@@ -26,6 +26,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.util.Optional;
+
 public class CSharpLanguageConfigurationTest {
 
   @Test
@@ -36,5 +38,35 @@ public class CSharpLanguageConfigurationTest {
     CSharpLanguageConfiguration config = new CSharpLanguageConfiguration(configuration);
 
     assertThat(config.bugCategories()).containsExactly("C#");
+  }
+
+  @Test
+  public void whenSettingIsTrue_analyzeRazorCode_returnsTrue() {
+    Configuration configuration = mock(Configuration.class);
+    when(configuration.getBoolean("sonar.cs.analyzeRazorCode")).thenReturn(Optional.of(true));
+
+    CSharpLanguageConfiguration config = new CSharpLanguageConfiguration(configuration);
+
+    assertThat(config.analyzeRazorCode()).isTrue();
+  }
+
+  @Test
+  public void whenSettingIsFalse_analyzeRazorCode_returnsFalse() {
+    Configuration configuration = mock(Configuration.class);
+    when(configuration.getBoolean("sonar.cs.analyzeRazorCode")).thenReturn(Optional.of(false));
+
+    CSharpLanguageConfiguration config = new CSharpLanguageConfiguration(configuration);
+
+    assertThat(config.analyzeRazorCode()).isFalse();
+  }
+
+  @Test
+  public void whenSettingIsEmpty_analyzeRazorCode_returnsTrue() {
+    Configuration configuration = mock(Configuration.class);
+    when(configuration.getBoolean("sonar.cs.analyzeRazorCode")).thenReturn(Optional.empty());
+
+    CSharpLanguageConfiguration config = new CSharpLanguageConfiguration(configuration);
+
+    assertThat(config.analyzeRazorCode()).isTrue();
   }
 }

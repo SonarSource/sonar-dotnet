@@ -19,12 +19,36 @@
  */
 package org.sonar.plugins.csharp;
 
+import org.sonar.api.PropertyType;
 import org.sonar.api.SonarRuntime;
+import org.sonar.api.config.PropertyDefinition;
+import org.sonar.api.resources.Qualifiers;
 import org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions;
+
+import java.util.List;
 
 public class CSharpPropertyDefinitions extends AbstractPropertyDefinitions {
 
   public CSharpPropertyDefinitions(SonarRuntime runtime) {
     super(CSharpPlugin.LANGUAGE_KEY, CSharpPlugin.LANGUAGE_NAME, CSharpPlugin.FILE_SUFFIXES_DEFVALUE, runtime);
+  }
+
+  public List<PropertyDefinition> create() {
+    List<PropertyDefinition> result = super.create();
+    result.add(
+      PropertyDefinition.builder(getAnalyzeRazorCode(CSharpPlugin.LANGUAGE_KEY))
+        .category(CSharpPlugin.LANGUAGE_NAME)
+        .defaultValue("true")
+        .name("Analyze Razor code")
+        .description("If set to \"true\", .razor and .cshtml files will be fully analysed, this may increase the analysis time." +
+          " If set to \"false\", .cshtml files will be analysed for taint vulnerabilities only.")
+        .onQualifiers(Qualifiers.PROJECT)
+        .type(PropertyType.BOOLEAN)
+        .build());
+    return result;
+  }
+
+  public static String getAnalyzeRazorCode(String languageKey) {
+    return PROP_PREFIX + languageKey + ".analyzeRazorCode";
   }
 }

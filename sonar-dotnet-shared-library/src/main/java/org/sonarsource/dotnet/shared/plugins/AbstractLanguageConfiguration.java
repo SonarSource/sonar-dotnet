@@ -28,8 +28,9 @@ import static java.util.Arrays.asList;
 
 @ScannerSide
 public abstract class AbstractLanguageConfiguration {
-  private final Configuration configuration;
   private final String languageKey;
+
+  protected final Configuration configuration;
 
   public AbstractLanguageConfiguration(Configuration configuration, String languageKey) {
     this.configuration = configuration;

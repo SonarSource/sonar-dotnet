@@ -2,6 +2,10 @@
 <AnalysisInput>
   <Settings>
     <Setting>
+      <Key>sonar.cs.analyzeRazorCode</Key>
+      <Value>false</Value>
+    </Setting>
+    <Setting>
       <Key>sonar.cs.ignoreHeaderComments</Key>
       <Value>true</Value>
     </Setting>

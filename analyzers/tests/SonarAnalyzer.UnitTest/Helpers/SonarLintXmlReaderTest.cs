@@ -34,6 +34,7 @@ public class SonarLintXmlReaderTest
         var sut = CreateSonarLintXmlReader(@$"TestResources\SonarLintXml\All_Properties_{xmlLanguageName}\SonarLint.xml");
         sut.IgnoreHeaderComments(language).Should().BeTrue();
         sut.AnalyzeGeneratedCode(language).Should().BeFalse();
+        sut.AnalyzeRazorCode(language).Should().BeFalse();
         AssertArrayContent(sut.Exclusions, nameof(sut.Exclusions));
         AssertArrayContent(sut.Inclusions, nameof(sut.Inclusions));
         AssertArrayContent(sut.GlobalExclusions, nameof(sut.GlobalExclusions));
@@ -62,6 +63,7 @@ public class SonarLintXmlReaderTest
         var sut = CreateSonarLintXmlReader(@"TestResources\SonarLintXml\Partially_missing_properties\SonarLint.xml");
         sut.IgnoreHeaderComments(LanguageNames.CSharp).Should().BeFalse();
         sut.AnalyzeGeneratedCode(LanguageNames.CSharp).Should().BeTrue();
+        sut.AnalyzeRazorCode(LanguageNames.CSharp).Should().BeTrue();
         AssertArrayContent(sut.Exclusions, nameof(sut.Exclusions));
         AssertArrayContent(sut.Inclusions, nameof(sut.Inclusions));
         sut.GlobalExclusions.Should().NotBeNull().And.HaveCount(0);
@@ -79,6 +81,8 @@ public class SonarLintXmlReaderTest
         sut.IgnoreHeaderComments(LanguageNames.VisualBasic).Should().BeFalse();
         sut.AnalyzeGeneratedCode(LanguageNames.CSharp).Should().BeTrue();
         sut.AnalyzeGeneratedCode(LanguageNames.VisualBasic).Should().BeFalse();
+        sut.AnalyzeRazorCode(LanguageNames.CSharp).Should().BeTrue();
+        sut.AnalyzeRazorCode(LanguageNames.VisualBasic).Should().BeFalse();
     }
 
     [TestMethod]
@@ -110,12 +114,14 @@ public class SonarLintXmlReaderTest
         var sut = CreateSonarLintXmlReader(@"TestResources\SonarLintXml\All_Properties_cs\SonarLint.xml");
         sut.Invoking(x => x.IgnoreHeaderComments(LanguageNames.FSharp)).Should().Throw<UnexpectedLanguageException>().WithMessage("Unexpected language: F#");
         sut.Invoking(x => x.AnalyzeGeneratedCode(LanguageNames.FSharp)).Should().Throw<UnexpectedLanguageException>().WithMessage("Unexpected language: F#");
+        sut.Invoking(x => x.AnalyzeRazorCode(LanguageNames.FSharp)).Should().Throw<UnexpectedLanguageException>().WithMessage("Unexpected language: F#");
     }
 
     private static void CheckSonarLintXmlReaderDefaultValues(SonarLintXmlReader sut)
     {
         sut.AnalyzeGeneratedCode(LanguageNames.CSharp).Should().BeFalse();
         sut.IgnoreHeaderComments(LanguageNames.CSharp).Should().BeFalse();
+        sut.AnalyzeRazorCode(LanguageNames.CSharp).Should().BeTrue();
         sut.Exclusions.Should().NotBeNull().And.HaveCount(0);
         sut.Inclusions.Should().NotBeNull().And.HaveCount(0);
         sut.GlobalExclusions.Should().NotBeNull().And.HaveCount(0);

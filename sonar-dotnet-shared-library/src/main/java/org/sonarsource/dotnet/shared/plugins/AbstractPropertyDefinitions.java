@@ -31,10 +31,9 @@ import org.sonar.api.utils.Version;
  * This class is responsible to declare all the properties that can be set through SonarQube/SonarCloud UI (settings page).
  */
 public abstract class AbstractPropertyDefinitions {
-
-  private static final String PROP_PREFIX = "sonar.";
   private static final String EXTERNAL_ANALYZERS_CATEGORY = "External Analyzers";
 
+  protected static final String PROP_PREFIX = "sonar.";
   public static final String PROJECT_KEY_PROPERTY = PROP_PREFIX + "projectKey";
   public static final String PROJECT_NAME_PROPERTY = PROP_PREFIX + "projectName";
   public static final String PROJECT_BASE_DIR_PROPERTY = PROP_PREFIX + "projectBaseDir";
