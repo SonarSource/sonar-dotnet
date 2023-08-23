@@ -48,7 +48,7 @@ public class CSharpTest {
 
   @Test
   public void shouldGetDefaultFileSuffixes() {
-    assertThat(csharp.getFileSuffixes()).containsOnly(".cs");
+    assertThat(csharp.getFileSuffixes()).containsOnly(".cs", ".razor");
   }
 
   @Test

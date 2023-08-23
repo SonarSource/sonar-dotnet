@@ -50,7 +50,7 @@ public class CSharpPlugin implements Plugin {
   static final String SONARANALYZER_NAME = "SonarAnalyzer.CSharp";
 
   static final String FILE_SUFFIXES_KEY = AbstractPropertyDefinitions.getFileSuffixProperty(LANGUAGE_KEY);
-  static final String FILE_SUFFIXES_DEFVALUE = ".cs";
+  static final String FILE_SUFFIXES_DEFVALUE = ".cs,.razor";
 
   static final DotNetPluginMetadata METADATA = new CSharpPluginMetadata();
 
