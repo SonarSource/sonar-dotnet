@@ -20,7 +20,6 @@
 
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.Rules;
-using UsingCookies = SonarAnalyzer.UnitTest.Rules.UsingCookies;
 
 namespace SonarAnalyzer.UnitTest.Common
 {
@@ -116,11 +115,9 @@ namespace SonarAnalyzer.UnitTest.Common
                 nameof(ExecutingSqlQueries) => ExecutingSqlQueriesTest.GetReferencesEntityFrameworkNetCore(version),
                 nameof(LooseFilePermissions) => NuGetMetadataReference.MonoPosixNetStandard(),
                 nameof(PermissiveCors) => PermissiveCorsTest.AdditionalReferences,
-                nameof(UsingCookies) => UsingCookies.GetAspNetCoreReferences(version),
 #else
                 nameof(ControllingPermissions) => ControllingPermissionsTest.AdditionalReferences,
                 nameof(ExecutingSqlQueries) => ExecutingSqlQueriesTest.GetReferencesNet46(version),
-                nameof(UsingCookies) => UsingCookies.GetAdditionalReferencesForNet46(),
 #endif
                 _ => MetadataReferenceFacade.SystemNetHttp
                                             .Concat(MetadataReferenceFacade.SystemDiagnosticsProcess)
