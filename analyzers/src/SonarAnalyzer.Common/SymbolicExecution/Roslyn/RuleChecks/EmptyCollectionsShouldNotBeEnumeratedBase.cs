@@ -195,7 +195,8 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
                 }
             }
             return ProcessAddMethod(context.State, invocation.TargetMethod, instance)
-                ?? ProcessRemoveMethod(context.State, invocation.TargetMethod, instance);
+                ?? ProcessRemoveMethod(context.State, invocation.TargetMethod, instance)
+                ?? ProcessClearMethod(context.State, invocation.TargetMethod, instance);
         }
         else
         {
@@ -229,6 +230,20 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
             if (instance.TrackedSymbol(state) is { } symbol)
             {
                 state = state.SetSymbolValue(symbol, value);
+            }
+            return state;
+        }
+        return null;
+    }
+
+    private static ProgramState ProcessClearMethod(ProgramState state, IMethodSymbol method, IOperation instance)
+    {
+        if (method.Name == nameof(ICollection<int>.Clear))
+        {
+            state = state.SetOperationConstraint(instance, CollectionConstraint.Empty);
+            if (instance.TrackedSymbol(state) is { } symbol)
+            {
+                state = state.SetSymbolConstraint(symbol, CollectionConstraint.Empty);
             }
         }
         return state;

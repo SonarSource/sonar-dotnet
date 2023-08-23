@@ -412,27 +412,35 @@ class CollectionTests
     public void Method_Set_Empty(List<int> list, HashSet<int> set, Queue<int> queue, Stack<int> stack, ObservableCollection<int> obs, Dictionary<int, int> dict)
     {
         list.Clear();                   // Compliant
-        list.Clear();                   // FN
+        list.Clear();                   // Noncompliant
 
         set.Clear();                    // Compliant
-        set.Clear();                    // FN
+        set.Clear();                    // Noncompliant
 
         queue.Clear();                  // Compliant
-        queue.Clear();                  // FN
+        queue.Clear();                  // Noncompliant
 
         stack.Clear();                  // Compliant
-        stack.Clear();                  // FN
+        stack.Clear();                  // Noncompliant
 
         obs.Clear();                    // Compliant
-        obs.Clear();                    // FN
+        obs.Clear();                    // Noncompliant
 
         dict.Clear();                   // Compliant
-        dict.Clear();                   // FN
+        dict.Clear();                   // Noncompliant
 
         var empty = new List<int>();
         list.Add(5);
         list.Intersect(empty);          // Compliant
         list.Clear();                   // FN
+
+        list.Add(5);
+        list.RemoveAll(x => true);      // Compliant
+        list.Clear();                   // FN
+
+        set.Add(5);
+        set.RemoveWhere(x => true);     // Compliant
+        set.Clear();                    // FN
     }
 }
 
@@ -531,6 +539,8 @@ class AdvancedTests
         var empty = new List<int>();
         var notEmpty = new List<int>() { 1, 2, 3 };
 
+        // the tests below are messy for as long as we unlearn CollectionConstraints on empty.Count()
+
         if ((isNull ?? empty).Count == 0)
         {
             empty.Clear();  // Noncompliant
@@ -588,11 +598,11 @@ class AdvancedTests
 
         if (notEmpty.Count(x => condition) == 0)
         {
-            empty.Clear();  // FN
+            empty.Clear();  // Noncompliant
         }
         else
         {
-            empty.Clear();  // FN
+            empty.Clear();  // Noncompliant
         }
 
         if (Enumerable.Count(empty) == 0)
@@ -736,7 +746,7 @@ class Flows
         Action<int> add = list.Add;
         list.Clear();    // FN
         add(5);
-        list.Clear();    // Compliant, but will break when we learn Empty from Clear()
+        list.Clear();    // Noncompliant FP
 
         list = new List<int>();
         Action clear = list.Clear;  // We don't raise here to avoid FPs
