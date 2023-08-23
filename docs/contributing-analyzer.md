@@ -30,6 +30,7 @@ Visual Studio 2022 version 17.6+ is required to build the project (due to source
     - [.NET Core 2.1 SDK](https://dotnet.microsoft.com/en-us/download/dotnet)
     - .NET Core 3.1 SDK
     - .NET 5.0 SDK
+    - .NET 6.0 SDK
     - .NET 7.0 SDK
     - .NET 3.5 SDK (SP1) from [Microsoft download center](https://www.microsoft.com/en-us/download/details.aspx?id=21)
     - Install Visual Studio 2019 and check these SDKs in the *individual components* tab
