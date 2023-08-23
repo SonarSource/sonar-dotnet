@@ -10,9 +10,9 @@ namespace MultiTargetConsoleApp
 
             Console.WriteLine("Hello World!");
 #if NET7_0
-            Console.WriteLine("\tfrom .Net Core 2.0"); // FIXME: .Net 7
+            Console.WriteLine("\tfrom .Net 7"); // FIXME: .Net 7
 #elif NET48
-            Console.WriteLine("\tfrom .Net Fwk 4.6"); // FIXME: .Net fwk 4.8
+            Console.WriteLine("\tfrom .Net 4.8"); // FIXME: .Net Framework 4.8
 #else
             Console.WriteLine("\tfrom other"); // FIXME: Other
 #endif
