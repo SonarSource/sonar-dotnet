@@ -182,7 +182,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 MSBuildLocator.RegisterDefaults();
             }
 
-            if (!razorSupportedFrameworks.Contains(builder.Framework))
+            if (!razorSupportedFrameworks.Contains(builder.RazorFramework))
             {
                 throw new InvalidOperationException("Razor compilation is supported only for .NET 6 and .NET 7 frameworks.");
             }
@@ -199,7 +199,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 const string origianlCsprojPath = "TestFramework\\Razor\\EmptyProject\\EmptyProject.csproj";
                 var originalXml = XElement.Load(origianlCsprojPath);
                 // Set TargetFramework
-                originalXml.Descendants("TargetFramework").Single().Value = builder.Framework;
+                originalXml.Descendants("TargetFramework").Single().Value = builder.RazorFramework;
                 originalXml.Save(origianlCsprojPath);
 
                 List<string> languages = new();

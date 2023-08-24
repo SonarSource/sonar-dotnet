@@ -46,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public string CodeFixTitle { get; init; }
         public bool ConcurrentAnalysis { get; init; } = true;
         public CompilationErrorBehavior ErrorBehavior { get; init; } = CompilationErrorBehavior.Default;
-        public string Framework { get; init; } = "net7.0";
+        public string RazorFramework { get; init; } = "net7.0";
         public bool IsRazor { get; init; }
         public ImmutableArray<DiagnosticDescriptor> OnlyDiagnostics { get; init; } = ImmutableArray<DiagnosticDescriptor>.Empty;
         public OutputKind OutputKind { get; init; } = OutputKind.DynamicallyLinkedLibrary;
@@ -109,7 +109,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             this with { ErrorBehavior = errorBehavior };
 
         public VerifierBuilder WithFramework(string framework) =>
-            this with { Framework = framework };
+            this with { RazorFramework = framework };
 
         public VerifierBuilder WithLanguageVersion(CS.LanguageVersion languageVersion) =>
             WithOptions(ImmutableArray.Create<ParseOptions>(new CS.CSharpParseOptions(languageVersion)));
