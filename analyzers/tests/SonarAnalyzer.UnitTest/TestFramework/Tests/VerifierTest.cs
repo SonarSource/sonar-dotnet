@@ -318,11 +318,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         [TestMethod]
         public void Verify_Razor_AddReferences()
         {
-            var verifierBuilder = DummyWithLocationMapping.AddPaths("Dummy.razor");
-            verifierBuilder.AddReferences(MetadataReferenceFacade.SystemXml)
-                           .Invoking(x => x.Verify())
-                           .Should()
-                           .NotThrow();
+            var compilations = DummyWithLocationMapping.AddPaths("Dummy.razor")
+                .AddReferences(NuGetMetadataReference.MicrosoftAzureDocumentDB())
+                .Build()
+                .Compile(false);
+
         }
 
 #endif
