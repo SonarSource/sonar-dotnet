@@ -196,27 +196,44 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             {
                 Directory.CreateDirectory(tempPath);
 
-                foreach (var file in Directory.GetFiles("TestFramework\\Razor\\EmptyProject").Concat(builder.Paths.Select(TestCasePath)))
+                const string origianlCsprojPath = "TestFramework\\Razor\\EmptyProject\\EmptyProject.csproj";
+                var originalXml = XElement.Load(origianlCsprojPath);
+                // Set TargetFramework
+                originalXml.Descendants("TargetFramework").Single().Value = builder.Framework;
+                originalXml.Save(origianlCsprojPath);
+
+                List<string> languages = new();
+                if (builder.ParseOptions != null && builder.ParseOptions.Any())
                 {
-                    File.Copy(file, Path.Combine(tempPath, Path.GetFileName(file)));
+                    foreach (var parseOption in builder.ParseOptions)
+                    {
+                        if (parseOption is CSharpParseOptions csharpParseOptions)
+                        {
+                            languages.Add(GetLanguageVersionReference(csharpParseOptions));
+                        }
+                    }
+                }
+                else
+                {
+                    languages.Add("latest");
                 }
 
-                var path = Path.Combine(tempPath, "EmptyProject.csproj");
-                var xml = XElement.Load(path);
-
-                // Set TargetFramework
-                xml.Descendants("TargetFramework").Single().Value = builder.Framework;
-
-                var langVersion = xml.Descendants("LangVersion").Single();
-                foreach (var parseOption in GetParseOptions())
+                foreach (var lang in languages)
                 {
-                    if (parseOption is CSharpParseOptions csharpParseOptions)
+                    Directory.CreateDirectory(Path.Combine(tempPath, lang));
+                    // Copy all the files
+                    foreach (var file in Directory.GetFiles("TestFramework\\Razor\\EmptyProject").Concat(builder.Paths.Select(TestCasePath)))
                     {
-                        // Set LangVersion
-                        langVersion.Value = GetLanguageVersionReference(csharpParseOptions);
-                        xml.Save(path);
-                        yield return workspace.OpenProjectAsync(path).Result.GetCompilationAsync().Result;
+                        File.Copy(file, Path.Combine(tempPath, lang, Path.GetFileName(file)));
                     }
+                    var csprojPath = Path.Combine(tempPath, lang, "EmptyProject.csproj");
+                    var destinationXml = XElement.Load(csprojPath);
+
+                    // Set LangVersion
+                    destinationXml.Descendants("LangVersion").Single().Value = lang;
+                    destinationXml.Save(csprojPath);
+
+                    yield return workspace.OpenProjectAsync(csprojPath).Result.GetCompilationAsync().Result;
                 }
             }
             finally
@@ -226,11 +243,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                     Directory.Delete(tempPath, true);
                 }
             }
-
-            IEnumerable<ParseOptions> GetParseOptions() =>
-                builder.ParseOptions != null && builder.ParseOptions.Any()
-                    ? builder.ParseOptions
-                    : ParseOptionsHelper.FromCSharp10;
         }
 
         private static string GetLanguageVersionReference(CSharpParseOptions parseOption) =>
