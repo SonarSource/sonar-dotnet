@@ -169,10 +169,10 @@ stages:
         inputs:
           artifact: TestBinaries
           targetPath: '$(UnitTestProjectPath)\bin'
-
+          # FIXME: REMOVE DEBUG
       - powershell: |
           cd analyzers
-          & dotnet test -f $(FrameworkMoniker) -c $(BuildConfiguration) -l trx /p:AltCover=true,AltCoverForce=true,AltCoverVisibleBranches=true,AltCoverAssemblyFilter='Moq|Humanizer|AltCover',AltCoverPathFilter='SonarAnalyzer\.CFG\\ShimLayer|SonarAnalyzer\.ShimLayer\.CodeGeneration',AltCoverAttributeFilter='ExcludeFromCodeCoverage',AltCoverReport=coverage/coverage.xml
+          & dotnet test -f $(FrameworkMoniker) -c $(BuildConfiguration) -l trx
         displayName: '.Net UTs'
 
       - task: PublishPipelineArtifact@1
