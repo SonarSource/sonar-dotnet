@@ -57,8 +57,7 @@ internal sealed partial class Invocation
 
     private static ProgramState[] ProcessSystemStringInvocation(ProgramState state, IInvocationOperationWrapper invocation)
     {
-        var methodName = invocation.TargetMethod.Name;
-        if (methodName is nameof(string.IsNullOrEmpty) or nameof(string.IsNullOrWhiteSpace))
+        if (invocation.TargetMethod.Name is nameof(string.IsNullOrEmpty) or nameof(string.IsNullOrWhiteSpace))
         {
             return ProcessIsNotNullWhen(state, invocation.WrappedOperation, invocation.Arguments[0].ToArgument(), false, true);
         }
