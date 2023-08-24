@@ -251,9 +251,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         public void Verify_Razor_WithFramework()
         {
             var compilations = DummyWithLocationMapping.AddPaths("Dummy.razor")
-                                                       .WithFramework("net6.0")
-                                                       .Build()
-                                                       .Compile(false);
+                .WithFramework("net6.0")
+                .Build()
+                .Compile(false);
 
             var my = compilations.Single().ExternalReferences.First().Display;
             my.Contains("net6.0").Should().BeTrue();
@@ -263,8 +263,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         public void Verify_Razor_DefaultFramework()
         {
             var compilations = DummyWithLocationMapping.AddPaths("Dummy.razor")
-                                                       .Build()
-                                                       .Compile(false);
+                .Build()
+                .Compile(false);
 
             var my = compilations.Single().ExternalReferences.First().Display;
             my.Contains("net7.0").Should().BeTrue();
@@ -279,18 +279,18 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         {
             var verifierBuilder = DummyWithLocationMapping.AddPaths("Dummy.razor");
             verifierBuilder.WithFramework(framework)
-                           .Invoking(x => x.Verify())
-                           .Should()
-                           .Throw<InvalidOperationException>().WithMessage("Razor compilation is supported only for .NET 6 and .NET 7 frameworks.");
+                .Invoking(x => x.Verify())
+                .Should()
+                .Throw<InvalidOperationException>().WithMessage("Razor compilation is supported only for .NET 6 and .NET 7 frameworks.");
         }
 
         [TestMethod]
         public void Verify_Razor_ParseOptions()
         {
             var compilations = DummyWithLocationMapping.AddPaths("Dummy.razor")
-                                                       .WithOptions(ParseOptionsHelper.FromCSharp9)
-                                                       .Build()
-                                                       .Compile(false);
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .Build()
+                .Compile(false);
 
             if (!TestContextHelper.IsAzureDevOpsContext || TestContextHelper.IsPullRequestBuild)
             {
