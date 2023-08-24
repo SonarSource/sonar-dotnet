@@ -218,7 +218,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         public void Verify_Razor_ParseOptions()
         {
             var compilations = DummyWithLocationMapping.AddPaths("Dummy.razor")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithOptions(ParseOptionsHelper.BeforeCSharp10)
                 .Build()
                 .Compile(false);
 
@@ -226,18 +226,23 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             {
                 compilations.Should().ContainSingle();
 
-                compilations.Single().LanguageVersionString().Should().BeEquivalentTo(LanguageVersion.CSharp9.ToString());
+                compilations.Single().LanguageVersionString().Should().BeEquivalentTo(LanguageVersion.CSharp5.ToString());
             }
             else
             {
-                compilations.Should().HaveCount(3);
+                compilations.Should().HaveCount(8);
                 var languages = compilations.Select(c => c.LanguageVersionString()).ToList();
 
                 languages.Should().BeEquivalentTo(new List<string>()
                     {
                         LanguageVersion.CSharp9.ToString(),
-                        LanguageVersion.CSharp10.ToString(),
-                        LanguageVersion.CSharp11.ToString()
+                        LanguageVersion.CSharp8.ToString(),
+                        LanguageVersion.CSharp7_3.ToString(),
+                        LanguageVersion.CSharp7_2.ToString(),
+                        LanguageVersion.CSharp7_1.ToString(),
+                        LanguageVersion.CSharp7.ToString(),
+                        LanguageVersion.CSharp6.ToString(),
+                        LanguageVersion.CSharp5.ToString()
                     });
             }
         }
