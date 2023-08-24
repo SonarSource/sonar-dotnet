@@ -19,13 +19,14 @@
  */
 
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Xml.Linq;
 using Google.Protobuf;
 using Microsoft.Build.Locator;
 using Microsoft.CodeAnalysis.CodeFixes;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.MSBuild;
 using SonarAnalyzer.Rules;
 using SonarAnalyzer.UnitTest.Helpers;
@@ -37,6 +38,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private const string TestCases = "TestCases";
 
         private static readonly Regex ImportsRegexVB = new(@"^\s*Imports\s+.+$", RegexOptions.Multiline | RegexOptions.RightToLeft);
+        private readonly string[] razorSupportedFrameworks = new[]
+            {
+                "net6.0",
+                "net7.0"
+            };
         private readonly VerifierBuilder builder;
         private readonly DiagnosticAnalyzer[] analyzers;
         private readonly SonarCodeFix codeFix;
@@ -176,6 +182,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 MSBuildLocator.RegisterDefaults();
             }
 
+            if (!razorSupportedFrameworks.Contains(builder.RazorFramework))
+            {
+                throw new InvalidOperationException("Razor compilation is supported only for .NET 6 and .NET 7 frameworks.");
+            }
+
             using var workspace = MSBuildWorkspace.Create();
             workspace.WorkspaceFailed += (_, failure) => Console.WriteLine(failure.Diagnostic);
 
@@ -185,12 +196,42 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             {
                 Directory.CreateDirectory(tempPath);
 
-                foreach (var file in Directory.GetFiles("TestFramework\\Razor\\EmptyProject").Concat(builder.Paths.Select(TestCasePath)))
+                List<string> languages = new();
+                if (builder.ParseOptions != null && builder.ParseOptions.Any())
                 {
-                    File.Copy(file, Path.Combine(tempPath, Path.GetFileName(file)));
+                    foreach (var parseOption in builder.ParseOptions)
+                    {
+                        if (parseOption is CSharpParseOptions csharpParseOptions)
+                        {
+                            languages.Add(GetLanguageVersionReference(csharpParseOptions));
+                        }
+                    }
+                }
+                else
+                {
+                    languages.Add("latest");
                 }
 
-                return new[] { workspace.OpenProjectAsync(Path.Combine(tempPath, "EmptyProject.csproj")).Result.GetCompilationAsync().Result };
+                foreach (var lang in languages)
+                {
+                    Directory.CreateDirectory(Path.Combine(tempPath, lang));
+                    // Copy all the files
+                    foreach (var file in Directory.GetFiles("TestFramework\\Razor\\EmptyProject").Concat(builder.Paths.Select(TestCasePath)))
+                    {
+                        File.Copy(file, Path.Combine(tempPath, lang, Path.GetFileName(file)));
+                    }
+                    var csprojPath = Path.Combine(tempPath, lang, "EmptyProject.csproj");
+                    var destinationXml = XElement.Load(csprojPath);
+
+                    // Set TargetFramework
+                    destinationXml.Descendants("TargetFramework").Single().Value = builder.RazorFramework;
+
+                    // Set LangVersion
+                    destinationXml.Descendants("LangVersion").Single().Value = lang;
+                    destinationXml.Save(csprojPath);
+
+                    yield return workspace.OpenProjectAsync(csprojPath).Result.GetCompilationAsync().Result;
+                }
             }
             finally
             {
@@ -200,6 +241,22 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 }
             }
         }
+
+        private static string GetLanguageVersionReference(CSharpParseOptions parseOption) =>
+            parseOption.LanguageVersion switch
+            {
+                LanguageVersion.CSharp5 => "5.0",
+                LanguageVersion.CSharp6 => "6.0",
+                LanguageVersion.CSharp7 => "7.0",
+                LanguageVersion.CSharp7_1 => "7.1",
+                LanguageVersion.CSharp7_2 => "7.2",
+                LanguageVersion.CSharp7_3 => "7.3",
+                LanguageVersion.CSharp8 => "8.0",
+                LanguageVersion.CSharp9 => "9.0",
+                LanguageVersion.CSharp10 => "10.0",
+                LanguageVersion.CSharp11 => "11.0",
+                _ => "latest"
+            };
 
         private ProjectBuilder CreateProject(bool concurrentAnalysis)
         {

@@ -19,6 +19,7 @@
  */
 
 using System.IO;
+using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.Protobuf;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
@@ -173,6 +174,78 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         [TestMethod]
         public void Verify_CshtmlAnalysisIsDisabled_DoesNotRaise() =>
             DummyWithLocationMapping.AddPaths("Dummy.cshtml").VerifyNoIssueReported();
+
+        [DataTestMethod]
+        [DataRow("net6.0")]
+        [DataRow("net7.0")]
+        public void Verify_Razor_WithFramework(string framework)
+        {
+            var compilations = DummyWithLocationMapping.AddPaths("Dummy.razor")
+                .WithFramework(framework)
+                .Build()
+                .Compile(false);
+
+            var reference = compilations.Single().ExternalReferences.First().Display;
+            reference.Contains(framework).Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void Verify_Razor_DefaultFramework()
+        {
+            var compilations = DummyWithLocationMapping.AddPaths("Dummy.razor")
+                .Build()
+                .Compile(false);
+
+            var reference = compilations.Single().ExternalReferences.First().Display;
+            reference.Contains("net7.0").Should().BeTrue();
+        }
+
+        [DataTestMethod]
+        [DataRow("net48")]
+        [DataRow("netcoreapp3.1")]
+        [DataRow("netstandard2.1")]
+        [DataRow("net5.0")]
+        public void Verify_Razor_WithFramework_NotSupported(string framework)
+        {
+            var verifierBuilder = DummyWithLocationMapping.AddPaths("Dummy.razor");
+            verifierBuilder.WithFramework(framework)
+                .Invoking(x => x.Verify())
+                .Should()
+                .Throw<InvalidOperationException>().WithMessage("Razor compilation is supported only for .NET 6 and .NET 7 frameworks.");
+        }
+
+        [TestMethod]
+        public void Verify_Razor_ParseOptions()
+        {
+            var compilations = DummyWithLocationMapping.AddPaths("Dummy.razor")
+                .WithOptions(ParseOptionsHelper.BeforeCSharp10)
+                .Build()
+                .Compile(false);
+
+            if (!TestContextHelper.IsAzureDevOpsContext || TestContextHelper.IsPullRequestBuild)
+            {
+                compilations.Should().ContainSingle();
+
+                compilations.Single().LanguageVersionString().Should().BeEquivalentTo(LanguageVersion.CSharp5.ToString());
+            }
+            else
+            {
+                compilations.Should().HaveCount(8);
+                var languages = compilations.Select(c => c.LanguageVersionString()).ToList();
+
+                languages.Should().BeEquivalentTo(new List<string>()
+                    {
+                        LanguageVersion.CSharp9.ToString(),
+                        LanguageVersion.CSharp8.ToString(),
+                        LanguageVersion.CSharp7_3.ToString(),
+                        LanguageVersion.CSharp7_2.ToString(),
+                        LanguageVersion.CSharp7_1.ToString(),
+                        LanguageVersion.CSharp7.ToString(),
+                        LanguageVersion.CSharp6.ToString(),
+                        LanguageVersion.CSharp5.ToString()
+                    });
+            }
+        }
 
 #endif
 
