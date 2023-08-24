@@ -196,12 +196,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             {
                 Directory.CreateDirectory(tempPath);
 
-                const string origianlCsprojPath = "TestFramework\\Razor\\EmptyProject\\EmptyProject.csproj";
-                var originalXml = XElement.Load(origianlCsprojPath);
-                // Set TargetFramework
-                originalXml.Descendants("TargetFramework").Single().Value = builder.RazorFramework;
-                originalXml.Save(origianlCsprojPath);
-
                 List<string> languages = new();
                 if (builder.ParseOptions != null && builder.ParseOptions.Any())
                 {
@@ -228,6 +222,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                     }
                     var csprojPath = Path.Combine(tempPath, lang, "EmptyProject.csproj");
                     var destinationXml = XElement.Load(csprojPath);
+
+                    // Set TargetFramework
+                    destinationXml.Descendants("TargetFramework").Single().Value = builder.RazorFramework;
 
                     // Set LangVersion
                     destinationXml.Descendants("LangVersion").Single().Value = lang;
