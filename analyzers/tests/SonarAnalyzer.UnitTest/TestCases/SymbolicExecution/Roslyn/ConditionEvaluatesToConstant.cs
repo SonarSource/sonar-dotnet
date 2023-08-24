@@ -2257,7 +2257,6 @@ namespace Tests.Diagnostics
             var steps = 0;
             while (list.Any())
             {
-
                 if (steps++ > MaxStepCount) // Noncompliant FP
                 {
                     return;
