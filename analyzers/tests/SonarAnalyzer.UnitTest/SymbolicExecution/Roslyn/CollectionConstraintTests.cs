@@ -21,7 +21,7 @@
 using ChecksCS = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 using CS = SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.UnitTest.Rules;
+namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn;
 
 [TestClass]
 public class CollectionConstraintTests
