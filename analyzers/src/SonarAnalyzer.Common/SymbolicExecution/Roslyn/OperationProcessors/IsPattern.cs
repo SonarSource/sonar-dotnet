@@ -27,10 +27,10 @@ internal sealed class IsPattern : BranchingProcessor<IIsPatternOperationWrapper>
     protected override IIsPatternOperationWrapper Convert(IOperation operation) =>
         IIsPatternOperationWrapper.FromOperation(operation);
 
-    protected override SymbolicConstraint BoolConstraintFromOperation(ProgramState state, IIsPatternOperationWrapper operation, bool isLoopCondition, int visitCount) =>
+    protected override SymbolicConstraint BoolConstraintFromOperation(ProgramState state, IIsPatternOperationWrapper operation) =>
         BoolContraintFromConstant(state, operation) ?? BoolConstraintFromPattern(state, operation);
 
-    protected override ProgramState LearnBranchingConstraint(ProgramState state, IIsPatternOperationWrapper operation, bool isLoopCondition, int visitCount, bool falseBranch) =>
+    protected override ProgramState LearnBranchingConstraint(ProgramState state, IIsPatternOperationWrapper operation, int visitCount, bool falseBranch) =>
         operation.Value.TrackedSymbol(state) is { } testedSymbol
         && LearnBranchingConstraint(state, operation.Pattern, falseBranch, state[testedSymbol]?.HasConstraint<ObjectConstraint>() is true) is { } constraint
             ? state.SetSymbolConstraint(testedSymbol, constraint)
