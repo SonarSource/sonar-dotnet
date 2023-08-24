@@ -240,11 +240,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                     Directory.Delete(tempPath, true);
                 }
             }
-
-            IEnumerable<ParseOptions> GetParseOptions() =>
-                builder.ParseOptions != null && builder.ParseOptions.Any()
-                    ? builder.ParseOptions
-                    : ParseOptionsHelper.FromCSharp10;
         }
 
         private static string GetLanguageVersionReference(CSharpParseOptions parseOption) =>
