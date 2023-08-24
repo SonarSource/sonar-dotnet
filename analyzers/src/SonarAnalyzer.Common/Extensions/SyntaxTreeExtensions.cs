@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Extensions;
 
 internal static class SyntaxTreeExtensions
 {
-    private const string EnableRazorAnalysisVariable = "SONAR_DOTNET_ENABLE_RAZOR_ANALYSIS";
+    public const string EnableRazorAnalysisVariable = "SONAR_DOTNET_ENABLE_RAZOR_ANALYSIS";
 
     private static readonly ConditionalWeakTable<Compilation, ConcurrentDictionary<SyntaxTree, bool>> GeneratedCodeCache = new();
 

@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
         public bool EnableRazorAnalysis
         {
-            set => SetVariable("SONAR_DOTNET_ENABLE_RAZOR_ANALYSIS", value.ToString());
+            set => SetVariable(SonarAnalyzer.Extensions.SyntaxTreeExtensions.EnableRazorAnalysisVariable, value.ToString());
         }
 #pragma warning restore S2376
 
