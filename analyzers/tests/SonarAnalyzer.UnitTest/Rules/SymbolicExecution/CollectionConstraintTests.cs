@@ -59,4 +59,21 @@ public class CollectionConstraintTests
             }
             """)
             .Verify();
+
+    [TestMethod]
+    public void CollectionConstraint_RemoveOnNonTrackedSymbol_DoesNotThrow() =>
+        builder.AddSnippet($$"""
+            using System;
+            using System.Collections.Generic;
+            class Sample
+            {
+                public List<int> Items { get; }
+
+                void Foo(Sample sample)
+                {
+                    sample.Items.Remove(1);
+                }
+            }
+            """)
+            .Verify();
 }
