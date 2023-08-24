@@ -69,19 +69,6 @@
 "id":  "S2589",
 "message":  "Change this condition so that it does not always evaluate to 'True'.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L706",
-"region":  {
-"startLine":  706,
-"startColumn":  24,
-"endLine":  706,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S2589",
-"message":  "Change this condition so that it does not always evaluate to 'True'.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L978",
 "region":  {
 "startLine":  978,

@@ -662,6 +662,57 @@ End If";
     }
 
     [DataTestMethod]
+    [DataRow("arg.Clone()")]
+    [DataRow("arg.Concat(\"foo\")")]
+    [DataRow("string.Copy(arg)")]
+    [DataRow("string.Format( \"\", arg)")]
+    [DataRow("arg.GetEnumerator()")]
+    [DataRow("arg.Insert(0, \"foo\")")]
+    [DataRow("string.Intern(arg)")]
+    [DataRow("string.Join(\"-\", arg, arg)")]
+    [DataRow("arg.Normalize()")]
+    [DataRow("arg.PadLeft(0)")]
+    [DataRow("arg.PadRight(0)")]
+    [DataRow("arg.Remove(0)")]
+    [DataRow("arg.Replace(\"-\", \"\")")]
+    [DataRow("arg.Split()")]
+    [DataRow("arg.Substring(2)")]
+    [DataRow("arg.ToCharArray()")]
+    [DataRow("arg.ToLower()")]
+    [DataRow("arg.ToLowerInvariant()")]
+    [DataRow("arg.ToString()")]
+    [DataRow("arg.ToUpper()")]
+    [DataRow("arg.ToUpperInvariant()")]
+    [DataRow("arg.Trim()")]
+    [DataRow("arg.TrimEnd()")]
+    [DataRow("arg.TrimStart()")]
+#if NET
+    [DataRow("string.Create(System.Globalization.CultureInfo.InvariantCulture, $\"{arg}\");")]
+    [DataRow("arg.GetPinnableReference()")]
+    [DataRow("arg.ReplaceLineEndings()")]
+#endif
+    public void Invocation_StringMethods_NotNull(string expression)
+    {
+        var code = $"""
+            var value = {expression};
+            Tag("Value", value);
+            """;
+        var stringMethodValidator = SETestContext.CreateCS(code, "string arg").Validator;
+        stringMethodValidator.TagValue("Value").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+    }
+
+    [TestMethod]
+    public void Invocation_StringMethods_NotNull_VB()
+    {
+        var code = $"""
+            Dim Value = Arg.Trim()
+            Tag("Value", Value)
+            """;
+        var stringMethodValidator = SETestContext.CreateVB(code, "Arg As String").Validator;
+        stringMethodValidator.TagValue("Value").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+    }
+
+    [DataTestMethod]
     [DataRow("Object = Nothing", true)]
     [DataRow("Object = New Object()", false)]
     [DataRow("Integer = Nothing", false)]   // While it can be assigned Nothing, value 0 is stored. And that is not null

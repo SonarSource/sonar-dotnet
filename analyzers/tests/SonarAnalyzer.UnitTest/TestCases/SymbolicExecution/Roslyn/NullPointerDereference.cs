@@ -1338,7 +1338,7 @@ namespace Tests.Diagnostics
             {
                 try
                 {
-                    foreach (var ch in ex.Message)  // Noncompliant FP
+                    foreach (var ch in ex.Message)  // Compliant, string.GetEnumerator returns not null
                     {
                         // Do something
                     }
