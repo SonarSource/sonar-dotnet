@@ -101,12 +101,26 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         nameof(List<int>.AddRange),
         nameof(List<int>.Insert),
         nameof(List<int>.InsertRange),
-        nameof(HashSet<int>.SymmetricExceptWith),
         nameof(HashSet<int>.UnionWith),
+        nameof(HashSet<int>.SymmetricExceptWith),   // This can add and/or remove items => It should remove all CollectionConstraints.
+                                                    // However, just learning NotEmpty (and thus unlearning Empty) is good enough for now.
         nameof(Queue<int>.Enqueue),
         nameof(Stack<int>.Push),
         nameof(Collection<int>.Insert),
         "TryAdd"
+    };
+
+    private static readonly HashSet<string> RemoveMethods = new()
+    {
+        nameof(ICollection<int>.Remove),
+        nameof(List<int>.RemoveAll),
+        nameof(List<int>.RemoveAt),
+        nameof(List<int>.RemoveRange),
+        nameof(HashSet<int>.ExceptWith),
+        nameof(HashSet<int>.IntersectWith),
+        nameof(HashSet<int>.RemoveWhere),
+        nameof(Queue<int>.Dequeue),
+        nameof(Stack<int>.Pop)
     };
 
     private readonly HashSet<IOperation> emptyAccess = new();
@@ -130,7 +144,7 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         }
         else if (operation.AsMethodReference() is { Instance: not null } methodReference)
         {
-            return ProcessAddMethod(context.State, methodReference.Method, methodReference.Instance);
+            return ProcessAddMethod(context.State, methodReference.Method, methodReference.Instance) ?? context.State;
         }
         else if (operation.AsPropertyReference() is { Property.IsIndexer: true } indexer)
         {
@@ -180,7 +194,8 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
                     nonEmptyAccess.Add(context.Operation.Instance);
                 }
             }
-            return ProcessAddMethod(context.State, invocation.TargetMethod, instance);
+            return ProcessAddMethod(context.State, invocation.TargetMethod, instance)
+                ?? ProcessRemoveMethod(context.State, invocation.TargetMethod, instance);
         }
         else
         {
@@ -199,6 +214,21 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
             if (instance.TrackedSymbol(state) is { } symbol)
             {
                 state = state.SetSymbolConstraint(symbol, CollectionConstraint.NotEmpty);
+            }
+            return state;
+        }
+        return null;
+    }
+
+    private static ProgramState ProcessRemoveMethod(ProgramState state, IMethodSymbol method, IOperation instance)
+    {
+        if (RemoveMethods.Contains(method.Name))
+        {
+            var value = (state[instance] ?? SymbolicValue.Empty).WithoutConstraint(CollectionConstraint.NotEmpty);
+            state = state.SetOperationValue(instance, value);
+            if (instance.TrackedSymbol(state) is { } symbol)
+            {
+                state = state.SetSymbolValue(symbol, value);
             }
         }
         return state;
