@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2023 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -711,5 +711,56 @@ Tag(""End"")";
         validator.TagValues("Result").Should().SatisfyRespectively(
             x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True),
             x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False));
+    }
+
+    [DataTestMethod]
+    [DataRow("list.Count >  0", null, null)]
+    [DataRow("list.Count >  1", null, null)]
+    [DataRow("list.Count >  5", null, null)]
+    [DataRow("list.Count >= 0", null, null)]
+    [DataRow("list.Count >= 1", null, null)]
+    [DataRow("list.Count >= 5", null, null)]
+    [DataRow("list.Count <  0", null, null)]
+    [DataRow("list.Count <  1", null, null)]
+    [DataRow("list.Count <  5", null, null)]
+    [DataRow("list.Count <= 0", null, null)]
+    [DataRow("list.Count <= 1", null, null)]
+    [DataRow("list.Count <= 5", null, null)]
+    [DataRow("0 >  list.Count", null, null)]
+    [DataRow("1 >  list.Count", null, null)]
+    [DataRow("5 >  list.Count", null, null)]
+    [DataRow("0 >= list.Count", null, null)]
+    [DataRow("1 >= list.Count", null, null)]
+    [DataRow("5 >= list.Count", null, null)]
+    [DataRow("0 <  list.Count", null, null)]
+    [DataRow("1 <  list.Count", null, null)]
+    [DataRow("5 <  list.Count", null, null)]
+    [DataRow("0 <= list.Count", null, null)]
+    [DataRow("1 <= list.Count", null, null)]
+    [DataRow("5 <= list.Count", null, null)]
+    public void Binary_Collections(string expression, bool? emptyInIf, bool? emptyInElse)
+    {
+        var code = $$"""
+            if ({{expression}})
+            {
+                Tag("If", list);
+            }
+            else
+            {
+                Tag("Else", list);
+            }
+            """;
+
+        var validator = SETestContext.CreateCS(code, "List<int> list").Validator;
+        validator.TagValue("If").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, Constraint(emptyInIf));
+        validator.TagValue("Else").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, Constraint(emptyInElse));
+
+        static CollectionConstraint Constraint(bool? empty) =>
+            empty switch
+            {
+                true => CollectionConstraint.Empty,
+                false => CollectionConstraint.NotEmpty,
+                _ => null
+            };
     }
 }
