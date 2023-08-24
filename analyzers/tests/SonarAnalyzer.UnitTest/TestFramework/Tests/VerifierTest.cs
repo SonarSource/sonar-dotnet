@@ -250,11 +250,24 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         [TestMethod]
         public void Verify_Razor_WithFramework()
         {
-            var verifierBuilder = DummyWithLocationMapping.AddPaths("Dummy.razor");
-            verifierBuilder.WithFramework("net6.0")
-                           .Invoking(x => x.Verify())
-                           .Should()
-                           .NotThrow();
+            var compilations = DummyWithLocationMapping.AddPaths("Dummy.razor")
+                                                       .WithFramework("net6.0")
+                                                       .Build()
+                                                       .Compile(false);
+
+            var my = compilations.Single().ExternalReferences.First().Display;
+            my.Contains("net6.0").Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void Verify_Razor_DefaultFramework()
+        {
+            var compilations = DummyWithLocationMapping.AddPaths("Dummy.razor")
+                                                       .Build()
+                                                       .Compile(false);
+
+            var my = compilations.Single().ExternalReferences.First().Display;
+            my.Contains("net7.0").Should().BeTrue();
         }
 
         [DataTestMethod]
@@ -274,11 +287,32 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         [TestMethod]
         public void Verify_Razor_ParseOptions()
         {
-            var verifierBuilder = DummyWithLocationMapping.AddPaths("Dummy.razor");
-            verifierBuilder.WithOptions(ParseOptionsHelper.FromCSharp10)
-                           .Invoking(x => x.Verify())
-                           .Should()
-                           .NotThrow();
+            var compilations = DummyWithLocationMapping.AddPaths("Dummy.razor")
+                                                       .WithOptions(ParseOptionsHelper.FromCSharp9)
+                                                       .Build()
+                                                       .Compile(false);
+
+            if (!TestContextHelper.IsAzureDevOpsContext || TestContextHelper.IsPullRequestBuild)
+            {
+                compilations.Should().ContainSingle();
+
+                compilations.Single().LanguageVersionString().Should().BeEquivalentTo(LanguageVersion.CSharp9.ToString());
+            }
+            else
+            {
+                compilations.Should().HaveCount(3);
+                List<string> languages = new();
+                foreach (var compilation in compilations)
+                {
+                    languages.Add(compilation.LanguageVersionString());
+                }
+                languages.Should().BeEquivalentTo(new List<string>()
+                    {
+                        LanguageVersion.CSharp9.ToString(),
+                        LanguageVersion.CSharp10.ToString(),
+                        LanguageVersion.CSharp11.ToString()
+                    });
+            }
         }
 
 #endif
