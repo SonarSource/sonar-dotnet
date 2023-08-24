@@ -27,6 +27,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly string EnableConcurrentExecutionVariable = "SONAR_DOTNET_ENABLE_CONCURRENT_EXECUTION";
 
         protected virtual bool EnableConcurrentExecution => IsConcurrentExecutionEnabled();
+        protected virtual Func<Compilation, bool> ShouldRegisterAnalyzerPredicate => null;
 
         protected abstract void Initialize(SonarAnalysisContext context);
 
@@ -36,7 +37,21 @@ namespace SonarAnalyzer.Helpers
             {
                 context.EnableConcurrentExecution();
             }
-            Initialize(new SonarAnalysisContext(context, SupportedDiagnostics));
+
+            if (ShouldRegisterAnalyzerPredicate != null)
+            {
+                context.RegisterCompilationStartAction(compilation =>
+                {
+                    if (ShouldRegisterAnalyzerPredicate(compilation.Compilation))
+                    {
+                        Initialize(new SonarAnalysisContext(context, SupportedDiagnostics));
+                    }
+                });
+            }
+            else
+            {
+                Initialize(new SonarAnalysisContext(context, SupportedDiagnostics));
+            }
         }
 
         protected static bool IsConcurrentExecutionEnabled()

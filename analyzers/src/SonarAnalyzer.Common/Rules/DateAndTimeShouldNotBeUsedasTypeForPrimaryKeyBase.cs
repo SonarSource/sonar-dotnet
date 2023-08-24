@@ -39,22 +39,20 @@ public abstract class DateAndTimeShouldNotBeUsedasTypeForPrimaryKeyBase<TSyntaxK
 
     protected override string MessageFormat => "'{0}' should not be used as a type for primary keys";
 
+    protected override Func<Compilation, bool> ShouldRegisterAnalyzerPredicate => compilation =>
+        compilation.GetTypeByMetadataName(KnownType.Microsoft_EntityFrameworkCore_DbContext) is not null
+        || compilation.GetTypeByMetadataName(KnownType.Microsoft_EntityFramework_DbContext) is not null;
+
     protected DateAndTimeShouldNotBeUsedasTypeForPrimaryKeyBase() : base(DiagnosticId) { }
 
     protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterCompilationStartAction(c =>
+        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, context =>
         {
-            if (ShouldRegisterAction(c.Compilation))
+            foreach (var propertyType in TypeNodesOfTemporalKeyProperties(context))
             {
-                context.RegisterNodeAction(Language.GeneratedCodeRecognizer, context =>
-                {
-                    foreach (var propertyType in TypeNodesOfTemporalKeyProperties(context))
-                    {
-                        context.ReportIssue(Diagnostic.Create(Rule, propertyType.GetLocation(), Language.Syntax.NodeIdentifier(propertyType)));
-                    }
-                }, Language.SyntaxKind.ClassDeclaration);
+                context.ReportIssue(Diagnostic.Create(Rule, propertyType.GetLocation(), Language.Syntax.NodeIdentifier(propertyType)));
             }
-        });
+        }, Language.SyntaxKind.ClassDeclaration);
 
     protected static bool IsKeyPropertyBasedOnName(string propertyName, string className) =>
         propertyName.Equals("Id", StringComparison.InvariantCultureIgnoreCase)
@@ -66,10 +64,6 @@ public abstract class DateAndTimeShouldNotBeUsedasTypeForPrimaryKeyBase<TSyntaxK
 
     protected bool MatchesAttributeName(string attributeName, string[] candidates) =>
         Array.Exists(candidates, x => attributeName.Equals(x, Language.NameComparison));
-
-    private static bool ShouldRegisterAction(Compilation compilation) =>
-        compilation.GetTypeByMetadataName(KnownType.Microsoft_EntityFrameworkCore_DbContext) is not null
-        || compilation.GetTypeByMetadataName(KnownType.Microsoft_EntityFramework_DbContext) is not null;
 
     private static string[] TypeNamesForAttribute(KnownType attributeType) => new[]
     {
