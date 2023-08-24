@@ -23,7 +23,7 @@ using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
-internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
+internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrapper>
 {
     protected override IBinaryOperationWrapper Convert(IOperation operation) =>
         IBinaryOperationWrapper.FromOperation(operation);

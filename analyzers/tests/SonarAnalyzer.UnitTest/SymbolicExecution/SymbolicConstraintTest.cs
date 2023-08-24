@@ -61,10 +61,10 @@ public class SymbolicConstraintTest
     }
 
     [TestMethod]
-    public void CollectionConstraint_Opposite()
+    public void CollectisonConstraint_Opposite()
     {
         CollectionConstraint.Empty.Opposite.Should().Be(CollectionConstraint.NotEmpty);
-        CollectionConstraint.NotEmpty.Opposite.Should().Be(CollectionConstraint.Empty);
+        CollectionConstraint.NotEmpty.Opposite.Should().Be(null);
     }
 
     [TestMethod]
