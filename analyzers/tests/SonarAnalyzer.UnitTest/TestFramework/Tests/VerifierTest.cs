@@ -183,8 +183,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
                 .Build()
                 .Compile(false);
 
-            var my = compilations.Single().ExternalReferences.First().Display;
-            my.Contains("net6.0").Should().BeTrue();
+            var reference = compilations.Single().ExternalReferences.First().Display;
+            reference.Contains("net6.0").Should().BeTrue();
         }
 
         [TestMethod]
@@ -194,8 +194,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
                 .Build()
                 .Compile(false);
 
-            var my = compilations.Single().ExternalReferences.First().Display;
-            my.Contains("net7.0").Should().BeTrue();
+            var reference = compilations.Single().ExternalReferences.First().Display;
+            reference.Contains("net7.0").Should().BeTrue();
         }
 
         [DataTestMethod]
