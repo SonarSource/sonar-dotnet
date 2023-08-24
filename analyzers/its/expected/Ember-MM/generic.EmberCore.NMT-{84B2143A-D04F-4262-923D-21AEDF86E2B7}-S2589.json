@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2589",
+"message":  "Change this condition so that it does not always evaluate to 'True'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L963",
+"region":  {
+"startLine":  963,
+"startColumn":  20,
+"endLine":  963,
+"endColumn":  33
+}
+}
+}
+]
+}

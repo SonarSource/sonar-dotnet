@@ -56,6 +56,19 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'imgResult' before using it.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L435",
+"region":  {
+"startLine":  435,
+"startColumn":  9,
+"endLine":  435,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'imgResult' before using it.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L514",
 "region":  {
 "startLine":  514,

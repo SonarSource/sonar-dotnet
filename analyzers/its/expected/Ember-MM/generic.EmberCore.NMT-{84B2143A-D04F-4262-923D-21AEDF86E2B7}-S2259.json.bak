@@ -158,6 +158,8 @@
 },
 {
 "id":  "S2259",
+<<<<<<< HEAD
+=======
 "message":  "'c.values.FirstOrDefault(Function(y) y.label = saved)' is Nothing on at least one execution path.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L960",
@@ -171,6 +173,7 @@
 },
 {
 "id":  "S2259",
+>>>>>>> c93e07070 (update ITs)
 "message":  "'p' is Nothing on at least one execution path.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L998",
