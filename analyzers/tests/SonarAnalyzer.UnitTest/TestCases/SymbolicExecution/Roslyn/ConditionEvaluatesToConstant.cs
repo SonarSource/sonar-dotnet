@@ -67,7 +67,7 @@ namespace Tests.Diagnostics
                                         // Secondary@-1 ^33#239
             {
                 if (o3 != null)
-                                        // secondary location starts at incrementor and ends at the end of the above line 
+                                        // secondary location starts at incrementor and ends at the end of the above line
                     break;
             }
         }
@@ -2248,6 +2248,30 @@ namespace Tests.Diagnostics
             else
             {
                 _test4 = true;
+            }
+        }
+
+        public void FP_Increment(List<int> list)
+        {
+            int MaxStepCount = 200;
+            var steps = 0;
+            while (list.Any())
+            {
+
+                if (steps++ > MaxStepCount) // Noncompliant FP
+                {
+                    return;
+                }
+            }
+
+            steps = 0;
+            while (list.Any())
+            {
+                steps = steps + 1;
+                if (steps > MaxStepCount) // Noncompliant FP
+                {
+                    return;
+                }
             }
         }
     }
