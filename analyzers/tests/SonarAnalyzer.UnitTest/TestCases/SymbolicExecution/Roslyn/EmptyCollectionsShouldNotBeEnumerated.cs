@@ -429,18 +429,28 @@ class CollectionTests
         dict.Clear();                   // Compliant
         dict.Clear();                   // Noncompliant
 
-        var empty = new List<int>();
-        list.Add(5);
-        list.Intersect(empty);          // Compliant
-        list.Clear();                   // FN
-
         list.Add(5);
         list.RemoveAll(x => true);      // Compliant
         list.Clear();                   // FN
+        list.Add(5);
+        list.RemoveAll(x => x == 1);    // Compliant
+        list.Clear();                   // Compliant
 
         set.Add(5);
         set.RemoveWhere(x => true);     // Compliant
         set.Clear();                    // FN
+        set.Add(5);
+        set.RemoveWhere(x => x == 1);   // Compliant
+        set.Clear();                    // Compliant
+
+        var empty = new List<int>();
+        set.Add(5);
+        set.IntersectWith(empty);       // Compliant
+        set.Clear();                    // FN
+        var notEmpty = new List<int> { 1 };
+        set.Add(5);
+        set.IntersectWith(notEmpty);    // Compliant
+        set.Clear();                    // Compliant
     }
 }
 

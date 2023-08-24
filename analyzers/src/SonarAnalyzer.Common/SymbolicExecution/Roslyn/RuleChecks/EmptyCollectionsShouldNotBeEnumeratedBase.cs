@@ -208,13 +208,19 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
     }
 
     private static ProgramState ProcessAddMethod(ProgramState state, IMethodSymbol method, IOperation instance) =>
-        AddMethods.Contains(method.Name) ? SetOperationAndSymbolConstraint(state, instance, CollectionConstraint.NotEmpty) : null;
+        AddMethods.Contains(method.Name)
+            ? SetOperationAndSymbolConstraint(state, instance, CollectionConstraint.NotEmpty)
+            : null;
 
     private static ProgramState ProcessRemoveMethod(ProgramState state, IMethodSymbol method, IOperation instance) =>
-        RemoveMethods.Contains(method.Name) ? SetOperationAndSymbolValue(state, instance, (state[instance] ?? SymbolicValue.Empty).WithoutConstraint(CollectionConstraint.NotEmpty)) : null;
+        RemoveMethods.Contains(method.Name)
+            ? SetOperationAndSymbolValue(state, instance, (state[instance] ?? SymbolicValue.Empty).WithoutConstraint(CollectionConstraint.NotEmpty))
+            : null;
 
     private static ProgramState ProcessClearMethod(ProgramState state, IMethodSymbol method, IOperation instance) =>
-        method.Name == nameof(ICollection<int>.Clear) ? SetOperationAndSymbolConstraint(state, instance, CollectionConstraint.Empty) : state;
+        method.Name == nameof(ICollection<int>.Clear)
+            ? SetOperationAndSymbolConstraint(state, instance, CollectionConstraint.Empty)
+            : state;
 
     private static ProgramState SetOperationAndSymbolConstraint(ProgramState state, IOperation instance, SymbolicConstraint constraint) =>
         SetOperationAndSymbolValue(state, instance, (state[instance] ?? SymbolicValue.Empty).WithConstraint(constraint));
