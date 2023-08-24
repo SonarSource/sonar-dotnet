@@ -175,16 +175,18 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         public void Verify_CshtmlAnalysisIsDisabled_DoesNotRaise() =>
             DummyWithLocationMapping.AddPaths("Dummy.cshtml").VerifyNoIssueReported();
 
-        [TestMethod]
-        public void Verify_Razor_WithFramework()
+        [DataTestMethod]
+        [DataRow("net6.0")]
+        [DataRow("net7.0")]
+        public void Verify_Razor_WithFramework(string framework)
         {
             var compilations = DummyWithLocationMapping.AddPaths("Dummy.razor")
-                .WithFramework("net6.0")
+                .WithFramework(framework)
                 .Build()
                 .Compile(false);
 
             var reference = compilations.Single().ExternalReferences.First().Display;
-            reference.Contains("net6.0").Should().BeTrue();
+            reference.Contains(framework).Should().BeTrue();
         }
 
         [TestMethod]
@@ -229,11 +231,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             else
             {
                 compilations.Should().HaveCount(3);
-                List<string> languages = new();
-                foreach (var compilation in compilations)
-                {
-                    languages.Add(compilation.LanguageVersionString());
-                }
+                var languages = compilations.Select(c => c.LanguageVersionString()).ToList();
+
                 languages.Should().BeEquivalentTo(new List<string>()
                     {
                         LanguageVersion.CSharp9.ToString(),
