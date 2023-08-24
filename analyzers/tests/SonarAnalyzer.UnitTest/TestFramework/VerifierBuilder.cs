@@ -46,6 +46,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public string CodeFixTitle { get; init; }
         public bool ConcurrentAnalysis { get; init; } = true;
         public CompilationErrorBehavior ErrorBehavior { get; init; } = CompilationErrorBehavior.Default;
+        public string RazorFramework { get; init; } = "net7.0";
+        public bool IsRazor { get; init; }
         public ImmutableArray<DiagnosticDescriptor> OnlyDiagnostics { get; init; } = ImmutableArray<DiagnosticDescriptor>.Empty;
         public OutputKind OutputKind { get; init; } = OutputKind.DynamicallyLinkedLibrary;
         public ImmutableArray<string> Paths { get; init; } = ImmutableArray<string>.Empty;
@@ -54,7 +56,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public ImmutableArray<MetadataReference> References { get; init; } = ImmutableArray<MetadataReference>.Empty;
         public ImmutableArray<Snippet> Snippets { get; init; } = ImmutableArray<Snippet>.Empty;
         public string SonarProjectConfigPath { get; init; }
-        public bool IsRazor { get; init; }
 
         /// <summary>
         /// This method solves complicated scenarios. Use 'new VerifierBuilder&lt;TAnalyzer&gt;()' for single analyzer cases with no rule parameters.
@@ -106,6 +107,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public VerifierBuilder WithErrorBehavior(CompilationErrorBehavior errorBehavior) =>
             this with { ErrorBehavior = errorBehavior };
+
+        public VerifierBuilder WithFramework(string framework) =>
+            this with { RazorFramework = framework };
 
         public VerifierBuilder WithLanguageVersion(CS.LanguageVersion languageVersion) =>
             WithOptions(ImmutableArray.Create<ParseOptions>(new CS.CSharpParseOptions(languageVersion)));
