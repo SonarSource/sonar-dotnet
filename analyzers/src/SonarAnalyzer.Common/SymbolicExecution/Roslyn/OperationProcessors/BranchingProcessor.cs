@@ -30,8 +30,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 internal abstract class BranchingProcessor<T> : MultiProcessor<T>
     where T : IOperationWrapper
 {
-    protected abstract SymbolicConstraint BoolConstraintFromOperation(ProgramState state, T operation);
-    protected abstract ProgramState LearnBranchingConstraint(ProgramState state, T operation, int visitCount, bool falseBranch);
+    protected abstract SymbolicConstraint BoolConstraintFromOperation(ProgramState state, T operation, bool isLoopCondition, int visitCount);
+    protected abstract ProgramState LearnBranchingConstraint(ProgramState state, T operation, bool isLoopCondition, int visitCount, bool falseBranch);
 
     protected virtual ProgramState PreProcess(ProgramState state, T operation) =>
         state;
@@ -39,18 +39,15 @@ internal abstract class BranchingProcessor<T> : MultiProcessor<T>
     protected override ProgramState[] Process(SymbolicContext context, T operation)
     {
         var state = PreProcess(context.State, operation);
-        if (BoolConstraintFromOperation(state, operation) is { } constraint)
+        if (BoolConstraintFromOperation(state, operation, context.IsLoopCondition, context.VisitCount) is { } constraint)
         {
-            state = state.SetOperationConstraint(context.Operation, constraint);
-            return context.VisitCount > 1   // apply fuzzy logic on NumberConstraints in loops
-                ? LearnBranchingConstraint(state, operation, context.VisitCount, constraint == BoolConstraint.False).ToArray()
-                : state.ToArray();
+            return state.SetOperationConstraint(context.Operation, constraint).ToArray();    // We already know the answer from existing constraints
         }
         else
         {
             var beforeLearningState = state;
-            var positive = LearnBranchingConstraint(state, operation, context.VisitCount, false);
-            var negative = LearnBranchingConstraint(state, operation, context.VisitCount, true);
+            var positive = LearnBranchingConstraint(state, operation, context.IsLoopCondition, context.VisitCount, false);
+            var negative = LearnBranchingConstraint(state, operation, context.IsLoopCondition, context.VisitCount, true);
             return positive == beforeLearningState && negative == beforeLearningState
                 ? beforeLearningState.ToArray()   // We can't learn anything, just move on
                 : new[]
