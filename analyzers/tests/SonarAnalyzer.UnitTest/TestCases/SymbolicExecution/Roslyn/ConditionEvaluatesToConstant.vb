@@ -652,7 +652,7 @@ End Sub
     Public Sub ReferenceEqualsBool()
         Dim a, b As Boolean
         a = b = True
-        If Object.ReferenceEquals(a, b) Then ' FN
+        If Object.ReferenceEquals(a, b) Then ' Noncompliant
         End If
     End Sub
 

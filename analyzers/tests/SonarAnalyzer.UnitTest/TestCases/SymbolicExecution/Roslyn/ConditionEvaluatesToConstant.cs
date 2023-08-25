@@ -839,7 +839,7 @@ namespace Tests.Diagnostics
         {
             bool a, b;
             a = b = true;
-            if (object.ReferenceEquals(a, b)) { }   // FN
+            if (object.ReferenceEquals(a, b)) { }   // Noncompliant
         }
 
         public override bool Equals(object obj)
