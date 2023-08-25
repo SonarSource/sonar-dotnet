@@ -42,8 +42,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override string MethodKeyword { get; } = "procedures";
 
         protected override IEnumerable<SyntaxToken> GetMethodTokens(MethodBlockBaseSyntax baseMethodDeclaration) =>
-            baseMethodDeclaration.Statements.SelectMany(s => s.DescendantTokens())
-                ?? Enumerable.Empty<SyntaxToken>();
+            baseMethodDeclaration.Statements.SelectMany(s => s.DescendantTokens());
 
         protected override SyntaxToken? GetMethodIdentifierToken(MethodBlockBaseSyntax baseMethodDeclaration) =>
             baseMethodDeclaration.GetIdentifierOrDefault();
