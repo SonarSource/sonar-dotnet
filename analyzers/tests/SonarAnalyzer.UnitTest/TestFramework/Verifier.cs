@@ -225,7 +225,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
                     // Set TargetFramework
                     destinationXml.Descendants("TargetFramework").Single().Value = builder.RazorFramework;
-
+                    // Add References
+                    var itemGroup = destinationXml.Descendants("ItemGroup").Single();
+                    foreach (var reference in builder.References)
+                    {
+                        itemGroup.Add(new XElement("Reference", new XAttribute("Include", reference.Display)));
+                    }
                     // Set LangVersion
                     destinationXml.Descendants("LangVersion").Single().Value = lang;
                     destinationXml.Save(csprojPath);
