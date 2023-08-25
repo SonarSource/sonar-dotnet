@@ -6,4 +6,6 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <OutputType>Library</OutputType>
     </PropertyGroup>
+    <ItemGroup>
+    </ItemGroup>
 </Project>

@@ -247,6 +247,27 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             }
         }
 
+        [TestMethod]
+        public void Verify_Razor_AddReferences()
+        {
+            var compilations = DummyWithLocationMapping.AddPaths("Dummy.razor")
+                .AddReferences(NuGetMetadataReference.MicrosoftAzureDocumentDB())
+                .Build()
+                .Compile(false);
+            var references = compilations.Single().References;
+            references.Should().Contain(x => x.Display.Contains("Microsoft.Azure.DocumentDB"));
+        }
+
+        [TestMethod]
+        public void Verify_Razor_NoReferences()
+        {
+            var compilations = DummyWithLocationMapping.AddPaths("Dummy.razor")
+                .Build()
+                .Compile(false);
+            var references = compilations.Single().References;
+            references.Should().NotContain(x => x.Display.Contains("Microsoft.Azure.DocumentDB"));
+        }
+
 #endif
 
         [TestMethod]
