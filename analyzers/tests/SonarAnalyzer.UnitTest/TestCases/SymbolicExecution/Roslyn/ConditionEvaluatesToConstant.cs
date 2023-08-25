@@ -2285,12 +2285,16 @@ namespace Tests.Diagnostics
                     return;
                 }
             }
+        }
 
-            steps = 0;
+        public void FP_Increment_2(List<int> list)
+        {
+            int MaxStepCount = 200;
+            int steps = 0;
             while (list.Any())
             {
                 steps = steps + 1;
-                if (steps > MaxStepCount)
+                if (steps > MaxStepCount) // Noncompliant FP
                 {
                     return;
                 }
