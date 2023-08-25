@@ -1200,6 +1200,65 @@ private static bool Equals(object a, object b, object c) => false;";
     }
 
     [DataTestMethod]
+    [DataRow("true", "true", true, true, true)]
+    [DataRow("true", "false", false, true, false)]
+    [DataRow("false", "true", false, false, true)]
+    [DataRow("false", "false", true, false, false)]
+    public void Invocation_BoolEquals_LearnsResult(string left, string right, bool expectedResult, bool expectedConstraintLeft, bool expectedConstraintRight)
+    {
+        var code = $"""
+                bool left = {left};
+                bool right = {right};
+                var result = object.Equals(left, right);
+                Tag("Result", result);
+                Tag("Left", left);
+                Tag("Right", right);
+                """;
+        var validator = SETestContext.CreateCS(code).Validator;
+        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expectedResult));
+        validator.TagValue("Left").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expectedConstraintLeft));
+        validator.TagValue("Right").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expectedConstraintRight));
+    }
+
+    [DataTestMethod]
+    [DataRow("true")]
+    [DataRow("false")]
+    public void Invocation_BoolEquals_Branches(string leftArgument)
+    {
+        var code = $"""
+                bool left = {leftArgument};
+                var result = object.Equals(left, right);
+                Tag("End");
+                """;
+        var validator = SETestContext.CreateCS(code, "bool right").Validator;
+        var result = validator.Symbol("result");
+        var left = validator.Symbol("left");
+        var right = validator.Symbol("right");
+        validator.TagStates("End").Should().SatisfyRespectively(
+            x =>
+            {
+                x[result].HasConstraint(BoolConstraint.True).Should().BeTrue();
+                x[right].HasConstraint(x[left].Constraint<BoolConstraint>()).Should().BeTrue();
+            },
+            x =>
+            {
+                x[result].HasConstraint(BoolConstraint.False).Should().BeTrue();
+                x[right].HasConstraint(x[left].Constraint<BoolConstraint>().Opposite).Should().BeTrue();
+            });
+    }
+
+    [DataTestMethod]
+    public void Invocation_BoolEquals_DoesNotLearn()
+    {
+        var code = $"""
+                var result = object.Equals(left, right);
+                Tag("Result", result);
+                """;
+        var validator = SETestContext.CreateCS(code, "bool left, bool right").Validator;
+        validator.TagValue("Result").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+    }
+
+    [DataTestMethod]
     [DataRow("null", 0)]
     [DataRow("42", 42)]
     public void Invocation_NullableGetHasValue_LearnsBoolConstraint(string value, int expected)

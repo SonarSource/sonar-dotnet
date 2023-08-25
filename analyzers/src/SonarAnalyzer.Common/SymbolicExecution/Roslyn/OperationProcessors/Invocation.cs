@@ -192,6 +192,21 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
 
     private static ProgramState[] ProcessEquals(SymbolicContext context, IOperation leftOperation, IOperation rightOperation)
     {
+        if (leftOperation.AsConversion() is { } left
+            && left.Operand.Type.Is(KnownType.System_Boolean)
+            && rightOperation.AsConversion() is { } right
+            && right.Operand.Type.Is(KnownType.System_Boolean))
+        {
+            return ProcessEqualsBool(context, leftOperation, rightOperation);
+        }
+        else
+        {
+            return ProcessEqualsObject(context, leftOperation, rightOperation);
+        }
+    }
+
+    private static ProgramState[] ProcessEqualsObject(SymbolicContext context, IOperation leftOperation, IOperation rightOperation)
+    {
         if (context.State[leftOperation]?.Constraint<ObjectConstraint>() is var leftConstraint
             && context.State[rightOperation]?.Constraint<ObjectConstraint>() is var rightConstraint
             && (leftConstraint == ObjectConstraint.Null || rightConstraint == ObjectConstraint.Null))
@@ -210,6 +225,31 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
                 {
                     context.SetOperationConstraint(BoolConstraint.True).SetSymbolConstraint(symbol, ObjectConstraint.Null),
                     context.SetOperationConstraint(BoolConstraint.False).SetSymbolConstraint(symbol, ObjectConstraint.NotNull)
+                };
+            }
+        }
+        return context.State.ToArray();
+    }
+
+    private static ProgramState[] ProcessEqualsBool(SymbolicContext context, IOperation leftOperation, IOperation rightOperation)
+    {
+        if (context.State[leftOperation]?.Constraint<BoolConstraint>() is var leftConstraint
+            && context.State[rightOperation]?.Constraint<BoolConstraint>() is var rightConstraint)
+        {
+            if (leftConstraint is not null && rightConstraint is not null)
+            {
+                return leftConstraint == rightConstraint
+                    ? context.SetOperationConstraint(BoolConstraint.True).ToArray()
+                    : context.SetOperationConstraint(BoolConstraint.False).ToArray();
+            }
+            else if ((leftConstraint is not null || rightConstraint is not null)
+                    && (leftConstraint is not null ? rightOperation : leftOperation).TrackedSymbol(context.State) is { } symbol)
+            {
+                var oppositeConstraint = leftConstraint is not null ? leftConstraint.Opposite : rightConstraint.Opposite;
+                return new[]
+                {
+                    context.SetOperationConstraint(BoolConstraint.True).SetSymbolConstraint(symbol, oppositeConstraint.Opposite),
+                    context.SetOperationConstraint(BoolConstraint.False).SetSymbolConstraint(symbol, oppositeConstraint),
                 };
             }
         }
