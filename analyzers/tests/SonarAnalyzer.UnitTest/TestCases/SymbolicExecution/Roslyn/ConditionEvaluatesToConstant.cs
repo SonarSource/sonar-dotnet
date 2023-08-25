@@ -2290,7 +2290,7 @@ namespace Tests.Diagnostics
             while (list.Any())
             {
                 steps = steps + 1;
-                if (steps > MaxStepCount) // Noncompliant FP
+                if (steps > MaxStepCount)
                 {
                     return;
                 }
