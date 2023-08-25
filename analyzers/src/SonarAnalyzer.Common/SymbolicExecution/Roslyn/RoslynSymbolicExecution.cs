@@ -69,13 +69,14 @@ internal class RoslynSymbolicExecution
         queue.Enqueue(new(cfg.EntryBlock, ProgramState.Empty, null));
         while (queue.Any())
         {
-            if (steps++ > MaxStepCount || cancel.IsCancellationRequested)
-            {
-                return;
-            }
             var current = queue.Dequeue();
             if (visited.Add(current) && CheckVisitCount(current, current.AddVisit()))
             {
+                if (steps++ > MaxStepCount || cancel.IsCancellationRequested)
+                {
+                    return;
+                }
+
                 logger.Log(current, "Processing");
                 var successors = current.Operation == null ? ProcessBranching(current) : ProcessOperation(current);
                 foreach (var node in successors)
