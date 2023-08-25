@@ -33,13 +33,13 @@ import static com.sonar.it.csharp.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(Tests.class)
-public class SharedFilesTest {
+class SharedFilesTest {
 
   @TempDir
   private static Path temp;
 
   @Test
-  public void should_analyze_shared_files() throws Exception {
+  void should_analyze_shared_files() throws Exception {
     BuildResult buildResult = Tests.analyzeProject(temp, "SharedFilesTest", null, "sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml");
 
     assertThat(getComponent("SharedFilesTest:Class1.cs")).isNotNull();
@@ -55,7 +55,7 @@ public class SharedFilesTest {
     assertThat(issues)
       .hasSize(2)
       .extracting(Issue::getRule)
-      .containsExactly("csharpsquid:S3903", "external_roslyn:CA1050");
+      .containsExactlyInAnyOrder("csharpsquid:S3903", "external_roslyn:CA1050");
 
     assertThat(buildResult.getLogsLines(l -> l.contains("INFO"))).contains("INFO: Found 2 MSBuild C# projects: 2 MAIN projects.");
   }
