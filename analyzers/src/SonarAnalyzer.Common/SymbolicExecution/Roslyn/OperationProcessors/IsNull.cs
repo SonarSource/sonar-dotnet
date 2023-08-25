@@ -27,12 +27,12 @@ internal sealed class IsNull : BranchingProcessor<IIsNullOperationWrapper>
     protected override IIsNullOperationWrapper Convert(IOperation operation) =>
         IIsNullOperationWrapper.FromOperation(operation);
 
-    protected override SymbolicConstraint BoolConstraintFromOperation(ProgramState state, IIsNullOperationWrapper operation) =>
+    protected override SymbolicConstraint BoolConstraintFromOperation(ProgramState state, IIsNullOperationWrapper operation, bool isLoopCondition, int visitCount) =>
         state[operation.Operand] is { } value && value.HasConstraint<ObjectConstraint>()
             ? BoolConstraint.From(value.HasConstraint(ObjectConstraint.Null))
             : null;
 
-    protected override ProgramState LearnBranchingConstraint(ProgramState state, IIsNullOperationWrapper operation, int visitCount, bool falseBranch)
+    protected override ProgramState LearnBranchingConstraint(ProgramState state, IIsNullOperationWrapper operation, bool isLoopCondition, int visitCount, bool falseBranch)
     {
         var constraint = falseBranch ? ObjectConstraint.NotNull : ObjectConstraint.Null;
         state = state.SetOperationConstraint(operation.Operand, constraint);

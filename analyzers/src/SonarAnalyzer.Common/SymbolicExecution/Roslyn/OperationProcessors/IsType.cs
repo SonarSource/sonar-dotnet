@@ -27,10 +27,10 @@ internal sealed class IsType : BranchingProcessor<IIsTypeOperationWrapper>
     protected override IIsTypeOperationWrapper Convert(IOperation operation) =>
         IIsTypeOperationWrapper.FromOperation(operation);
 
-    protected override SymbolicConstraint BoolConstraintFromOperation(ProgramState state, IIsTypeOperationWrapper operation) =>
+    protected override SymbolicConstraint BoolConstraintFromOperation(ProgramState state, IIsTypeOperationWrapper operation, bool isLoopCondition, int visitCount) =>
         state[operation.ValueOperand]?.HasConstraint(ObjectConstraint.Null) is true ? BoolConstraint.False : null;
 
-    protected override ProgramState LearnBranchingConstraint(ProgramState state, IIsTypeOperationWrapper operation, int visitCount, bool falseBranch) =>
+    protected override ProgramState LearnBranchingConstraint(ProgramState state, IIsTypeOperationWrapper operation, bool isLoopCondition, int visitCount, bool falseBranch) =>
         operation.ValueOperand.TrackedSymbol(state) is { } testedSymbol
         && ObjectConstraint.NotNull.ApplyOpposite(falseBranch ^ operation.IsNegated) is { } constraint
             ? state.SetSymbolConstraint(testedSymbol, constraint)

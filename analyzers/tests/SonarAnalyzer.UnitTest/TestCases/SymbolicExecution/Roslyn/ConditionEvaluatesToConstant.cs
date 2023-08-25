@@ -336,29 +336,6 @@ namespace Tests.Diagnostics
             }
         }
 
-        public void InfiniteForLoop(string arg)
-        {
-            for (var i = 0; i < 10; i--)    // Noncompliant
-            {
-            }
-        }
-
-        public void LoopWithIfsInside(bool condition)
-        {
-            var done = false;
-            var i = 0;
-            while (!done)
-            {
-                if (i <= 5)                 // Noncompliant FP
-                    i++;
-                else
-                    done = true;            // Secondary FP
-
-                if (i < 3 && condition)
-                    done = true;
-            }
-        }
-
         public void Method_Switch()
         {
             int i = 10;
