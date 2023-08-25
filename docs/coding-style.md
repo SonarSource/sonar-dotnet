@@ -178,6 +178,7 @@ Variable name `sut` (System Under Test) is recommended in unit tests that really
 * Use positive logic.
 * Use `is {}` and `is not null` as null-checks (instead of `!= null`).
 * Each compiler directive outside method body (namely `#if`/`#endif`) should be preceded and followed by an empty line.
+* Do not use `nullable`.
 
 ## Comments
 
