@@ -19,6 +19,7 @@
  */
 
 using System.IO;
+using System.Linq.Expressions;
 using SonarAnalyzer.Protobuf;
 using SonarAnalyzer.Rules;
 using CS = SonarAnalyzer.Rules.CSharp;
@@ -187,6 +188,30 @@ namespace SonarAnalyzer.UnitTest.Rules
             }
         }
 
+#if NET
+
+        [TestMethod]
+        public void Verify_Razor() =>
+            // Currently only the symbols from .cs files are computed since .razor support is not yet implemented.
+            CreateBuilder(ProjectType.Product, "Razor.razor", "ToDo.cs")
+                .WithConcurrentAnalysis(false)
+                .VerifyUtilityAnalyzer<SymbolReferenceInfo>(symbols =>
+                {
+                    symbols.Should().ContainSingle();
+                    symbols[0].FilePath.Should().EndWith("ToDo.cs");
+                    symbols[0].Reference
+                              .Select(x => x.Declaration)
+                              .Should()
+                              .BeEquivalentTo(new[]
+                                  {
+                                      new TextRange { StartLine = 3, EndLine = 3, StartOffset = 13, EndOffset = 17 },
+                                      new TextRange { StartLine = 5, EndLine = 5, StartOffset = 19, EndOffset = 24 },
+                                      new TextRange { StartLine = 6, EndLine = 6, StartOffset = 16, EndOffset = 22 }
+                                  });
+                });
+
+#endif
+
         private void Verify(string fileName, ProjectType projectType, int expectedDeclarationCount, int assertedDeclarationLine, params int[] assertedDeclarationLineReferences) =>
             Verify(fileName, projectType, references =>
                 {
@@ -213,10 +238,10 @@ namespace SonarAnalyzer.UnitTest.Rules
                         }
                     });
 
-        private VerifierBuilder CreateBuilder(ProjectType projectType, string fileName)
+        private VerifierBuilder CreateBuilder(ProjectType projectType, params string[] fileNames)
         {
             var testRoot = BasePath + TestContext.TestName;
-            var language = AnalyzerLanguage.FromPath(fileName);
+            var language = AnalyzerLanguage.FromPath(fileNames[0]);
             UtilityAnalyzerBase analyzer = language.LanguageName switch
             {
                 LanguageNames.CSharp => new TestSymbolReferenceAnalyzer_CS(testRoot, projectType == ProjectType.Test),
@@ -225,7 +250,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             };
             return new VerifierBuilder()
                 .AddAnalyzer(() => analyzer)
-                .AddPaths(fileName)
+                .AddPaths(fileNames)
                 .WithBasePath(BasePath)
                 .WithOptions(ParseOptionsHelper.Latest(language))
                 .WithProtobufPath(@$"{testRoot}\symrefs.pb");
