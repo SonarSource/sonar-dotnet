@@ -107,7 +107,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                         builder.ErrorBehavior,
                         builder.SonarProjectConfigPath,
                         onlyDiagnosticIds,
-                        builder.Paths.Where(x => x.EndsWith(".razor", StringComparison.OrdinalIgnoreCase) || x.EndsWith(".cshtml", StringComparison.OrdinalIgnoreCase)).Select(x => TestCasePath(x)));
+                        builder.Paths.Where(builder.IsRazorOrCshtmlFile).Select(TestCasePath));
                 }
                 else
                 {
@@ -219,6 +219,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                     foreach (var file in Directory.GetFiles("TestFramework\\Razor\\EmptyProject").Concat(builder.Paths.Select(TestCasePath)))
                     {
                         File.Copy(file, Path.Combine(tempPath, lang, Path.GetFileName(file)));
+                    }
+                    foreach (var snippet in builder.Snippets)
+                    {
+                        File.WriteAllText(Path.Combine(tempPath, lang, snippet.FileName), snippet.Content);
                     }
                     var csprojPath = Path.Combine(tempPath, lang, "EmptyProject.csproj");
                     var destinationXml = XElement.Load(csprojPath);

@@ -67,14 +67,18 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             this with
             {
                 Paths = Paths.Concat(paths).ToImmutableArray(),
-                IsRazor = IsRazor || Array.Exists(paths, x => x.EndsWith(".razor", StringComparison.OrdinalIgnoreCase) || x.EndsWith(".cshtml", StringComparison.OrdinalIgnoreCase))
+                IsRazor = IsRazor || Array.Exists(paths, IsRazorOrCshtmlFile)
             };
 
         public VerifierBuilder AddReferences(IEnumerable<MetadataReference> references) =>
             this with { References = References.Concat(references).ToImmutableArray() };
 
         public VerifierBuilder AddSnippet(string snippet, string fileName = null) =>
-            this with { Snippets = Snippets.Append(new(snippet, fileName)).ToImmutableArray() };
+            this with
+            {
+                Snippets = Snippets.Add(new(snippet, fileName)),
+                IsRazor = IsRazor || IsRazorOrCshtmlFile(fileName)
+            };
 
         /// <summary>
         /// Add a test reference to change the project type to Test project.
@@ -149,6 +153,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public Verifier Build() =>
             new(this);
+
+        internal bool IsRazorOrCshtmlFile(string fileName) =>
+            !string.IsNullOrEmpty(fileName) && (fileName.EndsWith(".razor", StringComparison.OrdinalIgnoreCase) || fileName.EndsWith(".cshtml", StringComparison.OrdinalIgnoreCase));
     }
 
     internal record VerifierBuilder<TAnalyzer> : VerifierBuilder
