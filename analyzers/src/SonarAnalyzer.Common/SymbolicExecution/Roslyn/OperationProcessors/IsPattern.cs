@@ -107,21 +107,21 @@ internal sealed class IsPattern : BranchingProcessor<IIsPatternOperationWrapper>
             && IConstantPatternOperationWrapper.FromOperation(isPattern.Pattern.WrappedOperation).Value is var constantPattern
             && constantPattern.ConstantValue.Value is { } constant)
         {
-            if (constant is bool boolConstant)
+            if (constant is bool boolConstantConstraint)
             {
-                if (value.Constraint<BoolConstraint>() is { } valueBool)
+                if (value.Constraint<BoolConstraint>() is { } valueBoolConstraint)
                 {
-                    return BoolConstraint.From(valueBool == BoolConstraint.From(boolConstant));
+                    return BoolConstraint.From(valueBoolConstraint == BoolConstraint.From(boolConstantConstraint));
                 }
                 else if (value.HasConstraint(ObjectConstraint.Null))
                 {
                     return BoolConstraint.False;
                 }
             }
-            else if (state.Constraint<NumberConstraint>(constantPattern) is { } constantNumber
-                && value.Constraint<NumberConstraint>() is { } valueNumber)
+            else if (state.Constraint<NumberConstraint>(constantPattern) is { } constantNumberConstraint
+                && value.Constraint<NumberConstraint>() is { } valueNumberConstraint)
             {
-                return BoolConstraint.From(valueNumber.Overlaps(constantNumber));
+                return BoolConstraint.From(valueNumberConstraint.Overlaps(constantNumberConstraint));
             }
         }
         return null; // We cannot take conclusive decision
