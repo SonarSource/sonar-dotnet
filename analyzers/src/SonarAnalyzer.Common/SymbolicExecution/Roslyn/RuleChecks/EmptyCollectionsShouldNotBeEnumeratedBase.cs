@@ -176,14 +176,15 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
 
     private ProgramState ProcessInvocation(SymbolicContext context, IInvocationOperationWrapper invocation)
     {
-        if (invocation.TargetMethod.Is(KnownType.System_Linq_Enumerable, nameof(Enumerable.Count))
+        var targetMethod = invocation.TargetMethod;
+        if (targetMethod.Is(KnownType.System_Linq_Enumerable, nameof(Enumerable.Count))
             && SizeConstraint(context.State, invocation.Instance ?? invocation.Arguments[0].ToArgument().Value, HasFilteringPredicate()) is { } constraint)
         {
             return context.SetOperationConstraint(constraint);
         }
         else if (invocation.Instance is { } instance)
         {
-            if (RaisingMethods.Contains(invocation.TargetMethod.Name))
+            if (RaisingMethods.Contains(targetMethod.Name))
             {
                 if (context.State[instance]?.HasConstraint(CollectionConstraint.Empty) is true)
                 {
@@ -194,9 +195,9 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
                     nonEmptyAccess.Add(context.Operation.Instance);
                 }
             }
-            return ProcessAddMethod(context.State, invocation.TargetMethod, instance)
-                ?? ProcessRemoveMethod(context.State, invocation.TargetMethod, instance)
-                ?? ProcessClearMethod(context.State, invocation.TargetMethod, instance);
+            return ProcessAddMethod(context.State, targetMethod, instance)
+                ?? ProcessRemoveMethod(context.State, targetMethod, instance)
+                ?? ProcessClearMethod(context.State, targetMethod, instance);
         }
         else
         {
