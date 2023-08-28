@@ -151,11 +151,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .WithConcurrentAnalysis(false);
         }
 
-        public bool IsRazorOrCshtmlFile(string fileName) =>
-            !string.IsNullOrEmpty(fileName) && (fileName.EndsWith(".razor", StringComparison.OrdinalIgnoreCase) || fileName.EndsWith(".cshtml", StringComparison.OrdinalIgnoreCase));
-
         public Verifier Build() =>
             new(this);
+
+        internal bool IsRazorOrCshtmlFile(string fileName) =>
+            !string.IsNullOrEmpty(fileName) && (fileName.EndsWith(".razor", StringComparison.OrdinalIgnoreCase) || fileName.EndsWith(".cshtml", StringComparison.OrdinalIgnoreCase));
     }
 
     internal record VerifierBuilder<TAnalyzer> : VerifierBuilder
