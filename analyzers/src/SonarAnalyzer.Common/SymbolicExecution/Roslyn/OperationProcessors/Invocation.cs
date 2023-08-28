@@ -223,27 +223,15 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
 
     private static ProgramState[] ProcessEqualsBool(SymbolicContext context, IOperation leftOperation, IOperation rightOperation)
     {
-        if (context.State[leftOperation]?.Constraint<BoolConstraint>() is var leftConstraint
-            && context.State[rightOperation]?.Constraint<BoolConstraint>() is var rightConstraint)
+        if (context.State[leftOperation]?.Constraint<BoolConstraint>() is { } leftConstraint
+            && context.State[rightOperation]?.Constraint<BoolConstraint>() is { } rightConstraint)
         {
-            if (leftConstraint is not null && rightConstraint is not null)
-            {
-                return leftConstraint == rightConstraint
-                    ? context.SetOperationConstraint(BoolConstraint.True).ToArray()
-                    : context.SetOperationConstraint(BoolConstraint.False).ToArray();
-            }
-            else if ((leftConstraint is not null || rightConstraint is not null)
-                    && (leftConstraint is not null ? rightOperation : leftOperation).TrackedSymbol(context.State) is { } symbol)
-            {
-                var oppositeConstraint = leftConstraint is not null ? leftConstraint.Opposite : rightConstraint.Opposite;
-                return new[]
-                {
-                    context.SetOperationConstraint(BoolConstraint.True).SetSymbolConstraint(symbol, oppositeConstraint.Opposite),
-                    context.SetOperationConstraint(BoolConstraint.False).SetSymbolConstraint(symbol, oppositeConstraint),
-                };
-            }
+            return context.SetOperationConstraint(BoolConstraint.From(leftConstraint == rightConstraint)).ToArray();
         }
-        return context.State.ToArray();
+        else
+        {
+            return context.State.ToArray();
+        }
     }
 
     private static ProgramState ProcessNullableGetValueOrDefault(SymbolicContext context, IInvocationOperationWrapper invocation)

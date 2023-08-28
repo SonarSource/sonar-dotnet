@@ -1223,32 +1223,19 @@ private static bool Equals(object a, object b, object c) => false;";
     [DataTestMethod]
     [DataRow("true")]
     [DataRow("false")]
-    public void Invocation_BoolEquals_Branches(string leftArgument)
+    public void Invocation_BoolEquals_OnlyOneArgumentHasBoolConstraint_DoesNotLearn(string leftArgument)
     {
         var code = $"""
                 bool left = {leftArgument};
                 var result = object.Equals(left, right);
-                Tag("End");
+                Tag("Result", result);
                 """;
         var validator = SETestContext.CreateCS(code, "bool right").Validator;
-        var result = validator.Symbol("result");
-        var left = validator.Symbol("left");
-        var right = validator.Symbol("right");
-        validator.TagStates("End").Should().SatisfyRespectively(
-            x =>
-            {
-                x[result].HasConstraint(BoolConstraint.True).Should().BeTrue();
-                x[right].HasConstraint(x[left].Constraint<BoolConstraint>()).Should().BeTrue();
-            },
-            x =>
-            {
-                x[result].HasConstraint(BoolConstraint.False).Should().BeTrue();
-                x[right].HasConstraint(x[left].Constraint<BoolConstraint>().Opposite).Should().BeTrue();
-            });
+        validator.TagValue("Result").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     [DataTestMethod]
-    public void Invocation_BoolEquals_DoesNotLearn()
+    public void Invocation_BoolEquals_BothArgumentsHaveNoConstraint_DoesNotLearn()
     {
         var code = $"""
                 var result = object.Equals(left, right);
