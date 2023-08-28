@@ -176,14 +176,15 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
 
     private ProgramState ProcessInvocation(SymbolicContext context, IInvocationOperationWrapper invocation)
     {
-        if (invocation.TargetMethod.Is(KnownType.System_Linq_Enumerable, nameof(Enumerable.Count))
+        var targetMethod = invocation.TargetMethod;
+        if (targetMethod.Is(KnownType.System_Linq_Enumerable, nameof(Enumerable.Count))
             && SizeConstraint(context.State, invocation.Instance ?? invocation.Arguments[0].ToArgument().Value, HasFilteringPredicate()) is { } constraint)
         {
             return context.SetOperationConstraint(constraint);
         }
         else if (invocation.Instance is { } instance)
         {
-            if (RaisingMethods.Contains(invocation.TargetMethod.Name))
+            if (RaisingMethods.Contains(targetMethod.Name))
             {
                 if (context.State[instance]?.HasConstraint(CollectionConstraint.Empty) is true)
                 {
@@ -194,8 +195,9 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
                     nonEmptyAccess.Add(context.Operation.Instance);
                 }
             }
-            return ProcessAddMethod(context.State, invocation.TargetMethod, instance)
-                ?? ProcessRemoveMethod(context.State, invocation.TargetMethod, instance);
+            return ProcessAddMethod(context.State, targetMethod, instance)
+                ?? ProcessRemoveMethod(context.State, targetMethod, instance)
+                ?? ProcessClearMethod(context.State, targetMethod, instance);
         }
         else
         {
@@ -206,30 +208,30 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
             invocation.Arguments.Any(x => x.ToArgument().Parameter.Type.Is(KnownType.System_Func_T_TResult));
     }
 
-    private static ProgramState ProcessAddMethod(ProgramState state, IMethodSymbol method, IOperation instance)
-    {
-        if (AddMethods.Contains(method.Name))
-        {
-            state = state.SetOperationConstraint(instance, CollectionConstraint.NotEmpty);
-            if (instance.TrackedSymbol(state) is { } symbol)
-            {
-                state = state.SetSymbolConstraint(symbol, CollectionConstraint.NotEmpty);
-            }
-            return state;
-        }
-        return null;
-    }
+    private static ProgramState ProcessAddMethod(ProgramState state, IMethodSymbol method, IOperation instance) =>
+        AddMethods.Contains(method.Name)
+            ? SetOperationAndSymbolConstraint(state, instance, CollectionConstraint.NotEmpty)
+            : null;
 
-    private static ProgramState ProcessRemoveMethod(ProgramState state, IMethodSymbol method, IOperation instance)
+    private static ProgramState ProcessRemoveMethod(ProgramState state, IMethodSymbol method, IOperation instance) =>
+        RemoveMethods.Contains(method.Name)
+            ? SetOperationAndSymbolValue(state, instance, (state[instance] ?? SymbolicValue.Empty).WithoutConstraint(CollectionConstraint.NotEmpty))
+            : null;
+
+    private static ProgramState ProcessClearMethod(ProgramState state, IMethodSymbol method, IOperation instance) =>
+        method.Name == nameof(ICollection<int>.Clear)
+            ? SetOperationAndSymbolConstraint(state, instance, CollectionConstraint.Empty)
+            : state;
+
+    private static ProgramState SetOperationAndSymbolConstraint(ProgramState state, IOperation instance, SymbolicConstraint constraint) =>
+        SetOperationAndSymbolValue(state, instance, (state[instance] ?? SymbolicValue.Empty).WithConstraint(constraint));
+
+    private static ProgramState SetOperationAndSymbolValue(ProgramState state, IOperation instance, SymbolicValue value)
     {
-        if (RemoveMethods.Contains(method.Name))
+        state = state.SetOperationValue(instance, value);
+        if (instance.TrackedSymbol(state) is { } symbol)
         {
-            var value = (state[instance] ?? SymbolicValue.Empty).WithoutConstraint(CollectionConstraint.NotEmpty);
-            state = state.SetOperationValue(instance, value);
-            if (instance.TrackedSymbol(state) is { } symbol)
-            {
-                state = state.SetSymbolValue(symbol, value);
-            }
+            state = state.SetSymbolValue(symbol, value);
         }
         return state;
     }

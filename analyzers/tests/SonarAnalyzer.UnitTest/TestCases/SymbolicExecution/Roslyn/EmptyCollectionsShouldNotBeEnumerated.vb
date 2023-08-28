@@ -181,7 +181,7 @@ Public Class CollectionTests
 
     Public Sub Method_Set_Empty(List As List(Of Integer))
         List.Clear()                    ' Compliant
-        List.Clear()                    ' FN
+        List.Clear()                    ' Noncompliant
 
         Dim Empty As New List(Of Integer)
         List.Add(5)
