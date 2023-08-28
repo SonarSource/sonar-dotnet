@@ -76,7 +76,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public VerifierBuilder AddSnippet(string snippet, string fileName = null) =>
             this with {
                 Snippets = Snippets.Append(new(snippet, fileName)).ToImmutableArray(),
-                IsRazor = IsRazor || fileName.EndsWith(".razor", StringComparison.OrdinalIgnoreCase) || fileName.EndsWith(".cshtml", StringComparison.OrdinalIgnoreCase)
+                IsRazor = IsRazor
+                    || (!string.IsNullOrEmpty(fileName) && (fileName.EndsWith(".razor", StringComparison.OrdinalIgnoreCase) || fileName.EndsWith(".cshtml", StringComparison.OrdinalIgnoreCase)))
             };
 
         /// <summary>
