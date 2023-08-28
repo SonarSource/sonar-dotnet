@@ -244,8 +244,8 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
     } catch (IllegalArgumentException ex1) {
       LOG.debug("Precise issue location cannot be found! Location: {}", location);
 
-      if (!isLocationResilient) {
-        // Our rules should fail if they report on an invalid location
+      if (!isLocationResilient && !isLocationInsideRazorFile(location)) {
+        // Our rules should fail if they report on an invalid location except for .razor and .cshtml files where we expect invalid locations due to issues on razor/roslyn side
         throw ex1;
       }
 
@@ -319,6 +319,13 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
 
   private static boolean isSonarSourceRepository(String repositoryKey){
     return OWN_REPOSITORIES.contains(repositoryKey);
+  }
+
+  private static boolean isLocationInsideRazorFile(Location location){
+    String absolutePath = location.getAbsolutePath();
+
+    return absolutePath.endsWith(".razor")
+      || absolutePath.endsWith(".cshtml");
   }
 
   private void logIssue(String issueType, String ruleId, String location){
