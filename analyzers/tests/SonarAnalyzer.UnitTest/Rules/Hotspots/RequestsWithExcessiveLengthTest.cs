@@ -110,7 +110,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         // Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/7867
         public void RequestsWithExcessiveLength_CS_WebConfig_CustomValues()
         {
-            var webConfigPath = GetWebConfigPath("TestCases\\WebConfig\\RequestsWithExcessiveLength\\Values\\ContentLength_Compliant"); // 83886080
+            var webConfigPath = GetWebConfigPath(@"TestCases\WebConfig\RequestsWithExcessiveLength\Values\ContentLength_Compliant"); // 83886080
             DiagnosticVerifier.VerifyExternalFile(
                 CreateCompilation(),
                 new CS.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled) { FileUploadSizeLimit = 838860800 },
