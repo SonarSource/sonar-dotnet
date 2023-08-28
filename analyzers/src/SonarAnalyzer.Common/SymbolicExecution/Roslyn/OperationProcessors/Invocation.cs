@@ -190,8 +190,9 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
             _ => context.State.ToArray()
         };
 
-    private static ProgramState[] ProcessEquals(SymbolicContext context, IOperation leftOperation, IOperation rightOperation) => leftOperation.AsConversion()?.Operand.Type.Is(KnownType.System_Boolean) is true
-            && rightOperation.AsConversion()?.Operand.Type.Is(KnownType.System_Boolean) is true
+    private static ProgramState[] ProcessEquals(SymbolicContext context, IOperation leftOperation, IOperation rightOperation) =>
+        context.State.Constraint<BoolConstraint>(leftOperation) is { }
+        && context.State.Constraint<BoolConstraint>(rightOperation) is { }
             ? ProcessEqualsBool(context, leftOperation, rightOperation)
             : ProcessEqualsObject(context, leftOperation, rightOperation);
 

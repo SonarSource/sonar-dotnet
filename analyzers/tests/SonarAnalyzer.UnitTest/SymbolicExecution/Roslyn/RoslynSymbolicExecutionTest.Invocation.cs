@@ -1222,6 +1222,7 @@ private static bool Equals(object a, object b, object c) => false;";
     [DataRow("true", "false", false)]
     [DataRow("false", "true", false)]
     [DataRow("false", "false", true)]
+    [DataRow("(false ? true : false)", "false", true)]
     public void Invocation_BoolEquals_LearnsResult(string left, string right, bool expectedResult)
     {
         var code = $"""
