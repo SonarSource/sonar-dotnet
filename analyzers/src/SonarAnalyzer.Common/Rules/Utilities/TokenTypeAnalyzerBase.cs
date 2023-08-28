@@ -35,8 +35,8 @@ namespace SonarAnalyzer.Rules
 
         protected TokenTypeAnalyzerBase() : base(DiagnosticId, Title) { }
 
-        protected abstract TokenClassifierBase GetTokenClassifier(SemanticModel semanticModel, bool skipIdentifierTokens);
-        protected abstract TriviaClassifierBase GetTriviaClassifier();
+        protected abstract TokenClassifierBase GetTokenClassifier(SemanticModel semanticModel, bool skipIdentifierTokens, string filePath);
+        protected abstract TriviaClassifierBase GetTriviaClassifier(string filePath);
 
         protected override bool ShouldGenerateMetrics(SyntaxTree tree, Compilation compilation) =>
             !GeneratedCodeRecognizer.IsRazorGeneratedFile(tree)
@@ -51,8 +51,8 @@ namespace SonarAnalyzer.Rules
                 .Skip(IdentifierTokenCountThreshold)
                 .Any();
 
-            var tokenClassifier = GetTokenClassifier(model, skipIdentifierTokens);
-            var triviaClassifier = GetTriviaClassifier();
+            var tokenClassifier = GetTokenClassifier(semanticModel, skipIdentifierTokens, filePath);
+            var triviaClassifier = GetTriviaClassifier(filePath);
             var spans = new List<TokenInfo>();
             // The second iteration of the tokens is intended since there is no processing done and we want to avoid copying all the tokens to a second collection.
             foreach (var token in tokens)
@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Rules
 
             var tokenTypeInfo = new TokenTypeInfo
             {
-                FilePath = tree.FilePath
+                FilePath = filePath
             };
 
             tokenTypeInfo.TokenInfo.AddRange(spans);
@@ -95,6 +95,7 @@ namespace SonarAnalyzer.Rules
         {
             private readonly bool skipIdentifiers;
             private readonly SemanticModel semanticModel;
+            private readonly string filePath;
 
             private static readonly ISet<MethodKind> ConstructorKinds = new HashSet<MethodKind>
             {
@@ -119,10 +120,11 @@ namespace SonarAnalyzer.Rules
 
             protected SemanticModel SemanticModel => semanticModel ?? throw new InvalidOperationException("The code snippet is not supposed to call the semantic model for classification.");
 
-            protected TokenClassifierBase(SemanticModel semanticModel, bool skipIdentifiers)
+            protected TokenClassifierBase(SemanticModel semanticModel, bool skipIdentifiers, string filePath)
             {
                 this.semanticModel = semanticModel;
                 this.skipIdentifiers = skipIdentifiers;
+                this.filePath = filePath;
             }
 
             public TokenInfo ClassifyToken(SyntaxToken token) =>
@@ -176,8 +178,15 @@ namespace SonarAnalyzer.Rules
 
         protected internal abstract class TriviaClassifierBase
         {
+            private readonly string filePath;
+
             protected abstract bool IsDocComment(SyntaxTrivia trivia);
             protected abstract bool IsRegularComment(SyntaxTrivia trivia);
+
+            protected TriviaClassifierBase(string filePath)
+            {
+                this.filePath = filePath;
+            }
 
             public TokenInfo ClassifyTrivia(SyntaxTrivia trivia) =>
                 trivia switch

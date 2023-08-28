@@ -25,15 +25,15 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         protected override ILanguageFacade<SyntaxKind> Language { get; } = VisualBasicFacade.Instance;
 
-        protected override TokenClassifierBase GetTokenClassifier(SemanticModel semanticModel, bool skipIdentifierTokens) =>
-            new TokenClassifier(semanticModel, skipIdentifierTokens);
+        protected override TokenClassifierBase GetTokenClassifier(SemanticModel semanticModel, bool skipIdentifierTokens, string filePath) =>
+            new TokenClassifier(semanticModel, skipIdentifierTokens, filePath);
 
-        protected override TriviaClassifierBase GetTriviaClassifier() =>
-            new TriviaClassifier();
+        protected override TriviaClassifierBase GetTriviaClassifier(string filePath) =>
+            new TriviaClassifier(filePath);
 
         private sealed class TokenClassifier : TokenClassifierBase
         {
-            public TokenClassifier(SemanticModel semanticModel, bool skipIdentifiers) : base(semanticModel, skipIdentifiers) { }
+            public TokenClassifier(SemanticModel semanticModel, bool skipIdentifiers, string filePath) : base(semanticModel, skipIdentifiers, filePath) { }
 
             protected override SyntaxNode GetBindableParent(SyntaxToken token) =>
                 token.GetBindableParent();
@@ -57,6 +57,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         private sealed class TriviaClassifier : TriviaClassifierBase
         {
+            public TriviaClassifier(string filePath) : base(filePath) { }
+
             protected override bool IsRegularComment(SyntaxTrivia trivia) =>
                 trivia.IsKind(SyntaxKind.CommentTrivia);
 

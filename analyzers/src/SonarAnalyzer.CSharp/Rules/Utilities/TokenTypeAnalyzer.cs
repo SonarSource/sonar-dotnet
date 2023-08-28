@@ -28,11 +28,11 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override ILanguageFacade<SyntaxKind> Language { get; } = CSharpFacade.Instance;
 
-        protected override TokenClassifierBase GetTokenClassifier(SemanticModel semanticModel, bool skipIdentifierTokens) =>
-            new TokenClassifier(semanticModel, skipIdentifierTokens);
+        protected override TokenClassifierBase GetTokenClassifier(SemanticModel semanticModel, bool skipIdentifierTokens, string filePath) =>
+            new TokenClassifier(semanticModel, skipIdentifierTokens, filePath);
 
-        protected override TriviaClassifierBase GetTriviaClassifier() =>
-            new TriviaClassifier();
+        protected override TriviaClassifierBase GetTriviaClassifier(string filePath) =>
+            new TriviaClassifier(filePath);
 
         internal sealed class TokenClassifier : TokenClassifierBase
         {
@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKindEx.InterpolatedRawStringEndToken,
             };
 
-            public TokenClassifier(SemanticModel semanticModel, bool skipIdentifiers) : base(semanticModel, skipIdentifiers) { }
+            public TokenClassifier(SemanticModel semanticModel, bool skipIdentifiers, string filePath) : base(semanticModel, skipIdentifiers, filePath) { }
 
             protected override SyntaxNode GetBindableParent(SyntaxToken token) =>
                 token.GetBindableParent();
@@ -342,6 +342,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.SingleLineDocumentationCommentTrivia,
                 SyntaxKind.MultiLineDocumentationCommentTrivia,
             };
+
+            public TriviaClassifier(string filePath) : base(filePath) { }
 
             protected override bool IsRegularComment(SyntaxTrivia trivia) =>
                 trivia.IsAnyKind(RegularCommentToken);
