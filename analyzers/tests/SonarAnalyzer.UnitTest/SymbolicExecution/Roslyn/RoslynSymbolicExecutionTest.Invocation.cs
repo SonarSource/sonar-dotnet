@@ -968,6 +968,21 @@ Tag(""Right"", right);";
     }
 
     [DataTestMethod]
+    [DataRow("true", "null", false)]
+    [DataRow("null", "true", false)]
+    [DataRow("null", "(bool?)true", false)]
+    public void Invocation_ObjectEqualsMixedNullObjectArguments_LearnResult(string left, string right, bool expectedResult)
+    {
+        var code = $@"
+object left = {left};
+object right = {right};
+var result = object.Equals(left, right);
+Tag(""Result"", result);";
+        var validator = SETestContext.CreateCS(code).Validator;
+        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expectedResult));
+    }
+
+    [DataTestMethod]
     [DataRow("new object()", "new object()")]
     [DataRow("new object()", "Unknown<object>()")]
     [DataRow("Unknown<object>()", "new object()")]
@@ -975,6 +990,10 @@ Tag(""Right"", right);";
     [DataRow("new int?(42)", "Unknown<int?>()")]
     [DataRow("(int?)42", "(int?)42")]
     [DataRow("(int?)42", "(int?)0")]
+    [DataRow("(bool?)true", "(bool?)true")]
+    [DataRow("true", "new object()")]
+    [DataRow("(bool?)true", "true")]
+    [DataRow("(bool?)true", "new object()")]
     public void Invocation_ObjectEquals_DoesNotLearnResult(string left, string right)
     {
         var code = $@"
@@ -1199,10 +1218,10 @@ private static bool Equals(object a, object b, object c) => false;";
     }
 
     [DataTestMethod]
-    [DataRow("true", "true", true, true, true)]
-    [DataRow("true", "false", false, true, false)]
-    [DataRow("false", "true", false, false, true)]
-    [DataRow("false", "false", true, false, false)]
+    [DataRow("true", "true", true)]
+    [DataRow("true", "false", false)]
+    [DataRow("false", "true", false)]
+    [DataRow("false", "false", true)]
     public void Invocation_BoolEquals_LearnsResult(string left, string right, bool expectedResult)
     {
         var code = $"""
