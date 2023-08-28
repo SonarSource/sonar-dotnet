@@ -67,7 +67,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             this with
             {
                 Paths = Paths.Concat(paths).ToImmutableArray(),
-                IsRazor = IsRazor || Array.Exists(paths, x => x.EndsWith(".razor", StringComparison.OrdinalIgnoreCase) || x.EndsWith(".cshtml", StringComparison.OrdinalIgnoreCase))
+                IsRazor = IsRazor || Array.Exists(paths, IsRazorOrCshtmlFile)
             };
 
         public VerifierBuilder AddReferences(IEnumerable<MetadataReference> references) =>
@@ -76,8 +76,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public VerifierBuilder AddSnippet(string snippet, string fileName = null) =>
             this with {
                 Snippets = Snippets.Append(new(snippet, fileName)).ToImmutableArray(),
-                IsRazor = IsRazor
-                    || (!string.IsNullOrEmpty(fileName) && (fileName.EndsWith(".razor", StringComparison.OrdinalIgnoreCase) || fileName.EndsWith(".cshtml", StringComparison.OrdinalIgnoreCase)))
+                IsRazor = IsRazor || IsRazorOrCshtmlFile(fileName)
             };
 
         /// <summary>
@@ -150,6 +149,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .WithOutputKind(OutputKind.ConsoleApplication)
                 .WithConcurrentAnalysis(false);
         }
+
+        public bool IsRazorOrCshtmlFile(string fileName) =>
+            !string.IsNullOrEmpty(fileName) && (fileName.EndsWith(".razor", StringComparison.OrdinalIgnoreCase) || fileName.EndsWith(".cshtml", StringComparison.OrdinalIgnoreCase));
 
         public Verifier Build() =>
             new(this);
