@@ -223,4 +223,42 @@ public class NumberConstraintTest
     [DataRow(42, null, 41)]
     public void CanContain_False(int? min, int? max, int value) =>
         NumberConstraint.From(min, max).CanContain(value).Should().BeFalse();
+
+    [DataTestMethod]
+    [DataRow(null, 42, null, 42)]
+    [DataRow(null, 42, null, 0)]
+    [DataRow(null, 42, 0, 0)]
+    [DataRow(null, 42, 0, 100)]
+    [DataRow(null, 42, 0, null)]
+    [DataRow(null, 42, null, null)]
+    [DataRow(0, null, 0, null)]
+    [DataRow(0, null, 0, 42)]
+    [DataRow(0, null, 10, 42)]
+    [DataRow(0, null, -10, 42)]
+    [DataRow(0, null, null, 42)]
+    [DataRow(0, null, null, null)]
+    [DataRow(0, 42, 0, 42)]
+    [DataRow(0, 42, -10, 42)]
+    [DataRow(0, 42, null, 42)]
+    [DataRow(0, 42, -10, 10)]
+    [DataRow(0, 42, 10, 20)]
+    [DataRow(0, 42, 10, 100)]
+    [DataRow(0, 42, 10, null)]
+    [DataRow(0, 42, 0, 100)]
+    [DataRow(0, 42, 0, null)]
+    [DataRow(0, 42, null, null)]
+    public void Overlaps_True(int? min, int? max, int? otherMin, int? otherMax) =>
+        NumberConstraint.From(min, max).Overlaps(NumberConstraint.From(otherMin, otherMax)).Should().BeTrue();
+
+    [DataTestMethod]
+    [DataRow(42, null, null, 0)]
+    [DataRow(42, null, -10, 0)]
+    [DataRow(42, 100, null, 0)]
+    [DataRow(42, 100, -10, 0)]
+    [DataRow(null, 0, 42, null)]
+    [DataRow(null, 0, 42, 100)]
+    [DataRow(-10, 0, 42, null)]
+    [DataRow(-10, 0, 42, 100)]
+    public void Overlaps_False(int? min, int? max, int? otherMin, int? otherMax) =>
+        NumberConstraint.From(min, max).Overlaps(NumberConstraint.From(otherMin, otherMax)).Should().BeFalse();
 }

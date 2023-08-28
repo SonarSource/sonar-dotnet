@@ -326,6 +326,25 @@ Tag(""End"", arg);";
         ValidateSetBoolConstraint_TwoStates(testedSymbol, isPattern, OperationKindEx.ConstantPattern, expectedForTrue, expectedForFalse);
 
     [DataTestMethod]
+    [DataRow("i == 42", 42, true)]
+    [DataRow("i == 16", 42, false)]
+    [DataRow("i >= 42", 42, true)]
+    [DataRow("i <= 42", 42, true)]
+    [DataRow("i >  42", 42, false)]
+    [DataRow("i <  42", 42, false)]
+    public void ConstantNumberPatternSetBoolConstraint(string rangeCondition, int constant, bool expectedBoolConstraint)
+    {
+        var code = $$"""
+            if ({{rangeCondition}})
+            {
+                var result = i is {{constant}};
+                Tag("Result", result);
+            }
+            """;
+        SETestContext.CreateCS(code, "int i").Validator.TagValue("Result").Should().HaveOnlyConstraints(BoolConstraint.From(expectedBoolConstraint), ObjectConstraint.NotNull);
+    }
+
+    [DataTestMethod]
     [DataRow("objectNotNull is { }", true)]
     [DataRow("objectNotNull is object { }", true)]
     [DataRow("objectNotNull is string { }", null)]
