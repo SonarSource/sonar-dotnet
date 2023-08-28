@@ -817,6 +817,8 @@ namespace Tests.Diagnostics
             bool a, b;
             a = b = true;
             if (object.ReferenceEquals(a, b)) { }   // FN
+
+            if (object.Equals(a, b)) { }   // Noncompliant {{Change this condition so that it does not always evaluate to 'True'.}}
         }
 
         public override bool Equals(object obj)

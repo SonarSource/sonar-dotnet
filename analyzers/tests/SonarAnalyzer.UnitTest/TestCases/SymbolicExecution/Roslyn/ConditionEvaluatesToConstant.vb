@@ -654,6 +654,8 @@ End Sub
         a = b = True
         If Object.ReferenceEquals(a, b) Then ' FN
         End If
+        If Object.Equals(a, b) Then ' Noncompliant
+        End If
     End Sub
 
     Public Overrides Function Equals(ByVal obj As Object) As Boolean

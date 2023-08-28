@@ -179,7 +179,7 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
 
     private static ProgramState[] ProcessReferenceEquals(SymbolicContext context, IInvocationOperationWrapper invocation) =>
         invocation.Arguments.Length == 2
-            ? ProcessEquals(context, invocation.Arguments[0].ToArgument().Value, invocation.Arguments[1].ToArgument().Value)
+            ? ProcessEqualsObject(context, invocation.Arguments[0].ToArgument().Value, invocation.Arguments[1].ToArgument().Value)
             : context.State.ToArray();
 
     private static ProgramState[] ProcessEquals(SymbolicContext context, IInvocationOperationWrapper invocation) =>
@@ -190,7 +190,13 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
             _ => context.State.ToArray()
         };
 
-    private static ProgramState[] ProcessEquals(SymbolicContext context, IOperation leftOperation, IOperation rightOperation)
+    private static ProgramState[] ProcessEquals(SymbolicContext context, IOperation leftOperation, IOperation rightOperation) =>
+        context.State.Constraint<BoolConstraint>(leftOperation) is { } rightBool
+        && context.State.Constraint<BoolConstraint>(rightOperation) is { } leftBool
+            ? context.SetOperationConstraint(BoolConstraint.From(leftBool == rightBool)).ToArray()
+            : ProcessEqualsObject(context, leftOperation, rightOperation);
+
+    private static ProgramState[] ProcessEqualsObject(SymbolicContext context, IOperation leftOperation, IOperation rightOperation)
     {
         if (context.State[leftOperation]?.Constraint<ObjectConstraint>() is var leftConstraint
             && context.State[rightOperation]?.Constraint<ObjectConstraint>() is var rightConstraint
