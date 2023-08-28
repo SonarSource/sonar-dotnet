@@ -220,6 +220,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                     {
                         File.Copy(file, Path.Combine(tempPath, lang, Path.GetFileName(file)));
                     }
+                    foreach (var snippet in builder.Snippets)
+                    {
+                        File.WriteAllText(Path.Combine(tempPath, lang, snippet.FileName), snippet.Content);
+                    }
                     var csprojPath = Path.Combine(tempPath, lang, "EmptyProject.csproj");
                     var destinationXml = XElement.Load(csprojPath);
 

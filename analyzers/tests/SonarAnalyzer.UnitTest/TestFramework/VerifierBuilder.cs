@@ -74,7 +74,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             this with { References = References.Concat(references).ToImmutableArray() };
 
         public VerifierBuilder AddSnippet(string snippet, string fileName = null) =>
-            this with { Snippets = Snippets.Append(new(snippet, fileName)).ToImmutableArray() };
+            this with {
+                Snippets = Snippets.Append(new(snippet, fileName)).ToImmutableArray(),
+                IsRazor = IsRazor || fileName.EndsWith(".razor", StringComparison.OrdinalIgnoreCase) || fileName.EndsWith(".cshtml", StringComparison.OrdinalIgnoreCase)
+            };
 
         /// <summary>
         /// Add a test reference to change the project type to Test project.
