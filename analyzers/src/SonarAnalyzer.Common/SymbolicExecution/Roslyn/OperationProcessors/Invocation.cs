@@ -179,7 +179,7 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
 
     private static ProgramState[] ProcessReferenceEquals(SymbolicContext context, IInvocationOperationWrapper invocation) =>
         invocation.Arguments.Length == 2
-            ? ProcessEquals(context, invocation.Arguments[0].ToArgument().Value, invocation.Arguments[1].ToArgument().Value)
+            ? ProcessEqualsObject(context, invocation.Arguments[0].ToArgument().Value, invocation.Arguments[1].ToArgument().Value)
             : context.State.ToArray();
 
     private static ProgramState[] ProcessEquals(SymbolicContext context, IInvocationOperationWrapper invocation) =>
@@ -191,9 +191,9 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
         };
 
     private static ProgramState[] ProcessEquals(SymbolicContext context, IOperation leftOperation, IOperation rightOperation) =>
-        context.State.Constraint<BoolConstraint>(leftOperation) is { }
-        && context.State.Constraint<BoolConstraint>(rightOperation) is { }
-            ? ProcessEqualsBool(context, leftOperation, rightOperation)
+        context.State.Constraint<BoolConstraint>(leftOperation) is { } rightBool
+        && context.State.Constraint<BoolConstraint>(rightOperation) is { } leftBool
+            ? context.SetOperationConstraint(BoolConstraint.From(leftBool == rightBool)).ToArray()
             : ProcessEqualsObject(context, leftOperation, rightOperation);
 
     private static ProgramState[] ProcessEqualsObject(SymbolicContext context, IOperation leftOperation, IOperation rightOperation)
@@ -220,19 +220,6 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
             }
         }
         return context.State.ToArray();
-    }
-
-    private static ProgramState[] ProcessEqualsBool(SymbolicContext context, IOperation leftOperation, IOperation rightOperation)
-    {
-        if (context.State[leftOperation]?.Constraint<BoolConstraint>() is { } leftConstraint
-            && context.State[rightOperation]?.Constraint<BoolConstraint>() is { } rightConstraint)
-        {
-            return context.SetOperationConstraint(BoolConstraint.From(leftConstraint == rightConstraint)).ToArray();
-        }
-        else
-        {
-            return context.State.ToArray();
-        }
     }
 
     private static ProgramState ProcessNullableGetValueOrDefault(SymbolicContext context, IInvocationOperationWrapper invocation)

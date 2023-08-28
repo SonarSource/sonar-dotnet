@@ -1186,6 +1186,7 @@ private static bool Equals(object a, object b, object c) => false;";
                 x[arg].HasConstraint(ObjectConstraint.NotNull).Should().BeTrue();
             });
     }
+
     [TestMethod]
     public void Invocation_ReferenceEquals_CustomSignatures_NotSupported()
     {
