@@ -988,8 +988,6 @@ Tag(""Result"", result);";
     [DataRow("Unknown<object>()", "new object()")]
     [DataRow("Unknown<object>()", "Unknown<object>()")]
     [DataRow("new int?(42)", "Unknown<int?>()")]
-    [DataRow("(int?)42", "(int?)42")]
-    [DataRow("(int?)42", "(int?)0")]
     [DataRow("true", "new object()")]
     [DataRow("(bool?)true", "new object()")]
     public void Invocation_ObjectEquals_DoesNotLearnResult(string left, string right)
@@ -1045,9 +1043,6 @@ Tag(""End"");";
     }
 
     [DataTestMethod]
-    [DataRow("42", "42")]
-    [DataRow("42", "0")]
-    [DataRow("0", "42")]
     [DataRow("42", "Unknown<int?>()")]
     [DataRow("Unknown<int?>()", "42")]
     [DataRow("Unknown<int?>()", "Unknown<int?>()")]
@@ -1261,20 +1256,26 @@ private static bool Equals(object a, object b, object c) => false;";
     }
 
     [DataTestMethod]
-    [DataRow("1", "1", true)]
-    [DataRow("1", "2", false)]
+    [DataRow("42", "42", true)]
+    [DataRow("0", "42", false)]
+    [DataRow("((int?)42)", "((int?)42)", true)]
+    [DataRow("((int?)42)", "((int?)0)", false)]
     public void Invocation_NumberEquals_LearnsResult(string left, string right, bool expected)
     {
         var code = $"""
-                var result = object.Equals({left}, {right});
+                var result = {left}.Equals({right});
                 Tag("Result", result);
+
+                var resultStaticCall = object.Equals({left}, {right});
+                Tag("ResultStaticCall", resultStaticCall);
                 """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expected));
+        validator.TagValue("ResultStaticCall").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expected));
     }
 
     [TestMethod]
-    public void Invocation_NumberEquals_DoesNotLear()
+    public void Invocation_NumberEquals_DoesNotLearn()
     {
         var code = """
                 if (i>1 && i<10)

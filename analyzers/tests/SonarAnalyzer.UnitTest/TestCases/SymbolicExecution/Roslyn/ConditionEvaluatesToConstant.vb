@@ -789,10 +789,10 @@ End Sub
         If i = j Then                         ' Noncompliant
         End If
 
-        If i.Equals(j) Then  ' FN
+        If i.Equals(j) Then  ' Noncompliant
         End If
 
-        If Equals(i, j) Then ' FN
+        If Equals(i, j) Then ' Noncompliant
         End If
     End Sub
 

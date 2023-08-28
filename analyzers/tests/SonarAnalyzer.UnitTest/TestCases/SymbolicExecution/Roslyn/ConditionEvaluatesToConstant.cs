@@ -1013,8 +1013,8 @@ namespace Tests.Diagnostics
             {
             }
 
-            if (i.Equals(j)) { }                    // FN
-            if (object.Equals(i, j)) { }            // FN
+            if (i.Equals(j)) { }                    // Noncompliant {{Change this condition so that it does not always evaluate to 'True'.}}
+            if (object.Equals(i, j)) { }            // Noncompliant {{Change this condition so that it does not always evaluate to 'True'.}}
         }
 
         async Task Test_Await_Constraint(Task<string> t)

@@ -186,7 +186,8 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
         invocation switch
         {
             { Arguments.Length: 2, TargetMethod.IsStatic: true } => ProcessEquals(context, invocation.Arguments[0].ToArgument().Value, invocation.Arguments[1].ToArgument().Value),
-            { Arguments.Length: 1 } when invocation.TargetMethod.ContainingType.IsNullableValueType() => ProcessEquals(context, invocation.Instance, invocation.Arguments[0].ToArgument().Value),
+            { Arguments.Length: 1 } when invocation.TargetMethod.ContainingType.IsNullableValueType() || invocation.TargetMethod.ContainingType.IsStruct() =>
+                ProcessEquals(context, invocation.Instance, invocation.Arguments[0].ToArgument().Value),
             _ => context.State.ToArray()
         };
 
