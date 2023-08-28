@@ -234,7 +234,7 @@ public class IncrementalAnalysisTest {
       .setProperty("sonar.pullrequest.key", PULL_REQUEST_KEY)
       .setProperty("sonar.pullrequest.branch", "pull-request")
       .setProperty("sonar.verbose", "true"));
-    TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Restore,Rebuild");
+    TestUtils.runBuild(projectDir);
     BuildResult endStepResults = ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectDir));
 
     return new BeginAndEndStepResults(beginStepResults, endStepResults);

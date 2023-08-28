@@ -22,8 +22,6 @@ package com.sonar.it.csharp;
 import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.build.BuildResult;
 import com.sonar.orchestrator.build.ScannerForMSBuild;
-import com.sonar.orchestrator.util.Command;
-import com.sonar.orchestrator.util.CommandExecutor;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -63,9 +61,8 @@ public class MultipleProjectsTest {
     Path projectDir = TestUtils.projectDir(temp, PROJECT);
     ScannerForMSBuild beginStep = TestUtils.createBeginStep(PROJECT, projectDir);
 
-    CommandExecutor.create().execute(Command.create("nuget").addArguments("restore").setDirectory(projectDir.toFile()), 10 * 60 * 1000);
     ORCHESTRATOR.executeBuild(beginStep);
-    TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Restore,Rebuild");
+    TestUtils.runBuild(projectDir);
     buildResult = ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectDir));
   }
 

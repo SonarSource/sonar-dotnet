@@ -43,7 +43,7 @@ public class AnalysisWarningsTest {
     Path projectDir = TestUtils.projectDir(temp, "Empty");
 
     ORCHESTRATOR.executeBuild(TestUtils.createBeginStep("Empty", projectDir));
-    TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Restore,Rebuild");
+    TestUtils.runBuild(projectDir);
 
     Path target = projectDir.resolve(".sonarqube\\out\\AnalysisWarnings.AutoScan.json");
     Files.createDirectories(target.getParent());
