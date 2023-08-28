@@ -1261,6 +1261,33 @@ private static bool Equals(object a, object b, object c) => false;";
     }
 
     [DataTestMethod]
+    [DataRow("1", "1", true)]
+    [DataRow("1", "2", false)]
+    public void Invocation_NumberEquals_LearnsResult(string left, string right, bool expected)
+    {
+        var code = $"""
+                var result = object.Equals({left}, {right});
+                Tag("Result", result);
+                """;
+        var validator = SETestContext.CreateCS(code).Validator;
+        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expected));
+    }
+
+    [TestMethod]
+    public void Invocation_NumberEquals_DoesNotLear()
+    {
+        var code = """
+                if (i>1 && i<10)
+                {
+                    var result = object.Equals(i, 0);
+                    Tag("Result", result);
+                }
+                """;
+        var validator = SETestContext.CreateCS(code, "int i").Validator;
+        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
+    }
+
+    [DataTestMethod]
     [DataRow("null", 0)]
     [DataRow("42", 42)]
     public void Invocation_NullableGetHasValue_LearnsBoolConstraint(string value, int expected)

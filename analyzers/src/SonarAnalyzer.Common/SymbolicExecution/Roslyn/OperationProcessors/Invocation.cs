@@ -190,11 +190,25 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
             _ => context.State.ToArray()
         };
 
-    private static ProgramState[] ProcessEquals(SymbolicContext context, IOperation leftOperation, IOperation rightOperation) =>
-        context.State.Constraint<BoolConstraint>(leftOperation) is { } rightBool
-        && context.State.Constraint<BoolConstraint>(rightOperation) is { } leftBool
-            ? context.SetOperationConstraint(BoolConstraint.From(leftBool == rightBool)).ToArray()
-            : ProcessEqualsObject(context, leftOperation, rightOperation);
+    private static ProgramState[] ProcessEquals(SymbolicContext context, IOperation leftOperation, IOperation rightOperation)
+    {
+        if (context.State.Constraint<BoolConstraint>(leftOperation) is { } rightBool
+            && context.State.Constraint<BoolConstraint>(rightOperation) is { } leftBool)
+        {
+            return context.SetOperationConstraint(BoolConstraint.From(leftBool == rightBool)).ToArray();
+        }
+        else if (context.State.Constraint<NumberConstraint>(leftOperation) is { } leftNumber
+            && context.State.Constraint<NumberConstraint>(rightOperation) is { } rightNumber
+            && leftNumber.IsSingleValue
+            && rightNumber.IsSingleValue)
+        {
+            return context.SetOperationConstraint(BoolConstraint.From(leftNumber.Equals(rightNumber))).ToArray();
+        }
+        else
+        {
+            return ProcessEqualsObject(context, leftOperation, rightOperation);
+        }
+    }
 
     private static ProgramState[] ProcessEqualsObject(SymbolicContext context, IOperation leftOperation, IOperation rightOperation)
     {
