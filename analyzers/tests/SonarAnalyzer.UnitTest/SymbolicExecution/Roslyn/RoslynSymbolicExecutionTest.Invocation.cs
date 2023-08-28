@@ -990,9 +990,7 @@ Tag(""Result"", result);";
     [DataRow("new int?(42)", "Unknown<int?>()")]
     [DataRow("(int?)42", "(int?)42")]
     [DataRow("(int?)42", "(int?)0")]
-    [DataRow("(bool?)true", "(bool?)true")]
     [DataRow("true", "new object()")]
-    [DataRow("(bool?)true", "true")]
     [DataRow("(bool?)true", "new object()")]
     public void Invocation_ObjectEquals_DoesNotLearnResult(string left, string right)
     {
@@ -1222,13 +1220,14 @@ private static bool Equals(object a, object b, object c) => false;";
     [DataRow("true", "false", false)]
     [DataRow("false", "true", false)]
     [DataRow("false", "false", true)]
+    [DataRow("(bool?)true", "(bool?)true", true)]
+    [DataRow("(bool?)true", "(bool?)false", false)]
+    [DataRow("(bool?)true", "true", true)]
     [DataRow("(false ? true : false)", "false", true)]
     public void Invocation_BoolEquals_LearnsResult(string left, string right, bool expectedResult)
     {
         var code = $"""
-                bool left = {left};
-                bool right = {right};
-                var result = object.Equals(left, right);
+                var result = object.Equals({left}, {right});
                 Tag("Result", result);
                 """;
         var validator = SETestContext.CreateCS(code).Validator;
