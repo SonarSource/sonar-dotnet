@@ -28,6 +28,7 @@ public abstract class SonarReportingContextBase<TContext> : SonarAnalysisContext
 
     protected void ReportIssueCore(Diagnostic diagnostic)
     {
+        diagnostic = EnsureDiagnosticLocation(diagnostic);
         if (HasMatchingScope(diagnostic.Descriptor) && SonarAnalysisContext.LegacyIsRegisteredActionEnabled(diagnostic.Descriptor, diagnostic.Location?.SourceTree))
         {
             var reportingContext = CreateReportingContext(diagnostic);
@@ -50,6 +51,31 @@ public abstract class SonarReportingContextBase<TContext> : SonarAnalysisContext
                 reportingContext.ReportDiagnostic(reportingContext.Diagnostic);
             }
         }
+    }
+
+    private static Diagnostic EnsureDiagnosticLocation(Diagnostic diagnostic)
+    {
+        if (!diagnostic.Location.GetMappedLineSpan().HasMappedPath)
+        {
+            return diagnostic;
+        }
+
+        var mappedLocation = diagnostic.Location.EnsureMappedLocation();
+
+        var descriptor = new DiagnosticDescriptor(diagnostic.Descriptor.Id,
+            diagnostic.Descriptor.Title,
+            diagnostic.GetMessage(),
+            diagnostic.Descriptor.Category,
+            diagnostic.Descriptor.DefaultSeverity,
+            diagnostic.Descriptor.IsEnabledByDefault,
+            diagnostic.Descriptor.Description,
+            diagnostic.Descriptor.HelpLinkUri,
+            diagnostic.Descriptor.CustomTags.ToArray());
+
+        return Diagnostic.Create(descriptor,
+            mappedLocation,
+            diagnostic.AdditionalLocations.Select(l => l.EnsureMappedLocation()).ToImmutableList(),
+            diagnostic.Properties);
     }
 }
 

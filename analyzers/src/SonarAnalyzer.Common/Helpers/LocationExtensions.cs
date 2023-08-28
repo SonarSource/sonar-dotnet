@@ -24,19 +24,14 @@ namespace SonarAnalyzer.Helpers
     {
         public static Location EnsureMappedLocation(this Location location)
         {
-            if (!GeneratedCodeRecognizer.IsRazorGeneratedFile(location.SourceTree))
+            if (location is null || !GeneratedCodeRecognizer.IsRazorGeneratedFile(location.SourceTree))
             {
                 return location;
             }
 
             var lineSpan = location.GetMappedLineSpan();
 
-            // var lines = File.ReadAllLines(lineSpan.Path);
-            // var from = lines.Take(lineSpan.Span.Start.Line).Sum(x => x.Length) + lineSpan.Span.Start.Character;
-            // var to = from + lineSpan.Span.End.Character;
-
-            location = Location.Create(lineSpan.Path, location.SourceSpan, lineSpan.Span);
-            return location;
+            return Location.Create(lineSpan.Path, location.SourceSpan, lineSpan.Span);
         }
     }
 }

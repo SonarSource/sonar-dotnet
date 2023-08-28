@@ -87,6 +87,14 @@ namespace SonarAnalyzer.UnitTest.Helpers
             GeneratedCodeRecognizer.IsRazorGeneratedFile(syntaxTree.Object).Should().BeFalse();
         }
 
+        [TestMethod]
+        public void IsRazorGeneratedFile_NullSyntaxTree_ReturnsFalse()
+        {
+            var result = GeneratedCodeRecognizer.IsRazorGeneratedFile(null);
+
+            result.Should().BeFalse();
+        }
+
         private class TestRecognizer : GeneratedCodeRecognizer
         {
             protected override string GetAttributeName(SyntaxNode node) => string.Empty;

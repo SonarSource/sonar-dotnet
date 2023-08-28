@@ -41,10 +41,7 @@ internal class DummyAnalyzerWithLocationMapping : SonarDiagnosticAnalyzer
             && invocation.NodeIdentifier() is { } identifier
             && identifier.ValueText == "RaiseHere")
         {
-            var location = identifier.GetLocation();
-            var lineSpan = location.GetMappedLineSpan();
-            location = Location.Create(lineSpan.Path, location.SourceSpan, lineSpan.Span);
-            context.ReportIssue(Diagnostic.Create(Rule, location));
+            context.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation()));
         }
     }
 }
