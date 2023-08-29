@@ -40,7 +40,7 @@ public abstract class ThrowReservedExceptionsBase<TSyntaxKind> : SonarDiagnostic
 
     protected ThrowReservedExceptionsBase() : base(DiagnosticId) { }
 
-    protected void ReportReservedExceptionCreation(SonarSyntaxNodeReportingContext context, SyntaxNode thrownExpression)
+    protected void Process(SonarSyntaxNodeReportingContext context, SyntaxNode thrownExpression)
     {
         if (thrownExpression is not null && IsObjectCreation(thrownExpression))
         {

@@ -26,7 +26,7 @@ public sealed class ThrowReservedExceptions : ThrowReservedExceptionsBase<Syntax
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
     protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(c => ReportReservedExceptionCreation(c, ((ThrowStatementSyntax)c.Node).Expression), SyntaxKind.ThrowStatement);
+        context.RegisterNodeAction(c => Process(c, ((ThrowStatementSyntax)c.Node).Expression), SyntaxKind.ThrowStatement);
 
     protected override bool IsObjectCreation(SyntaxNode throwStatementExpression) =>
         throwStatementExpression.IsKind(SyntaxKind.ObjectCreationExpression);
