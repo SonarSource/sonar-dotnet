@@ -960,7 +960,7 @@ class Program
 }
 """, 4, 6, 10, 17);
 
-    [TestMethod]
+        [TestMethod]
         public void Razor_AssignmentAndDeclarationInTheSameDeconstruction() =>
             AssertLineNumbersOfExecutableLinesRazor("""
 @code {
