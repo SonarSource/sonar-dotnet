@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Protobuf;
 
 namespace SonarAnalyzer.Rules
@@ -42,17 +41,16 @@ namespace SonarAnalyzer.Rules
 
         protected sealed override SymbolReferenceInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
         {
-            var symbolReferenceInfo = new SymbolReferenceInfo { FilePath = syntaxTree.FilePath };
+            var filePath = GetFilePath(syntaxTree);
+            var symbolReferenceInfo = new SymbolReferenceInfo { FilePath = filePath };
             var references = GetReferences(syntaxTree.GetRoot(), semanticModel);
-
             foreach (var symbol in references.Keys)
             {
-                if (GetSymbolReference(references[symbol], syntaxTree) is { } reference)
+                if (GetSymbolReference(references[symbol], filePath) is { } reference)
                 {
                     symbolReferenceInfo.Reference.Add(reference);
                 }
             }
-
             return symbolReferenceInfo;
         }
 
@@ -80,7 +78,8 @@ namespace SonarAnalyzer.Rules
                     var currentDeclaration = declarationReferences[j];
                     if (currentDeclaration.Symbol != null)
                     {
-                        references.GetOrAdd(currentDeclaration.Symbol, _ => new List<ReferenceInfo>())
+                        references
+                            .GetOrAdd(currentDeclaration.Symbol, _ => new List<ReferenceInfo>())
                             .Add(currentDeclaration);
                         knownNodes.Add(currentDeclaration.Node);
                         knownIdentifiers.Add(currentDeclaration.Identifier.ValueText);
@@ -112,33 +111,37 @@ namespace SonarAnalyzer.Rules
                 var symbol => symbol
             };
 
-        private static SymbolReferenceInfo.Types.SymbolReference GetSymbolReference(List<ReferenceInfo> references, SyntaxTree tree)
+        private static SymbolReferenceInfo.Types.SymbolReference GetSymbolReference(IReadOnlyList<ReferenceInfo> references, string filePath)
         {
-            var declarationSpan = GetDeclarationSpan(references);
+            var declarationSpan = GetDeclarationSpan(references, filePath);
             if (!declarationSpan.HasValue)
             {
                 return null;
             }
 
-            var symbolReference = new SymbolReferenceInfo.Types.SymbolReference { Declaration = GetTextRange(Location.Create(tree, declarationSpan.Value).GetLineSpan()) };
+            var symbolReference = new SymbolReferenceInfo.Types.SymbolReference { Declaration = GetTextRange(declarationSpan.Value) };
             for (var i = 0; i < references.Count; i++)
             {
                 var reference = references[i];
-                if (!reference.IsDeclaration)
+                if (!reference.IsDeclaration
+                    && reference.Identifier.GetLocation().GetMappedLineSpanIfAvailable() is var mappedLineSpan
+                    && string.Equals(mappedLineSpan.Path, filePath, StringComparison.OrdinalIgnoreCase))
                 {
-                    symbolReference.Reference.Add(GetTextRange(Location.Create(tree, reference.Identifier.Span).GetLineSpan()));
+                    symbolReference.Reference.Add(GetTextRange(mappedLineSpan));
                 }
             }
             return symbolReference;
         }
 
-        private static TextSpan? GetDeclarationSpan(List<ReferenceInfo> references)
+        private static FileLinePositionSpan? GetDeclarationSpan(IReadOnlyList<ReferenceInfo> references, string filePath)
         {
             for (var i = 0; i < references.Count; i++)
             {
-                if (references[i].IsDeclaration)
+                if (references[i].IsDeclaration
+                    && references[i].Identifier.GetLocation().GetMappedLineSpanIfAvailable() is var mappedLineSpan
+                    && string.Equals(mappedLineSpan.Path, filePath, StringComparison.OrdinalIgnoreCase))
                 {
-                    return references[i].Identifier.Span;
+                    return mappedLineSpan;
                 }
             }
             return null;

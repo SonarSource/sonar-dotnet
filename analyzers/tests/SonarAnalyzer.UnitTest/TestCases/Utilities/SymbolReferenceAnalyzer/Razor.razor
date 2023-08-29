@@ -31,7 +31,7 @@
     }
 </ul>
 
-<h3>Todo (@todos.Count(todo => !todo.IsDone))</h3>
+<h3>Todo (@todos.Count(x => !x.IsDone))</h3>
 
 @code {
     private List<ToDo> todos = new();
