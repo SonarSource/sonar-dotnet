@@ -21,23 +21,22 @@
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.UnitTest.Rules;
+
+[TestClass]
+public class ThrowReservedExceptionsTest
 {
-    [TestClass]
-    public class ThrowReservedExceptionsTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ThrowReservedExceptions>();
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ThrowReservedExceptions>();
 
-        [TestMethod]
-        public void ThrowReservedExceptions_CS() =>
-            builderCS.AddPaths("ThrowReservedExceptions.cs").Verify();
+    [TestMethod]
+    public void ThrowReservedExceptions_CS() =>
+        builderCS.AddPaths("ThrowReservedExceptions.cs").Verify();
 
-        [TestMethod]
-        public void ThrowReservedExceptions_CSharp8() =>
-            builderCS.AddPaths("ThrowReservedExceptions.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+    [TestMethod]
+    public void ThrowReservedExceptions_CSharp8() =>
+        builderCS.AddPaths("ThrowReservedExceptions.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
-        [TestMethod]
-        public void ThrowReservedExceptions_VB() =>
-            new VerifierBuilder<VB.ThrowReservedExceptions>().AddPaths("ThrowReservedExceptions.vb").Verify();
-    }
+    [TestMethod]
+    public void ThrowReservedExceptions_VB() =>
+        new VerifierBuilder<VB.ThrowReservedExceptions>().AddPaths("ThrowReservedExceptions.vb").Verify();
 }
