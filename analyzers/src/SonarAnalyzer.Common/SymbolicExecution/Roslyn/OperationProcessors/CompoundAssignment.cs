@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.SymbolicExecution.Constraints;
+
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
 internal sealed class CompoundAssignment : SimpleProcessor<ICompoundAssignmentOperationWrapper>
@@ -28,8 +30,30 @@ internal sealed class CompoundAssignment : SimpleProcessor<ICompoundAssignmentOp
     protected override ProgramState Process(SymbolicContext context, ICompoundAssignmentOperationWrapper assignment)
     {
         var state = context.SetOperationValue(SymbolicValue.NotNull);
-        return assignment.Target.TrackedSymbol(state) is { } symbol
-            ? state.SetSymbolValue(symbol, SymbolicValue.NotNull)
-            : state;
+        if (assignment.Target.TrackedSymbol(state) is { } symbol)
+        {
+            state = state.SetSymbolValue(symbol, SymbolicValue.NotNull);
+            state = CheckForNumberConstraints(state, assignment, symbol);
+        }
+        return state;
     }
+
+    private ProgramState CheckForNumberConstraints(ProgramState state, ICompoundAssignmentOperationWrapper assignment, ISymbol targetSymbol)
+    {
+        if (state[assignment.Target]?.Constraint<NumberConstraint>() is { } leftNumber
+            && state[assignment.Value]?.Constraint<NumberConstraint>() is { } rightNumber
+            && Calculate(assignment.OperatorKind, leftNumber, rightNumber) is { } constraint)
+        {
+            state =  state.SetSymbolConstraint(targetSymbol, constraint);
+            return state.SetOperationConstraint(assignment, constraint);
+        }
+        return state;
+    }
+
+    private static NumberConstraint Calculate(BinaryOperatorKind kind, NumberConstraint left, NumberConstraint right) => kind switch
+    {
+        BinaryOperatorKind.Add => NumberConstraint.From(left.Min + right.Min, left.Max + right.Max),
+        BinaryOperatorKind.Subtract => NumberConstraint.From(left.Min - right.Max, left.Max - right.Min),
+        _ => null
+    };
 }
