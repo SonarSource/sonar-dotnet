@@ -26,12 +26,18 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ThrowReservedExceptionsTest
     {
-        [TestMethod]
-        public void ThrowReservedExceptions_CSharp() =>
-            new VerifierBuilder<CS.ThrowReservedExceptions>().AddPaths("ThrowReservedExceptions.cs").Verify();
+        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ThrowReservedExceptions>();
 
         [TestMethod]
-        public void ThrowReservedExceptions_VisualBasic() =>
+        public void ThrowReservedExceptions_CS() =>
+            builderCS.AddPaths("ThrowReservedExceptions.cs").Verify();
+
+        [TestMethod]
+        public void ThrowReservedExceptions_CSharp8() =>
+            builderCS.AddPaths("ThrowReservedExceptions.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+
+        [TestMethod]
+        public void ThrowReservedExceptions_VB() =>
             new VerifierBuilder<VB.ThrowReservedExceptions>().AddPaths("ThrowReservedExceptions.vb").Verify();
     }
 }
