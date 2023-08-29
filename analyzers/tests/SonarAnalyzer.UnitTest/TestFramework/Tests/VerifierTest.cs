@@ -171,11 +171,15 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 
         [TestMethod]
         public void Verify_RazorAnalysisIsDisabled_DoesNotRaise() =>
-            DummyWithLocation.AddPaths("Dummy.razor").VerifyNoIssueReported();
+            DummyWithLocationMapping.AddPaths("Dummy.razor")
+                .WithAdditionalFilePath(Path.GetFullPath(@"TestResources\SonarLintXml\DisableRazorCodeAnalysis\SonarLint.xml"))
+                .VerifyNoIssueReported();
 
         [TestMethod]
         public void Verify_CshtmlAnalysisIsDisabled_DoesNotRaise() =>
-            DummyWithLocation.AddPaths("Dummy.cshtml").VerifyNoIssueReported();
+            DummyWithLocationMapping.AddPaths("Dummy.cshtml")
+                .WithAdditionalFilePath(Path.GetFullPath(@"TestResources\SonarLintXml\DisableRazorCodeAnalysis\SonarLint.xml"))
+                .VerifyNoIssueReported();
 
         [DataTestMethod]
         [DataRow("net6.0")]
