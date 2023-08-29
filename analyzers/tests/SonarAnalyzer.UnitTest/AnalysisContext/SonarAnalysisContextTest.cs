@@ -136,7 +136,7 @@ public partial class SonarAnalysisContextTest
             {
                 testCase.Builder
                     .WithOptions(ParseOptionsHelper.FromCSharp8)
-                    .WithSonarProjectConfigPath(sonarProjectConfig)
+                    .WithAdditionalFilePath(sonarProjectConfig)
                     .Verify();
             }
             else
@@ -144,7 +144,7 @@ public partial class SonarAnalysisContextTest
                 // MAIN-only
                 testCase.Builder
                     .WithOptions(ParseOptionsHelper.FromCSharp8)
-                    .WithSonarProjectConfigPath(sonarProjectConfig)
+                    .WithAdditionalFilePath(sonarProjectConfig)
                     .VerifyNoIssueReported();
             }
         }
@@ -162,14 +162,14 @@ public partial class SonarAnalysisContextTest
                 // MAIN-only and MAIN & TEST rules
                 testCase.Builder
                     .WithOptions(ParseOptionsHelper.FromCSharp8)
-                    .WithSonarProjectConfigPath(sonarProjectConfig)
+                    .WithAdditionalFilePath(sonarProjectConfig)
                     .VerifyNoIssueReported();
             }
             else
             {
                 testCase.Builder
                     .WithOptions(ParseOptionsHelper.FromCSharp8)
-                    .WithSonarProjectConfigPath(sonarProjectConfig)
+                    .WithAdditionalFilePath(sonarProjectConfig)
                     .Verify();
             }
         }
@@ -186,7 +186,7 @@ public partial class SonarAnalysisContextTest
             {
                 testCase.Builder
                     .WithOptions(ParseOptionsHelper.FromCSharp8)
-                    .WithSonarProjectConfigPath(sonarProjectConfig)
+                    .WithAdditionalFilePath(sonarProjectConfig)
                     .Verify();
             }
             else
@@ -194,7 +194,7 @@ public partial class SonarAnalysisContextTest
                 // TEST-only rule
                 testCase.Builder
                     .WithOptions(ParseOptionsHelper.FromCSharp8)
-                    .WithSonarProjectConfigPath(sonarProjectConfig)
+                    .WithAdditionalFilePath(sonarProjectConfig)
                     .VerifyNoIssueReported();
             }
         }

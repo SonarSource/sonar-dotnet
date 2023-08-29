@@ -55,7 +55,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public string ProtobufPath { get; init; }
         public ImmutableArray<MetadataReference> References { get; init; } = ImmutableArray<MetadataReference>.Empty;
         public ImmutableArray<Snippet> Snippets { get; init; } = ImmutableArray<Snippet>.Empty;
-        public string SonarProjectConfigPath { get; init; }
+        public string AdditionalFilePath { get; init; }
 
         /// <summary>
         /// This method solves complicated scenarios. Use 'new VerifierBuilder&lt;TAnalyzer&gt;()' for single analyzer cases with no rule parameters.
@@ -129,8 +129,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public VerifierBuilder WithProtobufPath(string protobufPath) =>
             this with { ProtobufPath = protobufPath };
 
-        public VerifierBuilder WithSonarProjectConfigPath(string sonarProjectConfigPath) =>
-            this with { SonarProjectConfigPath = sonarProjectConfigPath };
+        public VerifierBuilder WithAdditionalFilePath(string additionalFilePath) =>
+            this with { AdditionalFilePath = additionalFilePath };
 
         public VerifierBuilder WithTopLevelStatements()
         {

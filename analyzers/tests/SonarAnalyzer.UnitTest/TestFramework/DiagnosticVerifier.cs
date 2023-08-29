@@ -35,24 +35,24 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             "BC36716" // VB12 does not support line continuation comments" i.e. a comment at the end of a multi-line statement.
         };
 
-        public static void VerifyExternalFile(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer, string fileName, string sonarProjectConfigPath) =>
-            Verify(compilation, new[] { diagnosticAnalyzer }, CompilationErrorBehavior.FailTest, new[] { new File(fileName) }, sonarProjectConfigPath);
+        public static void VerifyExternalFile(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer, string fileName, string additionalFilePath) =>
+            Verify(compilation, new[] { diagnosticAnalyzer }, CompilationErrorBehavior.FailTest, new[] { new File(fileName) }, additionalFilePath);
 
         public static void Verify(
                 Compilation compilation,
                 DiagnosticAnalyzer diagnosticAnalyzer,
                 CompilationErrorBehavior checkMode,
-                string sonarProjectConfigPath = null,
+                string additionalFilePath = null,
                 string[] onlyDiagnostics = null) =>
-            Verify(compilation, new[] { diagnosticAnalyzer }, checkMode, sonarProjectConfigPath, onlyDiagnostics);
+            Verify(compilation, new[] { diagnosticAnalyzer }, checkMode, additionalFilePath, onlyDiagnostics);
 
         public static void Verify(
                 Compilation compilation,
                 DiagnosticAnalyzer[] diagnosticAnalyzers,
                 CompilationErrorBehavior checkMode,
-                string sonarProjectConfigPath = null,
+                string additionalFilePath = null,
                 string[] onlyDiagnostics = null) =>
-            Verify(compilation, diagnosticAnalyzers, checkMode, compilation.SyntaxTrees.ExceptExtraEmptyFile().Select(x => new File(x)), sonarProjectConfigPath, onlyDiagnostics);
+            Verify(compilation, diagnosticAnalyzers, checkMode, compilation.SyntaxTrees.ExceptExtraEmptyFile().Select(x => new File(x)), additionalFilePath, onlyDiagnostics);
 
         public static void Verify(Compilation compilation,
                                   DiagnosticAnalyzer diagnosticAnalyzer,
@@ -63,7 +63,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static void VerifyRazor(Compilation compilation,
                                        DiagnosticAnalyzer[] diagnosticAnalyzers,
                                        CompilationErrorBehavior checkMode,
-                                       string sonarProjectConfigPath,
+                                       string additionalFilePath,
                                        string[] onlyDiagnostics,
                                        IEnumerable<string> razorFiles) =>
             Verify(
@@ -71,20 +71,20 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 diagnosticAnalyzers,
                 checkMode,
                 compilation.SyntaxTrees.ExceptExtraEmptyFile().ExceptRazorGeneratedFile().Select(x => new File(x)).Concat(razorFiles.Select(x => new File(x))),
-                sonarProjectConfigPath,
+                additionalFilePath,
                 onlyDiagnostics);
 
         private static void Verify(Compilation compilation,
                                    DiagnosticAnalyzer[] diagnosticAnalyzers,
                                    CompilationErrorBehavior checkMode,
                                    IEnumerable<File> sources,
-                                   string sonarProjectConfigPath = null,
+                                   string additionalFilePath = null,
                                    string[] onlyDiagnostics = null)
         {
             SuppressionHandler.HookSuppression();
             try
             {
-                var diagnostics = GetAnalyzerDiagnostics(compilation, diagnosticAnalyzers, checkMode, sonarProjectConfigPath, onlyDiagnostics).ToArray();
+                var diagnostics = GetAnalyzerDiagnostics(compilation, diagnosticAnalyzers, checkMode, additionalFilePath, onlyDiagnostics).ToArray();
                 var expectedIssues = sources.Select(x => x.ToExpectedIssueLocations()).ToArray();
                 VerifyNoExceptionThrown(diagnostics);
                 CompareActualToExpected(compilation.LanguageVersionString(), diagnostics, expectedIssues, false);
@@ -106,17 +106,17 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static void VerifyNoIssueReported(Compilation compilation,
                                                  DiagnosticAnalyzer diagnosticAnalyzer,
                                                  CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
-                                                 string sonarProjectConfigPath = null,
+                                                 string additionalFilePath = null,
                                                  string[] onlyDiagnostics = null) =>
-            GetDiagnosticsNoExceptions(compilation, diagnosticAnalyzer, checkMode, sonarProjectConfigPath, onlyDiagnostics).Should().BeEmpty();
+            GetDiagnosticsNoExceptions(compilation, diagnosticAnalyzer, checkMode, additionalFilePath, onlyDiagnostics).Should().BeEmpty();
 
         public static IEnumerable<Diagnostic> GetDiagnosticsNoExceptions(Compilation compilation,
                                                                          DiagnosticAnalyzer diagnosticAnalyzer,
                                                                          CompilationErrorBehavior checkMode,
-                                                                         string sonarProjectConfigPath = null,
+                                                                         string additionalFilePath = null,
                                                                          string[] onlyDiagnostics = null)
         {
-            var ret = GetAnalyzerDiagnostics(compilation, new[] { diagnosticAnalyzer }, checkMode, sonarProjectConfigPath, onlyDiagnostics);
+            var ret = GetAnalyzerDiagnostics(compilation, new[] { diagnosticAnalyzer }, checkMode, additionalFilePath, onlyDiagnostics);
             VerifyNoExceptionThrown(ret);
             return ret;
         }
@@ -127,7 +127,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static ImmutableArray<Diagnostic> GetAnalyzerDiagnostics(Compilation compilation,
                                                                         DiagnosticAnalyzer[] diagnosticAnalyzers,
                                                                         CompilationErrorBehavior checkMode,
-                                                                        string sonarProjectConfigPath = null,
+                                                                        string additionalFilePath = null,
                                                                         string[] onlyDiagnostics = null)
         {
             onlyDiagnostics ??= Array.Empty<string>();
@@ -140,7 +140,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             var ids = supportedDiagnostics.Select(x => x.Key).ToHashSet();
 
             var compilationOptions = compilation.Options.WithSpecificDiagnosticOptions(supportedDiagnostics);
-            var analyzerOptions = string.IsNullOrWhiteSpace(sonarProjectConfigPath) ? null : AnalysisScaffolding.CreateOptions(sonarProjectConfigPath);
+            var analyzerOptions = string.IsNullOrWhiteSpace(additionalFilePath) ? null : AnalysisScaffolding.CreateOptions(additionalFilePath);
             var diagnostics = compilation
                 .WithOptions(compilationOptions)
                 .WithAnalyzers(diagnosticAnalyzers.ToImmutableArray(), analyzerOptions)

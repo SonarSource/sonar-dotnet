@@ -62,7 +62,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             var webConfigPath = Path.Combine(root, WebConfig);
             builder.AddPaths("CookieShouldBeHttpOnly_WithWebConfig.cs")
                 .AddReferences(MetadataReferenceFacade.SystemWeb)
-                .WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath))
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath))
                 .Verify();
         }
 
@@ -75,7 +75,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             var webConfigPath = Path.Combine(root, WebConfig);
             builder.AddPaths("CookieShouldBeHttpOnly.cs")
                 .AddReferences(MetadataReferenceFacade.SystemWeb)
-                .WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath))
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath))
                 .Verify();
         }
 

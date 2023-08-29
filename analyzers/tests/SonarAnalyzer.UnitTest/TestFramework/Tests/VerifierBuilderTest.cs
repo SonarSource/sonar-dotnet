@@ -266,13 +266,13 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         [TestMethod]
         public void WithSonarProjectConfig_Overwrites_IsImmutable()
         {
-            var one = Empty.WithSonarProjectConfigPath("First");
-            var two = one.WithSonarProjectConfigPath("Second");
-            var three = two.WithSonarProjectConfigPath(null);
-            Empty.SonarProjectConfigPath.Should().BeNull();
-            one.SonarProjectConfigPath.Should().Be("First");
-            two.SonarProjectConfigPath.Should().Be("Second");
-            three.SonarProjectConfigPath.Should().BeNull();
+            var one = Empty.WithAdditionalFilePath("First");
+            var two = one.WithAdditionalFilePath("Second");
+            var three = two.WithAdditionalFilePath(null);
+            Empty.AdditionalFilePath.Should().BeNull();
+            one.AdditionalFilePath.Should().Be("First");
+            two.AdditionalFilePath.Should().Be("Second");
+            three.AdditionalFilePath.Should().BeNull();
         }
 
         [TestMethod]

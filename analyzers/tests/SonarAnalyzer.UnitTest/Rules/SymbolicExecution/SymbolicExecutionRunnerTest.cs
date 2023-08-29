@@ -567,7 +567,7 @@ End Class";
         new VerifierBuilder<TRunner>()
             .AddReferences(TestHelper.ProjectTypeReference(projectType))
             .AddSnippet(code)
-            .WithSonarProjectConfigPath(sonarProjectConfigPath)
+            .WithAdditionalFilePath(sonarProjectConfigPath)
             .WithOptions(parseOptions)
             .WithOnlyDiagnostics(onlyRules)
             .WithConcurrentAnalysis(false)
