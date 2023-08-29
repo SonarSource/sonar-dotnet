@@ -730,7 +730,7 @@ public class X
         public void GetMappedFilePath(string code, string expectedFileName = DefaultFileName)
         {
             var syntaxTree = GetSyntaxTree(code, DefaultFileName);
-            syntaxTree.GetRoot().GetMappedFilePath().Should().Be(expectedFileName);
+            syntaxTree.GetRoot().GetMappedFilePathFromRoot().Should().Be(expectedFileName);
         }
 
         private static SyntaxNode NodeBetweenMarkers(string code, string language)

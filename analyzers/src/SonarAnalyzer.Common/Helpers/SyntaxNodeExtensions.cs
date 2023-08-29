@@ -37,7 +37,7 @@ internal static class SyntaxNodeExtensions
         return toString.Contains(a) || toString.Contains(b);
     }
 
-    public static string GetMappedFilePath(this SyntaxNode root)
+    public static string GetMappedFilePathFromRoot(this SyntaxNode root)
     {
         if (root.DescendantTrivia().FirstOrDefault() is { RawKind: (ushort)SyntaxKindEx.PragmaChecksumDirectiveTrivia } pragmaChecksum)
         {
