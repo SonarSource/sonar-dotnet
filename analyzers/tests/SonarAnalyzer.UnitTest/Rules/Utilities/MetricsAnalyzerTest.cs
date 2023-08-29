@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         public void VerifyMetrics() =>
             CreateBuilder(false, AllMetricsFileName)
-                .WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                 .VerifyUtilityAnalyzer<MetricsInfo>(messages =>
                     {
                         messages.Should().ContainSingle();

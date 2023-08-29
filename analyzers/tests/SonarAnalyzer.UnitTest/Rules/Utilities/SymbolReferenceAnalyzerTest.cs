@@ -177,7 +177,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("SomethingElse.cs", false)]
         public void Verify_UnchangedFiles(string unchangedFileName, bool expectedProtobufIsEmpty)
         {
-            var builder = CreateBuilder(ProjectType.Product, "Method.cs").WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfigWithUnchangedFiles(TestContext, BasePath + unchangedFileName));
+            var builder = CreateBuilder(ProjectType.Product, "Method.cs").WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfigWithUnchangedFiles(TestContext, BasePath + unchangedFileName));
             if (expectedProtobufIsEmpty)
             {
                 builder.VerifyUtilityAnalyzerProducesEmptyProtobuf();
@@ -226,7 +226,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                             Action<IReadOnlyList<SymbolReferenceInfo.Types.SymbolReference>> verifyReference,
                             bool isMessageExpected = true) =>
             CreateBuilder(projectType, fileName)
-                .WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, projectType))
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, projectType))
                 .VerifyUtilityAnalyzer<SymbolReferenceInfo>(messages =>
                     {
                         messages.Should().HaveCount(isMessageExpected ? 1 : 0);

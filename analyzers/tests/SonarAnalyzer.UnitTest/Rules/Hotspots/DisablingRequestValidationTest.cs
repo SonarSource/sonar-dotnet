@@ -100,7 +100,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 compilation,
                 new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
                 CompilationErrorBehavior.Default,
-                sonarProjectConfigPath: AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, filesToAnalyze.ToArray())).ToList();
+                additionalFilePath: AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, filesToAnalyze.ToArray())).ToList();
             allDiagnostics.Should().NotBeEmpty();
             var rootWebConfig = Path.Combine(rootDirectory, WebConfig);
             VerifyResults(rootWebConfig, allDiagnostics, languageVersion);

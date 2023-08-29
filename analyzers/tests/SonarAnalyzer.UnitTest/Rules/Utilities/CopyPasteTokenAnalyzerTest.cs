@@ -78,7 +78,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void Verify_Duplicated_CS_GlobalUsings() =>
             CreateBuilder(ProjectType.Product, "Duplicated.CSharp10.cs")
-                .WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                 .VerifyUtilityAnalyzer<CopyPasteTokenInfo>(messages =>
                     {
                         messages.Should().HaveCount(1);
@@ -105,12 +105,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("SomethingElse.cs")]
         public void Verify_UnchangedFiles(string unchangedFileName) =>
             CreateBuilder(ProjectType.Product, "Unique.cs")
-                .WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfigWithUnchangedFiles(TestContext, BasePath + unchangedFileName))
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfigWithUnchangedFiles(TestContext, BasePath + unchangedFileName))
                 .VerifyUtilityAnalyzer<TokenTypeInfo>(x => x.Should().NotBeEmpty());
 
         private void Verify(string fileName, Action<IReadOnlyList<CopyPasteTokenInfo.Types.TokenInfo>> verifyTokenInfo) =>
             CreateBuilder(ProjectType.Product, fileName)
-                .WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                 .VerifyUtilityAnalyzer<CopyPasteTokenInfo>(messages =>
                     {
                         messages.Should().HaveCount(1);
