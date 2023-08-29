@@ -154,46 +154,28 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
                 .Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>();
 
         [TestMethod]
-        public void Verify_RazorWithAdditionalLocation()
-        {
-            using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = true };
+        public void Verify_RazorWithAdditionalLocation() =>
             DummyWithLocation.AddPaths("Dummy.SecondaryLocation.razor").Verify();
-        }
 
         [TestMethod]
-        public void Verify_CshtmlWithAdditionalLocation()
-        {
-            using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = true };
+        public void Verify_CshtmlWithAdditionalLocation() =>
             DummyWithLocation.AddPaths("Dummy.SecondaryLocation.cshtml").Verify();
-        }
 
         [TestMethod]
-        public void Verify_Razor()
-        {
-            using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = true };
+        public void Verify_Razor() =>
             DummyWithLocation.AddPaths("Dummy.razor").Verify();
-        }
 
         [TestMethod]
-        public void Verify_Cshtml()
-        {
-            using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = true };
+        public void Verify_Cshtml() =>
             DummyWithLocation.AddPaths("Dummy.cshtml").Verify();
-        }
 
         [TestMethod]
-        public void Verify_RazorAnalysisIsDisabled_DoesNotRaise()
-        {
-            using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = false };
+        public void Verify_RazorAnalysisIsDisabled_DoesNotRaise() =>
             DummyWithLocation.AddPaths("Dummy.razor").VerifyNoIssueReported();
-        }
 
         [TestMethod]
-        public void Verify_CshtmlAnalysisIsDisabled_DoesNotRaise()
-        {
-            using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = false };
+        public void Verify_CshtmlAnalysisIsDisabled_DoesNotRaise() =>
             DummyWithLocation.AddPaths("Dummy.cshtml").VerifyNoIssueReported();
-        }
 
         [DataTestMethod]
         [DataRow("net6.0")]
