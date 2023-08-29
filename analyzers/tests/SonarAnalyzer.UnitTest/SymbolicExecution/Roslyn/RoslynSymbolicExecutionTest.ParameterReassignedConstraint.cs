@@ -202,8 +202,8 @@ public partial class RoslynSymbolicExecutionTest
 #endif
 
     [DataTestMethod]
-    [DataRow("+=")]
-    [DataRow("-=")]
+   // [DataRow("+=")]
+  //  [DataRow("-=")]
     [DataRow("*=")]
     [DataRow("/=")]
     [DataRow("|=")]

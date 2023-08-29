@@ -124,10 +124,10 @@ public class Sample
     public void AssignmentOperators()
     {
         int i = 2147483600;
-        i += 100;               // FN
+        i += 100;               // Noncompliant
 
         i = -2147483600;
-        i -= 100;               // FN
+        i -= 100;               // Noncompliant
 
         i = 2147483600;
         i *= 100;               // FN
@@ -210,7 +210,7 @@ public class Sample
         Action a = () =>
         {
             int i = -2147483600;
-            i -= 100;           // FN
+            i -= 100;           // Noncompliant
         };
     }
 
@@ -235,13 +235,13 @@ public class Properties
         get
         {
             int i = 2147483600;
-            i += 100;           // FN
+            i += 100;           // Noncompliant
             return i;
         }
         set
         {
             int i = 2147483600;
-            i += 100;           // FN
+            i += 100;           // Noncompliant
         }
     }
 
@@ -282,7 +282,7 @@ class DotnetOverflow
     public int Overflow2()
     {
         int i = 1834567890;
-        i += i;                                 // FN
+        i += i;                                 // Noncompliant
         return i;
     }
 
