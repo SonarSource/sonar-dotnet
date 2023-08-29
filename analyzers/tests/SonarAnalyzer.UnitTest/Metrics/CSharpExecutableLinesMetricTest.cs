@@ -1028,10 +1028,10 @@ class Program
         public void Razor_LocalFunctions() =>
             AssertLineNumbersOfExecutableLinesRazor("""
 @code {
-    int y = LocalFunction(); // Not reported
+    int y = LocalFunction(); // Not counted
     LocalFunction(); // +1
 
-    int LocalFunction() => 0; // Not reported
+    int LocalFunction() => 0; // Not counted
 }
 """, 2);
 
