@@ -27,25 +27,20 @@ namespace SonarAnalyzer.Helpers
     {
         #region Line Number
 
-        public static int GetLineNumberToReport(this SyntaxNode self)
-        {
-            return self.GetLocation().GetLineNumberToReport();
-        }
+        public static int GetLineNumberToReport(this SyntaxNode self) =>
+            self.GetLocation().GetLineNumberToReport();
 
-        public static int GetLineNumberToReport(this Diagnostic self)
-        {
-            return self.Location.GetLineNumberToReport();
-        }
+        public static int GetLineNumberToReport(this Diagnostic self) =>
+            self.Location.GetLineNumberToReport();
 
-        public static int GetLineNumberToReport(this Location self)
-        {
-            return self.GetLineSpan().StartLinePosition.GetLineNumberToReport();
-        }
+        public static int GetLineNumberToReport(this Location self) =>
+            self.GetLineSpan().StartLinePosition.GetLineNumberToReport();
 
-        public static int GetLineNumberToReport(this LinePosition self)
-        {
-            return self.Line + 1;
-        }
+        public static int GetLineNumberToReport(this LinePosition self) =>
+            self.Line + 1;
+
+        public static int GetLineNumberToReport(this FileLinePositionSpan self) =>
+            self.StartLinePosition.GetLineNumberToReport();
 
         #endregion Line Number
 
@@ -54,20 +49,14 @@ namespace SonarAnalyzer.Helpers
             LastJoiningWord lastJoiningWord = LastJoiningWord.And)
         {
             var wordCollection = words as ICollection<string> ?? words.ToList();
-            var singleQuoteOrBlank = quoteWords ? "'" : "";
+            var singleQuoteOrBlank = quoteWords ? "'" : string.Empty;
 
-            switch (wordCollection.Count)
+            return wordCollection.Count switch
             {
-                case 0:
-                    return null;
-
-                case 1:
-                    return string.Concat(singleQuoteOrBlank, wordCollection.First(), singleQuoteOrBlank);
-
-                default:
-                    return new StringBuilder(singleQuoteOrBlank)
-                        .Append(string.Join($"{singleQuoteOrBlank}, {singleQuoteOrBlank}",
-                            wordCollection.Take(wordCollection.Count - 1)))
+                0 => null,
+                1 => string.Concat(singleQuoteOrBlank, wordCollection.First(), singleQuoteOrBlank),
+                _ => new StringBuilder(singleQuoteOrBlank)
+                        .Append(string.Join($"{singleQuoteOrBlank}, {singleQuoteOrBlank}", wordCollection.Take(wordCollection.Count - 1)))
                         .Append(singleQuoteOrBlank)
                         .Append(" ")
                         .Append(lastJoiningWord.ToString().ToLower())
@@ -75,10 +64,14 @@ namespace SonarAnalyzer.Helpers
                         .Append(singleQuoteOrBlank)
                         .Append(wordCollection.Last())
                         .Append(singleQuoteOrBlank)
-                        .ToString();
-            }
+                        .ToString(),
+            };
         }
     }
 
-    public enum LastJoiningWord { And, Or }
+    public enum LastJoiningWord
+    {
+        And,
+        Or
+    }
 }

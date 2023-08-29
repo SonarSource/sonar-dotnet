@@ -18,11 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.UnitTest.Helpers;
+using SonarAnalyzer.UnitTest.TestFramework.Tests;
+
 namespace SonarAnalyzer.UnitTest.Common
 {
     [TestClass]
     public class CSharpExecutableLinesMetricTest
     {
+        private static readonly VerifierBuilder DummyWithLocationMapping = new VerifierBuilder<DummyAnalyzerWithLocationMapping>();
+
         [TestMethod]
         public void No_Executable_Lines() =>
             AssertLineNumbersOfExecutableLines(
@@ -867,10 +872,115 @@ class Program
     public static int Bar() => 42;
 }", 7, 8);
 
+#if NET
+
+        [TestMethod]
+        public void Razor_No_Executable_Lines() =>
+            AssertLineNumbersOfExecutableLinesRazor("""
+<p>Hello world!</p>
+@* Noncompliant *@
+@code
+{
+    private void SomeMethod()
+    {
+    }
+}
+""");
+
+        [TestMethod]
+        public void Razor_FieldReference() =>
+            AssertLineNumbersOfExecutableLinesRazor("""
+@page "/razor"
+@using TestCases
+
+<p>Current count: @currentCount</p>
+
+@currentCount
+
+@code {
+    private int currentCount = 0;
+}
+""", 4, 6);
+
+        [TestMethod]
+        public void Razor_MethodReferenceAndCall() =>
+            AssertLineNumbersOfExecutableLinesRazor("""
+<button @onclick="IncrementCount">Increment</button>
+<p> @(ShowAmount()) </p>
+
+@code {
+    [Parameter]
+    public int IncrementAmount { get; set; } = 1;
+
+    private void IncrementCount()
+    {
+        IncrementAmount += 1;
+    }
+
+    private string ShowAmount()
+    {
+        return $"Amount: {IncrementAmount}";
+    }
+}
+""", 2, 10, 15);
+
+        [TestMethod]
+        public void Razor_PropertyReference() =>
+            AssertLineNumbersOfExecutableLinesRazor("""
+@IncrementAmount
+
+@code {
+    [Parameter]
+    public int IncrementAmount { get; set; } = 1;
+}
+""", 1);
+
+        [TestMethod]
+        public void Razor_HtmlAndCode() =>
+            AssertLineNumbersOfExecutableLinesRazor("""
+<button @onclick="AddTodo">Add todo</button>
+
+<ul>
+    @foreach (var todo in todos)
+    {
+        <li>@todo.Title</li>
+    }
+</ul>
+
+<h3>Todo (@todos.Count(todo => !todo.IsDone))</h3>
+
+@code {
+    private List<ToDo> todos = new();
+
+    private void AddTodo()
+    {
+        var x = LocalMethod();
+        var y = new DateTime(); // Named type
+
+        int LocalMethod() => 42;
+    }
+}
+""", 4, 6, 10, 17);
+
+#endif
+
         private static void AssertLineNumbersOfExecutableLines(string code, params int[] expectedExecutableLines)
         {
             (var syntaxTree, var semanticModel) = TestHelper.CompileCS(code);
             Metrics.CSharp.CSharpExecutableLinesMetric.GetLineNumbers(syntaxTree, semanticModel).Should().BeEquivalentTo(expectedExecutableLines);
+        }
+
+        public static void AssertLineNumbersOfExecutableLinesRazor(string code, params int[] expectedExecutableLines)
+        {
+            const string fileName = "Test.razor";
+            using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = true };
+            var compilation = DummyWithLocationMapping.AddSnippet(code, fileName).Build().Compile(false).Single();
+
+            var syntaxTree = compilation.SyntaxTrees.Single(x => x.ToString().Contains(fileName));
+            var semanticModel = compilation.GetSemanticModel(syntaxTree);
+
+            var lineNumbers = Metrics.CSharp.CSharpExecutableLinesMetric.GetLineNumbers(syntaxTree, semanticModel);
+            lineNumbers.Should().BeEquivalentTo(expectedExecutableLines);
         }
     }
 }

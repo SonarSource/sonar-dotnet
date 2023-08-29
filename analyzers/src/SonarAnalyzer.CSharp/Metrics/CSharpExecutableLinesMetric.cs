@@ -32,11 +32,15 @@ namespace SonarAnalyzer.Metrics.CSharp
         private sealed class ExecutableLinesWalker : SafeCSharpSyntaxWalker
         {
             private readonly SemanticModel model;
+            private readonly bool isRazor;
 
             public HashSet<int> ExecutableLineNumbers { get; } = new();
 
-            public ExecutableLinesWalker(SemanticModel model) =>
+            public ExecutableLinesWalker(SemanticModel model)
+            {
                 this.model = model;
+                isRazor = model.SyntaxTree.FilePath.EndsWith("_razor.g.cs", StringComparison.InvariantCultureIgnoreCase);
+            }
 
             public override void DefaultVisit(SyntaxNode node)
             {
@@ -91,7 +95,7 @@ namespace SonarAnalyzer.Metrics.CSharp
                     case SyntaxKind.ParenthesizedLambdaExpression:
 
                     case SyntaxKind.ArrayInitializerExpression:
-                        ExecutableLineNumbers.Add(node.GetLocation().GetLineNumberToReport());
+                        AddExecutableLineNumbers(node.GetLocation());
                         return true;
 
                     case SyntaxKind.StructDeclaration:
@@ -117,6 +121,22 @@ namespace SonarAnalyzer.Metrics.CSharp
 
                     default:
                         return true;
+                }
+            }
+
+            private void AddExecutableLineNumbers(Location location)
+            {
+                if (isRazor)
+                {
+                    if (location.GetMappedLineSpan() is var mappedLocation
+                        && mappedLocation.HasMappedPath)
+                    {
+                        ExecutableLineNumbers.Add(mappedLocation.GetLineNumberToReport());
+                    }
+                }
+                else
+                {
+                    ExecutableLineNumbers.Add(location.GetLineNumberToReport());
                 }
             }
 
