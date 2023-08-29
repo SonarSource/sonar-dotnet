@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S112",
+"message":  "'System.NullReferenceException' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Mapper.cs#L151",
+"region":  {
+"startLine":  151,
+"startColumn":  117,
+"endLine":  151,
+"endColumn":  164
+}
+}
+}
+]
+}

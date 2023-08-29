@@ -40,4 +40,10 @@ public class ThrowReservedExceptions
             throw; // Compliant
         }
     }
+
+    public void Arrow() =>
+        throw new Exception();          // Noncompliant
+
+    public Action Lambda() =>
+        () => throw new Exception();    // Noncompliant
 }
