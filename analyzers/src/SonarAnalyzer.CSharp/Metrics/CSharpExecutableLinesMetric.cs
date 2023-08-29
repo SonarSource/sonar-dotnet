@@ -95,8 +95,7 @@ namespace SonarAnalyzer.Metrics.CSharp
                     case SyntaxKind.ParenthesizedLambdaExpression:
 
                     case SyntaxKind.ArrayInitializerExpression:
-                        AddExecutableLineNumbers(node.GetLocation());
-                        return true;
+                        return AddExecutableLineNumbers(node.GetLocation());
 
                     case SyntaxKind.StructDeclaration:
                     case SyntaxKind.ClassDeclaration:
@@ -124,7 +123,7 @@ namespace SonarAnalyzer.Metrics.CSharp
                 }
             }
 
-            private void AddExecutableLineNumbers(Location location)
+            private bool AddExecutableLineNumbers(Location location)
             {
                 if (isRazor)
                 {
@@ -132,11 +131,14 @@ namespace SonarAnalyzer.Metrics.CSharp
                     if (mappedLocation.HasMappedPath)
                     {
                         ExecutableLineNumbers.Add(mappedLocation.GetLineNumberToReport());
+                        return true;
                     }
+                    return false;
                 }
                 else
                 {
                     ExecutableLineNumbers.Add(location.GetLineNumberToReport());
+                    return true;
                 }
             }
 
