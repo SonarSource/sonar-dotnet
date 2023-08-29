@@ -34,8 +34,10 @@ namespace SonarAnalyzer.UnitTest.Common
         [DataRow("File.cs")]
         [DataRow("File.Cs")]
         [DataRow("File.CS")]
+        [DataRow("File.razor")]
         [DataRow(@"C:\Project\File.cs")]
         [DataRow(@"/c/Project/File.cs")]
+        [DataRow(@"/c/Project/File.razor")]
         public void FromPath_CS(string path) =>
             AnalyzerLanguage.FromPath(path).Should().Be(AnalyzerLanguage.CSharp);
 
