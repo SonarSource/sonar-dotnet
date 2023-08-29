@@ -33,9 +33,11 @@ import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.rule.Severity;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.batch.sensor.issue.ExternalIssue;
+import org.sonar.api.batch.sensor.issue.Issue;
 import org.sonar.api.batch.sensor.issue.Issue.Flow;
 import org.sonar.api.batch.sensor.issue.IssueLocation;
 import org.sonar.api.batch.sensor.rule.AdHocRule;
+import org.sonar.api.rule.RuleKey;
 import org.sonar.api.rules.RuleType;
 import org.sonar.api.testfixtures.log.LogTester;
 import org.slf4j.event.Level;
@@ -65,9 +67,18 @@ public class SarifParserCallbackImplTest {
     ctx = SensorContextTester.create(temp.getRoot().toPath());
     repositoryKeyByRoslynRuleKey.put("rule1", "rule1");
     repositoryKeyByRoslynRuleKey.put("rule2", "rule2");
+    repositoryKeyByRoslynRuleKey.put("rule42", "csharpsquid");
 
     // file needs to have a few lines so that the issue is within it's range
     ctx.fileSystem().add(TestInputFileBuilder.create("module1", "file1")
+      .setContents("My file\ncontents\nwith some\n lines")
+      .build());
+
+    ctx.fileSystem().add(TestInputFileBuilder.create("module1", "Dummy.razor")
+      .setContents("My file\ncontents\nwith some\n lines")
+      .build());
+
+    ctx.fileSystem().add(TestInputFileBuilder.create("module1", "Dummy.cshtml")
       .setContents("My file\ncontents\nwith some\n lines")
       .build());
 
@@ -405,6 +416,38 @@ public class SarifParserCallbackImplTest {
         tuple("S3", RuleType.VULNERABILITY),
         tuple("S4", RuleType.CODE_SMELL),
         tuple("S5", RuleType.CODE_SMELL));
+  }
+
+  @Test
+  public void issue_with_invalid_precise_location_forRazor_reports_on_line() {
+    assertIssueReportedOnLine("Dummy.razor");
+  }
+
+  @Test
+  public void issue_with_invalid_precise_location_forCshtml_reports_on_line() {
+    assertIssueReportedOnLine("Dummy.cshtml");
+  }
+
+  private void assertIssueReportedOnLine(String fileName) {
+    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, false, emptySet(), emptySet(), emptySet());
+
+    // We try to report an issue that contains an invalid startColumn (bigger than the line length) but with a valid start line
+    // So we expect the issue to be reported on the start line.
+    callback.onIssue("rule42", "warning", createLocation(fileName, 2, 99, 2, 101), Collections.emptyList());
+
+    assertThat(ctx.allIssues()).hasSize(1)
+      .extracting(Issue::ruleKey,
+        i -> i.primaryLocation().textRange().start().line(),
+        i -> i.primaryLocation().textRange().start().lineOffset(),
+        i -> i.primaryLocation().textRange().end().line(),
+        i -> i.primaryLocation().textRange().end().lineOffset())
+      .containsExactlyInAnyOrder(
+        tuple(RuleKey.of("csharpsquid", "rule42"), 2, 0, 2, 8));
+
+    List<String> logs = logTester.logs();
+    assertThat(logs.get(1))
+      .startsWith("Precise issue location cannot be found! Location:")
+      .endsWith(fileName +", message=msg, startLine=2, startColumn=99, endLine=2, endColumn=101]");
   }
 
   private Location createLocation(String filePath, int line, int column) {

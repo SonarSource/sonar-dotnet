@@ -30,7 +30,6 @@ import java.nio.file.Path;
 import java.util.List;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-
 import com.sonar.orchestrator.locator.MavenLocation;
 import org.junit.jupiter.api.extension.AfterAllCallback;
 import org.junit.jupiter.api.extension.BeforeAllCallback;
