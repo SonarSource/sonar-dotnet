@@ -34,15 +34,13 @@ public abstract class ThrowReservedExceptionsBase<TSyntaxKind> : SonarDiagnostic
         KnownType.System_NullReferenceException,
         KnownType.System_OutOfMemoryException);
 
-    protected abstract bool IsObjectCreation(SyntaxNode throwStatementExpression);
-
     protected override string MessageFormat => "'{0}' should not be thrown by user code.";
 
     protected ThrowReservedExceptionsBase() : base(DiagnosticId) { }
 
     protected void Process(SonarSyntaxNodeReportingContext context, SyntaxNode thrownExpression)
     {
-        if (thrownExpression is not null && IsObjectCreation(thrownExpression))
+        if (thrownExpression is not null && Language.Syntax.IsAnyKind(thrownExpression, Language.SyntaxKind.ObjectCreationExpressions))
         {
             var expressionType = context.SemanticModel.GetTypeInfo(thrownExpression).Type;
             if (expressionType.IsAny(reservedExceptions))

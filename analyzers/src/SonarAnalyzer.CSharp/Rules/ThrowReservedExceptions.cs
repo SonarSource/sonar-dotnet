@@ -30,7 +30,4 @@ public sealed class ThrowReservedExceptions : ThrowReservedExceptionsBase<Syntax
         context.RegisterNodeAction(c => Process(c, ((ThrowStatementSyntax)c.Node).Expression), SyntaxKind.ThrowStatement);
         context.RegisterNodeAction(c => Process(c, ((ThrowExpressionSyntaxWrapper)c.Node).Expression), SyntaxKindEx.ThrowExpression);
     }
-
-    protected override bool IsObjectCreation(SyntaxNode throwStatementExpression) =>
-        throwStatementExpression.IsKind(SyntaxKind.ObjectCreationExpression);
 }
