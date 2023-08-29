@@ -19,7 +19,6 @@
  */
 
 using System.IO;
-using System.Linq.Expressions;
 using SonarAnalyzer.Protobuf;
 using SonarAnalyzer.Rules;
 using CS = SonarAnalyzer.Rules.CSharp;
