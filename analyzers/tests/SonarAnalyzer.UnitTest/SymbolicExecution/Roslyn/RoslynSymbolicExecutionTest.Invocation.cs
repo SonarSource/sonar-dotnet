@@ -1260,7 +1260,7 @@ private static bool Equals(object a, object b, object c) => false;";
     [DataRow("0", "42", false)]
     [DataRow("((int?)42)", "((int?)42)", true)]
     [DataRow("((int?)42)", "((int?)0)", false)]
-    public void Invocation_NumberEquals_LearnsResult(string left, string right, bool expected)
+    public void Invocation_NumberEquals_SingleValues_LearnsResult(string left, string right, bool expected)
     {
         var code = $"""
                 var result = {left}.Equals({right});
@@ -1278,14 +1278,28 @@ private static bool Equals(object a, object b, object c) => false;";
     public void Invocation_NumberEquals_DoesNotLearn()
     {
         var code = """
-                if (i>1 && i<10)
+                if (i > 1 && i < 10)
                 {
-                    var result = object.Equals(i, 0);
+                    var result = object.Equals(i, 4);
                     Tag("Result", result);
                 }
                 """;
         var validator = SETestContext.CreateCS(code, "int i").Validator;
-        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
+        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull); // Should learn 'false'
+    }
+
+    [TestMethod]
+    public void Invocation_NumberEquals_RangesDoNotOverlap_LearnsResult()
+    {
+        var code = $$"""
+                if (i > 0 && j < 0)
+                {
+                    var result = i.Equals(j);
+                    Tag("Result", result);
+                }
+                """;
+        var validator = SETestContext.CreateCS(code, "int i, int j").Validator;
+        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False);
     }
 
     [DataTestMethod]

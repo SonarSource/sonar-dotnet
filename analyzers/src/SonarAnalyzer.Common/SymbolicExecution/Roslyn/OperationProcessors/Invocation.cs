@@ -199,15 +199,29 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
             return context.SetOperationConstraint(BoolConstraint.From(leftBool == rightBool)).ToArray();
         }
         else if (context.State.Constraint<NumberConstraint>(leftOperation) is { } leftNumber
-            && context.State.Constraint<NumberConstraint>(rightOperation) is { } rightNumber
-            && leftNumber.IsSingleValue
-            && rightNumber.IsSingleValue)
+            && context.State.Constraint<NumberConstraint>(rightOperation) is { } rightNumber)
         {
-            return context.SetOperationConstraint(BoolConstraint.From(leftNumber.Equals(rightNumber))).ToArray();
+            return ProcessNumberConstraints(leftNumber, rightNumber).ToArray();
         }
         else
         {
             return ProcessEqualsObject(context, leftOperation, rightOperation);
+        }
+
+        ProgramState ProcessNumberConstraints(NumberConstraint left, NumberConstraint right)
+        {
+            if (left.IsSingleValue && right.IsSingleValue)
+            {
+                return context.SetOperationConstraint(BoolConstraint.From(left.Equals(right)));
+            }
+            else if (!left.Overlaps(right))
+            {
+                return context.SetOperationConstraint(BoolConstraint.False);
+            }
+            else
+            {
+                return context.State;
+            }
         }
     }
 
