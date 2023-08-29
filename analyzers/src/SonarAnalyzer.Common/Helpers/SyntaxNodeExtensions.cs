@@ -37,6 +37,22 @@ internal static class SyntaxNodeExtensions
         return toString.Contains(a) || toString.Contains(b);
     }
 
+    public static string GetMappedFilePath(this SyntaxNode root)
+    {
+        if (root.DescendantTrivia().FirstOrDefault() is { RawKind: (ushort)SyntaxKindEx.PragmaChecksumDirectiveTrivia } pragmaChecksum)
+        {
+            // The format is: #pragma checksum "filename" "{guid}" "checksum bytes"
+            // See https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/preprocessor-directives#pragma-checksum
+            var content = pragmaChecksum.ToString();
+            var firstIndex = content.IndexOf('"');
+            var start = firstIndex + 1;
+            var secondIndex = content.IndexOf('"', start);
+            return content.Substring(start, secondIndex - start);
+        }
+
+        return root.SyntaxTree.FilePath;
+    }
+
     internal static TSyntaxKind Kind<TSyntaxKind>(this SyntaxNode node) where TSyntaxKind : struct, Enum => // internal to not be confused with e.g. CSharp.SyntaxNode.Kind()
         node == null ? default : (TSyntaxKind)Enum.ToObject(typeof(TSyntaxKind), node.RawKind);
 }

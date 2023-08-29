@@ -37,6 +37,8 @@ namespace SonarAnalyzer.UnitTest.Extensions
     [TestClass]
     public class SyntaxNodeExtensionsTest
     {
+        private const string DefaultFileName = "Test.cs";
+
         [TestMethod]
         public void GetPreviousStatementsCurrentBlockOfNotAStatement()
         {
@@ -722,6 +724,15 @@ public class X
         public void Kind_Null_ReturnsNone() =>
             SonarAnalyzer.Helpers.SyntaxNodeExtensions.Kind<SyntaxKind>(null).Should().Be(SyntaxKind.None);
 
+        [DataTestMethod]
+        [DataRow("class Test { }", DisplayName = "When there is no pragma, return default file name.")]
+        [DataRow("#pragma checksum \"FileName.txt\" \"{guid}\" \"checksum bytes\"", "FileName.txt", DisplayName = "When pragma is present, return file name from pragma.")]
+        public void GetMappedFilePath(string code, string expectedFileName = DefaultFileName)
+        {
+            var syntaxTree = GetSyntaxTree(code, DefaultFileName);
+            syntaxTree.GetRoot().GetMappedFilePath().Should().Be(expectedFileName);
+        }
+
         private static SyntaxNode NodeBetweenMarkers(string code, string language)
         {
             var position = code.IndexOf("$$");
@@ -737,5 +748,14 @@ public class X
 
         private static SyntaxToken GetFirstTokenOfKind(SyntaxTree syntaxTree, SyntaxKind kind) =>
             syntaxTree.GetRoot().DescendantTokens().First(token => token.IsKind(kind));
+
+        private static SyntaxTree GetSyntaxTree(string content, string fileName = null) =>
+            SolutionBuilder
+                .Create()
+                .AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false)
+                .AddSnippet(content, fileName)
+                .GetCompilation()
+                .SyntaxTrees
+                .First();
     }
 }
