@@ -391,7 +391,7 @@ public class Sample
             secondCondition.SuccessorBlocks.Should().BeEquivalentTo(new[] { trueBlockY, exitBlock });
             secondCondition.BranchingNode.Kind().Should().Be(SyntaxKind.FalseLiteralExpression);
 
-            exitBlock.PredecessorBlocks.Should().BeEquivalentTo(new[] { trueBlockX, trueBlockY, secondCondition });
+            exitBlock.PredecessorBlocks.Should().BeEquivalentTo(new[] { trueBlockX, trueBlockY, secondCondition }, x => x.IgnoringCyclicReferences());
         }
 
         [TestMethod]
@@ -417,7 +417,7 @@ public class Sample
             trueBlockY.SuccessorBlocks.Should().Equal(exitBlock);
             falseBlockZ.SuccessorBlocks.Should().Equal(exitBlock);
 
-            exitBlock.PredecessorBlocks.Should().BeEquivalentTo(new[] { trueBlockX, trueBlockY, falseBlockZ });
+            exitBlock.PredecessorBlocks.Should().BeEquivalentTo(new[] { trueBlockX, trueBlockY, falseBlockZ }, x => x.IgnoringCyclicReferences());
         }
 
         [TestMethod]

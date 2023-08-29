@@ -172,7 +172,7 @@ stages:
 
       - powershell: |
           cd analyzers
-          & dotnet test -f $(FrameworkMoniker) -c $(BuildConfiguration) -l trx /p:AltCover=true,AltCoverForce=true,AltCoverVisibleBranches=true,AltCoverAssemblyFilter='Moq|Humanizer|AltCover',AltCoverPathFilter='SonarAnalyzer\.CFG\\ShimLayer|SonarAnalyzer\.ShimLayer\.CodeGeneration',AltCoverAttributeFilter='ExcludeFromCodeCoverage',AltCoverReport=coverage/coverage.xml
+          & dotnet test -f $(FrameworkMoniker) -c $(BuildConfiguration) -l trx /p:AltCover=true,AltCoverForce=true,AltCoverVisibleBranches=true,AltCoverAssemblyFilter='Moq|Humanizer|AltCover|Microsoft.VisualStudio.TestPlatform.*|.*Test',AltCoverPathFilter='SonarAnalyzer\.CFG\\ShimLayer|SonarAnalyzer\.ShimLayer\.CodeGeneration',AltCoverAttributeFilter='ExcludeFromCodeCoverage',AltCoverReport=coverage/coverage.xml
         displayName: '.Net UTs'
 
       - task: PublishPipelineArtifact@1
