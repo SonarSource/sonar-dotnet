@@ -593,7 +593,7 @@ namespace Monitor_Conditions
 
         public void Numbers_CompoundAssignment()
         {
-            Monitor.Enter(obj);     // Noncompliant FP, always released
+            Monitor.Enter(obj);     // Always released
             Monitor.Enter(other);   // Noncompliant
             if (condition)          // Release on some paths
             {

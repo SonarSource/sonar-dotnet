@@ -86,10 +86,10 @@ Public Class Sample
 
     Public Sub AssignmentOperators()
         Dim i As Integer = 2147483600
-        i += 100                ' FN
+        i += 100                ' Noncompliant
 
         i = -2147483600
-        i -= 100                ' FN
+        i -= 100                ' Noncompliant
 
         i = 2147483600
         i *= 100                ' FN
@@ -147,11 +147,11 @@ Public Class Sample
     Public Sub Lambda()
         Dim a As Action = Sub()
                               Dim i As Integer = -2147483600
-                              i -= 100           ' FN
+                              i -= 100           ' Noncompliant
                           End Sub
         Dim b As Func(Of Integer) = Function()
                                         Dim i As Integer = -2147483600
-                                        i -= 100           ' FN
+                                        i -= 100           ' Noncompliant
                                         Return i
                                     End Function
     End Sub
@@ -174,12 +174,12 @@ Public Class Properties
     Public Property GetSet As Integer
         Get
             Dim i As Integer = 2147483600
-            i += 100           ' FN
+            i += 100           ' Noncompliant
             Return i
         End Get
         Set(value As Integer)
             Dim i As Integer = 2147483600
-            i += 100           ' FN
+            i += 100           ' Noncompliant
         End Set
     End Property
 
@@ -194,7 +194,7 @@ Public Class DotnetOverflow
 
     Public Function Overflow2() As Integer
         Dim i As Integer = 1834567890
-        i += i                              ' FN
+        i += i                              ' Noncompliant
         Return i
     End Function
 

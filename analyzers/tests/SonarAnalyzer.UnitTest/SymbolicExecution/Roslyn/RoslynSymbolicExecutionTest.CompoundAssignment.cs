@@ -48,9 +48,9 @@ public partial class RoslynSymbolicExecutionTest
             Tag("Result", result);
             """;
         var validator = SETestContext.CreateCS(code).Validator;
-        validator.TagValue("Left").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
+        validator.TagValue("Left").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(42));
         validator.TagValue("Right").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(2));
-        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
+        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(42));
     }
 
     [TestMethod]
@@ -63,13 +63,68 @@ public partial class RoslynSymbolicExecutionTest
             Tag("Value", value);
             """;
         var validator = SETestContext.CreateCS(code).Validator;
-        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
-        validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
+        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(42));
+        validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(42));
+    }
+
+    [TestMethod]
+    public void CompoundAssignment_TargetAndValueUnknown_DoesNotLearn()
+    {
+        var validator = SETestContext.CreateCS("""
+            var result = target += value;
+            Tag("Target", target);
+            Tag("Result", result);
+            """,
+            "int? target, int? value").Validator;
+        validator.TagValue("Target").Should().HaveNoConstraints();
+        validator.TagValue("Result").Should().HaveNoConstraints();
+    }
+
+    [TestMethod]
+    public void CompoundAssignment_ValueNull_UnlearnTargetConstraints()
+    {
+        var validator = SETestContext.CreateCS("""
+            int? target = 42;
+            var result = target += null;
+            Tag("Target", target);
+            Tag("Result", result);
+            """).Validator;
+        validator.TagValue("Target").Should().HaveNoConstraints();
+        validator.TagValue("Result").Should().HaveNoConstraints();
     }
 
     [DataTestMethod]
-    [DataRow("+=")]
-    [DataRow("-=")]
+    [DataRow("String.Empty")]
+    [DataRow("null")]
+    [DataRow("Unknown<string>()")]
+    public void CompoundAssignment_OnString_AlwaysLearnNotNull(string stringValue)
+    {
+        var validator = SETestContext.CreateCS($"""
+            string s = {stringValue};
+            var result = s += null;
+            Tag("S", s);
+            Tag("Result", result);
+            """).Validator;
+        validator.TagValue("S").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("Result").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+    }
+
+    [TestMethod]
+    public void CompoundAssignment_OnValueType_AlwaysLearnNotNull()
+    {
+        var validator = SETestContext.CreateCS("""
+            char c = 'a';
+            var result = c += Unknown<char>();
+            Tag("C", c);
+            Tag("Result", result);
+            """).Validator;
+        validator.TagValue("C").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("Result").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+    }
+
+    [DataTestMethod]
+  // [DataRow("+=")]
+  // [DataRow("-=")]
     [DataRow("*=")]
     [DataRow("/=")]
     [DataRow("%=")]
@@ -132,5 +187,26 @@ public partial class RoslynSymbolicExecutionTest
         var validator = SETestContext.CreateCS(code).Validator;
         validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
         validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
+    }
+
+    [DataTestMethod]
+    [DataRow("i += j", 43)]
+    [DataRow("i += 2", 44)]
+    [DataRow("i += (true ? 1 : 0)", 43)]
+    [DataRow("i -= j", 41)]
+    [DataRow("i -= 2", 40)]
+    [DataRow("i -= (true ? 1 : 0)", 41)]
+    public void CompoundAssignment_Arithmetic_PlusAndMinus(string expression, int expected)
+    {
+        var code = $"""
+            var i = 42;
+            var j = 1;
+            var result = {expression};
+            Tag("Result", result);
+            Tag("I", i);
+            """;
+        var validator = SETestContext.CreateCS(code).Validator;
+        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
+        validator.TagValue("I").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
     }
 }
