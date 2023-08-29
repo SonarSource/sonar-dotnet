@@ -154,18 +154,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
                 .Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>();
 
         [TestMethod]
-        public void Verify_Razor()
-        {
-            using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = true };
+        public void Verify_Razor() =>
             DummyWithLocationMapping.AddPaths("Dummy.razor").Verify();
-        }
 
         [TestMethod]
-        public void Verify_Cshtml()
-        {
-            using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = true };
+        public void Verify_Cshtml() =>
             DummyWithLocationMapping.AddPaths("Dummy.cshtml").Verify();
-        }
 
         [TestMethod]
         public void Verify_RazorAnalysisIsDisabled_DoesNotRaise() =>

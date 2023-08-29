@@ -140,7 +140,10 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             if (symbol.DeclaringSyntaxReferences.Length > 1
-                && symbol.DeclaringSyntaxReferences.Any(syntax => syntax.SyntaxTree.IsConsideredGenerated(CSharpGeneratedCodeRecognizer.Instance, context.Compilation)))
+                && symbol.DeclaringSyntaxReferences.Any(syntax => syntax.SyntaxTree.IsConsideredGenerated(
+                       CSharpGeneratedCodeRecognizer.Instance,
+                       context.Compilation,
+                       context.SonarLintXml().AnalyzeRazorCode(context.Compilation.Language))))
             {
                 return;
             }
