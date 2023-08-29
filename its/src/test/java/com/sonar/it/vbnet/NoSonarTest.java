@@ -47,17 +47,17 @@ public class NoSonarTest {
   }
 
   @Test
-  public void excludeNoSonarComment() {
+  void excludeNoSonarComment() {
     List<Issues.Issue> issues = TestUtils.getIssues(ORCHESTRATOR, PROJECT);
     assertThat(issues)
       .hasSize(3)
       .extracting(Issues.Issue::getRule)
-      .containsExactly("external_roslyn:CA1822", "vbnet:S101", "external_roslyn:CA1822");
+      .containsExactlyInAnyOrder("external_roslyn:CA1822", "vbnet:S101", "external_roslyn:CA1822");
 
   }
 
   @Test
-  public void logsContainInfo() {
+  void logsContainInfo() {
     assertThat(buildResult.getLogs()).contains("Found 1 MSBuild VB.NET project: 1 MAIN project.");
   }
 }

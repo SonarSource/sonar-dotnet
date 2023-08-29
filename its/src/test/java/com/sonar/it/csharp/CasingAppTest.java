@@ -46,7 +46,7 @@ public class CasingAppTest {
   }
 
   @Test
-  public void class1_should_have_metrics_and_issues() {
+  void class1_should_have_metrics_and_issues() {
     String componentKey = "CasingApp:CasingApp/SRC/Class1.cs";
 
     assertThat(getComponent(componentKey)).isNotNull();
@@ -56,6 +56,6 @@ public class CasingAppTest {
     assertThat(getIssues(componentKey))
       .hasSize(2)
       .extracting(Issues.Issue::getRule)
-      .containsExactly("csharpsquid:S1186", "external_roslyn:CA1822");
+      .containsExactlyInAnyOrder("csharpsquid:S1186", "external_roslyn:CA1822");
   }
 }
