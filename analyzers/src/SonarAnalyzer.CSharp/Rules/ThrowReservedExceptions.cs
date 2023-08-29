@@ -18,23 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.CSharp;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class ThrowReservedExceptions : ThrowReservedExceptionsBase<SyntaxKind>
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class ThrowReservedExceptions : ThrowReservedExceptionsBase
+    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
+    protected override void Initialize(SonarAnalysisContext context)
     {
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterNodeAction(
-                c => ReportReservedExceptionCreation(c, ((ThrowStatementSyntax)c.Node).Expression),
-                SyntaxKind.ThrowStatement);
-        }
-
-        protected override bool IsObjectCreation(SyntaxNode throwStatementExpression) =>
-            throwStatementExpression.IsKind(SyntaxKind.ObjectCreationExpression);
+        context.RegisterNodeAction(c => Process(c, ((ThrowStatementSyntax)c.Node).Expression), SyntaxKind.ThrowStatement);
+        context.RegisterNodeAction(c => Process(c, ((ThrowExpressionSyntaxWrapper)c.Node).Expression), SyntaxKindEx.ThrowExpression);
     }
 }

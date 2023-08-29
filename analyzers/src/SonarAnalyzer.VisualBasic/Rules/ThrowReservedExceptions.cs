@@ -18,24 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.VisualBasic
+namespace SonarAnalyzer.Rules.VisualBasic;
+
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class ThrowReservedExceptions : ThrowReservedExceptionsBase<SyntaxKind>
 {
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class ThrowReservedExceptions : ThrowReservedExceptionsBase
-    {
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
+    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterNodeAction(
-                c => ReportReservedExceptionCreation(c, ((ThrowStatementSyntax)c.Node).Expression),
-                SyntaxKind.ThrowStatement);
-        }
-
-        protected override bool IsObjectCreation(SyntaxNode throwStatementExpression) =>
-           throwStatementExpression.IsKind(SyntaxKind.ObjectCreationExpression);
-    }
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(c => Process(c, ((ThrowStatementSyntax)c.Node).Expression), SyntaxKind.ThrowStatement);
 }

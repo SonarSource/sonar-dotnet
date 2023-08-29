@@ -18,40 +18,35 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules
+namespace SonarAnalyzer.Rules;
+
+public abstract class ThrowReservedExceptionsBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+    where TSyntaxKind : struct
 {
-    public abstract class ThrowReservedExceptionsBase : SonarDiagnosticAnalyzer
+    protected const string DiagnosticId = "S112";
+
+    private readonly ImmutableArray<KnownType> reservedExceptions = ImmutableArray.Create(
+        KnownType.System_Exception,
+        KnownType.System_ApplicationException,
+        KnownType.System_SystemException,
+        KnownType.System_ExecutionEngineException,
+        KnownType.System_IndexOutOfRangeException,
+        KnownType.System_NullReferenceException,
+        KnownType.System_OutOfMemoryException);
+
+    protected override string MessageFormat => "'{0}' should not be thrown by user code.";
+
+    protected ThrowReservedExceptionsBase() : base(DiagnosticId) { }
+
+    protected void Process(SonarSyntaxNodeReportingContext context, SyntaxNode thrownExpression)
     {
-        internal const string DiagnosticId = "S112";
-        internal const string MessageFormat = "'{0}' should not be thrown by user code.";
-
-        internal static readonly ImmutableArray<KnownType> ReservedExceptionTypeNames =
-            ImmutableArray.Create(
-                KnownType.System_Exception,
-                KnownType.System_ApplicationException,
-                KnownType.System_SystemException,
-                KnownType.System_ExecutionEngineException,
-                KnownType.System_IndexOutOfRangeException,
-                KnownType.System_NullReferenceException,
-                KnownType.System_OutOfMemoryException
-            );
-
-        protected void ReportReservedExceptionCreation(SonarSyntaxNodeReportingContext context,
-            SyntaxNode throwStatementExpression)
+        if (thrownExpression is not null && Language.Syntax.IsAnyKind(thrownExpression, Language.SyntaxKind.ObjectCreationExpressions))
         {
-            if (throwStatementExpression == null ||
-                !IsObjectCreation(throwStatementExpression))
+            var expressionType = context.SemanticModel.GetTypeInfo(thrownExpression).Type;
+            if (expressionType.IsAny(reservedExceptions))
             {
-                return;
-            }
-
-            var expressionType = context.SemanticModel.GetTypeInfo(throwStatementExpression).Type;
-            if (expressionType.IsAny(ReservedExceptionTypeNames))
-            {
-                context.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], throwStatementExpression.GetLocation(), expressionType.ToDisplayString()));
+                context.ReportIssue(Diagnostic.Create(Rule, thrownExpression.GetLocation(), expressionType.ToDisplayString()));
             }
         }
-
-        protected abstract bool IsObjectCreation(SyntaxNode throwStatementExpression);
     }
 }
