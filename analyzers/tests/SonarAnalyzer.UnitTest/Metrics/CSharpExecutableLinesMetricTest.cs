@@ -893,9 +893,9 @@ class Program
 @page "/razor"
 @using TestCases
 
-<p>Current count: @currentCount</p>
+<p>Current count: @currentCount</p> <!-- +1 -->
 
-@currentCount
+@currentCount <!-- +1 -->
 
 @code {
     private int currentCount = 0;
@@ -905,8 +905,8 @@ class Program
         [TestMethod]
         public void Razor_MethodReferenceAndCall() =>
             AssertLineNumbersOfExecutableLinesRazor("""
-<button @onclick="IncrementCount">Increment</button>
-<p> @(ShowAmount()) </p>
+<button @onclick="IncrementCount">Increment</button> <!-- Not counted -->
+<p> @(ShowAmount()) </p> <!-- +1 -->
 
 @code {
     [Parameter]
@@ -914,20 +914,18 @@ class Program
 
     private void IncrementCount()
     {
-        IncrementAmount += 1;
+        IncrementAmount += 1; // +1
     }
 
-    private string ShowAmount()
-    {
-        return $"Amount: {IncrementAmount}";
-    }
+    private string ShowAmount() =>
+        $"Amount: {IncrementAmount}"; // Not counted
 }
-""", 2, 10, 15);
+""", 2, 10);
 
         [TestMethod]
         public void Razor_PropertyReference() =>
             AssertLineNumbersOfExecutableLinesRazor("""
-@IncrementAmount
+@IncrementAmount <!-- +1 -->
 
 @code {
     [Parameter]
@@ -941,26 +939,101 @@ class Program
 <button @onclick="AddTodo">Add todo</button>
 
 <ul>
-    @foreach (var todo in todos)
+    @foreach (var todo in todos) <!-- +1 -->
     {
-        <li>@todo.Title</li>
+        <li>@todo.Title</li> <!-- +1 -->
     }
 </ul>
 
-<h3>Todo (@todos.Count(todo => !todo.IsDone))</h3>
+<h3>Todo (@todos.Count(todo => !todo.IsDone))</h3> <!-- +1 -->
 
 @code {
     private List<ToDo> todos = new();
 
     private void AddTodo()
     {
-        var x = LocalMethod();
-        var y = new DateTime(); // Named type
+        var x = LocalMethod(); // +1
+        var y = new DateTime();
 
         int LocalMethod() => 42;
     }
 }
 """, 4, 6, 10, 17);
+
+    [TestMethod]
+        public void Razor_AssignmentAndDeclarationInTheSameDeconstruction() =>
+            AssertLineNumbersOfExecutableLinesRazor("""
+@code {
+    int? i = null;
+    (i, int k) = (42, 42); // Not counted
+}
+""");
+
+        [TestMethod]
+        public void Razor_MultiLineInvocation() =>
+            AssertLineNumbersOfExecutableLinesRazor("""
+@code {
+    public static bool Foo(int a, int b)
+    {
+        return Foo(1, // +1
+                    Bar()); // +1
+    }
+
+    public static int Bar() => 42;
+}
+""", 4, 5);
+
+        [TestMethod]
+        public void Razor_NullCoalescingAssignment() =>
+            AssertLineNumbersOfExecutableLinesRazor("""
+@code {
+    List<int> numbers = null;
+    int? i = null;
+
+    numbers ??= new List<int>(); // Not counted
+}
+""");
+
+        [TestMethod]
+        public void Razor_MultiLinePatternMatching() =>
+            AssertLineNumbersOfExecutableLinesRazor("""
+@code {
+    bool IsLetter(char c)
+    {
+        if (c is >= 'a' // +1
+                and <= 'z'
+                        or >= 'A'
+                            and <= 'Z')
+        {
+            return true; // +1
+        }
+        return false; // +1
+    }
+}
+""", 4, 9, 11);
+
+        [TestMethod]
+        public void Razor_NullCoalescingOperator() =>
+            AssertLineNumbersOfExecutableLinesRazor("""
+@code {
+    double SumNumbers(List<double[]> setsOfNumbers, int indexOfSetToSum)
+    {
+        return setsOfNumbers?[indexOfSetToSum]?.Sum() // +1
+                ?? double.NaN; // +1
+    }
+}
+""", 4, 5);
+
+        [TestMethod]
+        public void Razor_LocalFunctions() =>
+            AssertLineNumbersOfExecutableLinesRazor("""
+@code {
+    int y = LocalFunction(); // Not reported
+    LocalFunction(); // +1
+
+    int LocalFunction() => 0; // Not reported
+}
+""", 2);
 
 #endif
 

@@ -128,8 +128,8 @@ namespace SonarAnalyzer.Metrics.CSharp
             {
                 if (isRazor)
                 {
-                    if (location.GetMappedLineSpan() is var mappedLocation
-                        && mappedLocation.HasMappedPath)
+                    var mappedLocation = location.GetMappedLineSpan();
+                    if (mappedLocation.HasMappedPath)
                     {
                         ExecutableLineNumbers.Add(mappedLocation.GetLineNumberToReport());
                     }
