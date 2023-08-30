@@ -24,6 +24,16 @@ using static SonarAnalyzer.Protobuf.TokenTypeInfo.Types;
 
 namespace SonarAnalyzer.Rules
 {
+    internal static class LocationExtensions
+    {
+        public static bool TryEnsureMappedLocation(this Location inputLocation, out Location mappedLocation)
+        {
+            // FIXME: implement this method
+            mappedLocation = inputLocation;
+            return true;
+        }
+    }
+
     public abstract class TokenTypeAnalyzerBase<TSyntaxKind> : UtilityAnalyzerBase<TSyntaxKind, TokenTypeInfo>
         where TSyntaxKind : struct
     {
@@ -44,7 +54,14 @@ namespace SonarAnalyzer.Rules
 
         protected sealed override TokenTypeInfo CreateMessage(SyntaxTree tree, SemanticModel model)
         {
-            var tokens = tree.GetRoot().DescendantTokens();
+            // If the syntax tree is constructed for a razor generated file, we need to provide the original file path.
+            var filePath = syntaxTree.FilePath;
+            if (GeneratedCodeRecognizer.IsRazorGeneratedFile(syntaxTree) && syntaxTree.GetRoot() is var root && root.ContainsDirectives)
+            {
+                filePath = GetMappedFilePath(root);
+            }
+
+            var tokens = syntaxTree.GetRoot().DescendantTokens();
             var identifierTokenKind = Language.SyntaxKind.IdentifierToken;  // Performance optimization
             var skipIdentifierTokens = tokens
                 .Where(token => Language.Syntax.IsKind(token, identifierTokenKind))
@@ -137,15 +154,13 @@ namespace SonarAnalyzer.Rules
                     _ => null,
                 };
 
-            protected static TokenInfo TokenInfo(SyntaxToken token, TokenType tokenType) =>
+            protected TokenInfo TokenInfo(SyntaxToken token, TokenType tokenType) =>
                 tokenType == TokenType.UnknownTokentype
                 || (string.IsNullOrWhiteSpace(token.Text) && tokenType != TokenType.StringLiteral)
+                || !token.GetLocation().TryEnsureMappedLocation(out var mappedLocation)
+                || (!string.IsNullOrWhiteSpace(filePath) && !string.Equals(mappedLocation.GetLineSpan().Path, filePath, StringComparison.OrdinalIgnoreCase))
                     ? null
-                    : new()
-                    {
-                        TokenType = tokenType,
-                        TextRange = GetTextRange(token.GetLocation().GetLineSpan()),
-                    };
+                    : new() { TokenType = tokenType, TextRange = GetTextRange(token.GetLocation().GetLineSpan()) };
 
             protected virtual TokenInfo ClassifyIdentifier(SyntaxToken token)
             {
@@ -189,13 +204,16 @@ namespace SonarAnalyzer.Rules
             }
 
             public TokenInfo ClassifyTrivia(SyntaxTrivia trivia) =>
-                trivia switch
-                {
-                    _ when IsRegularComment(trivia) => TokenInfo(trivia.SyntaxTree, TokenType.Comment, trivia.Span),
-                    _ when IsDocComment(trivia) => ClassifyDocComment(trivia),
-                    // Handle preprocessor directives here
-                    _ => null,
-                };
+                trivia.GetLocation().TryEnsureMappedLocation(out var mappedLocation)
+                && (string.IsNullOrWhiteSpace(filePath) || string.Equals(filePath, mappedLocation.GetLineSpan().Path, StringComparison.OrdinalIgnoreCase))
+                    ? trivia switch
+                    {
+                        _ when IsRegularComment(trivia) => TokenInfo(trivia.SyntaxTree, TokenType.Comment, trivia.Span),
+                        _ when IsDocComment(trivia) => TokenInfo(trivia.SyntaxTree, TokenType.Comment, trivia.FullSpan),
+                        // Handle preprocessor directives here
+                        _ => null,
+                    }
+                    : null;
 
             private TokenInfo TokenInfo(SyntaxTree tree, TokenType tokenType, TextSpan span) =>
                 new()
@@ -203,9 +221,6 @@ namespace SonarAnalyzer.Rules
                     TokenType = tokenType,
                     TextRange = GetTextRange(Location.Create(tree, span).GetLineSpan())
                 };
-
-            private TokenInfo ClassifyDocComment(SyntaxTrivia trivia) =>
-                TokenInfo(trivia.SyntaxTree, TokenType.Comment, trivia.FullSpan);
         }
     }
 }
