@@ -59,9 +59,14 @@ namespace SonarAnalyzer.Helpers
              && (HasGeneratedFileName(tree) || HasGeneratedCommentOrAttribute(tree));
 
         public static bool IsRazorGeneratedFile(SyntaxTree tree) =>
+            IsRazor(tree) || IsCshtml(tree);
+
+        public static bool IsRazor(SyntaxTree tree) =>
             tree.FilePath.EndsWith("razor.g.cs", StringComparison.OrdinalIgnoreCase)
-            || tree.FilePath.EndsWith("cshtml.g.cs", StringComparison.OrdinalIgnoreCase)
-            || tree.FilePath.EndsWith("razor.ide.g.cs", StringComparison.OrdinalIgnoreCase)
+            || tree.FilePath.EndsWith("razor.ide.g.cs", StringComparison.OrdinalIgnoreCase);
+
+        public static bool IsCshtml(SyntaxTree tree) =>
+            tree.FilePath.EndsWith("cshtml.g.cs", StringComparison.OrdinalIgnoreCase)
             || tree.FilePath.EndsWith("cshtml.ide.g.cs", StringComparison.OrdinalIgnoreCase);
 
         private bool HasGeneratedCommentOrAttribute(SyntaxTree tree)
