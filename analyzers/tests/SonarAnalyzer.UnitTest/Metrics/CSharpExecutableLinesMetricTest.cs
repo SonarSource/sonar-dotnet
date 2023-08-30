@@ -874,7 +874,7 @@ class Program
     public static int Bar() => 42;
 }", 7, 8);
 
-        //#if NET
+#if NET
 
         [DataTestMethod]
         [DataRow(RazorFile)]
@@ -1059,7 +1059,7 @@ class Program
 }
 """, fileName, expectedExecutableLines);
 
-//#endif
+#endif
 
         private static void AssertLineNumbersOfExecutableLines(string code, params int[] expectedExecutableLines)
         {
