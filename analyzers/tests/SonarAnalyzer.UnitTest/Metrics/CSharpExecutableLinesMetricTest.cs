@@ -26,7 +26,6 @@ namespace SonarAnalyzer.UnitTest.Common
     [TestClass]
     public class CSharpExecutableLinesMetricTest
     {
-
         private const string RazorFile = "Test.razor";
         private const string CshtmlFile = "Test.cshtml";
 
