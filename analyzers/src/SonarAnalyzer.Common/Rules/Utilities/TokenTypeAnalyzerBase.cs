@@ -24,13 +24,6 @@ using static SonarAnalyzer.Protobuf.TokenTypeInfo.Types;
 
 namespace SonarAnalyzer.Rules
 {
-    // FIXME: this is temporary - remove it
-    public static class LocationExtensions
-    {
-        public static FileLinePositionSpan GetMappedLineSpanIfAvailable(this Location location) =>
-            !GeneratedCodeRecognizer.IsRazorGeneratedFile(location.SourceTree) ? location.GetLineSpan() : location.GetMappedLineSpan();
-    }
-
     public abstract class TokenTypeAnalyzerBase<TSyntaxKind> : UtilityAnalyzerBase<TSyntaxKind, TokenTypeInfo>
         where TSyntaxKind : struct
     {

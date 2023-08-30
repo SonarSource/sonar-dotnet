@@ -1,0 +1,119 @@
+<!-- Razor reserved keywords, only Razor Tokens, no C# Tokens -->
+
+@page "/razor"
+@namespace MyRazorNamespace
+@inherits LayoutComponentBase;
+@implements IDisposable
+@functions { }
+
+<!-- Pure HTML, only Razor Tokens, no C# Tokens -->
+
+@@page "/razor"                       <!-- razor reserved keyword look-alike -->
+@@inherits object                     <!-- razor reserved keyword look-alike -->
+@@using System;                       <!-- using look-alike -->
+@@using MyAlias = System.Int32;       <!-- type alias look-alike -->
+@@(1+1)                               <!-- razor expression look-alike -->
+@@((1 + (1))                          <!-- razor expression with unbalanced parens look-alike -->
+<p>var x = 42;</p>                    <!-- tag inner HTML looking like a C# statement -->
+<p>"42"</p>                           <!-- tag inner HTML looking like a C# expression -->
+<p class="var x = 42;"></p>           <!-- tag attribute looking like a C# statement -->
+<p class='"42"'></p>                  <!-- tag attribute looking like a C# expression -->
+<p>@@typeof(int)</p>                  <!-- escaped Razor directive -->
+<p>@@</p>                             <!-- escaped "at" symbol -->
+<p>@@@@</p>                           <!-- escaped "at" symbols -->
+<a href="mailto:a@b.com">Email</a>    <!-- unescaped "at" symbol in href -->
+<p>Age@joe.Age</p>                    <!-- unescaped "at" symbol in e-mail pattern -->
+#if                                   <!-- pragma look-alike -->
+// 42                                 <!-- comment look-alike -->
+<![CDATA[var x = 42;]]>               <!-- unparsed C# data -->
+
+<!-- Pure JS, no Razor Tokens, no C# Tokens -->
+
+<script type="text/javascript">
+//<![CDATA[
+    var d = document;
+    d.write("<");
+//]]>
+</script>
+
+<!-- Razor directives including C# Tokens -->
+
+@using TestCases                      <!-- razor using directive -->
+@using Microsoft.AspNetCore.Html      <!-- multilevel razor using directive -->
+<![CDATA[@using System ]]>            <!-- unparsed character data parsed by Razor -->
+@using AnAlias = System.Int32         <!-- razor using alias directive -->
+
+@functions {
+    public void Dispose() { }
+}
+
+@code {
+    volatile int aVolatileField = 42;
+    static int aStaticField = 42;
+    private protected int aPrivateProtectedFieldWithANumericLiteral1 = 42;
+    private protected double aPrivateProtectedFieldWithANumericLiteral2 = 42.0;
+    string aStringFieldInitializedWithAStringLiteral = "42";
+    string aStringFieldInitializedWithAVerbatimString = @"42";
+    string aStringFieldInitializedWithAVerbatimInterpolatedString = $@"42{42}";
+    string aStringFieldInitializedWithRawLiteral = """42""";
+    string aStringFieldInitializedWithRawInterpolatedLiteral1 = $"""{42}""";
+    string aStringFieldInitializedWithRawInterpolatedLiteral2 = $$"""{{42}}{}""";
+
+    /// <summary>
+    /// A documentation comment
+    /// </summary>
+    /// <returns></returns>
+    public static string AStaticMethod(/* An intermixed comment */) => "42"; // An inline comment
+
+    public async Task<string> AnAsyncMethod(string s1, string s2, string s3) => await Task.FromResult("42");
+
+    // A comment
+    /*
+     * A multi-line comment
+     */
+    // A comment with Razor directives: @code { }
+
+    #region ARegion
+        #if false
+        #endif
+    #endregion
+}
+
+<!-- Implicit Razor expressions including C# Tokens -->
+
+<p>@DateTime.Now</p>
+<p>@DateTime.IsLeapYear(2016)</p>
+<p id=@aStaticField>@nameof(int.MaxValue)@typeof(int).ToString()</p>
+<p>Last week: @DateTime.Now - TimeSpan.FromDays(7)</p>              <!-- Spaces not supported -->
+
+<!-- Explicit Razor expressions including C# Tokens -->
+
+<p>@(1+1)</p>
+<p>@((1 + (1)))</p>
+<p>Last week this time: @(DateTime.Now - TimeSpan.FromDays(7))</p>
+
+<!-- Razor code blocks -->
+
+@{
+    var someVarAssignedToANumericLiteral1 = 42m;
+    var someVarAssignedToANumericLiteral2 = 0b0001;
+    var someVarAssignedToANumericLiteral3 = 34.0123f;
+}
+
+<!-- Nesting with templated Razor delegates -->
+
+@{
+    // FIXME
+    //Func<dynamic, object> x1 = @<p>nested <b>rendered</b> text</p>;
+    //x1 = @<p>nested <b>@"rendered"</b> text</p>;
+}
+
+<!-- FIXME: add the following scenarios:
+ - Nesting: more cases
+ - <p>@@await AnAsyncMethod("hello", """world""", $@"{42}")</p>
+ - @@bind:culture
+ - @@on{EVENT}
+ - @@on{EVENT}:preventDefault
+ - @@key
+ - @@ref
+-->

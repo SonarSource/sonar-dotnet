@@ -19,8 +19,10 @@
  */
 
 using System.IO;
+using System.Linq;
 using SonarAnalyzer.Protobuf;
 using SonarAnalyzer.Rules;
+using SonarAnalyzer.UnitTest.Helpers;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
@@ -51,7 +53,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        public void Verify_MainTokens_CSSharp11(ProjectType projectType) =>
+        public void Verify_MainTokens_Csharp11(ProjectType projectType) =>
             Verify("Tokens.Csharp11.cs", projectType, info =>
             {
                 info.Should().HaveCount(42);
@@ -68,6 +70,61 @@ namespace SonarAnalyzer.UnitTest.Rules
             CreateBuilder(ProjectType.Product, fileName)
                 .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                 .VerifyUtilityAnalyzer<TokenTypeInfo>(messages => messages.Select(x => Path.GetFileName(x.FilePath)).Should().BeEmpty());
+
+        [TestMethod]
+        public void Verify_Razor()
+        {
+            using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = true };
+
+            CreateBuilder(ProjectType.Product, "RazorTokens.razor", "RazorTokens.cs")
+                .WithConcurrentAnalysis(false)
+                .VerifyUtilityAnalyzer<TokenTypeInfo>(tokens =>
+                    {
+                        var orderedTokens = tokens.OrderBy(x => x.FilePath, StringComparer.Ordinal).ToArray();
+                        orderedTokens.Select(x => Path.GetFileName(x.FilePath)).Should().Contain("_Imports.razor", "RazorTokens.razor", "RazorTokens.cs");
+                        orderedTokens[2].FilePath.Should().EndWith("_Imports.razor");
+                        orderedTokens[1].FilePath.Should().EndWith("RazorTokens.razor");
+                        orderedTokens[1].TokenInfo
+                            .GroupBy(x => (x.TextRange.StartLine, x.TextRange.EndLine))
+                            .ToDictionary(x => x.Key, x => string.Join(string.Empty, x.Select(y => TokenTypeAcronyms[y.TokenType])))
+                            .Should().Contain((41, 41), "k")
+                                .And.Contain((42, 42), "k")
+                                .And.Contain((43, 43), "k")
+                                .And.Contain((44, 44), "ktt")
+                                .And.Contain((47, 47), "kk")
+                                .And.Contain((51, 51), "kkn")
+                                .And.Contain((52, 52), "kkn")
+                                .And.Contain((53, 53), "kkkn")
+                                .And.Contain((54, 54), "kkkn")
+                                .And.Contain((55, 55), "ks")
+                                .And.Contain((56, 56), "ks")
+                                .And.Contain((57, 57), "kssns")
+                                .And.Contain((58, 58), "ks")
+                                .And.Contain((59, 59), "ksns")
+                                .And.Contain((60, 60), "ksnss")
+                                .And.Contain((66, 66), "kkks")
+                                .And.Contain((68, 68), "kktkkkkkts")
+                                .And.Contain((84, 84), "nt")
+                                .And.Contain((85, 85), "ntn")
+                                .And.Contain((86, 86), "nknkk")
+                                .And.Contain((87, 87), "nt")
+                                .And.Contain((91, 91), "nnn")
+                                .And.Contain((92, 92), "nnn")
+                                .And.Contain((93, 93), "nttn")
+                                .And.Contain((98, 98), "kn")
+                                .And.Contain((99, 99), "kn")
+                                .And.Contain((100, 100), "kn")
+                                .And.Contain((215, 215), "c")
+                                .And.Contain((216, 216), "c")
+                                .And.Contain((217, 217), "c")
+                                .And.Contain((246, 250), "c")
+                                .And.Contain((246, 250), "c")
+                                .And.Contain((250, 250), "cc")
+                                .And.Contain((254, 254), "c")
+                                .And.Contain((255, 257), "c")
+                                .And.Contain((258, 258), "c");
+                    });
+        }
 
 #endif
 
@@ -166,10 +223,10 @@ namespace SonarAnalyzer.UnitTest.Rules
                         verifyTokenInfo(info.TokenInfo);
                     });
 
-        private VerifierBuilder CreateBuilder(ProjectType projectType, string fileName)
+        private VerifierBuilder CreateBuilder(ProjectType projectType, params string[] fileNames)
         {
             var testRoot = BasePath + TestContext.TestName;
-            var language = AnalyzerLanguage.FromPath(fileName);
+            var language = AnalyzerLanguage.FromPath(fileNames[0]);
             UtilityAnalyzerBase analyzer = language.LanguageName switch
             {
                 LanguageNames.CSharp => new TestTokenTypeAnalyzer_CS(testRoot, projectType == ProjectType.Test),
@@ -178,7 +235,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             };
             return new VerifierBuilder()
                 .AddAnalyzer(() => analyzer)
-                .AddPaths(fileName)
+                .AddPaths(fileNames)
                 .WithBasePath(BasePath)
                 .WithOptions(ParseOptionsHelper.Latest(language))
                 .WithProtobufPath(@$"{testRoot}\token-type.pb");
