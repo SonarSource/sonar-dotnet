@@ -87,5 +87,6 @@ namespace StyleCop.Analyzers.Lightup
         public const SyntaxKind InterpolatedSingleLineRawStringStartToken = (SyntaxKind)9072;
         public const SyntaxKind InterpolatedMultiLineRawStringStartToken = (SyntaxKind)9073;
         public const SyntaxKind InterpolatedRawStringEndToken = (SyntaxKind)9074;
+        public const SyntaxKind PragmaChecksumDirectiveTrivia = (SyntaxKind)8560;
     }
 }
