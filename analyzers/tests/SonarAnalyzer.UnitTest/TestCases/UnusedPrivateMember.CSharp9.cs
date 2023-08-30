@@ -131,4 +131,12 @@ namespace Tests.Diagnostics
             return true;
         }
     }
+
+    public class Repro_7904_2
+    {
+        private bool PrintMembers(StringBuilder builder) // Noncompliant
+        {
+            return true;
+        }
+    }
 }
