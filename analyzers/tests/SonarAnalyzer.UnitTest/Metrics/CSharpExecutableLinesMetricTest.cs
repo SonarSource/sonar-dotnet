@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Common
         private const string CshtmlFile = "Test.cshtml";
 
         [TestMethod]
-        public void No_Executable_Lines() =>
+        public void GetLineNumbers_NoExecutableLines() =>
             AssertLineNumbersOfExecutableLines(
 @"using System;
 using System.Linq;
@@ -46,14 +46,14 @@ namespace Test
 }");
 
         [TestMethod]
-        public void Class() =>
+        public void GetLineNumbers_Class() =>
             AssertLineNumbersOfExecutableLines(
 @"class Program
 {
 }");
 
         [TestMethod]
-        public void Checked_Unchecked() =>
+        public void GetLineNumbers_CheckedUnchecked() =>
             AssertLineNumbersOfExecutableLines(
 @"class Program
 {
@@ -69,7 +69,7 @@ namespace Test
 }", 5, 7);
 
         [TestMethod]
-        public void Blocks() =>
+        public void GetLineNumbers_Blocks() =>
             AssertLineNumbersOfExecutableLines(
 @"class Program
 {
@@ -83,7 +83,7 @@ namespace Test
 }", 5, 6, 7, 8);
 
         [TestMethod]
-        public void Statements() =>
+        public void GetLineNumbers_Statements() =>
             AssertLineNumbersOfExecutableLines(
 @"class Program
 {
@@ -95,7 +95,7 @@ namespace Test
 }", 5, 6);
 
         [TestMethod]
-        public void Loops() =>
+        public void GetLineNumbers_Loops() =>
             AssertLineNumbersOfExecutableLines(
 @"class Program
 {
@@ -111,7 +111,7 @@ namespace Test
 }", 5, 7, 8, 9);
 
         [TestMethod]
-        public void Conditionals() =>
+        public void GetLineNumbers_Conditionals() =>
             AssertLineNumbersOfExecutableLines(
 @"class Program
 {
@@ -132,7 +132,7 @@ namespace Test
 }", 5, 6, 7, 12, 14, 15);
 
         [TestMethod]
-        public void Conditionals2() =>
+        public void GetLineNumbers_Conditionals2() =>
             AssertLineNumbersOfExecutableLines(
 @"class Program
 {
@@ -152,7 +152,7 @@ namespace Test
 }", 5, 6, 7, 9, 11, 12, 14);
 
         [TestMethod]
-        public void Yields() =>
+        public void GetLineNumbers_Yields() =>
             AssertLineNumbersOfExecutableLines(
 @"using System.Collections.Generic;
 
@@ -169,7 +169,7 @@ namespace Test
 }", 9, 10);
 
         [TestMethod]
-        public void AccessAndInvocation() =>
+        public void GetLineNumbers_AccessAndInvocation() =>
             AssertLineNumbersOfExecutableLines(
 @"class Program
 {
@@ -181,7 +181,7 @@ namespace Test
 }", 5, 6);
 
         [TestMethod]
-        public void Initialization() =>
+        public void GetLineNumbers_Initialization() =>
             AssertLineNumbersOfExecutableLines(
 @"class Program
 {
@@ -201,7 +201,7 @@ namespace Test
 }", 8, 12);
 
         [TestMethod]
-        public void Property_Set() =>
+        public void GetLineNumbers_PropertySet() =>
             AssertLineNumbersOfExecutableLines(
 @"class Program
 {
@@ -214,7 +214,7 @@ namespace Test
 }", 7);
 
         [TestMethod]
-        public void Property_Get() =>
+        public void GetLineNumbers_PropertyGet() =>
             AssertLineNumbersOfExecutableLines(
 @"class Program
 {
@@ -227,7 +227,7 @@ namespace Test
 }");
 
         [TestMethod]
-        public void Lambdas() =>
+        public void GetLineNumbers_Lambdas() =>
             AssertLineNumbersOfExecutableLines(
 @"using System;
 using System.Linq;
@@ -244,7 +244,7 @@ class Program
 }", 8, 9, 10);
 
         [TestMethod]
-        public void TryCatch() =>
+        public void GetLineNumbers_TryCatch() =>
             AssertLineNumbersOfExecutableLines(
 @"using System;
 class Program
@@ -268,7 +268,7 @@ class Program
 }", 8, 13);
 
         [TestMethod]
-        public void Test_16() =>
+        public void GetLineNumbers_MultipleStatementsSameLine() =>
             AssertLineNumbersOfExecutableLines(
 @"using System;
 class Program
@@ -280,7 +280,7 @@ class Program
 }", 5, 6);
 
         [TestMethod]
-        public void Test_17() =>
+        public void GetLineNumbers_DoWhile() =>
             AssertLineNumbersOfExecutableLines(
 @"class Program
 {
@@ -300,7 +300,7 @@ class Program
 }", 5);
 
         [TestMethod]
-        public void Class_Excluded() =>
+        public void GetLineNumbers_ClassExcluded() =>
             AssertLineNumbersOfExecutableLines(
 @"using System.Diagnostics.CodeAnalysis;
 public class ComplicatedCode
@@ -331,7 +331,7 @@ public class ComplicatedCode
 public class SomeAttribute : System.Attribute { }", 19, 22);
 
         [TestMethod]
-        public void AttributeOnLocalFunction_Excluded() =>
+        public void GetLineNumbers_AttributeOnLocalFunctionExcluded() =>
             AssertLineNumbersOfExecutableLines(
 @"using System.Diagnostics.CodeAnalysis;
 public class ComplicatedCode
@@ -359,7 +359,7 @@ public class SomeAttribute : System.Attribute { }", 8, 14);
         [DataRow("ExcludeFromCodeCoverageAttribute")]
         [DataRow("ExcludeFromCodeCoverageAttribute()")]
         [DataRow("System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()")]
-        public void ExcludeFromCodeCoverage_AttributeVariants(string attribute) =>
+        public void GetLineNumbers_ExcludeFromCodeCoverage_AttributeVariants(string attribute) =>
             AssertLineNumbersOfExecutableLines(
 @$"using System.Diagnostics.CodeAnalysis;
 public class ComplicatedCode
@@ -373,7 +373,7 @@ public class ComplicatedCode
 }}");
 
         [TestMethod]
-        public void Record_Excluded() =>
+        public void GetLineNumbers_RecordExcluded() =>
             AssertLineNumbersOfExecutableLines(
 @"using System.Diagnostics.CodeAnalysis;
 [ExcludeFromCodeCoverage]
@@ -386,7 +386,7 @@ record Program
 }");
 
         [TestMethod]
-        public void RecordStruct_Excluded() =>
+        public void GetLineNumbers_RecordStructExcluded() =>
             AssertLineNumbersOfExecutableLines(
 @"using System.Diagnostics.CodeAnalysis;
 [ExcludeFromCodeCoverage]
@@ -399,7 +399,7 @@ record struct Program
 }");
 
         [TestMethod]
-        public void Struct_Excluded() =>
+        public void GetLineNumbers_StructExcluded() =>
             AssertLineNumbersOfExecutableLines(
 @"using System.Diagnostics.CodeAnalysis;
 namespace project_1
@@ -415,7 +415,7 @@ namespace project_1
 }");
 
         [TestMethod]
-        public void Constructor_Excluded() =>
+        public void GetLineNumbers_ConstructorExcluded() =>
             AssertLineNumbersOfExecutableLines(
 @"using System.Diagnostics.CodeAnalysis;
 class Program
@@ -437,7 +437,7 @@ class Program
 #if NET
 
         [TestMethod]
-        public void Property_Excluded() =>
+        public void GetLineNumbers_PropertyExcluded() =>
             AssertLineNumbersOfExecutableLines(
 @"using System.Diagnostics.CodeAnalysis;
 class EventClass
@@ -481,7 +481,7 @@ class EventClass
 #endif
 
         [TestMethod]
-        public void Event_Excluded() =>
+        public void GetLineNumbers_EventExcluded() =>
             AssertLineNumbersOfExecutableLines(
 @"using System.Diagnostics.CodeAnalysis;
 class EventClass
@@ -510,7 +510,7 @@ class EventClass
 }", 15, 22, 23);
 
         [TestMethod]
-        public void PartialClasses_Excluded() =>
+        public void GetLineNumbers_PartialClassesExcluded() =>
             AssertLineNumbersOfExecutableLines(
 @"using System.Diagnostics.CodeAnalysis;
 [ExcludeFromCodeCoverage]
@@ -536,7 +536,7 @@ partial class AnotherClass
 } ", 20);
 
         [TestMethod]
-        public void PartialMethods_Excluded() =>
+        public void GetLineNumbers_PartialMethodsExcluded() =>
             AssertLineNumbersOfExecutableLines(
 @"using System.Diagnostics.CodeAnalysis;
 partial class Program
@@ -568,14 +568,14 @@ partial class AnotherClass
 }");
 
         [TestMethod]
-        public void AttributeAreIgnored() =>
+        public void GetLineNumbers_AttributeAreIgnored() =>
             AssertLineNumbersOfExecutableLines(
 @"using System.Reflection;
 using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo(""FOO"")]");
 
         [TestMethod]
-        public void OnlyAttributeAreIgnored() =>
+        public void GetLineNumbers_OnlyAttributeAreIgnored() =>
             AssertLineNumbersOfExecutableLines(
 @"[AnAttribute]
 public class Foo
@@ -590,7 +590,7 @@ public class Foo
 public class AnAttribute : System.Attribute { }", 7);
 
         [TestMethod]
-        public void AttributeOnLambdaIsIgnored() =>
+        public void GetLineNumbers_AttributeOnLambdaIsIgnored() =>
             AssertLineNumbersOfExecutableLines(
 @"using System;
 using System.Linq;
@@ -608,7 +608,7 @@ class Test
 public class AnAttribute : System.Attribute { }", 10);
 
         [TestMethod]
-        public void ExpressionsAreCounted() =>
+        public void GetLineNumbers_ExpressionsAreCounted() =>
             AssertLineNumbersOfExecutableLines(
 @"class Program
 {
@@ -622,7 +622,7 @@ public class AnAttribute : System.Attribute { }", 10);
 }", 5, 7);
 
         [TestMethod]
-        public void MultiLineLoop() =>
+        public void GetLineNumbers_MultiLineLoop() =>
             AssertLineNumbersOfExecutableLines(
 @"class Program
 {
@@ -640,7 +640,7 @@ public class AnAttribute : System.Attribute { }", 10);
 }", 5);
 
         [TestMethod]
-        public void SwitchStatementWithMultipleCases() =>
+        public void GetLineNumbers_SwitchStatementWithMultipleCases() =>
             AssertLineNumbersOfExecutableLines(
 @"class Program
 {
@@ -661,7 +661,7 @@ public class AnAttribute : System.Attribute { }", 10);
 }", 5, 8, 9, 11, 12, 14);
 
         [TestMethod]
-        public void SwitchExpressionWithMultipleCases() =>
+        public void GetLineNumbers_SwitchExpressionWithMultipleCases() =>
             AssertLineNumbersOfExecutableLines(
 @"class Program
 {
@@ -684,7 +684,7 @@ public class AnAttribute : System.Attribute { }", 10);
 }", 13, 14);
 
         [TestMethod]
-        public void MultiLineInterpolatedString() =>
+        public void GetLineNumbers_MultiLineInterpolatedString() =>
             AssertLineNumbersOfExecutableLines(
 @"class Program
 {
@@ -699,7 +699,7 @@ public class AnAttribute : System.Attribute { }", 10);
 }", 6);
 
         [TestMethod]
-        public void MultiLineInterpolatedStringWithMultipleLineExpressions() =>
+        public void GetLineNumbers_MultiLineInterpolatedStringWithMultipleLineExpressions() =>
             AssertLineNumbersOfExecutableLines(
 @"public class C
 {
@@ -716,7 +716,7 @@ public class AnAttribute : System.Attribute { }", 10);
 }", 5, 6, 7, 8);
 
         [TestMethod]
-        public void UsingDeclaration() =>
+        public void GetLineNumbers_UsingDeclaration() =>
             AssertLineNumbersOfExecutableLines(
 @"class Program
 {
@@ -727,7 +727,7 @@ public class AnAttribute : System.Attribute { }", 10);
 }");
 
         [TestMethod]
-        public void LocalFunctions() =>
+        public void GetLineNumbers_LocalFunctions() =>
             AssertLineNumbersOfExecutableLines(
 @"class Program
 {
@@ -753,7 +753,7 @@ public class AnAttribute : System.Attribute { }", 10);
 #if NET
 
         [TestMethod]
-        public void IndicesAndRanges() =>
+        public void GetLineNumbers_IndicesAndRanges() =>
             AssertLineNumbersOfExecutableLines(
 @"using System;
 class Program
@@ -782,7 +782,7 @@ class Program
 #endif
 
         [TestMethod]
-        public void NullCoalescingAssignment() =>
+        public void GetLineNumbers_NullCoalescingAssignment() =>
             AssertLineNumbersOfExecutableLines(
 @"using System;
 using System.Collections.Generic;
@@ -798,7 +798,7 @@ class Program
 }", 10);
 
         [TestMethod]
-        public void AssignmentAndDeclarationInTheSameDeconstruction() =>
+        public void GetLineNumbers_AssignmentAndDeclarationInTheSameDeconstruction() =>
             AssertLineNumbersOfExecutableLines(
 @"using System;
 using System.Collections.Generic;
@@ -814,7 +814,7 @@ class Program
 }", 10);
 
         [TestMethod]
-        public void NullCoalescingOperator() =>
+        public void GetLineNumbers_NullCoalescingOperator() =>
             AssertLineNumbersOfExecutableLines(
 @"using System;
 using System.Collections.Generic;
@@ -829,7 +829,7 @@ class Program
 }", 8, 9);
 
         [TestMethod]
-        public void SingleLinePatternMatching() =>
+        public void GetLineNumbers_SingleLinePatternMatching() =>
             AssertLineNumbersOfExecutableLines(
 @"static class Program
 {
@@ -838,7 +838,7 @@ class Program
 }");
 
         [TestMethod]
-        public void MultiLinePatternMatching() =>
+        public void GetLineNumbers_MultiLinePatternMatching() =>
             AssertLineNumbersOfExecutableLines(
 @"using System;
 using System.Collections.Generic;
@@ -858,7 +858,7 @@ class Program
 }", 7, 12, 14);
 
         [TestMethod]
-        public void MultiLineInvocation() =>
+        public void GetLineNumbers_MultiLineInvocation() =>
             AssertLineNumbersOfExecutableLines(
 @"using System;
 using System.Collections.Generic;
@@ -878,7 +878,7 @@ class Program
         [DataTestMethod]
         [DataRow(RazorFile)]
         [DataRow(CshtmlFile)]
-        public void Razor_No_Executable_Lines(string fileName) =>
+        public void GetLineNumbers_Razor_NoExecutableLines(string fileName) =>
             AssertLineNumbersOfExecutableLinesRazor("""
 <p>Hello world!</p>
 @* Noncompliant *@
@@ -893,7 +893,7 @@ class Program
         [DataTestMethod]
         [DataRow(RazorFile, 4, 6)]
         [DataRow(CshtmlFile)]
-        public void Razor_FieldReference(string fileName, params int[] expectedExecutableLines) =>
+        public void GetLineNumbers_Razor_FieldReference(string fileName, params int[] expectedExecutableLines) =>
             AssertLineNumbersOfExecutableLinesRazor("""
 @page "/razor"
 @using TestCases
@@ -910,7 +910,7 @@ class Program
         [DataTestMethod]
         [DataRow(RazorFile, 2, 10, 15)]
         [DataRow(CshtmlFile)]
-        public void Razor_MethodReferenceAndCall(string fileName, params int[] expectedExecutableLines) =>
+        public void GetLineNumbers_Razor_MethodReferenceAndCall(string fileName, params int[] expectedExecutableLines) =>
             AssertLineNumbersOfExecutableLinesRazor("""
 <button @onclick="IncrementCount">Increment</button> <!-- Not counted -->
 <p> @(ShowAmount()) </p> <!-- +1 -->
@@ -934,7 +934,7 @@ class Program
         [DataTestMethod]
         [DataRow(RazorFile, 1)]
         [DataRow(CshtmlFile)]
-        public void Razor_PropertyReference(string fileName, params int[] expectedExecutableLines) =>
+        public void GetLineNumbers_Razor_PropertyReference(string fileName, params int[] expectedExecutableLines) =>
             AssertLineNumbersOfExecutableLinesRazor("""
 @IncrementAmount <!-- +1 -->
 
@@ -947,7 +947,7 @@ class Program
         [DataTestMethod]
         [DataRow(RazorFile, 4, 6, 10, 17)]
         [DataRow(CshtmlFile)]
-        public void Razor_HtmlAndCode(string fileName, params int[] expectedExecutableLines) =>
+        public void GetLineNumbers_Razor_HtmlAndCode(string fileName, params int[] expectedExecutableLines) =>
             AssertLineNumbersOfExecutableLinesRazor("""
 <button @onclick="AddTodo">Add todo</button>
 
@@ -976,7 +976,7 @@ class Program
         [DataTestMethod]
         [DataRow(RazorFile)]
         [DataRow(CshtmlFile)]
-        public void Razor_AssignmentAndDeclarationInTheSameDeconstruction(string fileName, params int[] expectedExecutableLines) =>
+        public void GetLineNumbers_Razor_AssignmentAndDeclarationInTheSameDeconstruction(string fileName, params int[] expectedExecutableLines) =>
             AssertLineNumbersOfExecutableLinesRazor("""
 @code {
     int? i = null;
@@ -987,7 +987,7 @@ class Program
         [DataTestMethod]
         [DataRow(RazorFile, 4, 5)]
         [DataRow(CshtmlFile)]
-        public void Razor_MultiLineInvocation(string fileName, params int[] expectedExecutableLines) =>
+        public void GetLineNumbers_Razor_MultiLineInvocation(string fileName, params int[] expectedExecutableLines) =>
             AssertLineNumbersOfExecutableLinesRazor("""
 @code {
     public static bool Foo(int a, int b)
@@ -1003,7 +1003,7 @@ class Program
         [DataTestMethod]
         [DataRow(RazorFile)]
         [DataRow(CshtmlFile)]
-        public void Razor_NullCoalescingAssignment(string fileName, params int[] expectedExecutableLines) =>
+        public void GetLineNumbers_Razor_NullCoalescingAssignment(string fileName, params int[] expectedExecutableLines) =>
             AssertLineNumbersOfExecutableLinesRazor("""
 @code {
     List<int> numbers = null;
@@ -1036,7 +1036,7 @@ class Program
         [DataTestMethod]
         [DataRow(RazorFile, 4, 5)]
         [DataRow(CshtmlFile)]
-        public void Razor_NullCoalescingOperator(string fileName, params int[] expectedExecutableLines) =>
+        public void GetLineNumbers_Razor_NullCoalescingOperator(string fileName, params int[] expectedExecutableLines) =>
             AssertLineNumbersOfExecutableLinesRazor("""
 @code {
     double SumNumbers(List<double[]> setsOfNumbers, int indexOfSetToSum)
@@ -1050,7 +1050,7 @@ class Program
         [DataTestMethod]
         [DataRow(RazorFile, 2)]
         [DataRow(CshtmlFile)]
-        public void Razor_LocalFunctions(string fileName, params int[] expectedExecutableLines) =>
+        public void GetLineNumbers_Razor_LocalFunctions(string fileName, params int[] expectedExecutableLines) =>
             AssertLineNumbersOfExecutableLinesRazor("""
 @code {
     int y = LocalFunction(); // Not counted (.razor only)
