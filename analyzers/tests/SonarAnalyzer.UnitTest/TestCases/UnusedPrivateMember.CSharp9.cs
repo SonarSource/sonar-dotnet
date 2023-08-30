@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Runtime.InteropServices;
 
 namespace Tests.Diagnostics
@@ -118,5 +119,24 @@ namespace Tests.Diagnostics
 
         [DllImport("user32.dll")]
         private static extern bool ExternalMethod(ref PrivateRecordRef reference);
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/7904
+    public sealed record Repro_7904
+    {
+        // Used by the runtime to create a string representation of the record.
+        // See also https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/record#printmembers-formatting-in-derived-records
+        private bool PrintMembers(StringBuilder builder) // Noncompliant FP
+        {
+            return true;
+        }
+    }
+
+    public class Repro_7904_2
+    {
+        private bool PrintMembers(StringBuilder builder) // Noncompliant
+        {
+            return true;
+        }
     }
 }

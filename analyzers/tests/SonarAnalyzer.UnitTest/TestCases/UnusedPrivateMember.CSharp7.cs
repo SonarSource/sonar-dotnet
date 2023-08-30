@@ -199,4 +199,23 @@ namespace Tests.Diagnostics
             B
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/6699
+    public class Repro_6699
+    {
+        public void MethodUsingLocalMethod()
+        {
+            void LocalMethod() { } // FN
+        }
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/6724
+    public class Repro_6724
+    {
+        public int PrivateGetter { private get; set; } // FN
+        public int PrivateSetter { get; private set; } // FN
+
+        public int ExpressionBodiedPropertyWithPrivateGetter { private get => 1; set => _ = value; } // FN
+        public int ExpressionBodiedPropertyWithPrivateSetter { get => 1; private set => _ = value; } // FN
+    }
 }

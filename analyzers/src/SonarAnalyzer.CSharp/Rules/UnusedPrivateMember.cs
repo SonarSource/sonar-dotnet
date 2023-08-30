@@ -33,13 +33,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly DiagnosticDescriptor RuleS1144 = DescriptorFactory.Create(S1144DiagnosticId, S1144MessageFormat);
         private static readonly DiagnosticDescriptor RuleS4487 = DescriptorFactory.Create(S4487DiagnosticId, S4487MessageFormat);
-        private static readonly ImmutableArray<KnownType> IgnoredTypes =
-            ImmutableArray.Create(
-                KnownType.UnityEditor_AssetModificationProcessor,
-                KnownType.UnityEditor_AssetPostprocessor,
-                KnownType.UnityEngine_MonoBehaviour,
-                KnownType.UnityEngine_ScriptableObject,
-                KnownType.Microsoft_EntityFrameworkCore_Migrations_Migration);
+
+        private static readonly ImmutableArray<KnownType> IgnoredTypes = ImmutableArray.Create(
+            KnownType.UnityEditor_AssetModificationProcessor,
+            KnownType.UnityEditor_AssetPostprocessor,
+            KnownType.UnityEngine_MonoBehaviour,
+            KnownType.UnityEngine_ScriptableObject,
+            KnownType.Microsoft_EntityFrameworkCore_Migrations_Migration);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(RuleS1144, RuleS4487);
         protected override bool EnableConcurrentExecution => false;
