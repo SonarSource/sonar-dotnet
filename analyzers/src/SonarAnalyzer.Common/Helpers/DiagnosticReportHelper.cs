@@ -25,8 +25,6 @@ namespace SonarAnalyzer.Helpers
 {
     public static class DiagnosticReportHelper
     {
-        #region Line Number
-
         public static int GetLineNumberToReport(this SyntaxNode self) =>
             self.GetLocation().GetLineNumberToReport();
 
@@ -41,8 +39,6 @@ namespace SonarAnalyzer.Helpers
 
         public static int GetLineNumberToReport(this FileLinePositionSpan self) =>
             self.StartLinePosition.GetLineNumberToReport();
-
-        #endregion Line Number
 
         public static string ToSentence(this IEnumerable<string> words,
             bool quoteWords = false,
