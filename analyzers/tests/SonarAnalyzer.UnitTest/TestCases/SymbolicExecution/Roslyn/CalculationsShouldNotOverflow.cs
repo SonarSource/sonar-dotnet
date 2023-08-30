@@ -130,12 +130,12 @@ public class Sample
         i -= 100;               // Noncompliant
 
         i = 2147483600;
-        i *= 100;               // FN
+        i *= 100;               // Noncompliant
 
         var j = 10;
         i = 2147483600;
         i /= j;
-        _ = i * 100;            // FN
+        _ = i * 100;            // Noncompliant
 
         i = 2147483600;
         i <<= 1;                // Compliant
@@ -145,19 +145,19 @@ public class Sample
 
         i = 2;
         i &= j;
-        _ = i * 2147483600;     // FN
+        _ = i * 2147483600;     // Noncompliant
 
         i = 2;
         i |= j;
-        _ = i * 2147483600;     // FN
+        _ = i * 2147483600;     // Noncompliant
 
         i = 2;
         i ^= j;
-        _ = i * 2147483600;     // FN
+        _ = i * 2147483600;     // Noncompliant
 
         i = 2;
         i %= j;
-        _ = i * 2147483600;     // FN
+        _ = i * 2147483600;     // Noncompliant
     }
 
     public void Ranges(int i)
