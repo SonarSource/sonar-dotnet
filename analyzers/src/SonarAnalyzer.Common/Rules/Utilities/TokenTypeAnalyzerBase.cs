@@ -152,7 +152,7 @@ namespace SonarAnalyzer.Rules
                 tokenType == TokenType.UnknownTokentype
                 || (string.IsNullOrWhiteSpace(token.Text) && tokenType != TokenType.StringLiteral)
                 || !token.GetLocation().TryEnsureMappedLocation(out var mappedLocation)
-                || (!string.IsNullOrWhiteSpace(filePath) && !string.Equals(mappedLocation.GetLineSpan().Path, filePath, StringComparison.OrdinalIgnoreCase))
+                || !(string.IsNullOrWhiteSpace(filePath) || string.Equals(mappedLocation.GetLineSpan().Path, filePath, StringComparison.OrdinalIgnoreCase))
                     ? null
                     : new() { TokenType = tokenType, TextRange = GetTextRange(token.GetLocation().GetLineSpan()) };
 
