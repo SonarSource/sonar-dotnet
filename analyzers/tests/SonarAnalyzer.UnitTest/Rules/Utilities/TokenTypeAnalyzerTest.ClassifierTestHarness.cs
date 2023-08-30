@@ -25,8 +25,9 @@ public partial class TokenTypeAnalyzerTest
         {
             var (tree, model, expectedTokens) = ParseTokens(code, ignoreCompilationErrors);
             model = allowSemanticModel ? model : null; // The TokenClassifier will throw if the semantic model is used.
-            var tokenClassifier = new TokenClassifier(model, false);
-            var triviaClassifier = new TriviaClassifier();
+            // filePath for the snippet is defined later by TestHelper.CompileCS -> ignore filePath when classifying tokens and trivia
+            var tokenClassifier = new TokenClassifier(model, false, string.Empty);
+            var triviaClassifier = new TriviaClassifier(string.Empty);
             expectedTokens.Should().SatisfyRespectively(expectedTokens.Select(
                 (Func<ExpectedToken, Action<ExpectedToken>>)(_ => token => CheckClassifiedToken(tokenClassifier, triviaClassifier, tree, token))));
         }
