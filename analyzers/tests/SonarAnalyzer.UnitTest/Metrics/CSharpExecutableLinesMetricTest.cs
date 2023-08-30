@@ -26,7 +26,9 @@ namespace SonarAnalyzer.UnitTest.Common
     [TestClass]
     public class CSharpExecutableLinesMetricTest
     {
-        private static readonly VerifierBuilder DummyWithLocationMapping = new VerifierBuilder<DummyAnalyzerWithLocationMapping>();
+
+        private const string RazorFile = "Test.razor";
+        private const string CshtmlFile = "Test.cshtml";
 
         [TestMethod]
         public void No_Executable_Lines() =>
@@ -872,10 +874,12 @@ class Program
     public static int Bar() => 42;
 }", 7, 8);
 
-#if NET
+        //#if NET
 
-        [TestMethod]
-        public void Razor_No_Executable_Lines() =>
+        [DataTestMethod]
+        [DataRow(RazorFile)]
+        [DataRow(CshtmlFile)]
+        public void Razor_No_Executable_Lines(string fileName) =>
             AssertLineNumbersOfExecutableLinesRazor("""
 <p>Hello world!</p>
 @* Noncompliant *@
@@ -885,10 +889,12 @@ class Program
     {
     }
 }
-""");
+""", fileName);
 
-        [TestMethod]
-        public void Razor_FieldReference() =>
+        [DataTestMethod]
+        [DataRow(RazorFile, 4, 6)]
+        [DataRow(CshtmlFile)]
+        public void Razor_FieldReference(string fileName, params int[] expectedExecutableLines) =>
             AssertLineNumbersOfExecutableLinesRazor("""
 @page "/razor"
 @using TestCases
@@ -900,10 +906,12 @@ class Program
 @code {
     private int currentCount = 0;
 }
-""", 4, 6);
+""", fileName, expectedExecutableLines);
 
-        [TestMethod]
-        public void Razor_MethodReferenceAndCall() =>
+        [DataTestMethod]
+        [DataRow(RazorFile, 2, 10)]
+        [DataRow(CshtmlFile)]
+        public void Razor_MethodReferenceAndCall(string fileName, params int[] expectedExecutableLines) =>
             AssertLineNumbersOfExecutableLinesRazor("""
 <button @onclick="IncrementCount">Increment</button> <!-- Not counted -->
 <p> @(ShowAmount()) </p> <!-- +1 -->
@@ -920,10 +928,12 @@ class Program
     private string ShowAmount() =>
         $"Amount: {IncrementAmount}"; // Not counted
 }
-""", 2, 10);
+""", fileName, expectedExecutableLines);
 
-        [TestMethod]
-        public void Razor_PropertyReference() =>
+        [DataTestMethod]
+        [DataRow(RazorFile, 1)]
+        [DataRow(CshtmlFile)]
+        public void Razor_PropertyReference(string fileName, params int[] expectedExecutableLines) =>
             AssertLineNumbersOfExecutableLinesRazor("""
 @IncrementAmount <!-- +1 -->
 
@@ -931,10 +941,12 @@ class Program
     [Parameter]
     public int IncrementAmount { get; set; } = 1;
 }
-""", 1);
+""", fileName, expectedExecutableLines);
 
-        [TestMethod]
-        public void Razor_HtmlAndCode() =>
+        [DataTestMethod]
+        [DataRow(RazorFile, 4, 6, 10, 17)]
+        [DataRow(CshtmlFile)]
+        public void Razor_HtmlAndCode(string fileName, params int[] expectedExecutableLines) =>
             AssertLineNumbersOfExecutableLinesRazor("""
 <button @onclick="AddTodo">Add todo</button>
 
@@ -958,19 +970,23 @@ class Program
         int LocalMethod() => 42;
     }
 }
-""", 4, 6, 10, 17);
+""", fileName, expectedExecutableLines);
 
-        [TestMethod]
-        public void Razor_AssignmentAndDeclarationInTheSameDeconstruction() =>
+        [DataTestMethod]
+        [DataRow(RazorFile)]
+        [DataRow(CshtmlFile)]
+        public void Razor_AssignmentAndDeclarationInTheSameDeconstruction(string fileName, params int[] expectedExecutableLines) =>
             AssertLineNumbersOfExecutableLinesRazor("""
 @code {
     int? i = null;
     (i, int k) = (42, 42); // Not counted
 }
-""");
+""", fileName, expectedExecutableLines);
 
-        [TestMethod]
-        public void Razor_MultiLineInvocation() =>
+        [DataTestMethod]
+        [DataRow(RazorFile, 4, 5)]
+        [DataRow(CshtmlFile)]
+        public void Razor_MultiLineInvocation(string fileName, params int[] expectedExecutableLines) =>
             AssertLineNumbersOfExecutableLinesRazor("""
 @code {
     public static bool Foo(int a, int b)
@@ -981,10 +997,12 @@ class Program
 
     public static int Bar() => 42;
 }
-""", 4, 5);
+""", fileName, expectedExecutableLines);
 
-        [TestMethod]
-        public void Razor_NullCoalescingAssignment() =>
+        [DataTestMethod]
+        [DataRow(RazorFile)]
+        [DataRow(CshtmlFile)]
+        public void Razor_NullCoalescingAssignment(string fileName, params int[] expectedExecutableLines) =>
             AssertLineNumbersOfExecutableLinesRazor("""
 @code {
     List<int> numbers = null;
@@ -992,10 +1010,12 @@ class Program
 
     numbers ??= new List<int>(); // Not counted
 }
-""");
+""", fileName, expectedExecutableLines);
 
-        [TestMethod]
-        public void Razor_MultiLinePatternMatching() =>
+        [DataTestMethod]
+        [DataRow(RazorFile, 4, 9, 11)]
+        [DataRow(CshtmlFile)]
+        public void Razor_MultiLinePatternMatching(string fileName, params int[] expectedExecutableLines) =>
             AssertLineNumbersOfExecutableLinesRazor("""
 @code {
     bool IsLetter(char c)
@@ -1010,10 +1030,12 @@ class Program
         return false; // +1
     }
 }
-""", 4, 9, 11);
+""", fileName, expectedExecutableLines);
 
-        [TestMethod]
-        public void Razor_NullCoalescingOperator() =>
+        [DataTestMethod]
+        [DataRow(RazorFile, 4, 5)]
+        [DataRow(CshtmlFile)]
+        public void Razor_NullCoalescingOperator(string fileName, params int[] expectedExecutableLines) =>
             AssertLineNumbersOfExecutableLinesRazor("""
 @code {
     double SumNumbers(List<double[]> setsOfNumbers, int indexOfSetToSum)
@@ -1022,10 +1044,12 @@ class Program
                 ?? double.NaN; // +1
     }
 }
-""", 4, 5);
+""", fileName, expectedExecutableLines);
 
-        [TestMethod]
-        public void Razor_LocalFunctions() =>
+        [DataTestMethod]
+        [DataRow(RazorFile, 2)]
+        [DataRow(CshtmlFile)]
+        public void Razor_LocalFunctions(string fileName, params int[] expectedExecutableLines) =>
             AssertLineNumbersOfExecutableLinesRazor("""
 @code {
     int y = LocalFunction(); // Not counted
@@ -1033,9 +1057,9 @@ class Program
 
     int LocalFunction() => 0; // Not counted
 }
-""", 2);
+""", fileName, expectedExecutableLines);
 
-#endif
+//#endif
 
         private static void AssertLineNumbersOfExecutableLines(string code, params int[] expectedExecutableLines)
         {
@@ -1043,11 +1067,14 @@ class Program
             Metrics.CSharp.CSharpExecutableLinesMetric.GetLineNumbers(syntaxTree, semanticModel).Should().BeEquivalentTo(expectedExecutableLines);
         }
 
-        public static void AssertLineNumbersOfExecutableLinesRazor(string code, params int[] expectedExecutableLines)
+        private static void AssertLineNumbersOfExecutableLinesRazor(string code, string fileName, params int[] expectedExecutableLines)
         {
-            const string fileName = "Test.razor";
             using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = true };
-            var compilation = DummyWithLocationMapping.AddSnippet(code, fileName).Build().Compile(false).Single();
+            var compilation = new VerifierBuilder<DummyAnalyzerWithLocationMapping>()
+                .AddSnippet(code, fileName)
+                .Build()
+                .Compile(false)
+                .Single();
 
             var syntaxTree = compilation.SyntaxTrees.Single(x => x.ToString().Contains(fileName));
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
