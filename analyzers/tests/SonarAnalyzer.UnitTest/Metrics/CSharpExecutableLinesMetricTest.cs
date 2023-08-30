@@ -1016,7 +1016,7 @@ class Program
         [DataTestMethod]
         [DataRow(RazorFile, 4, 9, 11)]
         [DataRow(CshtmlFile)]
-        public void Razor_MultiLinePatternMatching(string fileName, params int[] expectedExecutableLines) =>
+        public void GetLineNumbers_Razor_MultiLinePatternMatching(string fileName, params int[] expectedExecutableLines) =>
             AssertLineNumbersOfExecutableLinesRazor("""
 @code {
     bool IsLetter(char c)
