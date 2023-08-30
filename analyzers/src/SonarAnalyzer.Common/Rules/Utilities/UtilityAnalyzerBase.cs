@@ -122,9 +122,6 @@ namespace SonarAnalyzer.Rules
                 ? root.GetMappedFilePathFromRoot()
                 : tree.FilePath;
 
-        protected string GetMappedFilePath(SyntaxNode root) =>
-            root.SyntaxTree.FilePath;
-
         private bool ShouldGenerateMetrics(SonarCompilationReportingContext context, SyntaxTree tree) =>
             (AnalyzeUnchangedFiles || !context.IsUnchanged(tree))
             && ShouldGenerateMetrics(tree, context.Compilation);

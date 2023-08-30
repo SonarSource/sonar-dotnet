@@ -54,13 +54,6 @@ namespace SonarAnalyzer.Rules
 
         protected sealed override TokenTypeInfo CreateMessage(SyntaxTree tree, SemanticModel model)
         {
-            // If the syntax tree is constructed for a razor generated file, we need to provide the original file path.
-            var filePath = syntaxTree.FilePath;
-            if (GeneratedCodeRecognizer.IsRazorGeneratedFile(syntaxTree) && syntaxTree.GetRoot() is var root && root.ContainsDirectives)
-            {
-                filePath = GetMappedFilePath(root);
-            }
-
             var tokens = syntaxTree.GetRoot().DescendantTokens();
             var identifierTokenKind = Language.SyntaxKind.IdentifierToken;  // Performance optimization
             var skipIdentifierTokens = tokens
@@ -68,6 +61,7 @@ namespace SonarAnalyzer.Rules
                 .Skip(IdentifierTokenCountThreshold)
                 .Any();
 
+            var filePath = syntaxTree.GetRoot().GetMappedFilePathFromRoot(); // For a razor generated file, we need the original file path.
             var tokenClassifier = GetTokenClassifier(semanticModel, skipIdentifierTokens, filePath);
             var triviaClassifier = GetTriviaClassifier(filePath);
             var spans = new List<TokenInfo>();
