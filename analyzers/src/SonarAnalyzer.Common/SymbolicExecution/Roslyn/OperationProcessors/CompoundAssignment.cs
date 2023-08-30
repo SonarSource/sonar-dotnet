@@ -29,25 +29,31 @@ internal sealed class CompoundAssignment : SimpleProcessor<ICompoundAssignmentOp
 
     protected override ProgramState Process(SymbolicContext context, ICompoundAssignmentOperationWrapper assignment)
     {
-        var state = context.SetOperationValue(SymbolicValue.NotNull);
-        if (assignment.Target.TrackedSymbol(state) is { } symbol)
-        {
-            state = state.SetSymbolValue(symbol, SymbolicValue.NotNull);
-            state = CheckForNumberConstraints(state, assignment, symbol);
-        }
-        return state;
+        return CheckForNumberConstraints(context.State, assignment)
+            ?? DoStuff(context, assignment);
     }
 
-    private ProgramState CheckForNumberConstraints(ProgramState state, ICompoundAssignmentOperationWrapper assignment, ISymbol targetSymbol)
+    private ProgramState DoStuff(SymbolicContext context, ICompoundAssignmentOperationWrapper assignment)
+    {
+        var state = context.SetOperationValue(SymbolicValue.NotNull);
+        return assignment.Target.TrackedSymbol(state) is { } symbol
+            ? state.SetSymbolValue(symbol, SymbolicValue.NotNull)
+            : state;
+    }
+
+    private ProgramState CheckForNumberConstraints(ProgramState state, ICompoundAssignmentOperationWrapper assignment)
     {
         if (state[assignment.Target]?.Constraint<NumberConstraint>() is { } leftNumber
             && state[assignment.Value]?.Constraint<NumberConstraint>() is { } rightNumber
             && Calculate(assignment.OperatorKind, leftNumber, rightNumber) is { } constraint)
         {
-            state =  state.SetSymbolConstraint(targetSymbol, constraint);
+            if (assignment.Target.TrackedSymbol(state) is { } targetSymbol)
+            {
+                state = state.SetSymbolConstraint(targetSymbol, constraint);
+            }
             return state.SetOperationConstraint(assignment, constraint);
         }
-        return state;
+        return null;
     }
 
     private static NumberConstraint Calculate(BinaryOperatorKind kind, NumberConstraint left, NumberConstraint right) => kind switch
