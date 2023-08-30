@@ -24,14 +24,11 @@ using static SonarAnalyzer.Protobuf.TokenTypeInfo.Types;
 
 namespace SonarAnalyzer.Rules
 {
-    internal static class LocationExtensions
+    // FIXME: this is temporary - remove it
+    public static class LocationExtensions
     {
-        public static bool TryEnsureMappedLocation(this Location inputLocation, out Location mappedLocation)
-        {
-            // FIXME: implement this method
-            mappedLocation = inputLocation;
-            return true;
-        }
+        public static FileLinePositionSpan GetMappedLineSpanIfAvailable(this Location location) =>
+            !GeneratedCodeRecognizer.IsRazorGeneratedFile(location.SourceTree) ? location.GetLineSpan() : location.GetMappedLineSpan();
     }
 
     public abstract class TokenTypeAnalyzerBase<TSyntaxKind> : UtilityAnalyzerBase<TSyntaxKind, TokenTypeInfo>
@@ -148,13 +145,15 @@ namespace SonarAnalyzer.Rules
                     _ => null,
                 };
 
-            protected TokenInfo TokenInfo(SyntaxToken token, TokenType tokenType) =>
-                tokenType == TokenType.UnknownTokentype
-                || (string.IsNullOrWhiteSpace(token.Text) && tokenType != TokenType.StringLiteral)
-                || !token.GetLocation().TryEnsureMappedLocation(out var mappedLocation)
-                || !(string.IsNullOrWhiteSpace(filePath) || string.Equals(mappedLocation.GetLineSpan().Path, filePath, StringComparison.OrdinalIgnoreCase))
-                    ? null
-                    : new() { TokenType = tokenType, TextRange = GetTextRange(token.GetLocation().GetLineSpan()) };
+            protected TokenInfo TokenInfo(SyntaxToken token, TokenType tokenType)
+            {
+                var span = token.GetLocation().GetMappedLineSpanIfAvailable();
+                return tokenType == TokenType.UnknownTokentype
+                    || (string.IsNullOrWhiteSpace(token.Text) && tokenType != TokenType.StringLiteral)
+                    || !(string.IsNullOrWhiteSpace(filePath) || string.Equals(span.Path, filePath, StringComparison.OrdinalIgnoreCase))
+                        ? null
+                        : new() { TokenType = tokenType, TextRange = GetTextRange(span) };
+            }
 
             protected virtual TokenInfo ClassifyIdentifier(SyntaxToken token)
             {
@@ -198,8 +197,8 @@ namespace SonarAnalyzer.Rules
             }
 
             public TokenInfo ClassifyTrivia(SyntaxTrivia trivia) =>
-                trivia.GetLocation().TryEnsureMappedLocation(out var mappedLocation)
-                && (string.IsNullOrWhiteSpace(filePath) || string.Equals(filePath, mappedLocation.GetLineSpan().Path, StringComparison.OrdinalIgnoreCase))
+                string.IsNullOrWhiteSpace(filePath)
+                || string.Equals(filePath, trivia.GetLocation().GetMappedLineSpanIfAvailable().Path, StringComparison.OrdinalIgnoreCase)
                     ? trivia switch
                     {
                         _ when IsRegularComment(trivia) => TokenInfo(trivia.SyntaxTree, TokenType.Comment, trivia.Span),
