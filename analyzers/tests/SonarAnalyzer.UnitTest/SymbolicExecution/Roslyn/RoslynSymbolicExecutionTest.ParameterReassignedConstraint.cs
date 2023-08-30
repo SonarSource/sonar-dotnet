@@ -222,9 +222,9 @@ public partial class RoslynSymbolicExecutionTest
                 local {{compoundAssignment}} 1;
                 Tag("AfterUnknown", local);
                 """, new PublicMethodArgumentsShouldBeCheckedForNull()).Validator;
-        validator.TagValue("AfterNull").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);    // ToDo: Misses ParameterReassignedConstraint in all cases
+        validator.TagValue("AfterNull").Should().HaveOnlyConstraints(ObjectConstraint.Null);    // ToDo: Misses ParameterReassignedConstraint in all cases
         validator.TagValue("AfterValue").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
-        validator.TagValue("AfterUnknown").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
+        validator.TagValue("AfterUnknown").Should().HaveNoConstraints();
     }
 
     [TestMethod]

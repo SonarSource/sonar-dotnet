@@ -27,25 +27,17 @@ internal sealed class CompoundAssignment : SimpleProcessor<ICompoundAssignmentOp
     protected override ICompoundAssignmentOperationWrapper Convert(IOperation operation) =>
         ICompoundAssignmentOperationWrapper.FromOperation(operation);
 
-    protected override ProgramState Process(SymbolicContext context, ICompoundAssignmentOperationWrapper assignment)
-    {
-        return CheckForNumberConstraints(context.State, assignment)
-            ?? DoStuff(context, assignment);
-    }
+    protected override ProgramState Process(SymbolicContext context, ICompoundAssignmentOperationWrapper assignment) =>
+        ProcessNumericalCompoundAssignment(context, assignment)
+        ?? LearnNotNullFromCompoundAssignment(context.State, assignment)
+        ?? context.State;
 
-    private ProgramState DoStuff(SymbolicContext context, ICompoundAssignmentOperationWrapper assignment)
+    private ProgramState ProcessNumericalCompoundAssignment(SymbolicContext context, ICompoundAssignmentOperationWrapper assignment)
     {
-        var state = context.SetOperationValue(SymbolicValue.NotNull);
-        return assignment.Target.TrackedSymbol(state) is { } symbol
-            ? state.SetSymbolValue(symbol, SymbolicValue.NotNull)
-            : state;
-    }
-
-    private ProgramState CheckForNumberConstraints(ProgramState state, ICompoundAssignmentOperationWrapper assignment)
-    {
-        if (state[assignment.Target]?.Constraint<NumberConstraint>() is { } leftNumber
-            && state[assignment.Value]?.Constraint<NumberConstraint>() is { } rightNumber
-            && Calculate(assignment.OperatorKind, leftNumber, rightNumber) is { } constraint)
+        var state = context.State;
+        var leftNumber = state[assignment.Target]?.Constraint<NumberConstraint>();
+        var rightNumber = state[assignment.Value]?.Constraint<NumberConstraint>();
+        if (leftNumber is { } && rightNumber is { } && Calculate(assignment.OperatorKind, leftNumber, rightNumber) is { } constraint)
         {
             if (assignment.Target.TrackedSymbol(state) is { } targetSymbol)
             {
@@ -53,8 +45,19 @@ internal sealed class CompoundAssignment : SimpleProcessor<ICompoundAssignmentOp
             }
             return state.SetOperationConstraint(assignment, constraint);
         }
+        else if (leftNumber is { }
+            && assignment.Target.TrackedSymbol(state) is { } targetSymbol
+            && state[assignment.Value]?.Constraint<ObjectConstraint>() is { Kind: ConstraintKind.NotNull })
+        {
+            return state.SetSymbolValue(targetSymbol, SymbolicValue.NotNull);
+        }
         return null;
     }
+
+    private ProgramState LearnNotNullFromCompoundAssignment(ProgramState state, ICompoundAssignmentOperationWrapper assignment) =>
+        assignment.Target.TrackedSymbol(state) is { } targetSymbol && targetSymbol.GetSymbolType().IsAny(KnownType.System_String, KnownType.System_Boolean)
+            ? state.SetSymbolValue(targetSymbol, SymbolicValue.NotNull)
+            : null;
 
     private static NumberConstraint Calculate(BinaryOperatorKind kind, NumberConstraint left, NumberConstraint right) => kind switch
     {
