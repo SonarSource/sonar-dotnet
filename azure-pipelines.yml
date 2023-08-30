@@ -15,6 +15,20 @@ pool: '.Net Bubble - GCP'
 variables:
   - group: sonar-dotnet-variables
   - group: sonarsource-build-variables
+  # ensure, it is not used anymore
+  - name: ARTIFACTORY_API_USER
+    value: unset
+  - group: artifactory_access
+  # ARTIFACTORY_URL https://repox.jfrog.io/repox => https://repox.jfrog.io/artifactory
+  # JFROG_URL https://repox.jfrog.io
+  # https://github.com/SonarSource/parent-oss/blob/master/pom.xml#L708-L711
+  - name: ARTIFACTORY_DEPLOY_USERNAME
+    value: $[variables.ARTIFACTORY_QA_DEPLOYER_USERNAME]
+  # ~https://github.com/SonarSource/re-ci-images/blob/master/docker/mvn/settings-private.xml
+  - name: ARTIFACTORY_PRIVATE_USERNAME
+    value: $[variables.ARTIFACTORY_PRIVATE_READER_USERNAME]
+  - name: ARTIFACTORY_QA_READER_USERNAME
+    value: $[variables.ARTIFACTORY_PRIVATE_READER_USERNAME]
   - name: UnitTestProjectPath
     value: 'analyzers\tests\SonarAnalyzer.UnitTest\'
   - name: UnitTestResultsPath
@@ -118,11 +132,11 @@ stages:
           pathToPublish: '$(Build.ArtifactStagingDirectory)/packages'
           artifactName: 'NuGet Packages'
 
-      - task: ArtifactoryNuGet@1
+      - task: JFrogNuGet@1
         displayName: 'Publish SonarAnalyzer.CFG NuGet on repox'
         inputs:
           command: 'push'
-          artifactoryService: 'Repox artifactory'
+          artifactoryConnection: 'repox_qa_deployer_token'
           targetDeployRepo: '$(ARTIFACTORY_NUGET_REPO)'
           pathToNupkg: '$(Build.ArtifactStagingDirectory)/packages/SonarAnalyzer.CFG.*.nupkg'
 
@@ -385,8 +399,7 @@ stages:
       - task: Maven@3
         displayName: 'Maven deploy'
         env:
-          ARTIFACTORY_DEPLOY_USERNAME: $(ARTIFACTORY_DEPLOY_USERNAME)
-          ARTIFACTORY_DEPLOY_PASSWORD: $(ARTIFACTORY_DEPLOY_PASSWORD)
+          ARTIFACTORY_DEPLOY_PASSWORD: $(ARTIFACTORY_QA_DEPLOYER_ACCESS_TOKEN)
           PGP_PASSPHRASE: $(PGP_PASSPHRASE)
           GITHUB_BRANCH: $(Build.SourceBranchName)
           GIT_SHA1: $(Build.SourceVersion)
@@ -486,8 +499,7 @@ stages:
       - task: Maven@3
         displayName: 'Maven install'
         env:
-          ARTIFACTORY_DEPLOY_USERNAME: $(ARTIFACTORY_DEPLOY_USERNAME)
-          ARTIFACTORY_DEPLOY_PASSWORD: $(ARTIFACTORY_DEPLOY_PASSWORD)
+          ARTIFACTORY_DEPLOY_PASSWORD: $(ARTIFACTORY_QA_DEPLOYER_ACCESS_TOKEN)
         inputs:
           goals: 'clean install'
           options: >-
@@ -502,7 +514,8 @@ stages:
       - task: Maven@3
         displayName: 'Maven ITs'
         env:
-          ARTIFACTORY_API_KEY: $(ARTIFACTORY_API_KEY)
+          # For Orchestrator (https://github.com/SonarSource/orchestrator/commit/d5396c75ab77e6088afe58e61b0cd0693ac885f0)
+          ARTIFACTORY_ACCESS_TOKEN: $(ARTIFACTORY_PRIVATE_READER_ACCESS_TOKEN)
           GITHUB_TOKEN: $(GITHUB_TOKEN)
         inputs:
           mavenPomFile: its/pom.xml
@@ -556,8 +569,8 @@ stages:
               print(f'Promoting nuget {artifact} from {sourceRepo} to {targetRepo}')
 
               url = f'$(ARTIFACTORY_URL)/api/move/{sourceRepo}/{artifact}?to=/{targetRepo}/{artifact}'
-              headers = {'Content-Type': 'application/json'}
-              response = requests.post(url, headers=headers, auth=('$(ARTIFACTORY_API_USER)', '$(ARTIFACTORY_API_KEY)'))
+              headers = {'Content-Type': 'application/json', 'Authorization': 'Bearer $(ARTIFACTORY_PROMOTER_ACCESS_TOKEN)'}
+              response = requests.post(url, headers=headers)
 
               fixedBranch = ''
               if not isPr:
@@ -571,6 +584,8 @@ stages:
               promoted = response.status_code == 200
               if not promoted:
                 print('[!] [{0}] Server Error'.format(response.status_code), file=sys.stderr)
+          env:
+            ARTIFACTORY_PROMOTER_ACCESS_TOKEN: $(ARTIFACTORY_PROMOTER_ACCESS_TOKEN)
 
     - job: nugetBurgrFailed
       dependsOn: promoteRepox
