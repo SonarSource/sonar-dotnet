@@ -908,7 +908,7 @@ class Program
 """, fileName, expectedExecutableLines);
 
         [DataTestMethod]
-        [DataRow(RazorFile, 2, 10)]
+        [DataRow(RazorFile, 2, 10, 15)]
         [DataRow(CshtmlFile)]
         public void Razor_MethodReferenceAndCall(string fileName, params int[] expectedExecutableLines) =>
             AssertLineNumbersOfExecutableLinesRazor("""
@@ -924,8 +924,10 @@ class Program
         IncrementAmount += 1; // +1
     }
 
-    private string ShowAmount() =>
-        $"Amount: {IncrementAmount}"; // Not counted
+    private string ShowAmount()
+    {
+        return $"Amount: {IncrementAmount}"; // +1
+    }
 }
 """, fileName, expectedExecutableLines);
 
@@ -966,7 +968,7 @@ class Program
         var x = LocalMethod(); // +1
         var y = new DateTime();
 
-        int LocalMethod() => 42;
+        int LocalMethod() => 42; // Not counted
     }
 }
 """, fileName, expectedExecutableLines);
@@ -978,7 +980,7 @@ class Program
             AssertLineNumbersOfExecutableLinesRazor("""
 @code {
     int? i = null;
-    (i, int k) = (42, 42); // Not counted
+    (i, int k) = (42, 42); // Not counted (.razor only)
 }
 """, fileName, expectedExecutableLines);
 
@@ -1007,7 +1009,7 @@ class Program
     List<int> numbers = null;
     int? i = null;
 
-    numbers ??= new List<int>(); // Not counted
+    numbers ??= new List<int>(); // Not counted (.razor only)
 }
 """, fileName, expectedExecutableLines);
 
@@ -1051,7 +1053,7 @@ class Program
         public void Razor_LocalFunctions(string fileName, params int[] expectedExecutableLines) =>
             AssertLineNumbersOfExecutableLinesRazor("""
 @code {
-    int y = LocalFunction(); // Not counted
+    int y = LocalFunction(); // Not counted (.razor only)
     LocalFunction(); // +1
 
     int LocalFunction() => 0; // Not counted
