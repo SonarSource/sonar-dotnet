@@ -328,11 +328,11 @@ Tag(""End"", arg);";
     [DataTestMethod]
     [DataRow("i == 42", 42, true)]
     [DataRow("i == 16", 42, false)]
-    [DataRow("i >= 42", 42, true)]
-    [DataRow("i <= 42", 42, true)]
+    [DataRow("i >= 42", 42, null)]
+    [DataRow("i <= 42", 42, null)]
     [DataRow("i >  42", 42, false)]
     [DataRow("i <  42", 42, false)]
-    public void ConstantNumberPatternSetBoolConstraint(string rangeCondition, int constant, bool expectedBoolConstraint)
+    public void ConstantNumberPatternSetBoolConstraint(string rangeCondition, int constant, bool? expectedBoolConstraint)
     {
         var code = $$"""
             if ({{rangeCondition}})
@@ -341,7 +341,8 @@ Tag(""End"", arg);";
                 Tag("Result", result);
             }
             """;
-        SETestContext.CreateCS(code, "int i").Validator.TagValue("Result").Should().HaveOnlyConstraints(BoolConstraint.From(expectedBoolConstraint), ObjectConstraint.NotNull);
+        var expected = expectedBoolConstraint == null ? null : BoolConstraint.From(expectedBoolConstraint.Value);
+        SETestContext.CreateCS(code, "int i").Validator.TagValue("Result").Should().HaveOnlyConstraints(expected, ObjectConstraint.NotNull);
     }
 
     [DataTestMethod]

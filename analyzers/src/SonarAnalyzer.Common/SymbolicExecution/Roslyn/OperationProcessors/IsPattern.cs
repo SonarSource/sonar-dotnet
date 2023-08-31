@@ -121,7 +121,14 @@ internal sealed class IsPattern : BranchingProcessor<IIsPatternOperationWrapper>
             else if (state.Constraint<NumberConstraint>(constantPattern) is { } constantNumberConstraint
                 && value.Constraint<NumberConstraint>() is { } valueNumberConstraint)
             {
-                return BoolConstraint.From(valueNumberConstraint.Overlaps(constantNumberConstraint));
+                if (constantNumberConstraint.IsSingleValue && valueNumberConstraint.IsSingleValue)
+                {
+                    return BoolConstraint.From(constantNumberConstraint.Min == valueNumberConstraint.Min);
+                }
+                else if (!valueNumberConstraint.Overlaps(constantNumberConstraint))
+                {
+                    return BoolConstraint.False;
+                }
             }
         }
         return null; // We cannot take conclusive decision
