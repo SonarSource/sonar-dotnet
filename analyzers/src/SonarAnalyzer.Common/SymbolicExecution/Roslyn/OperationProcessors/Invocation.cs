@@ -193,8 +193,8 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
 
     private static ProgramState[] ProcessEquals(SymbolicContext context, IOperation leftOperation, IOperation rightOperation)
     {
-        if (context.State.Constraint<BoolConstraint>(leftOperation) is { } rightBool
-            && context.State.Constraint<BoolConstraint>(rightOperation) is { } leftBool)
+        if (context.State.Constraint<BoolConstraint>(leftOperation) is { } leftBool
+            && context.State.Constraint<BoolConstraint>(rightOperation) is { } rightBool)
         {
             return context.SetOperationConstraint(BoolConstraint.From(leftBool == rightBool)).ToArray();
         }

@@ -1275,7 +1275,7 @@ private static bool Equals(object a, object b, object c) => false;";
     }
 
     [TestMethod]
-    public void Invocation_NumberEquals_DoesNotLearn()
+    public void Invocation_NumberEquals_ValueInRange_DoesNotLearn()
     {
         var code = """
                 if (i > 1 && i < 10)
@@ -1285,14 +1285,14 @@ private static bool Equals(object a, object b, object c) => false;";
                 }
                 """;
         var validator = SETestContext.CreateCS(code, "int i").Validator;
-        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull); // Should learn 'false'
+        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
     }
 
     [TestMethod]
     public void Invocation_NumberEquals_RangesDoNotOverlap_LearnsResult()
     {
         var code = $$"""
-                if (i > 0 && j < 0)
+                if (i < 0 && j > 0)
                 {
                     var result = i.Equals(j);
                     Tag("Result", result);
