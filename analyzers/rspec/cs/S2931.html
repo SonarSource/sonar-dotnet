@@ -9,38 +9,37 @@ If a class has an <code>IDisposable</code> field, there can be two situations:</
 and therefore to be itself <code>IDisposable</code>. A class is considered to own an <code>IDisposable</code> field resource if it created the object
 referenced by the field.</p>
 <h3>Noncompliant code example</h3>
-<pre>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 public class ResourceHolder   // Noncompliant; doesn't implement IDisposable
 {
-  private FileStream fs;  // This member is never Disposed
-  public void OpenResource(string path)
-  {
-    this.fs = new FileStream(path, FileMode.Open); // I create the FileStream, I'm owning it
-  }
-  public void CloseResource()
-  {
-    this.fs.Close();
-  }
+    private FileStream fs;  // This member is never Disposed
+    public void OpenResource(string path)
+    {
+        this.fs = new FileStream(path, FileMode.Open); // I create the FileStream, I'm owning it
+    }
+    public void CloseResource()
+    {
+        this.fs.Close();
+    }
 }
 </pre>
 <h3>Compliant solution</h3>
-<pre>
+<pre data-diff-id="1" data-diff-type="compliant">
 public class ResourceHolder : IDisposable
 {
-&nbsp;&nbsp;private FileStream fs;
-&nbsp;&nbsp;public void OpenResource(string path)
-&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;this.fs = new FileStream(path, FileMode.Open); // I create the FileStream, I'm owning it
-&nbsp;&nbsp;}
-&nbsp;&nbsp;public void CloseResource()
-&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;this.fs.Close();
-&nbsp;&nbsp;}
-
-&nbsp;&nbsp;public void Dispose()
-&nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;this.fs.Dispose();
-&nbsp;&nbsp;}
+    private FileStream fs;
+    public void OpenResource(string path)
+    {
+        this.fs = new FileStream(path, FileMode.Open); // I create the FileStream, I'm owning it
+    }
+    public void CloseResource()
+    {
+        this.fs.Close();
+    }
+    public void Dispose()
+    {
+        this.fs.Dispose();
+    }
 }
 </pre>
 <h2>Resources</h2>

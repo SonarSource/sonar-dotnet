@@ -1,6 +1,6 @@
 <p>This rule raises an issue each time a <code>static</code> field is updated from a non-static method or property.</p>
 <h2>Why is this an issue?</h2>
-<p>Updating a <code>static</code> field from a non-<code>static</code> method introduces ignificant challenges and potential bugs. Multiple class
+<p>Updating a <code>static</code> field from a non-<code>static</code> method introduces significant challenges and potential bugs. Multiple class
 instances and threads can access and modify the <code>static</code> field concurrently, leading to unintended consequences for other instances or
 threads (unexpected behavior, <a href="https://www.c-sharpcorner.com/UploadFile/1d42da/race-conditions-in-threading-C-Sharp/">race conditions</a> and
 synchronization problems).</p>
