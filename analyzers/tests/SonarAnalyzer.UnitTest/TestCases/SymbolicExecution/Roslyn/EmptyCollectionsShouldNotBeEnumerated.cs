@@ -456,6 +456,13 @@ class CollectionTests
 
 class AdvancedTests
 {
+    public void UntrackedCollections()
+    {
+        var sb = new StringBuilder();
+        sb.Clear();
+        sb.Clear();                                         // Noncompliant FP
+    }
+
     public void UnknownExtensionMethods()
     {
         var list = new List<int>();
