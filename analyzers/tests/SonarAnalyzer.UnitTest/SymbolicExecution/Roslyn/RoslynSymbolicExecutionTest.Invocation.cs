@@ -31,9 +31,9 @@ public partial class RoslynSymbolicExecutionTest
     private static IEnumerable<object[]> ThrowHelperCalls =>
         new object[][]
         {
-                    new[] { @"System.Diagnostics.Debug.Fail(""Fail"");" },
-                    new[] { @"Environment.FailFast(""Fail"");" },
-                    new[] { @"Environment.Exit(-1);" },
+            new[] { @"System.Diagnostics.Debug.Fail(""Fail"");" },
+            new[] { @"Environment.FailFast(""Fail"");" },
+            new[] { @"Environment.Exit(-1);" },
         };
 
     [TestMethod]
@@ -1186,24 +1186,24 @@ private static bool Equals(object a, object b, object c) => false;";
     public void Invocation_ReferenceEquals_CustomSignatures_NotSupported()
     {
         const string code = """
-                public void Main()
-                {
-                    var args0 = ReferenceEquals();
-                    var args1 = ReferenceEquals(null);
-                    var args2 = ReferenceEquals(null, null);
-                    var args3 = ReferenceEquals(null, null, null);
+            public void Main()
+            {
+                var args0 = ReferenceEquals();
+                var args1 = ReferenceEquals(null);
+                var args2 = ReferenceEquals(null, null);
+                var args3 = ReferenceEquals(null, null, null);
 
-                    Tag("Args0", args0);
-                    Tag("Args1", args1);
-                    Tag("Args2", args2);
-                    Tag("Args3", args3);
-                }
+                Tag("Args0", args0);
+                Tag("Args1", args1);
+                Tag("Args2", args2);
+                Tag("Args3", args3);
+            }
 
-                private bool ReferenceEquals() => false;
-                private bool ReferenceEquals(object a) => false;
-                private bool ReferenceEquals(object a, object b) => false;
-                private bool ReferenceEquals(object a, object b, object c) => false;
-                """;
+            private bool ReferenceEquals() => false;
+            private bool ReferenceEquals(object a) => false;
+            private bool ReferenceEquals(object a, object b) => false;
+            private bool ReferenceEquals(object a, object b, object c) => false;
+            """;
         var validator = SETestContext.CreateCSMethod(code).Validator;
         validator.TagValue("Args0").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
         validator.TagValue("Args1").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
@@ -1223,9 +1223,9 @@ private static bool Equals(object a, object b, object c) => false;";
     public void Invocation_BoolEquals_LearnsResult(string left, string right, bool expectedResult)
     {
         var code = $"""
-                var result = object.Equals({left}, {right});
-                Tag("Result", result);
-                """;
+            var result = object.Equals({left}, {right});
+            Tag("Result", result);
+            """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expectedResult));
     }
@@ -1236,10 +1236,10 @@ private static bool Equals(object a, object b, object c) => false;";
     public void Invocation_BoolEquals_OnlyOneArgumentHasBoolConstraint_DoesNotLearn(string leftArgument)
     {
         var code = $"""
-                bool left = {leftArgument};
-                var result = object.Equals(left, right);
-                Tag("Result", result);
-                """;
+            bool left = {leftArgument};
+            var result = object.Equals(left, right);
+            Tag("Result", result);
+            """;
         var validator = SETestContext.CreateCS(code, "bool right").Validator;
         validator.TagValue("Result").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
@@ -1248,9 +1248,9 @@ private static bool Equals(object a, object b, object c) => false;";
     public void Invocation_BoolEquals_BothArgumentsHaveNoConstraint_DoesNotLearn()
     {
         var code = $"""
-                var result = object.Equals(left, right);
-                Tag("Result", result);
-                """;
+            var result = object.Equals(left, right);
+            Tag("Result", result);
+            """;
         var validator = SETestContext.CreateCS(code, "bool left, bool right").Validator;
         validator.TagValue("Result").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
@@ -1263,12 +1263,12 @@ private static bool Equals(object a, object b, object c) => false;";
     public void Invocation_NumberEquals_SingleValues_LearnsResult(string left, string right, bool expected)
     {
         var code = $"""
-                var result = {left}.Equals({right});
-                Tag("Result", result);
+            var result = {left}.Equals({right});
+            Tag("Result", result);
 
-                var resultStaticCall = object.Equals({left}, {right});
-                Tag("ResultStaticCall", resultStaticCall);
-                """;
+            var resultStaticCall = object.Equals({left}, {right});
+            Tag("ResultStaticCall", resultStaticCall);
+            """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expected));
         validator.TagValue("ResultStaticCall").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expected));
@@ -1278,12 +1278,12 @@ private static bool Equals(object a, object b, object c) => false;";
     public void Invocation_NumberEquals_ValueInRange_DoesNotLearn()
     {
         var code = """
-                if (i > 1 && i < 10)
-                {
-                    var result = object.Equals(i, 4);
-                    Tag("Result", result);
-                }
-                """;
+            if (i > 1 && i < 10)
+            {
+                var result = object.Equals(i, 4);
+                Tag("Result", result);
+            }
+            """;
         var validator = SETestContext.CreateCS(code, "int i").Validator;
         validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
     }
@@ -1292,12 +1292,12 @@ private static bool Equals(object a, object b, object c) => false;";
     public void Invocation_NumberEquals_RangesDoNotOverlap_LearnsResult()
     {
         var code = $$"""
-                if (i < 0 && j > 0)
-                {
-                    var result = i.Equals(j);
-                    Tag("Result", result);
-                }
-                """;
+            if (i < 0 && j > 0)
+            {
+                var result = i.Equals(j);
+                Tag("Result", result);
+            }
+            """;
         var validator = SETestContext.CreateCS(code, "int i, int j").Validator;
         validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False);
     }
