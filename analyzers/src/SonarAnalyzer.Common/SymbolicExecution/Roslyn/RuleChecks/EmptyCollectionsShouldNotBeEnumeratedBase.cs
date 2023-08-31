@@ -195,14 +195,15 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
                     nonEmptyAccess.Add(context.Operation.Instance);
                 }
             }
-            return ProcessAddMethod(context.State, targetMethod, instance)
-                ?? ProcessRemoveMethod(context.State, targetMethod, instance)
-                ?? ProcessClearMethod(context.State, targetMethod, instance);
+            if (instance.Type.IsAny(TrackedCollectionTypes))
+            {
+                return ProcessAddMethod(context.State, targetMethod, instance)
+                    ?? ProcessRemoveMethod(context.State, targetMethod, instance)
+                    ?? ProcessClearMethod(context.State, targetMethod, instance)
+                    ?? context.State;
+            }
         }
-        else
-        {
-            return context.State;
-        }
+        return context.State;
 
         bool HasFilteringPredicate() =>
             invocation.Arguments.Any(x => x.ToArgument().Parameter.Type.Is(KnownType.System_Func_T_TResult));
@@ -221,7 +222,7 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
     private static ProgramState ProcessClearMethod(ProgramState state, IMethodSymbol method, IOperation instance) =>
         method.Name == nameof(ICollection<int>.Clear)
             ? SetOperationAndSymbolConstraint(state, instance, CollectionConstraint.Empty)
-            : state;
+            : null;
 
     private static ProgramState SetOperationAndSymbolConstraint(ProgramState state, IOperation instance, SymbolicConstraint constraint) =>
         SetOperationAndSymbolValue(state, instance, (state[instance] ?? SymbolicValue.Empty).WithConstraint(constraint));

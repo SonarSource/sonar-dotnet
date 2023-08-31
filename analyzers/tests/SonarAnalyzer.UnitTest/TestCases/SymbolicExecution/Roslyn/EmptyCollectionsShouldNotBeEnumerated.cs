@@ -460,7 +460,7 @@ class AdvancedTests
     {
         var sb = new StringBuilder();
         sb.Clear();
-        sb.Clear();                                         // Noncompliant FP
+        sb.Clear();                                         // Compliant
     }
 
     public void UnknownExtensionMethods()
