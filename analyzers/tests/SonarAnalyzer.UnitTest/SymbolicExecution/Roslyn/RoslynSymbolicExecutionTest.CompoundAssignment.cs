@@ -53,26 +53,6 @@ public partial class RoslynSymbolicExecutionTest
         validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(42));
     }
 
-    [DataTestMethod]
-    [DataRow("i += j", 43)]
-    [DataRow("i += 2", 44)]
-    [DataRow("i += (condition ? 1 : 0)", 43)]
-    [DataRow("i -= j", 41)]
-    [DataRow("i -= 2", 40)]
-    [DataRow("i -= (condition ? 1 : 0)", 41)]
-    public void Compound_PlusAndMinus(string expression, int expected)
-    {
-        var code = $"""
-            bool condition = true;
-            var i = 42;
-            var j = 1;
-            {expression};
-            Tag("I", i);
-            """;
-        var validator = SETestContext.CreateCS(code).Validator;
-        validator.TagValue("I").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
-    }
-
     [TestMethod]
     public void CompoundAssignment_SelfUpdate()
     {
@@ -152,5 +132,27 @@ public partial class RoslynSymbolicExecutionTest
         var validator = SETestContext.CreateCS(code).Validator;
         validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
         validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
+    }
+
+    [DataTestMethod]
+    [DataRow("i += j", 43)]
+    [DataRow("i += 2", 44)]
+    [DataRow("i += (condition ? 1 : 0)", 43)]
+    [DataRow("i -= j", 41)]
+    [DataRow("i -= 2", 40)]
+    [DataRow("i -= (condition ? 1 : 0)", 41)]
+    public void Compound_Arithmetic_PlusAndMinus(string expression, int expected)
+    {
+        var code = $"""
+            bool condition = true;
+            var i = 42;
+            var j = 1;
+            var result = {expression};
+            Tag("Result", result);
+            Tag("I", i);
+            """;
+        var validator = SETestContext.CreateCS(code).Validator;
+        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
+        validator.TagValue("I").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
     }
 }
