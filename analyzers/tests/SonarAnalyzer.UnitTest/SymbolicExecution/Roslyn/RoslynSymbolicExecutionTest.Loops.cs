@@ -100,18 +100,17 @@ public partial class RoslynSymbolicExecutionTest
     public void Loops_Infinite_ConditionVisitedMaxTreeTimes()
     {
         var code = """
-            int i = 1;
             while (i.Equals(1))
             {
             }
             Tag("End", i);
             """;
-        var validator = SETestContext.CreateCS(code, "int arg", new AddConstraintOnInvocationCheck(), new PreserveTestCheck("i")).Validator;
+        var validator = SETestContext.CreateCS(code, "int i", new AddConstraintOnInvocationCheck(), new PreserveTestCheck("i")).Validator;
         validator.ValidateExitReachCount(3);
         validator.TagValues("End").Should().SatisfyRespectively(
-            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(1), TestConstraint.First),
-            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(1), TestConstraint.First, BoolConstraint.True),
-            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(1), TestConstraint.First, BoolConstraint.True, DummyConstraint.Dummy));
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First),
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First, BoolConstraint.True),
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First, BoolConstraint.True, DummyConstraint.Dummy));
     }
 
     [DataTestMethod]

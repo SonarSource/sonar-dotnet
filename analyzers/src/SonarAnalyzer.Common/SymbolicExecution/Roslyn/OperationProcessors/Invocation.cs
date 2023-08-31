@@ -186,15 +186,44 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
         invocation switch
         {
             { Arguments.Length: 2, TargetMethod.IsStatic: true } => ProcessEquals(context, invocation.Arguments[0].ToArgument().Value, invocation.Arguments[1].ToArgument().Value),
-            { Arguments.Length: 1 } when invocation.TargetMethod.ContainingType.IsNullableValueType() => ProcessEquals(context, invocation.Instance, invocation.Arguments[0].ToArgument().Value),
+            { Arguments.Length: 1 } when invocation.TargetMethod.ContainingType.IsNullableValueType() || invocation.TargetMethod.ContainingType.IsStruct() =>
+                ProcessEquals(context, invocation.Instance, invocation.Arguments[0].ToArgument().Value),
             _ => context.State.ToArray()
         };
 
-    private static ProgramState[] ProcessEquals(SymbolicContext context, IOperation leftOperation, IOperation rightOperation) =>
-        context.State.Constraint<BoolConstraint>(leftOperation) is { } rightBool
-        && context.State.Constraint<BoolConstraint>(rightOperation) is { } leftBool
-            ? context.SetOperationConstraint(BoolConstraint.From(leftBool == rightBool)).ToArray()
-            : ProcessEqualsObject(context, leftOperation, rightOperation);
+    private static ProgramState[] ProcessEquals(SymbolicContext context, IOperation leftOperation, IOperation rightOperation)
+    {
+        if (context.State.Constraint<BoolConstraint>(leftOperation) is { } leftBool
+            && context.State.Constraint<BoolConstraint>(rightOperation) is { } rightBool)
+        {
+            return context.SetOperationConstraint(BoolConstraint.From(leftBool == rightBool)).ToArray();
+        }
+        else if (context.State.Constraint<NumberConstraint>(leftOperation) is { } leftNumber
+            && context.State.Constraint<NumberConstraint>(rightOperation) is { } rightNumber)
+        {
+            return ProcessNumberConstraints(leftNumber, rightNumber).ToArray();
+        }
+        else
+        {
+            return ProcessEqualsObject(context, leftOperation, rightOperation);
+        }
+
+        ProgramState ProcessNumberConstraints(NumberConstraint left, NumberConstraint right)
+        {
+            if (left.IsSingleValue && right.IsSingleValue)
+            {
+                return context.SetOperationConstraint(BoolConstraint.From(left.Equals(right)));
+            }
+            else if (!left.Overlaps(right))
+            {
+                return context.SetOperationConstraint(BoolConstraint.False);
+            }
+            else
+            {
+                return context.State;
+            }
+        }
+    }
 
     private static ProgramState[] ProcessEqualsObject(SymbolicContext context, IOperation leftOperation, IOperation rightOperation)
     {
