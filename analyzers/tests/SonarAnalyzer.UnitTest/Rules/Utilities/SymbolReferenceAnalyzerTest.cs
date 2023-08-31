@@ -200,20 +200,20 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithConcurrentAnalysis(false)
                 .VerifyUtilityAnalyzer<SymbolReferenceInfo>(symbols =>
                     {
-                        var orderedSymbols = symbols.OrderBy(x => x.FilePath).ToArray();
+                        var orderedSymbols = symbols.OrderBy(x => x.FilePath, StringComparer.InvariantCulture).ToArray();
                         orderedSymbols.Select(x => Path.GetFileName(x.FilePath)).Should().Contain("_Imports.razor", "Razor.razor", "ToDo.cs");
                         orderedSymbols[0].FilePath.Should().EndWith("_Imports.razor");
                         orderedSymbols[1].FilePath.Should().EndWith("Razor.razor");
 
-                        VerifyReferences(orderedSymbols[1].Reference, 9, 13, 4, 6, 20); // currentCount
-                        VerifyReferences(orderedSymbols[1].Reference, 9, 16, 10, 20, 21); // IncrementAmount
-                        VerifyReferences(orderedSymbols[1].Reference, 9, 18, 8); // IncrementCount
-                        VerifyReferences(orderedSymbols[1].Reference, 9, 34, 34); // x
-                        VerifyReferences(orderedSymbols[1].Reference, 9, 37, 28, 34); // todos
-                        VerifyReferences(orderedSymbols[1].Reference, 9, 39, 25); // AddTodo
-                        VerifyReferences(orderedSymbols[1].Reference, 9, 41); // x
-                        VerifyReferences(orderedSymbols[1].Reference, 9, 42); // y
-                        VerifyReferences(orderedSymbols[1].Reference, 9, 44, 41); // LocalMethod
+                        VerifyReferences(orderedSymbols[1].Reference, 9, 13, 4, 6, 20);     // currentCount
+                        VerifyReferences(orderedSymbols[1].Reference, 9, 16, 10, 20, 21);   // IncrementAmount
+                        VerifyReferences(orderedSymbols[1].Reference, 9, 18, 8);            // IncrementCount
+                        VerifyReferences(orderedSymbols[1].Reference, 9, 34, 34);           // x
+                        VerifyReferences(orderedSymbols[1].Reference, 9, 37, 28, 34);       // todos
+                        VerifyReferences(orderedSymbols[1].Reference, 9, 39, 25);           // AddTodo
+                        VerifyReferences(orderedSymbols[1].Reference, 9, 41);               // x
+                        VerifyReferences(orderedSymbols[1].Reference, 9, 42);               // y
+                        VerifyReferences(orderedSymbols[1].Reference, 9, 44, 41);           // LocalMethod
                     });
         }
 
@@ -223,9 +223,9 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verify(fileName, projectType, references => VerifyReferences(references, expectedDeclarationCount, assertedDeclarationLine, assertedDeclarationLineReferences));
 
         private void Verify(string fileName,
-                                   ProjectType projectType,
-                                   Action<IReadOnlyList<SymbolReferenceInfo.Types.SymbolReference>> verifyReference,
-                                   bool isMessageExpected = true) =>
+                            ProjectType projectType,
+                            Action<IReadOnlyList<SymbolReferenceInfo.Types.SymbolReference>> verifyReference,
+                            bool isMessageExpected = true) =>
             CreateBuilder(projectType, fileName)
                 .WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, projectType))
                 .VerifyUtilityAnalyzer<SymbolReferenceInfo>(messages =>
@@ -263,9 +263,9 @@ namespace SonarAnalyzer.UnitTest.Rules
                                              int assertedDeclarationLine,
                                              params int[] assertedDeclarationLineReferences)
         {
-            references.Where(x => x.Declaration != null).Should().HaveCount(expectedDeclarationCount);
-            var declarationReferences = references.Single(x => x.Declaration.StartLine == assertedDeclarationLine).Reference;
-            declarationReferences.Select(x => x.StartLine).Should().BeEquivalentTo(assertedDeclarationLineReferences);
+            references.Where(x => x.Declaration is not null).Should().HaveCount(expectedDeclarationCount);
+            references.Single(x => x.Declaration.StartLine == assertedDeclarationLine).Reference.Select(x => x.StartLine)
+                      .Should().BeEquivalentTo(assertedDeclarationLineReferences);
         }
 
         // We need to set protected properties and this class exists just to enable the analyzer without bothering with additional files with parameters
