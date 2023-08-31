@@ -62,8 +62,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DataTestMethod]
         [DataRow("C:\\SonarSource\\SomeFile_razor.g.cs")]
         [DataRow("C:\\SonarSource\\SomeFile_cshtml.g.cs")]
-        [DataRow("C:\\SonarSource\\SomeFile_razor.ide.g.cs")]
-        [DataRow("C:\\SonarSource\\SomeFile_cshtml.ide.g.cs")]
+
         [DataRow("C:\\SonarSource\\SomeFile_RAZOR.g.cS")]
         public void IsRazorGeneratedFile_RazorGeneratedFiles_ReturnsTrue(string path)
         {
@@ -79,6 +78,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DataRow("C:\\SonarSource\\SomeFile_razor.g.cs.randomEnding")]
         [DataRow("C:\\SonarSource\\SomeFile_cshtml.g.cs.randomEnding")]
         [DataRow("C:\\SonarSource\\SomeFile_razor.g.ß")]
+        [DataRow("C:\\SonarSource\\SomeFile_razor.ide.g.cs")] // Not considered razor file because of https://github.com/dotnet/razor/issues/9108
+        [DataRow("C:\\SonarSource\\SomeFile_cshtml.ide.g.cs")] // Not considered razor file because of https://github.com/dotnet/razor/issues/9108
         public void IsRazorGeneratedFile_NonRazorGeneratedFiles_ReturnsFalse(string path)
         {
             var syntaxTree = new Mock<SyntaxTree>(MockBehavior.Loose);

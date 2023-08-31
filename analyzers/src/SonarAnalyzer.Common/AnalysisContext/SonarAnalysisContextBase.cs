@@ -57,7 +57,7 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
         SonarLintXml() is var sonarLintXml
         && (generatedCodeRecognizer is null
             || sonarLintXml.AnalyzeGeneratedCode(Compilation.Language)
-            || !tree.IsConsideredGenerated(generatedCodeRecognizer, Compilation, sonarLintXml.AnalyzeRazorCode(Compilation.Language)))
+            || !tree.IsConsideredGenerated(generatedCodeRecognizer, Compilation, IsRazorAnalysisEnabled()))
         && (tree is null || (!IsUnchanged(tree) && !IsExcluded(sonarLintXml, tree.FilePath)));
 
     /// <summary>
@@ -96,6 +96,10 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
             return Helpers.SonarLintXmlReader.Empty;
         }
     }
+
+    public bool IsRazorAnalysisEnabled() =>
+        ProjectConfiguration().ProjectType != ProjectType.Unknown
+        && SonarLintXml().AnalyzeRazorCode(Compilation.Language);
 
     public bool IsTestProject()
     {

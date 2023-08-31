@@ -59,10 +59,9 @@ namespace SonarAnalyzer.Helpers
              && (HasGeneratedFileName(tree) || HasGeneratedCommentOrAttribute(tree));
 
         public static bool IsRazorGeneratedFile(SyntaxTree tree) =>
+            // razor.ide.g.cs and cshtml.ide.g.cs are also razor generated files for design time builds. They are not considered here because of https://github.com/dotnet/razor/issues/9108
             tree.FilePath.EndsWith("razor.g.cs", StringComparison.OrdinalIgnoreCase)
-            || tree.FilePath.EndsWith("cshtml.g.cs", StringComparison.OrdinalIgnoreCase)
-            || tree.FilePath.EndsWith("razor.ide.g.cs", StringComparison.OrdinalIgnoreCase)
-            || tree.FilePath.EndsWith("cshtml.ide.g.cs", StringComparison.OrdinalIgnoreCase);
+            || tree.FilePath.EndsWith("cshtml.g.cs", StringComparison.OrdinalIgnoreCase);
 
         private bool HasGeneratedCommentOrAttribute(SyntaxTree tree)
         {

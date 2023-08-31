@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             foreach (var syntaxTree in c.Compilation.SyntaxTrees.Where(tree => !tree.IsConsideredGenerated(
                                 CSharpGeneratedCodeRecognizer.Instance,
                                 c.Compilation,
-                                c.SonarLintXml().AnalyzeRazorCode(c.Compilation.Language))))
+                                c.IsRazorAnalysisEnabled())))
                             {
                                 usageCollector.SafeVisit(syntaxTree.GetRoot());
                             }
@@ -122,7 +122,7 @@ namespace SonarAnalyzer.Rules.CSharp
             foreach (var declaration in namedType.DeclaringSyntaxReferences.Where(r => !r.SyntaxTree.IsConsideredGenerated(
                 CSharpGeneratedCodeRecognizer.Instance,
                 compilation,
-                context.SonarLintXml().AnalyzeRazorCode(context.Compilation.Language)))
+                context.IsRazorAnalysisEnabled()))
                     .SelectMany(x => x.GetSyntax().ChildNodes().OfType<BaseTypeDeclarationSyntax>()))
             {
                 if (compilation.GetSemanticModel(declaration.SyntaxTree) is { } semanticModel
@@ -270,7 +270,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return syntaxReferencesToVisit.All(x => visitor.SafeVisit(x.GetSyntax()));
 
             bool IsGenerated(SyntaxReference syntaxReference) =>
-                syntaxReference.SyntaxTree.IsConsideredGenerated(CSharpGeneratedCodeRecognizer.Instance, compilation, context.SonarLintXml().AnalyzeRazorCode(context.Compilation.Language));
+                syntaxReference.SyntaxTree.IsConsideredGenerated(CSharpGeneratedCodeRecognizer.Instance, compilation, context.IsRazorAnalysisEnabled());
         }
 
         private static CSharpRemovableSymbolWalker RetrieveRemovableSymbols(INamedTypeSymbol namedType, Compilation compilation, SonarSymbolReportingContext context)
