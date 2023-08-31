@@ -64,7 +64,7 @@ public class ProtobufFilterTool {
 
   }
 
-  private static <T extends MessageLite> void rewrite(String filename, Parser<T> parser, Predicate<T> predicate, Function<T, T> rewriter) throws IOException {
+  private static <T extends MessageLite> void rewrite(String filename, Parser<T> parser, Predicate<T> predicate, Function<T, T> rewriter) {
     Path path = new File(TEST_DATA_DIR, filename).toPath();
     readFirstMatching(path, parser, predicate).ifPresent(m -> save(path, rewriter.apply(m)));
   }

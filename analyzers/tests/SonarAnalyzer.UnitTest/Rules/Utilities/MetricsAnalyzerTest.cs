@@ -21,6 +21,7 @@
 using System.IO;
 using SonarAnalyzer.Protobuf;
 using SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.UnitTest.Helpers;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -28,18 +29,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class MetricsAnalyzerTest
     {
         private const string BasePath = @"Utilities\MetricsAnalyzer\";
+        private const string AllMetricsFileName = "AllMetrics.cs";
+        private const string RazorFileName = "Razor.razor";
 
         public TestContext TestContext { get; set; }
 
         [DataTestMethod]
         public void VerifyMetrics() =>
-            CreateBuilder(false)
+            CreateBuilder(false, AllMetricsFileName)
                 .WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                 .VerifyUtilityAnalyzer<MetricsInfo>(messages =>
                     {
-                        messages.Should().HaveCount(1);
+                        messages.Should().ContainSingle();
                         var metrics = messages.Single();
-                        metrics.FilePath.Should().Be(Path.Combine(BasePath, "AllMetrics.cs"));
+                        metrics.FilePath.Should().Be(Path.Combine(BasePath, AllMetricsFileName));
                         metrics.ClassCount.Should().Be(4);
                         metrics.CodeLine.Should().HaveCount(24);
                         metrics.CognitiveComplexity.Should().Be(1);
@@ -50,17 +53,47 @@ namespace SonarAnalyzer.UnitTest.Rules
                         metrics.NonBlankComment.Should().HaveCount(1);
                         metrics.StatementCount.Should().Be(5);
                     });
+#if NET
+
+        [TestMethod]
+        public void VerifyMetrics_Razor()
+        {
+            using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = true };
+
+            CreateBuilder(false, RazorFileName)
+                .WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+                .VerifyUtilityAnalyzer<MetricsInfo>(messages =>
+                {
+                    messages.Should().HaveCount(2); // Razor.razor and _Imports.razor
+
+                    var metrics = messages.Single(x => x.FilePath.EndsWith(RazorFileName));
+
+                    // ToDo: this PR only solves the CodeLine metric. Other metrics will be fixed in subsequent PRs.
+                    metrics.ClassCount.Should().Be(1);
+                    metrics.CodeLine.Should().BeEquivalentTo(new[] { 3, 5, 8 });
+                    metrics.CognitiveComplexity.Should().Be(0);
+                    metrics.Complexity.Should().Be(1);
+                    metrics.ExecutableLines.Should().BeEmpty();
+                    metrics.FunctionCount.Should().Be(1);
+                    metrics.NoSonarComment.Should().BeEmpty();
+                    metrics.NonBlankComment.Should().BeEmpty();
+                    metrics.StatementCount.Should().Be(6);
+                });
+        }
+
+#endif
 
         [TestMethod]
         public void Verify_NotRunForTestProject() =>
-            CreateBuilder(true).VerifyUtilityAnalyzerProducesEmptyProtobuf();
+            CreateBuilder(true, AllMetricsFileName).VerifyUtilityAnalyzerProducesEmptyProtobuf();
 
         [DataTestMethod]
-        [DataRow("AllMetrics.cs", true)]
+        [DataRow(AllMetricsFileName, true)]
         [DataRow("SomethingElse.cs", false)]
         public void Verify_UnchangedFiles(string unchangedFileName, bool expectedProtobufIsEmpty)
         {
-            var builder = CreateBuilder(false).WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfigWithUnchangedFiles(TestContext, BasePath + unchangedFileName));
+            var builder = CreateBuilder(false, AllMetricsFileName)
+                .WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfigWithUnchangedFiles(TestContext, BasePath + unchangedFileName));
             if (expectedProtobufIsEmpty)
             {
                 builder.VerifyUtilityAnalyzerProducesEmptyProtobuf();
@@ -71,12 +104,12 @@ namespace SonarAnalyzer.UnitTest.Rules
             }
         }
 
-        private VerifierBuilder CreateBuilder(bool isTestProject)
+        private VerifierBuilder CreateBuilder(bool isTestProject, string fileName)
         {
             var testRoot = BasePath + TestContext.TestName;
             return new VerifierBuilder()
                 .AddAnalyzer(() => new TestMetricsAnalyzer(testRoot, isTestProject))
-                .AddPaths("AllMetrics.cs")
+                .AddPaths(fileName)
                 .WithBasePath(BasePath)
                 .WithOptions(ParseOptionsHelper.CSharpLatest)
                 .WithProtobufPath(@$"{testRoot}\metrics.pb");

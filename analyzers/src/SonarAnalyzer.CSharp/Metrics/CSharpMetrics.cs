@@ -34,7 +34,11 @@ namespace SonarAnalyzer.Metrics.CSharp
                 throw new ArgumentException(InitializationErrorTextPattern, nameof(tree));
             }
 
-            lazyExecutableLines = new Lazy<ImmutableArray<int>>(() => CSharpExecutableLinesMetric.GetLineNumbers(tree, semanticModel));
+            lazyExecutableLines = new Lazy<ImmutableArray<int>>(() =>
+                // ToDo: this will be implemented by https://github.com/SonarSource/sonar-dotnet/pull/7915
+                GeneratedCodeRecognizer.IsRazorGeneratedFile(tree)
+                    ? ImmutableArray<int>.Empty
+                    : CSharpExecutableLinesMetric.GetLineNumbers(tree, semanticModel));
         }
 
         protected override int ComputeCognitiveComplexity(SyntaxNode node) =>
