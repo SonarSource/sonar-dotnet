@@ -28,23 +28,29 @@ internal sealed class CompoundAssignment : SimpleProcessor<ICompoundAssignmentOp
         ICompoundAssignmentOperationWrapper.FromOperation(operation);
 
     protected override ProgramState Process(SymbolicContext context, ICompoundAssignmentOperationWrapper assignment) =>
-        ProcessNumericalCompoundAssignment(context, assignment)
+        ProcessNumericalCompoundAssignment(context.State, assignment)
         ?? ResetConstraintsAfterCompoundAssignment(context.State, assignment)
         ?? context.State;
 
-    private ProgramState ProcessNumericalCompoundAssignment(SymbolicContext context, ICompoundAssignmentOperationWrapper assignment)
+    private ProgramState ProcessNumericalCompoundAssignment(ProgramState state, ICompoundAssignmentOperationWrapper assignment)
     {
-        var state = context.State;
         var leftNumber = state[assignment.Target]?.Constraint<NumberConstraint>();
         var rightNumber = state[assignment.Value]?.Constraint<NumberConstraint>();
-        if (leftNumber is { } && rightNumber is { } && Calculate(assignment.OperatorKind, leftNumber, rightNumber) is { } constraint)
+        if (leftNumber is { })
         {
-            state = state.SetSymbolConstraint(assignment.Target.TrackedSymbol(state), constraint);
-            return state.SetOperationConstraint(assignment, constraint);
-        }
-        else if (leftNumber is { }  && assignment.Target.TrackedSymbol(state) is { } targetSymbol  && state[assignment.Value]?.Constraint<ObjectConstraint>() is { Kind: ConstraintKind.NotNull })
-        {
-            return state.SetSymbolValue(targetSymbol, SymbolicValue.NotNull);
+            if (rightNumber is { } && Calculate(assignment.OperatorKind, leftNumber, rightNumber) is { } constraint)
+            {
+                state = state.SetSymbolConstraint(assignment.Target.TrackedSymbol(state), constraint);
+                return state.SetOperationConstraint(assignment, constraint);
+            }
+            else if (state[assignment.Value]?.Constraint<ObjectConstraint>() is { Kind: ConstraintKind.NotNull })
+            {
+                return state.SetSymbolValue(assignment.Target.TrackedSymbol(state), SymbolicValue.NotNull);
+            }
+            else
+            {
+                return null;
+            }
         }
         return null;
     }
