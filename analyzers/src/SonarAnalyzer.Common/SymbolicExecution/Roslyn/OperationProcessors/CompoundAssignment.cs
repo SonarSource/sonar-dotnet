@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Data;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
@@ -29,46 +30,46 @@ internal sealed class CompoundAssignment : SimpleProcessor<ICompoundAssignmentOp
 
     protected override ProgramState Process(SymbolicContext context, ICompoundAssignmentOperationWrapper assignment) =>
         ProcessNumericalCompoundAssignment(context.State, assignment)
-        ?? ResetConstraintsAfterCompoundAssignment(context.State, assignment)
+        ?? ProcessCompoundAssignment(context.State, assignment)
         ?? context.State;
 
     private ProgramState ProcessNumericalCompoundAssignment(ProgramState state, ICompoundAssignmentOperationWrapper assignment)
     {
-        var leftNumber = state[assignment.Target]?.Constraint<NumberConstraint>();
-        var rightNumber = state[assignment.Value]?.Constraint<NumberConstraint>();
-        if (leftNumber is { })
+        if (state.Constraint<NumberConstraint>(assignment.Target) is { } leftNumber
+            && state.Constraint<NumberConstraint>(assignment.Value) is { } rightNumber
+            && Calculate(assignment.OperatorKind, leftNumber, rightNumber) is { } constraint)
         {
-            if (rightNumber is { } && Calculate(assignment.OperatorKind, leftNumber, rightNumber) is { } constraint)
+            state = state.SetOperationConstraint(assignment, constraint);
+            if (assignment.Target.TrackedSymbol(state) is { } symbol)
             {
-                state = state.SetSymbolConstraint(assignment.Target.TrackedSymbol(state), constraint);
-                return state.SetOperationConstraint(assignment, constraint);
+                state = state.SetSymbolConstraint(symbol, constraint);
             }
-            else if (state[assignment.Value]?.Constraint<ObjectConstraint>() is { Kind: ConstraintKind.NotNull })
-            {
-                return state.SetSymbolValue(assignment.Target.TrackedSymbol(state), SymbolicValue.NotNull);
-            }
-            else
-            {
-                return null;
-            }
-        }
-        return null;
-    }
-
-    private static ProgramState ResetConstraintsAfterCompoundAssignment(ProgramState state, ICompoundAssignmentOperationWrapper assignment)
-    {
-        // We don't know what happens to the target after the compound assignment, unless it's a number.
-        if (assignment.Target.TrackedSymbol(state) is { } targetSymbol
-            && targetSymbol.GetSymbolType() is { } type
-            && !type.IsNullableValueType())
-        {
-            return type.Is(KnownType.System_String) || type.IsValueType
-                ? state.SetSymbolValue(targetSymbol, SymbolicValue.NotNull)
-                : state.SetSymbolValue(targetSymbol, SymbolicValue.Empty);
+            return state;
         }
         else
         {
             return null;
+        }
+    }
+
+    private static ProgramState ProcessCompoundAssignment(ProgramState state, ICompoundAssignmentOperationWrapper assignment)
+    {
+        if ((state.HasConstraint(assignment.Target, ObjectConstraint.NotNull) && state.HasConstraint(assignment.Value, ObjectConstraint.NotNull))
+            || assignment.Target.Type.Is(KnownType.System_String)
+            || assignment.Target.Type.IsNonNullableValueType())
+        {
+            state = state.SetOperationConstraint(assignment, ObjectConstraint.NotNull);
+            if (assignment.Target.TrackedSymbol(state) is { } symbol)
+            {
+                state = state.SetSymbolValue(symbol, SymbolicValue.NotNull);
+            }
+            return state;
+        }
+        else
+        {
+            return assignment.Target.TrackedSymbol(state) is { } symbol
+                ? state.SetSymbolValue(symbol, SymbolicValue.Empty)
+                : state;
         }
     }
 
