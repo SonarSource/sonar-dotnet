@@ -92,7 +92,7 @@ Public Class Sample
         i -= 100                ' Noncompliant
 
         i = 2147483600
-        i *= 100                ' FN
+        i *= 100                ' Noncompliant
 
         Dim j As Integer = 10
         i = 2147483600
