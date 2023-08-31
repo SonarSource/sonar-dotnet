@@ -29,7 +29,7 @@ internal sealed class CompoundAssignment : SimpleProcessor<ICompoundAssignmentOp
 
     protected override ProgramState Process(SymbolicContext context, ICompoundAssignmentOperationWrapper assignment) =>
         ProcessNumericalCompoundAssignment(context, assignment)
-        ?? LearnNotNullFromCompoundAssignment(context.State, assignment)
+        ?? ResetConstraintsAfterCompoundAssignment(context.State, assignment)
         ?? context.State;
 
     private ProgramState ProcessNumericalCompoundAssignment(SymbolicContext context, ICompoundAssignmentOperationWrapper assignment)
@@ -49,15 +49,31 @@ internal sealed class CompoundAssignment : SimpleProcessor<ICompoundAssignmentOp
         return null;
     }
 
-    private static ProgramState LearnNotNullFromCompoundAssignment(ProgramState state, ICompoundAssignmentOperationWrapper assignment) =>
-        assignment.Target.TrackedSymbol(state) is { } targetSymbol && targetSymbol.GetSymbolType().IsAny(KnownType.System_String, KnownType.System_Boolean)
-            ? state.SetSymbolValue(targetSymbol, SymbolicValue.NotNull)
-            : null;
-
-    private static NumberConstraint Calculate(BinaryOperatorKind kind, NumberConstraint left, NumberConstraint right) => kind switch
+    private static ProgramState ResetConstraintsAfterCompoundAssignment(ProgramState state, ICompoundAssignmentOperationWrapper assignment)
     {
-        BinaryOperatorKind.Add => NumberConstraint.From(left.Min + right.Min, left.Max + right.Max),
-        BinaryOperatorKind.Subtract => NumberConstraint.From(left.Min - right.Max, left.Max - right.Min),
-        _ => null
-    };
+        // We don't know what happens to the target after the compound assignment, unless it's a number.
+        if (assignment.Target.TrackedSymbol(state) is { } targetSymbol
+            && targetSymbol.GetSymbolType() is { } type
+            && !type.IsNullableValueType())
+        {
+            return type.Is(KnownType.System_String) || type.IsValueType
+                ? state.SetSymbolValue(targetSymbol, SymbolicValue.NotNull)
+                : state.SetSymbolValue(targetSymbol, SymbolicValue.Empty);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    #region Copied Code
+    private static NumberConstraint Calculate(BinaryOperatorKind kind, NumberConstraint left, NumberConstraint right) =>
+        kind switch
+        {
+            BinaryOperatorKind.Add => NumberConstraint.From(left.Min + right.Min, left.Max + right.Max),
+            BinaryOperatorKind.Subtract => NumberConstraint.From(left.Min - right.Max, left.Max - right.Min),
+            _ => null
+        };
+
+    #endregion
 }
