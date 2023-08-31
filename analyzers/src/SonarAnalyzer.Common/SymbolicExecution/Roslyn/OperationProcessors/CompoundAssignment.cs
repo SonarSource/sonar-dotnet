@@ -33,7 +33,7 @@ internal sealed class CompoundAssignment : SimpleProcessor<ICompoundAssignmentOp
         ?? ProcessCompoundAssignment(context.State, assignment)
         ?? context.State;
 
-    private ProgramState ProcessNumericalCompoundAssignment(ProgramState state, ICompoundAssignmentOperationWrapper assignment)
+    private static ProgramState ProcessNumericalCompoundAssignment(ProgramState state, ICompoundAssignmentOperationWrapper assignment)
     {
         if (state.Constraint<NumberConstraint>(assignment.Target) is { } leftNumber
             && state.Constraint<NumberConstraint>(assignment.Value) is { } rightNumber
