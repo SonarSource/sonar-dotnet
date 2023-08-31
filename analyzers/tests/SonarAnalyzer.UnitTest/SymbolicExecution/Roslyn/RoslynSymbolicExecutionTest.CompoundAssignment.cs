@@ -1,22 +1,22 @@
 ﻿/*
-* SonarAnalyzer for .NET
-* Copyright (C) 2015-2023 SonarSource SA
-* mailto: contact AT sonarsource DOT com
-*
-* This program is free software; you can redistribute it and/or
-* modify it under the terms of the GNU Lesser General Public
-* License as published by the Free Software Foundation; either
-* version 3 of the License, or (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-* Lesser General Public License for more details.
-*
-* You should have received a copy of the GNU Lesser General Public License
-* along with this program; if not, write to the Free Software Foundation,
-* Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-*/
+ * SonarAnalyzer for .NET
+ * Copyright (C) 2015-2023 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
 
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
@@ -274,7 +274,7 @@ public partial class RoslynSymbolicExecutionTest
     [DataRow("i == -3 && j >= -5", null, 15)]
     [DataRow("i == -3 && j <=  5", -15, null)]
     [DataRow("i == -3 && j <= -5", 15, null)]
-    public void Compound_Multiplication_Range(string expression, int? expectedMin, int? expectedMax)
+    public void CompoundAssignment_Multiplication_Range(string expression, int? expectedMin, int? expectedMax)
     {
         var code = $$"""
             if ({{expression}})
@@ -302,7 +302,7 @@ public partial class RoslynSymbolicExecutionTest
     [DataRow(5, -1, -5)]
     [DataRow(-5, 1, -5)]
     [DataRow(-5, -1, 5)]
-    public void Compound_Division_SingleValue(int left, int right, int expected)
+    public void CompoundAssignment_Division_SingleValue(int left, int right, int expected)
     {
         var code = $"""
             var left = {left};
@@ -363,7 +363,7 @@ public partial class RoslynSymbolicExecutionTest
     [DataRow("i <= -21 && j >= 0", null, 0)]
     [DataRow("i <= -21 && j == 0", null, null)]
     [DataRow("i <= -21 && j <= 0", 0, null)]
-    public void Compound_Division_Range(string expression, int? expectedMin, int? expectedMax)
+    public void CompoundAssignment_Division_Range(string expression, int? expectedMin, int? expectedMax)
     {
         var code = $$"""
             if ({{expression}})
@@ -395,7 +395,7 @@ public partial class RoslynSymbolicExecutionTest
     [DataRow(5, -1, 0)]
     [DataRow(-5, 1, 0)]
     [DataRow(-5, -1, 0)]
-    public void Compound_Remainder_SingleValue(int left, int right, int expected)
+    public void CompoundAssignment_Remainder_SingleValue(int left, int right, int expected)
     {
         var code = $"""
             var left = {left};
@@ -484,7 +484,7 @@ public partial class RoslynSymbolicExecutionTest
     [DataRow("i >= -10 && i <=  -5 && j <= -21", -10, -5)]
     [DataRow("i >=   4 && i <=   7 && j >=   5 && j <= 10", 0, 7)]
     [DataRow("i == 5 && j == 0", null, null)]
-    public void Compound_Remainder_Range(string expression, int? expectedMin, int? expectedMax)
+    public void CompoundAssignment_Remainder_Range(string expression, int? expectedMin, int? expectedMax)
     {
         var code = $$"""
             if ({{expression}})
@@ -510,7 +510,7 @@ public partial class RoslynSymbolicExecutionTest
     [DataRow(5, -4, 4)]
     [DataRow(-5, -5, -5)]
     [DataRow(-5, -4, -8)]
-    public void Compound_BitAnd_SingleValue(int left, int right, int expected)
+    public void CompoundAssignment_BitAnd_SingleValue(int left, int right, int expected)
     {
         var code = $"""
             var left = {left};
@@ -549,7 +549,7 @@ public partial class RoslynSymbolicExecutionTest
     [DataRow("i <= -3 && j >= -5", null, null)]
     [DataRow("i <= -3 && j <=  5", null, 5)]
     [DataRow("i <= -3 && j <= -5", null, -5)]
-    public void Compound_BitAnd_Range(string expression, int? expectedMin, int? expectedMax)
+    public void CompoundAssignment_BitAnd_Range(string expression, int? expectedMin, int? expectedMax)
     {
         var code = $$"""
             if ({{expression}})
@@ -575,7 +575,7 @@ public partial class RoslynSymbolicExecutionTest
     [DataRow(5, -4, -3)]
     [DataRow(-5, -5, -5)]
     [DataRow(-5, -4, -1)]
-    public void Compound_BitOr_SingleValue(int left, int right, int expected)
+    public void CompoundAssignment_BitOr_SingleValue(int left, int right, int expected)
     {
         var code = $"""
             var left = {left};
@@ -614,7 +614,7 @@ public partial class RoslynSymbolicExecutionTest
     [DataRow("i <= -4 && j >= -6", null, -1)]
     [DataRow("i <= -4 && j <=  6", null, -1)]
     [DataRow("i <= -4 && j <= -6", null, -1)]
-    public void Compound_BitOr_Range(string expression, int? expectedMin, int? expectedMax)
+    public void CompoundAssignment_BitOr_Range(string expression, int? expectedMin, int? expectedMax)
     {
         var code = $$"""
             if ({{expression}})
@@ -648,7 +648,7 @@ public partial class RoslynSymbolicExecutionTest
     [DataRow(5, -4, -7)]
     [DataRow(-5, -5, 0)]
     [DataRow(-5, -4, 7)]
-    public void Compound_BitXor_SingleValue(int left, int right, int expected)
+    public void CompoundAssignment_BitXor_SingleValue(int left, int right, int expected)
     {
         var code = $"""
             var left = {left};
@@ -693,7 +693,7 @@ public partial class RoslynSymbolicExecutionTest
     [DataRow("i >= -3 && i <= -1 && j >= -4 && j <=-2", 0, 7)]    // exact range: 0, 3
     [DataRow("i >= -4 && i <= -3 && j >= -2 && j <=-1", 1, 7)]    // exact range: 2, 3
     [DataRow("i >= -4 && i <=  6 && j >= -3 && j <= 8", -16, 15)] // exact range: -12, 14
-    public void Compound_BitXor_Range(string expression, int? expectedMin, int? expectedMax)
+    public void CompoundAssignment_BitXor_Range(string expression, int? expectedMin, int? expectedMax)
     {
         var code = $$"""
             if ({{expression}})

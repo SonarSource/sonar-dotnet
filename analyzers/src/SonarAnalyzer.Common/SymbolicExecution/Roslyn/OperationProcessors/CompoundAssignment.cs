@@ -73,6 +73,7 @@ internal sealed class CompoundAssignment : SimpleProcessor<ICompoundAssignmentOp
         }
     }
 
+    // FIXME: This will be extracted to another class.
     #region CopiedCode
     private static NumberConstraint Calculate(BinaryOperatorKind kind, NumberConstraint left, NumberConstraint right) => kind switch
     {
@@ -88,7 +89,6 @@ internal sealed class CompoundAssignment : SimpleProcessor<ICompoundAssignmentOp
         BinaryOperatorKind.Or => NumberConstraint.From(CalculateOrMin(left, right), CalculateOrMax(left, right)),
         BinaryOperatorKind.ExclusiveOr when left.IsSingleValue && right.IsSingleValue => NumberConstraint.From(left.Min.Value ^ right.Min.Value),
         BinaryOperatorKind.ExclusiveOr => NumberConstraint.From(CalculateXorMin(left, right), CalculateXorMax(left, right)),
-
         _ => null
     };
 
