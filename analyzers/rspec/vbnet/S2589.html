@@ -39,7 +39,7 @@ End If
 </ul>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
-<pre>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 Public Sub Sample(ByVal b As Boolean, ByVal c As Boolean)
     Dim a = True
     If a Then                  ' Noncompliant: "a" is always "true"
@@ -60,7 +60,7 @@ Public Sub Sample(ByVal b As Boolean, ByVal c As Boolean)
 End Sub
 </pre>
 <h4>Compliant solution</h4>
-<pre>
+<pre data-diff-id="1" data-diff-type="compliant">
 Public Sub Sample(ByVal b As Boolean, ByVal c As Boolean, ByVal s As String)
     Dim a = IsAllowed()
     If a Then                   ' Compliant
