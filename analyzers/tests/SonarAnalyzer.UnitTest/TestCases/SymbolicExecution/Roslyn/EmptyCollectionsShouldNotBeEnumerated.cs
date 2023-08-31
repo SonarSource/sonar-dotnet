@@ -456,6 +456,24 @@ class CollectionTests
 
 class AdvancedTests
 {
+    public void UntrackedCollections()
+    {
+        var sb = new StringBuilder();                       // StringBuilder would be good to add, but we do not support it at the moment
+        sb.Clear();
+        sb.Clear();                                         // Compliant
+
+        var custom = new CustomCollection();
+        custom.Clear();
+        custom.AddMethodWithDifferentName(5);
+        custom.Clear();                                     // Compliant
+    }
+
+    class CustomCollection
+    {
+        public void Clear() { }
+        public void AddMethodWithDifferentName(int item) { }
+    }
+
     public void UnknownExtensionMethods()
     {
         var list = new List<int>();
