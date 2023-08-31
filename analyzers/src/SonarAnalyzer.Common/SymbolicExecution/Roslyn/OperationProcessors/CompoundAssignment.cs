@@ -54,7 +54,7 @@ internal sealed class CompoundAssignment : SimpleProcessor<ICompoundAssignmentOp
         return null;
     }
 
-    private ProgramState LearnNotNullFromCompoundAssignment(ProgramState state, ICompoundAssignmentOperationWrapper assignment) =>
+    private static ProgramState LearnNotNullFromCompoundAssignment(ProgramState state, ICompoundAssignmentOperationWrapper assignment) =>
         assignment.Target.TrackedSymbol(state) is { } targetSymbol && targetSymbol.GetSymbolType().IsAny(KnownType.System_String, KnownType.System_Boolean)
             ? state.SetSymbolValue(targetSymbol, SymbolicValue.NotNull)
             : null;

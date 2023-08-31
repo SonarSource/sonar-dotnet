@@ -88,8 +88,8 @@ public partial class RoslynSymbolicExecutionTest
     }
 
     [DataTestMethod]
-  //  [DataRow("+=")]
- //   [DataRow("-=")]
+  // [DataRow("+=")]
+  // [DataRow("-=")]
     [DataRow("*=")]
     [DataRow("/=")]
     [DataRow("%=")]
