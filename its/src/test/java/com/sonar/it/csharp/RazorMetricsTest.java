@@ -52,6 +52,6 @@ public class RazorMetricsTest {
 
   @Test
   void linesAtFileLevel() {
-    assertThat(getMeasureAsInt(FILE, "lines")).isEqualTo(23);
+    assertThat(getMeasureAsInt(FILE, "lines")).isEqualTo(27);
   }
 }

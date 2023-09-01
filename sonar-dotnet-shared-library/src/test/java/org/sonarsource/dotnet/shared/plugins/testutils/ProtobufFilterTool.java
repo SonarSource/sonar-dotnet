@@ -44,8 +44,8 @@ import static org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter.SYMBOLR
  */
 public class ProtobufFilterTool {
 
-  private static final File TEST_DATA_DIR = new File("src/test/resources/ProtobufImporterTest");
-  private static final String TEST_FILENAME = "Program.cs";
+  private static final File TEST_DATA_DIR = new File("sonar-dotnet-shared-library/src/test/resources/RazorProtobufImporter");
+  private static final String TEST_FILENAME = "Cases.razor";
 
   public static void main(String[] args) throws IOException {
     String pathSuffix = "\\" + TEST_FILENAME;

@@ -78,10 +78,10 @@ public class RoslynMetricsImporterTest {
         Tuple.tuple(CoreMetrics.CLASSES, 1),
         Tuple.tuple(CoreMetrics.STATEMENTS, 15),
         Tuple.tuple(CoreMetrics.FUNCTIONS, 4),
-        Tuple.tuple(CoreMetrics.COMPLEXITY, 4),
+        Tuple.tuple(CoreMetrics.COMPLEXITY, 5),
         Tuple.tuple(CoreMetrics.COMMENT_LINES, 0),
-        Tuple.tuple(CoreMetrics.COGNITIVE_COMPLEXITY, 0),
-        Tuple.tuple(CoreMetrics.NCLOC, 12));
+        Tuple.tuple(CoreMetrics.COGNITIVE_COMPLEXITY, 1),
+        Tuple.tuple(CoreMetrics.NCLOC, 14));
 
     verify(noSonarFilter).noSonarInFile(inputFile, Collections.emptySet());
 
@@ -93,15 +93,16 @@ public class RoslynMetricsImporterTest {
 
     verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 3, 1);
     verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 5, 1);
-    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 7, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 8, 1);
     verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 9, 1);
-    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 12, 1);
-    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 14, 1);
-    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 15, 1);
-    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 17, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 11, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 16, 1);
     verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 18, 1);
     verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 19, 1);
-    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 20, 1);
     verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 21, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 22, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 23, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 24, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 25, 1);
   }
 }
