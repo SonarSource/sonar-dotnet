@@ -53,7 +53,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        public void Verify_MainTokens_Csharp11(ProjectType projectType) =>
+        public void Verify_MainTokens_CSharp11(ProjectType projectType) =>
             Verify("Tokens.Csharp11.cs", projectType, info =>
             {
                 info.Should().HaveCount(42);
