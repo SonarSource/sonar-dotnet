@@ -62,7 +62,7 @@ public partial class RoslynSymbolicExecutionTest
         var code = $"""
             var i = 42;
             var j = 5;
-            var value = {expression};
+            var value =  {expression};
             Tag("Value", value);
             """;
         var validator = SETestContext.CreateCS(code).Validator;
@@ -86,16 +86,16 @@ public partial class RoslynSymbolicExecutionTest
             var left = {left};
             var right = {right};
 
-            var value = left * right;
-            Tag("Value", value);
+            var binary =  left * right;
+            Tag("Binary", binary);
 
-            var valueCompound = left *= right;
-            Tag("ValueCompound", valueCompound);
+            var compound = left *= right;
+            Tag("Compound", compound);
             Tag("Left", left);
             """;
         var validator = SETestContext.CreateCS(code).Validator;
-        validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
-        validator.TagValue("ValueCompound").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
+        validator.TagValue("Binary").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
+        validator.TagValue("Compound").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
         validator.TagValue("Left").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
     }
 
@@ -129,17 +129,17 @@ public partial class RoslynSymbolicExecutionTest
         var code = $$"""
             if ({{expression}})
             {
-                var value = i * j;
-                Tag("Value", value);
+                var binary =  i * j;
+                Tag("Binary", binary);
 
-                var valueCompound = i *= j;
-                Tag("ValueCompound", valueCompound);
+                var compound = i *= j;
+                Tag("Compound", compound);
                 Tag("I", i);
             }
             """;
         var validator = SETestContext.CreateCS(code, "int i, int j").Validator;
-        validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax));
-        validator.TagValue("ValueCompound").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax));
+        validator.TagValue("Binary").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax));
+        validator.TagValue("Compound").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax));
         validator.TagValue("I").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax));
     }
 
@@ -161,16 +161,16 @@ public partial class RoslynSymbolicExecutionTest
         var code = $"""
             var left = {left};
             var right = {right};
-            var value = left / right;
-            Tag("Value", value);
+            var binary =  left / right;
+            Tag("Binary", binary);
 
-            var valueCompound = left /= right;
-            Tag("ValueCompound", valueCompound);
+            var compound = left /= right;
+            Tag("Compound", compound);
             Tag("Left", left);
             """;
         var validator = SETestContext.CreateCS(code).Validator;
-        validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
-        validator.TagValue("ValueCompound").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
+        validator.TagValue("Binary").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
+        validator.TagValue("Compound").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
         validator.TagValue("Left").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
     }
 
@@ -226,17 +226,17 @@ public partial class RoslynSymbolicExecutionTest
         var code = $$"""
             if ({{expression}})
             {
-                var value = i / j;
-                Tag("Value", value);
+                var binary =  i / j;
+                Tag("Binary", binary);
 
-                var valueCompound = i /= j;
-                Tag("ValueCompound", valueCompound);
+                var compound = i /= j;
+                Tag("Compound", compound);
                 Tag("I", i);
             }
             """;
         var validator = SETestContext.CreateCS(code, "int i, int j").Validator;
-        validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax));
-        validator.TagValue("ValueCompound").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax));
+        validator.TagValue("Binary").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax));
+        validator.TagValue("Compound").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax));
         validator.TagValue("I").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax));
     }
 
@@ -262,16 +262,16 @@ public partial class RoslynSymbolicExecutionTest
         var code = $"""
             var left = {left};
             var right = {right};
-            var value = left % right;
-            Tag("Value", value);
+            var binary =  left % right;
+            Tag("Binary", binary);
 
-            var valueCompound = left %= right;
-            Tag("ValueCompound", valueCompound);
+            var compound = left %= right;
+            Tag("Compound", compound);
             Tag("Left", left);
             """;
         var validator = SETestContext.CreateCS(code).Validator;
-        validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
-        validator.TagValue("ValueCompound").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
+        validator.TagValue("Binary").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
+        validator.TagValue("Compound").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
         validator.TagValue("Left").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
     }
 
@@ -355,17 +355,17 @@ public partial class RoslynSymbolicExecutionTest
         var code = $$"""
             if ({{expression}})
             {
-                var value = i % j;
-                Tag("Value", value);
+                var binary =  i % j;
+                Tag("Binary", binary);
 
-                var valueCompound = i %= j;
-                Tag("ValueCompound", valueCompound);
+                var compound = i %= j;
+                Tag("Compound", compound);
                 Tag("I", i);
             }
             """;
         var validator = SETestContext.CreateCS(code, "int i, int j").Validator;
-        validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax));
-        validator.TagValue("ValueCompound").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax));
+        validator.TagValue("Binary").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax));
+        validator.TagValue("Compound").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax));
         validator.TagValue("I").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax));
     }
 
@@ -385,16 +385,16 @@ public partial class RoslynSymbolicExecutionTest
         var code = $"""
             var left = {left};
             var right = {right};
-            var value = left & right;
-            Tag("Value", value);
+            var binary =  left & right;
+            Tag("Binary", binary);
 
-            var valueCompound = left &= right;
-            Tag("ValueCompound", valueCompound);
+            var compound = left &= right;
+            Tag("Compound", compound);
             Tag("Left", left);
             """;
         var validator = SETestContext.CreateCS(code).Validator;
-        validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
-        validator.TagValue("ValueCompound").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
+        validator.TagValue("Binary").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
+        validator.TagValue("Compound").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
         validator.TagValue("Left").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
     }
 
@@ -428,17 +428,17 @@ public partial class RoslynSymbolicExecutionTest
         var code = $$"""
             if ({{expression}})
             {
-                var value = i & j;
-                Tag("Value", value);
+                var binary =  i & j;
+                Tag("Binary", binary);
 
-                var valueCompound = i &= j;
-                Tag("ValueCompound", valueCompound);
+                var compound = i &= j;
+                Tag("Compound", compound);
                 Tag("I", i);
             }
             """;
         var validator = SETestContext.CreateCS(code, "int i, int j").Validator;
-        validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax));
-        validator.TagValue("ValueCompound").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax));
+        validator.TagValue("Binary").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax));
+        validator.TagValue("Compound").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax));
         validator.TagValue("I").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax));
     }
 
@@ -458,16 +458,16 @@ public partial class RoslynSymbolicExecutionTest
         var code = $"""
             var left = {left};
             var right = {right};
-            var value = left | right;
-            Tag("Value", value);
+            var binary =  left | right;
+            Tag("Binary", binary);
 
-            var valueCompound = left |= right;
-            Tag("ValueCompound", valueCompound);
+            var compound = left |= right;
+            Tag("Compound", compound);
             Tag("Left", left);
             """;
         var validator = SETestContext.CreateCS(code).Validator;
-        validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
-        validator.TagValue("ValueCompound").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
+        validator.TagValue("Binary").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
+        validator.TagValue("Compound").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
         validator.TagValue("Left").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
     }
 
@@ -501,11 +501,11 @@ public partial class RoslynSymbolicExecutionTest
         var code = $$"""
             if ({{expression}})
             {
-                var value = i | j;
-                Tag("Value", value);
+                var binary =  i | j;
+                Tag("Binary", binary);
 
-                var valueCompound = i |= j;
-                Tag("ValueCompound", valueCompound);
+                var compound = i |= j;
+                Tag("Compound", compound);
                 Tag("I", i);
             }
             """;
@@ -513,14 +513,14 @@ public partial class RoslynSymbolicExecutionTest
         var validator = SETestContext.CreateCS(code, "int i, int j").Validator;
         if (expectedMin is not null || expectedMax is not null)
         {
-            validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax));
-            validator.TagValue("ValueCompound").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax));
+            validator.TagValue("Binary").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax));
+            validator.TagValue("Compound").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax));
             validator.TagValue("I").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax));
         }
         else
         {
-            validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
-            validator.TagValue("ValueCompound").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
+            validator.TagValue("Binary").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
+            validator.TagValue("Compound").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
             validator.TagValue("I").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
         }
     }
@@ -541,16 +541,16 @@ public partial class RoslynSymbolicExecutionTest
         var code = $"""
             var left = {left};
             var right = {right};
-            var value = left ^ right;
-            Tag("Value", value);
+            var binary =  left ^ right;
+            Tag("Binary", binary);
 
-            var valueCompound = left ^= right;
-            Tag("ValueCompound", valueCompound);
+            var compound = left ^= right;
+            Tag("Compound", compound);
             Tag("Left", left);
             """;
         var validator = SETestContext.CreateCS(code).Validator;
-        validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
-        validator.TagValue("ValueCompound").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
+        validator.TagValue("Binary").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
+        validator.TagValue("Compound").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
         validator.TagValue("Left").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
     }
 
@@ -592,11 +592,11 @@ public partial class RoslynSymbolicExecutionTest
         var code = $$"""
             if ({{expression}})
             {
-                var value = i ^ j;
-                Tag("Value", value);
+                var binary =  i ^ j;
+                Tag("Binary", binary);
 
-                var valueCompound = i ^= j;
-                Tag("ValueCompound", valueCompound);
+                var compound = i ^= j;
+                Tag("Compound", compound);
                 Tag("I", i);
             }
             """;
@@ -604,14 +604,14 @@ public partial class RoslynSymbolicExecutionTest
         var validator = SETestContext.CreateCS(code, "int i, int j").Validator;
         if (expectedMin is not null || expectedMax is not null)
         {
-            validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax));
-            validator.TagValue("ValueCompound").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax));
+            validator.TagValue("Binary").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax));
+            validator.TagValue("Compound").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax));
             validator.TagValue("I").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax));
         }
         else
         {
-            validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
-            validator.TagValue("ValueCompound").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
+            validator.TagValue("Binary").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
+            validator.TagValue("Compound").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
             validator.TagValue("I").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
         }
     }

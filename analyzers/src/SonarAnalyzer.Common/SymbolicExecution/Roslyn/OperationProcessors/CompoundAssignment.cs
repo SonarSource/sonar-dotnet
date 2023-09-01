@@ -36,7 +36,7 @@ internal sealed class CompoundAssignment : SimpleProcessor<ICompoundAssignmentOp
     {
         if (state.Constraint<NumberConstraint>(assignment.Target) is { } leftNumber
             && state.Constraint<NumberConstraint>(assignment.Value) is { } rightNumber
-            && ArithmeticCalculations.Calculate(assignment.OperatorKind, leftNumber, rightNumber) is { } constraint)
+            && ArithmeticCalculator.Calculate(assignment.OperatorKind, leftNumber, rightNumber) is { } constraint)
         {
             state = state.SetOperationConstraint(assignment, constraint);
             if (assignment.Target.TrackedSymbol(state) is { } symbol)

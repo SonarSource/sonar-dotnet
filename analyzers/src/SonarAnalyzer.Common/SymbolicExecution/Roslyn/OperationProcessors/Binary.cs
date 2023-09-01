@@ -51,7 +51,7 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
     {
         if (state[operation.LeftOperand]?.Constraint<NumberConstraint>() is { } leftNumber
             && state[operation.RightOperand]?.Constraint<NumberConstraint>() is { } rightNumber
-            && ArithmeticCalculations.Calculate(operation.OperatorKind, leftNumber, rightNumber) is { } constraint)
+            && ArithmeticCalculator.Calculate(operation.OperatorKind, leftNumber, rightNumber) is { } constraint)
         {
             state = state.SetOperationConstraint(operation, constraint);
         }
@@ -140,7 +140,7 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
     {
         return kind switch
         {
-            BinaryOperatorKind.Equals => NumberConstraint.From(ArithmeticCalculations.BiggestMinimum(comparedNumber, existingNumber), ArithmeticCalculations.SmallestMaximum(comparedNumber, existingNumber)),
+            BinaryOperatorKind.Equals => NumberConstraint.From(ArithmeticCalculator.BiggestMinimum(comparedNumber, existingNumber), ArithmeticCalculator.SmallestMaximum(comparedNumber, existingNumber)),
             BinaryOperatorKind.NotEquals when comparedNumber.IsSingleValue && comparedNumber.Min == existingNumber?.Min => NumberConstraint.From(existingNumber.Min + 1, existingNumber.Max),
             BinaryOperatorKind.NotEquals when comparedNumber.IsSingleValue && comparedNumber.Min == existingNumber?.Max => NumberConstraint.From(existingNumber.Min, existingNumber.Max - 1),
             BinaryOperatorKind.GreaterThan when comparedNumber.Min.HasValue => From(comparedNumber.Min + 1, null),
