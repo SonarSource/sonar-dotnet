@@ -155,22 +155,44 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 
         [TestMethod]
         public void Verify_Razor() =>
-            DummyWithLocationMapping.AddPaths("Dummy.razor").Verify();
+            DummyWithLocationMapping
+                .AddPaths("Dummy.razor")
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+                .Verify();
 
         [TestMethod]
         public void Verify_Cshtml() =>
-            DummyWithLocationMapping.AddPaths("Dummy.cshtml").Verify();
+            DummyWithLocationMapping
+                .AddPaths("Dummy.cshtml")
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+                .Verify();
 
         [TestMethod]
         public void Verify_RazorAnalysisIsDisabled_DoesNotRaise() =>
-            DummyWithLocationMapping.AddPaths("Dummy.razor")
-                .WithAdditionalFilePath(Path.GetFullPath(@"TestResources\SonarLintXml\DisableRazorCodeAnalysis\SonarLint.xml"))
+            DummyWithLocationMapping
+                .AddPaths("Dummy.razor")
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarLintXml(TestContext, analyzeRazorCode: false))
                 .VerifyNoIssueReported();
 
         [TestMethod]
         public void Verify_CshtmlAnalysisIsDisabled_DoesNotRaise() =>
-            DummyWithLocationMapping.AddPaths("Dummy.cshtml")
-                .WithAdditionalFilePath(Path.GetFullPath(@"TestResources\SonarLintXml\DisableRazorCodeAnalysis\SonarLint.xml"))
+            DummyWithLocationMapping
+                .AddPaths("Dummy.cshtml")
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarLintXml(TestContext, analyzeRazorCode: false))
+                .VerifyNoIssueReported();
+
+        [TestMethod]
+        public void Verify_RazorAnalysisInSLAndNugetContext_DoesNotRaise() =>
+            DummyWithLocationMapping
+                .AddPaths("Dummy.razor")
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Unknown))
+                .VerifyNoIssueReported();
+
+        [TestMethod]
+        public void Verify_CshtmlAnalysisInSLAndNugetContext_DoesNotRaise() =>
+            DummyWithLocationMapping
+                .AddPaths("Dummy.cshtml")
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Unknown))
                 .VerifyNoIssueReported();
 
         [DataTestMethod]
