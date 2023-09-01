@@ -23,7 +23,7 @@ using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
-internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrapper>
+internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
 {
     protected override IBinaryOperationWrapper Convert(IOperation operation) =>
         IBinaryOperationWrapper.FromOperation(operation);
@@ -51,7 +51,7 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
     {
         if (state[operation.LeftOperand]?.Constraint<NumberConstraint>() is { } leftNumber
             && state[operation.RightOperand]?.Constraint<NumberConstraint>() is { } rightNumber
-            && Calculate(operation.OperatorKind, leftNumber, rightNumber) is { } constraint)
+            && ArithmeticCalculations.Calculate(operation.OperatorKind, leftNumber, rightNumber) is { } constraint)
         {
             state = state.SetOperationConstraint(operation, constraint);
         }
@@ -140,7 +140,7 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
     {
         return kind switch
         {
-            BinaryOperatorKind.Equals => NumberConstraint.From(BiggestMinimum(comparedNumber, existingNumber), SmallestMaximum(comparedNumber, existingNumber)),
+            BinaryOperatorKind.Equals => NumberConstraint.From(ArithmeticCalculations.BiggestMinimum(comparedNumber, existingNumber), ArithmeticCalculations.SmallestMaximum(comparedNumber, existingNumber)),
             BinaryOperatorKind.NotEquals when comparedNumber.IsSingleValue && comparedNumber.Min == existingNumber?.Min => NumberConstraint.From(existingNumber.Min + 1, existingNumber.Max),
             BinaryOperatorKind.NotEquals when comparedNumber.IsSingleValue && comparedNumber.Min == existingNumber?.Max => NumberConstraint.From(existingNumber.Min, existingNumber.Max - 1),
             BinaryOperatorKind.GreaterThan when comparedNumber.Min.HasValue => From(comparedNumber.Min + 1, null),

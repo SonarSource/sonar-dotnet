@@ -23,9 +23,9 @@ using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
-internal sealed partial class Binary
+internal static class ArithmeticCalculations
 {
-    private static NumberConstraint Calculate(BinaryOperatorKind kind, NumberConstraint left, NumberConstraint right) => kind switch
+    public static NumberConstraint Calculate(BinaryOperatorKind kind, NumberConstraint left, NumberConstraint right) => kind switch
     {
         BinaryOperatorKind.Add => NumberConstraint.From(left.Min + right.Min, left.Max + right.Max),
         BinaryOperatorKind.Subtract => NumberConstraint.From(left.Min - right.Max, left.Max - right.Min),
@@ -41,6 +41,38 @@ internal sealed partial class Binary
         BinaryOperatorKind.ExclusiveOr => NumberConstraint.From(CalculateXorMin(left, right), CalculateXorMax(left, right)),
         _ => null
     };
+
+    public static BigInteger? BiggestMinimum(NumberConstraint left, NumberConstraint right)
+    {
+        if (left.Min is null)
+        {
+            return right?.Min;
+        }
+        else if (right?.Min is null)
+        {
+            return left.Min;
+        }
+        else
+        {
+            return BigInteger.Max(left.Min.Value, right.Min.Value);
+        }
+    }
+
+    public static BigInteger? SmallestMaximum(NumberConstraint left, NumberConstraint right)
+    {
+        if (left.Max is null)
+        {
+            return right?.Max;
+        }
+        else if (right?.Max is null)
+        {
+            return left.Max;
+        }
+        else
+        {
+            return BigInteger.Min(left.Max.Value, right.Max.Value);
+        }
+    }
 
     private static NumberConstraint CalculateMultiply(NumberConstraint left, NumberConstraint right)
     {
@@ -408,22 +440,6 @@ internal sealed partial class Binary
         return magnitude;
     }
 
-    private static BigInteger? SmallestMaximum(NumberConstraint left, NumberConstraint right)
-    {
-        if (left.Max is null)
-        {
-            return right?.Max;
-        }
-        else if (right?.Max is null)
-        {
-            return left.Max;
-        }
-        else
-        {
-            return BigInteger.Min(left.Max.Value, right.Max.Value);
-        }
-    }
-
     private static BigInteger? BiggestMaximum(NumberConstraint left, NumberConstraint right)
     {
         if (left.Max is null || right.Max is null)
@@ -445,22 +461,6 @@ internal sealed partial class Binary
         else
         {
             return BigInteger.Min(left.Min.Value, right.Min.Value);
-        }
-    }
-
-    private static BigInteger? BiggestMinimum(NumberConstraint left, NumberConstraint right)
-    {
-        if (left.Min is null)
-        {
-            return right?.Min;
-        }
-        else if (right?.Min is null)
-        {
-            return left.Min;
-        }
-        else
-        {
-            return BigInteger.Max(left.Min.Value, right.Min.Value);
         }
     }
 }
