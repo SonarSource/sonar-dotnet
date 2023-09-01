@@ -32,12 +32,16 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
     private static readonly KnownType[] TrackedCollectionTypes = new[]
     {
         KnownType.System_Collections_Generic_List_T,
+        KnownType.System_Collections_Generic_IList_T,
+        KnownType.System_Collections_Generic_ICollection_T,
         KnownType.System_Collections_Generic_HashSet_T,
+        KnownType.System_Collections_Generic_ISet_T,
         KnownType.System_Collections_Generic_Queue_T,
         KnownType.System_Collections_Generic_Stack_T,
         KnownType.System_Collections_ObjectModel_ObservableCollection_T,
         KnownType.System_Array,
-        KnownType.System_Collections_Generic_Dictionary_TKey_TValue
+        KnownType.System_Collections_Generic_Dictionary_TKey_TValue,
+        KnownType.System_Collections_Generic_IDictionary_TKey_TValue,
     };
 
     protected static readonly HashSet<string> RaisingMethods = new()

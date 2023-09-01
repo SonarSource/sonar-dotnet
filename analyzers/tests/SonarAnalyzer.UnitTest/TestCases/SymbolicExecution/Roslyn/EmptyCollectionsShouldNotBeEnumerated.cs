@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -468,10 +469,39 @@ class AdvancedTests
         custom.Clear();                                     // Compliant
     }
 
-    class CustomCollection
+    public void AssignmentToInterface()
     {
-        public void Clear() { }
-        public void AddMethodWithDifferentName(int item) { }
+        IList<int> iList = new List<int>();
+        iList.Add(5);
+        iList.Clear();                                      // Compliant
+
+        ICollection<int> iCollection = new List<int>();
+        iCollection.Add(5);
+        iCollection.Clear();                                // Compliant
+
+        ISet<int> iSet = new HashSet<int>();
+        iSet.Add(5);
+        iSet.Clear();                                       // Compliant
+
+        IDictionary<int, int> iDictionary = new Dictionary<int, int>();
+        iDictionary.Add(1, 5);
+        iDictionary.Clear();                                // Compliant
+
+        IList<int> customIList = new CustomIList();
+        customIList.Clear();                                // Compliant, state is unknown
+        customIList.Clear();                                // Noncompliant
+        customIList.Add(5);
+        customIList.Clear();                                // Compliant
+
+        IEnumerable<int> enumerable = new List<int>();
+        enumerable.GetEnumerator();                         // Noncompliant
+        enumerable = new List<int> { 5 };
+        enumerable.GetEnumerator();                         // Compliant
+
+        IReadOnlyList<int> readOnly = new List<int>();
+        readOnly.GetEnumerator();                           // Noncompliant
+        readOnly = new List<int> { 5 };
+        readOnly.GetEnumerator();                           // Compliant
     }
 
     public void UnknownExtensionMethods()
@@ -704,6 +734,29 @@ class AdvancedTests
     }
 
     void Foo(List<int> items) { }
+
+    class CustomCollection
+    {
+        public void Clear() { }
+        public void AddMethodWithDifferentName(int item) { }
+    }
+
+    class CustomIList : IList<int>
+    {
+        public int this[int index] { get => 0; set => Add(value); }
+        public int Count => throw new NotImplementedException();
+        public bool IsReadOnly => throw new NotImplementedException();
+        public void Add(int item) => throw new NotImplementedException();
+        public void Clear() => throw new NotImplementedException();
+        public bool Contains(int item) => throw new NotImplementedException();
+        public void CopyTo(int[] array, int arrayIndex) => throw new NotImplementedException();
+        public IEnumerator<int> GetEnumerator() => throw new NotImplementedException();
+        public int IndexOf(int item) => throw new NotImplementedException();
+        public void Insert(int index, int item) => throw new NotImplementedException();
+        public bool Remove(int item) => throw new NotImplementedException();
+        public void RemoveAt(int index) => throw new NotImplementedException();
+        IEnumerator IEnumerable.GetEnumerator() => throw new NotImplementedException();
+    }
 }
 
 static class CustomExtensions
