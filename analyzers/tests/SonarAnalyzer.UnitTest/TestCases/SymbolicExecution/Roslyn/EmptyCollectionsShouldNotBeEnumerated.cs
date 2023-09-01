@@ -492,6 +492,16 @@ class AdvancedTests
         customIList.Clear();                                // Noncompliant
         customIList.Add(5);
         customIList.Clear();                                // Compliant
+
+        IEnumerable<int> enumerable = new List<int>();
+        enumerable.GetEnumerator();                         // Noncompliant
+        enumerable = new List<int> { 5 };
+        enumerable.GetEnumerator();                         // Compliant
+
+        IReadOnlyList<int> readOnly = new List<int>();
+        readOnly.GetEnumerator();                           // Noncompliant
+        readOnly = new List<int> { 5 };
+        readOnly.GetEnumerator();                           // Compliant
     }
 
     public void UnknownExtensionMethods()
