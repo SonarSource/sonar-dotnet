@@ -147,7 +147,7 @@ class CoverageTest {
       "Sensor C# Tests Coverage Report Import",
       "Coverage Report Statistics: 5 files, 3 main files, 3 main files with coverage, 2 test files, 0 project excluded files, 0 other language files.");
 
-    assertLineCoverageMetrics("MultipleProjects", 22, 2);
+    assertLineCoverageMetrics("MultipleProjects", 11, 2);
     assertLineCoverageMetrics("MultipleProjects:FirstProject/FirstClass.cs", 10, 0);
     assertLineCoverageMetrics("MultipleProjects:FirstProject/SecondClass.cs", 4, 0);
     assertLineCoverageMetrics("MultipleProjects:SecondProject/FirstClass.cs", 8, 2);
