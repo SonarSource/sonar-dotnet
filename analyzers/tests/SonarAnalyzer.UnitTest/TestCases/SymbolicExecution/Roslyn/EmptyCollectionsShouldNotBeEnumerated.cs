@@ -474,7 +474,7 @@ class AdvancedTests
         public void AddMethodWithDifferentName(int item) { }
     }
 
-    public void AssignmentToDifferentType()
+    public void AssignmentToInterface()
     {
         IList<int> iList = new List<int>();
         iList.Add(5);
