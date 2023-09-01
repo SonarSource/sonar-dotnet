@@ -4742,7 +4742,7 @@ internal static class RuleTypeMappingVB
         // ["S4815"],
         // ["S4816"],
         // ["S4817"] = "SECURITY_HOTSPOT",
-        ["S4818"] = "SECURITY_HOTSPOT",
+        // ["S4818"],
         // ["S4819"],
         // ["S4820"],
         // ["S4821"],
