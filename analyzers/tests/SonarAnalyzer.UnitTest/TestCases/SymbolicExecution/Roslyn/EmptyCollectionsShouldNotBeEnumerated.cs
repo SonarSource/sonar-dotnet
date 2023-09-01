@@ -474,6 +474,25 @@ class AdvancedTests
         public void AddMethodWithDifferentName(int item) { }
     }
 
+    public void AssignmentToDifferentType()
+    {
+        IList<int> iList = new List<int>();
+        iList.Add(5);
+        iList.Clear();                                      // Noncompliant FP
+
+        ICollection<int> iCollection = new List<int>();
+        iCollection.Add(5);
+        iCollection.Clear();                                // Noncompliant FP
+
+        ISet<int> iSet = new HashSet<int>();
+        iSet.Add(5);
+        iSet.Clear();                                       // Noncompliant FP
+
+        IDictionary<int, int> iDictionary = new Dictionary<int, int>();
+        iDictionary.Add(1, 5);
+        iDictionary.Clear();                                // Noncompliant FP
+    }
+
     public void UnknownExtensionMethods()
     {
         var list = new List<int>();
