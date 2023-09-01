@@ -46,7 +46,7 @@ public class RoslynMetricsImporterTest {
   private static final File TEST_DATA_DIR = new File("src/test/resources/RazorProtobufImporter");
   private static final String TEST_FILE_PATH = "Cases.razor";
   private static final File TEST_FILE = new File(TEST_DATA_DIR, TEST_FILE_PATH);
-  private final File protobuf = new File(TEST_DATA_DIR, METRICS_FILENAME);
+  private static final File protobuf = new File(TEST_DATA_DIR, METRICS_FILENAME);
 
   @Before
   public void before() {

@@ -1,11 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
-
     <PropertyGroup>
         <TargetFramework>net7.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
-
 
     <ItemGroup>
         <SupportedPlatform Include="browser"/>
@@ -19,5 +17,4 @@
       <_ContentIncludedByDefault Remove="wwwroot\background.png" />
       <_ContentIncludedByDefault Remove="wwwroot\exampleJsInterop.js" />
     </ItemGroup>
-
 </Project>

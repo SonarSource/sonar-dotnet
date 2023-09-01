@@ -46,8 +46,8 @@ namespace SonarAnalyzer.Common
                 .SelectMany(
                     x =>
                     {
-                        var start = x.StartLinePosition.Line + 1;
-                        var end = x.EndLinePosition.Line + 1;
+                        var start = x.StartLinePosition.GetLineNumberToReport();
+                        var end = x.EndLinePosition.GetLineNumberToReport();
                         return Enumerable.Range(start, end - start + 1);
                     })
                 .ToHashSet();
@@ -116,10 +116,10 @@ namespace SonarAnalyzer.Common
         public int CognitiveComplexity =>
             ComputeCognitiveComplexity(tree.GetRoot());
 
-        private bool IsInSameFile(FileLinePositionSpan span)
+        private bool IsInSameFile(FileLinePositionSpan span) =>
             // Syntax tree can contain elements from external files (e.g. razor imports files)
             // We need to make sure that we don't count these elements.
-            => string.Equals(filePath, span.Path, StringComparison.OrdinalIgnoreCase);
+            string.Equals(filePath, span.Path, StringComparison.OrdinalIgnoreCase);
 
         private IEnumerable<SyntaxNode> ClassNodes =>
             tree.GetRoot().DescendantNodes().Where(IsClass);

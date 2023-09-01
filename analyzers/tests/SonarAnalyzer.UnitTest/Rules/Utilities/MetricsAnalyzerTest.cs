@@ -70,14 +70,14 @@ namespace SonarAnalyzer.UnitTest.Rules
 
                     // ToDo: this PR only solves the CodeLine metric. Other metrics will be fixed in subsequent PRs.
                     metrics.ClassCount.Should().Be(1);
-                    metrics.CodeLine.Should().BeEquivalentTo(new[] { 3, 5, 8 });
-                    metrics.CognitiveComplexity.Should().Be(0);
-                    metrics.Complexity.Should().Be(1);
+                    metrics.CodeLine.Should().BeEquivalentTo(new[] { 3, 5, 11, 13, 14, 15, 17, 20, 21, 22, 24, 26, 27, 30, 31, 32, 34, 35, 37, 38, 8 });
+                    metrics.CognitiveComplexity.Should().Be(3);
+                    metrics.Complexity.Should().Be(4);
                     metrics.ExecutableLines.Should().BeEmpty();
-                    metrics.FunctionCount.Should().Be(1);
+                    metrics.FunctionCount.Should().Be(2);
                     metrics.NoSonarComment.Should().BeEmpty();
-                    metrics.NonBlankComment.Should().BeEmpty();
-                    metrics.StatementCount.Should().Be(6);
+                    metrics.NonBlankComment.Should().BeEquivalentTo(new[] {13, 20, 21, 26, 27, 30, 31, 34, 35, 36, 8});
+                    metrics.StatementCount.Should().Be(31);
                 });
         }
 
