@@ -478,19 +478,19 @@ class AdvancedTests
     {
         IList<int> iList = new List<int>();
         iList.Add(5);
-        iList.Clear();                                      // Noncompliant FP
+        iList.Clear();                                      // Compliant
 
         ICollection<int> iCollection = new List<int>();
         iCollection.Add(5);
-        iCollection.Clear();                                // Noncompliant FP
+        iCollection.Clear();                                // Compliant
 
         ISet<int> iSet = new HashSet<int>();
         iSet.Add(5);
-        iSet.Clear();                                       // Noncompliant FP
+        iSet.Clear();                                       // Compliant
 
         IDictionary<int, int> iDictionary = new Dictionary<int, int>();
         iDictionary.Add(1, 5);
-        iDictionary.Clear();                                // Noncompliant FP
+        iDictionary.Clear();                                // Compliant
     }
 
     public void UnknownExtensionMethods()
