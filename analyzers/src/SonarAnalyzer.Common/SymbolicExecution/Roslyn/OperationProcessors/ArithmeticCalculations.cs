@@ -42,6 +42,38 @@ internal static class ArithmeticCalculations
         _ => null
     };
 
+    public static BigInteger? BiggestMinimum(NumberConstraint left, NumberConstraint right)
+    {
+        if (left.Min is null)
+        {
+            return right?.Min;
+        }
+        else if (right?.Min is null)
+        {
+            return left.Min;
+        }
+        else
+        {
+            return BigInteger.Max(left.Min.Value, right.Min.Value);
+        }
+    }
+
+    public static BigInteger? SmallestMaximum(NumberConstraint left, NumberConstraint right)
+    {
+        if (left.Max is null)
+        {
+            return right?.Max;
+        }
+        else if (right?.Max is null)
+        {
+            return left.Max;
+        }
+        else
+        {
+            return BigInteger.Min(left.Max.Value, right.Max.Value);
+        }
+    }
+
     private static NumberConstraint CalculateMultiply(NumberConstraint left, NumberConstraint right)
     {
         var products = new[] { left.Min * right.Min, left.Min * right.Max, left.Max * right.Min, left.Max * right.Max };
@@ -408,22 +440,6 @@ internal static class ArithmeticCalculations
         return magnitude;
     }
 
-    private static BigInteger? SmallestMaximum(NumberConstraint left, NumberConstraint right)
-    {
-        if (left.Max is null)
-        {
-            return right?.Max;
-        }
-        else if (right?.Max is null)
-        {
-            return left.Max;
-        }
-        else
-        {
-            return BigInteger.Min(left.Max.Value, right.Max.Value);
-        }
-    }
-
     private static BigInteger? BiggestMaximum(NumberConstraint left, NumberConstraint right)
     {
         if (left.Max is null || right.Max is null)
@@ -445,22 +461,6 @@ internal static class ArithmeticCalculations
         else
         {
             return BigInteger.Min(left.Min.Value, right.Min.Value);
-        }
-    }
-
-    private static BigInteger? BiggestMinimum(NumberConstraint left, NumberConstraint right)
-    {
-        if (left.Min is null)
-        {
-            return right?.Min;
-        }
-        else if (right?.Min is null)
-        {
-            return left.Min;
-        }
-        else
-        {
-            return BigInteger.Max(left.Min.Value, right.Min.Value);
         }
     }
 }
