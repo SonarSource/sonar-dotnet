@@ -1051,7 +1051,7 @@ class Program
 }
 """, fileName, expectedExecutableLines);
 
-        #endif
+#endif
 
         private static void AssertLineNumbersOfExecutableLines(string code, params int[] expectedExecutableLines)
         {
