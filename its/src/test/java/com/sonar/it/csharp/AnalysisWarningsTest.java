@@ -33,13 +33,13 @@ import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(Tests.class)
-public class AnalysisWarningsTest {
+class AnalysisWarningsTest {
 
   @TempDir
   private static Path temp;
 
   @Test
-  public void analysisWarningsImport() throws IOException {
+  void analysisWarningsImport() throws IOException {
     Path projectDir = TestUtils.projectDir(temp, "Empty");
 
     ORCHESTRATOR.executeBuild(TestUtils.createBeginStep("Empty", projectDir));
@@ -56,7 +56,7 @@ public class AnalysisWarningsTest {
   }
 
   @Test
-  public void analysisWarnings_OldRoslyn() throws IOException {
+  void analysisWarnings_OldRoslyn() throws IOException {
     BuildResult buildResult = Tests.analyzeProject(temp, "Roslyn.1.3.1");
     Ce.Task task = TestUtils.getAnalysisWarningsTask(ORCHESTRATOR, buildResult);
     assertThat(task.getStatus()).isEqualTo(Ce.TaskStatus.SUCCESS);

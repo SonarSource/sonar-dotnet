@@ -33,13 +33,13 @@ import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(Tests.class)
-public class QualityProfileExportTest {
+class QualityProfileExportTest {
 
   @TempDir
   private static Path temp;
 
   @Test
-  public void sonarLintRuleSet_can_be_downloaded_from_SonarQube_UI() throws Exception {
+  void sonarLintRuleSet_can_be_downloaded_from_SonarQube_UI() throws Exception {
     // Regression test for SONAR-6969: This URL is called to manually download a ruleset for SL4VS from SQ UI
     File file = ORCHESTRATOR.getServer()
       .newHttpCall("/api/qualityprofiles/export")

@@ -42,8 +42,6 @@ public class CshtmlClassLibProjectTest {
   private static final String PROJECT = "CshtmlClassLib";
   private static final String CSHTML_PAGE_CLASS_FILE = "CshtmlClassLib:Areas/MyFeature/Pages/Page.cshtml";
 
-  private static BuildResult buildResult;
-
   @BeforeAll
   public static void beforeAll() throws Exception {
     Path projectDir = TestUtils.projectDir(temp, PROJECT);
@@ -51,11 +49,11 @@ public class CshtmlClassLibProjectTest {
 
     ORCHESTRATOR.executeBuild(beginStep);
     TestUtils.runBuild(projectDir);
-    buildResult = ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectDir));
+    var buildResult = ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectDir));
   }
 
   @Test
-  public void projectIsAnalyzed() {
+  void projectIsAnalyzed() {
     assertThat(getComponent(PROJECT).getName()).isEqualTo("CshtmlClassLib");
 
     assertThat(getComponent(CSHTML_PAGE_CLASS_FILE).getName()).isEqualTo("Page.cshtml");

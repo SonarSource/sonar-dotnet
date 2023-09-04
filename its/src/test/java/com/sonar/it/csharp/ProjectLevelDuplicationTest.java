@@ -33,13 +33,13 @@ import static com.sonar.it.csharp.Tests.getIssues;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(Tests.class)
-public class ProjectLevelDuplicationTest {
+class ProjectLevelDuplicationTest {
 
   @TempDir
   private static Path temp;
 
   @Test
-  public void containsOnlyOneProjectLevelIssue() throws IOException {
+  void containsOnlyOneProjectLevelIssue() throws IOException {
     Tests.analyzeProject(temp, "ProjectLevelIssue");
 
     assertThat(getComponent("ProjectLevelIssue")).isNotNull();

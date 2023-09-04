@@ -49,53 +49,53 @@ public class UnitTestProjectTypeProbingTest {
   }
 
   @Test
-  public void mainProject_IsIdentifiedAsMain() {
+  void mainProject_IsIdentifiedAsMain() {
     assertThat(getIssues("UTProjectProbing:UTProjectProbing.Main/calculator.cs"))
       .extracting(Issues.Issue::getRule)
       .containsExactlyInAnyOrder(MAIN_RULE_ID, MAIN_AND_TEST_RULE_ID, REMOVE_EMPTY_FINALIZERS);
   }
 
   @Test
-  public void mainProject_WithPropertySetToTrue_IsIdentifiedAsTestProject() {
+  void mainProject_WithPropertySetToTrue_IsIdentifiedAsTestProject() {
     assertThat(getIssues("UTProjectProbing:UTProjectProbing.MainWithProjectPropertyTrue/Calculator.cs")).isEmpty();
   }
 
   @Test
-  public void testProject_WithPropertySetToFalse_IsIdentifiedAsMainProject() {
+  void testProject_WithPropertySetToFalse_IsIdentifiedAsMainProject() {
     assertThat(getIssues("UTProjectProbing:UTProjectProbing.MsTestWithProjectPropertyFalse/calculator.cs"))
       .extracting(Issues.Issue::getRule)
       .containsExactly(MAIN_AND_TEST_RULE_ID, MAIN_RULE_ID, REMOVE_EMPTY_FINALIZERS);
   }
 
   @Test
-  public void msTestProject_IsIdentifiedAsMainProject() {
+  void msTestProject_IsIdentifiedAsMainProject() {
     assertThat(getIssues("UTProjectProbing:UTProjectProbing.MsTest/calculator.cs"))
       .extracting(Issues.Issue::getRule)
       .containsExactly(REMOVE_EMPTY_FINALIZERS);
   }
 
   @Test
-  public void xUnitProject_IsIdentifiedAsTestProject() {
+  void xUnitProject_IsIdentifiedAsTestProject() {
     // project has the ProjectCapability 'TestContainer' -> test project
     assertThat(getIssues("UTProjectProbing:UTProjectProbing.xUnit/Calculator.cs")).isEmpty();
   }
 
   @Test
-  public void project_WithTestInName_IsIdentifiedAsMainProject() {
+  void project_WithTestInName_IsIdentifiedAsMainProject() {
     assertThat(getIssues("UTProjectProbing:UTProjectProbing.ContainsTestInName/calculator.cs"))
       .extracting(Issues.Issue::getRule)
       .containsExactlyInAnyOrder(MAIN_RULE_ID, MAIN_AND_TEST_RULE_ID, REMOVE_EMPTY_FINALIZERS);
   }
 
   @Test
-  public void project_WithTestsSuffix_IsIdentifiedAsMain() {
+  void project_WithTestsSuffix_IsIdentifiedAsMain() {
     assertThat(getIssues("UTProjectProbing:UTProjectProbing.EndsWithTests/calculator.cs"))
       .extracting(Issues.Issue::getRule)
       .containsExactlyInAnyOrder(MAIN_RULE_ID, MAIN_AND_TEST_RULE_ID, REMOVE_EMPTY_FINALIZERS);
   }
 
   @Test
-  public void logsContainInfo() {
+  void logsContainInfo() {
     assertThat(buildResult.getLogs()).contains("Found 7 MSBuild C# projects: 4 MAIN projects. 3 TEST projects.");
   }
 }

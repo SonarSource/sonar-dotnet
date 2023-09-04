@@ -33,7 +33,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonarqube.ws.Hotspots.SearchWsResponse.Hotspot;
 
 @ExtendWith(Tests.class)
-public class RuleParameterCustomizationTest {
+class RuleParameterCustomizationTest {
   private static final String LANGUAGE_KEY = "cs";
   private static final String PROFILE_NAME = "custom_parameters";
   private static final String CustomParametersProjectName = "DefaultRuleParametersCanBeCustomized";
@@ -42,7 +42,7 @@ public class RuleParameterCustomizationTest {
   private static Path temp;
 
   @Test
-  public void doNotHardcodeCredentials_defaultParameters_canBeCustomized() throws IOException {
+  void doNotHardcodeCredentials_defaultParameters_canBeCustomized() throws IOException {
     provisionProject();
     Tests.analyzeProject(temp, CustomParametersProjectName);
 
@@ -50,7 +50,7 @@ public class RuleParameterCustomizationTest {
     assertThat(getComponent(componentKey)).isNotNull();
 
     List<Hotspot> hotspots = getHotspots(CustomParametersProjectName);
-    assertThat(hotspots.size()).isEqualTo(1);
+    assertThat(hotspots).hasSize(1);
     assertHotspot(hotspots.get(0), 7, "\"senha\" detected here, make sure this is not a hard-coded credential.");
   }
 

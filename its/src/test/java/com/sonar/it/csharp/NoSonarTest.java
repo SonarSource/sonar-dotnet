@@ -47,7 +47,7 @@ public class NoSonarTest {
   }
 
   @Test
-  public void excludeNoSonarComment() {
+  void excludeNoSonarComment() {
     List<Issues.Issue> issues = TestUtils.getIssues(ORCHESTRATOR, PROJECT);
     assertThat(issues).hasSize(2);
     assertThat(issues.get(0).getLine()).isEqualTo(3);
@@ -57,7 +57,7 @@ public class NoSonarTest {
   }
 
   @Test
-  public void logsContainInfo() {
+  void logsContainInfo() {
     assertThat(buildResult.getLogs()).contains("Found 1 MSBuild C# project: 1 MAIN project.");
   }
 }

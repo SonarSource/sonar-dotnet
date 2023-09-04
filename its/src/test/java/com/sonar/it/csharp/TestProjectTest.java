@@ -54,14 +54,14 @@ public class TestProjectTest {
   }
 
   @Test
-  public void projectIsAnalyzed() {
+  void projectIsAnalyzed() {
     assertThat(getComponent(CSHARP_ONLY_TEST_PROJECT).getName()).isEqualTo("TestOnlyProject");
 
     assertThat(getComponent("TestOnlyProject:UnitTest1.cs").getName()).isEqualTo("UnitTest1.cs");
   }
 
   @Test
-  public void logsContainInfoAndWarning() {
+  void logsContainInfoAndWarning() {
     assertThat(buildResult.getLogs()).contains(
       "SonarScanner for .NET detected only TEST files and no MAIN files for C# in the current solution. " +
         "Only TEST-code related results will be imported to your SonarQube/SonarCloud project. " +
@@ -72,7 +72,7 @@ public class TestProjectTest {
   }
 
   @Test
-  public void with_csharp_only_test_should_not_populate_metrics() {
+  void with_csharp_only_test_should_not_populate_metrics() {
     assertThat(Tests.getComponent("TestOnlyProject:UnitTest1.cs")).isNotNull();
     assertThat(getMeasureAsInt(CSHARP_ONLY_TEST_PROJECT, "files")).isNull();
     assertThat(getMeasureAsInt(CSHARP_ONLY_TEST_PROJECT, "lines")).isNull();
@@ -82,7 +82,7 @@ public class TestProjectTest {
   }
 
   @Test
-  public void issuesAreImportedForTestProject() {
+  void issuesAreImportedForTestProject() {
     List<Issues.Issue> barIssues = getIssues("TestOnlyProject:UnitTest1.cs")
       .stream()
       .filter(x -> x.getRule().startsWith("csharpsquid:"))
@@ -96,7 +96,7 @@ public class TestProjectTest {
   }
 
   @Test
-  public void with_html_and_csharp_code_explicitly_marked_as_test_should_not_populate_metrics() throws Exception {
+  void with_html_and_csharp_code_explicitly_marked_as_test_should_not_populate_metrics() throws Exception {
     BuildResult buildResult = Tests.analyzeProject(temp, EXPLICITLY_MARKED_AS_TEST, "no_rule");
 
     assertThat(Tests.getComponent("HtmlCSharpExplicitlyMarkedAsTest:Foo.cs")).isNotNull();

@@ -44,7 +44,7 @@ public class CodeDuplicationTest {
   }
 
   @Test
-  public void codeDuplicationResultsAreImportedForMainCode() throws Exception {
+  void codeDuplicationResultsAreImportedForMainCode() {
     List<Duplications.Duplication> duplications = TestUtils.getDuplication(ORCHESTRATOR, "CodeDuplicationTest:CodeDuplicationMainProj/DuplicatedMainClass1.cs").getDuplicationsList();
     assertThat(duplications.size()).isEqualTo(1);
     Duplications.Duplication duplication = duplications.get(0);
@@ -58,7 +58,7 @@ public class CodeDuplicationTest {
   }
 
   @Test
-  public void codeDuplicationResultsAreNotImportedForTestCode() throws Exception {
+  void codeDuplicationResultsAreNotImportedForTestCode() {
     assertThat(TestUtils.getDuplication(ORCHESTRATOR, "CodeDuplicationTest:CodeDuplicationTestProj/DuplicatedTestClass1.cs").getDuplicationsList()).isEmpty();
   }
 }

@@ -33,13 +33,13 @@ import static com.sonar.it.csharp.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(Tests.class)
-public class CoverageTest {
+class CoverageTest {
 
   @TempDir
   private static Path temp;
 
   @Test
-  public void should_not_import_coverage_without_report() throws Exception {
+  void should_not_import_coverage_without_report() throws Exception {
     BuildResult buildResult = analyzeCoverageTestProject();
 
     assertThat(buildResult.getLogs())
@@ -54,7 +54,7 @@ public class CoverageTest {
   }
 
   @Test
-  public void ncover3() throws Exception {
+  void ncover3() throws Exception {
     String reportPath = temp.toAbsolutePath() + File.separator + "CoverageTest" + File.separator + "reports" + File.separator + "ncover3.nccov";
     BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.ncover3.reportsPaths", reportPath);
 
@@ -65,7 +65,7 @@ public class CoverageTest {
   }
 
   @Test
-  public void open_cover() throws Exception {
+  void open_cover() throws Exception {
     BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.opencover.reportsPaths", "reports/opencover.xml");
 
     assertThat(buildResult.getLogs()).contains(
@@ -76,7 +76,7 @@ public class CoverageTest {
   }
 
   @Test
-  public void open_cover_on_MultipleProjects() throws Exception {
+  void open_cover_on_MultipleProjects() throws Exception {
     BuildResult buildResult = analyzeMultipleProjectsTestProject("sonar.cs.opencover.reportsPaths", "opencover.xml");
 
     assertThat(buildResult.getLogs()).contains(
@@ -90,7 +90,7 @@ public class CoverageTest {
   }
 
   @Test
-  public void open_cover_on_MultipleProjects_with_UnixWildcardPattern() throws Exception {
+  void open_cover_on_MultipleProjects_with_UnixWildcardPattern() throws Exception {
     BuildResult buildResult = analyzeMultipleProjectsTestProject("sonar.cs.opencover.reportsPaths", "/*/opencover.xml");
 
     // The original opencover is moved to a subfolder and parts of it are removed and that is how we know the correct one is matched.
@@ -102,7 +102,7 @@ public class CoverageTest {
   }
 
   @Test
-  public void open_cover_with_deterministic_source_paths() throws Exception {
+  void open_cover_with_deterministic_source_paths() throws Exception {
     BuildResult buildResult = Tests.analyzeProject(temp, "CoverageWithDeterministicSourcePaths", "no_rule", "sonar.cs.opencover.reportsPaths", "opencover.xml");
 
     assertThat(buildResult.getLogs()).contains(
@@ -118,7 +118,7 @@ public class CoverageTest {
   }
 
   @Test
-  public void dotcover() throws Exception {
+  void dotcover() throws Exception {
     BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.dotcover.reportsPaths", "reports/dotcover.html");
 
     assertThat(buildResult.getLogs()).contains(
@@ -129,7 +129,7 @@ public class CoverageTest {
   }
 
   @Test
-  public void visual_studio() throws Exception {
+  void visual_studio() throws Exception {
     BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml");
 
     assertThat(buildResult.getLogs()).contains(
@@ -140,7 +140,7 @@ public class CoverageTest {
   }
 
   @Test
-  public void visual_studio_on_MultipleProjects() throws Exception {
+  void visual_studio_on_MultipleProjects() throws Exception {
     BuildResult buildResult = analyzeMultipleProjectsTestProject("sonar.cs.vscoveragexml.reportsPaths", "VisualStudio.coveragexml");
 
     assertThat(buildResult.getLogs()).contains(
@@ -154,7 +154,7 @@ public class CoverageTest {
   }
 
   @Test
-  public void visual_studio_with_deterministic_source_paths() throws Exception {
+  void visual_studio_with_deterministic_source_paths() throws Exception {
     BuildResult buildResult = Tests.analyzeProject(temp, "CoverageWithDeterministicSourcePaths", "no_rule", "sonar.cs.vscoveragexml.reportsPaths", "VisualStudio.coveragexml");
 
     assertThat(buildResult.getLogs()).contains(
@@ -169,7 +169,7 @@ public class CoverageTest {
   }
 
   @Test
-  public void no_coverage_on_tests() throws Exception {
+  void no_coverage_on_tests() throws Exception {
     BuildResult buildResult = Tests.analyzeProject(temp, "NoCoverageOnTests", "no_rule", "sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml");
 
     assertThat(buildResult.getLogs()).contains(
@@ -184,7 +184,7 @@ public class CoverageTest {
   }
 
   @Test
-  public void should_support_wildcard_patterns() throws Exception {
+  void should_support_wildcard_patterns() throws Exception {
     BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.ncover3.reportsPaths", "reports/*.nccov");
 
     assertThat(buildResult.getLogs()).contains(

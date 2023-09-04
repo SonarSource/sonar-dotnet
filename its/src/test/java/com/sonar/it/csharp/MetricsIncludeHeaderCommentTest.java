@@ -69,7 +69,7 @@ public class MetricsIncludeHeaderCommentTest {
   }
 
   @Test
-  public void projectIsAnalyzed() {
+  void projectIsAnalyzed() {
     assertThat(getComponent(PROJECT_KEY).getName()).isEqualTo("MetricsTestIncludeHeaderComment");
     assertThat(getComponent(DIRECTORY).getName()).isEqualTo("foo");
     assertThat(getComponent(FILE).getName()).isEqualTo("Class1.cs");
@@ -78,51 +78,51 @@ public class MetricsIncludeHeaderCommentTest {
   /* Lines - must be the same */
 
   @Test
-  public void linesAtProjectLevel() {
+  void linesAtProjectLevel() {
     assertThat(getProjectMeasureAsInt("lines")).isEqualTo(118);
   }
 
   @Test
-  public void linesAtDirectoryLevel() {
+  void linesAtDirectoryLevel() {
     assertThat(getDirectoryMeasureAsInt("lines")).isEqualTo(80);
   }
 
   @Test
-  public void linesAtFileLevel() {
+  void linesAtFileLevel() {
     assertThat(getFileMeasureAsInt("lines")).isEqualTo(42);
   }
 
   /* Lines of code - must be the same */
 
   @Test
-  public void linesOfCodeAtProjectLevel() {
+  void linesOfCodeAtProjectLevel() {
     assertThat(getProjectMeasureAsInt("ncloc")).isEqualTo(90);
   }
 
   @Test
-  public void linesOfCodeAtDirectoryLevel() {
+  void linesOfCodeAtDirectoryLevel() {
     assertThat(getDirectoryMeasureAsInt("ncloc")).isEqualTo(60);
   }
 
   @Test
-  public void linesOfCodeAtFileLevel() {
+  void linesOfCodeAtFileLevel() {
     assertThat(getFileMeasureAsInt("ncloc")).isEqualTo(30);
   }
 
   /* Comment lines - these are actually modified */
 
   @Test
-  public void commentLinesAtProjectLevel() {
+  void commentLinesAtProjectLevel() {
     assertThat(getProjectMeasureAsInt("comment_lines")).isEqualTo(12 + NUMBER_OF_HEADER_COMMENT_LINES);
   }
 
   @Test
-  public void commentLinesAtDirectoryLevel() {
+  void commentLinesAtDirectoryLevel() {
     assertThat(getDirectoryMeasureAsInt("comment_lines")).isEqualTo(8 + NUMBER_OF_HEADER_COMMENT_LINES);
   }
 
   @Test
-  public void commentLinesAtFileLevel() {
+  void commentLinesAtFileLevel() {
     assertThat(getFileMeasureAsInt("comment_lines")).isEqualTo(4 + NUMBER_OF_HEADER_COMMENT_LINES);
   }
 

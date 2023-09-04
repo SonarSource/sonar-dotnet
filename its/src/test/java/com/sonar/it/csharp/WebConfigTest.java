@@ -30,12 +30,12 @@ import org.sonarqube.ws.Issues;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(Tests.class)
-public class WebConfigTest extends WebConfigBase {
+class WebConfigTest extends WebConfigBase {
 
   static final String PROJECT = "WebConfig.CSharp";
 
   @Test
-  public void should_raise_hotspot_on_web_config() throws IOException {
+  void should_raise_hotspot_on_web_config() throws IOException {
     Tests.analyzeProject(temp, PROJECT);
     List<Hotspot> hotspots = Tests.getHotspots(PROJECT);
     // One from project directory, one from PathOutsideProjectRoot added with Directory.Build.props
