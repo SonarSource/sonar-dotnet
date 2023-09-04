@@ -49,7 +49,7 @@ public class CognitiveComplexityTest {
   }
 
   @Test
-  public void cognitiveComplexity_hasSecondaryLocations() {
+  void cognitiveComplexity_hasSecondaryLocations() {
 
     final String componentKey = "CognitiveComplexity.CS:CognitiveComplexity.cs";
 

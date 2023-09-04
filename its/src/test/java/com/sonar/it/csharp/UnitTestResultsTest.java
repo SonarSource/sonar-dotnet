@@ -31,7 +31,7 @@ import static com.sonar.it.csharp.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(Tests.class)
-public class UnitTestResultsTest {
+class UnitTestResultsTest {
 
   @TempDir
   private static Path temp;
@@ -39,7 +39,7 @@ public class UnitTestResultsTest {
   private static final String PROJECT = "UnitTestResultsTest";
 
   @Test
-  public void should_not_import_unit_test_results_without_report() throws Exception {
+  void should_not_import_unit_test_results_without_report() throws Exception {
     BuildResult buildResult = analyzeTestProject();
 
     assertThat(buildResult.getLogs()).doesNotContain("C# Unit Test Results Import");
@@ -50,7 +50,7 @@ public class UnitTestResultsTest {
   }
 
   @Test
-  public void vstest() throws Exception {
+  void vstest() throws Exception {
     BuildResult buildResult = analyzeTestProject("sonar.cs.vstest.reportsPaths", "reports/vstest.trx");
 
     assertThat(buildResult.getLogs()).contains("C# Unit Test Results Import");
@@ -61,7 +61,7 @@ public class UnitTestResultsTest {
   }
 
   @Test
-  public void nunit() throws Exception {
+  void nunit() throws Exception {
     BuildResult buildResult = analyzeTestProject("sonar.cs.nunit.reportsPaths", "reports/nunit.xml");
 
     assertThat(buildResult.getLogs()).contains("C# Unit Test Results Import");
@@ -72,7 +72,7 @@ public class UnitTestResultsTest {
   }
 
   @Test
-  public void should_support_wildcard_patterns() throws Exception {
+  void should_support_wildcard_patterns() throws Exception {
     analyzeTestProject("sonar.cs.vstest.reportsPaths", "reports/*.trx");
 
     assertThat(getMeasureAsInt(PROJECT, "tests")).isEqualTo(42);

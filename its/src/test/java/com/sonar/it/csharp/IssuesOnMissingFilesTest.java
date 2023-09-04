@@ -32,7 +32,7 @@ import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(Tests.class)
-public class IssuesOnMissingFilesTest {
+class IssuesOnMissingFilesTest {
 
   private static final String PROJECT = "ProjectWithIssuesOnMissingFiles";
 
@@ -40,7 +40,7 @@ public class IssuesOnMissingFilesTest {
   private static Path temp;
 
   @Test
-  public void givenAProjectWithIssuesOnMissingFiles_issuesOnMissingFilesAreNotImported() throws IOException {
+  void givenAProjectWithIssuesOnMissingFiles_issuesOnMissingFilesAreNotImported() throws IOException {
     Tests.analyzeProject(temp, PROJECT);
     List<Issues.Issue> issues = TestUtils.getIssues(ORCHESTRATOR, PROJECT);
     // There are two issues raised on this project, both on generated code which is not emitted on disk.

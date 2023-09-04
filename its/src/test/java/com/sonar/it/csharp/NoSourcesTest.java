@@ -47,7 +47,7 @@ public class NoSourcesTest {
   }
 
   @Test
-  public void raiseOnSharedFiles() {
+  void raiseOnSharedFiles() {
     List<Issues.Issue> issues = TestUtils.getIssues(ORCHESTRATOR, PROJECT);
     assertThat(issues).hasSize(1).hasOnlyOneElementSatisfying(e ->
     {
@@ -57,7 +57,7 @@ public class NoSourcesTest {
   }
 
   @Test
-  public void logsContainInfo() {
+  void logsContainInfo() {
     assertThat(buildResult.getLogs()).contains("Found 1 MSBuild C# project: 1 with no MAIN nor TEST files.");
   }
 }

@@ -34,7 +34,7 @@ import static org.assertj.core.api.Assertions.tuple;
 import static org.sonarqube.ws.Common.RuleType;
 
 @ExtendWith(Tests.class)
-public class ExternalIssuesTest {
+class ExternalIssuesTest {
 
   @TempDir
   private static Path temp;
@@ -47,7 +47,7 @@ public class ExternalIssuesTest {
   private static final String ROSLYN_RULES_PREFIX = "external_roslyn:";
 
   @Test
-  public void external_issues_imported_by_default_as_code_smells() throws Exception {
+  void external_issues_imported_by_default_as_code_smells() throws Exception {
     var projectKey = MAIN_PROJECT_DIR + "_imported";
     var componentId = projectKey + PROGRAM_COMPONENT_ID;
     Tests.analyzeProject(projectKey, temp, MAIN_PROJECT_DIR);
@@ -67,7 +67,7 @@ public class ExternalIssuesTest {
   }
 
   @Test
-  public void external_issues_imported_by_default_for_test_project() throws Exception {
+  void external_issues_imported_by_default_for_test_project() throws Exception {
     var projectKey = TEST_PROJECT_DIR + "_imported";
     Tests.analyzeProject(projectKey, temp, TEST_PROJECT_DIR);
 
@@ -78,7 +78,7 @@ public class ExternalIssuesTest {
   }
 
   @Test
-  public void external_issues_are_ignored() throws Exception {
+  void external_issues_are_ignored() throws Exception {
     var projectKey = MAIN_PROJECT_DIR + "_ignored";
     var componentId = projectKey + PROGRAM_COMPONENT_ID;
     Tests.analyzeProject(projectKey, temp, MAIN_PROJECT_DIR, null,
@@ -93,7 +93,7 @@ public class ExternalIssuesTest {
   }
 
   @Test
-  public void external_issues_categories_multiple_categories_mapped() throws Exception {
+  void external_issues_categories_multiple_categories_mapped() throws Exception {
     var projectKey = MAIN_PROJECT_DIR + "_categories_mapped";
     var componentId = projectKey + PROGRAM_COMPONENT_ID;
     Tests.analyzeProject(projectKey, temp, MAIN_PROJECT_DIR, null,
@@ -121,7 +121,7 @@ public class ExternalIssuesTest {
   }
 
   @Test
-  public void external_issues_all_three_properties() throws Exception {
+  void external_issues_all_three_properties() throws Exception {
     var projectKey = MAIN_PROJECT_DIR + "_three_properties";
     var componentId = projectKey + PROGRAM_COMPONENT_ID;
     Tests.analyzeProject(projectKey, temp, MAIN_PROJECT_DIR, null,

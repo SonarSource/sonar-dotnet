@@ -42,7 +42,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(Tests.class)
-public class IncrementalAnalysisTest {
+class IncrementalAnalysisTest {
   private static final String PROJECT_DIR = "IncrementalPRAnalysis";
   private static final String PULL_REQUEST_KEY = "42";
 
@@ -50,7 +50,7 @@ public class IncrementalAnalysisTest {
   private static Path temp;
 
   @Test
-  public void incrementalPrAnalysis_NoCache_FullAnalysisDone() throws IOException {
+  void incrementalPrAnalysis_NoCache_FullAnalysisDone() throws IOException {
     var projectKey = PROJECT_DIR + "_noCache_fullAnalysis";
     Tests.analyzeProject(projectKey, temp, PROJECT_DIR, null, "sonar.branch.name", "base-branch", "sonar.analysisCache.enabled", "false");
     Path projectDir = TestUtils.projectDir(temp, PROJECT_DIR);
@@ -71,7 +71,7 @@ public class IncrementalAnalysisTest {
   }
 
   @Test
-  public void incrementalPrAnalysis_cacheAvailableNoChanges_nothingReported() throws IOException {
+  void incrementalPrAnalysis_cacheAvailableNoChanges_nothingReported() throws IOException {
     var projectKey = PROJECT_DIR + "cacheAvailable_noChanges";
     Tests.analyzeProject(projectKey, temp, PROJECT_DIR, null, "sonar.branch.name", "base-branch");
     Path projectDir = TestUtils.projectDir(temp, PROJECT_DIR);
@@ -88,7 +88,7 @@ public class IncrementalAnalysisTest {
   }
 
   @Test
-  public void incrementalPrAnalysis_cacheAvailableChangesDone_issuesReportedForChangedFiles() throws IOException {
+  void incrementalPrAnalysis_cacheAvailableChangesDone_issuesReportedForChangedFiles() throws IOException {
     var projectKey = PROJECT_DIR + "cacheAvailable_withChanges";
     Tests.analyzeProject(projectKey, temp, PROJECT_DIR, null, "sonar.branch.name", "base-branch");
     Path projectDir = TestUtils.projectDir(temp, PROJECT_DIR);
@@ -122,7 +122,7 @@ public class IncrementalAnalysisTest {
   }
 
   @Test
-  public void incrementalPrAnalysis_cacheAvailableProjectBaseDirChanged_everythingIsReanalyzed() throws IOException {
+  void incrementalPrAnalysis_cacheAvailableProjectBaseDirChanged_everythingIsReanalyzed() throws IOException {
     var projectKey = PROJECT_DIR + "cacheAvailable_baseDirChanged";
     Tests.analyzeProject(projectKey, temp, PROJECT_DIR, null, "sonar.branch.name", "base-branch");
     Path projectDir = TestUtils.projectDir(temp, PROJECT_DIR);
@@ -151,7 +151,7 @@ public class IncrementalAnalysisTest {
   }
 
   @Test
-  public void incrementalPrAnalysis_cacheAvailableDuplicationIntroduced_duplicationReportedForChangedFile() throws IOException {
+  void incrementalPrAnalysis_cacheAvailableDuplicationIntroduced_duplicationReportedForChangedFile() throws IOException {
     String projectKey = "IncrementalPRAnalysisDuplication";
     Tests.analyzeProject(temp, projectKey, null, "sonar.branch.name", "base-branch");
     Path projectDir = TestUtils.projectDir(temp, projectKey);

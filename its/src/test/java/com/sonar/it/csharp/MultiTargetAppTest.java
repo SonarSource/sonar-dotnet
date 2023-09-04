@@ -31,13 +31,13 @@ import static com.sonar.it.csharp.Tests.getIssues;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(Tests.class)
-public class MultiTargetAppTest {
+class MultiTargetAppTest {
 
   @TempDir
   private static Path temp;
 
   @Test
-  public void should_analyze_multitarget_project() throws IOException {
+  void should_analyze_multitarget_project() throws IOException {
     String componentKey = "MultiTargetConsoleApp:MultiTargetConsoleApp/Program.cs";
     var buildResult = Tests.analyzeProject(temp, "MultiTargetConsoleApp");
     assertThat(buildResult.getLogs()).contains("Found 1 MSBuild C# project: 1 MAIN project.");

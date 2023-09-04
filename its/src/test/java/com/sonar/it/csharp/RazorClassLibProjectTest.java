@@ -47,8 +47,6 @@ public class RazorClassLibProjectTest {
   private static final String PROJECT = "RazorClassLib";
   private static final String RAZOR_COMPONENT_CLASS_FILE = "RazorClassLib:Component.razor";
 
-  private static BuildResult buildResult;
-
   @BeforeAll
   public static void beforeAll() throws Exception {
     Path projectDir = TestUtils.projectDir(temp, PROJECT);
@@ -56,11 +54,11 @@ public class RazorClassLibProjectTest {
 
     ORCHESTRATOR.executeBuild(beginStep);
     TestUtils.runBuild(projectDir);
-    buildResult = ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectDir));
+    ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectDir));
   }
 
   @Test
-  public void projectIsAnalyzed() {
+  void projectIsAnalyzed() {
     assertThat(getComponent(PROJECT).getName()).isEqualTo("RazorClassLib");
 
     assertThat(getComponent(RAZOR_COMPONENT_CLASS_FILE).getName()).isEqualTo("Component.razor");
