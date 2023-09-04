@@ -119,11 +119,7 @@ namespace SonarAnalyzer.Rules.CSharp
             CopyRetrievedSymbols(removableSymbolsCollector, privateSymbols, internalSymbols, fieldLikeSymbols);
 
             // Collect symbols of private members that could potentially be removed for the nested classes
-            foreach (var declaration in namedType.DeclaringSyntaxReferences.Where(r => !r.SyntaxTree.IsConsideredGenerated(
-                CSharpGeneratedCodeRecognizer.Instance,
-                compilation,
-                context.SonarLintXml().AnalyzeRazorCode(context.Compilation.Language)))
-                    .SelectMany(x => x.GetSyntax().ChildNodes().OfType<BaseTypeDeclarationSyntax>()))
+            foreach (var declaration in PrivateNestedMembersFromNonGeneratedCode(namedType, compilation, context))
             {
                 if (compilation.GetSemanticModel(declaration.SyntaxTree) is { } semanticModel
                     && semanticModel.GetDeclaredSymbol(declaration) is { } declarationSymbol
@@ -135,6 +131,13 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             return true;
+
+            static IEnumerable<BaseTypeDeclarationSyntax> PrivateNestedMembersFromNonGeneratedCode(INamedTypeSymbol namedType, Compilation compilation, SonarSymbolReportingContext context) =>
+                namedType.DeclaringSyntaxReferences.Where(r => !r.SyntaxTree.IsConsideredGenerated(
+                    CSharpGeneratedCodeRecognizer.Instance,
+                    compilation,
+                    context.SonarLintXml().AnalyzeRazorCode(context.Compilation.Language)))
+                        .SelectMany(x => x.GetSyntax().ChildNodes().OfType<BaseTypeDeclarationSyntax>());
         }
 
         private static IEnumerable<Diagnostic> DiagnosticsForUnusedPrivateMembers(CSharpSymbolUsageCollector usageCollector,
