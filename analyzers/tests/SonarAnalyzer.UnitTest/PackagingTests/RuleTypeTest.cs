@@ -26,10 +26,6 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
     [TestClass]
     public class RuleTypeTest
     {
-        // Rules that have been deprecated and deleted.
-        // When changing this please do not forget to notify the product teams (SQ, SC, SL).
-        private static readonly HashSet<string> DeletedRules = new() { "S1145", "S1697", "S2070", "S2255", "S2278", "S2758", "S3693", "S4142", "S4432", "S4787", "S4818"};
-
         [TestMethod]
         public void DetectRuleTypeChanges_CS() =>
             DetectTypeChanges(csharp::SonarAnalyzer.RuleCatalog.Rules, RuleTypeMappingCS.Rules, nameof(RuleTypeMappingCS));
@@ -55,9 +51,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             var newRules = items.Where(x => x.ExpectedType is null);
             newRules.Should().BeEmpty($"you need to add the rules in {expectedTypesName}");
 
-            items.Should().NotContain(
-                x => x.ActualType == null && !DeletedRules.Contains($"S{x.RuleId}"),
-                "YOU SHOULD NEVER DELETE RULES! Rules should not be deleted without careful consideration and prior deprecation. We need to notify the product teams (SQ, SC, SL) as well.");
+            items.Should().NotContain(x => x.ActualType == null);
 
             var changedRules = items.Where(x => x.ActualType != null && x.ExpectedType != null);
             changedRules.Should().BeEmpty($"you need to change the rule types in {expectedTypesName}.");
