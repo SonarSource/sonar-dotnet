@@ -35,7 +35,6 @@ namespace SonarAnalyzer.Metrics.CSharp
             }
 
             lazyExecutableLines = new Lazy<ImmutableArray<int>>(() =>
-                // ToDo: this will be implemented by https://github.com/SonarSource/sonar-dotnet/pull/7915
                 CSharpExecutableLinesMetric.GetLineNumbers(tree, semanticModel));
         }
 
