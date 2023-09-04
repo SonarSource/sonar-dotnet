@@ -138,7 +138,17 @@ stages:
           command: 'push'
           artifactoryConnection: 'repox_qa_deployer_token'
           targetDeployRepo: '$(ARTIFACTORY_NUGET_REPO)'
+          module: SonarAnalyzer.CFG
           pathToNupkg: '$(Build.ArtifactStagingDirectory)/packages/SonarAnalyzer.CFG.*.nupkg'
+          collectBuildInfo: true
+          buildName: sonar-dotnet_nuget
+          buildNumber: '$(Build.BuildId)'
+
+      - task: JFrogPublishBuildInfo@1
+        inputs:
+          artifactoryConnection: 'repox_qa_deployer_token'
+          buildName: sonar-dotnet_nuget
+          buildNumber: '$(Build.BuildId)'
 
       - task: PublishPipelineArtifact@1
         displayName: 'Publish analyzer binaries as pipeline artifact'
@@ -540,52 +550,20 @@ stages:
       steps:
         - template: set-azp-variables-steps.yml@pipelines-yaml-templates
 
-        - task: UsePythonVersion@0
+        - task: JFrogBuildPromotion@1
           inputs:
-            versionSpec: '3.x'
-
-        - bash: pip3 install requests
-
-        - task: PythonScript@0
-          name: promoteRepox
-          inputs:
-            failOnStderr: true
-            scriptSource: 'inline'
-            script: |
-              import requests
-              import os
-              import sys
-
-              version = '$(SONAR_PROJECT_VERSION).$(Build.BuildId)'
-              isPr = '$(Build.Reason)' == 'PullRequest'
-              sourceRepo = os.environ['ARTIFACTORY_NUGET_REPO']
-              targetRepo = None
-              if isPr:
-                targetRepo = sourceRepo.replace('qa', 'dev')
-              else:
-                targetRepo = sourceRepo.replace('qa', 'public')
-
-              artifact = f'SonarAnalyzer.CFG.{version}.nupkg'
-              print(f'Promoting nuget {artifact} from {sourceRepo} to {targetRepo}')
-
-              url = f'$(ARTIFACTORY_URL)/api/move/{sourceRepo}/{artifact}?to=/{targetRepo}/{artifact}'
-              headers = {'Content-Type': 'application/json', 'Authorization': 'Bearer $(ARTIFACTORY_PROMOTER_ACCESS_TOKEN)'}
-              response = requests.post(url, headers=headers)
-
-              fixedBranch = ''
-              if not isPr:
-                # Cannot use BUILD_SOURCEBRANCHNAME because of https://github.com/Microsoft/azure-pipelines-agent/issues/838
-                branch = os.environ['BUILD_SOURCEBRANCH']
-                refPrefix = "refs/heads/"
-                if branch.startswith(refPrefix):
-                  fixedBranch = branch[len(refPrefix):]
-              print("##vso[task.setvariable variable=fixedBranch;isOutput=true]" + fixedBranch)
-
-              promoted = response.status_code == 200
-              if not promoted:
-                print('[!] [{0}] Server Error'.format(response.status_code), file=sys.stderr)
-          env:
-            ARTIFACTORY_PROMOTER_ACCESS_TOKEN: $(ARTIFACTORY_PROMOTER_ACCESS_TOKEN)
+            artifactoryConnection: 'repox_promoter_token'
+            buildName: sonar-dotnet_nuget
+            buildNumber: '$(Build.BuildId)'
+            sourceRepo: '$(ARTIFACTORY_NUGET_REPO)'
+            ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
+              targetRepo: sonarsource-nuget-dev
+            ${{ else }}:
+              targetRepo: sonarsource-nuget-public
+            status: 'it-passed'
+            includeDependencies: false
+            copy: false
+            dryRun: false
 
     - job: nugetBurgrFailed
       dependsOn: promoteRepox
@@ -599,7 +577,7 @@ stages:
           name: 'artifacts'
           type: 'promotion'
           status: 'failed'
-          fixedBranch: $(fixedBranch)
+          fixedBranch: ${{ replace(variables['Build.SourceBranch'], 'refs/heads/', '') }}
 
     - job: nugetBurgrCanceled
       dependsOn: promoteRepox
@@ -613,7 +591,7 @@ stages:
           name: 'artifacts'
           type: 'promotion'
           status: 'canceled'
-          fixedBranch: $(fixedBranch)
+          fixedBranch: ${{ replace(variables['Build.SourceBranch'], 'refs/heads/', '') }}
 
 - template: promote-stage.yml@pipelines-yaml-templates
   parameters:
