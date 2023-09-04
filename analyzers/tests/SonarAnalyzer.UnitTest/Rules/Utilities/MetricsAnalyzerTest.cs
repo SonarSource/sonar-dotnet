@@ -68,7 +68,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
                     var metrics = messages.Single(x => x.FilePath.EndsWith(RazorFileName));
 
-                    // ToDo: this PR only solves the CodeLine metric. Other metrics will be fixed in subsequent PRs.
+                    // ToDo: other metrics will be fixed in subsequent PRs.
                     metrics.ClassCount.Should().Be(1);
                     metrics.CodeLine.Should().BeEquivalentTo(new[] { 3, 5, 11, 13, 14, 15, 17, 20, 21, 22, 24, 26, 27, 30, 31, 32, 34, 35, 37, 38, 8 });
                     metrics.CognitiveComplexity.Should().Be(3);
