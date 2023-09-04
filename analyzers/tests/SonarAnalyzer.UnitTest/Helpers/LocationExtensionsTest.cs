@@ -70,7 +70,7 @@ namespace HelloWorld
     {
         static void Main(string[] args)
         {
-#line (1, 5) - (1, 23) 30 ""Original.razor""
+#line (1, 5) - (1, 20) 30 ""Original.razor""
             Console.WriteLine(""Hello, World!"");
         }
     }

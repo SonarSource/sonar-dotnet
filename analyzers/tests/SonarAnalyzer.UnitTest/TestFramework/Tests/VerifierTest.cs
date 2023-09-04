@@ -157,14 +157,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         public void Verify_RazorWithAdditionalLocation()
         {
             using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = true };
-            DummyWithLocation.AddPaths("Dummy.AdditionalLocation.razor").Verify();
+            DummyWithLocation.AddPaths("Dummy.SecondaryLocation.razor").Verify();
         }
 
         [TestMethod]
         public void Verify_CshtmlWithAdditionalLocation()
         {
             using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = true };
-            DummyWithLocation.AddPaths("Dummy.AdditionalLocation.cshtml").Verify();
+            DummyWithLocation.AddPaths("Dummy.SecondaryLocation.cshtml").Verify();
         }
 
         [TestMethod]

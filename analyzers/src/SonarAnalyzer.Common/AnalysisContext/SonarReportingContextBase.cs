@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2023 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -55,7 +55,7 @@ public abstract class SonarReportingContextBase<TContext> : SonarAnalysisContext
 
     private static Diagnostic EnsureDiagnosticLocation(Diagnostic diagnostic)
     {
-        if (!diagnostic.Location.GetMappedLineSpan().HasMappedPath)
+        if (!GeneratedCodeRecognizer.IsRazorGeneratedFile(diagnostic.Location.SourceTree) || !diagnostic.Location.GetMappedLineSpan().HasMappedPath)
         {
             return diagnostic;
         }
