@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.SymbolicExecution.Constraints;
+
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
 internal sealed class CompoundAssignment : SimpleProcessor<ICompoundAssignmentOperationWrapper>
@@ -25,11 +27,48 @@ internal sealed class CompoundAssignment : SimpleProcessor<ICompoundAssignmentOp
     protected override ICompoundAssignmentOperationWrapper Convert(IOperation operation) =>
         ICompoundAssignmentOperationWrapper.FromOperation(operation);
 
-    protected override ProgramState Process(SymbolicContext context, ICompoundAssignmentOperationWrapper assignment)
+    protected override ProgramState Process(SymbolicContext context, ICompoundAssignmentOperationWrapper assignment) =>
+        ProcessNumericalCompoundAssignment(context.State, assignment)
+        ?? ProcessCompoundAssignment(context.State, assignment)
+        ?? context.State;
+
+    private static ProgramState ProcessNumericalCompoundAssignment(ProgramState state, ICompoundAssignmentOperationWrapper assignment)
     {
-        var state = context.SetOperationValue(SymbolicValue.NotNull);
-        return assignment.Target.TrackedSymbol(state) is { } symbol
-            ? state.SetSymbolValue(symbol, SymbolicValue.NotNull)
-            : state;
+        if (state.Constraint<NumberConstraint>(assignment.Target) is { } leftNumber
+            && state.Constraint<NumberConstraint>(assignment.Value) is { } rightNumber
+            && ArithmeticCalculator.Calculate(assignment.OperatorKind, leftNumber, rightNumber) is { } constraint)
+        {
+            state = state.SetOperationConstraint(assignment, constraint);
+            if (assignment.Target.TrackedSymbol(state) is { } symbol)
+            {
+                state = state.SetSymbolConstraint(symbol, constraint);
+            }
+            return state;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    private static ProgramState ProcessCompoundAssignment(ProgramState state, ICompoundAssignmentOperationWrapper assignment)
+    {
+        if ((state.HasConstraint(assignment.Target, ObjectConstraint.NotNull) && state.HasConstraint(assignment.Value, ObjectConstraint.NotNull))
+            || assignment.Target.Type.Is(KnownType.System_String)
+            || assignment.Target.Type.IsNonNullableValueType())
+        {
+            state = state.SetOperationConstraint(assignment, ObjectConstraint.NotNull);
+            if (assignment.Target.TrackedSymbol(state) is { } symbol)
+            {
+                state = state.SetSymbolValue(symbol, SymbolicValue.NotNull);
+            }
+            return state;
+        }
+        else
+        {
+            return assignment.Target.TrackedSymbol(state) is { } symbol
+                ? state.SetSymbolValue(symbol, SymbolicValue.Empty)
+                : state;
+        }
     }
 }
