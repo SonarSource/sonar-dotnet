@@ -15,9 +15,6 @@ pool: '.Net Bubble - GCP'
 variables:
   - group: sonar-dotnet-variables
   - group: sonarsource-build-variables
-  # ensure, it is not used anymore
-  - name: ARTIFACTORY_API_USER
-    value: unset
   - group: artifactory_access
   # ARTIFACTORY_URL https://repox.jfrog.io/repox => https://repox.jfrog.io/artifactory
   # JFROG_URL https://repox.jfrog.io
@@ -29,6 +26,11 @@ variables:
     value: $[variables.ARTIFACTORY_PRIVATE_READER_USERNAME]
   - name: ARTIFACTORY_QA_READER_USERNAME
     value: $[variables.ARTIFACTORY_PRIVATE_READER_USERNAME]
+  # pipelines-yaml-templates/promote-stage.yml line 56
+  - name: ARTIFACTORY_API_USER
+    value: $[variables.ARTIFACTORY_PROMOTER_USERNAME]
+  - name: ARTIFACTORY_API_KEY
+    value: $[variables.ARTIFACTORY_PROMOTER_ACCESS_TOKEN]
   - name: UnitTestProjectPath
     value: 'analyzers\tests\SonarAnalyzer.UnitTest\'
   - name: UnitTestResultsPath
