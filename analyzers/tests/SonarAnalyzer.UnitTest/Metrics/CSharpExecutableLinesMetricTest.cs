@@ -733,11 +733,10 @@ public class AnAttribute : System.Attribute { }", 10);
 {
     int M1()
     {
-        int y;
-        LocalFunction();
-        return y;
-
-        void LocalFunction() => y = 0;
+        int y = MyMethod(); // +1
+        MyMethod();         // +1
+        return 1; // +1
+        int MyMethod() => 0; // Not counted
     }
 
     int M2()
@@ -748,7 +747,7 @@ public class AnAttribute : System.Attribute { }", 10);
 
         static int Add(int left, int right) => left + right;
     }
-}", 6, 7, 16);
+}", 5, 6, 7, 15);
 
 #if NET
 
@@ -898,9 +897,9 @@ class Program
 @page "/razor"
 @using TestCases
 
-<p>Current count: @currentCount</p> <!-- +1 -->
+<p>Current count: @currentCount</p>     <!-- +1 -->
 
-@currentCount <!-- +1 -->
+@currentCount                           <!-- +1 -->
 
 @code {
     private int currentCount = 0;
@@ -912,8 +911,8 @@ class Program
         [DataRow(CshtmlFile)]
         public void GetLineNumbers_Razor_MethodReferenceAndCall(string fileName, params int[] expectedExecutableLines) =>
             AssertLineNumbersOfExecutableLinesRazor("""
-<button @onclick="IncrementCount">Increment</button> <!-- Not counted -->
-<p> @(ShowAmount()) </p> <!-- +1 -->
+<button @onclick="IncrementCount">Increment</button>    <!-- Not counted | Razor FN -->
+<p> @(ShowAmount()) </p>                                <!-- +1 -->
 
 @code {
     [Parameter]
@@ -921,12 +920,12 @@ class Program
 
     private void IncrementCount()
     {
-        IncrementAmount += 1; // +1
+        IncrementAmount += 1;                           // +1
     }
 
     private string ShowAmount()
     {
-        return $"Amount: {IncrementAmount}"; // +1
+        return $"Amount: {IncrementAmount}";            // +1
     }
 }
 """, fileName, expectedExecutableLines);
@@ -945,42 +944,31 @@ class Program
 """, fileName, expectedExecutableLines);
 
         [DataTestMethod]
-        [DataRow(RazorFile, 4, 6, 10, 17)]
+        [DataRow(RazorFile, 2, 4, 8)]
         [DataRow(CshtmlFile)]
-        public void GetLineNumbers_Razor_HtmlAndCode(string fileName, params int[] expectedExecutableLines) =>
+        public void GetLineNumbers_Razor_Html(string fileName, params int[] expectedExecutableLines) =>
             AssertLineNumbersOfExecutableLinesRazor("""
-<button @onclick="AddTodo">Add todo</button>
-
 <ul>
-    @foreach (var todo in todos) <!-- +1 -->
+    @foreach (var todo in todos)                        <!-- +1 -->
     {
-        <li>@todo.Title</li> <!-- +1 -->
+        <li>@todo.Title</li>                            <!-- +1 -->
     }
 </ul>
 
-<h3>Todo (@todos.Count(todo => !todo.IsDone))</h3> <!-- +1 -->
-
-@code {
-    private List<ToDo> todos = new();
-
-    private void AddTodo()
-    {
-        var x = LocalMethod(); // +1
-        var y = new DateTime();
-
-        int LocalMethod() => 42; // Not counted
-    }
-}
+<h3>Todo (@todos.Count(todo => !todo.IsDone))</h3>      <!-- +1 -->
 """, fileName, expectedExecutableLines);
 
         [DataTestMethod]
-        [DataRow(RazorFile)]
+        [DataRow(RazorFile, 5)]
         [DataRow(CshtmlFile)]
         public void GetLineNumbers_Razor_AssignmentAndDeclarationInTheSameDeconstruction(string fileName, params int[] expectedExecutableLines) =>
             AssertLineNumbersOfExecutableLinesRazor("""
 @code {
-    int? i = null;
-    (i, int k) = (42, 42); // Not counted (.razor only)
+    void Foo()
+    {
+        int? i = null;
+        (i, int j) = (42, 42);      // +1
+    }
 }
 """, fileName, expectedExecutableLines);
 
@@ -992,8 +980,8 @@ class Program
 @code {
     public static bool Foo(int a, int b)
     {
-        return Foo(1, // +1
-                    Bar()); // +1
+        return Foo(1,               // +1
+                    Bar());         // +1
     }
 
     public static int Bar() => 42;
@@ -1001,15 +989,16 @@ class Program
 """, fileName, expectedExecutableLines);
 
         [DataTestMethod]
-        [DataRow(RazorFile)]
+        [DataRow(RazorFile, 5)]
         [DataRow(CshtmlFile)]
         public void GetLineNumbers_Razor_NullCoalescingAssignment(string fileName, params int[] expectedExecutableLines) =>
             AssertLineNumbersOfExecutableLinesRazor("""
 @code {
-    List<int> numbers = null;
-    int? i = null;
-
-    numbers ??= new List<int>(); // Not counted (.razor only)
+    void Foo()
+    {
+        List<int> numbers = null;
+        numbers ??= new List<int>(); // +1
+    }
 }
 """, fileName, expectedExecutableLines);
 
@@ -1021,14 +1010,14 @@ class Program
 @code {
     bool IsLetter(char c)
     {
-        if (c is >= 'a' // +1
+        if (c is >= 'a'                     // +1
                 and <= 'z'
                         or >= 'A'
                             and <= 'Z')
         {
-            return true; // +1
+            return true;                    // +1
         }
-        return false; // +1
+        return false;                       // +1
     }
 }
 """, fileName, expectedExecutableLines);
@@ -1048,19 +1037,21 @@ class Program
 """, fileName, expectedExecutableLines);
 
         [DataTestMethod]
-        [DataRow(RazorFile, 2)]
+        [DataRow(RazorFile, 4, 5)]
         [DataRow(CshtmlFile)]
         public void GetLineNumbers_Razor_LocalFunctions(string fileName, params int[] expectedExecutableLines) =>
             AssertLineNumbersOfExecutableLinesRazor("""
 @code {
-    int y = LocalFunction(); // Not counted (.razor only)
-    LocalFunction(); // +1
-
-    int LocalFunction() => 0; // Not counted
+    void Foo()
+    {
+        var x = LocalMethod();          // +1
+        LocalMethod();                  // +1
+        int LocalMethod() => 42;
+    }
 }
 """, fileName, expectedExecutableLines);
 
-#endif
+        #endif
 
         private static void AssertLineNumbersOfExecutableLines(string code, params int[] expectedExecutableLines)
         {
