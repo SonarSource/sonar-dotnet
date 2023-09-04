@@ -24,26 +24,6 @@ namespace SonarAnalyzer.UnitTest.Common
     public class MetricsTest
     {
         [TestMethod]
-        public void Lines()
-        {
-            Lines(AnalyzerLanguage.CSharp, string.Empty).Should().Be(1);
-            Lines(AnalyzerLanguage.CSharp, "\n").Should().Be(2);
-            Lines(AnalyzerLanguage.CSharp, "\r").Should().Be(2);
-            Lines(AnalyzerLanguage.CSharp, "\r\n").Should().Be(2);
-            Lines(AnalyzerLanguage.CSharp, "\n").Should().Be(2);
-            Lines(AnalyzerLanguage.CSharp, "\n\r").Should().Be(3);
-            Lines(AnalyzerLanguage.CSharp, "using System;\r\n/*hello\r\nworld*/").Should().Be(3);
-
-            Lines(AnalyzerLanguage.VisualBasic, string.Empty).Should().Be(1);
-            Lines(AnalyzerLanguage.VisualBasic, "\n").Should().Be(2);
-            Lines(AnalyzerLanguage.VisualBasic, "\r").Should().Be(2);
-            Lines(AnalyzerLanguage.VisualBasic, "\r\n").Should().Be(2);
-            Lines(AnalyzerLanguage.VisualBasic, "\n").Should().Be(2);
-            Lines(AnalyzerLanguage.VisualBasic, "\n\r").Should().Be(3);
-            Lines(AnalyzerLanguage.VisualBasic, "Imports System\r\n'hello\r\n'world").Should().Be(3);
-        }
-
-        [TestMethod]
         public void LinesOfCode()
         {
             LinesOfCode(AnalyzerLanguage.CSharp, string.Empty).Should().BeEmpty();
@@ -559,9 +539,6 @@ End Class")
     End Sub
 End Module")
                 .Should().Equal(3);
-
-        private static int Lines(AnalyzerLanguage language, string text) =>
-            MetricsFor(language, text).LineCount;
 
         private static ISet<int> LinesOfCode(AnalyzerLanguage language, string text) =>
             MetricsFor(language, text).CodeLines;

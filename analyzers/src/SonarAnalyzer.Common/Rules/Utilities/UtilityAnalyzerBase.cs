@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class UtilityAnalyzerBase : SonarDiagnosticAnalyzer
     {
-        protected static readonly ISet<string> FileExtensionWhitelist = new HashSet<string> { ".cs", ".csx", ".vb" };
+        protected static readonly ISet<string> FileExtensionWhitelist = new HashSet<string> { ".cs", ".csx", ".vb", ".razor" };
         private readonly DiagnosticDescriptor rule;
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
@@ -110,14 +110,14 @@ namespace SonarAnalyzer.Rules
                 }
             });
 
-        protected virtual bool ShouldGenerateMetrics(SyntaxTree tree) =>
+        protected virtual bool ShouldGenerateMetrics(SyntaxTree tree, Compilation compilation) =>
             // The results of Metrics and CopyPasteToken analyzers are not needed for Test projects yet the plugin side expects the protobuf files, so we create empty ones.
             (AnalyzeTestProjects || !IsTestProject)
             && FileExtensionWhitelist.Contains(Path.GetExtension(tree.FilePath))
-            && (AnalyzeGeneratedCode || !Language.GeneratedCodeRecognizer.IsGenerated(tree));
+            && (AnalyzeGeneratedCode || !tree.IsConsideredGenerated(Language.GeneratedCodeRecognizer, compilation));
 
         private bool ShouldGenerateMetrics(SonarCompilationReportingContext context, SyntaxTree tree) =>
             (AnalyzeUnchangedFiles || !context.IsUnchanged(tree))
-            && ShouldGenerateMetrics(tree);
+            && ShouldGenerateMetrics(tree, context.Compilation);
     }
 }

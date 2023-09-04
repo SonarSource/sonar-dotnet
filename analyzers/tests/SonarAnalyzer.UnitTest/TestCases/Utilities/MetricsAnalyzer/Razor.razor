@@ -1,0 +1,40 @@
+@page "/razor"
+
+<p>Current count: @currentCount</p>                <!-- code line-->
+
+@currentCount                                      <!-- code line-->
+
+@code {
+    private int currentCount = 0;                  // code line
+}
+
+<p>Current time: @(DateTime.Now)</p>               <!-- code line-->
+
+@for (var i = 0; i < 5; i++)                       // code line
+{                                                  <!-- code line-->
+    <text>Value: @i</text>                         <!-- code line-->
+    <text>test</text>
+}                                                  <!-- code line-->
+
+@{
+    void RenderName(string name)                   // code line
+    {                                              // code line
+        <p>Name: <strong>@name</strong></p>        <!-- code line-->
+        <p>Name: <strong>Hardcoded</strong></p>
+    }                                              <!-- code line-->
+
+    RenderName("Mahatma Gandhi");                  // code line
+    RenderName("Martin Luther King, Jr.");         // code line
+}
+
+@if (true)                                         // code line
+{                                                  // code line
+}                                                  <!-- code line-->
+
+@for (var i = 0; i < 5; i++)                       // code line
+{                                                  // code line
+    // comment
+    @:Name: @i                                     // code line
+}                                                  <!-- code line-->
+
+<!-- comment -->

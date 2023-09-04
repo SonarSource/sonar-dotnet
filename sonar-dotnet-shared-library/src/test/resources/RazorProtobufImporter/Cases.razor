@@ -1,0 +1,22 @@
+﻿@page "/cases"
+
+<p>Current count: @currentCount</p>
+
+@currentCount
+
+<button @onclick="IncrementCount">Increment</button>
+
+@IncrementAmount
+
+@code {
+    private int currentCount = 0;
+
+    [Parameter]
+    public int IncrementAmount { get; set; } = 1;
+
+    private void IncrementCount()
+    {
+        currentCount += IncrementAmount;
+        IncrementAmount += 1;
+    }
+}

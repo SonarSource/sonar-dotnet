@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules
             var complexity = metrics.Complexity;
             var metricsInfo = new MetricsInfo
             {
-                FilePath = syntaxTree.FilePath,
+                FilePath = syntaxTree.GetRoot().GetMappedFilePathFromRoot(),
                 ClassCount = metrics.ClassCount,
                 StatementCount = metrics.StatementCount,
                 FunctionCount = metrics.FunctionCount,

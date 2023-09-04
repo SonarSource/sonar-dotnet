@@ -25,28 +25,29 @@ namespace SonarAnalyzer.Common
         protected const string InitializationErrorTextPattern = "The input tree is not of the expected language.";
 
         private readonly SyntaxTree tree;
+        private readonly string filePath;
 
         internal static readonly string[] LineTerminators = { "\r\n", "\n", "\r" };
 
         protected MetricsBase(SyntaxTree tree)
         {
             this.tree = tree;
+            filePath = tree.GetRoot().GetMappedFilePathFromRoot();
         }
-
-        public int LineCount =>
-            tree.GetText().Lines.Count;
 
         public abstract ImmutableArray<int> ExecutableLines { get; }
 
         public ISet<int> CodeLines =>
             tree.GetRoot()
                 .DescendantTokens()
-                .Where(token => !IsEndOfFile(token))
+                .Where(x => !IsEndOfFile(x))
+                .Select(x => x.GetLocation().GetMappedLineSpan())
+                .Where(IsInSameFile)
                 .SelectMany(
-                    t =>
+                    x =>
                     {
-                        var start = t.GetLocation().GetLineSpan().StartLinePosition.Line + 1;
-                        var end = t.GetLocation().GetLineSpan().EndLinePosition.Line + 1;
+                        var start = x.StartLinePosition.GetLineNumberToReport();
+                        var end = x.EndLinePosition.GetLineNumberToReport();
                         return Enumerable.Range(start, end - start + 1);
                     })
                 .ToHashSet();
@@ -64,10 +65,13 @@ namespace SonarAnalyzer.Common
                     continue;
                 }
 
-                var lineNumber = tree.GetLineSpan(trivia.FullSpan)
-                                     .StartLinePosition
-                                     .Line + 1;
+                var mappedSpan = tree.GetMappedLineSpan(trivia.FullSpan);
+                if (!IsInSameFile(mappedSpan))
+                {
+                    continue;
+                }
 
+                var lineNumber = mappedSpan.StartLinePosition.Line + 1;
                 var triviaLines = trivia.ToFullString().Split(LineTerminators, StringSplitOptions.None);
 
                 foreach (var line in triviaLines)
@@ -111,6 +115,11 @@ namespace SonarAnalyzer.Common
 
         public int CognitiveComplexity =>
             ComputeCognitiveComplexity(tree.GetRoot());
+
+        private bool IsInSameFile(FileLinePositionSpan span) =>
+            // Syntax tree can contain elements from external files (e.g. razor imports files)
+            // We need to make sure that we don't count these elements.
+            string.Equals(filePath, span.Path, StringComparison.OrdinalIgnoreCase);
 
         private IEnumerable<SyntaxNode> ClassNodes =>
             tree.GetRoot().DescendantNodes().Where(IsClass);
