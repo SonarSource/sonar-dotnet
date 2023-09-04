@@ -714,19 +714,31 @@ Tag(""End"")";
     }
 
     [DataTestMethod]
+    [DataRow("list.Count == 0", true, false)]
+    [DataRow("list.Count == 5", false, null)]
+    [DataRow("list.Count == -5", null, null)]   // if should be unreachable instead
+    [DataRow("list.Count != 0", false, true)]
+    [DataRow("list.Count != 5", null, false)]
+    [DataRow("list.Count != -5", null, null)]   // else should be unreachable instead
     [DataRow("list.Count >  0", false, true)]
     [DataRow("list.Count >  1", false, null)]
     [DataRow("list.Count >  5", false, null)]
-    [DataRow("list.Count >= 0", null, null)]    // should be unreachable instead
+    [DataRow("list.Count >= 0", null, null)]    // else should be unreachable instead
     [DataRow("list.Count >= 1", false, true)]
     [DataRow("list.Count >= 5", false, null)]
-    [DataRow("list.Count <  0", null, null)]    // should be unreachable instead
+    [DataRow("list.Count <  0", null, null)]    // if should be unreachable instead
     [DataRow("list.Count <  1", true, false)]
     [DataRow("list.Count <  5", null, false)]
     [DataRow("list.Count <= 0", true, false)]
     [DataRow("list.Count <= 1", null, false)]
     [DataRow("list.Count <= 5", null, false)]
-    [DataRow("0 >  list.Count", null, null)]    // should be unreachable instead
+    [DataRow("0 == list.Count", true, false)]
+    [DataRow("5 == list.Count", false, null)]
+    [DataRow("-5 == list.Count", null, null)]   // if should be unreachable instead
+    [DataRow("0 != list.Count", false, true)]
+    [DataRow("5 != list.Count", null, false)]
+    [DataRow("-5 != list.Count", null, null)]   // else should be unreachable instead
+    [DataRow("0 >  list.Count", null, null)]    // if should be unreachable instead
     [DataRow("1 >  list.Count", true, false)]
     [DataRow("5 >  list.Count", null, false)]
     [DataRow("0 >= list.Count", true, false)]
@@ -735,7 +747,7 @@ Tag(""End"")";
     [DataRow("0 <  list.Count", false, true)]
     [DataRow("1 <  list.Count", false, null)]
     [DataRow("5 <  list.Count", false, null)]
-    [DataRow("0 <= list.Count", null, null)]    // should be unreachable instead
+    [DataRow("0 <= list.Count", null, null)]    // else should be unreachable instead
     [DataRow("1 <= list.Count", false, true)]
     [DataRow("5 <= list.Count", false, null)]
     public void Binary_Collections(string expression, bool? emptyInIf, bool? emptyInElse)
