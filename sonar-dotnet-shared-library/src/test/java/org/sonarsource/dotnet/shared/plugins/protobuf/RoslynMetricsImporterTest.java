@@ -46,12 +46,12 @@ public class RoslynMetricsImporterTest {
   private static final File TEST_DATA_DIR = new File("src/test/resources/RazorProtobufImporter");
   private static final String TEST_FILE_PATH = "Cases.razor";
   private static final File TEST_FILE = new File(TEST_DATA_DIR, TEST_FILE_PATH);
-  private static final File protobuf = new File(TEST_DATA_DIR, METRICS_FILENAME);
+  private static final File PROTOBUF_FILE = new File(TEST_DATA_DIR, METRICS_FILENAME);
 
   @Before
   public void before() {
     assertThat(TEST_FILE).withFailMessage("no such file: " + TEST_FILE).isFile();
-    assertThat(protobuf).withFailMessage("no such file: " + protobuf).isFile();
+    assertThat(PROTOBUF_FILE).withFailMessage("no such file: " + PROTOBUF_FILE).isFile();
   }
 
   @Test
@@ -68,7 +68,7 @@ public class RoslynMetricsImporterTest {
     var fileLinesContextFactory = mock(FileLinesContextFactory.class);
     when(fileLinesContextFactory.createFor(any(InputFile.class))).thenReturn(fileLinesContext);
 
-    new MetricsImporter(sensorContext, fileLinesContextFactory, noSonarFilter, String::toString).accept(protobuf.toPath());
+    new MetricsImporter(sensorContext, fileLinesContextFactory, noSonarFilter, String::toString).accept(PROTOBUF_FILE.toPath());
 
     var measures = sensorContext.measures(inputFile.key());
     assertThat(measures).hasSize(7);
