@@ -65,7 +65,7 @@ public class SonarLintXmlReader
 
         bool ReadBoolean(string key, bool defaultValue = false) =>
             settings.TryGetValue(key, out var value)
-                ? bool.TryParse(value, out var boolvalue) && boolvalue
+                ? bool.TryParse(value, out var boolValue) && boolValue
                 : defaultValue;
 
         List<SonarLintXmlRule> ReadRuleParameters() =>
