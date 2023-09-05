@@ -45,7 +45,12 @@ namespace SonarAnalyzer.Rules
 
         protected sealed override LogInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel) =>
             syntaxTree.IsGenerated(Language.GeneratedCodeRecognizer, semanticModel.Compilation)
-            ? new LogInfo { Severity = LogSeverity.Debug, Text = $"File '{syntaxTree.FilePath}' was recognized as generated" }
+            ? CreateMessage(syntaxTree)
             : null;
+
+        private static LogInfo CreateMessage(SyntaxTree tree) =>
+            GeneratedCodeRecognizer.IsRazorGeneratedFile(tree)
+                ? new LogInfo { Severity = LogSeverity.Debug, Text = $"File '{tree.FilePath}' was recognized as razor generated" }
+                : new LogInfo { Severity = LogSeverity.Debug, Text = $"File '{tree.FilePath}' was recognized as generated" };
     }
 }
