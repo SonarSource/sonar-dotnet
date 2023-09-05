@@ -26,7 +26,7 @@ using SonarAnalyzer.Extensions;
 namespace SonarAnalyzer.UnitTest.TestFramework.Tests;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-internal class DummyAnalyzerWithLocationMapping : SonarDiagnosticAnalyzer
+internal class DummyAnalyzerWithLocation : SonarDiagnosticAnalyzer
 {
     private static readonly DiagnosticDescriptor Rule = AnalysisScaffolding.CreateDescriptorMain("DummyWithLocation");
 
@@ -38,13 +38,9 @@ internal class DummyAnalyzerWithLocationMapping : SonarDiagnosticAnalyzer
     private void ReportIssue(SonarSyntaxNodeReportingContext context)
     {
         if (context.Node is InvocationExpressionSyntax invocation
-            && invocation.NodeIdentifier() is { } identifier
-            && identifier.ValueText == "RaiseHere")
+            && invocation.NodeIdentifier() is { ValueText: "RaiseHere" } identifier)
         {
-            var location = identifier.GetLocation();
-            var lineSpan = location.GetMappedLineSpan();
-            location = Location.Create(lineSpan.Path, location.SourceSpan, lineSpan.Span);
-            context.ReportIssue(Diagnostic.Create(Rule, location));
+            context.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation(), invocation.ArgumentList.Arguments.Select(arg => arg.GetLocation())));
         }
     }
 }

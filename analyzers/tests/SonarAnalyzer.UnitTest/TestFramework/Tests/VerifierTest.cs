@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             .WithCodeFix<DummyCodeFixCS>()
             .WithCodeFixedPaths("Expected.cs");
 
-        private static readonly VerifierBuilder DummyWithLocationMapping = new VerifierBuilder<DummyAnalyzerWithLocationMapping>();
+        private static readonly VerifierBuilder DummyWithLocation = new VerifierBuilder<DummyAnalyzerWithLocation>();
 
         public TestContext TestContext { get; set; }
 
@@ -154,33 +154,47 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
                 .Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>();
 
         [TestMethod]
+        public void Verify_RazorWithAdditionalLocation()
+        {
+            using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = true };
+            DummyWithLocation.AddPaths("Dummy.SecondaryLocation.razor").Verify();
+        }
+
+        [TestMethod]
+        public void Verify_CshtmlWithAdditionalLocation()
+        {
+            using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = true };
+            DummyWithLocation.AddPaths("Dummy.SecondaryLocation.cshtml").Verify();
+        }
+
+        [TestMethod]
         public void Verify_Razor()
         {
             using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = true };
-            DummyWithLocationMapping.AddPaths("Dummy.razor").Verify();
+            DummyWithLocation.AddPaths("Dummy.razor").Verify();
         }
 
         [TestMethod]
         public void Verify_Cshtml()
         {
             using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = true };
-            DummyWithLocationMapping.AddPaths("Dummy.cshtml").Verify();
+            DummyWithLocation.AddPaths("Dummy.cshtml").Verify();
         }
 
         [TestMethod]
         public void Verify_RazorAnalysisIsDisabled_DoesNotRaise() =>
-            DummyWithLocationMapping.AddPaths("Dummy.razor").VerifyNoIssueReported();
+            DummyWithLocation.AddPaths("Dummy.razor").VerifyNoIssueReported();
 
         [TestMethod]
         public void Verify_CshtmlAnalysisIsDisabled_DoesNotRaise() =>
-            DummyWithLocationMapping.AddPaths("Dummy.cshtml").VerifyNoIssueReported();
+            DummyWithLocation.AddPaths("Dummy.cshtml").VerifyNoIssueReported();
 
         [DataTestMethod]
         [DataRow("net6.0")]
         [DataRow("net7.0")]
         public void Verify_Razor_WithFramework(string framework)
         {
-            var compilations = DummyWithLocationMapping.AddPaths("Dummy.razor")
+            var compilations = DummyWithLocation.AddPaths("Dummy.razor")
                 .WithFramework(framework)
                 .Build()
                 .Compile(false);
@@ -192,7 +206,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         [TestMethod]
         public void Verify_Razor_DefaultFramework()
         {
-            var compilations = DummyWithLocationMapping.AddPaths("Dummy.razor")
+            var compilations = DummyWithLocation.AddPaths("Dummy.razor")
                 .Build()
                 .Compile(false);
 
@@ -207,7 +221,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         [DataRow("net5.0")]
         public void Verify_Razor_WithFramework_NotSupported(string framework)
         {
-            var verifierBuilder = DummyWithLocationMapping.AddPaths("Dummy.razor");
+            var verifierBuilder = DummyWithLocation.AddPaths("Dummy.razor");
             verifierBuilder.WithFramework(framework)
                 .Invoking(x => x.Verify())
                 .Should()
@@ -217,7 +231,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         [TestMethod]
         public void Verify_Razor_ParseOptions()
         {
-            var compilations = DummyWithLocationMapping.AddPaths("Dummy.razor")
+            var compilations = DummyWithLocation.AddPaths("Dummy.razor")
                 .WithOptions(ParseOptionsHelper.BeforeCSharp10)
                 .Build()
                 .Compile(false);
@@ -250,7 +264,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         [TestMethod]
         public void Verify_Razor_AddReferences()
         {
-            var compilations = DummyWithLocationMapping.AddPaths("Dummy.razor")
+            var compilations = DummyWithLocation.AddPaths("Dummy.razor")
                 .AddReferences(NuGetMetadataReference.MicrosoftAzureDocumentDB())
                 .Build()
                 .Compile(false);
@@ -261,7 +275,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         [TestMethod]
         public void Verify_Razor_NoReferences()
         {
-            var compilations = DummyWithLocationMapping.AddPaths("Dummy.razor")
+            var compilations = DummyWithLocation.AddPaths("Dummy.razor")
                 .Build()
                 .Compile(false);
             var references = compilations.Single().References;
