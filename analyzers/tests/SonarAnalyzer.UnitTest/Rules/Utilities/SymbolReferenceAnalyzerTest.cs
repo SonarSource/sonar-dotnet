@@ -195,7 +195,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = true };
 
-            // Currently only the symbols from .cs files are computed since .razor support is not yet implemented.
             CreateBuilder(ProjectType.Product, "Razor.razor", "ToDo.cs", "Razor.cshtml")
                 .WithConcurrentAnalysis(false)
                 .VerifyUtilityAnalyzer<SymbolReferenceInfo>(symbols =>
