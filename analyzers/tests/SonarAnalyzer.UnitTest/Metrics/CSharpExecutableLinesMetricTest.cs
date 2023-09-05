@@ -1062,7 +1062,7 @@ class Program
         private static void AssertLineNumbersOfExecutableLinesRazor(string code, string fileName, params int[] expectedExecutableLines)
         {
             using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = true };
-            var compilation = new VerifierBuilder<DummyAnalyzerWithLocationMapping>()
+            var compilation = new VerifierBuilder<DummyAnalyzerWithLocation>()
                 .AddSnippet(code, fileName)
                 .Build()
                 .Compile(false)
