@@ -15,6 +15,22 @@ pool: '.Net Bubble - GCP'
 variables:
   - group: sonar-dotnet-variables
   - group: sonarsource-build-variables
+  - group: artifactory_access
+  # ARTIFACTORY_URL https://repox.jfrog.io/repox => https://repox.jfrog.io/artifactory
+  # JFROG_URL https://repox.jfrog.io
+  # https://github.com/SonarSource/parent-oss/blob/master/pom.xml#L708-L711
+  - name: ARTIFACTORY_DEPLOY_USERNAME
+    value: $[variables.ARTIFACTORY_QA_DEPLOYER_USERNAME]
+  # ~https://github.com/SonarSource/re-ci-images/blob/master/docker/mvn/settings-private.xml
+  - name: ARTIFACTORY_PRIVATE_USERNAME
+    value: $[variables.ARTIFACTORY_PRIVATE_READER_USERNAME]
+  - name: ARTIFACTORY_QA_READER_USERNAME
+    value: $[variables.ARTIFACTORY_PRIVATE_READER_USERNAME]
+  # pipelines-yaml-templates/promote-stage.yml line 56
+  - name: ARTIFACTORY_API_USER
+    value: $[variables.ARTIFACTORY_PROMOTER_USERNAME]
+  - name: ARTIFACTORY_API_KEY
+    value: $[variables.ARTIFACTORY_PROMOTER_ACCESS_TOKEN]
   - name: UnitTestProjectPath
     value: 'analyzers\tests\SonarAnalyzer.UnitTest\'
   - name: UnitTestResultsPath
@@ -118,13 +134,23 @@ stages:
           pathToPublish: '$(Build.ArtifactStagingDirectory)/packages'
           artifactName: 'NuGet Packages'
 
-      - task: ArtifactoryNuGet@1
+      - task: JFrogNuGet@1
         displayName: 'Publish SonarAnalyzer.CFG NuGet on repox'
         inputs:
           command: 'push'
-          artifactoryService: 'Repox artifactory'
+          artifactoryConnection: 'repox_qa_deployer_token'
           targetDeployRepo: '$(ARTIFACTORY_NUGET_REPO)'
+          module: SonarAnalyzer.CFG
           pathToNupkg: '$(Build.ArtifactStagingDirectory)/packages/SonarAnalyzer.CFG.*.nupkg'
+          collectBuildInfo: true
+          buildName: sonar-dotnet_nuget
+          buildNumber: '$(Build.BuildId)'
+
+      - task: JFrogPublishBuildInfo@1
+        inputs:
+          artifactoryConnection: 'repox_qa_deployer_token'
+          buildName: sonar-dotnet_nuget
+          buildNumber: '$(Build.BuildId)'
 
       - task: PublishPipelineArtifact@1
         displayName: 'Publish analyzer binaries as pipeline artifact'
@@ -385,8 +411,7 @@ stages:
       - task: Maven@3
         displayName: 'Maven deploy'
         env:
-          ARTIFACTORY_DEPLOY_USERNAME: $(ARTIFACTORY_DEPLOY_USERNAME)
-          ARTIFACTORY_DEPLOY_PASSWORD: $(ARTIFACTORY_DEPLOY_PASSWORD)
+          ARTIFACTORY_DEPLOY_PASSWORD: $(ARTIFACTORY_QA_DEPLOYER_ACCESS_TOKEN)
           PGP_PASSPHRASE: $(PGP_PASSPHRASE)
           GITHUB_BRANCH: $(Build.SourceBranchName)
           GIT_SHA1: $(Build.SourceVersion)
@@ -486,8 +511,7 @@ stages:
       - task: Maven@3
         displayName: 'Maven install'
         env:
-          ARTIFACTORY_DEPLOY_USERNAME: $(ARTIFACTORY_DEPLOY_USERNAME)
-          ARTIFACTORY_DEPLOY_PASSWORD: $(ARTIFACTORY_DEPLOY_PASSWORD)
+          ARTIFACTORY_DEPLOY_PASSWORD: $(ARTIFACTORY_QA_DEPLOYER_ACCESS_TOKEN)
         inputs:
           goals: 'clean install'
           options: >-
@@ -502,7 +526,8 @@ stages:
       - task: Maven@3
         displayName: 'Maven ITs'
         env:
-          ARTIFACTORY_API_KEY: $(ARTIFACTORY_API_KEY)
+          # For Orchestrator (https://github.com/SonarSource/orchestrator/commit/d5396c75ab77e6088afe58e61b0cd0693ac885f0)
+          ARTIFACTORY_ACCESS_TOKEN: $(ARTIFACTORY_PRIVATE_READER_ACCESS_TOKEN)
           GITHUB_TOKEN: $(GITHUB_TOKEN)
         inputs:
           mavenPomFile: its/pom.xml
@@ -527,50 +552,20 @@ stages:
       steps:
         - template: set-azp-variables-steps.yml@pipelines-yaml-templates
 
-        - task: UsePythonVersion@0
+        - task: JFrogBuildPromotion@1
           inputs:
-            versionSpec: '3.x'
-
-        - bash: pip3 install requests
-
-        - task: PythonScript@0
-          name: promoteRepox
-          inputs:
-            failOnStderr: true
-            scriptSource: 'inline'
-            script: |
-              import requests
-              import os
-              import sys
-
-              version = '$(SONAR_PROJECT_VERSION).$(Build.BuildId)'
-              isPr = '$(Build.Reason)' == 'PullRequest'
-              sourceRepo = os.environ['ARTIFACTORY_NUGET_REPO']
-              targetRepo = None
-              if isPr:
-                targetRepo = sourceRepo.replace('qa', 'dev')
-              else:
-                targetRepo = sourceRepo.replace('qa', 'public')
-
-              artifact = f'SonarAnalyzer.CFG.{version}.nupkg'
-              print(f'Promoting nuget {artifact} from {sourceRepo} to {targetRepo}')
-
-              url = f'$(ARTIFACTORY_URL)/api/move/{sourceRepo}/{artifact}?to=/{targetRepo}/{artifact}'
-              headers = {'Content-Type': 'application/json'}
-              response = requests.post(url, headers=headers, auth=('$(ARTIFACTORY_API_USER)', '$(ARTIFACTORY_API_KEY)'))
-
-              fixedBranch = ''
-              if not isPr:
-                # Cannot use BUILD_SOURCEBRANCHNAME because of https://github.com/Microsoft/azure-pipelines-agent/issues/838
-                branch = os.environ['BUILD_SOURCEBRANCH']
-                refPrefix = "refs/heads/"
-                if branch.startswith(refPrefix):
-                  fixedBranch = branch[len(refPrefix):]
-              print("##vso[task.setvariable variable=fixedBranch;isOutput=true]" + fixedBranch)
-
-              promoted = response.status_code == 200
-              if not promoted:
-                print('[!] [{0}] Server Error'.format(response.status_code), file=sys.stderr)
+            artifactoryConnection: 'repox_promoter_token'
+            buildName: sonar-dotnet_nuget
+            buildNumber: '$(Build.BuildId)'
+            sourceRepo: '$(ARTIFACTORY_NUGET_REPO)'
+            ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
+              targetRepo: sonarsource-nuget-dev
+            ${{ else }}:
+              targetRepo: sonarsource-nuget-public
+            status: 'it-passed'
+            includeDependencies: false
+            copy: false
+            dryRun: false
 
     - job: nugetBurgrFailed
       dependsOn: promoteRepox
@@ -584,7 +579,7 @@ stages:
           name: 'artifacts'
           type: 'promotion'
           status: 'failed'
-          fixedBranch: $(fixedBranch)
+          fixedBranch: ${{ replace(variables['Build.SourceBranch'], 'refs/heads/', '') }}
 
     - job: nugetBurgrCanceled
       dependsOn: promoteRepox
@@ -598,7 +593,7 @@ stages:
           name: 'artifacts'
           type: 'promotion'
           status: 'canceled'
-          fixedBranch: $(fixedBranch)
+          fixedBranch: ${{ replace(variables['Build.SourceBranch'], 'refs/heads/', '') }}
 
 - template: promote-stage.yml@pipelines-yaml-templates
   parameters:
