@@ -85,8 +85,11 @@ public class RoslynMetricsImporterTest {
 
     verify(noSonarFilter).noSonarInFile(inputFile, Collections.emptySet());
 
-    // Will be implemented by https://github.com/SonarSource/sonar-dotnet/pull/7915
-    verify(fileLinesContext, never()).setIntValue(eq(CoreMetrics.EXECUTABLE_LINES_DATA_KEY), anyInt(), anyInt());
+    verify(fileLinesContext).setIntValue(CoreMetrics.EXECUTABLE_LINES_DATA_KEY, 3, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.EXECUTABLE_LINES_DATA_KEY, 5, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.EXECUTABLE_LINES_DATA_KEY, 9, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.EXECUTABLE_LINES_DATA_KEY, 19, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.EXECUTABLE_LINES_DATA_KEY, 20, 1);
 
     verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 3, 1);
     verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 5, 1);

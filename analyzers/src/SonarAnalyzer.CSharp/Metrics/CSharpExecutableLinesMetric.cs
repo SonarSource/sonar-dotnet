@@ -24,16 +24,30 @@ namespace SonarAnalyzer.Metrics.CSharp
     {
         public static ImmutableArray<int> GetLineNumbers(SyntaxTree syntaxTree, SemanticModel semanticModel)
         {
-            var walker = new ExecutableLinesWalker(semanticModel);
+            var walker = GetWalker(syntaxTree, semanticModel);
             walker.SafeVisit(syntaxTree.GetRoot());
             return walker.ExecutableLineNumbers.ToImmutableArray();
         }
 
-        private sealed class ExecutableLinesWalker : SafeCSharpSyntaxWalker
+        private static ExecutableLinesWalker GetWalker(SyntaxTree syntaxTree, SemanticModel semanticModel) =>
+            syntaxTree switch
+            {
+                _ when GeneratedCodeRecognizer.IsCshtml(syntaxTree) => new CshtmlExecutableLinesWalker(semanticModel),
+                _ when GeneratedCodeRecognizer.IsRazor(syntaxTree) => new RazorExecutableLinesWalker(semanticModel),
+                _ => new ExecutableLinesWalker(semanticModel)
+            };
+
+        private class ExecutableLinesWalker : SafeCSharpSyntaxWalker
         {
             private readonly SemanticModel model;
 
             public HashSet<int> ExecutableLineNumbers { get; } = new();
+
+            protected virtual bool AddExecutableLineNumbers(Location location)
+            {
+                ExecutableLineNumbers.Add(location.GetLineNumberToReport());
+                return true;
+            }
 
             public ExecutableLinesWalker(SemanticModel model) =>
                 this.model = model;
@@ -91,8 +105,7 @@ namespace SonarAnalyzer.Metrics.CSharp
                     case SyntaxKind.ParenthesizedLambdaExpression:
 
                     case SyntaxKind.ArrayInitializerExpression:
-                        ExecutableLineNumbers.Add(node.GetLocation().GetLineNumberToReport());
-                        return true;
+                        return AddExecutableLineNumbers(node.GetLocation());
 
                     case SyntaxKind.StructDeclaration:
                     case SyntaxKind.ClassDeclaration:
@@ -131,6 +144,30 @@ namespace SonarAnalyzer.Metrics.CSharp
 
             private bool IsExcludedAttribute(AttributeSyntax attribute) =>
                 attribute.IsKnownType(KnownType.System_Diagnostics_CodeAnalysis_ExcludeFromCodeCoverageAttribute, model);
+        }
+
+        private sealed class RazorExecutableLinesWalker : ExecutableLinesWalker
+        {
+            public RazorExecutableLinesWalker(SemanticModel model) : base(model) { }
+
+            protected override bool AddExecutableLineNumbers(Location location)
+            {
+                var mappedLocation = location.GetMappedLineSpan();
+                if (mappedLocation.HasMappedPath)
+                {
+                    ExecutableLineNumbers.Add(mappedLocation.GetLineNumberToReport());
+                    return true;
+                }
+                return false;
+            }
+        }
+
+        private sealed class CshtmlExecutableLinesWalker : ExecutableLinesWalker
+        {
+            public CshtmlExecutableLinesWalker(SemanticModel model) : base(model) { }
+
+            // HTML plugin is responsible to compute the metrics
+            protected override bool AddExecutableLineNumbers(Location location) => false;
         }
     }
 }
