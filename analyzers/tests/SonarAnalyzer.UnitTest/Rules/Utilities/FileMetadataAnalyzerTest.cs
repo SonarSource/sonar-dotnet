@@ -152,8 +152,8 @@ namespace SonarAnalyzer.UnitTest.Rules
                 IsTestProject = isTestProject;
             }
 
-            public FileMetadataInfo TestCreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel) =>
-                CreateMessage(syntaxTree, semanticModel);
+            public FileMetadataInfo TestCreateMessage(SyntaxTree tree, SemanticModel model) =>
+                CreateMessage(tree, model);
         }
     }
 }

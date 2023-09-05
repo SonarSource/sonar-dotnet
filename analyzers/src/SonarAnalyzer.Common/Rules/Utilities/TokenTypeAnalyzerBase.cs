@@ -42,16 +42,16 @@ namespace SonarAnalyzer.Rules
             !GeneratedCodeRecognizer.IsRazorGeneratedFile(tree)
             && base.ShouldGenerateMetrics(tree, compilation);
 
-        protected sealed override TokenTypeInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
+        protected sealed override TokenTypeInfo CreateMessage(SyntaxTree tree, SemanticModel model)
         {
-            var tokens = syntaxTree.GetRoot().DescendantTokens();
+            var tokens = tree.GetRoot().DescendantTokens();
             var identifierTokenKind = Language.SyntaxKind.IdentifierToken;  // Performance optimization
             var skipIdentifierTokens = tokens
                 .Where(token => Language.Syntax.IsKind(token, identifierTokenKind))
                 .Skip(IdentifierTokenCountThreshold)
                 .Any();
 
-            var tokenClassifier = GetTokenClassifier(semanticModel, skipIdentifierTokens);
+            var tokenClassifier = GetTokenClassifier(model, skipIdentifierTokens);
             var triviaClassifier = GetTriviaClassifier();
             var spans = new List<TokenInfo>();
             // The second iteration of the tokens is intended since there is no processing done and we want to avoid copying all the tokens to a second collection.
@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Rules
 
             var tokenTypeInfo = new TokenTypeInfo
             {
-                FilePath = syntaxTree.FilePath
+                FilePath = tree.FilePath
             };
 
             tokenTypeInfo.TokenInfo.AddRange(spans);
