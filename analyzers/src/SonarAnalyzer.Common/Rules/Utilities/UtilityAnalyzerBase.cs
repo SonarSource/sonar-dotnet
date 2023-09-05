@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class UtilityAnalyzerBase : SonarDiagnosticAnalyzer
     {
-        protected static readonly ISet<string> FileExtensionWhitelist = new HashSet<string> { ".cs", ".csx", ".vb", ".razor" };
+        protected static readonly ISet<string> FileExtensionWhitelist = new HashSet<string> { ".cs", ".csx", ".vb" };
         private readonly DiagnosticDescriptor rule;
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
@@ -115,6 +115,12 @@ namespace SonarAnalyzer.Rules
             (AnalyzeTestProjects || !IsTestProject)
             && FileExtensionWhitelist.Contains(Path.GetExtension(tree.FilePath))
             && (AnalyzeGeneratedCode || !tree.IsConsideredGenerated(Language.GeneratedCodeRecognizer, compilation));
+
+        protected static string GetFilePath(SyntaxTree syntaxTree) =>
+            // If the syntax tree is constructed for a razor generated file, we need to provide the original file path.
+            GeneratedCodeRecognizer.IsRazorGeneratedFile(syntaxTree) && syntaxTree.GetRoot() is var root && root.ContainsDirectives
+                ? root.GetMappedFilePathFromRoot()
+                : syntaxTree.FilePath;
 
         private bool ShouldGenerateMetrics(SonarCompilationReportingContext context, SyntaxTree tree) =>
             (AnalyzeUnchangedFiles || !context.IsUnchanged(tree))

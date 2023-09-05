@@ -24,21 +24,25 @@ import static org.sonarsource.dotnet.shared.plugins.SensorContextUtils.toTextRan
 import java.util.function.UnaryOperator;
 import javax.annotation.CheckForNull;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.highlighting.NewHighlighting;
 import org.sonar.api.batch.sensor.highlighting.TypeOfText;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.TokenTypeInfo;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
 /**
-  This class is responsible of reading/importing the highlight info that was processed by the C#/VB.NET analyzer.
+  This class is responsible for reading/importing the highlight info that was processed by the C#/VB.NET analyzer.
  */
 public class HighlightImporter extends ProtobufImporter<SonarAnalyzer.TokenTypeInfo> {
 
+  private static final Logger LOG = LoggerFactory.getLogger(HighlightImporter.class);
   private final SensorContext context;
   private final Map<InputFile, HashSet<TokenTypeInfo.TokenInfo>> fileHighlights = new HashMap<>();
 
@@ -65,8 +69,13 @@ public class HighlightImporter extends ProtobufImporter<SonarAnalyzer.TokenTypeI
       for (SonarAnalyzer.TokenTypeInfo.TokenInfo message : entry.getValue()) {
         TypeOfText typeOfText = toType(message.getTokenType());
         if (typeOfText != null) {
-          highlighting.highlight(toTextRange(entry.getKey(), message.getTextRange()), typeOfText);
-          foundMappableHighlightings = true;
+          var textRange = toTextRange(entry.getKey(), message.getTextRange());
+          if (textRange.isPresent()) {
+            highlighting.highlight(textRange.get(), typeOfText);
+            foundMappableHighlightings = true;
+          } else if (LOG.isDebugEnabled()) {
+            LOG.debug("The reported token was out of the range. File {}, Range {}", entry.getKey().filename(), message.getTextRange());
+          }
         }
       }
       if (foundMappableHighlightings) {
