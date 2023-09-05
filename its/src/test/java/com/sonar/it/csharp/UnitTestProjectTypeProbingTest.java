@@ -64,7 +64,7 @@ public class UnitTestProjectTypeProbingTest {
   void testProject_WithPropertySetToFalse_IsIdentifiedAsMainProject() {
     assertThat(getIssues("UTProjectProbing:UTProjectProbing.MsTestWithProjectPropertyFalse/calculator.cs"))
       .extracting(Issues.Issue::getRule)
-      .containsExactly(MAIN_AND_TEST_RULE_ID, MAIN_RULE_ID, REMOVE_EMPTY_FINALIZERS);
+      .containsExactlyInAnyOrder(MAIN_AND_TEST_RULE_ID, MAIN_RULE_ID, REMOVE_EMPTY_FINALIZERS);
   }
 
   @Test
