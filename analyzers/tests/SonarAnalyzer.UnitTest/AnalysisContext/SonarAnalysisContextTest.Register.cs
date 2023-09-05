@@ -23,6 +23,7 @@ extern alias vbnet;
 using Microsoft.CodeAnalysis.CSharp;
 using Moq;
 using SonarAnalyzer.AnalysisContext;
+using SonarAnalyzer.UnitTest.TestFramework.Tests;
 using CS = csharp::SonarAnalyzer.Extensions.SonarAnalysisContextExtensions;
 using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext;
 using VB = vbnet::SonarAnalyzer.Extensions.SonarAnalysisContextExtensions;
@@ -187,6 +188,53 @@ public partial class SonarAnalysisContextTest
 
         startContext.RaisedDiagnostic.Should().NotBeNull().And.BeSameAs(diagnostic);
     }
+
+#if NET
+
+    [DataTestMethod]
+    [DataRow("S109")]
+    [DataRow("S103")]
+    [DataRow("S1192")]
+    [DataRow("S104")]
+    [DataRow("S113")]
+    [DataRow("S1451")]
+    [DataRow("S1147")]
+    public void DisabledRules_ForRazor_DoNotRaise(string ruleId) =>
+        new VerifierBuilder()
+            .AddAnalyzer(() => new DummyAnalyzerWithLocation(ruleId, false))
+            .WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+            .AddSnippet("""
+                        @code
+                        {
+                            private int magicNumber = RaiseHere();
+                            private static int RaiseHere()
+                            {
+                                return 42;
+                            }
+                        }
+                        """,
+                        "SomeFile.razor")
+            .VerifyNoIssueReported();
+
+    [TestMethod]
+    public void TestRules_ForRazor_DoNotRaise() =>
+    new VerifierBuilder()
+        .AddAnalyzer(() => new DummyAnalyzerWithLocation("DummyId", true))
+        .WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Test))
+        .AddSnippet("""
+                        @code
+                        {
+                            private int magicNumber = RaiseHere();
+                            private static int RaiseHere()
+                            {
+                                return 42;
+                            }
+                        }
+                        """,
+                    "SomeFile.razor")
+        .VerifyNoIssueReported();
+
+#endif
 
     private static CompilationStartAnalysisContext MockCompilationStartAnalysisContext(DummyAnalysisContext context)
     {

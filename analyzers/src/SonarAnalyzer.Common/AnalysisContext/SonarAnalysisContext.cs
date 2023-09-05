@@ -25,6 +25,17 @@ namespace SonarAnalyzer.AnalysisContext;
 
 public class SonarAnalysisContext
 {
+    private readonly HashSet<string> rulesDisabledForRazor = new()
+        {
+            "S109",
+            "S103",
+            "S1192",
+            "S104",
+            "S113",
+            "S1451",
+            "S1147"
+        };
+
     private readonly RoslynAnalysisContext analysisContext;
     private readonly ImmutableArray<DiagnosticDescriptor> supportedDiagnostics;
 
@@ -127,9 +138,15 @@ public class SonarAnalysisContext
         // the decision is made on based on whether the project contains the analyzer as NuGet).
         if (context.HasMatchingScope(supportedDiagnostics)
             && context.ShouldAnalyzeTree(sourceTree, generatedCodeRecognizer)
-            && LegacyIsRegisteredActionEnabled(supportedDiagnostics, sourceTree))
+            && LegacyIsRegisteredActionEnabled(supportedDiagnostics, sourceTree)
+            && ShoulAnalyzeRazorFile(sourceTree))
         {
             action(context);
         }
     }
+
+    private bool ShoulAnalyzeRazorFile(SyntaxTree sourceTree) =>
+        !GeneratedCodeRecognizer.IsRazorGeneratedFile(sourceTree)
+        || !supportedDiagnostics.Any(x => x.CustomTags.Contains(DiagnosticDescriptorFactory.TestSourceScopeTag)
+                                          || rulesDisabledForRazor.Contains(x.Id));
 }

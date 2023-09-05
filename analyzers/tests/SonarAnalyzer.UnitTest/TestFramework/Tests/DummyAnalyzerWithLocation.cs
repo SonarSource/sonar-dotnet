@@ -28,9 +28,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 internal class DummyAnalyzerWithLocation : SonarDiagnosticAnalyzer
 {
-    private static readonly DiagnosticDescriptor Rule = AnalysisScaffolding.CreateDescriptorMain("DummyWithLocation");
+    private readonly DiagnosticDescriptor Rule;
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+
+    public DummyAnalyzerWithLocation() : this("DummyWithLocation", false) { }
+
+    public DummyAnalyzerWithLocation(string id, bool isTest) =>
+        Rule = isTest ? AnalysisScaffolding.CreateDescriptorTest(id) : AnalysisScaffolding.CreateDescriptorMain(id);
 
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(CSharpGeneratedCodeRecognizer.Instance, ReportIssue, SyntaxKind.InvocationExpression);
