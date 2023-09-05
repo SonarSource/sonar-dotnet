@@ -20,6 +20,7 @@
 
 using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.UnitTest.Helpers;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -45,6 +46,52 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void UnnecessaryUsings_CSharp10_GlobalUsings() =>
             builder.AddPaths("UnnecessaryUsings.CSharp10.Global.cs", "UnnecessaryUsings.CSharp10.Consumer.cs").WithTopLevelStatements().WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
+        [DataTestMethod]
+        [DataRow("_ViewImports.cshtml")]
+        [DataRow("_viewimports.cshtml")]
+        [DataRow("_viEwiMpoRts.cshtml")]
+        public void UnnecessaryUsings_RazorViewImportsCshtmlFile_NoIssueReported(string fileName)
+        {
+            using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = true };
+            builder.AddSnippet(@"@using System.Text.Json;", fileName).VerifyNoIssueReported();
+        }
+
+        [DataTestMethod]
+        [DataRow("_Imports.razor")]
+        [DataRow("_imports.razor")]
+        [DataRow("_iMpoRts.razor")]
+        public void UnnecessaryUsings_RazorImportsRazorFile_NoIssueReported(string fileName)
+        {
+            using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = true };
+            builder.AddSnippet(@"@using System.Text.Json;", fileName).VerifyNoIssueReported();
+        }
+
+        [DataTestMethod]
+        [DataRow("RandomFile_ViewImports.cshtml")]
+        [DataRow("RandomFile_Imports.cshtml")]
+        [DataRow("_Imports.cshtml")]
+        public void UnnecessaryUsings_RazorViewImportsSimilarCshtmlFile_IssuesReported(string fileName)
+        {
+            using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = true };
+            builder.AddSnippet("@using System.Linq;", "_ViewImports.cshtml").AddSnippet(@"@using System.Text.Json; @* Noncompliant *@", fileName).Verify();
+        }
+
+        [DataTestMethod]
+        [DataRow("RandomFile_ViewImports.razor")]
+        [DataRow("RandomFile_Imports.razor")]
+        [DataRow("_ViewImports.razor")]
+        public void UnnecessaryUsings_RazorViewImportsSimilarRazorFile_IssuesReported(string fileName)
+        {
+            using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = true };
+            builder.AddSnippet("@using System.Linq;", "_Imports.razor").AddSnippet(@"@using System.Text.Json; @* Noncompliant *@", fileName).Verify();
+        }
+
+        [DataTestMethod]
+        [DataRow("_ViewImports.cs")]
+        [DataRow("_Imports.cs")]
+        public void UnnecessaryUsings_RazorViewImportsSimilarCSFile_IssuesReported(string fileName) =>
+            builder.AddSnippet(@"using System.Text; // Noncompliant", fileName).Verify();
 
         [TestMethod]
         public void UnnecessaryUsings_CSharp10_FileScopedNamespace() =>
