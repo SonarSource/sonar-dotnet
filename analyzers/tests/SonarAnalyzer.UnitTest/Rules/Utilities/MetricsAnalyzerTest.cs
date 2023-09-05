@@ -31,6 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         private const string BasePath = @"Utilities\MetricsAnalyzer\";
         private const string AllMetricsFileName = "AllMetrics.cs";
         private const string RazorFileName = "Razor.razor";
+        private const string CsHtmlFileName = "Razor.cshtml";
 
         public TestContext TestContext { get; set; }
 
@@ -79,6 +80,20 @@ namespace SonarAnalyzer.UnitTest.Rules
                     metrics.NonBlankComment.Should().BeEquivalentTo(new[] {13, 20, 21, 26, 27, 30, 31, 34, 35, 36, 8});
                     metrics.StatementCount.Should().Be(31);
                 });
+        }
+
+        [TestMethod]
+        public void VerifyMetrics_CsHtml()
+        {
+            using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = true };
+
+            CreateBuilder(false, CsHtmlFileName)
+                .WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+                .VerifyUtilityAnalyzer<MetricsInfo>(messages =>
+                    {
+                        // There should be no metrics messages for the cshtml files.
+                        messages.Select(x => Path.GetFileName(x.FilePath)).Should().BeEquivalentTo("_Imports.razor");
+                    });
         }
 
 #endif

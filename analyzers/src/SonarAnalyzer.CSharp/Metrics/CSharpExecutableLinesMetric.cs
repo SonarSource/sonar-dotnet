@@ -30,12 +30,9 @@ namespace SonarAnalyzer.Metrics.CSharp
         }
 
         private static ExecutableLinesWalker GetWalker(SyntaxTree syntaxTree, SemanticModel semanticModel) =>
-            syntaxTree switch
-            {
-                _ when GeneratedCodeRecognizer.IsCshtml(syntaxTree) => new CshtmlExecutableLinesWalker(semanticModel),
-                _ when GeneratedCodeRecognizer.IsRazor(syntaxTree) => new RazorExecutableLinesWalker(semanticModel),
-                _ => new ExecutableLinesWalker(semanticModel)
-            };
+            GeneratedCodeRecognizer.IsRazor(syntaxTree)
+                ? new RazorExecutableLinesWalker(semanticModel)
+                : new ExecutableLinesWalker(semanticModel);
 
         private class ExecutableLinesWalker : SafeCSharpSyntaxWalker
         {
@@ -160,14 +157,6 @@ namespace SonarAnalyzer.Metrics.CSharp
                 }
                 return false;
             }
-        }
-
-        private sealed class CshtmlExecutableLinesWalker : ExecutableLinesWalker
-        {
-            public CshtmlExecutableLinesWalker(SemanticModel model) : base(model) { }
-
-            // HTML plugin is responsible to compute the metrics
-            protected override bool AddExecutableLineNumbers(Location location) => false;
         }
     }
 }
