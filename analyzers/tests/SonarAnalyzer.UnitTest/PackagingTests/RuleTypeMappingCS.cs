@@ -4711,7 +4711,7 @@ internal static class RuleTypeMappingCS
         ["S4784"] = "SECURITY_HOTSPOT",
         // ["S4785"],
         // ["S4786"],
-        ["S4787"] = "SECURITY_HOTSPOT",
+        // ["S4787"],
         // ["S4788"],
         // ["S4789"],
         ["S4790"] = "SECURITY_HOTSPOT",
