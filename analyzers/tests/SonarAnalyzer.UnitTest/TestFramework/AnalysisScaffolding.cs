@@ -52,9 +52,6 @@ namespace SonarAnalyzer.UnitTest
         public static DiagnosticDescriptor CreateDescriptorMain(string id = "Sxxxx") =>
             CreateDescriptor(id, DiagnosticDescriptorFactory.MainSourceScopeTag);
 
-        public static DiagnosticDescriptor CreateDescriptorTest(string id = "Sxxxx") =>
-            CreateDescriptor(id, DiagnosticDescriptorFactory.TestSourceScopeTag);
-
         public static DiagnosticDescriptor CreateDescriptor(string id, params string[] customTags) =>
             new(id, "Title", "Message for " + id, "Category", DiagnosticSeverity.Warning, true, customTags: customTags);
 

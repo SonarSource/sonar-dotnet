@@ -107,7 +107,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                         builder.ErrorBehavior,
                         builder.SonarProjectConfigPath,
                         onlyDiagnosticIds,
-                        builder.Paths.Where(builder.IsRazorOrCshtmlFile).Select(TestCasePath));
+                        builder.Paths.Where(builder.IsRazorOrCshtmlFile).Select(TestCasePath),
+                        builder.Snippets.Where(x => builder.IsRazorOrCshtmlFile(x.FileName)));
                 }
                 else
                 {

@@ -27,13 +27,13 @@ public class SonarAnalysisContext
 {
     private readonly HashSet<string> rulesDisabledForRazor = new()
         {
-            "S109",
             "S103",
-            "S1192",
             "S104",
+            "S109",
             "S113",
+            "S1147",
+            "S1192",
             "S1451",
-            "S1147"
         };
 
     private readonly RoslynAnalysisContext analysisContext;
@@ -147,6 +147,6 @@ public class SonarAnalysisContext
 
     private bool ShoulAnalyzeRazorFile(SyntaxTree sourceTree) =>
         !GeneratedCodeRecognizer.IsRazorGeneratedFile(sourceTree)
-        || !supportedDiagnostics.Any(x => x.CustomTags.Contains(DiagnosticDescriptorFactory.TestSourceScopeTag)
+        || !supportedDiagnostics.Any(x => (x.CustomTags.Count() == 1 && x.CustomTags.Contains(DiagnosticDescriptorFactory.TestSourceScopeTag))
                                           || rulesDisabledForRazor.Contains(x.Id));
 }

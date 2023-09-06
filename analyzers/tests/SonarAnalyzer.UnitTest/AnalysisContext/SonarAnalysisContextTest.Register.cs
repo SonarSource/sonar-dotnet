@@ -201,7 +201,7 @@ public partial class SonarAnalysisContextTest
     [DataRow("S1147")]
     public void DisabledRules_ForRazor_DoNotRaise(string ruleId) =>
         new VerifierBuilder()
-            .AddAnalyzer(() => new DummyAnalyzerWithLocation(ruleId, false))
+            .AddAnalyzer(() => new DummyAnalyzerWithLocation(ruleId, DiagnosticDescriptorFactory.MainSourceScopeTag))
             .WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .AddSnippet("""
                         @code
@@ -219,20 +219,38 @@ public partial class SonarAnalysisContextTest
     [TestMethod]
     public void TestRules_ForRazor_DoNotRaise() =>
     new VerifierBuilder()
-        .AddAnalyzer(() => new DummyAnalyzerWithLocation("DummyId", true))
+        .AddAnalyzer(() => new DummyAnalyzerWithLocation("DummyId", DiagnosticDescriptorFactory.TestSourceScopeTag))
         .WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Test))
         .AddSnippet("""
+                    @code
+                    {
+                        private int magicNumber = RaiseHere();
+                        private static int RaiseHere()
+                        {
+                            return 42;
+                        }
+                    }
+                    """,
+                    "SomeFile.razor")
+        .VerifyNoIssueReported();
+
+    [TestMethod]
+    public void AllScopedRules_ForRazor_Raise() =>
+        new VerifierBuilder()
+            .AddAnalyzer(() => new DummyAnalyzerWithLocation("DummyId", DiagnosticDescriptorFactory.TestSourceScopeTag, DiagnosticDescriptorFactory.MainSourceScopeTag))
+            .WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+            .AddSnippet("""
                         @code
                         {
-                            private int magicNumber = RaiseHere();
+                            private int magicNumber = RaiseHere(); // Noncompliant
                             private static int RaiseHere()
                             {
                                 return 42;
                             }
                         }
                         """,
-                    "SomeFile.razor")
-        .VerifyNoIssueReported();
+                        "SomeFile.razor")
+            .Verify();
 
 #endif
 
