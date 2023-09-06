@@ -195,13 +195,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = true };
 
-            // Currently only the symbols from .cs files are computed since .razor support is not yet implemented.
-            CreateBuilder(ProjectType.Product, "Razor.razor", "ToDo.cs")
+            CreateBuilder(ProjectType.Product, "Razor.razor", "ToDo.cs", "Razor.cshtml")
                 .WithConcurrentAnalysis(false)
                 .VerifyUtilityAnalyzer<SymbolReferenceInfo>(symbols =>
                     {
                         var orderedSymbols = symbols.OrderBy(x => x.FilePath, StringComparer.InvariantCulture).ToArray();
-                        orderedSymbols.Select(x => Path.GetFileName(x.FilePath)).Should().Contain("_Imports.razor", "Razor.razor", "ToDo.cs");
+                        orderedSymbols.Select(x => Path.GetFileName(x.FilePath)).Should().BeEquivalentTo("_Imports.razor", "Razor.razor", "ToDo.cs");
                         orderedSymbols[0].FilePath.Should().EndWith("_Imports.razor");
                         orderedSymbols[1].FilePath.Should().EndWith("Razor.razor");
 

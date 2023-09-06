@@ -114,7 +114,7 @@ namespace SonarAnalyzer.Rules
             // The results of Metrics and CopyPasteToken analyzers are not needed for Test projects yet the plugin side expects the protobuf files, so we create empty ones.
             (AnalyzeTestProjects || !IsTestProject)
             && FileExtensionWhitelist.Contains(Path.GetExtension(tree.FilePath))
-            && (AnalyzeGeneratedCode || !tree.IsConsideredGenerated(Language.GeneratedCodeRecognizer, compilation));
+            && (AnalyzeGeneratedCode || !tree.IsConsideredGenerated(Language.GeneratedCodeRecognizer, compilation, true));
 
         protected static string GetFilePath(SyntaxTree syntaxTree) =>
             // If the syntax tree is constructed for a razor generated file, we need to provide the original file path.
