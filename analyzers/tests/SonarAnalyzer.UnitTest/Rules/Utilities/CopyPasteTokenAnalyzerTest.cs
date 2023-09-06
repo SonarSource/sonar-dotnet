@@ -119,6 +119,18 @@ namespace SonarAnalyzer.UnitTest.Rules
                         verifyTokenInfo(info.TokenInfo);
                     });
 
+#if NET
+
+        [DataTestMethod]
+        [DataRow("Razor.razor")]
+        [DataRow("Razor.cshtml")]
+        public void Verify_NoMetricsAreComputedForRazorFiles(string fileName) =>
+            CreateBuilder(ProjectType.Product, fileName)
+                .WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+                .VerifyUtilityAnalyzer<CopyPasteTokenInfo>(messages => messages.Select(x => Path.GetFileName(x.FilePath)).Should().BeEmpty());
+
+#endif
+
         private VerifierBuilder CreateBuilder(ProjectType projectType, string fileName)
         {
             var testRoot = BasePath + TestContext.TestName;

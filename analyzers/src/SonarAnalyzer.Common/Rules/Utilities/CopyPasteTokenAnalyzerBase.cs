@@ -37,6 +37,10 @@ namespace SonarAnalyzer.Rules
 
         protected CopyPasteTokenAnalyzerBase() : base(DiagnosticId, Title) { }
 
+        protected override bool ShouldGenerateMetrics(SyntaxTree tree, Compilation compilation) =>
+            !GeneratedCodeRecognizer.IsRazorGeneratedFile(tree)
+            && base.ShouldGenerateMetrics(tree, compilation);
+
         protected sealed override CopyPasteTokenInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
         {
             var cpdTokenInfo = new CopyPasteTokenInfo { FilePath = syntaxTree.FilePath };
