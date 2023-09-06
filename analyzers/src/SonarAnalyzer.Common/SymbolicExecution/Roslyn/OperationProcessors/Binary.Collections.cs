@@ -26,14 +26,9 @@ internal sealed partial class Binary
 {
     private ProgramState LearnBranchingCollectionConstraint(ProgramState state, IBinaryOperationWrapper binary, bool falseBranch)
     {
-        ISymbol collection;
-        bool countIsLeftOperand;
-        if (InstanceOfCountPropertyReference(binary.LeftOperand) is { } symbol)
-        {
-            collection = symbol;
-            countIsLeftOperand = true;
-        }
-        else
+        var collection = InstanceOfCountPropertyReference(binary.LeftOperand);
+        var countIsLeftOperand = true;
+        if (collection is null)
         {
             collection = InstanceOfCountPropertyReference(binary.RightOperand);
             countIsLeftOperand = false;
