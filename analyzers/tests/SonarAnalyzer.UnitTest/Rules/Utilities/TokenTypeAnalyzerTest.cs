@@ -61,6 +61,14 @@ namespace SonarAnalyzer.UnitTest.Rules
                 info.Should().ContainSingle(x => x.TokenType == TokenType.NumericLiteral);
             });
 
+        [DataTestMethod]
+        [DataRow("Razor.razor")]
+        [DataRow("Razor.cshtml")]
+        public void Verify_NoMetricsAreComputedForRazorFiles(string fileName) =>
+            CreateBuilder(ProjectType.Product, fileName)
+                .WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+                .VerifyUtilityAnalyzer<TokenTypeInfo>(messages => messages.Select(x => Path.GetFileName(x.FilePath)).Should().BeEmpty());
+
 #endif
 
         [DataTestMethod]
