@@ -112,31 +112,31 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
             && RelationalNumberConstraint(existingNumber, kind, comparedNumber, isLoopCondition, visitCount) is { } newConstraint
                 ? state.SetSymbolConstraint(symbol, newConstraint)
                 : state;
-
-        static BinaryOperatorKind Flip(BinaryOperatorKind kind) =>
-            kind switch
-            {
-                BinaryOperatorKind.Equals => BinaryOperatorKind.Equals,
-                BinaryOperatorKind.NotEquals => BinaryOperatorKind.NotEquals,
-                BinaryOperatorKind.GreaterThan => BinaryOperatorKind.LessThan,
-                BinaryOperatorKind.GreaterThanOrEqual => BinaryOperatorKind.LessThanOrEqual,
-                BinaryOperatorKind.LessThan => BinaryOperatorKind.GreaterThan,
-                BinaryOperatorKind.LessThanOrEqual => BinaryOperatorKind.GreaterThanOrEqual,
-                _ => BinaryOperatorKind.None    // Unreachable under normal conditions, VB ObjectValueEquals would need comparison with a number
-            };
-
-        static BinaryOperatorKind Opposite(BinaryOperatorKind kind) =>
-            kind switch
-            {
-                BinaryOperatorKind.Equals => BinaryOperatorKind.NotEquals,
-                BinaryOperatorKind.NotEquals => BinaryOperatorKind.Equals,
-                BinaryOperatorKind.GreaterThan => BinaryOperatorKind.LessThanOrEqual,
-                BinaryOperatorKind.GreaterThanOrEqual => BinaryOperatorKind.LessThan,
-                BinaryOperatorKind.LessThan => BinaryOperatorKind.GreaterThanOrEqual,
-                BinaryOperatorKind.LessThanOrEqual => BinaryOperatorKind.GreaterThan,
-                _ => BinaryOperatorKind.None    // We don't care about ObjectValueEquals
-            };
     }
+
+    private static BinaryOperatorKind Flip(BinaryOperatorKind kind) =>
+        kind switch
+        {
+            BinaryOperatorKind.Equals => BinaryOperatorKind.Equals,
+            BinaryOperatorKind.NotEquals => BinaryOperatorKind.NotEquals,
+            BinaryOperatorKind.GreaterThan => BinaryOperatorKind.LessThan,
+            BinaryOperatorKind.GreaterThanOrEqual => BinaryOperatorKind.LessThanOrEqual,
+            BinaryOperatorKind.LessThan => BinaryOperatorKind.GreaterThan,
+            BinaryOperatorKind.LessThanOrEqual => BinaryOperatorKind.GreaterThanOrEqual,
+            _ => BinaryOperatorKind.None    // Unreachable under normal conditions, VB ObjectValueEquals would need comparison with a number
+        };
+
+    private static BinaryOperatorKind Opposite(BinaryOperatorKind kind) =>
+        kind switch
+        {
+            BinaryOperatorKind.Equals => BinaryOperatorKind.NotEquals,
+            BinaryOperatorKind.NotEquals => BinaryOperatorKind.Equals,
+            BinaryOperatorKind.GreaterThan => BinaryOperatorKind.LessThanOrEqual,
+            BinaryOperatorKind.GreaterThanOrEqual => BinaryOperatorKind.LessThan,
+            BinaryOperatorKind.LessThan => BinaryOperatorKind.GreaterThanOrEqual,
+            BinaryOperatorKind.LessThanOrEqual => BinaryOperatorKind.GreaterThan,
+            _ => BinaryOperatorKind.None    // We don't care about ObjectValueEquals
+        };
 
     private static NumberConstraint RelationalNumberConstraint(NumberConstraint existingNumber, BinaryOperatorKind kind, NumberConstraint comparedNumber, bool isLoopCondition, int visitCount)
     {

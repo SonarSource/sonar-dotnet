@@ -50,79 +50,27 @@ internal sealed partial class Binary
             countIsLeftOperand ? binary.RightOperand : binary.LeftOperand;
     }
 
-    private static SymbolicConstraint BranchingCollectionConstraint(BinaryOperatorKind operatorKind, bool falseBranch, bool countIsLeftOperand, NumberConstraint number) =>
-        BranchingCollectionConstraintFromEquals(operatorKind, number, falseBranch)
-        ?? BranchingCollectionConstraintFromRelational(operatorKind, number, falseBranch, countIsLeftOperand);
-
-    private static SymbolicConstraint BranchingCollectionConstraintFromEquals(BinaryOperatorKind operatorKind, NumberConstraint number, bool falseBranch)
+    private static SymbolicConstraint BranchingCollectionConstraint(BinaryOperatorKind operatorKind, bool falseBranch, bool countIsLeftOperand, NumberConstraint number)
     {
-        if (operatorKind.IsAnyEquality())
+        if (!countIsLeftOperand)
         {
-            var operandsAreEqual = operatorKind.IsEquals() ^ falseBranch;
-            if (number.Min > 0 && operandsAreEqual)                                 // list.Count == 5
-            {
-                return CollectionConstraint.NotEmpty;
-            }
-            else if (number.Max == 0)                                               // list.Count == 0
-            {
-                return CollectionConstraint.Empty.ApplyOpposite(!operandsAreEqual);
-            }
+            operatorKind = Flip(operatorKind);
         }
-        return null;
-    }
-
-    private static SymbolicConstraint BranchingCollectionConstraintFromRelational(BinaryOperatorKind operatorKind, NumberConstraint number, bool falseBranch, bool countIsLeftOperand)
-    {
-        if ((CountIsGreaterThanOtherOperand() && number.Min >= 0)
-            || (CountIsGreaterThanOrEqualsOtherOperand() && number.Min >= 1))
+        if (falseBranch)
         {
-            return CollectionConstraint.NotEmpty;
+            operatorKind = Opposite(operatorKind);
         }
-        else if ((CountIsLessThanOtherOperand() && number.Max == 1)
-            || (CountIsLessThanOrEqualsOtherOperand() && number.Max == 0))
+        // consider count to be the left operand and the comparison to resolve to true:
+        return operatorKind switch
         {
-            return CollectionConstraint.Empty;
-        }
-        return null;
-
-        bool CountIsGreaterThanOtherOperand() =>
-            operatorKind switch
-            {
-                BinaryOperatorKind.GreaterThan => countIsLeftOperand && !falseBranch,          // list.Count > x  is true
-                BinaryOperatorKind.LessThan => !countIsLeftOperand && !falseBranch,            // x < list.Count  is true
-                BinaryOperatorKind.GreaterThanOrEqual => !countIsLeftOperand && falseBranch,   // x >= list.Count is false
-                BinaryOperatorKind.LessThanOrEqual => countIsLeftOperand && falseBranch,       // list.Count <= x is false
-                _ => false
-            };
-
-        bool CountIsGreaterThanOrEqualsOtherOperand() =>
-            operatorKind switch
-            {
-                BinaryOperatorKind.GreaterThan => !countIsLeftOperand && falseBranch,          // x > list.Count  is false
-                BinaryOperatorKind.LessThan => countIsLeftOperand && falseBranch,              // list.Count < x  is false
-                BinaryOperatorKind.GreaterThanOrEqual => countIsLeftOperand && !falseBranch,   // list.Count >= x is true
-                BinaryOperatorKind.LessThanOrEqual => !countIsLeftOperand && !falseBranch,     // x <= list.Count is true
-                _ => false
-            };
-
-        bool CountIsLessThanOtherOperand() =>
-            operatorKind switch
-            {
-                BinaryOperatorKind.GreaterThan => !countIsLeftOperand && !falseBranch,         // x > list.Count  is true
-                BinaryOperatorKind.LessThan => countIsLeftOperand && !falseBranch,             // list.Count < x  is true
-                BinaryOperatorKind.GreaterThanOrEqual => countIsLeftOperand && falseBranch,    // list.Count >= x is false
-                BinaryOperatorKind.LessThanOrEqual => !countIsLeftOperand && falseBranch,      // x <= list.Count is false
-                _ => false
-            };
-
-        bool CountIsLessThanOrEqualsOtherOperand() =>
-            operatorKind switch
-            {
-                BinaryOperatorKind.GreaterThan => countIsLeftOperand && falseBranch,           // list.Count > x  is false
-                BinaryOperatorKind.LessThan => !countIsLeftOperand && falseBranch,             // x < list.Count  is false
-                BinaryOperatorKind.GreaterThanOrEqual => !countIsLeftOperand && !falseBranch,  // x >= list.Count is true
-                BinaryOperatorKind.LessThanOrEqual => countIsLeftOperand && !falseBranch,      // list.Count <= x is true
-                _ => false
-            };
+            _ when operatorKind.IsEquals() && number.Min > 0 => CollectionConstraint.NotEmpty,
+            _ when operatorKind.IsEquals() && number.Max == 0 => CollectionConstraint.Empty,
+            _ when operatorKind.IsNotEquals() && number.Max == 0 => CollectionConstraint.NotEmpty,
+            BinaryOperatorKind.GreaterThan when number.Min >= 0 => CollectionConstraint.NotEmpty,
+            BinaryOperatorKind.GreaterThanOrEqual when number.Min >= 1 => CollectionConstraint.NotEmpty,
+            BinaryOperatorKind.LessThan when number.Max == 1 => CollectionConstraint.Empty,
+            BinaryOperatorKind.LessThanOrEqual when number.Max == 0 => CollectionConstraint.Empty,
+            _ => null
+        };
     }
 }
