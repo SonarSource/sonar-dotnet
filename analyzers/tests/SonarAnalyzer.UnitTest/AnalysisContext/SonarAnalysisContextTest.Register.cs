@@ -23,6 +23,7 @@ extern alias vbnet;
 using Microsoft.CodeAnalysis.CSharp;
 using Moq;
 using SonarAnalyzer.AnalysisContext;
+using SonarAnalyzer.UnitTest.Helpers;
 using SonarAnalyzer.UnitTest.TestFramework.Tests;
 using CS = csharp::SonarAnalyzer.Extensions.SonarAnalysisContextExtensions;
 using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext;
@@ -199,7 +200,9 @@ public partial class SonarAnalysisContextTest
     [DataRow("S113")]
     [DataRow("S1451")]
     [DataRow("S1147")]
-    public void DisabledRules_ForRazor_DoNotRaise(string ruleId) =>
+    public void DisabledRules_ForRazor_DoNotRaise(string ruleId)
+    {
+        using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = true };
         new VerifierBuilder()
             .AddAnalyzer(() => new DummyAnalyzerWithLocation(ruleId, DiagnosticDescriptorFactory.MainSourceScopeTag))
             .WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
@@ -215,34 +218,19 @@ public partial class SonarAnalysisContextTest
                         """,
                         "SomeFile.razor")
             .VerifyNoIssueReported();
+    }
 
     [TestMethod]
-    public void TestRules_ForRazor_DoNotRaise() =>
-    new VerifierBuilder()
-        .AddAnalyzer(() => new DummyAnalyzerWithLocation("DummyId", DiagnosticDescriptorFactory.TestSourceScopeTag))
-        .WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Test))
-        .AddSnippet("""
-                    @code
-                    {
-                        private int magicNumber = RaiseHere();
-                        private static int RaiseHere()
-                        {
-                            return 42;
-                        }
-                    }
-                    """,
-                    "SomeFile.razor")
-        .VerifyNoIssueReported();
-
-    [TestMethod]
-    public void AllScopedRules_ForRazor_Raise() =>
+    public void TestRules_ForRazor_DoNotRaise()
+    {
+        using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = true };
         new VerifierBuilder()
-            .AddAnalyzer(() => new DummyAnalyzerWithLocation("DummyId", DiagnosticDescriptorFactory.TestSourceScopeTag, DiagnosticDescriptorFactory.MainSourceScopeTag))
-            .WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+            .AddAnalyzer(() => new DummyAnalyzerWithLocation("DummyId", DiagnosticDescriptorFactory.TestSourceScopeTag))
+            .WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Test))
             .AddSnippet("""
                         @code
                         {
-                            private int magicNumber = RaiseHere(); // Noncompliant
+                            private int magicNumber = RaiseHere();
                             private static int RaiseHere()
                             {
                                 return 42;
@@ -250,7 +238,29 @@ public partial class SonarAnalysisContextTest
                         }
                         """,
                         "SomeFile.razor")
+            .VerifyNoIssueReported();
+    }
+
+    [TestMethod]
+    public void AllScopedRules_ForRazor_Raise()
+    {
+        using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = true };
+        new VerifierBuilder()
+            .AddAnalyzer(() => new DummyAnalyzerWithLocation("DummyId", DiagnosticDescriptorFactory.TestSourceScopeTag, DiagnosticDescriptorFactory.MainSourceScopeTag))
+            .WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+            .AddSnippet("""
+                @code
+                {
+                    private int magicNumber = RaiseHere(); // Noncompliant
+                    private static int RaiseHere()
+                    {
+                        return 42;
+                    }
+                }
+                """,
+                        "SomeFile.razor")
             .Verify();
+    }
 
 #endif
 
