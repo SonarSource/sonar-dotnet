@@ -44,9 +44,9 @@ internal static class SyntaxTreeExtensions
             : cache.GetOrAdd(tree, generatedCodeRecognizer.IsGenerated(tree));
     }
 
-    public static bool IsConsideredGenerated(this SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer, Compilation compilation, bool onlyRazorExtension = false) =>
+    public static bool IsConsideredGenerated(this SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer, Compilation compilation) =>
         IsRazorAnalysisEnabled()
-            ? IsGenerated(tree, generatedCodeRecognizer, compilation) && !GeneratedCodeRecognizer.IsRazorGeneratedFile(tree, onlyRazorExtension)
+            ? IsGenerated(tree, generatedCodeRecognizer, compilation) && !GeneratedCodeRecognizer.IsRazorGeneratedFile(tree)
             : IsGenerated(tree, generatedCodeRecognizer, compilation);
 
     private static bool IsRazorAnalysisEnabled()
