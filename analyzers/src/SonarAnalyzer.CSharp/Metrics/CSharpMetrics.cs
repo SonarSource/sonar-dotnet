@@ -82,9 +82,9 @@ namespace SonarAnalyzer.Metrics.CSharp
                 case SyntaxKind.OperatorDeclaration:
                     return HasBody((BaseMethodDeclarationSyntax)node); // Non-abstract, non-interface methods
                 case SyntaxKind.MethodDeclaration:
-                    return node is BaseMethodDeclarationSyntax methodDeclaration
-                        && HasBody(methodDeclaration) // Non-abstract, non-interface methods
-                        && !IsRazorGeneratedMethod(methodDeclaration);
+                    var methodDeclaration = (BaseMethodDeclarationSyntax)node;
+                    return HasBody(methodDeclaration) // Non-abstract, non-interface methods
+                        && IsInSameFile(methodDeclaration.GetLocation().GetMappedLineSpan()); // Excluding razor functions that are not mapped
                 case SyntaxKind.AddAccessorDeclaration:
                 case SyntaxKind.GetAccessorDeclaration:
                 case SyntaxKind.RemoveAccessorDeclaration:
@@ -115,11 +115,6 @@ namespace SonarAnalyzer.Metrics.CSharp
                     return false;
             }
         }
-
-        private bool IsRazorGeneratedMethod(BaseMethodDeclarationSyntax method) =>
-            method.GetIdentifierOrDefault().Value.ToString().Equals("BuildRenderTree", StringComparison.OrdinalIgnoreCase)
-            && method.Modifiers.Any(SyntaxKind.ProtectedKeyword)
-            && method.Modifiers.Any(SyntaxKind.OverrideKeyword);
 
         private bool HasBody(BaseMethodDeclarationSyntax method) =>
             method.ExpressionBody() != null || method.Body != null;
