@@ -152,8 +152,8 @@ namespace SonarAnalyzer.Metrics.CSharp
                 case SyntaxKind.WhileStatement:
                 case SyntaxKind.YieldBreakStatement:
                 case SyntaxKind.YieldReturnStatement:
-                    return true;
-
+                    return !GeneratedCodeRecognizer.IsRazor(node.SyntaxTree)
+                        || node.GetLocation().GetMappedLineSpan().HasMappedPath; // Excluding razor statements that are not mapped
                 case SyntaxKind.Block:
                     return false;
 
