@@ -49,22 +49,16 @@ namespace SonarAnalyzer.Metrics.CSharp
             switch (node.Kind())
             {
                 case SyntaxKind.ClassDeclaration:
-                    return !IsRazorClass((ClassDeclarationSyntax)node); // Exclude razor generated class
                 case SyntaxKindEx.RecordClassDeclaration:
                 case SyntaxKind.StructDeclaration:
                 case SyntaxKindEx.RecordStructDeclaration:
                 case SyntaxKind.InterfaceDeclaration:
-                    return true;
+                    return IsInSameFile(node.GetLocation().GetMappedLineSpan());
 
                 default:
                     return false;
             }
         }
-
-        private bool IsRazorClass(ClassDeclarationSyntax node) =>
-            node.Identifier.Text == "Razor"
-            && node.AttributeLists is { Count: 1 } attributeLists
-            && attributeLists[0].ToString().Equals("[global::Microsoft.AspNetCore.Components.RouteAttribute(\"/razor\")]", StringComparison.OrdinalIgnoreCase);
 
         protected override bool IsCommentTrivia(SyntaxTrivia trivia) =>
             trivia.IsComment();

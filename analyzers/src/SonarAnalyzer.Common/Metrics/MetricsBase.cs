@@ -116,7 +116,7 @@ namespace SonarAnalyzer.Common
         public int CognitiveComplexity =>
             ComputeCognitiveComplexity(tree.GetRoot());
 
-        private bool IsInSameFile(FileLinePositionSpan span) =>
+        protected bool IsInSameFile(FileLinePositionSpan span) =>
             // Syntax tree can contain elements from external files (e.g. razor imports files)
             // We need to make sure that we don't count these elements.
             string.Equals(filePath, span.Path, StringComparison.OrdinalIgnoreCase);
