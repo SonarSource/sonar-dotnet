@@ -80,10 +80,10 @@ namespace SonarAnalyzer.Metrics.CSharp
                 case SyntaxKind.ConversionOperatorDeclaration:
                 case SyntaxKind.DestructorDeclaration:
                 case SyntaxKind.OperatorDeclaration:
-                    return HasBody((BaseMethodDeclarationSyntax)node); // Non-abstract, non-interface methods
+                    return ((BaseMethodDeclarationSyntax)node).HasBodyOrExpressionBody(); // Non-abstract, non-interface methods
                 case SyntaxKind.MethodDeclaration:
                     var methodDeclaration = (BaseMethodDeclarationSyntax)node;
-                    return HasBody(methodDeclaration) // Non-abstract, non-interface methods
+                    return methodDeclaration.HasBodyOrExpressionBody() // Non-abstract, non-interface methods
                         && IsInSameFile(methodDeclaration.GetLocation().GetMappedLineSpan()); // Excluding razor functions that are not mapped
                 case SyntaxKind.AddAccessorDeclaration:
                 case SyntaxKind.GetAccessorDeclaration:
@@ -162,8 +162,5 @@ namespace SonarAnalyzer.Metrics.CSharp
                                : false;
             }
         }
-
-        private static bool HasBody(BaseMethodDeclarationSyntax method) =>
-            method.ExpressionBody() != null || method.Body != null;
     }
 }
