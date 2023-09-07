@@ -79,12 +79,12 @@ namespace SonarAnalyzer.Metrics.CSharp
                 case SyntaxKind.ConstructorDeclaration:
                 case SyntaxKind.ConversionOperatorDeclaration:
                 case SyntaxKind.DestructorDeclaration:
-                case SyntaxKind.MethodDeclaration:
                 case SyntaxKind.OperatorDeclaration:
-                    var methodDeclaration = (BaseMethodDeclarationSyntax)node;
-                    return methodDeclaration.ExpressionBody() != null
-                           || methodDeclaration.Body != null; // Non-abstract, non-interface methods
-
+                    return HasBody((BaseMethodDeclarationSyntax)node); // Non-abstract, non-interface methods
+                case SyntaxKind.MethodDeclaration:
+                    return node is BaseMethodDeclarationSyntax methodDeclaration
+                        && HasBody(methodDeclaration) // Non-abstract, non-interface methods
+                        && !IsRazorGeneratedMethod(methodDeclaration);
                 case SyntaxKind.AddAccessorDeclaration:
                 case SyntaxKind.GetAccessorDeclaration:
                 case SyntaxKind.RemoveAccessorDeclaration:
@@ -115,6 +115,14 @@ namespace SonarAnalyzer.Metrics.CSharp
                     return false;
             }
         }
+
+        private bool IsRazorGeneratedMethod(BaseMethodDeclarationSyntax method) =>
+            method.GetIdentifierOrDefault().Value.ToString().Equals("BuildRenderTree", StringComparison.OrdinalIgnoreCase)
+            && method.Modifiers.Any(SyntaxKind.ProtectedKeyword)
+            && method.Modifiers.Any(SyntaxKind.OverrideKeyword);
+
+        private bool HasBody(BaseMethodDeclarationSyntax method) =>
+            method.ExpressionBody() != null || method.Body != null;
 
         protected override bool IsNoneToken(SyntaxToken token) =>
             token.IsKind(SyntaxKind.None);
