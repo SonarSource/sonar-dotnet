@@ -63,7 +63,8 @@ namespace SonarAnalyzer.Metrics.CSharp
 
         private bool IsRazorClass(ClassDeclarationSyntax node) =>
             node.Identifier.Text == "Razor"
-            && node.AttributeLists.Single().ToString().Equals("[global::Microsoft.AspNetCore.Components.RouteAttribute(\"/razor\")]", StringComparison.OrdinalIgnoreCase);
+            && node.AttributeLists is { Count: 1 } attributeLists
+            && attributeLists[0].ToString().Equals("[global::Microsoft.AspNetCore.Components.RouteAttribute(\"/razor\")]", StringComparison.OrdinalIgnoreCase);
 
         protected override bool IsCommentTrivia(SyntaxTrivia trivia) =>
             trivia.IsComment();
