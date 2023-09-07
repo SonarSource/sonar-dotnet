@@ -116,9 +116,6 @@ namespace SonarAnalyzer.Metrics.CSharp
             }
         }
 
-        private bool HasBody(BaseMethodDeclarationSyntax method) =>
-            method.ExpressionBody() != null || method.Body != null;
-
         protected override bool IsNoneToken(SyntaxToken token) =>
             token.IsKind(SyntaxKind.None);
 
@@ -165,5 +162,8 @@ namespace SonarAnalyzer.Metrics.CSharp
                                : false;
             }
         }
+
+        private static bool HasBody(BaseMethodDeclarationSyntax method) =>
+            method.ExpressionBody() != null || method.Body != null;
     }
 }
