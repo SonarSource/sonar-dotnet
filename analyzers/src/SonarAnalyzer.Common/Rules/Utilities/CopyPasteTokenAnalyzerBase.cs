@@ -41,14 +41,14 @@ namespace SonarAnalyzer.Rules
             !GeneratedCodeRecognizer.IsRazorGeneratedFile(tree)
             && base.ShouldGenerateMetrics(tree, compilation);
 
-        protected sealed override CopyPasteTokenInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
+        protected sealed override CopyPasteTokenInfo CreateMessage(SyntaxTree tree, SemanticModel model)
         {
-            var cpdTokenInfo = new CopyPasteTokenInfo { FilePath = syntaxTree.FilePath };
-            foreach (var token in syntaxTree.GetRoot().DescendantTokens(n => !IsUsingDirective(n)))
+            var cpdTokenInfo = new CopyPasteTokenInfo { FilePath = tree.FilePath };
+            foreach (var token in tree.GetRoot().DescendantTokens(n => !IsUsingDirective(n)))
             {
                 if (GetCpdValue(token) is var value && !string.IsNullOrWhiteSpace(value))
                 {
-                    cpdTokenInfo.TokenInfo.Add(new CopyPasteTokenInfo.Types.TokenInfo { TokenValue = value, TextRange = GetTextRange(Location.Create(syntaxTree, token.Span).GetLineSpan()) });
+                    cpdTokenInfo.TokenInfo.Add(new CopyPasteTokenInfo.Types.TokenInfo { TokenValue = value, TextRange = GetTextRange(Location.Create(tree, token.Span).GetLineSpan()) });
                 }
             }
             return cpdTokenInfo;

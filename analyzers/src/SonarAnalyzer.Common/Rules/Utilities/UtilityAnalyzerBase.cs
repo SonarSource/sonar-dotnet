@@ -76,7 +76,7 @@ namespace SonarAnalyzer.Rules
     {
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract string FileName { get; }
-        protected abstract TMessage CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel);
+        protected abstract TMessage CreateMessage(SyntaxTree tree, SemanticModel model);
 
         protected virtual bool AnalyzeUnchangedFiles => false;
 
@@ -116,11 +116,11 @@ namespace SonarAnalyzer.Rules
             && FileExtensionWhitelist.Contains(Path.GetExtension(tree.FilePath))
             && ShouldGenerateMetricsByType(tree, compilation);
 
-        protected static string GetFilePath(SyntaxTree syntaxTree) =>
+        protected static string GetFilePath(SyntaxTree tree) =>
             // If the syntax tree is constructed for a razor generated file, we need to provide the original file path.
-            GeneratedCodeRecognizer.IsRazorGeneratedFile(syntaxTree) && syntaxTree.GetRoot() is var root && root.ContainsDirectives
+            GeneratedCodeRecognizer.IsRazorGeneratedFile(tree) && tree.GetRoot() is var root && root.ContainsDirectives
                 ? root.GetMappedFilePathFromRoot()
-                : syntaxTree.FilePath;
+                : tree.FilePath;
 
         private bool ShouldGenerateMetrics(SonarCompilationReportingContext context, SyntaxTree tree) =>
             (AnalyzeUnchangedFiles || !context.IsUnchanged(tree))

@@ -39,11 +39,11 @@ namespace SonarAnalyzer.Rules
 
         protected SymbolReferenceAnalyzerBase() : base(DiagnosticId, Title) { }
 
-        protected sealed override SymbolReferenceInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
+        protected sealed override SymbolReferenceInfo CreateMessage(SyntaxTree tree, SemanticModel model)
         {
-            var filePath = GetFilePath(syntaxTree);
+            var filePath = GetFilePath(tree);
             var symbolReferenceInfo = new SymbolReferenceInfo { FilePath = filePath };
-            var references = GetReferences(syntaxTree.GetRoot(), semanticModel);
+            var references = GetReferences(tree.GetRoot(), model);
             foreach (var symbol in references.Keys)
             {
                 if (GetSymbolReference(references[symbol], filePath) is { } reference)

@@ -35,13 +35,13 @@ namespace SonarAnalyzer.Rules
 
         protected MetricsAnalyzerBase() : base(DiagnosticId, Title) { }
 
-        protected sealed override MetricsInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
+        protected sealed override MetricsInfo CreateMessage(SyntaxTree tree, SemanticModel model)
         {
-            var metrics = GetMetrics(syntaxTree, semanticModel);
+            var metrics = GetMetrics(tree, model);
             var complexity = metrics.Complexity;
             var metricsInfo = new MetricsInfo
             {
-                FilePath = syntaxTree.GetRoot().GetMappedFilePathFromRoot(),
+                FilePath = tree.GetRoot().GetMappedFilePathFromRoot(),
                 ClassCount = metrics.ClassCount,
                 StatementCount = metrics.StatementCount,
                 FunctionCount = metrics.FunctionCount,

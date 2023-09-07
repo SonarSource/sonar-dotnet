@@ -37,12 +37,12 @@ namespace SonarAnalyzer.Rules
             !GeneratedCodeRecognizer.IsRazorGeneratedFile(tree)
             && base.ShouldGenerateMetrics(tree, compilation);
 
-        protected sealed override FileMetadataInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel) =>
+        protected sealed override FileMetadataInfo CreateMessage(SyntaxTree tree, SemanticModel model) =>
             new()
             {
-                FilePath = syntaxTree.FilePath,
-                IsGenerated = Language.GeneratedCodeRecognizer.IsGenerated(syntaxTree),
-                Encoding = syntaxTree.Encoding?.WebName.ToLowerInvariant() ?? string.Empty
+                FilePath = tree.FilePath,
+                IsGenerated = Language.GeneratedCodeRecognizer.IsGenerated(tree),
+                Encoding = tree.Encoding?.WebName.ToLowerInvariant() ?? string.Empty
             };
     }
 }
