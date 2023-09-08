@@ -27,10 +27,6 @@ namespace SonarAnalyzer.Metrics.CSharp
 
         public static CognitiveComplexity GetComplexity(SyntaxNode node, bool onlyGlobalStatements)
         {
-            if (GeneratedCodeRecognizer.IsRazor(node.SyntaxTree))
-            {
-                return new(0, ImmutableArray<SecondaryLocation>.Empty);
-            }
             var walker = new CognitiveWalker(onlyGlobalStatements);
             if (node.IsKind(SyntaxKindEx.LocalFunctionStatement))
             {

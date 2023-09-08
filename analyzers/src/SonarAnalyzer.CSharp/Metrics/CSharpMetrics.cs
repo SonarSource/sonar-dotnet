@@ -39,10 +39,14 @@ namespace SonarAnalyzer.Metrics.CSharp
         }
 
         protected override int ComputeCognitiveComplexity(SyntaxNode node) =>
-            CSharpCognitiveComplexityMetric.GetComplexity(node).Complexity;
+            GeneratedCodeRecognizer.IsRazor(node.SyntaxTree)
+            ? 0
+            : CSharpCognitiveComplexityMetric.GetComplexity(node).Complexity;
 
         public override int ComputeCyclomaticComplexity(SyntaxNode node) =>
-            CSharpCyclomaticComplexityMetric.GetComplexity(node).Complexity;
+            GeneratedCodeRecognizer.IsRazor(node.SyntaxTree)
+            ? 0
+            : CSharpCyclomaticComplexityMetric.GetComplexity(node).Complexity;
 
         protected override bool IsClass(SyntaxNode node)
         {

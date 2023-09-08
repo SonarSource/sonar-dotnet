@@ -38,10 +38,6 @@ namespace SonarAnalyzer.Metrics.CSharp
 
         public static CyclomaticComplexity GetComplexity(SyntaxNode syntaxNode, bool onlyGlobalStatements)
         {
-            if (GeneratedCodeRecognizer.IsRazor(syntaxNode.SyntaxTree))
-            {
-                return new(ImmutableArray<SecondaryLocation>.Empty);
-            }
             var walker = new CyclomaticWalker(onlyGlobalStatements);
             if (syntaxNode.IsKind(SyntaxKindEx.LocalFunctionStatement))
             {
