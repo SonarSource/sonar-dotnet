@@ -68,7 +68,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                     var orderedMessages = messages.OrderBy(x => x.FilePath, StringComparer.InvariantCulture).ToArray();
                     orderedMessages.Select(x => Path.GetFileName(x.FilePath)).Should().BeEquivalentTo("_Imports.razor", RazorFileName, "Component.razor");
 
-                    var metrics = messages[1]; // Razor.razor
+                    var metrics = orderedMessages[1]; // Razor.razor
 
                     // ToDo: other metrics will be fixed in subsequent PRs.
                     metrics.ClassCount.Should().Be(1);
