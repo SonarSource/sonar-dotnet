@@ -182,12 +182,18 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         }
 
         [TestMethod]
-        public void Verify_RazorAnalysisIsDisabled_DoesNotRaise() =>
+        public void Verify_RazorAnalysisIsDisabled_DoesNotRaise()
+        {
+            using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = false };
             DummyWithLocation.AddPaths("Dummy.razor").VerifyNoIssueReported();
+        }
 
         [TestMethod]
-        public void Verify_CshtmlAnalysisIsDisabled_DoesNotRaise() =>
+        public void Verify_CshtmlAnalysisIsDisabled_DoesNotRaise()
+        {
+            using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = false };
             DummyWithLocation.AddPaths("Dummy.cshtml").VerifyNoIssueReported();
+        }
 
         [DataTestMethod]
         [DataRow("net6.0")]

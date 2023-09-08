@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.IO;
+
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -27,6 +29,11 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Remove this unnecessary 'using'.";
 
         private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        private static readonly string[] IgnoredRazorFiles =
+        {
+            "_IMPORTS.RAZOR",
+            "_VIEWIMPORTS.CSHTML"
+        };
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
@@ -74,10 +81,14 @@ namespace SonarAnalyzer.Rules.CSharp
             foreach (var usingDirective in usingDirectives)
             {
                 // This will create some FNs but will kill noise from FPs.
-                // For more info see issue: https://github.com/SonarSource/sonar-dotnet/issues/5946
-                if (usingDirective.GetFirstToken().IsKind(SyntaxKind.GlobalKeyword))
+                // For more info see issues:
+                //  - https://github.com/SonarSource/sonar-dotnet/issues/5946
+                //  - https://github.com/SonarSource/sonar-dotnet/issues/7959
+                if (usingDirective.GetFirstToken().IsKind(SyntaxKind.GlobalKeyword)
+                    || (GeneratedCodeRecognizer.IsRazorGeneratedFile(usingDirective.SyntaxTree)
+                        && IgnoredRazorFiles.Contains(Path.GetFileName(usingDirective.GetLocation().GetMappedLineSpan().Path).ToUpperInvariant())))
                 {
-                    return;
+                    continue;
                 }
                 if (context.SemanticModel.GetSymbolInfo(usingDirective.Name).Symbol is INamespaceSymbol namespaceSymbol
                     && !necessaryNamespaces.Any(usedNamespace => usedNamespace.IsSameNamespace(namespaceSymbol)))
