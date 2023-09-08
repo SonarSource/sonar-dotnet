@@ -254,6 +254,26 @@ public partial class SonarAnalysisContextTest
             .Verify();
     }
 
+    [TestMethod]
+    public void RaisedIssue_WithinRazorGeneratedCode_ShouldNotBeReported()
+    {
+        using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = true };
+        new VerifierBuilder()
+            .AddAnalyzer(() => new DummyAnalyzerCS())
+            .AddSnippet(@"<p>Some Html</p>", "SomeFile.razor")
+            .VerifyNoIssueReported();
+    }
+
+    [TestMethod]
+    public void RaisedIssue_WithinCshtmlGeneratedCode_ShouldNotBeReported()
+    {
+        using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = true };
+        new VerifierBuilder()
+            .AddAnalyzer(() => new DummyAnalyzerCS())
+            .AddSnippet(@"<p>Some Html</p>", "SomeFile.cshtml")
+            .VerifyNoIssueReported();
+    }
+
     private static string Snippet(string extension)
     {
         var keyword = extension == "razor" ? "code" : "functions";
