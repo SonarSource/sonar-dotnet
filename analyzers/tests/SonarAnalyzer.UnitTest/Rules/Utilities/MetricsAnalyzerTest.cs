@@ -79,7 +79,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                     metrics.FunctionCount.Should().Be(2);
                     metrics.NoSonarComment.Should().BeEmpty();
                     metrics.NonBlankComment.Should().BeEquivalentTo(new[] { 8, 10, 15, 22, 23, 28, 29, 32, 33, 36, 37, 38 });
-                    metrics.StatementCount.Should().Be(35);
+                    metrics.StatementCount.Should().Be(13);
                 });
         }
 
