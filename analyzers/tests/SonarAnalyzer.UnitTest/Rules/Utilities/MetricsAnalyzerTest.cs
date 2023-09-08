@@ -65,9 +65,10 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                 .VerifyUtilityAnalyzer<MetricsInfo>(messages =>
                 {
-                    messages.Should().HaveCount(3); // Razor.razor, Component.razor and _Imports.razor
+                    var orderedMessages = messages.OrderBy(x => x.FilePath, StringComparer.InvariantCulture).ToArray();
+                    orderedMessages.Select(x => Path.GetFileName(x.FilePath)).Should().BeEquivalentTo("_Imports.razor", RazorFileName, "Component.razor");
 
-                    var metrics = messages.Single(x => x.FilePath.EndsWith(RazorFileName));
+                    var metrics = messages[1]; // Razor.razor
 
                     // ToDo: other metrics will be fixed in subsequent PRs.
                     metrics.ClassCount.Should().Be(1);
