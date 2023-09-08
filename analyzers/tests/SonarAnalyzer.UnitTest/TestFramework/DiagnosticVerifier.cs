@@ -65,12 +65,15 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                        CompilationErrorBehavior checkMode,
                                        string sonarProjectConfigPath,
                                        string[] onlyDiagnostics,
-                                       IEnumerable<string> razorFiles) =>
+                                       IEnumerable<string> razorFiles,
+                                       IEnumerable<Snippet> razorSnippets) =>
             Verify(
                 compilation,
                 diagnosticAnalyzers,
                 checkMode,
-                compilation.SyntaxTrees.ExceptExtraEmptyFile().ExceptRazorGeneratedFile().Select(x => new File(x)).Concat(razorFiles.Select(x => new File(x))),
+                compilation.SyntaxTrees.ExceptExtraEmptyFile().ExceptRazorGeneratedFile().Select(x => new File(x))
+                    .Concat(razorFiles.Select(x => new File(x)))
+                    .Concat(razorSnippets.Select(x => new File(x))),
                 sonarProjectConfigPath,
                 onlyDiagnostics);
 
@@ -331,6 +334,12 @@ Actual  : '{message}'");
             {
                 this.fileName = fileName;
                 Content = SourceText.From(System.IO.File.ReadAllText(fileName));
+            }
+
+            public File(Snippet snippet)
+            {
+                fileName = snippet.FileName;
+                Content = SourceText.From(snippet.Content);
             }
 
             public File(SyntaxTree syntaxTree)

@@ -23,6 +23,8 @@ extern alias vbnet;
 using Microsoft.CodeAnalysis.CSharp;
 using Moq;
 using SonarAnalyzer.AnalysisContext;
+using SonarAnalyzer.UnitTest.Helpers;
+using SonarAnalyzer.UnitTest.TestFramework.Tests;
 using CS = csharp::SonarAnalyzer.Extensions.SonarAnalysisContextExtensions;
 using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext;
 using VB = vbnet::SonarAnalyzer.Extensions.SonarAnalysisContextExtensions;
@@ -187,6 +189,87 @@ public partial class SonarAnalysisContextTest
 
         startContext.RaisedDiagnostic.Should().NotBeNull().And.BeSameAs(diagnostic);
     }
+
+#if NET
+
+    [DataTestMethod]
+    [DataRow("S109", "razor")]
+    [DataRow("S103", "razor")]
+    [DataRow("S1192", "razor")]
+    [DataRow("S104", "razor")]
+    [DataRow("S113", "razor")]
+    [DataRow("S1451", "razor")]
+    [DataRow("S1147", "razor")]
+    [DataRow("S109", "cshtml")]
+    [DataRow("S103", "cshtml")]
+    [DataRow("S1192", "cshtml")]
+    [DataRow("S104", "cshtml")]
+    [DataRow("S113", "cshtml")]
+    [DataRow("S1451", "cshtml")]
+    [DataRow("S1147", "cshtml")]
+    public void DisabledRules_ForRazor_DoNotRaise(string ruleId, string extension)
+    {
+        using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = true };
+        new VerifierBuilder()
+            .AddAnalyzer(() => new DummyAnalyzerWithLocation(ruleId, DiagnosticDescriptorFactory.MainSourceScopeTag))
+            .WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+            .AddSnippet(Snippet(extension), $"SomeFile.{extension}")
+            .VerifyNoIssueReported();
+    }
+
+    [DataTestMethod]
+    [DataRow("razor")]
+    [DataRow("cshtml")]
+    public void TestRules_ForRazor_DoNotRaise(string extension)
+    {
+        using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = true };
+        new VerifierBuilder()
+            .AddAnalyzer(() => new DummyAnalyzerWithLocation("DummyId", DiagnosticDescriptorFactory.TestSourceScopeTag))
+            .WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Test))
+            .AddSnippet(Snippet(extension), $"SomeFile.{extension}")
+            .VerifyNoIssueReported();
+    }
+
+    [DataTestMethod]
+    [DataRow("razor")]
+    [DataRow("cshtml")]
+    public void AllScopedRules_ForRazor_Raise(string extension)
+    {
+        var keyword = extension == "razor" ? "code" : "functions";
+        using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = true };
+        new VerifierBuilder()
+            .AddAnalyzer(() => new DummyAnalyzerWithLocation("DummyId", DiagnosticDescriptorFactory.TestSourceScopeTag, DiagnosticDescriptorFactory.MainSourceScopeTag))
+            .WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+            .AddSnippet($$"""
+                        @{{keyword}}
+                        {
+                            private int magicNumber = RaiseHere(); // Noncompliant
+                            private static int RaiseHere()
+                            {
+                                return 42;
+                            }
+                        }
+                        """,
+                        $"SomeFile.{extension}")
+            .Verify();
+    }
+
+    private static string Snippet(string extension)
+    {
+        var keyword = extension == "razor" ? "code" : "functions";
+        return $$"""
+                @{{keyword}}
+                {
+                    private int magicNumber = RaiseHere();
+                    private static int RaiseHere()
+                    {
+                        return 42;
+                    }
+                }
+                """;
+    }
+
+#endif
 
     private static CompilationStartAnalysisContext MockCompilationStartAnalysisContext(DummyAnalysisContext context)
     {

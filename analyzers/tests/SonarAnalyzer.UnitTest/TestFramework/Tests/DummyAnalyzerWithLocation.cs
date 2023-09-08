@@ -28,9 +28,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 internal class DummyAnalyzerWithLocation : SonarDiagnosticAnalyzer
 {
-    private static readonly DiagnosticDescriptor Rule = AnalysisScaffolding.CreateDescriptorMain("DummyWithLocation");
+    private readonly DiagnosticDescriptor rule;
 
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+    public DummyAnalyzerWithLocation() : this("DummyWithLocation", DiagnosticDescriptorFactory.MainSourceScopeTag) { }
+
+    public DummyAnalyzerWithLocation(string id, params string[] customTags) =>
+        rule = AnalysisScaffolding.CreateDescriptor(id, customTags);
 
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(CSharpGeneratedCodeRecognizer.Instance, ReportIssue, SyntaxKind.InvocationExpression);
@@ -40,7 +45,7 @@ internal class DummyAnalyzerWithLocation : SonarDiagnosticAnalyzer
         if (context.Node is InvocationExpressionSyntax invocation
             && invocation.NodeIdentifier() is { ValueText: "RaiseHere" } identifier)
         {
-            context.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation(), invocation.ArgumentList.Arguments.Select(arg => arg.GetLocation())));
+            context.ReportIssue(Diagnostic.Create(rule, identifier.GetLocation(), invocation.ArgumentList.Arguments.Select(arg => arg.GetLocation())));
         }
     }
 }
