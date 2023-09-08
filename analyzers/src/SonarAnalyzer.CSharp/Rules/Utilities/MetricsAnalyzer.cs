@@ -25,7 +25,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override ILanguageFacade<SyntaxKind> Language { get; } = CSharpFacade.Instance;
 
-        protected override MetricsBase GetMetrics(SyntaxTree syntaxTree, SemanticModel semanticModel)
-            => new Metrics.CSharp.CSharpMetrics(syntaxTree, semanticModel);
+        protected override MetricsBase GetMetrics(SyntaxTree syntaxTree, SemanticModel semanticModel) =>
+            new Metrics.CSharp.CSharpMetrics(syntaxTree, semanticModel);
     }
 }

@@ -29,13 +29,15 @@ namespace SonarAnalyzer.Common
 
         internal static readonly string[] LineTerminators = { "\r\n", "\n", "\r" };
 
-        protected MetricsBase(SyntaxTree tree)
-        {
-            this.tree = tree;
-            filePath = tree.GetRoot().GetMappedFilePathFromRoot();
-        }
-
         public abstract ImmutableArray<int> ExecutableLines { get; }
+        public abstract int ComputeCyclomaticComplexity(SyntaxNode node);
+        protected abstract bool IsEndOfFile(SyntaxToken token);
+        protected abstract int ComputeCognitiveComplexity(SyntaxNode node);
+        protected abstract bool IsNoneToken(SyntaxToken token);
+        protected abstract bool IsCommentTrivia(SyntaxTrivia trivia);
+        protected abstract bool IsClass(SyntaxNode node);
+        protected abstract bool IsStatement(SyntaxNode node);
+        protected abstract bool IsFunction(SyntaxNode node);
 
         public ISet<int> CodeLines =>
             tree.GetRoot()
@@ -51,6 +53,12 @@ namespace SonarAnalyzer.Common
                         return Enumerable.Range(start, end - start + 1);
                     })
                 .ToHashSet();
+
+        protected MetricsBase(SyntaxTree tree)
+        {
+            this.tree = tree;
+            filePath = tree.GetRoot().GetMappedFilePathFromRoot();
+        }
 
         public FileComments GetComments(bool ignoreHeaderComments)
         {
@@ -84,22 +92,6 @@ namespace SonarAnalyzer.Common
 
             return new FileComments(noSonar.ToHashSet(), nonBlank.ToHashSet());
         }
-
-        public abstract int ComputeCyclomaticComplexity(SyntaxNode node);
-
-        protected abstract bool IsEndOfFile(SyntaxToken token);
-
-        protected abstract int ComputeCognitiveComplexity(SyntaxNode node);
-
-        protected abstract bool IsNoneToken(SyntaxToken token);
-
-        protected abstract bool IsCommentTrivia(SyntaxTrivia trivia);
-
-        protected abstract bool IsClass(SyntaxNode node);
-
-        protected abstract bool IsStatement(SyntaxNode node);
-
-        protected abstract bool IsFunction(SyntaxNode node);
 
         public int ClassCount =>
             ClassNodes.Count();
