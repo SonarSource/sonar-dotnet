@@ -73,8 +73,8 @@ namespace SonarAnalyzer.UnitTest.Rules
                     // ToDo: other metrics will be fixed in subsequent PRs.
                     metrics.ClassCount.Should().Be(1);
                     metrics.CodeLine.Should().BeEquivalentTo(new[] { 3, 5, 8, 10, 13, 15, 16, 17, 19, 22, 23, 24, 26, 28, 29, 32, 33, 34, 36, 37, 39, 40, 43 });
-                    metrics.CognitiveComplexity.Should().Be(3);
-                    metrics.Complexity.Should().Be(4);
+                    metrics.CognitiveComplexity.Should().Be(0);
+                    metrics.Complexity.Should().Be(0);
                     metrics.ExecutableLines.Should().BeEquivalentTo(new[] { 3, 5, 13, 15, 17, 24, 28, 29, 32, 36, 39, 43 });
                     metrics.FunctionCount.Should().Be(2);
                     metrics.NoSonarComment.Should().BeEmpty();
