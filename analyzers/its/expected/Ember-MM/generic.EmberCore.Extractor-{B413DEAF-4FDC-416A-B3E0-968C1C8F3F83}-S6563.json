@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S6563",
-"message":  "Use UTC when recoding DateTime instants",
+"message":  "Use UTC when recording DateTime instants",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L185",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S6563",
-"message":  "Use UTC when recoding DateTime instants",
+"message":  "Use UTC when recording DateTime instants",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L185",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S6563",
-"message":  "Use UTC when recoding DateTime instants",
+"message":  "Use UTC when recording DateTime instants",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L31",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S6563",
-"message":  "Use UTC when recoding DateTime instants",
+"message":  "Use UTC when recording DateTime instants",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L31",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S6563",
-"message":  "Use UTC when recoding DateTime instants",
+"message":  "Use UTC when recording DateTime instants",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L62",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S6563",
-"message":  "Use UTC when recoding DateTime instants",
+"message":  "Use UTC when recording DateTime instants",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L62",
 "region":  {

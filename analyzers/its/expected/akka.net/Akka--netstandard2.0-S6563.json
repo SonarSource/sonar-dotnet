@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S6563",
-"message":  "Use UTC when recoding DateTime instants",
+"message":  "Use UTC when recording DateTime instants",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailbox.cs#L535",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S6563",
-"message":  "Use UTC when recoding DateTime instants",
+"message":  "Use UTC when recording DateTime instants",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/SimpleDnsCache.cs#L40",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S6563",
-"message":  "Use UTC when recoding DateTime instants",
+"message":  "Use UTC when recording DateTime instants",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/SimpleDnsCache.cs#L59",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S6563",
-"message":  "Use UTC when recoding DateTime instants",
+"message":  "Use UTC when recording DateTime instants",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/TokenBucket.cs#L139",
 "region":  {

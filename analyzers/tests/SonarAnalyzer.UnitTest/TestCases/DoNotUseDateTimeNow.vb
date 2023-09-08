@@ -5,7 +5,7 @@ Imports AliasedDateTime = System.DateTime
 
 Class Test
     Private Sub TestCases()
-        Dim currentTime = DateTime.Now                                                      ' Noncompliant {{Use UTC when recoding DateTime instants}}
+        Dim currentTime = DateTime.Now                                                      ' Noncompliant {{Use UTC when recording DateTime instants}}
         '                 ^^^^^^^^^^^^
         currentTime = Date.Now                                                              ' Noncompliant
         currentTime = Date.Now                                                              ' Noncompliant
