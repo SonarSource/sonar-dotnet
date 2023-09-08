@@ -31,7 +31,7 @@ public abstract class DoNotUseDateTimeNowBase<TSyntaxKind> : SonarDiagnosticAnal
     private static readonly MemberDescriptor DateTimeOffsetDate = new(KnownType.System_DateTimeOffset, nameof(DateTimeOffset.Date));
     private static readonly MemberDescriptor DateTimeOffsetDateTime = new(KnownType.System_DateTimeOffset, nameof(DateTimeOffset.DateTime));
 
-    protected override string MessageFormat => "Use UTC when recoding DateTime instants";
+    protected override string MessageFormat => "Use UTC when recording DateTime instants";
 
     protected abstract bool IsInsideNameOf(SyntaxNode node);
 
