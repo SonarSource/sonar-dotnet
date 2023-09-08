@@ -116,7 +116,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("Razor.cshtml", "EmptyProject.GlobalUsings.g.cs", ".NETCoreApp,Version=v7.0.AssemblyAttributes.cs", "EmptyProject.AssemblyInfo.cs", "EmptyProject.RazorAssemblyInfo.cs")]
         public void Verify_RazorFilesAreIgnored(string fileName, params string[] expectedFiles) =>
             CreateBuilder(ProjectType.Product, fileName)
-                .WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                 .VerifyUtilityAnalyzer<FileMetadataInfo>(messages =>
                     messages.Select(x => Path.GetFileName(x.FilePath)).Should().BeEquivalentTo(expectedFiles));
 

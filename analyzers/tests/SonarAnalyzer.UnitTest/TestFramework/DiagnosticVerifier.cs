@@ -74,6 +74,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 compilation.SyntaxTrees.ExceptExtraEmptyFile().ExceptRazorGeneratedFile().Select(x => new File(x))
                     .Concat(razorFiles.Select(x => new File(x)))
                     .Concat(razorSnippets.Select(x => new File(x))),
+                additionalFilePath,
                 onlyDiagnostics);
 
         private static void Verify(Compilation compilation,

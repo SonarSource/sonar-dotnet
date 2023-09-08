@@ -154,23 +154,23 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
                 .Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>();
 
         [DataTestMethod]
-        public void Verify_RazorWithAdditionalLocation() =>
-            DummyWithLocation.AddPaths("Dummy.SecondaryLocation.razor").Verify();
+        [DataRow("Dummy.SecondaryLocation.razor")]
+        [DataRow("Dummy.SecondaryLocation.cshtml")]
+        public void Verify_RazorWithAdditionalLocation(string path) =>
+            DummyWithLocation.AddPaths(path).Verify();
 
         [TestMethod]
-        public void Verify_CshtmlWithAdditionalLocation() =>
-            DummyWithLocation.AddPaths("Dummy.SecondaryLocation.cshtml").Verify();
-
-        [TestMethod]
-            DummyWithLocation.AddPaths("Dummy.razor").Verify();
-            DummyWithLocation.AddPaths("Dummy.cshtml").Verify();
+        [DataRow("Dummy.razor")]
+        [DataRow("Dummy.cshtml")]
+        public void Verify_Razor(string path) =>
+            DummyWithLocation.AddPaths(path).Verify();
 
         [DataTestMethod]
         [DataRow("Dummy.razor")]
         [DataRow("Dummy.cshtml")]
         public void Verify_RazorAnalysisIsDisabled_DoesNotRaise(string path) =>
-            DummyWithLocationMapping.AddPaths(path)
-                .WithAdditionalFilePath(Path.GetFullPath(@"TestResources\SonarLintXml\DisableRazorCodeAnalysis\SonarLint.xml"))
+            DummyWithLocation.AddPaths(path)
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarLintXml(TestContext, analyzeRazorCode: false))
                 .VerifyNoIssueReported();
 
         [DataTestMethod]

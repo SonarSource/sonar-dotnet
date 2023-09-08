@@ -66,7 +66,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("Razor.cshtml")]
         public void Verify_NoMetricsAreComputedForRazorFiles(string fileName) =>
             CreateBuilder(ProjectType.Product, fileName)
-                .WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                 .VerifyUtilityAnalyzer<TokenTypeInfo>(messages => messages.Select(x => Path.GetFileName(x.FilePath)).Should().BeEmpty());
 
 #endif

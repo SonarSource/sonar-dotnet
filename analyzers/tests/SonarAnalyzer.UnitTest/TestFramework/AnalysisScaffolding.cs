@@ -92,8 +92,9 @@ namespace SonarAnalyzer.UnitTest
             string[] testExclusions = null,
             string[] testInclusions = null,
             string[] globalTestExclusions = null,
-            List<SonarLintXmlRule> rulesParameters = null) =>
-            TestHelper.WriteFile(context, "SonarLint.xml", GenerateSonarLintXmlContent(language, analyzeGeneratedCode, ignoreHeaderComments, exclusions, inclusions, globalExclusions, testExclusions, testInclusions, globalTestExclusions, rulesParameters));
+            List<SonarLintXmlRule> rulesParameters = null,
+            bool analyzeRazorCode = true) =>
+            TestHelper.WriteFile(context, "SonarLint.xml", GenerateSonarLintXmlContent(language, analyzeGeneratedCode, ignoreHeaderComments, exclusions, inclusions, globalExclusions, testExclusions, testInclusions, globalTestExclusions, rulesParameters, analyzeRazorCode));
 
         public static string GenerateSonarLintXmlContent(
             string language = LanguageNames.CSharp,
@@ -105,13 +106,15 @@ namespace SonarAnalyzer.UnitTest
             string[] testExclusions = null,
             string[] testInclusions = null,
             string[] globalTestExclusions = null,
-            List<SonarLintXmlRule> rulesParameters = null) =>
+            List<SonarLintXmlRule> rulesParameters = null,
+            bool analyzeRazorCode = true) =>
             new XDocument(
                 new XDeclaration("1.0", "utf-8", "yes"),
                 new XElement("AnalysisInput",
                     new XElement("Settings",
                         CreateSetting($"sonar.{(language == LanguageNames.CSharp ? "cs" : "vbnet")}.analyzeGeneratedCode", analyzeGeneratedCode.ToString()),
                         CreateSetting($"sonar.{(language == LanguageNames.CSharp ? "cs" : "vbnet")}.ignoreHeaderComments", ignoreHeaderComments.ToString()),
+                        CreateSetting($"sonar.{(language == LanguageNames.CSharp ? "cs" : "vbnet")}.analyzeRazorCode", analyzeRazorCode.ToString()),
                         CreateSetting("sonar.exclusions", ConcatenateStringArray(exclusions)),
                         CreateSetting("sonar.inclusions", ConcatenateStringArray(inclusions)),
                         CreateSetting("sonar.global.exclusions", ConcatenateStringArray(globalExclusions)),

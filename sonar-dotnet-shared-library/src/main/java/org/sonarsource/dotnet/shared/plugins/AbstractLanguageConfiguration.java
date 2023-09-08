@@ -32,8 +32,6 @@ public abstract class AbstractLanguageConfiguration {
 
   protected final Configuration configuration;
 
-  protected final Configuration configuration;
-
   protected AbstractLanguageConfiguration(Configuration configuration, String languageKey) {
     this.configuration = configuration;
     this.languageKey = languageKey;
