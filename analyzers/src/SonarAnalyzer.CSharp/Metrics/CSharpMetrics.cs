@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Metrics.CSharp
                 case SyntaxKind.StructDeclaration:
                 case SyntaxKindEx.RecordStructDeclaration:
                 case SyntaxKind.InterfaceDeclaration:
-                    return true;
+                    return IsInSameFile(node.GetLocation().GetMappedLineSpan());
 
                 default:
                     return false;
