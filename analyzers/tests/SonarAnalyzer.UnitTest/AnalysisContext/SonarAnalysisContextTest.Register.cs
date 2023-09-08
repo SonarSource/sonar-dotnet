@@ -213,17 +213,7 @@ public partial class SonarAnalysisContextTest
         new VerifierBuilder()
             .AddAnalyzer(() => new DummyAnalyzerWithLocation(ruleId, DiagnosticDescriptorFactory.MainSourceScopeTag))
             .WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
-            .AddSnippet("""
-                        @code
-                        {
-                            private int magicNumber = RaiseHere();
-                            private static int RaiseHere()
-                            {
-                                return 42;
-                            }
-                        }
-                        """,
-                        $"SomeFile.{extension}")
+            .AddSnippet(Snippet(extension), $"SomeFile.{extension}")
             .VerifyNoIssueReported();
     }
 
@@ -236,17 +226,7 @@ public partial class SonarAnalysisContextTest
         new VerifierBuilder()
             .AddAnalyzer(() => new DummyAnalyzerWithLocation("DummyId", DiagnosticDescriptorFactory.TestSourceScopeTag))
             .WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Test))
-            .AddSnippet("""
-                        @code
-                        {
-                            private int magicNumber = RaiseHere();
-                            private static int RaiseHere()
-                            {
-                                return 42;
-                            }
-                        }
-                        """,
-                        $"SomeFile.{extension}")
+            .AddSnippet(Snippet(extension), $"SomeFile.{extension}")
             .VerifyNoIssueReported();
     }
 
@@ -255,12 +235,13 @@ public partial class SonarAnalysisContextTest
     [DataRow("cshtml")]
     public void AllScopedRules_ForRazor_Raise(string extension)
     {
+        var keyword = extension == "razor" ? "code" : "functions";
         using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = true };
         new VerifierBuilder()
             .AddAnalyzer(() => new DummyAnalyzerWithLocation("DummyId", DiagnosticDescriptorFactory.TestSourceScopeTag, DiagnosticDescriptorFactory.MainSourceScopeTag))
             .WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
-            .AddSnippet("""
-                        @code
+            .AddSnippet($$"""
+                        @{{keyword}}
                         {
                             private int magicNumber = RaiseHere(); // Noncompliant
                             private static int RaiseHere()
@@ -271,6 +252,21 @@ public partial class SonarAnalysisContextTest
                         """,
                         $"SomeFile.{extension}")
             .Verify();
+    }
+
+    private static string Snippet(string extension)
+    {
+        var keyword = extension == "razor" ? "code" : "functions";
+        return $$"""
+                @{{keyword}}
+                {
+                    private int magicNumber = RaiseHere();
+                    private static int RaiseHere()
+                    {
+                        return 42;
+                    }
+                }
+                """;
     }
 
 #endif
