@@ -61,24 +61,25 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = true };
 
-            CreateBuilder(false, RazorFileName)
+            CreateBuilder(false, RazorFileName, "Component.razor")
                 .WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                 .VerifyUtilityAnalyzer<MetricsInfo>(messages =>
                 {
-                    messages.Should().HaveCount(2); // Razor.razor and _Imports.razor
+                    var orderedMessages = messages.OrderBy(x => x.FilePath, StringComparer.InvariantCulture).ToArray();
+                    orderedMessages.Select(x => Path.GetFileName(x.FilePath)).Should().BeEquivalentTo("_Imports.razor", RazorFileName, "Component.razor");
 
                     var metrics = messages.Single(x => x.FilePath.EndsWith(RazorFileName));
 
                     // ToDo: other metrics will be fixed in subsequent PRs.
                     metrics.ClassCount.Should().Be(1);
-                    metrics.CodeLine.Should().BeEquivalentTo(new[] { 3, 5, 11, 13, 14, 15, 17, 20, 21, 22, 24, 26, 27, 30, 31, 32, 34, 35, 37, 38, 8 });
+                    metrics.CodeLine.Should().BeEquivalentTo(new[] { 3, 5, 11, 13, 14, 15, 17, 20, 21, 22, 24, 26, 27, 30, 31, 32, 34, 35, 37, 38, 41, 8 });
                     metrics.CognitiveComplexity.Should().Be(3);
                     metrics.Complexity.Should().Be(4);
-                    metrics.ExecutableLines.Should().BeEquivalentTo(new[] { 3, 5, 11, 13, 15, 22, 26, 27, 30, 34, 37 });
+                    metrics.ExecutableLines.Should().BeEquivalentTo(new[] { 3, 5, 11, 13, 15, 22, 26, 27, 30, 34, 37, 41 });
                     metrics.FunctionCount.Should().Be(2);
                     metrics.NoSonarComment.Should().BeEmpty();
                     metrics.NonBlankComment.Should().BeEquivalentTo(new[] {13, 20, 21, 26, 27, 30, 31, 34, 35, 36, 8});
-                    metrics.StatementCount.Should().Be(31);
+                    metrics.StatementCount.Should().Be(35);
                 });
         }
 
@@ -119,12 +120,12 @@ namespace SonarAnalyzer.UnitTest.Rules
             }
         }
 
-        private VerifierBuilder CreateBuilder(bool isTestProject, string fileName)
+        private VerifierBuilder CreateBuilder(bool isTestProject, params string[] fileNames)
         {
             var testRoot = BasePath + TestContext.TestName;
             return new VerifierBuilder()
                 .AddAnalyzer(() => new TestMetricsAnalyzer(testRoot, isTestProject))
-                .AddPaths(fileName)
+                .AddPaths(fileNames)
                 .WithBasePath(BasePath)
                 .WithOptions(ParseOptionsHelper.CSharpLatest)
                 .WithProtobufPath(@$"{testRoot}\metrics.pb");

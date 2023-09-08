@@ -153,9 +153,8 @@ namespace SonarAnalyzer.Metrics.CSharp
                 if (mappedLocation.HasMappedPath)
                 {
                     ExecutableLineNumbers.Add(mappedLocation.GetLineNumberToReport());
-                    return true;
                 }
-                return false;
+                return true;
             }
         }
     }
