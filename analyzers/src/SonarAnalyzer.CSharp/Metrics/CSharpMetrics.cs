@@ -79,12 +79,12 @@ namespace SonarAnalyzer.Metrics.CSharp
                 case SyntaxKind.ConstructorDeclaration:
                 case SyntaxKind.ConversionOperatorDeclaration:
                 case SyntaxKind.DestructorDeclaration:
-                case SyntaxKind.MethodDeclaration:
                 case SyntaxKind.OperatorDeclaration:
+                    return ((BaseMethodDeclarationSyntax)node).HasBodyOrExpressionBody(); // Non-abstract, non-interface methods
+                case SyntaxKind.MethodDeclaration:
                     var methodDeclaration = (BaseMethodDeclarationSyntax)node;
-                    return methodDeclaration.ExpressionBody() != null
-                           || methodDeclaration.Body != null; // Non-abstract, non-interface methods
-
+                    return methodDeclaration.HasBodyOrExpressionBody() // Non-abstract, non-interface methods
+                        && IsInSameFile(methodDeclaration.GetLocation().GetMappedLineSpan()); // Excluding razor functions that are not mapped
                 case SyntaxKind.AddAccessorDeclaration:
                 case SyntaxKind.GetAccessorDeclaration:
                 case SyntaxKind.RemoveAccessorDeclaration:

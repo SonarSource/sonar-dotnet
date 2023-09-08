@@ -76,7 +76,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                     metrics.CognitiveComplexity.Should().Be(3);
                     metrics.Complexity.Should().Be(4);
                     metrics.ExecutableLines.Should().BeEquivalentTo(new[] { 3, 5, 13, 15, 17, 24, 28, 29, 32, 36, 39, 43 });
-                    metrics.FunctionCount.Should().Be(2);
+                    metrics.FunctionCount.Should().Be(1);
                     metrics.NoSonarComment.Should().BeEmpty();
                     metrics.NonBlankComment.Should().BeEquivalentTo(new[] { 8, 10, 15, 22, 23, 28, 29, 32, 33, 36, 37, 38 });
                     metrics.StatementCount.Should().Be(13);
