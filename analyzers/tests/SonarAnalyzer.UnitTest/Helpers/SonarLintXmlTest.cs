@@ -39,18 +39,19 @@ public class SonarLintXmlTest
 
     private static void AssertSettings(List<SonarLintXmlKeyValuePair> settings)
     {
-        settings.Should().HaveCount(10);
+        settings.Should().HaveCount(11);
 
-        AssertKeyValuePair(settings[0], "sonar.cs.ignoreHeaderComments", "true");
-        AssertKeyValuePair(settings[1], "sonar.cs.analyzeGeneratedCode", "false");
-        AssertKeyValuePair(settings[2], "sonar.cs.file.suffixes", ".cs");
-        AssertKeyValuePair(settings[3], "sonar.cs.roslyn.ignoreIssues", "false");
-        AssertKeyValuePair(settings[4], "sonar.exclusions", "Fake/Exclusions/**/*,Fake/Exclusions/Second*/**/*");
-        AssertKeyValuePair(settings[5], "sonar.inclusions", "Fake/Inclusions/**/*,Fake/Inclusions/Second*/**/*");
-        AssertKeyValuePair(settings[6], "sonar.global.exclusions", "Fake/GlobalExclusions/**/*,Fake/GlobalExclusions/Second*/**/*");
-        AssertKeyValuePair(settings[7], "sonar.test.exclusions", "Fake/TestExclusions/**/*,Fake/TestExclusions/Second*/**/*");
-        AssertKeyValuePair(settings[8], "sonar.test.inclusions", "Fake/TestInclusions/**/*,Fake/TestInclusions/Second*/**/*");
-        AssertKeyValuePair(settings[9], "sonar.global.test.exclusions", "Fake/GlobalTestExclusions/**/*,Fake/GlobalTestExclusions/Second*/**/*");
+        AssertKeyValuePair(settings[0], "sonar.cs.analyzeRazorCode", "false");
+        AssertKeyValuePair(settings[1], "sonar.cs.ignoreHeaderComments", "true");
+        AssertKeyValuePair(settings[2], "sonar.cs.analyzeGeneratedCode", "false");
+        AssertKeyValuePair(settings[3], "sonar.cs.file.suffixes", ".cs");
+        AssertKeyValuePair(settings[4], "sonar.cs.roslyn.ignoreIssues", "false");
+        AssertKeyValuePair(settings[5], "sonar.exclusions", "Fake/Exclusions/**/*,Fake/Exclusions/Second*/**/*");
+        AssertKeyValuePair(settings[6], "sonar.inclusions", "Fake/Inclusions/**/*,Fake/Inclusions/Second*/**/*");
+        AssertKeyValuePair(settings[7], "sonar.global.exclusions", "Fake/GlobalExclusions/**/*,Fake/GlobalExclusions/Second*/**/*");
+        AssertKeyValuePair(settings[8], "sonar.test.exclusions", "Fake/TestExclusions/**/*,Fake/TestExclusions/Second*/**/*");
+        AssertKeyValuePair(settings[9], "sonar.test.inclusions", "Fake/TestInclusions/**/*,Fake/TestInclusions/Second*/**/*");
+        AssertKeyValuePair(settings[10], "sonar.global.test.exclusions", "Fake/GlobalTestExclusions/**/*,Fake/GlobalTestExclusions/Second*/**/*");
     }
 
     private static void AssertRules(List<SonarLintXmlRule> rules)

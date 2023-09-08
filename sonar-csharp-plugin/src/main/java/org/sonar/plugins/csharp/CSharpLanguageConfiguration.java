@@ -26,4 +26,8 @@ public class CSharpLanguageConfiguration extends AbstractLanguageConfiguration {
   public CSharpLanguageConfiguration(Configuration configuration) {
     super(configuration, CSharpPlugin.LANGUAGE_KEY);
   }
+
+  public boolean analyzeRazorCode() {
+    return configuration.getBoolean(CSharpPropertyDefinitions.getAnalyzeRazorCode(CSharpPlugin.LANGUAGE_KEY)).orElse(true);
+  }
 }

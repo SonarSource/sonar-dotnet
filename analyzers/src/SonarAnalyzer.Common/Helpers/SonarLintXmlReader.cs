@@ -31,6 +31,7 @@ public class SonarLintXmlReader
     private readonly bool ignoreHeaderCommentsVB;
     private readonly bool analyzeGeneratedCodeCS;
     private readonly bool analyzeGeneratedCodeVB;
+    private readonly bool analyzeRazorCodeCS;
 
     public string[] Exclusions { get; }
     public string[] Inclusions { get; }
@@ -55,14 +56,17 @@ public class SonarLintXmlReader
         ignoreHeaderCommentsVB = ReadBoolean("sonar.vbnet.ignoreHeaderComments");
         analyzeGeneratedCodeCS = ReadBoolean("sonar.cs.analyzeGeneratedCode");
         analyzeGeneratedCodeVB = ReadBoolean("sonar.vbnet.analyzeGeneratedCode");
+        analyzeRazorCodeCS = ReadBoolean("sonar.cs.analyzeRazorCode", true);
 
         string[] ReadArray(string key) =>
             settings.GetValueOrDefault(key) is { } value && !string.IsNullOrEmpty(value)
                 ? value.Split(',')
                 : Array.Empty<string>();
 
-        bool ReadBoolean(string key) =>
-            bool.TryParse(settings.GetValueOrDefault(key), out var value) && value;
+        bool ReadBoolean(string key, bool defaultValue = false) =>
+            settings.TryGetValue(key, out var value)
+                ? bool.TryParse(value, out var boolValue) && boolValue
+                : defaultValue;
 
         List<SonarLintXmlRule> ReadRuleParameters() =>
             sonarLintXml.Rules?.Where(x => x.Parameters.Any()).ToList() ?? new();
@@ -81,6 +85,14 @@ public class SonarLintXmlReader
         {
             LanguageNames.CSharp => analyzeGeneratedCodeCS,
             LanguageNames.VisualBasic => analyzeGeneratedCodeVB,
+            _ => throw new UnexpectedLanguageException(language)
+        };
+
+    public bool AnalyzeRazorCode(string language) =>
+        language switch
+        {
+            LanguageNames.CSharp => analyzeRazorCodeCS,
+            LanguageNames.VisualBasic => false,
             _ => throw new UnexpectedLanguageException(language)
         };
 

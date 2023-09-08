@@ -182,6 +182,7 @@ public partial class SonarAnalysisContextBaseTest
 
         sut.IgnoreHeaderComments(analyzerLanguage.LanguageName).Should().BeTrue();
         sut.AnalyzeGeneratedCode(analyzerLanguage.LanguageName).Should().BeFalse();
+        sut.AnalyzeRazorCode(analyzerLanguage.LanguageName).Should().BeFalse();
         AssertArrayContent(sut.Exclusions, nameof(sut.Exclusions));
         AssertArrayContent(sut.Inclusions, nameof(sut.Inclusions));
         AssertArrayContent(sut.GlobalExclusions, nameof(sut.GlobalExclusions));
@@ -252,6 +253,7 @@ public partial class SonarAnalysisContextBaseTest
 
     private static void CheckSonarLintXmlDefaultValues(SonarLintXmlReader sut)
     {
+        sut.AnalyzeRazorCode(LanguageNames.CSharp).Should().BeTrue();
         sut.AnalyzeGeneratedCode(LanguageNames.CSharp).Should().BeFalse();
         sut.IgnoreHeaderComments(LanguageNames.CSharp).Should().BeFalse();
         sut.Exclusions.Should().NotBeNull().And.HaveCount(0);
