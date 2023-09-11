@@ -350,7 +350,7 @@ namespace SonarAnalyzer.UnitTest.Common
 
         private void UnchangedFiles_Verify(VerifierBuilder builder, string unchangedFileName, bool expectEmptyResults)
         {
-            builder = builder.WithConcurrentAnalysis(false).WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfigWithUnchangedFiles(TestContext, unchangedFileName));
+            builder = builder.WithConcurrentAnalysis(false).WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfigWithUnchangedFiles(TestContext, unchangedFileName));
             if (expectEmptyResults)
             {
                 builder.VerifyNoIssueReported();

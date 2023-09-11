@@ -55,7 +55,9 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
     /// <param name="generatedCodeRecognizer">When set, generated trees are analyzed only when language-specific 'analyzeGeneratedCode' configuration property is also set.</param>
     public bool ShouldAnalyzeTree(SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer) =>
         SonarLintXml() is var sonarLintXml
-        && (generatedCodeRecognizer is null || sonarLintXml.AnalyzeGeneratedCode(Compilation.Language) || !tree.IsConsideredGenerated(generatedCodeRecognizer, Compilation))
+        && (generatedCodeRecognizer is null
+            || sonarLintXml.AnalyzeGeneratedCode(Compilation.Language)
+            || !tree.IsConsideredGenerated(generatedCodeRecognizer, Compilation, sonarLintXml.AnalyzeRazorCode(Compilation.Language)))
         && (tree is null || (!IsUnchanged(tree) && !IsExcluded(sonarLintXml, tree.FilePath)));
 
     /// <summary>

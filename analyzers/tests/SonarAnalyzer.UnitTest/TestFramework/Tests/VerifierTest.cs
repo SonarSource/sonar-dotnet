@@ -153,47 +153,25 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
                     """))
                 .Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>();
 
-        [TestMethod]
-        public void Verify_RazorWithAdditionalLocation()
-        {
-            using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = true };
-            DummyWithLocation.AddPaths("Dummy.SecondaryLocation.razor").Verify();
-        }
+        [DataTestMethod]
+        [DataRow("Dummy.SecondaryLocation.razor")]
+        [DataRow("Dummy.SecondaryLocation.cshtml")]
+        public void Verify_RazorWithAdditionalLocation(string path) =>
+            DummyWithLocation.AddPaths(path).Verify();
 
         [TestMethod]
-        public void Verify_CshtmlWithAdditionalLocation()
-        {
-            using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = true };
-            DummyWithLocation.AddPaths("Dummy.SecondaryLocation.cshtml").Verify();
-        }
+        [DataRow("Dummy.razor")]
+        [DataRow("Dummy.cshtml")]
+        public void Verify_Razor(string path) =>
+            DummyWithLocation.AddPaths(path).Verify();
 
-        [TestMethod]
-        public void Verify_Razor()
-        {
-            using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = true };
-            DummyWithLocation.AddPaths("Dummy.razor").Verify();
-        }
-
-        [TestMethod]
-        public void Verify_Cshtml()
-        {
-            using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = true };
-            DummyWithLocation.AddPaths("Dummy.cshtml").Verify();
-        }
-
-        [TestMethod]
-        public void Verify_RazorAnalysisIsDisabled_DoesNotRaise()
-        {
-            using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = false };
-            DummyWithLocation.AddPaths("Dummy.razor").VerifyNoIssueReported();
-        }
-
-        [TestMethod]
-        public void Verify_CshtmlAnalysisIsDisabled_DoesNotRaise()
-        {
-            using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = false };
-            DummyWithLocation.AddPaths("Dummy.cshtml").VerifyNoIssueReported();
-        }
+        [DataTestMethod]
+        [DataRow("Dummy.razor")]
+        [DataRow("Dummy.cshtml")]
+        public void Verify_RazorAnalysisIsDisabled_DoesNotRaise(string path) =>
+            DummyWithLocation.AddPaths(path)
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarLintXml(TestContext, analyzeRazorCode: false))
+                .VerifyNoIssueReported();
 
         [DataTestMethod]
         [DataRow("net6.0")]

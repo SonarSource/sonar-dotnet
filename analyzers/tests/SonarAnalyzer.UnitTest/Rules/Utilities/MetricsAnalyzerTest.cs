@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         public void VerifyMetrics() =>
             CreateBuilder(false, AllMetricsFileName)
-                .WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                 .VerifyUtilityAnalyzer<MetricsInfo>(messages =>
                     {
                         messages.Should().ContainSingle();
@@ -57,12 +57,9 @@ namespace SonarAnalyzer.UnitTest.Rules
 #if NET
 
         [TestMethod]
-        public void VerifyMetrics_Razor()
-        {
-            using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = true };
-
+        public void VerifyMetrics_Razor() =>
             CreateBuilder(false, RazorFileName, "Component.razor")
-                .WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                 .VerifyUtilityAnalyzer<MetricsInfo>(messages =>
                 {
                     var orderedMessages = messages.OrderBy(x => x.FilePath, StringComparer.InvariantCulture).ToArray();
@@ -81,21 +78,14 @@ namespace SonarAnalyzer.UnitTest.Rules
                     metrics.NonBlankComment.Should().BeEquivalentTo(new[] { 8, 10, 15, 22, 23, 28, 29, 32, 33, 36, 37, 38 });
                     metrics.StatementCount.Should().Be(13);
                 });
-        }
 
         [TestMethod]
-        public void VerifyMetrics_CsHtml()
-        {
-            using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = true };
-
+        public void VerifyMetrics_CsHtml() =>
             CreateBuilder(false, CsHtmlFileName)
-                .WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                 .VerifyUtilityAnalyzer<MetricsInfo>(messages =>
-                    {
                         // There should be no metrics messages for the cshtml files.
-                        messages.Select(x => Path.GetFileName(x.FilePath)).Should().BeEquivalentTo("_Imports.razor");
-                    });
-        }
+                        messages.Select(x => Path.GetFileName(x.FilePath)).Should().BeEquivalentTo("_Imports.razor"));
 
 #endif
 
@@ -109,7 +99,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void Verify_UnchangedFiles(string unchangedFileName, bool expectedProtobufIsEmpty)
         {
             var builder = CreateBuilder(false, AllMetricsFileName)
-                .WithSonarProjectConfigPath(AnalysisScaffolding.CreateSonarProjectConfigWithUnchangedFiles(TestContext, BasePath + unchangedFileName));
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfigWithUnchangedFiles(TestContext, BasePath + unchangedFileName));
             if (expectedProtobufIsEmpty)
             {
                 builder.VerifyUtilityAnalyzerProducesEmptyProtobuf();

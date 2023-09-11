@@ -26,8 +26,6 @@ namespace SonarAnalyzer.Extensions;
 
 internal static class SyntaxTreeExtensions
 {
-    public const string EnableRazorAnalysisVariable = "SONAR_DOTNET_ENABLE_RAZOR_ANALYSIS";
-
     private static readonly ConditionalWeakTable<Compilation, ConcurrentDictionary<SyntaxTree, bool>> GeneratedCodeCache = new();
 
     [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7439", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
@@ -44,19 +42,8 @@ internal static class SyntaxTreeExtensions
             : cache.GetOrAdd(tree, generatedCodeRecognizer.IsGenerated(tree));
     }
 
-    public static bool IsConsideredGenerated(this SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer, Compilation compilation) =>
-        IsRazorAnalysisEnabled()
+    public static bool IsConsideredGenerated(this SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer, Compilation compilation, bool isRazorAnalysisEnabled) =>
+        isRazorAnalysisEnabled
             ? IsGenerated(tree, generatedCodeRecognizer, compilation) && !GeneratedCodeRecognizer.IsRazorGeneratedFile(tree)
             : IsGenerated(tree, generatedCodeRecognizer, compilation);
-
-    private static bool IsRazorAnalysisEnabled()
-    {
-        var value = Environment.GetEnvironmentVariable(EnableRazorAnalysisVariable);
-
-        if (value != null && bool.TryParse(value, out var result))
-        {
-            return result;
-        }
-        return false;
-    }
 }

@@ -105,14 +105,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                         compilation,
                         analyzers,
                         builder.ErrorBehavior,
-                        builder.SonarProjectConfigPath,
+                        builder.AdditionalFilePath,
                         onlyDiagnosticIds,
                         builder.Paths.Where(builder.IsRazorOrCshtmlFile).Select(TestCasePath),
                         builder.Snippets.Where(x => builder.IsRazorOrCshtmlFile(x.FileName)));
                 }
                 else
                 {
-                    DiagnosticVerifier.Verify(compilation, analyzers, builder.ErrorBehavior, builder.SonarProjectConfigPath, onlyDiagnosticIds);
+                    DiagnosticVerifier.Verify(compilation, analyzers, builder.ErrorBehavior, builder.AdditionalFilePath, onlyDiagnosticIds);
                 }
             }
         }
@@ -123,7 +123,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             {
                 foreach (var analyzer in analyzers)
                 {
-                    DiagnosticVerifier.VerifyNoIssueReported(compilation, analyzer, builder.ErrorBehavior, builder.SonarProjectConfigPath, onlyDiagnosticIds);
+                    DiagnosticVerifier.VerifyNoIssueReported(compilation, analyzer, builder.ErrorBehavior, builder.AdditionalFilePath, onlyDiagnosticIds);
                 }
             }
         }
@@ -148,7 +148,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         {
             foreach (var compilation in Compile(false))
             {
-                DiagnosticVerifier.Verify(compilation, analyzers.Single(), CompilationErrorBehavior.Default, builder.SonarProjectConfigPath);
+                DiagnosticVerifier.Verify(compilation, analyzers.Single(), CompilationErrorBehavior.Default, builder.AdditionalFilePath);
                 new FileInfo(builder.ProtobufPath).Length.Should().Be(0, "protobuf file should be empty");
             }
         }
@@ -158,7 +158,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         {
             foreach (var compilation in Compile(false))
             {
-                DiagnosticVerifier.Verify(compilation, analyzers.Single(), builder.ErrorBehavior, builder.SonarProjectConfigPath);
+                DiagnosticVerifier.Verify(compilation, analyzers.Single(), builder.ErrorBehavior, builder.AdditionalFilePath);
                 verifyProtobuf(ReadProtobuf().ToList());
             }
 
