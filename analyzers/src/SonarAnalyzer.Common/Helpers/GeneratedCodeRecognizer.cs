@@ -62,12 +62,12 @@ namespace SonarAnalyzer.Helpers
             tree is not null && (IsRazor(tree) || IsCshtml(tree));
 
         public static bool IsRazor(SyntaxTree tree) =>
-            tree.FilePath.EndsWith("razor.g.cs", StringComparison.OrdinalIgnoreCase)
-            || tree.FilePath.EndsWith("razor.ide.g.cs", StringComparison.OrdinalIgnoreCase);
+            // razor.ide.g.cs is razor generated files for design time builds. However, it is not considered here because of https://github.com/dotnet/razor/issues/9108
+            tree.FilePath.EndsWith("razor.g.cs", StringComparison.OrdinalIgnoreCase);
 
         public static bool IsCshtml(SyntaxTree tree) =>
-            tree.FilePath.EndsWith("cshtml.g.cs", StringComparison.OrdinalIgnoreCase)
-            || tree.FilePath.EndsWith("cshtml.ide.g.cs", StringComparison.OrdinalIgnoreCase);
+            // cshtml.ide.g.cs is razor generated files for design time builds. However, it is not considered here because of https://github.com/dotnet/razor/issues/9108
+            tree.FilePath.EndsWith("cshtml.g.cs", StringComparison.OrdinalIgnoreCase);
 
         private bool HasGeneratedCommentOrAttribute(SyntaxTree tree)
         {

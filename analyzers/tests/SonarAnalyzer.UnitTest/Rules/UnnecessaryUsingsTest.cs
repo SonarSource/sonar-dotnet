@@ -30,6 +30,8 @@ namespace SonarAnalyzer.UnitTest.Rules
             .AddReferences(MetadataReferenceFacade.MicrosoftWin32Primitives)
             .AddReferences(MetadataReferenceFacade.SystemSecurityCryptography);
 
+        public TestContext TestContext { get; set; }
+
         [TestMethod]
         public void UnnecessaryUsings() =>
             builder.AddPaths("UnnecessaryUsings.cs", "UnnecessaryUsings2.cs", "UnnecessaryUsingsFNRepro.cs").WithAutogenerateConcurrentFiles(false).Verify();
@@ -51,28 +53,42 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("_viewimports.cshtml")]
         [DataRow("_viEwiMpoRts.cshtml")]
         public void UnnecessaryUsings_RazorViewImportsCshtmlFile_NoIssueReported(string fileName) =>
-            builder.AddSnippet(@"@using System.Text.Json;", fileName).VerifyNoIssueReported();
+            builder
+                .AddSnippet(@"@using System.Text.Json;", fileName)
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+                .VerifyNoIssueReported();
 
         [DataTestMethod]
         [DataRow("_Imports.razor")]
         [DataRow("_imports.razor")]
         [DataRow("_iMpoRts.razor")]
         public void UnnecessaryUsings_RazorImportsRazorFile_NoIssueReported(string fileName) =>
-            builder.AddSnippet(@"@using System.Text.Json;", fileName).VerifyNoIssueReported();
+            builder
+                .AddSnippet(@"@using System.Text.Json;", fileName)
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+                .VerifyNoIssueReported();
 
         [DataTestMethod]
         [DataRow("RandomFile_ViewImports.cshtml")]
         [DataRow("RandomFile_Imports.cshtml")]
         [DataRow("_Imports.cshtml")]
         public void UnnecessaryUsings_RazorViewImportsSimilarCshtmlFile_IssuesReported(string fileName) =>
-            builder.AddSnippet("@using System.Linq;", "_ViewImports.cshtml").AddSnippet(@"@using System.Text.Json; @* Noncompliant *@", fileName).Verify();
+            builder
+                .AddSnippet("@using System.Linq;", "_ViewImports.cshtml")
+                .AddSnippet(@"@using System.Text.Json; @* Noncompliant *@", fileName)
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+                .Verify();
 
         [DataTestMethod]
         [DataRow("RandomFile_ViewImports.razor")]
         [DataRow("RandomFile_Imports.razor")]
         [DataRow("_ViewImports.razor")]
         public void UnnecessaryUsings_RazorViewImportsSimilarRazorFile_IssuesReported(string fileName) =>
-            builder.AddSnippet("@using System.Linq;", "_Imports.razor").AddSnippet(@"@using System.Text.Json; @* Noncompliant *@", fileName).Verify();
+            builder
+            .AddSnippet("@using System.Linq;", "_Imports.razor")
+            .AddSnippet(@"@using System.Text.Json; @* Noncompliant *@", fileName)
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+            .Verify();
 
         [DataTestMethod]
         [DataRow("_ViewImports.cs")]
