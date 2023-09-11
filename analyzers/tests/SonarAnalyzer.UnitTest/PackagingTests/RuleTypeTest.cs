@@ -28,16 +28,16 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
     {
         [TestMethod]
         public void DetectRuleTypeChanges_CS() =>
-            DetectTypeChanges(csharp::SonarAnalyzer.RuleCatalog.Rules, RuleTypeMappingCS.Rules, nameof(RuleTypeMappingCS));
+            DetectTypeChanges(csharp::SonarAnalyzer.RuleCatalog.Rules, RuleTypeMappingCS.Rules, LanguageNames.CSharp, nameof(RuleTypeMappingCS));
 
         [TestMethod]
         public void DetectRuleTypeChanges_VB() =>
-            DetectTypeChanges(vbnet::SonarAnalyzer.RuleCatalog.Rules, RuleTypeMappingVB.Rules, nameof(RuleTypeMappingVB));
+            DetectTypeChanges(vbnet::SonarAnalyzer.RuleCatalog.Rules, RuleTypeMappingVB.Rules, LanguageNames.VisualBasic, nameof(RuleTypeMappingVB));
 
         [AssertionMethod]
-        private static void DetectTypeChanges(Dictionary<string, RuleDescriptor> rules, IImmutableDictionary<string, string> expectedTypes, string expectedTypesName)
+        private static void DetectTypeChanges(Dictionary<string, RuleDescriptor> rules, IImmutableDictionary<string, string> expectedTypes, string language, string expectedTypesName)
         {
-            var items = Enumerable.Range(1, 10000)
+            var rulesWithUnmatchingType = Enumerable.Range(1, 10000)
                                   .Select(x => "S" + x)
                                   .Select(x => new
                                   {
@@ -48,13 +48,18 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
                                   .Where(x => x.ActualType != x.ExpectedType)
                                   .ToList();
 
-            var newRules = items.Where(x => x.ExpectedType is null);
-            newRules.Should().BeEmpty($"you need to add the rules in {expectedTypesName}");
+            var newRules = rulesWithUnmatchingType.Where(x => x.ExpectedType is null);
+            newRules
+                .Should()
+                .BeEmpty($": there are rules that exist in '{language}::SonarAnalyzer.RuleCatalog.Rules' file but not in {expectedTypesName}. You need to add them to the latter");
 
-            items.Should().NotContain(x => x.ActualType == null);
+            var ruleWithoutActualTypeExists = rulesWithUnmatchingType.Exists(x => x.ActualType is null);
+            ruleWithoutActualTypeExists
+                .Should()
+                .BeFalse($": there are rules that exist in {expectedTypesName} but not in '{language}::SonarAnalyzer.RuleCatalog.Rules' file. You might have forgotten to update the RSpec for sonar-dotnet");
 
-            var changedRules = items.Where(x => x.ActualType != null && x.ExpectedType != null);
-            changedRules.Should().BeEmpty($"you need to change the rule types in {expectedTypesName}.");
+            var changedRules = rulesWithUnmatchingType.Where(x => x.ActualType != null && x.ExpectedType != null);
+            changedRules.Should().BeEmpty($": you need to change the rule types in {expectedTypesName}");
         }
     }
 }
