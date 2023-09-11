@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 && methodSymbol.IsPubliclyAccessible())
             {
                 foreach (var methodDeclaration in methodSymbol.DeclaringSyntaxReferences
-                    .Where(x => !x.SyntaxTree.IsConsideredGenerated(CSharpGeneratedCodeRecognizer.Instance, c.Compilation, c.SonarLintXml().AnalyzeRazorCode(c.Compilation.Language)))
+                    .Where(x => !x.SyntaxTree.IsConsideredGenerated(CSharpGeneratedCodeRecognizer.Instance, c.Compilation, c.IsRazorAnalysisEnabled()))
                     .Select(x => x.GetSyntax())
                     .OfType<MethodDeclarationSyntax>())
                 {

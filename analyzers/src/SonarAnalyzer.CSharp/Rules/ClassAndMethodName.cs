@@ -143,7 +143,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 && symbol.DeclaringSyntaxReferences.Any(syntax => syntax.SyntaxTree.IsConsideredGenerated(
                        CSharpGeneratedCodeRecognizer.Instance,
                        context.Compilation,
-                       context.SonarLintXml().AnalyzeRazorCode(context.Compilation.Language))))
+                       context.IsRazorAnalysisEnabled())))
             {
                 return;
             }
