@@ -223,7 +223,7 @@ public class CoverageReportImportSensorTest {
   }
 
   @Test
-  public void computeCoverageLoggingOutOfRange() throws IOException {
+  public void computeCoverageLoggingOutOfRange() {
     Coverage coverage = new Coverage();
     String fooPath = new File(baseDir, "Foo.cs").getAbsolutePath();
     coverage.addHits(fooPath, 1, 1);
