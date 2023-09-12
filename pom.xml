@@ -65,7 +65,7 @@
     <guava.version>32.1.2-jre</guava.version>
 
     <!-- Test dependencies -->
-    <junit.version>5.9.2</junit.version>
+    <junit.version>5.10.0</junit.version>
   </properties>
 
   <dependencyManagement>
@@ -109,7 +109,7 @@
       <dependency>
         <groupId>org.junit.jupiter</groupId>
         <artifactId>junit-jupiter-api</artifactId>
-        <version>5.9.2</version>
+        <version>${junit.version}</version>
         <scope>test</scope>
       </dependency>
       <dependency>
