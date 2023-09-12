@@ -26,22 +26,18 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
     [TestClass]
     public class RuleTypeTest
     {
-        // Rules that have been deprecated and deleted.
-        // When changing this please do not forget to notify the product teams (SQ, SC, SL).
-        private static readonly HashSet<string> DeletedRules = new() { "S1145", "S1697", "S2070", "S2255", "S2278", "S2758", "S3693", "S4142", "S4432", "S4787", "S4818"};
-
         [TestMethod]
         public void DetectRuleTypeChanges_CS() =>
-            DetectTypeChanges(csharp::SonarAnalyzer.RuleCatalog.Rules, RuleTypeMappingCS.Rules, nameof(RuleTypeMappingCS));
+            DetectTypeChanges(csharp::SonarAnalyzer.RuleCatalog.Rules, RuleTypeMappingCS.Rules, LanguageNames.CSharp, nameof(RuleTypeMappingCS));
 
         [TestMethod]
         public void DetectRuleTypeChanges_VB() =>
-            DetectTypeChanges(vbnet::SonarAnalyzer.RuleCatalog.Rules, RuleTypeMappingVB.Rules, nameof(RuleTypeMappingVB));
+            DetectTypeChanges(vbnet::SonarAnalyzer.RuleCatalog.Rules, RuleTypeMappingVB.Rules, LanguageNames.VisualBasic, nameof(RuleTypeMappingVB));
 
         [AssertionMethod]
-        private static void DetectTypeChanges(Dictionary<string, RuleDescriptor> rules, IImmutableDictionary<string, string> expectedTypes, string expectedTypesName)
+        private static void DetectTypeChanges(Dictionary<string, RuleDescriptor> rules, IImmutableDictionary<string, string> expectedTypes, string language, string expectedTypesName)
         {
-            var items = Enumerable.Range(1, 10000)
+            var rulesWithUnmatchingType = Enumerable.Range(1, 10000)
                                   .Select(x => "S" + x)
                                   .Select(x => new
                                   {
@@ -52,15 +48,14 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
                                   .Where(x => x.ActualType != x.ExpectedType)
                                   .ToList();
 
-            var newRules = items.Where(x => x.ExpectedType is null);
-            newRules.Should().BeEmpty($"you need to add the rules in {expectedTypesName}");
+            var newRules = rulesWithUnmatchingType.Where(x => x.ExpectedType is null);
+            newRules.Should().BeEmpty($"there are rules that exist in '{language}::SonarAnalyzer.RuleCatalog.Rules' file but not in {expectedTypesName}. Run Rspec.ps1 or add them manually to the rule type mapping test.");
 
-            items.Should().NotContain(
-                x => x.ActualType == null && !DeletedRules.Contains($"S{x.RuleId}"),
-                "YOU SHOULD NEVER DELETE RULES! Rules should not be deleted without careful consideration and prior deprecation. We need to notify the product teams (SQ, SC, SL) as well.");
+            var rulesWithoutImplementation = rulesWithUnmatchingType.Exists(x => x.ActualType is null);
+            rulesWithoutImplementation.Should().BeFalse($"there are rules that exist in {expectedTypesName} but not in '{language}::SonarAnalyzer.RuleCatalog.Rules' file.");
 
-            var changedRules = items.Where(x => x.ActualType != null && x.ExpectedType != null);
-            changedRules.Should().BeEmpty($"you need to change the rule types in {expectedTypesName}.");
+            var changedRules = rulesWithUnmatchingType.Where(x => x.ActualType != null && x.ExpectedType != null);
+            changedRules.Should().BeEmpty($"you need to change the rule type in {expectedTypesName}");
         }
     }
 }
