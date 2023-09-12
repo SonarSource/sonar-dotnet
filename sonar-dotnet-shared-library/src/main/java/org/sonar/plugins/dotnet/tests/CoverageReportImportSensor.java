@@ -140,9 +140,8 @@ public class CoverageReportImportSensor implements ProjectSensor {
       var line = entry.getKey();
       if (line > 0 && line <= inputFile.lines()){
         newCoverage.lineHits(line, entry.getValue());
-      }
-      else {
-        LOG.trace("Line {} is out of range in the file '{}' (lines: {})", line, inputFile, inputFile.lines());
+      } else {
+        LOG.warn("Line {} is out of range in the file '{}' (lines: {})", line, inputFile, inputFile.lines());
       }
     }
 

@@ -270,7 +270,7 @@ public class CoverageReportImportSensorTest {
     new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", false)
       .analyze(context, coverage);
 
-    assertThat(logTester.logs(Level.TRACE)).contains(
+    assertThat(logTester.logs(Level.WARN)).contains(
       "Line 1 is out of range in the file 'Foo.cs' (lines: -1)");
   }
 
