@@ -512,14 +512,14 @@ End Class")
         [TestMethod]
         public void WrongMetrics_CSharp()
         {
-            (var syntaxTree, var semanticModel) = TestHelper.CompileVB(string.Empty);
+            var (syntaxTree, semanticModel) = TestHelper.CompileVB(string.Empty);
             Assert.ThrowsException<ArgumentException>(() => new Metrics.CSharp.CSharpMetrics(syntaxTree, semanticModel));
         }
 
         [TestMethod]
         public void WrongMetrics_VisualBasic()
         {
-            (var syntaxTree, var semanticModel) = TestHelper.CompileCS(string.Empty);
+            var (syntaxTree, semanticModel) = TestHelper.CompileCS(string.Empty);
             Assert.ThrowsException<ArgumentException>(() => new Metrics.VisualBasic.VisualBasicMetrics(syntaxTree, semanticModel));
         }
 
