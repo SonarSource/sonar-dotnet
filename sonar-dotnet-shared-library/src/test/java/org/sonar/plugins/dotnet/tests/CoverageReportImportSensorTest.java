@@ -258,6 +258,22 @@ public class CoverageReportImportSensorTest {
     return context;
   }
 
+  @Test
+  public void computeCoverageLoggingOutOfRange() throws IOException {
+    Coverage coverage = new Coverage();
+    String fooPath = new File(baseDir, "Foo.cs").getAbsolutePath();
+    coverage.addHits(fooPath, 1, 1);
+
+    context.fileSystem().add(new TestInputFileBuilder("foo", "Foo.cs").setLanguage("cs")
+      .setType(Type.MAIN).build());
+
+    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", false)
+      .analyze(context, coverage);
+
+    assertThat(logTester.logs(Level.TRACE)).contains(
+      "Line 1 is out of range in the file 'Foo.cs' (lines: -1)");
+  }
+
   // This method has been taken from SonarSource/sonar-scanner-msbuild
   private static TemporaryFolder createTempFolder() {
     // If the test is being run under VSTS then the Scanner will

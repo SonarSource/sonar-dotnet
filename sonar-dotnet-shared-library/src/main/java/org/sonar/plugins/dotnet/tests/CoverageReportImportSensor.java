@@ -137,7 +137,13 @@ public class CoverageReportImportSensor implements ProjectSensor {
     for (Map.Entry<Integer, Integer> entry : coverage.hits(filePath).entrySet()) {
       LOG.trace("Found entry with key '{}' and value '{}'.", entry.getKey(), entry.getValue());
       fileHasCoverage = true;
-      newCoverage.lineHits(entry.getKey(), entry.getValue());
+      var line = entry.getKey();
+      if (line > 0 && line <= inputFile.lines()){
+        newCoverage.lineHits(line, entry.getValue());
+      }
+      else {
+        LOG.trace("Line {} is out of range in the file '{}' (lines: {})", line, inputFile, inputFile.lines());
+      }
     }
 
     for (BranchCoverage branchCoverage : coverage.getBranchCoverage(filePath)) {
