@@ -222,6 +222,22 @@ public class CoverageReportImportSensorTest {
     assertThat(logTester.logs(Level.TRACE)).contains("Counting statistics for '" + fooPath + "'.");
   }
 
+  @Test
+  public void computeCoverageLoggingOutOfRange() throws IOException {
+    Coverage coverage = new Coverage();
+    String fooPath = new File(baseDir, "Foo.cs").getAbsolutePath();
+    coverage.addHits(fooPath, 1, 1);
+
+    context.fileSystem().add(new TestInputFileBuilder("foo", "Foo.cs").setLanguage("cs")
+      .setType(Type.MAIN).build());
+
+    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", false)
+      .analyze(context, coverage);
+
+    assertThat(logTester.logs(Level.WARN)).contains(
+      "Line 1 is out of range in the file 'Foo.cs' (lines: -1)");
+  }
+
   private SensorContextTester computeCoverageMeasures(boolean isIntegrationTest) {
     Coverage coverage = mock(Coverage.class);
     String fooPath = new File(baseDir, "Foo.cs").getAbsolutePath();
@@ -256,22 +272,6 @@ public class CoverageReportImportSensorTest {
     verify(coverageAggregator).aggregate(Mockito.any(WildcardPatternFileProvider.class), Mockito.eq(coverage));
 
     return context;
-  }
-
-  @Test
-  public void computeCoverageLoggingOutOfRange() throws IOException {
-    Coverage coverage = new Coverage();
-    String fooPath = new File(baseDir, "Foo.cs").getAbsolutePath();
-    coverage.addHits(fooPath, 1, 1);
-
-    context.fileSystem().add(new TestInputFileBuilder("foo", "Foo.cs").setLanguage("cs")
-      .setType(Type.MAIN).build());
-
-    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", false)
-      .analyze(context, coverage);
-
-    assertThat(logTester.logs(Level.WARN)).contains(
-      "Line 1 is out of range in the file 'Foo.cs' (lines: -1)");
   }
 
   // This method has been taken from SonarSource/sonar-scanner-msbuild
