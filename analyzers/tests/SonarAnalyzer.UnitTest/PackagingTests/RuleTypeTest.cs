@@ -49,17 +49,13 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
                                   .ToList();
 
             var newRules = rulesWithUnmatchingType.Where(x => x.ExpectedType is null);
-            newRules
-                .Should()
-                .BeEmpty($": there are rules that exist in '{language}::SonarAnalyzer.RuleCatalog.Rules' file but not in {expectedTypesName}. You need to add them to the latter");
+            newRules.Should().BeEmpty($"there are rules that exist in '{language}::SonarAnalyzer.RuleCatalog.Rules' file but not in {expectedTypesName}. Run Rspec.ps1 or add them manually to the rule type mapping test.");
 
-            var ruleWithoutActualTypeExists = rulesWithUnmatchingType.Exists(x => x.ActualType is null);
-            ruleWithoutActualTypeExists
-                .Should()
-                .BeFalse($": there are rules that exist in {expectedTypesName} but not in '{language}::SonarAnalyzer.RuleCatalog.Rules' file. You might have forgotten to update the RSpec for sonar-dotnet");
+            var rulesWithoutImplementation = rulesWithUnmatchingType.Exists(x => x.ActualType is null);
+            rulesWithoutImplementation.Should().BeFalse($"there are rules that exist in {expectedTypesName} but not in '{language}::SonarAnalyzer.RuleCatalog.Rules' file.");
 
             var changedRules = rulesWithUnmatchingType.Where(x => x.ActualType != null && x.ExpectedType != null);
-            changedRules.Should().BeEmpty($": you need to change the rule types in {expectedTypesName}");
+            changedRules.Should().BeEmpty($"you need to change the rule type in {expectedTypesName}");
         }
     }
 }
