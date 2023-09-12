@@ -140,7 +140,7 @@ namespace SonarAnalyzer.Rules
 
             protected TokenInfo TokenInfo(SyntaxToken token, TokenType tokenType)
             {
-                var span = token.GetLocation().GetMappedLineSpanIfAvailable();
+                var span = token.GetLocation().GetMappedLineSpanIfAvailable(token);
                 return tokenType == TokenType.UnknownTokentype
                     || (string.IsNullOrWhiteSpace(token.Text) && tokenType != TokenType.StringLiteral)
                     || !(string.IsNullOrWhiteSpace(filePath) || string.Equals(span.Path, filePath, StringComparison.OrdinalIgnoreCase))
@@ -205,7 +205,7 @@ namespace SonarAnalyzer.Rules
                 new()
                 {
                     TokenType = tokenType,
-                    TextRange = GetTextRange(Location.Create(tree, span).GetLineSpan())
+                    TextRange = GetTextRange(Location.Create(tree, span).GetMappedLineSpanIfAvailable())
                 };
         }
     }
