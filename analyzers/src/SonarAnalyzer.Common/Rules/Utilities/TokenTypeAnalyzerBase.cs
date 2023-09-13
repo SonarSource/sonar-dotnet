@@ -35,25 +35,21 @@ namespace SonarAnalyzer.Rules
 
         protected TokenTypeAnalyzerBase() : base(DiagnosticId, Title) { }
 
-        protected abstract TokenClassifierBase GetTokenClassifier(SemanticModel semanticModel, bool skipIdentifierTokens, string filePath);
-        protected abstract TriviaClassifierBase GetTriviaClassifier(string filePath);
+        protected abstract TokenClassifierBase GetTokenClassifier(SemanticModel semanticModel, bool skipIdentifierTokens, string filePath, ImmutableSortedSet<LineDirectiveEntry> lineDirectiveMap);
+        protected abstract TriviaClassifierBase GetTriviaClassifier(string filePath, ImmutableSortedSet<LineDirectiveEntry> lineDirectiveMap);
 
-        protected override bool ShouldGenerateMetrics(SyntaxTree tree, Compilation compilation) =>
-            !GeneratedCodeRecognizer.IsRazorGeneratedFile(tree)
-            && base.ShouldGenerateMetrics(tree, compilation);
-
-        protected sealed override TokenTypeInfo CreateMessage(SyntaxTree tree, SemanticModel model)
+        protected sealed override TokenTypeInfo CreateMessage(SyntaxTree tree, SemanticModel model, ImmutableSortedSet<LineDirectiveEntry> lineDirectiveMap)
         {
-            var tokens = syntaxTree.GetRoot().DescendantTokens();
+            var tokens = tree.GetRoot().DescendantTokens();
             var identifierTokenKind = Language.SyntaxKind.IdentifierToken;  // Performance optimization
             var skipIdentifierTokens = tokens
                 .Where(token => Language.Syntax.IsKind(token, identifierTokenKind))
                 .Skip(IdentifierTokenCountThreshold)
                 .Any();
 
-            var filePath = syntaxTree.GetRoot().GetMappedFilePathFromRoot(); // For a razor generated file, we need the original file path.
-            var tokenClassifier = GetTokenClassifier(semanticModel, skipIdentifierTokens, filePath);
-            var triviaClassifier = GetTriviaClassifier(filePath);
+            var filePath = tree.GetRoot().GetMappedFilePathFromRoot(); // For a razor generated file, we need the original file path.
+            var tokenClassifier = GetTokenClassifier(model, skipIdentifierTokens, filePath, lineDirectiveMap);
+            var triviaClassifier = GetTriviaClassifier(filePath, lineDirectiveMap);
             var spans = new List<TokenInfo>();
             // The second iteration of the tokens is intended since there is no processing done and we want to avoid copying all the tokens to a second collection.
             foreach (var token in tokens)
@@ -97,6 +93,7 @@ namespace SonarAnalyzer.Rules
             private readonly bool skipIdentifiers;
             private readonly SemanticModel semanticModel;
             private readonly string filePath;
+            private readonly ImmutableSortedSet<LineDirectiveEntry> lineDirectiveMap;
 
             private static readonly ISet<MethodKind> ConstructorKinds = new HashSet<MethodKind>
             {
@@ -121,11 +118,12 @@ namespace SonarAnalyzer.Rules
 
             protected SemanticModel SemanticModel => semanticModel ?? throw new InvalidOperationException("The code snippet is not supposed to call the semantic model for classification.");
 
-            protected TokenClassifierBase(SemanticModel semanticModel, bool skipIdentifiers, string filePath)
+            protected TokenClassifierBase(SemanticModel semanticModel, bool skipIdentifiers, string filePath, ImmutableSortedSet<LineDirectiveEntry> lineDirectiveMap)
             {
                 this.semanticModel = semanticModel;
                 this.skipIdentifiers = skipIdentifiers;
                 this.filePath = filePath;
+                this.lineDirectiveMap = lineDirectiveMap;
             }
 
             public TokenInfo ClassifyToken(SyntaxToken token) =>
@@ -140,7 +138,7 @@ namespace SonarAnalyzer.Rules
 
             protected TokenInfo TokenInfo(SyntaxToken token, TokenType tokenType)
             {
-                var span = token.GetLocation().GetMappedLineSpanIfAvailable(token);
+                var span = token.GetLocation().GetMappedLineSpanIfAvailable(lineDirectiveMap);
                 return tokenType == TokenType.UnknownTokentype
                     || (string.IsNullOrWhiteSpace(token.Text) && tokenType != TokenType.StringLiteral)
                     || !(string.IsNullOrWhiteSpace(filePath) || string.Equals(span.Path, filePath, StringComparison.OrdinalIgnoreCase))
@@ -180,18 +178,20 @@ namespace SonarAnalyzer.Rules
         protected internal abstract class TriviaClassifierBase
         {
             private readonly string filePath;
+            private readonly ImmutableSortedSet<LineDirectiveEntry> lineDirectiveMap;
 
             protected abstract bool IsDocComment(SyntaxTrivia trivia);
             protected abstract bool IsRegularComment(SyntaxTrivia trivia);
 
-            protected TriviaClassifierBase(string filePath)
+            protected TriviaClassifierBase(string filePath, ImmutableSortedSet<LineDirectiveEntry> lineDirectiveMap)
             {
                 this.filePath = filePath;
+                this.lineDirectiveMap = lineDirectiveMap;
             }
 
             public TokenInfo ClassifyTrivia(SyntaxTrivia trivia) =>
                 string.IsNullOrWhiteSpace(filePath)
-                || string.Equals(filePath, trivia.GetLocation().GetMappedLineSpanIfAvailable().Path, StringComparison.OrdinalIgnoreCase)
+                || string.Equals(filePath, trivia.GetLocation().GetMappedLineSpanIfAvailable(lineDirectiveMap).Path, StringComparison.OrdinalIgnoreCase)
                     ? trivia switch
                     {
                         _ when IsRegularComment(trivia) => TokenInfo(trivia.SyntaxTree, TokenType.Comment, trivia.Span),
@@ -205,7 +205,7 @@ namespace SonarAnalyzer.Rules
                 new()
                 {
                     TokenType = tokenType,
-                    TextRange = GetTextRange(Location.Create(tree, span).GetMappedLineSpanIfAvailable())
+                    TextRange = GetTextRange(Location.Create(tree, span).GetMappedLineSpanIfAvailable(lineDirectiveMap))
                 };
         }
     }

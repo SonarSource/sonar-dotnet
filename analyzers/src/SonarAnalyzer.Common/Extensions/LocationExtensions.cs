@@ -18,88 +18,37 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CSharp;
+using SonarAnalyzer.Rules;
 
 namespace SonarAnalyzer.Extensions;
 
 public static class LocationExtensions
 {
-    public static FileLinePositionSpan GetMappedLineSpanIfAvailable(this Location location) =>
-        GeneratedCodeRecognizer.IsRazorGeneratedFile(location.SourceTree) ? location.GetMappedLineSpan() : location.GetLineSpan();
-
-    public static FileLinePositionSpan GetMappedLineSpanIfAvailable(this Location location, SyntaxToken token)
+    public static FileLinePositionSpan GetMappedLineSpanIfAvailable(this Location location, ImmutableSortedSet<LineDirectiveEntry> lineDirectiveMap)
     {
-        var node = token.Parent;
-        if (GeneratedCodeRecognizer.IsRazorGeneratedFile(location.SourceTree))
+        if (GeneratedCodeRecognizer.IsRazorGeneratedFile(location.SourceTree)
+            && !lineDirectiveMap.IsEmpty)
         {
-            var mappedLocation = location.GetMappedLineSpan();
-            if (mappedLocation.HasMappedPath)
+            var unmappedLocation = location.GetLineSpan().StartLinePosition.Line;
+            var lineSpanIndex = -1;
+            for (var i = 0; i < lineDirectiveMap.Count; i++)
             {
-                var lineDirective = FindLineDirecitive(node);
-                if (LineSpanDirectiveTriviaSyntaxWrapper.IsInstance(lineDirective)
-                    && (LineSpanDirectiveTriviaSyntaxWrapper)lineDirective is var lineSpanDirective
-                    && lineSpanDirective.CharacterOffset.ValueText is var stringValue
-                    && int.TryParse(stringValue, out var numericValue)
-                    && numericValue >= location.GetLineSpan().Span.End.Character)
+                if (lineDirectiveMap[i].LineNumber > unmappedLocation)
                 {
-                    return location.GetLineSpan();
+                    lineSpanIndex = i - 1;
+                    break;
                 }
             }
-            return mappedLocation;
+
+            return lineSpanIndex != -1
+                && LineSpanDirectiveTriviaSyntaxWrapper.IsInstance(lineDirectiveMap[lineSpanIndex].LineDirective)
+                    && (LineSpanDirectiveTriviaSyntaxWrapper)lineDirectiveMap[lineSpanIndex].LineDirective is var lineSpanDirective
+                    && lineSpanDirective.CharacterOffset.ValueText is var stringValue
+                    && int.TryParse(stringValue, out var numericValue)
+                    && numericValue >= location.GetLineSpan().Span.End.Character
+                ? location.GetLineSpan()
+                : location.GetMappedLineSpan();
         }
         return location.GetLineSpan();
     }
-
-    private static SyntaxNode FindLineDirecitive(SyntaxNode node)
-    {
-        while (node != null)
-        {
-            if (LineDirective(node) is { } lineDirective)
-            {
-                return lineDirective;
-            }
-            var directive = FindLineDirectiveOnSameLevel(node);
-
-            if (directive != null)
-            {
-                return directive;
-            }
-
-            node = node.Parent;
-        }
-        return null;
-    }
-
-    private static SyntaxNode FindLineDirectiveOnSameLevel(SyntaxNode node)
-    {
-        var childNodes = node.Parent.ChildNodes().ToArray();
-        var index = -1;
-        for (var i = 0; i < childNodes.Count(); i++)
-        {
-            if (childNodes[i] == node)
-            {
-                index = i;
-                break;
-            }
-        }
-
-        if (index == -1)
-        {
-            return null;
-        }
-
-        for (var j = index; j >= 0; j--)
-        {
-            if (LineDirective(childNodes[j]) is { } lineDirective)
-            {
-                return lineDirective;
-            }
-        }
-
-        return null;
-    }
-
-    private static SyntaxNode LineDirective(SyntaxNode node) =>
-        node.DescendantNodes(_ => true, true).FirstOrDefault(x => x.IsKind(SyntaxKind.LineDirectiveTrivia)
-                                                                  || x.IsKind(SyntaxKindEx.LineSpanDirectiveTrivia));
 }

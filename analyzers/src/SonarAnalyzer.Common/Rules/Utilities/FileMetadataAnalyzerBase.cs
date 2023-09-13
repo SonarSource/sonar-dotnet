@@ -32,13 +32,12 @@ namespace SonarAnalyzer.Rules
         protected override bool AnalyzeGeneratedCode => true;
 
         protected FileMetadataAnalyzerBase() : base(DiagnosticId, Title) { }
-
         protected override bool ShouldGenerateMetrics(SyntaxTree tree, Compilation compilation) =>
             !GeneratedCodeRecognizer.IsRazorGeneratedFile(tree)
             && base.ShouldGenerateMetrics(tree, compilation);
 
-        protected sealed override FileMetadataInfo CreateMessage(SyntaxTree tree, SemanticModel model) =>
-            new()
+        protected sealed override FileMetadataInfo CreateMessage(SyntaxTree tree, SemanticModel model, ImmutableSortedSet<LineDirectiveEntry> lineDirectiveMap) =>
+            new FileMetadataInfo
             {
                 FilePath = tree.FilePath,
                 IsGenerated = Language.GeneratedCodeRecognizer.IsGenerated(tree),

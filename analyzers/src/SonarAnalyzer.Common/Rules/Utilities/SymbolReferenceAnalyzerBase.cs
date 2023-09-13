@@ -39,14 +39,14 @@ namespace SonarAnalyzer.Rules
 
         protected SymbolReferenceAnalyzerBase() : base(DiagnosticId, Title) { }
 
-        protected sealed override SymbolReferenceInfo CreateMessage(SyntaxTree tree, SemanticModel model)
+        protected sealed override SymbolReferenceInfo CreateMessage(SyntaxTree tree, SemanticModel model, ImmutableSortedSet<LineDirectiveEntry> lineDirectiveMap)
         {
             var filePath = GetFilePath(tree);
             var symbolReferenceInfo = new SymbolReferenceInfo { FilePath = filePath };
             var references = GetReferences(tree.GetRoot(), model);
             foreach (var symbol in references.Keys)
             {
-                if (GetSymbolReference(references[symbol], filePath) is { } reference)
+                if (GetSymbolReference(references[symbol], filePath, lineDirectiveMap) is { } reference)
                 {
                     symbolReferenceInfo.Reference.Add(reference);
                 }
@@ -111,9 +111,9 @@ namespace SonarAnalyzer.Rules
                 var symbol => symbol
             };
 
-        private static SymbolReferenceInfo.Types.SymbolReference GetSymbolReference(IReadOnlyList<ReferenceInfo> references, string filePath)
+        private static SymbolReferenceInfo.Types.SymbolReference GetSymbolReference(IReadOnlyList<ReferenceInfo> references, string filePath, ImmutableSortedSet<LineDirectiveEntry> lineDirectiveMap)
         {
-            var declarationSpan = GetDeclarationSpan(references, filePath);
+            var declarationSpan = GetDeclarationSpan(references, filePath, lineDirectiveMap);
             if (!declarationSpan.HasValue)
             {
                 return null;
@@ -124,7 +124,7 @@ namespace SonarAnalyzer.Rules
             {
                 var reference = references[i];
                 if (!reference.IsDeclaration
-                    && reference.Identifier.GetLocation().GetMappedLineSpanIfAvailable(reference.Identifier) is var mappedLineSpan
+                    && reference.Identifier.GetLocation().GetMappedLineSpanIfAvailable(lineDirectiveMap) is var mappedLineSpan
                     && string.Equals(mappedLineSpan.Path, filePath, StringComparison.OrdinalIgnoreCase))
                 {
                     symbolReference.Reference.Add(GetTextRange(mappedLineSpan));
@@ -133,12 +133,12 @@ namespace SonarAnalyzer.Rules
             return symbolReference;
         }
 
-        private static FileLinePositionSpan? GetDeclarationSpan(IReadOnlyList<ReferenceInfo> references, string filePath)
+        private static FileLinePositionSpan? GetDeclarationSpan(IReadOnlyList<ReferenceInfo> references, string filePath, ImmutableSortedSet<LineDirectiveEntry> lineDirectiveMap)
         {
             for (var i = 0; i < references.Count; i++)
             {
                 if (references[i].IsDeclaration
-                    && references[i].Identifier.GetLocation().GetMappedLineSpanIfAvailable(references[i].Identifier) is var mappedLineSpan
+                    && references[i].Identifier.GetLocation().GetMappedLineSpanIfAvailable(lineDirectiveMap) is var mappedLineSpan
                     && string.Equals(mappedLineSpan.Path, filePath, StringComparison.OrdinalIgnoreCase))
                 {
                     return mappedLineSpan;

@@ -25,15 +25,16 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         protected override ILanguageFacade<SyntaxKind> Language { get; } = VisualBasicFacade.Instance;
 
-        protected override TokenClassifierBase GetTokenClassifier(SemanticModel semanticModel, bool skipIdentifierTokens, string filePath) =>
-            new TokenClassifier(semanticModel, skipIdentifierTokens, filePath);
+        protected override TokenClassifierBase GetTokenClassifier(SemanticModel semanticModel, bool skipIdentifierTokens, string filePath, ImmutableSortedSet<LineDirectiveEntry> lineDirectiveMap) =>
+            new TokenClassifier(semanticModel, skipIdentifierTokens, filePath, lineDirectiveMap);
 
-        protected override TriviaClassifierBase GetTriviaClassifier(string filePath) =>
-            new TriviaClassifier(filePath);
+        protected override TriviaClassifierBase GetTriviaClassifier(string filePath, ImmutableSortedSet<LineDirectiveEntry> lineDirectiveMap) =>
+            new TriviaClassifier(filePath, lineDirectiveMap);
 
         private sealed class TokenClassifier : TokenClassifierBase
         {
-            public TokenClassifier(SemanticModel semanticModel, bool skipIdentifiers, string filePath) : base(semanticModel, skipIdentifiers, filePath) { }
+            public TokenClassifier(SemanticModel semanticModel, bool skipIdentifiers, string filePath, ImmutableSortedSet<LineDirectiveEntry> lineDirectiveMap)
+                : base(semanticModel, skipIdentifiers, filePath, lineDirectiveMap) { }
 
             protected override SyntaxNode GetBindableParent(SyntaxToken token) =>
                 token.GetBindableParent();
@@ -57,7 +58,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         private sealed class TriviaClassifier : TriviaClassifierBase
         {
-            public TriviaClassifier(string filePath) : base(filePath) { }
+            public TriviaClassifier(string filePath, ImmutableSortedSet<LineDirectiveEntry> lineDirectiveMap) : base(filePath, lineDirectiveMap) { }
 
             protected override bool IsRegularComment(SyntaxTrivia trivia) =>
                 trivia.IsKind(SyntaxKind.CommentTrivia);

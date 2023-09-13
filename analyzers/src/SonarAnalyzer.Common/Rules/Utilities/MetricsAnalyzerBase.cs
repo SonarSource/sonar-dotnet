@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules
 
         protected MetricsAnalyzerBase() : base(DiagnosticId, Title) { }
 
-        protected sealed override MetricsInfo CreateMessage(SyntaxTree tree, SemanticModel model)
+        protected sealed override MetricsInfo CreateMessage(SyntaxTree tree, SemanticModel model, ImmutableSortedSet<LineDirectiveEntry> lineDirectiveMap)
         {
             var metrics = GetMetrics(tree, model);
             var complexity = metrics.Complexity;

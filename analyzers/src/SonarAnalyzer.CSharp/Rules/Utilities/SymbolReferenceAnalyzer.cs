@@ -28,6 +28,11 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override SyntaxNode GetBindableParent(SyntaxToken token) =>
             token.GetBindableParent();
 
+        protected override ImmutableSortedSet<LineDirectiveEntry> CalculateLineDirectiveMap(SyntaxTree syntaxTree) =>
+            syntaxTree.GetRoot().DescendantNodes(_ => true, true).Where(x => x.IsKind(SyntaxKind.LineDirectiveTrivia)
+                                                                             || x.IsKind(SyntaxKindEx.LineSpanDirectiveTrivia))
+                                                                 .Select(x => new LineDirectiveEntry(x.GetLocation().GetLineSpan().StartLinePosition.Line, x)).ToImmutableSortedSet();
+
         protected override ReferenceInfo[] CreateDeclarationReferenceInfo(SyntaxNode node, SemanticModel model) =>
             node switch
             {

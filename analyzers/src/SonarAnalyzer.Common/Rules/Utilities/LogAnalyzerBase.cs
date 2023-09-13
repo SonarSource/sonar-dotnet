@@ -43,9 +43,9 @@ namespace SonarAnalyzer.Rules
                 new LogInfo { Severity = LogSeverity.Info, Text = "Concurrent execution: " + (IsConcurrentExecutionEnabled() ? "enabled" : "disabled") }
             };
 
-        protected sealed override LogInfo CreateMessage(SyntaxTree tree, SemanticModel model) =>
+        protected sealed override LogInfo CreateMessage(SyntaxTree tree, SemanticModel model, ImmutableSortedSet<LineDirectiveEntry> lineDirectiveMap) =>
             tree.IsGenerated(Language.GeneratedCodeRecognizer, model.Compilation)
-            ? CreateMessage(tree)
+            ? new LogInfo { Severity = LogSeverity.Debug, Text = $"File '{syntaxTree.FilePath}' was recognized as generated" }
             : null;
 
         private static LogInfo CreateMessage(SyntaxTree tree) =>

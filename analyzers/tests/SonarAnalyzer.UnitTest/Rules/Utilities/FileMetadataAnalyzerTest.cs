@@ -21,6 +21,7 @@
 using System.IO;
 using Moq;
 using SonarAnalyzer.Protobuf;
+using SonarAnalyzer.Rules;
 using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -153,7 +154,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             }
 
             public FileMetadataInfo TestCreateMessage(SyntaxTree tree, SemanticModel model) =>
-                CreateMessage(tree, model);
+                CreateMessage(tree, model, ImmutableSortedSet<LineDirectiveEntry>.Empty);
         }
     }
 }

@@ -74,9 +74,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void Verify_Razor()
         {
-            using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = true };
-
             CreateBuilder(ProjectType.Product, "RazorTokens.razor", "RazorTokens.cs")
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                 .WithConcurrentAnalysis(false)
                 .VerifyUtilityAnalyzer<TokenTypeInfo>(tokens =>
                     {
@@ -110,7 +109,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                                 .And.Contain((74, 74), "c")
                                 .And.Contain((84, 84), "t")
                                 .And.Contain((85, 85), "tn")
-                                .And.Contain((86, 86), "knkk")
+                                .And.Contain((86, 86), "kkk")
                                 .And.Contain((87, 87), "t")
                                 .And.Contain((91, 91), "nn")
                                 .And.Contain((92, 92), "nn")

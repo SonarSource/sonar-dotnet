@@ -2,6 +2,7 @@
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Protobuf;
+using SonarAnalyzer.Rules;
 using static SonarAnalyzer.Rules.CSharp.TokenTypeAnalyzer;
 using Match = System.Text.RegularExpressions.Match;
 
@@ -30,8 +31,8 @@ public partial class TokenTypeAnalyzerTest
             var (tree, model, expectedTokens) = ParseTokens(code, ignoreCompilationErrors);
             model = allowSemanticModel ? model : null; // The TokenClassifier will throw if the semantic model is used.
             // filePath for the snippet is defined later by TestHelper.CompileCS -> ignore filePath when classifying tokens and trivia
-            var tokenClassifier = new TokenClassifier(model, false, string.Empty);
-            var triviaClassifier = new TriviaClassifier(string.Empty);
+            var tokenClassifier = new TokenClassifier(model, false, string.Empty, ImmutableSortedSet<LineDirectiveEntry>.Empty);
+            var triviaClassifier = new TriviaClassifier(string.Empty, ImmutableSortedSet<LineDirectiveEntry>.Empty);
             expectedTokens.Should().SatisfyRespectively(expectedTokens.Select(
                 (Func<ExpectedToken, Action<ExpectedToken>>)(_ => token => CheckClassifiedToken(tokenClassifier, triviaClassifier, tree, token))));
         }

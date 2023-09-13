@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules
             !GeneratedCodeRecognizer.IsRazorGeneratedFile(tree)
             && base.ShouldGenerateMetrics(tree, compilation);
 
-        protected sealed override CopyPasteTokenInfo CreateMessage(SyntaxTree tree, SemanticModel model)
+        protected sealed override CopyPasteTokenInfo CreateMessage(SyntaxTree tree, SemanticModel model, ImmutableSortedSet<LineDirectiveEntry> lineDirectiveMap)
         {
             var cpdTokenInfo = new CopyPasteTokenInfo { FilePath = tree.FilePath };
             foreach (var token in tree.GetRoot().DescendantTokens(n => !IsUsingDirective(n)))

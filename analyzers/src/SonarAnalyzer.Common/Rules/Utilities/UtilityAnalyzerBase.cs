@@ -76,11 +76,13 @@ namespace SonarAnalyzer.Rules
     {
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract string FileName { get; }
-        protected abstract TMessage CreateMessage(SyntaxTree tree, SemanticModel model);
+        protected abstract TMessage CreateMessage(SyntaxTree tree, SemanticModel model, ImmutableSortedSet<LineDirectiveEntry> lineDirectiveMap);
 
         protected virtual bool AnalyzeUnchangedFiles => false;
 
         protected virtual IEnumerable<TMessage> CreateAnalysisMessages(SonarCompilationReportingContext c) => Enumerable.Empty<TMessage>();
+
+        protected virtual ImmutableSortedSet<LineDirectiveEntry> CalculateLineDirectiveMap(SyntaxTree syntaxTree) => ImmutableSortedSet<LineDirectiveEntry>.Empty;
 
         protected UtilityAnalyzerBase(string diagnosticId, string title) : base(diagnosticId, title) { }
 
@@ -95,7 +97,15 @@ namespace SonarAnalyzer.Rules
 
                 var treeMessages = context.Compilation.SyntaxTrees
                     .Where(x => ShouldGenerateMetrics(context, x))
-                    .Select(x => CreateMessage(x, context.Compilation.GetSemanticModel(x)));
+                    .Select(x =>
+                        {
+                            var lineDirectiveMap = ImmutableSortedSet<LineDirectiveEntry>.Empty;
+                            if (GeneratedCodeRecognizer.IsRazorGeneratedFile(x))
+                            {
+                                lineDirectiveMap = CalculateLineDirectiveMap(x);
+                            }
+                            return CreateMessage(x, context.Compilation.GetSemanticModel(x), lineDirectiveMap);
+                        });
 
                 var allMessages = CreateAnalysisMessages(context)
                     .Concat(treeMessages)

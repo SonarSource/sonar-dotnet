@@ -28,11 +28,16 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override ILanguageFacade<SyntaxKind> Language { get; } = CSharpFacade.Instance;
 
-        protected override TokenClassifierBase GetTokenClassifier(SemanticModel semanticModel, bool skipIdentifierTokens, string filePath) =>
-            new TokenClassifier(semanticModel, skipIdentifierTokens, filePath);
+        protected override TokenClassifierBase GetTokenClassifier(SemanticModel semanticModel, bool skipIdentifierTokens, string filePath, ImmutableSortedSet<LineDirectiveEntry> lineDirectiveMap) =>
+            new TokenClassifier(semanticModel, skipIdentifierTokens, filePath, lineDirectiveMap);
 
-        protected override TriviaClassifierBase GetTriviaClassifier(string filePath) =>
-            new TriviaClassifier(filePath);
+        protected override TriviaClassifierBase GetTriviaClassifier(string filePath, ImmutableSortedSet<LineDirectiveEntry> lineDirectiveMap) =>
+            new TriviaClassifier(filePath, lineDirectiveMap);
+
+        protected override ImmutableSortedSet<LineDirectiveEntry> CalculateLineDirectiveMap(SyntaxTree syntaxTree) =>
+            syntaxTree.GetRoot().DescendantNodes(_ => true, true).Where(x => x.IsKind(SyntaxKind.LineDirectiveTrivia)
+                                                                             || x.IsKind(SyntaxKindEx.LineSpanDirectiveTrivia))
+                                                         .Select(x => new LineDirectiveEntry(x.GetLocation().GetLineSpan().StartLinePosition.Line, x)).ToImmutableSortedSet();
 
         internal sealed class TokenClassifier : TokenClassifierBase
         {
@@ -54,7 +59,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKindEx.InterpolatedRawStringEndToken,
             };
 
-            public TokenClassifier(SemanticModel semanticModel, bool skipIdentifiers, string filePath) : base(semanticModel, skipIdentifiers, filePath) { }
+            public TokenClassifier(SemanticModel semanticModel, bool skipIdentifiers, string filePath, ImmutableSortedSet<LineDirectiveEntry> lineDirectiveMap)
+                : base(semanticModel, skipIdentifiers, filePath, lineDirectiveMap) { }
 
             protected override SyntaxNode GetBindableParent(SyntaxToken token) =>
                 token.GetBindableParent();
@@ -343,7 +349,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.MultiLineDocumentationCommentTrivia,
             };
 
-            public TriviaClassifier(string filePath) : base(filePath) { }
+            public TriviaClassifier(string filePath, ImmutableSortedSet<LineDirectiveEntry> lineDirectiveMap) : base(filePath, lineDirectiveMap) { }
 
             protected override bool IsRegularComment(SyntaxTrivia trivia) =>
                 trivia.IsAnyKind(RegularCommentToken);
