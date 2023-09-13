@@ -234,8 +234,11 @@ public class CoverageReportImportSensorTest {
     new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", false)
       .analyze(context, coverage);
 
+    assertThat(logTester.logs(Level.DEBUG)).contains(
+      "Coverage import: Line 1 is out of range in the file 'Foo.cs' (lines: -1)");
+
     assertThat(logTester.logs(Level.WARN)).contains(
-      "Line 1 is out of range in the file 'Foo.cs' (lines: -1)");
+      "Verify or raise an issue with the coverage tool being used, as the imported coverage file has reported lines that are out of range for certain file(s).");
   }
 
   private SensorContextTester computeCoverageMeasures(boolean isIntegrationTest) {
