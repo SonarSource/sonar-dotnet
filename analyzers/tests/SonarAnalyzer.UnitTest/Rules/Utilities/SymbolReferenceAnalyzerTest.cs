@@ -192,12 +192,12 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void Verify_Razor() =>
-            CreateBuilder(ProjectType.Product, "Razor.razor", "ToDo.cs", "Razor.cshtml")
+            CreateBuilder(ProjectType.Product, "Razor.razor", "Razor.razor.cs", "ToDo.cs", "Razor.cshtml")
                 .WithConcurrentAnalysis(false)
                 .VerifyUtilityAnalyzer<SymbolReferenceInfo>(symbols =>
                     {
                         var orderedSymbols = symbols.OrderBy(x => x.FilePath, StringComparer.InvariantCulture).ToArray();
-                        orderedSymbols.Select(x => Path.GetFileName(x.FilePath)).Should().BeEquivalentTo("_Imports.razor", "Razor.razor", "ToDo.cs");
+                        orderedSymbols.Select(x => Path.GetFileName(x.FilePath)).Should().BeEquivalentTo("_Imports.razor", "Razor.razor", "Razor.razor.cs", "ToDo.cs");
                         orderedSymbols[0].FilePath.Should().EndWith("_Imports.razor");
                         orderedSymbols[1].FilePath.Should().EndWith("Razor.razor");
 
