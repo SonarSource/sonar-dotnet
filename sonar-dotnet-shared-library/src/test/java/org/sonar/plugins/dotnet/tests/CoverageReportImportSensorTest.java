@@ -222,6 +222,25 @@ public class CoverageReportImportSensorTest {
     assertThat(logTester.logs(Level.TRACE)).contains("Counting statistics for '" + fooPath + "'.");
   }
 
+  @Test
+  public void computeCoverageLoggingOutOfRange() {
+    Coverage coverage = new Coverage();
+    String fooPath = new File(baseDir, "Foo.cs").getAbsolutePath();
+    coverage.addHits(fooPath, 1, 1);
+
+    context.fileSystem().add(new TestInputFileBuilder("foo", "Foo.cs").setLanguage("cs")
+      .setType(Type.MAIN).build());
+
+    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", false)
+      .analyze(context, coverage);
+
+    assertThat(logTester.logs(Level.DEBUG)).contains(
+      "Coverage import: Line 1 is out of range in the file 'Foo.cs' (lines: -1)");
+
+    assertThat(logTester.logs(Level.WARN)).contains(
+      "Invalid data found in the coverage report, please check the debug logs for more details and raise an issue on the coverage tool being used.");
+  }
+
   private SensorContextTester computeCoverageMeasures(boolean isIntegrationTest) {
     Coverage coverage = mock(Coverage.class);
     String fooPath = new File(baseDir, "Foo.cs").getAbsolutePath();

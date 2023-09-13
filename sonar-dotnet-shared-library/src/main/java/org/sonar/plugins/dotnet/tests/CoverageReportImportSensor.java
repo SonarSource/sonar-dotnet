@@ -134,10 +134,20 @@ public class CoverageReportImportSensor implements ProjectSensor {
     boolean fileHasCoverage = false;
 
     NewCoverage newCoverage = context.newCoverage().onFile(inputFile);
+    var coverageImportError = false;
     for (Map.Entry<Integer, Integer> entry : coverage.hits(filePath).entrySet()) {
       LOG.trace("Found entry with key '{}' and value '{}'.", entry.getKey(), entry.getValue());
       fileHasCoverage = true;
-      newCoverage.lineHits(entry.getKey(), entry.getValue());
+      var line = entry.getKey();
+      if (line <= inputFile.lines()){
+        newCoverage.lineHits(line, entry.getValue());
+      } else {
+        coverageImportError = true;
+        LOG.debug("Coverage import: Line {} is out of range in the file '{}' (lines: {})", line, inputFile, inputFile.lines());
+      }
+    }
+    if (coverageImportError){
+      LOG.warn("Invalid data found in the coverage report, please check the debug logs for more details and raise an issue on the coverage tool being used.");
     }
 
     for (BranchCoverage branchCoverage : coverage.getBranchCoverage(filePath)) {
