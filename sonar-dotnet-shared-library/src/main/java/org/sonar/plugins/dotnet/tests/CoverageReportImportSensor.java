@@ -147,7 +147,7 @@ public class CoverageReportImportSensor implements ProjectSensor {
       }
     }
     if (coverageImportError){
-      LOG.warn("Verify or raise an issue with the coverage tool being used, as the imported coverage file has reported lines that are out of range for certain file(s).");
+      LOG.warn("Invalid data found in the coverage report, please check the debug logs for more details and raise an issue on the coverage tool being used.");
     }
 
     for (BranchCoverage branchCoverage : coverage.getBranchCoverage(filePath)) {
