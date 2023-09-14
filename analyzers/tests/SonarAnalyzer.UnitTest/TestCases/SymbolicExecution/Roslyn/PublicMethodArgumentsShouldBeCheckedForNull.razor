@@ -2,7 +2,7 @@
 @using Microsoft.AspNetCore.Components.Rendering
 @inherits PublicMethodArgumentsShouldBeCheckedForNull_component
 
-@Render <!-- Noncompliant FP -->
+@Render <!-- Compliant -->
 
 @code {
     public RenderFragment Render => base.BuildRenderTree;
