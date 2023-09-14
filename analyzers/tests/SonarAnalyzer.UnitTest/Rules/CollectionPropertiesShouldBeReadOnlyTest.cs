@@ -50,7 +50,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void CollectionPropertiesShouldBeReadOnly_Razor() =>
             builder.AddPaths("CollectionPropertiesShouldBeReadOnly.razor", "CollectionPropertiesShouldBeReadOnly.razor.cs")
-                   .WithConcurrentAnalysis(false)
                    .Verify();
 
 #endif
