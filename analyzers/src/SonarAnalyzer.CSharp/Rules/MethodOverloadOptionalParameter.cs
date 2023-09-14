@@ -29,27 +29,25 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat =
             "This method signature overlaps the one defined on line {0}{1}, the default parameter value {2}.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        private class ParameterHidingMethodInfo
+        private sealed class ParameterHidingMethodInfo
         {
-            public IParameterSymbol ParameterToReportOn { get; set; }
-            public IMethodSymbol HidingMethod { get; set; }
-            public IMethodSymbol HiddenMethod { get; set; }
+            public IParameterSymbol ParameterToReportOn { get; init; }
+            public IMethodSymbol HidingMethod { get; init; }
+            public IMethodSymbol HiddenMethod { get; init; }
         }
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSymbolAction(
                 c =>
                 {
-                    if (!(c.Symbol is IMethodSymbol methodSymbol) ||
-                        methodSymbol.GetInterfaceMember() != null ||
-                        methodSymbol.GetOverriddenMember() != null ||
-                        !methodSymbol.Parameters.Any(p => p.IsOptional))
+                    if (c.Symbol is not IMethodSymbol methodSymbol
+                        || methodSymbol.GetInterfaceMember() is not null
+                        || methodSymbol.GetOverriddenMember() is not null
+                        || !methodSymbol.Parameters.Any(p => p.IsOptional))
                     {
                         return;
                     }
@@ -58,24 +56,20 @@ namespace SonarAnalyzer.Rules.CSharp
                         .OfType<IMethodSymbol>()
                         .Where(m => m.TypeParameters.Length == methodSymbol.TypeParameters.Length);
 
-                    var hidingInfos = new List<ParameterHidingMethodInfo>();
-
                     var matchingNamedMethods = methods
-                        .Where(m => m.Parameters.Length < methodSymbol.Parameters.Length)
-                        .Where(m => !m.Parameters.Any(p => p.IsParams));
+                                               .Where(m => m.Parameters.Length < methodSymbol.Parameters.Length)
+                                               .Where(m => !m.Parameters.Any(p => p.IsParams));
 
-                    foreach (var candidateHidingMethod in matchingNamedMethods
-                        .Where(candidateHidingMethod => IsMethodHidingOriginal(candidateHidingMethod, methodSymbol))
-                        .Where(candidateHidingMethod => methodSymbol.Parameters[candidateHidingMethod.Parameters.Length].IsOptional))
-                    {
-                        hidingInfos.Add(
-                            new ParameterHidingMethodInfo
-                            {
-                                ParameterToReportOn = methodSymbol.Parameters[candidateHidingMethod.Parameters.Length],
-                                HiddenMethod = methodSymbol,
-                                HidingMethod = candidateHidingMethod
-                            });
-                    }
+                    var hidingInfos = matchingNamedMethods
+                                          .Where(candidateHidingMethod => IsMethodHidingOriginal(candidateHidingMethod, methodSymbol))
+                                          .Where(candidateHidingMethod => methodSymbol.Parameters[candidateHidingMethod.Parameters.Length].IsOptional)
+                                          .Select(candidateHidingMethod => new ParameterHidingMethodInfo
+                                                                           {
+                                                                               ParameterToReportOn = methodSymbol.Parameters[candidateHidingMethod.Parameters.Length],
+                                                                               HiddenMethod = methodSymbol,
+                                                                               HidingMethod = candidateHidingMethod
+                                                                           })
+                                          .ToList();
 
                     foreach (var hidingInfo in hidingInfos)
                     {
@@ -87,7 +81,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         var defaultCanBeUsed = IsMoreParameterAvailableInConflicting(hidingInfo) || !MethodsUsingSameParameterNames(hidingInfo);
                         var isOtherFile = syntax.SyntaxTree.FilePath != hidingMethodSyntax.SyntaxTree.FilePath;
 
-                        c.ReportIssue(Diagnostic.Create(rule, syntax.GetLocation(),
+                        c.ReportIssue(Diagnostic.Create(Rule, syntax.GetLocation(),
                             hidingMethodSyntax.GetLocation().GetLineSpan().StartLinePosition.Line + 1,
                             isOtherFile
                                 ? $" in file '{new FileInfo(hidingMethodSyntax.SyntaxTree.FilePath).Name}'"
@@ -98,14 +92,12 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 },
                 SymbolKind.Method);
-        }
 
         private static bool MethodsUsingSameParameterNames(ParameterHidingMethodInfo hidingInfo)
         {
             for (var i = 0; i < hidingInfo.HidingMethod.Parameters.Length; i++)
             {
-                if (hidingInfo.HidingMethod.Parameters[i].Name !=
-                    hidingInfo.HiddenMethod.Parameters[i].Name)
+                if (hidingInfo.HidingMethod.Parameters[i].Name != hidingInfo.HiddenMethod.Parameters[i].Name)
                 {
                     return false;
                 }
@@ -114,37 +106,29 @@ namespace SonarAnalyzer.Rules.CSharp
             return true;
         }
 
-        private static bool IsMoreParameterAvailableInConflicting(ParameterHidingMethodInfo hidingInfo)
-        {
-            return hidingInfo.HiddenMethod.Parameters.IndexOf(hidingInfo.ParameterToReportOn) <
-                hidingInfo.HiddenMethod.Parameters.Length - 1;
-        }
+        private static bool IsMoreParameterAvailableInConflicting(ParameterHidingMethodInfo hidingInfo) =>
+            hidingInfo.HiddenMethod.Parameters.IndexOf(hidingInfo.ParameterToReportOn) < hidingInfo.HiddenMethod.Parameters.Length - 1;
 
-        private static bool IsMethodHidingOriginal(IMethodSymbol candidateHidingMethod, IMethodSymbol method)
-        {
-            return candidateHidingMethod.Parameters
-                    .Zip(method.Parameters, (param1, param2) => new { param1, param2 })
-                    .All(p => AreTypesEqual(p.param1.Type, p.param2.Type) &&
-                              p.param1.IsOptional == p.param2.IsOptional);
-        }
+        private static bool IsMethodHidingOriginal(IMethodSymbol candidateHidingMethod, IMethodSymbol method) =>
+            candidateHidingMethod.Parameters
+                                 .Zip(method.Parameters, (param1, param2) => new { param1, param2 })
+                                 .All(p => AreTypesEqual(p.param1.Type, p.param2.Type)
+                                           && p.param1.IsOptional == p.param2.IsOptional);
 
-        private static bool AreTypesEqual(ITypeSymbol t1, ITypeSymbol t2)
-        {
-            return Equals(t1, t2) ||
-                   t1.Is(TypeKind.TypeParameter) && t2.Is(TypeKind.TypeParameter) ||
-                   AreGenericInstancesTypesEqual(t1, t2);
-        }
+        private static bool AreTypesEqual(ITypeSymbol t1, ITypeSymbol t2) =>
+            Equals(t1, t2)
+            || (t1.Is(TypeKind.TypeParameter) && t2.Is(TypeKind.TypeParameter))
+            || AreGenericInstancesTypesEqual(t1, t2);
 
         private static bool AreGenericInstancesTypesEqual(ITypeSymbol t1, ITypeSymbol t2)
         {
-            if (t1.OriginalDefinition != t2.OriginalDefinition)
+            if (!t1.OriginalDefinition.Equals(t2.OriginalDefinition))
             {
                 return false;
             }
             if (t1 is INamedTypeSymbol named1 && t2 is INamedTypeSymbol named2)
             {
-                return named1.TypeArguments.SequenceEqual(named2.TypeArguments,
-                    (arg1, arg2) => AreTypesEqual(arg1, arg2));
+                return named1.TypeArguments.SequenceEqual(named2.TypeArguments, AreTypesEqual);
             }
             return false;
         }
