@@ -27,6 +27,8 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<ConditionalsWithSameCondition>();
 
+        public TestContext TestContext { get; set; }
+
         [TestMethod]
         public void ConditionalsWithSameCondition() =>
             builder.AddPaths("ConditionalsWithSameCondition.cs").Verify();
@@ -50,6 +52,32 @@ namespace SonarAnalyzer.UnitTest.Rules
             builder.AddPaths("ConditionalsWithSameCondition.CSharp10.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
                 .Verify();
+
+        [TestMethod]
+        public void ConditionalsWithSameCondition_RazorFile_CorrectMessage() =>
+            builder.AddSnippet(
+                """
+                @code
+                {
+                    public void doTheThing(object o) { }
+
+                    public void Method(int a, int b)
+                    {
+                        if (a == b)
+                        {
+                            doTheThing(b);
+                        }
+                        if (a == b) // Noncompliant {{This condition was just checked on line 7.}}
+                        //  ^^^^^^
+                        {
+                            doTheThing(b);
+                        }
+                    }
+                }
+                """,
+                "SomeRazorFile.razor")
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+            .Verify();
 
 #endif
 
