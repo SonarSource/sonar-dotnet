@@ -37,7 +37,8 @@ public abstract class PublicMethodArgumentsShouldBeCheckedForNullBase : Symbolic
             && candidate.ToParameterReference() is { Parameter: { Type.IsValueType: false } parameter }
             && MissesObjectConstraint(context.State[parameter])
             && !context.CapturedVariables.Contains(parameter) // Workaround to avoid FPs. Can be removed once captures are properly handled by lva.LiveOut()
-            && !parameter.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_FromServicesAttribute))
+            && !parameter.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_FromServicesAttribute)
+            && !IsInsideRazorGeneratedCode(candidate))
         {
             var message = IsInConstructorInitializer(candidate.Syntax)
                 ? "Refactor this constructor to avoid using members of parameter '{0}' because it could be {1}."
@@ -89,4 +90,8 @@ public abstract class PublicMethodArgumentsShouldBeCheckedForNullBase : Symbolic
         operation.Kind == OperationKindEx.SimpleAssignment
             ? operation.ToAssignment().Target
             : null;
+
+    private static bool IsInsideRazorGeneratedCode(IOperation candidate) =>
+        GeneratedCodeRecognizer.IsRazorGeneratedFile(candidate.Syntax.SyntaxTree)
+        && candidate.Syntax.TryGetInferredMemberName().Equals("__builder", StringComparison.OrdinalIgnoreCase);
 }
