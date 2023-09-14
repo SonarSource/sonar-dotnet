@@ -82,7 +82,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         var isOtherFile = syntax.SyntaxTree.FilePath != hidingMethodSyntax.SyntaxTree.FilePath;
 
                         c.ReportIssue(Diagnostic.Create(Rule, syntax.GetLocation(),
-                            hidingMethodSyntax.GetLocation().GetLineSpan().StartLinePosition.Line + 1,
+                            hidingMethodSyntax.GetLocation().GetMappedLineSpan().StartLinePosition.Line + 1,
                             isOtherFile
                                 ? $" in file '{new FileInfo(hidingMethodSyntax.SyntaxTree.FilePath).Name}'"
                                 : string.Empty,

@@ -54,7 +54,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                        @code
                        {
                            void Print2(string[] messages) { }
-                           void Print2(string[] messages, string delimiter = "\n") { } // Noncompliant {{This method signature overlaps the one defined on line 78, the default parameter value can't be used.}};
+                           void Print2(string[] messages, string delimiter = "\n") { } // Noncompliant {{This method signature overlaps the one defined on line 3, the default parameter value can't be used.}};
                            //                             ^^^^^^^^^^^^^^^^^^^^^^^
                        }
                        """,
