@@ -27,6 +27,8 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<MethodOverloadOptionalParameter>();
 
+        public TestContext TestContext { get; set; }
+
         [TestMethod]
         public void MethodOverloadOptionalParameter() =>
             builder.AddPaths("MethodOverloadOptionalParameter.cs").AddReferences(MetadataReferenceFacade.NETStandard21).WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
@@ -44,6 +46,21 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void MethodOverloadOptionalParameter_CSharp11() =>
             builder.AddPaths("MethodOverloadOptionalParameter.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+
+        [TestMethod]
+        public void MethodOverloadOptionalParameter_Razor() =>
+            builder.AddSnippet(
+                       """
+                       @code
+                       {
+                           void Print2(string[] messages) { }
+                           void Print2(string[] messages, string delimiter = "\n") { } // Noncompliant {{This method signature overlaps the one defined on line 3, the default parameter value can't be used.}};
+                           //                             ^^^^^^^^^^^^^^^^^^^^^^^
+                       }
+                       """,
+                       "SomeRazorFile.razor")
+                   .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+                   .Verify();
 
 #endif
 
