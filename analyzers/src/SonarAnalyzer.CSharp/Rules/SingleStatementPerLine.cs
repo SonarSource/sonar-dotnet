@@ -21,38 +21,22 @@
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class SingleStatementPerLine : SingleStatementPerLineBase<StatementSyntax>
+    public sealed class SingleStatementPerLine : SingleStatementPerLineBase<SyntaxKind, StatementSyntax>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        protected override bool StatementShouldBeExcluded(StatementSyntax statement)
-        {
-            return StatementIsBlock(statement) ||
-                StatementIsSingleInLambda(statement);
-        }
-
-        private static bool StatementIsSingleInLambda(StatementSyntax st)
-        {
-            if (st.DescendantNodes()
-                .OfType<StatementSyntax>()
-                .Any())
-            {
-                return false;
-            }
-
-            if (!(st.Parent is BlockSyntax parentBlock) ||
-                parentBlock.Statements.Count > 1)
-            {
-                return false;
-            }
-
-            return parentBlock.Parent is AnonymousFunctionExpressionSyntax;
-        }
-
-        private static bool StatementIsBlock(StatementSyntax st) => st is BlockSyntax;
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
+
+        protected override bool StatementShouldBeExcluded(StatementSyntax statement) =>
+            StatementIsBlock(statement) || StatementIsSingleInLambda(statement);
+
+        private static bool StatementIsSingleInLambda(StatementSyntax st) =>
+            !st.DescendantNodes().OfType<StatementSyntax>().Any()
+            && st.Parent is BlockSyntax parentBlock
+            && parentBlock.Statements.Count <= 1
+            && parentBlock.Parent is AnonymousFunctionExpressionSyntax;
+
+        private static bool StatementIsBlock(StatementSyntax st) =>
+            st is BlockSyntax;
     }
 }

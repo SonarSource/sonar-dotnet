@@ -26,6 +26,8 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class SingleStatementPerLineTest
     {
+        public TestContext TestContext { get; set; }
+
         private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.SingleStatementPerLine>();
 
         [TestMethod]
@@ -38,6 +40,21 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void SingleStatementPerLine_CSharp9() =>
             builderCS.AddPaths("SingleStatementPerLine.CSharp9.cs")
                 .WithTopLevelStatements()
+                .Verify();
+
+        [TestMethod]
+        public void SingleStatementPerLine_Razor() =>
+            builderCS.AddSnippet(
+"""
+@if (true) { <p>Test</p> } <!-- Compliant FN -->
+
+@code
+{
+    void DoSomething(bool flag) { if (flag) Console.WriteLine("Test"); } // Noncompliant
+}
+""",
+"SomeRazorFile.razor")
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                 .Verify();
 
 #endif
