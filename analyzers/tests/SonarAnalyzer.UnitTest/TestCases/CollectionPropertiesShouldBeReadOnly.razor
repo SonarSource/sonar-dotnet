@@ -1,0 +1,9 @@
+﻿@page "/Sample"
+@namespace TestSamples
+
+<p>Test</p>
+
+@code {
+    [Parameter]
+    public Dictionary<string, object> Items { get; set; } = new (); // Compliant
+}
