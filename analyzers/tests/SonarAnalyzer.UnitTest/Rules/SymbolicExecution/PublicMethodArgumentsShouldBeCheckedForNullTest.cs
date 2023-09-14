@@ -28,6 +28,8 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class PublicMethodArgumentsShouldBeCheckedForNullTest
     {
+        public TestContext TestContext { get; set; }
+
         private readonly VerifierBuilder sonar = new VerifierBuilder()
             .AddAnalyzer(() => new CS.SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg))
             .WithBasePath(@"SymbolicExecution\Sonar")
@@ -106,6 +108,14 @@ namespace SonarAnalyzer.UnitTest.Rules
             roslynCS.AddPaths("PublicMethodArgumentsShouldBeCheckedForNull.CSharp11.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
                 .Verify();
+
+        [TestMethod]
+        public void PublicMethodArgumentsShouldBeCheckedForNull_Roslyn_Razor() =>
+            roslynCS.AddPaths(
+                "PublicMethodArgumentsShouldBeCheckedForNull.razor",
+                "PublicMethodArgumentsShouldBeCheckedForNull_component.razor")
+                    .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+                    .Verify();
 
 #endif
 
