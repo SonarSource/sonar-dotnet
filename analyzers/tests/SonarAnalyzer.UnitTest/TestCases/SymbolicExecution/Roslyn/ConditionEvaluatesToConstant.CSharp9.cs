@@ -254,16 +254,15 @@ namespace Repro_8011
         Bar
     }
 
-    public class VarWhen
+    public class VarWhen_FP
     {
         public int Test(Flags flags)
         {
             return flags switch
             {
-                var value when value.HasFlag(Flags.Foo) => 1, // Noncompliant FP
+                var value when value.HasFlag(Flags.Foo) => 1, // Noncompliant {{Change this condition so that it does not always evaluate to 'True'.}}
               //^^^^^^^^^
-
-                var value when value.HasFlag(Flags.Bar) => 2, // Noncompliant FP
+                var value when value.HasFlag(Flags.Bar) => 2, // Noncompliant {{Change this condition so that it does not always evaluate to 'True'.}}
               //^^^^^^^^^
                 _ => 0
             };
@@ -278,15 +277,15 @@ namespace Repro_8008
     {
         public int? Age { get; set; }
     }
-    // ...
-    class Double_Wildcard
+
+    class Double_Wildcard_FP
     {
         public int Compare(Person x, Person y) => (x.Age, y.Age) switch
         {
             (null, null) => 0,
             (null, _) => 1,
             (_, null) => -1,
-            (_, _) => Comparer<int>.Default.Compare(x.Age.Value, y.Age.Value) // Noncompliant FP
+            (_, _) => Comparer<int>.Default.Compare(x.Age.Value, y.Age.Value) // Noncompliant {{Change this condition so that it does not always evaluate to 'True'.}}
           //^^^^^^
         };
     }
