@@ -55,10 +55,6 @@ public abstract class PublicMethodArgumentsShouldBeCheckedForNullBase : Symbolic
             || (!symbolState.HasConstraint<ObjectConstraint>() && !symbolState.HasConstraint<ParameterReassignedConstraint>());
     }
 
-    private bool IsInsideRazorGeneratedCode(IOperation candidate) =>
-        GeneratedCodeRecognizer.IsRazorGeneratedFile(candidate.Syntax.SyntaxTree)
-        && candidate.Syntax.TryGetInferredMemberName().Equals("__builder", StringComparison.OrdinalIgnoreCase);
-
     protected override ProgramState PostProcessSimple(SymbolicContext context)
     {
         if (AssignmentTarget(context.Operation.Instance) is { Kind: OperationKindEx.ParameterReference } assignedParameter)
@@ -94,4 +90,8 @@ public abstract class PublicMethodArgumentsShouldBeCheckedForNullBase : Symbolic
         operation.Kind == OperationKindEx.SimpleAssignment
             ? operation.ToAssignment().Target
             : null;
+
+    private static bool IsInsideRazorGeneratedCode(IOperation candidate) =>
+        GeneratedCodeRecognizer.IsRazorGeneratedFile(candidate.Syntax.SyntaxTree)
+        && candidate.Syntax.TryGetInferredMemberName().Equals("__builder", StringComparison.OrdinalIgnoreCase);
 }
