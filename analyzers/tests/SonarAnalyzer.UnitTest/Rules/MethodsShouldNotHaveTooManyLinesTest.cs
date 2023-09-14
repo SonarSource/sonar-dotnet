@@ -26,6 +26,8 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class MethodsShouldNotHaveTooManyLinesTest
     {
+        public TestContext TestContext { get; set; }
+
         [TestMethod]
         public void MethodsShouldNotHaveTooManyLines_DefaultValues_CS() =>
             new VerifierBuilder<CS.MethodsShouldNotHaveTooManyLines>().AddPaths("MethodsShouldNotHaveTooManyLines_DefaultValues.cs").Verify();
@@ -35,6 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             CreateCSBuilder(2).AddPaths("MethodsShouldNotHaveTooManyLines_CustomValues.cs").Verify();
 
 #if NET
+
         [TestMethod]
         public void MethodsShouldNotHaveTooManyLines_LocalFunctions() =>
             CreateCSBuilder(5).AddPaths("MethodsShouldNotHaveTooManyLines.LocalFunctions.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
@@ -77,6 +80,26 @@ i++;")
             .WithOptions(ParseOptionsHelper.FromCSharp9)
             .WithOutputKind(OutputKind.ConsoleApplication)
             .Verify();
+
+        [TestMethod]
+        public void MethodsShouldNotHaveTooManyLines_Razor() =>
+            CreateCSBuilder(2).AddSnippet(
+"""
+@code
+{
+    void LocalFunction(int i) // Noncompliant {{This method 'LocalFunction' has 4 lines, which is greater than the 2 lines authorized. Split it into smaller methods.}}
+    {
+        i++;
+        i++;
+        i++;
+        i++;
+    }
+}
+""",
+"SomeRazorFile.razor")
+                   .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+                   .Verify();
+
 #endif
 
         [TestMethod]
