@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace Tests.Diagnostics
@@ -239,5 +240,53 @@ namespace Repro_5002
                 Console.WriteLine($"D Test");
             }
         }
+    }
+}
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8011
+namespace Repro_8011
+{
+    [Flags]
+    public enum Flags
+    {
+        None,
+        Foo,
+        Bar
+    }
+
+    public class VarWhen_FP
+    {
+        public int Test(Flags flags)
+        {
+            return flags switch
+            {
+                var value when value.HasFlag(Flags.Foo) => 1, // Noncompliant {{Change this condition so that it does not always evaluate to 'True'.}}
+              //^^^^^^^^^
+                var value when value.HasFlag(Flags.Bar) => 2, // Noncompliant {{Change this condition so that it does not always evaluate to 'True'.}}
+              //^^^^^^^^^
+                _ => 0
+            };
+        }
+    }
+}
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8008
+namespace Repro_8008
+{
+    class Person
+    {
+        public int? Age { get; set; }
+    }
+
+    class Double_Wildcard_FP
+    {
+        public int Compare(Person x, Person y) => (x.Age, y.Age) switch
+        {
+            (null, null) => 0,
+            (null, _) => 1,
+            (_, null) => -1,
+            (_, _) => Comparer<int>.Default.Compare(x.Age.Value, y.Age.Value) // Noncompliant {{Change this condition so that it does not always evaluate to 'True'.}}
+          //^^^^^^
+        };
     }
 }
