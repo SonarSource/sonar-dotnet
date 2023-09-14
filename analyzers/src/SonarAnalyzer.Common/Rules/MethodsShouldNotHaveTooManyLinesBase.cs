@@ -20,8 +20,7 @@
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class MethodsShouldNotHaveTooManyLinesBase<TSyntaxKind, TBaseMethodSyntax>
-        : ParametrizedDiagnosticAnalyzer
+    public abstract class MethodsShouldNotHaveTooManyLinesBase<TSyntaxKind, TBaseMethodSyntax> : ParametrizedDiagnosticAnalyzer
         where TSyntaxKind : struct
         where TBaseMethodSyntax : SyntaxNode
     {

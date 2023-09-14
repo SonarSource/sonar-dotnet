@@ -21,12 +21,12 @@
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class MethodsShouldNotHaveTooManyLines
-        : MethodsShouldNotHaveTooManyLinesBase<SyntaxKind, MethodBlockBaseSyntax>
+    public sealed class MethodsShouldNotHaveTooManyLines : MethodsShouldNotHaveTooManyLinesBase<SyntaxKind, MethodBlockBaseSyntax>
     {
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
             VisualBasicGeneratedCodeRecognizer.Instance;

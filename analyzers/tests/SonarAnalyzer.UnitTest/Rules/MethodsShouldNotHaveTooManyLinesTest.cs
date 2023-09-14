@@ -66,20 +66,20 @@ void LocalFunction() // Noncompliant {{This local function has 4 lines, which is
     i++;
     i++;
 }")
-            .WithOptions(ParseOptionsHelper.FromCSharp9)
-            .WithOutputKind(OutputKind.ConsoleApplication)
-            .Verify();
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithOutputKind(OutputKind.ConsoleApplication)
+                .Verify();
 
         [TestMethod]
         public void MethodsShouldNotHaveTooManyLines_CSharp9_Valid() =>
-                        CreateCSBuilder(4).AddSnippet(@"
+            CreateCSBuilder(4).AddSnippet(@"
 int i = 1; i++;
 i++;
 i++;
 i++;")
-            .WithOptions(ParseOptionsHelper.FromCSharp9)
-            .WithOutputKind(OutputKind.ConsoleApplication)
-            .Verify();
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
+                .WithOutputKind(OutputKind.ConsoleApplication)
+                .Verify();
 
         [TestMethod]
         public void MethodsShouldNotHaveTooManyLines_Razor() =>
@@ -97,16 +97,17 @@ i++;")
 }
 """,
 "SomeRazorFile.razor")
-                   .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
-                   .Verify();
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+                .Verify();
 
 #endif
 
         [TestMethod]
         public void MethodsShouldNotHaveTooManyLines_DoesntReportInTest_CS() =>
-            new VerifierBuilder<CS.MethodsShouldNotHaveTooManyLines>().AddPaths("MethodsShouldNotHaveTooManyLines_DefaultValues.cs")
-            .AddTestReference()
-            .VerifyNoIssueReported();
+            new VerifierBuilder<CS.MethodsShouldNotHaveTooManyLines>()
+                .AddPaths("MethodsShouldNotHaveTooManyLines_DefaultValues.cs")
+                .AddTestReference()
+                .VerifyNoIssueReported();
 
         [TestMethod]
         public void MethodsShouldNotHaveTooManyLines_InvalidSyntax_CS() =>
@@ -118,8 +119,8 @@ public class Foo
         return ""f"";
     }
 }")
-            .WithErrorBehavior(CompilationErrorBehavior.Ignore)
-            .Verify();
+                .WithErrorBehavior(CompilationErrorBehavior.Ignore)
+                .Verify();
 
         [DataTestMethod]
         [DataRow(1)]
@@ -140,14 +141,15 @@ public class Foo
         [TestMethod]
         public void MethodsShouldNotHaveTooManyLines_CustomValues_VB() =>
             new VerifierBuilder().AddAnalyzer(() => new VB.MethodsShouldNotHaveTooManyLines { Max = 2 })
-            .AddPaths("MethodsShouldNotHaveTooManyLines_CustomValues.vb")
-            .Verify();
+                .AddPaths("MethodsShouldNotHaveTooManyLines_CustomValues.vb")
+                .Verify();
 
         [TestMethod]
         public void MethodsShouldNotHaveTooManyLines_DoesntReportInTest_VB() =>
-            new VerifierBuilder<VB.MethodsShouldNotHaveTooManyLines>().AddPaths("MethodsShouldNotHaveTooManyLines_DefaultValues.vb")
-            .AddTestReference()
-            .VerifyNoIssueReported();
+            new VerifierBuilder<VB.MethodsShouldNotHaveTooManyLines>()
+                .AddPaths("MethodsShouldNotHaveTooManyLines_DefaultValues.vb")
+                .AddTestReference()
+                .VerifyNoIssueReported();
 
         [DataTestMethod]
         [DataRow(1)]

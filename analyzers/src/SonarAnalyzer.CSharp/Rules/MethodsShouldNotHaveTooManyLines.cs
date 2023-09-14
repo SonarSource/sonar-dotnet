@@ -21,8 +21,7 @@
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class MethodsShouldNotHaveTooManyLines
-        : MethodsShouldNotHaveTooManyLinesBase<SyntaxKind, BaseMethodDeclarationSyntax>
+    public sealed class MethodsShouldNotHaveTooManyLines : MethodsShouldNotHaveTooManyLinesBase<SyntaxKind, BaseMethodDeclarationSyntax>
     {
         private const string LocalFunctionMessageFormat = "{0} local function has {1} lines, which is greater than the {2} lines authorized.";
 
