@@ -33,65 +33,60 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        private sealed class ParameterHidingMethodInfo
-        {
-            public IParameterSymbol ParameterToReportOn { get; init; }
-            public IMethodSymbol HidingMethod { get; init; }
-            public IMethodSymbol HiddenMethod { get; init; }
-        }
-
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSymbolAction(
                 c =>
                 {
                     if (c.Symbol is not IMethodSymbol methodSymbol
-                        || methodSymbol.GetInterfaceMember() is not null
-                        || methodSymbol.GetOverriddenMember() is not null
-                        || !methodSymbol.Parameters.Any(p => p.IsOptional))
+                        || ShouldSkip(methodSymbol))
                     {
                         return;
                     }
 
-                    var methods = methodSymbol.ContainingType.GetMembers(methodSymbol.Name)
-                        .OfType<IMethodSymbol>()
-                        .Where(m => m.TypeParameters.Length == methodSymbol.TypeParameters.Length);
-
-                    var matchingNamedMethods = methods
-                                               .Where(m => m.Parameters.Length < methodSymbol.Parameters.Length)
-                                               .Where(m => !m.Parameters.Any(p => p.IsParams));
-
-                    var hidingInfos = matchingNamedMethods
-                                          .Where(candidateHidingMethod => IsMethodHidingOriginal(candidateHidingMethod, methodSymbol))
-                                          .Where(candidateHidingMethod => methodSymbol.Parameters[candidateHidingMethod.Parameters.Length].IsOptional)
-                                          .Select(candidateHidingMethod => new ParameterHidingMethodInfo
-                                                                           {
-                                                                               ParameterToReportOn = methodSymbol.Parameters[candidateHidingMethod.Parameters.Length],
-                                                                               HiddenMethod = methodSymbol,
-                                                                               HidingMethod = candidateHidingMethod
-                                                                           })
-                                          .ToList();
-
-                    foreach (var hidingInfo in hidingInfos)
+                    foreach (var info in GetParameterHidingInfo(methodSymbol))
                     {
-                        var syntax = hidingInfo.ParameterToReportOn.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax();
-                        if (syntax == null || hidingInfo.HidingMethod.ImplementationSyntax() is not { } hidingMethodSyntax)
-                        {
-                            continue;
-                        }
-                        var defaultCanBeUsed = IsMoreParameterAvailableInConflicting(hidingInfo) || !MethodsUsingSameParameterNames(hidingInfo);
-                        var isOtherFile = syntax.SyntaxTree.FilePath != hidingMethodSyntax.SyntaxTree.FilePath;
-
-                        c.ReportIssue(Diagnostic.Create(Rule, syntax.GetLocation(),
-                            hidingMethodSyntax.GetLocation().GetMappedLineSpan().StartLinePosition.Line + 1,
-                            isOtherFile
-                                ? $" in file '{new FileInfo(hidingMethodSyntax.SyntaxTree.FilePath).Name}'"
-                                : string.Empty,
-                            defaultCanBeUsed
-                                ? "can only be used with named arguments"
-                                : "can't be used"));
+                        ReportIssue(c, info);
                     }
                 },
                 SymbolKind.Method);
+
+        private static void ReportIssue(SonarSymbolReportingContext c, ParameterHidingMethodInfo hidingInfo)
+        {
+            var syntax = hidingInfo.ParameterToReportOn.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax();
+            if (syntax == null || hidingInfo.HidingMethod.ImplementationSyntax() is not { } hidingMethodSyntax)
+            {
+                return;
+            }
+
+            var defaultCanBeUsed = IsMoreParameterAvailableInConflicting(hidingInfo) || !MethodsUsingSameParameterNames(hidingInfo);
+            var isOtherFile = syntax.SyntaxTree.FilePath != hidingMethodSyntax.SyntaxTree.FilePath;
+
+            c.ReportIssue(Diagnostic.Create(Rule, syntax.GetLocation(),
+                hidingMethodSyntax.GetLocation().GetMappedLineSpan().StartLinePosition.Line + 1,
+                isOtherFile
+                    ? $" in file '{new FileInfo(hidingMethodSyntax.SyntaxTree.FilePath).Name}'"
+                    : string.Empty,
+                defaultCanBeUsed
+                    ? "can only be used with named arguments"
+                    : "can't be used"));
+        }
+
+        private static List<ParameterHidingMethodInfo> GetParameterHidingInfo(IMethodSymbol methodSymbol) =>
+            methodSymbol.ContainingType
+                        .GetMembers(methodSymbol.Name)
+                        .OfType<IMethodSymbol>()
+                        .Where(m => m.TypeParameters.Length == methodSymbol.TypeParameters.Length)
+                        .Where(m => m.Parameters.Length < methodSymbol.Parameters.Length)
+                        .Where(m => !m.Parameters.Any(p => p.IsParams))
+                        .Where(candidateHidingMethod => IsMethodHidingOriginal(candidateHidingMethod, methodSymbol))
+                        .Where(candidateHidingMethod => methodSymbol.Parameters[candidateHidingMethod.Parameters.Length].IsOptional)
+                        .Select(candidateHidingMethod => new ParameterHidingMethodInfo
+                                                         {
+                                                             ParameterToReportOn = methodSymbol.Parameters[candidateHidingMethod.Parameters.Length],
+                                                             HiddenMethod = methodSymbol,
+                                                             HidingMethod = candidateHidingMethod
+                                                         })
+                        .ToList();
 
         private static bool MethodsUsingSameParameterNames(ParameterHidingMethodInfo hidingInfo)
         {
@@ -131,6 +126,18 @@ namespace SonarAnalyzer.Rules.CSharp
                 return named1.TypeArguments.SequenceEqual(named2.TypeArguments, AreTypesEqual);
             }
             return false;
+        }
+
+        private static bool ShouldSkip(IMethodSymbol methodSymbol) =>
+            methodSymbol.GetInterfaceMember() is not null
+            || methodSymbol.GetOverriddenMember() is not null
+            || !methodSymbol.Parameters.Any(p => p.IsOptional);
+
+        private sealed class ParameterHidingMethodInfo
+        {
+            public IParameterSymbol ParameterToReportOn { get; init; }
+            public IMethodSymbol HidingMethod { get; init; }
+            public IMethodSymbol HiddenMethod { get; init; }
         }
     }
 }
