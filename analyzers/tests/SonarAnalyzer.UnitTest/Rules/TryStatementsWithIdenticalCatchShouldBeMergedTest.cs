@@ -25,8 +25,42 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class TryStatementsWithIdenticalCatchShouldBeMergedTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<TryStatementsWithIdenticalCatchShouldBeMerged>();
+
+        public TestContext TestContext { get; set; }
+
         [TestMethod]
         public void TryStatementsWithIdenticalCatchShouldBeMerged() =>
-            new VerifierBuilder<TryStatementsWithIdenticalCatchShouldBeMerged>().AddPaths("TryStatementsWithIdenticalCatchShouldBeMerged.cs").Verify();
+            builder.AddPaths("TryStatementsWithIdenticalCatchShouldBeMerged.cs").Verify();
+
+#if NET
+
+        [TestMethod]
+        public void TryStatementsWithIdenticalCatchShouldBeMerged_RazorFile_CorrectMessage() =>
+            builder.AddSnippet(
+                """
+                @using System;
+                @code
+                {
+                    public void Method()
+                    {
+                        try { }
+                        catch (Exception)
+                        {
+                        }
+                        finally { }
+
+                        try { } // Noncompliant {{Combine this 'try' with the one starting on line 6.}}
+                        catch (Exception)
+                        {
+                        }
+                        finally { }
+                    }
+                }
+                """,
+                "SomeRazorFile.razor")
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+            .Verify();
+#endif
     }
 }

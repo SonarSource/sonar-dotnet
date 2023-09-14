@@ -29,6 +29,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ConditionalStructureSameImplementation>();
         private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.ConditionalStructureSameImplementation>();
 
+        public TestContext TestContext { get; set; }
+
         [TestMethod]
         public void ConditionalStructureSameImplementation_If_CSharp() =>
             builderCS.AddPaths("ConditionalStructureSameImplementation_If.cs").Verify();
@@ -44,5 +46,36 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void ConditionalStructureSameImplementation_Switch_VisualBasic() =>
             builderVB.AddPaths("ConditionalStructureSameImplementation_Switch.vb").Verify();
+
+#if NET
+
+        [TestMethod]
+        public void ConditionalStructureSameImplementation_RazorFile_CorrectMessage() =>
+            builderCS.AddSnippet(
+                """
+                @code
+                {
+                    public bool someCondition1 { get; set; }
+                    public void DoSomething1() { }
+
+                    public void Method()
+                    {
+                        if (someCondition1)
+                        { // Secondary
+                            DoSomething1();
+                            DoSomething1();
+                        }
+                        else
+                        { // Noncompliant {{Either merge this branch with the identical one on line 9 or change one of the implementations.}}
+                            DoSomething1();
+                            DoSomething1();
+                        }
+                    }
+                }
+                """,
+                "SomeRazorFile.razor")
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+            .Verify();
+#endif
     }
 }
