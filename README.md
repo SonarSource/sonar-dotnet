@@ -8,14 +8,14 @@
 |Plugin|[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=org.sonarsource.dotnet%3Asonar-dotnet&metric=alert_status)](https://sonarcloud.io/dashboard?id=org.sonarsource.dotnet%3Asonar-dotnet)|[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=org.sonarsource.dotnet%3Asonar-dotnet&metric=coverage)](https://sonarcloud.io/component_measures?id=org.sonarsource.dotnet%3Asonar-dotnet&metric=coverage)|
 
 [Static analysis](https://en.wikipedia.org/wiki/Static_program_analysis) of C# and VB.NET
-languages in [SonarQube](http://www.sonarqube.org/), [SonarCloud](https://sonarcloud.io) and [SonarLint](https://www.sonarlint.org/) code quality and security products. These Roslyn analyzers allow you to produce safe, reliable and maintainable code by helping you find and correct bugs, vulnerabilities and code smells in your codebase.
+languages in [SonarQube](https://www.sonarsource.com/products/sonarqube), [SonarCloud](https://www.sonarsource.com/products/sonarcloud) and [SonarLint](https://www.sonarsource.com/products/sonarlint) code quality and security products. These Roslyn analyzers allow you to produce [Clean Code](https://www.sonarsource.com/solutions/clean-code/) that is safe, reliable, and maintainable by helping you find and correct bugs, vulnerabilities, and code smells in your codebase.
 
 ## Features
 
 * [430+ C# rules](https://rules.sonarsource.com/csharp) and [210+ VB.&#8203;NET rules](https://rules.sonarsource.com/vbnet)
-* Metrics (cognitive complexity, duplications, number of lines etc.)
+* Metrics (cognitive complexity, duplications, number of lines, etc.)
 * Import of [test coverage reports](https://community.sonarsource.com/t/9871) from Visual Studio Code Coverage, dotCover, OpenCover, Coverlet, Altcover.
-* Import of third party Roslyn Analyzers results
+* Import of third-party Roslyn Analyzers results
 * Support for [custom rules](https://github.com/SonarSource/sonarqube-roslyn-sdk)
 
 ## Useful public resources
@@ -38,7 +38,7 @@ languages in [SonarQube](http://www.sonarqube.org/), [SonarCloud](https://sonarc
 
 ## Do you have a question or feedback?
 
-* Contact us on [our Community Forum](https://community.sonarsource.com/) to provide feedback, ask for help, request new rules or features.
+* Contact us on [our Community Forum](https://community.sonarsource.com/) to provide feedback, ask for help, and request new rules or features.
 * [Create a GitHub Issue](https://github.com/SonarSource/sonar-dotnet/issues/new/choose) if you've found a bug, False-Positive or False-Negative. 
 
 ## Get started
@@ -93,7 +93,7 @@ your Roslyn analyzer in a SonarQube plugin, if you want to manage your rules fro
 
 ### SonarQube / SonarCloud and SonarLint in Connected Mode
 
-Open the rule in SonarQube / SonarCloud, scroll down and (in case the rule has parameters), you can configure the parameters for each Quality Profile the rule is part of.
+Open the rule in SonarQube / SonarCloud, scroll down, and (in case the rule has parameters), you can configure the parameters for each Quality Profile the rule is part of.
 
 Use SonarLint Connected Mode to connect to SonarQube and SonarCloud.
 
@@ -112,7 +112,7 @@ See: https://learn.microsoft.com/en-us/visualstudio/code-quality/use-roslyn-anal
 
 If the rules are parameterized, the parameter values can be changed using `SonarLint.xml` additional files.
 
-First step is to create a new file, named `SonarLint.xml`, that has the following structure:
+The first step is to create a new file, named `SonarLint.xml`, that has the following structure:
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <AnalysisInput xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
