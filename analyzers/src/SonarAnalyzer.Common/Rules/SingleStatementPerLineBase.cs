@@ -22,20 +22,16 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class SingleStatementPerLineBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+    public abstract class SingleStatementPerLineBase<TSyntaxKind, TStatementSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
+        where TStatementSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S122";
         protected override string MessageFormat => "Reformat the code to have only one statement per line.";
 
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
-        protected SingleStatementPerLineBase() : base(DiagnosticId) { }
-    }
+        protected abstract bool StatementShouldBeExcluded(TStatementSyntax statement);
 
-    public abstract class SingleStatementPerLineBase<TSyntaxKind, TStatementSyntax> : SingleStatementPerLineBase<TSyntaxKind>
-        where TSyntaxKind : struct
-        where TStatementSyntax : SyntaxNode
-    {
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterTreeAction(
                 GeneratedCodeRecognizer,
@@ -60,7 +56,7 @@ namespace SonarAnalyzer.Rules
                     }
                 });
 
-        protected abstract bool StatementShouldBeExcluded(TStatementSyntax statement);
+        protected SingleStatementPerLineBase() : base(DiagnosticId) { }
 
         private static Location CalculateLocationForLine(TextLine line, SyntaxTree tree, ICollection<TStatementSyntax> statements)
         {

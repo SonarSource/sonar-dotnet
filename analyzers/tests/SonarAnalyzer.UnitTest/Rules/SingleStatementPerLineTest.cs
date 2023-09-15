@@ -46,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void SingleStatementPerLine_Razor() =>
             builderCS.AddSnippet(
 """
-@if (true) { <p>Test</p> } <!-- Compliant FN -->
+@if (true) { @if (true) { <p>Test</p> }} <!-- FN -->
 
 @code
 {
