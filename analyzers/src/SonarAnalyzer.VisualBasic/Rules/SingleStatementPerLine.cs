@@ -37,22 +37,22 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         private static bool StatementIsBlock(StatementSyntax st) =>
             st is NamespaceBlockSyntax
-            || st is TypeBlockSyntax
-            || st is EnumBlockSyntax
-            || st is MethodBlockBaseSyntax
-            || st is PropertyBlockSyntax
-            || st is EventBlockSyntax
-            || st is DoLoopBlockSyntax
-            || st is WhileBlockSyntax
-            || st is ForOrForEachBlockSyntax
-            || st is MultiLineIfBlockSyntax
-            || st is ElseStatementSyntax
-            || st is SyncLockBlockSyntax
-            || st is TryBlockSyntax
-            || st is UsingBlockSyntax
-            || st is WithBlockSyntax
-            || st is MethodBaseSyntax
-            || st is InheritsOrImplementsStatementSyntax
-            || st is SelectBlockSyntax;
+            or TypeBlockSyntax
+            or EnumBlockSyntax
+            or MethodBlockBaseSyntax
+            or PropertyBlockSyntax
+            or EventBlockSyntax
+            or DoLoopBlockSyntax
+            or WhileBlockSyntax
+            or ForOrForEachBlockSyntax
+            or MultiLineIfBlockSyntax
+            or ElseStatementSyntax
+            or SyncLockBlockSyntax
+            or TryBlockSyntax
+            or UsingBlockSyntax
+            or WithBlockSyntax
+            or MethodBaseSyntax
+            or InheritsOrImplementsStatementSyntax
+            or SelectBlockSyntax;
     }
 }
