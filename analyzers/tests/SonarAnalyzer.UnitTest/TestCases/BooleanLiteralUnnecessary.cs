@@ -222,4 +222,13 @@ namespace Tests.Diagnostics
     {
         public bool? IsStateValid { get; set; }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/7999
+    class Repro7999CodeFixError
+    {
+        void Method(bool cond)
+        {
+            if (cond == false) { } // Noncompliant, TP but code fix is wrong - it should be fixed to "if (!cond)"
+        }
+    }
 }
