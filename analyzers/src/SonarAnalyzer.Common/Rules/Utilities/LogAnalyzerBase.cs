@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Protobuf;
 
 namespace SonarAnalyzer.Rules
@@ -45,7 +46,7 @@ namespace SonarAnalyzer.Rules
 
         protected sealed override LogInfo CreateMessage(SyntaxTree tree, SemanticModel model, ImmutableSortedSet<LineDirectiveEntry> lineDirectiveMap) =>
             tree.IsGenerated(Language.GeneratedCodeRecognizer, model.Compilation)
-            ? new LogInfo { Severity = LogSeverity.Debug, Text = $"File '{syntaxTree.FilePath}' was recognized as generated" }
+            ? CreateMessage(tree)
             : null;
 
         private static LogInfo CreateMessage(SyntaxTree tree) =>
