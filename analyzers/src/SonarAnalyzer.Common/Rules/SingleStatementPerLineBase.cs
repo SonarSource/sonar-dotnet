@@ -32,6 +32,8 @@ namespace SonarAnalyzer.Rules
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
         protected abstract bool StatementShouldBeExcluded(TStatementSyntax statement);
 
+        protected SingleStatementPerLineBase() : base(DiagnosticId) { }
+
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterTreeAction(
                 GeneratedCodeRecognizer,
@@ -55,8 +57,6 @@ namespace SonarAnalyzer.Rules
                         c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], location));
                     }
                 });
-
-        protected SingleStatementPerLineBase() : base(DiagnosticId) { }
 
         private static Location CalculateLocationForLine(TextLine line, SyntaxTree tree, ICollection<TStatementSyntax> statements)
         {
