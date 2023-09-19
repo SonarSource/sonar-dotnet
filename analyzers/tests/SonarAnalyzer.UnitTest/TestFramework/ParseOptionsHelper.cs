@@ -39,6 +39,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static ImmutableArray<ParseOptions> BeforeCSharp9 { get; }
         public static ImmutableArray<ParseOptions> BeforeCSharp10 { get; }
         public static ImmutableArray<ParseOptions> BeforeCSharp11 { get; }
+        public static ImmutableArray<ParseOptions> BeforeCSharp12 { get; }
 
         public static ImmutableArray<ParseOptions> FromCSharp6 { get; }
         public static ImmutableArray<ParseOptions> FromCSharp7 { get; }
@@ -46,6 +47,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static ImmutableArray<ParseOptions> FromCSharp9 { get; }
         public static ImmutableArray<ParseOptions> FromCSharp10 { get; }
         public static ImmutableArray<ParseOptions> FromCSharp11 { get; }
+        public static ImmutableArray<ParseOptions> FromCSharp12 { get; }
         public static ImmutableArray<ParseOptions> CSharpPreview { get; }
 
         public static ImmutableArray<ParseOptions> CSharpLatest { get; }
@@ -63,6 +65,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         static ParseOptionsHelper()
         {
+            var cs11 = CreateOptions(CSharp11);
             var cs10 = CreateOptions(CSharp10);
             var cs9 = CreateOptions(CSharp9);
             var cs8 = CreateOptions(CSharp8);
@@ -74,8 +77,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             BeforeCSharp9 = BeforeCSharp8.Concat(cs8).FilterByEnvironment();
             BeforeCSharp10 = BeforeCSharp9.Concat(cs9).FilterByEnvironment();
             BeforeCSharp11 = BeforeCSharp10.Concat(cs10).FilterByEnvironment();
+            BeforeCSharp12 = BeforeCSharp11.Concat(cs11).FilterByEnvironment();
 
-            FromCSharp11 = CreateOptions(CSharp11).FilterByEnvironment();
+            FromCSharp12 = CreateOptions(Preview).FilterByEnvironment();
+            FromCSharp11 = cs11.Concat(FromCSharp12).FilterByEnvironment();
             FromCSharp10 = cs10.Concat(FromCSharp11).FilterByEnvironment();
             FromCSharp9 = cs9.Concat(FromCSharp10).FilterByEnvironment();
             FromCSharp8 = cs8.Concat(FromCSharp9).FilterByEnvironment();
