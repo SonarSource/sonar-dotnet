@@ -46,8 +46,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void SingleStatementPerLine_Razor() =>
             builderCS.AddSnippet(
 """
-@if (true) { @if (true) { @currentCount }} <!-- FN -->
-@if (true) { @if (true) { <p>Test</p> }} <!-- FN -->
+@if (true) { @currentCount } <!-- FN -->
+@if (true) { <p>Test</p> } <!-- FN -->
 
 @code
 {
