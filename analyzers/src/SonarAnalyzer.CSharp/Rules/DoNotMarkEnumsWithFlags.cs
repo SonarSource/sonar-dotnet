@@ -26,22 +26,21 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S4070";
         private const string MessageFormat = "Remove the 'FlagsAttribute' from this enum.";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterNodeAction(
                 c =>
                 {
                     var enumDeclaration = (EnumDeclarationSyntax)c.Node;
                     var enumSymbol = c.SemanticModel.GetDeclaredSymbol(enumDeclaration);
 
-                    if (!enumDeclaration.HasFlagsAttribute(c.SemanticModel) ||
-                        enumDeclaration.Identifier.IsMissing ||
-                        enumSymbol == null)
+                    if (!enumDeclaration.HasFlagsAttribute(c.SemanticModel)
+                        || enumDeclaration.Identifier.IsMissing
+                        || enumSymbol == null)
                     {
                         return;
                     }
@@ -57,41 +56,29 @@ namespace SonarAnalyzer.Rules.CSharp
                         .Distinct()
                         .ToList();
 
-                    var invalidMembers = membersWithValues.Where(tuple => IsInvalidFlagValue(tuple.Value, allValues))
+                    var invalidMembers = membersWithValues.Where(tuple => !IsValidFlagValue(tuple.Value, allValues))
                         .Select(tuple => tuple.Member.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax().GetLocation())
                         .WhereNotNull()
                         .ToList();
 
                     if (invalidMembers.Count > 0)
                     {
-                        c.ReportIssue(rule.CreateDiagnostic(c.Compilation, enumDeclaration.Identifier.GetLocation(), additionalLocations: invalidMembers));
+                        c.ReportIssue(Rule.CreateDiagnostic(c.Compilation, enumDeclaration.Identifier.GetLocation(), additionalLocations: invalidMembers));
                     }
                 }, SyntaxKind.EnumDeclaration);
-        }
 
-        private static ulong? GetEnumValueOrDefault(IFieldSymbol enumMember)
-        {
-            // The idea of this method is to get rid of invalid values for flags such as negative values and decimals
-            if (!enumMember.HasConstantValue ||
-                !ulong.TryParse(enumMember.ConstantValue.ToString(), out var longValue))
-            {
-                return null;
-            }
+        // The idea of this method is to get rid of invalid values for flags such as negative values and decimals
+        private static ulong? GetEnumValueOrDefault(IFieldSymbol enumMember) =>
+            enumMember.HasConstantValue && ulong.TryParse(enumMember.ConstantValue.ToString(), out var longValue)
+                ? longValue
+                : null;
 
-            return longValue;
-        }
+        private static bool IsValidFlagValue(ulong? enumValue, List<ulong> allValues) =>
+            enumValue.HasValue && (IsZeroOrPowerOfTwo(enumValue.Value) || IsCombinationOfOtherValues(enumValue.Value, allValues));
 
-        private static bool IsInvalidFlagValue(ulong? enumValue, List<ulong> allValues)
-        {
-            return !enumValue.HasValue ||
-                (!IsZeroOrPowerOfTwo(enumValue.Value) && !IsCombinationOfOtherValues(enumValue.Value, allValues));
-        }
-
-        private static bool IsZeroOrPowerOfTwo(ulong value)
-        {
-            // See https://stackoverflow.com/questions/600293/how-to-check-if-a-number-is-a-power-of-2
-            return (value & (value - 1)) == 0;
-        }
+        // See https://stackoverflow.com/questions/600293/how-to-check-if-a-number-is-a-power-of-2
+        private static bool IsZeroOrPowerOfTwo(ulong value) =>
+            (value & (value - 1)) == 0;
 
         private static bool IsCombinationOfOtherValues(ulong value, List<ulong> otherValues)
         {

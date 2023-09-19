@@ -102,6 +102,6 @@ namespace Tests.Diagnostics
     public enum Repro_7991 // Noncompliant FP
     {
         None = 0,
-        Red = 1 << 31
+        Red = 1 << 31 // Secondary
     }
 }
