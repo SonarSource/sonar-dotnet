@@ -96,4 +96,12 @@ namespace Tests.Diagnostics
         N3 = N1 | N2,
         N5 = 5 // Secondary
     }
+
+    // Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/7991
+    [FlagsAttribute]
+    public enum Repro_7991 // Noncompliant FP
+    {
+        None = 0,
+        Red = 1 << 31
+    }
 }
