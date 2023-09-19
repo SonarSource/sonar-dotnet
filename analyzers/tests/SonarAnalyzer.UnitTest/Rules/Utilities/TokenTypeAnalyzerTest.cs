@@ -86,7 +86,9 @@ namespace SonarAnalyzer.UnitTest.Rules
                         orderedTokens[1].TokenInfo
                             .GroupBy(x => (x.TextRange.StartLine, x.TextRange.EndLine))
                             .ToDictionary(x => x.Key, x => string.Join(string.Empty, x.Select(y => TokenTypeAcronyms[y.TokenType])))
-                            .Should().Contain((41, 41), "k")
+                            .Should()
+                                // Razor directives including C# Tokens
+                                .Contain((41, 41), "k")
                                 .And.Contain((42, 42), "k")
                                 .And.Contain((43, 43), "k")
                                 .And.Contain((44, 44), "ktt")
@@ -107,19 +109,35 @@ namespace SonarAnalyzer.UnitTest.Rules
                                 .And.Contain((70, 70), "c")
                                 .And.Contain((71, 73), "c")
                                 .And.Contain((74, 74), "c")
+                                // Implicit Razor expressions including C# Tokens
                                 .And.Contain((84, 84), "t")
                                 .And.Contain((85, 85), "tn")
                                 .And.Contain((86, 86), "kkk")
                                 .And.Contain((87, 87), "t")
+                                // Explicit Razor expressions including C# Tokens
                                 .And.Contain((91, 91), "nn")
                                 .And.Contain((92, 92), "nn")
                                 .And.Contain((93, 93), "ttn")
+                                // Razor code blocks
                                 .And.Contain((98, 98), "kn")
                                 .And.Contain((99, 99), "kn")
                                 .And.Contain((100, 100), "kn")
-                                .And.Contain((106, 106), "c")
-                                .And.Contain((107, 107), "c")
-                                .And.Contain((108, 108), "c");
+                                // Single-level nesting with templated Razor delegates
+                                .And.Contain((106, 106), "nnn")
+                                .And.Contain((107, 107), "sssns")
+                                .And.Contain((107, 109), "s")
+                                .And.Contain((109, 109), "s")
+                                .And.Contain((110, 110), "n")
+                                .And.Contain((111, 111), "s")
+                                .And.Contain((112, 112), "k")
+                                .And.Contain((113, 113), "k")
+                                .And.Contain((114, 114), "nc")
+                                .And.Contain((115, 116), "cc")
+                                .And.Contain((116, 116), "c")
+                                // Multi-level nesting with templated Razor delegates
+                                .And.Contain((123, 123), "nnn")
+                                .And.Contain((124, 124), "sssnsssns")
+                                .And.Contain((124, 124), "cc");
                     });
         }
 

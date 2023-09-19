@@ -100,16 +100,34 @@
     var someVarAssignedToANumericLiteral3 = 34.0123f;
 }
 
-<!-- Nesting with templated Razor delegates -->
+<!-- Single-level nesting with templated Razor delegates -->
 
 @{
-    // FIXME
-    //Func<dynamic, object> x1 = @<p>nested <b>rendered</b> text</p>;
-    //x1 = @<p>nested <b>@"rendered"</b> text</p>;
+    @<p>Nested numbers: <strong>@(1 + 2.0 + 3f)</strong>.</p>;
+    @<p>Nested strings: <strong>@("1" + @"2" + $"{3}" + """
+        4
+        """ + $$"""
+        {{5}}
+        """)</strong>.</p>;
+    @<p>Nested keywords: <strong>@(default(
+        int))</strong>.</p>;
+    @<p>Nested comments: <strong>@(1 // A line comment
+        /* A multiline
+         * comment *//* A second comment, right after */)</strong>.</p>;
+}
+
+<!-- Multi-level nesting with templated Razor delegates -->
+@{
+    @<p>1st level nesting: <strong>@(
+        @<p>2nd level nesting: <strong>@(
+            1 + 2.0 + 3f +
+            int.Parse("1" + @"2" + $"{3}" + """4""" + $$"""{{5}}""")
+            /*A comment*/// A second comment, right after
+        )</strong>.</p>
+    )</strong>.</p>;
 }
 
 <!-- FIXME: add the following scenarios:
- - Nesting: more cases
  - <p>@@await AnAsyncMethod("hello", """world""", $@"{42}")</p>
  - @@bind:culture
  - @@on{EVENT}
