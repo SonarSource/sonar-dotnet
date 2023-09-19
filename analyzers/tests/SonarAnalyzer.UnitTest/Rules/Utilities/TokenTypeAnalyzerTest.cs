@@ -66,10 +66,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow("Razor.razor")]
         [DataRow("Razor.cshtml")]
-        public void Verify_NoMetricsAreComputedForRazorFiles(string fileName) =>
+        public void Verify_MetricsAreComputedForRazorFiles(string fileName) =>
             CreateBuilder(ProjectType.Product, fileName)
                 .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
-                .VerifyUtilityAnalyzer<TokenTypeInfo>(messages => messages.Select(x => Path.GetFileName(x.FilePath)).Should().BeEmpty());
+                .VerifyUtilityAnalyzer<TokenTypeInfo>(messages => messages.Select(x => Path.GetFileName(x.FilePath)).Should().NotBeEmpty());
 
         [TestMethod]
         public void Verify_Razor()
