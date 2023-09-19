@@ -68,14 +68,14 @@
     public async Task<string> AnAsyncMethod(string s1, string s2, string s3) => await Task.FromResult("42");
 
     // A comment
-    /*
+     /*
      * A multi-line comment
-     */
+    */
     // A comment with Razor directives: @code { }
 
     #region ARegion
-        #if false
-        #endif
+#if false
+#endif
     #endregion
 }
 
@@ -84,7 +84,7 @@
 <p>@DateTime.Now</p>
 <p>@DateTime.IsLeapYear(2016)</p>
 <p id=@aStaticField>@nameof(int.MaxValue)@typeof(int).ToString()</p>
-<p>Last week: @DateTime.Now - TimeSpan.FromDays(7)</p>              <!-- Spaces not supported -->
+<p>Last week: @DateTime.Now - TimeSpan.FromDays(7)</p>
 
 <!-- Explicit Razor expressions including C# Tokens -->
 
@@ -100,38 +100,63 @@
     var someVarAssignedToANumericLiteral3 = 34.0123f;
 }
 
-<!-- Single-level nesting with templated Razor delegates -->
+<!-- Single-level nested Razor expressions -->
 
 @{
-    @<p>Nested numbers: <strong>@(1 + 2.0 + 3f)</strong>.</p>;
-    @<p>Nested strings: <strong>@("1" + @"2" + $"{3}" + """
-        4
-        """ + $$"""
-        {{5}}
-        """)</strong>.</p>;
-    @<p>Nested keywords: <strong>@(default(
-        int))</strong>.</p>;
-    @<p>Nested comments: <strong>@(1 // A line comment
-        /* A multiline
-         * comment *//* A second comment, right after */)</strong>.</p>;
+    <p>Nested numbers: <strong>@(1 + 2.0 + 3f)<!-- An html comment --></strong>.</p>;
+    <p>Nested strings: <strong>@("1" + @"2" + $"{3}" + """4""" + $$"""{{5}}""")</strong>.</p>;
+    <p>Nested keywords: <strong>@(default(int))</strong>.</p>;
+    <p>Nested comments: <strong>@(1 // A line comment
+        /* A second comment, right after */)</strong>.</p>;
+    <p>Nested type name: <strong>@(DateTime.MinValue)</strong>.</p>;
 }
 
-<!-- Multi-level nesting with templated Razor delegates -->
+<!-- Multi-level nested Razor expressions in statements -->
 @{
-    @<p>1st level nesting: <strong>@(
-        @<p>2nd level nesting: <strong>@(
-            1 + 2.0 + 3f +
-            int.Parse("1" + @"2" + $"{3}" + """4""" + $$"""{{5}}""")
-            /*A comment*/// A second comment, right after
-        )</strong>.</p>
-    )</strong>.</p>;
+    <div>1st level nesting: @{<div>2nd level nesting: @(1 + 2.0 + 3f).<!-- An html comment --></div>}.</div>
+    <div>1st level nesting: @{<div>2nd level nesting: @("1" + @"2" + $"{3}" + """4""" + $$"""{{5}}""").</div>}.</div>
+    <div>1st level nesting: @{<div>2nd level nesting: @(default(int)).</div>}.</div>
+    <div>1st level nesting: @{<div>2nd level nesting: @(1 // A line comment
+        /* A second comment, right after */).</div>}.</div>
+    <div>1st level nesting: @{<div>2nd level nesting: @(DateTime.MinValue).</div>}.</div>
 }
 
-<!-- FIXME: add the following scenarios:
- - <p>@@await AnAsyncMethod("hello", """world""", $@"{42}")</p>
- - @@bind:culture
- - @@on{EVENT}
- - @@on{EVENT}:preventDefault
- - @@key
- - @@ref
--->
+<!-- Bind, on{EVENT} -->
+<p>
+    <input @bind="aBoundField /* a C# comment */"/>
+    <button
+        @onclick="UpdateBoundField /* a C# comment */"
+        @onclick:stopPropagation="stopPropagationBoundField /* a C# comment */ /* another C# comment */"
+        @onkeydown:preventDefault>Update bound field 1 <!-- An html comment --></button>
+</p>
+
+@code {
+    private String aBoundField = "42";
+    private bool stopPropagationBoundField = false;
+
+    private void UpdateBoundField() { }
+}
+
+<!-- Async await -->
+@{
+    async Task<string> UpdateBoundFieldAsync()
+    {
+        <p>@await UpdateBoundFieldAsync()</p>
+        return await Task.FromResult("42");
+    }
+}
+
+<!-- Explicit line transitions -->
+@{
+    @:var x = 3;
+}
+
+<!-- Razor keys -->
+<ul><li @key="aKeyField /* a C# comment */"></li></ul>
+
+@code {
+    private string aKeyField = "42";
+}
+
+<!-- Razor comments -->
+@* Razor comment, not C# comment *@

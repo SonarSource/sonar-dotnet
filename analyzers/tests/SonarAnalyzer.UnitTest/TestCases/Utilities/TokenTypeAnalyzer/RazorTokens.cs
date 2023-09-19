@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TestCases;
+namespace TestCases; // Referenced in RazorTokens.razor file
 
 public class ToDo : IDisposable
 {

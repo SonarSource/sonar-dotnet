@@ -113,7 +113,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                                 .And.Contain((84, 84), "t")
                                 .And.Contain((85, 85), "tn")
                                 .And.Contain((86, 86), "kkk")
-                                .And.Contain((87, 87), "t")
+                                .And.Contain((87, 87), "t")     // Spaces only supported by "@await"
                                 // Explicit Razor expressions including C# Tokens
                                 .And.Contain((91, 91), "nn")
                                 .And.Contain((92, 92), "nn")
@@ -122,22 +122,38 @@ namespace SonarAnalyzer.UnitTest.Rules
                                 .And.Contain((98, 98), "kn")
                                 .And.Contain((99, 99), "kn")
                                 .And.Contain((100, 100), "kn")
-                                // Single-level nesting with templated Razor delegates
-                                .And.Contain((106, 106), "nnn")
-                                .And.Contain((107, 107), "sssns")
-                                .And.Contain((107, 109), "s")
-                                .And.Contain((109, 109), "s")
-                                .And.Contain((110, 110), "n")
-                                .And.Contain((111, 111), "s")
-                                .And.Contain((112, 112), "k")
-                                .And.Contain((113, 113), "k")
-                                .And.Contain((114, 114), "nc")
-                                .And.Contain((115, 116), "cc")
-                                .And.Contain((116, 116), "c")
-                                // Multi-level nesting with templated Razor delegates
-                                .And.Contain((123, 123), "nnn")
-                                .And.Contain((124, 124), "sssnsssns")
-                                .And.Contain((124, 124), "cc");
+                                // Single-level nested Razor expressions
+                                .And.Contain((106, 106), "nnn") // HTML comments are not C# comments
+                                .And.Contain((107, 107), "sssnsssns")
+                                .And.Contain((108, 108), "kk")
+                                .And.Contain((109, 109), "nc")
+                                .And.Contain((110, 110), "c")
+                                .And.Contain((111, 111), "t")
+                                // Multi-level nested Razor expressions in statements
+                                .And.Contain((116, 116), "nnn") // HTML comments are not C# comments
+                                .And.Contain((117, 117), "sssnsssns")
+                                .And.Contain((118, 118), "kk")
+                                .And.Contain((119, 119), "nc")
+                                .And.Contain((120, 120), "c")
+                                .And.Contain((121, 121), "t")
+                                // Bind, on{EVENT}
+                                .And.Contain((126, 126), "c")   // "@bind" is a Razor token, but its value is C#
+                                .And.Contain((128, 128), "c")   // "@onclick" is a Razor token, but its value is C#
+                                .And.Contain((129, 129), "cc")  // "@onclick:stopPropagation" is a Razor token, but its value is C#
+                                .And.NotContainKey((130, 130))  // HTML comments are not C# comments
+                                .And.Contain((134, 134), "kts")
+                                .And.Contain((135, 135), "kkk")
+                                .And.Contain((137, 137), "kk")
+                                // Async await
+                                .And.Contain((142, 142), "ktk")
+                                .And.Contain((144, 144), "k")   // "@await" is a C# token, transitioning to C# (whitespace allowed after it)
+                                .And.Contain((145, 145), "kkts")
+                                // Explicit line transitions
+                                .And.NotContainKey((151, 151))  // What follows "@:" is HTML
+                                // Razor keys
+                                .And.Contain((155, 155), "c")   // "@key" is a Razor token
+                                // Razor comments
+                                .And.NotContainKey((162, 162)); // Razor comments are not C# comments
                     });
         }
 
