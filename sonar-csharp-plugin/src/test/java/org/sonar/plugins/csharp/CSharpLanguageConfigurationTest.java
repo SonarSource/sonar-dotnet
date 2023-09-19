@@ -19,7 +19,7 @@
  */
 package org.sonar.plugins.csharp;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.api.config.Configuration;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -28,10 +28,10 @@ import static org.mockito.Mockito.when;
 
 import java.util.Optional;
 
-public class CSharpLanguageConfigurationTest {
+class CSharpLanguageConfigurationTest {
 
   @Test
-  public void reads_correct_language() {
+  void reads_correct_language() {
     Configuration configuration = mock(Configuration.class);
     when(configuration.getStringArray("sonar.cs.roslyn.bugCategories")).thenReturn(new String[] {"C#"});
     when(configuration.getStringArray("sonar.vbnet.roslyn.bugCategories")).thenReturn(new String[] {"VB.NET"});
@@ -41,7 +41,7 @@ public class CSharpLanguageConfigurationTest {
   }
 
   @Test
-  public void whenSettingIsTrue_analyzeRazorCode_returnsTrue() {
+  void whenSettingIsTrue_analyzeRazorCode_returnsTrue() {
     Configuration configuration = mock(Configuration.class);
     when(configuration.getBoolean("sonar.cs.analyzeRazorCode")).thenReturn(Optional.of(true));
 
@@ -51,7 +51,7 @@ public class CSharpLanguageConfigurationTest {
   }
 
   @Test
-  public void whenSettingIsFalse_analyzeRazorCode_returnsFalse() {
+  void whenSettingIsFalse_analyzeRazorCode_returnsFalse() {
     Configuration configuration = mock(Configuration.class);
     when(configuration.getBoolean("sonar.cs.analyzeRazorCode")).thenReturn(Optional.of(false));
 
@@ -61,7 +61,7 @@ public class CSharpLanguageConfigurationTest {
   }
 
   @Test
-  public void whenSettingIsEmpty_analyzeRazorCode_returnsTrue() {
+  void whenSettingIsEmpty_analyzeRazorCode_returnsTrue() {
     Configuration configuration = mock(Configuration.class);
     when(configuration.getBoolean("sonar.cs.analyzeRazorCode")).thenReturn(Optional.empty());
 

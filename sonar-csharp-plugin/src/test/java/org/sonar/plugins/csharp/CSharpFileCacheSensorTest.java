@@ -19,13 +19,10 @@
  */
 package org.sonar.plugins.csharp;
 
-import java.io.File;
-import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
+import org.junit.jupiter.api.io.TempDir;
+import org.slf4j.event.Level;
 import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
 import org.sonar.api.SonarRuntime;
@@ -35,44 +32,42 @@ import org.sonar.api.batch.sensor.cache.WriteCache;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.internal.SonarRuntimeImpl;
-import org.sonar.api.testfixtures.log.LogTester;
+import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonar.api.utils.Version;
-import org.slf4j.event.Level;
 import org.sonarsource.dotnet.shared.plugins.HashProvider;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.security.NoSuchAlgorithmException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class CSharpFileCacheSensorTest {
+class CSharpFileCacheSensorTest {
   private static final SonarRuntime RUNTIME_WITH_ANALYSIS_CACHE = SonarRuntimeImpl.forSonarQube(Version.create(9, 4), SonarQubeSide.SERVER, SonarEdition.COMMUNITY);
 
-  @Rule
-  public TemporaryFolder temp = new TemporaryFolder();
+  @TempDir
+  public Path basePath;
 
-  @Rule
-  public LogTester logTester = new LogTester();
-
-  @Before
-  public void before() {
-    logTester.setLevel(Level.TRACE);
-  }
+  @RegisterExtension
+  public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
 
   @Test
-  public void execute_whenCacheIsEnabled_itAddsOnlyTheLanguageFiles() throws IOException, NoSuchAlgorithmException {
-    var basePath = temp.newFolder();
+  void execute_whenCacheIsEnabled_itAddsOnlyTheLanguageFiles() throws IOException, NoSuchAlgorithmException {
     var settings = new MapSettings();
     settings.setProperty(CSharpPlugin.FILE_SUFFIXES_KEY, ".cs");
-    settings.setProperty("sonar.pullrequest.cache.basepath", basePath.getCanonicalPath());
+    settings.setProperty("sonar.pullrequest.cache.basepath", new File(basePath.toString()).getCanonicalPath());
     var hashProvider = mock(HashProvider.class);
     when(hashProvider.computeHash(any())).thenReturn(new byte[]{42});
     var context = SensorContextTester.create(basePath);
     context.setCacheEnabled(true);
     context.setSettings(settings);
     context.setNextCache(mock(WriteCache.class));
-    AddFile(context, basePath, "CSharp/Foo.cs", CSharpPlugin.LANGUAGE_KEY);
-    AddFile(context, basePath, "VB/Bar.vb", "other-language-key");
+    AddFile(context, basePath.toString(), "CSharp/Foo.cs", CSharpPlugin.LANGUAGE_KEY);
+    AddFile(context, basePath.toString(), "VB/Bar.vb", "other-language-key");
     var sut = new CSharpFileCacheSensor(new CSharp(settings.asConfig()), hashProvider, RUNTIME_WITH_ANALYSIS_CACHE);
 
     sut.execute(context);
@@ -84,7 +79,7 @@ public class CSharpFileCacheSensorTest {
     );
   }
 
-  private static void AddFile(SensorContextTester context, File basePath, String filePath, String languageKey) {
-    context.fileSystem().add(new TestInputFileBuilder("project-key", basePath, new File(basePath, filePath)).setLanguage(languageKey).setType(InputFile.Type.MAIN).build());
+  private static void AddFile(SensorContextTester context, String basePath, String filePath, String languageKey) {
+    context.fileSystem().add(new TestInputFileBuilder("project-key", new File(basePath), new File(basePath, filePath)).setLanguage(languageKey).setType(InputFile.Type.MAIN).build());
   }
 }
