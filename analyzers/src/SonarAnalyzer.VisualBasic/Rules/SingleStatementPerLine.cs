@@ -21,56 +21,38 @@
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class SingleStatementPerLine : SingleStatementPerLineBase<StatementSyntax>
+    public sealed class SingleStatementPerLine : SingleStatementPerLineBase<SyntaxKind, StatementSyntax>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        protected override bool StatementShouldBeExcluded(StatementSyntax statement)
-        {
-            return StatementIsBlock(statement) ||
-                StatementIsSingleInLambda(statement);
-        }
-
-        private static bool StatementIsSingleInLambda(StatementSyntax st)
-        {
-            if (st.DescendantNodes()
-                .OfType<StatementSyntax>()
-                .Any())
-            {
-                return false;
-            }
-
-            if (!(st.Parent is MultiLineLambdaExpressionSyntax multiline))
-            {
-                return false;
-            }
-
-            return multiline.Statements.Count == 1;
-        }
-
-        private static bool StatementIsBlock(StatementSyntax st) =>
-            st is NamespaceBlockSyntax ||
-            st is TypeBlockSyntax ||
-            st is EnumBlockSyntax ||
-            st is MethodBlockBaseSyntax ||
-            st is PropertyBlockSyntax ||
-            st is EventBlockSyntax ||
-            st is DoLoopBlockSyntax ||
-            st is WhileBlockSyntax ||
-            st is ForOrForEachBlockSyntax ||
-            st is MultiLineIfBlockSyntax ||
-            st is ElseStatementSyntax ||
-            st is SyncLockBlockSyntax ||
-            st is TryBlockSyntax ||
-            st is UsingBlockSyntax ||
-            st is WithBlockSyntax ||
-            st is MethodBaseSyntax ||
-            st is InheritsOrImplementsStatementSyntax ||
-            st is SelectBlockSyntax;
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
+
+        protected override bool StatementShouldBeExcluded(StatementSyntax statement) =>
+            StatementIsBlock(statement) || StatementIsSingleInLambda(statement);
+
+        private static bool StatementIsSingleInLambda(StatementSyntax st) =>
+            !st.DescendantNodes().OfType<StatementSyntax>().Any()
+            && st.Parent is MultiLineLambdaExpressionSyntax multiline
+            && multiline.Statements.Count == 1;
+
+        private static bool StatementIsBlock(StatementSyntax st) =>
+            st is NamespaceBlockSyntax
+            or TypeBlockSyntax
+            or EnumBlockSyntax
+            or MethodBlockBaseSyntax
+            or PropertyBlockSyntax
+            or EventBlockSyntax
+            or DoLoopBlockSyntax
+            or WhileBlockSyntax
+            or ForOrForEachBlockSyntax
+            or MultiLineIfBlockSyntax
+            or ElseStatementSyntax
+            or SyncLockBlockSyntax
+            or TryBlockSyntax
+            or UsingBlockSyntax
+            or WithBlockSyntax
+            or MethodBaseSyntax
+            or InheritsOrImplementsStatementSyntax
+            or SelectBlockSyntax;
     }
 }

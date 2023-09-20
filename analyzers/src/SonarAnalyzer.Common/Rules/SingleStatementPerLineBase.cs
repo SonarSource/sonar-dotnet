@@ -22,19 +22,19 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class SingleStatementPerLineBase : SonarDiagnosticAnalyzer
-    {
-        protected const string DiagnosticId = "S122";
-        protected const string MessageFormat = "Reformat the code to have only one statement per line.";
-
-        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
-    }
-
-    public abstract class SingleStatementPerLineBase<TStatementSyntax> : SingleStatementPerLineBase
+    public abstract class SingleStatementPerLineBase<TSyntaxKind, TStatementSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
+        where TSyntaxKind : struct
         where TStatementSyntax : SyntaxNode
     {
-        protected sealed override void Initialize(SonarAnalysisContext context)
-        {
+        protected const string DiagnosticId = "S122";
+        protected override string MessageFormat => "Reformat the code to have only one statement per line.";
+
+        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
+        protected abstract bool StatementShouldBeExcluded(TStatementSyntax statement);
+
+        protected SingleStatementPerLineBase() : base(DiagnosticId) { }
+
+        protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterTreeAction(
                 GeneratedCodeRecognizer,
                 c =>
@@ -57,11 +57,8 @@ namespace SonarAnalyzer.Rules
                         c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], location));
                     }
                 });
-        }
-        protected abstract bool StatementShouldBeExcluded(TStatementSyntax statement);
 
-        private static Location CalculateLocationForLine(TextLine line, SyntaxTree tree,
-            ICollection<TStatementSyntax> statements)
+        private static Location CalculateLocationForLine(TextLine line, SyntaxTree tree, ICollection<TStatementSyntax> statements)
         {
             var lineSpan = line.Span;
 
@@ -89,8 +86,8 @@ namespace SonarAnalyzer.Rules
         {
             var node = token.Parent;
             var statement = node as TStatementSyntax;
-            while (node != null &&
-                (statement == null || !StatementShouldBeExcluded(statement)))
+            while (node != null
+                && (statement == null || !StatementShouldBeExcluded(statement)))
             {
                 node = node.Parent;
                 statement = node as TStatementSyntax;
