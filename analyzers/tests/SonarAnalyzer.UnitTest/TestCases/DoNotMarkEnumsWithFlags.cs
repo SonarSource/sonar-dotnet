@@ -2,6 +2,12 @@
 
 namespace Tests.Diagnostics
 {
+    public enum NoFlags // Compliant - no flags attribute
+    {
+        None = 0,
+        Something = 3
+    }
+
     [FlagsAttribute]
     public enum Color // Compliant - only power of 2 values
     {
@@ -95,5 +101,13 @@ namespace Tests.Diagnostics
         N2 = 2,
         N3 = N1 | N2,
         N5 = 5 // Secondary
+    }
+
+    // Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/7991
+    [FlagsAttribute]
+    public enum Repro_7991 // Noncompliant FP
+    {
+        None = 0,
+        Red = 1 << 31 // Secondary
     }
 }

@@ -33,12 +33,14 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void DoNotMarkEnumsWithFlags_InvalidEnumType() =>
-            builder.AddSnippet(@"
+            builder.AddSnippet(
+"""
 [System.Flags]
 public enum InvalidStringEnum : string // Noncompliant
 {
-    MyValue = ""toto"" // Secondary
-}")
+    MyValue = "toto" // Secondary
+}
+""")
                 .WithErrorBehavior(CompilationErrorBehavior.Ignore)
                 .Verify();
     }
