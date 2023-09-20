@@ -21,11 +21,11 @@ package org.sonar.plugins.vbnet;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.security.NoSuchAlgorithmException;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
+import org.junit.jupiter.api.io.TempDir;
 import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
 import org.sonar.api.SonarRuntime;
@@ -35,7 +35,7 @@ import org.sonar.api.batch.sensor.cache.WriteCache;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.internal.SonarRuntimeImpl;
-import org.sonar.api.testfixtures.log.LogTester;
+import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 import org.sonar.api.utils.Version;
 import org.slf4j.event.Level;
 import org.sonarsource.dotnet.shared.plugins.HashProvider;
@@ -45,34 +45,28 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class VbNetFileCacheSensorTest {
+class VbNetFileCacheSensorTest {
   private static final SonarRuntime RUNTIME_WITH_ANALYSIS_CACHE = SonarRuntimeImpl.forSonarQube(Version.create(9, 4), SonarQubeSide.SERVER, SonarEdition.COMMUNITY);
 
-  @Rule
-  public TemporaryFolder temp = new TemporaryFolder();
+  @TempDir
+  public Path basePath;
 
-  @Rule
-  public LogTester logTester = new LogTester();
-
-  @Before
-  public void before() {
-    logTester.setLevel(Level.DEBUG);
-  }
+  @RegisterExtension
+  public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
 
   @Test
-  public void execute_whenCacheIsEnabled_itAddsOnlyTheLanguageFiles() throws IOException, NoSuchAlgorithmException {
-    var basePath = temp.newFolder();
+  void execute_whenCacheIsEnabled_itAddsOnlyTheLanguageFiles() throws IOException, NoSuchAlgorithmException {
     var settings = new MapSettings();
     settings.setProperty(VbNetPlugin.FILE_SUFFIXES_KEY, ".vb");
-    settings.setProperty("sonar.pullrequest.cache.basepath", basePath.getCanonicalPath());
+    settings.setProperty("sonar.pullrequest.cache.basepath", new File(basePath.toString()).getCanonicalPath());
     var hashProvider = mock(HashProvider.class);
     when(hashProvider.computeHash(any())).thenReturn(new byte[]{42});
     var context = SensorContextTester.create(basePath);
     context.setCacheEnabled(true);
     context.setSettings(settings);
     context.setNextCache(mock(WriteCache.class));
-    AddFile(context, basePath, "CSharp/Foo.cs", "other-language-key");
-    AddFile(context, basePath, "VB/Bar.vb", VbNetPlugin.LANGUAGE_KEY);
+    AddFile(context, basePath.toFile(), "CSharp/Foo.cs", "other-language-key");
+    AddFile(context, basePath.toFile(), "VB/Bar.vb", VbNetPlugin.LANGUAGE_KEY);
     var sut = new VbNetFileCacheSensor(new VbNet(settings.asConfig()), hashProvider, RUNTIME_WITH_ANALYSIS_CACHE);
 
     sut.execute(context);

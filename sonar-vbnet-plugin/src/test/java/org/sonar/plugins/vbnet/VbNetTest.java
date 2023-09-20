@@ -19,8 +19,8 @@
  */
 package org.sonar.plugins.vbnet;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
 import org.sonar.api.config.PropertyDefinitions;
@@ -33,12 +33,12 @@ import org.sonar.api.utils.Version;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
-public class VbNetTest {
+class VbNetTest {
 
   private MapSettings settings;
   private VbNet vbnet;
 
-  @Before
+  @BeforeEach
   public void init() {
     PropertyDefinitions defs = new PropertyDefinitions(mock(System2.class),
       new VbNetPropertyDefinitions(SonarRuntimeImpl.forSonarQube(Version.create(7, 9), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY)).create());
@@ -47,18 +47,18 @@ public class VbNetTest {
   }
 
   @Test
-  public void shouldGetDefaultFileSuffixes() {
+  void shouldGetDefaultFileSuffixes() {
     assertThat(vbnet.getFileSuffixes()).containsOnly(".vb");
   }
 
   @Test
-  public void shouldGetCustomFileSuffixes() {
+  void shouldGetCustomFileSuffixes() {
     settings.setProperty(VbNetPlugin.FILE_SUFFIXES_KEY, ".vb,.vbnet");
     assertThat(vbnet.getFileSuffixes()).containsOnly(".vb", ".vbnet");
   }
 
   @Test
-  public void equals_and_hashCode_considers_configuration() {
+  void equals_and_hashCode_considers_configuration() {
     MapSettings otherSettings = new MapSettings();
     otherSettings.setProperty("key", "value");
     VbNet otherVbNet = new VbNet(otherSettings.asConfig());

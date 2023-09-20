@@ -19,7 +19,7 @@
  */
 package org.sonar.plugins.vbnet;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
 import org.sonar.api.SonarRuntime;
@@ -34,12 +34,12 @@ import org.sonar.api.utils.Version;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class VbNetSonarRulesDefinitionTest {
+class VbNetSonarRulesDefinitionTest {
   private static final String SECURITY_HOTSPOT_RULE_KEY = "S4792";
   private static final SonarRuntime SONAR_RUNTIME = SonarRuntimeImpl.forSonarQube(Version.create(9, 3), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
 
   @Test
-  public void test() {
+  void test() {
     Context context = new Context();
     assertThat(context.repositories()).isEmpty();
 
@@ -62,7 +62,7 @@ public class VbNetSonarRulesDefinitionTest {
   }
 
   @Test
-  public void test_security_hotspot() {
+  void test_security_hotspot() {
     VbNetSonarRulesDefinition definition = new VbNetSonarRulesDefinition(SONAR_RUNTIME);
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
@@ -74,7 +74,7 @@ public class VbNetSonarRulesDefinitionTest {
   }
 
   @Test
-  public void test_security_hotspot_has_correct_type_and_security_standards() {
+  void test_security_hotspot_has_correct_type_and_security_standards() {
     VbNetSonarRulesDefinition definition = new VbNetSonarRulesDefinition(SONAR_RUNTIME);
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
@@ -86,7 +86,7 @@ public class VbNetSonarRulesDefinitionTest {
   }
 
   @Test
-  public void test_all_rules_have_status_set() {
+  void test_all_rules_have_status_set() {
     VbNetSonarRulesDefinition definition = new VbNetSonarRulesDefinition(SONAR_RUNTIME);
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
