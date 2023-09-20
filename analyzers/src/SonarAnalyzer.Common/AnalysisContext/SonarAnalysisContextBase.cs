@@ -21,6 +21,7 @@
 using System.Collections.Concurrent;
 using System.IO;
 using System.Runtime.CompilerServices;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Roslyn.Utilities;
 using static SonarAnalyzer.Helpers.DiagnosticDescriptorFactory;
 
@@ -38,6 +39,8 @@ public class SonarAnalysisContextBase
 
 public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextBase
 {
+    private const string RazorGeneratedFileSuffix = "_razor.g.cs";
+
     public abstract Compilation Compilation { get; }
     public abstract AnalyzerOptions Options { get; }
     public abstract CancellationToken Cancel { get; }
@@ -116,7 +119,7 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
         var unchangedFiles = UnchangedFilesCache.TryGetValue(Compilation, out var unchangedFilesFromCache)
             ? unchangedFilesFromCache
             : UnchangedFilesCache.GetValue(Compilation, _ => CreateUnchangedFilesHashSet());
-        return unchangedFiles.Contains(tree.FilePath);
+        return unchangedFiles.Contains(MapFilePath(tree));
     }
 
     public bool HasMatchingScope(ImmutableArray<DiagnosticDescriptor> descriptors)
@@ -164,4 +167,17 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
 
     private ImmutableHashSet<string> CreateUnchangedFilesHashSet() =>
         ImmutableHashSet.Create(StringComparer.OrdinalIgnoreCase, ProjectConfiguration().AnalysisConfig?.UnchangedFiles() ?? Array.Empty<string>());
+
+    private static string MapFilePath(SyntaxTree tree) =>
+        // Currently only .razor file hashes are stored in the cache.
+        //
+        // For a file like `Pages\Component.razor`, the compiler generated path has the following pattern:
+        // Microsoft.NET.Sdk.Razor.SourceGenerators\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_Component_razor.g.cs
+        // In order to avoid rebuilding the original file path we have to read it from the pragma directive.
+        //
+        // This should be updated for .cshtml files as well once https://github.com/SonarSource/sonar-dotnet/issues/8032 is done.
+        tree.FilePath.EndsWith(RazorGeneratedFileSuffix, StringComparison.OrdinalIgnoreCase)
+        && (tree.GetRoot().DescendantNodes(_ => true, true).OfType<PragmaChecksumDirectiveTriviaSyntax>().FirstOrDefault() is { } pragmaChecksum)
+            ? pragmaChecksum.File.ValueText
+            : tree.FilePath;
 }

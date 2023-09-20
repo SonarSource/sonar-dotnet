@@ -74,14 +74,14 @@ public partial class SonarAnalysisContextBaseTest
     [TestMethod]
     public void ShouldAnalyzeTree_Scanner_WhenRazorFileHasNotChanged_ReturnsFalseForTheAssociatedGeneratedFile()
     {
-        const string fileName = "Component.razor";
-        const string generatedFileName = "Component_razor.g";
+        // The generated files have a different root that is not absolute and might not exist on disk.
+        const string generatedFileName = "Microsoft.NET.Sdk.Razor.SourceGenerators\\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\\Pages_Component_razor.g";
         const string content =
             """
             #pragma checksum "C:\Component.razor" "{8829d00f-11b8-4213-878b-770e8597ac16}" "35c3e85c77eb4f50f311a96f96be44f36c36b570ce2579ec311010076f7ac44d"
             """;
 
-        var options = CreateOptions(new[] { fileName });
+        var options = CreateOptions(new[] { @"C:\Component.razor" }); // In the configuration file we always provide full paths.
 
         ShouldAnalyzeTree(options, generatedFileName, content).Should().BeFalse("File is known to be Unchanged in Incremental PR analysis.");
     }
