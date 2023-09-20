@@ -82,12 +82,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsCombinationOfOtherValues(ulong value, List<ulong> otherValues)
         {
-            // Assume otherValues is not empty and sorted Z -> A
-            if (value > otherValues[0])
-            {
-                return false;
-            }
-
             var newValue = value;
             foreach (var otherValue in otherValues.SkipWhile(v => value <= v))
             {
