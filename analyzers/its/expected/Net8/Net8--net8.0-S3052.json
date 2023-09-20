@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3052",
+"message":  "Remove this initialization to 'CreditLimit', the compiler will do that for you.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net8/Net8/features/PrimaryConstructor.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  49,
+"endLine":  9,
+"endColumn":  52
+}
+}
+}
+]
+}
