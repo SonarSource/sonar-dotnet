@@ -93,7 +93,7 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
         }
         else
         {
-            return Helpers.SonarLintXmlReader.Empty;
+            return SonarLintXmlReader.Empty;
         }
     }
 
@@ -112,7 +112,7 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
     [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7439", AllowCaptures = true, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
     public bool IsUnchanged(SyntaxTree tree)
     {
-        // Hotpath: Use TryGetValue to prevent the allocation of the GetValue factory delegate in the common case
+        // Hot path: Use TryGetValue to prevent the allocation of the GetValue factory delegate in the common case
         var unchangedFiles = UnchangedFilesCache.TryGetValue(Compilation, out var unchangedFilesFromCache)
             ? unchangedFilesFromCache
             : UnchangedFilesCache.GetValue(Compilation, _ => CreateUnchangedFilesHashSet());
@@ -153,7 +153,7 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
         if (ProjectConfiguration().ProjectType == ProjectType.Unknown)
         {
             var fileInclusionCache = FileInclusionCache.GetOrCreateValue(Compilation);
-            // Hotpath: Don't use GetOrAdd with the value factory parameter. It allocates a delegate which causes GC preasure.
+            // Hot path: Don't use GetOrAdd with the value factory parameter. It allocates a delegate which causes GC pressure.
             var isIncluded = fileInclusionCache.TryGetValue(filePath, out var result)
                 ? result
                 : fileInclusionCache.GetOrAdd(filePath, sonarLintXml.IsFileIncluded(filePath, IsTestProject()));
