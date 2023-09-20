@@ -19,8 +19,8 @@
  */
 package org.sonar.plugins.csharp;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
 import org.sonar.api.config.PropertyDefinitions;
@@ -33,12 +33,12 @@ import org.sonar.api.utils.Version;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
-public class CSharpTest {
+class CSharpTest {
 
   private MapSettings settings;
   private CSharp csharp;
 
-  @Before
+  @BeforeEach
   public void init() {
     PropertyDefinitions defs = new PropertyDefinitions(mock(System2.class),
       new CSharpPropertyDefinitions(SonarRuntimeImpl.forSonarQube(Version.create(7, 9), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY)).create());
@@ -47,18 +47,18 @@ public class CSharpTest {
   }
 
   @Test
-  public void shouldGetDefaultFileSuffixes() {
+  void shouldGetDefaultFileSuffixes() {
     assertThat(csharp.getFileSuffixes()).containsOnly(".cs", ".razor");
   }
 
   @Test
-  public void shouldGetCustomFileSuffixes() {
+  void shouldGetCustomFileSuffixes() {
     settings.setProperty(CSharpPlugin.FILE_SUFFIXES_KEY, ".cs,.csharp");
     assertThat(csharp.getFileSuffixes()).containsOnly(".cs", ".csharp");
   }
 
   @Test
-  public void equals_and_hashCode_considers_configuration() {
+  void equals_and_hashCode_considers_configuration() {
     MapSettings otherSettings = new MapSettings();
     otherSettings.setProperty("key", "value");
     CSharp otherCSharp = new CSharp(otherSettings.asConfig());

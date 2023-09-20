@@ -21,7 +21,8 @@ package org.sonar.plugins.csharp;
 
 import com.google.common.collect.ImmutableList;
 import java.util.List;
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 import org.sonar.api.Plugin;
 import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
@@ -49,10 +50,10 @@ import org.sonarsource.dotnet.shared.plugins.WrongEncodingFileFilter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CSharpPluginTest {
+class CSharpPluginTest {
 
   @Test
-  public void getExtensions() {
+  void getExtensions() {
     SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(7, 9), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
 
     Plugin.Context context = new Plugin.Context(sonarRuntime);

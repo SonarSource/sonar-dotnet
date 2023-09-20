@@ -19,22 +19,22 @@
  */
 package org.sonar.plugins.vbnet;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.sonar.api.SonarRuntime;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
+import org.slf4j.event.Level;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition.BuiltInQualityProfile;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition.Context;
-import org.sonar.api.testfixtures.log.LogTester;
+import org.sonar.api.testfixtures.log.LogTesterJUnit5;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class VbNetSonarWayProfileTest {
-  @Rule
-  public LogTester logTester = new LogTester();
+class VbNetSonarWayProfileTest {
+  @RegisterExtension
+  public LogTesterJUnit5 logTester = new LogTesterJUnit5().setLevel(Level.DEBUG);
 
   @Test
-  public void hotspots_in_sonar_way() {
+  void hotspots_in_sonar_way() {
     Context context = new Context();
 
     VbNetSonarWayProfile profileDef = new VbNetSonarWayProfile();

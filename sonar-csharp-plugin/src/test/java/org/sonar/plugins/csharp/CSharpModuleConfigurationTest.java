@@ -20,17 +20,18 @@
 package org.sonar.plugins.csharp;
 
 import java.nio.file.Paths;
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 import org.sonar.api.config.Configuration;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class CSharpModuleConfigurationTest {
+class CSharpModuleConfigurationTest {
 
   @Test
-  public void reads_correct_language() {
+  void reads_correct_language() {
     Configuration configuration = mock(Configuration.class);
     when(configuration.getStringArray("sonar.cs.roslyn.reportFilePaths")).thenReturn(new String[] {"C#"});
     when(configuration.getStringArray("sonar.vbnet.roslyn.reportFilePaths")).thenReturn(new String[] {"VB.NET"});

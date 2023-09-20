@@ -19,7 +19,7 @@
  */
 package org.sonar.plugins.csharp;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
 import org.sonar.api.SonarRuntime;
@@ -35,7 +35,7 @@ import org.sonar.api.utils.Version;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CSharpSonarRulesDefinitionTest {
+class CSharpSonarRulesDefinitionTest {
   private static final String SECURITY_HOTSPOT_RULE_KEY = "S5766";
   private static final String VULNERABILITY_RULE_KEY = "S4426";
   private static final String NO_TAGS_RULE_KEY = "S1048";
@@ -45,7 +45,7 @@ public class CSharpSonarRulesDefinitionTest {
   private static final SonarRuntime SONAR_RUNTIME = SonarRuntimeImpl.forSonarQube(Version.create(9, 9), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
 
   @Test
-  public void test() {
+  void test() {
     Context context = new Context();
     assertThat(context.repositories()).isEmpty();
 
@@ -67,7 +67,7 @@ public class CSharpSonarRulesDefinitionTest {
   }
 
   @Test
-  public void test_security_hotspot() {
+  void test_security_hotspot() {
     CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SONAR_RUNTIME);
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
@@ -79,7 +79,7 @@ public class CSharpSonarRulesDefinitionTest {
   }
 
   @Test
-  public void test_security_hotspot_has_correct_type_and_security_standards() {
+  void test_security_hotspot_has_correct_type_and_security_standards() {
     CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SONAR_RUNTIME);
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
@@ -97,7 +97,7 @@ public class CSharpSonarRulesDefinitionTest {
   }
 
   @Test
-  public void test_security_standards_with_vulnerability() {
+  void test_security_standards_with_vulnerability() {
     CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SONAR_RUNTIME);
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
@@ -114,7 +114,7 @@ public class CSharpSonarRulesDefinitionTest {
   }
 
   @Test
-  public void test_security_standards_before_9_3() {
+  void test_security_standards_before_9_3() {
     SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(9, 2), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
     RulesDefinition.Context context = new RulesDefinition.Context();
     new CSharpSonarRulesDefinition(sonarRuntime).define(context);
@@ -125,7 +125,7 @@ public class CSharpSonarRulesDefinitionTest {
   }
 
   @Test
-  public void test_all_rules_have_metadata_set() {
+  void test_all_rules_have_metadata_set() {
     CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SONAR_RUNTIME);
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
@@ -140,7 +140,7 @@ public class CSharpSonarRulesDefinitionTest {
   }
 
   @Test
-  public void test_all_rules_have_htmldescription() {
+  void test_all_rules_have_htmldescription() {
     CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SONAR_RUNTIME);
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
@@ -152,7 +152,7 @@ public class CSharpSonarRulesDefinitionTest {
   }
 
   @Test
-  public void test_tags_are_set() {
+  void test_tags_are_set() {
     CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SONAR_RUNTIME);
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
@@ -162,7 +162,7 @@ public class CSharpSonarRulesDefinitionTest {
   }
 
   @Test
-  public void test_tags_are_empty() {
+  void test_tags_are_empty() {
     CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SONAR_RUNTIME);
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
@@ -172,7 +172,7 @@ public class CSharpSonarRulesDefinitionTest {
   }
 
   @Test
-  public void test_remediation_is_set() {
+  void test_remediation_is_set() {
     CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SONAR_RUNTIME);
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
@@ -184,7 +184,7 @@ public class CSharpSonarRulesDefinitionTest {
   }
 
   @Test
-  public void test_no_params() {
+  void test_no_params() {
     CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SONAR_RUNTIME);
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
@@ -194,7 +194,7 @@ public class CSharpSonarRulesDefinitionTest {
   }
 
   @Test
-  public void test_single_params() {
+  void test_single_params() {
     CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SONAR_RUNTIME);
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
@@ -205,7 +205,7 @@ public class CSharpSonarRulesDefinitionTest {
   }
 
   @Test
-  public void test_multiple_params() {
+  void test_multiple_params() {
     CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SONAR_RUNTIME);
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
