@@ -2,6 +2,12 @@
 
 namespace Tests.Diagnostics
 {
+    public enum NoFlags // Compliant - no flags attribute
+    {
+        None = 0,
+        Something = 3
+    }
+
     [FlagsAttribute]
     public enum Color // Compliant - only power of 2 values
     {
