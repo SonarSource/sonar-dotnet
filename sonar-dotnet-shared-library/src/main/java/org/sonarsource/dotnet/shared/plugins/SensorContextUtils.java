@@ -59,7 +59,6 @@ public final class SensorContextUtils {
     int startLineOffset = pbTextRange.getStartOffset();
     int endLine = pbTextRange.getEndLine();
 
-
     // We accept data out of range due to the mapping issues on Roslyn side.
     // The strategy is to throw if the start offset is outside the line; otherwise, if only the end line is out of the range,
     // trim to the end of the line.
@@ -69,13 +68,17 @@ public final class SensorContextUtils {
     // https://github.com/dotnet/razor/issues/9050
     int lineLength = inputFile.selectLine(startLine).end().lineOffset();
 
-    if (startLineOffset >= lineLength){
+    if (startLineOffset > lineLength){
       return Optional.empty();
     }
 
     int endLineOffset = pbTextRange.getEndOffset();
     if (endLineOffset > lineLength) {
       endLineOffset = lineLength;
+    }
+
+    if (startLine == endLine && startLineOffset == endLineOffset) {
+      return Optional.empty();
     }
 
     return Optional.of(inputFile.newRange(startLine, startLineOffset, endLine, endLineOffset));

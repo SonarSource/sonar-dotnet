@@ -29,13 +29,16 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
+import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.sonar.api.batch.fs.InputFile.Type;
 import static org.sonarsource.dotnet.shared.plugins.SensorContextUtils.hasAnyMainFiles;
 import static org.sonarsource.dotnet.shared.plugins.SensorContextUtils.hasFilesOfLanguage;
 import static org.sonarsource.dotnet.shared.plugins.SensorContextUtils.hasFilesOfType;
 import static org.sonarsource.dotnet.shared.plugins.SensorContextUtils.toInputFile;
+import static org.sonarsource.dotnet.shared.plugins.SensorContextUtils.toTextRange;
 
 public class SensorContextUtilsTest {
   private static final String LANG_ONE = "LANG_ONE";
@@ -155,6 +158,57 @@ public class SensorContextUtilsTest {
     addFileToFileSystem("foo", Type.MAIN, LANG_TWO);
     addFileToFileSystem("bar", Type.TEST, LANG_TWO);
     assertThat(hasFilesOfLanguage(fs, LANG_ONE)).isFalse();
+  }
+
+  @Test
+  public void toTextRange_whenTokensStartAtEOL_doesNotFilterOut() {
+    var inputFile = new TestInputFileBuilder("mod", "source.cs")
+      .setLanguage("cs")
+      .setType(Type.MAIN)
+      .setContents(
+        "var rawString = $$\"\"\"\n" +
+        "    {\n" +
+        "        return {{BuildSwitchExpression(ref enumData)}}\n" +
+        "    }\n" +
+        "\n" +
+        "}\n" +
+        "\"\"\";")
+      .build();
+    fs.add(inputFile);
+
+    var pbTextRange1 = SonarAnalyzer.TextRange.newBuilder()
+      .setStartLine(3)
+      .setStartOffset(54)
+      .setEndLine(6)
+      .setEndOffset(1)
+      .build();
+    assertThat(toTextRange(inputFile, pbTextRange1)).isNotEmpty();
+
+    var pbTextRange2 = SonarAnalyzer.TextRange.newBuilder()
+      .setStartLine(6)
+      .setStartOffset(1)
+      .setEndLine(7)
+      .setEndOffset(3)
+      .build();
+    assertThat(toTextRange(inputFile, pbTextRange2)).isNotEmpty();
+  }
+
+  @Test
+  public void toTextRange_whenTokensStartBeyondEOL_throwsException() {
+    var inputFile = new TestInputFileBuilder("mod", "source.cs")
+      .setLanguage("cs")
+      .setType(Type.MAIN)
+      .setContents("var rawString = $$\"\"\"42\"\"\";\n")
+      .build();
+    fs.add(inputFile);
+
+    var pbTextRange1 = SonarAnalyzer.TextRange.newBuilder()
+      .setStartLine(1)
+      .setStartOffset(27)
+      .setEndLine(1)
+      .setEndOffset(28)
+      .build();
+    assertThrows(IllegalArgumentException.class, () -> toTextRange(inputFile, pbTextRange1));
   }
 
   private void addFileToFileSystem(String fileName, InputFile.Type fileType, String language) {
