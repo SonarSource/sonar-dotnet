@@ -71,6 +71,21 @@ public partial class SonarAnalysisContextBaseTest
         ShouldAnalyzeTree(options).Should().BeTrue();
     }
 
+    [TestMethod]
+    public void ShouldAnalyzeTree_Scanner_WhenRazorFileHasNotChanged_ReturnsFalseForTheAssociatedGeneratedFile()
+    {
+        const string fileName = "Component.razor";
+        const string generatedFileName = "Component_razor.g";
+        const string content =
+            """
+            #pragma checksum "C:\Component.razor" "{8829d00f-11b8-4213-878b-770e8597ac16}" "35c3e85c77eb4f50f311a96f96be44f36c36b570ce2579ec311010076f7ac44d"
+            """;
+
+        var options = CreateOptions(new[] { fileName });
+
+        ShouldAnalyzeTree(options, generatedFileName, content).Should().BeFalse("File is known to be Unchanged in Incremental PR analysis.");
+    }
+
     [DataTestMethod]
     [DataRow(GeneratedFileName, false)]
     [DataRow(OtherFileName, true)]
@@ -439,9 +454,10 @@ public partial class SonarAnalysisContextBaseTest
         return (compilation, compilation.SyntaxTrees.Single(x => x.FilePath.Contains(treeFileName)));
     }
 
-    private static bool ShouldAnalyzeTree(AnalyzerOptions options)
+    private static bool ShouldAnalyzeTree(AnalyzerOptions options, string fileName = OtherFileName, string content = "")
     {
-        var tree = CreateDummyCompilation(AnalyzerLanguage.CSharp, OtherFileName).Tree;
+        var compilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).AddSnippet(content, fileName + AnalyzerLanguage.CSharp.FileExtension).GetCompilation();
+        var tree = compilation.SyntaxTrees.Single(x => x.FilePath.Contains(fileName));
         return CreateSut(options).ShouldAnalyzeTree(tree, CSharpGeneratedCodeRecognizer.Instance);
     }
 
