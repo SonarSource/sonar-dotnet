@@ -189,13 +189,11 @@ public class SensorContextUtilsTest {
   }
 
   @Test
-  public void toTextRange_whenTokensStartBeyondEOL_filtersOut() {
+  public void toTextRange_whenRangeStartsBeyondEOL_filtersOut() {
     var inputFile = new TestInputFileBuilder("mod", "source.cs")
       .setLanguage("cs")
       .setType(Type.MAIN)
-      .setContents(
-        "\tSome text\n" +
-        "rangeStartingAtEOL1\n")
+      .setContents("\tSome text\nrangeStartingAtEOL1\n")
       .build();
     fs.add(inputFile);
 
@@ -209,13 +207,11 @@ public class SensorContextUtilsTest {
   }
 
   @Test
-  public void toTextRange_whenMultilineTokensEndBeyondEOL_trimsBasedOnEndLineLength() {
-    var eightSpaces = " ".repeat(8);
-    var fileContents = "Some text multiline\nTokenWithEndLineOffsetBiggerThanStartLineOffset Some other text";
+  public void toTextRange_whenMultilineRangeEndsBeyondEOL_trimsBasedOnEndLineLength() {
     var inputFile = new TestInputFileBuilder("mod", "source.cs")
       .setLanguage("cs")
       .setType(Type.MAIN)
-      .setContents(fileContents)
+      .setContents("Some text multiline\nRangeWithEndLineOffsetBiggerThanStartLineOffset Some other text")
       .build();
     fs.add(inputFile);
 
@@ -226,6 +222,24 @@ public class SensorContextUtilsTest {
       .setEndOffset(46)
       .build();
     assertThat(toTextRange(inputFile, pbTextRange).map(x -> x.end().lineOffset())).hasValue(46);
+  }
+
+  @Test
+  public void toTextRange_whenSingleLineRangeStartsBeyondEOL_filtersOut() {
+    var inputFile = new TestInputFileBuilder("mod", "source.cs")
+      .setLanguage("cs")
+      .setType(Type.MAIN)
+      .setContents("Some text\nSome other text")
+      .build();
+    fs.add(inputFile);
+
+    var pbTextRange = SonarAnalyzer.TextRange.newBuilder()
+      .setStartLine(1)
+      .setStartOffset(9)
+      .setEndLine(1)
+      .setEndOffset(12)
+      .build();
+    assertThat(toTextRange(inputFile, pbTextRange)).isEmpty();
   }
 
   private void addFileToFileSystem(String fileName, InputFile.Type fileType, String language) {
