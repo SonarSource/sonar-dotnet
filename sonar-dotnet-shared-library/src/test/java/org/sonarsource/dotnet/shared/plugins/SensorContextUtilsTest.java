@@ -32,7 +32,6 @@ import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.sonar.api.batch.fs.InputFile.Type;
 import static org.sonarsource.dotnet.shared.plugins.SensorContextUtils.hasAnyMainFiles;
 import static org.sonarsource.dotnet.shared.plugins.SensorContextUtils.hasFilesOfLanguage;
@@ -194,7 +193,7 @@ public class SensorContextUtilsTest {
   }
 
   @Test
-  public void toTextRange_whenTokensStartBeyondEOL_throwsException() {
+  public void toTextRange_whenTokensStartBeyondEOL_filtersOut() {
     var inputFile = new TestInputFileBuilder("mod", "source.cs")
       .setLanguage("cs")
       .setType(Type.MAIN)
@@ -208,7 +207,7 @@ public class SensorContextUtilsTest {
       .setEndLine(1)
       .setEndOffset(28)
       .build();
-    assertThrows(IllegalArgumentException.class, () -> toTextRange(inputFile, pbTextRange1));
+    assertThat(toTextRange(inputFile, pbTextRange1)).isEmpty();
   }
 
   private void addFileToFileSystem(String fileName, InputFile.Type fileType, String language) {
