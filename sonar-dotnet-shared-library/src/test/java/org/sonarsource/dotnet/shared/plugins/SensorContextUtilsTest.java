@@ -149,7 +149,6 @@ public class SensorContextUtilsTest {
   public void hasFilesOfLanguage_whenOnlyTestFilesOfThatLanguageExist_returnsTrue() {
     addFileToFileSystem("bar", Type.TEST, LANG_ONE);
     assertThat(hasFilesOfLanguage(fs, LANG_ONE)).isTrue();
-
   }
 
   @Test
@@ -160,34 +159,31 @@ public class SensorContextUtilsTest {
   }
 
   @Test
-  public void toTextRange_whenTokensStartAtEOL_doesNotFilterOut() {
+  public void toTextRange_whenStartAtEOL_doesNotFilterOut() {
     var inputFile = new TestInputFileBuilder("mod", "source.cs")
       .setLanguage("cs")
       .setType(Type.MAIN)
       .setContents(
-        "var rawString = $$\"\"\"\n" +
-        "    {\n" +
-        "        return {{BuildSwitchExpression(ref enumData)}}\n" +
-        "    }\n" +
-        "\n" +
-        "}\n" +
-        "\"\"\";")
+        "Some text \n" +
+        "rangeStartingAtEOL1\n" +
+        "Some more text rangeStarting\n" +
+        "AtEOL2 Some other text")
       .build();
     fs.add(inputFile);
 
     var pbTextRange1 = SonarAnalyzer.TextRange.newBuilder()
-      .setStartLine(3)
-      .setStartOffset(54)
-      .setEndLine(6)
-      .setEndOffset(1)
+      .setStartLine(1)
+      .setStartOffset(10)
+      .setEndLine(2)
+      .setEndOffset(18)
       .build();
     assertThat(toTextRange(inputFile, pbTextRange1)).isNotEmpty();
 
     var pbTextRange2 = SonarAnalyzer.TextRange.newBuilder()
-      .setStartLine(6)
-      .setStartOffset(1)
-      .setEndLine(7)
-      .setEndOffset(3)
+      .setStartLine(2)
+      .setStartOffset(19)
+      .setEndLine(4)
+      .setEndOffset(5)
       .build();
     assertThat(toTextRange(inputFile, pbTextRange2)).isNotEmpty();
   }
@@ -197,17 +193,39 @@ public class SensorContextUtilsTest {
     var inputFile = new TestInputFileBuilder("mod", "source.cs")
       .setLanguage("cs")
       .setType(Type.MAIN)
-      .setContents("var rawString = $$\"\"\"42\"\"\";\n")
+      .setContents(
+        "\tSome text\n" +
+        "rangeStartingAtEOL1\n")
       .build();
     fs.add(inputFile);
 
-    var pbTextRange1 = SonarAnalyzer.TextRange.newBuilder()
+    var pbTextRange = SonarAnalyzer.TextRange.newBuilder()
       .setStartLine(1)
-      .setStartOffset(27)
-      .setEndLine(1)
-      .setEndOffset(28)
+      .setStartOffset(13) // Possible real scenario: \t transformed into 4 spaces -> new EOL at 13 instead of 10
+      .setEndLine(2)
+      .setEndOffset(18)
       .build();
-    assertThat(toTextRange(inputFile, pbTextRange1)).isEmpty();
+    assertThat(toTextRange(inputFile, pbTextRange)).isEmpty();
+  }
+
+  @Test
+  public void toTextRange_whenMultilineTokensEndBeyondEOL_trimsBasedOnEndLineLength() {
+    var eightSpaces = " ".repeat(8);
+    var fileContents = "Some text multiline\nTokenWithEndLineOffsetBiggerThanStartLineOffset Some other text";
+    var inputFile = new TestInputFileBuilder("mod", "source.cs")
+      .setLanguage("cs")
+      .setType(Type.MAIN)
+      .setContents(fileContents)
+      .build();
+    fs.add(inputFile);
+
+    var pbTextRange = SonarAnalyzer.TextRange.newBuilder()
+      .setStartLine(1)
+      .setStartOffset(10)
+      .setEndLine(2)
+      .setEndOffset(46)
+      .build();
+    assertThat(toTextRange(inputFile, pbTextRange).map(x -> x.end().lineOffset())).hasValue(46);
   }
 
   private void addFileToFileSystem(String fileName, InputFile.Type fileType, String language) {
