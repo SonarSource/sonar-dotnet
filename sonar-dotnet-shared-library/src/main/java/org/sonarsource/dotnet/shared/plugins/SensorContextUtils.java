@@ -77,6 +77,7 @@ public final class SensorContextUtils {
       endLineOffset = endLineLength;
     }
 
+    // Discard the range if trimming of the end has made it empty
     if (startLine == endLine && startLineOffset == endLineOffset) {
       return Optional.empty();
     }
