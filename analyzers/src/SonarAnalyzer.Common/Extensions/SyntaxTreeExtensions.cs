@@ -46,4 +46,10 @@ internal static class SyntaxTreeExtensions
         isRazorAnalysisEnabled
             ? IsGenerated(tree, generatedCodeRecognizer, compilation) && !GeneratedCodeRecognizer.IsRazorGeneratedFile(tree)
             : IsGenerated(tree, generatedCodeRecognizer, compilation);
+
+    public static string GetOriginalFilePath(this SyntaxTree tree) =>
+        // Currently we support only C# based generated files.
+        tree.GetRoot().DescendantNodes(_ => true, true).OfType<Microsoft.CodeAnalysis.CSharp.Syntax.PragmaChecksumDirectiveTriviaSyntax>().FirstOrDefault() is { } pragmaChecksum
+            ? pragmaChecksum.File.ValueText
+            : tree.FilePath;
 }

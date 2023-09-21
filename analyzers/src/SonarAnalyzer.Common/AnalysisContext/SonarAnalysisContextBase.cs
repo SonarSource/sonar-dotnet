@@ -21,7 +21,6 @@
 using System.Collections.Concurrent;
 using System.IO;
 using System.Runtime.CompilerServices;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Roslyn.Utilities;
 using static SonarAnalyzer.Helpers.DiagnosticDescriptorFactory;
 
@@ -177,7 +176,6 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
         //
         // This should be updated for .cshtml files as well once https://github.com/SonarSource/sonar-dotnet/issues/8032 is done.
         tree.FilePath.EndsWith(RazorGeneratedFileSuffix, StringComparison.OrdinalIgnoreCase)
-        && (tree.GetRoot().DescendantNodes(_ => true, true).OfType<PragmaChecksumDirectiveTriviaSyntax>().FirstOrDefault() is { } pragmaChecksum)
-            ? pragmaChecksum.File.ValueText
+            ? tree.GetOriginalFilePath()
             : tree.FilePath;
 }
