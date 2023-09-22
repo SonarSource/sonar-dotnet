@@ -179,7 +179,7 @@ Variable name `sut` (System Under Test) is recommended in unit tests that really
   * otherwise, use nested conditions
 * Use positive logic.
 * Use `is {}` and `is not null` as null-checks (instead of `!= null`).
-* Use of `is var o` can be used only where variable declarations would require additional nesting.
+* Var pattern `is var o` can be used only where variable declarations would require additional nesting.
 * Each compiler directive outside method body (namely `#if`/`#endif`) should be preceded and followed by an empty line.
 * Do not use `nullable`.
 
