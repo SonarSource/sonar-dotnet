@@ -2152,7 +2152,7 @@ internal static class RuleTypeMappingCS
         ["S2225"] = "BUG",
         // ["S2226"],
         // ["S2227"],
-        ["S2228"] = "VULNERABILITY",
+        // ["S2228"],
         // ["S2229"],
         // ["S2230"],
         // ["S2231"],
