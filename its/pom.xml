@@ -28,7 +28,7 @@
     <dependency>
       <groupId>org.sonarsource.orchestrator</groupId>
       <artifactId>sonar-orchestrator-junit5</artifactId>
-      <version>4.1.0.495</version>
+      <version>4.2.0.542</version>
     </dependency>
     <dependency>
       <groupId>org.sonarsource.scanner.msbuild</groupId>
