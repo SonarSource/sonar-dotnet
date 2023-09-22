@@ -38,6 +38,8 @@ public class SonarAnalysisContextBase
 
 public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextBase
 {
+    private const string RazorGeneratedFileSuffix = "_razor.g.cs";
+
     public abstract Compilation Compilation { get; }
     public abstract AnalyzerOptions Options { get; }
     public abstract CancellationToken Cancel { get; }
@@ -93,7 +95,7 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
         }
         else
         {
-            return Helpers.SonarLintXmlReader.Empty;
+            return SonarLintXmlReader.Empty;
         }
     }
 
@@ -112,11 +114,11 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
     [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7439", AllowCaptures = true, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
     public bool IsUnchanged(SyntaxTree tree)
     {
-        // Hotpath: Use TryGetValue to prevent the allocation of the GetValue factory delegate in the common case
+        // Hot path: Use TryGetValue to prevent the allocation of the GetValue factory delegate in the common case
         var unchangedFiles = UnchangedFilesCache.TryGetValue(Compilation, out var unchangedFilesFromCache)
             ? unchangedFilesFromCache
             : UnchangedFilesCache.GetValue(Compilation, _ => CreateUnchangedFilesHashSet());
-        return unchangedFiles.Contains(tree.FilePath);
+        return unchangedFiles.Contains(MapFilePath(tree));
     }
 
     public bool HasMatchingScope(ImmutableArray<DiagnosticDescriptor> descriptors)
@@ -153,7 +155,7 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
         if (ProjectConfiguration().ProjectType == ProjectType.Unknown)
         {
             var fileInclusionCache = FileInclusionCache.GetOrCreateValue(Compilation);
-            // Hotpath: Don't use GetOrAdd with the value factory parameter. It allocates a delegate which causes GC preasure.
+            // Hot path: Don't use GetOrAdd with the value factory parameter. It allocates a delegate which causes GC pressure.
             var isIncluded = fileInclusionCache.TryGetValue(filePath, out var result)
                 ? result
                 : fileInclusionCache.GetOrAdd(filePath, sonarLintXml.IsFileIncluded(filePath, IsTestProject()));
@@ -164,4 +166,16 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
 
     private ImmutableHashSet<string> CreateUnchangedFilesHashSet() =>
         ImmutableHashSet.Create(StringComparer.OrdinalIgnoreCase, ProjectConfiguration().AnalysisConfig?.UnchangedFiles() ?? Array.Empty<string>());
+
+    private static string MapFilePath(SyntaxTree tree) =>
+        // Currently only .razor file hashes are stored in the cache.
+        //
+        // For a file like `Pages\Component.razor`, the compiler generated path has the following pattern:
+        // Microsoft.NET.Sdk.Razor.SourceGenerators\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_Component_razor.g.cs
+        // In order to avoid rebuilding the original file path we have to read it from the pragma directive.
+        //
+        // This should be updated for .cshtml files as well once https://github.com/SonarSource/sonar-dotnet/issues/8032 is done.
+        tree.FilePath.EndsWith(RazorGeneratedFileSuffix, StringComparison.OrdinalIgnoreCase)
+            ? tree.GetOriginalFilePath()
+            : tree.FilePath;
 }
