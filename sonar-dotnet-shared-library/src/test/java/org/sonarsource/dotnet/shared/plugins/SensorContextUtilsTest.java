@@ -198,7 +198,7 @@ public class SensorContextUtilsTest {
       .setContents("Some text multiline\nRangeWithEndLineOffsetBiggerThanStartLineOffset Some other text")
       .build();
     fs.add(inputFile);
-    assertTextRange(toTextRange(inputFile, pbTextRangeOf(1, 10, 2, 46)), 1, 10, 2, 46);
+    assertTextRange(toTextRange(inputFile, pbTextRangeOf(1, 10, 2, 64)), 1, 10, 2, 63);
   }
 
   @Test
