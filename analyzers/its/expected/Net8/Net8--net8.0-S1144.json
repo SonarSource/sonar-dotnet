@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'pointDictionary'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net8/Net8/features/AliasAnyType.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  9,
+"endLine":  9,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'Copy'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net8/Net8/features/AliasAnyType.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  15,
+"endLine":  11,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'Examples'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net8/Net8/features/CollectionExpressions.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  14,
+"endLine":  5,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'Example'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net8/Net8/features/DefaultLambdaParameters.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  14,
+"endLine":  5,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field '_element0'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net8/Net8/features/InlineArrays.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  13,
+"endLine":  8,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'Example'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net8/Net8/features/InlineArrays.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  14,
+"endLine":  11,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal class 'BankAccount'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net8/Net8/features/PrimaryConstructor.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  22,
+"endLine":  5,
+"endColumn":  33
+}
+}
+}
+]
+}
