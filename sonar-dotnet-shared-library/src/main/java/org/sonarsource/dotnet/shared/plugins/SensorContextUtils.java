@@ -55,29 +55,31 @@ public final class SensorContextUtils {
   }
 
   public static Optional<TextRange> toTextRange(InputFile inputFile, SonarAnalyzer.TextRange pbTextRange) {
-    int startLine = pbTextRange.getStartLine();
-    int startLineOffset = pbTextRange.getStartOffset();
-    int endLine = pbTextRange.getEndLine();
-
-
     // We accept data out of range due to the mapping issues on Roslyn side.
     // The strategy is to throw if the start offset is outside the line; otherwise, if only the end line is out of the range,
     // trim to the end of the line.
+    // The range is discarded if trimming of the end has made it empty.
     // The wrong locations are caused by the following issues:
     // https://github.com/dotnet/roslyn/issues/69248
     // https://github.com/dotnet/razor/issues/9051
     // https://github.com/dotnet/razor/issues/9050
-    int lineLength = inputFile.selectLine(startLine).end().lineOffset();
-
-    if (startLineOffset >= lineLength){
-      return Optional.empty();
+    int startLine = pbTextRange.getStartLine();
+    int startLineOffset = pbTextRange.getStartOffset();
+    int startLineLength = inputFile.selectLine(startLine).end().lineOffset();
+    if (startLineOffset > startLineLength) {
+      startLine++;
+      startLineOffset = 0;
     }
 
+    int endLine = pbTextRange.getEndLine();
+    int endLineLength = inputFile.selectLine(endLine).end().lineOffset();
     int endLineOffset = pbTextRange.getEndOffset();
-    if (endLineOffset > lineLength) {
-      endLineOffset = lineLength;
+    if (endLineOffset > endLineLength) {
+      endLineOffset = endLineLength;
     }
 
-    return Optional.of(inputFile.newRange(startLine, startLineOffset, endLine, endLineOffset));
+    return startLine < endLine || (startLine == endLine && startLineOffset < endLineOffset)
+      ? Optional.of(inputFile.newRange(startLine, startLineOffset, endLine, endLineOffset))
+      : Optional.empty();
   }
 }

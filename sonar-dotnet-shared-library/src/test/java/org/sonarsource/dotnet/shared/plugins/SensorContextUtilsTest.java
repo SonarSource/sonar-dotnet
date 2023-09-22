@@ -21,21 +21,26 @@ package org.sonarsource.dotnet.shared.plugins;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.batch.fs.TextRange;
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
+import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
 import static org.sonar.api.batch.fs.InputFile.Type;
 import static org.sonarsource.dotnet.shared.plugins.SensorContextUtils.hasAnyMainFiles;
 import static org.sonarsource.dotnet.shared.plugins.SensorContextUtils.hasFilesOfLanguage;
 import static org.sonarsource.dotnet.shared.plugins.SensorContextUtils.hasFilesOfType;
 import static org.sonarsource.dotnet.shared.plugins.SensorContextUtils.toInputFile;
+import static org.sonarsource.dotnet.shared.plugins.SensorContextUtils.toTextRange;
 
 public class SensorContextUtilsTest {
   private static final String LANG_ONE = "LANG_ONE";
@@ -147,7 +152,6 @@ public class SensorContextUtilsTest {
   public void hasFilesOfLanguage_whenOnlyTestFilesOfThatLanguageExist_returnsTrue() {
     addFileToFileSystem("bar", Type.TEST, LANG_ONE);
     assertThat(hasFilesOfLanguage(fs, LANG_ONE)).isTrue();
-
   }
 
   @Test
@@ -157,11 +161,108 @@ public class SensorContextUtilsTest {
     assertThat(hasFilesOfLanguage(fs, LANG_ONE)).isFalse();
   }
 
+  @Test
+  public void toTextRange_whenMultiLineRangeStartsAtEOL_doesNotFilterOut() {
+    var inputFile = new TestInputFileBuilder("mod", "source.cs")
+      .setLanguage("cs")
+      .setType(Type.MAIN)
+      .setContents(
+        "Some text \n" +
+        "rangeStartingAtEOL1\n" +
+        "Some more text rangeStarting\n" +
+        "AtEOL2 Some other text")
+      .build();
+    fs.add(inputFile);
+    assertTextRange(toTextRange(inputFile, pbTextRangeOf(1, 10, 2, 18)), 1, 10, 2, 18);
+    assertTextRange(toTextRange(inputFile, pbTextRangeOf(2, 19, 4, 5)), 2, 19, 4, 5);
+  }
+
+  @Test
+  public void toTextRange_whenMultiLineRangeStartsBeyondEOL_trimsStartMovingToNextLine() {
+    var inputFile = new TestInputFileBuilder("mod", "source.cs")
+      .setLanguage("cs")
+      .setType(Type.MAIN)
+      .setContents("\tSome text\nrangeStartingAtEOL1\nrangeStarting\nAtEOL2\nAndSpanning\nMultipleLines")
+      .build();
+    fs.add(inputFile);
+
+    // Possible real scenario: 4 spaces transformed into \t -> new EOL at 10 instead of 13
+    assertTextRange(toTextRange(inputFile, pbTextRangeOf(1, 13, 2, 18)), 2, 0, 2, 18);
+  }
+
+  @Test
+  public void toTextRange_whenMultiLineRangeEndsBeyondEOL_trimsBasedOnEndLineLength() {
+    var inputFile = new TestInputFileBuilder("mod", "source.cs")
+      .setLanguage("cs")
+      .setType(Type.MAIN)
+      .setContents("Some text multiline\nRangeWithEndLineOffsetBiggerThanStartLineOffset Some other text")
+      .build();
+    fs.add(inputFile);
+    assertTextRange(toTextRange(inputFile, pbTextRangeOf(1, 10, 2, 64)), 1, 10, 2, 63);
+  }
+
+  @Test
+  public void toTextRange_whenSingleLineRangeStartsAtEOL_filtersOut() {
+    var inputFile = new TestInputFileBuilder("mod", "source.cs")
+      .setLanguage("cs")
+      .setType(Type.MAIN)
+      .setContents("Some text\nSome other text")
+      .build();
+    fs.add(inputFile);
+    assertThat(toTextRange(inputFile, pbTextRangeOf(1, 9, 1, 12))).isEmpty();
+    assertThat(toTextRange(inputFile, pbTextRangeOf(1, 9, 1, 9))).isEmpty();
+  }
+
+  @Test
+  public void toTextRange_whenSingleLineRangeStartsBeyondEOL_filtersOut() {
+    var inputFile = new TestInputFileBuilder("mod", "source.cs")
+      .setLanguage("cs")
+      .setType(Type.MAIN)
+      .setContents("Some text\nSome other text")
+      .build();
+    fs.add(inputFile);
+    assertThat(toTextRange(inputFile, pbTextRangeOf(1, 10, 1, 12))).isEmpty();
+    assertThat(toTextRange(inputFile, pbTextRangeOf(1, 10, 1, 10))).isEmpty();
+  }
+
+  @Test
+  public void toTextRange_whenSingleLineRangeEndsBeyondEOL_trimsBasedOnEndLineLength() {
+    var inputFile = new TestInputFileBuilder("mod", "source.cs")
+      .setLanguage("cs")
+      .setType(Type.MAIN)
+      .setContents("Some text singleLineRange\n")
+      .build();
+    fs.add(inputFile);
+    assertTextRange(toTextRange(inputFile, pbTextRangeOf(1, 10, 1, 100)), 1, 10, 1, 25);
+  }
+
   private void addFileToFileSystem(String fileName, InputFile.Type fileType, String language) {
     DefaultInputFile inputFile = new TestInputFileBuilder("mod", fileName)
       .setLanguage(language)
       .setType(fileType)
       .build();
     fs.add(inputFile);
+  }
+
+  private SonarAnalyzer.TextRange pbTextRangeOf(int startLine, int startLineOffset, int endLine, int endLineOffset) {
+    return SonarAnalyzer.TextRange.newBuilder()
+      .setStartLine(startLine)
+      .setStartOffset(startLineOffset)
+      .setEndLine(endLine)
+      .setEndOffset(endLineOffset)
+      .build();
+  }
+
+  private void assertTextRange(Optional<TextRange> textRange, int startLine, int startLineOffset, int endLine, int endLineOffset) {
+    textRange.ifPresentOrElse(
+      x -> {
+        assertThat(x.start().line()).isEqualTo(startLine);
+        assertThat(x.start().lineOffset()).isEqualTo(startLineOffset);
+        assertThat(x.end().line()).isEqualTo(endLine);
+        assertThat(x.end().lineOffset()).isEqualTo(endLineOffset);
+      },
+      () -> {
+        fail("The provided textRange is empty.");
+      });
   }
 }
