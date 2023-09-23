@@ -1329,4 +1329,26 @@ public partial class TokenTypeAnalyzerTest
                 }
             }
             """, allowSemanticModel);
+
+    [DataTestMethod]
+    [DataRow("var d = [u:dateTimePointer]->Date;", true)]
+    [DataRow("var d = dateTimePointer->[u:Date];", false)]
+    [DataRow("var d = (*[u:dateTimePointer]).Date;", false)]
+    [DataRow("var d = (*dateTimePointer).[u:Date];", false)]
+    [DataRow("[t:Int32]* iPointer;", false)]
+    [DataRow("[u:System].Int32* iPointer;", true)]
+    [DataRow("System.[t:Int32]* iPointer;", false)]
+    [DataRow("[k:void]* voidPointer;", false)]
+    [DataRow("DateTime d = default; M(&[u:d]);", false)]
+    public void IdentifierToken_Unsafe_Pointers(string statement, bool allowSemanticModel) =>
+        ClassifierTestHarness.AssertTokenTypes($$"""
+            using System;
+            public class C
+            {
+                public unsafe void M(DateTime* dateTimePointer)
+                {
+                    {{statement}}
+                }
+            }
+            """, allowSemanticModel);
 }
