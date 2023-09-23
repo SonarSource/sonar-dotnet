@@ -196,6 +196,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     // that can not bind to a type. The only things that can bind to a type are SimpleNames (Identifier or GenericName)
                     // or pre-defined types. None of the pre-defined types have a nested type, so we can exclude these as well.
                     { Parent: MemberAccessExpressionSyntax x } when AnyMemberAccessLeftIsNotASimpleName(x) => TokenType.UnknownTokentype,
+                    // The left side of a pointer member access must be a pointer and can not be a type
+                    { Parent: MemberAccessExpressionSyntax { RawKind: (int)SyntaxKind.PointerMemberAccessExpression } } => TokenType.UnknownTokentype,
                     _ => ClassifyIdentifierByModel(name),
                 };
 

@@ -1331,7 +1331,7 @@ public partial class TokenTypeAnalyzerTest
             """, allowSemanticModel);
 
     [DataTestMethod]
-    [DataRow("var d = [u:dateTimePointer]->Date;", true)]
+    [DataRow("var d = [u:dateTimePointer]->Date;", false)]
     [DataRow("var d = dateTimePointer->[u:Date];", false)]
     [DataRow("var d = (*[u:dateTimePointer]).Date;", false)]
     [DataRow("var d = (*dateTimePointer).[u:Date];", false)]
