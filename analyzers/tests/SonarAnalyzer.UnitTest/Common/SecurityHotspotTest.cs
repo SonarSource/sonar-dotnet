@@ -106,7 +106,6 @@ namespace SonarAnalyzer.UnitTest.Common
                 nameof(DoNotUseRandom) => MetadataReferenceFacade.SystemSecurityCryptography,
                 nameof(ExpandingArchives) => ExpandingArchivesTest.AdditionalReferences,
                 nameof(RequestsWithExcessiveLength) => RequestsWithExcessiveLengthTest.GetAdditionalReferences(),
-                nameof(UsingRegularExpressions) => MetadataReferenceFacade.RegularExpressions,
                 nameof(SpecifyTimeoutOnRegex) => MetadataReferenceFacade.RegularExpressions
                     .Concat(NuGetMetadataReference.SystemComponentModelAnnotations()),
 
