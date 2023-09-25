@@ -45,6 +45,18 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CheckArgumentException_TopLevelStatements() =>
             builder.AddPaths("CheckArgumentException.TopLevelStatements.cs").WithTopLevelStatements().Verify();
 
+        [TestMethod]
+        public void CheckArgumentException_CSharp12() =>
+            builder.AddSnippet("""
+                using System;
+
+                // Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/7714
+                public class Class(string s)
+                {
+                    private readonly string _s = s ?? throw new ArgumentNullException(nameof(s)); // Noncompliant FP
+                }
+                """).WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
+
 #endif
 
     }
