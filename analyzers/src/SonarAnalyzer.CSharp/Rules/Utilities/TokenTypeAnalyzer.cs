@@ -325,6 +325,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     { RawKind: (int)SyntaxKindEx.FileScopedNamespaceDeclaration } x => ((FileScopedNamespaceDeclarationSyntaxWrapper)x).Name == name,
                     { RawKind: (int)SyntaxKindEx.TupleElement } x => ((TupleElementSyntaxWrapper)x).Type == name,
                     { RawKind: (int)SyntaxKindEx.RefType } x => ((RefTypeSyntaxWrapper)x).Type == name,
+                    { RawKind: (int)SyntaxKindEx.ScopedType } x => ((ScopedTypeSyntaxWrapper)x).Type == name,
                     _ => false,
                 };
         }

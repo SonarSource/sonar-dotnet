@@ -27,6 +27,7 @@ namespace StyleCop.Analyzers.Lightup
         public const SyntaxKind Utf8StringLiteralToken = (SyntaxKind)8520;
         public const SyntaxKind Utf8SingleLineRawStringLiteralToken = (SyntaxKind)8521;
         public const SyntaxKind Utf8MultiLineRawStringLiteralToken = (SyntaxKind)8522;
+        public const SyntaxKind PragmaChecksumDirectiveTrivia = (SyntaxKind)8560;
         public const SyntaxKind ConflictMarkerTrivia = (SyntaxKind)8564;
         public const SyntaxKind IsPatternExpression = (SyntaxKind)8657;
         public const SyntaxKind RangeExpression = (SyntaxKind)8658;
@@ -87,6 +88,6 @@ namespace StyleCop.Analyzers.Lightup
         public const SyntaxKind InterpolatedSingleLineRawStringStartToken = (SyntaxKind)9072;
         public const SyntaxKind InterpolatedMultiLineRawStringStartToken = (SyntaxKind)9073;
         public const SyntaxKind InterpolatedRawStringEndToken = (SyntaxKind)9074;
-        public const SyntaxKind PragmaChecksumDirectiveTrivia = (SyntaxKind)8560;
+        public const SyntaxKind ScopedType = (SyntaxKind)9075;
     }
 }
