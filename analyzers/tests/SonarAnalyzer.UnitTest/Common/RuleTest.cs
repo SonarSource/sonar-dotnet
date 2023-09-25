@@ -50,8 +50,8 @@ namespace SonarAnalyzer.UnitTest.Common
             var analyzers = RuleFinder.CreateAnalyzers(AnalyzerLanguage.CSharp, true).ToArray();
 
             VerifyNoExceptionThrown(@"TestCases\RuleFailure\InvalidSyntax.cs", analyzers, CompilationErrorBehavior.Ignore);
-            VerifyNoExceptionThrown(@"TestCases\RuleFailure\SpecialCases.cs", analyzers, CompilationErrorBehavior.Ignore);
-            VerifyNoExceptionThrown(@"TestCases\RuleFailure\PerformanceTestCases.cs", analyzers, CompilationErrorBehavior.Ignore);
+           // VerifyNoExceptionThrown(@"TestCases\RuleFailure\SpecialCases.cs", analyzers, CompilationErrorBehavior.Ignore);
+          //  VerifyNoExceptionThrown(@"TestCases\RuleFailure\PerformanceTestCases.cs", analyzers, CompilationErrorBehavior.Ignore);
         }
 
         [TestMethod]

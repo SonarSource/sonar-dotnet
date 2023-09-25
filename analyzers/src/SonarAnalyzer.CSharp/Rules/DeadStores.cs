@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             // No need to check for ExpressionBody as it can't contain variable assignment
             context.RegisterNodeAction(
-                c => CheckForDeadStores<BaseMethodDeclarationSyntax>(c, c.SemanticModel.GetDeclaredSymbol(c.Node), x => (CSharpSyntaxNode)x.Body ?? x.ExpressionBody()),
+                c => CheckForDeadStores<BaseMethodDeclarationSyntax>(c, c.SemanticModel.GetDeclaredSymbol(c.Node), c.Node, x => (CSharpSyntaxNode)x.Body ?? x.ExpressionBody()),
                 SyntaxKind.MethodDeclaration,
                 SyntaxKind.ConstructorDeclaration,
                 SyntaxKind.DestructorDeclaration,
@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.OperatorDeclaration);
 
             context.RegisterNodeAction(
-                c => CheckForDeadStores<AccessorDeclarationSyntax>(c, c.SemanticModel.GetDeclaredSymbol(c.Node), x => (CSharpSyntaxNode)x.Body ?? x.ExpressionBody()),
+                c => CheckForDeadStores<AccessorDeclarationSyntax>(c, c.SemanticModel.GetDeclaredSymbol(c.Node), c.Node, x => x.Body != null || x.ExpressionBody() != null ? x : null),
                 SyntaxKind.GetAccessorDeclaration,
                 SyntaxKind.SetAccessorDeclaration,
                 SyntaxKindEx.InitAccessorDeclaration,
@@ -62,20 +62,25 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.RemoveAccessorDeclaration);
 
             context.RegisterNodeAction(
-                c => CheckForDeadStores<AnonymousFunctionExpressionSyntax>(c, c.SemanticModel.GetSymbolInfo(c.Node).Symbol, x => x.Body),
+                c => CheckForDeadStores(c, c.SemanticModel.GetSymbolInfo(c.Node).Symbol, c.Node),
                 SyntaxKind.AnonymousMethodExpression,
                 SyntaxKind.SimpleLambdaExpression,
                 SyntaxKind.ParenthesizedLambdaExpression);
 
             context.RegisterNodeAction(
-                c => CheckForDeadStores(c, c.SemanticModel.GetDeclaredSymbol(c.Node), ((LocalFunctionStatementSyntaxWrapper)c.Node).Body),
+                c => CheckForDeadStores(c, c.SemanticModel.GetDeclaredSymbol(c.Node), c.Node),
                 SyntaxKindEx.LocalFunctionStatement);
         }
 
-        private void CheckForDeadStores<T>(SonarSyntaxNodeReportingContext context, ISymbol symbol, Func<T, CSharpSyntaxNode> bodyOrExpressionBody) where T : SyntaxNode =>
-            CheckForDeadStores(context, symbol, bodyOrExpressionBody((T)context.Node));
+        private void CheckForDeadStores<T>(SonarSyntaxNodeReportingContext context, ISymbol symbol, SyntaxNode node, Func<T, CSharpSyntaxNode> hasABody) where T : SyntaxNode
+        {
+            if (hasABody((T)node) is { })
+            {
+                CheckForDeadStores(context, symbol, node);
+            }
+        }
 
-        private void CheckForDeadStores(SonarSyntaxNodeReportingContext context, ISymbol symbol, CSharpSyntaxNode node)
+        private void CheckForDeadStores(SonarSyntaxNodeReportingContext context, ISymbol symbol, SyntaxNode node)
         {
             if (symbol != null && node != null)
             {
