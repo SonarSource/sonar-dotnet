@@ -137,10 +137,9 @@ namespace SonarAnalyzer.Rules.CSharp
         /// </summary>
         private bool IsSymbolFirstSetInCfg(ISymbol classMember, BaseMethodDeclarationSyntax constructorOrInitializer, SemanticModel semanticModel, CancellationToken cancel)
         {
-            var body = (CSharpSyntaxNode)constructorOrInitializer.Body ?? constructorOrInitializer.ExpressionBody();
             if (useSonarCfg)
             {
-                if (!CSharpControlFlowGraph.TryGet(body, semanticModel, out var cfg))
+                if (!CSharpControlFlowGraph.TryGet(constructorOrInitializer, semanticModel, out var cfg))
                 {
                     return false;
                 }
@@ -150,7 +149,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             else
             {
-                var cfg = ControlFlowGraph.Create(body.Parent, semanticModel, cancel);
+                var cfg = ControlFlowGraph.Create(constructorOrInitializer, semanticModel, cancel);
                 var checker = new RoslynChecker(cfg, classMember, cancel);
                 return checker.CheckAllPaths();
             }
