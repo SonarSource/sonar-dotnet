@@ -1343,6 +1343,9 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("System.[t:Int32]* iPointer;", false)]
     [DataRow("[k:void]* voidPointer;", false)]
     [DataRow("DateTime d = default; M(&[u:d]);", false)]
+    [DataRow("[t:DateTime]** dt = &[u:dateTimePointer];", false)]
+    [DataRow("_ = (*(&[u:dateTimePointer]))->Date;", false)]
+    [DataRow("_ = (**(&[u:dateTimePointer])).Date;", false)]
     public void IdentifierToken_Unsafe_Pointers(string statement, bool allowSemanticModel) =>
         ClassifierTestHarness.AssertTokenTypes($$"""
             using System;
