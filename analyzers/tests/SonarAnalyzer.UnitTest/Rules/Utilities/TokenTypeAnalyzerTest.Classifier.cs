@@ -1357,4 +1357,19 @@ public partial class TokenTypeAnalyzerTest
                 }
             }
             """, allowSemanticModel);
+
+    [DataTestMethod]
+    [DataRow("[k:int] @int;", false)]
+    [DataRow("[k:volatile] [t:@volatile] [u:@volatile];", false)]
+    public void IdentifierToken_KeywordEscaping(string fieldDeclaration, bool allowSemanticModel) =>
+        ClassifierTestHarness.AssertTokenTypes($$"""
+            using System;
+
+            public class @volatile { }
+            
+            public class C
+            {
+                {{fieldDeclaration}}
+            }
+            """, allowSemanticModel);
 }
