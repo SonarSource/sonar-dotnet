@@ -43,12 +43,11 @@ public class ArrayPassedAsParamsTest
 
     [TestMethod]
     public void ArrayPassedAsParams_CSharp12() =>
-        builderCS.AddSnippet(
-"""
-MyClass s = new(1, [1, 2, 3]); // FN
+        builderCS.AddSnippet("""
+            MyClass s = new(1, [1, 2, 3]); // FN
 
-public class MyClass(int a, params int[] args) { }
-""")
+            public class MyClass(int a, params int[] args) { }
+            """)
             .WithOptions(ParseOptionsHelper.FromCSharp12)
             .WithTopLevelStatements()
             .Verify();
