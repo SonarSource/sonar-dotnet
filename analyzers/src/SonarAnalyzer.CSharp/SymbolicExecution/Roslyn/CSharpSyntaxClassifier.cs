@@ -36,6 +36,7 @@ public sealed class CSharpSyntaxClassifier : SyntaxClassifierBase
         {
             DoStatementSyntax doStatement => doStatement.Condition,
             ForStatementSyntax forStatement => forStatement.Condition,
+            ForEachStatementSyntax forEachStatement => forEachStatement.Expression,
             WhileStatementSyntax whileStatement => whileStatement.Condition,
             _ => null
         };

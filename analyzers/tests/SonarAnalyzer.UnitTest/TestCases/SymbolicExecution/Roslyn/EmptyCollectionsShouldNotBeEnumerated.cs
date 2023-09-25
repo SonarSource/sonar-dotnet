@@ -1103,7 +1103,7 @@ public class Repro_7582
 
         if (flag)
         {
-            foreach (var item in list)  // Noncompliant FP
+            foreach (var item in list)  // Compliant
             {
                 // do something with items that were <= 10
                 // only when items > 10 were found.
@@ -1161,7 +1161,7 @@ static class Repro_8041
 
             foreach (T item in current.Successors)
             {
-                _ = toDoLater.Remove(item);     // Noncompliant FP
+                _ = toDoLater.Remove(item);     // Compliant
                 toDoNow.Enqueue(item);
             }
         }

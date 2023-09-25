@@ -37,6 +37,7 @@ public sealed class VisualBasicSyntaxClassifier : SyntaxClassifierBase
             DoStatementSyntax doStatement => doStatement.WhileOrUntilClause,
             LoopStatementSyntax loopStatement => loopStatement.WhileOrUntilClause,
             ForBlockSyntax forBlock => forBlock.ForStatement,
+            ForEachStatementSyntax foreachStatement => foreachStatement.Expression,
             WhileStatementSyntax whileStatement => whileStatement.Condition,
             _ => null
         };

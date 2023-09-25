@@ -2374,9 +2374,10 @@ namespace Tests.Diagnostics
                 }
             }
 
-            if (do1 && do2)                             // Noncompliant: This repro is badly written. This is a TP. You can find the FP below.
+            if (do1 && do2)                             // FN, this repro is written badly. This used to be a TP due to the known content of items.
+                                                        //     The original intention of the reported issues can be found below.
             {
-                throw new InvalidOperationException();  // Secondary
+                throw new InvalidOperationException();
             }
         }
 
@@ -2397,9 +2398,9 @@ namespace Tests.Diagnostics
                 }
             }
 
-            if (do1 && do2)                             // Noncompliant FP
+            if (do1 && do2)                             // Compliant
             {
-                throw new InvalidOperationException();  // Secondary FP
+                throw new InvalidOperationException();
             }
         }
 
@@ -2439,9 +2440,9 @@ namespace Tests.Diagnostics
                     allPathsRooted = false;
                 }
             }
-            if (anyPathRooted && !allPathsRooted)   // Noncompliant FP
+            if (anyPathRooted && !allPathsRooted)   // Compliant
             {
-                throw new InvalidOperationException("Paths must be all rooted or all unrooted");    // Secondary FP
+                throw new InvalidOperationException("Paths must be all rooted or all unrooted");
             }
             return allPathsRooted;
         }
@@ -2463,9 +2464,9 @@ namespace Tests.Diagnostics
                 }
             }
 
-            if (bool1 && bool2)                         // Noncompliant FP
+            if (bool1 && bool2)                         // Compliant
             {
-                throw new InvalidOperationException();  // Secondary FP
+                throw new InvalidOperationException();
             }
 
             return bool1 && !bool2;                     // Compliant
