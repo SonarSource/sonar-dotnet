@@ -39,6 +39,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ParametersCorrectOrder_CSharp11() =>
             builderCS.AddPaths("ParametersCorrectOrder.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
 
+        [TestMethod]
+        public void ParametersCorrectOrder_CSharp12() =>
+            builderCS.AddPaths("ParametersCorrectOrder.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
+
 #endif
 
         [TestMethod]

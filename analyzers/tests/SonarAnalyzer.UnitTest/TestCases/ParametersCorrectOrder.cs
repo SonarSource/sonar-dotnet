@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
+using static Tests.Diagnostics.A;
 
 namespace Tests.Diagnostics
 {
@@ -194,3 +196,62 @@ namespace Tests.Diagnostics
         }
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8070
+namespace Repro_8070
+{
+    class InvokingConstructorViaNew
+    {
+        void Test(int a, int b, int c)
+        {
+            _ = new SomeClass(b, a);                  // Noncompliant, fully inverted
+            _ = new SomeClass(b, a, c);               // Noncompliant, partially inverted
+        }
+
+        class SomeClass
+        {
+            public SomeClass(int a, int b) { }        // Secondary
+            public SomeClass(int a, int b, int c) { } // Secondary
+        }
+    }
+
+    class InvokingConstructorViaThis
+    {
+        class SomeClass
+        {
+            public SomeClass(int a, int b) { }
+            public SomeClass(int a, int b, string c) : this(b, a) { } // FN: ctor params fully inverted with additional par after
+            public SomeClass(string c, int a, int b) : this(b, a) { } // FN: ctor params fully inverted with additional par before
+        }
+    }
+
+    class InvokingConstructorViaBase
+    {
+        class Base
+        {
+            public Base(int a, int b) { }
+            public Base(int a, int b, int c) { }
+        }
+
+        class ParamsFullyInverted : Base
+        {
+            public ParamsFullyInverted(int a, int b) : base(b, a) { }                                    // FN
+        }
+
+        class ParamsPartiallyInverted : Base
+        {
+            public ParamsPartiallyInverted(int a, int b, int c) : base(b, a, c) { }                      // FN
+        }
+
+        class ParamsFullyInvertedWithAdditionalParamAfter : Base
+        {
+            public ParamsFullyInvertedWithAdditionalParamAfter(int a, int b, string s) : base(b, a) { }  // FN
+        }
+
+        class ParamsFullyInvertedWithAdditionalParamBefore : Base
+        {
+            public ParamsFullyInvertedWithAdditionalParamBefore(string s, int a, int b) : base(b, a) { } // FN
+        }
+    }
+}
+
