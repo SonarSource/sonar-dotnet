@@ -1336,6 +1336,7 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("var d = (*[u:dateTimePointer]).Date;", false)]
     [DataRow("var d = (*dateTimePointer).[u:Date];", false)]
     [DataRow("var d = [u:dateTimePointer][0];", false)]
+    [DataRow("[u:dateTimePointer][0] = default;", false)]
     [DataRow("[t:Int32]* iPointer;", false)]
     [DataRow("[t:Int32]?* iPointer;", false)]
     [DataRow("[t:Int32]?** iPointer;", false)]
