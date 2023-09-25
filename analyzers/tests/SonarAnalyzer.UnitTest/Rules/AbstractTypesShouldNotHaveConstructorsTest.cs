@@ -45,6 +45,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithTopLevelStatements()
                 .Verify();
 
+        [TestMethod]
+        public void AbstractTypesShouldNotHaveConstructors_CSharp12() =>
+            builder.AddPaths("AbstractTypesShouldNotHaveConstructors.CSharp12.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp12)
+                .Verify();
+
 #endif
 
     }
