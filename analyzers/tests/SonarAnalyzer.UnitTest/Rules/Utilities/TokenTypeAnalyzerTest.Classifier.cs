@@ -1292,6 +1292,7 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("scoped ref [t:S] s2 = ref s1;", false)]
     [DataRow("ref [t:S] s2 = ref s1;", false)]
     [DataRow("scoped [t:S] s2 = s1;", false)]
+    [DataRow("[k:scoped] [k:ref] [k:readonly] [t:S] [u:s2] = [k:ref] [u:s1];", false)]
     public void IdentifierToken_Scoped_Local(string localDeclaration, bool allowSemanticModel) =>
         ClassifierTestHarness.AssertTokenTypes($$"""
             using System;
@@ -1312,6 +1313,7 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("scoped ref [t:S] s", false)]
     [DataRow("ref [t:S] s", false)]
     [DataRow("scoped [t:S] s", false)]
+    [DataRow("[k:scoped] [k:ref] [t:S] [u:s]", false)]
     public void IdentifierToken_Scoped_Parameter(string parameterDeclaration, bool allowSemanticModel) =>
         ClassifierTestHarness.AssertTokenTypes($$"""
             using System;
