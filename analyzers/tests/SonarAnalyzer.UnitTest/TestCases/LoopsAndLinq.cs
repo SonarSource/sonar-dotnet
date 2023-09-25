@@ -20,7 +20,7 @@ namespace Tests.Diagnostics
         {
             var result = new List<string>();
 
-            foreach (var element in collection) // Noncompliant {{Loops should be simplified with "LINQ" expressions}}
+            foreach (var element in collection) // Noncompliant {{Loops should be simplified using the "Where" LINQ method}}
             //                      ^^^^^^^^^^
             {
                 if (condition(element))
@@ -148,7 +148,7 @@ namespace Tests.Diagnostics
         {
             var result = new List<string>();
 
-            foreach (var element in collection) // Noncompliant {{Loops should be simplified with "LINQ" expressions}}
+            foreach (var element in collection) // Noncompliant {{Loops should be simplified using the "Where" LINQ method}}
             //                      ^^^^^^^^^^
                 if (condition(element))
                 //  ^^^^^^^^^^^^^^^^^^ Secondary
