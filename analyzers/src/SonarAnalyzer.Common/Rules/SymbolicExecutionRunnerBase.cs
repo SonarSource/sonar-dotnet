@@ -74,25 +74,25 @@ public abstract class SymbolicExecutionRunnerBase : SonarDiagnosticAnalyzer
 
     protected void Analyze<TNode>(SonarAnalysisContext analysisContext, SonarSyntaxNodeReportingContext context, Func<TNode, SyntaxNode> getBody) where TNode : SyntaxNode
     {
-        if (getBody((TNode)context.Node) is { } body && context.SemanticModel.GetDeclaredSymbol(context.Node) is { } symbol)
+        if (getBody((TNode)context.Node) is { } && context.SemanticModel.GetDeclaredSymbol(context.Node) is { } symbol)
         {
-            Analyze(analysisContext, context, body, symbol);
+            Analyze(analysisContext, context, context.Node, symbol);
         }
     }
 
-    protected void Analyze(SonarAnalysisContext analysisContext, SonarSyntaxNodeReportingContext nodeContext, SyntaxNode body, ISymbol symbol)
+    protected void Analyze(SonarAnalysisContext analysisContext, SonarSyntaxNodeReportingContext nodeContext, SyntaxNode declaration, ISymbol symbol)
     {
-        if (body is { ContainsDiagnostics: false })
+        if (declaration is { ContainsDiagnostics: false })
         {
-            AnalyzeSonar(nodeContext, body, symbol);
+            AnalyzeSonar(nodeContext, declaration, symbol);
             if (ControlFlowGraph.IsAvailable)
             {
-                AnalyzeRoslyn(analysisContext, nodeContext, body, symbol);
+                AnalyzeRoslyn(analysisContext, nodeContext, declaration, symbol);
             }
         }
     }
 
-    private void AnalyzeRoslyn(SonarAnalysisContext analysisContext, SonarSyntaxNodeReportingContext nodeContext, SyntaxNode body, ISymbol symbol)
+    private void AnalyzeRoslyn(SonarAnalysisContext analysisContext, SonarSyntaxNodeReportingContext nodeContext, SyntaxNode declaration, ISymbol symbol)
     {
         var checks = AllRules
             .Where(x => IsEnabled(nodeContext, x.Key))
@@ -104,7 +104,7 @@ public abstract class SymbolicExecutionRunnerBase : SonarDiagnosticAnalyzer
         {
             try
             {
-                if (CreateCfg(nodeContext.SemanticModel, body, nodeContext.Cancel) is { } cfg)
+                if (CreateCfg(nodeContext.SemanticModel, declaration, nodeContext.Cancel) is { } cfg)
                 {
                     var engine = new RoslynSymbolicExecution(cfg, SyntaxClassifier, checks, nodeContext.Cancel);
                     engine.Execute();
@@ -112,7 +112,7 @@ public abstract class SymbolicExecutionRunnerBase : SonarDiagnosticAnalyzer
             }
             catch (Exception ex) when (ex is not OperationCanceledException)
             {
-                throw new SymbolicExecutionException(ex, symbol, body.GetLocation());
+                throw new SymbolicExecutionException(ex, symbol, declaration.GetLocation());
             }
         }
     }

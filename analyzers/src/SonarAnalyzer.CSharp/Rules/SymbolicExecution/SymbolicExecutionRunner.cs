@@ -108,7 +108,7 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
                 var declaration = (AnonymousFunctionExpressionSyntax)c.Node;
                 if (c.SemanticModel.GetSymbolInfo(declaration).Symbol is { } symbol && !c.IsInExpressionTree())
                 {
-                    Analyze(context, c, declaration.Body, symbol);
+                    Analyze(context, c, declaration, symbol);
                 }
             },
             SyntaxKind.AnonymousMethodExpression,
