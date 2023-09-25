@@ -1336,12 +1336,12 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("var d = (*[u:dateTimePointer]).Date;", false)]
     [DataRow("var d = (*dateTimePointer).[u:Date];", false)]
     [DataRow("var d = [u:dateTimePointer][0];", false)]
-    [DataRow("[u:dateTimePointer][0] = default;", false)]
+    [DataRow("[u:dateTimePointer][0] = *(&[u:dateTimePointer][0]);", false)]
     [DataRow("[t:Int32]* iPointer;", false)]
     [DataRow("[t:Int32]?* iPointer;", false)]
-    [DataRow("[t:Int32]?** iPointer;", false)]
-    [DataRow("[t:Nullable]<[t:Int32]>** iPointer;", false)]
-    [DataRow("[u:System].Int32* iPointerPointer;", true)]
+    [DataRow("[t:Int32]?** iPointerPointer;", false)]
+    [DataRow("[t:Nullable]<[t:Int32]>** iPointerPointer;", false)]
+    [DataRow("[u:System].Int32* iPointer;", true)]
     [DataRow("System.[t:Int32]* iPointer;", false)]
     [DataRow("[k:void]* voidPointer;", false)]
     [DataRow("DateTime d = default; M(&[u:d]);", false)]
@@ -1363,6 +1363,7 @@ public partial class TokenTypeAnalyzerTest
     [DataTestMethod]
     [DataRow("[k:int] @int;", false)]
     [DataRow("[k:volatile] [t:@volatile] [u:@volatile];", false)]
+    [DataRow("[t:Int32] [u:@someName];", false)]
     public void IdentifierToken_KeywordEscaping(string fieldDeclaration, bool allowSemanticModel) =>
         ClassifierTestHarness.AssertTokenTypes($$"""
             using System;
