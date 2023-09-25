@@ -40,16 +40,21 @@ namespace SonarAnalyzer.UnitTest.Common
             {
                 var analyzerName = analyzer.GetType().Name;
 
-                if (IsTestValid(analyzerName))
+#if NETFRAMEWORK
+
+                if (analyzerName is nameof(DisablingCsrfProtection) || analyzerName is nameof(PermissiveCors))
                 {
-                    new VerifierBuilder()
-                        .AddPaths(@$"Hotspots\{GetTestCaseFileName(analyzerName)}{language.FileExtension}")
-                        .AddAnalyzer(() => analyzer)
-                        .WithOptions(parseOptions)
-                        .AddReferences(GetAdditionalReferences(analyzerName, Constants.NuGetLatestVersion))
-                        .WithConcurrentAnalysis(analyzerName is not nameof(ClearTextProtocolsAreSensitive))
-                        .VerifyNoIssueReported();
+                    continue;
                 }
+#endif
+
+                new VerifierBuilder()
+                    .AddPaths(@$"Hotspots\{GetTestCaseFileName(analyzerName)}{language.FileExtension}")
+                    .AddAnalyzer(() => analyzer)
+                    .WithOptions(parseOptions)
+                    .AddReferences(GetAdditionalReferences(analyzerName, Constants.NuGetLatestVersion))
+                    .WithConcurrentAnalysis(analyzerName is not nameof(ClearTextProtocolsAreSensitive))
+                    .VerifyNoIssueReported();
             }
         }
 
@@ -83,16 +88,6 @@ namespace SonarAnalyzer.UnitTest.Common
                 _ => analyzerName
             };
 
-        private static bool IsTestValid(string analyzerName) =>
-
-#if NETFRAMEWORK
-            analyzerName != nameof(DisablingCsrfProtection)
-            && analyzerName != nameof(PermissiveCors);
-#else
-            // IdentityModel is not available on .Net Core
-            analyzerName != nameof(ControllingPermissions);
-#endif
-
         private static IEnumerable<MetadataReference> GetAdditionalReferences(string analyzerName, string version) =>
             analyzerName switch
             {
@@ -116,7 +111,6 @@ namespace SonarAnalyzer.UnitTest.Common
                 nameof(LooseFilePermissions) => NuGetMetadataReference.MonoPosixNetStandard(),
                 nameof(PermissiveCors) => PermissiveCorsTest.AdditionalReferences,
 #else
-                nameof(ControllingPermissions) => ControllingPermissionsTest.AdditionalReferences,
                 nameof(ExecutingSqlQueries) => ExecutingSqlQueriesTest.GetReferencesNet46(version),
 #endif
                 _ => MetadataReferenceFacade.SystemNetHttp
