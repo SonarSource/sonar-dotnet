@@ -79,7 +79,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             BeforeCSharp11 = BeforeCSharp10.Concat(cs10).FilterByEnvironment();
             BeforeCSharp12 = BeforeCSharp11.Concat(cs11).FilterByEnvironment();
 
-            FromCSharp12 = CreateOptions(Preview).FilterByEnvironment();
+            FromCSharp12 = CreateOptions(CSharp12).FilterByEnvironment();
             FromCSharp11 = cs11.Concat(FromCSharp12).FilterByEnvironment();
             FromCSharp10 = cs10.Concat(FromCSharp11).FilterByEnvironment();
             FromCSharp9 = cs9.Concat(FromCSharp10).FilterByEnvironment();
