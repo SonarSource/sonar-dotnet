@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterNodeAction(
-                c => CheckForRedundantJumps(c, ((BaseMethodDeclarationSyntax)c.Node).Body),
+                c => CheckForRedundantJumps(c, ((BaseMethodDeclarationSyntax)c.Node)),
                 SyntaxKind.MethodDeclaration,
                 SyntaxKind.ConstructorDeclaration,
                 SyntaxKind.DestructorDeclaration,
@@ -43,11 +43,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.OperatorDeclaration);
 
             context.RegisterNodeAction(
-                c => CheckForRedundantJumps(c, ((LocalFunctionStatementSyntaxWrapper)c.Node).Body),
+                c => CheckForRedundantJumps(c, ((LocalFunctionStatementSyntaxWrapper)c.Node)),
                 SyntaxKindEx.LocalFunctionStatement);
 
             context.RegisterNodeAction(
-                c => CheckForRedundantJumps(c, ((AccessorDeclarationSyntax)c.Node).Body),
+                c => CheckForRedundantJumps(c, ((AccessorDeclarationSyntax)c.Node)),
                 SyntaxKind.GetAccessorDeclaration,
                 SyntaxKind.SetAccessorDeclaration,
                 SyntaxKindEx.InitAccessorDeclaration,
@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.RemoveAccessorDeclaration);
 
             context.RegisterNodeAction(
-                c => CheckForRedundantJumps(c, ((AnonymousFunctionExpressionSyntax)c.Node).Body),
+                c => CheckForRedundantJumps(c, ((AnonymousFunctionExpressionSyntax)c.Node)),
                 SyntaxKind.AnonymousMethodExpression,
                 SyntaxKind.SimpleLambdaExpression,
                 SyntaxKind.ParenthesizedLambdaExpression);
