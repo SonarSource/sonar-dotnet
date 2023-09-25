@@ -185,7 +185,7 @@ public class Sample
             var (tree, semanticModel) = TestHelper.CompileCS(code);
             var node = tree.Single<SyntaxCS.MethodDeclarationSyntax>();
 
-            ExtensionsCS.CreateCfg(node.Body, semanticModel, default).Should().NotBeNull();
+            ExtensionsCS.CreateCfg(node, semanticModel, default).Should().NotBeNull();
         }
 
         [TestMethod]
@@ -251,7 +251,7 @@ public class Sample
             var (tree, semanticModel) = TestHelper.CompileCS(code);
             var lambda = tree.Single<SyntaxCS.ParenthesizedLambdaExpressionSyntax>();
 
-            ExtensionsCS.CreateCfg(lambda.Body, semanticModel, default).Should().NotBeNull();
+            ExtensionsCS.CreateCfg(lambda, semanticModel, default).Should().NotBeNull();
         }
 
         [TestMethod]
@@ -267,7 +267,7 @@ End Class
             var (tree, semanticModel) = TestHelper.CompileVB(code);
             var lambda = tree.Single<SyntaxVB.SingleLineLambdaExpressionSyntax>();
 
-            ExtensionsVB.CreateCfg(lambda.Body, semanticModel, default).Should().NotBeNull();
+            ExtensionsVB.CreateCfg(lambda, semanticModel, default).Should().NotBeNull();
         }
 
         [TestMethod]
@@ -310,7 +310,7 @@ public class Sample
             var innerLambda = tree.Single<SyntaxCS.SimpleLambdaExpressionSyntax>();
             innerLambda.Parent.Parent.Should().BeOfType<SyntaxCS.VariableDeclaratorSyntax>().Subject.Identifier.ValueText.Should().Be("innerLambda");
 
-            var cfg = ExtensionsCS.CreateCfg(innerLambda.Body, semanticModel, default);
+            var cfg = ExtensionsCS.CreateCfg(innerLambda, semanticModel, default);
             cfg.Should().NotBeNull("It's innerLambda");
             cfg.Parent.Should().NotBeNull("It's InnerLocalFunction");
             cfg.Parent.Parent.Should().NotBeNull("Lambda iniside Lazy<int> constructor");
@@ -371,7 +371,7 @@ public class Sample
 }";
             var (tree, model) = TestHelper.CompileIgnoreErrorsCS(code);
             var lambda = tree.Single<SyntaxCS.ParenthesizedLambdaExpressionSyntax>();
-            ExtensionsCS.CreateCfg(lambda.Body, model, default).Should().NotBeNull();
+            ExtensionsCS.CreateCfg(lambda, model, default).Should().NotBeNull();
         }
 
         [TestMethod]
@@ -398,7 +398,7 @@ End Class";
             var (tree, model) = TestHelper.CompileIgnoreErrorsCS(code);
             var lambda = tree.Single<SyntaxCS.ParenthesizedLambdaExpressionSyntax>();
 
-            ExtensionsCS.CreateCfg(lambda.Body, model, default).Should().NotBeNull();
+            ExtensionsCS.CreateCfg(lambda, model, default).Should().NotBeNull();
         }
 
         [TestMethod]
@@ -477,8 +477,8 @@ public class Sample
             var compilation2 = compilation1.WithAssemblyName("Different-Compilation-Reusing-Same-Nodes");
             var method1 = compilation1.SyntaxTrees.Single().Single<SyntaxCS.MethodDeclarationSyntax>();
             var method2 = compilation2.SyntaxTrees.Single().Single<SyntaxCS.MethodDeclarationSyntax>();
-            var cfg1 = ExtensionsCS.CreateCfg(method1.Body, compilation1.GetSemanticModel(method1.SyntaxTree), default);
-            var cfg2 = ExtensionsCS.CreateCfg(method2.Body, compilation2.GetSemanticModel(method2.SyntaxTree), default);
+            var cfg1 = ExtensionsCS.CreateCfg(method1, compilation1.GetSemanticModel(method1.SyntaxTree), default);
+            var cfg2 = ExtensionsCS.CreateCfg(method2, compilation2.GetSemanticModel(method2.SyntaxTree), default);
 
             ReferenceEquals(cfg1, cfg2).Should().BeFalse("Different compilations should not reuse cache. They do not share semantic model and symbols.");
         }
