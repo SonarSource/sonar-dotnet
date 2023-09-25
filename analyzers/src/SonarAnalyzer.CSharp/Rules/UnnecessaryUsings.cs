@@ -29,10 +29,10 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Remove this unnecessary 'using'.";
 
         private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        private static readonly string[] IgnoredRazorFiles =
+        private static readonly HashSet<string> IgnoredRazorFiles = new(StringComparer.OrdinalIgnoreCase)
         {
-            "_IMPORTS.RAZOR",
-            "_VIEWIMPORTS.CSHTML"
+            "_Imports.razor",
+            "_ViewImports.cshtml"
         };
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
@@ -86,7 +86,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 //  - https://github.com/SonarSource/sonar-dotnet/issues/7959
                 if (usingDirective.GetFirstToken().IsKind(SyntaxKind.GlobalKeyword)
                     || (GeneratedCodeRecognizer.IsRazorGeneratedFile(usingDirective.SyntaxTree)
-                        && IgnoredRazorFiles.Contains(Path.GetFileName(usingDirective.GetLocation().GetMappedLineSpan().Path).ToUpperInvariant())))
+                        && IgnoredRazorFiles.Contains(Path.GetFileName(usingDirective.GetLocation().GetMappedLineSpan().Path))))
                 {
                     continue;
                 }
@@ -228,7 +228,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
     internal sealed class EquivalentNameSyntax : IEquatable<EquivalentNameSyntax>
     {
-        public NameSyntax Name { get; private set; }
+        public NameSyntax Name { get; }
 
         public EquivalentNameSyntax(NameSyntax name) =>
             Name = name;
