@@ -25,6 +25,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         private const string DiagnosticId = "S106";
         private const string MessageFormat = "Remove this logging statement.";
+
         protected DiagnosticDescriptor Rule =>
             DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
