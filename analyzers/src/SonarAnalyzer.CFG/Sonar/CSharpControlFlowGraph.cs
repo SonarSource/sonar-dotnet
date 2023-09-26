@@ -34,6 +34,7 @@ namespace SonarAnalyzer.CFG.Sonar
                 IndexerDeclarationSyntax n => n.ExpressionBody?.Expression,
                 AccessorDeclarationSyntax n => (SyntaxNode)n.Body ?? n.ExpressionBody(),
                 AnonymousFunctionExpressionSyntax n => n.Body,
+                ArrowExpressionClauseSyntax n => n,
                 _ => null
             };
             if (LocalFunctionStatementSyntaxWrapper.IsInstance(node))
