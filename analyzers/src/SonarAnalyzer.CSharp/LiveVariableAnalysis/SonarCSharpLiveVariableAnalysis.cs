@@ -206,7 +206,7 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
                     && symbol.DeclaringSyntaxReferences.Length == 1
                     && symbol.DeclaringSyntaxReferences.Single().GetSyntax() is { } node
                     && (LocalFunctionStatementSyntaxWrapper)node is LocalFunctionStatementSyntaxWrapper function
-                    && CSharpControlFlowGraph.TryGet(function.Body ?? function.ExpressionBody as CSharpSyntaxNode, semanticModel, out var cfg))
+                    && CSharpControlFlowGraph.TryGet(function, semanticModel, out var cfg))
                 {
                     ProcessedLocalFunctions.Add(symbol);
                     foreach (var block in cfg.Blocks.Reverse())
