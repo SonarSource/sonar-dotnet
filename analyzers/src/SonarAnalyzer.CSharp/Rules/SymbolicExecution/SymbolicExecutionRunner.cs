@@ -71,7 +71,7 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
             SyntaxKind.CompilationUnit);
 
         context.RegisterNodeAction(
-            c => Analyze<BaseMethodDeclarationSyntax>(context, c, x => (SyntaxNode)x.Body ?? x.ExpressionBody()),
+            c => Analyze<BaseMethodDeclarationSyntax>(context, c, c.Node, x => (SyntaxNode)x.Body ?? x.ExpressionBody()),
             SyntaxKind.ConstructorDeclaration,
             SyntaxKind.DestructorDeclaration,
             SyntaxKind.ConversionOperatorDeclaration,
@@ -79,7 +79,7 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
             SyntaxKind.MethodDeclaration);
 
         context.RegisterNodeAction(
-            c => Analyze<SyntaxNode>(context, c, x =>
+            c => Analyze<SyntaxNode>(context, c, c.Node, x =>
             {
                 var localFunction = (LocalFunctionStatementSyntaxWrapper)x;
                 return (SyntaxNode)localFunction.Body ?? localFunction.ExpressionBody;
@@ -87,15 +87,15 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
             SyntaxKindEx.LocalFunctionStatement);
 
         context.RegisterNodeAction(
-            c => Analyze<PropertyDeclarationSyntax>(context, c, x => x.ExpressionBody?.Expression),
+            c => Analyze<PropertyDeclarationSyntax>(context, c, ((PropertyDeclarationSyntax)c.Node).ExpressionBody, x => x.ExpressionBody?.Expression),
             SyntaxKind.PropertyDeclaration);
 
         context.RegisterNodeAction(
-            c => Analyze<IndexerDeclarationSyntax>(context, c, x => x.ExpressionBody?.Expression),
+            c => Analyze<IndexerDeclarationSyntax>(context, c, ((IndexerDeclarationSyntax)c.Node).ExpressionBody, x => x.ExpressionBody?.Expression),
             SyntaxKind.IndexerDeclaration);
 
         context.RegisterNodeAction(
-            c => Analyze<AccessorDeclarationSyntax>(context, c, x => (SyntaxNode)x.Body ?? x.ExpressionBody()),
+            c => Analyze<AccessorDeclarationSyntax>(context, c, c.Node, x => (SyntaxNode)x.Body ?? x.ExpressionBody()),
             SyntaxKind.GetAccessorDeclaration,
             SyntaxKind.SetAccessorDeclaration,
             SyntaxKindEx.InitAccessorDeclaration,
