@@ -128,6 +128,19 @@ namespace Tests.Diagnostics
                 o = value;          // Secondary
             }
         }
+
+        //Repro for https://github.com/SonarSource/sonar-dotnet/issues/8043
+        private static void TupleAssignment(string foo)
+        {
+            bool condition = true;
+            (condition, foo) = AssignFromTuple(condition, foo);
+            if (condition)      // Noncompliant {{Change this condition so that it does not always evaluate to 'True'.}} FP
+            {
+                Console.WriteLine(foo);
+            }
+
+            static (bool, string) AssignFromTuple(bool condition, string foo) => (false, foo);
+        }
     }
 }
 
