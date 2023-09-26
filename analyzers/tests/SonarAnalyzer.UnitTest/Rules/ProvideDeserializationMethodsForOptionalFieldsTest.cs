@@ -40,6 +40,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithOptions(ParseOptionsHelper.FromCSharp9)
                 .Verify();
 
+        [TestMethod]
+        public void ProvideDeserializationMethodsForOptionalFields_CSharp12() =>
+            builderCS.AddPaths("ProvideDeserializationMethodsForOptionalFields.CSharp12.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp12)
+                .Verify();
+
 #endif
 
         [TestMethod]
