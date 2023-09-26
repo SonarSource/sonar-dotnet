@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace CSharp12
 {
-    abstract class PrimaryConstructor(int i) // FN - Primary constructor is public by default
+    abstract class PrimaryConstructor(int i) // Compliant
     {
         public int I { get; set; } = i;
     }
