@@ -3241,5 +3241,21 @@ public class Repro_2411
         if (guid == null || guid == Guid.Empty) // Noncompliant {{Change this condition so that it does not always evaluate to 'False'.}}
         //  ^^^^^^^^^^^^
             guid = Guid.NewGuid();
+
+    }
+}
+// https://github.com/SonarSource/sonar-dotnet/issues/8080
+public class Repro_8080
+{
+    protected const int Limit = 10;
+
+    protected void Repro()
+    {
+        for (int i = 0; i < Limit; i++)
+        {
+            var test = i > 2 ? 0 : 42;
+            //         ^^^^^     Noncompliant {{Change this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.}} FP
+            //                 ^ Secondary@-1
+        }
     }
 }
