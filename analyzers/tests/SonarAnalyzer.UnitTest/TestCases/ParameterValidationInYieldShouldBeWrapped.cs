@@ -113,3 +113,39 @@ namespace Tests.Diagnostics
         }
     }
 }
+
+class NullCoalescing
+{
+    IEnumerable<int> Invalid(int? i)                // FN
+    {
+        _ = i ?? throw new ArgumentNullException(nameof(i));
+
+        yield return 1;
+    }
+
+    IEnumerable<int> ValidWithSecondMethod(int? i)  // Compliant
+    {
+        _ = i ?? throw new ArgumentNullException(nameof(i));
+        return SecondMethod();
+    }
+
+    IEnumerable<int> SecondMethod() { yield return 1; }
+
+    IEnumerable<int> ValidWithLocalFunction(int? i)  // Compliant
+    {
+        _ = i ?? throw new ArgumentNullException(nameof(i));
+        return LocalFunction();
+
+        IEnumerable<int> LocalFunction() { yield return 1; }
+    }
+}
+
+class NullCoalescingAssignment
+{
+    IEnumerable<int> NullableInlineArray(int? i) // FN
+    {
+        _ = i ?? throw new ArgumentNullException(nameof(i));
+
+        yield return 1;
+    }
+}
