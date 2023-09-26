@@ -26,17 +26,23 @@ internal sealed partial class Binary
 {
     private ProgramState LearnBranchingCollectionConstraint(ProgramState state, IBinaryOperationWrapper binary, bool falseBranch)
     {
-        var collection = InstanceOfCountPropertyReference(binary.LeftOperand);
-        var countIsLeftOperand = true;
-        if (collection is null)
+        IOperation otherOperand;
+        bool shouldFlipOperator;
+        if (InstanceOfCountPropertyReference(binary.LeftOperand) is { } collection)
         {
+            otherOperand = binary.RightOperand;
+            shouldFlipOperator = true;
+        }
+        else
+        {
+            otherOperand = binary.LeftOperand;
+            shouldFlipOperator = false;
             collection = InstanceOfCountPropertyReference(binary.RightOperand);
-            countIsLeftOperand = false;
         }
 
         return collection is not null
-            && state.Constraint<NumberConstraint>(OtherOperator(binary, countIsLeftOperand)) is { } number
-            && BranchingCollectionConstraint(binary.OperatorKind, falseBranch, countIsLeftOperand, number) is { } constraint
+            && state.Constraint<NumberConstraint>(otherOperand) is { } number
+            && BranchingCollectionConstraint(binary.OperatorKind, falseBranch, shouldFlipOperator, number) is { } constraint
                 ? state.SetSymbolConstraint(collection, constraint)
                 : state;
 
@@ -45,9 +51,6 @@ internal sealed partial class Binary
             && instance.TrackedSymbol(state) is { } symbol
                 ? symbol
                 : null;
-
-        static IOperation OtherOperator(IBinaryOperationWrapper binary, bool countIsLeftOperand) =>
-            countIsLeftOperand ? binary.RightOperand : binary.LeftOperand;
     }
 
     private static SymbolicConstraint BranchingCollectionConstraint(BinaryOperatorKind operatorKind, bool falseBranch, bool countIsLeftOperand, NumberConstraint number)
