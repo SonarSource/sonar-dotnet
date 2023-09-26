@@ -63,7 +63,7 @@ public void Test_TypeThatCannotBeConst(int arg)
 // invalid code
 public void (int arg)
 {
-    int intVar = 1; // Noncompliant
+    int intVar = 1;
 }").WithErrorBehavior(CompilationErrorBehavior.Ignore).Verify();
 
     [TestMethod]
