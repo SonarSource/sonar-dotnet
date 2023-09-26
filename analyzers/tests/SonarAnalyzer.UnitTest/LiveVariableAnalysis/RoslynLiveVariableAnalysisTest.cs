@@ -942,7 +942,7 @@ public class Sample
             return captureMe;
         };
 }";
-            new Context(code, SyntaxKind.Block).ValidateAllEmpty();
+            new Context(code, SyntaxKind.ParenthesizedLambdaExpression).ValidateAllEmpty();
         }
 
         [TestMethod]
