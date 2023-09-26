@@ -3,9 +3,8 @@ using Person = (string name, string surname);
 
 class MyClass
 {
-    void AliasType()
+    void AliasType(List<object> persons)
     {
-        var persons = new List<object> { ("Mickey", "Mouse") };
         if (persons[0] is Person person)
         {
             var a = (Person)person; // FN
