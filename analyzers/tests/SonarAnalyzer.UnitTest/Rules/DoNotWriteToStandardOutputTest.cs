@@ -29,17 +29,17 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void DoNotWriteToStandardOutput() =>
-            builder.AddPaths("ConsoleLogging.cs").Verify();
+            builder.AddPaths("DoNotWriteToStandardOutput.cs").Verify();
 
         [TestMethod]
         public void DoNotWriteToStandardOutput_ConditionalDirectives1() =>
-            builder.AddPaths("ConsoleLogging_Conditionals1.cs")
+            builder.AddPaths("DoNotWriteToStandardOutput_Conditionals1.cs")
                 .WithConcurrentAnalysis(false)
                 .Verify();
 
         [TestMethod]
         public void DoNotWriteToStandardOutput_ConditionalDirectives2() =>
-            builder.AddPaths("ConsoleLogging_Conditionals2.cs")
+            builder.AddPaths("DoNotWriteToStandardOutput_Conditionals2.cs")
                 .WithConcurrentAnalysis(false)
                 .Verify();
     }
