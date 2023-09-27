@@ -503,12 +503,9 @@ class Repro8094
     {
         Action? someDelegate = delegate { };
         someDelegate += Callback;
-
         someDelegate -= Callback;
-
         if (someDelegate == null) // Noncompliant {{Change this condition so that it does not always evaluate to 'False'.}}
         { }
-
     }
 
     private void Callback() { }
