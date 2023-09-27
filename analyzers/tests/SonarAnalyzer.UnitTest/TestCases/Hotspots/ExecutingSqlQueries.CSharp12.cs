@@ -9,7 +9,7 @@ namespace Tests.Diagnostics
     {
         void MyMethod()
         {
-            context.Query<object>().FromSql(someUserInput, parameters); // Compliant FN
+            context.Query<object>().FromSql(someUserInput, parameters); // Compliant, we don't know anything about the someUserInput parameter
             SqliteCommand command = new($"""SELECT * FROM mytable WHERE mycol={someUserInput}""", connection); // Noncompliant
         }
     }
