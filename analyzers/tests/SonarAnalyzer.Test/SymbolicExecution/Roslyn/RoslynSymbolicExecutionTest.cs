@@ -345,9 +345,8 @@ if (boolParameter)
         validator.ValidateExitReachCount(expectedExitPoints);
     }
 
-        private static States<ProgramState> DecorateIntLiteral(SymbolicContext context, SymbolicConstraint first, SymbolicConstraint second) =>
-            context.Operation.Instance.Kind == OperationKind.Literal && context.Operation.Instance.ConstantValue.Value is int
-                ? new(context.SetOperationConstraint(first), context.SetOperationConstraint(second))
-                : new(context.State);
-    }
+    private static States<ProgramState> DecorateIntLiteral(SymbolicContext context, SymbolicConstraint first, SymbolicConstraint second) =>
+        context.Operation.Instance.Kind == OperationKind.Literal && context.Operation.Instance.ConstantValue.Value is int
+            ? new(context.SetOperationConstraint(first), context.SetOperationConstraint(second))
+            : new(context.State);
 }

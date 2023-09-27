@@ -40,8 +40,8 @@ public class SymbolicCheckListTest
         var a = new Mock<SymbolicCheck>();
         var b = new Mock<SymbolicCheck>();
         var context = new SymbolicContext(null, default, ProgramState.Empty, false, Array.Empty<ISymbol>());
-        a.Setup(x => x.PreProcess(context)).Returns(new[] { context.State });
-        a.Setup(x => x.PostProcess(context)).Returns(new[] { context.State });
+        a.Setup(x => x.PreProcess(context)).Returns(new ProgramStates(context.State));
+        a.Setup(x => x.PostProcess(context)).Returns(new ProgramStates(context.State));
         var sut = new SymbolicCheckList(new[] { a.Object, b.Object });
 
         a.Verify(x => x.ExitReached(context), Times.Never);

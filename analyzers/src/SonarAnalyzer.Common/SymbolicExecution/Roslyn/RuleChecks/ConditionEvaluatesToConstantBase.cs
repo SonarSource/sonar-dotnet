@@ -45,10 +45,10 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
     protected abstract bool IsInsideUsingDeclaration(SyntaxNode node);
     protected abstract bool IsLockStatement(SyntaxNode syntax);
 
-    public override ProgramState[] PreProcess(SymbolicContext context)
+    public override ProgramStates PreProcess(SymbolicContext context)
     {
         reachedOperations.Add(context.Operation.Instance);
-        return context.State.ToArray();
+        return new(context.State);
     }
 
     public override ProgramState ConditionEvaluated(SymbolicContext context)

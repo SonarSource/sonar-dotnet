@@ -111,7 +111,7 @@ public readonly struct States<T> where T : class
 
         public Enumerator(States<T> states) => this.states = states;
 
-        public T Current =>
+        public readonly T Current =>
             index switch
             {
                 1 => states.first,
