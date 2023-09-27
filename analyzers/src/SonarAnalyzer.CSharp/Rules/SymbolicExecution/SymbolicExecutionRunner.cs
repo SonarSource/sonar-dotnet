@@ -71,32 +71,27 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
             SyntaxKind.CompilationUnit);
 
         context.RegisterNodeAction(
-            c => Analyze<BaseMethodDeclarationSyntax>(context, c, c.Node),
+            c => Analyze(context, c, c.Node),
             SyntaxKind.ConstructorDeclaration,
             SyntaxKind.DestructorDeclaration,
             SyntaxKind.ConversionOperatorDeclaration,
             SyntaxKind.OperatorDeclaration,
-            SyntaxKind.MethodDeclaration);
-
-        context.RegisterNodeAction(
-            c => Analyze<SyntaxNode>(context, c, c.Node),
-            SyntaxKindEx.LocalFunctionStatement);
-
-        context.RegisterNodeAction(
-            c => Analyze<PropertyDeclarationSyntax>(context, c, ((PropertyDeclarationSyntax)c.Node).ExpressionBody),
-            SyntaxKind.PropertyDeclaration);
-
-        context.RegisterNodeAction(
-            c => Analyze<IndexerDeclarationSyntax>(context, c, ((IndexerDeclarationSyntax)c.Node).ExpressionBody),
-            SyntaxKind.IndexerDeclaration);
-
-        context.RegisterNodeAction(
-            c => Analyze<AccessorDeclarationSyntax>(context, c, c.Node),
+            SyntaxKind.MethodDeclaration,
+            SyntaxKindEx.LocalFunctionStatement,
             SyntaxKind.GetAccessorDeclaration,
             SyntaxKind.SetAccessorDeclaration,
             SyntaxKindEx.InitAccessorDeclaration,
             SyntaxKind.AddAccessorDeclaration,
             SyntaxKind.RemoveAccessorDeclaration);
+
+
+        context.RegisterNodeAction(
+            c => Analyze(context, c, ((PropertyDeclarationSyntax)c.Node).ExpressionBody),
+            SyntaxKind.PropertyDeclaration);
+
+        context.RegisterNodeAction(
+            c => Analyze(context, c, ((IndexerDeclarationSyntax)c.Node).ExpressionBody),
+            SyntaxKind.IndexerDeclaration);
 
         context.RegisterNodeAction(
             c =>

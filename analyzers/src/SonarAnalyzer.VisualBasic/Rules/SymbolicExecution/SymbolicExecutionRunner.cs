@@ -49,7 +49,7 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
     protected override void Initialize(SonarAnalysisContext context)
     {
         context.RegisterNodeAction(
-            c => Analyze<MethodBlockBaseSyntax>(context, c, c.Node),
+            c => Analyze(context, c, c.Node),
             SyntaxKind.ConstructorBlock,
             SyntaxKind.OperatorBlock,
             SyntaxKind.SubBlock,
