@@ -107,7 +107,7 @@ public readonly struct States<T> where T : class
     public struct Enumerator
     {
         private readonly States<T> states;
-        private int index = 0;
+        private int index;
 
         public Enumerator(States<T> states) => this.states = states;
 
