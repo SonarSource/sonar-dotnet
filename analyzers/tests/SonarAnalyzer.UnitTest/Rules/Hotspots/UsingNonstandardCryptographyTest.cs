@@ -43,6 +43,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void UsingNonstandardCryptography_CSharp10() =>
             builderCS.AddPaths("UsingNonstandardCryptography.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
+        [TestMethod]
+        public void UsingNonstandardCryptography_CSharp12() =>
+            builderCS.AddPaths("UsingNonstandardCryptography.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
+
 #endif
 
         [TestMethod]
