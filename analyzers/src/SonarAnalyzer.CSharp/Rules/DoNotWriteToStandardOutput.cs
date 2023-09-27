@@ -20,16 +20,19 @@
 
 namespace SonarAnalyzer.Rules.CSharp
 {
-    // This base class is only there to avoid duplication between the implementation of S106 and S2228
-    public abstract class DoNotWriteToStandardOutputBase : SonarDiagnosticAnalyzer
+    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    public class DoNotWriteToStandardOutput : SonarDiagnosticAnalyzer
     {
-        protected abstract DiagnosticDescriptor Rule { get; }
+        private const string DiagnosticId = "S106";
+        private const string MessageFormat = "Remove this logging statement.";
+
+        protected static DiagnosticDescriptor Rule =>
+            DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         private static readonly ISet<string> BannedConsoleMembers = new HashSet<string> { "WriteLine", "Write" };
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
             ImmutableArray.Create(Rule);
-
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterNodeAction(c =>
                 {
@@ -51,15 +54,5 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 },
                 SyntaxKind.InvocationExpression);
-    }
-
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class DoNotWriteToStandardOutput : DoNotWriteToStandardOutputBase
-    {
-        private const string DiagnosticId = "S106";
-        private const string MessageFormat = "Remove this logging statement.";
-
-        protected override DiagnosticDescriptor Rule =>
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
     }
 }
