@@ -116,6 +116,21 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void UnnecessaryUsings_TupleDeconstruct_NetCore() =>
             builder.AddPaths("UnnecessaryUsings.TupleDeconstruct.NetCore.cs").Verify();
 
+        [TestMethod]
+        public void UnnecessaryUsings_CSharp12() =>
+            builder.AddSnippet("""
+                using Person = (string name, string surname); // FN
+                using Point3D = (int, int, int);
+
+                class MyClass
+                {
+                    void AliasType()
+                    {
+                        var point = new Point3D(1, 2, 3);
+                    }
+                }
+                """).WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
+
 #elif NETFRAMEWORK
 
         [TestMethod]
