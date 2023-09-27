@@ -3254,8 +3254,8 @@ public class Repro_8080
         for (int i = 0; i < Limit; i++)
         {
             var test = i > 2 ? 0 : 42;
-            //         ^^^^^     Noncompliant {{Change this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.}} FP
-            //                 ^ Secondary@-1
+            //         ^^^^^              Noncompliant
+            //                 ^          Secondary@-1
         }
     }
 }
