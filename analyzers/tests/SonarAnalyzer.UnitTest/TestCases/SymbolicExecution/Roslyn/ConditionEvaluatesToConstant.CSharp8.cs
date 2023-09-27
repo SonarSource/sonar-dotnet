@@ -495,3 +495,18 @@ public class TestShouldExecute
         };
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8094
+class Repro8094
+{
+    public void TestMethod()
+    {
+        Action? someDelegate = delegate { };
+        someDelegate += Callback;
+        someDelegate -= Callback;
+        if (someDelegate == null) // Noncompliant {{Change this condition so that it does not always evaluate to 'False'.}}
+        { }
+    }
+
+    private void Callback() { }
+}
