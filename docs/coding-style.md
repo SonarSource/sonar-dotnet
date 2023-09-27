@@ -118,7 +118,7 @@ Variable name `sut` (System Under Test) is recommended in unit tests that really
           A
           && B; // A and B are siblings => we don't indent
       ```
-    * Indented one level further if it is a parent.  
+    * Indented one level further otherwise.  
       ```csharp
       return A
           && B; // "return" is the parent of A and B => we indent
