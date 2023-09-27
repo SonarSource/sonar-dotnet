@@ -186,8 +186,8 @@ public sealed record ProgramState : IEquatable<ProgramState>
         && other.PreservedSymbols.SetEquals(PreservedSymbols)
         && other.Exceptions.SequenceEqual(Exceptions);
 
-        public override string ToString() =>
-            Equals(Empty) ? "Empty" + Environment.NewLine : SerializeExceptions() + SerializeSymbols() + SerializeOperations() + SerializeCaptures();
+    public override string ToString() =>
+        Equals(Empty) ? "Empty" + Environment.NewLine : SerializeExceptions() + SerializeSymbols() + SerializeOperations() + SerializeCaptures();
 
     private ProgramState SetOperationValueCore(IOperation operation, SymbolicValue value) =>
         (operation ?? throw new ArgumentNullException(nameof(operation))) is var _
