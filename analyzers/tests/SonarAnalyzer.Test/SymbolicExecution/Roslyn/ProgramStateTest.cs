@@ -321,12 +321,12 @@ Captures:
         staticFieldSymbolValue.HasConstraint(preserveNone).Should().BeFalse();
     }
 
-        private static IFieldSymbol CreateFieldSymbol(string fieldDefinition)
-        {
-            var compiler = new SnippetCompiler($@"class C {{ {fieldDefinition} }}");
-            var fieldSymbol = compiler.SemanticModel.GetDeclaredSymbol(compiler.GetNodes<VariableDeclaratorSyntax>().Single());
-            return (IFieldSymbol)fieldSymbol;
-        }
+    private static IFieldSymbol CreateFieldSymbol(string fieldDefinition)
+    {
+        var compiler = new SnippetCompiler($@"class C {{ {fieldDefinition} }}");
+        var fieldSymbol = compiler.SemanticModel.GetDeclaredSymbol(compiler.GetNodes<VariableDeclaratorSyntax>().Single());
+        return (IFieldSymbol)fieldSymbol;
+    }
 
     private static void ResetFieldConstraintTests(SymbolicConstraint constraint, bool expectIsPreserved)
     {
