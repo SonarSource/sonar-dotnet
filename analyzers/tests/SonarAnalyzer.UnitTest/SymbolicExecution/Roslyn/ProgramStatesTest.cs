@@ -172,6 +172,6 @@ public class ProgramStatesTest
             i++;
         }
         sut.Length.Should().Be(i, "sut should have as many elements as expectedStates");
-        expectedStates.Length.Should().Be(i, "expectedStates should have as many elements as sut");
+        expectedStates.Should().HaveCount(i, "expectedStates should have as many elements as sut");
     }
 }
