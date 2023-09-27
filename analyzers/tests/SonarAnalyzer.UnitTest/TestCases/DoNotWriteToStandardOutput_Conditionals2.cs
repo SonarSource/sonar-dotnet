@@ -1,9 +1,9 @@
 ﻿#define DEBUG
 using System;
 
-namespace Rules2015
+namespace Tests.Diagnostics
 {
-    class S2228_ConsoleWriteLineInDebugBlock
+    class Tests
     {
 
 #if !DEBUG
