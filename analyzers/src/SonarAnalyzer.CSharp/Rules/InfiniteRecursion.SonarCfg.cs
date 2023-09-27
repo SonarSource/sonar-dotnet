@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 IControlFlowGraph cfg;
                 if (property.ExpressionBody?.Expression != null)
                 {
-                    if (CSharpControlFlowGraph.TryGet(property, c.SemanticModel, out cfg))
+                    if (CSharpControlFlowGraph.TryGet(property.ExpressionBody, c.SemanticModel, out cfg))
                     {
                         var walker = new RecursionSearcherForProperty(
                             new RecursionContext<IControlFlowGraph>(c, cfg, propertySymbol, property.Identifier.GetLocation(), "property's recursion"),

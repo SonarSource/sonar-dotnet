@@ -33,33 +33,40 @@ namespace SonarAnalyzer.CFG.Roslyn
 
         public ControlFlowGraph FindOrCreate(SyntaxNode declaration, SemanticModel model, CancellationToken cancel)
         {
-            var rootSyntax = model.GetOperation(declaration).RootOperation().Syntax;
-            var nodeCache = compilationCache.GetValue(model.Compilation, x => new());
-            if (!nodeCache.TryGetValue(rootSyntax, out var wrapper))
+            if (model.GetOperation(declaration) is { } declarationOperation)
             {
-                wrapper = new(ControlFlowGraph.Create(rootSyntax, model, cancel));
-                nodeCache[rootSyntax] = wrapper;
-            }
-            if (HasNestedCfg(declaration))
-            {
-                // We need to go up and track all possible enclosing lambdas, local functions and other FlowAnonymousFunctionOperations
-                foreach (var node in declaration.AncestorsAndSelf().TakeWhile(x => x != rootSyntax).Reverse())
+                var rootSyntax = declarationOperation.RootOperation().Syntax;
+                var nodeCache = compilationCache.GetValue(model.Compilation, x => new());
+                if (!nodeCache.TryGetValue(rootSyntax, out var wrapper))
                 {
-                    if (IsLocalFunction(node))
+                    wrapper = new(ControlFlowGraph.Create(rootSyntax, model, cancel));
+                    nodeCache[rootSyntax] = wrapper;
+                }
+                if (HasNestedCfg(declaration))
+                {
+                    // We need to go up and track all possible enclosing lambdas, local functions and other FlowAnonymousFunctionOperations
+                    foreach (var node in declaration.AncestorsAndSelf().TakeWhile(x => x != rootSyntax).Reverse())
                     {
-                        wrapper = new(wrapper.Cfg.GetLocalFunctionControlFlowGraph(node, cancel));
-                    }
-                    else if (wrapper.FlowOperation(node) is { WrappedOperation: not null } flowOperation)
-                    {
-                        wrapper = new(wrapper.Cfg.GetAnonymousFunctionControlFlowGraph(flowOperation, cancel));
-                    }
-                    else if (node == declaration)
-                    {
-                        return null;    // Lambda syntax is not always recognized as a FlowOperation for invalid syntaxes
+                        if (IsLocalFunction(node))
+                        {
+                            wrapper = new(wrapper.Cfg.GetLocalFunctionControlFlowGraph(node, cancel));
+                        }
+                        else if (wrapper.FlowOperation(node) is { WrappedOperation: not null } flowOperation)
+                        {
+                            wrapper = new(wrapper.Cfg.GetAnonymousFunctionControlFlowGraph(flowOperation, cancel));
+                        }
+                        else if (node == declaration)
+                        {
+                            return null;    // Lambda syntax is not always recognized as a FlowOperation for invalid syntaxes
+                        }
                     }
                 }
+                return wrapper.Cfg;
             }
-            return wrapper.Cfg;
+            else
+            {
+                return null;
+            }
         }
 
         private sealed class Wrapper

@@ -46,15 +46,13 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             // No need to check for ExpressionBody as it can't contain variable assignment
             context.RegisterNodeAction(
-                c => CheckForDeadStores<BaseMethodDeclarationSyntax>(c, c.SemanticModel.GetDeclaredSymbol(c.Node), c.Node, x => (CSharpSyntaxNode)x.Body ?? x.ExpressionBody()),
+                c => CheckForDeadStores(c, c.SemanticModel.GetDeclaredSymbol(c.Node), c.Node),
                 SyntaxKind.MethodDeclaration,
                 SyntaxKind.ConstructorDeclaration,
                 SyntaxKind.DestructorDeclaration,
                 SyntaxKind.ConversionOperatorDeclaration,
-                SyntaxKind.OperatorDeclaration);
-
-            context.RegisterNodeAction(
-                c => CheckForDeadStores<AccessorDeclarationSyntax>(c, c.SemanticModel.GetDeclaredSymbol(c.Node), c.Node, x => x.Body != null || x.ExpressionBody() != null ? x : null),
+                SyntaxKind.OperatorDeclaration,
+                SyntaxKindEx.LocalFunctionStatement,
                 SyntaxKind.GetAccessorDeclaration,
                 SyntaxKind.SetAccessorDeclaration,
                 SyntaxKindEx.InitAccessorDeclaration,
@@ -66,18 +64,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.AnonymousMethodExpression,
                 SyntaxKind.SimpleLambdaExpression,
                 SyntaxKind.ParenthesizedLambdaExpression);
-
-            context.RegisterNodeAction(
-                c => CheckForDeadStores(c, c.SemanticModel.GetDeclaredSymbol(c.Node), c.Node),
-                SyntaxKindEx.LocalFunctionStatement);
-        }
-
-        private void CheckForDeadStores<T>(SonarSyntaxNodeReportingContext context, ISymbol symbol, SyntaxNode node, Func<T, CSharpSyntaxNode> hasABody) where T : SyntaxNode
-        {
-            if (hasABody((T)node) is { })
-            {
-                CheckForDeadStores(context, symbol, node);
-            }
         }
 
         private void CheckForDeadStores(SonarSyntaxNodeReportingContext context, ISymbol symbol, SyntaxNode node)

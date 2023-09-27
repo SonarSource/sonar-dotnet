@@ -72,9 +72,9 @@ public abstract class SymbolicExecutionRunnerBase : SonarDiagnosticAnalyzer
         }
     }
 
-    protected void Analyze<TNode>(SonarAnalysisContext analysisContext, SonarSyntaxNodeReportingContext context, SyntaxNode toAnalyze, Func<TNode, SyntaxNode> getBody) where TNode : SyntaxNode
+    protected void Analyze<TNode>(SonarAnalysisContext analysisContext, SonarSyntaxNodeReportingContext context, SyntaxNode toAnalyze) where TNode : SyntaxNode
     {
-        if (getBody((TNode)context.Node) is { } && context.SemanticModel.GetDeclaredSymbol(context.Node) is { } symbol)
+        if (context.SemanticModel.GetDeclaredSymbol(context.Node) is { } symbol)
         {
             Analyze(analysisContext, context, toAnalyze, symbol);
         }

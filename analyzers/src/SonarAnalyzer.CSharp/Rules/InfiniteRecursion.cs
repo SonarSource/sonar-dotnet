@@ -44,6 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var method = (MethodDeclarationSyntax)c.Node;
                     CheckForNoExitMethod(c, method, method.Identifier);
+
                 },
                 SyntaxKind.MethodDeclaration);
 
@@ -52,6 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var function = (LocalFunctionStatementSyntaxWrapper)c.Node;
                     CheckForNoExitMethod(c, function, function.Identifier);
+
                 },
                 SyntaxKindEx.LocalFunctionStatement);
 
