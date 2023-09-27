@@ -111,7 +111,18 @@ Variable name `sut` (System Under Test) is recommended in unit tests that really
 
 ## Multi-line statements
 
-* Operators (&&, ||, `and`, `or`, +, :, ?, ?? and others) are placed at the beginning of a line.
+* Operators (`&&`, `||`, `and`, `or`, `+`, `:`, `?`, `??` and others) are placed at the beginning of a line.
+    * Indented at the same level if the syntax at the beginning of the previous line is a sibling.
+      ```csharp
+      void Foo() =>
+          A
+          && B; // A and B are siblings => we don't indent
+      ```
+    * Indented one level further otherwise.  
+      ```csharp
+      return A
+          && B; // "return" is the parent of A and B => we indent
+      ```
 * Dot before an invocation `.Method()` is placed at the beginning of a line.
 * The comma separating arguments is placed at the end of a line.
 * Method declaration parameters should be on the same line. If S103 is violated, parameters should be placed each on a separate line; the first parameter should be on the same line with the declaration; the other parameters should be aligned with the first parameter.
