@@ -61,6 +61,15 @@ public class ConditionEvaluatesToConstantTest
             .Verify();
 
     [TestMethod]
+    public void ConditionEvaluatesToConstant_Roslyn_CS_WithS4158() =>
+        new VerifierBuilder()
+        .AddAnalyzer(() => new CS.SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabled))
+        .WithBasePath(@"SymbolicExecution\Roslyn")
+        .WithOnlyDiagnostics(ChecksCS.ConditionEvaluatesToConstant.S2583, ChecksCS.ConditionEvaluatesToConstant.S2589, ChecksCS.EmptyCollectionsShouldNotBeEnumerated.S4158)
+        .AddPaths("ConditionEvaluatesToConstant.EmptyCollectionsShouldNotBeEnumerated.cs")
+        .Verify();
+
+    [TestMethod]
     public void ConditionEvaluatesToConstant_Roslyn_VB() =>
         roslynVB.AddPaths("ConditionEvaluatesToConstant.vb").Verify();
 
