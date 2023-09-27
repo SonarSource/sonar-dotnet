@@ -60,6 +60,12 @@ namespace SonarAnalyzer.UnitTest.Rules.Hotspots
                 .Verify();
 
         [TestMethod]
+        public void LooseFilePermissions_Windows_CSharp12() =>
+            builderCS.AddPaths("LooseFilePermissions.Windows.CSharp12.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp12)
+                .Verify();
+
+        [TestMethod]
         public void LooseFilePermissions_Unix_CS() =>
             builderCS.AddPaths("LooseFilePermissions.Unix.cs")
                 .AddReferences(NuGetMetadataReference.MonoPosixNetStandard())
