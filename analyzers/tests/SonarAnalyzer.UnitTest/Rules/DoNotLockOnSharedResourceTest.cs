@@ -45,6 +45,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
                 .Verify();
 
+        [TestMethod]
+        public void DoNotLockOnSharedResource_CSharp12() =>
+            builderCS.AddPaths("DoNotLockOnSharedResource.CSharp12.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp12)
+                .Verify();
+
 #endif
 
     }

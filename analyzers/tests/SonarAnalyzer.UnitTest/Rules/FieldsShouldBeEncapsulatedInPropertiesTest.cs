@@ -39,6 +39,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithOptions(ParseOptionsHelper.FromCSharp9)
                 .Verify();
 
+        [TestMethod]
+        public void FieldsShouldBeEncapsulatedInProperties_CSharp12() =>
+            builder.AddPaths("FieldsShouldBeEncapsulatedInProperties.CSharp12.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp12)
+                .Verify();
+
 #endif
 
     }
