@@ -31,33 +31,37 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void PropertiesAccessCorrectField_CS() =>
-            builderCS.AddPaths(@"PropertiesAccessCorrectField.cs").AddReferences(AdditionalReferences).Verify();
+            builderCS.AddPaths("PropertiesAccessCorrectField.cs").AddReferences(AdditionalReferences).Verify();
 
         [TestMethod]
         public void PropertiesAccessCorrectField_CSharp8() =>
-            builderCS.AddPaths(@"PropertiesAccessCorrectField.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+            builderCS.AddPaths("PropertiesAccessCorrectField.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
 
         [TestMethod]
         public void PropertiesAccessCorrectField_CSharp9() =>
-            builderCS.AddPaths(@"PropertiesAccessCorrectField.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+            builderCS.AddPaths("PropertiesAccessCorrectField.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+
+        [TestMethod]
+        public void PropertiesAccessCorrectField_CSharp12() =>
+            builderCS.AddPaths("PropertiesAccessCorrectField.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
 
 #else
 
         [TestMethod]
         public void PropertiesAccessCorrectField_CS_NetFramework() =>
-            builderCS.AddPaths(@"PropertiesAccessCorrectField.NetFramework.cs").AddReferences(AdditionalReferences).Verify();
+            builderCS.AddPaths("PropertiesAccessCorrectField.NetFramework.cs").AddReferences(AdditionalReferences).Verify();
 
         [TestMethod]
         public void PropertiesAccessCorrectField_VB_NetFramework() =>
-            builderVB.AddPaths(@"PropertiesAccessCorrectField.NetFramework.vb").AddReferences(AdditionalReferences).Verify();
+            builderVB.AddPaths("PropertiesAccessCorrectField.NetFramework.vb").AddReferences(AdditionalReferences).Verify();
 
 #endif
 
         [TestMethod]
         public void PropertiesAccessCorrectField_VB() =>
-            builderVB.AddPaths(@"PropertiesAccessCorrectField.vb").AddReferences(AdditionalReferences).Verify();
+            builderVB.AddPaths("PropertiesAccessCorrectField.vb").AddReferences(AdditionalReferences).Verify();
 
         private static IEnumerable<MetadataReference> AdditionalReferences =>
             NuGetMetadataReference.MvvmLightLibs("5.4.1.1")
