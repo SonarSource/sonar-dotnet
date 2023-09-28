@@ -1329,4 +1329,50 @@ public partial class TokenTypeAnalyzerTest
                 }
             }
             """, allowSemanticModel);
+
+    [DataTestMethod]
+    [DataRow("var d = [u:dateTimePointer]->Date;", false)]
+    [DataRow("var d = dateTimePointer->[u:Date];", false)]
+    [DataRow("var d = (*[u:dateTimePointer]).Date;", false)]
+    [DataRow("var d = (*dateTimePointer).[u:Date];", false)]
+    [DataRow("var d = [u:dateTimePointer][0];", false)]
+    [DataRow("[u:dateTimePointer][0] = *(&[u:dateTimePointer][0]);", false)]
+    [DataRow("[t:Int32]* iPointer;", false)]
+    [DataRow("[t:Int32]?* iPointer;", false)]
+    [DataRow("[t:Int32]?** iPointerPointer;", false)]
+    [DataRow("[t:Nullable]<[t:Int32]>** iPointerPointer;", false)]
+    [DataRow("[u:System].Int32* iPointer;", true)]
+    [DataRow("System.[t:Int32]* iPointer;", false)]
+    [DataRow("[k:void]* voidPointer;", false)]
+    [DataRow("DateTime d = default; M(&[u:d]);", false)]
+    [DataRow("[t:DateTime]** dt = &[u:dateTimePointer];", false)]
+    [DataRow("_ = (*(&[u:dateTimePointer]))->Date;", false)]
+    [DataRow("_ = (**(&[u:dateTimePointer])).Date;", false)]
+    public void IdentifierToken_Unsafe_Pointers(string statement, bool allowSemanticModel) =>
+        ClassifierTestHarness.AssertTokenTypes($$"""
+            using System;
+            public class C
+            {
+                public unsafe void M(DateTime* dateTimePointer)
+                {
+                    {{statement}}
+                }
+            }
+            """, allowSemanticModel);
+
+    [DataTestMethod]
+    [DataRow("[k:int] @int;", false)]
+    [DataRow("[k:volatile] [t:@volatile] [u:@volatile];", false)]
+    [DataRow("[t:Int32] [u:@someName];", false)]
+    public void IdentifierToken_KeywordEscaping(string fieldDeclaration, bool allowSemanticModel) =>
+        ClassifierTestHarness.AssertTokenTypes($$"""
+            using System;
+
+            public class @volatile { }
+            
+            public class C
+            {
+                {{fieldDeclaration}}
+            }
+            """, allowSemanticModel);
 }
