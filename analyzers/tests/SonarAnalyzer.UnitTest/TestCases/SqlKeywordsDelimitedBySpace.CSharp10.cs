@@ -70,13 +70,41 @@ namespace Tests.Diagnostics
     // https://github.com/SonarSource/sonar-dotnet/issues/6355
     public class Repro_6355
     {
-        public void MyMethod(string unknownValue)
+        void Example(string parameter)
         {
-            const string One = "One";
-            const string myString = $"{One}Two"; // Noncompliant FP
-            const string myString1 = $"{nameof(One)}Two"; // Noncompliant FP
-            string myString4 = $"{unknownValue}Two";
-            string myString5 = $"{nameof(unknownValue)}Two"; // Noncompliant FP
+            const string constOne = "One";
+            string nonConstOne = "One";
+            string empty = string.Empty;
+
+            const string s0 = $"{constOne}";                // Compliant
+            const string s1 = $"{constOne}Two";             // Noncompliant FP
+            const string s2 = $"{nameof(constOne)}Two";     // Noncompliant FP
+            const string s3 = $"{parameter}";               // Error CS0133
+            const string s4 = $"{parameter}Two";            // Error CS0133
+            const string s5 = $"{nameof(parameter)}Two";    // Noncompliant FP
+            const string s6 = $"{nonConstOne}";             // Error CS0133
+            const string s7 = $"{nonConstOne}Two";          // Error CS0133
+                                                            // Noncompliant@-1 FP
+            const string s8 = $"{nameof(nonConstOne)}Two";  // Noncompliant FP
+            const string s9 = $"{empty}";                   // Error CS0133
+            const string s10 = $"{empty}Two";               // Error CS0133
+            const string s11 = $"{nameof(empty)}Two";       // Noncompliant FP
+
+            string s12 = $"{constOne}";                     // Compliant
+            string s13 = $"{constOne}Two";                  // Noncompliant FP
+            string s14 = $"{nameof(constOne)}Two";          // Noncompliant FP
+            string s15 = $"{parameter}";                    // Compliant
+            string s16 = $"{parameter}Two";                 // Compliant
+            string s17 = $"{nameof(parameter)}Two";         // Noncompliant FP
+            string s18 = $"{nonConstOne}";                  // Compliant
+            string s19 = $"{nonConstOne}Two";               // Noncompliant FP
+            string s20 = $"{nameof(nonConstOne)}Two";       // Noncompliant FP
+            string s21 = $"{empty}";                        // Compliant
+            string s22 = $"{empty}Two";                     // Compliant
+            string s23 = $"{nameof(empty)}Two";             // Noncompliant FP
+
+            string s24 = $"{{{nonConstOne}}}";              // Noncompliant FP
+                                                            // Noncompliant@-1 FP
         }
     }
 }
