@@ -26,34 +26,28 @@ namespace StyleCop.Analyzers.Lightup
     // This is a temporary substitute for IOperationWrapper in case StyleCop will accept PR https://github.com/DotNetAnalyzers/StyleCopAnalyzers/issues/3381
     public class IOperationWrapperSonar
     {
-        private static readonly PropertyInfo ParentProperty;
-        private static readonly PropertyInfo ChildrenProperty;
-        private static readonly PropertyInfo LanguageProperty;
-        private static readonly PropertyInfo IsImplicitProperty;
-        private static readonly PropertyInfo SemanticModelProperty;
-
-        private IOperation parent;
-        private IEnumerable<IOperation> children;
-        private string language;
-        private bool? isImplicit;
-        private SemanticModel semanticModel;
-
-        public IOperation Instance { get; }
-        public IOperation Parent => ParentProperty.ReadCached(Instance, ref parent);
-        public IEnumerable<IOperation> Children => ChildrenProperty.ReadCached(Instance, ref children);
-        public string Language => LanguageProperty.ReadCached(Instance, ref language);
-        public bool IsImplicit => IsImplicitProperty.ReadCached(Instance, ref isImplicit);
-        public SemanticModel SemanticModel => SemanticModelProperty.ReadCached(Instance, ref semanticModel);
+        private static readonly Func<IOperation, IOperation> ParentPropertyAccessor;
+        private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenPropertyAccessor;
+        private static readonly Func<IOperation, string> LanguagePropertyAccessor;
+        private static readonly Func<IOperation, bool> IsImplicitPropertyAccessor;
+        private static readonly Func<IOperation, SemanticModel> SemanticModelPropertyAccessor;
 
         static IOperationWrapperSonar()
         {
             var type = typeof(IOperation);
-            ParentProperty = type.GetProperty(nameof(Parent));
-            ChildrenProperty = type.GetProperty(nameof(Children));
-            LanguageProperty = type.GetProperty(nameof(Language));
-            IsImplicitProperty = type.GetProperty(nameof(IsImplicit));
-            SemanticModelProperty = type.GetProperty(nameof(SemanticModel));
+            ParentPropertyAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<IOperation, IOperation>(type, nameof(Parent));
+            ChildrenPropertyAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<IOperation, IEnumerable<IOperation>>(type, nameof(Children));
+            LanguagePropertyAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<IOperation, string>(type, nameof(Language));
+            IsImplicitPropertyAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<IOperation, bool>(type, nameof(IsImplicit));
+            SemanticModelPropertyAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<IOperation, SemanticModel>(type, nameof(SemanticModel));
         }
+
+        public IOperation Instance { get; }
+        public IOperation Parent => ParentPropertyAccessor(Instance);
+        public IEnumerable<IOperation> Children => ChildrenPropertyAccessor(Instance);
+        public string Language => LanguagePropertyAccessor(Instance);
+        public bool IsImplicit => IsImplicitPropertyAccessor(Instance);
+        public SemanticModel SemanticModel => SemanticModelPropertyAccessor(Instance);
 
         public IOperationWrapperSonar(IOperation instance) =>
             Instance = instance ?? throw new ArgumentNullException(nameof(instance));
