@@ -48,6 +48,10 @@ namespace SonarAnalyzer.UnitTest.Rules
             builder.AddPaths("MethodOverloadOptionalParameter.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
 
         [TestMethod]
+        public void MethodOverloadOptionalParameter_CSharp12() =>
+            builder.AddPaths("MethodOverloadOptionalParameter.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
+
+        [TestMethod]
         public void MethodOverloadOptionalParameter_Razor() =>
             builder.AddSnippet(
                        """

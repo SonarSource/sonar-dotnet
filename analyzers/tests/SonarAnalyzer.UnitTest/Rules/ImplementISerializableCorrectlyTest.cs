@@ -41,6 +41,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ImplementISerializableCorrectly_FromCSharp10() =>
             builder.AddPaths("ImplementISerializableCorrectly.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
+        [TestMethod]
+        public void ImplementISerializableCorrectly_FromCSharp12() =>
+            builder.AddPaths("ImplementISerializableCorrectly.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
+
 #endif
 
     }

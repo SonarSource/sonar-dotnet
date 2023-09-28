@@ -76,6 +76,10 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
                 .VerifyCodeFix();
 
+        [TestMethod]
+        public void MemberInitializerRedundant_CSharp12() =>
+            builder.AddPaths("MemberInitializerRedundant.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
+
 #endif
 
     }

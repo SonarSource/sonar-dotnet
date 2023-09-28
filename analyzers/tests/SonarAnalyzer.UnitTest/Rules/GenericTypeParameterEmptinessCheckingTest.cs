@@ -37,6 +37,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void GenericTypeParameterEmptinessChecking_CSharp9() =>
             builder.AddPaths("GenericTypeParameterEmptinessChecking.CSharp9.cs").WithTopLevelStatements().Verify();
 
+        [TestMethod]
+        public void GenericTypeParameterEmptinessChecking_CSharp12() =>
+            builder.AddPaths("GenericTypeParameterEmptinessChecking.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
+
 #endif
 
         [TestMethod]
