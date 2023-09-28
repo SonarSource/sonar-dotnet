@@ -26,28 +26,28 @@ namespace StyleCop.Analyzers.Lightup
     // This is a temporary substitute for IOperationWrapper in case StyleCop will accept PR https://github.com/DotNetAnalyzers/StyleCopAnalyzers/issues/3381
     public readonly struct IOperationWrapperSonar
     {
-        private static readonly Func<IOperation, IOperation> ParentPropertyAccessor;
-        private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenPropertyAccessor;
-        private static readonly Func<IOperation, string> LanguagePropertyAccessor;
-        private static readonly Func<IOperation, bool> IsImplicitPropertyAccessor;
-        private static readonly Func<IOperation, SemanticModel> SemanticModelPropertyAccessor;
+        private static readonly Func<IOperation, IOperation> ParentAccessor;
+        private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor;
+        private static readonly Func<IOperation, string> LanguageAccessor;
+        private static readonly Func<IOperation, bool> IsImplicitAccessor;
+        private static readonly Func<IOperation, SemanticModel> SemanticModelAccessor;
 
         static IOperationWrapperSonar()
         {
             var type = typeof(IOperation);
-            ParentPropertyAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<IOperation, IOperation>(type, nameof(Parent));
-            ChildrenPropertyAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<IOperation, IEnumerable<IOperation>>(type, nameof(Children));
-            LanguagePropertyAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<IOperation, string>(type, nameof(Language));
-            IsImplicitPropertyAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<IOperation, bool>(type, nameof(IsImplicit));
-            SemanticModelPropertyAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<IOperation, SemanticModel>(type, nameof(SemanticModel));
+            ParentAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<IOperation, IOperation>(type, nameof(Parent));
+            ChildrenAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<IOperation, IEnumerable<IOperation>>(type, nameof(Children));
+            LanguageAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<IOperation, string>(type, nameof(Language));
+            IsImplicitAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<IOperation, bool>(type, nameof(IsImplicit));
+            SemanticModelAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<IOperation, SemanticModel>(type, nameof(SemanticModel));
         }
 
         public IOperation Instance { get; }
-        public IOperation Parent => ParentPropertyAccessor(Instance);
-        public IEnumerable<IOperation> Children => ChildrenPropertyAccessor(Instance);
-        public string Language => LanguagePropertyAccessor(Instance);
-        public bool IsImplicit => IsImplicitPropertyAccessor(Instance);
-        public SemanticModel SemanticModel => SemanticModelPropertyAccessor(Instance);
+        public IOperation Parent => ParentAccessor(Instance);
+        public IEnumerable<IOperation> Children => ChildrenAccessor(Instance);
+        public string Language => LanguageAccessor(Instance);
+        public bool IsImplicit => IsImplicitAccessor(Instance);
+        public SemanticModel SemanticModel => SemanticModelAccessor(Instance);
 
         public IOperationWrapperSonar(IOperation instance) =>
             Instance = instance ?? throw new ArgumentNullException(nameof(instance));
