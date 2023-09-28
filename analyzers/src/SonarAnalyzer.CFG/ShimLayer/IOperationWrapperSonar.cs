@@ -24,7 +24,7 @@ using SonarAnalyzer.CFG;
 namespace StyleCop.Analyzers.Lightup
 {
     // This is a temporary substitute for IOperationWrapper in case StyleCop will accept PR https://github.com/DotNetAnalyzers/StyleCopAnalyzers/issues/3381
-    public class IOperationWrapperSonar
+    public readonly struct IOperationWrapperSonar
     {
         private static readonly Func<IOperation, IOperation> ParentPropertyAccessor;
         private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenPropertyAccessor;

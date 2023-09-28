@@ -96,14 +96,17 @@ Method(4);";
             var enumerator = Compile("Method(0);", false).GetEnumerator();
             enumerator.MoveNext().Should().BeTrue();
             enumerator.Current.Should().NotBeNull();
+            enumerator.Current.Instance.Should().NotBeNull();
 
             enumerator.Reset();
             enumerator.MoveNext().Should().BeTrue();
             enumerator.Current.Should().NotBeNull();
+            enumerator.Current.Instance.Should().NotBeNull();
 
             enumerator.Dispose();
             enumerator.MoveNext().Should().BeFalse();
-            enumerator.Current.Should().BeNull();
+            enumerator.Current.Should().NotBeNull();
+            enumerator.Current.Instance.Should().BeNull();
         }
 
         [TestMethod]

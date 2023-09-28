@@ -190,7 +190,7 @@ public partial class ProgramStateTest
 
     [TestMethod]
     public void SetOperationValue_WithWrapperSonar_NullOperation_Throws() =>
-        ProgramState.Empty.Invoking(x => x.SetOperationValue((IOperationWrapperSonar)null, SymbolicValue.Empty)).Should().Throw<ArgumentNullException>();
+        ProgramState.Empty.Invoking(x => x.SetOperationValue((IOperationWrapperSonar)default, SymbolicValue.Empty)).Should().Throw<ArgumentNullException>();
 
     [TestMethod]
     public void SetOperationValue_OnCaptureReference_SetsValueToCapturedOperation()

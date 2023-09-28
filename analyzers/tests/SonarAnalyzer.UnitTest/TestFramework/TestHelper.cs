@@ -125,7 +125,7 @@ End Class", AnalyzerLanguage.VisualBasic);
 
         public static string Serialize(IOperationWrapperSonar operation)
         {
-            _ = operation ?? throw new ArgumentNullException(nameof(operation));
+            _ = operation.Instance ?? throw new ArgumentNullException(nameof(operation));
             return operation.Instance.Kind + ": " + operation.Instance.Syntax + (operation.IsImplicit ? " (Implicit)" : null);
         }
 

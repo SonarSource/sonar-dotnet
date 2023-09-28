@@ -31,7 +31,7 @@ public sealed class ExplodedNode : IEquatable<ExplodedNode>
     public ProgramState State { get; private set; }
     public BasicBlock Block { get; }
     public FinallyPoint FinallyPoint { get; }
-    public IOperationWrapperSonar Operation => index < operations.Length ? operations[index] : null;
+    public IOperationWrapperSonar Operation => index < operations.Length ? operations[index] : default;
     public int VisitCount => State.GetVisitCount(programPointHash);
 
     public ExplodedNode(BasicBlock block, ProgramState state, FinallyPoint finallyPoint)
@@ -69,7 +69,7 @@ public sealed class ExplodedNode : IEquatable<ExplodedNode>
         && other.State.Equals(State);
 
     public override string ToString() =>
-        Operation is null
-            ? $"Block #{Block.Ordinal}, Branching{Environment.NewLine}{State}"
-            : $"Block #{Block.Ordinal}, Operation #{index}, {Operation.Instance.Serialize()}{Environment.NewLine}{State}";
+        Operation.Instance is { } operation
+            ? $"Block #{Block.Ordinal}, Operation #{index}, {operation.Serialize()}{Environment.NewLine}{State}"
+            : $"Block #{Block.Ordinal}, Branching{Environment.NewLine}{State}";
 }
