@@ -62,14 +62,15 @@ public static class LightupHelpers
         }
 
         // Avoid creating the delegate if the value already exists
-        if (!wrappedObject.TryGetValue(obj.GetType(), out var canCast))
-        {
-            canCast = wrappedObject.GetOrAdd(
-                obj.GetType(),
-                kind => underlyingType.GetTypeInfo().IsAssignableFrom(obj.GetType().GetTypeInfo()));
-        }
+        return wrappedObject.TryGetValue(obj.GetType(), out var canCast)
+            ? canCast
+            : GetOrAdd(obj, underlyingType, wrappedObject);
 
-        return canCast;
+        // Dont' inline this method. The capture class will span the whole method otherwise.
+#pragma warning disable HAA0301, HAA0302 // Display class allocation to capture closure
+        static bool GetOrAdd(object obj, Type underlyingType, ConcurrentDictionary<Type, bool> wrappedObject) =>
+            wrappedObject.GetOrAdd(obj.GetType(), kind => underlyingType.GetTypeInfo().IsAssignableFrom(obj.GetType().GetTypeInfo()));
+#pragma warning restore HAA0301, HAA0302
     }
 
     [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/8106", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
@@ -93,15 +94,13 @@ public static class LightupHelpers
             wrappedSyntax = SupportedSyntaxWrappers.GetOrAdd(underlyingType, static _ => new ConcurrentDictionary<SyntaxKind, bool>());
         }
 
-        // Avoid creating the delegate if the value already exists
-        if (!wrappedSyntax.TryGetValue(node.Kind(), out var canCast))
-        {
-            canCast = wrappedSyntax.GetOrAdd(
-                node.Kind(),
-                kind => underlyingType.GetTypeInfo().IsAssignableFrom(node.GetType().GetTypeInfo()));
-        }
+        return wrappedSyntax.TryGetValue(node.Kind(), out var canCast) ? canCast : GetOrAdd(node, underlyingType, wrappedSyntax);
 
-        return canCast;
+        // Dont' inline this method. The capture class will span the whole method otherwise.
+#pragma warning disable HAA0301, HAA0302 // Display class allocation to capture closure
+        static bool GetOrAdd(SyntaxNode node, Type underlyingType, ConcurrentDictionary<SyntaxKind, bool> wrappedSyntax) =>
+            wrappedSyntax.GetOrAdd(node.Kind(), kind => underlyingType.GetTypeInfo().IsAssignableFrom(node.GetType().GetTypeInfo()));
+#pragma warning restore HAA0301, HAA0302
     }
 
     [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/8106", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
@@ -126,14 +125,15 @@ public static class LightupHelpers
         }
 
         // Avoid creating the delegate if the value already exists
-        if (!wrappedSyntax.TryGetValue(operation.Kind, out var canCast))
-        {
-            canCast = wrappedSyntax.GetOrAdd(
-                operation.Kind,
-                kind => underlyingType.GetTypeInfo().IsAssignableFrom(operation.GetType().GetTypeInfo()));
-        }
+        return wrappedSyntax.TryGetValue(operation.Kind, out var canCast)
+            ? canCast
+            : GetOrAdd(operation, underlyingType, wrappedSyntax);
 
-        return canCast;
+        // Dont' inline this method. The capture class will span the whole method otherwise.
+#pragma warning disable HAA0301, HAA0302 // Display class allocation to capture closure
+        static bool GetOrAdd(IOperation operation, Type underlyingType, ConcurrentDictionary<OperationKind, bool> wrappedSyntax) =>
+            wrappedSyntax.GetOrAdd(operation.Kind, kind => underlyingType.GetTypeInfo().IsAssignableFrom(operation.GetType().GetTypeInfo()));
+#pragma warning restore HAA0301, HAA0302
     }
 
     internal static Func<TOperation, TProperty> CreateOperationPropertyAccessor<TOperation, TProperty>(Type type, string propertyName)
