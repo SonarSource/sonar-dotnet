@@ -119,20 +119,20 @@ public static class LightupHelpers
         }
 
         // Avoid creating the delegate if the value already exists
-        if (!SupportedOperationWrappers.TryGetValue(underlyingType, out var wrappedSyntax))
+        if (!SupportedOperationWrappers.TryGetValue(underlyingType, out var wrappedOperation))
         {
-            wrappedSyntax = SupportedOperationWrappers.GetOrAdd(underlyingType, static _ => new ConcurrentDictionary<OperationKind, bool>());
+            wrappedOperation = SupportedOperationWrappers.GetOrAdd(underlyingType, static _ => new ConcurrentDictionary<OperationKind, bool>());
         }
 
         // Avoid creating the delegate if the value already exists
-        return wrappedSyntax.TryGetValue(operation.Kind, out var canCast)
+        return wrappedOperation.TryGetValue(operation.Kind, out var canCast)
             ? canCast
-            : GetOrAdd(operation, underlyingType, wrappedSyntax);
+            : GetOrAdd(operation, underlyingType, wrappedOperation);
 
         // Dont' inline this method. The capture class will span the whole method otherwise.
 #pragma warning disable HAA0301, HAA0302 // Display class allocation to capture closure
-        static bool GetOrAdd(IOperation operation, Type underlyingType, ConcurrentDictionary<OperationKind, bool> wrappedSyntax) =>
-            wrappedSyntax.GetOrAdd(operation.Kind, kind => underlyingType.GetTypeInfo().IsAssignableFrom(operation.GetType().GetTypeInfo()));
+        static bool GetOrAdd(IOperation operation, Type underlyingType, ConcurrentDictionary<OperationKind, bool> wrappedOperation) =>
+            wrappedOperation.GetOrAdd(operation.Kind, kind => underlyingType.GetTypeInfo().IsAssignableFrom(operation.GetType().GetTypeInfo()));
 #pragma warning restore HAA0301, HAA0302
     }
 
