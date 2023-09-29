@@ -193,9 +193,8 @@ namespace EntityFrameworkMigrations
         {
             // The exception should disappear once the fix for https://github.com/dotnet/roslyn/issues/70041 gets released.
             // If this does not happen before the official release of .NET8 and C#12, the code should be refactored to handle potential null values.
-            Action analysis = () => builder.AddPaths("UnusedPrivateMember.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
-            analysis.Should().Throw<AssertFailedException>().Which.Message.Should()
-                .StartWith("Expected diagnostics {error AD0001: Analyzer 'SonarAnalyzer.Rules.CSharp.UnusedPrivateMember' threw an exception of type 'System.NullReferenceException' with message 'Object reference not set to an instance of an object.'.");
+            var analysis = () => builder.AddPaths("UnusedPrivateMember.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
+            analysis.Should().Throw<AssertFailedException>().WithMessage("Expected diagnostics {error AD0001: Analyzer 'SonarAnalyzer.Rules.CSharp.UnusedPrivateMember' threw an exception of type 'System.NullReferenceException' with message 'Object reference not set to an instance of an object.'.*");
         }
 
 #endif
