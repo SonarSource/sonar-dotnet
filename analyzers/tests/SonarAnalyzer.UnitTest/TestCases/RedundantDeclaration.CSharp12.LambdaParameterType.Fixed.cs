@@ -37,3 +37,39 @@ namespace AliasAnyType
         }
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8115
+namespace Repro_8115
+{
+    class CollectionExpressions
+    {
+        void ExplicitTypeDeclaration()
+        {
+            int[] a1 = [1, 2, 3];         // Compliant
+            a1 = [1, 2, 3];               // Compliant, reassignment
+            int[] a2 = new[] { 1, 2, 3 }; // FN, can be written as [1, 2, 3]
+            a2 = new[] { 1, 2, 3 };       // FN, can be written as [1, 2, 3], reassignment
+        }
+
+        void VarDeclarationWithInlineAssignment()
+        {
+            var invalid = [1, 2, 3];            // Error CS9176  There is no target type for the collection expression.
+        }
+
+        void VarDeclarationWithReassignment()
+        {
+            var typeInferredAndReassigned = new[] { 1, 2, 3 }; // Compliant, cannot be written as [1, 2, 3]
+            typeInferredAndReassigned = new[] { 1, 2, 3 };     // FN, can be written as [1, 2, 3], reassignment of a type-inferred variable
+            typeInferredAndReassigned = new int[] { 1, 2, 3 }; // Fixed
+            typeInferredAndReassigned = [];                    // Compliant
+            typeInferredAndReassigned = new int[] { };         // FN, can be written as []
+        }
+
+        void VarDeclarationWithReassignmentToEmptyCollection()
+        {
+            var typeInferredAndReassigned = new[] { 1, 2, 3 };
+            typeInferredAndReassigned = new[] { };             // Error CS0826 No best type found for implicitly-typed array
+                                                               // Error@-1 CS0029 Cannot implicitly convert type '?[]' to 'int[]'
+        }
+    }
+}
