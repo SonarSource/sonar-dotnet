@@ -48,11 +48,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void VariableUnused_CSharp12() =>
-            builderCS.AddSnippet("""
-                public class SomeClass(int someInt) { } // Compliant
-                """)
-                .WithOptions(ParseOptionsHelper.FromCSharp12)
-                .Verify();
+            builderCS.AddPaths("VariableUnused.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
 
 #endif
 

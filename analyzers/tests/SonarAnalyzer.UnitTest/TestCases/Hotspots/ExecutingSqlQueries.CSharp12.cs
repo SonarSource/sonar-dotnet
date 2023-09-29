@@ -3,14 +3,11 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Data.Sqlite;
 
-namespace Tests.Diagnostics
+class ClassWithPrimaryConstructor(DbContext context, SqliteConnection connection, string someUserInput, params object[] parameters)
 {
-    class MyClass(DbContext context, SqliteConnection connection, string someUserInput, params object[] parameters)
+    void Foo()
     {
-        void MyMethod()
-        {
-            context.Query<object>().FromSql(someUserInput, parameters); // Compliant, we don't know anything about the someUserInput parameter
-            SqliteCommand command = new($"""SELECT * FROM mytable WHERE mycol={someUserInput}""", connection); // Noncompliant
-        }
+        context.Query<object>().FromSql(someUserInput, parameters); // Compliant, we don't know anything about the someUserInput parameter
+        SqliteCommand command = new($"""SELECT * FROM mytable WHERE mycol={someUserInput}""", connection); // Noncompliant
     }
 }

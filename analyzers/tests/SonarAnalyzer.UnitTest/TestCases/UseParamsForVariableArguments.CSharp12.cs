@@ -1,17 +1,9 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 
-namespace Tests.Diagnostics
+class BaseClass(__arglist)
 {
-    public class BaseClass(__arglist)
+    void Foo()
     {
-        public void Foo()
-        {
-            ArgIterator argumentIterator = new ArgIterator(__arglist); // Error CS0190
-            for (int i = 0; i < argumentIterator.GetRemainingCount(); i++)
-            {
-                Console.WriteLine(__refvalue(argumentIterator.GetNextArg(), string));
-            }
-        }
+        ArgIterator argumentIterator = new ArgIterator(__arglist); // Error CS0190
     }
 }

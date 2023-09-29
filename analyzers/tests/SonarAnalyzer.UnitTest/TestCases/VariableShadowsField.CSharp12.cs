@@ -1,14 +1,13 @@
-﻿class MyClass(int first, int second, int third)
+﻿using System;
+
+class MyClass(int first, int second, int third, int fourth)
 {
-    private int first; // Compliant
+    private int first = first; // Compliant
+    private int second; // FN
 
     void MyMethod()
     {
-        int second = 1; // Compliant
-
-        if (first is object third) // Compliant
-        {
-            return;
-        }
+        int third = 1; // FN
+        _ = first is object fourth; // FN
     }
 }

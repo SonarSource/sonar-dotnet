@@ -51,18 +51,7 @@ public class UnchangedLocalVariablesShouldBeConstTest
 
     [TestMethod]
     public void UnchangedLocalVariablesShouldBeConst_CSharp12() =>
-        verifier.AddSnippet("""
-            using Person = (string, string);
-
-            public class Sample(string str)
-            {
-              public void Method()
-              {
-                string sample1 = $"{nameof(str)}"; // Noncompliant
-                string sample2 = $"{nameof(Person)}"; // Noncompliant
-              }
-            }
-            """).WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
+        verifier.AddPaths("UnchangedLocalVariablesShouldBeConst.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
 
 #endif
 
