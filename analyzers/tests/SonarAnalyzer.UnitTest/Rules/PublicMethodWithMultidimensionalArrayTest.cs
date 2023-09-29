@@ -42,10 +42,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
                 .Verify();
 
-#endif
-
-#if NET48_OR_GREATER
-
         [TestMethod]
         public void PublicMethodWithMultidimensionalArray_CSharp12() =>
             builderCS.AddPaths("PublicMethodWithMultidimensionalArray.CSharp12.cs")
