@@ -25,7 +25,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         private const string DiagnosticId = "S3267";
         private const string MessageFormat = "{0}";
-        private const string WhereMessageFormat = @"Loops should be simplified with ""LINQ"" expressions";
+        private const string WhereMessageFormat = @"Loops should be simplified using the ""Where"" LINQ method";
         private const string SelectMessageFormat = "Loop should be simplified by calling Select({0} => {0}.{1}))";
 
         private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);

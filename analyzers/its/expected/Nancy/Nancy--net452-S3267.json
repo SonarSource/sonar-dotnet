@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3267",
-"message":  "Loops should be simplified with "LINQ" expressions",
+"message":  "Loops should be simplified using the "Where" LINQ method",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperLocator.cs#L73",
@@ -39,7 +39,7 @@
 },
 {
 "id":  "S3267",
-"message":  "Loops should be simplified with "LINQ" expressions",
+"message":  "Loops should be simplified using the "Where" LINQ method",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/AssemblyExtensions.cs#L55",
@@ -63,7 +63,7 @@
 },
 {
 "id":  "S3267",
-"message":  "Loops should be simplified with "LINQ" expressions",
+"message":  "Loops should be simplified using the "Where" LINQ method",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/CollectionExtensions.cs#L79",
@@ -87,7 +87,7 @@
 },
 {
 "id":  "S3267",
-"message":  "Loops should be simplified with "LINQ" expressions",
+"message":  "Loops should be simplified using the "Where" LINQ method",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L100",
@@ -111,7 +111,7 @@
 },
 {
 "id":  "S3267",
-"message":  "Loops should be simplified with "LINQ" expressions",
+"message":  "Loops should be simplified using the "Where" LINQ method",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultModelBinderLocator.cs#L50",
@@ -161,7 +161,7 @@
 },
 {
 "id":  "S3267",
-"message":  "Loops should be simplified with "LINQ" expressions",
+"message":  "Loops should be simplified using the "Where" LINQ method",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/RouteResolverTrie.cs#L88",
@@ -185,7 +185,7 @@
 },
 {
 "id":  "S3267",
-"message":  "Loops should be simplified with "LINQ" expressions",
+"message":  "Loops should be simplified using the "Where" LINQ method",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3365",
@@ -209,7 +209,7 @@
 },
 {
 "id":  "S3267",
-"message":  "Loops should be simplified with "LINQ" expressions",
+"message":  "Loops should be simplified using the "Where" LINQ method",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3393",
@@ -233,7 +233,7 @@
 },
 {
 "id":  "S3267",
-"message":  "Loops should be simplified with "LINQ" expressions",
+"message":  "Loops should be simplified using the "Where" LINQ method",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3825",

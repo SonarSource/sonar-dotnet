@@ -41,7 +41,7 @@
 },
 {
 "id":  "S3267",
-"message":  "Loops should be simplified with "LINQ" expressions",
+"message":  "Loops should be simplified using the "Where" LINQ method",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorProducerPipeline.cs#L217",
@@ -78,7 +78,7 @@
 },
 {
 "id":  "S3267",
-"message":  "Loops should be simplified with "LINQ" expressions",
+"message":  "Loops should be simplified using the "Where" LINQ method",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/SupervisorStrategy.cs#L965",

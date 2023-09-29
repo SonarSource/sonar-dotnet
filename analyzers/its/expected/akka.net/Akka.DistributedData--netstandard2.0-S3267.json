@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3267",
-"message":  "Loops should be simplified with "LINQ" expressions",
+"message":  "Loops should be simplified using the "Where" LINQ method",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1389",
@@ -26,7 +26,7 @@
 },
 {
 "id":  "S3267",
-"message":  "Loops should be simplified with "LINQ" expressions",
+"message":  "Loops should be simplified using the "Where" LINQ method",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L313",
