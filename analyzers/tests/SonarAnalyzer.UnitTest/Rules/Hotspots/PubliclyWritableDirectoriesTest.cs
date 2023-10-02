@@ -47,6 +47,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
                 .Verify();
 
+        [TestMethod]
+        public void PubliclyWritableDirectories_CSharp12() =>
+            builderCS.AddPaths(@"Hotspots\PubliclyWritableDirectories.CSharp12.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp12)
+                .Verify();
+
 #endif
 
         [TestMethod]
