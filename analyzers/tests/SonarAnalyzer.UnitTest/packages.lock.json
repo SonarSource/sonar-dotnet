@@ -444,7 +444,7 @@
         }
       }
     },
-    "net7.0": {
+    "net8.0": {
       "altcover": {
         "type": "Direct",
         "requested": "[8.6.68, )",
