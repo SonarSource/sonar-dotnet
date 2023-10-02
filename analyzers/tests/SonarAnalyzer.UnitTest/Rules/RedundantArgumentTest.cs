@@ -43,6 +43,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithTopLevelStatements()
                 .Verify();
 
+        [TestMethod]
+        public void RedundantArgument_CSharp12() =>
+            builder.AddPaths("RedundantArgument.CSharp12.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp12)
+                .Verify();
+
 #endif
 
         [TestMethod]

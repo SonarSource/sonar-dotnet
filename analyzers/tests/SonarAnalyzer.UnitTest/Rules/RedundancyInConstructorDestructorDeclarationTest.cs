@@ -52,6 +52,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Verify();
 
         [TestMethod]
+        public void RedundancyInConstructorDestructorDeclaration_CSharp12() =>
+            builder.AddPaths("RedundancyInConstructorDestructorDeclaration.CSharp12.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp12)
+                .Verify();
+
+        [TestMethod]
         public void RedundancyInConstructorDestructorDeclaration_CodeFix_CSharp9() =>
             codeFixBuilderRemoveBaseCall.AddPaths("RedundancyInConstructorDestructorDeclaration.CSharp9.cs")
                 .WithCodeFixedPaths("RedundancyInConstructorDestructorDeclaration.CSharp9.Fixed.cs")

@@ -70,6 +70,30 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
                 .VerifyCodeFix();
 
+        [TestMethod]
+        public void RedundantDeclaration_CSharp12() =>
+            builder.AddPaths("RedundantDeclaration.CSharp12.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp12)
+                .Verify();
+
+        [TestMethod]
+        public void RedundantDeclaration_CSharp12_CodeFix_ArraySize() =>
+            codeFixBuilder.AddPaths("RedundantDeclaration.CSharp12.cs")
+                .WithCodeFix<RedundantDeclarationCodeFix>()
+                .WithCodeFixTitle(RedundantDeclarationCodeFix.TitleRedundantArraySize)
+                .WithCodeFixedPaths("RedundantDeclaration.CSharp12.ArraySize.Fixed.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp12)
+                .VerifyCodeFix();
+
+        [TestMethod]
+        public void RedundantDeclaration_CSharp12_CodeFix_LambdaParameterType() =>
+            codeFixBuilder.AddPaths("RedundantDeclaration.CSharp12.cs")
+                .WithCodeFix<RedundantDeclarationCodeFix>()
+                .WithCodeFixTitle(RedundantDeclarationCodeFix.TitleRedundantLambdaParameterType)
+                .WithCodeFixedPaths("RedundantDeclaration.CSharp12.LambdaParameterType.Fixed.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp12)
+                .VerifyCodeFix();
+
 #endif
 
         [TestMethod]
