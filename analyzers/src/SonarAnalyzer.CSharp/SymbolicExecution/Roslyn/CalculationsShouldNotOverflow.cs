@@ -43,6 +43,7 @@ public sealed class CalculationsShouldNotOverflow : CalculationsShouldNotOverflo
     internal sealed class SyntaxKindWalker : SafeCSharpSyntaxWalker
     {
         public bool HasOverflow { get; private set; }
+        private bool IsUnchecked { get; set; }
 
         public override void Visit(SyntaxNode node)
         {
@@ -50,25 +51,43 @@ public sealed class CalculationsShouldNotOverflow : CalculationsShouldNotOverflo
             {
                 return; // We have an potential overflow: stop visiting
             }
-            switch (node.Kind())
+            if (!IsUnchecked && node.Kind() is
+                SyntaxKind.AddExpression or
+                SyntaxKind.AddAssignmentExpression or
+                SyntaxKind.MultiplyExpression or
+                SyntaxKind.MultiplyAssignmentExpression or
+                SyntaxKind.SubtractExpression or
+                SyntaxKind.SubtractAssignmentExpression or
+                SyntaxKind.PostDecrementExpression or
+                SyntaxKind.PostIncrementExpression or
+                SyntaxKind.PreDecrementExpression or
+                SyntaxKind.PreIncrementExpression)
             {
-                case SyntaxKind.UncheckedStatement:
-                case SyntaxKind.UncheckedExpression:
-                    return; // Don't step into unchecked context. Any overflowing operations there are considered intentional
-                case SyntaxKind.AddExpression:
-                case SyntaxKind.AddAssignmentExpression:
-                case SyntaxKind.MultiplyExpression:
-                case SyntaxKind.MultiplyAssignmentExpression:
-                case SyntaxKind.SubtractExpression:
-                case SyntaxKind.SubtractAssignmentExpression:
-                case SyntaxKind.PostDecrementExpression:
-                case SyntaxKind.PostIncrementExpression:
-                case SyntaxKind.PreDecrementExpression:
-                case SyntaxKind.PreIncrementExpression:
-                    HasOverflow = true;
-                    return;
+                HasOverflow = true;
+                return;
             }
             base.Visit(node);
+        }
+
+        public override void VisitCheckedExpression(CheckedExpressionSyntax node)
+        {
+            var before = SetIsUnchecked(node.Kind() == SyntaxKind.UncheckedExpression);
+            base.VisitCheckedExpression(node);
+            IsUnchecked = before;
+        }
+
+        public override void VisitCheckedStatement(CheckedStatementSyntax node)
+        {
+            var before = SetIsUnchecked(node.Kind() == SyntaxKind.UncheckedStatement);
+            base.VisitCheckedStatement(node);
+            IsUnchecked = before;
+        }
+
+        private bool SetIsUnchecked(bool isUnchecked)
+        {
+            var before = IsUnchecked;
+            IsUnchecked = isUnchecked;
+            return before;
         }
     }
 }

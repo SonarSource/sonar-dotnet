@@ -50,14 +50,14 @@ public class CalculationsShouldNotOverflowSyntaxWalkerTest
 
     [DataTestMethod]
     [DataRow("")]
-    [DataRow("_ = 1 / 1;")]
-    [DataRow("_ = 1 % 1;")]
-    [DataRow("_ = 1 == 1;")]
-    [DataRow("_ = 1 != 1;")]
-    [DataRow("_ = 1 > 1;")]
-    [DataRow("_ = 1 >= 1;")]
-    [DataRow("_ = 1 < 1;")]
-    [DataRow("_ = 1 <= 1;")]
+    [DataRow("_ = i / 1;")]
+    [DataRow("_ = i % 1;")]
+    [DataRow("_ = i == 1;")]
+    [DataRow("_ = i != 1;")]
+    [DataRow("_ = i > 1;")]
+    [DataRow("_ = i >= 1;")]
+    [DataRow("_ = i < 1;")]
+    [DataRow("_ = i <= 1;")]
     [DataRow("_ = i >>> 1;")]
     [DataRow("_ = i << 1;")]
     [DataRow("_ = i | 1;")]
@@ -104,12 +104,62 @@ public class CalculationsShouldNotOverflowSyntaxWalkerTest
     [DataRow("""
         checked
         {
-            _ = 1 + 1;
+            _ = i + i;
         }
         """, true)]
-    [DataRow("_ = checked(1 + 1);", true)]
-    [DataRow("_ = checked(unchecked(1 + 1));", false)]
-    [DataRow("_ = unchecked(checked(1 + 1));", true)]
+    [DataRow("_ = checked(i + i);", true)]
+    [DataRow("_ = checked(unchecked(i + i));", false)]
+    [DataRow("_ = unchecked(checked(i + i));", true)]
+    [DataRow("_ = checked(unchecked(checked(i + i)));", true)]
+    [DataRow("_ = unchecked(checked(unchecked(i + i)));", false)]
+    [DataRow("_ = unchecked(i + i + checked(i + i));", true)]
+    [DataRow("_ = unchecked(i + i + checked(i / i) + i + i);", false)]
+    [DataRow("_ = unchecked(i + i + checked(i / unchecked(i + i)) + i + i);", false)]
+    [DataRow("_ = unchecked(i / checked(i + i));", true)]
+    [DataRow("_ = unchecked(i + checked(i / i));", false)]
+    [DataRow("_ = unchecked(unchecked(i / checked(checked(i + i))));", true)]
+    [DataRow("_ = unchecked(unchecked(i + checked(checked(i / i))));", false)]
+    [DataRow("_ = checked(unchecked(i / unchecked(checked(i + i))));", true)]
+    [DataRow("_ = checked(unchecked(i + unchecked(checked(i / i))));", false)]
+    [DataRow("_ = checked(unchecked(i + unchecked(i + i)) + i);", true)]
+    [DataRow("""
+        unchecked
+        {
+            _ = i + i;
+            checked
+            {
+                _ = i / i;
+            }
+            _ = i + i;
+        }
+        """, false)]
+    [DataRow("""
+        unchecked
+        {
+            _ = i + i;
+            checked
+            {
+                unchecked
+                {
+                    _ = i + i;
+                }
+                _ = i / i;
+            }
+            _ = i + i;
+        }
+        """, false)]
+    [DataRow("""
+        unchecked
+        {
+            checked
+            {
+                unchecked
+                {
+                }
+                _ = i + i;
+            }
+        }
+        """, true)]
     public void HasOverflowExpressions_Unchecked_Nesting(string statement, bool exepected)
     {
         var (tree, _) = TestHelper.CompileCS(WrapInMethod($$"""
