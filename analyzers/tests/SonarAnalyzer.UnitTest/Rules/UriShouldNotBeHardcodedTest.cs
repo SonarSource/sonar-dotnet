@@ -41,6 +41,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
                 .Verify();
 
+        [TestMethod]
+        public void UriShouldNotBeHardcoded_CSharp12() =>
+            builderCS.AddPaths("UriShouldNotBeHardcoded.CSharp12.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp12)
+                .Verify();
+
 #endif
 
 #if NETFRAMEWORK // HttpContext is available only when targeting .Net Framework

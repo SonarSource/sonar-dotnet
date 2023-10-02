@@ -33,6 +33,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void WeakSslTlsProtocols_CSharp() =>
             builderCS.AddPaths("WeakSslTlsProtocols.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
+#if NET
+
+        [TestMethod]
+        public void WeakSslTlsProtocols_CSharp12() =>
+            builderCS.AddPaths("WeakSslTlsProtocols.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
+
+#endif
+
         [TestMethod]
         public void WeakSslTlsProtocols_VB() =>
             builderVB.AddPaths("WeakSslTlsProtocols.vb").Verify();

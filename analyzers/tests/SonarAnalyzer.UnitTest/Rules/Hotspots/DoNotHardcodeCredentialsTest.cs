@@ -56,10 +56,16 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void DoNotHardcodeCredentials_CSharp11_DefaultValues() =>
-            builderCS.AddPaths("DoNotHardcodeCredentials_DefaultValues.CSharp11.cs")
+            builderCS.AddPaths("DoNotHardcodeCredentials.DefaultValues.CSharp11.cs")
                 .AddReferences(AdditionalReferences)
                 .WithTopLevelStatements()
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
+        [TestMethod]
+        public void DoNotHardcodeCredentials_CSharp12_DefaultValues() =>
+            builderCS.AddPaths("DoNotHardcodeCredentials.DefaultValues.CSharp12.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp12)
                 .Verify();
 
 #endif
