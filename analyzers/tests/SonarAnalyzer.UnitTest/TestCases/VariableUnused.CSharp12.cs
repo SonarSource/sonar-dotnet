@@ -1,6 +1,6 @@
-﻿class SomeClass(int someInt) { } // Compliant
+﻿class PrimaryConstructorParameterNotUsed(int someInt) { } // Compliant
 
-class SomeOtherClass(int someInt)
+class PrimaryConstructorParameterUsedInMethod(int someInt) // Compliant
 {
     int Method => someInt;
 }

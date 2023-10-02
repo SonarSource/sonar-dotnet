@@ -6,7 +6,7 @@ using Point3D = (int, int, int);
 namespace ANamespace
 {
     using Point2D = (int, int); // FN
-    using unsafe IntPointer = int*; // FN (unused)
+    using unsafe IntPointer = int*; // FN: unused
     using StringArray = string[];
 
     class MyClass
@@ -20,7 +20,7 @@ namespace ANamespace
 
     namespace BNamespace
     {
-        using unsafe IntPointer = int; // Compliant (used)
+        using unsafe IntPointer = int; // Compliant: used
 
         unsafe class AliasShadowing(IntPointer* y);
     }
