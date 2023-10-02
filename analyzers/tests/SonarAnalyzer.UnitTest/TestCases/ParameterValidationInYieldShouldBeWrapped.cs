@@ -139,13 +139,3 @@ class NullCoalescing
         IEnumerable<int> LocalFunction() { yield return 1; }
     }
 }
-
-class NullCoalescingAssignment
-{
-    IEnumerable<int> NullableInlineArray(int? i) // FN
-    {
-        i ??= throw new ArgumentNullException(nameof(i));
-
-        yield return 1;
-    }
-}
