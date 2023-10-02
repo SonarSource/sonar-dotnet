@@ -65,9 +65,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void CreatingHashAlgorithms_CSharp11() =>
-            builderCS.AddPaths("CreatingHashAlgorithms.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .Verify();
+            builderCS.AddPaths("CreatingHashAlgorithms.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+
+        [TestMethod]
+        public void CreatingHashAlgorithms_CSharp12() =>
+            builderCS.AddPaths("CreatingHashAlgorithms.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
 
 #endif
 
