@@ -62,7 +62,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
                 .Verify();
 
-
         [TestMethod]
         public void DoNotHardcodeCredentials_CSharp12_DefaultValues() =>
             builderCS.AddPaths("DoNotHardcodeCredentials.DefaultValues.CSharp12.cs")
