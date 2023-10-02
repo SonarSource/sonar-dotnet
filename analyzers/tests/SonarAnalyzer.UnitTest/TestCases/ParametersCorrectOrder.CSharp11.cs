@@ -21,7 +21,7 @@ namespace Tests.Diagnostics
 
 namespace Repro_8072
 {
-    public class Lambdas
+    class Lambdas
     {
         Func<int, int, int> F1 = (int a, int b) => a + b;
 
