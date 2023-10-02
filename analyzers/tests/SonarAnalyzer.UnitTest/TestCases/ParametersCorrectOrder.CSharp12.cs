@@ -72,22 +72,22 @@ namespace Repro_8072
     {
         void InvokedFromAnotherLambda()
         {
-            var f1 = (int a, int b) => a + b;
-            var paramsFullyInverted = (int a, int b) => f1(b, a);                                    // FN
-            var paramsFullyInvertedWithAdditionalParamAfter = (int a, int b, string s) => f1(b, a);  // FN
-            var paramsFullyInvertedWithAdditionalParamBefore = (string s, int a, int b) => f1(b, a); // FN
+            var f1 = (int a = 42, int b = 42) => a + b;
+            var paramsFullyInverted = (int a = 42, int b = 42) => f1(b, a);                                           // FN
+            var paramsFullyInvertedWithAdditionalParamAfter = (int a = 42, int b = 42, string s = "42") => f1(b, a);  // FN
+            var paramsFullyInvertedWithAdditionalParamBefore = (string s = "42", int a = 42, int b = 42) => f1(b, a); // FN
 
-            var f2 = (int a, int b, int c) => a + b + c;
-            var paramsPartiallyInvertedFirstAndSecond = (int a, int b, int c) => f2(b, a, c);        // FN
-            var paramsPartiallyInvertedFirstAndLast = (int a, int b, int c) => f2(c, b, a);          // FN
-            var paramsPartiallyInvertedSecondAndLast = (int a, int b, int c) => f2(a, c, b);         // FN
+            var f2 = (int a = 42, int b = 42, int c = 42) => a + b + c;
+            var paramsPartiallyInvertedFirstAndSecond = (int a = 42, int b = 42, int c = 42) => f2(b, a, c); // FN
+            var paramsPartiallyInvertedFirstAndLast = (int a = 42, int b = 42, int c = 42) => f2(c, b, a);   // FN
+            var paramsPartiallyInvertedSecondAndLast = (int a = 42, int b = 42, int c = 42) => f2(a, c, b);  // FN
         }
 
         void InvokedFromLocalFunction()
         {
-            var f = (int a, int b) => a + b;
+            var f = (int a = 42, int b = 42) => a + b;
 
-            int SomeLocalFunction(int a, int b) => f(b, a);
+            int SomeLocalFunction(int a = 42, int b = 42) => f(b, a); // FN
         }
     }
 }
