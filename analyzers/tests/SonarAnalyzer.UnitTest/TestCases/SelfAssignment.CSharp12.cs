@@ -15,3 +15,17 @@
                                      // Secondary@-1
     }
 }
+
+class WithInlineArrays
+{
+    void Test(Buffer b)
+    {
+        b = b; // Noncompliant: local to local assignment
+    }
+
+    [System.Runtime.CompilerServices.InlineArray(10)]
+    struct Buffer
+    {
+        int arrayItem;
+    }
+}
