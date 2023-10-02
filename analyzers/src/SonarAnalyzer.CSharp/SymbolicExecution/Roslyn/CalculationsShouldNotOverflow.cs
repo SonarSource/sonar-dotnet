@@ -36,33 +36,39 @@ public sealed class CalculationsShouldNotOverflow : CalculationsShouldNotOverflo
         {
             var walker = new SyntaxKindWalker();
             walker.SafeVisit(Node);
-            return walker.HasOverflow && !walker.IsUnchecked;
+            return walker.HasOverflow;
         }
     }
 
     internal sealed class SyntaxKindWalker : SafeCSharpSyntaxWalker
     {
-        public bool IsUnchecked { get; private set; }
         public bool HasOverflow { get; private set; }
 
         public override void Visit(SyntaxNode node)
         {
-            if (!IsUnchecked && !HasOverflow)
+            if (HasOverflow)
             {
-                IsUnchecked = node.IsAnyKind(SyntaxKind.UncheckedStatement, SyntaxKind.UncheckedExpression);
-                HasOverflow = node.IsAnyKind(
-                    SyntaxKind.AddExpression,
-                    SyntaxKind.AddAssignmentExpression,
-                    SyntaxKind.MultiplyExpression,
-                    SyntaxKind.MultiplyAssignmentExpression,
-                    SyntaxKind.SubtractExpression,
-                    SyntaxKind.SubtractAssignmentExpression,
-                    SyntaxKind.PostDecrementExpression,
-                    SyntaxKind.PostIncrementExpression,
-                    SyntaxKind.PreDecrementExpression,
-                    SyntaxKind.PreIncrementExpression);
-                base.Visit(node);
+                return; // We have an potential overflow: stop visiting
             }
+            switch (node.Kind())
+            {
+                case SyntaxKind.UncheckedStatement:
+                case SyntaxKind.UncheckedExpression:
+                    return; // Don't step into unchecked context. Any overflowing operations there are considered intentional
+                case SyntaxKind.AddExpression:
+                case SyntaxKind.AddAssignmentExpression:
+                case SyntaxKind.MultiplyExpression:
+                case SyntaxKind.MultiplyAssignmentExpression:
+                case SyntaxKind.SubtractExpression:
+                case SyntaxKind.SubtractAssignmentExpression:
+                case SyntaxKind.PostDecrementExpression:
+                case SyntaxKind.PostIncrementExpression:
+                case SyntaxKind.PreDecrementExpression:
+                case SyntaxKind.PreIncrementExpression:
+                    HasOverflow = true;
+                    return;
+            }
+            base.Visit(node);
         }
     }
 }

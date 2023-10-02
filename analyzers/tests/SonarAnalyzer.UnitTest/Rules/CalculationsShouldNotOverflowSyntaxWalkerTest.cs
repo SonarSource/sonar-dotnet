@@ -36,6 +36,7 @@ public class CalculationsShouldNotOverflowSyntaxWalkerTest
     [DataRow("i += 1;")]
     [DataRow("i -= 1;")]
     [DataRow("i *= 1;")]
+    [DataRow("_ = (1 + 1, 0);")] // Test for "Stop visiting"
     public void HasOverflowExpressions_True(string statement)
     {
         var (tree, _) = TestHelper.CompileCS(WrapInMethod($$"""
