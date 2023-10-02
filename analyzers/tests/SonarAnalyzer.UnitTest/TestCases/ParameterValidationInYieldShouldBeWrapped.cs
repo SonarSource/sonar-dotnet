@@ -144,7 +144,7 @@ class NullCoalescingAssignment
 {
     IEnumerable<int> NullableInlineArray(int? i) // FN
     {
-        _ = i ?? throw new ArgumentNullException(nameof(i));
+        i ??= throw new ArgumentNullException(nameof(i));
 
         yield return 1;
     }
