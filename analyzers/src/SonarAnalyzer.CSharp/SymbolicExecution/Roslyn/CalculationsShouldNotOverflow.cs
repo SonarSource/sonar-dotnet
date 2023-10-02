@@ -42,8 +42,9 @@ public sealed class CalculationsShouldNotOverflow : CalculationsShouldNotOverflo
 
     internal sealed class SyntaxKindWalker : SafeCSharpSyntaxWalker
     {
+        private bool isUncheckedContext;
+
         public bool HasOverflow { get; private set; }
-        private bool IsUnchecked { get; set; }
 
         public override void Visit(SyntaxNode node)
         {
@@ -51,7 +52,7 @@ public sealed class CalculationsShouldNotOverflow : CalculationsShouldNotOverflo
             {
                 return; // We have an potential overflow: stop visiting
             }
-            if (!IsUnchecked && node.Kind() is
+            if (!isUncheckedContext && node.Kind() is
                 SyntaxKind.AddExpression or
                 SyntaxKind.AddAssignmentExpression or
                 SyntaxKind.MultiplyExpression or
@@ -73,20 +74,20 @@ public sealed class CalculationsShouldNotOverflow : CalculationsShouldNotOverflo
         {
             var before = SetIsUnchecked(node.Kind() == SyntaxKind.UncheckedExpression);
             base.VisitCheckedExpression(node);
-            IsUnchecked = before;
+            isUncheckedContext = before;
         }
 
         public override void VisitCheckedStatement(CheckedStatementSyntax node)
         {
             var before = SetIsUnchecked(node.Kind() == SyntaxKind.UncheckedStatement);
             base.VisitCheckedStatement(node);
-            IsUnchecked = before;
+            isUncheckedContext = before;
         }
 
         private bool SetIsUnchecked(bool isUnchecked)
         {
-            var before = IsUnchecked;
-            IsUnchecked = isUnchecked;
+            var before = isUncheckedContext;
+            isUncheckedContext = isUnchecked;
             return before;
         }
     }
