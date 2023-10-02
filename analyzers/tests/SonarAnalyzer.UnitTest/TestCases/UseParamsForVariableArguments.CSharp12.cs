@@ -1,6 +1,6 @@
 ﻿using System;
 
-class BaseClass(__arglist)
+class BaseClass(__arglist) // FN
 {
     void Foo()
     {
