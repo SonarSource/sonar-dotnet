@@ -48,8 +48,6 @@ namespace Repro_8096
             _ = new C2(42);     // Compliant
             _ = new C2(42, 42); // FN
             _ = new C2(41, 42); // FN, multiple violations
-            //         ~~
-            //             ~~@-1
         }
 
         void NamedArguments()
