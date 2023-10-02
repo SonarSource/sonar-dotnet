@@ -36,7 +36,7 @@ public class CalculationsShouldNotOverflowSyntaxWalkerTest
     [DataRow("i += 1;")]
     [DataRow("i -= 1;")]
     [DataRow("i *= 1;")]
-    public void HasOverflowExpressions(string statement)
+    public void HasOverflowExpressions_True(string statement)
     {
         var (tree, _) = TestHelper.CompileCS(WrapInMethod($$"""
             var i = 0;
@@ -45,6 +45,58 @@ public class CalculationsShouldNotOverflowSyntaxWalkerTest
         var sut = new CalculationsShouldNotOverflow.SyntaxKindWalker();
         sut.SafeVisit(tree.GetRoot());
         sut.HasOverflow.Should().BeTrue();
+    }
+
+    [DataTestMethod]
+    [DataRow("")]
+    [DataRow("_ = 1 / 1;")]
+    [DataRow("_ = 1 % 1;")]
+    [DataRow("_ = 1 == 1;")]
+    [DataRow("_ = 1 != 1;")]
+    [DataRow("_ = 1 > 1;")]
+    [DataRow("_ = 1 >= 1;")]
+    [DataRow("_ = 1 < 1;")]
+    [DataRow("_ = 1 <= 1;")]
+    [DataRow("_ = i >>> 1;")]
+    [DataRow("_ = i << 1;")]
+    [DataRow("_ = i | 1;")]
+    [DataRow("_ = i & 1;")]
+    [DataRow("_ = true && true;")]
+    [DataRow("_ = true || true;")]
+    [DataRow("_ = true ^ true;")]
+    [DataRow("_ = null ?? new object();")]
+    [DataRow("_ = i is int;")]
+    [DataRow("_ = i as int?;")]
+    [DataRow("i /= 1;")]
+    [DataRow("i %= 1;")]
+    public void HasOverflowExpressions_False(string statement)
+    {
+        var (tree, _) = TestHelper.CompileCS(WrapInMethod($$"""
+            var i = 0;
+            {{statement}}
+            """));
+        var sut = new CalculationsShouldNotOverflow.SyntaxKindWalker();
+        sut.SafeVisit(tree.GetRoot());
+        sut.HasOverflow.Should().BeFalse();
+    }
+
+    [DataTestMethod]
+    [DataRow("""
+        unchecked
+        {
+            _ = 1 + 1;
+        }
+        """)]
+    [DataRow("_ = unchecked(1 + 1);")]
+    public void HasOverflowExpressions_False_InUnchecked(string statement)
+    {
+        var (tree, _) = TestHelper.CompileCS(WrapInMethod($$"""
+            var i = 0;
+            {{statement}}
+            """));
+        var sut = new CalculationsShouldNotOverflow.SyntaxKindWalker();
+        sut.SafeVisit(tree.GetRoot());
+        sut.HasOverflow.Should().BeFalse();
     }
 
     private static string WrapInMethod(string body) =>
