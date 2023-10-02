@@ -43,9 +43,9 @@ namespace Repro_8072
             var f1 = (int a, int b) => a + b;
             var f2 = (int a, int b, int c) => a + b + c;
 
-            int FullyInverted(int a, int b) => f1(b, a);
-            int FullyInvertedWithAdditionalParamAfter(int a, int b, string c) => f1(b, a);
-            int FullyInvertedWithAdditionalParamBefore(string c, int a, int b) => f1(b, a);
+            int FullyInverted(int a, int b) => f1(b, a);                                    // FN
+            int FullyInvertedWithAdditionalParamAfter(int a, int b, string c) => f1(b, a);  // FN
+            int FullyInvertedWithAdditionalParamBefore(string c, int a, int b) => f1(b, a); // FN
 
             int PartiallyInvertedFirstAndSecond(int a, int b, int c) => f2(b, a, c); // FN
             int PartiallyInvertedFirstAndLast(int a, int b, int c) => f2(c, b, a);   // FN
