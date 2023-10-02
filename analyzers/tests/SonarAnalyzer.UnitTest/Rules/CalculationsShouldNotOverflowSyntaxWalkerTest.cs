@@ -100,6 +100,27 @@ public class CalculationsShouldNotOverflowSyntaxWalkerTest
         sut.HasOverflow.Should().BeFalse();
     }
 
+    [DataTestMethod]
+    [DataRow("""
+        checked
+        {
+            _ = 1 + 1;
+        }
+        """, true)]
+    [DataRow("_ = checked(1 + 1);", true)]
+    [DataRow("_ = checked(unchecked(1 + 1));", false)]
+    [DataRow("_ = unchecked(checked(1 + 1));", true)]
+    public void HasOverflowExpressions_Unchecked_Nesting(string statement, bool exepected)
+    {
+        var (tree, _) = TestHelper.CompileCS(WrapInMethod($$"""
+            var i = 0;
+            {{statement}}
+            """));
+        var sut = new CalculationsShouldNotOverflow.SyntaxKindWalker();
+        sut.SafeVisit(tree.GetRoot());
+        sut.HasOverflow.Should().Be(exepected);
+    }
+
     private static string WrapInMethod(string body) =>
         $$"""
         using System;
