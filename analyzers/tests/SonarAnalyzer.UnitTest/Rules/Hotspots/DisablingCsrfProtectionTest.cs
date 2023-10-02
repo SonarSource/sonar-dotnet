@@ -27,28 +27,25 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DisablingCsrfProtectionTest
     {
-        private readonly VerifierBuilder builder = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new DisablingCsrfProtection(AnalyzerConfiguration.AlwaysEnabled));
+        private readonly VerifierBuilder builder = new VerifierBuilder().WithBasePath("Hotspots")
+                                                                        .AddAnalyzer(() => new DisablingCsrfProtection(AnalyzerConfiguration.AlwaysEnabled))
+                                                                        .AddReferences(AdditionalReferences());
 
         [TestMethod]
         public void DisablingCSRFProtection_CSharp9() =>
-            builder.AddPaths("DisablingCSRFProtection.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
-                .AddReferences(AdditionalReferences())
-                .Verify();
+            builder.AddPaths("DisablingCsrfProtection.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
 
         [TestMethod]
         public void DisablingCSRFProtection_CSharp10() =>
-            builder.AddPaths("DisablingCSRFProtection.CSharp10.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .AddReferences(AdditionalReferences())
-                .Verify();
+            builder.AddPaths("DisablingCsrfProtection.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
         [TestMethod]
         public void DisablingCSRFProtection_CSharp11() =>
-            builder.AddPaths("DisablingCSRFProtection.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .AddReferences(AdditionalReferences())
-                .Verify();
+            builder.AddPaths("DisablingCsrfProtection.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+
+        [TestMethod]
+        public void DisablingCSRFProtection_CSharp12() =>
+            builder.AddPaths("DisablingCsrfProtection.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
 
         internal static IEnumerable<MetadataReference> AdditionalReferences() =>
             new[]
