@@ -184,8 +184,8 @@ stages:
             FrameworkMoniker: 'net48'
             CoverageArtifactName: 'DotnetCoverageNet48'
             TestResultsArtifactName: 'DotnetTestResultsNet48'
-          Net80:
-            FrameworkMoniker: 'net8'
+          Net8:
+            FrameworkMoniker: 'net8.0'
             CoverageArtifactName: 'DotnetCoverageNet8'
             TestResultsArtifactName: 'DotnetTestResultsNet8'
 
@@ -337,7 +337,7 @@ stages:
           }
 
           Update-Coverage-BasePaths 'coverage\coverage.net48.xml'
-          Update-Coverage-BasePaths 'coverage\coverage.net8.xml'
+          Update-Coverage-BasePaths 'coverage\coverage.net8.0.xml'
         displayName: Fix coverage paths
 
       - task: SonarCloudAnalyze@1
