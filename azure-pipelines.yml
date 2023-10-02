@@ -184,10 +184,10 @@ stages:
             FrameworkMoniker: 'net48'
             CoverageArtifactName: 'DotnetCoverageNet48'
             TestResultsArtifactName: 'DotnetTestResultsNet48'
-          Net70:
-            FrameworkMoniker: 'net7.0'
-            CoverageArtifactName: 'DotnetCoverageNet7'
-            TestResultsArtifactName: 'DotnetTestResultsNet7'
+          Net80:
+            FrameworkMoniker: 'net8'
+            CoverageArtifactName: 'DotnetCoverageNet8'
+            TestResultsArtifactName: 'DotnetTestResultsNet8'
 
       steps:
       - task: DownloadPipelineArtifact@2
@@ -306,7 +306,7 @@ stages:
       - task: DownloadPipelineArtifact@2
         displayName: 'Download coverage reports'
         inputs:
-          artifact: DotnetCoverageNet7
+          artifact: DotnetCoverageNet8
           targetPath: 'coverage'
 
       - task: DownloadPipelineArtifact@2
@@ -318,7 +318,7 @@ stages:
       - task: DownloadPipelineArtifact@2
         displayName: 'Download test results'
         inputs:
-          artifact: DotnetTestResultsNet7
+          artifact: DotnetTestResultsNet8
           targetPath: 'TestResults'
 
       - powershell: |
@@ -337,7 +337,7 @@ stages:
           }
 
           Update-Coverage-BasePaths 'coverage\coverage.net48.xml'
-          Update-Coverage-BasePaths 'coverage\coverage.net7.0.xml'
+          Update-Coverage-BasePaths 'coverage\coverage.net8.xml'
         displayName: Fix coverage paths
 
       - task: SonarCloudAnalyze@1
