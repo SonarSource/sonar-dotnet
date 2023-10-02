@@ -95,6 +95,8 @@ namespace Tests.Diagnostics
             invalidIPv6 = "20015555:db8:1234:ffff:ffff:ffff:ffff:ffff";
             invalidIPv6 = "2001:db8:1234:ffff:ffff:ffff:ffff:ffff:1623:2316";
             invalidIPv6 = ":::4";
+
+            string invalidIp = $"192.168.{"0"}.1"; // Noncompliant
         }
     }
 }
