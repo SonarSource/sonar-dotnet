@@ -1,6 +1,4 @@
-﻿using System;
-
-class MyClass(int first, int second, int third, int fourth)
+﻿class MyClass(int first, int second, int third, int fourth)
 {
     private int first = first; // Compliant
     private int second; // FN

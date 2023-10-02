@@ -1,4 +1,4 @@
-﻿public class PrimaryConstructor(string ctorParam = "file://blah.txt") // FN
+﻿class PrimaryConstructor(string ctorParam = "file://blah.txt") // FN
 {
     void Method(string methodParam = "file://blah.txt") // FN
     {

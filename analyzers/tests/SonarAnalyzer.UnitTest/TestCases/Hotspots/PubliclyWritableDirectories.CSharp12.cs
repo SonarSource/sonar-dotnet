@@ -1,5 +1,5 @@
-﻿public class PrimaryConstructor(string ctorParam = "C:\\TMP\\f",        // Noncompliant
-                                string ctorParam2 = $"C:\\{"TM"}P\\f")  // FN
+﻿class PrimaryConstructor(string ctorParam = "C:\\TMP\\f",        // Noncompliant
+                         string ctorParam2 = $"C:\\{"TM"}P\\f")  // FN
 {
     void Method(string methodParam = "C:\\TMP\\f",        // Noncompliant
                 string methodParam2 = $"C:\\{"TM"}P\\f")  // FN

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Security.AccessControl;
+﻿using System.Security.AccessControl;
 
 class Program(FileSecurity fileSecurity)
 {

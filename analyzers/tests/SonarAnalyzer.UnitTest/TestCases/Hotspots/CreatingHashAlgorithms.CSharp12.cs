@@ -1,7 +1,6 @@
-﻿using System.Diagnostics;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 
-public class PrimaryConstructor(string ctorParam = "MD5")
+class PrimaryConstructor(string ctorParam = "MD5")
 {
     void Method(string methodParam = "MD5")
     {

@@ -1,8 +1,8 @@
 ﻿using System.Net;
 
-public class WeakSslTlsProtocols(SecurityProtocolType classParam = SecurityProtocolType.Ssl3) // Noncompliant
+class WeakSslTlsProtocols(SecurityProtocolType classParam = SecurityProtocolType.Ssl3) // Noncompliant
 {
-    public void SecurityProtocolTypeNonComplaint()
+    void SecurityProtocolTypeNonComplaint(SecurityProtocolType methodParam = SecurityProtocolType.Ssl3) // Noncompliant
     {
         var lambda = (SecurityProtocolType lambdaParam = SecurityProtocolType.Ssl3) => lambdaParam; // Noncompliant
     }
