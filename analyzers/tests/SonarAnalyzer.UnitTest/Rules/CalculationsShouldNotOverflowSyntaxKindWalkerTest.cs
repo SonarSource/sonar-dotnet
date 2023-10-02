@@ -23,7 +23,7 @@ using CalculationsShouldNotOverflow = SonarAnalyzer.SymbolicExecution.Roslyn.Rul
 namespace SonarAnalyzer.UnitTest.Rules;
 
 [TestClass]
-public class CalculationsShouldNotOverflowSyntaxWalkerTest
+public class CalculationsShouldNotOverflowSyntaxKindWalkerTest
 {
     [DataTestMethod]
     [DataRow("_ = 1 + 1;")]
