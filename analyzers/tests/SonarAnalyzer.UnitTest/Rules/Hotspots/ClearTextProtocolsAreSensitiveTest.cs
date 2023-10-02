@@ -60,6 +60,10 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
                 .Verify();
 
+        [TestMethod]
+        public void ClearTextProtocolsAreSensitive_CSharp12() =>
+            builder.AddPaths("ClearTextProtocolsAreSensitive.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
+
 #endif
 
         internal static IEnumerable<MetadataReference> AdditionalReferences =>
