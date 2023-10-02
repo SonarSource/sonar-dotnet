@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Wrappers
             return objectCreation is not null;
         }
 
-        private class ObjectCreation : IObjectCreation
+        private sealed class ObjectCreation : IObjectCreation
         {
             private readonly ObjectCreationExpressionSyntax objectCreation;
 
@@ -80,7 +80,7 @@ namespace SonarAnalyzer.Wrappers
                 semanticModel.GetSymbolInfo(objectCreation).Symbol as IMethodSymbol;
         }
 
-        private class ImplicitObjectCreation : IObjectCreation
+        private sealed class ImplicitObjectCreation : IObjectCreation
         {
             private readonly ImplicitObjectCreationExpressionSyntaxWrapper objectCreation;
 
@@ -99,7 +99,7 @@ namespace SonarAnalyzer.Wrappers
                 TypeSymbol(semanticModel).Name;
 
             public ITypeSymbol TypeSymbol(SemanticModel semanticModel) =>
-                semanticModel.GetTypeInfo(objectCreation).Type;
+                semanticModel.GetTypeInfo(objectCreation).ConvertedType;
 
             public IMethodSymbol MethodSymbol(SemanticModel semanticModel) =>
                 semanticModel.GetSymbolInfo(objectCreation).Symbol as IMethodSymbol;
