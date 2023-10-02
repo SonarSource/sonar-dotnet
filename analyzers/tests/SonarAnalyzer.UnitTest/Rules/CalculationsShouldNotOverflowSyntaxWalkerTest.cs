@@ -171,6 +171,34 @@ public class CalculationsShouldNotOverflowSyntaxWalkerTest
         sut.HasOverflow.Should().Be(exepected);
     }
 
+    [DataTestMethod]
+    [DataRow("_ = 1 + 1;", true)] // Fix: should be false as it is checked at compile time
+    [DataRow("_ = int.MaxValue + 0;", true)] // OK: We would need to consult the semanticModel to learn that int.MaxValue is also a constant
+    [DataRow("_ = i + 1;", true)]
+    [DataRow("_ = 1 - 1;", true)] // Fix: should be false as it is checked at compile time
+    [DataRow("_ = 1 * 1;", true)] // Fix: should be false as it is checked at compile time
+    [DataRow("_ = i + 0;", true)] // Fix: should be false as one operand is the identity element of addition
+    [DataRow("_ = i - 0;", true)] // Fix: should be false as one operand is the identity element of substruction
+    [DataRow("_ = i * 1;", true)] // Fix: should be false as one operand is the identity element of multipliction
+    [DataRow("_ = i * 0;", true)] // Fix: should be false as the result is always 0
+    [DataRow("""_ = "" + "";""", true)] // Fix: should be false as both sides are string literals
+    [DataRow("""_ = s + "";""", true)] // Fix: should be false as right side is a string literal
+    [DataRow("""_ = "" + s;""", true)] // Fix: should be false as left side is a string literal
+    [DataRow("""_ = "" + s + s;""", true)] // Fix: should be false as one of the operands is a string literal
+    [DataRow("""_ = s + "" + s;""", true)] // Fix: should be false as one of the operands is a string literal
+    [DataRow("""_ = s + s + "";""", true)] // Fix: should be false as one of the operands is a string literal
+    public void HasOverflowExpressions_Literals(string statement, bool exepected)
+    {
+        var (tree, _) = TestHelper.CompileCS(WrapInMethod($$"""
+            var i = 0;
+            var s = "";
+            {{statement}}
+            """));
+        var sut = new CalculationsShouldNotOverflow.SyntaxKindWalker();
+        sut.SafeVisit(tree.GetRoot());
+        sut.HasOverflow.Should().Be(exepected);
+    }
+
     private static string WrapInMethod(string body) =>
         $$"""
         using System;
