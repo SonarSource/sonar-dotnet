@@ -178,8 +178,8 @@ public class CalculationsShouldNotOverflowSyntaxKindWalkerTest
     [DataRow("_ = 1 - 1;", true)] // Fix: should be false as it is checked at compile time
     [DataRow("_ = 1 * 1;", true)] // Fix: should be false as it is checked at compile time
     [DataRow("_ = i + 0;", true)] // Fix: should be false as one operand is the identity element of addition
-    [DataRow("_ = i - 0;", true)] // Fix: should be false as one operand is the identity element of substruction
-    [DataRow("_ = i * 1;", true)] // Fix: should be false as one operand is the identity element of multipliction
+    [DataRow("_ = i - 0;", true)] // Fix: should be false as one operand is the identity element of subtraction
+    [DataRow("_ = i * 1;", true)] // Fix: should be false as one operand is the identity element of multiplication
     [DataRow("_ = i * 0;", true)] // Fix: should be false as the result is always 0
     [DataRow("""_ = "" + "";""", true)] // Fix: should be false as both sides are string literals
     [DataRow("""_ = s + "";""", true)] // Fix: should be false as right side is a string literal
