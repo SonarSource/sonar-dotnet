@@ -62,6 +62,19 @@ namespace SonarAnalyzer.UnitTest.Rules
             });
 
         [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
+        public void Verify_MainTokens_CSSharp12(ProjectType projectType) =>
+            Verify("Tokens.Csharp12.cs", projectType, info =>
+            {
+                info.Should().HaveCount(26);
+                info.Where(x => x.TokenType == TokenType.Keyword).Should().HaveCount(13);
+                info.Where(x => x.TokenType == TokenType.StringLiteral).Should().HaveCount(4);
+                info.Where(x => x.TokenType == TokenType.NumericLiteral).Should().HaveCount(4);
+                info.Should().ContainSingle(x => x.TokenType == TokenType.Comment);
+            });
+
+        [DataTestMethod]
         [DataRow("Razor.razor")]
         [DataRow("Razor.cshtml")]
         public void Verify_NoMetricsAreComputedForRazorFiles(string fileName) =>
