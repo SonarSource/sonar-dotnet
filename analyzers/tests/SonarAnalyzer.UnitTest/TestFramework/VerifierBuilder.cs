@@ -46,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public string CodeFixTitle { get; init; }
         public bool ConcurrentAnalysis { get; init; } = true;
         public CompilationErrorBehavior ErrorBehavior { get; init; } = CompilationErrorBehavior.Default;
-        public string RazorFramework { get; init; } = "net7.0";
+        public string RazorFramework { get; init; } = Constants.RazorFrameworkLatestVersion;
         public bool IsRazor { get; init; }
         public ImmutableArray<DiagnosticDescriptor> OnlyDiagnostics { get; init; } = ImmutableArray<DiagnosticDescriptor>.Empty;
         public OutputKind OutputKind { get; init; } = OutputKind.DynamicallyLinkedLibrary;

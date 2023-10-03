@@ -41,7 +41,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private readonly string[] razorSupportedFrameworks = new[]
             {
                 "net6.0",
-                "net7.0"
+                "net7.0",
+                "net8.0"
             };
         private readonly VerifierBuilder builder;
         private readonly DiagnosticAnalyzer[] analyzers;
