@@ -36,59 +36,69 @@ public sealed class CalculationsShouldNotOverflow : CalculationsShouldNotOverflo
         {
             var walker = new SyntaxKindWalker();
             walker.SafeVisit(Node);
-            return walker.HasOverflow;
+            return walker.HasOverflow && !walker.IsUnchecked;
         }
     }
 
     internal sealed class SyntaxKindWalker : SafeCSharpSyntaxWalker
     {
-        private bool isUncheckedContext;
+        public bool IsUnchecked { get; private set; }
 
         public bool HasOverflow { get; private set; }
 
         public override void Visit(SyntaxNode node)
         {
-            if (HasOverflow)
+            if (IsUnchecked)
             {
-                return; // We have an potential overflow: stop visiting
-            }
-            if (!isUncheckedContext && node.Kind() is
-                SyntaxKind.AddExpression or
-                SyntaxKind.AddAssignmentExpression or
-                SyntaxKind.MultiplyExpression or
-                SyntaxKind.MultiplyAssignmentExpression or
-                SyntaxKind.SubtractExpression or
-                SyntaxKind.SubtractAssignmentExpression or
-                SyntaxKind.PostDecrementExpression or
-                SyntaxKind.PostIncrementExpression or
-                SyntaxKind.PreDecrementExpression or
-                SyntaxKind.PreIncrementExpression)
-            {
-                HasOverflow = true;
-                return;
+                return; // We have an unchecked context: stop visiting
             }
             base.Visit(node);
         }
 
+        public override void VisitBinaryExpression(BinaryExpressionSyntax node)
+        {
+            HasOverflow |= node.Kind() is
+                SyntaxKind.AddExpression or
+                SyntaxKind.MultiplyExpression or
+                SyntaxKind.SubtractExpression;
+            base.VisitBinaryExpression(node);
+        }
+
+        public override void VisitAssignmentExpression(AssignmentExpressionSyntax node)
+        {
+            HasOverflow |= node.Kind() is
+                SyntaxKind.AddAssignmentExpression or
+                SyntaxKind.MultiplyAssignmentExpression or
+                SyntaxKind.SubtractAssignmentExpression;
+            base.VisitAssignmentExpression(node);
+        }
+
+        public override void VisitPostfixUnaryExpression(PostfixUnaryExpressionSyntax node)
+        {
+            HasOverflow |= node.Kind() is
+                SyntaxKind.PostDecrementExpression or
+                SyntaxKind.PostIncrementExpression;
+            base.VisitPostfixUnaryExpression(node);
+        }
+
+        public override void VisitPrefixUnaryExpression(PrefixUnaryExpressionSyntax node)
+        {
+            HasOverflow |= node.Kind() is
+                SyntaxKind.PreDecrementExpression or
+                SyntaxKind.PreIncrementExpression;
+            base.VisitPrefixUnaryExpression(node);
+        }
+
         public override void VisitCheckedExpression(CheckedExpressionSyntax node)
         {
-            var before = SetIsUnchecked(node.Kind() == SyntaxKind.UncheckedExpression);
+            IsUnchecked |= node.Kind() is SyntaxKind.UncheckedExpression;
             base.VisitCheckedExpression(node);
-            isUncheckedContext = before;
         }
 
         public override void VisitCheckedStatement(CheckedStatementSyntax node)
         {
-            var before = SetIsUnchecked(node.Kind() == SyntaxKind.UncheckedStatement);
+            IsUnchecked |= node.Kind() is SyntaxKind.UncheckedStatement;
             base.VisitCheckedStatement(node);
-            isUncheckedContext = before;
-        }
-
-        private bool SetIsUnchecked(bool isUnchecked)
-        {
-            var before = isUncheckedContext;
-            isUncheckedContext = isUnchecked;
-            return before;
         }
     }
 }

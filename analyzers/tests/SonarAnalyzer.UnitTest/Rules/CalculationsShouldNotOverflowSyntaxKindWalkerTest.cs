@@ -26,9 +26,9 @@ namespace SonarAnalyzer.UnitTest.Rules;
 public class CalculationsShouldNotOverflowSyntaxKindWalkerTest
 {
     [DataTestMethod]
-    [DataRow("_ = 1 + 1;")]
-    [DataRow("_ = 1 - 1;")]
-    [DataRow("_ = 1 * 1;")]
+    [DataRow("_ = i + i;")]
+    [DataRow("_ = i - i;")]
+    [DataRow("_ = i * i;")]
     [DataRow("_ = ++i;")]
     [DataRow("_ = --i;")]
     [DataRow("_ = i++;")]
@@ -36,7 +36,23 @@ public class CalculationsShouldNotOverflowSyntaxKindWalkerTest
     [DataRow("i += 1;")]
     [DataRow("i -= 1;")]
     [DataRow("i *= 1;")]
-    [DataRow("_ = (1 + 1, 0);")] // Test for "Stop visiting"
+    [DataRow("_ = (i + i, 0);")] // Test for "Stop visiting"
+    [DataRow("""
+        _ = i + i;
+        _ = 1 / i;
+        """)]
+    [DataRow("""
+        _ = ++i;
+        _ = +i;
+        """)]
+    [DataRow("""
+        _ = i++;
+        _ = i!;
+        """)]
+    [DataRow("""
+        i += 1;
+        i /= 1;
+        """)]
     public void HasOverflowExpressions_True(string statement)
     {
         var (tree, _) = TestHelper.CompileCS(WrapInMethod($$"""
@@ -45,7 +61,11 @@ public class CalculationsShouldNotOverflowSyntaxKindWalkerTest
             """));
         var sut = new CalculationsShouldNotOverflow.SyntaxKindWalker();
         sut.SafeVisit(tree.GetRoot());
-        sut.HasOverflow.Should().BeTrue();
+        sut.Should().BeEquivalentTo(new
+        {
+            HasOverflow = true,
+            IsUnchecked = false,
+        });
     }
 
     [DataTestMethod]
@@ -78,17 +98,21 @@ public class CalculationsShouldNotOverflowSyntaxKindWalkerTest
             """));
         var sut = new CalculationsShouldNotOverflow.SyntaxKindWalker();
         sut.SafeVisit(tree.GetRoot());
-        sut.HasOverflow.Should().BeFalse();
+        sut.Should().BeEquivalentTo(new
+        {
+            HasOverflow = false,
+            IsUnchecked = false,
+        });
     }
 
     [DataTestMethod]
     [DataRow("""
         unchecked
         {
-            _ = 1 + 1;
+            _ = i + i;
         }
         """)]
-    [DataRow("_ = unchecked(1 + 1);")]
+    [DataRow("_ = unchecked(i + i);")]
     public void HasOverflowExpressions_False_InUnchecked(string statement)
     {
         var (tree, _) = TestHelper.CompileCS(WrapInMethod($$"""
@@ -97,7 +121,11 @@ public class CalculationsShouldNotOverflowSyntaxKindWalkerTest
             """));
         var sut = new CalculationsShouldNotOverflow.SyntaxKindWalker();
         sut.SafeVisit(tree.GetRoot());
-        sut.HasOverflow.Should().BeFalse();
+        sut.Should().BeEquivalentTo(new
+        {
+            HasOverflow = false,
+            IsUnchecked = true,
+        });
     }
 
     [DataTestMethod]
@@ -106,22 +134,23 @@ public class CalculationsShouldNotOverflowSyntaxKindWalkerTest
         {
             _ = i + i;
         }
-        """, true)]
-    [DataRow("_ = checked(i + i);", true)]
-    [DataRow("_ = checked(unchecked(i + i));", false)]
-    [DataRow("_ = unchecked(checked(i + i));", true)]
-    [DataRow("_ = checked(unchecked(checked(i + i)));", true)]
-    [DataRow("_ = unchecked(checked(unchecked(i + i)));", false)]
-    [DataRow("_ = unchecked(i + i + checked(i + i));", true)]
-    [DataRow("_ = unchecked(i + i + checked(i / i) + i + i);", false)]
-    [DataRow("_ = unchecked(i + i + checked(i / unchecked(i + i)) + i + i);", false)]
-    [DataRow("_ = unchecked(i / checked(i + i));", true)]
-    [DataRow("_ = unchecked(i + checked(i / i));", false)]
-    [DataRow("_ = unchecked(unchecked(i / checked(checked(i + i))));", true)]
-    [DataRow("_ = unchecked(unchecked(i + checked(checked(i / i))));", false)]
-    [DataRow("_ = checked(unchecked(i / unchecked(checked(i + i))));", true)]
-    [DataRow("_ = checked(unchecked(i + unchecked(checked(i / i))));", false)]
-    [DataRow("_ = checked(unchecked(i + unchecked(i + i)) + i);", true)]
+        """, true, false)]
+    [DataRow("_ = checked(i + i);", true, false)]
+    [DataRow("_ = checked(unchecked(i + i));", false, true)]
+    [DataRow("_ = checked(unchecked(i) + i);", true, true)]
+    [DataRow("_ = unchecked(checked(i + i));", false, true)]
+    [DataRow("_ = checked(unchecked(checked(i + i)));", false, true)]
+    [DataRow("_ = unchecked(checked(unchecked(i + i)));", false, true)]
+    [DataRow("_ = unchecked(i + i + checked(i + i));", false, true)]
+    [DataRow("_ = unchecked(i + i + checked(i / i) + i + i);", false, true)]
+    [DataRow("_ = unchecked(i + i + checked(i / unchecked(i + i)) + i + i);", false, true)]
+    [DataRow("_ = unchecked(i / checked(i + i));", false, true)]
+    [DataRow("_ = unchecked(i + checked(i / i));", false, true)]
+    [DataRow("_ = unchecked(unchecked(i / checked(checked(i + i))));", false, true)]
+    [DataRow("_ = unchecked(unchecked(i + checked(checked(i / i))));", false, true)]
+    [DataRow("_ = checked(unchecked(i / unchecked(checked(i + i))));", false, true)]
+    [DataRow("_ = checked(unchecked(i + unchecked(checked(i / i))));", false, true)]
+    [DataRow("_ = checked(unchecked(i + unchecked(i + i)) + i);", true, true)]
     [DataRow("""
         unchecked
         {
@@ -132,7 +161,13 @@ public class CalculationsShouldNotOverflowSyntaxKindWalkerTest
             }
             _ = i + i;
         }
-        """, false)]
+        """, false, true)]
+    [DataRow("""
+        _ = i + i;
+        unchecked
+        {
+        }
+        """, true, true)]
     [DataRow("""
         unchecked
         {
@@ -147,7 +182,7 @@ public class CalculationsShouldNotOverflowSyntaxKindWalkerTest
             }
             _ = i + i;
         }
-        """, false)]
+        """, false, true)]
     [DataRow("""
         unchecked
         {
@@ -159,8 +194,8 @@ public class CalculationsShouldNotOverflowSyntaxKindWalkerTest
                 _ = i + i;
             }
         }
-        """, true)]
-    public void HasOverflowExpressions_Unchecked_Nesting(string statement, bool exepected)
+        """, false, true)]
+    public void HasOverflowExpressions_Unchecked_Nesting(string statement, bool expectedHasOverflow, bool expectedIsUnchecked)
     {
         var (tree, _) = TestHelper.CompileCS(WrapInMethod($$"""
             var i = 0;
@@ -168,7 +203,11 @@ public class CalculationsShouldNotOverflowSyntaxKindWalkerTest
             """));
         var sut = new CalculationsShouldNotOverflow.SyntaxKindWalker();
         sut.SafeVisit(tree.GetRoot());
-        sut.HasOverflow.Should().Be(exepected);
+        sut.Should().BeEquivalentTo(new
+        {
+            HasOverflow = expectedHasOverflow,
+            IsUnchecked = expectedIsUnchecked,
+        });
     }
 
     [DataTestMethod]
@@ -187,7 +226,7 @@ public class CalculationsShouldNotOverflowSyntaxKindWalkerTest
     [DataRow("""_ = "" + s + s;""", true)] // Fix: should be false as one of the operands is a string literal
     [DataRow("""_ = s + "" + s;""", true)] // Fix: should be false as one of the operands is a string literal
     [DataRow("""_ = s + s + "";""", true)] // Fix: should be false as one of the operands is a string literal
-    public void HasOverflowExpressions_Literals(string statement, bool exepected)
+    public void HasOverflowExpressions_Literals(string statement, bool expected)
     {
         var (tree, _) = TestHelper.CompileCS(WrapInMethod($$"""
             var i = 0;
@@ -196,7 +235,11 @@ public class CalculationsShouldNotOverflowSyntaxKindWalkerTest
             """));
         var sut = new CalculationsShouldNotOverflow.SyntaxKindWalker();
         sut.SafeVisit(tree.GetRoot());
-        sut.HasOverflow.Should().Be(exepected);
+        sut.Should().BeEquivalentTo(new
+        {
+            HasOverflow = expected,
+            IsUnchecked = false,
+        });
     }
 
     private static string WrapInMethod(string body) =>
