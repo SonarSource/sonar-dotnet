@@ -49,12 +49,12 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override int BaseParameterCount(SyntaxNode node) =>
             node switch
             {
-                ConstructorDeclarationSyntax ctorDeclaration => ctorDeclaration?.Initializer?.ArgumentList?.Arguments.Count ?? 0,
+                ConstructorDeclarationSyntax ctorDeclaration => ctorDeclaration.Initializer?.ArgumentList?.Arguments.Count ?? 0,
                 ClassDeclarationSyntax classDeclaration => RetrieveBasePrimaryConstructorArguments(classDeclaration),
                 _ => 0,
             };
 
-        private int RetrieveBasePrimaryConstructorArguments(ClassDeclarationSyntax node) =>
+        private static int RetrieveBasePrimaryConstructorArguments(ClassDeclarationSyntax node) =>
             node.BaseList?.Types.FirstOrDefault() is { } type && PrimaryConstructorBaseTypeSyntaxWrapper.IsInstance(type)
                 ? ((PrimaryConstructorBaseTypeSyntaxWrapper)type).ArgumentList?.Arguments.Count ?? 0
                 : 0;
