@@ -3253,9 +3253,7 @@ public class Repro_8080
     {
         for (int i = 0; i < Limit; i++)
         {
-            var test = i > 2 ? 0 : 42;
-            //         ^^^^^              Noncompliant
-            //                 ^          Secondary@-1
+            var test = i > 2 ? 0 : 42;  // Compliant
         }
     }
 }
