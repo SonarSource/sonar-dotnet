@@ -344,7 +344,7 @@ namespace Tests.Diagnostics
                 Console.WriteLine();
             for (var i = 0; i < Limit; i++)
                 Console.WriteLine();
-            if (Limit == 10)            // FN
+            if (Limit == 10)            // Noncompliant
                 Console.WriteLine();
         }
 

@@ -95,11 +95,11 @@ internal sealed class Binary : BranchingProcessor<IBinaryOperationWrapper>
         var kind = falseBranch ? Opposite(binary.OperatorKind) : binary.OperatorKind;
         var leftNumber = state[binary.LeftOperand]?.Constraint<NumberConstraint>();
         var rightNumber = state[binary.RightOperand]?.Constraint<NumberConstraint>();
-        if (rightNumber is not null && binary.LeftOperand.TrackedSymbol(state) is { } leftSymbol)
+        if (rightNumber is not null && !binary.LeftOperand.ConstantValue.HasValue && binary.LeftOperand.TrackedSymbol(state) is { } leftSymbol)
         {
             state = LearnBranching(leftSymbol, leftNumber, kind, rightNumber);
         }
-        if (leftNumber is not null && binary.RightOperand.TrackedSymbol(state) is { } rightSymbol)
+        if (leftNumber is not null && !binary.RightOperand.ConstantValue.HasValue && binary.RightOperand.TrackedSymbol(state) is { } rightSymbol)
         {
             state = LearnBranching(rightSymbol, rightNumber, Flip(kind), leftNumber);
         }
