@@ -25,8 +25,22 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class TypeExaminationOnSystemTypeTest
     {
+        private readonly VerifierBuilder builder = new VerifierBuilder<TypeExaminationOnSystemType>();
+
         [TestMethod]
         public void TypeExaminationOnSystemType() =>
-            new VerifierBuilder<TypeExaminationOnSystemType>().AddPaths("TypeExaminationOnSystemType.cs").Verify();
+            builder.AddPaths("TypeExaminationOnSystemType.cs").Verify();
+
+#if NET
+
+        [TestMethod]
+        public void TypeExaminationOnSystemType_CSharp12() =>
+            builder.AddPaths("TypeExaminationOnSystemType.CSharp12.cs")
+                .WithTopLevelStatements()
+                .WithOptions(ParseOptionsHelper.FromCSharp12)
+                .Verify();
+
+#endif
+
     }
 }
