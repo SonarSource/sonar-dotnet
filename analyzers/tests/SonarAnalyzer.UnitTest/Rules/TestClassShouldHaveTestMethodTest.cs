@@ -74,6 +74,15 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .AddReferences(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion))
                 .Verify();
 
+        [DataTestMethod]
+        public void TestClassShouldHaveTestMethod_CSharp12() =>
+            builder
+                .WithOptions(ParseOptionsHelper.FromCSharp12)
+                .AddPaths("TestClassShouldHaveTestMethod.CSharp12.cs")
+                .AddReferences(NuGetMetadataReference.MSTestTestFramework(Constants.NuGetLatestVersion))
+                .AddReferences(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion))
+                .Verify();
+
 #endif
 
     }
