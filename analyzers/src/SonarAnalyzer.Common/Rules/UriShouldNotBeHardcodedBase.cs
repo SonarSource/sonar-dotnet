@@ -22,10 +22,11 @@ using System.Text.RegularExpressions;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class UriShouldNotBeHardcodedBase : SonarDiagnosticAnalyzer
+    public abstract class UriShouldNotBeHardcodedBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+        where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S1075";
-        protected const string MessageFormat = "{0}";
+        protected override string MessageFormat => "{0}";
 
         protected const string AbsoluteUriMessage = "Refactor your code not to use hardcoded absolute paths or URIs.";
         protected const string PathDelimiterMessage = "Remove this hardcoded path-delimiter.";
@@ -51,16 +52,17 @@ namespace SonarAnalyzer.Rules
                 "URN",
                 "STREAM"
             };
+
+        protected UriShouldNotBeHardcodedBase() : base(DiagnosticId) { }
     }
 
-    public abstract class UriShouldNotBeHardcodedBase<TExpressionSyntax,
-        TLiteralExpressionSyntax, TLanguageKindEnum, TBinaryExpressionSyntax, TArgumentSyntax, TVariableDeclaratorSyntax>
-        : UriShouldNotBeHardcodedBase
+    public abstract class UriShouldNotBeHardcodedBase<TSyntaxKind, TExpressionSyntax,TLiteralExpressionSyntax, TLanguageKindEnum, TBinaryExpressionSyntax, TArgumentSyntax>
+        : UriShouldNotBeHardcodedBase<TSyntaxKind>
+        where TSyntaxKind : struct
         where TExpressionSyntax : SyntaxNode
         where TLiteralExpressionSyntax : TExpressionSyntax
         where TBinaryExpressionSyntax : TExpressionSyntax
         where TArgumentSyntax : SyntaxNode
-        where TVariableDeclaratorSyntax : SyntaxNode
         where TLanguageKindEnum : struct
     {
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
@@ -69,8 +71,6 @@ namespace SonarAnalyzer.Rules
 
         protected abstract string GetLiteralText(TLiteralExpressionSyntax literalExpression);
 
-        protected abstract string GetDeclaratorIdentifierName(TVariableDeclaratorSyntax declarator);
-
         protected abstract TExpressionSyntax GetLeftNode(TBinaryExpressionSyntax binaryExpression);
 
         protected abstract TExpressionSyntax GetRightNode(TBinaryExpressionSyntax binaryExpression);
@@ -78,6 +78,7 @@ namespace SonarAnalyzer.Rules
         protected abstract bool IsInvocationOrObjectCreation(SyntaxNode node);
 
         protected abstract int? GetArgumentIndex(TArgumentSyntax argument);
+        protected abstract SyntaxNode GetRelevantAncestor(SyntaxNode node);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -137,11 +138,7 @@ namespace SonarAnalyzer.Rules
                        && methodSymbol.Parameters[argumentIndex.Value].Name.SplitCamelCaseToWords().Any(CheckedVariableNames.Contains);
             }
 
-            var variableDeclarator = expression.FirstAncestorOrSelf<TVariableDeclaratorSyntax>();
-            return variableDeclarator != null
-                   && GetDeclaratorIdentifierName(variableDeclarator)
-                        .SplitCamelCaseToWords()
-                        .Any(name => CheckedVariableNames.Contains(name));
+            return GetRelevantAncestor(expression) is { } relevantAncestor && Language.GetName(relevantAncestor).SplitCamelCaseToWords().Any(CheckedVariableNames.Contains);
         }
 
         private bool IsPathDelimiter(TExpressionSyntax expression) =>

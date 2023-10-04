@@ -21,13 +21,14 @@
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class UriShouldNotBeHardcoded
-        : UriShouldNotBeHardcodedBase<ExpressionSyntax, LiteralExpressionSyntax,
-            SyntaxKind, BinaryExpressionSyntax, ArgumentSyntax, VariableDeclaratorSyntax>
+    public sealed class UriShouldNotBeHardcoded : UriShouldNotBeHardcodedBase<SyntaxKind,
+                                                                              ExpressionSyntax,
+                                                                              LiteralExpressionSyntax,
+                                                                              SyntaxKind,
+                                                                              BinaryExpressionSyntax,
+                                                                              ArgumentSyntax>
     {
-        private static readonly DiagnosticDescriptor Rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
         protected override SyntaxKind StringLiteralSyntaxKind { get; } = SyntaxKind.StringLiteralExpression;
         protected override SyntaxKind[] StringConcatenateExpressions { get; } = { SyntaxKind.AddExpression };
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
@@ -35,13 +36,23 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override ExpressionSyntax GetLeftNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Left;
         protected override ExpressionSyntax GetRightNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Right;
         protected override bool IsInvocationOrObjectCreation(SyntaxNode node) =>
-            node.IsKind(SyntaxKind.InvocationExpression)
-            || node.IsKind(SyntaxKind.ObjectCreationExpression);
+            node.IsAnyKind(SyntaxKind.InvocationExpression, SyntaxKind.ObjectCreationExpression);
 
         protected override int? GetArgumentIndex(ArgumentSyntax argument) =>
             (argument?.Parent as ArgumentListSyntax)?.Arguments.IndexOf(argument);
-
-        protected override string GetDeclaratorIdentifierName(VariableDeclaratorSyntax declarator) =>
-            declarator?.Identifier.ValueText;
+        protected override SyntaxNode GetRelevantAncestor(SyntaxNode node)
+        {
+            var parameter = node.FirstAncestorOrSelf<ParameterSyntax>();
+            if (parameter != null)
+            {
+                return parameter;
+            }
+            var variableDeclarator = node.FirstAncestorOrSelf<VariableDeclaratorSyntax>();
+            if (variableDeclarator != null)
+            {
+                return variableDeclarator;
+            }
+            return null;
+        }
     }
 }

@@ -1,7 +1,10 @@
-﻿class PrimaryConstructor(string ctorParam = "file://blah.txt") // FN
+﻿class PrimaryConstructor(string ctorParamUri = "file://blah.txt", // Noncompliant
+                         string ctorParam = "file://blah.txt") // Compliant
 {
-    void Method(string methodParam = "file://blah.txt") // FN
+    void Method(string methodParamUri = "file://blah.txt", // Noncompliant
+                string methodParam = "file://blah.txt") // Compliant
     {
-        var lambda = (string lambdaParam = "file://blah.txt") => lambdaParam; // FN
+        var lambda = (string lambdaParamUri = "file://blah.txt") => lambdaParamUri; // Noncompliant
+        var lambda2 = (string lambdaParam = "file://blah.txt") => lambdaParam; // Compliant
     }
 }
