@@ -28,6 +28,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly ImmutableDictionary<SyntaxKind, string> NodeToDeclarationName = new Dictionary<SyntaxKind, string>
         {
             { SyntaxKind.ConstructorDeclaration, "Constructor" },
+            { SyntaxKind.ClassDeclaration, "Constructor" },
             { SyntaxKind.MethodDeclaration, "Method" },
             { SyntaxKind.DelegateDeclaration, "Delegate" },
             { SyntaxKind.AnonymousMethodExpression, "Delegate" },
@@ -46,6 +47,16 @@ namespace SonarAnalyzer.Rules.CSharp
             NodeToDeclarationName.ContainsKey(node.Kind()) && VerifyCanBeChangedBySymbol(node, semanticModel);
 
         protected override int BaseParameterCount(SyntaxNode node) =>
-            (node as ConstructorDeclarationSyntax)?.Initializer?.ArgumentList?.Arguments.Count ?? 0;
+            node switch
+            {
+                ConstructorDeclarationSyntax ctorDeclaration => ctorDeclaration?.Initializer?.ArgumentList?.Arguments.Count ?? 0,
+                ClassDeclarationSyntax classDeclaration => RetrieveBasePrimaryConstructorArguments(classDeclaration),
+                _ => 0,
+            };
+
+        private int RetrieveBasePrimaryConstructorArguments(ClassDeclarationSyntax node) =>
+            node.BaseList?.Types.FirstOrDefault() is { } type && PrimaryConstructorBaseTypeSyntaxWrapper.IsInstance(type)
+                ? ((PrimaryConstructorBaseTypeSyntaxWrapper)type).ArgumentList?.Arguments.Count ?? 0
+                : 0;
     }
 }
