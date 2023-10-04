@@ -43,7 +43,6 @@ public sealed class CalculationsShouldNotOverflow : CalculationsShouldNotOverflo
     internal sealed class SyntaxKindWalker : SafeCSharpSyntaxWalker
     {
         public bool IsUnchecked { get; private set; }
-
         public bool HasOverflow { get; private set; }
 
         public override void Visit(SyntaxNode node)
