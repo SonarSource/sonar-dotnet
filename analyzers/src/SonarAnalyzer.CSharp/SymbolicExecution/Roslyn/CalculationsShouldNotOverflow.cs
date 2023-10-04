@@ -28,7 +28,7 @@ public sealed class CalculationsShouldNotOverflow : CalculationsShouldNotOverflo
 
     public override bool ShouldExecute()
     {
-        if (ContainingSymbol?.Name == nameof(GetHashCode))
+        if (ContainingSymbol is IMethodSymbol method && method.IsObjectGetHashCode())
         {
             return false;
         }
