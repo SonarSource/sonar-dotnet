@@ -30,30 +30,30 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        public void StringFormatRuntimeExceptionFreeValidator(ProjectType projectType) =>
-            builder.AddPaths("StringFormatRuntimeExceptionFreeValidator.cs")
+        public void StringFormatValidator_RuntimeExceptionFree(ProjectType projectType) =>
+            builder.AddPaths("StringFormatValidator.RuntimeExceptionFree.cs")
                 .AddReferences(TestHelper.ProjectTypeReference(projectType))
                 .Verify();
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        public void StringFormatTypoFreeValidator(ProjectType projectType) =>
-            builder.AddPaths("StringFormatTypoFreeValidator.cs")
+        public void StringFormatValidator_TypoFree(ProjectType projectType) =>
+            builder.AddPaths("StringFormatValidator.TypoFree.cs")
                 .AddReferences(TestHelper.ProjectTypeReference(projectType))
                 .Verify();
 
         [TestMethod]
-        public void StringFormatEdgeCasesValidator() =>
-            builder.AddPaths("StringFormatEdgeCasesValidator.cs").Verify();
+        public void StringFormatValidator_EdgeCases() =>
+            builder.AddPaths("StringFormatValidator.EdgeCases.cs").Verify();
 
 #if NET
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        public void StringFormatRuntimeExceptionFreeValidator_CSharp11(ProjectType projectType) =>
-            builder.AddPaths("StringFormatRuntimeExceptionFreeValidator.CSharp11.cs")
+        public void StringFormatValidator_RuntimeExceptionFree_CSharp11(ProjectType projectType) =>
+            builder.AddPaths("StringFormatValidator.RuntimeExceptionFree.CSharp11.cs")
                 .AddReferences(TestHelper.ProjectTypeReference(projectType))
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
                 .Verify();
@@ -61,10 +61,17 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        public void StringFormatTypoFreeValidator_CSharp11(ProjectType projectType) =>
-            builder.AddPaths("StringFormatTypoFreeValidator.CSharp11.cs")
+        public void StringFormatValidator_TypoFree_CSharp11(ProjectType projectType) =>
+            builder.AddPaths("StringFormatValidator.TypoFree.CSharp11.cs")
                 .AddReferences(TestHelper.ProjectTypeReference(projectType))
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
+
+        [TestMethod]
+        public void StringFormatValidator_CSharp12() =>
+            builder.AddPaths("StringFormatValidator.CSharp12.cs")
+                .AddReferences(TestHelper.ProjectTypeReference(ProjectType.Product))
+                .WithOptions(ParseOptionsHelper.FromCSharp12)
                 .Verify();
 
 #endif
