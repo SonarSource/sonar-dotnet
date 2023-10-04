@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2023 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -720,12 +720,14 @@ Tag(""End"")";
     [DataRow("list.Count != 0", false, true)]
     [DataRow("list.Count != 5", null, false)]
     [DataRow("list.Count != -5", null, null)]   // else should be unreachable instead
+    [DataRow("list.Count >  -5", null, null)]   // else should be unreachable instead
     [DataRow("list.Count >  0", false, true)]
     [DataRow("list.Count >  1", false, null)]
     [DataRow("list.Count >  5", false, null)]
     [DataRow("list.Count >= 0", null, null)]    // else should be unreachable instead
     [DataRow("list.Count >= 1", false, true)]
     [DataRow("list.Count >= 5", false, null)]
+    [DataRow("list.Count <  -5", null, null)]   // if should be unreachable instead
     [DataRow("list.Count <  0", null, null)]    // if should be unreachable instead
     [DataRow("list.Count <  1", true, false)]
     [DataRow("list.Count <  5", null, false)]

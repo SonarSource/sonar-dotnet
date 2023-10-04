@@ -26,45 +26,35 @@ internal sealed partial class Binary
 {
     private ProgramState LearnBranchingCollectionConstraint(ProgramState state, IBinaryOperationWrapper binary, bool falseBranch)
     {
+        var operatorKind = falseBranch ? Opposite(binary.OperatorKind) : binary.OperatorKind;
         IOperation otherOperand;
-        bool shouldFlipOperator;
-        if (InstanceOfCountPropertyReference(binary.LeftOperand) is { } collection)
+        if (InstanceOfCountProperty(binary.LeftOperand) is { } collection)
         {
             otherOperand = binary.RightOperand;
-            shouldFlipOperator = true;
         }
         else
         {
             otherOperand = binary.LeftOperand;
-            shouldFlipOperator = false;
-            collection = InstanceOfCountPropertyReference(binary.RightOperand);
+            operatorKind = Flip(operatorKind);
+            collection = InstanceOfCountProperty(binary.RightOperand);
         }
 
         return collection is not null
             && state.Constraint<NumberConstraint>(otherOperand) is { } number
-            && BranchingCollectionConstraint(binary.OperatorKind, falseBranch, shouldFlipOperator, number) is { } constraint
+            && CollectionConstraintFromOperator(operatorKind, number) is { } constraint
                 ? state.SetSymbolConstraint(collection, constraint)
                 : state;
 
-        ISymbol InstanceOfCountPropertyReference(IOperation operation) =>
+        ISymbol InstanceOfCountProperty(IOperation operation) =>
             operation.AsPropertyReference() is { Instance: { } instance, Property.Name: nameof(Array.Length) or nameof(List<int>.Count) }
             && instance.TrackedSymbol(state) is { } symbol
                 ? symbol
                 : null;
     }
 
-    private static SymbolicConstraint BranchingCollectionConstraint(BinaryOperatorKind operatorKind, bool falseBranch, bool countIsLeftOperand, NumberConstraint number)
-    {
-        if (!countIsLeftOperand)
-        {
-            operatorKind = Flip(operatorKind);
-        }
-        if (falseBranch)
-        {
-            operatorKind = Opposite(operatorKind);
-        }
+    private static SymbolicConstraint CollectionConstraintFromOperator(BinaryOperatorKind operatorKind, NumberConstraint number) =>
         // consider count to be the left operand and the comparison to resolve to true:
-        return operatorKind switch
+        operatorKind switch
         {
             _ when operatorKind.IsEquals() && number.Min > 0 => CollectionConstraint.NotEmpty,
             _ when operatorKind.IsEquals() && number.Max == 0 => CollectionConstraint.Empty,
@@ -75,5 +65,4 @@ internal sealed partial class Binary
             BinaryOperatorKind.LessThanOrEqual when number.Max == 0 => CollectionConstraint.Empty,
             _ => null
         };
-    }
 }
