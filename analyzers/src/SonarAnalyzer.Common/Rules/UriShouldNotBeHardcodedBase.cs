@@ -56,22 +56,16 @@ namespace SonarAnalyzer.Rules
         protected UriShouldNotBeHardcodedBase() : base(DiagnosticId) { }
     }
 
-    public abstract class UriShouldNotBeHardcodedBase<TSyntaxKind, TExpressionSyntax,TLiteralExpressionSyntax, TLanguageKindEnum, TBinaryExpressionSyntax, TArgumentSyntax>
-        : UriShouldNotBeHardcodedBase<TSyntaxKind>
+    public abstract class UriShouldNotBeHardcodedBase<TSyntaxKind, TLiteralExpressionSyntax, TArgumentSyntax> : UriShouldNotBeHardcodedBase<TSyntaxKind>
         where TSyntaxKind : struct
-        where TExpressionSyntax : SyntaxNode
-        where TLiteralExpressionSyntax : TExpressionSyntax
-        where TBinaryExpressionSyntax : TExpressionSyntax
+        where TLiteralExpressionSyntax : SyntaxNode
         where TArgumentSyntax : SyntaxNode
-        where TLanguageKindEnum : struct
     {
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
-        protected abstract TLanguageKindEnum StringLiteralSyntaxKind { get; }
-        protected abstract TLanguageKindEnum[] StringConcatenateExpressions { get; }
+        protected abstract TSyntaxKind[] StringConcatenateExpressions { get; }
+        protected abstract TSyntaxKind[] InvocationOrObjectCreationKind { get; }
 
         protected abstract string GetLiteralText(TLiteralExpressionSyntax literalExpression);
-
-        protected abstract bool IsInvocationOrObjectCreation(SyntaxNode node);
 
         protected abstract SyntaxNode GetRelevantAncestor(SyntaxNode node);
 
@@ -88,22 +82,21 @@ namespace SonarAnalyzer.Rules
                         c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], stringLiteral.GetLocation(), AbsoluteUriMessage));
                     }
                 },
-                StringLiteralSyntaxKind);
+                Language.SyntaxKind.StringLiteralExpressions);
 
             context.RegisterNodeAction(
                 GeneratedCodeRecognizer,
                 c =>
                 {
-                    var addExpression = (TBinaryExpressionSyntax)c.Node;
-                    var isInCheckedContext = new Lazy<bool>(() => IsInCheckedContext(addExpression, c.SemanticModel));
+                    var isInCheckedContext = new Lazy<bool>(() => IsInCheckedContext(c.Node, c.SemanticModel));
 
-                    var leftNode = Language.Syntax.BinaryExpressionLeft(addExpression);
+                    var leftNode = Language.Syntax.BinaryExpressionLeft(c.Node);
                     if (IsPathDelimiter(leftNode) && isInCheckedContext.Value)
                     {
                         c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], leftNode.GetLocation(), PathDelimiterMessage));
                     }
 
-                    var rightNode = Language.Syntax.BinaryExpressionRight(addExpression);
+                    var rightNode = Language.Syntax.BinaryExpressionRight(c.Node);
                     if (IsPathDelimiter(rightNode) && isInCheckedContext.Value)
                     {
                         c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], rightNode.GetLocation(), PathDelimiterMessage));
@@ -112,7 +105,7 @@ namespace SonarAnalyzer.Rules
                 StringConcatenateExpressions);
         }
 
-        private bool IsInCheckedContext(TExpressionSyntax expression, SemanticModel model)
+        private bool IsInCheckedContext(SyntaxNode expression, SemanticModel model)
         {
             var argument = expression.FirstAncestorOrSelf<TArgumentSyntax>();
             if (argument != null)
@@ -123,7 +116,7 @@ namespace SonarAnalyzer.Rules
                     return false;
                 }
 
-                var constructorOrMethod = argument.Ancestors().FirstOrDefault(IsInvocationOrObjectCreation);
+                var constructorOrMethod = argument.Ancestors().FirstOrDefault(x => Language.Syntax.IsAnyKind(x, InvocationOrObjectCreationKind));
                 var methodSymbol = constructorOrMethod != null
                     ? model.GetSymbolInfo(constructorOrMethod).Symbol as IMethodSymbol
                     : null;

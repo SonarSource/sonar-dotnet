@@ -21,25 +21,14 @@
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class UriShouldNotBeHardcoded : UriShouldNotBeHardcodedBase<SyntaxKind, ExpressionSyntax, LiteralExpressionSyntax, SyntaxKind, BinaryExpressionSyntax, ArgumentSyntax>
+    public sealed class UriShouldNotBeHardcoded : UriShouldNotBeHardcodedBase<SyntaxKind, LiteralExpressionSyntax, ArgumentSyntax>
     {
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
-        protected override SyntaxKind StringLiteralSyntaxKind => SyntaxKind.StringLiteralExpression;
-
-        protected override SyntaxKind[] StringConcatenateExpressions =>
-            new[]
-            {
-                SyntaxKind.AddExpression,
-                SyntaxKind.ConcatenateExpression
-            };
-
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
+        protected override SyntaxKind[] StringConcatenateExpressions =>new[] { SyntaxKind.AddExpression, SyntaxKind.ConcatenateExpression };
+        protected override SyntaxKind[] InvocationOrObjectCreationKind => new[] { SyntaxKind.InvocationExpression, SyntaxKind.ObjectCreationExpression };
 
         protected override string GetLiteralText(LiteralExpressionSyntax literalExpression) => literalExpression?.Token.ValueText;
-
-        protected override bool IsInvocationOrObjectCreation(SyntaxNode node) =>
-            node.IsAnyKind(SyntaxKind.InvocationExpression, SyntaxKind.ObjectCreationExpression);
-
         protected override SyntaxNode GetRelevantAncestor(SyntaxNode node)
         {
             var parameter = node.FirstAncestorOrSelf<ParameterSyntax>();
