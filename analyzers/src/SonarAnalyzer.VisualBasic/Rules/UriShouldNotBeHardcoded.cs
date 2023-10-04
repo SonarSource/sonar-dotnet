@@ -37,15 +37,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override string GetLiteralText(LiteralExpressionSyntax literalExpression) => literalExpression?.Token.ValueText;
 
-        protected override ExpressionSyntax GetLeftNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Left;
-
-        protected override ExpressionSyntax GetRightNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Right;
-
         protected override bool IsInvocationOrObjectCreation(SyntaxNode node) =>
             node.IsAnyKind(SyntaxKind.InvocationExpression, SyntaxKind.ObjectCreationExpression);
-
-        protected override int? GetArgumentIndex(ArgumentSyntax argument) =>
-            (argument?.Parent as ArgumentListSyntax)?.Arguments.IndexOf(argument);
 
         protected override SyntaxNode GetRelevantAncestor(SyntaxNode node)
         {

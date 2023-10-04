@@ -33,13 +33,9 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override SyntaxKind[] StringConcatenateExpressions { get; } = { SyntaxKind.AddExpression };
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
         protected override string GetLiteralText(LiteralExpressionSyntax literalExpression) => literalExpression?.Token.ValueText;
-        protected override ExpressionSyntax GetLeftNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Left;
-        protected override ExpressionSyntax GetRightNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Right;
         protected override bool IsInvocationOrObjectCreation(SyntaxNode node) =>
             node.IsAnyKind(SyntaxKind.InvocationExpression, SyntaxKind.ObjectCreationExpression);
 
-        protected override int? GetArgumentIndex(ArgumentSyntax argument) =>
-            (argument?.Parent as ArgumentListSyntax)?.Arguments.IndexOf(argument);
         protected override SyntaxNode GetRelevantAncestor(SyntaxNode node)
         {
             var parameter = node.FirstAncestorOrSelf<ParameterSyntax>();

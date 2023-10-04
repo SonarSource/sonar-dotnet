@@ -28,5 +28,8 @@ namespace SonarAnalyzer.Extensions
 
         private static IEnumerable<ArgumentSyntax> GetArgumentsOfKnownType(this SeparatedSyntaxList<ArgumentSyntax> syntaxList, KnownType knownType, SemanticModel semanticModel) =>
             syntaxList.Where(argument => semanticModel.GetTypeInfo(argument.GetExpression()).Type.Is(knownType));
+
+        internal static int? GetArgumentIndex(this ArgumentSyntax argument) =>
+            (argument?.Parent as ArgumentListSyntax)?.Arguments.IndexOf(argument);
     }
 }

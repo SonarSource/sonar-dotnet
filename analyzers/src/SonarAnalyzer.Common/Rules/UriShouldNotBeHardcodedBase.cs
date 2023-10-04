@@ -71,13 +71,8 @@ namespace SonarAnalyzer.Rules
 
         protected abstract string GetLiteralText(TLiteralExpressionSyntax literalExpression);
 
-        protected abstract TExpressionSyntax GetLeftNode(TBinaryExpressionSyntax binaryExpression);
-
-        protected abstract TExpressionSyntax GetRightNode(TBinaryExpressionSyntax binaryExpression);
-
         protected abstract bool IsInvocationOrObjectCreation(SyntaxNode node);
 
-        protected abstract int? GetArgumentIndex(TArgumentSyntax argument);
         protected abstract SyntaxNode GetRelevantAncestor(SyntaxNode node);
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -102,13 +97,13 @@ namespace SonarAnalyzer.Rules
                     var addExpression = (TBinaryExpressionSyntax)c.Node;
                     var isInCheckedContext = new Lazy<bool>(() => IsInCheckedContext(addExpression, c.SemanticModel));
 
-                    var leftNode = GetLeftNode(addExpression);
+                    var leftNode = Language.Syntax.BinaryExpressionLeft(addExpression);
                     if (IsPathDelimiter(leftNode) && isInCheckedContext.Value)
                     {
                         c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], leftNode.GetLocation(), PathDelimiterMessage));
                     }
 
-                    var rightNode = GetRightNode(addExpression);
+                    var rightNode = Language.Syntax.BinaryExpressionRight(addExpression);
                     if (IsPathDelimiter(rightNode) && isInCheckedContext.Value)
                     {
                         c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], rightNode.GetLocation(), PathDelimiterMessage));
@@ -122,7 +117,7 @@ namespace SonarAnalyzer.Rules
             var argument = expression.FirstAncestorOrSelf<TArgumentSyntax>();
             if (argument != null)
             {
-                var argumentIndex = GetArgumentIndex(argument);
+                var argumentIndex = Language.Syntax.GetArgumentIndex(argument);
                 if (argumentIndex is null or < 0)
                 {
                     return false;
@@ -141,8 +136,7 @@ namespace SonarAnalyzer.Rules
             return GetRelevantAncestor(expression) is { } relevantAncestor && Language.GetName(relevantAncestor).SplitCamelCaseToWords().Any(CheckedVariableNames.Contains);
         }
 
-        private bool IsPathDelimiter(TExpressionSyntax expression) =>
-            GetLiteralText(expression as TLiteralExpressionSyntax) is { } text
-            && PathDelimiterRegex.IsMatch(text);
+        private bool IsPathDelimiter(SyntaxNode expression) =>
+            GetLiteralText(expression as TLiteralExpressionSyntax) is { } text && PathDelimiterRegex.IsMatch(text);
     }
 }
