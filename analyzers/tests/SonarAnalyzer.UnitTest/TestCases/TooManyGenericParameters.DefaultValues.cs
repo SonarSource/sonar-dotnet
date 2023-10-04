@@ -77,7 +77,10 @@ namespace MyLib
 {
     public abstract class FrameworkBaseClass<T1, T2, T3> // Noncompliant
     {
-
+        void Method()
+        {
+            bool GenericLambda<T1, T2, T3, T4>() => true; // Noncompliant
+        }
     }
 }
 
