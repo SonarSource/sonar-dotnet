@@ -38,6 +38,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void SelfAssignment_CSharp10() =>
             builderCS.AddPaths("SelfAssignment.CSharp10.cs").WithOptions(ParseOptionsHelper.FromCSharp10).WithTopLevelStatements().Verify();
 
+        [TestMethod]
+        public void SelfAssignment_CSharp12() =>
+            builderCS.AddPaths("SelfAssignment.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
+
 #endif
 
         [TestMethod]

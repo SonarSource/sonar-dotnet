@@ -73,6 +73,13 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
                 .Verify();
 
+        [TestMethod]
+        public void SqlKeywordsDelimitedBySpace_CSharp12() =>
+            builder.AddPaths("SqlKeywordsDelimitedBySpace.CSharp12.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp12)
+                .WithConcurrentAnalysis(false)
+                .Verify();
+
 #endif
 
         [DataRow("System.Data")]
