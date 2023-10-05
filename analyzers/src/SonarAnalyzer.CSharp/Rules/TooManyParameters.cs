@@ -28,6 +28,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly ImmutableDictionary<SyntaxKind, string> NodeToDeclarationName = new Dictionary<SyntaxKind, string>
         {
             { SyntaxKind.ConstructorDeclaration, "Constructor" },
+            { SyntaxKind.StructDeclaration, "Constructor" },
             { SyntaxKind.ClassDeclaration, "Constructor" },
             { SyntaxKind.MethodDeclaration, "Method" },
             { SyntaxKind.DelegateDeclaration, "Delegate" },
