@@ -38,11 +38,11 @@ namespace SonarAnalyzer.Rules
         private const string AbsoluteDiskUri = @"^[A-Za-z]:(/|\\)";
         private const string AbsoluteMappedDiskUri = @"^\\\\\w[ \w\.]*";
 
-        protected static readonly Regex UriRegex = new($"{UriScheme}|{AbsoluteDiskUri}|{AbsoluteMappedDiskUri}", RegexOptions.Compiled);
+        protected readonly Regex UriRegex = new($"{UriScheme}|{AbsoluteDiskUri}|{AbsoluteMappedDiskUri}", RegexOptions.Compiled);
 
-        protected static readonly Regex PathDelimiterRegex = new(@"^(\\|/)$", RegexOptions.Compiled);
+        protected readonly Regex PathDelimiterRegex = new(@"^(\\|/)$", RegexOptions.Compiled);
 
-        protected static readonly ISet<string> CheckedVariableNames =
+        protected readonly ISet<string> CheckedVariableNames =
             new HashSet<string>
             {
                 "FILE",
