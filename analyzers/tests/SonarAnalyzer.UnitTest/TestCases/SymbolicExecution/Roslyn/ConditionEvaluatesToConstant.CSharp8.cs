@@ -512,7 +512,7 @@ class Repro8094
 }
 
 // https://github.com/SonarSource/sonar-dotnet/issues/8149
-public class Repro_8149
+class Repro_8149
 {
     enum UserType
     {
@@ -528,15 +528,17 @@ public class Repro_8149
         UserType UserType { get; }
     }
 
-    static void Check_SwitchExpression(IUser user)
+    void Check_SwitchExpression(IUser user)
     {
-        if (user.UserType switch                    // Noncompliant FP, always false
+        if (user.UserType switch                    // Noncompliant FP: always false
         {
             UserType.Internal => user.Id == 1,
             UserType.External => user.LoginName == "test",
             _ => false,
         })
+        {
             return;
+        }
 
         throw new ApplicationException("not authorized");
     }
