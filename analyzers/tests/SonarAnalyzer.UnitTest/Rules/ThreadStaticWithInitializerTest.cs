@@ -45,6 +45,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
                 .Verify();
 
+        [TestMethod]
+        public void ThreadStaticWithInitializer_CSharp12() =>
+            builder.AddPaths("ThreadStaticWithInitializer.CSharp12.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp12)
+                .Verify();
+
 #endif
 
     }
