@@ -25,7 +25,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
-        protected override SyntaxKind[] StringConcatenateExpressions =>new[] { SyntaxKind.AddExpression, SyntaxKind.ConcatenateExpression };
+        protected override SyntaxKind[] StringConcatenateExpressions => new[] { SyntaxKind.AddExpression, SyntaxKind.ConcatenateExpression };
         protected override SyntaxKind[] InvocationOrObjectCreationKind => new[] { SyntaxKind.InvocationExpression, SyntaxKind.ObjectCreationExpression };
 
         protected override string GetLiteralText(LiteralExpressionSyntax literalExpression) =>
