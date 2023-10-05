@@ -7,6 +7,7 @@ public class ThreadStaticWithInitializer
     {
         [ThreadStatic]
         public static int[] PerThreadArray = [1, 2, 3]; // Noncompliant
+
         [ThreadStatic]
         public static Point2D PerThreadPoint = new Point2D(); // Noncompliant
     }
