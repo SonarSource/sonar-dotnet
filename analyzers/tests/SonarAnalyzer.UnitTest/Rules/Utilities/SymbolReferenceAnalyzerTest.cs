@@ -19,9 +19,9 @@
  */
 
 using System.IO;
+using Google.Protobuf.Collections;
 using SonarAnalyzer.Protobuf;
 using SonarAnalyzer.Rules;
-using SonarAnalyzer.UnitTest.Helpers;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
@@ -56,9 +56,12 @@ namespace SonarAnalyzer.UnitTest.Rules
 
                 var procedureDeclaration = references.Single(x => x.Declaration.StartLine == 3);
                 procedureDeclaration.Declaration.Should().BeEquivalentTo(new TextRange { StartLine = 3, EndLine = 3, StartOffset = 15, EndOffset = 21 });
-                procedureDeclaration.Reference.Should().Equal(
-                    new TextRange { StartLine = 11, EndLine = 11, StartOffset = 8, EndOffset = 14 },
-                    new TextRange { StartLine = 13, EndLine = 13, StartOffset = 8, EndOffset = 14 });
+                procedureDeclaration.Reference.Should().BeEquivalentTo(
+                    new RepeatedField<TextRange>
+                    {
+                        new TextRange { StartLine = 11, EndLine = 11, StartOffset = 8, EndOffset = 14 },
+                        new TextRange { StartLine = 13, EndLine = 13, StartOffset = 8, EndOffset = 14 }
+                    });
 
                 var functionDeclaration = references.Single(x => x.Declaration.StartLine == 6);
                 functionDeclaration.Declaration.Should().BeEquivalentTo(new TextRange { StartLine = 6, EndLine = 6, StartOffset = 13, EndOffset = 23 });
@@ -222,10 +225,13 @@ namespace SonarAnalyzer.UnitTest.Rules
 
                 var primaryCtorParameterDeclaration = references.Single(x => x.Declaration.StartLine == 8 && x.Declaration.StartOffset == 19); // b1, primary ctor
                 primaryCtorParameterDeclaration.Declaration.Should().BeEquivalentTo(new TextRange { StartLine = 8, EndLine = 8, StartOffset = 19, EndOffset = 21 });
-                primaryCtorParameterDeclaration.Reference.Should().Equal(
-                    new TextRange { StartLine = 10, EndLine = 10, StartOffset = 24, EndOffset = 26 },  // Field
-                    new TextRange { StartLine = 11, EndLine = 11, StartOffset = 41, EndOffset = 43 },  // Property
-                    new TextRange { StartLine = 12, EndLine = 12, StartOffset = 21, EndOffset = 23 }); // b1
+                primaryCtorParameterDeclaration.Reference.Should().BeEquivalentTo(
+                    new RepeatedField<TextRange>
+                    {
+                        new TextRange { StartLine = 10, EndLine = 10, StartOffset = 24, EndOffset = 26 }, // Field
+                        new TextRange { StartLine = 11, EndLine = 11, StartOffset = 41, EndOffset = 43 }, // Property
+                        new TextRange { StartLine = 12, EndLine = 12, StartOffset = 21, EndOffset = 23 }  // b1
+                    });
 
                 var ctorDeclaration = references.Single(x => x.Declaration.StartLine == 8 && x.Declaration.StartOffset == 6); // SubClass
                 ctorDeclaration.Reference.Should().BeEmpty(); // FN, not reporting constructor 'SubClass' and 'this' (line 14)
@@ -239,20 +245,29 @@ namespace SonarAnalyzer.UnitTest.Rules
                     new TextRange { StartLine = 21, EndLine = 21, StartOffset = 36, EndOffset = 38 }); // b1, this parameter
 
                 var primaryCtorParameterDeclarationB = references.Single(x => x.Declaration.StartLine == 17 && x.Declaration.StartOffset == 12); // b1, primary ctor B
-                primaryCtorParameterDeclarationB.Reference.Should().Equal(
-                    new TextRange { StartLine = 19, EndLine = 19, StartOffset = 24, EndOffset = 26 },  // Field
-                    new TextRange { StartLine = 20, EndLine = 20, StartOffset = 41, EndOffset = 43 },  // Property
-                    new TextRange { StartLine = 25, EndLine = 25, StartOffset = 20, EndOffset = 22 }); // returned by Method
+                primaryCtorParameterDeclarationB.Reference.Should().BeEquivalentTo(
+                    new RepeatedField<TextRange>
+                    {
+                        new TextRange { StartLine = 19, EndLine = 19, StartOffset = 24, EndOffset = 26 }, // Field
+                        new TextRange { StartLine = 20, EndLine = 20, StartOffset = 41, EndOffset = 43 }, // Property
+                        new TextRange { StartLine = 25, EndLine = 25, StartOffset = 20, EndOffset = 22 }  // returned by Method
+                    });
 
                 var classADeclaration = references.Single(x => x.Declaration.StartLine == 1 && x.Declaration.StartOffset == 13); // A
-                classADeclaration.Reference.Should().Equal(
-                    new TextRange { StartLine = 6, EndLine = 6, StartOffset = 34, EndOffset = 35 },  // primary ctor default parameter
-                    new TextRange { StartLine = 23, EndLine = 23, StartOffset = 25, EndOffset = 26 }); // lambda default parameter
+                classADeclaration.Reference.Should().BeEquivalentTo(
+                    new RepeatedField<TextRange>
+                    {
+                        new TextRange { StartLine = 6, EndLine = 6, StartOffset = 34, EndOffset = 35 },  // primary ctor default parameter
+                        new TextRange { StartLine = 23, EndLine = 23, StartOffset = 25, EndOffset = 26 } // lambda default parameter
+                    });
 
                 var constFieldDeclaration = references.Single(x => x.Declaration.StartLine == 3 && x.Declaration.StartOffset == 21); // I
-                constFieldDeclaration.Reference.Should().Equal(
-                    new TextRange { StartLine = 6, EndLine = 6, StartOffset = 36, EndOffset = 37 },  // primary ctor default parameter
-                    new TextRange { StartLine = 23, EndLine = 23, StartOffset = 27, EndOffset = 28 }); // lambda default parameter
+                constFieldDeclaration.Reference.Should().BeEquivalentTo(
+                    new RepeatedField<TextRange>
+                    {
+                        new TextRange { StartLine = 6, EndLine = 6, StartOffset = 36, EndOffset = 37 },  // primary ctor default parameter
+                        new TextRange { StartLine = 23, EndLine = 23, StartOffset = 27, EndOffset = 28 } // lambda default parameter
+                    });
             });
 
 #endif
