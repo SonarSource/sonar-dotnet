@@ -76,8 +76,7 @@ namespace SonarAnalyzer.Rules
                 c =>
                 {
                     var stringLiteral = (TLiteralExpressionSyntax)c.Node;
-                    if (UriRegex.IsMatch(GetLiteralText(stringLiteral))
-                        && IsInCheckedContext(stringLiteral, c.SemanticModel))
+                    if (UriRegex.IsMatch(GetLiteralText(stringLiteral)) && IsInCheckedContext(stringLiteral, c.SemanticModel))
                     {
                         c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], stringLiteral.GetLocation(), AbsoluteUriMessage));
                     }
