@@ -14,7 +14,7 @@ namespace Repro_8083
 
     public class Aliases(IntMatrix a)                    // FN
     {
-        public Aliases(IntMatrix a, int i) : this(a) { } // FN
+        public Aliases(IntMatrix a, int i) : this(a) { } // Noncompliant
 
         public void AMethod1(IntMatrix a) { }            // Noncompliant
         public void AMethod2(params IntMatrix a) { }     // Compliant

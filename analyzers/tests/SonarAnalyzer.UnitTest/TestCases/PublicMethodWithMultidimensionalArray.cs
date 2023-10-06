@@ -68,10 +68,16 @@ namespace Repro_8083
 {
     public class Constructors
     {
-        public Constructors(int[][] a) { }          // FN, the ctor is publicly exposed
-        public Constructors(int[,] a) { }           // FN
+        public Constructors(int[][] a) { }          // Noncompliant {{Make this constructor private or simplify its parameters to not use multidimensional/jagged arrays.}}
+        public Constructors(int[,] a) { }           // Noncompliant
         public Constructors(params int[] a) { }     // Compliant, params of int
-        public Constructors(params int[][][] a) { } // FN, params of int[][]
+        public Constructors(params int[][][] a) { } // Noncompliant
         public Constructors(int i) { }              // Compliant, not a multi-dimensional array
     }
+}
+
+public static class ExtensionMethod
+{
+    public static void Method1<T>(this T[,] dataMatrix, int a) { }
+    public static void Method2<T>(this T data, T[,] dataMatrix) { } // Noncompliant
 }

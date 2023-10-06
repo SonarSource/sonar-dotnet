@@ -18,21 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.CSharp;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class PublicMethodWithMultidimensionalArray : PublicMethodWithMultidimensionalArrayBase<SyntaxKind>
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class PublicMethodWithMultidimensionalArray : PublicMethodWithMultidimensionalArrayBase<SyntaxKind, MethodDeclarationSyntax>
-    {
+    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+    protected override Location GetIssueLocation(SyntaxNode node) =>
+        Language.Syntax.NodeIdentifier(node)?.GetLocation();
 
-        private static readonly ImmutableArray<SyntaxKind> kindsOfInterest = ImmutableArray.Create(SyntaxKind.MethodDeclaration);
-        public override ImmutableArray<SyntaxKind> SyntaxKindsOfInterest => kindsOfInterest;
-
-        protected override SyntaxToken GetIdentifier(MethodDeclarationSyntax method) => method.Identifier;
-
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
-    }
+    protected override string GetType(SyntaxNode node) =>
+        node is MethodDeclarationSyntax ? "method" : "constructor";
 }

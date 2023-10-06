@@ -18,21 +18,21 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.VisualBasic
+namespace SonarAnalyzer.Rules.VisualBasic;
+
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class PublicMethodWithMultidimensionalArray : PublicMethodWithMultidimensionalArrayBase<SyntaxKind>
 {
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class PublicMethodWithMultidimensionalArray : PublicMethodWithMultidimensionalArrayBase<SyntaxKind, MethodStatementSyntax>
-    {
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
+    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+    protected override Location GetIssueLocation(SyntaxNode node) =>
+        node?.RemoveParentheses() switch
+        {
+            ConstructorBlockSyntax x => x.SubNewStatement.NewKeyword.GetLocation(),
+            MethodStatementSyntax x => x.Identifier.GetLocation(),
+            _ => null,
+        };
 
-        private static readonly ImmutableArray<SyntaxKind> kindsOfInterest = ImmutableArray.Create(SyntaxKind.SubStatement, SyntaxKind.FunctionStatement);
-        public override ImmutableArray<SyntaxKind> SyntaxKindsOfInterest => kindsOfInterest;
-
-        protected override SyntaxToken GetIdentifier(MethodStatementSyntax method) => method.Identifier;
-
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
-    }
+    protected override string GetType(SyntaxNode node) =>
+        node is MethodStatementSyntax ? "method" : "constructor";
 }
