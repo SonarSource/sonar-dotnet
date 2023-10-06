@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         private const string AllMetricsFileName = "AllMetrics.cs";
         private const string RazorFileName = "Razor.razor";
         private const string CsHtmlFileName = "Razor.cshtml";
-        private const string CSharp12FileName = "CSharp12.cs";
+        private const string CSharp12FileName = "Metrics.CSharp12.cs";
 
         public TestContext TestContext { get; set; }
 

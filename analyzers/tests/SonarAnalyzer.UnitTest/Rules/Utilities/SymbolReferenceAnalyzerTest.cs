@@ -212,7 +212,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                         VerifyReferences(orderedSymbols[1].Reference, 9, 44, 41);           // LocalMethod
                     });
 
-        
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
