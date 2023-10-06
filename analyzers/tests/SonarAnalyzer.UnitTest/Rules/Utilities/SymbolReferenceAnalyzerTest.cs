@@ -212,6 +212,50 @@ namespace SonarAnalyzer.UnitTest.Rules
                         VerifyReferences(orderedSymbols[1].Reference, 9, 44, 41);           // LocalMethod
                     });
 
+        
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
+        public void Verify_PrimaryConstructor_PreciseLocation_CSharp12(ProjectType projectType) =>
+            Verify("PrimaryConstructor.cs", projectType, references =>
+            {
+                references.Select(x => x.Declaration.StartLine).Should().BeEquivalentTo(new[] { 1, 3, 6, 6, 8, 8, 10, 11, 12, 14, 17, 17, 19, 20, 21, 21, 23, 23, 25 });
+
+                var primaryCtorParameterDeclaration = references.Single(x => x.Declaration.StartLine == 8 && x.Declaration.StartOffset == 19); // b1, primary ctor
+                primaryCtorParameterDeclaration.Declaration.Should().BeEquivalentTo(new TextRange { StartLine = 8, EndLine = 8, StartOffset = 19, EndOffset = 21 });
+                primaryCtorParameterDeclaration.Reference.Should().Equal(
+                    new TextRange { StartLine = 10, EndLine = 10, StartOffset = 24, EndOffset = 26 },  // Field
+                    new TextRange { StartLine = 11, EndLine = 11, StartOffset = 41, EndOffset = 43 },  // Property
+                    new TextRange { StartLine = 12, EndLine = 12, StartOffset = 21, EndOffset = 23 }); // b1
+
+                var ctorDeclaration = references.Single(x => x.Declaration.StartLine == 8 && x.Declaration.StartOffset == 6); // SubClass
+                ctorDeclaration.Reference.Should().BeEmpty(); // FN, not reporting constructor 'SubClass' and 'this' (line 14)
+
+                var fieldNameEqualToParameter = references.Single(x => x.Declaration.StartLine == 12 && x.Declaration.StartOffset == 16); // b1, field
+                fieldNameEqualToParameter.Reference.Should().Equal(
+                    new TextRange { StartLine = 14, EndLine = 14, StartOffset = 20, EndOffset = 22 }); // b1, returned by Method
+
+                var ctorParameterDeclaration = references.Single(x => x.Declaration.StartLine == 21 && x.Declaration.StartOffset == 17); // b1, internal ctor
+                ctorParameterDeclaration.Reference.Should().Equal(
+                    new TextRange { StartLine = 21, EndLine = 21, StartOffset = 36, EndOffset = 38 }); // b1, this parameter
+
+                var primaryCtorParameterDeclarationB = references.Single(x => x.Declaration.StartLine == 17 && x.Declaration.StartOffset == 12); // b1, primary ctor B
+                primaryCtorParameterDeclarationB.Reference.Should().Equal(
+                    new TextRange { StartLine = 19, EndLine = 19, StartOffset = 24, EndOffset = 26 },  // Field
+                    new TextRange { StartLine = 20, EndLine = 20, StartOffset = 41, EndOffset = 43 },  // Property
+                    new TextRange { StartLine = 25, EndLine = 25, StartOffset = 20, EndOffset = 22 }); // returned by Method
+
+                var classADeclaration = references.Single(x => x.Declaration.StartLine == 1 && x.Declaration.StartOffset == 13); // A
+                classADeclaration.Reference.Should().Equal(
+                    new TextRange { StartLine = 6, EndLine = 6, StartOffset = 34, EndOffset = 35 },  // primary ctor default parameter
+                    new TextRange { StartLine = 23, EndLine = 23, StartOffset = 25, EndOffset = 26 }); // lambda default parameter
+
+                var constFieldDeclaration = references.Single(x => x.Declaration.StartLine == 3 && x.Declaration.StartOffset == 21); // I
+                constFieldDeclaration.Reference.Should().Equal(
+                    new TextRange { StartLine = 6, EndLine = 6, StartOffset = 36, EndOffset = 37 },  // primary ctor default parameter
+                    new TextRange { StartLine = 23, EndLine = 23, StartOffset = 27, EndOffset = 28 }); // lambda default parameter
+            });
+
 #endif
 
         private void Verify(string fileName, ProjectType projectType, int expectedDeclarationCount, int assertedDeclarationLine, params int[] assertedDeclarationLineReferences) =>
