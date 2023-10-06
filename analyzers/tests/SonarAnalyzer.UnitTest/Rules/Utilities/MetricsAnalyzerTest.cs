@@ -21,7 +21,6 @@
 using System.IO;
 using SonarAnalyzer.Protobuf;
 using SonarAnalyzer.Rules.CSharp;
-using SonarAnalyzer.UnitTest.Helpers;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,6 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         private const string AllMetricsFileName = "AllMetrics.cs";
         private const string RazorFileName = "Razor.razor";
         private const string CsHtmlFileName = "Razor.cshtml";
+        private const string CSharp12FileName = "CSharp12.cs";
 
         public TestContext TestContext { get; set; }
 
@@ -86,6 +86,25 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .VerifyUtilityAnalyzer<MetricsInfo>(messages =>
                         // There should be no metrics messages for the cshtml files.
                         messages.Select(x => Path.GetFileName(x.FilePath)).Should().BeEquivalentTo("_Imports.razor"));
+
+        [TestMethod]
+        public void VerifyMetrics_CSharp12() =>
+            CreateBuilder(false, CSharp12FileName)
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+                .VerifyUtilityAnalyzer<MetricsInfo>(messages =>
+                {
+                    messages.Should().ContainSingle();
+                    var metrics = messages.Single();
+                    metrics.ClassCount.Should().Be(1); // no changes
+                    metrics.CodeLine.Should().HaveCount(12);
+                    metrics.CognitiveComplexity.Should().Be(1); // no changes
+                    metrics.Complexity.Should().Be(3); // no changes
+                    metrics.ExecutableLines.Should().HaveCount(3); // 5, 7, 9
+                    metrics.FunctionCount.Should().Be(2); // no changes
+                    metrics.NoSonarComment.Should().BeEmpty();
+                    metrics.NonBlankComment.Should().ContainSingle();
+                    metrics.StatementCount.Should().Be(3);
+                });
 
 #endif
 
