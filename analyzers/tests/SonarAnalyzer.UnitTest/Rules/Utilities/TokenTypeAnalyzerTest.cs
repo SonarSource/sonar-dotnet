@@ -51,7 +51,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        public void Verify_MainTokens_CSSharp11(ProjectType projectType) =>
+        public void Verify_MainTokens_CSharp11(ProjectType projectType) =>
             Verify("Tokens.Csharp11.cs", projectType, info =>
             {
                 info.Should().HaveCount(42);
@@ -64,13 +64,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        public void Verify_MainTokens_CSSharp12(ProjectType projectType) =>
+        public void Verify_MainTokens_CSharp12(ProjectType projectType) =>
             Verify("Tokens.Csharp12.cs", projectType, info =>
             {
-                info.Should().HaveCount(26);
-                info.Where(x => x.TokenType == TokenType.Keyword).Should().HaveCount(13);
-                info.Where(x => x.TokenType == TokenType.StringLiteral).Should().HaveCount(4);
+                info.Should().HaveCount(34);
+                info.Where(x => x.TokenType == TokenType.Keyword).Should().HaveCount(17);
+                info.Where(x => x.TokenType == TokenType.StringLiteral).Should().HaveCount(5);
                 info.Where(x => x.TokenType == TokenType.NumericLiteral).Should().HaveCount(4);
+                info.Where(x => x.TokenType == TokenType.TypeName).Should().HaveCount(7);
                 info.Should().ContainSingle(x => x.TokenType == TokenType.Comment);
             });
 

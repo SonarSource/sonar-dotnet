@@ -6,6 +6,11 @@ class PrimaryConstructor(System.String p1, string p2 = "default value that shoul
     {
         var lambdaWithDefaultValues = (string l1 = "default value that should be tokenized as string", int l2 = 2) => l1;
         var usingAliasDirective = new Point(0, 0);
-        string[] collectionExpression = ["Hello", "World"]; 
+        string[] collectionExpression = ["Hello", "World"];
     }
+}
+
+class SubClass() : PrimaryConstructor("something")
+{
+    public SubClass(int p1) : this() { }
 }
