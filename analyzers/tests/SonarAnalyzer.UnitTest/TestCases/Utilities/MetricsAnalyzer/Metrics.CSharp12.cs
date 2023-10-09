@@ -1,5 +1,7 @@
 ﻿class PrimaryConstructor(bool condition /* comment */)
 {
+    bool Field = condition;
+
     int Method()
     {
         if (condition)

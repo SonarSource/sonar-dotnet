@@ -1375,4 +1375,21 @@ public partial class TokenTypeAnalyzerTest
                 {{fieldDeclaration}}
             }
             """, allowSemanticModel);
+
+#if NET
+
+    [TestMethod]
+    public void CSharp12Syntax_Classification() =>
+        ClassifierTestHarness.AssertTokenTypes("""
+            class PrimaryConstructor([k:int] [u:i] = [n:1])
+            {
+                public PrimaryConstructor(int a1, int a2) : [k:this]([u:a1])
+                {
+                    var f = ([k:int] [u:i] = [n:1]) => i;
+                }
+            }
+            """);
+
+#endif
+
 }

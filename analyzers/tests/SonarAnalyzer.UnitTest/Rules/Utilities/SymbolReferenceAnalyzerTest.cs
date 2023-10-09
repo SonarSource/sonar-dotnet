@@ -223,9 +223,9 @@ namespace SonarAnalyzer.UnitTest.Rules
             {
                 references.Select(x => x.Declaration.StartLine).Should().BeEquivalentTo(new[] { 1, 3, 6, 6, 8, 8, 10, 11, 12, 14, 17, 17, 19, 20, 21, 21, 23, 23, 25 });
 
-                var primaryCtorParameterDeclaration = references.Single(x => x.Declaration.StartLine == 8 && x.Declaration.StartOffset == 19); // b1, primary ctor
-                primaryCtorParameterDeclaration.Declaration.Should().BeEquivalentTo(new TextRange { StartLine = 8, EndLine = 8, StartOffset = 19, EndOffset = 21 });
-                primaryCtorParameterDeclaration.Reference.Should().BeEquivalentTo(
+                var primaryCtorParameter = references.Single(x => x.Declaration.StartLine == 8 && x.Declaration.StartOffset == 19); // b1, primary ctor
+                primaryCtorParameter.Declaration.Should().BeEquivalentTo(new TextRange { StartLine = 8, EndLine = 8, StartOffset = 19, EndOffset = 21 });
+                primaryCtorParameter.Reference.Should().BeEquivalentTo(
                     new RepeatedField<TextRange>
                     {
                         new TextRange { StartLine = 10, EndLine = 10, StartOffset = 24, EndOffset = 26 }, // Field
@@ -233,8 +233,8 @@ namespace SonarAnalyzer.UnitTest.Rules
                         new TextRange { StartLine = 12, EndLine = 12, StartOffset = 21, EndOffset = 23 }  // b1
                     });
 
-                var ctorDeclaration = references.Single(x => x.Declaration.StartLine == 8 && x.Declaration.StartOffset == 6); // SubClass
-                ctorDeclaration.Reference.Should().BeEmpty(); // FN, not reporting constructor 'SubClass' and 'this' (line 14)
+                var ctorDeclaration = references.Single(x => x.Declaration.StartLine == 17 && x.Declaration.StartOffset == 6); // B
+                ctorDeclaration.Reference.Should().BeEmpty(); // FN, not reporting constructor 'B' and 'this' (line 21)
 
                 var fieldNameEqualToParameter = references.Single(x => x.Declaration.StartLine == 12 && x.Declaration.StartOffset == 16); // b1, field
                 fieldNameEqualToParameter.Reference.Should().Equal(
@@ -244,8 +244,8 @@ namespace SonarAnalyzer.UnitTest.Rules
                 ctorParameterDeclaration.Reference.Should().Equal(
                     new TextRange { StartLine = 21, EndLine = 21, StartOffset = 36, EndOffset = 38 }); // b1, this parameter
 
-                var primaryCtorParameterDeclarationB = references.Single(x => x.Declaration.StartLine == 17 && x.Declaration.StartOffset == 12); // b1, primary ctor B
-                primaryCtorParameterDeclarationB.Reference.Should().BeEquivalentTo(
+                var primaryCtorParameterB = references.Single(x => x.Declaration.StartLine == 17 && x.Declaration.StartOffset == 12); // b1, primary ctor B
+                primaryCtorParameterB.Reference.Should().BeEquivalentTo(
                     new RepeatedField<TextRange>
                     {
                         new TextRange { StartLine = 19, EndLine = 19, StartOffset = 24, EndOffset = 26 }, // Field

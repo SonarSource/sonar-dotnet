@@ -96,7 +96,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                     messages.Should().ContainSingle();
                     var metrics = messages.Single();
                     metrics.ClassCount.Should().Be(1); // no changes
-                    metrics.CodeLine.Should().HaveCount(12);
+                    metrics.CodeLine.Should().HaveCount(13);
                     metrics.CognitiveComplexity.Should().Be(1); // no changes
                     metrics.Complexity.Should().Be(3); // no changes
                     metrics.ExecutableLines.Should().HaveCount(3); // 5, 7, 9
