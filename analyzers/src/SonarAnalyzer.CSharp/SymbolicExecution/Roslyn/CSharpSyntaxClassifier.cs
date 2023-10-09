@@ -38,8 +38,10 @@ public sealed class CSharpSyntaxClassifier : SyntaxClassifierBase
             ForStatementSyntax forStatement => forStatement.Condition,
             ForEachStatementSyntax forEachStatement => forEachStatement.Expression,
             WhileStatementSyntax whileStatement => whileStatement.Condition,
+            _ when node.Parent.IsKind(SyntaxKindEx.ForEachVariableStatement) => ((ForEachVariableStatementSyntaxWrapper)node.Parent).Expression,
             _ => null
         };
+
     protected override bool IsCfgBoundary(SyntaxNode node) =>
         node is LambdaExpressionSyntax || node.IsKind(SyntaxKindEx.LocalFunctionStatement);
 }
