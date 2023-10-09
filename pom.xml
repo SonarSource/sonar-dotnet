@@ -179,7 +179,7 @@
             <groupId>org.simplify4u.plugins</groupId>
             <artifactId>sign-maven-plugin</artifactId>
             <!-- This property is defined in the parent pom: https://github.com/SonarSource/parent/blob/66063199466a4bffd46de4780af26eb6456f996d/pom.xml#L64 -->
-            <version>${version.gpg.plugin}</version>
+            <version>${version.sign.plugin}</version>
             <executions>
               <execution>
                 <id>sign-artifacts</id>
