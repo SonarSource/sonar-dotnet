@@ -51,7 +51,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        public void Verify_MainTokens_CSSharp11(ProjectType projectType) =>
+        public void Verify_MainTokens_CSharp11(ProjectType projectType) =>
             Verify("Tokens.Csharp11.cs", projectType, info =>
             {
                 info.Should().HaveCount(42);
@@ -59,6 +59,20 @@ namespace SonarAnalyzer.UnitTest.Rules
                 info.Where(x => x.TokenType == TokenType.StringLiteral).Should().HaveCount(15);
                 info.Should().ContainSingle(x => x.TokenType == TokenType.TypeName);
                 info.Should().ContainSingle(x => x.TokenType == TokenType.NumericLiteral);
+            });
+
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
+        public void Verify_MainTokens_CSharp12(ProjectType projectType) =>
+            Verify("Tokens.Csharp12.cs", projectType, info =>
+            {
+                info.Should().HaveCount(34);
+                info.Where(x => x.TokenType == TokenType.Keyword).Should().HaveCount(17);
+                info.Where(x => x.TokenType == TokenType.StringLiteral).Should().HaveCount(5);
+                info.Where(x => x.TokenType == TokenType.NumericLiteral).Should().HaveCount(4);
+                info.Where(x => x.TokenType == TokenType.TypeName).Should().HaveCount(7);
+                info.Should().ContainSingle(x => x.TokenType == TokenType.Comment);
             });
 
         [DataTestMethod]
@@ -134,10 +148,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void Verify_IdentifierTokenThreshold() =>
             Verify("IdentifierTokenThreshold.cs", ProjectType.Product, tokenInfo =>
-            {
                 // IdentifierTokenThreshold.cs has 4001 identifiers which exceeds current threshold of 4000. Due to this, the identifiers are not classified
-                tokenInfo.Where(token => token.TokenType == TokenType.TypeName).Should().BeEmpty();
-            });
+                tokenInfo.Should().NotContain(token => token.TokenType == TokenType.TypeName));
 
         [DataTestMethod]
         [DataRow("Tokens.cs", true)]
@@ -160,7 +172,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, projectType))
                 .VerifyUtilityAnalyzer<TokenTypeInfo>(messages =>
                     {
-                        messages.Should().HaveCount(1);
+                        messages.Should().ContainSingle();
                         var info = messages.Single();
                         info.FilePath.Should().Be(Path.Combine(BasePath, fileName));
                         verifyTokenInfo(info.TokenInfo);

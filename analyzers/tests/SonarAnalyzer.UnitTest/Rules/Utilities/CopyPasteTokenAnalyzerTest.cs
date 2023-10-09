@@ -55,6 +55,16 @@ namespace SonarAnalyzer.UnitTest.Rules
                 info.Count(x => x.TokenValue == "$char").Should().Be(2);
             });
 
+        [TestMethod]
+        public void Verify_Unique_CSharp12() =>
+            Verify("Unique.Csharp12.cs", info =>
+            {
+                info.Should().HaveCount(81);
+                info.Count(x => x.TokenValue == "$str").Should().Be(4);
+                info.Count(x => x.TokenValue == "$num").Should().Be(4);
+                info.Count(x => x.TokenValue == "$char").Should().Be(4);
+            });
+
 #endif
 
         [TestMethod]
@@ -81,7 +91,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                 .VerifyUtilityAnalyzer<CopyPasteTokenInfo>(messages =>
                     {
-                        messages.Should().HaveCount(1);
+                        messages.Should().ContainSingle();
                         var info = messages.Single();
                         info.FilePath.Should().Be(Path.Combine(BasePath, "Duplicated.CSharp10.cs"));
                         info.TokenInfo.Should().HaveCount(39);
@@ -113,7 +123,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                 .VerifyUtilityAnalyzer<CopyPasteTokenInfo>(messages =>
                     {
-                        messages.Should().HaveCount(1);
+                        messages.Should().ContainSingle();
                         var info = messages.Single();
                         info.FilePath.Should().Be(Path.Combine(BasePath, fileName));
                         verifyTokenInfo(info.TokenInfo);
