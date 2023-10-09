@@ -1,4 +1,16 @@
 <h2>Why is this an issue?</h2>
-<p>Private methods are clearly intended for use only within their own scope. When such methods return values that are never used by any of their
-callers, then clearly there is no need to actually make the return, and it should be removed in the interests of efficiency and clarity.</p>
+<p>Private methods are intended for use only within their scope. If these methods return values that are not utilized by any calling functions, it
+indicates that the return operation is unnecessary. Removing such returns can enhance both efficiency and code clarity.</p>
+<h3>Noncompliant code example</h3>
+<pre>
+class SomeClass
+{
+     private int PrivateMethod() =&gt; 42;
+
+     public void PublicMethod()
+     {
+          PrivateMethod(); // Noncompliant: the result of PrivateMethod is not used
+     }
+}
+</pre>
 
