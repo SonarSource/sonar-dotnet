@@ -155,7 +155,7 @@
           <pluginClass>org.sonar.plugins.csharp.CSharpPlugin</pluginClass>
           <skipDependenciesPackaging>true</skipDependenciesPackaging>
           <sonarLintSupported>false</sonarLintSupported>
-          <sonarQubeMinVersion>${sonarLTS.version}</sonarQubeMinVersion> <!-- runtime minimal API version -->
+          <pluginApiMinVersion>${sonar.version}</pluginApiMinVersion> <!-- runtime minimal API version -->
         </configuration>
       </plugin>
       <plugin>
