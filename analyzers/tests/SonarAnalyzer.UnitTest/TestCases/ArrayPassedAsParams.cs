@@ -103,7 +103,6 @@ public class Repro6894
 public class Repro6893
 {
     public void Method(int a, params object[] argumentArray) { }
-    
 
     public void CallMethod()
     {
@@ -126,5 +125,16 @@ public class Repro6977
 
         [Params("1", "2")]
         FooBar
+    }
+}
+
+// Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/8163
+public class Repro8163
+{
+    public static void Method(params object[][] array) { }
+
+    public static void CallParamsMethod()
+    {
+        Method(new[] { new object() });  // Noncompliant - FP
     }
 }
