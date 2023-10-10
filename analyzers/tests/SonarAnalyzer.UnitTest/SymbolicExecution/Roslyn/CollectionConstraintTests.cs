@@ -90,8 +90,8 @@ public class CollectionConstraintTests
                 {
                     bool result = foo.Contains("foo"); // This is needed to trigger S4158
 
-                    // This FP is triggered due to S4158, when it checks for the Length property.
-                    if (this.Length < 0) // Noncompliant {{Change this condition so that it does not always evaluate to 'False'.}} FP
+                    // This FP used to trigger due to S4158, when checking for the Length property.
+                    if (this.Length < 0) // Compliant
                     { }
                 }
             }
