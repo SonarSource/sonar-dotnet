@@ -3,7 +3,7 @@ Imports System.IO
 
 Namespace Tests.Diagnostics
     Class Program
-        Private Sub InvalidCases(s1 As String, s2 As String, ByVal Optional methodParamUri As String = "file://blah.txt") ' Noncompliant
+        Private Sub InvalidCases(s1 As String, s2 As String, Optional methodParamUri As String = "file://blah.txt") ' Noncompliant
             Dim fileLiteral = "file://blah.txt" ' Noncompliant {{Refactor your code not to use hardcoded absolute paths or URIs.}}
 '                             ^^^^^^^^^^^^^^^^^
             Dim webUri1 = "http://www.mywebsite.com" ' Noncompliant
@@ -35,7 +35,7 @@ Namespace Tests.Diagnostics
             File.OpenRead("/etc/foo.csv") ' FN
         End Sub
 
-        Private Sub ValidCases(s As String, ByVal Optional methodParam As String = "file://blah.txt")
+        Private Sub ValidCases(s As String, Optional methodParam As String = "file://blah.txt")
             Dim windowsPathStartingWithVariable = "%AppData%\Adobe"
             Dim windowsPathWithVariable = "%appdata%"
 

@@ -31,19 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override string GetLiteralText(LiteralExpressionSyntax literalExpression) =>
             literalExpression?.Token.ValueText;
 
-        protected override SyntaxNode GetRelevantAncestor(SyntaxNode node)
-        {
-            var parameter = node.FirstAncestorOrSelf<ParameterSyntax>();
-            if (parameter != null)
-            {
-                return parameter;
-            }
-            var variableDeclarator = node.FirstAncestorOrSelf<VariableDeclaratorSyntax>();
-            if (variableDeclarator != null)
-            {
-                return variableDeclarator;
-            }
-            return null;
-        }
+        protected override SyntaxNode GetRelevantAncestor(SyntaxNode node) =>
+            (SyntaxNode)node.FirstAncestorOrSelf<ParameterSyntax>() ?? node.FirstAncestorOrSelf<VariableDeclaratorSyntax>();
     }
 }

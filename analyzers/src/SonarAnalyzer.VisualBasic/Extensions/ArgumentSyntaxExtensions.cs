@@ -30,6 +30,6 @@ namespace SonarAnalyzer.Extensions
             syntaxList.Where(argument => semanticModel.GetTypeInfo(argument.GetExpression()).Type.Is(knownType));
 
         internal static int? GetArgumentIndex(this ArgumentSyntax argument) =>
-            (argument?.Parent as ArgumentListSyntax)?.Arguments.IndexOf(argument);
+            (argument.Parent as ArgumentListSyntax)?.Arguments.IndexOf(argument);
     }
 }

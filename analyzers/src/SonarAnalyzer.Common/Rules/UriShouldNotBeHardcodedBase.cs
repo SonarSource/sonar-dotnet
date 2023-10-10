@@ -26,7 +26,6 @@ namespace SonarAnalyzer.Rules
         where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S1075";
-        protected override string MessageFormat => "{0}";
 
         protected const string AbsoluteUriMessage = "Refactor your code not to use hardcoded absolute paths or URIs.";
         protected const string PathDelimiterMessage = "Remove this hardcoded path-delimiter.";
@@ -38,11 +37,11 @@ namespace SonarAnalyzer.Rules
         private const string AbsoluteDiskUri = @"^[A-Za-z]:(/|\\)";
         private const string AbsoluteMappedDiskUri = @"^\\\\\w[ \w\.]*";
 
-        protected readonly Regex UriRegex = new($"{UriScheme}|{AbsoluteDiskUri}|{AbsoluteMappedDiskUri}", RegexOptions.Compiled, TimeSpan.FromSeconds(1));
+        protected static readonly Regex UriRegex = new($"{UriScheme}|{AbsoluteDiskUri}|{AbsoluteMappedDiskUri}", RegexOptions.Compiled, TimeSpan.FromSeconds(1));
 
-        protected readonly Regex PathDelimiterRegex = new(@"^(\\|/)$", RegexOptions.Compiled, TimeSpan.FromSeconds(1));
+        protected static readonly Regex PathDelimiterRegex = new(@"^(\\|/)$", RegexOptions.Compiled, TimeSpan.FromSeconds(1));
 
-        protected readonly ISet<string> CheckedVariableNames =
+        protected static readonly ISet<string> CheckedVariableNames =
             new HashSet<string>
             {
                 "FILE",
@@ -53,6 +52,7 @@ namespace SonarAnalyzer.Rules
                 "STREAM"
             };
 
+        protected override string MessageFormat => "{0}";
         protected UriShouldNotBeHardcodedBase() : base(DiagnosticId) { }
     }
 
@@ -109,7 +109,7 @@ namespace SonarAnalyzer.Rules
             var argument = expression.FirstAncestorOrSelf<TArgumentSyntax>();
             if (argument != null)
             {
-                var argumentIndex = Language.Syntax.GetArgumentIndex(argument);
+                var argumentIndex = Language.Syntax.ArgumentIndex(argument);
                 if (argumentIndex is null or < 0)
                 {
                     return false;

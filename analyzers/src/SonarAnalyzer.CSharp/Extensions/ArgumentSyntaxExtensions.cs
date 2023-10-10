@@ -49,6 +49,6 @@ namespace SonarAnalyzer.Extensions
                     : null;
 
         internal static int? GetArgumentIndex(this ArgumentSyntax argument) =>
-            (argument?.Parent as ArgumentListSyntax)?.Arguments.IndexOf(argument);
+            (argument.Parent as ArgumentListSyntax)?.Arguments.IndexOf(argument);
     }
 }

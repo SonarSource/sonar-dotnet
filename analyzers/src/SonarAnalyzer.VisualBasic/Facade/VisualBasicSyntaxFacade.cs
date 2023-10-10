@@ -88,8 +88,8 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
     public override IEnumerable<SyntaxNode> EnumMembers(SyntaxNode @enum) =>
         @enum == null ? Enumerable.Empty<SyntaxNode>() : Cast<EnumStatementSyntax>(@enum).Parent.ChildNodes().OfType<EnumMemberDeclarationSyntax>();
 
-    public override int? GetArgumentIndex(SyntaxNode node) =>
-        Cast<ArgumentSyntax>(node).GetArgumentIndex();
+    public override int? ArgumentIndex(SyntaxNode argument) =>
+        Cast<ArgumentSyntax>(argument).GetArgumentIndex();
 
     public override SyntaxToken? InvocationIdentifier(SyntaxNode invocation) =>
         invocation == null ? null : Cast<InvocationExpressionSyntax>(invocation).GetMethodCallIdentifier();

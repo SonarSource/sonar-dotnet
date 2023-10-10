@@ -26,6 +26,8 @@ namespace Tests.Diagnostics
             var windowsSharedDrivePath4 = @"\\my-network-drive\%foo%\file.txt"; // Noncompliant
             var windowsSharedDrivePath5 = @"\\my-network-drive/folder/file.txt"; // Noncompliant
 
+            IComparable compatibleTypeUri = "ftp://www.mywebsite.com"; // Noncompliant
+
             var unixPath1 = "/my/other/folder"; // Compliant - we ignore unix paths by default
             var unixPath2 = "~/blah/blah/blah.txt"; // Compliant
             var unixPath3 = "~\\blah\\blah\\blah.txt"; // Compliant
