@@ -54,8 +54,8 @@ namespace SonarAnalyzer.Rules
 
         static PubliclyWritableDirectoriesBase()
         {
-            LinuxDirectories = new Regex($@"^({LinuxDirs().JoinStr("|", x => Regex.Escape(x))})(\/|$)", RegexOptions.Compiled);
-            MacDirectories = new Regex($@"^({MacDirs().JoinStr("|", x => Regex.Escape(x))})(\/|$)", WindowsAndUnixOptions);
+            LinuxDirectories = new Regex($@"^({LinuxDirs().JoinStr("|", Regex.Escape)})(\/|$)", RegexOptions.Compiled);
+            MacDirectories = new Regex($@"^({MacDirs().JoinStr("|", Regex.Escape)})(\/|$)", WindowsAndUnixOptions);
             EnvironmentVariables = new Regex($@"^%({InsecureEnvironmentVariables.JoinStr("|")})%([\\\/]|$)", WindowsAndUnixOptions);
         }
 
