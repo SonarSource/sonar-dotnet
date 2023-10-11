@@ -18,16 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Data;
 using System.Text.RegularExpressions;
+using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class PubliclyWritableDirectoriesBase<TSyntaxKind, TInvocationExpression> : HotspotDiagnosticAnalyzer
-        where TSyntaxKind : struct
-        where TInvocationExpression : SyntaxNode
+    public abstract class PubliclyWritableDirectoriesBase : HotspotDiagnosticAnalyzer
     {
-        protected const string DiagnosticId = "S5443";
-        private const string MessageFormat = "Make sure publicly writable directories are used safely here.";
         private const RegexOptions WindowsAndUnixOptions = RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant;
 
         private static readonly Regex UserProfile = new("""^%USERPROFILE%[\\\/]AppData[\\\/]Local[\\\/]Temp""", WindowsAndUnixOptions);
@@ -36,20 +34,10 @@ namespace SonarAnalyzer.Rules
         private static readonly Regex WindowsDirectories = new("""^([a-z]:[\\\/]?|[\\\/][\\\/][^\\\/]+[\\\/]|[\\\/])(windows[\\\/])?te?mp([\\\/]|$)""", WindowsAndUnixOptions);
         private static readonly Regex EnvironmentVariables;
 
-        private readonly DiagnosticDescriptor rule;
-
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
-
-        private protected abstract bool IsGetTempPathAssignment(TInvocationExpression invocationExpression, KnownType type, string methodName, SemanticModel semanticModel);
-        private protected abstract bool IsInsecureEnvironmentVariableRetrieval(TInvocationExpression invocation, KnownType type, string methodName, SemanticModel semanticModel);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
-
         protected static string[] InsecureEnvironmentVariables { get; } = { "tmp", "temp", "tmpdir" };
 
         protected PubliclyWritableDirectoriesBase(IAnalyzerConfiguration configuration) : base(configuration)
         {
-            rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
         }
 
         static PubliclyWritableDirectoriesBase()
@@ -58,6 +46,13 @@ namespace SonarAnalyzer.Rules
             MacDirectories = new Regex($@"^({MacDirs().JoinStr("|", Regex.Escape)})(\/|$)", WindowsAndUnixOptions);
             EnvironmentVariables = new Regex($@"^%({InsecureEnvironmentVariables.JoinStr("|")})%([\\\/]|$)", WindowsAndUnixOptions);
         }
+
+        protected static bool IsSensitiveDirectoryUsage(string directory) =>
+            WindowsDirectories.IsMatch(directory)
+                || MacDirectories.IsMatch(directory)
+                || LinuxDirectories.IsMatch(directory)
+                || EnvironmentVariables.IsMatch(directory)
+                || UserProfile.IsMatch(directory);
 
         private static string[] LinuxDirs() => new[]
             {
@@ -76,6 +71,28 @@ namespace SonarAnalyzer.Rules
                 "/private/tmp",
                 "/private/var/tmp",
             };
+    }
+
+    public abstract class PubliclyWritableDirectoriesBase<TSyntaxKind, TInvocationExpression> : PubliclyWritableDirectoriesBase
+        where TSyntaxKind : struct
+        where TInvocationExpression : SyntaxNode
+    {
+        protected const string DiagnosticId = "S5443";
+        private const string MessageFormat = "Make sure publicly writable directories are used safely here.";
+
+        private readonly DiagnosticDescriptor rule;
+
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
+
+        private protected abstract bool IsGetTempPathAssignment(TInvocationExpression invocationExpression, KnownType type, string methodName, SemanticModel semanticModel);
+        private protected abstract bool IsInsecureEnvironmentVariableRetrieval(TInvocationExpression invocation, KnownType type, string methodName, SemanticModel semanticModel);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        protected PubliclyWritableDirectoriesBase(IAnalyzerConfiguration configuration) : base(configuration)
+        {
+            rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
+        }
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -109,12 +126,5 @@ namespace SonarAnalyzer.Rules
                 },
                 Language.SyntaxKind.InvocationExpression);
         }
-
-        private bool IsSensitiveDirectoryUsage(string directory) =>
-            WindowsDirectories.IsMatch(directory)
-            || MacDirectories.IsMatch(directory)
-            || LinuxDirectories.IsMatch(directory)
-            || EnvironmentVariables.IsMatch(directory)
-            || UserProfile.IsMatch(directory);
     }
 }
