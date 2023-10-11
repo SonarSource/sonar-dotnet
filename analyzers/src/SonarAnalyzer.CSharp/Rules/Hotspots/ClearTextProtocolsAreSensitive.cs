@@ -173,7 +173,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private void VisitStringExpressions(SonarSyntaxNodeReportingContext c)
+        private static void VisitStringExpressions(SonarSyntaxNodeReportingContext c)
         {
             if (GetUnsafeProtocol(c.Node, c.SemanticModel) is { } unsafeProtocol)
             {
