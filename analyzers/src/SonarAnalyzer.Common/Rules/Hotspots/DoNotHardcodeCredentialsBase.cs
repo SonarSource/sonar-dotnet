@@ -31,23 +31,8 @@ namespace SonarAnalyzer.Rules
     public abstract class DoNotHardcodeCredentialsBase : ParametrizedDiagnosticAnalyzer
     {
         protected static readonly Regex ValidCredentialPattern = new(@"^(\?|:\w+|\{\d+[^}]*\}|""|')$", RegexOptions.IgnoreCase | RegexOptions.Compiled);
-        protected static readonly Regex UriUserInfoPattern;
+        protected static readonly Regex UriUserInfoPattern = CreateUriUserInfoPattern();
         protected static readonly ConcurrentDictionary<string, Regex> PasswordValuePattern = new();
-
-        static DoNotHardcodeCredentialsBase()
-        {
-            const string Rfc3986_Unreserved = "-._~";  // Numbers and letters are embedded in regex itself without escaping
-            const string Rfc3986_Pct = "%";
-            const string Rfc3986_SubDelims = "!$&'()*+,;=";
-            const string UriPasswordSpecialCharacters = Rfc3986_Unreserved + Rfc3986_Pct + Rfc3986_SubDelims;
-            // See https://tools.ietf.org/html/rfc3986 Userinfo can contain groups: unreserved | pct-encoded | sub-delims
-            var loginGroup = CreateUserInfoGroup("Login");
-            var passwordGroup = CreateUserInfoGroup("Password", ":");   // Additional ":" to capture passwords containing it
-            UriUserInfoPattern = new Regex(@$"\w+:\/\/{loginGroup}:{passwordGroup}@", RegexOptions.Compiled);
-
-            static string CreateUserInfoGroup(string name, string additionalCharacters = null) =>
-                $@"(?<{name}>[\w\d{Regex.Escape(UriPasswordSpecialCharacters)}{additionalCharacters}]+)";
-        }
 
         protected static Regex PasswordValueRegex(string credentialWords) =>
             PasswordValuePattern.GetOrAdd(credentialWords, static credentialWords =>
@@ -62,6 +47,21 @@ namespace SonarAnalyzer.Rules
                 .Select(x => x.Trim())
                 .Where(x => x.Length != 0)
                 .ToImmutableList();
+
+        private static Regex CreateUriUserInfoPattern()
+        {
+            const string Rfc3986_Unreserved = "-._~";  // Numbers and letters are embedded in regex itself without escaping
+            const string Rfc3986_Pct = "%";
+            const string Rfc3986_SubDelims = "!$&'()*+,;=";
+            const string UriPasswordSpecialCharacters = Rfc3986_Unreserved + Rfc3986_Pct + Rfc3986_SubDelims;
+            // See https://tools.ietf.org/html/rfc3986 Userinfo can contain groups: unreserved | pct-encoded | sub-delims
+            var loginGroup = CreateUserInfoGroup("Login");
+            var passwordGroup = CreateUserInfoGroup("Password", ":");   // Additional ":" to capture passwords containing it
+            return new Regex(@$"\w+:\/\/{loginGroup}:{passwordGroup}@", RegexOptions.Compiled);
+
+            static string CreateUserInfoGroup(string name, string additionalCharacters = null) =>
+                $@"(?<{name}>[\w\d{Regex.Escape(UriPasswordSpecialCharacters)}{additionalCharacters}]+)";
+        }
     }
 
     public abstract class DoNotHardcodeCredentialsBase<TSyntaxKind> : DoNotHardcodeCredentialsBase
