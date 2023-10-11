@@ -81,7 +81,7 @@ namespace SonarAnalyzer.Rules.CSharp
             KnownType.System_Windows_Markup_XmlnsCompatibleWithAttribute,
         };
 
-        private readonly CSharpObjectInitializationTracker objectInitializationTracker =
+        private static readonly CSharpObjectInitializationTracker ObjectInitializationTracker =
             new(constantValue => constantValue is bool value && value,
                                                   ImmutableArray.Create(KnownType.System_Net_Mail_SmtpClient, KnownType.System_Net_FtpWebRequest),
                                                   propertyName => propertyName == EnableSslName);
@@ -138,11 +138,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 context.RegisterNodeAction(VisitAssignments, SyntaxKind.SimpleAssignmentExpression);
             });
 
-        private void VisitObjectCreation(SonarSyntaxNodeReportingContext context)
+        private static void VisitObjectCreation(SonarSyntaxNodeReportingContext context)
         {
             var objectCreation = ObjectCreationFactory.Create(context.Node);
 
-            if (!IsServerSafe(objectCreation, context.SemanticModel) && objectInitializationTracker.ShouldBeReported(objectCreation, context.SemanticModel, false))
+            if (!IsServerSafe(objectCreation, context.SemanticModel) && ObjectInitializationTracker.ShouldBeReported(objectCreation, context.SemanticModel, false))
             {
                 context.ReportIssue(Diagnostic.Create(EnableSslRule, objectCreation.Expression.GetLocation()));
             }
@@ -152,7 +152,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private void VisitInvocationExpression(SonarSyntaxNodeReportingContext context)
+        private static void VisitInvocationExpression(SonarSyntaxNodeReportingContext context)
         {
             var invocation = (InvocationExpressionSyntax)context.Node;
             if (TelnetRegexForIdentifier.IsMatch(invocation.Expression.ToString()))
@@ -181,11 +181,11 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private bool IsServerSafe(IObjectCreation objectCreation, SemanticModel semanticModel) =>
+        private static bool IsServerSafe(IObjectCreation objectCreation, SemanticModel semanticModel) =>
             objectCreation.ArgumentList?.Arguments.Count > 0
             && ValidServerRegex.IsMatch(GetText(objectCreation.ArgumentList.Arguments[0].Expression, semanticModel));
 
-        private string GetUnsafeProtocol(SyntaxNode node, SemanticModel semanticModel)
+        private static string GetUnsafeProtocol(SyntaxNode node, SemanticModel semanticModel)
         {
             var text = GetText(node, semanticModel);
             if (HttpRegex.IsMatch(text) && !IsNamespace(semanticModel, node.Parent))
