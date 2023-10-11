@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Licensed to the .NET Foundation under one or more agreements. The .NET Foundation licenses this file to you under the MIT license. See the LICENSE file in the project root for more information. -->
 
-<!-- 
+<!--
  To re-generate source from this file, run eng/generate-compiler-code.cmd
 -->
 
@@ -3080,7 +3080,7 @@
         </Field>
         <Choice Optional="true">
             <Field Name="StaticKeyword" Type="SyntaxToken"/>
-                <Field Name="Alias" Type="NameEqualsSyntax"/>
+            <Field Name="Alias" Type="NameEqualsSyntax"/>
         </Choice>
         <Field Name="Name" Type="NameSyntax"/>
         <Field Name="SemicolonToken" Type="SyntaxToken">
