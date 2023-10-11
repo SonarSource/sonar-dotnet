@@ -28,13 +28,13 @@ namespace SonarAnalyzer.Rules
     {
         private const RegexOptions WindowsAndUnixOptions = RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant;
 
+        protected static string[] InsecureEnvironmentVariables { get; } = { "tmp", "temp", "tmpdir" };
+
         private static readonly Regex UserProfile = new("""^%USERPROFILE%[\\\/]AppData[\\\/]Local[\\\/]Temp""", WindowsAndUnixOptions);
         private static readonly Regex LinuxDirectories = new($@"^({LinuxDirs().JoinStr("|", Regex.Escape)})(\/|$)", RegexOptions.Compiled);
         private static readonly Regex MacDirectories = new($@"^({MacDirs().JoinStr("|", Regex.Escape)})(\/|$)", WindowsAndUnixOptions);
         private static readonly Regex WindowsDirectories = new("""^([a-z]:[\\\/]?|[\\\/][\\\/][^\\\/]+[\\\/]|[\\\/])(windows[\\\/])?te?mp([\\\/]|$)""", WindowsAndUnixOptions);
         private static readonly Regex EnvironmentVariables = new($@"^%({InsecureEnvironmentVariables.JoinStr("|")})%([\\\/]|$)", WindowsAndUnixOptions);
-
-        protected static string[] InsecureEnvironmentVariables { get; } = { "tmp", "temp", "tmpdir" };
 
         protected PubliclyWritableDirectoriesBase(IAnalyzerConfiguration configuration) : base(configuration)
         {
