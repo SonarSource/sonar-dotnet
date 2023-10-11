@@ -28,16 +28,26 @@ namespace SonarAnalyzer.Rules
     {
         private const RegexOptions WindowsAndUnixOptions = RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant;
 
-        protected static string[] InsecureEnvironmentVariables { get; } = { "tmp", "temp", "tmpdir" };
+        protected static string[] InsecureEnvironmentVariables { get; }
 
-        private static readonly Regex UserProfile = new("""^%USERPROFILE%[\\\/]AppData[\\\/]Local[\\\/]Temp""", WindowsAndUnixOptions);
-        private static readonly Regex LinuxDirectories = new($@"^({LinuxDirs().JoinStr("|", Regex.Escape)})(\/|$)", RegexOptions.Compiled);
-        private static readonly Regex MacDirectories = new($@"^({MacDirs().JoinStr("|", Regex.Escape)})(\/|$)", WindowsAndUnixOptions);
-        private static readonly Regex WindowsDirectories = new("""^([a-z]:[\\\/]?|[\\\/][\\\/][^\\\/]+[\\\/]|[\\\/])(windows[\\\/])?te?mp([\\\/]|$)""", WindowsAndUnixOptions);
-        private static readonly Regex EnvironmentVariables = new($@"^%({InsecureEnvironmentVariables.JoinStr("|")})%([\\\/]|$)", WindowsAndUnixOptions);
+        private static readonly Regex UserProfile;
+        private static readonly Regex LinuxDirectories;
+        private static readonly Regex MacDirectories;
+        private static readonly Regex WindowsDirectories;
+        private static readonly Regex EnvironmentVariables;
 
         protected PubliclyWritableDirectoriesBase(IAnalyzerConfiguration configuration) : base(configuration)
         {
+        }
+
+        static PubliclyWritableDirectoriesBase()
+        {
+            InsecureEnvironmentVariables = new[] { "tmp", "temp", "tmpdir" };
+            UserProfile = new("""^%USERPROFILE%[\\\/]AppData[\\\/]Local[\\\/]Temp""", WindowsAndUnixOptions);
+            LinuxDirectories = new($@"^({LinuxDirs().JoinStr("|", Regex.Escape)})(\/|$)", RegexOptions.Compiled);
+            MacDirectories = new($@"^({MacDirs().JoinStr("|", Regex.Escape)})(\/|$)", WindowsAndUnixOptions);
+            WindowsDirectories = new("""^([a-z]:[\\\/]?|[\\\/][\\\/][^\\\/]+[\\\/]|[\\\/])(windows[\\\/])?te?mp([\\\/]|$)""", WindowsAndUnixOptions);
+            EnvironmentVariables = new($@"^%({InsecureEnvironmentVariables.JoinStr("|")})%([\\\/]|$)", WindowsAndUnixOptions);
         }
 
         protected static bool IsSensitiveDirectoryUsage(string directory) =>
