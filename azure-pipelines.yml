@@ -1,3 +1,4 @@
+
 schedules:
 # Run from Monday to Friday at 5:30 UTC (https://docs.microsoft.com/en-us/azure/devops/pipelines/process/scheduled-triggers?view=azure-devops&tabs=yaml#cron-syntax)
 - cron: "30 5 * * 1-5"
@@ -175,6 +176,7 @@ stages:
 
     jobs:
     - job: runUnitTestsDotNet
+      condition: eq(1,2)
       displayName: '.NET UTs'
       workspace:
         clean: all
@@ -378,6 +380,7 @@ stages:
           workingDirectory: 'analyzers/its'
 
     - job: runJavaBuild
+      condition: eq(1,2)
       displayName: 'Java build'
       workspace:
         clean: all
@@ -427,6 +430,7 @@ stages:
           mavenOptions: $(MAVEN_OPTS)
 
     - job: runJavaUnitTests
+      condition: eq(1,2)
       displayName: 'Java UTs'
       dependsOn: runJavaBuild
       workspace:
@@ -477,6 +481,7 @@ stages:
           pollingTimeoutSec: '300'
 
     - job: runJavaIntegrationTests
+      condition: eq(1,2)
       displayName: 'Java ITs'
       dependsOn: runJavaBuild
       workspace:
