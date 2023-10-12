@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
             };
 
         private static int RetrieveBasePrimaryConstructorArguments(ClassDeclarationSyntax node) =>
-            node.BaseList?.Types.FirstOrDefault() is { } type && PrimaryConstructorBaseTypeSyntaxWrapper.IsInstance(type)
+            node.BaseList?.Types.FirstOrDefault() is var type && PrimaryConstructorBaseTypeSyntaxWrapper.IsInstance(type)
                 ? ((PrimaryConstructorBaseTypeSyntaxWrapper)type).ArgumentList?.Arguments.Count ?? 0
                 : 0;
     }
