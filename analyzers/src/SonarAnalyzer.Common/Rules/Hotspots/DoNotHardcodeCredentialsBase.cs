@@ -44,13 +44,13 @@ namespace SonarAnalyzer.Rules
             set
             {
                 credentialWords = value;
-                SplitCredentialWords = GetSplitCredentialWords(credentialWords);
+                SplitCredentialWords = SplitCredentialWordsByComma(credentialWords);
             }
         }
 
         protected ImmutableList<string> SplitCredentialWords { get; private set; }
 
-        public DoNotHardcodeCredentialsBase()
+        protected DoNotHardcodeCredentialsBase()
         {
             CredentialWords = DefaultCredentialWords;   // Property will initialize multiple state variables
         }
@@ -58,11 +58,11 @@ namespace SonarAnalyzer.Rules
         protected static Regex PasswordValueRegex(string credentialWords) =>
             PasswordValuePattern.GetOrAdd(credentialWords, static credentialWords =>
             {
-                var splitCredentialWords = string.Join("|", GetSplitCredentialWords(credentialWords).Select(Regex.Escape));
+                var splitCredentialWords = string.Join("|", SplitCredentialWordsByComma(credentialWords).Select(Regex.Escape));
                 return new Regex($@"\b(?<credential>{splitCredentialWords})\s*[:=]\s*(?<suffix>.+)$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
             });
 
-        protected static ImmutableList<string> GetSplitCredentialWords(string credentialWords) =>
+        protected static ImmutableList<string> SplitCredentialWordsByComma(string credentialWords) =>
             credentialWords.ToUpperInvariant()
                 .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
                 .Select(x => x.Trim())
