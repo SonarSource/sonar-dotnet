@@ -30,9 +30,30 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class DoNotHardcodeCredentialsBase : ParametrizedDiagnosticAnalyzer
     {
+        private const string DefaultCredentialWords = "password, passwd, pwd, passphrase";
+        private static readonly ConcurrentDictionary<string, Regex> PasswordValuePattern = new();
         protected static readonly Regex ValidCredentialPattern = new(@"^(\?|:\w+|\{\d+[^}]*\}|""|')$", RegexOptions.IgnoreCase | RegexOptions.Compiled);
         protected static readonly Regex UriUserInfoPattern = CreateUriUserInfoPattern();
-        protected static readonly ConcurrentDictionary<string, Regex> PasswordValuePattern = new();
+
+        private string credentialWords;
+
+        [RuleParameter("credentialWords", PropertyType.String, "Comma separated list of words identifying potential credentials", DefaultCredentialWords)]
+        public string CredentialWords
+        {
+            get => credentialWords;
+            set
+            {
+                credentialWords = value;
+                SplitCredentialWords = GetSplitCredentialWords(credentialWords);
+            }
+        }
+
+        protected ImmutableList<string> SplitCredentialWords { get; private set; }
+
+        public DoNotHardcodeCredentialsBase()
+        {
+            CredentialWords = DefaultCredentialWords;   // Property will initialize multiple state variables
+        }
 
         protected static Regex PasswordValueRegex(string credentialWords) =>
             PasswordValuePattern.GetOrAdd(credentialWords, static credentialWords =>
@@ -73,11 +94,9 @@ namespace SonarAnalyzer.Rules
         private const string MessageHardcodedPassword = "Please review this hard-coded password.";
         private const string MessageFormatCredential = @"""{0}"" detected here, make sure this is not a hard-coded credential.";
         private const string MessageUriUserInfo = "Review this hard-coded URI, which may contain a credential.";
-        private const string DefaultCredentialWords = "password, passwd, pwd, passphrase";
 
         private readonly IAnalyzerConfiguration configuration;
         private readonly DiagnosticDescriptor rule;
-        private string credentialWords;
 
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract void InitializeActions(SonarParametrizedAnalysisContext context);
@@ -85,24 +104,10 @@ namespace SonarAnalyzer.Rules
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        [RuleParameter("credentialWords", PropertyType.String, "Comma separated list of words identifying potential credentials", DefaultCredentialWords)]
-        public string CredentialWords
-        {
-            get => credentialWords;
-            set
-            {
-                credentialWords = value;
-                SplitCredentialWords = GetSplitCredentialWords(credentialWords);
-            }
-        }
-
-        protected ImmutableList<string> SplitCredentialWords { get; private set; }
-
         protected DoNotHardcodeCredentialsBase(IAnalyzerConfiguration configuration)
         {
             this.configuration = configuration;
             rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
-            CredentialWords = DefaultCredentialWords;   // Property will initialize multiple state variables
         }
 
         protected sealed override void Initialize(SonarParametrizedAnalysisContext context)
