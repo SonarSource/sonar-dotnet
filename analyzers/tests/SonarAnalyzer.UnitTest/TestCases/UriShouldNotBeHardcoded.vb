@@ -50,4 +50,15 @@ Namespace Tests.Diagnostics
             Dim concat1 = Convert.ToString(s & Convert.ToString("\")) & s
         End Sub
     End Class
+
+    ' https://github.com/SonarSource/sonar-dotnet/issues/8169
+    Friend Class Repro_8169
+        Private Sub Method()
+            Dim uris1 = ("C:/test.txt", "C:/test.txt")               ' FN
+            Dim a = ("C:/test.txt", "C:/test.txt")                   ' FN, first
+            Dim a1 = ("C:/test.txt", "C:/test.txt")                  ' FN, first and second
+            Dim uris = ("C:/test.txt", "C:/test.txt")                ' FN, first and second
+            Dim a2 = ("C:/test.txt", ("C:/test.txt", "C:/test.txt")) ' FN, second
+        End Sub
+    End Class
 End Namespace
