@@ -3417,7 +3417,7 @@
             <Kind Name="OpenBraceToken"/>
         </Field>
         <Field Name="Members" Type="SyntaxList&lt;MemberDeclarationSyntax&gt;" Override="true"/>
-        <Field Name="CloseBraceToken" Type="SyntaxToken" Override="true">
+        <Field Name="CloseBraceToken" Type="SyntaxToken" Override="true" Optional="true">
             <Kind Name="CloseBraceToken"/>
         </Field>
         <Field Name="SemicolonToken" Type="SyntaxToken" Optional="true" Override="true">
