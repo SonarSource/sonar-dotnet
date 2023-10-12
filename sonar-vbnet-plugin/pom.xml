@@ -43,6 +43,7 @@
     <sonarAnalyzer.workDirectory>${project.build.directory}/analyzer</sonarAnalyzer.workDirectory>
     <documentationDirectory>${project.basedir}/src/main/resources</documentationDirectory>
     <analyzers.directory>${project.build.directory}/../../analyzers</analyzers.directory>
+    <maven.deploy.skip>false</maven.deploy.skip>
   </properties>
 
   <dependencies>
