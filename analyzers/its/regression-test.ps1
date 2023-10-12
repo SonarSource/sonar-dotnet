@@ -442,14 +442,37 @@ try {
     Initialize-ActualFolder
     Initialize-OutputFolder
 
-    Write-Debug "Installing the import before target file at '${msBuildImportBefore14}'"
+    Write-Output "Installing the import before target file at '${msBuildImportBefore14}'"
     Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination (New-Item $msBuildImportBefore14 -Type container -Force) -Force -Recurse
-    Write-Debug "Installing the import before target file at '${msBuildImportBefore15}'"
+    Write-Output "Installing the import before target file at '${msBuildImportBefore15}'"
     Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination (New-Item $msBuildImportBefore15 -Type container -Force) -Force -Recurse
-    Write-Debug "Installing the import before target file at '${msBuildImportBefore16}'"
+    Write-Output "Installing the import before target file at '${msBuildImportBefore16}'"
     Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination (New-Item $msBuildImportBefore16 -Type container -Force) -Force -Recurse
-    Write-Debug "Installing the import before target file at '${msBuildImportBeforeCurrent}'"
+    Write-Output "Installing the import before target file at '${msBuildImportBeforeCurrent}'"
     Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination (New-Item $msBuildImportBeforeCurrent -Type container -Force) -Force -Recurse
+
+    Write-Output "User profile is '$env:UserProfile'"
+
+    # When executing 32-bit applications, WoW64 transparently redirects access to "system32" (e.g. DLL loads) to %SystemRoot%\SysWoW64, which contains 32-bit libraries and executables.
+    # See: https://en.wikipedia.org/wiki/WoW64
+    #
+    # On CI, the script is run under the "system32" user so, do to the behavior explained in the linked wiki, the files need to be placed in both "system32" and "SysWOW64".
+    if ($env:UserProfile -match 'systemprofile$')
+    {
+        $msBuildImportBefore14 = Get-MSBuildImportBeforePath-SystemX64 "14.0"
+        $msBuildImportBefore15 = Get-MSBuildImportBeforePath-SystemX64 "15.0"
+        $msBuildImportBefore16 = Get-MSBuildImportBeforePath-SystemX64 "16.0"
+        $msBuildImportBeforeCurrent = Get-MSBuildImportBeforePath-SystemX64 "Current"
+
+        Write-Output "Installing the import before target file at '${msBuildImportBefore14}'"
+        Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination (New-Item $msBuildImportBefore14 -Type container -Force) -Force -Recurse
+        Write-Output "Installing the import before target file at '${msBuildImportBefore15}'"
+        Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination (New-Item $msBuildImportBefore15 -Type container -Force) -Force -Recurse
+        Write-Output "Installing the import before target file at '${msBuildImportBefore16}'"
+        Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination (New-Item $msBuildImportBefore16 -Type container -Force) -Force -Recurse
+        Write-Output "Installing the import before target file at '${msBuildImportBeforeCurrent}'"
+        Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination (New-Item $msBuildImportBeforeCurrent -Type container -Force) -Force -Recurse
+    }
 
     # Note: Automapper has multiple configurations that are built simultaneously and sometimes
     # it happens that a the same project is built in parallel in different configurations. The
@@ -485,8 +508,6 @@ try {
     Build-Project-DotnetTool "BlazorSample" "BlazorSample.sln"
 
     Write-Header "Processing analyzer results"
-
-    
 
     # Not needed when $project is internal
     if ($project -eq "" -or -not $InternalProjects.Contains($project)) {
