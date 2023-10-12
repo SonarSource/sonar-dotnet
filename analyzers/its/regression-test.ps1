@@ -75,9 +75,7 @@ function Build-Project-MSBuild([string]$ProjectName, [string]$SolutionRelativePa
         /m:$CpuCount `
         /t:rebuild `
         /p:Configuration=Debug `
-        /clp:"Summary;ErrorsOnly" `
-        /fl `
-        /flp:"logFile=output\${ProjectName}.log;verbosity=d"
+        /clp:"Summary;ErrorsOnly"
 }
 
 function Build-Project-DotnetTool([string]$ProjectName, [string]$SolutionRelativePath) {
@@ -163,24 +161,6 @@ function Initialize-OutputFolder() {
     Write-Debug "Initialized output folder in '${methodTimerElapsed}'"
 }
 
-function Export-AnalyzerPerformancesFromLogs([string[]]$buildLogsPaths) {
-    return $buildLogsPaths |
-        Foreach-Object { Get-Content $_ } |
-        Where-Object { $_ -match '^\s*<?([0-9.]+)\s*<?[0-9]+\s*(SonarAnalyzer\..*)$' -and ($matches[1] -ne '0.001') } |
-        Foreach-Object {
-            New-Object PSObject -Property @{
-                Rule = $matches[2];
-                Time = [decimal]$matches[1]}
-        } |
-        Group-Object Rule |
-        Foreach-Object {
-            New-Object PSObject -property @{
-                Rule = $_.Name;
-                Time = [math]::Round(($_.Group.Time | Measure-Object -sum).Sum, 3)}
-        } |
-        Sort-Object Time -Descending
-}
-
 function Get-FullPath($Folder) {
     return [System.IO.Path]::GetFullPath((Join-Path (Get-Location).Path $Folder))
 }
@@ -204,20 +184,6 @@ function Copy-FolderRecursively($From, $To, $Include, $Exclude) {
         }
         Copy-Item $file.FullName -Destination $path
     }
-}
-
-function Measure-AnalyzerPerformance(){
-    # Process all build logs in the "output" folder
-    $timings = Export-AnalyzerPerformancesFromLogs(Get-ChildItem output -filter *.log | Foreach-Object { $_.FullName })
-
-    $timings | Where-Object { $_.Rule -match 'SonarAnalyzer\.CSharp.*' }                |
-        Format-Table -Wrap -AutoSize | Out-String -Width 100
-    $timings | Where-Object { $_.Rule -match 'SonarAnalyzer\.VisualBasic.*' }           |
-        Format-Table -Wrap -AutoSize | Out-String -Width 100
-    $timings | Where-Object { $_.Rule -match 'SonarAnalyzer\.Rules\.CSharp.*' }         |
-        Format-Table -Wrap -AutoSize | Out-String -Width 100
-    $timings | Where-Object { $_.Rule -match 'SonarAnalyzer\.Rules\.VisualBasic.*' }    |
-        Format-Table -Wrap -AutoSize | Out-String -Width 100
 }
 
 function Show-DiffResults() {
@@ -517,12 +483,6 @@ try {
     Build-Project-DotnetTool "BlazorSample" "BlazorSample.sln"
 
     Write-Header "Processing analyzer results"
-
-    Write-Host "Computing analyzer performance"
-    $measurePerfTimer = [system.diagnostics.stopwatch]::StartNew()
-    Measure-AnalyzerPerformance
-    $measurePerfTimerElapsed = $measurePerfTimer.Elapsed.TotalSeconds
-    Write-Debug "Computed analyzer performance in '${measurePerfTimerElapsed}'"
 
     CheckInternalProjectsDifferences
 
