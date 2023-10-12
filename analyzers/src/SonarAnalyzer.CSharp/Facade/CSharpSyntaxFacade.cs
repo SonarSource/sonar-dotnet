@@ -90,6 +90,9 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
     public override IEnumerable<SyntaxNode> EnumMembers(SyntaxNode @enum) =>
         @enum == null ? Enumerable.Empty<SyntaxNode>() : Cast<EnumDeclarationSyntax>(@enum).Members;
 
+    public override int? ArgumentIndex(SyntaxNode argument) =>
+        Cast<ArgumentSyntax>(argument).GetArgumentIndex();
+
     public override SyntaxToken? InvocationIdentifier(SyntaxNode invocation) =>
         invocation == null ? null : Cast<InvocationExpressionSyntax>(invocation).GetMethodCallIdentifier();
 

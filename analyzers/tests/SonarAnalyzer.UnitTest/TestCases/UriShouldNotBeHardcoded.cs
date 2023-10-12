@@ -26,6 +26,8 @@ namespace Tests.Diagnostics
             var windowsSharedDrivePath4 = @"\\my-network-drive\%foo%\file.txt"; // Noncompliant
             var windowsSharedDrivePath5 = @"\\my-network-drive/folder/file.txt"; // Noncompliant
 
+            IComparable compatibleTypeUri = "ftp://www.mywebsite.com"; // Noncompliant
+
             var unixPath1 = "/my/other/folder"; // Compliant - we ignore unix paths by default
             var unixPath2 = "~/blah/blah/blah.txt"; // Compliant
             var unixPath3 = "~\\blah\\blah\\blah.txt"; // Compliant
@@ -103,5 +105,19 @@ class ReproFN_7815
         {
             FilePath = "c:\\blah\\blah\\blah.txt" // FN
         };
+    }
+}
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8169
+class Repro_8169
+{
+    void Method()
+    {
+        (string, string) uris1 = ("C:/test.txt", "C:/test.txt");       // FN
+        (string uri, string) a = ("C:/test.txt", "C:/test.txt");       // FN, first
+        (string uri, string uri2) a1 = ("C:/test.txt", "C:/test.txt"); // FN, first and second
+        (string uri, string uri2) = ("C:/test.txt", "C:/test.txt");    // FN, first and second
+        (string uri, string) uris = ("C:/test.txt", "C:/test.txt");    // FN, first and second
+        (string b, (string uri, string c)) a2 = ("C:/test.txt", ("C:/test.txt", "C:/test.txt")); // FN, second
     }
 }

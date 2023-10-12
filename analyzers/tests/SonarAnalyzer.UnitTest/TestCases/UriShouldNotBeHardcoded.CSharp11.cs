@@ -30,4 +30,10 @@ public class TestCases
     {
         bool pathFlag = uris is ["""\\my-network-drive\folder\file.txt"""]; // Noncompliant
     }
+
+    public void Utf8()
+    {
+        var utf8uri = """file://blah.txt"""u8; // Noncompliant
+        var utf8 = """file://blah.txt"""u8;
+    }
 }

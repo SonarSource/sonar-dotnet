@@ -22,10 +22,10 @@ using System.Text.RegularExpressions;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class UriShouldNotBeHardcodedBase : SonarDiagnosticAnalyzer
+    public abstract class UriShouldNotBeHardcodedBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+        where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S1075";
-        protected const string MessageFormat = "{0}";
 
         protected const string AbsoluteUriMessage = "Refactor your code not to use hardcoded absolute paths or URIs.";
         protected const string PathDelimiterMessage = "Remove this hardcoded path-delimiter.";
@@ -37,9 +37,9 @@ namespace SonarAnalyzer.Rules
         private const string AbsoluteDiskUri = @"^[A-Za-z]:(/|\\)";
         private const string AbsoluteMappedDiskUri = @"^\\\\\w[ \w\.]*";
 
-        protected static readonly Regex UriRegex = new($"{UriScheme}|{AbsoluteDiskUri}|{AbsoluteMappedDiskUri}", RegexOptions.Compiled);
+        protected static readonly Regex UriRegex = new($"{UriScheme}|{AbsoluteDiskUri}|{AbsoluteMappedDiskUri}", RegexOptions.Compiled, TimeSpan.FromSeconds(1));
 
-        protected static readonly Regex PathDelimiterRegex = new(@"^(\\|/)$", RegexOptions.Compiled);
+        protected static readonly Regex PathDelimiterRegex = new(@"^(\\|/)$", RegexOptions.Compiled, TimeSpan.FromSeconds(1));
 
         protected static readonly ISet<string> CheckedVariableNames =
             new HashSet<string>
@@ -51,33 +51,24 @@ namespace SonarAnalyzer.Rules
                 "URN",
                 "STREAM"
             };
+
+        protected override string MessageFormat => "{0}";
+
+        protected UriShouldNotBeHardcodedBase() : base(DiagnosticId) { }
     }
 
-    public abstract class UriShouldNotBeHardcodedBase<TExpressionSyntax,
-        TLiteralExpressionSyntax, TLanguageKindEnum, TBinaryExpressionSyntax, TArgumentSyntax, TVariableDeclaratorSyntax>
-        : UriShouldNotBeHardcodedBase
-        where TExpressionSyntax : SyntaxNode
-        where TLiteralExpressionSyntax : TExpressionSyntax
-        where TBinaryExpressionSyntax : TExpressionSyntax
+    public abstract class UriShouldNotBeHardcodedBase<TSyntaxKind, TLiteralExpressionSyntax, TArgumentSyntax> : UriShouldNotBeHardcodedBase<TSyntaxKind>
+        where TSyntaxKind : struct
+        where TLiteralExpressionSyntax : SyntaxNode
         where TArgumentSyntax : SyntaxNode
-        where TVariableDeclaratorSyntax : SyntaxNode
-        where TLanguageKindEnum : struct
     {
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
-        protected abstract TLanguageKindEnum StringLiteralSyntaxKind { get; }
-        protected abstract TLanguageKindEnum[] StringConcatenateExpressions { get; }
+        protected abstract TSyntaxKind[] StringConcatenateExpressions { get; }
+        protected abstract TSyntaxKind[] InvocationOrObjectCreationKind { get; }
 
         protected abstract string GetLiteralText(TLiteralExpressionSyntax literalExpression);
 
-        protected abstract string GetDeclaratorIdentifierName(TVariableDeclaratorSyntax declarator);
-
-        protected abstract TExpressionSyntax GetLeftNode(TBinaryExpressionSyntax binaryExpression);
-
-        protected abstract TExpressionSyntax GetRightNode(TBinaryExpressionSyntax binaryExpression);
-
-        protected abstract bool IsInvocationOrObjectCreation(SyntaxNode node);
-
-        protected abstract int? GetArgumentIndex(TArgumentSyntax argument);
+        protected abstract SyntaxNode GetRelevantAncestor(SyntaxNode node);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -86,28 +77,26 @@ namespace SonarAnalyzer.Rules
                 c =>
                 {
                     var stringLiteral = (TLiteralExpressionSyntax)c.Node;
-                    if (UriRegex.IsMatch(GetLiteralText(stringLiteral))
-                        && IsInCheckedContext(stringLiteral, c.SemanticModel))
+                    if (UriRegex.IsMatch(GetLiteralText(stringLiteral)) && IsInCheckedContext(stringLiteral, c.SemanticModel))
                     {
                         c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], stringLiteral.GetLocation(), AbsoluteUriMessage));
                     }
                 },
-                StringLiteralSyntaxKind);
+                Language.SyntaxKind.StringLiteralExpressions);
 
             context.RegisterNodeAction(
                 GeneratedCodeRecognizer,
                 c =>
                 {
-                    var addExpression = (TBinaryExpressionSyntax)c.Node;
-                    var isInCheckedContext = new Lazy<bool>(() => IsInCheckedContext(addExpression, c.SemanticModel));
+                    var isInCheckedContext = new Lazy<bool>(() => IsInCheckedContext(c.Node, c.SemanticModel));
 
-                    var leftNode = GetLeftNode(addExpression);
+                    var leftNode = Language.Syntax.BinaryExpressionLeft(c.Node);
                     if (IsPathDelimiter(leftNode) && isInCheckedContext.Value)
                     {
                         c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], leftNode.GetLocation(), PathDelimiterMessage));
                     }
 
-                    var rightNode = GetRightNode(addExpression);
+                    var rightNode = Language.Syntax.BinaryExpressionRight(c.Node);
                     if (IsPathDelimiter(rightNode) && isInCheckedContext.Value)
                     {
                         c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], rightNode.GetLocation(), PathDelimiterMessage));
@@ -116,18 +105,18 @@ namespace SonarAnalyzer.Rules
                 StringConcatenateExpressions);
         }
 
-        private bool IsInCheckedContext(TExpressionSyntax expression, SemanticModel model)
+        private bool IsInCheckedContext(SyntaxNode expression, SemanticModel model)
         {
             var argument = expression.FirstAncestorOrSelf<TArgumentSyntax>();
             if (argument != null)
             {
-                var argumentIndex = GetArgumentIndex(argument);
+                var argumentIndex = Language.Syntax.ArgumentIndex(argument);
                 if (argumentIndex is null or < 0)
                 {
                     return false;
                 }
 
-                var constructorOrMethod = argument.Ancestors().FirstOrDefault(IsInvocationOrObjectCreation);
+                var constructorOrMethod = argument.Ancestors().FirstOrDefault(x => Language.Syntax.IsAnyKind(x, InvocationOrObjectCreationKind));
                 var methodSymbol = constructorOrMethod != null
                     ? model.GetSymbolInfo(constructorOrMethod).Symbol as IMethodSymbol
                     : null;
@@ -137,15 +126,10 @@ namespace SonarAnalyzer.Rules
                        && methodSymbol.Parameters[argumentIndex.Value].Name.SplitCamelCaseToWords().Any(CheckedVariableNames.Contains);
             }
 
-            var variableDeclarator = expression.FirstAncestorOrSelf<TVariableDeclaratorSyntax>();
-            return variableDeclarator != null
-                   && GetDeclaratorIdentifierName(variableDeclarator)
-                        .SplitCamelCaseToWords()
-                        .Any(name => CheckedVariableNames.Contains(name));
+            return GetRelevantAncestor(expression) is { } relevantAncestor && Language.GetName(relevantAncestor).SplitCamelCaseToWords().Any(CheckedVariableNames.Contains);
         }
 
-        private bool IsPathDelimiter(TExpressionSyntax expression) =>
-            GetLiteralText(expression as TLiteralExpressionSyntax) is { } text
-            && PathDelimiterRegex.IsMatch(text);
+        private bool IsPathDelimiter(SyntaxNode expression) =>
+            GetLiteralText(expression as TLiteralExpressionSyntax) is { } text && PathDelimiterRegex.IsMatch(text);
     }
 }

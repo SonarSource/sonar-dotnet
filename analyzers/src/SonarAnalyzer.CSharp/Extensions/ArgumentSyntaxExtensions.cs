@@ -47,5 +47,8 @@ namespace SonarAnalyzer.Extensions
                 && TupleExpressionSyntaxWrapper.IsInstance(outerTuple)
                     ? (TupleExpressionSyntaxWrapper)outerTuple
                     : null;
+
+        internal static int? GetArgumentIndex(this ArgumentSyntax argument) =>
+            (argument.Parent as ArgumentListSyntax)?.Arguments.IndexOf(argument);
     }
 }

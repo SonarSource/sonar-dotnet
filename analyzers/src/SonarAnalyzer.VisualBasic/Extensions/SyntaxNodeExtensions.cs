@@ -96,6 +96,7 @@ namespace SonarAnalyzer.Extensions
                 SimpleNameSyntax x => x.Identifier,
                 StructureBlockSyntax x => x.StructureStatement.Identifier,
                 QualifiedNameSyntax x => x.Right.Identifier,
+                VariableDeclaratorSyntax x => x.Names.FirstOrDefault()?.Identifier,
                 _ => null,
             };
 

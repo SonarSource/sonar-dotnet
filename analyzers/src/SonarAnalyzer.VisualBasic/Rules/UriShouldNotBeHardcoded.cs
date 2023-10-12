@@ -21,38 +21,17 @@
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class UriShouldNotBeHardcoded
-        : UriShouldNotBeHardcodedBase<ExpressionSyntax, LiteralExpressionSyntax,
-            SyntaxKind, BinaryExpressionSyntax, ArgumentSyntax, VariableDeclaratorSyntax>
+    public sealed class UriShouldNotBeHardcoded : UriShouldNotBeHardcodedBase<SyntaxKind, LiteralExpressionSyntax, ArgumentSyntax>
     {
-        private static readonly DiagnosticDescriptor Rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
-        protected override SyntaxKind StringLiteralSyntaxKind => SyntaxKind.StringLiteralExpression;
-
-        protected override SyntaxKind[] StringConcatenateExpressions =>
-            new[]
-            {
-                SyntaxKind.AddExpression,
-                SyntaxKind.ConcatenateExpression
-            };
-
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
+        protected override SyntaxKind[] StringConcatenateExpressions => new[] { SyntaxKind.AddExpression, SyntaxKind.ConcatenateExpression };
+        protected override SyntaxKind[] InvocationOrObjectCreationKind => new[] { SyntaxKind.InvocationExpression, SyntaxKind.ObjectCreationExpression };
 
-        protected override string GetLiteralText(LiteralExpressionSyntax literalExpression) => literalExpression?.Token.ValueText;
+        protected override string GetLiteralText(LiteralExpressionSyntax literalExpression) =>
+            literalExpression?.Token.ValueText;
 
-        protected override ExpressionSyntax GetLeftNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Left;
-
-        protected override ExpressionSyntax GetRightNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Right;
-
-        protected override bool IsInvocationOrObjectCreation(SyntaxNode node) =>
-            node.IsKind(SyntaxKind.InvocationExpression)
-            || node.IsKind(SyntaxKind.ObjectCreationExpression);
-
-        protected override int? GetArgumentIndex(ArgumentSyntax argument) =>
-            (argument?.Parent as ArgumentListSyntax)?.Arguments.IndexOf(argument);
-
-        protected override string GetDeclaratorIdentifierName(VariableDeclaratorSyntax declarator) =>
-            declarator.Names.FirstOrDefault()?.Identifier.ValueText;
+        protected override SyntaxNode GetRelevantAncestor(SyntaxNode node) =>
+            (SyntaxNode)node.FirstAncestorOrSelf<ParameterSyntax>() ?? node.FirstAncestorOrSelf<VariableDeclaratorSyntax>();
     }
 }

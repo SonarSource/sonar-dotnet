@@ -3,7 +3,7 @@ Imports System.IO
 
 Namespace Tests.Diagnostics
     Class Program
-        Private Sub InvalidCases(s1 As String, s2 As String)
+        Private Sub InvalidCases(s1 As String, s2 As String, Optional methodParamUri As String = "file://blah.txt") ' Noncompliant
             Dim fileLiteral = "file://blah.txt" ' Noncompliant {{Refactor your code not to use hardcoded absolute paths or URIs.}}
 '                             ^^^^^^^^^^^^^^^^^
             Dim webUri1 = "http://www.mywebsite.com" ' Noncompliant
@@ -35,7 +35,7 @@ Namespace Tests.Diagnostics
             File.OpenRead("/etc/foo.csv") ' FN
         End Sub
 
-        Private Sub ValidCases(s As String)
+        Private Sub ValidCases(s As String, Optional methodParam As String = "file://blah.txt")
             Dim windowsPathStartingWithVariable = "%AppData%\Adobe"
             Dim windowsPathWithVariable = "%appdata%"
 
@@ -48,6 +48,17 @@ Namespace Tests.Diagnostics
             Dim driveLetterPath = "C:"
 
             Dim concat1 = Convert.ToString(s & Convert.ToString("\")) & s
+        End Sub
+    End Class
+
+    ' https://github.com/SonarSource/sonar-dotnet/issues/8169
+    Friend Class Repro_8169
+        Private Sub Method()
+            Dim uris1 = ("C:/test.txt", "C:/test.txt")               ' FN
+            Dim a = ("C:/test.txt", "C:/test.txt")                   ' FN, first
+            Dim a1 = ("C:/test.txt", "C:/test.txt")                  ' FN, first and second
+            Dim uris = ("C:/test.txt", "C:/test.txt")                ' FN, first and second
+            Dim a2 = ("C:/test.txt", ("C:/test.txt", "C:/test.txt")) ' FN, second
         End Sub
     End Class
 End Namespace
