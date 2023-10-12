@@ -44,9 +44,13 @@ public class ArrayPassedAsParamsTest
     [TestMethod]
     public void ArrayPassedAsParams_CSharp12() =>
         builderCS.AddSnippet("""
-            MyClass s = new(1, [1, 2, 3]); // FN
+            MyClass s0 = new(1, [1, 2, 3]);     // Noncompliant
+            MyClass s1 = new(1, []);            // Noncompliant
+            MyClass2 s2 = new([1], [1, 2, 3]); // Noncompliant
+            MyClass2 s3 = new([1, 2, 3], 1);
 
             public class MyClass(int a, params int[] args) { }
+            public class MyClass2(int[] a, params int[] args) { }
             """)
             .WithOptions(ParseOptionsHelper.FromCSharp12)
             .WithTopLevelStatements()

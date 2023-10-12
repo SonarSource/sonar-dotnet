@@ -104,7 +104,6 @@ public class Repro6893
 {
     public void Method(int a, params object[] argumentArray) { }
     
-
     public void CallMethod()
     {
         Method(a: 1, argumentArray: new int[] { 1, 2 }); // Noncompliant FP
