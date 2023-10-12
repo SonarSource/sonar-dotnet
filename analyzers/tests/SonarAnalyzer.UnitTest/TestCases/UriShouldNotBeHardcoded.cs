@@ -42,8 +42,6 @@ namespace Tests.Diagnostics
             new Uri(new Uri("../stuff"), ("C:/test.txt")); // Noncompliant
             File.OpenRead(@"\\drive\foo.csv"); // Noncompliant
 
-            (string, string) a = ("C:/test.txt", "C:/test.txt");
-
             // We don't support non-English variable names. This is happening due to the way the rule checks against
             // a small set of predefined words that do not include translations.
             var unixChemin = "/my/other/folder"; // Compliant - we ignore unix paths by default
@@ -107,5 +105,19 @@ class ReproFN_7815
         {
             FilePath = "c:\\blah\\blah\\blah.txt" // FN
         };
+    }
+}
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8169
+class Repro_8169
+{
+    void Method()
+    {
+        (string, string) uris1 = ("C:/test.txt", "C:/test.txt");       // FN
+        (string uri, string) a = ("C:/test.txt", "C:/test.txt");       // FN, first
+        (string uri, string uri2) a1 = ("C:/test.txt", "C:/test.txt"); // FN, first and second
+        (string uri, string uri2) = ("C:/test.txt", "C:/test.txt");    // FN, first and second
+        (string uri, string) uris = ("C:/test.txt", "C:/test.txt");    // FN, first and second
+        (string b, (string uri, string c)) a2 = ("C:/test.txt", ("C:/test.txt", "C:/test.txt")); // FN, second
     }
 }

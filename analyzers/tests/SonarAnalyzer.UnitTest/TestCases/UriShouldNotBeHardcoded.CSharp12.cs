@@ -31,6 +31,7 @@ record struct PrimaryConstructorRecordStruct(string ctorParamUri = "file://blah.
 {
 }
 
+// https://github.com/SonarSource/sonar-dotnet/pull/8146
 class Repro_8146
 {
     void Method()

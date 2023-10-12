@@ -53,6 +53,7 @@ namespace SonarAnalyzer.Rules
             };
 
         protected override string MessageFormat => "{0}";
+
         protected UriShouldNotBeHardcodedBase() : base(DiagnosticId) { }
     }
 
