@@ -28,9 +28,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override SyntaxKind[] StringConcatenateExpressions => new[] { SyntaxKind.AddExpression, SyntaxKind.ConcatenateExpression };
         protected override SyntaxKind[] InvocationOrObjectCreationKind => new[] { SyntaxKind.InvocationExpression, SyntaxKind.ObjectCreationExpression };
 
-        protected override string GetLiteralText(LiteralExpressionSyntax literalExpression) =>
-            literalExpression?.Token.ValueText;
-
         protected override SyntaxNode GetRelevantAncestor(SyntaxNode node) =>
             (SyntaxNode)node.FirstAncestorOrSelf<ParameterSyntax>() ?? node.FirstAncestorOrSelf<VariableDeclaratorSyntax>();
     }

@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Xml.Linq;
+
 namespace SonarAnalyzer.Helpers.Facade;
 
 internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
@@ -139,6 +141,9 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
 
     public override string StringValue(SyntaxNode node, SemanticModel semanticModel) =>
         VisualBasicSyntaxHelper.StringValue(node, semanticModel);
+
+    public override string LiteralText(SyntaxNode literal) =>
+        Cast<LiteralExpressionSyntax>(literal)?.Token.ValueText;
 
     public override bool TryGetInterpolatedTextValue(SyntaxNode node, SemanticModel semanticModel, out string interpolatedValue) =>
         Cast<InterpolatedStringExpressionSyntax>(node).TryGetInterpolatedTextValue(semanticModel, out interpolatedValue);

@@ -66,8 +66,6 @@ namespace SonarAnalyzer.Rules
         protected abstract TSyntaxKind[] StringConcatenateExpressions { get; }
         protected abstract TSyntaxKind[] InvocationOrObjectCreationKind { get; }
 
-        protected abstract string GetLiteralText(TLiteralExpressionSyntax literalExpression);
-
         protected abstract SyntaxNode GetRelevantAncestor(SyntaxNode node);
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -76,10 +74,9 @@ namespace SonarAnalyzer.Rules
                 GeneratedCodeRecognizer,
                 c =>
                 {
-                    var stringLiteral = (TLiteralExpressionSyntax)c.Node;
-                    if (UriRegex.IsMatch(GetLiteralText(stringLiteral)) && IsInCheckedContext(stringLiteral, c.SemanticModel))
+                    if (UriRegex.IsMatch(Language.Syntax.LiteralText(c.Node)) && IsInCheckedContext(c.Node, c.SemanticModel))
                     {
-                        c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], stringLiteral.GetLocation(), AbsoluteUriMessage));
+                        c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], c.Node.GetLocation(), AbsoluteUriMessage));
                     }
                 },
                 Language.SyntaxKind.StringLiteralExpressions);
@@ -130,6 +127,6 @@ namespace SonarAnalyzer.Rules
         }
 
         private bool IsPathDelimiter(SyntaxNode expression) =>
-            GetLiteralText(expression as TLiteralExpressionSyntax) is { } text && PathDelimiterRegex.IsMatch(text);
+            expression is TLiteralExpressionSyntax && PathDelimiterRegex.IsMatch(Language.Syntax.LiteralText(expression));
     }
 }

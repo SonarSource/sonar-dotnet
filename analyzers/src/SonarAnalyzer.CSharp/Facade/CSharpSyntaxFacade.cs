@@ -138,6 +138,9 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
     public override string StringValue(SyntaxNode node, SemanticModel semanticModel) =>
         CSharpSyntaxHelper.StringValue(node, semanticModel);
 
+    public override string LiteralText(SyntaxNode literal) =>
+        Cast<LiteralExpressionSyntax>(literal)?.Token.ValueText;
+
     public override bool TryGetInterpolatedTextValue(SyntaxNode node, SemanticModel semanticModel, out string interpolatedValue) =>
         Cast<InterpolatedStringExpressionSyntax>(node).TryGetInterpolatedTextValue(semanticModel, out interpolatedValue);
 
