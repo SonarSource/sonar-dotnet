@@ -57,6 +57,10 @@ function Get-MSBuildImportBeforePath([ValidateSet("14.0", "15.0", "16.0", "17.0"
     return "$env:USERPROFILE\AppData\Local\Microsoft\MSBuild\${msbuildVersion}\Microsoft.Common.targets\ImportBefore"
 }
 
+function Get-MSBuildImportBeforePath-SystemX64([ValidateSet("14.0", "15.0", "16.0", "17.0", "Current")][string]$msbuildVersion) {
+    return "C:\Windows\SysWOW64\config\systemprofile\AppData\Local\Microsoft\MSBuild\${msbuildVersion}\Microsoft.Common.targets\ImportBefore"
+}
+
 # NuGet
 function New-NuGetPackages([string]$binPath) {
     Write-Header "Building NuGet packages"
