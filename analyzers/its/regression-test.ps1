@@ -532,7 +532,7 @@ finally {
 
     if ($env:UserProfile -match 'systemprofile$')
     {
-        foreach ($msBuildVersion in $("14.0", "15.0", "16.0", "Current")) {
+        foreach ($msBuildVersion in $msBuildVersions) {
             $msBuildImportBefore = Get-MSBuildImportBeforePath-SystemX64 $msBuildVersion
             if (Test-Path $msBuildImportBefore -PathType Leaf) {
                 Write-Output "Removing the import before target file from '${msBuildImportBefore}'"
