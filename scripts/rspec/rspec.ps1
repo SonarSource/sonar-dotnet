@@ -32,6 +32,15 @@ param (
 Set-StrictMode -version 1.0
 $ErrorActionPreference = "Stop"
 $RuleTemplateFolder = "${PSScriptRoot}\\rspec-templates"
+# Based on RuleApiCache.computeDefaultCachePath
+# https://github.com/SonarSource/sonar-rule-api/blob/2323b7313c76e7adc2b7df037e96510b90660292/src/main/java/com/sonarsource/ruleapi/utilities/RuleApiCache.java#L20-L25
+$RspecRepositoryPath = "${Env:USERPROFILE}\\.sonar\\rule-api\\rspec"
+if (! [string]::IsNullOrEmpty($Env:SONAR_USER_HOME))
+{
+    $RspecRepositoryPath = "${Env:SONAR_USER_HOME}\\rule-api\\rspec"
+}
+
+. ${PSScriptRoot}\CopyTestCasesFromRspec.ps1
 
 $RuleApiError = "Could not find the Rule API Jar locally. Please download the latest rule-api from " + `
     "'https://repox.jfrog.io/repox/sonarsource-private-releases/com/sonarsource/rule-api/rule-api/' " +`
@@ -224,6 +233,7 @@ if ($ClassName -And $RuleKey) {
     elseif ($Language -eq "vbnet") {
        GenerateRuleClassesVB
     }
+    CopyTestCasesFromRspec $ClassName "${RspecRepositoryPath}\\rules\\${RuleKey}\\csharp" $TestCasesFolder
     UpdateRuleTypeMapping
     GenerateBaseClassIfSecondLanguage
 }
