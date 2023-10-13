@@ -3112,7 +3112,7 @@
                 <Field Name="UnsafeKeyword" Type="SyntaxToken" Optional="true">
                     <Kind Name="UnsafeKeyword"/>
                 </Field>
-            <Field Name="Alias" Type="NameEqualsSyntax"/>
+                <Field Name="Alias" Type="NameEqualsSyntax"/>
             </Sequence>
         </Choice>
         <Field Name="NamespaceOrType" Type="TypeSyntax"/>

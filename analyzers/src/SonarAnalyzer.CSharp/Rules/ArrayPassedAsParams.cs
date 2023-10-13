@@ -53,7 +53,11 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, Ar
             : null;
 
     private static bool IsArrayCreation(ExpressionSyntax expression) =>
-        expression
-            is ArrayCreationExpressionSyntax { Initializer: not null }
-            or ImplicitArrayCreationExpressionSyntax;
+        expression switch
+        {
+            ArrayCreationExpressionSyntax { Initializer: not null } => true,
+            ImplicitArrayCreationExpressionSyntax => true,
+            _ when CollectionExpressionSyntaxWrapper.IsInstance(expression) => true,
+            _ => false
+        };
 }
