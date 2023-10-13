@@ -19,6 +19,7 @@ param
 
 Set-StrictMode -version 2.0
 $ErrorActionPreference = "Stop"
+$msBuildVersions = @("14.0", "15.0", "16.0", "Current")
 
 . .\create-issue-reports.ps1
 
@@ -429,11 +430,6 @@ function CheckInternalProjectsDifferences(){
 try {
     $scriptTimer = [system.diagnostics.stopwatch]::StartNew()
     . (Join-Path $PSScriptRoot "..\..\scripts\build\build-utils.ps1")
-    $msBuildImportBefore14 = Get-MSBuildImportBeforePath "14.0"
-    $msBuildImportBefore15 = Get-MSBuildImportBeforePath "15.0"
-    $msBuildImportBefore16 = Get-MSBuildImportBeforePath "16.0"
-    $msBuildImportBeforeCurrent = Get-MSBuildImportBeforePath "Current"
-
     Push-Location $PSScriptRoot
     Test-FileExists "..\packaging\binaries\SonarAnalyzer.dll"
     Test-FileExists "..\packaging\binaries\SonarAnalyzer.CFG.dll"
@@ -442,14 +438,11 @@ try {
     Initialize-ActualFolder
     Initialize-OutputFolder
 
-    Write-Output "Installing the import before target file at '${msBuildImportBefore14}'"
-    Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination (New-Item $msBuildImportBefore14 -Type container -Force) -Force -Recurse
-    Write-Output "Installing the import before target file at '${msBuildImportBefore15}'"
-    Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination (New-Item $msBuildImportBefore15 -Type container -Force) -Force -Recurse
-    Write-Output "Installing the import before target file at '${msBuildImportBefore16}'"
-    Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination (New-Item $msBuildImportBefore16 -Type container -Force) -Force -Recurse
-    Write-Output "Installing the import before target file at '${msBuildImportBeforeCurrent}'"
-    Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination (New-Item $msBuildImportBeforeCurrent -Type container -Force) -Force -Recurse
+    foreach ($msBuildVersion in $msBuildVersions) {
+        $msBuildImportBefore = Get-MSBuildImportBeforePath $msBuildVersion
+        Write-Output "Installing the import before target file at '${msBuildImportBefore}'"
+        Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination (New-Item $msBuildImportBefore -Type container -Force) -Force -Recurse
+    }
 
     Write-Output "User profile is '$env:UserProfile'"
 
@@ -459,19 +452,11 @@ try {
     # On CI, the script is run under the "system32" user so, do to the behavior explained in the linked wiki, the files need to be placed in both "system32" and "SysWOW64".
     if ($env:UserProfile -match 'systemprofile$')
     {
-        $msBuildImportBefore14 = Get-MSBuildImportBeforePath-SystemX64 "14.0"
-        $msBuildImportBefore15 = Get-MSBuildImportBeforePath-SystemX64 "15.0"
-        $msBuildImportBefore16 = Get-MSBuildImportBeforePath-SystemX64 "16.0"
-        $msBuildImportBeforeCurrent = Get-MSBuildImportBeforePath-SystemX64 "Current"
-
-        Write-Output "Installing the import before target file at '${msBuildImportBefore14}'"
-        Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination (New-Item $msBuildImportBefore14 -Type container -Force) -Force -Recurse
-        Write-Output "Installing the import before target file at '${msBuildImportBefore15}'"
-        Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination (New-Item $msBuildImportBefore15 -Type container -Force) -Force -Recurse
-        Write-Output "Installing the import before target file at '${msBuildImportBefore16}'"
-        Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination (New-Item $msBuildImportBefore16 -Type container -Force) -Force -Recurse
-        Write-Output "Installing the import before target file at '${msBuildImportBeforeCurrent}'"
-        Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination (New-Item $msBuildImportBeforeCurrent -Type container -Force) -Force -Recurse
+        foreach ($msBuildVersion in $msBuildVersions) {
+            $msBuildImportBefore = Get-MSBuildImportBeforePath-SystemX64 $msBuildVersion
+            Write-Output "Installing the import before target file at '${msBuildImportBefore}'"
+            Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination (New-Item $msBuildImportBefore -Type container -Force) -Force -Recurse
+        }
     }
 
     # Note: Automapper has multiple configurations that are built simultaneously and sometimes
@@ -538,17 +523,23 @@ catch {
 }
 finally {
     Pop-Location
-    Write-Debug "Removing the import before target file from '${msBuildImportBefore14}'"
-    Remove-Item -ErrorAction Ignore -Force (Join-Path $msBuildImportBefore14 "\SonarAnalyzer.Testing.ImportBefore.targets") `
 
-    Write-Debug "Removing the import before target file from '${msBuildImportBefore15}'"
-    Remove-Item -ErrorAction Ignore -Force (Join-Path $msBuildImportBefore15 "\SonarAnalyzer.Testing.ImportBefore.targets") `
+    foreach ($msBuildVersion in $msBuildVersions) {
+        $msBuildImportBefore = Get-MSBuildImportBeforePath $msBuildVersion
+        Write-Output "Removing the import before target file from '${msBuildImportBefore}'"
+        Remove-Item -ErrorAction Ignore -Force (Join-Path $msBuildVersion "\SonarAnalyzer.Testing.ImportBefore.targets") `
+    }
 
-    Write-Debug "Removing the import before target file from '${msBuildImportBefore16}'"
-    Remove-Item -ErrorAction Ignore -Force (Join-Path $msBuildImportBefore16 "\SonarAnalyzer.Testing.ImportBefore.targets") `
-
-    Write-Debug "Removing the import before target file from '${msBuildImportBeforeCurrent}'"
-    Remove-Item -ErrorAction Ignore -Force (Join-Path $msBuildImportBeforeCurrent "\SonarAnalyzer.Testing.ImportBefore.targets") `
+    if ($env:UserProfile -match 'systemprofile$')
+    {
+        foreach ($msBuildVersion in $("14.0", "15.0", "16.0", "Current")) {
+            $msBuildImportBefore = Get-MSBuildImportBeforePath-SystemX64 $msBuildVersion
+            if (Test-Path $msBuildImportBefore -PathType Leaf) {
+                Write-Output "Removing the import before target file from '${msBuildImportBefore}'"
+                Remove-Item -ErrorAction Ignore -Force .\SonarAnalyzer.Testing.ImportBefore.targets -Destination (Join-Path $msBuildImportBefore "\SonarAnalyzer.Testing.ImportBefore.targets")
+            }
+        }
+    }
 
     Remove-Item -ErrorAction Ignore -Force global.json
 
