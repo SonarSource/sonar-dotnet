@@ -48,6 +48,16 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxFactory.IdentifierName("PetaPoco")
         };
 
+        // The '@' symbol is used for named parameters.
+        // The '{' and '}' symbols are used in string interpolations.
+        // The '[' and ']' symbols are used to escape keywords, reserved words or special characters in SQL queries.
+        //
+        // We ignore other non-alphanumeric characters (e.g. '>','=') to avoid false positives.
+        private static readonly ISet<char> InvalidCharacters = new HashSet<char>()
+        {
+            '@', '{', '}', '[', ']'
+        };
+
         // We are interested in SQL keywords that start a query (so without "FROM", for example)
         private static readonly IList<string> SqlStartQueryKeywords = new List<string>()
         {
@@ -154,9 +164,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     var secondString = stringWrappers[i + 1];
                     var secondStringText = secondString.Text;
                     if (firstStringText.Length > 0
-                        && IsAlphaNumericOrAt(firstStringText.Last())
                         && secondStringText.Length > 0
-                        && IsAlphaNumericOrAt(secondStringText.First()))
+                        && IsInvalidCombination(firstStringText.Last(), secondStringText.First()))
                     {
                         var word = secondStringText.Split(' ').FirstOrDefault();
                         context.ReportIssue(Diagnostic.Create(Rule, secondString.Node.GetLocation(), word));
@@ -237,12 +246,19 @@ namespace SonarAnalyzer.Rules.CSharp
                 firstString.Length >= SqlKeywordMinSize
                 && SqlStartQueryKeywords.Any(x => firstString.StartsWith(x, StringComparison.OrdinalIgnoreCase));
 
-            /**
-             * The '@' symbol is used for named parameters. The '{' and '}' symbols are used in string interpolations.
-             * We ignore other non-alphanumeric characters (e.g. '>','=') to avoid false positives.
-             */
-            private static bool IsAlphaNumericOrAt(char c) =>
-                char.IsLetterOrDigit(c) || c == '@' || c == '{' || c == '}';
+            private bool IsInvalidCombination(char first, char second)
+            {
+                // Concatenation of a named parameter with or without string interpolation.
+                if (first == '@' && (char.IsLetterOrDigit(second) || second == '{'))
+                {
+                    return false;
+                }
+
+                return IsAlphaNumericOrInvalidCharacters(first) && IsAlphaNumericOrInvalidCharacters(second);
+
+                bool IsAlphaNumericOrInvalidCharacters(char c) =>
+                    char.IsLetterOrDigit(c) || InvalidCharacters.Contains(c);
+            }
         }
 
         private sealed class StringWrapper
