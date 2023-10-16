@@ -428,6 +428,8 @@ stages:
           jdkVersionOption: '1.17'
           mavenOptions: $(MAVEN_OPTS)
 
+      - bash: exit 1
+
     - job: runJavaUnitTests
       displayName: 'Java UTs'
       dependsOn: runJavaBuild
