@@ -56,35 +56,25 @@ public sealed class CalculationsShouldNotOverflow : CalculationsShouldNotOverflo
 
         public override void VisitBinaryExpression(BinaryExpressionSyntax node)
         {
-            HasOverflow |= node.Kind() is
-                SyntaxKind.AddExpression or
-                SyntaxKind.MultiplyExpression or
-                SyntaxKind.SubtractExpression;
+            HasOverflow |= node.Kind() is SyntaxKind.AddExpression or SyntaxKind.MultiplyExpression or SyntaxKind.SubtractExpression;
             base.VisitBinaryExpression(node);
         }
 
         public override void VisitAssignmentExpression(AssignmentExpressionSyntax node)
         {
-            HasOverflow |= node.Kind() is
-                SyntaxKind.AddAssignmentExpression or
-                SyntaxKind.MultiplyAssignmentExpression or
-                SyntaxKind.SubtractAssignmentExpression;
+            HasOverflow |= node.Kind() is SyntaxKind.AddAssignmentExpression or SyntaxKind.MultiplyAssignmentExpression or SyntaxKind.SubtractAssignmentExpression;
             base.VisitAssignmentExpression(node);
         }
 
         public override void VisitPostfixUnaryExpression(PostfixUnaryExpressionSyntax node)
         {
-            HasOverflow |= node.Kind() is
-                SyntaxKind.PostDecrementExpression or
-                SyntaxKind.PostIncrementExpression;
+            HasOverflow |= node.Kind() is SyntaxKind.PostDecrementExpression or SyntaxKind.PostIncrementExpression;
             base.VisitPostfixUnaryExpression(node);
         }
 
         public override void VisitPrefixUnaryExpression(PrefixUnaryExpressionSyntax node)
         {
-            HasOverflow |= node.Kind() is
-                SyntaxKind.PreDecrementExpression or
-                SyntaxKind.PreIncrementExpression;
+            HasOverflow |= node.Kind() is SyntaxKind.PreDecrementExpression or SyntaxKind.PreIncrementExpression;
             base.VisitPrefixUnaryExpression(node);
         }
 
