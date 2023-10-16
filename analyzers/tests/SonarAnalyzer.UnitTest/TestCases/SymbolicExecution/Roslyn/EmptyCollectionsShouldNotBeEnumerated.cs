@@ -858,7 +858,7 @@ class Flows
     {
         var list = GetList();
         if (list.Count == 0)
-            list.Clear();       // FN
+            list.Clear();       // Noncompliant
         else
             list.Clear();       // Compliant
 
@@ -869,10 +869,22 @@ class Flows
             list.Clear();       // Compliant
 
         list = GetList();
+        if (list.Count == 5)
+            list.Clear();       // Compliant
+        else
+            list.Clear();       // Compliant
+
+        list = GetList();
+        if (list.Count() == 5)
+            list.Clear();       // Compliant
+        else
+            list.Clear();       // Compliant
+
+        list = GetList();
         if (list.Count != 0)
             list.Clear();       // Compliant
         else
-            list.Clear();       // FN
+            list.Clear();       // Noncompliant
 
         list = GetList();
         if (list.Count() != 0)
@@ -884,7 +896,7 @@ class Flows
         if (list.Count > 0)
             list.Clear();       // Compliant
         else
-            list.Clear();       // FN
+            list.Clear();       // Noncompliant
 
         list = GetList();
         if (list.Count() > 0)
@@ -903,11 +915,18 @@ class Flows
             list.Clear();       // Compliant
         else
             list.Clear();       // Compliant
+
+        var array = GetArray();
+        if (array.Length == 0)
+            array.Clone();      // Noncompliant
+        else
+            array.Clone();      // Compliant
     }
 
     private static void DoSomething(Action<int> callback) { }
     private static void DoSomething(Action callback) { }
     private List<int> GetList() => null;
+    private int[] GetArray() => null;
 }
 
 

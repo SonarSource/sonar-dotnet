@@ -341,7 +341,7 @@ Public Class Flows
 
     Public Sub CountZero(List As List(Of Integer))
         If List.Count = 0 Then
-            List.Clear()        ' FN
+            List.Clear()        ' Noncompliant
         Else
             List.Clear()        ' Compliant
         End If
@@ -359,7 +359,7 @@ Public Class Flows
         If List.Count <> 0 Then
             List.Clear()        ' Compliant
         Else
-            List.Clear()        ' FN
+            List.Clear()        ' Noncompliant
         End If
     End Sub
 
@@ -367,7 +367,7 @@ Public Class Flows
         If List.Count > 0 Then
             List.Clear()        ' Compliant
         Else
-            List.Clear()        ' FN
+            List.Clear()        ' Noncompliant
         End If
     End Sub
 

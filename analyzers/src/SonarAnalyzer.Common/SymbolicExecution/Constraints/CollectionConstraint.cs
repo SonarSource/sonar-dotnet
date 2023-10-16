@@ -26,7 +26,9 @@ internal sealed class CollectionConstraint : SymbolicConstraint
     public static readonly CollectionConstraint NotEmpty = new(ConstraintKind.CollectionNotEmpty);
 
     public override SymbolicConstraint Opposite =>
-        this == Empty ? NotEmpty : Empty;
+        // x.Count == 0 ? Empty : NotEmpty
+        // x.Count == 5 ? NotEmpty : <unknown, could be Empty or NotEmpty here>
+        this == Empty ? NotEmpty : null;
 
     private CollectionConstraint(ConstraintKind kind) : base(kind) { }
 }
