@@ -402,7 +402,10 @@ stages:
         inputs:
           secureFile: 'sign-key.asc'
 
-      - bash: choco upgrade maven --version 3.9.3 -y
+      - bash: |
+          curl -O https://dlcdn.apache.org/maven/maven-3/3.9.4/binaries/apache-maven-3.9.4-bin.zip
+          tar -xf apache-maven-3.9.4-bin.zip
+          ls -la
 
       - template: update-maven-version-steps.yml
         parameters:
@@ -427,6 +430,8 @@ stages:
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: '1.17'
           mavenOptions: $(MAVEN_OPTS)
+          mavenVersionOption: 'Path'
+          mavenDirectory: '$(Agent.BuildDirectory)/apache-maven-3.9.4'
 
       - bash: exit 1
 
