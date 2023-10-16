@@ -76,4 +76,25 @@ public class CollectionConstraintTests
             }
             """)
             .Verify();
+
+    [TestMethod]
+    public void CollectionConstraint_ShouldNotLearnConstraintForNonCollectionProperties() =>
+    builder.AddSnippet($$$"""
+            ﻿using System.Collections.Generic;
+
+            class Tests
+            {
+                int Length { get; }
+
+                void Test(List<string> foo)
+                {
+                    bool result = foo.Contains("foo"); // This is needed to trigger S4158
+
+                    // This FP is triggered due to S4158, when it checks for the Length property.
+                    if (this.Length < 0) // Noncompliant {{Change this condition so that it does not always evaluate to 'False'.}} FP
+                    { }
+                }
+            }
+            """)
+        .Verify();
 }
