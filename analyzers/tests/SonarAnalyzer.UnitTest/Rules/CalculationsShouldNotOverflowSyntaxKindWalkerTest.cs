@@ -55,10 +55,10 @@ public class CalculationsShouldNotOverflowSyntaxKindWalkerTest
         """)]
     public void HasOverflowExpressions_True(string statement)
     {
-        var (tree, _) = TestHelper.CompileCS(WrapInMethod($$"""
+        var tree = TestHelper.CompileCS(WrapInMethod($"""
             var i = 0;
-            {{statement}}
-            """));
+            {statement}
+            """)).Tree;
         var sut = new CalculationsShouldNotOverflow.SyntaxKindWalker();
         sut.SafeVisit(tree.GetRoot());
         sut.Should().BeEquivalentTo(new
@@ -92,11 +92,10 @@ public class CalculationsShouldNotOverflowSyntaxKindWalkerTest
     [DataRow("i %= 1;")]
     public void HasOverflowExpressions_False(string statement)
     {
-        var (tree, _) = TestHelper.CompileCS(WrapInMethod($$"""
-            var i = 0;
-            var b = true;
-            {{statement}}
-            """));
+        var tree = TestHelper.CompileCS(WrapInMethod($"""
+            var i = 0; var b = true;
+            {statement}
+            """)).Tree;
         var sut = new CalculationsShouldNotOverflow.SyntaxKindWalker();
         sut.SafeVisit(tree.GetRoot());
         sut.Should().BeEquivalentTo(new
@@ -116,10 +115,10 @@ public class CalculationsShouldNotOverflowSyntaxKindWalkerTest
     [DataRow("_ = unchecked(i + i);")]
     public void HasOverflowExpressions_IsUnchecked_True(string statement)
     {
-        var (tree, _) = TestHelper.CompileCS(WrapInMethod($$"""
+        var tree = TestHelper.CompileCS(WrapInMethod($"""
             var i = 0;
-            {{statement}}
-            """));
+            {statement}
+            """)).Tree;
         var sut = new CalculationsShouldNotOverflow.SyntaxKindWalker();
         sut.SafeVisit(tree.GetRoot());
         sut.Should().BeEquivalentTo(new
@@ -198,10 +197,10 @@ public class CalculationsShouldNotOverflowSyntaxKindWalkerTest
         """, false, true)]
     public void HasOverflowExpressions_Unchecked_Nesting(string statement, bool expectedHasOverflow, bool expectedIsUnchecked)
     {
-        var (tree, _) = TestHelper.CompileCS(WrapInMethod($$"""
+        var tree = TestHelper.CompileCS(WrapInMethod($"""
             var i = 0;
-            {{statement}}
-            """));
+            {statement}
+            """)).Tree;
         var sut = new CalculationsShouldNotOverflow.SyntaxKindWalker();
         sut.SafeVisit(tree.GetRoot());
         sut.Should().BeEquivalentTo(new
@@ -229,11 +228,10 @@ public class CalculationsShouldNotOverflowSyntaxKindWalkerTest
     [DataRow("""_ = s + s + "";""", true)]   // Fix: should be false as one of the operands is a string literal
     public void HasOverflowExpressions_Literals(string statement, bool expected)
     {
-        var (tree, _) = TestHelper.CompileCS(WrapInMethod($$"""
-            var i = 0;
-            var s = "";
-            {{statement}}
-            """));
+        var tree = TestHelper.CompileCS(WrapInMethod($"""
+            var i = 0; var s = "";
+            {statement}
+            """)).Tree;
         var sut = new CalculationsShouldNotOverflow.SyntaxKindWalker();
         sut.SafeVisit(tree.GetRoot());
         sut.Should().BeEquivalentTo(new
