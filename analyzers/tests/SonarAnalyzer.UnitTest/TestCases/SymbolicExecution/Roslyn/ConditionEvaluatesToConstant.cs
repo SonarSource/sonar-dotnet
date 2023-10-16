@@ -336,6 +336,18 @@ namespace Tests.Diagnostics
             }
         }
 
+        const int Limit = 10;
+
+        public void FixedCountLoopWithConstLimit()
+        {
+            if (Limit == 10)            // Noncompliant
+                Console.WriteLine();
+            for (var i = 0; i < Limit; i++)
+                Console.WriteLine();
+            if (Limit == 10)            // Noncompliant
+                Console.WriteLine();
+        }
+
         public void Method_Switch()
         {
             int i = 10;
@@ -3254,9 +3266,7 @@ public class Repro_8080
     {
         for (int i = 0; i < Limit; i++)
         {
-            var test = i > 2 ? 0 : 42;
-            //         ^^^^^              Noncompliant
-            //                 ^          Secondary@-1
+            var test = i > 2 ? 0 : 42;  // Compliant
         }
     }
 }

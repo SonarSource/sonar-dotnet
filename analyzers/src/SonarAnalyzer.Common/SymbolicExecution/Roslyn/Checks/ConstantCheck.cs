@@ -24,11 +24,20 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.Checks;
 
 internal class ConstantCheck : SymbolicCheck
 {
-    protected override ProgramState PreProcessSimple(SymbolicContext context) =>
-        context.Operation.Instance.ConstantValue.HasValue
-        && ConstraintFromConstantValue(context.Operation) is { } value
-            ? context.SetOperationValue(value)
-            : context.State;
+    protected override ProgramState PreProcessSimple(SymbolicContext context)
+    {
+        var state = context.State;
+        var operation = context.Operation.Instance;
+        if (operation.ConstantValue.HasValue && ConstraintFromConstantValue(context.Operation) is { } value)
+        {
+            state = context.SetOperationValue(value);
+            if (operation.TrackedSymbol(state) is { } symbol && state[symbol] is null)
+            {
+                state = state.SetSymbolValue(symbol, value);
+            }
+        }
+        return state;
+    }
 
     public static SymbolicConstraint ConstraintFromType(ITypeSymbol type)
     {
