@@ -12,21 +12,20 @@ namespace StyleCop.Analyzers.Lightup
 
         static TypeDeclarationExtensions()
         {
+            // TypeDeclarationSyntax.ParameterList was introduced in Roslyn 4.6 (C#12)
             ParameterListAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<TypeDeclarationSyntax, ParameterListSyntax>(typeof(TypeDeclarationSyntax), nameof(ParameterList));
-            var recordDeclaration = typeof(ClassDeclarationSyntax).Assembly.GetType("Microsoft.CodeAnalysis.CSharp.Syntax.RecordDeclarationSyntax", throwOnError: false);
-            if (recordDeclaration is not null)
+            // In earlier versions, the ParameterList was only available on the derived RecordDeclarationSyntax (starting from version 3.7)
+            // To work with version 3.7 to version 4.6 we need to special case the record declaration and access
+            // the parameter list from the derived RecordDeclarationSyntax.
+            if (SyntaxWrapperHelper.GetWrappedType(typeof(RecordDeclarationSyntaxWrapper)) is { } recordDeclaration)
             {
                 RecordDeclarationParameterListAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<TypeDeclarationSyntax, ParameterListSyntax>(recordDeclaration, nameof(ParameterList));
             }
         }
 
-        public static ParameterListSyntax ParameterList(this TypeDeclarationSyntax syntax)
-        {
-            if (syntax.Kind() is SyntaxKindEx.RecordClassDeclaration or SyntaxKindEx.RecordStructDeclaration)
-            {
-                return RecordDeclarationParameterListAccessor(syntax);
-            }
-            return ParameterListAccessor(syntax);
-        }
+        public static ParameterListSyntax ParameterList(this TypeDeclarationSyntax syntax) =>
+            syntax.Kind() is SyntaxKindEx.RecordClassDeclaration or SyntaxKindEx.RecordStructDeclaration
+                ? RecordDeclarationParameterListAccessor(syntax)
+                : ParameterListAccessor(syntax);
     }
 }
