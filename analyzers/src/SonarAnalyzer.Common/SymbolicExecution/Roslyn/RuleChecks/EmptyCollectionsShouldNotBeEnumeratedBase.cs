@@ -264,7 +264,7 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
                 return NumberConstraint.From(1, null);
             }
         }
-        return NumberConstraint.From(0, null);
+        return instance.Type.IsAny(TrackedCollectionTypes) ? NumberConstraint.From(0, null) : null;
     }
 
     private static ProgramState ProcessIndexerAccess(ProgramState state, IPropertyReferenceOperationWrapper propertyReference)
