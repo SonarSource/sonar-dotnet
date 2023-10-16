@@ -402,6 +402,8 @@ stages:
         inputs:
           secureFile: 'sign-key.asc'
 
+      - bash: choco upgrade maven --version 3.9.3
+
       - template: update-maven-version-steps.yml
         parameters:
           mavenSettingsFilePath: $(mavenSettings.secureFilePath)
