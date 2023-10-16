@@ -10,7 +10,6 @@
   </parent>
 
   <artifactId>sonar-csharp-plugin</artifactId>
-  <packaging>sonar-plugin</packaging>
 
   <name>SonarC#</name>
   <description>Code Analyzer for C#</description>
@@ -147,18 +146,6 @@
     </resources>
 
     <plugins>
-      <plugin>
-        <groupId>org.sonarsource.sonar-packaging-maven-plugin</groupId>
-        <artifactId>sonar-packaging-maven-plugin</artifactId>
-        <configuration>
-          <pluginName>C# Code Quality and Security</pluginName>
-          <pluginClass>org.sonar.plugins.csharp.CSharpPlugin</pluginClass>
-          <skipDependenciesPackaging>true</skipDependenciesPackaging>
-          <sonarLintSupported>false</sonarLintSupported>
-          <pluginApiMinVersion>${sonar.version}</pluginApiMinVersion> <!-- runtime minimal API version -->
-          <requiredForLanguages>cs</requiredForLanguages>
-        </configuration>
-      </plugin>
       <plugin>
         <artifactId>maven-shade-plugin</artifactId>
         <executions>
