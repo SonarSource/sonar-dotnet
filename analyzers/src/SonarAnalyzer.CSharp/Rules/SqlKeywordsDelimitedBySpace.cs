@@ -246,7 +246,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 firstString.Length >= SqlKeywordMinSize
                 && SqlStartQueryKeywords.Any(x => firstString.StartsWith(x, StringComparison.OrdinalIgnoreCase));
 
-            private bool IsInvalidCombination(char first, char second)
+            private static bool IsInvalidCombination(char first, char second)
             {
                 // Concatenation of a named parameter with or without string interpolation.
                 if (first == '@' && (char.IsLetterOrDigit(second) || second == '{'))
