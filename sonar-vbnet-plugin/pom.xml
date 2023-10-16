@@ -10,7 +10,6 @@
   </parent>
 
   <artifactId>sonar-vbnet-plugin</artifactId>
-  <packaging>sonar-plugin</packaging>
 
   <name>SonarVB</name>
   <description>Code Analyzer for VB.NET</description>
@@ -147,18 +146,6 @@
     </resources>
 
     <plugins>
-      <plugin>
-        <groupId>org.sonarsource.sonar-packaging-maven-plugin</groupId>
-        <artifactId>sonar-packaging-maven-plugin</artifactId>
-        <configuration>
-          <pluginName>VB.NET Code Quality and Security</pluginName>
-          <pluginClass>org.sonar.plugins.vbnet.VbNetPlugin</pluginClass>
-          <skipDependenciesPackaging>true</skipDependenciesPackaging>
-          <sonarLintSupported>false</sonarLintSupported>
-          <pluginApiMinVersion>${sonar.version}</pluginApiMinVersion> <!-- runtime minimal API version -->
-          <requiredForLanguages>vbnet</requiredForLanguages>
-        </configuration>
-      </plugin>
       <plugin>
         <artifactId>maven-shade-plugin</artifactId>
         <executions>
