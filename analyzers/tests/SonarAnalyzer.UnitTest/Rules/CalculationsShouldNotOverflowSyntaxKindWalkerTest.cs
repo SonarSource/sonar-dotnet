@@ -61,11 +61,8 @@ public class CalculationsShouldNotOverflowSyntaxKindWalkerTest
             """)).Tree;
         var sut = new CalculationsShouldNotOverflow.SyntaxKindWalker();
         sut.SafeVisit(tree.GetRoot());
-        sut.Should().BeEquivalentTo(new
-        {
-            HasOverflow = true,
-            IsUnchecked = false,
-        });
+        sut.HasOverflow.Should().Be(true);
+        sut.IsUnchecked.Should().Be(false);
     }
 
     [DataTestMethod]
@@ -98,11 +95,8 @@ public class CalculationsShouldNotOverflowSyntaxKindWalkerTest
             """)).Tree;
         var sut = new CalculationsShouldNotOverflow.SyntaxKindWalker();
         sut.SafeVisit(tree.GetRoot());
-        sut.Should().BeEquivalentTo(new
-        {
-            HasOverflow = false,
-            IsUnchecked = false,
-        });
+        sut.HasOverflow.Should().Be(false);
+        sut.IsUnchecked.Should().Be(false);
     }
 
     [DataTestMethod]
@@ -121,11 +115,8 @@ public class CalculationsShouldNotOverflowSyntaxKindWalkerTest
             """)).Tree;
         var sut = new CalculationsShouldNotOverflow.SyntaxKindWalker();
         sut.SafeVisit(tree.GetRoot());
-        sut.Should().BeEquivalentTo(new
-        {
-            HasOverflow = false,
-            IsUnchecked = true,
-        });
+        sut.HasOverflow.Should().Be(false);
+        sut.IsUnchecked.Should().Be(true);
     }
 
     [DataTestMethod]
@@ -203,11 +194,8 @@ public class CalculationsShouldNotOverflowSyntaxKindWalkerTest
             """)).Tree;
         var sut = new CalculationsShouldNotOverflow.SyntaxKindWalker();
         sut.SafeVisit(tree.GetRoot());
-        sut.Should().BeEquivalentTo(new
-        {
-            HasOverflow = expectedHasOverflow,
-            IsUnchecked = expectedIsUnchecked,
-        });
+        sut.HasOverflow.Should().Be(expectedHasOverflow);
+        sut.IsUnchecked.Should().Be(expectedIsUnchecked);
     }
 
     [DataTestMethod]
@@ -234,11 +222,8 @@ public class CalculationsShouldNotOverflowSyntaxKindWalkerTest
             """)).Tree;
         var sut = new CalculationsShouldNotOverflow.SyntaxKindWalker();
         sut.SafeVisit(tree.GetRoot());
-        sut.Should().BeEquivalentTo(new
-        {
-            HasOverflow = expected,
-            IsUnchecked = false,
-        });
+        sut.HasOverflow.Should().Be(expected);
+        sut.IsUnchecked.Should().Be(false);
     }
 
     private static string WrapInMethod(string body) =>
