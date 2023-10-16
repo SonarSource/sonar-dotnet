@@ -33,7 +33,7 @@ function Prepare-Project([string]$ProjectName){
     $Output = ".\output\$ProjectName"
     New-Item -ItemType directory -Path $Output | out-null
 
-    Write-Output "Copying the target file to the project directory ($ProjectName)..."
+    Write-Output "Copying `Directory.Build.targets` to the project directory ($ProjectName)..."
     Copy-Item .\Directory.Build.targets -Destination $ProjectName
 
     $SourcePath = ".\config\$ProjectName\SonarLint.xml"
@@ -69,7 +69,7 @@ function Build-Project-MSBuild([string]$ProjectName, [string]$SolutionRelativePa
 
     $solutionPath = Resolve-Path ".\sources\${ProjectName}\${SolutionRelativePath}"
 
-    # The PROJECT env variable is used by 'SonarAnalyzer.Testing.ImportBefore.targets'
+    # The PROJECT env variable is used by 'Directory.Build.targets'
     Write-Debug "Setting PROJECT environment variable to '${ProjectName}'"
     $Env:PROJECT = $ProjectName
 
@@ -96,7 +96,7 @@ function Build-Project-DotnetTool([string]$ProjectName, [string]$SolutionRelativ
 
     $solutionPath = Resolve-Path ".\sources\${ProjectName}\${SolutionRelativePath}"
 
-    # The PROJECT env variable is used by 'SonarAnalyzer.Testing.ImportBefore.targets'
+    # The PROJECT env variable is used by 'Directory.Build.targets'
     Write-Debug "Setting PROJECT environment variable to '${ProjectName}'"
     $Env:PROJECT = $ProjectName
 
