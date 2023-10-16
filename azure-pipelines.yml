@@ -415,9 +415,9 @@ stages:
           GIT_SHA1: $(Build.SourceVersion)
         inputs:
           ${{ if eq(variables.isReleaseBranch, 'True') }}:
-            goals: 'package deploy -P deploy-sonarsource,release,sign'
+            goals: 'deploy -P deploy-sonarsource,release,sign'
           ${{ else }}:
-            goals: 'package deploy -P deploy-sonarsource,release'
+            goals: 'deploy -P deploy-sonarsource,release'
           options: >-
             $(commonMavenArguments)
             --settings $(mavenSettings.secureFilePath)
