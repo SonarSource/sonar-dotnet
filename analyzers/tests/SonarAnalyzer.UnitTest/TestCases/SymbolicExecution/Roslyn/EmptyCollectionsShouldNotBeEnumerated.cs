@@ -1103,7 +1103,7 @@ public class Repro_7582
 
         if (flag)
         {
-            foreach (var item in list)  // Noncompliant FP
+            foreach (var item in list)  // Compliant
             {
                 // do something with items that were <= 10
                 // only when items > 10 were found.
@@ -1130,5 +1130,47 @@ public class ReproCommunity_97192
         }
 
         myList.ForEach(i => Console.WriteLine(i)); // Compliant - Was a FP on 9.7.0.75501
+    }
+}
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8041
+static class Repro_8041
+{
+    static void Func<T>(this ICollection<T> toDo) where T : class, IFoo<T>
+    {
+        Queue<T> toDoNow = new Queue<T>();
+        HashSet<T> toDoLater = new HashSet<T>();
+
+        foreach (T item in toDo)
+        {
+            if (item.someProperty)
+            {
+                toDoNow.Enqueue(item);
+            }
+            else
+            {
+                _ = toDoLater.Add(item);
+            }
+        }
+
+        while (toDoNow.Count > 0)
+        {
+            T current = toDoNow.Dequeue();
+
+            // Handle current
+
+            foreach (T item in current.Successors)
+            {
+                _ = toDoLater.Remove(item);     // Compliant
+                toDoNow.Enqueue(item);
+            }
+        }
+    }
+
+    interface IFoo<T>
+    {
+        bool someProperty { get; }
+
+        IEnumerable<T> Successors { get; }
     }
 }
