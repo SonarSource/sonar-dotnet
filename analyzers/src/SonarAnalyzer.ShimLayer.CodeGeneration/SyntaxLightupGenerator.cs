@@ -1209,7 +1209,7 @@ namespace StyleCop.Analyzers.CodeGeneration
             {
                 for (var current = node; current is not null; current = this.TryGetNode(current.BaseName))
                 {
-                    if (current.WrapperName is null)
+                    if (current.ExistingType is not null)
                     {
                         // This is not a wrapper
                         return current;
@@ -1237,8 +1237,8 @@ namespace StyleCop.Analyzers.CodeGeneration
                 nameof(AnonymousFunctionExpressionSyntax),
                 nameof(LambdaExpressionSyntax),
                 nameof(ParenthesizedLambdaExpressionSyntax),
-                nameof(SimpleLambdaExpressionSyntax)
-                );
+                nameof(SimpleLambdaExpressionSyntax),
+                nameof(ClassDeclarationSyntax));
 
             public NodeData(in GeneratorExecutionContext context, XElement element)
             {
