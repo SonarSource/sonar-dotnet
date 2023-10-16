@@ -402,7 +402,7 @@ stages:
         inputs:
           secureFile: 'sign-key.asc'
 
-      - bash: choco upgrade maven --version 3.9.3
+      - bash: choco upgrade maven --version 3.9.3 -y
 
       - template: update-maven-version-steps.yml
         parameters:
