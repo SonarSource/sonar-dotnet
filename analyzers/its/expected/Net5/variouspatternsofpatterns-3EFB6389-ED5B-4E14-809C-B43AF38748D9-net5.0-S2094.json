@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2094",
+"message":  "Remove this empty record, write its code or make it an "interface".",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfPatterns/Program.cs#L109",
+"region":  {
+"startLine":  109,
+"startColumn":  15,
+"endLine":  109,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2094",
+"message":  "Remove this empty record, write its code or make it an "interface".",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfPatterns/Program.cs#L118",
+"region":  {
+"startLine":  118,
+"startColumn":  15,
+"endLine":  118,
+"endColumn":  22
+}
+}
+}
+]
+}
