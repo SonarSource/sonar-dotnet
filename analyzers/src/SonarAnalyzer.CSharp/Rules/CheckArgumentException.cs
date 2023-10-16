@@ -129,7 +129,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 _ => Enumerable.Empty<string>()
             };
 
-            return parameterList.Union(ParentParameterList(node));
+            return parameterList.Union(ParentParameterList(creationSyntax));
 
             static IEnumerable<string> IdentifierNames(BaseParameterListSyntax parameterList) =>
                     parameterList.Parameters.Select(x => x.Identifier.ValueText);
@@ -153,11 +153,15 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             static IEnumerable<string> ParentParameterList(SyntaxNode node) =>
-                node?.Ancestors().OfType<BaseTypeDeclarationSyntax>().FirstOrDefault() is { } baseTypeAncestor
-                && RecordDeclarationSyntaxWrapper.IsInstance(baseTypeAncestor)
-                && ((RecordDeclarationSyntaxWrapper)baseTypeAncestor).ParameterList is { } recordParameterList
-                    ? IdentifierNames(recordParameterList)
-                    : Enumerable.Empty<string>();
+                node?.Ancestors().OfType<BaseTypeDeclarationSyntax>().FirstOrDefault() switch
+                {
+                    var type when RecordDeclarationSyntaxWrapper.IsInstance(type) => GetIdentifierNames(((RecordDeclarationSyntaxWrapper)type).ParameterList),
+                    var type when ClassDeclarationSyntaxWrapper.IsInstance(type) => GetIdentifierNames(((ClassDeclarationSyntaxWrapper)type).ParameterList),
+                    _ => Enumerable.Empty<string>(),
+                };
+
+            static IEnumerable<string> GetIdentifierNames(ParameterListSyntax parameterList) =>
+                parameterList is null ? Enumerable.Empty<string>() : IdentifierNames(parameterList);
         }
 
         private static string TakeOnlyBeforeDot(Optional<object> value) =>
