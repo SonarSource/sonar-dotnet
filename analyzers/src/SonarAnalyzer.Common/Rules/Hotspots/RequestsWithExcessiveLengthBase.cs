@@ -38,9 +38,7 @@ namespace SonarAnalyzer.Rules
         private const string RequestFormLimitsAttribute = RequestFormLimits + Attribute;
         private const string MessageFormat = "Make sure the content length limit is safe here.";
         private const string Attribute = "Attribute";
-        private const int DefaultFileUploadSizeLimit = 8_000_000;
-        private const int MaxAllowedRequestLength = 8192;
-        private const int MaxAllowedContentLength = 8_388_608;
+        private const int DefaultFileUploadSizeLimit = 8_388_608;   // 8 MB (in bytes)
         private readonly IAnalyzerConfiguration analyzerConfiguration;
         private readonly DiagnosticDescriptor rule;
 
@@ -155,7 +153,7 @@ namespace SonarAnalyzer.Rules
             foreach (var httpRuntime in doc.XPathSelectElements("configuration/system.web/httpRuntime"))
             {
                 if (httpRuntime.Attribute("maxRequestLength") is { } maxRequestLength
-                    && IsVulnerable(maxRequestLength.Value, MaxAllowedRequestLength)
+                    && IsVulnerable(maxRequestLength.Value, FileUploadSizeLimit / 1024)
                     && maxRequestLength.CreateLocation(webConfigPath) is { } location)
                 {
                     c.ReportIssue(Language.GeneratedCodeRecognizer, Diagnostic.Create(rule, location));
@@ -164,7 +162,7 @@ namespace SonarAnalyzer.Rules
             foreach (var requestLimit in doc.XPathSelectElements("configuration/system.webServer/security/requestFiltering/requestLimits"))
             {
                 if (requestLimit.Attribute("maxAllowedContentLength") is { } maxAllowedContentLength
-                    && IsVulnerable(maxAllowedContentLength.Value, MaxAllowedContentLength)
+                    && IsVulnerable(maxAllowedContentLength.Value, FileUploadSizeLimit)
                     && maxAllowedContentLength.CreateLocation(webConfigPath) is { } location)
                 {
                     c.ReportIssue(Language.GeneratedCodeRecognizer, Diagnostic.Create(rule, location));
