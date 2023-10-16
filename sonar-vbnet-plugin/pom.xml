@@ -10,6 +10,7 @@
   </parent>
 
   <artifactId>sonar-vbnet-plugin</artifactId>
+  <packaging>sonar-plugin</packaging>
 
   <name>SonarVB</name>
   <description>Code Analyzer for VB.NET</description>
