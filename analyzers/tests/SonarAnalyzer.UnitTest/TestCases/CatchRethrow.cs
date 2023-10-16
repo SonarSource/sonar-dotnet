@@ -143,4 +143,23 @@ namespace Tests.TestCases
             }
         }
     }
+
+    // Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/8199
+    public class Repro8199
+    {
+        public void SomeMethod() => throw new NotSupportedException();
+        public bool LogException(Exception ex) => false;
+
+        public void CatchWithFilter()
+        {
+            try
+            {
+                SomeMethod();
+            }
+            catch (Exception ex) when (LogException(ex))  // Noncompliant - FP
+            {
+                throw;
+            }
+        }
+    }
 }

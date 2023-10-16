@@ -96,4 +96,23 @@ Namespace Tests.TestCases
             End Try
         End Sub
     End Class
+
+    ' Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/8199
+    Public Class Repro8163
+        Public Sub SomeMethod()
+            Throw New NotSupportedException()
+        End Sub
+
+        Public Function LogException(ex As Exception) As Boolean
+            Return False
+        End Function
+
+        Public Sub CatchWithFilter()
+            Try
+                SomeMethod()
+            Catch ex As Exception When LogException(ex)  ' Noncompliant - FP
+                Throw
+            End Try
+        End Sub
+    End Class
 End Namespace
