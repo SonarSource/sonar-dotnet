@@ -53,13 +53,13 @@ namespace SonarAnalyzer.Rules.CSharp
         // The '[' and ']' symbols are used to escape keywords, reserved words or special characters in SQL queries.
         //
         // We ignore other non-alphanumeric characters (e.g. '>','=') to avoid false positives.
-        private static readonly ISet<char> InvalidCharacters = new HashSet<char>()
+        private static readonly ISet<char> InvalidCharacters = new HashSet<char>
         {
             '@', '{', '}', '[', ']'
         };
 
         // We are interested in SQL keywords that start a query (so without "FROM", for example)
-        private static readonly IList<string> SqlStartQueryKeywords = new List<string>()
+        private static readonly IList<string> SqlStartQueryKeywords = new List<string>
         {
             "ALTER",
             "BULK INSERT",
