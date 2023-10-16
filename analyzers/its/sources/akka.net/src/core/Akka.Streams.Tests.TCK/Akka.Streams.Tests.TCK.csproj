@@ -2,7 +2,7 @@
 <Import Project="..\..\common.props" />
   <Import Project="..\..\xunitSettings.props" />
   <PropertyGroup>
-    <!-- We need to manually mark this project as TEST. See analyzers\its\SonarAnalyzer.Testing.ImportBefore.targets for details.-->
+    <!-- We need to manually mark this project as TEST. See analyzers\its\Directory.Build.targets for details.-->
     <SonarQubeTestProject>true</SonarQubeTestProject>
   </PropertyGroup>
   <PropertyGroup>

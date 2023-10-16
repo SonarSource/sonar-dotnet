@@ -33,6 +33,9 @@ function Prepare-Project([string]$ProjectName){
     $Output = ".\output\$ProjectName"
     New-Item -ItemType directory -Path $Output | out-null
 
+    Write-Output "Copying `Directory.Build.targets` to the project directory ($ProjectName)..."
+    Copy-Item .\Directory.Build.targets -Destination $ProjectName
+
     $SourcePath = ".\config\$ProjectName\SonarLint.xml"
     if(-Not (Test-Path $SourcePath)){
         $SourcePath = ".\config\SonarLint.xml"
@@ -66,7 +69,7 @@ function Build-Project-MSBuild([string]$ProjectName, [string]$SolutionRelativePa
 
     $solutionPath = Resolve-Path ".\sources\${ProjectName}\${SolutionRelativePath}"
 
-    # The PROJECT env variable is used by 'SonarAnalyzer.Testing.ImportBefore.targets'
+    # The PROJECT env variable is used by 'Directory.Build.targets'
     Write-Debug "Setting PROJECT environment variable to '${ProjectName}'"
     $Env:PROJECT = $ProjectName
 
@@ -93,7 +96,7 @@ function Build-Project-DotnetTool([string]$ProjectName, [string]$SolutionRelativ
 
     $solutionPath = Resolve-Path ".\sources\${ProjectName}\${SolutionRelativePath}"
 
-    # The PROJECT env variable is used by 'SonarAnalyzer.Testing.ImportBefore.targets'
+    # The PROJECT env variable is used by 'Directory.Build.targets'
     Write-Debug "Setting PROJECT environment variable to '${ProjectName}'"
     $Env:PROJECT = $ProjectName
 
@@ -438,27 +441,6 @@ try {
     Initialize-ActualFolder
     Initialize-OutputFolder
 
-    foreach ($msBuildVersion in $msBuildVersions) {
-        $msBuildImportBefore = Get-MSBuildImportBeforePath $msBuildVersion
-        Write-Output "Installing the import before target file at '${msBuildImportBefore}'"
-        Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination (New-Item $msBuildImportBefore -Type container -Force) -Force -Recurse
-    }
-
-    Write-Output "User profile is '$env:UserProfile'"
-
-    # When executing 32-bit applications, WoW64 transparently redirects access to "system32" (e.g. DLL loads) to %SystemRoot%\SysWoW64, which contains 32-bit libraries and executables.
-    # See: https://en.wikipedia.org/wiki/WoW64
-    #
-    # On CI, the script is run under the "system32" user so, do to the behavior explained in the linked wiki, the files need to be placed in both "system32" and "SysWOW64".
-    if ($env:UserProfile -match 'systemprofile$')
-    {
-        foreach ($msBuildVersion in $msBuildVersions) {
-            $msBuildImportBefore = Get-MSBuildImportBeforePath-SystemX64 $msBuildVersion
-            Write-Output "Installing the import before target file at '${msBuildImportBefore}'"
-            Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination (New-Item $msBuildImportBefore -Type container -Force) -Force -Recurse
-        }
-    }
-
     # Note: Automapper has multiple configurations that are built simultaneously and sometimes
     # it happens that a the same project is built in parallel in different configurations. The
     # protobuf-generating rules try to write their output in the same folder and fail, even
@@ -523,23 +505,6 @@ catch {
 }
 finally {
     Pop-Location
-
-    foreach ($msBuildVersion in $msBuildVersions) {
-        $msBuildImportBefore = Get-MSBuildImportBeforePath $msBuildVersion
-        Write-Output "Removing the import before target file from '${msBuildImportBefore}'"
-        Remove-Item -ErrorAction Ignore -Force (Join-Path $msBuildVersion "\SonarAnalyzer.Testing.ImportBefore.targets") `
-    }
-
-    if ($env:UserProfile -match 'systemprofile$')
-    {
-        foreach ($msBuildVersion in $msBuildVersions) {
-            $msBuildImportBefore = Get-MSBuildImportBeforePath-SystemX64 $msBuildVersion
-            if (Test-Path $msBuildImportBefore -PathType Leaf) {
-                Write-Output "Removing the import before target file from '${msBuildImportBefore}'"
-                Remove-Item -ErrorAction Ignore -Force .\SonarAnalyzer.Testing.ImportBefore.targets -Destination (Join-Path $msBuildImportBefore "\SonarAnalyzer.Testing.ImportBefore.targets")
-            }
-        }
-    }
 
     Remove-Item -ErrorAction Ignore -Force global.json
 
