@@ -1,52 +1,52 @@
 {
-  "issues":  [
-  {
-  "id":  "S2583",
-  "message":  "Change this condition so that it does not always evaluate to 'True'. Some code paths are unreachable.",
-  "location":  [
-  {
-  "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L668",
-  "region":  {
-  "startLine":  668,
-  "startColumn":  25,
-  "endLine":  668,
-  "endColumn":  39
-  }
-  },
-  {
-  "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L679-L684",
-  "region":  {
-  "startLine":  679,
-  "startColumn":  30,
-  "endLine":  684,
-  "endColumn":  49
-  }
-  }
-  ]
-  },
-  {
-  "id":  "S2583",
-  "message":  "Change this condition so that it does not always evaluate to 'True'. Some code paths are unreachable.",
-  "location":  [
-  {
-  "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L696",
-  "region":  {
-  "startLine":  696,
-  "startColumn":  25,
-  "endLine":  696,
-  "endColumn":  39
-  }
-  },
-  {
-  "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L703-L704",
-  "region":  {
-  "startLine":  703,
-  "startColumn":  25,
-  "endLine":  704,
-  "endColumn":  55
-  }
-  }
-  ]
-  }
-  ]
-  }
+"issues":  [
+{
+"id":  "S2583",
+"message":  "Change this condition so that it does not always evaluate to 'True'. Some code paths are unreachable.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L668",
+"region":  {
+"startLine":  668,
+"startColumn":  25,
+"endLine":  668,
+"endColumn":  39
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L679-L684",
+"region":  {
+"startLine":  679,
+"startColumn":  30,
+"endLine":  684,
+"endColumn":  49
+}
+}
+]
+},
+{
+"id":  "S2583",
+"message":  "Change this condition so that it does not always evaluate to 'True'. Some code paths are unreachable.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L696",
+"region":  {
+"startLine":  696,
+"startColumn":  25,
+"endLine":  696,
+"endColumn":  39
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L703-L704",
+"region":  {
+"startLine":  703,
+"startColumn":  25,
+"endLine":  704,
+"endColumn":  55
+}
+}
+]
+}
+]
+}
