@@ -115,7 +115,7 @@ public class CollectionConstraintTests
                     if (notACollection.Count > 0)
                     {
                         notACollection.Remove(5);
-                        if (notACollection.Count > 0)   // Noncompliant FP
+                        if (notACollection.Count > 0)   // Compliant
                         {
                             Console.WriteLine();
                         }

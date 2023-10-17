@@ -18,7 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
 using SonarAnalyzer.SymbolicExecution.Constraints;
+using SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
@@ -47,6 +49,7 @@ internal sealed partial class Binary
 
         ISymbol InstanceOfCountProperty(IOperation operation) =>
             operation.AsPropertyReference() is { Instance: { } instance, Property.Name: nameof(Array.Length) or nameof(List<int>.Count) }
+            && instance.Type.DerivesOrImplementsAny(EmptyCollectionsShouldNotBeEnumeratedBase.TrackedCollectionTypes)
             && instance.TrackedSymbol(state) is { } symbol
                 ? symbol
                 : null;
