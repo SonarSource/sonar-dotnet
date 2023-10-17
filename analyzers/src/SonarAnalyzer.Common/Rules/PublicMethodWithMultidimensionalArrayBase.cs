@@ -34,13 +34,10 @@ namespace SonarAnalyzer.Rules
     {
         protected abstract ILanguageFacade<TLanguageKindEnum> LanguageFacade { get; }
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterNodeAction(
-                GeneratedCodeRecognizer,
-                c =>
+        protected sealed override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterNodeAction(GeneratedCodeRecognizer, c =>
                 {
-                    if (c.SemanticModel.GetDeclaredSymbol(c.Node) is IMethodSymbol methodSymbol &&
+                    if (MethodSymbolOfNode(c.SemanticModel, c.Node) is { } methodSymbol &&
                         methodSymbol.GetInterfaceMember() == null &&
                         !methodSymbol.IsOverride &&
                         methodSymbol.IsPubliclyAccessible() &&
@@ -51,7 +48,9 @@ namespace SonarAnalyzer.Rules
                     }
                 },
                 SyntaxKindsOfInterest.ToArray());
-        }
+
+        protected virtual IMethodSymbol MethodSymbolOfNode(SemanticModel semanticModel, SyntaxNode node) =>
+            semanticModel.GetDeclaredSymbol(node) as IMethodSymbol;
 
         private static bool MethodHasMultidimensionalArrayParameters(IMethodSymbol methodSymbol) =>
             methodSymbol.Parameters.Any(param => param.Type is IArrayTypeSymbol arrayType
