@@ -79,7 +79,7 @@ public class CollectionConstraintTests
 
     [TestMethod]
     public void CollectionConstraint_ShouldNotLearnConstraintForNonCollectionProperties() =>
-    builder.AddSnippet($$$"""
+        builder.AddSnippet($$$"""
             ﻿using System.Collections.Generic;
 
             class Tests
@@ -93,6 +93,33 @@ public class CollectionConstraintTests
                     // This FP used to trigger due to S4158, when checking for the Length property.
                     if (this.Length < 0) // Compliant
                     { }
+                }
+            }
+            """)
+        .Verify();
+
+    [TestMethod]
+    public void CollectionConstraint_ShouldNotLearnConstraintFromBinariesForNonTrackedTypes() =>
+        builder.AddSnippet("""
+            using System;
+            ﻿using System.Collections.Generic;
+            class NotACollection
+            {
+                List<int> items;
+                int Count => items.Count;
+            
+                void Remove(int i) => items.Remove(i);
+            
+                void Foo(NotACollection notACollection)
+                {
+                    if (notACollection.Count > 0)
+                    {
+                        notACollection.Remove(5);
+                        if (notACollection.Count > 0)   // Noncompliant FP
+                        {
+                            Console.WriteLine();
+                        }
+                    }
                 }
             }
             """)
