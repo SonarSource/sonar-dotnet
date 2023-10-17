@@ -33,6 +33,6 @@ public class PrimaryConstructor2(string Prop)
     {
         public static string B { get; }
 
-        public string A { get; } = B ?? throw new ArgumentNullException(nameof(Prop)); // Noncompliant
+        public string A { get; } = B ?? throw new ArgumentNullException(nameof(Prop)); // Noncompliant: we are checking only the first parent (TestClass) 
     }
 }
