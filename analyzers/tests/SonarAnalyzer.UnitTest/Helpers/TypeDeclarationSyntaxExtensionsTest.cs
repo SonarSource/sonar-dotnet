@@ -91,5 +91,95 @@ namespace Test
                     "Function3"
                 });
         }
+
+        [DataTestMethod]
+        [DataRow(LanguageVersion.CSharp1)]
+        [DataRow(LanguageVersion.CSharp2)]
+        [DataRow(LanguageVersion.CSharp3)]
+        [DataRow(LanguageVersion.CSharp4)]
+        [DataRow(LanguageVersion.CSharp5)]
+        [DataRow(LanguageVersion.CSharp6)]
+        [DataRow(LanguageVersion.CSharp7)]
+        [DataRow(LanguageVersion.CSharp7_1)]
+        [DataRow(LanguageVersion.CSharp7_2)]
+        [DataRow(LanguageVersion.CSharp7_3)]
+        [DataRow(LanguageVersion.CSharp8)]
+        [DataRow(LanguageVersion.CSharp9)]
+        [DataRow(LanguageVersion.CSharp10)]
+        [DataRow(LanguageVersion.CSharp11)]
+        [DataRow(LanguageVersion.CSharp12)]
+        public void PrimaryConstructor_NoPrimaryConstructor(LanguageVersion languageVersion)
+        {
+            var options = new CSharpParseOptions(languageVersion);
+            var tree = CSharpSyntaxTree.ParseText("""
+                public class Test
+                {
+                }
+                """);
+            var compilation = CSharpCompilation.Create(assemblyName: null, syntaxTrees: new[] { tree });
+            var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
+            typeDeclaration.PrimaryConstructor(compilation.GetSemanticModel(tree)).Should().BeNull();
+        }
+
+        [DataTestMethod]
+        [DataRow(LanguageVersion.CSharp8)]
+        [DataRow(LanguageVersion.CSharp9)]
+        [DataRow(LanguageVersion.CSharp10)]
+        [DataRow(LanguageVersion.CSharp11)]
+        [DataRow(LanguageVersion.CSharp12)]
+        public void PrimaryConstructor_PrimaryConstructorRecord(LanguageVersion languageVersion)
+        {
+            var options = new CSharpParseOptions(languageVersion);
+            var tree = CSharpSyntaxTree.ParseText("""
+                public record Test(int i)
+                {
+                }
+                """);
+            var compilation = CSharpCompilation.Create(assemblyName: null, syntaxTrees: new[] { tree });
+            var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
+            var methodSymbol = typeDeclaration.PrimaryConstructor(compilation.GetSemanticModel(tree));
+            methodSymbol.Should().NotBeNull();
+            methodSymbol.MethodKind.Should().Be(MethodKind.Constructor);
+            methodSymbol.Parameters.Should().HaveCount(1);
+            methodSymbol.Parameters.Should().ContainSingle(p => p.Name == "i" && p.Type.SpecialType == SpecialType.System_Int32);
+        }
+
+        [DataTestMethod]
+        [DataRow("class")]
+        [DataRow("struct")]
+        [DataRow("readonly struct")]
+        [DataRow("record")]
+        [DataRow("record class")]
+        [DataRow("record struct")]
+        public void PrimaryConstructor_PrimaryConstructorOnClass(string type)
+        {
+            var (tree, model) = TestHelper.CompileCS($$"""
+                {{type}} Test(int i)
+                {
+                }
+                """);
+            var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
+            var methodSymbol = typeDeclaration.PrimaryConstructor(model);
+            methodSymbol.Should().NotBeNull();
+            methodSymbol.MethodKind.Should().Be(MethodKind.Constructor);
+            methodSymbol.Parameters.Should().HaveCount(1);
+            methodSymbol.Parameters.Should().ContainSingle(p => p.Name == "i" && p.Type.SpecialType == SpecialType.System_Int32);
+        }
+
+        [TestMethod]
+        public void PrimaryConstructor_EmptyPrimaryConstructor()
+        {
+            var (tree, model) = TestHelper.CompileCS($$"""
+                public class Test()
+                {
+                    public Test(int i) : this() { }
+                }
+                """);
+            var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
+            var methodSymbol = typeDeclaration.PrimaryConstructor(model);
+            methodSymbol.Should().NotBeNull();
+            methodSymbol.MethodKind.Should().Be(MethodKind.Constructor);
+            methodSymbol.Parameters.Should().BeEmpty();
+        }
     }
 }

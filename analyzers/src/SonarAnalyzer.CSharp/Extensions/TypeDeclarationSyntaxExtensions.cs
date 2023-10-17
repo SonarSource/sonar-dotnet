@@ -34,5 +34,21 @@ namespace SonarAnalyzer.Extensions
             methodDeclaration.DescendantNodes()
                              .Where(member => member.IsKind(SyntaxKindEx.LocalFunctionStatement))
                              .Select(member => MethodDeclarationFactory.Create(member));
+
+        public static IMethodSymbol PrimaryConstructor(this TypeDeclarationSyntax typeDeclaration, SemanticModel semanticModel)
+        {
+            if (((TypeDeclarationSyntaxWrapper)typeDeclaration) is { ParameterList: { } parameterList })
+            {
+                return parameterList is { Parameters: { Count: > 0 } parameters }
+                    ? semanticModel.GetDeclaredSymbol(parameters[0])?.ContainingSymbol as IMethodSymbol
+                    : semanticModel.GetDeclaredSymbol(typeDeclaration).GetMembers(".ctor").OfType<IMethodSymbol>().FirstOrDefault(m => m is
+                    {
+                        MethodKind: MethodKind.Constructor,
+                        Parameters.Length: 0,
+                    });
+            }
+
+            return null;
+        }
     }
 }
