@@ -1,5 +1,5 @@
 <p>Rejecting requests with significant content length is a good practice to control the network traffic intensity and thus resource consumption in
-order to prevents DoS attacks.</p>
+order to prevent DoS attacks.</p>
 <h2>Ask Yourself Whether</h2>
 <ul>
   <li> size limits are not defined for the different resources of the web application. </li>
@@ -24,14 +24,14 @@ public class MyController : Controller
 {
     [HttpPost]
     [DisableRequestSizeLimit] // Sensitive: No size  limit
-    [RequestSizeLimit(10000000)] // Sensitive: 10MB is more than the recommended limit of 8MB
+    [RequestSizeLimit(10485760)] // Sensitive: 10485760 B = 10240 KB = 10 MB is more than the recommended limit of 8MB
     public IActionResult PostRequest(Model model)
     {
     // ...
     }
 
     [HttpPost]
-    [RequestFormLimits(MultipartBodyLengthLimit = 8000000)] // Sensitive: 10MB is more than the recommended limit of 8MB
+    [RequestFormLimits(MultipartBodyLengthLimit = 10485760)] // Sensitive: 10485760 B = 10240 KB = 10 MB is more than the recommended limit of 8MB
     public IActionResult MultipartFormRequest(Model model)
     {
     // ...
@@ -43,13 +43,13 @@ public class MyController : Controller
 &lt;configuration&gt;
     &lt;system.web&gt;
         &lt;httpRuntime maxRequestLength="81920" executionTimeout="3600" /&gt;
-        &lt;!-- Sensitive: maxRequestLength is exprimed in KB, so 81920KB = 80MB  --&gt;
+        &lt;!-- Sensitive: maxRequestLength is expressed in KB, so 81920 KB = 80 MB  --&gt;
     &lt;/system.web&gt;
     &lt;system.webServer&gt;
         &lt;security&gt;
             &lt;requestFiltering&gt;
                 &lt;requestLimits maxAllowedContentLength="83886080" /&gt;
-                &lt;!-- Sensitive: maxAllowedContentLength is exprimed in bytes, so 83886080B = 80MB  --&gt;
+                &lt;!-- Sensitive: maxAllowedContentLength is expressed in bytes, so 83886080 B = 81920 KB = 80 MB  --&gt;
             &lt;/requestFiltering&gt;
         &lt;/security&gt;
     &lt;/system.webServer&gt;
@@ -62,14 +62,14 @@ using Microsoft.AspNetCore.Mvc;
 public class MyController : Controller
 {
     [HttpPost]
-    [RequestSizeLimit(8000000)] // Compliant: 8MB
+    [RequestSizeLimit(8388608)] // Compliant: 8388608 B = 8192 KB = 8 MB
     public IActionResult PostRequest(Model model)
     {
     // ...
     }
 
     [HttpPost]
-    [RequestFormLimits(MultipartBodyLengthLimit = 8000000)] // Compliant: 8MB
+    [RequestFormLimits(MultipartBodyLengthLimit = 8388608)] // Compliant: 8388608 B = 8192 KB = 8 MB
     public IActionResult MultipartFormRequest(Model model)
     {
     // ...
@@ -81,13 +81,13 @@ public class MyController : Controller
 &lt;configuration&gt;
     &lt;system.web&gt;
         &lt;httpRuntime maxRequestLength="8192" executionTimeout="3600" /&gt;
-        &lt;!-- Compliant: maxRequestLength is exprimed in KB, so 8192KB = 8MB  --&gt;
+        &lt;!-- Compliant: maxRequestLength is expressed in KB, so 8192 KB = 8 MB  --&gt;
     &lt;/system.web&gt;
     &lt;system.webServer&gt;
         &lt;security&gt;
             &lt;requestFiltering&gt;
                 &lt;requestLimits maxAllowedContentLength="8388608" /&gt;
-                &lt;!-- Comliant: maxAllowedContentLength is exprimed in bytes, so 8388608B = 8MB  --&gt;
+                &lt;!-- Compliant: maxAllowedContentLength is expressed in bytes, so 8388608 B = 8192 KB = 8 MB  --&gt;
             &lt;/requestFiltering&gt;
         &lt;/security&gt;
     &lt;/system.webServer&gt;
