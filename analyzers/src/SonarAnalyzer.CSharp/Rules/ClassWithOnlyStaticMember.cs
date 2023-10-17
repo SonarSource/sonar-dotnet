@@ -90,8 +90,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     switch (syntaxReference.GetSyntax())
                     {
                         case ConstructorDeclarationSyntax constructorDeclaration:
-                            var reportMessage = string.Format(MessageFormatConstructor, utilityClass.IsSealed ? SyntaxConstants.Private : SyntaxConstants.Protected);
-                            context.ReportIssue(Diagnostic.Create(Rule, constructorDeclaration.Identifier.GetLocation(), reportMessage));
+                            var messageArg = utilityClass.IsSealed ? SyntaxConstants.Private : SyntaxConstants.Protected;
+                            context.ReportIssue(Diagnostic.Create(Rule, constructorDeclaration.Identifier.GetLocation(), MessageFormatConstructor, messageArg));
                             break;
                         case ClassDeclarationSyntax classDeclaration when ClassDeclarationSyntaxWrapper.IsInstance(classDeclaration)
                                 && (ClassDeclarationSyntaxWrapper)classDeclaration is var classDeclarationWrapper
