@@ -61,8 +61,8 @@ public class CalculationsShouldNotOverflowSyntaxKindWalkerTest
             """)).Tree;
         var sut = new CalculationsShouldNotOverflow.SyntaxKindWalker();
         sut.SafeVisit(tree.GetRoot());
-        sut.HasOverflow.Should().Be(true);
-        sut.IsUnchecked.Should().Be(false);
+        sut.HasOverflow.Should().BeTrue();
+        sut.IsUnchecked.Should().BeFalse();
     }
 
     [DataTestMethod]
@@ -95,8 +95,8 @@ public class CalculationsShouldNotOverflowSyntaxKindWalkerTest
             """)).Tree;
         var sut = new CalculationsShouldNotOverflow.SyntaxKindWalker();
         sut.SafeVisit(tree.GetRoot());
-        sut.HasOverflow.Should().Be(false);
-        sut.IsUnchecked.Should().Be(false);
+        sut.HasOverflow.Should().BeFalse();
+        sut.IsUnchecked.Should().BeFalse();
     }
 
     [DataTestMethod]
@@ -115,8 +115,8 @@ public class CalculationsShouldNotOverflowSyntaxKindWalkerTest
             """)).Tree;
         var sut = new CalculationsShouldNotOverflow.SyntaxKindWalker();
         sut.SafeVisit(tree.GetRoot());
-        sut.HasOverflow.Should().Be(false);
-        sut.IsUnchecked.Should().Be(true);
+        sut.HasOverflow.Should().BeFalse();
+        sut.IsUnchecked.Should().BeTrue();
     }
 
     [DataTestMethod]
@@ -199,21 +199,21 @@ public class CalculationsShouldNotOverflowSyntaxKindWalkerTest
     }
 
     [DataTestMethod]
-    [DataRow("_ = 1 + 1;", true)]            // Fix: should be false as it is checked at compile time
+    [DataRow("_ = 1 + 1;", true)]            // Should be false as it is checked at compile time
     [DataRow("_ = int.MaxValue + 0;", true)] // OK: We would need to consult the semanticModel to learn that int.MaxValue is also a constant
     [DataRow("_ = i + 1;", true)]
-    [DataRow("_ = 1 - 1;", true)]            // Fix: should be false as it is checked at compile time
-    [DataRow("_ = 1 * 1;", true)]            // Fix: should be false as it is checked at compile time
-    [DataRow("_ = i + 0;", true)]            // Fix: should be false as one operand is the identity element of addition
-    [DataRow("_ = i - 0;", true)]            // Fix: should be false as one operand is the identity element of subtraction
-    [DataRow("_ = i * 1;", true)]            // Fix: should be false as one operand is the identity element of multiplication
-    [DataRow("_ = i * 0;", true)]            // Fix: should be false as the result is always 0
-    [DataRow("""_ = "" + "";""", true)]      // Fix: should be false as both sides are string literals
-    [DataRow("""_ = s + "";""", true)]       // Fix: should be false as right side is a string literal
-    [DataRow("""_ = "" + s;""", true)]       // Fix: should be false as left side is a string literal
-    [DataRow("""_ = "" + s + s;""", true)]   // Fix: should be false as one of the operands is a string literal
-    [DataRow("""_ = s + "" + s;""", true)]   // Fix: should be false as one of the operands is a string literal
-    [DataRow("""_ = s + s + "";""", true)]   // Fix: should be false as one of the operands is a string literal
+    [DataRow("_ = 1 - 1;", true)]            // Should be false as it is checked at compile time
+    [DataRow("_ = 1 * 1;", true)]            // Should be false as it is checked at compile time
+    [DataRow("_ = i + 0;", true)]            // Should be false as one operand is the identity element of addition
+    [DataRow("_ = i - 0;", true)]            // Should be false as one operand is the identity element of subtraction
+    [DataRow("_ = i * 1;", true)]            // Should be false as one operand is the identity element of multiplication
+    [DataRow("_ = i * 0;", true)]            // Should be false as the result is always 0
+    [DataRow("""_ = "" + "";""", true)]      // Should be false as both sides are string literals
+    [DataRow("""_ = s + "";""", true)]       // Should be false as right side is a string literal
+    [DataRow("""_ = "" + s;""", true)]       // Should be false as left side is a string literal
+    [DataRow("""_ = "" + s + s;""", true)]   // Should be false as one of the operands is a string literal
+    [DataRow("""_ = s + "" + s;""", true)]   // Should be false as one of the operands is a string literal
+    [DataRow("""_ = s + s + "";""", true)]   // Should be false as one of the operands is a string literal
     public void HasOverflowExpressions_Literals(string statement, bool expected)
     {
         var tree = TestHelper.CompileCS(WrapInMethod($"""
@@ -223,7 +223,7 @@ public class CalculationsShouldNotOverflowSyntaxKindWalkerTest
         var sut = new CalculationsShouldNotOverflow.SyntaxKindWalker();
         sut.SafeVisit(tree.GetRoot());
         sut.HasOverflow.Should().Be(expected);
-        sut.IsUnchecked.Should().Be(false);
+        sut.IsUnchecked.Should().BeFalse();
     }
 
     private static string WrapInMethod(string body) =>
