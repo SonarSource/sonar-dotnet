@@ -59,10 +59,15 @@ namespace Tests.Diagnostics
     }
 
     [Flags]
-    public enum Color5 : int // Noncompliant
+    public enum NegativeValues
     {
-        Value = -3, // Secondary
-        Other = -4 // Secondary
+        Default = 0,
+        A = -2,
+        B = -4,
+        C = 1 << 31, // It overflows and becomes negative: https://github.com/SonarSource/sonar-dotnet/issues/7991
+        D = A | B,
+        E = 2,
+        F = D | E
     }
 
     [Flags]
@@ -102,12 +107,71 @@ namespace Tests.Diagnostics
         N3 = N1 | N2,
         N5 = 5 // Secondary
     }
+}
 
-    // Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/7991
-    [FlagsAttribute]
-    public enum Repro_7991 // Noncompliant FP
+namespace DifferentBaseType
+{
+    [Flags]
+    public enum EByte : byte
     {
-        None = 0,
-        Red = 1 << 31 // Secondary
+        A = 1,
+        B = 2,
+        C = A | B
+    }
+
+    [Flags]
+    public enum ESByte : sbyte
+    {
+        A = -2,
+        B = 2,
+        C = A | B
+    }
+
+    [Flags]
+    public enum EShort : short
+    {
+        A = -2,
+        B = 2,
+        C = A | B
+    }
+
+    [Flags]
+    public enum EUShort : ushort
+    {
+        A = 1,
+        B = 2,
+        C = A | B
+    }
+
+    [Flags]
+    public enum EInt : int
+    {
+        A = -2,
+        B = 2,
+        C = A | B
+    }
+
+    [Flags]
+    public enum EUInt : uint
+    {
+        A = 1,
+        B = 2,
+        C = A | B
+    }
+
+    [Flags]
+    public enum ELong : long
+    {
+        A = -2,
+        B = 2,
+        C = A | B
+    }
+
+    [Flags]
+    public enum EULong : ulong
+    {
+        A = 1,
+        B = 2,
+        C = A | B
     }
 }
