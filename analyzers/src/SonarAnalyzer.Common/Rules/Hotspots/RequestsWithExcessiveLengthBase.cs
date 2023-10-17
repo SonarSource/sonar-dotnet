@@ -39,6 +39,7 @@ namespace SonarAnalyzer.Rules
         private const string MessageFormat = "Make sure the content length limit is safe here.";
         private const string Attribute = "Attribute";
         private const int DefaultFileUploadSizeLimit = 8_388_608;   // 8 MB (in bytes)
+        private const int OneKilobyte = 1024; // 1 KB = 1024 bytes
         private readonly IAnalyzerConfiguration analyzerConfiguration;
         private readonly DiagnosticDescriptor rule;
 
@@ -153,7 +154,7 @@ namespace SonarAnalyzer.Rules
             foreach (var httpRuntime in doc.XPathSelectElements("configuration/system.web/httpRuntime"))
             {
                 if (httpRuntime.Attribute("maxRequestLength") is { } maxRequestLength
-                    && IsVulnerable(maxRequestLength.Value, FileUploadSizeLimit / 1024)
+                    && IsVulnerable(maxRequestLength.Value, FileUploadSizeLimit / OneKilobyte)
                     && maxRequestLength.CreateLocation(webConfigPath) is { } location)
                 {
                     c.ReportIssue(Language.GeneratedCodeRecognizer, Diagnostic.Create(rule, location));
