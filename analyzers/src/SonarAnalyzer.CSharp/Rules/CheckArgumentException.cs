@@ -153,12 +153,9 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             static IEnumerable<string> ParentParameterList(SyntaxNode node) =>
-                node?.Ancestors().OfType<BaseTypeDeclarationSyntax>().FirstOrDefault() switch
-                {
-                    var type when RecordDeclarationSyntaxWrapper.IsInstance(type) => GetIdentifierNames(((RecordDeclarationSyntaxWrapper)type).ParameterList),
-                    var type when ClassDeclarationSyntaxWrapper.IsInstance(type) => GetIdentifierNames(((ClassDeclarationSyntaxWrapper)type).ParameterList),
-                    _ => Enumerable.Empty<string>(),
-                };
+                node?.Ancestors().OfType<TypeDeclarationSyntax>().FirstOrDefault() is { } typeDeclaration
+                    ? GetIdentifierNames(((TypeDeclarationSyntaxWrapper)typeDeclaration).ParameterList)
+                    : Enumerable.Empty<string>();
 
             static IEnumerable<string> GetIdentifierNames(ParameterListSyntax parameterList) =>
                 parameterList is null ? Enumerable.Empty<string>() : IdentifierNames(parameterList);
