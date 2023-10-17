@@ -45,7 +45,8 @@ public abstract class FindInsteadOfFirstOrDefaultBase<TSyntaxKind, TInvocationEx
                     && Language.Syntax.HasExactlyNArguments(invocation, NumberOfArgument)
                     && Language.Syntax.TryGetOperands(invocation, out var left, out var right)
                     && IsCorrectCall(right, c.SemanticModel)
-                    && IsCorrectType(left, c.SemanticModel))
+                    && IsCorrectType(left, c.SemanticModel)
+                    && !Language.Syntax.IsInExpressionTree(c.SemanticModel, invocation))
                 {
                     c.ReportIssue(Diagnostic.Create(Rule, Language.Syntax.NodeIdentifier(invocation)?.GetLocation()));
                 }

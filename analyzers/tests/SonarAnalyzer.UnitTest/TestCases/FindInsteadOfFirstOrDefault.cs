@@ -1,6 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System;
+using System.Linq.Expressions;
 
 public class FindInsteadOfFirstOrDefault
 {
@@ -163,5 +164,14 @@ public class FindInsteadOfFirstOrDefault
         //                                          ^^^^^^^^^^^^^^
         data.Fluent()?.Fluent()?.Fluent()?.Fluent()?.FirstOrDefault(x => true); // Noncompliant
         //                                           ^^^^^^^^^^^^^^
+    }
+}
+
+public class ExpressionTree
+{
+    // See https://github.com/SonarSource/sonar-dotnet/issues/7964
+    public void Repro_7964()
+    {
+        Expression<Func<List<int>, int>> firstThree = list => list.FirstOrDefault(el => el == 3); // Compliant (IsInExpressionTree)
     }
 }
