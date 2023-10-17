@@ -203,5 +203,22 @@ namespace Test
             methodSymbol.MethodKind.Should().Be(MethodKind.Constructor);
             methodSymbol.Parameters.Should().BeEmpty();
         }
+
+        [TestMethod]
+        public void PrimaryConstructor_EmptyPrimaryConstructorAndStaticConstructor()
+        {
+            var (tree, model) = TestHelper.CompileCS($$"""
+                public class Test()
+                {
+                    static Test() { }
+                }
+                """);
+            var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
+            var methodSymbol = typeDeclaration.PrimaryConstructor(model);
+            methodSymbol.Should().NotBeNull();
+            methodSymbol.MethodKind.Should().Be(MethodKind.Constructor);
+            methodSymbol.Parameters.Should().BeEmpty();
+            methodSymbol.IsStatic.Should().BeFalse();
+        }
     }
 }
