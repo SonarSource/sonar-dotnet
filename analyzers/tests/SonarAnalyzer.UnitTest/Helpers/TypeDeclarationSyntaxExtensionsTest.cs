@@ -170,11 +170,11 @@ namespace Test
     [DataRow("class")]
     [DataRow("struct")]
     [DataRow("readonly struct")]
+    [DataRow("record struct")]
 #if NET
     [DataRow("record")]
     [DataRow("record class")]
 #endif
-    [DataRow("record struct")]
     public void PrimaryConstructor_PrimaryConstructorOnClass(string type)
     {
         var (tree, model) = TestHelper.CompileCS($$"""
