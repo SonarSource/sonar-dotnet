@@ -26,12 +26,9 @@ public sealed class PublicMethodWithMultidimensionalArray : PublicMethodWithMult
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
     protected override Location GetIssueLocation(SyntaxNode node) =>
-        node?.RemoveParentheses() switch
-        {
-            ConstructorBlockSyntax x => x.SubNewStatement.NewKeyword.GetLocation(),
-            MethodStatementSyntax x => x.Identifier.GetLocation(),
-            _ => null,
-        };
+        node is ConstructorBlockSyntax x
+            ? x.SubNewStatement.NewKeyword.GetLocation()
+            : Language.Syntax.NodeIdentifier(node)?.GetLocation();
 
     protected override string GetType(SyntaxNode node) =>
         node is MethodStatementSyntax ? "method" : "constructor";
