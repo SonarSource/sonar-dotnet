@@ -1238,7 +1238,10 @@ namespace StyleCop.Analyzers.CodeGeneration
                 nameof(LambdaExpressionSyntax),
                 nameof(ParenthesizedLambdaExpressionSyntax),
                 nameof(SimpleLambdaExpressionSyntax),
-                nameof(ClassDeclarationSyntax),
+                // TypeDeclarationSyntaxWrapper causes compatibility problems with ParameterList because the property was first declared in RecordDeclarationSyntax and later
+                // moved upwards into TypeDeclarationSyntaxWrapper. The forwarding of the accessor to the base wrapper doe not work for language version .Net5 to .Net7 as the property
+                // is not found in TypeDeclarationSyntaxWrapper. Use the ParameterList(this TypeDeclarationSyntax) extension method for a unified access.
+                nameof(ClassDeclarationSyntax), 
                 nameof(StructDeclarationSyntax));
 
             public NodeData(in GeneratorExecutionContext context, XElement element)

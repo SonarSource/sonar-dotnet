@@ -102,7 +102,7 @@ namespace Test
     [DataRow("record class")]
     [DataRow("readonly record struct")]
 #endif
-    public void PrimaryConstructorParameterList_ReturnsList(string type)
+    public void ParameterList_ReturnsList(string type)
     {
         var (tree, model) = TestHelper.CompileCS($$"""
             {{type}} Test(int i)
@@ -110,14 +110,14 @@ namespace Test
             }
             """);
         var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
-        var parameterList = typeDeclaration.PrimaryConstructorParameterList();
+        var parameterList = typeDeclaration.ParameterList();
         parameterList.Should().NotBeNull();
         parameterList.Parameters.Should().ContainSingle();
         parameterList.Parameters.Should().ContainSingle(p => p.Type is PredefinedTypeSyntax && p.Identifier.ValueText == "i");
     }
 
     [TestMethod]
-    public void PrimaryConstructorParameterList_Interface()
+    public void ParameterList_Interface()
     {
         var (tree, model) = TestHelper.CompileCS($$"""
             interface Test
@@ -125,7 +125,7 @@ namespace Test
             }
             """);
         var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
-        var parameterList = typeDeclaration.PrimaryConstructorParameterList();
+        var parameterList = typeDeclaration.ParameterList();
         parameterList.Should().BeNull();
     }
 

@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Extensions
 
         public static IMethodSymbol PrimaryConstructor(this TypeDeclarationSyntax typeDeclaration, SemanticModel semanticModel)
         {
-            if (PrimaryConstructorParameterList(typeDeclaration) is { } parameterList)
+            if (ParameterList(typeDeclaration) is { } parameterList)
             {
                 return parameterList is { Parameters: { Count: > 0 } parameters }
                     ? semanticModel.GetDeclaredSymbol(parameters[0])?.ContainingSymbol as IMethodSymbol
@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Extensions
             return null;
         }
 
-        public static ParameterListSyntax PrimaryConstructorParameterList(this TypeDeclarationSyntax typeDeclaration) =>
+        public static ParameterListSyntax ParameterList(this TypeDeclarationSyntax typeDeclaration) =>
             typeDeclaration.Kind() switch
             {
                 SyntaxKind.ClassDeclaration => ((ClassDeclarationSyntaxWrapper)typeDeclaration).ParameterList,
