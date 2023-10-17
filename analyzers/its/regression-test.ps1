@@ -33,9 +33,6 @@ function Prepare-Project([string]$ProjectName){
     $Output = ".\output\$ProjectName"
     New-Item -ItemType directory -Path $Output | out-null
 
-    Write-Output "Copying `Directory.Build.targets` to the project directory ($ProjectName)..."
-    Copy-Item .\Directory.Build.targets -Destination $ProjectName
-
     $SourcePath = ".\config\$ProjectName\SonarLint.xml"
     if(-Not (Test-Path $SourcePath)){
         $SourcePath = ".\config\SonarLint.xml"
