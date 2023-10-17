@@ -1,5 +1,5 @@
 <p>Rejecting requests with significant content length is a good practice to control the network traffic intensity and thus resource consumption in
-order to prevents DoS attacks.</p>
+order to prevent DoS attacks.</p>
 <h2>Ask Yourself Whether</h2>
 <ul>
   <li> size limits are not defined for the different resources of the web application. </li>
@@ -25,13 +25,13 @@ Public Class MyController
 
     &lt;HttpPost&gt;
     &lt;DisableRequestSizeLimit&gt; ' Sensitive: No size  limit
-    &lt;RequestSizeLimit(10000000)&gt; ' Sensitive: 10MB is more than the recommended limit of 8MB
+    &lt;RequestSizeLimit(10485760)&gt; ' Sensitive: 10485760 B = 10240 KB = 10 MB is more than the recommended limit of 8MB
     Public Function PostRequest(Model model) As IActionResult
     ' ...
     End Function
 
     &lt;HttpPost&gt;
-    &lt;RequestFormLimits(MultipartBodyLengthLimit = 8000000)&gt; ' Sensitive: 10MB is more than the recommended limit of 8MB
+    &lt;RequestFormLimits(MultipartBodyLengthLimit = 10485760)&gt; ' Sensitive: 10485760 B = 10240 KB = 10 MB is more than the recommended limit of 8MB
     Public Function MultipartFormRequest(Model model) As IActionResult
     ' ...
     End Function
@@ -46,13 +46,13 @@ Public Class MyController
     Inherits Controller
 
     &lt;HttpPost&gt;
-    &lt;RequestSizeLimit(8000000)&gt; ' Compliant: 8MB
+    &lt;RequestSizeLimit(8388608)&gt; ' Compliant: 8388608 B = 8192 KB = 8 MB
     Public Function PostRequest(Model model) As IActionResult
     ' ...
     End Function
 
     &lt;HttpPost&gt;
-    &lt;RequestFormLimits(MultipartBodyLengthLimit = 8000000)&gt; ' Compliant: 8MB
+    &lt;RequestFormLimits(MultipartBodyLengthLimit = 8388608)&gt; ' Compliant: 8388608 B = 8192 KB = 8 MB
     Public Function MultipartFormRequest(Model model) AS IActionResult
     ' ...
     End Function
