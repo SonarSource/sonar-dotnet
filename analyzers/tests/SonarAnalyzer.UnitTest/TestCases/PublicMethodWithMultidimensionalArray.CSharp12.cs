@@ -5,7 +5,7 @@ namespace Repro_8083
 
     public class PrimaryConstructors
     {
-        public class C1(int[][] a);          // Noncompliant {{Make this method private or simplify its parameters to not use multidimensional/jagged arrays.}}
+        public class C1(int[][] a);          // Noncompliant {{Make this constructor private or simplify its parameters to not use multidimensional/jagged arrays.}}
         //           ^^
         public class C2(int[,] a);           // Noncompliant
         public class C3(params int[] a);     // Compliant, params of int

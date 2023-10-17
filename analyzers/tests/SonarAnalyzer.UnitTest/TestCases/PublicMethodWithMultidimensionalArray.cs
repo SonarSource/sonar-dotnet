@@ -68,7 +68,7 @@ namespace Repro_8083
 {
     public class Constructors
     {
-        public Constructors(int[][] a) { }          // Noncompliant {{Make this method private or simplify its parameters to not use multidimensional/jagged arrays.}}
+        public Constructors(int[][] a) { }          // Noncompliant {{Make this constructor private or simplify its parameters to not use multidimensional/jagged arrays.}}
         //     ^^^^^^^^^^^^
         public Constructors(int[,] a) { }           // Noncompliant
         public Constructors(params int[] a) { }     // Compliant, params of int

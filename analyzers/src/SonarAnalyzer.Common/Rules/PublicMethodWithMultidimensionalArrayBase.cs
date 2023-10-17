@@ -23,14 +23,13 @@ namespace SonarAnalyzer.Rules
     public abstract class PublicMethodWithMultidimensionalArrayBase : SonarDiagnosticAnalyzer
     {
         protected const string DiagnosticId = "S2368";
-        protected const string MessageFormat = "Make this method private or simplify its parameters to not use multidimensional/jagged arrays.";
+        protected const string MessageFormat = "Make this {0} private or simplify its parameters to not use multidimensional/jagged arrays.";
 
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
     }
 
-    public abstract class PublicMethodWithMultidimensionalArrayBase<TLanguageKindEnum, TMethodSyntax> : PublicMethodWithMultidimensionalArrayBase
+    public abstract class PublicMethodWithMultidimensionalArrayBase<TLanguageKindEnum> : PublicMethodWithMultidimensionalArrayBase
         where TLanguageKindEnum : struct
-        where TMethodSyntax : SyntaxNode
     {
         protected abstract ILanguageFacade<TLanguageKindEnum> LanguageFacade { get; }
 
@@ -44,7 +43,7 @@ namespace SonarAnalyzer.Rules
                         MethodHasMultidimensionalArrayParameters(methodSymbol) &&
                         LanguageFacade.Syntax.NodeIdentifier(c.Node) is { } identifier)
                     {
-                        c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], identifier.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], identifier.GetLocation(), methodSymbol.MethodKind is MethodKind.Constructor ? "constructor" : "method"));
                     }
                 },
                 SyntaxKindsOfInterest.ToArray());
