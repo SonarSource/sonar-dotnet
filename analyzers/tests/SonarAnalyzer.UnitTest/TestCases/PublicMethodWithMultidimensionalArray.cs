@@ -68,10 +68,11 @@ namespace Repro_8083
 {
     public class Constructors
     {
-        public Constructors(int[][] a) { }          // FN, the ctor is publicly exposed
-        public Constructors(int[,] a) { }           // FN
+        public Constructors(int[][] a) { }          // Noncompliant {{Make this method private or simplify its parameters to not use multidimensional/jagged arrays.}}
+        //     ^^^^^^^^^^^^
+        public Constructors(int[,] a) { }           // Noncompliant
         public Constructors(params int[] a) { }     // Compliant, params of int
-        public Constructors(params int[][][] a) { } // FN, params of int[][]
+        public Constructors(params int[][][] a) { } // Noncompliant, params of int[][]
         public Constructors(int i) { }              // Compliant, not a multi-dimensional array
     }
 }

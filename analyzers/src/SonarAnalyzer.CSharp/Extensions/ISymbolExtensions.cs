@@ -98,6 +98,7 @@ namespace SonarAnalyzer.Extensions
             {
                 AttributeArgumentSyntax x => x.NameColon?.Name.Identifier,
                 BaseTypeDeclarationSyntax x => x.Identifier,
+                ConstructorDeclarationSyntax x => x.Identifier,
                 DelegateDeclarationSyntax x => x.Identifier,
                 EnumMemberDeclarationSyntax x => x.Identifier,
                 EventDeclarationSyntax x => x.Identifier,
