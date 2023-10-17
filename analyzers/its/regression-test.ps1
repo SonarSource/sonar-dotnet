@@ -33,8 +33,8 @@ function Prepare-Project([string]$ProjectName){
     $Output = ".\output\$ProjectName"
     New-Item -ItemType directory -Path $Output | out-null
 
-    Write-Output "Copying `Directory.Build.targets` to the project directory ($ProjectName)..."
-    Copy-Item .\Directory.Build.targets -Destination $ProjectName
+    Write-Output "Copying `Directory.Build.targets` to the project directory (sources\$ProjectName)..."
+    Copy-Item .\Directory.Build.targets -Destination sources\$ProjectName\Directory.Build.targets
 
     $SourcePath = ".\config\$ProjectName\SonarLint.xml"
     if(-Not (Test-Path $SourcePath)){
@@ -507,6 +507,8 @@ finally {
     Pop-Location
 
     Remove-Item -ErrorAction Ignore -Force global.json
+
+    Get-ChildItem -Recurse -Path sources -Filter "Directory.Build.targets" | Remove-Item
 
     $scriptTimer.Stop()
     $totalTimeInSeconds = [int]$scriptTimer.Elapsed.TotalSeconds
