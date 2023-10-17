@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override bool IsStringLiteralArgument(ArgumentSyntax argument) =>
             argument.GetExpression().IsKind(SyntaxKind.StringLiteralExpression);
 
-        protected override SyntaxNode GetExpression(ArgumentSyntax argument) =>
+        protected override SyntaxNode Expression(ArgumentSyntax argument) =>
             argument.GetExpression();
     }
 }

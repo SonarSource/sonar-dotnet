@@ -22,14 +22,14 @@ namespace SonarAnalyzer.Extensions
 {
     public static class ArgumentSyntaxExtensions
     {
+        internal static int? GetArgumentIndex(this ArgumentSyntax argument) =>
+            (argument.Parent as ArgumentListSyntax)?.Arguments.IndexOf(argument);
+
         internal static IEnumerable<ISymbol> GetSymbolsOfKnownType(this SeparatedSyntaxList<ArgumentSyntax> syntaxList, KnownType knownType, SemanticModel semanticModel) =>
             syntaxList.GetArgumentsOfKnownType(knownType, semanticModel)
                       .Select(argument => semanticModel.GetSymbolInfo(argument.GetExpression()).Symbol);
 
         private static IEnumerable<ArgumentSyntax> GetArgumentsOfKnownType(this SeparatedSyntaxList<ArgumentSyntax> syntaxList, KnownType knownType, SemanticModel semanticModel) =>
             syntaxList.Where(argument => semanticModel.GetTypeInfo(argument.GetExpression()).Type.Is(knownType));
-
-        internal static int? GetArgumentIndex(this ArgumentSyntax argument) =>
-            (argument.Parent as ArgumentListSyntax)?.Arguments.IndexOf(argument);
     }
 }
