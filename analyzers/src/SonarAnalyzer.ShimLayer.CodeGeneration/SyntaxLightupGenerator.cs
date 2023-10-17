@@ -1239,7 +1239,7 @@ namespace StyleCop.Analyzers.CodeGeneration
                 nameof(ParenthesizedLambdaExpressionSyntax),
                 nameof(SimpleLambdaExpressionSyntax),
                 nameof(ClassDeclarationSyntax),
-                nameof(TypeDeclarationSyntax));
+                nameof(StructDeclarationSyntax));
 
             public NodeData(in GeneratorExecutionContext context, XElement element)
             {
