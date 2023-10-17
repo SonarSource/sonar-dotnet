@@ -1241,7 +1241,7 @@ namespace StyleCop.Analyzers.CodeGeneration
                 // TypeDeclarationSyntaxWrapper causes compatibility problems with ParameterList because the property was first declared in RecordDeclarationSyntax (C#9) and later
                 // moved upwards into TypeDeclarationSyntax (C#12). The forwarding of the accessor to the base wrapper doe not work for SDK versions .Net5 to .Net7 as the property
                 // is not found in TypeDeclarationSyntax. Use the ParameterList(this TypeDeclarationSyntax) extension method for a unified access instead of adding TypeDeclarationSyntax here.
-                nameof(ClassDeclarationSyntax), 
+                nameof(ClassDeclarationSyntax),
                 nameof(StructDeclarationSyntax));
 
             public NodeData(in GeneratorExecutionContext context, XElement element)
