@@ -24,11 +24,26 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class PublicMethodWithMultidimensionalArray : PublicMethodWithMultidimensionalArrayBase<SyntaxKind, MethodDeclarationSyntax>
     {
         private static readonly ImmutableArray<DiagnosticDescriptor> Rule = ImmutableArray.Create(DescriptorFactory.Create(DiagnosticId, MessageFormat));
-        private static readonly ImmutableArray<SyntaxKind> KindsOfInterest = ImmutableArray.Create(SyntaxKind.MethodDeclaration);
+        private static readonly ImmutableArray<SyntaxKind> KindsOfInterest = ImmutableArray.Create(
+            SyntaxKind.MethodDeclaration,
+            SyntaxKind.ConstructorDeclaration,
+            SyntaxKind.ClassDeclaration,
+            SyntaxKind.StructDeclaration,
+            SyntaxKindEx.RecordClassDeclaration,
+            SyntaxKindEx.RecordStructDeclaration);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => Rule;
         public override ImmutableArray<SyntaxKind> SyntaxKindsOfInterest => KindsOfInterest;
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
         protected override ILanguageFacade<SyntaxKind> LanguageFacade => CSharpFacade.Instance;
+
+        protected override IMethodSymbol MethodSymbolOfNode(SemanticModel semanticModel, SyntaxNode node)
+        {
+            return node switch
+            {
+                { RawKind: (int)SyntaxKind.MethodDeclaration or (int)SyntaxKind.ConstructorDeclaration } => base.MethodSymbolOfNode(semanticModel, node),
+                _ => null,
+            };
+        }
     }
 }
