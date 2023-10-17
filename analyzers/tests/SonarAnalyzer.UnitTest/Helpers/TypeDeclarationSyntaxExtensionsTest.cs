@@ -135,10 +135,10 @@ namespace Test
     public void PrimaryConstructor_NoPrimaryConstructor(LanguageVersion languageVersion)
     {
         var tree = CSharpSyntaxTree.ParseText("""
-                public class Test
-                {
-                }
-                """, new CSharpParseOptions(languageVersion));
+            public class Test
+            {
+            }
+            """, new CSharpParseOptions(languageVersion));
         var compilation = CSharpCompilation.Create(assemblyName: null, syntaxTrees: new[] { tree });
         var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
         typeDeclaration.PrimaryConstructor(compilation.GetSemanticModel(tree)).Should().BeNull();
@@ -151,12 +151,11 @@ namespace Test
     [DataRow(LanguageVersion.CSharp12)]
     public void PrimaryConstructor_PrimaryConstructorRecord(LanguageVersion languageVersion)
     {
-        var options = new CSharpParseOptions(languageVersion);
         var tree = CSharpSyntaxTree.ParseText("""
-                public record Test(int i)
-                {
-                }
-                """, options);
+            public record Test(int i)
+            {
+            }
+            """, new CSharpParseOptions(languageVersion));
         var compilation = CSharpCompilation.Create(assemblyName: null, syntaxTrees: new[] { tree });
         var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
         var methodSymbol = typeDeclaration.PrimaryConstructor(compilation.GetSemanticModel(tree));
