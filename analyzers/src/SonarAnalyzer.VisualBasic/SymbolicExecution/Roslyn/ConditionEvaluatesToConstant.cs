@@ -35,34 +35,76 @@ public class ConditionEvaluatesToConstant : ConditionEvaluatesToConstantBase
         return walker.ContainsCondition;
     }
 
-    private sealed class SyntaxKindWalker : SafeVisualBasicSyntaxWalker
-    {
-        public bool ContainsCondition { get; private set; }
-        public override void Visit(SyntaxNode node)
-        {
-            if (!ContainsCondition)
-            {
-                ContainsCondition = node.IsAnyKind(
-                                    SyntaxKind.AndAlsoExpression,
-                                    SyntaxKind.BinaryConditionalExpression,
-                                    SyntaxKind.ConditionalAccessExpression,
-                                    SyntaxKind.DoWhileStatement,
-                                    SyntaxKind.DoUntilStatement,
-                                    SyntaxKind.IfStatement,
-                                    SyntaxKind.SelectStatement,
-                                    SyntaxKind.SimpleDoStatement,
-                                    SyntaxKind.TernaryConditionalExpression,
-                                    SyntaxKind.OrElseExpression,
-                                    SyntaxKind.WhileStatement);
-
-                base.Visit(node);
-            }
-        }
-    }
-
     protected override bool IsInsideUsingDeclaration(SyntaxNode node) =>
         node.IsKind(SyntaxKind.VariableDeclarator) && node.Parent.IsKind(SyntaxKind.UsingStatement);
 
     protected override bool IsLockStatement(SyntaxNode syntax) =>
         syntax.IsKind(SyntaxKind.SyncLockBlock);
+
+    private sealed class SyntaxKindWalker : SafeVisualBasicSyntaxWalker
+    {
+        public bool ContainsCondition { get; private set; }
+
+        public override void Visit(SyntaxNode node)
+        {
+            if (!ContainsCondition)
+            {
+                base.Visit(node);
+            }
+        }
+
+        public override void VisitBinaryConditionalExpression(BinaryConditionalExpressionSyntax node)
+        {
+            ContainsCondition |= node.Kind() is SyntaxKind.BinaryConditionalExpression;
+            base.VisitBinaryConditionalExpression(node);
+        }
+
+        public override void VisitBinaryExpression(BinaryExpressionSyntax node)
+        {
+            ContainsCondition |= node.Kind() is SyntaxKind.AndAlsoExpression or SyntaxKind.OrElseExpression;
+            base.VisitBinaryExpression(node);
+        }
+
+        public override void VisitConditionalAccessExpression(ConditionalAccessExpressionSyntax node)
+        {
+            ContainsCondition |= node.Kind() is SyntaxKind.ConditionalAccessExpression;
+            base.VisitConditionalAccessExpression(node);
+        }
+
+        public override void VisitDoStatement(DoStatementSyntax node)
+        {
+            ContainsCondition |= node.Kind() is SyntaxKind.DoWhileStatement or SyntaxKind.DoUntilStatement or SyntaxKind.SimpleDoStatement;
+            base.VisitDoStatement(node);
+        }
+
+        public override void VisitIfStatement(IfStatementSyntax node)
+        {
+            ContainsCondition |= node.Kind() is SyntaxKind.IfStatement;
+            base.VisitIfStatement(node);
+        }
+
+        public override void VisitSelectStatement(SelectStatementSyntax node)
+        {
+            ContainsCondition |= node.Kind() is SyntaxKind.SelectStatement;
+            base.VisitSelectStatement(node);
+        }
+
+        public override void VisitSingleLineIfStatement(SingleLineIfStatementSyntax node)
+        {
+            ContainsCondition |= node.Kind() is SyntaxKind.SingleLineIfStatement;
+            base.VisitSingleLineIfStatement(node);
+        }
+
+        public override void VisitTernaryConditionalExpression(TernaryConditionalExpressionSyntax node)
+        {
+            ContainsCondition |= node.Kind() is SyntaxKind.TernaryConditionalExpression;
+            base.VisitTernaryConditionalExpression(node);
+        }
+
+        public override void VisitWhileStatement(WhileStatementSyntax node)
+        {
+            ContainsCondition |= node.Kind() is SyntaxKind.WhileStatement;
+            base.VisitWhileStatement(node);
+        }
+    }
 }
