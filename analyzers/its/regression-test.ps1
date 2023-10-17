@@ -19,7 +19,6 @@ param
 
 Set-StrictMode -version 2.0
 $ErrorActionPreference = "Stop"
-$msBuildVersions = @("14.0", "15.0", "16.0", "Current")
 
 . .\create-issue-reports.ps1
 
