@@ -37,13 +37,12 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
         protected override ILanguageFacade<SyntaxKind> LanguageFacade => CSharpFacade.Instance;
 
-        protected override IMethodSymbol MethodSymbolOfNode(SemanticModel semanticModel, SyntaxNode node)
-        {
-            return node switch
+        protected override IMethodSymbol MethodSymbolOfNode(SemanticModel semanticModel, SyntaxNode node) =>
+            node switch
             {
                 { RawKind: (int)SyntaxKind.MethodDeclaration or (int)SyntaxKind.ConstructorDeclaration } => base.MethodSymbolOfNode(semanticModel, node),
                 TypeDeclarationSyntax typeDeclaration => typeDeclaration.PrimaryConstructor(semanticModel),
+                _ => null,
             };
-        }
     }
 }
