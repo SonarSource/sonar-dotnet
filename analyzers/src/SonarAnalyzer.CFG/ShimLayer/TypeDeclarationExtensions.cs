@@ -17,10 +17,8 @@ namespace StyleCop.Analyzers.Lightup
             // In earlier versions, the ParameterList was only available on the derived RecordDeclarationSyntax (starting from version 3.7)
             // To work with version 3.7 to version 4.6 we need to special case the record declaration and access
             // the parameter list from the derived RecordDeclarationSyntax.
-            if (SyntaxWrapperHelper.GetWrappedType(typeof(RecordDeclarationSyntaxWrapper)) is { } recordDeclaration)
-            {
-                RecordDeclarationParameterListAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<TypeDeclarationSyntax, ParameterListSyntax>(recordDeclaration, nameof(ParameterList));
-            }
+            var recordDeclaration = SyntaxWrapperHelper.GetWrappedType(typeof(RecordDeclarationSyntaxWrapper));
+            RecordDeclarationParameterListAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<TypeDeclarationSyntax, ParameterListSyntax>(recordDeclaration, nameof(ParameterList));
         }
 
         public static ParameterListSyntax ParameterList(this TypeDeclarationSyntax syntax) =>
