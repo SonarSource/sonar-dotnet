@@ -104,9 +104,9 @@ namespace Test
     {
         var (tree, model) = TestHelper.CompileCS($$"""
             {{type}} Test(int i)
-                {
-                }
-                """);
+            {
+            }
+            """);
         var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
         var parameterList = typeDeclaration.PrimaryConstructorParameterList();
         parameterList.Should().NotBeNull();
@@ -177,9 +177,9 @@ namespace Test
     {
         var (tree, model) = TestHelper.CompileCS($$"""
             {{type}} Test(int i)
-                {
-                }
-                """);
+            {
+            }
+            """);
         var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
         var methodSymbol = typeDeclaration.PrimaryConstructor(model);
         methodSymbol.Should().NotBeNull();
@@ -193,10 +193,10 @@ namespace Test
     {
         var (tree, model) = TestHelper.CompileCS($$"""
             public class Test()
-                {
-                    public Test(int i) : this() { }
-                }
-                """);
+            {
+                public Test(int i) : this() { }
+            }
+            """);
         var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
         var methodSymbol = typeDeclaration.PrimaryConstructor(model);
         methodSymbol.Should().NotBeNull();
@@ -209,10 +209,10 @@ namespace Test
     {
         var (tree, model) = TestHelper.CompileCS($$"""
             public class Test()
-                {
-                    static Test() { }
-                }
-                """);
+            {
+                static Test() { }
+            }
+            """);
         var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
         var methodSymbol = typeDeclaration.PrimaryConstructor(model);
         methodSymbol.Should().NotBeNull();
