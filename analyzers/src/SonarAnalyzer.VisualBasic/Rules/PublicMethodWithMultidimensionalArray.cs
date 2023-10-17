@@ -23,16 +23,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     public sealed class PublicMethodWithMultidimensionalArray : PublicMethodWithMultidimensionalArrayBase<SyntaxKind, MethodStatementSyntax>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        private static readonly ImmutableArray<DiagnosticDescriptor> Rule = ImmutableArray.Create(DescriptorFactory.Create(DiagnosticId, MessageFormat));
+        private static readonly ImmutableArray<SyntaxKind> KindsOfInterest = ImmutableArray.Create(SyntaxKind.SubStatement, SyntaxKind.FunctionStatement);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        private static readonly ImmutableArray<SyntaxKind> kindsOfInterest = ImmutableArray.Create(SyntaxKind.SubStatement, SyntaxKind.FunctionStatement);
-        public override ImmutableArray<SyntaxKind> SyntaxKindsOfInterest => kindsOfInterest;
-
-        protected override SyntaxToken GetIdentifier(MethodStatementSyntax method) => method.Identifier;
-
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => Rule;
+        public override ImmutableArray<SyntaxKind> SyntaxKindsOfInterest => KindsOfInterest;
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
+        protected override ILanguageFacade<SyntaxKind> LanguageFacade => VisualBasicFacade.Instance;
     }
 }

@@ -23,16 +23,12 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class PublicMethodWithMultidimensionalArray : PublicMethodWithMultidimensionalArrayBase<SyntaxKind, MethodDeclarationSyntax>
     {
+        private static readonly ImmutableArray<DiagnosticDescriptor> Rule = ImmutableArray.Create(DescriptorFactory.Create(DiagnosticId, MessageFormat));
+        private static readonly ImmutableArray<SyntaxKind> KindsOfInterest = ImmutableArray.Create(SyntaxKind.MethodDeclaration);
 
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        private static readonly ImmutableArray<SyntaxKind> kindsOfInterest = ImmutableArray.Create(SyntaxKind.MethodDeclaration);
-        public override ImmutableArray<SyntaxKind> SyntaxKindsOfInterest => kindsOfInterest;
-
-        protected override SyntaxToken GetIdentifier(MethodDeclarationSyntax method) => method.Identifier;
-
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => Rule;
+        public override ImmutableArray<SyntaxKind> SyntaxKindsOfInterest => KindsOfInterest;
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
+        protected override ILanguageFacade<SyntaxKind> LanguageFacade => CSharpFacade.Instance;
     }
 }

@@ -32,25 +32,23 @@ namespace SonarAnalyzer.Rules
         where TLanguageKindEnum : struct
         where TMethodSyntax : SyntaxNode
     {
+        protected abstract ILanguageFacade<TLanguageKindEnum> LanguageFacade { get; }
+
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterNodeAction(
                 GeneratedCodeRecognizer,
                 c =>
                 {
-                    var method = (TMethodSyntax)c.Node;
-
-                    if (!(c.SemanticModel.GetDeclaredSymbol(method) is IMethodSymbol methodSymbol) ||
-                        methodSymbol.GetInterfaceMember() != null ||
-                        methodSymbol.GetOverriddenMember() != null ||
-                        !methodSymbol.IsPubliclyAccessible() ||
-                        !MethodHasMultidimensionalArrayParameters(methodSymbol))
+                    if (c.SemanticModel.GetDeclaredSymbol(c.Node) is IMethodSymbol methodSymbol &&
+                        methodSymbol.GetInterfaceMember() == null &&
+                        !methodSymbol.IsOverride &&
+                        methodSymbol.IsPubliclyAccessible() &&
+                        MethodHasMultidimensionalArrayParameters(methodSymbol) &&
+                        LanguageFacade.Syntax.NodeIdentifier(c.Node) is { } identifier)
                     {
-                        return;
+                        c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], identifier.GetLocation()));
                     }
-
-                    var identifier = GetIdentifier(method);
-                    c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], identifier.GetLocation()));
                 },
                 SyntaxKindsOfInterest.ToArray());
         }
@@ -62,10 +60,8 @@ namespace SonarAnalyzer.Rules
 
         private static bool IsJaggedArrayParam(IParameterSymbol param, IArrayTypeSymbol arrayType) =>
             param.IsParams
-                ? arrayType.ElementType is IArrayTypeSymbol subType && subType.ElementType is IArrayTypeSymbol
+                ? arrayType.ElementType is IArrayTypeSymbol { ElementType: IArrayTypeSymbol }
                 : arrayType.ElementType is IArrayTypeSymbol;
-
-        protected abstract SyntaxToken GetIdentifier(TMethodSyntax method);
 
         public abstract ImmutableArray<TLanguageKindEnum> SyntaxKindsOfInterest { get; }
     }
