@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var type = node.BaseList?.Types.FirstOrDefault();
             return PrimaryConstructorBaseTypeSyntaxWrapper.IsInstance(type)
-                ? ((PrimaryConstructorBaseTypeSyntaxWrapper)type).ArgumentList?.Arguments.Count ?? 0
+                ? ((PrimaryConstructorBaseTypeSyntaxWrapper)type).ArgumentList.Arguments.Count
                 : 0;
         }
     }
