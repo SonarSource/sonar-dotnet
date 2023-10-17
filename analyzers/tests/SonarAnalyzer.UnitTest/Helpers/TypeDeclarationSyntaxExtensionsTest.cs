@@ -116,6 +116,19 @@ namespace Test
         parameterList.Parameters.Should().ContainSingle(p => p.Type is PredefinedTypeSyntax && p.Identifier.ValueText == "i");
     }
 
+    [TestMethod]
+    public void PrimaryConstructorParameterList_Interface()
+    {
+        var (tree, model) = TestHelper.CompileCS($$"""
+            interface Test
+            {
+            }
+            """);
+        var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
+        var parameterList = typeDeclaration.PrimaryConstructorParameterList();
+        parameterList.Should().BeNull();
+    }
+
     [DataTestMethod]
     [DataRow(LanguageVersion.CSharp1)]
     [DataRow(LanguageVersion.CSharp2)]
