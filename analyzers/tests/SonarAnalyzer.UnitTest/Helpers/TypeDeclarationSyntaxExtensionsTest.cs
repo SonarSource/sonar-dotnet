@@ -93,6 +93,28 @@ namespace Test
         }
 
         [DataTestMethod]
+        [DataRow("class")]
+        [DataRow("struct")]
+        [DataRow("readonly struct")]
+        [DataRow("record")]
+        [DataRow("record class")]
+        [DataRow("record struct")]
+        [DataRow("readonly record struct")]
+        public void PrimaryConstructorParameterList_ReturnsList(string type)
+        {
+            var (tree, model) = TestHelper.CompileCS($$"""
+                {{type}} Test(int i)
+                {
+                }
+                """);
+            var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
+            var parameterList = typeDeclaration.PrimaryConstructorParameterList();
+            parameterList.Should().NotBeNull();
+            parameterList.Parameters.Should().ContainSingle();
+            parameterList.Parameters.Should().ContainSingle(p => p.Type is PredefinedTypeSyntax && p.Identifier.ValueText == "i");
+        }
+
+        [DataTestMethod]
         [DataRow(LanguageVersion.CSharp1)]
         [DataRow(LanguageVersion.CSharp2)]
         [DataRow(LanguageVersion.CSharp3)]
@@ -110,19 +132,17 @@ namespace Test
         [DataRow(LanguageVersion.CSharp12)]
         public void PrimaryConstructor_NoPrimaryConstructor(LanguageVersion languageVersion)
         {
-            var options = new CSharpParseOptions(languageVersion);
             var tree = CSharpSyntaxTree.ParseText("""
                 public class Test
                 {
                 }
-                """);
+                """, new CSharpParseOptions(languageVersion));
             var compilation = CSharpCompilation.Create(assemblyName: null, syntaxTrees: new[] { tree });
             var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
             typeDeclaration.PrimaryConstructor(compilation.GetSemanticModel(tree)).Should().BeNull();
         }
 
         [DataTestMethod]
-        [DataRow(LanguageVersion.CSharp8)]
         [DataRow(LanguageVersion.CSharp9)]
         [DataRow(LanguageVersion.CSharp10)]
         [DataRow(LanguageVersion.CSharp11)]
@@ -134,13 +154,13 @@ namespace Test
                 public record Test(int i)
                 {
                 }
-                """);
+                """, options);
             var compilation = CSharpCompilation.Create(assemblyName: null, syntaxTrees: new[] { tree });
             var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
             var methodSymbol = typeDeclaration.PrimaryConstructor(compilation.GetSemanticModel(tree));
             methodSymbol.Should().NotBeNull();
             methodSymbol.MethodKind.Should().Be(MethodKind.Constructor);
-            methodSymbol.Parameters.Should().HaveCount(1);
+            methodSymbol.Parameters.Should().ContainSingle();
             methodSymbol.Parameters.Should().ContainSingle(p => p.Name == "i" && p.Type.SpecialType == SpecialType.System_Int32);
         }
 
@@ -164,7 +184,7 @@ namespace Test
             var methodSymbol = typeDeclaration.PrimaryConstructor(model);
             methodSymbol.Should().NotBeNull();
             methodSymbol.MethodKind.Should().Be(MethodKind.Constructor);
-            methodSymbol.Parameters.Should().HaveCount(1);
+            methodSymbol.Parameters.Should().ContainSingle();
             methodSymbol.Parameters.Should().ContainSingle(p => p.Name == "i" && p.Type.SpecialType == SpecialType.System_Int32);
         }
 
