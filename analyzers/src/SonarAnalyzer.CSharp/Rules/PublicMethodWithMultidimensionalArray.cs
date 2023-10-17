@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return node switch
             {
                 { RawKind: (int)SyntaxKind.MethodDeclaration or (int)SyntaxKind.ConstructorDeclaration } => base.MethodSymbolOfNode(semanticModel, node),
-                _ => null,
+                TypeDeclarationSyntax typeDeclaration => typeDeclaration.PrimaryConstructor(semanticModel),
             };
         }
     }
