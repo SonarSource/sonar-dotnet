@@ -51,6 +51,11 @@ namespace Tests.Diagnostics
             int x = 42;
 
             (x, var y) = (x, "TRUNCATE" + "TABLE HumanResources.JobCandidate;"); // Noncompliant
+
+            var compliant6 = "UPDATE [some_table] SET [some_column] = @" + $"{nameof(complexCase2)}";
+            var compliant7 = "UPDATE [some_table] SET [some_column] = " + $"@{nameof(complexCase2)}";
+            var compliant8 = "UPDATE [some_table] SET [some_column] = @" + "VarName";
+            var compliant9 = "UPDATE [some_table] SET [some_column] = " + "@VarName";
         }
     }
 
@@ -61,9 +66,9 @@ namespace Tests.Diagnostics
 
         public void Method()
         {
-            const string sql = "UPDATE [some_table]" +          // FN
-                $"SET [some_column] = @{nameof(SomeColumn)}," +
-                $" [other_column] = @{nameof(SomeColumn)}";     // Noncompliant FP
+            const string sql = "UPDATE [some_table]" +
+                $"SET [some_column] = @{nameof(SomeColumn)}," + // Noncompliant
+                $" [other_column] = @{nameof(SomeColumn)}";
         }
     }
 

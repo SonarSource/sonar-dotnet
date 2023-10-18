@@ -65,6 +65,8 @@ namespace Tests.Diagnostics
             var e1 = "TRUNCATE" + @$" " + "TABLE HumanResources.JobCandidate;";
             var e2 = @$"TRUNCATE" + @$" TABLE HumanResources.JobCandidate;";
             var e3 = @$"TRUNCATE" + @$"TABLE HumanResources.JobCandidate;"; // Noncompliant
+
+            var f1 = "UPDATE [some_table]" + "SET [some_column] = '42'"; // Noncompliant
         }
 
         public string Property
