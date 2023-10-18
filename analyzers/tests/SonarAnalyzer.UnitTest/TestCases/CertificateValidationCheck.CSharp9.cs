@@ -12,7 +12,7 @@ namespace Tests.Diagnostics
         {
             CreateRQ().ServerCertificateValidationCallback += (_, _, _, _) => true;
 //                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ {{Enable server certificate validation on this SSL/TLS connection}}
-//                                                                            ^^^^ Secondary@-1
+//                                                                            ^^^^ Secondary@-1 {{This function trusts all certificates.}}
 
             CreateRQ().ServerCertificateValidationCallback += (sender, _, _, SslPolicyErrors) => false;
 

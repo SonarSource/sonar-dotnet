@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
                 var diagnostic = invocationLocation.GetLineSpan().StartLinePosition.Line == secondaryLocation.GetLineSpan().StartLinePosition.Line
                     ? Diagnostic.Create(Rule, invocationLocation)
-                    : Rule.CreateDiagnostic(context.Compilation, invocationLocation, additionalLocations: new[] {secondaryLocation});
+                    : Rule.CreateDiagnostic(context.Compilation, invocationLocation, additionalLocations: new[] {secondaryLocation}, properties: null);
 
                 context.ReportIssue(diagnostic);
             }

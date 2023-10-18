@@ -26,18 +26,18 @@ namespace Tests.Diagnostics
             //Inline version
             CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) => true;
             //         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ {{Enable server certificate validation on this SSL/TLS connection}}
-            //                                                                                                 ^^^^ Secondary@-1
-            //Secondary@+1
+            //                                                                                                 ^^^^ Secondary@-1 {{This function trusts all certificates.}}
+            //Secondary@+1 {{This function trusts all certificates.}}
             CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) => (((true)));    //Noncompliant
             CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) => false;
             CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) => certificate.Subject == "Test";
 
             //Lambda block syntax
-            //Secondary@+1
+            //Secondary@+1 {{This function trusts all certificates.}}
             CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) => { return true; };    //Noncompliant
             CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) =>                      //Noncompliant
             {
-                return true;    //Secondary
+                return true;    //Secondary {{This function trusts all certificates.}}
             };
             CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) =>
             {
@@ -54,7 +54,7 @@ namespace Tests.Diagnostics
             //Assignment syntax = instead of +=
             CreateRQ().ServerCertificateValidationCallback = InvalidValidation;    //Noncompliant  [flow4]
             CreateRQ().ServerCertificateValidationCallback = (sender, certificate, chain, SslPolicyErrors) => { return true; };    //Noncompliant
-                                                                                                                                   //Secondary@-1
+                                                                                                                                   //Secondary@-1 {{This function trusts all certificates.}}
             CreateRQ().ServerCertificateValidationCallback += LocalFunction; // FN
             bool LocalFunction(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) => true;
 
@@ -88,7 +88,7 @@ namespace Tests.Diagnostics
             var httpHandler = new HttpClientHandler();          //This is not RemoteCertificateValidationCallback delegate type, but Func<...>
             httpHandler.ServerCertificateCustomValidationCallback += InvalidValidation;            //Noncompliant [flow9]
             httpHandler.ServerCertificateCustomValidationCallback += HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;    // Noncompliant [flow19]
-                                                                                                                                        // Secondary@-1 [flow19]
+                                                                                                                                        // Secondary@-1 [flow19] {{This function trusts all certificates.}}
 
             //Generic signature check without RemoteCertificateValidationCallback
             var ShouldTrigger = new RelatedSignatureType();
@@ -106,8 +106,8 @@ namespace Tests.Diagnostics
             if (true)
             {
                 //If there's only one Assignment, we will inspect it
-                //Secondary@+1 [flow0]
-                SingleAssignmentCB = InvalidValidationAsArgument;                   //Secondary [flow1]
+                //Secondary@+1 [flow0] {{This function trusts all certificates.}}
+                SingleAssignmentCB = InvalidValidationAsArgument;                   //Secondary [flow1] {{This function trusts all certificates.}}
                 FalseNegativeCB = InvalidValidation;                                //Compliant due to false negative, the second assignment is after usage of the variable
                 CompliantCB = InvalidValidation;                                    //Compliant due to further logic and more assingments
             }
@@ -116,22 +116,22 @@ namespace Tests.Diagnostics
                 CompliantCB = null;                                                 //Compliant, there are more assignments, so there is a logic
                 DeclarationAssignmentCompliantCB = InvalidValidation;               //This is compliant due to the more assignments, first one is in variable initialization
             }
-            //Secondary@+1 [flow0]
-            InitAsArgument(SingleAssignmentCB);                                     //Secondary [flow1]
+            //Secondary@+1 [flow0] {{This function trusts all certificates.}}
+            InitAsArgument(SingleAssignmentCB);                                     //Secondary [flow1] {{This function trusts all certificates.}}
             InitAsArgument(FalseNegativeCB);
             InitAsArgument(CompliantCB);
             InitAsArgument(DeclarationAssignmentCompliantCB);
             FalseNegativeCB = null;                                                 //False negative due to more assignments, but this one is after variable usage.
 
-            InitAsArgument(InvalidValidationAsArgument);                            //Secondary [flow0, flow1]
+            InitAsArgument(InvalidValidationAsArgument);                            //Secondary [flow0, flow1] {{This function trusts all certificates.}}
             InitAsArgument((sender, certificate, chain, SslPolicyErrors) => false);
-            InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  //Secondary [flow0, flow1]
+            InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  //Secondary [flow0, flow1] {{This function trusts all certificates.}}
 
-            InitAsArgumentRecursive(InvalidValidation, 1);                          //Secondary [flow17]
+            InitAsArgumentRecursive(InvalidValidation, 1);                          //Secondary [flow17] {{This function trusts all certificates.}}
             InitAsOptionalArgument();
 
             //Call in nested class from root (this)
-            new InnerAssignmentClass().InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  //Secondary
+            new InnerAssignmentClass().InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  // Secondary {{This function trusts all certificates.}}
         }
 
         void DelegateReturnedByFunction(HttpClientHandler httpHandler)
@@ -155,7 +155,7 @@ namespace Tests.Diagnostics
             {
                 using (var ssl = new System.Net.Security.SslStream(ms, true, (sender, chain, certificate, SslPolicyErrors) => true))
                 //                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ {{Enable server certificate validation on this SSL/TLS connection}}
-                //                                                                                                            ^^^^ Secondary@-1
+                //                                                                                                            ^^^^ Secondary@-1 {{This function trusts all certificates.}}
                 {
                 }
                 using (var ssl = new System.Net.Security.SslStream(ms, true, InvalidValidation))   //Noncompliant [flow16]
@@ -171,7 +171,7 @@ namespace Tests.Diagnostics
 
         void InitAsArgument(RemoteCertificateValidationCallback Callback)   //This double-assigment will fire the seconday for each occurence twice
         {
-            var cb = Callback;                                              //Secondary [flow1]
+            var cb = Callback;                                              //Secondary [flow1] {{This function trusts all certificates.}}
             CreateRQ().ServerCertificateValidationCallback += Callback;     //Noncompliant [flow0]
             CreateRQ().ServerCertificateValidationCallback += cb;           //Noncompliant [flow1]
         }
@@ -222,12 +222,12 @@ namespace Tests.Diagnostics
 
         static bool InvalidValidation(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
-            return true;    //Secondary [flow2, flow3, flow4, flow5, flow9, flow10, flow11, flow12, flow14, flow15, flow16, flow17]
+            return true;    //Secondary [flow2, flow3, flow4, flow5, flow9, flow10, flow11, flow12, flow14, flow15, flow16, flow17] {{This function trusts all certificates.}}
         }
 
         bool InvalidValidationAsArgument(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
-            return true;    //Secondary [flow0, flow0, flow1, flow1]
+            return true;    //Secondary [flow0, flow0, flow1, flow1] {{This function trusts all certificates.}}
         }
 
         static bool CompliantValidation(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
@@ -278,12 +278,12 @@ namespace Tests.Diagnostics
             try
             {
                 System.Diagnostics.Trace.WriteLine(certificate.Subject);
-                return true; //Secondary [flow6]
+                return true; //Secondary [flow6] {{This function trusts all certificates.}}
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Trace.WriteLine(ex.Message);
-                return true; //Secondary [flow6]
+                return true; //Secondary [flow6] {{This function trusts all certificates.}}
             }
         }
 
@@ -295,13 +295,13 @@ namespace Tests.Diagnostics
                 System.Diagnostics.Trace.WriteLine("Log something");
                 Log(certificate);
 
-                return true; //Secondary [flow7]
+                return true; //Secondary [flow7] {{This function trusts all certificates.}}
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Trace.WriteLine(ex.Message);
             }
-            return true; //Secondary [flow7]
+            return true; //Secondary [flow7] {{This function trusts all certificates.}}
         }
 
         bool AdvCompliantWithTryObstacles(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
@@ -327,7 +327,7 @@ namespace Tests.Diagnostics
             System.Diagnostics.Trace.WriteLine("Log something");
             Log(certificate);
 
-            return true; //Secondary [flow8]
+            return true; //Secondary [flow8] {{This function trusts all certificates.}}
         }
 
         bool AdvCompliantWithObstacles(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
@@ -371,28 +371,28 @@ namespace Tests.Diagnostics
 
         static RemoteCertificateValidationCallback FindInvalid()
         {
-            return InvalidValidation;                                      //Secondary [flow12]
+            return InvalidValidation;                                      //Secondary [flow12] {{This function trusts all certificates.}}
         }
 
         static RemoteCertificateValidationCallback FindLambdaValidator()
         {
-            return (sender, certificate, chain, SslPolicyErrors) => true;        //Secondary [flow13]
+            return (sender, certificate, chain, SslPolicyErrors) => true;        //Secondary [flow13] {{This function trusts all certificates.}}
         }
 
         static Func<HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, Boolean> FindDangerous()
         {
-            return HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;        //Secondary [flow20]
+            return HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;        //Secondary [flow20] {{This function trusts all certificates.}}
         }
 
         static RemoteCertificateValidationCallback FindInvalid(bool useDelegate)   //All paths return noncompliant
         {
             if (useDelegate)
             {
-                return InvalidValidation;                                  //Secondary [flow11]
+                return InvalidValidation;                                  //Secondary [flow11] {{This function trusts all certificates.}}
             }
             else
             {
-                return (sender, certificate, chain, SslPolicyErrors) => true;   //Secondary [flow11]
+                return (sender, certificate, chain, SslPolicyErrors) => true;   //Secondary [flow11] {{This function trusts all certificates.}}
             }
         }
 
@@ -424,7 +424,7 @@ namespace Tests.Diagnostics
         {
             if (Index <= 0)
             {
-                return InvalidValidation;                                  //Secondary [flow14]
+                return InvalidValidation;                                  //Secondary [flow14] {{This function trusts all certificates.}}
             }
             else
             {
@@ -519,7 +519,7 @@ namespace Tests.Diagnostics
             public void Init(RemoteCertificateValidationCallback callback)
             {
                 //Assignment from sibling class in nested tree
-                new InnerAssignmentClass().InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  //Secondary
+                new InnerAssignmentClass().InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  //Secondary {{This function trusts all certificates.}}
             }
         }
 
@@ -531,7 +531,7 @@ namespace Tests.Diagnostics
     {
         public void Foo()
         {
-            InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  // Secondary
+            InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  // Secondary {{This function trusts all certificates.}}
 
             HttpWebRequest CreateRQ()
             {
@@ -561,7 +561,7 @@ namespace Tests.Diagnostics
         static void Execute()
         {
             new AssignmentStruct().InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);
-//                                                                                                 ^^^^ Secondary
+//                                                                                                 ^^^^ Secondary {{This function trusts all certificates.}}
         }
     }
 

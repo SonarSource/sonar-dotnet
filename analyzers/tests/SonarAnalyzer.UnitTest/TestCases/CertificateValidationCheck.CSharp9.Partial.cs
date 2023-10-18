@@ -11,7 +11,7 @@ namespace Tests.Diagnostics
         public static partial RemoteCertificateValidationCallback FindInvalid()
         {
             return (sender, certificate, chain, SslPolicyErrors) => true;
-            //                                                      ^^^^ Secondary
+            //                                                      ^^^^ Secondary {{This function trusts all certificates.}}
         }
     }
 }

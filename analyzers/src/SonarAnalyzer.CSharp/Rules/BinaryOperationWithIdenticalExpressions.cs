@@ -77,7 +77,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 CSharpEquivalenceChecker.AreEquivalent(RemoveParentheses(operands.Item1), RemoveParentheses(operands.Item2)))
             {
                 var message = string.Format(EqualsMessage, operands.Item2);
-                var diagnostic = Rule.CreateDiagnostic(context.Compilation, operands.Item1.GetLocation(), additionalLocations: new[] { operands.Item2.GetLocation() }, messageArgs: message);
+                var diagnostic = Rule.CreateDiagnostic(context.Compilation,
+                    operands.Item1.GetLocation(),
+                    additionalLocations: new[] { operands.Item2.GetLocation() },
+                    properties: null,
+                    messageArgs: message);
                 context.ReportIssue(diagnostic);
             }
         }
@@ -114,7 +118,12 @@ namespace SonarAnalyzer.Rules.CSharp
             if (CSharpEquivalenceChecker.AreEquivalent(left.RemoveParentheses(), right.RemoveParentheses()))
             {
                 var message = string.Format(OperatorMessageFormat, operatorToken);
-                context.ReportIssue(Rule.CreateDiagnostic(context.Compilation, right.GetLocation(), additionalLocations: new[] { left.GetLocation() }, messageArgs: message));
+                context.ReportIssue(Rule.CreateDiagnostic(context.Compilation,
+                    right.GetLocation(),
+                    additionalLocations:
+                    new[] { left.GetLocation() },
+                    properties: null,
+                    messageArgs: message));
             }
         }
     }

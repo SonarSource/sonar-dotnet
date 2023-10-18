@@ -94,6 +94,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         c.ReportIssue(rule.CreateDiagnostic(c.Compilation,
                             forNode.Incrementors.First().GetLocation(),
                             new[] { forNode.Condition.GetLocation() },
+                            properties: null,
                             incrementorData.IdentifierName, "inc"));
                     }
                     else if (incrementorData.Operation == ArithmeticOperation.Substraction &&
@@ -102,6 +103,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         c.ReportIssue(rule.CreateDiagnostic(c.Compilation,
                             forNode.Incrementors.First().GetLocation(),
                             new[] { forNode.Condition.GetLocation() },
+                            properties: null,
                             incrementorData.IdentifierName, "dec"));
                     }
                 },
