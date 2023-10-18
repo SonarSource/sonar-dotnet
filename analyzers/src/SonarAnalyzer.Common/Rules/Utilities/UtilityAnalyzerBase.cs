@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules
                 EndOffset = lineSpan.EndLinePosition.Character
             };
 
-        protected virtual UtilityAnalyzerParameters ReadParameters(SonarCompilationStartAnalysisContext context)
+        protected virtual UtilityAnalyzerParameters ReadParameters(SonarCompilationReportingContext context)
         {
             var outPath = context.ProjectConfiguration().OutPath;
             // For backward compatibility with S4MSB <= 5.0
@@ -81,7 +81,6 @@ namespace SonarAnalyzer.Rules
     {
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract string FileName { get; }
-        protected abstract TMessage CreateMessage(SyntaxTree tree, SemanticModel model);
         protected virtual bool AnalyzeUnchangedFiles => false;
 
         protected abstract TMessage CreateMessage(UtilityAnalyzerParameters parameters, SyntaxTree syntaxTree, SemanticModel semanticModel);
@@ -93,14 +92,14 @@ namespace SonarAnalyzer.Rules
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterCompilationAction(context =>
             {
-                var parameters = ReadParameters(startContext);
+                var parameters = ReadParameters(context);
                 if (!parameters.IsAnalyzerEnabled)
                 {
                     return;
                 }
 
                 var treeMessages = context.Compilation.SyntaxTrees
-                    .Where(x => ShouldGenerateMetrics(context, x))
+                    .Where(x => ShouldGenerateMetrics(parameters, context, x))
                     .Select(x => CreateMessage(parameters, x, context.Compilation.GetSemanticModel(x)));
 
                 var allMessages = CreateAnalysisMessages(context)
@@ -108,8 +107,8 @@ namespace SonarAnalyzer.Rules
                     .WhereNotNull()
                     .ToArray();
 
-                Directory.CreateDirectory(OutPath);
-                using var stream = File.Create(Path.Combine(OutPath, FileName));
+                Directory.CreateDirectory(parameters.OutPath);
+                using var stream = File.Create(Path.Combine(parameters.OutPath, FileName));
                 foreach (var message in allMessages)
                 {
                     message.WriteDelimitedTo(stream);
@@ -120,7 +119,7 @@ namespace SonarAnalyzer.Rules
             // The results of Metrics and CopyPasteToken analyzers are not needed for Test projects yet the plugin side expects the protobuf files, so we create empty ones.
             (parameters.AnalyzeTestProjects || !parameters.IsTestProject)
             && FileExtensionWhitelist.Contains(Path.GetExtension(tree.FilePath))
-            && ShouldGenerateMetricsByType(tree, compilation);
+            && ShouldGenerateMetricsByType(parameters, tree, compilation);
 
         protected static string GetFilePath(SyntaxTree tree) =>
             // If the syntax tree is constructed for a razor generated file, we need to provide the original file path.
@@ -128,12 +127,12 @@ namespace SonarAnalyzer.Rules
                 ? root.GetMappedFilePathFromRoot()
                 : tree.FilePath;
 
-        private bool ShouldGenerateMetrics(UtilityAnalyzerParameters parameters, SonarSematicModelReportingContext context) =>
-            (AnalyzeUnchangedFiles || !context.IsUnchanged(context.Tree))
-            && ShouldGenerateMetrics(parameters, context.Tree, context.Compilation);
+        private bool ShouldGenerateMetrics(UtilityAnalyzerParameters parameters, SonarCompilationReportingContext context, SyntaxTree tree) =>
+            (AnalyzeUnchangedFiles || !context.IsUnchanged(tree))
+            && ShouldGenerateMetrics(parameters, tree, context.Compilation);
 
-        private bool ShouldGenerateMetricsByType(SyntaxTree tree, Compilation compilation) =>
-            AnalyzeGeneratedCode
+        private bool ShouldGenerateMetricsByType(UtilityAnalyzerParameters parameters, SyntaxTree tree, Compilation compilation) =>
+            parameters.AnalyzeGeneratedCode
                 ? !GeneratedCodeRecognizer.IsCshtml(tree) // We cannot upload metrics for .cshtml files. The file is owned by the html plugin.
                 : !tree.IsGenerated(Language.GeneratedCodeRecognizer, compilation) || GeneratedCodeRecognizer.IsRazor(tree);
     }

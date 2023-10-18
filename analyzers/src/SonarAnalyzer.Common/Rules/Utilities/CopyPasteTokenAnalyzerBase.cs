@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules
         protected abstract string GetCpdValue(SyntaxToken token);
         protected abstract bool IsUsingDirective(SyntaxNode node);
 
-        protected override UtilityAnalyzerParameters ReadParameters(SonarCompilationStartAnalysisContext context) =>
+        protected override UtilityAnalyzerParameters ReadParameters(SonarCompilationReportingContext context) =>
             base.ReadParameters(context) with { AnalyzeTestProjects = false };
 
         protected sealed override bool AnalyzeUnchangedFiles => true;
@@ -39,9 +39,9 @@ namespace SonarAnalyzer.Rules
 
         protected CopyPasteTokenAnalyzerBase() : base(DiagnosticId, Title) { }
 
-        protected override bool ShouldGenerateMetrics(SyntaxTree tree, Compilation compilation) =>
+        protected override bool ShouldGenerateMetrics(UtilityAnalyzerParameters parameters, SyntaxTree tree, Compilation compilation) =>
             !GeneratedCodeRecognizer.IsRazorGeneratedFile(tree)
-            && base.ShouldGenerateMetrics(tree, compilation);
+            && base.ShouldGenerateMetrics(parameters, tree, compilation);
 
         protected sealed override CopyPasteTokenInfo CreateMessage(UtilityAnalyzerParameters parameters, SyntaxTree tree, SemanticModel model)
         {

@@ -38,9 +38,9 @@ namespace SonarAnalyzer.Rules
         protected abstract TokenClassifierBase GetTokenClassifier(SemanticModel semanticModel, bool skipIdentifierTokens);
         protected abstract TriviaClassifierBase GetTriviaClassifier();
 
-        protected override bool ShouldGenerateMetrics(SyntaxTree tree, Compilation compilation) =>
+        protected override bool ShouldGenerateMetrics(UtilityAnalyzerParameters parameters, SyntaxTree tree, Compilation compilation) =>
             !GeneratedCodeRecognizer.IsRazorGeneratedFile(tree)
-            && base.ShouldGenerateMetrics(tree, compilation);
+            && base.ShouldGenerateMetrics(parameters, tree, compilation);
 
         protected sealed override TokenTypeInfo CreateMessage(UtilityAnalyzerParameters parameters, SyntaxTree tree, SemanticModel model)
         {

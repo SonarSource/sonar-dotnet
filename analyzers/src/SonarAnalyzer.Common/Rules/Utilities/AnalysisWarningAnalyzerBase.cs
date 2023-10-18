@@ -39,7 +39,7 @@ public abstract class AnalysisWarningAnalyzerBase : UtilityAnalyzerBase
                 if (parameter.IsAnalyzerEnabled && !RoslynHelper.IsRoslynCfgSupported(MinimalSupportedRoslynVersion))     // MsBuild 15 is bound with Roslyn 2.x, where Roslyn CFG is not available.
                 {
                     // This can be removed after we bump Microsoft.CodeAnalysis references to 3.0 or higher.
-                    var path = Path.GetFullPath(Path.Combine(OutPath, "../../AnalysisWarnings.MsBuild.json"));
+                    var path = Path.GetFullPath(Path.Combine(parameter.OutPath, "../../AnalysisWarnings.MsBuild.json"));
                     if (!File.Exists(path))
                     {
                         try
