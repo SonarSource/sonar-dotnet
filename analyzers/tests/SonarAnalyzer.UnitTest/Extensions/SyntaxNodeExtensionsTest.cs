@@ -734,16 +734,16 @@ public class X
         }
 
         [DataTestMethod]
-        [DataRow("""$$public C(int p) { }$$""")]
-        [DataRow("""$$public void M(int p) { }$$""")]
-        [DataRow("""$$public static C operator + (C p) => default;$$""")]
-        [DataRow("""$$public static implicit operator C (int p) => default;$$""")]
+        [DataRow("""public C(int p) { }""")]
+        [DataRow("""public void M(int p) { }""")]
+        [DataRow("""public static C operator + (C p) => default;""")]
+        [DataRow("""public static implicit operator C (int p) => default;""")]
         public void ParameterList_Methods(string declarations)
         {
             var node = NodeBetweenMarkers($$"""
                 public class C
                 {
-                    {{declarations}}
+                    $${{declarations}}$$
                 }
                 """, LanguageNames.CSharp);
             var actual = ExtensionsCS.ParameterList(node);
@@ -821,9 +821,10 @@ public class X
         [DataTestMethod]
         [DataRow("$$int i;$$")]
         [DataRow("$$class Nested { }$$")]
-        public void ParameterList_UnsupportedNodes(string declaration)
+        public void ParameterList_ReturnsNull(string declaration)
         {
             var node = NodeBetweenMarkers($$"""
+                using System.Collections.Generic;
                 public class C
                 {
                     {{declaration}}
