@@ -40,9 +40,14 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var argumentList = c.Node is InvocationExpressionSyntax invocationExpression
-                        ? invocationExpression.ArgumentList
-                        : ((ImplicitObjectCreationExpressionSyntaxWrapper)c.Node).ArgumentList;
+                    var argumentList = c.Node switch
+                    {
+                        InvocationExpressionSyntax invocationExpression => invocationExpression.ArgumentList,
+                        ObjectCreationExpressionSyntax objectCreationExpression => objectCreationExpression.ArgumentList,
+                        { RawKind: (int)SyntaxKindEx.ImplicitObjectCreationExpression } => ((ImplicitObjectCreationExpressionSyntaxWrapper)c.Node).ArgumentList,
+                        _ => null,
+                    };
+
                     var methodParameterLookup = new CSharpMethodParameterLookup(argumentList, c.SemanticModel);
 
                     if (methodParameterLookup.MethodSymbol != null)
@@ -61,7 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         }
                     }
                 },
-                SyntaxKind.InvocationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
+                SyntaxKind.InvocationExpression, SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
 
         internal static bool ArgumentHasDefaultValue(NodeAndSymbol<ArgumentSyntax, IParameterSymbol> argumentMapping, SemanticModel semanticModel)
         {

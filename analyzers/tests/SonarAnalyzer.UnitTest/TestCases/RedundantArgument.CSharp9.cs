@@ -11,6 +11,10 @@ Record r1 = new(1);
 Record r2 = new(1, 5); // Noncompliant
 Record r3 = new(1, 6); // Compliant
 
+r1 = new Record(1);
+r2 = new Record(1, 5); // Noncompliant
+r3 = new Record(1, 6);  // Compliant
+
 int x = 5;
 var y = x switch
 {
