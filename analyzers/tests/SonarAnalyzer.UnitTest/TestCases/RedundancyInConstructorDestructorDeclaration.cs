@@ -71,6 +71,20 @@ namespace Tests.Diagnostics
         }
     }
 
+    public class MyClass1
+    {
+        Stream unmanagedResource;
+
+        ~MyClass1() // Compliant
+        {
+            if (unmanagedResource != null)
+            {
+                unmanagedResource.Dispose();
+                unmanagedResource = null;
+            }
+        }
+    }
+
     public class MyClass2
     {
         private MyClass2()
