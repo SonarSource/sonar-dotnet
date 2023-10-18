@@ -80,20 +80,18 @@ namespace SonarAnalyzer.Rules.CSharp
                       uint x => (BigInteger)x,
                       long x => (BigInteger)x,
                       ulong x => (BigInteger)x,
-                      // this is a safeguard for the case when the enum is defined with a base type that is not currently supported by the compiler
-                      var x when BigInteger.TryParse(x.ToString(), out var value) => value,
                       _ => null
                   }
                 : null;
 
         private static bool IsValidFlagValue(BigInteger? enumValue, IEnumerable<BigInteger> allValues) =>
-            enumValue.HasValue && (IsZeroOrPowerOfTwo(enumValue.Value) || IsCombinationOfOtherValues(enumValue.Value, allValues));
+            enumValue.HasValue
+            && (IsZeroOrPowerOfTwo(enumValue.Value)
+                || IsCombinationOfOtherValues(enumValue.Value, allValues));
 
         private static bool IsZeroOrPowerOfTwo(BigInteger value) =>
             value.IsZero
-            || (value.Sign == -1
-                    ? BigInteger.Multiply(value, -1).IsPowerOfTwo
-                    : value.IsPowerOfTwo);
+            || BigInteger.Abs(value).IsPowerOfTwo;
 
         private static bool IsCombinationOfOtherValues(BigInteger value, IEnumerable<BigInteger> otherValues)
         {
