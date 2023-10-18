@@ -39,7 +39,7 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
         Cast<ArgumentSyntax>(argument).GetArgumentIndex();
 
     public override SyntaxNode AssignmentLeft(SyntaxNode assignment) =>
-    Cast<AssignmentExpressionSyntax>(assignment).Left;
+        Cast<AssignmentExpressionSyntax>(assignment).Left;
 
     public override SyntaxNode AssignmentRight(SyntaxNode assignment) =>
         Cast<AssignmentExpressionSyntax>(assignment).Right;
