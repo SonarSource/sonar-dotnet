@@ -81,9 +81,9 @@ namespace SonarAnalyzer.Rules
     {
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract string FileName { get; }
-        protected virtual bool AnalyzeUnchangedFiles => false;
-
         protected abstract TMessage CreateMessage(UtilityAnalyzerParameters parameters, SyntaxTree tree, SemanticModel model);
+
+        protected virtual bool AnalyzeUnchangedFiles => false;
 
         protected virtual IEnumerable<TMessage> CreateAnalysisMessages(SonarCompilationReportingContext c) => Enumerable.Empty<TMessage>();
 
