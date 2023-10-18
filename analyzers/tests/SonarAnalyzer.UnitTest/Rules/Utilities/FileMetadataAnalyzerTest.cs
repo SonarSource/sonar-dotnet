@@ -159,8 +159,8 @@ namespace SonarAnalyzer.UnitTest.Rules
             protected override UtilityAnalyzerParameters ReadParameters(SonarCompilationReportingContext context) =>
                 base.ReadParameters(context) with { IsAnalyzerEnabled = true, OutPath = outPath, IsTestProject = isTestProject };
 
-            public FileMetadataInfo TestCreateMessage(UtilityAnalyzerParameters parameters, SyntaxTree syntaxTree, SemanticModel semanticModel) =>
-                CreateMessage(parameters, syntaxTree, semanticModel);
+            public FileMetadataInfo TestCreateMessage(UtilityAnalyzerParameters parameters, SyntaxTree tree, SemanticModel model) =>
+                CreateMessage(parameters, tree, model);
         }
     }
 }

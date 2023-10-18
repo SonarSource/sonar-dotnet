@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules
 
         protected CopyPasteTokenAnalyzerBase() : base(DiagnosticId, Title) { }
 
-        protected override bool ShouldGenerateMetrics(UtilityAnalyzerParameters parameters, SyntaxTree tree, Compilation compilation) =>
+        protected sealed override bool ShouldGenerateMetrics(UtilityAnalyzerParameters parameters, SyntaxTree tree, Compilation compilation) =>
             !GeneratedCodeRecognizer.IsRazorGeneratedFile(tree)
             && base.ShouldGenerateMetrics(parameters, tree, compilation);
 

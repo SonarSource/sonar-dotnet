@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules
             return symbolReferenceInfo;
         }
 
-        protected override bool ShouldGenerateMetrics(UtilityAnalyzerParameters parameters, SyntaxTree tree, Compilation compilation) =>
+        protected sealed override bool ShouldGenerateMetrics(UtilityAnalyzerParameters parameters, SyntaxTree tree, Compilation compilation) =>
             base.ShouldGenerateMetrics(parameters, tree, compilation)
             && !HasTooManyTokens(tree);
 
