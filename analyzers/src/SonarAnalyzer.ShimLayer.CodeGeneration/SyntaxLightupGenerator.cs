@@ -1238,7 +1238,12 @@ namespace StyleCop.Analyzers.CodeGeneration
                 nameof(LambdaExpressionSyntax),
                 nameof(ParenthesizedLambdaExpressionSyntax),
                 nameof(SimpleLambdaExpressionSyntax),
-                nameof(ClassDeclarationSyntax));
+                // TypeDeclarationSyntaxWrapper causes compatibility problems with ParameterList because the property was first declared in RecordDeclarationSyntax (C#9) and later
+                // moved upwards into TypeDeclarationSyntax (C#12). The forwarding of the accessor in RecordDeclarationSyntax  to the base wrapper does not work for SDK versions
+                // .Net5 to .Net7 as the property is not found in TypeDeclarationSyntax.
+                // Use the `ParameterList(this TypeDeclarationSyntax)` extension method for a unified access instead of adding TypeDeclarationSyntax here.
+                nameof(ClassDeclarationSyntax),
+                nameof(StructDeclarationSyntax));
 
             public NodeData(in GeneratorExecutionContext context, XElement element)
             {
