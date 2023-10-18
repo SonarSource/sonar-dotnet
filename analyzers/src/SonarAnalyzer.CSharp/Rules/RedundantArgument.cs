@@ -50,12 +50,11 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             foreach (var argumentMapping in methodParameterLookup.GetAllArgumentParameterMappings().Reverse().Where(x => x.Symbol.HasExplicitDefaultValue))
             {
-                var hasDefaultValue = ArgumentHasDefaultValue(argumentMapping, context.SemanticModel);
-                if (argumentMapping.Node.NameColon == null && !hasDefaultValue)
+                if (argumentMapping is { Node.NameColon: null, Symbol.HasExplicitDefaultValue: false })
                 {
                     return;
                 }
-                else if (hasDefaultValue)
+                if (ArgumentHasDefaultValue(argumentMapping, context.SemanticModel))
                 {
                     context.ReportIssue(Diagnostic.Create(Rule, argumentMapping.Node.GetLocation(), argumentMapping.Symbol.Name));
                 }

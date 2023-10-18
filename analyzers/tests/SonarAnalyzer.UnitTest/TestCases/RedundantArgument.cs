@@ -16,7 +16,9 @@ namespace Tests.Diagnostics
         {
             var x = "".ToString();
             M(1, 5); //Noncompliant, y has the default value
-//               ^
+            //   ^
+            M(1, 5, 0); //Noncompliant, y has the default value
+            //   ^
             M(1, z: 7); //Noncompliant, z has the default value
             M(1, 5, // Noncompliant
 //               ^
@@ -25,25 +27,27 @@ namespace Tests.Diagnostics
             M(1);
             M(1, 2, 4);
             M2(1, 1, 1);
-            5.Ext(5); //Noncompliant
+            5.Ext(5);       //Noncompliant
+            5.Ext(5, 0, 0); //Noncompliant
             5.Ext2(5);
 
-            RedundantArgument.Ext(5, 5, 4, 4, 5, 6); //Noncompliant
+            RedundantArgument.Ext(5, 5, 4, 4, 5, 6); //Noncompliant {{Remove this default value assigned to parameter 'y'.}}
             RedundantArgument.Ext(5, y: 5, parameters: new int[] { 4, 4, 5, 6 }); //Noncompliant {{Remove this default value assigned to parameter 'y'.}}
             RedundantArgument.Ext(5, 5); //Noncompliant
 
-            M3(1,//Noncompliant
-                y: 5,//Noncompliant
-                z: 7);//Noncompliant
+            M3(1,      //Noncompliant
+                y: 5,  //Noncompliant
+                z: 7); //Noncompliant
 
-            M3(1,//Noncompliant
+            M3(1,      //Noncompliant
                 y: 4);
-            M3(x: 1,//Noncompliant
+            M3(x: 1,   //Noncompliant
                 y: 4);
-            M3(1, 4,
-                7);//Noncompliant
-
-            M3(1, 4);
+            M3(1,      //Noncompliant
+                4,
+                7);    //Noncompliant
+            M3(1,      //Noncompliant
+                4);
         }
     }
 
