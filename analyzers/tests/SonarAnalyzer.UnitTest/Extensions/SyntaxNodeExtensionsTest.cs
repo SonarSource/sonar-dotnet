@@ -733,6 +733,63 @@ public class X
             syntaxTree.GetRoot().GetMappedFilePathFromRoot().Should().Be(expectedFileName);
         }
 
+        [DataTestMethod]
+        [DataRow("""$$public C(int p) { }$$""")]
+        [DataRow("""$$public void M(int p) { }$$""")]
+        [DataRow("""$$public static C operator + (C p) => default;$$""")]
+        [DataRow("""$$public static implicit operator C (int p) => default;$$""")]
+        public void ParameterList_Methods(string declarations)
+        {
+            var node = NodeBetweenMarkers($$"""
+                public class C
+                {
+                    {{declarations}}
+                }
+                """, LanguageNames.CSharp);
+            var actual = ExtensionsCS.ParameterList(node);
+            actual.Should().NotBeNull();
+            var entry = actual.Parameters.Should().ContainSingle().Which;
+            entry.Identifier.ValueText.Should().Be("p");
+        }
+
+        [DataTestMethod]
+        [DataRow("""$$void Local(int p) { }$$""")]
+        [DataRow("""$$static void Local(int p) { }$$""")]
+        [DataRow("""Func<int, int> f = $$(int p) => 0$$;""")]
+        [DataRow("""Func<int, int> f = $$delegate (int p) { return 0; }$$;""")]
+        public void ParameterList_NestedMethods(string declarations)
+        {
+            var node = NodeBetweenMarkers($$"""
+                using System;
+
+                public class C
+                {
+                    public class M()
+                    {
+                        {{declarations}}
+                    }
+                }
+                """, LanguageNames.CSharp);
+            var actual = ExtensionsCS.ParameterList(node);
+            actual.Should().NotBeNull();
+            var entry = actual.Parameters.Should().ContainSingle().Which;
+            entry.Identifier.ValueText.Should().Be("p");
+        }
+
+        [TestMethod]
+        public void ParameterList_Destructor()
+        {
+            var node = NodeBetweenMarkers("""
+                public class C
+                {
+                    $$~C() { }$$
+                }
+                """, LanguageNames.CSharp);
+            var actual = ExtensionsCS.ParameterList(node);
+            actual.Should().NotBeNull();
+            actual.Parameters.Should().BeEmpty();
+        }
+
         private static SyntaxNode NodeBetweenMarkers(string code, string language)
         {
             var position = code.IndexOf("$$");
