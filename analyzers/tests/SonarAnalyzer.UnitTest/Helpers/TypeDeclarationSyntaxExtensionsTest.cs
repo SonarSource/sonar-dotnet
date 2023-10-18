@@ -97,11 +97,15 @@ namespace Test
         [DataRow("struct")]
         [DataRow("readonly struct")]
         [DataRow("record struct")]
+
 #if NET
+
         [DataRow("record")]
         [DataRow("record class")]
         [DataRow("readonly record struct")]
+
 #endif
+
         public void ParameterList_ReturnsList(string type)
         {
             var (tree, model) = TestHelper.CompileCS($$"""
@@ -112,8 +116,9 @@ namespace Test
             var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
             var parameterList = typeDeclaration.ParameterList();
             parameterList.Should().NotBeNull();
-            parameterList.Parameters.Should().ContainSingle();
-            parameterList.Parameters.Should().ContainSingle(p => p.Type is PredefinedTypeSyntax && p.Identifier.ValueText == "i");
+            var entry = parameterList.Parameters.Should().ContainSingle().Which;
+            entry.Type.Should().BeOfType<PredefinedTypeSyntax>();
+            entry.Identifier.ValueText.Should().Be("i");
         }
 
         [TestMethod]
@@ -174,8 +179,9 @@ namespace Test
             var methodSymbol = typeDeclaration.PrimaryConstructor(compilation.GetSemanticModel(tree));
             methodSymbol.Should().NotBeNull();
             methodSymbol.MethodKind.Should().Be(MethodKind.Constructor);
-            methodSymbol.Parameters.Should().ContainSingle();
-            methodSymbol.Parameters.Should().ContainSingle(p => p.Name == "i" && p.Type.SpecialType == SpecialType.System_Int32);
+            var entry = methodSymbol.Parameters.Should().ContainSingle().Which;
+            entry.Name.Should().Be("i");
+            entry.Type.SpecialType.Should().Be(SpecialType.System_Int32);
         }
 
         [DataTestMethod]
@@ -198,12 +204,28 @@ namespace Test
             var methodSymbol = typeDeclaration.PrimaryConstructor(model);
             methodSymbol.Should().NotBeNull();
             methodSymbol.MethodKind.Should().Be(MethodKind.Constructor);
-            methodSymbol.Parameters.Should().ContainSingle();
-            methodSymbol.Parameters.Should().ContainSingle(p => p.Name == "i" && p.Type.SpecialType == SpecialType.System_Int32);
+            var entry = methodSymbol.Parameters.Should().ContainSingle().Which;
+            entry.Name.Should().Be("i");
+            entry.Type.SpecialType.Should().Be(SpecialType.System_Int32);
         }
 
         [TestMethod]
         public void PrimaryConstructor_EmptyPrimaryConstructor()
+        {
+            var (tree, model) = TestHelper.CompileCS($$"""
+            public class Test()
+            {
+            }
+            """);
+            var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
+            var methodSymbol = typeDeclaration.PrimaryConstructor(model);
+            methodSymbol.Should().NotBeNull();
+            methodSymbol.MethodKind.Should().Be(MethodKind.Constructor);
+            methodSymbol.Parameters.Should().BeEmpty();
+        }
+
+        [TestMethod]
+        public void PrimaryConstructor_EmptyPrimaryConstructor_SecondConstructor()
         {
             var (tree, model) = TestHelper.CompileCS($$"""
             public class Test()
