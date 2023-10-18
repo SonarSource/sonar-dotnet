@@ -3,7 +3,7 @@ namespace Repro_8092
 {
     namespace PrimaryParameterlessConstructor
     {
-        class AClassWithBody() { }                // Noncompliant
+        class AClassWithBody() { }                // Noncompliant {{Remove this redundant primary constructor.}}
 //                          ^^
         class AClassWithoutBody();                // Noncompliant
         struct AStructWithBody() { }              // Noncompliant
