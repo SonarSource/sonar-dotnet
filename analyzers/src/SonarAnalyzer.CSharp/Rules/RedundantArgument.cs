@@ -48,9 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         _ => null,
                     };
 
-                    var methodParameterLookup = new CSharpMethodParameterLookup(argumentList, c.SemanticModel);
-
-                    if (methodParameterLookup.MethodSymbol != null)
+                    if (argumentList != null && new CSharpMethodParameterLookup(argumentList, c.SemanticModel) is { MethodSymbol: { } } methodParameterLookup)
                     {
                         foreach (var argumentMapping in methodParameterLookup.GetAllArgumentParameterMappings().Reverse().Where(x => x.Symbol.HasExplicitDefaultValue))
                         {
