@@ -34,6 +34,25 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             context.RegisterNodeAction(CheckConstructorDeclaration, SyntaxKind.ConstructorDeclaration);
             context.RegisterNodeAction(CheckDestructorDeclaration, SyntaxKind.DestructorDeclaration);
+            context.RegisterNodeAction(CheckPrimaryConstructor, SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordClassDeclaration);
+            context.RegisterNodeAction(CheckFieldAndPrimaryConstructor, SyntaxKind.StructDeclaration, SyntaxKindEx.RecordStructDeclaration);
+        }
+
+        private static void CheckFieldAndPrimaryConstructor(SonarSyntaxNodeReportingContext context)
+        {
+            if (!context.Node.ChildNodes().Any(n => n.IsAnyKind(SyntaxKind.FieldDeclaration, SyntaxKind.PropertyDeclaration)))
+            {
+                CheckPrimaryConstructor(context);
+            }
+        }
+
+        private static void CheckPrimaryConstructor(SonarSyntaxNodeReportingContext context)
+        {
+            var typeDeclaration = (TypeDeclarationSyntax)context.Node;
+            if (TypeDeclarationSyntaxExtensions.ParameterList(typeDeclaration) is { Parameters: { Count: 0 } } parameterList)
+            {
+                context.ReportIssue(Diagnostic.Create(Rule, parameterList.GetLocation(), "primary constructor"));
+            }
         }
 
         private static void CheckDestructorDeclaration(SonarSyntaxNodeReportingContext context)

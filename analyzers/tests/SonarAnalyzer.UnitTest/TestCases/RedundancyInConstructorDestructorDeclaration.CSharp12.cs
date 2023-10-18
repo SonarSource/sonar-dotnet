@@ -3,14 +3,15 @@ namespace Repro_8092
 {
     namespace PrimaryParameterlessConstructor
     {
-        class AClassWithBody() { }                // FN
-        class AClassWithoutBody();                // FN
-        struct AStructWithBody() { }              // FN
-        struct AStructWithoutBody();              // FN
-        record ARecordWithBody() { }              // FN
-        record ARecordWithoutBody();              // FN
-        record struct ARecordStructWithBody() { } // FN
-        record struct ARecordStructWithoutBody(); // FN
+        class AClassWithBody() { }                // Noncompliant
+//                          ^^
+        class AClassWithoutBody();                // Noncompliant
+        struct AStructWithBody() { }              // Noncompliant
+        struct AStructWithoutBody();              // Noncompliant
+        record ARecordWithBody() { }              // Noncompliant
+        record ARecordWithoutBody();              // Noncompliant
+        record struct ARecordStructWithBody() { } // Noncompliant
+        record struct ARecordStructWithoutBody(); // Noncompliant
 
         // https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-messages/constructor-errors?f1url=%3FappId%3Droslyn%26k%3Dk(CS8983)#constructors-in-struct-types
         namespace FieldInitializerInStructRequiresConstructor
@@ -33,17 +34,17 @@ namespace Repro_8092
 
         namespace FieldInitializerInClassDontRequireConstructor
         {
-            class AClassWithFieldInitializer()       // FN
+            class AClassWithFieldInitializer()    // Noncompliant
             {
                 public int aField = 42;
             }
 
-            class AClassWithPropertyInitializer()    // FN
+            class AClassWithPropertyInitializer() // Noncompliant
             {
                 public int AProperty { get; } = 42;
             }
 
-            class ARecordWithFieldInitializer()      // FN
+            class ARecordWithFieldInitializer()   // Noncompliant
             {
                 public int aField = 42;
             }
