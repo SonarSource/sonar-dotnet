@@ -20,7 +20,7 @@ namespace Tests.Diagnostics
         }
 
         [HttpPost]
-        [RequestSizeLimit(8_000_001)] // Noncompliant {{Make sure the content length limit is safe here.}}
+        [RequestSizeLimit(8_388_609)] // Noncompliant {{Make sure the content length limit is safe here.}}
 //       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
         public ActionResult PostRequestAboveLimit()
         {
@@ -28,28 +28,28 @@ namespace Tests.Diagnostics
         }
 
         [HttpPost]
-        [RequestSizeLimitAttribute(8_000_001)] // Noncompliant
+        [RequestSizeLimitAttribute(8_388_609)] // Noncompliant
         public ActionResult RequestSizeLimitWithFullname()
         {
             return null;
         }
 
         [HttpPost]
-        [RequestSizeLimit(8_000_000)] // Compliant value is below limit.
+        [RequestSizeLimit(8_388_608)] // Compliant value is below limit.
         public ActionResult PostRequestBelowLimit()
         {
             return null;
         }
 
         [HttpPost]
-        [RequestSizeLimit(8_388_608)] // Noncompliant
+        [RequestSizeLimit(8_389_632)] // Noncompliant
         public ActionResult SizeWith1024Base()
         {
             return null;
         }
 
         [HttpPost]
-        [RequestFormLimits(MultipartBodyLengthLimit = 8_000_001, MultipartHeadersLengthLimit = 42)] // Noncompliant {{Make sure the content length limit is safe here.}}
+        [RequestFormLimits(MultipartBodyLengthLimit = 8_388_609, MultipartHeadersLengthLimit = 42)] // Noncompliant {{Make sure the content length limit is safe here.}}
 //       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         public ActionResult MultipartFormRequestAboveLimit()
         {
@@ -57,14 +57,14 @@ namespace Tests.Diagnostics
         }
 
         [HttpPost]
-        [RequestFormLimitsAttribute(MultipartBodyLengthLimit = 8_000_001)] // Noncompliant
+        [RequestFormLimitsAttribute(MultipartBodyLengthLimit = 8_388_609)] // Noncompliant
         public ActionResult RequestFormLimitsWithFullname()
         {
             return null;
         }
 
         [HttpPost]
-        [RequestFormLimits(MultipartHeadersLengthLimit = 8_000_000)]
+        [RequestFormLimits(MultipartHeadersLengthLimit = 8_388_608)]
         public ActionResult MultipartFormRequestHeadersLimitSet()
         {
             return null;
@@ -77,21 +77,21 @@ namespace Tests.Diagnostics
         }
 
         [HttpPost]
-        [RequestFormLimits(MultipartHeadersLengthLimit = 42, MultipartBodyLengthLimit = 8_000_001)] // Noncompliant {{Make sure the content length limit is safe here.}}
+        [RequestFormLimits(MultipartHeadersLengthLimit = 42, MultipartBodyLengthLimit = 8_388_609)] // Noncompliant {{Make sure the content length limit is safe here.}}
         public ActionResult RequestFormLimitsWithVariousParamsV1()
         {
             return null;
         }
 
         [HttpPost]
-        [RequestFormLimits(BufferBody = true, MultipartBodyLengthLimit = 8_000_001)]  // Noncompliant {{Make sure the content length limit is safe here.}}
+        [RequestFormLimits(BufferBody = true, MultipartBodyLengthLimit = 8_388_609)]  // Noncompliant {{Make sure the content length limit is safe here.}}
         public ActionResult RequestFormLimitsWithVariousParamsV2()
         {
             return null;
         }
 
         [HttpPost]
-        [RequestFormLimits(BufferBody = true, MultipartHeadersLengthLimit = 42, ValueCountLimit = 42, MultipartBodyLengthLimit = 8_000_001)] // Noncompliant
+        [RequestFormLimits(BufferBody = true, MultipartHeadersLengthLimit = 42, ValueCountLimit = 42, MultipartBodyLengthLimit = 8_388_609)] // Noncompliant
         public ActionResult RequestFormLimitsWithVariousParamsV3()
         {
             return null;
@@ -105,7 +105,7 @@ namespace Tests.Diagnostics
         }
 
         [HttpPost]
-        [RequestFormLimits(MultipartBodyLengthLimit = 8_000_000)] // Compliant value is below limit.
+        [RequestFormLimits(MultipartBodyLengthLimit = 8_388_608)] // Compliant value is below limit.
         public ActionResult MultipartFormRequestBelowLimit()
         {
             return null;
@@ -200,25 +200,25 @@ namespace Tests.Diagnostics
 
     }
 
-    [RequestSizeLimit(8_000_001)] // Noncompliant
+    [RequestSizeLimit(8_388_609)] // Noncompliant
     public class RequestSizeLimitAboveController : Controller
     {
 
     }
 
-    [RequestFormLimits(MultipartBodyLengthLimit = 8_000_001)] // Noncompliant
+    [RequestFormLimits(MultipartBodyLengthLimit = 8_388_609)] // Noncompliant
     public class RequestFormLimitsAboveController : Controller
     {
 
     }
 
-    [RequestSizeLimit(8_000_000)]
+    [RequestSizeLimit(8_388_608)]
     public class RequestSizeLimitBelowController : Controller
     {
 
     }
 
-    [RequestFormLimits(MultipartHeadersLengthLimit = 8_000_000)]
+    [RequestFormLimits(MultipartHeadersLengthLimit = 8_388_608)]
     public class RequestFormLimitsBelowController : Controller
     {
 
@@ -226,7 +226,7 @@ namespace Tests.Diagnostics
 
     internal class TestCases
     {
-        [DerivedAttribute(8_000_001)] // FN for performance reasons we decided not to handle derived classes
+        [DerivedAttribute(8_388_609)] // FN for performance reasons we decided not to handle derived classes
         public void Bar() { }
     }
 

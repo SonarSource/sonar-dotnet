@@ -26,7 +26,7 @@ namespace NetCore31.Controllers
         }
 
         [HttpPost]
-        [RequestFormLimits(MultipartBodyLengthLimit = 8_000_001, MultipartHeadersLengthLimit = 42)]
+        [RequestFormLimits(MultipartBodyLengthLimit = 8_388_609, MultipartHeadersLengthLimit = 42)]
         public ActionResult MultipartFormRequestAboveLimit()
         {
             return null;
