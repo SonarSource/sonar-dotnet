@@ -764,7 +764,7 @@ public class X
 
                 public class C
                 {
-                    public class M()
+                    public void M()
                     {
                         {{declarations}}
                     }
@@ -788,6 +788,49 @@ public class X
             var actual = ExtensionsCS.ParameterList(node);
             actual.Should().NotBeNull();
             actual.Parameters.Should().BeEmpty();
+        }
+
+        [DataTestMethod]
+        [DataRow("class")]
+        [DataRow("struct")]
+        [DataRow("record struct")]
+        [DataRow("readonly struct")]
+
+#if NET
+
+        [DataRow("readonly record struct")]
+        [DataRow("record")]
+        [DataRow("record class")]
+
+#endif
+
+        public void ParameterList_PrimaryConstructors(string type)
+        {
+            var node = NodeBetweenMarkers($$"""
+                $$public {{type}} C(int p)
+                {
+                    
+                }$$
+                """, LanguageNames.CSharp);
+            var actual = ExtensionsCS.ParameterList(node);
+            actual.Should().NotBeNull();
+            var entry = actual.Parameters.Should().ContainSingle().Which;
+            entry.Identifier.ValueText.Should().Be("p");
+        }
+
+        [DataTestMethod]
+        [DataRow("$$int i;$$")]
+        [DataRow("$$class Nested { }$$")]
+        public void ParameterList_UnsupportedNodes(string declaration)
+        {
+            var node = NodeBetweenMarkers($$"""
+                public class C
+                {
+                    {{declaration}}
+                }
+                """, LanguageNames.CSharp);
+            var actual = ExtensionsCS.ParameterList(node);
+            actual.Should().BeNull();
         }
 
         private static SyntaxNode NodeBetweenMarkers(string code, string language)
