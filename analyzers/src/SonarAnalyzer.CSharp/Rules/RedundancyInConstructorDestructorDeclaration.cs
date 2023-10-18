@@ -94,6 +94,16 @@ namespace SonarAnalyzer.Rules.CSharp
             && (IsSinglePublicConstructor(constructorDeclaration, semanticModel)
                 || constructorDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword));
 
+        private static bool IsStructWithInitializedFieldOrProperty(ConstructorDeclarationSyntax constructorDeclaration, Lazy<IMethodSymbol> constructorSymbol) =>
+            constructorDeclaration.Parent.Kind() is SyntaxKind.StructDeclaration or SyntaxKindEx.RecordStructDeclaration
+            && constructorSymbol.Value != null
+            && (constructorSymbol.Value.ContainingType.GetMembers()
+                    .OfType<IFieldSymbol>()
+                    .Any(f => f.DeclaringSyntaxReferences.Any(d => d.GetSyntax() is VariableDeclaratorSyntax { Initializer: not null }))
+                || constructorSymbol.Value.ContainingType.GetMembers()
+                    .OfType<IPropertySymbol>()
+                    .Any(p => p.DeclaringSyntaxReferences.Any(d => d.GetSyntax() is PropertyDeclarationSyntax { Initializer: not null })));
+
         private static bool IsSinglePublicConstructor(ConstructorDeclarationSyntax constructorDeclaration, SemanticModel semanticModel) =>
             constructorDeclaration.Modifiers.Any(SyntaxKind.PublicKeyword)
             && IsInitializerEmptyOrRedundant(constructorDeclaration.Initializer)
@@ -109,9 +119,9 @@ namespace SonarAnalyzer.Rules.CSharp
             var symbol = semanticModel.GetDeclaredSymbol(constructorDeclaration);
             return symbol != null
                    && symbol.ContainingType
-                            .GetMembers()
-                            .OfType<IMethodSymbol>()
-                            .Count(m => m.MethodKind == MethodKind.Constructor && !m.IsImplicitlyDeclared) == 1;
+                       .GetMembers()
+                       .OfType<IMethodSymbol>()
+                       .Count(m => m.MethodKind == MethodKind.Constructor && !m.IsImplicitlyDeclared) == 1;
         }
 
         private static bool ContainsInitializedFieldOrProperty(INamedTypeSymbol symbol) =>
