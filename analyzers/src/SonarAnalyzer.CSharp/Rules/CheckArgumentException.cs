@@ -154,7 +154,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             static IEnumerable<string> ParentParameterList(SyntaxNode node) =>
                 node?.Ancestors().OfType<TypeDeclarationSyntax>().FirstOrDefault() is { } typeDeclaration
-                    ? GetIdentifierNames(((TypeDeclarationSyntaxWrapper)typeDeclaration).ParameterList)
+                    ? GetIdentifierNames(typeDeclaration.ParameterList())
                     : Enumerable.Empty<string>();
 
             static IEnumerable<string> GetIdentifierNames(ParameterListSyntax parameterList) =>

@@ -99,6 +99,7 @@ namespace Tests.Diagnostics
             throw new DuplicateWaitObjectException(nameof(Foo5)); // Noncompliant
 
             throw new ArgumentNullException("a");
+            throw new ArgumentNullException("@a");
             throw new ArgumentNullException(nameof(a));
             throw new ArgumentNullException(nameof(@a));
             throw new ArgumentNullException("b");
