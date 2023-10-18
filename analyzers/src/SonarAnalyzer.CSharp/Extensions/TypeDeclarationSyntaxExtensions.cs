@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Extensions
         {
             if (ParameterList(typeDeclaration) is { } parameterList)
             {
-                return parameterList is { Parameters: { Count: > 0 } parameters }
+                return parameterList is { Parameters: { Count: > 0 } parameters } && parameters[0] is { Identifier.RawKind: not (int)SyntaxKind.ArgListKeyword }
                     ? semanticModel.GetDeclaredSymbol(parameters[0])?.ContainingSymbol as IMethodSymbol
                     : semanticModel.GetDeclaredSymbol(typeDeclaration).GetMembers(".ctor").OfType<IMethodSymbol>().FirstOrDefault(m => m is
                     {

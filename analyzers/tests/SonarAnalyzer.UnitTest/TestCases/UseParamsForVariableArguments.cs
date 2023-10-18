@@ -21,7 +21,7 @@ namespace Tests.Diagnostics
 
     public class Program : BaseClass
     {
-        public Program(__arglist) { } // FN
+        public Program(__arglist) { } // Noncompliant {{Use the 'params' keyword instead of '__arglist'.}}
 
         public void Bar(__arglist) // Noncompliant {{Use the 'params' keyword instead of '__arglist'.}}
 //                  ^^^

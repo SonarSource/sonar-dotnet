@@ -32,6 +32,16 @@ namespace SonarAnalyzer.UnitTest.Rules
             builder.AddPaths("UseParamsForVariableArguments.cs")
                 .Verify();
 
+        [TestMethod]
+        public void UseParamsForVariableArguments1() =>
+            builder.AddSnippet("""
+                public interface IFoo
+                {
+                    void Foo(__arglist); // Noncompliant
+                }
+                """)
+                .Verify();
+
 #if NET
 
         [TestMethod]

@@ -332,6 +332,16 @@ namespace SonarAnalyzer.Extensions
             return false;
         }
 
+        public static ParameterListSyntax ParameterList(this SyntaxNode node) =>
+            node switch
+            {
+                BaseMethodDeclarationSyntax method => method.ParameterList,
+                TypeDeclarationSyntax type => type.ParameterList(),
+                { RawKind: (int)SyntaxKindEx.LocalFunctionStatement } localFunction => ((LocalFunctionStatementSyntaxWrapper)localFunction).ParameterList,
+                _ => default,
+            };
+
+
         /// <summary>
         /// Returns the left hand side of a conditional access expression. Returns c in case like a?.b?[0].c?.d.e?.f if d is passed.
         /// </summary>
