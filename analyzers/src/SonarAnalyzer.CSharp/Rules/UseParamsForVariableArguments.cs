@@ -47,7 +47,12 @@ namespace SonarAnalyzer.Rules.CSharp
                         c.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation()));
                     }
                 },
-                SyntaxKind.MethodDeclaration, SyntaxKind.ConstructorDeclaration, SyntaxKind.ClassDeclaration, SyntaxKind.StructDeclaration, SyntaxKindEx.RecordClassDeclaration, SyntaxKindEx.RecordStructDeclaration);
+                SyntaxKind.MethodDeclaration,
+                SyntaxKind.ConstructorDeclaration,
+                SyntaxKind.ClassDeclaration,
+                SyntaxKind.StructDeclaration,
+                SyntaxKindEx.RecordClassDeclaration,
+                SyntaxKindEx.RecordStructDeclaration);
 
         private static IMethodSymbol MethodSymbol(SyntaxNode node, SemanticModel semanticModel) =>
             node switch
