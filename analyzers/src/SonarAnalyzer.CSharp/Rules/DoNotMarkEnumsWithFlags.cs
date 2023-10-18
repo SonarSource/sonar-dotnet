@@ -18,16 +18,17 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Numerics;
+
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class DoNotMarkEnumsWithFlags : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S4070";
+        private const string DiagnosticId = "S4070";
         private const string MessageFormat = "Remove the 'FlagsAttribute' from this enum.";
 
-        private static readonly DiagnosticDescriptor Rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
@@ -52,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         .ToList();
 
                     var allValues = membersWithValues.Select(x => x.Value)
-                        .OfType<ulong>()
+                        .OfType<BigInteger>()
                         .Distinct()
                         .ToList();
 
@@ -67,35 +68,47 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 }, SyntaxKind.EnumDeclaration);
 
-        // The idea of this method is to get rid of invalid values for flags such as negative values and decimals
-        private static ulong? GetEnumValueOrDefault(IFieldSymbol enumMember) =>
-            enumMember.HasConstantValue && ulong.TryParse(enumMember.ConstantValue.ToString(), out var longValue)
-                ? longValue
+        private static BigInteger? GetEnumValueOrDefault(IFieldSymbol enumMember) =>
+            enumMember.HasConstantValue
+                ? enumMember.ConstantValue switch // BigInteger is used here to support enums with base type of ulong. Direct cast is used to avoid string conversion.
+                  {
+                      byte x => (BigInteger)x,
+                      sbyte x => (BigInteger)x,
+                      short x => (BigInteger)x,
+                      ushort x => (BigInteger)x,
+                      int x => (BigInteger)x,
+                      uint x => (BigInteger)x,
+                      long x => (BigInteger)x,
+                      ulong x => (BigInteger)x,
+                      _ => null
+                  }
                 : null;
 
-        private static bool IsValidFlagValue(ulong? enumValue, List<ulong> allValues) =>
-            enumValue.HasValue && (IsZeroOrPowerOfTwo(enumValue.Value) || IsCombinationOfOtherValues(enumValue.Value, allValues));
+        private static bool IsValidFlagValue(BigInteger? enumValue, IEnumerable<BigInteger> allValues) =>
+            enumValue.HasValue
+            && (IsZeroOrPowerOfTwo(enumValue.Value)
+                || IsCombinationOfOtherValues(enumValue.Value, allValues));
 
-        // See https://stackoverflow.com/questions/600293/how-to-check-if-a-number-is-a-power-of-2
-        private static bool IsZeroOrPowerOfTwo(ulong value) =>
-            (value & (value - 1)) == 0;
+        private static bool IsZeroOrPowerOfTwo(BigInteger value) =>
+            value.IsZero
+            || BigInteger.Abs(value).IsPowerOfTwo;
 
-        private static bool IsCombinationOfOtherValues(ulong value, List<ulong> otherValues)
+        private static bool IsCombinationOfOtherValues(BigInteger value, IEnumerable<BigInteger> otherValues)
         {
-            var newValue = value;
-            foreach (var otherValue in otherValues.SkipWhile(v => value <= v))
+            var currentValue = value;
+            foreach (var otherValue in otherValues.SkipWhile(x => value <= x))
             {
-                if (otherValue <= newValue)
+                if (otherValue <= currentValue)
                 {
-                    newValue ^= otherValue;
-                    if (newValue == 0)
+                    currentValue ^= otherValue;
+                    if (currentValue == 0)
                     {
                         return true;
                     }
                 }
             }
 
-            return newValue == 0;
+            return currentValue == 0;
         }
     }
 }
