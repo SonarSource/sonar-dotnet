@@ -93,9 +93,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             var reportMessage = string.Format(MessageFormatConstructor, utilityClass.IsSealed ? SyntaxConstants.Private : SyntaxConstants.Protected);
                             context.ReportIssue(Diagnostic.Create(Rule, constructorDeclaration.Identifier.GetLocation(), reportMessage));
                             break;
-                        case ClassDeclarationSyntax classDeclaration when ClassDeclarationSyntaxWrapper.IsInstance(classDeclaration)
-                                && (ClassDeclarationSyntaxWrapper)classDeclaration is var classDeclarationWrapper
-                                && classDeclarationWrapper.ParameterList is { Parameters.Count: 0 }:
+                        case ClassDeclarationSyntax classDeclaration when classDeclaration.ParameterList() is { Parameters.Count: 0 }:
                             context.ReportIssue(Diagnostic.Create(Rule, classDeclaration.Identifier.GetLocation(), MessageFormatPrimaryConstructor));
                             break;
                         default:
