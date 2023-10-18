@@ -23,11 +23,28 @@ namespace SonarAnalyzer.Rules.CSharp;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class PublicMethodWithMultidimensionalArray : PublicMethodWithMultidimensionalArrayBase<SyntaxKind>
 {
+    private static readonly ImmutableArray<SyntaxKind> KindsOfInterest = ImmutableArray.Create(
+        SyntaxKind.MethodDeclaration,
+        SyntaxKind.ConstructorDeclaration,
+        SyntaxKind.ClassDeclaration,
+        SyntaxKind.StructDeclaration,
+        SyntaxKindEx.RecordClassDeclaration,
+        SyntaxKindEx.RecordStructDeclaration);
+
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+    protected override ImmutableArray<SyntaxKind> SyntaxKindsOfInterest => KindsOfInterest;
 
     protected override Location GetIssueLocation(SyntaxNode node) =>
         Language.Syntax.NodeIdentifier(node)?.GetLocation();
 
     protected override string GetType(SyntaxNode node) =>
         node is MethodDeclarationSyntax ? "method" : "constructor";
+
+    protected override IMethodSymbol MethodSymbolOfNode(SemanticModel semanticModel, SyntaxNode node) =>
+        node switch
+        {
+            { RawKind: (int)SyntaxKind.MethodDeclaration or (int)SyntaxKind.ConstructorDeclaration } => base.MethodSymbolOfNode(semanticModel, node),
+            TypeDeclarationSyntax typeDeclaration => typeDeclaration.PrimaryConstructor(semanticModel),
+            _ => null,
+        };
 }

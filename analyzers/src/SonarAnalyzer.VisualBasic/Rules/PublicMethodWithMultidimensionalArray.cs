@@ -23,7 +23,10 @@ namespace SonarAnalyzer.Rules.VisualBasic;
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
 public sealed class PublicMethodWithMultidimensionalArray : PublicMethodWithMultidimensionalArrayBase<SyntaxKind>
 {
+    private static readonly ImmutableArray<SyntaxKind> KindsOfInterest = ImmutableArray.Create(SyntaxKind.SubStatement, SyntaxKind.FunctionStatement);
+
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+    protected override ImmutableArray<SyntaxKind> SyntaxKindsOfInterest => KindsOfInterest;
 
     protected override Location GetIssueLocation(SyntaxNode node) =>
         node is ConstructorBlockSyntax x
