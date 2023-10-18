@@ -45,7 +45,7 @@ public abstract class PublicMethodWithMultidimensionalArrayBase<TSyntaxKind> : S
                     c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], GetIssueLocation(c.Node), GetType(c.Node)));
                 }
             },
-            SyntaxKindsOfInterest);
+            SyntaxKindsOfInterest.ToArray());
 
     protected virtual IMethodSymbol MethodSymbolOfNode(SemanticModel semanticModel, SyntaxNode node) =>
            semanticModel.GetDeclaredSymbol(node) as IMethodSymbol;
