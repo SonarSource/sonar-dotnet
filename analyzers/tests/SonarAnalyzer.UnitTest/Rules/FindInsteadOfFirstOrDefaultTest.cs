@@ -26,12 +26,17 @@ namespace SonarAnalyzer.UnitTest.Rules;
 [TestClass]
 public class FindInsteadOfFirstOrDefaultTest
 {
-    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.FindInsteadOfFirstOrDefault>();
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.FindInsteadOfFirstOrDefault>().WithConcurrentAnalysis(false);
     private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.FindInsteadOfFirstOrDefault>();
 
     [TestMethod]
     public void FindInsteadOfFirstOrDefault_CS() =>
-        builderCS.AddPaths("FindInsteadOfFirstOrDefault.cs").Verify();
+        builderCS.AddPaths("FindInsteadOfFirstOrDefault.cs").AddReferences(GetReferencesEntityFrameworkNetCore("7.0.5")).Verify();
+
+    internal static IEnumerable<MetadataReference> GetReferencesEntityFrameworkNetCore(string entityFrameworkVersion) =>
+        Enumerable.Empty<MetadataReference>()
+            .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCore(entityFrameworkVersion))
+            .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreRelational(entityFrameworkVersion));
 
 #if NET
 
