@@ -140,13 +140,13 @@ internal sealed partial class UnsafeBinderPartial1 : SerializationBinder
 
 internal sealed partial class UnsafeBinderPartial1 : SerializationBinder
 {
-    public override partial Type BindToType(string assemblyName, string typeName) =>    // Secondary
+    public override partial Type BindToType(string assemblyName, string typeName) =>    // Secondary {{This method allows all types.}}
         Assembly.Load(assemblyName).GetType(typeName);
 }
 
 internal sealed partial class UnsafeBinderPartial2 : SerializationBinder
 {
-    public override partial Type BindToType(string assemblyName, string typeName) =>    // Secondary
+    public override partial Type BindToType(string assemblyName, string typeName) =>    // Secondary {{This method allows all types.}}
         Assembly.Load(assemblyName).GetType(typeName);
 }
 

@@ -100,11 +100,11 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
         var secondaryLocations = SecondaryLocations(block, conditionValue, syntax.Span.End);
         if (secondaryLocations.Any())
         {
-            ReportIssue(Rule2583, syntax, secondaryLocations, issueMessage, S2583MessageSuffix);
+            ReportIssue(Rule2583, syntax, secondaryLocations, properties: null, issueMessage, S2583MessageSuffix);
         }
         else
         {
-            ReportIssue(Rule2589, syntax, null, issueMessage, string.Empty);
+            ReportIssue(Rule2589, syntax, additionalLocations: null, properties: null, issueMessage, string.Empty);
         }
     }
 

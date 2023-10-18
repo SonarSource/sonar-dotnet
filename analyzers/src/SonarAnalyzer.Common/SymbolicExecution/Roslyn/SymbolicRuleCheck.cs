@@ -47,30 +47,41 @@ public abstract class SymbolicRuleCheck : SymbolicCheck
     }
 
     protected void ReportIssue(IOperationWrapperSonar operation, params object[] messageArgs) =>
-        ReportIssue(operation.Instance, messageArgs);
+        ReportIssue(operation.Instance, additionalLocations: null, properties: null, messageArgs);
 
     protected void ReportIssue(IOperation operation, params object[] messageArgs) =>
-        ReportIssue(operation, null, messageArgs);
+        ReportIssue(operation, additionalLocations: null, properties: null, messageArgs);
 
-    protected void ReportIssue(IOperation operation, IEnumerable<Location> additionalLocations, params object[] messageArgs)
+    protected void ReportIssue(IOperation operation,
+                               IEnumerable<Location> additionalLocations,
+                               ImmutableDictionary<string, string> properties,
+                               params object[] messageArgs)
     {
         _ = Rule ?? throw new InvalidOperationException(
             $"""
             Property {nameof(Rule)} is null.
             Use the "void ReportIssue(DiagnosticDescriptor rule, IOperation operation, IEnumerable<Location> additionalLocations, params object[] messageArgs)" overload
             """);
-        ReportIssue(Rule, operation, additionalLocations, messageArgs);
+        ReportIssue(Rule, operation, additionalLocations, properties, messageArgs);
     }
 
-    protected void ReportIssue(DiagnosticDescriptor rule, IOperation operation, IEnumerable<Location> additionalLocations, params object[] messageArgs) =>
-        ReportIssue(rule, operation.Syntax, additionalLocations, messageArgs);
+    private void ReportIssue(DiagnosticDescriptor rule,
+                             IOperation operation,
+                             IEnumerable<Location> additionalLocations,
+                             ImmutableDictionary<string, string> properties,
+                             params object[] messageArgs) =>
+        ReportIssue(rule, operation.Syntax, additionalLocations, properties, messageArgs);
 
-    protected void ReportIssue(DiagnosticDescriptor rule, SyntaxNode syntax, IEnumerable<Location> additionalLocations, params object[] messageArgs)
+    protected void ReportIssue(DiagnosticDescriptor rule,
+                               SyntaxNode syntax,
+                               IEnumerable<Location> additionalLocations,
+                               ImmutableDictionary<string, string> properties = null,
+                               params object[] messageArgs)
     {
         var location = syntax.GetLocation();
         if (reportedDiagnostics.Add(location))
         {
-            context.ReportIssue(Diagnostic.Create(rule, location, additionalLocations, messageArgs));
+            context.ReportIssue(Diagnostic.Create(rule, location, additionalLocations, properties, messageArgs));
         }
     }
 }
