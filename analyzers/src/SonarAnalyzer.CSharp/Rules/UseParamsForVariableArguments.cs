@@ -35,8 +35,8 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterNodeAction(
                 c =>
                 {
-                    if (c.Node.ParameterList() is { Parameters: { Count: > 0 } parameters } parameterList
-                        && parameterList.Parameters.Any(p => p.Identifier.IsKind(SyntaxKind.ArgListKeyword))
+                    if (c.Node.ParameterList() is { Parameters: { Count: > 0 } parameters }
+                        && parameters.Any(p => p.Identifier.IsKind(SyntaxKind.ArgListKeyword))
                         && CheckModifiers(c.Node)
                         && c.Node.GetIdentifier() is { IsMissing: false } identifier
                         && MethodSymbol(c.Node, c.SemanticModel) is { } methodSymbol
@@ -62,11 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 _ => null,
             };
 
-        private bool CheckModifiers(SyntaxNode node) =>
-            node switch
-            {
-                BaseMethodDeclarationSyntax method => !method.Modifiers.Any(SyntaxKind.ExternKeyword),
-                _ => true,
-            };
+        private static bool CheckModifiers(SyntaxNode node) =>
+            (node is BaseMethodDeclarationSyntax method && !method.Modifiers.Any(SyntaxKind.ExternKeyword)) || true;
     }
 }
