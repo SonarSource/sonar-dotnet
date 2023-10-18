@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.Helpers;
+
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -35,36 +37,39 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     // Can't use optional arguments in expression trees (CS0584), so skip those
-                    if (c.IsInExpressionTree())
+                    if (!c.IsInExpressionTree()
+                        && ArgumentList(c) is { } argumentList
+                        && new CSharpMethodParameterLookup(argumentList, c.SemanticModel) is { MethodSymbol: { } } methodParameterLookup)
                     {
-                        return;
-                    }
-
-                    var argumentList = c.Node switch
-                    {
-                        InvocationExpressionSyntax invocationExpression => invocationExpression.ArgumentList,
-                        ObjectCreationExpressionSyntax objectCreationExpression => objectCreationExpression.ArgumentList,
-                        { RawKind: (int)SyntaxKindEx.ImplicitObjectCreationExpression } => ((ImplicitObjectCreationExpressionSyntaxWrapper)c.Node).ArgumentList,
-                        _ => null,
-                    };
-
-                    if (argumentList != null && new CSharpMethodParameterLookup(argumentList, c.SemanticModel) is { MethodSymbol: { } } methodParameterLookup)
-                    {
-                        foreach (var argumentMapping in methodParameterLookup.GetAllArgumentParameterMappings().Reverse().Where(x => x.Symbol.HasExplicitDefaultValue))
-                        {
-                            var hasDefaultValue = ArgumentHasDefaultValue(argumentMapping, c.SemanticModel);
-                            if (argumentMapping.Node.NameColon == null && !hasDefaultValue)
-                            {
-                                return;
-                            }
-                            else if (hasDefaultValue)
-                            {
-                                c.ReportIssue(Diagnostic.Create(Rule, argumentMapping.Node.GetLocation(), argumentMapping.Symbol.Name));
-                            }
-                        }
+                        ProcessArgumentMappings(c, methodParameterLookup);
                     }
                 },
                 SyntaxKind.InvocationExpression, SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
+
+        private static void ProcessArgumentMappings(SonarSyntaxNodeReportingContext context, CSharpMethodParameterLookup methodParameterLookup)
+        {
+            foreach (var argumentMapping in methodParameterLookup.GetAllArgumentParameterMappings().Reverse().Where(x => x.Symbol.HasExplicitDefaultValue))
+            {
+                var hasDefaultValue = ArgumentHasDefaultValue(argumentMapping, context.SemanticModel);
+                if (argumentMapping.Node.NameColon == null && !hasDefaultValue)
+                {
+                    return;
+                }
+                else if (hasDefaultValue)
+                {
+                    context.ReportIssue(Diagnostic.Create(Rule, argumentMapping.Node.GetLocation(), argumentMapping.Symbol.Name));
+                }
+            }
+        }
+
+        private static ArgumentListSyntax ArgumentList(SonarSyntaxNodeReportingContext c) =>
+            c.Node switch
+            {
+                InvocationExpressionSyntax invocationExpression => invocationExpression.ArgumentList,
+                ObjectCreationExpressionSyntax objectCreationExpression => objectCreationExpression.ArgumentList,
+                { RawKind: (int)SyntaxKindEx.ImplicitObjectCreationExpression } => ((ImplicitObjectCreationExpressionSyntaxWrapper)c.Node).ArgumentList,
+                _ => null,
+            };
 
         internal static bool ArgumentHasDefaultValue(NodeAndSymbol<ArgumentSyntax, IParameterSymbol> argumentMapping, SemanticModel semanticModel)
         {
