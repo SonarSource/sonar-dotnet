@@ -65,4 +65,23 @@ Namespace Tests.Diagnostics
         End Sub
 
     End Class
+
+    Public Class Constructors
+        Public Sub New(A As Integer()()) ' Noncompliant {{Make this constructor private or simplify its parameters to not use multidimensional/jagged arrays.}}
+'                  ^^^
+        End Sub
+
+        Public Sub New(A As Integer(,)) ' Noncompliant
+        End Sub
+
+        Public Sub New(ParamArray A As Integer())
+        End Sub
+
+        Public Sub New(ParamArray A As Integer()()()) ' Noncompliant
+        End Sub
+
+        Public Sub New(I As Integer)
+        End Sub
+    End Class
+
 End Namespace
