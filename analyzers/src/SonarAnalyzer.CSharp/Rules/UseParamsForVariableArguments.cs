@@ -63,6 +63,7 @@ namespace SonarAnalyzer.Rules.CSharp
             };
 
         private static bool CheckModifiers(SyntaxNode node) =>
-            (node is BaseMethodDeclarationSyntax method && !method.Modifiers.Any(SyntaxKind.ExternKeyword)) || true;
+            node is not BaseMethodDeclarationSyntax method
+            || !method.Modifiers.Any(SyntaxKind.ExternKeyword);
     }
 }
