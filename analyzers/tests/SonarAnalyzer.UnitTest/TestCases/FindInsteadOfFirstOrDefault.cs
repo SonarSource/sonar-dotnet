@@ -173,25 +173,7 @@ public class ExpressionTree
     {
         Expression<Func<List<int>, int>> firstThree = list => list.FirstOrDefault(el => el == 3); // Compliant (IsInExpressionTree)
     }
-}
 
-// See https://github.com/SonarSource/sonar-dotnet/issues/7964
-public class Repro_7964
-{
-    public class PersonProperty
-    {
-        public string Value { get; set; }
-    }
-
-    public class Person
-    {
-        public string Id { get; set; }
-
-        public List<PersonProperty> Properties { get; set; }
-    }
-
-    public void Repro(IQueryable<Person> persons)
-    {
-        var person = persons.FirstOrDefault(p => p.Properties.FirstOrDefault(pp => pp.Value == "test") != null); // Compliant (IsInExpressionTree)
-    }
+    public List<string> Repro_7964(IQueryable<List<string>> values) =>                 // See https://github.com/SonarSource/sonar-dotnet/issues/7964
+        values.FirstOrDefault(p => p.FirstOrDefault(x => x.Equals("a")) != null); // Compliant - usage in expression tree
 }
