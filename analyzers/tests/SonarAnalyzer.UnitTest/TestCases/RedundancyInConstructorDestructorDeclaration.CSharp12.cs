@@ -30,6 +30,24 @@ namespace Repro_8092
             {
                 public int aField = 42;
             }
+
+            partial struct PartialStructWithPropertyInitializer() // Compliant
+            {
+            }
+
+            partial struct PartialStructWithPropertyInitializer
+            {
+                public int AProperty { get; } = 42;
+            }
+
+            partial record struct PartialRecordStructWithFieldInitializer() // Compliant
+            {
+            }
+
+            partial record struct PartialRecordStructWithFieldInitializer
+            {
+                public int AField = 42;
+            }
         }
 
         namespace FieldInitializerInClassDontRequireConstructor
