@@ -54,7 +54,7 @@ End Class
 Class UnsafeTypeResolver
     Inherits JavaScriptTypeResolver
     Public Overrides Function ResolveType(id As String) As Type
-        '                     ^^^^^^^^^^^ Secondary [unsafeResolver1, unsafeResolver3, unsafeResolver4]
+        '                     ^^^^^^^^^^^ Secondary [unsafeResolver1, unsafeResolver3, unsafeResolver4] {{This method allows all types.}}
         Return Type.GetType(id)
     End Function
 
@@ -104,7 +104,7 @@ Class UnsafeResolverWithOtherMethods
     End Function
 
     Public Overrides Function ResolveType(id As String) As Type
-        '                     ^^^^^^^^^^^ Secondary [unsafeResolver2]
+        '                     ^^^^^^^^^^^ Secondary [unsafeResolver2] {{This method allows all types.}}
         Return Type.GetType(id)
     End Function
 

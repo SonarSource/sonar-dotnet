@@ -212,7 +212,7 @@ internal class Serializer
         new BinaryFormatter()                                                   // Noncompliant [unsafeBinder13]: unsafe binder on at least one path
         {
             Binder = condition ? (SerializationBinder) new SafeBinderExpressionWithNull() : new UnsafeBinder()
-        }.Deserialize(new MemoryStream());                                      
+        }.Deserialize(new MemoryStream());
     }
 
     internal BinaryFormatter UnknownBinaryFormattersAreSafeByDefault(BinaryFormatter formatter)
@@ -303,7 +303,7 @@ internal sealed class SafeBinderWithThrowExpression : SerializationBinder
 internal sealed class UnsafeBinder : SerializationBinder
 {
     public override Type BindToType(string assemblyName, string typeName)   // nullbinder1: FP
-    //                   ^^^^^^^^^^ Secondary [unsafeBinder1, unsafeBinder2, unsafeBinder3, unsafeBinder4, unsafeBinder5, unsafeBinder6, unsafeBinder7, unsafeBinder8, unsafeBinder9, unsafeBinder10, unsafeBinder11, unsafeBinder12, unsafeBinder13, unsafeBinder14, unsafeBinder15, unsafeBinder16, nullBinder1]
+    //                   ^^^^^^^^^^ Secondary [unsafeBinder1, unsafeBinder2, unsafeBinder3, unsafeBinder4, unsafeBinder5, unsafeBinder6, unsafeBinder7, unsafeBinder8, unsafeBinder9, unsafeBinder10, unsafeBinder11, unsafeBinder12, unsafeBinder13, unsafeBinder14, unsafeBinder15, unsafeBinder16, nullBinder1] {{This method allows all types.}}
     {
         return Assembly.Load(assemblyName).GetType(typeName);
     }
@@ -312,7 +312,7 @@ internal sealed class UnsafeBinder : SerializationBinder
 internal sealed class UnsafeBinderExpressionBody : SerializationBinder
 {
     public override Type BindToType(string assemblyName, string typeName) =>
-//                       ^^^^^^^^^^ Secondary
+//                       ^^^^^^^^^^ Secondary {{This method allows all types.}}
         Assembly.Load(assemblyName).GetType(typeName);
 }
 
@@ -332,7 +332,7 @@ internal sealed class UnsafeBinderWithOtherMethods : SerializationBinder
         throw new SerializationException("Not implemented.");
 
     public override Type BindToType(string assemblyName, string typeName) =>
-//                       ^^^^^^^^^^ Secondary
+//                       ^^^^^^^^^^ Secondary {{This method allows all types.}}
         Assembly.Load(assemblyName).GetType(typeName);
 }
 

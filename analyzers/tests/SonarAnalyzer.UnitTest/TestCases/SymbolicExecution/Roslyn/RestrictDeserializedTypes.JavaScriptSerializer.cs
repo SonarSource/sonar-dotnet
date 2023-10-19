@@ -56,7 +56,7 @@ internal class Serializer
 internal class UnsafeTypeResolver : JavaScriptTypeResolver
 {
     public override Type ResolveType(string id) => Type.GetType(id);
-    //                   ^^^^^^^^^^^ Secondary [unsafeResolver1, unsafeResolver3, unsafeResolver4]
+    //                   ^^^^^^^^^^^ Secondary [unsafeResolver1, unsafeResolver3, unsafeResolver4] {{This method allows all types.}}
 
     public override string ResolveTypeId(Type type) => throw new NotImplementedException();
 }

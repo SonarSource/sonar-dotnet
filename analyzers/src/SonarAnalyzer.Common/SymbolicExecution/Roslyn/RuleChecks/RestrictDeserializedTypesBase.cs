@@ -29,8 +29,9 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
     protected const string MessageFormat = "{0}";
     private const string RestrictTypesMessage = "Restrict types of objects allowed to be deserialized.";
     private const string VerifyMacMessage = "Serialized data signature (MAC) should be verified.";
+    private const string SecondaryMessage = "This method allows all types.";
 
-    private static readonly KnownType[] FormattersWithBinderProperty = new[]
+    private static readonly KnownType[] FormattersWithBinderProperty =
     {
         KnownType.System_Runtime_Serialization_Formatters_Binary_BinaryFormatter,
         KnownType.System_Runtime_Serialization_NetDataContractSerializer,
@@ -80,7 +81,7 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
             var additionalLocations = methodDeclaration is not null
                 ? new[] { GetIdentifier(methodDeclaration).GetLocation() }
                 : Array.Empty<Location>();
-            ReportIssue(operation, additionalLocations, RestrictTypesMessage);
+            ReportIssue(operation, additionalLocations, additionalLocations.ToProperties(SecondaryMessage), RestrictTypesMessage);
         }
         return state;
     }

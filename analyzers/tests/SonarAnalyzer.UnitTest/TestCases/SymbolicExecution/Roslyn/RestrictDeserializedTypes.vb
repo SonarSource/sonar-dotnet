@@ -270,7 +270,7 @@ Friend NotInheritable Class UnsafeBinder
     Inherits SerializationBinder
 
     Public Overrides Function BindToType(ByVal assemblyName As String, ByVal typeName As String) As Type    ' FP: nothingBinder1
-        '                     ^^^^^^^^^^ Secondary [unsafeBinder1, unsafeBinder2, unsafeBinder3, unsafeBinder4, unsafeBinder5, unsafeBinder6, unsafeBinder7, unsafeBinder8, unsafeBinder9, unsafeBinder10, unsafeBinder11, unsafeBinder14, unsafeBinder15, unsafeBinder16, unsafeBinder17, nothingBinder1]
+        '                     ^^^^^^^^^^ Secondary [unsafeBinder1, unsafeBinder2, unsafeBinder3, unsafeBinder4, unsafeBinder5, unsafeBinder6, unsafeBinder7, unsafeBinder8, unsafeBinder9, unsafeBinder10, unsafeBinder11, unsafeBinder14, unsafeBinder15, unsafeBinder16, unsafeBinder17, nothingBinder1] {{This method allows all types.}}
         Return Assembly.Load(assemblyName).[GetType](typeName)
     End Function
 End Class
@@ -279,7 +279,7 @@ Friend NotInheritable Class UnsafeBinderExpressionBody
     Inherits SerializationBinder
 
     Public Overrides Function BindToType(ByVal assemblyName As String, ByVal typeName As String) As Type
-        '                     ^^^^^^^^^^ Secondary [unsafeBinder12]
+        '                     ^^^^^^^^^^ Secondary [unsafeBinder12] {{This method allows all types.}}
         Return Assembly.Load(assemblyName).[GetType](typeName)
     End Function
 
@@ -304,7 +304,7 @@ Friend NotInheritable Class UnsafeBinderWithOtherMethods
     End Function
 
     Public Overrides Function BindToType(ByVal assemblyName As String, ByVal typeName As String) As Type
-        '                     ^^^^^^^^^^ Secondary [unsafeBinder13]
+        '                     ^^^^^^^^^^ Secondary [unsafeBinder13] {{This method allows all types.}}
         Return Assembly.Load(assemblyName).[GetType](typeName)
     End Function
 End Class

@@ -85,7 +85,7 @@ internal sealed class SafeBinderExpressionWithNull : SerializationBinder
 internal sealed class UnsafeBinder : SerializationBinder
 {
     public override Type BindToType(string assemblyName, string typeName)
-    //                   ^^^^^^^^^^ Secondary [unsafeBinder1, unsafeBinder2, unsafeBinder3, unsafeBinder4, unsafeBinder5]
+    //                   ^^^^^^^^^^ Secondary [unsafeBinder1, unsafeBinder2, unsafeBinder3, unsafeBinder4, unsafeBinder5] {{This method allows all types.}}
     {
         return Assembly.Load(assemblyName).GetType(typeName);
     }
