@@ -71,20 +71,6 @@ namespace Tests.Diagnostics
         }
     }
 
-    public class MyClass1
-    {
-        Stream unmanagedResource;
-
-        ~MyClass1() // Compliant
-        {
-            if (unmanagedResource != null)
-            {
-                unmanagedResource.Dispose();
-                unmanagedResource = null;
-            }
-        }
-    }
-
     public class MyClass2
     {
         private MyClass2()
@@ -120,6 +106,20 @@ namespace Tests.Diagnostics
     {
         public MyClass6() : base(10)
         {
+        }
+    }
+
+    public class MyClass7
+    {
+        Stream unmanagedResource;
+
+        ~MyClass7() // Compliant
+        {
+            if (unmanagedResource != null)
+            {
+                unmanagedResource.Dispose();
+                unmanagedResource = null;
+            }
         }
     }
 

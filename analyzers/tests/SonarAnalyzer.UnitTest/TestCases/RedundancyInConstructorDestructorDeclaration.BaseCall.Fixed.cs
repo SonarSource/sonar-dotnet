@@ -94,6 +94,20 @@ namespace Tests.Diagnostics
         }
     }
 
+    public class MyClass7
+    {
+        Stream unmanagedResource;
+
+        ~MyClass7() // Compliant
+        {
+            if (unmanagedResource != null)
+            {
+                unmanagedResource.Dispose();
+                unmanagedResource = null;
+            }
+        }
+    }
+
     class LambdaCtor
     {
         private int i;
