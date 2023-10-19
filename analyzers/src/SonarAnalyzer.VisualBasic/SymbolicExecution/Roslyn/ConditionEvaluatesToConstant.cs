@@ -41,7 +41,7 @@ public class ConditionEvaluatesToConstant : ConditionEvaluatesToConstantBase
     protected override bool IsLockStatement(SyntaxNode syntax) =>
         syntax.IsKind(SyntaxKind.SyncLockBlock);
 
-    private sealed class SyntaxKindWalker : SafeVisualBasicSyntaxWalker
+    internal sealed class SyntaxKindWalker : SafeVisualBasicSyntaxWalker
     {
         public bool ContainsCondition { get; private set; }
 
@@ -55,7 +55,7 @@ public class ConditionEvaluatesToConstant : ConditionEvaluatesToConstantBase
 
         public override void VisitBinaryConditionalExpression(BinaryConditionalExpressionSyntax node)
         {
-            ContainsCondition |= node.Kind() is SyntaxKind.BinaryConditionalExpression;
+            ContainsCondition = true;
             base.VisitBinaryConditionalExpression(node);
         }
 
@@ -67,43 +67,44 @@ public class ConditionEvaluatesToConstant : ConditionEvaluatesToConstantBase
 
         public override void VisitConditionalAccessExpression(ConditionalAccessExpressionSyntax node)
         {
-            ContainsCondition |= node.Kind() is SyntaxKind.ConditionalAccessExpression;
+            ContainsCondition = true;
             base.VisitConditionalAccessExpression(node);
         }
 
         public override void VisitDoStatement(DoStatementSyntax node)
         {
-            ContainsCondition |= node.Kind() is SyntaxKind.DoWhileStatement or SyntaxKind.DoUntilStatement or SyntaxKind.SimpleDoStatement;
+            // Possible SyntaxKinds: SyntaxKind.DoWhileStatement or SyntaxKind.DoUntilStatement or SyntaxKind.SimpleDoStatement
+            ContainsCondition = true;
             base.VisitDoStatement(node);
         }
 
         public override void VisitIfStatement(IfStatementSyntax node)
         {
-            ContainsCondition |= node.Kind() is SyntaxKind.IfStatement;
+            ContainsCondition = true;
             base.VisitIfStatement(node);
         }
 
         public override void VisitSelectStatement(SelectStatementSyntax node)
         {
-            ContainsCondition |= node.Kind() is SyntaxKind.SelectStatement;
+            ContainsCondition = true;
             base.VisitSelectStatement(node);
         }
 
         public override void VisitSingleLineIfStatement(SingleLineIfStatementSyntax node)
         {
-            ContainsCondition |= node.Kind() is SyntaxKind.SingleLineIfStatement;
+            ContainsCondition = true;
             base.VisitSingleLineIfStatement(node);
         }
 
         public override void VisitTernaryConditionalExpression(TernaryConditionalExpressionSyntax node)
         {
-            ContainsCondition |= node.Kind() is SyntaxKind.TernaryConditionalExpression;
+            ContainsCondition = true;
             base.VisitTernaryConditionalExpression(node);
         }
 
         public override void VisitWhileStatement(WhileStatementSyntax node)
         {
-            ContainsCondition |= node.Kind() is SyntaxKind.WhileStatement;
+            ContainsCondition = true;
             base.VisitWhileStatement(node);
         }
     }
