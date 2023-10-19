@@ -36,30 +36,19 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterNodeAction(
                 c =>
                 {
-                    // Can't use optional arguments in expression trees (CS0584), so skip those
-                    if (!c.IsInExpressionTree()
+                    if (!c.IsInExpressionTree() // Can't use optional arguments in expression trees (CS0584), so skip those
                         && ArgumentList(c) is { } argumentList
                         && new CSharpMethodParameterLookup(argumentList, c.SemanticModel) is { MethodSymbol: { } } methodParameterLookup)
                     {
-                        ProcessArgumentMappings(c, methodParameterLookup);
+                        foreach (var argumentMapping in methodParameterLookup.GetAllArgumentParameterMappings().Reverse().Where(x =>
+                            x.Symbol.HasExplicitDefaultValue
+                            && ArgumentHasDefaultValue(x, c.SemanticModel)))
+                        {
+                            c.ReportIssue(Diagnostic.Create(Rule, argumentMapping.Node.GetLocation(), argumentMapping.Symbol.Name));
+                        }
                     }
                 },
                 SyntaxKind.InvocationExpression, SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
-
-        private static void ProcessArgumentMappings(SonarSyntaxNodeReportingContext context, CSharpMethodParameterLookup methodParameterLookup)
-        {
-            foreach (var argumentMapping in methodParameterLookup.GetAllArgumentParameterMappings().Reverse().Where(x => x.Symbol.HasExplicitDefaultValue))
-            {
-                if (argumentMapping is { Node.NameColon: null, Symbol.HasExplicitDefaultValue: false })
-                {
-                    return;
-                }
-                if (ArgumentHasDefaultValue(argumentMapping, context.SemanticModel))
-                {
-                    context.ReportIssue(Diagnostic.Create(Rule, argumentMapping.Node.GetLocation(), argumentMapping.Symbol.Name));
-                }
-            }
-        }
 
         private static ArgumentListSyntax ArgumentList(SonarSyntaxNodeReportingContext c) =>
             c.Node switch
