@@ -53,11 +53,8 @@ public class ConditionEvaluatesToConstant : ConditionEvaluatesToConstantBase
             }
         }
 
-        public override void VisitBinaryConditionalExpression(BinaryConditionalExpressionSyntax node)
-        {
+        public override void VisitBinaryConditionalExpression(BinaryConditionalExpressionSyntax node) =>
             ContainsCondition = true;
-            base.VisitBinaryConditionalExpression(node);
-        }
 
         public override void VisitBinaryExpression(BinaryExpressionSyntax node)
         {
@@ -65,47 +62,26 @@ public class ConditionEvaluatesToConstant : ConditionEvaluatesToConstantBase
             base.VisitBinaryExpression(node);
         }
 
-        public override void VisitConditionalAccessExpression(ConditionalAccessExpressionSyntax node)
-        {
+        public override void VisitConditionalAccessExpression(ConditionalAccessExpressionSyntax node) =>
             ContainsCondition = true;
-            base.VisitConditionalAccessExpression(node);
-        }
 
-        public override void VisitDoStatement(DoStatementSyntax node)
-        {
+        public override void VisitDoStatement(DoStatementSyntax node) =>
             // Possible SyntaxKinds: SyntaxKind.DoWhileStatement or SyntaxKind.DoUntilStatement or SyntaxKind.SimpleDoStatement
             ContainsCondition = true;
-            base.VisitDoStatement(node);
-        }
 
-        public override void VisitIfStatement(IfStatementSyntax node)
-        {
+        public override void VisitIfStatement(IfStatementSyntax node) =>
             ContainsCondition = true;
-            base.VisitIfStatement(node);
-        }
 
-        public override void VisitSelectStatement(SelectStatementSyntax node)
-        {
+        public override void VisitSelectStatement(SelectStatementSyntax node) =>
             ContainsCondition = true;
-            base.VisitSelectStatement(node);
-        }
 
-        public override void VisitSingleLineIfStatement(SingleLineIfStatementSyntax node)
-        {
+        public override void VisitSingleLineIfStatement(SingleLineIfStatementSyntax node) =>
             ContainsCondition = true;
-            base.VisitSingleLineIfStatement(node);
-        }
 
-        public override void VisitTernaryConditionalExpression(TernaryConditionalExpressionSyntax node)
-        {
+        public override void VisitTernaryConditionalExpression(TernaryConditionalExpressionSyntax node) =>
             ContainsCondition = true;
-            base.VisitTernaryConditionalExpression(node);
-        }
 
-        public override void VisitWhileStatement(WhileStatementSyntax node)
-        {
+        public override void VisitWhileStatement(WhileStatementSyntax node) =>
             ContainsCondition = true;
-            base.VisitWhileStatement(node);
-        }
     }
 }
