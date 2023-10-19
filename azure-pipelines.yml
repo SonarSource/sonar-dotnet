@@ -108,7 +108,9 @@ stages:
           solution: '$(solution)'
           platform: '$(buildPlatform)'
           configuration: '$(buildConfiguration)'
-          msbuildArgs: '/p:SignAssembly=$(isReleaseBranch) /p:AssemblyOriginatorKeyFile="$(snk.secureFilePath)" /p:Sha1=$(Build.SourceVersion) /p:BuildNumber=$(Build.BuildId) /p:WarningLevel=0'
+          # Code signing is temporarily disabled until new certificate is properly set up
+          # https://github.com/SonarSource/sonar-dotnet/issues/8230
+          msbuildArgs: '/p:SignAssembly=false /p:AssemblyOriginatorKeyFile="$(snk.secureFilePath)" /p:Sha1=$(Build.SourceVersion) /p:BuildNumber=$(Build.BuildId) /p:WarningLevel=0'
           vsVersion: $(vsVersion)
 
       - task: NuGetCommand@2
@@ -121,7 +123,10 @@ stages:
           verbosityPack: 'Detailed'
           publishPackageMetadata: true
 
+      # Code signing is temporarily disabled until new certificate is properly set up.
+      # https://github.com/SonarSource/sonar-dotnet/issues/8230
       - task: NuGetCommand@2
+        enabled: false
         displayName: "Sign NuGet packages"
         condition: eq(variables.isReleaseBranch, 'True')
         inputs:
