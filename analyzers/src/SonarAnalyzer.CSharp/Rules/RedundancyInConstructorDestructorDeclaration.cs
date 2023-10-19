@@ -129,7 +129,7 @@ namespace SonarAnalyzer.Rules.CSharp
             constructorDeclaration.ParameterList.Parameters.Count == 0;
 
         private static bool ContainsInitializedFieldOrProperty(INamedTypeSymbol symbol) =>
-            symbol.GetMembers().OfType<IFieldSymbol>().Any(f => f.DeclaringSyntaxReferences.Any(d => d.GetSyntax() is VariableDeclaratorSyntax { Initializer: not null }))
-            || symbol.GetMembers().OfType<IPropertySymbol>().Any(p => p.DeclaringSyntaxReferences.Any(d => d.GetSyntax() is PropertyDeclarationSyntax { Initializer: not null }));
+            symbol.GetMembers().OfType<IFieldSymbol>().Any(f => f.DeclaringSyntaxReferences.Any(d => ((VariableDeclaratorSyntax)d.GetSyntax()).Initializer != null))
+            || symbol.GetMembers().OfType<IPropertySymbol>().Any(p => p.DeclaringSyntaxReferences.Any(d => ((PropertyDeclarationSyntax)d.GetSyntax()).Initializer != null));
     }
 }

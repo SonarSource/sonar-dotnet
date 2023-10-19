@@ -21,6 +21,11 @@ namespace Repro_8092
                 public int aField = 42;
             }
 
+            struct AStructWithFieldDoubleInitializers()       // Compliant
+            {
+                public int aField, bField = 42;
+            }
+
             struct AStructWithPropertyInitializer()           // Compliant
             {
                 public int AProperty { get; } = 42;
