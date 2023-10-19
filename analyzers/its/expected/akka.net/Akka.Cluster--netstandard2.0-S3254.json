@@ -2,6 +2,19 @@
 "issues":  [
 {
 "id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'initialValue'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Cluster.cs#L496",
+"region":  {
+"startLine":  496,
+"startColumn":  74,
+"endLine":  496,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterActorRefProvider.cs#L161",

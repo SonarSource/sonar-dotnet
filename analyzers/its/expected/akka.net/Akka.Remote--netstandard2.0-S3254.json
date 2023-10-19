@@ -483,6 +483,84 @@
 },
 {
 "id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'startAsOn'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L83",
+"region":  {
+"startLine":  83,
+"startColumn":  59,
+"endLine":  83,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'cause'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Remoting.cs#L293",
+"region":  {
+"startLine":  293,
+"startColumn":  117,
+"endLine":  293,
+"endColumn":  121
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'cause'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Remoting.cs#L309",
+"region":  {
+"startLine":  309,
+"startColumn":  121,
+"endLine":  309,
+"endColumn":  125
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'cause'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Remoting.cs#L389",
+"region":  {
+"startLine":  389,
+"startColumn":  25,
+"endLine":  389,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'cause'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Remoting.cs#L399",
+"region":  {
+"startLine":  399,
+"startColumn":  21,
+"endLine":  399,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'cause'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Remoting.cs#L404",
+"region":  {
+"startLine":  404,
+"startColumn":  90,
+"endLine":  404,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'repeat'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L873",
