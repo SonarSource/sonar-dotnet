@@ -47,7 +47,7 @@ public class ExplodedNodeTest
     {
         var cfg = TestHelper.CompileCfgBodyCS();
         var sut = new ExplodedNode(cfg.EntryBlock, ProgramState.Empty, null);
-        sut.Operation.Should().BeNull();
+        sut.Operation.Instance.Should().BeNull();
     }
 
     [TestMethod]
@@ -70,7 +70,7 @@ public class ExplodedNodeTest
         TestHelper.Serialize(current.Operation).Should().Be("SimpleAssignment: value = 42 (Implicit)");
 
         current = current.CreateNext(ProgramState.Empty);
-        current.Operation.Should().BeNull();
+        current.Operation.Instance.Should().BeNull();
     }
 
     [TestMethod]
@@ -93,7 +93,7 @@ public class ExplodedNodeTest
         TestHelper.Serialize(sut.Operation).Should().Be("SimpleAssignment: Value As Integer = 42 (Implicit)");
 
         sut = sut.CreateNext(ProgramState.Empty);
-        sut.Operation.Should().BeNull();
+        sut.Operation.Instance.Should().BeNull();
     }
 
     [TestMethod]

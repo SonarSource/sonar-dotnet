@@ -79,7 +79,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 protected override bool IsValid(BasicBlock block)
                 {
-                    if (block.OperationsAndBranchValue.ToReversedExecutionOrder().FirstOrDefault(x => context.AnalyzedSymbol.Equals(MemberSymbol(x.Instance))) is { } operation)
+                    if (block.OperationsAndBranchValue.ToReversedExecutionOrder().FirstOrDefault(x => context.AnalyzedSymbol.Equals(MemberSymbol(x.Instance))) is { Instance: { } } operation)
                     {
                         var isWrite = operation.Parent is { Kind: OperationKindEx.SimpleAssignment } parent
                                       && ISimpleAssignmentOperationWrapper.FromOperation(parent).Target == operation.Instance;

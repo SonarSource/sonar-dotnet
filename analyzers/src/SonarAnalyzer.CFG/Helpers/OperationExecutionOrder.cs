@@ -86,7 +86,7 @@ namespace SonarAnalyzer.Helpers
                         return true;
                     }
                 }
-                Current = null;
+                Current = default;
                 return false;
             }
 

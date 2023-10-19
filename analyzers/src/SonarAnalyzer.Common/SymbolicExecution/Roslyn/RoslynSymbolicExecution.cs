@@ -78,7 +78,7 @@ internal class RoslynSymbolicExecution
                 }
 
                 logger.Log(current, "Processing");
-                var successors = current.Operation == null ? ProcessBranching(current) : ProcessOperation(current);
+                var successors = current.Operation.Instance == null ? ProcessBranching(current) : ProcessOperation(current);
                 foreach (var node in successors)
                 {
                     logger.Log(node, "Enqueuing", true);
@@ -101,7 +101,7 @@ internal class RoslynSymbolicExecution
 
         bool IsLoopCondition() =>
             node.Block.BranchValue is not null
-            && (node.Operation is null || IsInBranchValue(node.Operation.Instance))
+            && (node.Operation.Instance is null || IsInBranchValue(node.Operation.Instance))
             && syntaxClassifier.IsInLoopCondition(node.Block.BranchValue.Syntax);
 
         bool IsInBranchValue(IOperation current)

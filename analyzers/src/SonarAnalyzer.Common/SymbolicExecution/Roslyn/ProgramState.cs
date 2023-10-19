@@ -69,7 +69,7 @@ public sealed record ProgramState : IEquatable<ProgramState>
             : SetOperationValue(operation.WrappedOperation, value);
 
     public ProgramState SetOperationValue(IOperationWrapperSonar operation, SymbolicValue value) =>
-        operation is null
+        operation.Instance is null
             ? throw new ArgumentNullException(nameof(operation))
             : SetOperationValue(operation.Instance, value);
 

@@ -47,7 +47,7 @@ public class SymbolicContextTest
 
     [TestMethod]
     public void NullOperation_SetsOperationToNull() =>
-        new SymbolicContext(null, null, ProgramState.Empty, false, 0, Array.Empty<ISymbol>()).Operation.Should().Be(null);
+        new SymbolicContext(null, default, ProgramState.Empty, false, 0, Array.Empty<ISymbol>()).Operation.Instance.Should().BeNull();
 
     [TestMethod]
     public void PropertiesArePersisted()
@@ -129,7 +129,7 @@ public class SymbolicContextTest
     public void WithState_SameState_ReturnsThis()
     {
         var state = ProgramState.Empty;
-        var sut = new SymbolicContext(null, null, state, false, 0, Array.Empty<ISymbol>());
+        var sut = new SymbolicContext(null, default, state, false, 0, Array.Empty<ISymbol>());
         sut.WithState(state).Should().Be(sut);
     }
 
@@ -137,7 +137,7 @@ public class SymbolicContextTest
     public void WithState_DifferentState_ReturnsNew()
     {
         var state = ProgramState.Empty;
-        var sut = new SymbolicContext(null, null, state, false, 0, Array.Empty<ISymbol>());
+        var sut = new SymbolicContext(null, default, state, false, 0, Array.Empty<ISymbol>());
         var newState = state.SetOperationValue(CreateOperation(), SymbolicValue.Empty);
         sut.WithState(newState).Should().NotBe(sut);
     }
