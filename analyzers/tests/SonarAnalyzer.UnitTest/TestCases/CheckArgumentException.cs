@@ -91,12 +91,20 @@ namespace Tests.Diagnostics
             throw new DuplicateWaitObjectException(paramName); // Compliant
         }
 
-        void Foo6(int a)
+        void Foo6(int a, int @b)
         {
             throw new ArgumentNullException(nameof(a));
             throw new ArgumentNullException(nameof(Foo5)); // Noncompliant
             throw new ArgumentOutOfRangeException(nameof(Foo5)); // Noncompliant
             throw new DuplicateWaitObjectException(nameof(Foo5)); // Noncompliant
+
+            throw new ArgumentNullException("a");
+            throw new ArgumentNullException("@a"); // Noncompliant
+            throw new ArgumentNullException(nameof(a));
+            throw new ArgumentNullException(nameof(@a));
+            throw new ArgumentNullException("b");
+            throw new ArgumentNullException(nameof(b));
+            throw new ArgumentNullException(nameof(@b));
         }
 
         void Foo7(int a)
