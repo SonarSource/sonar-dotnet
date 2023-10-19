@@ -340,6 +340,7 @@ namespace SonarAnalyzer.Extensions
                 { RawKind: (int)SyntaxKindEx.LocalFunctionStatement } localFunction => ((LocalFunctionStatementSyntaxWrapper)localFunction).ParameterList,
                 ParenthesizedLambdaExpressionSyntax lambda => lambda.ParameterList,
                 AnonymousMethodExpressionSyntax anonymous => anonymous.ParameterList,
+                DelegateDeclarationSyntax delegateDeclaration => delegateDeclaration.ParameterList,
                 _ => default,
             };
 

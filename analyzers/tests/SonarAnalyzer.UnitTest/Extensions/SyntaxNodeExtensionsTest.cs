@@ -738,6 +738,7 @@ public class X
         [DataRow("""public void M(int p) { }""")]
         [DataRow("""public static C operator + (C p) => default;""")]
         [DataRow("""public static implicit operator C (int p) => default;""")]
+        [DataRow("""public delegate void M(int p);""")]
         public void ParameterList_Methods(string declarations)
         {
             var node = NodeBetweenMarkers($$"""
