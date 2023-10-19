@@ -40,9 +40,9 @@ namespace SonarAnalyzer.Rules.CSharp
                         && CheckModifiers(c.Node)
                         && c.Node.GetIdentifier() is { IsMissing: false } identifier
                         && MethodSymbol(c.Node, c.SemanticModel) is { } methodSymbol
+                        && !methodSymbol.IsOverride
                         && methodSymbol.IsPubliclyAccessible()
-                        && methodSymbol.GetInterfaceMember() == null
-                        && !methodSymbol.IsOverride)
+                        && methodSymbol.GetInterfaceMember() == null)
                     {
                         c.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation()));
                     }
