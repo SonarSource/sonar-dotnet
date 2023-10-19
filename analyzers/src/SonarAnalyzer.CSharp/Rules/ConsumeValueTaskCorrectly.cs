@@ -56,6 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             c.ReportIssue(rule.CreateDiagnostic(c.Compilation,
                                 syntaxNodes.First().GetLocation(),
                                 additionalLocations: syntaxNodes.Skip(1).Select(node => node.GetLocation()).ToArray(),
+                                properties: null,
                                 messageArgs: ConsumeOnlyOnceMessage));
                         }
                     }

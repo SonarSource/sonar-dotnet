@@ -26,8 +26,9 @@ public static class DiagnosticDescriptorExtensions
                                               Compilation compilation,
                                               Location location,
                                               IEnumerable<Location> additionalLocations,
+                                              ImmutableDictionary<string, string> properties,
                                               params object[] messageArgs) =>
-        Diagnostic.Create(descriptor, location, additionalLocations?.Where(x => IsLocationValid(x, compilation)), messageArgs);
+        Diagnostic.Create(descriptor, location, additionalLocations?.Where(x => IsLocationValid(x, compilation)), properties, messageArgs);
 
     private static bool IsLocationValid(Location location, Compilation compilation) =>
         location.Kind != LocationKind.SourceFile || compilation.ContainsSyntaxTree(location.SourceTree);

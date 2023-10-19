@@ -5,7 +5,7 @@ using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 
 CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) // Noncompliant
-    => { return true; };    // Secondary
+    => { return true; };    // Secondary {{This function trusts all certificates.}}
 
 static HttpWebRequest CreateRQ() // static local function
 {

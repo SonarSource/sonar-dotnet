@@ -48,7 +48,9 @@ namespace SonarAnalyzer.Rules.CSharp
                         c.ReportIssue(Rule.CreateDiagnostic(c.Compilation,
                             propertyIdentifier.GetLocation(),
                             new[] { methodIdentifier.GetLocation() },
-                            propertyIdentifier.ValueText, methodIdentifier.ValueText));
+                            properties: null,
+                            propertyIdentifier.ValueText,
+                            methodIdentifier.ValueText));
                     }
                 },
                 SyntaxKind.ClassDeclaration,

@@ -43,7 +43,8 @@ namespace SonarAnalyzer.Rules
         where TLambdaSyntax : SyntaxNode
         where TMemberAccessSyntax : SyntaxNode
     {
-        protected const string DiagnosticId = "S4830";
+        private const string SecondaryMessage = "This function trusts all certificates.";
+        private const string DiagnosticId = "S4830";
 
         internal /* for testing */ abstract MethodParameterLookupBase<TArgumentSyntax> CreateParameterLookup(SyntaxNode argumentListNode, IMethodSymbol method);
         protected abstract TSyntaxKind[] MethodDeclarationKinds { get; }
@@ -150,7 +151,7 @@ namespace SonarAnalyzer.Rules
             if (!locations.IsEmpty)
             {
                 // Report both, assignment as well as all implementation occurrences
-                c.Context.ReportIssue(Rule.CreateDiagnostic(c.Context.Compilation, primaryLocation, locations));
+                c.Context.ReportIssue(Rule.CreateDiagnostic(c.Context.Compilation, primaryLocation, locations, locations.ToProperties(SecondaryMessage)));
             }
         }
 

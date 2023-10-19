@@ -82,7 +82,9 @@ namespace SonarAnalyzer.Rules
                 context.ReportIssue(rule.CreateDiagnostic(context.Compilation,
                     firstToken.GetLocation(),
                     duplicates.Skip(1).Select(x => x.GetLocation()),
-                    ExtractStringContent(firstToken), duplicates.Count));
+                    properties: null,
+                    ExtractStringContent(firstToken),
+                    duplicates.Count));
             }
         }
 

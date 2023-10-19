@@ -122,7 +122,10 @@ namespace SonarAnalyzer.Rules
                 context.ReportIssue(
                     Language.GeneratedCodeRecognizer,
                     invalidAttributes.SecondaryAttribute != null
-                        ? rule.CreateDiagnostic(context.Compilation, invalidAttributes.MainAttribute.GetLocation(), new List<Location> { invalidAttributes.SecondaryAttribute.GetLocation() })
+                        ? rule.CreateDiagnostic(context.Compilation,
+                            invalidAttributes.MainAttribute.GetLocation(),
+                            new List<Location> { invalidAttributes.SecondaryAttribute.GetLocation() },
+                            properties: null)
                         : Diagnostic.Create(rule, invalidAttributes.MainAttribute.GetLocation()));
             }
         }

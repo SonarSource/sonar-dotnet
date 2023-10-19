@@ -58,6 +58,7 @@ namespace SonarAnalyzer.Rules
                             c.ReportIssue(SupportedDiagnostics[0].CreateDiagnostic(c.Compilation,
                                 GetMethodIdentifier(duplicate).GetLocation(),
                                 additionalLocations: new[] { GetMethodIdentifier(method).GetLocation() },
+                                properties: null,
                                 messageArgs: GetMethodIdentifier(method).ValueText));
                         }
                     }

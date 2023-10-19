@@ -18,7 +18,7 @@ namespace TestCases
         static void Execute(ICertValidation certValidation)
         {
             certValidation.InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);
-            //                                                                             ^^^^ Secondary
+            //                                                                             ^^^^ Secondary {{This function trusts all certificates.}}
         }
     }
 

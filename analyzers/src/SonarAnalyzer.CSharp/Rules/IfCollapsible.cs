@@ -41,7 +41,10 @@ namespace SonarAnalyzer.Rules.CSharp
                     var parentIfStatement = GetParentIfStatement(ifStatement);
                     if (parentIfStatement is { Else: null })
                     {
-                        c.ReportIssue(Rule.CreateDiagnostic(c.Compilation, ifStatement.IfKeyword.GetLocation(), additionalLocations: new[] { parentIfStatement.IfKeyword.GetLocation() }));
+                        c.ReportIssue(Rule.CreateDiagnostic(c.Compilation,
+                            ifStatement.IfKeyword.GetLocation(),
+                            additionalLocations: new[] { parentIfStatement.IfKeyword.GetLocation() },
+                            properties: null));
                     }
                 },
                 SyntaxKind.IfStatement);

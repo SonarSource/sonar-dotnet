@@ -50,7 +50,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
                         return;
                     }
 
-                    c.ReportIssue(rule.CreateDiagnostic(c.Compilation, multilineIfBlock.IfStatement.IfKeyword.GetLocation(), new[] { parentMultilineIfBlock.IfStatement.IfKeyword.GetLocation() }));
+                    c.ReportIssue(rule.CreateDiagnostic(c.Compilation,
+                        multilineIfBlock.IfStatement.IfKeyword.GetLocation(),
+                        new[] { parentMultilineIfBlock.IfStatement.IfKeyword.GetLocation() },
+                        properties: null));
                 },
                 SyntaxKind.MultiLineIfBlock);
         }

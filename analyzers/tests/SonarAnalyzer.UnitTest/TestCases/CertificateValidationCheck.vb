@@ -26,15 +26,15 @@ Namespace Tests.TestCases
             'Inline version
             CreateRQ().ServerCertificateValidationCallback = Function(sender, certificate, chain, SslPolicyErrors) True
             '          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ {{Enable server certificate validation on this SSL/TLS connection}}
-            '                                                                                                      ^^^^ Secondary@-1
-            'Secondary@+1
+            '                                                                                                      ^^^^ Secondary@-1 {{This function trusts all certificates.}}
+            'Secondary@+1 {{This function trusts all certificates.}}
             CreateRQ().ServerCertificateValidationCallback = Function(sender, certificate, chain, SslPolicyErrors) (((True)))   'Noncompliant
             CreateRQ().ServerCertificateValidationCallback = Function(sender, certificate, chain, SslPolicyErrors) False
             CreateRQ().ServerCertificateValidationCallback = Function(sender, certificate, chain, SslPolicyErrors) certificate.Subject = "Test"
 
             'Lambda block syntax
             CreateRQ().ServerCertificateValidationCallback = Function(sender, certificate, chain, SslPolicyErrors)                       'Noncompliant
-                                                                 Return True    'Secondary
+                                                                 Return True    'Secondary {{This function trusts all certificates.}}
                                                              End Function
             CreateRQ().ServerCertificateValidationCallback = Function(sender, certificate, chain, SslPolicyErrors)
                                                                  Return False

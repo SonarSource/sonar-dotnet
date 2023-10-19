@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Rules
                     .Select(s => GetMethodDeclarationIdentifierLocation(s.GetSyntax()))
                     .WhereNotNull();
 
-                analysisContext.ReportIssue(SupportedDiagnostics[0].CreateDiagnostic(analysisContext.Compilation,  getLocationToReport(), secondaryLocations, methodSymbol.Name));
+                analysisContext.ReportIssue(SupportedDiagnostics[0].CreateDiagnostic(analysisContext.Compilation, getLocationToReport(), secondaryLocations, properties: null, methodSymbol.Name));
             }
         }
 

@@ -57,7 +57,12 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (operands != null &&
                         CSharpEquivalenceChecker.AreEquivalent(operands.Left, operands.Right))
                     {
-                        c.ReportIssue(rule.CreateDiagnostic(c.Compilation, operands.Left.GetLocation(), new[] { operands.Right.GetLocation() }, operands.Right.ToString(), operands.ErrorMessage));
+                        c.ReportIssue(rule.CreateDiagnostic(c.Compilation,
+                            operands.Left.GetLocation(),
+                            new[] { operands.Right.GetLocation() },
+                            properties: null,
+                            operands.Right.ToString(),
+                            operands.ErrorMessage));
                     }
                 }, SyntaxKind.InvocationExpression);
         }
