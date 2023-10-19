@@ -10,12 +10,17 @@ schedules:
 trigger:
 - master
 
-pool: '.Net Bubble - GCP'
+#pool: '.Net Bubble - GCP'
+pool:
+  name: '.Net Bubble staging'
+  demands:
+    - PR_NUMBER -equals 381
 
 variables:
   - group: sonar-dotnet-variables
   - group: sonarsource-build-variables
   - group: artifactory_access
+  - group: digicert-keylocker
   # ARTIFACTORY_URL https://repox.jfrog.io/repox => https://repox.jfrog.io/artifactory
   # JFROG_URL https://repox.jfrog.io
   # https://github.com/SonarSource/parent-oss/blob/master/pom.xml#L708-L711
@@ -92,12 +97,18 @@ stages:
         inputs:
           secureFile: SonarSourceSecret.snk
 
+      - task: DownloadSecureFile@1
+        displayName: 'Download p12 file'
+        name: SM_CLIENT_CERT
+        inputs:
+          secureFile: digicert_authentication_certificate.p12
+
       - task: VSBuild@1
-        displayName: "Build and sign SonarAnalyzer solution"
-        env:
-          SIGNTOOL_PATH: 'C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.17763.0\\x64\\signtool.exe'
-          PFX_PASSWORD: $(pfxPassword2021-2023)
-          PFX_PATH: $(pfx.secureFilePath)
+        displayName: "Build SonarAnalyzer solution"
+        # env:
+        #   SIGNTOOL_PATH: 'C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.17763.0\\x64\\signtool.exe'
+        #   PFX_PASSWORD: $(pfxPassword2021-2023)
+        #   PFX_PATH: $(pfx.secureFilePath)
         inputs:
           solution: '$(solution)'
           platform: '$(buildPlatform)'
@@ -127,6 +138,29 @@ stages:
           command: 'custom'
           arguments: 'sign $(Build.ArtifactStagingDirectory)\packages\*.nupkg -CertificatePath $(pfx.secureFilePath) -CertificatePassword $(pfxPassword2021-2023) -Timestamper http://sha256timestamp.ws.symantec.com/sha256/timestamp'
 
+      - task: CmdLine@2
+        displayName: "Sign NuGet packages"
+        # condition: eq(variables.isReleaseBranch, 'True')
+        env:
+          SIGNTOOL_PATH: 'C:\Program Files (x86)\Microsoft SDKs\ClickOnce\SignTool\signtool.exe'
+          SM_CLIENT_CERT_FILE: $(SM_CLIENT_CERT.secureFilePath)
+          SM_CLIENT_CERT_PASSWORD: $(SM_CLIENT_CERT_PASSWORD)
+          SM_API_KEY: $(SM_API_KEY)
+          SM_CERT: $(SM_CERT)
+          SM_CERT_FP: $(SM_CERT_FP)
+          SM_HOST: $(SM_HOST)
+          BUILD_DIR: '$(Build.ArtifactStagingDirectory)\packages'
+          
+          
+        inputs:
+          script: |
+            echo "smctl healthcheck:"
+            smctl healthcheck 
+            echo "smctl sync:"
+            smctl windows certsync
+            echo "signing:"
+            nuget sign "%BUILD_DIR%\*.nupkg" -Overwrite  -HashAlgorithm SHA256   -CertificateFingerprint %SM_CERT_FP%   -Timestamper http://timestamp.digicert.com -TimestampHashAlgorithm SHA256
+            
       - task: PublishBuildArtifacts@1
         displayName: 'Publish NuGet packages as build artifacts'
         inputs:
