@@ -49,8 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var typeDeclaration = (TypeDeclarationSyntax)context.Node;
             if (typeDeclaration.ParameterList() is { Parameters.Count: 0 } parameterList
-                && (typeDeclaration.IsAnyKind(SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordClassDeclaration)
-                    || !ContainsInitializedFieldOrProperty((INamedTypeSymbol)context.SemanticModel.GetDeclaredSymbol(context.Node))))
+                && !IsStructWithInitializedFieldOrProperty(typeDeclaration, (INamedTypeSymbol)context.SemanticModel.GetDeclaredSymbol(context.Node)))
             {
                 context.ReportIssue(Diagnostic.Create(Rule, parameterList.GetLocation(), "primary constructor"));
             }
@@ -91,18 +90,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsConstructorRedundant(ConstructorDeclarationSyntax constructorDeclaration, SemanticModel semanticModel) =>
             constructorDeclaration is { ParameterList.Parameters.Count: 0, Body.Statements.Count: 0 }
+            && !IsStructWithInitializedFieldOrProperty(constructorDeclaration.Parent, (INamedTypeSymbol)semanticModel.GetDeclaredSymbol(constructorDeclaration.Parent))
             && (IsSinglePublicConstructor(constructorDeclaration, semanticModel)
                 || constructorDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword));
 
-        private static bool IsStructWithInitializedFieldOrProperty(ConstructorDeclarationSyntax constructorDeclaration, Lazy<IMethodSymbol> constructorSymbol) =>
-            constructorDeclaration.Parent.Kind() is SyntaxKind.StructDeclaration or SyntaxKindEx.RecordStructDeclaration
-            && constructorSymbol.Value != null
-            && (constructorSymbol.Value.ContainingType.GetMembers()
-                    .OfType<IFieldSymbol>()
-                    .Any(f => f.DeclaringSyntaxReferences.Any(d => d.GetSyntax() is VariableDeclaratorSyntax { Initializer: not null }))
-                || constructorSymbol.Value.ContainingType.GetMembers()
-                    .OfType<IPropertySymbol>()
-                    .Any(p => p.DeclaringSyntaxReferences.Any(d => d.GetSyntax() is PropertyDeclarationSyntax { Initializer: not null })));
+        private static bool IsStructWithInitializedFieldOrProperty(SyntaxNode parentType, INamedTypeSymbol parentSymbol) =>
+            parentType.Kind() is SyntaxKind.StructDeclaration or SyntaxKindEx.RecordStructDeclaration
+            && ContainsInitializedFieldOrProperty(parentSymbol);
 
         private static bool IsSinglePublicConstructor(ConstructorDeclarationSyntax constructorDeclaration, SemanticModel semanticModel) =>
             constructorDeclaration.Modifiers.Any(SyntaxKind.PublicKeyword)
