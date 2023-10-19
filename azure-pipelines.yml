@@ -92,12 +92,6 @@ stages:
         inputs:
           secureFile: SonarSourceSecret.snk
 
-      - task: DownloadSecureFile@1
-        displayName: 'Download pfx file'
-        name: pfx
-        inputs:
-          secureFile: 'SonarSource-2021-2023.pfx'
-
       - task: VSBuild@1
         displayName: "Build and sign SonarAnalyzer solution"
         env:
