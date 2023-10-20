@@ -22,8 +22,10 @@ using System.Text.RegularExpressions;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class UriShouldNotBeHardcodedBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+    public abstract class UriShouldNotBeHardcodedBase<TSyntaxKind, TLiteralExpressionSyntax, TArgumentSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
+        where TLiteralExpressionSyntax : SyntaxNode
+        where TArgumentSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S1075";
 
@@ -54,19 +56,13 @@ namespace SonarAnalyzer.Rules
 
         protected override string MessageFormat => "{0}";
 
-        protected UriShouldNotBeHardcodedBase() : base(DiagnosticId) { }
-    }
-
-    public abstract class UriShouldNotBeHardcodedBase<TSyntaxKind, TLiteralExpressionSyntax, TArgumentSyntax> : UriShouldNotBeHardcodedBase<TSyntaxKind>
-        where TSyntaxKind : struct
-        where TLiteralExpressionSyntax : SyntaxNode
-        where TArgumentSyntax : SyntaxNode
-    {
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
         protected abstract TSyntaxKind[] StringConcatenateExpressions { get; }
         protected abstract TSyntaxKind[] InvocationOrObjectCreationKind { get; }
 
         protected abstract SyntaxNode GetRelevantAncestor(SyntaxNode node);
+
+        protected UriShouldNotBeHardcodedBase() : base(DiagnosticId) { }
 
         protected override void Initialize(SonarAnalysisContext context)
         {
