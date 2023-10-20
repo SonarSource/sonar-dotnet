@@ -18,22 +18,22 @@ namespace Repro_8092
         {
             struct AStructWithFieldInitializer()              // Compliant
             {
-                public int aField = 42;
+                int aField = 42;
             }
 
             struct AStructWithFieldDoubleInitializers()       // Compliant
             {
-                public int aField, bField = 42;
+                int aField, bField = 42;
             }
 
             struct AStructWithPropertyInitializer()           // Compliant
             {
-                public int AProperty { get; } = 42;
+                int AProperty { get; } = 42;
             }
 
             record struct ARecordStructWithFieldInitializer() // Compliant
             {
-                public int aField = 42;
+                int aField = 42;
             }
 
             partial struct PartialStructWithPropertyInitializer() // Compliant
@@ -42,7 +42,7 @@ namespace Repro_8092
 
             partial struct PartialStructWithPropertyInitializer
             {
-                public int AProperty { get; } = 42;
+                int AProperty { get; } = 42;
             }
 
             partial record struct PartialRecordStructWithFieldInitializer() // Compliant
@@ -51,7 +51,7 @@ namespace Repro_8092
 
             partial record struct PartialRecordStructWithFieldInitializer
             {
-                public int AField = 42;
+                int AField = 42;
             }
         }
 
@@ -59,17 +59,17 @@ namespace Repro_8092
         {
             class AClassWithFieldInitializer()    // Noncompliant
             {
-                public int aField = 42;
+                int aField = 42;
             }
 
             class AClassWithPropertyInitializer() // Noncompliant
             {
-                public int AProperty { get; } = 42;
+                int AProperty { get; } = 42;
             }
 
             class ARecordWithFieldInitializer()   // Noncompliant
             {
-                public int aField = 42;
+                int aField = 42;
             }
         }
     }

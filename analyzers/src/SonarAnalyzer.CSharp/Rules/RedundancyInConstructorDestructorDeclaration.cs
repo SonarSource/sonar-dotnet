@@ -34,26 +34,19 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             context.RegisterNodeAction(CheckConstructorDeclaration, SyntaxKind.ConstructorDeclaration);
             context.RegisterNodeAction(CheckDestructorDeclaration, SyntaxKind.DestructorDeclaration);
-            context.RegisterNodeAction(CheckPrimaryConstructorRef, SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordClassDeclaration);
-            context.RegisterNodeAction(CheckPrimaryConstructorVal, SyntaxKind.StructDeclaration, SyntaxKindEx.RecordStructDeclaration);
+            context.RegisterNodeAction(x => CheckPrimaryConstructor(x, false), SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordClassDeclaration);
+            context.RegisterNodeAction(x => CheckPrimaryConstructor(x, true), SyntaxKind.StructDeclaration, SyntaxKindEx.RecordStructDeclaration);
         }
-
-        private static void CheckPrimaryConstructorRef(SonarSyntaxNodeReportingContext context) =>
-            CheckPrimaryConstructor(context, checkInitializedFieldOrProperty: false);
-
-        private static void CheckPrimaryConstructorVal(SonarSyntaxNodeReportingContext context) =>
-            CheckPrimaryConstructor(context, checkInitializedFieldOrProperty: true);
 
         private static void CheckPrimaryConstructor(SonarSyntaxNodeReportingContext context, bool checkInitializedFieldOrProperty)
         {
             var typeDeclaration = (TypeDeclarationSyntax)context.Node;
-            if (TypeDeclarationSyntaxExtensions.ParameterList(typeDeclaration) is { Parameters.Count: 0 } parameterList)
+            if (typeDeclaration.ParameterList() is { Parameters.Count: 0 } parameterList)
             {
-                if (checkInitializedFieldOrProperty && ContainsInitializedFieldOrProperty((INamedTypeSymbol)context.SemanticModel.GetDeclaredSymbol(context.Node)))
+                if (!checkInitializedFieldOrProperty || !ContainsInitializedFieldOrProperty((INamedTypeSymbol)context.SemanticModel.GetDeclaredSymbol(context.Node)))
                 {
-                    return;
+                    context.ReportIssue(Diagnostic.Create(Rule, parameterList.GetLocation(), "primary constructor"));
                 }
-                context.ReportIssue(Diagnostic.Create(Rule, parameterList.GetLocation(), "primary constructor"));
             }
         }
 
@@ -129,7 +122,6 @@ namespace SonarAnalyzer.Rules.CSharp
             constructorDeclaration.ParameterList.Parameters.Count == 0;
 
         private static bool ContainsInitializedFieldOrProperty(INamedTypeSymbol symbol) =>
-            symbol.GetMembers().OfType<IFieldSymbol>().Any(f => f.DeclaringSyntaxReferences.Any(d => ((VariableDeclaratorSyntax)d.GetSyntax()).Initializer != null))
-            || symbol.GetMembers().OfType<IPropertySymbol>().Any(p => p.DeclaringSyntaxReferences.Any(d => ((PropertyDeclarationSyntax)d.GetSyntax()).Initializer != null));
+            symbol.GetMembers().Any(f => f.DeclaringSyntaxReferences.Any(d => d.GetSyntax().GetInitializer() is not null));
     }
 }

@@ -5,7 +5,7 @@ namespace StyleCop.Analyzers.Lightup
 {
     using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-    public static class TypeDeclarationExtensions
+    internal static class TypeDeclarationExtensions
     {
         private static readonly Func<TypeDeclarationSyntax, ParameterListSyntax> ParameterListAccessor;
         private static readonly Func<TypeDeclarationSyntax, ParameterListSyntax> RecordDeclarationParameterListAccessor;

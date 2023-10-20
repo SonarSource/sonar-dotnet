@@ -449,6 +449,14 @@ namespace SonarAnalyzer.Extensions
 
 #endif
 
+        public static SyntaxNode GetInitializer(this SyntaxNode node) =>
+            node switch
+            {
+                VariableDeclaratorSyntax { Initializer: { } initializer } => initializer,
+                PropertyDeclarationSyntax { Initializer: { } initializer } => initializer,
+                _ => null
+            };
+
         public static bool IsTrue(this SyntaxNode node) =>
             node switch
             {
