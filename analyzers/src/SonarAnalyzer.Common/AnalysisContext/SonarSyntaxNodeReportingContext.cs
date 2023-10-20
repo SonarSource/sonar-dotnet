@@ -46,6 +46,21 @@ public sealed class SonarSyntaxNodeReportingContext : SonarTreeReportingContextB
     public bool IsRedundantPositionalRecordContext() =>
         Context.ContainingSymbol.Kind == SymbolKind.Method;
 
+    /// <summary>
+    /// Roslyn invokes the analyzer twice for PrimaryConstructorBaseType. The ContainingSymbol is first the type and second the constructor. This check filters can be used to filter
+    /// the first invocation. See also <seealso href="https://github.com/dotnet/roslyn/issues/70488">#roslyn/70488</seealso>
+    /// </summary>
+    /// <returns>
+    /// Returns <see langword="true"/> for the invocation on the class declaration and <see langword="false"/> for the ctor invocation.
+    /// </returns>
+    public bool IsRedundantPrimaryConstructorBaseTypeContext() =>
+        Context.Compilation.Language == LanguageNames.CSharp
+        && Context is
+        {
+            Node.RawKind: (int)SyntaxKindEx.PrimaryConstructorBaseType,
+            ContainingSymbol.Kind: SymbolKind.Method,
+        };
+
     public bool IsAzureFunction() =>
         AzureFunctionMethod() is not null;
 

@@ -215,9 +215,9 @@ namespace Repro_8070
     {
         class SomeClass
         {
-            public SomeClass(int a, int b) { }
-            public SomeClass(int a, int b, string c) : this(b, a) { } // FN: ctor params fully inverted with additional par after
-            public SomeClass(string c, int a, int b) : this(b, a) { } // FN: ctor params fully inverted with additional par before
+            public SomeClass(int a, int b) { } // Secondary [SomeClass1, SomeClass2]
+            public SomeClass(int a, int b, string c) : this(b, a) { } // Noncompliant [SomeClass1]
+            public SomeClass(string c, int a, int b) : this(b, a) { } // Noncompliant [SomeClass2]
         }
     }
 

@@ -68,9 +68,9 @@ internal sealed class CSharpFacade : ILanguageFacade<SyntaxKind>
             ArgumentListSyntax x => x,
             ObjectCreationExpressionSyntax x => x.ArgumentList,
             InvocationExpressionSyntax x => x.ArgumentList,
-            _ when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(invocation) =>
-                ((ImplicitObjectCreationExpressionSyntaxWrapper)invocation).ArgumentList,
             ConstructorInitializerSyntax x => x.ArgumentList,
+            _ when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(invocation) => ((ImplicitObjectCreationExpressionSyntaxWrapper)invocation).ArgumentList,
+            _ when PrimaryConstructorBaseTypeSyntaxWrapper.IsInstance(invocation) => ((PrimaryConstructorBaseTypeSyntaxWrapper)invocation).ArgumentList,
             _ => throw new ArgumentException($"{invocation.GetType()} does not contain an ArgumentList.", nameof(invocation)),
         };
 

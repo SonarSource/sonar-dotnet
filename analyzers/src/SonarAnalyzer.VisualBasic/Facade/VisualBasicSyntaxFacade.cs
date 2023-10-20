@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
+
 namespace SonarAnalyzer.Helpers.Facade;
 
 internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
@@ -26,15 +28,22 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
         SyntaxFactory.AreEquivalent(firstNode, secondNode);
 
     public override IEnumerable<SyntaxNode> ArgumentExpressions(SyntaxNode node) =>
-        node switch
+        ArgumentList(node).OfType<ArgumentSyntax>().Select(x => x.GetExpression()).WhereNotNull();
+
+    public override IReadOnlyList<SyntaxNode> ArgumentList(SyntaxNode node) =>
+        (node switch
         {
-            ObjectCreationExpressionSyntax creation => creation.ArgumentList?.Arguments.Select(x => x.GetExpression()) ?? Enumerable.Empty<SyntaxNode>(),
-            null => Enumerable.Empty<SyntaxNode>(),
+            ObjectCreationExpressionSyntax creation => creation.ArgumentList,
+            InvocationExpressionSyntax invocation => invocation.ArgumentList,
+            null => null,
             _ => throw InvalidOperation(node, nameof(ArgumentExpressions))
-        };
+        })?.Arguments ?? (IReadOnlyList<SyntaxNode>)Array.Empty<SyntaxNode>();
 
     public override int? ArgumentIndex(SyntaxNode argument) =>
         Cast<ArgumentSyntax>(argument).GetArgumentIndex();
+
+    public override SyntaxToken? ArgumentNameColon(SyntaxNode argument) =>
+        (argument as SimpleArgumentSyntax)?.NameColonEquals?.Name.Identifier;
 
     public override SyntaxNode AssignmentLeft(SyntaxNode assignment) =>
         Cast<AssignmentStatementSyntax>(assignment).Left;

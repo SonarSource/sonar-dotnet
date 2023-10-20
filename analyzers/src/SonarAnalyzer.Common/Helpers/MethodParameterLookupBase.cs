@@ -26,6 +26,7 @@ public interface IMethodParameterLookup
     bool TryGetSyntax(IParameterSymbol parameter, out ImmutableArray<SyntaxNode> expressions);
     bool TryGetSyntax(string parameterName, out ImmutableArray<SyntaxNode> expressions);
     bool TryGetNonParamsSyntax(IParameterSymbol parameter, out SyntaxNode expression);
+    IMethodSymbol MethodSymbol { get; }
 }
 
 // This should come from the Roslyn API (https://github.com/dotnet/roslyn/issues/9)

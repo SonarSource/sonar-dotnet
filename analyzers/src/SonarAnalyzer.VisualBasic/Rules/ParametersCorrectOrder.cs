@@ -21,67 +21,14 @@
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class ParametersCorrectOrder : ParametersCorrectOrderBase<ArgumentSyntax>
+    public sealed class ParametersCorrectOrder : ParametersCorrectOrderBase<SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
-
-        protected override void Initialize(SonarAnalysisContext context)
+        protected override SyntaxKind[] InvocationKinds => new[]
         {
-            context.RegisterNodeAction(
-                c =>
-                {
-                    var methodCall = (InvocationExpressionSyntax)c.Node;
+            SyntaxKind.ObjectCreationExpression,
+            SyntaxKind.InvocationExpression
+        };
 
-                    var memberAccess = methodCall.Expression as MemberAccessExpressionSyntax;
-                    Location getLocation() =>
-                        memberAccess == null
-                        ? methodCall.Expression.GetLocation()
-                        : memberAccess.Name.GetLocation();
-
-                    AnalyzeArguments(c, methodCall.ArgumentList, getLocation);
-                }, SyntaxKind.InvocationExpression);
-
-            context.RegisterNodeAction(
-                c =>
-                {
-                    var objectCreationCall = (ObjectCreationExpressionSyntax)c.Node;
-
-                    var qualifiedAccess = objectCreationCall.Type as QualifiedNameSyntax;
-                    Location getLocation() =>
-                        qualifiedAccess == null
-                        ? objectCreationCall.Type.GetLocation()
-                        : qualifiedAccess.Right.GetLocation();
-
-                    AnalyzeArguments(c, objectCreationCall.ArgumentList, getLocation);
-                }, SyntaxKind.ObjectCreationExpression);
-        }
-
-        private void AnalyzeArguments(SonarSyntaxNodeReportingContext analysisContext, ArgumentListSyntax argumentList,
-            Func<Location> getLocation)
-        {
-            if (argumentList == null)
-            {
-                return;
-            }
-
-            var methodParameterLookup = new VisualBasicMethodParameterLookup(argumentList, analysisContext.SemanticModel);
-
-            ReportIncorrectlyOrderedParameters(analysisContext, methodParameterLookup, argumentList.Arguments, getLocation);
-        }
-
-        protected override TypeInfo GetArgumentTypeSymbolInfo(ArgumentSyntax argument, SemanticModel semanticModel) =>
-            semanticModel.GetTypeInfo(argument.GetExpression());
-
-        protected override Location GetMethodDeclarationIdentifierLocation(SyntaxNode syntaxNode) =>
-            (syntaxNode as MethodBlockBaseSyntax)?.FindIdentifierLocation();
-
-        protected override SyntaxToken? GetArgumentIdentifier(ArgumentSyntax argument) =>
-            (argument.GetExpression() as IdentifierNameSyntax)?.Identifier;
-
-        protected override SyntaxToken? GetNameColonArgumentIdentifier(ArgumentSyntax argument) =>
-            (argument as SimpleArgumentSyntax)?.NameColonEquals?.Name.Identifier;
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
     }
 }
-

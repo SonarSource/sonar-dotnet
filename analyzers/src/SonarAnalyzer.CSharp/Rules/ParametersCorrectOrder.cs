@@ -21,66 +21,17 @@
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class ParametersCorrectOrder : ParametersCorrectOrderBase<ArgumentSyntax>
+    public sealed class ParametersCorrectOrder : ParametersCorrectOrderBase<SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterNodeAction(
-                c =>
-                {
-                    var methodCall = (InvocationExpressionSyntax)c.Node;
-
-                    var memberAccess = methodCall.Expression as MemberAccessExpressionSyntax;
-                    Location getLocation() =>
-                        memberAccess == null
-                        ? methodCall.Expression.GetLocation()
-                        : memberAccess.Name.GetLocation();
-
-                    AnalyzeArguments(c, methodCall.ArgumentList, getLocation);
-                }, SyntaxKind.InvocationExpression);
-
-            context.RegisterNodeAction(
-                c =>
-                {
-                    var objectCreationCall = (ObjectCreationExpressionSyntax)c.Node;
-
-                    var qualifiedAccess = objectCreationCall.Type as QualifiedNameSyntax;
-                    Location getLocation() =>
-                        qualifiedAccess == null
-                        ? objectCreationCall.Type.GetLocation()
-                        : qualifiedAccess.Right.GetLocation();
-
-                    AnalyzeArguments(c, objectCreationCall.ArgumentList, getLocation);
-                }, SyntaxKind.ObjectCreationExpression);
-        }
-
-        private void AnalyzeArguments(SonarSyntaxNodeReportingContext analysisContext, ArgumentListSyntax argumentList,
-            Func<Location> getLocation)
-        {
-            if (argumentList == null)
+        protected override SyntaxKind[] InvocationKinds => new[]
             {
-                return;
-            }
+                SyntaxKind.InvocationExpression,
+                SyntaxKind.ObjectCreationExpression,
+                SyntaxKind.ThisConstructorInitializer,
+                SyntaxKindEx.PrimaryConstructorBaseType,
+                SyntaxKindEx.ImplicitObjectCreationExpression,
+            };
 
-            var methodParameterLookup = new CSharpMethodParameterLookup(argumentList, analysisContext.SemanticModel);
-
-            ReportIncorrectlyOrderedParameters(analysisContext, methodParameterLookup, argumentList.Arguments, getLocation);
-        }
-
-        protected override TypeInfo GetArgumentTypeSymbolInfo(ArgumentSyntax argument, SemanticModel semanticModel) =>
-            semanticModel.GetTypeInfo(argument.Expression);
-
-        protected override Location GetMethodDeclarationIdentifierLocation(SyntaxNode syntaxNode) =>
-            (syntaxNode as BaseMethodDeclarationSyntax)?.FindIdentifierLocation();
-
-        protected override SyntaxToken? GetArgumentIdentifier(ArgumentSyntax argument) =>
-            (argument.Expression as IdentifierNameSyntax)?.Identifier;
-
-        protected override SyntaxToken? GetNameColonArgumentIdentifier(ArgumentSyntax argument) =>
-            argument.NameColon?.Name.Identifier;
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
     }
 }

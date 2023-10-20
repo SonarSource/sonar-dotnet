@@ -71,5 +71,23 @@ Public Class Foo
         Dim y = New System. ()
     End Sub
 End Class").WithErrorBehavior(CompilationErrorBehavior.Ignore).Verify();
+
+        [TestMethod]
+        public void ParametersCorrectOrder_InvalidCode_CS1() =>
+            builderCS.AddSnippet("""
+                class BaseConstructor
+                {
+                    class Base(int a, int b) // Secondary [1, 2, 3, 4, 5, 6]
+                    {
+                        Base(int a, int b, string c) : this(b, a) { }  // Noncompliant [1]
+                        Base(string c, int a, int b) : this(b, a) { }  // Noncompliant [2]
+                    }
+
+                    class ParamsFullyInverted(int a, int b) : Base(b, a);                                    // Noncompliant [3]
+                    class ParamsPartiallyInverted(int a, int b, int c) : Base(b, a);                         // Noncompliant [4]
+                    class ParamsFullyInvertedWithAdditionalParamAfter(int a, int b, string s) : Base(b, a);  // Noncompliant [5]
+                    class ParamsFullyInvertedWithAdditionalParamBefore(string s, int a, int b) : Base(b, a); // Noncompliant [6]
+                }
+                """).WithOptions(ParseOptionsHelper.FromCSharp12).WithConcurrentAnalysis(false).Verify();
     }
 }

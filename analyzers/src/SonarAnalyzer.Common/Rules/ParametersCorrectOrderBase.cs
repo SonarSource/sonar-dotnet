@@ -18,141 +18,63 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Extensions;
+
 namespace SonarAnalyzer.Rules
 {
-    public abstract class ParametersCorrectOrderBase<TArgumentSyntax> : SonarDiagnosticAnalyzer
-        where TArgumentSyntax : SyntaxNode
+    public abstract class ParametersCorrectOrderBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+        where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S2234";
-        protected const string MessageFormat = "Parameters to '{0}' have the same names but not the same order as the method arguments.";
+        protected abstract TSyntaxKind[] InvocationKinds { get; }
+        protected override string MessageFormat => "Parameters to '{0}' have the same names but not the same order as the method arguments.";
 
-        protected abstract TypeInfo GetArgumentTypeSymbolInfo(TArgumentSyntax argument, SemanticModel semanticModel);
-        protected abstract Location GetMethodDeclarationIdentifierLocation(SyntaxNode syntaxNode);
-        protected abstract SyntaxToken? GetArgumentIdentifier(TArgumentSyntax argument);
-        protected abstract SyntaxToken? GetNameColonArgumentIdentifier(TArgumentSyntax argument);
-
-        internal void ReportIncorrectlyOrderedParameters(SonarSyntaxNodeReportingContext analysisContext,
-            MethodParameterLookupBase<TArgumentSyntax> methodParameterLookup, SeparatedSyntaxList<TArgumentSyntax> argumentList,
-            Func<Location> getLocationToReport)
+        protected ParametersCorrectOrderBase() : base(DiagnosticId)
         {
-            var argumentParameterMappings = methodParameterLookup.GetAllArgumentParameterMappings()
-                .ToDictionary(pair => pair.Node, pair => pair.Symbol);
-
-            var methodSymbol = methodParameterLookup.MethodSymbol;
-            if (methodSymbol == null)
-            {
-                return;
-            }
-
-            var parameterNames = argumentParameterMappings.Values
-                .Select(symbol => symbol.Name)
-                .Distinct()
-                .ToList();
-
-            var argumentIdentifiers = argumentList
-                .Select(argument => ConvertToArgumentIdentifier(argument))
-                .ToList();
-            var identifierNames = argumentIdentifiers
-                .Select(p => p.IdentifierName)
-                .ToList();
-
-            if (parameterNames.Intersect(identifierNames).Any() &&
-                HasIncorrectlyOrderedParameters(argumentIdentifiers, argumentParameterMappings, parameterNames, identifierNames,
-                    analysisContext.SemanticModel))
-            {
-                // for VB the symbol does not contain the method syntax reference
-                var secondaryLocations = methodSymbol.DeclaringSyntaxReferences
-                    .Select(s => GetMethodDeclarationIdentifierLocation(s.GetSyntax()))
-                    .WhereNotNull();
-
-                analysisContext.ReportIssue(SupportedDiagnostics[0].CreateDiagnostic(analysisContext.Compilation, getLocationToReport(), secondaryLocations, properties: null, methodSymbol.Name));
-            }
         }
 
-        private bool HasIncorrectlyOrderedParameters(List<ArgumentIdentifier> argumentIdentifiers,
-            Dictionary<TArgumentSyntax, IParameterSymbol> argumentParameterMappings, List<string> parameterNames,
-            List<string> identifierNames, SemanticModel semanticModel)
-        {
-            for (var i = 0; i < argumentIdentifiers.Count; i++)
-            {
-                var argumentIdentifier = argumentIdentifiers[i];
-                var identifierName = argumentIdentifier.IdentifierName;
-                var parameter = argumentParameterMappings[argumentIdentifier.ArgumentSyntax];
-                var parameterName = parameter.Name;
-
-                if (string.IsNullOrEmpty(identifierName) ||
-                    !parameterNames.Contains(identifierName) ||
-                    !IdentifierWithSameNameAndTypeExists(parameter))
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterNodeAction(Language.GeneratedCodeRecognizer,
+                c =>
                 {
-                    continue;
-                }
+                    if (c.IsRedundantPrimaryConstructorBaseTypeContext())
+                    {
+                        return;
+                    }
+                    var arguments = Language.Syntax.ArgumentList(c.Node);
+                    IMethodParameterLookup methodParameterLookup = null;
+                    foreach (var argument in arguments)
+                    {
+                        methodParameterLookup ??= Language.MethodParameterLookup(c.Node, c.SemanticModel);
+                        // Example void M(int x, int y) <- p_x and p_y are the parameter
+                        // M(y, x) <- a_x and a_y are the arguments
+                        if (methodParameterLookup.TryGetSymbol(argument, out var parameterSymbol) // argument = a_x and parameterSymbol = p_y
+                            && parameterSymbol is { IsParams: false }
+                            && ArgumentName(argument) is { } argumentName // "x"
+                            && !MatchingNames(parameterSymbol, argumentName)  // "x" != "y"
+                            && Language.Syntax.NodeExpression(argument) is { } argumentExpression
+                            && c.Context.SemanticModel.GetTypeInfo(argumentExpression).ConvertedType is { } argumentType
+                            && methodParameterLookup.MethodSymbol.Parameters.FirstOrDefault(p => MatchingNames(p, argumentName) && argumentType.DerivesOrImplements(p.Type)) is
+                                { IsParams: false } // p_x (there is another parameter that seems to be a better fit)
+                            && arguments.FirstOrDefault(x => MatchingNames(parameterSymbol, ArgumentName(x))) is { }) // Look if there is an argument that matches the parameter p_y (yes: a_y)
+                        {
+                            var secondaryLocations = methodParameterLookup.MethodSymbol.DeclaringSyntaxReferences
+                                .Select(s => Language.Syntax.NodeIdentifier(s.GetSyntax())?.GetLocation())
+                                .WhereNotNull();
 
-                if (argumentIdentifier is PositionalArgumentIdentifier positional &&
-                    (parameter.IsParams || identifierName == parameterName))
-                {
-                    continue;
-                }
+                            c.ReportIssue(SupportedDiagnostics[0].CreateDiagnostic(c.Compilation, c.Node.GetLocation(), secondaryLocations, properties: null, methodParameterLookup.MethodSymbol.Name));
+                            return;
+                        }
+                    }
+                }, InvocationKinds);
 
-                if (argumentIdentifier is NamedArgumentIdentifier named &&
-                    (!identifierNames.Contains(named.DeclaredName) || named.DeclaredName == named.IdentifierName))
-                {
-                    continue;
-                }
+        private static bool MatchingNames(IParameterSymbol parameter, string argumentName) =>
+            parameter.Name == argumentName;
 
-                return true;
-            }
-
-            return false;
-
-            bool IdentifierWithSameNameAndTypeExists(IParameterSymbol parameter) =>
-                argumentIdentifiers.Any(ia =>
-                    ia.IdentifierName == parameter.Name &&
-                    GetArgumentTypeSymbolInfo(ia.ArgumentSyntax, semanticModel).ConvertedType.DerivesOrImplements(parameter.Type));
-        }
-
-        private ArgumentIdentifier ConvertToArgumentIdentifier(TArgumentSyntax argument)
-        {
-            var identifierName = GetArgumentIdentifier(argument)?.Text;
-            var nameColonIdentifier = GetNameColonArgumentIdentifier(argument);
-
-            if (nameColonIdentifier == null)
-            {
-                return new PositionalArgumentIdentifier(identifierName, argument);
-            }
-
-            return new NamedArgumentIdentifier(identifierName, argument, nameColonIdentifier.Value.Text);
-        }
-
-        private class ArgumentIdentifier
-        {
-            protected ArgumentIdentifier(string identifierName, TArgumentSyntax argumentSyntax)
-            {
-                IdentifierName = identifierName;
-                ArgumentSyntax = argumentSyntax;
-            }
-
-            public string IdentifierName { get; }
-            public TArgumentSyntax ArgumentSyntax { get; }
-        }
-
-        private class PositionalArgumentIdentifier : ArgumentIdentifier
-        {
-            public PositionalArgumentIdentifier(string identifierName, TArgumentSyntax argumentSyntax)
-                : base(identifierName, argumentSyntax)
-            {
-            }
-        }
-
-        private class NamedArgumentIdentifier : ArgumentIdentifier
-        {
-            public NamedArgumentIdentifier(string identifierName, TArgumentSyntax argumentSyntax, string declaredName)
-                : base(identifierName, argumentSyntax)
-            {
-                DeclaredName = declaredName;
-            }
-
-            public string DeclaredName { get; }
-        }
+        private string ArgumentName(SyntaxNode argument) =>
+            Language.Syntax.NodeIdentifier(Language.Syntax.NodeExpression(argument)) is SyntaxToken identifier
+                ? identifier.ValueText
+                : null;
     }
 }
-

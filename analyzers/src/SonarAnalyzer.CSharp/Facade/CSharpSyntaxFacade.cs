@@ -26,14 +26,22 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
         SyntaxFactory.AreEquivalent(firstNode, secondNode);
 
     public override IEnumerable<SyntaxNode> ArgumentExpressions(SyntaxNode node) =>
+        ArgumentList(node)?.OfType<ArgumentSyntax>().Select(x => x.Expression) ?? Enumerable.Empty<SyntaxNode>();
+
+    public override IReadOnlyList<SyntaxNode> ArgumentList(SyntaxNode node) =>
         node switch
         {
-            ObjectCreationExpressionSyntax creation => creation.ArgumentList?.Arguments.Select(x => x.Expression) ?? Enumerable.Empty<SyntaxNode>(),
-            null => Enumerable.Empty<SyntaxNode>(),
-            var _ when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(node)
-                => ((ImplicitObjectCreationExpressionSyntaxWrapper)node).ArgumentList?.Arguments.Select(x => x.Expression) ?? Enumerable.Empty<SyntaxNode>(),
+            ObjectCreationExpressionSyntax creation => creation.ArgumentList.Arguments,
+            InvocationExpressionSyntax invocation => invocation.ArgumentList.Arguments,
+            ConstructorInitializerSyntax constructorInitializer => constructorInitializer.ArgumentList.Arguments,
+            null => ImmutableArray<SyntaxNode>.Empty,
+            _ when PrimaryConstructorBaseTypeSyntaxWrapper.IsInstance(node) => ((PrimaryConstructorBaseTypeSyntaxWrapper)node).ArgumentList.Arguments,
+            _ when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(node)
+                => ((ImplicitObjectCreationExpressionSyntaxWrapper)node).ArgumentList.Arguments,
             _ => throw InvalidOperation(node, nameof(ArgumentExpressions))
         };
+    public override SyntaxToken? ArgumentNameColon(SyntaxNode argument) =>
+        (argument as ArgumentSyntax)?.NameColon?.Name?.Identifier;
 
     public override int? ArgumentIndex(SyntaxNode argument) =>
         Cast<ArgumentSyntax>(argument).GetArgumentIndex();
@@ -126,6 +134,7 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
         node switch
         {
             ArrowExpressionClauseSyntax x => x.Expression,
+            ArgumentSyntax argument => argument.Expression,
             AttributeArgumentSyntax x => x.Expression,
             InterpolationSyntax x => x.Expression,
             InvocationExpressionSyntax x => x.Expression,

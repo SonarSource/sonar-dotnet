@@ -5,39 +5,39 @@ namespace Repro_8071
 {
     class BaseConstructor
     {
-        class Base(int a, int b)
+        class Base(int a, int b) // Secondary [Base1, Base2, Base3, Base4, Base5, Base6]
         {
-            Base(int a, int b, string c) : this(b, a) { }  // FN: ctor params inverted with additional param after
-            Base(string c, int a, int b) : this(b, a) { }  // FN: ctor params inverted with additional param before
+            Base(int a, int b, string c) : this(b, a) { }  // Noncompliant [Base1]
+            Base(string c, int a, int b) : this(b, a) { }  // Noncompliant [Base2]
         }
 
-        class ParamsFullyInverted(int a, int b) : Base(b, a);                                    // FN
-        class ParamsPartiallyInverted(int a, int b, int c) : Base(b, a);                         // FN
-        class ParamsFullyInvertedWithAdditionalParamAfter(int a, int b, string s) : Base(b, a);  // FN
-        class ParamsFullyInvertedWithAdditionalParamBefore(string s, int a, int b) : Base(b, a); // FN
+        class ParamsFullyInverted(int a, int b) : Base(b, a);                                    // Noncompliant [Base3]
+        class ParamsPartiallyInverted(int a, int b, int c) : Base(b, a);                         // Noncompliant [Base4]
+        class ParamsFullyInvertedWithAdditionalParamAfter(int a, int b, string s) : Base(b, a);  // Noncompliant [Base5]
+        class ParamsFullyInvertedWithAdditionalParamBefore(string s, int a, int b) : Base(b, a); // Noncompliant [Base6]
     }
 
     class WithRecordStructs
     {
         void Basics(int a, int b, int c)
         {
-            _ = new SomeRecord(b, a);           // Noncompliant
+            _ = new SomeRecord(b, a);           // Noncompliant [SomeRecord1]
         }
 
         void WithPromotion(short a, short b)
         {
-            _ = new SomeRecord(b, a);           // Noncompliant
+            _ = new SomeRecord(b, a);           // Noncompliant [SomeRecord2]
         }
 
         void WithCasting(long a, long b)
         {
-            _ = new SomeRecord((int)b, (int)a); // FN
+            _ = new SomeRecord((int)b, (int)a); // FN [SomeRecord3]
         }
 
-        record SomeRecord(int a, int b)
+        record SomeRecord(int a, int b)  // Secondary [SomeRecord1, SomeRecord2, SomeRecord4, SomeRecord5]
         {
-            public SomeRecord(int a, int b, string c) : this(b, a) { } // FN
-            public SomeRecord(string c, int a, int b) : this(b, a) { } // FN
+            public SomeRecord(int a, int b, string c) : this(b, a) { } // Noncompliant [SomeRecord4]
+            public SomeRecord(string c, int a, int b) : this(b, a) { } // Noncompliant [SomeRecord5]
         }
     }
 
@@ -45,23 +45,23 @@ namespace Repro_8071
     {
         void Basics(int a, int b, int c)
         {
-            _ = new SomeRecordStruct(b, a);           // Noncompliant
+            _ = new SomeRecordStruct(b, a);           // Noncompliant [SomeRecordStruct1]
         }
 
         void WithPromotion(short a, short b)
         {
-            _ = new SomeRecordStruct(b, a);           // Noncompliant
+            _ = new SomeRecordStruct(b, a);           // Noncompliant [SomeRecordStruct2]
         }
 
         void WithCasting(long a, long b)
         {
-            _ = new SomeRecordStruct((int)b, (int)a); // FN
+            _ = new SomeRecordStruct((int)b, (int)a); // FN [SomeRecordStruct3]
         }
 
-        record struct SomeRecordStruct(int a, int b)
+        record struct SomeRecordStruct(int a, int b) // Secondary [SomeRecordStruct1, SomeRecordStruct2, SomeRecordStruct4, SomeRecordStruct5]
         {
-            public SomeRecordStruct(int a, int b, string c) : this(b, a) { } // FN
-            public SomeRecordStruct(string c, int a, int b) : this(b, a) { } // FN
+            public SomeRecordStruct(int a, int b, string c) : this(b, a) { } // Noncompliant [SomeRecordStruct4]
+            public SomeRecordStruct(string c, int a, int b) : this(b, a) { } // Noncompliant [SomeRecordStruct5]
         }
     }
 }
