@@ -18,9 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Extensions;
-
 namespace SonarAnalyzer.Rules
 {
     public abstract class ParametersCorrectOrderBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
@@ -42,22 +39,22 @@ namespace SonarAnalyzer.Rules
                     {
                         return;
                     }
-                    var arguments = Language.Syntax.ArgumentList(c.Node);
                     IMethodParameterLookup methodParameterLookup = null;
-                    foreach (var argument in arguments)
+                    foreach (var argument in Language.Syntax.ArgumentList(c.Node))
                     {
                         methodParameterLookup ??= Language.MethodParameterLookup(c.Node, c.SemanticModel);
                         // Example void M(int x, int y) <- p_x and p_y are the parameter
-                        // M(y, x) <- a_x and a_y are the arguments
+                        // M(y, x); <- a_y and a_x are the arguments
                         if (methodParameterLookup.TryGetSymbol(argument, out var parameterSymbol) // argument = a_x and parameterSymbol = p_y
                             && parameterSymbol is { IsParams: false }
                             && ArgumentName(argument) is { } argumentName // "x"
                             && !MatchingNames(parameterSymbol, argumentName)  // "x" != "y"
                             && Language.Syntax.NodeExpression(argument) is { } argumentExpression
                             && c.Context.SemanticModel.GetTypeInfo(argumentExpression).ConvertedType is { } argumentType
-                            && methodParameterLookup.MethodSymbol.Parameters.FirstOrDefault(p => MatchingNames(p, argumentName) && argumentType.DerivesOrImplements(p.Type)) is
-                                { IsParams: false } // p_x (there is another parameter that seems to be a better fit)
-                            && arguments.FirstOrDefault(x => MatchingNames(parameterSymbol, ArgumentName(x))) is { }) // Look if there is an argument that matches the parameter p_y (yes: a_y)
+                            // is there another parameter that seems to be a better fit (name and type match): p_x
+                            && methodParameterLookup.MethodSymbol.Parameters.FirstOrDefault(p => MatchingNames(p, argumentName) && argumentType.DerivesOrImplements(p.Type)) is { IsParams: false }
+                            // is there an argument that matches the parameter p_y by name: a_y
+                            && Language.Syntax.ArgumentList(c.Node).FirstOrDefault(x => MatchingNames(parameterSymbol, ArgumentName(x))) is { })
                         {
                             var secondaryLocations = methodParameterLookup.MethodSymbol.DeclaringSyntaxReferences
                                 .Select(s => Language.Syntax.NodeIdentifier(s.GetSyntax())?.GetLocation())
@@ -73,8 +70,6 @@ namespace SonarAnalyzer.Rules
             parameter.Name == argumentName;
 
         private string ArgumentName(SyntaxNode argument) =>
-            Language.Syntax.NodeIdentifier(Language.Syntax.NodeExpression(argument)) is SyntaxToken identifier
-                ? identifier.ValueText
-                : null;
+            Language.Syntax.NodeIdentifier(Language.Syntax.NodeExpression(argument))?.ValueText;
     }
 }

@@ -36,8 +36,7 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
             ConstructorInitializerSyntax constructorInitializer => constructorInitializer.ArgumentList.Arguments,
             null => ImmutableArray<SyntaxNode>.Empty,
             _ when PrimaryConstructorBaseTypeSyntaxWrapper.IsInstance(node) => ((PrimaryConstructorBaseTypeSyntaxWrapper)node).ArgumentList.Arguments,
-            _ when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(node)
-                => ((ImplicitObjectCreationExpressionSyntaxWrapper)node).ArgumentList.Arguments,
+            _ when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(node) => ((ImplicitObjectCreationExpressionSyntaxWrapper)node).ArgumentList.Arguments,
             _ => throw InvalidOperation(node, nameof(ArgumentExpressions))
         };
     public override SyntaxToken? ArgumentNameColon(SyntaxNode argument) =>
