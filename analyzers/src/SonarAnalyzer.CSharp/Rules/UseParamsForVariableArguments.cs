@@ -35,8 +35,8 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterNodeAction(
                 c =>
                 {
-                    if (c.Node.ParameterList() is { Parameters: { Count: > 0 } parameters }
-                        && parameters.Any(p => p.Identifier.IsKind(SyntaxKind.ArgListKeyword))
+                    if (c.Node.ParameterList() is { Parameters: { Count: > 0 and var count } parameters }
+                        && parameters[count - 1].Identifier.IsKind(SyntaxKind.ArgListKeyword)
                         && CheckModifiers(c.Node)
                         && c.Node.GetIdentifier() is { IsMissing: false } identifier
                         && MethodSymbol(c.Node, c.SemanticModel) is { } methodSymbol
