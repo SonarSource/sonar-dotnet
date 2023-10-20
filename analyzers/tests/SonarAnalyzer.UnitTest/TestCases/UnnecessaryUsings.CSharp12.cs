@@ -11,6 +11,7 @@ namespace ANamespace
 
     class MyClass
     {
+        public bool MyProperty { get; set; } = true;
         void AliasType()
         {
             var point = new Point3D(1, 2, 3);

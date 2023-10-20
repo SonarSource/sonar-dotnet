@@ -37,7 +37,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context) =>
+        protected override void Initialize(SonarAnalysisContext context)
+        {
             context.RegisterNodeAction(
                 c =>
                 {
@@ -48,6 +49,10 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var compilationUnit = (CompilationUnitSyntax)c.Node;
+
+                    var aliasUsingDirectives = compilationUnit.Usings.Where(usingDirective => usingDirective.Alias != null).ToList();
+                    CheckAliasDirectives(aliasUsingDirectives, c.SemanticModel);
+
                     var simpleNamespaces = compilationUnit.Usings.Where(usingDirective => usingDirective.Alias == null).ToList();
                     var globalUsingDirectives = simpleNamespaces.Select(x => new EquivalentNameSyntax(x.Name)).ToImmutableHashSet();
 
@@ -61,6 +66,33 @@ namespace SonarAnalyzer.Rules.CSharp
                     CheckUnnecessaryUsings(c, simpleNamespaces, visitor.NecessaryNamespaces);
                 },
                 SyntaxKind.CompilationUnit);
+            
+            context.RegisterOperationAction(c =>
+            {
+                var a = 1;
+            },
+            OperationKind.ArrayElementReferenceExpression,
+            OperationKindEx.DynamicMemberReference,
+            OperationKind.EventReferenceExpression,
+            OperationKind.FieldReferenceExpression,
+            OperationKindEx.FlowCaptureReference,
+            OperationKindEx.InstanceReference,
+            OperationKind.LocalReferenceExpression,
+            OperationKindEx.MethodReference,
+            OperationKind.ParameterReferenceExpression,
+            OperationKind.PropertyReferenceExpression);
+        }
+
+        private static void CheckAliasDirectives(List<UsingDirectiveSyntax> aliasUsingDirectives, SemanticModel model)
+        {
+            foreach(var alias in aliasUsingDirectives)
+            {
+                var symbol = model.GetDeclaredSymbol(alias);
+                var syys = symbol.Target;
+                var aa = model.GetSymbolInfo(alias);
+                var a = symbol.Target;
+            }
+        }
 
         private static void VisitContent(ISafeSyntaxWalker visitor, SyntaxList<MemberDeclarationSyntax> members, IEnumerable<SyntaxTrivia> trivias)
         {
@@ -101,6 +133,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private sealed class CSharpRemovableUsingWalker : SafeCSharpSyntaxWalker
         {
             public readonly HashSet<INamespaceSymbol> NecessaryNamespaces = new();
+            public readonly HashSet<ISymbol> NecessarySymbols = new();
 
             private readonly SonarSyntaxNodeReportingContext context;
             private readonly IImmutableSet<EquivalentNameSyntax> usingDirectivesFromParent;

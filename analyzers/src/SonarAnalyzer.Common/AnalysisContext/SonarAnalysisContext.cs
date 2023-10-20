@@ -118,6 +118,10 @@ public class SonarAnalysisContext
             c => c.RegisterSyntaxTreeAction(
                 treeContext => Execute<SonarSyntaxTreeReportingContext, SyntaxTreeAnalysisContext>(new(this, treeContext, c.Compilation), action, treeContext.Tree, generatedCodeRecognizer)));
 
+    public void RegisterOperationAction(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarOperationReportingContext> action, params OperationKind[] operationKinds) =>
+        analysisContext.RegisterOperationAction(
+            c => Execute<SonarOperationReportingContext, OperationAnalysisContext>(new(this, c), action, c.Operation.Syntax.SyntaxTree, generatedCodeRecognizer), operationKinds);
+
     /// <summary>
     /// Register action for a SyntaxNode that is executed unconditionally:
     /// * For all non-generated code.

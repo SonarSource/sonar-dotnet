@@ -43,6 +43,9 @@ namespace SonarAnalyzer.Helpers
         public ReportingContext(SonarCodeBlockReportingContext context, Diagnostic diagnostic)
             : this(diagnostic, context.Context.ReportDiagnostic, context.Compilation, context.Tree) { }
 
+        public ReportingContext(SonarOperationReportingContext context, Diagnostic diagnostic)
+            : this(diagnostic, context.Context.ReportDiagnostic, context.Compilation, diagnostic.Location?.SourceTree) { }
+
         private ReportingContext(Diagnostic diagnostic,
                                  Action<Diagnostic> roslynReportDiagnostic,
                                  Compilation compilation,

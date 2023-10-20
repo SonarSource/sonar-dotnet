@@ -47,6 +47,11 @@ namespace SonarAnalyzer.Extensions
             where TSyntaxKind : struct =>
             context.RegisterCodeBlockStartAction(CSharpGeneratedCodeRecognizer.Instance, action);
 
+        public static void RegisterOperationAction(this SonarAnalysisContext context,
+                                                   Action<SonarOperationReportingContext> action,
+                                                   params OperationKind[] operationKinds) =>
+            context.RegisterOperationAction(CSharpGeneratedCodeRecognizer.Instance, action, operationKinds);
+
         public static void ReportIssue(this SonarCompilationReportingContext context, Diagnostic diagnostic) =>
             context.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, diagnostic);
 
