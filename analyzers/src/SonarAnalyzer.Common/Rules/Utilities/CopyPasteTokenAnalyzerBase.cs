@@ -31,17 +31,19 @@ namespace SonarAnalyzer.Rules
         protected abstract string GetCpdValue(SyntaxToken token);
         protected abstract bool IsUsingDirective(SyntaxNode node);
 
-        protected sealed override bool AnalyzeTestProjects => false;
+        protected override UtilityAnalyzerParameters ReadParameters(SonarCompilationReportingContext context) =>
+            base.ReadParameters(context) with { AnalyzeTestProjects = false };
+
         protected sealed override bool AnalyzeUnchangedFiles => true;
         protected sealed override string FileName => "token-cpd.pb";
 
         protected CopyPasteTokenAnalyzerBase() : base(DiagnosticId, Title) { }
 
-        protected override bool ShouldGenerateMetrics(SyntaxTree tree, Compilation compilation) =>
+        protected sealed override bool ShouldGenerateMetrics(UtilityAnalyzerParameters parameters, SyntaxTree tree, Compilation compilation) =>
             !GeneratedCodeRecognizer.IsRazorGeneratedFile(tree)
-            && base.ShouldGenerateMetrics(tree, compilation);
+            && base.ShouldGenerateMetrics(parameters, tree, compilation);
 
-        protected sealed override CopyPasteTokenInfo CreateMessage(SyntaxTree tree, SemanticModel model)
+        protected sealed override CopyPasteTokenInfo CreateMessage(UtilityAnalyzerParameters parameters, SyntaxTree tree, SemanticModel model)
         {
             var cpdTokenInfo = new CopyPasteTokenInfo { FilePath = tree.FilePath };
             foreach (var token in tree.GetRoot().DescendantTokens(n => !IsUsingDirective(n)))

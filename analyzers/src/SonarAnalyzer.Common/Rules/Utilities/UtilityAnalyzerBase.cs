@@ -24,19 +24,20 @@ using SonarAnalyzer.Protobuf;
 
 namespace SonarAnalyzer.Rules
 {
+    public readonly record struct UtilityAnalyzerParameters(bool IsAnalyzerEnabled, bool IgnoreHeaderComments, bool AnalyzeGeneratedCode, bool AnalyzeTestProjects, string OutPath, bool IsTestProject)
+    {
+        public static readonly UtilityAnalyzerParameters Default =
+            new(IsAnalyzerEnabled: false, IgnoreHeaderComments: false, AnalyzeGeneratedCode: false, AnalyzeTestProjects: true, OutPath: null, IsTestProject: false);
+    }
+
     public abstract class UtilityAnalyzerBase : SonarDiagnosticAnalyzer
     {
         protected static readonly ISet<string> FileExtensionWhitelist = new HashSet<string> { ".cs", ".csx", ".vb" };
         private readonly DiagnosticDescriptor rule;
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
-        protected bool IsAnalyzerEnabled { get; set; }
-        protected bool IgnoreHeaderComments { get; set; }
-        protected virtual bool AnalyzeGeneratedCode { get; set; }
-        protected virtual bool AnalyzeTestProjects => true;
-        protected string OutPath { get; set; }
-        protected bool IsTestProject { get; set; }
         protected override bool EnableConcurrentExecution => false;
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+            ImmutableArray.Create(rule);
 
         protected UtilityAnalyzerBase(string diagnosticId, string title) =>
             rule = DiagnosticDescriptorFactory.CreateUtility(diagnosticId, title);
@@ -50,7 +51,7 @@ namespace SonarAnalyzer.Rules
                 EndOffset = lineSpan.EndLinePosition.Character
             };
 
-        protected void ReadParameters(SonarCompilationReportingContext context)
+        protected virtual UtilityAnalyzerParameters ReadParameters(SonarCompilationReportingContext context)
         {
             var outPath = context.ProjectConfiguration().OutPath;
             // For backward compatibility with S4MSB <= 5.0
@@ -60,13 +61,17 @@ namespace SonarAnalyzer.Rules
             }
             if (context.Options.SonarLintXml() != null && !string.IsNullOrEmpty(outPath))
             {
+                var language = context.Compilation.Language;
                 var sonarLintXml = context.SonarLintXml();
-                IgnoreHeaderComments = sonarLintXml.IgnoreHeaderComments(context.Compilation.Language);
-                AnalyzeGeneratedCode = sonarLintXml.AnalyzeGeneratedCode(context.Compilation.Language);
-                OutPath = Path.Combine(outPath, context.Compilation.Language == LanguageNames.CSharp ? "output-cs" : "output-vbnet");
-                IsAnalyzerEnabled = true;
-                IsTestProject = context.IsTestProject();
+                return new UtilityAnalyzerParameters(
+                    IsAnalyzerEnabled: true,
+                    IgnoreHeaderComments: sonarLintXml.IgnoreHeaderComments(language),
+                    AnalyzeGeneratedCode: sonarLintXml.AnalyzeGeneratedCode(language),
+                    AnalyzeTestProjects: true,
+                    OutPath: Path.Combine(outPath, language == LanguageNames.CSharp ? "output-cs" : "output-vbnet"),
+                    IsTestProject: context.IsTestProject());
             }
+            return UtilityAnalyzerParameters.Default;
         }
     }
 
@@ -76,7 +81,7 @@ namespace SonarAnalyzer.Rules
     {
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract string FileName { get; }
-        protected abstract TMessage CreateMessage(SyntaxTree tree, SemanticModel model);
+        protected abstract TMessage CreateMessage(UtilityAnalyzerParameters parameters, SyntaxTree tree, SemanticModel model);
 
         protected virtual bool AnalyzeUnchangedFiles => false;
 
@@ -87,34 +92,34 @@ namespace SonarAnalyzer.Rules
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterCompilationAction(context =>
             {
-                ReadParameters(context);
-                if (!IsAnalyzerEnabled)
+                var parameters = ReadParameters(context);
+                if (!parameters.IsAnalyzerEnabled)
                 {
                     return;
                 }
 
                 var treeMessages = context.Compilation.SyntaxTrees
-                    .Where(x => ShouldGenerateMetrics(context, x))
-                    .Select(x => CreateMessage(x, context.Compilation.GetSemanticModel(x)));
+                    .Where(x => ShouldGenerateMetrics(parameters, context, x))
+                    .Select(x => CreateMessage(parameters, x, context.Compilation.GetSemanticModel(x)));
 
                 var allMessages = CreateAnalysisMessages(context)
                     .Concat(treeMessages)
                     .WhereNotNull()
                     .ToArray();
 
-                Directory.CreateDirectory(OutPath);
-                using var stream = File.Create(Path.Combine(OutPath, FileName));
+                Directory.CreateDirectory(parameters.OutPath);
+                using var stream = File.Create(Path.Combine(parameters.OutPath, FileName));
                 foreach (var message in allMessages)
                 {
                     message.WriteDelimitedTo(stream);
                 }
             });
 
-        protected virtual bool ShouldGenerateMetrics(SyntaxTree tree, Compilation compilation) =>
+        protected virtual bool ShouldGenerateMetrics(UtilityAnalyzerParameters parameters, SyntaxTree tree, Compilation compilation) =>
             // The results of Metrics and CopyPasteToken analyzers are not needed for Test projects yet the plugin side expects the protobuf files, so we create empty ones.
-            (AnalyzeTestProjects || !IsTestProject)
+            (parameters.AnalyzeTestProjects || !parameters.IsTestProject)
             && FileExtensionWhitelist.Contains(Path.GetExtension(tree.FilePath))
-            && ShouldGenerateMetricsByType(tree, compilation);
+            && ShouldGenerateMetricsByType(parameters, tree, compilation);
 
         protected static string GetFilePath(SyntaxTree tree) =>
             // If the syntax tree is constructed for a razor generated file, we need to provide the original file path.
@@ -122,12 +127,12 @@ namespace SonarAnalyzer.Rules
                 ? root.GetMappedFilePathFromRoot()
                 : tree.FilePath;
 
-        private bool ShouldGenerateMetrics(SonarCompilationReportingContext context, SyntaxTree tree) =>
+        private bool ShouldGenerateMetrics(UtilityAnalyzerParameters parameters, SonarCompilationReportingContext context, SyntaxTree tree) =>
             (AnalyzeUnchangedFiles || !context.IsUnchanged(tree))
-            && ShouldGenerateMetrics(tree, context.Compilation);
+            && ShouldGenerateMetrics(parameters, tree, context.Compilation);
 
-        private bool ShouldGenerateMetricsByType(SyntaxTree tree, Compilation compilation) =>
-            AnalyzeGeneratedCode
+        private bool ShouldGenerateMetricsByType(UtilityAnalyzerParameters parameters, SyntaxTree tree, Compilation compilation) =>
+            parameters.AnalyzeGeneratedCode
                 ? !GeneratedCodeRecognizer.IsCshtml(tree) // We cannot upload metrics for .cshtml files. The file is owned by the html plugin.
                 : !tree.IsGenerated(Language.GeneratedCodeRecognizer, compilation) || GeneratedCodeRecognizer.IsRazor(tree);
     }

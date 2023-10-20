@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules
 
         protected SymbolReferenceAnalyzerBase() : base(DiagnosticId, Title) { }
 
-        protected sealed override SymbolReferenceInfo CreateMessage(SyntaxTree tree, SemanticModel model)
+        protected sealed override SymbolReferenceInfo CreateMessage(UtilityAnalyzerParameters parameters, SyntaxTree tree, SemanticModel model)
         {
             var filePath = GetFilePath(tree);
             var symbolReferenceInfo = new SymbolReferenceInfo { FilePath = filePath };
@@ -54,8 +54,8 @@ namespace SonarAnalyzer.Rules
             return symbolReferenceInfo;
         }
 
-        protected override bool ShouldGenerateMetrics(SyntaxTree tree, Compilation compilation) =>
-            base.ShouldGenerateMetrics(tree, compilation)
+        protected sealed override bool ShouldGenerateMetrics(UtilityAnalyzerParameters parameters, SyntaxTree tree, Compilation compilation) =>
+            base.ShouldGenerateMetrics(parameters, tree, compilation)
             && !HasTooManyTokens(tree);
 
         private Dictionary<ISymbol, List<ReferenceInfo>> GetReferences(SyntaxNode root, SemanticModel model)

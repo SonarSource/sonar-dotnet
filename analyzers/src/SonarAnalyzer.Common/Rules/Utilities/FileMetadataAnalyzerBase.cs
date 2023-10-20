@@ -29,15 +29,16 @@ namespace SonarAnalyzer.Rules
         private const string Title = "File metadata generator";
 
         protected sealed override string FileName => "file-metadata.pb";
-        protected override bool AnalyzeGeneratedCode => true;
+        protected override UtilityAnalyzerParameters ReadParameters(SonarCompilationReportingContext context) =>
+            base.ReadParameters(context) with { AnalyzeGeneratedCode = true };
 
         protected FileMetadataAnalyzerBase() : base(DiagnosticId, Title) { }
 
-        protected override bool ShouldGenerateMetrics(SyntaxTree tree, Compilation compilation) =>
+        protected override bool ShouldGenerateMetrics(UtilityAnalyzerParameters parameters, SyntaxTree tree, Compilation compilation) =>
             !GeneratedCodeRecognizer.IsRazorGeneratedFile(tree)
-            && base.ShouldGenerateMetrics(tree, compilation);
+            && base.ShouldGenerateMetrics(parameters, tree, compilation);
 
-        protected sealed override FileMetadataInfo CreateMessage(SyntaxTree tree, SemanticModel model) =>
+        protected sealed override FileMetadataInfo CreateMessage(UtilityAnalyzerParameters parameters, SyntaxTree tree, SemanticModel model) =>
             new()
             {
                 FilePath = tree.FilePath,

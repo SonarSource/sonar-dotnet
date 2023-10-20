@@ -20,6 +20,8 @@
 
 using System.IO;
 using Google.Protobuf.Collections;
+using SonarAnalyzer.AnalysisContext;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Protobuf;
 using SonarAnalyzer.Rules;
 using CS = SonarAnalyzer.Rules.CSharp;
@@ -324,22 +326,32 @@ namespace SonarAnalyzer.UnitTest.Rules
         // We need to set protected properties and this class exists just to enable the analyzer without bothering with additional files with parameters
         private sealed class TestSymbolReferenceAnalyzer_CS : CS.SymbolReferenceAnalyzer
         {
+            private readonly string outPath;
+            private readonly bool isTestProject;
+
             public TestSymbolReferenceAnalyzer_CS(string outPath, bool isTestProject)
             {
-                IsAnalyzerEnabled = true;
-                OutPath = outPath;
-                IsTestProject = isTestProject;
+                this.outPath = outPath;
+                this.isTestProject = isTestProject;
             }
+
+            protected override UtilityAnalyzerParameters ReadParameters(SonarCompilationReportingContext context) =>
+                base.ReadParameters(context) with { IsAnalyzerEnabled = true, OutPath = outPath, IsTestProject = isTestProject };
         }
 
         private sealed class TestSymbolReferenceAnalyzer_VB : VB.SymbolReferenceAnalyzer
         {
+            private readonly string outPath;
+            private readonly bool isTestProject;
+
             public TestSymbolReferenceAnalyzer_VB(string outPath, bool isTestProject)
             {
-                IsAnalyzerEnabled = true;
-                OutPath = outPath;
-                IsTestProject = isTestProject;
+                this.outPath = outPath;
+                this.isTestProject = isTestProject;
             }
+
+            protected override UtilityAnalyzerParameters ReadParameters(SonarCompilationReportingContext context) =>
+                base.ReadParameters(context) with { IsAnalyzerEnabled = true, OutPath = outPath, IsTestProject = isTestProject };
         }
     }
 }

@@ -31,11 +31,12 @@ namespace SonarAnalyzer.Rules
         protected abstract MetricsBase GetMetrics(SyntaxTree syntaxTree, SemanticModel semanticModel);
 
         protected sealed override string FileName => "metrics.pb";
-        protected sealed override bool AnalyzeTestProjects => false;
+        protected override UtilityAnalyzerParameters ReadParameters(SonarCompilationReportingContext context) =>
+            base.ReadParameters(context) with { AnalyzeTestProjects = false };
 
         protected MetricsAnalyzerBase() : base(DiagnosticId, Title) { }
 
-        protected sealed override MetricsInfo CreateMessage(SyntaxTree tree, SemanticModel model)
+        protected sealed override MetricsInfo CreateMessage(UtilityAnalyzerParameters parameters, SyntaxTree tree, SemanticModel model)
         {
             var metrics = GetMetrics(tree, model);
             var complexity = metrics.Complexity;
@@ -49,7 +50,7 @@ namespace SonarAnalyzer.Rules
                 CognitiveComplexity = metrics.CognitiveComplexity,
             };
 
-            var comments = metrics.GetComments(IgnoreHeaderComments);
+            var comments = metrics.GetComments(parameters.IgnoreHeaderComments);
             metricsInfo.NoSonarComment.AddRange(comments.NoSonar);
             metricsInfo.NonBlankComment.AddRange(comments.NonBlank);
             metricsInfo.CodeLine.AddRange(metrics.CodeLines);
