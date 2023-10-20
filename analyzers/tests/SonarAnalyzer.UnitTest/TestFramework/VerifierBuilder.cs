@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
     /// <summary>
     /// Immutable builder that holds all parameters for rule verification.
     /// </summary>
-    internal record VerifierBuilder
+    public record VerifierBuilder
     {
         // All properties are (and should be) immutable.
         public ImmutableArray<Func<DiagnosticAnalyzer>> Analyzers { get; init; } = ImmutableArray<Func<DiagnosticAnalyzer>>.Empty;
@@ -158,14 +158,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             !string.IsNullOrEmpty(fileName) && (fileName.EndsWith(".razor", StringComparison.OrdinalIgnoreCase) || fileName.EndsWith(".cshtml", StringComparison.OrdinalIgnoreCase));
     }
 
-    internal record VerifierBuilder<TAnalyzer> : VerifierBuilder
+    public record VerifierBuilder<TAnalyzer> : VerifierBuilder
         where TAnalyzer : DiagnosticAnalyzer, new()
     {
         public VerifierBuilder() =>
             Analyzers = new Func<DiagnosticAnalyzer>[] { () => new TAnalyzer() }.ToImmutableArray();
     }
 
-    internal static class VerifierBuilderExtensions
+    public static class VerifierBuilderExtensions
     {
         public static void Verify(this VerifierBuilder builder) =>
             builder.Build().Verify();
