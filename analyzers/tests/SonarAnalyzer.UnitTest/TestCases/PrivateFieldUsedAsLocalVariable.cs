@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Tests.Diagnostics
 {
@@ -7,7 +8,7 @@ namespace Tests.Diagnostics
         private int F0 = 0; // Compliant - unused
 
         private int F1 = 0; // Noncompliant {{Remove the field 'F1' and declare it as a local variable in the relevant methods.}}
-//                  ^^^^^^
+                            //                  ^^^^^^
         public int F2 = 0; // Compliant - Public
 
         void Use(int foo) { }
@@ -357,5 +358,58 @@ namespace Tests.Diagnostics
 
         private int F36; // compliant
         public void M15(int i) => F36 = i + 1;
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/8239
+    public class Repo_8239
+    {
+        private bool _received; // Noncompliant FP
+
+        public void Program()
+        {
+            var broker = new Broker();
+            broker.Receive += Broker_Receive; // Broker_Receive should be treated as "public" as it is passed as a delegate
+
+            broker.Process();
+
+            _received = false;
+            if (_received)
+            {
+                Console.WriteLine("OK");
+            }
+        }
+
+        private void Broker_Receive(object sender, EventArgs e)
+        {
+            _received = true;
+        }
+
+        public class Broker
+        {
+            public event EventHandler Receive;
+            public void Process() { Receive?.Invoke(this, EventArgs.Empty); }
+        }
+    }
+
+    public class Repo_8239_Variation
+    {
+        private int _counter; // Noncompliant FP
+
+        public void Program()
+        {
+            var list = new List<int>();
+            _counter = 0;
+
+            list.ForEach(Increment); // Increment is passed as a delegate and should be treated as "public"
+
+            if (_counter == 0)
+            {
+                Console.WriteLine("OK");
+            }
+        }
+
+        void Increment(int dummy)
+            => _counter = _counter + 1;
+
     }
 }
