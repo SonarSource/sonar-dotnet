@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-class PrimaryConstructor(string ctorParamUri = "file://blah.txt", // Noncompliant
-                         string ctorParam = "file://blah.txt") // Compliant
+class PrimaryConstructor(
+    string ctorParamUri = "file://blah.txt", // Noncompliant
+    string ctorParam = "file://blah.txt") // Compliant
 {
-    void Method(string methodParamUri = "file://blah.txt", // Noncompliant
-                string methodParam = "file://blah.txt") // Compliant
+    void Method(
+        string methodParamUri = "file://blah.txt", // Noncompliant
+        string methodParam = "file://blah.txt") // Compliant
     {
         var lambda = (string lambdaParamUri = "file://blah.txt") => lambdaParamUri; // Noncompliant
         var lambda2 = (string lambdaParam = "file://blah.txt") => lambdaParam; // Compliant
@@ -16,18 +18,21 @@ class PrimaryConstructor(string ctorParamUri = "file://blah.txt", // Noncomplian
     }
 }
 
-struct PrimaryConstructorStruct(string ctorParamUri = "file://blah.txt", // Noncompliant
-                         string ctorParam = "file://blah.txt") // Compliant
+struct PrimaryConstructorStruct(
+    string ctorParamUri = "file://blah.txt", // Noncompliant
+    string ctorParam = "file://blah.txt") // Compliant
 {
 }
 
-record class PrimaryConstructorRecordClass(string ctorParamUri = "file://blah.txt", // Noncompliant
-                         string ctorParam = "file://blah.txt") // Compliant
+record class PrimaryConstructorRecordClass(
+    string ctorParamUri = "file://blah.txt", // Noncompliant
+    string ctorParam = "file://blah.txt") // Compliant
 {
 }
 
-record struct PrimaryConstructorRecordStruct(string ctorParamUri = "file://blah.txt", // Noncompliant
-                         string ctorParam = "file://blah.txt") // Compliant
+record struct PrimaryConstructorRecordStruct(
+    string ctorParamUri = "file://blah.txt", // Noncompliant
+    string ctorParam = "file://blah.txt") // Compliant
 {
 }
 

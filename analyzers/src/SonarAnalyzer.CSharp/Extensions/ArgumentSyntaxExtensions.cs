@@ -22,6 +22,9 @@ namespace SonarAnalyzer.Extensions
 {
     internal static class ArgumentSyntaxExtensions
     {
+        internal static int? GetArgumentIndex(this ArgumentSyntax argument) =>
+            (argument.Parent as ArgumentListSyntax)?.Arguments.IndexOf(argument);
+
         internal static IEnumerable<ArgumentSyntax> GetArgumentsOfKnownType(this SeparatedSyntaxList<ArgumentSyntax> syntaxList, KnownType knownType, SemanticModel semanticModel) =>
             syntaxList
                 .Where(argument => semanticModel.GetTypeInfo(argument.Expression).Type.Is(knownType));
@@ -47,8 +50,5 @@ namespace SonarAnalyzer.Extensions
                 && TupleExpressionSyntaxWrapper.IsInstance(outerTuple)
                     ? (TupleExpressionSyntaxWrapper)outerTuple
                     : null;
-
-        internal static int? GetArgumentIndex(this ArgumentSyntax argument) =>
-            (argument.Parent as ArgumentListSyntax)?.Arguments.IndexOf(argument);
     }
 }

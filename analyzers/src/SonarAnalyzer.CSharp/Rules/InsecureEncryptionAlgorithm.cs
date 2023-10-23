@@ -36,8 +36,8 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override bool IsStringLiteralArgument(ArgumentSyntax argument) =>
             argument.Expression.IsKind(SyntaxKind.StringLiteralExpression);
 
-        protected override string StringLiteralValue(ArgumentSyntax argument) =>
-            ((LiteralExpressionSyntax)argument.Expression).Token.ValueText;
+        protected override SyntaxNode Expression(ArgumentSyntax argument) =>
+            argument.Expression;
 
         protected override Location Location(SyntaxNode objectCreation) =>
             objectCreation is ObjectCreationExpressionSyntax objectCreationExpression

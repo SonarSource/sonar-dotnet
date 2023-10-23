@@ -33,7 +33,9 @@ public class TestCases
 
     public void Utf8()
     {
-        var utf8uri = """file://blah.txt"""u8; // Noncompliant
-        var utf8 = """file://blah.txt"""u8;
+        var utf8uri = "file://blah.txt"u8; // Noncompliant
+        var utf8 = "file://blah.txt"u8;
+        var utf8uriRaw = """file://blah.txt"""u8; // Noncompliant
+        var utf8Raw = """file://blah.txt"""u8;
     }
 }

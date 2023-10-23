@@ -53,7 +53,6 @@ namespace SonarAnalyzer.Rules
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
         protected abstract string GetAssignedVariableName(SyntaxNode stringLiteral);
-        protected abstract string GetValueText(TLiteralExpression literalExpression);
         protected abstract bool HasAttributes(SyntaxNode literalExpression);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
@@ -83,7 +82,7 @@ namespace SonarAnalyzer.Rules
         {
             if (IsEnabled(context.Options)
                 && (TLiteralExpression)context.Node is var stringLiteral
-                && GetValueText(stringLiteral) is var literalValue
+                && Language.Syntax.LiteralText(stringLiteral) is var literalValue
                 && IsHardcodedIp(literalValue, stringLiteral))
             {
                 context.ReportIssue(Diagnostic.Create(Rule, stringLiteral.GetLocation(), literalValue));

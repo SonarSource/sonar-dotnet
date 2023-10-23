@@ -29,9 +29,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         public HardcodedIpAddress(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration) { }
 
-        protected override string GetValueText(LiteralExpressionSyntax literalExpression) =>
-            literalExpression.Token.ValueText;
-
         protected override bool HasAttributes(SyntaxNode literalExpression) =>
             literalExpression.Ancestors().AnyOfKind(SyntaxKind.Attribute);
 

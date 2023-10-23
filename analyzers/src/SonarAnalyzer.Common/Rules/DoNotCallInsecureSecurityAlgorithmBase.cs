@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules
         protected abstract TArgumentListSyntax ArgumentList(TInvocationExpressionSyntax invocationExpression);
         protected abstract SeparatedSyntaxList<TArgumentSyntax> Arguments(TArgumentListSyntax argumentList);
         protected abstract bool IsStringLiteralArgument(TArgumentSyntax argument);
-        protected abstract string StringLiteralValue(TArgumentSyntax argument);
+        protected abstract SyntaxNode Expression(TArgumentSyntax argument);
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
@@ -99,7 +99,7 @@ namespace SonarAnalyzer.Rules
                 return false;
             }
 
-            return FactoryParameterNames.Any(alg => alg.Equals(StringLiteralValue(Arguments(argumentList).First()), StringComparison.Ordinal));
+            return FactoryParameterNames.Any(x => x.Equals(Language.Syntax.LiteralText(Expression(Arguments(argumentList).First())), StringComparison.Ordinal));
         }
 
         private void ReportAllDiagnostics(SonarSyntaxNodeReportingContext context, Location location)

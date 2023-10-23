@@ -22,37 +22,6 @@ namespace SonarAnalyzer.Helpers.Facade;
 
 internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
 {
-    public override bool IsNullLiteral(SyntaxNode node) => node.IsNothingLiteral();
-
-    public override SyntaxKind Kind(SyntaxNode node) => node.Kind();
-
-    public override ComparisonKind ComparisonKind(SyntaxNode node) =>
-        node.Kind() switch
-        {
-            SyntaxKind.EqualsExpression => Helpers.ComparisonKind.Equals,
-            SyntaxKind.NotEqualsExpression => Helpers.ComparisonKind.NotEquals,
-            SyntaxKind.LessThanExpression => Helpers.ComparisonKind.LessThan,
-            SyntaxKind.LessThanOrEqualExpression => Helpers.ComparisonKind.LessThanOrEqual,
-            SyntaxKind.GreaterThanExpression => Helpers.ComparisonKind.GreaterThan,
-            SyntaxKind.GreaterThanOrEqualExpression => Helpers.ComparisonKind.GreaterThanOrEqual,
-            _ => Helpers.ComparisonKind.None,
-        };
-
-    public override bool IsKind(SyntaxNode node, SyntaxKind kind) => node.IsKind(kind);
-
-    public override bool IsKind(SyntaxToken token, SyntaxKind kind) => token.IsKind(kind);
-
-    public override bool IsKind(SyntaxTrivia trivia, SyntaxKind kind) => trivia.IsKind(kind);
-
-    public override bool IsAnyKind(SyntaxNode node, ISet<SyntaxKind> syntaxKinds) => node.IsAnyKind(syntaxKinds);
-
-    public override bool IsAnyKind(SyntaxNode node, params SyntaxKind[] syntaxKinds) => node.IsAnyKind(syntaxKinds);
-
-    public override bool IsAnyKind(SyntaxTrivia trivia, params SyntaxKind[] syntaxKinds) => trivia.IsAnyKind(syntaxKinds);
-
-    public override bool IsKnownAttributeType(SemanticModel model, SyntaxNode attribute, KnownType knownType) =>
-        AttributeSyntaxExtensions.IsKnownType(Cast<AttributeSyntax>(attribute), knownType, model);
-
     public override bool AreEquivalent(SyntaxNode firstNode, SyntaxNode secondNode) =>
         SyntaxFactory.AreEquivalent(firstNode, secondNode);
 
@@ -64,14 +33,17 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
             _ => throw InvalidOperation(node, nameof(ArgumentExpressions))
         };
 
-    public override ImmutableArray<SyntaxNode> AssignmentTargets(SyntaxNode assignment) =>
-        ImmutableArray.Create<SyntaxNode>(Cast<AssignmentStatementSyntax>(assignment).Left);
+    public override int? ArgumentIndex(SyntaxNode argument) =>
+        Cast<ArgumentSyntax>(argument).GetArgumentIndex();
 
     public override SyntaxNode AssignmentLeft(SyntaxNode assignment) =>
         Cast<AssignmentStatementSyntax>(assignment).Left;
 
     public override SyntaxNode AssignmentRight(SyntaxNode assignment) =>
         Cast<AssignmentStatementSyntax>(assignment).Right;
+
+    public override ImmutableArray<SyntaxNode> AssignmentTargets(SyntaxNode assignment) =>
+        ImmutableArray.Create<SyntaxNode>(Cast<AssignmentStatementSyntax>(assignment).Left);
 
     public override SyntaxNode BinaryExpressionLeft(SyntaxNode binary) =>
         Cast<BinaryExpressionSyntax>(binary).Left;
@@ -85,23 +57,63 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
     public override SyntaxNode CastExpression(SyntaxNode cast) =>
         Cast<CastExpressionSyntax>(cast).Expression;
 
+    public override ComparisonKind ComparisonKind(SyntaxNode node) =>
+        node.Kind() switch
+        {
+            SyntaxKind.EqualsExpression => Helpers.ComparisonKind.Equals,
+            SyntaxKind.NotEqualsExpression => Helpers.ComparisonKind.NotEquals,
+            SyntaxKind.LessThanExpression => Helpers.ComparisonKind.LessThan,
+            SyntaxKind.LessThanOrEqualExpression => Helpers.ComparisonKind.LessThanOrEqual,
+            SyntaxKind.GreaterThanExpression => Helpers.ComparisonKind.GreaterThan,
+            SyntaxKind.GreaterThanOrEqualExpression => Helpers.ComparisonKind.GreaterThanOrEqual,
+            _ => Helpers.ComparisonKind.None,
+        };
+
     public override IEnumerable<SyntaxNode> EnumMembers(SyntaxNode @enum) =>
         @enum == null ? Enumerable.Empty<SyntaxNode>() : Cast<EnumStatementSyntax>(@enum).Parent.ChildNodes().OfType<EnumMemberDeclarationSyntax>();
 
-    public override int? ArgumentIndex(SyntaxNode argument) =>
-        Cast<ArgumentSyntax>(argument).GetArgumentIndex();
+    public override ImmutableArray<SyntaxToken> FieldDeclarationIdentifiers(SyntaxNode node) =>
+        Cast<FieldDeclarationSyntax>(node).Declarators.SelectMany(d => d.Names.Select(n => n.Identifier)).ToImmutableArray();
+
+    public override bool HasExactlyNArguments(SyntaxNode invocation, int count) =>
+        Cast<InvocationExpressionSyntax>(invocation).HasExactlyNArguments(count);
 
     public override SyntaxToken? InvocationIdentifier(SyntaxNode invocation) =>
         invocation == null ? null : Cast<InvocationExpressionSyntax>(invocation).GetMethodCallIdentifier();
 
-    public override SyntaxToken? ObjectCreationTypeIdentifier(SyntaxNode objectCreation) =>
-        objectCreation == null ? null : Cast<ObjectCreationExpressionSyntax>(objectCreation).GetObjectCreationTypeIdentifier();
+    public override bool IsAnyKind(SyntaxNode node, ISet<SyntaxKind> syntaxKinds) => node.IsAnyKind(syntaxKinds);
+
+    public override bool IsAnyKind(SyntaxNode node, params SyntaxKind[] syntaxKinds) => node.IsAnyKind(syntaxKinds);
+
+    public override bool IsAnyKind(SyntaxTrivia trivia, params SyntaxKind[] syntaxKinds) => trivia.IsAnyKind(syntaxKinds);
+
+    public override bool IsInExpressionTree(SemanticModel model, SyntaxNode node) =>
+        node.IsInExpressionTree(model);
+
+    public override bool IsKind(SyntaxNode node, SyntaxKind kind) => node.IsKind(kind);
+
+    public override bool IsKind(SyntaxToken token, SyntaxKind kind) => token.IsKind(kind);
+
+    public override bool IsKind(SyntaxTrivia trivia, SyntaxKind kind) => trivia.IsKind(kind);
+
+    public override bool IsKnownAttributeType(SemanticModel model, SyntaxNode attribute, KnownType knownType) =>
+        AttributeSyntaxExtensions.IsKnownType(Cast<AttributeSyntax>(attribute), knownType, model);
+
+    public override bool IsMemberAccessOnKnownType(SyntaxNode memberAccess, string name, KnownType knownType, SemanticModel semanticModel) =>
+        Cast<MemberAccessExpressionSyntax>(memberAccess).IsMemberAccessOnKnownType(name, knownType, semanticModel);
+
+    public override bool IsNullLiteral(SyntaxNode node) => node.IsNothingLiteral();
+
+    public override bool IsStatic(SyntaxNode node) =>
+        Cast<MethodBlockSyntax>(node).IsShared();
+
+    public override SyntaxKind Kind(SyntaxNode node) => node.Kind();
+
+    public override string LiteralText(SyntaxNode literal) =>
+        Cast<LiteralExpressionSyntax>(literal).Token.ValueText;
 
     public override ImmutableArray<SyntaxToken> LocalDeclarationIdentifiers(SyntaxNode node) =>
         Cast<LocalDeclarationStatementSyntax>(node).Declarators.SelectMany(d => d.Names.Select(n => n.Identifier)).ToImmutableArray();
-
-    public override ImmutableArray<SyntaxToken> FieldDeclarationIdentifiers(SyntaxNode node) =>
-        Cast<FieldDeclarationSyntax>(node).Declarators.SelectMany(d => d.Names.Select(n => n.Identifier)).ToImmutableArray();
 
     public override SyntaxKind[] ModifierKinds(SyntaxNode node) =>
         node is StructureBlockSyntax structureBlock
@@ -124,6 +136,9 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
     public override SyntaxToken? NodeIdentifier(SyntaxNode node) =>
         node.GetIdentifier();
 
+    public override SyntaxToken? ObjectCreationTypeIdentifier(SyntaxNode objectCreation) =>
+        objectCreation == null ? null : Cast<ObjectCreationExpressionSyntax>(objectCreation).GetObjectCreationTypeIdentifier();
+
     public override SyntaxNode RemoveConditionalAccess(SyntaxNode node)
     {
         var whenNotNull = node.RemoveParentheses();
@@ -143,18 +158,6 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
     public override bool TryGetInterpolatedTextValue(SyntaxNode node, SemanticModel semanticModel, out string interpolatedValue) =>
         Cast<InterpolatedStringExpressionSyntax>(node).TryGetInterpolatedTextValue(semanticModel, out interpolatedValue);
 
-    public override bool IsStatic(SyntaxNode node) =>
-        Cast<MethodBlockSyntax>(node).IsShared();
-
     public override bool TryGetOperands(SyntaxNode invocation, out SyntaxNode left, out SyntaxNode right) =>
         Cast<InvocationExpressionSyntax>(invocation).TryGetOperands(out left, out right);
-
-    public override bool HasExactlyNArguments(SyntaxNode invocation, int count) =>
-        Cast<InvocationExpressionSyntax>(invocation).HasExactlyNArguments(count);
-
-    public override bool IsMemberAccessOnKnownType(SyntaxNode memberAccess, string name, KnownType knownType, SemanticModel semanticModel) =>
-        Cast<MemberAccessExpressionSyntax>(memberAccess).IsMemberAccessOnKnownType(name, knownType, semanticModel);
-
-    public override bool IsInExpressionTree(SemanticModel model, SyntaxNode node) =>
-        node.IsInExpressionTree(model);
 }

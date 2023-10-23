@@ -22,8 +22,10 @@ using System.Text.RegularExpressions;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class UriShouldNotBeHardcodedBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+    public abstract class UriShouldNotBeHardcodedBase<TSyntaxKind, TLiteralExpressionSyntax, TArgumentSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
+        where TLiteralExpressionSyntax : SyntaxNode
+        where TArgumentSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S1075";
 
@@ -37,9 +39,9 @@ namespace SonarAnalyzer.Rules
         private const string AbsoluteDiskUri = @"^[A-Za-z]:(/|\\)";
         private const string AbsoluteMappedDiskUri = @"^\\\\\w[ \w\.]*";
 
-        protected static readonly Regex UriRegex = new($"{UriScheme}|{AbsoluteDiskUri}|{AbsoluteMappedDiskUri}", RegexOptions.Compiled, TimeSpan.FromSeconds(1));
+        protected static readonly Regex UriRegex = new($"{UriScheme}|{AbsoluteDiskUri}|{AbsoluteMappedDiskUri}", RegexOptions.Compiled, RegexConstants.DefaultTimeout);
 
-        protected static readonly Regex PathDelimiterRegex = new(@"^(\\|/)$", RegexOptions.Compiled, TimeSpan.FromSeconds(1));
+        protected static readonly Regex PathDelimiterRegex = new(@"^(\\|/)$", RegexOptions.Compiled, RegexConstants.DefaultTimeout);
 
         protected static readonly ISet<string> CheckedVariableNames =
             new HashSet<string>
@@ -54,21 +56,13 @@ namespace SonarAnalyzer.Rules
 
         protected override string MessageFormat => "{0}";
 
-        protected UriShouldNotBeHardcodedBase() : base(DiagnosticId) { }
-    }
-
-    public abstract class UriShouldNotBeHardcodedBase<TSyntaxKind, TLiteralExpressionSyntax, TArgumentSyntax> : UriShouldNotBeHardcodedBase<TSyntaxKind>
-        where TSyntaxKind : struct
-        where TLiteralExpressionSyntax : SyntaxNode
-        where TArgumentSyntax : SyntaxNode
-    {
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
         protected abstract TSyntaxKind[] StringConcatenateExpressions { get; }
         protected abstract TSyntaxKind[] InvocationOrObjectCreationKind { get; }
 
-        protected abstract string GetLiteralText(TLiteralExpressionSyntax literalExpression);
-
         protected abstract SyntaxNode GetRelevantAncestor(SyntaxNode node);
+
+        protected UriShouldNotBeHardcodedBase() : base(DiagnosticId) { }
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -76,10 +70,9 @@ namespace SonarAnalyzer.Rules
                 GeneratedCodeRecognizer,
                 c =>
                 {
-                    var stringLiteral = (TLiteralExpressionSyntax)c.Node;
-                    if (UriRegex.IsMatch(GetLiteralText(stringLiteral)) && IsInCheckedContext(stringLiteral, c.SemanticModel))
+                    if (UriRegex.IsMatch(Language.Syntax.LiteralText(c.Node)) && IsInCheckedContext(c.Node, c.SemanticModel))
                     {
-                        c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], stringLiteral.GetLocation(), AbsoluteUriMessage));
+                        c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], c.Node.GetLocation(), AbsoluteUriMessage));
                     }
                 },
                 Language.SyntaxKind.StringLiteralExpressions);
@@ -130,6 +123,6 @@ namespace SonarAnalyzer.Rules
         }
 
         private bool IsPathDelimiter(SyntaxNode expression) =>
-            GetLiteralText(expression as TLiteralExpressionSyntax) is { } text && PathDelimiterRegex.IsMatch(text);
+            expression is TLiteralExpressionSyntax && PathDelimiterRegex.IsMatch(Language.Syntax.LiteralText(expression));
     }
 }
