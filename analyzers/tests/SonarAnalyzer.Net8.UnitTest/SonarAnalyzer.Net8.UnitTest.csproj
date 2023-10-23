@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <!-- `-windows` is required in order to be able to reference SonarAnalyzer.UnitTests -->
+        <!-- `-windows` is required in order to be able to reference SonarAnalyzer.UnitTests to resolve e.g. WinForms references -->
         <TargetFramework>net8.0-windows</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
