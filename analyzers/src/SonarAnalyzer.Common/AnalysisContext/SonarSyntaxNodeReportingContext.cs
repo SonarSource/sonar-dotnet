@@ -51,7 +51,8 @@ public sealed class SonarSyntaxNodeReportingContext : SonarTreeReportingContextB
     /// the first invocation. See also <seealso href="https://github.com/dotnet/roslyn/issues/70488">#Roslyn/70488</seealso>.
     /// </summary>
     /// <returns>
-    /// Returns <see langword="true"/> for the invocation with PrimaryConstructorBaseType and ContainingSymbol being the type <see langword="false"/> for everything else.
+    /// Returns <see langword="true"/> for the invocation with PrimaryConstructorBaseType and ContainingSymbol being <see cref="SymbolKind.NamedType"/> and
+    /// <see langword="false"/> for everything else.
     /// </returns>
     public bool IsRedundantPrimaryConstructorBaseTypeContext() =>
         Context is
