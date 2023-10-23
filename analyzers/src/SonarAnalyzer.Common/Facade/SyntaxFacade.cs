@@ -24,10 +24,10 @@ public abstract class SyntaxFacade<TSyntaxKind>
     where TSyntaxKind : struct
 {
     public abstract bool AreEquivalent(SyntaxNode firstNode, SyntaxNode secondNode);
-    public abstract SyntaxToken? ArgumentNameColon(SyntaxNode argument); 
     public abstract IEnumerable<SyntaxNode> ArgumentExpressions(SyntaxNode node);
     public abstract int? ArgumentIndex(SyntaxNode argument);
     public abstract IReadOnlyList<SyntaxNode> ArgumentList(SyntaxNode node);
+    public abstract SyntaxToken? ArgumentNameColon(SyntaxNode argument);
     public abstract SyntaxNode AssignmentLeft(SyntaxNode assignment);
     public abstract SyntaxNode AssignmentRight(SyntaxNode assignment);
     public abstract ImmutableArray<SyntaxNode> AssignmentTargets(SyntaxNode assignment);
@@ -37,6 +37,8 @@ public abstract class SyntaxFacade<TSyntaxKind>
     public abstract SyntaxNode CastExpression(SyntaxNode cast);
     public abstract ComparisonKind ComparisonKind(SyntaxNode node);
     public abstract IEnumerable<SyntaxNode> EnumMembers(SyntaxNode @enum);
+    public abstract ImmutableArray<SyntaxToken> FieldDeclarationIdentifiers(SyntaxNode node);
+    public abstract bool HasExactlyNArguments(SyntaxNode invocation, int count);
     public abstract SyntaxToken? InvocationIdentifier(SyntaxNode invocation);
     public abstract bool IsAnyKind(SyntaxNode node, ISet<TSyntaxKind> syntaxKinds);
     public abstract bool IsAnyKind(SyntaxNode node, params TSyntaxKind[] syntaxKinds);

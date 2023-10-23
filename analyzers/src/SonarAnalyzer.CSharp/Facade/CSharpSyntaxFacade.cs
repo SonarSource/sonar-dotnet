@@ -31,11 +31,11 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
     public override IReadOnlyList<SyntaxNode> ArgumentList(SyntaxNode node) =>
         node.ArgumentList();
 
-    public override SyntaxToken? ArgumentNameColon(SyntaxNode argument) =>
-        (argument as ArgumentSyntax)?.NameColon?.Name?.Identifier;
-
     public override int? ArgumentIndex(SyntaxNode argument) =>
         Cast<ArgumentSyntax>(argument).GetArgumentIndex();
+
+    public override SyntaxToken? ArgumentNameColon(SyntaxNode argument) =>
+        (argument as ArgumentSyntax)?.NameColon?.Name?.Identifier;
 
     public override SyntaxNode AssignmentLeft(SyntaxNode assignment) =>
         Cast<AssignmentExpressionSyntax>(assignment).Left;
