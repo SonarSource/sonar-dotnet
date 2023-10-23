@@ -26,7 +26,7 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
         SyntaxFactory.AreEquivalent(firstNode, secondNode);
 
     public override IEnumerable<SyntaxNode> ArgumentExpressions(SyntaxNode node) =>
-        ArgumentList(node).OfType<ArgumentSyntax>().Select(x => x.GetExpression()).WhereNotNull();
+        ArgumentList(node)?.OfType<ArgumentSyntax>().Select(x => x.GetExpression()).WhereNotNull() ?? Enumerable.Empty<SyntaxNode>();
 
     public override IReadOnlyList<SyntaxNode> ArgumentList(SyntaxNode node) =>
         node.ArgumentList()?.Arguments;

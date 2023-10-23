@@ -97,8 +97,8 @@ public class VisualBasicFacadeTests
         var root = tree.GetRoot();
         var argumentList = root.DescendantNodes().OfType<ArgumentListSyntax>().First();
         var method = model.GetDeclaredSymbol(root.DescendantNodes().OfType<MethodStatementSyntax>().First());
-        var actual = sut.MethodParameterLookup(argumentList, method);
-        actual.Should().NotBeNull().And.BeOfType<VisualBasicMethodParameterLookup>();
+        var actual = () => sut.MethodParameterLookup(argumentList, method);
+        actual.Should().Throw<InvalidOperationException>();
     }
 
     [TestMethod]
@@ -117,7 +117,7 @@ public class VisualBasicFacadeTests
         var methodDeclaration = root.DescendantNodes().OfType<MethodStatementSyntax>().First();
         var method = model.GetDeclaredSymbol(methodDeclaration);
         var actual = () => sut.MethodParameterLookup(methodDeclaration, method); // MethodDeclarationSyntax passed instead of invocation
-        actual.Should().Throw<ArgumentException>().Which.Message.Should().StartWith("Microsoft.CodeAnalysis.VisualBasic.Syntax.MethodStatementSyntax does not contain an ArgumentList.");
+        actual.Should().Throw<InvalidOperationException>().Which.Message.Should().StartWith("The node of kind FunctionStatement does not have an ArgumentList.");
     }
 
     [TestMethod]
