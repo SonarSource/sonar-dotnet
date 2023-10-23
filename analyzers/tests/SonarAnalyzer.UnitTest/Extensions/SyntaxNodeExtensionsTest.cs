@@ -737,7 +737,7 @@ public class X
         [DataRow("$$M(1)$$;")]
         [DataRow("_ = $$new C(1)$$;")]
         [DataRow("C c = $$new(1)$$;")]
-        public void ArgumentList_InvocationObjectCreation(string statement)
+        public void ArgumentList_CS_InvocationObjectCreation(string statement)
         {
             var code = $$"""
                 public class C(int p) {    
@@ -755,7 +755,7 @@ public class X
         [DataTestMethod]
         [DataRow("base")]
         [DataRow("this")]
-        public void ArgumentList_ConstructorInitializer(string keyword)
+        public void ArgumentList_CS_ConstructorInitializer(string keyword)
         {
             var code = $$"""
                 public class Base(int p);
@@ -774,7 +774,7 @@ public class X
         }
 
         [TestMethod]
-        public void ArgumentList_PrimaryConstructorBaseType()
+        public void ArgumentList_CS_PrimaryConstructorBaseType()
         {
             var code = """
                 public class Base(int p);
@@ -788,7 +788,7 @@ public class X
 
         [DataTestMethod]
         [DataRow("_ = $$new System.Collections.Generic.List<int> { 0 }$$;")]
-        public void ArgumentList_NoList(string statement)
+        public void ArgumentList_CS_NoList(string statement)
         {
             var code = $$"""
                 public class C {    
@@ -805,7 +805,7 @@ public class X
         [DataTestMethod]
         [DataRow("_ = $$new int[] { 1 }$$;")]
         [DataRow("_ = $$new { A = 1 }$$;")]
-        public void ArgumentList_UnsupportedNodeKinds(string statement)
+        public void ArgumentList_CS_UnsupportedNodeKinds(string statement)
         {
             var code = $$"""
                 public class C {    
@@ -816,6 +816,121 @@ public class X
                 """;
             var node = NodeBetweenMarkers(code, LanguageNames.CSharp);
             var sut = () => ExtensionsCS.ArgumentList(node);
+            sut.Should().Throw<InvalidOperationException>();
+        }
+
+        [DataTestMethod]
+        [DataRow("$$M(1)$$")]
+        [DataRow("Call $$M(1)$$")]
+        [DataRow("Dim c = $$New C(1)$$")]
+        [DataRow("$$RaiseEvent SomeEvent(1)$$")]
+        public void ArgumentList_VB_Invocations(string statement)
+        {
+            var code = $$"""
+                Imports System
+
+                Public Class C
+                    Public Event SomeEvent As Action(Of Integer)
+
+                    Public Sub New(p As Integer)
+                    End Sub
+
+                    Public Sub M(p As Integer)
+                        Dim s As String = "Test"
+                        {{statement}}
+                    End Sub
+                End Class
+                """;
+            var node = NodeBetweenMarkers(code, LanguageNames.VisualBasic, getInnermostNodeForTie: true);
+            var argumentList = ExtensionsVB.ArgumentList(node);
+            var argument = argumentList.Should().ContainSingle().Which;
+            (argument.GetExpression() is SyntaxVB.LiteralExpressionSyntax { Token.ValueText: "1" }).Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void ArgumentList_VB_Mid()
+        {
+            var code = $$"""
+                Public Class C
+                    Public Sub M()
+                        Dim s As String = "Test"
+                        $$Mid(s, 1)$$ = "Test"
+                    End Sub
+                End Class
+                """;
+            var node = NodeBetweenMarkers(code, LanguageNames.VisualBasic, getInnermostNodeForTie: true);
+            var argumentList = ExtensionsVB.ArgumentList(node);
+            argumentList.Should().SatisfyRespectively(
+                a => (a.GetExpression() is SyntaxVB.IdentifierNameSyntax { Identifier.ValueText: "s" }).Should().BeTrue(),
+                a => (a.GetExpression() is SyntaxVB.LiteralExpressionSyntax { Token.ValueText: "1" }).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void ArgumentList_VB_Attribute()
+        {
+            var code = """
+                <$$System.Obsolete("1")$$>
+                Public Class C
+                End Class
+                """;
+            var node = NodeBetweenMarkers(code, LanguageNames.VisualBasic, getInnermostNodeForTie: true);
+            var argumentList = ExtensionsVB.ArgumentList(node);
+            var argument = argumentList.Should().ContainSingle().Which;
+            (argument.GetExpression() is SyntaxVB.LiteralExpressionSyntax { Token.ValueText: "1" }).Should().BeTrue();
+        }
+
+        [DataTestMethod]
+        [DataRow("Dim $$i(1)$$ As Integer")]
+        [DataRow("Dim sales()() As Double = $$New Double(1)() { }$$")]
+        [DataRow("ReDim $$arr(1)$$")]
+        public void ArgumentList_VB_ArrayBounds(string statement)
+        {
+            var code = $$"""
+                Public Class C
+                    Public Sub M()
+                        Dim arr(0) As Integer
+                        {{statement}}
+                    End Sub
+                End Class
+                """;
+            var node = NodeBetweenMarkers(code, LanguageNames.VisualBasic, getInnermostNodeForTie: true);
+            var argumentList = ExtensionsVB.ArgumentList(node);
+            var argument = argumentList.Should().ContainSingle().Which;
+            (argument.GetExpression() is SyntaxVB.LiteralExpressionSyntax { Token.ValueText: "1" }).Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void ArgumentList_VB_Call()
+        {
+            var code = $$"""
+                Public Class C
+                    Public Sub M()
+                        Call $$M$$
+                    End Sub
+                End Class
+                """;
+            var node = NodeBetweenMarkers(code, LanguageNames.VisualBasic, getInnermostNodeForTie: false);
+            var argumentList = ExtensionsVB.ArgumentList(node);
+            argumentList.Should().BeEmpty();
+        }
+
+        [TestMethod]
+        public void ArgumentList_VB_Null() =>
+            ExtensionsVB.ArgumentList(null).Should().BeEmpty();
+
+        [DataTestMethod]
+        [DataRow("$$Dim a = 1$$")]
+        public void ArgumentList_VB_UnsupportedNodeKinds(string statement)
+        {
+            var code = $$"""
+                Public Class C
+                    Public Sub M()
+                        {{statement}}
+                    End Sub
+                End Class
+                """;
+            var node = NodeBetweenMarkers(code, LanguageNames.VisualBasic, getInnermostNodeForTie: true);
+            var sut = () => ExtensionsVB.ArgumentList(node);
             sut.Should().Throw<InvalidOperationException>();
         }
 
@@ -1016,14 +1131,14 @@ public class X
             }
         }
 
-        private static SyntaxNode NodeBetweenMarkers(string code, string language)
+        private static SyntaxNode NodeBetweenMarkers(string code, string language, bool getInnermostNodeForTie = false)
         {
             var position = code.IndexOf("$$");
             var lastPosition = code.LastIndexOf("$$");
             var length = lastPosition == position ? 0 : lastPosition - position - "$$".Length;
             code = code.Replace("$$", string.Empty);
             var (tree, _) = IsCSharp() ? TestHelper.CompileCS(code) : TestHelper.CompileVB(code);
-            var node = tree.GetRoot().FindNode(new TextSpan(position, length));
+            var node = tree.GetRoot().FindNode(new TextSpan(position, length), getInnermostNodeForTie: getInnermostNodeForTie);
             return node;
 
             bool IsCSharp() => language == LanguageNames.CSharp;

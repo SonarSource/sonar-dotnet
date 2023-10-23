@@ -209,21 +209,6 @@ internal static class VisualBasicSyntaxHelper
             ? argumentList.Arguments[index].GetExpression().RemoveParentheses()
             : null;
 
-    public static IReadOnlyList<ArgumentSyntax> ArgumentList(this SyntaxNode node) =>
-        (node switch
-        {
-            ObjectCreationExpressionSyntax creation => creation.ArgumentList,
-            InvocationExpressionSyntax invocation => invocation.ArgumentList,
-            ModifiedIdentifierSyntax modified => modified.ArrayBounds,
-            AttributeSyntax attribute => attribute.ArgumentList,
-            MidExpressionSyntax mid => mid.ArgumentList,
-            RaiseEventStatementSyntax raise => raise.ArgumentList,
-            RedimClauseSyntax reDim => reDim.ArrayBounds,
-            ArrayCreationExpressionSyntax arrayCreation => arrayCreation.ArrayBounds,
-            null => null,
-            _ => throw new InvalidOperationException($"The {nameof(node)} of kind {node.Kind()} does not have an {nameof(ArgumentList)}."),
-        })?.Arguments ?? (IReadOnlyList<ArgumentSyntax>)Array.Empty<ArgumentSyntax>();
-
     /// <summary>
     /// Returns argument expressions for given parameter.
     ///
