@@ -802,6 +802,10 @@ public class X
             argumentList.Should().BeEmpty();
         }
 
+        [TestMethod]
+        public void ArgumentList_CS_Null() =>
+            ExtensionsCS.ArgumentList(null).Should().BeEmpty();
+
         [DataTestMethod]
         [DataRow("_ = $$new int[] { 1 }$$;")]
         [DataRow("_ = $$new { A = 1 }$$;")]
