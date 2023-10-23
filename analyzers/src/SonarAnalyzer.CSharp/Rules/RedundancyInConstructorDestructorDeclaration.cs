@@ -26,6 +26,14 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3253";
         private const string MessageFormat = "Remove this redundant {0}.";
 
+        private static readonly SyntaxKind[] TypesWithPrimaryConstructorDeclarations =
+        {
+            SyntaxKind.ClassDeclaration,
+            SyntaxKind.StructDeclaration,
+            SyntaxKindEx.RecordClassDeclaration,
+            SyntaxKindEx.RecordStructDeclaration
+        };
+
         private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
@@ -34,19 +42,17 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             context.RegisterNodeAction(CheckConstructorDeclaration, SyntaxKind.ConstructorDeclaration);
             context.RegisterNodeAction(CheckDestructorDeclaration, SyntaxKind.DestructorDeclaration);
-            context.RegisterNodeAction(x => CheckPrimaryConstructor(x, false), SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordClassDeclaration);
-            context.RegisterNodeAction(x => CheckPrimaryConstructor(x, true), SyntaxKind.StructDeclaration, SyntaxKindEx.RecordStructDeclaration);
+            context.RegisterNodeAction(CheckTypesWithPrimaryConstructor, TypesWithPrimaryConstructorDeclarations);
         }
 
-        private static void CheckPrimaryConstructor(SonarSyntaxNodeReportingContext context, bool checkInitializedFieldOrProperty)
+        private static void CheckTypesWithPrimaryConstructor(SonarSyntaxNodeReportingContext context)
         {
             var typeDeclaration = (TypeDeclarationSyntax)context.Node;
-            if (typeDeclaration.ParameterList() is { Parameters.Count: 0 } parameterList)
+            if (typeDeclaration.ParameterList() is { Parameters.Count: 0 } parameterList
+                && (typeDeclaration.IsAnyKind(SyntaxKind.ClassDeclaration, SyntaxKindEx.RecordClassDeclaration)
+                    || !ContainsInitializedFieldOrProperty((INamedTypeSymbol)context.SemanticModel.GetDeclaredSymbol(context.Node))))
             {
-                if (!checkInitializedFieldOrProperty || !ContainsInitializedFieldOrProperty((INamedTypeSymbol)context.SemanticModel.GetDeclaredSymbol(context.Node)))
-                {
-                    context.ReportIssue(Diagnostic.Create(Rule, parameterList.GetLocation(), "primary constructor"));
-                }
+                context.ReportIssue(Diagnostic.Create(Rule, parameterList.GetLocation(), "primary constructor"));
             }
         }
 
@@ -54,7 +60,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var destructorDeclaration = (DestructorDeclarationSyntax)context.Node;
 
-            if (IsBodyEmpty(destructorDeclaration.Body))
+            if (destructorDeclaration.Body is { Statements.Count: 0 })
             {
                 context.ReportIssue(Diagnostic.Create(Rule, destructorDeclaration.GetLocation(), "destructor"));
             }
@@ -84,8 +90,7 @@ namespace SonarAnalyzer.Rules.CSharp
             && !initializer.ArgumentList.Arguments.Any();
 
         private static bool IsConstructorRedundant(ConstructorDeclarationSyntax constructorDeclaration, SemanticModel semanticModel) =>
-            IsConstructorParameterless(constructorDeclaration)
-            && IsBodyEmpty(constructorDeclaration.Body)
+            constructorDeclaration is { ParameterList.Parameters.Count: 0, Body.Statements.Count: 0 }
             && (IsSinglePublicConstructor(constructorDeclaration, semanticModel)
                 || constructorDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword));
 
@@ -94,16 +99,10 @@ namespace SonarAnalyzer.Rules.CSharp
             && IsInitializerEmptyOrRedundant(constructorDeclaration.Initializer)
             && TypeHasExactlyOneConstructor(constructorDeclaration, semanticModel);
 
-        private static bool IsInitializerEmptyOrRedundant(ConstructorInitializerSyntax initializer)
-        {
-            if (initializer == null)
-            {
-                return true;
-            }
-
-            return initializer.ArgumentList.Arguments.Count == 0
-                   && initializer.ThisOrBaseKeyword.IsKind(SyntaxKind.BaseKeyword);
-        }
+        private static bool IsInitializerEmptyOrRedundant(ConstructorInitializerSyntax initializer) =>
+            initializer is null
+            || (initializer.ArgumentList.Arguments.Count == 0
+                && initializer.ThisOrBaseKeyword.IsKind(SyntaxKind.BaseKeyword));
 
         private static bool TypeHasExactlyOneConstructor(BaseMethodDeclarationSyntax constructorDeclaration, SemanticModel semanticModel)
         {
@@ -114,12 +113,6 @@ namespace SonarAnalyzer.Rules.CSharp
                             .OfType<IMethodSymbol>()
                             .Count(m => m.MethodKind == MethodKind.Constructor && !m.IsImplicitlyDeclared) == 1;
         }
-
-        private static bool IsBodyEmpty(BlockSyntax block) =>
-            block != null && !block.Statements.Any();
-
-        private static bool IsConstructorParameterless(BaseMethodDeclarationSyntax constructorDeclaration) =>
-            constructorDeclaration.ParameterList.Parameters.Count == 0;
 
         private static bool ContainsInitializedFieldOrProperty(INamedTypeSymbol symbol) =>
             symbol.GetMembers().Any(f => f.DeclaringSyntaxReferences.Any(d => d.GetSyntax().GetInitializer() is not null));
