@@ -29,7 +29,8 @@ namespace Repro_8071
 
         void WithPromotion(short a, short b)
         {
-            _ = new SomeRecord(b, a);           // Noncompliant [SomeRecord2]
+            SomeRecord _ = new(b, a);           // Noncompliant [SomeRecord2]
+            //             ^^^
         }
 
         void WithCasting(long a, long b)
