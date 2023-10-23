@@ -19,7 +19,9 @@
             Foo.GlobalDivide(divisor, dividend)
 
             Divide(dividend, divisor) ' Noncompliant [1] {{Parameters to 'Divide' have the same names but not the same order as the method arguments.}}
+'           ^^^^^^
             Foo.GlobalDivide(dividend, divisor) ' Noncompliant [2]
+            '   ^^^^^^^^^^^^
 
             Divide(dividend:=dividend, divisor:= divisor)
 
@@ -41,8 +43,10 @@
             x = New Foo
 
             x = New Foo(right, left) ' Noncompliant
+            '       ^^^
             x = New FooFoo(right, left) ' Noncompliant
             x = New Foo.FooFoo(right, left) ' Noncompliant
+            '           ^^^^^^
 
             x = New Foo(ValProp, Foo.ValProp)
         End Sub

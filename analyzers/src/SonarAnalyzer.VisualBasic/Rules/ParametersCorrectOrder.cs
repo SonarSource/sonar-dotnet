@@ -30,5 +30,14 @@ namespace SonarAnalyzer.Rules.VisualBasic
         };
 
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+        protected override Location PrimaryLocation(SyntaxNode node) =>
+            node switch
+            {
+                InvocationExpressionSyntax { Expression: MemberAccessExpressionSyntax { Name: { } name } } => name.GetLocation(),
+                InvocationExpressionSyntax { Expression: { } expression } => expression.GetLocation(),
+                ObjectCreationExpressionSyntax { Type: QualifiedNameSyntax { Right: { } right } } => right.GetLocation(),
+                ObjectCreationExpressionSyntax { Type: { } type } => type.GetLocation(),
+                _ => base.PrimaryLocation(node),
+            };
     }
 }
