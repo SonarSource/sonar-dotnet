@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
-
 namespace SonarAnalyzer.Helpers.Facade;
 
 internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
@@ -31,7 +29,7 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
         ArgumentList(node).OfType<ArgumentSyntax>().Select(x => x.GetExpression()).WhereNotNull();
 
     public override IReadOnlyList<SyntaxNode> ArgumentList(SyntaxNode node) =>
-        node.ArgumentList();
+        node.ArgumentList()?.Arguments;
 
     public override int? ArgumentIndex(SyntaxNode argument) =>
         Cast<ArgumentSyntax>(argument).GetArgumentIndex();

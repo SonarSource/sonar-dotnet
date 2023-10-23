@@ -343,8 +343,8 @@ namespace SonarAnalyzer.Extensions
         }
 
         // based on Type="ArgumentListSyntax" in https://github.com/dotnet/roslyn/blob/main/src/Compilers/CSharp/Portable/Syntax/Syntax.xml
-        public static IReadOnlyList<ArgumentSyntax> ArgumentList(this SyntaxNode node) =>
-            (node switch
+        public static ArgumentListSyntax ArgumentList(this SyntaxNode node) =>
+            node switch
             {
                 ObjectCreationExpressionSyntax creation => creation.ArgumentList,
                 InvocationExpressionSyntax invocation => invocation.ArgumentList,
@@ -353,7 +353,7 @@ namespace SonarAnalyzer.Extensions
                 _ when PrimaryConstructorBaseTypeSyntaxWrapper.IsInstance(node) => ((PrimaryConstructorBaseTypeSyntaxWrapper)node).ArgumentList,
                 _ when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(node) => ((ImplicitObjectCreationExpressionSyntaxWrapper)node).ArgumentList,
                 _ => throw new InvalidOperationException($"The {nameof(node)} of kind {node.Kind()} does not have an {nameof(ArgumentList)}."),
-            })?.Arguments ?? (IReadOnlyList<ArgumentSyntax>)Array.Empty<ArgumentSyntax>();
+            };
 
         public static ParameterListSyntax ParameterList(this SyntaxNode node) =>
             node switch

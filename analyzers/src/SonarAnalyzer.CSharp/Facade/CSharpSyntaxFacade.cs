@@ -29,7 +29,7 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
         ArgumentList(node)?.OfType<ArgumentSyntax>().Select(x => x.Expression) ?? Enumerable.Empty<SyntaxNode>();
 
     public override IReadOnlyList<SyntaxNode> ArgumentList(SyntaxNode node) =>
-        node.ArgumentList();
+        node.ArgumentList()?.Arguments;
 
     public override int? ArgumentIndex(SyntaxNode argument) =>
         Cast<ArgumentSyntax>(argument).GetArgumentIndex();

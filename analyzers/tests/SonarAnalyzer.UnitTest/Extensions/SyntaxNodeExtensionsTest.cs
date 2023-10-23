@@ -747,7 +747,7 @@ public class X
                 }
                 """;
             var node = NodeBetweenMarkers(code, LanguageNames.CSharp);
-            var argumentList = ExtensionsCS.ArgumentList(node);
+            var argumentList = ExtensionsCS.ArgumentList(node).Arguments;
             var argument = argumentList.Should().ContainSingle().Which;
             (argument is { Expression: SyntaxCS.LiteralExpressionSyntax { Token.ValueText: "1" } }).Should().BeTrue();
         }
@@ -768,7 +768,7 @@ public class X
                 
                 """;
             var node = NodeBetweenMarkers(code, LanguageNames.CSharp);
-            var argumentList = ExtensionsCS.ArgumentList(node);
+            var argumentList = ExtensionsCS.ArgumentList(node).Arguments;
             var argument = argumentList.Should().ContainSingle().Which;
             (argument is { Expression: SyntaxCS.LiteralExpressionSyntax { Token.ValueText: "1" } }).Should().BeTrue();
         }
@@ -781,7 +781,7 @@ public class X
                 public class Derived(int p): $$Base(1)$$;
                 """;
             var node = NodeBetweenMarkers(code, LanguageNames.CSharp);
-            var argumentList = ExtensionsCS.ArgumentList(node);
+            var argumentList = ExtensionsCS.ArgumentList(node).Arguments;
             var argument = argumentList.Should().ContainSingle().Which;
             (argument is { Expression: SyntaxCS.LiteralExpressionSyntax { Token.ValueText: "1" } }).Should().BeTrue();
         }
@@ -798,13 +798,12 @@ public class X
                 }
                 """;
             var node = NodeBetweenMarkers(code, LanguageNames.CSharp);
-            var argumentList = ExtensionsCS.ArgumentList(node);
-            argumentList.Should().BeEmpty();
+            ExtensionsCS.ArgumentList(node).Should().BeNull();
         }
 
         [TestMethod]
         public void ArgumentList_CS_Null() =>
-            ExtensionsCS.ArgumentList(null).Should().BeEmpty();
+            ExtensionsCS.ArgumentList(null).Should().BeNull();
 
         [DataTestMethod]
         [DataRow("_ = $$new int[] { 1 }$$;")]
@@ -847,7 +846,7 @@ public class X
                 """;
             var node = NodeBetweenMarkers(code, LanguageNames.VisualBasic, getInnermostNodeForTie: true);
             var argumentList = ExtensionsVB.ArgumentList(node);
-            var argument = argumentList.Should().ContainSingle().Which;
+            var argument = argumentList.Arguments.Should().ContainSingle().Which;
             (argument.GetExpression() is SyntaxVB.LiteralExpressionSyntax { Token.ValueText: "1" }).Should().BeTrue();
         }
 
@@ -864,7 +863,7 @@ public class X
                 """;
             var node = NodeBetweenMarkers(code, LanguageNames.VisualBasic, getInnermostNodeForTie: true);
             var argumentList = ExtensionsVB.ArgumentList(node);
-            argumentList.Should().SatisfyRespectively(
+            argumentList.Arguments.Should().SatisfyRespectively(
                 a => (a.GetExpression() is SyntaxVB.IdentifierNameSyntax { Identifier.ValueText: "s" }).Should().BeTrue(),
                 a => (a.GetExpression() is SyntaxVB.LiteralExpressionSyntax { Token.ValueText: "1" }).Should().BeTrue());
         }
@@ -879,7 +878,7 @@ public class X
                 """;
             var node = NodeBetweenMarkers(code, LanguageNames.VisualBasic, getInnermostNodeForTie: true);
             var argumentList = ExtensionsVB.ArgumentList(node);
-            var argument = argumentList.Should().ContainSingle().Which;
+            var argument = argumentList.Arguments.Should().ContainSingle().Which;
             (argument.GetExpression() is SyntaxVB.LiteralExpressionSyntax { Token.ValueText: "1" }).Should().BeTrue();
         }
 
@@ -899,7 +898,7 @@ public class X
                 """;
             var node = NodeBetweenMarkers(code, LanguageNames.VisualBasic, getInnermostNodeForTie: true);
             var argumentList = ExtensionsVB.ArgumentList(node);
-            var argument = argumentList.Should().ContainSingle().Which;
+            var argument = argumentList.Arguments.Should().ContainSingle().Which;
             (argument.GetExpression() is SyntaxVB.LiteralExpressionSyntax { Token.ValueText: "1" }).Should().BeTrue();
         }
 
@@ -914,13 +913,12 @@ public class X
                 End Class
                 """;
             var node = NodeBetweenMarkers(code, LanguageNames.VisualBasic, getInnermostNodeForTie: false);
-            var argumentList = ExtensionsVB.ArgumentList(node);
-            argumentList.Should().BeEmpty();
+            ExtensionsVB.ArgumentList(node).Should().BeNull();
         }
 
         [TestMethod]
         public void ArgumentList_VB_Null() =>
-            ExtensionsVB.ArgumentList(null).Should().BeEmpty();
+            ExtensionsVB.ArgumentList(null).Should().BeNull();
 
         [DataTestMethod]
         [DataRow("$$Dim a = 1$$")]
