@@ -48,7 +48,7 @@ public abstract class PublicMethodWithMultidimensionalArrayBase<TSyntaxKind> : S
             SyntaxKindsOfInterest.ToArray());
 
     protected virtual IMethodSymbol MethodSymbolOfNode(SemanticModel semanticModel, SyntaxNode node) =>
-           semanticModel.GetDeclaredSymbol(node) as IMethodSymbol;
+        semanticModel.GetDeclaredSymbol(node) as IMethodSymbol;
 
     private static bool MethodHasMultidimensionalArrayParameters(IMethodSymbol methodSymbol) =>
         methodSymbol.IsExtensionMethod
