@@ -165,7 +165,7 @@ public class SyntaxFacadeTest
     [TestMethod]
     public void ArgumentNameColon_CS_WithNameColon()
     {
-        var expression = CS.SyntaxFactory.LiteralExpression(CS.SyntaxKind.TrueLiteralExpression, CS.SyntaxFactory.Token(CS.SyntaxKind.TrueKeyword));
+        var expression = CS.SyntaxFactory.LiteralExpression(CS.SyntaxKind.TrueLiteralExpression);
         var argument = CS.SyntaxFactory.Argument(CS.SyntaxFactory.NameColon(CS.SyntaxFactory.IdentifierName("a")), CS.SyntaxFactory.Token(CS.SyntaxKind.None), expression);
         cs.ArgumentNameColon(argument).Should().BeOfType<SyntaxToken>().Subject.ValueText.Should().Be("a");
     }
@@ -173,7 +173,7 @@ public class SyntaxFacadeTest
     [TestMethod]
     public void ArgumentNameColon_CS_WithoutNameColon()
     {
-        var expression = CS.SyntaxFactory.LiteralExpression(CS.SyntaxKind.TrueLiteralExpression, CS.SyntaxFactory.Token(CS.SyntaxKind.TrueKeyword));
+        var expression = CS.SyntaxFactory.LiteralExpression(CS.SyntaxKind.TrueLiteralExpression);
         var argument = CS.SyntaxFactory.Argument(expression);
         cs.ArgumentNameColon(argument).Should().BeNull();
     }
