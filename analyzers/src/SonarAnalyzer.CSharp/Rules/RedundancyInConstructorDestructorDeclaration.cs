@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var typeDeclaration = (TypeDeclarationSyntax)context.Node;
             if (typeDeclaration.ParameterList() is { Parameters.Count: 0 } parameterList
-                && !IsStructWithInitializedFieldOrProperty(typeDeclaration, (INamedTypeSymbol)context.SemanticModel.GetDeclaredSymbol(context.Node)))
+                && !IsStructWithInitializedFieldOrProperty(typeDeclaration, new Lazy<INamedTypeSymbol>(() => (INamedTypeSymbol)context.SemanticModel.GetDeclaredSymbol(context.Node))))
             {
                 context.ReportIssue(Diagnostic.Create(Rule, parameterList.GetLocation(), "primary constructor"));
             }
@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var constructorDeclaration = (ConstructorDeclarationSyntax)context.Node;
 
-            if (IsConstructorRedundant(constructorDeclaration, context.SemanticModel))
+            if (IsConstructorRedundant(constructorDeclaration, new Lazy<INamedTypeSymbol>(() => context.SemanticModel.GetDeclaredSymbol(constructorDeclaration)?.ContainingType)))
             {
                 context.ReportIssue(Diagnostic.Create(Rule, constructorDeclaration.GetLocation(), "constructor"));
                 return;
@@ -88,37 +88,34 @@ namespace SonarAnalyzer.Rules.CSharp
             && initializer.ArgumentList != null
             && !initializer.ArgumentList.Arguments.Any();
 
-        private static bool IsConstructorRedundant(ConstructorDeclarationSyntax constructorDeclaration, SemanticModel semanticModel) =>
+        private static bool IsConstructorRedundant(ConstructorDeclarationSyntax constructorDeclaration, Lazy<INamedTypeSymbol> typeSymbol) =>
             constructorDeclaration is { ParameterList.Parameters.Count: 0, Body.Statements.Count: 0 }
-            && !IsStructWithInitializedFieldOrProperty(constructorDeclaration.Parent, (INamedTypeSymbol)semanticModel.GetDeclaredSymbol(constructorDeclaration.Parent))
-            && (IsSinglePublicConstructor(constructorDeclaration, semanticModel)
+            && !IsStructWithInitializedFieldOrProperty(constructorDeclaration.Parent, typeSymbol)
+            && (IsSinglePublicConstructor(constructorDeclaration, typeSymbol)
                 || constructorDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword));
 
-        private static bool IsStructWithInitializedFieldOrProperty(SyntaxNode parentType, INamedTypeSymbol parentSymbol) =>
-            parentType.Kind() is SyntaxKind.StructDeclaration or SyntaxKindEx.RecordStructDeclaration
-            && ContainsInitializedFieldOrProperty(parentSymbol);
+        private static bool IsStructWithInitializedFieldOrProperty(SyntaxNode parentType, Lazy<INamedTypeSymbol> typeSymbol) =>
+            parentType.IsAnyKind(SyntaxKind.StructDeclaration, SyntaxKindEx.RecordStructDeclaration)
+            && ContainsInitializedFieldOrProperty(typeSymbol.Value);
 
-        private static bool IsSinglePublicConstructor(ConstructorDeclarationSyntax constructorDeclaration, SemanticModel semanticModel) =>
+        private static bool IsSinglePublicConstructor(ConstructorDeclarationSyntax constructorDeclaration, Lazy<INamedTypeSymbol> typeSymbol) =>
             constructorDeclaration.Modifiers.Any(SyntaxKind.PublicKeyword)
             && IsInitializerEmptyOrRedundant(constructorDeclaration.Initializer)
-            && TypeHasExactlyOneConstructor(constructorDeclaration, semanticModel);
+            && TypeHasExactlyOneConstructor(typeSymbol.Value);
 
         private static bool IsInitializerEmptyOrRedundant(ConstructorInitializerSyntax initializer) =>
             initializer is null
             || (initializer.ArgumentList.Arguments.Count == 0
                 && initializer.ThisOrBaseKeyword.IsKind(SyntaxKind.BaseKeyword));
 
-        private static bool TypeHasExactlyOneConstructor(BaseMethodDeclarationSyntax constructorDeclaration, SemanticModel semanticModel)
-        {
-            var symbol = semanticModel.GetDeclaredSymbol(constructorDeclaration);
-            return symbol != null
-                   && symbol.ContainingType
-                       .GetMembers()
-                       .OfType<IMethodSymbol>()
-                       .Count(m => m.MethodKind == MethodKind.Constructor && !m.IsImplicitlyDeclared) == 1;
-        }
+        private static bool TypeHasExactlyOneConstructor(INamedTypeSymbol typeSymbol) =>
+            typeSymbol != null
+            && typeSymbol
+                .GetMembers()
+                .OfType<IMethodSymbol>()
+                .Count(m => m.MethodKind == MethodKind.Constructor && !m.IsImplicitlyDeclared) == 1;
 
-        private static bool ContainsInitializedFieldOrProperty(INamedTypeSymbol symbol) =>
-            symbol.GetMembers().Any(f => f.DeclaringSyntaxReferences.Any(d => d.GetSyntax().GetInitializer() is not null));
+        private static bool ContainsInitializedFieldOrProperty(INamedTypeSymbol typeSymbol) =>
+            typeSymbol != null && typeSymbol.GetMembers().Any(f => f.DeclaringSyntaxReferences.Any(d => d.GetSyntax().GetInitializer() is not null));
     }
 }
