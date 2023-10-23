@@ -48,17 +48,17 @@ public sealed class SonarSyntaxNodeReportingContext : SonarTreeReportingContextB
 
     /// <summary>
     /// Roslyn invokes the analyzer twice for PrimaryConstructorBaseType. The ContainingSymbol is first the type and second the constructor. This check filters can be used to filter
-    /// the first invocation. See also <seealso href="https://github.com/dotnet/roslyn/issues/70488">#roslyn/70488</seealso>
+    /// the first invocation. See also <seealso href="https://github.com/dotnet/roslyn/issues/70488">#Roslyn/70488</seealso>.
     /// </summary>
     /// <returns>
-    /// Returns <see langword="true"/> for the invocation on the class declaration and <see langword="false"/> for the ctor invocation.
+    /// Returns <see langword="true"/> for the invocation with PrimaryConstructorBaseType and ContainingSymbol being the type <see langword="false"/> for everything else.
     /// </returns>
     public bool IsRedundantPrimaryConstructorBaseTypeContext() =>
-        Context.Compilation.Language == LanguageNames.CSharp
-        && Context is
+        Context is
         {
             Node.RawKind: (int)SyntaxKindEx.PrimaryConstructorBaseType,
-            ContainingSymbol.Kind: SymbolKind.Method,
+            Compilation.Language: LanguageNames.CSharp,
+            ContainingSymbol.Kind: SymbolKind.NamedType,
         };
 
     public bool IsAzureFunction() =>
