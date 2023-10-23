@@ -38,13 +38,15 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override Location PrimaryLocation(SyntaxNode node) =>
             node switch
             {
-                InvocationExpressionSyntax { Expression: MemberAccessExpressionSyntax { Name: { } name } } => name.GetLocation(),
-                InvocationExpressionSyntax {  Expression: { } expression } => expression.GetLocation(),
-                ObjectCreationExpressionSyntax { Type: QualifiedNameSyntax { Right: { } right } } => right.GetLocation(),
-                ObjectCreationExpressionSyntax { Type: { } type } => type.GetLocation(),
-                ConstructorInitializerSyntax { ThisOrBaseKeyword: { } keyword } => keyword.GetLocation(),
+                InvocationExpressionSyntax { Expression: MemberAccessExpressionSyntax { Name: { } name } } => name.GetLocation(), // A.B.C() -> C
+                InvocationExpressionSyntax {  Expression: { } expression } => expression.GetLocation(),                           // A() -> A
+                ObjectCreationExpressionSyntax { Type: QualifiedNameSyntax { Right: { } right } } => right.GetLocation(),         // new A.B.C() -> C
+                ObjectCreationExpressionSyntax { Type: { } type } => type.GetLocation(),                                          // new A() -> A
+                ConstructorInitializerSyntax { ThisOrBaseKeyword: { } keyword } => keyword.GetLocation(),                         // this() -> this
                 _ when PrimaryConstructorBaseTypeSyntaxWrapper.IsInstance(node) && ((PrimaryConstructorBaseTypeSyntaxWrapper)node).Type is { } type =>
-                    type is QualifiedNameSyntax { Right: { } right } ? right.GetLocation() : type.GetLocation(),
+                    type is QualifiedNameSyntax { Right: { } right }
+                        ? right.GetLocation()                                                                                     // class A: B.C() -> C
+                        : type.GetLocation(),                                                                                     // class A: B() -> B
                 _ => base.PrimaryLocation(node),
             };
     }
