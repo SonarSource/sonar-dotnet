@@ -35,7 +35,7 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
         Cast<ArgumentSyntax>(argument).GetArgumentIndex();
 
     public override SyntaxToken? ArgumentNameColon(SyntaxNode argument) =>
-        (argument as ArgumentSyntax)?.NameColon?.Name?.Identifier;
+        (argument as ArgumentSyntax)?.NameColon?.Name.Identifier;
 
     public override SyntaxNode AssignmentLeft(SyntaxNode assignment) =>
         Cast<AssignmentExpressionSyntax>(assignment).Left;
