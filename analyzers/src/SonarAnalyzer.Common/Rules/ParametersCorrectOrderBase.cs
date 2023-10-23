@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules
         {
         }
 
-        protected override void Initialize(SonarAnalysisContext context) =>
+        protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterNodeAction(Language.GeneratedCodeRecognizer,
                 c =>
                 {
@@ -57,12 +57,15 @@ namespace SonarAnalyzer.Rules
                                 var secondaryLocations = methodParameterLookup.MethodSymbol.DeclaringSyntaxReferences
                                     .Select(s => Language.Syntax.NodeIdentifier(s.GetSyntax())?.GetLocation())
                                     .WhereNotNull();
-                                c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], c.Node.GetLocation(), secondaryLocations, properties: null, methodParameterLookup.MethodSymbol.Name));
+                                c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], PrimaryLocation(c.Node), secondaryLocations, properties: null, methodParameterLookup.MethodSymbol.Name));
                                 return;
                             }
                         }
                     }
                 }, InvocationKinds);
+
+        protected virtual Location PrimaryLocation(SyntaxNode node)
+            => node.GetLocation();
 
         private static bool MatchingNames(IParameterSymbol parameter, string argumentName) =>
             parameter.Name == argumentName;

@@ -28,10 +28,22 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.InvocationExpression,
                 SyntaxKind.ObjectCreationExpression,
                 SyntaxKind.ThisConstructorInitializer,
+                SyntaxKind.BaseConstructorInitializer,
                 SyntaxKindEx.PrimaryConstructorBaseType,
                 SyntaxKindEx.ImplicitObjectCreationExpression,
             };
 
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
+        protected override Location PrimaryLocation(SyntaxNode node) =>
+            node switch
+            {
+                InvocationExpressionSyntax { Expression: MemberAccessExpressionSyntax { Name: { } name } } => name.GetLocation(),
+                InvocationExpressionSyntax {  Expression: { } expression } => expression.GetLocation(),
+                ObjectCreationExpressionSyntax { Type: QualifiedNameSyntax { Right: { } right } } => right.GetLocation(),
+                ObjectCreationExpressionSyntax { Type: { } type } => type.GetLocation(),
+                ConstructorInitializerSyntax { ThisOrBaseKeyword: { } keyword } => keyword.GetLocation(),
+                _ => base.PrimaryLocation(node),
+            };
     }
 }

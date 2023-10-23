@@ -30,6 +30,7 @@ namespace Tests.Diagnostics
             var b = "2";
 
             Comparer.Default.Compare(b, a); // Noncompliant
+            //               ^^^^^^^
         }
     }
 
@@ -75,6 +76,7 @@ namespace Tests.Diagnostics
             var some = 6;
 
             divide(dividend, 1 + 1, divisor, other2: 6);  // Noncompliant [1] operation succeeds, but result is unexpected
+//          ^^^^^^
 
             divide(divisor, other2, dividend);
             divide(divisor, other2, dividend, other2: someOther); // Noncompliant [2] {{Parameters to 'divide' have the same names but not the same order as the method arguments.}}
@@ -200,8 +202,10 @@ namespace Repro_8070
     {
         void Test(int a, int b, int c)
         {
-            _ = new SomeClass(b, a);                  // Noncompliant, fully inverted
-            _ = new SomeClass(b, a, c);               // Noncompliant, partially inverted
+            _ = new SomeClass(b, a);                              // Noncompliant, fully inverted
+            //      ^^^^^^^^^
+            _ = new InvokingConstructorViaNew.SomeClass(b, a, c); // Noncompliant, partially inverted
+            //                                ^^^^^^^^^
         }
 
         class SomeClass
@@ -225,28 +229,29 @@ namespace Repro_8070
     {
         class Base
         {
-            public Base(int a, int b) { }
-            public Base(int a, int b, int c) { }
+            public Base(int a, int b) { }        // Secondary [Base1, Base3, Base4]
+            public Base(int a, int b, int c) { } // Secondary [Base2]
         }
 
         class ParamsFullyInverted : Base
         {
-            public ParamsFullyInverted(int a, int b) : base(b, a) { }                                    // FN
+            public ParamsFullyInverted(int a, int b) : base(b, a) { }                                    // Noncompliant [Base1]
+            //                                         ^^^^
         }
 
         class ParamsPartiallyInverted : Base
         {
-            public ParamsPartiallyInverted(int a, int b, int c) : base(b, a, c) { }                      // FN
+            public ParamsPartiallyInverted(int a, int b, int c) : base(b, a, c) { }                      // Noncompliant [Base2]
         }
 
         class ParamsFullyInvertedWithAdditionalParamAfter : Base
         {
-            public ParamsFullyInvertedWithAdditionalParamAfter(int a, int b, string s) : base(b, a) { }  // FN
+            public ParamsFullyInvertedWithAdditionalParamAfter(int a, int b, string s) : base(b, a) { }  // Noncompliant [Base3]
         }
 
         class ParamsFullyInvertedWithAdditionalParamBefore : Base
         {
-            public ParamsFullyInvertedWithAdditionalParamBefore(string s, int a, int b) : base(b, a) { } // FN
+            public ParamsFullyInvertedWithAdditionalParamBefore(string s, int a, int b) : base(b, a) { } // Noncompliant [Base4]
         }
     }
 }
