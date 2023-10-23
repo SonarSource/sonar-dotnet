@@ -59,5 +59,17 @@ namespace Repro_8096
 
         class C1(int i = 42);
         class C2(int i = 41, int j = 42);
+        class C3() : C1(42);    // Noncompliant
+    }
+
+    class ConstructorInitializerBase
+    {
+        public ConstructorInitializerBase(int i = 42) { }
+        public ConstructorInitializerBase(bool _) : this(42) { } // Noncompliant
+
+        class Derived : ConstructorInitializerBase
+        {
+            public Derived() : base(42) { }                      // Noncompliant
+        }
     }
 }

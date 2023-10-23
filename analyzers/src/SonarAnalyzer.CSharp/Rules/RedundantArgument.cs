@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Helpers;
-
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -36,9 +34,10 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterNodeAction(
                 c =>
                 {
-                    if (!c.IsInExpressionTree() // Can't use optional arguments in expression trees (CS0584), so skip those
-                        && ArgumentList(c) is { Arguments.Count: > 0 } argumentList
-                        && new CSharpMethodParameterLookup(argumentList, c.SemanticModel) is { MethodSymbol: { } } methodParameterLookup)
+                    if (ArgumentList(c.Node) is { Arguments.Count: > 0 } argumentList
+                        && !IsRedundantPrimaryConstructorBaseTypeContext(c) // FIXME: Use extension method from #8238
+                        && !c.IsInExpressionTree() // Can't use optional arguments in expression trees (CS0584), so skip those
+                        && new CSharpMethodParameterLookup(argumentList, c.SemanticModel) is { MethodSymbol: { } } methodParameterLookup) // FIXME: Replace argumentList with c.Node after #8238
                     {
                         foreach (var argumentMapping in methodParameterLookup.GetAllArgumentParameterMappings().Reverse().Where(x => ArgumentHasDefaultValue(x, c.SemanticModel)))
                         {
@@ -46,14 +45,31 @@ namespace SonarAnalyzer.Rules.CSharp
                         }
                     }
                 },
-                SyntaxKind.InvocationExpression, SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
+                SyntaxKind.InvocationExpression,
+                SyntaxKind.ObjectCreationExpression,
+                SyntaxKindEx.ImplicitObjectCreationExpression,
+                SyntaxKind.BaseConstructorInitializer,
+                SyntaxKind.ThisConstructorInitializer,
+                SyntaxKindEx.PrimaryConstructorBaseType);
 
-        private static ArgumentListSyntax ArgumentList(SonarSyntaxNodeReportingContext c) =>
-            c.Node switch
+        // // FIXME: Copy of https://github.com/SonarSource/sonar-dotnet/pull/8238/files#diff-260dcbe170483d6f19c1ccbd5a4159c909e032540194c6621fd94a2461b5f530R57 and should be deleted after #8238
+        private static bool IsRedundantPrimaryConstructorBaseTypeContext(SonarSyntaxNodeReportingContext context) =>
+            context is
+            {
+                Node.RawKind: (int)SyntaxKindEx.PrimaryConstructorBaseType,
+                Compilation.Language: LanguageNames.CSharp,
+                ContainingSymbol.Kind: SymbolKind.NamedType,
+            };
+
+        // FIXME: Should be deleted after #8238
+        private static ArgumentListSyntax ArgumentList(SyntaxNode node) =>
+            node switch
             {
                 InvocationExpressionSyntax invocationExpression => invocationExpression.ArgumentList,
                 ObjectCreationExpressionSyntax objectCreationExpression => objectCreationExpression.ArgumentList,
-                { RawKind: (int)SyntaxKindEx.ImplicitObjectCreationExpression } => ((ImplicitObjectCreationExpressionSyntaxWrapper)c.Node).ArgumentList,
+                ConstructorInitializerSyntax constructorInitializer => constructorInitializer.ArgumentList,
+                { RawKind: (int)SyntaxKindEx.PrimaryConstructorBaseType } => ((PrimaryConstructorBaseTypeSyntaxWrapper)node).ArgumentList,
+                { RawKind: (int)SyntaxKindEx.ImplicitObjectCreationExpression } => ((ImplicitObjectCreationExpressionSyntaxWrapper)node).ArgumentList,
                 _ => null,
             };
 
