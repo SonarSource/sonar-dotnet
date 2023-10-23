@@ -64,11 +64,11 @@ namespace SonarAnalyzer.Rules
                     }
                 }, InvocationKinds);
 
-        protected virtual Location PrimaryLocation(SyntaxNode node)
-            => node.GetLocation();
+        protected virtual Location PrimaryLocation(SyntaxNode node) =>
+            node.GetLocation();
 
-        private static bool MatchingNames(IParameterSymbol parameter, string argumentName) =>
-            parameter.Name == argumentName;
+        private bool MatchingNames(IParameterSymbol parameter, string argumentName) =>
+            Language.NameComparer.Equals(parameter.Name, argumentName);
 
         private string ArgumentName(SyntaxNode argument) =>
             Language.Syntax.NodeIdentifier(Language.Syntax.NodeExpression(argument))?.ValueText;
