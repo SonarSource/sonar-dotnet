@@ -29,16 +29,8 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
         ArgumentList(node)?.OfType<ArgumentSyntax>().Select(x => x.Expression) ?? Enumerable.Empty<SyntaxNode>();
 
     public override IReadOnlyList<SyntaxNode> ArgumentList(SyntaxNode node) =>
-        (node switch
-        {
-            ObjectCreationExpressionSyntax creation => creation.ArgumentList,
-            InvocationExpressionSyntax invocation => invocation.ArgumentList,
-            ConstructorInitializerSyntax constructorInitializer => constructorInitializer.ArgumentList,
-            null => null,
-            _ when PrimaryConstructorBaseTypeSyntaxWrapper.IsInstance(node) => ((PrimaryConstructorBaseTypeSyntaxWrapper)node).ArgumentList,
-            _ when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(node) => ((ImplicitObjectCreationExpressionSyntaxWrapper)node).ArgumentList,
-            _ => throw InvalidOperation(node, nameof(ArgumentExpressions))
-        })?.Arguments ?? (IReadOnlyList<SyntaxNode>)Array.Empty<SyntaxNode>();
+        node.ArgumentList();
+
     public override SyntaxToken? ArgumentNameColon(SyntaxNode argument) =>
         (argument as ArgumentSyntax)?.NameColon?.Name?.Identifier;
 

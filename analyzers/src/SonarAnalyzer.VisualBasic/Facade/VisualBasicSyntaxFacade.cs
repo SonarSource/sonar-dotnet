@@ -31,13 +31,7 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
         ArgumentList(node).OfType<ArgumentSyntax>().Select(x => x.GetExpression()).WhereNotNull();
 
     public override IReadOnlyList<SyntaxNode> ArgumentList(SyntaxNode node) =>
-        (node switch
-        {
-            ObjectCreationExpressionSyntax creation => creation.ArgumentList,
-            InvocationExpressionSyntax invocation => invocation.ArgumentList,
-            null => null,
-            _ => throw InvalidOperation(node, nameof(ArgumentExpressions))
-        })?.Arguments ?? (IReadOnlyList<SyntaxNode>)Array.Empty<SyntaxNode>();
+        node.ArgumentList();
 
     public override int? ArgumentIndex(SyntaxNode argument) =>
         Cast<ArgumentSyntax>(argument).GetArgumentIndex();

@@ -734,6 +734,92 @@ public class X
         }
 
         [DataTestMethod]
+        [DataRow("$$M(1)$$;")]
+        [DataRow("_ = $$new C(1)$$;")]
+        [DataRow("C c = $$new(1)$$;")]
+        public void ArgumentList_InvocationObjectCreation(string statement)
+        {
+            var code = $$"""
+                public class C(int p) {    
+                    public void M(int p) {
+                        {{statement}}
+                    }
+                }
+                """;
+            var node = NodeBetweenMarkers(code, LanguageNames.CSharp);
+            var argumentList = ExtensionsCS.ArgumentList(node);
+            var argument = argumentList.Should().ContainSingle().Which;
+            (argument is { Expression: SyntaxCS.LiteralExpressionSyntax { Token.ValueText: "1" } }).Should().BeTrue();
+        }
+
+        [DataTestMethod]
+        [DataRow("base")]
+        [DataRow("this")]
+        public void ArgumentList_ConstructorInitializer(string keyword)
+        {
+            var code = $$"""
+                public class Base(int p);
+
+                public class C: Base
+                {
+                    public C(): $${{keyword}}(1)$$ { }
+                    public C(int  p): base(p) { }   
+                }
+                
+                """;
+            var node = NodeBetweenMarkers(code, LanguageNames.CSharp);
+            var argumentList = ExtensionsCS.ArgumentList(node);
+            var argument = argumentList.Should().ContainSingle().Which;
+            (argument is { Expression: SyntaxCS.LiteralExpressionSyntax { Token.ValueText: "1" } }).Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void ArgumentList_PrimaryConstructorBaseType()
+        {
+            var code = """
+                public class Base(int p);
+                public class Derived(int p): $$Base(1)$$;
+                """;
+            var node = NodeBetweenMarkers(code, LanguageNames.CSharp);
+            var argumentList = ExtensionsCS.ArgumentList(node);
+            var argument = argumentList.Should().ContainSingle().Which;
+            (argument is { Expression: SyntaxCS.LiteralExpressionSyntax { Token.ValueText: "1" } }).Should().BeTrue();
+        }
+
+        [DataTestMethod]
+        [DataRow("_ = $$new System.Collections.Generic.List<int> { 0 }$$;")]
+        public void ArgumentList_NoList(string statement)
+        {
+            var code = $$"""
+                public class C {    
+                    public void M() {
+                        {{statement}}
+                    }
+                }
+                """;
+            var node = NodeBetweenMarkers(code, LanguageNames.CSharp);
+            var argumentList = ExtensionsCS.ArgumentList(node);
+            argumentList.Should().BeEmpty();
+        }
+
+        [DataTestMethod]
+        [DataRow("_ = $$new int[] { 1 }$$;")]
+        [DataRow("_ = $$new { A = 1 }$$;")]
+        public void ArgumentList_UnsupportedNodeKinds(string statement)
+        {
+            var code = $$"""
+                public class C {    
+                    public void M() {
+                        {{statement}}
+                    }
+                }
+                """;
+            var node = NodeBetweenMarkers(code, LanguageNames.CSharp);
+            var sut = () => ExtensionsCS.ArgumentList(node);
+            sut.Should().Throw<InvalidOperationException>();
+        }
+
+        [DataTestMethod]
         [DataRow("""public C(int p) { }""")]
         [DataRow("""public void M(int p) { }""")]
         [DataRow("""public static C operator + (C p) => default;""")]

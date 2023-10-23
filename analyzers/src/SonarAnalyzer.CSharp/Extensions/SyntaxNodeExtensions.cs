@@ -342,6 +342,18 @@ namespace SonarAnalyzer.Extensions
             return false;
         }
 
+        public static IReadOnlyList<ArgumentSyntax> ArgumentList(this SyntaxNode node) =>
+            (node switch
+            {
+                ObjectCreationExpressionSyntax creation => creation.ArgumentList,
+                InvocationExpressionSyntax invocation => invocation.ArgumentList,
+                ConstructorInitializerSyntax constructorInitializer => constructorInitializer.ArgumentList,
+                null => null,
+                _ when PrimaryConstructorBaseTypeSyntaxWrapper.IsInstance(node) => ((PrimaryConstructorBaseTypeSyntaxWrapper)node).ArgumentList,
+                _ when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(node) => ((ImplicitObjectCreationExpressionSyntaxWrapper)node).ArgumentList,
+                _ => throw new InvalidOperationException($"The {nameof(node)} of kind {node.Kind()} does not have an {nameof(ArgumentList)}."),
+            })?.Arguments ?? (IReadOnlyList<ArgumentSyntax>)Array.Empty<ArgumentSyntax>();
+
         public static ParameterListSyntax ParameterList(this SyntaxNode node) =>
             node switch
             {
