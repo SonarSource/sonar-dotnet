@@ -463,10 +463,10 @@ class AdvancedTests
         sb.Clear();
         sb.Clear();                                         // Compliant
 
-        var custom = new CustomCollection();
-        custom.Clear();
-        custom.AddMethodWithDifferentName(5);
-        custom.Clear();                                     // Compliant
+        var collectionLookALike = new CollectionLookALike();
+        collectionLookALike.Clear();
+        collectionLookALike.AddMethodWithDifferentName(5);
+        collectionLookALike.Clear();                        // Compliant
     }
 
     public void AssignmentToInterface()
@@ -502,6 +502,15 @@ class AdvancedTests
         readOnly.GetEnumerator();                           // Noncompliant
         readOnly = new List<int> { 5 };
         readOnly.GetEnumerator();                           // Compliant
+    }
+
+    public void DeriveFromTrackedCollection()
+    {
+        var custom = new CustomCollection<int>();
+        custom.Clear();                                     // Compliant, state is unknown
+        custom.Clear();                                     // Noncompliant
+        custom.Add(5);
+        custom.Clear();                                     // Compliant
     }
 
     public void UnknownExtensionMethods()
@@ -735,11 +744,13 @@ class AdvancedTests
 
     void Foo(List<int> items) { }
 
-    class CustomCollection
+    class CollectionLookALike
     {
         public void Clear() { }
         public void AddMethodWithDifferentName(int item) { }
     }
+
+    class CustomCollection<T> : Collection<T> { }
 
     class CustomIList : IList<int>
     {

@@ -29,20 +29,26 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
     protected const string DiagnosticId = "S4158";
     protected const string MessageFormat = "Remove this call, the collection is known to be empty here.";
 
-    private static readonly KnownType[] TrackedCollectionTypes = new[]
+    internal static readonly ImmutableArray<KnownType> TrackedCollectionTypes = new[]
     {
         KnownType.System_Collections_Generic_List_T,
         KnownType.System_Collections_Generic_IList_T,
+        KnownType.System_Collections_Immutable_IImmutableList_T,
         KnownType.System_Collections_Generic_ICollection_T,
         KnownType.System_Collections_Generic_HashSet_T,
         KnownType.System_Collections_Generic_ISet_T,
+        KnownType.System_Collections_Immutable_IImmutableSet_T,
         KnownType.System_Collections_Generic_Queue_T,
+        KnownType.System_Collections_Immutable_IImmutableQueue_T,
         KnownType.System_Collections_Generic_Stack_T,
+        KnownType.System_Collections_Immutable_IImmutableStack_T,
         KnownType.System_Collections_ObjectModel_ObservableCollection_T,
         KnownType.System_Array,
+        KnownType.System_Collections_Immutable_IImmutableArray_T,
         KnownType.System_Collections_Generic_Dictionary_TKey_TValue,
         KnownType.System_Collections_Generic_IDictionary_TKey_TValue,
-    };
+        KnownType.System_Collections_Immutable_IImmutableDictionary_TKey_TValue,
+    }.ToImmutableArray();
 
     protected static readonly HashSet<string> RaisingMethods = new()
     {
@@ -199,7 +205,7 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
                     nonEmptyAccess.Add(context.Operation.Instance);
                 }
             }
-            if (instance.Type.IsAny(TrackedCollectionTypes))
+            if (instance.Type.DerivesOrImplementsAny(TrackedCollectionTypes))
             {
                 return ProcessAddMethod(context.State, targetMethod, instance)
                     ?? ProcessRemoveMethod(context.State, targetMethod, instance)
@@ -264,7 +270,7 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
                 return NumberConstraint.From(1, null);
             }
         }
-        return instance.Type.IsAny(TrackedCollectionTypes) ? NumberConstraint.From(0, null) : null;
+        return instance.Type.DerivesOrImplementsAny(TrackedCollectionTypes) ? NumberConstraint.From(0, null) : null;
     }
 
     private static ProgramState ProcessIndexerAccess(ProgramState state, IPropertyReferenceOperationWrapper propertyReference)
