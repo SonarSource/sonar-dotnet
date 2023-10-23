@@ -8,11 +8,14 @@ namespace Repro_8071
         class Base(int a, int b) // Secondary [Base1, Base2, Base3, Base4, Base5, Base6]
         {
             Base(int a, int b, string c) : this(b, a) { }  // Noncompliant [Base1]
+            //                             ^^^^
             Base(string c, int a, int b) : this(b, a) { }  // Noncompliant [Base2]
         }
 
         class ParamsFullyInverted(int a, int b) : Base(b, a);                                    // Noncompliant [Base3]
-        class ParamsPartiallyInverted(int a, int b, int c) : Base(b, a);                         // Noncompliant [Base4]
+        //                                        ^^^^
+        class ParamsPartiallyInverted(int a, int b, int c) : BaseConstructor.Base(b, a);         // Noncompliant [Base4]
+        //                                                                   ^^^^
         class ParamsFullyInvertedWithAdditionalParamAfter(int a, int b, string s) : Base(b, a);  // Noncompliant [Base5]
         class ParamsFullyInvertedWithAdditionalParamBefore(string s, int a, int b) : Base(b, a); // Noncompliant [Base6]
     }

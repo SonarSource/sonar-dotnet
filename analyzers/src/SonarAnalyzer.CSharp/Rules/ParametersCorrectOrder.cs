@@ -43,6 +43,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 ObjectCreationExpressionSyntax { Type: QualifiedNameSyntax { Right: { } right } } => right.GetLocation(),
                 ObjectCreationExpressionSyntax { Type: { } type } => type.GetLocation(),
                 ConstructorInitializerSyntax { ThisOrBaseKeyword: { } keyword } => keyword.GetLocation(),
+                _ when PrimaryConstructorBaseTypeSyntaxWrapper.IsInstance(node) && ((PrimaryConstructorBaseTypeSyntaxWrapper)node).Type is { } type =>
+                    type is QualifiedNameSyntax { Right: { } right } ? right.GetLocation() : type.GetLocation(),
                 _ => base.PrimaryLocation(node),
             };
     }
