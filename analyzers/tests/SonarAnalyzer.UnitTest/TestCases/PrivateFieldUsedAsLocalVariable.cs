@@ -393,23 +393,24 @@ namespace Tests.Diagnostics
 
     public class Repo_8239_Variation
     {
-        private int _counter; // Noncompliant FP
+        private bool _wasCalled; // Noncompliant FP
 
         public void Program()
         {
             var list = new List<int>();
-            _counter = 0;
+            _wasCalled = false;
 
-            list.ForEach(Increment); // Increment is passed as a delegate and should be treated as "public"
+            list.ForEach(Increment);            // Increment is passed as a delegate `new Action<int>(Increment)` and should be treated as "public"
+            // list.ForEach(x => Increment(x)); // This is detected correctly
 
-            if (_counter == 0)
+            if (_wasCalled)
             {
                 Console.WriteLine("OK");
             }
         }
 
-        void Increment(int dummy)
-            => _counter = _counter + 1;
+        private void Increment(int dummy)
+            => _wasCalled = true;
 
     }
 }
