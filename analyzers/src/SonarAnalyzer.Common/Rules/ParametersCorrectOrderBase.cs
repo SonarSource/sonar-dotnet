@@ -35,33 +35,31 @@ namespace SonarAnalyzer.Rules
             context.RegisterNodeAction(Language.GeneratedCodeRecognizer,
                 c =>
                 {
-                    if (c.IsRedundantPrimaryConstructorBaseTypeContext())
+                    if (!c.IsRedundantPrimaryConstructorBaseTypeContext()
+                        && Language.Syntax.ArgumentList(c.Node) is { Count: >= 2 } argumentList // there must be at least two arguments to be able to swap
+                        && Language.MethodParameterLookup(c.Node, c.SemanticModel) is var methodParameterLookup)
                     {
-                        return;
-                    }
-                    IMethodParameterLookup methodParameterLookup = null;
-                    foreach (var argument in Language.Syntax.ArgumentList(c.Node))
-                    {
-                        methodParameterLookup ??= Language.MethodParameterLookup(c.Node, c.SemanticModel);
-                        // Example void M(int x, int y) <- p_x and p_y are the parameter
-                        // M(y, x); <- a_y and a_x are the arguments
-                        if (methodParameterLookup.TryGetSymbol(argument, out var parameterSymbol) // argument = a_x and parameterSymbol = p_y
-                            && parameterSymbol is { IsParams: false }
-                            && ArgumentName(argument) is { } argumentName // "x"
-                            && !MatchingNames(parameterSymbol, argumentName)  // "x" != "y"
-                            && Language.Syntax.NodeExpression(argument) is { } argumentExpression
-                            && c.Context.SemanticModel.GetTypeInfo(argumentExpression).ConvertedType is { } argumentType
-                            // is there another parameter that seems to be a better fit (name and type match): p_x
-                            && methodParameterLookup.MethodSymbol.Parameters.FirstOrDefault(p => MatchingNames(p, argumentName) && argumentType.DerivesOrImplements(p.Type)) is { IsParams: false }
-                            // is there an argument that matches the parameter p_y by name: a_y
-                            && Language.Syntax.ArgumentList(c.Node).FirstOrDefault(x => MatchingNames(parameterSymbol, ArgumentName(x))) is { })
+                        foreach (var argument in argumentList)
                         {
-                            var secondaryLocations = methodParameterLookup.MethodSymbol.DeclaringSyntaxReferences
-                                .Select(s => Language.Syntax.NodeIdentifier(s.GetSyntax())?.GetLocation())
-                                .WhereNotNull();
-
-                            c.ReportIssue(SupportedDiagnostics[0].CreateDiagnostic(c.Compilation, c.Node.GetLocation(), secondaryLocations, properties: null, methodParameterLookup.MethodSymbol.Name));
-                            return;
+                            // Example void M(int x, int y) <- p_x and p_y are the parameter
+                            // M(y, x); <- a_y and a_x are the arguments
+                            if (methodParameterLookup.TryGetSymbol(argument, out var parameterSymbol) // argument = a_x and parameterSymbol = p_y
+                                && parameterSymbol is { IsParams: false }
+                                && ArgumentName(argument) is { } argumentName // "x"
+                                && !MatchingNames(parameterSymbol, argumentName)  // "x" != "y"
+                                && Language.Syntax.NodeExpression(argument) is { } argumentExpression
+                                && c.Context.SemanticModel.GetTypeInfo(argumentExpression).ConvertedType is { } argumentType
+                                // is there another parameter that seems to be a better fit (name and type match): p_x
+                                && methodParameterLookup.MethodSymbol.Parameters.FirstOrDefault(p => MatchingNames(p, argumentName) && argumentType.DerivesOrImplements(p.Type)) is { IsParams: false }
+                                // is there an argument that matches the parameter p_y by name: a_y
+                                && Language.Syntax.ArgumentList(c.Node).FirstOrDefault(x => MatchingNames(parameterSymbol, ArgumentName(x))) is { })
+                            {
+                                var secondaryLocations = methodParameterLookup.MethodSymbol.DeclaringSyntaxReferences
+                                    .Select(s => Language.Syntax.NodeIdentifier(s.GetSyntax())?.GetLocation())
+                                    .WhereNotNull();
+                                c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], c.Node.GetLocation(), secondaryLocations, properties: null, methodParameterLookup.MethodSymbol.Name));
+                                return;
+                            }
                         }
                     }
                 }, InvocationKinds);
