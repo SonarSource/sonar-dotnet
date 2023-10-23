@@ -342,6 +342,7 @@ namespace SonarAnalyzer.Extensions
             return false;
         }
 
+        // based on Type="ArgumentListSyntax" in https://github.com/dotnet/roslyn/blob/main/src/Compilers/CSharp/Portable/Syntax/Syntax.xml
         public static IReadOnlyList<ArgumentSyntax> ArgumentList(this SyntaxNode node) =>
             (node switch
             {

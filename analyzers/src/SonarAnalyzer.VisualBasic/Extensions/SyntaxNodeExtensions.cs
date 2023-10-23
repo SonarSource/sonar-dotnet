@@ -100,6 +100,7 @@ namespace SonarAnalyzer.Extensions
                 _ => null,
             };
 
+        // based on kind="ArgumentList" in https://github.com/dotnet/roslyn/blob/main/src/Compilers/VisualBasic/Portable/Syntax/Syntax.xml
         public static IReadOnlyList<ArgumentSyntax> ArgumentList(this SyntaxNode node) =>
             (node switch
             {
