@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Tests.Diagnostics
 {
@@ -357,5 +358,59 @@ namespace Tests.Diagnostics
 
         private int F36; // compliant
         public void M15(int i) => F36 = i + 1;
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/8239
+    public class Repo_8239
+    {
+        private bool _received; // Noncompliant FP
+
+        public void Program()
+        {
+            var broker = new Broker();
+            broker.Receive += Broker_Receive; // Broker_Receive should be treated as "public" as it is passed as a delegate
+
+            broker.Process();
+
+            _received = false;
+            if (_received)
+            {
+                Console.WriteLine("OK");
+            }
+        }
+
+        private void Broker_Receive(object sender, EventArgs e)
+        {
+            _received = true;
+        }
+
+        public class Broker
+        {
+            public event EventHandler Receive;
+            public void Process() { Receive?.Invoke(this, EventArgs.Empty); }
+        }
+    }
+
+    public class Repo_8239_Variation
+    {
+        private bool _wasCalled; // Noncompliant FP
+
+        public void Program()
+        {
+            var list = new List<int>();
+            _wasCalled = false;
+
+            list.ForEach(Increment);            // Increment is passed as a delegate `new Action<int>(Increment)` and should be treated as "public"
+            // list.ForEach(x => Increment(x)); // This is detected correctly
+
+            if (_wasCalled)
+            {
+                Console.WriteLine("OK");
+            }
+        }
+
+        private void Increment(int dummy)
+            => _wasCalled = true;
+
     }
 }
