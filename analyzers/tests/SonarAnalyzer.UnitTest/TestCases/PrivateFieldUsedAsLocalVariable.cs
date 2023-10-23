@@ -370,9 +370,10 @@ namespace Tests.Diagnostics
             var broker = new Broker();
             broker.Receive += Broker_Receive; // Broker_Receive should be treated as "public" as it is passed as a delegate
 
+            _received = false;
+
             broker.Process();
 
-            _received = false;
             if (_received)
             {
                 Console.WriteLine("OK");
