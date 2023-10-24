@@ -28,6 +28,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string DiagnosticId = "S1118";
         private const string MessageFormat = "{0}";
         private const string MessageFormatConstructor = "Hide this public constructor by making it '{0}'.";
+        private const string MessageFormatPrimaryConstructor = "Remove this primary constructor.";
         private const string MessageFormatStaticClass = "Add a '{0}' constructor or the 'static' keyword to the class declaration.";
 
         private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
@@ -79,8 +80,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var reportMessage = string.Format(MessageFormatConstructor, utilityClass.IsSealed ? SyntaxConstants.Private : SyntaxConstants.Protected);
-
             foreach (var constructor in utilityClass.GetMembers()
                                                     .Where(IsConstructor)
                                                     .Where(symbol => ProblematicConstructorAccessibility.Contains(symbol.DeclaredAccessibility)))
@@ -88,9 +87,17 @@ namespace SonarAnalyzer.Rules.CSharp
                 var syntaxReferences = constructor.DeclaringSyntaxReferences;
                 foreach (var syntaxReference in syntaxReferences)
                 {
-                    if (syntaxReference.GetSyntax() is ConstructorDeclarationSyntax constructorDeclaration)
+                    switch (syntaxReference.GetSyntax())
                     {
-                        context.ReportIssue(Diagnostic.Create(Rule, constructorDeclaration.Identifier.GetLocation(), reportMessage));
+                        case ConstructorDeclarationSyntax constructorDeclaration:
+                            var reportMessage = string.Format(MessageFormatConstructor, utilityClass.IsSealed ? SyntaxConstants.Private : SyntaxConstants.Protected);
+                            context.ReportIssue(Diagnostic.Create(Rule, constructorDeclaration.Identifier.GetLocation(), reportMessage));
+                            break;
+                        case ClassDeclarationSyntax classDeclaration when classDeclaration.ParameterList() is { Parameters.Count: 0 }:
+                            context.ReportIssue(Diagnostic.Create(Rule, classDeclaration.Identifier.GetLocation(), MessageFormatPrimaryConstructor));
+                            break;
+                        default:
+                            break;
                     }
                 }
             }
@@ -126,6 +133,6 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static bool IsConstructor(ISymbol member) =>
-            member is IMethodSymbol {MethodKind: MethodKind.Constructor, IsImplicitlyDeclared: false};
+            member is IMethodSymbol { MethodKind: MethodKind.Constructor, IsImplicitlyDeclared: false };
     }
 }
