@@ -55,12 +55,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKindEx.RecordStructDeclaration);
 
         private static IMethodSymbol MethodSymbol(SyntaxNode node, SemanticModel semanticModel) =>
-            node switch
-            {
-                BaseMethodDeclarationSyntax method => semanticModel.GetDeclaredSymbol(method),
-                TypeDeclarationSyntax type => type.PrimaryConstructor(semanticModel),
-                _ => null,
-            };
+            node is TypeDeclarationSyntax type
+                ? type.PrimaryConstructor(semanticModel)
+                : semanticModel.GetDeclaredSymbol(node) as IMethodSymbol;
 
         private static bool CheckModifiers(SyntaxNode node) =>
             node is not BaseMethodDeclarationSyntax method
