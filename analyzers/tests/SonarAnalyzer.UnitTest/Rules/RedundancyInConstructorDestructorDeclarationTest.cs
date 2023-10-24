@@ -77,6 +77,13 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
                 .VerifyCodeFix();
 
+        [TestMethod]
+        public void RedundancyInConstructorDestructorDeclaration_CodeFix_CSharp11() =>
+            codeFixBuilderRemoveConstructor.AddPaths("RedundancyInConstructorDestructorDeclaration.CSharp11.cs")
+                .WithCodeFixedPaths("RedundancyInConstructorDestructorDeclaration.CSharp11.Fixed.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .VerifyCodeFix();
+
 #endif
 
         [TestMethod]

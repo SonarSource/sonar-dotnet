@@ -12,7 +12,6 @@ struct StructWithMulitpleField2
 
 public struct Noncompliant
 {
-    public Noncompliant() { } // Noncompliant
 
     public bool Foo { get; set; } // No initializer
 }

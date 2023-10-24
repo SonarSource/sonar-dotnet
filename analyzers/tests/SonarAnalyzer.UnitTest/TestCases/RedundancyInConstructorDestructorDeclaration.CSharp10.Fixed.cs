@@ -34,7 +34,7 @@ struct StructWithFieldInitializer
 
 struct StructWithPropertyInitializer
 {
-    public StructWithPropertyInitializer() { } // Compliant
+    public StructWithPropertyInitializer(int someParam) { } // Compliant
     public int AProperty { get; } = 42;
 }
 
@@ -44,9 +44,9 @@ record struct RecordStructWithFieldInitializer
     public int aField = 42;
 }
 
-record struct REcordStructWithPropertyInitializer
+record struct RecordStructWithPropertyInitializer
 {
-    public REcordStructWithPropertyInitializer() { } // Compliant
+    public RecordStructWithPropertyInitializer() { } // Compliant
     public int AProperty { get; } = 42;
 }
 
