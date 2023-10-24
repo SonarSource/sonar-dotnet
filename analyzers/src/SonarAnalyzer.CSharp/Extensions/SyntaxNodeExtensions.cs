@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq.Expressions;
 using SonarAnalyzer.CFG.Roslyn;
 
 namespace SonarAnalyzer.Extensions
@@ -162,8 +163,10 @@ namespace SonarAnalyzer.Extensions
                 MethodDeclarationSyntax { Identifier: var identifier } => identifier,
                 NamespaceDeclarationSyntax { Name: { } name } => GetIdentifier(name),
                 NullableTypeSyntax { ElementType: { } elementType } => GetIdentifier(elementType),
+                ObjectCreationExpressionSyntax { Type: var type } => GetIdentifier(type),
                 OperatorDeclarationSyntax { OperatorToken: var operatorToken } => operatorToken,
                 ParameterSyntax { Identifier: var identifier } => identifier,
+                ParenthesizedExpressionSyntax { Expression: { } expression } => GetIdentifier(expression),
                 PropertyDeclarationSyntax { Identifier: var identifier } => identifier,
                 PointerTypeSyntax { ElementType: { } elementType } => GetIdentifier(elementType),
                 PredefinedTypeSyntax { Keyword: var keyword } => keyword,
@@ -171,8 +174,12 @@ namespace SonarAnalyzer.Extensions
                 SimpleNameSyntax { Identifier: var identifier } => identifier,
                 TypeParameterConstraintClauseSyntax { Name.Identifier: var identifier } => identifier,
                 TypeParameterSyntax { Identifier: var identifier } => identifier,
+                PrefixUnaryExpressionSyntax { Operand: { } operand } => GetIdentifier(operand),
+                PostfixUnaryExpressionSyntax { Operand: { } operand } => GetIdentifier(operand),
                 UsingDirectiveSyntax { Alias.Name: { } name } => GetIdentifier(name),
                 VariableDeclaratorSyntax { Identifier: var identifier } => identifier,
+                { } fileScoped when FileScopedNamespaceDeclarationSyntaxWrapper.IsInstance(fileScoped)
+                    && ((FileScopedNamespaceDeclarationSyntaxWrapper)fileScoped).Name is { } name => GetIdentifier(name),
                 { } refType when RefTypeSyntaxWrapper.IsInstance(refType) => GetIdentifier(((RefTypeSyntaxWrapper)refType).Type),
                 _ => null
             };
