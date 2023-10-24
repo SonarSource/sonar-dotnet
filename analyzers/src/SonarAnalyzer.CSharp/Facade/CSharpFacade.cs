@@ -60,7 +60,9 @@ internal sealed class CSharpFacade : ILanguageFacade<SyntaxKind>
         };
 
     public IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, SemanticModel semanticModel) =>
-        invocation != null ? new CSharpMethodParameterLookup(invocation.ArgumentList(), semanticModel) : null;
+        invocation?.ArgumentList() is { } argumentList
+            ? new CSharpMethodParameterLookup(argumentList, semanticModel)
+            : null;
 
     public string GetName(SyntaxNode expression) =>
         expression.GetName();

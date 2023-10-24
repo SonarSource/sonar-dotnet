@@ -27,16 +27,16 @@ namespace SonarAnalyzer.Rules
         protected abstract TSyntaxKind[] InvocationKinds { get; }
         protected override string MessageFormat => "Parameters to '{0}' have the same names but not the same order as the method arguments.";
 
-        protected ParametersCorrectOrderBase() : base(DiagnosticId)
-        {
-        }
+        protected ParametersCorrectOrderBase() : base(DiagnosticId) { }
 
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterNodeAction(Language.GeneratedCodeRecognizer,
                 c =>
                 {
+                    const int MinNumberOfNameableArguments = 2;
                     if (!c.IsRedundantPrimaryConstructorBaseTypeContext()
-                        && Language.Syntax.ArgumentList(c.Node) is { Count: >= 2 } argumentList // there must be at least two arguments to be able to swap
+                        && Language.Syntax.ArgumentList(c.Node) is { Count: >= MinNumberOfNameableArguments } argumentList  // there must be at least two arguments to be able to swap, and further
+                        && argumentList.Select(ArgumentName).WhereNotNull().Take(MinNumberOfNameableArguments).Count() == MinNumberOfNameableArguments // at least two arguments with a "name"
                         && Language.MethodParameterLookup(c.Node, c.SemanticModel) is var methodParameterLookup)
                     {
                         foreach (var argument in argumentList)

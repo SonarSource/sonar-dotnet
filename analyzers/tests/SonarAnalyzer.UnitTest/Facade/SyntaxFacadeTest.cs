@@ -156,6 +156,15 @@ public class SyntaxFacadeTest
     }
 
     [TestMethod]
+    public void ArgumentNameColon_VB_RangeArgument()
+    {
+        var literal1 = VB.SyntaxFactory.LiteralExpression(VB.SyntaxKind.NumericLiteralExpression, VB.SyntaxFactory.Literal(1));
+        var literal2 = literal1.WithToken(VB.SyntaxFactory.Literal(2));
+        var argument = VB.SyntaxFactory.RangeArgument(literal1, literal2);
+        vb.ArgumentNameColon(argument).Should().BeNull();
+    }
+
+    [TestMethod]
     public void ArgumentNameColon_VB_UnsupportedSyntaxKind()
     {
         var expression = VB.SyntaxFactory.LiteralExpression(VB.SyntaxKind.TrueLiteralExpression, VB.SyntaxFactory.Token(VB.SyntaxKind.TrueKeyword));
