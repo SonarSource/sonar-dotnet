@@ -2,16 +2,19 @@
 
 class MyParentClass(int parentClassParam)
 {
-    class MyClass(int a, int b, int c, int d, int e, int f, int g)
+    class MyClass(int a, int b, int c, int d, int e, int f, int g, int h)
     {
-        private int a = a; // Compliant
-        private int b; // FN
-        private int c { get; set; } = c; // Compliant
-        private int d { get; set; } // FN
+        public int a = a; // Compliant
+        public int b; // FN
+
+        public int c { get; set; } = c; // Compliant
+        public int d { get; set; } // FN
+
+        public int g = a; // FN {{Rename 'g' which hides the primary constructor parameter with the same name.}}
 
         class MyChildClass(int childClassParam) { }
 
-        MyClass(int a, int b) : this(a, b, 1, 1, 1, 1, 1) { } // Compliant
+        MyClass(int ctorParam, int f) : this(ctorParam, f, 1, 1, 1, 1, 1, 1) { } // Compliant
 
         void MyMethod()
         {
@@ -19,11 +22,12 @@ class MyParentClass(int parentClassParam)
             int childClassParam = 42; // Compliant
             int ctorParam = 42; // Compliant
 
-            int e = 42; // Noncompliant {{Rename 'e' which hides the primary constructor parameter with the same name.}}
-            _ = a is object f; // Noncompliant
-            for (int g = 0; g < 10; g++) { } // Noncompliant
-            for (int a = 0; a < 10; a++) { } // Noncompliant FP
-            var lambda = (int g = 1) => g; // Compliant
+            int f = 42; // Noncompliant {{Rename 'f' which hides the primary constructor parameter with the same name.}}
+            _ = a is object g; // Noncompliant
+            for (int h = 0; h < 10; h++) { } // Noncompliant
+            for (int a = 0; a < 10; a++) { } // Compliant
+            for (int c = 0; c < 10; c++) { } // Compliant
+            var lambda = (int h = 1) => h; // Compliant
         }
     }
 }

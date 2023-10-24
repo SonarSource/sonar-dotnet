@@ -90,13 +90,46 @@ namespace SonarAnalyzer.Rules.CSharp
                 _ => new()
             };
 
-        private static ImmutableArray<ISymbol> GetContextSymbols(SonarSyntaxNodeReportingContext context)
+        private static List<ISymbol> GetContextSymbols(SonarSyntaxNodeReportingContext context)
         {
             var symbols = context.ContainingSymbol.ContainingSymbol.GetSymbolType().GetMembers();
-            var relevantSymbols = symbols.Where(x => x is IPropertySymbol or IFieldSymbol).ToImmutableArray();
             var primaryCtor = symbols.FirstOrDefault(x => x is IMethodSymbol && IsPrimaryCtor(x));
             var primaryCtorParameters = primaryCtor?.GetParameters();
-            return primaryCtor is null ? relevantSymbols : relevantSymbols.AddRange(primaryCtorParameters);
+            var relevantSymbols = new List<ISymbol>();
+            foreach (var relevant in symbols.Where(x => x is IPropertySymbol or IFieldSymbol))
+            {
+                if (primaryCtorParameters is not null
+                    && primaryCtorParameters.Any()
+                    && TryGetAssignedValue(relevant, out var assignedValue)
+                    && primaryCtorParameters.Any(x => x.Name == assignedValue))
+                {
+                    primaryCtorParameters = primaryCtorParameters.Where(x => x.Name != assignedValue).ToImmutableArray();
+                }
+                else
+                {
+                    relevantSymbols.Add(relevant);
+                }
+            }
+            return primaryCtor is null ? relevantSymbols : relevantSymbols.Concat(primaryCtorParameters).ToList();
+        }
+
+        private static bool TryGetAssignedValue(ISymbol symbol, out string assignedValue)
+        {
+            assignedValue = string.Empty;
+            if (symbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is { } syntax)
+            {
+                if (syntax is VariableDeclaratorSyntax variableDeclarator && variableDeclarator.Initializer is { Value: IdentifierNameSyntax { } fieldValue })
+                {
+                    assignedValue = fieldValue.Identifier.ValueText;
+                    return true;
+                }
+                else if (syntax is PropertyDeclarationSyntax propertyDeclaration && propertyDeclaration.Initializer is { Value: IdentifierNameSyntax { } propertyValue })
+                {
+                    assignedValue = propertyValue.Identifier.ValueText;
+                    return true;
+                }
+            }
+            return false;
         }
 
         private static bool IsPrimaryCtor(ISymbol methodSymbol) =>
