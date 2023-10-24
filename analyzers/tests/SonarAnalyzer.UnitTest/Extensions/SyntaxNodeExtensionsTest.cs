@@ -835,6 +835,57 @@ public class X
             actual.Should().BeNull();
         }
 
+        [DataTestMethod]
+        [DataRow("""$$global::System$$.Int32 i;""", "global")]              // AliasQualifiedNameSyntax
+        [DataRow("""int i = Math.Abs($$1$$);""", null)]                     // ArgumentSyntax
+        [DataRow("""int i = Math.Abs($$value: 1$$);""", "value")]           // ArgumentSyntax
+        [DataRow("""$$int[]$$ i;""", "int")]                                // ArrayTypeSyntax
+        [DataRow("""$$int[][]$$ i;""", "int")]                              // ArrayTypeSyntax
+        [DataRow("""[DebuggerDisplay($$""$$)]int i;""", null)]              // AttributeArgumentSyntax
+        [DataRow("""[DebuggerDisplay($$value: ""$$)]int i;""", "value")]    // AttributeArgumentSyntax
+        [DataRow("""[DebuggerDisplay("", $$Name = ""$$)]int i;""", "Name")] // AttributeArgumentSyntax
+        [DataRow("""[$$DebuggerDisplay("")$$]int i;""", "DebuggerDisplay")] // AttributeSyntax
+        [DataRow("""class $$T$$ { }""", "T")]                               // BaseTypeDeclarationSyntax
+        [DataRow("""struct $$T$$ { }""", "T")]                              // BaseTypeDeclarationSyntax
+        [DataRow("""interface $$T$$ { }""", "T")]                           // BaseTypeDeclarationSyntax
+        [DataRow("""record $$T$$ { }""", "T")]                              // BaseTypeDeclarationSyntax
+        [DataRow("""record class $$T$$ { }""", "T")]                        // BaseTypeDeclarationSyntax
+        [DataRow("""record struct $$T$$ { }""", "T")]                       // BaseTypeDeclarationSyntax
+        [DataRow("""enum $$T$$ { }""", "T")]                                // BaseTypeDeclarationSyntax
+        [DataRow("""$$Test() { }$$""", "Test")]                             // ConstructorDeclarationSyntax
+        [DataRow("""$$public static implicit operator int(Test t) => 1;$$""", "int")] // ConversionOperatorDeclarationSyntax
+        [DataRow("""$$delegate void D();$$""", "D")] // DelegateDeclarationSyntax
+        [DataRow("""$$~Test() { }$$""", "Test")] // DestructorDeclarationSyntax
+        [DataRow("""enum E { $$M$$ }""", "M")] // EnumMemberDeclarationSyntax
+        [DataRow("""enum E { $$M = 1$$, }""", "M")] // EnumMemberDeclarationSyntax
+        [DataRow("""$$event Action E {add { } remove { } }$$""", "E")] // EventDeclarationSyntax
+        [DataRow("""$$event Action E;$$""", null)] // EventFieldDeclarationSyntax
+        [DataRow("""$$event Action E1, E2;$$""", null)] // EventFieldDeclarationSyntax
+        [DataRow("""$$Int32$$ i;""", "Int32")] // IdentifierNameSyntax
+        [DataRow("""$$int this[int i] { get => 1; set { } }""", "this")] // IndexerDeclarationSyntax
+
+        public void GetIdentifier(string member, string expected)
+        {
+            var node = NodeBetweenMarkers($$"""
+                using System;
+                using System.Diagnostics;
+                class Test
+                {
+                    {{member}}
+                }
+                """, LanguageNames.CSharp);
+            var actual = ExtensionsCS.GetIdentifier(node);
+            if (expected is null)
+            {
+                actual.Should().BeNull();
+            }
+            else
+            {
+                actual.Should().NotBeNull();
+                actual.Value.ValueText.Should().Be(expected);
+            }
+        }
+
         private static SyntaxNode NodeBetweenMarkers(string code, string language)
         {
             var position = code.IndexOf("$$");
