@@ -32,7 +32,7 @@ public sealed class AssertionArgsShouldBePassedInCorrectOrder : SonarDiagnosticA
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(c =>
         {
-            if (c.Node is InvocationExpressionSyntax { ArgumentList: { Arguments.Count: >= 2 } argumentList } invocation
+            if (c.Node is InvocationExpressionSyntax { ArgumentList.Arguments.Count: >= 2 } invocation
                 && GetParameters(invocation.GetName()) is { } knownAssertParameters
                 && c.SemanticModel.GetSymbolInfo(invocation).AllSymbols()
                     .SelectMany(symbol =>
