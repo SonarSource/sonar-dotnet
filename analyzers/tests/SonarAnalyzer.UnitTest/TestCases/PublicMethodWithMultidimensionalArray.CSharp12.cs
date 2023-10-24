@@ -5,14 +5,16 @@ namespace Repro_8083
 
     public class PrimaryConstructors
     {
-        public class C1(int[][] a);          // FN, the ctor is publicly exposed
-        public class C2(int[,] a);           // FN
+        public class C0(int[] a);            // Compliant
+        public class C1(int[][] a);          // Noncompliant, the ctor is publicly exposed
+        public class C2(int[,] a);           // Noncompliant
         public class C3(params int[] a);     // Compliant, params of int
-        public class C4(params int[][][] a); // FN, params of int[][]
+        public class C4(params int[][][] a); // Noncompliant, params of int[][]
         public class C5(int i);              // Compliant, not a multi-dimensional array
+        public class C6(params int[][] a);   // Compliant
     }
 
-    public class Aliases(IntMatrix a)                    // FN
+    public class Aliases(IntMatrix a)                    // Noncompliant
     {
         public Aliases(IntMatrix a, int i) : this(a) { } // Noncompliant
 

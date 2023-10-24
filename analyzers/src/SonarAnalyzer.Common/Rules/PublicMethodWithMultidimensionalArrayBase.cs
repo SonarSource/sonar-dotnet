@@ -26,47 +26,34 @@ public abstract class PublicMethodWithMultidimensionalArrayBase<TSyntaxKind> : S
     private const string DiagnosticId = "S2368";
     protected override string MessageFormat => "Make this {0} private or simplify its parameters to not use multidimensional/jagged arrays.";
 
+    protected abstract ImmutableArray<TSyntaxKind> SyntaxKindsOfInterest { get; }
     protected abstract Location GetIssueLocation(SyntaxNode node);
     protected abstract string GetType(SyntaxNode node);
 
     protected PublicMethodWithMultidimensionalArrayBase() : base(DiagnosticId) { }
 
-    protected sealed override void Initialize(SonarAnalysisContext context)
-    {
-        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, AnalyzeDeclaration, Language.SyntaxKind.MethodDeclarations);
-        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, AnalyzeDeclaration, Language.SyntaxKind.ConstructorDeclaration);
-    }
-
-    private void AnalyzeDeclaration(SonarSyntaxNodeReportingContext c)
-    {
-        if (c.SemanticModel.GetDeclaredSymbol(c.Node) is IMethodSymbol methodSymbol
-            && methodSymbol.GetInterfaceMember() == null
-            && methodSymbol.GetOverriddenMember() == null
-            && methodSymbol.IsPubliclyAccessible()
-            && MethodHasMultidimensionalArrayParameters(methodSymbol))
-        {
-            c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], GetIssueLocation(c.Node), GetType(c.Node)));
-        }
-    }
-
-    private static bool MethodHasMultidimensionalArrayParameters(IMethodSymbol methodSymbol)
-    {
-        if (methodSymbol.IsExtensionMethod)
-        {
-            for (var i = 1; i < methodSymbol.Parameters.Length; i++)
+    protected sealed override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(Language.GeneratedCodeRecognizer,
+            c =>
             {
-                if (IsMultidimensionalArrayParameter(methodSymbol.Parameters[i]))
+                if (MethodSymbolOfNode(c.SemanticModel, c.Node) is { } methodSymbol
+                    && methodSymbol.GetInterfaceMember() == null
+                    && !methodSymbol.IsOverride
+                    && methodSymbol.IsPubliclyAccessible()
+                    && MethodHasMultidimensionalArrayParameters(methodSymbol))
                 {
-                    return true;
+                    c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], GetIssueLocation(c.Node), GetType(c.Node)));
                 }
-            }
-            return false;
-        }
-        else
-        {
-            return methodSymbol.Parameters.Any(param => IsMultidimensionalArrayParameter(param));
-        }
-    }
+            },
+            SyntaxKindsOfInterest.ToArray());
+
+    protected virtual IMethodSymbol MethodSymbolOfNode(SemanticModel semanticModel, SyntaxNode node) =>
+        semanticModel.GetDeclaredSymbol(node) as IMethodSymbol;
+
+    private static bool MethodHasMultidimensionalArrayParameters(IMethodSymbol methodSymbol) =>
+        methodSymbol.IsExtensionMethod
+            ? methodSymbol.Parameters.Skip(1).Any(IsMultidimensionalArrayParameter)
+            : methodSymbol.Parameters.Any(IsMultidimensionalArrayParameter); // Perf: Make sure the Any method of ImmutableArray is called when possible. Don't do `Skip(m.IsExtensionMethod ? 0 : 1)`
 
     private static bool IsMultidimensionalArrayParameter(IParameterSymbol param) =>
         param.Type is IArrayTypeSymbol arrayType
@@ -75,6 +62,6 @@ public abstract class PublicMethodWithMultidimensionalArrayBase<TSyntaxKind> : S
 
     private static bool IsJaggedArrayParam(IParameterSymbol param, IArrayTypeSymbol arrayType) =>
         param.IsParams
-            ? arrayType.ElementType is IArrayTypeSymbol subType && subType.ElementType is IArrayTypeSymbol
+            ? arrayType.ElementType is IArrayTypeSymbol { ElementType: IArrayTypeSymbol }
             : arrayType.ElementType is IArrayTypeSymbol;
 }
