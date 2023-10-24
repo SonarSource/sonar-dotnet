@@ -41,10 +41,7 @@ public sealed class PublicMethodWithMultidimensionalArray : PublicMethodWithMult
         node is MethodDeclarationSyntax ? "method" : "constructor";
 
     protected override IMethodSymbol MethodSymbolOfNode(SemanticModel semanticModel, SyntaxNode node) =>
-        node switch
-        {
-            { RawKind: (int)SyntaxKind.MethodDeclaration or (int)SyntaxKind.ConstructorDeclaration } => base.MethodSymbolOfNode(semanticModel, node),
-            TypeDeclarationSyntax typeDeclaration => typeDeclaration.PrimaryConstructor(semanticModel),
-            _ => null,
-        };
+        node is TypeDeclarationSyntax typeDeclaration
+            ? typeDeclaration.PrimaryConstructor(semanticModel)
+            : base.MethodSymbolOfNode(semanticModel, node);
 }
