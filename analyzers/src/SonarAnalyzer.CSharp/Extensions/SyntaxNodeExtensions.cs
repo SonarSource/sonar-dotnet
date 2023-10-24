@@ -139,7 +139,10 @@ namespace SonarAnalyzer.Extensions
             node switch
             {
                 AliasQualifiedNameSyntax { Alias.Identifier: var identifier } => identifier,
+                ArgumentSyntax { NameColon.Name.Identifier: var identifier } => identifier,
                 ArrayTypeSyntax { ElementType: { } elementType } => GetIdentifier(elementType),
+                AttributeArgumentSyntax { NameColon.Name.Identifier: var identifier } => identifier,
+                AttributeArgumentSyntax { NameEquals.Name.Identifier: var identifier } => identifier,
                 AttributeSyntax { Name: { } name } => GetIdentifier(name),
                 BaseTypeDeclarationSyntax { Identifier: var identifier } => identifier,
                 ConstructorDeclarationSyntax { Identifier: var identifier } => identifier,
@@ -147,15 +150,16 @@ namespace SonarAnalyzer.Extensions
                 DelegateDeclarationSyntax { Identifier: var identifier } => identifier,
                 DestructorDeclarationSyntax { Identifier: var identifier } => identifier,
                 EnumMemberDeclarationSyntax { Identifier: var identifier } => identifier,
+                EventDeclarationSyntax { Identifier: var identifier } => identifier,
                 IdentifierNameSyntax { Identifier: var identifier } => identifier,
                 IndexerDeclarationSyntax { ThisKeyword: var thisKeyword } => thisKeyword,
                 InvocationExpressionSyntax
                 {
                     Expression: not InvocationExpressionSyntax // We don't want to recurse into nested invocations like: fun()()
                 } invocation => GetIdentifier(invocation.Expression),
-                MethodDeclarationSyntax { Identifier: var identifier } => identifier,
-                MemberBindingExpressionSyntax { Name.Identifier: var identifier } => identifier,
                 MemberAccessExpressionSyntax { Name.Identifier: var identifier } => identifier,
+                MemberBindingExpressionSyntax { Name.Identifier: var identifier } => identifier,
+                MethodDeclarationSyntax { Identifier: var identifier } => identifier,
                 NamespaceDeclarationSyntax { Name: { } name } => GetIdentifier(name),
                 NullableTypeSyntax { ElementType: { } elementType } => GetIdentifier(elementType),
                 OperatorDeclarationSyntax { OperatorToken: var operatorToken } => operatorToken,

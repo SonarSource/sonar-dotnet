@@ -137,7 +137,7 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
         };
 
     public override SyntaxToken? NodeIdentifier(SyntaxNode node) =>
-        node.NodeIdentifier();
+        node.GetIdentifier();
 
     public override SyntaxToken? ObjectCreationTypeIdentifier(SyntaxNode objectCreation) =>
         objectCreation == null ? null : Cast<ObjectCreationExpressionSyntax>(objectCreation).GetObjectCreationTypeIdentifier();

@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterNodeAction(c =>
             {
                 if (!c.IsRedundantPositionalRecordContext()
-                    && c.Node.NodeIdentifier() is { } identifier
+                    && c.Node.GetIdentifier() is { } identifier
                     && FrameworkNamespaces.Contains(identifier.ValueText)
                     && c.SemanticModel.GetDeclaredSymbol(c.Node)?.DeclaredAccessibility == Accessibility.Public)
                 {
