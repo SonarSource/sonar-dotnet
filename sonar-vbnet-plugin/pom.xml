@@ -157,7 +157,6 @@
           <skipDependenciesPackaging>true</skipDependenciesPackaging>
           <sonarLintSupported>false</sonarLintSupported>
           <pluginApiMinVersion>${sonar.version}</pluginApiMinVersion> <!-- runtime minimal API version -->
-          <requiredForLanguages>vbnet</requiredForLanguages>
         </configuration>
       </plugin>
       <plugin>
