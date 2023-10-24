@@ -260,5 +260,23 @@ namespace Test
             methodSymbol.Parameters.Should().BeEmpty();
             methodSymbol.IsStatic.Should().BeFalse();
         }
+
+        [DataTestMethod]
+        [DataRow("__arglist", 0)]
+        [DataRow("int i, __arglist", 1)]
+        [DataRow("int i, int j, __arglist", 2)]
+        public void PrimaryConstructor_ArglistPrimaryConstructor(string parameterList, int expectedNumberOfParameters)
+        {
+            var (tree, model) = TestHelper.CompileCS($$"""
+            public class Test({{parameterList}})
+            {
+            }
+            """);
+            var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
+            var methodSymbol = typeDeclaration.PrimaryConstructor(model);
+            methodSymbol.Should().NotBeNull();
+            methodSymbol.MethodKind.Should().Be(MethodKind.Constructor);
+            methodSymbol.Parameters.Should().HaveCount(expectedNumberOfParameters);
+        }
     }
 }

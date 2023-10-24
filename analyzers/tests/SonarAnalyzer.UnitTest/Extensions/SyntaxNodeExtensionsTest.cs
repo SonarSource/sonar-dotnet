@@ -733,6 +733,108 @@ public class X
             syntaxTree.GetRoot().GetMappedFilePathFromRoot().Should().Be(expectedFileName);
         }
 
+        [DataTestMethod]
+        [DataRow("""public C(int p) { }""")]
+        [DataRow("""public void M(int p) { }""")]
+        [DataRow("""public static C operator + (C p) => default;""")]
+        [DataRow("""public static implicit operator C (int p) => default;""")]
+        [DataRow("""public delegate void M(int p);""")]
+        public void ParameterList_Methods(string declarations)
+        {
+            var node = NodeBetweenMarkers($$"""
+                public class C
+                {
+                    $${{declarations}}$$
+                }
+                """, LanguageNames.CSharp);
+            var actual = ExtensionsCS.ParameterList(node);
+            actual.Should().NotBeNull();
+            var entry = actual.Parameters.Should().ContainSingle().Which;
+            entry.Identifier.ValueText.Should().Be("p");
+        }
+
+        [DataTestMethod]
+        [DataRow("""$$void Local(int p) { }$$""")]
+        [DataRow("""$$static void Local(int p) { }$$""")]
+        [DataRow("""Func<int, int> f = $$(int p) => 0$$;""")]
+        [DataRow("""Func<int, int> f = $$delegate (int p) { return 0; }$$;""")]
+        public void ParameterList_NestedMethods(string declarations)
+        {
+            var node = NodeBetweenMarkers($$"""
+                using System;
+
+                public class C
+                {
+                    public void M()
+                    {
+                        {{declarations}}
+                    }
+                }
+                """, LanguageNames.CSharp);
+            var actual = ExtensionsCS.ParameterList(node);
+            actual.Should().NotBeNull();
+            var entry = actual.Parameters.Should().ContainSingle().Which;
+            entry.Identifier.ValueText.Should().Be("p");
+        }
+
+        [TestMethod]
+        public void ParameterList_Destructor()
+        {
+            var node = NodeBetweenMarkers("""
+                public class C
+                {
+                    $$~C() { }$$
+                }
+                """, LanguageNames.CSharp);
+            var actual = ExtensionsCS.ParameterList(node);
+            actual.Should().NotBeNull();
+            actual.Parameters.Should().BeEmpty();
+        }
+
+        [DataTestMethod]
+        [DataRow("class")]
+        [DataRow("struct")]
+        [DataRow("record struct")]
+        [DataRow("readonly struct")]
+
+#if NET
+
+        [DataRow("readonly record struct")]
+        [DataRow("record")]
+        [DataRow("record class")]
+
+#endif
+
+        public void ParameterList_PrimaryConstructors(string type)
+        {
+            var node = NodeBetweenMarkers($$"""
+                $$public {{type}} C(int p)
+                {
+                    
+                }$$
+                """, LanguageNames.CSharp);
+            var actual = ExtensionsCS.ParameterList(node);
+            actual.Should().NotBeNull();
+            var entry = actual.Parameters.Should().ContainSingle().Which;
+            entry.Identifier.ValueText.Should().Be("p");
+        }
+
+        [DataTestMethod]
+        [DataRow("$$int i;$$")]
+        [DataRow("$$class Nested { }$$")]
+        public void ParameterList_ReturnsNull(string declaration)
+        {
+            var node = NodeBetweenMarkers($$"""
+                using System.Collections.Generic;
+                public class C
+                {
+                    {{declaration}}
+                }
+                """, LanguageNames.CSharp);
+            var actual = ExtensionsCS.ParameterList(node);
+            actual.Should().BeNull();
+        }
+
         private static SyntaxNode NodeBetweenMarkers(string code, string language)
         {
             var position = code.IndexOf("$$");

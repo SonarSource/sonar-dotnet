@@ -26,37 +26,41 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S4061";
         private const string MessageFormat = "Use the 'params' keyword instead of '__arglist'.";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterNodeAction(
                 c =>
                 {
-                    var methodDeclaration = (MethodDeclarationSyntax)c.Node;
-
-                    if (methodDeclaration.Identifier.IsMissing ||
-                        methodDeclaration.Modifiers.Any(SyntaxKind.ExternKeyword) ||
-                        !HasAnyArgListParameter(methodDeclaration))
+                    if (c.Node.ParameterList() is { Parameters: { Count: > 0 and var count } parameters }
+                        && parameters[count - 1].Identifier.IsKind(SyntaxKind.ArgListKeyword)
+                        && CheckModifiers(c.Node)
+                        && c.Node.GetIdentifier() is { IsMissing: false } identifier
+                        && MethodSymbol(c.Node, c.SemanticModel) is { } methodSymbol
+                        && !methodSymbol.IsOverride
+                        && methodSymbol.IsPubliclyAccessible()
+                        && methodSymbol.GetInterfaceMember() == null)
                     {
-                        return;
-                    }
-
-                    var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
-                    if (methodSymbol != null &&
-                        methodSymbol.IsPubliclyAccessible() &&
-                        methodSymbol.GetInterfaceMember() == null &&
-                        methodSymbol.OverriddenMethod == null)
-                    {
-                        c.ReportIssue(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation()));
+                        c.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation()));
                     }
                 },
-                SyntaxKind.MethodDeclaration);
-        }
+                SyntaxKind.MethodDeclaration,
+                SyntaxKind.ConstructorDeclaration,
+                SyntaxKind.ClassDeclaration,
+                SyntaxKind.StructDeclaration,
+                SyntaxKindEx.RecordClassDeclaration,
+                SyntaxKindEx.RecordStructDeclaration);
 
-        private static bool HasAnyArgListParameter(MethodDeclarationSyntax methodDeclaration) =>
-            methodDeclaration.ParameterList.Parameters.Any(p => p.Identifier.IsKind(SyntaxKind.ArgListKeyword));
+        private static IMethodSymbol MethodSymbol(SyntaxNode node, SemanticModel semanticModel) =>
+            node is TypeDeclarationSyntax type
+                ? type.PrimaryConstructor(semanticModel)
+                : semanticModel.GetDeclaredSymbol(node) as IMethodSymbol;
+
+        private static bool CheckModifiers(SyntaxNode node) =>
+            node is not BaseMethodDeclarationSyntax method
+            || !method.Modifiers.Any(SyntaxKind.ExternKeyword);
     }
 }

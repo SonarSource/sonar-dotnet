@@ -1,6 +1,7 @@
 ﻿using System;
 
-class BaseClass(__arglist) // FN
+public class BaseClass(__arglist) // Nomcompliant {{Use the 'params' keyword instead of '__arglist'.}}
+//           ^^^^^^^^^
 {
     void Foo()
     {
