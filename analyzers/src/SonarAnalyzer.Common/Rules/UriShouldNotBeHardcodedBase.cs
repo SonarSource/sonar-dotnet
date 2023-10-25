@@ -47,7 +47,9 @@ namespace SonarAnalyzer.Rules
             new HashSet<string>
             {
                 "FILE",
+                "FILES",
                 "PATH",
+                "PATHS",
                 "URI",
                 "URIS",
                 "URL",
