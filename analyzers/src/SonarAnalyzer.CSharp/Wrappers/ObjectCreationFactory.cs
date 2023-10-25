@@ -95,8 +95,9 @@ namespace SonarAnalyzer.Wrappers
             public bool IsKnownType(KnownType knownType, SemanticModel semanticModel) =>
                 semanticModel.GetTypeInfo(objectCreation).Type.Is(knownType);
 
+            // Return null if TypeSymbol returns null to avoid AD0001 due to this issue: https://github.com/dotnet/roslyn/issues/70041
             public string TypeAsString(SemanticModel semanticModel) =>
-                TypeSymbol(semanticModel).Name;
+                TypeSymbol(semanticModel)?.Name;
 
             public ITypeSymbol TypeSymbol(SemanticModel semanticModel) =>
                 semanticModel.GetTypeInfo(objectCreation).ConvertedType;
