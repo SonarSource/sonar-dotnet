@@ -12,4 +12,14 @@ namespace Tests.Diagnostics
             int.TryParse("123", out result); // Noncompliant
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/8233
+    class Repro_8233
+    {
+        public void IgnoreCulture()
+        {
+            // Need more example of type implementating IParseable that ignore culture
+            _ = Guid.Parse(""); // Noncompliant - FP
+        }
+    }
 }
