@@ -38,6 +38,12 @@ namespace SonarAnalyzer.Rules.CSharp
             { SyntaxKindEx.LocalFunctionStatement, "Local function" }
         }.ToImmutableDictionary();
 
+        protected override bool IsZeroOverheadMemberAccess(SyntaxNode node) =>
+            node is MethodDeclarationSyntax { AttributeLists: { Count: > 0 } attributeList } methodDeclaration
+            && methodDeclaration.Modifiers.Any(SyntaxKind.ExternKeyword)
+            && methodDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword)
+            && attributeList.Any(x => x.Attributes.Any(y => y.Name.ToString() == "UnsafeAccessor"));
+
         protected override string UserFriendlyNameForNode(SyntaxNode node) =>
             NodeToDeclarationName[node.Kind()];
 
