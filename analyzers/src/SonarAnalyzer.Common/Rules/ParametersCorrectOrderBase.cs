@@ -50,7 +50,8 @@ namespace SonarAnalyzer.Rules
                                 && Language.Syntax.NodeExpression(argument) is { } argumentExpression
                                 && c.Context.SemanticModel.GetTypeInfo(argumentExpression).ConvertedType is { } argumentType
                                 // is there another parameter that seems to be a better fit (name and type match): p_x
-                                && methodParameterLookup.MethodSymbol.Parameters.FirstOrDefault(p => MatchingNames(p, argumentName) && argumentType.DerivesOrImplements(p.Type)) is { IsParams: false }
+                                && methodParameterLookup.MethodSymbol.Parameters.FirstOrDefault(p => MatchingNames(p, argumentName)) is { IsParams: false } otherParameter
+                                && argumentType.DerivesOrImplements(otherParameter.Type)
                                 // is there an argument that matches the parameter p_y by name: a_y
                                 && Language.Syntax.ArgumentList(c.Node).FirstOrDefault(x => MatchingNames(parameterSymbol, ArgumentName(x))) is { })
                             {
