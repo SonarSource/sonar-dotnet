@@ -89,28 +89,8 @@ namespace SonarAnalyzer.Extensions
 
         public static ImmutableArray<SyntaxToken> DeclaringReferenceIdentifiers(this ISymbol symbol) =>
             symbol.DeclaringSyntaxReferences
-               .Select(x => x.GetSyntax().NodeIdentifier())
+               .Select(x => x.GetSyntax().GetIdentifier())
                .WhereNotNull()
                .ToImmutableArray();
-
-        public static SyntaxToken? NodeIdentifier(this SyntaxNode node) =>
-            node.RemoveParentheses() switch
-            {
-                AttributeArgumentSyntax x => x.NameColon?.Name.Identifier,
-                BaseTypeDeclarationSyntax x => x.Identifier,
-                ConstructorDeclarationSyntax x => x.Identifier,
-                DelegateDeclarationSyntax x => x.Identifier,
-                EnumMemberDeclarationSyntax x => x.Identifier,
-                EventDeclarationSyntax x => x.Identifier,
-                InvocationExpressionSyntax x => NodeIdentifier(x.Expression),
-                MemberAccessExpressionSyntax x => x.Name.Identifier,
-                MemberBindingExpressionSyntax x => x.Name.Identifier,
-                MethodDeclarationSyntax x => x.Identifier,
-                ParameterSyntax x => x.Identifier,
-                PropertyDeclarationSyntax x => x.Identifier,
-                SimpleNameSyntax x => x.Identifier,
-                VariableDeclaratorSyntax x => x.Identifier,
-                _ => null,
-            };
     }
 }

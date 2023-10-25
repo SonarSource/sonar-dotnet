@@ -18,10 +18,12 @@
 * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+extern alias csharp;
+
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.AnalysisContext;
-using SonarAnalyzer.Extensions;
+using ExtensionsCS = csharp::SonarAnalyzer.Extensions.SyntaxNodeExtensions;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.Tests;
 
@@ -43,7 +45,7 @@ internal class DummyAnalyzerWithLocation : SonarDiagnosticAnalyzer
     private void ReportIssue(SonarSyntaxNodeReportingContext context)
     {
         if (context.Node is InvocationExpressionSyntax invocation
-            && invocation.NodeIdentifier() is { ValueText: "RaiseHere" } identifier)
+            && ExtensionsCS.GetIdentifier(invocation) is { ValueText: "RaiseHere" } identifier)
         {
             context.ReportIssue(Diagnostic.Create(rule, identifier.GetLocation(), invocation.ArgumentList.Arguments.Select(arg => arg.GetLocation())));
         }
