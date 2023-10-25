@@ -38,8 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterNodeAction(c => Process(c, GetDeclarationOrDesignation(c.Node)),
                 SyntaxKind.LocalDeclarationStatement,
                 SyntaxKind.ForStatement,
@@ -49,10 +48,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKindEx.RecursivePattern,
                 SyntaxKindEx.VarPattern,
                 SyntaxKindEx.DeclarationPattern,
-                SyntaxKindEx.ListPattern);
-            context.RegisterNodeAction(c => Process(c, c.Node),
+                SyntaxKindEx.ListPattern,
                 SyntaxKind.ForEachStatement);
-        }
 
         private static SyntaxNode GetDeclarationOrDesignation(SyntaxNode node) =>
             node switch
@@ -61,6 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 ForStatementSyntax forStatement => forStatement.Declaration,
                 UsingStatementSyntax usingStatement => usingStatement.Declaration,
                 FixedStatementSyntax fixedStatement => fixedStatement.Declaration,
+                ForEachStatementSyntax forEachStatement => forEachStatement,
                 _ when DeclarationExpressionSyntaxWrapper.IsInstance(node) => ((DeclarationExpressionSyntaxWrapper)node).Designation,
                 _ when RecursivePatternSyntaxWrapper.IsInstance(node) => ((RecursivePatternSyntaxWrapper)node).Designation,
                 _ when VarPatternSyntaxWrapper.IsInstance(node) => ((VarPatternSyntaxWrapper)node).Designation,
@@ -92,44 +90,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static List<ISymbol> GetContextSymbols(SonarSyntaxNodeReportingContext context)
         {
-            var symbols = context.ContainingSymbol.ContainingSymbol.GetSymbolType().GetMembers();
+            var symbols = ((INamespaceOrTypeSymbol)context.ContainingSymbol.ContainingSymbol).GetMembers();
             var primaryCtor = symbols.FirstOrDefault(x => x is IMethodSymbol && IsPrimaryCtor(x));
-            var primaryCtorParameters = primaryCtor?.GetParameters();
-            var relevantSymbols = new List<ISymbol>();
-            foreach (var relevant in symbols.Where(x => x is IPropertySymbol or IFieldSymbol))
-            {
-                if (primaryCtorParameters is not null
-                    && primaryCtorParameters.Any()
-                    && TryGetAssignedValue(relevant, out var assignedValue)
-                    && primaryCtorParameters.Any(x => x.Name == assignedValue))
-                {
-                    primaryCtorParameters = primaryCtorParameters.Where(x => x.Name != assignedValue).ToImmutableArray();
-                }
-                else
-                {
-                    relevantSymbols.Add(relevant);
-                }
-            }
-            return primaryCtor is null ? relevantSymbols : relevantSymbols.Concat(primaryCtorParameters).ToList();
-        }
-
-        private static bool TryGetAssignedValue(ISymbol symbol, out string assignedValue)
-        {
-            assignedValue = string.Empty;
-            if (symbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is { } syntax)
-            {
-                if (syntax is VariableDeclaratorSyntax variableDeclarator && variableDeclarator.Initializer is { Value: IdentifierNameSyntax { } fieldValue })
-                {
-                    assignedValue = fieldValue.Identifier.ValueText;
-                    return true;
-                }
-                else if (syntax is PropertyDeclarationSyntax propertyDeclaration && propertyDeclaration.Initializer is { Value: IdentifierNameSyntax { } propertyValue })
-                {
-                    assignedValue = propertyValue.Identifier.ValueText;
-                    return true;
-                }
-            }
-            return false;
+            var relevantSymbols = symbols.Where(x => x is IPropertySymbol or IFieldSymbol).ToList();
+            return primaryCtor is null ? relevantSymbols : relevantSymbols.Concat(primaryCtor.GetParameters()).ToList();
         }
 
         private static bool IsPrimaryCtor(ISymbol methodSymbol) =>
