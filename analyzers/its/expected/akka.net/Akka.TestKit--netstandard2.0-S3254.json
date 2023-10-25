@@ -2,6 +2,19 @@
 "issues":  [
 {
 "id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'recurseInnerExceptions'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/ErrorFilter.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  55,
+"endLine":  29,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'timeout'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L89",

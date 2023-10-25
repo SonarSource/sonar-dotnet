@@ -444,6 +444,19 @@
 },
 {
 "id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'replayMax'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/PersistentActor.cs#L85",
+"region":  {
+"startLine":  85,
+"startColumn":  119,
+"endLine":  85,
+"endColumn":  132
+}
+}
+},
+{
+"id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/LocalSnapshotStore.cs#L54",

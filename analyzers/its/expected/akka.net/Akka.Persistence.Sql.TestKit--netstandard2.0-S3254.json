@@ -25,6 +25,19 @@
 "endColumn":  47
 }
 }
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'actorSystemName'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.TestKit/SqlJournalConnectionFailureSpec.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  28,
+"endLine":  22,
+"endColumn":  32
+}
+}
 }
 ]
 }
