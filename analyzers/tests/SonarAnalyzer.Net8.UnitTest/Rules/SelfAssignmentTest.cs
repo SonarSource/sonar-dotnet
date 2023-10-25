@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 
-namespace SonarAnalyzer.UnitTest.Rules;
+namespace SonarAnalyzer.Net8.UnitTest.Rules;
 
 [TestClass]
 public class SelfAssignmentTest

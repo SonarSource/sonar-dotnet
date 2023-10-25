@@ -1,4 +1,4 @@
-﻿namespace SonarAnalyzer.UnitTest.TestCases;
+﻿namespace SonarAnalyzer.Net8.UnitTest.TestCases;
 
 class WithInlineArrays
 {
