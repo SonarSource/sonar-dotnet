@@ -49,6 +49,7 @@ namespace SonarAnalyzer.Rules
                 "FILE",
                 "PATH",
                 "URI",
+                "URIS",
                 "URL",
                 "URN",
                 "STREAM"

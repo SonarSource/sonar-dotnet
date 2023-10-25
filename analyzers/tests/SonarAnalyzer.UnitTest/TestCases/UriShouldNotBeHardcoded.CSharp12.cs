@@ -41,9 +41,9 @@ class Repro_8146
 {
     void Method()
     {
-        IList<string> uris1 = new[] { "C:/test.txt" }; // FN
-        IList<string> uris2 = ["C:/test.txt"]; // FN
-        string[][] urisMatrix1 = [["C:/test.txt"]]; // FN
-        IDictionary<string, string> urisDict = new Dictionary<string, string> { ["a"] = "C:/test.txt" }; // FN
+        IList<string> uris1 = new[] { "C:/test.txt" }; // Noncompliant
+        IList<string> uris2 = ["C:/test.txt"]; // Noncompliant
+        string[][] urisMatrix1 = [["C:/test.txt"]]; // Noncompliant
+        IDictionary<string, string> urisDict = new Dictionary<string, string> { ["a"] = "C:/test.txt" }; // Noncompliant
     }
 }
