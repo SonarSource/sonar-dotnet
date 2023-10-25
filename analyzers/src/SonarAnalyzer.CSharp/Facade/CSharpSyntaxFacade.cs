@@ -26,17 +26,16 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
         SyntaxFactory.AreEquivalent(firstNode, secondNode);
 
     public override IEnumerable<SyntaxNode> ArgumentExpressions(SyntaxNode node) =>
-        node switch
-        {
-            ObjectCreationExpressionSyntax creation => creation.ArgumentList?.Arguments.Select(x => x.Expression) ?? Enumerable.Empty<SyntaxNode>(),
-            null => Enumerable.Empty<SyntaxNode>(),
-            var _ when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(node)
-                => ((ImplicitObjectCreationExpressionSyntaxWrapper)node).ArgumentList?.Arguments.Select(x => x.Expression) ?? Enumerable.Empty<SyntaxNode>(),
-            _ => throw InvalidOperation(node, nameof(ArgumentExpressions))
-        };
+        ArgumentList(node)?.OfType<ArgumentSyntax>().Select(x => x.Expression) ?? Enumerable.Empty<SyntaxNode>();
+
+    public override IReadOnlyList<SyntaxNode> ArgumentList(SyntaxNode node) =>
+        node.ArgumentList()?.Arguments;
 
     public override int? ArgumentIndex(SyntaxNode argument) =>
         Cast<ArgumentSyntax>(argument).GetArgumentIndex();
+
+    public override SyntaxToken? ArgumentNameColon(SyntaxNode argument) =>
+        (argument as ArgumentSyntax)?.NameColon?.Name.Identifier;
 
     public override SyntaxNode AssignmentLeft(SyntaxNode assignment) =>
         Cast<AssignmentExpressionSyntax>(assignment).Left;
@@ -126,6 +125,7 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
         node switch
         {
             ArrowExpressionClauseSyntax x => x.Expression,
+            ArgumentSyntax x => x.Expression,
             AttributeArgumentSyntax x => x.Expression,
             InterpolationSyntax x => x.Expression,
             InvocationExpressionSyntax x => x.Expression,

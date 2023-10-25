@@ -56,23 +56,13 @@ internal sealed class CSharpFacade : ILanguageFacade<SyntaxKind>
         {
             null => null,
             AttributeSyntax x => new CSharpAttributeParameterLookup(x, methodSymbol),
-            _ => new CSharpMethodParameterLookup(GetArgumentList(invocation), methodSymbol),
+            _ => new CSharpMethodParameterLookup(invocation.ArgumentList(), methodSymbol),
         };
 
     public IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, SemanticModel semanticModel) =>
-        invocation != null ? new CSharpMethodParameterLookup(GetArgumentList(invocation), semanticModel) : null;
-
-    private static ArgumentListSyntax GetArgumentList(SyntaxNode invocation) =>
-        invocation switch
-        {
-            ArgumentListSyntax x => x,
-            ObjectCreationExpressionSyntax x => x.ArgumentList,
-            InvocationExpressionSyntax x => x.ArgumentList,
-            _ when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(invocation) =>
-                ((ImplicitObjectCreationExpressionSyntaxWrapper)invocation).ArgumentList,
-            ConstructorInitializerSyntax x => x.ArgumentList,
-            _ => throw new ArgumentException($"{invocation.GetType()} does not contain an ArgumentList.", nameof(invocation)),
-        };
+        invocation?.ArgumentList() is { } argumentList
+            ? new CSharpMethodParameterLookup(argumentList, semanticModel)
+            : null;
 
     public string GetName(SyntaxNode expression) =>
         expression.GetName();

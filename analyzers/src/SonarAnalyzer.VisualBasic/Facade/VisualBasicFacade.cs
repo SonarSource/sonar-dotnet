@@ -51,20 +51,14 @@ internal sealed class VisualBasicFacade : ILanguageFacade<SyntaxKind>
         node.FindConstantValue(model);
 
     public IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, IMethodSymbol methodSymbol) =>
-        invocation != null ? new VisualBasicMethodParameterLookup(GetArgumentList(invocation), methodSymbol) : null;
+        invocation?.ArgumentList() is { } argumentList
+            ? new VisualBasicMethodParameterLookup(argumentList, methodSymbol)
+            : null;
 
     public IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, SemanticModel semanticModel) =>
-        invocation != null ? new VisualBasicMethodParameterLookup(GetArgumentList(invocation), semanticModel) : null;
-
-    private static ArgumentListSyntax GetArgumentList(SyntaxNode invocation) =>
-        invocation switch
-        {
-            ArgumentListSyntax x => x,
-            AttributeSyntax x => x.ArgumentList,
-            ObjectCreationExpressionSyntax x => x.ArgumentList,
-            InvocationExpressionSyntax x => x.ArgumentList,
-            _ => throw new ArgumentException($"{invocation.GetType()} does not contain an ArgumentList.", nameof(invocation)),
-        };
+        invocation?.ArgumentList() is { } argumentList
+            ? new VisualBasicMethodParameterLookup(argumentList, semanticModel)
+            : null;
 
     public string GetName(SyntaxNode expression) =>
         expression.GetName();

@@ -131,4 +131,66 @@ public class SyntaxFacadeTest
     [DataRow("A.B?.C?.D", ".D")]
     public void RemoveConditionalAccess_SimpleInvocation_CS(string invocation, string expected) =>
         cs.RemoveConditionalAccess(CS.SyntaxFactory.ParseExpression(invocation)).ToString().Should().Be(expected);
+
+    [TestMethod]
+    public void ArgumentNameColon_VB_SimpleNameWithNameColonEquals()
+    {
+        var expression = VB.SyntaxFactory.LiteralExpression(VB.SyntaxKind.TrueLiteralExpression, VB.SyntaxFactory.Token(VB.SyntaxKind.TrueKeyword));
+        var argument = VB.SyntaxFactory.SimpleArgument(VB.SyntaxFactory.NameColonEquals(VB.SyntaxFactory.IdentifierName("a")), expression);
+        vb.ArgumentNameColon(argument).Should().BeOfType<SyntaxToken>().Subject.ValueText.Should().Be("a");
+    }
+
+    [TestMethod]
+    public void ArgumentNameColon_VB_SimpleNameWithoutNameColonEquals()
+    {
+        var expression = VB.SyntaxFactory.LiteralExpression(VB.SyntaxKind.TrueLiteralExpression, VB.SyntaxFactory.Token(VB.SyntaxKind.TrueKeyword));
+        var argument = VB.SyntaxFactory.SimpleArgument(expression);
+        vb.ArgumentNameColon(argument).Should().BeNull();
+    }
+
+    [TestMethod]
+    public void ArgumentNameColon_VB_OmittedArgument()
+    {
+        var argument = VB.SyntaxFactory.OmittedArgument();
+        vb.ArgumentNameColon(argument).Should().BeNull();
+    }
+
+    [TestMethod]
+    public void ArgumentNameColon_VB_RangeArgument()
+    {
+        var literal1 = VB.SyntaxFactory.LiteralExpression(VB.SyntaxKind.NumericLiteralExpression, VB.SyntaxFactory.Literal(1));
+        var literal2 = literal1.WithToken(VB.SyntaxFactory.Literal(2));
+        var argument = VB.SyntaxFactory.RangeArgument(literal1, literal2);
+        vb.ArgumentNameColon(argument).Should().BeNull();
+    }
+
+    [TestMethod]
+    public void ArgumentNameColon_VB_UnsupportedSyntaxKind()
+    {
+        var expression = VB.SyntaxFactory.LiteralExpression(VB.SyntaxKind.TrueLiteralExpression, VB.SyntaxFactory.Token(VB.SyntaxKind.TrueKeyword));
+        vb.ArgumentNameColon(expression).Should().BeNull();
+    }
+
+    [TestMethod]
+    public void ArgumentNameColon_CS_WithNameColon()
+    {
+        var expression = CS.SyntaxFactory.LiteralExpression(CS.SyntaxKind.TrueLiteralExpression);
+        var argument = CS.SyntaxFactory.Argument(CS.SyntaxFactory.NameColon(CS.SyntaxFactory.IdentifierName("a")), CS.SyntaxFactory.Token(CS.SyntaxKind.None), expression);
+        cs.ArgumentNameColon(argument).Should().BeOfType<SyntaxToken>().Subject.ValueText.Should().Be("a");
+    }
+
+    [TestMethod]
+    public void ArgumentNameColon_CS_WithoutNameColon()
+    {
+        var expression = CS.SyntaxFactory.LiteralExpression(CS.SyntaxKind.TrueLiteralExpression);
+        var argument = CS.SyntaxFactory.Argument(expression);
+        cs.ArgumentNameColon(argument).Should().BeNull();
+    }
+
+    [TestMethod]
+    public void ArgumentNameColon_CS_UnsupportedSyntaxKind()
+    {
+        var expression = CS.SyntaxFactory.LiteralExpression(CS.SyntaxKind.TrueLiteralExpression, CS.SyntaxFactory.Token(CS.SyntaxKind.TrueKeyword));
+        cs.ArgumentNameColon(expression).Should().BeNull();
+    }
 }

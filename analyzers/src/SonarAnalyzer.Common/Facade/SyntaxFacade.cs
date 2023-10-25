@@ -26,6 +26,8 @@ public abstract class SyntaxFacade<TSyntaxKind>
     public abstract bool AreEquivalent(SyntaxNode firstNode, SyntaxNode secondNode);
     public abstract IEnumerable<SyntaxNode> ArgumentExpressions(SyntaxNode node);
     public abstract int? ArgumentIndex(SyntaxNode argument);
+    public abstract IReadOnlyList<SyntaxNode> ArgumentList(SyntaxNode node);
+    public abstract SyntaxToken? ArgumentNameColon(SyntaxNode argument);
     public abstract SyntaxNode AssignmentLeft(SyntaxNode assignment);
     public abstract SyntaxNode AssignmentRight(SyntaxNode assignment);
     public abstract ImmutableArray<SyntaxNode> AssignmentTargets(SyntaxNode assignment);

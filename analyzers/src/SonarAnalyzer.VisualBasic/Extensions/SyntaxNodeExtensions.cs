@@ -100,6 +100,22 @@ namespace SonarAnalyzer.Extensions
                 _ => null,
             };
 
+        // based on kind="ArgumentList" in https://github.com/dotnet/roslyn/blob/main/src/Compilers/VisualBasic/Portable/Syntax/Syntax.xml
+        public static ArgumentListSyntax ArgumentList(this SyntaxNode node) =>
+            node switch
+            {
+                ArrayCreationExpressionSyntax arrayCreation => arrayCreation.ArrayBounds,
+                AttributeSyntax attribute => attribute.ArgumentList,
+                InvocationExpressionSyntax invocation => invocation.ArgumentList,
+                MidExpressionSyntax mid => mid.ArgumentList,
+                ModifiedIdentifierSyntax modified => modified.ArrayBounds,
+                ObjectCreationExpressionSyntax creation => creation.ArgumentList,
+                RaiseEventStatementSyntax raise => raise.ArgumentList,
+                RedimClauseSyntax reDim => reDim.ArrayBounds,
+                null => null,
+                _ => throw new InvalidOperationException($"The {nameof(node)} of kind {node.Kind()} does not have an {nameof(ArgumentList)}."),
+            };
+
         /// <summary>
         /// Returns the left hand side of a conditional access expression. Returns c in case like a?.b?[0].c?.d.e?.f if d is passed.
         /// </summary>

@@ -116,10 +116,10 @@ public class CSharpFacadeTests
             """;
         var (tree, model) = TestHelper.CompileCS(code);
         var root = tree.GetRoot();
-        var invocation = root.DescendantNodes().OfType<ArgumentListSyntax>().First();
+        var argumentList = root.DescendantNodes().OfType<ArgumentListSyntax>().First();
         var method = model.GetDeclaredSymbol(root.DescendantNodes().OfType<MethodDeclarationSyntax>().First());
-        var actual = sut.MethodParameterLookup(invocation, method);
-        actual.Should().NotBeNull().And.BeOfType<CSharpMethodParameterLookup>();
+        var actual = () => sut.MethodParameterLookup(argumentList, method);
+        actual.Should().Throw<InvalidOperationException>();
     }
 
     [TestMethod]
@@ -138,7 +138,7 @@ public class CSharpFacadeTests
         var methodDeclaration = root.DescendantNodes().OfType<MethodDeclarationSyntax>().First();
         var method = model.GetDeclaredSymbol(methodDeclaration);
         var actual = () => sut.MethodParameterLookup(methodDeclaration, method); // MethodDeclarationSyntax passed instead of invocation
-        actual.Should().Throw<ArgumentException>().Which.Message.Should().StartWith("Microsoft.CodeAnalysis.CSharp.Syntax.MethodDeclarationSyntax does not contain an ArgumentList.");
+        actual.Should().Throw<InvalidOperationException>().Which.Message.Should().StartWith("The node of kind MethodDeclaration does not have an ArgumentList.");
     }
 
     [TestMethod]

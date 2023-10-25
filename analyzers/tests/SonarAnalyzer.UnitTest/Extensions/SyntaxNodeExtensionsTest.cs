@@ -734,6 +734,209 @@ public class X
         }
 
         [DataTestMethod]
+        [DataRow("$$M(1)$$;")]
+        [DataRow("_ = $$new C(1)$$;")]
+        [DataRow("C c = $$new(1)$$;")]
+        public void ArgumentList_CS_InvocationObjectCreation(string statement)
+        {
+            var code = $$"""
+                public class C(int p) {    
+                    public void M(int p) {
+                        {{statement}}
+                    }
+                }
+                """;
+            var node = NodeBetweenMarkers(code, LanguageNames.CSharp);
+            var argumentList = ExtensionsCS.ArgumentList(node).Arguments;
+            var argument = argumentList.Should().ContainSingle().Which;
+            (argument is { Expression: SyntaxCS.LiteralExpressionSyntax { Token.ValueText: "1" } }).Should().BeTrue();
+        }
+
+        [DataTestMethod]
+        [DataRow("base")]
+        [DataRow("this")]
+        public void ArgumentList_CS_ConstructorInitializer(string keyword)
+        {
+            var code = $$"""
+                public class Base(int p);
+
+                public class C: Base
+                {
+                    public C(): $${{keyword}}(1)$$ { }
+                    public C(int  p): base(p) { }   
+                }
+                
+                """;
+            var node = NodeBetweenMarkers(code, LanguageNames.CSharp);
+            var argumentList = ExtensionsCS.ArgumentList(node).Arguments;
+            var argument = argumentList.Should().ContainSingle().Which;
+            (argument is { Expression: SyntaxCS.LiteralExpressionSyntax { Token.ValueText: "1" } }).Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void ArgumentList_CS_PrimaryConstructorBaseType()
+        {
+            var code = """
+                public class Base(int p);
+                public class Derived(int p): $$Base(1)$$;
+                """;
+            var node = NodeBetweenMarkers(code, LanguageNames.CSharp);
+            var argumentList = ExtensionsCS.ArgumentList(node).Arguments;
+            var argument = argumentList.Should().ContainSingle().Which;
+            (argument is { Expression: SyntaxCS.LiteralExpressionSyntax { Token.ValueText: "1" } }).Should().BeTrue();
+        }
+
+        [DataTestMethod]
+        [DataRow("_ = $$new System.Collections.Generic.List<int> { 0 }$$;")]
+        public void ArgumentList_CS_NoList(string statement)
+        {
+            var code = $$"""
+                public class C {    
+                    public void M() {
+                        {{statement}}
+                    }
+                }
+                """;
+            var node = NodeBetweenMarkers(code, LanguageNames.CSharp);
+            ExtensionsCS.ArgumentList(node).Should().BeNull();
+        }
+
+        [TestMethod]
+        public void ArgumentList_CS_Null() =>
+            ExtensionsCS.ArgumentList(null).Should().BeNull();
+
+        [DataTestMethod]
+        [DataRow("_ = $$new int[] { 1 }$$;")]
+        [DataRow("_ = $$new { A = 1 }$$;")]
+        public void ArgumentList_CS_UnsupportedNodeKinds(string statement)
+        {
+            var code = $$"""
+                public class C {    
+                    public void M() {
+                        {{statement}}
+                    }
+                }
+                """;
+            var node = NodeBetweenMarkers(code, LanguageNames.CSharp);
+            var sut = () => ExtensionsCS.ArgumentList(node);
+            sut.Should().Throw<InvalidOperationException>();
+        }
+
+        [DataTestMethod]
+        [DataRow("$$M(1)$$")]
+        [DataRow("Call $$M(1)$$")]
+        [DataRow("Dim c = $$New C(1)$$")]
+        [DataRow("$$RaiseEvent SomeEvent(1)$$")]
+        public void ArgumentList_VB_Invocations(string statement)
+        {
+            var code = $$"""
+                Imports System
+
+                Public Class C
+                    Public Event SomeEvent As Action(Of Integer)
+
+                    Public Sub New(p As Integer)
+                    End Sub
+
+                    Public Sub M(p As Integer)
+                        Dim s As String = "Test"
+                        {{statement}}
+                    End Sub
+                End Class
+                """;
+            var node = NodeBetweenMarkers(code, LanguageNames.VisualBasic, getInnermostNodeForTie: true);
+            var argumentList = ExtensionsVB.ArgumentList(node);
+            var argument = argumentList.Arguments.Should().ContainSingle().Which;
+            (argument.GetExpression() is SyntaxVB.LiteralExpressionSyntax { Token.ValueText: "1" }).Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void ArgumentList_VB_Mid()
+        {
+            var code = $$"""
+                Public Class C
+                    Public Sub M()
+                        Dim s As String = "Test"
+                        $$Mid(s, 1)$$ = "Test"
+                    End Sub
+                End Class
+                """;
+            var node = NodeBetweenMarkers(code, LanguageNames.VisualBasic, getInnermostNodeForTie: true);
+            var argumentList = ExtensionsVB.ArgumentList(node);
+            argumentList.Arguments.Should().SatisfyRespectively(
+                a => (a.GetExpression() is SyntaxVB.IdentifierNameSyntax { Identifier.ValueText: "s" }).Should().BeTrue(),
+                a => (a.GetExpression() is SyntaxVB.LiteralExpressionSyntax { Token.ValueText: "1" }).Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void ArgumentList_VB_Attribute()
+        {
+            var code = """
+                <$$System.Obsolete("1")$$>
+                Public Class C
+                End Class
+                """;
+            var node = NodeBetweenMarkers(code, LanguageNames.VisualBasic, getInnermostNodeForTie: true);
+            var argumentList = ExtensionsVB.ArgumentList(node);
+            var argument = argumentList.Arguments.Should().ContainSingle().Which;
+            (argument.GetExpression() is SyntaxVB.LiteralExpressionSyntax { Token.ValueText: "1" }).Should().BeTrue();
+        }
+
+        [DataTestMethod]
+        [DataRow("Dim $$i(1)$$ As Integer")]
+        [DataRow("Dim sales()() As Double = $$New Double(1)() { }$$")]
+        [DataRow("ReDim $$arr(1)$$")]
+        public void ArgumentList_VB_ArrayBounds(string statement)
+        {
+            var code = $$"""
+                Public Class C
+                    Public Sub M()
+                        Dim arr(0) As Integer
+                        {{statement}}
+                    End Sub
+                End Class
+                """;
+            var node = NodeBetweenMarkers(code, LanguageNames.VisualBasic, getInnermostNodeForTie: true);
+            var argumentList = ExtensionsVB.ArgumentList(node);
+            var argument = argumentList.Arguments.Should().ContainSingle().Which;
+            (argument.GetExpression() is SyntaxVB.LiteralExpressionSyntax { Token.ValueText: "1" }).Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void ArgumentList_VB_Call()
+        {
+            var code = $$"""
+                Public Class C
+                    Public Sub M()
+                        Call $$M$$
+                    End Sub
+                End Class
+                """;
+            var node = NodeBetweenMarkers(code, LanguageNames.VisualBasic, getInnermostNodeForTie: false);
+            ExtensionsVB.ArgumentList(node).Should().BeNull();
+        }
+
+        [TestMethod]
+        public void ArgumentList_VB_Null() =>
+            ExtensionsVB.ArgumentList(null).Should().BeNull();
+
+        [DataTestMethod]
+        [DataRow("$$Dim a = 1$$")]
+        public void ArgumentList_VB_UnsupportedNodeKinds(string statement)
+        {
+            var code = $$"""
+                Public Class C
+                    Public Sub M()
+                        {{statement}}
+                    End Sub
+                End Class
+                """;
+            var node = NodeBetweenMarkers(code, LanguageNames.VisualBasic, getInnermostNodeForTie: true);
+            var sut = () => ExtensionsVB.ArgumentList(node);
+            sut.Should().Throw<InvalidOperationException>();
+        }
+
+        [DataTestMethod]
         [DataRow("""public C(int p) { }""")]
         [DataRow("""public void M(int p) { }""")]
         [DataRow("""public static C operator + (C p) => default;""")]
@@ -853,6 +1056,8 @@ public class X
         [DataRow("""record struct $$T$$ { }""", "T")]                                 // BaseTypeDeclarationSyntax
         [DataRow("""enum $$T$$ { }""", "T")]                                          // BaseTypeDeclarationSyntax
         [DataRow("""$$Test() { }$$""", "Test")]                                       // ConstructorDeclarationSyntax
+        [DataRow("""Test() : $$this(1)$$ { }""", "this")]                             // ConstructorInitializerSyntax
+        [DataRow("""Test() : $$base()$$ { }""", "base")]                              // ConstructorInitializerSyntax
         [DataRow("""$$public static implicit operator int(Test t) => 1;$$""", "int")] // ConversionOperatorDeclarationSyntax
         [DataRow("""$$delegate void D();$$""", "D")]                                  // DelegateDeclarationSyntax
         [DataRow("""$$~Test() { }$$""", "Test")]                                      // DestructorDeclarationSyntax
@@ -883,6 +1088,7 @@ public class X
         [DataRow("""void M<T>() where $$T : class$$ { }""", "T")]                     // TypeParameterConstraintClauseSyntax
         [DataRow("""void M<$$T$$>() { }""", "T")]                                     // TypeParameterSyntax
         [DataRow("""int $$i$$;""", "i")]                                              // VariableDeclaratorSyntax
+        [DataRow("""object o = $$new()$$;""", "new")]                                 // ImplicitObjectCreationExpressionSyntax
         [DataRow("""void M(int p) { $$ref int$$ i = ref p; }""", "int")]              // RefTypeSyntax
         public void GetIdentifier_Members(string member, string expected)
         {
@@ -893,6 +1099,7 @@ public class X
                 unsafe class Test
                 {
                     static Func<int> Fun() => default;
+                    public Test(int i) { }
                     {{member}}
                 }
                 """, LanguageNames.CSharp);
@@ -930,14 +1137,38 @@ public class X
             }
         }
 
-        private static SyntaxNode NodeBetweenMarkers(string code, string language)
+        [DataTestMethod]
+        [DataRow(""" : $$Base(i)$$""", "Base")]       // NamespaceDeclarationSyntax
+        [DataRow(""" : $$Test.Base(i)$$""", "Base")]  // NamespaceDeclarationSyntax
+        public void GetIdentifier_PrimaryConstructor(string baseType, string expected)
+        {
+            var node = NodeBetweenMarkers($$"""
+                namespace Test;
+                public class Base(int i)
+                {
+                }
+                public class Derived(int i) {{baseType}} { }
+                """, LanguageNames.CSharp);
+            var actual = ExtensionsCS.GetIdentifier(node);
+            if (expected is null)
+            {
+                actual.Should().BeNull();
+            }
+            else
+            {
+                actual.Should().NotBeNull();
+                actual.Value.ValueText.Should().Be(expected);
+            }
+        }
+
+        private static SyntaxNode NodeBetweenMarkers(string code, string language, bool getInnermostNodeForTie = false)
         {
             var position = code.IndexOf("$$");
             var lastPosition = code.LastIndexOf("$$");
             var length = lastPosition == position ? 0 : lastPosition - position - "$$".Length;
             code = code.Replace("$$", string.Empty);
             var (tree, _) = IsCSharp() ? TestHelper.CompileCS(code) : TestHelper.CompileVB(code);
-            var node = tree.GetRoot().FindNode(new TextSpan(position, length));
+            var node = tree.GetRoot().FindNode(new TextSpan(position, length), getInnermostNodeForTie: getInnermostNodeForTie);
             return node;
 
             bool IsCSharp() => language == LanguageNames.CSharp;

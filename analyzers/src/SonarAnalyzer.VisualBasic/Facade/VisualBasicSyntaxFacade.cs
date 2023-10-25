@@ -26,15 +26,16 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
         SyntaxFactory.AreEquivalent(firstNode, secondNode);
 
     public override IEnumerable<SyntaxNode> ArgumentExpressions(SyntaxNode node) =>
-        node switch
-        {
-            ObjectCreationExpressionSyntax creation => creation.ArgumentList?.Arguments.Select(x => x.GetExpression()) ?? Enumerable.Empty<SyntaxNode>(),
-            null => Enumerable.Empty<SyntaxNode>(),
-            _ => throw InvalidOperation(node, nameof(ArgumentExpressions))
-        };
+        ArgumentList(node)?.OfType<ArgumentSyntax>().Select(x => x.GetExpression()).WhereNotNull() ?? Enumerable.Empty<SyntaxNode>();
+
+    public override IReadOnlyList<SyntaxNode> ArgumentList(SyntaxNode node) =>
+        node.ArgumentList()?.Arguments;
 
     public override int? ArgumentIndex(SyntaxNode argument) =>
         Cast<ArgumentSyntax>(argument).GetArgumentIndex();
+
+    public override SyntaxToken? ArgumentNameColon(SyntaxNode argument) =>
+        (argument as SimpleArgumentSyntax)?.NameColonEquals?.Name.Identifier;
 
     public override SyntaxNode AssignmentLeft(SyntaxNode assignment) =>
         Cast<AssignmentStatementSyntax>(assignment).Left;
