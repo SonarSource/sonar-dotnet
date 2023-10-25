@@ -53,8 +53,11 @@ namespace SonarAnalyzer.Rules
                 "URI",
                 "URIS",
                 "URL",
+                "URLS",
                 "URN",
-                "STREAM"
+                "URNS",
+                "STREAM",
+                "STREAMS"
             };
 
         protected override string MessageFormat => "{0}";
