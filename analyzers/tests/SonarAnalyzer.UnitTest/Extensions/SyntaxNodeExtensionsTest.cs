@@ -1056,6 +1056,8 @@ public class X
         [DataRow("""record struct $$T$$ { }""", "T")]                                 // BaseTypeDeclarationSyntax
         [DataRow("""enum $$T$$ { }""", "T")]                                          // BaseTypeDeclarationSyntax
         [DataRow("""$$Test() { }$$""", "Test")]                                       // ConstructorDeclarationSyntax
+        [DataRow("""Test() : $$this(1)$$ { }""", "this")]                             // ConstructorInitializerSyntax
+        [DataRow("""Test() : $$base()$$ { }""", "base")]                              // ConstructorInitializerSyntax
         [DataRow("""$$public static implicit operator int(Test t) => 1;$$""", "int")] // ConversionOperatorDeclarationSyntax
         [DataRow("""$$delegate void D();$$""", "D")]                                  // DelegateDeclarationSyntax
         [DataRow("""$$~Test() { }$$""", "Test")]                                      // DestructorDeclarationSyntax
@@ -1086,6 +1088,7 @@ public class X
         [DataRow("""void M<T>() where $$T : class$$ { }""", "T")]                     // TypeParameterConstraintClauseSyntax
         [DataRow("""void M<$$T$$>() { }""", "T")]                                     // TypeParameterSyntax
         [DataRow("""int $$i$$;""", "i")]                                              // VariableDeclaratorSyntax
+        [DataRow("""object o = $$new()$$;""", "new")]                                 // ImplicitObjectCreationExpressionSyntax
         [DataRow("""void M(int p) { $$ref int$$ i = ref p; }""", "int")]              // RefTypeSyntax
         public void GetIdentifier_Members(string member, string expected)
         {
@@ -1096,6 +1099,7 @@ public class X
                 unsafe class Test
                 {
                     static Func<int> Fun() => default;
+                    public Test(int i) { }
                     {{member}}
                 }
                 """, LanguageNames.CSharp);
@@ -1120,6 +1124,30 @@ public class X
         {
             var node = NodeBetweenMarkers($$"""
                 {{member}}
+                """, LanguageNames.CSharp);
+            var actual = ExtensionsCS.GetIdentifier(node);
+            if (expected is null)
+            {
+                actual.Should().BeNull();
+            }
+            else
+            {
+                actual.Should().NotBeNull();
+                actual.Value.ValueText.Should().Be(expected);
+            }
+        }
+
+        [DataTestMethod]
+        [DataRow(""" : $$Base(i)$$""", "Base")]       // NamespaceDeclarationSyntax
+        [DataRow(""" : $$Test.Base(i)$$""", "Base")]  // NamespaceDeclarationSyntax
+        public void GetIdentifier_PrimaryConstructor(string baseType, string expected)
+        {
+            var node = NodeBetweenMarkers($$"""
+                namespace Test;
+                public class Base(int i)
+                {
+                }
+                public class Derived(int i) {{baseType}} { }
                 """, LanguageNames.CSharp);
             var actual = ExtensionsCS.GetIdentifier(node);
             if (expected is null)

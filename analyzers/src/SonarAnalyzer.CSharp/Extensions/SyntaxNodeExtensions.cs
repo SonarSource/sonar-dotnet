@@ -146,6 +146,7 @@ namespace SonarAnalyzer.Extensions
                 AttributeSyntax { Name: { } name } => GetIdentifier(name),
                 BaseTypeDeclarationSyntax { Identifier: var identifier } => identifier,
                 ConstructorDeclarationSyntax { Identifier: var identifier } => identifier,
+                ConstructorInitializerSyntax { ThisOrBaseKeyword: var keyword } => keyword,
                 ConversionOperatorDeclarationSyntax { Type: { } type } => GetIdentifier(type),
                 DelegateDeclarationSyntax { Identifier: var identifier } => identifier,
                 DestructorDeclarationSyntax { Identifier: var identifier } => identifier,
@@ -177,8 +178,11 @@ namespace SonarAnalyzer.Extensions
                 PostfixUnaryExpressionSyntax { Operand: { } operand } => GetIdentifier(operand),
                 UsingDirectiveSyntax { Alias.Name: { } name } => GetIdentifier(name),
                 VariableDeclaratorSyntax { Identifier: var identifier } => identifier,
+                { } implicitNew when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(implicitNew) => ((ImplicitObjectCreationExpressionSyntaxWrapper)implicitNew).NewKeyword,
                 { } fileScoped when FileScopedNamespaceDeclarationSyntaxWrapper.IsInstance(fileScoped)
                     && ((FileScopedNamespaceDeclarationSyntaxWrapper)fileScoped).Name is { } name => GetIdentifier(name),
+                { } primary when PrimaryConstructorBaseTypeSyntaxWrapper.IsInstance(primary)
+                    && ((PrimaryConstructorBaseTypeSyntaxWrapper)primary).Type is { } type => GetIdentifier(type),
                 { } refType when RefTypeSyntaxWrapper.IsInstance(refType) => GetIdentifier(((RefTypeSyntaxWrapper)refType).Type),
                 _ => null
             };

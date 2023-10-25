@@ -34,22 +34,5 @@ namespace SonarAnalyzer.Rules.CSharp
             };
 
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
-
-        protected override Location PrimaryLocation(SyntaxNode node) =>
-            node switch
-            {
-                InvocationExpressionSyntax { Expression: MemberAccessExpressionSyntax { Name: { } name } } => name.GetLocation(), // A.B.C() -> C
-                InvocationExpressionSyntax { Expression: { } expression } => expression.GetLocation(),                            // A() -> A
-                ObjectCreationExpressionSyntax { Type: QualifiedNameSyntax { Right: { } right } } => right.GetLocation(),         // new A.B.C() -> C
-                ObjectCreationExpressionSyntax { Type: { } type } => type.GetLocation(),                                          // new A() -> A
-                ConstructorInitializerSyntax { ThisOrBaseKeyword: { } keyword } => keyword.GetLocation(),                         // this() -> this
-                _ when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(node) =>
-                    ((ImplicitObjectCreationExpressionSyntaxWrapper)node).NewKeyword.GetLocation(),                               // new() -> new
-                _ when PrimaryConstructorBaseTypeSyntaxWrapper.IsInstance(node) && ((PrimaryConstructorBaseTypeSyntaxWrapper)node).Type is { } type =>
-                    type is QualifiedNameSyntax { Right: { } right }
-                        ? right.GetLocation()                                                                                     // class A: B.C() -> C
-                        : type.GetLocation(),                                                                                     // class A: B() -> B
-                _ => base.PrimaryLocation(node),
-            };
     }
 }
