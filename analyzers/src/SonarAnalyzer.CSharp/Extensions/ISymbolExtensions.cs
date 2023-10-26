@@ -20,7 +20,6 @@
 
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Sonar;
-using System.Linq;
 
 namespace SonarAnalyzer.Extensions
 {
