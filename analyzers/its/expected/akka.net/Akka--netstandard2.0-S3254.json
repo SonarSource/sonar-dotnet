@@ -2,6 +2,32 @@
 "issues":  [
 {
 "id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'failure'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.cs#L206",
+"region":  {
+"startLine":  206,
+"startColumn":  92,
+"endLine":  206,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'failure'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.cs#L215",
+"region":  {
+"startLine":  215,
+"startColumn":  44,
+"endLine":  215,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'timeout'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.FaultHandling.cs#L153",
@@ -23,6 +49,32 @@
 "startColumn":  31,
 "endLine":  186,
 "endColumn":  35
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'wildCardFanOut'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorSelection.cs#L122",
+"region":  {
+"startLine":  122,
+"startColumn":  58,
+"endLine":  122,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'initialValue'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L276",
+"region":  {
+"startLine":  276,
+"startColumn":  77,
+"endLine":  276,
+"endColumn":  82
 }
 }
 },
@@ -140,6 +192,19 @@
 "startColumn":  120,
 "endLine":  250,
 "endColumn":  125
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'startAsOn'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/RootGuardianSupervisor.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  55,
+"endLine":  25,
+"endColumn":  60
 }
 }
 },
@@ -556,6 +621,58 @@
 "startColumn":  94,
 "endLine":  152,
 "endColumn":  98
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'loggingEnabled'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/SupervisorStrategy.cs#L318",
+"region":  {
+"startLine":  318,
+"startColumn":  46,
+"endLine":  318,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'loggingEnabled'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/SupervisorStrategy.cs#L337",
+"region":  {
+"startLine":  337,
+"startColumn":  37,
+"endLine":  337,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'loggingEnabled'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/SupervisorStrategy.cs#L586",
+"region":  {
+"startLine":  586,
+"startColumn":  46,
+"endLine":  586,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'loggingEnabled'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/SupervisorStrategy.cs#L595",
+"region":  {
+"startLine":  595,
+"startColumn":  37,
+"endLine":  595,
+"endColumn":  41
 }
 }
 },
@@ -1133,6 +1250,19 @@
 },
 {
 "id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'usePoolDispatcher'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Broadcast.cs#L55",
+"region":  {
+"startLine":  55,
+"startColumn":  13,
+"endLine":  55,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Broadcast.cs#L64",
@@ -1141,6 +1271,19 @@
 "startColumn":  67,
 "endLine":  64,
 "endColumn":  68
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'usePoolDispatcher'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ConsistentHashRouter.cs#L337",
+"region":  {
+"startLine":  337,
+"startColumn":  13,
+"endLine":  337,
+"endColumn":  18
 }
 }
 },
@@ -1167,6 +1310,32 @@
 "startColumn":  72,
 "endLine":  356,
 "endColumn":  73
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'usePoolDispatcher'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ConsistentHashRouter.cs#L367",
+"region":  {
+"startLine":  367,
+"startColumn":  106,
+"endLine":  367,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'virtualNodesFactor'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ConsistentHashRouter.cs#L367",
+"region":  {
+"startLine":  367,
+"startColumn":  113,
+"endLine":  367,
+"endColumn":  114
 }
 }
 },

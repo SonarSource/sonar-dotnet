@@ -2,6 +2,19 @@
 "issues":  [
 {
 "id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'initialValue'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Cluster.cs#L496",
+"region":  {
+"startLine":  496,
+"startColumn":  74,
+"endLine":  496,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterActorRefProvider.cs#L161",
@@ -322,6 +335,19 @@
 "startColumn":  109,
 "endLine":  97,
 "endColumn":  114
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'useRole'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  69,
+"endLine":  33,
+"endColumn":  73
 }
 }
 },

@@ -34,34 +34,23 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterNodeAction(
                 c =>
                 {
-                    // Can't use optional arguments in expression trees (CS0584), so skip those
-                    if (c.IsInExpressionTree())
+                    if (c.Node.ArgumentList() is { Arguments.Count: > 0 } argumentList
+                        && !c.IsRedundantPrimaryConstructorBaseTypeContext()
+                        && !c.IsInExpressionTree() // Can't use optional arguments in expression trees (CS0584), so skip those
+                        && new CSharpMethodParameterLookup(argumentList, c.SemanticModel) is { MethodSymbol: { } } methodParameterLookup)
                     {
-                        return;
-                    }
-
-                    var argumentList = c.Node is InvocationExpressionSyntax invocationExpression
-                        ? invocationExpression.ArgumentList
-                        : ((ImplicitObjectCreationExpressionSyntaxWrapper)c.Node).ArgumentList;
-                    var methodParameterLookup = new CSharpMethodParameterLookup(argumentList, c.SemanticModel);
-
-                    if (methodParameterLookup.MethodSymbol != null)
-                    {
-                        foreach (var argumentMapping in methodParameterLookup.GetAllArgumentParameterMappings().Reverse().Where(x => x.Symbol.HasExplicitDefaultValue))
+                        foreach (var argumentMapping in methodParameterLookup.GetAllArgumentParameterMappings().Reverse().Where(x => ArgumentHasDefaultValue(x, c.SemanticModel)))
                         {
-                            var hasDefaultValue = ArgumentHasDefaultValue(argumentMapping, c.SemanticModel);
-                            if (argumentMapping.Node.NameColon == null && !hasDefaultValue)
-                            {
-                                return;
-                            }
-                            else if (hasDefaultValue)
-                            {
-                                c.ReportIssue(Diagnostic.Create(Rule, argumentMapping.Node.GetLocation(), argumentMapping.Symbol.Name));
-                            }
+                            c.ReportIssue(Diagnostic.Create(Rule, argumentMapping.Node.GetLocation(), argumentMapping.Symbol.Name));
                         }
                     }
                 },
-                SyntaxKind.InvocationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
+                SyntaxKind.InvocationExpression,
+                SyntaxKind.ObjectCreationExpression,
+                SyntaxKindEx.ImplicitObjectCreationExpression,
+                SyntaxKind.BaseConstructorInitializer,
+                SyntaxKind.ThisConstructorInitializer,
+                SyntaxKindEx.PrimaryConstructorBaseType);
 
         internal static bool ArgumentHasDefaultValue(NodeAndSymbol<ArgumentSyntax, IParameterSymbol> argumentMapping, SemanticModel semanticModel)
         {

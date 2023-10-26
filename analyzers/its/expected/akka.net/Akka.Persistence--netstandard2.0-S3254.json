@@ -4,6 +4,19 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.Recovery.cs#L67",
+"region":  {
+"startLine":  67,
+"startColumn":  109,
+"endLine":  67,
+"endColumn":  113
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'default'.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSM.cs#L470",
 "region":  {
 "startLine":  470,
@@ -327,6 +340,84 @@
 },
 {
 "id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'redeliverInterval'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistence.cs#L464",
+"region":  {
+"startLine":  464,
+"startColumn":  29,
+"endLine":  464,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'redeliveryBurstLimit'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistence.cs#L464",
+"region":  {
+"startLine":  464,
+"startColumn":  35,
+"endLine":  464,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'unconfirmedAttemptsToWarn'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistence.cs#L464",
+"region":  {
+"startLine":  464,
+"startColumn":  41,
+"endLine":  464,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'redeliverInterval'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistence.cs#L474",
+"region":  {
+"startLine":  474,
+"startColumn":  29,
+"endLine":  474,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'redeliverInterval'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistence.cs#L484",
+"region":  {
+"startLine":  484,
+"startColumn":  29,
+"endLine":  484,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'redeliveryBurstLimit'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistence.cs#L484",
+"region":  {
+"startLine":  484,
+"startColumn":  35,
+"endLine":  484,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistence.cs#L502",
@@ -348,6 +439,19 @@
 "startColumn":  126,
 "endLine":  503,
 "endColumn":  131
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'replayMax'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/PersistentActor.cs#L85",
+"region":  {
+"startLine":  85,
+"startColumn":  119,
+"endLine":  85,
+"endColumn":  132
 }
 }
 },

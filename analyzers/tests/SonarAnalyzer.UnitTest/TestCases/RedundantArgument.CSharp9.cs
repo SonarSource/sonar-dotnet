@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 A(1, 5); //Noncompliant, y has the default value
 //   ^
@@ -10,6 +11,12 @@ A(1, 2, 4);
 Record r1 = new(1);
 Record r2 = new(1, 5); // Noncompliant
 Record r3 = new(1, 6); // Compliant
+
+r1 = new Record(1);
+r2 = new Record(1, 5); // Noncompliant
+r3 = new Record(1, 6); // Compliant
+
+_ = new List<int> { 1 }; // Constructor without ArgumentList
 
 int x = 5;
 var y = x switch

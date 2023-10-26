@@ -2,6 +2,58 @@
 "issues":  [
 {
 "id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'lifetime'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperWithRequestContainerBase.cs#L125",
+"region":  {
+"startLine":  125,
+"startColumn":  104,
+"endLine":  125,
+"endColumn":  122
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'lifetime'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperWithRequestContainerBase.cs#L134",
+"region":  {
+"startLine":  134,
+"startColumn":  145,
+"endLine":  134,
+"endColumn":  163
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'disableMethodNotAllowedResponses'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RouteConfiguration.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  13,
+"endLine":  12,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'explicitHeadRouting'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RouteConfiguration.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  13,
+"endLine":  13,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'httpsPort'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/ModuleSecurity.cs#L84",
@@ -10,6 +62,32 @@
 "startColumn":  88,
 "endLine":  84,
 "endColumn":  92
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'runtimeViewDiscovery'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewConfiguration.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  13,
+"endLine":  12,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'runtimeViewUpdates'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewConfiguration.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  13,
+"endLine":  13,
+"endColumn":  38
 }
 }
 }

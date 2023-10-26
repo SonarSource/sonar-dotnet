@@ -25,6 +25,32 @@
 "endColumn":  77
 }
 }
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'fieldOffset'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Framing.cs#L101",
+"region":  {
+"startLine":  101,
+"startColumn":  61,
+"endLine":  101,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'initialValue'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Sinks.cs#L1152",
+"region":  {
+"startLine":  1152,
+"startColumn":  74,
+"endLine":  1152,
+"endColumn":  79
+}
+}
 }
 ]
 }
