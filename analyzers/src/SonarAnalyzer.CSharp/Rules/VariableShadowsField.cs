@@ -28,14 +28,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        private static readonly SyntaxKind[] TypesWithPrimaryConstructorDeclarations =
-        {
-            SyntaxKind.ClassDeclaration,
-            SyntaxKind.StructDeclaration,
-            SyntaxKindEx.RecordClassDeclaration,
-            SyntaxKindEx.RecordStructDeclaration
-        };
-
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
@@ -90,16 +82,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static List<ISymbol> GetContextSymbols(SonarSyntaxNodeReportingContext context)
         {
-            var symbols = ((INamespaceOrTypeSymbol)context.ContainingSymbol.ContainingSymbol).GetMembers();
-            var primaryCtor = symbols.FirstOrDefault(x => x is IMethodSymbol && IsPrimaryCtor(x));
-            var relevantSymbols = symbols.Where(x => x is IPropertySymbol or IFieldSymbol).ToList();
-            return primaryCtor is null ? relevantSymbols : relevantSymbols.Concat(primaryCtor.GetParameters()).ToList();
+            var members = context.ContainingSymbol.ContainingType.GetMembers();
+            var primaryConstructorParameters = members.FirstOrDefault(x => x.IsPrimaryConstructor())?.GetParameters();
+            var fieldsAndProperties = members.Where(x => x is IPropertySymbol or IFieldSymbol).ToList();
+            return primaryConstructorParameters is null ? fieldsAndProperties : fieldsAndProperties.Concat(primaryConstructorParameters).ToList();
         }
-
-        private static bool IsPrimaryCtor(ISymbol methodSymbol) =>
-            methodSymbol.IsConstructor()
-            && methodSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is { } syntax
-            && TypesWithPrimaryConstructorDeclarations.Contains(syntax.Kind());
 
         private static void ReportOnVariableMatchingField(SonarSyntaxNodeReportingContext context, IEnumerable<ISymbol> members, SyntaxToken identifier)
         {
