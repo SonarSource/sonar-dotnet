@@ -42,27 +42,53 @@ public class ConditionEvaluatesToConstant : ConditionEvaluatesToConstantBase
     protected override bool IsLockStatement(SyntaxNode syntax) =>
         syntax.IsKind(SyntaxKind.LockStatement);
 
-    private sealed class SyntaxKindWalker : SafeCSharpSyntaxWalker
+    internal sealed class SyntaxKindWalker : SafeCSharpSyntaxWalker
     {
         public bool ContainsCondition { get; private set; }
+
         public override void Visit(SyntaxNode node)
         {
+            ContainsCondition |= node.Kind() is SyntaxKindEx.CoalesceAssignmentExpression or SyntaxKindEx.SwitchExpression;
             if (!ContainsCondition)
             {
-                ContainsCondition = node.IsAnyKind(
-                                    SyntaxKind.CoalesceExpression,
-                                    SyntaxKind.ConditionalAccessExpression,
-                                    SyntaxKind.ConditionalExpression,
-                                    SyntaxKind.DoStatement,
-                                    SyntaxKind.ForStatement,
-                                    SyntaxKind.IfStatement,
-                                    SyntaxKind.LogicalAndExpression,
-                                    SyntaxKind.LogicalOrExpression,
-                                    SyntaxKindEx.SwitchExpression,
-                                    SyntaxKind.SwitchStatement,
-                                    SyntaxKind.WhileStatement);
                 base.Visit(node);
             }
         }
+
+        public override void VisitBinaryExpression(BinaryExpressionSyntax node)
+        {
+            ContainsCondition |= node.Kind() is SyntaxKind.CoalesceExpression or SyntaxKind.LogicalAndExpression or SyntaxKind.LogicalOrExpression;
+            base.VisitBinaryExpression(node);
+        }
+
+        public override void VisitConditionalAccessExpression(ConditionalAccessExpressionSyntax node) =>
+            ContainsCondition = true;
+
+        public override void VisitConditionalExpression(ConditionalExpressionSyntax node) =>
+            ContainsCondition = true;
+
+        public override void VisitDoStatement(DoStatementSyntax node) =>
+            ContainsCondition = true;
+
+        public override void VisitForStatement(ForStatementSyntax node)
+        {
+            if (node.Condition == null)
+            {
+                base.VisitForStatement(node);
+            }
+            else
+            {
+                ContainsCondition = true;
+            }
+        }
+
+        public override void VisitIfStatement(IfStatementSyntax node) =>
+            ContainsCondition = true;
+
+        public override void VisitSwitchStatement(SwitchStatementSyntax node) =>
+            ContainsCondition = true;
+
+        public override void VisitWhileStatement(WhileStatementSyntax node) =>
+            ContainsCondition = true;
     }
 }

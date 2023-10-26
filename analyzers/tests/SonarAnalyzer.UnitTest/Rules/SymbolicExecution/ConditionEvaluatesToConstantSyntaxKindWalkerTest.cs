@@ -19,6 +19,7 @@
  */
 
 using VB = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic;
+using CS = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution;
 
@@ -65,9 +66,9 @@ public class ConditionEvaluatesToConstantSyntaxKindWalkerTest
         Select case True
         End Select
     """)]
-    public void SyntaxKindsChecks_True(string statement)
+    public void SyntaxKindsChecks_VB_True(string statement)
     {
-        var tree = TestHelper.CompileVB(WrapInMethod($"""
+        var tree = TestHelper.CompileVB(WrapInMethod_VB($"""
             {statement}
             """)).Tree;
         var sut = new VB.ConditionEvaluatesToConstant.SyntaxKindWalker();
@@ -101,9 +102,9 @@ public class ConditionEvaluatesToConstantSyntaxKindWalkerTest
         Dim x = From y in New Integer() { }
                 Where True
     """)]
-    public void SyntaxKindsChecks_False(string statement)
+    public void SyntaxKindsChecks_VB_False(string statement)
     {
-        var tree = TestHelper.CompileVB(WrapInMethod($"""
+        var tree = TestHelper.CompileVB(WrapInMethod_VB($"""
             {statement}
             """)).Tree;
         var sut = new VB.ConditionEvaluatesToConstant.SyntaxKindWalker();
@@ -111,8 +112,64 @@ public class ConditionEvaluatesToConstantSyntaxKindWalkerTest
         sut.ContainsCondition.Should().BeFalse();
     }
 
-    private static string WrapInMethod(string statements)
-        => $$"""
+    [DataTestMethod]
+    [DataRow("_ = new object() ?? null;")]
+    [DataRow("_ = true || false;")]
+    [DataRow("_ = true && false;")]
+    [DataRow("(new object())?.ToString();")]
+    [DataRow("_ = true ? true : false;")]
+    [DataRow("do { } while (true);")]
+    [DataRow("for(;true;) { }")]
+    [DataRow("if (true) { }")]
+    [DataRow("switch (true) { }")]
+    [DataRow("while (true) { }")]
+    [DataRow("object o = null; o ??= new object();")]
+    [DataRow("_ = true switch { _ => true };")]
+    public void SyntaxKindsChecks_CS_True(string statement)
+    {
+        var tree = TestHelper.CompileCS(WrapInMethod_CS($"""
+            {statement}
+            """)).Tree;
+        var sut = new CS.ConditionEvaluatesToConstant.SyntaxKindWalker();
+        sut.SafeVisit(tree.GetRoot());
+        sut.ContainsCondition.Should().BeTrue();
+    }
+
+    [DataTestMethod]
+    [DataRow("_ = 1 + 1;")]
+    [DataRow("_ = 1 - 1;")]
+    [DataRow("_ = 1 * 1;")]
+    [DataRow("_ = 1 / 1;")]
+    [DataRow("_ = 1 % 1;")]
+    [DataRow("_ = 1 >> 1;")]
+    [DataRow("_ = 1 << 1;")]
+    [DataRow("_ = true | false;")]
+    [DataRow("_ = true & false;")]
+    [DataRow("_ = true ^ false;")]
+    [DataRow("_ = 1 == 1;")]
+    [DataRow("_ = 1 != 1;")]
+    [DataRow("_ = 1 < 1;")]
+    [DataRow("_ = 1 <= 1;")]
+    [DataRow("_ = 1 >= 1;")]
+    [DataRow("_ = 1 is 1;")]
+    [DataRow("_ = new object() as object;")]
+    [DataRow("for(;;) { }")]
+    [DataRow("for(var i = 0; ; i++) { }")]
+    // Undetected conditions
+    [DataRow("try { } catch when (true) { }")]
+    [DataRow("_ = from x in new int[] { } where x > 0 select x;")]
+    public void SyntaxKindsChecks_CS_False(string statement)
+    {
+        var tree = TestHelper.CompileCS(WrapInMethod_CS($"""
+            {statement}
+            """)).Tree;
+        var sut = new CS.ConditionEvaluatesToConstant.SyntaxKindWalker();
+        sut.SafeVisit(tree.GetRoot());
+        sut.ContainsCondition.Should().BeFalse();
+    }
+
+    private static string WrapInMethod_VB(string statements) =>
+        $$"""
         Imports System
 
         Public Class Test
@@ -120,5 +177,18 @@ public class ConditionEvaluatesToConstantSyntaxKindWalkerTest
                 {{statements}}
             End Sub
         End Class
+        """;
+
+    private static string WrapInMethod_CS(string statements) =>
+        $$"""
+        using System;
+        using System.Linq;
+        public class Test
+        {
+            public void M()
+            {
+                {{statements}}
+            }
+        }
         """;
 }
