@@ -35,6 +35,13 @@ public class ConditionEvaluatesToConstant : ConditionEvaluatesToConstantBase
         return walker.ContainsCondition;
     }
 
+    protected override bool IsInsideUsingDeclaration(SyntaxNode node) =>
+        (node.IsKind(SyntaxKind.VariableDeclaration) && node.Parent.IsKind(SyntaxKind.UsingStatement))
+        || (node is LocalDeclarationStatementSyntax local && local.UsingKeyword().IsKind(SyntaxKind.UsingKeyword));
+
+    protected override bool IsLockStatement(SyntaxNode syntax) =>
+        syntax.IsKind(SyntaxKind.LockStatement);
+
     private sealed class SyntaxKindWalker : SafeCSharpSyntaxWalker
     {
         public bool ContainsCondition { get; private set; }
@@ -58,11 +65,4 @@ public class ConditionEvaluatesToConstant : ConditionEvaluatesToConstantBase
             }
         }
     }
-
-    protected override bool IsInsideUsingDeclaration(SyntaxNode node) =>
-        (node.IsKind(SyntaxKind.VariableDeclaration) && node.Parent.IsKind(SyntaxKind.UsingStatement))
-        || (node is LocalDeclarationStatementSyntax local && local.UsingKeyword().IsKind(SyntaxKind.UsingKeyword));
-
-    protected override bool IsLockStatement(SyntaxNode syntax) =>
-        syntax.IsKind(SyntaxKind.LockStatement);
 }
