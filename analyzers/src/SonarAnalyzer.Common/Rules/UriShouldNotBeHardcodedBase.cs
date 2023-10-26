@@ -47,11 +47,17 @@ namespace SonarAnalyzer.Rules
             new HashSet<string>
             {
                 "FILE",
+                "FILES",
                 "PATH",
+                "PATHS",
                 "URI",
+                "URIS",
                 "URL",
+                "URLS",
                 "URN",
-                "STREAM"
+                "URNS",
+                "STREAM",
+                "STREAMS"
             };
 
         protected override string MessageFormat => "{0}";

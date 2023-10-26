@@ -41,9 +41,18 @@ class Repro_8146
 {
     void Method()
     {
-        IList<string> uris1 = new[] { "C:/test.txt" }; // FN
-        IList<string> uris2 = ["C:/test.txt"]; // FN
-        string[][] urisMatrix1 = [["C:/test.txt"]]; // FN
-        IDictionary<string, string> urisDict = new Dictionary<string, string> { ["a"] = "C:/test.txt" }; // FN
+        IList<string> uris1 = new[] { "C:/test.txt" }; // Noncompliant
+        IList<string> uris2 = ["C:/test.txt"]; // Noncompliant
+        IList<string> uris3 = new List<string> { "file://blah.txt" }; // Noncompliant
+        var uris4 = new string[1] { "C:/test.txt" }; // Noncompliant
+        var uris5 = new[] { "C:/test.txt" }; // Noncompliant
+        string[] uris6 = ["C:/test.txt"]; // Noncompliant
+        string[][] urisMatrix1 = [["C:/test.txt"]]; // Noncompliant
+        IDictionary<string, string> urisDict = new Dictionary<string, string> { ["a"] = "C:/test.txt" }; // Noncompliant
+
+        IList<string> paths = new[] { "c:\\blah.txt" }; // Noncompliant
+        IList<string> files = new[] { "file://blah.txt" }; // Noncompliant
+        IList<string> urls = new[] { "http://www.mywebsite.com" }; // Noncompliant
+        IList<string> urns = new[] { "http://bar.html" }; // Noncompliant
     }
 }
