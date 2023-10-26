@@ -43,7 +43,6 @@ public abstract class SyntaxFacade<TSyntaxKind>
     public abstract bool IsAnyKind(SyntaxNode node, ISet<TSyntaxKind> syntaxKinds);
     public abstract bool IsAnyKind(SyntaxNode node, params TSyntaxKind[] syntaxKinds);
     public abstract bool IsAnyKind(SyntaxTrivia trivia, params TSyntaxKind[] syntaxKinds);
-    public abstract bool IsExtern(SyntaxNode node);
     public abstract bool IsInExpressionTree(SemanticModel model, SyntaxNode node);
     public abstract bool IsKind(SyntaxNode node, TSyntaxKind kind);
     public abstract bool IsKind(SyntaxToken token, TSyntaxKind kind);

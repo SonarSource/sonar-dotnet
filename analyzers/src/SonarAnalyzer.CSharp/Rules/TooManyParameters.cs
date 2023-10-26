@@ -55,6 +55,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 _ => 0,
             };
 
+        protected override bool IsExtern(SyntaxNode node) =>
+            node is BaseMethodDeclarationSyntax { } methodDeclaration && methodDeclaration.IsExtern();
+
         private static int RetrieveBasePrimaryConstructorArguments(ClassDeclarationSyntax node)
         {
             var type = node.BaseList?.Types.FirstOrDefault();
