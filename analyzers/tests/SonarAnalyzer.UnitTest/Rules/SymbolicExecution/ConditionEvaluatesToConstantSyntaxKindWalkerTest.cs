@@ -158,6 +158,8 @@ public class ConditionEvaluatesToConstantSyntaxKindWalkerTest
     // Undetected conditions
     [DataRow("try { } catch when (true) { }")]
     [DataRow("_ = from x in new int[] { } where x > 0 select x;")]
+    [DataRow("_ = 1 is >2;")]
+    [DataRow("_ = default(Exception) is { Message.Length: 1 };")]
     public void SyntaxKindsChecks_CS_False(string statement)
     {
         var tree = TestHelper.CompileCS(WrapInMethod_CS($"""
