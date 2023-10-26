@@ -142,7 +142,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 context.ReportIssue(Diagnostic.Create(EnableSslRule, objectCreation.Expression.GetLocation()));
             }
-            else if (telnetRegexForIdentifier.IsMatch(objectCreation.TypeAsString(context.SemanticModel)))
+            else if (objectCreation.TypeAsString(context.SemanticModel) is { } typeAsString && telnetRegexForIdentifier.IsMatch(typeAsString))
             {
                 context.ReportIssue(Diagnostic.Create(DefaultRule, objectCreation.Expression.GetLocation(), TelnetKey, RecommendedProtocols[TelnetKey]));
             }

@@ -188,14 +188,16 @@ namespace EntityFrameworkMigrations
         public void UnusedPrivateMember_FromCSharp11() =>
             builder.AddPaths("UnusedPrivateMember.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
 
+        // The exception should disappear once the fix for https://github.com/dotnet/roslyn/issues/70041 gets released.
+        // If this does not happen before the official release of .NET8 and C#12, the code should be refactored to handle potential null values.
+        //
+        // Workaround to return null in ImplicitObjectCreation.TypeAsString in this particular case to avoid AD0001.
+        // Should be reverted once the fix is released
         [TestMethod]
-        public void UnusedPrivateMember_FromCSharp12()
-        {
-            // The exception should disappear once the fix for https://github.com/dotnet/roslyn/issues/70041 gets released.
-            // If this does not happen before the official release of .NET8 and C#12, the code should be refactored to handle potential null values.
-            var analysis = () => builder.AddPaths("UnusedPrivateMember.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
-            analysis.Should().Throw<AssertFailedException>().WithMessage("Expected diagnostics {error AD0001: Analyzer 'SonarAnalyzer.Rules.CSharp.UnusedPrivateMember' threw an exception of type 'System.NullReferenceException' with message 'Object reference not set to an instance of an object.'.*");
-        }
+        public void UnusedPrivateMember_FromCSharp12() =>
+            builder.AddPaths("UnusedPrivateMember.CSharp12.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp12)
+                .Verify();
 
 #endif
 
