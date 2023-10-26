@@ -6,9 +6,11 @@ namespace SonarAnalyzer.Net8.UnitTest.Rules;
 [TestClass]
 public class SelfAssignmentTest
 {
-    private readonly VerifierBuilder builderCS = new VerifierBuilder<SonarAnalyzer.Rules.CSharp.SelfAssignment>().WithConcurrentAnalysis(false);
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<SonarAnalyzer.Rules.CSharp.SelfAssignment>()
+                                                 .WithConcurrentAnalysis(false)
+                                                 .WithOptions(ParseOptionsHelper.FromCSharp12);
 
     [TestMethod]
     public void SelfAssignment() =>
-        builderCS.AddPaths("SelfAssignment.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
+        builderCS.AddPaths("SelfAssignment.cs").Verify();
 }
