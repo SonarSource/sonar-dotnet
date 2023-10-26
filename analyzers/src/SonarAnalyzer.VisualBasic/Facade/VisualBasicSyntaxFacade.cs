@@ -88,6 +88,9 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
 
     public override bool IsAnyKind(SyntaxTrivia trivia, params SyntaxKind[] syntaxKinds) => trivia.IsAnyKind(syntaxKinds);
 
+    public override bool IsExtern(SyntaxNode node) =>
+        node is MethodBlockSyntax { } methodBlock && methodBlock.IsDeclare();
+
     public override bool IsInExpressionTree(SemanticModel model, SyntaxNode node) =>
         node.IsInExpressionTree(model);
 

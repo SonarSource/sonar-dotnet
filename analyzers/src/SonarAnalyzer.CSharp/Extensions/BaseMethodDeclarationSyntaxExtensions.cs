@@ -30,6 +30,9 @@ namespace SonarAnalyzer.Extensions
         public static bool IsStatic(this BaseMethodDeclarationSyntax methodDeclaration) =>
             methodDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword);
 
+        public static bool IsExtern(this BaseMethodDeclarationSyntax methodDeclaration) =>
+            methodDeclaration.Modifiers.Any(SyntaxKind.ExternKeyword);
+
         public static bool HasBodyOrExpressionBody(this BaseMethodDeclarationSyntax node) =>
             node.GetBodyOrExpressionBody() is not null;
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace Tests.Diagnostics
@@ -41,11 +42,15 @@ namespace Tests.Diagnostics
         }
 
         // see https://github.com/SonarSource/sonar-dotnet/issues/1459
+        // and https://github.com/SonarSource/sonar-dotnet/issues/8156
         // We should not raise for imported methods according to external definition.
         [DllImport("foo.dll")]
         public static extern void Extern(int p1, int p2, int p3, int p4); // Compliant, external definition
-        public static extern void ExternNoAttribute(int p1, int p2, int p3, int p4);    // Noncompliant
-        public extern void ExternNoStatic(int p1, int p2, int p3, int p4);              // Noncompliant
+
+        public static extern void ExternNoAttribute(int p1, int p2, int p3, int p4); // Compliant
+
+        [MethodImpl(MethodImplOptions.InternalCall)]
+        public extern void ExternNoStatic(int p1, int p2, int p3, int p4);           // Compliant
     }
 
     public interface If

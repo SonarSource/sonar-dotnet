@@ -39,7 +39,6 @@ namespace SonarAnalyzer.Rules
         protected abstract int CountParameters(TParameterListSyntax parameterList);
         protected abstract int BaseParameterCount(SyntaxNode node);
         protected abstract bool CanBeChanged(SyntaxNode node, SemanticModel semanticModel);
-        protected virtual bool IsZeroOverheadMemberAccess(SyntaxNode node) => false;
 
         protected TooManyParametersBase() =>
             rule = Language.CreateDescriptor(DiagnosticId, MessageFormat, isEnabledByDefault: false);
@@ -53,7 +52,7 @@ namespace SonarAnalyzer.Rules
                     var baseCount = BaseParameterCount(c.Node.Parent);
                     if (parametersCount - baseCount > Maximum
                         && c.Node.Parent is { } parent
-                        && !IsZeroOverheadMemberAccess(parent)
+                        && !Language.Syntax.IsExtern(parent)
                         && CanBeChanged(parent, c.SemanticModel))
                     {
                         var valueText = baseCount == 0 ? parametersCount.ToString() : $"{parametersCount - baseCount} new";
@@ -78,10 +77,9 @@ namespace SonarAnalyzer.Rules
 
             if (declaredSymbol.IsStatic)
             {
-                if ((declaredSymbol.IsExtern && declaredSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_DllImportAttribute))
-                    || declaredSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_LibraryImportAttribute))
+                if (declaredSymbol.IsExtern || declaredSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_LibraryImportAttribute))
                 {
-                    return false;   // P/Invoke method is defined externally.
+                    return false;
                 }
             }
 
