@@ -77,9 +77,10 @@ namespace SonarAnalyzer.Rules
 
             if (declaredSymbol.IsStatic)
             {
-                if (declaredSymbol.IsExtern || declaredSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_LibraryImportAttribute))
+                if ((declaredSymbol.IsExtern && declaredSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_DllImportAttribute))
+                    || declaredSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_LibraryImportAttribute))
                 {
-                    return false;
+                    return false;   // P/Invoke method is defined externally.
                 }
             }
 
