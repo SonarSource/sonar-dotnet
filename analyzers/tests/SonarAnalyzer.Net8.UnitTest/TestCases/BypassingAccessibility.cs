@@ -11,7 +11,8 @@ namespace Repro_8153
         [UnsafeAccessor(UnsafeAccessorKind.StaticField, Name = "aPrivateStaticField")]        // FN
         extern static ref string M1(UserData obj);
 
-        [UnsafeAccessor(UnsafeAccessorKind.Field, Name = nameof(UserData.aPublicField))]      // FN
+        [UnsafeAccessor(UnsafeAccessorKind.Field, Name = nameof(UserData.aPublicField))]      // Compliant, the field is public.
+                                                                                              // A new rule is needed for this. See: https://github.com/SonarSource/sonar-dotnet/issues/8258
         extern static ref string M2(UserData obj);
 
         [UnsafeAccessorAttribute(UnsafeAccessorKind.Field, Name = "aProtectedInternalField")] // FN
