@@ -58,6 +58,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AnalysisConfig", "AnalysisC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.SourceGenerators", "src\SonarAnalyzer.SourceGenerators\SonarAnalyzer.SourceGenerators.csproj", "{76D6EBB8-D2B0-41C1-8880-027EC78CB7FF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.Net8.UnitTest", "tests\SonarAnalyzer.Net8.UnitTest\SonarAnalyzer.Net8.UnitTest.csproj", "{DB0A158B-D003-47ED-8209-E70277EB0693}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -96,6 +98,10 @@ Global
 		{76D6EBB8-D2B0-41C1-8880-027EC78CB7FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76D6EBB8-D2B0-41C1-8880-027EC78CB7FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76D6EBB8-D2B0-41C1-8880-027EC78CB7FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB0A158B-D003-47ED-8209-E70277EB0693}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB0A158B-D003-47ED-8209-E70277EB0693}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB0A158B-D003-47ED-8209-E70277EB0693}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB0A158B-D003-47ED-8209-E70277EB0693}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -108,6 +114,7 @@ Global
 		{28067DB4-C098-4A15-9846-2978711733F3} = {314A0C27-4768-4F15-B7FA-DC3C33C08180}
 		{C086048C-D183-4B4D-9D3C-A6E191F19680} = {0C3E0519-DB5C-47C0-ABB3-9D1FB23DFBAF}
 		{E044950A-098B-4090-B4FB-8D6BD086828B} = {0C3E0519-DB5C-47C0-ABB3-9D1FB23DFBAF}
+		{DB0A158B-D003-47ED-8209-E70277EB0693} = {B7233F78-E142-4882-B084-7C83BE472109}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4259CA71-C565-42DD-8D58-F59819A11065}

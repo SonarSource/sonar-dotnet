@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
     /// Local run: Only the latest language version is used to simplify debugging.
     /// CI run: All configured versions are returned.
     /// </summary>
-    internal static class ParseOptionsHelper
+    public static class ParseOptionsHelper
     {
         public static ImmutableArray<ParseOptions> BeforeCSharp7 { get; }
         public static ImmutableArray<ParseOptions> BeforeCSharp8 { get; }

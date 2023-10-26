@@ -34,7 +34,9 @@ variables:
   - name: UnitTestProjectPath
     value: 'analyzers\tests\SonarAnalyzer.UnitTest\'
   - name: UnitTestResultsPath
-    value: '$(UnitTestProjectPath)\TestResults'
+    value: '$(Agent.TempDirectory)\TestResults'
+  - name: CoveragePath
+    value: '$(Agent.TempDirectory)\coverage'
   - name: UnitTestExclusionsPattern
     value: 'analyzers/tests/SonarAnalyzer.UnitTest/TestCases/**/*'
   - name: isReleaseBranch
@@ -189,10 +191,17 @@ stages:
             FrameworkMoniker: 'net48'
             CoverageArtifactName: 'DotnetCoverageNet48'
             TestResultsArtifactName: 'DotnetTestResultsNet48'
+            ProjectFilePath: 'tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj'
           Net70:
             FrameworkMoniker: 'net7.0'
             CoverageArtifactName: 'DotnetCoverageNet7'
             TestResultsArtifactName: 'DotnetTestResultsNet7'
+            ProjectFilePath: 'tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj'
+          Net80:
+            FrameworkMoniker: 'net8.0-windows'
+            CoverageArtifactName: 'DotnetCoverageNet8'
+            TestResultsArtifactName: 'DotnetTestResultsNet8'
+            ProjectFilePath: 'tests\SonarAnalyzer.Net8.UnitTest\SonarAnalyzer.Net8.UnitTest.csproj'
 
       steps:
       - task: DownloadPipelineArtifact@2
@@ -203,13 +212,13 @@ stages:
 
       - powershell: |
           cd analyzers
-          & dotnet test -f $(FrameworkMoniker) -c $(BuildConfiguration) -l trx /p:AltCover=true,AltCoverForce=true,AltCoverVisibleBranches=true,AltCoverAssemblyFilter='Moq|Humanizer|AltCover|Microsoft.VisualStudio.TestPlatform.*|.*Test',AltCoverPathFilter='SonarAnalyzer\.CFG\\ShimLayer|SonarAnalyzer\.ShimLayer\.CodeGeneration',AltCoverAttributeFilter='ExcludeFromCodeCoverage',AltCoverReport=coverage/coverage.xml
+          & dotnet test $(ProjectFilePath) -f $(FrameworkMoniker) -c $(BuildConfiguration) -l trx --results-directory $(UnitTestResultsPath) /p:AltCover=true,AltCoverForce=true,AltCoverVisibleBranches=true,AltCoverAssemblyFilter='Moq|Humanizer|AltCover|Microsoft.VisualStudio.TestPlatform.*|.*Test',AltCoverPathFilter='SonarAnalyzer\.CFG\\ShimLayer|SonarAnalyzer\.ShimLayer\.CodeGeneration',AltCoverAttributeFilter='ExcludeFromCodeCoverage',AltCoverReport=$(CoveragePath)/coverage.$(FrameworkMoniker).xml
         displayName: '.Net UTs'
 
       - task: PublishPipelineArtifact@1
         displayName: 'Save coverage files'
         inputs:
-          path: '$(UnitTestProjectPath)\coverage'
+          path: '$(CoveragePath)'
           artifact: $(CoverageArtifactName)
 
       - task: PublishPipelineArtifact@1
@@ -315,6 +324,12 @@ stages:
           targetPath: 'coverage'
 
       - task: DownloadPipelineArtifact@2
+        displayName: 'Download coverage reports'
+        inputs:
+          artifact: DotnetCoverageNet8
+          targetPath: 'coverage'
+
+      - task: DownloadPipelineArtifact@2
         displayName: 'Download test results'
         inputs:
           artifact: DotnetTestResultsNet48
@@ -324,6 +339,12 @@ stages:
         displayName: 'Download test results'
         inputs:
           artifact: DotnetTestResultsNet7
+          targetPath: 'TestResults'
+
+      - task: DownloadPipelineArtifact@2
+        displayName: 'Download test results'
+        inputs:
+          artifact: DotnetTestResultsNet8
           targetPath: 'TestResults'
 
       - powershell: |
@@ -341,8 +362,7 @@ stages:
             (Get-Content -path $path -Raw) -replace $pattern,$localPath | Set-Content $path
           }
 
-          Update-Coverage-BasePaths 'coverage\coverage.net48.xml'
-          Update-Coverage-BasePaths 'coverage\coverage.net7.0.xml'
+          dir coverage\*.xml | % { Update-Coverage-BasePaths $_.FullName }
         displayName: Fix coverage paths
 
       - task: SonarCloudAnalyze@1
