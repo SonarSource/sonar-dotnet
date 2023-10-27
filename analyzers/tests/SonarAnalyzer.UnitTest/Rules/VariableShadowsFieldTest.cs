@@ -60,6 +60,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithOptions(ParseOptionsHelper.FromCSharp12)
                 .Verify();
 
+        [TestMethod]
+        public void VariableShadowsField_PartialClass() =>
+            builder.AddPaths("VariableShadowsField_PartialClass1.cs", "VariableShadowsField_PartialClass2.cs")
+                .WithOptions(ParseOptionsHelper.FromCSharp12)
+                .Verify();
+
 #endif
 
     }

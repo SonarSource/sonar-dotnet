@@ -25,6 +25,14 @@ namespace SonarAnalyzer.Extensions
 {
     internal static class ISymbolExtensions
     {
+        private static readonly SyntaxKind[] DeclarationsTypesWithPrimaryConstructor =
+        {
+            SyntaxKind.ClassDeclaration,
+            SyntaxKind.StructDeclaration,
+            SyntaxKindEx.RecordClassDeclaration,
+            SyntaxKindEx.RecordStructDeclaration
+        };
+
         public static bool HasConstraint(this ISymbol symbol, SymbolicConstraint constraint, ProgramState programState)
         {
             var symbolicValue = programState.GetSymbolValue(symbol);
@@ -92,5 +100,10 @@ namespace SonarAnalyzer.Extensions
                .Select(x => x.GetSyntax().GetIdentifier())
                .WhereNotNull()
                .ToImmutableArray();
+
+        public static bool IsPrimaryConstructor(this ISymbol symbol) =>
+            symbol.IsConstructor()
+            && symbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is { } syntax
+            && DeclarationsTypesWithPrimaryConstructor.Contains(syntax.Kind());
     }
 }

@@ -30,73 +30,79 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterNodeAction(c =>
-                {
-                    var declaration = (ForEachStatementSyntax)c.Node;
-
-                    var variableSymbol = c.SemanticModel.GetDeclaredSymbol(declaration);
-                    if (variableSymbol == null)
-                    {
-                        return;
-                    }
-
-                    var members = GetMembers(variableSymbol.ContainingType);
-
-                    ReportOnVariableMatchingField(c, members, declaration.Identifier);
-                },
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterNodeAction(c => Process(c, GetDeclarationOrDesignation(c.Node)),
+                SyntaxKind.LocalDeclarationStatement,
+                SyntaxKind.ForStatement,
+                SyntaxKind.UsingStatement,
+                SyntaxKind.FixedStatement,
+                SyntaxKindEx.DeclarationExpression,
+                SyntaxKindEx.RecursivePattern,
+                SyntaxKindEx.VarPattern,
+                SyntaxKindEx.DeclarationPattern,
+                SyntaxKindEx.ListPattern,
                 SyntaxKind.ForEachStatement);
 
-            context.RegisterNodeAction(c => ProcessVariableDeclaration(c, ((LocalDeclarationStatementSyntax)c.Node).Declaration), SyntaxKind.LocalDeclarationStatement);
-            context.RegisterNodeAction(c => ProcessVariableDeclaration(c, ((ForStatementSyntax)c.Node).Declaration), SyntaxKind.ForStatement);
-            context.RegisterNodeAction(c => ProcessVariableDeclaration(c, ((UsingStatementSyntax)c.Node).Declaration), SyntaxKind.UsingStatement);
-            context.RegisterNodeAction(c => ProcessVariableDeclaration(c, ((FixedStatementSyntax)c.Node).Declaration), SyntaxKind.FixedStatement);
-
-            context.RegisterNodeAction(c => ProcessVariableDesignation(c, ((DeclarationExpressionSyntaxWrapper)c.Node).Designation), SyntaxKindEx.DeclarationExpression);
-            context.RegisterNodeAction(c => ProcessVariableDesignation(c, ((RecursivePatternSyntaxWrapper)c.Node).Designation), SyntaxKindEx.RecursivePattern);
-            context.RegisterNodeAction(c => ProcessVariableDesignation(c, ((VarPatternSyntaxWrapper)c.Node).Designation), SyntaxKindEx.VarPattern);
-            context.RegisterNodeAction(c => ProcessVariableDesignation(c, ((DeclarationPatternSyntaxWrapper)c.Node).Designation), SyntaxKindEx.DeclarationPattern);
-            context.RegisterNodeAction(c => ProcessVariableDesignation(c, ((ListPatternSyntaxWrapper)c.Node).Designation), SyntaxKindEx.ListPattern);
-        }
-
-        private static void ProcessVariableDesignation(SonarSyntaxNodeReportingContext context, VariableDesignationSyntaxWrapper variableDesignation)
-        {
-            if (variableDesignation.AllVariables() is { Length: > 0 } variables
-                && context.ContainingSymbol.ContainingType is { } containingType
-                && GetMembers(containingType) is var members)
+        private static SyntaxNode GetDeclarationOrDesignation(SyntaxNode node) =>
+            node switch
             {
-                foreach (var variable in variables)
+                LocalDeclarationStatementSyntax localDeclaration => localDeclaration.Declaration,
+                ForStatementSyntax forStatement => forStatement.Declaration,
+                UsingStatementSyntax usingStatement => usingStatement.Declaration,
+                FixedStatementSyntax fixedStatement => fixedStatement.Declaration,
+                ForEachStatementSyntax forEachStatement => forEachStatement,
+                _ when DeclarationExpressionSyntaxWrapper.IsInstance(node) => ((DeclarationExpressionSyntaxWrapper)node).Designation,
+                _ when RecursivePatternSyntaxWrapper.IsInstance(node) => ((RecursivePatternSyntaxWrapper)node).Designation,
+                _ when VarPatternSyntaxWrapper.IsInstance(node) => ((VarPatternSyntaxWrapper)node).Designation,
+                _ when DeclarationPatternSyntaxWrapper.IsInstance(node) => ((DeclarationPatternSyntaxWrapper)node).Designation,
+                _ when ListPatternSyntaxWrapper.IsInstance(node) => ((ListPatternSyntaxWrapper)node).Designation,
+                _ => null
+            };
+
+        private static void Process(SonarSyntaxNodeReportingContext context, SyntaxNode node)
+        {
+            if (ExtractIdentifiers(node) is { Count: > 0 } identifiers
+                && GetContextSymbols(context) is var members)
+            {
+                foreach (var identifier in identifiers)
                 {
-                    ReportOnVariableMatchingField(context, members, variable.Identifier);
+                    ReportOnVariableMatchingField(context, members, identifier);
                 }
             }
         }
 
-        private static void ProcessVariableDeclaration(SonarSyntaxNodeReportingContext context, VariableDeclarationSyntax variableDeclaration)
-        {
-            if (variableDeclaration is { Variables: { Count: > 0 } variables }
-                && context.ContainingSymbol.ContainingType is { } containingType
-                && GetMembers(containingType) is var members)
+        private static List<SyntaxToken> ExtractIdentifiers(SyntaxNode node) =>
+            node switch
             {
-                foreach (var variable in variables)
-                {
-                    ReportOnVariableMatchingField(context, members, variable.Identifier);
-                }
-            }
+                VariableDeclarationSyntax variableDeclaration => variableDeclaration.Variables.Select(x => x.Identifier).ToList(),
+                ForEachStatementSyntax foreachStatement => new() { foreachStatement.Identifier },
+                _ when VariableDesignationSyntaxWrapper.IsInstance(node) => ((VariableDesignationSyntaxWrapper)node).AllVariables().Select(x => x.Identifier).ToList(),
+                _ => new()
+            };
+
+        private static List<ISymbol> GetContextSymbols(SonarSyntaxNodeReportingContext context)
+        {
+            var members = context.ContainingSymbol.ContainingType.GetMembers();
+            var primaryConstructorParameters = members.FirstOrDefault(x => x.IsPrimaryConstructor())?.GetParameters();
+            var fieldsAndProperties = members.Where(x => x is IPropertySymbol or IFieldSymbol).ToList();
+            return primaryConstructorParameters is null ? fieldsAndProperties : fieldsAndProperties.Concat(primaryConstructorParameters).ToList();
         }
 
         private static void ReportOnVariableMatchingField(SonarSyntaxNodeReportingContext context, IEnumerable<ISymbol> members, SyntaxToken identifier)
         {
-            if (members.FirstOrDefault(m => m.Name == identifier.ValueText) is { } matchingMember)
+            if (members.FirstOrDefault(x => x.Name == identifier.ValueText) is { } matchingMember)
             {
-                context.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation(), identifier.Text, matchingMember is IFieldSymbol ? "field" : "property"));
+                context.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation(), identifier.Text, GetSymbolName(matchingMember)));
             }
         }
 
-        private static List<ISymbol> GetMembers(INamespaceOrTypeSymbol classSymbol) =>
-            classSymbol.GetMembers()
-                       .Where(member => member is IFieldSymbol or IPropertySymbol)
-                       .ToList();
+        private static string GetSymbolName(ISymbol symbol) =>
+            symbol switch
+            {
+                IFieldSymbol => "field",
+                IPropertySymbol => "property",
+                IParameterSymbol => "primary constructor parameter",
+                _ => string.Empty
+            };
     }
 }
