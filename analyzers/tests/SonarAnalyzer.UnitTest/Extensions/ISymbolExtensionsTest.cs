@@ -124,7 +124,7 @@ Public Class Sample
     End Property
 
 End Class";
-        ISymbolExtensionsCommon.IsAutoProperty(CreateSymbol(code,  AnalyzerLanguage.VisualBasic)).Should().BeFalse();
+        ISymbolExtensionsCommon.IsAutoProperty(CreateSymbol(code, AnalyzerLanguage.VisualBasic)).Should().BeFalse();
     }
 
     [TestMethod]
