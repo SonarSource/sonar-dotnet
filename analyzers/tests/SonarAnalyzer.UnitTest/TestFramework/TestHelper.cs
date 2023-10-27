@@ -48,9 +48,10 @@ namespace SonarAnalyzer.UnitTest
                                                                      bool ignoreErrors,
                                                                      AnalyzerLanguage language,
                                                                      MetadataReference[] additionalReferences = null,
-                                                                     OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)
+                                                                     OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
+                                                                     ParseOptions parseOptions = null)
         {
-            var compiled = new SnippetCompiler(snippet, ignoreErrors, language, additionalReferences, outputKind);
+            var compiled = new SnippetCompiler(snippet, ignoreErrors, language, additionalReferences, outputKind, parseOptions);
             return (compiled.SyntaxTree, compiled.SemanticModel);
         }
 
