@@ -26,9 +26,6 @@ using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using ISymbolExtensionsCommon = SonarAnalyzer.Helpers.ISymbolExtensions;
 using ISymbolExtensionsVB = vbnet::SonarAnalyzer.Extensions.ISymbolExtensions;
 using ISymbolExtensionsCS = csharp::SonarAnalyzer.Extensions.ISymbolExtensions;
-using SonarAnalyzer.CFG.Helpers;
-using SonarAnalyzer.Json.Parsing;
-using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.UnitTest.Extensions;
 
