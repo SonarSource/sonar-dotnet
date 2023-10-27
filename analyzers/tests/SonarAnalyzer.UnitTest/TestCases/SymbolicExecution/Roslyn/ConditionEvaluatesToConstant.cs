@@ -3326,3 +3326,41 @@ public class Repro_8285
         }
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8262
+public class Repro_8262
+{
+    void Repro(int rounds) // upper bound of the loop must be unknown. If it is known, no FP is reported
+    {
+        for (var i = 1; i <= rounds; i++)
+        {
+            switch (i)
+            {
+                case 1:
+                case 4:   // Noncompliant FP
+                case 7:   // Noncompliant FP
+                case 10:  // Noncompliant FP
+                case 13:  // Noncompliant FP
+                case 16:  // Noncompliant FP
+                    Console.WriteLine(i);
+                    break;
+                case 2:   // Noncompliant FP
+                case 5:   // Secondary
+                case 8:   
+                case 11:  
+                case 14:  
+                    Console.WriteLine(i);
+                    break;
+                case 3:   // Secondary
+                case 6:
+                case 9:
+                case 12:
+                case 15:
+                    Console.WriteLine(i);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+}
