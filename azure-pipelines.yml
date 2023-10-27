@@ -10,12 +10,16 @@ schedules:
 trigger:
 - master
 
-pool: '.Net Bubble - GCP'
+pool:
+  name: '.Net Bubble staging'
+  demands:
+    - PR_NUMBER -equals 381
 
 variables:
   - group: sonar-dotnet-variables
   - group: sonarsource-build-variables
   - group: artifactory_access
+  - group: digicert-keylocker
   # ARTIFACTORY_URL https://repox.jfrog.io/repox => https://repox.jfrog.io/artifactory
   # JFROG_URL https://repox.jfrog.io
   # https://github.com/SonarSource/parent-oss/blob/master/pom.xml#L708-L711
@@ -71,6 +75,38 @@ stages:
 
       - script: '"$(MSBUILD_PATH)" /t:restore /p:RestoreLockedMode=true /p:RestoreConfigFile="analyzers\NuGet.Config" $(solution)'
         displayName: "NuGet Restore"
+        
+      - powershell: |
+          Invoke-WebRequest -Uri https://cacerts.digicert.com/DigiCertTLSECCP384RootG5.crt.pem -OutFile certificate1.pem
+          certutil –addstore -enterprise –f "Root" certificate1.pem
+          
+          Invoke-WebRequest -Uri https://cacerts.digicert.com/DigiCertTLSRSA4096RootG5.crt.pem -OutFile certificate2.pem
+          certutil –addstore -enterprise –f "Root" certificate2.pem
+          
+          Invoke-WebRequest -Uri https://cacerts.digicert.com/DigiCertCSECCP384RootG5.crt.pem -OutFile certificate3.pem
+          certutil –addstore -enterprise –f "Root" certificate3.pem
+          
+          Invoke-WebRequest -Uri https://cacerts.digicert.com/DigiCertCSRSA4096RootG5.crt.pem -OutFile certificate4.pem
+          certutil –addstore -enterprise –f "Root" certificate4.pem
+          
+          Invoke-WebRequest -Uri https://cacerts.digicert.com/DigiCertClientECCP384RootG5.crt.pem -OutFile certificate5.pem
+          certutil –addstore -enterprise –f "Root" certificate5.pem
+          
+          Invoke-WebRequest -Uri https://cacerts.digicert.com/DigiCertSMIMERSA4096RootG5.crt.pem -OutFile certificate6.pem
+          certutil –addstore -enterprise –f "Root" certificate6.pem
+          
+          Invoke-WebRequest -Uri https://cacerts.digicert.com/DigiCertSMIMEECCP384RootG5.crt.pem -OutFile certificate7.pem
+          certutil –addstore -enterprise –f "Root" certificate7.pem
+          
+          Invoke-WebRequest -Uri https://cacerts.digicert.com/DigiCertSMIMERSA4096RootG5.crt.pem -OutFile certificate8.pem
+          certutil –addstore -enterprise –f "Root" certificate8.pem
+          
+          Invoke-WebRequest -Uri https://cacerts.digicert.com/DigiCertECCP384RootG5.crt.pem -OutFile certificate9.pem
+          certutil –addstore -enterprise –f "Root" certificate9.pem
+          
+          Invoke-WebRequest -Uri https://cacerts.digicert.com/DigiCertRSA4096RootG5.crt.pem -OutFile certificate10.pem
+          certutil –addstore -enterprise –f "Root" certificate10.pem
+        displayName: "Download DigiCert TLS ECC P-384 Root G5 certificate"
 
       - powershell: .\scripts\build\store-azp-variables.ps1
         displayName: "Store AZP Variables"
@@ -94,24 +130,28 @@ stages:
         inputs:
           secureFile: SonarSourceSecret.snk
 
+#      - task: DownloadSecureFile@1
+#        displayName: 'Download pfx file'
+#        name: pfx
+#        inputs:
+#          secureFile: 'SonarSource-2021-2023.pfx'
+
       - task: DownloadSecureFile@1
-        displayName: 'Download pfx file'
-        name: pfx
+        displayName: 'Download p12 file'
+        name: SM_CLIENT_CERT_FILE
         inputs:
-          secureFile: 'SonarSource-2021-2023.pfx'
+          secureFile: 'digicert_authentication_certificate.p12'
 
       - task: VSBuild@1
         displayName: "Build and sign SonarAnalyzer solution"
         env:
           SIGNTOOL_PATH: 'C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.17763.0\\x64\\signtool.exe'
-          PFX_PASSWORD: $(pfxPassword2021-2023)
-          PFX_PATH: $(pfx.secureFilePath)
+          PFX_PASSWORD: $(SM_CLIENT_CERT_PASSWORD)
+          PFX_PATH: $(SM_CLIENT_CERT_PASSWORD.secureFilePath)
         inputs:
           solution: '$(solution)'
           platform: '$(buildPlatform)'
           configuration: '$(buildConfiguration)'
-          # Code signing is temporarily disabled until new certificate is properly set up
-          # https://github.com/SonarSource/sonar-dotnet/issues/8230
           msbuildArgs: '/p:SignAssembly=false /p:AssemblyOriginatorKeyFile="$(snk.secureFilePath)" /p:Sha1=$(Build.SourceVersion) /p:BuildNumber=$(Build.BuildId) /p:WarningLevel=0'
           vsVersion: $(vsVersion)
 
@@ -125,15 +165,12 @@ stages:
           verbosityPack: 'Detailed'
           publishPackageMetadata: true
 
-      # Code signing is temporarily disabled until new certificate is properly set up.
-      # https://github.com/SonarSource/sonar-dotnet/issues/8230
       - task: NuGetCommand@2
-        enabled: false
         displayName: "Sign NuGet packages"
-        condition: eq(variables.isReleaseBranch, 'True')
+        # condition: eq(variables.isReleaseBranch, 'True')
         inputs:
           command: 'custom'
-          arguments: 'sign $(Build.ArtifactStagingDirectory)\packages\*.nupkg -CertificatePath $(pfx.secureFilePath) -CertificatePassword $(pfxPassword2021-2023) -Timestamper http://sha256timestamp.ws.symantec.com/sha256/timestamp'
+          arguments: 'sign $(Build.ArtifactStagingDirectory)\packages\*.nupkg -CertificatePath $(SM_CLIENT_CERT_FILE.secureFilePath) -CertificatePassword $(SM_CLIENT_CERT_PASSWORD) -Timestamper http://sha256timestamp.ws.symantec.com/sha256/timestamp'
 
       - task: PublishBuildArtifacts@1
         displayName: 'Publish NuGet packages as build artifacts'
