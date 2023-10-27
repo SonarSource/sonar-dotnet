@@ -85,8 +85,13 @@ function GenerateRuleClassesCS() {
     $FilesMap = @{
         "Rule.CS.cs"     = "${RulesFolderCS}\\${className}.cs"
         "Test.CS.cs"     = "${RulesFolderTests}\\${className}Test.cs"
-        "TestCase.CS.cs" = "${TestCasesFolder}\\${className}.cs"
     }
+
+    if (-Not (Test-Path -Path "${TestCasesFolder}\\${className}.cs" -PathType Leaf))
+    {
+        $FilesMap["TestCase.CS.cs"] = "${TestCasesFolder}\\${className}.cs"
+    }
+
     WriteClasses $FilesMap $ClassName
 }
 
@@ -103,7 +108,11 @@ function GenerateRuleClassesVB() {
     }
 
     $FilesMap["Rule.VB.cs"] = "${RulesFolderVB}\\${ClassName}.cs"
-    $FilesMap["TestCase.VB.vb"] = "${TestCasesFolder}\\${ClassName}.vb"
+
+    if (-Not (Test-Path -Path "${TestCasesFolder}\\${className}.vb" -PathType Leaf))
+    {
+        $FilesMap["TestCase.VB.vb"] = "${TestCasesFolder}\\${ClassName}.vb"
+    }
 
     WriteClasses $FilesMap
 }
@@ -228,12 +237,13 @@ popd
 
 if ($ClassName -And $RuleKey) {
     if ($Language -eq "cs") {
-       GenerateRuleClassesCS
+        CopyTestCasesFromRspec $ClassName "${RspecRepositoryPath}\\rules\\${RuleKey}\\csharp" $TestCasesFolder
+        GenerateRuleClassesCS
     }
     elseif ($Language -eq "vbnet") {
-       GenerateRuleClassesVB
+        CopyTestCasesFromRspec $ClassName "${RspecRepositoryPath}\\rules\\${RuleKey}\\vbnet" $TestCasesFolder
+        GenerateRuleClassesVB
     }
-    CopyTestCasesFromRspec $ClassName "${RspecRepositoryPath}\\rules\\${RuleKey}\\csharp" $TestCasesFolder
     UpdateRuleTypeMapping
     GenerateBaseClassIfSecondLanguage
 }

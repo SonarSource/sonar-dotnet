@@ -57,4 +57,52 @@ Describe 'CopyTestCasesFromRspec - <_> files' -ForEach $FileExtension {
         Get-ChildItem -Path $OutputFolder -File -name | Should -Contain "RuleName.Scenario1$_"
         "$OutputFolder\RuleName.Scenario1$_" | Should -Exist
     }
+
+    It 'should add a suffix counter when output files have the same name' {
+        New-Item -Path $InputFolder -Name "SomeTestCase$_" -ItemType "file"
+        New-Item -Path $InputFolder -Name "SomeOtherTestCases$_" -ItemType "file"
+        New-Item -Path $InputFolder -Name "ThirdTestCases$_" -ItemType "file"
+
+        CopyTestCasesFromRspec "RuleName" $InputFolder $OutputFolder
+
+        Get-ChildItem -Path $OutputFolder -File -name | Should -Contain "RuleName$_"
+        Get-ChildItem -Path $OutputFolder -File -name | Should -Contain "RuleName.1$_"
+        Get-ChildItem -Path $OutputFolder -File -name | Should -Contain "RuleName.2$_"
+        "$OutputFolder\RuleName$_" | Should -Exist
+        "$OutputFolder\RuleName.1$_" | Should -Exist
+        "$OutputFolder\RuleName.2$_" | Should -Exist
+    }
+
+    It 'should add a suffix counter when output files have the same scenario' {
+        New-Item -Path $InputFolder -Name "SomeTestCase.Scenario$_" -ItemType "file"
+        New-Item -Path $InputFolder -Name "SomeOtherTestCases.Scenario$_" -ItemType "file"
+        New-Item -Path $InputFolder -Name "ThirdTestCases.Scenario$_" -ItemType "file"
+
+        CopyTestCasesFromRspec "RuleName" $InputFolder $OutputFolder
+
+        Get-ChildItem -Path $OutputFolder -File -name | Should -Contain "RuleName.Scenario$_"
+        Get-ChildItem -Path $OutputFolder -File -name | Should -Contain "RuleName.Scenario.1$_"
+        Get-ChildItem -Path $OutputFolder -File -name | Should -Contain "RuleName.Scenario.2$_"
+        "$OutputFolder\RuleName.Scenario$_" | Should -Exist
+        "$OutputFolder\RuleName.Scenario.1$_" | Should -Exist
+        "$OutputFolder\RuleName.Scenario.2$_" | Should -Exist
+    }
+
+    It 'should add a suffix counter when output files have the same name from different folders' {
+        New-Item -Path $InputFolder -Name "AFolder" -ItemType "directory"
+        New-Item -Path "TestDrive:\input\AFolder" -Name "Scenario$_" -ItemType "file"
+        New-Item -Path $InputFolder -Name "BFolder" -ItemType "directory"
+        New-Item -Path "TestDrive:\input\BFolder" -Name "Scenario$_" -ItemType "file"
+        New-Item -Path $InputFolder -Name "CFolder" -ItemType "directory"
+        New-Item -Path "TestDrive:\input\CFolder" -Name "Scenario$_" -ItemType "file"
+
+        CopyTestCasesFromRspec "RuleName" $InputFolder $OutputFolder
+
+        Get-ChildItem -Path $OutputFolder -File -name | Should -Contain "RuleName.Scenario$_"
+        Get-ChildItem -Path $OutputFolder -File -name | Should -Contain "RuleName.Scenario.1$_"
+        Get-ChildItem -Path $OutputFolder -File -name | Should -Contain "RuleName.Scenario.2$_"
+        "$OutputFolder\RuleName.Scenario$_" | Should -Exist
+        "$OutputFolder\RuleName.Scenario.1$_" | Should -Exist
+        "$OutputFolder\RuleName.Scenario.2$_" | Should -Exist
+    }
 }

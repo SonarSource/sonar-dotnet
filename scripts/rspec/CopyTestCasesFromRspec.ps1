@@ -37,6 +37,14 @@ function CopyTestCasesFromRspec($FileName, $RspecRulePath, $OutputFolder) {
             $scenario = "." + $_.BaseName
         }
 
-        Set-Content -NoNewline -Path "${OutputFolder}\\$FileName$scenario$($_.Extension)" -Value $(Get-Content $_ -Raw) -Encoding UTF8
+        $outputPath = "${OutputFolder}\$FileName$scenario$($_.Extension)"
+
+        if (Test-Path -Path $outputPath -PathType Leaf)
+        {
+            $count = (Get-ChildItem -Path $OutputFolder -Name | Where-Object { $_.StartsWith("$FileName$scenario") }).Count
+            $outputPath = "${OutputFolder}\$FileName$scenario.$count$($_.Extension)"
+        }
+
+        Set-Content -NoNewline -Path $outputPath -Value $(Get-Content $_ -Raw) -Encoding UTF8
     }
 }
