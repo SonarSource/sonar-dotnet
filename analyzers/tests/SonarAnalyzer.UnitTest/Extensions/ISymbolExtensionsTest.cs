@@ -151,6 +151,8 @@ End Class";
         ISymbolExtensionsCommon.IsAutoProperty(CreateSymbol(code, AnalyzerLanguage.VisualBasic)).Should().BeFalse();
     }
 
+#if NET
+
     [DataTestMethod]
     [DataRow("class SymbolMember();", true)]
     [DataRow("class SymbolMember() { }", true)]
@@ -203,6 +205,8 @@ End Class";
 
         methodSymbols.Count(ISymbolExtensionsCS.IsPrimaryConstructor).Should().Be(hasPrimaryConstructor ? 1 : 0);
     }
+
+#endif
 
     private static ISymbol CreateSymbol(string snippet, AnalyzerLanguage language, ParseOptions parseOptions = null)
     {
