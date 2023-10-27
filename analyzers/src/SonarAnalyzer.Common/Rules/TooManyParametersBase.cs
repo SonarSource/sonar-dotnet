@@ -39,6 +39,7 @@ namespace SonarAnalyzer.Rules
         protected abstract int CountParameters(TParameterListSyntax parameterList);
         protected abstract int BaseParameterCount(SyntaxNode node);
         protected abstract bool CanBeChanged(SyntaxNode node, SemanticModel semanticModel);
+        protected virtual bool IsExtern(SyntaxNode node) => false;
 
         protected TooManyParametersBase() =>
             rule = Language.CreateDescriptor(DiagnosticId, MessageFormat, isEnabledByDefault: false);
@@ -50,7 +51,10 @@ namespace SonarAnalyzer.Rules
                 {
                     var parametersCount = CountParameters((TParameterListSyntax)c.Node);
                     var baseCount = BaseParameterCount(c.Node.Parent);
-                    if (parametersCount - baseCount > Maximum && c.Node.Parent != null && CanBeChanged(c.Node.Parent, c.SemanticModel))
+                    if (parametersCount - baseCount > Maximum
+                        && c.Node.Parent is { } parent
+                        && !IsExtern(parent)
+                        && CanBeChanged(parent, c.SemanticModel))
                     {
                         var valueText = baseCount == 0 ? parametersCount.ToString() : $"{parametersCount - baseCount} new";
                         c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], c.Node.GetLocation(), UserFriendlyNameForNode(c.Node.Parent), valueText, Maximum));
