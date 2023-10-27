@@ -3270,3 +3270,41 @@ public class Repro_8080
         }
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8264
+public class Repro_8264
+{
+    enum HttpStatusCode { OK }
+
+    void Repro()
+    {
+        HttpStatusCode? statusCode = null;
+        var contentLength = 0;
+
+        while (true)
+        {
+            var response = "5";
+            if (statusCode is null)
+            {
+                statusCode = HttpStatusCode.OK;
+                continue; // first iteration
+            }
+
+            if (response == "5" && contentLength == 0)  // Noncompliant {{Change this condition so that it does not always evaluate to 'True'.}} FP (contentLength is changed in the second iteration)
+            {
+                contentLength = 7;
+                continue;
+            }
+
+            if (response.Length > 0)
+            {
+                if (contentLength > 0)                  // Noncompliant {{Change this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.}} FP (consequential error)
+                {
+                    Console.WriteLine("Unreachable??"); // Secondary
+                }
+
+                break;
+            }
+        }
+    }
+}
