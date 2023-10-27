@@ -21,6 +21,7 @@
 extern alias vbnet;
 extern alias csharp;
 
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using ISymbolExtensionsCommon = SonarAnalyzer.Helpers.ISymbolExtensions;
@@ -73,7 +74,7 @@ public class ISymbolExtensionsTest
                 public string SymbolMember {{getterSetter}}
             }
             """;
-        ISymbolExtensionsCommon.IsAutoProperty(CreateSymbol(code, false, AnalyzerLanguage.CSharp)).Should().BeTrue();
+        ISymbolExtensionsCommon.IsAutoProperty(CreateSymbol(code, AnalyzerLanguage.CSharp)).Should().BeTrue();
     }
 
     [TestMethod]
@@ -85,7 +86,7 @@ Public Class Sample
     Public Property SymbolMember As String
 
 End Class";
-        ISymbolExtensionsCommon.IsAutoProperty(CreateSymbol(code, false, AnalyzerLanguage.VisualBasic)).Should().BeTrue();
+        ISymbolExtensionsCommon.IsAutoProperty(CreateSymbol(code, AnalyzerLanguage.VisualBasic)).Should().BeTrue();
     }
 
     [TestMethod]
@@ -102,7 +103,7 @@ public class Sample
         set { _SymbolMember = value; }
     }
 }";
-        ISymbolExtensionsCommon.IsAutoProperty(CreateSymbol(code, true, AnalyzerLanguage.CSharp)).Should().BeFalse();
+        ISymbolExtensionsCommon.IsAutoProperty(CreateSymbol(code, AnalyzerLanguage.CSharp)).Should().BeFalse();
     }
 
     [TestMethod]
@@ -123,7 +124,7 @@ Public Class Sample
     End Property
 
 End Class";
-        ISymbolExtensionsCommon.IsAutoProperty(CreateSymbol(code, true,  AnalyzerLanguage.VisualBasic)).Should().BeFalse();
+        ISymbolExtensionsCommon.IsAutoProperty(CreateSymbol(code,  AnalyzerLanguage.VisualBasic)).Should().BeFalse();
     }
 
     [TestMethod]
@@ -134,7 +135,7 @@ public class Sample
 {
     public void SymbolMember() { }
 }";
-        ISymbolExtensionsCommon.IsAutoProperty(CreateSymbol(code, true, AnalyzerLanguage.CSharp)).Should().BeFalse();
+        ISymbolExtensionsCommon.IsAutoProperty(CreateSymbol(code, AnalyzerLanguage.CSharp)).Should().BeFalse();
     }
 
     [TestMethod]
@@ -147,7 +148,7 @@ Public Class Sample
     End Sub
 
 End Class";
-        ISymbolExtensionsCommon.IsAutoProperty(CreateSymbol(code, true, AnalyzerLanguage.VisualBasic)).Should().BeFalse();
+        ISymbolExtensionsCommon.IsAutoProperty(CreateSymbol(code, AnalyzerLanguage.VisualBasic)).Should().BeFalse();
     }
 
     [DataTestMethod]
@@ -155,60 +156,58 @@ End Class";
     [DataRow("class SymbolMember() { }", true)]
     [DataRow("class SymbolMember(int a) { }", true)]
     [DataRow("class SymbolMember { }", false)]
-    [DataRow("class SymbolMember(int a) { SymbolMember() : this(1) { } };", true)]
+    [DataRow("class SymbolMember(int a) { @SymbolMember() : this(1) { } };", true)]
     [DataRow("class SymbolMember { SymbolMember() { } };", false)]
     [DataRow("class Base(int i); class SymbolMember() : Base(1);", true)]
     [DataRow("""
     class Base(int i);
     class SymbolMember : Base
     {
-        SymbolMember() : base(1) { }
+        @SymbolMember() : base(1) { }
     }
     """, false)]
     [DataRow("struct SymbolMember();", true)]
     [DataRow("struct SymbolMember() { }", true)]
     [DataRow("struct SymbolMember(int a) { }", true)]
     [DataRow("struct SymbolMember { }", false)]
-    [DataRow("struct SymbolMember(int a) { public SymbolMember() : this(1) { } };", true)]
-    [DataRow("struct SymbolMember { public SymbolMember() { } };", false)]
+    [DataRow("struct SymbolMember(int a) { public @SymbolMember() : this(1) { } };", true)]
+    [DataRow("struct SymbolMember { public @SymbolMember() { } };", false)]
     [DataRow("record SymbolMember();", true)]
     [DataRow("record SymbolMember() { }", true)]
     [DataRow("record SymbolMember(int a) { }", true)]
     [DataRow("record SymbolMember { }", false)]
-    [DataRow("record SymbolMember(int a) { SymbolMember() : this(1) { } };", true)]
+    [DataRow("record SymbolMember(int a) { @SymbolMember() : this(1) { } };", true)]
     [DataRow("record SymbolMember { SymbolMember() { } };", false)]
     [DataRow("record struct SymbolMember();", true)]
     [DataRow("record struct SymbolMember() { }", true)]
     [DataRow("record struct SymbolMember(int a) { }", true)]
     [DataRow("record struct SymbolMember { }", false)]
-    [DataRow("record struct SymbolMember(int a) { public SymbolMember() : this(1) { } };", true)]
-    [DataRow("record struct SymbolMember { public SymbolMember() { } };", false)]
+    [DataRow("record struct SymbolMember(int a) { public @SymbolMember() : this(1) { } };", true)]
+    [DataRow("record struct SymbolMember { public @SymbolMember() { } };", false)]
     [DataRow("record class SymbolMember();", true)]
     [DataRow("record class SymbolMember() { }", true)]
     [DataRow("record class SymbolMember(int a) { }", true)]
     [DataRow("record class SymbolMember { }", false)]
-    [DataRow("record class SymbolMember(int a) { SymbolMember() : this(1) { } };", true)]
-    [DataRow("record class SymbolMember { SymbolMember() { } };", false)]
+    [DataRow("record class SymbolMember(int a) { @SymbolMember() : this(1) { } };", true)]
+    [DataRow("record class SymbolMember { @SymbolMember() { } };", false)]
     [DataRow("readonly struct SymbolMember();", true)]
     [DataRow("readonly struct SymbolMember() { }", true)]
     [DataRow("readonly struct SymbolMember(int a) { }", true)]
     [DataRow("readonly struct SymbolMember { }", false)]
-    [DataRow("readonly struct SymbolMember(int a) { public SymbolMember() : this(1) { } };", true)]
-    [DataRow("readonly struct SymbolMember { public SymbolMember() { } };", false)]
+    [DataRow("readonly struct SymbolMember(int a) { public @SymbolMember() : this(1) { } };", true)]
+    [DataRow("readonly struct SymbolMember { public @SymbolMember() { } };", false)]
     public void IsPrimaryConstructor_CS(string code, bool hasPrimaryConstructor)
     {
-        var typeSymbol = (INamedTypeSymbol)CreateSymbol(code, true, AnalyzerLanguage.CSharp, ParseOptionsHelper.CSharpLatest.First());
+        var typeSymbol = (INamedTypeSymbol)CreateSymbol(code, AnalyzerLanguage.CSharp, new CSharpParseOptions(Microsoft.CodeAnalysis.CSharp.LanguageVersion.Latest));
         var methodSymbols = typeSymbol.GetMembers().OfType<IMethodSymbol>();
 
         methodSymbols.Count(ISymbolExtensionsCS.IsPrimaryConstructor).Should().Be(hasPrimaryConstructor ? 1 : 0);
     }
 
-    private static ISymbol CreateSymbol(string snippet, bool firstOccurence, AnalyzerLanguage language, ParseOptions parseOptions = null)
+    private static ISymbol CreateSymbol(string snippet, AnalyzerLanguage language, ParseOptions parseOptions = null)
     {
         var (tree, semanticModel) = TestHelper.Compile(snippet, false, language, parseOptions: parseOptions);
-        var node = firstOccurence
-            ? tree.GetRoot().DescendantNodes().First(x => x.ToString().Contains(" SymbolMember"))
-            : tree.GetRoot().DescendantNodes().Last(x => x.ToString().Contains(" SymbolMember"));
+        var node = tree.GetRoot().DescendantNodes().Last(x => x.ToString().Contains(" SymbolMember"));
         return semanticModel.GetDeclaredSymbol(node);
     }
 }
