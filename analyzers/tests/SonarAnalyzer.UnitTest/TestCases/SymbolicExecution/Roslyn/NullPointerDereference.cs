@@ -2076,3 +2076,16 @@ public class Repro_7104
         public bool IsTrue() => true;
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8266
+public class Repro_8266
+{
+    void Method(Exception[] array)
+    {
+        if (array.Any())
+        {
+            Exception exception = array.FirstOrDefault();
+            Console.WriteLine(exception.Message); // Noncompliant - FP
+        }
+    }
+}
