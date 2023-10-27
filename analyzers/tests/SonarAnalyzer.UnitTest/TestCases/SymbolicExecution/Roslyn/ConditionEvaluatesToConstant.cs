@@ -3302,7 +3302,6 @@ public class Repro_8264
                 {
                     Console.WriteLine("Unreachable??"); // Secondary
                 }
-
                 break;
             }
         }
