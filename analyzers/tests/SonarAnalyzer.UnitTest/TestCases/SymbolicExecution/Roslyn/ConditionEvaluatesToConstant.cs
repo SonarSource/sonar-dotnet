@@ -3337,7 +3337,7 @@ public class Repro_8262
             switch (i)
             {
                 case 1:
-                case 4:   // Noncompliant FP
+                case 4:   // Noncompliant {{Change this condition so that it does not always evaluate to 'False'.}} FP
                 case 7:   // Noncompliant FP
                 case 10:  // Noncompliant FP
                 case 13:  // Noncompliant FP
