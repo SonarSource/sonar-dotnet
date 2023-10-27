@@ -24,8 +24,8 @@ extern alias csharp;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using ISymbolExtensionsCommon = SonarAnalyzer.Helpers.ISymbolExtensions;
-using ISymbolExtensionsVB = vbnet::SonarAnalyzer.Extensions.ISymbolExtensions;
 using ISymbolExtensionsCS = csharp::SonarAnalyzer.Extensions.ISymbolExtensions;
+using ISymbolExtensionsVB = vbnet::SonarAnalyzer.Extensions.ISymbolExtensions;
 
 namespace SonarAnalyzer.UnitTest.Extensions;
 
