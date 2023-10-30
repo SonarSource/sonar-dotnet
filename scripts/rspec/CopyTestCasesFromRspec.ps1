@@ -9,12 +9,18 @@
 #    Then the scenario name is the file name, e.g. "Scenario", ignoring the folder name
 # 4. The test case file name does not contain a dot and the test case file is in the root folder, e.g. "MyTestCase.razor"
 #    Then the scenario name is empty, e.g. ""
+# 5. In case of multiple test case files with the same scenario name, e.g. "MyTestCase1.Scenario.razor" and "MyTestCase2.Scenario.razor"
+#    Then the scenario of the first file is "Scenario" and the scenario of the second file is "Scenario.1" and so on
+#    This is to avoid overwriting the first file with the second file
+#    This also applied to the other rules, e.g. "MyTestCase\MyTestCase.Scenario.razor" and "MyTestCase\Scenario.razor"
 #
 # Example:
 #   1. MyTestCase.Scenario.razor            =>  RuleName.Scenario.razor
 #   2. MyTestCase\MyTestCase.Scenario.razor =>  RuleName.Scenario.razor
 #   3. MyTestCase\Scenario.razor            =>  RuleName.Scenario.razor
 #   4. MyTestCase.razor                     =>  RuleName.razor
+#   5. MyTestCase1.Scenario.razor           =>  RuleName.Scenario.razor
+#      MyTestCase2.Scenario.razor           =>  RuleName.Scenario.1.razor
 #
 function CopyTestCasesFromRspec($FileName, $RspecRulePath, $OutputFolder) {
     $TestCaseFileExtension = @(
