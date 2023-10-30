@@ -1,0 +1,23 @@
+{
+  "title": "Parameter should be declared before usage",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "blazor"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-6801",
+  "sqKey": "S6801",
+  "scope": "All",
+  "quickfix": "infeasible",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "HIGH"
+    },
+    "attribute": "LOGICAL"
+  }
+}

@@ -1,0 +1,57 @@
+<h2>Why is this an issue?</h2>
+<p>This rule checks that all Razor <a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/#component-parameters">component
+parameters</a> are properly declared before they are used in the code. Using a parameter that is not declared can lead to undefined behavior and
+runtime exceptions in your program.</p>
+<pre>
+crit: Microsoft.AspNetCore.Components.WebAssembly.Rendering.WebAssemblyRenderer[100]
+      Unhandled exception rendering component: Object of type 'Web.Pages.Samples' does not have a property matching the name 'Other'.
+</pre>
+<h3>Exceptions</h3>
+<p>The rule will not raise when the component has a parameter with <a
+href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.components.parameterattribute.captureunmatchedvalues">CaptureUnmatchedValues</a>
+property set to true.</p>
+<pre>
+@code {
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary&lt;string, object&gt; All { get; set; }
+}
+
+@* Usage: *@
+
+&lt;Print Other="true"/&gt;  @* Compliant *@
+</pre>
+<h2>How to fix it</h2>
+<p>To prevent runtime exceptions and unexpected behavior, always declare parameters prior to their use.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+@code {
+    [Parameter]
+    public bool Param { get; set; }
+}
+
+@* Usage: *@
+
+&lt;Print Other="1"/&gt;     @* Noncompliant *@
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+@code {
+    [Parameter]
+    public bool Param { get; set; }
+}
+
+@* Usage: *@
+
+&lt;Print Param="true"/&gt;  @* Compliant *@
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/#component-parameters">component parameters</a>
+  </li>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.components.parameterattribute.captureunmatchedvalues">CaptureUnmatchedValues
+  property</a> </li>
+</ul>
+
