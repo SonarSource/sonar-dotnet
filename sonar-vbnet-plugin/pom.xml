@@ -38,7 +38,6 @@
   </scm>
 
   <properties>
-    <sonarLTS.version>9.9</sonarLTS.version>
     <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
     <sonarAnalyzer.workDirectory>${project.build.directory}/analyzer</sonarAnalyzer.workDirectory>
     <documentationDirectory>${project.basedir}/src/main/resources</documentationDirectory>
@@ -156,7 +155,7 @@
           <pluginClass>org.sonar.plugins.vbnet.VbNetPlugin</pluginClass>
           <skipDependenciesPackaging>true</skipDependenciesPackaging>
           <sonarLintSupported>false</sonarLintSupported>
-          <pluginApiMinVersion>${sonar.version}</pluginApiMinVersion> <!-- runtime minimal API version -->
+          <pluginApiMinVersion>${plugin.api.min.version}</pluginApiMinVersion>
         </configuration>
       </plugin>
       <plugin>
