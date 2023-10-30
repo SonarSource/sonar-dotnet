@@ -1,0 +1,23 @@
+{
+  "title": "[JSInvokable] attribute should only be used on public methods",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "blazor"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-6798",
+  "sqKey": "S6798",
+  "scope": "All",
+  "quickfix": "infeasible",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "HIGH"
+    },
+    "attribute": "LOGICAL"
+  }
+}
