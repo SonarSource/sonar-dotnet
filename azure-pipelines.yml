@@ -13,7 +13,7 @@ trigger:
 pool:
   name: '.Net Bubble staging'
   demands:
-    - PR_NUMBER -equals 381
+    - PR_NUMBER -equals 384
 
 variables:
   - group: sonar-dotnet-variables
@@ -73,40 +73,14 @@ stages:
       - task: NuGetToolInstaller@1
         displayName: "Install NuGet"
 
+      - task: DownloadSecureFile@1
+        displayName: 'Download p12 file'
+        name: SM_CLIENT_CERT_FILE
+        inputs:
+          secureFile: 'digicert_authentication_certificate.p12'
+
       - script: '"$(MSBUILD_PATH)" /t:restore /p:RestoreLockedMode=true /p:RestoreConfigFile="analyzers\NuGet.Config" $(solution)'
         displayName: "NuGet Restore"
-        
-      - powershell: |
-          Invoke-WebRequest -Uri https://cacerts.digicert.com/DigiCertTLSECCP384RootG5.crt.pem -OutFile certificate1.pem
-          certutil –addstore -enterprise –f "Root" certificate1.pem
-          
-          Invoke-WebRequest -Uri https://cacerts.digicert.com/DigiCertTLSRSA4096RootG5.crt.pem -OutFile certificate2.pem
-          certutil –addstore -enterprise –f "Root" certificate2.pem
-          
-          Invoke-WebRequest -Uri https://cacerts.digicert.com/DigiCertCSECCP384RootG5.crt.pem -OutFile certificate3.pem
-          certutil –addstore -enterprise –f "Root" certificate3.pem
-          
-          Invoke-WebRequest -Uri https://cacerts.digicert.com/DigiCertCSRSA4096RootG5.crt.pem -OutFile certificate4.pem
-          certutil –addstore -enterprise –f "Root" certificate4.pem
-          
-          Invoke-WebRequest -Uri https://cacerts.digicert.com/DigiCertClientECCP384RootG5.crt.pem -OutFile certificate5.pem
-          certutil –addstore -enterprise –f "Root" certificate5.pem
-          
-          Invoke-WebRequest -Uri https://cacerts.digicert.com/DigiCertSMIMERSA4096RootG5.crt.pem -OutFile certificate6.pem
-          certutil –addstore -enterprise –f "Root" certificate6.pem
-          
-          Invoke-WebRequest -Uri https://cacerts.digicert.com/DigiCertSMIMEECCP384RootG5.crt.pem -OutFile certificate7.pem
-          certutil –addstore -enterprise –f "Root" certificate7.pem
-          
-          Invoke-WebRequest -Uri https://cacerts.digicert.com/DigiCertSMIMERSA4096RootG5.crt.pem -OutFile certificate8.pem
-          certutil –addstore -enterprise –f "Root" certificate8.pem
-          
-          Invoke-WebRequest -Uri https://cacerts.digicert.com/DigiCertECCP384RootG5.crt.pem -OutFile certificate9.pem
-          certutil –addstore -enterprise –f "Root" certificate9.pem
-          
-          Invoke-WebRequest -Uri https://cacerts.digicert.com/DigiCertRSA4096RootG5.crt.pem -OutFile certificate10.pem
-          certutil –addstore -enterprise –f "Root" certificate10.pem
-        displayName: "Download DigiCert TLS ECC P-384 Root G5 certificate"
 
       - powershell: .\scripts\build\store-azp-variables.ps1
         displayName: "Store AZP Variables"
@@ -136,11 +110,7 @@ stages:
 #        inputs:
 #          secureFile: 'SonarSource-2021-2023.pfx'
 
-      - task: DownloadSecureFile@1
-        displayName: 'Download p12 file'
-        name: SM_CLIENT_CERT_FILE
-        inputs:
-          secureFile: 'digicert_authentication_certificate.p12'
+      
 
       - task: VSBuild@1
         displayName: "Build and sign SonarAnalyzer solution"
