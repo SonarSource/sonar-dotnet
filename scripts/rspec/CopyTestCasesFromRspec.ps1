@@ -47,7 +47,7 @@ function CopyTestCasesFromRspec($FileName, $RspecRulePath, $OutputFolder) {
 
         if (Test-Path -Path $outputPath -PathType Leaf)
         {
-            $count = (Get-ChildItem -Path $OutputFolder -Name | Where-Object { $_.StartsWith("$FileName$scenario") }).Count
+            $count = (Get-ChildItem -Path $OutputFolder | Where-Object { $_.Name -match "$FileExtension$scenario(\.\d+)?$($_.Extension)" }).Count
             $outputPath = "${OutputFolder}\$FileName$scenario.$count$($_.Extension)"
         }
 

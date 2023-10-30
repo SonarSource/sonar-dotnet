@@ -39,6 +39,7 @@ When the rule has been specified according to the [new RSPEC process](https://gi
 
 - Should not be used to update, just to create a new rule (including to create the `vbnet` impl for an existing `cs` rule).
 - If it's newly specified, you need to give the `-rspecBranch` parameter (see *Usage 2* above).
+  - Specifying the `-rspecBranch` parameter will also copy all test case files from the RSPEC branch to the `TestCases` folder.
 - For updates, use *Usage 1* or *Usage 2*.
 
 ```

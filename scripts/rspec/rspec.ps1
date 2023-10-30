@@ -92,7 +92,7 @@ function GenerateRuleClassesCS() {
         $FilesMap["TestCase.CS.cs"] = "${TestCasesFolder}\\${className}.cs"
     }
 
-    WriteClasses $FilesMap $ClassName
+    WriteClasses $FilesMap
 }
 
 function GenerateRuleClassesVB() {
@@ -109,7 +109,7 @@ function GenerateRuleClassesVB() {
 
     $FilesMap["Rule.VB.cs"] = "${RulesFolderVB}\\${ClassName}.cs"
 
-    if (-Not (Test-Path -Path "${TestCasesFolder}\\${className}.vb" -PathType Leaf))
+    if (-Not (Test-Path -Path "${TestCasesFolder}\\${ClassName}.vb" -PathType Leaf))
     {
         $FilesMap["TestCase.VB.vb"] = "${TestCasesFolder}\\${ClassName}.vb"
     }
@@ -236,12 +236,15 @@ Write-Host "Ran rule-api, will move back to root"
 popd
 
 if ($ClassName -And $RuleKey) {
+    if ($RspecBranch) {
+        $langFolder = If ($Language -eq "vbnet") { "vbnet" } Else { "csharp" }
+        CopyTestCasesFromRspec $ClassName "${RspecRepositoryPath}\\rules\\${RuleKey}\\$langFolder" $TestCasesFolder
+    }
+
     if ($Language -eq "cs") {
-        CopyTestCasesFromRspec $ClassName "${RspecRepositoryPath}\\rules\\${RuleKey}\\csharp" $TestCasesFolder
         GenerateRuleClassesCS
     }
     elseif ($Language -eq "vbnet") {
-        CopyTestCasesFromRspec $ClassName "${RspecRepositoryPath}\\rules\\${RuleKey}\\vbnet" $TestCasesFolder
         GenerateRuleClassesVB
     }
     UpdateRuleTypeMapping
