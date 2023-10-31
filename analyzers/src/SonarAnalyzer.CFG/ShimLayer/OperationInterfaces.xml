@@ -616,7 +616,7 @@
         <summary>Operator method used by the operation, null if the operation does not use an operator method.</summary>
       </Comments>
     </Property>
-    <Property Name="ConstrainedToType" Type="ITypeSymbol?" SkipGeneration="true">
+    <Property Name="ConstrainedToType" Type="ITypeSymbol" SkipGeneration="true">
       <Comments>
         <summary>
           Type parameter which runtime type will be used to resolve virtual invocation of the <see cref="OperatorMethod" />, if any.
@@ -671,7 +671,7 @@
         <summary>Method to be invoked.</summary>
       </Comments>
     </Property>
-    <Property Name="ConstrainedToType" Type="ITypeSymbol?">
+    <Property Name="ConstrainedToType" Type="ITypeSymbol">
       <Comments>
         <summary>
           Type parameter which runtime type will be used to resolve virtual invocation of the <see cref="TargetMethod" />.
@@ -784,7 +784,7 @@
         <summary>Referenced member.</summary>
       </Comments>
     </Property>
-    <Property Name="ConstrainedToType" Type="ITypeSymbol?" MakeAbstract="true">
+    <Property Name="ConstrainedToType" Type="ITypeSymbol" MakeAbstract="true">
       <Comments>
         <summary>
           Type parameter which runtime type will be used to resolve virtual invocation of the <see cref="Member" />.
@@ -835,7 +835,7 @@
         <summary>Referenced method.</summary>
       </Comments>
     </Property>
-    <!--<Property Name="ConstrainedToType" Type="ITypeSymbol?" Override="true"/> Commented out to avoid duplication-->
+    <Property Name="ConstrainedToType" Type="ITypeSymbol" Override="true"/>
     <Property Name="IsVirtual" Type="bool">
       <Comments>
         <summary>Indicates whether the reference uses virtual semantics.</summary>
@@ -858,7 +858,7 @@
         <summary>Referenced property.</summary>
       </Comments>
     </Property>
-    <!--<Property Name="ConstrainedToType" Type="ITypeSymbol?" Override="true"/> Commented out to avoid duplication-->
+    <Property Name="ConstrainedToType" Type="ITypeSymbol" Override="true"/>
     <Property Name="Arguments" Type="ImmutableArray&lt;IArgumentOperation&gt;">
       <Comments>
         <summary>Arguments of the indexer property reference, excluding the instance argument. Arguments are in evaluation order.</summary>
@@ -885,7 +885,7 @@
         <summary>Referenced event.</summary>
       </Comments>
     </Property>
-    <!--<Property Name="ConstrainedToType" Type="ITypeSymbol?" Override="true"/> Commented out to avoid duplication--> 
+    <Property Name="ConstrainedToType" Type="ITypeSymbol" Override="true"/>
   </Node>
   <Node Name="IUnaryOperation" Base="IOperation" VisitorName="VisitUnaryOperator" HasType="true" HasConstantValue="true">
     <OperationKind>
@@ -934,7 +934,7 @@
         <summary>Operator method used by the operation, null if the operation does not use an operator method.</summary>
       </Comments>
     </Property>
-    <Property Name="ConstrainedToType" Type="ITypeSymbol?">
+    <Property Name="ConstrainedToType" Type="ITypeSymbol">
       <Comments>
         <summary>
           Type parameter which runtime type will be used to resolve virtual invocation of the <see cref="OperatorMethod" />, if any.
@@ -1002,7 +1002,7 @@
         <summary>Operator method used by the operation, null if the operation does not use an operator method.</summary>
       </Comments>
     </Property>
-    <Property Name="ConstrainedToType" Type="ITypeSymbol?">
+    <Property Name="ConstrainedToType" Type="ITypeSymbol">
       <Comments>
         <summary>
           Type parameter which runtime type will be used to resolve virtual invocation of the <see cref="OperatorMethod" />
@@ -1348,7 +1348,7 @@
         <summary>Operator method used by the operation, null if the operation does not use an operator method.</summary>
       </Comments>
     </Property>
-    <Property Name="ConstrainedToType" Type="ITypeSymbol?">
+    <Property Name="ConstrainedToType" Type="ITypeSymbol">
       <Comments>
         <summary>
           Type parameter which runtime type will be used to resolve virtual invocation of the <see cref="OperatorMethod" />, if any.
@@ -1858,7 +1858,7 @@
         <summary>Operator method used by the operation, null if the operation does not use an operator method.</summary>
       </Comments>
     </Property>
-    <Property Name="ConstrainedToType" Type="ITypeSymbol?">
+    <Property Name="ConstrainedToType" Type="ITypeSymbol">
       <Comments>
         <summary>
           Type parameter which runtime type will be used to resolve virtual invocation of the <see cref="OperatorMethod" />, if any.
@@ -3207,7 +3207,7 @@
       </Comments>
     </Property>
   </Node>
-  <!--<Node Name="IInterpolatedStringHandlerArgumentPlaceholderOperation" Base="IOperation">  Commented out because it is not needed and InterpolatedStringArgumentPlaceholderKind is missing.
+  <Node Name="IInterpolatedStringHandlerArgumentPlaceholderOperation" Base="IOperation">
     <Comments>
       <summary>
         Represents an argument from the method call, indexer access, or constructor invocation that is creating the containing <see cref="IInterpolatedStringHandlerCreationOperation"/>
@@ -3228,7 +3228,7 @@
         </summary>
       </Comments>
     </Property>
-  </Node>-->
+  </Node>
   <Node Name="IFunctionPointerInvocationOperation" Base="IOperation" ChildrenOrder="Target,Arguments" HasType="true">
     <Comments>
       <summary>

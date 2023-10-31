@@ -240,7 +240,7 @@ namespace StyleCop.Analyzers.CodeGeneration
                 if (property.IsSkipped)
                 {
                     // Generate a NotImplementedException for public properties that do not have a supported type
-                    if (property.IsPublicProperty)
+                    if (property.IsPublicProperty && !property.IsOverride)
                     {
                         // public object Constructor => throw new NotImplementedException("Property 'Type.Property' has unsupported type 'Type'");
                         members = members.Add(SyntaxFactory.PropertyDeclaration(
@@ -1031,6 +1031,7 @@ namespace StyleCop.Analyzers.CodeGeneration
 
                 this.IsNew = node.Attribute("New")?.Value == "true";
                 this.IsPublicProperty = node.Attribute("Internal")?.Value != "true";
+                this.IsOverride = node.Attribute("Override")?.Value == "true";
 
                 this.IsSkipped = this.Type switch
                 {
@@ -1041,9 +1042,10 @@ namespace StyleCop.Analyzers.CodeGeneration
                     "ForEachLoopOperationInfo" => true,
                     "IDiscardSymbol" => true,
                     "InstanceReferenceKind" => true,
+                    "InterpolatedStringArgumentPlaceholderKind" => true,    // Sonar: Skipped because it's not available
                     "LoopKind" => true,
                     "PlaceholderKind" => true,
-                    _ => !this.IsPublicProperty,
+                    _ => !this.IsPublicProperty || this.IsOverride,
                 };
 
                 this.NeedsWrapper = IsAnyOperation(this.Type) && this.Type != "IOperation";
@@ -1068,6 +1070,8 @@ namespace StyleCop.Analyzers.CodeGeneration
             public bool IsNew { get; }
 
             public bool IsPublicProperty { get; }
+
+            public bool IsOverride{ get; }
 
             public bool IsSkipped { get; }
 
