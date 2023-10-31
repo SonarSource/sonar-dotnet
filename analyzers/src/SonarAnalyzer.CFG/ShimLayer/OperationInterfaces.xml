@@ -183,7 +183,7 @@
         </summary>
       </Comments>
     </Property>
-    <Property Name="Info" Type="ForEachLoopOperationInfo" Internal="true" SkipGeneration="true" />
+    <Property Name="Info" Type="ForEachLoopOperationInfo" Internal="true" />
     <Property Name="IsAsynchronous" Type="bool">
       <Comments>
         <summary>
@@ -2628,7 +2628,7 @@
       </Comments>
     </Property>
   </Node>
-  <Node Name="IIsNullOperation" Base="IOperation" Namespace="FlowAnalysis" SkipClassGeneration="true" HasType="true" HasConstantValue="true">
+  <Node Name="IIsNullOperation" Base="IOperation" Namespace="FlowAnalysis" SkipInCloner="true" HasType="true" HasConstantValue="true">
     <Comments>
       <summary>
         Represents result of checking whether the <see cref="Operand" /> is null.
@@ -2846,9 +2846,9 @@
       </Comments>
     </Property>
     <Property Name="IsExhaustive" Type="bool">
-      <Comments>
-        <summary>True if the switch expressions arms cover every possible input value.</summary>
-      </Comments>
+        <Comments>
+          <summary>True if the switch expressions arms cover every possible input value.</summary>
+        </Comments>
     </Property>
   </Node>
   <Node Name="ISwitchExpressionArmOperation" Base="IOperation" ChildrenOrder="Pattern,Guard,Value">
@@ -3209,9 +3209,7 @@
   </Node>
   <Node Name="IInterpolatedStringHandlerArgumentPlaceholderOperation" Base="IOperation">
     <Comments>
-      <summary>
-        Represents an argument from the method call, indexer access, or constructor invocation that is creating the containing <see cref="IInterpolatedStringHandlerCreationOperation"/>
-      </summary>
+      <summary>Represents an argument from the method call, indexer access, or constructor invocation that is creating the containing <see cref="IInterpolatedStringHandlerCreationOperation"/></summary>
     </Comments>
     <Property Name="ArgumentIndex" Type="int">
       <Comments>
@@ -3364,9 +3362,7 @@
     </Comments>
     <Property Name="Operation" Type="IOperation">
       <Comments>
-        <summary>
-          The operation representing the attribute. This can be a <see cref="IObjectCreationOperation" /> in non-error cases, or an <see cref="IInvalidOperation" /> in error cases.
-        </summary>
+        <summary>The operation representing the attribute. This can be a <see cref="IObjectCreationOperation" /> in non-error cases, or an <see cref="IInvalidOperation" /> in error cases.</summary>
       </Comments>
     </Property>
   </Node>
