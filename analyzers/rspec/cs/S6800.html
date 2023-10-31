@@ -1,0 +1,83 @@
+<h2>Why is this an issue?</h2>
+<p>In Blazor, when a <a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/fundamentals/routing#route-constraints">route parameter
+constraint</a> is applied, the value is automatically cast to the corresponding component parameter type. If the constraint type does not match the
+component parameter type, it can lead to confusion and potential runtime errors due to unsuccessful casting. Therefore, it is crucial to ensure that
+the types of route parameters and component parameters match to prevent such issues and maintain code clarity.</p>
+<h2>How to fix it</h2>
+<p>Ensure the component parameter type matches the route parameter constraint type.</p>
+<table>
+  <colgroup>
+    <col style="width: 50%;">
+    <col style="width: 50%;">
+  </colgroup>
+  <thead>
+    <tr>
+      <th>Constraint Type</th>
+      <th>.NET Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><p>bool</p></td>
+      <td><p>bool</p></td>
+    </tr>
+    <tr>
+      <td><p>datetime</p></td>
+      <td><p>DateTime</p></td>
+    </tr>
+    <tr>
+      <td><p>decimal</p></td>
+      <td><p>decimal</p></td>
+    </tr>
+    <tr>
+      <td><p>double</p></td>
+      <td><p>double</p></td>
+    </tr>
+    <tr>
+      <td><p>float</p></td>
+      <td><p>float</p></td>
+    </tr>
+    <tr>
+      <td><p>guid</p></td>
+      <td><p>Guid</p></td>
+    </tr>
+    <tr>
+      <td><p>int</p></td>
+      <td><p>int</p></td>
+    </tr>
+    <tr>
+      <td><p>long</p></td>
+      <td><p>long</p></td>
+    </tr>
+    <tr>
+      <td><p>string</p></td>
+      <td><p>string</p></td>
+    </tr>
+  </tbody>
+</table>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+@page "/my-route/{Param:datetime}"
+
+@code {
+    [Parameter]
+    public string Param { get; set; } // Noncompliant
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+@page "/my-route/{Param:datetime}"
+
+@code {
+    [Parameter]
+    public DateTime Param { get; set; } // Compliant
+}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/fundamentals/routing#route-constraints">Blazor routing and
+  navigation - Route Constraints</a> </li>
+</ul>
+
