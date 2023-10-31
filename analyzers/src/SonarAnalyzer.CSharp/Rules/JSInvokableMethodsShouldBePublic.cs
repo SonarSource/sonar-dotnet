@@ -24,7 +24,7 @@ namespace SonarAnalyzer.Rules.CSharp;
 public sealed class JSInvokableMethodsShouldBePublic : SonarDiagnosticAnalyzer
 {
     private const string DiagnosticId = "S6798";
-    private const string MessageFormat = "FIXME";
+    private const string MessageFormat = "Methods marked as 'JSInvokable' should be 'public'.";
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
@@ -33,11 +33,12 @@ public sealed class JSInvokableMethodsShouldBePublic : SonarDiagnosticAnalyzer
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(c =>
             {
-                var node = c.Node;
-                if (true)
+                var method = (MethodDeclarationSyntax)c.Node;
+                if (method.AttributeLists.SelectMany(x => x.Attributes).Any(x => x.NameIs("JSInvokable", "JSInvokableAttribute"))
+                    && !method.Modifiers.AnyOfKind(SyntaxKind.PublicKeyword))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
+                    c.ReportIssue(Diagnostic.Create(Rule, method.Identifier.GetLocation()));
                 }
             },
-            SyntaxKind.InvocationExpression);
+            SyntaxKind.MethodDeclaration);
 }

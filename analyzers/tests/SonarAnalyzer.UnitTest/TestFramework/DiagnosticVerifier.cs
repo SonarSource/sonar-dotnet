@@ -245,7 +245,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             var buildErrors = GetBuildErrors(diagnostics).ToArray();
 
             var expectedBuildErrors = compilation.SyntaxTrees
-                                                 .Skip(1)
+                                                 .Where(x => !x.FilePath.Contains("ExtraEmptyFile"))
                                                  .Select(x => new FileIssueLocations(x.FilePath, IssueLocationCollector.GetExpectedBuildErrors(x.GetText().Lines).ToList()))
                                                  .ToArray();
 
