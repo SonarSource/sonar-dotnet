@@ -1071,7 +1071,7 @@ namespace StyleCop.Analyzers.CodeGeneration
 
             public bool IsPublicProperty { get; }
 
-            public bool IsOverride{ get; }
+            public bool IsOverride{ get; } // Added by Sonar. Usages are also by Sonar.
 
             public bool IsSkipped { get; }
 
