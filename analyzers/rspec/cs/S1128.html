@@ -1,40 +1,72 @@
 <h2>Why is this an issue?</h2>
-<p>Although unnecessary <code>using</code> won’t change anything to the produced application, removing them:</p>
+<p>Unnecessary <code>using</code> directives refer to importing namespaces, types or creating aliases that are not used or referenced anywhere in the
+code.</p>
+<p>Although they don’t affect the runtime behavior of the application after compilation, removing them will:</p>
 <ul>
-  <li> Will help readability and maintenance. </li>
-  <li> Will help reduce the number of items in the IDE auto-completion list when coding. </li>
-  <li> May avoid some name collisions. </li>
-  <li> May improve compilation time because the compiler has fewer namespaces to look-up when it resolves types. </li>
-  <li> The build will fail if this namespace is removed from the project. </li>
+  <li> Improve the readability and maintainability of the code. </li>
+  <li> Help avoid potential naming conflicts. </li>
+  <li> Improve the build time, as the compiler has fewer lines to read and fewer types to resolve. </li>
+  <li> Reduce the number of items the code editor will show for auto-completion, thereby showing fewer irrelevant suggestions. </li>
 </ul>
-<h3>Noncompliant code example</h3>
+<p>Starting with C# 10, it’s possible to define <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/using-directive#global-modifier">global usings</a> for an entire
+project. They reduce the need for repetitive namespace inclusions, but can also mask which namespaces are truly necessary for the code at hand.
+Over-relying on them can lead to less transparent code dependencies, especially for newcomers to the project.</p>
+<h3>Exceptions</h3>
+<p>The rule will not raise a warning for <code>global using</code> directives, even if none of the types of that namespace are used in the
+project:</p>
 <pre>
-using System.Collections.Generic; // Noncompliant - unnecessary using
-
-namespace Foo
-{
-    public class Bar
-    {
-        public Bar(string path)
-        {
-            File.ReadAllLines(path);
-        }
-    }
-}
+global using System.Net.Sockets; // Compliant by exception
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<p>Unnecessary <code>using</code> directives are ignored in ASP.NET Core projects in the following files:</p>
+<ul>
+  <li> <code>_Imports.razor</code> </li>
+  <li> <code>_ViewImports.cshtml</code> </li>
+</ul>
+<h2>How to fix it</h2>
+<p>While it’s not difficult to remove these unneeded lines manually, modern code editors support the removal of every unnecessary <code>using</code>
+directive with a single click from every file of the project.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 using System.IO;
+using System.Linq;
+using System.Collections.Generic;   // Noncompliant - no types are used from this namespace
+using MyApp.Helpers;                // Noncompliant - FileHelper is in the same namespace
+using MyCustomNamespace;            // Noncompliant - no types are used from this namespace
 
-namespace Foo
+namespace MyApp.Helpers
 {
-    public class Bar
+    public class FileHelper
     {
-        public Bar(string path)
-        {
-            File.ReadAllLines(path);
-        }
+        public static string ReadFirstLine(string filePath) =&gt;
+            File.ReadAllLines(filePath).First();
     }
 }
 </pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+using System.IO;
+using System.Linq;
+
+namespace MyApp.Helpers
+{
+    public class FileHelper
+    {
+        public static string ReadFirstLine(string filePath) =&gt;
+            File.ReadAllLines(filePath).First();
+    }
+}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/using-directive">MSDN - using directives</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/namespace">MSDN - namespaces</a> </li>
+</ul>
+<h3>Related rules</h3>
+<ul>
+  <li> {rule:csharpsquid:S1144} - Unused private types or members should be removed </li>
+  <li> {rule:csharpsquid:S1481} - Unused local variables should be removed </li>
+</ul>
 

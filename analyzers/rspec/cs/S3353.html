@@ -1,8 +1,15 @@
 <h2>Why is this an issue?</h2>
-<p>Marking a variable that is unchanged after initialization <code>const</code> is an indication to future maintainers that "no this isn’t updated,
-and it’s not supposed to be". <code>const</code> should be used in these situations in the interests of code clarity.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<p>If a variable that is not supposed to change is not marked as <code>const</code>, it could be accidentally reassigned elsewhere in the code,
+leading to unexpected behavior and bugs that can be hard to track down.</p>
+<p>By declaring a variable as <code>const</code>, you ensure that its value remains constant throughout the code. It also signals to other developers
+that this value is intended to remain constant. This can make the code easier to understand and maintain.</p>
+<p>In some cases, using <code>const</code> can lead to performance improvements. The compiler might be able to make optimizations knowing that the
+value of a <code>const</code> variable will not change.</p>
+<h2>How to fix it</h2>
+<p>Mark the given variable with the <code>const</code> modifier.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 public bool Seek(int[] input)
 {
   var target = 32;  // Noncompliant
@@ -16,18 +23,8 @@ public bool Seek(int[] input)
   return false;
 }
 </pre>
-<p>or</p>
-<pre>
-public class Sample
-{
-  public void Method()
-  {
-    var context = $"{nameof(Sample)}.{nameof(Method)}";  // Noncompliant (C# 10 and above only)
-  }
-}
-</pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 public bool Seek(int[] input)
 {
   const int target = 32;
@@ -41,8 +38,18 @@ public bool Seek(int[] input)
   return false;
 }
 </pre>
-<p>or</p>
-<pre>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+public class Sample
+{
+  public void Method()
+  {
+    var context = $"{nameof(Sample)}.{nameof(Method)}";  // Noncompliant (C# 10 and above only)
+  }
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
 public class Sample
 {
   public void Method()
@@ -51,4 +58,9 @@ public class Sample
   }
 }
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/const">const</a> </li>
+</ul>
 

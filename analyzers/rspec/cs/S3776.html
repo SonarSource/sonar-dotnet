@@ -1,53 +1,233 @@
+<p>This rule raises an issue when the code cognitive complexity of a function is above a certain threshold.</p>
 <h2>Why is this an issue?</h2>
-<p><a href="https://www.sonarsource.com/docs/CognitiveComplexity.pdf">Cognitive Complexity</a> Complexity is a measure of how hard the control flow of
-a method is to understand.</p>
-<p>Methods with high Cognitive Complexity will be difficult to maintain.</p>
+<p>Cognitive Complexity is a measure of how hard it is to understand the control flow of a unit of code. Code with high cognitive complexity is hard
+to read, understand, test, and modify.</p>
+<p>As a rule of thumb, high cognitive complexity is a sign that the code should be refactored into smaller, easier-to-manage pieces.</p>
+<h3>Which syntax in code does impact cognitive complexity score?</h3>
+<p>Here are the core concepts:</p>
+<ul>
+  <li> <strong>Cognitive complexity is incremented each time the code breaks the normal linear reading flow.</strong><br> This concerns, for example:
+  Loop structures, Conditionals, Catches, Switches, Jumps to label and mixed operators in condition. </li>
+  <li> <strong>Each nesting level adds a malus to the breaking call.</strong><br> During code reading, the deeper you go through nested layers, the
+  harder it becomes to keep the context in mind. </li>
+  <li> <strong>Method calls are free</strong><br> A well-picked method name is a summary of multiple lines of code. A reader can first explore a
+  high-level view of what the code is performing then go deeper and deeper by looking at called functions content.<br> <em>Note:</em> This does not
+  apply to recursive calls, those will increment cognitive score. </li>
+</ul>
+<p>The method of computation is fully detailed in the pdf linked in the resources.</p>
+<h3>What is the potential impact?</h3>
+<p>Developers spend more time reading and understanding code than writing it. High cognitive complexity slows down changes and increases the cost of
+maintenance.</p>
+<h2>How to fix it</h2>
+<p>Reducing cognitive complexity can be challenging.<br> Here are a few suggestions:</p>
+<ul>
+  <li> <strong>Extract complex conditions in a new function.</strong><br> Mixed operators in condition will increase complexity. Extracting the
+  condition in a new function with an appropriate name will reduce cognitive load. </li>
+  <li> <strong>Break down large functions.</strong><br> Large functions can be hard to understand and maintain. If a function is doing too many
+  things, consider breaking it down into smaller, more manageable functions. Each function should have a single responsibility. </li>
+  <li> <strong>Avoid deep nesting by returning early.</strong><br> To avoid the nesting of conditions, process exceptional cases first and return
+  early. </li>
+  <li> <strong>Use null-safe operations (if available in the language).</strong><br> When available the <code>.?</code> or <code>??</code> operator
+  replaces multiple tests and simplifies the flow. </li>
+</ul>
+<h3>Code examples</h3>
+<p><strong>Extraction of a complex condition in a new function.</strong></p>
+<h4>Noncompliant code example</h4>
+<p>The code is using a complex condition and has a cognitive cost of 3.</p>
 <pre data-diff-id="1" data-diff-type="noncompliant">
-int Abs(int n) // Noncompliant: cognitive complexity = 5
+decimal CalculateFinalPrice(User user, Cart cart)
 {
-    if (n &gt;= 0)   // +1
+    decimal total = CalculateTotal(cart);
+    if (user.HasMembership()               // +1 (if)
+        &amp;&amp; user.OrdersCount &gt; 10           // +1 (more than one condition)
+        &amp;&amp; user.AccountActive
+        &amp;&amp; !user.HasDiscount
+        || user.OrdersCount == 1)          // +1 (change of operator in condition)
     {
-        return n;
+
+        total = ApplyDiscount(user, total);
     }
-    else          // +2, due to nesting
-    {
-        if (n == int.MinValue)  // +1
-        {
-            throw new ArgumentException("The absolute value of int.MinValue is outside of int boundaries");
-        }
-        else                    // +1
-        {
-            return -n;
-        }
-    }
+    return total;
 }
 </pre>
-<p>They should be refactored to have lower complexity:</p>
+<h4>Compliant solution</h4>
+<p>Even if the cognitive complexity of the whole program did not change, it is easier for a reader to understand the code of the
+<code>calculateFinalPrice</code> function, which now only has a cognitive cost of 1.</p>
 <pre data-diff-id="1" data-diff-type="compliant">
-int Abs(int n) // Compliant: cognitive complexity = 3
+decimal CalculateFinalPrice(User user, Cart cart)
 {
-    if (n == int.MinValue)  // +1
+    decimal total = CalculateTotal(cart);
+    if (IsEligibleForDiscount(user))       // +1 (if)
     {
-        throw new ArgumentException("The absolute value of int.MinValue is outside of int boundaries");
+        total = applyDiscount(user, total);
     }
-    else if (n &gt;= 0)        // +1
+    return total;
+}
+
+bool IsEligibleForDiscount(User user)
+{
+    return user.HasMembership()
+            &amp;&amp; user.OrdersCount &gt; 10       // +1 (more than one condition)
+            &amp;&amp; user.AccountActive
+            &amp;&amp; !user.HasDiscount
+            || user.OrdersCount == 1;      // +1 (change of operator in condition)
+}
+</pre>
+<p><strong>Break down large functions.</strong></p>
+<h4>Noncompliant code example</h4>
+<p>For example, consider a function that calculates the total price of a shopping cart, including sales tax and shipping.<br> <em>Note:</em> The code
+is simplified here, to illustrate the purpose. Please imagine there is more happening in the <code>foreach</code> loops.</p>
+<pre data-diff-id="3" data-diff-type="noncompliant">
+decimal CalculateTotal(Cart cart)
+{
+    decimal total = 0;
+    foreach (Item item in cart.Items) // +1 (foreach)
     {
-        return n;
+        total += item.Price;
     }
-    else                    // +1
+
+    // calculateSalesTax
+    foreach (Item item in cart.Items) // +1 (foreach)
     {
-        return -n;
+        total += 0.2m * item.Price;
+    }
+
+    //calculateShipping
+    total += 5m * cart.Items.Count;
+
+    return total;
+}
+</pre>
+<p>This function could be refactored into smaller functions: The complexity is spread over multiple functions and the complex
+<code>CalculateTotal</code> has now a complexity score of zero.</p>
+<h4>Compliant solution</h4>
+<pre data-diff-id="3" data-diff-type="compliant">
+decimal CalculateTotal(Cart cart)
+{
+    decimal total = 0;
+    total = CalculateSubtotal(cart, total);
+    total += CalculateSalesTax(cart, total);
+    total += CalculateShipping(cart, total);
+    return total;
+}
+
+decimal CalculateSubtotal(Cart cart, decimal total)
+{
+    foreach (Item item in cart.Items) // +1 (foreach)
+    {
+        total += item.Price;
+    }
+
+    return total;
+}
+
+decimal CalculateSalesTax(Cart cart, decimal total)
+{
+    foreach (Item item in cart.Items)  // +1 (foreach)
+    {
+        total += 0.2m * item.Price;
+    }
+
+    return total;
+}
+
+decimal CalculateShipping(Cart cart, decimal total)
+{
+    total += 5m * cart.Items.Count;
+    return total;
+}
+</pre>
+<p><strong>Avoid deep nesting by returning early.</strong></p>
+<h4>Noncompliant code example</h4>
+<p>The below code has a cognitive complexity of 6.</p>
+<pre data-diff-id="4" data-diff-type="noncompliant">
+decimal CalculateDiscount(decimal price, User user)
+{
+    if (IsEligibleForDiscount(user))    // +1 ( if )
+    {
+        if (user.HasMembership())       // +2 ( nested if )
+        {
+            return price * 0.9m;
+        }
+        else if (user.OrdersCount == 1) // +1 ( else )
+        {
+            return price * 0.95m;
+        }
+        else                            // +1 ( else )
+        {
+            return price;
+        }
+    }
+    else                                // +1 ( else )
+    {
+        return price;
     }
 }
 </pre>
+<h4>Compliant solution</h4>
+<p>Checking for the edge case first flattens the <code>if</code> statements and reduces the cognitive complexity to 3.</p>
+<pre data-diff-id="4" data-diff-type="compliant">
+decimal CalculateDiscount(decimal price, User user)
+{
+    if (!IsEligibleForDiscount(user)) // +1 ( if )
+    {
+        return price;
+    }
+
+    if (user.HasMembership())         // +1 (  if )
+    {
+        return price * 0.9m;
+    }
+
+    if (user.OrdersCount == 1)        // +1 ( else )
+    {
+        return price * 0.95m;
+    }
+
+    return price;
+}
+</pre>
+<p><strong>Use the null-conditional operator to access data.</strong></p>
+<p>In the below code, the cognitive complexity is increased due to the multiple checks required to access the manufacturer’s name. This can be
+simplified using the optional chaining operator.</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+string GetManufacturerName(Product product)
+{
+    string manufacturerName = null;
+    if (product != null &amp;&amp; product.Details != null &amp;&amp;
+        product.Details.Manufacturer != null) // +1 (if) +1 (multiple condition)
+    {
+        manufacturerName = product.Details.Manufacturer.Name;
+    }
+
+    if (manufacturerName != null) // +1 (if)
+    {
+        return manufacturerName;
+    }
+
+    return "Unknown";
+}
+</pre>
+<h4>Compliant solution</h4>
+<p>The optional chaining operator will return <code>null</code> if any reference in the chain is <code>null</code>, avoiding multiple checks. The
+<code>??</code> operator allows to provide the default value to use.</p>
+<pre data-diff-id="2" data-diff-type="compliant">
+string GetManufacturerName(Product product)
+{
+    return product?.Details?.Manufacturer?.Name ?? "Unknown";
+}
+</pre>
+<h3>Pitfalls</h3>
+<p>As this code is complex, ensure that you have unit tests that cover the code before refactoring.</p>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> <a href="https://www.sonarsource.com/docs/CognitiveComplexity.pdf">Cognitive Complexity</a> </li>
+  <li> Sonar - <a href="https://www.sonarsource.com/docs/CognitiveComplexity.pdf">Cognitive Complexity</a> </li>
 </ul>
 <h3>Articles &amp; blog posts</h3>
 <ul>
-  <li> <a href="https://www.sonarsource.com/blog/5-clean-code-tips-for-reducing-cognitive-complexity/">5 Clean Code Tips for Reducing Cognitive
-  Complexity</a> </li>
+  <li> Sonar Blog - <a href="https://www.sonarsource.com/blog/5-clean-code-tips-for-reducing-cognitive-complexity/">5 Clean Code Tips for Reducing
+  Cognitive Complexity</a> </li>
 </ul>
 

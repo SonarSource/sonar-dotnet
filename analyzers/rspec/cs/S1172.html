@@ -1,21 +1,39 @@
 <h2>Why is this an issue?</h2>
-<p>Unused parameters are misleading. Whatever the values passed to such parameters, the behavior will be the same.</p>
+<p>A typical code smell known as unused function parameters refers to parameters declared in a function but not used anywhere within the function’s
+body. While this might seem harmless at first glance, it can lead to confusion and potential errors in your code. Disregarding the values passed to
+such parameters, the function’s behavior will be the same, but the programmer’s intention won’t be clearly expressed anymore. Therefore, removing
+function parameters that are not being utilized is considered best practice.</p>
 <p>This rule raises an issue when a <code>private</code> method or constructor of a class/struct takes a parameter without using it.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-private void DoSomething(int a, int b) // "b" is unused
+<h3>Exceptions</h3>
+<p>This rule doesn’t raise any issue in the following contexts:</p>
+<ul>
+  <li> The <code>this</code> parameter of extension methods. </li>
+  <li> Methods decorated with attributes. </li>
+  <li> Empty methods. </li>
+  <li> Methods which only throw <code>NotImplementedException</code>. </li>
+  <li> The Main method of the application. </li>
+  <li> <code>virtual</code>, <code>override</code> methods. </li>
+  <li> interface implementations. </li>
+</ul>
+<h2>How to fix it</h2>
+<p>Having unused function parameters in your code can lead to confusion and misunderstanding of a developer’s intention. They reduce code readability
+and introduce the potential for errors. To avoid these problems, developers should remove unused parameters from function declarations.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+private void DoSomething(int a, int b) // Noncompliant, "b" is unused
 {
     Compute(a);
 }
 
-private void DoSomething2(int a) // value of "a" is unused
+private void DoSomething2(int a) // Noncompliant, the value of "a" is unused
 {
     a = 10;
     Compute(a);
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 private void DoSomething(int a)
 {
     Compute(a);
@@ -27,15 +45,4 @@ private void DoSomething2()
     Compute(a);
 }
 </pre>
-<h3>Exceptions</h3>
-<p>This rule doesn’t raise any issue in the following contexts:</p>
-<ul>
-  <li> The <code>this</code> parameter of extension methods. </li>
-  <li> Methods decorated with attributes. </li>
-  <li> Empty methods. </li>
-  <li> Methods which only throw <code>NotImplementedException</code>. </li>
-  <li> Main methods. </li>
-  <li> <code>virtual</code>, <code>override</code> methods. </li>
-  <li> interface implementations. </li>
-</ul>
 

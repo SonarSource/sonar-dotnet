@@ -1,9 +1,13 @@
 <h2>Why is this an issue?</h2>
-<p>Nested <code>If</code>, <code>Select</code>, <code>For</code>, <code>For Each</code>, <code>While</code>, <code>Do</code>, and <code>Try</code>
-statements are key ingredients for making what’s known as "Spaghetti code".</p>
-<p>Such code is hard to read, refactor and therefore maintain.</p>
-<h3>Noncompliant code example</h3>
-<p>With the default threshold of 3:</p>
+<p>Nested control flow statements <code>If</code>, <code>Select</code>, <code>For</code>, <code>For Each</code>, <code>While</code>, <code>Do</code>,
+and <code>Try</code> are often key ingredients in creating what’s known as "Spaghetti code". This code smell can make your program difficult to
+understand and maintain.</p>
+<p>When numerous control structures are placed inside one another, the code becomes a tangled, complex web. This significantly reduces the code’s
+readability and maintainability, and it also complicates the testing process.</p>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<p>The following example demonstrates the behavior of the rule with the default threshold of 3 levels of nesting:</p>
+<h4>Noncompliant code example</h4>
 <pre>
 If condition1 ' Compliant - depth = 1
   ' ...

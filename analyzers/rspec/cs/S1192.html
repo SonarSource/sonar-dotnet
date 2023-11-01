@@ -1,8 +1,19 @@
 <h2>Why is this an issue?</h2>
-<p>Duplicated string literals make the process of refactoring error-prone, since you must be sure to update all occurrences.</p>
-<p>On the other hand, constants can be referenced from many places, but only need to be updated in a single place.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<p>Duplicated string literals make the process of refactoring complex and error-prone, as any change would need to be propagated on all
+occurrences.</p>
+<h3>Exceptions</h3>
+<p>The following are ignored:</p>
+<ul>
+  <li> literals with fewer than 5 characters </li>
+  <li> literals matching one of the parameter names </li>
+  <li> literals used in attributes </li>
+</ul>
+<h2>How to fix it</h2>
+<p>Instead, use constants to replace the duplicated string literals. Constants can be referenced from many places, but only need to be updated in a
+single place.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 public class Foo
 {
     private string name = "foobar"; // Noncompliant
@@ -15,8 +26,8 @@ public class Foo
     }
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 public class Foo
 {
     private const string Foobar = "foobar";
@@ -31,11 +42,4 @@ public class Foo
     }
 }
 </pre>
-<h3>Exceptions</h3>
-<p>The following are ignored:</p>
-<ul>
-  <li> literals with fewer than 5 characters </li>
-  <li> literals matching one of the parameter names </li>
-  <li> literals used in attributes </li>
-</ul>
 

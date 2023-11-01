@@ -1,5 +1,5 @@
 {
-  "title": "Unused \"using\" should be removed",
+  "title": "Unnecessary \"using\" should be removed",
   "type": "CODE_SMELL",
   "code": {
     "impacts": {
@@ -10,7 +10,7 @@
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
-    "constantCost": "2min"
+    "constantCost": "1min"
   },
   "tags": [
     "unused"

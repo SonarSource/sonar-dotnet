@@ -1,5 +1,4 @@
 {
-  "title": "Local variables should not shadow class fields or properties",
   "type": "CODE_SMELL",
   "code": {
     "impacts": {
@@ -20,5 +19,6 @@
   "ruleSpecification": "RSPEC-1117",
   "sqKey": "S1117",
   "scope": "All",
-  "quickfix": "infeasible"
+  "quickfix": "infeasible",
+  "title": "Local variables should not shadow class fields or properties"
 }

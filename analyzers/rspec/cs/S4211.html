@@ -1,50 +1,68 @@
+<p>Transparency attributes in the .NET Framework, designed to protect security-critical operations, can lead to ambiguities and vulnerabilities when
+declared at different levels such as both for the class and a method.</p>
 <h2>Why is this an issue?</h2>
-<p>Transparency attributes, <code>SecurityCriticalAttribute</code> and <code>SecuritySafeCriticalAttribute</code> are used to identify code that
-performs security-critical operations. The second one indicates that it is safe to call this code from transparent, while the first one does not.
-Since the transparency attributes of code elements with larger scope take precedence over transparency attributes of code elements that are contained
-in the first element a class, for instance, with a <code>SecurityCriticalAttribute</code> can not contain a method with a
-<code>SecuritySafeCriticalAttribute</code>.</p>
-<p>This rule raises an issue when a member is marked with a <code>System.Security</code> security attribute that has a different transparency than the
-security attribute of a container of the member.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<p>Transparency attributes can be declared at several levels. If two different attributes are declared at two different levels, the attribute that
+prevails is the one in the highest level. For example, you can declare that a class is <code>SecuritySafeCritical</code> and that a method of this
+class is <code>SecurityCritical</code>. In this case, the method will be <code>SecuritySafeCritical</code> and the <code>SecurityCritical</code>
+attribute attached to it is ignored.</p>
+<h3>What is the potential impact?</h3>
+<p>Below are some real-world scenarios that illustrate some impacts of an attacker exploiting the vulnerability.</p>
+<h4>Elevation of Privileges</h4>
+<p>An attacker could potentially exploit conflicting transparency attributes to perform actions with higher privileges than intended.</p>
+<h4>Data Exposure</h4>
+<p>If a member with conflicting attributes is involved in handling sensitive data, an attacker could exploit the vulnerability to gain unauthorized
+access to this data. This could lead to breaches of confidentiality and potential data loss.</p>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 using System;
 using System.Security;
 
 namespace MyLibrary
 {
-
-    [SecurityCritical]
+    [SecuritySafeCritical]
     public class Foo
     {
-        [SecuritySafeCritical] // Noncompliant
+        [SecurityCritical] // Noncompliant
         public void Bar()
         {
         }
     }
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 using System;
 using System.Security;
 
 namespace MyLibrary
 {
-
-    [SecurityCritical]
     public class Foo
     {
+        [SecurityCritical]
         public void Bar()
         {
         }
     }
 }
 </pre>
+<h3>How does this work?</h3>
+<h4>Never set class-level annotations</h4>
+<p>A class should never have class-level annotations if some functions have different permission levels. Instead, make sure every function has its own
+correct annotation.</p>
+<p>If no function needs a particularly distinct security annotation in a class, just set a class-level <code>[SecurityCritical]</code>.</p>
 <h2>Resources</h2>
+<h3>Articles &amp; blog posts</h3>
 <ul>
-  <li> <a href="https://owasp.org/Top10/A05_2021-Security_Misconfiguration/">OWASP Top 10 2021 Category A5</a> - Security Misconfiguration </li>
-  <li> <a href="https://owasp.org/www-project-top-ten/2017/A6_2017-Security_Misconfiguration">OWASP Top 10 2017 Category A6</a> - Security
-  Misconfiguration </li>
+  <li> Redgate Hub - <a
+  href="https://www.red-gate.com/simple-talk/development/dotnet-development/whats-new-in-code-access-security-in-net-framework-4-0-part-i/">What’s New
+  in Code Access Security in .NET Framework 4.0 – Part I</a> </li>
+</ul>
+<h3>Standards</h3>
+<ul>
+  <li> OWASP - <a href="https://owasp.org/Top10/A05_2021-Security_Misconfiguration/">Top 10 2021 Category A5 - Security Misconfiguration</a> </li>
+  <li> OWASP - <a href="https://owasp.org/www-project-top-ten/2017/A6_2017-Security_Misconfiguration">Top 10 2017 Category A6 - Security
+  Misconfiguration</a> </li>
 </ul>
 

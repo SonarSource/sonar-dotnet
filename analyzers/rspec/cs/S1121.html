@@ -1,41 +1,60 @@
 <h2>Why is this an issue?</h2>
-<p>Assignments within sub-expressions are hard to spot and therefore make the code less readable. Ideally, sub-expressions should not have
-side-effects.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-if (string.IsNullOrEmpty(result = str.Substring(index, length))) // Noncompliant
-{
-  //...
-}
-</pre>
-<h3>Compliant solution</h3>
-<pre>
-var result = str.Substring(index, length);
-if (string.IsNullOrEmpty(result))
-{
-  //...
-}
-</pre>
+<p>A common code smell that can hinder the clarity of source code is making assignments within sub-expressions. This practice involves assigning a
+value to a variable inside a larger expression, such as within a loop or a conditional statement.</p>
+<p>This practice essentially gives a side-effect to a larger expression, thus making it less readable. This often leads to confusion and potential
+errors.</p>
 <h3>Exceptions</h3>
 <p>Assignments inside lambda and delegate expressions are allowed.</p>
-<p>Furthermore, the following patterns are also accepted:</p>
+<pre>
+var result = Foo(() =&gt;
+{
+   int x = 100; // dead store, but ignored
+   x = 200;
+   return x;
+}
+</pre>
+<p>The rule also ignores the following patterns:</p>
+<ul>
+  <li> Chained assignments </li>
+</ul>
 <pre>
 var a = b = c = 10;
 </pre>
+<ul>
+  <li> Assignments that are part of a condition of an <code>if</code> statement or a loop </li>
+</ul>
 <pre>
 while ((val = GetNewValue()) &gt; 0)
 {
 ...
 }
 </pre>
+<ul>
+  <li> Assignment in the right-hand side of a coalescing operator </li>
+</ul>
 <pre>
 private MyClass instance;
-public MyClass Instance
+public MyClass Instance =&gt; instance ?? (instance = new MyClass());
+</pre>
+<h2>How to fix it</h2>
+<p>Making assignments within sub-expressions can hinder the clarity of source code.</p>
+<p>This practice essentially gives a side-effect to a larger expression, thus making it less readable. This often leads to confusion and potential
+errors.</p>
+<p>Extracting assignments into separate statements is encouraged to keep the code clear and straightforward.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+if (string.IsNullOrEmpty(result = str.Substring(index, length))) // Noncompliant
 {
-  get
-  {
-    return instance ?? (instance = new MyClass());
-  }
+  // do something with "result"
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+var result = str.Substring(index, length);
+if (string.IsNullOrEmpty(result))
+{
+  // do something with "result"
 }
 </pre>
 <h2>Resources</h2>

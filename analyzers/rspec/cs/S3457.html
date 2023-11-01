@@ -1,38 +1,78 @@
 <h2>Why is this an issue?</h2>
+<p>A [composite format string](<a
+href="https://learn.microsoft.com/en-us/dotnet/standard/base-types/composite-formatting">https://learn.microsoft.com/en-us/dotnet/standard/base-types/composite-formatting</a>)
+is a string that contains placeholders, represented by indices inside curly braces "{0}", "{1}", etc. These placeholders are replaced by values when
+the string is printed or logged.</p>
 <p>Because composite format strings are interpreted at runtime, rather than validated by the compiler, they can contain errors that lead to unexpected
-behaviors or runtime errors. This rule statically validates the good behavior of composite formats when calling the methods of
-<code>String.Format</code>, <code>StringBuilder.AppendFormat</code>, <code>Console.Write</code>, <code>Console.WriteLine</code>,
-<code>TextWriter.Write</code>, <code>TextWriter.WriteLine</code>, <code>Debug.WriteLine(String, Object[])</code>,
-<code>Trace.TraceError(String, Object[])</code>, <code>Trace.TraceInformation(String, Object[])</code>,
-<code>Trace.TraceWarning(String, Object[])</code> and <code>TraceSource.TraceInformation(String, Object[])</code>.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-s = string.Format("{0}", arg0, arg1); // Noncompliant, arg1 is declared but not used.
-s = string.Format("{0} {2}", arg0, arg1, arg2); // Noncompliant, the format item with index 1 is missing so arg1 will not be used.
-s = string.Format("foo"); // Noncompliant, there is no need to use string.Format here.
-</pre>
-<h3>Compliant solution</h3>
-<pre>
-s = string.Format("{0}", arg0);
-s = string.Format("{0} {1}", arg0, arg2);
-s = "foo";
-</pre>
+behaviors or runtime errors.</p>
+<p>This rule validates the correspondence between arguments and composite formats when calling the following methods:</p>
+<ul>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.format?view=net-7.0"><code>String.Format</code></a> </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.text.stringbuilder.appendformat?view=net-7.0"><code>StringBuilder.AppendFormat</code></a>
+  </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.console.write?view=net-7.0"><code>Console.Write</code></a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.console.writeline?view=net-7.0"><code>Console.WriteLine</code></a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.io.textwriter.write?view=net-7.0"><code>TextWriter.Write</code></a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.io.textwriter.writeline?view=net-7.0"><code>TextWriter.WriteLine</code></a> </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.debug.writeline?view=net-7.0"><code>Debug.WriteLine(String, Object[</code></a><code>)</code>] </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.trace.traceerror?view=net-7.0"><code>Trace.TraceError(String, Object[</code></a><code>)</code>] </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.trace.traceinformation?view=net-7.0"><code>Trace.TraceInformation(String, Object[</code></a><code>)</code>] </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.trace.tracewarning?view=net-7.0"><code>Trace.TraceWarning(String, Object[</code></a><code>)</code>] </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.tracesource.traceinformation?view=net-7.0"><code>TraceSource.TraceInformation(String, Object[</code></a><code>)</code>] </li>
+</ul>
 <h3>Exceptions</h3>
 <ul>
-  <li> No issue is raised if the format string is not a <code>const</code>. </li>
+  <li> No issue is raised if the format string is not a string literal, but comes from a variable. </li>
 </ul>
 <pre>
 var pattern = "{0} {1} {2}";
-var res = string.Format(pattern, 1, 2); // Compliant, not const string are not recognized
+var res = string.Format(pattern, 1, 2); // Incorrect, but the analyzer doesn't raise any warnings here
 </pre>
 <ul>
-  <li> No issue is raised if the argument is not an inline creation array. </li>
+  <li> No issue is raised if the argument is not an inline created array. </li>
 </ul>
 <pre>
 var array = new int[] {};
-var res = string.Format("{0} {1}", array); // Compliant we don't know the size of the array
+var res = string.Format("{0} {1}", array); // Compliant; we don't know the size of the array
 </pre>
 <ul>
   <li> This rule doesn’t check whether the format specifier (defined after the <code>:</code>) is actually valid. </li>
 </ul>
+<h2>How to fix it</h2>
+<p>A composite format string contains placeholders, replaced by values when the string is printed or logged. Mismatch in the format specifiers and the
+arguments provided can lead to incorrect strings being created.</p>
+<p>To avoid issues, a developer should ensure that the provided arguments match format specifiers.</p>
+<p>Moreover, use <a href="https://learn.microsoft.com/en-us/dotnet/csharp/tutorials/string-interpolation">string interpolation</a> when possible.</p>
+<p>Instead of</p>
+<pre>
+string str = string.Format("Hello {0} {1}!", firstName, lastName);
+</pre>
+<p>use</p>
+<pre>
+string str = $"Hello {firstName} {lastName}!";
+</pre>
+<p>With string interpolation:</p>
+<ul>
+  <li> the arguments are validated at compilation time rather than runtime </li>
+  <li> modern code editors provide auto-completion when typing the interpolation expression </li>
+</ul>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+s = string.Format("{0}", arg0, arg1); // Noncompliant, arg1 is declared but not used.
+s = string.Format("{0} {2}", arg0, arg1, arg2); // Noncompliant, the format item with index 1 is missing, so arg1 will not be used.
+s = string.Format("foo"); // Noncompliant; there is no need to use "string.Format" here.
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+s = string.Format("{0}", arg0);
+s = string.Format("{0} {1}", arg0, arg2);
+s = "foo";
+</pre>
 
