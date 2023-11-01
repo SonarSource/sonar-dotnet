@@ -68,7 +68,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
         [TestMethod]
         public void Description_TagsAreRemoved() =>
-            ValidateDescription("S1116", "i.e. <code>;</code>, are", "Empty statements, i.e. ;, are usually introduced by mistake, for example because:");
+            ValidateDescription("S1116", "by a semicolon <code>;</code>", "Empty statements represented by a semicolon ; are statements that do not perform any operation.");
 
         [TestMethod]
         public void Description_HtmlIsDecoded() =>
