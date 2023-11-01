@@ -1,0 +1,17 @@
+﻿@using Microsoft.JSInterop
+
+@code {
+    private void JSInvokableImplicitelyPrivateMethodInCodeBlock() { }               // Compliant: not a JSInvokable
+    [JSInvokable] private void JSInvokableExplicitelyPrivateMethodInCodeBlock() { } // Noncompliant {{Methods marked as 'JSInvokable' should be 'public'.}}
+    //                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+}
+
+@functions {
+    [JSInvokable] private void JSInvokablePrivateMethodInFunctionsBlock() { } // Noncompliant
+}
+
+@{
+    [JSInvokable] void JSInvokableLocalFunctionInDirective() { }              // Compliant: local function
+    [JSInvokable] static void JSInvokableStaticLocalFunctionInDirective() { } // Compliant: local function
+}
+

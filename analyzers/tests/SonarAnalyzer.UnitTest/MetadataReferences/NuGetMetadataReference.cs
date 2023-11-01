@@ -99,6 +99,7 @@ namespace SonarAnalyzer.UnitTest.MetadataReferences
             .Concat(Create("Microsoft.Extensions.Logging.EventLog", packageVersion));
         public static References MicrosoftExtensionsOptions(string packageVersion) => Create("Microsoft.Extensions.Options", packageVersion);
         public static References MicrosoftExtensionsPrimitives(string packageVersion) => Create("Microsoft.Extensions.Primitives", packageVersion);
+        public static References MicrosoftJSInterop(string packageVersion) => Create("Microsoft.JSInterop", packageVersion);
         public static References MicrosoftNetHttpHeaders(string packageVersion) => Create("Microsoft.Net.Http.Headers", packageVersion);
         public static References MicrosoftNetSdkFunctions(string packageVersion = Constants.NuGetLatestVersion) =>
             Create("Microsoft.NET.Sdk.Functions", packageVersion)
