@@ -19,6 +19,7 @@
  */
 
 using SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.UnitTest.Common;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -45,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [DataTestMethod]
         [DataRow("2.0.0")]
-        [DataRow(Constants.NuGetLatestVersion)]
+        [DataRow(XUnitVersions.Ver253)]
         public void DoNotUseLiteralBoolInAssertions_Xunit(string testFwkVersion) =>
             builder.AddPaths("DoNotUseLiteralBoolInAssertions.Xunit.cs")
                 .AddReferences(NuGetMetadataReference.XunitFramework(testFwkVersion))

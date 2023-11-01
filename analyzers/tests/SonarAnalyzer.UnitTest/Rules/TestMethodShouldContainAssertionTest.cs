@@ -19,6 +19,7 @@
  */
 
 using SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.UnitTest.Common;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -44,11 +45,6 @@ namespace SonarAnalyzer.UnitTest.Rules
             public const string Ver3 = "3.11.0";
             public const string Ver25 = "2.5.7.10213";
             public const string Ver27 = "2.7.0";
-        }
-
-        private static class XUnitVersions
-        {
-            public const string Ver2 = "2.0.0";
         }
 
         private readonly VerifierBuilder builder = new VerifierBuilder<TestMethodShouldContainAssertion>();
@@ -110,7 +106,7 @@ public class Foo
 
         [DataTestMethod]
         [DataRow(XUnitVersions.Ver2, Latest, Latest)]
-        [DataRow(Latest, Latest, Latest)]
+        [DataRow(XUnitVersions.Ver253, Latest, Latest)]
         public void TestMethodShouldContainAssertion_Xunit(string testFwkVersion, string fluentVersion, string nSubstituteVersion) =>
             WithTestReferences(NuGetMetadataReference.XunitFramework(testFwkVersion), fluentVersion, nSubstituteVersion).AddPaths("TestMethodShouldContainAssertion.Xunit.cs").Verify();
 
