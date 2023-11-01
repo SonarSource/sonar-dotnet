@@ -1,6 +1,12 @@
 using System;
 using Microsoft.AspNetCore.Components;
 
+public static class Constants
+{
+    public const string NONCOMPLIANT_ROUTE = "/route/{NoncompliantFromConstant:bool}";
+    public const string COMPLIANT_ROUTE = "/route/{CompliantFromConstant:bool}";
+}
+
 [Route("/route/{BoolParam:bool}")] // Secondary [bool] {{This route parameter has a 'bool' type constraint.}}
 //             ^^^^^^^^^^^^^^^^
 [Route("/route/{DatetimeParam:datetime}")] // Secondary [datetime] {{This route parameter has a 'datetime' type constraint.}}
@@ -9,6 +15,8 @@ using Microsoft.AspNetCore.Components;
                                                             // Secondary@-1 ^41#16 [bool-multiple] {{This route parameter has a 'bool' type constraint.}}
 [Route("/route/{CompliantBoolParam:bool}")]
 [Route("/route/{CompliantDatetimeParam:datetime}")]
+[Route(Constants.NONCOMPLIANT_ROUTE)]
+[Route(Constants.COMPLIANT_ROUTE)]
 public class ParameterTypeShouldMatchRouteTypeConstraint : ComponentBase
 {
     [Parameter]
@@ -21,4 +29,8 @@ public class ParameterTypeShouldMatchRouteTypeConstraint : ComponentBase
     public bool CompliantBoolParam { get; set; } // Compliant
     [Parameter]
     public DateTime CompliantDatetimeParam { get; set; } // Compliant
+    [Parameter]
+    public DateTime NoncompliantFromConstant { get; set; } // FN
+    [Parameter]
+    public bool CompliantFromConstant { get; set; } // Compliant
 }

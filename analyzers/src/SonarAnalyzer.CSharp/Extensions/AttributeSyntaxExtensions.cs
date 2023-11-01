@@ -36,9 +36,11 @@ internal static class AttributeSyntaxExtensions
         return false;
     }
 
+    public static bool IsKnownType(this AttributeSyntax attribute, KnownType knownType) =>
+        attribute.Name.GetName().Contains(GetShortNameWithoutAttributeSuffix(knownType));
+
     public static bool IsKnownType(this AttributeSyntax attribute, KnownType knownType, SemanticModel semanticModel) =>
-        attribute.Name.GetName().Contains(GetShortNameWithoutAttributeSuffix(knownType))
-        && SymbolHelper.IsKnownType(attribute, knownType, semanticModel);
+        attribute.IsKnownType(knownType) && SymbolHelper.IsKnownType(attribute, knownType, semanticModel);
 
     private static string GetShortNameWithoutAttributeSuffix(KnownType knownType) =>
         knownType.TypeName == nameof(Attribute)

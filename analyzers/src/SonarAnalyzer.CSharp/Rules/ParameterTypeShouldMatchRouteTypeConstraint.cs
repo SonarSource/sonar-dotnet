@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2023 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -71,9 +71,9 @@ public sealed class ParameterTypeShouldMatchRouteTypeConstraint : SonarDiagnosti
             },
             SyntaxKind.ClassDeclaration);
 
-    private IList<PropertyTypeMismatch> GetPropertyTypeMismatches(ClassDeclarationSyntax classDeclaration, SemanticModel semanticModel)
+    private static IList<PropertyTypeMismatch> GetPropertyTypeMismatches(ClassDeclarationSyntax classDeclaration, SemanticModel semanticModel)
     {
-        var routeParameters = GetRouteParametersWithValidConstraint(classDeclaration, semanticModel);
+        var routeParameters = GetRouteParametersWithValidConstraint(classDeclaration);
 
         if (routeParameters.Count == 0)
         {
@@ -104,16 +104,16 @@ public sealed class ParameterTypeShouldMatchRouteTypeConstraint : SonarDiagnosti
         return mismatches;
     }
 
-    private bool TypeMatchConstraint(ITypeSymbol type, string constraintType) =>
+    private static bool TypeMatchConstraint(ISymbol type, string constraintType) =>
         ConstraintMapping.ContainsKey(constraintType) && ConstraintMapping[constraintType] == type.Name;
 
-    private Dictionary<string, List<RouteParameter>> GetRouteParametersWithValidConstraint(ClassDeclarationSyntax classDeclaration, SemanticModel semanticModel)
+    private static Dictionary<string, List<RouteParameter>> GetRouteParametersWithValidConstraint(ClassDeclarationSyntax classDeclaration)
     {
         var routeParameters = new Dictionary<string, List<RouteParameter>>(StringComparer.InvariantCultureIgnoreCase);
 
         var routes = classDeclaration.AttributeLists
             .SelectMany(list => list.Attributes)
-            .Where(attr => attr.IsKnownType(KnownType.Microsoft_AspNetCore_Components_RouteAttribute, semanticModel)
+            .Where(attr => attr.IsKnownType(KnownType.Microsoft_AspNetCore_Components_RouteAttribute)
                            && attr.ArgumentList.Arguments.Count > 0
                            && attr.ArgumentList.Arguments[0].Expression is LiteralExpressionSyntax)
             .Select(attr => (LiteralExpressionSyntax)attr.ArgumentList.Arguments[0].Expression);
@@ -145,7 +145,7 @@ public sealed class ParameterTypeShouldMatchRouteTypeConstraint : SonarDiagnosti
         return routeParameters;
     }
 
-    private Location CalculateRouteParamLocation(Location routeLocation, string route, string routeParam)
+    private static Location CalculateRouteParamLocation(Location routeLocation, string route, string routeParam)
     {
         if (!GeneratedCodeRecognizer.IsRazorGeneratedFile(routeLocation.SourceTree))
         {

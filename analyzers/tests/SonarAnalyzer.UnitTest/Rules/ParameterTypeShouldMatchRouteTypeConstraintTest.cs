@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2023 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -38,7 +38,7 @@ public class ParameterTypeShouldMatchRouteTypeConstraintTest
 
     [TestMethod]
     public void ParameterTypeShouldMatchRouteTypeConstraint_Partial() =>
-        builder.AddPaths("ParameterTypeShouldMatchRouteTypeConstraint.Partial.razor", "ParameterTypeShouldMatchRouteTypeConstraint.Partial.cs")
+        builder.AddPaths("ParameterTypeShouldMatchRouteTypeConstraint.Partial.razor", "ParameterTypeShouldMatchRouteTypeConstraint.Partial.razor.cs")
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .Verify();
 
