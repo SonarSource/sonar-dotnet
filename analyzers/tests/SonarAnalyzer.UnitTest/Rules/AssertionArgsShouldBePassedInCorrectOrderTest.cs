@@ -19,6 +19,7 @@
  */
 
 using SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.UnitTest.Common;
 
 namespace SonarAnalyzer.UnitTest.Rules;
 
@@ -60,8 +61,8 @@ public class AssertionArgsShouldBePassedInCorrectOrderTest
             """).Verify();
 
     [DataTestMethod]
-    [DataRow("2.0.0")]
-    [DataRow(Constants.NuGetLatestVersion)]
+    [DataRow(XUnitVersions.Ver2)]
+    [DataRow(XUnitVersions.Ver253)]
     public void AssertionArgsShouldBePassedInCorrectOrder_XUnit(string testFwkVersion) =>
         builder.AddPaths("AssertionArgsShouldBePassedInCorrectOrder.Xunit.cs")
             .AddReferences(NuGetMetadataReference.XunitFramework(testFwkVersion)
@@ -70,9 +71,11 @@ public class AssertionArgsShouldBePassedInCorrectOrderTest
 
     [TestMethod]
     public void AssertionArgsShouldBePassedInCorrectOrder_XUnit_Static() =>
-        builder.WithTopLevelStatements().AddReferences(NuGetMetadataReference.XunitFramework(Constants.NuGetLatestVersion)).AddSnippet("""
-            using static Xunit.Assert;
-            var str = "";
-            Equal(str, ""); // Noncompliant
-            """).Verify();
+        builder.WithTopLevelStatements()
+               .AddReferences(NuGetMetadataReference.XunitFramework(XUnitVersions.Ver253))
+               .AddSnippet("""
+                           using static Xunit.Assert;
+                           var str = "";
+                           Equal(str, ""); // Noncompliant
+                           """).Verify();
 }

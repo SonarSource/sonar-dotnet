@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.UnitTest.Common;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
@@ -29,12 +30,12 @@ public class TestsShouldNotUseThreadSleepTest
     private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.TestsShouldNotUseThreadSleep>()
         .AddReferences(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion))
         .AddReferences(NuGetMetadataReference.MSTestTestFramework(Constants.NuGetLatestVersion))
-        .AddReferences(NuGetMetadataReference.XunitFramework(Constants.NuGetLatestVersion));
+        .AddReferences(NuGetMetadataReference.XunitFramework(XUnitVersions.Ver253));
 
     private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.TestsShouldNotUseThreadSleep>()
         .AddReferences(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion))
         .AddReferences(NuGetMetadataReference.MSTestTestFramework(Constants.NuGetLatestVersion))
-        .AddReferences(NuGetMetadataReference.XunitFramework(Constants.NuGetLatestVersion));
+        .AddReferences(NuGetMetadataReference.XunitFramework(XUnitVersions.Ver253));
 
     [TestMethod]
     public void TestsShouldNotUseThreadSleep_CS() =>
