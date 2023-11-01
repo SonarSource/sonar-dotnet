@@ -1,11 +1,10 @@
 <h2>Why is this an issue?</h2>
-<p>Empty statements, i.e. <code>;</code>, are usually introduced by mistake, for example because:</p>
-<ul>
-  <li> It was meant to be replaced by an actual statement, but this was forgotten. </li>
-  <li> There was a typo which lead the semicolon to be doubled, i.e. <code>;;</code>. </li>
-</ul>
-<h3>Noncompliant code example</h3>
-<pre>
+<p>Empty statements represented by a semicolon <code>;</code> are statements that do not perform any operation. They are often the result of a typo or
+a misunderstanding of the language syntax. It is a good practice to remove empty statements since they don’t add value and lead to confusion and
+errors.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 void DoSomething()
 {
     ; // Noncompliant - was used as a kind of TODO marker
@@ -21,8 +20,8 @@ void DoSomethingElse()
     // ...
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 void DoSomething()
 {
 }

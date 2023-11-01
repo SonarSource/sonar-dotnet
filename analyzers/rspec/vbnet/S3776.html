@@ -1,7 +1,23 @@
+<p>This rule raises an issue when the code cognitive complexity of a function is above a certain threshold.</p>
 <h2>Why is this an issue?</h2>
-<p><a href="https://www.sonarsource.com/docs/CognitiveComplexity.pdf">Cognitive Complexity</a> Complexity is a measure of how hard the control flow of
-a method is to understand.</p>
-<p>Methods with high Cognitive Complexity will be difficult to maintain.</p>
+<p>Cognitive Complexity is a measure of how hard it is to understand the control flow of a unit of code. Code with high cognitive complexity is hard
+to read, understand, test, and modify.</p>
+<p>As a rule of thumb, high cognitive complexity is a sign that the code should be refactored into smaller, easier-to-manage pieces.</p>
+<h3>Which syntax in code does impact cognitive complexity score?</h3>
+<p>Here are the core concepts:</p>
+<ul>
+  <li> <strong>Cognitive complexity is incremented each time the code breaks the normal linear reading flow.</strong><br> This concerns, for example:
+  Loop structures, Conditionals, Catches, Switches, Jumps to label and mixed operators in condition. </li>
+  <li> <strong>Each nesting level adds a malus to the breaking call.</strong><br> During code reading, the deeper you go through nested layers, the
+  harder it becomes to keep the context in mind. </li>
+  <li> <strong>Method calls are free</strong><br> A well-picked method name is a summary of multiple lines of code. A reader can first explore a
+  high-level view of what the code is performing then go deeper and deeper by looking at called functions content.<br> <em>Note:</em> This does not
+  apply to recursive calls, those will increment cognitive score. </li>
+</ul>
+<p>The method of computation is fully detailed in the pdf linked in the resources.</p>
+<h3>What is the potential impact?</h3>
+<p>Developers spend more time reading and understanding code than writing it. High cognitive complexity slows down changes and increases the cost of
+maintenance.</p>
 <pre data-diff-id="1" data-diff-type="noncompliant">
 Function Abs(ByVal n As Integer) As Integer ' Noncompliant: cognitive complexity = 5
     If n &gt;= 0 Then    ' +1
@@ -30,11 +46,11 @@ End Function
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> <a href="https://www.sonarsource.com/docs/CognitiveComplexity.pdf">Cognitive Complexity</a> </li>
+  <li> Sonar - <a href="https://www.sonarsource.com/docs/CognitiveComplexity.pdf">Cognitive Complexity</a> </li>
 </ul>
 <h3>Articles &amp; blog posts</h3>
 <ul>
-  <li> <a href="https://www.sonarsource.com/blog/5-clean-code-tips-for-reducing-cognitive-complexity/">5 Clean Code Tips for Reducing Cognitive
-  Complexity</a> </li>
+  <li> Sonar Blog - <a href="https://www.sonarsource.com/blog/5-clean-code-tips-for-reducing-cognitive-complexity/">5 Clean Code Tips for Reducing
+  Cognitive Complexity</a> </li>
 </ul>
 

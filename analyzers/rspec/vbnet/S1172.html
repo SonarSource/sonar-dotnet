@@ -1,29 +1,10 @@
 <h2>Why is this an issue?</h2>
-<p>Unused parameters are misleading. Whatever the values passed to such parameters, the behavior will be the same.</p>
+<p>A typical code smell known as unused function parameters refers to parameters declared in a function but not used anywhere within the function’s
+body. While this might seem harmless at first glance, it can lead to confusion and potential errors in your code. Disregarding the values passed to
+such parameters, the function’s behavior will be the same, but the programmer’s intention won’t be clearly expressed anymore. Therefore, removing
+function parameters that are not being utilized is considered best practice.</p>
 <p>This rule raises an issue when a <code>private</code> procedure of a <code>Class</code>, <code>Module</code> or <code>Structure</code> takes a
 parameter without using it.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-Private Sub DoSomething(ByVal a As Integer, ByVal b as Integer) ' "b" is unused
-    Compute(a)
-End Sub
-
-Private Function DoSomething2(ByVal a As Integer, ByVal b As Integer) As Integer ' "a" is unused
-    Compute(b)
-    Return b
-End Function
-</pre>
-<h3>Compliant solution</h3>
-<pre>
-Private Sub DoSomething(ByVal a As Integer)
-    Compute(a)
-End Sub
-
-Private Function DoSomething2(ByVal b As Integer) As Integer
-    Compute(b)
-    Return b
-End Function
-</pre>
 <h3>Exceptions</h3>
 <p>This rule doesn’t raise any issue in the following contexts:</p>
 <ul>
@@ -35,4 +16,30 @@ End Function
   <li> Interface implementations. </li>
   <li> Event handlers. </li>
 </ul>
+<h2>How to fix it</h2>
+<p>Having unused function parameters in your code can lead to confusion and misunderstanding of a developer’s intention. They reduce code readability
+and introduce the potential for errors. To avoid these problems, developers should remove unused parameters from function declarations.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+Private Sub DoSomething(ByVal a As Integer, ByVal b as Integer) ' "b" is unused
+    Compute(a)
+End Sub
+
+Private Function DoSomething2(ByVal a As Integer, ByVal b As Integer) As Integer ' "a" is unused
+    Compute(b)
+    Return b
+End Function
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+Private Sub DoSomething(ByVal a As Integer)
+    Compute(a)
+End Sub
+
+Private Function DoSomething2(ByVal b As Integer) As Integer
+    Compute(b)
+    Return b
+End Function
+</pre>
 

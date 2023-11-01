@@ -1,6 +1,11 @@
 <h2>Why is this an issue?</h2>
-<p>Unnecessarily verbose declarations and initializations make it harder to read the code, and should be simplified.</p>
-<p>Specifically the following should be omitted when they can be inferred:</p>
+<p>In C#, the type of a variable can often be inferred by the compiler. The use of the [var keyword](<a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/implicitly-typed-local-variables">https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/implicitly-typed-local-variables</a>)
+allows you to avoid repeating the type name in a variable declaration and object instantiation because the declared type can often be inferred by the
+compiler.</p>
+<p>Additionally, initializations providing the default value can also be omitted, helping to make the code more concise and readable.</p>
+<p>Unnecessarily verbose declarations and initializations should be simplified. Specifically, the following should be omitted when they can be
+inferred:</p>
 <ul>
   <li> array element type </li>
   <li> array size </li>
@@ -10,8 +15,11 @@
   <li> type of lambda expression parameters </li>
   <li> parameter declarations of anonymous methods when the parameters are not used. </li>
 </ul>
-<h3>Noncompliant code example</h3>
-<pre>
+<h2>How to fix it</h2>
+<p>Remove any unneeded code. C# provides many features designed to help you write more concise code.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 var l = new List&lt;int&gt;() {}; // Noncompliant, {} can be removed
 var o = new object() {}; // Noncompliant, {} can be removed
 
@@ -33,8 +41,8 @@ class Class
     }
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 var l = new List&lt;int&gt;();
 var o = new object();
 
@@ -56,4 +64,10 @@ class Class
     }
 }
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/declarations">Declaration
+  statements</a> </li>
+</ul>
 

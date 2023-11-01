@@ -1,5 +1,5 @@
 {
-  "title": "General exceptions should never be thrown",
+  "title": "General or reserved exceptions should never be thrown",
   "type": "CODE_SMELL",
   "code": {
     "impacts": {

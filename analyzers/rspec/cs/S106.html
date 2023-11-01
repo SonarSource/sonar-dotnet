@@ -1,29 +1,50 @@
 <h2>Why is this an issue?</h2>
-<p>When logging a message there are several important requirements which must be fulfilled:</p>
+<p>In software development, logs serve as a record of events within an application, providing crucial insights for debugging. When logging, it is
+essential to ensure that the logs are:</p>
 <ul>
-  <li> The user must be able to easily retrieve the logs </li>
-  <li> The format of all logged message must be uniform to allow the user to easily read the log </li>
-  <li> Logged data must actually be recorded </li>
-  <li> Sensitive data must only be logged securely </li>
+  <li> easily accessible </li>
+  <li> uniformly formatted for readability </li>
+  <li> properly recorded </li>
+  <li> securely logged when dealing with sensitive data </li>
 </ul>
-<p>If a program directly writes to the standard outputs, there is absolutely no way to comply with those requirements. That’s why defining and using a
-dedicated logger is highly recommended.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-private void DoSomething()
-{
-    // ...
-    Console.WriteLine("so far, so good..."); // Noncompliant
-    // ...
-}
-</pre>
+<p>Those requirements are not met if a program directly writes to the standard outputs (e.g., Console). That is why defining and using a dedicated
+logger is highly recommended.</p>
 <h3>Exceptions</h3>
-<p>The following are ignored by this rule:</p>
+<p>The rule doesn’t raise an issue for:</p>
 <ul>
   <li> Console Applications </li>
   <li> Calls in methods decorated with <code>[Conditional ("DEBUG")]</code> </li>
   <li> Calls included in DEBUG preprocessor branches (<code>#if DEBUG</code>) </li>
 </ul>
+<h3>Code examples</h3>
+<p>The following noncompliant code:</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+public class MyClass
+{
+    private void DoSomething()
+    {
+        // ...
+        Console.WriteLine("My Message"); // Noncompliant
+        // ...
+    }
+}
+</pre>
+<p>Could be replaced by:</p>
+<pre data-diff-id="1" data-diff-type="compliant">
+public class MyClass
+{
+    private readonly ILogger _logger;
+
+    // ...
+
+    private void DoSomething()
+    {
+        // ...
+        _logger.LogInformation("My Message");
+        // ...
+    }
+}
+</pre>
 <h2>Resources</h2>
 <ul>
   <li> <a href="https://owasp.org/Top10/A09_2021-Security_Logging_and_Monitoring_Failures/">OWASP Top 10 2021 Category A9</a> - Security Logging and

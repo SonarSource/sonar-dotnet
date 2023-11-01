@@ -1,9 +1,25 @@
 <h2>Why is this an issue?</h2>
-<p>Having two <code>cases</code> in the same <code>switch</code> statement or branches in the same <code>if</code> structure with the same
-implementation is at best duplicate code, and at worst a coding error. If the same logic is truly needed for both instances, then in an
-<code>if</code> structure they should be combined, or for a <code>switch</code>, one should fall through to the other.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<p>When the same code is duplicated in two or more separate branches of a conditional, it can make the code harder to understand, maintain, and can
+potentially introduce bugs if one instance of the code is changed but others are not.</p>
+<p>Having two <code>cases</code> in a <code>switch</code> statement or two branches in an <code>if</code> chain with the same implementation is at
+best duplicate code, and at worst a coding error.</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+if (a &gt;= 0 &amp;&amp; a &lt; 10)
+{
+  DoFirst();
+  DoTheThing();
+}
+else if (a &gt;= 10 &amp;&amp; a &lt; 20)
+{
+  DoTheOtherThing();
+}
+else if (a &gt;= 20 &amp;&amp; a &lt; 50) // Noncompliant; duplicates first condition
+{
+  DoFirst();
+  DoTheThing();
+}
+</pre>
+<pre data-diff-id="2" data-diff-type="noncompliant">
 switch (i)
 {
   case 1:
@@ -20,8 +36,13 @@ switch (i)
   default:
     DoTheRest();
 }
-
-if (a &gt;= 0 &amp;&amp; a &lt; 10)
+</pre>
+<p>If the same logic is truly needed for both instances, then:</p>
+<ul>
+  <li> in an <code>if</code> chain they should be combined </li>
+</ul>
+<pre data-diff-id="1" data-diff-type="compliant">
+if ((a &gt;= 0 &amp;&amp; a &lt; 10) || (a &gt;= 20 &amp;&amp; a &lt; 50))
 {
   DoFirst();
   DoTheThing();
@@ -30,10 +51,23 @@ else if (a &gt;= 10 &amp;&amp; a &lt; 20)
 {
   DoTheOtherThing();
 }
-else if (a &gt;= 20 &amp;&amp; a &lt; 50)   // Noncompliant; duplicates first condition
+</pre>
+<ul>
+  <li> for a <code>switch</code>, one should fall through to the other </li>
+</ul>
+<pre data-diff-id="2" data-diff-type="compliant">
+switch (i)
 {
-  DoFirst();
-  DoTheThing();
+  case 1:
+  case 3:
+    DoFirst();
+    DoSomething();
+    break;
+  case 2:
+    DoSomethingDifferent();
+    break;
+  default:
+    DoTheRest();
 }
 </pre>
 <h3>Exceptions</h3>
@@ -54,8 +88,8 @@ else if (a &gt;= 20 &amp;&amp; a &lt; 50)    //no issue, usually this is done on
 }
 </pre>
 <p>But this exception does not apply to <code>if</code> chains without <code>else</code>-s, or to <code>switch</code>-es without default clauses when
-all branches have the same single line of code. In case of <code>if</code> chains with <code>else</code>-s, or of <code>switch</code>-es with default
-clauses, rule {rule:csharpsquid:S3923} raises a bug.</p>
+all branches have the same single line of code. In the case of <code>if</code> chains with <code>else</code>-s, or of <code>switch</code>-es with
+default clauses, rule {rule:csharpsquid:S3923} raises a bug.</p>
 <pre>
 if(a == 1)
 {
@@ -66,4 +100,9 @@ else if (a == 2)
   doSomething();
 }
 </pre>
+<h2>Resources</h2>
+<h3>Related rules</h3>
+<ul>
+  <li> {rule:csharpsquid:S3923} - All branches in a conditional structure should not have exactly the same implementation </li>
+</ul>
 

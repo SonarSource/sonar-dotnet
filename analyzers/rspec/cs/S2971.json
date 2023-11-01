@@ -1,5 +1,5 @@
 {
-  "title": "\"IEnumerable\" LINQs should be simplified",
+  "title": "LINQ expressions should be simplified",
   "type": "CODE_SMELL",
   "code": {
     "impacts": {
