@@ -349,7 +349,11 @@ public partial class RoslynSymbolicExecutionTest
     [DataRow("i >= -10 && i <=  -5 && j >=  21", -10, -5)]
     [DataRow("i >= -10 && i <=  -5 && j <= -21", -10, -5)]
     [DataRow("i >=   4 && i <=   7 && j >=   5 && j <= 10", 0, 7)]
-    [DataRow("i == 5 && j == 0", null, null)]
+    [DataRow("i <    0 && j == 2", -1, 0)]
+    [DataRow("i <    0 && j == -2", -1, 0)]
+    [DataRow("i <    0 && j > 0", null, 0)]
+    [DataRow("i >    0 && j == 2", 0, 1)]
+    [DataRow("i ==   5 && j == 0", null, null)]
     public void Calculate_Remainder_Range(string expression, int? expectedMin, int? expectedMax)
     {
         var code = $$"""
