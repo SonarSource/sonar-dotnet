@@ -108,13 +108,13 @@ namespace WithDifferentWaysOfReferencingTheAttribute
         [JSInvokableAttribute] private void WithAttributeSuffix() { }               // Noncompliant
         [Microsoft.JSInterop.JSInvokable] private void WithFullyQualifiedName() { } // Noncompliant
         [AliasForJSInterop.JSInvokable] private void WithNamespaceAlias() { }       // Noncompliant
-        [AliasForJSInvokable] private void WithAttributeAlias() { }                 // FN
+        [AliasForJSInvokable] private void WithAttributeAlias() { }                 // FN: requires semantic analysis
     }
 }
 
 class WithUserDefinedJSInvokable
 {
-    [@JSInvokable] private void PrivateMethod1() { }            // Noncompliant: FP
+    [@JSInvokable] private void PrivateMethod1() { }            // Noncompliant: FP: requires semantic analysis
     [JSInvokableWithSuffix] private void PrivateMethod2() { }   // Compliant
 
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
