@@ -1,0 +1,23 @@
+﻿{
+  "title": "Using lambda expressions in loops should be avoided",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "1h"
+  },
+  "tags": [
+    "blazor"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-6802",
+  "sqKey": "S6802",
+  "scope": "All",
+  "quickfix": "infeasible",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "MEDIUM"
+    },
+    "attribute": "EFFICIENT"
+  }
+}
