@@ -32,6 +32,15 @@ param (
 Set-StrictMode -version 1.0
 $ErrorActionPreference = "Stop"
 $RuleTemplateFolder = "${PSScriptRoot}\\rspec-templates"
+# Based on RuleApiCache.computeDefaultCachePath
+# https://github.com/SonarSource/sonar-rule-api/blob/2323b7313c76e7adc2b7df037e96510b90660292/src/main/java/com/sonarsource/ruleapi/utilities/RuleApiCache.java#L20-L25
+$RspecRepositoryPath = "${Env:USERPROFILE}\\.sonar\\rule-api\\rspec"
+if (! [string]::IsNullOrEmpty($Env:SONAR_USER_HOME))
+{
+    $RspecRepositoryPath = "${Env:SONAR_USER_HOME}\\rule-api\\rspec"
+}
+
+. ${PSScriptRoot}\CopyTestCasesFromRspec.ps1
 
 $RuleApiError = "Could not find the Rule API Jar locally. Please download the latest rule-api from " + `
     "'https://repox.jfrog.io/repox/sonarsource-private-releases/com/sonarsource/rule-api/rule-api/' " +`
@@ -76,9 +85,14 @@ function GenerateRuleClassesCS() {
     $FilesMap = @{
         "Rule.CS.cs"     = "${RulesFolderCS}\\${className}.cs"
         "Test.CS.cs"     = "${RulesFolderTests}\\${className}Test.cs"
-        "TestCase.CS.cs" = "${TestCasesFolder}\\${className}.cs"
     }
-    WriteClasses $FilesMap $ClassName
+
+    if (-Not (Test-Path -Path "${TestCasesFolder}\\${className}.cs" -PathType Leaf))
+    {
+        $FilesMap["TestCase.CS.cs"] = "${TestCasesFolder}\\${className}.cs"
+    }
+
+    WriteClasses $FilesMap
 }
 
 function GenerateRuleClassesVB() {
@@ -94,7 +108,11 @@ function GenerateRuleClassesVB() {
     }
 
     $FilesMap["Rule.VB.cs"] = "${RulesFolderVB}\\${ClassName}.cs"
-    $FilesMap["TestCase.VB.vb"] = "${TestCasesFolder}\\${ClassName}.vb"
+
+    if (-Not (Test-Path -Path "${TestCasesFolder}\\${ClassName}.vb" -PathType Leaf))
+    {
+        $FilesMap["TestCase.VB.vb"] = "${TestCasesFolder}\\${ClassName}.vb"
+    }
 
     WriteClasses $FilesMap
 }
@@ -218,11 +236,16 @@ Write-Host "Ran rule-api, will move back to root"
 popd
 
 if ($ClassName -And $RuleKey) {
+    if ($RspecBranch) {
+        $langFolder = If ($Language -eq "vbnet") { "vbnet" } Else { "csharp" }
+        CopyTestCasesFromRspec $ClassName "${RspecRepositoryPath}\\rules\\${RuleKey}\\$langFolder" $TestCasesFolder
+    }
+
     if ($Language -eq "cs") {
-       GenerateRuleClassesCS
+        GenerateRuleClassesCS
     }
     elseif ($Language -eq "vbnet") {
-       GenerateRuleClassesVB
+        GenerateRuleClassesVB
     }
     UpdateRuleTypeMapping
     GenerateBaseClassIfSecondLanguage
