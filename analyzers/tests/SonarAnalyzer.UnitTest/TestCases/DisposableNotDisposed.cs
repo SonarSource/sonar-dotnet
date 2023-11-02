@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading;
 
 namespace Tests.Diagnostics
 {
@@ -109,6 +110,11 @@ namespace Tests.Diagnostics
             field_fs7 = new FileStream(@"c:\foo.txt", FileMode.Open); // Noncompliant - even if field_fs7's type is object
 
             NoOperation(this.field_fs8);
+
+            var tokenSource1 = new CancellationTokenSource(); // Noncompliant
+            var tokenSource2 = CancellationTokenSource.CreateLinkedTokenSource(CancellationToken.None, CancellationToken.None); // Noncompliant
+            var tokenSource3 = CancellationTokenSource.CreateLinkedTokenSource(CancellationToken.None, CancellationToken.None); // Compliant, disposed
+            tokenSource3.Dispose();
         }
 
         private void Conditions(bool cond, string x)

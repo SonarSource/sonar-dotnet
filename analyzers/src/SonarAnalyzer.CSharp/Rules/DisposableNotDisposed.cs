@@ -38,7 +38,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_IO_StreamWriter,
                 KnownType.System_Net_WebClient,
                 KnownType.System_Net_Sockets_TcpClient,
-                KnownType.System_Net_Sockets_UdpClient);
+                KnownType.System_Net_Sockets_UdpClient,
+                KnownType.System_Threading_CancellationTokenSource);
 
         private static readonly ImmutableArray<KnownType> DisposableTypes = ImmutableArray.Create(KnownType.System_IDisposable, KnownType.System_IAsyncDisposable);
 
@@ -49,7 +50,8 @@ namespace SonarAnalyzer.Rules.CSharp
             "System.IO.File.Create",
             "System.IO.File.Open",
             "System.Drawing.Image.FromFile",
-            "System.Drawing.Image.FromStream"
+            "System.Drawing.Image.FromStream",
+            "System.Threading.CancellationTokenSource.CreateLinkedTokenSource"
         };
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
