@@ -192,7 +192,7 @@ internal static class ArithmeticCalculator
         // If the absolute value of the divisor is bigger than the absolute value of the dividend, the result is equal to the dividend =>
         // If the absolute value of every divisor is bigger than the absolute value of any dividend => resulting range == dividend range.
         // Otherwise, the result is between 0 and the absolute value of the divisor - 1 for positive dividends or in the same range multiplied by -1 for negative dividends.
-        if (left.CanBePositive || -left.Max < MinOfAbsoluteValues(right))
+        if (left.CanBePositive || -left.Min < MinOfAbsoluteValues(right))
         {
             if (right.Min is null || right.Max is null)
             {

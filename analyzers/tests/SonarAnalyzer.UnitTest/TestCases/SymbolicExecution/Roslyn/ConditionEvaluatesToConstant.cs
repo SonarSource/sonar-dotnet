@@ -3307,3 +3307,22 @@ public class Repro_8264
         }
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8285
+public class Repro_8285
+{
+    void Repro(int number)
+    {
+        if (number < 0)
+        {
+            if (number % 2 == 0) // Compliant
+            {
+                Console.WriteLine("Something");
+            }
+            else
+            {
+                Console.WriteLine("Something else");
+            }
+        }
+    }
+}
