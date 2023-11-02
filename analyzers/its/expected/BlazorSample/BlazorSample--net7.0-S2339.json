@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6800/Constants.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  25,
+"endLine":  5,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6800/Constants.cs#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  25,
+"endLine":  6,
+"endColumn":  38
+}
+}
+}
+]
+}
