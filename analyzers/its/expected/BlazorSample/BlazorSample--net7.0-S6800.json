@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S6800",
+"message":  "Parameter type 'string' does not match route parameter type constraint.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6800/S6800.CsharpOnly.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  12,
+"endLine":  12,
+"endColumn":  18
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6800/S6800.CsharpOnly.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  28,
+"endLine":  5,
+"endColumn":  44
+}
+}
+]
+}
+]
+}

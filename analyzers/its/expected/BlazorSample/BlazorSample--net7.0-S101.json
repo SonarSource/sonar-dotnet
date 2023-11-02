@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S101",
+"message":  "Rename class 'S6800_CsharpOnly' to match pascal case naming rules, consider using 'S6800CsharpOnly'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6800/S6800.CsharpOnly.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  14,
+"endLine":  9,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'S6800_Partial' to match pascal case naming rules, consider using 'S6800Partial'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6800/S6800.Partial.razor.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  22,
+"endLine":  5,
+"endColumn":  35
+}
+}
+}
+]
+}
