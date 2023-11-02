@@ -19,23 +19,17 @@
  */
 package com.sonar.it.csharp;
 
-import com.sonar.it.shared.TestUtils;
-import com.sonar.orchestrator.build.BuildResult;
-import com.sonar.orchestrator.build.ScannerForMSBuild;
-import com.sonar.orchestrator.util.Command;
-import com.sonar.orchestrator.util.CommandExecutor;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.io.TempDir;
 import org.sonarqube.ws.Issues;
-import org.sonarqube.ws.Measures.Measure;
 
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.sonar.it.csharp.Tests.*;
+import static com.sonar.it.csharp.Tests.getComponent;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(Tests.class)
@@ -46,15 +40,15 @@ public class RazorClassLibProjectTest {
 
   private static final String PROJECT = "RazorClassLib";
   private static final String RAZOR_COMPONENT_CLASS_FILE = "RazorClassLib:Component.razor";
+  private static final String SONAR_RULE_S6800 = "csharpsquid:S6800";
+  private static final String S6800_COMPONENT_RAZOR_FILE = "RazorClassLib:S6800/S6800.razor";
+  private static final String S6800_COMPONENT_CSONLY_FILE = "RazorClassLib:S6800/S6800.CsharpOnly.cs";
+  private static final String S6800_COMPONENT_PARTIAL_FILE = "RazorClassLib:S6800/S6800.Partial.razor.cs";
+
 
   @BeforeAll
   public static void beforeAll() throws Exception {
-    Path projectDir = TestUtils.projectDir(temp, PROJECT);
-    ScannerForMSBuild beginStep = TestUtils.createBeginStep(PROJECT, projectDir);
-
-    ORCHESTRATOR.executeBuild(beginStep);
-    TestUtils.runBuild(projectDir);
-    ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectDir));
+    Tests.analyzeProject(PROJECT, temp, PROJECT);
   }
 
   @Test
@@ -62,5 +56,17 @@ public class RazorClassLibProjectTest {
     assertThat(getComponent(PROJECT).getName()).isEqualTo("RazorClassLib");
 
     assertThat(getComponent(RAZOR_COMPONENT_CLASS_FILE).getName()).isEqualTo("Component.razor");
+  }
+
+  @Test
+  void issueS6800IsRaised() {
+    List<Issues.Issue> s6800Issues = Tests.getIssues(PROJECT)
+      .stream()
+      .filter(x -> x.getRule().startsWith(SONAR_RULE_S6800))
+      .collect(Collectors.toList());
+    List<String> files = s6800Issues.stream().map(Issues.Issue::getComponent).collect(Collectors.toList());
+
+    assertThat(s6800Issues).hasSize(3);
+    assertThat(files).contains(S6800_COMPONENT_RAZOR_FILE, S6800_COMPONENT_CSONLY_FILE, S6800_COMPONENT_PARTIAL_FILE);
   }
 }
