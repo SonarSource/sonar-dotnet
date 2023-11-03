@@ -326,7 +326,7 @@ namespace SonarAnalyzer.Json.Parsing
             object BuildResult()
             {
                 var baseValue = @decimal == null
-                    ? (object)int.Parse(integer.ToString())
+                    ? ParseInteger(integer.ToString())
                     : decimal.Parse(integer + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator + @decimal);
                 if (exponent == null)   // Integer or Decimal
                 {
@@ -341,6 +341,11 @@ namespace SonarAnalyzer.Json.Parsing
                     return Convert.ToDouble(baseValue) * Math.Pow(10, int.Parse(exponent.ToString()));
                 }
             }
+
+            static object ParseInteger(string number) =>
+                int.TryParse(number, out var result)
+                    ? result
+                    : long.Parse(number);
         }
     }
 }
