@@ -264,8 +264,8 @@ namespace SonarAnalyzer.Json.Parsing
         {
             StringBuilder @decimal = null;
             StringBuilder exponent = null;
-            var integer = new StringBuilder();
-            var current = integer;
+            var number = new StringBuilder();
+            var current = number;
             while (!ReachedEndOfInput)
             {
                 switch (CurrentChar)
@@ -293,7 +293,7 @@ namespace SonarAnalyzer.Json.Parsing
                         current.Append(CurrentChar);
                         break;
                     case '.':
-                        if (current == integer && current.ToString().TrimStart('-').Any())
+                        if (current == number && current.ToString().TrimStart('-').Any())
                         {
                             @decimal = new StringBuilder();
                             current = @decimal;
@@ -326,8 +326,8 @@ namespace SonarAnalyzer.Json.Parsing
             object BuildResult()
             {
                 var baseValue = @decimal == null
-                    ? ParseInteger(integer.ToString())
-                    : decimal.Parse(integer + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator + @decimal);
+                    ? ParseNumber(number.ToString())
+                    : decimal.Parse(number + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator + @decimal);
                 if (exponent == null)   // Integer or Decimal
                 {
                     return baseValue;
@@ -342,7 +342,7 @@ namespace SonarAnalyzer.Json.Parsing
                 }
             }
 
-            static object ParseInteger(string number) =>
+            static object ParseNumber(string number) =>
                 int.TryParse(number, out var result)
                     ? result
                     : long.Parse(number);
