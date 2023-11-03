@@ -57,5 +57,11 @@
         public Action<MouseEventArgs> Action { get; set; } = e => { };
     }
 
-    private void Reset(MouseEventArgs mouseEventArgs) { }
+    private void Reset(MouseEventArgs mouseEventArgs) 
+    { 
+        foreach (var button in Buttons)
+        {
+            button.Action = e => { }; // Compliant
+        }
+    }
 }

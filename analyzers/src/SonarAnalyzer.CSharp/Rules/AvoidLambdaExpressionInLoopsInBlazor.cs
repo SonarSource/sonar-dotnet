@@ -24,7 +24,7 @@ namespace SonarAnalyzer.Rules.CSharp;
 public sealed class AvoidLambdaExpressionInLoopsInBlazor : SonarDiagnosticAnalyzer
 {
     private const string DiagnosticId = "S6802";
-    private const string MessageFormat = "Avoid using lambda expressions in loops.";
+    private const string MessageFormat = "Avoid using lambda expressions in loops in Blazor markup.";
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
