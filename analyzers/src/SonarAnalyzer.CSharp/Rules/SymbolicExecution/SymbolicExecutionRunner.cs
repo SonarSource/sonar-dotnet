@@ -89,21 +89,20 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
         context.RegisterNodeAction(
             c =>
             {
-                var declaration = (AnonymousFunctionExpressionSyntax)c.Node;
-                if (c.SemanticModel.GetSymbolInfo(declaration).Symbol is { } symbol && !c.IsInExpressionTree())
+                if (c.SemanticModel.GetSymbolInfo(c.Node).Symbol is { } symbol && !c.IsInExpressionTree())
                 {
                     Analyze(context, c, symbol);
                 }
             },
             SyntaxKind.AnonymousMethodExpression,
-            SyntaxKind.SimpleLambdaExpression,
-            SyntaxKind.ParenthesizedLambdaExpression);
+            SyntaxKind.ParenthesizedLambdaExpression,
+            SyntaxKind.SimpleLambdaExpression);
     }
 
     protected override ControlFlowGraph CreateCfg(SemanticModel model, SyntaxNode node, CancellationToken cancel) =>
         node.CreateCfg(model, cancel);
 
-    protected override void AnalyzeSonar(SonarSyntaxNodeReportingContext context, SyntaxNode declaration, ISymbol symbol)
+    protected override void AnalyzeSonar(SonarSyntaxNodeReportingContext context, ISymbol symbol)
     {
         var enabledAnalyzers = AllRules.GroupBy(x => x.Value.Type)         // Multiple DiagnosticDescriptors (S2583, S2589) can share the same check type
                                        .Select(x => x.First().Value.CreateSonarFallback(Configuration))
@@ -111,7 +110,7 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
                                        .Cast<ISymbolicExecutionAnalyzer>() // ISymbolicExecutionAnalyzer should be passed as TSonarFallback to CreateFactory. Have you passed a Roslyn rule instead?
                                        .Where(x => x.SupportedDiagnostics.Any(descriptor => IsEnabled(context, descriptor)))
                                        .ToList();
-        if (enabledAnalyzers.Any() && CSharpControlFlowGraph.TryGet((CSharpSyntaxNode)declaration, context.SemanticModel, out var cfg))
+        if (enabledAnalyzers.Any() && CSharpControlFlowGraph.TryGet((CSharpSyntaxNode)context.Node, context.SemanticModel, out var cfg))
         {
             var lva = new SonarCSharpLiveVariableAnalysis(cfg, symbol, context.SemanticModel, context.Cancel);
             try
@@ -142,7 +141,7 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
             }
             catch (Exception ex)
             {
-                throw new SymbolicExecutionException(ex, symbol, declaration.GetLocation());
+                throw new SymbolicExecutionException(ex, symbol, context.Node.GetLocation());
             }
         }
     }

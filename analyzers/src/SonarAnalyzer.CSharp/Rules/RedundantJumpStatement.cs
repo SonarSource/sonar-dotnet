@@ -63,13 +63,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckForRedundantJumps(SonarSyntaxNodeReportingContext context)
         {
-            var node = context.Node;
-            if (!CSharpControlFlowGraph.TryGet(node, context.SemanticModel, out var cfg))
+            if (!CSharpControlFlowGraph.TryGet(context.Node, context.SemanticModel, out var cfg))
             {
                 return;
             }
 
-            var yieldStatementCount = node.DescendantNodes().OfType<YieldStatementSyntax>().Count();
+            var yieldStatementCount = context.Node.DescendantNodes().OfType<YieldStatementSyntax>().Count();
 
             var removableJumps = cfg.Blocks
                                     .OfType<JumpBlock>()

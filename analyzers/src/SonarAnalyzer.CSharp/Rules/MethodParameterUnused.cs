@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Xml.Linq;
 using SonarAnalyzer.CFG.LiveVariableAnalysis;
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.CFG.Sonar;
@@ -83,13 +82,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool OnlyThrowsNotImplementedException(MethodContext declaration)
         {
-            if (declaration.Body != null && declaration.Body.Statements.Count != 1)
+            if (declaration.Body is not null && declaration.Body.Statements.Count != 1)
             {
                 return false;
             }
 
             var throwExpressions = Enumerable.Empty<ExpressionSyntax>();
-            if (declaration.ExpressionBody != null)
+            if (declaration.ExpressionBody is not null)
             {
                 if (ThrowExpressionSyntaxWrapper.IsInstance(declaration.ExpressionBody.Expression))
                 {
@@ -105,7 +104,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .OfType<ObjectCreationExpressionSyntax>()
                 .Select(x => declaration.Context.SemanticModel.GetSymbolInfo(x).Symbol)
                 .OfType<IMethodSymbol>()
-                .Any(x => x != null && x.ContainingType.Is(KnownType.System_NotImplementedException));
+                .Any(x => x is not null && x.ContainingType.Is(KnownType.System_NotImplementedException));
         }
 
         private void ReportUnusedParametersOnMethod(MethodContext declaration)
@@ -173,7 +172,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var parameters = declaration.ParameterList.Parameters
                 .Select(x => new NodeAndSymbol(x, declaration.Context.SemanticModel.GetDeclaredSymbol(x)))
-                .Where(x => x.Symbol != null);
+                .Where(x => x.Symbol is not null);
 
             foreach (var parameter in parameters)
             {
@@ -218,7 +217,7 @@ namespace SonarAnalyzer.Rules.CSharp
             body.DescendantNodes()
                 .Where(x => x.IsKind(SyntaxKind.IdentifierName))
                 .Select(x => semanticModel.GetSymbolInfo(x).Symbol as IParameterSymbol)
-                .Where(x => x != null && parameters.Contains(x))
+                .Where(x => x is not null && parameters.Contains(x))
                 .ToHashSet();
 
         private static bool IsUsedAsEventHandlerFunctionOrAction(MethodContext declaration) =>
@@ -232,7 +231,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsMethodUsedAsEventHandlerFunctionOrActionInExpression(IMethodSymbol methodSymbol, ExpressionSyntax expression, SemanticModel semanticModel) =>
             !expression.IsKind(SyntaxKind.InvocationExpression)
-            && semanticModel != null
+            && semanticModel is not null
             && IsStandaloneExpression(expression)
             && methodSymbol.Equals(semanticModel.GetSymbolInfo(expression).Symbol?.OriginalDefinition);
 
@@ -241,7 +240,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var parentAsAssignment = expression.Parent as AssignmentExpressionSyntax;
 
             return expression.Parent is not ExpressionSyntax
-                || (parentAsAssignment != null && ReferenceEquals(expression, parentAsAssignment.Right));
+                || (parentAsAssignment is not null && ReferenceEquals(expression, parentAsAssignment.Right));
         }
 
         private static bool IsCandidateSerializableConstructor(IImmutableList<IParameterSymbol> unusedParameters, IMethodSymbol methodSymbol) =>

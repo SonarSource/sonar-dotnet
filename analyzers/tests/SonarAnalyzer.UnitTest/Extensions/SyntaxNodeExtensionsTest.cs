@@ -174,7 +174,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [TestMethod]
         public void CreateCfg_MethodDeclaration_ReturnsCfg_CS()
         {
-            const string code = """
+            var code = """
                 public class Sample
                 {
                     public void Main()
@@ -192,11 +192,10 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [TestMethod]
         public void CreateCfg_PropertyDeclartion_ReturnsCfg_CS()
         {
-            const string code = """
+            var code = """
                 public class Sample
                 {
-                    int field;
-                    public int Property => field + 42;
+                    public int Property => 42;
                 }
                 """;
             var (tree, semanticModel) = TestHelper.CompileCS(code);
@@ -208,7 +207,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [TestMethod]
         public void CreateCfg_PropertyDeclartionWithoutExpressionBody_ReturnsNull_CS()
         {
-            const string code = """
+            var code = """
                 public class Sample
                 {
                     public int Property {get; set;}
@@ -223,7 +222,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [TestMethod]
         public void CreateCfg_IndexerDeclartion_ReturnsCfg_CS()
         {
-            const string code = """
+            var code = """
                 public class Sample
                 {
                     private string field;
@@ -788,7 +787,7 @@ public class X
         public void ArgumentList_CS_InvocationObjectCreation(string statement)
         {
             var code = $$"""
-                public class C(int p) {    
+                public class C(int p) {
                     public void M(int p) {
                         {{statement}}
                     }
@@ -811,9 +810,9 @@ public class X
                 public class C: Base
                 {
                     public C(): $${{keyword}}(1)$$ { }
-                    public C(int  p): base(p) { }   
+                    public C(int  p): base(p) { }
                 }
-                
+
                 """;
             var node = NodeBetweenMarkers(code, LanguageNames.CSharp);
             var argumentList = ExtensionsCS.ArgumentList(node).Arguments;
@@ -839,7 +838,7 @@ public class X
         public void ArgumentList_CS_NoList(string statement)
         {
             var code = $$"""
-                public class C {    
+                public class C {
                     public void M() {
                         {{statement}}
                     }
@@ -859,7 +858,7 @@ public class X
         public void ArgumentList_CS_UnsupportedNodeKinds(string statement)
         {
             var code = $$"""
-                public class C {    
+                public class C {
                     public void M() {
                         {{statement}}
                     }
@@ -1061,7 +1060,7 @@ public class X
             var node = NodeBetweenMarkers($$"""
                 $$public {{type}} C(int p)
                 {
-                    
+
                 }$$
                 """, LanguageNames.CSharp);
             var actual = ExtensionsCS.ParameterList(node);
