@@ -18,8 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.CSharp;
 using Moq;
 using SonarAnalyzer.AnalysisContext;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.UnitTest.AnalysisContext;
 
@@ -82,4 +84,50 @@ public class SonarSyntaxNodeReportingContextTest
         wasReported.Should().Be(reportOnCorrectTree);
     }
 #endif
+
+    [TestMethod]
+    public void IsRedundantPrimaryConstructorBaseTypeContext_ReturnsTrueForTypeDeclaration()
+    {
+        var compilerVersion = typeof(DiagnosticAnalyzer).Assembly.GetName().Version;
+        var assertion = compilerVersion < new Version(5, 0) // Fix the compiler version once https://github.com/dotnet/roslyn/pull/70655 is released
+            ? """
+              //                            ^^^^^^^    {{IsRedundantPrimaryConstructorBaseTypeContext is True, ContainingSymbol is NamedType Derived}}
+              //                            ^^^^^^^@-1 {{IsRedundantPrimaryConstructorBaseTypeContext is False, ContainingSymbol is Method Derived.Derived(int)}}
+              """
+            : """
+              //                            ^^^^^^^    {{IsRedundantPrimaryConstructorBaseTypeContext is False, ContainingSymbol is Method Derived.Derived(int)}}
+              """;
+        var snippet = $$"""
+            public class Base(int i);
+            public class Derived(int i) : Base(i);
+            {{assertion}}
+            """;
+        new VerifierBuilder()
+            .AddAnalyzer(() => new TestAnalyzer(new[] { SyntaxKindEx.PrimaryConstructorBaseType }))
+            .WithOptions(ParseOptionsHelper.FromCSharp12)
+            .AddSnippet(snippet)
+            .Verify();
+    }
+
+    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    private sealed class TestAnalyzer : SonarDiagnosticAnalyzer
+    {
+        private readonly SyntaxKind[] syntaxKinds;
+        public DiagnosticDescriptor Rule { get; } = DiagnosticDescriptorFactory.Create(AnalyzerLanguage.CSharp,
+            new RuleDescriptor("Test", "Test", "BUG", "BLOCKER", "READY", SourceScope.All, true, "Test"), "{0}", true, false);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+
+        public TestAnalyzer(SyntaxKind[] syntaxKinds)
+        {
+            this.syntaxKinds = syntaxKinds;
+        }
+
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterNodeAction(CSharpGeneratedCodeRecognizer.Instance, c =>
+            {
+                var message = $"IsRedundantPrimaryConstructorBaseTypeContext is {c.IsRedundantPrimaryConstructorBaseTypeContext()}, ContainingSymbol is {c.ContainingSymbol.Kind} {c.ContainingSymbol.ToDisplayString()}";
+                c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation(), message));
+            }, syntaxKinds);
+    }
 }
