@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var method = (MethodDeclarationSyntax)c.Node;
-                    CheckForNoExitMethod(c, method, method.Identifier);
+                    CheckForNoExitMethod(c, method.Identifier);
 
                 },
                 SyntaxKind.MethodDeclaration);
@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var function = (LocalFunctionStatementSyntaxWrapper)c.Node;
-                    CheckForNoExitMethod(c, function, function.Identifier);
+                    CheckForNoExitMethod(c, function.Identifier);
 
                 },
                 SyntaxKindEx.LocalFunctionStatement);
@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var @operator = (OperatorDeclarationSyntax)c.Node;
-                    CheckForNoExitMethod(c, @operator, @operator.OperatorToken);
+                    CheckForNoExitMethod(c, @operator.OperatorToken);
                 },
                 SyntaxKind.OperatorDeclaration);
 
@@ -77,11 +77,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.PropertyDeclaration);
         }
 
-        private void CheckForNoExitMethod(SonarSyntaxNodeReportingContext c, CSharpSyntaxNode node, SyntaxToken identifier)
+        private void CheckForNoExitMethod(SonarSyntaxNodeReportingContext c, SyntaxToken identifier)
         {
-            if (node != null && c.SemanticModel.GetDeclaredSymbol(c.Node) is IMethodSymbol symbol)
+            if (c.SemanticModel.GetDeclaredSymbol(c.Node) is IMethodSymbol symbol)
             {
-                checker.CheckForNoExitMethod(c, node, identifier, symbol);
+                checker.CheckForNoExitMethod(c, (CSharpSyntaxNode)c.Node, identifier, symbol);
             }
         }
 

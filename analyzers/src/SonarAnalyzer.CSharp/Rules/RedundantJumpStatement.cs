@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterNodeAction(
-                c => CheckForRedundantJumps(c, ((BaseMethodDeclarationSyntax)c.Node)),
+                CheckForRedundantJumps,
                 SyntaxKind.MethodDeclaration,
                 SyntaxKind.ConstructorDeclaration,
                 SyntaxKind.DestructorDeclaration,
@@ -43,11 +43,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.OperatorDeclaration);
 
             context.RegisterNodeAction(
-                c => CheckForRedundantJumps(c, ((LocalFunctionStatementSyntaxWrapper)c.Node)),
+                CheckForRedundantJumps,
                 SyntaxKindEx.LocalFunctionStatement);
 
             context.RegisterNodeAction(
-                c => CheckForRedundantJumps(c, ((AccessorDeclarationSyntax)c.Node)),
+                CheckForRedundantJumps,
                 SyntaxKind.GetAccessorDeclaration,
                 SyntaxKind.SetAccessorDeclaration,
                 SyntaxKindEx.InitAccessorDeclaration,
@@ -55,14 +55,15 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.RemoveAccessorDeclaration);
 
             context.RegisterNodeAction(
-                c => CheckForRedundantJumps(c, ((AnonymousFunctionExpressionSyntax)c.Node)),
+                CheckForRedundantJumps,
                 SyntaxKind.AnonymousMethodExpression,
                 SyntaxKind.SimpleLambdaExpression,
                 SyntaxKind.ParenthesizedLambdaExpression);
         }
 
-        private static void CheckForRedundantJumps(SonarSyntaxNodeReportingContext context, CSharpSyntaxNode node)
+        private static void CheckForRedundantJumps(SonarSyntaxNodeReportingContext context)
         {
+            var node = context.Node;
             if (!CSharpControlFlowGraph.TryGet(node, context.SemanticModel, out var cfg))
             {
                 return;
