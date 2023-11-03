@@ -49,7 +49,15 @@ public sealed class ParameterTypeShouldMatchRouteTypeConstraint : SonarDiagnosti
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
     protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(c =>
+        context.RegisterCompilationStartAction(cc =>
+        {
+            // If we are not in a Blazor project, we don't need to register for lambda expressions.
+            if (cc.Compilation.GetTypeByMetadataName(KnownType.Microsoft_AspNetCore_Components_RouteAttribute) is null)
+            {
+                return;
+            }
+
+            cc.RegisterNodeAction(c =>
             {
                 var node = (ClassDeclarationSyntax)c.Node;
 
@@ -70,6 +78,7 @@ public sealed class ParameterTypeShouldMatchRouteTypeConstraint : SonarDiagnosti
                 }
             },
             SyntaxKind.ClassDeclaration);
+        });
 
     private static IList<PropertyTypeMismatch> GetPropertyTypeMismatches(ClassDeclarationSyntax classDeclaration, SemanticModel semanticModel)
     {
