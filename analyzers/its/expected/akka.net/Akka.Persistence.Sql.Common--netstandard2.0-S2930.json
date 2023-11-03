@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2930",
+"message":  "Dispose '_pendingRequestsCancellation' when it is no longer needed.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/SqlJournal.cs#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  13,
+"endLine":  45,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S2930",
+"message":  "Dispose '_pendingRequestsCancellation' when it is no longer needed.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/SqlSnapshotStore.cs#L53",
+"region":  {
+"startLine":  53,
+"startColumn":  13,
+"endLine":  53,
+"endColumn":  73
+}
+}
+}
+]
+}

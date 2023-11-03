@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2930",
+"message":  "Dispose 'cts' when it is no longer needed.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.Tests.Performance/Transports/RemoteMessagingThroughputSpecBase.cs#L56",
+"region":  {
+"startLine":  56,
+"startColumn":  29,
+"endLine":  56,
+"endColumn":  88
+}
+}
+}
+]
+}

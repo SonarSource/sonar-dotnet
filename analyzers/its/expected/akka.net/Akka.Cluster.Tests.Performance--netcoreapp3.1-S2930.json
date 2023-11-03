@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2930",
+"message":  "Dispose 'cts' when it is no longer needed.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests.Performance/Startup/ClusterStartupSpec.cs#L58",
+"region":  {
+"startLine":  58,
+"startColumn":  17,
+"endLine":  58,
+"endColumn":  76
+}
+}
+}
+]
+}
