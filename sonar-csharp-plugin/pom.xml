@@ -156,6 +156,7 @@
           <skipDependenciesPackaging>true</skipDependenciesPackaging>
           <sonarLintSupported>false</sonarLintSupported>
           <pluginApiMinVersion>${plugin.api.min.version}</pluginApiMinVersion>
+          <requiredForLanguages>cs</requiredForLanguages>
         </configuration>
       </plugin>
       <plugin>
