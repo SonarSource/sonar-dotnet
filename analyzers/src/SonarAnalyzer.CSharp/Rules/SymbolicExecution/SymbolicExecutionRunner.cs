@@ -72,19 +72,19 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
 
         context.RegisterNodeAction(
             c => Analyze(context, c, c.Node),
-            SyntaxKind.ConstructorDeclaration,
-            SyntaxKind.DestructorDeclaration,
-            SyntaxKind.ConversionOperatorDeclaration,
-            SyntaxKind.OperatorDeclaration,
-            SyntaxKind.MethodDeclaration,
-            SyntaxKindEx.LocalFunctionStatement,
-            SyntaxKind.GetAccessorDeclaration,
-            SyntaxKind.SetAccessorDeclaration,
-            SyntaxKindEx.InitAccessorDeclaration,
             SyntaxKind.AddAccessorDeclaration,
-            SyntaxKind.RemoveAccessorDeclaration,
+            SyntaxKind.ConstructorDeclaration,
+            SyntaxKind.ConversionOperatorDeclaration,
+            SyntaxKind.DestructorDeclaration,
+            SyntaxKind.GetAccessorDeclaration,
+            SyntaxKind.IndexerDeclaration,
+            SyntaxKindEx.InitAccessorDeclaration,
+            SyntaxKindEx.LocalFunctionStatement,
+            SyntaxKind.MethodDeclaration,
+            SyntaxKind.OperatorDeclaration,
             SyntaxKind.PropertyDeclaration,
-            SyntaxKind.IndexerDeclaration);
+            SyntaxKind.RemoveAccessorDeclaration,
+            SyntaxKind.SetAccessorDeclaration);
 
         context.RegisterNodeAction(
             c =>
@@ -103,7 +103,7 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
     protected override ControlFlowGraph CreateCfg(SemanticModel model, SyntaxNode node, CancellationToken cancel) =>
         node.CreateCfg(model, cancel);
 
-    protected override void AnalyzeSonar(SonarSyntaxNodeReportingContext context, SyntaxNode body, ISymbol symbol)
+    protected override void AnalyzeSonar(SonarSyntaxNodeReportingContext context, SyntaxNode declaration, ISymbol symbol)
     {
         var enabledAnalyzers = AllRules.GroupBy(x => x.Value.Type)         // Multiple DiagnosticDescriptors (S2583, S2589) can share the same check type
                                        .Select(x => x.First().Value.CreateSonarFallback(Configuration))
@@ -111,7 +111,7 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
                                        .Cast<ISymbolicExecutionAnalyzer>() // ISymbolicExecutionAnalyzer should be passed as TSonarFallback to CreateFactory. Have you passed a Roslyn rule instead?
                                        .Where(x => x.SupportedDiagnostics.Any(descriptor => IsEnabled(context, descriptor)))
                                        .ToList();
-        if (enabledAnalyzers.Any() && CSharpControlFlowGraph.TryGet((CSharpSyntaxNode)body, context.SemanticModel, out var cfg))
+        if (enabledAnalyzers.Any() && CSharpControlFlowGraph.TryGet((CSharpSyntaxNode)declaration, context.SemanticModel, out var cfg))
         {
             var lva = new SonarCSharpLiveVariableAnalysis(cfg, symbol, context.SemanticModel, context.Cancel);
             try
@@ -142,7 +142,7 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
             }
             catch (Exception ex)
             {
-                throw new SymbolicExecutionException(ex, symbol, body.GetLocation());
+                throw new SymbolicExecutionException(ex, symbol, declaration.GetLocation());
             }
         }
     }

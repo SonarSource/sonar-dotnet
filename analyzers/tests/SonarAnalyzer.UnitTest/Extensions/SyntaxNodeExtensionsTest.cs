@@ -172,18 +172,66 @@ namespace SonarAnalyzer.UnitTest.Extensions
             ExtensionsCS.GetDeclarationTypeName(SyntaxFactory.StructDeclaration("MyStruct")).Should().Be("struct");
 
         [TestMethod]
-        public void CreateCfg_MethodBody_ReturnsCfg_CS()
+        public void CreateCfg_MethodDeclaration_ReturnsCfg_CS()
         {
-            const string code = @"
-public class Sample
-{
-    public void Main()
-    {
-        var x = 42;
-    }
-}";
+            const string code = """
+                public class Sample
+                {
+                    public void Main()
+                    {
+                        var x = 42;
+                    }
+                }
+                """;
             var (tree, semanticModel) = TestHelper.CompileCS(code);
             var node = tree.Single<SyntaxCS.MethodDeclarationSyntax>();
+
+            ExtensionsCS.CreateCfg(node, semanticModel, default).Should().NotBeNull();
+        }
+
+        [TestMethod]
+        public void CreateCfg_PropertyDeclartion_ReturnsCfg_CS()
+        {
+            const string code = """
+                public class Sample
+                {
+                    int field;
+                    public int Property => field + 42;
+                }
+                """;
+            var (tree, semanticModel) = TestHelper.CompileCS(code);
+            var node = tree.Single<SyntaxCS.PropertyDeclarationSyntax>();
+
+            ExtensionsCS.CreateCfg(node, semanticModel, default).Should().NotBeNull();
+        }
+
+        [TestMethod]
+        public void CreateCfg_PropertyDeclartionWithoutExpressionBody_ReturnsNull_CS()
+        {
+            const string code = """
+                public class Sample
+                {
+                    public int Property {get; set;}
+                }
+                """;
+            var (tree, semanticModel) = TestHelper.CompileCS(code);
+            var node = tree.Single<SyntaxCS.PropertyDeclarationSyntax>();
+
+            ExtensionsCS.CreateCfg(node, semanticModel, default).Should().BeNull();
+        }
+
+        [TestMethod]
+        public void CreateCfg_IndexerDeclartion_ReturnsCfg_CS()
+        {
+            const string code = """
+                public class Sample
+                {
+                    private string field;
+                    public string this[int index] => field = null;
+                }
+                """;
+            var (tree, semanticModel) = TestHelper.CompileCS(code);
+            var node = tree.Single<SyntaxCS.IndexerDeclarationSyntax>();
 
             ExtensionsCS.CreateCfg(node, semanticModel, default).Should().NotBeNull();
         }
