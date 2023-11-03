@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Xml.Linq;
 using SonarAnalyzer.CFG.LiveVariableAnalysis;
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.CFG.Sonar;
@@ -45,20 +46,20 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterNodeAction(c =>
-            {
-                var declaration = CreateContext(c);
-                if ((declaration.Body == null && declaration.ExpressionBody == null)
-                    || declaration.Body?.Statements.Count == 0  // Don't report on empty methods
-                    || declaration.Symbol == null
-                    || !declaration.Symbol.ContainingType.IsClassOrStruct()
-                    || declaration.Symbol.IsMainMethod()
-                    || OnlyThrowsNotImplementedException(declaration))
                 {
-                    return;
-                }
+                    var declaration = CreateContext(c);
+                    if ((declaration.Body == null && declaration.ExpressionBody == null)
+                        || declaration.Body?.Statements.Count == 0  // Don't report on empty methods
+                        || declaration.Symbol == null
+                        || !declaration.Symbol.ContainingType.IsClassOrStruct()
+                        || declaration.Symbol.IsMainMethod()
+                        || OnlyThrowsNotImplementedException(declaration))
+                    {
+                        return;
+                    }
 
-                ReportUnusedParametersOnMethod(declaration);
-            },
+                    ReportUnusedParametersOnMethod(declaration);
+                },
                 SyntaxKind.MethodDeclaration,
                 SyntaxKind.ConstructorDeclaration,
                 SyntaxKindEx.LocalFunctionStatement);
@@ -67,15 +68,16 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (c.Node is BaseMethodDeclarationSyntax method)
             {
-                return new MethodContext(c, method);
+                return new MethodContext(c, method.ParameterList, method.Body, method.ExpressionBody());
             }
-            else if (c.Node.Kind() == SyntaxKindEx.LocalFunctionStatement)
+            else if (LocalFunctionStatementSyntaxWrapper.IsInstance(c.Node))
             {
-                return new MethodContext(c, (LocalFunctionStatementSyntaxWrapper)c.Node);
+                var localFunction = (LocalFunctionStatementSyntaxWrapper)c.Node;
+                return new MethodContext(c, localFunction.ParameterList, localFunction.Body, localFunction.ExpressionBody);
             }
             else
             {
-                throw new System.InvalidOperationException("Unexpected Node: " + c.Node);
+                throw new InvalidOperationException("Unexpected Node: " + c.Node);
             }
         }
 
@@ -126,8 +128,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private void ReportOnDeadParametersAtEntry(MethodContext declaration, IImmutableList<IParameterSymbol> noReportOnParameters)
         {
-            var declarationNode = (CSharpSyntaxNode)declaration.MethodDeclaration ?? declaration.LocalFunctionDeclaration;
-            if (declarationNode == null || declaration.Context.Node.IsKind(SyntaxKind.ConstructorDeclaration))
+            var node = (CSharpSyntaxNode)(declaration.Body?.Parent ?? declaration.ExpressionBody.Parent);
+            if (node is null || declaration.Context.Node.IsKind(SyntaxKind.ConstructorDeclaration))
             {
                 return;
             }
@@ -140,7 +142,7 @@ namespace SonarAnalyzer.Rules.CSharp
             excludedParameters = excludedParameters.AddRange(declaration.Symbol.Parameters.Where(p => p.RefKind != RefKind.None));
 
             var candidateParameters = declaration.Symbol.Parameters.Except(excludedParameters);
-            if (candidateParameters.Any() && ComputeLva(declaration, declarationNode) is { } lva)
+            if (candidateParameters.Any() && ComputeLva(declaration, node) is { } lva)
             {
                 ReportOnUnusedParameters(declaration, candidateParameters.Except(lva.LiveInEntryBlock).Except(lva.CapturedVariables), MessageDead, isRemovable: false);
             }
@@ -238,7 +240,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var parentAsAssignment = expression.Parent as AssignmentExpressionSyntax;
 
-            return !(expression.Parent is ExpressionSyntax)
+            return expression.Parent is not ExpressionSyntax
                 || (parentAsAssignment != null && ReferenceEquals(expression, parentAsAssignment.Right));
         }
 
@@ -256,25 +258,11 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             public readonly SonarSyntaxNodeReportingContext Context;
             public readonly IMethodSymbol Symbol;
-            public readonly BaseMethodDeclarationSyntax MethodDeclaration;
-            public readonly LocalFunctionStatementSyntaxWrapper LocalFunctionDeclaration;
             public readonly ParameterListSyntax ParameterList;
             public readonly BlockSyntax Body;
             public readonly ArrowExpressionClauseSyntax ExpressionBody;
 
-            public MethodContext(SonarSyntaxNodeReportingContext context, BaseMethodDeclarationSyntax declaration)
-                : this(context, declaration.ParameterList, declaration.Body, declaration.ExpressionBody())
-            {
-                MethodDeclaration = declaration;
-            }
-
-            public MethodContext(SonarSyntaxNodeReportingContext context, LocalFunctionStatementSyntaxWrapper declaration)
-                : this(context, declaration.ParameterList, declaration.Body, declaration.ExpressionBody)
-            {
-                LocalFunctionDeclaration = declaration;
-            }
-
-            private MethodContext(SonarSyntaxNodeReportingContext context, ParameterListSyntax parameterList, BlockSyntax body, ArrowExpressionClauseSyntax expressionBody)
+            public MethodContext(SonarSyntaxNodeReportingContext context, ParameterListSyntax parameterList, BlockSyntax body, ArrowExpressionClauseSyntax expressionBody)
             {
                 Context = context;
                 Symbol = context.SemanticModel.GetDeclaredSymbol(context.Node) as IMethodSymbol;
