@@ -27,52 +27,25 @@ namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution;
 public class ConditionEvaluatesToConstantSyntaxKindWalkerTest
 {
     [DataTestMethod]
-    [DataRow("""Dim x = If(True, 1, 2)""")]
     [DataRow("""Dim x = If("", "")""")]
-    [DataRow("""Dim x = 1 AndAlso 2""")]
-    [DataRow("""Dim x = 1 OrElse 2""")]
-    [DataRow("""Dim x = Nothing?.ToString""")]
-    [DataRow("""
-        Do Until True
-        Loop
-    """)]
-    [DataRow("""
-        Do While True
-        Loop
-    """)]
-    [DataRow("""
-        Do
-        Loop Until True
-    """)]
-    [DataRow("""
-        Do
-        Loop While True
-    """)]
-    [DataRow("""
-        While True
-        End While
-    """)]
-    [DataRow("""
-        If True
-        End If
-    """)]
-    [DataRow("""If True Then ToString""")]
-    [DataRow("""If True Then ToString Else ToString""")]
-    [DataRow("""
-        If True
-        End If
-    """)]
-    [DataRow("""
-        Select case True
-        End Select
-    """)]
+    [DataRow("Dim x = If(True, 1, 2)")]
+    [DataRow("Dim x = True AndAlso False")]
+    [DataRow("Dim x = True OrElse False")]
+    [DataRow("Dim x = Nothing?.ToString")]
+    [DataRow("Do Until True : Loop")]
+    [DataRow("Do While True : Loop")]
+    [DataRow("Do : Loop Until True")]
+    [DataRow("Do : Loop While True")]
+    [DataRow("While True : End While")]
+    [DataRow("If True : End If")]
+    [DataRow("If True Then ToString")]
+    [DataRow("If True Then ToString Else ToString")]
+    [DataRow("Select Case True : End Select")]
     public void SyntaxKindsChecks_VB_True(string statement)
     {
-        var tree = TestHelper.CompileVB(WrapInMethod_VB($"""
-            {statement}
-            """)).Tree;
+        var root = TestHelper.CompileVB(WrapInMethod_VB(statement)).Tree.GetRoot();
         var sut = new VB.ConditionEvaluatesToConstant.SyntaxKindWalker();
-        sut.SafeVisit(tree.GetRoot());
+        sut.SafeVisit(root);
         sut.ContainsCondition.Should().BeTrue();
     }
 
@@ -102,13 +75,13 @@ public class ConditionEvaluatesToConstantSyntaxKindWalkerTest
         Dim x = From y in New Integer() { }
                 Where True
     """)]
+    [DataRow("""For i As Integer = 1 To 3 : Next""")]
+    [DataRow("""For Each i As Integer In { 1, 2, 3 } : Next""")]
     public void SyntaxKindsChecks_VB_False(string statement)
     {
-        var tree = TestHelper.CompileVB(WrapInMethod_VB($"""
-            {statement}
-            """)).Tree;
+        var root = TestHelper.CompileVB(WrapInMethod_VB(statement)).Tree.GetRoot();
         var sut = new VB.ConditionEvaluatesToConstant.SyntaxKindWalker();
-        sut.SafeVisit(tree.GetRoot());
+        sut.SafeVisit(root);
         sut.ContainsCondition.Should().BeFalse();
     }
 
@@ -127,11 +100,9 @@ public class ConditionEvaluatesToConstantSyntaxKindWalkerTest
     [DataRow("_ = true switch { _ => true };")]
     public void SyntaxKindsChecks_CS_True(string statement)
     {
-        var tree = TestHelper.CompileCS(WrapInMethod_CS($"""
-            {statement}
-            """)).Tree;
+        var root = TestHelper.CompileCS(WrapInMethod_CS(statement)).Tree.GetRoot();
         var sut = new CS.ConditionEvaluatesToConstant.SyntaxKindWalker();
-        sut.SafeVisit(tree.GetRoot());
+        sut.SafeVisit(root);
         sut.ContainsCondition.Should().BeTrue();
     }
 
@@ -162,18 +133,14 @@ public class ConditionEvaluatesToConstantSyntaxKindWalkerTest
     [DataRow("_ = default(Exception) is { Message.Length: 1 };")]
     public void SyntaxKindsChecks_CS_False(string statement)
     {
-        var tree = TestHelper.CompileCS(WrapInMethod_CS($"""
-            {statement}
-            """)).Tree;
+        var root = TestHelper.CompileCS(WrapInMethod_CS(statement)).Tree.GetRoot();
         var sut = new CS.ConditionEvaluatesToConstant.SyntaxKindWalker();
-        sut.SafeVisit(tree.GetRoot());
+        sut.SafeVisit(root);
         sut.ContainsCondition.Should().BeFalse();
     }
 
     private static string WrapInMethod_VB(string statements) =>
         $$"""
-        Imports System
-
         Public Class Test
             Public Sub M()
                 {{statements}}
