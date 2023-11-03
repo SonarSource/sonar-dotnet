@@ -1,5 +1,5 @@
-﻿{
-  "title": "Using lambda expressions in loops should be avoided",
+{
+  "title": "Using lambda expressions in loops should be avoided in Blazor markup section",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
