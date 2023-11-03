@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Json.Parsing
 {
     internal class LexicalAnalyzer
     {
-        private readonly List<string> lines = new List<string>();
+        private readonly List<string> lines = new();
         private int line;
         private int column = -1;
 
@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Json.Parsing
         }
 
         public LinePosition CurrentPosition(int increment) =>
-            new LinePosition(line, column + increment);
+            new(line, column + increment);
 
         public Symbol NextSymbol()
         {
@@ -264,8 +264,8 @@ namespace SonarAnalyzer.Json.Parsing
         {
             StringBuilder @decimal = null;
             StringBuilder exponent = null;
-            var number = new StringBuilder();
-            var current = number;
+            var @double = new StringBuilder();
+            var current = @double;
             while (!ReachedEndOfInput)
             {
                 switch (CurrentChar)
@@ -277,7 +277,7 @@ namespace SonarAnalyzer.Json.Parsing
                         }
                         else
                         {
-                            throw new JsonException("Unexpected number format: Unexpected '-'", LastStart);
+                            throw new JsonException("Unexpected double format: Unexpected '-'", LastStart);
                         }
                         break;
                     case '0':
@@ -293,20 +293,20 @@ namespace SonarAnalyzer.Json.Parsing
                         current.Append(CurrentChar);
                         break;
                     case '.':
-                        if (current == number && current.ToString().TrimStart('-').Any())
+                        if (current == @double && current.ToString().TrimStart('-').Any())
                         {
                             @decimal = new StringBuilder();
                             current = @decimal;
                         }
                         else
                         {
-                            throw new JsonException("Unexpected number format: Unexpected '.'", LastStart);
+                            throw new JsonException("Unexpected double format: Unexpected '.'", LastStart);
                         }
                         break;
                     case '+':
                         if (current != exponent || current.Length != 0)
                         {
-                            throw new JsonException("Unexpected number format", LastStart);
+                            throw new JsonException("Unexpected double format", LastStart);
                         }
                         break;
                     case 'e':
@@ -326,26 +326,21 @@ namespace SonarAnalyzer.Json.Parsing
             object BuildResult()
             {
                 var baseValue = @decimal == null
-                    ? ParseNumber(number.ToString())
-                    : decimal.Parse(number + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator + @decimal);
+                    ? (object)double.Parse(@double.ToString())
+                    : decimal.Parse(@double + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator + @decimal);
                 if (exponent == null)   // Integer or Decimal
                 {
                     return baseValue;
                 }
                 else if (exponent.Length == 0 || exponent.ToString() == "-")
                 {
-                    throw new JsonException($"Unexpected number exponent format: {exponent}", LastStart);
+                    throw new JsonException($"Unexpected double exponent format: {exponent}", LastStart);
                 }
                 else
                 {
                     return Convert.ToDouble(baseValue) * Math.Pow(10, int.Parse(exponent.ToString()));
                 }
             }
-
-            static object ParseNumber(string number) =>
-                int.TryParse(number, out var result)
-                    ? result
-                    : long.Parse(number);
         }
     }
 }
