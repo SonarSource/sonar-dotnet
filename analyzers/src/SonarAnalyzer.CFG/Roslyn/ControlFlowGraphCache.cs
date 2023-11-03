@@ -20,6 +20,7 @@
 
 using System.Collections.Concurrent;
 using System.Runtime.CompilerServices;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace SonarAnalyzer.CFG.Roslyn
 {
@@ -33,7 +34,14 @@ namespace SonarAnalyzer.CFG.Roslyn
 
         public ControlFlowGraph FindOrCreate(SyntaxNode declaration, SemanticModel model, CancellationToken cancel)
         {
-            if (model.GetOperation(declaration) is { } declarationOperation)
+            var cfgInputNode = declaration switch
+            {
+                IndexerDeclarationSyntax indexer => indexer.ExpressionBody,
+                PropertyDeclarationSyntax property => property.ExpressionBody,
+                _ => declaration
+            };
+
+            if (cfgInputNode is not null && model.GetOperation(cfgInputNode) is { } declarationOperation)
             {
                 var rootSyntax = declarationOperation.RootOperation().Syntax;
                 var nodeCache = compilationCache.GetValue(model.Compilation, x => new());
@@ -42,10 +50,10 @@ namespace SonarAnalyzer.CFG.Roslyn
                     wrapper = new(ControlFlowGraph.Create(rootSyntax, model, cancel));
                     nodeCache[rootSyntax] = wrapper;
                 }
-                if (HasNestedCfg(declaration))
+                if (HasNestedCfg(cfgInputNode))
                 {
                     // We need to go up and track all possible enclosing lambdas, local functions and other FlowAnonymousFunctionOperations
-                    foreach (var node in declaration.AncestorsAndSelf().TakeWhile(x => x != rootSyntax).Reverse())
+                    foreach (var node in cfgInputNode.AncestorsAndSelf().TakeWhile(x => x != rootSyntax).Reverse())
                     {
                         if (IsLocalFunction(node))
                         {
@@ -55,7 +63,7 @@ namespace SonarAnalyzer.CFG.Roslyn
                         {
                             wrapper = new(wrapper.Cfg.GetAnonymousFunctionControlFlowGraph(flowOperation, cancel));
                         }
-                        else if (node == declaration)
+                        else if (node == cfgInputNode)
                         {
                             return null;    // Lambda syntax is not always recognized as a FlowOperation for invalid syntaxes
                         }

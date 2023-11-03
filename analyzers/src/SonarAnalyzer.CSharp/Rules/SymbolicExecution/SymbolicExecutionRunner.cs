@@ -82,15 +82,8 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
             SyntaxKind.SetAccessorDeclaration,
             SyntaxKindEx.InitAccessorDeclaration,
             SyntaxKind.AddAccessorDeclaration,
-            SyntaxKind.RemoveAccessorDeclaration);
-
-
-        context.RegisterNodeAction(
-            c => Analyze(context, c, ((PropertyDeclarationSyntax)c.Node).ExpressionBody),
-            SyntaxKind.PropertyDeclaration);
-
-        context.RegisterNodeAction(
-            c => Analyze(context, c, ((IndexerDeclarationSyntax)c.Node).ExpressionBody),
+            SyntaxKind.RemoveAccessorDeclaration,
+            SyntaxKind.PropertyDeclaration,
             SyntaxKind.IndexerDeclaration);
 
         context.RegisterNodeAction(
