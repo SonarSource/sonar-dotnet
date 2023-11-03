@@ -65,13 +65,13 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
                 var compilationUnit = (CompilationUnitSyntax)c.Node;
                 if (compilationUnit.IsTopLevelMain() && c.SemanticModel.GetDeclaredSymbol(compilationUnit) is { } symbol)
                 {
-                    Analyze(context, c, compilationUnit, symbol);
+                    Analyze(context, c, symbol);
                 }
             },
             SyntaxKind.CompilationUnit);
 
         context.RegisterNodeAction(
-            c => Analyze(context, c, c.Node),
+            c => Analyze(context, c),
             SyntaxKind.AddAccessorDeclaration,
             SyntaxKind.ConstructorDeclaration,
             SyntaxKind.ConversionOperatorDeclaration,
@@ -92,7 +92,7 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
                 var declaration = (AnonymousFunctionExpressionSyntax)c.Node;
                 if (c.SemanticModel.GetSymbolInfo(declaration).Symbol is { } symbol && !c.IsInExpressionTree())
                 {
-                    Analyze(context, c, declaration, symbol);
+                    Analyze(context, c, symbol);
                 }
             },
             SyntaxKind.AnonymousMethodExpression,

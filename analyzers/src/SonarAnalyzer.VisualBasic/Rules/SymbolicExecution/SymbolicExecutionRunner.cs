@@ -49,7 +49,7 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
     protected override void Initialize(SonarAnalysisContext context)
     {
         context.RegisterNodeAction(
-            c => Analyze(context, c, c.Node),
+            c => Analyze(context, c),
             SyntaxKind.ConstructorBlock,
             SyntaxKind.OperatorBlock,
             SyntaxKind.SubBlock,
@@ -66,7 +66,7 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
                 var declaration = (LambdaExpressionSyntax)c.Node;
                 if (c.SemanticModel.GetSymbolInfo(declaration).Symbol is { } symbol && !c.IsInExpressionTree())
                 {
-                    Analyze(context, c, declaration, symbol);
+                    Analyze(context, c, symbol);
                 }
             },
             SyntaxKind.SingleLineFunctionLambdaExpression,

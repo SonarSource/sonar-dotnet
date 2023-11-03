@@ -27,7 +27,7 @@ namespace SonarAnalyzer.CFG.Sonar
         public static bool TryGet(SyntaxNode node, SemanticModel semanticModel, out IControlFlowGraph cfg)
         {
             cfg = null;
-            var block = node switch
+            var body = node switch
             {
                 BaseMethodDeclarationSyntax n => (SyntaxNode)n.Body ?? n.ExpressionBody(),
                 PropertyDeclarationSyntax n => n.ExpressionBody?.Expression,
@@ -35,18 +35,15 @@ namespace SonarAnalyzer.CFG.Sonar
                 AccessorDeclarationSyntax n => (SyntaxNode)n.Body ?? n.ExpressionBody(),
                 AnonymousFunctionExpressionSyntax n => n.Body,
                 ArrowExpressionClauseSyntax n => n,
+                _ when LocalFunctionStatementSyntaxWrapper.IsInstance(node) && (LocalFunctionStatementSyntaxWrapper)node is var local =>
+                    (SyntaxNode)local.Body ?? local.ExpressionBody,
                 _ => null
             };
-            if (LocalFunctionStatementSyntaxWrapper.IsInstance(node))
-            {
-                var local = (LocalFunctionStatementSyntaxWrapper)node;
-                block = (SyntaxNode)local.Body ?? local.ExpressionBody;
-            }
             try
             {
-                if (block != null)
+                if (body is not null)
                 {
-                    cfg = Create(block, semanticModel);
+                    cfg = Create(body, semanticModel);
                 }
                 else
                 {

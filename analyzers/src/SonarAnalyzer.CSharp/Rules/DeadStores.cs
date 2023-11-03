@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             // No need to check for ExpressionBody as it can't contain variable assignment
             context.RegisterNodeAction(
-                c => CheckForDeadStores(c, c.SemanticModel.GetDeclaredSymbol(c.Node), c.Node),
+                c => CheckForDeadStores(c, c.SemanticModel.GetDeclaredSymbol(c.Node)),
                 SyntaxKind.MethodDeclaration,
                 SyntaxKind.ConstructorDeclaration,
                 SyntaxKind.DestructorDeclaration,
@@ -60,14 +60,15 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.RemoveAccessorDeclaration);
 
             context.RegisterNodeAction(
-                c => CheckForDeadStores(c, c.SemanticModel.GetSymbolInfo(c.Node).Symbol, c.Node),
+                c => CheckForDeadStores(c, c.SemanticModel.GetSymbolInfo(c.Node).Symbol),
                 SyntaxKind.AnonymousMethodExpression,
                 SyntaxKind.SimpleLambdaExpression,
                 SyntaxKind.ParenthesizedLambdaExpression);
         }
 
-        private void CheckForDeadStores(SonarSyntaxNodeReportingContext context, ISymbol symbol, SyntaxNode node)
+        private void CheckForDeadStores(SonarSyntaxNodeReportingContext context, ISymbol symbol)
         {
+            var node = context.Node;
             if (symbol != null && node != null)
             {
                 if (useSonarCfg)

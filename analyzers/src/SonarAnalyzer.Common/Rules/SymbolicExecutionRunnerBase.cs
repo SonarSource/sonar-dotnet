@@ -72,16 +72,17 @@ public abstract class SymbolicExecutionRunnerBase : SonarDiagnosticAnalyzer
         }
     }
 
-    protected void Analyze(SonarAnalysisContext analysisContext, SonarSyntaxNodeReportingContext context, SyntaxNode node)
+    protected void Analyze(SonarAnalysisContext analysisContext, SonarSyntaxNodeReportingContext context)
     {
         if (context.SemanticModel.GetDeclaredSymbol(context.Node) is { } symbol)
         {
-            Analyze(analysisContext, context, node, symbol);
+            Analyze(analysisContext, context, symbol);
         }
     }
 
-    protected void Analyze(SonarAnalysisContext analysisContext, SonarSyntaxNodeReportingContext nodeContext, SyntaxNode node, ISymbol symbol)
+    protected void Analyze(SonarAnalysisContext analysisContext, SonarSyntaxNodeReportingContext nodeContext, ISymbol symbol)
     {
+        var node = nodeContext.Node;
         if (node is { ContainsDiagnostics: false })
         {
             AnalyzeSonar(nodeContext, node, symbol);
