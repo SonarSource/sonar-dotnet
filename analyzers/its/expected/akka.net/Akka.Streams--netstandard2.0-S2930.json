@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2930",
+"message":  "Dispose '_cancellation' when it is no longer needed.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/OutputStreamSourceStage.cs#L124",
+"region":  {
+"startLine":  124,
+"startColumn":  54,
+"endLine":  124,
+"endColumn":  99
+}
+}
+}
+]
+}

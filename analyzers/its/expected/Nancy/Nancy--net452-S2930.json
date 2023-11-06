@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2930",
+"message":  "Dispose 'engineDisposedCts' when it is no longer needed.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L98",
+"region":  {
+"startLine":  98,
+"startColumn":  13,
+"endLine":  98,
+"endColumn":  67
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2930",
+"message":  "Dispose 'cancellationSource' when it is no longer needed.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Futures.cs#L356",
+"region":  {
+"startLine":  356,
+"startColumn":  17,
+"endLine":  356,
+"endColumn":  67
+}
+}
+}
+]
+}
