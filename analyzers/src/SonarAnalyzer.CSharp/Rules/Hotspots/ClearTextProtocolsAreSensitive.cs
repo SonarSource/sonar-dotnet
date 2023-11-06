@@ -97,9 +97,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public ClearTextProtocolsAreSensitive() : this(AnalyzerConfiguration.Hotspot) { }
 
-        public ClearTextProtocolsAreSensitive(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration)
-        {
-        }
+        public ClearTextProtocolsAreSensitive(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration) { }
 
         static ClearTextProtocolsAreSensitive()
         {
