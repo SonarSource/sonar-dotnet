@@ -10,7 +10,8 @@ schedules:
 trigger:
 - master
 
-pool: '.Net Bubble - GCP'
+pool:
+  name: '.net-bubble-aws-re-team-dev'
 
 variables:
   - group: sonar-dotnet-variables
