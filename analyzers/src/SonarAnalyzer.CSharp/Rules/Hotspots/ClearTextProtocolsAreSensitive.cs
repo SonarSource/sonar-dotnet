@@ -81,23 +81,25 @@ namespace SonarAnalyzer.Rules.CSharp
             KnownType.System_Windows_Markup_XmlnsCompatibleWithAttribute,
         };
 
-        private readonly CSharpObjectInitializationTracker objectInitializationTracker =
+        private static readonly CSharpObjectInitializationTracker ObjectInitializationTracker =
             new(constantValue => constantValue is bool value && value,
                                                   ImmutableArray.Create(KnownType.System_Net_Mail_SmtpClient, KnownType.System_Net_FtpWebRequest),
                                                   propertyName => propertyName == EnableSslName);
 
-        private readonly Regex httpRegex;
-        private readonly Regex ftpRegex;
-        private readonly Regex telnetRegex;
-        private readonly Regex telnetRegexForIdentifier;
-        private readonly Regex validServerRegex;
+        private static readonly Regex HttpRegex;
+        private static readonly Regex FtpRegex;
+        private static readonly Regex TelnetRegex;
+        private static readonly Regex TelnetRegexForIdentifier;
+        private static readonly Regex ValidServerRegex;
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
             ImmutableArray.Create(DefaultRule, EnableSslRule);
 
         public ClearTextProtocolsAreSensitive() : this(AnalyzerConfiguration.Hotspot) { }
 
-        public ClearTextProtocolsAreSensitive(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration)
+        public ClearTextProtocolsAreSensitive(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration) { }
+
+        static ClearTextProtocolsAreSensitive()
         {
             const string allSubdomainsPattern = @"([^/?#]+\.)?";
 
@@ -108,11 +110,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var validServerPattern = domainsList.JoinStr("|");
 
-            httpRegex = CompileRegex(@$"^http:\/\/(?!{validServerPattern}).");
-            ftpRegex = CompileRegex(@$"^ftp:\/\/.*@(?!{validServerPattern})");
-            telnetRegex = CompileRegex(@$"^telnet:\/\/.*@(?!{validServerPattern})");
-            telnetRegexForIdentifier = CompileRegex(@"Telnet(?![a-z])", false);
-            validServerRegex = CompileRegex($"^({validServerPattern})$");
+            HttpRegex = CompileRegex(@$"^http:\/\/(?!{validServerPattern}).");
+            FtpRegex = CompileRegex(@$"^ftp:\/\/.*@(?!{validServerPattern})");
+            TelnetRegex = CompileRegex(@$"^telnet:\/\/.*@(?!{validServerPattern})");
+            TelnetRegexForIdentifier = CompileRegex(@"Telnet(?![a-z])", false);
+            ValidServerRegex = CompileRegex($"^({validServerPattern})$");
         }
 
         protected override void Initialize(SonarAnalysisContext context) =>
@@ -134,24 +136,24 @@ namespace SonarAnalyzer.Rules.CSharp
                 context.RegisterNodeAction(VisitAssignments, SyntaxKind.SimpleAssignmentExpression);
             });
 
-        private void VisitObjectCreation(SonarSyntaxNodeReportingContext context)
+        private static void VisitObjectCreation(SonarSyntaxNodeReportingContext context)
         {
             var objectCreation = ObjectCreationFactory.Create(context.Node);
 
-            if (!IsServerSafe(objectCreation, context.SemanticModel) && objectInitializationTracker.ShouldBeReported(objectCreation, context.SemanticModel, false))
+            if (!IsServerSafe(objectCreation, context.SemanticModel) && ObjectInitializationTracker.ShouldBeReported(objectCreation, context.SemanticModel, false))
             {
                 context.ReportIssue(Diagnostic.Create(EnableSslRule, objectCreation.Expression.GetLocation()));
             }
-            else if (objectCreation.TypeAsString(context.SemanticModel) is { } typeAsString && telnetRegexForIdentifier.IsMatch(typeAsString))
+            else if (objectCreation.TypeAsString(context.SemanticModel) is { } typeAsString && TelnetRegexForIdentifier.IsMatch(typeAsString))
             {
                 context.ReportIssue(Diagnostic.Create(DefaultRule, objectCreation.Expression.GetLocation(), TelnetKey, RecommendedProtocols[TelnetKey]));
             }
         }
 
-        private void VisitInvocationExpression(SonarSyntaxNodeReportingContext context)
+        private static void VisitInvocationExpression(SonarSyntaxNodeReportingContext context)
         {
             var invocation = (InvocationExpressionSyntax)context.Node;
-            if (telnetRegexForIdentifier.IsMatch(invocation.Expression.ToString()))
+            if (TelnetRegexForIdentifier.IsMatch(invocation.Expression.ToString()))
             {
                 context.ReportIssue(Diagnostic.Create(DefaultRule, invocation.GetLocation(), TelnetKey, RecommendedProtocols[TelnetKey]));
             }
@@ -169,7 +171,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private void VisitStringExpressions(SonarSyntaxNodeReportingContext c)
+        private static void VisitStringExpressions(SonarSyntaxNodeReportingContext c)
         {
             if (GetUnsafeProtocol(c.Node, c.SemanticModel) is { } unsafeProtocol)
             {
@@ -177,22 +179,22 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private bool IsServerSafe(IObjectCreation objectCreation, SemanticModel semanticModel) =>
+        private static bool IsServerSafe(IObjectCreation objectCreation, SemanticModel semanticModel) =>
             objectCreation.ArgumentList?.Arguments.Count > 0
-            && validServerRegex.IsMatch(GetText(objectCreation.ArgumentList.Arguments[0].Expression, semanticModel));
+            && ValidServerRegex.IsMatch(GetText(objectCreation.ArgumentList.Arguments[0].Expression, semanticModel));
 
-        private string GetUnsafeProtocol(SyntaxNode node, SemanticModel semanticModel)
+        private static string GetUnsafeProtocol(SyntaxNode node, SemanticModel semanticModel)
         {
             var text = GetText(node, semanticModel);
-            if (httpRegex.IsMatch(text) && !IsNamespace(semanticModel, node.Parent))
+            if (HttpRegex.IsMatch(text) && !IsNamespace(semanticModel, node.Parent))
             {
                 return "http";
             }
-            else if (ftpRegex.IsMatch(text))
+            else if (FtpRegex.IsMatch(text))
             {
                 return "ftp";
             }
-            else if (telnetRegex.IsMatch(text))
+            else if (TelnetRegex.IsMatch(text))
             {
                 return "telnet";
             }
