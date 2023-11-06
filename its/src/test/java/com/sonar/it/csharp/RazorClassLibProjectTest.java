@@ -42,6 +42,9 @@ public class RazorClassLibProjectTest {
   private static final String RAZOR_COMPONENT_CLASS_FILE = "RazorClassLib:Component.razor";
   private static final String S6798_FOLDER = "RazorClassLib:S6798";
   private static final String S6800_FOLDER = "RazorClassLib:S6800";
+  private static final String SONAR_RULE_S6802 = "csharpsquid:S6802";
+  private static final String S6802_COMPONENT_RAZOR_FILE = "RazorClassLib:S6802/S6802.razor";
+  private static final String S6802_COMPONENT_CS_FILE = "RazorClassLib:S6802/S6802.cs";
 
   @BeforeAll
   public static void beforeAll() throws Exception {
@@ -74,6 +77,19 @@ public class RazorClassLibProjectTest {
     assertThat(issues.stream().filter(issue -> issue.getComponent().equals(S6800_FOLDER + "/S6800.CsharpOnly.cs"))).hasSize(1);
     assertThat(issues.stream().filter(issue -> issue.getComponent().equals(S6800_FOLDER + "/S6800.razor"))).hasSize(1);
     assertThat(issues.stream().filter(issue -> issue.getComponent().equals(S6800_FOLDER + "/S6800.Partial.razor.cs"))).hasSize(1);
+  }
+
+  @Test
+  void issuesS6802AreRaised() {
+    List<Issues.Issue> s6800Issues = Tests.getIssues(PROJECT)
+      .stream()
+      .filter(x -> x.getRule().startsWith(SONAR_RULE_S6802))
+      .collect(Collectors.toList());
+    List<String> files = s6800Issues.stream().map(Issues.Issue::getComponent).collect(Collectors.toList());
+
+    assertThat(s6800Issues).hasSize(4);
+    assertThat(files).contains(S6802_COMPONENT_RAZOR_FILE);
+    assertThat(files).doesNotContain(S6802_COMPONENT_CS_FILE);
   }
 
   @Test

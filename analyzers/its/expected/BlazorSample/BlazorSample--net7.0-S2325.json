@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'Method' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6802/S6802.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  17,
+"endLine":  5,
+"endColumn":  23
+}
+}
+}
+]
+}
