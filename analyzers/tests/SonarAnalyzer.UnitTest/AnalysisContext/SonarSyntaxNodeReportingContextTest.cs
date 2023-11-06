@@ -18,8 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.CSharp;
 using Moq;
 using SonarAnalyzer.AnalysisContext;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.UnitTest.AnalysisContext;
 
@@ -82,4 +84,63 @@ public class SonarSyntaxNodeReportingContextTest
         wasReported.Should().Be(reportOnCorrectTree);
     }
 #endif
+
+    [DataTestMethod]
+    [DataRow("class")]
+
+#if NET
+
+    [DataRow("record")]
+
+#endif
+
+    public void IsRedundantPrimaryConstructorBaseTypeContext_ReturnsTrueForTypeDeclaration(string type)
+    {
+        var compilerVersion = typeof(DiagnosticAnalyzer).Assembly.GetName().Version;
+        // Depending on the version of the compiler, the node action is called either twice with different ContainingSymbol or just once
+        var assertion = compilerVersion < new Version(5, 0) // Fix the compiler version once https://github.com/dotnet/roslyn/pull/70655 is released
+            ? """
+              //  ^^^^^^^    {{IsRedundantPrimaryConstructorBaseTypeContext is True, ContainingSymbol is NamedType Derived}}
+              //  ^^^^^^^@-1 {{IsRedundantPrimaryConstructorBaseTypeContext is False, ContainingSymbol is Method Derived.Derived(int)}}
+              """
+            : """
+              //  ^^^^^^^    {{IsRedundantPrimaryConstructorBaseTypeContext is False, ContainingSymbol is Method Derived.Derived(int)}}
+              """;
+        var snippet = $$"""
+            public {{type}} Base(int i);
+            public {{type}} Derived(int i) :
+                Base(i); // This is the node that is asserted
+            {{assertion}}
+            """;
+        new VerifierBuilder()
+            .AddAnalyzer(() => new TestAnalyzer(new[] { SyntaxKindEx.PrimaryConstructorBaseType }, c =>
+                $"IsRedundantPrimaryConstructorBaseTypeContext is {c.IsRedundantPrimaryConstructorBaseTypeContext()}, ContainingSymbol is {c.ContainingSymbol.Kind} {c.ContainingSymbol.ToDisplayString()}"))
+            .WithOptions(ParseOptionsHelper.FromCSharp12)
+            .AddSnippet(snippet)
+            .Verify();
+    }
+
+    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+#pragma warning disable RS1036 // Specify analyzer banned API enforcement setting
+    private sealed class TestAnalyzer : SonarDiagnosticAnalyzer
+#pragma warning restore RS1036 // Specify analyzer banned API enforcement setting
+    {
+        private readonly SyntaxKind[] syntaxKinds;
+        private readonly Func<SonarSyntaxNodeReportingContext, string> message;
+
+        public DiagnosticDescriptor Rule { get; } = DiagnosticDescriptorFactory.Create(AnalyzerLanguage.CSharp,
+            new RuleDescriptor("Test", "Test", "BUG", "BLOCKER", "READY", SourceScope.All, true, "Test"), "{0}", true, false);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+
+        public TestAnalyzer(SyntaxKind[] syntaxKinds, Func<SonarSyntaxNodeReportingContext, string> message)
+        {
+            this.syntaxKinds = syntaxKinds;
+            this.message = message;
+        }
+
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterNodeAction(CSharpGeneratedCodeRecognizer.Instance, c =>
+                c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation(), message(c))), syntaxKinds);
+    }
 }
