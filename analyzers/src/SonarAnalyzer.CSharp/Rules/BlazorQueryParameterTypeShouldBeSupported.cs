@@ -28,7 +28,7 @@ public sealed class BlazorQueryParameterTypeShouldBeSupported : SonarDiagnosticA
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-    private static readonly ISet<KnownType> SupportedTypes = new HashSet<KnownType>()
+    private static readonly ISet<KnownType> SupportedTypes = new HashSet<KnownType>
     {
         KnownType.System_Boolean,
         KnownType.System_DateTime,
