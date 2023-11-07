@@ -34,6 +34,8 @@ public class DeclareParameterBeforeUsageTest
     public void DeclareParameterBeforeUsage_Razor() =>
         builder
             .AddPaths("DeclareParameterBeforeUsage.Consumer.razor",
+                      "DeclareParameterBeforeUsageComponent.cs",
+                      "DeclareParameterBeforeUsageComponent2.cs",
                       "DeclareParameterBeforeUsage.PrintUnmatchedFalse.razor",
                       "DeclareParameterBeforeUsage.PrintUnmatchedTrue.razor")
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))

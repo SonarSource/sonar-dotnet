@@ -83,7 +83,7 @@ public sealed class DeclareParameterBeforeUsage : SonarDiagnosticAnalyzer
                 }, SyntaxKind.MethodDeclaration);
             });
 
-    private bool IsBuildRenderTreeMethod(MethodDeclarationSyntax method) =>
+    private static bool IsBuildRenderTreeMethod(MethodDeclarationSyntax method) =>
         method.NameIs("BuildRenderTree")
         && method.ParameterList.Parameters.Count == 1
         && method.ParameterList.Parameters[0].NameIs("__builder");
@@ -110,7 +110,7 @@ public sealed class DeclareParameterBeforeUsage : SonarDiagnosticAnalyzer
                 if (member is IPropertySymbol property
                     && property.GetAttributes().Where(x => x.AttributeClass.Is(KnownType.Microsoft_AspNetCore_Components_ParameterAttribute)).ToList() is { Count: 1 } parameterAttributes
                     && componentDescriptor.Parameters.Add(member.Name)
-                    && parameterAttributes[0].NamedArguments.Any(x => x.Key == "CaptureUnmatchedValues" && x.Value.Value is true))
+                    && parameterAttributes[0].NamedArguments.Any(x => x.Key.Equals("CaptureUnmatchedValues") && x.Value.Value is true))
                 {
                     componentDescriptor.HasMatchUnmatchedParameters = true;
                 }
@@ -121,7 +121,7 @@ public sealed class DeclareParameterBeforeUsage : SonarDiagnosticAnalyzer
         return componentDescriptor;
     }
 
-    private class ComponentDescriptor
+    private sealed class ComponentDescriptor
     {
         public ISet<string> Parameters { get; set; } = new HashSet<string>(StringComparer.Ordinal);
         public bool HasMatchUnmatchedParameters { get; set; }
