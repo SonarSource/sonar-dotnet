@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6803",
+"message":  "Component parameters can only receive query parameter values in routable components.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6797/S6797.Partial.razor.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  25,
+"endLine":  9,
+"endColumn":  33
+}
+}
+}
+]
+}

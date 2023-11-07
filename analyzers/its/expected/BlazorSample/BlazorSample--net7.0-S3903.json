@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3903",
+"message":  "Move 'S6797' into a named namespace.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6797/S6797.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  14,
+"endLine":  5,
+"endColumn":  19
+}
+}
+}
+]
+}

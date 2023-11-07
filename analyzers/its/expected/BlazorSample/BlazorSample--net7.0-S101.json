@@ -2,6 +2,19 @@
 "issues":  [
 {
 "id":  "S101",
+"message":  "Rename class 'S6797_Partial' to match pascal case naming rules, consider using 'S6797Partial'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6797/S6797.Partial.razor.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  26,
+"endLine":  5,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S101",
 "message":  "Rename class 'S6798_CSharpOnly' to match pascal case naming rules, consider using 'S6798CSharpOnly'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6798/S6798.CSharpOnly.cs#L5",
