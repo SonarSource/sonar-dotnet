@@ -2089,3 +2089,22 @@ public class Repro_8266
         }
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8324
+class Repro_8324
+{
+    void Foo(object o, int i)
+    {
+        object n = null;
+
+        if (i is var x1)
+            Console.WriteLine();
+        else
+            Console.WriteLine(n.ToString());    // Compliant: unreachable
+
+        if (o is var x2)
+            Console.WriteLine();
+        else
+            Console.WriteLine(n.ToString());    // Noncompliant FP: unreachable
+    }
+}
