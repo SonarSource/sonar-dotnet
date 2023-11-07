@@ -28,6 +28,9 @@ public sealed class DeclareParameterBeforeUsage : SonarDiagnosticAnalyzer
     private const string DiagnosticId = "S6801";
     private const string MessageFormat = "'{0}' parameter should be declared on component '{1}' before usage.";
 
+    // https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.components.rendering.rendertreebuilder.addattribute?view=aspnetcore-7.0
+    private const int MinAddAttributeParameters = 2;
+
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
@@ -44,9 +47,7 @@ public sealed class DeclareParameterBeforeUsage : SonarDiagnosticAnalyzer
                 cs.RegisterNodeAction(c =>
                 {
                     var method = (MethodDeclarationSyntax)c.Node;
-                    if (!method.NameIs("BuildRenderTree")
-                        || method.ParameterList.Parameters.Count != 1
-                        || !method.ParameterList.Parameters[0].NameIs("__builder"))
+                    if (!IsBuildRenderTreeMethod(method))
                     {
                         return;
                     }
@@ -64,7 +65,7 @@ public sealed class DeclareParameterBeforeUsage : SonarDiagnosticAnalyzer
                         }
                         else if (currentComponent != null
                             && targetMethod.Name.Equals("AddAttribute")
-                            && targetMethod.Parameters is { Length: >= 2 } parameters
+                            && targetMethod.Parameters is { Length: >= MinAddAttributeParameters } parameters
                             && parameters[1].Type.Is(KnownType.System_String)
                             && invocation.ArgumentList.Arguments[1].Expression.StringValue(c.SemanticModel) is { } parameterName
                             && GetComponentDescriptor(currentComponent, descriptors) is var descriptor
@@ -81,6 +82,11 @@ public sealed class DeclareParameterBeforeUsage : SonarDiagnosticAnalyzer
                     }
                 }, SyntaxKind.MethodDeclaration);
             });
+
+    private bool IsBuildRenderTreeMethod(MethodDeclarationSyntax method) =>
+        method.NameIs("BuildRenderTree")
+        && method.ParameterList.Parameters.Count == 1
+        && method.ParameterList.Parameters[0].NameIs("__builder");
 
     private ComponentDescriptor GetComponentDescriptor(ITypeSymbol typeSymbol, Dictionary<string, ComponentDescriptor> descriptors)
     {
@@ -115,7 +121,7 @@ public sealed class DeclareParameterBeforeUsage : SonarDiagnosticAnalyzer
         return componentDescriptor;
     }
 
-    internal class ComponentDescriptor
+    private class ComponentDescriptor
     {
         public ISet<string> Parameters { get; set; } = new HashSet<string>(StringComparer.Ordinal);
         public bool HasMatchUnmatchedParameters { get; set; }

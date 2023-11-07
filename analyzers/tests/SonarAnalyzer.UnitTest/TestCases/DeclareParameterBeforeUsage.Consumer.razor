@@ -1,5 +1,18 @@
 ﻿@* Noncompliant {{'Other' parameter should be declared on component 'DeclareParameterBeforeUsage_PrintUnmatchedFalse' before usage.}}*@
+@* Noncompliant@-1 {{'Something' parameter should be declared on component 'DeclareParameterBeforeUsage_PrintUnmatchedFalse' before usage.}}*@
+@* Noncompliant@-2 {{'BOOLParam' parameter should be declared on component 'DeclareParameterBeforeUsage_PrintUnmatchedFalse' before usage.}}*@
 
 <DeclareParameterBeforeUsage_PrintUnmatchedTrue BoolParam="true" Other="1"/>
 
-<DeclareParameterBeforeUsage_PrintUnmatchedFalse BoolParam="true" Other="1"/>
+<DeclareParameterBeforeUsage_PrintUnmatchedFalse BoolParam="true" Other="1"/> @* here *@
+
+<NonExistentComponent Something ="true"/>
+
+<div class="marvellous" notGlobalAttribute="xy"> 
+    <DeclareParameterBeforeUsage_PrintUnmatchedFalse Something="0" /> @* here *@
+    <DeclareParameterBeforeUsage_PrintUnmatchedFalse BOOLParam="true" /> @* here *@
+</div>
+
+@code {
+    public bool MyMethod() => true;
+}
