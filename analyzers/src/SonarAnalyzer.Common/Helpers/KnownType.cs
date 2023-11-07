@@ -49,7 +49,9 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Microsoft_AspNet_SignalR_Hub = new("Microsoft.AspNet.SignalR.Hub");
         public static readonly KnownType Microsoft_AspNetCore_Builder_DeveloperExceptionPageExtensions = new("Microsoft.AspNetCore.Builder.DeveloperExceptionPageExtensions");
         public static readonly KnownType Microsoft_AspNetCore_Builder_DatabaseErrorPageExtensions = new("Microsoft.AspNetCore.Builder.DatabaseErrorPageExtensions");
+        public static readonly KnownType Microsoft_AspNetCore_Components_ComponentBase = new("Microsoft.AspNetCore.Components.ComponentBase");
         public static readonly KnownType Microsoft_AspNetCore_Components_ParameterAttribute = new("Microsoft.AspNetCore.Components.ParameterAttribute");
+        public static readonly KnownType Microsoft_AspNetCore_Components_Rendering_RenderTreeBuilder = new("Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder");
         public static readonly KnownType Microsoft_AspNetCore_Components_RouteAttribute = new("Microsoft.AspNetCore.Components.RouteAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Cors_Infrastructure_CorsPolicyBuilder = new("Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder");
         public static readonly KnownType Microsoft_AspNetCore_Hosting_HostingEnvironmentExtensions = new("Microsoft.AspNetCore.Hosting.HostingEnvironmentExtensions");
