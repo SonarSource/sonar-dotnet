@@ -10,12 +10,17 @@ schedules:
 trigger:
 - master
 
-pool: '.Net Bubble - GCP'
+# ToDo: Remove this change once the staging image changes are merged in the base image 
+pool:
+  name: '.Net Bubble staging'
+  demands:
+    - PR_NUMBER -equals 381
 
 variables:
   - group: sonar-dotnet-variables
   - group: sonarsource-build-variables
   - group: artifactory_access
+  - group: digicert-keylocker
   # ARTIFACTORY_URL https://repox.jfrog.io/repox => https://repox.jfrog.io/artifactory
   # JFROG_URL https://repox.jfrog.io
   # https://github.com/SonarSource/parent-oss/blob/master/pom.xml#L708-L711
@@ -43,6 +48,8 @@ variables:
     value: ${{ or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), startsWith(variables['Build.SourceBranch'], 'refs/heads/branch-')) }}
   - name: vsVersion
     value: '17.0'
+  - name: SignToolPath
+    value: 'C:\Program Files (x86)\Windows Kits\10\bin\10.0.22621.0\x64\signtool.exe'
 
 resources:
   repositories:
@@ -95,24 +102,56 @@ stages:
           secureFile: SonarSourceSecret.snk
 
       - task: DownloadSecureFile@1
-        displayName: 'Download pfx file'
-        name: pfx
+        displayName: 'Download p12 file'
+        name: SM_CLIENT_CERT
         inputs:
-          secureFile: 'SonarSource-2021-2023.pfx'
+          secureFile: digicert_authentication_certificate.p12
+ 
+      - task: DownloadSecureFile@1
+        displayName: 'Download crt file'
+        name: SM_CLIENT_CRT
+        inputs:
+          secureFile: cert_525594307.crt
+
+      - task: PowerShell@2
+        displayName: "Signing certificate setup"
+        # ToDo: add back the condition
+        # condition: eq(variables.isReleaseBranch, 'True')
+        env:
+          SIGNTOOL_PATH: $(SignToolPath)
+          SM_CLIENT_CERT_FILE: $(SM_CLIENT_CERT.secureFilePath)
+          SM_CLIENT_CERT_PASSWORD: $(SM_CLIENT_CERT_PASSWORD)
+          SM_API_KEY: $(SM_API_KEY)
+          SM_CERT: $(SM_CERT)
+          SM_CERT_FP: $(SM_CERT_FP)
+          SM_HOST: $(SM_HOST)
+          SM_KP: $(SM_KP)
+        inputs:
+          targetType: 'inline'
+          script: |
+            Write-Output "smctl healthcheck:"
+            smctl healthcheck 
+            Write-Output "smctl sync:"
+            smctl windows certsync
 
       - task: VSBuild@1
         displayName: "Build and sign SonarAnalyzer solution"
         env:
-          SIGNTOOL_PATH: 'C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.17763.0\\x64\\signtool.exe'
-          PFX_PASSWORD: $(pfxPassword2021-2023)
-          PFX_PATH: $(pfx.secureFilePath)
+          SIGNTOOL_PATH: $(SignToolPath)
+          SM_CLIENT_CRT_FILE: $(SM_CLIENT_CRT.secureFilePath)
+          SM_CLIENT_CERT_FILE: $(SM_CLIENT_CERT.secureFilePath)
+          SM_CLIENT_CERT_PASSWORD: $(SM_CLIENT_CERT_PASSWORD)
+          SM_API_KEY: $(SM_API_KEY)
+          SM_CERT: $(SM_CERT)
+          SM_CERT_FP: $(SM_CERT_FP)
+          SM_HOST: $(SM_HOST)
+          SM_KP: $(SM_KP)
         inputs:
           solution: '$(solution)'
           platform: '$(buildPlatform)'
           configuration: '$(buildConfiguration)'
-          # Code signing is temporarily disabled until new certificate is properly set up
-          # https://github.com/SonarSource/sonar-dotnet/issues/8230
-          msbuildArgs: '/p:SignAssembly=false /p:AssemblyOriginatorKeyFile="$(snk.secureFilePath)" /p:Sha1=$(Build.SourceVersion) /p:BuildNumber=$(Build.BuildId) /p:WarningLevel=0'
+          # ToDo: conditionally sign assemblies
+          msbuildArgs: '/p:SignAssembly=true /p:AssemblyOriginatorKeyFile="$(snk.secureFilePath)" /p:Sha1=$(Build.SourceVersion) /p:BuildNumber=$(Build.BuildId) /p:WarningLevel=0'
           vsVersion: $(vsVersion)
 
       - task: NuGetCommand@2
@@ -125,15 +164,24 @@ stages:
           verbosityPack: 'Detailed'
           publishPackageMetadata: true
 
-      # Code signing is temporarily disabled until new certificate is properly set up.
-      # https://github.com/SonarSource/sonar-dotnet/issues/8230
-      - task: NuGetCommand@2
-        enabled: false
+      - task: PowerShell@2
         displayName: "Sign NuGet packages"
-        condition: eq(variables.isReleaseBranch, 'True')
+        # ToDo: add back the condition
+        # condition: eq(variables.isReleaseBranch, 'True')
+        env:
+          PACKAGES_PATH: '$(Build.ArtifactStagingDirectory)\packages\*.nupkg'
+          SIGNTOOL_PATH: $(SignToolPath)
+          SM_CLIENT_CERT_FILE: $(SM_CLIENT_CERT.secureFilePath)
+          SM_CLIENT_CERT_PASSWORD: $(SM_CLIENT_CERT_PASSWORD)
+          SM_API_KEY: $(SM_API_KEY)
+          SM_CERT: $(SM_CERT)
+          SM_CERT_FP: $(SM_CERT_FP)
+          SM_HOST: $(SM_HOST)
+          SM_KP: $(SM_KP)
         inputs:
-          command: 'custom'
-          arguments: 'sign $(Build.ArtifactStagingDirectory)\packages\*.nupkg -CertificatePath $(pfx.secureFilePath) -CertificatePassword $(pfxPassword2021-2023) -Timestamper http://sha256timestamp.ws.symantec.com/sha256/timestamp'
+          targetType: 'inline'
+          script: |
+            nuget sign "$env:PACKAGES_PATH" -Overwrite -HashAlgorithm SHA256 -CertificateFingerprint $env:SM_CERT_FP -Timestamper http://timestamp.digicert.com -TimestampHashAlgorithm SHA256
 
       - task: PublishBuildArtifacts@1
         displayName: 'Publish NuGet packages as build artifacts'
