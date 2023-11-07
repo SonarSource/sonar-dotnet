@@ -1,0 +1,7 @@
+﻿@code {
+    [Parameter]
+    public bool BoolParam { get; set; }
+
+    [Parameter(CaptureUnmatchedValues = false)]
+    public Dictionary<string, object> AllParam { get; set; }
+}
