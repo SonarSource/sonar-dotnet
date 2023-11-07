@@ -1,0 +1,51 @@
+<h2>Why is this an issue?</h2>
+<p>The <a
+href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.components.supplyparameterfromqueryattribute">SupplyParameterFromQuery</a>
+attribute can be used to specify that a component parameter, of a routable component, comes from the query string.</p>
+<p>Component parameters supplied from the query string support the following types:</p>
+<ul>
+  <li> bool, DateTime, decimal, double, float, Guid, int, long, string. </li>
+  <li> Nullable variants of the preceding types. </li>
+  <li> Arrays of the preceding types, whether they’re nullable or not nullable. </li>
+</ul>
+<p>Query parameters should have one of the supported types. Otherwise, an unhandled exception will be raised at runtime.</p>
+<pre>
+Unhandled exception rendering component: Querystring values cannot be parsed as type '&lt;type&gt;'.
+System.NotSupportedException: Querystring values cannot be parsed as type '&lt;type&gt;'
+...
+</pre>
+<h2>How to fix it</h2>
+<p>Change the parameter type to one of the following ones:</p>
+<ul>
+  <li> bool, DateTime, decimal, double, float, Guid, int, long, string. </li>
+  <li> Nullable variants of the preceding types. </li>
+  <li> Arrays of the preceding types, whether they’re nullable or not nullable. </li>
+</ul>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+@page "/print"
+&lt;p&gt; Parameter value is: @Value &lt;/p&gt;
+@code {
+    [Parameter]
+    [SupplyParameterFromQuery()]
+    public TimeSpan Value { get; set; }     // Noncompliant
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+@page "/print"
+&lt;p&gt; Parameter value is: @Value &lt;/p&gt;
+@code {
+    [Parameter]
+    [SupplyParameterFromQuery()]
+    public long Value { get; set; }         // Compliant
+}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.components.supplyparameterfromqueryattribute">SupplyParameterFromQueryAttribute</a> </li>
+</ul>
+

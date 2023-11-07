@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2023 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -6721,7 +6721,7 @@ internal static class RuleTypeMappingCS
         // ["S6794"],
         // ["S6795"],
         // ["S6796"],
-        // ["S6797"],
+        ["S6797"] = "BUG",
         ["S6798"] = "BUG",
         // ["S6799"],
         ["S6800"] = "BUG",
