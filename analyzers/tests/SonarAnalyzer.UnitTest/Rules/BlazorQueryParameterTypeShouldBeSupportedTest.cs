@@ -36,5 +36,24 @@ public class BlazorQueryParameterTypeShouldBeSupportedTest
             .AddPaths("BlazorQueryParameterTypeShouldBeSupported.razor")
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .Verify();
+
+    [TestMethod]
+    public void BlazorQueryParameterTypeShouldBeSupported_BlazorNoRoute() =>
+        builder
+            .AddPaths("BlazorQueryParameterTypeShouldBeSupported.NoRoute.razor")
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+            .VerifyNoIssueReported();
+
+    [TestMethod]
+    public void BlazorQueryParameterTypeShouldBeSupported_Partial() =>
+        builder.AddPaths("BlazorQueryParameterTypeShouldBeSupported.Partial.razor", "BlazorQueryParameterTypeShouldBeSupported.Partial.razor.cs")
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+            .Verify();
+
+    [TestMethod]
+    public void BlazorQueryParameterTypeShouldBeSupported_CS() =>
+        builder.AddPaths("BlazorQueryParameterTypeShouldBeSupported.cs")
+            .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreComponents("7.0.13"))
+            .Verify();
 }
 #endif
