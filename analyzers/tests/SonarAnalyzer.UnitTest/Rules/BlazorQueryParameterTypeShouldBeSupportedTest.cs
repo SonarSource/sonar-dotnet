@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#if NET
 using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules;
@@ -27,7 +28,13 @@ public class BlazorQueryParameterTypeShouldBeSupportedTest
 {
     private readonly VerifierBuilder builder = new VerifierBuilder<BlazorQueryParameterTypeShouldBeSupported>();
 
+    public TestContext TestContext { get; set; }
+
     [TestMethod]
     public void BlazorQueryParameterTypeShouldBeSupported_Blazor() =>
-        builder.AddPaths("BlazorQueryParameterTypeShouldBeSupported.razor").Verify();
+        builder
+            .AddPaths("BlazorQueryParameterTypeShouldBeSupported.razor")
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+            .Verify();
 }
+#endif

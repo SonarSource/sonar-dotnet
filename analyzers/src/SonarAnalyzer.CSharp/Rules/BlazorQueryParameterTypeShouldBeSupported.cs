@@ -24,20 +24,83 @@ namespace SonarAnalyzer.Rules.CSharp;
 public sealed class BlazorQueryParameterTypeShouldBeSupported : SonarDiagnosticAnalyzer
 {
     private const string DiagnosticId = "S6797";
-    private const string MessageFormat = "FIXME";
+    private const string MessageFormat = "Query parameter type '{0}' is not supported.";
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+
+    private static readonly ISet<KnownType> SupportedTypes = new HashSet<KnownType>()
+    {
+        KnownType.System_Boolean,
+        KnownType.System_DateTime,
+        KnownType.System_Decimal,
+        KnownType.System_Double,
+        KnownType.System_Single,
+        KnownType.System_Int32,
+        KnownType.System_Int64,
+        KnownType.System_String,
+        KnownType.System_Guid
+    };
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
     protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(c =>
+        context.RegisterCompilationStartAction(cc =>
+        {
+            if (cc.Compilation.GetTypeByMetadataName(KnownType.Microsoft_AspNetCore_Components_RouteAttribute) is null)
             {
-                var node = c.Node;
-                if (true)
+                return;
+            }
+
+            cc.RegisterSymbolAction(c =>
+            {
+                var componentClass = (INamedTypeSymbol)c.Symbol;
+                if (HasRouteAttribute(componentClass))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
+                    foreach (var propertyType in GetPropertyTypeMismatches(componentClass))
+                    {
+                        c.ReportIssue(Diagnostic.Create(Rule, propertyType.GetLocation(), GetTypeName(propertyType)));
+                    }
                 }
             },
-            SyntaxKind.InvocationExpression);
+            SymbolKind.NamedType);
+        });
+
+    private static string GetTypeName(TypeSyntax propertyType)
+    {
+        if (propertyType.NameIs(KnownType.System_Nullable_T.TypeName))
+        {
+            propertyType = ((GenericNameSyntax)propertyType).TypeArgumentList.Arguments[0];
+        }
+
+        return propertyType.GetName();
+    }
+
+    private static IEnumerable<TypeSyntax> GetPropertyTypeMismatches(INamedTypeSymbol componentClass) =>
+        componentClass
+            .GetMembers()
+            .Where(IsPropertyTypeMismatch)
+            .SelectMany(p => p.DeclaringSyntaxReferences.Select(d => ((PropertyDeclarationSyntax)d.GetSyntax()).Type));
+
+    private static bool IsPropertyTypeMismatch(ISymbol member) =>
+        member is IPropertySymbol property
+        && property.HasAttribute(KnownType.Microsoft_AspNetCore_Components_SupplyParameterFromQueryAttribute)
+        && !SupportedTypes.Any(t => IsSupportedType(property.Type, t));
+
+    private static bool IsSupportedType(ITypeSymbol type, KnownType supportType)
+    {
+        if (type is IArrayTypeSymbol arrayTypeSymbol)
+        {
+            type = arrayTypeSymbol.ElementType;
+        }
+
+        if (KnownType.System_Nullable_T.Matches(type))
+        {
+            type = ((INamedTypeSymbol)type).TypeArguments[0];
+        }
+
+        return supportType.Matches(type);
+    }
+
+    private static bool HasRouteAttribute(INamedTypeSymbol componentClass) =>
+        componentClass.GetAttributes().Any(a => KnownType.Microsoft_AspNetCore_Components_RouteAttribute.Matches(a.AttributeClass));
 }

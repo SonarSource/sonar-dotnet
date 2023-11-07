@@ -1,4 +1,4 @@
-﻿@page "/print"
+﻿@page "/query-parameters"
 <p>
     Component parameters supplied from the query string support the following types:
     <ul>
@@ -51,7 +51,7 @@
 
     [Parameter]
     [SupplyParameterFromQuery]
-    public bool? NullableBoolParamLongForm { get; set; } // Compliant
+    public Nullable<bool> NullableBoolParamLongForm { get; set; } // Compliant
 
     [Parameter]
     [SupplyParameterFromQuery]
@@ -63,17 +63,33 @@
 
     [Parameter]
     [SupplyParameterFromQuery]
-    public TimeSpan TimeSpan { get; set; } // Noncompliant
+    public TimeSpan TimeSpan { get; set; } // Noncompliant {{Query parameter type 'TimeSpan' is not supported.}}
+    //     ^^^^^^^^
 
     [Parameter]
     [SupplyParameterFromQuery]
-    public TimeSpan? NullableTimeSpan { get; set; } // Noncompliant
+    public TimeSpan? NullableTimeSpan { get; set; } // Noncompliant {{Query parameter type 'TimeSpan' is not supported.}}
+    //     ^^^^^^^^^
 
     [Parameter]
     [SupplyParameterFromQuery]
-    public Nullable<TimeSpan> NullableTimeSpanLongForm { get; set; } // Noncompliant
+    public Nullable<TimeSpan> NullableTimeSpanLongForm { get; set; } // Noncompliant {{Query parameter type 'TimeSpan' is not supported.}}
+    //     ^^^^^^^^^^^^^^^^^^
 
     [Parameter]
     [SupplyParameterFromQuery]
-    public TimeSpan[] TimeSpanArrayLongForm { get; set; } // Noncompliant
+    public TimeSpan[] TimeSpanArrayLongForm { get; set; } // Noncompliant {{Query parameter type 'TimeSpan' is not supported.}}
+    //     ^^^^^^^^^^
+
+    [Parameter]
+    public TimeSpan TimeSpanParam { get; set; } // Compliant
+
+    [Parameter]
+    public TimeSpan? NullableTimeSpanParam { get; set; } // Compliant
+
+    [Parameter]
+    public Nullable<TimeSpan> NullableTimeSpanLongFormParam { get; set; } // Compliant
+
+    [Parameter]
+    public TimeSpan[] TimeSpanArrayLongFormParam { get; set; } // Compliant
 }
