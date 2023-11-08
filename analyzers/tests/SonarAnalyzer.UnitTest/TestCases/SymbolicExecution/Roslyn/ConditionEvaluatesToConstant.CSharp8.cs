@@ -558,7 +558,7 @@ class Repro_8326
         _ = o switch
         {
             1 => 1,
-            var other => 2          // Compliant: by accident, o has no SymbolicValue and always branches du to #8324
+            var other => 2          // Compliant: by accident, o has no SymbolicValue and always branches due to #8324
         };
 
         if (i is var x1)            // Noncompliant {{Change this condition so that it does not always evaluate to 'True'. Some code paths are unreachable.}}
