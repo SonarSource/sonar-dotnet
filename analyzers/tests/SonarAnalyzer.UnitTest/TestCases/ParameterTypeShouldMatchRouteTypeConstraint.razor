@@ -1,23 +1,23 @@
 @page "/route/{BoolParam:bool}"
-@page "/route/{BoolParam:int}"
-@page "/route/{BoolParam:int}/{DatetimeParam:datetime}"
+@page "/route/{BoolParam:InT}"
+@page "/route/{BoolParam:int}/{DatetimeParam:DATEtime}"
 @page "/route/{DatetimeParam:datetime}"
 @page "/route/{DecimalParam:decimal}"
-@page "/route/{DoubleParam:double}"
+@page "/route/{doubleparam:double}"
 @page "/route/{FloatParam:float}"
-@page "/route/{GuidParam:guid}"
-@page "/route/{IntParam:int}"
+@page "/route/{GuIdPaRam:guid}"
+@page "/route/{INTPARAM:INT}"
 @page "/route/{LongParam:long}"
 @page "/route/{StringParam:string}"
 @page "/route/{OptionalStringParam:string?}"
 @page "/route/{CompliantBoolParam:bool}"
-@page "/route/{CompliantDatetimeParam:datetime}"
+@page "/route/{COMPLIANTDATETIMEPARAM:datetime}"
 @page "/route/{CompliantDecimalParam:decimal}"
 @page "/route/{CompliantDoubleParam:double}"
 @page "/route/{CompliantFloatParam:float}"
 @page "/route/{CompliantGuidParam:guid}"
 @page "/route/{CompliantIntParam:int}"
-@page "/route/{CompliantLongParam:long}"
+@page "/route/{compliantlongparam:long}"
 @page "/route/{CompliantStringParam:string}"
 @page "/route/{OptionalCompliantStringParam:string?}"
 @page "/route/{InvalidConstraint:invalid}"
@@ -26,21 +26,21 @@
     [Parameter]
     public string BoolParam { get; set; } // Noncompliant {{Parameter type 'string' does not match route parameter type constraint 'bool' in route '/route/{BoolParam:bool}'.}}
     //     ^^^^^^
-                                          // Noncompliant@-2 {{Parameter type 'string' does not match route parameter type constraint 'int' in route '/route/{BoolParam:int}'.}}
-                                          // Noncompliant@-3 {{Parameter type 'string' does not match route parameter type constraint 'int' in route '/route/{BoolParam:int}/{DatetimeParam:datetime}'.}}
+                                          // Noncompliant@-2 {{Parameter type 'string' does not match route parameter type constraint 'int' in route '/route/{BoolParam:InT}'.}}
+                                          // Noncompliant@-3 {{Parameter type 'string' does not match route parameter type constraint 'int' in route '/route/{BoolParam:int}/{DatetimeParam:DATEtime}'.}}
     [Parameter]
-    public decimal DatetimeParam { get; set; } // Noncompliant {{Parameter type 'decimal' does not match route parameter type constraint 'datetime' in route '/route/{BoolParam:int}/{DatetimeParam:datetime}'.}}
+    public decimal DatetimeParam { get; set; } // Noncompliant {{Parameter type 'decimal' does not match route parameter type constraint 'datetime' in route '/route/{BoolParam:int}/{DatetimeParam:DATEtime}'.}}
                                                // Noncompliant@-1 {{Parameter type 'decimal' does not match route parameter type constraint 'datetime' in route '/route/{DatetimeParam:datetime}'.}}
     [Parameter]
     public bool DecimalParam { get; set; } // Noncompliant {{Parameter type 'bool' does not match route parameter type constraint 'decimal' in route '/route/{DecimalParam:decimal}'.}}
     [Parameter]
-    public DateTime DoubleParam { get; set; } // Noncompliant {{Parameter type 'DateTime' does not match route parameter type constraint 'double' in route '/route/{DoubleParam:double}'.}}
+    public DateTime DoubleParam { get; set; } // Noncompliant {{Parameter type 'DateTime' does not match route parameter type constraint 'double' in route '/route/{doubleparam:double}'.}}
     [Parameter]
     public Guid FloatParam { get; set; } // Noncompliant {{Parameter type 'Guid' does not match route parameter type constraint 'float' in route '/route/{FloatParam:float}'.}}
     [Parameter]
-    public string GuidParam { get; set; } // Noncompliant {{Parameter type 'string' does not match route parameter type constraint 'guid' in route '/route/{GuidParam:guid}'.}}
+    public string GuidParam { get; set; } // Noncompliant {{Parameter type 'string' does not match route parameter type constraint 'guid' in route '/route/{GuIdPaRam:guid}'.}}
     [Parameter]
-    public long IntParam { get; set; } // Noncompliant {{Parameter type 'long' does not match route parameter type constraint 'int' in route '/route/{IntParam:int}'.}}
+    public long IntParam { get; set; } // Noncompliant {{Parameter type 'long' does not match route parameter type constraint 'int' in route '/route/{INTPARAM:INT}'.}}
     [Parameter]
     public int LongParam { get; set; } // Noncompliant {{Parameter type 'int' does not match route parameter type constraint 'long' in route '/route/{LongParam:long}'.}}
     [Parameter]

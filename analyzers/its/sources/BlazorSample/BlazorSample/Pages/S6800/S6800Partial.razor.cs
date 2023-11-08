@@ -2,7 +2,7 @@
 
 namespace BlazorSample.Pages.S6800;
 
-public partial class S6800_Partial
+public partial class S6800Partial
 {
     [Parameter]
     public string Unmatched { get; set; }

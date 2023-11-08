@@ -6,7 +6,7 @@ namespace BlazorSample.Pages.S6800;
 [Route("/S6800/csharp-only/{Matched:datetime}")]
 [Route(Constants.ROUTE_UNMATCHED)]
 [Route(Constants.ROUTE_MATCHED)]
-public class S6800_CsharpOnly
+public class S6800CsharpOnly
 {
     [Parameter]
     public string Unmatched { get; set; }
