@@ -22,7 +22,8 @@ namespace Tests.Diagnostics
                 (_, _) =>
                 {
                     throw new ArgumentNullException("_");
-                    throw new ArgumentNullException("a"); // Noncompliant - we are just looking at most direct parent definition
+                    // https://github.com/SonarSource/sonar-dotnet/issues/8319
+                    throw new ArgumentNullException("a"); // Noncompliant FP - we are just looking at most direct parent definition
                 };
         }
 

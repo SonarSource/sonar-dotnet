@@ -113,9 +113,10 @@ namespace Tests.Diagnostics
                 i =>
                 {
                     throw new ArgumentNullException("i");
-                    throw new ArgumentNullException("a"); // Noncompliant - we are just looking at most direct parent definition
-                    throw new ArgumentOutOfRangeException("a"); // Noncompliant
-                    throw new DuplicateWaitObjectException("a"); // Noncompliant
+                    // https://github.com/SonarSource/sonar-dotnet/issues/8319
+                    throw new ArgumentNullException("a"); // Noncompliant FP - we are just looking at most direct parent definition
+                    throw new ArgumentOutOfRangeException("a"); // Noncompliant FP
+                    throw new DuplicateWaitObjectException("a"); // Noncompliant FP
                 };
         }
 
@@ -125,9 +126,10 @@ namespace Tests.Diagnostics
                 (i, j) =>
                 {
                     throw new ArgumentNullException("i");
-                    throw new ArgumentNullException("a"); // Noncompliant - we are just looking at most direct parent definition
-                    throw new ArgumentOutOfRangeException("a"); // Noncompliant
-                    throw new DuplicateWaitObjectException("a"); // Noncompliant
+                    // https://github.com/SonarSource/sonar-dotnet/issues/8319
+                    throw new ArgumentNullException("a"); // Noncompliant FP - we are just looking at most direct parent definition
+                    throw new ArgumentOutOfRangeException("a"); // Noncompliant FP
+                    throw new DuplicateWaitObjectException("a"); // Noncompliant FP
                 };
         }
 
@@ -307,5 +309,18 @@ namespace Tests.Diagnostics
             throw new ArgumentOutOfRangeException(actualValue: nameof(a), message: "Sample message", paramName: "randomString"); // Noncompliant
         }
     }
-}
 
+    // https://github.com/SonarSource/sonar-dotnet/issues/8319
+    public class Repro_8319
+    {
+        public void Bar(int x)
+        {
+            Wrapper(() =>
+            {
+                throw new ArgumentException("blah", nameof(x)); // Noncompliant FP
+            });
+        }
+
+        static void Wrapper(Action action) => action();
+    }
+}
