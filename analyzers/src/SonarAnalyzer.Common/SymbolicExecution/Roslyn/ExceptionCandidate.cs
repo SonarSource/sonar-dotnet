@@ -66,7 +66,7 @@ internal class ExceptionCandidate
             : new ExceptionState(typeCatalog.SystemIndexOutOfRangeException);
 
     private ExceptionState FromOperation(ProgramState state, IMemberReferenceOperationWrapper reference) =>
-        reference.IsStaticOrThis()
+        reference.IsStaticOrThis(state)
         || state[reference.Instance]?.HasConstraint(ObjectConstraint.NotNull) is true
         || reference.IsOnReaderWriterLockOrSlim()   // Needed by S2222
             ? null
