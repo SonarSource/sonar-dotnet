@@ -1,0 +1,9 @@
+﻿@page "/component"
+
+<h3>Component</h3>
+
+@code {
+    [Parameter]
+    [SupplyParameterFromQuery]  @* Compliant *@
+    public bool Param { get; set; }
+}

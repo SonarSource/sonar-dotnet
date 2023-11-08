@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#if NET
+
 using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules;
@@ -26,8 +28,14 @@ namespace SonarAnalyzer.UnitTest.Rules;
 public class SupplyParameterFromQueryNeedRoutableComponentTest
 {
     private readonly VerifierBuilder builder = new VerifierBuilder<SupplyParameterFromQueryNeedRoutableComponent>();
+    public TestContext TestContext { get; set; }
 
     [TestMethod]
-    public void SupplyParameterFromQueryNeedRoutableComponent_CS() =>
-        builder.AddPaths("SupplyParameterFromQueryNeedRoutableComponent.razor").Verify();
+    public void SupplyParameterFromQueryNeedRoutableComponent() =>
+        builder.AddPaths("SupplyParameterFromQueryNeedRoutableComponent_Compliant.razor",
+                         "SupplyParameterFromQueryNeedRoutableComponent_Noncompliant")
+               .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+               .Verify();
 }
+
+#endif

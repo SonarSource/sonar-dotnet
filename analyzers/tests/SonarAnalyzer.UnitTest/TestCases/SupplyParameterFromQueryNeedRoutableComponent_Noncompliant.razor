@@ -1,0 +1,7 @@
+﻿<h3>Component</h3>
+
+@code {
+    [Parameter]
+    [SupplyParameterFromQuery]  @* Noncompliant *@
+    public bool Param { get; set; }
+}
