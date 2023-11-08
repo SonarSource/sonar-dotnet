@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'SomeMethod'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6798/S6798.CSharpOnly.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  10,
+"endLine":  11,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'SomeMethod'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6798/S6798.Partial.razor.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  10,
+"endLine":  11,
+"endColumn":  20
+}
+}
+}
+]
+}

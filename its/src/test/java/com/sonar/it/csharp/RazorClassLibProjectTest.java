@@ -71,4 +71,14 @@ public class RazorClassLibProjectTest {
     assertThat(s6800Issues.stream().filter(issue -> issue.getComponent().equals(S6800_COMPONENT_RAZOR_FILE))).hasSize(1);
     assertThat(s6800Issues.stream().filter(issue -> issue.getComponent().equals(S6800_COMPONENT_PARTIAL_FILE))).hasSize(1);
   }
+
+  @Test
+  void issuesOfS6798AreRaised() {
+    var issues = Tests.getIssues(PROJECT).stream().filter(x -> x.getRule().startsWith("csharpsquid:S6798")).collect(Collectors.toList());
+
+    assertThat(issues.stream().filter(x -> x.getComponent().equals("RazorClassLib:S6798/S6798.CsharpOnly.cs"))).hasSize(2);
+    assertThat(issues.stream().filter(x -> x.getComponent().equals("RazorClassLib:S6798/S6798.Partial.razor"))).hasSize(2);
+    assertThat(issues.stream().filter(x -> x.getComponent().equals("RazorClassLib:S6798/S6798.Partial.razor.cs"))).hasSize(2);
+    assertThat(issues.stream().filter(x -> x.getComponent().equals("RazorClassLib:S6798/S6798.razor"))).hasSize(2);
+  }
 }

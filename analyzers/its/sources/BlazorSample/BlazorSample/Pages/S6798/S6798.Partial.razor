@@ -1,0 +1,14 @@
+@code {
+    private void JSInvokableImplicitelyPrivateMethodInCodeBlock() { }
+    [JSInvokable] private void JSInvokableExplicitelyPrivateMethodInCodeBlock() { }
+}
+
+@functions {
+    [JSInvokable] private void JSInvokablePrivateMethodInFunctionsBlock() { }
+}
+
+@{
+    [JSInvokable] void JSInvokableLocalFunctionInDirective() { }
+    [JSInvokable] static void JSInvokableStaticLocalFunctionInDirective() { }
+}
+
