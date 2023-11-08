@@ -75,4 +75,10 @@ public class RazorClassLibProjectTest {
     assertThat(issues.stream().filter(issue -> issue.getComponent().equals(S6800_FOLDER + "/S6800.razor"))).hasSize(1);
     assertThat(issues.stream().filter(issue -> issue.getComponent().equals(S6800_FOLDER + "/S6800.Partial.razor.cs"))).hasSize(1);
   }
+  
+  @Test
+  void issuesOfS6801AreRaised() {
+    var issuesS6801 = Tests.getIssues(PROJECT).stream().filter(x -> x.getRule().startsWith(SONAR_RULE_S6801)).collect(Collectors.toList());
+    assertThat(issuesS6801).hasSize(1);
+  }
 }
