@@ -41,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
             var syntaxTree = compilation.SyntaxTrees.First();
             var attribute = syntaxTree.First<AttributeSyntax>();
 
-            attribute.IsKnownType(KnownType.System_ObsoleteAttribute).Should().Be(isKnownType);
+            attribute.IsSameShortName(KnownType.System_ObsoleteAttribute).Should().Be(isKnownType);
         }
 
         [TestMethod]

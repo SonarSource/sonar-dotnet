@@ -19,6 +19,7 @@
  */
 
 #if NET
+
 using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules;
@@ -45,7 +46,8 @@ public class ParameterTypeShouldMatchRouteTypeConstraintTest
     [TestMethod]
     public void ParameterTypeShouldMatchRouteTypeConstraint_CS() =>
         builder.AddPaths("ParameterTypeShouldMatchRouteTypeConstraint.cs")
-            .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreComponents())
+            .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreComponents("7.0.13"))
             .Verify();
 }
+
 #endif

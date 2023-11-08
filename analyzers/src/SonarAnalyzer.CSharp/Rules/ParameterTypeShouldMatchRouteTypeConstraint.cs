@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Text;
 using Microsoft.CodeAnalysis.Text;
 
 namespace SonarAnalyzer.Rules.CSharp;
@@ -33,17 +34,18 @@ public sealed class ParameterTypeShouldMatchRouteTypeConstraint : SonarDiagnosti
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-    private static readonly Dictionary<string, string> ConstraintMapping = new(StringComparer.InvariantCultureIgnoreCase)
+    // https://learn.microsoft.com/en-us/aspnet/core/blazor/fundamentals/routing?view=aspnetcore-7.0#route-constraints
+    private static readonly Dictionary<string, KnownType> ConstraintMapping = new(StringComparer.InvariantCultureIgnoreCase)
     {
-        { "bool", nameof(Boolean) },
-        { "datetime", nameof(DateTime) },
-        { "decimal", nameof(Decimal) },
-        { "double", nameof(Double) },
-        { "float", nameof(Single) },
-        { "guid", nameof(Guid) },
-        { "int", nameof(Int32) },
-        { "long", nameof(Int64) },
-        { "string", nameof(String) }
+        { "bool", KnownType.System_Boolean },
+        { "datetime", KnownType.System_DateTime },
+        { "decimal", KnownType.System_Decimal },
+        { "double", KnownType.System_Double },
+        { "float", KnownType.System_Single },
+        { "guid", KnownType.System_Guid },
+        { "int", KnownType.System_Int32 },
+        { "long", KnownType.System_Int64 },
+        { "string", KnownType.System_String }
     };
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
@@ -51,119 +53,111 @@ public sealed class ParameterTypeShouldMatchRouteTypeConstraint : SonarDiagnosti
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterCompilationStartAction(cc =>
         {
-            // If we are not in a Blazor project, we don't need to register for lambda expressions.
+            // If we are not in a Blazor project, we don't need to go further.
             if (cc.Compilation.GetTypeByMetadataName(KnownType.Microsoft_AspNetCore_Components_RouteAttribute) is null)
             {
                 return;
             }
 
             cc.RegisterNodeAction(c =>
-            {
-                var node = (ClassDeclarationSyntax)c.Node;
-
-                foreach (var property in GetPropertyTypeMismatches(node, c.SemanticModel))
                 {
-                    var additionalLocations = property.RouteParamLocation is not null
-                        ? new[] { property.RouteParamLocation }
-                        : Array.Empty<Location>();
-                    var message = property.RouteParamLocation is not null
-                        ? string.Format(MessageWithSecondaryLocationFormat, property.Type.GetName())
-                        : string.Format(MessageNoSecondaryLocationFormat, property.Type.GetName(), property.ConstraintType, property.Route);
-
-                    c.ReportIssue(Diagnostic.Create(Rule,
-                        property.Type.GetLocation(),
-                        additionalLocations,
-                        additionalLocations.ToProperties(string.Format(SecondaryMessageFormat, property.ConstraintType)),
-                        message));
-                }
-            },
-            SyntaxKind.ClassDeclaration);
+                    foreach (var property in GetPropertyTypeMismatches((ClassDeclarationSyntax)c.Node, c.SemanticModel))
+                    {
+                        if (property.RouteParamLocation is null)
+                        {
+                            c.ReportIssue(Diagnostic.Create(Rule,
+                                property.Type.GetLocation(),
+                                string.Format(MessageNoSecondaryLocationFormat, GetTypeName(property.Type), property.ConstraintType.ToLower(), property.Route)));
+                        }
+                        else
+                        {
+                            c.ReportIssue(Diagnostic.Create(Rule,
+                                property.Type.GetLocation(),
+                                new[] { property.RouteParamLocation },
+                                new[] { property.RouteParamLocation }.ToProperties(string.Format(SecondaryMessageFormat, property.ConstraintType)),
+                                string.Format(MessageWithSecondaryLocationFormat, GetTypeName(property.Type))));
+                        }
+                    }
+                },
+                SyntaxKind.ClassDeclaration);
         });
+
+    private static string GetTypeName(TypeSyntax type) =>
+        type switch
+        {
+            ArrayTypeSyntax _ => type.ToString(),
+            PointerTypeSyntax _ => type.ToString(),
+            _ => type.GetName()
+        };
 
     private static IList<PropertyTypeMismatch> GetPropertyTypeMismatches(ClassDeclarationSyntax classDeclaration, SemanticModel semanticModel)
     {
-        var routeParameters = GetRouteParametersWithValidConstraint(classDeclaration);
+        var routeParams = GetRouteParametersWithValidConstraint(classDeclaration);
 
-        if (routeParameters.Count == 0)
+        if (routeParams.Count == 0)
         {
             return Array.Empty<PropertyTypeMismatch>();
         }
 
-        var mismatches = new List<PropertyTypeMismatch>();
-        var classSymbol = semanticModel.GetDeclaredSymbol(classDeclaration);
-        var properties = classSymbol.GetMembers()
-            .Where(member => member.Kind is SymbolKind.Property && member.HasAttribute(KnownType.Microsoft_AspNetCore_Components_ParameterAttribute) && routeParameters.ContainsKey(member.Name));
+        return semanticModel
+            .GetDeclaredSymbol(classDeclaration)
+            .GetMembers()
+            .Where(IsPropertyWithParameterAttributeInRoute)
+            .SelectMany(property => routeParams[property.Name].Select(routeParam => new { RouteParam = routeParam, Property = property }))
+            .Where(x => !IsTypeMatchRouteConstraint(x.Property.GetSymbolType(), x.RouteParam.Constraint))
+            .SelectMany(x => x.Property.DeclaringSyntaxReferences
+                .Where(r => r.GetSyntax() is PropertyDeclarationSyntax)
+                .Select(r => new PropertyTypeMismatch(((PropertyDeclarationSyntax)r.GetSyntax()).Type, x.RouteParam.Constraint, x.RouteParam.FromRoute, x.RouteParam.RouteParamLocation)))
+            .ToList();
 
-        foreach (var property in properties)
-        {
-            foreach (var routeParameter in routeParameters[property.Name])
-            {
-                if (TypeMatchConstraint(property.GetSymbolType(), routeParameter.Constraint))
-                {
-                    continue;
-                }
-
-                foreach (var propertySyntax in property.DeclaringSyntaxReferences.Where(r => r.GetSyntax() is PropertyDeclarationSyntax).Select(r => (PropertyDeclarationSyntax)r.GetSyntax()))
-                {
-                    mismatches.Add(new PropertyTypeMismatch(propertySyntax.Type, routeParameter.Constraint, routeParameter.FromRoute, routeParameter.RouteParamLocation));
-                }
-            }
-        }
-
-        return mismatches;
+        bool IsPropertyWithParameterAttributeInRoute(ISymbol member) =>
+            member.Kind is SymbolKind.Property && member.HasAttribute(KnownType.Microsoft_AspNetCore_Components_ParameterAttribute) && routeParams.ContainsKey(member.Name);
     }
 
-    private static bool TypeMatchConstraint(ISymbol type, string constraintType) =>
-        ConstraintMapping.ContainsKey(constraintType) && ConstraintMapping[constraintType] == type.Name;
+    private static bool IsTypeMatchRouteConstraint(ITypeSymbol type, string routeConstraintType)
+    {
+        if (type.IsNullableValueType())
+        {
+            type = ((INamedTypeSymbol)type).TypeArguments[0];
+        }
+
+        return ConstraintMapping.ContainsKey(routeConstraintType) && type.Is(ConstraintMapping[routeConstraintType]);
+    }
 
     private static Dictionary<string, List<RouteParameter>> GetRouteParametersWithValidConstraint(ClassDeclarationSyntax classDeclaration)
     {
         var routeParameters = new Dictionary<string, List<RouteParameter>>(StringComparer.InvariantCultureIgnoreCase);
 
         var routes = classDeclaration.AttributeLists
-            .SelectMany(list => list.Attributes)
-            .Where(attr => attr.IsKnownType(KnownType.Microsoft_AspNetCore_Components_RouteAttribute)
-                           && attr.ArgumentList.Arguments.Count > 0
-                           && attr.ArgumentList.Arguments[0].Expression is LiteralExpressionSyntax)
-            .Select(attr => (LiteralExpressionSyntax)attr.ArgumentList.Arguments[0].Expression);
+            .SelectMany(x => x.Attributes)
+            .Where(x => x.IsSameShortName(KnownType.Microsoft_AspNetCore_Components_RouteAttribute)
+                        && x.ArgumentList.Arguments.Count > 0
+                        && x.ArgumentList.Arguments[0].Expression is LiteralExpressionSyntax)
+            .Select(x => (LiteralExpressionSyntax)x.ArgumentList.Arguments[0].Expression);
 
         foreach (var route in routes)
         {
-            var routeParams = route.Token.ValueText.Split('/').Where(segment => segment.StartsWith("{") && segment.EndsWith("}"));
+            var routeParams = route.Token.ValueText
+                .Split('/')
+                .Where(segment => segment.StartsWith("{") && segment.EndsWith("}"))
+                .Select(x => new { Param = x, Parts = x.TrimStart('{').TrimEnd('}', '?').Split(':') })
+                .Where(x => x.Parts.Length == 2 && ConstraintMapping.ContainsKey(x.Parts[1]));
 
             foreach (var routeParam in routeParams)
             {
-                var routeParameterParts = routeParam.TrimStart('{').TrimEnd('}', '?').Split(':');
-                if (routeParameterParts.Length != 2 || !ConstraintMapping.ContainsKey(routeParameterParts[1]))
-                {
-                    continue;
-                }
-
-                var routeParameter = new RouteParameter(routeParameterParts[1], route.Token.ValueText, CalculateRouteParamLocation(route.GetLocation(), route.Token.ValueText, routeParam));
-                if (routeParameters.ContainsKey(routeParameterParts[0]))
-                {
-                    routeParameters[routeParameterParts[0]].Add(routeParameter);
-                }
-                else
-                {
-                    routeParameters.Add(routeParameterParts[0], new List<RouteParameter> { routeParameter });
-                }
+                routeParameters
+                    .GetOrAdd(routeParam.Parts[0], _ => new List<RouteParameter>(1))
+                    .Add(new(routeParam.Parts[1], route.Token.ValueText, CalculateRouteParamLocation(route.GetLocation(), route.Token.ValueText, routeParam.Param)));
             }
         }
 
         return routeParameters;
     }
 
-    private static Location CalculateRouteParamLocation(Location routeLocation, string route, string routeParam)
-    {
-        if (!GeneratedCodeRecognizer.IsRazorGeneratedFile(routeLocation.SourceTree))
-        {
-            var startIndex = route.IndexOf(routeParam, StringComparison.InvariantCulture);
-            return Location.Create(routeLocation.SourceTree, new TextSpan(routeLocation.SourceSpan.Start + startIndex + 1, routeParam.Length));
-        }
-
-        return null;
-    }
+    private static Location CalculateRouteParamLocation(Location routeLocation, string route, string routeParam) =>
+        !GeneratedCodeRecognizer.IsRazorGeneratedFile(routeLocation.SourceTree)
+            ? Location.Create(routeLocation.SourceTree, new TextSpan(routeLocation.SourceSpan.Start + route.IndexOf(routeParam, StringComparison.InvariantCulture) + 1, routeParam.Length))
+            : null;
 
     private sealed record PropertyTypeMismatch(TypeSyntax Type, string ConstraintType, string Route, Location RouteParamLocation);
 
