@@ -19,6 +19,7 @@
  */
 
 using System.Globalization;
+using System.Numerics;
 using System.Text;
 using Microsoft.CodeAnalysis.Text;
 
@@ -304,8 +305,8 @@ namespace SonarAnalyzer.Json.Parsing
             object BuildResult()
             {
                 var baseValue = @decimal == null
-                    ? (object)double.Parse(integral.ToString())
-                    : decimal.Parse(integral + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator + @decimal);
+                    ? (object)BigInteger.Parse(integral.ToString())
+                    : decimal.Parse(integral + CultureInfo.InvariantCulture.NumberFormat.NumberDecimalSeparator + @decimal);
                 if (exponent == null)   // Integer or Decimal
                 {
                     return baseValue;
