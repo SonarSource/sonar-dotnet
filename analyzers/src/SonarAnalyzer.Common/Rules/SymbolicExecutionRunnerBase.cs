@@ -72,47 +72,47 @@ public abstract class SymbolicExecutionRunnerBase : SonarDiagnosticAnalyzer
         }
     }
 
-    protected void Analyze(SonarAnalysisContext analysisContext, SonarSyntaxNodeReportingContext context)
+    protected void Analyze(SonarAnalysisContext analysisContext, SonarSyntaxNodeReportingContext nodeContext)
     {
-        if (context.SemanticModel.GetDeclaredSymbol(context.Node) is { } symbol)
+        if (nodeContext.SemanticModel.GetDeclaredSymbol(nodeContext.Node) is { } symbol)
         {
-            Analyze(analysisContext, context, symbol);
+            Analyze(analysisContext, nodeContext, symbol);
         }
     }
 
-    protected void Analyze(SonarAnalysisContext analysisContext, SonarSyntaxNodeReportingContext context, ISymbol symbol)
+    protected void Analyze(SonarAnalysisContext analysisContext, SonarSyntaxNodeReportingContext nodeContext, ISymbol symbol)
     {
-        if (context.Node is { ContainsDiagnostics: false })
+        if (nodeContext.Node is { ContainsDiagnostics: false })
         {
-            AnalyzeSonar(context, symbol);
+            AnalyzeSonar(nodeContext, symbol);
             if (ControlFlowGraph.IsAvailable)
             {
-                AnalyzeRoslyn(analysisContext, context, symbol);
+                AnalyzeRoslyn(analysisContext, nodeContext, symbol);
             }
         }
     }
 
-    private void AnalyzeRoslyn(SonarAnalysisContext analysisContext, SonarSyntaxNodeReportingContext context, ISymbol symbol)
+    private void AnalyzeRoslyn(SonarAnalysisContext analysisContext, SonarSyntaxNodeReportingContext nodeContext, ISymbol symbol)
     {
         var checks = AllRules
-            .Where(x => IsEnabled(context, x.Key))
-            .GroupBy(x => x.Value.Type)                                                             // Multiple DiagnosticDescriptors (S2583, S2589) can share the same check type
-            .Select(x => x.First().Value.CreateInstance(Configuration, analysisContext, context))   // We need just one instance in that case
+            .Where(x => IsEnabled(nodeContext, x.Key))
+            .GroupBy(x => x.Value.Type)                                                                 // Multiple DiagnosticDescriptors (S2583, S2589) can share the same check type
+            .Select(x => x.First().Value.CreateInstance(Configuration, analysisContext, nodeContext))   // We need just one instance in that case
             .Where(x => x?.ShouldExecute() is true)
             .ToArray();
         if (checks.Any())
         {
             try
             {
-                if (CreateCfg(context.SemanticModel, context.Node, context.Cancel) is { } cfg)
+                if (CreateCfg(nodeContext.SemanticModel, nodeContext.Node, nodeContext.Cancel) is { } cfg)
                 {
-                    var engine = new RoslynSymbolicExecution(cfg, SyntaxClassifier, checks, context.Cancel);
+                    var engine = new RoslynSymbolicExecution(cfg, SyntaxClassifier, checks, nodeContext.Cancel);
                     engine.Execute();
                 }
             }
             catch (Exception ex) when (ex is not OperationCanceledException)
             {
-                throw new SymbolicExecutionException(ex, symbol, context.Node.GetLocation());
+                throw new SymbolicExecutionException(ex, symbol, nodeContext.Node.GetLocation());
             }
         }
     }

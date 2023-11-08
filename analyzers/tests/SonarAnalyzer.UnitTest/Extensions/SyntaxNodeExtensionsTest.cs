@@ -174,7 +174,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [TestMethod]
         public void CreateCfg_MethodDeclaration_ReturnsCfg_CS()
         {
-            var code = """
+            const string code = """
                 public class Sample
                 {
                     public void Main()
@@ -192,7 +192,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [TestMethod]
         public void CreateCfg_PropertyDeclartion_ReturnsCfg_CS()
         {
-            var code = """
+            const string code = """
                 public class Sample
                 {
                     public int Property => 42;
@@ -207,7 +207,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [TestMethod]
         public void CreateCfg_PropertyDeclartionWithoutExpressionBody_ReturnsNull_CS()
         {
-            var code = """
+            const string code = """
                 public class Sample
                 {
                     public int Property {get; set;}
@@ -222,7 +222,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [TestMethod]
         public void CreateCfg_IndexerDeclartion_ReturnsCfg_CS()
         {
-            var code = """
+            const string code = """
                 public class Sample
                 {
                     private string field;

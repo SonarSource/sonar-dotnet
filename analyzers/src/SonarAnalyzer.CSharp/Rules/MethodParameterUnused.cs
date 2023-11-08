@@ -67,12 +67,12 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (c.Node is BaseMethodDeclarationSyntax method)
             {
-                return new MethodContext(c, method.ParameterList, method.Body, method.ExpressionBody());
+                return new MethodContext(c, method);
             }
-            else if (LocalFunctionStatementSyntaxWrapper.IsInstance(c.Node))
+            else if (c.Node.IsKind(SyntaxKindEx.LocalFunctionStatement))
             {
                 var localFunction = (LocalFunctionStatementSyntaxWrapper)c.Node;
-                return new MethodContext(c, localFunction.ParameterList, localFunction.Body, localFunction.ExpressionBody);
+                return new MethodContext(c, localFunction);
             }
             else
             {
@@ -253,13 +253,18 @@ namespace SonarAnalyzer.Rules.CSharp
             && methodSymbol.Parameters[0].IsType(KnownType.System_Runtime_Serialization_SerializationInfo)
             && methodSymbol.Parameters[1].IsType(KnownType.System_Runtime_Serialization_StreamingContext);
 
-        private class MethodContext
+        private sealed class MethodContext
         {
             public readonly SonarSyntaxNodeReportingContext Context;
             public readonly IMethodSymbol Symbol;
             public readonly ParameterListSyntax ParameterList;
             public readonly BlockSyntax Body;
             public readonly ArrowExpressionClauseSyntax ExpressionBody;
+            public MethodContext(SonarSyntaxNodeReportingContext context, BaseMethodDeclarationSyntax declaration)
+                : this(context, declaration.ParameterList, declaration.Body, declaration.ExpressionBody()) { }
+
+            public MethodContext(SonarSyntaxNodeReportingContext context, LocalFunctionStatementSyntaxWrapper declaration)
+                : this(context, declaration.ParameterList, declaration.Body, declaration.ExpressionBody) { }
 
             public MethodContext(SonarSyntaxNodeReportingContext context, ParameterListSyntax parameterList, BlockSyntax body, ArrowExpressionClauseSyntax expressionBody)
             {
@@ -271,7 +276,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private class LvaResult
+        private sealed class LvaResult
         {
             public readonly IReadOnlyCollection<ISymbol> LiveInEntryBlock;
             public readonly IReadOnlyCollection<ISymbol> CapturedVariables;
