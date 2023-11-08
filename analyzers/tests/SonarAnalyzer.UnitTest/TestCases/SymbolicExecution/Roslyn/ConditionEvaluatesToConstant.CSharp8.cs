@@ -543,3 +543,27 @@ class Repro_8149
         throw new ApplicationException("not authorized");
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8326
+class Repro_8326
+{
+    void Test(int i, object o)
+    {
+        _ = i switch
+        {
+            1 => 1,
+            var other => 2          // Noncompliant {{Change this condition so that it does not always evaluate to 'True'.}} FP: var should not raise
+        };
+
+        _ = o switch
+        {
+            1 => 1,
+            var other => 2          // Compliant: by accident, o has no SymbolicValue and always branches due to #8324
+        };
+
+        if (i is var x1)            // Noncompliant {{Change this condition so that it does not always evaluate to 'True'. Some code paths are unreachable.}}
+            Console.WriteLine();
+        else
+            Console.WriteLine();    // Secondary
+    }
+}
