@@ -35,7 +35,7 @@ namespace SonarAnalyzer.CFG.Sonar
                 AccessorDeclarationSyntax n => (SyntaxNode)n.Body ?? n.ExpressionBody(),
                 AnonymousFunctionExpressionSyntax n => n.Body,
                 ArrowExpressionClauseSyntax n => n,
-                _ when LocalFunctionStatementSyntaxWrapper.IsInstance(node) && (LocalFunctionStatementSyntaxWrapper)node is var local => (SyntaxNode)local.Body ?? local.ExpressionBody,
+                _ when node.IsKind(SyntaxKindEx.LocalFunctionStatement) && (LocalFunctionStatementSyntaxWrapper)node is var local => (SyntaxNode)local.Body ?? local.ExpressionBody,
                 _ => null
             };
             try

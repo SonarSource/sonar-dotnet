@@ -127,8 +127,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private void ReportOnDeadParametersAtEntry(MethodContext declaration, IImmutableList<IParameterSymbol> noReportOnParameters)
         {
-            var node = (CSharpSyntaxNode)(declaration.Body?.Parent ?? declaration.ExpressionBody.Parent);
-            if (node is null || declaration.Context.Node.IsKind(SyntaxKind.ConstructorDeclaration))
+            if (declaration.Context.Node.IsKind(SyntaxKind.ConstructorDeclaration))
             {
                 return;
             }
@@ -141,23 +140,23 @@ namespace SonarAnalyzer.Rules.CSharp
             excludedParameters = excludedParameters.AddRange(declaration.Symbol.Parameters.Where(p => p.RefKind != RefKind.None));
 
             var candidateParameters = declaration.Symbol.Parameters.Except(excludedParameters);
-            if (candidateParameters.Any() && ComputeLva(declaration, node) is { } lva)
+            if (candidateParameters.Any() && ComputeLva(declaration) is { } lva)
             {
                 ReportOnUnusedParameters(declaration, candidateParameters.Except(lva.LiveInEntryBlock).Except(lva.CapturedVariables), MessageDead, isRemovable: false);
             }
         }
 
-        private LvaResult ComputeLva(MethodContext declaration, CSharpSyntaxNode declarationNode)
+        private LvaResult ComputeLva(MethodContext declaration)
         {
             if (useSonarCfg)
             {
-                return CSharpControlFlowGraph.TryGet(declarationNode, declaration.Context.SemanticModel, out var cfg)
+                return CSharpControlFlowGraph.TryGet(declaration.Context.Node, declaration.Context.SemanticModel, out var cfg)
                     ? new LvaResult(declaration, cfg)
                     : null;
             }
             else
             {
-                return declarationNode.CreateCfg(declaration.Context.SemanticModel, declaration.Context.Cancel) is { } cfg
+                return declaration.Context.Node.CreateCfg(declaration.Context.SemanticModel, declaration.Context.Cancel) is { } cfg
                     ? new LvaResult(cfg, declaration.Context.Cancel)
                     : null;
             }
