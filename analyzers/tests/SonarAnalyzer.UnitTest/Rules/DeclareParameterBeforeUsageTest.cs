@@ -37,7 +37,9 @@ public class DeclareParameterBeforeUsageTest
                       "DeclareParameterBeforeUsageComponent.cs",
                       "DeclareParameterBeforeUsageComponent2.cs",
                       "DeclareParameterBeforeUsage.PrintUnmatchedFalse.razor",
-                      "DeclareParameterBeforeUsage.PrintUnmatchedTrue.razor")
+                      "DeclareParameterBeforeUsage.PrintUnmatchedTrue.razor",
+                      "DeclareParameterBeforeUsage.PrintUnmatchedFalseConstant.razor",
+                      "DeclareParameterBeforeUsage.PrintUnmatchedTrueConstant.razor")
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .Verify();
 

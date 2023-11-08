@@ -1,0 +1,6 @@
+﻿@code {
+    const bool CAPTURE_UNMACHED_VALUE = true;
+
+    [Parameter(CaptureUnmatchedValues = CAPTURE_UNMACHED_VALUE)]
+    public Dictionary<string, object> AllParam { get; set; }
+}

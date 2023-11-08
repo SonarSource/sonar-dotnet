@@ -123,7 +123,7 @@ public sealed class DeclareParameterBeforeUsage : SonarDiagnosticAnalyzer
         return componentDescriptor;
     }
 
-    private sealed class ComponentDescriptor
+    private sealed record ComponentDescriptor
     {
         public ISet<string> Parameters { get; set; } = new HashSet<string>(StringComparer.Ordinal);
         public bool HasMatchUnmatchedParameters { get; set; }
