@@ -173,15 +173,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Select(x => new NodeAndSymbol(x, declaration.Context.SemanticModel.GetDeclaredSymbol(x)))
                 .Where(x => x.Symbol is not null);
 
-            foreach (var parameter in parameters)
+            foreach (var parameter in parameters.Where(x => parametersToReportOn.Contains(x.Symbol)))
             {
-                if (parametersToReportOn.Contains(parameter.Symbol))
-                {
-                    declaration.Context.ReportIssue(
-                        Diagnostic.Create(Rule, parameter.Node.GetLocation(),
-                        ImmutableDictionary<string, string>.Empty.Add(IsRemovableKey, isRemovable.ToString()),
-                        string.Format(messagePattern, parameter.Symbol.Name)));
-                }
+                declaration.Context.ReportIssue(
+                    Diagnostic.Create(Rule, parameter.Node.GetLocation(),
+                    ImmutableDictionary<string, string>.Empty.Add(IsRemovableKey, isRemovable.ToString()),
+                    string.Format(messagePattern, parameter.Symbol.Name)));
             }
         }
 
