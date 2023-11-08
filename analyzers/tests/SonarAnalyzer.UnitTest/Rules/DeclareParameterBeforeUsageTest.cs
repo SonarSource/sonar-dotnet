@@ -40,6 +40,14 @@ public class DeclareParameterBeforeUsageTest
                       "DeclareParameterBeforeUsage.PrintUnmatchedTrue.razor")
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .Verify();
+
+    [TestMethod]
+    public void DeclareParameterBeforeUsage_NotGenerated() =>
+        builder
+            .AddPaths("DeclareParameterBeforeUsage.NotGenerated.cs",
+                      "DeclareParameterBeforeUsage.PrintUnmatchedFalse.razor")
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+            .Verify();
 }
 
 #endif

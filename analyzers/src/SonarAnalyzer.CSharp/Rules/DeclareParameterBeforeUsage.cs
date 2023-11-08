@@ -38,8 +38,8 @@ public sealed class DeclareParameterBeforeUsage : SonarDiagnosticAnalyzer
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterCompilationStartAction(cs =>
             {
-                // If we are not in a Blazor project, we don't need to register for lambda expressions.
-                if (cs.Compilation.GetTypeByMetadataName(KnownType.Microsoft_AspNetCore_Components_RouteAttribute) is null)
+                // If we are not in a Blazor project, we don't need to register for the node
+                if (cs.Compilation.GetTypeByMetadataName(KnownType.Microsoft_AspNetCore_Components_ParameterAttribute) is null)
                 {
                     return;
                 }
@@ -72,8 +72,10 @@ public sealed class DeclareParameterBeforeUsage : SonarDiagnosticAnalyzer
                             && !descriptor.HasMatchUnmatchedParameters
                             && !descriptor.Parameters.Contains(parameterName))
                         {
-                            // The diagnostic is reported at the beginning of the file because the attribute location cannot be mapped back.
-                            c.ReportIssue(Diagnostic.Create(Rule, null, parameterName, currentComponent.Name));
+                            var location = c.Tree.FilePath.EndsWith("razor.g.cs", StringComparison.OrdinalIgnoreCase)
+                                ? null // The diagnostic is reported at the beginning of the file because the attribute location cannot be mapped back.
+                                : invocation.GetLocation();
+                            c.ReportIssue(Diagnostic.Create(Rule, location, parameterName, currentComponent.Name));
                         }
                         else if (targetMethod.Name.Equals("CloseComponent"))
                         {
@@ -86,7 +88,7 @@ public sealed class DeclareParameterBeforeUsage : SonarDiagnosticAnalyzer
     private static bool IsBuildRenderTreeMethod(MethodDeclarationSyntax method) =>
         method.NameIs("BuildRenderTree")
         && method.ParameterList.Parameters.Count == 1
-        && method.ParameterList.Parameters[0].NameIs("__builder");
+        && method.Modifiers.Any(SyntaxKind.OverrideKeyword);
 
     private ComponentDescriptor GetComponentDescriptor(ITypeSymbol typeSymbol, Dictionary<string, ComponentDescriptor> descriptors)
     {
