@@ -13,7 +13,7 @@ namespace Tests.Diagnostics
         {
             object o = null;
             this._foo1 = o;
-            this?._foo1.ToString(); // Not supported, TrackedSymbol() does not resolve flow capture references
+            this?._foo1.ToString(); // Noncompliant
         }
 
         string TryCatch3()
