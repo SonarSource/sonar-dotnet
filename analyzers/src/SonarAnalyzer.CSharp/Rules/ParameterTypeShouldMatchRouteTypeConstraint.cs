@@ -18,8 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Text;
 using Microsoft.CodeAnalysis.Text;
+using Conversion = SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors.Conversion;
 
 namespace SonarAnalyzer.Rules.CSharp;
 
@@ -35,17 +35,17 @@ public sealed class ParameterTypeShouldMatchRouteTypeConstraint : SonarDiagnosti
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
     // https://learn.microsoft.com/en-us/aspnet/core/blazor/fundamentals/routing?view=aspnetcore-7.0#route-constraints
-    private static readonly Dictionary<string, KnownType> ConstraintMapping = new(StringComparer.InvariantCultureIgnoreCase)
+    private static readonly Dictionary<string, SupportedType> ConstraintMapping = new(StringComparer.InvariantCultureIgnoreCase)
     {
-        { "bool", KnownType.System_Boolean },
-        { "datetime", KnownType.System_DateTime },
-        { "decimal", KnownType.System_Decimal },
-        { "double", KnownType.System_Double },
-        { "float", KnownType.System_Single },
-        { "guid", KnownType.System_Guid },
-        { "int", KnownType.System_Int32 },
-        { "long", KnownType.System_Int64 },
-        { "string", KnownType.System_String }
+        { "bool", new SupportedType(KnownType.System_Boolean) },
+        { "datetime", new SupportedType(KnownType.System_DateTime) },
+        { "decimal", new SupportedType(KnownType.System_Decimal) },
+        { "double", new SupportedType(KnownType.System_Double) },
+        { "float", new SupportedType(KnownType.System_Single) },
+        { "guid", new SupportedType(KnownType.System_Guid) },
+        { "int", new SupportedType(KnownType.System_Int32) },
+        { "long", new SupportedType(KnownType.System_Int64) },
+        { "string", new SupportedType(KnownType.System_String) }
     };
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
@@ -61,7 +61,7 @@ public sealed class ParameterTypeShouldMatchRouteTypeConstraint : SonarDiagnosti
 
             cc.RegisterNodeAction(c =>
                 {
-                    foreach (var property in GetPropertyTypeMismatches((ClassDeclarationSyntax)c.Node, c.SemanticModel))
+                    foreach (var property in GetPropertyTypeMismatches((ClassDeclarationSyntax)c.Node, c.SemanticModel, cc.Compilation))
                     {
                         if (property.RouteParamLocation is null)
                         {
@@ -90,7 +90,7 @@ public sealed class ParameterTypeShouldMatchRouteTypeConstraint : SonarDiagnosti
             _ => type.GetName()
         };
 
-    private static IList<PropertyTypeMismatch> GetPropertyTypeMismatches(ClassDeclarationSyntax classDeclaration, SemanticModel semanticModel)
+    private static IList<PropertyTypeMismatch> GetPropertyTypeMismatches(ClassDeclarationSyntax classDeclaration, SemanticModel semanticModel, Compilation compilation)
     {
         var routeParams = GetRouteParametersWithValidConstraint(classDeclaration);
 
@@ -104,7 +104,7 @@ public sealed class ParameterTypeShouldMatchRouteTypeConstraint : SonarDiagnosti
             .GetMembers()
             .Where(IsPropertyWithParameterAttributeInRoute)
             .SelectMany(property => routeParams[property.Name].Select(routeParam => new { RouteParam = routeParam, Property = property }))
-            .Where(x => !IsTypeMatchRouteConstraint(x.Property.GetSymbolType(), x.RouteParam.Constraint))
+            .Where(x => !IsTypeMatchRouteConstraint(x.Property.GetSymbolType(), x.RouteParam.Constraint, compilation))
             .SelectMany(x => x.Property.DeclaringSyntaxReferences
                 .Where(r => r.GetSyntax() is PropertyDeclarationSyntax)
                 .Select(r => new PropertyTypeMismatch(((PropertyDeclarationSyntax)r.GetSyntax()).Type, x.RouteParam.Constraint, x.RouteParam.FromRoute, x.RouteParam.RouteParamLocation)))
@@ -114,14 +114,14 @@ public sealed class ParameterTypeShouldMatchRouteTypeConstraint : SonarDiagnosti
             member.Kind is SymbolKind.Property && member.HasAttribute(KnownType.Microsoft_AspNetCore_Components_ParameterAttribute) && routeParams.ContainsKey(member.Name);
     }
 
-    private static bool IsTypeMatchRouteConstraint(ITypeSymbol type, string routeConstraintType)
+    private static bool IsTypeMatchRouteConstraint(ITypeSymbol type, string routeConstraintType, Compilation compilation)
     {
         if (type.IsNullableValueType())
         {
             type = ((INamedTypeSymbol)type).TypeArguments[0];
         }
 
-        return ConstraintMapping.ContainsKey(routeConstraintType) && type.Is(ConstraintMapping[routeConstraintType]);
+        return ConstraintMapping.ContainsKey(routeConstraintType) && ConstraintMapping[routeConstraintType].Matches(type, compilation);
     }
 
     private static Dictionary<string, List<RouteParameter>> GetRouteParametersWithValidConstraint(ClassDeclarationSyntax classDeclaration)
@@ -162,4 +162,22 @@ public sealed class ParameterTypeShouldMatchRouteTypeConstraint : SonarDiagnosti
     private sealed record PropertyTypeMismatch(TypeSyntax Type, string ConstraintType, string Route, Location RouteParamLocation);
 
     private sealed record RouteParameter(string Constraint, string FromRoute, Location RouteParamLocation);
+
+    private sealed record SupportedType(KnownType ConstraintKnownType)
+    {
+        public bool Matches(ITypeSymbol propertyType, Compilation compilation)
+        {
+            if (propertyType.Is(ConstraintKnownType))
+            {
+                return true;
+            }
+
+            var constraintTypeSymbol = compilation.GetTypeByMetadataName(ConstraintKnownType);
+
+            var conversion = compilation.ClassifyConversion(constraintTypeSymbol, propertyType);
+
+            return conversion.IsBoxing
+                || conversion.IsEnumeration;
+        }
+    }
 }
