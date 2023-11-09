@@ -28,9 +28,11 @@ public sealed class ParameterTypeShouldMatchRouteTypeConstraint : SonarDiagnosti
 {
     private const string DiagnosticId = "S6800";
     private const string MessageFormat = "{0}";
-    private const string MessageNoSecondaryLocationFormat = "Parameter type '{0}' does not match route parameter type constraint '{1}' in route '{2}'.";
+    private const string ImplicitStringPrimaryMessageFormat = "Parameter type '{0}' does not match route parameter implicit type constraint 'string' in route '{1}'.";
+    private const string PrimaryMessageFormat = "Parameter type '{0}' does not match route parameter type constraint '{1}' in route '{2}'.";
     private const string MessageWithSecondaryLocationFormat = "Parameter type '{0}' does not match route parameter type constraint.";
     private const string SecondaryMessageFormat = "This route parameter has a '{0}' type constraint.";
+    private const string ImplicitStringSecondaryMessage = "This route parameter has an implicit 'string' type constraint.";
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
@@ -63,32 +65,15 @@ public sealed class ParameterTypeShouldMatchRouteTypeConstraint : SonarDiagnosti
                 {
                     foreach (var property in GetPropertyTypeMismatches((ClassDeclarationSyntax)c.Node, c.SemanticModel, cc.Compilation))
                     {
-                        if (property.RouteParamLocation is null)
-                        {
-                            c.ReportIssue(Diagnostic.Create(Rule,
-                                property.Type.GetLocation(),
-                                string.Format(MessageNoSecondaryLocationFormat, GetTypeName(property.Type), property.ConstraintType.ToLower(), property.Route)));
-                        }
-                        else
-                        {
-                            c.ReportIssue(Diagnostic.Create(Rule,
-                                property.Type.GetLocation(),
-                                new[] { property.RouteParamLocation },
-                                new[] { property.RouteParamLocation }.ToProperties(string.Format(SecondaryMessageFormat, property.ConstraintType)),
-                                string.Format(MessageWithSecondaryLocationFormat, GetTypeName(property.Type))));
-                        }
+                        c.ReportIssue(Diagnostic.Create(Rule,
+                            property.Type.GetLocation(),
+                            property.ToAdditionalLocation(),
+                            property.ToProperties(),
+                            property.ToPrimaryMessage()));
                     }
                 },
                 SyntaxKind.ClassDeclaration);
         });
-
-    private static string GetTypeName(TypeSyntax type) =>
-        type switch
-        {
-            ArrayTypeSyntax _ => type.ToString(),
-            PointerTypeSyntax _ => type.ToString(),
-            _ => type.GetName()
-        };
 
     private static IList<PropertyTypeMismatch> GetPropertyTypeMismatches(ClassDeclarationSyntax classDeclaration, SemanticModel semanticModel, Compilation compilation)
     {
@@ -141,13 +126,15 @@ public sealed class ParameterTypeShouldMatchRouteTypeConstraint : SonarDiagnosti
                 .Split('/')
                 .Where(segment => segment.StartsWith("{") && segment.EndsWith("}"))
                 .Select(x => new { Param = x, Parts = x.TrimStart('{').TrimEnd('}', '?').Split(':') })
-                .Where(x => x.Parts.Length == 2 && ConstraintMapping.ContainsKey(x.Parts[1]));
+                .Where(x => x.Parts.Length == 1 || (x.Parts.Length == 2 && ConstraintMapping.ContainsKey(x.Parts[1])));
 
             foreach (var routeParam in routeParams)
             {
                 routeParameters
                     .GetOrAdd(routeParam.Parts[0], _ => new List<RouteParameter>(1))
-                    .Add(new(routeParam.Parts[1], route.Token.ValueText, CalculateRouteParamLocation(route.GetLocation(), route.Token.ValueText, routeParam.Param)));
+                    .Add(new(routeParam.Parts.Length == 2 ? routeParam.Parts[1] : "string",
+                        route.Token.ValueText,
+                        CalculateRouteParamLocation(route.GetLocation(), route.Token.ValueText, routeParam.Param)));
             }
         }
 
@@ -159,7 +146,58 @@ public sealed class ParameterTypeShouldMatchRouteTypeConstraint : SonarDiagnosti
             ? Location.Create(routeLocation.SourceTree, new TextSpan(routeLocation.SourceSpan.Start + route.IndexOf(routeParam, StringComparison.InvariantCulture) + 1, routeParam.Length))
             : null;
 
-    private sealed record PropertyTypeMismatch(TypeSyntax Type, string ConstraintType, string Route, Location RouteParamLocation);
+    private sealed class PropertyTypeMismatch
+    {
+        public TypeSyntax Type { get; }
+        public string ConstraintType { get; }
+        public string Route { get; }
+        public Location RouteParamLocation { get; }
+
+        private bool IsImplicitStringConstraint => ConstraintType.Equals("string", StringComparison.OrdinalIgnoreCase);
+        private bool CanReportSecondaryLocation => RouteParamLocation is not null;
+
+        public PropertyTypeMismatch(TypeSyntax type, string constraintType, string route, Location routeParamLocation)
+        {
+            Type = type;
+            ConstraintType = constraintType;
+            Route = route;
+            RouteParamLocation = routeParamLocation;
+        }
+
+        public string ToPrimaryMessage()
+        {
+            if (CanReportSecondaryLocation)
+            {
+                return string.Format(MessageWithSecondaryLocationFormat, GetTypeName(Type));
+            }
+
+            if (IsImplicitStringConstraint)
+            {
+                return string.Format(ImplicitStringPrimaryMessageFormat, GetTypeName(Type), Route);
+            }
+
+            return string.Format(PrimaryMessageFormat, GetTypeName(Type), ConstraintType.ToLower(), Route);
+        }
+
+        private static string GetTypeName(TypeSyntax type) =>
+            type switch
+            {
+                ArrayTypeSyntax _ => type.ToString(),
+                PointerTypeSyntax _ => type.ToString(),
+                _ => type.GetName()
+            };
+
+        public IEnumerable<Location> ToAdditionalLocation() =>
+            CanReportSecondaryLocation ? new[] { RouteParamLocation } : Array.Empty<Location>();
+
+        public ImmutableDictionary<string, string> ToProperties() => CanReportSecondaryLocation
+            ? new Dictionary<string, string> { { "0", ToSecondaryMessage() } }
+                .ToImmutableDictionary()
+            : ImmutableDictionary<string, string>.Empty;
+
+        private string ToSecondaryMessage() =>
+            IsImplicitStringConstraint ? ImplicitStringSecondaryMessage : string.Format(SecondaryMessageFormat, ConstraintType.ToLower());
+    }
 
     private sealed record RouteParameter(string Constraint, string FromRoute, Location RouteParamLocation);
 
@@ -177,7 +215,7 @@ public sealed class ParameterTypeShouldMatchRouteTypeConstraint : SonarDiagnosti
             var conversion = compilation.ClassifyConversion(constraintTypeSymbol, propertyType);
 
             return conversion.IsBoxing
-                || conversion.IsEnumeration;
+                   || conversion.IsEnumeration;
         }
     }
 }
