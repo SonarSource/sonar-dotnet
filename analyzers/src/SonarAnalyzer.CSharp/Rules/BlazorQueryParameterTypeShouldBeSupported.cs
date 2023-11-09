@@ -65,26 +65,19 @@ public sealed class BlazorQueryParameterTypeShouldBeSupported : SonarDiagnosticA
             SymbolKind.NamedType);
         });
 
-    private static string GetTypeName(TypeSyntax propertyType)
-    {
-        if (propertyType.NameIs(KnownType.System_Nullable_T.TypeName))
-        {
-            propertyType = ((GenericNameSyntax)propertyType).TypeArgumentList.Arguments[0];
-        }
-
-        return propertyType.GetName();
-    }
+    private static bool HasRouteAttribute(INamedTypeSymbol componentClass) =>
+        componentClass.GetAttributes().Any(x => KnownType.Microsoft_AspNetCore_Components_RouteAttribute.Matches(x.AttributeClass));
 
     private static IEnumerable<TypeSyntax> GetPropertyTypeMismatches(INamedTypeSymbol componentClass) =>
         componentClass
             .GetMembers()
             .Where(IsPropertyTypeMismatch)
-            .SelectMany(p => p.DeclaringSyntaxReferences.Select(d => ((PropertyDeclarationSyntax)d.GetSyntax()).Type));
+            .SelectMany(x => x.DeclaringSyntaxReferences.Select(r => ((PropertyDeclarationSyntax)r.GetSyntax()).Type));
 
     private static bool IsPropertyTypeMismatch(ISymbol member) =>
         member is IPropertySymbol property
         && property.HasAttribute(KnownType.Microsoft_AspNetCore_Components_SupplyParameterFromQueryAttribute)
-        && !SupportedTypes.Any(t => IsSupportedType(property.Type, t));
+        && !SupportedTypes.Any(x => IsSupportedType(property.Type, x));
 
     private static bool IsSupportedType(ITypeSymbol type, KnownType supportType)
     {
@@ -101,6 +94,8 @@ public sealed class BlazorQueryParameterTypeShouldBeSupported : SonarDiagnosticA
         return supportType.Matches(type);
     }
 
-    private static bool HasRouteAttribute(INamedTypeSymbol componentClass) =>
-        componentClass.GetAttributes().Any(a => KnownType.Microsoft_AspNetCore_Components_RouteAttribute.Matches(a.AttributeClass));
+    private static string GetTypeName(TypeSyntax propertyType) =>
+        propertyType.NameIs(KnownType.System_Nullable_T.TypeName) && propertyType is GenericNameSyntax syntax
+            ? syntax.TypeArgumentList.Arguments[0].GetName()
+            : propertyType.GetName();
 }

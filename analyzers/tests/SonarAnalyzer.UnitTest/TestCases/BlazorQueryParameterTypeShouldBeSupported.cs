@@ -1,6 +1,11 @@
 ﻿using System;
 using Microsoft.AspNetCore.Components;
 
+public class Nullable
+{
+
+}
+
 [Route("/query-parameters")]
 public class BlazorQueryParameterTypeShouldBeSupported : ComponentBase
 {
@@ -11,4 +16,9 @@ public class BlazorQueryParameterTypeShouldBeSupported : ComponentBase
 
     [Parameter]
     public TimeSpan TimeSpanParam { get; set; } // Compliant
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public Nullable Nullable { get; set; } // Noncompliant {{Query parameter type 'Nullable' is not supported.}}
+
 }

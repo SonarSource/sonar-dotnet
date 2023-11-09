@@ -19,6 +19,7 @@
  */
 
 #if NET
+
 using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules;
@@ -46,14 +47,17 @@ public class BlazorQueryParameterTypeShouldBeSupportedTest
 
     [TestMethod]
     public void BlazorQueryParameterTypeShouldBeSupported_Partial() =>
-        builder.AddPaths("BlazorQueryParameterTypeShouldBeSupported.Partial.razor", "BlazorQueryParameterTypeShouldBeSupported.Partial.razor.cs")
+        builder
+            .AddPaths("BlazorQueryParameterTypeShouldBeSupported.Partial.razor", "BlazorQueryParameterTypeShouldBeSupported.Partial.razor.cs")
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .Verify();
 
     [TestMethod]
     public void BlazorQueryParameterTypeShouldBeSupported_CS() =>
-        builder.AddPaths("BlazorQueryParameterTypeShouldBeSupported.cs")
+        builder
+            .AddPaths("BlazorQueryParameterTypeShouldBeSupported.cs")
             .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreComponents("7.0.13"))
             .Verify();
 }
+
 #endif

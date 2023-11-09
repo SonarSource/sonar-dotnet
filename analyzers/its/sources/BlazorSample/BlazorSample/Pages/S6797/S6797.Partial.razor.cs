@@ -6,10 +6,9 @@ namespace BlazorSample.Pages.S6797
     {
         [Parameter]
         [SupplyParameterFromQuery]
-        public TimeSpan TimeSpan { get; set; } // Noncompliant {{Query parameter type 'TimeSpan' is not supported.}}
-        //     ^^^^^^^^
+        public TimeSpan TimeSpan { get; set; }
 
         [Parameter]
-        public TimeSpan TimeSpanParam { get; set; } // Compliant
+        public TimeSpan TimeSpanParam { get; set; }
     }
 }
