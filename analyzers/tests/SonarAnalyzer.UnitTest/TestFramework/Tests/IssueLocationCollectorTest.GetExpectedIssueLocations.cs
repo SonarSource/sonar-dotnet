@@ -201,6 +201,26 @@ Noncompliant - this should not be detected as expected issue
         }
 
         [TestMethod]
+        public void GetExpectedIssueLocations_PrimaryIdWithAndBracketInMessage()
+        {
+            const string code = @"public class Foo
+{
+    public void Bar(object o) // Noncompliant [myId1] {{A message with brackets [].}}
+    {
+        Console.WriteLine(o);
+    }
+}";
+
+            var locations = IssueLocationCollector.GetExpectedIssueLocations(SourceText.From(code).Lines);
+
+            locations.Should().ContainSingle();
+
+            locations[0].IsPrimary.Should().BeTrue();
+            locations[0].Message.Should().Be("A message with brackets [].");
+            locations[0].IssueId.Should().Be("myId1");
+        }
+
+        [TestMethod]
         public void GetExpectedIssueLocations_Multiple_PrimaryIds()
         {
             const string code = @"public class Foo
