@@ -33,6 +33,7 @@ public class PrimaryConstructor2(string Prop)
     {
         public static string B { get; }
 
-        public string A { get; } = B ?? throw new ArgumentNullException(nameof(Prop)); // Noncompliant: we are checking only the first parent (TestClass) 
+        // https://github.com/SonarSource/sonar-dotnet/issues/8319
+        public string A { get; } = B ?? throw new ArgumentNullException(nameof(Prop)); // Noncompliant FP: we are checking only the first parent (TestClass) 
     }
 }
