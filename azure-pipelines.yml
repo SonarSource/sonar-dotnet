@@ -10,11 +10,7 @@ schedules:
 trigger:
 - master
 
-# ToDo: Remove this change once the staging image changes are merged in the base image 
-pool:
-  name: '.Net Bubble staging'
-  demands:
-    - PR_NUMBER -equals 381
+pool: '.Net Bubble - GCP'
 
 variables:
   - group: sonar-dotnet-variables
