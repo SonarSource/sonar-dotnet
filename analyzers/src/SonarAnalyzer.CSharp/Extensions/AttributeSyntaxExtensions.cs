@@ -24,6 +24,9 @@ internal static class AttributeSyntaxExtensions
 {
     private const int AttributeLength = 9;
 
+    public static bool IsSameShortName(this AttributeSyntax attribute, KnownType knownType) =>
+        attribute.Name.GetName().Contains(GetShortNameWithoutAttributeSuffix(knownType));
+
     public static bool IsKnownType(this AttributeSyntax attribute, ImmutableArray<KnownType> attributeKnownTypes, SemanticModel semanticModel)
     {
         for (var i = 0; i < attributeKnownTypes.Length; i++)
@@ -35,9 +38,6 @@ internal static class AttributeSyntaxExtensions
         }
         return false;
     }
-
-    public static bool IsSameShortName(this AttributeSyntax attribute, KnownType knownType) =>
-        attribute.Name.GetName().Contains(GetShortNameWithoutAttributeSuffix(knownType));
 
     public static bool IsKnownType(this AttributeSyntax attribute, KnownType knownType, SemanticModel semanticModel) =>
         attribute.IsSameShortName(knownType) && SymbolHelper.IsKnownType(attribute, knownType, semanticModel);
