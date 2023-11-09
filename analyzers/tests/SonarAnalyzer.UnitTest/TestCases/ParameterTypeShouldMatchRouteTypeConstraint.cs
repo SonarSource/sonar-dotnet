@@ -35,8 +35,8 @@ public class ParameterTypeShouldMatchRouteTypeConstraint : ComponentBase
 }
 
 [Route("/route/{FullyQualifiedParam:bool}")] // Secondary [fully-qualified] {{This route parameter has a 'bool' type constraint.}}
-[Route("/route/{ListParam:string}")] // Secondary [list] {{This route parameter has a 'string' type constraint.}}
-[Route("/route/{DictionaryParam:string}")] // Secondary [dictionary] {{This route parameter has a 'string' type constraint.}}
+[Route("/route/{ListParam}")] // Secondary [list] {{This route parameter has an implicit 'string' type constraint.}}
+[Route("/route/{DictionaryParam}")] // Secondary [dictionary] {{This route parameter has an implicit 'string' type constraint.}}
 [Route("/route/{PointerParam:int}")] // Secondary [pointer] {{This route parameter has a 'int' type constraint.}}
 [Route("/route/{DoublePointerParam:int}")] // Secondary [double-pointer] {{This route parameter has a 'int' type constraint.}}
 [Route("/route/{NullableInt:int}")]

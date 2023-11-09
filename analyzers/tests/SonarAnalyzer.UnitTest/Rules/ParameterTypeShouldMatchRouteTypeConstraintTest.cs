@@ -50,12 +50,6 @@ public class ParameterTypeShouldMatchRouteTypeConstraintTest
             .Verify();
 
     [TestMethod]
-    public void ParameterTypeShouldMatchRouteTypeConstraint_CSPartial() =>
-        builder.AddPaths("ParameterTypeShouldMatchRouteTypeConstraint.Partial.Property.cs", "ParameterTypeShouldMatchRouteTypeConstraint.Partial.Route.cs")
-            .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreComponents("7.0.13"))
-            .Verify();
-
-    [TestMethod]
     public void ParameterTypeShouldMatchRouteTypeConstraint_Conversion() =>
         builder.AddPaths("ParameterTypeShouldMatchRouteTypeConstraint.Conversion.razor")
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))

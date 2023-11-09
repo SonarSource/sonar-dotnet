@@ -8,8 +8,8 @@
 @page "/route/{GuIdPaRam:guid}"
 @page "/route/{INTPARAM:INT}"
 @page "/route/{LongParam:long}"
-@page "/route/{StringParam:string}"
-@page "/route/{OptionalStringParam:string?}"
+@page "/route/{StringParam}"
+@page "/route/{OptionalStringParam?}"
 @page "/route/{CompliantBoolParam:bool}"
 @page "/route/{COMPLIANTDATETIMEPARAM:datetime}"
 @page "/route/{CompliantDecimalParam:decimal}"
@@ -18,8 +18,8 @@
 @page "/route/{CompliantGuidParam:guid}"
 @page "/route/{CompliantIntParam:int}"
 @page "/route/{compliantlongparam:long}"
-@page "/route/{CompliantStringParam:string}"
-@page "/route/{OptionalCompliantStringParam:string?}"
+@page "/route/{CompliantStringParam}"
+@page "/route/{OptionalCompliantStringParam?}"
 @page "/route/{InvalidConstraint:invalid}"
 
 @code {
@@ -44,9 +44,9 @@
     [Parameter]
     public int LongParam { get; set; } // Noncompliant {{Parameter type 'int' does not match route parameter type constraint 'long' in route '/route/{LongParam:long}'.}}
     [Parameter]
-    public float StringParam { get; set; } // Noncompliant {{Parameter type 'float' does not match route parameter type constraint 'string' in route '/route/{StringParam:string}'.}}
+    public float StringParam { get; set; } // Noncompliant {{Parameter type 'float' does not match route parameter implicit type constraint 'string' in route '/route/{StringParam}'.}}
     [Parameter]
-    public float OptionalStringParam { get; set; } // Noncompliant {{Parameter type 'float' does not match route parameter type constraint 'string' in route '/route/{OptionalStringParam:string?}'.}}
+    public float OptionalStringParam { get; set; } // Noncompliant {{Parameter type 'float' does not match route parameter implicit type constraint 'string' in route '/route/{OptionalStringParam?}'.}}
 
     [Parameter]
     public bool CompliantBoolParam { get; set; } // Compliant
