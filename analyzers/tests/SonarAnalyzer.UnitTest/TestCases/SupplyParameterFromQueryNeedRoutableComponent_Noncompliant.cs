@@ -7,4 +7,8 @@ public class SupplyParameterFromQueryNeedRoutableComponent_Noncompliant : Compon
     [SupplyParameterFromQuery]
     public TimeSpan TimeSpan { get; set; } // Noncompliant {{Component parameters can only receive query parameter values in routable components.}}
     //              ^^^^^^^^
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public string MyString { get; set; } // Noncompliant
 }

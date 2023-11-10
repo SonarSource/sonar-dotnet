@@ -75,4 +75,10 @@ public class RazorClassLibProjectTest {
     assertThat(issues.stream().filter(issue -> issue.getComponent().equals(S6800_FOLDER + "/S6800.razor"))).hasSize(1);
     assertThat(issues.stream().filter(issue -> issue.getComponent().equals(S6800_FOLDER + "/S6800.Partial.razor.cs"))).hasSize(1);
   }
+
+  @Test
+  void issuesOfS6803AreRaised() {
+    var issues = Tests.getIssues(PROJECT).stream().filter(x -> x.getRule().startsWith("csharpsquid:S6803")).collect(Collectors.toList());
+    assertThat(issues.stream().filter(x -> x.getComponent().equals("RazorClassLib:S6803/S6803.razor"))).hasSize(1);
+  }
 }
