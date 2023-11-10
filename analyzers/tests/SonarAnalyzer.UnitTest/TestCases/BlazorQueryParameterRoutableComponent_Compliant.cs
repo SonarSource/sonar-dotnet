@@ -16,4 +16,7 @@ class SupplyParameterFromQueryNeedsRoutableComponent_Compliant : ComponentBase
 
     [SupplyParameterFromQuery]
     public string ParameterAttributeMissing { get; set; } // Compliant: missing [Parameter]
+
+    [Parameter]
+    public TimeSpan TimeSpanParam { get; set; } // Compliant: missing [SupplyParameterFromQuery]
 }

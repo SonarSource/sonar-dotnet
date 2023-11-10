@@ -1,15 +1,18 @@
-﻿@page "/query-parameters"
-<p>
-    Component parameters supplied from the query string support the following types:
-    <ul>
-        <li>bool, DateTime, decimal, double, float, Guid, int, long, string.</li>
-        <li>Nullable variants of the preceding types.</li>
-        <li>Arrays of the preceding types, whether they're nullable or not nullable.</li>
-    </ul>
-</p>
+﻿@page "/component"
+
+<h3>Component</h3>
 
 @code {
     [Parameter]
+    [SupplyParameterFromQuery] @* Compliant *@
+    public bool Param { get; set; }
+
+    [Parameter]
+    public string SupplyParameterFromQueryAttributeMissing { get; set; } @* Compliant: missing [SupplyParameterFromQuery] *@
+
+    [SupplyParameterFromQuery]
+    public string ParameterAttributeMissing { get; set; } @* Compliant: missing [Parameter] *@    [Parameter]
+
     [SupplyParameterFromQuery]
     public bool BoolParam { get; set; } // Compliant
 
@@ -62,6 +65,18 @@
     public Nullable<bool>[] ArrayOfNullableBoolParamLongForm { get; set; } // Compliant
 
     [Parameter]
+    public TimeSpan TimeSpanParam { get; set; } // Compliant
+
+    [Parameter]
+    public TimeSpan? NullableTimeSpanParam { get; set; } // Compliant
+
+    [Parameter]
+    public Nullable<TimeSpan> NullableTimeSpanLongFormParam { get; set; } // Compliant
+
+    [Parameter]
+    public TimeSpan[] TimeSpanArrayLongFormParam { get; set; } // Compliant
+
+    [Parameter]
     [SupplyParameterFromQuery]
     public TimeSpan TimeSpan { get; set; } // Noncompliant {{Query parameter type 'TimeSpan' is not supported.}}
     //     ^^^^^^^^
@@ -80,16 +95,4 @@
     [SupplyParameterFromQuery]
     public TimeSpan[] TimeSpanArrayLongForm { get; set; } // Noncompliant {{Query parameter type 'TimeSpan' is not supported.}}
     //     ^^^^^^^^^^
-
-    [Parameter]
-    public TimeSpan TimeSpanParam { get; set; } // Compliant
-
-    [Parameter]
-    public TimeSpan? NullableTimeSpanParam { get; set; } // Compliant
-
-    [Parameter]
-    public Nullable<TimeSpan> NullableTimeSpanLongFormParam { get; set; } // Compliant
-
-    [Parameter]
-    public TimeSpan[] TimeSpanArrayLongFormParam { get; set; } // Compliant
 }

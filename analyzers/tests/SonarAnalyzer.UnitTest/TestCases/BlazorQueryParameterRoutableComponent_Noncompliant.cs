@@ -1,7 +1,12 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System;
 
-class SupplyParameterFromQueryNeedsRoutableComponent_Noncompliant : ComponentBase
+public class Nullable
+{
+
+}
+
+public class BlazorQueryParameterRoutableComponent_Noncompliant : ComponentBase
 {
     [Parameter]
     [SupplyParameterFromQuery]
@@ -10,5 +15,5 @@ class SupplyParameterFromQueryNeedsRoutableComponent_Noncompliant : ComponentBas
 
     [Parameter]
     [SupplyParameterFromQuery]
-    public string MyString { get; set; } // Noncompliant
+    public string MyString { get; set; } // Noncompliant    [Parameter]
 }
