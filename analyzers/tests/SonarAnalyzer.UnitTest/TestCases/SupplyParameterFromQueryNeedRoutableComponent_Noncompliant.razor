@@ -3,5 +3,6 @@
 @code {
     [Parameter]
     [SupplyParameterFromQuery]
-    public bool Param { get; set; } @* Noncompliant *@
+    public bool Param { get; set; } @* Noncompliant {{Component parameters can only receive query parameter values in routable components.}} *@
+    @*          ^^^^^ *@
 }
