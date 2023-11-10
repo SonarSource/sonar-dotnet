@@ -119,8 +119,6 @@ stages:
         inputs:
           targetType: 'inline'
           script: |
-            Write-Output "smctl healthcheck:"
-            smctl healthcheck 
             Write-Output "smctl sync:"
             smctl windows certsync
 
