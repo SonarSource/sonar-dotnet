@@ -44,8 +44,6 @@ variables:
     value: ${{ or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), startsWith(variables['Build.SourceBranch'], 'refs/heads/branch-')) }}
   - name: vsVersion
     value: '17.0'
-  - name: SignToolPath
-    value: 'C:\Program Files (x86)\Windows Kits\10\bin\10.0.22621.0\x64\signtool.exe'
 
 resources:
   repositories:
@@ -114,7 +112,6 @@ stages:
         # ToDo: add back the condition
         # condition: eq(variables.isReleaseBranch, 'True')
         env:
-          SIGNTOOL_PATH: $(SignToolPath)
           SM_CLIENT_CERT_FILE: $(SM_CLIENT_CERT.secureFilePath)
           SM_CLIENT_CERT_PASSWORD: $(SM_CLIENT_CERT_PASSWORD)
           SM_API_KEY: $(SM_API_KEY)
@@ -133,7 +130,6 @@ stages:
       - task: VSBuild@1
         displayName: "Build and sign SonarAnalyzer solution"
         env:
-          SIGNTOOL_PATH: $(SignToolPath)
           SM_CLIENT_CRT_FILE: $(SM_CLIENT_CRT.secureFilePath)
           SM_CLIENT_CERT_FILE: $(SM_CLIENT_CERT.secureFilePath)
           SM_CLIENT_CERT_PASSWORD: $(SM_CLIENT_CERT_PASSWORD)
@@ -166,7 +162,6 @@ stages:
         # condition: eq(variables.isReleaseBranch, 'True')
         env:
           PACKAGES_PATH: '$(Build.ArtifactStagingDirectory)\packages\*.nupkg'
-          SIGNTOOL_PATH: $(SignToolPath)
           SM_CLIENT_CERT_FILE: $(SM_CLIENT_CERT.secureFilePath)
           SM_CLIENT_CERT_PASSWORD: $(SM_CLIENT_CERT_PASSWORD)
           SM_API_KEY: $(SM_API_KEY)
