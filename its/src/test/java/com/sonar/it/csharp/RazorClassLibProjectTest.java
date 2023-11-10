@@ -66,7 +66,9 @@ public class RazorClassLibProjectTest {
       .collect(Collectors.toList());
     List<String> files = s6800Issues.stream().map(Issues.Issue::getComponent).collect(Collectors.toList());
 
-    assertThat(s6800Issues).hasSize(3);
-    assertThat(files).contains(S6800_COMPONENT_RAZOR_FILE, S6800_COMPONENT_CSONLY_FILE, S6800_COMPONENT_PARTIAL_FILE);
+    assertThat(s6800Issues).hasSize(4);
+    assertThat(s6800Issues.stream().filter(issue -> issue.getComponent().equals(S6800_COMPONENT_CSONLY_FILE))).hasSize(2);
+    assertThat(s6800Issues.stream().filter(issue -> issue.getComponent().equals(S6800_COMPONENT_RAZOR_FILE))).hasSize(1);
+    assertThat(s6800Issues.stream().filter(issue -> issue.getComponent().equals(S6800_COMPONENT_PARTIAL_FILE))).hasSize(1);
   }
 }
