@@ -42,8 +42,8 @@ public sealed class JSInvokableMethodsShouldBePublic : SonarDiagnosticAnalyzer
     private static void CheckMethod(SonarSyntaxNodeReportingContext context)
     {
         var method = (MethodDeclarationSyntax)context.Node;
-        if (method.AttributeLists.SelectMany(x => x.Attributes).Any(x => x.IsKnownType(KnownType.Microsoft_JSInterop_JSInvokable, context.SemanticModel))
-            && !method.Modifiers.AnyOfKind(SyntaxKind.PublicKeyword))
+        if (!method.Modifiers.AnyOfKind(SyntaxKind.PublicKeyword)
+            && method.AttributeLists.SelectMany(x => x.Attributes).Any(x => x.IsKnownType(KnownType.Microsoft_JSInterop_JSInvokable, context.SemanticModel)))
         {
             context.ReportIssue(Diagnostic.Create(Rule, method.Identifier.GetLocation()));
         }
