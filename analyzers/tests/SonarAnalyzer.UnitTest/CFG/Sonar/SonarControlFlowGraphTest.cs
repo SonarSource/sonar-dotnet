@@ -227,7 +227,7 @@ public class Sample
             var (tree, semanticModel) = TestHelper.CompileCS(input);
             var method = FirstMethod(tree);
             CSharpControlFlowGraph.Create(method.ExpressionBody, semanticModel).Should().NotBeNull();
-            CSharpControlFlowGraph.TryGet(method.ExpressionBody, semanticModel, out _).Should().BeTrue();
+            CSharpControlFlowGraph.TryGet(method, semanticModel, out _).Should().BeTrue();
         }
 
         [TestMethod]
@@ -243,7 +243,7 @@ public class Sample
             var (tree, semanticModel) = TestHelper.CompileCS(input);
             var method = FirstMethod(tree);
             CSharpControlFlowGraph.Create(method.ExpressionBody, semanticModel).Should().NotBeNull();
-            CSharpControlFlowGraph.TryGet(method.ExpressionBody, semanticModel, out _).Should().BeTrue();
+            CSharpControlFlowGraph.TryGet(method, semanticModel, out _).Should().BeTrue();
         }
 
         #endregion

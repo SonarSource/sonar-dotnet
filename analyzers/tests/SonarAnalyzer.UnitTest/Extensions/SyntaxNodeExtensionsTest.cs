@@ -172,20 +172,67 @@ namespace SonarAnalyzer.UnitTest.Extensions
             ExtensionsCS.GetDeclarationTypeName(SyntaxFactory.StructDeclaration("MyStruct")).Should().Be("struct");
 
         [TestMethod]
-        public void CreateCfg_MethodBody_ReturnsCfg_CS()
+        public void CreateCfg_MethodDeclaration_ReturnsCfg_CS()
         {
-            const string code = @"
-public class Sample
-{
-    public void Main()
-    {
-        var x = 42;
-    }
-}";
+            const string code = """
+                public class Sample
+                {
+                    public void Main()
+                    {
+                        var x = 42;
+                    }
+                }
+                """;
             var (tree, semanticModel) = TestHelper.CompileCS(code);
             var node = tree.Single<SyntaxCS.MethodDeclarationSyntax>();
 
-            ExtensionsCS.CreateCfg(node.Body, semanticModel, default).Should().NotBeNull();
+            ExtensionsCS.CreateCfg(node, semanticModel, default).Should().NotBeNull();
+        }
+
+        [TestMethod]
+        public void CreateCfg_PropertyDeclartion_ReturnsCfg_CS()
+        {
+            const string code = """
+                public class Sample
+                {
+                    public int Property => 42;
+                }
+                """;
+            var (tree, semanticModel) = TestHelper.CompileCS(code);
+            var node = tree.Single<SyntaxCS.PropertyDeclarationSyntax>();
+
+            ExtensionsCS.CreateCfg(node, semanticModel, default).Should().NotBeNull();
+        }
+
+        [TestMethod]
+        public void CreateCfg_PropertyDeclartionWithoutExpressionBody_ReturnsNull_CS()
+        {
+            const string code = """
+                public class Sample
+                {
+                    public int Property {get; set;}
+                }
+                """;
+            var (tree, semanticModel) = TestHelper.CompileCS(code);
+            var node = tree.Single<SyntaxCS.PropertyDeclarationSyntax>();
+
+            ExtensionsCS.CreateCfg(node, semanticModel, default).Should().BeNull();
+        }
+
+        [TestMethod]
+        public void CreateCfg_IndexerDeclartion_ReturnsCfg_CS()
+        {
+            const string code = """
+                public class Sample
+                {
+                    private string field;
+                    public string this[int index] => field = null;
+                }
+                """;
+            var (tree, semanticModel) = TestHelper.CompileCS(code);
+            var node = tree.Single<SyntaxCS.IndexerDeclarationSyntax>();
+
+            ExtensionsCS.CreateCfg(node, semanticModel, default).Should().NotBeNull();
         }
 
         [TestMethod]
@@ -251,7 +298,7 @@ public class Sample
             var (tree, semanticModel) = TestHelper.CompileCS(code);
             var lambda = tree.Single<SyntaxCS.ParenthesizedLambdaExpressionSyntax>();
 
-            ExtensionsCS.CreateCfg(lambda.Body, semanticModel, default).Should().NotBeNull();
+            ExtensionsCS.CreateCfg(lambda, semanticModel, default).Should().NotBeNull();
         }
 
         [TestMethod]
@@ -267,7 +314,7 @@ End Class
             var (tree, semanticModel) = TestHelper.CompileVB(code);
             var lambda = tree.Single<SyntaxVB.SingleLineLambdaExpressionSyntax>();
 
-            ExtensionsVB.CreateCfg(lambda.Body, semanticModel, default).Should().NotBeNull();
+            ExtensionsVB.CreateCfg(lambda, semanticModel, default).Should().NotBeNull();
         }
 
         [TestMethod]
@@ -310,7 +357,7 @@ public class Sample
             var innerLambda = tree.Single<SyntaxCS.SimpleLambdaExpressionSyntax>();
             innerLambda.Parent.Parent.Should().BeOfType<SyntaxCS.VariableDeclaratorSyntax>().Subject.Identifier.ValueText.Should().Be("innerLambda");
 
-            var cfg = ExtensionsCS.CreateCfg(innerLambda.Body, semanticModel, default);
+            var cfg = ExtensionsCS.CreateCfg(innerLambda, semanticModel, default);
             cfg.Should().NotBeNull("It's innerLambda");
             cfg.Parent.Should().NotBeNull("It's InnerLocalFunction");
             cfg.Parent.Parent.Should().NotBeNull("Lambda iniside Lazy<int> constructor");
@@ -371,7 +418,7 @@ public class Sample
 }";
             var (tree, model) = TestHelper.CompileIgnoreErrorsCS(code);
             var lambda = tree.Single<SyntaxCS.ParenthesizedLambdaExpressionSyntax>();
-            ExtensionsCS.CreateCfg(lambda.Body, model, default).Should().NotBeNull();
+            ExtensionsCS.CreateCfg(lambda, model, default).Should().NotBeNull();
         }
 
         [TestMethod]
@@ -398,7 +445,7 @@ End Class";
             var (tree, model) = TestHelper.CompileIgnoreErrorsCS(code);
             var lambda = tree.Single<SyntaxCS.ParenthesizedLambdaExpressionSyntax>();
 
-            ExtensionsCS.CreateCfg(lambda.Body, model, default).Should().NotBeNull();
+            ExtensionsCS.CreateCfg(lambda, model, default).Should().NotBeNull();
         }
 
         [TestMethod]
@@ -477,8 +524,8 @@ public class Sample
             var compilation2 = compilation1.WithAssemblyName("Different-Compilation-Reusing-Same-Nodes");
             var method1 = compilation1.SyntaxTrees.Single().Single<SyntaxCS.MethodDeclarationSyntax>();
             var method2 = compilation2.SyntaxTrees.Single().Single<SyntaxCS.MethodDeclarationSyntax>();
-            var cfg1 = ExtensionsCS.CreateCfg(method1.Body, compilation1.GetSemanticModel(method1.SyntaxTree), default);
-            var cfg2 = ExtensionsCS.CreateCfg(method2.Body, compilation2.GetSemanticModel(method2.SyntaxTree), default);
+            var cfg1 = ExtensionsCS.CreateCfg(method1, compilation1.GetSemanticModel(method1.SyntaxTree), default);
+            var cfg2 = ExtensionsCS.CreateCfg(method2, compilation2.GetSemanticModel(method2.SyntaxTree), default);
 
             ReferenceEquals(cfg1, cfg2).Should().BeFalse("Different compilations should not reuse cache. They do not share semantic model and symbols.");
         }
@@ -740,7 +787,7 @@ public class X
         public void ArgumentList_CS_InvocationObjectCreation(string statement)
         {
             var code = $$"""
-                public class C(int p) {    
+                public class C(int p) {
                     public void M(int p) {
                         {{statement}}
                     }
@@ -763,9 +810,9 @@ public class X
                 public class C: Base
                 {
                     public C(): $${{keyword}}(1)$$ { }
-                    public C(int  p): base(p) { }   
+                    public C(int  p): base(p) { }
                 }
-                
+
                 """;
             var node = NodeBetweenMarkers(code, LanguageNames.CSharp);
             var argumentList = ExtensionsCS.ArgumentList(node).Arguments;
@@ -791,7 +838,7 @@ public class X
         public void ArgumentList_CS_NoList(string statement)
         {
             var code = $$"""
-                public class C {    
+                public class C {
                     public void M() {
                         {{statement}}
                     }
@@ -811,7 +858,7 @@ public class X
         public void ArgumentList_CS_UnsupportedNodeKinds(string statement)
         {
             var code = $$"""
-                public class C {    
+                public class C {
                     public void M() {
                         {{statement}}
                     }
@@ -1013,7 +1060,7 @@ public class X
             var node = NodeBetweenMarkers($$"""
                 $$public {{type}} C(int p)
                 {
-                    
+
                 }$$
                 """, LanguageNames.CSharp);
             var actual = ExtensionsCS.ParameterList(node);

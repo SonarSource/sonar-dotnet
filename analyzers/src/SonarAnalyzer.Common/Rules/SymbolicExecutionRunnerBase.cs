@@ -28,7 +28,7 @@ public abstract class SymbolicExecutionRunnerBase : SonarDiagnosticAnalyzer
 {
     protected abstract ImmutableDictionary<DiagnosticDescriptor, RuleFactory> AllRules { get; }
     protected abstract ControlFlowGraph CreateCfg(SemanticModel model, SyntaxNode node, CancellationToken cancel);
-    protected abstract void AnalyzeSonar(SonarSyntaxNodeReportingContext context, SyntaxNode body, ISymbol symbol);
+    protected abstract void AnalyzeSonar(SonarSyntaxNodeReportingContext context, ISymbol symbol);
     protected abstract SyntaxClassifierBase SyntaxClassifier { get; }
 
     protected IAnalyzerConfiguration Configuration { get; }
@@ -72,31 +72,31 @@ public abstract class SymbolicExecutionRunnerBase : SonarDiagnosticAnalyzer
         }
     }
 
-    protected void Analyze<TNode>(SonarAnalysisContext analysisContext, SonarSyntaxNodeReportingContext context, Func<TNode, SyntaxNode> getBody) where TNode : SyntaxNode
+    protected void Analyze(SonarAnalysisContext analysisContext, SonarSyntaxNodeReportingContext nodeContext)
     {
-        if (getBody((TNode)context.Node) is { } body && context.SemanticModel.GetDeclaredSymbol(context.Node) is { } symbol)
+        if (nodeContext.SemanticModel.GetDeclaredSymbol(nodeContext.Node) is { } symbol)
         {
-            Analyze(analysisContext, context, body, symbol);
+            Analyze(analysisContext, nodeContext, symbol);
         }
     }
 
-    protected void Analyze(SonarAnalysisContext analysisContext, SonarSyntaxNodeReportingContext nodeContext, SyntaxNode body, ISymbol symbol)
+    protected void Analyze(SonarAnalysisContext analysisContext, SonarSyntaxNodeReportingContext nodeContext, ISymbol symbol)
     {
-        if (body is { ContainsDiagnostics: false })
+        if (nodeContext.Node is { ContainsDiagnostics: false })
         {
-            AnalyzeSonar(nodeContext, body, symbol);
+            AnalyzeSonar(nodeContext, symbol);
             if (ControlFlowGraph.IsAvailable)
             {
-                AnalyzeRoslyn(analysisContext, nodeContext, body, symbol);
+                AnalyzeRoslyn(analysisContext, nodeContext, symbol);
             }
         }
     }
 
-    private void AnalyzeRoslyn(SonarAnalysisContext analysisContext, SonarSyntaxNodeReportingContext nodeContext, SyntaxNode body, ISymbol symbol)
+    private void AnalyzeRoslyn(SonarAnalysisContext analysisContext, SonarSyntaxNodeReportingContext nodeContext, ISymbol symbol)
     {
         var checks = AllRules
             .Where(x => IsEnabled(nodeContext, x.Key))
-            .GroupBy(x => x.Value.Type)                             // Multiple DiagnosticDescriptors (S2583, S2589) can share the same check type
+            .GroupBy(x => x.Value.Type)                                                                 // Multiple DiagnosticDescriptors (S2583, S2589) can share the same check type
             .Select(x => x.First().Value.CreateInstance(Configuration, analysisContext, nodeContext))   // We need just one instance in that case
             .Where(x => x?.ShouldExecute() is true)
             .ToArray();
@@ -104,7 +104,7 @@ public abstract class SymbolicExecutionRunnerBase : SonarDiagnosticAnalyzer
         {
             try
             {
-                if (CreateCfg(nodeContext.SemanticModel, body, nodeContext.Cancel) is { } cfg)
+                if (CreateCfg(nodeContext.SemanticModel, nodeContext.Node, nodeContext.Cancel) is { } cfg)
                 {
                     var engine = new RoslynSymbolicExecution(cfg, SyntaxClassifier, checks, nodeContext.Cancel);
                     engine.Execute();
@@ -112,7 +112,7 @@ public abstract class SymbolicExecutionRunnerBase : SonarDiagnosticAnalyzer
             }
             catch (Exception ex) when (ex is not OperationCanceledException)
             {
-                throw new SymbolicExecutionException(ex, symbol, body.GetLocation());
+                throw new SymbolicExecutionException(ex, symbol, nodeContext.Node.GetLocation());
             }
         }
     }

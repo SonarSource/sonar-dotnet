@@ -65,61 +65,44 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
                 var compilationUnit = (CompilationUnitSyntax)c.Node;
                 if (compilationUnit.IsTopLevelMain() && c.SemanticModel.GetDeclaredSymbol(compilationUnit) is { } symbol)
                 {
-                    Analyze(context, c, compilationUnit, symbol);
+                    Analyze(context, c, symbol);
                 }
             },
             SyntaxKind.CompilationUnit);
 
         context.RegisterNodeAction(
-            c => Analyze<BaseMethodDeclarationSyntax>(context, c, x => (SyntaxNode)x.Body ?? x.ExpressionBody()),
-            SyntaxKind.ConstructorDeclaration,
-            SyntaxKind.DestructorDeclaration,
-            SyntaxKind.ConversionOperatorDeclaration,
-            SyntaxKind.OperatorDeclaration,
-            SyntaxKind.MethodDeclaration);
-
-        context.RegisterNodeAction(
-            c => Analyze<SyntaxNode>(context, c, x =>
-            {
-                var localFunction = (LocalFunctionStatementSyntaxWrapper)x;
-                return (SyntaxNode)localFunction.Body ?? localFunction.ExpressionBody;
-            }),
-            SyntaxKindEx.LocalFunctionStatement);
-
-        context.RegisterNodeAction(
-            c => Analyze<PropertyDeclarationSyntax>(context, c, x => x.ExpressionBody?.Expression),
-            SyntaxKind.PropertyDeclaration);
-
-        context.RegisterNodeAction(
-            c => Analyze<IndexerDeclarationSyntax>(context, c, x => x.ExpressionBody?.Expression),
-            SyntaxKind.IndexerDeclaration);
-
-        context.RegisterNodeAction(
-            c => Analyze<AccessorDeclarationSyntax>(context, c, x => (SyntaxNode)x.Body ?? x.ExpressionBody()),
-            SyntaxKind.GetAccessorDeclaration,
-            SyntaxKind.SetAccessorDeclaration,
-            SyntaxKindEx.InitAccessorDeclaration,
+            c => Analyze(context, c),
             SyntaxKind.AddAccessorDeclaration,
-            SyntaxKind.RemoveAccessorDeclaration);
+            SyntaxKind.ConstructorDeclaration,
+            SyntaxKind.ConversionOperatorDeclaration,
+            SyntaxKind.DestructorDeclaration,
+            SyntaxKind.GetAccessorDeclaration,
+            SyntaxKind.IndexerDeclaration,
+            SyntaxKindEx.InitAccessorDeclaration,
+            SyntaxKindEx.LocalFunctionStatement,
+            SyntaxKind.MethodDeclaration,
+            SyntaxKind.OperatorDeclaration,
+            SyntaxKind.PropertyDeclaration,
+            SyntaxKind.RemoveAccessorDeclaration,
+            SyntaxKind.SetAccessorDeclaration);
 
         context.RegisterNodeAction(
             c =>
             {
-                var declaration = (AnonymousFunctionExpressionSyntax)c.Node;
-                if (c.SemanticModel.GetSymbolInfo(declaration).Symbol is { } symbol && !c.IsInExpressionTree())
+                if (c.SemanticModel.GetSymbolInfo(c.Node).Symbol is { } symbol && !c.IsInExpressionTree())
                 {
-                    Analyze(context, c, declaration.Body, symbol);
+                    Analyze(context, c, symbol);
                 }
             },
             SyntaxKind.AnonymousMethodExpression,
-            SyntaxKind.SimpleLambdaExpression,
-            SyntaxKind.ParenthesizedLambdaExpression);
+            SyntaxKind.ParenthesizedLambdaExpression,
+            SyntaxKind.SimpleLambdaExpression);
     }
 
     protected override ControlFlowGraph CreateCfg(SemanticModel model, SyntaxNode node, CancellationToken cancel) =>
         node.CreateCfg(model, cancel);
 
-    protected override void AnalyzeSonar(SonarSyntaxNodeReportingContext context, SyntaxNode body, ISymbol symbol)
+    protected override void AnalyzeSonar(SonarSyntaxNodeReportingContext context, ISymbol symbol)
     {
         var enabledAnalyzers = AllRules.GroupBy(x => x.Value.Type)         // Multiple DiagnosticDescriptors (S2583, S2589) can share the same check type
                                        .Select(x => x.First().Value.CreateSonarFallback(Configuration))
@@ -127,7 +110,7 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
                                        .Cast<ISymbolicExecutionAnalyzer>() // ISymbolicExecutionAnalyzer should be passed as TSonarFallback to CreateFactory. Have you passed a Roslyn rule instead?
                                        .Where(x => x.SupportedDiagnostics.Any(descriptor => IsEnabled(context, descriptor)))
                                        .ToList();
-        if (enabledAnalyzers.Any() && CSharpControlFlowGraph.TryGet((CSharpSyntaxNode)body, context.SemanticModel, out var cfg))
+        if (enabledAnalyzers.Any() && CSharpControlFlowGraph.TryGet((CSharpSyntaxNode)context.Node, context.SemanticModel, out var cfg))
         {
             var lva = new SonarCSharpLiveVariableAnalysis(cfg, symbol, context.SemanticModel, context.Cancel);
             try
@@ -158,7 +141,7 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
             }
             catch (Exception ex)
             {
-                throw new SymbolicExecutionException(ex, symbol, body.GetLocation());
+                throw new SymbolicExecutionException(ex, symbol, context.Node.GetLocation());
             }
         }
     }

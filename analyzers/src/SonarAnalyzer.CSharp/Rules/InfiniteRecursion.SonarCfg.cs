@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 IControlFlowGraph cfg;
                 if (property.ExpressionBody?.Expression != null)
                 {
-                    if (CSharpControlFlowGraph.TryGet(property.ExpressionBody.Expression, c.SemanticModel, out cfg))
+                    if (CSharpControlFlowGraph.TryGet(property, c.SemanticModel, out cfg))
                     {
                         var walker = new RecursionSearcherForProperty(
                             new RecursionContext<IControlFlowGraph>(c, cfg, propertySymbol, property.Identifier.GetLocation(), "property's recursion"),
@@ -47,15 +47,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     foreach (var accessor in accessors)
                     {
-                        var bodyNode = (CSharpSyntaxNode)accessor.Body ?? accessor.ExpressionBody();
-                        if (CSharpControlFlowGraph.TryGet(bodyNode, c.SemanticModel, out cfg))
+                        if (CSharpControlFlowGraph.TryGet(accessor, c.SemanticModel, out cfg))
                         {
                             var walker = new RecursionSearcherForProperty(
                                 new RecursionContext<IControlFlowGraph>(c, cfg, propertySymbol, accessor.Keyword.GetLocation(), "property accessor's recursion"),
                                 isSetAccessor: accessor.Keyword.IsKind(SyntaxKind.SetKeyword));
                             walker.CheckPaths();
 
-                            CheckInfiniteJumpLoop(c, bodyNode, cfg, "property accessor");
+                            CheckInfiniteJumpLoop(c, accessor, cfg, "property accessor");
                         }
                     }
                 }
@@ -73,7 +72,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private static void CheckInfiniteJumpLoop(SonarSyntaxNodeReportingContext context, SyntaxNode body, IControlFlowGraph cfg, string declarationType)
             {
-                if (body == null)
+                if (body is null)
                 {
                     return;
                 }

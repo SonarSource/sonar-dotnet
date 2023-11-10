@@ -46,50 +46,41 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             // No need to check for ExpressionBody as it can't contain variable assignment
             context.RegisterNodeAction(
-                c => CheckForDeadStores<BaseMethodDeclarationSyntax>(c, c.SemanticModel.GetDeclaredSymbol(c.Node), x => (CSharpSyntaxNode)x.Body ?? x.ExpressionBody()),
-                SyntaxKind.MethodDeclaration,
+                c => CheckForDeadStores(c, c.SemanticModel.GetDeclaredSymbol(c.Node)),
+                SyntaxKind.AddAccessorDeclaration,
                 SyntaxKind.ConstructorDeclaration,
-                SyntaxKind.DestructorDeclaration,
                 SyntaxKind.ConversionOperatorDeclaration,
-                SyntaxKind.OperatorDeclaration);
-
-            context.RegisterNodeAction(
-                c => CheckForDeadStores<AccessorDeclarationSyntax>(c, c.SemanticModel.GetDeclaredSymbol(c.Node), x => (CSharpSyntaxNode)x.Body ?? x.ExpressionBody()),
+                SyntaxKind.DestructorDeclaration,
                 SyntaxKind.GetAccessorDeclaration,
+                SyntaxKind.MethodDeclaration,
+                SyntaxKind.OperatorDeclaration,
+                SyntaxKind.RemoveAccessorDeclaration,
                 SyntaxKind.SetAccessorDeclaration,
                 SyntaxKindEx.InitAccessorDeclaration,
-                SyntaxKind.AddAccessorDeclaration,
-                SyntaxKind.RemoveAccessorDeclaration);
-
-            context.RegisterNodeAction(
-                c => CheckForDeadStores<AnonymousFunctionExpressionSyntax>(c, c.SemanticModel.GetSymbolInfo(c.Node).Symbol, x => x.Body),
-                SyntaxKind.AnonymousMethodExpression,
-                SyntaxKind.SimpleLambdaExpression,
-                SyntaxKind.ParenthesizedLambdaExpression);
-
-            context.RegisterNodeAction(
-                c => CheckForDeadStores(c, c.SemanticModel.GetDeclaredSymbol(c.Node), ((LocalFunctionStatementSyntaxWrapper)c.Node).Body),
                 SyntaxKindEx.LocalFunctionStatement);
+
+            context.RegisterNodeAction(
+                c => CheckForDeadStores(c, c.SemanticModel.GetSymbolInfo(c.Node).Symbol),
+                SyntaxKind.AnonymousMethodExpression,
+                SyntaxKind.ParenthesizedLambdaExpression,
+                SyntaxKind.SimpleLambdaExpression);
         }
 
-        private void CheckForDeadStores<T>(SonarSyntaxNodeReportingContext context, ISymbol symbol, Func<T, CSharpSyntaxNode> bodyOrExpressionBody) where T : SyntaxNode =>
-            CheckForDeadStores(context, symbol, bodyOrExpressionBody((T)context.Node));
-
-        private void CheckForDeadStores(SonarSyntaxNodeReportingContext context, ISymbol symbol, CSharpSyntaxNode node)
+        private void CheckForDeadStores(SonarSyntaxNodeReportingContext context, ISymbol symbol)
         {
-            if (symbol != null && node != null)
+            if (symbol != null)
             {
                 if (useSonarCfg)
                 {
                     // Tuple expressions are not supported. See https://github.com/SonarSource/sonar-dotnet/issues/3094
-                    if (!node.DescendantNodes().AnyOfKind(SyntaxKindEx.TupleExpression) && CSharpControlFlowGraph.TryGet(node, context.SemanticModel, out var cfg))
+                    if (!context.Node.DescendantNodes().AnyOfKind(SyntaxKindEx.TupleExpression) && CSharpControlFlowGraph.TryGet(context.Node, context.SemanticModel, out var cfg))
                     {
                         var lva = new SonarCSharpLiveVariableAnalysis(cfg, symbol, context.SemanticModel, context.Cancel);
-                        var checker = new SonarChecker(context, lva, node);
+                        var checker = new SonarChecker(context, lva, context.Node);
                         checker.Analyze(cfg.Blocks);
                     }
                 }
-                else if (node.CreateCfg(context.SemanticModel, context.Cancel) is { } cfg)
+                else if (context.Node.CreateCfg(context.SemanticModel, context.Cancel) is { } cfg)
                 {
                     var lva = new RoslynLiveVariableAnalysis(cfg, context.Cancel);
                     var checker = new RoslynChecker(context, lva);

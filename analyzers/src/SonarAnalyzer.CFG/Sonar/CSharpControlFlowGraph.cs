@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+
 namespace SonarAnalyzer.CFG.Sonar
 {
     public static class CSharpControlFlowGraph
@@ -25,11 +27,22 @@ namespace SonarAnalyzer.CFG.Sonar
         public static bool TryGet(SyntaxNode node, SemanticModel semanticModel, out IControlFlowGraph cfg)
         {
             cfg = null;
+            var body = node switch
+            {
+                BaseMethodDeclarationSyntax n => (SyntaxNode)n.Body ?? n.ExpressionBody(),
+                PropertyDeclarationSyntax n => n.ExpressionBody?.Expression,
+                IndexerDeclarationSyntax n => n.ExpressionBody?.Expression,
+                AccessorDeclarationSyntax n => (SyntaxNode)n.Body ?? n.ExpressionBody(),
+                AnonymousFunctionExpressionSyntax n => n.Body,
+                ArrowExpressionClauseSyntax n => n,
+                _ when node.IsKind(SyntaxKindEx.LocalFunctionStatement) && (LocalFunctionStatementSyntaxWrapper)node is var local => (SyntaxNode)local.Body ?? local.ExpressionBody,
+                _ => null
+            };
             try
             {
-                if (node != null)
+                if (body is not null)
                 {
-                    cfg = Create(node, semanticModel);
+                    cfg = Create(body, semanticModel);
                 }
                 else
                 {

@@ -49,7 +49,7 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
     protected override void Initialize(SonarAnalysisContext context)
     {
         context.RegisterNodeAction(
-            c => Analyze<MethodBlockBaseSyntax>(context, c, x => x),
+            c => Analyze(context, c),
             SyntaxKind.ConstructorBlock,
             SyntaxKind.OperatorBlock,
             SyntaxKind.SubBlock,
@@ -66,7 +66,7 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
                 var declaration = (LambdaExpressionSyntax)c.Node;
                 if (c.SemanticModel.GetSymbolInfo(declaration).Symbol is { } symbol && !c.IsInExpressionTree())
                 {
-                    Analyze(context, c, declaration, symbol);
+                    Analyze(context, c, symbol);
                 }
             },
             SyntaxKind.SingleLineFunctionLambdaExpression,
@@ -78,7 +78,7 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
     protected override ControlFlowGraph CreateCfg(SemanticModel model, SyntaxNode node, CancellationToken cancel) =>
         node.CreateCfg(model, cancel);
 
-    protected override void AnalyzeSonar(SonarSyntaxNodeReportingContext context, SyntaxNode body, ISymbol symbol)
+    protected override void AnalyzeSonar(SonarSyntaxNodeReportingContext context, ISymbol symbol)
     {
         // There are no old Sonar rules in VB.NET
     }

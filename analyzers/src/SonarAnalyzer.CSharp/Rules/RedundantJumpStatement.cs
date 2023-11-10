@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterNodeAction(
-                c => CheckForRedundantJumps(c, ((BaseMethodDeclarationSyntax)c.Node).Body),
+                CheckForRedundantJumps,
                 SyntaxKind.MethodDeclaration,
                 SyntaxKind.ConstructorDeclaration,
                 SyntaxKind.DestructorDeclaration,
@@ -43,11 +43,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.OperatorDeclaration);
 
             context.RegisterNodeAction(
-                c => CheckForRedundantJumps(c, ((LocalFunctionStatementSyntaxWrapper)c.Node).Body),
+                CheckForRedundantJumps,
                 SyntaxKindEx.LocalFunctionStatement);
 
             context.RegisterNodeAction(
-                c => CheckForRedundantJumps(c, ((AccessorDeclarationSyntax)c.Node).Body),
+                CheckForRedundantJumps,
                 SyntaxKind.GetAccessorDeclaration,
                 SyntaxKind.SetAccessorDeclaration,
                 SyntaxKindEx.InitAccessorDeclaration,
@@ -55,20 +55,20 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.RemoveAccessorDeclaration);
 
             context.RegisterNodeAction(
-                c => CheckForRedundantJumps(c, ((AnonymousFunctionExpressionSyntax)c.Node).Body),
+                CheckForRedundantJumps,
                 SyntaxKind.AnonymousMethodExpression,
                 SyntaxKind.SimpleLambdaExpression,
                 SyntaxKind.ParenthesizedLambdaExpression);
         }
 
-        private static void CheckForRedundantJumps(SonarSyntaxNodeReportingContext context, CSharpSyntaxNode node)
+        private static void CheckForRedundantJumps(SonarSyntaxNodeReportingContext context)
         {
-            if (!CSharpControlFlowGraph.TryGet(node, context.SemanticModel, out var cfg))
+            if (!CSharpControlFlowGraph.TryGet(context.Node, context.SemanticModel, out var cfg))
             {
                 return;
             }
 
-            var yieldStatementCount = node.DescendantNodes().OfType<YieldStatementSyntax>().Count();
+            var yieldStatementCount = context.Node.DescendantNodes().OfType<YieldStatementSyntax>().Count();
 
             var removableJumps = cfg.Blocks
                                     .OfType<JumpBlock>()
