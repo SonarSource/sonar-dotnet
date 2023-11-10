@@ -74,16 +74,22 @@ public static class Constants
 
 [Route(Constants.COMPLIANT_ROUTE)]
 [Route(Constants.NONCOMPLIANT_ROUTE)] // Secondary [constant]
+//     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 [Route(template: "/route/{UseTemplateParam:bool}")]
 [Route(template: "/route/{UseTemplateParam:int}")] // Secondary [template-int]
+//                       ^^^^^^^^^^^^^^^^^^^^^^
 [Route((("/route/{ParenthesisParam:bool}")))]
 [Route((("/route/{ParenthesisParam:int}")))] // Secondary [parenthesis-int]
+//               ^^^^^^^^^^^^^^^^^^^^^^
 [Route("""/route/{RawStringLiteralParam:bool}""")]
 [Route("""/route/{RawStringLiteralParam:int}""")] // Secondary [raw-int]
+//               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 [Route($$"""/route/{RawInterpolatedParam:{{Constants.BoolConstraint}}}""")]
 [Route($$"""/route/{RawInterpolatedParam:{{Constants.IntConstraint}}}""")] // Secondary [raw-interpolated-int]
+//     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 [Route("/something" + "/{ConcatenationParam:bool}")]
 [Route("/something" + "/{ConcatenationParam:int}")] // Secondary [concatenation-int]
+//                      ^^^^^^^^^^^^^^^^^^^^^^^^
 public class ParameterTypeShouldMatchRouteTypeConstraint_Constant : ComponentBase
 {
     [Parameter]

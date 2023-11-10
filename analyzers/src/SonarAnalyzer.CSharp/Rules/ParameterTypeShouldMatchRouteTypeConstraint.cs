@@ -64,9 +64,9 @@ public sealed class ParameterTypeShouldMatchRouteTypeConstraint : SonarDiagnosti
                 return;
             }
 
-            cc.RegisterNodeAction(c =>
+            cc.RegisterSymbolAction(c =>
                 {
-                    foreach (var property in GetPropertyTypeMismatches((ClassDeclarationSyntax)c.Node, c.SemanticModel, cc.Compilation))
+                    foreach (var property in GetPropertyTypeMismatches((INamedTypeSymbol)c.Symbol, cc.Compilation))
                     {
                         c.ReportIssue(Diagnostic.Create(Rule,
                             property.Type.GetLocation(),
@@ -75,20 +75,19 @@ public sealed class ParameterTypeShouldMatchRouteTypeConstraint : SonarDiagnosti
                             property.ToPrimaryMessage()));
                     }
                 },
-                SyntaxKind.ClassDeclaration);
+                SymbolKind.NamedType);
         });
 
-    private static IList<PropertyTypeMismatch> GetPropertyTypeMismatches(ClassDeclarationSyntax classDeclaration, SemanticModel semanticModel, Compilation compilation)
+    private static IList<PropertyTypeMismatch> GetPropertyTypeMismatches(INamedTypeSymbol classSymbol, Compilation compilation)
     {
-        var routeParams = GetRouteParametersWithValidConstraint(classDeclaration);
+        var routeParams = GetRouteParametersWithValidConstraint(classSymbol);
 
         if (routeParams.Count == 0)
         {
             return Array.Empty<PropertyTypeMismatch>();
         }
 
-        return semanticModel
-            .GetDeclaredSymbol(classDeclaration)
+        return classSymbol
             .GetMembers()
             .Where(IsPropertyWithParameterAttributeInRoute)
             .SelectMany(property => routeParams[property.Name].Select(routeParam => new { RouteParam = routeParam, Property = property }))
@@ -112,20 +111,24 @@ public sealed class ParameterTypeShouldMatchRouteTypeConstraint : SonarDiagnosti
         return ConstraintMapping.ContainsKey(routeConstraintType) && ConstraintMapping[routeConstraintType].Matches(type, compilation);
     }
 
-    private static Dictionary<string, List<RouteParameter>> GetRouteParametersWithValidConstraint(ClassDeclarationSyntax classDeclaration)
+    private static Dictionary<string, List<RouteParameter>> GetRouteParametersWithValidConstraint(INamedTypeSymbol classDeclaration)
     {
         var routeParameters = new Dictionary<string, List<RouteParameter>>(StringComparer.InvariantCultureIgnoreCase);
 
-        var routes = classDeclaration.AttributeLists
-            .SelectMany(x => x.Attributes)
-            .Where(x => x.IsSameShortName(KnownType.Microsoft_AspNetCore_Components_RouteAttribute)
-                        && x.ArgumentList.Arguments.Count > 0
-                        && x.ArgumentList.Arguments[0].Expression is LiteralExpressionSyntax)
-            .Select(x => (LiteralExpressionSyntax)x.ArgumentList.Arguments[0].Expression);
+        var routeAttributeDataList = classDeclaration.GetAttributes()
+            .Where(x => KnownType.Microsoft_AspNetCore_Components_RouteAttribute.Matches(x.AttributeClass));
 
-        foreach (var route in routes)
+        foreach (var routeAttributeData in routeAttributeDataList)
         {
-            var routeParams = route.Token.ValueText
+            var route = routeAttributeData.ConstructorArguments[0].Value as string;
+            var routeNode = routeAttributeData.ApplicationSyntaxReference.GetSyntax() as AttributeSyntax;
+
+            if (route is null || routeNode is null)
+            {
+                continue;
+            }
+
+            var routeParams = route
                 .Split('/')
                 .Where(segment => segment.StartsWith("{") && segment.EndsWith("}"))
                 .Select(x => new { Param = x, Parts = x.TrimStart('{').TrimEnd('}', '?').Split(':') })
@@ -136,18 +139,32 @@ public sealed class ParameterTypeShouldMatchRouteTypeConstraint : SonarDiagnosti
                 routeParameters
                     .GetOrAdd(routeParam.Parts[0], _ => new List<RouteParameter>(1))
                     .Add(new(routeParam.Parts.Length == 2 ? routeParam.Parts[1] : ImplicitStringConstraint,
-                        route.Token.ValueText,
-                        CalculateRouteParamLocation(route.GetLocation(), route.Token.ValueText, routeParam.Param)));
+                        route,
+                        CalculateRouteParamLocation(routeNode.GetLocation(), routeNode, routeParam.Param)));
             }
         }
 
         return routeParameters;
     }
 
-    private static Location CalculateRouteParamLocation(Location routeLocation, string route, string routeParam) =>
-        !GeneratedCodeRecognizer.IsRazorGeneratedFile(routeLocation.SourceTree)
-            ? Location.Create(routeLocation.SourceTree, new TextSpan(routeLocation.SourceSpan.Start + route.IndexOf(routeParam, StringComparison.InvariantCulture) + 1, routeParam.Length))
-            : null;
+    private static Location CalculateRouteParamLocation(Location attributeLocation, AttributeSyntax routeNode, string routeParam)
+    {
+        if (GeneratedCodeRecognizer.IsRazorGeneratedFile(attributeLocation.SourceTree))
+        {
+            return null;
+        }
+
+        return routeNode.ArgumentList.Arguments[0].Expression.RemoveParentheses() switch
+        {
+            var expression when expression.ToString().IndexOf(routeParam, StringComparison.InvariantCulture) >= 0 => CreateLocationFromRoute(expression.GetLocation(), expression.ToString()),
+            var expression => expression.GetLocation()
+        };
+
+        Location CreateLocationFromRoute(Location routeLocation, string route)
+        {
+            return Location.Create(routeLocation.SourceTree, new TextSpan(routeLocation.SourceSpan.Start + route.IndexOf(routeParam, StringComparison.InvariantCulture), routeParam.Length));
+        }
+    }
 
     private sealed class PropertyTypeMismatch
     {
