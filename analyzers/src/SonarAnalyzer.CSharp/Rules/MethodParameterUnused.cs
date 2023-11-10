@@ -71,8 +71,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             else if (c.Node.IsKind(SyntaxKindEx.LocalFunctionStatement))
             {
-                var localFunction = (LocalFunctionStatementSyntaxWrapper)c.Node;
-                return new MethodContext(c, localFunction);
+                return new MethodContext(c, (LocalFunctionStatementSyntaxWrapper)c.Node);
             }
             else
             {
@@ -256,6 +255,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public readonly ParameterListSyntax ParameterList;
             public readonly BlockSyntax Body;
             public readonly ArrowExpressionClauseSyntax ExpressionBody;
+
             public MethodContext(SonarSyntaxNodeReportingContext context, BaseMethodDeclarationSyntax declaration)
                 : this(context, declaration.ParameterList, declaration.Body, declaration.ExpressionBody()) { }
 
