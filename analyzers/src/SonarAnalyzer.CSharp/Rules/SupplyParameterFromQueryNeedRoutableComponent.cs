@@ -40,8 +40,7 @@ public sealed class SupplyParameterFromQueryNeedRoutableComponent : SonarDiagnos
             context.RegisterSymbolAction(c =>
             {
                 var property = (IPropertySymbol)c.Symbol;
-                if (property.HasAttribute(KnownType.Microsoft_AspNetCore_Components_SupplyParameterFromQueryAttribute)
-                    && property.HasAttribute(KnownType.Microsoft_AspNetCore_Components_ParameterAttribute))
+                if (HasComponentParameterAttributes(property))
                 {
                     if (!property.ContainingType.HasAttribute(KnownType.Microsoft_AspNetCore_Components_RouteAttribute))
                     {
@@ -52,10 +51,14 @@ public sealed class SupplyParameterFromQueryNeedRoutableComponent : SonarDiagnos
                     }
                     else
                     {
-                        // Checks for supported types and raise S6797
+                        // TODO: checks for supported types and raise S6797
                     }
                 }
             },
             SymbolKind.Property);
         });
+
+    private static bool HasComponentParameterAttributes(IPropertySymbol property) =>
+        property.HasAttribute(KnownType.Microsoft_AspNetCore_Components_SupplyParameterFromQueryAttribute)
+        && property.HasAttribute(KnownType.Microsoft_AspNetCore_Components_ParameterAttribute);
 }
