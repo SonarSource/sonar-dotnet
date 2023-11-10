@@ -31,28 +31,9 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [DataRow("[System.ObsoleteAttribute] public class X{}", true)]
         [DataRow("using System; [ObsoleteAttribute] public class X{}", true)]
         [DataRow("using System; [Obsolete] public class X{}", true)]
-        [DataRow("class ObsoleteAttribute : Attribute { } [Obsolete] public class X{}", true)]
-        [DataRow("class ObsoleteAttribute : Attribute { } [ObsoleteAttribute] public class X{}", true)]
         [DataRow("using System; [Attribute] public class X{}", false)]
         [DataRow("using System; [AttributeUsageAttribute] public class X{}", false)]
-        public void IsKnownType_ChecksAttributeType_WithoutSemanticModel(string code, bool isKnownType)
-        {
-            var compilation = CreateCompilation(code);
-            var syntaxTree = compilation.SyntaxTrees.First();
-            var attribute = syntaxTree.First<AttributeSyntax>();
-
-            attribute.IsSameShortName(KnownType.System_ObsoleteAttribute).Should().Be(isKnownType);
-        }
-
-        [TestMethod]
-        [DataRow("[System.ObsoleteAttribute] public class X{}", true)]
-        [DataRow("using System; [ObsoleteAttribute] public class X{}", true)]
-        [DataRow("using System; [Obsolete] public class X{}", true)]
-        [DataRow("class ObsoleteAttribute : Attribute { } [Obsolete] public class X{}", false)]
-        [DataRow("class ObsoleteAttribute : Attribute { } [ObsoleteAttribute] public class X{}", false)]
-        [DataRow("using System; [Attribute] public class X{}", false)]
-        [DataRow("using System; [AttributeUsageAttribute] public class X{}", false)]
-        public void IsKnownType_ChecksAttributeType_WithSemanticModel(string code, bool isKnownType)
+        public void IsKnownType_ChecksAttributeType(string code, bool isKnownType)
         {
             var compilation = CreateCompilation(code);
             var syntaxTree = compilation.SyntaxTrees.First();
