@@ -109,8 +109,7 @@ stages:
 
       - task: PowerShell@2
         displayName: "Signing certificate setup"
-        # ToDo: add back the condition
-        # condition: eq(variables.isReleaseBranch, 'True')
+        condition: eq(variables.isReleaseBranch, 'True')
         env:
           SM_CLIENT_CERT_FILE: $(SM_CLIENT_CERT.secureFilePath)
           SM_CLIENT_CERT_PASSWORD: $(SM_CLIENT_CERT_PASSWORD)
@@ -134,8 +133,7 @@ stages:
           solution: '$(solution)'
           platform: '$(buildPlatform)'
           configuration: '$(buildConfiguration)'
-          # ToDo: conditionally sign assemblies
-          msbuildArgs: '/p:SignAssembly=true /p:AssemblyOriginatorKeyFile="$(snk.secureFilePath)" /p:Sha1=$(Build.SourceVersion) /p:BuildNumber=$(Build.BuildId) /p:WarningLevel=0'
+          msbuildArgs: '/p:SignAssembly=$(isReleaseBranch) /p:AssemblyOriginatorKeyFile="$(snk.secureFilePath)" /p:Sha1=$(Build.SourceVersion) /p:BuildNumber=$(Build.BuildId) /p:WarningLevel=0'
           vsVersion: $(vsVersion)
 
       - task: NuGetCommand@2
@@ -150,8 +148,7 @@ stages:
 
       - task: PowerShell@2
         displayName: "Sign NuGet packages"
-        # ToDo: add back the condition
-        # condition: eq(variables.isReleaseBranch, 'True')
+        condition: eq(variables.isReleaseBranch, 'True')
         env:
           PACKAGES_PATH: '$(Build.ArtifactStagingDirectory)\packages\*.nupkg'
           SM_CLIENT_CERT_FILE: $(SM_CLIENT_CERT.secureFilePath)
