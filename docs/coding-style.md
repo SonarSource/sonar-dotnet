@@ -99,16 +99,16 @@ public void MethodB()
 
 ## Naming conventions
 
-### Casing
-
-Protected fields should start with lowercase letter.
-
 ### Principles
 
 Keep it minimal and suggestive.
 - Generic words that don't convey meaning (e.g. `Helper`) should be avoided.
 - Overwordy and complex names should be avoided as well.
 - Use positive naming when possible.
+
+### Casing
+
+Protected fields should start with lowercase letter.
 
 ### Parameters and variables
 
