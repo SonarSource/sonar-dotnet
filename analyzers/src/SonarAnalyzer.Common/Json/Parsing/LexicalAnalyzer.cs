@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Globalization;
 using System.Text;
 using Microsoft.CodeAnalysis.Text;
@@ -304,8 +305,9 @@ namespace SonarAnalyzer.Json.Parsing
             object BuildResult()
             {
                 var baseValue = @decimal == null
-                    ? (object)double.Parse(integral.ToString())
-                    : decimal.Parse(integral + CultureInfo.InvariantCulture.NumberFormat.NumberDecimalSeparator + @decimal);
+                    ? (object)double.Parse(integral.ToString(), CultureInfo.InvariantCulture)
+                    : decimal.Parse(integral + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator + @decimal, CultureInfo.InvariantCulture);
+
                 if (exponent == null)   // Integer or Decimal
                 {
                     return baseValue;
