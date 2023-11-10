@@ -44,7 +44,7 @@
 
   <Target Name="SignDlls" Condition="'$(SignAssembly)' == 'true'">
     <Message Importance="high" Text="Signing analyzer assemblies from $(OutputPath)" />
-    <Exec WorkingDirectory="$(OutputPath)" Command="&quot;$(SIGNTOOL_PATH)&quot; sign /fd SHA256 /f $(PFX_PATH) /p $(PFX_PASSWORD) /du https://www.sonarsource.com/ /d &quot;Roslyn analyzers that spot Bugs, Vulnerabilities and Code Smells in your code.&quot; /tr http://sha256timestamp.ws.symantec.com/sha256/timestamp SonarAnalyzer*.dll" />
+    <Exec WorkingDirectory="$(OutputPath)" Command="signtool sign /du https://www.sonarsource.com/ /d &quot;Roslyn analyzers that spot Bugs, Vulnerabilities and Code Smells in your code.&quot; /tr http://timestamp.digicert.com /td SHA256 /fd SHA256 /csp &quot;DigiCert Signing Manager KSP&quot; /kc &quot;$(SM_KP)&quot; /f &quot;$(SM_CLIENT_CRT_FILE)&quot; SonarAnalyzer*.dll" />
   </Target>
 
   <Target Name="CopyBinaries" AfterTargets="Build" DependsOnTargets="SignDlls">
