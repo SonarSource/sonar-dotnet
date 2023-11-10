@@ -33,7 +33,7 @@ public class SupplyParameterFromQueryNeedRoutableComponentTest
     [TestMethod]
     public void SupplyParameterFromQueryNeedRoutableComponent() =>
         builder.AddPaths("SupplyParameterFromQueryNeedRoutableComponent_Compliant.razor",
-                         "SupplyParameterFromQueryNeedRoutableComponent_Noncompliant")
+                         "SupplyParameterFromQueryNeedRoutableComponent_Noncompliant.razor")
                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                .Verify();
 }

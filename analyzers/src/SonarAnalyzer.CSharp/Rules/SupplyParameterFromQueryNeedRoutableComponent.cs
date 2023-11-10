@@ -31,13 +31,31 @@ public sealed class SupplyParameterFromQueryNeedRoutableComponent : SonarDiagnos
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
     protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(c =>
+        context.RegisterCompilationStartAction(cs =>
+        {
+            if (cs.Compilation.GetTypeByMetadataName(KnownType.Microsoft_AspNetCore_Components_RouteAttribute) is null)
             {
-                var node = c.Node;
-                if (true)
+                return;
+            }
+            context.RegisterSymbolAction(c =>
+            {
+                var property = (IPropertySymbol)c.Symbol;
+                if (property.HasAttribute(KnownType.Microsoft_AspNetCore_Components_SupplyParameterFromQueryAttribute)
+                    && property.HasAttribute(KnownType.Microsoft_AspNetCore_Components_ParameterAttribute))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
+                    if (!property.ContainingType.HasAttribute(KnownType.Microsoft_AspNetCore_Components_RouteAttribute))
+                    {
+                        foreach (var location in property.Locations)
+                        {
+                            c.ReportIssue(Diagnostic.Create(Rule, location));
+                        }
+                    }
+                    else
+                    {
+                        // Checks for supported types and raise S6797
+                    }
                 }
             },
-            SyntaxKind.InvocationExpression);
+            SymbolKind.Property);
+        });
 }
