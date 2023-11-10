@@ -34,6 +34,8 @@ public sealed class ParameterTypeShouldMatchRouteTypeConstraint : SonarDiagnosti
     private const string SecondaryMessageFormat = "This route parameter has a '{0}' type constraint.";
     private const string ImplicitStringSecondaryMessage = "This route parameter has an implicit 'string' type constraint.";
 
+    private const string ImplicitStringConstraint = "string";
+
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
     // https://learn.microsoft.com/en-us/aspnet/core/blazor/fundamentals/routing?view=aspnetcore-7.0#route-constraints
@@ -47,7 +49,8 @@ public sealed class ParameterTypeShouldMatchRouteTypeConstraint : SonarDiagnosti
         { "guid", new SupportedType(KnownType.System_Guid) },
         { "int", new SupportedType(KnownType.System_Int32) },
         { "long", new SupportedType(KnownType.System_Int64) },
-        { "string", new SupportedType(KnownType.System_String) }
+        // Implicit string constraint
+        { ImplicitStringConstraint, new SupportedType(KnownType.System_String) }
     };
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
@@ -132,7 +135,7 @@ public sealed class ParameterTypeShouldMatchRouteTypeConstraint : SonarDiagnosti
             {
                 routeParameters
                     .GetOrAdd(routeParam.Parts[0], _ => new List<RouteParameter>(1))
-                    .Add(new(routeParam.Parts.Length == 2 ? routeParam.Parts[1] : "string",
+                    .Add(new(routeParam.Parts.Length == 2 ? routeParam.Parts[1] : ImplicitStringConstraint,
                         route.Token.ValueText,
                         CalculateRouteParamLocation(route.GetLocation(), route.Token.ValueText, routeParam.Param)));
             }

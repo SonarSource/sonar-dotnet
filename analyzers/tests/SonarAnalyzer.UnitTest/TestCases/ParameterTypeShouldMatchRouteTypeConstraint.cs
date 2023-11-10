@@ -2,12 +2,6 @@ using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Components;
 
-public static class Constants
-{
-    public const string NONCOMPLIANT_ROUTE = "/route/{NoncompliantFromConstant:bool}";
-    public const string COMPLIANT_ROUTE = "/route/{CompliantFromConstant:bool}";
-}
-
 [Route("/route/{BoolParam:bool}")] // Secondary [bool] {{This route parameter has a 'bool' type constraint.}}
 //             ^^^^^^^^^^^^^^^^
 [Route("/route/{DatetimeParam:datetime}")] // Secondary [datetime] {{This route parameter has a 'datetime' type constraint.}}
@@ -16,8 +10,6 @@ public static class Constants
                                                             // Secondary@-1 ^41#16 [bool-multiple] {{This route parameter has a 'bool' type constraint.}}
 [Route("/route/{CompliantBoolParam:bool}")]
 [Route("/route/{CompliantDatetimeParam:datetime}")]
-[Route(Constants.NONCOMPLIANT_ROUTE)]
-[Route(Constants.COMPLIANT_ROUTE)]
 public class ParameterTypeShouldMatchRouteTypeConstraint : ComponentBase
 {
     [Parameter]
@@ -70,4 +62,42 @@ public class ParameterTypeShouldMatchRouteTypeConstraint_EdgeCase : ComponentBas
 
     [Parameter]
     public int[] ArrayInt { get; set; } // Noncompliant [array, array-optional] {{Parameter type 'int[]' does not match route parameter type constraint.}}
+}
+
+public static class Constants
+{
+    public const string NONCOMPLIANT_ROUTE = "/route/{NoncompliantFromConstant:bool}";
+    public const string COMPLIANT_ROUTE = "/route/{CompliantFromConstant:bool}";
+    public const string BoolConstraint = "bool";
+    public const string IntConstraint = "int";
+}
+
+[Route(Constants.COMPLIANT_ROUTE)]
+[Route(Constants.NONCOMPLIANT_ROUTE)] // Secondary [constant]
+[Route(template: "/route/{UseTemplateParam:bool}")]
+[Route(template: "/route/{UseTemplateParam:int}")] // Secondary [template-int]
+[Route((("/route/{ParenthesisParam:bool}")))]
+[Route((("/route/{ParenthesisParam:int}")))] // Secondary [parenthesis-int]
+[Route("""/route/{RawStringLiteralParam:bool}""")]
+[Route("""/route/{RawStringLiteralParam:int}""")] // Secondary [raw-int]
+[Route($$"""/route/{RawInterpolatedParam:{{Constants.BoolConstraint}}}""")]
+[Route($$"""/route/{RawInterpolatedParam:{{Constants.IntConstraint}}}""")] // Secondary [raw-interpolated-int]
+[Route("/something" + "/{ConcatenationParam:bool}")]
+[Route("/something" + "/{ConcatenationParam:int}")] // Secondary [concatenation-int]
+public class ParameterTypeShouldMatchRouteTypeConstraint_Constant : ComponentBase
+{
+    [Parameter]
+    public DateTime NoncompliantFromConstant { get; set; } // Noncompliant [constant]
+    [Parameter]
+    public bool CompliantFromConstant { get; set; } // Compliant
+    [Parameter]
+    public bool UseTemplateParam { get; set; } // Noncompliant [template-int]
+    [Parameter]
+    public bool ParenthesisParam { get; set; } // Noncompliant [parenthesis-int]
+    [Parameter]
+    public bool RawStringLiteralParam { get; set; } // Noncompliant [raw-int]
+    [Parameter]
+    public bool RawInterpolatedParam { get; set; } // Noncompliant [raw-interpolated-int]
+    [Parameter]
+    public bool ConcatenationParam { get; set; } // Noncompliant [concatenation-int]
 }
