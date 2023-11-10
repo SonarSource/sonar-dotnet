@@ -23,12 +23,29 @@ namespace SonarAnalyzer.Rules.CSharp;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class SupplyParameterFromQueryNeedsRoutableComponent : SonarDiagnosticAnalyzer
 {
-    private const string DiagnosticId = "S6803";
-    private const string MessageFormat = "Component parameters can only receive query parameter values in routable components.";
+    private const string NoRouteQueryDiagnosticId = "S6803";
+    private const string NoRouteQueryMessageFormat = "Component parameters can only receive query parameter values in routable components.";
 
-    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+    private const string QueryTypeDiagnosticId = "S6797";
+    private const string QueryTypeMessageFormat = "Query parameter type '{0}' is not supported.";
 
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+    private static readonly DiagnosticDescriptor S6803Rule = DescriptorFactory.Create(NoRouteQueryDiagnosticId, NoRouteQueryMessageFormat);
+    private static readonly DiagnosticDescriptor S6797Rule = DescriptorFactory.Create(QueryTypeDiagnosticId, QueryTypeMessageFormat);
+
+    private static readonly ISet<KnownType> SupportedQueryTypes = new HashSet<KnownType>
+    {
+        KnownType.System_Boolean,
+        KnownType.System_DateTime,
+        KnownType.System_Decimal,
+        KnownType.System_Double,
+        KnownType.System_Single,
+        KnownType.System_Int32,
+        KnownType.System_Int64,
+        KnownType.System_String,
+        KnownType.System_Guid
+    };
+
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(S6803Rule, S6797Rule);
 
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterCompilationStartAction(c =>
@@ -39,19 +56,54 @@ public sealed class SupplyParameterFromQueryNeedsRoutableComponent : SonarDiagno
             }
         });
 
-    private static void CheckQueryProperties(SonarSymbolReportingContext context)
+    private static void CheckQueryProperties(SonarSymbolReportingContext c)
     {
-        var property = (IPropertySymbol)context.Symbol;
-        if (property.HasAttribute(KnownType.Microsoft_AspNetCore_Components_SupplyParameterFromQueryAttribute)
-            && property.HasAttribute(KnownType.Microsoft_AspNetCore_Components_ParameterAttribute))
+        var property = (IPropertySymbol)c.Symbol;
+        if (HasComponentParameterAttributes(property))
         {
             if (!property.ContainingType.HasAttribute(KnownType.Microsoft_AspNetCore_Components_RouteAttribute))
             {
                 foreach (var location in property.Locations)
                 {
-                    context.ReportIssue(Diagnostic.Create(Rule, location));
+                    c.ReportIssue(Diagnostic.Create(S6803Rule, location));
+                }
+            }
+            else if (IsPropertyTypeMismatch(property))
+            {
+                foreach (var propertyType in property.DeclaringSyntaxReferences.Select(r => ((PropertyDeclarationSyntax)r.GetSyntax()).Type))
+                {
+                    c.ReportIssue(Diagnostic.Create(S6797Rule, propertyType.GetLocation(), GetTypeName(propertyType)));
                 }
             }
         }
     }
+
+    private static bool HasComponentParameterAttributes(IPropertySymbol property) =>
+        property.HasAttribute(KnownType.Microsoft_AspNetCore_Components_SupplyParameterFromQueryAttribute)
+        && property.HasAttribute(KnownType.Microsoft_AspNetCore_Components_ParameterAttribute);
+
+
+    private static bool IsPropertyTypeMismatch(IPropertySymbol property) =>
+        property.HasAttribute(KnownType.Microsoft_AspNetCore_Components_SupplyParameterFromQueryAttribute)
+        && !SupportedQueryTypes.Any(x => IsSupportedType(property.Type, x));
+
+    private static bool IsSupportedType(ITypeSymbol type, KnownType supportType)
+    {
+        if (type is IArrayTypeSymbol arrayTypeSymbol)
+        {
+            type = arrayTypeSymbol.ElementType;
+        }
+
+        if (KnownType.System_Nullable_T.Matches(type))
+        {
+            type = ((INamedTypeSymbol)type).TypeArguments[0];
+        }
+
+        return supportType.Matches(type);
+    }
+
+    private static string GetTypeName(TypeSyntax propertyType) =>
+        propertyType.NameIs(KnownType.System_Nullable_T.TypeName) && propertyType is GenericNameSyntax syntax
+            ? syntax.TypeArgumentList.Arguments[0].GetName()
+            : propertyType.GetName();
 }

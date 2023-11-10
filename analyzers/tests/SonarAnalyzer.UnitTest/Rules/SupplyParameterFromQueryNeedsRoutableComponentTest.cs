@@ -31,7 +31,7 @@ public class SupplyParameterFromQueryNeedsRoutableComponentTest
     public TestContext TestContext { get; set; }
 
     [TestMethod]
-    public void SupplyParameterFromQueryNeedsRoutableComponent_Razor() =>
+    public void SupplyParameterFromQueryNeedsRoutableComponent_Blazor() =>
         builder.AddPaths("SupplyParameterFromQueryNeedsRoutableComponent_Compliant.razor",
                          "SupplyParameterFromQueryNeedsRoutableComponent_Noncompliant.razor")
                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
@@ -45,12 +45,39 @@ public class SupplyParameterFromQueryNeedsRoutableComponentTest
                .Verify();
 
     [TestMethod]
-    public void SupplyParameterFromQueryNeedsRoutableComponent_CS() =>
+    public void SupplyParameterFromQueryNeedRoutableComponent_CS() =>
         builder.AddPaths("SupplyParameterFromQueryNeedsRoutableComponent_Compliant.cs",
                          "SupplyParameterFromQueryNeedsRoutableComponent_Noncompliant.cs")
-               .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreComponents("7.0.13"))
                .Verify();
+
+    [TestMethod]
+    public void BlazorQueryParameterTypeShouldBeSupported_Blazor() =>
+        builder
+            .AddPaths("BlazorQueryParameterTypeShouldBeSupported.razor")
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+            .Verify();
+
+    [TestMethod]
+    public void BlazorQueryParameterTypeShouldBeSupported_BlazorNoRoute() =>
+        builder
+            .AddPaths("BlazorQueryParameterTypeShouldBeSupported.NoRoute.razor")
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+            .VerifyNoIssueReported();
+
+    [TestMethod]
+    public void BlazorQueryParameterTypeShouldBeSupported_Partial() =>
+        builder
+            .AddPaths("BlazorQueryParameterTypeShouldBeSupported.Partial.razor", "BlazorQueryParameterTypeShouldBeSupported.Partial.razor.cs")
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+            .Verify();
+
+    [TestMethod]
+    public void BlazorQueryParameterTypeShouldBeSupported_CS() =>
+        builder
+            .AddPaths("BlazorQueryParameterTypeShouldBeSupported.cs")
+            .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreComponents("7.0.13"))
+            .Verify();
 }
 
 #endif

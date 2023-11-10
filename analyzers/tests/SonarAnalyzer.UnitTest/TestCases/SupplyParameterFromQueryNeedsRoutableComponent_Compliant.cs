@@ -6,7 +6,7 @@ class SupplyParameterFromQueryNeedsRoutableComponent_Compliant : ComponentBase
 {
     [Parameter]
     [SupplyParameterFromQuery]
-    public TimeSpan TimeSpan { get; set; } // Compliant
+    public int Number { get; set; } // Compliant
 
     [Parameter, SupplyParameterFromQuery]
     public int MyInt { get; set; } // Compliant
