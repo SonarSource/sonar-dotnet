@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Globalization;
 using System.Text;
 using Microsoft.CodeAnalysis.Text;
@@ -26,7 +27,7 @@ namespace SonarAnalyzer.Json.Parsing
 {
     internal class LexicalAnalyzer
     {
-        private readonly List<string> lines = new List<string>();
+        private readonly List<string> lines = new();
         private int line;
         private int column = -1;
 
@@ -40,9 +41,7 @@ namespace SonarAnalyzer.Json.Parsing
             var sb = new StringBuilder();
             foreach (var c in source.Replace("\r\n", "\n"))
             {
-                if (c == '\n'
-                    || c == '\r'
-                    || (char.GetUnicodeCategory(c) is var category && (category == UnicodeCategory.LineSeparator || category == UnicodeCategory.ParagraphSeparator)))
+                if (c is '\n' or '\r' || char.GetUnicodeCategory(c) is UnicodeCategory.LineSeparator or UnicodeCategory.ParagraphSeparator)
                 {
                     lines.Add(sb.ToString());
                     sb.Clear();
@@ -56,7 +55,7 @@ namespace SonarAnalyzer.Json.Parsing
         }
 
         public LinePosition CurrentPosition(int increment) =>
-            new LinePosition(line, column + increment);
+            new(line, column + increment);
 
         public Symbol NextSymbol()
         {
@@ -85,17 +84,7 @@ namespace SonarAnalyzer.Json.Parsing
                 case '"':
                     Value = ReadStringValue();
                     return Symbol.Value;
-                case '-':
-                case '0':
-                case '1':
-                case '2':
-                case '3':
-                case '4':
-                case '5':
-                case '6':
-                case '7':
-                case '8':
-                case '9':
+                case (>= '0' and <= '9') or '-':
                     Value = ReadNumberValue();
                     return Symbol.Value;
                 case 'n':
@@ -264,8 +253,8 @@ namespace SonarAnalyzer.Json.Parsing
         {
             StringBuilder @decimal = null;
             StringBuilder exponent = null;
-            var integer = new StringBuilder();
-            var current = integer;
+            StringBuilder integral = new();
+            StringBuilder current = integral;
             while (!ReachedEndOfInput)
             {
                 switch (CurrentChar)
@@ -277,40 +266,30 @@ namespace SonarAnalyzer.Json.Parsing
                         }
                         else
                         {
-                            throw new JsonException("Unexpected number format: Unexpected '-'", LastStart);
+                            throw new JsonException("Unexpected Number format: Unexpected '-'", LastStart);
                         }
                         break;
-                    case '0':
-                    case '1':
-                    case '2':
-                    case '3':
-                    case '4':
-                    case '5':
-                    case '6':
-                    case '7':
-                    case '8':
-                    case '9':
+                    case (>= '0' and <= '9'):
                         current.Append(CurrentChar);
                         break;
                     case '.':
-                        if (current == integer && current.ToString().TrimStart('-').Any())
+                        if (current == integral && current.ToString().TrimStart('-').Any())
                         {
                             @decimal = new StringBuilder();
                             current = @decimal;
                         }
                         else
                         {
-                            throw new JsonException("Unexpected number format: Unexpected '.'", LastStart);
+                            throw new JsonException("Unexpected Number format: Unexpected '.'", LastStart);
                         }
                         break;
                     case '+':
                         if (current != exponent || current.Length != 0)
                         {
-                            throw new JsonException("Unexpected number format", LastStart);
+                            throw new JsonException("Unexpected Number format", LastStart);
                         }
                         break;
-                    case 'e':
-                    case 'E':
+                    case 'e' or 'E':
                         exponent = new StringBuilder();
                         current = exponent;
                         break;
@@ -326,15 +305,16 @@ namespace SonarAnalyzer.Json.Parsing
             object BuildResult()
             {
                 var baseValue = @decimal == null
-                    ? (object)int.Parse(integer.ToString())
-                    : decimal.Parse(integer + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator + @decimal);
+                    ? (object)double.Parse(integral.ToString(), CultureInfo.InvariantCulture)
+                    : decimal.Parse(integral + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator + @decimal, CultureInfo.InvariantCulture);
+
                 if (exponent == null)   // Integer or Decimal
                 {
                     return baseValue;
                 }
                 else if (exponent.Length == 0 || exponent.ToString() == "-")
                 {
-                    throw new JsonException($"Unexpected number exponent format: {exponent}", LastStart);
+                    throw new JsonException($"Unexpected Number exponent format: {exponent}", LastStart);
                 }
                 else
                 {

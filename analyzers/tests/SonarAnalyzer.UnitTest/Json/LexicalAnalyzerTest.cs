@@ -92,11 +92,13 @@ namespace SonarAnalyzer.UnitTest.Common
         [DataRow("42")]
         [DataRow("42424242")]
         [DataRow("1234567890")]
-        public void ReadNumber_Integer(string source)
+        [DataRow("9223372036854775807")]
+        [DataRow("-9223372036854775807")]
+        public void ReadNumber_Integers_ParseToDouble(string source)
         {
             var sut = new LexicalAnalyzer(source);
             sut.NextSymbol().Should().Be(Symbol.Value);
-            sut.Value.Should().BeOfType<int>().And.Be(int.Parse(source));
+            sut.Value.Should().BeOfType<double>().And.Be(double.Parse(source));
             sut.NextSymbol().Should().Be(Symbol.EndOfInput);
         }
 
@@ -129,7 +131,7 @@ namespace SonarAnalyzer.UnitTest.Common
         [DataRow("-42e+1", -420.0)]
         [DataRow("4.2e1", 42.0)]
         [DataRow("44.22e2", 4422.0)]
-        public void ReadNumber_Double(string source, double expected)
+        public void ReadNumber_Double_ParseToDoudle(string source, double expected)
         {
             var sut = new LexicalAnalyzer(source);
             sut.NextSymbol().Should().Be(Symbol.Value);
@@ -176,16 +178,16 @@ namespace SonarAnalyzer.UnitTest.Common
         [DataRow(@"""\u12345", @"Unexpected EOI at line 1 position 1")]
         [DataRow(@"""\x", @"Unexpected escape sequence \x at line 1 position 1")]
         [DataRow(@"""\", @"Unexpected EOI at line 1 position 1")]
-        [DataRow("0-", "Unexpected number format: Unexpected '-' at line 1 position 1")]
-        [DataRow("-.", "Unexpected number format: Unexpected '.' at line 1 position 1")]
-        [DataRow("0..", "Unexpected number format: Unexpected '.' at line 1 position 1")]
-        [DataRow("0.0.", "Unexpected number format: Unexpected '.' at line 1 position 1")]
-        [DataRow("0e0.0", "Unexpected number format: Unexpected '.' at line 1 position 1")]
-        [DataRow("0+", "Unexpected number format at line 1 position 1")]
-        [DataRow("0.0+", "Unexpected number format at line 1 position 1")]
-        [DataRow("0e0+0", "Unexpected number format at line 1 position 1")]
-        [DataRow("0e", "Unexpected number exponent format:  at line 1 position 1")]
-        [DataRow("0e-", "Unexpected number exponent format: - at line 1 position 1")]
+        [DataRow("0-", "Unexpected Number format: Unexpected '-' at line 1 position 1")]
+        [DataRow("-.", "Unexpected Number format: Unexpected '.' at line 1 position 1")]
+        [DataRow("0..", "Unexpected Number format: Unexpected '.' at line 1 position 1")]
+        [DataRow("0.0.", "Unexpected Number format: Unexpected '.' at line 1 position 1")]
+        [DataRow("0e0.0", "Unexpected Number format: Unexpected '.' at line 1 position 1")]
+        [DataRow("0+", "Unexpected Number format at line 1 position 1")]
+        [DataRow("0.0+", "Unexpected Number format at line 1 position 1")]
+        [DataRow("0e0+0", "Unexpected Number format at line 1 position 1")]
+        [DataRow("0e", "Unexpected Number exponent format:  at line 1 position 1")]
+        [DataRow("0e-", "Unexpected Number exponent format: - at line 1 position 1")]
         [DataRow("/*", "Unexpected EOI at line 1 position 1")]
         [DataRow(" /* * /", "Unexpected EOI at line 1 position 1")]
         [DataRow(" /* *", "Unexpected EOI at line 1 position 1")]
