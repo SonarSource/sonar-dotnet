@@ -116,9 +116,6 @@ stages:
           SM_CLIENT_CERT_PASSWORD: $(SM_CLIENT_CERT_PASSWORD)
           SM_API_KEY: $(SM_API_KEY)
           SM_CERT: $(SM_CERT)
-          SM_CERT_FP: $(SM_CERT_FP)
-          SM_HOST: $(SM_HOST)
-          SM_KP: $(SM_KP)
         inputs:
           targetType: 'inline'
           script: |
@@ -135,9 +132,6 @@ stages:
           SM_CLIENT_CERT_PASSWORD: $(SM_CLIENT_CERT_PASSWORD)
           SM_API_KEY: $(SM_API_KEY)
           SM_CERT: $(SM_CERT)
-          SM_CERT_FP: $(SM_CERT_FP)
-          SM_HOST: $(SM_HOST)
-          SM_KP: $(SM_KP)
         inputs:
           solution: '$(solution)'
           platform: '$(buildPlatform)'
@@ -166,13 +160,10 @@ stages:
           SM_CLIENT_CERT_PASSWORD: $(SM_CLIENT_CERT_PASSWORD)
           SM_API_KEY: $(SM_API_KEY)
           SM_CERT: $(SM_CERT)
-          SM_CERT_FP: $(SM_CERT_FP)
-          SM_HOST: $(SM_HOST)
-          SM_KP: $(SM_KP)
         inputs:
           targetType: 'inline'
           script: |
-            nuget sign "$env:PACKAGES_PATH" -Overwrite -HashAlgorithm SHA256 -CertificateFingerprint $env:SM_CERT_FP -Timestamper http://timestamp.digicert.com -TimestampHashAlgorithm SHA256
+            nuget sign "$env:PACKAGES_PATH" -Overwrite -HashAlgorithm SHA256 -CertificateFingerprint $(SM_CERT_FP) -Timestamper http://timestamp.digicert.com -TimestampHashAlgorithm SHA256
 
       - task: PublishBuildArtifacts@1
         displayName: 'Publish NuGet packages as build artifacts'
