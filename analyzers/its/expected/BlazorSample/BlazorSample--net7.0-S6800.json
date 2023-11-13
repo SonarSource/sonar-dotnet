@@ -5,11 +5,11 @@
 "message":  "Parameter type 'string' does not match route parameter type constraint.",
 "location":  [
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6800/S6800CsharpOnly.cs#L12",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6800/S6800CsharpOnly.cs#L10",
 "region":  {
-"startLine":  12,
+"startLine":  10,
 "startColumn":  12,
-"endLine":  12,
+"endLine":  10,
 "endColumn":  18
 }
 },
@@ -20,30 +20,6 @@
 "startColumn":  28,
 "endLine":  5,
 "endColumn":  44
-}
-}
-]
-},
-{
-"id":  "S6800",
-"message":  "Parameter type 'string' does not match route parameter type constraint.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6800/S6800CsharpOnly.cs#L18",
-"region":  {
-"startLine":  18,
-"startColumn":  12,
-"endLine":  18,
-"endColumn":  18
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6800/S6800CsharpOnly.cs#L7",
-"region":  {
-"startLine":  7,
-"startColumn":  8,
-"endLine":  7,
-"endColumn":  33
 }
 }
 ]

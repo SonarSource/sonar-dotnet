@@ -7,21 +7,8 @@
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6798/S6798.CSharpOnly.cs#L7",
 "region":  {
 "startLine":  7,
-"startColumn":  32,
-"endLine":  7,
-"endColumn":  79
-}
-}
-},
-{
-"id":  "S6798",
-"message":  "Methods marked as 'JSInvokable' should be 'public'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6798/S6798.CSharpOnly.cs#L8",
-"region":  {
-"startLine":  8,
 "startColumn":  24,
-"endLine":  8,
+"endLine":  7,
 "endColumn":  82
 }
 }

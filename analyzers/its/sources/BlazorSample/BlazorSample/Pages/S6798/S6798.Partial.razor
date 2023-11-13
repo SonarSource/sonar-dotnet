@@ -1,14 +1,10 @@
-@code {
-    private void JSInvokableImplicitelyPrivateMethodInCodeBlock() { }
-    [JSInvokable] private void JSInvokableExplicitelyPrivateMethodInCodeBlock() { }
-}
+@namespace BlazorSample.Pages.S6798
 
 @functions {
-    [JSInvokable] private void JSInvokablePrivateMethodInFunctionsBlock() { }
+    [JSInvokable] private void JSInvokablePrivateMethodInFunctionsBlock() { } // FN: Razor generation disabled in SL context, so in ITs too
 }
 
 @{
-    [JSInvokable] void JSInvokableLocalFunctionInDirective() { }
-    [JSInvokable] static void JSInvokableStaticLocalFunctionInDirective() { }
+    [JSInvokable] void JSInvokableLocalFunctionInDirective() { }              // Compliant: local function
 }
 
