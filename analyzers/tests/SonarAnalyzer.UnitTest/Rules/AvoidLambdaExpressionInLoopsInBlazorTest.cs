@@ -20,7 +20,6 @@
 
 #if NET
 
-using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules;
@@ -29,9 +28,6 @@ namespace SonarAnalyzer.UnitTest.Rules;
 public class AvoidLambdaExpressionInLoopsInBlazorTest
 {
     private readonly VerifierBuilder builder = new VerifierBuilder<AvoidLambdaExpressionInLoopsInBlazor>();
-    public AvoidLambdaExpressionInLoopsInBlazorTest(TestContext testContext) {
-        TestContext = testContext;
-    }
 
     public TestContext TestContext { get; set; }
 
@@ -48,10 +44,12 @@ public class AvoidLambdaExpressionInLoopsInBlazorTest
             .Verify();
 
     [TestMethod]
-    public void AvoidLambdaExpressionInLoopsInBlazor_DoesNotReportInCs() =>
+    public void AvoidLambdaExpressionInLoopsInBlazor_CS() =>
         builder.AddPaths("AvoidLambdaExpressionInLoopsInBlazor.cs")
+            .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreComponents("7.0.13"))
+            .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreComponentsWeb("7.0.13"))
             .WithOptions(ParseOptionsHelper.FromCSharp10)
-            .VerifyNoIssueReported();
+            .Verify();
 }
 
 #endif

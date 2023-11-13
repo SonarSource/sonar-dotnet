@@ -28,7 +28,7 @@ public sealed class AvoidLambdaExpressionInLoopsInBlazor : SonarDiagnosticAnalyz
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-    private static readonly ISet<string> RenderTreeBuilderMethods = new HashSet<string> { "AddAttribute", "AddMultipleAttributes" };
+    private static readonly ISet<string> AddAttributeMethods = new HashSet<string> { "AddAttribute", "AddMultipleAttributes" };
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
@@ -59,10 +59,10 @@ public sealed class AvoidLambdaExpressionInLoopsInBlazor : SonarDiagnosticAnalyz
     {
         while (node != null)
         {
-            if (node is InvocationExpressionSyntax { Expression: MemberAccessExpressionSyntax { Expression: IdentifierNameSyntax identifier } }
-                && RenderTreeBuilderMethods.Contains(node.GetName())
-                && semanticModel.GetSymbolInfo(identifier).Symbol is { } symbol
-                && symbol.GetSymbolType().Is(KnownType.Microsoft_AspNetCore_Components_Rendering_RenderTreeBuilder))
+            if (node is InvocationExpressionSyntax invocation
+                && AddAttributeMethods.Contains(invocation.GetName())
+                && semanticModel.GetSymbolInfo(invocation.Expression).Symbol is IMethodSymbol symbol
+                && symbol.ContainingType.GetSymbolType().Is(KnownType.Microsoft_AspNetCore_Components_Rendering_RenderTreeBuilder))
             {
                 return true;
             }
