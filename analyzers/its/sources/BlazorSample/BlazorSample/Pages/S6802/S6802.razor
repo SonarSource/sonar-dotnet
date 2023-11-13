@@ -1,7 +1,6 @@
 ﻿@foreach (var button in Buttons)
 {
     <button @key="button.Id" @onclick="button.Action">
-        @* Compliant *@
         Button #@button.Id
     </button>
 }
@@ -9,7 +8,6 @@
 @foreach (var button in Buttons)
 {
     <button @key="button.Id" @onclick="(e) => button.Action(e)">
-        @* Noncompliant *@
         Button #@button.Id
     </button>
 }
@@ -18,7 +16,6 @@
 {
     var buttonNumber = i;
     <button @onclick="@(e => DoAction(e, Buttons[buttonNumber]))">
-        @* Noncompliant *@
         Button #@buttonNumber
     </button>
 }
@@ -29,7 +26,6 @@
     {
         j += 1;
         <button @onclick="(e) => Reset(e)">
-            @* Noncompliant *@
             Reset @j
         </button>
     }
@@ -38,17 +34,16 @@
     {
         j += 1;
         <button @onclick="(e) => Reset(e)">
-            @* Noncompliant *@
             Reset @j
         </button>
     } while (j < 10);
 }
 
-<button @onclick="(e) => Reset(e)">Reset</button> @* Compliant *@
+<button @onclick="(e) => Reset(e)">Reset</button>
 
 @if (Buttons.Count > 0)
 {
-    <button @onclick="(e) => Reset(e)">Reset #2</button> @* Compliant *@
+    <button @onclick="(e) => Reset(e)">Reset #2</button>
 }
 
 @code {
@@ -66,7 +61,7 @@
     {
         foreach (var button in Buttons)
         {
-            button.Action = e => { }; // Compliant
+            button.Action = e => { };
         }
     }
 

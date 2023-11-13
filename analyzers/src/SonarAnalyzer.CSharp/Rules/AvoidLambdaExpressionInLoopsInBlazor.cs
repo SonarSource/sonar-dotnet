@@ -28,6 +28,8 @@ public sealed class AvoidLambdaExpressionInLoopsInBlazor : SonarDiagnosticAnalyz
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
+    private static readonly ISet<string> RenderTreeBuilderMethods = new HashSet<string> { "AddAttribute", "AddMultipleAttributes" };
+
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
     protected override void Initialize(SonarAnalysisContext context) =>
@@ -58,15 +60,14 @@ public sealed class AvoidLambdaExpressionInLoopsInBlazor : SonarDiagnosticAnalyz
         while (node != null)
         {
             if (node is InvocationExpressionSyntax { Expression: MemberAccessExpressionSyntax { Expression: IdentifierNameSyntax identifier } }
-                && semanticModel.GetSymbolInfo(identifier) is { Symbol: { } symbol }
-                && KnownType.Microsoft_AspNetCore_Components_Rendering_RenderTreeBuilder.Matches(symbol.GetSymbolType()))
+                && RenderTreeBuilderMethods.Contains(node.GetName())
+                && semanticModel.GetSymbolInfo(identifier).Symbol is { } symbol
+                && symbol.GetSymbolType().Is(KnownType.Microsoft_AspNetCore_Components_Rendering_RenderTreeBuilder))
             {
                 return true;
             }
-
             node = node.Parent;
         }
-
         return false;
     }
 
@@ -78,10 +79,8 @@ public sealed class AvoidLambdaExpressionInLoopsInBlazor : SonarDiagnosticAnalyz
             {
                 return true;
             }
-
             node = node.Parent;
         }
-
         return false;
     }
 }

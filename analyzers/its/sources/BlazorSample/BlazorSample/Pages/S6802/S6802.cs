@@ -6,7 +6,7 @@ public class LambdaInLoopInMethod
     {
         for (int i = 0; i < 10; i++)
         {
-            var a = () => { }; // Compliant - Not in blazor
+            var a = () => { };
         }
     }
 }
