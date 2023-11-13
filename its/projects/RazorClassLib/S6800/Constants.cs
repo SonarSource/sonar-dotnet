@@ -1,4 +1,4 @@
-﻿namespace BlazorSample.Pages.S6800;
+﻿namespace RazorClassLib.S6800;
 
 public static class Constants
 {

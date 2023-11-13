@@ -1,10 +1,10 @@
-using Microsoft.JSInterop;
+﻿using Microsoft.JSInterop;
 
 namespace BlazorSample.Pages;
 
 public class S6798_CSharpOnly
 {
-    [JSInvokable] private void JSInvokablePrivateMethodInPartialRazorComponent() { }
+    private void JSInvokablePrivateMethodInPartialRazorComponent() { }
     [JSInvokable] void JSInvokableImplicitelyPrivateMethodInPartialRazorComponent() { }
     [JSInvokable] public void JSInvokablePublicMethodInPartialRazorComponent() { }
 
