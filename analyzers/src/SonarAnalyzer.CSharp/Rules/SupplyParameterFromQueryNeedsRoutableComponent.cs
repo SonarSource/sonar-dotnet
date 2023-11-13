@@ -39,7 +39,7 @@ public sealed class SupplyParameterFromQueryNeedsRoutableComponent : SonarDiagno
             }
         });
 
-    private void RegisterSymbolAction(SonarAnalysisContext context) =>
+    private static void RegisterSymbolAction(SonarAnalysisContext context) =>
         context.RegisterSymbolAction(c =>
         {
             var property = (IPropertySymbol)c.Symbol;
