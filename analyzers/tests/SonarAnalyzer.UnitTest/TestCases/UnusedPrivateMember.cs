@@ -3,417 +3,420 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
 
-namespace Tests.Diagnostics
+public class MyAttribute : Attribute { }
+
+class UnusedPrivateMember
 {
-    public class MyAttribute : Attribute { }
+    public static void Main() { }
 
-    class UnusedPrivateMember
+    private class MyOtherClass
+    { }
+
+    private class MyClass
     {
-        public static void Main() { }
-
-        private class MyOtherClass
-        { }
-
-        private class MyClass
+        internal MyClass(int i)
         {
-            internal MyClass(int i)
-            {
-                var x = (MyOtherClass)null;
-                x = x as MyOtherClass;
-                Console.WriteLine();
-            }
-        }
-
-        private class Gen<T> : MyClass
-        {
-            public Gen() : base(1)
-            {
-                Console.WriteLine();
-            }
-
-            public Gen(int i) : this() // Noncompliant {{Remove the unused private constructor 'Gen'.}}
-            {
-                Console.WriteLine();
-            }
-        }
-
-        public UnusedPrivateMember()
-        {
-            MyProperty = 5;
-            MyEvent += UnusedPrivateMember_MyEvent;
-            MyUsedEvent += UnusedPrivateMember_MyUsedEvent;
-            new Gen<int>();
-        }
-
-        private void UnusedPrivateMember_MyUsedEvent(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void UnusedPrivateMember_MyEvent()
-        {
-            field3 = 5;
-            throw new NotImplementedException();
-        }
-
-        private int field, field2; // Noncompliant
-//      ^^^^^^^^^^^^^^^^^^^^^^^^^^
-        private
-            int field3, // Noncompliant {{Remove this unread private field 'field3' or refactor the code to use its value.}}
-                field4; // Noncompliant;
-//              ^^^^^^
-        private int Property // Noncompliant {{Remove the unused private property 'Property'.}}
-        {
-            get; set;
-        }
-        private void Method() { } // Noncompliant {{Remove the unused private method 'Method'.}}
-//                   ^^^^^^
-        private class Class { }// Noncompliant {{Remove the unused private class 'Class'.}}
-//                    ^^^^^
-        private struct Struct { }// Noncompliant {{Remove the unused private struct 'Struct'.}}
-//                     ^^^^^^
-        private delegate void Delegate();
-        private delegate void Delegate2(); // Noncompliant {{Remove the unused private delegate 'Delegate2'.}}
-        private event Delegate Event; //Noncompliant {{Remove the unused private event 'Event'.}}
-        private event Delegate MyEvent; //Noncompliant {{Remove this unread private field 'MyEvent' or refactor the code to use its value.}}
-        private int[][] array = new int[0][];
-        private Dictionary<int, int> used = new Dictionary<int, int>();
-        private Dictionary<int, int> unused = new Dictionary<int, int>(); // Noncompliant
-
-        public int GetValue(int x, int y) => array[x][y];
-
-        public int GetItem(int i) => used[i];
-
-        private Dictionary<int, int> GetDictionary() => null;
-
-        public int GetDictionaryItem(int i) => GetDictionary()[i];
-
-        private event EventHandler<EventArgs> MyOtherEvent //Noncompliant {{Remove the unused private event 'MyOtherEvent'.}}
-        {
-            add { }
-            remove { }
-        }
-
-        private event EventHandler<EventArgs> MyUsedEvent
-        {
-            add { }
-            remove { }
-        }
-
-        private int MyProperty
-        {
-            get;
-            set;
-        }
-
-        [My]
-        private class Class1 { }
-
-        private class Class2
-        {
-            private Class2() // Compliant
-            {
-            }
-            private Class2(int i) // Noncompliant {{Remove the unused private constructor 'Class2'.}}
-            {
-                new Class2("").field2 = 3;
-            }
-            private Class2(string i)
-            {
-            }
-            public int field; // Noncompliant {{Remove the unused private field 'field'.}}
-            public int field2; // Noncompliant {{Remove this unread private class field 'field2' or refactor the code to use its value.}}
-        }
-
-        private interface MyInterface
-        {
-            void Method();
-        }
-        private class Class3 : MyInterface // Noncompliant {{Remove the unused private class 'Class3'.}}
-        {
-            public void Method() { var x = this[20]; }
-            public void Method1() { var x = Method2(); } // Noncompliant {{Remove the unused private method 'Method1'.}}
-            public static int Method2() { return 2; }
-
-            public int this[int index]
-            {
-                get { return 42; }
-            }
-        }
-
-        internal class Class4 : MyInterface // Noncompliant {{Remove the unused internal class 'Class4'.}}
-        {
-            public void Method() { }
-        }
-
-        public void MethodUsingLocalMethod()
-        {
-            void LocalMethod() // FN: local function is never used
-            {
-
-            }
+            var x = (MyOtherClass)null;
+            x = x as MyOtherClass;
+            Console.WriteLine();
         }
     }
 
-    class NewClass1
+    private class Gen<T> : MyClass
     {
-        // See https://github.com/SonarSource/sonar-dotnet/issues/888
-        static async Task Main() // Compliant - valid main method since C# 7.1
+        public Gen() : base(1)
         {
-            Console.WriteLine("Test");
+            Console.WriteLine();
+        }
+
+        public Gen(int i) : this() // Noncompliant {{Remove the unused private constructor 'Gen'.}}
+        {
+            Console.WriteLine();
         }
     }
 
-    class NewClass2
+    public UnusedPrivateMember()
     {
-        static async Task<int> Main() // Compliant - valid main method since C# 7.1
-        {
-            Console.WriteLine("Test");
+        MyProperty = 5;
+        MyEvent += UnusedPrivateMember_MyEvent;
+        MyUsedEvent += UnusedPrivateMember_MyUsedEvent;
+        new Gen<int>();
+    }
 
-            return 1;
+    private void UnusedPrivateMember_MyUsedEvent(object sender, EventArgs e)
+    {
+        throw new NotImplementedException();
+    }
+
+    private void UnusedPrivateMember_MyEvent()
+    {
+        field3 = 5;
+        throw new NotImplementedException();
+    }
+
+    private int field, field2; // Noncompliant
+//  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    private
+        int field3, // Noncompliant {{Remove this unread private field 'field3' or refactor the code to use its value.}}
+            field4; // Noncompliant;
+//          ^^^^^^
+    private int Property // Noncompliant {{Remove the unused private property 'Property'.}}
+    {
+        get; set;
+    }
+    private void Method() { } // Noncompliant {{Remove the unused private method 'Method'.}}
+//               ^^^^^^
+    private class Class { }// Noncompliant {{Remove the unused private class 'Class'.}}
+//                ^^^^^
+    private struct Struct { }// Noncompliant {{Remove the unused private struct 'Struct'.}}
+//                 ^^^^^^
+    private delegate void Delegate();
+    private delegate void Delegate2(); // Noncompliant {{Remove the unused private delegate 'Delegate2'.}}
+    private event Delegate Event; //Noncompliant {{Remove the unused private event 'Event'.}}
+    private event Delegate MyEvent; //Noncompliant {{Remove this unread private field 'MyEvent' or refactor the code to use its value.}}
+    private int[][] array = new int[0][];
+    private Dictionary<int, int> used = new Dictionary<int, int>();
+    private Dictionary<int, int> unused = new Dictionary<int, int>(); // Noncompliant
+
+    public int GetValue(int x, int y) => array[x][y];
+
+    public int GetItem(int i) => used[i];
+
+    private Dictionary<int, int> GetDictionary() => null;
+
+    public int GetDictionaryItem(int i) => GetDictionary()[i];
+
+    private event EventHandler<EventArgs> MyOtherEvent //Noncompliant {{Remove the unused private event 'MyOtherEvent'.}}
+    {
+        add { }
+        remove { }
+    }
+
+    private event EventHandler<EventArgs> MyUsedEvent
+    {
+        add { }
+        remove { }
+    }
+
+    private int MyProperty
+    {
+        get;
+        set;
+    }
+
+    [My]
+    private class Class1 { }
+
+    private class Class2
+    {
+        private Class2() // Compliant
+        {
+        }
+        private Class2(int i) // Noncompliant {{Remove the unused private constructor 'Class2'.}}
+        {
+            new Class2("").field2 = 3;
+        }
+        private Class2(string i)
+        {
+        }
+        public int field; // Noncompliant {{Remove the unused private field 'field'.}}
+        public int field2; // Noncompliant {{Remove this unread private class field 'field2' or refactor the code to use its value.}}
+    }
+
+    private interface MyInterface
+    {
+        void Method();
+    }
+    private class Class3 : MyInterface // Noncompliant {{Remove the unused private class 'Class3'.}}
+    {
+        public void Method() { var x = this[20]; }
+        public void Method1() { var x = Method2(); } // Noncompliant {{Remove the unused private method 'Method1'.}}
+        public static int Method2() { return 2; }
+
+        public int this[int index]
+        {
+            get { return 42; }
         }
     }
 
-    class NewClass3
+    internal class Class4 : MyInterface // Noncompliant {{Remove the unused internal class 'Class4'.}}
     {
-        static async Task Main(string[] args) // Compliant - valid main method since C# 7.1
+        public void Method() { }
+    }
+
+    public void MethodUsingLocalMethod()
+    {
+        void LocalMethod() // FN: local function is never used
         {
-            Console.WriteLine("Test");
+
         }
     }
+}
 
-    class NewClass4
+class NewClass1
+{
+    // See https://github.com/SonarSource/sonar-dotnet/issues/888
+    static async Task Main() // Compliant - valid main method since C# 7.1
     {
-        static async Task<int> Main(string[] args) // Compliant - valid main method since C# 7.1
-        {
-            Console.WriteLine("Test");
-
-            return 1;
-        }
+        Console.WriteLine("Test");
     }
+}
 
-    class NewClass5
+class NewClass2
+{
+    static async Task<int> Main() // Compliant - valid main method since C# 7.1
     {
-        static async Task<string> Main(string[] args) // Noncompliant
-        {
-            Console.WriteLine("Test");
+        Console.WriteLine("Test");
 
-            return "ok";
-        }
+        return 1;
     }
+}
 
-    public static class MyExtension
+class NewClass3
+{
+    static async Task Main(string[] args) // Compliant - valid main method since C# 7.1
     {
-        private static void MyMethod<T>(this T self) { "".MyMethod<string>(); }
+        Console.WriteLine("Test");
     }
+}
 
-    public class NonExactMatch
+class NewClass4
+{
+    static async Task<int> Main(string[] args) // Compliant - valid main method since C# 7.1
     {
-        private static void M(int i) { }    // Compliant, might be called
-        private static void M(string i) { } // Compliant, might be called
+        Console.WriteLine("Test");
 
-        public static void Call(dynamic d)
-        {
-            M(d);
-        }
+        return 1;
     }
+}
 
-    public class EventHandlerSample
+class NewClass5
+{
+    static async Task<string> Main(string[] args) // Noncompliant
     {
-        private void MyOnClick(object sender, EventArgs args) { } // Noncompliant
+        Console.WriteLine("Test");
+
+        return "ok";
     }
+}
 
-    public partial class EventHandlerSample1
+public static class MyExtension
+{
+    private static void MyMethod<T>(this T self) { "".MyMethod<string>(); }
+}
+
+public class NonExactMatch
+{
+    private static void M(int i) { }    // Compliant, might be called
+    private static void M(string i) { } // Compliant, might be called
+
+    public static void Call(dynamic d)
     {
-        private void MyOnClick(object sender, EventArgs args) { } // Compliant, event handlers in partial classes are not reported
+        M(d);
     }
+}
 
-    public class PropertyAccess
+public class EventHandlerSample
+{
+    private void MyOnClick(object sender, EventArgs args) { } // Noncompliant
+}
+
+public partial class EventHandlerSample1
+{
+    private void MyOnClick(object sender, EventArgs args) { } // Compliant, event handlers in partial classes are not reported
+}
+
+public class PropertyAccess
+{
+    private int OnlyRead { get; set; }                                              // Noncompliant {{Remove the unused private set accessor in property 'OnlyRead'.}}
+//                              ^^^
+    private int OnlySet { get; set; }
+    private int OnlySet2 { get { return 42; } set { } }                             // Noncompliant {{Remove the unused private get accessor in property 'OnlySet2'.}}
+//                         ^^^
+    private int NotAccessed { get; set; }                                           // Noncompliant {{Remove the unused private property 'NotAccessed'.}}
+//              ^^^^^^^^^^^
+    public int PrivateGetter { private get; set; }                                  // FN - unused private getter
+    public int PrivateSetter { get; private set; }                                  // FN - unused private setter
+
+    private int ExpressionBodiedProperty => 1;                                      // Noncompliant {{Remove the unused private property 'ExpressionBodiedProperty'.}}
+//              ^^^^^^^^^^^^^^^^^^^^^^^^
+    private int ExpressionBodiedProperty2 { get => 1; }                             // Noncompliant
+    private int ExpressionBodiedProperty3 { set => _ = value; }                     // Noncompliant
+    private int ExpressionBodiedProperty4 { get => 1; set => _ = value; }           // Noncompliant
+    private int ExpressionBodiedProperty5 { get => 1; set => _ = value; }           // Noncompliant
+//                                          ^^^
+    private int ExpressionBodiedProperty6 { get => 1; set => _ = value; }           // Noncompliant
+//                                                    ^^^
+    public int ExpressionBodiedProperty7 { private get => 1; set => _ = value; }    // FN - unused private getter
+    public int ExpressionBodiedProperty8 { get => 1; private set => _ = value; }    // FN - unused private setter
+
+    private int BothAccessed { get; set; }
+
+    private int OnlyGet { get { return 42; } }
+
+    public void M()
     {
-        private int OnlyRead { get; set; }                                              // Noncompliant {{Remove the unused private set accessor in property 'OnlyRead'.}}
-//                                  ^^^
-        private int OnlySet { get; set; }
-        private int OnlySet2 { get { return 42; } set { } }                             // Noncompliant {{Remove the unused private get accessor in property 'OnlySet2'.}}
-//                             ^^^
-        private int NotAccessed { get; set; }                                           // Noncompliant {{Remove the unused private property 'NotAccessed'.}}
-//                  ^^^^^^^^^^^
-        public int PrivateGetter { private get; set; }                                  // FN - unused private getter
-        public int PrivateSetter { get; private set; }                                  // FN - unused private setter
+        Console.WriteLine(OnlyRead);
+        OnlySet = 42;
+        (this.OnlySet2) = 42;
 
-        private int ExpressionBodiedProperty => 1;                                      // Noncompliant {{Remove the unused private property 'ExpressionBodiedProperty'.}}
-//                  ^^^^^^^^^^^^^^^^^^^^^^^^
-        private int ExpressionBodiedProperty2 { get => 1; }                             // Noncompliant
-        private int ExpressionBodiedProperty3 { set => _ = value; }                     // Noncompliant
-        private int ExpressionBodiedProperty4 { get => 1; set => _ = value; }           // Noncompliant
-        private int ExpressionBodiedProperty5 { get => 1; set => _ = value; }           // Noncompliant
+        BothAccessed++;
+
+        int? x = 10;
+        x = this?.OnlyGet;
+
+        ExpressionBodiedProperty5 = 0;
+        Console.WriteLine(ExpressionBodiedProperty6);
+    }
+}
+
+public class Indexer1
+{
+    private int this[int i] => 1;                                       // Noncompliant
+//              ^^^^
+}
+
+public class Indexer2
+{
+    private int this[int i] { get => 1; }                               // Noncompliant
+}
+
+public class Indexer3
+{
+    private int this[int i] { set => _ = value; }                       // Noncompliant
+}
+
+public class Indexer4
+{
+    private int this[int i] { get { return 1; } set { _ = value; } }    // Noncompliant
+//              ^^^^
+}
+
+public class Indexer5
+{
+    private int this[int i] { get { return 1; } set { _ = value; } }    // Noncompliant
 //                                              ^^^
-        private int ExpressionBodiedProperty6 { get => 1; set => _ = value; }           // Noncompliant
-//                                                        ^^^
-        public int ExpressionBodiedProperty7 { private get => 1; set => _ = value; }    // FN - unused private getter
-        public int ExpressionBodiedProperty8 { get => 1; private set => _ = value; }    // FN - unused private setter
 
-        private int BothAccessed { get; set; }
-
-        private int OnlyGet { get { return 42; } }
-
-        public void M()
-        {
-            Console.WriteLine(OnlyRead);
-            OnlySet = 42;
-            (this.OnlySet2) = 42;
-
-            BothAccessed++;
-
-            int? x = 10;
-            x = this?.OnlyGet;
-
-            ExpressionBodiedProperty5 = 0;
-            Console.WriteLine(ExpressionBodiedProperty6);
-        }
-    }
-
-    public class Indexer1
+    public void Method()
     {
-        private int this[int i] => 1;                                       // Noncompliant
-//                  ^^^^
+        Console.WriteLine(this[0]);
     }
+}
 
-    public class Indexer2
+public class Indexer6
+{
+    private int this[int i] { get { return 1; } set { _ = value; } }    // Noncompliant
+//                            ^^^
+
+    public void Method()
     {
-        private int this[int i] { get => 1; }                               // Noncompliant
+        this[0] = 42;
     }
+}
 
-    public class Indexer3
+[Serializable]
+public sealed class GoodException : Exception
+{
+    public GoodException()
     {
-        private int this[int i] { set => _ = value; }                       // Noncompliant
     }
-
-    public class Indexer4
+    public GoodException(string message)
+        : base(message)
     {
-        private int this[int i] { get { return 1; } set { _ = value; } }    // Noncompliant
-//                  ^^^^
     }
-
-    public class Indexer5
+    public GoodException(string message, Exception innerException)
+        : base(message, innerException)
     {
-        private int this[int i] { get { return 1; } set { _ = value; } }    // Noncompliant
-//                                                  ^^^
-
-        public void Method()
-        {
-            Console.WriteLine(this[0]);
-        }
     }
-
-    public class Indexer6
+    private GoodException(SerializationInfo info, StreamingContext context) // Compliant because of the serialization
+        : base(info, context)
     {
-        private int this[int i] { get { return 1; } set { _ = value; } }    // Noncompliant
-//                                ^^^
-
-        public void Method()
-        {
-            this[0] = 42;
-        }
     }
+}
 
-    [Serializable]
-    public sealed class GoodException : Exception
+public class FieldAccess
+{
+    private object field1;
+    private object field2; // Noncompliant {{Remove this unread private field 'field2' or refactor the code to use its value.}}
+    private object field3;
+
+    public FieldAccess()
     {
-        public GoodException()
-        {
-        }
-        public GoodException(string message)
-            : base(message)
-        {
-        }
-        public GoodException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
-        private GoodException(SerializationInfo info, StreamingContext context) // Compliant because of the serialization
-            : base(info, context)
-        {
-        }
+        this.field2 = field3 ?? this.field1?.ToString();
     }
+}
 
-    public class FieldAccess
+// As S4487 will raise when a private field is written and not read, S1450 won't raise on these cases
+// These tests where finding issues before with S1450 and should find them with S4487 now
+public class TestsFormerS1450
+{
+    private int F1 = 0; // Noncompliant {{Remove this unread private field 'F1' or refactor the code to use its value.}}
+
+    public void M1()
     {
-        private object field1;
-        private object field2; // Noncompliant {{Remove this unread private field 'field2' or refactor the code to use its value.}}
-        private object field3;
-
-        public FieldAccess()
-        {
-            this.field2 = field3 ?? this.field1?.ToString();
-        }
+        ((F1)) = 42;
     }
 
-    // As S4487 will raise when a private field is written and not read, S1450 won't raise on these cases
-    // These tests where finding issues before with S1450 and should find them with S4487 now
-    public class TestsFormerS1450
+    private int F5 = 0; // Noncompliant {{Remove this unread private field 'F5' or refactor the code to use its value.}}
+    private int F6; // Noncompliant {{Remove this unread private field 'F6' or refactor the code to use its value.}}
+    public void M2()
     {
-        private int F1 = 0; // Noncompliant {{Remove this unread private field 'F1' or refactor the code to use its value.}}
-
-        public void M1()
-        {
-            ((F1)) = 42;
-        }
-
-        private int F5 = 0; // Noncompliant {{Remove this unread private field 'F5' or refactor the code to use its value.}}
-        private int F6; // Noncompliant {{Remove this unread private field 'F6' or refactor the code to use its value.}}
-        public void M2()
-        {
-            F5 = 42;
-            F6 = 42;
-        }
-
-        private int F14 = 0; // Noncompliant {{Remove this unread private field 'F14' or refactor the code to use its value.}}
-        public void M6(int F14)
-        {
-            this.F14 = 42;
-        }
-        private int F28 = 42; // Noncompliant {{Remove this unread private field 'F28' or refactor the code to use its value.}}
-        public event EventHandler E1
-        {
-            add
-            {
-                F28 = 42;
-            }
-            remove
-            {
-            }
-        }
-
-        private int F36; // Noncompliant {{Remove this unread private field 'F36' or refactor the code to use its value.}}
-        public void M15(int i) => F36 = i + 1;
+        F5 = 42;
+        F6 = 42;
     }
 
-    public class OutAndRef
+    private int F14 = 0; // Noncompliant {{Remove this unread private field 'F14' or refactor the code to use its value.}}
+    public void M6(int F14)
     {
-        private int F37; // Noncompliant {{Remove this unread private field 'F37' or refactor the code to use its value.}}
-        public void M37() => int.TryParse("1", out F37);
-
-        private int F38;
-        public void M38() => Modify(ref F38);
-
-        public void Modify(ref int x) => x = 37;
-
-        private int F39; // Noncompliant {{Remove the unused private field 'F39'.}}
-        public void M39()
-        {
-            int.TryParse("1", out var x);
-            int.TryParse("1", out var F39);
-        }
+        this.F14 = 42;
     }
-
-    public interface IPublicInterface { }
-    [Serializable]
-    public sealed class PublicClass : IPublicInterface
+    private int F28 = 42; // Noncompliant {{Remove this unread private field 'F28' or refactor the code to use its value.}}
+    public event EventHandler E1
     {
-        public static readonly PublicClass Instance = new PublicClass();
-
-        private PublicClass()
+        add
+        {
+            F28 = 42;
+        }
+        remove
         {
         }
     }
+
+    private int F36; // Noncompliant {{Remove this unread private field 'F36' or refactor the code to use its value.}}
+    public void M15(int i) => F36 = i + 1;
+}
+
+public class OutAndRef
+{
+    private int F37; // Noncompliant {{Remove this unread private field 'F37' or refactor the code to use its value.}}
+    public void M37() => int.TryParse("1", out F37);
+
+    private int F38;
+    public void M38() => Modify(ref F38);
+
+    public void Modify(ref int x) => x = 37;
+
+    private int F39; // Noncompliant {{Remove the unused private field 'F39'.}}
+    public void M39()
+    {
+        int.TryParse("1", out var x);
+        int.TryParse("1", out var F39);
+    }
+}
+
+public interface IPublicInterface { }
+[Serializable]
+public sealed class PublicClass : IPublicInterface
+{
+    public static readonly PublicClass Instance = new PublicClass();
+
+    private PublicClass()
+    {
+    }
+}
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8348
+class Repro_8348
+{
+    [MyAttribute] void PrivateMethodWithAttribute() { } // FN: due to the attribute
 }
