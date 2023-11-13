@@ -1,4 +1,8 @@
-﻿namespace BlazorSample.Pages.S6802;
+﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Rendering;
+using Microsoft.AspNetCore.Components.Web;
+
+namespace BlazorSample.Pages.S6802;
 
 public class LambdaInLoopInMethod
 {
@@ -15,7 +19,7 @@ public class LambdaComponent : ComponentBase
 {
     private List<Button> Buttons { get; } = new();
 
-    private class Button
+    private sealed class Button
     {
         public string? Id { get; } = Guid.NewGuid().ToString();
         public Action<MouseEventArgs> Action { get; set; } = e => { };
@@ -26,7 +30,7 @@ public class LambdaComponent : ComponentBase
         foreach (var button in Buttons)
         {
             builder.OpenElement(12, "button");
-            builder.AddMultipleAttributes(13, new Dictionary<string, object>()
+            builder.AddMultipleAttributes(13, new Dictionary<string, object>
             {
                 { "onclick", (MouseEventArgs e) => button.Action(e) }
             });
