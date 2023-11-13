@@ -19,6 +19,8 @@
  */
 package com.sonar.it.csharp;
 
+import com.sonar.it.shared.TestUtils;
+import com.sonar.orchestrator.build.ScannerForMSBuild;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -81,15 +83,16 @@ public class RazorClassLibProjectTest {
 
   @Test
   void issuesS6802AreRaised() {
-    List<Issues.Issue> s6800Issues = Tests.getIssues(PROJECT)
+    List<Issues.Issue> s6802Issues = Tests.getIssues(PROJECT)
       .stream()
       .filter(x -> x.getRule().startsWith(SONAR_RULE_S6802))
       .collect(Collectors.toList());
-    List<String> files = s6800Issues.stream().map(Issues.Issue::getComponent).collect(Collectors.toList());
+    List<String> files = s6802Issues.stream().map(Issues.Issue::getComponent).collect(Collectors.toList());
 
-    assertThat(s6800Issues).hasSize(4);
-    assertThat(files).contains(S6802_COMPONENT_RAZOR_FILE);
-    assertThat(files).doesNotContain(S6802_COMPONENT_CS_FILE);
+    assertThat(s6802Issues).hasSize(4);
+    assertThat(files)
+      .contains(S6802_COMPONENT_RAZOR_FILE)
+      .doesNotContain(S6802_COMPONENT_CS_FILE);
   }
 
   @Test
