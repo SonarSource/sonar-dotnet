@@ -41,7 +41,7 @@ public class RazorClassLibProjectTest {
   private static final String PROJECT = "RazorClassLib";
   private static final String RAZOR_COMPONENT_CLASS_FILE = "RazorClassLib:Component.razor";
   private static final String S6798_FOLDER = "RazorClassLib:S6798";
-  private static final String S6800_FOLDER = "RazorClassLib:S6798";
+  private static final String S6800_FOLDER = "RazorClassLib:S6800";
 
   @BeforeAll
   public static void beforeAll() throws Exception {
