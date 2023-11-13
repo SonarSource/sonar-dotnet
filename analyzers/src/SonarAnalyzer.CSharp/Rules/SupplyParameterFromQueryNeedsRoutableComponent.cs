@@ -21,7 +21,7 @@
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class SupplyParameterFromQueryNeedRoutableComponent : SonarDiagnosticAnalyzer
+public sealed class SupplyParameterFromQueryNeedsRoutableComponent : SonarDiagnosticAnalyzer
 {
     private const string DiagnosticId = "S6803";
     private const string MessageFormat = "Component parameters can only receive query parameter values in routable components.";
@@ -31,34 +31,29 @@ public sealed class SupplyParameterFromQueryNeedRoutableComponent : SonarDiagnos
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
     protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterCompilationStartAction(cs =>
+        context.RegisterCompilationStartAction(c =>
         {
-            if (cs.Compilation.GetTypeByMetadataName(KnownType.Microsoft_AspNetCore_Components_RouteAttribute) is null)
+            if (c.Compilation.GetTypeByMetadataName(KnownType.Microsoft_AspNetCore_Components_RouteAttribute) is not null)
             {
-                return;
+                RegisterSymbolAction(context);
             }
-            context.RegisterSymbolAction(c =>
-            {
-                var property = (IPropertySymbol)c.Symbol;
-                if (HasComponentParameterAttributes(property))
-                {
-                    if (!property.ContainingType.HasAttribute(KnownType.Microsoft_AspNetCore_Components_RouteAttribute))
-                    {
-                        foreach (var location in property.Locations)
-                        {
-                            c.ReportIssue(Diagnostic.Create(Rule, location));
-                        }
-                    }
-                    else
-                    {
-                        // TODO: checks for supported types and raise S6797
-                    }
-                }
-            },
-            SymbolKind.Property);
         });
 
-    private static bool HasComponentParameterAttributes(IPropertySymbol property) =>
-        property.HasAttribute(KnownType.Microsoft_AspNetCore_Components_SupplyParameterFromQueryAttribute)
-        && property.HasAttribute(KnownType.Microsoft_AspNetCore_Components_ParameterAttribute);
+    private void RegisterSymbolAction(SonarAnalysisContext context) =>
+        context.RegisterSymbolAction(c =>
+        {
+            var property = (IPropertySymbol)c.Symbol;
+            if (property.HasAttribute(KnownType.Microsoft_AspNetCore_Components_SupplyParameterFromQueryAttribute)
+                && property.HasAttribute(KnownType.Microsoft_AspNetCore_Components_ParameterAttribute))
+            {
+                if (!property.ContainingType.HasAttribute(KnownType.Microsoft_AspNetCore_Components_RouteAttribute))
+                {
+                    foreach (var location in property.Locations)
+                    {
+                        c.ReportIssue(Diagnostic.Create(Rule, location));
+                    }
+                }
+            }
+        },
+        SymbolKind.Property);
 }

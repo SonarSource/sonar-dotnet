@@ -25,29 +25,29 @@ using SonarAnalyzer.Rules.CSharp;
 namespace SonarAnalyzer.UnitTest.Rules;
 
 [TestClass]
-public class SupplyParameterFromQueryNeedRoutableComponentTest
+public class SupplyParameterFromQueryNeedsRoutableComponentTest
 {
-    private readonly VerifierBuilder builder = new VerifierBuilder<SupplyParameterFromQueryNeedRoutableComponent>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<SupplyParameterFromQueryNeedsRoutableComponent>();
     public TestContext TestContext { get; set; }
 
     [TestMethod]
-    public void SupplyParameterFromQueryNeedRoutableComponent_Razor() =>
-        builder.AddPaths("SupplyParameterFromQueryNeedRoutableComponent_Compliant.razor",
-                         "SupplyParameterFromQueryNeedRoutableComponent_Noncompliant.razor")
+    public void SupplyParameterFromQueryNeedsRoutableComponent_Razor() =>
+        builder.AddPaths("SupplyParameterFromQueryNeedsRoutableComponent_Compliant.razor",
+                         "SupplyParameterFromQueryNeedsRoutableComponent_Noncompliant.razor")
                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                .Verify();
 
     [TestMethod]
-    public void SupplyParameterFromQueryNeedRoutableComponent_Partial() =>
-        builder.AddPaths("SupplyParameterFromQueryNeedRoutableComponent_Partial.cs",
-                         "SupplyParameterFromQueryNeedRoutableComponent_Partial.razor")
+    public void SupplyParameterFromQueryNeedsRoutableComponent_Partial() =>
+        builder.AddPaths("SupplyParameterFromQueryNeedsRoutableComponent_Partial.cs",
+                         "SupplyParameterFromQueryNeedsRoutableComponent_Partial.razor")
                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                .Verify();
 
     [TestMethod]
-    public void SupplyParameterFromQueryNeedRoutableComponent_CS() =>
-        builder.AddPaths("SupplyParameterFromQueryNeedRoutableComponent_Compliant.cs",
-                         "SupplyParameterFromQueryNeedRoutableComponent_Noncompliant.cs")
+    public void SupplyParameterFromQueryNeedsRoutableComponent_CS() =>
+        builder.AddPaths("SupplyParameterFromQueryNeedsRoutableComponent_Compliant.cs",
+                         "SupplyParameterFromQueryNeedsRoutableComponent_Noncompliant.cs")
                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreComponents("7.0.13"))
                .Verify();

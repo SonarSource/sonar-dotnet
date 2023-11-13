@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System;
 
-public class SupplyParameterFromQueryNeedRoutableComponent_Noncompliant : ComponentBase
+class SupplyParameterFromQueryNeedsRoutableComponent_Noncompliant : ComponentBase
 {
     [Parameter]
     [SupplyParameterFromQuery]
