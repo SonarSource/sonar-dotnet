@@ -37,60 +37,59 @@ public sealed class DeclareParameterBeforeUsage : SonarDiagnosticAnalyzer
 
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterCompilationStartAction(cs =>
+        {
+            if (cs.Compilation.GetTypeByMetadataName(KnownType.Microsoft_AspNetCore_Components_IComponent) is not null)
             {
-                // If we are not in a Blazor project, we don't need to register for the node
-                if (cs.Compilation.GetTypeByMetadataName(KnownType.Microsoft_AspNetCore_Components_ParameterAttribute) is null)
-                {
-                    return;
-                }
+                cs.RegisterNodeAction(CheckMethodDeclarationSyntax, SyntaxKind.MethodDeclaration);
+            }
+        });
 
-                cs.RegisterNodeAction(c =>
-                {
-                    var method = (MethodDeclarationSyntax)c.Node;
-                    if (!IsBuildRenderTreeMethod(method))
-                    {
-                        return;
-                    }
+    private static void CheckMethodDeclarationSyntax(SonarSyntaxNodeReportingContext context)
+    {
+        var method = (MethodDeclarationSyntax)context.Node;
+        if (!IsBuildRenderTreeMethod(method))
+        {
+            return;
+        }
 
-                    ITypeSymbol currentComponent = null;
-                    Dictionary<string, ComponentDescriptor> descriptors = new();
-                    foreach (var invocation in method.DescendantNodes().OfType<InvocationExpressionSyntax>())
-                    {
-                        var targetMethod = c.SemanticModel.GetOperation(invocation).AsInvocation().Value.TargetMethod;
-                        if (targetMethod.Name.Equals("OpenComponent")
-                            && targetMethod.TypeArguments is { Length: 1 } arguments
-                            && arguments[0].BaseType.Is(KnownType.Microsoft_AspNetCore_Components_ComponentBase))
-                        {
-                            currentComponent = targetMethod.TypeArguments[0];
-                        }
-                        else if (currentComponent != null
-                            && targetMethod.Name.Equals("AddAttribute")
-                            && targetMethod.Parameters is { Length: >= MinAddAttributeParameters } parameters
-                            && parameters[1].Type.Is(KnownType.System_String)
-                            && invocation.ArgumentList.Arguments[1].Expression.StringValue(c.SemanticModel) is { } parameterName
-                            && GetComponentDescriptor(currentComponent, descriptors) is var descriptor
-                            && !descriptor.HasMatchUnmatchedParameters
-                            && !descriptor.Parameters.Contains(parameterName))
-                        {
-                            var location = c.Tree.FilePath.EndsWith("razor.g.cs", StringComparison.OrdinalIgnoreCase)
-                                ? null // The diagnostic is reported at the beginning of the file because the attribute location cannot be mapped back.
-                                : invocation.GetLocation();
-                            c.ReportIssue(Diagnostic.Create(Rule, location, parameterName, currentComponent.Name));
-                        }
-                        else if (targetMethod.Name.Equals("CloseComponent"))
-                        {
-                            currentComponent = null;
-                        }
-                    }
-                }, SyntaxKind.MethodDeclaration);
-            });
+        ITypeSymbol currentComponent = null;
+        Dictionary<string, ComponentDescriptor> descriptors = new();
+        foreach (var invocation in method.DescendantNodes().OfType<InvocationExpressionSyntax>())
+        {
+            var targetMethod = context.SemanticModel.GetOperation(invocation).AsInvocation().Value.TargetMethod;
+            if (targetMethod.Name.Equals("OpenComponent")
+                && targetMethod.TypeArguments is { Length: 1 } arguments
+                && arguments[0].BaseType.Is(KnownType.Microsoft_AspNetCore_Components_ComponentBase))
+            {
+                currentComponent = targetMethod.TypeArguments[0];
+            }
+            else if (currentComponent != null
+                && targetMethod.Name.Equals("AddAttribute")
+                && targetMethod.Parameters is { Length: >= MinAddAttributeParameters } parameters
+                && parameters[1].Type.Is(KnownType.System_String)
+                && invocation.ArgumentList.Arguments[1].Expression.StringValue(context.SemanticModel) is { } parameterName
+                && GetComponentDescriptor(currentComponent, descriptors) is var descriptor
+                && !descriptor.HasMatchUnmatchedParameters
+                && !descriptor.Parameters.Contains(parameterName))
+            {
+                var location = context.Tree.FilePath.EndsWith("razor.g.cs", StringComparison.OrdinalIgnoreCase)
+                    ? null // The diagnostic is reported at the beginning of the file because the attribute location cannot be mapped back.
+                    : invocation.GetLocation();
+                context.ReportIssue(Diagnostic.Create(Rule, location, parameterName, currentComponent.Name));
+            }
+            else if (targetMethod.Name.Equals("CloseComponent"))
+            {
+                currentComponent = null;
+            }
+        }
+    }
 
     private static bool IsBuildRenderTreeMethod(MethodDeclarationSyntax method) =>
         method.NameIs("BuildRenderTree")
         && method.ParameterList.Parameters.Count == 1
         && method.Modifiers.Any(SyntaxKind.OverrideKeyword);
 
-    private ComponentDescriptor GetComponentDescriptor(ITypeSymbol typeSymbol, Dictionary<string, ComponentDescriptor> descriptors)
+    private static ComponentDescriptor GetComponentDescriptor(ITypeSymbol typeSymbol, Dictionary<string, ComponentDescriptor> descriptors)
     {
         if (!descriptors.TryGetValue(typeSymbol.ToDisplayString(), out var descriptor))
         {
@@ -101,7 +100,7 @@ public sealed class DeclareParameterBeforeUsage : SonarDiagnosticAnalyzer
         return descriptor;
     }
 
-    private ComponentDescriptor GetComponentDescriptor(ITypeSymbol typeSymbol)
+    private static ComponentDescriptor GetComponentDescriptor(ITypeSymbol typeSymbol)
     {
         var componentDescriptor = new ComponentDescriptor();
         var currentSymbol = typeSymbol as INamedTypeSymbol;

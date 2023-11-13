@@ -3,6 +3,7 @@
 @* Noncompliant@-2 {{'BOOLParam' parameter should be declared on component 'DeclareParameterBeforeUsage_PrintUnmatchedFalse' before usage.}}*@
 @* Noncompliant@-3 {{'SecondMessage' parameter should be declared on component 'DeclareParameterBeforeUsageComponent' before usage.}}*@
 @* Noncompliant@-4 {{'Message' parameter should be declared on component 'DeclareParameterBeforeUsage_PrintUnmatchedFalseConstant' before usage.}}*@
+@* Noncompliant@-5 {{'Fragment' parameter should be declared on component 'DeclareParameterBeforeUsage_PrintUnmatchedFalse' before usage.}}*@
 
 @using Microsoft.AspNetCore.Components.Rendering 
 
@@ -24,6 +25,10 @@
     <DeclareParameterBeforeUsage_PrintUnmatchedFalse Something="0"/> @* here *@
     <DeclareParameterBeforeUsage_PrintUnmatchedFalse BOOLParam="true"/> @* here *@
 </div>
+
+<RenderFragmentTest>
+    <DeclareParameterBeforeUsage_PrintUnmatchedFalse Fragment="0"/> @* here *@
+</RenderFragmentTest>
 
 @code {
     public bool MyMethod() => true;
