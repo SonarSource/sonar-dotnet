@@ -94,10 +94,12 @@ public class ParameterTypeShouldMatchRouteTypeConstraint_Constant : ComponentBas
 {
     [Parameter]
     public DateTime NoncompliantFromConstant { get; set; } // Noncompliant [constant]
+    //     ^^^^^^^^
     [Parameter]
     public bool CompliantFromConstant { get; set; } // Compliant
     [Parameter]
     public bool UseTemplateParam { get; set; } // Noncompliant [template-int]
+    //     ^^^^
     [Parameter]
     public bool ParenthesisParam { get; set; } // Noncompliant [parenthesis-int]
     [Parameter]
