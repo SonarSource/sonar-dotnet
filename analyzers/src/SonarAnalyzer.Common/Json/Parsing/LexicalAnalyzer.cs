@@ -306,7 +306,7 @@ namespace SonarAnalyzer.Json.Parsing
             {
                 var baseValue = @decimal == null
                     ? (object)double.Parse(integral.ToString(), CultureInfo.InvariantCulture)
-                    : decimal.Parse(integral + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator + @decimal, CultureInfo.InvariantCulture);
+                    : decimal.Parse(integral + CultureInfo.InvariantCulture.NumberFormat.NumberDecimalSeparator + @decimal, CultureInfo.InvariantCulture);
 
                 if (exponent == null)   // Integer or Decimal
                 {
