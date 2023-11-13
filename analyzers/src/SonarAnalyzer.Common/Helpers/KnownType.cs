@@ -108,6 +108,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Microsoft_Extensions_Logging_LoggerExtensions = new("Microsoft.Extensions.Logging.LoggerExtensions");
         public static readonly KnownType Microsoft_Extensions_Primitives_StringValues = new("Microsoft.Extensions.Primitives.StringValues");
         public static readonly KnownType Microsoft_Net_Http_Headers_HeaderNames = new("Microsoft.Net.Http.Headers.HeaderNames");
+        public static readonly KnownType Microsoft_JSInterop_JSInvokable = new("Microsoft.JSInterop.JSInvokableAttribute");
         public static readonly KnownType Microsoft_VisualBasic_Information = new("Microsoft.VisualBasic.Information");
         public static readonly KnownType Microsoft_VisualBasic_Interaction = new("Microsoft.VisualBasic.Interaction");
         public static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_Assert = new("Microsoft.VisualStudio.TestTools.UnitTesting.Assert");

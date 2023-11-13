@@ -31,14 +31,21 @@ public sealed class JSInvokableMethodsShouldBePublic : SonarDiagnosticAnalyzer
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
     protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(c =>
+        context.RegisterCompilationStartAction(c =>
+        {
+            if (c.Compilation.GetTypeByMetadataName(KnownType.Microsoft_JSInterop_JSInvokable) is not null)
             {
-                var method = (MethodDeclarationSyntax)c.Node;
-                if (method.AttributeLists.SelectMany(x => x.Attributes).Any(x => x.NameIs("JSInvokable", "JSInvokableAttribute"))
-                    && !method.Modifiers.AnyOfKind(SyntaxKind.PublicKeyword))
-                {
-                    c.ReportIssue(Diagnostic.Create(Rule, method.Identifier.GetLocation()));
-                }
-            },
-            SyntaxKind.MethodDeclaration);
+                context.RegisterNodeAction(CheckMethod, SyntaxKind.MethodDeclaration);
+            }
+        });
+
+    private static void CheckMethod(SonarSyntaxNodeReportingContext context)
+    {
+        var method = (MethodDeclarationSyntax)context.Node;
+        if (!method.Modifiers.AnyOfKind(SyntaxKind.PublicKeyword)
+            && method.AttributeLists.SelectMany(x => x.Attributes).Any(x => x.IsKnownType(KnownType.Microsoft_JSInterop_JSInvokable, context.SemanticModel)))
+        {
+            context.ReportIssue(Diagnostic.Create(Rule, method.Identifier.GetLocation()));
+        }
+    }
 }
