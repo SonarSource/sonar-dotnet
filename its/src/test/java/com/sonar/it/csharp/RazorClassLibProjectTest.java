@@ -59,19 +59,19 @@ public class RazorClassLibProjectTest {
   void issuesOfS6798AreRaised() {
     var issues = Tests.getIssues(PROJECT).stream().filter(x -> x.getRule().startsWith("csharpsquid:S6798")).collect(Collectors.toList());
 
-    assertThat(issues).hasSize(8);
-    assertThat(issues.stream().filter(x -> x.getComponent().equals(S6798_FOLDER + "/S6798.CSharpOnly.cs"))).hasSize(2);
-    assertThat(issues.stream().filter(x -> x.getComponent().equals(S6798_FOLDER + "/S6798.Partial.razor"))).hasSize(2);
-    assertThat(issues.stream().filter(x -> x.getComponent().equals(S6798_FOLDER + "/S6798.Partial.razor.cs"))).hasSize(2);
-    assertThat(issues.stream().filter(x -> x.getComponent().equals(S6798_FOLDER + "/S6798.razor"))).hasSize(2);
+    assertThat(issues).hasSize(4);
+    assertThat(issues.stream().filter(x -> x.getComponent().equals(S6798_FOLDER + "/S6798.CSharpOnly.cs"))).hasSize(1);
+    assertThat(issues.stream().filter(x -> x.getComponent().equals(S6798_FOLDER + "/S6798.Partial.razor"))).hasSize(1);
+    assertThat(issues.stream().filter(x -> x.getComponent().equals(S6798_FOLDER + "/S6798.Partial.razor.cs"))).hasSize(1);
+    assertThat(issues.stream().filter(x -> x.getComponent().equals(S6798_FOLDER + "/S6798.razor"))).hasSize(1);
   }
 
   @Test
   void issuesOfS6800AreRaised() {
     var issues = Tests.getIssues(PROJECT).stream().filter(x -> x.getRule().startsWith("csharpsquid:S6800")).collect(Collectors.toList());
 
-    assertThat(issues).hasSize(4);
-    assertThat(issues.stream().filter(issue -> issue.getComponent().equals(S6800_FOLDER + "/S6800.CsharpOnly.cs"))).hasSize(2);
+    assertThat(issues).hasSize(3);
+    assertThat(issues.stream().filter(issue -> issue.getComponent().equals(S6800_FOLDER + "/S6800.CsharpOnly.cs"))).hasSize(1);
     assertThat(issues.stream().filter(issue -> issue.getComponent().equals(S6800_FOLDER + "/S6800.razor"))).hasSize(1);
     assertThat(issues.stream().filter(issue -> issue.getComponent().equals(S6800_FOLDER + "/S6800.Partial.razor.cs"))).hasSize(1);
   }

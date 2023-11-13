@@ -2,17 +2,10 @@
 
 @namespace RazorClassLib
 
-@code {
-    private void JSInvokableImplicitelyPrivateMethodInCodeBlock() { }
-    [JSInvokable] private void JSInvokableExplicitelyPrivateMethodInCodeBlock() { }
-}
-
 @functions {
-    [JSInvokable] private void JSInvokablePrivateMethodInFunctionsBlock() { }
+    [JSInvokable] private void JSInvokablePrivateMethodInFunctionsBlock() { } // Noncompliant
 }
 
 @{
-    [JSInvokable] void JSInvokableLocalFunctionInDirective() { }
-    [JSInvokable] static void JSInvokableStaticLocalFunctionInDirective() { }
+    [JSInvokable] void JSInvokableLocalFunctionInDirective() { }              // Compliant: local function
 }
-

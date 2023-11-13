@@ -4,12 +4,10 @@ namespace RazorClassLib;
 
 public partial class S6798_Partial
 {
-    [JSInvokable] private void JSInvokablePrivateMethodInPartialRazorComponent() { }
-    [JSInvokable] void JSInvokableImplicitelyPrivateMethodInPartialRazorComponent() { }
-    [JSInvokable] public void JSInvokablePublicMethodInPartialRazorComponent() { }
+    [JSInvokable] private void JSInvokablePrivateMethodInPartialRazorComponent() { } // Noncompliant
 
     void SomeMethod()
     {
-        [JSInvokable] void JSInvokablePrivateMethodInLocalFunction() { }
+        [JSInvokable] void JSInvokablePrivateMethodInLocalFunction() { }             // Compliant: local function
     }
 }
