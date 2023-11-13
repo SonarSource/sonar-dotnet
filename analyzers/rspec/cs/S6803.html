@@ -15,7 +15,7 @@ affect the behavior.</p>
 
 @code {
     [Parameter]
-    [SupplyParameterFromQuery]  @* Noncompliant *@
+    [SupplyParameterFromQuery]  // Noncompliant
     public bool Param { get; set; }
 }
 </pre>
@@ -27,7 +27,7 @@ affect the behavior.</p>
 
 @code {
     [Parameter]
-    [SupplyParameterFromQuery]  @* Compliant *@
+    [SupplyParameterFromQuery]  // Compliant
     public bool Param { get; set; }
 }
 </pre>
