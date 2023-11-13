@@ -4,15 +4,16 @@
 
 @code {
     [Parameter]
-    [SupplyParameterFromQuery] @* Compliant *@
+    [SupplyParameterFromQuery] // Compliant
     public bool Param { get; set; }
 
     [Parameter]
-    public string SupplyParameterFromQueryAttributeMissing { get; set; } @* Compliant: missing [SupplyParameterFromQuery] *@
+    public string SupplyParameterFromQueryAttributeMissing { get; set; } // Compliant: missing [SupplyParameterFromQuery]
 
     [SupplyParameterFromQuery]
-    public string ParameterAttributeMissing { get; set; } @* Compliant: missing [Parameter] *@    [Parameter]
+    public string ParameterAttributeMissing { get; set; } // Compliant: missing [Parameter]    
 
+    [Parameter]
     [SupplyParameterFromQuery]
     public bool BoolParam { get; set; } // Compliant
 
@@ -91,8 +92,7 @@
     public Nullable<TimeSpan> NullableTimeSpanLongForm { get; set; } // Noncompliant {{Query parameter type 'TimeSpan' is not supported.}}
     //     ^^^^^^^^^^^^^^^^^^
 
-    [Parameter]
-    [SupplyParameterFromQuery]
+    [Parameter, SupplyParameterFromQuery]
     public TimeSpan[] TimeSpanArrayLongForm { get; set; } // Noncompliant {{Query parameter type 'TimeSpan' is not supported.}}
     //     ^^^^^^^^^^
 }

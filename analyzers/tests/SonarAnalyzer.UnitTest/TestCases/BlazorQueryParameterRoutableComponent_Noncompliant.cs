@@ -1,12 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System;
 
-public class Nullable
-{
+public class Nullable { }
 
-}
-
-public class BlazorQueryParameterRoutableComponent_Noncompliant : ComponentBase
+class BlazorQueryParameterRoutableComponent_Noncompliant : ComponentBase
 {
     [Parameter]
     [SupplyParameterFromQuery]
@@ -15,5 +12,14 @@ public class BlazorQueryParameterRoutableComponent_Noncompliant : ComponentBase
 
     [Parameter]
     [SupplyParameterFromQuery]
-    public string MyString { get; set; } // Noncompliant    [Parameter]
+    public string MyString { get; set; } // Noncompliant
+}
+
+
+[Route("/my-route")]
+class BlazorQueryParameterRoutableComponent_Noncompliant_S6797 : ComponentBase
+{
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public Nullable Nullable { get; set; } // Noncompliant {{Query parameter type 'Nullable' is not supported.}}
 }

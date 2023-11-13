@@ -59,7 +59,8 @@ public sealed class BlazorQueryParameterRoutableComponent : SonarDiagnosticAnaly
     private static void CheckQueryProperties(SonarSymbolReportingContext c)
     {
         var property = (IPropertySymbol)c.Symbol;
-        if (HasComponentParameterAttributes(property))
+        if (property.HasAttribute(KnownType.Microsoft_AspNetCore_Components_SupplyParameterFromQueryAttribute)
+            && property.HasAttribute(KnownType.Microsoft_AspNetCore_Components_ParameterAttribute))
         {
             if (!property.ContainingType.HasAttribute(KnownType.Microsoft_AspNetCore_Components_RouteAttribute))
             {
@@ -70,18 +71,13 @@ public sealed class BlazorQueryParameterRoutableComponent : SonarDiagnosticAnaly
             }
             else if (IsPropertyTypeMismatch(property))
             {
-                foreach (var propertyType in property.DeclaringSyntaxReferences.Select(r => ((PropertyDeclarationSyntax)r.GetSyntax()).Type))
+                foreach (var propertyType in property.DeclaringSyntaxReferences.Select(x => ((PropertyDeclarationSyntax)x.GetSyntax()).Type))
                 {
                     c.ReportIssue(Diagnostic.Create(S6797Rule, propertyType.GetLocation(), GetTypeName(propertyType)));
                 }
             }
         }
     }
-
-    private static bool HasComponentParameterAttributes(IPropertySymbol property) =>
-        property.HasAttribute(KnownType.Microsoft_AspNetCore_Components_SupplyParameterFromQueryAttribute)
-        && property.HasAttribute(KnownType.Microsoft_AspNetCore_Components_ParameterAttribute);
-
 
     private static bool IsPropertyTypeMismatch(IPropertySymbol property) =>
         property.HasAttribute(KnownType.Microsoft_AspNetCore_Components_SupplyParameterFromQueryAttribute)

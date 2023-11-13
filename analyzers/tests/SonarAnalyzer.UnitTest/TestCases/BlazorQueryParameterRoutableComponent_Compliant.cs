@@ -2,7 +2,7 @@
 using System;
 
 [Route("/query-parameters")]
-public class BlazorQueryParameterRoutableComponent_Compliant : ComponentBase
+class BlazorQueryParameterRoutableComponent_Compliant : ComponentBase
 {
     [Parameter]
     [SupplyParameterFromQuery]

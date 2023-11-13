@@ -63,7 +63,7 @@ public class RazorClassLibProjectTest {
   }
 
   @Test
-  void issueS6797IsRaised() {
+  void issuesS6797AreRaised() {
     List<Issues.Issue> s6797Issues = Tests.getIssues(PROJECT)
       .stream()
       .filter(x -> x.getRule().startsWith(SONAR_RULE_S6797))
