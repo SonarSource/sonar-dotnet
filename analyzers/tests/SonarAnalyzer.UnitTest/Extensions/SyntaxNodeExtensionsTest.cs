@@ -25,6 +25,7 @@ using FluentAssertions.Extensions;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Operations;
 using Microsoft.CodeAnalysis.Text;
+using SonarAnalyzer.CFG.Roslyn;
 using StyleCop.Analyzers.Lightup;
 using static csharp::SonarAnalyzer.Extensions.SyntaxTokenExtensions;
 using ExtensionsCS = csharp::SonarAnalyzer.Extensions.SyntaxNodeExtensions;
@@ -183,10 +184,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
                     }
                 }
                 """;
-            var (tree, semanticModel) = TestHelper.CompileCS(code);
-            var node = tree.Single<SyntaxCS.MethodDeclarationSyntax>();
-
-            ExtensionsCS.CreateCfg(node, semanticModel, default).Should().NotBeNull();
+            VerifyCfgCS<SyntaxCS.MethodDeclarationSyntax>(code).Should().NotBeNull();
         }
 
         [TestMethod]
@@ -198,10 +196,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
                     public int Property => 42;
                 }
                 """;
-            var (tree, semanticModel) = TestHelper.CompileCS(code);
-            var node = tree.Single<SyntaxCS.PropertyDeclarationSyntax>();
-
-            ExtensionsCS.CreateCfg(node, semanticModel, default).Should().NotBeNull();
+            VerifyCfgCS<SyntaxCS.PropertyDeclarationSyntax>(code).Should().NotBeNull();
         }
 
         [TestMethod]
@@ -213,10 +208,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
                     public int Property {get; set;}
                 }
                 """;
-            var (tree, semanticModel) = TestHelper.CompileCS(code);
-            var node = tree.Single<SyntaxCS.PropertyDeclarationSyntax>();
-
-            ExtensionsCS.CreateCfg(node, semanticModel, default).Should().BeNull();
+            VerifyCfgCS<SyntaxCS.PropertyDeclarationSyntax>(code).Should().BeNull();
         }
 
         [TestMethod]
@@ -229,92 +221,78 @@ namespace SonarAnalyzer.UnitTest.Extensions
                     public string this[int index] => field = null;
                 }
                 """;
-            var (tree, semanticModel) = TestHelper.CompileCS(code);
-            var node = tree.Single<SyntaxCS.IndexerDeclarationSyntax>();
-
-            ExtensionsCS.CreateCfg(node, semanticModel, default).Should().NotBeNull();
+            VerifyCfgCS<SyntaxCS.IndexerDeclarationSyntax>(code).Should().NotBeNull();
         }
 
         [TestMethod]
         public void CreateCfg_MethodBlock_ReturnsCfg_VB()
         {
-            const string code = @"
-Public Class Sample
-    Public Sub Main()
-        Dim X As Integer = 42
-    End Sub
-End Class";
-            var (tree, semanticModel) = TestHelper.CompileVB(code);
-            var node = tree.Single<SyntaxVB.MethodBlockSyntax>();
-
-            ExtensionsVB.CreateCfg(node, semanticModel, default).Should().NotBeNull();
+            const string code = """
+                Public Class Sample
+                    Public Sub Main()
+                        Dim X As Integer = 42
+                    End Sub
+                End Class
+                """;
+            VerifyCfgVB<SyntaxVB.MethodBlockSyntax>(code).Should().NotBeNull();
         }
 
         [TestMethod]
         public void CreateCfg_AnyNode_ReturnsCfg_CS()
         {
-            const string code = @"
-public class Sample
-{
-    public void Main()
-    {
-        Main();
-    }
-}";
-            var (tree, semanticModel) = TestHelper.CompileCS(code);
-            var node = tree.Single<SyntaxCS.InvocationExpressionSyntax>();
-
-            ExtensionsCS.CreateCfg(node, semanticModel, default).Should().NotBeNull();
+            const string code = """
+                public class Sample
+                {
+                    public void Main()
+                    {
+                        Main();
+                    }
+                }
+                """;
+            VerifyCfgCS<SyntaxCS.InvocationExpressionSyntax>(code).Should().NotBeNull();
         }
 
         [TestMethod]
         public void CreateCfg_AnyNode_ReturnsCfg_VB()
         {
-            const string code = @"
-Public Class Sample
-    Public Sub Main()
-        Main()
-    End Sub
-End Class";
-            var (tree, semanticModel) = TestHelper.CompileVB(code);
-            var node = tree.Single<SyntaxVB.InvocationExpressionSyntax>();
-
-            ExtensionsVB.CreateCfg(node, semanticModel, default).Should().NotBeNull();
+            const string code = """
+                Public Class Sample
+                    Public Sub Main()
+                        Main()
+                    End Sub
+                End Class
+                """;
+            VerifyCfgVB<SyntaxVB.InvocationExpressionSyntax>(code).Should().NotBeNull();
         }
 
         [TestMethod]
         public void CreateCfg_LambdaInsideQuery_CS()
         {
-            const string code = @"
-using System;
-using System.Linq;
-public class Sample
-{
-    public void Main(int[] values)
-    {
-        var result = from value in values select new Lazy<int>(() => value);
-    }
-}";
-            var (tree, semanticModel) = TestHelper.CompileCS(code);
-            var lambda = tree.Single<SyntaxCS.ParenthesizedLambdaExpressionSyntax>();
-
-            ExtensionsCS.CreateCfg(lambda, semanticModel, default).Should().NotBeNull();
+            const string code = """
+                using System;
+                using System.Linq;
+                public class Sample
+                {
+                    public void Main(int[] values)
+                    {
+                        var result = from value in values select new Lazy<int>(() => value);
+                    }
+                }
+                """;
+            VerifyCfgCS<SyntaxCS.ParenthesizedLambdaExpressionSyntax>(code).Should().NotBeNull();
         }
 
         [TestMethod]
         public void CreateCfg_LambdaInsideQuery_VB()
         {
-            const string code = @"
-Public Class Sample
-    Public Sub Main(Values() As Integer)
-        Dim Result As IEnumerable(Of Lazy(Of Integer)) = From Value In Values Select New Lazy(Of Integer)(Function() Value)
-    End Sub
-End Class
-";
-            var (tree, semanticModel) = TestHelper.CompileVB(code);
-            var lambda = tree.Single<SyntaxVB.SingleLineLambdaExpressionSyntax>();
-
-            ExtensionsVB.CreateCfg(lambda, semanticModel, default).Should().NotBeNull();
+            const string code = """
+                Public Class Sample
+                    Public Sub Main(Values() As Integer)
+                        Dim Result As IEnumerable(Of Lazy(Of Integer)) = From Value In Values Select New Lazy(Of Integer)(Function() Value)
+                    End Sub
+                End Class
+                """;
+            VerifyCfgVB<SyntaxVB.SingleLineLambdaExpressionSyntax>(code).Should().NotBeNull();
         }
 
         [TestMethod]
@@ -408,14 +386,15 @@ End Class";
         [TestMethod]
         public void CreateCfg_UndefinedSymbol_ReturnsCfg_CS()
         {
-            const string code = @"
-public class Sample
-{
-    public void Main()
-    {
-        Undefined(() => 45);
-    }
-}";
+            const string code = """
+                public class Sample
+                {
+                    public void Main()
+                    {
+                        Undefined(() => 45);
+                    }
+                }
+                """;
             var (tree, model) = TestHelper.CompileIgnoreErrorsCS(code);
             var lambda = tree.Single<SyntaxCS.ParenthesizedLambdaExpressionSyntax>();
             ExtensionsCS.CreateCfg(lambda, model, default).Should().NotBeNull();
@@ -1232,5 +1211,19 @@ public class X
                 .GetCompilation()
                 .SyntaxTrees
                 .First();
+
+        private static ControlFlowGraph VerifyCfgCS<T>(string code) where T : CSharpSyntaxNode
+        {
+            var (tree, semanticModel) = TestHelper.CompileCS(code);
+            var node = tree.Single<T>();
+            return ExtensionsCS.CreateCfg(node, semanticModel, default);
+        }
+
+        private static ControlFlowGraph VerifyCfgVB<T>(string code) where T : Microsoft.CodeAnalysis.VisualBasic.VisualBasicSyntaxNode
+        {
+            var (tree, semanticModel) = TestHelper.CompileVB(code);
+            var node = tree.Single<T>();
+            return ExtensionsVB.CreateCfg(node, semanticModel, default);
+        }
     }
 }
