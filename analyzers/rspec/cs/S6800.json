@@ -1,0 +1,23 @@
+{
+  "title": "Component parameter type should match the route parameter type constraint",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "blazor"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-6800",
+  "sqKey": "S6800",
+  "scope": "All",
+  "quickfix": "infeasible",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "HIGH"
+    },
+    "attribute": "LOGICAL"
+  }
+}

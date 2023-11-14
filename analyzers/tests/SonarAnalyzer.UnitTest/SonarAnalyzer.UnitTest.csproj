@@ -58,6 +58,12 @@
     <None Include="TestFramework\Razor\EmptyProject\**\*">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="TestCases\ParameterTypeShouldMatchRouteTypeConstraint.Partial.razor">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestCases\ParameterTypeShouldMatchRouteTypeConstraint.Conversion.razor">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>

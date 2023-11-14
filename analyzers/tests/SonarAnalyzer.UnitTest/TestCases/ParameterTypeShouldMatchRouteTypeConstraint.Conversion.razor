@@ -1,0 +1,65 @@
+@page "/route/1/{ObjectParam:int}"
+@page "/route/2/{ComparableParam:int}"
+@page "/route/3/{LongParam:int}"
+@page "/route/4/{IntEnumParam:int}"
+@page "/route/5/{LongEnumParam:long}"
+@page "/route/6/{GuidEnumParam:guid}"
+@page "/route/7/{ImplicitConversionParam:int}"
+@page "/route/8/{ExplicitConversionParam:int}"
+
+@code {
+
+    public enum MyEnum
+    {
+        A,
+        B,
+        C
+    }
+
+    public class ImplicitConversion
+    {
+        public int IntProp { get; set; }
+
+        public static implicit operator ImplicitConversion(int i)
+        {
+            return new ImplicitConversion { IntProp = i };
+        }
+    }
+
+    public class ExplicitConversion
+    {
+        public int IntProp { get; set; }
+
+        public static explicit operator ExplicitConversion(int i)
+        {
+            return new ExplicitConversion { IntProp = i };
+        }
+    }
+
+    [Parameter]
+    public object ObjectParam { get; set; }
+
+    [Parameter]
+    public IComparable ComparableParam { get; set; }
+
+    [Parameter]
+    public MyEnum IntEnumParam { get; set; }
+
+    [Parameter]
+    public MyEnum LongEnumParam { get; set; }
+
+    [Parameter]
+    public MyEnum GuidEnumParam { get; set; } // Noncompliant
+    //     ^^^^^^
+
+    [Parameter]
+    public long LongParam { get; set; } // Noncompliant
+
+    [Parameter]
+    public ImplicitConversion ImplicitConversionParam { get; set; } // Noncompliant
+    //     ^^^^^^^^^^^^^^^^^^
+
+    [Parameter]
+    public ExplicitConversion ExplicitConversionParam { get; set; } // Noncompliant
+
+}

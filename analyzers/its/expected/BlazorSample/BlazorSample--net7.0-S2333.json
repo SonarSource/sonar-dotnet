@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2333",
+"message":  "'partial' is gratuitous in this context.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6800/S6800Partial.razor.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  8,
+"endLine":  5,
+"endColumn":  15
+}
+}
+}
+]
+}

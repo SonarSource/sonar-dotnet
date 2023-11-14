@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private const string ErrorTypePattern = @"\s*Error";
         private const string OffsetPattern = @"(\s*@(?<offset>[+-]?\d+))?";
         private const string ExactColumnPattern = @"(\s*\^(?<columnStart>\d+)#(?<length>\d+))?";
-        private const string IssueIdsPattern = @"(\s*\[(?<issueIds>.+)\])?";
+        private const string IssueIdsPattern = @"(\s*\[(?<issueIds>[^]]+)\])?";
         private const string MessagePattern = @"(\s*\{\{(?<message>.+)\}\})?";
 
         internal static readonly Regex RxIssue =
@@ -87,7 +87,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 var preciseLocationsOnSameLine = preciseLocations.Where(l => l.LineNumber == location.LineNumber).ToList();
                 if (preciseLocationsOnSameLine.Count > 1)
                 {
-                    ThrowUnexpectedPreciseLocationCount(preciseLocationsOnSameLine.Count, preciseLocationsOnSameLine.First().LineNumber);
+                    ThrowUnexpectedPreciseLocationCount(preciseLocationsOnSameLine.Count, preciseLocationsOnSameLine[0].LineNumber);
                 }
 
                 if (preciseLocationsOnSameLine.SingleOrDefault() is { } preciseLocation)
