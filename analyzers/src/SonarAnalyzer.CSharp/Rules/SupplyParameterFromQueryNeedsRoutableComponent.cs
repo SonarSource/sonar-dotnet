@@ -35,11 +35,11 @@ public sealed class SupplyParameterFromQueryNeedsRoutableComponent : SonarDiagno
         {
             if (c.Compilation.GetTypeByMetadataName(KnownType.Microsoft_AspNetCore_Components_RouteAttribute) is not null)
             {
-                context.RegisterSymbolAction(CheckMethod, SymbolKind.Property);
+                context.RegisterSymbolAction(CheckQueryProperties, SymbolKind.Property);
             }
         });
 
-    private static void CheckMethod(SonarSymbolReportingContext context)
+    private static void CheckQueryProperties(SonarSymbolReportingContext context)
     {
         var property = (IPropertySymbol)context.Symbol;
         if (property.HasAttribute(KnownType.Microsoft_AspNetCore_Components_SupplyParameterFromQueryAttribute)
