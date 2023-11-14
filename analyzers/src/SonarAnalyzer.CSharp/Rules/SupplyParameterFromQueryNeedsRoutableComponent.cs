@@ -35,25 +35,23 @@ public sealed class SupplyParameterFromQueryNeedsRoutableComponent : SonarDiagno
         {
             if (c.Compilation.GetTypeByMetadataName(KnownType.Microsoft_AspNetCore_Components_RouteAttribute) is not null)
             {
-                RegisterSymbolAction(context);
+                context.RegisterSymbolAction(CheckMethod, SymbolKind.Property);
             }
         });
 
-    private static void RegisterSymbolAction(SonarAnalysisContext context) =>
-        context.RegisterSymbolAction(c =>
+    private static void CheckMethod(SonarSymbolReportingContext context)
+    {
+        var property = (IPropertySymbol)context.Symbol;
+        if (property.HasAttribute(KnownType.Microsoft_AspNetCore_Components_SupplyParameterFromQueryAttribute)
+            && property.HasAttribute(KnownType.Microsoft_AspNetCore_Components_ParameterAttribute))
         {
-            var property = (IPropertySymbol)c.Symbol;
-            if (property.HasAttribute(KnownType.Microsoft_AspNetCore_Components_SupplyParameterFromQueryAttribute)
-                && property.HasAttribute(KnownType.Microsoft_AspNetCore_Components_ParameterAttribute))
+            if (!property.ContainingType.HasAttribute(KnownType.Microsoft_AspNetCore_Components_RouteAttribute))
             {
-                if (!property.ContainingType.HasAttribute(KnownType.Microsoft_AspNetCore_Components_RouteAttribute))
+                foreach (var location in property.Locations)
                 {
-                    foreach (var location in property.Locations)
-                    {
-                        c.ReportIssue(Diagnostic.Create(Rule, location));
-                    }
+                    context.ReportIssue(Diagnostic.Create(Rule, location));
                 }
             }
-        },
-        SymbolKind.Property);
+        }
+    }
 }
