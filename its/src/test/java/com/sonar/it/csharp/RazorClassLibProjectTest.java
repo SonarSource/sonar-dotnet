@@ -78,7 +78,7 @@ public class RazorClassLibProjectTest {
   
   @Test
   void issuesOfS6801AreRaised() {
-    var issues = Tests.getIssues(PROJECT).stream().filter(x -> x.getRule().startsWith(SONAR_RULE_S6801)).collect(Collectors.toList());
+    var issues = Tests.getIssues(PROJECT).stream().filter(x -> x.getRule().startsWith("csharpsquid:S6801")).collect(Collectors.toList());
     assertThat(issues.stream().filter(issue -> issue.getComponent().equals("RazorClassLib:S6801/Consumer.razor"))).hasSize(1);
   }
 }
