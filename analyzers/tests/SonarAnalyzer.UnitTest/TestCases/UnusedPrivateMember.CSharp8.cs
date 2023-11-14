@@ -1,4 +1,6 @@
-﻿namespace Tests.Diagnostics
+﻿using System;
+
+namespace Tests.Diagnostics
 {
     public interface MyInterface1
     {
@@ -147,3 +149,10 @@ namespace Repro6653
     }
 }
 
+// https://github.com/SonarSource/sonar-dotnet/issues/8342
+public class Repro_8342
+{
+    [Private1] private protected void APrivateProtectedMethod() { }
+
+    private class Private1Attribute : Attribute { }  // Noncompliant: FP: attribute used on a private protected method
+}

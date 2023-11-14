@@ -341,3 +341,12 @@ class Repro_8348
 {
     [MyAttribute] void PrivateMethodWithAttribute() { } // FN: due to the attribute
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8342
+class Repro_8342
+{
+    [Private1] public void APublicMethod() => APrivateMethodCalledByAPublicMethod();
+    [Private2] internal void AnInternalMethod() { }
+    [Private3] protected void AProtectedMethod() { }
+    [Private4] private void APrivateMethodCalledByAPublicMethod() { }
+}
