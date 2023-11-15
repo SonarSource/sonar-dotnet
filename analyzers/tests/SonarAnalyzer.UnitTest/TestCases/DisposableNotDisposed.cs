@@ -161,7 +161,7 @@ namespace Tests.Diagnostics
     {
         public void NotDisposed(string filePath)
         {
-            FileStream fileStream = File.OpenRead(filePath); // Noncompliant
+            FileStream fileStream = File.OpenRead(filePath); // FN
         }
 
         public void Disposed(string filePath)
