@@ -55,7 +55,7 @@ public class RazorClassLibProjectTest {
   }
 
   @Test
-  void issuesS6797AreRaised() {
+  void issuesOfS6797AreRaised() {
     var issues = Tests.getIssues(PROJECT).stream().filter(x -> x.getRule().startsWith("csharpsquid:S6797")).collect(Collectors.toList());
 
     assertThat(issues).hasSize(6);

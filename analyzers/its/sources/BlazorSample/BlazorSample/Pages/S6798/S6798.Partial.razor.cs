@@ -1,6 +1,6 @@
 using Microsoft.JSInterop;
 
-namespace BlazorSample.Pages;
+namespace BlazorSample.Pages.S6798;
 
 public partial class S6798_Partial
 {
