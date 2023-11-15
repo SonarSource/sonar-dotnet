@@ -21,6 +21,8 @@ namespace Tests.TestCases
 //                           ^^^^^^
         public /*comment */ static string sProp2 { get; set; } // Noncompliant {{A static field in a generic type is not shared among instances of different close constructed types.}}
 
+        public static int ArrowProperty => 42; // Noncompliant FP, doesn't have a static backing field
+
         public string sProp3 { get; set; }
 
         public static T tProp { get; set; }
