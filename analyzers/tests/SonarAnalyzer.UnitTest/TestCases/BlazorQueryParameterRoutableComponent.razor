@@ -13,6 +13,8 @@
     [SupplyParameterFromQuery]
     public string ParameterAttributeMissing { get; set; } // Compliant: missing [Parameter]    
 
+    public string SimpleProperty { get; set; } // Compliant: no parameters    
+
     [Parameter]
     [SupplyParameterFromQuery]
     public bool BoolParam { get; set; } // Compliant
