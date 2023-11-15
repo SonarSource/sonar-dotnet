@@ -52,7 +52,7 @@ namespace SonarAnalyzer.UnitTest.Common
                     .AddPaths(@$"Hotspots\{GetTestCaseFileName(analyzerName)}{language.FileExtension}")
                     .AddAnalyzer(() => analyzer)
                     .WithOptions(parseOptions)
-                    .AddReferences(GetAdditionalReferences(analyzerName, Constants.NuGetLatestVersion))
+                    .AddReferences(GetAdditionalReferences(analyzerName))
                     .WithConcurrentAnalysis(analyzerName is not nameof(ClearTextProtocolsAreSensitive))
                     .VerifyNoIssueReported();
             }
@@ -88,7 +88,7 @@ namespace SonarAnalyzer.UnitTest.Common
                 _ => analyzerName
             };
 
-        private static IEnumerable<MetadataReference> GetAdditionalReferences(string analyzerName, string version) =>
+        private static IEnumerable<MetadataReference> GetAdditionalReferences(string analyzerName) =>
             analyzerName switch
             {
                 nameof(ClearTextProtocolsAreSensitive) => ClearTextProtocolsAreSensitiveTest.AdditionalReferences,
@@ -96,7 +96,7 @@ namespace SonarAnalyzer.UnitTest.Common
                 nameof(CookieShouldBeSecure) => CookieShouldBeSecureTest.AdditionalReferences,
                 nameof(ConfiguringLoggers) => ConfiguringLoggersTest.Log4NetReferences,
                 nameof(DeliveringDebugFeaturesInProduction) => DeliveringDebugFeaturesInProductionTest.AdditionalReferencesForAspNetCore2,
-                nameof(DisablingRequestValidation) => NuGetMetadataReference.MicrosoftAspNetMvc(version),
+                nameof(DisablingRequestValidation) => NuGetMetadataReference.MicrosoftAspNetMvc(Constants.NuGetLatestVersion),
                 nameof(DoNotHardcodeCredentials) => DoNotHardcodeCredentialsTest.AdditionalReferences,
                 nameof(DoNotUseRandom) => MetadataReferenceFacade.SystemSecurityCryptography,
                 nameof(ExpandingArchives) => ExpandingArchivesTest.AdditionalReferences,
@@ -106,11 +106,11 @@ namespace SonarAnalyzer.UnitTest.Common
 
 #if NET
                 nameof(DisablingCsrfProtection) => DisablingCsrfProtectionTest.AdditionalReferences(),
-                nameof(ExecutingSqlQueries) => ExecutingSqlQueriesTest.GetReferencesEntityFrameworkNetCore(version),
+                nameof(ExecutingSqlQueries) => ExecutingSqlQueriesTest.GetReferencesEntityFrameworkNetCore("7.0.14"),
                 nameof(LooseFilePermissions) => NuGetMetadataReference.MonoPosixNetStandard(),
                 nameof(PermissiveCors) => PermissiveCorsTest.AdditionalReferences,
 #else
-                nameof(ExecutingSqlQueries) => ExecutingSqlQueriesTest.GetReferencesNet46(version),
+                nameof(ExecutingSqlQueries) => ExecutingSqlQueriesTest.GetReferencesNet46(Constants.NuGetLatestVersion),
 #endif
                 _ => MetadataReferenceFacade.SystemNetHttp
                                             .Concat(MetadataReferenceFacade.SystemDiagnosticsProcess)

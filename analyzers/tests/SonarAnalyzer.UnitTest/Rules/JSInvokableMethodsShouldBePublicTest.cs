@@ -28,7 +28,7 @@ namespace SonarAnalyzer.UnitTest.Rules;
 public class JSInvokableMethodsShouldBePublicTest
 {
     private readonly VerifierBuilder builder = new VerifierBuilder<JSInvokableMethodsShouldBePublic>()
-        .AddReferences(NuGetMetadataReference.MicrosoftJSInterop(Constants.NuGetLatestVersion));
+        .AddReferences(NuGetMetadataReference.MicrosoftJSInterop("7.0.14"));
 
     public TestContext TestContext { get; set; }
 

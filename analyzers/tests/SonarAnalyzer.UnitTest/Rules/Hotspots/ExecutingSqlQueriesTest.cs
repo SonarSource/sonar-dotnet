@@ -82,11 +82,11 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Verify();
 
         [TestMethod]
-        public void ExecutingSqlQueries_CS_EntityFrameworkCoreLatest() =>
+        public void ExecutingSqlQueries_CS_EntityFrameworkCore7() =>
             builderCS
                 .AddPaths("ExecutingSqlQueries.EntityFrameworkCoreLatest.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
-                .AddReferences(GetReferencesEntityFrameworkNetCore(Constants.NuGetLatestVersion))
+                .AddReferences(GetReferencesEntityFrameworkNetCore("7.0.14"))
                 .Verify();
 
         [TestMethod]
@@ -132,11 +132,11 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Verify();
 
         [TestMethod]
-        public void ExecutingSqlQueries_VB_EntityFrameworkCoreLatest() =>
+        public void ExecutingSqlQueries_VB_EntityFrameworkCore7() =>
             builderVB
                 .AddPaths(@"ExecutingSqlQueries.EntityFrameworkCoreLatest.vb")
                 .WithOptions(ParseOptionsHelper.FromVisualBasic15)
-                .AddReferences(GetReferencesEntityFrameworkNetCore(Constants.NuGetLatestVersion))
+                .AddReferences(GetReferencesEntityFrameworkNetCore("7.0.14"))
                 .Verify();
 
         internal static IEnumerable<MetadataReference> GetReferencesEntityFrameworkNetCore(string entityFrameworkVersion) =>

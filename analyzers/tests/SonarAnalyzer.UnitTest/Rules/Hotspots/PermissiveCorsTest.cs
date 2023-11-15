@@ -76,7 +76,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Verify();
 
         private static IEnumerable<MetadataReference> AdditionalReferences =>
-            NuGetMetadataReference.MicrosoftNetHttpHeaders(Constants.NuGetLatestVersion)
+            NuGetMetadataReference.MicrosoftNetHttpHeaders("2.1.14")
                                   .Concat(NuGetMetadataReference.MicrosoftAspNetMvc(Constants.NuGetLatestVersion))
                                   .Concat(NuGetMetadataReference.MicrosoftAspNetWebApiCors(Constants.NuGetLatestVersion))
                                   .Concat(NuGetMetadataReference.MicrosoftNetWebApiCore(Constants.NuGetLatestVersion))
