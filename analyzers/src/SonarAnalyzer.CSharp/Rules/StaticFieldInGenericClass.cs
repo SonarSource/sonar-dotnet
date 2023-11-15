@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         CheckMember(c, variable, variable.Identifier.GetLocation(), typeParameterNames);
                     }
-                    foreach (var property in typeDeclaration.Members.OfType<PropertyDeclarationSyntax>().Where(x => x.Modifiers.Any(SyntaxKind.StaticKeyword)))
+                    foreach (var property in typeDeclaration.Members.OfType<PropertyDeclarationSyntax>().Where(x => x.Modifiers.Any(SyntaxKind.StaticKeyword) && x.ExpressionBody is null))
                     {
                         CheckMember(c, property, property.Identifier.GetLocation(), typeParameterNames);
                     }
