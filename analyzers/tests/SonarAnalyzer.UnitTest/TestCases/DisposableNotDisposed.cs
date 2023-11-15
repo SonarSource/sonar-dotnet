@@ -155,4 +155,19 @@ namespace Tests.Diagnostics
     {
         private ImplementsDisposable stream = new ImplementsDisposable();     // Compliant - the rule only tracks specific IDisposable / IAsyncDisposable types
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/8365
+    public class Repro_8365
+    {
+        public void NotDisposed(string filePath)
+        {
+            FileStream fileStream = File.OpenRead(filePath); // Noncompliant
+        }
+
+        public void Disposed(string filePath)
+        {
+            FileStream fileStream = File.OpenRead(filePath); // Compliant
+            fileStream.Dispose();
+        }
+    }
 }
