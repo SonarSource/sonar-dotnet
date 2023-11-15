@@ -21,6 +21,8 @@ namespace Tests.TestCases
 //                           ^^^^^^
         public /*comment */ static string sProp2 { get; set; } // Noncompliant {{A static field in a generic type is not shared among instances of different close constructed types.}}
 
+        public static int ArrowProperty => 42; // Compliant, doesn't have a static backing field
+
         public string sProp3 { get; set; }
 
         public static T tProp { get; set; }
@@ -39,9 +41,9 @@ namespace Tests.TestCases
 
         public static List<int> Numbers { get; } = new List<int>(); // Noncompliant
 
-        public static string State => nameof(State); // Noncompliant - FP
+        public static string State => nameof(State); // Compliant
 
-        public static object New => new object(); // Noncompliant - FP, always a new instance
+        public static object New => new object(); // Compliant always a new instance
 
         public static object Y { get { return new object(); } } // Noncompliant - FP, always a new instance
 
