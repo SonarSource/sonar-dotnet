@@ -64,7 +64,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [DataTestMethod]
         [DataRow("2.0.4", "2.0.3", "2.1.1")]
-        [DataRow(Constants.NuGetLatestVersion, Constants.NuGetLatestVersion, Constants.NuGetLatestVersion)]
+        [DataRow("2.2.0", "2.2.0", "2.2.0")]
         public void UriShouldNotBeHardcoded_CSharp_VirtualPath_AspNetCore(string aspNetCoreMvcVersion, string aspNetCoreRoutingVersion, string netHttpHeadersVersion) =>
             builderCS
                 .AddPaths("UriShouldNotBeHardcoded.AspNetCore.cs")

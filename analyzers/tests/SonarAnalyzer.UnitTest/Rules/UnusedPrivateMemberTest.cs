@@ -150,7 +150,7 @@ namespace EntityFrameworkMigrations
 
         protected override void Up(MigrationBuilder migrationBuilder) { }
     }
-}").AddReferences(EntityFrameworkCoreReferences(Constants.NuGetLatestVersion)).Verify();
+}").AddReferences(EntityFrameworkCoreReferences("7.0.14")).Verify();
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
