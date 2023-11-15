@@ -55,32 +55,12 @@ public sealed class AvoidLambdaExpressionInLoopsInBlazor : SonarDiagnosticAnalyz
                 SyntaxKind.ParenthesizedLambdaExpression);
         });
 
-    private static bool IsWithinRenderTreeBuilderInvocation(SyntaxNode node, SemanticModel semanticModel)
-    {
-        while (node != null)
-        {
-            if (node is InvocationExpressionSyntax invocation
-                && AddAttributeMethods.Contains(invocation.GetName())
-                && semanticModel.GetSymbolInfo(invocation.Expression).Symbol is IMethodSymbol symbol
-                && symbol.ContainingType.GetSymbolType().Is(KnownType.Microsoft_AspNetCore_Components_Rendering_RenderTreeBuilder))
-            {
-                return true;
-            }
-            node = node.Parent;
-        }
-        return false;
-    }
+    private static bool IsWithinRenderTreeBuilderInvocation(SyntaxNode node, SemanticModel semanticModel) =>
+        node.AncestorsAndSelf().Any(x => x is InvocationExpressionSyntax invocation
+                                         && AddAttributeMethods.Contains(invocation.GetName())
+                                         && semanticModel.GetSymbolInfo(invocation.Expression).Symbol is IMethodSymbol symbol
+                                         && symbol.ContainingType.GetSymbolType().Is(KnownType.Microsoft_AspNetCore_Components_Rendering_RenderTreeBuilder));
 
-    private static bool IsWithinLoop(SyntaxNode node)
-    {
-        while (node != null)
-        {
-            if (node is ForStatementSyntax or ForEachStatementSyntax or WhileStatementSyntax or DoStatementSyntax)
-            {
-                return true;
-            }
-            node = node.Parent;
-        }
-        return false;
-    }
+    private static bool IsWithinLoop(SyntaxNode node) =>
+        node.AncestorsAndSelf().Any(x => x is ForStatementSyntax or ForEachStatementSyntax or WhileStatementSyntax or DoStatementSyntax);
 }
