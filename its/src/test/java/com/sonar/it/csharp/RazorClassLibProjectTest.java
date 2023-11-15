@@ -87,8 +87,8 @@ public class RazorClassLibProjectTest {
     var issues = Tests.getIssues(PROJECT).stream().filter(x -> x.getRule().startsWith("csharpsquid:S6802")).collect(Collectors.toList());
 
     assertThat(issues).hasSize(4);
-    assertThat(issues.stream().filter(issue -> issue.getComponent().equals(S6800_FOLDER + "/S6802.razor"))).hasSize(4);
-    assertThat(issues.stream().filter(issue -> issue.getComponent().equals(S6800_FOLDER + "/S6802.cs"))).hasSize(0);
+    assertThat(issues.stream().filter(issue -> issue.getComponent().equals(S6802_FOLDER + "/S6802.razor"))).hasSize(4);
+    assertThat(issues.stream().filter(issue -> issue.getComponent().equals(S6802_FOLDER + "/S6802.cs"))).hasSize(0);
   }
 
   @Test
