@@ -23,10 +23,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.io.TempDir;
-import org.sonarqube.ws.Issues;
 
 import java.nio.file.Path;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.sonar.it.csharp.Tests.getComponent;
@@ -40,13 +38,7 @@ public class RazorClassLibProjectTest {
 
   private static final String PROJECT = "RazorClassLib";
   private static final String RAZOR_COMPONENT_CLASS_FILE = "RazorClassLib:Component.razor";
-  private static final String SONAR_RULE_S6797 = "csharpsquid:S6797";
-  private static final String S6797_COMPONENT_RAZOR_FILE = "RazorClassLib:S6797/S6797.razor";
-  private static final String S6797_COMPONENT_CSONLY_FILE = "RazorClassLib:S6797/S6797.CsharpOnly.cs";
-  private static final String S6797_COMPONENT_PARTIAL_CS_FILE = "RazorClassLib:S6797/S6797.Partial.razor.cs";
-  private static final String S6797_COMPONENT_PARTIAL_RAZOR_FILE = "RazorClassLib:S6797/S6797.Partial.razor";
-  private static final String S6797_COMPONENT_NOROUTE_FILE = "RazorClassLib:S6797/S6797.NoRoute.razor";
-
+  private static final String S6797_FOLDER = "RazorClassLib:S6797";
   private static final String S6798_FOLDER = "RazorClassLib:S6798";
   private static final String S6800_FOLDER = "RazorClassLib:S6800";
 
@@ -64,17 +56,14 @@ public class RazorClassLibProjectTest {
 
   @Test
   void issuesS6797AreRaised() {
-    List<Issues.Issue> s6797Issues = Tests.getIssues(PROJECT)
-      .stream()
-      .filter(x -> x.getRule().startsWith(SONAR_RULE_S6797))
-      .collect(Collectors.toList());
+    var issues = Tests.getIssues(PROJECT).stream().filter(x -> x.getRule().startsWith("csharpsquid:S6797")).collect(Collectors.toList());
 
-    assertThat(s6797Issues).hasSize(6);
-    assertThat(s6797Issues.stream().filter(issue -> issue.getComponent().equals(S6797_COMPONENT_RAZOR_FILE))).hasSize(4);
-    assertThat(s6797Issues.stream().filter(issue -> issue.getComponent().equals(S6797_COMPONENT_CSONLY_FILE))).hasSize(1);
-    assertThat(s6797Issues.stream().filter(issue -> issue.getComponent().equals(S6797_COMPONENT_PARTIAL_CS_FILE))).hasSize(1);
-    assertThat(s6797Issues.stream().filter(issue -> issue.getComponent().equals(S6797_COMPONENT_PARTIAL_RAZOR_FILE))).isEmpty();
-    assertThat(s6797Issues.stream().filter(issue -> issue.getComponent().equals(S6797_COMPONENT_NOROUTE_FILE))).isEmpty();
+    assertThat(issues).hasSize(6);
+    assertThat(issues.stream().filter(x -> x.getComponent().equals(S6797_FOLDER + "/S6797.razor"))).hasSize(4);
+    assertThat(issues.stream().filter(x -> x.getComponent().equals(S6797_FOLDER + "/S6797.CsharpOnly.cs"))).hasSize(1);
+    assertThat(issues.stream().filter(x -> x.getComponent().equals(S6797_FOLDER + "/S6797.Partial.razor.cs"))).hasSize(1);
+    assertThat(issues.stream().filter(x -> x.getComponent().equals(S6797_FOLDER + "/S6797.Partial.razor"))).isEmpty();
+    assertThat(issues.stream().filter(x -> x.getComponent().equals(S6797_FOLDER + "/S6797.NoRoute.razor"))).isEmpty();
   }
 
   @Test
