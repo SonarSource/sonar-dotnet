@@ -35,34 +35,53 @@ public class ConditionEvaluatesToConstant : ConditionEvaluatesToConstantBase
         return walker.ContainsCondition;
     }
 
-    private sealed class SyntaxKindWalker : SafeVisualBasicSyntaxWalker
-    {
-        public bool ContainsCondition { get; private set; }
-        public override void Visit(SyntaxNode node)
-        {
-            if (!ContainsCondition)
-            {
-                ContainsCondition = node.IsAnyKind(
-                                    SyntaxKind.AndAlsoExpression,
-                                    SyntaxKind.BinaryConditionalExpression,
-                                    SyntaxKind.ConditionalAccessExpression,
-                                    SyntaxKind.DoWhileStatement,
-                                    SyntaxKind.DoUntilStatement,
-                                    SyntaxKind.IfStatement,
-                                    SyntaxKind.SelectStatement,
-                                    SyntaxKind.SimpleDoStatement,
-                                    SyntaxKind.TernaryConditionalExpression,
-                                    SyntaxKind.OrElseExpression,
-                                    SyntaxKind.WhileStatement);
-
-                base.Visit(node);
-            }
-        }
-    }
-
     protected override bool IsInsideUsingDeclaration(SyntaxNode node) =>
         node.IsKind(SyntaxKind.VariableDeclarator) && node.Parent.IsKind(SyntaxKind.UsingStatement);
 
     protected override bool IsLockStatement(SyntaxNode syntax) =>
         syntax.IsKind(SyntaxKind.SyncLockBlock);
+
+    internal sealed class SyntaxKindWalker : SafeVisualBasicSyntaxWalker
+    {
+        public bool ContainsCondition { get; private set; }
+
+        public override void Visit(SyntaxNode node)
+        {
+            if (!ContainsCondition)
+            {
+                base.Visit(node);
+            }
+        }
+
+        public override void VisitBinaryConditionalExpression(BinaryConditionalExpressionSyntax node) =>
+            ContainsCondition = true;
+
+        public override void VisitBinaryExpression(BinaryExpressionSyntax node)
+        {
+            ContainsCondition |= node.Kind() is SyntaxKind.AndAlsoExpression or SyntaxKind.OrElseExpression;
+            base.VisitBinaryExpression(node);
+        }
+
+        public override void VisitConditionalAccessExpression(ConditionalAccessExpressionSyntax node) =>
+            ContainsCondition = true;
+
+        public override void VisitDoStatement(DoStatementSyntax node) =>
+            // Possible SyntaxKinds: SyntaxKind.DoWhileStatement or SyntaxKind.DoUntilStatement or SyntaxKind.SimpleDoStatement
+            ContainsCondition = true;
+
+        public override void VisitIfStatement(IfStatementSyntax node) =>
+            ContainsCondition = true;
+
+        public override void VisitSelectStatement(SelectStatementSyntax node) =>
+            ContainsCondition = true;
+
+        public override void VisitSingleLineIfStatement(SingleLineIfStatementSyntax node) =>
+            ContainsCondition = true;
+
+        public override void VisitTernaryConditionalExpression(TernaryConditionalExpressionSyntax node) =>
+            ContainsCondition = true;
+
+        public override void VisitWhileStatement(WhileStatementSyntax node) =>
+            ContainsCondition = true;
+    }
 }
