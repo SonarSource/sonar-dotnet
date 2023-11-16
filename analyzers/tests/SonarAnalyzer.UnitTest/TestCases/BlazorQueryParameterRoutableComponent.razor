@@ -92,6 +92,11 @@
 
     [Parameter]
     [SupplyParameterFromQuery]
+    public IList<TimeSpan> ListTimeSpan { get; set; } // Noncompliant {{Query parameter type 'IList' is not supported.}}
+    //     ^^^^^^^^^^^^^^^
+
+    [Parameter]
+    [SupplyParameterFromQuery]
     public System.Tuple<bool, bool> SystemTupleForm { get; set; } // Noncompliant {{Query parameter type 'Tuple' is not supported.}}
     //     ^^^^^^^^^^^^^^^^^^^^^^^^
 
