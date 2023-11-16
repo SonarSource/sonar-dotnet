@@ -1,0 +1,11 @@
+﻿@page "/query-parameters"
+
+@code {
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public bool BoolParam { get; set; }
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public DateTime DateTimeParam { get; set; }
+}

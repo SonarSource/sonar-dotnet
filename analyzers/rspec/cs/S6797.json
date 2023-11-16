@@ -1,0 +1,23 @@
+{
+  "title": "Blazor query parameter type should be supported",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "blazor"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-6797",
+  "sqKey": "S6797",
+  "scope": "All",
+  "quickfix": "infeasible",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "MEDIUM"
+    },
+    "attribute": "LOGICAL"
+  }
+}

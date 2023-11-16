@@ -1,0 +1,121 @@
+﻿@namespace EmptyProject
+@page "/component"
+
+<h3>Component</h3>
+
+@code {
+    [Parameter]
+    [SupplyParameterFromQuery] // Compliant
+    public bool Param { get; set; }
+
+    [Parameter]
+    public string SupplyParameterFromQueryAttributeMissing { get; set; } // Compliant: missing [SupplyParameterFromQuery]
+
+    [SupplyParameterFromQuery]
+    public string ParameterAttributeMissing { get; set; } // Compliant: missing [Parameter]    
+
+    public string SimpleProperty { get; set; } // Compliant: no parameters    
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public bool BoolParam { get; set; } // Compliant
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public DateTime DateTimeParam { get; set; } // Compliant
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public decimal DecimalParam { get; set; } // Compliant
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public double DoubleParam { get; set; } // Compliant
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public float FloatParam { get; set; } // Compliant
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public Guid GuidParam { get; set; } // Compliant
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public int IntParam { get; set; } // Compliant
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public long LongParam { get; set; } // Compliant
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public string StringParam { get; set; } // Compliant
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public bool? NullableBoolParamShortForm { get; set; } // Compliant
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public Nullable<bool> NullableBoolParamLongForm { get; set; } // Compliant
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public bool?[] ArrayOfNullableBoolParamShortForm { get; set; } // Compliant
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public Nullable<bool>[] ArrayOfNullableBoolParamLongForm { get; set; } // Compliant
+
+    [Parameter]
+    public TimeSpan TimeSpanParam { get; set; } // Compliant
+
+    [Parameter]
+    public TimeSpan? NullableTimeSpanParam { get; set; } // Compliant
+
+    [Parameter]
+    public Nullable<TimeSpan> NullableTimeSpanLongFormParam { get; set; } // Compliant
+
+    [Parameter]
+    public TimeSpan[] TimeSpanArrayLongFormParam { get; set; } // Compliant
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public TimeSpan TimeSpan { get; set; } // Noncompliant {{Query parameter type 'TimeSpan' is not supported.}}
+    //     ^^^^^^^^
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public TimeSpan? NullableTimeSpan { get; set; } // Noncompliant {{Query parameter type 'TimeSpan' is not supported.}}
+    //     ^^^^^^^^^
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public IList<TimeSpan> ListTimeSpan { get; set; } // Noncompliant {{Query parameter type 'IList' is not supported.}}
+    //     ^^^^^^^^^^^^^^^
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public System.Tuple<bool, bool> SystemTupleForm { get; set; } // Noncompliant {{Query parameter type 'Tuple' is not supported.}}
+    //     ^^^^^^^^^^^^^^^^^^^^^^^^
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public System.ValueTuple<bool, bool> ValueTupleForm { get; set; } // Noncompliant {{Query parameter type 'ValueTuple' is not supported.}}
+    //     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public (bool, bool) TupleForm { get; set; } // Noncompliant {{Query parameter type 'ValueTuple' is not supported.}}
+    //     ^^^^^^^^^^^^
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public Nullable<TimeSpan> NullableTimeSpanLongForm { get; set; } // Noncompliant {{Query parameter type 'TimeSpan' is not supported.}}
+    //     ^^^^^^^^^^^^^^^^^^
+
+    [Parameter, SupplyParameterFromQuery]
+    public TimeSpan[] TimeSpanArrayLongForm { get; set; } // Noncompliant {{Query parameter type 'TimeSpan' is not supported.}}
+    //     ^^^^^^^^^^
+}

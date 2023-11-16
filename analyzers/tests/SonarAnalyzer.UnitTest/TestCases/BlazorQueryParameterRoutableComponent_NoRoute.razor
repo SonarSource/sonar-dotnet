@@ -1,0 +1,75 @@
+﻿@namespace EmptyProject
+
+@code {
+    [Parameter]
+    public bool BoolParam { get; set; } // Compliant
+
+    [Parameter]
+    public DateTime DateTimeParam { get; set; } // Compliant
+
+    [Parameter]
+    public decimal DecimalParam { get; set; } // Compliant
+
+    [Parameter]
+    public double DoubleParam { get; set; } // Compliant
+
+    [Parameter]
+    public float FloatParam { get; set; } // Compliant
+
+    [Parameter]
+    public Guid GuidParam { get; set; } // Compliant
+
+    [Parameter]
+    public int IntParam { get; set; } // Compliant
+
+    [Parameter]
+    public long LongParam { get; set; } // Compliant
+
+    [Parameter]
+    public string StringParam { get; set; } // Compliant
+
+    [Parameter]
+    public bool? NullableBoolParamShortForm { get; set; } // Compliant
+
+    [Parameter]
+    public Nullable<bool> NullableBoolParamLongForm { get; set; } // Compliant
+
+    [Parameter]
+    public bool?[] ArrayOfNullableBoolParamShortForm { get; set; } // Compliant
+
+    [Parameter]
+    public Nullable<bool>[] ArrayOfNullableBoolParamLongForm { get; set; } // Compliant
+
+    [Parameter]
+    public TimeSpan TimeSpan { get; set; } // Compliant
+
+    [Parameter]
+    public TimeSpan? NullableTimeSpan { get; set; } // Compliant
+
+    [Parameter]
+    public Nullable<TimeSpan> NullableTimeSpanLongForm { get; set; } // Compliant
+
+    [Parameter]
+    public TimeSpan[] TimeSpanArrayLongForm { get; set; } // Compliant
+
+    [Parameter]
+    public TimeSpan TimeSpanParam { get; set; } // Compliant
+
+    [Parameter]
+    public TimeSpan? NullableTimeSpanParam { get; set; } // Compliant
+
+    [Parameter]
+    public Nullable<TimeSpan> NullableTimeSpanLongFormParam { get; set; } // Compliant
+
+    [Parameter]
+    public TimeSpan[] TimeSpanArrayLongFormParam { get; set; } // Compliant
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public bool Param { get; set; } // Noncompliant {{Component parameters can only receive query parameter values in routable components.}}
+    //          ^^^^^
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public string MyString { get; set; } // Noncompliant
+}

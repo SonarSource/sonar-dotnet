@@ -25,10 +25,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.io.TempDir;
-import org.sonarqube.ws.Issues;
 
 import java.nio.file.Path;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.sonar.it.csharp.Tests.getComponent;
@@ -42,6 +40,7 @@ public class RazorClassLibProjectTest {
 
   private static final String PROJECT = "RazorClassLib";
   private static final String RAZOR_COMPONENT_CLASS_FILE = "RazorClassLib:Component.razor";
+  private static final String S6797_FOLDER = "RazorClassLib:S6797";
   private static final String S6798_FOLDER = "RazorClassLib:S6798";
   private static final String S6800_FOLDER = "RazorClassLib:S6800";
   private static final String S6802_FOLDER = "RazorClassLib:S6802";
@@ -59,6 +58,18 @@ public class RazorClassLibProjectTest {
     assertThat(getComponent(PROJECT).getName()).isEqualTo("RazorClassLib");
 
     assertThat(getComponent(RAZOR_COMPONENT_CLASS_FILE).getName()).isEqualTo("Component.razor");
+  }
+
+  @Test
+  void issuesOfS6797AreRaised() {
+    var issues = Tests.getIssues(PROJECT).stream().filter(x -> x.getRule().startsWith("csharpsquid:S6797")).collect(Collectors.toList());
+
+    assertThat(issues).hasSize(3);
+    assertThat(issues.stream().filter(x -> x.getComponent().equals(S6797_FOLDER + "/S6797.razor"))).hasSize(1);
+    assertThat(issues.stream().filter(x -> x.getComponent().equals(S6797_FOLDER + "/S6797.CsharpOnly.cs"))).hasSize(1);
+    assertThat(issues.stream().filter(x -> x.getComponent().equals(S6797_FOLDER + "/S6797.Partial.razor.cs"))).hasSize(1);
+    assertThat(issues.stream().filter(x -> x.getComponent().equals(S6797_FOLDER + "/S6797.Partial.razor"))).isEmpty();
+    assertThat(issues.stream().filter(x -> x.getComponent().equals(S6797_FOLDER + "/S6797.NoRoute.razor"))).isEmpty();
   }
 
   @Test
