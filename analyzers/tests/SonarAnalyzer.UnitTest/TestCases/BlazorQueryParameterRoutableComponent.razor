@@ -1,4 +1,5 @@
-﻿@page "/component"
+﻿@namespace EmptyProject
+@page "/component"
 
 <h3>Component</h3>
 
@@ -88,6 +89,21 @@
     [SupplyParameterFromQuery]
     public TimeSpan? NullableTimeSpan { get; set; } // Noncompliant {{Query parameter type 'TimeSpan' is not supported.}}
     //     ^^^^^^^^^
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public System.Tuple<bool, bool> SystemTupleForm { get; set; } // Noncompliant {{Query parameter type 'Tuple' is not supported.}}
+    //     ^^^^^^^^^^^^^^^^^^^^^^^^
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public System.ValueTuple<bool, bool> ValueTupleForm { get; set; } // Noncompliant {{Query parameter type 'ValueTuple' is not supported.}}
+    //     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public (bool, bool) TupleForm { get; set; } // Noncompliant {{Query parameter type 'ValueTuple' is not supported.}}
+    //     ^^^^^^^^^^^^
 
     [Parameter]
     [SupplyParameterFromQuery]

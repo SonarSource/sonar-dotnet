@@ -69,7 +69,7 @@ public sealed class BlazorQueryParameterRoutableComponent : SonarDiagnosticAnaly
                     c.ReportIssue(Diagnostic.Create(S6803Rule, location));
                 }
             }
-            else if (IsPropertyTypeMismatch(property))
+            else if (!SupportedQueryTypes.Any(x => IsSupportedType(property.Type, x)))
             {
                 foreach (var propertyType in property.DeclaringSyntaxReferences.Select(x => ((PropertyDeclarationSyntax)x.GetSyntax()).Type))
                 {
@@ -78,10 +78,6 @@ public sealed class BlazorQueryParameterRoutableComponent : SonarDiagnosticAnaly
             }
         }
     }
-
-    private static bool IsPropertyTypeMismatch(IPropertySymbol property) =>
-        property.HasAttribute(KnownType.Microsoft_AspNetCore_Components_SupplyParameterFromQueryAttribute)
-        && !SupportedQueryTypes.Any(x => IsSupportedType(property.Type, x));
 
     private static bool IsSupportedType(ITypeSymbol type, KnownType supportType)
     {
@@ -99,7 +95,10 @@ public sealed class BlazorQueryParameterRoutableComponent : SonarDiagnosticAnaly
     }
 
     private static string GetTypeName(TypeSyntax propertyType) =>
-        propertyType.NameIs(KnownType.System_Nullable_T.TypeName) && propertyType is GenericNameSyntax syntax
-            ? syntax.TypeArgumentList.Arguments[0].GetName()
-            : propertyType.GetName();
+        propertyType switch
+        {
+            GenericNameSyntax genericSyntax when propertyType.NameIs(KnownType.System_Nullable_T.TypeName) => genericSyntax.TypeArgumentList.Arguments[0].GetName(),
+            {} tuple when TupleTypeSyntaxWrapper.IsInstance(tuple) => KnownType.System_ValueTuple.TypeName,
+            _ => propertyType.GetName()
+        };
 }

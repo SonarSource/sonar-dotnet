@@ -1,25 +1,28 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System;
 
-public class Nullable { }
-
-class BlazorQueryParameterRoutableComponent_Noncompliant : ComponentBase
+namespace EmptyProject
 {
-    [Parameter]
-    [SupplyParameterFromQuery]
-    public int Number { get; set; } // Noncompliant {{Component parameters can only receive query parameter values in routable components.}}
-    //         ^^^^^^
+    public class Nullable { }
 
-    [Parameter]
-    [SupplyParameterFromQuery]
-    public string MyString { get; set; } // Noncompliant
+    class BlazorQueryParameterRoutableComponent_Noncompliant : ComponentBase
+    {
+        [Parameter]
+        [SupplyParameterFromQuery]
+        public int Number { get; set; } // Noncompliant {{Component parameters can only receive query parameter values in routable components.}}
+        //         ^^^^^^
+
+        [Parameter]
+        [SupplyParameterFromQuery]
+        public string MyString { get; set; } // Noncompliant
+    }
+
+    [Route("/my-route")]
+    class BlazorQueryParameterRoutableComponent_Noncompliant_S6797 : ComponentBase
+    {
+        [Parameter]
+        [SupplyParameterFromQuery]
+        public Nullable Nullable { get; set; } // Noncompliant {{Query parameter type 'Nullable' is not supported.}}
+    }
 }
 
-
-[Route("/my-route")]
-class BlazorQueryParameterRoutableComponent_Noncompliant_S6797 : ComponentBase
-{
-    [Parameter]
-    [SupplyParameterFromQuery]
-    public Nullable Nullable { get; set; } // Noncompliant {{Query parameter type 'Nullable' is not supported.}}
-}

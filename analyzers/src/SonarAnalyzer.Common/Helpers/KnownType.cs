@@ -499,6 +499,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_UInt64 = new("System.UInt64");
         public static readonly KnownType System_UIntPtr = new("System.UIntPtr");
         public static readonly KnownType System_Uri = new("System.Uri");
+        public static readonly KnownType System_ValueTuple = new("System.ValueTuple");
         public static readonly KnownType System_ValueType = new("System.ValueType");
         public static readonly KnownType System_Web_HttpApplication = new("System.Web.HttpApplication");
         public static readonly KnownType System_Web_HttpCookie = new("System.Web.HttpCookie");
