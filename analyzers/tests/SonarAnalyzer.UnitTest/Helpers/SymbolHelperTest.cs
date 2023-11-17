@@ -74,7 +74,7 @@ namespace NS
     {
       AppDomain.CurrentDomain.AssemblyResolve += LoadAnyVersion;
     }
-    Assembly? LoadAnyVersion(object? sender, ResolveEventArgs args) => null;
+    Assembly LoadAnyVersion(object sender, ResolveEventArgs args) => null;
   }
 }
 ";
