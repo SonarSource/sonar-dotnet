@@ -22,8 +22,12 @@ using System.Text.RegularExpressions;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class PubliclyWritableDirectoriesBase : HotspotDiagnosticAnalyzer
+    public abstract class PubliclyWritableDirectoriesBase<TSyntaxKind, TInvocationExpression> : HotspotDiagnosticAnalyzer
+        where TSyntaxKind : struct
+        where TInvocationExpression : SyntaxNode
     {
+        protected const string DiagnosticId = "S5443";
+        private const string MessageFormat = "Make sure publicly writable directories are used safely here.";
         private const RegexOptions WindowsAndUnixOptions = RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant;
 
         protected static string[] InsecureEnvironmentVariables { get; }
@@ -34,10 +38,6 @@ namespace SonarAnalyzer.Rules
         private static readonly Regex WindowsDirectories;
         private static readonly Regex EnvironmentVariables;
 
-        protected PubliclyWritableDirectoriesBase(IAnalyzerConfiguration configuration) : base(configuration)
-        {
-        }
-
         static PubliclyWritableDirectoriesBase()
         {
             InsecureEnvironmentVariables = new[] { "tmp", "temp", "tmpdir" };
@@ -47,39 +47,6 @@ namespace SonarAnalyzer.Rules
             WindowsDirectories = new("""^([a-z]:[\\\/]?|[\\\/][\\\/][^\\\/]+[\\\/]|[\\\/])(windows[\\\/])?te?mp([\\\/]|$)""", WindowsAndUnixOptions);
             EnvironmentVariables = new($@"^%({InsecureEnvironmentVariables.JoinStr("|")})%([\\\/]|$)", WindowsAndUnixOptions);
         }
-
-        protected static bool IsSensitiveDirectoryUsage(string directory) =>
-            WindowsDirectories.IsMatch(directory)
-                || MacDirectories.IsMatch(directory)
-                || LinuxDirectories.IsMatch(directory)
-                || EnvironmentVariables.IsMatch(directory)
-                || UserProfile.IsMatch(directory);
-
-        private static string[] LinuxDirs() => new[]
-            {
-                "/dev/mqueue",
-                "/run/lock",
-                "/var/run/lock",
-            };
-
-        private static string[] MacDirs() => new[]
-            {
-                "/var/tmp",
-                "/usr/tmp",
-                "/dev/shm",
-                "/library/caches",
-                "/users/shared",
-                "/private/tmp",
-                "/private/var/tmp",
-            };
-    }
-
-    public abstract class PubliclyWritableDirectoriesBase<TSyntaxKind, TInvocationExpression> : PubliclyWritableDirectoriesBase
-        where TSyntaxKind : struct
-        where TInvocationExpression : SyntaxNode
-    {
-        protected const string DiagnosticId = "S5443";
-        private const string MessageFormat = "Make sure publicly writable directories are used safely here.";
 
         private readonly DiagnosticDescriptor rule;
 
@@ -127,5 +94,30 @@ namespace SonarAnalyzer.Rules
                 },
                 Language.SyntaxKind.InvocationExpression);
         }
+
+        private static bool IsSensitiveDirectoryUsage(string directory) =>
+            WindowsDirectories.IsMatch(directory)
+                || MacDirectories.IsMatch(directory)
+                || LinuxDirectories.IsMatch(directory)
+                || EnvironmentVariables.IsMatch(directory)
+                || UserProfile.IsMatch(directory);
+
+        private static string[] LinuxDirs() => new[]
+            {
+                "/dev/mqueue",
+                "/run/lock",
+                "/var/run/lock",
+            };
+
+        private static string[] MacDirs() => new[]
+            {
+                "/var/tmp",
+                "/usr/tmp",
+                "/dev/shm",
+                "/library/caches",
+                "/users/shared",
+                "/private/tmp",
+                "/private/var/tmp",
+            };
     }
 }
