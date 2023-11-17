@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
@@ -611,6 +612,24 @@ namespace Tests.TestCases
         private static double GetDegreeOfOverlap(string[] largerArray, string[] smallerOrEqualArray)    // Noncompliant FP
         {
             return (double)largerArray.Count(smallerOrEqualArray.Contains) / largerArray.Length;
+        }
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/8371
+    public class Repro_8371
+    {
+        static Repro_8371()
+        {
+            AppDomain.CurrentDomain.AssemblyResolve += AssemblyResolver.LoadAnyVersion;
+        }
+
+        private static class AssemblyResolver
+        {
+            public static Assembly LoadAnyVersion(object sender, ResolveEventArgs args) // Was not detected by IsEventHandler because the non-void return type
+            {
+                ReferenceEquals(1, 2);
+                return null;
+            }
         }
     }
 }
