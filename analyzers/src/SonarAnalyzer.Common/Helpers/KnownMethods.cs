@@ -220,13 +220,16 @@ public static class KnownMethods
 
     public static bool IsEventHandler(this IMethodSymbol methodSymbol) =>
         methodSymbol is { Parameters.Length: 2 }
-        && (methodSymbol.ReturnsVoid || methodSymbol.ReturnType.Is(KnownType.System_Reflection_Assembly)) // https://learn.microsoft.com/dotnet/api/system.resolveeventhandler
         && (methodSymbol.Parameters[0].Name.Equals("sender", StringComparison.OrdinalIgnoreCase) || methodSymbol.Parameters[0].Type.Is(KnownType.System_Object))
-        && (
-                // Inheritance from EventArgs is not enough for UWP or Xamarin as it uses other kind of event args (e.g. ILeavingBackgroundEventArgs)
-                methodSymbol.Parameters[1].Type.ToString().EndsWith("EventArgs", StringComparison.Ordinal) ||
-                methodSymbol.Parameters[1].Type.DerivesFrom(KnownType.System_EventArgs)
-            );
+        && (// Inheritance from EventArgs is not enough for UWP or Xamarin as it uses other kind of event args (e.g. ILeavingBackgroundEventArgs)
+            methodSymbol.Parameters[1].Type.ToString().EndsWith("EventArgs", StringComparison.Ordinal)
+            || methodSymbol.Parameters[1].Type.DerivesFrom(KnownType.System_EventArgs))
+        && (methodSymbol.ReturnsVoid
+            // The ResolveEventHandler violates the https://learn.microsoft.com/en-us/dotnet/csharp/event-pattern#event-delegate-signatures
+            // The ResolveEventHandler dates back to .Net1.1, is present in most runtimes and needs to be supported as an exception to the rule
+            // https://github.com/SonarSource/sonar-dotnet/issues/8371
+            // https://learn.microsoft.com/dotnet/api/system.resolveeventhandler
+            || methodSymbol.ReturnType.Is(KnownType.System_Reflection_Assembly));
 
     private static bool IsEnumerableMethod(this IMethodSymbol methodSymbol, string methodName, params int[] parametersCount) =>
         methodSymbol != null
