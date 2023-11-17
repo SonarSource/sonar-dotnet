@@ -40,8 +40,8 @@ namespace SonarAnalyzer.Rules
         private const string DefaultCredentialWords = "password, passwd, pwd, passphrase";
 
         private static readonly ConcurrentDictionary<string, Regex> PasswordValuePattern = new();
-        protected static readonly Regex ValidCredentialPattern = new(@"^(\?|:\w+|\{\d+[^}]*\}|""|')$", RegexOptions.IgnoreCase | RegexOptions.Compiled);
-        protected static readonly Regex UriUserInfoPattern = CreateUriUserInfoPattern();
+        private static readonly Regex ValidCredentialPattern = new(@"^(\?|:\w+|\{\d+[^}]*\}|""|')$", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+        private static readonly Regex UriUserInfoPattern = CreateUriUserInfoPattern();
 
         private readonly IAnalyzerConfiguration configuration;
         private readonly DiagnosticDescriptor rule;
