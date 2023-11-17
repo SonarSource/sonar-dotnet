@@ -200,7 +200,7 @@ namespace NS
             var nsSymbol = testCode.GetNamespaceSymbol("NS");
 
             var typeSymbols = nsSymbol.GetAllNamedTypes();
-            typeSymbols.Should().HaveCount(6);
+            typeSymbols.Should().HaveCount(7);
         }
 
         [TestMethod]
