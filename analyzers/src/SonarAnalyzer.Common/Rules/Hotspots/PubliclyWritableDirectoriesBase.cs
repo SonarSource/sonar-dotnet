@@ -40,12 +40,13 @@ namespace SonarAnalyzer.Rules
 
         static PubliclyWritableDirectoriesBase()
         {
-            InsecureEnvironmentVariables = new[] { "tmp", "temp", "tmpdir" };
+            var insecureEnvironmentVariables = new[] { "tmp", "temp", "tmpdir" };
+            InsecureEnvironmentVariables = insecureEnvironmentVariables;
             UserProfile = new("""^%USERPROFILE%[\\\/]AppData[\\\/]Local[\\\/]Temp""", WindowsAndUnixOptions);
             LinuxDirectories = new($@"^({LinuxDirs().JoinStr("|", Regex.Escape)})(\/|$)", RegexOptions.Compiled);
             MacDirectories = new($@"^({MacDirs().JoinStr("|", Regex.Escape)})(\/|$)", WindowsAndUnixOptions);
             WindowsDirectories = new("""^([a-z]:[\\\/]?|[\\\/][\\\/][^\\\/]+[\\\/]|[\\\/])(windows[\\\/])?te?mp([\\\/]|$)""", WindowsAndUnixOptions);
-            EnvironmentVariables = new($@"^%({InsecureEnvironmentVariables.JoinStr("|")})%([\\\/]|$)", WindowsAndUnixOptions);
+            EnvironmentVariables = new($@"^%({insecureEnvironmentVariables.JoinStr("|")})%([\\\/]|$)", WindowsAndUnixOptions);
         }
 
         private readonly DiagnosticDescriptor rule;
