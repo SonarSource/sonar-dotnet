@@ -66,16 +66,18 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        protected DoNotHardcodeCredentialsBase()
+        protected DoNotHardcodeCredentialsBase(IAnalyzerConfiguration configuration)
         {
+            this.configuration = configuration;
+            rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
             CredentialWords = DefaultCredentialWords;   // Property will initialize multiple state variables
         }
 
         private static Regex PasswordValueRegex(string credentialWords) =>
             PasswordValuePattern.GetOrAdd(credentialWords, static credentialWords =>
             {
-                var splitCredentialWords = string.Join("|", SplitCredentialWordsByComma(credentialWords).Select(Regex.Escape));
-                return new Regex($@"\b(?<credential>{splitCredentialWords})\s*[:=]\s*(?<suffix>.+)$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                var credentialWordsPattern = string.Join("|", SplitCredentialWordsByComma(credentialWords).Select(Regex.Escape));
+                return new Regex($@"\b(?<credential>{credentialWordsPattern})\s*[:=]\s*(?<suffix>.+)$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
             });
 
         private static ImmutableList<string> SplitCredentialWordsByComma(string credentialWords) =>
@@ -98,12 +100,6 @@ namespace SonarAnalyzer.Rules
 
             static string CreateUserInfoGroup(string name, string additionalCharacters = null) =>
                 $@"(?<{name}>[\w\d{Regex.Escape(UriPasswordSpecialCharacters)}{additionalCharacters}]+)";
-        }
-
-        protected DoNotHardcodeCredentialsBase(IAnalyzerConfiguration configuration)
-        {
-            this.configuration = configuration;
-            rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
         }
 
         protected sealed override void Initialize(SonarParametrizedAnalysisContext context)
