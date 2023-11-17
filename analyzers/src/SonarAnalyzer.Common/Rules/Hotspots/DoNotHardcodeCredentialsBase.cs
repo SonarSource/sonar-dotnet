@@ -28,12 +28,23 @@ using SonarAnalyzer.Json.Parsing;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class DoNotHardcodeCredentialsBase : ParametrizedDiagnosticAnalyzer
+    public abstract class DoNotHardcodeCredentialsBase<TSyntaxKind> : ParametrizedDiagnosticAnalyzer
+        where TSyntaxKind : struct
     {
         private const string DefaultCredentialWords = "password, passwd, pwd, passphrase";
+        private const string DiagnosticId = "S2068";
+        private const string MessageFormat = "{0}";
+        private const string MessageHardcodedPassword = "Please review this hard-coded password.";
+        private const string MessageFormatCredential = @"""{0}"" detected here, make sure this is not a hard-coded credential.";
+        private const string MessageUriUserInfo = "Review this hard-coded URI, which may contain a credential.";
+        protected const char CredentialSeparator = ';';
+
         private static readonly ConcurrentDictionary<string, Regex> PasswordValuePattern = new();
         protected static readonly Regex ValidCredentialPattern = new(@"^(\?|:\w+|\{\d+[^}]*\}|""|')$", RegexOptions.IgnoreCase | RegexOptions.Compiled);
         protected static readonly Regex UriUserInfoPattern = CreateUriUserInfoPattern();
+
+        private readonly IAnalyzerConfiguration configuration;
+        private readonly DiagnosticDescriptor rule;
 
         private string credentialWords;
 
@@ -83,20 +94,6 @@ namespace SonarAnalyzer.Rules
             static string CreateUserInfoGroup(string name, string additionalCharacters = null) =>
                 $@"(?<{name}>[\w\d{Regex.Escape(UriPasswordSpecialCharacters)}{additionalCharacters}]+)";
         }
-    }
-
-    public abstract class DoNotHardcodeCredentialsBase<TSyntaxKind> : DoNotHardcodeCredentialsBase
-        where TSyntaxKind : struct
-    {
-        protected const char CredentialSeparator = ';';
-        private const string DiagnosticId = "S2068";
-        private const string MessageFormat = "{0}";
-        private const string MessageHardcodedPassword = "Please review this hard-coded password.";
-        private const string MessageFormatCredential = @"""{0}"" detected here, make sure this is not a hard-coded credential.";
-        private const string MessageUriUserInfo = "Review this hard-coded URI, which may contain a credential.";
-
-        private readonly IAnalyzerConfiguration configuration;
-        private readonly DiagnosticDescriptor rule;
 
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract void InitializeActions(SonarParametrizedAnalysisContext context);
