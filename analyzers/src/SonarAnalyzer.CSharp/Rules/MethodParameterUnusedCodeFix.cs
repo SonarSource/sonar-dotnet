@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var newRoot = root.RemoveNode(
                         parameter,
-                        SyntaxRemoveOptions.KeepLeadingTrivia);
+                        SyntaxRemoveOptions.KeepLeadingTrivia | SyntaxRemoveOptions.AddElasticMarker);
                     return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
                 },
                 context.Diagnostics);
