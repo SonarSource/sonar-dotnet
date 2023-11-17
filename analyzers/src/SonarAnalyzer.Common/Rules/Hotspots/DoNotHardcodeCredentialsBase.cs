@@ -31,13 +31,13 @@ namespace SonarAnalyzer.Rules
     public abstract class DoNotHardcodeCredentialsBase<TSyntaxKind> : ParametrizedDiagnosticAnalyzer
         where TSyntaxKind : struct
     {
-        private const string DefaultCredentialWords = "password, passwd, pwd, passphrase";
+        protected const char CredentialSeparator = ';';
         private const string DiagnosticId = "S2068";
         private const string MessageFormat = "{0}";
         private const string MessageHardcodedPassword = "Please review this hard-coded password.";
         private const string MessageFormatCredential = @"""{0}"" detected here, make sure this is not a hard-coded credential.";
         private const string MessageUriUserInfo = "Review this hard-coded URI, which may contain a credential.";
-        protected const char CredentialSeparator = ';';
+        private const string DefaultCredentialWords = "password, passwd, pwd, passphrase";
 
         private static readonly ConcurrentDictionary<string, Regex> PasswordValuePattern = new();
         protected static readonly Regex ValidCredentialPattern = new(@"^(\?|:\w+|\{\d+[^}]*\}|""|')$", RegexOptions.IgnoreCase | RegexOptions.Compiled);
@@ -47,6 +47,13 @@ namespace SonarAnalyzer.Rules
         private readonly DiagnosticDescriptor rule;
 
         private string credentialWords;
+        private ImmutableList<string> splitCredentialWords;
+
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
+        protected abstract void InitializeActions(SonarParametrizedAnalysisContext context);
+        protected abstract bool IsSecureStringAppendCharFromConstant(SyntaxNode argumentNode, SemanticModel model);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         [RuleParameter("credentialWords", PropertyType.String, "Comma separated list of words identifying potential credentials", DefaultCredentialWords)]
         public string CredentialWords
@@ -55,25 +62,23 @@ namespace SonarAnalyzer.Rules
             set
             {
                 credentialWords = value;
-                SplitCredentialWords = SplitCredentialWordsByComma(credentialWords);
+                splitCredentialWords = SplitCredentialWordsByComma(credentialWords);
             }
         }
-
-        protected ImmutableList<string> SplitCredentialWords { get; private set; }
 
         protected DoNotHardcodeCredentialsBase()
         {
             CredentialWords = DefaultCredentialWords;   // Property will initialize multiple state variables
         }
 
-        protected static Regex PasswordValueRegex(string credentialWords) =>
+        private static Regex PasswordValueRegex(string credentialWords) =>
             PasswordValuePattern.GetOrAdd(credentialWords, static credentialWords =>
             {
                 var splitCredentialWords = string.Join("|", SplitCredentialWordsByComma(credentialWords).Select(Regex.Escape));
                 return new Regex($@"\b(?<credential>{splitCredentialWords})\s*[:=]\s*(?<suffix>.+)$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
             });
 
-        protected static ImmutableList<string> SplitCredentialWordsByComma(string credentialWords) =>
+        private static ImmutableList<string> SplitCredentialWordsByComma(string credentialWords) =>
             credentialWords.ToUpperInvariant()
                 .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
                 .Select(x => x.Trim())
@@ -94,12 +99,6 @@ namespace SonarAnalyzer.Rules
             static string CreateUserInfoGroup(string name, string additionalCharacters = null) =>
                 $@"(?<{name}>[\w\d{Regex.Escape(UriPasswordSpecialCharacters)}{additionalCharacters}]+)";
         }
-
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
-        protected abstract void InitializeActions(SonarParametrizedAnalysisContext context);
-        protected abstract bool IsSecureStringAppendCharFromConstant(SyntaxNode argumentNode, SemanticModel model);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected DoNotHardcodeCredentialsBase(IAnalyzerConfiguration configuration)
         {
@@ -209,7 +208,7 @@ namespace SonarAnalyzer.Rules
         {
             var credentialWordsFound = variableName
                 .SplitCamelCaseToWords()
-                .Intersect(SplitCredentialWords)
+                .Intersect(splitCredentialWords)
                 .ToHashSet(StringComparer.OrdinalIgnoreCase);
 
             if (credentialWordsFound.Any(x => variableValue.IndexOf(x, StringComparison.InvariantCultureIgnoreCase) >= 0))
