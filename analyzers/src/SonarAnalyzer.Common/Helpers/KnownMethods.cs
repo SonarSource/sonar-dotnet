@@ -222,7 +222,7 @@ public static class KnownMethods
         methodSymbol is { Parameters.Length: 2 }
         && (methodSymbol.Parameters[0].Name.Equals("sender", StringComparison.OrdinalIgnoreCase) || methodSymbol.Parameters[0].Type.Is(KnownType.System_Object))
         && (// Inheritance from EventArgs is not enough for UWP or Xamarin as it uses other kind of event args (e.g. ILeavingBackgroundEventArgs)
-            methodSymbol.Parameters[1].Type.ToString().EndsWith("EventArgs", StringComparison.Ordinal)
+            methodSymbol.Parameters[1].Type.Name.EndsWith("EventArgs", StringComparison.Ordinal)
             || methodSymbol.Parameters[1].Type.DerivesFrom(KnownType.System_EventArgs))
         && (methodSymbol.ReturnsVoid
             // The ResolveEventHandler violates the https://learn.microsoft.com/en-us/dotnet/csharp/event-pattern#event-delegate-signatures
