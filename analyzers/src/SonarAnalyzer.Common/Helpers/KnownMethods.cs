@@ -219,9 +219,8 @@ public static class KnownMethods
         && methodSymbol.ContainingType.ConstructedFrom.Is(KnownType.System_Collections_Generic_List_T);
 
     public static bool IsEventHandler(this IMethodSymbol methodSymbol) =>
-        methodSymbol != null
-        && methodSymbol.ReturnsVoid
-        && methodSymbol.Parameters.Length == 2
+        methodSymbol is { Parameters.Length: 2 }
+        && (methodSymbol.ReturnsVoid || methodSymbol.ReturnType.Is(KnownType.System_Reflection_Assembly)) // https://learn.microsoft.com/dotnet/api/system.resolveeventhandler
         && (methodSymbol.Parameters[0].Name.Equals("sender", StringComparison.OrdinalIgnoreCase) || methodSymbol.Parameters[0].Type.Is(KnownType.System_Object))
         && (
                 // Inheritance from EventArgs is not enough for UWP or Xamarin as it uses other kind of event args (e.g. ILeavingBackgroundEventArgs)
