@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <IsPackable>false</IsPackable>
@@ -44,7 +44,7 @@
       <!-- This package is a dependency of Microsoft.CodeAnalysis.CSharp.Workspaces. It is safe to use since it's compatible with .Net Portable runtime -->
       <NoWarn>NU1701</NoWarn>
     </PackageReference>
-    <PackageReference Include="NuGet.Protocol" Version="6.7.0" />
+    <PackageReference Include="NuGet.Protocol" Version="6.8.0" />
   </ItemGroup>
 
   <ItemGroup>
