@@ -184,7 +184,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
                     }
                 }
                 """;
-            VerifyCfgCS<SyntaxCS.MethodDeclarationSyntax>(code).Should().NotBeNull();
+            CreateCfgCS<SyntaxCS.MethodDeclarationSyntax>(code).Should().NotBeNull();
         }
 
         [TestMethod]
@@ -196,7 +196,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
                     public int Property => 42;
                 }
                 """;
-            VerifyCfgCS<SyntaxCS.PropertyDeclarationSyntax>(code).Should().NotBeNull();
+            CreateCfgCS<SyntaxCS.PropertyDeclarationSyntax>(code).Should().NotBeNull();
         }
 
         [TestMethod]
@@ -208,7 +208,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
                     public int Property {get; set;}
                 }
                 """;
-            VerifyCfgCS<SyntaxCS.PropertyDeclarationSyntax>(code).Should().BeNull();
+            CreateCfgCS<SyntaxCS.PropertyDeclarationSyntax>(code).Should().BeNull();
         }
 
         [TestMethod]
@@ -221,7 +221,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
                     public string this[int index] => field = null;
                 }
                 """;
-            VerifyCfgCS<SyntaxCS.IndexerDeclarationSyntax>(code).Should().NotBeNull();
+            CreateCfgCS<SyntaxCS.IndexerDeclarationSyntax>(code).Should().NotBeNull();
         }
 
         [TestMethod]
@@ -234,7 +234,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
                     End Sub
                 End Class
                 """;
-            VerifyCfgVB<SyntaxVB.MethodBlockSyntax>(code).Should().NotBeNull();
+            CreateCfgVB<SyntaxVB.MethodBlockSyntax>(code).Should().NotBeNull();
         }
 
         [TestMethod]
@@ -249,7 +249,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
                     }
                 }
                 """;
-            VerifyCfgCS<SyntaxCS.InvocationExpressionSyntax>(code).Should().NotBeNull();
+            CreateCfgCS<SyntaxCS.InvocationExpressionSyntax>(code).Should().NotBeNull();
         }
 
         [TestMethod]
@@ -262,7 +262,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
                     End Sub
                 End Class
                 """;
-            VerifyCfgVB<SyntaxVB.InvocationExpressionSyntax>(code).Should().NotBeNull();
+            CreateCfgVB<SyntaxVB.InvocationExpressionSyntax>(code).Should().NotBeNull();
         }
 
         [TestMethod]
@@ -279,7 +279,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
                     }
                 }
                 """;
-            VerifyCfgCS<SyntaxCS.ParenthesizedLambdaExpressionSyntax>(code).Should().NotBeNull();
+            CreateCfgCS<SyntaxCS.ParenthesizedLambdaExpressionSyntax>(code).Should().NotBeNull();
         }
 
         [TestMethod]
@@ -292,7 +292,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
                     End Sub
                 End Class
                 """;
-            VerifyCfgVB<SyntaxVB.SingleLineLambdaExpressionSyntax>(code).Should().NotBeNull();
+            CreateCfgVB<SyntaxVB.SingleLineLambdaExpressionSyntax>(code).Should().NotBeNull();
         }
 
         [TestMethod]
@@ -423,7 +423,6 @@ End Class";
         {
             var (tree, model) = TestHelper.CompileIgnoreErrorsCS(code);
             var lambda = tree.Single<SyntaxCS.ParenthesizedLambdaExpressionSyntax>();
-
             ExtensionsCS.CreateCfg(lambda, model, default).Should().NotBeNull();
         }
 
@@ -1212,18 +1211,16 @@ public class X
                 .SyntaxTrees
                 .First();
 
-        private static ControlFlowGraph VerifyCfgCS<T>(string code) where T : CSharpSyntaxNode
+        private static ControlFlowGraph CreateCfgCS<T>(string code) where T : CSharpSyntaxNode
         {
-            var (tree, semanticModel) = TestHelper.CompileCS(code);
-            var node = tree.Single<T>();
-            return ExtensionsCS.CreateCfg(node, semanticModel, default);
+            var (tree, model) = TestHelper.CompileCS(code);
+            return ExtensionsCS.CreateCfg(tree.Single<T>(), model, default);
         }
 
-        private static ControlFlowGraph VerifyCfgVB<T>(string code) where T : Microsoft.CodeAnalysis.VisualBasic.VisualBasicSyntaxNode
+        private static ControlFlowGraph CreateCfgVB<T>(string code) where T : Microsoft.CodeAnalysis.VisualBasic.VisualBasicSyntaxNode
         {
-            var (tree, semanticModel) = TestHelper.CompileVB(code);
-            var node = tree.Single<T>();
-            return ExtensionsVB.CreateCfg(node, semanticModel, default);
+            var (tree, model) = TestHelper.CompileVB(code);
+            return ExtensionsVB.CreateCfg(tree.Single<T>(), model, default);
         }
     }
 }
