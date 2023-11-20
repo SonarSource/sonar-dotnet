@@ -134,6 +134,17 @@ public partial class SonarAnalysisContextTest
     }
 
     [TestMethod]
+    public void SonarCompilationStartAnalysisContext_RegisterSemanticModel()
+    {
+        var context = new DummyAnalysisContext(TestContext);
+        var startContext = new DummyCompilationStartAnalysisContext(context);
+        var sut = new SonarCompilationStartAnalysisContext(new(context, DummyMainDescriptor), startContext);
+        sut.RegisterSemanticModelAction(_ => { });
+
+        startContext.AssertExpectedInvocationCounts(expectedSemanticModelCount: 1);
+    }
+
+    [TestMethod]
     public void SonarCompilationStartAnalysisContext_RegisterCompilationEndAction()
     {
         var context = new DummyAnalysisContext(TestContext);
@@ -179,7 +190,7 @@ public partial class SonarAnalysisContextTest
     }
 
     [TestMethod]
-    public void SonarCompilationStartAnalysisContext_RegistSymbol_ReportsIssue()
+    public void SonarCompilationStartAnalysisContext_RegisterSymbol_ReportsIssue()
     {
         var context = new DummyAnalysisContext(TestContext);
         var startContext = new DummyCompilationStartAnalysisContext(context);
