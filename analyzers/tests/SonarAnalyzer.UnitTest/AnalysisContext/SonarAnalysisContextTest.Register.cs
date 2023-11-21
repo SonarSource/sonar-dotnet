@@ -145,6 +145,16 @@ public partial class SonarAnalysisContextTest
     }
 
     [TestMethod]
+    public void RegisterSemanticModelAction_Extension_SonarAnalysisContext_CS()
+    {
+        var context = new DummyAnalysisContext(TestContext);
+        var self = new SonarAnalysisContext(context, DummyMainDescriptor);
+        CS.RegisterSemanticModelAction(self, context.DelegateAction);
+
+        context.AssertDelegateInvoked(true);
+    }
+
+    [TestMethod]
     public void RegisterSemanticModelAction_Extension_SonarParametrizedAnalysisContext_CS()
     {
         var context = new DummyAnalysisContext(TestContext);
