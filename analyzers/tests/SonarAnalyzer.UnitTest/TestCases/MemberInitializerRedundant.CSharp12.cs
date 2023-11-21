@@ -12,3 +12,12 @@ class SampleClass2(object options)
     }
     private readonly object _options = options; // Compliant
 }
+
+class SampleClass3(object options)
+{
+    public SampleClass3() : this(null)
+    {
+        _options = null;
+    }
+    private readonly object _options = options; // Compliant
+}
