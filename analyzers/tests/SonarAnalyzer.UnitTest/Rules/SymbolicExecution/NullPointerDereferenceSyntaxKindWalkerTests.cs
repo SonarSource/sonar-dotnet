@@ -58,7 +58,7 @@ public class NullPointerDereferenceSyntaxKindWalkerTests
                 public unsafe void M(int i)
                 {
                     int* iPtr = &i;
-                    iPtr -> ToString();
+                    iPtr->ToString();
                 }
             }
             """).Tree.GetRoot();
