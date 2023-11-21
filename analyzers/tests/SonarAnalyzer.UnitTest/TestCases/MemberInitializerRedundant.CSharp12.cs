@@ -1,23 +1,36 @@
 ﻿/// Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/7624
-class SampleClass1(object options)
+class PrimaryConstructor1(object options)
 {
-    private readonly object _options = options; // Compliant
+    private readonly object _options = options;      // Compliant
+    public object Options { get; } = options;        // Compliant
+    public object[] AllOptions { get; } = [options]; // Compliant
 }
 
-class SampleClass2(object options)
+class PrimaryConstructor2(object options)
 {
-    public SampleClass2() : this(null)
+    public PrimaryConstructor2() : this(null)
     {
 
     }
     private readonly object _options = options; // Compliant
 }
 
-class SampleClass3(object options)
+class PrimaryConstructor3(object options)
 {
-    public SampleClass3() : this(null)
+    public PrimaryConstructor3() : this(null)
     {
         _options = null;
     }
     private readonly object _options = options; // Compliant
+}
+
+class CollectionExpression1
+{
+    private readonly int[] numbers = [1, 2, 3]; // Noncompliant
+    //                             ^^^^^^^^^^^
+
+    CollectionExpression1()
+    {
+        numbers = [4, 5, 6];
+    }
 }
