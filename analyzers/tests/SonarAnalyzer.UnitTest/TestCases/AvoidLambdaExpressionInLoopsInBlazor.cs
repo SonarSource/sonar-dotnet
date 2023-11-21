@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.Web;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 class LambdaInLoopInMethod
@@ -76,6 +77,11 @@ public class LambdaComponent : ComponentBase
             });
             builder.AddMarkupContent(14, "\r\n        Button");
             builder.CloseElement();
+        }
+
+        foreach (var button in Buttons.OrderByDescending(x => x.Id))
+        {
+
         }
     }
 }
