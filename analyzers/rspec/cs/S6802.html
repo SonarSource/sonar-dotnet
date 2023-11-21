@@ -5,11 +5,11 @@ are rendered in a loop can lead to negative user experiences and performance iss
 elements.</p>
 <p>The reason behind this is that Blazor rebuilds all lambda expressions within the loop every time the UI elements are rendered.</p>
 <h2>How to fix it</h2>
-<p>Ensure to not use a delegate in elements rendered in loops by either:</p>
+<p>Ensure to not use a delegate in elements rendered in loops, you can try:</p>
 <ul>
   <li> using a collection of objects containing the delegate as an <a href="https://learn.microsoft.com/en-us/dotnet/api/system.action">Action</a>,
   </li>
-  <li> extract the elements into a dedicated component and use an <a
+  <li> or extracting the elements into a dedicated component and using an <a
   href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/event-handling#eventcallback">EventCallback</a> to call the delegate </li>
 </ul>
 <h3>Code examples</h3>
@@ -69,6 +69,8 @@ elements.</p>
 </pre>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="2" data-diff-type="noncompliant">
+@* Component.razor *@
+
 @for (var i = 1; i &lt; 100; i++)
 {
     var buttonNumber = i;
@@ -86,7 +88,7 @@ elements.</p>
 }
 </pre>
 <h4>Compliant solution</h4>
-<pre>
+<pre data-diff-id="2" data-diff-type="compliant">
 @* MyButton.razor *@
 
 &lt;button @onclick="OnClickCallback"&gt;
@@ -94,7 +96,6 @@ elements.</p>
 &lt;/button&gt;
 
 @code {
-
     [Parameter]
     public int Id { get; set; }
 
@@ -109,8 +110,9 @@ elements.</p>
         OnClick.InvokeAsync(Id);
     }
 }
-</pre>
-<pre data-diff-id="2" data-diff-type="compliant">
+
+@* Component.razor *@
+
 @for (var i = 1; i &lt; 100; i++)
 {
     var buttonNumber = i;
