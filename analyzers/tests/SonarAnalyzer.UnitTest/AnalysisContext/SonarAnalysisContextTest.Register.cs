@@ -140,6 +140,7 @@ public partial class SonarAnalysisContextTest
         var context = new DummyAnalysisContext(TestContext, unchangedFileName);
         var sut = new SonarParametrizedAnalysisContext(new(context, DummyMainDescriptor));
         sut.RegisterSemanticModelAction(CSharpGeneratedCodeRecognizer.Instance, context.DelegateAction);
+
         context.AssertDelegateInvoked(expected);
     }
 
@@ -149,6 +150,7 @@ public partial class SonarAnalysisContextTest
         var context = new DummyAnalysisContext(TestContext);
         var self = new SonarParametrizedAnalysisContext(new(context, DummyMainDescriptor));
         CS.RegisterSemanticModelAction(self, context.DelegateAction);
+
         context.AssertDelegateInvoked(true);
     }
 
@@ -158,6 +160,7 @@ public partial class SonarAnalysisContextTest
         var context = new DummyAnalysisContext(TestContext);
         var self = new SonarParametrizedAnalysisContext(new(context, DummyMainDescriptor));
         VB.RegisterSemanticModelAction(self, context.DelegateAction);
+
         context.AssertDelegateInvoked(true);
     }
 
