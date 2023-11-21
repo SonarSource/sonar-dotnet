@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private void CheckInstanceMembers(SonarSyntaxNodeReportingContext c, TypeDeclarationSyntax declaration, IEnumerable<ISymbol> typeMembers)
         {
-            var constructors = typeMembers.OfType<IMethodSymbol>().Where(x => x is { MethodKind: MethodKind.Constructor }).ToList();
+            var constructors = typeMembers.OfType<IMethodSymbol>().Where(x => x is { MethodKind: MethodKind.Constructor, IsStatic: false }).ToList();
             if (constructors.Any(x =>
                 // Implicit parameterless constructor
                 x.IsImplicitlyDeclared
