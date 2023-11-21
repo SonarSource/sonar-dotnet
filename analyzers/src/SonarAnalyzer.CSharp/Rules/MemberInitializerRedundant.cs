@@ -47,19 +47,16 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var declaration = (TypeDeclarationSyntax)c.Node;
-                    var members = c.SemanticModel.GetDeclaredSymbol(declaration)?.GetMembers();
-                    if (members == null || members.Value.Length == 0)
+                    if (c.SemanticModel.GetDeclaredSymbol(declaration)?.GetMembers() is { Length: > 0 } members)
                     {
-                        return;
+                        // structs cannot initialize fields/properties at declaration time
+                        // interfaces cannot have instance fields and instance properties cannot have initializers
+                        if (declaration is ClassDeclarationSyntax)
+                        {
+                            CheckInstanceMembers(c, declaration, members);
+                        }
+                        CheckStaticMembers(c, declaration, members);
                     }
-
-                    // structs cannot initialize fields/properties at declaration time
-                    // interfaces cannot have instance fields and instance properties cannot have initializers
-                    if (declaration is ClassDeclarationSyntax)
-                    {
-                        CheckInstanceMembers(c, declaration, members);
-                    }
-                    CheckStaticMembers(c, declaration, members);
                 },
                 // For record support, see details in https://github.com/SonarSource/sonar-dotnet/pull/4756
                 // it is difficult to work with instance record constructors w/o raising FPs
@@ -69,14 +66,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private void CheckInstanceMembers(SonarSyntaxNodeReportingContext c, TypeDeclarationSyntax declaration, IEnumerable<ISymbol> typeMembers)
         {
-            var typeInitializers = typeMembers.OfType<IMethodSymbol>().Where(x =>
-                // implicit parameterless constructors and primary constructor can be considered as having an
-                // empty body. For now we exclude them here, but we should consider adding them to the list
-                // of constructors, but with an empty body, to unify the handling.
-                x is { MethodKind: MethodKind.Constructor, IsStatic: false, IsImplicitlyDeclared: false }
-                && x.DeclaringSyntaxReferences.Any(s => s.GetSyntax() is ConstructorDeclarationSyntax)).ToList();
-            if (typeInitializers.Count == 0)
+            var constructors = typeMembers.OfType<IMethodSymbol>().Where(x => x is { MethodKind: MethodKind.Constructor }).ToList();
+            if (constructors.Any(x =>
+                // Implicit parameterless constructor
+                x.IsImplicitlyDeclared
+                // Primary constructor
+                || x.DeclaringSyntaxReferences.All(s => s.GetSyntax() is not ConstructorDeclarationSyntax)))
             {
+                // Implicit parameterless constructors and primary constructors can be considered as having an
+                // empty body and they do not initialize any members. If any of these is present, the rule does not apply.
                 return;
             }
 
@@ -87,25 +85,17 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var initializerDeclarations = GetConstructorDeclarations<ConstructorDeclarationSyntax>(c, typeInitializers);
-            foreach (var memberSymbol in initializedMembers.Keys)
+            var constructorDeclarations = GetConstructorDeclarations<ConstructorDeclarationSyntax>(c, constructors);
+            foreach (var kvp in initializedMembers)
             {
                 // the instance member should be initialized in ALL instance constructors
                 // otherwise, initializing it inline makes sense and the rule should not report
-                if (initializerDeclarations.All(constructor =>
-                    {
-                        if (constructor.Node.Initializer is { ThisOrBaseKeyword.RawKind: (int)SyntaxKind.ThisKeyword } initializer
-                            && c.SemanticModel.GetSymbolInfo(initializer).Symbol is IMethodSymbol calledCtor
-                            && typeInitializers.Contains(calledCtor)) // Some constructors called by this() are not defined in source (e.g. primary constructors) and are therefore not checked.
-                        {
-                            // Calls another ctor, which is also checked.
-                            return true;
-                        }
-
-                        return IsSymbolFirstSetInCfg(memberSymbol, constructor.Node, constructor.Model, c.Cancel);
-                    }))
+                if (constructorDeclarations.All(constructor =>
+                    // Calls another ctor, which is also checked:
+                    constructor is { Node.Initializer.ThisOrBaseKeyword.RawKind: (int)SyntaxKind.ThisKeyword }
+                    || IsSymbolFirstSetInCfg(kvp.Key, constructor.Node, constructor.Model, c.Cancel)))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, initializedMembers[memberSymbol].GetLocation(), InstanceMemberMessage));
+                    c.ReportIssue(Diagnostic.Create(Rule, kvp.Value.GetLocation(), InstanceMemberMessage));
                 }
             }
         }
