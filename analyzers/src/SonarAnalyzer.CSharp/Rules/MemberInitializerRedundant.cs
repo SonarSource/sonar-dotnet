@@ -87,7 +87,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var initializerDeclarations = GetInitializerDeclarations<ConstructorDeclarationSyntax>(c, typeInitializers);
+            var initializerDeclarations = GetConstructorDeclarations<ConstructorDeclarationSyntax>(c, typeInitializers);
             foreach (var memberSymbol in initializedMembers.Keys)
             {
                 // the instance member should be initialized in ALL instance constructors
@@ -125,7 +125,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var initializerDeclarations = GetInitializerDeclarations<BaseMethodDeclarationSyntax>(c, typeInitializers);
+            var initializerDeclarations = GetConstructorDeclarations<BaseMethodDeclarationSyntax>(c, typeInitializers);
             foreach (var memberSymbol in initializedMembers.Keys)
             {
                 // there can be only one static constructor
@@ -182,14 +182,13 @@ namespace SonarAnalyzer.Rules.CSharp
             return allMembers;
         }
 
-        private static List<NodeSymbolAndModel<TSyntax, IMethodSymbol>> GetInitializerDeclarations<TSyntax>(SonarSyntaxNodeReportingContext context, List<IMethodSymbol> constructorSymbols)
+        private static List<NodeSymbolAndModel<TSyntax, IMethodSymbol>> GetConstructorDeclarations<TSyntax>(SonarSyntaxNodeReportingContext context, List<IMethodSymbol> constructorSymbols)
             where TSyntax : SyntaxNode =>
-            constructorSymbols
-                .Select(x => new NodeSymbolAndModel<TSyntax, IMethodSymbol>(null, x.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() as TSyntax, x))
-                .Where(x => x.Node != null)
-                .Select(x => new NodeSymbolAndModel<TSyntax, IMethodSymbol>(x.Node.EnsureCorrectSemanticModelOrDefault(context.SemanticModel), x.Node, x.Symbol))
-                .Where(x => x.Model != null)
-                .ToList();
+                (from constructorSymbol in constructorSymbols
+                 from declarationNode in constructorSymbol.DeclaringSyntaxReferences.Select(x => x.GetSyntax()).OfType<TSyntax>()
+                 let model = declarationNode.EnsureCorrectSemanticModelOrDefault(context.SemanticModel)
+                 where model != null
+                 select new NodeSymbolAndModel<TSyntax, IMethodSymbol>(model, declarationNode, constructorSymbol)).ToList();
 
         private static IEnumerable<DeclarationTuple<IPropertySymbol>> GetInitializedPropertyDeclarations(TypeDeclarationSyntax declaration,
                                                                                                          Func<SyntaxTokenList, bool> filterModifiers,
