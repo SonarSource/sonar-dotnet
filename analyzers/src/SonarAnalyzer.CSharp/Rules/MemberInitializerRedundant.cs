@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private void CheckInstanceMembers(SonarSyntaxNodeReportingContext c, TypeDeclarationSyntax declaration, IEnumerable<ISymbol> typeMembers)
         {
             var constructors = typeMembers.OfType<IMethodSymbol>().Where(x => x is { MethodKind: MethodKind.Constructor, IsStatic: false }).ToList();
-            if (constructors.Any(x =>
+            if (constructors.Exists(x =>
                 // Implicit parameterless constructor
                 x.IsImplicitlyDeclared
                 // Primary constructor
@@ -90,7 +90,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 // the instance member should be initialized in ALL instance constructors
                 // otherwise, initializing it inline makes sense and the rule should not report
-                if (constructorDeclarations.All(constructor =>
+                if (constructorDeclarations.TrueForAll(constructor =>
                     // Calls another ctor, which is also checked:
                     constructor is { Node.Initializer.ThisOrBaseKeyword.RawKind: (int)SyntaxKind.ThisKeyword }
                     || IsSymbolFirstSetInCfg(kvp.Key, constructor.Node, constructor.Model, c.Cancel)))
