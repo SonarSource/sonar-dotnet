@@ -34,7 +34,7 @@ public sealed class SonarCompilationStartAnalysisContext : SonarAnalysisContextB
     public void RegisterCompilationEndAction(Action<SonarCompilationReportingContext> action) =>
         Context.RegisterCompilationEndAction(x => action(new(AnalysisContext, x)));
 
-    public void RegisterSemanticModelAction(Action<SonarSematicModelReportingContext> action) =>
+    public void RegisterSemanticModelAction(Action<SonarSemanticModelReportingContext> action) =>
         Context.RegisterSemanticModelAction(x => action(new(AnalysisContext, x)));
 
     public void RegisterNodeAction<TSyntaxKind>(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxNodeReportingContext> action, params TSyntaxKind[] syntaxKinds)

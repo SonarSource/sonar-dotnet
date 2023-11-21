@@ -113,9 +113,9 @@ public class SonarAnalysisContext
         analysisContext.RegisterSyntaxNodeAction(
             c => Execute<SonarSyntaxNodeReportingContext, SyntaxNodeAnalysisContext>(new(this, c), action, c.Node.SyntaxTree, generatedCodeRecognizer), syntaxKinds);
 
-    public void RegisterSemanticModelAction(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSematicModelReportingContext> action) =>
+    public void RegisterSemanticModelAction(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSemanticModelReportingContext> action) =>
         analysisContext.RegisterSemanticModelAction(
-            c => Execute<SonarSematicModelReportingContext, SemanticModelAnalysisContext>(new(this, c), action, c.SemanticModel.SyntaxTree, generatedCodeRecognizer));
+            c => Execute<SonarSemanticModelReportingContext, SemanticModelAnalysisContext>(new(this, c), action, c.SemanticModel.SyntaxTree, generatedCodeRecognizer));
 
     public void RegisterTreeAction(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxTreeReportingContext> action) =>
         analysisContext.RegisterCompilationStartAction(

@@ -23,7 +23,7 @@ using SonarAnalyzer.AnalysisContext;
 namespace SonarAnalyzer.UnitTest.AnalysisContext;
 
 [TestClass]
-public class SonarSematicModelReportingContextTest
+public class SonarSemanticModelReportingContextTest
 {
     [TestMethod]
     public void Properties_ArePropagated()
@@ -32,7 +32,7 @@ public class SonarSematicModelReportingContextTest
         var (tree, model) = TestHelper.CompileCS("// Nothing to see here");
         var options = AnalysisScaffolding.CreateOptions();
         var context = new SemanticModelAnalysisContext(model, options, _ => { }, _ => true, cancel);
-        var sut = new SonarSematicModelReportingContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context);
+        var sut = new SonarSemanticModelReportingContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context);
 
         sut.Tree.Should().BeSameAs(tree);
         sut.Compilation.Should().BeSameAs(model.Compilation);

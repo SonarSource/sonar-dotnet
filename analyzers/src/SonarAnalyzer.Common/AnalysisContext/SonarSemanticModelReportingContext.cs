@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.AnalysisContext;
 
-public sealed class SonarSematicModelReportingContext : SonarTreeReportingContextBase<SemanticModelAnalysisContext>
+public sealed class SonarSemanticModelReportingContext : SonarTreeReportingContextBase<SemanticModelAnalysisContext>
 {
     public override SyntaxTree Tree => SemanticModel.SyntaxTree;
     public override Compilation Compilation => Context.SemanticModel.Compilation;
@@ -28,7 +28,7 @@ public sealed class SonarSematicModelReportingContext : SonarTreeReportingContex
     public override CancellationToken Cancel => Context.CancellationToken;
     public SemanticModel SemanticModel => Context.SemanticModel;
 
-    internal SonarSematicModelReportingContext(SonarAnalysisContext analysisContext, SemanticModelAnalysisContext context) : base(analysisContext, context) { }
+    internal SonarSemanticModelReportingContext(SonarAnalysisContext analysisContext, SemanticModelAnalysisContext context) : base(analysisContext, context) { }
 
     private protected override ReportingContext CreateReportingContext(Diagnostic diagnostic) =>
         new(this, diagnostic);

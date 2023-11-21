@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Helpers
         public ReportingContext(SonarCodeBlockReportingContext context, Diagnostic diagnostic)
             : this(diagnostic, context.Context.ReportDiagnostic, context.Compilation, context.Tree) { }
 
-        public ReportingContext(SonarSematicModelReportingContext context, Diagnostic diagnostic)
+        public ReportingContext(SonarSemanticModelReportingContext context, Diagnostic diagnostic)
             : this(diagnostic, context.Context.ReportDiagnostic, context.Compilation, context.Tree) { }
 
         private ReportingContext(Diagnostic diagnostic,
