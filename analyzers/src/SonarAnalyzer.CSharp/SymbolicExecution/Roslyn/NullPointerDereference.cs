@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 
 public class NullPointerDereference : NullPointerDereferenceBase
@@ -38,20 +39,37 @@ public class NullPointerDereference : NullPointerDereferenceBase
         return walker.Result;
     }
 
-    private sealed class SyntaxKindWalker : SafeCSharpSyntaxWalker
+    internal sealed class SyntaxKindWalker : SafeCSharpSyntaxWalker
     {
         public bool Result { get; private set; }
 
         public override void Visit(SyntaxNode node)
         {
+            Result |= node.Kind() is SyntaxKindEx.ForEachVariableStatement;
             if (!Result)
             {
-                Result = node.IsAnyKind(
-                    SyntaxKind.AwaitExpression,
-                    SyntaxKind.ElementAccessExpression,
-                    SyntaxKind.ForEachStatement,
-                    SyntaxKind.SimpleMemberAccessExpression);
                 base.Visit(node);
+            }
+        }
+
+        public override void VisitAwaitExpression(AwaitExpressionSyntax node) =>
+            Result = true;
+
+        public override void VisitElementAccessExpression(ElementAccessExpressionSyntax node) =>
+            Result = true;
+
+        public override void VisitForEachStatement(ForEachStatementSyntax node) =>
+            Result = true;
+
+        public override void VisitMemberAccessExpression(MemberAccessExpressionSyntax node)
+        {
+            if (node.Kind() is SyntaxKind.SimpleMemberAccessExpression)
+            {
+                Result = true;
+            }
+            else
+            {
+                base.VisitMemberAccessExpression(node);
             }
         }
     }
