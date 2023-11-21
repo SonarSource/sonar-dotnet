@@ -99,6 +99,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         {
             protected override string GetAttributeName(SyntaxNode node) => string.Empty;
             protected override bool IsTriviaComment(SyntaxTrivia trivia) => false;
+            protected override bool HasGeneratedCodeAttributeDescendIntoChildren(SyntaxNode node) => true;
         }
     }
 }

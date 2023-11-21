@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.Helpers
 {
-    internal class CSharpGeneratedCodeRecognizer : GeneratedCodeRecognizer
+    internal sealed class CSharpGeneratedCodeRecognizer : GeneratedCodeRecognizer
     {
         #region Singleton implementation
 
@@ -43,5 +43,15 @@ namespace SonarAnalyzer.Helpers
             node.IsKind(SyntaxKind.Attribute)
                 ? ((AttributeSyntax)node).Name.ToString()
                 : string.Empty;
+
+        protected override bool HasGeneratedCodeAttributeDescendIntoChildren(SyntaxNode node) =>
+            node.Kind() is SyntaxKind.CompilationUnit
+                or SyntaxKind.NamespaceDeclaration
+                or SyntaxKindEx.FileScopedNamespaceDeclaration
+                or SyntaxKind.ClassDeclaration
+                or SyntaxKind.StructDeclaration
+                or SyntaxKind.InterfaceDeclaration
+                or SyntaxKindEx.RecordClassDeclaration
+                or SyntaxKindEx.RecordStructDeclaration;
     }
 }

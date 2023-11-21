@@ -53,6 +53,7 @@ namespace SonarAnalyzer.Helpers
 
         protected abstract bool IsTriviaComment(SyntaxTrivia trivia);
         protected abstract string GetAttributeName(SyntaxNode node);
+        protected abstract bool HasGeneratedCodeAttributeDescendIntoChildren(SyntaxNode node);
 
         public bool IsGenerated(SyntaxTree tree) =>
              !string.IsNullOrEmpty(tree.FilePath)
@@ -102,7 +103,7 @@ namespace SonarAnalyzer.Helpers
         private bool HasGeneratedCodeAttribute(SyntaxNode root)
         {
             var attributeNames = root
-                .DescendantNodesAndSelf()
+                .DescendantNodesAndSelf(HasGeneratedCodeAttributeDescendIntoChildren)
                 .Select(GetAttributeName)
                 .Where(name => !string.IsNullOrEmpty(name));
 

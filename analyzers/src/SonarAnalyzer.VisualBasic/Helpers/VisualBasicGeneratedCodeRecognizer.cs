@@ -40,5 +40,7 @@ namespace SonarAnalyzer.Helpers
             node.IsKind(SyntaxKind.Attribute)
                 ? ((AttributeSyntax)node).Name.ToString()
                 : string.Empty;
+
+        protected override bool HasGeneratedCodeAttributeDescendIntoChildren(SyntaxNode node) => true;
     }
 }
