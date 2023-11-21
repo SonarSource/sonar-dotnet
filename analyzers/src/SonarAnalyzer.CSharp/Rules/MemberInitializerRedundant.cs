@@ -69,7 +69,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private void CheckInstanceMembers(SonarSyntaxNodeReportingContext c, TypeDeclarationSyntax declaration, IEnumerable<ISymbol> typeMembers)
         {
-            var typeInitializers = typeMembers.OfType<IMethodSymbol>().Where(x => x is { MethodKind: MethodKind.Constructor, IsStatic: false, IsImplicitlyDeclared: false }).ToList();
+            var typeInitializers = typeMembers.OfType<IMethodSymbol>().Where(x =>
+                // implicit parameterless constructors and primary constructor can be considered as having an
+                // empty body. For now we exclude them here, but we should consider adding them to the list
+                // of constructors, but with an empty body, to unify the handling.
+                x is { MethodKind: MethodKind.Constructor, IsStatic: false, IsImplicitlyDeclared: false }
+                && x.DeclaringSyntaxReferences.Any(s => s.GetSyntax() is ConstructorDeclarationSyntax)).ToList();
             if (typeInitializers.Count == 0)
             {
                 return;
@@ -89,8 +94,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 // otherwise, initializing it inline makes sense and the rule should not report
                 if (initializerDeclarations.All(constructor =>
                     {
-                        if (constructor.Node.Initializer != null
-                            && constructor.Node.Initializer.ThisOrBaseKeyword.IsKind(SyntaxKind.ThisKeyword))
+                        if (constructor.Node.Initializer is { ThisOrBaseKeyword.RawKind: (int)SyntaxKind.ThisKeyword } initializer
+                            && c.SemanticModel.GetSymbolInfo(initializer).Symbol is IMethodSymbol calledCtor
+                            && typeInitializers.Contains(calledCtor)) // Some constructors called by this() are not defined in source (e.g. primary constructors) and are therefore not checked.
                         {
                             // Calls another ctor, which is also checked.
                             return true;
