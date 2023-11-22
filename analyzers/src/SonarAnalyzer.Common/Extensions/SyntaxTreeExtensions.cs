@@ -27,22 +27,18 @@ internal static class SyntaxTreeExtensions
 {
     private static readonly ConditionalWeakTable<SyntaxTree, object> GeneratedCodeCache = new();
 
-    [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7439", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = true)]
-    public static bool IsGenerated(this SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer, Compilation compilation)
-    {
-        if (tree == null)
+    [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7439", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
+    public static bool IsGenerated(this SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer, Compilation compilation) =>
+        tree switch
         {
-            return false;
-        }
-        if (GeneratedCodeCache.TryGetValue(tree, out var result))
-        {
-            return (bool)result;
-        }
-        // Hot path: Don't use cache.GetValue that takes a factory method. It allocates a delegate which causes GC pressure.
-        var isGenerated = generatedCodeRecognizer.IsGenerated(tree);
-        GeneratedCodeCache.Add(tree, isGenerated);
-        return isGenerated;
-    }
+            null => false,
+            _ => GeneratedCodeCache.TryGetValue(tree, out var result)
+                ? (bool)result
+                : IsGeneratedGetOrAdd(tree, generatedCodeRecognizer)
+        };
+
+    private static bool IsGeneratedGetOrAdd(SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer) =>
+        (bool)GeneratedCodeCache.GetValue(tree, tree => generatedCodeRecognizer.IsGenerated(tree));
 
     public static bool IsConsideredGenerated(this SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer, Compilation compilation, bool isRazorAnalysisEnabled) =>
         isRazorAnalysisEnabled
