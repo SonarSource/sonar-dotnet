@@ -79,9 +79,6 @@ public class LambdaComponent : ComponentBase
             builder.CloseElement();
         }
 
-        foreach (var button in Buttons.OrderByDescending(x => x.Id))
-        {
-
-        }
+        foreach (var button in Buttons.OrderByDescending(x => x.Id)) { } // Compliant, the lambda is executed outside of the loop
     }
 }

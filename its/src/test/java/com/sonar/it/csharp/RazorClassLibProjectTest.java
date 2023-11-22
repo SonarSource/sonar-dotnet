@@ -46,7 +46,9 @@ public class RazorClassLibProjectTest {
 
   @BeforeAll
   public static void beforeAll() throws Exception {
+    // Create the project in SQ before setting the associated QualityPorfile
     ORCHESTRATOR.getServer().provisionProject(PROJECT, PROJECT);
+    // Enable only Blazor rules, include those in non-SonarWay, through the blazor_rules profile
     ORCHESTRATOR.getServer().associateProjectToQualityProfile(PROJECT, "cs", "blazor_rules");
     Tests.analyzeProject(PROJECT, temp, PROJECT);
   }

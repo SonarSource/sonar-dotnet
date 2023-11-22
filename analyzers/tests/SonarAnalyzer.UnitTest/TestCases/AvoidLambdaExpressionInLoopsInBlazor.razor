@@ -46,7 +46,7 @@
     <button @onclick="(e) => Reset(e)">Reset #2</button> @* Compliant *@
 }
 
-@foreach (var button in Buttons.OrderByDescending(x => x.Id)) @* Compliant *@
+@foreach (var button in Buttons.OrderByDescending(x => x.Id)) @* Compliant, the lambda is executed outside of the loop *@
 {
     <p>@button.Id</p>
 }
