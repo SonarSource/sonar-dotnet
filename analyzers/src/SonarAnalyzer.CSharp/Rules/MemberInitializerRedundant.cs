@@ -67,11 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private void CheckInstanceMembers(SonarSyntaxNodeReportingContext c, TypeDeclarationSyntax declaration, IEnumerable<ISymbol> typeMembers)
         {
             var constructors = typeMembers.OfType<IMethodSymbol>().Where(x => x is { MethodKind: MethodKind.Constructor, IsStatic: false }).ToList();
-            if (constructors.Exists(x =>
-                // Implicit parameterless constructor
-                x.IsImplicitlyDeclared
-                // Primary constructor
-                || x.DeclaringSyntaxReferences.All(s => s.GetSyntax() is not ConstructorDeclarationSyntax)))
+            if (constructors.Exists(x => x.IsImplicitlyDeclared || x.IsPrimaryConstructor()))
             {
                 // Implicit parameterless constructors and primary constructors can be considered as having an
                 // empty body and they do not initialize any members. If any of these is present, the rule does not apply.
