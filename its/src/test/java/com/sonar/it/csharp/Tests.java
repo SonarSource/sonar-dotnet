@@ -49,6 +49,7 @@ public class Tests implements BeforeAllCallback, AfterAllCallback {
     // otherwise .cshtml file are not pushed to SQ
     .addPlugin(MavenLocation.of("org.sonarsource.html", "sonar-html-plugin", "LATEST_RELEASE"))
     .restoreProfileAtStartup(FileLocation.of("profiles/no_rule.xml"))
+    .restoreProfileAtStartup(FileLocation.of("profiles/blazor_rules.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/class_name.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/template_rule.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/custom_parameters.xml"))

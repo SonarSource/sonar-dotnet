@@ -45,7 +45,7 @@ public sealed class AvoidLambdaExpressionInLoopsInBlazor : SonarDiagnosticAnalyz
                 {
                     var node = (LambdaExpressionSyntax)c.Node;
 
-                    if (IsWithinLoop(node)
+                    if (IsWithinLoopBody(node)
                         && IsWithinRenderTreeBuilderInvocation(node, c.SemanticModel))
                     {
                         c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
@@ -61,6 +61,6 @@ public sealed class AvoidLambdaExpressionInLoopsInBlazor : SonarDiagnosticAnalyz
                                          && semanticModel.GetSymbolInfo(invocation.Expression).Symbol is IMethodSymbol symbol
                                          && symbol.ContainingType.GetSymbolType().Is(KnownType.Microsoft_AspNetCore_Components_Rendering_RenderTreeBuilder));
 
-    private static bool IsWithinLoop(SyntaxNode node) =>
-        node.AncestorsAndSelf().Any(x => x is ForStatementSyntax or ForEachStatementSyntax or WhileStatementSyntax or DoStatementSyntax);
+    private static bool IsWithinLoopBody(SyntaxNode node) =>
+        node.AncestorsAndSelf().Any(x => x is BlockSyntax && x.Parent is ForStatementSyntax or ForEachStatementSyntax or WhileStatementSyntax or DoStatementSyntax);
 }

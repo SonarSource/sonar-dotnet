@@ -1,0 +1,102 @@
+﻿@* https://github.com/SonarSource/sonar-dotnet/issues/8394 *@
+
+@foreach (var item in Buttons.Where(x => x.Id == "idToFind"))
+    if (item.Id == "idToFind")
+    {
+        <button @onclick="(e) => Reset(e)">Reset #3</button> @* FN *@
+    }
+
+@for (int i = 0; i < Buttons.Count; i++)
+    @if (i % 2 == 0)
+    {
+        var buttonNumber = i;
+        <button @onclick="@(e => DoAction(e, Buttons[buttonNumber]))"> @* FN *@
+            Button #@buttonNumber
+        </button>
+    }
+
+@{
+    var j = 0;
+    while (j < 5)
+        if (j % 2 == 0)
+        {
+            j += 2;
+            <button @onclick="(e) => Reset(e)"> @* FN *@
+                Reset @j
+            </button>
+            j += 2;
+        }
+
+    do
+        if (j % 2 == 0)
+        {
+            <button @onclick="(e) => Reset(e)"> @* FN *@
+                Reset @j
+            </button>
+            j += 2;
+        }
+    while (j < 10);
+}
+
+@foreach (var item in Buttons.Where(x => x.Id == "idToFind"))
+    @if (item.Id == "idToFind")
+    {
+        <button @onclick="(e) => Reset(e)">Reset #3</button> @* FN *@
+    }
+    else if (item.Id == "idToFind")
+    {
+        <button @onclick="(e) => Reset(e)">Reset #3</button> @* FN *@
+    }
+    else
+    {
+        <button @onclick="(e) => Reset(e)">Reset #3</button> @* FN *@
+    }
+
+@foreach (var item in Buttons.Where(x => x.Id == "idToFind"))
+    @if (true)
+        @if (item.Id == "idToFind")
+        {
+            <button @onclick="(e) => Reset(e)">Reset #3</button> @* FN *@
+        }
+
+@foreach (var item in Buttons.Where(x => x.Id == "idToFind"))
+    @switch(item.Id)
+    {
+        case "idToFind":
+            <button @onclick="(e) => Reset(e)">Reset #3</button> @* FN *@
+            break;
+        default:
+        {
+            <button @onclick="(e) => Reset(e)">Reset #4</button> @* FN *@
+            break;
+        }
+    }
+
+@foreach (var button in Buttons)
+{
+    {
+        <button @key="button.Id" @onclick="(e) => button.Action(e)"> @* Noncompliant, there is a direct block for the loop *@
+            Button #@button.Id
+        </button>
+    }
+}
+
+@code {
+    private List<Button> Buttons { get; } = new();
+
+    private void DoAction(MouseEventArgs e, Button button) { }
+
+    private class Button
+    {
+        public string? Id { get; } = Guid.NewGuid().ToString();
+        public Action<MouseEventArgs> Action { get; set; } = e => { };
+    }
+
+    private void Reset(MouseEventArgs mouseEventArgs) 
+    { 
+        foreach (var button in Buttons)
+        {
+            button.Action = e => { }; // Compliant
+        }
+    }
+}

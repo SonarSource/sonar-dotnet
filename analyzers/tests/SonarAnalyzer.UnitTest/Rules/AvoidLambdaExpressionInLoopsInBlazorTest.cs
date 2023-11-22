@@ -38,6 +38,12 @@ public class AvoidLambdaExpressionInLoopsInBlazorTest
             .Verify();
 
     [TestMethod]
+    public void AvoidLambdaExpressionInLoopsInBlazor_BlazorLoopsWithNoBody() =>
+        builder.AddPaths("AvoidLambdaExpressionInLoopsInBlazor.LoopsWithNoBody.razor")
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+            .Verify();
+
+    [TestMethod]
     public void AvoidLambdaExpressionInLoopsInBlazor_UsingRenderFragment() =>
         builder.AddPaths("AvoidLambdaExpressionInLoopsInBlazor.RenderFragment.razor", "AvoidLambdaExpressionInLoopsInBlazor.RenderFragmentConsumer.razor")
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))

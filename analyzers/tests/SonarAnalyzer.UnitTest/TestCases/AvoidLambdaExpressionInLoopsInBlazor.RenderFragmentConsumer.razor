@@ -5,6 +5,13 @@
             Button #@button.Id
         </button>
     }
+    
+    @foreach (var button in Buttons.Where(x => x.Id == "SomeId")) @* Compliant *@
+    {
+        <button @key="button.Id" @onclick="(e) => button.Action(e)"> @* Noncompliant *@
+            Button #@button.Id
+        </button>
+    }
 </AvoidLambdaExpressionInLoopsInBlazor_RenderFragment>
 
 @code {

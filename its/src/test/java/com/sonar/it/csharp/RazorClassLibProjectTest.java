@@ -19,8 +19,6 @@
  */
 package com.sonar.it.csharp;
 
-import com.sonar.it.shared.TestUtils;
-import com.sonar.orchestrator.build.ScannerForMSBuild;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,6 +27,7 @@ import org.junit.jupiter.api.io.TempDir;
 import java.nio.file.Path;
 import java.util.stream.Collectors;
 
+import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static com.sonar.it.csharp.Tests.getComponent;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -44,12 +43,13 @@ public class RazorClassLibProjectTest {
   private static final String S6798_FOLDER = "RazorClassLib:S6798";
   private static final String S6800_FOLDER = "RazorClassLib:S6800";
   private static final String S6802_FOLDER = "RazorClassLib:S6802";
-  private static final String SONAR_RULE_S6802 = "csharpsquid:S6802";
-  private static final String S6802_COMPONENT_RAZOR_FILE = "RazorClassLib:S6802/S6802.razor";
-  private static final String S6802_COMPONENT_CS_FILE = "RazorClassLib:S6802/S6802.cs";
 
   @BeforeAll
   public static void beforeAll() throws Exception {
+    // Create the project in SQ before setting the associated QualityPorfile
+    ORCHESTRATOR.getServer().provisionProject(PROJECT, PROJECT);
+    // Enable only Blazor rules, include those in non-SonarWay, through the blazor_rules profile
+    ORCHESTRATOR.getServer().associateProjectToQualityProfile(PROJECT, "cs", "blazor_rules");
     Tests.analyzeProject(PROJECT, temp, PROJECT);
   }
 
@@ -99,7 +99,7 @@ public class RazorClassLibProjectTest {
 
     assertThat(issues).hasSize(4);
     assertThat(issues.stream().filter(issue -> issue.getComponent().equals(S6802_FOLDER + "/S6802.razor"))).hasSize(4);
-    assertThat(issues.stream().filter(issue -> issue.getComponent().equals(S6802_FOLDER + "/S6802.cs"))).hasSize(0);
+    assertThat(issues.stream().filter(issue -> issue.getComponent().equals(S6802_FOLDER + "/S6802.cs"))).isEmpty();
   }
 
   @Test

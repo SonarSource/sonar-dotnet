@@ -5,8 +5,13 @@ are rendered in a loop can lead to negative user experiences and performance iss
 elements.</p>
 <p>The reason behind this is that Blazor rebuilds all lambda expressions within the loop every time the UI elements are rendered.</p>
 <h2>How to fix it</h2>
-<p>Ensure to not use a delegate in elements rendered in loops by using a collection of objects containing the delegate as an <a
-href="https://learn.microsoft.com/en-us/dotnet/api/system.action">Action</a>.</p>
+<p>Ensure to not use a delegate in elements rendered in loops, you can try:</p>
+<ul>
+  <li> using a collection of objects containing the delegate as an <a href="https://learn.microsoft.com/en-us/dotnet/api/system.action">Action</a>,
+  </li>
+  <li> or extracting the elements into a dedicated component and using an <a
+  href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/event-handling#eventcallback">EventCallback</a> to call the delegate </li>
+</ul>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
@@ -15,7 +20,7 @@ href="https://learn.microsoft.com/en-us/dotnet/api/system.action">Action</a>.</p
     var buttonNumber = i;
 
     &lt;button @onclick="@(e =&gt; DoAction(e, buttonNumber))"&gt; @* Noncompliant *@
-        Button #buttonNumber
+        Button #@buttonNumber
     &lt;/button&gt;
 }
 
@@ -62,6 +67,67 @@ href="https://learn.microsoft.com/en-us/dotnet/api/system.action">Action</a>.</p
     }
 }
 </pre>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+@* Component.razor *@
+
+@for (var i = 1; i &lt; 100; i++)
+{
+    var buttonNumber = i;
+
+    &lt;button @onclick="@(e =&gt; DoAction(e, buttonNumber))"&gt; @* Noncompliant *@
+        Button #@buttonNumber
+    &lt;/button&gt;
+}
+
+@code {
+    private void DoAction(MouseEventArgs e, int button)
+    {
+        // Do something here
+    }
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+@* MyButton.razor *@
+
+&lt;button @onclick="OnClickCallback"&gt;
+    @ChildContent
+&lt;/button&gt;
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    [Parameter]
+    public EventCallback&lt;int&gt; OnClick { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    private void OnClickCallback()
+    {
+        OnClick.InvokeAsync(Id);
+    }
+}
+
+@* Component.razor *@
+
+@for (var i = 1; i &lt; 100; i++)
+{
+    var buttonNumber = i;
+    &lt;MyButton Id="buttonNumber" OnClick="DoAction"&gt;
+        Button #@buttonNumber
+    &lt;/MyButton&gt;
+}
+
+@code {
+    private void DoAction(int button)
+    {
+        // Do something here
+    }
+}
+</pre>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
@@ -69,7 +135,9 @@ href="https://learn.microsoft.com/en-us/dotnet/api/system.action">Action</a>.</p
   href="https://learn.microsoft.com/en-us/aspnet/core/blazor/performance#avoid-recreating-delegates-for-many-repeated-elements-or-components">ASP.NET
   Core Blazor performance best practices</a> </li>
   <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/event-handling#lambda-expressions">ASP.NET Core
-  Blazor event handling</a> </li>
+  Blazor event handling - Lambda expressions</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/event-handling#eventcallback">Event handling -
+  EventCallback Struct</a> </li>
 </ul>
 <h3>Benchmarks</h3>
 <p>The results were generated with the help of <a href="https://github.com/dotnet/BenchmarkDotNet">BenchmarkDotNet</a> and <a
