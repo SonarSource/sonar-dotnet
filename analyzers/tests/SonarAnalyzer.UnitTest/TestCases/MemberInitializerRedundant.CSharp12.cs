@@ -1,23 +1,23 @@
 ﻿/// Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/7624
-class PrimaryConstructor1(object options)
+class WithPrimaryConstructor(object options)
 {
     private readonly object _options = options;      // Compliant
     public object Options { get; } = options;        // Compliant
     public object[] AllOptions { get; } = [options]; // Compliant
 }
 
-class PrimaryConstructor2(object options)
+class WithReferencedPrimaryConstructor(object options)
 {
-    public PrimaryConstructor2() : this(null)
+    public WithReferencedPrimaryConstructor() : this(null)
     {
 
     }
     private readonly object _options = options; // Compliant
 }
 
-class PrimaryConstructor3(object options)
+class WithPrimaryConstructorAndAssignment(object options)
 {
-    public PrimaryConstructor3() : this(null)
+    public WithPrimaryConstructorAndAssignment() : this(null)
     {
         _options = null;
     }
