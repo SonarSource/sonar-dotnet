@@ -207,7 +207,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     { Expression: not SimpleNameSyntax and not MemberAccessExpressionSyntax and not AliasQualifiedNameSyntax } => true,
                     { Expression: MemberAccessExpressionSyntax left } => AnyMemberAccessLeftIsNotAType(left),
                     // Heuristic: any MemberAccess that starts with a lowercase on the most left hand side, is assumed to start
-                    // as an expression (e.g. i.Length). Rational: It is (almost) granted that Types (including enums) start
+                    // as an expression (e.g. s.Length). Rational: It is (almost) granted that Types (including enums) start
                     // with an uppercase in C#. Any identifier, that starts with a lower case is assumed to refer a local, a parameter,
                     // or a field.
                     { Expression: SimpleNameSyntax { Identifier.ValueText: { Length: >= 1 } mostLeftIdentifier } } => char.IsLower(mostLeftIdentifier[0]),
