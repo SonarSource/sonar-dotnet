@@ -33,13 +33,9 @@ public class NullPointerDereferenceSyntaxKindWalkerTests
     [DataRow("""this.ToString();""")]
     [DataRow("""_ = Int32.MaxValue;""")]
     [DataRow("""_ = (new int[0])[0];""")]
-
 #if NET
-
     [DataRow("""foreach(var (i, j) in new(int, int)[0]) { }""")]
-
 #endif
-
     public void SyntaxKindChecks_CS_True(string statement)
     {
         var root = TestHelper.CompileCS(WrapInMethod_CS(statement)).Tree.GetRoot();
@@ -51,8 +47,7 @@ public class NullPointerDereferenceSyntaxKindWalkerTests
     [TestMethod]
     public void SyntaxKindChecks_CS_PointerMemberAccess()
     {
-        var root = TestHelper.CompileCS(
-            """
+        var root = TestHelper.CompileCS("""
             public class Test
             {
                 public unsafe void M(int i)
@@ -81,7 +76,7 @@ public class NullPointerDereferenceSyntaxKindWalkerTests
     [DataTestMethod]
     [DataRow("""Await Task.Yield()""")]
     [DataRow("""Dim t As Task : Await t""")]
-    [DataRow("""For Each i In New Integer(-1) { } : Next""")]
+    [DataRow("""For Each i In New Integer() { } : Next""")]
     [DataRow("""ToString()""")]
     [DataRow("""call ToString""")]
     [DataRow("""Dim arr(0) As Integer : Dim i = arr(0)""")]
@@ -97,6 +92,7 @@ public class NullPointerDereferenceSyntaxKindWalkerTests
 
     [DataTestMethod]
     [DataRow("""Dim i As System.Int32""")]
+    [DataRow("""Dim i = 1 + 1""")]
     public void SyntaxKindChecks_VB_False(string statement)
     {
         var root = TestHelper.CompileVB(WrapInMethod_VB(statement)).Tree.GetRoot();
