@@ -107,7 +107,7 @@ public class SonarAnalysisContext
                 var context = new SonarCompilationStartAnalysisContext(this, c);
                 if (context.HasMatchingScope(supportedDiagnostics))
                 {
-                    ExecuteWithoutHasMatchingScope<SonarCompilationStartAnalysisContext, CompilationStartAnalysisContext>(new(this, c), action, null);
+                    ExecuteWithoutHasMatchingScope<SonarCompilationStartAnalysisContext, CompilationStartAnalysisContext>(context, action, null);
                 }
             });
 
