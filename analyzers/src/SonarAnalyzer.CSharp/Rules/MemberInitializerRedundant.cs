@@ -86,10 +86,10 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 // the instance member should be initialized in ALL instance constructors
                 // otherwise, initializing it inline makes sense and the rule should not report
-                if (constructorDeclarations.TrueForAll(constructor =>
+                if (constructorDeclarations.TrueForAll(x =>
                     // Calls another ctor, which is also checked:
-                    constructor is { Node.Initializer.ThisOrBaseKeyword.RawKind: (int)SyntaxKind.ThisKeyword }
-                    || IsSymbolFirstSetInCfg(kvp.Key, constructor.Node, constructor.Model, c.Cancel)))
+                    x is { Node.Initializer.ThisOrBaseKeyword.RawKind: (int)SyntaxKind.ThisKeyword }
+                    || IsSymbolFirstSetInCfg(kvp.Key, x.Node, x.Model, c.Cancel)))
                 {
                     c.ReportIssue(Diagnostic.Create(Rule, kvp.Value.GetLocation(), InstanceMemberMessage));
                 }
