@@ -35,21 +35,20 @@ public class NullPointerDereference : NullPointerDereferenceBase
         return walker.Result;
     }
 
-    private sealed class SyntaxKindWalker : SafeVisualBasicSyntaxWalker
+    internal sealed class SyntaxKindWalker : SafeVisualBasicSyntaxWalker
     {
         public bool Result { get; private set; }
 
-        public override void Visit(SyntaxNode node)
-        {
-            if (!Result)
-            {
-                Result = node.IsAnyKind(
-                    SyntaxKind.AwaitExpression,
-                    SyntaxKind.ForEachStatement,
-                    SyntaxKind.InvocationExpression,    // For array access arr(42)
-                    SyntaxKind.SimpleMemberAccessExpression);
-                base.Visit(node);
-            }
-        }
+        public override void VisitAwaitExpression(AwaitExpressionSyntax node) =>
+            Result = true;
+
+        public override void VisitForEachBlock(ForEachBlockSyntax node) =>
+            Result = true;
+
+        public override void VisitInvocationExpression(InvocationExpressionSyntax node) =>
+            Result = true; // For array access arr(42)
+
+        public override void VisitMemberAccessExpression(MemberAccessExpressionSyntax node) =>
+            Result = true; // SimpleMemberAccess and DictionaryAccess
     }
 }
