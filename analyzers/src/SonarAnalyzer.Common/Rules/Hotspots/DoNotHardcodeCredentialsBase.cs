@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Concurrent;
 using System.IO;
 using System.Security;
 using System.Text.RegularExpressions;
@@ -39,7 +38,9 @@ namespace SonarAnalyzer.Rules
         private const string MessageUriUserInfo = "Review this hard-coded URI, which may contain a credential.";
         private const string DefaultCredentialWords = "password, passwd, pwd, passphrase";
 
-        private static readonly ConcurrentDictionary<string, Regex> PasswordValuePattern = new();
+        // Assumption: There will only be one "CredentialWords" parameter value per AppDomain. If this changes,
+        // use a concurrent dictionary instead (Don't use ValueTuple as the write is not atomic).
+        private static Tuple<string, Regex> PasswordValuePattern;
         private static readonly Regex ValidCredentialPattern = new(@"^(\?|:\w+|\{\d+[^}]*\}|""|')$", RegexOptions.IgnoreCase | RegexOptions.Compiled);
         private static readonly Regex UriUserInfoPattern = CreateUriUserInfoPattern();
 
@@ -73,12 +74,20 @@ namespace SonarAnalyzer.Rules
             CredentialWords = DefaultCredentialWords;   // Property will initialize multiple state variables
         }
 
-        private static Regex PasswordValueRegex(string credentialWords) =>
-            PasswordValuePattern.GetOrAdd(credentialWords, static credentialWords =>
+        private static Regex PasswordValueRegex(string credentialWords)
+        {
+            // Make a local copy of the reference to the tuple class to avoid concurrency issues between the access of Item1 and Item2
+            var local = PasswordValuePattern;
+            if (local.Item1 == credentialWords)
             {
-                var credentialWordsPattern = string.Join("|", SplitCredentialWordsByComma(credentialWords).Select(Regex.Escape));
-                return new Regex($@"\b(?<credential>{credentialWordsPattern})\s*[:=]\s*(?<suffix>.+)$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            });
+                return local.Item2;
+            }
+            var credentialWordsPattern = string.Join("|", SplitCredentialWordsByComma(credentialWords).Select(Regex.Escape));
+            var regex = new Regex($@"\b(?<credential>{credentialWordsPattern})\s*[:=]\s*(?<suffix>.+)$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            // There is no need for locking on the write. The read is atomic and any tuple read is valid (but may fail the condition).
+            PasswordValuePattern = new(credentialWords, regex);
+            return regex;
+        }
 
         private static ImmutableList<string> SplitCredentialWordsByComma(string credentialWords) =>
             credentialWords.ToUpperInvariant()
