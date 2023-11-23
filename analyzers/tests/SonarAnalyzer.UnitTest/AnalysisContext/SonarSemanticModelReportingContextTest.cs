@@ -18,9 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using CS = Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.AnalysisContext;
 using SonarAnalyzer.UnitTest.TestFramework.Tests;
+
+using CS = Microsoft.CodeAnalysis.CSharp;
+using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.AnalysisContext;
 
@@ -85,7 +87,7 @@ public class SonarSemanticModelReportingContextTest
             context.RegisterCompilationStartAction(start =>
                 start.RegisterSemanticModelAction(c =>
                 {
-                    if (c.Tree.GetRoot().GetFirstToken() is { RawKind: not (int)CS.SyntaxKind.None } token)
+                    if (c.Tree.GetRoot().GetFirstToken() is { RawKind: not (int)VB.SyntaxKind.None } token)
                     {
                         c.ReportIssue(Diagnostic.Create(TestAnalyzer.Rule, token.GetLocation()));
                     }
