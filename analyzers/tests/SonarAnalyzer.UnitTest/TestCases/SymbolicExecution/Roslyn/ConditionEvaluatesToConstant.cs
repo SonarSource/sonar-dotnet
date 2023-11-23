@@ -3346,9 +3346,9 @@ public class Repro_8262
                     break;
                 case 2:   // Noncompliant FP
                 case 5:   // Secondary
-                case 8:   
-                case 11:  
-                case 14:  
+                case 8:
+                case 11:
+                case 14:
                     Console.WriteLine(i);
                     break;
                 case 3:   // Secondary
@@ -3363,4 +3363,31 @@ public class Repro_8262
             }
         }
     }
+}
+
+// Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/8368
+public class Repro_8368
+{
+    public void Method()
+    {
+        Exception lastException = null;
+
+        try
+        {
+            DoSomeWork();
+            return;
+        }
+        catch (Exception ex)
+        {
+            lastException = ex;
+        }
+
+        if (lastException != null) // Noncompliant - FP
+        {
+            LogError(lastException);
+        }
+    }
+
+    void DoSomeWork() { }
+    void LogError(Exception exception) { }
 }

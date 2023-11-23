@@ -1,4 +1,5 @@
-﻿Imports System.IO
+﻿Imports System
+Imports System.IO
 Imports System.Runtime.InteropServices
 
 Public Class ConditionEvaluatesToConstant
@@ -252,47 +253,46 @@ Public Class ConditionEvaluatesToConstant
     End Sub
 
     Public Sub RelationshipWithConstraint(ByVal a As Boolean, ByVal b As Boolean)
-    If a = b AndAlso a Then
-        If b Then                      ' FN: requires relation support
-        '  ~
+        If a = b AndAlso a Then
+            If b Then                      ' FN: requires relation support
+            '  ~
+            End If
         End If
-    End If
 
-    If a <> b AndAlso a Then
-        If b Then                     ' FN: requires relation support
+        If a <> b AndAlso a Then
+            If b Then                     ' FN: requires relation support
+            End If
         End If
-    End If
 
-    If a AndAlso b Then
-        If a = b Then                 ' Noncompliant
+        If a AndAlso b Then
+            If a = b Then                 ' Noncompliant
+            End If
         End If
-    End If
 
-    If a AndAlso b AndAlso a = b Then
-                '          ^^^^^        Noncompliant
-    End if
+        If a AndAlso b AndAlso a = b Then
+        '                      ^^^^^        Noncompliant
+        End If
 
-    a = True
-    b = False
-    If a AndAlso b Then
-    '  ^                                 Noncompliant
-    '            ^                       Noncompliant@-1
+        a = True
+        b = False
+        If a AndAlso b Then
+        '  ^                                Noncompliant
+        '            ^                      Noncompliant@-1
 
-
-    End If
-End Sub
+        End If
+    End Sub
 
 
     Public Property Property1 As Boolean
         Get
             Dim a = New Action(Sub()
-                                    Dim b = True
-                                    If b Then                      ' Noncompliant
-                                        Console.WriteLine()
-                                    Else
-                                        Console.WriteLine()        ' Secondary
-                                    End If
-                                End Sub)
+                                   Dim b = True
+                                   If b Then                      ' Noncompliant
+                                       Console.WriteLine()
+                                   Else
+                                       Console.WriteLine()        ' Secondary
+                                   End If
+                               End Sub)
             Return True
         End Get
         Set(ByVal value As Boolean)
@@ -469,11 +469,11 @@ End Sub
 
     Public Sub CompoundAssignment(ByVal a As Boolean, ByVal b As Boolean)
         ' https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/operators/assignment-operators
-        a &=True
+        a &= True
         If a Then           ' FN
         End If
 
-        a ^=True
+        a ^= True
         If a Then           ' FN
         End If
     End Sub
@@ -1234,7 +1234,7 @@ Public Class GuardedTests
         Guard1(s1)
 
         If Equals(s1, Nothing) Then  ' Noncompliant, always false
-        ' this branch is never executed
+            ' this branch is never executed
         Else
         End If
     End Sub
@@ -1776,5 +1776,29 @@ Public Class NullOrWhiteSpace
             End If
         End If
 
+    End Sub
+End Class
+
+' Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/8368
+Public Class Repro_8368
+    Public Sub Method()
+        Dim lastException As Exception = Nothing
+
+        Try
+            DoSomeWork()
+            Return
+        Catch ex As Exception
+            lastException = ex
+        End Try
+
+        If lastException IsNot Nothing Then ' Noncompliant - FP
+            LogError(lastException)
+        End If
+    End Sub
+
+    Private Sub DoSomeWork()
+    End Sub
+
+    Private Sub LogError(ByVal exception As Exception)
     End Sub
 End Class
