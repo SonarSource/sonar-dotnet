@@ -30,7 +30,9 @@ namespace SonarAnalyzer.UnitTest.Helpers
         internal const string TestInput = @"
 namespace NS
 {
+  using System;
   using System.Collections.Generic;
+  using System.Reflection;
   using PropertyBag = System.Collections.Generic.Dictionary<string, object>;
 
   public class Base
@@ -65,6 +67,14 @@ namespace NS
     int Property2 { get; set; }
     void Method3();
     void Method4<T, V>(List<T> param1, List<int> param2, List<V> param3, IList<int> param4);
+  }
+  public class AssemblyLoad
+  {
+    public AssemblyLoad()
+    {
+      AppDomain.CurrentDomain.AssemblyResolve += LoadAnyVersion;
+    }
+    Assembly LoadAnyVersion(object sender, ResolveEventArgs args) => null;
   }
 }
 ";
@@ -162,6 +172,13 @@ namespace NS
         }
 
         [TestMethod]
+        public void Symbol_IsProbablyEventHandler_ResolveEventHandler()
+        {
+            var symbol = testCode.GetMethodSymbol("AssemblyLoad.LoadAnyVersion");
+            symbol.IsEventHandler().Should().BeTrue();
+        }
+
+        [TestMethod]
         public void Symbol_GetSelfAndBaseTypes()
         {
             var objectType = testCode.GetTypeByMetadataName("System.Object");
@@ -183,7 +200,7 @@ namespace NS
             var nsSymbol = testCode.GetNamespaceSymbol("NS");
 
             var typeSymbols = nsSymbol.GetAllNamedTypes();
-            typeSymbols.Should().HaveCount(6);
+            typeSymbols.Should().HaveCount(7);
         }
 
         [TestMethod]

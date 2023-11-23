@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
@@ -104,7 +105,8 @@ namespace Tests.TestCases
                 }
             }
 
-            void DoSomething() { }
+            void DoSomething()
+            { }
         }
     }
 
@@ -213,7 +215,7 @@ namespace Tests.TestCases
             return a + b;
         }
 
-        private static int AddedLength(this string s, int a ) //Fixed
+        private static int AddedLength(this string s, int a) //Fixed
         {
             return s.Length + a;
         }
@@ -452,7 +454,7 @@ namespace Tests.TestCases
     {
         private string value;
 
-        private NotProperImplementedSerializableClass2(SerializationInfo info ) // Fixed
+        private NotProperImplementedSerializableClass2(SerializationInfo info) // Fixed
         {
             value = info.GetString("Value");
         }
@@ -609,6 +611,24 @@ namespace Tests.TestCases
         private static double GetDegreeOfOverlap(string[] largerArray, string[] smallerOrEqualArray)    // Fixed
         {
             return (double)largerArray.Count(smallerOrEqualArray.Contains) / largerArray.Length;
+        }
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/8371
+    public class Repro_8371
+    {
+        static Repro_8371()
+        {
+            AppDomain.CurrentDomain.AssemblyResolve += AssemblyResolver.LoadAnyVersion;
+        }
+
+        private static class AssemblyResolver
+        {
+            public static Assembly LoadAnyVersion(object sender, ResolveEventArgs args) // Was not detected by IsEventHandler because the non-void return type
+            {
+                ReferenceEquals(1, 2);
+                return null;
+            }
         }
     }
 }
