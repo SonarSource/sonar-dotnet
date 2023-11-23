@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CSharp;
+using CS = Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.AnalysisContext;
 using SonarAnalyzer.UnitTest.TestFramework.Tests;
 
@@ -44,28 +44,54 @@ public class SonarSemanticModelReportingContextTest
     }
 
     [TestMethod]
-    public void RegistrationIsExecuted_SonarAnalysisContext() =>
+    public void RegistrationIsExecuted_SonarAnalysisContext_CS() =>
         new VerifierBuilder().AddAnalyzer(() => new TestAnalyzerCS((context, g) =>
             context.RegisterSemanticModelAction(g, c =>
-                c.ReportIssue(Diagnostic.Create(TestAnalyzer.Rule, c.Tree.GetCompilationUnitRoot().GetFirstToken().GetLocation())))))
+                c.ReportIssue(Diagnostic.Create(TestAnalyzer.Rule, c.Tree.GetRoot().GetFirstToken().GetLocation())))))
         .AddSnippet("""
         using System; // Noncompliant
         """)
         .Verify();
 
     [TestMethod]
-    public void RegistrationIsExecuted_SonarCompilationStartAnalysisContext() =>
+    public void RegistrationIsExecuted_SonarAnalysisContext_VB() =>
+        new VerifierBuilder().AddAnalyzer(() => new TestAnalyzerVB((context, g) =>
+            context.RegisterSemanticModelAction(g, c =>
+                c.ReportIssue(Diagnostic.Create(TestAnalyzer.Rule, c.Tree.GetRoot().GetFirstToken().GetLocation())))))
+        .AddSnippet("""
+        Imports System ' Noncompliant
+        """)
+        .Verify();
+
+    [TestMethod]
+    public void RegistrationIsExecuted_SonarCompilationStartAnalysisContext_CS() =>
         new VerifierBuilder().AddAnalyzer(() => new TestAnalyzerCS((context, _) =>
             context.RegisterCompilationStartAction(start =>
                 start.RegisterSemanticModelAction(c =>
                 {
-                    if (c.Tree.GetCompilationUnitRoot().GetFirstToken() is { RawKind: not (int)SyntaxKind.None } token)
+                    if (c.Tree.GetRoot().GetFirstToken() is { RawKind: not (int)CS.SyntaxKind.None } token)
                     {
                         c.ReportIssue(Diagnostic.Create(TestAnalyzer.Rule, token.GetLocation()));
                     }
                 }))))
             .AddSnippet("""
             using System; // Noncompliant
+            """)
+            .Verify();
+
+    [TestMethod]
+    public void RegistrationIsExecuted_SonarCompilationStartAnalysisContext_VB() =>
+        new VerifierBuilder().AddAnalyzer(() => new TestAnalyzerVB((context, _) =>
+            context.RegisterCompilationStartAction(start =>
+                start.RegisterSemanticModelAction(c =>
+                {
+                    if (c.Tree.GetRoot().GetFirstToken() is { RawKind: not (int)CS.SyntaxKind.None } token)
+                    {
+                        c.ReportIssue(Diagnostic.Create(TestAnalyzer.Rule, token.GetLocation()));
+                    }
+                }))))
+            .AddSnippet("""
+            Imports System ' Noncompliant
             """)
             .Verify();
 }

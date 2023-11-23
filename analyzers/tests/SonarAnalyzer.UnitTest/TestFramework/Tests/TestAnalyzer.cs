@@ -32,27 +32,25 @@ internal abstract class TestAnalyzer : SonarDiagnosticAnalyzer
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 internal class TestAnalyzerCS : TestAnalyzer
 {
+    private readonly Action<SonarAnalysisContext, GeneratedCodeRecognizer> initializeAction;
     protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
 
-    public Action<SonarAnalysisContext, GeneratedCodeRecognizer> InitializeAction { get; }
-
     public TestAnalyzerCS(Action<SonarAnalysisContext, GeneratedCodeRecognizer> action) =>
-        InitializeAction = action;
+        initializeAction = action;
 
     protected override void Initialize(SonarAnalysisContext context) =>
-        InitializeAction(context, GeneratedCodeRecognizer);
+        initializeAction(context, GeneratedCodeRecognizer);
 }
 
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
 internal class TestAnalyzerVB : TestAnalyzer
 {
+    private readonly Action<SonarAnalysisContext, GeneratedCodeRecognizer> initializeAction;
     protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
 
-    public Action<SonarAnalysisContext, GeneratedCodeRecognizer> InitializeAction { get; }
-
     public TestAnalyzerVB(Action<SonarAnalysisContext, GeneratedCodeRecognizer> action) =>
-        InitializeAction = action;
+        initializeAction = action;
 
     protected override void Initialize(SonarAnalysisContext context) =>
-        InitializeAction(context, GeneratedCodeRecognizer);
+        initializeAction(context, GeneratedCodeRecognizer);
 }
