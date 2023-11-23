@@ -38,14 +38,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
     }
 
-    internal abstract class DummyAnalyzer : SonarDiagnosticAnalyzer
-    {
-        public static readonly DiagnosticDescriptor Rule = AnalysisScaffolding.CreateDescriptorMain("SDummy");
-        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
-    }
-
-    internal abstract class DummyAnalyzer<TSyntaxKind> : DummyAnalyzer where TSyntaxKind : struct
+    internal abstract class DummyAnalyzer<TSyntaxKind> : TestAnalyzer where TSyntaxKind : struct
     {
         protected abstract TSyntaxKind NumericLiteralExpression { get; }
 
@@ -53,5 +46,26 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterNodeAction(GeneratedCodeRecognizer, c => c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation())), NumericLiteralExpression);
+    }
+
+    internal abstract class TestAnalyzer : SonarDiagnosticAnalyzer
+    {
+        public static readonly DiagnosticDescriptor Rule = AnalysisScaffolding.CreateDescriptorMain("SDummy");
+        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+    }
+
+    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    internal class TestAnalyzerCS : TestAnalyzer
+    {
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
+
+        public Action<SonarAnalysisContext, GeneratedCodeRecognizer> InitializeAction { get; }
+
+        public TestAnalyzerCS(Action<SonarAnalysisContext, GeneratedCodeRecognizer> action) =>
+            InitializeAction = action;
+
+        protected override void Initialize(SonarAnalysisContext context) =>
+            InitializeAction(context, GeneratedCodeRecognizer);
     }
 }
