@@ -78,7 +78,7 @@ namespace SonarAnalyzer.Rules
         {
             // Make a local copy of the reference to the tuple class to avoid concurrency issues between the access of Item1 and Item2
             var local = PasswordValuePattern;
-            if (local.Item1 == credentialWords)
+            if (local?.Item1 == credentialWords)
             {
                 return local.Item2;
             }
