@@ -174,6 +174,16 @@ public partial class SonarAnalysisContextTest
         context.AssertDelegateInvoked(true);
     }
 
+    [TestMethod]
+    public void RegisterSemanticModelAction_Extension_SonarAnalysisContext_VB()
+    {
+        var context = new DummyAnalysisContext(TestContext);
+        var self = new SonarAnalysisContext(context, DummyMainDescriptor);
+        VB.RegisterSemanticModelAction(self, context.DelegateAction);
+
+        context.AssertDelegateInvoked(true);
+    }
+
     [DataTestMethod]
     [DataRow(SnippetFileName, false)]
     [DataRow(AnotherFileName, true)]
