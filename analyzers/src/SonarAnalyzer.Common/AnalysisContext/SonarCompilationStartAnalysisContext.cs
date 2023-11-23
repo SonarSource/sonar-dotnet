@@ -39,5 +39,5 @@ public sealed class SonarCompilationStartAnalysisContext : SonarAnalysisContextB
 
     public void RegisterNodeAction<TSyntaxKind>(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxNodeReportingContext> action, params TSyntaxKind[] syntaxKinds)
         where TSyntaxKind : struct =>
-        AnalysisContext.RegisterNodeActionImpl(generatedCodeRecognizer, action, syntaxKinds);
+        AnalysisContext.RegisterNodeActionScopeValid(generatedCodeRecognizer, action, syntaxKinds);
 }

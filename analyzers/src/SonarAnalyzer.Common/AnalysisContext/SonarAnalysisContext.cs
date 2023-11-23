@@ -107,7 +107,7 @@ public class SonarAnalysisContext
                 var context = new SonarCompilationStartAnalysisContext(this, c);
                 if (context.HasMatchingScope(supportedDiagnostics))
                 {
-                    ExecuteWithoutHasMatchingScope<SonarCompilationStartAnalysisContext, CompilationStartAnalysisContext>(context, action, null);
+                    ExecuteScopeValid<SonarCompilationStartAnalysisContext, CompilationStartAnalysisContext>(context, action, null);
                 }
             });
 
@@ -115,24 +115,24 @@ public class SonarAnalysisContext
         analysisContext.RegisterSymbolAction(
             c => Execute<SonarSymbolReportingContext, SymbolAnalysisContext>(new(this, c), action, null), symbolKinds);
 
-    internal void RegisterNodeActionImpl<TSyntaxKind>(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxNodeReportingContext> action, params TSyntaxKind[] syntaxKinds)
-        where TSyntaxKind : struct =>
-        analysisContext.RegisterSyntaxNodeAction(
-            c => ExecuteWithoutHasMatchingScope<SonarSyntaxNodeReportingContext, SyntaxNodeAnalysisContext>(new(this, c), action, c.Node.SyntaxTree, generatedCodeRecognizer), syntaxKinds);
+    public void RegisterTreeAction(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxTreeReportingContext> action) =>
+        analysisContext.RegisterCompilationStartAction(
+            c => c.RegisterSyntaxTreeAction(
+                treeContext => Execute<SonarSyntaxTreeReportingContext, SyntaxTreeAnalysisContext>(new(this, treeContext, c.Compilation), action, treeContext.Tree, generatedCodeRecognizer)));
+
+    public void RegisterSemanticModelAction(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSemanticModelReportingContext> action) =>
+        analysisContext.RegisterSemanticModelAction(
+            c => Execute<SonarSemanticModelReportingContext, SemanticModelAnalysisContext>(new(this, c), action, c.SemanticModel.SyntaxTree, generatedCodeRecognizer));
 
     public void RegisterNodeAction<TSyntaxKind>(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxNodeReportingContext> action, params TSyntaxKind[] syntaxKinds)
         where TSyntaxKind : struct =>
         RegisterCompilationStartAction(
             c => c.RegisterNodeAction(generatedCodeRecognizer, action, syntaxKinds));
 
-    public void RegisterSemanticModelAction(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSemanticModelReportingContext> action) =>
-        analysisContext.RegisterSemanticModelAction(
-            c => Execute<SonarSemanticModelReportingContext, SemanticModelAnalysisContext>(new(this, c), action, c.SemanticModel.SyntaxTree, generatedCodeRecognizer));
-
-    public void RegisterTreeAction(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxTreeReportingContext> action) =>
-        analysisContext.RegisterCompilationStartAction(
-            c => c.RegisterSyntaxTreeAction(
-                treeContext => Execute<SonarSyntaxTreeReportingContext, SyntaxTreeAnalysisContext>(new(this, treeContext, c.Compilation), action, treeContext.Tree, generatedCodeRecognizer)));
+    internal void RegisterNodeActionScopeValid<TSyntaxKind>(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxNodeReportingContext> action, params TSyntaxKind[] syntaxKinds)
+        where TSyntaxKind : struct =>
+        analysisContext.RegisterSyntaxNodeAction(
+            c => ExecuteScopeValid<SonarSyntaxNodeReportingContext, SyntaxNodeAnalysisContext>(new(this, c), action, c.Node.SyntaxTree, generatedCodeRecognizer), syntaxKinds);
 
     /// <summary>
     /// Register action for a SyntaxNode that is executed unconditionally:
@@ -162,7 +162,7 @@ public class SonarAnalysisContext
     }
 
     /// <param name="sourceTree">Tree that is definitely known to be analyzed. Pass 'null' if the context doesn't know a specific tree to be analyzed, like a CompilationContext.</param>
-    private void ExecuteWithoutHasMatchingScope<TSonarContext, TRoslynContext>(TSonarContext context, Action<TSonarContext> action, SyntaxTree sourceTree, GeneratedCodeRecognizer generatedCodeRecognizer = null)
+    private void ExecuteScopeValid<TSonarContext, TRoslynContext>(TSonarContext context, Action<TSonarContext> action, SyntaxTree sourceTree, GeneratedCodeRecognizer generatedCodeRecognizer = null)
         where TSonarContext : SonarAnalysisContextBase<TRoslynContext>
     {
         // For each action registered on context we need to do some pre-processing before actually calling the rule.
