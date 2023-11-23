@@ -980,7 +980,8 @@ public partial class TokenTypeAnalyzerTest
     [DataTestMethod]
     [DataRow("_ = [u:i];")]
     [DataRow("[u:i] = [u:i] + [u:i];")]
-    [DataRow("_ = i.[u:ToString]().[u:ToString]();")] // "i" must be queried. It could be a type.
+    [DataRow("_ = [u:i].[u:ToString]().[u:ToString]();")]          // Heuristic: "i" is lower case and identified as "not a type".
+    [DataRow("_ = [u:ex].[u:InnerException].[u:InnerException];")] // Heuristic: "ex" is lower case and identified as "not a type".
     [DataRow("_ = [u:ex]?.[u:ToString]();")]
     [DataRow("_ = ([u:ex] ?? new Exception()).[u:ToString]();")]
     [DataRow("[u:ex] ??= new Exception();")]
@@ -1120,6 +1121,25 @@ public partial class TokenTypeAnalyzerTest
             }
             """, allowSemanticModel);
 
+    [DataTestMethod]
+    [WorkItem(8388)] // https://github.com/SonarSource/sonar-dotnet/pull/8388
+    [DataRow("""_ = [u:iPhone].Latest;""")]              // [u:iPhone] -> False classification because of heuristic. Should be t:
+    [DataRow("""_ = [u:iPhone].[u:Latest];""")]          // [u:iPhone] -> False classification because of heuristic. Should be t:
+    [DataRow("""[u:iPhone].[u:iPhone15Pro].[u:M]();""")] // [u:iPhone] -> False classification because of heuristic. Should be t:
+    [DataRow("""[u:iPhone15Pro].[u:M]();""")]            // Correct
+    public void IdentifierToken_MemberAccess_FalseClassification(string statement) =>
+        ClassifierTestHarness.AssertTokenTypes($$"""
+            public class iPhone
+            {
+                public static iPhone iPhone15Pro;
+                public static iPhone Latest;
+
+                public void M()
+                {
+                    {{statement}}
+                }
+            }
+            """, allowSemanticModel: false);
 #if NET
 
     [DataTestMethod]

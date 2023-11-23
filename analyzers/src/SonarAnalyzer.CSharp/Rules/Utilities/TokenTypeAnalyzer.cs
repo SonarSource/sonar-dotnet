@@ -195,17 +195,22 @@ namespace SonarAnalyzer.Rules.CSharp
                     // 'name' can not be a nested type, if there is an expression to the left of the member access,
                     // that can not bind to a type. The only things that can bind to a type are SimpleNames (Identifier or GenericName)
                     // or pre-defined types. None of the pre-defined types have a nested type, so we can exclude these as well.
-                    { Parent: MemberAccessExpressionSyntax x } when AnyMemberAccessLeftIsNotASimpleName(x) => TokenType.UnknownTokentype,
+                    { Parent: MemberAccessExpressionSyntax x } when AnyMemberAccessLeftIsNotAType(x) => TokenType.UnknownTokentype,
                     // The left side of a pointer member access must be a pointer and can not be a type
                     { Parent: MemberAccessExpressionSyntax { RawKind: (int)SyntaxKind.PointerMemberAccessExpression } } => TokenType.UnknownTokentype,
                     _ => ClassifyIdentifierByModel(name),
                 };
 
-            private static bool AnyMemberAccessLeftIsNotASimpleName(MemberAccessExpressionSyntax memberAccess) =>
+            private static bool AnyMemberAccessLeftIsNotAType(MemberAccessExpressionSyntax memberAccess) =>
                 memberAccess switch
                 {
                     { Expression: not SimpleNameSyntax and not MemberAccessExpressionSyntax and not AliasQualifiedNameSyntax } => true,
-                    { Expression: MemberAccessExpressionSyntax left } => AnyMemberAccessLeftIsNotASimpleName(left),
+                    { Expression: MemberAccessExpressionSyntax left } => AnyMemberAccessLeftIsNotAType(left),
+                    // Heuristic: any MemberAccess that starts with a lowercase on the most left hand side, is assumed to start
+                    // as an expression (e.g. s.Length). Rational: It is (almost) granted that Types (including enums) start
+                    // with an uppercase in C#. Any identifier, that starts with a lower case is assumed to refer a local, a parameter,
+                    // or a field.
+                    { Expression: SimpleNameSyntax { Identifier.ValueText: { Length: >= 1 } mostLeftIdentifier } } => char.IsLower(mostLeftIdentifier[0]),
                     _ => false,
                 };
 
