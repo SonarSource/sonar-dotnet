@@ -45,8 +45,8 @@ namespace SonarAnalyzer.Rules
         private readonly DiagnosticDescriptor rule;
 
         private string credentialWords;
-        private Regex PasswordValuePattern;
         private ImmutableList<string> splitCredentialWords;
+        private Regex passwordValuePattern;
 
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
         protected abstract void InitializeActions(SonarParametrizedAnalysisContext context);
@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules
                 var split = SplitCredentialWordsByComma(credentialWords);
                 splitCredentialWords = split;
                 var credentialWordsPattern = string.Join("|", split.Select(Regex.Escape));
-                PasswordValuePattern = new Regex($@"\b(?<credential>{credentialWordsPattern})\s*[:=]\s*(?<suffix>.+)$", RegexOptions.IgnoreCase);
+                passwordValuePattern = new Regex($@"\b(?<credential>{credentialWordsPattern})\s*[:=]\s*(?<suffix>.+)$", RegexOptions.IgnoreCase);
             }
         }
 
@@ -208,7 +208,7 @@ namespace SonarAnalyzer.Rules
                 return Enumerable.Empty<string>();
             }
 
-            var match = PasswordValuePattern.Match(variableValue);
+            var match = passwordValuePattern.Match(variableValue);
             if (match.Success && !IsValidCredential(match.Groups["suffix"].Value))
             {
                 credentialWordsFound.Add(match.Groups["credential"].Value);
