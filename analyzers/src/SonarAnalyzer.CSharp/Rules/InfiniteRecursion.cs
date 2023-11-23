@@ -79,7 +79,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (c.SemanticModel.GetDeclaredSymbol(c.Node) is IMethodSymbol symbol)
             {
-                checker.CheckForNoExitMethod(c, (CSharpSyntaxNode)c.Node, identifier, symbol);
+                checker.CheckForNoExitMethod(c, c.Node, identifier, symbol);
             }
         }
 
@@ -124,7 +124,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private interface IChecker
         {
             void CheckForNoExitProperty(SonarSyntaxNodeReportingContext c, PropertyDeclarationSyntax property, IPropertySymbol propertySymbol);
-            void CheckForNoExitMethod(SonarSyntaxNodeReportingContext c, CSharpSyntaxNode body, SyntaxToken identifier, IMethodSymbol symbol);
+            void CheckForNoExitMethod(SonarSyntaxNodeReportingContext c, SyntaxNode body, SyntaxToken identifier, IMethodSymbol symbol);
         }
     }
 }

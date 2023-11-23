@@ -110,7 +110,7 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
                                        .Cast<ISymbolicExecutionAnalyzer>() // ISymbolicExecutionAnalyzer should be passed as TSonarFallback to CreateFactory. Have you passed a Roslyn rule instead?
                                        .Where(x => x.SupportedDiagnostics.Any(descriptor => IsEnabled(context, descriptor)))
                                        .ToList();
-        if (enabledAnalyzers.Any() && CSharpControlFlowGraph.TryGet((CSharpSyntaxNode)context.Node, context.SemanticModel, out var cfg))
+        if (enabledAnalyzers.Any() && CSharpControlFlowGraph.TryGet(context.Node, context.SemanticModel, out var cfg))
         {
             var lva = new SonarCSharpLiveVariableAnalysis(cfg, symbol, context.SemanticModel, context.Cancel);
             try
