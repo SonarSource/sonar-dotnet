@@ -29,27 +29,26 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S5443";
         private const string MessageFormat = "Make sure publicly writable directories are used safely here.";
         private const RegexOptions WindowsAndUnixOptions = RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant;
-        private readonly string[] linuxDirs =
+
+        protected static string[] InsecureEnvironmentVariables { get; }
+
+        private static readonly Regex UserProfile;
+        private static readonly Regex LinuxDirectories;
+        private static readonly Regex MacDirectories;
+        private static readonly Regex WindowsDirectories;
+        private static readonly Regex EnvironmentVariables;
+
+        static PubliclyWritableDirectoriesBase()
         {
-            "/dev/mqueue",
-            "/run/lock",
-            "/var/run/lock",
-        };
-        private readonly string[] macDirs =
-        {
-            "/var/tmp",
-            "/usr/tmp",
-            "/dev/shm",
-            "/library/caches",
-            "/users/shared",
-            "/private/tmp",
-            "/private/var/tmp",
-        };
-        private readonly Regex userProfile = new(@"^%USERPROFILE%[\\\/]AppData[\\\/]Local[\\\/]Temp", WindowsAndUnixOptions);
-        private readonly Regex linuxDirectories;
-        private readonly Regex macDirectories;
-        private readonly Regex windowsDirectories = new(@"^([a-z]:[\\\/]?|[\\\/][\\\/][^\\\/]+[\\\/]|[\\\/])(windows[\\\/])?te?mp([\\\/]|$)", WindowsAndUnixOptions);
-        private readonly Regex environmentVariables;
+            var insecureEnvironmentVariables = new[] { "tmp", "temp", "tmpdir" };
+            InsecureEnvironmentVariables = insecureEnvironmentVariables;
+            UserProfile = new("""^%USERPROFILE%[\\\/]AppData[\\\/]Local[\\\/]Temp""", WindowsAndUnixOptions);
+            LinuxDirectories = new($@"^({LinuxDirs().JoinStr("|", Regex.Escape)})(\/|$)", RegexOptions.Compiled);
+            MacDirectories = new($@"^({MacDirs().JoinStr("|", Regex.Escape)})(\/|$)", WindowsAndUnixOptions);
+            WindowsDirectories = new("""^([a-z]:[\\\/]?|[\\\/][\\\/][^\\\/]+[\\\/]|[\\\/])(windows[\\\/])?te?mp([\\\/]|$)""", WindowsAndUnixOptions);
+            EnvironmentVariables = new($@"^%({insecureEnvironmentVariables.JoinStr("|")})%([\\\/]|$)", WindowsAndUnixOptions);
+        }
+
         private readonly DiagnosticDescriptor rule;
 
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
@@ -59,14 +58,9 @@ namespace SonarAnalyzer.Rules
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected string[] InsecureEnvironmentVariables { get; } = { "tmp", "temp", "tmpdir" };
-
         protected PubliclyWritableDirectoriesBase(IAnalyzerConfiguration configuration) : base(configuration)
         {
             rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
-            linuxDirectories = new Regex($@"^({linuxDirs.JoinStr("|", x => Regex.Escape(x))})(\/|$)", RegexOptions.Compiled);
-            macDirectories = new Regex($@"^({macDirs.JoinStr("|", x => Regex.Escape(x))})(\/|$)", WindowsAndUnixOptions);
-            environmentVariables = new Regex($@"^%({InsecureEnvironmentVariables.JoinStr("|")})%([\\\/]|$)", WindowsAndUnixOptions);
         }
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -102,11 +96,29 @@ namespace SonarAnalyzer.Rules
                 Language.SyntaxKind.InvocationExpression);
         }
 
-        private bool IsSensitiveDirectoryUsage(string directory) =>
-            windowsDirectories.IsMatch(directory)
-            || macDirectories.IsMatch(directory)
-            || linuxDirectories.IsMatch(directory)
-            || environmentVariables.IsMatch(directory)
-            || userProfile.IsMatch(directory);
+        private static bool IsSensitiveDirectoryUsage(string directory) =>
+            WindowsDirectories.IsMatch(directory)
+                || MacDirectories.IsMatch(directory)
+                || LinuxDirectories.IsMatch(directory)
+                || EnvironmentVariables.IsMatch(directory)
+                || UserProfile.IsMatch(directory);
+
+        private static string[] LinuxDirs() => new[]
+            {
+                "/dev/mqueue",
+                "/run/lock",
+                "/var/run/lock",
+            };
+
+        private static string[] MacDirs() => new[]
+            {
+                "/var/tmp",
+                "/usr/tmp",
+                "/dev/shm",
+                "/library/caches",
+                "/users/shared",
+                "/private/tmp",
+                "/private/var/tmp",
+            };
     }
 }
