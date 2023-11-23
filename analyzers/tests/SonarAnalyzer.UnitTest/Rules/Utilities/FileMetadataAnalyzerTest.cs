@@ -98,9 +98,10 @@ namespace SonarAnalyzer.UnitTest.Rules
             var tree = new Mock<SyntaxTree>();
             tree.SetupGet(x => x.FilePath).Returns("File.Generated.cs");    // Generated to simplify mocking for GeneratedCodeRecognizer
             tree.SetupGet(x => x.Encoding).Returns(() => null);
+            var model = TestHelper.CompileCS(string.Empty).Model;
             var sut = new TestFileMetadataAnalyzer(null, isTestProject);
 
-            sut.TestCreateMessage(UtilityAnalyzerParameters.Default, tree.Object, null).Encoding.Should().BeEmpty();
+            sut.TestCreateMessage(UtilityAnalyzerParameters.Default, tree.Object, model).Encoding.Should().BeEmpty();
         }
 
         [DataTestMethod]
