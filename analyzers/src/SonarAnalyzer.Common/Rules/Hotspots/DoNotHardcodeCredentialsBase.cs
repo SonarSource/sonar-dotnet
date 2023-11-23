@@ -38,9 +38,6 @@ namespace SonarAnalyzer.Rules
         private const string MessageUriUserInfo = "Review this hard-coded URI, which may contain a credential.";
         private const string DefaultCredentialWords = "password, passwd, pwd, passphrase";
 
-        // Assumption: There will only be one "CredentialWords" parameter value per AppDomain. If this changes,
-        // use a concurrent dictionary instead (Don't use ValueTuple as the write is not atomic).
-        private static Tuple<string, Regex> PasswordValuePattern;
         private static readonly Regex ValidCredentialPattern = new(@"^(\?|:\w+|\{\d+[^}]*\}|""|')$", RegexOptions.IgnoreCase | RegexOptions.Compiled);
         private static readonly Regex UriUserInfoPattern = CreateUriUserInfoPattern();
 
@@ -48,6 +45,7 @@ namespace SonarAnalyzer.Rules
         private readonly DiagnosticDescriptor rule;
 
         private string credentialWords;
+        private Regex PasswordValuePattern;
         private ImmutableList<string> splitCredentialWords;
 
         protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
@@ -63,7 +61,10 @@ namespace SonarAnalyzer.Rules
             set
             {
                 credentialWords = value;
-                splitCredentialWords = SplitCredentialWordsByComma(credentialWords);
+                var split = SplitCredentialWordsByComma(credentialWords);
+                splitCredentialWords = split;
+                var credentialWordsPattern = string.Join("|", split.Select(Regex.Escape));
+                PasswordValuePattern = new Regex($@"\b(?<credential>{credentialWordsPattern})\s*[:=]\s*(?<suffix>.+)$", RegexOptions.IgnoreCase);
             }
         }
 
@@ -72,21 +73,6 @@ namespace SonarAnalyzer.Rules
             this.configuration = configuration;
             rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
             CredentialWords = DefaultCredentialWords;   // Property will initialize multiple state variables
-        }
-
-        private static Regex PasswordValueRegex(string credentialWords)
-        {
-            // Make a local copy of the reference to the tuple class to avoid concurrency issues between the access of Item1 and Item2
-            var local = PasswordValuePattern;
-            if (local?.Item1 == credentialWords)
-            {
-                return local.Item2;
-            }
-            var credentialWordsPattern = string.Join("|", SplitCredentialWordsByComma(credentialWords).Select(Regex.Escape));
-            var regex = new Regex($@"\b(?<credential>{credentialWordsPattern})\s*[:=]\s*(?<suffix>.+)$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            // There is no need for locking on the write. The read is atomic and any tuple read is valid (but may fail the condition).
-            PasswordValuePattern = new(credentialWords, regex);
-            return regex;
         }
 
         private static ImmutableList<string> SplitCredentialWordsByComma(string credentialWords) =>
@@ -222,7 +208,7 @@ namespace SonarAnalyzer.Rules
                 return Enumerable.Empty<string>();
             }
 
-            var match = PasswordValueRegex(CredentialWords).Match(variableValue);
+            var match = PasswordValuePattern.Match(variableValue);
             if (match.Success && !IsValidCredential(match.Groups["suffix"].Value))
             {
                 credentialWordsFound.Add(match.Groups["credential"].Value);
