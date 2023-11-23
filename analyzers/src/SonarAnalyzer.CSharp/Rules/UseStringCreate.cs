@@ -35,14 +35,14 @@ public sealed class UseStringCreate : SonarDiagnosticAnalyzer
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
     protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterCompilationStartAction(start =>
+        context.RegisterCompilationStartAction(c =>
         {
-            if (!CompilationTargetsValidNetVersion(start.Compilation))
+            if (!CompilationTargetsValidNetVersion(c.Compilation))
             {
                 return;
             }
 
-            context.RegisterNodeAction(c =>
+            c.RegisterNodeAction(c =>
             {
                 var node = (InvocationExpressionSyntax)c.Node;
 

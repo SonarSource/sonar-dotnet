@@ -46,11 +46,11 @@ public abstract class DateAndTimeShouldNotBeUsedasTypeForPrimaryKeyBase<TSyntaxK
         {
             if (ShouldRegisterAction(c.Compilation))
             {
-                context.RegisterNodeAction(Language.GeneratedCodeRecognizer, context =>
+                c.RegisterNodeAction(Language.GeneratedCodeRecognizer, cc =>
                 {
-                    foreach (var propertyType in TypeNodesOfTemporalKeyProperties(context))
+                    foreach (var propertyType in TypeNodesOfTemporalKeyProperties(cc))
                     {
-                        context.ReportIssue(Diagnostic.Create(Rule, propertyType.GetLocation(), Language.Syntax.NodeIdentifier(propertyType)));
+                        cc.ReportIssue(Diagnostic.Create(Rule, propertyType.GetLocation(), Language.Syntax.NodeIdentifier(propertyType)));
                     }
                 }, Language.SyntaxKind.ClassDeclaration);
             }

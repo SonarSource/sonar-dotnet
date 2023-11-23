@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    context.RegisterNodeAction(
+                    ccc.RegisterNodeAction(
                         CheckIgnoreAntiforgeryTokenAttribute,
                         SyntaxKind.Attribute,
                         SyntaxKind.ObjectCreationExpression,
