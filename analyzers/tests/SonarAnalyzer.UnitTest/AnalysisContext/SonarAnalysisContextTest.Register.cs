@@ -55,8 +55,10 @@ public partial class SonarAnalysisContextTest
     public void RegisterNodeAction_UnchangedFiles_SonarParametrizedAnalysisContext(string unchangedFileName, bool expected)
     {
         var context = new DummyAnalysisContext(TestContext, unchangedFileName);
-        var sut = new SonarParametrizedAnalysisContext(new(context, DummyMainDescriptor));
+        var sonarContext = new SonarAnalysisContext(context, DummyMainDescriptor);
+        var sut = new SonarParametrizedAnalysisContext(sonarContext);
         sut.RegisterNodeAction<SyntaxKind>(CSharpGeneratedCodeRecognizer.Instance, context.DelegateAction);
+        sonarContext.RegisterCompilationStartAction(c => sut.ExecutePostponedActions(c));
 
         context.AssertDelegateInvoked(expected);
     }
