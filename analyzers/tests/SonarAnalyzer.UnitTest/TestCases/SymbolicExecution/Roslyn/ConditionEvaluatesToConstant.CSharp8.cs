@@ -567,3 +567,12 @@ class Repro_8326
             Console.WriteLine();    // Secondary
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8262
+public struct Repro_8382
+{
+    public bool Equals(string? other) => true;
+    public bool Repro(object? obj, bool condition) =>
+        Equals((string?)null) // Noncompliant FP this is a local method, it does not need to follow the Equals contract.
+        || condition;
+}
