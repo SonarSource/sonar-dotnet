@@ -42,22 +42,29 @@ public sealed class SonarCompilationStartAnalysisContext : SonarAnalysisContextB
     {
         if (HasMatchingScope(AnalysisContext.SupportedDiagnostics))
         {
+            var lastShouldAnalyze = default(Tuple<SyntaxTree, bool>);
             Context.RegisterSyntaxNodeAction(x =>
-                    Execute<SonarSyntaxNodeReportingContext, SyntaxNodeAnalysisContext>(
-                        new(AnalysisContext, x), action, x.Node.SyntaxTree, generatedCodeRecognizer),
-                syntaxKinds);
-        }
-    }
-
-    /// <inheritdoc cref="SonarAnalysisContext.Execute" />
-    private void Execute<TSonarContext, TRoslynContext>(TSonarContext context, Action<TSonarContext> action, SyntaxTree sourceTree, GeneratedCodeRecognizer generatedCodeRecognizer = null)
-        where TSonarContext : SonarAnalysisContextBase<TRoslynContext>
-    {
-        if (ShouldAnalyzeTree(sourceTree, generatedCodeRecognizer)
-            && SonarAnalysisContext.LegacyIsRegisteredActionEnabled(AnalysisContext.SupportedDiagnostics, sourceTree)
-            && AnalysisContext.ShouldAnalyzeRazorFile(sourceTree))
-        {
-            action(context);
+            {
+                var tree = x.Node.SyntaxTree;
+                var last = lastShouldAnalyze; // Make a local copy of the reference to avoid concurrency issues between the access of Item1 and Item2
+                bool shouldAnalyze;
+                if (ReferenceEquals(last?.Item1, tree))
+                {
+                    shouldAnalyze = last!.Item2;
+                }
+                else
+                {
+                    // Inlined from "Execute"
+                    shouldAnalyze = ShouldAnalyzeTree(x.Node.SyntaxTree, generatedCodeRecognizer)
+                                    && SonarAnalysisContext.LegacyIsRegisteredActionEnabled(AnalysisContext.SupportedDiagnostics, x.Node.SyntaxTree)
+                                    && AnalysisContext.ShouldAnalyzeRazorFile(x.Node.SyntaxTree);
+                    lastShouldAnalyze = new Tuple<SyntaxTree, bool>(tree, shouldAnalyze);
+                }
+                if (shouldAnalyze)
+                {
+                    action(new(AnalysisContext, x));
+                }
+            }, syntaxKinds);
         }
     }
 }

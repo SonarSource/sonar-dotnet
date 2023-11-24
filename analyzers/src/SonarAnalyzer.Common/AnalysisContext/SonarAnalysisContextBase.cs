@@ -47,9 +47,6 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
     public SonarAnalysisContext AnalysisContext { get; }
     public TContext Context { get; }
 
-    private readonly ConcurrentDictionary<SyntaxTree, bool> shouldAnalyzeTreeCache = new();
-    private bool? shouldAnalyzeNullTreeCache = null;
-
     protected SonarAnalysisContextBase(SonarAnalysisContext analysisContext, TContext context)
     {
         AnalysisContext = analysisContext ?? throw new ArgumentNullException(nameof(analysisContext));
@@ -58,25 +55,12 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
 
     /// <param name="tree">Tree to decide on. Can be null for Symbol-based and Compilation-based scenarios. And we want to analyze those too.</param>
     /// <param name="generatedCodeRecognizer">When set, generated trees are analyzed only when language-specific 'analyzeGeneratedCode' configuration property is also set.</param>
-    public bool ShouldAnalyzeTree(SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer)
-    {
-        if (tree is null)
-        {
-            return shouldAnalyzeNullTreeCache ??= AnalyzeTree(null);
-        }
-        else
-        {
-            return shouldAnalyzeTreeCache.GetOrAdd(tree, AnalyzeTree);
-        }
-
-        bool AnalyzeTree(SyntaxTree syntaxTree) =>
-            SonarLintXml() is var sonarLintXml
-            && (generatedCodeRecognizer is null
-                || sonarLintXml.AnalyzeGeneratedCode(Compilation.Language)
-                || !syntaxTree.IsConsideredGenerated(generatedCodeRecognizer, Compilation, IsRazorAnalysisEnabled()))
-            && (syntaxTree is null || (!IsUnchanged(syntaxTree) && !IsExcluded(sonarLintXml, syntaxTree.FilePath)));
-    }
-
+    public bool ShouldAnalyzeTree(SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer) =>
+        SonarLintXml() is var sonarLintXml
+        && (generatedCodeRecognizer is null
+            || sonarLintXml.AnalyzeGeneratedCode(Compilation.Language)
+            || !tree.IsConsideredGenerated(generatedCodeRecognizer, Compilation, IsRazorAnalysisEnabled()))
+        && (tree is null || (!IsUnchanged(tree) && !IsExcluded(sonarLintXml, tree.FilePath)));
 
     /// <summary>
     /// Reads configuration from SonarProjectConfig.xml file and caches the result for scope of this analysis.
