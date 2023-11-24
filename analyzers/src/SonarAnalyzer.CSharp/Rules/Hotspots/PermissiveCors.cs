@@ -41,11 +41,11 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             base.Initialize(context);
 
-            context.RegisterCompilationStartAction(compilationContext =>
+            context.RegisterCompilationStartAction(c =>
             {
-                if (IsEnabled(compilationContext.Options))
+                if (IsEnabled(c.Options))
                 {
-                    context.RegisterNodeAction(VisitAttribute, SyntaxKind.Attribute);
+                    c.RegisterNodeAction(VisitAttribute, SyntaxKind.Attribute);
                 }
             });
         }

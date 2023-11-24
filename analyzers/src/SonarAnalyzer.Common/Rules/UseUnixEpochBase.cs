@@ -47,33 +47,33 @@ public abstract class UseUnixEpochBase<TSyntaxKind, TLiteralExpression, TMemberA
     protected abstract bool IsZeroTimeOffset(SyntaxNode node);
 
     protected sealed override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterCompilationStartAction(start =>
+        context.RegisterCompilationStartAction(c =>
         {
-            if (!IsUnixEpochSupported(start.Compilation))
+            if (!IsUnixEpochSupported(c.Compilation))
             {
                 return;
             }
 
-            context.RegisterNodeAction(
+            c.RegisterNodeAction(
                 Language.GeneratedCodeRecognizer,
-                c =>
+                cc =>
                 {
-                    var arguments = Language.Syntax.ArgumentExpressions(c.Node);
+                    var arguments = Language.Syntax.ArgumentExpressions(cc.Node);
                     var literalsArguments = arguments.OfType<TLiteralExpression>();
 
                     if (literalsArguments.Any(x => IsValueEqualTo(x, EpochYear)
                         && literalsArguments.Count(x => IsValueEqualTo(x, EpochMonth)) == 2)
-                        && CheckAndGetTypeName(c.Node, c.SemanticModel) is { } name
-                        && IsEpochCtor(c.Node, c.SemanticModel))
+                        && CheckAndGetTypeName(cc.Node, cc.SemanticModel) is { } name
+                        && IsEpochCtor(cc.Node, cc.SemanticModel))
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation(), name));
+                        cc.ReportIssue(Diagnostic.Create(Rule, cc.Node.GetLocation(), name));
                     }
                     else if (arguments.Count() == 1
                         && ((literalsArguments.Count() == 1  && IsValueEqualTo(literalsArguments.First(), EpochTicks))
-                            || (Language.FindConstantValue(c.SemanticModel, arguments.First()) is long ticks && ticks == EpochTicks))
-                        && CheckAndGetTypeName(c.Node, c.SemanticModel) is { } typeName)
+                            || (Language.FindConstantValue(cc.SemanticModel, arguments.First()) is long ticks && ticks == EpochTicks))
+                        && CheckAndGetTypeName(cc.Node, cc.SemanticModel) is { } typeName)
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation(), typeName));
+                        cc.ReportIssue(Diagnostic.Create(Rule, cc.Node.GetLocation(), typeName));
                     }
                 },
                 Language.SyntaxKind.ObjectCreationExpressions);

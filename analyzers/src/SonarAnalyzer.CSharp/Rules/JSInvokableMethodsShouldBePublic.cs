@@ -35,7 +35,7 @@ public sealed class JSInvokableMethodsShouldBePublic : SonarDiagnosticAnalyzer
         {
             if (c.Compilation.GetTypeByMetadataName(KnownType.Microsoft_JSInterop_JSInvokable) is not null)
             {
-                context.RegisterNodeAction(CheckMethod, SyntaxKind.MethodDeclaration);
+                c.RegisterNodeAction(CheckMethod, SyntaxKind.MethodDeclaration);
             }
         });
 

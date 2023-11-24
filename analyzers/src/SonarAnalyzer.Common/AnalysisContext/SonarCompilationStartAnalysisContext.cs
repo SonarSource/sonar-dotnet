@@ -38,6 +38,26 @@ public sealed class SonarCompilationStartAnalysisContext : SonarAnalysisContextB
         Context.RegisterSemanticModelAction(x => action(new(AnalysisContext, x)));
 
     public void RegisterNodeAction<TSyntaxKind>(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxNodeReportingContext> action, params TSyntaxKind[] syntaxKinds)
-        where TSyntaxKind : struct =>
-        AnalysisContext.RegisterNodeAction(generatedCodeRecognizer, action, syntaxKinds);
+        where TSyntaxKind : struct
+    {
+        if (HasMatchingScope(AnalysisContext.SupportedDiagnostics))
+        {
+            Context.RegisterSyntaxNodeAction(x =>
+                    Execute<SonarSyntaxNodeReportingContext, SyntaxNodeAnalysisContext>(
+                        new(AnalysisContext, x), action, x.Node.SyntaxTree, generatedCodeRecognizer),
+                syntaxKinds);
+        }
+    }
+
+    /// <inheritdoc cref="SonarAnalysisContext.Execute" />
+    private void Execute<TSonarContext, TRoslynContext>(TSonarContext context, Action<TSonarContext> action, SyntaxTree sourceTree, GeneratedCodeRecognizer generatedCodeRecognizer = null)
+        where TSonarContext : SonarAnalysisContextBase<TRoslynContext>
+    {
+        if (ShouldAnalyzeTree(sourceTree, generatedCodeRecognizer)
+            && SonarAnalysisContext.LegacyIsRegisteredActionEnabled(AnalysisContext.SupportedDiagnostics, sourceTree)
+            && AnalysisContext.ShouldAnalyzeRazorFile(sourceTree))
+        {
+            action(context);
+        }
+    }
 }

@@ -55,8 +55,10 @@ public partial class SonarAnalysisContextTest
     public void RegisterNodeAction_UnchangedFiles_SonarParametrizedAnalysisContext(string unchangedFileName, bool expected)
     {
         var context = new DummyAnalysisContext(TestContext, unchangedFileName);
-        var sut = new SonarParametrizedAnalysisContext(new(context, DummyMainDescriptor));
+        var sonarContext = new SonarAnalysisContext(context, DummyMainDescriptor);
+        var sut = new SonarParametrizedAnalysisContext(sonarContext);
         sut.RegisterNodeAction<SyntaxKind>(CSharpGeneratedCodeRecognizer.Instance, context.DelegateAction);
+        sonarContext.RegisterCompilationStartAction(c => sut.ExecutePostponedActions(c));
 
         context.AssertDelegateInvoked(expected);
     }
@@ -237,7 +239,7 @@ public partial class SonarAnalysisContextTest
         var sut = new SonarCompilationStartAnalysisContext(new(context, DummyMainDescriptor), startContext);
         sut.RegisterNodeAction<SyntaxKind>(CSharpGeneratedCodeRecognizer.Instance, _ => { });
 
-        startContext.AssertExpectedInvocationCounts(expectedNodeCount: 0); // RegisterNodeAction doesn't use DummyCompilationStartAnalysisContext to register but a newly created context
+        startContext.AssertExpectedInvocationCounts(expectedNodeCount: 1);
     }
 
     [TestMethod]

@@ -35,13 +35,13 @@ namespace SonarAnalyzer.Rules
         protected DoNotCallMethodsBase(string diagnosticId) : base(diagnosticId) { }
 
         protected override void Initialize(SonarAnalysisContext context) =>
-             context.RegisterCompilationStartAction(start =>
+             context.RegisterCompilationStartAction(c =>
              {
-                 if (!ShouldRegisterAction(start.Compilation))
+                 if (!ShouldRegisterAction(c.Compilation))
                  {
                      return;
                  }
-                 context.RegisterNodeAction(Language.GeneratedCodeRecognizer, AnalyzeInvocation, Language.SyntaxKind.InvocationExpression);
+                 c.RegisterNodeAction(Language.GeneratedCodeRecognizer, AnalyzeInvocation, Language.SyntaxKind.InvocationExpression);
              });
 
         private void AnalyzeInvocation(SonarSyntaxNodeReportingContext analysisContext)
