@@ -239,7 +239,7 @@ public partial class SonarAnalysisContextTest
         var sut = new SonarCompilationStartAnalysisContext(new(context, DummyMainDescriptor), startContext);
         sut.RegisterNodeAction<SyntaxKind>(CSharpGeneratedCodeRecognizer.Instance, _ => { });
 
-        startContext.AssertExpectedInvocationCounts(expectedNodeCount: 0); // RegisterNodeAction doesn't use DummyCompilationStartAnalysisContext to register but a newly created context
+        startContext.AssertExpectedInvocationCounts(expectedNodeCount: 1);
     }
 
     [TestMethod]

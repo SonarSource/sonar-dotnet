@@ -25,6 +25,8 @@ namespace SonarAnalyzer.AnalysisContext;
 
 public class SonarAnalysisContext
 {
+    internal readonly ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics;
+
     private readonly HashSet<string> rulesDisabledForRazor = new()
         {
             "S103",
@@ -37,7 +39,6 @@ public class SonarAnalysisContext
         };
 
     private readonly RoslynAnalysisContext analysisContext;
-    private readonly ImmutableArray<DiagnosticDescriptor> supportedDiagnostics;
 
     /// <summary>
     /// This delegate is called on all specific contexts, after the registration to the <see cref="RoslynAnalysisContext"/>, to
@@ -71,10 +72,10 @@ public class SonarAnalysisContext
     internal SonarAnalysisContext(RoslynAnalysisContext analysisContext, ImmutableArray<DiagnosticDescriptor> supportedDiagnostics)
     {
         this.analysisContext = analysisContext ?? throw new ArgumentNullException(nameof(analysisContext));
-        this.supportedDiagnostics = supportedDiagnostics;
+        SupportedDiagnostics = supportedDiagnostics;
     }
 
-    private protected SonarAnalysisContext(SonarAnalysisContext context) : this(context.analysisContext, context.supportedDiagnostics) { }
+    private protected SonarAnalysisContext(SonarAnalysisContext context) : this(context.analysisContext, context.SupportedDiagnostics) { }
 
     public bool TryGetValue<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value) =>
         analysisContext.TryGetValue(text, valueProvider, out value);
@@ -102,14 +103,7 @@ public class SonarAnalysisContext
 
     public virtual void RegisterCompilationStartAction(Action<SonarCompilationStartAnalysisContext> action) =>
         analysisContext.RegisterCompilationStartAction(
-            c =>
-            {
-                var context = new SonarCompilationStartAnalysisContext(this, c);
-                if (context.HasMatchingScope(supportedDiagnostics))
-                {
-                    ExecuteScopeValid<SonarCompilationStartAnalysisContext, CompilationStartAnalysisContext>(context, action, null);
-                }
-            });
+            c => Execute<SonarCompilationStartAnalysisContext, CompilationStartAnalysisContext>(new(this, c), action, null));
 
     public void RegisterSymbolAction(Action<SonarSymbolReportingContext> action, params SymbolKind[] symbolKinds) =>
         analysisContext.RegisterSymbolAction(
@@ -129,11 +123,6 @@ public class SonarAnalysisContext
         RegisterCompilationStartAction(
             c => c.RegisterNodeAction(generatedCodeRecognizer, action, syntaxKinds));
 
-    internal void RegisterNodeActionScopeValid<TSyntaxKind>(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxNodeReportingContext> action, params TSyntaxKind[] syntaxKinds)
-        where TSyntaxKind : struct =>
-        analysisContext.RegisterSyntaxNodeAction(
-            c => ExecuteScopeValid<SonarSyntaxNodeReportingContext, SyntaxNodeAnalysisContext>(new(this, c), action, c.Node.SyntaxTree, generatedCodeRecognizer), syntaxKinds);
-
     /// <summary>
     /// Register action for a SyntaxNode that is executed unconditionally:
     /// * For all non-generated code.
@@ -144,6 +133,11 @@ public class SonarAnalysisContext
     public void RegisterNodeActionInAllFiles<TSyntaxKind>(Action<SonarSyntaxNodeReportingContext> action, params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct =>
         analysisContext.RegisterSyntaxNodeAction(c => action(new(this, c)), syntaxKinds);
 
+    internal bool ShouldAnalyzeRazorFile(SyntaxTree sourceTree) =>
+        !GeneratedCodeRecognizer.IsRazorGeneratedFile(sourceTree)
+        || !SupportedDiagnostics.Any(x => (x.CustomTags.Count() == 1 && x.CustomTags.Contains(DiagnosticDescriptorFactory.TestSourceScopeTag))
+                                          || rulesDisabledForRazor.Contains(x.Id));
+
     /// <param name="sourceTree">Tree that is definitely known to be analyzed. Pass 'null' if the context doesn't know a specific tree to be analyzed, like a CompilationContext.</param>
     private void Execute<TSonarContext, TRoslynContext>(TSonarContext context, Action<TSonarContext> action, SyntaxTree sourceTree, GeneratedCodeRecognizer generatedCodeRecognizer = null)
         where TSonarContext : SonarAnalysisContextBase<TRoslynContext>
@@ -152,33 +146,12 @@ public class SonarAnalysisContext
         // First, we need to ensure the rule does apply to the current scope (main vs test source).
         // Second, we call an external delegate (set by legacy SonarLint for VS) to ensure the rule should be run (usually
         // the decision is made on based on whether the project contains the analyzer as NuGet).
-        if (context.HasMatchingScope(supportedDiagnostics)
+        if (context.HasMatchingScope(SupportedDiagnostics)
             && context.ShouldAnalyzeTree(sourceTree, generatedCodeRecognizer)
-            && LegacyIsRegisteredActionEnabled(supportedDiagnostics, sourceTree)
+            && LegacyIsRegisteredActionEnabled(SupportedDiagnostics, sourceTree)
             && ShouldAnalyzeRazorFile(sourceTree))
         {
             action(context);
         }
     }
-
-    /// <param name="sourceTree">Tree that is definitely known to be analyzed. Pass 'null' if the context doesn't know a specific tree to be analyzed, like a CompilationContext.</param>
-    private void ExecuteScopeValid<TSonarContext, TRoslynContext>(TSonarContext context, Action<TSonarContext> action, SyntaxTree sourceTree, GeneratedCodeRecognizer generatedCodeRecognizer = null)
-        where TSonarContext : SonarAnalysisContextBase<TRoslynContext>
-    {
-        // For each action registered on context we need to do some pre-processing before actually calling the rule.
-        // First, we need to ensure the rule does apply to the current scope (main vs test source).
-        // Second, we call an external delegate (set by legacy SonarLint for VS) to ensure the rule should be run (usually
-        // the decision is made on based on whether the project contains the analyzer as NuGet).
-        if (context.ShouldAnalyzeTree(sourceTree, generatedCodeRecognizer)
-            && LegacyIsRegisteredActionEnabled(supportedDiagnostics, sourceTree)
-            && ShouldAnalyzeRazorFile(sourceTree))
-        {
-            action(context);
-        }
-    }
-
-    private bool ShouldAnalyzeRazorFile(SyntaxTree sourceTree) =>
-        !GeneratedCodeRecognizer.IsRazorGeneratedFile(sourceTree)
-        || !supportedDiagnostics.Any(x => (x.CustomTags.Count() == 1 && x.CustomTags.Contains(DiagnosticDescriptorFactory.TestSourceScopeTag))
-                                          || rulesDisabledForRazor.Contains(x.Id));
 }

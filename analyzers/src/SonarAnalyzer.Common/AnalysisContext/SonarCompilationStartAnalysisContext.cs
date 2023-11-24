@@ -38,6 +38,26 @@ public sealed class SonarCompilationStartAnalysisContext : SonarAnalysisContextB
         Context.RegisterSemanticModelAction(x => action(new(AnalysisContext, x)));
 
     public void RegisterNodeAction<TSyntaxKind>(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxNodeReportingContext> action, params TSyntaxKind[] syntaxKinds)
-        where TSyntaxKind : struct =>
-        AnalysisContext.RegisterNodeActionScopeValid(generatedCodeRecognizer, action, syntaxKinds);
+        where TSyntaxKind : struct
+    {
+        if (HasMatchingScope(AnalysisContext.SupportedDiagnostics))
+        {
+            Context.RegisterSyntaxNodeAction(x =>
+                    Execute<SonarSyntaxNodeReportingContext, SyntaxNodeAnalysisContext>(
+                        new(AnalysisContext, x), action, x.Node.SyntaxTree, generatedCodeRecognizer),
+                syntaxKinds);
+        }
+    }
+
+    /// <param name="sourceTree">Tree that is definitely known to be analyzed. Pass 'null' if the context doesn't know a specific tree to be analyzed, like a CompilationContext.</param>
+    private void Execute<TSonarContext, TRoslynContext>(TSonarContext context, Action<TSonarContext> action, SyntaxTree sourceTree, GeneratedCodeRecognizer generatedCodeRecognizer = null)
+        where TSonarContext : SonarAnalysisContextBase<TRoslynContext>
+    {
+        if (ShouldAnalyzeTree(sourceTree, generatedCodeRecognizer)
+            && SonarAnalysisContext.LegacyIsRegisteredActionEnabled(AnalysisContext.SupportedDiagnostics, sourceTree)
+            && AnalysisContext.ShouldAnalyzeRazorFile(sourceTree))
+        {
+            action(context);
+        }
+    }
 }
