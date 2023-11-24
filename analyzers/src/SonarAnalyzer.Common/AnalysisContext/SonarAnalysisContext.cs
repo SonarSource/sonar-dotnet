@@ -25,7 +25,7 @@ namespace SonarAnalyzer.AnalysisContext;
 
 public class SonarAnalysisContext
 {
-    internal readonly ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics;
+    internal ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; }
 
     private readonly HashSet<string> rulesDisabledForRazor = new()
         {
@@ -109,19 +109,19 @@ public class SonarAnalysisContext
         analysisContext.RegisterSymbolAction(
             c => Execute<SonarSymbolReportingContext, SymbolAnalysisContext>(new(this, c), action, null), symbolKinds);
 
-    public void RegisterTreeAction(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxTreeReportingContext> action) =>
-        analysisContext.RegisterCompilationStartAction(
-            c => c.RegisterSyntaxTreeAction(
-                treeContext => Execute<SonarSyntaxTreeReportingContext, SyntaxTreeAnalysisContext>(new(this, treeContext, c.Compilation), action, treeContext.Tree, generatedCodeRecognizer)));
+    public void RegisterNodeAction<TSyntaxKind>(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxNodeReportingContext> action, params TSyntaxKind[] syntaxKinds)
+        where TSyntaxKind : struct =>
+        RegisterCompilationStartAction(
+            c => c.RegisterNodeAction(generatedCodeRecognizer, action, syntaxKinds));
 
     public void RegisterSemanticModelAction(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSemanticModelReportingContext> action) =>
         analysisContext.RegisterSemanticModelAction(
             c => Execute<SonarSemanticModelReportingContext, SemanticModelAnalysisContext>(new(this, c), action, c.SemanticModel.SyntaxTree, generatedCodeRecognizer));
 
-    public void RegisterNodeAction<TSyntaxKind>(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxNodeReportingContext> action, params TSyntaxKind[] syntaxKinds)
-        where TSyntaxKind : struct =>
-        RegisterCompilationStartAction(
-            c => c.RegisterNodeAction(generatedCodeRecognizer, action, syntaxKinds));
+    public void RegisterTreeAction(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxTreeReportingContext> action) =>
+        analysisContext.RegisterCompilationStartAction(
+            c => c.RegisterSyntaxTreeAction(
+                treeContext => Execute<SonarSyntaxTreeReportingContext, SyntaxTreeAnalysisContext>(new(this, treeContext, c.Compilation), action, treeContext.Tree, generatedCodeRecognizer)));
 
     /// <summary>
     /// Register action for a SyntaxNode that is executed unconditionally:
@@ -138,6 +138,7 @@ public class SonarAnalysisContext
         || !SupportedDiagnostics.Any(x => (x.CustomTags.Count() == 1 && x.CustomTags.Contains(DiagnosticDescriptorFactory.TestSourceScopeTag))
                                           || rulesDisabledForRazor.Contains(x.Id));
 
+    /// This method will be replaced by <see cref="SonarCompilationStartAnalysisContext.Execute"/> in the future.
     /// <param name="sourceTree">Tree that is definitely known to be analyzed. Pass 'null' if the context doesn't know a specific tree to be analyzed, like a CompilationContext.</param>
     private void Execute<TSonarContext, TRoslynContext>(TSonarContext context, Action<TSonarContext> action, SyntaxTree sourceTree, GeneratedCodeRecognizer generatedCodeRecognizer = null)
         where TSonarContext : SonarAnalysisContextBase<TRoslynContext>

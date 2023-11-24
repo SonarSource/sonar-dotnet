@@ -37,14 +37,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context) =>
              context.RegisterCompilationStartAction(
-                ccc =>
+                c =>
                 {
-                    if (!IsEnabled(ccc.Options))
+                    if (!IsEnabled(c.Options))
                     {
                         return;
                     }
 
-                    ccc.RegisterNodeAction(
+                    c.RegisterNodeAction(
                         CheckIgnoreAntiforgeryTokenAttribute,
                         SyntaxKind.Attribute,
                         SyntaxKind.ObjectCreationExpression,

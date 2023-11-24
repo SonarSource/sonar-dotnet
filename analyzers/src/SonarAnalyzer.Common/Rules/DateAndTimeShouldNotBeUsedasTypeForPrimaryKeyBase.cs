@@ -42,15 +42,15 @@ public abstract class DateAndTimeShouldNotBeUsedasTypeForPrimaryKeyBase<TSyntaxK
     protected DateAndTimeShouldNotBeUsedasTypeForPrimaryKeyBase() : base(DiagnosticId) { }
 
     protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterCompilationStartAction(c =>
+        context.RegisterCompilationStartAction(startContext =>
         {
-            if (ShouldRegisterAction(c.Compilation))
+            if (ShouldRegisterAction(startContext.Compilation))
             {
-                c.RegisterNodeAction(Language.GeneratedCodeRecognizer, cc =>
+                startContext.RegisterNodeAction(Language.GeneratedCodeRecognizer, nodeContext =>
                 {
-                    foreach (var propertyType in TypeNodesOfTemporalKeyProperties(cc))
+                    foreach (var propertyType in TypeNodesOfTemporalKeyProperties(nodeContext))
                     {
-                        cc.ReportIssue(Diagnostic.Create(Rule, propertyType.GetLocation(), Language.Syntax.NodeIdentifier(propertyType)));
+                        nodeContext.ReportIssue(Diagnostic.Create(Rule, propertyType.GetLocation(), Language.Syntax.NodeIdentifier(propertyType)));
                     }
                 }, Language.SyntaxKind.ClassDeclaration);
             }

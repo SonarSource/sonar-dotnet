@@ -49,7 +49,7 @@ public sealed class SonarCompilationStartAnalysisContext : SonarAnalysisContextB
         }
     }
 
-    /// <param name="sourceTree">Tree that is definitely known to be analyzed. Pass 'null' if the context doesn't know a specific tree to be analyzed, like a CompilationContext.</param>
+    /// <inheritdoc cref="SonarAnalysisContext.Execute" />
     private void Execute<TSonarContext, TRoslynContext>(TSonarContext context, Action<TSonarContext> action, SyntaxTree sourceTree, GeneratedCodeRecognizer generatedCodeRecognizer = null)
         where TSonarContext : SonarAnalysisContextBase<TRoslynContext>
     {
