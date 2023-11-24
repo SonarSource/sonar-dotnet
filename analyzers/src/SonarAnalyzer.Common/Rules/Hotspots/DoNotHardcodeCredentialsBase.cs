@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Rules
                 credentialWords = value;
                 var split = SplitCredentialWordsByComma(credentialWords);
                 splitCredentialWords = split;
-                var credentialWordsPattern = string.Join("|", split.Select(Regex.Escape));
+                var credentialWordsPattern = split.Select(Regex.Escape).JoinStr("|");
                 passwordValuePattern = new Regex($@"\b(?<credential>{credentialWordsPattern})\s*[:=]\s*(?<suffix>.+)$", RegexOptions.IgnoreCase);
             }
         }
