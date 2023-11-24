@@ -38,16 +38,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
     }
 
-    internal abstract class DummyAnalyzer<TSyntaxKind> : SonarDiagnosticAnalyzer where TSyntaxKind : struct
+    internal abstract class DummyAnalyzer<TSyntaxKind> : TestAnalyzer where TSyntaxKind : struct
     {
-        private static readonly DiagnosticDescriptor Rule = AnalysisScaffolding.CreateDescriptorMain("SDummy");
-
         protected abstract TSyntaxKind NumericLiteralExpression { get; }
-        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
 
         public int DummyProperty { get; set; }
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterNodeAction(GeneratedCodeRecognizer, c => c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation())), NumericLiteralExpression);

@@ -43,6 +43,12 @@ namespace SonarAnalyzer.Extensions
         public static void RegisterTreeAction(this SonarParametrizedAnalysisContext context, Action<SonarSyntaxTreeReportingContext> action) =>
             context.RegisterTreeAction(VisualBasicGeneratedCodeRecognizer.Instance, action);
 
+        public static void RegisterSemanticModelAction(this SonarAnalysisContext context, Action<SonarSemanticModelReportingContext> action) =>
+            context.RegisterSemanticModelAction(VisualBasicGeneratedCodeRecognizer.Instance, action);
+
+        public static void RegisterSemanticModelAction(this SonarParametrizedAnalysisContext context, Action<SonarSemanticModelReportingContext> action) =>
+            context.RegisterSemanticModelAction(VisualBasicGeneratedCodeRecognizer.Instance, action);
+
         public static void RegisterCodeBlockStartAction<TSyntaxKind>(this SonarAnalysisContext context, Action<SonarCodeBlockStartAnalysisContext<TSyntaxKind>> action)
             where TSyntaxKind : struct =>
             context.RegisterCodeBlockStartAction(VisualBasicGeneratedCodeRecognizer.Instance, action);

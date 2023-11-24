@@ -23,7 +23,6 @@ extern alias vbnet;
 using Microsoft.CodeAnalysis.CSharp;
 using Moq;
 using SonarAnalyzer.AnalysisContext;
-using SonarAnalyzer.UnitTest.Helpers;
 using SonarAnalyzer.UnitTest.TestFramework.Tests;
 using CS = csharp::SonarAnalyzer.Extensions.SonarAnalysisContextExtensions;
 using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext;
@@ -124,6 +123,70 @@ public partial class SonarAnalysisContextTest
     [DataTestMethod]
     [DataRow(SnippetFileName, false)]
     [DataRow(AnotherFileName, true)]
+    public void RegisterSemanticModelAction_UnchangedFiles_SonarAnalysisContext(string unchangedFileName, bool expected)
+    {
+        var context = new DummyAnalysisContext(TestContext, unchangedFileName);
+        var sut = new SonarAnalysisContext(context, DummyMainDescriptor);
+        sut.RegisterSemanticModelAction(CSharpGeneratedCodeRecognizer.Instance, context.DelegateAction);
+
+        context.AssertDelegateInvoked(expected);
+    }
+
+    [DataTestMethod]
+    [DataRow(SnippetFileName, false)]
+    [DataRow(AnotherFileName, true)]
+    public void RegisterSemanticModelAction_UnchangedFiles_SonarParametrizedAnalysisContext(string unchangedFileName, bool expected)
+    {
+        var context = new DummyAnalysisContext(TestContext, unchangedFileName);
+        var sut = new SonarParametrizedAnalysisContext(new(context, DummyMainDescriptor));
+        sut.RegisterSemanticModelAction(CSharpGeneratedCodeRecognizer.Instance, context.DelegateAction);
+
+        context.AssertDelegateInvoked(expected);
+    }
+
+    [TestMethod]
+    public void RegisterSemanticModelAction_Extension_SonarAnalysisContext_CS()
+    {
+        var context = new DummyAnalysisContext(TestContext);
+        var self = new SonarAnalysisContext(context, DummyMainDescriptor);
+        CS.RegisterSemanticModelAction(self, context.DelegateAction);
+
+        context.AssertDelegateInvoked(true);
+    }
+
+    [TestMethod]
+    public void RegisterSemanticModelAction_Extension_SonarParametrizedAnalysisContext_CS()
+    {
+        var context = new DummyAnalysisContext(TestContext);
+        var self = new SonarParametrizedAnalysisContext(new(context, DummyMainDescriptor));
+        CS.RegisterSemanticModelAction(self, context.DelegateAction);
+
+        context.AssertDelegateInvoked(true);
+    }
+
+    [TestMethod]
+    public void RegisterSemanticModelAction_Extension_SonarParametrizedAnalysisContext_VB()
+    {
+        var context = new DummyAnalysisContext(TestContext);
+        var self = new SonarParametrizedAnalysisContext(new(context, DummyMainDescriptor));
+        VB.RegisterSemanticModelAction(self, context.DelegateAction);
+
+        context.AssertDelegateInvoked(true);
+    }
+
+    [TestMethod]
+    public void RegisterSemanticModelAction_Extension_SonarAnalysisContext_VB()
+    {
+        var context = new DummyAnalysisContext(TestContext);
+        var self = new SonarAnalysisContext(context, DummyMainDescriptor);
+        VB.RegisterSemanticModelAction(self, context.DelegateAction);
+
+        context.AssertDelegateInvoked(true);
+    }
+
+    [DataTestMethod]
+    [DataRow(SnippetFileName, false)]
+    [DataRow(AnotherFileName, true)]
     public void RegisterCodeBlockStartAction_UnchangedFiles_SonarAnalysisContext(string unchangedFileName, bool expected)
     {
         var context = new DummyAnalysisContext(TestContext, unchangedFileName);
@@ -131,6 +194,17 @@ public partial class SonarAnalysisContextTest
         sut.RegisterCodeBlockStartAction<SyntaxKind>(CSharpGeneratedCodeRecognizer.Instance, context.DelegateAction);
 
         context.AssertDelegateInvoked(expected);
+    }
+
+    [TestMethod]
+    public void SonarCompilationStartAnalysisContext_RegisterSemanticModel()
+    {
+        var context = new DummyAnalysisContext(TestContext);
+        var startContext = new DummyCompilationStartAnalysisContext(context);
+        var sut = new SonarCompilationStartAnalysisContext(new(context, DummyMainDescriptor), startContext);
+        sut.RegisterSemanticModelAction(_ => { });
+
+        startContext.AssertExpectedInvocationCounts(expectedSemanticModelCount: 1);
     }
 
     [TestMethod]
@@ -179,7 +253,7 @@ public partial class SonarAnalysisContextTest
     }
 
     [TestMethod]
-    public void SonarCompilationStartAnalysisContext_RegistSymbol_ReportsIssue()
+    public void SonarCompilationStartAnalysisContext_RegisterSymbol_ReportsIssue()
     {
         var context = new DummyAnalysisContext(TestContext);
         var startContext = new DummyCompilationStartAnalysisContext(context);
@@ -305,6 +379,9 @@ public partial class SonarAnalysisContextTest
         public SyntaxNodeAnalysisContext CreateSyntaxNodeAnalysisContext() =>
             new(Tree.GetRoot(), Model, Options, _ => { }, _ => true, default);
 
+        public SemanticModelAnalysisContext CreateSemanticModelAnalysisContext() =>
+            new(Model, Options, _ => { }, _ => true, default);
+
         public override void RegisterCodeBlockAction(Action<CodeBlockAnalysisContext> action) =>
             throw new NotImplementedException();
 
@@ -318,7 +395,7 @@ public partial class SonarAnalysisContextTest
             action(MockCompilationStartAnalysisContext(this));  // Directly invoke to let the inner registrations be added into this.actions
 
         public override void RegisterSemanticModelAction(Action<SemanticModelAnalysisContext> action) =>
-            throw new NotImplementedException();
+            action(CreateSemanticModelAnalysisContext());
 
         public override void RegisterSymbolAction(Action<SymbolAnalysisContext> action, ImmutableArray<SymbolKind> symbolKinds) =>
             throw new NotImplementedException();

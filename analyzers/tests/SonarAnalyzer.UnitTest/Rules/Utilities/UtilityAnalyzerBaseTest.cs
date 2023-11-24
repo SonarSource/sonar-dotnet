@@ -21,7 +21,6 @@
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.CodeAnalysis.VisualBasic;
-using Moq;
 using SonarAnalyzer.AnalysisContext;
 using SonarAnalyzer.Rules;
 
