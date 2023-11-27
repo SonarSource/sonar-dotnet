@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Rules
         private const string Title = "File metadata generator";
 
         protected sealed override string FileName => "file-metadata.pb";
-        protected override UtilityAnalyzerParameters ReadParameters(SonarCompilationReportingContext context) =>
+        protected override UtilityAnalyzerParameters ReadParameters<T>(SonarAnalysisContextBase<T> context) =>
             base.ReadParameters(context) with { AnalyzeGeneratedCode = true };
 
         protected FileMetadataAnalyzerBase() : base(DiagnosticId, Title) { }
