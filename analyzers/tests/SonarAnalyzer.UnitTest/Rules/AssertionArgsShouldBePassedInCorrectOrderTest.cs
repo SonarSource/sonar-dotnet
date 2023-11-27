@@ -46,7 +46,7 @@ public class AssertionArgsShouldBePassedInCorrectOrderTest
 
     [DataTestMethod]
     [DataRow("2.5.7.10213")]
-    [DataRow(Constants.NuGetLatestVersion)]
+    [DataRow("3.14.0")] // Breaking changes in NUnit 4.0 would fail the test https://github.com/SonarSource/sonar-dotnet/issues/8409
     public void AssertionArgsShouldBePassedInCorrectOrder_NUnit(string testFwkVersion) =>
         builder.AddPaths("AssertionArgsShouldBePassedInCorrectOrder.NUnit.cs")
             .AddReferences(NuGetMetadataReference.NUnit(testFwkVersion))
@@ -54,7 +54,8 @@ public class AssertionArgsShouldBePassedInCorrectOrderTest
 
     [TestMethod]
     public void AssertionArgsShouldBePassedInCorrectOrder_NUnit_Static() =>
-        builder.WithTopLevelStatements().AddReferences(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion)).AddSnippet("""
+        // Breaking changes in NUnit 4.0 would fail the test https://github.com/SonarSource/sonar-dotnet/issues/8409
+        builder.WithTopLevelStatements().AddReferences(NuGetMetadataReference.NUnit("3.14.0")).AddSnippet("""
             using static NUnit.Framework.Assert;
             var str = "";
             AreEqual(str, ""); // Noncompliant

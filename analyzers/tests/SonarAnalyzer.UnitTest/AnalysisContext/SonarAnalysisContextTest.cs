@@ -65,7 +65,8 @@ public partial class SonarAnalysisContextTest
             new TestSetup(
                 "TestMethodShouldContainAssertion.NUnit.cs",
                 new TestMethodShouldContainAssertion(),
-                TestMethodShouldContainAssertionTest.WithTestReferences(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion)).References),    // ToDo: Reuse the entire builder in TestSetup
+                // Breaking changes in NUnit 4.0 would fail the test https://github.com/SonarSource/sonar-dotnet/issues/8409
+                TestMethodShouldContainAssertionTest.WithTestReferences(NuGetMetadataReference.NUnit("3.14.0")).References),    // ToDo: Reuse the entire builder in TestSetup
 
             // SyntaxTreeAnalysisContext
             // S3244 - MAIN and TEST
