@@ -59,7 +59,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Verify();
 
         [DataTestMethod]
-        [DataRow(NUnitVersions.Ver3, Latest, Latest)] 
+        [DataRow(NUnitVersions.Ver3, Latest, Latest)]
         [DataRow(NUnitVersions.Ver3Latest, FluentAssertionVersions.Ver5, Latest)] // Breaking changes in NUnit 4.0 would fail the test https://github.com/SonarSource/sonar-dotnet/issues/8409
         [DataRow(NUnitVersions.Ver3Latest, Latest, Latest)] // Breaking changes in NUnit 4.0 would fail the test https://github.com/SonarSource/sonar-dotnet/issues/8409
         public void TestMethodShouldContainAssertion_NUnit(string testFwkVersion, string fluentVersion, string nSubstituteVersion) =>
