@@ -90,8 +90,7 @@ namespace SonarAnalyzer.Rules
 
         protected UtilityAnalyzerBase(string diagnosticId, string title) : base(diagnosticId, title) { }
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
-        {
+        protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterCompilationStartAction(startContext =>
             {
                 var parameters = ReadParameters(startContext);
@@ -122,7 +121,6 @@ namespace SonarAnalyzer.Rules
                     }
                 });
             });
-        }
 
         protected virtual bool ShouldGenerateMetrics(UtilityAnalyzerParameters parameters, SyntaxTree tree, Compilation compilation) =>
             // The results of Metrics and CopyPasteToken analyzers are not needed for Test projects yet the plugin side expects the protobuf files, so we create empty ones.
