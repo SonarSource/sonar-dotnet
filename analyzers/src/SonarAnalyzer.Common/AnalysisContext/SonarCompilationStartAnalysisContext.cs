@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Concurrent;
+
 namespace SonarAnalyzer.AnalysisContext;
 
 public sealed class SonarCompilationStartAnalysisContext : SonarAnalysisContextBase<CompilationStartAnalysisContext>
@@ -25,7 +27,6 @@ public sealed class SonarCompilationStartAnalysisContext : SonarAnalysisContextB
     public override Compilation Compilation => Context.Compilation;
     public override AnalyzerOptions Options => Context.Options;
     public override CancellationToken Cancel => Context.CancellationToken;
-
     internal SonarCompilationStartAnalysisContext(SonarAnalysisContext analysisContext, CompilationStartAnalysisContext context) : base(analysisContext, context) { }
 
     public void RegisterSymbolAction(Action<SonarSymbolReportingContext> action, params SymbolKind[] symbolKinds) =>
@@ -42,22 +43,19 @@ public sealed class SonarCompilationStartAnalysisContext : SonarAnalysisContextB
     {
         if (HasMatchingScope(AnalysisContext.SupportedDiagnostics))
         {
+            ConcurrentDictionary<SyntaxTree, bool> canProceedAnalysisCache = new();
             Context.RegisterSyntaxNodeAction(x =>
-                    Execute<SonarSyntaxNodeReportingContext, SyntaxNodeAnalysisContext>(
-                        new(AnalysisContext, x), action, x.Node.SyntaxTree, generatedCodeRecognizer),
-                syntaxKinds);
-        }
-    }
+            {
+                if (canProceedAnalysisCache.GetOrAdd(x.Node.SyntaxTree, CanProceedWithAnalysis))
+                {
+                    action(new(AnalysisContext, x));
+                }
 
-    /// <inheritdoc cref="SonarAnalysisContext.Execute" />
-    private void Execute<TSonarContext, TRoslynContext>(TSonarContext context, Action<TSonarContext> action, SyntaxTree sourceTree, GeneratedCodeRecognizer generatedCodeRecognizer = null)
-        where TSonarContext : SonarAnalysisContextBase<TRoslynContext>
-    {
-        if (ShouldAnalyzeTree(sourceTree, generatedCodeRecognizer)
-            && SonarAnalysisContext.LegacyIsRegisteredActionEnabled(AnalysisContext.SupportedDiagnostics, sourceTree)
-            && AnalysisContext.ShouldAnalyzeRazorFile(sourceTree))
-        {
-            action(context);
+                bool CanProceedWithAnalysis(SyntaxTree tree) =>
+                    ShouldAnalyzeTree(tree, generatedCodeRecognizer)
+                    && SonarAnalysisContext.LegacyIsRegisteredActionEnabled(AnalysisContext.SupportedDiagnostics, tree)
+                    && AnalysisContext.ShouldAnalyzeRazorFile(tree);
+            }, syntaxKinds);
         }
     }
 }
