@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [DataTestMethod]
         [DataRow("2.5.7.10213")]
-        [DataRow("3.14.0")] // Breaking changes in NUnit 4.0 would fail the test
+        [DataRow("3.14.0")] // Breaking changes in NUnit 4.0 would fail the test https://github.com/SonarSource/sonar-dotnet/issues/8409
         public void DoNotUseLiteralBoolInAssertions_NUnit(string testFwkVersion) =>
             builder.AddPaths("DoNotUseLiteralBoolInAssertions.NUnit.cs")
                 .AddReferences(NuGetMetadataReference.NUnit(testFwkVersion))
