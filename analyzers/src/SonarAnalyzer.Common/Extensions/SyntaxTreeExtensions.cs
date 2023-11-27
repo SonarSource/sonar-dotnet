@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Concurrent;
 using System.Runtime.CompilerServices;
 using Roslyn.Utilities;
 
@@ -26,21 +25,20 @@ namespace SonarAnalyzer.Extensions;
 
 internal static class SyntaxTreeExtensions
 {
-    private static readonly ConditionalWeakTable<Compilation, ConcurrentDictionary<SyntaxTree, bool>> GeneratedCodeCache = new();
+    private static readonly ConditionalWeakTable<SyntaxTree, object> GeneratedCodeCache = new();
 
     [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7439", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
-    public static bool IsGenerated(this SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer, Compilation compilation)
-    {
-        if (tree == null)
+    public static bool IsGenerated(this SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer, Compilation compilation) =>
+        tree switch
         {
-            return false;
-        }
-        var cache = GeneratedCodeCache.GetOrCreateValue(compilation);
-        // Hot path: Don't use cache.GetOrAdd that takes a factory method. It allocates a delegate which causes GC pressure.
-        return cache.TryGetValue(tree, out var isGenerated)
-            ? isGenerated
-            : cache.GetOrAdd(tree, generatedCodeRecognizer.IsGenerated(tree));
-    }
+            null => false,
+            _ => GeneratedCodeCache.TryGetValue(tree, out var result)
+                ? (bool)result
+                : IsGeneratedGetOrAdd(tree, generatedCodeRecognizer)
+        };
+
+    private static bool IsGeneratedGetOrAdd(SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer) =>
+        (bool)GeneratedCodeCache.GetValue(tree, tree => generatedCodeRecognizer.IsGenerated(tree));
 
     public static bool IsConsideredGenerated(this SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer, Compilation compilation, bool isRazorAnalysisEnabled) =>
         isRazorAnalysisEnabled
