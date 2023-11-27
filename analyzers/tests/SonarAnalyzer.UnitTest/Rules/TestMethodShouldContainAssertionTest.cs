@@ -43,6 +43,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         private static class NUnitVersions
         {
             public const string Ver3 = "3.11.0";
+            public const string Ver3Latest = "3.14.0";
             public const string Ver25 = "2.5.7.10213";
             public const string Ver27 = "2.7.0";
         }
@@ -58,9 +59,9 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .Verify();
 
         [DataTestMethod]
-        [DataRow(NUnitVersions.Ver3, Latest, Latest)]
-        [DataRow(Latest, FluentAssertionVersions.Ver5, Latest)]
-        [DataRow(Latest, Latest, Latest)]
+        [DataRow(NUnitVersions.Ver3, Latest, Latest)] 
+        [DataRow(NUnitVersions.Ver3Latest, FluentAssertionVersions.Ver5, Latest)] // Breaking changes in NUnit 4.0 would fail the test
+        [DataRow(NUnitVersions.Ver3Latest, Latest, Latest)] // Breaking changes in NUnit 4.0 would fail the test
         public void TestMethodShouldContainAssertion_NUnit(string testFwkVersion, string fluentVersion, string nSubstituteVersion) =>
             WithTestReferences(NuGetMetadataReference.NUnit(testFwkVersion), fluentVersion, nSubstituteVersion).AddPaths("TestMethodShouldContainAssertion.NUnit.cs").Verify();
 
