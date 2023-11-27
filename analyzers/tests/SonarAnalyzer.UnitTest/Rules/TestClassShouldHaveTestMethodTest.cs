@@ -29,7 +29,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [DataTestMethod]
         [DataRow("2.5.7.10213")]
-        [DataRow(Constants.NuGetLatestVersion)]
+        [DataRow("3.14.0")] // Breaking changes in NUnit 4.0 would fail the test https://github.com/SonarSource/sonar-dotnet/issues/8409
         public void TestClassShouldHaveTestMethod_NUnit(string testFwkVersion) =>
             builder
                 .AddPaths("TestClassShouldHaveTestMethod.NUnit.cs")
