@@ -188,7 +188,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         }
 
         [TestMethod]
-        public void CreateCfg_PropertyDeclartion_ReturnsCfg_CS()
+        public void CreateCfg_PropertyDeclaration_ReturnsCfg_CS()
         {
             const string code = """
                 public class Sample
@@ -200,7 +200,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         }
 
         [TestMethod]
-        public void CreateCfg_PropertyDeclartionWithoutExpressionBody_ReturnsNull_CS()
+        public void CreateCfg_PropertyDeclarationWithoutExpressionBody_ReturnsNull_CS()
         {
             const string code = """
                 public class Sample
@@ -212,7 +212,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         }
 
         [TestMethod]
-        public void CreateCfg_IndexerDeclartion_ReturnsCfg_CS()
+        public void CreateCfg_IndexerDeclaration_ReturnsCfg_CS()
         {
             const string code = """
                 public class Sample
@@ -298,39 +298,40 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [TestMethod]
         public void CreateCfg_NestingChain_CS()
         {
-            const string code = @"
-using System;
-using System.Linq;
-public class Sample
-{
-    public void Main(int[] values)
-    {
-        OuterLocalFunction();
-
-        void OuterLocalFunction()
-        {
-            Action<int, int> outerParenthesizedLambda = (a, b) =>
-            {
-                MiddleLocalFunction(42);
-
-                void MiddleLocalFunction(int c)
+            const string code = """
+                using System;
+                using System.Linq;
+                public class Sample
                 {
-                    var queryExpressionInTheWay = from value in values select new Lazy<int>(() =>
+                    public void Main(int[] values)
+                    {
+                        OuterLocalFunction();
+
+                        void OuterLocalFunction()
                         {
-                            return InnerLocalFunction(value);
-
-                            static int InnerLocalFunction(int arg)
+                            Action<int, int> outerParenthesizedLambda = (a, b) =>
                             {
-                                Func<int, int> innerLambda = xxx => xxx;
+                                MiddleLocalFunction(42);
 
-                                return innerLambda(arg);
-                            }
-                        });
+                                void MiddleLocalFunction(int c)
+                                {
+                                    var queryExpressionInTheWay = from value in values select new Lazy<int>(() =>
+                                        {
+                                            return InnerLocalFunction(value);
+
+                                            static int InnerLocalFunction(int arg)
+                                            {
+                                                Func<int, int> innerLambda = xxx => xxx;
+
+                                                return innerLambda(arg);
+                                            }
+                                        });
+                                }
+                            };
+                        }
+                    }
                 }
-            };
-        }
-    }
-}";
+                """;
             var (tree, semanticModel) = TestHelper.CompileCS(code);
             var innerLambda = tree.Single<SyntaxCS.SimpleLambdaExpressionSyntax>();
             innerLambda.Parent.Parent.Should().BeOfType<SyntaxCS.VariableDeclaratorSyntax>().Subject.Identifier.ValueText.Should().Be("innerLambda");
@@ -351,22 +352,23 @@ public class Sample
         [TestMethod]
         public void CreateCfg_NestingChain_VB()
         {
-            const string code = @"
-Public Class Sample
-    Public Sub Main(Values() As Integer)
-        Dim OuterMultiLineSub As Action =
-            Sub()
-                Dim OuterSingleLineFunc As Func(Of Func(Of Integer, Integer)) =
-                        Function() Function(NestedMultiLineFuncArg As Integer)
-                                        Dim Lst = From Value
-                                                  In Values
-                                                  Select New Lazy(Of Integer)(Function()
-                                                                                  Dim InnerSingleLineSub = Sub(xxx As Integer) Value.ToString()
-                                                                              End Function)
-                                    End Function
-            End Sub
-    End Sub
-End Class";
+            const string code = """
+                Public Class Sample
+                    Public Sub Main(Values() As Integer)
+                        Dim OuterMultiLineSub As Action =
+                            Sub()
+                                Dim OuterSingleLineFunc As Func(Of Func(Of Integer, Integer)) =
+                                        Function() Function(NestedMultiLineFuncArg As Integer)
+                                                        Dim Lst = From Value
+                                                                  In Values
+                                                                  Select New Lazy(Of Integer)(Function()
+                                                                                                  Dim InnerSingleLineSub = Sub(xxx As Integer) Value.ToString()
+                                                                                              End Function)
+                                                    End Function
+                            End Sub
+                    End Sub
+                End Class
+                """;
             var (tree, semanticModel) = TestHelper.CompileVB(code);
             var innerSub = tree.Single<SyntaxVB.InvocationExpressionSyntax>().FirstAncestorOrSelf<SyntaxVB.SingleLineLambdaExpressionSyntax>();
             innerSub.Parent.Parent.Should().BeOfType<SyntaxVB.VariableDeclaratorSyntax>().Subject.Names.Single().Identifier.ValueText.Should().Be("InnerSingleLineSub");
@@ -403,12 +405,13 @@ End Class";
         [TestMethod]
         public void CreateCfg_UndefinedSymbol_ReturnsNull_VB()
         {
-            const string code = @"
-Public Class Sample
-    Public Sub Main()
-        Undefined(Function() 42)
-    End Sub
-End Class";
+            const string code = """
+                Public Class Sample
+                    Public Sub Main()
+                        Undefined(Function() 42)
+                    End Sub
+                End Class
+                """;
             var (tree, model) = TestHelper.CompileIgnoreErrorsVB(code);
             var lambda = tree.Single<SyntaxVB.SingleLineLambdaExpressionSyntax>();
             ExtensionsVB.CreateCfg(lambda, model, default).Should().BeNull();
@@ -429,24 +432,25 @@ End Class";
         [TestMethod]
         public void CreateCfg_Performance_UsesCache_CS()
         {
-            const string code = @"
-using System;
-public class Sample
-{
-    public void Main(string noiseToHaveMoreOperations)
-    {
-        noiseToHaveMoreOperations.ToString();
-        noiseToHaveMoreOperations.ToString();
-        noiseToHaveMoreOperations.ToString();
-        void LocalFunction()
-        {
-            noiseToHaveMoreOperations.ToString();
-            noiseToHaveMoreOperations.ToString();
-            noiseToHaveMoreOperations.ToString();
-            Action a = () => 42.ToString();
-        }
-    }
-}";
+            const string code = """
+                using System;
+                public class Sample
+                {
+                    public void Main(string noiseToHaveMoreOperations)
+                    {
+                        noiseToHaveMoreOperations.ToString();
+                        noiseToHaveMoreOperations.ToString();
+                        noiseToHaveMoreOperations.ToString();
+                        void LocalFunction()
+                        {
+                            noiseToHaveMoreOperations.ToString();
+                            noiseToHaveMoreOperations.ToString();
+                            noiseToHaveMoreOperations.ToString();
+                            Action a = () => 42.ToString();
+                        }
+                    }
+                }
+                """;
             var (tree, model) = TestHelper.CompileCS(code);
             var lambda = tree.Single<SyntaxCS.ParenthesizedLambdaExpressionSyntax>();
             Action a = () =>
@@ -462,20 +466,21 @@ public class Sample
         [TestMethod]
         public void CreateCfg_Performance_UsesCache_VB()
         {
-            const string code = @"
-Public Class Sample
-    Public Sub Main(NoiseToHaveMoreOperations As String)
-        NoiseToHaveMoreOperations.ToString()
-        NoiseToHaveMoreOperations.ToString()
-        NoiseToHaveMoreOperations.ToString()
-        Dim Outer As Action = Sub()
-                                  NoiseToHaveMoreOperations.ToString()
-                                  NoiseToHaveMoreOperations.ToString()
-                                  NoiseToHaveMoreOperations.ToString()
-                                  Dim Inner As Action = Sub() NoiseToHaveMoreOperations.ToString()
-                              End Sub
-    End Sub
-End Class";
+            const string code = """
+                Public Class Sample
+                    Public Sub Main(NoiseToHaveMoreOperations As String)
+                        NoiseToHaveMoreOperations.ToString()
+                        NoiseToHaveMoreOperations.ToString()
+                        NoiseToHaveMoreOperations.ToString()
+                        Dim Outer As Action = Sub()
+                                                  NoiseToHaveMoreOperations.ToString()
+                                                  NoiseToHaveMoreOperations.ToString()
+                                                  NoiseToHaveMoreOperations.ToString()
+                                                  Dim Inner As Action = Sub() NoiseToHaveMoreOperations.ToString()
+                                              End Sub
+                    End Sub
+                End Class
+                """;
             var (tree, model) = TestHelper.CompileVB(code);
             var lambda = tree.Single<SyntaxVB.SingleLineLambdaExpressionSyntax>();
             Action a = () =>
@@ -492,12 +497,13 @@ End Class";
         public void CreateCfg_SameNode_DifferentCompilation_DoesNotCache()
         {
             // https://github.com/SonarSource/sonar-dotnet/issues/5491
-            const string code = @"
-public class Sample
-{
-    private void Method()
-    { }
-}";
+            const string code = """
+                public class Sample
+                {
+                    private void Method()
+                    { }
+                }
+                """;
             var compilation1 = TestHelper.CompileCS(code).Model.Compilation;
             var compilation2 = compilation1.WithAssemblyName("Different-Compilation-Reusing-Same-Nodes");
             var method1 = compilation1.SyntaxTrees.Single().Single<SyntaxCS.MethodDeclarationSyntax>();
@@ -1024,15 +1030,11 @@ public class X
         [DataRow("struct")]
         [DataRow("record struct")]
         [DataRow("readonly struct")]
-
 #if NET
-
         [DataRow("readonly record struct")]
         [DataRow("record")]
         [DataRow("record class")]
-
 #endif
-
         public void ParameterList_PrimaryConstructors(string type)
         {
             var node = NodeBetweenMarkers($$"""
