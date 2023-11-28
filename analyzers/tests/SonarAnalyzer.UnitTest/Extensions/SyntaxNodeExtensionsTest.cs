@@ -225,6 +225,18 @@ namespace SonarAnalyzer.UnitTest.Extensions
         }
 
         [TestMethod]
+        public void CreateCfg_FieldInitializerWithoutOperation_ReturnsCfg_CS()
+        {
+            const string code = """
+                public class Sample
+                {
+                    private string field = null!;   // null! itself doens't have operation, and we can still generate CFG for it from the equals clause
+                }
+                """;
+            CreateCfgCS<SyntaxCS.EqualsValueClauseSyntax>(code).Should().NotBeNull();
+        }
+
+        [TestMethod]
         public void CreateCfg_MethodBlock_ReturnsCfg_VB()
         {
             const string code = """
