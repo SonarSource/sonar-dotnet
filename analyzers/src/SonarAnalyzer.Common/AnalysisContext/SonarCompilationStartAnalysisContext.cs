@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Concurrent;
+using Roslyn.Utilities;
 
 namespace SonarAnalyzer.AnalysisContext;
 
@@ -43,19 +44,25 @@ public sealed class SonarCompilationStartAnalysisContext : SonarAnalysisContextB
     {
         if (HasMatchingScope(AnalysisContext.SupportedDiagnostics))
         {
-            ConcurrentDictionary<SyntaxTree, bool> canProceedAnalysisCache = new();
+            ConcurrentDictionary<SyntaxTree, bool> shouldAnalyzeCache = new();
             Context.RegisterSyntaxNodeAction(x =>
             {
-                if (canProceedAnalysisCache.GetOrAdd(x.Node.SyntaxTree, CanProceedWithAnalysis))
+                if (!shouldAnalyzeCache.TryGetValue(x.Node.SyntaxTree, out var canProceedWithAnalysis))
+                {
+                    canProceedWithAnalysis = GetOrAddCanProceedWithAnalysis(generatedCodeRecognizer, shouldAnalyzeCache, x.Node.SyntaxTree);
+                }
+                if (canProceedWithAnalysis)
                 {
                     action(new(AnalysisContext, x));
                 }
-
-                bool CanProceedWithAnalysis(SyntaxTree tree) =>
-                    ShouldAnalyzeTree(tree, generatedCodeRecognizer)
-                    && SonarAnalysisContext.LegacyIsRegisteredActionEnabled(AnalysisContext.SupportedDiagnostics, tree)
-                    && AnalysisContext.ShouldAnalyzeRazorFile(tree);
             }, syntaxKinds);
+
+            // Performance: Don't inline to avoid capture class and delegate allocations.
+            bool GetOrAddCanProceedWithAnalysis(GeneratedCodeRecognizer codeRecognizer, ConcurrentDictionary<SyntaxTree, bool> cache, SyntaxTree tree) =>
+                cache.GetOrAdd(tree, x =>
+                    ShouldAnalyzeTree(x, codeRecognizer)
+                    && SonarAnalysisContext.LegacyIsRegisteredActionEnabled(AnalysisContext.SupportedDiagnostics, x)
+                    && AnalysisContext.ShouldAnalyzeRazorFile(x));
         }
     }
 }
