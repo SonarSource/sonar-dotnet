@@ -1,0 +1,8 @@
+﻿@using MediatR;
+@typeparam T where T : Model
+@typeparam TCommand where TCommand : IRequest<T>
+
+@code {
+    [Parameter, EditorRequired]
+    public StateBase<T, TCommand> State { get; set; } = default!;
+}
