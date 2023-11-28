@@ -216,9 +216,10 @@ namespace SonarAnalyzer.UnitTest.Rules
                         VerifyReferences(orderedSymbols[1].Reference, 9, 44, 41);           // LocalMethod
 
                         orderedSymbols[3].FilePath.Should().EndWith("RazorComponent.razor"); // RazorComponent.razor
-                        // Net8 SDK: Declaration (2,0) - (2,17) Reference (2,6) - (2,23)
+                        // Net8 SDK: Declaration (1,0) - (1,17) Reference (1,6) - (1,23) <- Overlapping
                         // Declaration of TSomeVeryLongName is placed starting at index 0 (ignoring @typeparam)
                         // Reference "where TSomeVeryLongName" is placed starting at index 6 (ignoring @typeparam T )
+                        // In Net7 SDK, no references are produced
                         orderedSymbols[3].Reference.Should().BeEmpty();
                     });
 
