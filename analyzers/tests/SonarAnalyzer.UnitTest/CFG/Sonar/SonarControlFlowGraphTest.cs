@@ -176,7 +176,7 @@ namespace NS
             Action a = () => CSharpControlFlowGraph.Create(equalsValueSyntax.Value, model);
 
             a.Should().Throw<NotSupportedException>().WithMessage("Too complex expression");
-            CSharpControlFlowGraph.TryGet(equalsValueSyntax.Value, model, out _).Should().BeFalse();
+            CSharpControlFlowGraph.TryGet(equalsValueSyntax, model, out _).Should().BeFalse();
         }
 
         [TestMethod]
