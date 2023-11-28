@@ -12,6 +12,19 @@
 "endColumn":  20
 }
 }
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'DoAction'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6802/S6802.razor#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  18,
+"endLine":  18,
+"endColumn":  26
+}
+}
 }
 ]
 }

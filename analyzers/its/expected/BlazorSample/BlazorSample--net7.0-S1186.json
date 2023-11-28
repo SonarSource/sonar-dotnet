@@ -17,6 +17,32 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6798/S6798.Partial.razor#L4",
+"region":  {
+"startLine":  4,
+"startColumn":  32,
+"endLine":  4,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1186",
+"message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6798/S6798.Partial.razor#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  24,
+"endLine":  8,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S1186",
+"message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6798/S6798.Partial.razor.cs#L7",
 "region":  {
 "startLine":  7,
@@ -62,6 +88,45 @@
 "startColumn":  28,
 "endLine":  13,
 "endColumn":  67
+}
+}
+},
+{
+"id":  "S1186",
+"message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6798/S6798.razor#L4",
+"region":  {
+"startLine":  4,
+"startColumn":  32,
+"endLine":  4,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1186",
+"message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6798/S6798.razor#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  24,
+"endLine":  8,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S1186",
+"message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6802/S6802.razor#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  18,
+"endLine":  18,
+"endColumn":  26
 }
 }
 }

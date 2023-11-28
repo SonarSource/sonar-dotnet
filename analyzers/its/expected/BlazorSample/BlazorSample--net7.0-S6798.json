@@ -17,6 +17,19 @@
 "id":  "S6798",
 "message":  "Methods marked as 'JSInvokable' should be 'public'.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6798/S6798.Partial.razor#L4",
+"region":  {
+"startLine":  4,
+"startColumn":  32,
+"endLine":  4,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S6798",
+"message":  "Methods marked as 'JSInvokable' should be 'public'.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6798/S6798.Partial.razor.cs#L7",
 "region":  {
 "startLine":  7,
@@ -36,6 +49,19 @@
 "startColumn":  24,
 "endLine":  8,
 "endColumn":  82
+}
+}
+},
+{
+"id":  "S6798",
+"message":  "Methods marked as 'JSInvokable' should be 'public'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6798/S6798.razor#L4",
+"region":  {
+"startLine":  4,
+"startColumn":  32,
+"endLine":  4,
+"endColumn":  72
 }
 }
 }

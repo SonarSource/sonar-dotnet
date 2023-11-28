@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/FetchData.razor#L46",
+"region":  {
+"startLine":  46,
+"startColumn":  60,
+"endLine":  46,
+"endColumn":  72
+}
+}
+}
+]
+}

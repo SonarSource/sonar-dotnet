@@ -4,12 +4,38 @@
 "id":  "S6803",
 "message":  "Component parameters can only receive query parameter values in routable components.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6797/S6797.Partial.razor.cs#L9",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6797/S6797.NoRoute.razor#L4",
 "region":  {
-"startLine":  9,
-"startColumn":  25,
-"endLine":  9,
-"endColumn":  33
+"startLine":  4,
+"startColumn":  17,
+"endLine":  4,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S6803",
+"message":  "Component parameters can only receive query parameter values in routable components.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6797/S6797.NoRoute.razor#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  21,
+"endLine":  8,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S6803",
+"message":  "Component parameters can only receive query parameter values in routable components.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6803/S6803.razor#L4",
+"region":  {
+"startLine":  4,
+"startColumn":  17,
+"endLine":  4,
+"endColumn":  22
 }
 }
 }

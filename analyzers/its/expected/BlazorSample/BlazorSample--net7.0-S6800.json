@@ -2,6 +2,19 @@
 "issues":  [
 {
 "id":  "S6800",
+"message":  "Parameter type 'string' does not match route parameter type constraint 'int' in route '/S6800/{Unmatched:int}'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6800/S6800.razor#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  12,
+"endLine":  9,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S6800",
 "message":  "Parameter type 'string' does not match route parameter type constraint.",
 "location":  [
 {
@@ -23,6 +36,19 @@
 }
 }
 ]
+},
+{
+"id":  "S6800",
+"message":  "Parameter type 'string' does not match route parameter type constraint 'int' in route '/S6800/partial/{Unmatched:int}'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6800/S6800Partial.razor.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  12,
+"endLine":  8,
+"endColumn":  18
+}
+}
 }
 ]
 }

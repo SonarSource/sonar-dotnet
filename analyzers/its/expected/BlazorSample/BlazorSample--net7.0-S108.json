@@ -4,12 +4,38 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6798/S6798.Partial.razor#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  62,
+"endLine":  8,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6798/S6798.Partial.razor.cs#L13",
 "region":  {
 "startLine":  13,
 "startColumn":  70,
 "endLine":  13,
 "endColumn":  73
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6798/S6798.razor#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  62,
+"endLine":  8,
+"endColumn":  65
 }
 }
 }
