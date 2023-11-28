@@ -3,6 +3,7 @@
   <PropertyGroup>
     <ProjectGuid>{1250CC30-A343-4A10-A1DE-B1792ADB6244}</ProjectGuid>
     <TargetFramework>net8.0</TargetFramework>
+    <RuntimeIdentifier>browser-wasm</RuntimeIdentifier>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="MediatR.Contracts" Version="2.0.1" />
