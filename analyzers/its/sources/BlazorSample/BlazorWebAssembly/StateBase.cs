@@ -11,6 +11,4 @@ namespace Repro
     }
 
     public abstract class BaseModel<T> { }
-
-
 }
