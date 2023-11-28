@@ -97,4 +97,24 @@ namespace Tests.Diagnostics
             O = o;
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/8413
+    // See also https://github.com/SonarSource/sonar-dotnet/pull/7036
+    class Repro_8413
+    {
+        public IEnumerable<string> GetNonNullStringsDirectCast(IEnumerable<string?> strings)
+        {
+            return (IEnumerable<string>)strings.Where(s => s != null); // Noncompliant - FP
+        }
+
+        public IEnumerable<string> GetNonNullStringsMethodCast(IEnumerable<string?> strings)
+        {
+            return strings.Where(s => s != null).Cast<string>(); // Compliant
+        }
+
+        public IEnumerable<string> GetNonNullStringsAsCast(IEnumerable<string?> strings)
+        {
+            return strings.Where(s => s != null) as IEnumerable<string>;  // Noncompliant - FP
+        }
+    }
 }
