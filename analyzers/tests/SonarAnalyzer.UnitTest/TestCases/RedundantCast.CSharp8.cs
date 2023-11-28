@@ -99,6 +99,7 @@ namespace Tests.Diagnostics
     }
 
     // https://github.com/SonarSource/sonar-dotnet/issues/8413
+    // See also https://github.com/SonarSource/sonar-dotnet/pull/7036
     class Repro_8413
     {
         public IEnumerable<string> GetNonNullStringsDirectCast(IEnumerable<string?> strings)
