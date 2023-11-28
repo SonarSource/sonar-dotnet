@@ -22,9 +22,6 @@ namespace SonarAnalyzer.Helpers;
 
 internal static class TypeHelper
 {
-    private static readonly Func<ITypeSymbol, NullableAnnotation> NullableAnnotationAccessor =
-        LightupHelpers.CreateSyntaxPropertyAccessor<ITypeSymbol, NullableAnnotation>(typeof(ITypeSymbol), nameof(NullableAnnotation));
-
     #region TypeKind
 
     public static bool IsInterface(this ITypeSymbol self) =>
@@ -208,6 +205,4 @@ internal static class TypeHelper
             ITypeSymbol x => x,
             _ => null,
         };
-
-    public static NullableAnnotation NullableAnnotation(this ITypeSymbol type) => NullableAnnotationAccessor(type);
 }

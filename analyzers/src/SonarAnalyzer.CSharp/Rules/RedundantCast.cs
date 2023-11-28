@@ -96,9 +96,7 @@ public sealed class RedundantCast : SonarDiagnosticAnalyzer
                 }
 
                 var elementType = GetElementType(invocation, methodSymbol, context.SemanticModel);
-                // Generic types {T} and {T?} are equal and there is no way to access NullableAnnotation field right now
-                // See https://github.com/SonarSource/sonar-dotnet/issues/3273
-                if (elementType != null && elementType.Equals(castType) && string.Equals(elementType.ToString(), castType.ToString(), StringComparison.Ordinal))
+                if (elementType != null && elementType.Equals(castType) && elementType.NullableAnnotation() == castType.NullableAnnotation())
                 {
                     var methodCalledAsStatic = methodSymbol.MethodKind == MethodKind.Ordinary;
                     ReportIssue(context, invocation, returnType, GetReportLocation(invocation, methodCalledAsStatic));
