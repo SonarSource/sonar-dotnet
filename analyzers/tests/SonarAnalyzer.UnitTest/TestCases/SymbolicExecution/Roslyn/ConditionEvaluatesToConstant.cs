@@ -459,18 +459,18 @@ namespace Tests.Diagnostics
                 }
                 else
                 {
-                    if (guard2)         // Noncompliant FP: loop is only analyzed twice
+                    if (guard2)         // Compliant
                     {
                         guard2 = false;
                     }
                     else
                     {
-                        guard3 = false; // Secondary FP
+                        guard3 = false;
                     }
                 }
             }
 
-            if (guard3)                 // Noncompliant FP: loop is only analyzed twice
+            if (guard3)                 // Compliant
             {
                 Console.WriteLine();
             }
@@ -2271,7 +2271,7 @@ namespace Tests.Diagnostics
             var steps = 0;
             while (list.Any())
             {
-                if (steps++ > MaxStepCount) // Noncompliant FP
+                if (steps++ > MaxStepCount) // Compliant
                 {
                     return;
                 }
@@ -2527,9 +2527,9 @@ namespace Tests.Diagnostics
 
             foreach (var item1 in items)
             {
-                if (bool2)          // Noncompliant - FP because symbolic execution stops at the third iteration of loop
+                if (bool2)          // Compliant
                 {
-                    bool3 = true;   // Secondary FP
+                    bool3 = true;
                 }
                 if (bool1)
                 {
@@ -2541,6 +2541,7 @@ namespace Tests.Diagnostics
 
             }
             return bool3;
+            // TODO change UT so it would only work with 4 iterations
         }
     }
 
@@ -3290,7 +3291,7 @@ public class Repro_8264
                 continue; // first iteration
             }
 
-            if (response == "5" && contentLength == 0)  // Noncompliant {{Change this condition so that it does not always evaluate to 'True'.}} FP (contentLength is changed in the second iteration)
+            if (response == "5" && contentLength == 0)  // Compliant
             {
                 contentLength = 7;
                 continue;
@@ -3298,9 +3299,9 @@ public class Repro_8264
 
             if (response.Length > 0)
             {
-                if (contentLength > 0)                  // Noncompliant {{Change this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.}} FP (consequential error)
+                if (contentLength > 0)                  // Compliant
                 {
-                    Console.WriteLine("Unreachable??"); // Secondary
+                    Console.WriteLine("Unreachable??");
                 }
                 break;
             }
@@ -3337,21 +3338,21 @@ public class Repro_8262
             switch (i)
             {
                 case 1:
-                case 4:   // Noncompliant {{Change this condition so that it does not always evaluate to 'False'.}} FP
-                case 7:   // Noncompliant FP
-                case 10:  // Noncompliant FP
-                case 13:  // Noncompliant FP
-                case 16:  // Noncompliant FP
+                case 4:
+                case 7:
+                case 10:
+                case 13:
+                case 16:
                     Console.WriteLine(i);
                     break;
-                case 2:   // Noncompliant FP
-                case 5:   // Secondary
+                case 2:
+                case 5:
                 case 8:
                 case 11:
                 case 14:
                     Console.WriteLine(i);
                     break;
-                case 3:   // Secondary
+                case 3:
                 case 6:
                 case 9:
                 case 12:
@@ -3422,7 +3423,7 @@ public class Repro_8428
         var ids = new int[1000];
         for (var i = 0; i < ids.Length; i++)
         {
-            if (i % 100 != 0 || i <= 0)   // Noncompliant FP
+            if (i % 100 != 0 || i <= 0)   // Compliant
             {
                 System.Diagnostics.Debug.WriteLine(i);
             }

@@ -320,15 +320,15 @@ Public Class ConditionEvaluatesToConstant
             If guard1 Then
                 guard1 = False
             Else
-                If guard2 Then         ' Noncompliant FP: loop is only analyzed twice
+                If guard2 Then         ' Compliant
                     guard2 = False
                 Else
-                    guard3 = False     ' Secondary FP
+                    guard3 = False
                 End If
             End If
         End While
 
-        If guard3 Then                 ' Noncompliant FP: loop is only analyzed twice
+        If guard3 Then                 ' Compliant
             Console.WriteLine()
         End If
     End Sub

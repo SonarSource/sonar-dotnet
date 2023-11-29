@@ -38,6 +38,10 @@ internal sealed class IncrementOrDecrement : SimpleProcessor<IIncrementOrDecreme
                 newNumber = incrementOrDecrement.WrappedOperation.Kind == OperationKindEx.Increment
                     ? NumberConstraint.From(oldNumber.Min + 1, null)
                     : NumberConstraint.From(null, oldNumber.Max - 1);
+                if (incrementOrDecrement.Target.TrackedSymbol(state) is { } symbol)
+                {
+                    state = state.SetSymbolValue(symbol, state[symbol]?.WithoutConstraint<FuzzyConstraint>());
+                }
             }
             else
             {
@@ -66,7 +70,7 @@ internal sealed class IncrementOrDecrement : SimpleProcessor<IIncrementOrDecreme
                         : state;
                 return incrementOrDecrement.IsPostfix
                     ? state.SetOperationConstraint(incrementOrDecrement, oldNumber)
-                    : state.SetOperationValue(incrementOrDecrement, state[incrementOrDecrement].WithoutConstraint<NumberConstraint>());
+                    : state.SetOperationValue(incrementOrDecrement, state[incrementOrDecrement]?.WithoutConstraint<NumberConstraint>());
             }
         }
         return context.State;

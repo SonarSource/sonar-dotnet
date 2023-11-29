@@ -394,7 +394,7 @@ class Repro_7088
                 continue;
             }
 
-            if (sb is null)     // Noncompliant FP
+            if (sb is null)     // Compliant
             {
                 sb = new StringBuilder();
             }
