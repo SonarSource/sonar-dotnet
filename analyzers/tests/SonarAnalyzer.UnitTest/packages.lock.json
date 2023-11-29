@@ -4,9 +4,9 @@
     ".NETFramework,Version=v4.8": {
       "altcover": {
         "type": "Direct",
-        "requested": "[8.6.68, )",
-        "resolved": "8.6.68",
-        "contentHash": "Q/9iaREaVi2RakQLiCVUYGVKuuvqog0YPsHwpkOjEG8RiCbnqp1ujmH0lQEyQGZP0v3Y2mqYvdZEaH9BjFGuFA=="
+        "requested": "[8.6.95, )",
+        "resolved": "8.6.95",
+        "contentHash": "/hjK4jymLaakUq9pih1pU8ITcVLPQD/pZh4Lga4m99y9dBH2CL4dJwgCc2kD9c6QZX2sZBT45wZmoebvUvn/pw=="
       },
       "FluentAssertions": {
         "type": "Direct",
@@ -447,9 +447,9 @@
     "net7.0": {
       "altcover": {
         "type": "Direct",
-        "requested": "[8.6.68, )",
-        "resolved": "8.6.68",
-        "contentHash": "Q/9iaREaVi2RakQLiCVUYGVKuuvqog0YPsHwpkOjEG8RiCbnqp1ujmH0lQEyQGZP0v3Y2mqYvdZEaH9BjFGuFA=="
+        "requested": "[8.6.95, )",
+        "resolved": "8.6.95",
+        "contentHash": "/hjK4jymLaakUq9pih1pU8ITcVLPQD/pZh4Lga4m99y9dBH2CL4dJwgCc2kD9c6QZX2sZBT45wZmoebvUvn/pw=="
       },
       "FluentAssertions": {
         "type": "Direct",
