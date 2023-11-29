@@ -43,7 +43,7 @@ public class RazorSymbolRefsImporterTest extends RazorImporterTestBase {
   public void test_symbol_refs_get_imported_cases() {
 
     var inputFile = CasesInputFile;
-    var sut = new SymbolRefsImporter(sensorContext, s -> Paths.get(s).getFileName().toString());
+    var sut = new SymbolRefsImporter(sensorContext, RazorImporterTestBase::fileName);
     sut.accept(protobuf.toPath());
     sut.save();
 

@@ -22,6 +22,7 @@ package org.sonarsource.dotnet.shared.plugins.protobuf;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.nio.file.Paths;
 import org.junit.Before;
 import org.junit.Rule;
 import org.slf4j.event.Level;
@@ -53,6 +54,10 @@ public class RazorImporterTestBase {
     ProgramInputFile = addTestFileToContext("Program.cs");
   }
 
+  protected static String fileName(String filePath)
+  {
+    return Paths.get(filePath).getFileName().toString();
+  }
   private DefaultInputFile addTestFileToContext(String testFilePath) throws FileNotFoundException {
     var testFile = new File(TEST_DATA_DIR, testFilePath);
     assertThat(testFile).withFailMessage("no such file: " + testFilePath).isFile();

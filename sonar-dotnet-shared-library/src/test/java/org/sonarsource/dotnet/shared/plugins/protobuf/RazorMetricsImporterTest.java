@@ -21,7 +21,6 @@ package org.sonarsource.dotnet.shared.plugins.protobuf;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.nio.file.Paths;
 import java.util.Collections;
 import org.assertj.core.groups.Tuple;
 import org.junit.Before;
@@ -51,14 +50,14 @@ public class RazorMetricsImporterTest extends RazorImporterTestBase {
   }
 
   @Test
-  public void roslyn_metrics_are_imported() throws FileNotFoundException {
+  public void roslyn_metrics_are_imported() {
     var inputFile = CasesInputFile;
     var noSonarFilter = mock(NoSonarFilter.class);
     var fileLinesContext = mock(FileLinesContext.class);
     var fileLinesContextFactory = mock(FileLinesContextFactory.class);
     when(fileLinesContextFactory.createFor(any(InputFile.class))).thenReturn(fileLinesContext);
 
-    new MetricsImporter(sensorContext, fileLinesContextFactory, noSonarFilter, s -> Paths.get(s).getFileName().toString()).accept(PROTOBUF_FILE.toPath());
+    new MetricsImporter(sensorContext, fileLinesContextFactory, noSonarFilter, RazorImporterTestBase::fileName).accept(PROTOBUF_FILE.toPath());
 
     var measures = sensorContext.measures(inputFile.key());
     assertThat(measures).hasSize(7);
