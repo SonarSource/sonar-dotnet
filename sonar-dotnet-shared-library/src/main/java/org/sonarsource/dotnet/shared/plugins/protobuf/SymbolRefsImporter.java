@@ -23,7 +23,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.function.UnaryOperator;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.InputFile;
@@ -46,6 +45,27 @@ public class SymbolRefsImporter extends ProtobufImporter<SonarAnalyzer.SymbolRef
   public SymbolRefsImporter(SensorContext context, UnaryOperator<String> toRealPath) {
     super(SonarAnalyzer.SymbolReferenceInfo.parser(), context, SonarAnalyzer.SymbolReferenceInfo::getFilePath, toRealPath);
     this.context = context;
+  }
+
+  private static void addReferences(InputFile file, SymbolReferenceInfo.SymbolReference tokenInfo, NewSymbolTable symbolTable) {
+    var declarationRange = toTextRange(file, tokenInfo.getDeclaration());
+    if (declarationRange.isPresent()) {
+      NewSymbol symbol = symbolTable.newSymbol(declarationRange.get());
+      for (SonarAnalyzer.TextRange refTextRange : tokenInfo.getReferenceList()) {
+        var referenceRange = toTextRange(file, refTextRange);
+        if (referenceRange.isEmpty()) {
+          if (LOG.isDebugEnabled()) {
+            LOG.debug("The reported token was out of the range. File {}, Range {}", file.filename(), refTextRange);
+          }
+        } else if (declarationRange.get().overlap(referenceRange.get())) {
+          if (LOG.isDebugEnabled()) {
+            LOG.debug("The declaration token at {} overlaps with the referencing token {} in file {}", declarationRange.get(), referenceRange.get(), file.filename());
+          }
+        } else {
+          symbol.newReference(referenceRange.get());
+        }
+      }
+    }
   }
 
   @Override
@@ -72,30 +92,5 @@ public class SymbolRefsImporter extends ProtobufImporter<SonarAnalyzer.SymbolRef
   boolean isProcessed(InputFile inputFile) {
     // we aggregate all symbol reference information, no need to process only the first protobuf file
     return false;
-  }
-
-  private static void addReferences(InputFile file, SymbolReferenceInfo.SymbolReference tokenInfo, NewSymbolTable symbolTable) {
-    var declarationRange = toTextRange(file, tokenInfo.getDeclaration());
-    if (declarationRange.isPresent()) {
-      NewSymbol symbol = symbolTable.newSymbol(declarationRange.get());
-      for (SonarAnalyzer.TextRange refTextRange : tokenInfo.getReferenceList()) {
-        var referenceRange = toTextRange(file, refTextRange);
-        if (referenceRange.isPresent())
-        {
-          if (declarationRange.get().overlap(referenceRange.get())) {
-            if (LOG.isDebugEnabled())
-            {
-              LOG.debug("The declaration token at {} overlaps with the referencing token {} in file {}", declarationRange.get(), referenceRange.get(), file.filename());
-            }
-          } else {
-            symbol.newReference(referenceRange.get());
-          }
-        } else if (LOG.isDebugEnabled()) {
-          LOG.debug("The reported token was out of the range. File {}, Range {}", file.filename(), refTextRange);
-        }
-      }
-    } else if (LOG.isDebugEnabled()) {
-      LOG.debug("The reported token was out of the range. File {}, Range {}", file.filename(), tokenInfo.getDeclaration());
-    }
   }
 }
