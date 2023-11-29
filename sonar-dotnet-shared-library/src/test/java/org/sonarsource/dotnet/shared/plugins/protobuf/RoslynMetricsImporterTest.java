@@ -19,6 +19,7 @@
  */
 package org.sonarsource.dotnet.shared.plugins.protobuf;
 
+import java.nio.file.Paths;
 import org.assertj.core.groups.Tuple;
 import org.junit.Before;
 import org.junit.Test;
@@ -68,7 +69,7 @@ public class RoslynMetricsImporterTest {
     var fileLinesContextFactory = mock(FileLinesContextFactory.class);
     when(fileLinesContextFactory.createFor(any(InputFile.class))).thenReturn(fileLinesContext);
 
-    new MetricsImporter(sensorContext, fileLinesContextFactory, noSonarFilter, String::toString).accept(PROTOBUF_FILE.toPath());
+    new MetricsImporter(sensorContext, fileLinesContextFactory, noSonarFilter, s -> Paths.get(s).getFileName().toString()).accept(PROTOBUF_FILE.toPath());
 
     var measures = sensorContext.measures(inputFile.key());
     assertThat(measures).hasSize(7);
