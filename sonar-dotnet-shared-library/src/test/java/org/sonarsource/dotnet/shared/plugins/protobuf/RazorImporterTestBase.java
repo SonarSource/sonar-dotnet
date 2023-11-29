@@ -39,12 +39,15 @@ import static org.mockito.Mockito.mock;
 public class RazorImporterTestBase {
   protected final static File TEST_DATA_DIR = new File("src/test/resources/RazorProtobufImporter");
   protected final SensorContextTester sensorContext = SensorContextTester.create(TEST_DATA_DIR);
+  @Rule
+  public LogTester logTester = new LogTester();
   protected DefaultInputFile CasesInputFile;
   protected DefaultInputFile OverlapSymbolReferencesInputFile;
   protected DefaultInputFile ProgramInputFile;
 
-  @Rule
-  public LogTester logTester = new LogTester();
+  protected static String fileName(String filePath) {
+    return Paths.get(filePath).getFileName().toString();
+  }
 
   @Before
   public void setUp() throws FileNotFoundException {
@@ -54,10 +57,6 @@ public class RazorImporterTestBase {
     ProgramInputFile = addTestFileToContext("Program.cs");
   }
 
-  protected static String fileName(String filePath)
-  {
-    return Paths.get(filePath).getFileName().toString();
-  }
   private DefaultInputFile addTestFileToContext(String testFilePath) throws FileNotFoundException {
     var testFile = new File(TEST_DATA_DIR, testFilePath);
     assertThat(testFile).withFailMessage("no such file: " + testFilePath).isFile();
