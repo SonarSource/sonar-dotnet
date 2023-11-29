@@ -53,7 +53,7 @@ public class RazorSymbolRefsImporterTest extends RazorImporterTestBase {
     // ... other similar examples ...
     assertThat(sensorContext.referencesForSymbolAt(inputFile.key(), 16, 16)).hasSize(4);
     assertThat(sensorContext.referencesForSymbolAt(inputFile.key(), 19, 15)).hasSize(3);
-    assertThat(sensorContext.referencesForSymbolAt(inputFile.key(), 21, 17)).hasSize(0);
+    assertThat(sensorContext.referencesForSymbolAt(inputFile.key(), 21, 17)).isEmpty();
 
     assertThat(logTester.logs(Level.DEBUG)).containsExactly(
       "The declaration token at Range[from [line=1, lineOffset=0] to [line=1, lineOffset=17]] overlaps with the referencing token Range[from [line=1, lineOffset=6] to [line=1, lineOffset=23]] in file OverlapSymbolReferences.razor");
@@ -68,8 +68,9 @@ public class RazorSymbolRefsImporterTest extends RazorImporterTestBase {
     sut.save();
 
     var references = sensorContext.referencesForSymbolAt(inputFile.key(), 1, 1);
-    assertThat(references).isNotNull(); // The symbol declaration can be found,
-    assertThat(references).isEmpty();   // but there are no references, due to the overlap.
+    assertThat(references)
+      .isNotNull() // The symbol declaration can be found,
+      .isEmpty();  // but there are no references, due to the overlap.
 
     assertThat(logTester.logs(Level.DEBUG)).containsExactly(
       "The declaration token at Range[from [line=1, lineOffset=0] to [line=1, lineOffset=17]] overlaps with the referencing token Range[from [line=1, lineOffset=6] to [line=1, lineOffset=23]] in file OverlapSymbolReferences.razor");
