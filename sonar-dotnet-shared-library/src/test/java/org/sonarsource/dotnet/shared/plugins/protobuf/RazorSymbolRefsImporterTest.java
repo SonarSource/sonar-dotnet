@@ -40,7 +40,7 @@ public class RazorSymbolRefsImporterTest extends RazorImporterTestBase {
   }
 
   @Test
-  public void test_symbol_refs_get_imported() throws FileNotFoundException {
+  public void test_symbol_refs_get_imported() {
 
     var inputFile = CasesInputFile;
     var sut = new SymbolRefsImporter(sensorContext, s -> Paths.get(s).getFileName().toString());
@@ -56,7 +56,6 @@ public class RazorSymbolRefsImporterTest extends RazorImporterTestBase {
     assertThat(sensorContext.referencesForSymbolAt(inputFile.key(), 21, 17)).hasSize(0);
 
     assertThat(logTester.logs(Level.DEBUG)).containsExactly(
-      "The declaration token at Range[from [line=1, lineOffset=0] to [line=1, lineOffset=17]] overlaps with the referencing token Range[from [line=1, lineOffset=6] to [line=1, lineOffset=23]] in file OverlapSymbolReferences.razor"
-    );
+      "The declaration token at Range[from [line=1, lineOffset=0] to [line=1, lineOffset=17]] overlaps with the referencing token Range[from [line=1, lineOffset=6] to [line=1, lineOffset=23]] in file OverlapSymbolReferences.razor");
   }
 }
