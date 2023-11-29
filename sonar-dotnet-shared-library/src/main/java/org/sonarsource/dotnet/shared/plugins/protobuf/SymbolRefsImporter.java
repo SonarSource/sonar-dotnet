@@ -22,10 +22,12 @@ package org.sonarsource.dotnet.shared.plugins.protobuf;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.UnaryOperator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.batch.fs.TextRange;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.symbol.NewSymbol;
 import org.sonar.api.batch.sensor.symbol.NewSymbolTable;
@@ -52,20 +54,27 @@ public class SymbolRefsImporter extends ProtobufImporter<SonarAnalyzer.SymbolRef
     if (declarationRange.isPresent()) {
       NewSymbol symbol = symbolTable.newSymbol(declarationRange.get());
       for (SonarAnalyzer.TextRange refTextRange : tokenInfo.getReferenceList()) {
-        var referenceRange = toTextRange(file, refTextRange);
-        if (referenceRange.isEmpty()) {
-          if (LOG.isDebugEnabled()) {
-            LOG.debug("The reported token was out of the range. File {}, Range {}", file.filename(), refTextRange);
-          }
-        } else if (declarationRange.get().overlap(referenceRange.get())) {
-          if (LOG.isDebugEnabled()) {
-            LOG.debug("The declaration token at {} overlaps with the referencing token {} in file {}", declarationRange.get(), referenceRange.get(), file.filename());
-          }
-        } else {
-          symbol.newReference(referenceRange.get());
-        }
+        var newReference = newReference(file, refTextRange, declarationRange.get());
+        newReference.ifPresent(symbol::newReference);
       }
     }
+  }
+
+  private static Optional<TextRange> newReference(InputFile file, SonarAnalyzer.TextRange refTextRange, TextRange declarationRange)
+  {
+    var referenceRange = toTextRange(file, refTextRange);
+    if (referenceRange.isEmpty()) {
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("The reported token was out of the range. File {}, Range {}", file.filename(), refTextRange);
+        return Optional.empty();
+      }
+    } else if (declarationRange.overlap(referenceRange.get())) {
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("The declaration token at {} overlaps with the referencing token {} in file {}", declarationRange, referenceRange.get(), file.filename());
+        return Optional.empty();
+      }
+    }
+    return referenceRange;
   }
 
   @Override
