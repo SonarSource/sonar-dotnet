@@ -80,8 +80,16 @@ public class SymbolRefsImporter extends ProtobufImporter<SonarAnalyzer.SymbolRef
       NewSymbol symbol = symbolTable.newSymbol(declarationRange.get());
       for (SonarAnalyzer.TextRange refTextRange : tokenInfo.getReferenceList()) {
         var referenceRange = toTextRange(file, refTextRange);
-        if (referenceRange.isPresent()) {
-          symbol.newReference(referenceRange.get());
+        if (referenceRange.isPresent())
+        {
+          if (declarationRange.get().overlap(referenceRange.get())) {
+            if (LOG.isDebugEnabled())
+            {
+              LOG.debug("The declaration token at {} overlaps with the referencing token {} in file {}", declarationRange.get(), referenceRange.get(), file.filename());
+            }
+          } else {
+            symbol.newReference(referenceRange.get());
+          }
         } else if (LOG.isDebugEnabled()) {
           LOG.debug("The reported token was out of the range. File {}, Range {}", file.filename(), refTextRange);
         }

@@ -21,49 +21,22 @@ package org.sonarsource.dotnet.shared.plugins.protobuf;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.nio.file.Paths;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.slf4j.event.Level;
-import org.sonar.api.batch.fs.internal.DefaultInputFile;
-import org.sonar.api.batch.fs.internal.FileMetadata;
-import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
-import org.sonar.api.batch.sensor.internal.SensorContextTester;
-import org.sonar.api.notifications.AnalysisWarnings;
-import org.sonar.api.testfixtures.log.LogTester;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
 import static org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter.SYMBOLREFS_FILENAME;
 
-public class RoslynSymbolRefsImporterTest {
-  private final File TEST_DATA_DIR = new File("src/test/resources/RazorProtobufImporter");
-  private final SensorContextTester sensorContext = SensorContextTester.create(TEST_DATA_DIR);
+public class RoslynSymbolRefsImporterTest extends RazorProtobufImporterTestBase {
   private final File protobuf = new File(TEST_DATA_DIR, SYMBOLREFS_FILENAME);
 
-  private DefaultInputFile CasesInputFile;
-  private DefaultInputFile OverlapSymbolReferencesInputFile;
-  private DefaultInputFile ProgramInputFile;
-  @Rule
-  public LogTester logTester = new LogTester();
-
+  @Override
   @Before
   public void setUp() throws FileNotFoundException {
-    logTester.setLevel(Level.TRACE);
+    super.setUp();
     assertThat(protobuf).withFailMessage("no such file: " + protobuf).isFile();
-    CasesInputFile = addTestFileToContext("Cases.razor");
-    OverlapSymbolReferencesInputFile = addTestFileToContext("OverlapSymbolReferences.razor");
-    ProgramInputFile = addTestFileToContext("Program.cs");
-  }
-
-  private DefaultInputFile addTestFileToContext(String testFile) throws FileNotFoundException {
-    var inputFile = new TestInputFileBuilder("dummyKey", testFile)
-      .setMetadata(new FileMetadata(mock(AnalysisWarnings.class)).readMetadata(new FileReader(new File(TEST_DATA_DIR, testFile))))
-      .build();
-    sensorContext.fileSystem().add(inputFile);
-    return inputFile;
   }
 
   @Test
@@ -82,6 +55,6 @@ public class RoslynSymbolRefsImporterTest {
     assertThat(sensorContext.referencesForSymbolAt(inputFile.key(), 19, 15)).hasSize(3);
     assertThat(sensorContext.referencesForSymbolAt(inputFile.key(), 21, 17)).hasSize(0);
 
-    assertThat(logTester.logs(Level.DEBUG).get(0)).startsWith("The reported token was out of the range. File Cases.razor, Range start_line: 8");
+    assertThat(logTester.logs(Level.DEBUG).get(0)).isEqualTo("The declaration token at Range[from [line=1, lineOffset=0] to [line=1, lineOffset=17]] overlaps with the referencing token Range[from [line=1, lineOffset=6] to [line=1, lineOffset=23]] in file OverlapSymbolReferences.razor");
   }
 }
