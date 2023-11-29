@@ -1,5 +1,6 @@
-Please see the ReadMe.md file from `ProtobufImporterTest` folder that explains how to use the `ProtobufFilterTool`.
+### How to re-create the pb files
 
-Before running the tool please update the following fields in the `ProtobufFilterTool`:
-- TEST_DATA_DIR should point to `"sonar-dotnet-shared-library/src/test/resources/RazorProtobufImporter"`
-- TEST_FILENAME should point to `"Cases.razor"`
+- Create a Project in SonarQube (manual setup)
+- Open a console in this directory
+- Run the "Start" and the "Build" step as given by SonarQube
+- Copy the pb files from `.sonarqube\out\0\output-cs` here
