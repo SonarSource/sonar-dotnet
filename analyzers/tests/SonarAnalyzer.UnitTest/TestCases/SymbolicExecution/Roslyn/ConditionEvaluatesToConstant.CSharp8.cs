@@ -552,7 +552,7 @@ class Repro_8326
         _ = i switch
         {
             1 => 1,
-            var other => 2          // Noncompliant {{Change this condition so that it does not always evaluate to 'True'.}} FP: var should not raise
+            var other => 2          // Compliant
         };
 
         _ = o switch

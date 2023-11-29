@@ -260,10 +260,8 @@ namespace Repro_8011
         {
             return flags switch
             {
-                var value when value.HasFlag(Flags.Foo) => 1, // Noncompliant {{Change this condition so that it does not always evaluate to 'True'.}}
-              //^^^^^^^^^
-                var value when value.HasFlag(Flags.Bar) => 2, // Noncompliant {{Change this condition so that it does not always evaluate to 'True'.}}
-              //^^^^^^^^^
+                var value when value.HasFlag(Flags.Foo) => 1,   // Compliant
+                var value when value.HasFlag(Flags.Bar) => 2,   // Compliant
                 _ => 0
             };
         }
