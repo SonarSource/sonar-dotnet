@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <!-- `-windows` is required in order to be able to reference SonarAnalyzer.UnitTests to resolve e.g. WinForms references -->
@@ -8,7 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="altcover" Version="8.6.68" />
+      <PackageReference Include="altcover" Version="8.6.95" />
       <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.3" />
       <PackageReference Include="MSTest.TestAdapter" Version="3.1.1" />
       <PackageReference Include="MSTest.TestFramework" Version="3.1.1" />
