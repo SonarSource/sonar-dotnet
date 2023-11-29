@@ -29,7 +29,7 @@ import org.slf4j.event.Level;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter.SYMBOLREFS_FILENAME;
 
-public class RoslynSymbolRefsImporterTest extends RazorProtobufImporterTestBase {
+public class RazorSymbolRefsImporterTest extends RazorImporterTestBase {
   private final File protobuf = new File(TEST_DATA_DIR, SYMBOLREFS_FILENAME);
 
   @Override

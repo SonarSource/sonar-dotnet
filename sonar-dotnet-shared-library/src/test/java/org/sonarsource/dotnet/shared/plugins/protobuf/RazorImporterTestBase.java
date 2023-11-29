@@ -16,7 +16,7 @@ import org.sonar.api.testfixtures.log.LogTester;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
-public class RazorProtobufImporterTestBase {
+public class RazorImporterTestBase {
   protected final static File TEST_DATA_DIR = new File("src/test/resources/RazorProtobufImporter");
   protected final SensorContextTester sensorContext = SensorContextTester.create(TEST_DATA_DIR);
   protected DefaultInputFile CasesInputFile;

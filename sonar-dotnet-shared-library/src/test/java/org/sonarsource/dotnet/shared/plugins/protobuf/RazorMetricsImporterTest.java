@@ -40,7 +40,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter.METRICS_FILENAME;
 
-public class RoslynMetricsImporterTest extends RazorProtobufImporterTestBase {
+public class RazorMetricsImporterTest extends RazorImporterTestBase {
   private static final File PROTOBUF_FILE = new File(TEST_DATA_DIR, METRICS_FILENAME);
 
   @Before
