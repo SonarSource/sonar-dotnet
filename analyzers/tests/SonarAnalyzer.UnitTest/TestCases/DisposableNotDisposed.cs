@@ -157,14 +157,14 @@ namespace Tests.Diagnostics
     }
 
     // https://github.com/SonarSource/sonar-dotnet/issues/8365
-    public class Repro_8365
+    class Repro_8365
     {
-        public void NotDisposed(string filePath)
+        void NotDisposed(string filePath)
         {
             FileStream fileStream = File.OpenRead(filePath); // FN
         }
 
-        public void Disposed(string filePath)
+        void Disposed(string filePath)
         {
             FileStream fileStream = File.OpenRead(filePath); // Compliant
             fileStream.Dispose();
