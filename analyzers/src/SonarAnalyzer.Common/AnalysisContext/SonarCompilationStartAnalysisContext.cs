@@ -45,24 +45,29 @@ public sealed class SonarCompilationStartAnalysisContext : SonarAnalysisContextB
         if (HasMatchingScope(AnalysisContext.SupportedDiagnostics))
         {
             ConcurrentDictionary<SyntaxTree, bool> shouldAnalyzeCache = new();
-            Context.RegisterSyntaxNodeAction(x =>
-            {
-                if (!shouldAnalyzeCache.TryGetValue(x.Node.SyntaxTree, out var canProceedWithAnalysis))
+            Context.RegisterSyntaxNodeAction(
+                [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/8406", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
+                (x) =>
                 {
-                    canProceedWithAnalysis = GetOrAddCanProceedWithAnalysis(generatedCodeRecognizer, shouldAnalyzeCache, x.Node.SyntaxTree);
-                }
-                if (canProceedWithAnalysis)
-                {
-                    action(new(AnalysisContext, x));
-                }
-            }, syntaxKinds);
+                    if (!shouldAnalyzeCache.TryGetValue(x.Node.SyntaxTree, out var canProceedWithAnalysis))
+                    {
+                        canProceedWithAnalysis = GetOrAddCanProceedWithAnalysis(generatedCodeRecognizer, shouldAnalyzeCache, x.Node.SyntaxTree);
+                    }
 
-            // Performance: Don't inline to avoid capture class and delegate allocations.
-            bool GetOrAddCanProceedWithAnalysis(GeneratedCodeRecognizer codeRecognizer, ConcurrentDictionary<SyntaxTree, bool> cache, SyntaxTree tree) =>
-                cache.GetOrAdd(tree, x =>
-                    ShouldAnalyzeTree(x, codeRecognizer)
-                    && SonarAnalysisContext.LegacyIsRegisteredActionEnabled(AnalysisContext.SupportedDiagnostics, x)
-                    && AnalysisContext.ShouldAnalyzeRazorFile(x));
+                    if (canProceedWithAnalysis)
+                    {
+                        action(new(AnalysisContext, x));
+                    }
+                },
+                syntaxKinds);
         }
     }
+
+    // Performance: Don't inline to avoid capture class and delegate allocations.
+    private bool GetOrAddCanProceedWithAnalysis(GeneratedCodeRecognizer codeRecognizer, ConcurrentDictionary<SyntaxTree, bool> cache, SyntaxTree tree) =>
+        cache.GetOrAdd(tree,
+            x =>
+                ShouldAnalyzeTree(x, codeRecognizer)
+                && SonarAnalysisContext.LegacyIsRegisteredActionEnabled(AnalysisContext.SupportedDiagnostics, x)
+                && AnalysisContext.ShouldAnalyzeRazorFile(x));
 }
