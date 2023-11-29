@@ -55,6 +55,8 @@ public class RazorSymbolRefsImporterTest extends RazorImporterTestBase {
     assertThat(sensorContext.referencesForSymbolAt(inputFile.key(), 19, 15)).hasSize(3);
     assertThat(sensorContext.referencesForSymbolAt(inputFile.key(), 21, 17)).hasSize(0);
 
-    assertThat(logTester.logs(Level.DEBUG).get(0)).isEqualTo("The declaration token at Range[from [line=1, lineOffset=0] to [line=1, lineOffset=17]] overlaps with the referencing token Range[from [line=1, lineOffset=6] to [line=1, lineOffset=23]] in file OverlapSymbolReferences.razor");
+    assertThat(logTester.logs(Level.DEBUG)).containsExactly(
+      "The declaration token at Range[from [line=1, lineOffset=0] to [line=1, lineOffset=17]] overlaps with the referencing token Range[from [line=1, lineOffset=6] to [line=1, lineOffset=23]] in file OverlapSymbolReferences.razor"
+    );
   }
 }
