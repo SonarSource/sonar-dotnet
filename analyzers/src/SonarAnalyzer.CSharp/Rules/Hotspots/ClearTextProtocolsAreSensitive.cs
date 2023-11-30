@@ -249,6 +249,6 @@ namespace SonarAnalyzer.Rules.CSharp
         private static Regex CompileRegex(string pattern, bool ignoreCase = true) =>
             new(pattern, ignoreCase
                           ? RegexOptions.Compiled | RegexOptions.IgnoreCase
-                          : RegexOptions.Compiled);
+                          : RegexOptions.Compiled, RegexConstants.DefaultTimeout);
     }
 }

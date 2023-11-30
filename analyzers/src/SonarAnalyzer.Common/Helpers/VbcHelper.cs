@@ -24,8 +24,8 @@ namespace SonarAnalyzer.Helpers
 {
     public static class VbcHelper
     {
-        public static readonly Regex VbNetErrorPattern = new Regex(@"\s+error(\s+\S+)?\s*:", RegexOptions.Compiled |
-            RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+        public static readonly Regex VbNetErrorPattern = new Regex(@"\s+error(\s+\S+)?\s*:",
+            RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant, RegexConstants.DefaultTimeout);
 
         /// <summary>
         /// VB.Net Complier (VBC) post-process issues and will fail if the line contains the <see cref="VbNetErrorPattern"/>.

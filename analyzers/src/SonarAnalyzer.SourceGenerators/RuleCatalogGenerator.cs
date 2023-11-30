@@ -32,6 +32,7 @@ namespace SonarAnalyzer.SourceGenerators
     public class RuleCatalogGenerator : ISourceGenerator
     {
         private const string SonarWayFileName = "Sonar_way_profile.json";
+        private static readonly TimeSpan RegexTimeout = TimeSpan.FromMilliseconds(100);
 
         public void Initialize(GeneratorInitializationContext context)
         {
@@ -106,13 +107,13 @@ namespace SonarAnalyzer
 
         private static string FirstParagraphText(string id, string html)
         {
-            var match = Regex.Match(html, "<p>(?<Text>.*?)</p>", RegexOptions.Singleline);
+            var match = Regex.Match(html, "<p>(?<Text>.*?)</p>", RegexOptions.Singleline, RegexTimeout);
             if (match.Success)
             {
                 var text = match.Groups["Text"].Value;
-                text = Regex.Replace(text, "<[^>]*>", string.Empty);
+                text = Regex.Replace(text, "<[^>]*>", string.Empty, RegexOptions.None, RegexTimeout);
                 text = text.Replace("\n", " ").Replace("\r", " ");
-                text = Regex.Replace(text, @"\s{2,}", " ");
+                text = Regex.Replace(text, @"\s{2,}", " ", RegexOptions.None, RegexTimeout);
                 return WebUtility.HtmlDecode(text);
             }
             else
