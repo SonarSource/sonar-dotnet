@@ -30,8 +30,7 @@ namespace SonarAnalyzer.Rules
 
         protected abstract string GetCpdValue(SyntaxToken token);
         protected abstract bool IsUsingDirective(SyntaxNode node);
-
-        protected override UtilityAnalyzerParameters ReadParameters(SonarCompilationReportingContext context) =>
+        protected override UtilityAnalyzerParameters ReadParameters<T>(SonarAnalysisContextBase<T> context) =>
             base.ReadParameters(context) with { AnalyzeTestProjects = false };
 
         protected sealed override bool AnalyzeUnchangedFiles => true;

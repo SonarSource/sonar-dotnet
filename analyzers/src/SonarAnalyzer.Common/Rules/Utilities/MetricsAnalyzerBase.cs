@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules
         protected abstract MetricsBase GetMetrics(SyntaxTree syntaxTree, SemanticModel semanticModel);
 
         protected sealed override string FileName => "metrics.pb";
-        protected override UtilityAnalyzerParameters ReadParameters(SonarCompilationReportingContext context) =>
+        protected override UtilityAnalyzerParameters ReadParameters<T>(SonarAnalysisContextBase<T> context) =>
             base.ReadParameters(context) with { AnalyzeTestProjects = false };
 
         protected MetricsAnalyzerBase() : base(DiagnosticId, Title) { }

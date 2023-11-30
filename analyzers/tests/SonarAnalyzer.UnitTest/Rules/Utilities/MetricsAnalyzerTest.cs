@@ -154,7 +154,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 this.isTestProject = isTestProject;
             }
 
-            protected override UtilityAnalyzerParameters ReadParameters(SonarCompilationReportingContext context) =>
+            protected override UtilityAnalyzerParameters ReadParameters<T>(SonarAnalysisContextBase<T> context) =>
                 base.ReadParameters(context) with { IsAnalyzerEnabled = true, OutPath = outPath, IsTestProject = isTestProject };
         }
     }

@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Concurrent;
 using System.IO;
 using Google.Protobuf;
 using SonarAnalyzer.Protobuf;
@@ -51,7 +52,7 @@ namespace SonarAnalyzer.Rules
                 EndOffset = lineSpan.EndLinePosition.Character
             };
 
-        protected virtual UtilityAnalyzerParameters ReadParameters(SonarCompilationReportingContext context)
+        protected virtual UtilityAnalyzerParameters ReadParameters<T>(SonarAnalysisContextBase<T> context)
         {
             var outPath = context.ProjectConfiguration().OutPath;
             // For backward compatibility with S4MSB <= 5.0
@@ -90,29 +91,35 @@ namespace SonarAnalyzer.Rules
         protected UtilityAnalyzerBase(string diagnosticId, string title) : base(diagnosticId, title) { }
 
         protected sealed override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterCompilationAction(context =>
+            context.RegisterCompilationStartAction(startContext =>
             {
-                var parameters = ReadParameters(context);
+                var parameters = ReadParameters(startContext);
                 if (!parameters.IsAnalyzerEnabled)
                 {
                     return;
                 }
-
-                var treeMessages = context.Compilation.SyntaxTrees
-                    .Where(x => ShouldGenerateMetrics(parameters, context, x))
-                    .Select(x => CreateMessage(parameters, x, context.Compilation.GetSemanticModel(x)));
-
-                var allMessages = CreateAnalysisMessages(context)
-                    .Concat(treeMessages)
-                    .WhereNotNull()
-                    .ToArray();
-
-                Directory.CreateDirectory(parameters.OutPath);
-                using var stream = File.Create(Path.Combine(parameters.OutPath, FileName));
-                foreach (var message in allMessages)
+                var treeMessages = new ConcurrentStack<TMessage>();
+                startContext.RegisterSemanticModelAction(modelContext =>
                 {
-                    message.WriteDelimitedTo(stream);
-                }
+                    if (ShouldGenerateMetrics(parameters, modelContext))
+                    {
+                        var message = CreateMessage(parameters, modelContext.Tree, modelContext.SemanticModel);
+                        treeMessages.Push(message);
+                    }
+                });
+                startContext.RegisterCompilationEndAction(endContext =>
+                {
+                    var allMessages = CreateAnalysisMessages(endContext)
+                        .Concat(treeMessages)
+                        .WhereNotNull()
+                        .ToArray();
+                    Directory.CreateDirectory(parameters.OutPath);
+                    using var stream = File.Create(Path.Combine(parameters.OutPath, FileName));
+                    foreach (var message in allMessages)
+                    {
+                        message.WriteDelimitedTo(stream);
+                    }
+                });
             });
 
         protected virtual bool ShouldGenerateMetrics(UtilityAnalyzerParameters parameters, SyntaxTree tree, Compilation compilation) =>
@@ -127,9 +134,9 @@ namespace SonarAnalyzer.Rules
                 ? root.GetMappedFilePathFromRoot()
                 : tree.FilePath;
 
-        private bool ShouldGenerateMetrics(UtilityAnalyzerParameters parameters, SonarCompilationReportingContext context, SyntaxTree tree) =>
-            (AnalyzeUnchangedFiles || !context.IsUnchanged(tree))
-            && ShouldGenerateMetrics(parameters, tree, context.Compilation);
+        private bool ShouldGenerateMetrics(UtilityAnalyzerParameters parameters, SonarSemanticModelReportingContext context) =>
+            (AnalyzeUnchangedFiles || !context.IsUnchanged(context.Tree))
+            && ShouldGenerateMetrics(parameters, context.Tree, context.Compilation);
 
         private bool ShouldGenerateMetricsByType(UtilityAnalyzerParameters parameters, SyntaxTree tree, Compilation compilation) =>
             parameters.AnalyzeGeneratedCode
