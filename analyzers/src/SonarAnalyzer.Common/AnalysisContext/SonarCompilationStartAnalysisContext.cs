@@ -62,7 +62,7 @@ public sealed class SonarCompilationStartAnalysisContext : SonarAnalysisContextB
 #pragma warning disable HAA0502
                         // https://github.com/SonarSource/sonar-dotnet/issues/8425
                         action(new(AnalysisContext, x));
-#pragma warning enable HAA0502
+#pragma warning restore HAA0502
                     }
                 },
                 syntaxKinds);
