@@ -32,7 +32,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private const int MinimalCommonKeyLength = 2048;
         private const int MinimalEllipticCurveKeyLength = 224;
-        private readonly Regex namedEllipticCurve = new("^(secp|sect|prime|c2tnb|c2pnb|brainpoolP|B-|K-|P-)(?<KeyLength>\\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private readonly Regex namedEllipticCurve = new("^(secp|sect|prime|c2tnb|c2pnb|brainpoolP|B-|K-|P-)(?<KeyLength>\\d+)",
+            RegexOptions.Compiled | RegexOptions.IgnoreCase, RegexConstants.DefaultTimeout);
 
         private static readonly ImmutableArray<KnownType> BouncyCastleCurveClasses =
             ImmutableArray.Create(
@@ -161,7 +162,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (c.SemanticModel.GetSymbolInfo(firstParam).Symbol is { }  paramSymbol)
+            if (c.SemanticModel.GetSymbolInfo(firstParam).Symbol is { } paramSymbol)
             {
                 CheckCurveNameKeyLength(c, syntaxElement, paramSymbol.Name);
             }

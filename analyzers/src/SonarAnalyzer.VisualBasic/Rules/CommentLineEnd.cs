@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             {
                 var location = comment.GetLocation();
                 if (location.GetLineSpan().StartLinePosition.Line == tokenLine &&
-                    !Regex.IsMatch(comment.ToString(), LegalCommentPattern))
+                    !Regex.IsMatch(comment.ToString(), LegalCommentPattern, RegexOptions.None, RegexConstants.DefaultTimeout))
                 {
                     context.ReportIssue(Diagnostic.Create(rule, location));
                 }
