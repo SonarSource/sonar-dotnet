@@ -21,7 +21,6 @@
 using System.IO;
 using Google.Protobuf.Collections;
 using SonarAnalyzer.AnalysisContext;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Protobuf;
 using SonarAnalyzer.Rules;
 using CS = SonarAnalyzer.Rules.CSharp;
@@ -197,12 +196,12 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void Verify_Razor() =>
-            CreateBuilder(ProjectType.Product, "Razor.razor", "Razor.razor.cs", "ToDo.cs", "Razor.cshtml")
+            CreateBuilder(ProjectType.Product, "Razor.razor", "Razor.razor.cs", "RazorComponent.razor", "ToDo.cs", "Razor.cshtml")
                 .WithConcurrentAnalysis(false)
                 .VerifyUtilityAnalyzer<SymbolReferenceInfo>(symbols =>
                     {
                         var orderedSymbols = symbols.OrderBy(x => x.FilePath, StringComparer.InvariantCulture).ToArray();
-                        orderedSymbols.Select(x => Path.GetFileName(x.FilePath)).Should().BeEquivalentTo("_Imports.razor", "Razor.razor", "Razor.razor.cs", "ToDo.cs");
+                        orderedSymbols.Select(x => Path.GetFileName(x.FilePath)).Should().BeEquivalentTo("_Imports.razor", "Razor.razor", "Razor.razor.cs", "RazorComponent.razor", "ToDo.cs");
                         orderedSymbols[0].FilePath.Should().EndWith("_Imports.razor");
                         orderedSymbols[1].FilePath.Should().EndWith("Razor.razor");
 
@@ -215,6 +214,14 @@ namespace SonarAnalyzer.UnitTest.Rules
                         VerifyReferences(orderedSymbols[1].Reference, 9, 41);               // x
                         VerifyReferences(orderedSymbols[1].Reference, 9, 42);               // y
                         VerifyReferences(orderedSymbols[1].Reference, 9, 44, 41);           // LocalMethod
+
+                        orderedSymbols[3].FilePath.Should().EndWith("RazorComponent.razor"); // RazorComponent.razor
+                        // https://github.com/SonarSource/sonar-dotnet/issues/8417
+                        // Net8 SDK: Declaration (1,0) - (1,17) Reference (1,6) - (1,23) <- Overlapping
+                        // Declaration of TSomeVeryLongName is placed starting at index 0 (ignoring "@typeparam ")
+                        // Reference "where TSomeVeryLongName" is placed starting at index 6 (ignoring "@typeparam TSomeVeryLongName ")
+                        // In Net7 SDK, no references are produced
+                        orderedSymbols[3].Reference.Should().BeEmpty();
                     });
 
         [DataTestMethod]
