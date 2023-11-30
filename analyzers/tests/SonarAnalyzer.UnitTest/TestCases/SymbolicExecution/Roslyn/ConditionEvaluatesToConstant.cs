@@ -3407,7 +3407,7 @@ public class Repro_8378
         {
             success = false;
         }
-        if (success)    // NoncompliantFP
+        if (success)    // Noncompliant FP
         {
             Console.WriteLine("Success!");
         }
