@@ -39,15 +39,18 @@ public sealed class SonarCompilationStartAnalysisContext : SonarAnalysisContextB
     public void RegisterSemanticModelAction(Action<SonarSemanticModelReportingContext> action) =>
         Context.RegisterSemanticModelAction(x => action(new(AnalysisContext, x)));
 
+#pragma warning disable HAA0303, HAA0302, HAA0301
+
+    [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/8406", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
     public void RegisterNodeAction<TSyntaxKind>(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxNodeReportingContext> action, params TSyntaxKind[] syntaxKinds)
         where TSyntaxKind : struct
     {
         if (HasMatchingScope(AnalysisContext.SupportedDiagnostics))
         {
             ConcurrentDictionary<SyntaxTree, bool> shouldAnalyzeCache = new();
-            Context.RegisterSyntaxNodeAction(
-                [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/8406", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
-                (x) =>
+            Context.RegisterSyntaxNodeAction(x =>
+// The hot path starts in the lambda below.
+#pragma warning restore HAA0303, HAA0302, HAA0301
                 {
                     if (!shouldAnalyzeCache.TryGetValue(x.Node.SyntaxTree, out var canProceedWithAnalysis))
                     {
