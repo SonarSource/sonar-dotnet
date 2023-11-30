@@ -66,13 +66,13 @@ public class SymbolRefsImporter extends ProtobufImporter<SonarAnalyzer.SymbolRef
     if (referenceRange.isEmpty()) {
       if (LOG.isDebugEnabled()) {
         LOG.debug("The reported token was out of the range. File {}, Range {}", file.filename(), refTextRange);
-        return Optional.empty();
       }
+      return Optional.empty();
     } else if (declarationRange.overlap(referenceRange.get())) {
       if (LOG.isDebugEnabled()) {
         LOG.debug("The declaration token at {} overlaps with the referencing token {} in file {}", declarationRange, referenceRange.get(), file.filename());
-        return Optional.empty();
       }
+      return Optional.empty();
     }
     return referenceRange;
   }
