@@ -22,11 +22,12 @@ package org.sonarsource.dotnet.shared.plugins.protobuf;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.UnaryOperator;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.batch.fs.TextRange;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.symbol.NewSymbol;
 import org.sonar.api.batch.sensor.symbol.NewSymbolTable;
@@ -46,6 +47,33 @@ public class SymbolRefsImporter extends ProtobufImporter<SonarAnalyzer.SymbolRef
   public SymbolRefsImporter(SensorContext context, UnaryOperator<String> toRealPath) {
     super(SonarAnalyzer.SymbolReferenceInfo.parser(), context, SonarAnalyzer.SymbolReferenceInfo::getFilePath, toRealPath);
     this.context = context;
+  }
+
+  private static void addReferences(InputFile file, SymbolReferenceInfo.SymbolReference tokenInfo, NewSymbolTable symbolTable) {
+    var declarationRange = toTextRange(file, tokenInfo.getDeclaration());
+    if (declarationRange.isPresent()) {
+      NewSymbol symbol = symbolTable.newSymbol(declarationRange.get());
+      for (SonarAnalyzer.TextRange refTextRange : tokenInfo.getReferenceList()) {
+        var validatedReference = validatedReference(file, refTextRange, declarationRange.get());
+        validatedReference.ifPresent(symbol::newReference);
+      }
+    }
+  }
+
+  private static Optional<TextRange> validatedReference(InputFile file, SonarAnalyzer.TextRange refTextRange, TextRange declarationRange) {
+    var referenceRange = toTextRange(file, refTextRange);
+    if (referenceRange.isEmpty()) {
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("The reported token was out of the range. File {}, Range {}", file.filename(), refTextRange);
+      }
+      return Optional.empty();
+    } else if (declarationRange.overlap(referenceRange.get())) {
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("The declaration token at {} overlaps with the referencing token {} in file {}", declarationRange, referenceRange.get(), file.filename());
+      }
+      return Optional.empty();
+    }
+    return referenceRange;
   }
 
   @Override
@@ -72,22 +100,5 @@ public class SymbolRefsImporter extends ProtobufImporter<SonarAnalyzer.SymbolRef
   boolean isProcessed(InputFile inputFile) {
     // we aggregate all symbol reference information, no need to process only the first protobuf file
     return false;
-  }
-
-  private static void addReferences(InputFile file, SymbolReferenceInfo.SymbolReference tokenInfo, NewSymbolTable symbolTable) {
-    var declarationRange = toTextRange(file, tokenInfo.getDeclaration());
-    if (declarationRange.isPresent()) {
-      NewSymbol symbol = symbolTable.newSymbol(declarationRange.get());
-      for (SonarAnalyzer.TextRange refTextRange : tokenInfo.getReferenceList()) {
-        var referenceRange = toTextRange(file, refTextRange);
-        if (referenceRange.isPresent()) {
-          symbol.newReference(referenceRange.get());
-        } else if (LOG.isDebugEnabled()) {
-          LOG.debug("The reported token was out of the range. File {}, Range {}", file.filename(), refTextRange);
-        }
-      }
-    } else if (LOG.isDebugEnabled()) {
-      LOG.debug("The reported token was out of the range. File {}, Range {}", file.filename(), tokenInfo.getDeclaration());
-    }
   }
 }
