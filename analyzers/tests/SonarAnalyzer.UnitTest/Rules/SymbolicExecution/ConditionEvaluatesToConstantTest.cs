@@ -148,6 +148,12 @@ public class ConditionEvaluatesToConstantTest
             .WithOptions(ParseOptionsHelper.FromCSharp11)
             .Verify();
 
+    [TestMethod]
+    public void ConditionEvaluatesToConstant_Roslyn_CSharp12() =>
+        roslynCS.AddPaths("ConditionEvaluatesToConstant.CSharp12.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp12)
+            .Verify();
+
 #endif
 
 }
