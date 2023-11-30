@@ -60,8 +60,7 @@ public class SymbolRefsImporter extends ProtobufImporter<SonarAnalyzer.SymbolRef
     }
   }
 
-  private static Optional<TextRange> validatedReference(InputFile file, SonarAnalyzer.TextRange refTextRange, TextRange declarationRange)
-  {
+  private static Optional<TextRange> validatedReference(InputFile file, SonarAnalyzer.TextRange refTextRange, TextRange declarationRange) {
     var referenceRange = toTextRange(file, refTextRange);
     if (referenceRange.isEmpty()) {
       if (LOG.isDebugEnabled()) {
