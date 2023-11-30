@@ -2,6 +2,7 @@
 
 class Sample
 {
+    // Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/8428
     void CollectionExpressions(int[] array)
     {
         int[] knownLength = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
