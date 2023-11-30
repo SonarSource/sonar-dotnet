@@ -54,13 +54,13 @@ public class SymbolRefsImporter extends ProtobufImporter<SonarAnalyzer.SymbolRef
     if (declarationRange.isPresent()) {
       NewSymbol symbol = symbolTable.newSymbol(declarationRange.get());
       for (SonarAnalyzer.TextRange refTextRange : tokenInfo.getReferenceList()) {
-        var newReference = newReference(file, refTextRange, declarationRange.get());
-        newReference.ifPresent(symbol::newReference);
+        var validatedReference = validatedReference(file, refTextRange, declarationRange.get());
+        validatedReference.ifPresent(symbol::newReference);
       }
     }
   }
 
-  private static Optional<TextRange> newReference(InputFile file, SonarAnalyzer.TextRange refTextRange, TextRange declarationRange)
+  private static Optional<TextRange> validatedReference(InputFile file, SonarAnalyzer.TextRange refTextRange, TextRange declarationRange)
   {
     var referenceRange = toTextRange(file, refTextRange);
     if (referenceRange.isEmpty()) {
