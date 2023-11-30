@@ -3413,3 +3413,19 @@ public class Repro_8378
         }
     }
 }
+
+// Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/8428
+public class Repro_8428
+{
+    void Test()
+    {
+        var ids = new int[1000];
+        for (var i = 0; i < ids.Length; i++)
+        {
+            if (i % 100 != 0 || i <= 0)   // Noncompliant FP
+            {
+                System.Diagnostics.Debug.WriteLine(i);
+            }
+        }
+    }
+}
