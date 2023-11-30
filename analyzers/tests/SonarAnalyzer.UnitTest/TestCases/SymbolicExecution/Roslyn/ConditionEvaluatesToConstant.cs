@@ -3391,3 +3391,25 @@ public class Repro_8368
     void DoSomeWork() { }
     void LogError(Exception exception) { }
 }
+
+
+// Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/8378
+public class Repro_8378
+{
+    public void Method()
+    {
+        var success = true;
+        try
+        {
+            var result = 100 / DateTime.Now.Second;
+        }
+        catch (Exception ex)
+        {
+            success = false;
+        }
+        if (success)    // Noncompliant FP
+        {
+            Console.WriteLine("Success!");
+        }
+    }
+}
