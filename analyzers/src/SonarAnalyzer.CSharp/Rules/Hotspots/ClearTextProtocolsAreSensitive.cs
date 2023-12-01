@@ -86,6 +86,7 @@ namespace SonarAnalyzer.Rules.CSharp
                                                   ImmutableArray.Create(KnownType.System_Net_Mail_SmtpClient, KnownType.System_Net_FtpWebRequest),
                                                   propertyName => propertyName == EnableSslName);
 
+        private static readonly TimeSpan RegexTimeout = TimeSpan.FromMilliseconds(250);
         private static readonly Regex HttpRegex;
         private static readonly Regex FtpRegex;
         private static readonly Regex TelnetRegex;
@@ -110,11 +111,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var validServerPattern = domainsList.JoinStr("|");
 
-            HttpRegex = CompileRegex(@$"^http:\/\/(?!{validServerPattern}).");
-            FtpRegex = CompileRegex(@$"^ftp:\/\/.*@(?!{validServerPattern})");
-            TelnetRegex = CompileRegex(@$"^telnet:\/\/.*@(?!{validServerPattern})");
-            TelnetRegexForIdentifier = CompileRegex(@"Telnet(?![a-z])", false);
-            ValidServerRegex = CompileRegex($"^({validServerPattern})$");
+            HttpRegex = CompileRegex(@$"^http:\/\/(?!{validServerPattern}).", overrideTimeout: RegexTimeout);
+            FtpRegex = CompileRegex(@$"^ftp:\/\/.*@(?!{validServerPattern})", overrideTimeout: RegexTimeout);
+            TelnetRegex = CompileRegex(@$"^telnet:\/\/.*@(?!{validServerPattern})", overrideTimeout: RegexTimeout);
+            TelnetRegexForIdentifier = CompileRegex("Telnet(?![a-z])", false);
+            ValidServerRegex = CompileRegex($"^({validServerPattern})$", overrideTimeout: RegexTimeout);
         }
 
         protected override void Initialize(SonarAnalysisContext context) =>
@@ -139,23 +140,36 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void VisitObjectCreation(SonarSyntaxNodeReportingContext context)
         {
             var objectCreation = ObjectCreationFactory.Create(context.Node);
-
-            if (!IsServerSafe(objectCreation, context.SemanticModel) && ObjectInitializationTracker.ShouldBeReported(objectCreation, context.SemanticModel, false))
+            try
             {
-                context.ReportIssue(Diagnostic.Create(EnableSslRule, objectCreation.Expression.GetLocation()));
+                if (!IsServerSafe(objectCreation, context.SemanticModel) && ObjectInitializationTracker.ShouldBeReported(objectCreation, context.SemanticModel, false))
+                {
+                    context.ReportIssue(Diagnostic.Create(EnableSslRule, objectCreation.Expression.GetLocation()));
+                }
+                else if (objectCreation.TypeAsString(context.SemanticModel) is { } typeAsString && TelnetRegexForIdentifier.IsMatch(typeAsString))
+                {
+                    context.ReportIssue(Diagnostic.Create(DefaultRule, objectCreation.Expression.GetLocation(), TelnetKey, RecommendedProtocols[TelnetKey]));
+                }
             }
-            else if (objectCreation.TypeAsString(context.SemanticModel) is { } typeAsString && TelnetRegexForIdentifier.IsMatch(typeAsString))
+            catch (RegexMatchTimeoutException)
             {
-                context.ReportIssue(Diagnostic.Create(DefaultRule, objectCreation.Expression.GetLocation(), TelnetKey, RecommendedProtocols[TelnetKey]));
+                // We don't want to have an AD0001 due to a Regex timeout
             }
         }
 
         private static void VisitInvocationExpression(SonarSyntaxNodeReportingContext context)
         {
             var invocation = (InvocationExpressionSyntax)context.Node;
-            if (TelnetRegexForIdentifier.IsMatch(invocation.Expression.ToString()))
+            try
             {
-                context.ReportIssue(Diagnostic.Create(DefaultRule, invocation.GetLocation(), TelnetKey, RecommendedProtocols[TelnetKey]));
+                if (TelnetRegexForIdentifier.IsMatch(invocation.Expression.ToString()))
+                {
+                    context.ReportIssue(Diagnostic.Create(DefaultRule, invocation.GetLocation(), TelnetKey, RecommendedProtocols[TelnetKey]));
+                }
+            }
+            catch (RegexMatchTimeoutException)
+            {
+                // We don't want to have an AD0001 due to a Regex timeout
             }
         }
 
@@ -186,20 +200,28 @@ namespace SonarAnalyzer.Rules.CSharp
         private static string GetUnsafeProtocol(SyntaxNode node, SemanticModel semanticModel)
         {
             var text = GetText(node, semanticModel);
-            if (HttpRegex.IsMatch(text) && !IsNamespace(semanticModel, node.Parent))
+            try
             {
-                return "http";
+                if (HttpRegex.IsMatch(text) && !IsNamespace(semanticModel, node.Parent))
+                {
+                    return "http";
+                }
+                else if (FtpRegex.IsMatch(text))
+                {
+                    return "ftp";
+                }
+                else if (TelnetRegex.IsMatch(text))
+                {
+                    return "telnet";
+                }
+                else
+                {
+                    return null;
+                }
             }
-            else if (FtpRegex.IsMatch(text))
+            catch (RegexMatchTimeoutException)
             {
-                return "ftp";
-            }
-            else if (TelnetRegex.IsMatch(text))
-            {
-                return "telnet";
-            }
-            else
-            {
+                // We don't want to have an AD0001 due to a Regex timeout
                 return null;
             }
         }
@@ -246,9 +268,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool TokenContainsNamespace(SyntaxToken token) =>
             token.Text.IndexOf("Namespace", StringComparison.OrdinalIgnoreCase) != -1;
 
-        private static Regex CompileRegex(string pattern, bool ignoreCase = true) =>
+        private static Regex CompileRegex(string pattern, bool ignoreCase = true, TimeSpan? overrideTimeout = null) =>
             new(pattern, ignoreCase
                           ? RegexOptions.Compiled | RegexOptions.IgnoreCase
-                          : RegexOptions.Compiled, RegexConstants.DefaultTimeout);
+                          : RegexOptions.Compiled, overrideTimeout ?? RegexConstants.DefaultTimeout);
     }
 }

@@ -38,7 +38,8 @@ namespace SonarAnalyzer.Rules
         private const string MessageUriUserInfo = "Review this hard-coded URI, which may contain a credential.";
         private const string DefaultCredentialWords = "password, passwd, pwd, passphrase";
 
-        private static readonly Regex ValidCredentialPattern = new(@"^(\?|:\w+|\{\d+[^}]*\}|""|')$", RegexOptions.IgnoreCase | RegexOptions.Compiled, RegexConstants.DefaultTimeout);
+        private static readonly TimeSpan RegexTimeout = TimeSpan.FromMilliseconds(250);
+        private static readonly Regex ValidCredentialPattern = new(@"^(\?|:\w+|\{\d+[^}]*\}|""|')$", RegexOptions.IgnoreCase | RegexOptions.Compiled, RegexTimeout);
         private static readonly Regex UriUserInfoPattern = CreateUriUserInfoPattern();
 
         private readonly IAnalyzerConfiguration configuration;
@@ -91,7 +92,7 @@ namespace SonarAnalyzer.Rules
             // See https://tools.ietf.org/html/rfc3986 Userinfo can contain groups: unreserved | pct-encoded | sub-delims
             var loginGroup = CreateUserInfoGroup("Login");
             var passwordGroup = CreateUserInfoGroup("Password", ":");   // Additional ":" to capture passwords containing it
-            return new Regex(@$"\w+:\/\/{loginGroup}:{passwordGroup}@", RegexOptions.Compiled, RegexConstants.DefaultTimeout);
+            return new Regex(@$"\w+:\/\/{loginGroup}:{passwordGroup}@", RegexOptions.Compiled, RegexTimeout);
 
             static string CreateUserInfoGroup(string name, string additionalCharacters = null) =>
                 $@"(?<{name}>[\w\d{Regex.Escape(UriPasswordSpecialCharacters)}{additionalCharacters}]+)";
@@ -177,20 +178,28 @@ namespace SonarAnalyzer.Rules
 
         private string IssueMessage(string variableName, string variableValue)
         {
-            if (string.IsNullOrWhiteSpace(variableValue))
+            try
             {
-                return null;
+                if (string.IsNullOrWhiteSpace(variableValue))
+                {
+                    return null;
+                }
+                else if (FindCredentialWords(variableName, variableValue) is var bannedWords && bannedWords.Any())
+                {
+                    return string.Format(MessageFormatCredential, bannedWords.JoinAnd());
+                }
+                else if (ContainsUriUserInfo(variableValue))
+                {
+                    return MessageUriUserInfo;
+                }
+                else
+                {
+                    return null;
+                }
             }
-            else if (FindCredentialWords(variableName, variableValue) is var bannedWords && bannedWords.Any())
+            catch (RegexMatchTimeoutException)
             {
-                return string.Format(MessageFormatCredential, bannedWords.JoinAnd());
-            }
-            else if (ContainsUriUserInfo(variableValue))
-            {
-                return MessageUriUserInfo;
-            }
-            else
-            {
+                // In case of Regex timeout, we don't want to report an issue.
                 return null;
             }
         }
