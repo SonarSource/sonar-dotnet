@@ -3429,3 +3429,37 @@ public class Repro_8428
         }
     }
 }
+
+// Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/8434
+public class Repro_8434
+{
+    public async Task Method()
+    {
+        MyResult result = null;
+
+        for (var i = 0; i < 300; i++)
+        {
+            await Task.Delay(1000);
+
+            result = IsOpFinished();
+
+            if (result.Completed != null)
+            {
+                break;
+            }
+        }
+
+        if (result?.Completed == null)  // Noncompliant - FP
+        {
+            throw new TimeoutException();
+        }
+    }
+
+    private static MyResult IsOpFinished() =>
+        new MyResult();
+
+    public class MyResult
+    {
+        public DateTime? Completed { get; set; }
+    }
+}
