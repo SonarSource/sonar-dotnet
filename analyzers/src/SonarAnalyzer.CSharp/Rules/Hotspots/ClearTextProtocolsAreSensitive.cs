@@ -111,11 +111,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var validServerPattern = domainsList.JoinStr("|");
 
-            HttpRegex = CompileRegex(@$"^http:\/\/(?!{validServerPattern}).", overrideTimeout: RegexTimeout);
-            FtpRegex = CompileRegex(@$"^ftp:\/\/.*@(?!{validServerPattern})", overrideTimeout: RegexTimeout);
-            TelnetRegex = CompileRegex(@$"^telnet:\/\/.*@(?!{validServerPattern})", overrideTimeout: RegexTimeout);
-            TelnetRegexForIdentifier = CompileRegex("Telnet(?![a-z])", false);
-            ValidServerRegex = CompileRegex($"^({validServerPattern})$", overrideTimeout: RegexTimeout);
+            HttpRegex = CompileRegex(@$"^http:\/\/(?!{validServerPattern}).");
+            FtpRegex = CompileRegex(@$"^ftp:\/\/.*@(?!{validServerPattern})");
+            TelnetRegex = CompileRegex(@$"^telnet:\/\/.*@(?!{validServerPattern})");
+            TelnetRegexForIdentifier = CompileRegex(@"Telnet(?![a-z])", false);
+            ValidServerRegex = CompileRegex($"^({validServerPattern})$");
         }
 
         protected override void Initialize(SonarAnalysisContext context) =>
@@ -140,36 +140,23 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void VisitObjectCreation(SonarSyntaxNodeReportingContext context)
         {
             var objectCreation = ObjectCreationFactory.Create(context.Node);
-            try
+
+            if (!IsServerSafe(objectCreation, context.SemanticModel) && ObjectInitializationTracker.ShouldBeReported(objectCreation, context.SemanticModel, false))
             {
-                if (!IsServerSafe(objectCreation, context.SemanticModel) && ObjectInitializationTracker.ShouldBeReported(objectCreation, context.SemanticModel, false))
-                {
-                    context.ReportIssue(Diagnostic.Create(EnableSslRule, objectCreation.Expression.GetLocation()));
-                }
-                else if (objectCreation.TypeAsString(context.SemanticModel) is { } typeAsString && TelnetRegexForIdentifier.IsMatch(typeAsString))
-                {
-                    context.ReportIssue(Diagnostic.Create(DefaultRule, objectCreation.Expression.GetLocation(), TelnetKey, RecommendedProtocols[TelnetKey]));
-                }
+                context.ReportIssue(Diagnostic.Create(EnableSslRule, objectCreation.Expression.GetLocation()));
             }
-            catch (RegexMatchTimeoutException)
+            else if (objectCreation.TypeAsString(context.SemanticModel) is { } typeAsString && TelnetRegexForIdentifier.IsMatchSilent(typeAsString))
             {
-                // We don't want to have an AD0001 due to a Regex timeout
+                context.ReportIssue(Diagnostic.Create(DefaultRule, objectCreation.Expression.GetLocation(), TelnetKey, RecommendedProtocols[TelnetKey]));
             }
         }
 
         private static void VisitInvocationExpression(SonarSyntaxNodeReportingContext context)
         {
             var invocation = (InvocationExpressionSyntax)context.Node;
-            try
+            if (TelnetRegexForIdentifier.IsMatchSilent(invocation.Expression.ToString()))
             {
-                if (TelnetRegexForIdentifier.IsMatch(invocation.Expression.ToString()))
-                {
-                    context.ReportIssue(Diagnostic.Create(DefaultRule, invocation.GetLocation(), TelnetKey, RecommendedProtocols[TelnetKey]));
-                }
-            }
-            catch (RegexMatchTimeoutException)
-            {
-                // We don't want to have an AD0001 due to a Regex timeout
+                context.ReportIssue(Diagnostic.Create(DefaultRule, invocation.GetLocation(), TelnetKey, RecommendedProtocols[TelnetKey]));
             }
         }
 
@@ -195,33 +182,25 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsServerSafe(IObjectCreation objectCreation, SemanticModel semanticModel) =>
             objectCreation.ArgumentList?.Arguments.Count > 0
-            && ValidServerRegex.IsMatch(GetText(objectCreation.ArgumentList.Arguments[0].Expression, semanticModel));
+            && ValidServerRegex.IsMatchSilent(GetText(objectCreation.ArgumentList.Arguments[0].Expression, semanticModel));
 
         private static string GetUnsafeProtocol(SyntaxNode node, SemanticModel semanticModel)
         {
             var text = GetText(node, semanticModel);
-            try
+            if (HttpRegex.IsMatchSilent(text) && !IsNamespace(semanticModel, node.Parent))
             {
-                if (HttpRegex.IsMatch(text) && !IsNamespace(semanticModel, node.Parent))
-                {
-                    return "http";
-                }
-                else if (FtpRegex.IsMatch(text))
-                {
-                    return "ftp";
-                }
-                else if (TelnetRegex.IsMatch(text))
-                {
-                    return "telnet";
-                }
-                else
-                {
-                    return null;
-                }
+                return "http";
             }
-            catch (RegexMatchTimeoutException)
+            else if (FtpRegex.IsMatchSilent(text))
             {
-                // We don't want to have an AD0001 due to a Regex timeout
+                return "ftp";
+            }
+            else if (TelnetRegex.IsMatchSilent(text))
+            {
+                return "telnet";
+            }
+            else
+            {
                 return null;
             }
         }
@@ -263,14 +242,14 @@ namespace SonarAnalyzer.Rules.CSharp
             };
 
         private static bool IsAttributeWithNamespaceParameter(SemanticModel model, AttributeSyntax attribute) =>
-            model.GetSymbolInfo(attribute).Symbol is IMethodSymbol { ContainingType: { } attributeSymbol } && AttributesWithNamespaceParameter.Any(x => x.Matches(attributeSymbol));
+            model.GetSymbolInfo(attribute).Symbol is IMethodSymbol { ContainingType: { } attributeSymbol } && Array.Exists(AttributesWithNamespaceParameter, x => x.Matches(attributeSymbol));
 
         private static bool TokenContainsNamespace(SyntaxToken token) =>
             token.Text.IndexOf("Namespace", StringComparison.OrdinalIgnoreCase) != -1;
 
-        private static Regex CompileRegex(string pattern, bool ignoreCase = true, TimeSpan? overrideTimeout = null) =>
+        private static Regex CompileRegex(string pattern, bool ignoreCase = true) =>
             new(pattern, ignoreCase
                           ? RegexOptions.Compiled | RegexOptions.IgnoreCase
-                          : RegexOptions.Compiled, overrideTimeout ?? RegexConstants.DefaultTimeout);
+                          : RegexOptions.Compiled, RegexTimeout);
     }
 }

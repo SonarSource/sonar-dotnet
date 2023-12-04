@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Rules
                 var split = SplitCredentialWordsByComma(credentialWords);
                 splitCredentialWords = split;
                 var credentialWordsPattern = split.Select(Regex.Escape).JoinStr("|");
-                passwordValuePattern = new Regex($@"\b(?<credential>{credentialWordsPattern})\s*[:=]\s*(?<suffix>.+)$", RegexOptions.IgnoreCase);
+                passwordValuePattern = new Regex($@"\b(?<credential>{credentialWordsPattern})\s*[:=]\s*(?<suffix>.+)$", RegexOptions.IgnoreCase, RegexTimeout);
             }
         }
 
@@ -178,28 +178,20 @@ namespace SonarAnalyzer.Rules
 
         private string IssueMessage(string variableName, string variableValue)
         {
-            try
+            if (string.IsNullOrWhiteSpace(variableValue))
             {
-                if (string.IsNullOrWhiteSpace(variableValue))
-                {
-                    return null;
-                }
-                else if (FindCredentialWords(variableName, variableValue) is var bannedWords && bannedWords.Any())
-                {
-                    return string.Format(MessageFormatCredential, bannedWords.JoinAnd());
-                }
-                else if (ContainsUriUserInfo(variableValue))
-                {
-                    return MessageUriUserInfo;
-                }
-                else
-                {
-                    return null;
-                }
+                return null;
             }
-            catch (RegexMatchTimeoutException)
+            else if (FindCredentialWords(variableName, variableValue) is var bannedWords && bannedWords.Any())
             {
-                // In case of Regex timeout, we don't want to report an issue.
+                return string.Format(MessageFormatCredential, bannedWords.JoinAnd());
+            }
+            else if (ContainsUriUserInfo(variableValue))
+            {
+                return MessageUriUserInfo;
+            }
+            else
+            {
                 return null;
             }
         }
@@ -217,7 +209,7 @@ namespace SonarAnalyzer.Rules
                 return Enumerable.Empty<string>();
             }
 
-            var match = passwordValuePattern.Match(variableValue);
+            var match = passwordValuePattern.MatchSilent(variableValue);
             if (match.Success && !IsValidCredential(match.Groups["suffix"].Value))
             {
                 credentialWordsFound.Add(match.Groups["credential"].Value);
@@ -229,18 +221,18 @@ namespace SonarAnalyzer.Rules
 
         private static bool IsValidCredential(string suffix)
         {
-            var candidateCredential = suffix.Split(CredentialSeparator).First().Trim();
-            return string.IsNullOrWhiteSpace(candidateCredential) || ValidCredentialPattern.IsMatch(candidateCredential);
+            var candidateCredential = suffix.Split(CredentialSeparator)[0].Trim();
+            return string.IsNullOrWhiteSpace(candidateCredential) || ValidCredentialPattern.IsMatchSilent(candidateCredential);
         }
 
         private static bool ContainsUriUserInfo(string variableValue)
         {
-            var match = UriUserInfoPattern.Match(variableValue);
+            var match = UriUserInfoPattern.MatchSilent(variableValue);
             return match.Success
                 && match.Groups["Password"].Value is { } password
                 && !string.Equals(match.Groups["Login"].Value, password, StringComparison.OrdinalIgnoreCase)
                 && password != CredentialSeparator.ToString()
-                && !ValidCredentialPattern.IsMatch(password);
+                && !ValidCredentialPattern.IsMatchSilent(password);
         }
 
         protected abstract class CredentialWordsFinderBase<TSyntaxNode>
