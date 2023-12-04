@@ -32,7 +32,7 @@ public class RegexExtensionsTest
     [TestMethod]
     public void IsMatchSilent_Timeout_ReturnsFalse()
     {
-        var regex = new Regex(TimeoutPattern, RegexOptions.None, TimeSpan.FromMilliseconds(0.0001));
+        var regex = new Regex(TimeoutPattern, RegexOptions.None, TimeSpan.FromTicks(1));
 
         regex.IsMatchSilent(@"C:\Users\username\AppData\Local\Temp\00af5451-626f-40db-af1d-89d376dc5ef6\SomeFile.csproj").Should().BeFalse();
     }
@@ -52,7 +52,7 @@ public class RegexExtensionsTest
     [TestMethod]
     public void MatchSilent_Timeout_ReturnsEmpty()
     {
-        var regex = new Regex(TimeoutPattern, RegexOptions.None, TimeSpan.FromMilliseconds(0.0001));
+        var regex = new Regex(TimeoutPattern, RegexOptions.None, TimeSpan.FromTicks(1));
 
         regex.MatchSilent(@"C:\Users\username\AppData\Local\Temp\00af5451-626f-40db-af1d-89d376dc5ef6\SomeFile.csproj").Should().Be(Match.Empty);
     }
