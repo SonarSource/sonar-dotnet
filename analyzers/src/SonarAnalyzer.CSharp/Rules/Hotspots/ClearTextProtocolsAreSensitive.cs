@@ -86,6 +86,7 @@ namespace SonarAnalyzer.Rules.CSharp
                                                   ImmutableArray.Create(KnownType.System_Net_Mail_SmtpClient, KnownType.System_Net_FtpWebRequest),
                                                   propertyName => propertyName == EnableSslName);
 
+        private static readonly TimeSpan RegexTimeout = TimeSpan.FromMilliseconds(250);
         private static readonly Regex HttpRegex;
         private static readonly Regex FtpRegex;
         private static readonly Regex TelnetRegex;
@@ -144,7 +145,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 context.ReportIssue(Diagnostic.Create(EnableSslRule, objectCreation.Expression.GetLocation()));
             }
-            else if (objectCreation.TypeAsString(context.SemanticModel) is { } typeAsString && TelnetRegexForIdentifier.IsMatch(typeAsString))
+            else if (objectCreation.TypeAsString(context.SemanticModel) is { } typeAsString && TelnetRegexForIdentifier.SafeIsMatch(typeAsString))
             {
                 context.ReportIssue(Diagnostic.Create(DefaultRule, objectCreation.Expression.GetLocation(), TelnetKey, RecommendedProtocols[TelnetKey]));
             }
@@ -153,7 +154,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void VisitInvocationExpression(SonarSyntaxNodeReportingContext context)
         {
             var invocation = (InvocationExpressionSyntax)context.Node;
-            if (TelnetRegexForIdentifier.IsMatch(invocation.Expression.ToString()))
+            if (TelnetRegexForIdentifier.SafeIsMatch(invocation.Expression.ToString()))
             {
                 context.ReportIssue(Diagnostic.Create(DefaultRule, invocation.GetLocation(), TelnetKey, RecommendedProtocols[TelnetKey]));
             }
@@ -181,20 +182,20 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsServerSafe(IObjectCreation objectCreation, SemanticModel semanticModel) =>
             objectCreation.ArgumentList?.Arguments.Count > 0
-            && ValidServerRegex.IsMatch(GetText(objectCreation.ArgumentList.Arguments[0].Expression, semanticModel));
+            && ValidServerRegex.SafeIsMatch(GetText(objectCreation.ArgumentList.Arguments[0].Expression, semanticModel));
 
         private static string GetUnsafeProtocol(SyntaxNode node, SemanticModel semanticModel)
         {
             var text = GetText(node, semanticModel);
-            if (HttpRegex.IsMatch(text) && !IsNamespace(semanticModel, node.Parent))
+            if (HttpRegex.SafeIsMatch(text) && !IsNamespace(semanticModel, node.Parent))
             {
                 return "http";
             }
-            else if (FtpRegex.IsMatch(text))
+            else if (FtpRegex.SafeIsMatch(text))
             {
                 return "ftp";
             }
-            else if (TelnetRegex.IsMatch(text))
+            else if (TelnetRegex.SafeIsMatch(text))
             {
                 return "telnet";
             }
@@ -241,7 +242,7 @@ namespace SonarAnalyzer.Rules.CSharp
             };
 
         private static bool IsAttributeWithNamespaceParameter(SemanticModel model, AttributeSyntax attribute) =>
-            model.GetSymbolInfo(attribute).Symbol is IMethodSymbol { ContainingType: { } attributeSymbol } && AttributesWithNamespaceParameter.Any(x => x.Matches(attributeSymbol));
+            model.GetSymbolInfo(attribute).Symbol is IMethodSymbol { ContainingType: { } attributeSymbol } && Array.Exists(AttributesWithNamespaceParameter, x => x.Matches(attributeSymbol));
 
         private static bool TokenContainsNamespace(SyntaxToken token) =>
             token.Text.IndexOf("Namespace", StringComparison.OrdinalIgnoreCase) != -1;
@@ -249,6 +250,6 @@ namespace SonarAnalyzer.Rules.CSharp
         private static Regex CompileRegex(string pattern, bool ignoreCase = true) =>
             new(pattern, ignoreCase
                           ? RegexOptions.Compiled | RegexOptions.IgnoreCase
-                          : RegexOptions.Compiled, RegexConstants.DefaultTimeout);
+                          : RegexOptions.Compiled, RegexTimeout);
     }
 }

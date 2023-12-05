@@ -38,7 +38,8 @@ namespace SonarAnalyzer.Rules
         private const string MessageUriUserInfo = "Review this hard-coded URI, which may contain a credential.";
         private const string DefaultCredentialWords = "password, passwd, pwd, passphrase";
 
-        private static readonly Regex ValidCredentialPattern = new(@"^(\?|:\w+|\{\d+[^}]*\}|""|')$", RegexOptions.IgnoreCase | RegexOptions.Compiled, RegexConstants.DefaultTimeout);
+        private static readonly TimeSpan RegexTimeout = TimeSpan.FromMilliseconds(250);
+        private static readonly Regex ValidCredentialPattern = new(@"^(\?|:\w+|\{\d+[^}]*\}|""|')$", RegexOptions.IgnoreCase | RegexOptions.Compiled, RegexTimeout);
         private static readonly Regex UriUserInfoPattern = CreateUriUserInfoPattern();
 
         private readonly IAnalyzerConfiguration configuration;
@@ -64,7 +65,7 @@ namespace SonarAnalyzer.Rules
                 var split = SplitCredentialWordsByComma(credentialWords);
                 splitCredentialWords = split;
                 var credentialWordsPattern = split.Select(Regex.Escape).JoinStr("|");
-                passwordValuePattern = new Regex($@"\b(?<credential>{credentialWordsPattern})\s*[:=]\s*(?<suffix>.+)$", RegexOptions.IgnoreCase);
+                passwordValuePattern = new Regex($@"\b(?<credential>{credentialWordsPattern})\s*[:=]\s*(?<suffix>.+)$", RegexOptions.IgnoreCase, RegexTimeout);
             }
         }
 
@@ -91,7 +92,7 @@ namespace SonarAnalyzer.Rules
             // See https://tools.ietf.org/html/rfc3986 Userinfo can contain groups: unreserved | pct-encoded | sub-delims
             var loginGroup = CreateUserInfoGroup("Login");
             var passwordGroup = CreateUserInfoGroup("Password", ":");   // Additional ":" to capture passwords containing it
-            return new Regex(@$"\w+:\/\/{loginGroup}:{passwordGroup}@", RegexOptions.Compiled, RegexConstants.DefaultTimeout);
+            return new Regex(@$"\w+:\/\/{loginGroup}:{passwordGroup}@", RegexOptions.Compiled, RegexTimeout);
 
             static string CreateUserInfoGroup(string name, string additionalCharacters = null) =>
                 $@"(?<{name}>[\w\d{Regex.Escape(UriPasswordSpecialCharacters)}{additionalCharacters}]+)";
@@ -208,7 +209,7 @@ namespace SonarAnalyzer.Rules
                 return Enumerable.Empty<string>();
             }
 
-            var match = passwordValuePattern.Match(variableValue);
+            var match = passwordValuePattern.SafeMatch(variableValue);
             if (match.Success && !IsValidCredential(match.Groups["suffix"].Value))
             {
                 credentialWordsFound.Add(match.Groups["credential"].Value);
@@ -220,18 +221,18 @@ namespace SonarAnalyzer.Rules
 
         private static bool IsValidCredential(string suffix)
         {
-            var candidateCredential = suffix.Split(CredentialSeparator).First().Trim();
-            return string.IsNullOrWhiteSpace(candidateCredential) || ValidCredentialPattern.IsMatch(candidateCredential);
+            var candidateCredential = suffix.Split(CredentialSeparator)[0].Trim();
+            return string.IsNullOrWhiteSpace(candidateCredential) || ValidCredentialPattern.SafeIsMatch(candidateCredential);
         }
 
         private static bool ContainsUriUserInfo(string variableValue)
         {
-            var match = UriUserInfoPattern.Match(variableValue);
+            var match = UriUserInfoPattern.SafeMatch(variableValue);
             return match.Success
                 && match.Groups["Password"].Value is { } password
                 && !string.Equals(match.Groups["Login"].Value, password, StringComparison.OrdinalIgnoreCase)
                 && password != CredentialSeparator.ToString()
-                && !ValidCredentialPattern.IsMatch(password);
+                && !ValidCredentialPattern.SafeIsMatch(password);
         }
 
         protected abstract class CredentialWordsFinderBase<TSyntaxNode>
