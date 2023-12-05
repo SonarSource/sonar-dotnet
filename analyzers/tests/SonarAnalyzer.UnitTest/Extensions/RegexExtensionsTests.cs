@@ -26,46 +26,28 @@ namespace SonarAnalyzer.UnitTest.Extensions;
 [TestClass]
 public class RegexExtensionsTest
 {
+    // https://stackoverflow.com/questions/3403512/regex-match-take-a-very-long-time-to-execute
+    // Regular expression with catastrophic backtracking to ensure timeout exception when a small timeout is set
     private const string TimeoutPattern =
-        "^((?<DRIVE>[a-zA-Z]):\\\\)*((?<DIR>[a-zA-Z0-9_]+(([a-zA-Z0-9_\\s_\\-\\.]*[a-zA-Z0-9_]+)|([a-zA-Z0-9_]+)))\\\\)*(?<FILE>([a-zA-Z0-9_]+(([a-zA-Z0-9_\\s_\\-\\.]*[a-zA-Z0-9_]+)|([a-zA-Z0-9_]+))\\.(?<EXTENSION>[a-zA-Z0-9]{1,6})$))";
+        @"^((?<DRIVE>[a-zA-Z]):\\)*((?<DIR>[a-zA-Z0-9_]+(([a-zA-Z0-9_\s_\-\.]*[a-zA-Z0-9_]+)|([a-zA-Z0-9_]+)))\\)*(?<FILE>([a-zA-Z0-9_]+(([a-zA-Z0-9_\s_\-\.]*[a-zA-Z0-9_]+)|([a-zA-Z0-9_]+))\.(?<EXTENSION>[a-zA-Z0-9]{1,6})$))";
 
     [TestMethod]
-    public void IsMatchSilent_Timeout_ReturnsFalse()
+    [DataRow(1, false)]
+    [DataRow(1_000_000, true)]
+    public void SafeIsMatch_Timeout(long timeoutTicks, bool matchSucceed)
     {
-        var regex = new Regex(TimeoutPattern, RegexOptions.None, TimeSpan.FromTicks(1));
+        var regex = new Regex(TimeoutPattern, RegexOptions.None, TimeSpan.FromTicks(timeoutTicks));
 
-        regex.IsMatchSilent(@"C:\Users\username\AppData\Local\Temp\00af5451-626f-40db-af1d-89d376dc5ef6\SomeFile.csproj").Should().BeFalse();
+        regex.SafeIsMatch(@"C:\Users\username\AppData\Local\Temp\00af5451-626f-40db-af1d-89d376dc5ef6\SomeFile.csproj").Should().Be(matchSucceed);
     }
 
     [TestMethod]
-    [DataRow("a", "a", true)]
-    [DataRow("a", "b", false)]
-    [DataRow("\\w+", "abc123", true)]
-    [DataRow("\\W+", "abc123", false)]
-    public void IsMatchSilent_NoTimeout_ReturnsExpectedResult(string pattern, string input, bool expectedResult)
+    [DataRow(1, false)]
+    [DataRow(1_000_000, true)]
+    public void SafeMatch_Timeout(long timeoutTicks, bool matchSucceed)
     {
-        var regex = new Regex(pattern, RegexOptions.None, TimeSpan.FromMilliseconds(500));
+        var regex = new Regex(TimeoutPattern, RegexOptions.None, TimeSpan.FromTicks(timeoutTicks));
 
-        regex.IsMatchSilent(input).Should().Be(expectedResult);
-    }
-
-    [TestMethod]
-    public void MatchSilent_Timeout_ReturnsEmpty()
-    {
-        var regex = new Regex(TimeoutPattern, RegexOptions.None, TimeSpan.FromTicks(1));
-
-        regex.MatchSilent(@"C:\Users\username\AppData\Local\Temp\00af5451-626f-40db-af1d-89d376dc5ef6\SomeFile.csproj").Should().Be(Match.Empty);
-    }
-
-    [TestMethod]
-    [DataRow("a", "a", true)]
-    [DataRow("a", "b", false)]
-    [DataRow("\\w+", "abc123", true)]
-    [DataRow("\\W+", "abc123", false)]
-    public void MatchSilent_NoTimeout_ReturnsExpectedResult(string pattern, string input, bool expectedResult)
-    {
-        var regex = new Regex(pattern, RegexOptions.None, TimeSpan.FromMilliseconds(500));
-
-        regex.MatchSilent(input).Success.Should().Be(expectedResult);
+        regex.SafeMatch(@"C:\Users\username\AppData\Local\Temp\00af5451-626f-40db-af1d-89d376dc5ef6\SomeFile.csproj").Success.Should().Be(matchSucceed);
     }
 }

@@ -209,7 +209,7 @@ namespace SonarAnalyzer.Rules
                 return Enumerable.Empty<string>();
             }
 
-            var match = passwordValuePattern.MatchSilent(variableValue);
+            var match = passwordValuePattern.SafeMatch(variableValue);
             if (match.Success && !IsValidCredential(match.Groups["suffix"].Value))
             {
                 credentialWordsFound.Add(match.Groups["credential"].Value);
@@ -222,17 +222,17 @@ namespace SonarAnalyzer.Rules
         private static bool IsValidCredential(string suffix)
         {
             var candidateCredential = suffix.Split(CredentialSeparator)[0].Trim();
-            return string.IsNullOrWhiteSpace(candidateCredential) || ValidCredentialPattern.IsMatchSilent(candidateCredential);
+            return string.IsNullOrWhiteSpace(candidateCredential) || ValidCredentialPattern.SafeIsMatch(candidateCredential);
         }
 
         private static bool ContainsUriUserInfo(string variableValue)
         {
-            var match = UriUserInfoPattern.MatchSilent(variableValue);
+            var match = UriUserInfoPattern.SafeMatch(variableValue);
             return match.Success
                 && match.Groups["Password"].Value is { } password
                 && !string.Equals(match.Groups["Login"].Value, password, StringComparison.OrdinalIgnoreCase)
                 && password != CredentialSeparator.ToString()
-                && !ValidCredentialPattern.IsMatchSilent(password);
+                && !ValidCredentialPattern.SafeIsMatch(password);
         }
 
         protected abstract class CredentialWordsFinderBase<TSyntaxNode>

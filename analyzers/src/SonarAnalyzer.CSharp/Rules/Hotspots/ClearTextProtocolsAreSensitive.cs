@@ -145,7 +145,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 context.ReportIssue(Diagnostic.Create(EnableSslRule, objectCreation.Expression.GetLocation()));
             }
-            else if (objectCreation.TypeAsString(context.SemanticModel) is { } typeAsString && TelnetRegexForIdentifier.IsMatchSilent(typeAsString))
+            else if (objectCreation.TypeAsString(context.SemanticModel) is { } typeAsString && TelnetRegexForIdentifier.SafeIsMatch(typeAsString))
             {
                 context.ReportIssue(Diagnostic.Create(DefaultRule, objectCreation.Expression.GetLocation(), TelnetKey, RecommendedProtocols[TelnetKey]));
             }
@@ -154,7 +154,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void VisitInvocationExpression(SonarSyntaxNodeReportingContext context)
         {
             var invocation = (InvocationExpressionSyntax)context.Node;
-            if (TelnetRegexForIdentifier.IsMatchSilent(invocation.Expression.ToString()))
+            if (TelnetRegexForIdentifier.SafeIsMatch(invocation.Expression.ToString()))
             {
                 context.ReportIssue(Diagnostic.Create(DefaultRule, invocation.GetLocation(), TelnetKey, RecommendedProtocols[TelnetKey]));
             }
@@ -182,20 +182,20 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsServerSafe(IObjectCreation objectCreation, SemanticModel semanticModel) =>
             objectCreation.ArgumentList?.Arguments.Count > 0
-            && ValidServerRegex.IsMatchSilent(GetText(objectCreation.ArgumentList.Arguments[0].Expression, semanticModel));
+            && ValidServerRegex.SafeIsMatch(GetText(objectCreation.ArgumentList.Arguments[0].Expression, semanticModel));
 
         private static string GetUnsafeProtocol(SyntaxNode node, SemanticModel semanticModel)
         {
             var text = GetText(node, semanticModel);
-            if (HttpRegex.IsMatchSilent(text) && !IsNamespace(semanticModel, node.Parent))
+            if (HttpRegex.SafeIsMatch(text) && !IsNamespace(semanticModel, node.Parent))
             {
                 return "http";
             }
-            else if (FtpRegex.IsMatchSilent(text))
+            else if (FtpRegex.SafeIsMatch(text))
             {
                 return "ftp";
             }
-            else if (TelnetRegex.IsMatchSilent(text))
+            else if (TelnetRegex.SafeIsMatch(text))
             {
                 return "telnet";
             }

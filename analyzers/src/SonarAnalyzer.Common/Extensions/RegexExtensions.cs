@@ -24,7 +24,10 @@ namespace SonarAnalyzer.Extensions;
 
 public static class RegexExtensions
 {
-    public static bool IsMatchSilent(this Regex regex, string input)
+    /// <summary>
+    /// Matches the input to the regex. Returns <see langword = "false" /> in case of an <see cref="RegexMatchTimeoutException" />.
+    /// </summary>
+    public static bool SafeIsMatch(this Regex regex, string input)
     {
         try
         {
@@ -36,7 +39,10 @@ public static class RegexExtensions
         }
     }
 
-    public static Match MatchSilent(this Regex regex, string input)
+    /// <summary>
+    /// Matches the input to the regex. Returns <see langword = "Match.Empty" /> in case of an <see cref="RegexMatchTimeoutException" />.
+    /// </summary>
+    public static Match SafeMatch(this Regex regex, string input)
     {
         try
         {
