@@ -53,8 +53,7 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
     public override ProgramState ConditionEvaluated(SymbolicContext context)
     {
         var operation = context.Operation.Instance;
-        if (context.State.Constraint<BoolConstraint>(operation) is { } constraint
-            && !IsIgnored(context.State, operation))
+        if (!IsIgnored(context.State, operation))
         {
             var constraint = context.State.Constraint<BoolConstraint>(operation);
             if (constraint == BoolConstraint.True)
@@ -75,14 +74,13 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
 
     private bool IsIgnored(ProgramState state, IOperation operation) =>
         operation.Kind is OperationKindEx.Literal
-        || IsVarPatternInSwitchArm(operation)
+        || IsVarPattern(operation)
         || IsDiscardPattern(operation)
         || operation.TrackedSymbol(state) is IFieldSymbol { IsConst: true }
         || operation.Syntax.Ancestors().Any(x => IsInsideUsingDeclaration(x) || IsLockStatement(x));
 
-    private static bool IsVarPatternInSwitchArm(IOperation operation) =>
-        operation.AsIsPattern()?.Pattern.WrappedOperation.AsDeclarationPattern()?.MatchesNull is true
-        && operation.Syntax.IsKind(SyntaxKindEx.SwitchExpressionArm);
+    private static bool IsVarPattern(IOperation operation) =>
+        operation.AsIsPattern()?.Pattern.WrappedOperation.AsDeclarationPattern()?.MatchesNull is true;
 
     private static bool IsDiscardPattern(IOperation operation) =>
         operation.AsIsPattern() is { } pattern
