@@ -565,6 +565,11 @@ class Repro_8326
             Console.WriteLine();
         else
             Console.WriteLine();    // Secondary
+
+        if (i is var x2 && x2 > 10) // Noncompliant {{Change this condition so that it does not always evaluate to 'True'.}} FP
+            Console.WriteLine();
+        else
+            Console.WriteLine();
     }
 }
 
