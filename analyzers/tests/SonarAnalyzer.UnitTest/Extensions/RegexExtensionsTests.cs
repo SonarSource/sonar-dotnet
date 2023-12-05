@@ -32,22 +32,26 @@ public class RegexExtensionsTest
         @"^((?<DRIVE>[a-zA-Z]):\\)*((?<DIR>[a-zA-Z0-9_]+(([a-zA-Z0-9_\s_\-\.]*[a-zA-Z0-9_]+)|([a-zA-Z0-9_]+)))\\)*(?<FILE>([a-zA-Z0-9_]+(([a-zA-Z0-9_\s_\-\.]*[a-zA-Z0-9_]+)|([a-zA-Z0-9_]+))\.(?<EXTENSION>[a-zA-Z0-9]{1,6})$))";
 
     [TestMethod]
-    [DataRow(1, false)]
-    [DataRow(1_000_000, true)]
-    public void SafeIsMatch_Timeout(long timeoutTicks, bool matchSucceed)
+    [DataRow(@"C:\Users\username\AppData\Local\Temp\00af5451-626f-40db-af1d-89d376dc5ef6\SomeFile.csproj", 1, false)]
+    [DataRow(@"C:\Users\username\AppData\Local\Temp\00af5451-626f-40db-af1d-89d376dc5ef6\SomeFile.csproj", 1_000_000, true)]
+    [DataRow(@"äöü", 1, false)]
+    [DataRow(@"äöü", 1_000_000, false)]
+    public void SafeIsMatch_Timeout(string input, long timeoutTicks, bool matchSucceed)
     {
         var regex = new Regex(TimeoutPattern, RegexOptions.None, TimeSpan.FromTicks(timeoutTicks));
 
-        regex.SafeIsMatch(@"C:\Users\username\AppData\Local\Temp\00af5451-626f-40db-af1d-89d376dc5ef6\SomeFile.csproj").Should().Be(matchSucceed);
+        regex.SafeIsMatch(input).Should().Be(matchSucceed);
     }
 
     [TestMethod]
-    [DataRow(1, false)]
-    [DataRow(1_000_000, true)]
-    public void SafeMatch_Timeout(long timeoutTicks, bool matchSucceed)
+    [DataRow(@"C:\Users\username\AppData\Local\Temp\00af5451-626f-40db-af1d-89d376dc5ef6\SomeFile.csproj", 1, false)]
+    [DataRow(@"C:\Users\username\AppData\Local\Temp\00af5451-626f-40db-af1d-89d376dc5ef6\SomeFile.csproj", 1_000_000, true)]
+    [DataRow(@"äöü", 1, false)]
+    [DataRow(@"äöü", 1_000_000, false)]
+    public void SafeMatch_Timeout(string input, long timeoutTicks, bool matchSucceed)
     {
         var regex = new Regex(TimeoutPattern, RegexOptions.None, TimeSpan.FromTicks(timeoutTicks));
 
-        regex.SafeMatch(@"C:\Users\username\AppData\Local\Temp\00af5451-626f-40db-af1d-89d376dc5ef6\SomeFile.csproj").Success.Should().Be(matchSucceed);
+        regex.SafeMatch(input).Success.Should().Be(matchSucceed);
     }
 }
