@@ -3429,3 +3429,14 @@ public class Repro_8428
         }
     }
 }
+
+// Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/8445
+public class Repro_8445
+{
+    private static readonly int readonlyField = 42;
+    private void Test()
+    {
+        if (readonlyField == 42)    // FN
+            Console.WriteLine();
+    }
+}
