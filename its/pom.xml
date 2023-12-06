@@ -28,14 +28,14 @@
     <dependency>
       <groupId>org.sonarsource.orchestrator</groupId>
       <artifactId>sonar-orchestrator-junit5</artifactId>
-      <version>4.4.0.1640</version>
+      <version>4.6.0.1748</version>
     </dependency>
     <dependency>
       <groupId>org.sonarsource.scanner.msbuild</groupId>
-      <artifactId>sonar-scanner-msbuild</artifactId>
+      <artifactId>sonar-scanner</artifactId>
       <version>${scannerMsbuild.version}</version>
       <type>zip</type>
-      <classifier>net46</classifier>
+      <classifier>net-framework</classifier>
     </dependency>
     <dependency>
       <groupId>org.sonarsource.sonarqube</groupId>
