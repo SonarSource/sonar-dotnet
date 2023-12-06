@@ -156,11 +156,11 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
         {
             if (existingNumber is not null)
             {
-                if ((newMin is null || (existingNumber.Min > newMin && EvaluateBranchingCondition(isLoopCondition, visitCount))) && !(existingNumber.Min > newMax))
+                if ((newMin is null || (existingNumber.Min > newMin)) && !(existingNumber.Min > newMax))
                 {
                     newMin = existingNumber.Min;
                 }
-                if ((newMax is null || (existingNumber.Max < newMax && EvaluateBranchingCondition(isLoopCondition, visitCount))) && !(existingNumber.Max < newMin))
+                if ((newMax is null || (existingNumber.Max < newMax)) && !(existingNumber.Max < newMin))
                 {
                     newMax = existingNumber.Max;
                 }
@@ -203,8 +203,7 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
             return BinaryBoolConstraint(kind, leftBool == BoolConstraint.True, rightBool == BoolConstraint.True);
         }
         else if (left?.Constraint<NumberConstraint>() is { } leftNumber
-            && right?.Constraint<NumberConstraint>() is { } rightNumber
-            && EvaluateBranchingCondition(isLoopCondition, visitCount))
+            && right?.Constraint<NumberConstraint>() is { } rightNumber)
         {
             return BinaryNumberConstraint(kind, leftNumber, rightNumber);
         }
@@ -267,10 +266,4 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
                 _ => null
             }
             : null;
-
-    // Fixed loops:
-    // 1st visit decides on the initial value. We don't learn from binary comparison.
-    // 2nd visit does not decide on the current value. It learns range from binary comparison instead to be able to exit the loop.
-    private static bool EvaluateBranchingCondition(bool isLoopCondition, int visitCount) =>
-        visitCount == 1 || !isLoopCondition;
 }

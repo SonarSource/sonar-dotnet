@@ -402,9 +402,9 @@ class Repro_7088
             sb.Append(i);
         }
 
-        if (sb is null) // FN
+        if (sb is null) // Noncompliant
         {
-            Console.WriteLine("NULL");
+            Console.WriteLine("NULL");  // Secondary
         }
 
         Console.WriteLine(sb);

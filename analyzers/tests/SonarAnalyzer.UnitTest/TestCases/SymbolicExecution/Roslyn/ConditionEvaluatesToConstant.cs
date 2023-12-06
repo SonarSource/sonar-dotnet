@@ -279,18 +279,18 @@ namespace Tests.Diagnostics
         public void Method6(bool cond)
         {
             var i = 10;
-            while (i < 20)
+            while (i < 20)  // Noncompliant FP
             {
                 i = i + 1;
             }
 
-            var b = true;
-            while (b)               // Noncompliant
+            var b = true;   // Secondary
+            while (b)               // FN
             {
                 Console.WriteLine();
             }
 
-            Console.WriteLine();    // Secondary
+            Console.WriteLine();    // FN 2ndary
         }
 
         public void Method7(bool cond)
