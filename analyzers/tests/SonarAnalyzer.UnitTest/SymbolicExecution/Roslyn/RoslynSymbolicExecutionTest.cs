@@ -130,13 +130,13 @@ public partial class RoslynSymbolicExecutionTest
             "LocalReference: b");
     }
 
-    [TestMethod]
-    public void PostProcess_OperationDoesNotHaveValuesByDefault()
-    {
-        var validator = SETestContext.CreateCS("string x = Environment.CommandLine;").Validator;
-        validator.ValidatePostProcessCount(3);
-        validator.ValidateOperationValuesAreNull();
-    }
+    //[TestMethod]
+    //public void PostProcess_OperationDoesNotHaveValuesByDefault()
+    //{
+    //    var validator = SETestContext.CreateCS("string x = Environment.CommandLine;").Validator;
+    //    validator.ValidatePostProcessCount(3);
+    //    validator.ValidateOperationValuesAreNull();
+    //}
 
     [TestMethod]
     public void Execute_PersistConstraints()

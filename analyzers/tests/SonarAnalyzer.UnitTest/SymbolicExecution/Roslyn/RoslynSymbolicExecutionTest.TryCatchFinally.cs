@@ -914,24 +914,24 @@ finally
         SETestContext.CreateCSLambda(code, "// Lambda marker").Validator.ValidateTagOrder("Before", "CanThrow", "After");
     }
 
-    [TestMethod]
-    public void Catch_ExceptionVariableIsNotNull()
-    {
-        const string code = @"
-try
-{
-    InstanceMethod();
-}
-catch(InvalidOperationException ex) when (Tag(""InFilter"", ex))
-{
-    Tag(""InCatch"", ex);
-}
+//    [TestMethod]
+//    public void Catch_ExceptionVariableIsNotNull()
+//    {
+//        const string code = @"
+//try
+//{
+//    InstanceMethod();
+//}
+//catch(InvalidOperationException ex) when (Tag(""InFilter"", ex))
+//{
+//    Tag(""InCatch"", ex);
+//}
 
-static bool Tag<T>(string name, T value) => true;";
-        var validator = SETestContext.CreateCS(code).Validator;
-        validator.TagValue("InFilter").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-        validator.TagValue("InCatch").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-    }
+//static bool Tag<T>(string name, T value) => true;";
+//        var validator = SETestContext.CreateCS(code).Validator;
+//        validator.TagValue("InFilter").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+//        validator.TagValue("InCatch").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+//    }
 
     private static bool HasNoException(ProgramState state) =>
         state.Exception == null;

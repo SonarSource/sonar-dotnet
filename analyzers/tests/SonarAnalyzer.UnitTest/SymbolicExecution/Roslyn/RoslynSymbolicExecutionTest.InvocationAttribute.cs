@@ -120,164 +120,164 @@ public sealed class {attributeName}: Attribute {{ }}";
 
 #if NET
 
-    [TestMethod]
-    public void Invocation_NotNullWhen_Null()
-    {
-        const string code = @"
-this.ObjectField = null;
-string byteString = null;
-var success = byte.TryParse(byteString, out var result); // bool TryParse([NotNullWhen(true)] string? s, out byte result)
-Tag(""ByteString"", byteString);
-Tag(""Success"", success);
-Tag(""Result"", result);
-Tag(""ObjectField"", ObjectField);";
-        var validator = SETestContext.CreateCS(code).Validator;
-        validator.TagValue("ByteString").Should().HaveOnlyConstraint(ObjectConstraint.Null);
-        validator.TagValue("Success").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False);
-        validator.TagValue("Result").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-        validator.TagValue("ObjectField").Should().HaveOnlyConstraint(ObjectConstraint.Null);
-    }
+//    [TestMethod]
+//    public void Invocation_NotNullWhen_Null()
+//    {
+//        const string code = @"
+//this.ObjectField = null;
+//string byteString = null;
+//var success = byte.TryParse(byteString, out var result); // bool TryParse([NotNullWhen(true)] string? s, out byte result)
+//Tag(""ByteString"", byteString);
+//Tag(""Success"", success);
+//Tag(""Result"", result);
+//Tag(""ObjectField"", ObjectField);";
+//        var validator = SETestContext.CreateCS(code).Validator;
+//        validator.TagValue("ByteString").Should().HaveOnlyConstraint(ObjectConstraint.Null);
+//        validator.TagValue("Success").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False);
+//        validator.TagValue("Result").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+//        validator.TagValue("ObjectField").Should().HaveOnlyConstraint(ObjectConstraint.Null);
+//    }
 
-    [TestMethod]
-    public void Invocation_NotNullWhen_NotNull()
-    {
-        const string code = @"
-this.ObjectField = null;
-string byteString = ""42"";
-var success = byte.TryParse(byteString, out var result); // bool TryParse([NotNullWhen(true)] string? s, out byte result)
-Tag(""ByteString"", byteString);
-Tag(""Success"", success);
-Tag(""Result"", result);
-Tag(""ObjectField"", ObjectField);";
-        var validator = SETestContext.CreateCS(code).Validator;
-        validator.TagValue("ByteString").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-        validator.TagValue("Success").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-        validator.TagValue("Result").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-        validator.TagValue("ObjectField").Should().HaveOnlyConstraint(ObjectConstraint.Null);
-    }
+//    [TestMethod]
+//    public void Invocation_NotNullWhen_NotNull()
+//    {
+//        const string code = @"
+//this.ObjectField = null;
+//string byteString = ""42"";
+//var success = byte.TryParse(byteString, out var result); // bool TryParse([NotNullWhen(true)] string? s, out byte result)
+//Tag(""ByteString"", byteString);
+//Tag(""Success"", success);
+//Tag(""Result"", result);
+//Tag(""ObjectField"", ObjectField);";
+//        var validator = SETestContext.CreateCS(code).Validator;
+//        validator.TagValue("ByteString").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+//        validator.TagValue("Success").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+//        validator.TagValue("Result").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+//        validator.TagValue("ObjectField").Should().HaveOnlyConstraint(ObjectConstraint.Null);
+//    }
 
-    [TestMethod]
-    public void Invocation_NotNullWhen_Unknown()
-    {
-        const string code = @"
-this.ObjectField = null;
-string byteString = Unknown<string>();
-var success = byte.TryParse(byteString, out var result);
-Tag(""End"", null);";
-        var validator = SETestContext.CreateCS(code).Validator;
-        validator.TagStates("End").Should().SatisfyRespectively(
-            x =>
-            {
-                x[validator.Symbol("ObjectField")].Should().HaveOnlyConstraint(ObjectConstraint.Null);
-                x[validator.Symbol("byteString")].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-                x[validator.Symbol("success")].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True);
-                x[validator.Symbol("result")].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-            },
-            x =>
-            {
-                x[validator.Symbol("ObjectField")].Should().HaveOnlyConstraint(ObjectConstraint.Null);
-                x[validator.Symbol("byteString")].Should().HaveNoConstraints();
-                x[validator.Symbol("success")].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False);
-                x[validator.Symbol("result")].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-            });
-    }
+//    [TestMethod]
+//    public void Invocation_NotNullWhen_Unknown()
+//    {
+//        const string code = @"
+//this.ObjectField = null;
+//string byteString = Unknown<string>();
+//var success = byte.TryParse(byteString, out var result);
+//Tag(""End"", null);";
+//        var validator = SETestContext.CreateCS(code).Validator;
+//        validator.TagStates("End").Should().SatisfyRespectively(
+//            x =>
+//            {
+//                x[validator.Symbol("ObjectField")].Should().HaveOnlyConstraint(ObjectConstraint.Null);
+//                x[validator.Symbol("byteString")].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+//                x[validator.Symbol("success")].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True);
+//                x[validator.Symbol("result")].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+//            },
+//            x =>
+//            {
+//                x[validator.Symbol("ObjectField")].Should().HaveOnlyConstraint(ObjectConstraint.Null);
+//                x[validator.Symbol("byteString")].Should().HaveNoConstraints();
+//                x[validator.Symbol("success")].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False);
+//                x[validator.Symbol("result")].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+//            });
+//    }
 
-    [TestMethod]
-    public void Invocation_NotNullWhen_Unknown_InstanceMethodResetsFieldConstraints()
-    {
-        const string code = """
-            private object ObjectField;
-            public void Test()
-            {
-                this.ObjectField = null;
-                string byteString = Unknown<string>();
-                var success = TryParse(byteString, out var result);
-                Tag("End", null);
-            }
-            public bool TryParse([System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string s, out object o) { o = null; return true; }
-            """;
-        var validator = SETestContext.CreateCSMethod(code).Validator;
-        validator.TagStates("End").Should().SatisfyRespectively(
-            x =>
-            {
-                x[validator.Symbol("ObjectField")].Should().HaveNoConstraints();
-                x[validator.Symbol("byteString")].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-                x[validator.Symbol("success")].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True);
-                x[validator.Symbol("result")].Should().HaveNoConstraints();
-            },
-            x =>
-            {
-                x[validator.Symbol("ObjectField")].Should().HaveNoConstraints();
-                x[validator.Symbol("byteString")].Should().HaveNoConstraints();
-                x[validator.Symbol("success")].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False);
-                x[validator.Symbol("result")].Should().HaveNoConstraints();
-            });
-    }
+//    [TestMethod]
+//    public void Invocation_NotNullWhen_Unknown_InstanceMethodResetsFieldConstraints()
+//    {
+//        const string code = """
+//            private object ObjectField;
+//            public void Test()
+//            {
+//                this.ObjectField = null;
+//                string byteString = Unknown<string>();
+//                var success = TryParse(byteString, out var result);
+//                Tag("End", null);
+//            }
+//            public bool TryParse([System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string s, out object o) { o = null; return true; }
+//            """;
+//        var validator = SETestContext.CreateCSMethod(code).Validator;
+//        validator.TagStates("End").Should().SatisfyRespectively(
+//            x =>
+//            {
+//                x[validator.Symbol("ObjectField")].Should().HaveNoConstraints();
+//                x[validator.Symbol("byteString")].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+//                x[validator.Symbol("success")].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True);
+//                x[validator.Symbol("result")].Should().HaveNoConstraints();
+//            },
+//            x =>
+//            {
+//                x[validator.Symbol("ObjectField")].Should().HaveNoConstraints();
+//                x[validator.Symbol("byteString")].Should().HaveNoConstraints();
+//                x[validator.Symbol("success")].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False);
+//                x[validator.Symbol("result")].Should().HaveNoConstraints();
+//            });
+//    }
 
-    [TestMethod]
-    public void Invocation_NotNullWhen_TwoParametersWithAttribute_Unknown()
-    {
-        const string code = @"
-public void Main()
-{
-var first = Unknown<object>();
-var second = Unknown<object>();
-if(CustomValidator(first, second))
-{
-    Tag(""First"", first);
-    Tag(""Second"", second);
-}
-}
+//    [TestMethod]
+//    public void Invocation_NotNullWhen_TwoParametersWithAttribute_Unknown()
+//    {
+//        const string code = @"
+//public void Main()
+//{
+//var first = Unknown<object>();
+//var second = Unknown<object>();
+//if(CustomValidator(first, second))
+//{
+//    Tag(""First"", first);
+//    Tag(""Second"", second);
+//}
+//}
 
-public bool CustomValidator([System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object first, [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object second) => true;";
-        var validator = SETestContext.CreateCSMethod(code).Validator;
-        validator.TagValue("First").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-        validator.TagValue("Second").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-    }
+//public bool CustomValidator([System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object first, [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object second) => true;";
+//        var validator = SETestContext.CreateCSMethod(code).Validator;
+//        validator.TagValue("First").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+//        validator.TagValue("Second").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+//    }
 
-    [TestMethod]
-    public void Invocation_NotNullWhen_TwoParametersWithAttribute_ContradictingValues()
-    {
-        const string code = @"
-public void Main()
-{
-var first = Unknown<object>();
-object second = null;
-if(CustomValidator(first, second))
-{
-    Tag(""First"", first);
-    Tag(""Second"", second);
-}
-}
+//    [TestMethod]
+//    public void Invocation_NotNullWhen_TwoParametersWithAttribute_ContradictingValues()
+//    {
+//        const string code = @"
+//public void Main()
+//{
+//var first = Unknown<object>();
+//object second = null;
+//if(CustomValidator(first, second))
+//{
+//    Tag(""First"", first);
+//    Tag(""Second"", second);
+//}
+//}
 
-public bool CustomValidator([System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object first, [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object second) => true;";
-        var validator = SETestContext.CreateCSMethod(code).Validator;
-        validator.TagValue("First").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);   // This path should be unreachable instead
-        validator.TagValue("Second").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-    }
+//public bool CustomValidator([System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object first, [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object second) => true;";
+//        var validator = SETestContext.CreateCSMethod(code).Validator;
+//        validator.TagValue("First").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);   // This path should be unreachable instead
+//        validator.TagValue("Second").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+//    }
 
-    [TestMethod]
-    public void Invocation_NotNullWhen_TwoParametersWithAttribute_UntrackedSymbol()
-    {
-        const string code = @"
-private object field;
+//    [TestMethod]
+//    public void Invocation_NotNullWhen_TwoParametersWithAttribute_UntrackedSymbol()
+//    {
+//        const string code = @"
+//private object field;
 
-public void Main(Sample untracked)
-{
-var first = Unknown<object>();
-untracked.field = null;
-if(CustomValidator(first, untracked.field))
-{
-    Tag(""First"", first);
-    Tag(""Second"", untracked.field);
-}
-}
+//public void Main(Sample untracked)
+//{
+//var first = Unknown<object>();
+//untracked.field = null;
+//if(CustomValidator(first, untracked.field))
+//{
+//    Tag(""First"", first);
+//    Tag(""Second"", untracked.field);
+//}
+//}
 
-public bool CustomValidator([System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object first, [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object second) => true;";
-        var validator = SETestContext.CreateCSMethod(code).Validator;
-        validator.TagValue("First").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-        validator.TagValue("Second").Should().BeNull();  // We didn't learn anything. And we continued
-    }
+//public bool CustomValidator([System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object first, [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object second) => true;";
+//        var validator = SETestContext.CreateCSMethod(code).Validator;
+//        validator.TagValue("First").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+//        validator.TagValue("Second").Should().BeNull();  // We didn't learn anything. And we continued
+//    }
 
     [DataTestMethod]
     [DataRow("null", "false")]

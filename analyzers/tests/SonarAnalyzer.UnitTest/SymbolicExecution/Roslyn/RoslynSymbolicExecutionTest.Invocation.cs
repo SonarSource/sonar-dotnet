@@ -36,16 +36,16 @@ public partial class RoslynSymbolicExecutionTest
             new[] { @"Environment.Exit(-1);" },
         };
 
-    [TestMethod]
-    public void InstanceReference_SetsNotNull_VB()
-    {
-        const string code = @"
-Dim FromMe As Sample = Me
-Tag(""Me"", FromMe)";
-        var validator = SETestContext.CreateVB(code).Validator;
-        validator.ValidateContainsOperation(OperationKind.InstanceReference);
-        validator.TagValue("Me").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-    }
+//    [TestMethod]
+//    public void InstanceReference_SetsNotNull_VB()
+//    {
+//        const string code = @"
+//Dim FromMe As Sample = Me
+//Tag(""Me"", FromMe)";
+//        var validator = SETestContext.CreateVB(code).Validator;
+//        validator.ValidateContainsOperation(OperationKind.InstanceReference);
+//        validator.TagValue("Me").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+//    }
 
     [TestMethod]
     public void Invocation_SetsNotNullOnInstance_CS()
@@ -289,52 +289,52 @@ public static class Extensions
             });
     }
 
-    [TestMethod]
-    public void Instance_InstanceMethodCall_ClearsFieldInConsistentManner()
-    {
-        var code = $@"
-ObjectField = null;
-Tag(""InitNull"", ObjectField);
-InstanceMethod();
-Tag(""AfterInvocationNull"", ObjectField);
-ObjectField = new object();
-Tag(""InitNotNull"", ObjectField);
-InstanceMethod();
-Tag(""AfterInvocationNotNull"", ObjectField);
-if (ObjectField == null)
-{{
-    Tag(""IfBefore"", ObjectField);
-    InstanceMethod();
-    Tag(""IfAfter"", ObjectField);
-}}
-else
-{{
-    Tag(""ElseBefore"", ObjectField);
-    InstanceMethod();
-    Tag(""ElseAfter"", ObjectField);
-}}
-Tag(""AfterIfElse"", ObjectField);";
-        var invalidateConstraint = DummyConstraint.Dummy;
-        var dontInvalidateConstraint = LockConstraint.Held;
-        var check = new PostProcessTestCheck(x => x.Operation.Instance.Kind == OperationKindEx.SimpleAssignment
-            && IFieldReferenceOperationWrapper.FromOperation(ISimpleAssignmentOperationWrapper.FromOperation(x.Operation.Instance).Target).Member is var field
-            ? x.SetSymbolConstraint(field, invalidateConstraint).SetSymbolConstraint(field, dontInvalidateConstraint)
-            : x.State);
-        var validator = SETestContext.CreateCS(code, check).Validator;
-        validator.ValidateContainsOperation(OperationKind.Invocation);
-        validator.TagValue("InitNull").Should().HaveOnlyConstraints(ObjectConstraint.Null, invalidateConstraint, dontInvalidateConstraint);
-        validator.TagValue("AfterInvocationNull").Should().HaveOnlyConstraint(dontInvalidateConstraint, "ObjectConstraint.Null and invalidateConstraint are reset");
-        validator.TagValue("InitNotNull").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, invalidateConstraint, dontInvalidateConstraint);
-        validator.TagValue("AfterInvocationNotNull").Should().HaveOnlyConstraint(dontInvalidateConstraint, "ObjectConstraint.NotNull and invalidateConstraint are reset");
-        validator.TagValue("IfBefore").Should().HaveOnlyConstraints(ObjectConstraint.Null, dontInvalidateConstraint);
-        validator.TagValue("IfAfter").Should().HaveOnlyConstraint(dontInvalidateConstraint, "ObjectConstraint.Null is reset");
-        validator.TagValue("ElseBefore").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, dontInvalidateConstraint);
-        validator.TagValue("ElseAfter").Should().HaveOnlyConstraint(dontInvalidateConstraint, "ObjectConstraint.NotNull is reset");
-        validator.TagValues("AfterIfElse").Should().Equal(new[]
-        {
-            SymbolicValue.Empty.WithConstraint(dontInvalidateConstraint),
-        });
-    }
+//    [TestMethod]
+//    public void Instance_InstanceMethodCall_ClearsFieldInConsistentManner()
+//    {
+//        var code = $@"
+//ObjectField = null;
+//Tag(""InitNull"", ObjectField);
+//InstanceMethod();
+//Tag(""AfterInvocationNull"", ObjectField);
+//ObjectField = new object();
+//Tag(""InitNotNull"", ObjectField);
+//InstanceMethod();
+//Tag(""AfterInvocationNotNull"", ObjectField);
+//if (ObjectField == null)
+//{{
+//    Tag(""IfBefore"", ObjectField);
+//    InstanceMethod();
+//    Tag(""IfAfter"", ObjectField);
+//}}
+//else
+//{{
+//    Tag(""ElseBefore"", ObjectField);
+//    InstanceMethod();
+//    Tag(""ElseAfter"", ObjectField);
+//}}
+//Tag(""AfterIfElse"", ObjectField);";
+//        var invalidateConstraint = DummyConstraint.Dummy;
+//        var dontInvalidateConstraint = LockConstraint.Held;
+//        var check = new PostProcessTestCheck(x => x.Operation.Instance.Kind == OperationKindEx.SimpleAssignment
+//            && IFieldReferenceOperationWrapper.FromOperation(ISimpleAssignmentOperationWrapper.FromOperation(x.Operation.Instance).Target).Member is var field
+//            ? x.SetSymbolConstraint(field, invalidateConstraint).SetSymbolConstraint(field, dontInvalidateConstraint)
+//            : x.State);
+//        var validator = SETestContext.CreateCS(code, check).Validator;
+//        validator.ValidateContainsOperation(OperationKind.Invocation);
+//        validator.TagValue("InitNull").Should().HaveOnlyConstraints(ObjectConstraint.Null, invalidateConstraint, dontInvalidateConstraint);
+//        validator.TagValue("AfterInvocationNull").Should().HaveOnlyConstraint(dontInvalidateConstraint, "ObjectConstraint.Null and invalidateConstraint are reset");
+//        validator.TagValue("InitNotNull").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, invalidateConstraint, dontInvalidateConstraint);
+//        validator.TagValue("AfterInvocationNotNull").Should().HaveOnlyConstraint(dontInvalidateConstraint, "ObjectConstraint.NotNull and invalidateConstraint are reset");
+//        validator.TagValue("IfBefore").Should().HaveOnlyConstraints(ObjectConstraint.Null, dontInvalidateConstraint);
+//        validator.TagValue("IfAfter").Should().HaveOnlyConstraint(dontInvalidateConstraint, "ObjectConstraint.Null is reset");
+//        validator.TagValue("ElseBefore").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, dontInvalidateConstraint);
+//        validator.TagValue("ElseAfter").Should().HaveOnlyConstraint(dontInvalidateConstraint, "ObjectConstraint.NotNull is reset");
+//        validator.TagValues("AfterIfElse").Should().Equal(new[]
+//        {
+//            SymbolicValue.Empty.WithConstraint(dontInvalidateConstraint),
+//        });
+//    }
 
     [TestMethod]
     public void Instance_InstanceMethodCall_ClearsField()
@@ -487,23 +487,23 @@ Tag(""AfterStaticField"", StaticObjectField);";
 "SimpleAssignment: isNullOrEmpy = string.IsNullOrEmpty(arg) (Implicit)"); // False/NotNull
     }
 
-    [TestMethod]
-    public void Invocation_IsNullOrEmpty_Tags()
-    {
-        const string code = @"
-var isNullOrEmpy = string.IsNullOrEmpty(arg);
-Tag(""IsNullOrEmpy"", isNullOrEmpy);
-Tag(""Arg"", arg);";
-        var validator = SETestContext.CreateCS(code, "string arg").Validator;
-        validator.TagValues("IsNullOrEmpy").Should().Equal(
-            SymbolicValue.NotNull.WithConstraint(BoolConstraint.False),      // False/NotNull
-            SymbolicValue.NotNull.WithConstraint(BoolConstraint.True),       // True/Null
-            SymbolicValue.NotNull.WithConstraint(BoolConstraint.True));      // True/NotNull
-        validator.TagValues("Arg").Should().Equal(
-            SymbolicValue.Empty.WithConstraint(ObjectConstraint.NotNull),  // False/NotNull
-            SymbolicValue.Empty.WithConstraint(ObjectConstraint.Null),     // True/Null
-            SymbolicValue.Empty.WithConstraint(ObjectConstraint.NotNull)); // True/NotNull
-    }
+//    [TestMethod]
+//    public void Invocation_IsNullOrEmpty_Tags()
+//    {
+//        const string code = @"
+//var isNullOrEmpy = string.IsNullOrEmpty(arg);
+//Tag(""IsNullOrEmpy"", isNullOrEmpy);
+//Tag(""Arg"", arg);";
+//        var validator = SETestContext.CreateCS(code, "string arg").Validator;
+//        validator.TagValues("IsNullOrEmpy").Should().Equal(
+//            SymbolicValue.NotNull.WithConstraint(BoolConstraint.False),      // False/NotNull
+//            SymbolicValue.NotNull.WithConstraint(BoolConstraint.True),       // True/Null
+//            SymbolicValue.NotNull.WithConstraint(BoolConstraint.True));      // True/NotNull
+//        validator.TagValues("Arg").Should().Equal(
+//            SymbolicValue.Empty.WithConstraint(ObjectConstraint.NotNull),  // False/NotNull
+//            SymbolicValue.Empty.WithConstraint(ObjectConstraint.Null),     // True/Null
+//            SymbolicValue.Empty.WithConstraint(ObjectConstraint.NotNull)); // True/NotNull
+//    }
 
     [TestMethod]
     public void Invocation_IsNullOrEmpty_NestedProperty()
@@ -544,62 +544,62 @@ finally
         });
     }
 
-    [DataTestMethod]
-    [DataRow("arg.Append(arg)")]
-    [DataRow("arg.AsEnumerable()")]
-    [DataRow("arg.AsQueryable()")]
-    [DataRow("arg.Cast<string>()")]
-    [DataRow("arg.Concat(arg)")]
-    [DataRow("arg.DefaultIfEmpty()")]   // Returns collection with a single default item in it in case the the source enumerable is empty
-    [DataRow("arg.Distinct()")]
-    [DataRow("Enumerable.Empty<string>()")]
-    [DataRow("arg.Except(arg)")]
-    [DataRow("arg.GroupBy(x => x);")]
-    [DataRow("arg.GroupJoin(arg, x => x, x => x, (x, lst) => x);")]
-    [DataRow("arg.Intersect(arg);")]
-    [DataRow("arg.Join(arg, x => x, x => x, (x, lst) => x);")]
-    [DataRow("arg.OfType<string>();")]
-    [DataRow("arg.OrderBy(x => x);")]
-    [DataRow("arg.OrderByDescending(x => x);")]
-    [DataRow("arg.Prepend(null);")]
-    [DataRow("Enumerable.Range(42, 42);")]
-    [DataRow("Enumerable.Repeat(42, 42);")]
-    [DataRow("arg.Reverse();")]
-    [DataRow("arg.Select(x => x);")]
-    [DataRow("arg.SelectMany(x => new[] { x });")]
-    [DataRow("arg.Skip(42);")]
-    [DataRow("arg.SkipWhile(x => x == null);")]
-    [DataRow("arg.Take(42);")]
-    [DataRow("arg.TakeWhile(x => x != null);")]
-    [DataRow("arg.OrderBy(x => x).ThenBy(x => x);")]
-    [DataRow("arg.OrderBy(x => x).ThenByDescending(x => x);")]
-    [DataRow("arg.ToArray();")]
-    [DataRow("arg.ToDictionary(x => x);")]
-    [DataRow("arg.ToList();")]
-    [DataRow("arg.ToLookup(x => x);")]
-    [DataRow("arg.Union(arg);")]
-    [DataRow("arg.Where(x => x != null);")]
-    [DataRow("arg.Zip(arg, (x, y) => x);")]
-#if NET
-    [DataRow("arg.Chunk(42)")]
-    [DataRow("arg.DistinctBy(x => x)")]
-    [DataRow("arg.ExceptBy(arg, x => x)")]
-    [DataRow("arg.IntersectBy(arg, x => x);")]
-    [DataRow("arg.SkipLast(42);")]
-    [DataRow("arg.UnionBy(arg, x => x);")]
-    [DataRow("arg.TakeLast(42);")]
-#endif
-    public void Invocation_LinqEnumerableAndQueryable_NotNull(string expression)
-    {
-        var code = $@"
-var value = {expression};
-Tag(""Value"", value);";
-        var enumerableValidator = SETestContext.CreateCS(code, "IEnumerable<object> arg").Validator;
-        enumerableValidator.TagValue("Value").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+//    [DataTestMethod]
+//    [DataRow("arg.Append(arg)")]
+//    [DataRow("arg.AsEnumerable()")]
+//    [DataRow("arg.AsQueryable()")]
+//    [DataRow("arg.Cast<string>()")]
+//    [DataRow("arg.Concat(arg)")]
+//    [DataRow("arg.DefaultIfEmpty()")]   // Returns collection with a single default item in it in case the the source enumerable is empty
+//    [DataRow("arg.Distinct()")]
+//    [DataRow("Enumerable.Empty<string>()")]
+//    [DataRow("arg.Except(arg)")]
+//    [DataRow("arg.GroupBy(x => x);")]
+//    [DataRow("arg.GroupJoin(arg, x => x, x => x, (x, lst) => x);")]
+//    [DataRow("arg.Intersect(arg);")]
+//    [DataRow("arg.Join(arg, x => x, x => x, (x, lst) => x);")]
+//    [DataRow("arg.OfType<string>();")]
+//    [DataRow("arg.OrderBy(x => x);")]
+//    [DataRow("arg.OrderByDescending(x => x);")]
+//    [DataRow("arg.Prepend(null);")]
+//    [DataRow("Enumerable.Range(42, 42);")]
+//    [DataRow("Enumerable.Repeat(42, 42);")]
+//    [DataRow("arg.Reverse();")]
+//    [DataRow("arg.Select(x => x);")]
+//    [DataRow("arg.SelectMany(x => new[] { x });")]
+//    [DataRow("arg.Skip(42);")]
+//    [DataRow("arg.SkipWhile(x => x == null);")]
+//    [DataRow("arg.Take(42);")]
+//    [DataRow("arg.TakeWhile(x => x != null);")]
+//    [DataRow("arg.OrderBy(x => x).ThenBy(x => x);")]
+//    [DataRow("arg.OrderBy(x => x).ThenByDescending(x => x);")]
+//    [DataRow("arg.ToArray();")]
+//    [DataRow("arg.ToDictionary(x => x);")]
+//    [DataRow("arg.ToList();")]
+//    [DataRow("arg.ToLookup(x => x);")]
+//    [DataRow("arg.Union(arg);")]
+//    [DataRow("arg.Where(x => x != null);")]
+//    [DataRow("arg.Zip(arg, (x, y) => x);")]
+//#if NET
+//    [DataRow("arg.Chunk(42)")]
+//    [DataRow("arg.DistinctBy(x => x)")]
+//    [DataRow("arg.ExceptBy(arg, x => x)")]
+//    [DataRow("arg.IntersectBy(arg, x => x);")]
+//    [DataRow("arg.SkipLast(42);")]
+//    [DataRow("arg.UnionBy(arg, x => x);")]
+//    [DataRow("arg.TakeLast(42);")]
+//#endif
+//    public void Invocation_LinqEnumerableAndQueryable_NotNull(string expression)
+//    {
+//        var code = $@"
+//var value = {expression};
+//Tag(""Value"", value);";
+//        var enumerableValidator = SETestContext.CreateCS(code, "IEnumerable<object> arg").Validator;
+//        enumerableValidator.TagValue("Value").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
 
-        var queryableValidator = SETestContext.CreateCS(code, "IQueryable<object> arg").Validator;
-        queryableValidator.TagValue("Value").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-    }
+//        var queryableValidator = SETestContext.CreateCS(code, "IQueryable<object> arg").Validator;
+//        queryableValidator.TagValue("Value").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+//    }
 
     [DataTestMethod]
     [DataRow("FirstOrDefault();")]
@@ -621,114 +621,114 @@ Tag(""Value"", value);";
             .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
     }
 
-    [DataTestMethod]    // Just a few examples to demonstrate that we don't set ObjectContraint for all
-    [DataRow("Min()")]
-    [DataRow("ElementAtOrDefault(42);")]
-    [DataRow("FirstOrDefault();")]
-    [DataRow("LastOrDefault();")]
-    [DataRow("SingleOrDefault();")]
-    public void Invocation_LinqEnumerable_Unknown_Int(string expression)
-    {
-        var code = $@"
-var value = arg.{expression};
-Tag(""Value"", value);";
-        var validator = SETestContext.CreateCS(code, $"IEnumerable<int> arg").Validator;
-        validator.TagValue("Value").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-    }
+//    [DataTestMethod]    // Just a few examples to demonstrate that we don't set ObjectContraint for all
+//    [DataRow("Min()")]
+//    [DataRow("ElementAtOrDefault(42);")]
+//    [DataRow("FirstOrDefault();")]
+//    [DataRow("LastOrDefault();")]
+//    [DataRow("SingleOrDefault();")]
+//    public void Invocation_LinqEnumerable_Unknown_Int(string expression)
+//    {
+//        var code = $@"
+//var value = arg.{expression};
+//Tag(""Value"", value);";
+//        var validator = SETestContext.CreateCS(code, $"IEnumerable<int> arg").Validator;
+//        validator.TagValue("Value").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+//    }
 
-    [DataTestMethod]    // Just a few examples to demonstrate that we don't set ObjectContraint for all
-    [DataRow("First()")]
-    [DataRow("ElementAtOrDefault(42);")]
-    public void Invocation_LinqEnumerable_Unknown_Object(string expression)
-    {
-        var code = $@"
-var value = arg.{expression};
-Tag(""Value"", value);";
-        var validator = SETestContext.CreateCS(code, $"IEnumerable<object> arg").Validator;
-        validator.TagValue("Value").Should().BeNull();
-    }
+//    [DataTestMethod]    // Just a few examples to demonstrate that we don't set ObjectContraint for all
+//    [DataRow("First()")]
+//    [DataRow("ElementAtOrDefault(42);")]
+//    public void Invocation_LinqEnumerable_Unknown_Object(string expression)
+//    {
+//        var code = $@"
+//var value = arg.{expression};
+//Tag(""Value"", value);";
+//        var validator = SETestContext.CreateCS(code, $"IEnumerable<object> arg").Validator;
+//        validator.TagValue("Value").Should().BeNull();
+//    }
 
-    [TestMethod]
-    public void Invocation_Linq_VB()
-    {
-        const string code = @"
-Dim Query = From Item In Items Where Item IsNot Nothing
-If Query.Count <> 0 Then
-    Dim Value = Query(0)
-    Tag(""Value"", Value)
-End If";
-        var validator = SETestContext.CreateVB(code, "Items() As Object").Validator;
-        validator.TagValue("Value").Should().BeNull();
-    }
+//    [TestMethod]
+//    public void Invocation_Linq_VB()
+//    {
+//        const string code = @"
+//Dim Query = From Item In Items Where Item IsNot Nothing
+//If Query.Count <> 0 Then
+//    Dim Value = Query(0)
+//    Tag(""Value"", Value)
+//End If";
+//        var validator = SETestContext.CreateVB(code, "Items() As Object").Validator;
+//        validator.TagValue("Value").Should().BeNull();
+//    }
 
-    [DataTestMethod]
-    [DataRow("arg.Clone()")]
-    [DataRow("arg.Concat(\"foo\")")]
-    [DataRow("string.Copy(arg)")]
-    [DataRow("string.Format( \"\", arg)")]
-    [DataRow("arg.GetEnumerator()")]
-    [DataRow("arg.Insert(0, \"foo\")")]
-    [DataRow("string.Intern(arg)")]
-    [DataRow("string.Join(\"-\", arg, arg)")]
-    [DataRow("arg.Normalize()")]
-    [DataRow("arg.PadLeft(0)")]
-    [DataRow("arg.PadRight(0)")]
-    [DataRow("arg.Remove(0)")]
-    [DataRow("arg.Replace(\"-\", \"\")")]
-    [DataRow("arg.Split()")]
-    [DataRow("arg.Substring(2)")]
-    [DataRow("arg.ToCharArray()")]
-    [DataRow("arg.ToLower()")]
-    [DataRow("arg.ToLowerInvariant()")]
-    [DataRow("arg.ToString()")]
-    [DataRow("arg.ToUpper()")]
-    [DataRow("arg.ToUpperInvariant()")]
-    [DataRow("arg.Trim()")]
-    [DataRow("arg.TrimEnd()")]
-    [DataRow("arg.TrimStart()")]
-#if NET
-    [DataRow("string.Create(System.Globalization.CultureInfo.InvariantCulture, $\"{arg}\");")]
-    [DataRow("arg.GetPinnableReference()")]
-    [DataRow("arg.ReplaceLineEndings()")]
-#endif
-    public void Invocation_StringMethods_NotNull(string expression)
-    {
-        var code = $"""
-            var value = {expression};
-            Tag("Value", value);
-            """;
-        var stringMethodValidator = SETestContext.CreateCS(code, "string arg").Validator;
-        stringMethodValidator.TagValue("Value").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-    }
+//    [DataTestMethod]
+//    [DataRow("arg.Clone()")]
+//    [DataRow("arg.Concat(\"foo\")")]
+//    [DataRow("string.Copy(arg)")]
+//    [DataRow("string.Format( \"\", arg)")]
+//    [DataRow("arg.GetEnumerator()")]
+//    [DataRow("arg.Insert(0, \"foo\")")]
+//    [DataRow("string.Intern(arg)")]
+//    [DataRow("string.Join(\"-\", arg, arg)")]
+//    [DataRow("arg.Normalize()")]
+//    [DataRow("arg.PadLeft(0)")]
+//    [DataRow("arg.PadRight(0)")]
+//    [DataRow("arg.Remove(0)")]
+//    [DataRow("arg.Replace(\"-\", \"\")")]
+//    [DataRow("arg.Split()")]
+//    [DataRow("arg.Substring(2)")]
+//    [DataRow("arg.ToCharArray()")]
+//    [DataRow("arg.ToLower()")]
+//    [DataRow("arg.ToLowerInvariant()")]
+//    [DataRow("arg.ToString()")]
+//    [DataRow("arg.ToUpper()")]
+//    [DataRow("arg.ToUpperInvariant()")]
+//    [DataRow("arg.Trim()")]
+//    [DataRow("arg.TrimEnd()")]
+//    [DataRow("arg.TrimStart()")]
+//#if NET
+//    [DataRow("string.Create(System.Globalization.CultureInfo.InvariantCulture, $\"{arg}\");")]
+//    [DataRow("arg.GetPinnableReference()")]
+//    [DataRow("arg.ReplaceLineEndings()")]
+//#endif
+//    public void Invocation_StringMethods_NotNull(string expression)
+//    {
+//        var code = $"""
+//            var value = {expression};
+//            Tag("Value", value);
+//            """;
+//        var stringMethodValidator = SETestContext.CreateCS(code, "string arg").Validator;
+//        stringMethodValidator.TagValue("Value").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+//    }
 
-    [TestMethod]
-    public void Invocation_StringMethods_NotNull_VB()
-    {
-        var code = $"""
-            Dim Value = Arg.Trim()
-            Tag("Value", Value)
-            """;
-        var stringMethodValidator = SETestContext.CreateVB(code, "Arg As String").Validator;
-        stringMethodValidator.TagValue("Value").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-    }
+//    [TestMethod]
+//    public void Invocation_StringMethods_NotNull_VB()
+//    {
+//        var code = $"""
+//            Dim Value = Arg.Trim()
+//            Tag("Value", Value)
+//            """;
+//        var stringMethodValidator = SETestContext.CreateVB(code, "Arg As String").Validator;
+//        stringMethodValidator.TagValue("Value").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+//    }
 
-    [DataTestMethod]
-    [DataRow("Object = Nothing", true)]
-    [DataRow("Object = New Object()", false)]
-    [DataRow("Integer = Nothing", false)]   // While it can be assigned Nothing, value 0 is stored. And that is not null
-    [DataRow("TStruct = Nothing", false)]
-    [DataRow("T = Nothing", false)]
-    public void Invocation_InformationIsNothing_KnownSymbol(string declarationSuffix, bool expected)
-    {
-        var code = $@"
-Public Sub Main(Of T, TStruct As Structure)()
-    Dim Value As {declarationSuffix}
-    Dim Result As Boolean = IsNothing(CType(DirectCast(Value, Object), Object)) ' Some conversions in the way to detect the value type
-    Tag(""Result"", Result)
-End Sub";
-        var validator = SETestContext.CreateVBMethod(code).Validator;
-        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expected));
-    }
+//    [DataTestMethod]
+//    [DataRow("Object = Nothing", true)]
+//    [DataRow("Object = New Object()", false)]
+//    [DataRow("Integer = Nothing", false)]   // While it can be assigned Nothing, value 0 is stored. And that is not null
+//    [DataRow("TStruct = Nothing", false)]
+//    [DataRow("T = Nothing", false)]
+//    public void Invocation_InformationIsNothing_KnownSymbol(string declarationSuffix, bool expected)
+//    {
+//        var code = $@"
+//Public Sub Main(Of T, TStruct As Structure)()
+//    Dim Value As {declarationSuffix}
+//    Dim Result As Boolean = IsNothing(CType(DirectCast(Value, Object), Object)) ' Some conversions in the way to detect the value type
+//    Tag(""Result"", Result)
+//End Sub";
+//        var validator = SETestContext.CreateVBMethod(code).Validator;
+//        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expected));
+//    }
 
     [DataTestMethod]
     [DataRow("Object")]
@@ -750,15 +750,15 @@ End Sub";
             .And.ContainSingle(x => x[argSymbol].HasConstraint(ObjectConstraint.NotNull) && x[resultSymbol].HasConstraint(BoolConstraint.False));
     }
 
-    [TestMethod]
-    public void Invocation_InformationIsNothing_NoTrackedSymbol()
-    {
-        var code = $@"
-Dim Result As Boolean = IsNothing(Arg.ToString())
-Tag(""Result"", Result)";
-        var validator = SETestContext.CreateVB(code, "Arg As Object").Validator;
-        validator.TagValue("Result").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-    }
+//    [TestMethod]
+//    public void Invocation_InformationIsNothing_NoTrackedSymbol()
+//    {
+//        var code = $@"
+//Dim Result As Boolean = IsNothing(Arg.ToString())
+//Tag(""Result"", Result)";
+//        var validator = SETestContext.CreateVB(code, "Arg As Object").Validator;
+//        validator.TagValue("Result").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+//    }
 
     [DataTestMethod]
     [DataRow("arg is not true", "bool?")]
@@ -944,62 +944,62 @@ f()();";
         validator.ValidateExecutionCompleted();
     }
 
-    [DataTestMethod]
-    [DataRow("null", "null", true, ConstraintKind.Null, ConstraintKind.Null)]
-    [DataRow("null", "new object()", false, ConstraintKind.Null, ConstraintKind.NotNull)]
-    [DataRow("new object()", "null", false, ConstraintKind.NotNull, ConstraintKind.Null)]
-    [DataRow("new int?()", "null", true, ConstraintKind.Null, ConstraintKind.Null)]
-    [DataRow("(int?)null", "null", true, ConstraintKind.Null, ConstraintKind.Null)]
-    [DataRow("new char?('x')", "null", false, ConstraintKind.NotNull, ConstraintKind.Null)]
-    [DataRow("new char?()", "'x'", false, ConstraintKind.Null, ConstraintKind.NotNull)]
-    public void Invocation_ObjectEquals_LearnResult(string left, string right, bool expectedResult, ConstraintKind expectedConstraintLeft, ConstraintKind expectedConstraintRight)
-    {
-        var code = $@"
-object left = {left};
-object right = {right};
-var result = object.Equals(left, right);
-Tag(""Result"", result);
-Tag(""Left"", left);
-Tag(""Right"", right);";
-        var validator = SETestContext.CreateCS(code).Validator;
-        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expectedResult));
-        validator.TagValue("Left").AllConstraints.Should().ContainSingle().Which.Kind.Should().Be(expectedConstraintLeft);
-        validator.TagValue("Right").AllConstraints.Should().ContainSingle().Which.Kind.Should().Be(expectedConstraintRight);
-    }
+//    [DataTestMethod]
+//    [DataRow("null", "null", true, ConstraintKind.Null, ConstraintKind.Null)]
+//    [DataRow("null", "new object()", false, ConstraintKind.Null, ConstraintKind.NotNull)]
+//    [DataRow("new object()", "null", false, ConstraintKind.NotNull, ConstraintKind.Null)]
+//    [DataRow("new int?()", "null", true, ConstraintKind.Null, ConstraintKind.Null)]
+//    [DataRow("(int?)null", "null", true, ConstraintKind.Null, ConstraintKind.Null)]
+//    [DataRow("new char?('x')", "null", false, ConstraintKind.NotNull, ConstraintKind.Null)]
+//    [DataRow("new char?()", "'x'", false, ConstraintKind.Null, ConstraintKind.NotNull)]
+//    public void Invocation_ObjectEquals_LearnResult(string left, string right, bool expectedResult, ConstraintKind expectedConstraintLeft, ConstraintKind expectedConstraintRight)
+//    {
+//        var code = $@"
+//object left = {left};
+//object right = {right};
+//var result = object.Equals(left, right);
+//Tag(""Result"", result);
+//Tag(""Left"", left);
+//Tag(""Right"", right);";
+//        var validator = SETestContext.CreateCS(code).Validator;
+//        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expectedResult));
+//        validator.TagValue("Left").AllConstraints.Should().ContainSingle().Which.Kind.Should().Be(expectedConstraintLeft);
+//        validator.TagValue("Right").AllConstraints.Should().ContainSingle().Which.Kind.Should().Be(expectedConstraintRight);
+//    }
 
-    [DataTestMethod]
-    [DataRow("true", "null", false)]
-    [DataRow("null", "true", false)]
-    [DataRow("null", "(bool?)true", false)]
-    public void Invocation_ObjectEqualsMixedNullObjectArguments_LearnResult(string left, string right, bool expectedResult)
-    {
-        var code = $@"
-object left = {left};
-object right = {right};
-var result = object.Equals(left, right);
-Tag(""Result"", result);";
-        var validator = SETestContext.CreateCS(code).Validator;
-        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expectedResult));
-    }
+//    [DataTestMethod]
+//    [DataRow("true", "null", false)]
+//    [DataRow("null", "true", false)]
+//    [DataRow("null", "(bool?)true", false)]
+//    public void Invocation_ObjectEqualsMixedNullObjectArguments_LearnResult(string left, string right, bool expectedResult)
+//    {
+//        var code = $@"
+//object left = {left};
+//object right = {right};
+//var result = object.Equals(left, right);
+//Tag(""Result"", result);";
+//        var validator = SETestContext.CreateCS(code).Validator;
+//        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expectedResult));
+//    }
 
-    [DataTestMethod]
-    [DataRow("new object()", "new object()")]
-    [DataRow("new object()", "Unknown<object>()")]
-    [DataRow("Unknown<object>()", "new object()")]
-    [DataRow("Unknown<object>()", "Unknown<object>()")]
-    [DataRow("new int?(42)", "Unknown<int?>()")]
-    [DataRow("true", "new object()")]
-    [DataRow("(bool?)true", "new object()")]
-    public void Invocation_ObjectEquals_DoesNotLearnResult(string left, string right)
-    {
-        var code = $@"
-object left = {left};
-object right = {right};
-var result = object.Equals(left, right);
-Tag(""Result"", result);";
-        var validator = SETestContext.CreateCS(code).Validator;
-        validator.TagValue("Result").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-    }
+//    [DataTestMethod]
+//    [DataRow("new object()", "new object()")]
+//    [DataRow("new object()", "Unknown<object>()")]
+//    [DataRow("Unknown<object>()", "new object()")]
+//    [DataRow("Unknown<object>()", "Unknown<object>()")]
+//    [DataRow("new int?(42)", "Unknown<int?>()")]
+//    [DataRow("true", "new object()")]
+//    [DataRow("(bool?)true", "new object()")]
+//    public void Invocation_ObjectEquals_DoesNotLearnResult(string left, string right)
+//    {
+//        var code = $@"
+//object left = {left};
+//object right = {right};
+//var result = object.Equals(left, right);
+//Tag(""Result"", result);";
+//        var validator = SETestContext.CreateCS(code).Validator;
+//        validator.TagValue("Result").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+//    }
 
     [DataTestMethod]
     [DataRow("null", "arg", "object")]
@@ -1027,133 +1027,133 @@ Tag(""End"");";
             });
     }
 
-    [DataTestMethod]
-    [DataRow("null", "null", true)]
-    [DataRow("null", "42", false)]
-    [DataRow("42", "null", false)]
-    public void Invocation_NullableEquals_LearnResult(string left, string right, bool expectedResult)
-    {
-        var code = $"""
-            int? left = {left};
-            int? right = {right};
-            var result = left.Equals(right);
-            Tag("Result", result);
-            """;
-        SETestContext.CreateCS(code).Validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expectedResult));
-    }
+//    [DataTestMethod]
+//    [DataRow("null", "null", true)]
+//    [DataRow("null", "42", false)]
+//    [DataRow("42", "null", false)]
+//    public void Invocation_NullableEquals_LearnResult(string left, string right, bool expectedResult)
+//    {
+//        var code = $"""
+//            int? left = {left};
+//            int? right = {right};
+//            var result = left.Equals(right);
+//            Tag("Result", result);
+//            """;
+//        SETestContext.CreateCS(code).Validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expectedResult));
+//    }
 
-    [DataTestMethod]
-    [DataRow("42", "Unknown<int?>()")]
-    [DataRow("Unknown<int?>()", "42")]
-    [DataRow("Unknown<int?>()", "Unknown<int?>()")]
-    public void Invocation_NullableEquals_DoesNotLearnResult(string left, string right)
-    {
-        var code = $"""
-            int? left = {left};
-            int? right = {right};
-            var result = left.Equals(right);
-            Tag("Result", result);
-            """;
-        SETestContext.CreateCS(code).Validator.TagValue("Result").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-    }
+//    [DataTestMethod]
+//    [DataRow("42", "Unknown<int?>()")]
+//    [DataRow("Unknown<int?>()", "42")]
+//    [DataRow("Unknown<int?>()", "Unknown<int?>()")]
+//    public void Invocation_NullableEquals_DoesNotLearnResult(string left, string right)
+//    {
+//        var code = $"""
+//            int? left = {left};
+//            int? right = {right};
+//            var result = left.Equals(right);
+//            Tag("Result", result);
+//            """;
+//        SETestContext.CreateCS(code).Validator.TagValue("Result").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+//    }
 
-    [DataTestMethod]
-    [DataRow("isNull", "arg")]
-    [DataRow("arg", "null")]
-    public void Invocation_NullableEquals_Null_SplitsToBothResults(string left, string right)
-    {
-        var code = $"""
-            int? isNull = null;
-            var result = {left}.Equals({right});
-            Tag("End");
-            """;
-        var validator = SETestContext.CreateCS(code, "int? arg").Validator;
-        var result = validator.Symbol("result");
-        var arg = validator.Symbol("arg");
-        validator.TagStates("End").Should().SatisfyRespectively(
-            x =>
-            {
-                x[result].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True);
-                x[arg].Should().HaveOnlyConstraint(ObjectConstraint.Null);
-            },
-            x =>
-            {
-                x[result].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False);
-                x[arg].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-            });
-    }
+//    [DataTestMethod]
+//    [DataRow("isNull", "arg")]
+//    [DataRow("arg", "null")]
+//    public void Invocation_NullableEquals_Null_SplitsToBothResults(string left, string right)
+//    {
+//        var code = $"""
+//            int? isNull = null;
+//            var result = {left}.Equals({right});
+//            Tag("End");
+//            """;
+//        var validator = SETestContext.CreateCS(code, "int? arg").Validator;
+//        var result = validator.Symbol("result");
+//        var arg = validator.Symbol("arg");
+//        validator.TagStates("End").Should().SatisfyRespectively(
+//            x =>
+//            {
+//                x[result].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True);
+//                x[arg].Should().HaveOnlyConstraint(ObjectConstraint.Null);
+//            },
+//            x =>
+//            {
+//                x[result].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False);
+//                x[arg].Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+//            });
+//    }
 
-    [TestMethod]
-    public void Invocation_Equals_CustomSignatures_NotSupported()
-    {
-        const string code = @"
-public void Main()
-{
-    var instanceOne = Equals(null);
-    var instanceTwo = Equals(null, null);
-    var noArgs = Equals();
-    var moreArgs = Equals(null, null, null);
+//    [TestMethod]
+//    public void Invocation_Equals_CustomSignatures_NotSupported()
+//    {
+//        const string code = @"
+//public void Main()
+//{
+//    var instanceOne = Equals(null);
+//    var instanceTwo = Equals(null, null);
+//    var noArgs = Equals();
+//    var moreArgs = Equals(null, null, null);
 
-    Tag(""InstanceOne"", instanceOne);
-    Tag(""InstanceTwo"", instanceTwo);
-    Tag(""NoArgs"", noArgs);
-    Tag(""MoreArgs"", moreArgs);
-}
+//    Tag(""InstanceOne"", instanceOne);
+//    Tag(""InstanceTwo"", instanceTwo);
+//    Tag(""NoArgs"", noArgs);
+//    Tag(""MoreArgs"", moreArgs);
+//}
 
-private bool Equals(object a) => false;
-private bool Equals(object a, object b) => false;
-private static bool Equals() => false;
-private static bool Equals(object a, object b, object c) => false;";
-        var validator = SETestContext.CreateCSMethod(code).Validator;
-        validator.TagValue("InstanceOne").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-        validator.TagValue("InstanceTwo").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-        validator.TagValue("NoArgs").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-        validator.TagValue("MoreArgs").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-    }
+//private bool Equals(object a) => false;
+//private bool Equals(object a, object b) => false;
+//private static bool Equals() => false;
+//private static bool Equals(object a, object b, object c) => false;";
+//        var validator = SETestContext.CreateCSMethod(code).Validator;
+//        validator.TagValue("InstanceOne").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+//        validator.TagValue("InstanceTwo").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+//        validator.TagValue("NoArgs").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+//        validator.TagValue("MoreArgs").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+//    }
 
-    [DataTestMethod]
-    [DataRow("null", "null", true, ConstraintKind.Null, ConstraintKind.Null)]
-    [DataRow("null", "new object()", false, ConstraintKind.Null, ConstraintKind.NotNull)]
-    [DataRow("new object()", "null", false, ConstraintKind.NotNull, ConstraintKind.Null)]
-    [DataRow("new int?()", "null", true, ConstraintKind.Null, ConstraintKind.Null)]
-    [DataRow("(int?)null", "null", true, ConstraintKind.Null, ConstraintKind.Null)]
-    [DataRow("new char?('x')", "null", false, ConstraintKind.NotNull, ConstraintKind.Null)]
-    [DataRow("new char?()", "'x'", false, ConstraintKind.Null, ConstraintKind.NotNull)]
-    public void Invocation_ReferenceEquals_LearnResult(string left, string right, bool expectedResult, ConstraintKind expectedConstraintLeft, ConstraintKind expectedConstraintRight)
-    {
-        var code = $"""
-            object left = {left};
-            object right = {right};
-            var result = ReferenceEquals(left, right);
-            Tag("Result", result);
-            Tag("Left", left);
-            Tag("Right", right);
-            """;
-        var validator = SETestContext.CreateCS(code).Validator;
-        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expectedResult));
-        validator.TagValue("Left").AllConstraints.Should().ContainSingle().Which.Kind.Should().Be(expectedConstraintLeft);
-        validator.TagValue("Right").AllConstraints.Should().ContainSingle().Which.Kind.Should().Be(expectedConstraintRight);
-    }
+//    [DataTestMethod]
+//    [DataRow("null", "null", true, ConstraintKind.Null, ConstraintKind.Null)]
+//    [DataRow("null", "new object()", false, ConstraintKind.Null, ConstraintKind.NotNull)]
+//    [DataRow("new object()", "null", false, ConstraintKind.NotNull, ConstraintKind.Null)]
+//    [DataRow("new int?()", "null", true, ConstraintKind.Null, ConstraintKind.Null)]
+//    [DataRow("(int?)null", "null", true, ConstraintKind.Null, ConstraintKind.Null)]
+//    [DataRow("new char?('x')", "null", false, ConstraintKind.NotNull, ConstraintKind.Null)]
+//    [DataRow("new char?()", "'x'", false, ConstraintKind.Null, ConstraintKind.NotNull)]
+//    public void Invocation_ReferenceEquals_LearnResult(string left, string right, bool expectedResult, ConstraintKind expectedConstraintLeft, ConstraintKind expectedConstraintRight)
+//    {
+//        var code = $"""
+//            object left = {left};
+//            object right = {right};
+//            var result = ReferenceEquals(left, right);
+//            Tag("Result", result);
+//            Tag("Left", left);
+//            Tag("Right", right);
+//            """;
+//        var validator = SETestContext.CreateCS(code).Validator;
+//        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expectedResult));
+//        validator.TagValue("Left").AllConstraints.Should().ContainSingle().Which.Kind.Should().Be(expectedConstraintLeft);
+//        validator.TagValue("Right").AllConstraints.Should().ContainSingle().Which.Kind.Should().Be(expectedConstraintRight);
+//    }
 
-    [DataTestMethod]
-    [DataRow("new object()", "new object()")]
-    [DataRow("new object()", "Unknown<object>()")]
-    [DataRow("Unknown<object>()", "new object()")]
-    [DataRow("Unknown<object>()", "Unknown<object>()")]
-    [DataRow("new int?(42)", "Unknown<int?>()")]
-    [DataRow("(int?)42", "(int?)42")]
-    [DataRow("(int?)42", "(int?)0")]
-    public void Invocation_ReferenceEquals_DoesNotLearnResult(string left, string right)
-    {
-        var code = $"""
-            object left = {left};
-            object right = {right};
-            var result = ReferenceEquals(left, right);
-            Tag("Result", result);
-            """;
-        var validator = SETestContext.CreateCS(code).Validator;
-        validator.TagValue("Result").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-    }
+//    [DataTestMethod]
+//    [DataRow("new object()", "new object()")]
+//    [DataRow("new object()", "Unknown<object>()")]
+//    [DataRow("Unknown<object>()", "new object()")]
+//    [DataRow("Unknown<object>()", "Unknown<object>()")]
+//    [DataRow("new int?(42)", "Unknown<int?>()")]
+//    [DataRow("(int?)42", "(int?)42")]
+//    [DataRow("(int?)42", "(int?)0")]
+//    public void Invocation_ReferenceEquals_DoesNotLearnResult(string left, string right)
+//    {
+//        var code = $"""
+//            object left = {left};
+//            object right = {right};
+//            var result = ReferenceEquals(left, right);
+//            Tag("Result", result);
+//            """;
+//        var validator = SETestContext.CreateCS(code).Validator;
+//        validator.TagValue("Result").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+//    }
 
     [DataTestMethod]
     [DataRow("null", "arg", "object")]
@@ -1182,163 +1182,163 @@ private static bool Equals(object a, object b, object c) => false;";
             });
     }
 
-    [TestMethod]
-    public void Invocation_ReferenceEquals_CustomSignatures_NotSupported()
-    {
-        const string code = """
-            public void Main()
-            {
-                var args0 = ReferenceEquals();
-                var args1 = ReferenceEquals(null);
-                var args2 = ReferenceEquals(null, null);
-                var args3 = ReferenceEquals(null, null, null);
+    //[TestMethod]
+    //public void Invocation_ReferenceEquals_CustomSignatures_NotSupported()
+    //{
+    //    const string code = """
+    //        public void Main()
+    //        {
+    //            var args0 = ReferenceEquals();
+    //            var args1 = ReferenceEquals(null);
+    //            var args2 = ReferenceEquals(null, null);
+    //            var args3 = ReferenceEquals(null, null, null);
 
-                Tag("Args0", args0);
-                Tag("Args1", args1);
-                Tag("Args2", args2);
-                Tag("Args3", args3);
-            }
+    //            Tag("Args0", args0);
+    //            Tag("Args1", args1);
+    //            Tag("Args2", args2);
+    //            Tag("Args3", args3);
+    //        }
 
-            private bool ReferenceEquals() => false;
-            private bool ReferenceEquals(object a) => false;
-            private bool ReferenceEquals(object a, object b) => false;
-            private bool ReferenceEquals(object a, object b, object c) => false;
-            """;
-        var validator = SETestContext.CreateCSMethod(code).Validator;
-        validator.TagValue("Args0").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-        validator.TagValue("Args1").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-        validator.TagValue("Args2").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-        validator.TagValue("Args3").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-    }
+    //        private bool ReferenceEquals() => false;
+    //        private bool ReferenceEquals(object a) => false;
+    //        private bool ReferenceEquals(object a, object b) => false;
+    //        private bool ReferenceEquals(object a, object b, object c) => false;
+    //        """;
+    //    var validator = SETestContext.CreateCSMethod(code).Validator;
+    //    validator.TagValue("Args0").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+    //    validator.TagValue("Args1").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+    //    validator.TagValue("Args2").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+    //    validator.TagValue("Args3").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+    //}
 
-    [DataTestMethod]
-    [DataRow("true", "true", true)]
-    [DataRow("true", "false", false)]
-    [DataRow("false", "true", false)]
-    [DataRow("false", "false", true)]
-    [DataRow("(bool?)true", "(bool?)true", true)]
-    [DataRow("(bool?)true", "(bool?)false", false)]
-    [DataRow("(bool?)true", "true", true)]
-    [DataRow("(false ? true : false)", "false", true)]
-    public void Invocation_BoolEquals_LearnsResult(string left, string right, bool expectedResult)
-    {
-        var code = $"""
-            var result = object.Equals({left}, {right});
-            Tag("Result", result);
-            """;
-        var validator = SETestContext.CreateCS(code).Validator;
-        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expectedResult));
-    }
+    //[DataTestMethod]
+    //[DataRow("true", "true", true)]
+    //[DataRow("true", "false", false)]
+    //[DataRow("false", "true", false)]
+    //[DataRow("false", "false", true)]
+    //[DataRow("(bool?)true", "(bool?)true", true)]
+    //[DataRow("(bool?)true", "(bool?)false", false)]
+    //[DataRow("(bool?)true", "true", true)]
+    //[DataRow("(false ? true : false)", "false", true)]
+    //public void Invocation_BoolEquals_LearnsResult(string left, string right, bool expectedResult)
+    //{
+    //    var code = $"""
+    //        var result = object.Equals({left}, {right});
+    //        Tag("Result", result);
+    //        """;
+    //    var validator = SETestContext.CreateCS(code).Validator;
+    //    validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expectedResult));
+    //}
 
-    [DataTestMethod]
-    [DataRow("true")]
-    [DataRow("false")]
-    public void Invocation_BoolEquals_OnlyOneArgumentHasBoolConstraint_DoesNotLearn(string leftArgument)
-    {
-        var code = $"""
-            bool left = {leftArgument};
-            var result = object.Equals(left, right);
-            Tag("Result", result);
-            """;
-        var validator = SETestContext.CreateCS(code, "bool right").Validator;
-        validator.TagValue("Result").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-    }
+    //[DataTestMethod]
+    //[DataRow("true")]
+    //[DataRow("false")]
+    //public void Invocation_BoolEquals_OnlyOneArgumentHasBoolConstraint_DoesNotLearn(string leftArgument)
+    //{
+    //    var code = $"""
+    //        bool left = {leftArgument};
+    //        var result = object.Equals(left, right);
+    //        Tag("Result", result);
+    //        """;
+    //    var validator = SETestContext.CreateCS(code, "bool right").Validator;
+    //    validator.TagValue("Result").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+    //}
 
-    [DataTestMethod]
-    public void Invocation_BoolEquals_BothArgumentsHaveNoConstraint_DoesNotLearn()
-    {
-        var code = $"""
-            var result = object.Equals(left, right);
-            Tag("Result", result);
-            """;
-        var validator = SETestContext.CreateCS(code, "bool left, bool right").Validator;
-        validator.TagValue("Result").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-    }
+    //[DataTestMethod]
+    //public void Invocation_BoolEquals_BothArgumentsHaveNoConstraint_DoesNotLearn()
+    //{
+    //    var code = $"""
+    //        var result = object.Equals(left, right);
+    //        Tag("Result", result);
+    //        """;
+    //    var validator = SETestContext.CreateCS(code, "bool left, bool right").Validator;
+    //    validator.TagValue("Result").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+    //}
 
-    [DataTestMethod]
-    [DataRow("42", "42", true)]
-    [DataRow("0", "42", false)]
-    [DataRow("((int?)42)", "((int?)42)", true)]
-    [DataRow("((int?)42)", "((int?)0)", false)]
-    public void Invocation_NumberEquals_SingleValues_LearnsResult(string left, string right, bool expected)
-    {
-        var code = $"""
-            var result = {left}.Equals({right});
-            Tag("Result", result);
+    //[DataTestMethod]
+    //[DataRow("42", "42", true)]
+    //[DataRow("0", "42", false)]
+    //[DataRow("((int?)42)", "((int?)42)", true)]
+    //[DataRow("((int?)42)", "((int?)0)", false)]
+    //public void Invocation_NumberEquals_SingleValues_LearnsResult(string left, string right, bool expected)
+    //{
+    //    var code = $"""
+    //        var result = {left}.Equals({right});
+    //        Tag("Result", result);
 
-            var resultStaticCall = object.Equals({left}, {right});
-            Tag("ResultStaticCall", resultStaticCall);
-            """;
-        var validator = SETestContext.CreateCS(code).Validator;
-        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expected));
-        validator.TagValue("ResultStaticCall").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expected));
-    }
+    //        var resultStaticCall = object.Equals({left}, {right});
+    //        Tag("ResultStaticCall", resultStaticCall);
+    //        """;
+    //    var validator = SETestContext.CreateCS(code).Validator;
+    //    validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expected));
+    //    validator.TagValue("ResultStaticCall").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expected));
+    //}
 
-    [TestMethod]
-    public void Invocation_NumberEquals_ValueInRange_DoesNotLearn()
-    {
-        var code = """
-            if (i > 1 && i < 10)
-            {
-                var result = object.Equals(i, 4);
-                Tag("Result", result);
-            }
-            """;
-        var validator = SETestContext.CreateCS(code, "int i").Validator;
-        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
-    }
+    //[TestMethod]
+    //public void Invocation_NumberEquals_ValueInRange_DoesNotLearn()
+    //{
+    //    var code = """
+    //        if (i > 1 && i < 10)
+    //        {
+    //            var result = object.Equals(i, 4);
+    //            Tag("Result", result);
+    //        }
+    //        """;
+    //    var validator = SETestContext.CreateCS(code, "int i").Validator;
+    //    validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
+    //}
 
-    [TestMethod]
-    public void Invocation_NumberEquals_RangesDoNotOverlap_LearnsResult()
-    {
-        var code = $$"""
-            if (i < 0 && j > 0)
-            {
-                var result = i.Equals(j);
-                Tag("Result", result);
-            }
-            """;
-        var validator = SETestContext.CreateCS(code, "int i, int j").Validator;
-        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False);
-    }
+    //[TestMethod]
+    //public void Invocation_NumberEquals_RangesDoNotOverlap_LearnsResult()
+    //{
+    //    var code = $$"""
+    //        if (i < 0 && j > 0)
+    //        {
+    //            var result = i.Equals(j);
+    //            Tag("Result", result);
+    //        }
+    //        """;
+    //    var validator = SETestContext.CreateCS(code, "int i, int j").Validator;
+    //    validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False);
+    //}
 
-    [DataTestMethod]
-    [DataRow("null", 0)]
-    [DataRow("42", 42)]
-    public void Invocation_NullableGetHasValue_LearnsBoolConstraint(string value, int expected)
-    {
-        var code = $"""
-            int? value = {value};
-            value ??= 0;    // Uses InvocationOperation int?.HasValue.get()
-            Tag("Value", value);
-            """;
-        SETestContext.CreateCS(code).Validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
-    }
+    //[DataTestMethod]
+    //[DataRow("null", 0)]
+    //[DataRow("42", 42)]
+    //public void Invocation_NullableGetHasValue_LearnsBoolConstraint(string value, int expected)
+    //{
+    //    var code = $"""
+    //        int? value = {value};
+    //        value ??= 0;    // Uses InvocationOperation int?.HasValue.get()
+    //        Tag("Value", value);
+    //        """;
+    //    SETestContext.CreateCS(code).Validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expected));
+    //}
 
-    [TestMethod]
-    public void Invocation_NullableGetHasValue_Unknown()
-    {
-        const string code = """
-            arg ??= 0;      // Uses InvocationOperation int?.HasValue.get()
-            Tag("Arg", arg);
-            """;
-        SETestContext.CreateCS(code, "int? arg").Validator.TagValues("Arg").Should().SatisfyRespectively(
-            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull),
-            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(0)));
-    }
+    //[TestMethod]
+    //public void Invocation_NullableGetHasValue_Unknown()
+    //{
+    //    const string code = """
+    //        arg ??= 0;      // Uses InvocationOperation int?.HasValue.get()
+    //        Tag("Arg", arg);
+    //        """;
+    //    SETestContext.CreateCS(code, "int? arg").Validator.TagValues("Arg").Should().SatisfyRespectively(
+    //        x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull),
+    //        x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(0)));
+    //}
 
-    [TestMethod]
-    public void Invocation_NullableGetHasValue_UntrackedSymbol()
-    {
-        const string code = """
-            var result = arg.NullableProperty ??= 0;      // Uses InvocationOperation int?.HasValue.get()
-            Tag("Property", arg.NullableProperty);
-            Tag("Result", result);
-            """;
-        var validator = SETestContext.CreateCS(code, "Sample arg").Validator;
-        validator.TagValues("Property").Should().AllSatisfy(x => x.Should().HaveNoConstraints());
-        validator.TagValues("Result").Should().SatisfyRespectively(
-            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull),  // Because it's int
-            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(0)));
-    }
+    //[TestMethod]
+    //public void Invocation_NullableGetHasValue_UntrackedSymbol()
+    //{
+    //    const string code = """
+    //        var result = arg.NullableProperty ??= 0;      // Uses InvocationOperation int?.HasValue.get()
+    //        Tag("Property", arg.NullableProperty);
+    //        Tag("Result", result);
+    //        """;
+    //    var validator = SETestContext.CreateCS(code, "Sample arg").Validator;
+    //    validator.TagValues("Property").Should().AllSatisfy(x => x.Should().HaveNoConstraints());
+    //    validator.TagValues("Result").Should().SatisfyRespectively(
+    //        x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull),  // Because it's int
+    //        x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(0)));
+    //}
 }

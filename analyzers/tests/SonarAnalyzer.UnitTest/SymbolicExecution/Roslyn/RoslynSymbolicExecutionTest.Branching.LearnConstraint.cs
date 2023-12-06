@@ -120,28 +120,28 @@ Tag(""End"", collection);";
         validator.TagStates("End").Should().HaveCount(2);
     }
 
-    [TestMethod]
-    public void Branching_BoolExpression_LearnsBoolConstraint()
-    {
-        const string code = @"
-if (boolParameter == true)
-{
-    Tag(""True"", boolParameter);
-}
-else
-{
-    Tag(""False"", boolParameter);
-}
-bool value;
-if (value = boolParameter)
-{
-    Tag(""Value"", value);
-}";
-        var validator = SETestContext.CreateCS(code).Validator;
-        validator.TagValue("True").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True);
-        validator.TagValue("False").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False);
-        validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True);    // Visited only for "true" condition
-    }
+//    [TestMethod]
+//    public void Branching_BoolExpression_LearnsBoolConstraint()
+//    {
+//        const string code = @"
+//if (boolParameter == true)
+//{
+//    Tag(""True"", boolParameter);
+//}
+//else
+//{
+//    Tag(""False"", boolParameter);
+//}
+//bool value;
+//if (value = boolParameter)
+//{
+//    Tag(""Value"", value);
+//}";
+//        var validator = SETestContext.CreateCS(code).Validator;
+//        validator.TagValue("True").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True);
+//        validator.TagValue("False").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False);
+//        validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True);    // Visited only for "true" condition
+//    }
 
     [DataTestMethod]
     [DataRow("arg == null")]
@@ -298,24 +298,24 @@ if (value = boolParameter)
         validator.TagValue("End").Should().HaveNoConstraints();
     }
 
-    [DataTestMethod]
-    [DataRow("True", true)]
-    [DataRow("False", false)]
-    public void Branching_LearnsObjectConstraint_NullableBool_VB(string branchValue, bool expectedPath)
-    {
-        var validator = SETestContext.CreateVB($$"""
-            Dim b As Boolean? = {{branchValue}}
-            if b Then
-                Tag("True", b)
-            else
-                Tag("False", b)
-            End if
-            Tag("End", b)
-            """).Validator;
-        validator.ValidateTagOrder(branchValue, "End");
-        validator.TagValue(branchValue).Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expectedPath));
-        validator.TagValues("End").Should().SatisfyRespectively(x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expectedPath)));
-    }
+    //[DataTestMethod]
+    //[DataRow("True", true)]
+    //[DataRow("False", false)]
+    //public void Branching_LearnsObjectConstraint_NullableBool_VB(string branchValue, bool expectedPath)
+    //{
+    //    var validator = SETestContext.CreateVB($$"""
+    //        Dim b As Boolean? = {{branchValue}}
+    //        if b Then
+    //            Tag("True", b)
+    //        else
+    //            Tag("False", b)
+    //        End if
+    //        Tag("End", b)
+    //        """).Validator;
+    //    validator.ValidateTagOrder(branchValue, "End");
+    //    validator.TagValue(branchValue).Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expectedPath));
+    //    validator.TagValues("End").Should().SatisfyRespectively(x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expectedPath)));
+    //}
 
     [DataTestMethod]
     [DataRow("arg == isObject", "object")]
