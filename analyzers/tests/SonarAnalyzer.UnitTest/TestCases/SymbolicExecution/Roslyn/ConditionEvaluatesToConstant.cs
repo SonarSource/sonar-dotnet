@@ -279,18 +279,18 @@ namespace Tests.Diagnostics
         public void Method6(bool cond)
         {
             var i = 10;
-            while (i < 20)  // Noncompliant FP
+            while (i < 20)
             {
                 i = i + 1;
             }
 
-            var b = true;   // Secondary
-            while (b)               // FN
+            var b = true;
+            while (b)               // Noncompliant
             {
                 Console.WriteLine();
             }
 
-            Console.WriteLine();    // FN 2ndary
+            Console.WriteLine();    // Secondary
         }
 
         public void Method7(bool cond)
@@ -622,16 +622,16 @@ namespace Tests.Diagnostics
             a = false;
 
             a &= true;
-            if (a)
-            { }              // FN: engine doesn't learn BoolConstraints from binary operators
+            if (a)                  // Noncompliant
+            { }
 
             a |= true;
-            if (a)
-            { }              // FN: engine doesn't learn BoolConstraints from binary operators
+            if (a)                  // Noncompliant
+            { }
 
             a ^= true;
-            if (a)
-            { }              // FN: engine doesn't learn BoolConstraints from binary operators
+            if (a)                  // Noncompliant
+            { }
         }
 
         public void IsAsExpression(object o)
@@ -2285,7 +2285,7 @@ namespace Tests.Diagnostics
             while (list.Any())
             {
                 steps = steps + 1;
-                if (steps > MaxStepCount) // Noncompliant FP
+                if (steps > MaxStepCount)
                 {
                     return;
                 }

@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.SymbolicExecution.Constraints;
+
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
 internal sealed class Assignment : SimpleProcessor<ISimpleAssignmentOperationWrapper>
@@ -27,7 +29,13 @@ internal sealed class Assignment : SimpleProcessor<ISimpleAssignmentOperationWra
 
     protected override ProgramState Process(SymbolicContext context, ISimpleAssignmentOperationWrapper assignment)
     {
-        var rightSide = context.State[assignment.Value];
+        var rightSide = context.State[assignment.Value] ?? SymbolicValue.Empty;
+        if (!assignment.Value.ConstantValue.HasValue)
+        {
+            rightSide = context.State.Constraint<FuzzyConstraint>(assignment.Target) is { } fuzzy && fuzzy.Source == assignment.WrappedOperation
+                ? SymbolicValue.Empty
+                : rightSide.WithConstraint(new FuzzyConstraint(assignment.WrappedOperation));
+        }
         var newState = context.State
             .SetOperationValue(assignment.Target, rightSide)
             .SetOperationValue(assignment, rightSide);

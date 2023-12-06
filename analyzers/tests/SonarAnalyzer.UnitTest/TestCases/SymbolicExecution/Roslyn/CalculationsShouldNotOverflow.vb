@@ -97,7 +97,7 @@ Public Class Sample
         Dim j As Integer = 10
         i = 2147483600
         i \= j
-        __ = i * 100            ' FN
+        __ = i * 100            ' Noncompliant
 
         i = 2147483600
         i <<= 1                 ' Compliant

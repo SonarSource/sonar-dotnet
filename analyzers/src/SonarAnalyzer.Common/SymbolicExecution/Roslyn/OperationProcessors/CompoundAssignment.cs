@@ -27,48 +27,37 @@ internal sealed class CompoundAssignment : SimpleProcessor<ICompoundAssignmentOp
     protected override ICompoundAssignmentOperationWrapper Convert(IOperation operation) =>
         ICompoundAssignmentOperationWrapper.FromOperation(operation);
 
-    protected override ProgramState Process(SymbolicContext context, ICompoundAssignmentOperationWrapper assignment) =>
-        ProcessNumericalCompoundAssignment(context.State, assignment)
-        ?? ProcessCompoundAssignment(context.State, assignment)
-        ?? context.State;
-
-    private static ProgramState ProcessNumericalCompoundAssignment(ProgramState state, ICompoundAssignmentOperationWrapper assignment)
+    protected override ProgramState Process(SymbolicContext context, ICompoundAssignmentOperationWrapper assignment)
     {
-        if (state.Constraint<NumberConstraint>(assignment.Target) is { } leftNumber
-            && state.Constraint<NumberConstraint>(assignment.Value) is { } rightNumber
-            && ArithmeticCalculator.Calculate(assignment.OperatorKind, leftNumber, rightNumber) is { } constraint)
+        var state = context.State;
+        SymbolicValue value;
+        if (context.State.Constraint<FuzzyConstraint>(assignment.Target) is { } fuzzy && fuzzy.Source == assignment.WrappedOperation)
         {
-            state = state.SetOperationConstraint(assignment, constraint);
-            if (assignment.Target.TrackedSymbol(state) is { } symbol)
-            {
-                state = state.SetSymbolConstraint(symbol, constraint);
-            }
-            return state;
+            value = SymbolicValue.Empty;
         }
         else
         {
-            return null;
+            value = (ProcessNumericalCompoundAssignment(state, assignment) ?? ProcessCompoundAssignment(state, assignment)) is { } constraint
+                ? (state[assignment.Target] ?? SymbolicValue.Empty).WithConstraint(constraint).WithConstraint(new FuzzyConstraint(assignment.WrappedOperation))
+                : SymbolicValue.Empty;
         }
+        if (assignment.Target.TrackedSymbol(state) is { } symbol)
+        {
+            state = state.SetSymbolValue(symbol, value);
+        }
+        return state.SetOperationValue(assignment, value);
     }
 
-    private static ProgramState ProcessCompoundAssignment(ProgramState state, ICompoundAssignmentOperationWrapper assignment)
-    {
-        if ((state.HasConstraint(assignment.Target, ObjectConstraint.NotNull) && state.HasConstraint(assignment.Value, ObjectConstraint.NotNull))
-            || assignment.Target.Type.Is(KnownType.System_String)
-            || assignment.Target.Type.IsNonNullableValueType())
-        {
-            state = state.SetOperationConstraint(assignment, ObjectConstraint.NotNull);
-            if (assignment.Target.TrackedSymbol(state) is { } symbol)
-            {
-                state = state.SetSymbolValue(symbol, SymbolicValue.NotNull);
-            }
-            return state;
-        }
-        else
-        {
-            return assignment.Target.TrackedSymbol(state) is { } symbol
-                ? state.SetSymbolValue(symbol, SymbolicValue.Empty)
-                : state;
-        }
-    }
+    private static SymbolicConstraint ProcessNumericalCompoundAssignment(ProgramState state, ICompoundAssignmentOperationWrapper assignment) =>
+        state.Constraint<NumberConstraint>(assignment.Target) is { } leftNumber
+        && state.Constraint<NumberConstraint>(assignment.Value) is { } rightNumber
+            ? ArithmeticCalculator.Calculate(assignment.OperatorKind, leftNumber, rightNumber)
+            : null;
+
+    private static SymbolicConstraint ProcessCompoundAssignment(ProgramState state, ICompoundAssignmentOperationWrapper assignment) =>
+        (state.HasConstraint(assignment.Target, ObjectConstraint.NotNull) && state.HasConstraint(assignment.Value, ObjectConstraint.NotNull))
+        || assignment.Target.Type.Is(KnownType.System_String)
+        || assignment.Target.Type.IsNonNullableValueType()
+            ? ObjectConstraint.NotNull
+            : null;
 }
