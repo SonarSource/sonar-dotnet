@@ -38,6 +38,7 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
 
     private readonly Dictionary<IOperation, BasicBlock> trueOperations = new();
     private readonly Dictionary<IOperation, BasicBlock> falseOperations = new();
+    private readonly Dictionary<IOperation, BasicBlock> unknownOperations = new();
     private readonly List<IOperation> reachedOperations = new();
 
     protected abstract bool IsInsideUsingDeclaration(SyntaxNode node);
@@ -52,16 +53,20 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
     public override ProgramState ConditionEvaluated(SymbolicContext context)
     {
         var operation = context.Operation.Instance;
-        if (context.State.Constraint<BoolConstraint>(operation) is { } constraint
-            && IsNotIgnored(context.State, operation))
+        if (IsNotIgnored(context.State, operation))
         {
+            var constraint = context.State.Constraint<BoolConstraint>(operation);
             if (constraint == BoolConstraint.True)
             {
                 trueOperations[operation] = context.Block;
             }
-            else
+            else if (constraint == BoolConstraint.False)
             {
                 falseOperations[operation] = context.Block;
+            }
+            else
+            {
+                unknownOperations[operation] = context.Block;
             }
         }
         return context.State;
@@ -79,8 +84,8 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
 
     public override void ExecutionCompleted()
     {
-        var alwaysTrue = trueOperations.Except(falseOperations);
-        var alwaysFalse = falseOperations.Except(trueOperations);
+        var alwaysTrue = trueOperations.Except(falseOperations).Except(unknownOperations);
+        var alwaysFalse = falseOperations.Except(trueOperations).Except(unknownOperations);
 
         foreach (var pair in alwaysTrue)
         {
