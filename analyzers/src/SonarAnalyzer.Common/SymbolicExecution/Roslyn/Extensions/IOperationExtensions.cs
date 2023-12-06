@@ -102,6 +102,9 @@ internal static class IOperationExtensions
     internal static ILocalReferenceOperationWrapper ToLocalReference(this IOperation operation) =>
         ILocalReferenceOperationWrapper.FromOperation(operation);
 
+    internal static IMemberReferenceOperationWrapper ToMemberReference(this IOperation operation) =>
+        IMemberReferenceOperationWrapper.FromOperation(operation);
+
     internal static IMethodReferenceOperationWrapper ToMethodReference(this IOperation operation) =>
         IMethodReferenceOperationWrapper.FromOperation(operation);
 
