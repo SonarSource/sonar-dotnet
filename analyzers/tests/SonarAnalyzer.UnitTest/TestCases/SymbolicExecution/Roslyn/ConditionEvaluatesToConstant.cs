@@ -3433,10 +3433,35 @@ public class Repro_8428
 // Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/8445
 public class Repro_8445
 {
-    private static readonly int readonlyField = 42;
+    private readonly int readonlyInt = 42;
+    private readonly string readonlyString = "42";
+    private static readonly int readonlyStaticInt = 42;
+    private static readonly string readonlyStaticString = "42";
     private void Test()
     {
-        if (readonlyField == 42)    // FN
+        if (readonlyInt == 42)                                  // FN
+            Console.WriteLine();
+        if (readonlyString == "42")                             // FN
+            Console.WriteLine();
+        if (readonlyStaticInt == 42)                            // FN
+            Console.WriteLine();
+        if (readonlyStaticString == "42")                       // FN
+            Console.WriteLine();
+        var other = new Repro_8445_OtherClass();
+        if (other.readonlyInt == 42)                            // FN
+            Console.WriteLine();
+        if (other.readonlyString == "42")                       // FN
+            Console.WriteLine();
+        if (Repro_8445_OtherClass.readonlyStaticInt == 42)      // FN
+            Console.WriteLine();
+        if (Repro_8445_OtherClass.readonlyStaticString == "42") // FN
             Console.WriteLine();
     }
+}
+public class Repro_8445_OtherClass
+{
+    public static readonly int readonlyStaticInt = 42;
+    public static readonly string readonlyStaticString = "42";
+    public readonly int readonlyInt = 42;
+    public readonly string readonlyString = "42";
 }
