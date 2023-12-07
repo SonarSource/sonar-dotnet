@@ -32,18 +32,20 @@ internal class ExceptionCandidate
     public ExceptionState FromOperation(ProgramState state, IOperationWrapperSonar operation) =>
         operation.Instance.Kind switch
         {
-            OperationKindEx.ArrayElementReference => FromOperation(IArrayElementReferenceOperationWrapper.FromOperation(operation.Instance)),
+            OperationKindEx.ArrayElementReference => FromOperation(operation.Instance.ToArrayElementReference()),
             OperationKindEx.Conversion => FromConversion(operation),
             OperationKindEx.DynamicIndexerAccess => new ExceptionState(typeCatalog.SystemIndexOutOfRangeException),
             OperationKindEx.DynamicInvocation => ExceptionState.UnknownException,      // This raises is Microsoft.CSharp.RuntimeBinder.RuntimeBinderException that we can't access.
             OperationKindEx.DynamicMemberReference => ExceptionState.UnknownException, // This raises is Microsoft.CSharp.RuntimeBinder.RuntimeBinderException that we can't access.
             OperationKindEx.DynamicObjectCreation => ExceptionState.UnknownException,  // This raises is Microsoft.CSharp.RuntimeBinder.RuntimeBinderException that we can't access.
-            OperationKindEx.EventReference => FromOperation(state, IMemberReferenceOperationWrapper.FromOperation(operation.Instance)),
-            OperationKindEx.FieldReference => FromOperation(state, IMemberReferenceOperationWrapper.FromOperation(operation.Instance)),
-            OperationKindEx.Invocation => FromOperation(IInvocationOperationWrapper.FromOperation(operation.Instance)),
-            OperationKindEx.MethodReference => FromOperation(state, IMemberReferenceOperationWrapper.FromOperation(operation.Instance)),
+            OperationKindEx.EventReference => FromOperation(state, operation.Instance.ToMemberReference()),
+            OperationKindEx.FieldReference => FromOperation(state, operation.Instance.ToMemberReference()),
+            OperationKindEx.Invocation => FromOperation(operation.Instance.ToInvocation()),
+            OperationKindEx.MethodReference => FromOperation(state, operation.Instance.ToMemberReference()),
             OperationKindEx.ObjectCreation => operation.Instance.Type.DerivesFrom(KnownType.System_Exception) ? null : ExceptionState.UnknownException,
-            OperationKindEx.PropertyReference => FromOperation(state, IMemberReferenceOperationWrapper.FromOperation(operation.Instance)),
+            OperationKindEx.PropertyReference => FromOperation(state, operation.Instance.ToMemberReference()),
+            OperationKindEx.Binary => FromOperation(operation.Instance.ToBinary()),
+            OperationKindEx.CompoundAssignment => FromOperation(operation.Instance.ToCompoundAssignment()),
             _ => null
         };
 
@@ -80,4 +82,17 @@ internal class ExceptionCandidate
         || invocation.IsLockRelease()       // Needed by S2222
         ? null
         : ExceptionState.UnknownException;
+
+    private ExceptionState FromOperation(IBinaryOperationWrapper binary) =>
+        IsDivision(binary.OperatorKind)
+            ? new ExceptionState(typeCatalog.SystemDivideByZeroException)
+            : null;
+
+    private ExceptionState FromOperation(ICompoundAssignmentOperationWrapper compoundAssignment) =>
+        IsDivision(compoundAssignment.OperatorKind)
+            ? new ExceptionState(typeCatalog.SystemDivideByZeroException)
+            : null;
+
+    private static bool IsDivision(BinaryOperatorKind operatorKind) =>
+        operatorKind is BinaryOperatorKind.Divide or BinaryOperatorKind.Remainder or BinaryOperatorKind.IntegerDivide;
 }

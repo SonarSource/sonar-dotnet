@@ -707,4 +707,52 @@ tag = ""AfterCatch"";
         validator.ValidateTagOrder("BeforeTry", "InTry", "AfterCatch");
         validator.ExitStates.Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
     }
+
+    [TestMethod]
+    public void ExceptionCandidate_DivisionByZero()
+    {
+        const string code = """
+            var tag = "BeforeTry";
+            try
+            {
+                tag = "InTry";
+                _ = 42 / canBeZero;
+            }
+            catch
+            {
+                tag = "InCatch";
+            }
+            tag = "AfterCatch";
+
+            """;
+        var validator = SETestContext.CreateCS(code, "int canBeZero").Validator;
+        validator.ValidateContainsOperation(OperationKindEx.Binary);
+        validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
+        validator.TagStates("InCatch").Should().ContainSingle(x => HasExceptionOfType(x, "DivideByZeroException"));
+        validator.ExitStates.Should().ContainSingle().And.ContainSingle(x => HasNoException(x));
+    }
+
+    [TestMethod]
+    public void ExceptionCandidate_DivisionByZero_Remainder()
+    {
+        const string code = """
+            var tag = "BeforeTry";
+            try
+            {
+                tag = "InTry";
+                _ = 42 % canBeZero;
+            }
+            catch
+            {
+                tag = "InCatch";
+            }
+            tag = "AfterCatch";
+
+            """;
+        var validator = SETestContext.CreateCS(code, "int canBeZero").Validator;
+        validator.ValidateContainsOperation(OperationKindEx.Binary);
+        validator.ValidateTagOrder("BeforeTry", "InTry", "InCatch", "AfterCatch");
+        validator.TagStates("InCatch").Should().ContainSingle(x => HasExceptionOfType(x, "DivideByZeroException"));
+        validator.ExitStates.Should().ContainSingle().And.ContainSingle(x => HasNoException(x));
+    }
 }

@@ -26,6 +26,7 @@ internal class TypeCatalog
     public INamedTypeSymbol SystemNullReferenceException { get; }
     public INamedTypeSymbol SystemInvalidCastException { get; }
     public INamedTypeSymbol SystemArgumentOutOfRangeException { get; }
+    public INamedTypeSymbol SystemDivideByZeroException { get; }
 
     public TypeCatalog(Compilation compilation)
     {
@@ -33,5 +34,6 @@ internal class TypeCatalog
         SystemNullReferenceException = compilation.GetTypeByMetadataName("System.NullReferenceException");
         SystemInvalidCastException = compilation.GetTypeByMetadataName("System.InvalidCastException");
         SystemArgumentOutOfRangeException = compilation.GetTypeByMetadataName("System.ArgumentOutOfRangeException");
+        SystemDivideByZeroException = compilation.GetTypeByMetadataName("System.DivideByZeroException");
     }
 }
