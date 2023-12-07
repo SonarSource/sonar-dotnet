@@ -203,7 +203,8 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
             return BinaryBoolConstraint(kind, leftBool == BoolConstraint.True, rightBool == BoolConstraint.True);
         }
         else if (left?.Constraint<NumberConstraint>() is { } leftNumber
-            && right?.Constraint<NumberConstraint>() is { } rightNumber)
+            && right?.Constraint<NumberConstraint>() is { } rightNumber
+            && (!isLoopCondition || visitCount <= 3))
         {
             return BinaryNumberConstraint(kind, leftNumber, rightNumber);
         }
