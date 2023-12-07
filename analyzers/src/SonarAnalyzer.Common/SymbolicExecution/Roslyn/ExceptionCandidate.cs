@@ -83,14 +83,14 @@ internal class ExceptionCandidate
         ? null
         : ExceptionState.UnknownException;
 
-    private static ExceptionState FromOperation(IBinaryOperationWrapper binary) =>
+    private ExceptionState FromOperation(IBinaryOperationWrapper binary) =>
         IsDivision(binary.OperatorKind)
-            ? ExceptionState.UnknownException   // This raises is System.DivideByZeroException that we can't access.
+            ? new ExceptionState(typeCatalog.SystemDivideByZeroException)
             : null;
 
-    private static ExceptionState FromOperation(ICompoundAssignmentOperationWrapper compoundAssignment) =>
+    private ExceptionState FromOperation(ICompoundAssignmentOperationWrapper compoundAssignment) =>
         IsDivision(compoundAssignment.OperatorKind)
-            ? ExceptionState.UnknownException   // This raises is System.DivideByZeroException that we can't access.
+            ? new ExceptionState(typeCatalog.SystemDivideByZeroException)
             : null;
 
     private static bool IsDivision(BinaryOperatorKind operatorKind) =>
