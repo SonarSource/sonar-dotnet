@@ -26,24 +26,24 @@
 },
 {
 "id":  "S2583",
-"message":  "Change this condition so that it does not always evaluate to 'True'. Some code paths are unreachable.",
+"message":  "Change this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.",
 "location":  [
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L449",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L503",
 "region":  {
-"startLine":  449,
-"startColumn":  21,
-"endLine":  449,
-"endColumn":  31
+"startLine":  503,
+"startColumn":  29,
+"endLine":  503,
+"endColumn":  43
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L476-L551",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L505-L507",
 "region":  {
-"startLine":  476,
-"startColumn":  26,
-"endLine":  551,
-"endColumn":  42
+"startLine":  505,
+"startColumn":  29,
+"endLine":  507,
+"endColumn":  48
 }
 }
 ]
@@ -53,21 +53,45 @@
 "message":  "Change this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.",
 "location":  [
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L560",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L520",
 "region":  {
-"startLine":  560,
-"startColumn":  22,
-"endLine":  560,
+"startLine":  520,
+"startColumn":  30,
+"endLine":  520,
 "endColumn":  42
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L562",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L520-L523",
 "region":  {
-"startLine":  562,
-"startColumn":  17,
-"endLine":  562,
-"endColumn":  78
+"startLine":  520,
+"startColumn":  46,
+"endLine":  523,
+"endColumn":  53
+}
+}
+]
+},
+{
+"id":  "S2583",
+"message":  "Change this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L546",
+"region":  {
+"startLine":  546,
+"startColumn":  29,
+"endLine":  546,
+"endColumn":  49
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L548-L549",
+"region":  {
+"startLine":  548,
+"startColumn":  29,
+"endLine":  549,
+"endColumn":  58
 }
 }
 ]

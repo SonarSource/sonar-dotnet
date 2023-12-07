@@ -2,14 +2,27 @@
 "issues":  [
 {
 "id":  "S2589",
-"message":  "Change this condition so that it does not always evaluate to 'False'.",
+"message":  "Change this condition so that it does not always evaluate to 'True'.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L250",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L494",
 "region":  {
-"startLine":  250,
-"startColumn":  50,
-"endLine":  250,
-"endColumn":  71
+"startLine":  494,
+"startColumn":  26,
+"endLine":  494,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2589",
+"message":  "Change this condition so that it does not always evaluate to 'True'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L536",
+"region":  {
+"startLine":  536,
+"startColumn":  30,
+"endLine":  536,
+"endColumn":  41
 }
 }
 }
