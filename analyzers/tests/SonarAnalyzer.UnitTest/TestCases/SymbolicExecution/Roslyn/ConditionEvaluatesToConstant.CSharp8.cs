@@ -530,7 +530,7 @@ class Repro_8149
 
     void Check_SwitchExpression(IUser user)
     {
-        if (user.UserType switch                    // Noncompliant FP: always false
+        if (user.UserType switch
         {
             UserType.Internal => user.Id == 1,
             UserType.External => user.LoginName == "test",
