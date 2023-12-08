@@ -47,8 +47,5 @@ jobs:
       - name: Notify failures on Slack
         uses: Ilshidur/action-slack@1.6.2
         if: failure()
-        env:
-          SLACK_WEBHOOK: ${{ fromJSON(steps.secrets.outputs.vault).SLACK_WEBHOOK }}
-          SLACK_OVERRIDE_MESSAGE: 'Dogfood build for `${{ steps.dogfood.outputs.sha1 }}`: *failed*, see the logs at https://github.com/SonarSource/sonar-dotnet/actions'
         with:
-          args: 'Fail to build dogfood branch'
+          args: "Dogfood merge failed by {{ GITHUB_ACTOR }}, see {{ GITHUB_SERVER_URL }}/{{ GITHUB_REPOSITORY }}/actions/runs/{{ GITHUB_RUN_ID }}"
