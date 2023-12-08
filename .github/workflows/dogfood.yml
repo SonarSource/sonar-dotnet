@@ -2,9 +2,9 @@ name: dogfood merge
 # This workflow is triggered on pushes to master and dogfood branches
 on:
   push:
-    branches:
-      - master
-      - 'dogfood/*'
+  delete:
+    # There is no 'branch:' filter for the delete action,
+    # so we are using 'if:' inside the job instead.
 
 env:
   SLACK_CHANNEL: team-lang-dotnet
@@ -12,6 +12,9 @@ env:
 
 jobs:
   dogfood_merge:
+    if: >-
+      (github.event_name == 'push' && (github.event.ref == 'refs/heads/master' || startsWith(github.event.ref, 'refs/heads/dogfood/')))
+      || (github.event_name == 'delete' && startsWith(github.event.ref, 'dogfood/'))
     runs-on: ubuntu-latest
     name: Update dogfood branch
     permissions:
