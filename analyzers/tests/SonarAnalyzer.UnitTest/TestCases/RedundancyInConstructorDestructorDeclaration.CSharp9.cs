@@ -48,3 +48,17 @@ record FooWithParams(string name)
 
     ~FooWithParams() { } // Noncompliant {{Remove this redundant destructor.}}
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8436
+public class Repro_FP_8436
+{
+    public abstract record BaseRecord(string Value);
+
+    public record RecordStyle() : BaseRecord("SomeValue"); // Noncompliant FP, Foo is calling Base constructor with record idiomatic syntax, it's not redundant
+
+    public record DefaultStyle : BaseRecord
+    {
+        public DefaultStyle() : base("SomeValue") // Compliant, "default" way of calling Base constructor
+        { }
+    }
+}
