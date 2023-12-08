@@ -47,3 +47,17 @@ record FooWithParams(string name)
 
     ~FooWithParams() { } // Fixed
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8436
+public class Repro_FP_8436
+{
+    public abstract record BaseRecord(string Value);
+
+    public record RecordStyle() : BaseRecord("SomeValue"); // Fixed
+
+    public record DefaultStyle : BaseRecord
+    {
+        public DefaultStyle() : base("SomeValue") // Compliant, "default" way of calling Base constructor
+        { }
+    }
+}
