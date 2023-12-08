@@ -19,7 +19,6 @@ jobs:
     name: Update dogfood branch
     permissions:
       id-token: write # required for SonarSource/vault-action-wrapper
-      contents: write # required to grant GITHUB_TOKEN writing permission
     steps:
       - name: get secrets
         id: secrets
@@ -50,6 +49,6 @@ jobs:
         if: failure()
         env:
           SLACK_WEBHOOK: ${{ fromJSON(steps.secrets.outputs.vault).SLACK_WEBHOOK }}
-          SLACK_OVERRIDE_MESSAGE: 'Dogfood build for `${{ steps.dogfood.outputs.sha1 }}`: *failed*, see the logs at https://github.com/SonarSource/sonar-iac/actions'
+          SLACK_OVERRIDE_MESSAGE: 'Dogfood build for `${{ steps.dogfood.outputs.sha1 }}`: *failed*, see the logs at https://github.com/SonarSource/sonar-dotnet/actions'
         with:
           args: 'Fail to build dogfood branch'
