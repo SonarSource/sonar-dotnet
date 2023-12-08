@@ -3458,10 +3458,28 @@ public class Repro_8445
             Console.WriteLine();
     }
 }
+
 public class Repro_8445_OtherClass
 {
     public static readonly int readonlyStaticInt = 42;
     public static readonly string readonlyStaticString = "42";
     public readonly int readonlyInt = 42;
     public readonly string readonlyString = "42";
+}
+
+// Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/8449
+public class Repro_8449
+{
+    public static void Foo()
+    {
+        int delay = 100;
+        while (true)
+        {
+            if (delay < 1000) // Noncompliant {{Change this condition so that it does not always evaluate to 'True'.}} FP
+            //  ^^^^^^^^^^^^
+            {
+                delay = delay * 2;
+            }
+        }
+    }
 }
