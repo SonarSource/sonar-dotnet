@@ -52,11 +52,11 @@ record FooWithParams(string name)
 // https://github.com/SonarSource/sonar-dotnet/issues/8436
 public class Repro_FP_8436
 {
-    public abstract record Base(string Value);
+    public abstract record BaseRecord(string Value);
 
-    public record RecordStyle() : Base("SomeValue"); // Noncompliant FP, Foo is calling Base constructor with record idiomatic syntax, it's not redundant
+    public record RecordStyle() : BaseRecord("SomeValue"); // Noncompliant FP, Foo is calling Base constructor with record idiomatic syntax, it's not redundant
 
-    public record DefaultStyle : Base
+    public record DefaultStyle : BaseRecord
     {
         public DefaultStyle() : base("SomeValue") // Compliant, "default" way of calling Base constructor
         { }
