@@ -128,3 +128,19 @@ class Repro_7776
         }
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8430
+class Repro_8430
+{
+    void Visit(ReadOnlySpan<char> x) { }
+
+    void Test(IEnumerable<ReadOnlyMemory<char>> tokens)
+    {
+        // rule suggests "Select(token => token.Span)", but "Span" is ref-struct, so it cannot be used a type parameter.
+        foreach (ReadOnlyMemory<char> token in tokens) // Noncompliant FP
+        {
+            ReadOnlySpan<char> chars = token.Span;
+            Visit(chars);
+        }
+    }
+}
