@@ -35,7 +35,6 @@ namespace SonarAnalyzer.Rules
     {
         protected static readonly ISet<string> FileExtensionWhitelist = new HashSet<string> { ".cs", ".csx", ".vb" };
         private readonly DiagnosticDescriptor rule;
-        protected override bool EnableConcurrentExecution => false;
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
             ImmutableArray.Create(rule);
