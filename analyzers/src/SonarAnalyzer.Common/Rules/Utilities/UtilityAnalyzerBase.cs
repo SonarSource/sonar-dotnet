@@ -103,7 +103,7 @@ namespace SonarAnalyzer.Rules
                 {
                     Directory.CreateDirectory(parameters.OutPath);
                     using var stream = File.Create(Path.Combine(parameters.OutPath, FileName));
-                    foreach (var message in treeMessages.GetConsumingEnumerable(cancel))
+                    foreach (var message in treeMessages.GetConsumingEnumerable(cancel).WhereNotNull())
                     {
                         message.WriteDelimitedTo(stream);
                     }
