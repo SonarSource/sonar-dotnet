@@ -29,6 +29,7 @@ internal sealed class CompoundAssignment : SimpleProcessor<ICompoundAssignmentOp
 
     protected override ProgramState Process(SymbolicContext context, ICompoundAssignmentOperationWrapper assignment) =>
         ProcessNumericalCompoundAssignment(context.State, assignment)
+        ?? ProcessDelegateCompoundAssignment(context.State, assignment)
         ?? ProcessCompoundAssignment(context.State, assignment)
         ?? context.State;
 
@@ -43,6 +44,29 @@ internal sealed class CompoundAssignment : SimpleProcessor<ICompoundAssignmentOp
             {
                 state = state.SetSymbolConstraint(symbol, constraint);
             }
+            return state;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    private static ProgramState ProcessDelegateCompoundAssignment(ProgramState state, ICompoundAssignmentOperationWrapper assignment)
+    {
+        // When the -= operator is used on a delegate instance (for unsubscribing),
+        // it can leave the invocation list associated with the delegate empty. In that case the delegate instance will become null.
+        // https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/subtraction-operator#delegate-removal
+        // For this reason, we remove the NotNull constraint from the delegate instance.
+        if (assignment.Target.Type.TypeKind == TypeKind.Delegate
+            && assignment.OperatorKind == BinaryOperatorKind.Subtract
+            && state.HasConstraint(assignment.Target, ObjectConstraint.NotNull))
+        {
+            var value = (state[assignment.Target] ?? SymbolicValue.Empty).WithoutConstraint(ObjectConstraint.NotNull);
+            state = state
+                .SetOperationValue(assignment, value)
+                .SetOperationValue(assignment.Target, value);
+            state = state.SetSymbolValue(assignment.Target.TrackedSymbol(state), value);
             return state;
         }
         else
