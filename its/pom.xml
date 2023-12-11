@@ -20,7 +20,6 @@
   </organization>
 
   <properties>
-    <scannerMsbuild.version>5.15.0.80890</scannerMsbuild.version>
     <surefire.argLine>-server</surefire.argLine>
   </properties>
 
@@ -28,14 +27,7 @@
     <dependency>
       <groupId>org.sonarsource.orchestrator</groupId>
       <artifactId>sonar-orchestrator-junit5</artifactId>
-      <version>4.4.0.1640</version>
-    </dependency>
-    <dependency>
-      <groupId>org.sonarsource.scanner.msbuild</groupId>
-      <artifactId>sonar-scanner-msbuild</artifactId>
-      <version>${scannerMsbuild.version}</version>
-      <type>zip</type>
-      <classifier>net46</classifier>
+      <version>4.6.0.1748</version>
     </dependency>
     <dependency>
       <groupId>org.sonarsource.sonarqube</groupId>
@@ -70,36 +62,9 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
           <version>3.2.2</version>
-          <configuration>
-            <systemProperties>
-              <scannerMsbuild.version>${scannerMsbuild.version}</scannerMsbuild.version>
-            </systemProperties>
-          </configuration>
         </plugin>
       </plugins>
     </pluginManagement>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <version>3.6.1</version>
-        <executions>
-          <execution>
-            <id>get-scanner-2.1</id>
-            <phase>initialize</phase>
-            <goals>
-              <goal>get</goal>
-            </goals>
-            <configuration>
-              <artifactId>sonar-scanner-msbuild</artifactId>
-              <groupId>org.sonarsource.scanner.msbuild</groupId>
-              <packaging>zip</packaging>
-              <version>2.1.0.0</version>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
   </build>
 
 </project>
