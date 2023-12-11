@@ -97,27 +97,33 @@ namespace SonarAnalyzer.Rules
                 {
                     return;
                 }
-                var treeMessages = new ConcurrentStack<TMessage>();
+                var treeMessages = new BlockingCollection<TMessage>();
+                var consumerTask = Task.Factory.StartNew(() =>
+                {
+                    Directory.CreateDirectory(parameters.OutPath);
+                    using var stream = File.Create(Path.Combine(parameters.OutPath, FileName));
+                    while (treeMessages.TryTake(out var message))
+                    {
+                        message.WriteDelimitedTo(stream);
+                    }
+                }, TaskCreationOptions.LongRunning);
                 startContext.RegisterSemanticModelAction(modelContext =>
                 {
                     if (ShouldGenerateMetrics(parameters, modelContext))
                     {
                         var message = CreateMessage(parameters, modelContext.Tree, modelContext.SemanticModel);
-                        treeMessages.Push(message);
+                        treeMessages.Add(message);
                     }
                 });
                 startContext.RegisterCompilationEndAction(endContext =>
                 {
-                    var allMessages = CreateAnalysisMessages(endContext)
-                        .Concat(treeMessages)
-                        .WhereNotNull()
-                        .ToArray();
-                    Directory.CreateDirectory(parameters.OutPath);
-                    using var stream = File.Create(Path.Combine(parameters.OutPath, FileName));
-                    foreach (var message in allMessages)
+                    var analysisMessages = CreateAnalysisMessages(endContext);
+                    foreach (var message in analysisMessages)
                     {
-                        message.WriteDelimitedTo(stream);
+                        treeMessages.Add(message);
                     }
+                    treeMessages.CompleteAdding();
+                    consumerTask.Wait();
                 });
             });
 
