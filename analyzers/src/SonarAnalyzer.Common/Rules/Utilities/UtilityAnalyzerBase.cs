@@ -92,24 +92,25 @@ namespace SonarAnalyzer.Rules
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterCompilationStartAction(startContext =>
             {
-                var parameters = ReadParameters(startContext);
+                var parameters = base.ReadParameters(startContext);
                 if (!parameters.IsAnalyzerEnabled)
                 {
                     return;
                 }
                 var treeMessages = new BlockingCollection<TMessage>();
+                var cancel = startContext.Cancel;
                 var consumerTask = Task.Factory.StartNew(() =>
                 {
                     Directory.CreateDirectory(parameters.OutPath);
                     using var stream = File.Create(Path.Combine(parameters.OutPath, FileName));
-                    foreach (var message in treeMessages.GetConsumingEnumerable())
+                    foreach (var message in treeMessages.GetConsumingEnumerable(cancel))
                     {
                         message.WriteDelimitedTo(stream);
                     }
-                }, TaskCreationOptions.LongRunning);
+                }, cancel, TaskCreationOptions.LongRunning, TaskScheduler.Default);
                 startContext.RegisterSemanticModelAction(modelContext =>
                 {
-                    if (ShouldGenerateMetrics(parameters, modelContext))
+                    if (ShouldGenerateMetrics(parameters, modelContext) && !cancel.IsCancellationRequested)
                     {
                         var message = CreateMessage(parameters, modelContext.Tree, modelContext.SemanticModel);
                         treeMessages.Add(message);
