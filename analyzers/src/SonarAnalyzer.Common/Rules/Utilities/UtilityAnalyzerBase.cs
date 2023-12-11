@@ -92,7 +92,7 @@ namespace SonarAnalyzer.Rules
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterCompilationStartAction(startContext =>
             {
-                var parameters = base.ReadParameters(startContext);
+                var parameters = ReadParameters(startContext);
                 if (!parameters.IsAnalyzerEnabled)
                 {
                     return;
