@@ -97,12 +97,19 @@ namespace SonarAnalyzer.Rules
                 {
                     return;
                 }
-                var treeMessages = new BlockingCollection<TMessage>();
                 var cancel = startContext.Cancel;
+                var outPath = parameters.OutPath;
+                var treeMessages = new BlockingCollection<TMessage>();
                 var consumerTask = Task.Factory.StartNew(() =>
                 {
-                    Directory.CreateDirectory(parameters.OutPath);
-                    using var stream = File.Create(Path.Combine(parameters.OutPath, FileName));
+                    // Consume all messages as they arrive during the compilation and write them to disk.
+                    // The Task starts on CompilationStart and in CompilationEnd we block until it is finished via CompleteAdding().
+                    // Note: CompilationEndAction is not guaranteed to be called for each CompilationStart.
+                    // Therefore it is important to properly handle cancelation here.
+                    // LongRunning: We probably run on a dedicated thread outside of the thread pool
+                    // If any of the IO operations throw, CompilationEnd takes care of the clean up.
+                    Directory.CreateDirectory(outPath);
+                    using var stream = File.Create(Path.Combine(outPath, FileName));
                     foreach (var message in treeMessages.GetConsumingEnumerable(cancel).WhereNotNull())
                     {
                         message.WriteDelimitedTo(stream);
@@ -124,8 +131,14 @@ namespace SonarAnalyzer.Rules
                         treeMessages.Add(message);
                     }
                     treeMessages.CompleteAdding();
-                    consumerTask.Wait();
-                    treeMessages.Dispose();
+                    try
+                    {
+                        consumerTask.Wait(cancel); // Throws, if the task failed.
+                    }
+                    finally
+                    {
+                        treeMessages.Dispose();
+                    }
                 });
             });
 
