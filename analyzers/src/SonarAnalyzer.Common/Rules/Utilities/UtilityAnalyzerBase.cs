@@ -124,6 +124,7 @@ namespace SonarAnalyzer.Rules
                     }
                     treeMessages.CompleteAdding();
                     consumerTask.Wait();
+                    treeMessages.Dispose();
                 });
             });
 
