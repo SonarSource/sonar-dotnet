@@ -133,7 +133,7 @@ namespace SonarAnalyzer.Rules
                     treeMessages.CompleteAdding();
                     try
                     {
-                        consumerTask.Wait(cancel); // Throws, if the task failed.
+                        consumerTask.Wait(cancel); // Wait until all messages are written to disk. Throws, if the task failed.
                     }
                     finally
                     {
