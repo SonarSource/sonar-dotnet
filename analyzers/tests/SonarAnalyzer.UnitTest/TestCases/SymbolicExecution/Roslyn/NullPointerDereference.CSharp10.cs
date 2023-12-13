@@ -8,16 +8,15 @@ public class Sample
     public void Examples()
     {
         StringBuilder sb = new();
-
         (sb, int a) = (null, 42);
-        sb.ToString(); // FN
+        sb.ToString();  // Noncompliant
     }
 
     public void Unassigned()
     {
         StringBuilder isNull, hasValue;
         (isNull, hasValue) = (null, new StringBuilder());
-        isNull.ToString();      // FN
+        isNull.ToString();  // Noncompliant
         hasValue.ToString();
     }
 }

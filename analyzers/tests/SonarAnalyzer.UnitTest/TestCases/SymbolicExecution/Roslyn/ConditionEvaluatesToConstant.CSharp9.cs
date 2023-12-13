@@ -121,11 +121,11 @@ namespace Tests.Diagnostics
             {
                 var tmp = 0;
                 var flag = true;
-                while (flag)        // Noncompliant
+                while (flag)        // Compliant
                 {
                     (flag, tmp) = (false, 5);
                 }
-                o = value;          // Secondary
+                o = value;
             }
         }
     }

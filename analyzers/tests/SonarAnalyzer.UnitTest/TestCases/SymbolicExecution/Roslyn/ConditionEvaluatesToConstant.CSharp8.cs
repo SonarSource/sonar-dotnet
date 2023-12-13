@@ -133,8 +133,8 @@ namespace Tests.Diagnostics
         public void NestedDeconstructionAssignment()
         {
             var (a, (b, _)) = (true, (true, true));
-            if (a) { }  // FN
-            if (b) { }  // FN
+            if (a) { }  // Noncompliant
+            if (b) { }  // Noncompliant
         }
 
         int UsingDeclaration_Null()
@@ -330,7 +330,7 @@ namespace Tests.Diagnostics
             {
             }
 
-            if (b)  // FN
+            if (b)  // Noncompliant
             {
             }
         }

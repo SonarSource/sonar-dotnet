@@ -250,7 +250,7 @@ class TestLoops
             disposable.Dispose();       // Compliant
 
         foreach (var (_, disposable) in tuples)
-            disposable.Dispose();       // Noncompliant FP
+            disposable.Dispose();       // Compliant
     }
 }
 
