@@ -3125,7 +3125,7 @@ public class Tuples
 
         (memoryStream, str) = GetData();
 
-        if (memoryStream != null) // Noncompliant FP: memoryStream was reassigned as a tuple
+        if (memoryStream != null) // Compliant: memoryStream was reassigned as a tuple
         {
             // some code
         }
@@ -3142,27 +3142,90 @@ public class Repro_7057
 
     public void WithTuple()
     {
-        string current = null;
-        string last;
-        do
+        string text1 = null;
+        (text1, _) = SomeTuple();
+        if (text1 == null) // Compliant
         {
-            last = current;
-            (current, _) = SomeTuple();
+            Console.WriteLine();
         }
-        while (last == null);   // Noncompliant FP
+
+        string text2 = "";
+        (text2, _) = (null, 42);
+        if (text2 == null) // Noncompliant
+        {
+            Console.WriteLine();
+        }
+
+        string text3 = null;
+        ((text3, _), _) = (SomeTuple(), 42);
+        if (text3 == null) // Compliant
+        {
+            Console.WriteLine();
+        }
+
+        var (text4, _) = SomeTuple();
+        if (text4 == null) // Compliant
+        {
+            Console.WriteLine();
+        }
+
+        var (text5, _) = (null as string, 42);
+        if (text5 == null) // Noncompliant
+        {
+            Console.WriteLine();
+        }
+
+        string text6 = null;
+        (_, (text6, _)) = (42, SomeTuple());
+        if (text6 == null) // Compliant
+        {
+            Console.WriteLine();
+        }
+
+        string text7 = "";
+        (_, (text7, _)) = (SomeTuple(), (null, 42));
+        if (text7 == null) // Noncompliant
+        {
+            Console.WriteLine();
+        }
+
+        string text8, text9, text10;
+        text8 = text9 = text10 = SomeString();
+        (text8, (text9, text10)) = ("", ("", ""));
+        if (text8 == null           // Noncompliant
+            || text9 == null        // Noncompliant
+            || text10 == null)      // Noncompliant
+        {
+            Console.WriteLine();    // Secondary
+        }
+
+        var tuple = ("hello", 42);
+        if (tuple.Item1 == null)    // FN
+        {
+            Console.WriteLine();
+        }
+
+        string text11 = SomeString();
+        string text12 = null;
+        (text11, text12) = (text12, text11);
+        if (text11 == null)         // Noncompliant
+        {
+            Console.WriteLine();
+        }
+        if (text12 == null)         // Compliant
+        {
+            Console.WriteLine();
+        }
     }
 
     public void WithString()
     {
         string current = null;
-        string last;
-
-        do
+        current = SomeString();
+        if (current == null) // Compliant
         {
-            last = current;
-            current = SomeString();
+            Console.WriteLine();
         }
-        while (last == null);
     }
 }
 
