@@ -51,6 +51,9 @@ internal static class IOperationExtensions
     internal static IConversionOperationWrapper? AsConversion(this IOperation operation) =>
         operation.As(OperationKindEx.Conversion, IConversionOperationWrapper.FromOperation);
 
+    internal static IDeclarationExpressionOperationWrapper? AsDeclarationExpression(this IOperation operation) =>
+        operation.As(OperationKindEx.DeclarationExpression, IDeclarationExpressionOperationWrapper.FromOperation);
+
     internal static IDeclarationPatternOperationWrapper? AsDeclarationPattern(this IOperation operation) =>
         operation.As(OperationKindEx.DeclarationPattern, IDeclarationPatternOperationWrapper.FromOperation);
 
@@ -68,6 +71,9 @@ internal static class IOperationExtensions
 
     internal static IPropertyReferenceOperationWrapper? AsPropertyReference(this IOperation operation) =>
         operation.As(OperationKindEx.PropertyReference, IPropertyReferenceOperationWrapper.FromOperation);
+
+    internal static ITupleOperationWrapper? AsTuple(this IOperation operation) =>
+        operation.As(OperationKindEx.Tuple, ITupleOperationWrapper.FromOperation);
 
     internal static IAwaitOperationWrapper ToAwait(this IOperation operation) =>
         IAwaitOperationWrapper.FromOperation(operation);
@@ -122,6 +128,9 @@ internal static class IOperationExtensions
 
     internal static IEventReferenceOperationWrapper ToEventReference(this IOperation operation) =>
         IEventReferenceOperationWrapper.FromOperation(operation);
+
+    internal static ITupleOperationWrapper ToTuple(this IOperation operation) =>
+        ITupleOperationWrapper.FromOperation(operation);
 
     internal static IUnaryOperationWrapper ToUnary(this IOperation operation) =>
         IUnaryOperationWrapper.FromOperation(operation);

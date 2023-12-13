@@ -63,6 +63,16 @@ public sealed record ProgramState : IEquatable<ProgramState>
         Exceptions = original.Exceptions;
     }
 
+    public ProgramState SetOperationAndSymbolValue(IOperation operation, SymbolicValue value)
+    {
+        var newState = SetOperationValue(operation, value);
+        if (operation.TrackedSymbol(this) is { } symbol)
+        {
+            newState = newState.SetSymbolValue(symbol, value);
+        }
+        return newState;
+    }
+
     public ProgramState SetOperationValue(IOperationWrapper operation, SymbolicValue value) =>
         operation is null
             ? throw new ArgumentNullException(nameof(operation))
