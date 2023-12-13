@@ -604,17 +604,38 @@ public class Repro_5261
 // https://github.com/SonarSource/sonar-dotnet/issues/6642
 public class Repro_6642
 {
+    private List<byte> list;
+
     public int this[int i]
     {
-        get { return this[i]; } // FN
-        set { this[i] = value; } // FN
+        get { return this[i]; } // Noncompliant
+        set { this[i] = value; } // Noncompliant
     }
+
+    public char this[char i] => this[i]; // Noncompliant
+
+    public byte this[byte i]
+    {
+        get { return list[i]; } // Compliant
+        set { list[i] = value; } // Compliant
+    }
+
+    public short this[short i] => list[1623]; // Compliant
+
+    public string this[string i]
+    {
+        get { return this; } // Compliant
+    }
+
+    public static implicit operator string(Repro_6642 d) => "";
 }
 
 // https://github.com/SonarSource/sonar-dotnet/issues/6643
 public class Repro_6643
 {
-    public static implicit operator byte(Repro_6643 d) => d; // FN
+    public static implicit operator byte(Repro_6643 d) => d; // Noncompliant
+
+    public static explicit operator string(Repro_6643 d) => (string)d; // Noncompliant
 }
 
 // https://github.com/SonarSource/sonar-dotnet/issues/6644
@@ -624,14 +645,28 @@ public class Repro_6644
 {
     public event SomeDelegate SomeEvent
     {
+        add { SomeEvent += value; } // Noncompliant
+
+        remove { SomeEvent -= value; } // Noncompliant
+    }
+
+    public event SomeDelegate SomeEvent2
+    {
+        add { SomeEvent2 -= value; } // Noncompliant FP
+
+        remove { SomeEvent2 += value; } // Noncompliant FP
+    }
+
+    public event SomeDelegate SomeEvent3
+    {
         add
         {
-            SomeEvent += value; // FN
+            SomeEvent += value; // Compliant
         }
 
         remove
         {
-            SomeEvent -= value; // FN
+            SomeEvent -= value; // Compliant
         }
     }
 }
