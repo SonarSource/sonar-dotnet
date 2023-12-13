@@ -27,21 +27,33 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         private sealed class RoslynChecker : IChecker
         {
-            public void CheckForNoExitProperty(SonarSyntaxNodeReportingContext c, PropertyDeclarationSyntax property, IPropertySymbol propertySymbol)
+            public void CheckForNoExitProperty(SonarSyntaxNodeReportingContext c, PropertyDeclarationSyntax property, IPropertySymbol propertySymbol) =>
+                CheckForNoExit(c,
+                    propertySymbol,
+                    property.ExpressionBody,
+                    property.AccessorList,
+                    property.Identifier.GetLocation(),
+                    "property's recursion",
+                    "property accessor's recursion");
+
+            public void CheckForNoExitIndexer(SonarSyntaxNodeReportingContext c, IndexerDeclarationSyntax indexer, IPropertySymbol propertySymbol) =>
+                CheckForNoExit(c,
+                    propertySymbol,
+                    indexer.ExpressionBody,
+                    indexer.AccessorList,
+                    indexer.ThisKeyword.GetLocation(),
+                    "indexer's recursion",
+                    "indexer accessor's recursion");
+
+            public void CheckForNoExitEvent(SonarSyntaxNodeReportingContext c, EventDeclarationSyntax eventDeclaration, IEventSymbol eventSymbol)
             {
-                if (property.ExpressionBody?.Expression != null)
+                if (eventDeclaration.AccessorList != null)
                 {
-                    var cfg = ControlFlowGraph.Create(property.ExpressionBody, c.SemanticModel, c.Cancel);
-                    var walker = new RecursionSearcher(new RecursionContext<ControlFlowGraph>(c, cfg, propertySymbol, property.Identifier.GetLocation(), "property's recursion"));
-                    walker.CheckPaths();
-                }
-                else if (property.AccessorList != null)
-                {
-                    foreach (var accessor in property.AccessorList.Accessors.Where(a => a.HasBodyOrExpressionBody()))
+                    foreach (var accessor in eventDeclaration.AccessorList.Accessors.Where(a => a.HasBodyOrExpressionBody()))
                     {
                         var cfg = ControlFlowGraph.Create(accessor, c.SemanticModel, c.Cancel);
-                        var context = new RecursionContext<ControlFlowGraph>(c, cfg, propertySymbol, accessor.Keyword.GetLocation(), "property accessor's recursion");
-                        var walker = new RecursionSearcher(context, !accessor.Keyword.IsAnyKind(SyntaxKind.SetKeyword, SyntaxKindEx.InitKeyword));
+                        var context = new RecursionContext<ControlFlowGraph>(c, cfg, eventSymbol, accessor.Keyword.GetLocation(), "event accessor's recursion");
+                        var walker = new RecursionSearcher(context);
                         walker.CheckPaths();
                     }
                 }
@@ -54,6 +66,32 @@ namespace SonarAnalyzer.Rules.CSharp
                     var context = new RecursionContext<ControlFlowGraph>(c, cfg, symbol, identifier.GetLocation(), "method's recursion");
                     var walker = new RecursionSearcher(context);
                     walker.CheckPaths();
+                }
+            }
+
+            private void CheckForNoExit(SonarSyntaxNodeReportingContext c,
+                                       IPropertySymbol propertySymbol,
+                                       ArrowExpressionClauseSyntax expressionBody,
+                                       AccessorListSyntax accessorList,
+                                       Location location,
+                                       string arrowExpressionMessageArg,
+                                       string accessorMessageArg)
+            {
+                if (expressionBody?.Expression != null)
+                {
+                    var cfg = ControlFlowGraph.Create(expressionBody, c.SemanticModel, c.Cancel);
+                    var walker = new RecursionSearcher(new RecursionContext<ControlFlowGraph>(c, cfg, propertySymbol, location, arrowExpressionMessageArg));
+                    walker.CheckPaths();
+                }
+                else if (accessorList != null)
+                {
+                    foreach (var accessor in accessorList.Accessors.Where(a => a.HasBodyOrExpressionBody()))
+                    {
+                        var cfg = ControlFlowGraph.Create(accessor, c.SemanticModel, c.Cancel);
+                        var context = new RecursionContext<ControlFlowGraph>(c, cfg, propertySymbol, accessor.Keyword.GetLocation(), accessorMessageArg);
+                        var walker = new RecursionSearcher(context, !accessor.Keyword.IsAnyKind(SyntaxKind.SetKeyword, SyntaxKindEx.InitKeyword));
+                        walker.CheckPaths();
+                    }
                 }
             }
 
@@ -109,6 +147,12 @@ namespace SonarAnalyzer.Rules.CSharp
                             OperationKindEx.Unary
                                 when IUnaryOperationWrapper.FromOperation(operation) is var unaryOperation =>
                                 unaryOperation.OperatorMethod,
+                            OperationKindEx.Conversion
+                                when IConversionOperationWrapper.FromOperation(operation) is var conversion =>
+                                conversion.OperatorMethod,
+                            OperationKindEx.EventReference
+                                when IEventReferenceOperationWrapper.FromOperation(operation) is var eventReference =>
+                                eventReference.Member,
                             _ => null
                         };
 

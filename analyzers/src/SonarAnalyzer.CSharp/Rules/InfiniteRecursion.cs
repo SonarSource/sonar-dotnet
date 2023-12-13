@@ -66,6 +66,14 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterNodeAction(
                 c =>
                 {
+                    var conversionOperator = (ConversionOperatorDeclarationSyntax)c.Node;
+                    CheckForNoExitMethod(c, conversionOperator.OperatorKeyword);
+                },
+                SyntaxKind.ConversionOperatorDeclaration);
+
+            context.RegisterNodeAction(
+                c =>
+                {
                     var property = (PropertyDeclarationSyntax)c.Node;
                     if (c.SemanticModel.GetDeclaredSymbol(property) is { } propertySymbol)
                     {
@@ -73,6 +81,28 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 },
                 SyntaxKind.PropertyDeclaration);
+
+            context.RegisterNodeAction(
+                c =>
+                {
+                    var indexer = (IndexerDeclarationSyntax)c.Node;
+                    if (c.SemanticModel.GetDeclaredSymbol(indexer) is { } indexerSymbol)
+                    {
+                        checker.CheckForNoExitIndexer(c, indexer, indexerSymbol);
+                    }
+                },
+                SyntaxKind.IndexerDeclaration);
+
+            context.RegisterNodeAction(
+                c =>
+                {
+                    var eventDeclaration = (EventDeclarationSyntax)c.Node;
+                    if (c.SemanticModel.GetDeclaredSymbol(eventDeclaration) is { } eventSymbol)
+                    {
+                        checker.CheckForNoExitEvent(c, eventDeclaration, eventSymbol);
+                    }
+                },
+                SyntaxKind.EventDeclaration);
         }
 
         private void CheckForNoExitMethod(SonarSyntaxNodeReportingContext c, SyntaxToken identifier)
@@ -124,6 +154,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private interface IChecker
         {
             void CheckForNoExitProperty(SonarSyntaxNodeReportingContext c, PropertyDeclarationSyntax property, IPropertySymbol propertySymbol);
+            void CheckForNoExitIndexer(SonarSyntaxNodeReportingContext c, IndexerDeclarationSyntax indexer, IPropertySymbol propertySymbol);
+            void CheckForNoExitEvent(SonarSyntaxNodeReportingContext c, EventDeclarationSyntax eventDeclaration, IEventSymbol eventSymbol);
             void CheckForNoExitMethod(SonarSyntaxNodeReportingContext c, SyntaxNode body, SyntaxToken identifier, IMethodSymbol symbol);
         }
     }
