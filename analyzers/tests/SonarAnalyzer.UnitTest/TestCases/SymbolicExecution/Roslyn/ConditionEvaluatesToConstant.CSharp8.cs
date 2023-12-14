@@ -552,19 +552,24 @@ class Repro_8326
         _ = i switch
         {
             1 => 1,
-            var other => 2          // Noncompliant {{Change this condition so that it does not always evaluate to 'True'.}} FP: var should not raise
+            var other => 2          // Compliant
         };
 
         _ = o switch
         {
             1 => 1,
-            var other => 2          // Compliant: by accident, o has no SymbolicValue and always branches due to #8324
+            var other => 2          // Compliant
         };
 
-        if (i is var x1)            // Noncompliant {{Change this condition so that it does not always evaluate to 'True'. Some code paths are unreachable.}}
+        if (i is var x1)            // FN
             Console.WriteLine();
         else
-            Console.WriteLine();    // Secondary
+            Console.WriteLine();
+
+        if (i is var x2 && x2 > 10) // Compliant
+            Console.WriteLine();
+        else
+            Console.WriteLine();
     }
 }
 

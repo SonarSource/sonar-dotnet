@@ -51,6 +51,9 @@ internal static class IOperationExtensions
     internal static IConversionOperationWrapper? AsConversion(this IOperation operation) =>
         operation.As(OperationKindEx.Conversion, IConversionOperationWrapper.FromOperation);
 
+    internal static IDeclarationPatternOperationWrapper? AsDeclarationPattern(this IOperation operation) =>
+        operation.As(OperationKindEx.DeclarationPattern, IDeclarationPatternOperationWrapper.FromOperation);
+
     internal static IInvocationOperationWrapper? AsInvocation(this IOperation operation) =>
         operation.As(OperationKindEx.Invocation, IInvocationOperationWrapper.FromOperation);
 
