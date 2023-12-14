@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-
 MyDelegate first, second, third, fourth;
 first = () => Console.Write("1");
 second = () => Console.Write("2");
@@ -27,5 +26,18 @@ record R
             MyDelegate chain12 = chain1234 - third - fourth; // Compliant - chain sequence = "12"
             chain12 = chain1234 - (third + third) - fourth; // Noncompliant {{Review this subtraction of a chain of delegates: it may not work as you expect.}}
         }
+    }
+}
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8467
+class Repro_8467
+{
+    void SwitchStatement(Action action)
+    {
+        action -= 1 switch // Noncompliant FP
+        {
+            1 => action,
+            2 => action,
+        };
     }
 }
