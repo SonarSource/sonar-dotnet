@@ -17,7 +17,7 @@ public class DelegateSubtraction
         MyDelegate chain1234 = first + second + third + fourth; // Compliant - chain sequence = "1234"
         MyDelegate chain12 = chain1234 - third - fourth; // Compliant - chain sequence = "12"
         chain12 = chain1234 - (third + third) - fourth; // Noncompliant {{Review this subtraction of a chain of delegates: it may not work as you expect.}}
-//                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
         // The chain sequence of "chain23" will be "1234" instead of "23"!
         // Indeed, the sequence "1234" does not contain the subsequence "14", so nothing is subtracted

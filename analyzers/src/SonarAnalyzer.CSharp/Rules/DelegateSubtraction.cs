@@ -62,7 +62,7 @@ public sealed class DelegateSubtraction : SonarDiagnosticAnalyzer
     {
         var currentSubtraction = subtraction;
 
-        while (currentSubtraction != null && currentSubtraction.IsKind(SyntaxKind.SubtractExpression))
+        while (currentSubtraction is not null && currentSubtraction.IsKind(SyntaxKind.SubtractExpression))
         {
             if (!ExpressionIsSimple(currentSubtraction.Right))
             {
