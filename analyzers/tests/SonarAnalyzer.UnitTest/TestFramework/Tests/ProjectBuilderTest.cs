@@ -83,4 +83,3 @@ public class ProjectBuilderTest
         new Action(() => EmptyVB.AddDocument("TestCases\\UnusedPrivateMember.vbhtml").FindDocument("UnusedPrivateMember.vbhtml").Should().NotBeNull())
             .Should().Throw<ArgumentException>();
 }
-
