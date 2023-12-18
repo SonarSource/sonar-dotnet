@@ -97,15 +97,23 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
         var kind = falseBranch ? Opposite(binary.OperatorKind) : binary.OperatorKind;
         var leftNumber = state[binary.LeftOperand]?.Constraint<NumberConstraint>();
         var rightNumber = state[binary.RightOperand]?.Constraint<NumberConstraint>();
-        if (rightNumber is not null && !binary.LeftOperand.ConstantValue.HasValue && binary.LeftOperand.TrackedSymbol(state) is { } leftSymbol)
+        if (rightNumber is not null && OperandSymbol(binary.LeftOperand) is { } leftSymbol)
         {
             state = LearnBranching(leftSymbol, leftNumber, kind, rightNumber);
         }
-        if (leftNumber is not null && !binary.RightOperand.ConstantValue.HasValue && binary.RightOperand.TrackedSymbol(state) is { } rightSymbol)
+        if (leftNumber is not null && OperandSymbol(binary.RightOperand) is { } rightSymbol)
         {
             state = LearnBranching(rightSymbol, rightNumber, Flip(kind), leftNumber);
         }
         return state;
+
+        ISymbol OperandSymbol(IOperation operand) =>
+            !operand.ConstantValue.HasValue
+            && operand.TrackedSymbol(state) is { } symbol
+            && symbol.GetSymbolType() is INamedTypeSymbol type
+            && (type.IsAny(KnownType.IntegralNumbersIncludingNative) || type.IsNullableOfAny(KnownType.IntegralNumbersIncludingNative))
+                ? symbol
+                : null;
 
         ProgramState LearnBranching(ISymbol symbol, NumberConstraint existingNumber, BinaryOperatorKind kind, NumberConstraint comparedNumber) =>
             !(falseBranch && symbol.GetSymbolType().IsNullableValueType())  // Don't learn opposite for "nullable > 0", because it could also be <null>.

@@ -18,6 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
+using static Google.Protobuf.WellKnownTypes.Field;
+
 namespace SonarAnalyzer.Helpers;
 
 internal static class TypeHelper
@@ -105,6 +108,11 @@ internal static class TypeHelper
 
         return false;
     }
+    public static bool IsNullableOfAny(this ITypeSymbol type, ImmutableArray<KnownType> argumentTypes) =>
+        NullableTypeArgument(type).IsAny(argumentTypes);
+
+    public static bool IsNullableOf(this ITypeSymbol type, KnownType typeArgument) =>
+        NullableTypeArgument(type).Is(typeArgument);
 
     public static bool IsType(this IParameterSymbol parameter, KnownType type) =>
         parameter != null && parameter.Type.Is(type);
@@ -121,10 +129,7 @@ internal static class TypeHelper
     #endregion TypeName
 
     public static bool IsNullableBoolean(this ITypeSymbol type) =>
-        type is INamedTypeSymbol namedType
-        && namedType.OriginalDefinition.Is(KnownType.System_Nullable_T)
-        && namedType.TypeArguments.Length == 1
-        && namedType.TypeArguments[0].Is(KnownType.System_Boolean);
+        type.IsNullableOf(KnownType.System_Boolean);
 
     public static bool Implements(this ITypeSymbol typeSymbol, KnownType type) =>
         typeSymbol is { }
@@ -205,4 +210,9 @@ internal static class TypeHelper
             ITypeSymbol x => x,
             _ => null,
         };
+
+    private static ITypeSymbol NullableTypeArgument(ITypeSymbol type) =>
+        type is INamedTypeSymbol namedType && namedType.OriginalDefinition.Is(KnownType.System_Nullable_T)
+            ? namedType.TypeArguments[0]
+            : null;
 }
