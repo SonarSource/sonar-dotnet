@@ -3602,3 +3602,21 @@ public class Repro_8094
 
     private void Callback() { }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8470
+public class Repro_8470
+{
+    public string Go()
+    {
+        double t = 0.5;
+        if (t <= 0)
+        {
+            return "a";
+        }
+        if (t >= 1) // Noncompliant FP
+        {
+            return "b";
+        }
+        return "c"; // Secondary FP
+    }
+}
