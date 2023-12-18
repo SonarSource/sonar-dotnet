@@ -18,18 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.UnitTest.TestFramework;
-using CS = SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.Net8.UnitTest.Rules;
 
 [TestClass]
 public class TooManyParametersTest
 {
-    private readonly VerifierBuilder builderCSMax3 = new VerifierBuilder()
-                                                     .AddAnalyzer(() => new CS.TooManyParameters { Maximum = 3 })
-                                                     .WithOptions(ParseOptionsHelper.FromCSharp12);
+    private readonly VerifierBuilder builderCSMax3 = new VerifierBuilder().AddAnalyzer(() => new TooManyParameters { Maximum = 3 }).WithOptions(ParseOptionsHelper.FromCSharp12);
 
     [TestMethod]
     public void TooManyParameters_CS_CustomValues() =>

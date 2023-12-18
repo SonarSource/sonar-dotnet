@@ -18,17 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.UnitTest.TestFramework;
+using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.Net8.UnitTest.Rules;
 
 [TestClass]
 public class SelfAssignmentTest
 {
-    private readonly VerifierBuilder builderCS = new VerifierBuilder<SonarAnalyzer.Rules.CSharp.SelfAssignment>()
-                                                 .WithConcurrentAnalysis(false)
-                                                 .WithOptions(ParseOptionsHelper.FromCSharp12);
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<SelfAssignment>().WithConcurrentAnalysis(false).WithOptions(ParseOptionsHelper.FromCSharp12);
 
     [TestMethod]
     public void SelfAssignment() =>

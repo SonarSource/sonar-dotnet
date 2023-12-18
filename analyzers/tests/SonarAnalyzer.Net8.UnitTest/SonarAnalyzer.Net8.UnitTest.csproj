@@ -14,7 +14,13 @@
       <PackageReference Include="MSTest.TestFramework" Version="3.1.1" />
     </ItemGroup>
 
-    <ItemGroup>
+  <ItemGroup>
+    <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
+    <Using Include="SonarAnalyzer.UnitTest.MetadataReferences" />
+    <Using Include="SonarAnalyzer.UnitTest.TestFramework" />
+  </ItemGroup>
+
+  <ItemGroup>
       <Compile Remove="TestCases\**\*" />
       <None Include="TestCases\**\*">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
