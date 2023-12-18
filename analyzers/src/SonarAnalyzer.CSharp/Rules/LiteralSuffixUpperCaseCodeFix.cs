@@ -25,12 +25,14 @@ namespace SonarAnalyzer.Rules.CSharp
     [ExportCodeFixProvider(LanguageNames.CSharp)]
     public sealed class LiteralSuffixUpperCaseCodeFix : SonarCodeFix
     {
-        internal const string Title = "Make literal suffix upper case";
+        private const string Title = "Make literal suffix upper case";
+        private const string LowercaseEllSuffix = "CS0078";     // The 'l' suffix is easily confused with the digit '1' -- use 'L' for clarity: 25l -> 25L
+
         public override ImmutableArray<string> FixableDiagnosticIds
         {
             get
             {
-                return ImmutableArray.Create(LiteralSuffixUpperCase.DiagnosticId, WellKnownDiagnosticIds.WRN_LowercaseEllSuffix);
+                return ImmutableArray.Create(LiteralSuffixUpperCase.DiagnosticId, LowercaseEllSuffix);
             }
         }
 
