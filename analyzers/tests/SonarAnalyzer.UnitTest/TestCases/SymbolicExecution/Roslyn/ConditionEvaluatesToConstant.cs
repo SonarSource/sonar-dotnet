@@ -3487,6 +3487,8 @@ public class Repro_8449
 // Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/8094
 public class Repro_8094
 {
+    public Action this[int index] { get => null; set { _ = value; } }
+
     public void TestMethod()
     {
         Action someDelegate = delegate { };
@@ -3500,6 +3502,13 @@ public class Repro_8094
 
         var delegateCopy = someDelegate -= Callback;
         if (delegateCopy == null) // Compliant
+        {
+            Console.WriteLine();
+        }
+
+        this[42] += Callback;
+        this[42] -= Callback;
+        if (this[42] == null)     // Compliant
         {
             Console.WriteLine();
         }

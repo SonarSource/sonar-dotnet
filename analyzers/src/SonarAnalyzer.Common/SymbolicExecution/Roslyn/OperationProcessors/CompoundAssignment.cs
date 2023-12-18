@@ -63,11 +63,10 @@ internal sealed class CompoundAssignment : SimpleProcessor<ICompoundAssignmentOp
             && state.HasConstraint(assignment.Target, ObjectConstraint.NotNull))
         {
             var value = (state[assignment.Target] ?? SymbolicValue.Empty).WithoutConstraint(ObjectConstraint.NotNull);
-            state = state
+            return state
                 .SetOperationValue(assignment, value)
-                .SetOperationValue(assignment.Target, value);
-            state = state.SetSymbolValue(assignment.Target.TrackedSymbol(state), value);
-            return state;
+                .SetOperationValue(assignment.Target, value)
+                .SetSymbolValue(assignment.Target.TrackedSymbol(state), value);
         }
         else
         {
