@@ -38,6 +38,7 @@ internal sealed class DeconstructionAssignment : SimpleProcessor<IDeconstruction
 
     private static IEnumerable<OperationValue> CollectOperationValues(ProgramState state, IOperation target, IOperation value)
     {
+        var operationValues = new List<OperationValue>();
         var leftTupleElements = TupleElements(target, state);
         // If the right side is a tuple, then every symbol/constraint is copied to the left side.
         if (Unwrap(value, state).AsTuple() is { } rightSideTuple)
@@ -53,25 +54,22 @@ internal sealed class DeconstructionAssignment : SimpleProcessor<IDeconstruction
                 }
                 if (leftTupleMember.AsTuple() is { } nestedTuple)
                 {
-                    foreach (var operationValue in CollectOperationValues(state, nestedTuple.WrappedOperation, rightTupleMember))
-                    {
-                        yield return operationValue;
-                    }
+                    operationValues.AddRange(CollectOperationValues(state, nestedTuple.WrappedOperation, rightTupleMember));
                 }
                 else
                 {
-                    yield return new(leftTupleMember, state[rightTupleMember]);
+                    operationValues.Add(new(leftTupleMember, state[rightTupleMember]));
                 }
             }
         }
         // If the right side is not a tuple, then every member of the left side tuple is set to empty.
         else
         {
-            foreach (var tupleMember in leftTupleElements.Where(x => x.Kind != OperationKindEx.Discard))
-            {
-                yield return new(tupleMember, SymbolicValue.Empty);
-            }
+            operationValues.AddRange(leftTupleElements
+                .Where(x => x.Kind != OperationKindEx.Discard)
+                .Select(x => new OperationValue(x, SymbolicValue.Empty)));
         }
+        return operationValues;
     }
 
     private static IOperation[] TupleElements(IOperation operation, ProgramState state) =>
