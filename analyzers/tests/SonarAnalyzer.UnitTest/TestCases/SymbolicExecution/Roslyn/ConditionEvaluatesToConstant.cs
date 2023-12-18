@@ -3483,3 +3483,52 @@ public class Repro_8449
         }
     }
 }
+
+// Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/8094
+public class Repro_8094
+{
+    public Action field;
+    public Action Prop { get; set; }
+    public Action this[int index] { get => null; set { _ = value; } }
+
+    public void TestMethod()
+    {
+        Action someDelegate = delegate { };
+        someDelegate += Callback;
+        someDelegate -= Callback;
+
+        if (someDelegate == null) // Compliant
+        {
+            Console.WriteLine();
+        }
+
+        var delegateCopy = someDelegate -= Callback;
+        if (delegateCopy == null) // Compliant
+        {
+            Console.WriteLine();
+        }
+
+        field += Callback;
+        field -= Callback;
+        if (field == null)     // Compliant
+        {
+            Console.WriteLine();
+        }
+
+        Prop += Callback;
+        Prop -= Callback;
+        if (Prop == null)       // Compliant
+        {
+            Console.WriteLine();
+        }
+
+        this[42] += Callback;
+        this[42] -= Callback;
+        if (this[42] == null)   // Compliant
+        {
+            Console.WriteLine();
+        }
+    }
+
+    private void Callback() { }
+}
