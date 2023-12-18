@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using OperationValueList = System.Collections.Generic.List<(Microsoft.CodeAnalysis.IOperation TupleMember, SonarAnalyzer.SymbolicExecution.Roslyn.SymbolicValue Value)>;
-
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
 internal sealed class DeconstructionAssignment : SimpleProcessor<IDeconstructionAssignmentOperationWrapper>
@@ -29,23 +27,22 @@ internal sealed class DeconstructionAssignment : SimpleProcessor<IDeconstruction
 
     protected override ProgramState Process(SymbolicContext context, IDeconstructionAssignmentOperationWrapper assignment)
     {
-        var list = new OperationValueList();
-        CollectOperationValues(context.State, assignment.Target, assignment.Value, list);
+        var operationValues = CollectOperationValues(context.State, assignment.Target, assignment.Value);
         var newState = context.State;
-        foreach (var (tupleMember, value) in list)
+        foreach (var (tupleMember, value) in operationValues)
         {
             newState = newState.SetOperationAndSymbolValue(tupleMember, value);
         }
         return newState;
     }
 
-    private static void CollectOperationValues(ProgramState state, IOperation target, IOperation value, OperationValueList operationValues)
+    private static IEnumerable<OperationValue> CollectOperationValues(ProgramState state, IOperation target, IOperation value)
     {
-        var leftTupleElements = TupleElements(target);
+        var leftTupleElements = TupleElements(target, state);
         // If the right side is a tuple, then every symbol/constraint is copied to the left side.
-        if (Unwrap(value).AsTuple() is { } rightSideTuple)
+        if (Unwrap(value, state).AsTuple() is { } rightSideTuple)
         {
-            var rightTupleElements = TupleElements(rightSideTuple.WrappedOperation);
+            var rightTupleElements = TupleElements(rightSideTuple.WrappedOperation, state);
             for (var i = 0; i < leftTupleElements.Length; i++)
             {
                 var leftTupleMember = leftTupleElements[i];
@@ -56,12 +53,14 @@ internal sealed class DeconstructionAssignment : SimpleProcessor<IDeconstruction
                 }
                 if (leftTupleMember.AsTuple() is { } nestedTuple)
                 {
-                    var rightSideMember = rightTupleMember.AsTuple()?.WrappedOperation ?? rightTupleMember;
-                    CollectOperationValues(state, nestedTuple.WrappedOperation, rightSideMember, operationValues);
+                    foreach (var operationValue in CollectOperationValues(state, nestedTuple.WrappedOperation, rightTupleMember))
+                    {
+                        yield return operationValue;
+                    }
                 }
                 else
                 {
-                    operationValues.Add((leftTupleMember, state[rightTupleMember]));
+                    yield return new(leftTupleMember, state[rightTupleMember]);
                 }
             }
         }
@@ -70,21 +69,23 @@ internal sealed class DeconstructionAssignment : SimpleProcessor<IDeconstruction
         {
             foreach (var tupleMember in leftTupleElements.Where(x => x.Kind != OperationKindEx.Discard))
             {
-                operationValues.Add((tupleMember, SymbolicValue.Empty));
+                yield return new(tupleMember, SymbolicValue.Empty);
             }
         }
     }
 
-    private static IOperation[] TupleElements(IOperation operation) =>
-        Unwrap(operation)
+    private static IOperation[] TupleElements(IOperation operation, ProgramState state) =>
+        Unwrap(operation, state)
             .ToTuple()
             .Elements
-            .Select(Unwrap)
+            .Select(x => Unwrap(x, state))
             .ToArray();
 
-    private static IOperation Unwrap(IOperation operation)
+    private static IOperation Unwrap(IOperation operation, ProgramState state)
     {
-        var unwrapped = operation.UnwrapConversion();
+        var unwrapped = state.ResolveCaptureAndUnwrapConversion(operation);
         return unwrapped.AsDeclarationExpression()?.Expression ?? unwrapped;
     }
+
+    private sealed record OperationValue(IOperation Operation, SymbolicValue Value);
 }
