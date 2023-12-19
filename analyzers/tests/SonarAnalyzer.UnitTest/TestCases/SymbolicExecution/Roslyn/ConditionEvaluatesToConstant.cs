@@ -3216,6 +3216,13 @@ public class Repro_7057
         {
             Console.WriteLine();
         }
+
+        string text13;
+        (text13, text13) = (SomeString(), null);
+        if (text11 == null)         // Noncompliant
+        {
+            Console.WriteLine();
+        }
     }
 
     public void WithString()

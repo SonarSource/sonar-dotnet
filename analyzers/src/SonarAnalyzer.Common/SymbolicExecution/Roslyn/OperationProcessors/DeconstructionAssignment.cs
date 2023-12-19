@@ -27,7 +27,7 @@ internal sealed class DeconstructionAssignment : SimpleProcessor<IDeconstruction
 
     protected override ProgramState Process(SymbolicContext context, IDeconstructionAssignmentOperationWrapper assignment)
     {
-        var operationValues = CollectOperationValues(context.State, assignment.Target, assignment.Value);
+        var operationValues = TupleElementValues(context.State, assignment.Target, assignment.Value);
         var newState = context.State;
         foreach (var (tupleMember, value) in operationValues)
         {
@@ -36,14 +36,14 @@ internal sealed class DeconstructionAssignment : SimpleProcessor<IDeconstruction
         return newState;
     }
 
-    private static IEnumerable<OperationValue> CollectOperationValues(ProgramState state, IOperation target, IOperation value)
+    private static IEnumerable<OperationValue> TupleElementValues(ProgramState state, IOperation target, IOperation value)
     {
         var operationValues = new List<OperationValue>();
-        var leftTupleElements = TupleElements(target, state);
+        var leftTupleElements = TupleElements(Unwrap(target, state).ToTuple(), state);
         // If the right side is a tuple, then every symbol/constraint is copied to the left side.
         if (Unwrap(value, state).AsTuple() is { } rightSideTuple)
         {
-            var rightTupleElements = TupleElements(rightSideTuple.WrappedOperation, state);
+            var rightTupleElements = TupleElements(rightSideTuple, state);
             for (var i = 0; i < leftTupleElements.Length; i++)
             {
                 var leftTupleMember = leftTupleElements[i];
@@ -52,9 +52,9 @@ internal sealed class DeconstructionAssignment : SimpleProcessor<IDeconstruction
                 {
                     continue;
                 }
-                if (leftTupleMember.AsTuple() is { } nestedTuple)
+                else if (leftTupleMember.AsTuple() is { } nestedTuple)
                 {
-                    operationValues.AddRange(CollectOperationValues(state, nestedTuple.WrappedOperation, rightTupleMember));
+                    operationValues.AddRange(TupleElementValues(state, nestedTuple.WrappedOperation, rightTupleMember));
                 }
                 else
                 {
@@ -72,12 +72,8 @@ internal sealed class DeconstructionAssignment : SimpleProcessor<IDeconstruction
         return operationValues;
     }
 
-    private static IOperation[] TupleElements(IOperation operation, ProgramState state) =>
-        Unwrap(operation, state)
-            .ToTuple()
-            .Elements
-            .Select(x => Unwrap(x, state))
-            .ToArray();
+    private static IOperation[] TupleElements(ITupleOperationWrapper operation, ProgramState state) =>
+        operation.Elements.Select(x => Unwrap(x, state)).ToArray();
 
     private static IOperation Unwrap(IOperation operation, ProgramState state)
     {
