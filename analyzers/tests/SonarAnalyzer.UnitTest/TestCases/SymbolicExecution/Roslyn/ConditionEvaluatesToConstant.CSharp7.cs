@@ -294,7 +294,7 @@ namespace Tests.Diagnostics
         {
             var tmp = 0;
             var flag = true;
-            while (flag)            // Noncompliant
+            while (flag)            // Compliant
             {
                 (flag, tmp) = (false, 5);
             }
@@ -329,7 +329,7 @@ namespace Tests.Diagnostics
         {
             var tmp = 0;
             var flag = "x";
-            while (flag != null)            // Noncompliant
+            while (flag != null)            // Compliant
             {
                 (flag, tmp) = (null, 5);
             }

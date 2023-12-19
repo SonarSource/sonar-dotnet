@@ -9,6 +9,6 @@ public class Sample
         AesCng aes = new AesCng();
         aes.CreateEncryptor();
         (var rgb, int a) = (new byte[16], 42);
-        aes.CreateEncryptor(aes.Key, rgb); // FN
+        aes.CreateEncryptor(aes.Key, rgb); // Noncompliant
     }
 }

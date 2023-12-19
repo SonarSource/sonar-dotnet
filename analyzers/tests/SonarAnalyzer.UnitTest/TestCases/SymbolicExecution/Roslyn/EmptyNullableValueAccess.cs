@@ -148,13 +148,13 @@ class AssignmentAndDeconstruction
     void TypeInference()
     {
         (int? discard, int? b) = (null, null);
-        _ = b.Value;        // FN: b is empty
+        _ = b.Value;        // Noncompliant
     }
 
     void FirstLevel()
     {
         var (b, _) = (null as bool?, null as bool?);
-        _ = b.Value;        // FN: b is empty
+        _ = b.Value;        // Noncompliant
     }
 
     void SecondLevel()
@@ -162,7 +162,7 @@ class AssignmentAndDeconstruction
         (int? i1, (int? i2, int? i3)) = (42, (42, null));
         _ = i1.Value;       // Compliant
         _ = i2.Value;       // Compliant
-        _ = i3.Value;       // FN
+        _ = i3.Value;       // Noncompliant
     }
 
     void ThirdLevel()
@@ -171,7 +171,7 @@ class AssignmentAndDeconstruction
         _ = i1.Value;       // Compliant
         _ = i2.Value;       // Compliant
         _ = i3.Value;       // Compliant
-        _ = i4.Value;       // FN
+        _ = i4.Value;       // Noncompliant
         _ = i5.Value;       // Compliant
     }
 
@@ -179,7 +179,7 @@ class AssignmentAndDeconstruction
     {
         (_, (int? i1, (int?, int?) _, int? i2)) = (42, (42, (42, null), null));
         _ = i1.Value;       // Compliant
-        _ = i2.Value;       // FN
+        _ = i2.Value;       // Noncompliant
     }
 
     void TwoWaySwapping()
@@ -187,8 +187,8 @@ class AssignmentAndDeconstruction
         bool? b1 = null;
         bool? b2 = true;
         (b1, b2) = (b2, b1);
-        _ = b1.Value;       // Noncompliant, FP: after swapping is non-empty
-        _ = b2.Value;       // FN: after swapping is empty
+        _ = b1.Value;       // Compliant: after swapping is non-empty
+        _ = b2.Value;       // Noncompliant
     }
 
     void ThreeWaySwapping()
@@ -197,9 +197,9 @@ class AssignmentAndDeconstruction
         bool? b2 = true;
         bool? b3 = null;
         (b1, b2, b3) = (b2, b3, b2);
-        _ = b1.Value;       // Noncompliant, FP: after swapping is non-empty
-        _ = b2.Value;       // FN: after swapping is empty
-        _ = b3.Value;       // Noncompliant, FP: after swapping is non-empty
+        _ = b1.Value;       // Compliant: after swapping is non-empty
+        _ = b2.Value;       // Noncompliant
+        _ = b3.Value;       // Compliant: after swapping is non-empty
     }
 
     void CustomDeconstruction()
@@ -209,7 +209,7 @@ class AssignmentAndDeconstruction
         _ = i1.Value;       // Compliant
         _ = i2.Value;       // Compliant, unknown
         _ = i3.Value;       // Compliant, unknown
-        _ = i4.Value;       // FN
+        _ = i4.Value;       // Noncompliant
     }
 
     struct DeconstructableStruct

@@ -7,7 +7,7 @@ public class Sample
         int? nullable;
 
         (nullable, _) = (null, 42);
-        var v = nullable.Value; // FN
+        var v = nullable.Value; // Noncompliant
 
         nullable = null;
         v = nullable.Value;     // Noncompliant

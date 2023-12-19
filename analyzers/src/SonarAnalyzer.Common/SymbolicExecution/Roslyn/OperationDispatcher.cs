@@ -45,6 +45,7 @@ internal static class OperationDispatcher
         { OperationKindEx.CompoundAssignment, new CompoundAssignment() },
         { OperationKindEx.Conversion, new Conversion() },
         { OperationKindEx.DeclarationPattern, new DeclarationPattern() },
+        { OperationKindEx.DeconstructionAssignment, new DeconstructionAssignment() },
         { OperationKindEx.Decrement, new IncrementOrDecrement() },
         { OperationKindEx.DefaultValue, new DefaultValue() },
         { OperationKindEx.DelegateCreation, new NotNullOperation() },
