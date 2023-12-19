@@ -3662,3 +3662,32 @@ public class Repro_8470
         return "c";
     }
 }
+
+// Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/8484
+public class Repro_8484
+{
+    void TestMethod()
+    {
+        Exception failure = null;
+
+        try
+        {
+            try
+            {
+                var x = new object();
+            }
+            catch (InvalidOperationException)
+            {
+            }
+        }
+        catch (NotSupportedException exception)
+        {
+            failure = exception;
+        }
+
+        if (failure != null) // Compliant
+        {
+            Console.WriteLine("Found failures.");
+        }
+    }
+}

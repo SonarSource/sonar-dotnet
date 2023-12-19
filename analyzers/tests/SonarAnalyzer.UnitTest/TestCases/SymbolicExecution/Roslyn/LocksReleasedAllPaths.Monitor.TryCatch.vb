@@ -45,6 +45,17 @@ Namespace Monitor_TryCatch
             Monitor.Exit(Obj)
         End Sub
 
+        Public Sub CatchWhen(condition As Boolean)
+            Monitor.Enter(Obj) ' Noncompliant
+            Try
+                Console.WriteLine()
+                Monitor.Exit(Obj)
+            Catch When (condition)
+                Monitor.Exit(Obj)
+                Throw
+            End Try
+        End Sub
+
         Public Sub Method6(Arg As String)
             Monitor.Enter(Obj) ' Noncompliant
             Try
