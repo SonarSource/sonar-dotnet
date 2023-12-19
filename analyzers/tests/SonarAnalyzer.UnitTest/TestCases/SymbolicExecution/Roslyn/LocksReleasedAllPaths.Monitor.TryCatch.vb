@@ -35,7 +35,7 @@ Namespace Monitor_TryCatch
         End Sub
 
         Public Sub Method5(Arg As String)
-            Monitor.Enter(Obj) ' Compliant
+            Monitor.Enter(Obj) ' Noncompliant
             Try
                 Console.WriteLine(Arg.Length)
             Catch nre As NullReferenceException

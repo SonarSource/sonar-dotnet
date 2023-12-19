@@ -52,7 +52,7 @@ namespace Monitor_TryCatch
 
         public void Method5(string arg)
         {
-            Monitor.Enter(obj); // Compliant
+            Monitor.Enter(obj); // Noncompliant
             try
             {
                 Console.WriteLine(arg.Length);
@@ -63,6 +63,21 @@ namespace Monitor_TryCatch
                 throw;
             }
             Monitor.Exit(obj);
+        }
+
+        public void CatchWhen(bool condition)
+        {
+            Monitor.Enter(obj); // Noncompliant
+            try
+            {
+                Console.WriteLine();
+                Monitor.Exit(obj);
+            }
+            catch when (condition)
+            {
+                Monitor.Exit(obj);
+                throw;
+            }
         }
 
         public void Method6(string arg)

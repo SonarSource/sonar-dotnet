@@ -236,21 +236,23 @@ internal class RoslynSymbolicExecution
         state = node.Block.EnclosingRegion(ControlFlowRegionKind.Catch) is not null
             ? state.PushException(exception)        // If we're nested inside catch, we need to preserve the exception chain
             : state.SetException(exception);        // Otherwise we track only the current exception to avoid explosion of states after each statement
-        while (tryRegion is not null)
+
+        var handlersAreExhaustive = false;
+        while (tryRegion is not null && !handlersAreExhaustive)
         {
             var reachableHandlers = tryRegion.EnclosingRegion.NestedRegions.Where(x => x.Kind != ControlFlowRegionKind.Try && IsReachable(x, state.Exception)).ToArray();
             foreach (var handler in reachableHandlers)  // CatchRegion, FinallyRegion or FilterAndHandlerRegion
             {
+                handlersAreExhaustive |= CatchesAll(handler) || state.Exception.Type.DerivesFrom(handler.ExceptionType);
                 yield return new(cfg.Blocks[handler.FirstBlockOrdinal], state, null);
-            }
-            if (reachableHandlers.Length != 0)
-            {
-                yield break;
             }
             tryRegion = tryRegion.EnclosingRegion.EnclosingRegionOrSelf(ControlFlowRegionKind.Try); // Inner catch for specific exception doesn't match. Go to outer one.
         }
 
-        yield return new(cfg.ExitBlock, node.State.SetException(exception), null);  // catch without finally or uncaught exception type
+        if (!handlersAreExhaustive)
+        {
+            yield return new(cfg.ExitBlock, node.State.SetException(exception), null);  // catch without finally or uncaught exception type
+        }
     }
 
     private static ExceptionState ThrownException(ExplodedNode node, ControlFlowBranchSemantics semantics) =>
@@ -295,9 +297,15 @@ internal class RoslynSymbolicExecution
         branch.IsConditionalSuccessor ? condition == constraint : condition != constraint;
 
     private static bool IsReachable(ControlFlowRegion region, ExceptionState thrown) =>
-        region.Kind == ControlFlowRegionKind.Finally
+        CatchesAll(region)
         || thrown == ExceptionState.UnknownException
-        || region.ExceptionType.Is(KnownType.System_Object)       // catch when (condition)
-        || region.ExceptionType.Is(KnownType.System_Exception)
         || thrown.Type.DerivesFrom(region.ExceptionType);
+
+    private static bool CatchesAll(ControlFlowRegion region) =>
+        region.Kind switch
+        {
+            ControlFlowRegionKind.FilterAndHandler => false,
+            ControlFlowRegionKind.Finally => true,
+            _ => region.ExceptionType.Is(KnownType.System_Exception) || region.ExceptionType.Is(KnownType.System_Object)
+        };
 }
