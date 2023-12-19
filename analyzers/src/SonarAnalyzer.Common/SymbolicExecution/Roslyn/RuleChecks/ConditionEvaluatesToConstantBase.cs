@@ -75,16 +75,18 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
     private bool IsIgnored(ProgramState state, IOperation operation) =>
         operation.Kind is OperationKindEx.Literal
         || IsVarPattern(operation)
-        || IsDiscardPattern(operation)
+        || IsDiscardPattern(state, operation)
         || operation.TrackedSymbol(state) is IFieldSymbol { IsConst: true }
         || operation.Syntax.Ancestors().Any(x => IsInsideUsingDeclaration(x) || IsLockStatement(x));
 
     private static bool IsVarPattern(IOperation operation) =>
         operation.AsIsPattern()?.Pattern.WrappedOperation.AsDeclarationPattern()?.MatchesNull is true;
 
-    private static bool IsDiscardPattern(IOperation operation) =>
-        operation.AsIsPattern() is { } pattern
-        && pattern.Pattern.WrappedOperation.Kind is OperationKindEx.DiscardPattern;
+    private static bool IsDiscardPattern(ProgramState state, IOperation operation) =>
+        operation.Kind is OperationKindEx.DiscardPattern
+        || (operation.AsIsPattern() is { } isPattern
+            && (isPattern.Pattern.WrappedOperation.Kind is OperationKindEx.DiscardPattern
+                || (isPattern.Pattern.WrappedOperation.AsRecursivePattern() is {} recursivePattern && recursivePattern.DeconstructionSubpatterns.All(x => IsDiscardPattern(state, x)))));
 
     public override void ExecutionCompleted()
     {

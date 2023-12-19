@@ -269,22 +269,29 @@ namespace Repro_8011
 }
 
 // https://github.com/SonarSource/sonar-dotnet/issues/8008
-namespace Repro_8008
+public class Repro_8008
 {
-    class Person
+    public int Compare(string name1, string name2) => (name1, name2) switch
     {
-        public int? Age { get; set; }
-    }
+        (null, null) => 0,
+        (null, _) => 1,
+        (_, null) => -1,
+        (_, _) => Comparer<string>.Default.Compare(name1, name2)
+    };
 
-    class Double_Wildcard_FP
+    public int NestedTuples(string name1, string name2, string name3) => ((name1, name2), name3) switch
     {
-        public int Compare(Person x, Person y) => (x.Age, y.Age) switch
-        {
-            (null, null) => 0,
-            (null, _) => 1,
-            (_, null) => -1,
-            (_, _) => Comparer<int>.Default.Compare(x.Age.Value, y.Age.Value) // Noncompliant {{Change this condition so that it does not always evaluate to 'True'.}}
-          //^^^^^^
-        };
-    }
+        ((null, null), null) => 42,
+        ((null, null), _) => 43,
+        ((_, _), null) => 44,
+        ((_, _), _) => 45
+    };
+
+    public int DeeperNestedTuples(string name1, string name2, string name3, string name4) => (((name1, name2), name3), name4) switch
+    {
+        (((null, null), null), null) => 42,
+        (((_, _), null), null) => 43,
+        (((_, _), _), null) => 44,
+        (((_, _), _), _) => 45,
+    };
 }
