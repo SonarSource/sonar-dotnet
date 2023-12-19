@@ -408,6 +408,7 @@ stages:
         displayName: "Mend scan"
         condition: eq(variables.isReleaseBranch, 'True')
         env:
+          JAVA: 'C:\Program Files\JDK Temurin\17'
           WS_PRODUCTNAME: '$(MEND_PRODUCTNAME)'
           WS_APIKEY: '$(MEND_APIKEY)'
           BUILD_NUMBER: '$(Build.BuildId)'
