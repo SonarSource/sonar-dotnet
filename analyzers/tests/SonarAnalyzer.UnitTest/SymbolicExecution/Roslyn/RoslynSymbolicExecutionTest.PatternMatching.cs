@@ -252,19 +252,20 @@ Tag(""End"", arg);";
     [TestMethod]
     public void DeclarationPattern_Var_PreservePreviousConstraint_DoesNotSetNotNullConstraint()
     {
-        const string code = @"
-if (arg is var value)
-{
-    Tag(""Value"", value);
-    Tag(""Arg"", arg);
-}
-Tag(""End"", arg);";
+        const string code = """
+            if (arg is var value)
+            {
+                Tag("Value", value);
+                Tag("Arg", arg);
+            }
+            Tag("End", arg);
+            """;
         var setter = new PreProcessTestCheck(OperationKind.ParameterReference, x => x.SetSymbolConstraint(x.Operation.Instance.TrackedSymbol(x.State), TestConstraint.First));
         var validator = SETestContext.CreateCS(code, "object arg", setter).Validator;
         validator.ValidateContainsOperation(OperationKind.DeclarationPattern);
         validator.TagValue("Value").Should().HaveOnlyConstraint(TestConstraint.First, "'var' only propagates existing constraints and ObjectConstraint is missing");
         validator.TagValue("Arg").Should().HaveOnlyConstraint(TestConstraint.First, "'var' only propagates existing constraints and ObjectConstraint is missing");
-        validator.TagValues("End").Should().HaveCount(2).And.OnlyContain(x => x != null && x.HasConstraint(TestConstraint.First));     // 2x because value has different states
+        validator.TagValue("End").Should().HaveOnlyConstraint(TestConstraint.First, "'var' only propagates existing constraints and ObjectConstraint is missing");
     }
 
     [TestMethod]
@@ -381,7 +382,7 @@ Tag(""End"", arg);";
     [DataTestMethod]
     [DataRow("objectNull is var a", true)]
     [DataRow("objectNotNull is var a", true)]
-    [DataRow("objectUnknown is var a", null)] // Should be "true". Some patterns always match.
+    [DataRow("objectUnknown is var a", true)]
     [DataRow("objectNull is object o", false)]
     [DataRow("objectNotNull is object o", true)]
     [DataRow("objectNull is int i", false)]

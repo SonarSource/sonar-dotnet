@@ -2105,6 +2105,6 @@ class Repro_8324
         if (o is var x2)
             Console.WriteLine();
         else
-            Console.WriteLine(n.ToString());    // Noncompliant FP: unreachable
+            Console.WriteLine(n.ToString());    // Compliant
     }
 }
