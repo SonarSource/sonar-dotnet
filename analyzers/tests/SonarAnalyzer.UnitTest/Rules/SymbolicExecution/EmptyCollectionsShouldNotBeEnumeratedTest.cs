@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
 using ChecksCS = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 using ChecksVB = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic;
@@ -70,7 +71,71 @@ public class EmptyCollectionsShouldNotBeEnumeratedTest
 
 #if NET
 
-    [TestMethod]
+    [DataTestMethod]
+    [DataRow("list.Aggregate((x, y) => x)", false)]
+    [DataRow("list.All(x => true)", false)]
+    [DataRow("list.AsEnumerable()", true)]
+    [DataRow("list.AsQueryable()", true)]
+    [DataRow("list.AsReadOnly()", true)]
+    [DataRow("list.Average()", false)]
+    [DataRow("list.Cast<byte>()", false)]
+    [DataRow("list.Concat(list)", true)]
+    [DataRow("list.Contains(1)", false)]
+    [DataRow("list.Count()", false)]
+    [DataRow("list.DefaultIfEmpty()", true)]
+    [DataRow("list.Distinct()", false)]
+    [DataRow("list.ElementAt(0)", false)]
+    [DataRow("list.ElementAtOrDefault(0)", false)]
+    [DataRow("list.Except(list)", false)]
+    [DataRow("list.First()", false)]
+    [DataRow("list.FirstOrDefault()", false)]
+    [DataRow("list.GroupBy(x => x)", false)]
+    [DataRow("list.GroupJoin(list, x => x, x => x, (x, y) => x)", false)]
+    [DataRow("list.Intersect(list)", false)]
+    [DataRow("list.Join(list, x => x, x => x, (x, y) => x)", true)]
+    [DataRow("list.Last()", false)]
+    [DataRow("list.LastOrDefault()", false)]
+    [DataRow("list.LongCount()", false)]
+    [DataRow("list.Max()", false)]
+    [DataRow("list.Min()", false)]
+    [DataRow("list.OfType<int>()", false)]
+    [DataRow("list.OrderBy(x => x)", false)]
+    [DataRow("list.OrderByDescending(x => x)", false)]
+    [DataRow("list.Reverse()", false)]
+    [DataRow("list.Select(x => x)", false)]
+    [DataRow("list.SelectMany(x => list)", false)]
+    [DataRow("list.SequenceEqual(list)", false)]
+    [DataRow("list.Single()", false)]
+    [DataRow("list.SingleOrDefault()", false)]
+    [DataRow("list.Skip(0)", false)]
+    [DataRow("list.SkipWhile(x => true)", false)]
+    [DataRow("list.Sum()", false)]
+    [DataRow("list.Take(0)", false)]
+    [DataRow("list.TakeWhile(x => true)", false)]
+    [DataRow("list.ToArray()", true)]
+    [DataRow("list.ToDictionary(x => x)", true)]
+    [DataRow("list.ToList()", true)]
+    [DataRow("list.ToLookup(x => x)", true)]
+    [DataRow("list.Union(list)", true)]
+    [DataRow("list.Where(x => true)", false)]
+    [DataRow("list.Zip(list, (x, y) => x)", false)]
+    [DataRow("Enumerable.Reverse(list)", false)]
+    public void EmptyCollectionsShouldNotBeEnumerated_Roslyn_ExtensionMethods(string invocation, bool compliant) =>
+        roslynCS.AddSnippet($$"""
+            using System.Collections.Generic;
+            using System.Linq;
+
+            class C
+            {
+                void M()
+                {
+                    var list = new List<int>() { };
+                    {{invocation}}; // {{(compliant ? "Compliant" : "Noncompliant")}}
+                }
+            }
+            """).Verify();
+
+[TestMethod]
     public void EmptyCollectionsShouldNotBeEnumerated_Sonar_CSharp8() =>
         sonar.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 

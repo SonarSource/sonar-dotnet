@@ -520,57 +520,6 @@ class AdvancedTests
         list.Clear();                                       // Compliant
     }
 
-    public void WellKnownExtensionMethods()
-    {
-        var list = new List<int>();
-        list.All(x => true);                                // FN
-        list.Any();                                         // FN
-        list.AsEnumerable();
-        list.AsQueryable();
-        list.AsReadOnly();
-        list.Average();                                     // FN
-        list.Cast<byte>();                                  // FN
-        list.Concat(list);                                  // FN
-        list.Contains(5, EqualityComparer<int>.Default);    // FN
-        list.Count();                                       // FN
-        list.DefaultIfEmpty();                              // FN
-        list.Distinct();                                    // FN
-        list.Except(list);                                  // FN
-        list.First();                                       // FN
-        list.FirstOrDefault();                              // FN
-        list.GroupBy(x => x);
-        list.GroupJoin(list, x => x, x => x, (x, y) => x);  // FN
-        list.Intersect(list);                               // FN
-        list.Join(list, x => x, x => x, (x, y) => x);       // FN
-        list.Last();                                        // FN
-        list.LastOrDefault();                               // FN
-        list.LongCount();                                   // FN
-        list.Max();                                         // FN
-        list.Min();                                         // FN
-        list.OfType<int>();                                 // FN
-        list.OrderBy(x => x);
-        list.OrderByDescending(x => x);
-        list.Select(x => x);                                // FN
-        list.SelectMany(x => new int[5]);                   // FN
-        list.SequenceEqual(list);                           // FN
-        list.Single();                                      // FN
-        list.SingleOrDefault();                             // FN
-        list.Skip(1);                                       // FN
-        list.SkipWhile(x => true);                          // FN
-        list.Sum();                                         // FN
-        list.Take(1);                                       // FN
-        list.TakeWhile(x => true);                          // FN
-        list.ToArray();                                     // FN
-        list.ToDictionary(x => x);                          // FN
-        list.ToList();                                      // FN
-        list.ToLookup(x => x);
-        list.Union(list);                                   // FN
-        list.Where(x => true);                              // FN
-        list.Zip(list, (x, y) => x);                        // FN
-        Enumerable.Reverse(list);                           // FN
-        list.Clear();                                       // FN, should raise, because the methods above should not reset the state
-    }
-
     public void PassingAsArgument_Removes_Constraints(bool condition)
     {
         var list = new List<int>();
@@ -645,18 +594,18 @@ class AdvancedTests
             empty.Clear();  // Compliant, unreachable
         }
 
-        if (empty.Count() == 0)
+        if (empty.Count() == 0) // Noncompliant
         {
-            empty.Clear();  // FN
+            empty.Clear();  // Compliant
         }
         else
         {
             empty.Clear();  // Compliant, unreachable
         }
 
-        if (empty.Count(x => condition) == 0)
+        if (empty.Count(x => condition) == 0) // Noncompliant
         {
-            empty.Clear();  // FN
+            empty.Clear();  // Compliant
         }
         else
         {
@@ -672,7 +621,7 @@ class AdvancedTests
             empty.Clear();  // Noncompliant
         }
 
-        if (Enumerable.Count(empty) == 0)
+        if (Enumerable.Count(empty) == 0) // Noncompliant
         {
             empty.Clear();  // FN
         }
@@ -713,7 +662,7 @@ class AdvancedTests
             empty.Clone();  // Compliant, unreachable
         }
 
-        if (empty.Count() == 0)
+        if (empty.Count() == 0) // Noncompliant
         {
             empty.Clone();  // FN
         }

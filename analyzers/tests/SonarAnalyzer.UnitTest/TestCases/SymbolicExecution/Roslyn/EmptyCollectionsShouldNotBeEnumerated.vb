@@ -223,16 +223,16 @@ Public Class CollectionTests
             Empty.Clear()  ' Compliant, unreachable
         End If
         If DirectCast(Empty, IEnumerable(Of Integer)).Count(Function(X) Condition) = 0 Then
-            Empty.Clear()   ' Noncompliant
+            Empty.Clear()  ' Noncompliant
         Else
-            Empty.Clear()   ' Compliant, unreachable
+            Empty.Clear()  ' Compliant, unreachable
         End If
         If DirectCast(NotEmpty, IEnumerable(Of Integer)).Count(Function(X) Condition) = 0 Then
-            Empty.Clear()   ' Noncompliant
+            Empty.Clear()  ' Noncompliant
         Else
-            Empty.Clear()   ' Noncompliant
+            Empty.Clear()  ' Noncompliant
         End If
-        If Enumerable.Count(Empty) = 0 Then
+        If Enumerable.Count(Empty) = 0 Then ' Noncompliant
             Empty.Clear()  ' FN
         Else
             Empty.Clear()  ' Compliant, unreachable
@@ -262,9 +262,9 @@ Public Class AdvancedTests
 
     Public Sub WellKnownExtensionMethods()
         Dim List As New List(Of Integer)
-        List.All(Function(X) True)      ' FN
-        List.Any()                      ' FN
-        Enumerable.Reverse(List)        ' FN
+        List.All(Function(X) True)      ' Noncompliant
+        List.Any()                      ' Noncompliant
+        Enumerable.Reverse(List)        ' Noncompliant
         List.Clear()                    ' FN, should raise, because the methods above should not reset the state
     End Sub
 

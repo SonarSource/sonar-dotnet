@@ -48,15 +48,80 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         KnownType.System_Collections_Generic_Dictionary_TKey_TValue,
         KnownType.System_Collections_Generic_IDictionary_TKey_TValue,
         KnownType.System_Collections_Immutable_IImmutableDictionary_TKey_TValue,
+        KnownType.System_Collections_Generic_IReadOnlyCollection_T,
+        KnownType.System_Collections_Generic_IReadOnlyList_T,
     }.ToImmutableArray();
 
     protected static readonly HashSet<string> RaisingMethods = new()
     {
-        nameof(IEnumerable<int>.GetEnumerator),
+        "TryDequeue",
+        "TryPeek",
+        "TryPop",
+        nameof(Array.Clone),
+        nameof(Array.Copy),
+        nameof(Array.GetLength),
+        nameof(Array.GetLongLength),
+        nameof(Array.GetLowerBound),
+        nameof(Array.GetUpperBound),
+        nameof(Array.GetValue),
+        nameof(Array.Initialize),
+        nameof(Array.SetValue),
+        nameof(Dictionary<int, int>.ContainsKey),
+        nameof(Dictionary<int, int>.ContainsValue),
+        nameof(Dictionary<int, int>.TryGetValue),
+        nameof(Enumerable.Aggregate),
+        nameof(Enumerable.All),
+        nameof(Enumerable.Any),
+        nameof(Enumerable.Average),
+        nameof(Enumerable.Cast),
+        nameof(Enumerable.Contains),
+        nameof(Enumerable.Count),
+        nameof(Enumerable.Distinct),
+        nameof(Enumerable.ElementAt),
+        nameof(Enumerable.ElementAtOrDefault),
+        nameof(Enumerable.Except),
+        nameof(Enumerable.First),
+        nameof(Enumerable.FirstOrDefault),
+        nameof(Enumerable.GroupBy),
+        nameof(Enumerable.GroupJoin),
+        nameof(Enumerable.Intersect),
+        nameof(Enumerable.Last),
+        nameof(Enumerable.LastOrDefault),
+        nameof(Enumerable.LongCount),
+        nameof(Enumerable.Max),
+        nameof(Enumerable.Min),
+        nameof(Enumerable.OfType),
+        nameof(Enumerable.OrderBy),
+        nameof(Enumerable.OrderByDescending),
+        nameof(Enumerable.Reverse),
+        nameof(Enumerable.Select),
+        nameof(Enumerable.SelectMany),
+        nameof(Enumerable.SequenceEqual),
+        nameof(Enumerable.Single),
+        nameof(Enumerable.SingleOrDefault),
+        nameof(Enumerable.Skip),
+        nameof(Enumerable.SkipWhile),
+        nameof(Enumerable.Sum),
+        nameof(Enumerable.Take),
+        nameof(Enumerable.TakeWhile),
+        nameof(Enumerable.ThenByDescending),
+        nameof(Enumerable.Where),
+        nameof(Enumerable.Zip),
+        nameof(HashSet<int>.ExceptWith),
+        nameof(HashSet<int>.IntersectWith),
+        nameof(HashSet<int>.IsProperSubsetOf),
+        nameof(HashSet<int>.IsProperSupersetOf),
+        nameof(HashSet<int>.IsSubsetOf),
+        nameof(HashSet<int>.IsSupersetOf),
+        nameof(HashSet<int>.Overlaps),
+        nameof(HashSet<int>.RemoveWhere),
+        nameof(HashSet<int>.SymmetricExceptWith),
+        nameof(HashSet<int>.UnionWith),
         nameof(ICollection.CopyTo),
         nameof(ICollection<int>.Clear),
         nameof(ICollection<int>.Contains),
         nameof(ICollection<int>.Remove),
+        nameof(IEnumerable<int>.GetEnumerator),
         nameof(List<int>.BinarySearch),
         nameof(List<int>.ConvertAll),
         nameof(List<int>.Exists),
@@ -75,34 +140,10 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         nameof(List<int>.Reverse),
         nameof(List<int>.Sort),
         nameof(List<int>.TrueForAll),
-        nameof(HashSet<int>.ExceptWith),
-        nameof(HashSet<int>.IntersectWith),
-        nameof(HashSet<int>.IsProperSubsetOf),
-        nameof(HashSet<int>.IsProperSupersetOf),
-        nameof(HashSet<int>.IsSubsetOf),
-        nameof(HashSet<int>.IsSupersetOf),
-        nameof(HashSet<int>.Overlaps),
-        nameof(HashSet<int>.RemoveWhere),
-        nameof(HashSet<int>.SymmetricExceptWith),
-        nameof(HashSet<int>.UnionWith),
+        nameof(ObservableCollection<int>.Move),
         nameof(Queue<int>.Dequeue),
         nameof(Queue<int>.Peek),
-        "TryDequeue",
-        "TryPeek",
         nameof(Stack<int>.Pop),
-        "TryPop",
-        nameof(ObservableCollection<int>.Move),
-        nameof(Array.Clone),
-        nameof(Array.GetLength),
-        nameof(Array.GetLongLength),
-        nameof(Array.GetLowerBound),
-        nameof(Array.GetUpperBound),
-        nameof(Array.GetValue),
-        nameof(Array.Initialize),
-        nameof(Array.SetValue),
-        nameof(Dictionary<int, int>.ContainsKey),
-        nameof(Dictionary<int, int>.ContainsValue),
-        nameof(Dictionary<int, int>.TryGetValue)
     };
 
     private static readonly HashSet<string> AddMethods = new()
@@ -187,13 +228,13 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
     private ProgramState ProcessInvocation(SymbolicContext context, IInvocationOperationWrapper invocation)
     {
         var targetMethod = invocation.TargetMethod;
-        if (targetMethod.Is(KnownType.System_Linq_Enumerable, nameof(Enumerable.Count))
-            && SizeConstraint(context.State, invocation.Instance ?? invocation.Arguments[0].ToArgument().Value, HasFilteringPredicate()) is { } constraint)
+        if ((invocation.Instance ?? invocation.Arguments.FirstOrDefault()?.ToArgument().Value) is { } instance)
         {
-            return context.SetOperationConstraint(constraint);
-        }
-        else if (invocation.Instance is { } instance)
-        {
+            if (targetMethod.Is(KnownType.System_Linq_Enumerable, nameof(Enumerable.Count))
+                && SizeConstraint(context.State, instance, HasFilteringPredicate()) is { } constraint)
+            {
+                return context.SetOperationConstraint(constraint);
+            }
             if (RaisingMethods.Contains(targetMethod.Name))
             {
                 if (context.State[instance]?.HasConstraint(CollectionConstraint.Empty) is true)
