@@ -610,11 +610,13 @@ tag = ""End"";";
         validator.ValidateTagOrder(
             "BeforeTry",
             "InTry",
-            "InCatchSpecificWithCondition", // should be followed by InCatchSpecificNoCondition
+            "InCatchSpecificNoCondition",
+            "InCatchBase",    // It would be better not visit this state, but it gets tricky with conditions
+            "InCatchSpecificWithCondition",
             "End");
-        validator.TagStates("InCatchBase").Should().BeEmpty();
+        validator.TagStates("InCatchBase").Should().HaveCount(1).And.ContainSingle(x => HasExceptionOfType(x, "FileNotFoundException"));    // Should().BeEmpt()
         validator.TagStates("InCatchSpecificWithCondition").Should().HaveCount(1).And.ContainSingle(x => HasExceptionOfType(x, "FileNotFoundException"));
-        validator.TagStates("InCatchSpecificNoCondition").Should().BeEmpty();   // Should().HaveCount(1).And.ContainSingle(x => HasExceptionOfType(x, "FileNotFoundException"))
+        validator.TagStates("InCatchSpecificNoCondition").Should().HaveCount(1).And.ContainSingle(x => HasExceptionOfType(x, "FileNotFoundException"));
     }
 
     [TestMethod]

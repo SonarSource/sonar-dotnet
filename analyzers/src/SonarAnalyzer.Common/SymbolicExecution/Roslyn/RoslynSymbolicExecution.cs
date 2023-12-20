@@ -243,7 +243,13 @@ internal class RoslynSymbolicExecution
             var reachableHandlers = tryRegion.EnclosingRegion.NestedRegions.Where(x => x.Kind != ControlFlowRegionKind.Try && IsReachable(x, state.Exception)).ToArray();
             foreach (var handler in reachableHandlers)  // CatchRegion, FinallyRegion or FilterAndHandlerRegion
             {
-                handlersAreExhaustive |= CatchesAll(handler) || state.Exception.Type.DerivesFrom(handler.ExceptionType);
+                handlersAreExhaustive |= handler.Kind switch
+                {
+                    ControlFlowRegionKind.Finally => true,
+                    ControlFlowRegionKind.FilterAndHandler => false,
+                    _ => state.Exception.Type.DerivesFrom(handler.ExceptionType)
+                        || handler.ExceptionType.IsAny(KnownType.System_Exception, KnownType.System_Object) // relevant for UnkonwnException: 'catch (Exception) { ... }' and 'catch { ... }'
+                };
                 yield return new(cfg.Blocks[handler.FirstBlockOrdinal], state, null);
             }
             tryRegion = tryRegion.EnclosingRegion.EnclosingRegionOrSelf(ControlFlowRegionKind.Try); // Inner catch for specific exception doesn't match. Go to outer one.
@@ -297,15 +303,7 @@ internal class RoslynSymbolicExecution
         branch.IsConditionalSuccessor ? condition == constraint : condition != constraint;
 
     private static bool IsReachable(ControlFlowRegion region, ExceptionState thrown) =>
-        CatchesAll(region)
+        region.Kind == ControlFlowRegionKind.Finally
         || thrown == ExceptionState.UnknownException
         || thrown.Type.DerivesFrom(region.ExceptionType);
-
-    private static bool CatchesAll(ControlFlowRegion region) =>
-        region.Kind switch
-        {
-            ControlFlowRegionKind.FilterAndHandler => false,
-            ControlFlowRegionKind.Finally => true,
-            _ => region.ExceptionType.Is(KnownType.System_Exception) || region.ExceptionType.Is(KnownType.System_Object)
-        };
 }

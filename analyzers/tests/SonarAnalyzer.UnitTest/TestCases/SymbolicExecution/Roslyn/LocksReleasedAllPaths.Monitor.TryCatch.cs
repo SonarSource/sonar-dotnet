@@ -96,7 +96,7 @@ namespace Monitor_TryCatch
 
         public void CatchWhen_SpecificException(string arg)
         {
-            Monitor.Enter(obj); // FN
+            Monitor.Enter(obj); // Noncompliant
             try
             {
                 throw new NotImplementedException();
