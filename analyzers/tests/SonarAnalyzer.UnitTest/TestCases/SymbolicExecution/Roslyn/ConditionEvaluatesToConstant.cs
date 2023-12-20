@@ -3602,3 +3602,63 @@ public class Repro_8094
 
     private void Callback() { }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8470
+public class Repro_8470
+{
+    public string WithDouble()
+    {
+        double t = 0.5;
+        if (t <= 0)
+        {
+            return "a";
+        }
+        if (t >= 1) // Compliant, we don't track floating point numbers
+        {
+            return "b";
+        }
+        return "c";
+    }
+
+    public string WithDoubleSwappedOperands()
+    {
+        double t = 0.5;
+        if (0 >= t)
+        {
+            return "a";
+        }
+        if (1 <= t) // Compliant, we don't track floating point numbers
+        {
+            return "b";
+        }
+        return "c";
+    }
+
+    public string WithDecimal()
+    {
+        decimal t = 0.5M;
+        if (t <= 0)
+        {
+            return "a";
+        }
+        if (t >= 1) // Compliant, we don't track floating point numbers
+        {
+            return "b";
+        }
+        return "c";
+    }
+
+    public string WithFloat()
+    {
+        float t = 0.5F;
+        if (t <= 0)
+        {
+            return "a";
+        }
+        if (t >= 1) // Compliant, we don't track floating point numbers
+        {
+            return "b";
+        }
+        return "c";
+    }
+}

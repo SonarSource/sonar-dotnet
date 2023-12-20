@@ -777,4 +777,48 @@ Tag(""End"")";
                 _ => null
             };
     }
+
+    [DataTestMethod]
+    [DataRow("3.14")]   // Double
+    [DataRow("3.14M")]  // Decimal
+    [DataRow("3.14F")]  // Float
+    public void Binary_Relation_FloatingPoint_DoesNotLearnNumberConstraint(string value)
+    {
+        var code = $$"""
+            var value = {{value}};
+            if (value > 0)
+            {
+                Tag("If", value);
+            }
+            else
+            {
+                Tag("Else", value);
+            }
+            """;
+        var validator = SETestContext.CreateCS(code).Validator;
+        validator.TagValue("If").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("Else").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+    }
+
+    [DataTestMethod]
+    [DataRow("3.14")]   // Double
+    [DataRow("3.14M")]  // Decimal
+    [DataRow("3.14F")]  // Float
+    public void Binary_Equals_FloatingPoint_DoesNotLearnNumberConstraint(string value)
+    {
+        var code = $$"""
+            var value = {{value}};
+            if (value == 0)
+            {
+                Tag("If", value);
+            }
+            else
+            {
+                Tag("Else", value);
+            }
+            """;
+        var validator = SETestContext.CreateCS(code).Validator;
+        validator.TagValue("If").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("Else").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+    }
 }
