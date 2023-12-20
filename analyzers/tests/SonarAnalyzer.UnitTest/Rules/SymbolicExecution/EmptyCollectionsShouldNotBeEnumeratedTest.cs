@@ -135,7 +135,7 @@ public class EmptyCollectionsShouldNotBeEnumeratedTest
             }
             """).Verify();
 
-[TestMethod]
+    [TestMethod]
     public void EmptyCollectionsShouldNotBeEnumerated_Sonar_CSharp8() =>
         sonar.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
