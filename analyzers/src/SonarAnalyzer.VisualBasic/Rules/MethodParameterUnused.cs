@@ -107,7 +107,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     .Cast<IdentifierNameSyntax>()
                     .Select(x => x.Identifier.ValueText)
                     .WhereNotNull()
-                    .ToHashSet();
+                    .ToHashSet(StringComparer.InvariantCultureIgnoreCase);
 
             return methodBlock.BlockStatement.ParameterList.Parameters
                 .Where(p => !usedIdentifiers.Contains(p.Identifier.Identifier.ValueText))
