@@ -91,6 +91,10 @@ Namespace Tests.TestCases
             Return a
         End Function
 
+        Private Function Casing(DifferentCasing As Integer) As Integer
+            Return differentCASING
+        End Function
+
         Sub DoSomething3(ByVal a As Integer) ' Default accessibility is public
             Console.WriteLine("foo")
         End Sub
