@@ -784,31 +784,35 @@ tag = ""End"";";
     [TestMethod]
     public void CatchWhen_Simple()
     {
-        const string code = @"
-var tag = ""BeforeTry"";
-try
-{
-    Tag(""InTry"");
-}
-catch (Exception ex) when (ex is FormatException)
-{
-    tag = ""InCatch"";
-}
-finally
-{
-    tag = ""InFinally"";
-}
-tag = ""End"";";
+        const string code = """
+            var tag = "BeforeTry";
+            try
+            {
+                Tag("InTry");
+            }
+            catch (Exception ex) when (ex is FormatException)
+            {
+                tag = "InCatch";
+            }
+            finally
+            {
+                tag = "InFinally";
+            }
+            tag = "End";
+            """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.ValidateTagOrder(
             "BeforeTry",
             "InTry",
             "InFinally",
+            "InFinally",
             "InCatch",
             "End");
 
         validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
-        validator.TagStates("InFinally").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+        validator.TagStates("InFinally").Should().HaveCount(2)
+            .And.ContainSingle(x => HasNoException(x), "no exception, and exception processed by catch clears exception state")
+            .And.ContainSingle(x => HasUnknownException(x), "if an exception not matching the filter is thrown, execution goes from 'InTry' to 'InFinally'.");
         validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
     }
 
@@ -857,37 +861,6 @@ tag = ""End"";";
         validator.TagStates("InCatchArgument").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
         validator.TagStates("InCatchAllWhen").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
         validator.TagStates("InCatchAll").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
-        validator.TagStates("InFinally").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
-        validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
-    }
-
-    [TestMethod]
-    public void CatchWhen_Finally()
-    {
-        const string code = @"
-var tag = ""BeforeTry"";
-try
-{
-    Tag(""InTry"");
-}
-catch (Exception ex) when (ex is ArgumentNullException)
-{
-    tag = ""InCatch"";
-}
-finally
-{
-    tag = ""InFinally"";
-}
-tag = ""End"";";
-        var validator = SETestContext.CreateCS(code).Validator;
-        validator.ValidateTagOrder(
-            "BeforeTry",
-            "InTry",
-            "InFinally",
-            "InCatch",
-            "End");
-
-        validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
         validator.TagStates("InFinally").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
         validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
     }

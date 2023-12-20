@@ -191,14 +191,12 @@ tag = ""AfterCatch"";";
             "InTry",
             "InFirstCatch",     // With Exception thrown by Tag("InTry")
             "InSecondCatch",    // With Exception thrown by Tag("InTry")
-            "InThirdCatch",     // With Exception thrown by Tag("InTry")
             "InSecondCatch",    // With Exception thrown by throw new System.Exception()
-            "InThirdCatch",     // With Exception thrown by throw new System.Exception()
             "AfterCatch");
 
         validator.TagStates("InFirstCatch").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
         ValidateHasOnlyUnknownExceptionAndSystemException(validator, "InSecondCatch");
-        ValidateHasOnlyUnknownExceptionAndSystemException(validator, "InThirdCatch");
+        validator.TagStates("InThirdCatch").Should().BeEmpty();
         validator.TagStates("AfterCatch").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
     }
 
@@ -535,9 +533,8 @@ tag = ""End"";";
             "BeforeTry",
             "InTry",
             "InCatchSpecific",
-            "InCatchBase",  // It would be better not visit this state
             "End");
-        validator.TagStates("InCatchBase").Should().HaveCount(1).And.ContainSingle(x => HasExceptionOfType(x, "FileNotFoundException"));
+        validator.TagStates("InCatchBase").Should().BeEmpty();
         validator.TagStates("InCatchSpecific").Should().HaveCount(1).And.ContainSingle(x => HasExceptionOfType(x, "FileNotFoundException"));
     }
 
@@ -570,10 +567,49 @@ tag = ""End"";";
             "BeforeTry",
             "InTry",
             "InCatchSpecificNoCondition",
-            "InCatchBase",    // It would be better not visit this state, but it gets tricky with conditions
             "InCatchSpecificWithCondition",
             "End");
-        validator.TagStates("InCatchBase").Should().HaveCount(1).And.ContainSingle(x => HasExceptionOfType(x, "FileNotFoundException"));
+        validator.TagStates("InCatchBase").Should().BeEmpty();
+        validator.TagStates("InCatchSpecificWithCondition").Should().HaveCount(1).And.ContainSingle(x => HasExceptionOfType(x, "FileNotFoundException"));
+        validator.TagStates("InCatchSpecificNoCondition").Should().HaveCount(1).And.ContainSingle(x => HasExceptionOfType(x, "FileNotFoundException"));
+    }
+
+    [TestMethod]
+    public void Throw_TryCatch_Throw_CatchBaseTypeAndSpecificType_WithWhenCondition_Nested()
+    {
+        const string code = """
+            var tag = "BeforeTry";
+            try
+            {
+                try
+                {
+                    tag = "InTry";
+                    throw new System.IO.FileNotFoundException();
+                    tag = "UnreachableInTry";
+                }
+                catch (System.IO.FileNotFoundException) when (condition)
+                {
+                    tag = "InCatchSpecificWithCondition";
+                }
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                tag = "InCatchSpecificNoCondition";
+            }
+            catch (System.IO.IOException)
+            {
+                tag = "InCatchBase";
+            }
+            tag = "End";
+            """;
+        var validator = SETestContext.CreateCS(code, "bool condition").Validator;
+        validator.ValidateTagOrder(
+            "BeforeTry",
+            "InTry",
+            "InCatchSpecificNoCondition",
+            "InCatchSpecificWithCondition",
+            "End");
+        validator.TagStates("InCatchBase").Should().BeEmpty();
         validator.TagStates("InCatchSpecificWithCondition").Should().HaveCount(1).And.ContainSingle(x => HasExceptionOfType(x, "FileNotFoundException"));
         validator.TagStates("InCatchSpecificNoCondition").Should().HaveCount(1).And.ContainSingle(x => HasExceptionOfType(x, "FileNotFoundException"));
     }
