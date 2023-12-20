@@ -294,4 +294,17 @@ public class Repro_8008
         (((_, _), _), null) => 44,
         (((_, _), _), _) => 45,
     };
+
+    public int TupleWithKnownNullConstraint()
+    {
+        string name1 = null;
+        string name2 = null;
+        return (name1, name2) switch
+        {
+            (null, null) => 0,  // FN
+            (null, _) => 1,     // FN
+            (_, null) => -1,    // FN
+            (_, _) => Comparer<string>.Default.Compare(name1, name2)
+        };
+    }
 }
