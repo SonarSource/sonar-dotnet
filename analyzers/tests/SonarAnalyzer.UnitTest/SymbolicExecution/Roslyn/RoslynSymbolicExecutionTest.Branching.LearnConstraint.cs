@@ -803,14 +803,21 @@ if (value = boolParameter)
             .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
     }
 
-    [DataTestMethod]
-    [DataRow("arg is var o")]
-    [DataRow("arg is object o", "T")]
-    public void Branching_LearnsObjectConstraint_DeclarationPattern_NoConstraints(string expression, string argType = "object")
+    [TestMethod]
+    public void Branching_LearnsObjectConstraint_DeclarationPattern_NoConstraints()
     {
-        var validator = CreateIfElseEndValidatorCS(expression, OperationKind.DeclarationPattern, argType);
+        var validator = CreateIfElseEndValidatorCS("arg is object o", OperationKind.DeclarationPattern, "T");
         validator.TagValue("If").Should().BeNull();
-        validator.TagValue("Else").Should().BeNull();
+        validator.TagValue("Else").Should().BeNull();   // Should().HaveOnlyConstraint(ObjectConstraint.Null)
+        validator.TagValue("End").Should().BeNull();
+    }
+
+    [TestMethod]
+    public void Branching_LearnsObjectConstraint_DeclarationPattern_Var_NoConstraints()
+    {
+        var validator = CreateIfElseEndValidatorCS("arg is var o", OperationKind.DeclarationPattern, "object");
+        validator.TagValue("If").Should().BeNull();
+        validator.TagValues("Else").Should().BeEmpty(); // unreachable
         validator.TagValue("End").Should().BeNull();
     }
 

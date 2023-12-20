@@ -28,7 +28,7 @@ internal sealed class IsPattern : BranchingProcessor<IIsPatternOperationWrapper>
         IIsPatternOperationWrapper.FromOperation(operation);
 
     protected override SymbolicConstraint BoolConstraintFromOperation(ProgramState state, IIsPatternOperationWrapper operation, bool isLoopCondition, int visitCount) =>
-        BoolConstraintFromConstant(state, operation) ?? BoolConstraintFromPattern(state, operation);
+        BoolConstraintFromConstant(state, operation) ?? BoolConstraintFromPattern(state, state.Constraint<ObjectConstraint>(operation.Value), operation.Pattern);
 
     protected override ProgramState LearnBranchingConstraint(ProgramState state, IIsPatternOperationWrapper operation, bool isLoopCondition, int visitCount, bool falseBranch) =>
         operation.Value.TrackedSymbol(state) is { } testedSymbol
@@ -134,38 +134,38 @@ internal sealed class IsPattern : BranchingProcessor<IIsPatternOperationWrapper>
         return null; // We cannot take conclusive decision
     }
 
-    private static SymbolicConstraint BoolConstraintFromPattern(ProgramState state, IIsPatternOperationWrapper isPattern) =>
-        state[isPattern.Value] is { } value
-        && value.Constraint<ObjectConstraint>() is { } valueConstraint
-        && BoolConstraintFromPattern(state, valueConstraint, isPattern.Pattern) is { } newConstraint
-            ? newConstraint
-            : null;
-
     private static SymbolicConstraint BoolConstraintFromPattern(ProgramState state, ObjectConstraint valueConstraint, IPatternOperationWrapper pattern)
     {
-        return pattern.WrappedOperation.Kind switch
+        var patternOperation = pattern.WrappedOperation;
+        if (patternOperation.Kind is OperationKindEx.DiscardPattern
+            || patternOperation.AsDeclarationPattern() is { MatchesNull: true })
         {
-            OperationKindEx.ConstantPattern when state[As(IConstantPatternOperationWrapper.FromOperation).Value]?.HasConstraint(ObjectConstraint.Null) is true =>
-                BoolConstraint.From(valueConstraint == ObjectConstraint.Null),
-            OperationKindEx.RecursivePattern => BoolConstraintFromRecursivePattern(valueConstraint, As(IRecursivePatternOperationWrapper.FromOperation)),
-            OperationKindEx.DeclarationPattern => BoolConstraintFromDeclarationPattern(valueConstraint, As(IDeclarationPatternOperationWrapper.FromOperation)),
-            OperationKindEx.TypePattern when
-                As(ITypePatternOperationWrapper.FromOperation) is var type
-                && type.InputType.DerivesOrImplements(type.NarrowedType) => BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
-            OperationKindEx.NegatedPattern => BoolConstraintFromPattern(state, valueConstraint, As(INegatedPatternOperationWrapper.FromOperation).Pattern)?.Opposite,
-            OperationKindEx.DiscardPattern => BoolConstraint.True,
-            OperationKindEx.BinaryPattern => BoolConstraintFromBinaryPattern(state, valueConstraint, As(IBinaryPatternOperationWrapper.FromOperation)),
-            _ => null,
-        };
-
-        T As<T>(Func<IOperation, T> fromOperation) =>
-             fromOperation(pattern.WrappedOperation);
+            return BoolConstraint.True;
+        }
+        else if (valueConstraint is not null)
+        {
+            return patternOperation.Kind switch
+            {
+                OperationKindEx.ConstantPattern when state[patternOperation.ToConstantPattern().Value]?.HasConstraint(ObjectConstraint.Null) is true =>
+                    BoolConstraint.From(valueConstraint == ObjectConstraint.Null),
+                OperationKindEx.RecursivePattern => BoolConstraintFromRecursivePattern(valueConstraint, patternOperation.ToRecursivePattern()),
+                OperationKindEx.DeclarationPattern => BoolConstraintFromDeclarationPattern(valueConstraint, patternOperation.ToDeclarationPattern()),
+                OperationKindEx.TypePattern when patternOperation.ToTypePattern() is var type && type.InputType.DerivesOrImplements(type.NarrowedType) =>
+                    BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
+                OperationKindEx.NegatedPattern => BoolConstraintFromPattern(state, valueConstraint, patternOperation.ToNegatedPattern().Pattern)?.Opposite,
+                OperationKindEx.BinaryPattern => BoolConstraintFromBinaryPattern(state, valueConstraint, patternOperation.ToBinaryPattern()),
+                _ => null,
+            };
+        }
+        else
+        {
+            return null;
+        }
     }
 
     private static BoolConstraint BoolConstraintFromDeclarationPattern(ObjectConstraint valueConstraint, IDeclarationPatternOperationWrapper declaration) =>
         declaration switch
         {
-            { MatchesNull: true } => BoolConstraint.True,
             _ when valueConstraint == ObjectConstraint.Null => BoolConstraint.False,
             _ when declaration.InputType.DerivesOrImplements(declaration.NarrowedType) => BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
             _ => null,

@@ -93,23 +93,35 @@ internal static class IOperationExtensions
     internal static IBinaryOperationWrapper ToBinary(this IOperation operation) =>
         IBinaryOperationWrapper.FromOperation(operation);
 
+    internal static IBinaryPatternOperationWrapper ToBinaryPattern(this IOperation operation) =>
+        IBinaryPatternOperationWrapper.FromOperation(operation);
+
     internal static ICompoundAssignmentOperationWrapper ToCompoundAssignment(this IOperation operation) =>
         ICompoundAssignmentOperationWrapper.FromOperation(operation);
+
+    internal static IConstantPatternOperationWrapper ToConstantPattern(this IOperation operation) =>
+        IConstantPatternOperationWrapper.FromOperation(operation);
 
     internal static IConversionOperationWrapper ToConversion(this IOperation operation) =>
         IConversionOperationWrapper.FromOperation(operation);
 
-    internal static IIncrementOrDecrementOperationWrapper ToIncrementOrDecrement(this IOperation operation) =>
-        IIncrementOrDecrementOperationWrapper.FromOperation(operation);
+    internal static IDeclarationPatternOperationWrapper ToDeclarationPattern(this IOperation operation) =>
+        IDeclarationPatternOperationWrapper.FromOperation(operation);
 
-    internal static IInvocationOperationWrapper ToInvocation(this IOperation operation) =>
-        IInvocationOperationWrapper.FromOperation(operation);
+    internal static IEventReferenceOperationWrapper ToEventReference(this IOperation operation) =>
+        IEventReferenceOperationWrapper.FromOperation(operation);
 
     internal static IFieldReferenceOperationWrapper ToFieldReference(this IOperation operation) =>
         IFieldReferenceOperationWrapper.FromOperation(operation);
 
     internal static IFlowCaptureReferenceOperationWrapper ToFlowCaptureReference(this IOperation operation) =>
         IFlowCaptureReferenceOperationWrapper.FromOperation(operation);
+
+    internal static IIncrementOrDecrementOperationWrapper ToIncrementOrDecrement(this IOperation operation) =>
+        IIncrementOrDecrementOperationWrapper.FromOperation(operation);
+
+    internal static IInvocationOperationWrapper ToInvocation(this IOperation operation) =>
+        IInvocationOperationWrapper.FromOperation(operation);
 
     internal static ILocalReferenceOperationWrapper ToLocalReference(this IOperation operation) =>
         ILocalReferenceOperationWrapper.FromOperation(operation);
@@ -120,17 +132,23 @@ internal static class IOperationExtensions
     internal static IMethodReferenceOperationWrapper ToMethodReference(this IOperation operation) =>
         IMethodReferenceOperationWrapper.FromOperation(operation);
 
+    internal static INegatedPatternOperationWrapper ToNegatedPattern(this IOperation operation) =>
+        INegatedPatternOperationWrapper.FromOperation(operation);
+
     internal static IObjectCreationOperationWrapper ToObjectCreation(this IOperation operation) =>
         IObjectCreationOperationWrapper.FromOperation(operation);
-
-    internal static IPropertyReferenceOperationWrapper ToPropertyReference(this IOperation operation) =>
-        IPropertyReferenceOperationWrapper.FromOperation(operation);
 
     internal static IParameterReferenceOperationWrapper ToParameterReference(this IOperation operation) =>
         IParameterReferenceOperationWrapper.FromOperation(operation);
 
-    internal static IEventReferenceOperationWrapper ToEventReference(this IOperation operation) =>
-        IEventReferenceOperationWrapper.FromOperation(operation);
+    internal static IPropertyReferenceOperationWrapper ToPropertyReference(this IOperation operation) =>
+        IPropertyReferenceOperationWrapper.FromOperation(operation);
+
+    internal static IRecursivePatternOperationWrapper ToRecursivePattern(this IOperation operation) =>
+        IRecursivePatternOperationWrapper.FromOperation(operation);
+
+    internal static ITypePatternOperationWrapper ToTypePattern(this IOperation operation) =>
+        ITypePatternOperationWrapper.FromOperation(operation);
 
     internal static ITupleOperationWrapper ToTuple(this IOperation operation) =>
         ITupleOperationWrapper.FromOperation(operation);
