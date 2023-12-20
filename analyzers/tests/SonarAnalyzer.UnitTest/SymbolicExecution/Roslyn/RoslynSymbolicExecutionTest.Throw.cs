@@ -579,6 +579,45 @@ tag = ""End"";";
     }
 
     [TestMethod]
+    public void Throw_TryCatch_Throw_CatchBaseTypeAndSpecificType_WithWhenCondition_Nested()
+    {
+        const string code = """
+            var tag = "BeforeTry";
+            try
+            {
+                try
+                {
+                    tag = "InTry";
+                    throw new System.IO.FileNotFoundException();
+                    tag = "UnreachableInTry";
+                }
+                catch (System.IO.FileNotFoundException) when (condition)
+                {
+                    tag = "InCatchSpecificWithCondition";
+                }
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                tag = "InCatchSpecificNoCondition";
+            }
+            catch (System.IO.IOException)
+            {
+                tag = "InCatchBase";
+            }
+            tag = "End";
+            """;
+        var validator = SETestContext.CreateCS(code, "bool condition").Validator;
+        validator.ValidateTagOrder(
+            "BeforeTry",
+            "InTry",
+            "InCatchSpecificWithCondition", // should be followed by InCatchSpecificNoCondition
+            "End");
+        validator.TagStates("InCatchBase").Should().BeEmpty();
+        validator.TagStates("InCatchSpecificWithCondition").Should().HaveCount(1).And.ContainSingle(x => HasExceptionOfType(x, "FileNotFoundException"));
+        validator.TagStates("InCatchSpecificNoCondition").Should().BeEmpty();   // Should().HaveCount(1).And.ContainSingle(x => HasExceptionOfType(x, "FileNotFoundException"))
+    }
+
+    [TestMethod]
     public void Throw_TryCatch_Throw_CatchAllWhen_IsTrue()
     {
         const string code = @"

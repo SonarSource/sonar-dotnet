@@ -85,9 +85,23 @@ namespace Monitor_TryCatch
             Monitor.Enter(obj); // Noncompliant
             try
             {
-                Console.WriteLine(arg.Length);
+                Console.WriteLine(arg.Length);  // throws NRE and UnknownException
             }
             catch (NullReferenceException nre) when (nre.Message.Contains("Dummy string"))
+            {
+                Monitor.Exit(obj);
+                throw;
+            }
+        }
+
+        public void CatchWhen_SpecificException(string arg)
+        {
+            Monitor.Enter(obj); // FN
+            try
+            {
+                throw new NotImplementedException();
+            }
+            catch (NotImplementedException nre) when (nre.Message.Contains("Dummy string"))
             {
                 Monitor.Exit(obj);
                 throw;
