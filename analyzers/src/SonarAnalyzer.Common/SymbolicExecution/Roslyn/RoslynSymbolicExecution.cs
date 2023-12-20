@@ -237,28 +237,31 @@ internal class RoslynSymbolicExecution
             ? state.PushException(exception)        // If we're nested inside catch, we need to preserve the exception chain
             : state.SetException(exception);        // Otherwise we track only the current exception to avoid explosion of states after each statement
 
-        var handlersAreExhaustive = false;
-        while (tryRegion is not null && !handlersAreExhaustive)
+        foreach (var handler in ReachableHandlers(tryRegion, exception))
         {
-            var reachableHandlers = tryRegion.EnclosingRegion.NestedRegions.Where(x => x.Kind != ControlFlowRegionKind.Try && IsReachable(x, state.Exception)).ToArray();
-            foreach (var handler in reachableHandlers)  // CatchRegion, FinallyRegion or FilterAndHandlerRegion
+            yield return new(cfg.Blocks[handler.FirstBlockOrdinal], state, null);
+            if (IsExhaustive(handler, exception))
             {
-                handlersAreExhaustive |= handler.Kind switch
-                {
-                    ControlFlowRegionKind.Finally => true,
-                    ControlFlowRegionKind.FilterAndHandler => false,
-                    _ => state.Exception.Type.DerivesFrom(handler.ExceptionType)
-                        || handler.ExceptionType.IsAny(KnownType.System_Exception, KnownType.System_Object) // relevant for UnkonwnException: 'catch (Exception) { ... }' and 'catch { ... }'
-                };
-                yield return new(cfg.Blocks[handler.FirstBlockOrdinal], state, null);
+                yield break;
             }
-            tryRegion = tryRegion.EnclosingRegion.EnclosingRegionOrSelf(ControlFlowRegionKind.Try); // Inner catch for specific exception doesn't match. Go to outer one.
         }
 
-        if (!handlersAreExhaustive)
-        {
-            yield return new(cfg.ExitBlock, node.State.SetException(exception), null);  // catch without finally or uncaught exception type
-        }
+        yield return new(cfg.ExitBlock, node.State.SetException(exception), null);  // catch without finally or uncaught exception type
+
+        static IEnumerable<ControlFlowRegion> ReachableHandlers(ControlFlowRegion tryRegion, ExceptionState exception) =>
+            tryRegion is null
+                ? Enumerable.Empty<ControlFlowRegion>()
+                : tryRegion.EnclosingRegion.NestedRegions.Where(x => x.Kind != ControlFlowRegionKind.Try && IsReachable(x, exception))
+                    .Concat(ReachableHandlers(tryRegion.EnclosingRegion.EnclosingRegionOrSelf(ControlFlowRegionKind.Try), exception));
+
+        static bool IsExhaustive(ControlFlowRegion handler, ExceptionState exception) =>
+            handler.Kind switch
+            {
+                ControlFlowRegionKind.Finally => true,
+                ControlFlowRegionKind.FilterAndHandler => false,
+                _ => exception.Type.DerivesFrom(handler.ExceptionType)
+                    || handler.ExceptionType.IsAny(KnownType.System_Exception, KnownType.System_Object) // relevant for UnkonwnException: 'catch (Exception) { ... }' and 'catch { ... }'
+            };
     }
 
     private static ExceptionState ThrownException(ExplodedNode node, ControlFlowBranchSemantics semantics) =>
