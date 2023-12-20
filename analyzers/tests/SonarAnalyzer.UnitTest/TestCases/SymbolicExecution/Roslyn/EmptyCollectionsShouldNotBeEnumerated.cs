@@ -596,7 +596,7 @@ class AdvancedTests
 
         if (empty.Count() == 0) // Noncompliant
         {
-            empty.Clear();  // Compliant
+            empty.Clear();  // FN
         }
         else
         {
@@ -605,7 +605,7 @@ class AdvancedTests
 
         if (empty.Count(x => condition) == 0) // Noncompliant
         {
-            empty.Clear();  // Compliant
+            empty.Clear();  // FN
         }
         else
         {
