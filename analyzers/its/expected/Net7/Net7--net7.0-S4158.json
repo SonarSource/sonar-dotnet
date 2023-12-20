@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4158",
+"message":  "Remove this call, the collection is known to be empty here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/OrderByBeforeWhere.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  20,
+"endLine":  8,
+"endColumn":  40
+}
+}
+}
+]
+}
