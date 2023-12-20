@@ -811,8 +811,8 @@ tag = ""End"";";
 
         validator.TagStates("InCatch").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
         validator.TagStates("InFinally").Should().HaveCount(2)
-            .And.ContainSingle(x => HasNoException(x), "if no exception is thrown, execution goes from 'InTry' to 'InFinally'.")
-            .And.ContainSingle(x => HasUnknownException(x), "if an exception is thrown, execution goes fron 'InTry' to 'InCatch' to 'InFinally'.");
+            .And.ContainSingle(x => HasNoException(x), "if no exception or one not matching the filter is thrown, execution goes from 'InTry' to 'InFinally'.")
+            .And.ContainSingle(x => HasUnknownException(x), "if an exception matching the filter is thrown, execution goes from 'InTry' to 'InCatch' to 'InFinally'.");
         validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
     }
 
