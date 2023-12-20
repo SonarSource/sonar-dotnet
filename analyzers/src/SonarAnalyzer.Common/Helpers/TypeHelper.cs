@@ -108,6 +108,7 @@ internal static class TypeHelper
 
         return false;
     }
+
     public static bool IsNullableOfAny(this ITypeSymbol type, ImmutableArray<KnownType> argumentTypes) =>
         NullableTypeArgument(type).IsAny(argumentTypes);
 
