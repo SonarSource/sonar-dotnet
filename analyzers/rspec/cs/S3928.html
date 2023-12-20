@@ -9,32 +9,39 @@
 <pre>
 public void Foo(Bar a, int[] b)
 {
-  throw new ArgumentException(); // Noncompliant
-  throw new ArgumentException("My error message", "c"); // Noncompliant
+  throw new ArgumentException();                                        // Noncompliant
+  throw new ArgumentException("My error message", "c");                 // Noncompliant
   throw new ArgumentException("My error message", "c", innerException); // Noncompliant
-  throw new ArgumentNullException("c"); // Noncompliant
-  throw new ArgumentNullException("My error message", "c"); // Noncompliant
-  throw new ArgumentOutOfRangeException("c");
-  throw new ArgumentOutOfRangeException("c", "My error message"); // Noncompliant
-  throw new ArgumentOutOfRangeException("c", b, "My error message"); // Noncompliant
-  throw new DuplicateWaitObjectException("c", "My error message");  // Noncompliant
+
+  throw new ArgumentNullException("c");                     // Noncompliant
+  throw new ArgumentNullException(nameof(c));               // Noncompliant
+  throw new ArgumentNullException("My error message", "a"); // Noncompliant
+
+  throw new ArgumentOutOfRangeException("c");                           // Noncompliant
+  throw new ArgumentOutOfRangeException("c", "My error message");       // Noncompliant
+  throw new ArgumentOutOfRangeException("c", b, "My error message");    // Noncompliant
+
+  throw new DuplicateWaitObjectException("c", "My error message");      // Noncompliant
 }
 </pre>
 <h3>Compliant solution</h3>
 <pre>
-public void Foo(Bar a, Bar b)
+public void Foo(Bar a, int[] b)
 {
   throw new ArgumentException("My error message", "a");
   throw new ArgumentException("My error message", "b", innerException);
+
   throw new ArgumentNullException("a");
   throw new ArgumentNullException(nameof(a));
   throw new ArgumentNullException("a", "My error message");
+
   throw new ArgumentOutOfRangeException("b");
   throw new ArgumentOutOfRangeException("b", "My error message");
   throw new ArgumentOutOfRangeException("b", b, "My error message");
+
   throw new DuplicateWaitObjectException("b", "My error message");
 }
 </pre>
 <h3>Exceptions</h3>
-<p>The rule won’t raise an issue if the parameter name is not a constant value (inline declaration, nameof() or const variable).</p>
+<p>The rule won’t raise an issue if the parameter name is not a constant value.</p>
 
