@@ -420,6 +420,8 @@ Tag(""End"", arg);";
     [DataRow("nullableBoolFalse is not false", OperationKindEx.NegatedPattern, null)]   // Should be false
     [DataRow("objectNull is not object", OperationKindEx.TypePattern, true)]
     [DataRow("objectNull is not not object", OperationKindEx.TypePattern, false)]
+    [DataRow("objectNull is not Exception", OperationKindEx.TypePattern, true)]
+    [DataRow("objectNull is not not Exception", OperationKindEx.TypePattern, false)]
     [DataRow("objectNotNull is not object", OperationKindEx.TypePattern, false)]
     [DataRow("objectNotNull is not not object", OperationKindEx.TypePattern, true)]
     [DataRow("exceptionNull is not object", OperationKindEx.TypePattern, true)]
@@ -450,8 +452,6 @@ Tag(""End"", arg);";
     [DataRow("objectUnknown", "is not not object", OperationKindEx.TypePattern, new[] { ConstraintKind.NotNull }, null)]
     [DataRow("exceptionUnknown", "is not object", OperationKindEx.TypePattern, null, new[] { ConstraintKind.NotNull })]
     [DataRow("exceptionUnknown", "is not not object", OperationKindEx.TypePattern, new[] { ConstraintKind.NotNull }, null)]
-    [DataRow("objectNull", "is not Exception", OperationKindEx.TypePattern, new[] { ConstraintKind.Null }, new[] { ConstraintKind.NotNull })]
-    [DataRow("objectNull", "is not not Exception", OperationKindEx.TypePattern, new[] { ConstraintKind.NotNull }, new[] { ConstraintKind.Null })]
     [DataRow("objectUnknown", "is not Exception", OperationKindEx.TypePattern, null, new[] { ConstraintKind.NotNull })]
     [DataRow("objectUnknown", "is not not Exception", OperationKindEx.TypePattern, new[] { ConstraintKind.NotNull }, null)]
     public void NegateTypeDiscardPatternsSetBoolConstraint_TwoStates(string testedSymbol, string isPattern, OperationKind expectedOperation, ConstraintKind[] expectedForTrue, ConstraintKind[] expectedForFalse) =>

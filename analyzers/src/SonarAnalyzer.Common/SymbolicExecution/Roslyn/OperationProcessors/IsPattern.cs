@@ -148,11 +148,10 @@ internal sealed class IsPattern : BranchingProcessor<IIsPatternOperationWrapper>
             {
                 OperationKindEx.ConstantPattern when state[patternOperation.ToConstantPattern().Value]?.HasConstraint(ObjectConstraint.Null) is true =>
                     BoolConstraint.From(valueConstraint == ObjectConstraint.Null),
+                OperationKindEx.NegatedPattern => BoolConstraintFromPattern(state, valueConstraint, patternOperation.ToNegatedPattern().Pattern)?.Opposite,
                 OperationKindEx.RecursivePattern => BoolConstraintFromRecursivePattern(valueConstraint, patternOperation.ToRecursivePattern()),
                 OperationKindEx.DeclarationPattern => BoolConstraintFromDeclarationPattern(valueConstraint, patternOperation.ToDeclarationPattern()),
-                OperationKindEx.TypePattern when patternOperation.ToTypePattern() is var type && type.InputType.DerivesOrImplements(type.NarrowedType) =>
-                    BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
-                OperationKindEx.NegatedPattern => BoolConstraintFromPattern(state, valueConstraint, patternOperation.ToNegatedPattern().Pattern)?.Opposite,
+                OperationKindEx.TypePattern => BoolConstraintFromTypePattern(valueConstraint, patternOperation.ToTypePattern()),
                 OperationKindEx.BinaryPattern => BoolConstraintFromBinaryPattern(state, valueConstraint, patternOperation.ToBinaryPattern()),
                 _ => null,
             };
@@ -169,6 +168,14 @@ internal sealed class IsPattern : BranchingProcessor<IIsPatternOperationWrapper>
             _ when valueConstraint == ObjectConstraint.Null => BoolConstraint.False,
             _ when declaration.InputType.DerivesOrImplements(declaration.NarrowedType) => BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
             _ => null,
+        };
+
+    private static BoolConstraint BoolConstraintFromTypePattern(ObjectConstraint valueConstraint, ITypePatternOperationWrapper type) =>
+        type switch
+        {
+            _ when valueConstraint == ObjectConstraint.Null => BoolConstraint.False,
+            _ when type.InputType.DerivesOrImplements(type.NarrowedType) => BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
+            _ => null
         };
 
     private static BoolConstraint BoolConstraintFromRecursivePattern(ObjectConstraint valueConstraint, IRecursivePatternOperationWrapper recursive) =>
