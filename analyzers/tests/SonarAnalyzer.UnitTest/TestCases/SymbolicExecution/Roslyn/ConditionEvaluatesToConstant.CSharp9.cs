@@ -307,4 +307,11 @@ public class Repro_8008
             (_, _) => Comparer<string>.Default.Compare(name1, name2)
         };
     }
+
+    public int TupleWithDeclaration(string name1, string name2) =>
+        (name1, name2) switch
+        {
+            ("A", "B") => 0,
+            (var x, _) => -1,    // Noncompliant - FP
+        };
 }
