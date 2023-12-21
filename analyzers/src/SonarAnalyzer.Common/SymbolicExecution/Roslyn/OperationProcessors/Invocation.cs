@@ -186,7 +186,7 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
         invocation switch
         {
             { Arguments.Length: 2, TargetMethod.IsStatic: true } => ProcessEquals(context, invocation.Arguments[0].ToArgument().Value, invocation.Arguments[1].ToArgument().Value),
-            { Arguments.Length: 1 } when invocation.TargetMethod.ContainingType.IsNullableValueType() || invocation.TargetMethod.ContainingType.IsStruct() =>
+            { Arguments.Length: 1 } when IsSupportedEqualsType(invocation.TargetMethod.ContainingType) =>
                 ProcessEquals(context, invocation.Instance, invocation.Arguments[0].ToArgument().Value),
             _ => context.State.ToArray()
         };
@@ -312,4 +312,9 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
 
     private static bool IsNullableGetValueOrDefault(IInvocationOperationWrapper invocation) =>
         invocation.TargetMethod.Is(KnownType.System_Nullable_T, nameof(Nullable<int>.GetValueOrDefault));
+
+    private static bool IsSupportedEqualsType(ITypeSymbol type) =>
+        type.IsNullableValueType()                                      // int?.Equals
+        || (type.IsStruct() && type.SpecialType != SpecialType.None)    // int.Equals and similar build-in basic value types
+        || type.SpecialType == SpecialType.System_ValueType;           // struct.Equals that was not overriden
 }
