@@ -272,9 +272,21 @@ namespace Repro7665
 {
     class IsNotAndShortCircuitOr
     {
+        void FlatVersion(ObjectInstance obj)
+        {
+            if(obj?.Value is not Table)
+            {
+                obj.ToString(); // Noncompliant
+            }
+            else
+            {
+                obj.ToString(); // Compliant, "null is not Table" returns True. So this path is visited only for NotNull.
+            }
+        }
+
         void Test(ObjectInstance obj)
         {
-            _ = obj?.Value is not Table || obj.Value is Table; // Noncompliant: FP
+            _ = obj?.Value is not Table || obj.Value is Table; // Compliant, "null is not Table" returns True. So || is not visited.
             obj = Unknown();
             _ = obj?.Value is Table || obj.Value is Table;     // Noncompliant
             obj = Unknown();
