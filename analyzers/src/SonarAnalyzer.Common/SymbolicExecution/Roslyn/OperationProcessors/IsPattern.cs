@@ -251,7 +251,7 @@ internal sealed class IsPattern : BranchingProcessor<IIsPatternOperationWrapper>
         else if (value.Constraint<NumberConstraint>() is { } valueNumber
             && NumberConstraint.From(pattern.Value.ConstantValue.Value) is { } patternNumber)
         {
-            return Binary.BinaryNumberConstraint(pattern.OperatorKind, valueNumber, patternNumber);
+            return pattern.OperatorKind.BinaryNumberConstraint(valueNumber, patternNumber);
         }
         else
         {
