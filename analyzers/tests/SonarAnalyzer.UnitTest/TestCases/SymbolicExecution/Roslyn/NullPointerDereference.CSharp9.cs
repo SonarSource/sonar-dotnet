@@ -178,12 +178,30 @@ public class Sample
         o.ToString();       // Noncompliant
     }
 
+    public void PatternMatching_Numbers()
+    {
+        object o = null;
+        var value = 42;
+        o = value switch
+        {
+            < 0 => o.ToString(),            // Noncompliant FP, unreachable
+            <= 0 => o.ToString(),           // Noncompliant FP, unreachable
+            > 100 => o.ToString(),          // Noncompliant FP, unreachable
+            >= 100 => o.ToString(),         // Noncompliant FP, unreachable
+            > 0 and < 20 => o.ToString(),   // Noncompliant FP, unreachable
+            < 10 or > 90 => o.ToString(),   // Noncompliant FP, unreachable
+            > 40 and < 50 => o.ToString(),  // Noncompliant, this is reachable
+            _ => o.ToString()               // Noncompliant FP, unreachable
+        };
+    }
+
     public void LearnFromPatternMatchingEverywhere(object arg)
     {
         Something(arg is null);
         arg.ToString(); // Noncompliant
 
-        void Something(bool b) { }
+        void Something(bool b)
+        { }
     }
 
     public void StaticLambda()
@@ -274,7 +292,7 @@ namespace Repro7665
     {
         void FlatVersion(ObjectInstance obj)
         {
-            if(obj?.Value is not Table)
+            if (obj?.Value is not Table)
             {
                 obj.ToString(); // Noncompliant
             }
