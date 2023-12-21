@@ -31,16 +31,29 @@ namespace Tests.Diagnostics
         void ArithmeticComparisonAndPattern()
         {
             int? c = null;
-            if (c is > 10 and < 100)    // FN
+            if (c is > 10 and < 100)    // Noncompliant
             {
-                DoSomething();
+                DoSomething();          // Secondary
             }
         }
 
-        void ArithmeticComparisonOrPattern()
+        void ArithmeticComparisonAndPattern_Null()
+        {
+            int? c = null;
+            if (c is > 10 and < 100)    // Noncompliant
+            {
+                DoSomething();          // Secondary
+            }
+        }
+
+        void ArithmeticComparisonOrPattern_Value()
         {
             int c = 10;
-            if (c is < 0 or > 100)      // FN
+            if (c is < 0 or > 100)      // Noncompliant
+            {
+                DoSomething();          // Secondary
+            }
+            if (c is > 0)               // Noncompliant
             {
                 DoSomething();
             }

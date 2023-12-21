@@ -184,14 +184,14 @@ public class Sample
         var value = 42;
         o = value switch
         {
-            < 0 => o.ToString(),            // Noncompliant FP, unreachable
-            <= 0 => o.ToString(),           // Noncompliant FP, unreachable
-            > 100 => o.ToString(),          // Noncompliant FP, unreachable
-            >= 100 => o.ToString(),         // Noncompliant FP, unreachable
-            > 0 and < 20 => o.ToString(),   // Noncompliant FP, unreachable
-            < 10 or > 90 => o.ToString(),   // Noncompliant FP, unreachable
+            < 0 => o.ToString(),            // Compliant, unreachable
+            <= 0 => o.ToString(),           // Compliant, unreachable
+            > 100 => o.ToString(),          // Compliant, unreachable
+            >= 100 => o.ToString(),         // Compliant, unreachable
+            > 0 and < 20 => o.ToString(),   // Compliant, unreachable
+            < 10 or > 90 => o.ToString(),   // Compliant, unreachable
             > 40 and < 50 => o.ToString(),  // Noncompliant, this is reachable
-            _ => o.ToString()               // Noncompliant FP, unreachable
+            _ => o.ToString()               // Compliant, unreachable due to previous line
         };
     }
 

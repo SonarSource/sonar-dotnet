@@ -241,7 +241,7 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
             _ => null
         };
 
-    private static SymbolicConstraint BinaryNumberConstraint(BinaryOperatorKind kind, NumberConstraint left, NumberConstraint right) =>
+    public static SymbolicConstraint BinaryNumberConstraint(BinaryOperatorKind kind, NumberConstraint left, NumberConstraint right) =>
         kind switch
         {
             BinaryOperatorKind.Equals when left.IsSingleValue && right.IsSingleValue => BoolConstraint.From(left.Equals(right)),

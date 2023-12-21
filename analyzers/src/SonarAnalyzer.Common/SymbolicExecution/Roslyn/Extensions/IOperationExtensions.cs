@@ -147,6 +147,9 @@ internal static class IOperationExtensions
     internal static IRecursivePatternOperationWrapper ToRecursivePattern(this IOperation operation) =>
         IRecursivePatternOperationWrapper.FromOperation(operation);
 
+    internal static IRelationalPatternOperationWrapper ToRelationalPattern(this IOperation operation) =>
+        IRelationalPatternOperationWrapper.FromOperation(operation);
+
     internal static ITypePatternOperationWrapper ToTypePattern(this IOperation operation) =>
         ITypePatternOperationWrapper.FromOperation(operation);
 
