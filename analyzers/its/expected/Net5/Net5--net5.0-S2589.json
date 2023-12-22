@@ -64,6 +64,19 @@
 "endColumn":  18
 }
 }
+},
+{
+"id":  "S2589",
+"message":  "Change this condition so that it does not always evaluate to 'True'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3981.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  17,
+"endLine":  12,
+"endColumn":  62
+}
+}
 }
 ]
 }
