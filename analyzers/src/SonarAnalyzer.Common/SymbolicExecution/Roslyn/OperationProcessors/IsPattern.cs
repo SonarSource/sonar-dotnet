@@ -28,7 +28,7 @@ internal sealed class IsPattern : BranchingProcessor<IIsPatternOperationWrapper>
         IIsPatternOperationWrapper.FromOperation(operation);
 
     protected override SymbolicConstraint BoolConstraintFromOperation(ProgramState state, IIsPatternOperationWrapper operation, bool isLoopCondition, int visitCount) =>
-        BoolConstraintFromConstant(state, operation) ?? BoolConstraintFromPattern(state, state.Constraint<ObjectConstraint>(operation.Value), operation.Pattern);
+        BoolConstraintFromConstant(state, operation) ?? BoolConstraintFromPattern(state, state[operation.Value], operation.Pattern);
 
     protected override ProgramState LearnBranchingConstraint(ProgramState state, IIsPatternOperationWrapper operation, bool isLoopCondition, int visitCount, bool falseBranch) =>
         operation.Value.TrackedSymbol(state) is { } testedSymbol
@@ -134,7 +134,7 @@ internal sealed class IsPattern : BranchingProcessor<IIsPatternOperationWrapper>
         return null; // We cannot take conclusive decision
     }
 
-    private static SymbolicConstraint BoolConstraintFromPattern(ProgramState state, ObjectConstraint valueConstraint, IPatternOperationWrapper pattern)
+    private static SymbolicConstraint BoolConstraintFromPattern(ProgramState state, SymbolicValue value, IPatternOperationWrapper pattern)
     {
         var patternOperation = pattern.WrappedOperation;
         if (patternOperation.Kind is OperationKindEx.DiscardPattern
@@ -142,18 +142,19 @@ internal sealed class IsPattern : BranchingProcessor<IIsPatternOperationWrapper>
         {
             return BoolConstraint.True;
         }
-        else if (valueConstraint is not null)
+        else if (value?.Constraint<ObjectConstraint>() is { } valueConstraint)
         {
             return patternOperation.Kind switch
             {
                 OperationKindEx.ConstantPattern when state[patternOperation.ToConstantPattern().Value]?.HasConstraint(ObjectConstraint.Null) is true =>
                     BoolConstraint.From(valueConstraint == ObjectConstraint.Null),
-                OperationKindEx.NegatedPattern => BoolConstraintFromPattern(state, valueConstraint, patternOperation.ToNegatedPattern().Pattern)?.Opposite,
+                OperationKindEx.NegatedPattern => BoolConstraintFromPattern(state, value, patternOperation.ToNegatedPattern().Pattern)?.Opposite,
                 OperationKindEx.RecursivePattern => BoolConstraintFromRecursivePattern(valueConstraint, patternOperation.ToRecursivePattern()),
                 OperationKindEx.DeclarationPattern => BoolConstraintFromDeclarationPattern(valueConstraint, patternOperation.ToDeclarationPattern()),
                 OperationKindEx.TypePattern => BoolConstraintFromTypePattern(valueConstraint, patternOperation.ToTypePattern()),
-                OperationKindEx.BinaryPattern => BoolConstraintFromBinaryPattern(state, valueConstraint, patternOperation.ToBinaryPattern()),
-                _ => null,
+                OperationKindEx.BinaryPattern => BoolConstraintFromBinaryPattern(state, value, patternOperation.ToBinaryPattern()),
+                OperationKindEx.RelationalPattern => BoolConstraintFromRelationalPattern(value, patternOperation.ToRelationalPattern()),
+                _ => null
             };
         }
         else
@@ -197,10 +198,10 @@ internal sealed class IsPattern : BranchingProcessor<IIsPatternOperationWrapper>
             .All(x => x is { WrappedOperation.Kind: OperationKindEx.DiscardPattern }
                 || (x.WrappedOperation.Kind == OperationKindEx.DeclarationPattern && IDeclarationPatternOperationWrapper.FromOperation(x.WrappedOperation).MatchesNull));
 
-    private static BoolConstraint BoolConstraintFromBinaryPattern(ProgramState state, ObjectConstraint valueConstraint, IBinaryPatternOperationWrapper binaryPattern)
+    private static BoolConstraint BoolConstraintFromBinaryPattern(ProgramState state, SymbolicValue value, IBinaryPatternOperationWrapper binaryPattern)
     {
-        var left = BoolConstraintFromPattern(state, valueConstraint, binaryPattern.LeftPattern);
-        var right = BoolConstraintFromPattern(state, valueConstraint, binaryPattern.RightPattern);
+        var left = BoolConstraintFromPattern(state, value, binaryPattern.LeftPattern);
+        var right = BoolConstraintFromPattern(state, value, binaryPattern.RightPattern);
         return binaryPattern.OperatorKind switch
         {
             BinaryOperatorKind.And => CombineAnd(),
@@ -238,6 +239,23 @@ internal sealed class IsPattern : BranchingProcessor<IIsPatternOperationWrapper>
             {
                 return null;
             }
+        }
+    }
+
+    private static SymbolicConstraint BoolConstraintFromRelationalPattern(SymbolicValue value, IRelationalPatternOperationWrapper pattern)
+    {
+        if (value.HasConstraint(ObjectConstraint.Null))
+        {
+            return BoolConstraint.False;
+        }
+        else if (value.Constraint<NumberConstraint>() is { } valueNumber
+            && NumberConstraint.From(pattern.Value.ConstantValue.Value) is { } patternNumber)
+        {
+            return pattern.OperatorKind.BinaryNumberConstraint(valueNumber, patternNumber);
+        }
+        else
+        {
+            return null;
         }
     }
 }

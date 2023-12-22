@@ -513,6 +513,68 @@ static object Tag(string name, object value) => null;";
         validator.TagValue("Arg").Should().HaveOnlyConstraint(ObjectConstraint.NotNull); // Should not have Null in any case
     }
 
+    [TestMethod]
+    public void RelationalPattern_SetsBoolConstraint_Enum()
+    {
+        const string code = """
+            var value = DayOfWeek.Monday;
+            var result = value is < DayOfWeek.Friday;
+            Tag("Result", result);
+            """;
+        var validator = SETestContext.CreateCS(code, "int arg").Validator;
+        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True);
+    }
+
+    [DataTestMethod]
+    [DataRow("is > 41")]
+    [DataRow("is >= 41")]
+    [DataRow("is >= 42")]
+    [DataRow("is < 43")]
+    [DataRow("is <= 42")]
+    [DataRow("is <= 43")]
+    public void RelationalPattern_SetsBoolConstraint_True(string expressionSuffix)
+    {
+        var code = $"""
+            var value = 42;
+            var result = value {expressionSuffix};
+            Tag("Result", result);
+            """;
+        var validator = SETestContext.CreateCS(code).Validator;
+        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True);
+    }
+
+    [DataTestMethod]
+    [DataRow("is > 42")]
+    [DataRow("is > 43")]
+    [DataRow("is >= 43")]
+    [DataRow("is < 41")]
+    [DataRow("is < 42")]
+    [DataRow("is <= 41")]
+    public void RelationalPattern_SetsBoolConstraint_False(string expressionSuffix)
+    {
+        var code = $"""
+            var value = 42;
+            var result = value {expressionSuffix};
+            Tag("Result", result);
+            """;
+        var validator = SETestContext.CreateCS(code).Validator;
+        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False);
+    }
+
+    [DataTestMethod]
+    [DataRow("arg is > 42")]
+    [DataRow("43.1 is > 43")]
+    [DataRow("'A' is > 'a'")]
+    public void RelationalPattern_SetsBoolConstraint_NotSet(string expression)
+    {
+        var code = $"""
+            var result = {expression};
+            Tag("Result", result);
+            """;
+        var validator = SETestContext.CreateCS(code, "int arg").Validator;
+        validator.TagValue("Result").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+    }
+
     private static void ValidateSetBoolConstraint(string isPattern, OperationKind expectedOperation, bool? expectedBoolConstraint)
     {
         var validator = CreateSetBoolConstraintValidator(isPattern);
@@ -552,30 +614,31 @@ static object Tag(string name, object value) => null;";
 
     private static ValidatorTestCheck CreateSetBoolConstraintValidator(string isPattern)
     {
-        var code = @$"
-public void Main()
-{{
-    var objectNotNull = new object();
-    var objectNull = (object)null;
-    var objectUnknown = Unknown<object>();
-    var exceptionNotNull = new Exception();
-    var exceptionNull = (Exception)null;
-    var exceptionUnknown = Unknown<Exception>();
-    var nullableBoolTrue = (bool?)true;
-    var nullableBoolFalse = (bool?)false;
-    var nullableBoolNull = (bool?)null;
-    var nullableBoolUnknown = Unknown<bool?>();
-    var stringNotNull = new string('c', 1);  // Make sure, we learn 's is not null'
-    var stringNull = (string)null;
-    var stringUnknown = Unknown<string>();
-    var integer = new int();
-    var deconstructableNull = (Deconstructable)null;
-    var deconstructableNotNull = new Deconstructable();
-    var deconstructableUnknown = Unknown<Deconstructable>();
+        var code = $$"""
+            public void Main()
+            {
+                var objectNotNull = new object();
+                var objectNull = (object)null;
+                var objectUnknown = Unknown<object>();
+                var exceptionNotNull = new Exception();
+                var exceptionNull = (Exception)null;
+                var exceptionUnknown = Unknown<Exception>();
+                var nullableBoolTrue = (bool?)true;
+                var nullableBoolFalse = (bool?)false;
+                var nullableBoolNull = (bool?)null;
+                var nullableBoolUnknown = Unknown<bool?>();
+                var stringNotNull = new string('c', 1);  // Make sure, we learn 's is not null'
+                var stringNull = (string)null;
+                var stringUnknown = Unknown<string>();
+                var integer = new int();
+                var deconstructableNull = (Deconstructable)null;
+                var deconstructableNotNull = new Deconstructable();
+                var deconstructableUnknown = Unknown<Deconstructable>();
 
-    var result = {isPattern};
-    Tag(""Result"", result);
-}}";
+                var result = {{isPattern}};
+                Tag("Result", result);
+            }
+            """;
         return SETestContext.CreateCSMethod(code).Validator;
     }
 }
