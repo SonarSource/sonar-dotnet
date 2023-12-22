@@ -69,7 +69,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
 
-            private void CheckForNoExit(SonarSyntaxNodeReportingContext c,
             private static void CheckForNoExit(SonarSyntaxNodeReportingContext c,
                                        IPropertySymbol propertySymbol,
                                        ArrowExpressionClauseSyntax expressionBody,
@@ -136,24 +135,18 @@ namespace SonarAnalyzer.Rules.CSharp
                             OperationKindEx.Invocation
                                 when IInvocationOperationWrapper.FromOperation(operation) is var invocation && (!invocation.IsVirtual || InstanceReferencesThis(invocation.Instance)) =>
                                 invocation.TargetMethod,
-                            OperationKindEx.Binary
-                                when IBinaryOperationWrapper.FromOperation(operation) is var binaryOperation =>
-                                binaryOperation.OperatorMethod,
-                            OperationKindEx.Decrement
-                                when IIncrementOrDecrementOperationWrapper.FromOperation(operation) is var decrementOperation =>
-                                decrementOperation.OperatorMethod,
-                            OperationKindEx.Increment
-                                when IIncrementOrDecrementOperationWrapper.FromOperation(operation) is var incrementOperation =>
-                                incrementOperation.OperatorMethod,
-                            OperationKindEx.Unary
-                                when IUnaryOperationWrapper.FromOperation(operation) is var unaryOperation =>
-                                unaryOperation.OperatorMethod,
-                            OperationKindEx.Conversion
-                                when IConversionOperationWrapper.FromOperation(operation) is var conversion =>
-                                conversion.OperatorMethod,
-                            OperationKindEx.EventReference
-                                when IEventReferenceOperationWrapper.FromOperation(operation) is var eventReference =>
-                                eventReference.Member,
+                            OperationKindEx.Binary =>
+                                IBinaryOperationWrapper.FromOperation(operation).OperatorMethod,
+                            OperationKindEx.Decrement =>
+                                IIncrementOrDecrementOperationWrapper.FromOperation(operation).OperatorMethod,
+                            OperationKindEx.Increment =>
+                                IIncrementOrDecrementOperationWrapper.FromOperation(operation).OperatorMethod,
+                            OperationKindEx.Unary =>
+                                IUnaryOperationWrapper.FromOperation(operation).OperatorMethod,
+                            OperationKindEx.Conversion=>
+                                IConversionOperationWrapper.FromOperation(operation).OperatorMethod,
+                            OperationKindEx.EventReference =>
+                                IEventReferenceOperationWrapper.FromOperation(operation).Member,
                             _ => null
                         };
 
