@@ -78,10 +78,10 @@ public class EmptyCollectionsShouldNotBeEnumeratedTest
     [DataRow("list.AsQueryable()", true)]
     [DataRow("list.AsReadOnly()", true)]
     [DataRow("list.Average()", false)]
-    [DataRow("list.Cast<byte>()", false)]
+    [DataRow("list.Cast<byte>()", true)] // FN
     [DataRow("list.Concat(list)", true)]
     [DataRow("list.Contains(1)", false)]
-    [DataRow("list.Count()", false)]
+    [DataRow("list.Count()", true)]
     [DataRow("list.DefaultIfEmpty()", true)]
     [DataRow("list.Distinct()", false)]
     [DataRow("list.ElementAt(0)", false)]
@@ -98,7 +98,7 @@ public class EmptyCollectionsShouldNotBeEnumeratedTest
     [DataRow("list.LongCount()", false)]
     [DataRow("list.Max()", false)]
     [DataRow("list.Min()", false)]
-    [DataRow("list.OfType<int>()", false)]
+    [DataRow("list.OfType<int>()", true)] // FN
     [DataRow("list.OrderBy(x => x)", false)]
     [DataRow("list.OrderByDescending(x => x)", false)]
     [DataRow("list.Reverse()", false)]

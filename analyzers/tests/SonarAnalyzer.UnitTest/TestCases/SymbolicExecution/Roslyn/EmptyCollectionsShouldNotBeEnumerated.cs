@@ -516,59 +516,60 @@ class AdvancedTests
     public void UnknownExtensionMethods()
     {
         var list = new List<int>();
-        list.CustomExtensionMethod();                       // Compliant
-        list.Clear();                                       // Compliant
+        list.CustomExtensionMethod(); // Compliant
+        list.Clear();                 // Compliant: we don't know what CustomExtensionMethod does
     }
 
     public void WellKnownExtensionMethods()
     {
         var list = new List<int>();
         list.All(x => true);                                // Noncompliant
-        list.Any();                                         // FN
+        list.Any();                                         // Noncompliant
+        list.Average();                                     // Noncompliant
+        list.Contains(5, EqualityComparer<int>.Default);    // Noncompliant
+        list.Distinct();                                    // Noncompliant
+        list.Except(list);                                  // Noncompliant
+        list.First();                                       // Noncompliant
+        list.FirstOrDefault();                              // Noncompliant
+        list.GroupBy(x => x);                               // Noncompliant
+        list.GroupJoin(list, x => x, x => x, (x, y) => x);  // Noncompliant
+        list.Intersect(list);                               // Noncompliant
+        list.Last();                                        // Noncompliant
+        list.LastOrDefault();                               // Noncompliant
+        list.LongCount();                                   // Noncompliant
+        list.Max();                                         // Noncompliant
+        list.Min();                                         // Noncompliant
+        list.OrderBy(x => x);                               // Noncompliant
+        list.OrderByDescending(x => x);                     // Noncompliant
+        list.Select(x => x);                                // Noncompliant
+        list.SelectMany(x => new int[5]);                   // Noncompliant
+        list.SequenceEqual(list);                           // Noncompliant
+        list.Single();                                      // Noncompliant
+        list.SingleOrDefault();                             // Noncompliant
+        list.Skip(1);                                       // Noncompliant
+        list.SkipWhile(x => true);                          // Noncompliant
+        list.Sum();                                         // Noncompliant
+        list.Take(1);                                       // Noncompliant
+        list.TakeWhile(x => true);                          // Noncompliant
+        list.Where(x => true);                              // Noncompliant
+        list.Zip(list, (x, y) => x);                        // Noncompliant
+        Enumerable.Reverse(list);                           // Noncompliant
+        list.Clear();                                       // Noncompliant should raise, because the methods above should not reset the state
+
         list.AsEnumerable();
         list.AsQueryable();
-        list.AsReadOnly();
-        list.Average();                                     // FN
-        list.Cast<byte>();                                  // FN
-        list.Concat(list);                                  // FN
-        list.Contains(5, EqualityComparer<int>.Default);    // FN
-        list.Count();                                       // FN
-        list.DefaultIfEmpty();                              // FN
-        list.Distinct();                                    // FN
-        list.Except(list);                                  // FN
-        list.First();                                       // FN
-        list.FirstOrDefault();                              // FN
-        list.GroupBy(x => x);
-        list.GroupJoin(list, x => x, x => x, (x, y) => x);  // FN
-        list.Intersect(list);                               // FN
-        list.Join(list, x => x, x => x, (x, y) => x);       // FN
-        list.Last();                                        // FN
-        list.LastOrDefault();                               // FN
-        list.LongCount();                                   // FN
-        list.Max();                                         // FN
-        list.Min();                                         // FN
-        list.OfType<int>();                                 // FN
-        list.OrderBy(x => x);
-        list.OrderByDescending(x => x);
-        list.Select(x => x);                                // FN
-        list.SelectMany(x => new int[5]);                   // FN
-        list.SequenceEqual(list);                           // FN
-        list.Single();                                      // FN
-        list.SingleOrDefault();                             // FN
-        list.Skip(1);                                       // FN
-        list.SkipWhile(x => true);                          // FN
-        list.Sum();                                         // FN
-        list.Take(1);                                       // FN
-        list.TakeWhile(x => true);                          // FN
-        list.ToArray();                                     // FN
-        list.ToDictionary(x => x);                          // FN
-        list.ToList();                                      // FN
-        list.ToLookup(x => x);
-        list.Union(list);                                   // FN
-        list.Where(x => true);                              // FN
-        list.Zip(list, (x, y) => x);                        // FN
-        Enumerable.Reverse(list);                           // FN
-        list.Clear();                                       // FN, should raise, because the methods above should not reset the state
+        list.AsReadOnly();                               
+        list.Concat(list);
+        list.DefaultIfEmpty();
+        list.Count();          // FN
+        list.OfType<int>();    // FN
+        list.Cast<byte>();     // FN
+        list.ToArray();                                    
+        list.ToDictionary(x => x);                         
+        list.ToList();                                     
+        list.ToLookup(x => x);                             
+        list.Join(list, x => x, x => x, (x, y) => x);
+        list.Union(list);
     }
 
     public void PassingAsArgument_Removes_Constraints(bool condition)
@@ -645,18 +646,18 @@ class AdvancedTests
             empty.Clear();  // Compliant, unreachable
         }
 
-        if (empty.Count() == 0) // Noncompliant
+        if (empty.Count() == 0)
         {
-            empty.Clear();  // FN
+            empty.Clear();  // Noncompliant
         }
         else
         {
             empty.Clear();  // Compliant, unreachable
         }
 
-        if (empty.Count(x => condition) == 0) // Noncompliant
+        if (empty.Count(x => condition) == 0)
         {
-            empty.Clear();  // FN
+            empty.Clear();  // Noncompliant
         }
         else
         {
@@ -672,9 +673,9 @@ class AdvancedTests
             empty.Clear();  // Noncompliant
         }
 
-        if (Enumerable.Count(empty) == 0) // Noncompliant
+        if (Enumerable.Count(empty) == 0)
         {
-            empty.Clear();  // FN
+            empty.Clear();  // Noncompliant
         }
         else
         {
@@ -713,9 +714,9 @@ class AdvancedTests
             empty.Clone();  // Compliant, unreachable
         }
 
-        if (empty.Count() == 0) // Noncompliant
+        if (empty.Count() == 0)
         {
-            empty.Clone();  // FN
+            empty.Clone();  // Noncompliant
         }
         else
         {

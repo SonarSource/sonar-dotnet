@@ -232,8 +232,8 @@ Public Class CollectionTests
         Else
             Empty.Clear()  ' Noncompliant
         End If
-        If Enumerable.Count(Empty) = 0 Then ' Noncompliant
-            Empty.Clear()  ' FN
+        If Enumerable.Count(Empty) = 0 Then
+            Empty.Clear()  ' Noncompliant
         Else
             Empty.Clear()  ' Compliant, unreachable
         End If
@@ -265,7 +265,7 @@ Public Class AdvancedTests
         List.All(Function(X) True)      ' Noncompliant
         List.Any()                      ' Noncompliant
         Enumerable.Reverse(List)        ' Noncompliant
-        List.Clear()                    ' FN, should raise, because the methods above should not reset the state
+        List.Clear()                    ' Noncompliant: the methods above should not reset the state
     End Sub
 
     Public Sub PassingAsArgument_Removes_Constraints()

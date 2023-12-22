@@ -35,6 +35,7 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         KnownType.System_Collections_Generic_IList_T,
         KnownType.System_Collections_Immutable_IImmutableList_T,
         KnownType.System_Collections_Generic_ICollection_T,
+        KnownType.System_Collections_Generic_IEnumerable_T,
         KnownType.System_Collections_Generic_HashSet_T,
         KnownType.System_Collections_Generic_ISet_T,
         KnownType.System_Collections_Immutable_IImmutableSet_T,
@@ -207,7 +208,8 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         }
         else if (operation.Kind == OperationKindEx.Argument
             && operation.TrackedSymbol(context.State) is { } symbol
-            && context.State[symbol] is { } symbolValue)
+            && context.State[symbol] is { } symbolValue
+            && !IsWithinTrackedInvocation(context.Operation)) // Remove CollectionConstraint if the invocation is not tracked
         {
             return context.State.SetSymbolValue(symbol, symbolValue.WithoutConstraint<CollectionConstraint>());
         }
@@ -228,7 +230,8 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
     private ProgramState ProcessInvocation(SymbolicContext context, IInvocationOperationWrapper invocation)
     {
         var targetMethod = invocation.TargetMethod;
-        if ((invocation.Instance ?? invocation.Arguments.FirstOrDefault()?.ToArgument().Value) is { } instance)
+        if ((invocation.Instance ?? invocation.Arguments.FirstOrDefault()?.ToArgument().Value) is { } instance
+            && instance.Type.DerivesOrImplementsAny(TrackedCollectionTypes)) // To be improved to handle OfType and Cast FNs
         {
             if (targetMethod.Is(KnownType.System_Linq_Enumerable, nameof(Enumerable.Count))
                 && SizeConstraint(context.State, instance, HasFilteringPredicate()) is { } constraint)
@@ -246,19 +249,22 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
                     nonEmptyAccess.Add(context.Operation.Instance);
                 }
             }
-            if (instance.Type.DerivesOrImplementsAny(TrackedCollectionTypes))
-            {
-                return ProcessAddMethod(context.State, targetMethod, instance)
-                    ?? ProcessRemoveMethod(context.State, targetMethod, instance)
-                    ?? ProcessClearMethod(context.State, targetMethod, instance)
-                    ?? context.State;
-            }
+            return ProcessAddMethod(context.State, targetMethod, instance)
+                ?? ProcessRemoveMethod(context.State, targetMethod, instance)
+                ?? ProcessClearMethod(context.State, targetMethod, instance)
+                ?? context.State;
         }
         return context.State;
 
         bool HasFilteringPredicate() =>
             invocation.Arguments.Any(x => x.ToArgument().Parameter.Type.Is(KnownType.System_Func_T_TResult));
     }
+
+    private static bool IsWithinTrackedInvocation(IOperationWrapperSonar operation) =>
+        operation.Parent.AsInvocation() is { } invocation
+        && (RaisingMethods.Contains(invocation.TargetMethod.Name)
+            || AddMethods.Contains(invocation.TargetMethod.Name)
+            || RemoveMethods.Contains(invocation.TargetMethod.Name));
 
     private static ProgramState ProcessAddMethod(ProgramState state, IMethodSymbol method, IOperation instance) =>
         AddMethods.Contains(method.Name)
