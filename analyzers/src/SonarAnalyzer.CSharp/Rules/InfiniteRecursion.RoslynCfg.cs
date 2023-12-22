@@ -70,6 +70,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             private void CheckForNoExit(SonarSyntaxNodeReportingContext c,
+            private static void CheckForNoExit(SonarSyntaxNodeReportingContext c,
                                        IPropertySymbol propertySymbol,
                                        ArrowExpressionClauseSyntax expressionBody,
                                        AccessorListSyntax accessorList,
