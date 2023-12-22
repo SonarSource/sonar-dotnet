@@ -3691,3 +3691,109 @@ public class Repro_8484
         }
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8495
+public class Repro_8495
+{
+    private readonly static object Lock = new object();
+
+    public bool WithLock(bool a, bool b)
+    {
+        bool flag = true;
+        lock (Lock)
+        {
+            if (a)
+            {
+                return true;
+            }
+            if (b)
+            {
+                flag = false;
+            }
+        }
+        if (flag)           // Noncompliant FP
+        {
+            return true;    // Secondary FP
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool WithUsing(bool a, bool b)
+    {
+        bool flag = true;
+        using (var ms = new MemoryStream())
+        {
+            if (a)
+            {
+                return true;
+            }
+            if (b)
+            {
+                flag = false;
+            }
+        }
+        if (flag)           // Noncompliant FP
+        {
+            return true;    // Secondary FP
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool WithTryFinally(bool a, bool b)
+    {
+        bool flag = true;
+        try
+        {
+            if (a)
+            {
+                return true;
+            }
+            if (b)
+            {
+                flag = false;
+            }
+        }
+        finally
+        {
+            a.ToString();
+        }
+        if (flag)           // Compliant
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool WithForeach(bool a, bool b, int[] items)
+    {
+        bool flag = true;
+        foreach (var i in items)
+        {
+            if (a)
+            {
+                return true;
+            }
+            if (b)
+            {
+                flag = false;
+            }
+        }
+        if (flag)           // Compliant
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+}
