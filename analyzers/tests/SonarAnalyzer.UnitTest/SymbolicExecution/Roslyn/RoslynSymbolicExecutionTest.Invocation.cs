@@ -1302,6 +1302,48 @@ private static bool Equals(object a, object b, object c) => false;";
         validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False);
     }
 
+    [TestMethod]
+    public void Invocation_StructEquals_Default_LearnsFromNull()
+    {
+        const string code = """
+            public struct Sample
+            {
+                public void Method()
+                {
+                    var result = Equals(null);
+                    Tag("Result", result);
+                }
+
+                private static void Tag(string name, object arg) { }
+            }
+            """;
+        var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
+        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False);  // Calling underlaying ValueTuple.Equals recognizes null
+    }
+
+    [TestMethod]
+    public void Invocation_StructEquals_Overriden_DoesNotLearn()
+    {
+        const string code = """
+            private struct InnerStruct  // Nested inside outer Sample, that provides Tag(..)
+            {
+                public void Method()
+                {
+                    var fromOverride = Equals(null);
+                    var fromOverload = Equals((string)null);
+                    Tag("FromOverride", fromOverride);
+                    Tag("FromOverload", fromOverload);
+                }
+
+                public bool Equals(string obj) => true;
+                public override bool Equals(object obj) => true;
+            }
+            """;
+        var validator = SETestContext.CreateCSMethod(code).Validator;
+        validator.TagValue("FromOverride").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
+        validator.TagValue("FromOverload").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
+    }
+
     [DataTestMethod]
     [DataRow("null", 0)]
     [DataRow("42", 42)]
