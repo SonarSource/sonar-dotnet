@@ -28,15 +28,6 @@ namespace Tests.Diagnostics
             }
         }
 
-        void ArithmeticComparisonAndPattern()
-        {
-            int? c = null;
-            if (c is > 10 and < 100)    // Noncompliant
-            {
-                DoSomething();          // Secondary
-            }
-        }
-
         void ArithmeticComparisonAndPattern_Null()
         {
             int? c = null;
