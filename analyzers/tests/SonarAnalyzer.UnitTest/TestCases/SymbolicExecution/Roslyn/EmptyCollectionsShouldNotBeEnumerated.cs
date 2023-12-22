@@ -523,11 +523,14 @@ class AdvancedTests
     public void WellKnownExtensionMethods()
     {
         var list = new List<int>();
+        list.Aggregate((x, y) => x + y);                    // Noncompliant
         list.All(x => true);                                // Noncompliant
         list.Any();                                         // Noncompliant
         list.Average();                                     // Noncompliant
         list.Contains(5, EqualityComparer<int>.Default);    // Noncompliant
         list.Distinct();                                    // Noncompliant
+        list.ElementAt(0);                                  // Noncompliant
+        list.ElementAtOrDefault(0);                         // Noncompliant
         list.Except(list);                                  // Noncompliant
         list.First();                                       // Noncompliant
         list.FirstOrDefault();                              // Noncompliant
@@ -541,6 +544,7 @@ class AdvancedTests
         list.Min();                                         // Noncompliant
         list.OrderBy(x => x);                               // Noncompliant
         list.OrderByDescending(x => x);                     // Noncompliant
+        list.Reverse();                                     // Noncompliant
         list.Select(x => x);                                // Noncompliant
         list.SelectMany(x => new int[5]);                   // Noncompliant
         list.SequenceEqual(list);                           // Noncompliant
@@ -556,19 +560,19 @@ class AdvancedTests
         Enumerable.Reverse(list);                           // Noncompliant
         list.Clear();                                       // Noncompliant should raise, because the methods above should not reset the state
 
+        list.Cast<byte>();                                  // FN
+        list.OfType<int>();                                 // FN
         list.AsEnumerable();
         list.AsQueryable();
         list.AsReadOnly();                               
         list.Concat(list);
+        list.Count();
         list.DefaultIfEmpty();
-        list.Count();          // FN
-        list.OfType<int>();    // FN
-        list.Cast<byte>();     // FN
+        list.Join(list, x => x, x => x, (x, y) => x);
         list.ToArray();                                    
         list.ToDictionary(x => x);                         
         list.ToList();                                     
-        list.ToLookup(x => x);                             
-        list.Join(list, x => x, x => x, (x, y) => x);
+        list.ToLookup(x => x);                         
         list.Union(list);
     }
 
