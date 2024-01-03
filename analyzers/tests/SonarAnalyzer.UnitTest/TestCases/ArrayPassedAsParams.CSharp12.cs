@@ -1,11 +1,14 @@
 ﻿using System;
 
 const int a = 1;
-int[] bs = [2, 3];
+int[] array = [2, 3];
 
 _ = new MyClass(1, [1, 2, 3]);     // Noncompliant
 _ = new MyClass(1, []);            // Noncompliant
-_ = new MyClass(1, [a, .. bs]);    // Noncompliant FP
+
+// repro for https://github.com/SonarSource/sonar-dotnet/issues/8510
+_ = new MyClass(1, [a, .. array]);    // Noncompliant FP
+
 _ = new MyClass2([1], [1, 2, 3]);  // Noncompliant
 _ = new MyClass2([1, 2, 3], 1);
 _ = new MyClass3([1, 2, 3], [4, 5, 6]); // Noncompliant FP
