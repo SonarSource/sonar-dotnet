@@ -23,6 +23,10 @@ variables:
   - name: ARTIFACTORY_DEPLOY_USERNAME
     value: $[variables.ARTIFACTORY_QA_DEPLOYER_USERNAME]
   # ~https://github.com/SonarSource/re-ci-images/blob/master/docker/mvn/settings-private.xml
+  - name: ARTIFACTORY_NUGET_PASSWORD
+    value: $[variables.ARTIFACTORY_PRIVATE_READER_ACCESS_TOKEN]
+  - name: ARTIFACTORY_NUGET_USERNAME
+    value: $[variables.ARTIFACTORY_PRIVATE_READER_USERNAME]
   - name: ARTIFACTORY_PRIVATE_USERNAME
     value: $[variables.ARTIFACTORY_PRIVATE_READER_USERNAME]
   - name: ARTIFACTORY_QA_READER_USERNAME
