@@ -74,6 +74,9 @@ stages:
       - task: NuGetToolInstaller@1
         displayName: "Install NuGet"
 
+      - script: 'dotnet nuget locals all --clear'
+        displayName: "NuGet Cache Clear"
+
       - script: '"$(MSBUILD_PATH)" /t:restore /p:RestoreLockedMode=true /p:RestoreConfigFile="analyzers\NuGet.Config" $(solution)'
         displayName: "NuGet Restore"
 
@@ -333,6 +336,9 @@ stages:
           solution: scripts/version/ChangeVersion.proj
           msbuildArgs: '/p:Sha1=$(Build.SourceVersion) /p:BranchName=$(Build.SourceBranchName) /p:BuildNumber=$(Build.BuildId) /p:BuildConfiguration=$(BuildConfiguration)'
           vsVersion: $(vsVersion)
+
+      - script: 'dotnet nuget locals all --clear'
+        displayName: "NuGet Cache Clear"
 
       - script: '"$(MSBUILD_PATH)" /t:restore /p:RestoreLockedMode=true /p:RestoreConfigFile="analyzers\NuGet.Config" $(solution)'
         displayName: "NuGet Restore"
