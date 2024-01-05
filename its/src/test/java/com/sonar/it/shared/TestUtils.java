@@ -137,7 +137,9 @@ public class TestUtils {
   }
 
   public static ScannerForMSBuild createBeginStep(String projectName, Path projectDir) {
-    return createBeginStep(projectName, projectDir, "");
+    return createBeginStep(projectName, projectDir, "")
+      // FIXME: Remove the next line after this issue is resolved: https://sonarsource.slack.com/archives/CJ8L44WRF/p1704444673166759
+      .setProperty("sonar.plugins.downloadOnlyRequired", "false");
   }
 
   public static ScannerForMSBuild createBeginStep(String projectName, Path projectDir, String subProjectName) {
