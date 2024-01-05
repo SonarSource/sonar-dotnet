@@ -39,7 +39,7 @@ languages in [SonarQube](https://www.sonarsource.com/products/sonarqube), [Sonar
 ## Do you have a question or feedback?
 
 * Contact us on [our Community Forum](https://community.sonarsource.com/) to provide feedback, ask for help, and request new rules or features.
-* [Create a GitHub Issue](https://github.com/SonarSource/sonar-dotnet/issues/new/choose) if you've found a bug, False-Positive or False-Negative. 
+* [Create a GitHub Issue](https://github.com/SonarSource/sonar-dotnet/issues/new/choose) if you've found a bug, False-Positive or False-Negative.
 
 ## Get started
 
@@ -50,7 +50,7 @@ languages in [SonarQube](https://www.sonarsource.com/products/sonarqube), [Sonar
 
 ## How to contribute
 
-There are many ways you can contribute to the `sonar-dotnet` project. 
+There are many ways you can contribute to the `sonar-dotnet` project.
 When contributing, please respect our [Code of Conduct](./docs/code-of-conduct.md).
 
 ### Join the discussions
@@ -149,6 +149,7 @@ Then, update the projects to include this additional file:
 * [CI Infrastructure](https://github.com/SonarSource/re-ci-infrastructure)
 * [CI Infrastructure docs](https://github.com/SonarSource/re-ci-infrastructure/blob/master/languages-dotnet/README.md)
 * [VM Images repository](https://github.com/SonarSource/re-ci-images)
+* [Provisioning repository](https://github.com/SonarSource/dotnet-infra/blob/main/src/dotnet_infra/constructs/asg.py)
 * [Azure Pipelines](https://sonarsource.visualstudio.com/DotNetTeam%20Project/_build?definitionId=77&_a=summary)
 * [Peachee configuration](https://github.com/SonarSource/peachee-languages/tree/dotnet)
 
