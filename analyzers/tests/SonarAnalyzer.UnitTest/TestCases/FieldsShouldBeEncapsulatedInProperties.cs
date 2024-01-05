@@ -88,8 +88,8 @@ namespace Tests.Diagnostics
     [Serializable]
     public class Repro_8504
     {
-        public string type;     // Noncompliant FP
-        public string key;      // Noncompliant FP
-        public string value;    // Noncompliant FP
+        public string type;     // Compliant
+        public string key;      // Compliant
+        public string value;    // Compliant
     }
 }
