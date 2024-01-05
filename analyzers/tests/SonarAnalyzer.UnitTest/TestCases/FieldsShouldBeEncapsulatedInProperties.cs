@@ -84,4 +84,12 @@ namespace Tests.Diagnostics
         public string value; // Compliant - for interop code
     }
 
+    // https://github.com/SonarSource/sonar-dotnet/issues/8504
+    [Serializable]
+    public class Repro_8504
+    {
+        public string type;     // Noncompliant FP
+        public string key;      // Noncompliant FP
+        public string value;    // Noncompliant FP
+    }
 }

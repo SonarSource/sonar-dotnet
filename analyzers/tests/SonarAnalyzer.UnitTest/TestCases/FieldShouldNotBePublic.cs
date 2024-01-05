@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Tests.TestCases
+﻿namespace Tests.TestCases
 {
     public class MyClass
     {
@@ -75,14 +73,5 @@ namespace Tests.TestCases
             private double Pi5;
             internal double Pi7;
         }
-    }
-
-    // https://github.com/SonarSource/sonar-dotnet/issues/8504
-    [Serializable]
-    public class Repro_8504
-    {
-        public string type;     // Noncompliant FP
-        public string key;      // Noncompliant FP
-        public string value;    // Noncompliant FP
     }
 }
