@@ -155,6 +155,6 @@ Then, update the projects to include this additional file:
 
 ## License
 
-Copyright 2014-2023 SonarSource.
+Copyright 2014-2024 SonarSource.
 
 Licensed under the [GNU Lesser General Public License, Version 3.0](http://www.gnu.org/licenses/lgpl.txt)

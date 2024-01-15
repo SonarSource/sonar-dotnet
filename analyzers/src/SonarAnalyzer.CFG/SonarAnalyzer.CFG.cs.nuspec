@@ -11,7 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>SonarSource CFG library</description>
     <language>en-US</language>
-    <copyright>Copyright © 2015-2023 SonarSource SA</copyright>
+    <copyright>Copyright © 2015-2024 SonarSource SA</copyright>
     <frameworkAssemblies>
       <frameworkAssembly assemblyName="System" targetFramework="" />
     </frameworkAssemblies>
