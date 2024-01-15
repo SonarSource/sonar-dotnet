@@ -49,15 +49,13 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
+                    var firstVariable = fieldDeclaration.Declaration.Variables[0];
+                    var symbol = c.SemanticModel.GetDeclaredSymbol(firstVariable);
                     var parentSymbol = c.SemanticModel.GetDeclaredSymbol(fieldDeclaration.Parent);
-                    if (parentSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_StructLayoutAttribute)
-                        || parentSymbol.HasAttribute(KnownType.System_SerializableAttribute))
+                    if (parentSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_StructLayoutAttribute) || Serializable(symbol, parentSymbol))
                     {
                         return;
                     }
-
-                    var firstVariable = fieldDeclaration.Declaration.Variables[0];
-                    var symbol = c.SemanticModel.GetDeclaredSymbol(firstVariable);
 
                     if (symbol.GetEffectiveAccessibility() == Accessibility.Public)
                     {
@@ -65,5 +63,9 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 },
                 SyntaxKind.FieldDeclaration);
+
+        private static bool Serializable(ISymbol symbol, ISymbol parentSymbol) =>
+            parentSymbol.HasAttribute(KnownType.System_SerializableAttribute)
+            && !symbol.HasAttribute(KnownType.System_NonSerializedAttribute);
     }
 }
