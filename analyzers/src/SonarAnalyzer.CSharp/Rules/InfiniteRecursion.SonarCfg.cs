@@ -60,6 +60,16 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
 
+            public void CheckForNoExitIndexer(SonarSyntaxNodeReportingContext c, IndexerDeclarationSyntax indexer, IPropertySymbol propertySymbol)
+            {
+                // SonarCFG is out of support
+            }
+
+            public void CheckForNoExitEvent(SonarSyntaxNodeReportingContext c, EventDeclarationSyntax eventDeclaration, IEventSymbol eventSymbol)
+            {
+                // SonarCFG is out of support
+            }
+
             public void CheckForNoExitMethod(SonarSyntaxNodeReportingContext c, SyntaxNode body, SyntaxToken identifier, IMethodSymbol symbol)
             {
                 if (CSharpControlFlowGraph.TryGet(body, c.SemanticModel, out var cfg))
