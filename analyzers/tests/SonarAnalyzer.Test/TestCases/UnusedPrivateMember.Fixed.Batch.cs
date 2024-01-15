@@ -350,3 +350,11 @@ class Repro_8342
     [Private3] protected void AProtectedMethod() { }
     [Private4] private void APrivateMethodCalledByAPublicMethod() { }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8532
+[Serializable]
+public class Repro_8532
+{
+    [NonSerialized]
+    private string value;               // FN
+}
