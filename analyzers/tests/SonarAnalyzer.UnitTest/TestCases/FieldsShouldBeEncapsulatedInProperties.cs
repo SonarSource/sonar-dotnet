@@ -90,6 +90,7 @@ namespace Tests.Diagnostics
     {
         public string type;     // Compliant
         public string key;      // Compliant
-        public string value;    // Compliant
+        [NonSerialized]
+        public string value;    // Noncompliant
     }
 }

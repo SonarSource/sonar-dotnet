@@ -356,6 +356,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Net_Sockets_TcpClient = new("System.Net.Sockets.TcpClient");
         public static readonly KnownType System_Net_Sockets_UdpClient = new("System.Net.Sockets.UdpClient");
         public static readonly KnownType System_Net_WebClient = new("System.Net.WebClient");
+        public static readonly KnownType System_NonSerializedAttribute = new("System.NonSerializedAttribute");
         public static readonly KnownType System_NotImplementedException = new("System.NotImplementedException");
         public static readonly KnownType System_NotSupportedException = new("System.NotSupportedException");
         public static readonly KnownType System_Nullable_T = new("System.Nullable", "T");

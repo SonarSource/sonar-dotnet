@@ -20,32 +20,31 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.UnitTest.Rules
-{
-    [TestClass]
-    public class FieldsShouldBeEncapsulatedInPropertiesTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<FieldsShouldBeEncapsulatedInProperties>();
+namespace SonarAnalyzer.UnitTest.Rules;
 
-        [TestMethod]
-        public void FieldsShouldBeEncapsulatedInProperties() =>
-            builder.AddPaths("FieldsShouldBeEncapsulatedInProperties.cs").Verify();
+[TestClass]
+public class FieldsShouldBeEncapsulatedInPropertiesTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder<FieldsShouldBeEncapsulatedInProperties>();
+
+    [TestMethod]
+    public void FieldsShouldBeEncapsulatedInProperties() =>
+        builder.AddPaths("FieldsShouldBeEncapsulatedInProperties.cs").Verify();
 
 #if NET
 
-        [TestMethod]
-        public void FieldsShouldBeEncapsulatedInProperties_CSharp9() =>
-            builder.AddPaths("FieldsShouldBeEncapsulatedInProperties.CSharp9.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
-                .Verify();
+    [TestMethod]
+    public void FieldsShouldBeEncapsulatedInProperties_CSharp9() =>
+        builder.AddPaths("FieldsShouldBeEncapsulatedInProperties.CSharp9.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .Verify();
 
-        [TestMethod]
-        public void FieldsShouldBeEncapsulatedInProperties_CSharp12() =>
-            builder.AddPaths("FieldsShouldBeEncapsulatedInProperties.CSharp12.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp12)
-                .Verify();
+    [TestMethod]
+    public void FieldsShouldBeEncapsulatedInProperties_CSharp12() =>
+        builder.AddPaths("FieldsShouldBeEncapsulatedInProperties.CSharp12.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp12)
+            .Verify();
 
 #endif
 
-    }
 }
