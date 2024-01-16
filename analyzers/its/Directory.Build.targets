@@ -5,6 +5,8 @@
     <PropertyGroup>
       <BinariesFolder>$(MSBuildStartupDirectory)\..\packaging\binaries</BinariesFolder>
       <AnalysisOutputPath>$(MSBuildStartupDirectory)\output\$(PROJECT)\$(AssemblyName)</AnalysisOutputPath>
+      <DiagnosticsPath>$(MSBuildStartupDirectory)\output\$(PROJECT)\$(PROJECT)-$(AssemblyName)</DiagnosticsPath>
+      <DiagnosticsPathWithTFM>$(MSBuildStartupDirectory)\output\$(PROJECT)\$(TargetFramework)-$(PROJECT)-$(AssemblyName)</DiagnosticsPathWithTFM>
       <SonarAnalysisConfigPath>$(MSBuildStartupDirectory)\SonarQubeAnalysisConfig.xml</SonarAnalysisConfigPath>
       <SonarProjectOutputPath Condition="'$(TargetFramework)' != ''">$(AnalysisOutputPath)\$(TargetFramework)</SonarProjectOutputPath>
       <SonarProjectOutputPath Condition="'$(TargetFramework)' == ''">$(AnalysisOutputPath)</SonarProjectOutputPath>
@@ -56,10 +58,10 @@
 
     <PropertyGroup>
       <!-- Set the path to the SARIF report -->
-      <ErrorLog Condition="'$(TargetFramework)' != ''">$(AnalysisOutputPath)-$(ProjectGuid)-$(TargetFramework).json</ErrorLog>
-      <ErrorLog Condition="'$(TargetFramework)' == ''">$(AnalysisOutputPath)-$(ProjectGuid).json</ErrorLog>
-      <RazorCompilationErrorLog Condition="'$(TargetFramework)' != ''">$(AnalysisOutputPath)-$(ProjectGuid)-$(TargetFramework).Views.json</RazorCompilationErrorLog>
-      <RazorCompilationErrorLog Condition="'$(TargetFramework)' == ''">$(AnalysisOutputPath)-$(ProjectGuid).Views.json</RazorCompilationErrorLog>
+      <ErrorLog Condition="'$(TargetFramework)' != ''">$(DiagnosticsPathWithTFM).json</ErrorLog>
+      <ErrorLog Condition="'$(TargetFramework)' == ''">$(DiagnosticsPath).json</ErrorLog>
+      <RazorCompilationErrorLog Condition="'$(TargetFramework)' != ''">$(DiagnosticsPathWithTFM).Views.json</RazorCompilationErrorLog>
+      <RazorCompilationErrorLog Condition="'$(TargetFramework)' == ''">$(DiagnosticsPath).Views.json</RazorCompilationErrorLog>
 
       <!-- Override the ruleset with all SonarAnalyzer rules -->
       <ResolvedCodeAnalysisRuleSet>$(MSBuildStartupDirectory)\output\AllSonarAnalyzerRules.ruleset</ResolvedCodeAnalysisRuleSet>
