@@ -27,9 +27,10 @@ namespace SonarAnalyzer.Test.Rules;
 public class ExcludeFromCodeCoverageAttributesNeedJustificationTest
 {
     private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ExcludeFromCodeCoverageAttributesNeedJustification>();
-    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.ExcludeFromCodeCoverageAttributesNeedJustification>();
 
 #if NET
+
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.ExcludeFromCodeCoverageAttributesNeedJustification>();
 
     [TestMethod]
     public void ExcludeFromCodeCoverageAttributesNeedJustification_OnAssembly_CS() =>
@@ -55,13 +56,11 @@ public class ExcludeFromCodeCoverageAttributesNeedJustificationTest
     public void ExcludeFromCodeCoverageAttributesNeedJustification_VB() =>
         builderVB.AddPaths("ExcludeFromCodeCoverageAttributesNeedJustification.vb").Verify();
 
-#endif
-
-#if netframework
+#else
 
     [TestMethod]
     public void ExcludeFromCodeCoverageAttributesNeedJustification_IgnoredForNet48() =>
-        builderCS.AddPaths("ExcludeFromCodeCoverageAttributesNeedJustification.net48.cs").Verify();
+        builderCS.AddPaths("ExcludeFromCodeCoverageAttributesNeedJustification.Net48.cs").Verify();
 
 #endif
 
