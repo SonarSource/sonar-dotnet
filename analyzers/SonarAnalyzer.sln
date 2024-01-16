@@ -58,7 +58,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AnalysisConfig", "AnalysisC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.SourceGenerators", "src\SonarAnalyzer.SourceGenerators\SonarAnalyzer.SourceGenerators.csproj", "{76D6EBB8-D2B0-41C1-8880-027EC78CB7FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.Net8.UnitTest", "tests\SonarAnalyzer.Net8.UnitTest\SonarAnalyzer.Net8.UnitTest.csproj", "{DB0A158B-D003-47ED-8209-E70277EB0693}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.Net8.Test", "tests\SonarAnalyzer.Net8.Test\SonarAnalyzer.Net8.Test.csproj", "{DB0A158B-D003-47ED-8209-E70277EB0693}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
