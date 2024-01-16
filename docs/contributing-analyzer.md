@@ -75,7 +75,7 @@ public class MyAnalyzerTest
     public void MyAnalyzer_CSharp10()
     {
         verifier
-            .AddPaths("MyAnalyzer.CSharp10.cs") // searched in analyzers\tests\SonarAnalyzer.UnitTest\TestCases\
+            .AddPaths("MyAnalyzer.CSharp10.cs") // searched in analyzers\tests\SonarAnalyzer.Test\TestCases\
             .AddReferences(MetadataReferenceFacade.SystemData);
             .WithOptions(ParseOptionsHelper.FromCSharp10)
             .Verify();

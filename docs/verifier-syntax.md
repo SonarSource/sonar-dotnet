@@ -88,4 +88,4 @@ Note that most of the previous patterns can be used together when needed.
     //                            ^^^^^^ @-1 {{Message for issue 2}}
 ```
 
-The code comment syntax logic is implemented by the [`IssueLocationCollector`](https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/tests/SonarAnalyzer.UnitTest/TestFramework/IssueLocationCollector.cs) class.
+The code comment syntax logic is implemented by the [`IssueLocationCollector`](https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/tests/SonarAnalyzer.Test/TestFramework/IssueLocationCollector.cs) class.

@@ -61,8 +61,8 @@ $AnalyzersPath = "${PSScriptRoot}\\..\\..\\analyzers"
 $RulesFolderCommon = "${AnalyzersPath}\\src\\SonarAnalyzer.Common\\Rules"
 $RulesFolderCS     = "${AnalyzersPath}\\src\\SonarAnalyzer.CSharp\\Rules"
 $RulesFolderVB     = "${AnalyzersPath}\\src\\SonarAnalyzer.VisualBasic\\Rules"
-$RulesFolderTests  = "${AnalyzersPath}\\tests\\SonarAnalyzer.UnitTest\\Rules"
-$TestCasesFolder   = "${AnalyzersPath}\\tests\\SonarAnalyzer.UnitTest\\TestCases"
+$RulesFolderTests  = "${AnalyzersPath}\\tests\\SonarAnalyzer.Test\\Rules"
+$TestCasesFolder   = "${AnalyzersPath}\\tests\\SonarAnalyzer.Test\\TestCases"
 
 $SonarpediaMap = @{
     "cs" = ".\analyzers\src\SonarAnalyzer.CSharp";
@@ -77,7 +77,7 @@ function UpdateRuleTypeMapping() {
     }
 
     $FileToEdit = if ($Language -eq "cs") {"RuleTypeMappingCS"} else {"RuleTypeMappingVB"}
-    $TestFile = "${AnalyzersPath}\\tests\\SonarAnalyzer.UnitTest\\PackagingTests\\$fileToEdit.cs"
+    $TestFile = "${AnalyzersPath}\\tests\\SonarAnalyzer.Test\\PackagingTests\\$fileToEdit.cs"
     (Get-Content "${TestFile}") -replace "//\s*\[`"$ruleKey`"\]", "[`"$ruleKey`"] = `"$ruleType`"" | Set-Content "${TestFile}" -Encoding UTF8
 }
 
@@ -162,7 +162,7 @@ function GenerateBaseClassIfSecondLanguage()
 function AppendTestCaseVB() {
     $UsingTokenCS = "using CS = SonarAnalyzer.Rules.CSharp;`n"
     $UsingTokenVB = "using VB = SonarAnalyzer.Rules.VisualBasic;`n"
-    $NamespaceToken = "namespace SonarAnalyzer.UnitTest.Rules"
+    $NamespaceToken = "namespace SonarAnalyzer.Test.Rules"
     $OldEndToken = "    }" # For files using old namespaces
     $NewEndToken = "}"     # For files using file scoped namespaces
     $MethodVB = Get-Content -Path "${RuleTemplateFolder}\\TestMethod.VB.cs" -Raw
