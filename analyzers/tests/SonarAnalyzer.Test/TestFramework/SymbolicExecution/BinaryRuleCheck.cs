@@ -20,7 +20,7 @@
 
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 
-namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
+namespace SonarAnalyzer.Test.TestFramework.SymbolicExecution
 {
     internal class BinaryRuleCheck : SymbolicRuleCheck
     {

@@ -23,7 +23,7 @@ using FluentAssertions.Primitives;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 
-namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
+namespace SonarAnalyzer.Test.TestFramework.SymbolicExecution
 {
     public static class SymbolicValueExtensions
     {

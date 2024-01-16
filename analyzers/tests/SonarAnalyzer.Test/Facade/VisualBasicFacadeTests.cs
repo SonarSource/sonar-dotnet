@@ -21,7 +21,7 @@
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
-namespace SonarAnalyzer.UnitTest.Facade;
+namespace SonarAnalyzer.Test.Facade;
 
 [TestClass]
 public class VisualBasicFacadeTests

@@ -23,7 +23,7 @@ using Google.Protobuf;
 using SonarAnalyzer.AnalysisContext;
 using SonarAnalyzer.Rules;
 
-namespace SonarAnalyzer.UnitTest.TestFramework.Tests
+namespace SonarAnalyzer.Test.TestFramework.Tests
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     internal class DummyUtilityAnalyzerCS : DummyUtilityAnalyzer

@@ -21,7 +21,7 @@
 using System.IO;
 using System.Text.RegularExpressions;
 
-namespace SonarAnalyzer.UnitTest.Helpers
+namespace SonarAnalyzer.Test.Helpers
 {
     [TestClass]
     public class FilesToAnalyzeProviderTest

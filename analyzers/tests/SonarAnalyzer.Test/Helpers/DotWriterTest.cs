@@ -20,7 +20,7 @@
 
 using SonarAnalyzer.CFG;
 
-namespace SonarAnalyzer.UnitTest.Helpers
+namespace SonarAnalyzer.Test.Helpers
 {
     [TestClass]
     public class DotWriterTest

@@ -1,4 +1,4 @@
-﻿namespace SonarAnalyzer.UnitTest.TestCases // Noncompliant
+﻿namespace SonarAnalyzer.Test.TestCases // Noncompliant
 {
     class Foo
     {

@@ -20,7 +20,7 @@
 
 using References = System.Collections.Generic.IEnumerable<Microsoft.CodeAnalysis.MetadataReference>;
 
-namespace SonarAnalyzer.UnitTest.MetadataReferences
+namespace SonarAnalyzer.Test.MetadataReferences
 {
     internal static class MetadataReferenceFacade
     {

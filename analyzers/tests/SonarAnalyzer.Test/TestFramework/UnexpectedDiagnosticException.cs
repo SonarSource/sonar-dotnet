@@ -23,7 +23,7 @@ using System.Resources;
 #endif
 using System.IO;
 
-namespace SonarAnalyzer.UnitTest.TestFramework
+namespace SonarAnalyzer.Test.TestFramework
 {
     /// <summary>
     /// This exception class is used in unit tests that analyze some code to report a violation.

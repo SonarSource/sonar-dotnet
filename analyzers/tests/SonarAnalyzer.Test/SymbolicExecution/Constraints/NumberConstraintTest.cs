@@ -21,7 +21,7 @@
 using System.Numerics;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
-namespace SonarAnalyzer.UnitTest.SymbolicExecution;
+namespace SonarAnalyzer.Test.SymbolicExecution;
 
 [TestClass]
 public class NumberConstraintTest

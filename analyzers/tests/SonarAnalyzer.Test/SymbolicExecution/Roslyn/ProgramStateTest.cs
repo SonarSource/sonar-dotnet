@@ -23,11 +23,11 @@ using SonarAnalyzer.Extensions;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
-using SonarAnalyzer.UnitTest.Helpers;
-using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
+using SonarAnalyzer.Test.Helpers;
+using SonarAnalyzer.Test.TestFramework.SymbolicExecution;
 using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn;
+namespace SonarAnalyzer.Test.SymbolicExecution.Roslyn;
 
 [TestClass]
 public partial class ProgramStateTest

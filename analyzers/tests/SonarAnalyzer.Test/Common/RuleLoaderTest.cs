@@ -20,7 +20,7 @@
 
 using System.Xml;
 
-namespace SonarAnalyzer.UnitTest.Common
+namespace SonarAnalyzer.Test.Common
 {
     [TestClass]
     public class RuleLoaderTest

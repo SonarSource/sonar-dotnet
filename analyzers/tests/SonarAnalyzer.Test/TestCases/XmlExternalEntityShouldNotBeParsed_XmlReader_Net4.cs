@@ -1,6 +1,6 @@
 ﻿using System.Xml;
 
-namespace SonarAnalyzer.UnitTest.TestCases
+namespace SonarAnalyzer.Test.TestCases
 {
     public class XmlReaderUnsafe
     {

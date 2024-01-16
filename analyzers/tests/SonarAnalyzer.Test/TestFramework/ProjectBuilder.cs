@@ -21,7 +21,7 @@
 using System.IO;
 using System.Text;
 
-namespace SonarAnalyzer.UnitTest.TestFramework
+namespace SonarAnalyzer.Test.TestFramework
 {
     internal readonly struct ProjectBuilder
     {

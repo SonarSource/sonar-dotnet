@@ -21,9 +21,9 @@
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.CFG;
 using SonarAnalyzer.CFG.Sonar;
-using SonarAnalyzer.UnitTest.Helpers;
+using SonarAnalyzer.Test.Helpers;
 
-namespace SonarAnalyzer.UnitTest.CFG.Sonar
+namespace SonarAnalyzer.Test.CFG.Sonar
 {
     [TestClass]
     public class SonarCfgSerializerTest

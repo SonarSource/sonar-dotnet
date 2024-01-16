@@ -2,7 +2,7 @@
 using System.Xml;
 using System.Xml.XPath;
 
-namespace SonarAnalyzer.UnitTest.TestCases
+namespace SonarAnalyzer.Test.TestCases
 {
     public class XPathDocumentCases
     {

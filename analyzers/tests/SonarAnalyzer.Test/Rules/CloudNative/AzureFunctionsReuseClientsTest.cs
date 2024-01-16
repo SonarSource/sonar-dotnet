@@ -20,7 +20,7 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.UnitTest.Rules.CloudNative
+namespace SonarAnalyzer.Test.Rules.CloudNative
 {
     [TestClass]
     public class AzureFunctionsReuseClientsTest

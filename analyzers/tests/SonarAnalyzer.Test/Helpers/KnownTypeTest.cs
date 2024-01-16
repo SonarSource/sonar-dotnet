@@ -21,7 +21,7 @@
 using CS = Microsoft.CodeAnalysis.CSharp.Syntax;
 using VB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
-namespace SonarAnalyzer.UnitTest.Helpers;
+namespace SonarAnalyzer.Test.Helpers;
 
 [TestClass]
 public class KnownTypeTest

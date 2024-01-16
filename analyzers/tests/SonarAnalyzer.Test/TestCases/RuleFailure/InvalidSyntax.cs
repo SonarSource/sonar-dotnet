@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text
 using System.Threading.Tasks;
 
-namespace SonarAnalyzer.UnitTest.TestCasesForRuleFailure
+namespace SonarAnalyzer.Test.TestCasesForRuleFailure
 {
     public void Method2(int i, int j) { }
 

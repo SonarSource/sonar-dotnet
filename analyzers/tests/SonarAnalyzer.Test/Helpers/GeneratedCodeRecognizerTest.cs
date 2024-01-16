@@ -20,7 +20,7 @@
 
 using Moq;
 
-namespace SonarAnalyzer.UnitTest.Helpers
+namespace SonarAnalyzer.Test.Helpers
 {
     [TestClass]
     public class GeneratedCodeRecognizerTest

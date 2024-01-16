@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.UI;
 
-namespace SonarAnalyzer.UnitTest.TestCases
+namespace SonarAnalyzer.Test.TestCases
 {
     internal class RestrictDeserializedTypes
     {

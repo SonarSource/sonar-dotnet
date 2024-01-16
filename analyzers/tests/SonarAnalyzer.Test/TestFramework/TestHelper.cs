@@ -23,12 +23,12 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.CFG;
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.Extensions;
-using SonarAnalyzer.UnitTest.PackagingTests;
+using SonarAnalyzer.Test.PackagingTests;
 using StyleCop.Analyzers.Lightup;
 using CS = Microsoft.CodeAnalysis.CSharp;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 
-namespace SonarAnalyzer.UnitTest
+namespace SonarAnalyzer.Test
 {
     internal static class TestHelper
     {
@@ -135,7 +135,7 @@ End Class", AnalyzerLanguage.VisualBasic);
 
         public static string TestPath(TestContext context, string fileName)
         {
-            var root = Path.Combine(context.TestDir, context.FullyQualifiedTestClassName.Replace("SonarAnalyzer.UnitTest.", null));
+            var root = Path.Combine(context.TestDir, context.FullyQualifiedTestClassName.Replace("SonarAnalyzer.Test.", null));
             var directoryName = root.Length + context.TestName.Length + fileName.Length > 250   // 260 can throw PathTooLongException
                 ? $"TooLongTestName.{RootSubdirectoryCount()}"
                 : context.TestName;

@@ -23,7 +23,7 @@ using RoslynCS = Microsoft.CodeAnalysis.CSharp;
 using RoslynVB = Microsoft.CodeAnalysis.VisualBasic;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Test.Rules
 {
     [TestClass]
     public class NameOfShouldBeUsedTest

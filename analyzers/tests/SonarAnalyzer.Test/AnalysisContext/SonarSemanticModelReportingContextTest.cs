@@ -19,12 +19,12 @@
  */
 
 using SonarAnalyzer.AnalysisContext;
-using SonarAnalyzer.UnitTest.TestFramework.Tests;
+using SonarAnalyzer.Test.TestFramework.Tests;
 
 using CS = Microsoft.CodeAnalysis.CSharp;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 
-namespace SonarAnalyzer.UnitTest.AnalysisContext;
+namespace SonarAnalyzer.Test.AnalysisContext;
 
 [TestClass]
 public class SonarSemanticModelReportingContextTest

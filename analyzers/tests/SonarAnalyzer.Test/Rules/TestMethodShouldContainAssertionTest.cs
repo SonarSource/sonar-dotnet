@@ -19,9 +19,9 @@
  */
 
 using SonarAnalyzer.Rules.CSharp;
-using SonarAnalyzer.UnitTest.Common;
+using SonarAnalyzer.Test.Common;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Test.Rules
 {
     [TestClass]
     public class TestMethodShouldContainAssertionTest

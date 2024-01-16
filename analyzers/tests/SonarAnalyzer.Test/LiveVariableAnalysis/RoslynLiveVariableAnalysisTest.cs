@@ -24,7 +24,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.CFG.LiveVariableAnalysis;
 using SonarAnalyzer.CFG.Roslyn;
 
-namespace SonarAnalyzer.UnitTest.LiveVariableAnalysis
+namespace SonarAnalyzer.Test.LiveVariableAnalysis
 {
     [TestClass]
     public partial class RoslynLiveVariableAnalysisTest

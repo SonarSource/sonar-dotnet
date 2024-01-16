@@ -21,7 +21,7 @@
 using CS = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 using VB = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic;
 
-namespace SonarAnalyzer.UnitTest.Rules.SymbolicExecution;
+namespace SonarAnalyzer.Test.Rules.SymbolicExecution;
 
 [TestClass]
 public class NullPointerDereferenceSyntaxKindWalkerTests

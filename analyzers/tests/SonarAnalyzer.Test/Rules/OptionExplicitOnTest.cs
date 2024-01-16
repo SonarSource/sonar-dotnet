@@ -20,9 +20,9 @@
 
 using Microsoft.CodeAnalysis.VisualBasic;
 using SonarAnalyzer.Rules.VisualBasic;
-using SonarAnalyzer.UnitTest.Helpers;
+using SonarAnalyzer.Test.Helpers;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Test.Rules
 {
     [TestClass]
     public class OptionExplicitOnTest

@@ -21,7 +21,7 @@
 using Microsoft.CodeAnalysis.Operations;
 using IIsNullOperation = Microsoft.CodeAnalysis.FlowAnalysis.IIsNullOperation;
 
-namespace SonarAnalyzer.UnitTest.LiveVariableAnalysis
+namespace SonarAnalyzer.Test.LiveVariableAnalysis
 {
     public partial class RoslynLiveVariableAnalysisTest
     {

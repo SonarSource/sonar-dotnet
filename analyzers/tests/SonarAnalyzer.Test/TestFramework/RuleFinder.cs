@@ -22,7 +22,7 @@ using System.Reflection;
 using Microsoft.CodeAnalysis.CodeFixes;
 using SonarAnalyzer.Rules;
 
-namespace SonarAnalyzer.UnitTest.TestFramework
+namespace SonarAnalyzer.Test.TestFramework
 {
     internal static class RuleFinder
     {

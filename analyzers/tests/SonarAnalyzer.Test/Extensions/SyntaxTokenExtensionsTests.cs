@@ -22,7 +22,7 @@ extern alias csharp;
 using Microsoft.CodeAnalysis.CSharp;
 using static csharp::SonarAnalyzer.Extensions.SyntaxTokenExtensions;
 
-namespace SonarAnalyzer.UnitTest.Extensions
+namespace SonarAnalyzer.Test.Extensions
 {
     [TestClass]
     public class SyntaxTokenExtensionsTests

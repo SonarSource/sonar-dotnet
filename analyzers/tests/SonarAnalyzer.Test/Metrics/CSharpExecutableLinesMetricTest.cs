@@ -18,10 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.UnitTest.Helpers;
-using SonarAnalyzer.UnitTest.TestFramework.Tests;
+using SonarAnalyzer.Test.Helpers;
+using SonarAnalyzer.Test.TestFramework.Tests;
 
-namespace SonarAnalyzer.UnitTest.Common
+namespace SonarAnalyzer.Test.Common
 {
     [TestClass]
     public class CSharpExecutableLinesMetricTest

@@ -22,11 +22,11 @@ using System.IO;
 using Moq;
 using SonarAnalyzer.AnalysisContext;
 using SonarAnalyzer.Rules.CSharp;
-using SonarAnalyzer.UnitTest.Helpers;
-using SonarAnalyzer.UnitTest.Rules;
+using SonarAnalyzer.Test.Helpers;
+using SonarAnalyzer.Test.Rules;
 using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext;
 
-namespace SonarAnalyzer.UnitTest.AnalysisContext;
+namespace SonarAnalyzer.Test.AnalysisContext;
 
 [TestClass]
 public partial class SonarAnalysisContextTest

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SonarAnalyzer.UnitTest.TestCasesForRuleFailure
+namespace SonarAnalyzer.Test.TestCasesForRuleFailure
 {
     class PerformanceTestCases
     {

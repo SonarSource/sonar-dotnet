@@ -21,7 +21,7 @@
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.UnitTest.Rules.Hotspots
+namespace SonarAnalyzer.Test.Rules.Hotspots
 {
     [TestClass]
     public class LooseFilePermissionsTest

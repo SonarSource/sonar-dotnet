@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 
-namespace SonarAnalyzer.UnitTest.TestCasesForRuleFailure
+namespace SonarAnalyzer.Test.TestCasesForRuleFailure
 {
     public class SpecialCases
     {

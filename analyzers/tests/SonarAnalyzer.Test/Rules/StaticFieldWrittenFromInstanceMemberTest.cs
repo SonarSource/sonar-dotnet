@@ -22,7 +22,7 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Test.Rules
 {
     [TestClass]
     public class StaticFieldWrittenFromInstanceMemberTest

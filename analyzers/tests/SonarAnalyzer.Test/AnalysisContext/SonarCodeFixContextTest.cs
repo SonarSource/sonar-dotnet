@@ -23,7 +23,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.AnalysisContext;
 
-namespace SonarAnalyzer.UnitTest.AnalysisContext
+namespace SonarAnalyzer.Test.AnalysisContext
 {
     [TestClass]
     public class SonarCodeFixContextTest

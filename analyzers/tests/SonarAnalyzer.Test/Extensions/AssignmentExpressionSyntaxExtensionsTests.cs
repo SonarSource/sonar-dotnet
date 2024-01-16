@@ -24,7 +24,7 @@ using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Extensions;
 using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.UnitTest.Extensions
+namespace SonarAnalyzer.Test.Extensions
 {
     [TestClass]
     public class AssignmentExpressionSyntaxExtensionsTests

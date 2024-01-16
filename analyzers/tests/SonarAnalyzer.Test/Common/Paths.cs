@@ -20,7 +20,7 @@
 
 using System.IO;
 
-namespace SonarAnalyzer.UnitTest.Common
+namespace SonarAnalyzer.Test.Common
 {
     public static class Paths
     {

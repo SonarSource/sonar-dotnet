@@ -20,7 +20,7 @@
 
 using SonarAnalyzer.CFG.Sonar;
 
-namespace SonarAnalyzer.UnitTest.Helpers
+namespace SonarAnalyzer.Test.Helpers
 {
     [TestClass]
     public class BlockIdMapTest

@@ -20,7 +20,7 @@
 
 using SonarAnalyzer.AnalysisContext;
 
-namespace SonarAnalyzer.UnitTest.TestFramework.Tests;
+namespace SonarAnalyzer.Test.TestFramework.Tests;
 
 internal abstract class TestAnalyzer : SonarDiagnosticAnalyzer
 {

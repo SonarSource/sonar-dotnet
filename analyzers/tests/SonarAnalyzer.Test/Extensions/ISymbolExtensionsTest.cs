@@ -28,7 +28,7 @@ using ISymbolExtensionsCommon = SonarAnalyzer.Helpers.ISymbolExtensions;
 using ISymbolExtensionsCS = csharp::SonarAnalyzer.Extensions.ISymbolExtensions;
 using ISymbolExtensionsVB = vbnet::SonarAnalyzer.Extensions.ISymbolExtensions;
 
-namespace SonarAnalyzer.UnitTest.Extensions;
+namespace SonarAnalyzer.Test.Extensions;
 
 [TestClass]
 public class ISymbolExtensionsTest

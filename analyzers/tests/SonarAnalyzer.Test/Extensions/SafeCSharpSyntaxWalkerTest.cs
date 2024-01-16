@@ -20,7 +20,7 @@
 
 using Microsoft.CodeAnalysis.CSharp;
 
-namespace SonarAnalyzer.UnitTest.Extensions
+namespace SonarAnalyzer.Test.Extensions
 {
     [TestClass]
     public class SafeCSharpSyntaxWalkerTest

@@ -21,7 +21,7 @@
 extern alias csharp;
 extern alias vbnet;
 
-namespace SonarAnalyzer.UnitTest.PackagingTests
+namespace SonarAnalyzer.Test.PackagingTests
 {
     [TestClass]
     public class RuleTypeTest

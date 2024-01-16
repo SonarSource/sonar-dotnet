@@ -22,7 +22,7 @@
 
 using HashCode = SonarAnalyzer.Helpers.HashCode;
 
-namespace SonarAnalyzer.UnitTest.Helpers
+namespace SonarAnalyzer.Test.Helpers
 {
     [TestClass]
     public class HashCodeTest

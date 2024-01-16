@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SonarAnalyzer.UnitTest.TestCases {
+namespace SonarAnalyzer.Test.TestCases {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.TestCases {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SonarAnalyzer.UnitTest.TestCases.AnotherResources", typeof(AnotherResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SonarAnalyzer.Test.TestCases.AnotherResources", typeof(AnotherResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

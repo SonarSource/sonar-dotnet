@@ -23,7 +23,7 @@ using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 
-namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
+namespace SonarAnalyzer.Test.TestFramework.SymbolicExecution;
 
 internal class AddConstraintOnInvocationCheck : SymbolicCheck
 {

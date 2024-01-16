@@ -21,7 +21,7 @@
 using SonarAnalyzer.CFG.Sonar;
 using SonarAnalyzer.SymbolicExecution.Sonar;
 
-namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar
+namespace SonarAnalyzer.Test.SymbolicExecution.Sonar
 {
     [TestClass]
     public class ProgramPointTest

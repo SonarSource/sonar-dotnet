@@ -22,7 +22,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Wrappers;
 using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.UnitTest.Wrappers
+namespace SonarAnalyzer.Test.Wrappers
 {
     [TestClass]
     public class ObjectCreationFactoryTest

@@ -24,7 +24,7 @@ using SonarAnalyzer.CFG.Roslyn;
 using StyleCop.Analyzers.Lightup;
 using FlowAnalysis = Microsoft.CodeAnalysis.FlowAnalysis;
 
-namespace SonarAnalyzer.UnitTest.CFG.Roslyn
+namespace SonarAnalyzer.Test.CFG.Roslyn
 {
     [TestClass]
     public class RoslynControlFlowGraphTest

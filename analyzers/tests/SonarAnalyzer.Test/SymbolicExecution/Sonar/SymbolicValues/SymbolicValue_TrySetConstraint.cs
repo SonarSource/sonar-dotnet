@@ -24,7 +24,7 @@ using SonarAnalyzer.SymbolicExecution.Sonar;
 using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
 using SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues;
 
-namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.SymbolicValues
+namespace SonarAnalyzer.Test.SymbolicExecution.Sonar.SymbolicValues
 {
     [TestClass]
     public class SymbolicValue_TrySetConstraint

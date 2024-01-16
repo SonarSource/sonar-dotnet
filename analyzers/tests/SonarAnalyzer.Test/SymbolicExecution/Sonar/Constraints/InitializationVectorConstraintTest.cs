@@ -20,7 +20,7 @@
 
 using SonarAnalyzer.SymbolicExecution.Sonar.Constraints;
 
-namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.Constraints
+namespace SonarAnalyzer.Test.SymbolicExecution.Sonar.Constraints
 {
     [TestClass]
     public class InitializationVectorConstraintTest
