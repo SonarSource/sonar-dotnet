@@ -2,6 +2,8 @@
 
 All C# and VB.NET code analyzers present in SonarLint for Visual Studio, SonarQube and SonarCloud are being developed here. These analyzers rely on Roslyn 1.3.2 API.
 
+Before following any of the guides below, if you are external contributor you need to delete `sonar-dotnet\analyzers\NuGet.Config`.
+
 ## Working with the code
 
 1. Clone [this repository](https://github.com/SonarSource/sonar-dotnet.git)
@@ -39,10 +41,7 @@ Visual Studio 2022 version 17.6+ is required to build the project (due to source
 1. The following environment variables must be set:
     - **JAVA_HOME** (e.g. `C:\Program Files\Java\jdk-11.0.2`)
     - **MSBUILD_PATH** - path to the MSBuild.exe executable (MSBuild 16 e.g. `C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe`)
-    - **NUGET_PATH** - path to the nuget.exe executable (related to the [plugin integration tests](./contributing-plugin.md#integration-tests))
-    - **Sonarsource internal only** These two steps require access to SonarSource internal resources and are not possible for external contributers
-        - **ORCHESTRATOR_CONFIG_URL** - url to orchestrator.properties file (for integration tests) in uri form (i.e. file:///c:/something/orchestrator.properties). See also: [Documentation in the orchestrator repository](https://github.com/sonarsource/orchestrator#configuration)
-        - **RULE_API_PATH** - path to folder containing the rule api jar. The rule api jar can be found at [repox.jfrog search](https://repox.jfrog.io/ui/artifactSearchResults?name=rule-api&type=artifacts) or [repox.jfrog private releases](https://repox.jfrog.io/ui/native/sonarsource-private-releases/com/sonarsource/rule-api/rule-api/)
+    - **NUGET_PATH** - path to the nuget.exe executable (related to the [plugin integration tests](./contributing-plugin.md#integration-tests)) 
     - **PATH** - the **PATH** variable must contain (*system* scope):
         - dotnet core installation folder (`C:\Program Files\dotnet\`)
         - MSBuild bin folder (`C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin`)
@@ -51,6 +50,12 @@ Visual Studio 2022 version 17.6+ is required to build the project (due to source
         - JDK bin folder (`C:\Program Files\Java\jdk-11.0.2\bin`)
         - %M2_HOME%\bin (`C:\Program Files\JetBrains\IntelliJ IDEA\plugins\maven\lib\maven3\bin` [Maven cli](https://maven.apache.org/install.html). Here installed via IntelliJ IDEA.)
         - SonarScanner for .NET folder and to the Scanner CLI ([SonarScanner download](https://github.com/SonarSource/sonar-scanner-msbuild/releases))
+    -  **Sonar internal only** These two steps require access to SonarSource internal resources and are not possible for external contributors
+        - **ORCHESTRATOR_CONFIG_URL** - url to `orchestrator.properties` file (for integration tests) in uri form (i.e. `file:///c:/something/orchestrator.properties`). See also: [Documentation in the orchestrator repository](https://github.com/sonarsource/orchestrator#configuration)
+        - **RULE_API_PATH** - path to folder containing the rule api jar. The rule api jar can be found at [repox.jfrog search](https://repox.jfrog.io/ui/artifactSearchResults?name=rule-api&type=artifacts) or [repox.jfrog private releases](https://repox.jfrog.io/ui/native/sonarsource-private-releases/com/sonarsource/rule-api/rule-api/)
+        - **ARTIFACTORY_URL** https://repox.jfrog.io/repox
+        - **ARTIFACTORY_USER** your repox.jfrog username (see e.g. `orchestrator.properties`)
+        - **ARTIFACTORY_PASSWORD** the api key for repox.jfrog (see e.g. `orchestrator.properties`)   
 1. Open `analyzers/SonarAnalyzer.sln`
 
 ## Tests
@@ -154,11 +159,8 @@ After the debug session, remove the `Debugger.Launch()` line.
   * Follow the [Code Style Configuration for Intellij](https://github.com/SonarSource/sonar-developer-toolset#code-style-configuration-for-intellij) instructions
   * Open the root folder of the repo
   * Make sure the `its`, `sonar-csharp-plugin`, `sonar-dotnet-shared-library`, and `sonar-vbnet-plugin` folders are are imported as Maven modules (indicated by a blue square). Search for `pom.xml` in the folders and make it a maven project if not.
-* Add the following environment variables (*user* scope)
-  * **ARTIFACTORY_URL** https://repox.jfrog.io/repox
-  * **ARTIFACTORY_USER** your repox.jfrog username (see e.g. orchestrator.properties)
-  * **ARTIFACTORY_PASSWORD** the api key for repox.jfrog (see e.g. orchestrator.properties)
 * Create `settings.xml` in the `%USERPROFILE%\.m2` directory. A template can be found in the [Developer box section in the extranet](https://xtranet-sonarsource.atlassian.net/wiki/spaces/DEV/pages/776711/Developer+Box#Maven-Settings). Change the username and password settings with the values from the environment variables above.
+* Make sure the orchestrator is configured [see here](https://xtranet-sonarsource.atlassian.net/wiki/spaces/DEV/pages/776679/Integration+Tests#Configuration).
 * Run `mvn install clean -DskipTests=true` in the respective directories (pom.xml). To build all artefacts run `.\scripts\build\dev-build.ps1 -buildJava`
 * Use the IDE to run unit tests in the projects.
 
