@@ -72,8 +72,8 @@ stages:
 
       - script: '"$(MSBUILD_PATH)" /t:restore /p:RestoreLockedMode=true /p:RestoreConfigFile="analyzers\NuGet.Config" $(solution)'
         env:
-          ARTIFACTORY_NUGET_USERNAME: $(ARTIFACTORY_PRIVATE_READER_USERNAME)
-          ARTIFACTORY_NUGET_PASSWORD: $(ARTIFACTORY_PRIVATE_READER_ACCESS_TOKEN)
+          ARTIFACTORY_USER: $(ARTIFACTORY_PRIVATE_READER_USERNAME)
+          ARTIFACTORY_PASSWORD: $(ARTIFACTORY_PRIVATE_READER_ACCESS_TOKEN)
         displayName: "NuGet Restore"
 
       - powershell: .\scripts\build\store-azp-variables.ps1
@@ -335,8 +335,8 @@ stages:
 
       - script: '"$(MSBUILD_PATH)" /t:restore /p:RestoreLockedMode=true /p:RestoreConfigFile="analyzers\NuGet.Config" $(solution)'
         env:
-          ARTIFACTORY_NUGET_USERNAME: $(ARTIFACTORY_PRIVATE_READER_USERNAME)
-          ARTIFACTORY_NUGET_PASSWORD: $(ARTIFACTORY_PRIVATE_READER_ACCESS_TOKEN)
+          ARTIFACTORY_USER: $(ARTIFACTORY_PRIVATE_READER_USERNAME)
+          ARTIFACTORY_PASSWORD: $(ARTIFACTORY_PRIVATE_READER_ACCESS_TOKEN)
         displayName: "NuGet Restore"
 
       - task: VSBuild@1
