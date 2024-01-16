@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
+// https://github.com/SonarSource/sonar-dotnet/issues/8539
 class CollectionExpressions
 {
     void Method(int[] arrayArgument)

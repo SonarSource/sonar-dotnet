@@ -21,7 +21,7 @@
 using ChecksCS = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 using CS = SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.UnitTest.Rules;
+namespace SonarAnalyzer.Net8.Test.Rules;
 
 [TestClass]
 public class EmptyCollectionsShouldNotBeEnumeratedTest
