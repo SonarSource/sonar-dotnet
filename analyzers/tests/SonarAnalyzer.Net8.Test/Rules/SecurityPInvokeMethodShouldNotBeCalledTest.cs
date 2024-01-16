@@ -20,7 +20,7 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Net8.UnitTest.Rules;
+namespace SonarAnalyzer.Net8.Test.Rules;
 
 [TestClass]
 public class SecurityPInvokeMethodShouldNotBeCalledTest
