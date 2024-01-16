@@ -18,7 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B7233F78
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.Common", "src\SonarAnalyzer.Common\SonarAnalyzer.Common.csproj", "{8A8A663E-1318-4361-BC97-2E63666FEADB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.UnitTest", "tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj", "{E11606CA-A186-4FEE-BA30-B1688747CD1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.Test", "tests\SonarAnalyzer.Test\SonarAnalyzer.Test.csproj", "{E11606CA-A186-4FEE-BA30-B1688747CD1A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.RuleDescriptorGenerator", "src\SonarAnalyzer.RuleDescriptorGenerator\SonarAnalyzer.RuleDescriptorGenerator.csproj", "{07E31F39-7419-4B4E-998E-C2BF1A6BB91C}"
 EndProject

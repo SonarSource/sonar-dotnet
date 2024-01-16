@@ -460,7 +460,7 @@
           "System.Collections.Immutable": "[1.1.37, )"
         }
       },
-      "sonaranalyzer.unittest": {
+      "sonaranalyzer.test": {
         "type": "Project",
         "dependencies": {
           "FluentAssertions": "[6.12.0, )",

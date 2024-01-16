@@ -33,13 +33,13 @@ variables:
   - name: ARTIFACTORY_API_KEY
     value: $[variables.ARTIFACTORY_PROMOTER_ACCESS_TOKEN]
   - name: UnitTestProjectPath
-    value: 'analyzers\tests\SonarAnalyzer.UnitTest\'
+    value: 'analyzers\tests\SonarAnalyzer.Test\'
   - name: UnitTestResultsPath
     value: '$(Agent.TempDirectory)\TestResults'
   - name: CoveragePath
     value: '$(Agent.TempDirectory)\coverage'
   - name: UnitTestExclusionsPattern
-    value: 'analyzers/tests/SonarAnalyzer.UnitTest/TestCases/**/*'
+    value: 'analyzers/tests/SonarAnalyzer.Test/TestCases/**/*'
   - name: isReleaseBranch
     value: ${{ or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), startsWith(variables['Build.SourceBranch'], 'refs/heads/branch-')) }}
   - name: vsVersion
@@ -222,17 +222,17 @@ stages:
             FrameworkMoniker: 'net48'
             CoverageArtifactName: 'DotnetCoverageNet48'
             TestResultsArtifactName: 'DotnetTestResultsNet48'
-            ProjectFilePath: 'tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj'
+            ProjectFilePath: 'tests\SonarAnalyzer.Test\SonarAnalyzer.Test.csproj'
           Net70:
             FrameworkMoniker: 'net7.0'
             CoverageArtifactName: 'DotnetCoverageNet7'
             TestResultsArtifactName: 'DotnetTestResultsNet7'
-            ProjectFilePath: 'tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj'
+            ProjectFilePath: 'tests\SonarAnalyzer.Test\SonarAnalyzer.Test.csproj'
           Net80:
             FrameworkMoniker: 'net8.0-windows'
             CoverageArtifactName: 'DotnetCoverageNet8'
             TestResultsArtifactName: 'DotnetTestResultsNet8'
-            ProjectFilePath: 'tests\SonarAnalyzer.Net8.UnitTest\SonarAnalyzer.Net8.UnitTest.csproj'
+            ProjectFilePath: 'tests\SonarAnalyzer.Net8.Test\SonarAnalyzer.Net8.Test.csproj'
 
       steps:
       - task: DownloadPipelineArtifact@2
