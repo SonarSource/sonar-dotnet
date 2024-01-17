@@ -434,3 +434,13 @@ class Repro_8342
     private class Private3Attribute : Attribute { } // Noncompliant: FP: attribute used on a protected method
     private class Private4Attribute : Attribute { } // Noncompliant: FP: attribute used on a private method used by a public method
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8532
+[Serializable]
+public class Repro_8532
+{
+    private string type;                // Noncompliant FP
+    private string key { get; set; }    // Noncompliant FP
+    [NonSerialized]
+    private string value;               // FN
+}
