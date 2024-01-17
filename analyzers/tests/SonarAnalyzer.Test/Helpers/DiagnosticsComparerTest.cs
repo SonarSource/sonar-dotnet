@@ -21,7 +21,7 @@
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.UnitTest.Helpers
+namespace SonarAnalyzer.Test.Helpers
 {
     [TestClass]
     public class DiagnosticsComparerTest

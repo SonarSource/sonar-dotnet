@@ -25,9 +25,9 @@ using System.Reflection;
 using SonarAnalyzer.AnalysisContext;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
-using SonarAnalyzer.UnitTest.Helpers;
+using SonarAnalyzer.Test.Helpers;
 
-namespace SonarAnalyzer.UnitTest.Common
+namespace SonarAnalyzer.Test.Common
 {
     [TestClass]
     public class RuleTest

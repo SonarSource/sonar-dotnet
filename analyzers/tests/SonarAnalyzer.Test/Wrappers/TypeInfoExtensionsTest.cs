@@ -24,7 +24,7 @@ using NullabilityInfo = StyleCop.Analyzers.Lightup.NullabilityInfo;
 using NullableAnnotation = StyleCop.Analyzers.Lightup.NullableAnnotation;
 using NullableFlowState = StyleCop.Analyzers.Lightup.NullableFlowState;
 
-namespace SonarAnalyzer.UnitTest.Wrappers
+namespace SonarAnalyzer.Test.Wrappers
 {
     [TestClass]
     public class TypeInfoExtensionsTest

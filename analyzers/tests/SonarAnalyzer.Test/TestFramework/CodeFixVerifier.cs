@@ -22,7 +22,7 @@ using System.IO;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 
-namespace SonarAnalyzer.UnitTest.TestFramework;
+namespace SonarAnalyzer.Test.TestFramework;
 
 internal class CodeFixVerifier
 {

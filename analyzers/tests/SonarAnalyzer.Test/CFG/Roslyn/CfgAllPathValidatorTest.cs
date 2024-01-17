@@ -20,7 +20,7 @@
 
 using SonarAnalyzer.CFG.Roslyn;
 
-namespace SonarAnalyzer.UnitTest.CFG.Roslyn
+namespace SonarAnalyzer.Test.CFG.Roslyn
 {
     [TestClass]
     public class CfgAllPathValidatorTest

@@ -25,7 +25,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.AnalysisContext;
 using ExtensionsCS = csharp::SonarAnalyzer.Extensions.SyntaxNodeExtensions;
 
-namespace SonarAnalyzer.UnitTest.TestFramework.Tests;
+namespace SonarAnalyzer.Test.TestFramework.Tests;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 internal class DummyAnalyzerWithLocation : SonarDiagnosticAnalyzer

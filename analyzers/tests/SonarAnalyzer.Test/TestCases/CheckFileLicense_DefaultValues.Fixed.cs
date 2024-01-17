@@ -6,7 +6,7 @@
  * You can also set it in SonarLint.xml additional file for SonarLint or standalone NuGet analyzer.
  */
 
-namespace SonarAnalyzer.UnitTest.TestCases // Fixed
+namespace SonarAnalyzer.Test.TestCases // Fixed
 {
     class Foo
     {

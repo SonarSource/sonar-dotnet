@@ -20,7 +20,7 @@
 
 using SonarAnalyzer.CFG.Helpers;
 
-namespace SonarAnalyzer.UnitTest.Helpers
+namespace SonarAnalyzer.Test.Helpers
 {
     [TestClass]
     public class UniqueQueueTest

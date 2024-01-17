@@ -20,7 +20,7 @@
 
 using System.Diagnostics;
 
-namespace SonarAnalyzer.UnitTest.Helpers
+namespace SonarAnalyzer.Test.Helpers
 {
     /// <summary>
     /// Some of the tests cover exceptions in which we have asserts as well, we want to ignore those asserts during tests

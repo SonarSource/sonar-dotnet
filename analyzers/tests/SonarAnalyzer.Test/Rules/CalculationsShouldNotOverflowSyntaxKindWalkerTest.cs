@@ -20,7 +20,7 @@
 
 using CalculationsShouldNotOverflow = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp.CalculationsShouldNotOverflow;
 
-namespace SonarAnalyzer.UnitTest.Rules;
+namespace SonarAnalyzer.Test.Rules;
 
 [TestClass]
 public class CalculationsShouldNotOverflowSyntaxKindWalkerTest

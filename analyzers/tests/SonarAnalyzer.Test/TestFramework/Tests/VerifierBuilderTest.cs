@@ -22,7 +22,7 @@ using SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
 using CS = Microsoft.CodeAnalysis.CSharp;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 
-namespace SonarAnalyzer.UnitTest.TestFramework.Tests
+namespace SonarAnalyzer.Test.TestFramework.Tests
 {
     [TestClass]
     public class VerifierBuilderTest

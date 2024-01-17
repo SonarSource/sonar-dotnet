@@ -28,7 +28,7 @@ using CSharpSyntaxNodeExtensions = csharp::SonarAnalyzer.Extensions.SyntaxNodeEx
 using VBSyntax = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using VBSyntaxNodeExtensions = vbnet::SonarAnalyzer.Extensions.SyntaxNodeExtensions;
 
-namespace SonarAnalyzer.UnitTest.Helpers
+namespace SonarAnalyzer.Test.Helpers
 {
     [TestClass]
     public class BuilderPatternConditionTest

@@ -33,7 +33,7 @@ using ExtensionsVB = vbnet::SonarAnalyzer.Extensions.SyntaxNodeExtensions;
 using SyntaxCS = Microsoft.CodeAnalysis.CSharp.Syntax;
 using SyntaxVB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
-namespace SonarAnalyzer.UnitTest.Extensions
+namespace SonarAnalyzer.Test.Extensions
 {
     [TestClass]
     public class SyntaxNodeExtensionsTest

@@ -20,7 +20,7 @@
 
 using System.IO;
 
-namespace SonarAnalyzer.UnitTest.Helpers
+namespace SonarAnalyzer.Test.Helpers
 {
     [TestClass]
     public class WildcardPatternMatcherTest

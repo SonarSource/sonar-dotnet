@@ -23,12 +23,12 @@ extern alias vbnet;
 using Microsoft.CodeAnalysis.CSharp;
 using Moq;
 using SonarAnalyzer.AnalysisContext;
-using SonarAnalyzer.UnitTest.TestFramework.Tests;
+using SonarAnalyzer.Test.TestFramework.Tests;
 using CS = csharp::SonarAnalyzer.Extensions.SonarAnalysisContextExtensions;
 using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext;
 using VB = vbnet::SonarAnalyzer.Extensions.SonarAnalysisContextExtensions;
 
-namespace SonarAnalyzer.UnitTest.AnalysisContext;
+namespace SonarAnalyzer.Test.AnalysisContext;
 
 public partial class SonarAnalysisContextTest
 {

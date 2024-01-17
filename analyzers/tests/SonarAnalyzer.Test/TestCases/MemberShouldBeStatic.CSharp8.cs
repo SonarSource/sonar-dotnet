@@ -1,4 +1,4 @@
-﻿namespace SonarAnalyzer.UnitTest.TestCases
+﻿namespace SonarAnalyzer.Test.TestCases
 {
     public interface IUtilities
     {

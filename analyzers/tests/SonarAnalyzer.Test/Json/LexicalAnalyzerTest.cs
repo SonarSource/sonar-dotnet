@@ -22,7 +22,7 @@ using System.Globalization;
 using SonarAnalyzer.Json;
 using SonarAnalyzer.Json.Parsing;
 
-namespace SonarAnalyzer.UnitTest.Common
+namespace SonarAnalyzer.Test.Common
 {
     [TestClass]
     public class LexicalAnalyzerTest

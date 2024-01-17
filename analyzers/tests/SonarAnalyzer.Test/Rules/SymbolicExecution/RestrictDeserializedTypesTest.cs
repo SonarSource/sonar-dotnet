@@ -19,14 +19,14 @@
  */
 
 using SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
-using SonarAnalyzer.UnitTest.Helpers;
+using SonarAnalyzer.Test.Helpers;
 
 using ChecksCS = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 using ChecksVB = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.UnitTest.Rules;
+namespace SonarAnalyzer.Test.Rules;
 
 [TestClass]
 public class RestrictDeserializedTypesTest

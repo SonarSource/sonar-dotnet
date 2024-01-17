@@ -20,9 +20,9 @@
 
 using System.IO;
 using System.Text.RegularExpressions;
-using SonarAnalyzer.UnitTest.Common;
+using SonarAnalyzer.Test.Common;
 
-namespace SonarAnalyzer.UnitTest.PackagingTests
+namespace SonarAnalyzer.Test.PackagingTests
 {
     [TestClass]
     public class GeneratedResourcesTest

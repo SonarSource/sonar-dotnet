@@ -19,9 +19,9 @@
  */
 
 using System.IO;
-using SonarAnalyzer.UnitTest.Common;
+using SonarAnalyzer.Test.Common;
 
-namespace SonarAnalyzer.UnitTest.MetadataReferences
+namespace SonarAnalyzer.Test.MetadataReferences
 {
     public static partial class NuGetMetadataFactory
     {

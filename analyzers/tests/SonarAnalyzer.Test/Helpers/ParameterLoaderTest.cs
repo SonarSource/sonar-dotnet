@@ -23,7 +23,7 @@ using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.AnalysisContext;
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.UnitTest.Helpers
+namespace SonarAnalyzer.Test.Helpers
 {
     [TestClass]
     public class ParameterLoaderTest

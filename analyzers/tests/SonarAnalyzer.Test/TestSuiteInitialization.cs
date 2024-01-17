@@ -20,9 +20,9 @@
 
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.VisualBasic;
-using SonarAnalyzer.UnitTest.Helpers;
+using SonarAnalyzer.Test.Helpers;
 
-namespace SonarAnalyzer.UnitTest
+namespace SonarAnalyzer.Test
 {
     [TestClass]
     public class TestSuiteInitialization

@@ -23,9 +23,9 @@ using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.Protobuf;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
-using SonarAnalyzer.UnitTest.Helpers;
+using SonarAnalyzer.Test.Helpers;
 
-namespace SonarAnalyzer.UnitTest.TestFramework.Tests
+namespace SonarAnalyzer.Test.TestFramework.Tests
 {
     [TestClass]
     public class VerifierTest

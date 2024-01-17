@@ -21,7 +21,7 @@
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
-namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
+namespace SonarAnalyzer.Test.TestFramework.SymbolicExecution
 {
     internal enum ConstraintKindTest
     {

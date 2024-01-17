@@ -5,7 +5,7 @@
 // <date>08/22/2017 12:39:58 AM </date>
 // <summary>Class representing a Sample entity</summary>
 
-namespace SonarAnalyzer.UnitTest.TestCases
+namespace SonarAnalyzer.Test.TestCases
 {
     class CheckFileLicense_ComplexRegex
     {

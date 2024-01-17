@@ -21,7 +21,7 @@
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.Extensions;
 
-namespace SonarAnalyzer.UnitTest.Extensions
+namespace SonarAnalyzer.Test.Extensions
 {
     [TestClass]
     public class BaciBlockExtensionsTests

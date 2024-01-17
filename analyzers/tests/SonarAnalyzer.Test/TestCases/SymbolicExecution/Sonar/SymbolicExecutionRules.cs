@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SonarAnalyzer.UnitTest.TestCases
+namespace SonarAnalyzer.Test.TestCases
 {
     public class SymbolicExecutionRules
     {

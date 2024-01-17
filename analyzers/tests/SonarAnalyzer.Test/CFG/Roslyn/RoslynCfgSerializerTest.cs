@@ -19,9 +19,9 @@
  */
 
 using SonarAnalyzer.CFG;
-using SonarAnalyzer.UnitTest.Helpers;
+using SonarAnalyzer.Test.Helpers;
 
-namespace SonarAnalyzer.UnitTest.CFG.Sonar
+namespace SonarAnalyzer.Test.CFG.Sonar
 {
     [TestClass]
     public class RoslynCfgSerializerTest

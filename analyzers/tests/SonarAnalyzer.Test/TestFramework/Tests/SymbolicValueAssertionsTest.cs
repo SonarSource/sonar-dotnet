@@ -20,9 +20,9 @@
 
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
-using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
+using SonarAnalyzer.Test.TestFramework.SymbolicExecution;
 
-namespace SonarAnalyzer.UnitTest.TestFramework.Tests
+namespace SonarAnalyzer.Test.TestFramework.Tests
 {
     [TestClass]
     public class SymbolicValueAssertionsTest

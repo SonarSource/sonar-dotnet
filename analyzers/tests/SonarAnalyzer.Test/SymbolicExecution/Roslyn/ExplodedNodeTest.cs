@@ -20,9 +20,9 @@
 
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
-using SonarAnalyzer.UnitTest.Helpers;
+using SonarAnalyzer.Test.Helpers;
 
-namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn;
+namespace SonarAnalyzer.Test.SymbolicExecution.Roslyn;
 
 [TestClass]
 public class ExplodedNodeTest

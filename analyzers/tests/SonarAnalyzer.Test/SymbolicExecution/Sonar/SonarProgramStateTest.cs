@@ -22,10 +22,10 @@ using SonarAnalyzer.Extensions;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Sonar;
-using SonarAnalyzer.UnitTest.CFG.Sonar;
-using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
+using SonarAnalyzer.Test.CFG.Sonar;
+using SonarAnalyzer.Test.TestFramework.SymbolicExecution;
 
-namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar
+namespace SonarAnalyzer.Test.SymbolicExecution.Sonar
 {
     [TestClass]
     public class SonarProgramStateTest

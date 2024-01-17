@@ -22,9 +22,9 @@
 
 using System.Globalization;
 using System.Threading;
-using SonarAnalyzer.UnitTest.Helpers;
+using SonarAnalyzer.Test.Helpers;
 
-namespace SonarAnalyzer.UnitTest.Extensions
+namespace SonarAnalyzer.Test.Extensions
 {
     [TestClass]
     public class EnumerableExtensionsTest

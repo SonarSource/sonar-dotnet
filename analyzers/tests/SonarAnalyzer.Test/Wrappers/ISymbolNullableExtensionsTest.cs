@@ -22,7 +22,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using StyleCop.Analyzers.Lightup;
 using NullableAnnotation = StyleCop.Analyzers.Lightup.NullableAnnotation;
 
-namespace SonarAnalyzer.UnitTest.Wrappers;
+namespace SonarAnalyzer.Test.Wrappers;
 
 [TestClass]
 public class ISymbolNullableExtensionsTest

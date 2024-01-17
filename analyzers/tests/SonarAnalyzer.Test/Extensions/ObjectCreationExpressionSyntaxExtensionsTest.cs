@@ -27,7 +27,7 @@ using ExtensionsCS = csharp::SonarAnalyzer.Extensions.ObjectCreationExpressionSy
 using ExtensionsVB = vbnet::SonarAnalyzer.Extensions.ObjectCreationExpressionSyntaxExtensions;
 using SyntaxCS = Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace SonarAnalyzer.UnitTest.Extensions
+namespace SonarAnalyzer.Test.Extensions
 {
     [TestClass]
     public class ObjectCreationExpressionSyntaxExtensionsTest

@@ -21,7 +21,7 @@
 using System.Globalization;
 using System.Threading;
 
-namespace SonarAnalyzer.UnitTest.Helpers
+namespace SonarAnalyzer.Test.Helpers
 {
     public sealed class CurrentCultureScope : IDisposable
     {

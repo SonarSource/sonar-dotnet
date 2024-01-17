@@ -20,7 +20,7 @@
 
 using System.Text;
 
-namespace SonarAnalyzer.UnitTest.TestFramework
+namespace SonarAnalyzer.Test.TestFramework
 {
     public static class DiagnosticsComparer
     {

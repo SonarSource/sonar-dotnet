@@ -20,7 +20,7 @@
 
 using Microsoft.CodeAnalysis.VisualBasic;
 
-namespace SonarAnalyzer.UnitTest.Extensions
+namespace SonarAnalyzer.Test.Extensions
 {
     [TestClass]
     public class SafeVisualBasicSyntaxWalkerTest

@@ -20,7 +20,7 @@
 
 using System.IO;
 
-namespace SonarAnalyzer.UnitTest.MetadataReferences
+namespace SonarAnalyzer.Test.MetadataReferences
 {
     internal static class MetadataReferenceFactory
     {

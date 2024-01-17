@@ -20,7 +20,7 @@
 
 using SonarAnalyzer.SymbolicExecution.Sonar.SymbolicValues;
 
-namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.SymbolicValues
+namespace SonarAnalyzer.Test.SymbolicExecution.Sonar.SymbolicValues
 {
     [TestClass]
     public class NullableSymbolicValueTest

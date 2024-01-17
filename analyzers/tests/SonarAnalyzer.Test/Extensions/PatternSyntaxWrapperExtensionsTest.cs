@@ -22,7 +22,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.Extensions;
 using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.UnitTest.Extensions
+namespace SonarAnalyzer.Test.Extensions
 {
     [TestClass]
     public class PatternSyntaxWrapperExtensionsTest

@@ -22,7 +22,7 @@ using Microsoft.CodeAnalysis.Operations;
 using SonarAnalyzer.CFG.Helpers;
 using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.UnitTest.Helpers
+namespace SonarAnalyzer.Test.Helpers
 {
     [TestClass]
     public class OperationFinderTest

@@ -19,9 +19,9 @@
  */
 
 using SonarAnalyzer.Rules.CSharp;
-using SonarAnalyzer.UnitTest.Rules;
+using SonarAnalyzer.Test.Rules;
 
-namespace SonarAnalyzer.UnitTest.Common
+namespace SonarAnalyzer.Test.Common
 {
     [TestClass]
     public class SecurityHotspotTest

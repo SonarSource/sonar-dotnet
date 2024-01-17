@@ -18,11 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.UnitTest.Common;
+using SonarAnalyzer.Test.Common;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.UnitTest.Rules;
+namespace SonarAnalyzer.Test.Rules;
 
 [TestClass]
 public class TestsShouldNotUseThreadSleepTest

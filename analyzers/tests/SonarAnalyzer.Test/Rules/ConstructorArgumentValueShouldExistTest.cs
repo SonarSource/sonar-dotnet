@@ -25,7 +25,7 @@ using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 #endif
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Test.Rules
 {
     [TestClass]
     public class ConstructorArgumentValueShouldExistTest

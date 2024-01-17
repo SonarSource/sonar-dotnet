@@ -25,7 +25,7 @@ using Moq;
 using SonarAnalyzer.AnalysisContext;
 using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext;
 
-namespace SonarAnalyzer.UnitTest
+namespace SonarAnalyzer.Test
 {
     internal static class AnalysisScaffolding
     {

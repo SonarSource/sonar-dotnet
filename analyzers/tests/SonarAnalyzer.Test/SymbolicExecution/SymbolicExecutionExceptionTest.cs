@@ -20,7 +20,7 @@
 
 using SonarAnalyzer.SymbolicExecution;
 
-namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.Constraints;
+namespace SonarAnalyzer.Test.SymbolicExecution.Sonar.Constraints;
 
 [TestClass]
 public class SymbolicExecutionExceptionTest

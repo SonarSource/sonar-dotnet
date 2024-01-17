@@ -20,7 +20,7 @@
 
 using FluentAssertions.Primitives;
 
-namespace SonarAnalyzer.UnitTest.Helpers
+namespace SonarAnalyzer.Test.Helpers
 {
     internal static class FluentTestHelper
     {

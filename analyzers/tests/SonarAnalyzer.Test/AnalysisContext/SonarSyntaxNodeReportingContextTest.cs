@@ -23,7 +23,7 @@ using Moq;
 using SonarAnalyzer.AnalysisContext;
 using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.UnitTest.AnalysisContext;
+namespace SonarAnalyzer.Test.AnalysisContext;
 
 [TestClass]
 public class SonarSyntaxNodeReportingContextTest

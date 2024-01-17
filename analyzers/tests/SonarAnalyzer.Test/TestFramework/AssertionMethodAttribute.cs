@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.UnitTest.TestFramework
+namespace SonarAnalyzer.Test.TestFramework
 {
     /// <summary>
     /// This attribute is used to decorate custom assertion methods for rule S2699.

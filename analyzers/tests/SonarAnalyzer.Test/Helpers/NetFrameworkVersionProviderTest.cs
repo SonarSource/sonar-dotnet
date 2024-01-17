@@ -19,9 +19,9 @@
  */
 
 using System.IO;
-using SonarAnalyzer.UnitTest.Common;
+using SonarAnalyzer.Test.Common;
 
-namespace SonarAnalyzer.UnitTest.Helpers
+namespace SonarAnalyzer.Test.Helpers
 {
     [TestClass]
     public class NetFrameworkVersionProviderTest

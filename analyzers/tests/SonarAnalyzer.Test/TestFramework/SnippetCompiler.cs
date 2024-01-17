@@ -26,7 +26,7 @@ using SonarAnalyzer.AnalysisContext;
 using CS = Microsoft.CodeAnalysis.CSharp.Syntax;
 using VB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
-namespace SonarAnalyzer.UnitTest.TestFramework
+namespace SonarAnalyzer.Test.TestFramework
 {
     /// <summary>
     /// Helper class compiles snippets of code on the fly.

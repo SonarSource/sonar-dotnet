@@ -26,7 +26,7 @@ using SonarAnalyzer.AnalysisContext;
 using ExtensionsCS = csharp::SonarAnalyzer.Extensions.SonarAnalysisContextExtensions;
 using ExtensionsVB = vbnet::SonarAnalyzer.Extensions.SonarAnalysisContextExtensions;
 
-namespace SonarAnalyzer.UnitTest.Extensions;
+namespace SonarAnalyzer.Test.Extensions;
 
 [TestClass]
 public class SonarAnalysisContextExtensions

@@ -24,7 +24,7 @@ using FluentAssertions.Execution;
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.AnalysisContext;
 
-namespace SonarAnalyzer.UnitTest.TestFramework
+namespace SonarAnalyzer.Test.TestFramework
 {
     internal static class DiagnosticVerifier
     {

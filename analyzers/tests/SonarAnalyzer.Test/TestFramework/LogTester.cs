@@ -20,7 +20,7 @@
 
 using System.IO;
 
-namespace SonarAnalyzer.UnitTest.TestFramework
+namespace SonarAnalyzer.Test.TestFramework
 {
     internal sealed class LogTester : IDisposable
     {

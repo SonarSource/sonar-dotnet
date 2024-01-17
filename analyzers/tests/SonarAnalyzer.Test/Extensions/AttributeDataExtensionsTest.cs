@@ -23,7 +23,7 @@ using Moq;
 using Moq.Protected;
 using SonarAnalyzer.Extensions;
 
-namespace SonarAnalyzer.UnitTest.Extensions
+namespace SonarAnalyzer.Test.Extensions
 {
     [TestClass]
     public class AttributeDataExtensionsTest

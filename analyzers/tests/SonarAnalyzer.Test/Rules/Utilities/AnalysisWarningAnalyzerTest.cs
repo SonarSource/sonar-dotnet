@@ -25,7 +25,7 @@ using SonarAnalyzer.Rules;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.UnitTest.Rules;
+namespace SonarAnalyzer.Test.Rules;
 
 [TestClass]
 public class AnalysisWarningAnalyzerTest

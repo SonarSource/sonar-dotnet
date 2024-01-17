@@ -22,7 +22,7 @@ using SonarAnalyzer.Helpers.Trackers;
 using CS = Microsoft.CodeAnalysis.CSharp;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 
-namespace SonarAnalyzer.UnitTest.Helpers
+namespace SonarAnalyzer.Test.Helpers
 {
     [TestClass]
     public class MethodDeclarationTrackerTest

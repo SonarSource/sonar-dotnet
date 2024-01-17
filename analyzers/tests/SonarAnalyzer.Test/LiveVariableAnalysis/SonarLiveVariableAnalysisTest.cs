@@ -22,10 +22,10 @@ using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.CFG;
 using SonarAnalyzer.CFG.Sonar;
 using SonarAnalyzer.LiveVariableAnalysis.CSharp;
-using SonarAnalyzer.UnitTest.CFG.Sonar;
+using SonarAnalyzer.Test.CFG.Sonar;
 using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.UnitTest.LiveVariableAnalysis
+namespace SonarAnalyzer.Test.LiveVariableAnalysis
 {
     [TestClass]
     public class SonarLiveVariableAnalysisTest

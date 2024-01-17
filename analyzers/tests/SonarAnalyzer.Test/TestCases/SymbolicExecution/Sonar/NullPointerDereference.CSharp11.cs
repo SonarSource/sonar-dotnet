@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SonarAnalyzer.UnitTest.TestCases.SymbolicExecution.Sonar
+namespace SonarAnalyzer.Test.TestCases.SymbolicExecution.Sonar
 {
     public class NullPointerDereference
     {

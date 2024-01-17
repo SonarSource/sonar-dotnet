@@ -21,7 +21,7 @@
 using System.IO;
 using Microsoft.CodeAnalysis.Text;
 
-namespace SonarAnalyzer.UnitTest.Helpers;
+namespace SonarAnalyzer.Test.Helpers;
 
 [TestClass]
 public class SonarLintXmlReaderTest

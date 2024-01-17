@@ -20,7 +20,7 @@
 
 using Microsoft.CodeAnalysis.Text;
 
-namespace SonarAnalyzer.UnitTest.TestFramework.Tests
+namespace SonarAnalyzer.Test.TestFramework.Tests
 {
     public partial class IssueLocationCollectorTest
     {

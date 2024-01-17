@@ -18,9 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using static SonarAnalyzer.UnitTest.MetadataReferences.MetadataReferenceFactory;
+using static SonarAnalyzer.Test.MetadataReferences.MetadataReferenceFactory;
 
-namespace SonarAnalyzer.UnitTest.MetadataReferences
+namespace SonarAnalyzer.Test.MetadataReferences
 {
     internal static class NetStandardMetadataReference
     {

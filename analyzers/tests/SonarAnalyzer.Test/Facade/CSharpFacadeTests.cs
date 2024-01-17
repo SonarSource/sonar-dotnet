@@ -22,7 +22,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.UnitTest.Facade;
+namespace SonarAnalyzer.Test.Facade;
 
 [TestClass]
 public class CSharpFacadeTests

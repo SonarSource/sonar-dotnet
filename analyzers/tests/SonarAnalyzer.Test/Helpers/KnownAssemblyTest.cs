@@ -23,7 +23,7 @@ using SonarAnalyzer.Extensions;
 using static SonarAnalyzer.Helpers.KnownAssembly;
 using static SonarAnalyzer.Helpers.KnownAssembly.Predicates;
 
-namespace SonarAnalyzer.UnitTest.Helpers;
+namespace SonarAnalyzer.Test.Helpers;
 
 [TestClass]
 public class KnownAssemblyTest

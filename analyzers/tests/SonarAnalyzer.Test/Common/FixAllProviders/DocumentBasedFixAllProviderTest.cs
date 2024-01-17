@@ -21,9 +21,9 @@
 using System.IO;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
-using SonarAnalyzer.UnitTest.TestFramework.Tests;
+using SonarAnalyzer.Test.TestFramework.Tests;
 
-namespace SonarAnalyzer.UnitTest.Common.FixAllProviders
+namespace SonarAnalyzer.Test.Common.FixAllProviders
 {
     [TestClass]
     public class DocumentBasedFixAllProviderTest

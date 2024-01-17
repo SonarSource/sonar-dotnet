@@ -22,7 +22,7 @@ using Microsoft.CodeAnalysis.Text;
 using Moq;
 using static SonarAnalyzer.Common.AnalyzerConfiguration;
 
-namespace SonarAnalyzer.UnitTest.Common
+namespace SonarAnalyzer.Test.Common
 {
     [TestClass]
     public class AnalyzerConfigurationTest

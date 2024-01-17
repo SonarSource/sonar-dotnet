@@ -22,7 +22,7 @@ using SonarAnalyzer.CFG.Roslyn;
 using StyleCop.Analyzers.Lightup;
 using IFlowCaptureReferenceOperation = Microsoft.CodeAnalysis.FlowAnalysis.IFlowCaptureReferenceOperation;
 
-namespace SonarAnalyzer.UnitTest.CFG.Roslyn
+namespace SonarAnalyzer.Test.CFG.Roslyn
 {
     [TestClass]
     public class CaptureIdTest

@@ -23,7 +23,7 @@
 using System.IO;
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Test.Rules
 {
     [TestClass]
     public class DatabasePasswordsShouldBeSecureTest

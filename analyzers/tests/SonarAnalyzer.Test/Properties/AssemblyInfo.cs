@@ -20,5 +20,5 @@
 
 using System.Reflection;
 
-[assembly: AssemblyTitle("SonarAnalyzer.UnitTest")]
-[assembly: AssemblyProduct("SonarAnalyzer.UnitTest")]
+[assembly: AssemblyTitle("SonarAnalyzer.Test")]
+[assembly: AssemblyProduct("SonarAnalyzer.Test")]

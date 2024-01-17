@@ -21,11 +21,11 @@
 extern alias csharp;
 extern alias vbnet;
 using System.IO;
-using SonarAnalyzer.UnitTest.Common;
+using SonarAnalyzer.Test.Common;
 using RuleCatalogCS = csharp::SonarAnalyzer.RuleCatalog;
 using RuleCatalogVB = vbnet::SonarAnalyzer.RuleCatalog;
 
-namespace SonarAnalyzer.UnitTest.Helpers
+namespace SonarAnalyzer.Test.Helpers
 {
     [TestClass]
     public class RuleCatalogTest

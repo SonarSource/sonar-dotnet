@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SonarAnalyzer.UnitTest.TestCases.SymbolicExecution.Sonar
+namespace SonarAnalyzer.Test.TestCases.SymbolicExecution.Sonar
 {
     public class EmptyNullableValueAccess
     {

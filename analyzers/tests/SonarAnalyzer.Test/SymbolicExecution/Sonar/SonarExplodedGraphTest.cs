@@ -28,10 +28,10 @@ using SonarAnalyzer.Extensions;
 using SonarAnalyzer.LiveVariableAnalysis.CSharp;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Sonar;
-using SonarAnalyzer.UnitTest.CFG.Sonar;
-using SonarAnalyzer.UnitTest.Helpers;
+using SonarAnalyzer.Test.CFG.Sonar;
+using SonarAnalyzer.Test.Helpers;
 
-namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar
+namespace SonarAnalyzer.Test.SymbolicExecution.Sonar
 {
     [TestClass]
     public class SonarExplodedGraphTest

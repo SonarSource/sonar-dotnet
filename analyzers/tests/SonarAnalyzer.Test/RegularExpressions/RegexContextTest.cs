@@ -21,7 +21,7 @@
 using System.Text.RegularExpressions;
 using SonarAnalyzer.RegularExpressions;
 
-namespace SonarAnalyzer.UnitTest.RegularExpressions;
+namespace SonarAnalyzer.Test.RegularExpressions;
 
 [TestClass]
 public class RegexContextTest

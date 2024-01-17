@@ -20,9 +20,9 @@
 
 using Moq;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
-using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
+using SonarAnalyzer.Test.TestFramework.SymbolicExecution;
 
-namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn;
+namespace SonarAnalyzer.Test.SymbolicExecution.Roslyn;
 
 [TestClass]
 public class SymbolicCheckListTest

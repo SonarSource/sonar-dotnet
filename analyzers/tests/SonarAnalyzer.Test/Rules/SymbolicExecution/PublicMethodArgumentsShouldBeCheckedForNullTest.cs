@@ -23,7 +23,7 @@ using ChecksVB = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Test.Rules
 {
     [TestClass]
     public class PublicMethodArgumentsShouldBeCheckedForNullTest

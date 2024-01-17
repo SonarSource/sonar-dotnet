@@ -21,7 +21,7 @@
 using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 
-namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
+namespace SonarAnalyzer.Test.TestFramework.SymbolicExecution
 {
     internal abstract class AssignmentRuleCheck : SymbolicRuleCheck
     {

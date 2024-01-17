@@ -22,10 +22,10 @@ using Microsoft.CodeAnalysis.Operations;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
-using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
+using SonarAnalyzer.Test.TestFramework.SymbolicExecution;
 using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn;
+namespace SonarAnalyzer.Test.SymbolicExecution.Roslyn;
 
 public partial class RoslynSymbolicExecutionTest
 {

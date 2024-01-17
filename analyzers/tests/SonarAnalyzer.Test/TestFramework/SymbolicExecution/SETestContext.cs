@@ -22,7 +22,7 @@ using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.SymbolicExecution.Roslyn.CSharp;
 using SonarAnalyzer.SymbolicExecution.Roslyn.VisualBasic;
 
-namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
+namespace SonarAnalyzer.Test.TestFramework.SymbolicExecution;
 
 internal class SETestContext
 {

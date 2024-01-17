@@ -22,10 +22,10 @@ using Microsoft.CodeAnalysis.Operations;
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
-using SonarAnalyzer.UnitTest.Helpers;
+using SonarAnalyzer.Test.Helpers;
 using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
+namespace SonarAnalyzer.Test.TestFramework.SymbolicExecution
 {
     /// <summary>
     /// This checks looks for specific tags in the source and collects them:

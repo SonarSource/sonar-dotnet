@@ -20,7 +20,7 @@
 
 using SonarAnalyzer.AnalysisContext;
 
-namespace SonarAnalyzer.UnitTest.AnalysisContext;
+namespace SonarAnalyzer.Test.AnalysisContext;
 
 [TestClass]
 public class SonarSyntaxTreeReportingContextTest

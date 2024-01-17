@@ -20,10 +20,10 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.CSharp;
-using SonarAnalyzer.UnitTest.MetadataReferences;
-using SonarAnalyzer.UnitTest.TestFramework;
+using SonarAnalyzer.Test.MetadataReferences;
+using SonarAnalyzer.Test.TestFramework;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Test.Rules
 {
     [TestClass]
     public class AzureFunctionsLogFailuresTest

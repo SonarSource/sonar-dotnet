@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SonarAnalyzer.UnitTest.TestCases.SymbolicExecution.Roslyn
+namespace SonarAnalyzer.Test.TestCases.SymbolicExecution.Roslyn
 {
     public class NullPointerDereference
     {

@@ -23,7 +23,7 @@
 using System.IO;
 using System.Text.RegularExpressions;
 
-namespace SonarAnalyzer.UnitTest.Common;
+namespace SonarAnalyzer.Test.Common;
 
 [TestClass]
 public class ReadMeTest

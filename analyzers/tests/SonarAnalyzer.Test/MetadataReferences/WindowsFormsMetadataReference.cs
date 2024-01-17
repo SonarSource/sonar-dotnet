@@ -20,9 +20,9 @@
 
 #if NET
 
-using static SonarAnalyzer.UnitTest.MetadataReferences.MetadataReferenceFactory;
+using static SonarAnalyzer.Test.MetadataReferences.MetadataReferenceFactory;
 
-namespace SonarAnalyzer.UnitTest.MetadataReferences
+namespace SonarAnalyzer.Test.MetadataReferences
 {
     internal static class WindowsFormsMetadataReference
     {

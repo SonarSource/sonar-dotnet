@@ -24,7 +24,7 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using SonarAnalyzer.AnalysisContext;
 using SonarAnalyzer.Rules;
 
-namespace SonarAnalyzer.UnitTest.Rules.Utilities
+namespace SonarAnalyzer.Test.Rules.Utilities
 {
     [TestClass]
     public class UtilityAnalyzerBaseTest

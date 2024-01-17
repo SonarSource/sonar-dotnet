@@ -21,11 +21,11 @@
 using SonarAnalyzer.Rules;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
-using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
+using SonarAnalyzer.Test.TestFramework.SymbolicExecution;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.UnitTest.Rules;
+namespace SonarAnalyzer.Test.Rules;
 
 [TestClass]
 public class SymbolicExecutionRunnerTest
@@ -462,7 +462,7 @@ public class Sample
         var compilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).AddSnippet(code).Solution.Compile(ParseOptionsHelper.CSharpLatest.ToArray()).Single();
         var diagnostics = DiagnosticVerifier.GetDiagnosticsIgnoreExceptions(compilation, sut);
         diagnostics.Should().ContainSingle(x => x.Id == "AD0001").Which.GetMessage().Should()
-            .StartWith("Analyzer 'SonarAnalyzer.UnitTest.Rules.SymbolicExecutionRunnerTest+ConfigurableSERunnerCS' threw an exception of type 'SonarAnalyzer.SymbolicExecution.SymbolicExecutionException' with message 'Error processing method: Method ## Method file: snippet1.cs ## Method line: 3,4 ## Inner exception: System.InvalidOperationException: This check is not useful.");
+            .StartWith("Analyzer 'SonarAnalyzer.Test.Rules.SymbolicExecutionRunnerTest+ConfigurableSERunnerCS' threw an exception of type 'SonarAnalyzer.SymbolicExecution.SymbolicExecutionException' with message 'Error processing method: Method ## Method file: snippet1.cs ## Method line: 3,4 ## Inner exception: System.InvalidOperationException: This check is not useful.");
     }
 
     [TestMethod]

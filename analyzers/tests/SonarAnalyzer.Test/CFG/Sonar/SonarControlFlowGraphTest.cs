@@ -24,7 +24,7 @@ using SonarAnalyzer.CFG;
 using SonarAnalyzer.CFG.Sonar;
 using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.UnitTest.CFG.Sonar
+namespace SonarAnalyzer.Test.CFG.Sonar
 {
     [TestClass]
     public class SonarControlFlowGraphTest

@@ -25,7 +25,7 @@ using SonarAnalyzer.Protobuf;
 using static SonarAnalyzer.Rules.CSharp.TokenTypeAnalyzer;
 using Match = System.Text.RegularExpressions.Match;
 
-namespace SonarAnalyzer.UnitTest.Rules;
+namespace SonarAnalyzer.Test.Rules;
 
 public partial class TokenTypeAnalyzerTest
 {
