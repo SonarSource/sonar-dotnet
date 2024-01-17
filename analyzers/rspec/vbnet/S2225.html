@@ -1,7 +1,7 @@
 <h2>Why is this an issue?</h2>
 <p>Calling <a href="https://learn.microsoft.com/en-us/dotnet/api/system.object.tostring">ToString()</a> on an object should always return a
-<code>string</code>. Thus, overriding the ToString method should never return <code>Nothing</code>, as it breaks the method’s implicit contract, and
-as a result the consumer’s expectations.</p>
+<code>string</code>. Thus, overriding the ToString method should never return <code>Nothing</code> because it breaks the method’s implicit contract,
+and as a result the consumer’s expectations.</p>
 <pre data-diff-id="1" data-diff-type="noncompliant">
 Public Overrides Function ToString() As String
     Return Nothing ' Noncompliant
@@ -15,7 +15,7 @@ End Function
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> <a href="https://cwe.mitre.org/data/definitions/476">MITRE, CWE-476</a> - NULL Pointer Dereference </li>
+  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/476">CWE-476 - NULL Pointer Dereference</a> </li>
   <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.object.tostring">Object.ToString Method</a> </li>
 </ul>
 
