@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.Common
 {
-    public class MultiValueDictionary<TKey, TValue> : Dictionary<TKey, ICollection<TValue>>
+    public sealed class MultiValueDictionary<TKey, TValue> : Dictionary<TKey, ICollection<TValue>>
     {
         public static MultiValueDictionary<TKey, TValue> Create<TUnderlying>()
             where TUnderlying : ICollection<TValue>, new() =>
