@@ -173,19 +173,6 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Validation/ModelValidationException.cs#L8",
-"region":  {
-"startLine":  8,
-"startColumn":  18,
-"endLine":  8,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S4027",
-"message":  "Implement the missing constructors for this exception.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/AmbiguousViewsException.cs#L8",
 "region":  {
 "startLine":  8,
