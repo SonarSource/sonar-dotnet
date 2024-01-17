@@ -153,7 +153,7 @@ function Invoke-UnitTests([string]$binPath, [string]$buildConfiguration) {
     & (Get-VsTestPath) $testFiles /Logger:"console;verbosity=minimal" /Parallel /Enablecodecoverage /InIsolation  /TestAdapterPath:$testDirs
     Test-ExitCode "ERROR: Unit Tests execution FAILED."
 
-    $testProjFileName = "tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj"
+    $testProjFileName = "tests\SonarAnalyzer.Test\SonarAnalyzer.Test.csproj"
 
     Write-Header "Running unit tests .NET 6"
     dotnet test $testProjFileName -f net6.0 -v minimal -c $buildConfiguration --no-build --no-restore
