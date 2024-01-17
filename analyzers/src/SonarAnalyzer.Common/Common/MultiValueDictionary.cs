@@ -18,24 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Diagnostics.CodeAnalysis;
-using System.Runtime.Serialization;
-
 namespace SonarAnalyzer.Common
 {
-    [Serializable]
     public class MultiValueDictionary<TKey, TValue> : Dictionary<TKey, ICollection<TValue>>
     {
-        public MultiValueDictionary()
-        {
-        }
-
-        [ExcludeFromCodeCoverage]
-        protected MultiValueDictionary(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
-
         public static MultiValueDictionary<TKey, TValue> Create<TUnderlying>()
             where TUnderlying : ICollection<TValue>, new() =>
             new MultiValueDictionary<TKey, TValue>
@@ -69,12 +55,6 @@ namespace SonarAnalyzer.Common
             {
                 values.Add(addedValue);
             }
-        }
-
-        [ExcludeFromCodeCoverage]
-        public override void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            base.GetObjectData(info, context);
         }
     }
 
