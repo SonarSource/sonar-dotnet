@@ -409,3 +409,16 @@ namespace Repro5430
         }
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8522
+class Repro_8522
+{
+    T Get<T>(params string[] key) => default;
+
+    string Get(string key) => default;
+
+    void Test()
+    {
+        Get<string>("text");    // Noncompliant FP
+    }
+}
