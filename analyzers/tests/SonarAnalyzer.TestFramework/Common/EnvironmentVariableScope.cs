@@ -53,17 +53,9 @@ namespace SonarAnalyzer.Test.Helpers
             Environment.SetEnvironmentVariable(name, value, EnvironmentVariableTarget.Process);
         }
 
-        #region IDispose implementation
-
         public void Dispose()
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        private void Dispose(bool disposing)
-        {
-            if (disposing && originalValues != null)
+            if (originalValues != null)
             {
                 foreach (var kvp in originalValues)
                 {
@@ -72,7 +64,5 @@ namespace SonarAnalyzer.Test.Helpers
                 originalValues = null;
             }
         }
-
-        #endregion IDispose implementation
     }
 }

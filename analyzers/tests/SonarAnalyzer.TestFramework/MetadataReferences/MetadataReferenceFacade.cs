@@ -340,7 +340,7 @@ namespace SonarAnalyzer.Test.MetadataReferences
                     CoreMetadataReference.SystemSecurityAccessControl,
                     CoreMetadataReference.SystemSecurityPrincipalWindows
                 }
-                .Concat(NetStandardMetadataReference.Netstandard);
+                .Concat(MetadataReferenceFactory.NetStandard);
 #endif
     }
 }

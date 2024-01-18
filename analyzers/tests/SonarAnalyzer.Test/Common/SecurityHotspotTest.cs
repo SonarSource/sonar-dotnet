@@ -19,6 +19,7 @@
  */
 
 using SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.Test.PackagingTests;
 using SonarAnalyzer.Test.Rules;
 
 namespace SonarAnalyzer.Test.Common
@@ -65,7 +66,13 @@ namespace SonarAnalyzer.Test.Common
                 .Where(IsSecurityHotspot);
 
         private static bool IsSecurityHotspot(DiagnosticAnalyzer analyzer) =>
-            analyzer.SupportedDiagnostics.Any(TestHelper.IsSecurityHotspot);
+            analyzer.SupportedDiagnostics.Any(IsSecurityHotspot);
+
+        private static bool IsSecurityHotspot(DiagnosticDescriptor diagnostic)
+        {
+            var type = RuleTypeMappingCS.Rules.GetValueOrDefault(diagnostic.Id) ?? RuleTypeMappingVB.Rules.GetValueOrDefault(diagnostic.Id);
+            return type == "SECURITY_HOTSPOT";
+        }
 
         private static string GetTestCaseFileName(string analyzerName) =>
             analyzerName switch

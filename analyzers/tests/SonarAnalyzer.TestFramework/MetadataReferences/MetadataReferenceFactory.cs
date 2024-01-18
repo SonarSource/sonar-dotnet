@@ -22,8 +22,9 @@ using System.IO;
 
 namespace SonarAnalyzer.Test.MetadataReferences
 {
-    internal static class MetadataReferenceFactory
+    public static class MetadataReferenceFactory
     {
+        public static IEnumerable<MetadataReference> NetStandard { get; } = Create("netstandard.dll");
         private static readonly string SystemAssembliesFolder = Path.GetDirectoryName(typeof(object).Assembly.Location);
 
         public static IEnumerable<MetadataReference> Create(string assemblyName) =>

@@ -18,13 +18,32 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using FluentAssertions.Primitives;
+using System.Globalization;
 
 namespace SonarAnalyzer.Test.Helpers
 {
-    internal static class FluentTestHelper
+    public sealed class CurrentCultureScope : IDisposable
     {
-        public static void BeIgnoringLineEndings(this StringAssertions stringAssertions, string expected) =>
-            stringAssertions.Subject.ToUnixLineEndings().Should().Be(expected.ToUnixLineEndings());
+        private readonly CultureInfo oldCulture;
+        private readonly CultureInfo oldUiCulture;
+
+        public CurrentCultureScope() : this(CultureInfo.InvariantCulture) { }
+        public CurrentCultureScope(string culture) : this(new CultureInfo(culture)) { }
+
+        public CurrentCultureScope(CultureInfo culture)
+        {
+            var thread = Thread.CurrentThread;
+            oldCulture = thread.CurrentCulture;
+            oldUiCulture = thread.CurrentUICulture;
+            thread.CurrentCulture = culture;
+            thread.CurrentUICulture = culture;
+        }
+
+        public void Dispose()
+        {
+            var thread = Thread.CurrentThread;
+            thread.CurrentCulture = oldCulture;
+            thread.CurrentUICulture = oldUiCulture;
+        }
     }
 }

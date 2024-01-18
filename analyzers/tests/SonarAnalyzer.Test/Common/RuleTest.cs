@@ -26,6 +26,7 @@ using SonarAnalyzer.AnalysisContext;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 using SonarAnalyzer.Test.Helpers;
+using SonarAnalyzer.Test.PackagingTests;
 
 namespace SonarAnalyzer.Test.Common
 {
@@ -150,7 +151,7 @@ namespace SonarAnalyzer.Test.Common
                 .Where(RuleFinder.IsParameterized)
                 .Select(type => (DiagnosticAnalyzer)Activator.CreateInstance(type))
                 .SelectMany(analyzer => analyzer.SupportedDiagnostics)
-                .Where(analyzer => !TestHelper.IsSecurityHotspot(analyzer))
+                .Where(analyzer => !IsSecurityHotspot(analyzer))
                 .ToList()
                 .ForEach(diagnostic => diagnostic.IsEnabledByDefault.Should().BeFalse());
 
@@ -172,7 +173,7 @@ namespace SonarAnalyzer.Test.Common
             var descriptors = RuleFinder.RuleAnalyzerTypes.SelectMany(SupportedDiagnostics)
                 // Security hotspots are enabled by default, but they will report issues only
                 // when their ID is contained in SonarLint.xml
-                .Where(descriptor => !TestHelper.IsSecurityHotspot(descriptor));
+                .Where(descriptor => !IsSecurityHotspot(descriptor));
 
             foreach (var descriptor in descriptors)
             {
@@ -228,7 +229,7 @@ namespace SonarAnalyzer.Test.Common
 
             foreach (var diagnostic in RuleFinder.RuleAnalyzerTypes.SelectMany(SupportedDiagnostics))
             {
-                if (TestHelper.IsSecurityHotspot(diagnostic))
+                if (IsSecurityHotspot(diagnostic))
                 {
                     // Security hotspots are enabled by default, but they will report issues only when their ID is contained in SonarLint.xml
                     // DiagnosticDescriptorFactory adds WellKnownDiagnosticTags.NotConfigurable to prevent rule supression and deactivation.
@@ -339,7 +340,6 @@ namespace SonarAnalyzer.Test.Common
             UnchangedFiles_Verify(builder, unchangedFileName, expectEmptyResults);
         }
 
-        [AssertionMethod]
         private static void AllRulesAreConfigurable(AnalyzerLanguage language)
         {
             foreach (var diagnostic in SupportedDiagnostics(language))
@@ -401,6 +401,12 @@ namespace SonarAnalyzer.Test.Common
 
             var diagnostics = DiagnosticVerifier.GetAnalyzerDiagnostics(compilation, diagnosticAnalyzers, checkMode);
             DiagnosticVerifier.VerifyNoExceptionThrown(diagnostics);
+        }
+
+        private static bool IsSecurityHotspot(DiagnosticDescriptor diagnostic)
+        {
+            var type = RuleTypeMappingCS.Rules.GetValueOrDefault(diagnostic.Id) ?? RuleTypeMappingVB.Rules.GetValueOrDefault(diagnostic.Id);
+            return type == "SECURITY_HOTSPOT";
         }
 
         [DiagnosticAnalyzer(LanguageNames.CSharp)]

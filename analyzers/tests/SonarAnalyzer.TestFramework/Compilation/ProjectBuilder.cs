@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Test.TestFramework
             }
             if (references.Any(x => x.Display.Contains("\\netstandard")))
             {
-                references = references.Concat(NetStandardMetadataReference.Netstandard);
+                references = references.Concat(MetadataReferenceFactory.NetStandard);
             }
             var existingReferences = project.MetadataReferences.ToHashSet();
             return FromProject(project.AddMetadataReferences(references.Distinct().Where(x => !existingReferences.Contains(x))));

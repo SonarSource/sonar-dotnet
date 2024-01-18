@@ -18,6 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Helpers;
+using System.Linq;
 using static SonarAnalyzer.Test.MetadataReferences.NuGetMetadataFactory;
 using References = System.Collections.Generic.IEnumerable<Microsoft.CodeAnalysis.MetadataReference>;
 
@@ -163,5 +166,10 @@ namespace SonarAnalyzer.Test.MetadataReferences
         public static References XunitFramework(string packageVersion) =>
             Create("xunit.assert", packageVersion)
             .Concat(Create("xunit.extensibility.core", packageVersion));
+
+        public static References ProjectTypeReference(ProjectType projectType) =>
+            projectType == ProjectType.Test
+                ? MSTestTestFrameworkV1  // Any reference to detect a test project
+                : Enumerable.Empty<MetadataReference>();
     }
 }

@@ -23,7 +23,6 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.CFG;
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.Extensions;
-using SonarAnalyzer.Test.PackagingTests;
 using StyleCop.Analyzers.Lightup;
 using CS = Microsoft.CodeAnalysis.CSharp;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
@@ -112,17 +111,6 @@ End Class", AnalyzerLanguage.VisualBasic);
                     ? node.RawKind == (int)CS.SyntaxKind.MethodDeclaration
                     : node.RawKind == (int)VB.SyntaxKind.FunctionBlock || node.RawKind == (int)VB.SyntaxKind.SubBlock;
         }
-
-        public static bool IsSecurityHotspot(DiagnosticDescriptor diagnostic)
-        {
-            var type = RuleTypeMappingCS.Rules.GetValueOrDefault(diagnostic.Id) ?? RuleTypeMappingVB.Rules.GetValueOrDefault(diagnostic.Id);
-            return type == "SECURITY_HOTSPOT";
-        }
-
-        public static IEnumerable<MetadataReference> ProjectTypeReference(ProjectType projectType) =>
-            projectType == ProjectType.Test
-                ? NuGetMetadataReference.MSTestTestFrameworkV1  // Any reference to detect a test project
-                : Enumerable.Empty<MetadataReference>();
 
         public static string Serialize(IOperationWrapperSonar operation)
         {
