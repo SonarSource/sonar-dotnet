@@ -105,7 +105,7 @@ public class Foo
     [Microsoft.AspNetCore.Mvc.NonActionAttribute]
     public void PublicNonAction() { }
 }";
-            var compilation = TestHelper.CompileCS(code, NetStandardMetadataReference.Netstandard.Union(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetMvcVersion)).ToArray())
+            var compilation = TestHelper.CompileCS(code, MetadataReferenceFacade.NetStandard.Union(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetMvcVersion)).ToArray())
                 .Model
                 .Compilation;
             var publicFoo = GetMethodSymbol(compilation, "PublicFoo");
@@ -126,7 +126,7 @@ public class Foo : Microsoft.AspNetCore.Mvc.ControllerBase
 {
     public void PublicFoo() { }
 }";
-            var compilation = TestHelper.CompileCS(code, NetStandardMetadataReference.Netstandard.Union(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetMvcVersion)).ToArray())
+            var compilation = TestHelper.CompileCS(code, MetadataReferenceFacade.NetStandard.Union(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetMvcVersion)).ToArray())
                 .Model
                 .Compilation;
             var publicFoo = GetMethodSymbol(compilation, "PublicFoo");
@@ -145,7 +145,7 @@ public class Foo : Microsoft.AspNetCore.Mvc.ControllerBase
 {
         public Foo() { }
 }";
-            var (tree, semanticModel) = TestHelper.CompileCS(code, NetStandardMetadataReference.Netstandard.Union(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetMvcVersion)).ToArray());
+            var (tree, semanticModel) = TestHelper.CompileCS(code, MetadataReferenceFacade.NetStandard.Union(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetMvcVersion)).ToArray());
             var methodSymbol = semanticModel.GetDeclaredSymbol(tree.Single<ConstructorDeclarationSyntax>()) as IMethodSymbol;
             methodSymbol.IsControllerMethod().Should().Be(false);
         }

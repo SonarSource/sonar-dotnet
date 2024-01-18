@@ -26,7 +26,7 @@ using References = System.Collections.Generic.IEnumerable<Microsoft.CodeAnalysis
 
 namespace SonarAnalyzer.Test.MetadataReferences
 {
-    internal static class NuGetMetadataReference
+    public static class NuGetMetadataReference
     {
 #pragma warning disable S103 // Lines should not be too long
         // Hardcoded version
@@ -166,10 +166,5 @@ namespace SonarAnalyzer.Test.MetadataReferences
         public static References XunitFramework(string packageVersion) =>
             Create("xunit.assert", packageVersion)
             .Concat(Create("xunit.extensibility.core", packageVersion));
-
-        public static References ProjectTypeReference(ProjectType projectType) =>
-            projectType == ProjectType.Test
-                ? MSTestTestFrameworkV1  // Any reference to detect a test project
-                : Enumerable.Empty<MetadataReference>();
     }
 }

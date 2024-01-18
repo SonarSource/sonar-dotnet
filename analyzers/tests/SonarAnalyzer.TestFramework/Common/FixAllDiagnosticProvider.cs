@@ -22,7 +22,7 @@ using Microsoft.CodeAnalysis.CodeFixes;
 
 namespace SonarAnalyzer.Test
 {
-    internal class FixAllDiagnosticProvider : FixAllContext.DiagnosticProvider
+    public class FixAllDiagnosticProvider : FixAllContext.DiagnosticProvider
     {
         private readonly IEnumerable<Diagnostic> diagnostics;
 

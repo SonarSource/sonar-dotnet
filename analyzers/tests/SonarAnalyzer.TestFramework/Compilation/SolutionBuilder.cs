@@ -23,7 +23,7 @@ using Microsoft.CodeAnalysis.VisualBasic;
 
 namespace SonarAnalyzer.Test.TestFramework
 {
-    internal readonly struct SolutionBuilder
+    public readonly struct SolutionBuilder
     {
         private const string GeneratedAssemblyName = "project";
 

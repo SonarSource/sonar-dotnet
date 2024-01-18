@@ -83,7 +83,7 @@ namespace SonarAnalyzer.Test.Rules
 
         internal static IEnumerable<MetadataReference> AdditionalReferencesForAspNetCore2 =>
             Enumerable.Empty<MetadataReference>()
-                      .Concat(NetStandardMetadataReference.Netstandard)
+                      .Concat(MetadataReferenceFacade.NetStandard)
                       .Concat(NuGetMetadataReference.MicrosoftAspNetCoreDiagnostics(Constants.DotNetCore220Version))
                       .Concat(NuGetMetadataReference.MicrosoftAspNetCoreDiagnosticsEntityFrameworkCore(Constants.DotNetCore220Version))
                       .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpAbstractions(Constants.DotNetCore220Version))

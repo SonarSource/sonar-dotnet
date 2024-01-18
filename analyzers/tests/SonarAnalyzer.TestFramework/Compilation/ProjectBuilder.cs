@@ -23,7 +23,7 @@ using System.Text;
 
 namespace SonarAnalyzer.Test.TestFramework
 {
-    internal readonly struct ProjectBuilder
+    public readonly struct ProjectBuilder
     {
         private readonly Lazy<SolutionBuilder> solution;
         private readonly Project project;
@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Test.TestFramework
             }
             if (references.Any(x => x.Display.Contains("\\netstandard")))
             {
-                references = references.Concat(MetadataReferenceFactory.NetStandard);
+                references = references.Concat(MetadataReferenceFacade.NetStandard);
             }
             var existingReferences = project.MetadataReferences.ToHashSet();
             return FromProject(project.AddMetadataReferences(references.Distinct().Where(x => !existingReferences.Contains(x))));

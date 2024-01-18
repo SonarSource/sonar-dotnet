@@ -79,7 +79,7 @@ namespace SonarAnalyzer.Test.TestFramework
         internal static IEnumerable<IIssueLocation> GetExpectedBuildErrors(IEnumerable<TextLine> lines) =>
             lines?.SelectMany(GetBuildErrorsLocations) ?? Enumerable.Empty<IIssueLocation>();
 
-        internal static /*for testing*/ IList<IIssueLocation> MergeLocations(IssueLocation[] locations, IssueLocation[] preciseLocations)
+        internal static IList<IIssueLocation> MergeLocations(IssueLocation[] locations, IssueLocation[] preciseLocations)
         {
             var usedLocations = new List<IssueLocation>();
             foreach (var location in locations)

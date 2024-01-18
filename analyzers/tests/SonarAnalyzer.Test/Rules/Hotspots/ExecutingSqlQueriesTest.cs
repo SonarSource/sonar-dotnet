@@ -63,13 +63,13 @@ namespace SonarAnalyzer.Test.Rules
                 .Verify();
 
         internal static IEnumerable<MetadataReference> GetReferencesNet46(string sqlServerCeVersion) =>
-            NetStandardMetadataReference.Netstandard
-                                        .Concat(FrameworkMetadataReference.SystemData)
-                                        .Concat(FrameworkMetadataReference.SystemDataOracleClient)
-                                        .Concat(NuGetMetadataReference.SystemDataSqlServerCe(sqlServerCeVersion))
-                                        .Concat(NuGetMetadataReference.MySqlData("8.0.22"))
-                                        .Concat(NuGetMetadataReference.MicrosoftDataSqliteCore())
-                                        .Concat(NuGetMetadataReference.SystemDataSQLiteCore());
+            MetadataReferenceFacade.NetStandard
+                .Concat(FrameworkMetadataReference.SystemData)
+                .Concat(FrameworkMetadataReference.SystemDataOracleClient)
+                .Concat(NuGetMetadataReference.SystemDataSqlServerCe(sqlServerCeVersion))
+                .Concat(NuGetMetadataReference.MySqlData("8.0.22"))
+                .Concat(NuGetMetadataReference.MicrosoftDataSqliteCore())
+                .Concat(NuGetMetadataReference.SystemDataSQLiteCore());
 
 #else
 

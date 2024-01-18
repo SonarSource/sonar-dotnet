@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Test.Rules
         private static readonly VerifierBuilder WithReferences = new VerifierBuilder()
             .AddReferences(MetadataReferenceFacade.SystemNetHttp)
             .AddReferences(MetadataReferenceFacade.SystemSecurityCryptography)
-            .AddReferences(NetStandardMetadataReference.Netstandard);
+            .AddReferences(MetadataReferenceFacade.NetStandard);
         private readonly VerifierBuilder builderCS = WithReferences.AddAnalyzer(() => new CS.CertificateValidationCheck());
         private readonly VerifierBuilder builderVB = WithReferences.AddAnalyzer(() => new VB.CertificateValidationCheck());
 

@@ -47,7 +47,7 @@ public partial class SonarAnalysisContextTest
             Analyzer = analyzer;
             additionalReferences = additionalReferences
                 .Concat(MetadataReferenceFacade.SystemComponentModelPrimitives)
-                .Concat(NetStandardMetadataReference.Netstandard)
+                .Concat(MetadataReferenceFacade.NetStandard)
                 .Concat(MetadataReferenceFacade.SystemData);
             Builder = new VerifierBuilder().AddAnalyzer(() => analyzer).AddPaths(Path).AddReferences(additionalReferences);
         }
