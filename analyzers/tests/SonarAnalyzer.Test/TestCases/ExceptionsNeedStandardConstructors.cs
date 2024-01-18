@@ -22,7 +22,7 @@ namespace MyLibrary
         My_01_Exception(SerializationInfo info, StreamingContext context) {}
     }
 
-    public class My_02_Exception : Exception // Noncompliant
+    public class My_02_Exception : Exception // Compliant
     {
         public My_02_Exception() { }
 
@@ -30,10 +30,10 @@ namespace MyLibrary
 
         public My_02_Exception(string message, Exception innerException) { }
 
-        public My_02_Exception(SerializationInfo info, StreamingContext context) { }
+        public My_02_Exception(SerializationInfo info, StreamingContext context) { } // optional serialization constructor (should be protected)
     }
 
-    public class My_03_Exception : Exception // Noncompliant
+    public class My_03_Exception : Exception // Compliant
     {
         public My_03_Exception() { }
 
@@ -41,10 +41,10 @@ namespace MyLibrary
 
         public My_03_Exception(string message, Exception innerException) { }
 
-        private My_03_Exception(SerializationInfo info, StreamingContext context) { }
+        private My_03_Exception(SerializationInfo info, StreamingContext context) { }  // optional serialization constructor (should be protected)
     }
 
-    public sealed class My_04_Exception : Exception // Noncompliant
+    public sealed class My_04_Exception : Exception // Compliant
     {
         public My_04_Exception() { }
 
@@ -52,7 +52,7 @@ namespace MyLibrary
 
         public My_04_Exception(string message, Exception innerException) { }
 
-        protected My_04_Exception(SerializationInfo info, StreamingContext context) { }
+        protected My_04_Exception(SerializationInfo info, StreamingContext context) { }  // optional serialization constructor (should be private)
     }
 
     public sealed class My_05_Exception : Exception
@@ -66,7 +66,7 @@ namespace MyLibrary
         private My_05_Exception(SerializationInfo info, StreamingContext context) { }
     }
 
-    public sealed class My_06_Exception : Exception // Noncompliant
+    public sealed class My_06_Exception : Exception // Compliant
     {
         public My_06_Exception() { }
 
@@ -74,6 +74,6 @@ namespace MyLibrary
 
         public My_06_Exception(string message, Exception innerException) { }
 
-        public My_06_Exception(SerializationInfo info, StreamingContext context) { }
+        public My_06_Exception(SerializationInfo info, StreamingContext context) { } // optional serialization constructor (should be protected)
     }
 }

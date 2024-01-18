@@ -53,11 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             return HasConstructor(ctors, Accessibility.Public) &&
                    HasConstructor(ctors, Accessibility.Public, KnownType.System_String) &&
-                   HasConstructor(ctors, Accessibility.Public, KnownType.System_String, KnownType.System_Exception) &&
-                   HasConstructor(ctors,
-                       classSymbol.IsSealed ? Accessibility.Private : Accessibility.Protected,
-                       KnownType.System_Runtime_Serialization_SerializationInfo,
-                       KnownType.System_Runtime_Serialization_StreamingContext);
+                   HasConstructor(ctors, Accessibility.Public, KnownType.System_String, KnownType.System_Exception);
         }
 
         private static bool HasConstructor(ImmutableArray<IMethodSymbol> constructors,
