@@ -146,8 +146,6 @@ Then, update the projects to include this additional file:
 
 ### Build configuration
 
-* [CI Infrastructure](https://github.com/SonarSource/re-ci-infrastructure)
-* [CI Infrastructure docs](https://github.com/SonarSource/re-ci-infrastructure/blob/master/languages-dotnet/README.md)
 * [VM Images repository](https://github.com/SonarSource/re-ci-images)
 * [Provisioning repository](https://github.com/SonarSource/dotnet-infra/blob/main/src/dotnet_infra/constructs/asg.py)
 * [Azure Pipelines](https://sonarsource.visualstudio.com/DotNetTeam%20Project/_build?definitionId=77&_a=summary)
