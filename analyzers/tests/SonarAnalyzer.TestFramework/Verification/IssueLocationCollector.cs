@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Diagnostics;
 using System.Text.RegularExpressions;
 using FluentAssertions.Execution;
 using Microsoft.CodeAnalysis.Text;
@@ -42,14 +41,14 @@ namespace SonarAnalyzer.Test.TestFramework
         private const string MessagePattern = @"(\s*\{\{(?<message>.+)\}\})?";
 
         internal static readonly Regex RxIssue =
-            new(CommentPattern + NoPrecisePositionPattern + IssueTypePattern + OffsetPattern + ExactColumnPattern + IssueIdsPattern + MessagePattern, RegexOptions.Compiled);
+            CreateRegex(CommentPattern + NoPrecisePositionPattern + IssueTypePattern + OffsetPattern + ExactColumnPattern + IssueIdsPattern + MessagePattern);
 
         internal static readonly Regex RxPreciseLocation =
-            new(@"^\s*" + CommentPattern + PrecisePositionPattern + IssueTypePattern + "?" + OffsetPattern + IssueIdsPattern + MessagePattern + @"\s*(-->|\*/|\*@)?$", RegexOptions.Compiled);
+            CreateRegex(@"^\s*" + CommentPattern + PrecisePositionPattern + IssueTypePattern + "?" + OffsetPattern + IssueIdsPattern + MessagePattern + @"\s*(-->|\*/|\*@)?$");
 
-        private static readonly Regex RxBuildError = new(CommentPattern + ErrorTypePattern + OffsetPattern + ExactColumnPattern + IssueIdsPattern, RegexOptions.Compiled);
-        private static readonly Regex RxInvalidType = new(CommentPattern + ".*" + IssueTypePattern, RegexOptions.Compiled);
-        private static readonly Regex RxInvalidPreciseLocation = new(@"^\s*" + CommentPattern + ".*" + PrecisePositionPattern, RegexOptions.Compiled);
+        private static readonly Regex RxBuildError = CreateRegex(CommentPattern + ErrorTypePattern + OffsetPattern + ExactColumnPattern + IssueIdsPattern);
+        private static readonly Regex RxInvalidType = CreateRegex(CommentPattern + ".*" + IssueTypePattern);
+        private static readonly Regex RxInvalidPreciseLocation = CreateRegex(@"^\s*" + CommentPattern + ".*" + PrecisePositionPattern);
 
         public static IList<IIssueLocation> GetExpectedIssueLocations(IEnumerable<TextLine> lines)
         {
@@ -247,6 +246,9 @@ internal class MyClass : IInterface1 // there should be no Noncompliant comment
                          ^^^^^^^^^^^ @-1 {{IInterface1 is bad for your health.}}";
             throw new InvalidOperationException(message);
         }
+
+        private static Regex CreateRegex(string pattern) =>
+            new Regex(pattern, RegexOptions.Compiled, RegexConstants.DefaultTimeout);
 
         [DebuggerDisplay("ID:{IssueId} @{LineNumber} Primary:{IsPrimary} Start:{Start} Length:{Length} '{Message}'")]
         internal class IssueLocation : IIssueLocation
