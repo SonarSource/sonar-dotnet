@@ -122,21 +122,29 @@ namespace Tests.Diagnostics
     }
 
     // https://github.com/SonarSource/sonar-dotnet/issues/7904
-    public sealed record Repro_7904
+    public class Repro_7904
     {
-        // Used by the runtime to create a string representation of the record.
-        // See also https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/record#printmembers-formatting-in-derived-records
-        private bool PrintMembers(StringBuilder builder) // Noncompliant FP
+        public sealed record RecordWithPrintMembers
         {
-            return true;
-        }
-    }
+            // Used by the runtime to create a string representation of the record.
+            // See also https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/record#printmembers-formatting-in-derived-records
+            private bool PrintMembers(StringBuilder builder) => true;   // Compliant
 
-    public class Repro_7904_2
-    {
-        private bool PrintMembers(StringBuilder builder) // Noncompliant
+            private int PrintMembers(int arg) => 42;                    // Noncompliant - different return type
+            private bool PrintMembers() => false;                       // Noncompliant - different parameter list
+            private bool PrintMembers(string arg) => false;             // Noncompliant - different parameter list
+
+            public bool MethodWithLocalFunction()
+            {
+                return false;
+
+                bool PrintMembers(StringBuilder builder) => true;       // FN - local functions are not handled
+            }
+        }
+
+        public class ClassWithPrintMembers
         {
-            return true;
+            private bool PrintMembers(StringBuilder builder) => true;   // Noncompliant - not a record
         }
     }
 }

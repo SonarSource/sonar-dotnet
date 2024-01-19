@@ -496,7 +496,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 && (methodSymbol.MethodKind == MethodKind.Ordinary || methodSymbol.MethodKind == MethodKind.Constructor)
                 && !methodSymbol.IsMainMethod()
                 && (!methodSymbol.IsEventHandler() || !IsDeclaredInPartialClass(methodSymbol)) // Event handlers could be added in XAML and no method reference will be generated in the .g.cs file.
-                && !methodSymbol.IsSerializationConstructor();
+                && !methodSymbol.IsSerializationConstructor()
+                && !methodSymbol.IsRecordPrintMembers();
 
             private static bool IsRemovable(ISymbol symbol) =>
                 symbol is { IsImplicitlyDeclared: false, IsVirtual: false }

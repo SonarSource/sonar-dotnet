@@ -64,6 +64,10 @@ namespace SonarAnalyzer.Test.Helpers
             KnownMethods.IsArrayClone(null).Should().BeFalse();
 
         [TestMethod]
+        public void IsRecordPrintMembers_Null_ShouldBeFalse() =>
+            KnownMethods.IsRecordPrintMembers(null).Should().BeFalse();
+
+        [TestMethod]
         public void IsGcSuppressFinalize_Null_ShouldBeFalse() =>
             KnownMethods.IsGcSuppressFinalize(null).Should().BeFalse();
 
