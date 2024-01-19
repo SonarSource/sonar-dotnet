@@ -1,6 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <!-- The -windows suffix is needed because SonarAnalyzer.TestFramework references Microsoft.WindowsDesktop.App.WindowsForms framework reference. -->
+    <TargetFrameworks>net48;net7.0-windows</TargetFrameworks>
     <IsPackable>false</IsPackable>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
@@ -13,8 +15,6 @@
       - NuGet.Core 2.14.0 (net40-client)
       -->
     <AssetTargetFallback>$(AssetTargetFallback);net40-client;portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
-    <ProjectGuid>{e11606ca-a186-4fee-ba30-b1688747cd1a}</ProjectGuid>
-    <TargetFrameworks>net48;net7.0</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' != 'net48'">
@@ -61,6 +61,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SonarAnalyzer.TestFramework\SonarAnalyzer.TestFramework.csproj" />
     <ProjectReference Include="..\..\src\SonarAnalyzer.CFG\SonarAnalyzer.CFG.csproj" />
     <ProjectReference Include="..\..\src\SonarAnalyzer.Common\SonarAnalyzer.Common.csproj" />
     <ProjectReference Include="..\..\src\SonarAnalyzer.CSharp\SonarAnalyzer.CSharp.csproj">
