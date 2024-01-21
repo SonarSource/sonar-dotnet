@@ -64,5 +64,8 @@ public sealed class UseStringCreate : SonarDiagnosticAnalyzer
 
     private static bool CompilationTargetsValidNetVersion(Compilation compilation) =>
         compilation.GetTypeByMetadataName(KnownType.System_String) is var stringType
-        && stringType.GetMembers("Create").Any(x => x is IMethodSymbol);
+        && stringType.GetMembers("Create")
+            .Any(x => x is IMethodSymbol createMethod
+                      && createMethod.Parameters.FirstOrDefault() is { } parameter
+                      && parameter.Type.Is(KnownType.System_IFormatProvider));
 }
