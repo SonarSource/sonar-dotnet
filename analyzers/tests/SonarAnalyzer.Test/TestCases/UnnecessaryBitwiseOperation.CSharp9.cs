@@ -105,5 +105,11 @@ public class CSharp8
         // Not passed by ref
         _ = Convert.ToString(bytes8);
         _ = bytes8 | 0x80; // Noncompliant
+
+        var bytes9 = 0;
+        var otherBytes = 0;
+        // Other variable passed
+        Interlocked.Increment(ref otherBytes);
+        _ = bytes9 | 0x80; // Noncompliant
     }
 }
