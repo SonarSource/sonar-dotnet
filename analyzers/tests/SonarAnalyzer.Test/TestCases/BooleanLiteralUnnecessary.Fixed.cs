@@ -214,4 +214,14 @@ namespace Tests.Diagnostics
             if (cond) { } // Fixed
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/7792
+    class ObjectIsBool
+    {
+        void Method(object obj, Exception exc)
+        {
+            if (obj is true) { }
+            if (exc.Data["SomeKey"] is true) { }
+        }
+    }
 }

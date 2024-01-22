@@ -182,8 +182,8 @@ Public Class BooleanLiteralUnnecessary
   End Sub
 
   Function BooleanMethod() As Boolean
-    Return True 
-  End Function
+        Return True
+    End Function
 
 End Class
 
@@ -219,4 +219,14 @@ Public Class Repro
     Public Function SomeMethod2() As Boolean
         Return True
     End Function
+End Class
+
+' https://github.com/SonarSource/sonar-dotnet/issues/7792
+Class ObjectIsBool
+    Sub Method(obj As Object, exc As Exception)
+        If obj = True Then
+        End If
+        If exc.Data("SomeKey") = True Then
+        End If
+    End Sub
 End Class
