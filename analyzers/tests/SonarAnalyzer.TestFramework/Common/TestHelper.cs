@@ -19,7 +19,6 @@
  */
 
 using System.IO;
-using System.Security.Cryptography.Xml;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.CFG;
 using SonarAnalyzer.CFG.Roslyn;

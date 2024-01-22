@@ -22,12 +22,12 @@ using System.IO;
 
 namespace SonarAnalyzer.Test.TestFramework
 {
-    internal sealed class LogTester : IDisposable
+    public sealed class LogTester : IDisposable
     {
         private readonly TextWriter originalOut;
         private readonly TextWriter originalError;
-        private readonly StringWriter outWriter = new ();
-        private readonly StringWriter errorWriter = new ();
+        private readonly StringWriter outWriter = new();
+        private readonly StringWriter errorWriter = new();
 
         public LogTester()
         {
