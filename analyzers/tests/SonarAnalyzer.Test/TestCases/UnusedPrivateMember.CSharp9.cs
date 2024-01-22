@@ -122,14 +122,34 @@ namespace Tests.Diagnostics
     }
 
     // https://github.com/SonarSource/sonar-dotnet/issues/7904
+    // In record types PrintMembers is used by the runtime to create a string representation of the record.
+    // See also https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/record#printmembers-formatting-in-derived-records
     public class Repro_7904
     {
-        public sealed record RecordWithPrintMembers
-        {
-            // Used by the runtime to create a string representation of the record.
-            // See also https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/record#printmembers-formatting-in-derived-records
-            private bool PrintMembers(StringBuilder builder) => true;   // Compliant
+        public record BaseRecord(int Value);
 
+        public record NoBaseRecord
+        {
+            protected virtual bool PrintMembers(StringBuilder builder) => true;     // Compliant
+        }
+
+        public record HasBaseRecord() : BaseRecord(42)
+        {
+            protected override bool PrintMembers(StringBuilder builder) => true;    // Compliant
+        }
+
+        public sealed record SealedWithNoBaseRecord
+        {
+            private bool PrintMembers(StringBuilder builder) => true;               // Compliant
+        }
+
+        public sealed record SealedWithBaseRecord() : BaseRecord(42)
+        {
+            protected override bool PrintMembers(StringBuilder builder) => true;   // Compliant
+        }
+
+        public sealed record NonMatchingPrintMembers
+        {
             private int PrintMembers(int arg) => 42;                    // Noncompliant - different return type
             private bool PrintMembers() => false;                       // Noncompliant - different parameter list
             private bool PrintMembers(string arg) => false;             // Noncompliant - different parameter list

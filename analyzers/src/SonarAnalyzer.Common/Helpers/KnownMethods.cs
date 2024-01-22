@@ -143,11 +143,13 @@ public static class KnownMethods
         && methodSymbol.ContainingType.Is(KnownType.System_Array);
 
     public static bool IsRecordPrintMembers(this IMethodSymbol methodSymbol) =>
-        methodSymbol != null
-        && methodSymbol.MethodKind == MethodKind.Ordinary
-        && methodSymbol.Name == "PrintMembers"
-        && methodSymbol.ReturnType.Is(KnownType.System_Boolean)
-        && methodSymbol.Parameters.Length == 1
+        methodSymbol is
+        {
+            MethodKind: MethodKind.Ordinary,
+            Name: "PrintMembers",
+            ReturnType.SpecialType: SpecialType.System_Boolean,
+            Parameters.Length: 1,
+        }
         && methodSymbol.Parameters[0].Type.Is(KnownType.System_Text_StringBuilder)
         && methodSymbol.ContainingType.IsRecord();
 
