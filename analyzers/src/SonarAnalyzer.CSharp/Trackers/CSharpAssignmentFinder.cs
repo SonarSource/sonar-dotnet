@@ -44,6 +44,7 @@ namespace SonarAnalyzer.Helpers
                         when assignment.MapAssignmentArguments().FirstOrDefault(x => x.Left.NameIs(identifierName)) is { Right: { } right } => right,
                     PostfixUnaryExpressionSyntax unary when unary.Operand.NameIs(identifierName) => unary.Operand,
                     PrefixUnaryExpressionSyntax unary when unary.Operand.NameIs(identifierName) => unary.Operand,
+                    // Passing by ref is likely mutating the argument so we assume it is assigned a value in the called method.
                     ArgumentSyntax { RefOrOutKeyword.RawKind: (int)SyntaxKind.RefKeyword, Expression: { } argumentExpression } when argumentExpression.NameIs(identifierName) => argumentExpression,
                     _ => null,
                 } is { } assignedTo)
