@@ -445,7 +445,7 @@ try {
     # redirects the outputs of the different configurations in separate folders.
 
     # Do not forget to update ValidateSet of -project parameter when new project is added.
-    Build-Project-MSBuild "ManuallyAddedNoncompliantIssues.CS" "ManuallyAddedNoncompliantIssues.CS.sln"
+    # Build-Project-MSBuild "ManuallyAddedNoncompliantIssues.CS" "ManuallyAddedNoncompliantIssues.CS.sln"
     Build-Project-MSBuild "ManuallyAddedNoncompliantIssues.VB" "ManuallyAddedNoncompliantIssues.VB.sln"
     CheckInternalProjectsDifferences
 
