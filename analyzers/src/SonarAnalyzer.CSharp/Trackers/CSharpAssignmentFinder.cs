@@ -40,7 +40,8 @@ namespace SonarAnalyzer.Helpers
             if ((anyAssignmentKind || node.IsKind(SyntaxKind.SimpleAssignmentExpression))
                 && node switch
                 {
-                    AssignmentExpressionSyntax assignment when assignment.MapAssignmentArguments().FirstOrDefault(x => x.Left.NameIs(identifierName)) is { Left: not null, Right: not null } assignmentTarget => assignmentTarget.Right,
+                    AssignmentExpressionSyntax assignment
+                        when assignment.MapAssignmentArguments().FirstOrDefault(x => x.Left.NameIs(identifierName)) is { Right: { } right } => right,
                     PostfixUnaryExpressionSyntax unary when unary.Operand.NameIs(identifierName) => unary.Operand,
                     PrefixUnaryExpressionSyntax unary when unary.Operand.NameIs(identifierName) => unary.Operand,
                     _ => null,
