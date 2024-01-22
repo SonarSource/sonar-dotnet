@@ -102,6 +102,10 @@ public class EmptyCollectionsShouldNotBeEnumeratedTest
     public void EmptyCollectionsShouldNotBeEnumerated_Roslyn_CSharp11() =>
         roslynCS.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
 
+    [TestMethod]
+    public void EmptyCollectionsShouldNotBeEnumerated_Roslyn_CSharp12() =>
+        roslynCS.AddPaths("EmptyCollectionsShouldNotBeEnumerated.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
+
 #endif
 
 }
