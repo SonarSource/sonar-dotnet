@@ -33,6 +33,17 @@ namespace SonarAnalyzer.Test.Rules
         public void UnnecessaryBitwiseOperation_CS() =>
             builderCS.AddPaths("UnnecessaryBitwiseOperation.cs").Verify();
 
+        [TestMethod]
+        public void UnnecessaryBitwiseOperation_CS1() =>
+            builderCS.AddSnippet("""
+            void TupleAssignment()
+            {
+                var i = 0;
+                (i, _) = (1, 1);
+                _ = i | 0x80;
+            }
+            """).WithTopLevelStatements().Verify();
+
 #if NET
 
         [TestMethod]

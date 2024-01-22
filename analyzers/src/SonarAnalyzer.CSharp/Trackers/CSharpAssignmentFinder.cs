@@ -38,10 +38,15 @@ namespace SonarAnalyzer.Helpers
                 node = statement.Expression;
             }
             if ((anyAssignmentKind || node.IsKind(SyntaxKind.SimpleAssignmentExpression))
-                && node is AssignmentExpressionSyntax assignment
-                && assignment.Left.NameIs(identifierName))
+                && node switch
+                {
+                    AssignmentExpressionSyntax assignment when assignment.MapAssignmentArguments().FirstOrDefault(x => x.Left.NameIs(identifierName)) is { Left: not null, Right: not null } assignmentTarget => assignmentTarget.Right,
+                    PostfixUnaryExpressionSyntax unary when unary.Operand.NameIs(identifierName) => unary.Operand,
+                    PrefixUnaryExpressionSyntax unary when unary.Operand.NameIs(identifierName) => unary.Operand,
+                    _ => null,
+                } is { } assignedTo)
             {
-                rightExpression = assignment.Right;
+                rightExpression = assignedTo;
                 return true;
             }
             rightExpression = null;

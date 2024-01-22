@@ -62,4 +62,11 @@ public class CSharp8
         }
         unchanged = 1;
     }
+
+    public void TupleAssignment()
+    {
+        var i = 0;
+        (i, _) = (1, 1);
+        _ = i | 0x80;
+    }
 }
