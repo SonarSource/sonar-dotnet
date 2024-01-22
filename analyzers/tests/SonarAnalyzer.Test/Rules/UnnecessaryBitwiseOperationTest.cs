@@ -36,11 +36,12 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void UnnecessaryBitwiseOperation_CS1() =>
             builderCS.AddSnippet("""
+            using System.Threading;
             void TupleAssignment()
             {
-                var i = 0;
-                (i, _) = (1, 1);
-                _ = i | 0x80;
+                var bytes1 = 0;
+                Interlocked.Add(ref bytes1, 1);
+                _ = bytes1 | 0x80; // Compliant
             }
             """).WithTopLevelStatements().Verify();
 

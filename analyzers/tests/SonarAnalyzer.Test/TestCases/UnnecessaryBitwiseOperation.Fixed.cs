@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Tests.Diagnostics
 {
@@ -83,6 +84,37 @@ namespace Tests.Diagnostics
             var bytes4 = 0;
             --bytes4;
             _ = bytes4 | 0x80; // Compliant
+        }
+
+        public void InterlockedMethods()
+        {
+            var bytes1 = 0;
+            Interlocked.Add(ref bytes1, 1);
+            _ = bytes1 | 0x80; // Compliant
+
+            var bytes2 = 0;
+            Interlocked.Decrement(ref bytes2);
+            _ = bytes2 | 0x80; // Compliant
+
+            var bytes3 = 0;
+            Interlocked.Increment(ref bytes3);
+            _ = bytes3 | 0x80; // Compliant
+
+            var bytes4 = 0;
+            Interlocked.And(ref bytes4, 0x80);
+            _ = bytes4 | 0x80; // Compliant
+
+            var bytes5 = 0;
+            Interlocked.Or(ref bytes5, 0x80);
+            _ = bytes5 | 0x80; // Compliant
+
+            var bytes6 = 0;
+            Interlocked.Exchange(ref bytes6, 0x80);
+            _ = bytes6 | 0x80; // Compliant
+
+            var bytes7 = 0;
+            Interlocked.CompareExchange(ref bytes7, 100, 0x80);
+            _ = bytes7 | 0x80; // Compliant
         }
 
         private static long returnLong()
