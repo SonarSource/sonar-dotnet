@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0-windows</TargetFramework>
+    <!-- 01/2024: Using net8.0-windows breaks Verifier.CompileRazor -->
+    <TargetFramework>net7.0-windows</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -33,6 +34,13 @@
     <Using Include="SonarAnalyzer.Helpers" />
     <Using Include="SonarAnalyzer.Test.MetadataReferences" />
     <Using Include="SonarAnalyzer.Test.TestFramework" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="TestCases\**\*" />
+    <None Include="TestCases\**\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

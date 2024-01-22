@@ -237,7 +237,7 @@ stages:
             TestResultsArtifactName: 'DotnetTestResultsNet8'
             ProjectFilePath: 'tests\SonarAnalyzer.Net8.Test\SonarAnalyzer.Net8.Test.csproj'
           TestFramework:
-            FrameworkMoniker: 'net8.0-windows'
+            FrameworkMoniker: 'net7.0-windows'
             CoverageArtifactName: 'DotnetCoverageTestFramework'
             TestResultsArtifactName: 'DotnetTestResultsTestFramework'
             ProjectFilePath: 'tests\SonarAnalyzer.TestFramework.Test\SonarAnalyzer.TestFramework.Test.csproj'

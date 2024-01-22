@@ -432,8 +432,8 @@ Line: 1, Type: primary, Id: ''
         public void Verify_BasePath()
         {
             DummyCS.AddPaths("Nonexistent.cs").Invoking(x => x.Verify()).Should().Throw<FileNotFoundException>("This file should not exist in TestCases directory.");
-            DummyCS.AddPaths("ArrayCovariance.cs").Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>("File should be found in TestCases directory.");
-            DummyCS.WithBasePath("TestFramework").AddPaths("Verifier.BasePath.cs").Invoking(x => x.Verify()).Should().NotThrow();
+            DummyCS.AddPaths("Verifier.BasePathAssertFails.cs").Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>("File should be found in TestCases directory.");
+            DummyCS.WithBasePath("Verifier").AddPaths("Verifier.BasePath.cs").Invoking(x => x.Verify()).Should().NotThrow();
         }
 
         [TestMethod]
