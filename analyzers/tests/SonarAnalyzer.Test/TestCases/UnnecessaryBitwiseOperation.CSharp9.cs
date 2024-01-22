@@ -100,5 +100,10 @@ public class CSharp8
         var bytes7 = 0;
         Interlocked.CompareExchange(ref bytes7, 100, 0x80);
         _ = bytes7 | 0x80; // Compliant
+
+        var bytes8 = 0;
+        // Not passed by ref
+        _ = Convert.ToString(bytes8);
+        _ = bytes8 | 0x80; // Noncompliant
     }
 }
