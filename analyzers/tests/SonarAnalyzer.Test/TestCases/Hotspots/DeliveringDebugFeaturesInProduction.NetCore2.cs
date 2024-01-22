@@ -7,14 +7,59 @@ namespace Tests.Diagnostics
     public class Startup
     {
         // for coverage
+        private IHostingEnvironment env;
+
         private IApplicationBuilder foo;
         public IApplicationBuilder Foo
         {
+            get
+            {
+                if (env.IsDevelopment())
+                {
+                    foo.UseDeveloperExceptionPage();        // Compliant
+                }
+                return foo;
+            }
             set
             {
-                var x = value.UseDeveloperExceptionPage(); // Noncompliant
+                var x = value.UseDeveloperExceptionPage();  // Noncompliant
                 foo = value;
             }
+        }
+
+        event EventHandler SomeEvent
+        {
+            add { foo.UseDeveloperExceptionPage(); }        // Noncompliant
+            remove
+            {
+                if (env.IsDevelopment())
+                {
+                    foo.UseDeveloperExceptionPage();        // Compliant
+                }
+            }
+        }
+
+        public Startup()
+        {
+            foo.UseDeveloperExceptionPage();                // Noncompliant
+        }
+
+        public void Lambda()
+        {
+            Action action1 = () =>
+            {
+                foo.UseDeveloperExceptionPage();            // Noncompliant
+            };
+            action1();
+
+            Action action2 = () =>
+            {
+                if (env.IsDevelopment())
+                {
+                    foo.UseDeveloperExceptionPage();        // Compliant
+                }
+            };
+            action2();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
