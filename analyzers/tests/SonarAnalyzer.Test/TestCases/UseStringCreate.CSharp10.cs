@@ -15,7 +15,7 @@ class Program
 
         FormattableString.CurrentCulture(formString); // Compliant
         FormattableString.Invariant(formString);      // Compliant
-        
+
         var classImplementingIFormattable = new ClassImplementingIFormattable();
         classImplementingIFormattable.CurrentCulture($"Value: {value}"); // Compliant
         classImplementingIFormattable.Invariant();                       // Compliant

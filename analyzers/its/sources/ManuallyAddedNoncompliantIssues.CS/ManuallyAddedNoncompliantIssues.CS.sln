@@ -14,7 +14,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetFramework35", "NetFramew
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetFramework45", "NetFramework45\NetFramework45.csproj", "{304DB1D2-AF51-4CBB-B284-CEF20DE2B299}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net7", "Net7\Net7.csproj", "{F8FE7021-95DA-4902-A809-6561704207B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Net5", "Net5\Net5.csproj", "{39B74F7F-4E5B-460E-9353-555CAA74F46F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Net6", "Net6\Net6.csproj", "{D9E219D9-1411-4D02-83E3-33ECCA795C60}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Net7", "Net7\Net7.csproj", "{F8FE7021-95DA-4902-A809-6561704207B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,6 +54,14 @@ Global
 		{F8FE7021-95DA-4902-A809-6561704207B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8FE7021-95DA-4902-A809-6561704207B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8FE7021-95DA-4902-A809-6561704207B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39B74F7F-4E5B-460E-9353-555CAA74F46F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39B74F7F-4E5B-460E-9353-555CAA74F46F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39B74F7F-4E5B-460E-9353-555CAA74F46F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39B74F7F-4E5B-460E-9353-555CAA74F46F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9E219D9-1411-4D02-83E3-33ECCA795C60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9E219D9-1411-4D02-83E3-33ECCA795C60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9E219D9-1411-4D02-83E3-33ECCA795C60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9E219D9-1411-4D02-83E3-33ECCA795C60}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
