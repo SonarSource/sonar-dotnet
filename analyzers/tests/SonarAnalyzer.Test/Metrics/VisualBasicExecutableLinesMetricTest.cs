@@ -434,6 +434,37 @@ End Class");
     End Sub
 End Module", 4, 6);
 
+        [TestMethod]
+        public void ExcludedFromCodeCoverage_Class() =>
+            AssertLinesOfCode(
+                """
+                Imports System.Diagnostics.CodeAnalysis
+
+                <ExcludeFromCodeCoverage>
+                Public Module Class1
+                    Public Sub TestMe()
+                        Console.WriteLine("Exclude me") ' +1, FP
+                    End Sub
+                End Module
+                """, 6); // There should be no executable lines in the module
+
+        [TestMethod]
+        public void ExcludedFromCodeCoverage_Methods() =>
+            AssertLinesOfCode(
+                """
+                Imports System.Diagnostics.CodeAnalysis
+
+                Public Module Class3
+                    <ExcludeFromCodeCoverage>
+                    Public Sub Excluded()
+                        Console.WriteLine("Exclude me") ' +1, FP
+                    End Sub
+                    Public Sub NotCovered()
+                        Console.WriteLine("Not covered") ' +1
+                    End Sub
+                End Module
+                """, 6, 9);
+
         private static void AssertLinesOfCode(string code, params int[] expectedExecutableLines)
         {
             var (syntaxTree, semanticModel) = TestHelper.CompileVB(code);
