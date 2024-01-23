@@ -7,7 +7,7 @@ namespace Tests.Diagnostics
     {
     }
 
-    public struct SerializableStruct_NoAttribute : ISerializable    // Noncompliant {{Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.}}
+    public struct SerializableStruct_NoAttribute : ISerializable    // Noncompliant {{Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'SerializableStruct_NoAttribute' because it implements 'ISerializable'. Add a 'private' constructor 'SerializableStruct_NoAttribute(SerializationInfo, StreamingContext)'.}}
                                                                     // Secondary@-1 {{Add 'System.SerializableAttribute' attribute on 'SerializableStruct_NoAttribute' because it implements 'ISerializable'.}}
                                                                     // Secondary@-2 {{Add a 'private' constructor 'SerializableStruct_NoAttribute(SerializationInfo, StreamingContext)'.}}
     {

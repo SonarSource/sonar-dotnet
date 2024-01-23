@@ -204,8 +204,8 @@ namespace Tests.Diagnostics
 
     [Serializable]
     public record Serializable_NoConstructor_Positional(string Value) : ISerializable
-//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant {{Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.}}
-//         ^^^^^^ Secondary@-1 {{Add a 'protected' constructor 'Serializable_NoConstructor_Positional(SerializationInfo, StreamingContext)'.}}
+    //            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant {{Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add a 'protected' constructor 'Serializable_NoConstructor_Positional(SerializationInfo, StreamingContext)'.}}
+    //     ^^^^^^ Secondary@-1 {{Add a 'protected' constructor 'Serializable_NoConstructor_Positional(SerializationInfo, StreamingContext)'.}}
     {
         public Serializable_NoConstructor_Positional() : this("") { }
         public virtual void GetObjectData(SerializationInfo info, StreamingContext context) { }
@@ -231,7 +231,7 @@ namespace Tests.Diagnostics.PartialMethods
 
     [Serializable]
     public partial record Partial_SerializableDerived_Not_CallingBase_GetObjectData_Record : SerializableRecord
-//                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant {{Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.}}
+    //                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant {{Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Invoke 'base.GetObjectData(SerializationInfo, StreamingContext)' in this method.}}
     {
         public Partial_SerializableDerived_Not_CallingBase_GetObjectData_Record() { }
         protected Partial_SerializableDerived_Not_CallingBase_GetObjectData_Record(SerializationInfo info, StreamingContext context) : base(info, context) { }
@@ -239,7 +239,7 @@ namespace Tests.Diagnostics.PartialMethods
     }
 
     public partial record Partial_SerializableDerived_Not_CallingBase_GetObjectData_Record
-//                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant {{Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.}}
+    //                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant {{Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Invoke 'base.GetObjectData(SerializationInfo, StreamingContext)' in this method.}}
     {
         public override partial void GetObjectData(SerializationInfo info, StreamingContext context) { }      // Secondary
     }
@@ -268,7 +268,7 @@ namespace Tests.Diagnostics.PartialMethods
 
     [Serializable]
     public partial class Partial_SerializableDerived_Not_CallingBase_GetObjectData_Class : SerializableClass
-//                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant [1] {{Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.}}
+    //                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant [1] {{Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Invoke 'base.GetObjectData(SerializationInfo, StreamingContext)' in this method.}}
     {
         public Partial_SerializableDerived_Not_CallingBase_GetObjectData_Class() { }
         protected Partial_SerializableDerived_Not_CallingBase_GetObjectData_Class(SerializationInfo info, StreamingContext context) : base(info, context) { }
@@ -276,7 +276,7 @@ namespace Tests.Diagnostics.PartialMethods
     }
 
     public partial class Partial_SerializableDerived_Not_CallingBase_GetObjectData_Class
-//                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant [2] {{Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.}}
+    //                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant [2] {{Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Invoke 'base.GetObjectData(SerializationInfo, StreamingContext)' in this method.}}
     {
         public override partial void GetObjectData(SerializationInfo info, StreamingContext context) { }  // Secondary [2] {{Invoke 'base.GetObjectData(SerializationInfo, StreamingContext)' in this method.}}
     }
@@ -297,7 +297,7 @@ namespace Tests.Diagnostics.PartialMethods
 
     [Serializable]
     public partial class Partial_SerializableDerived_Not_CallingBase_GetObjectData_SeparateFiles_Class : SerializableClass
-//                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant [3] {{Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.}}
+    //                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant [3] {{Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Invoke 'base.GetObjectData(SerializationInfo, StreamingContext)' in this method.}}
     {
         public Partial_SerializableDerived_Not_CallingBase_GetObjectData_SeparateFiles_Class() { }
         protected Partial_SerializableDerived_Not_CallingBase_GetObjectData_SeparateFiles_Class(SerializationInfo info, StreamingContext context) : base(info, context) { }
