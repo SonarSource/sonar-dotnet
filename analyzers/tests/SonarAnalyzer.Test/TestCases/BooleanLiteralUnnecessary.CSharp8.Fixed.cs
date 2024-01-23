@@ -18,4 +18,17 @@ namespace Tests.Diagnostics
             var x = (key is null) ? throw new ArgumentNullException(nameof(key)) : false;
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/7792
+    class ConvertibleGenericTypes
+    {
+        void ConvertibleToBool<T1, T2, T3>(T1 unconstrained, T2 constrainedToStruct, T3 constrainedToBoolInterface)
+            where T2 : struct
+            where T3 : IComparable<bool>
+        {
+            if (unconstrained is true) { }
+            if (constrainedToStruct is true) { }
+            if (constrainedToBoolInterface is true) { }
+        }
+    }
 }

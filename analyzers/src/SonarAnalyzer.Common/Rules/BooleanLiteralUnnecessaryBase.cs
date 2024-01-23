@@ -25,6 +25,8 @@ namespace SonarAnalyzer.Rules
     {
         internal const string DiagnosticId = "S1125";
 
+        private INamedTypeSymbol[] systemBooleanInterfaces;
+
         protected enum ErrorLocation
         {
             // The BooleanLiteral node is highlighted
@@ -207,10 +209,14 @@ namespace SonarAnalyzer.Rules
             return isLeftSide ? parent.CreateLocation(token) : token.CreateLocation(parent);
         }
 
-        private static bool TypeShouldBeIgnored(SyntaxNode node, SemanticModel model)
+        private bool TypeShouldBeIgnored(SyntaxNode node, SemanticModel model)
         {
             var type = model.GetTypeInfo(node).Type;
-            return type.IsNullableBoolean() || type.Is(KnownType.System_Object);
+            systemBooleanInterfaces ??= model.Compilation.GetTypeByMetadataName(KnownType.System_Boolean).Interfaces.ToArray();
+            return type.IsNullableBoolean()
+                || type is ITypeParameterSymbol
+                || type.Is(KnownType.System_Object)
+                || Array.Exists(systemBooleanInterfaces, x => x.Equals(type));
         }
     }
 }

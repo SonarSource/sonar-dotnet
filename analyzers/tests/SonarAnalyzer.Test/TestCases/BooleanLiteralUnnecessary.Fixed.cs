@@ -218,10 +218,18 @@ namespace Tests.Diagnostics
     // https://github.com/SonarSource/sonar-dotnet/issues/7792
     class ObjectIsBool
     {
-        void Method(object obj, Exception exc)
+        void Object(object obj, Exception exc)
         {
             if (obj is true) { }
             if (exc.Data["SomeKey"] is true) { }
+        }
+
+        void ConvertibleToBool(IComparable comparable, IComparable<bool> comparableBool, IEquatable<bool> equatable, IConvertible convertible)
+        {
+            if (comparable is true) { }
+            if (comparableBool is true) { }
+            if (equatable is true) { }
+            if (convertible is true) { }
         }
     }
 }
