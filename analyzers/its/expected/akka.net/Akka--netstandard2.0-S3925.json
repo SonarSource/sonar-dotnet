@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'ActorInterruptedException' because it implements 'ISerializable'.",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L116",
@@ -26,7 +26,7 @@
 },
 {
 "id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'ActorInitializationException' because it implements 'ISerializable'.",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L139",
@@ -50,7 +50,7 @@
 },
 {
 "id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'LoggerInitializationException' because it implements 'ISerializable'.",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L219",
@@ -74,7 +74,7 @@
 },
 {
 "id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'ActorKilledException' because it implements 'ISerializable'.",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L263",
@@ -98,7 +98,7 @@
 },
 {
 "id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'IllegalActorStateException' because it implements 'ISerializable'.",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L293",
@@ -122,7 +122,7 @@
 },
 {
 "id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'IllegalActorNameException' because it implements 'ISerializable'.",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L318",
@@ -146,7 +146,7 @@
 },
 {
 "id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'DeathPactException' because it implements 'ISerializable'.",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L344",
@@ -170,7 +170,7 @@
 },
 {
 "id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'PreRestartException' because it implements 'ISerializable'.",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L388",
@@ -194,7 +194,7 @@
 },
 {
 "id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'PostRestartException' because it implements 'ISerializable'.",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L434",
@@ -218,7 +218,7 @@
 },
 {
 "id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'ActorNotFoundException' because it implements 'ISerializable'.",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L475",
@@ -242,7 +242,7 @@
 },
 {
 "id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'InvalidMessageException' because it implements 'ISerializable'.",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L510",
@@ -266,7 +266,7 @@
 },
 {
 "id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'InvalidActorNameException' because it implements 'ISerializable'.",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L54",
@@ -290,7 +290,7 @@
 },
 {
 "id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'AskTimeoutException' because it implements 'ISerializable'.",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L89",
@@ -314,7 +314,7 @@
 },
 {
 "id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'SchedulerException' because it implements 'ISerializable'. Make this constructor 'private'.",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/SchedulerException.cs#L16",
@@ -347,7 +347,7 @@
 },
 {
 "id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'StashOverflowException' because it implements 'ISerializable'.",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Stash/StashOverflowException.cs#L16",
@@ -371,7 +371,7 @@
 },
 {
 "id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'ConfigurationException' because it implements 'ISerializable'.",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/ConfigurationException.cs#L17",
@@ -395,7 +395,7 @@
 },
 {
 "id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'RejectedExecutionException' because it implements 'ISerializable'.",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/ExecutorService.cs#L66",
@@ -419,7 +419,7 @@
 },
 {
 "id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'BufferPoolAllocationException' because it implements 'ISerializable'.",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Buffers/DirectBufferPool.cs#L19",
@@ -443,7 +443,7 @@
 },
 {
 "id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'IllegalStateException' because it implements 'ISerializable'.",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/IllegalStateException.cs#L17",
@@ -467,7 +467,7 @@
 },
 {
 "id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'OpenCircuitException' because it implements 'ISerializable'.",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/OpenCircuitException.cs#L17",
@@ -491,7 +491,7 @@
 },
 {
 "id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'UserCalledFailException' because it implements 'ISerializable'.",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/UserCalledFailException.cs#L16",

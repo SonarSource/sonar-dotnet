@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'PerformanceTestException' because it implements 'ISerializable'.",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PersistenceBenchmark/Messages.cs#L59",
