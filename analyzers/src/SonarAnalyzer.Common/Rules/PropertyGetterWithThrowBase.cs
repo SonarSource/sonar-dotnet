@@ -68,7 +68,8 @@ namespace SonarAnalyzer.Rules
 
                             var symbol = c.SemanticModel.GetSymbolInfo(throwExpression).Symbol;
                             if (symbol == null ||
-                                symbol.ContainingType.DerivesFromAny(AllowedExceptionBaseTypes))
+                                symbol.ContainingType.DerivesFromAny(AllowedExceptionBaseTypes) ||
+                                (symbol.Kind == SymbolKind.Method && ((IMethodSymbol)symbol).ReturnType?.DerivesFromAny(AllowedExceptionBaseTypes) == true))
                             {
                                 return;
                             }

@@ -84,5 +84,16 @@
             {
             }
         }
+        public int MyProperty9
+        {
+            get
+            {
+                throw FactoryMethod(); // Compliant
+            }
+        }
+        private NotSupportedException FactoryMethod()
+        {
+            return new NotSupportedException();
+        }
     }
 }
