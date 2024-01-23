@@ -68,6 +68,9 @@ public sealed class ReturnEmptyCollectionInsteadOfNull : SonarDiagnosticAnalyzer
         }
     }
 
+    private static BlockSyntax GetBody(SyntaxNode node) =>
+        node is PropertyDeclarationSyntax property ? GetAccessor(property)?.Body : node.GetBody();
+
     private static bool IsReturningCollection(SonarSyntaxNodeReportingContext context) =>
         GetType(context) is { } type
         && !type.Is(KnownType.System_String)
@@ -75,34 +78,22 @@ public sealed class ReturnEmptyCollectionInsteadOfNull : SonarDiagnosticAnalyzer
         && type.DerivesOrImplementsAny(CollectionTypes)
         && type.NullableAnnotation() != NullableAnnotation.Annotated;
 
-    private static ITypeSymbol GetType(SonarSyntaxNodeReportingContext context) =>
-        context.SemanticModel.GetDeclaredSymbol(context.Node) switch
-        {
-            IPropertySymbol property => property.Type,
-            IMethodSymbol method => method.ReturnType,
-            _ => null,
-        };
+    private static ITypeSymbol GetType(SonarSyntaxNodeReportingContext context)
+    {
+        var symbol = context.SemanticModel.GetDeclaredSymbol(context.Node);
+        return symbol is IPropertySymbol property ? property.Type : ((IMethodSymbol)symbol).ReturnType;
+    }
 
     private static ArrowExpressionClauseSyntax GetExpressionBody(SyntaxNode node) =>
-            node switch
-            {
-                BaseMethodDeclarationSyntax method => method.ExpressionBody(),
-                PropertyDeclarationSyntax property => property.ExpressionBody ?? GetAccessor(property)?.ExpressionBody(),
-                var _ when LocalFunctionStatementSyntaxWrapper.IsInstance(node) => ((LocalFunctionStatementSyntaxWrapper)node).ExpressionBody,
-                _ => null,
-            };
-
-    private static BlockSyntax GetBody(SyntaxNode node) =>
         node switch
         {
-            BaseMethodDeclarationSyntax method => method.Body,
-            PropertyDeclarationSyntax property => GetAccessor(property)?.Body,
-            var _ when LocalFunctionStatementSyntaxWrapper.IsInstance(node) => ((LocalFunctionStatementSyntaxWrapper)node).Body,
-            _ => null,
+            BaseMethodDeclarationSyntax method => method.ExpressionBody(),
+            PropertyDeclarationSyntax property => property.ExpressionBody ?? GetAccessor(property)?.ExpressionBody(),
+            _ => ((LocalFunctionStatementSyntaxWrapper)node).ExpressionBody,
         };
 
     private static AccessorDeclarationSyntax GetAccessor(PropertyDeclarationSyntax property) =>
-        property.AccessorList?.Accessors.FirstOrDefault(a => a.IsKind(SyntaxKind.GetAccessorDeclaration));
+        property.AccessorList?.Accessors.FirstOrDefault(x => x.IsKind(SyntaxKind.GetAccessorDeclaration));
 
     private static IEnumerable<SyntaxNode> GetReturnNullOrDefaultExpressions(SyntaxNode methodBlock) =>
         methodBlock.DescendantNodes(n =>

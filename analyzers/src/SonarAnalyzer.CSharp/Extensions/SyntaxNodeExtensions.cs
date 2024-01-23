@@ -19,6 +19,7 @@
  */
 
 using SonarAnalyzer.CFG.Roslyn;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Extensions
 {
@@ -488,12 +489,29 @@ namespace SonarAnalyzer.Extensions
 
 #endif
 
+        public static BlockSyntax GetBody(this SyntaxNode node) =>
+            node switch
+            {
+                BaseMethodDeclarationSyntax method => method.Body,
+                AccessorDeclarationSyntax accessor => accessor.Body,
+                _ when LocalFunctionStatementSyntaxWrapper.IsInstance(node) => ((LocalFunctionStatementSyntaxWrapper)node).Body,
+                _ => null,
+            };
+
         public static SyntaxNode GetInitializer(this SyntaxNode node) =>
             node switch
             {
                 VariableDeclaratorSyntax { Initializer: { } initializer } => initializer,
                 PropertyDeclarationSyntax { Initializer: { } initializer } => initializer,
                 _ => null
+            };
+
+        public static SyntaxTokenList GetModifiers(this SyntaxNode node) =>
+            node switch
+            {
+                AccessorDeclarationSyntax accessor => accessor.Modifiers,
+                MemberDeclarationSyntax member => member.Modifiers(),
+                _ => default,
             };
 
         public static bool IsTrue(this SyntaxNode node) =>

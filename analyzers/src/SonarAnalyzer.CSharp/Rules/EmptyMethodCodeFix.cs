@@ -36,20 +36,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override async Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
         {
-            var diagnostic = context.Diagnostics.First();
-            var diagnosticSpan = diagnostic.Location.SourceSpan;
-            var syntaxNode = root.FindNode(diagnosticSpan, getInnermostNodeForTie: true);
-            var method = syntaxNode.FirstAncestorOrSelf<SyntaxNode>(x => x.IsAnyKind(SyntaxKind.MethodDeclaration, SyntaxKindEx.LocalFunctionStatement));
-            var methodBody = method.IsKind(SyntaxKind.MethodDeclaration)
-                ? ((BaseMethodDeclarationSyntax)method).Body
-                : ((LocalFunctionStatementSyntaxWrapper)method).Body;
-
-            if (methodBody.CloseBraceToken.IsMissing || methodBody.OpenBraceToken.IsMissing)
+            if (root.FindNode(context.Diagnostics.First().Location.SourceSpan, getInnermostNodeForTie: true)
+                .FirstAncestorOrSelf<SyntaxNode>(x => x.IsAnyKind(EmptyMethod.SupportedSyntaxKinds))
+                .GetBody() is { CloseBraceToken.IsMissing: false, OpenBraceToken.IsMissing: false } body)
             {
-                return;
+                await RegisterCodeFixesForMethodsAsync(context, root, body).ConfigureAwait(false);
             }
-
-            await RegisterCodeFixesForMethodsAsync(context, root, methodBody).ConfigureAwait(false);
         }
 
         private static async Task RegisterCodeFixesForMethodsAsync(SonarCodeFixContext context, SyntaxNode root, BlockSyntax methodBody)
@@ -70,9 +62,13 @@ namespace SonarAnalyzer.Rules.CSharp
                                 .Add(SyntaxFactory.Comment("// Method intentionally left empty."))
                                 .Add(SyntaxFactory.EndOfLine(Environment.NewLine))));
 
-                    var newRoot = root.ReplaceNode(
-                        methodBody,
-                        newMethodBody.WithTriviaFrom(methodBody).WithAdditionalAnnotations(Formatter.Annotation));
+                    var newRoot = methodBody.Parent is AccessorDeclarationSyntax accessor
+                        ? root.ReplaceNode(
+                            accessor,
+                            accessor.WithBody(newMethodBody.WithTriviaFrom(accessor.Body)).WithAdditionalAnnotations(Formatter.Annotation))
+                        : root.ReplaceNode(
+                            methodBody,
+                            newMethodBody.WithTriviaFrom(methodBody).WithAdditionalAnnotations(Formatter.Annotation));
                     return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
                 },
                 context.Diagnostics);
@@ -110,10 +106,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static bool NamespaceNeedsToBeAdded(BlockSyntax methodBody, SemanticModel semanticModel) =>
-            !semanticModel.LookupNamespacesAndTypes(methodBody.CloseBraceToken.SpanStart)
-                .OfType<INamedTypeSymbol>()
-                .Any(x => x.IsType
-                          && x.Name == LiteralNotSupportedException
-                          && x.ContainingNamespace.Name == LiteralSystem);
+            semanticModel.LookupNamespacesAndTypes(methodBody.CloseBraceToken.SpanStart)
+                .All(x => x is not INamedTypeSymbol { IsType: true, Name: LiteralNotSupportedException, ContainingNamespace.Name: LiteralSystem });
     }
 }

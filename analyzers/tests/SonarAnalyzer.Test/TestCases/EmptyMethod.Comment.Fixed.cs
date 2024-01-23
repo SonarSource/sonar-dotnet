@@ -68,10 +68,7 @@ namespace Tests.Diagnostics
 
     public interface IInterface
     {
-        public void F1()
-        {
-            // Method intentionally left empty.
-        } // Fixed
+        public void F1() { } // Compliant, implemented interface methods are virtual by default
 
         public virtual void F2() { }
 
@@ -82,7 +79,10 @@ namespace Tests.Diagnostics
     {
         public string Prop
         {
-            set { } // FN https://github.com/SonarSource/sonar-dotnet/issues/3753
+            set
+            {
+                // Method intentionally left empty.
+            } // Fixed
         }
     }
 

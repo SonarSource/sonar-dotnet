@@ -23,42 +23,43 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class EmptyMethod : EmptyMethodBase<SyntaxKind>
     {
+        internal static readonly SyntaxKind[] SupportedSyntaxKinds =
+        {
+            SyntaxKind.MethodDeclaration,
+            SyntaxKindEx.LocalFunctionStatement,
+            SyntaxKind.SetAccessorDeclaration,
+            SyntaxKindEx.InitAccessorDeclaration
+        };
+
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        protected override SyntaxKind[] SyntaxKinds { get; } =
-            {
-                SyntaxKind.MethodDeclaration,
-                SyntaxKindEx.LocalFunctionStatement
-            };
+        protected override SyntaxKind[] SyntaxKinds => SupportedSyntaxKinds;
 
         protected override void CheckMethod(SonarSyntaxNodeReportingContext context)
         {
-            if (LocalFunctionStatementSyntaxWrapper.IsInstance(context.Node))
+            // No need to check for ExpressionBody as arrowed methods can't be empty
+            if (context.Node.GetBody() is { } body
+                && body.IsEmpty()
+                && !ShouldBeExcluded(context, context.Node, context.Node.GetModifiers()))
             {
-                var wrapper = (LocalFunctionStatementSyntaxWrapper)context.Node;
-                if (wrapper.Body is { } body && body.IsEmpty())
-                {
-                    context.ReportIssue(Diagnostic.Create(Rule, wrapper.Identifier.GetLocation()));
-                }
-            }
-            else
-            {
-                var methodDeclaration = (MethodDeclarationSyntax)context.Node;
-
-                // No need to check for ExpressionBody as arrowed methods can't be empty
-                if (methodDeclaration.Body is { } body
-                    && body.IsEmpty()
-                    && !ShouldMethodBeExcluded(context, methodDeclaration))
-                {
-                    context.ReportIssue(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation()));
-                }
+                context.ReportIssue(Diagnostic.Create(Rule, ReportingToken(context.Node).GetLocation()));
             }
         }
 
-        private static bool ShouldMethodBeExcluded(SonarSyntaxNodeReportingContext context, BaseMethodDeclarationSyntax methodNode) =>
-            methodNode.Modifiers.Any(SyntaxKind.VirtualKeyword)
-            || (context.SemanticModel.GetDeclaredSymbol(methodNode) is var symbol
-                && (symbol is { IsOverride: true, OverriddenMethod.IsAbstract: true } || !symbol.ExplicitOrImplicitInterfaceImplementations().IsEmpty))
-            || (methodNode.Modifiers.Any(SyntaxKind.OverrideKeyword) && context.IsTestProject());
+        private static bool ShouldBeExcluded(SonarSyntaxNodeReportingContext context, SyntaxNode node, SyntaxTokenList modifiers) =>
+            modifiers.Any(SyntaxKind.VirtualKeyword) // This quick check only works for methods, for accessors we need to check the symbol
+            || (context.SemanticModel.GetDeclaredSymbol(node) is IMethodSymbol symbol
+                && (symbol is { IsVirtual: true }
+                    || symbol is { IsOverride: true, OverriddenMethod.IsAbstract: true }
+                    || !symbol.ExplicitOrImplicitInterfaceImplementations().IsEmpty))
+            || (modifiers.Any(SyntaxKind.OverrideKeyword) && context.IsTestProject());
+
+        private static SyntaxToken ReportingToken(SyntaxNode node) =>
+            node switch
+            {
+                MethodDeclarationSyntax method => method.Identifier,
+                AccessorDeclarationSyntax accessor => accessor.Keyword,
+                _ => ((LocalFunctionStatementSyntaxWrapper)node).Identifier
+            };
     }
 }

@@ -77,14 +77,6 @@ record MyR2 : MyR
     }
 }
 
-class WithProp
-{
-    public string Prop
-    {
-        init { } // FN https://github.com/SonarSource/sonar-dotnet/issues/3753
-    }
-}
-
 class M
 {
     [ModuleInitializer]
@@ -131,5 +123,61 @@ namespace D
         {
             Console.WriteLine();
         }
+    }
+}
+
+class PropertyAccessors
+{
+    int NonEmptyInitProp { init { int x; } }
+    int EmptyInitProp {
+        init
+        {
+            // Method intentionally left empty.
+        }
+    }                   // Fixed
+    int EmptyInitPropWithGet { get => 42; init
+        {
+            // Method intentionally left empty.
+        }
+    } // Fixed
+    int AutoInitPropWithGet { get; init; }           // Compliant, auto-implemented, so not-empty
+
+    int NonEmptySetProp { set { int x; } }
+    int EmptySetProp {
+        set
+        {
+            // Method intentionally left empty.
+        }
+    }                     // Fixed
+    int EmptySetPropWithGet { get => 42; set
+        {
+            // Method intentionally left empty.
+        }
+    }   // Fixed
+    int AutoSetPropWithGet { get; set; }             // Compliant, auto-implemented, so not-empty
+
+    class Base
+    {
+        protected virtual int VirtualEmptyInitProp { init { } }  // Compliant, virtual
+    }
+
+    class Inherited : Base
+    {
+        protected override int VirtualEmptyInitProp {
+            init
+            {
+                // Method intentionally left empty.
+            }
+        } // Fixed
+    }
+
+    class Hidden : Base
+    {
+        protected new int VirtualEmptyInitProp {
+            init
+            {
+                // Method intentionally left empty.
+            }
+        }      // Fixed
     }
 }
