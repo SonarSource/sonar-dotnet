@@ -20,6 +20,7 @@
 
 namespace SonarAnalyzer.Rules
 {
+    [Obsolete("This rule has been deprecated since 9.18")]
     public abstract class SecurityPInvokeMethodShouldNotBeCalledBase<TSyntaxKind, TInvocationExpressionSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
         where TInvocationExpressionSyntax : SyntaxNode
