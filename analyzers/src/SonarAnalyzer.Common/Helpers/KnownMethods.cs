@@ -142,6 +142,17 @@ public static class KnownMethods
         && methodSymbol.Parameters.Length == 0
         && methodSymbol.ContainingType.Is(KnownType.System_Array);
 
+    public static bool IsRecordPrintMembers(this IMethodSymbol methodSymbol) =>
+        methodSymbol is
+        {
+            MethodKind: MethodKind.Ordinary,
+            Name: "PrintMembers",
+            ReturnType.SpecialType: SpecialType.System_Boolean,
+            Parameters.Length: 1,
+        }
+        && methodSymbol.Parameters[0].Type.Is(KnownType.System_Text_StringBuilder)
+        && methodSymbol.ContainingType.IsRecord();
+
     public static bool IsGcSuppressFinalize(this IMethodSymbol methodSymbol) =>
         methodSymbol != null
         && methodSymbol.Name == nameof(GC.SuppressFinalize)
