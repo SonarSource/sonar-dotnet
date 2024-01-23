@@ -438,9 +438,9 @@ stages:
         inputs:
           filePath: 'analyzers/its/regression-test.ps1'
           workingDirectory: 'analyzers/its'
-        env:
-          ARTIFACTORY_USER: $(ARTIFACTORY_PRIVATE_READER_USERNAME)
-          ARTIFACTORY_PASSWORD: $(ARTIFACTORY_PRIVATE_READER_ACCESS_TOKEN)
+        # env:
+        #   ARTIFACTORY_USER: $(ARTIFACTORY_PRIVATE_READER_USERNAME)
+        #   ARTIFACTORY_PASSWORD: $(ARTIFACTORY_PRIVATE_READER_ACCESS_TOKEN)
 
     - job: runJavaBuild
       displayName: 'Java build'
