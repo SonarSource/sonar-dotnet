@@ -259,11 +259,11 @@ function LoadExpectedIssues($file, $regex){
     $id = $issues | where { $_.IssueId -ne "" } | select -ExpandProperty IssueId | unique
 
     if ($id -eq $null){
-        # throw "Please specify the rule id in the following file: $($file.FullName)"
+        throw "Please specify the rule id in the following file: $($file.FullName)"
     }
 
     if ($id -is [system.array]){
-        # throw "Only one rule can be verified per file. Multiple rule identifiers are defined ($id) in $($file.FullName)"
+        throw "Only one rule can be verified per file. Multiple rule identifiers are defined ($id) in $($file.FullName)"
     }
 
     foreach($issue in $issues){
@@ -407,7 +407,7 @@ function CheckDiffsForInternalProject($project){
     $result = CompareIssues $actualIssues $expectedIssues
 
     if ($result -eq $false){
-    #    throw "There are differences between actual and expected issues for $project!"
+       throw "There are differences between actual and expected issues for $project!"
     }
 }
 
