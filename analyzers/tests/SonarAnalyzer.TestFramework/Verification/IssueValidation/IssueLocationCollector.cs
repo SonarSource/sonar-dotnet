@@ -50,7 +50,7 @@ namespace SonarAnalyzer.TestFramework.Verification.IssueValidation
         private static readonly Regex RxInvalidType = CreateRegex(CommentPattern + ".*" + IssueTypePattern);
         private static readonly Regex RxInvalidPreciseLocation = CreateRegex(@"^\s*" + CommentPattern + ".*" + PrecisePositionPattern);
 
-        public static IList<IIssueLocation> GetExpectedIssueLocations(IEnumerable<TextLine> lines)
+        public static IList<IssueLocation> GetExpectedIssueLocations(IEnumerable<TextLine> lines)
         {
             var preciseLocations = new List<IssueLocation>();
             var locations = new List<IssueLocation>();
@@ -75,10 +75,10 @@ namespace SonarAnalyzer.TestFramework.Verification.IssueValidation
             return EnsureNoDuplicatedPrimaryIds(MergeLocations(locations.ToArray(), preciseLocations.ToArray()));
         }
 
-        public static IEnumerable<IIssueLocation> GetExpectedBuildErrors(IEnumerable<TextLine> lines) =>
-            lines?.SelectMany(GetBuildErrorsLocations) ?? Enumerable.Empty<IIssueLocation>();
+        public static IEnumerable<IssueLocation> GetExpectedBuildErrors(IEnumerable<TextLine> lines) =>
+            lines?.SelectMany(GetBuildErrorsLocations) ?? Enumerable.Empty<IssueLocation>();
 
-        public static IList<IIssueLocation> MergeLocations(IssueLocation[] locations, IssueLocation[] preciseLocations)
+        public static IList<IssueLocation> MergeLocations(IssueLocation[] locations, IssueLocation[] preciseLocations)
         {
             var usedLocations = new List<IssueLocation>();
             foreach (var location in locations)
@@ -105,7 +105,6 @@ namespace SonarAnalyzer.TestFramework.Verification.IssueValidation
 
             return locations
                    .Union(preciseLocations.Except(usedLocations))
-                   .Cast<IIssueLocation>()
                    .ToList();
         }
 
@@ -213,7 +212,7 @@ Either remove the Noncompliant/Secondary word or precise pattern '^^' from the c
             }
         }
 
-        private static IList<IIssueLocation> EnsureNoDuplicatedPrimaryIds(IList<IIssueLocation> mergedLocations)
+        private static IList<IssueLocation> EnsureNoDuplicatedPrimaryIds(IList<IssueLocation> mergedLocations)
         {
             var duplicateLocationsIds = mergedLocations
                             .Where(x => x.IsPrimary && x.IssueId != null)

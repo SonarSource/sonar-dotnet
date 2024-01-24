@@ -35,7 +35,7 @@ internal sealed class CompilationIssues
 
     public CompilationIssues(string languageVersion, Diagnostic[] diagnostics)
     {
-        var map = new Dictionary<string, List<IIssueLocation>>();
+        var map = new Dictionary<string, List<IssueLocation>>();
         foreach (var diagnostic in diagnostics)
         {
             Add(new IssueLocation(diagnostic));
@@ -49,7 +49,7 @@ internal sealed class CompilationIssues
 
         void Add(IssueLocation issue)
         {
-            var list = map.GetOrAdd(issue.FilePath ?? string.Empty, _ => new List<IIssueLocation>());
+            var list = map.GetOrAdd(issue.FilePath ?? string.Empty, _ => new List<IssueLocation>());
             list.Add(issue);
         }
     }
