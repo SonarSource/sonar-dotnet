@@ -229,7 +229,7 @@ Either remove the Noncompliant/Secondary word or precise pattern '^^' from the c
         private static void EnsureNoRemainingCurlyBrace(TextLine line, Capture match)
         {
             var remainingLine = line.ToString().Substring(match.Index + match.Length);
-            if (remainingLine.Contains("{") || remainingLine.Contains("}"))
+            if (remainingLine.Contains('{') || remainingLine.Contains('}'))
             {
                 Execute.Assertion.FailWith("Unexpected '{{' or '}}' found on line: {0}. Either correctly use the '{{{{message}}}}' " +
                     "format or remove the curly braces on the line of the expected issue", line.LineNumber);

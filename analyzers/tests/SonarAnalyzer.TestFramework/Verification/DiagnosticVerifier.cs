@@ -24,7 +24,7 @@ using SonarAnalyzer.TestFramework.Verification.IssueValidation;
 
 namespace SonarAnalyzer.Test.TestFramework
 {
-    public static partial class DiagnosticVerifier
+    public static class DiagnosticVerifier
     {
         private const string AnalyzerFailedDiagnosticId = "AD0001";
 
