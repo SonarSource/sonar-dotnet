@@ -26,5 +26,8 @@ namespace SonarAnalyzer.Test.Helpers
     {
         public static void BeIgnoringLineEndings(this StringAssertions stringAssertions, string expected) =>
             stringAssertions.Subject.ToUnixLineEndings().Should().Be(expected.ToUnixLineEndings());
+
+        public static void ContainIgnoringLineEndings(this StringAssertions stringAssertions, string expected) =>
+            stringAssertions.Subject.ToUnixLineEndings().Should().Contain(expected.ToUnixLineEndings());
     }
 }

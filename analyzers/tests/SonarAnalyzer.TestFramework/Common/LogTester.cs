@@ -19,6 +19,7 @@
  */
 
 using System.IO;
+using SonarAnalyzer.Test.Helpers;
 
 namespace SonarAnalyzer.Test.TestFramework
 {
@@ -38,10 +39,10 @@ namespace SonarAnalyzer.Test.TestFramework
         }
 
         public void AssertContain(string value) =>
-            outWriter.ToString().Should().Contain(value);
+            outWriter.ToString().Should().ContainIgnoringLineEndings(value);
 
         public void AssertContainError(string value) =>
-            errorWriter.ToString().Should().Contain(value);
+            errorWriter.ToString().Should().ContainIgnoringLineEndings(value);
 
         public void Dispose()
         {
