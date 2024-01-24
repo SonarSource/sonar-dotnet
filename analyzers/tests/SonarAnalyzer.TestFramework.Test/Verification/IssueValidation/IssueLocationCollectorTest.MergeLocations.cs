@@ -19,7 +19,6 @@
  */
 
 using SonarAnalyzer.TestFramework.Verification.IssueValidation;
-using IssueLocation = SonarAnalyzer.TestFramework.Verification.IssueValidation.IssueLocationCollector.IssueLocation;
 
 namespace SonarAnalyzer.Test.TestFramework.Tests
 {

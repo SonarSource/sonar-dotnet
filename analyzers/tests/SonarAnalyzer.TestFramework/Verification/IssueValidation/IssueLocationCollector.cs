@@ -28,7 +28,7 @@ namespace SonarAnalyzer.TestFramework.Verification.IssueValidation
     /// See <see href="https://github.com/SonarSource/sonar-dotnet/blob/master/docs/verifier-syntax.md">docs/verifier-syntax.md</see>
     /// for a comprehensive documentation of the verifier syntax.
     /// </summary>
-    internal static class IssueLocationCollector
+    internal static partial class IssueLocationCollector
     {
         private const string CommentPattern = @"(?<comment>//|'|<!--|/\*|@\*)";
         private const string PrecisePositionPattern = @"\s*(?<position>\^+)(\s+(?<invalid>\^+))*";
@@ -249,36 +249,5 @@ internal class MyClass : IInterface1 // there should be no Noncompliant comment
 
         private static Regex CreateRegex(string pattern) =>
             new Regex(pattern, RegexOptions.Compiled, RegexConstants.DefaultTimeout);
-
-        [DebuggerDisplay("ID:{IssueId} @{LineNumber} Primary:{IsPrimary} Start:{Start} Length:{Length} '{Message}'")]
-        internal class IssueLocation : IIssueLocation
-        {
-            public string FilePath { get; init; }
-            public bool IsPrimary { get; init; }
-            public int LineNumber { get; init; }
-            public string Message { get; init; }
-            public string IssueId { get; init; }
-            public int? Start { get; set; }
-            public int? Length { get; set; }
-
-            public IssueLocation(Diagnostic diagnostic) : this(diagnostic.GetMessage(), diagnostic.Location)
-            {
-                IsPrimary = true;
-                IssueId = diagnostic.Id;
-            }
-
-            public IssueLocation(SecondaryLocation secondaryLocation) : this(secondaryLocation.Message, secondaryLocation.Location) { }
-
-            public IssueLocation() { }
-
-            private IssueLocation(string message, Location location)
-            {
-                Message = message;
-                LineNumber = location.GetLineNumberToReport();
-                Start = location.GetLineSpan().StartLinePosition.Character;
-                Length = location.SourceSpan.Length;
-                FilePath = location.SourceTree?.FilePath;
-            }
-        }
     }
 }

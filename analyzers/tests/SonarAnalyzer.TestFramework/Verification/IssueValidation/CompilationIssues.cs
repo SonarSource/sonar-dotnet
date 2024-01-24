@@ -38,16 +38,16 @@ internal sealed class CompilationIssues
         var map = new Dictionary<string, List<IIssueLocation>>();
         foreach (var diagnostic in diagnostics)
         {
-            Add(new IssueLocationCollector.IssueLocation(diagnostic));
+            Add(new IssueLocation(diagnostic));
             for (var i = 0; i < diagnostic.AdditionalLocations.Count; i++)
             {
-                Add(new IssueLocationCollector.IssueLocation(diagnostic.GetSecondaryLocation(i)));
+                Add(new IssueLocation(diagnostic.GetSecondaryLocation(i)));
             }
         }
         LanguageVersion = languageVersion;
         fileIssues = map.Select(x => new FileIssueLocations(x.Key, x.Value)).ToArray();
 
-        void Add(IssueLocationCollector.IssueLocation issue)
+        void Add(IssueLocation issue)
         {
             var list = map.GetOrAdd(issue.FilePath ?? string.Empty, _ => new List<IIssueLocation>());
             list.Add(issue);
