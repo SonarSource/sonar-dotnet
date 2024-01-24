@@ -29,17 +29,24 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void CollectionQuerySimplification() =>
-            builder.AddPaths("CollectionQuerySimplification.cs").Verify();
+            builder.AddPaths("CollectionQuerySimplification.cs")
+                .Verify();
 
 #if NET
 
         [TestMethod]
         public void CollectionQuerySimplification_CSharp9() =>
             builder.AddPaths("CollectionQuerySimplification.CSharp9.cs")
+                .AddReferences(GetReferencesEntityFrameworkNetCore())
                 .WithTopLevelStatements()
                 .Verify();
 
-#endif
+        private static IEnumerable<MetadataReference> GetReferencesEntityFrameworkNetCore() =>
+            Enumerable.Empty<MetadataReference>()
+                .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCore("2.2.6"))
+                .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreRelational("2.2.6"))
+                .Concat(NuGetMetadataReference.SystemComponentModelTypeConverter());
 
+#endif
     }
 }
