@@ -25,7 +25,7 @@ namespace SonarAnalyzer.Rules
     {
         internal const string DiagnosticId = "S1125";
 
-        private INamedTypeSymbol[] systemBooleanInterfaces;
+        private ImmutableArray<INamedTypeSymbol> systemBooleanInterfaces;
 
         protected enum ErrorLocation
         {
@@ -47,6 +47,12 @@ namespace SonarAnalyzer.Rules
         protected abstract SyntaxToken? GetOperatorToken(SyntaxNode node);
         protected abstract bool IsTrue(SyntaxNode syntaxNode);
         protected abstract bool IsFalse(SyntaxNode syntaxNode);
+
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterCompilationStartAction(x =>
+            {
+                systemBooleanInterfaces = x.Compilation.GetTypeByMetadataName(KnownType.System_Boolean).Interfaces;
+            });
 
         // For C# 7 syntax
         protected virtual bool IsInsideTernaryWithThrowExpression(SyntaxNode syntaxNode) => false;
@@ -212,11 +218,10 @@ namespace SonarAnalyzer.Rules
         private bool TypeShouldBeIgnored(SyntaxNode node, SemanticModel model)
         {
             var type = model.GetTypeInfo(node).Type;
-            systemBooleanInterfaces ??= model.Compilation.GetTypeByMetadataName(KnownType.System_Boolean).Interfaces.ToArray();
             return type.IsNullableBoolean()
                 || type is ITypeParameterSymbol
                 || type.Is(KnownType.System_Object)
-                || Array.Exists(systemBooleanInterfaces, x => x.Equals(type));
+                || systemBooleanInterfaces.Any(x => x.Equals(type));
         }
     }
 }
