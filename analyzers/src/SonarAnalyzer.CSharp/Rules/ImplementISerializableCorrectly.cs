@@ -19,6 +19,7 @@
  */
 
 using System.Runtime.Serialization;
+using System.Text;
 using SonarAnalyzer.Constants;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -27,7 +28,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public class ImplementISerializableCorrectly : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S3925";
-        private const string MessageFormat = "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.";
+        private const string MessageFormat = "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. {0}";
 
         private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
@@ -56,7 +57,9 @@ namespace SonarAnalyzer.Rules.CSharp
                     implementationErrors.AddRange(CheckGetObjectData(typeDeclarationSyntax, typeSymbol, getObjectData));
                     if (implementationErrors.Any())
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, typeDeclarationSyntax.Identifier.GetLocation(), implementationErrors.ToAdditionalLocations(), implementationErrors.ToProperties()));
+                        var details = implementationErrors.Aggregate(new StringBuilder(), (sb, error) => sb.Append($"{error.Message} "), sb => sb.ToString().TrimEnd());
+                        var rule = Diagnostic.Create(Rule, typeDeclarationSyntax.Identifier.GetLocation(), implementationErrors.ToAdditionalLocations(), implementationErrors.ToProperties(), details);
+                        c.ReportIssue(rule);
                     }
                 },
                 SyntaxKind.ClassDeclaration,
@@ -99,7 +102,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 foreach (var declaration in DeclarationOrImplementation<MethodDeclarationSyntax>(typeDeclaration, getObjectData))
                 {
-                    yield return new(declaration.Identifier.GetLocation(), "Invoke 'base.GetObjectData(SerializationInfo, StreamingContext)' in this method.");
+                    yield return new(declaration.Identifier.GetLocation(), "Invoke 'base.GetObjectData(SerializationInfo, StreamingContext)' in 'GetObjectData'.");
                 }
             }
         }
@@ -131,12 +134,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 if ((typeSymbol.IsSealed && serializationConstructor.DeclaredAccessibility != Accessibility.Private)
                     || (!typeSymbol.IsSealed && serializationConstructor.DeclaredAccessibility != Accessibility.Protected))
                 {
-                    yield return new(constructorSyntax.Identifier.GetLocation(), $"Make this constructor '{accessibility}'.");
+                    yield return new(constructorSyntax.Identifier.GetLocation(), $"Make the serialization constructor '{accessibility}'.");
                 }
 
                 if (ImplementsISerializable(typeSymbol.BaseType) && !IsCallingBaseConstructor(serializationConstructor))
                 {
-                    yield return new(constructorSyntax.Identifier.GetLocation(), $"Call constructor 'base(SerializationInfo, StreamingContext)'.");
+                    yield return new(constructorSyntax.Identifier.GetLocation(), $"Call 'base(SerializationInfo, StreamingContext)' on the serialization constructor.");
                 }
             }
             else

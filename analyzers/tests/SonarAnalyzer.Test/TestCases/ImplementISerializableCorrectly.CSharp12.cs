@@ -21,7 +21,7 @@ namespace Tests.Diagnostics
         public SomeClass() : this(new Serializable()) { }
 
         protected SomeClass(SerializationInfo info, StreamingContext context) : this(new Serializable()) { }
-//                ^^^^^^^^^ Secondary {{Call constructor 'base(SerializationInfo, StreamingContext)'.}}
+        //        ^^^^^^^^^ Secondary {{Call 'base(SerializationInfo, StreamingContext)' on the serialization constructor.}}
         private void SomeMethod()
         {
             Console.WriteLine(serializableField.ToString());
