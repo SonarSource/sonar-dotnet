@@ -22,7 +22,7 @@ using System.Text.RegularExpressions;
 using FluentAssertions.Execution;
 using Microsoft.CodeAnalysis.Text;
 
-namespace SonarAnalyzer.Test.TestFramework
+namespace SonarAnalyzer.TestFramework.Verification.IssueValidation
 {
     /// <summary>
     /// See <see href="https://github.com/SonarSource/sonar-dotnet/blob/master/docs/verifier-syntax.md">docs/verifier-syntax.md</see>
@@ -155,18 +155,18 @@ namespace SonarAnalyzer.Test.TestFramework
 
             return GetIssueIds(match).Select(
                 issueId => new IssueLocation
-                           {
-                               IsPrimary = isPrimary,
-                               LineNumber = line,
-                               Message = message,
-                               IssueId = issueId,
-                               Start = start,
-                               Length = length,
-                           });
+                {
+                    IsPrimary = isPrimary,
+                    LineNumber = line,
+                    Message = message,
+                    IssueId = issueId,
+                    Start = start,
+                    Length = length,
+                });
         }
 
         private static int? GetStart(Match match) =>
-            match.Groups["position"] is {Success: true} position ? position.Index : null;
+            match.Groups["position"] is { Success: true } position ? position.Index : null;
 
         private static int? GetLength(Match match) =>
             match.Groups["position"] is { Success: true } position ? position.Length : null;
@@ -237,7 +237,7 @@ Either remove the Noncompliant/Secondary word or precise pattern '^^' from the c
             }
         }
 
-        private static void ThrowUnexpectedPreciseLocationCount(int  count, int line)
+        private static void ThrowUnexpectedPreciseLocationCount(int count, int line)
         {
             var message = $"Expecting only one precise location per line, found {count} on line {line}. " +
                 @"If you want to specify more than one precise location per line you need to omit the Noncompliant comment:

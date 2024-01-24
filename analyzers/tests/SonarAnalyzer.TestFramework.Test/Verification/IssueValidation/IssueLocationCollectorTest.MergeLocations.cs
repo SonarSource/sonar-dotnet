@@ -18,7 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using IssueLocation = SonarAnalyzer.Test.TestFramework.IssueLocationCollector.IssueLocation;
+using SonarAnalyzer.TestFramework.Verification.IssueValidation;
+using IssueLocation = SonarAnalyzer.TestFramework.Verification.IssueValidation.IssueLocationCollector.IssueLocation;
 
 namespace SonarAnalyzer.Test.TestFramework.Tests
 {
