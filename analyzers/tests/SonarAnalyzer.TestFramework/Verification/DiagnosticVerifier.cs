@@ -352,17 +352,5 @@ Actual  : '{message}'");
             public FileIssueLocations ToExpectedIssueLocations() =>
                 new(FileName, IssueLocationCollector.GetExpectedIssueLocations(Content.Lines));
         }
-
-        internal class FileIssueLocations
-        {
-            public string FileName { get; }
-            public IList<IIssueLocation> IssueLocations { get; }
-
-            public FileIssueLocations(string fileName, IList<IIssueLocation> issueLocations)
-            {
-                FileName = fileName;
-                IssueLocations = issueLocations;
-            }
-        }
     }
 }
