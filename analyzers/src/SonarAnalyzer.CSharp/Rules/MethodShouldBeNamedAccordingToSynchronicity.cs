@@ -91,7 +91,7 @@ namespace SonarAnalyzer.Rules.CSharp
             || typeSymbol.ImplementsAny(AsyncReturnInterfaces);
 
         private static bool HasAsyncSuffix(MethodDeclarationSyntax methodDeclaration) =>
-            methodDeclaration.Identifier.ValueText.ToUpper().EndsWith("ASYNC");
+            methodDeclaration.Identifier.ValueText.EndsWith("async", StringComparison.OrdinalIgnoreCase);
 
         private static bool IsSignalRHubMethod(ISymbol methodSymbol) =>
             methodSymbol.GetEffectiveAccessibility() == Accessibility.Public
