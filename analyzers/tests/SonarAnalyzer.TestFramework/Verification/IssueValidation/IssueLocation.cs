@@ -20,21 +20,22 @@
 
 namespace SonarAnalyzer.TestFramework.Verification.IssueValidation;
 
-[DebuggerDisplay("ID:{IssueId} @{LineNumber} Primary:{IsPrimary} Start:{Start} Length:{Length} '{Message}'")]
-internal sealed class IssueLocation
+[DebuggerDisplay("ID:{RuleId} @{LineNumber} Primary:{IsPrimary} Start:{Start} Length:{Length} '{Message}'")]
+internal sealed class IssueLocation // ToDo: Refactor the relation between this and the Key
 {
+    public string RuleId { get; init; }     // Diagnostic ID for actual issues
     public string FilePath { get; init; }
-    public bool IsPrimary { get; init; }
     public int LineNumber { get; init; }
+    public bool IsPrimary { get; init; }
     public string Message { get; init; }
-    public string IssueId { get; init; }
+    public string IssueId { get; init; }    // Issue location ID to pair primary and secondary locations
     public int? Start { get; set; }
     public int? Length { get; set; }
 
     public IssueLocation(Diagnostic diagnostic) : this(diagnostic.GetMessage(), diagnostic.Location)
     {
         IsPrimary = true;
-        IssueId = diagnostic.Id;
+        RuleId = diagnostic.Id;
     }
 
     public IssueLocation(SecondaryLocation secondaryLocation) : this(secondaryLocation.Message, secondaryLocation.Location) { }
@@ -49,4 +50,10 @@ internal sealed class IssueLocation
         Length = location.SourceSpan.Length;
         FilePath = location.SourceTree?.FilePath;
     }
+}
+
+[DebuggerDisplay("@{LineNumber} Primary:{IsPrimary} {FilePath}")]
+internal record IssueLocationKey(string FilePath, int LineNumber, bool IsPrimary)
+{
+    public IssueLocationKey(IssueLocation issue) : this(issue.FilePath, issue.LineNumber, issue.IsPrimary) { }
 }
