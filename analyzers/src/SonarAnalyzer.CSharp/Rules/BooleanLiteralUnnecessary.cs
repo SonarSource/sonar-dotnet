@@ -66,6 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterNodeAction(CheckNotEquals, SyntaxKind.NotEqualsExpression);
             context.RegisterNodeAction(CheckConditional, SyntaxKind.ConditionalExpression);
             context.RegisterNodeAction(CheckForLoopCondition, SyntaxKind.ForStatement);
+            base.Initialize(context);
         }
 
         private void CheckForLoopCondition(SonarSyntaxNodeReportingContext context)

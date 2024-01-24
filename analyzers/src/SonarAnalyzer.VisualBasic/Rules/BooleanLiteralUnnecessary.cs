@@ -45,6 +45,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             context.RegisterNodeAction(CheckEquals, SyntaxKind.EqualsExpression);
             context.RegisterNodeAction(CheckNotEquals, SyntaxKind.NotEqualsExpression);
             context.RegisterNodeAction(CheckConditional, SyntaxKind.TernaryConditionalExpression);
+            base.Initialize(context);
         }
 
         private void CheckLogicalNot(SonarSyntaxNodeReportingContext context)

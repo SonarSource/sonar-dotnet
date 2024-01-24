@@ -231,4 +231,22 @@ namespace Tests.Diagnostics
             if (cond == false) { } // Noncompliant, TP but code fix is wrong - it should be fixed to "if (!cond)"
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/7792
+    class ObjectIsBool
+    {
+        void Object(object obj, Exception exc)
+        {
+            if (obj is true) { }
+            if (exc.Data["SomeKey"] is true) { }
+        }
+
+        void ConvertibleToBool(IComparable comparable, IComparable<bool> comparableBool, IEquatable<bool> equatable, IConvertible convertible)
+        {
+            if (comparable is true) { }
+            if (comparableBool is true) { }
+            if (equatable is true) { }
+            if (convertible is true) { }
+        }
+    }
 }

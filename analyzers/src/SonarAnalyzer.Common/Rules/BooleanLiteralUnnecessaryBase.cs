@@ -25,6 +25,8 @@ namespace SonarAnalyzer.Rules
     {
         internal const string DiagnosticId = "S1125";
 
+        private ImmutableArray<INamedTypeSymbol> systemBooleanInterfaces;
+
         protected enum ErrorLocation
         {
             // The BooleanLiteral node is highlighted
@@ -45,6 +47,12 @@ namespace SonarAnalyzer.Rules
         protected abstract SyntaxToken? GetOperatorToken(SyntaxNode node);
         protected abstract bool IsTrue(SyntaxNode syntaxNode);
         protected abstract bool IsFalse(SyntaxNode syntaxNode);
+
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterCompilationStartAction(x =>
+            {
+                systemBooleanInterfaces = x.Compilation.GetTypeByMetadataName(KnownType.System_Boolean).Interfaces;
+            });
 
         // For C# 7 syntax
         protected virtual bool IsInsideTernaryWithThrowExpression(SyntaxNode syntaxNode) => false;
@@ -145,7 +153,9 @@ namespace SonarAnalyzer.Rules
             var left = Language.Syntax.RemoveParentheses(GetLeftNode(node));
             var right = Language.Syntax.RemoveParentheses(GetRightNode(node));
 
-            if (CheckForNullability(left, right, context.SemanticModel))
+            if (right is null // Avoids DeclarationPattern or RecursivePattern
+                || TypeShouldBeIgnored(left, context.SemanticModel)
+                || TypeShouldBeIgnored(right, context.SemanticModel))
             {
                 return true;
             }
@@ -205,9 +215,13 @@ namespace SonarAnalyzer.Rules
             return isLeftSide ? parent.CreateLocation(token) : token.CreateLocation(parent);
         }
 
-        private static bool CheckForNullability(SyntaxNode left, SyntaxNode right, SemanticModel model) =>
-            right is null // Avoids DeclarationPattern or RecursivePattern
-            || model.GetTypeInfo(left).Type.IsNullableBoolean()
-            || model.GetTypeInfo(right).Type.IsNullableBoolean();
+        private bool TypeShouldBeIgnored(SyntaxNode node, SemanticModel model)
+        {
+            var type = model.GetTypeInfo(node).Type;
+            return type.IsNullableBoolean()
+                || type is ITypeParameterSymbol
+                || type.Is(KnownType.System_Object)
+                || systemBooleanInterfaces.Any(x => x.Equals(type));
+        }
     }
 }
