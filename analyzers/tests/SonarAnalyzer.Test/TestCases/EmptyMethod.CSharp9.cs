@@ -144,3 +144,67 @@ class PropertyAccessors
         protected new int VirtualEmptyInitProp { init { } }      // Noncompliant
     }
 }
+
+class EmptyProperty
+{
+    int EmptyProp { } // Error CS0548 property or indexer must have at least one accessor
+}
+
+class LocalFunction
+{
+    void FirstLevelInMethod()
+    {
+        void NonEmpty() { int i; }              // Compliant
+        void Empty() { }                        // Noncompliant
+        static void EmptyStatic() { }           // Noncompliant
+        extern static void EmptyExternStatic(); // Compliant, no body
+        unsafe void EmptyUnsafe() { }           // Noncompliant
+        async void EmptyAsync() { }             // Noncompliant
+    }
+
+    void NestedInMethod()
+    {
+        void FirstLevelLocalFunction()
+        {
+            void NonEmpty() { int i; }          // Compliant
+            void Empty() { }                    // Noncompliant
+
+            void SecondLevelLocalFunction()     // Compliant, contains a local functions
+            {
+                void NonEmpty() { int i; }      // Compliant
+                void Empty() { }                // Noncompliant
+            }
+        }
+    }
+
+    int FirstLevelInAccessor
+    {
+        set
+        {
+            void NonEmpty() { int i; }              // Compliant
+            void Empty() { }                        // Noncompliant
+            static void EmptyStatic() { }           // Noncompliant
+            extern static void EmptyExternStatic(); // Compliant, no body
+            unsafe void EmptyUnsafe() { }           // Noncompliant
+            async void EmptyAsync() { }             // Noncompliant
+        }
+    }
+
+    int NestedInAccessor
+    {
+        init
+        {
+            void FirstLevelLocalFunction()
+            {
+                void NonEmpty() { int i; }          // Compliant
+                void Empty() { }                    // Noncompliant
+
+                void SecondLevelLocalFunction()     // Compliant, contains local functions
+                {
+                    void NonEmpty() { int i; }      // Compliant
+                    void Empty() { }                // Noncompliant
+                }
+            }
+        }
+    }
+}

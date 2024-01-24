@@ -150,3 +150,67 @@ class PropertyAccessors
         protected new int VirtualEmptyInitProp { init { throw new NotSupportedException(); } }      // Fixed
     }
 }
+
+class EmptyProperty
+{
+    int EmptyProp { } // Error CS0548 property or indexer must have at least one accessor
+}
+
+class LocalFunction
+{
+    void FirstLevelInMethod()
+    {
+        void NonEmpty() { int i; }              // Compliant
+        void Empty() { throw new NotSupportedException(); }                        // Fixed
+        static void EmptyStatic() { throw new NotSupportedException(); }           // Fixed
+        extern static void EmptyExternStatic(); // Compliant, no body
+        unsafe void EmptyUnsafe() { throw new NotSupportedException(); }           // Fixed
+        async void EmptyAsync() { throw new NotSupportedException(); }             // Fixed
+    }
+
+    void NestedInMethod()
+    {
+        void FirstLevelLocalFunction()
+        {
+            void NonEmpty() { int i; }          // Compliant
+            void Empty() { throw new NotSupportedException(); }                    // Fixed
+
+            void SecondLevelLocalFunction()     // Compliant, contains a local functions
+            {
+                void NonEmpty() { int i; }      // Compliant
+                void Empty() { throw new NotSupportedException(); }                // Fixed
+            }
+        }
+    }
+
+    int FirstLevelInAccessor
+    {
+        set
+        {
+            void NonEmpty() { int i; }              // Compliant
+            void Empty() { throw new NotSupportedException(); }                        // Fixed
+            static void EmptyStatic() { throw new NotSupportedException(); }           // Fixed
+            extern static void EmptyExternStatic(); // Compliant, no body
+            unsafe void EmptyUnsafe() { throw new NotSupportedException(); }           // Fixed
+            async void EmptyAsync() { throw new NotSupportedException(); }             // Fixed
+        }
+    }
+
+    int NestedInAccessor
+    {
+        init
+        {
+            void FirstLevelLocalFunction()
+            {
+                void NonEmpty() { int i; }          // Compliant
+                void Empty() { throw new NotSupportedException(); }                    // Fixed
+
+                void SecondLevelLocalFunction()     // Compliant, contains local functions
+                {
+                    void NonEmpty() { int i; }      // Compliant
+                    void Empty() { throw new NotSupportedException(); }                // Fixed
+                }
+            }
+        }
+    }
+}

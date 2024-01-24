@@ -181,3 +181,103 @@ class PropertyAccessors
         }      // Fixed
     }
 }
+
+class EmptyProperty
+{
+    int EmptyProp { } // Error CS0548 property or indexer must have at least one accessor
+}
+
+class LocalFunction
+{
+    void FirstLevelInMethod()
+    {
+        void NonEmpty() { int i; }              // Compliant
+        void Empty()
+        {
+            // Method intentionally left empty.
+        }                        // Fixed
+        static void EmptyStatic()
+        {
+            // Method intentionally left empty.
+        }           // Fixed
+        extern static void EmptyExternStatic(); // Compliant, no body
+        unsafe void EmptyUnsafe()
+        {
+            // Method intentionally left empty.
+        }           // Fixed
+        async void EmptyAsync()
+        {
+            // Method intentionally left empty.
+        }             // Fixed
+    }
+
+    void NestedInMethod()
+    {
+        void FirstLevelLocalFunction()
+        {
+            void NonEmpty() { int i; }          // Compliant
+            void Empty()
+            {
+                // Method intentionally left empty.
+            }                    // Fixed
+
+            void SecondLevelLocalFunction()     // Compliant, contains a local functions
+            {
+                void NonEmpty() { int i; }      // Compliant
+                void Empty()
+                {
+                    // Method intentionally left empty.
+                }                // Fixed
+            }
+        }
+    }
+
+    int FirstLevelInAccessor
+    {
+        set
+        {
+            void NonEmpty() { int i; }              // Compliant
+            void Empty()
+            {
+                // Method intentionally left empty.
+            }                        // Fixed
+            static void EmptyStatic()
+            {
+                // Method intentionally left empty.
+            }           // Fixed
+            extern static void EmptyExternStatic(); // Compliant, no body
+            unsafe void EmptyUnsafe()
+            {
+                // Method intentionally left empty.
+            }           // Fixed
+            async void EmptyAsync()
+            {
+                // Method intentionally left empty.
+            }             // Fixed
+        }
+    }
+
+    int NestedInAccessor
+    {
+        init
+        {
+            void FirstLevelLocalFunction()
+            {
+                void NonEmpty() { int i; }          // Compliant
+                void Empty()
+                {
+                    // Method intentionally left empty.
+                }                    // Fixed
+
+                void SecondLevelLocalFunction()     // Compliant, contains local functions
+                {
+                    void NonEmpty() { int i; }      // Compliant
+                    void Empty()
+                    {
+                        // Method intentionally left empty.
+                    }                // Fixed
+                }
+            }
+        }
+    }
+}

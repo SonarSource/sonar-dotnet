@@ -26,3 +26,10 @@ public unsafe partial class Externals
     [System.Runtime.InteropServices.DllImportAttribute("ole32.dll", EntryPoint = "F", ExactSpelling = true)]
     private static extern partial void F(); // Compliant
 }
+
+abstract class WithModifiers
+{
+    public unsafe required int X { set { } }              // Noncompliant
+    public virtual int Y { get => 42;  private set { } }  // Noncompliant
+    public abstract int Z { get; private protected set; } // Compliant: no body
+}
