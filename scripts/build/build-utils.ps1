@@ -158,7 +158,7 @@ function Invoke-IntegrationTests() {
     Invoke-InLocation "its" {
         Exec { & git submodule update --init --recursive --depth 1 }
 
-        Exec { & .\regression-test.ps1
+        Exec { & .\regression-test.ps1 `
         } -errorMessage "ERROR: Integration tests FAILED."
     }
 }
