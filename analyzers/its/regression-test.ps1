@@ -437,7 +437,6 @@ try {
     Initialize-ActualFolder
     Initialize-OutputFolder
 
-    nuget.exe locals all -clear
     # Note: Automapper has multiple configurations that are built simultaneously and sometimes
     # it happens that a the same project is built in parallel in different configurations. The
     # protobuf-generating rules try to write their output in the same folder and fail, even
