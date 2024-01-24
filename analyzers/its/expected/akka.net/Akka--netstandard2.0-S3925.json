@@ -314,7 +314,7 @@
 },
 {
 "id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'SchedulerException' because it implements 'ISerializable'. Make this constructor 'private'.",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'SchedulerException' because it implements 'ISerializable'. Make the serialization constructor 'private'.",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/SchedulerException.cs#L16",

@@ -26,7 +26,7 @@
 },
 {
 "id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'AbruptStageTerminationException' because it implements 'ISerializable'. Make this constructor 'private'.",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'AbruptStageTerminationException' because it implements 'ISerializable'. Make the serialization constructor 'private'.",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L281",
@@ -83,7 +83,7 @@
 },
 {
 "id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'PartitionOutOfBoundsException' because it implements 'ISerializable'. Make this constructor 'private'.",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'PartitionOutOfBoundsException' because it implements 'ISerializable'. Make the serialization constructor 'private'.",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L1205",
@@ -164,7 +164,7 @@
 },
 {
 "id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'TcpIdleTimeoutException' because it implements 'ISerializable'. Make this constructor 'private'.",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'TcpIdleTimeoutException' because it implements 'ISerializable'. Make the serialization constructor 'private'.",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L300",
@@ -293,7 +293,7 @@
 },
 {
 "id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'InvalidSequenceNumberException' because it implements 'ISerializable'. Make this constructor 'private'.",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'InvalidSequenceNumberException' because it implements 'ISerializable'. Make the serialization constructor 'private'.",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamRefs.cs#L112",
@@ -326,7 +326,7 @@
 },
 {
 "id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'InvalidPartnerActorException' because it implements 'ISerializable'. Make this constructor 'private'.",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'InvalidPartnerActorException' because it implements 'ISerializable'. Make the serialization constructor 'private'.",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamRefs.cs#L145",
@@ -359,7 +359,7 @@
 },
 {
 "id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'TargetRefNotInitializedYetException' because it implements 'ISerializable'. Make this constructor 'private'.",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'TargetRefNotInitializedYetException' because it implements 'ISerializable'. Make the serialization constructor 'private'.",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamRefs.cs#L56",
@@ -392,7 +392,7 @@
 },
 {
 "id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'StreamRefSubscriptionTimeoutException' because it implements 'ISerializable'. Make this constructor 'private'.",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'StreamRefSubscriptionTimeoutException' because it implements 'ISerializable'. Make the serialization constructor 'private'.",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamRefs.cs#L75",
@@ -425,7 +425,7 @@
 },
 {
 "id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'RemoteStreamRefActorTerminatedException' because it implements 'ISerializable'. Make this constructor 'private'.",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'RemoteStreamRefActorTerminatedException' because it implements 'ISerializable'. Make the serialization constructor 'private'.",
 "location":  [
 {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamRefs.cs#L92",
