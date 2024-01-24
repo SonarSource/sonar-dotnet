@@ -57,7 +57,7 @@ internal static class DiagnosticsComparer
     {
         var prefix = $"Line {actual.LineNumber}";
         var issueType = IssueType(actual.IsPrimary);
-        var issueId = (expected?.RuleId ?? actual.RuleId) is { } id ? $" ID: {id}" : string.Empty;
+        var issueId = (expected?.IssueId ?? actual.IssueId) is { } id ? $" ID: {id}" : string.Empty;
 
         if (expected == null)
         {

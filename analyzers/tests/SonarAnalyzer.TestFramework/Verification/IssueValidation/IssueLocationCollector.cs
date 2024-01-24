@@ -153,12 +153,12 @@ namespace SonarAnalyzer.TestFramework.Verification.IssueValidation
             }
 
             return GetIssueIds(match).Select(
-                x => new IssueLocation
+                issueId => new IssueLocation
                 {
                     IsPrimary = isPrimary,
                     LineNumber = line,
                     Message = message,
-                    RuleId = x,
+                    IssueId = issueId,
                     Start = start,
                     Length = length,
                 });
@@ -215,8 +215,8 @@ Either remove the Noncompliant/Secondary word or precise pattern '^^' from the c
         private static IList<IssueLocation> EnsureNoDuplicatedPrimaryIds(IList<IssueLocation> mergedLocations)
         {
             var duplicateLocationsIds = mergedLocations
-                            .Where(x => x.IsPrimary && x.RuleId != null)
-                            .GroupBy(x => x.RuleId)
+                            .Where(x => x.IsPrimary && x.IssueId != null)
+                            .GroupBy(x => x.IssueId)
                             .FirstOrDefault(group => group.Count() > 1);
             if (duplicateLocationsIds != null)
             {

@@ -61,7 +61,7 @@ internal sealed class CompilationIssues
             Console.WriteLine($"Actual {LanguageVersion} diagnostics {Path.GetFileName(file.FileName)}:");
             foreach (var issue in file.IssueLocations.OrderBy(x => x.LineNumber))
             {
-                Console.WriteLine($"  ID: {issue.RuleId}, Line: {issue.LineNumber}, [{issue.Start}, {issue.Length}] {issue.Message}");
+                Console.WriteLine($"  ID: {issue.IssueId}, Line: {issue.LineNumber}, [{issue.Start}, {issue.Length}] {issue.Message}");
             }
         }
     }
