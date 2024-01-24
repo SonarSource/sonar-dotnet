@@ -1,8 +1,8 @@
 [CmdletBinding(PositionalBinding = $false)]
 param
 (
-    [Parameter(HelpMessage = "Version of MS Build: 14.0, 15.0, 16.0 or Current")]
-    [ValidateSet("14.0", "15.0", "16.0", "Current")]
+    [Parameter(HelpMessage = "Version of MS Build: 15.0, 16.0 or Current")]
+    [ValidateSet("15.0", "16.0", "Current")]
     [string]
     $msbuildVersion = "Current",
 
@@ -70,7 +70,6 @@ function Build-Project-MSBuild([string]$ProjectName, [string]$SolutionRelativePa
     $Env:PROJECT = $ProjectName
 
     Restore-Packages $msbuildVersion $solutionPath
-    # Note: Summary doesn't work for MSBuild 14
     Invoke-MSBuild $msbuildVersion $solutionPath `
         /m:$CpuCount `
         /t:rebuild `
