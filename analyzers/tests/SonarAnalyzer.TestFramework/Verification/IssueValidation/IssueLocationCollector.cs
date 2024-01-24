@@ -28,7 +28,7 @@ namespace SonarAnalyzer.TestFramework.Verification.IssueValidation
     /// See <see href="https://github.com/SonarSource/sonar-dotnet/blob/master/docs/verifier-syntax.md">docs/verifier-syntax.md</see>
     /// for a comprehensive documentation of the verifier syntax.
     /// </summary>
-    public static class IssueLocationCollector
+    internal static class IssueLocationCollector
     {
         private const string CommentPattern = @"(?<comment>//|'|<!--|/\*|@\*)";
         private const string PrecisePositionPattern = @"\s*(?<position>\^+)(\s+(?<invalid>\^+))*";
@@ -40,10 +40,10 @@ namespace SonarAnalyzer.TestFramework.Verification.IssueValidation
         private const string IssueIdsPattern = @"(\s*\[(?<issueIds>[^]]+)\])?";
         private const string MessagePattern = @"(\s*\{\{(?<message>.+)\}\})?";
 
-        internal static readonly Regex RxIssue =
+        public static readonly Regex RxIssue =
             CreateRegex(CommentPattern + NoPrecisePositionPattern + IssueTypePattern + OffsetPattern + ExactColumnPattern + IssueIdsPattern + MessagePattern);
 
-        internal static readonly Regex RxPreciseLocation =
+        public static readonly Regex RxPreciseLocation =
             CreateRegex(@"^\s*" + CommentPattern + PrecisePositionPattern + IssueTypePattern + "?" + OffsetPattern + IssueIdsPattern + MessagePattern + @"\s*(-->|\*/|\*@)?$");
 
         private static readonly Regex RxBuildError = CreateRegex(CommentPattern + ErrorTypePattern + OffsetPattern + ExactColumnPattern + IssueIdsPattern);
@@ -75,10 +75,10 @@ namespace SonarAnalyzer.TestFramework.Verification.IssueValidation
             return EnsureNoDuplicatedPrimaryIds(MergeLocations(locations.ToArray(), preciseLocations.ToArray()));
         }
 
-        internal static IEnumerable<IIssueLocation> GetExpectedBuildErrors(IEnumerable<TextLine> lines) =>
+        public static IEnumerable<IIssueLocation> GetExpectedBuildErrors(IEnumerable<TextLine> lines) =>
             lines?.SelectMany(GetBuildErrorsLocations) ?? Enumerable.Empty<IIssueLocation>();
 
-        internal static IList<IIssueLocation> MergeLocations(IssueLocation[] locations, IssueLocation[] preciseLocations)
+        public static IList<IIssueLocation> MergeLocations(IssueLocation[] locations, IssueLocation[] preciseLocations)
         {
             var usedLocations = new List<IssueLocation>();
             foreach (var location in locations)
@@ -109,10 +109,10 @@ namespace SonarAnalyzer.TestFramework.Verification.IssueValidation
                    .ToList();
         }
 
-        internal static /*for testing*/ IEnumerable<IssueLocation> GetIssueLocations(TextLine line) =>
+        public static /*for testing*/ IEnumerable<IssueLocation> GetIssueLocations(TextLine line) =>
             GetLocations(line, RxIssue);
 
-        internal static /*for testing*/ IEnumerable<IssueLocation> GetPreciseIssueLocations(TextLine line)
+        public static /*for testing*/ IEnumerable<IssueLocation> GetPreciseIssueLocations(TextLine line)
         {
             var match = RxPreciseLocation.Match(line.ToString());
             if (match.Success)
