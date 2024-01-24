@@ -26,29 +26,31 @@ namespace SonarAnalyzer.Test.TestFramework
     {
         public static StringBuilder Compare(Diagnostic[] diagnostics, Dictionary<string, IList<IIssueLocation>> expectedIssuesPerFile, string languageVersion)
         {
-            var summary = new StringBuilder($"Comparing actual issues with expected:\nLanguage version: {languageVersion}.\n");
-            var actualIssuesPerFile = diagnostics.ToIssueLocationsPerFile();
+            throw new NotImplementedException();
 
-            foreach (var fileName in actualIssuesPerFile.Keys.OrderBy(x => x))
-            {
-                summary.Append('\n').Append(fileName).Append('\n');
+            //var summary = new StringBuilder($"Comparing actual issues with expected:\nLanguage version: {languageVersion}.\n");
+            //var actualIssuesPerFile = diagnostics.ToIssueLocationsPerFile();
 
-                var expectedIssues = expectedIssuesPerFile[fileName];
-                foreach (var actualIssue in actualIssuesPerFile[fileName].OrderBy(x => x.LineNumber))
-                {
-                    var expectedIssue = expectedIssues.FirstOrDefault(x => x.IsPrimary == actualIssue.IsPrimary && x.LineNumber == actualIssue.LineNumber);
-                    summary.AppendComparison(actualIssue, expectedIssue);
-                    expectedIssues.Remove(expectedIssue);
-                }
+            //foreach (var fileName in actualIssuesPerFile.Keys.OrderBy(x => x))
+            //{
+            //    summary.Append('\n').Append(fileName).Append('\n');
 
-                foreach (var expectedIssue in expectedIssues.OrderBy(x => x.LineNumber))
-                {
-                    var issueId = expectedIssue.IssueId is { } id ? $" ID: {id}" : string.Empty;
-                    summary.Append($"Line {expectedIssue.LineNumber}: Expected {IssueType(expectedIssue.IsPrimary)} issue was not raised!{issueId}\n");
-                }
-            }
+            //    var expectedIssues = expectedIssuesPerFile[fileName];
+            //    foreach (var actualIssue in actualIssuesPerFile[fileName].OrderBy(x => x.LineNumber))
+            //    {
+            //        var expectedIssue = expectedIssues.FirstOrDefault(x => x.IsPrimary == actualIssue.IsPrimary && x.LineNumber == actualIssue.LineNumber);
+            //        summary.AppendComparison(actualIssue, expectedIssue);
+            //        expectedIssues.Remove(expectedIssue);
+            //    }
 
-            return summary;
+            //    foreach (var expectedIssue in expectedIssues.OrderBy(x => x.LineNumber))
+            //    {
+            //        var issueId = expectedIssue.IssueId is { } id ? $" ID: {id}" : string.Empty;
+            //        summary.Append($"Line {expectedIssue.LineNumber}: Expected {IssueType(expectedIssue.IsPrimary)} issue was not raised!{issueId}\n");
+            //    }
+            //}
+
+            //return summary;
         }
 
         private static void AppendComparison(this StringBuilder summary, IIssueLocation actual, IIssueLocation expected)
@@ -73,28 +75,6 @@ namespace SonarAnalyzer.Test.TestFramework
             {
                 summary.Append($"{prefix}: {issueType} issue should have a length of {expected.Length} but got a length of {actual.Length}!{issueId}\n");
             }
-        }
-
-        private static Dictionary<string, IList<IIssueLocation>> ToIssueLocationsPerFile(this IEnumerable<Diagnostic> diagnostics)
-        {
-            var issuesPerFile = new Dictionary<string, IList<IIssueLocation>>();
-
-            foreach (var diagnostic in diagnostics)
-            {
-                var path = diagnostic.Location.SourceTree?.FilePath ?? string.Empty;
-                if (!issuesPerFile.ContainsKey(path))
-                {
-                    issuesPerFile.Add(path, new List<IIssueLocation>());
-                }
-                issuesPerFile[path].Add(new IssueLocationCollector.IssueLocation(diagnostic));
-
-                for (var i = 0; i < diagnostic.AdditionalLocations.Count; i++)
-                {
-                    issuesPerFile[path].Add(new IssueLocationCollector.IssueLocation(diagnostic.GetSecondaryLocation(i)));
-                }
-            }
-
-            return issuesPerFile;
         }
 
         private static string IssueType(bool isPrimary) =>
