@@ -112,4 +112,36 @@ public class CSharp8
         Interlocked.Increment(ref otherBytes);
         _ = bytes9 | 0x80; // Noncompliant
     }
+
+    public unsafe void UnaryOperators()
+    {
+#nullable enable
+        var bytes1 = 0;
+        _ = bytes1!; // SuppressNullableWarning does not mutate the value
+        _ = bytes1 | 0x80; // Noncompliant
+#nullable disable
+
+        var bytes2 = 0;
+        _ = +bytes2; // UnaryPlus does not mutate the value
+        _ = bytes2 | 0x80; // Noncompliant
+
+        var bytes3 = 0;
+        _ = -bytes3; // UnaryMinus does not mutate the value
+        _ = bytes3 | 0x80; // Noncompliant
+
+        var bytes4 = 0;
+        _ = ~bytes4; // BitwiseNot does not mutate the value
+        _ = bytes4 | 0x80; // Noncompliant
+
+        // LogicalNot does not mutate and can not be tested here
+
+        var bytes5 = 0;
+        var pointer5 = &bytes5; // The address of operator indicates a possible mutation through the pointer
+        _ = bytes5 | 0x80; // Compliant
+
+        var bytes6 = 0;
+        var pointer6 = &bytes6; // The address of operator indicates a possible mutation through the pointer
+        *pointer6 = 1; // Pointer indirect mutates a value
+        _ = bytes6 | 0x80; // Compliant
+    }
 }
