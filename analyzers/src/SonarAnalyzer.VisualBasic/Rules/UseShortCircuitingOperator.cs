@@ -31,9 +31,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override string GetCurrentOpName(BinaryExpressionSyntax node) =>
             OperatorNames[node.Kind()];
 
-        protected override Operands GetOperands(BinaryExpressionSyntax expression)
-            => new(expression.Left, expression.Right);
-
         protected override SyntaxToken GetOperator(BinaryExpressionSyntax expression) =>
             expression.OperatorToken;
 

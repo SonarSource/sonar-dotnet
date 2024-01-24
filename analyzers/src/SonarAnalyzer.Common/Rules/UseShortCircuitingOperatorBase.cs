@@ -46,8 +46,9 @@ namespace SonarAnalyzer.Rules
             context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
                 {
                     var node = (TBinaryExpression)c.Node;
-
-                    if (GetOperands(node) is ({ } left, { } right) && IsBool(left, c.SemanticModel) && IsBool(right, c.SemanticModel))
+                    var left = Language.Syntax.BinaryExpressionLeft(node);
+                    var right = Language.Syntax.BinaryExpressionRight(node);
+                    if (IsBool(left, c.SemanticModel) && IsBool(right, c.SemanticModel))
                     {
                         var extractText = c.SemanticModel.GetConstantValue(right) is { HasValue: true }
                             || c.SemanticModel.GetSymbolInfo(right).Symbol is ILocalSymbol or IFieldSymbol or IPropertySymbol or IParameterSymbol
@@ -63,12 +64,8 @@ namespace SonarAnalyzer.Rules
 
         protected abstract string GetCurrentOpName(TBinaryExpression node);
 
-        protected abstract Operands GetOperands(TBinaryExpression expression);
-
         protected abstract SyntaxToken GetOperator(TBinaryExpression expression);
 
         protected abstract ImmutableArray<TSyntaxKind> SyntaxKindsOfInterest { get; }
-
-        protected readonly record struct Operands(SyntaxNode Left, SyntaxNode Right);
     }
 }
