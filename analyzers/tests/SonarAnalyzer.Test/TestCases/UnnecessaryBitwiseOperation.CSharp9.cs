@@ -102,21 +102,26 @@ public class CSharp8
         _ = bytes7 | 0x80; // Compliant
 
         var bytes8 = 0;
-        // Not passed by ref
-        _ = Convert.ToString(bytes8);
-        _ = bytes8 | 0x80; // Noncompliant
-
-
-        var bytes9 = 0;
-        // Passed by out
-        _ = int.TryParse("1", out bytes9);
-        _ = bytes9 | 0x80; // Compliant
-
-        var bytes10 = 0;
         var otherBytes = 0;
         // Other variable passed
         Interlocked.Increment(ref otherBytes);
-        _ = bytes10 | 0x80; // Noncompliant
+        _ = bytes8 | 0x80; // Noncompliant
+    }
+
+    public void RefOrOut()
+    {
+        var bytes1 = 0;
+        // Not passed by ref
+        _ = Convert.ToString(bytes1);
+        _ = bytes1 | 0x80; // Noncompliant
+
+
+        var bytes2 = 0;
+        // Passed by out
+        _ = int.TryParse("1", out bytes2);
+        _ = bytes2 | 0x80; // Compliant
+
+        // ref tests are in InterlockedMethods()
     }
 
     public unsafe void UnaryOperators()
