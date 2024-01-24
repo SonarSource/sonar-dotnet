@@ -68,7 +68,11 @@ namespace SonarAnalyzer.Helpers
                     Operand: { } operand,
                 } when operand.NameIs(identifierName) => operand,
                 // Passing by ref is likely mutating the argument so we assume it is assigned a value in the called method.
-                ArgumentSyntax { RefOrOutKeyword.RawKind: (int)SyntaxKind.RefKeyword, Expression: { } argumentExpression } when argumentExpression.NameIs(identifierName) => argumentExpression,
+                ArgumentSyntax
+                {
+                    RefOrOutKeyword.RawKind: (int)SyntaxKind.RefKeyword or (int)SyntaxKind.OutKeyword,
+                    Expression: { } argumentExpression
+                } when argumentExpression.NameIs(identifierName) => argumentExpression,
                 _ => null,
             };
 

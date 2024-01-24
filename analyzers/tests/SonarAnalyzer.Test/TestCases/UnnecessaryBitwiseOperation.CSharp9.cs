@@ -106,11 +106,17 @@ public class CSharp8
         _ = Convert.ToString(bytes8);
         _ = bytes8 | 0x80; // Noncompliant
 
+
         var bytes9 = 0;
+        // Passed by out
+        _ = int.TryParse("1", out bytes9);
+        _ = bytes9 | 0x80; // Compliant
+
+        var bytes10 = 0;
         var otherBytes = 0;
         // Other variable passed
         Interlocked.Increment(ref otherBytes);
-        _ = bytes9 | 0x80; // Noncompliant
+        _ = bytes10 | 0x80; // Noncompliant
     }
 
     public unsafe void UnaryOperators()
