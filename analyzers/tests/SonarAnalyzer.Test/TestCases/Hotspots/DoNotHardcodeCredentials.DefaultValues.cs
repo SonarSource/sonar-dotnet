@@ -186,7 +186,7 @@ namespace Tests.Diagnostics
         {
             var secret = "hardcoded";
             FillRef(ref secret);
-            var a = "Server = localhost; Database = Test; User = SA; Password = " + secret;   // Noncompliant FP
+            var a = "Server = localhost; Database = Test; User = SA; Password = " + secret;   // Compliant
         }
 
         private void FillRef(ref string arg) =>

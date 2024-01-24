@@ -75,19 +75,28 @@ namespace Tests.Diagnostics
 
             var bytes1 = 0;
             bytes1++;
-            _ = bytes1 | 0x80; // Noncompliant, FP See: https://github.com/SonarSource/sonar-dotnet/issues/6326
+            _ = bytes1 | 0x80; // Compliant, See: https://github.com/SonarSource/sonar-dotnet/issues/6326
 
             var bytes2 = 0;
             ++bytes2;
-            _ = bytes2 | 0x80; // Noncompliant, FP
+            _ = bytes2 | 0x80; // Compliant
 
             var bytes3 = 0;
             bytes3--;
-            _ = bytes3 | 0x80; // Noncompliant, FP
+            _ = bytes3 | 0x80; // Compliant
 
             var bytes4 = 0;
             --bytes4;
-            _ = bytes4 | 0x80; // Noncompliant, FP
+            _ = bytes4 | 0x80; // Compliant
+
+            var bytes5 = 0;
+            var bytesOther = 0;
+            --bytesOther;      // Other variable is mutated
+            _ = bytes5 | 0x80; // Noncompliant
+
+            var bytes6 = 0;
+            bytesOther++;      // Other variable is mutated
+            _ = bytes6 | 0x80; // Noncompliant
         }
 
         private static long returnLong()

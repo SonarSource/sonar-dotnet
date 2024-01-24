@@ -38,15 +38,43 @@ namespace SonarAnalyzer.Helpers
                 node = statement.Expression;
             }
             if ((anyAssignmentKind || node.IsKind(SyntaxKind.SimpleAssignmentExpression))
-                && node is AssignmentExpressionSyntax assignment
-                && assignment.Left.NameIs(identifierName))
+                && IdentifierMutation(node, identifierName) is { } mutation)
             {
-                rightExpression = assignment.Right;
+                rightExpression = mutation;
                 return true;
             }
             rightExpression = null;
             return false;
         }
+
+        /// <summary>
+        /// If <paramref name="identifierName"/> is mutated inside <paramref name="mutation"/> then
+        /// the expression representing the new value is returned. The returned expression might be
+        /// the reference to the identifier itself, e.g. in a case like <c>i++;</c>.
+        /// </summary>
+        private static SyntaxNode IdentifierMutation(SyntaxNode mutation, string identifierName) =>
+            mutation switch
+            {
+                AssignmentExpressionSyntax assignment
+                    when assignment.MapAssignmentArguments().FirstOrDefault(x => x.Left.NameIs(identifierName)) is { Right: { } right } => right,
+                PostfixUnaryExpressionSyntax
+                {
+                    RawKind: (int)SyntaxKind.PostIncrementExpression or (int)SyntaxKind.PostDecrementExpression,
+                    Operand: { } operand,
+                } when operand.NameIs(identifierName) => operand,
+                PrefixUnaryExpressionSyntax
+                {
+                    RawKind: (int)SyntaxKind.PreIncrementExpression or (int)SyntaxKind.PreDecrementExpression or (int)SyntaxKind.AddressOfExpression,
+                    Operand: { } operand,
+                } when operand.NameIs(identifierName) => operand,
+                // Passing by ref or out is likely mutating the argument so we assume it is assigned a value in the called method.
+                ArgumentSyntax
+                {
+                    RefOrOutKeyword.RawKind: (int)SyntaxKind.RefKeyword or (int)SyntaxKind.OutKeyword,
+                    Expression: { } argumentExpression
+                } when argumentExpression.NameIs(identifierName) => argumentExpression,
+                _ => null,
+            };
 
         protected override bool IsIdentifierDeclaration(SyntaxNode node, string identifierName, out SyntaxNode initializer)
         {
