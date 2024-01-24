@@ -31,6 +31,7 @@ import com.sonar.orchestrator.locator.Location;
 import com.sonar.orchestrator.locator.MavenLocation;
 import com.sonar.orchestrator.util.Command;
 import com.sonar.orchestrator.util.CommandExecutor;
+import com.sonar.orchestrator.util.StreamConsumer;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -178,7 +179,18 @@ public class TestUtils {
 
     LOG.info(String.format("Running `dotnet build` in working directory '%s'", command.getDirectory()));
 
-    int r = CommandExecutor.create().execute(command, 2 * 60 * 1000);
+    final StringBuilder stdOutBuilder = new StringBuilder();
+    StreamConsumer streamConsumer = new StreamConsumer() {
+      @Override
+      public void consumeLine(String line) {
+        stdOutBuilder.append(line).append("\n");
+      }
+    };
+
+    int r = CommandExecutor.create().execute(command, streamConsumer, 2 * 60 * 1000);
+
+    String stdOut = stdOutBuilder.toString();
+    LOG.info(String.format("`dotnet build` stdOut: %s", stdOut));
     assertThat(r).isZero();
   }
 
