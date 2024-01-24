@@ -102,7 +102,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 foreach (var declaration in DeclarationOrImplementation<MethodDeclarationSyntax>(typeDeclaration, getObjectData))
                 {
-                    yield return new(declaration.Identifier.GetLocation(), "Invoke 'base.GetObjectData(SerializationInfo, StreamingContext)' in this method.");
+                    yield return new(declaration.Identifier.GetLocation(), "Invoke 'base.GetObjectData(SerializationInfo, StreamingContext)' in 'GetObjectData'.");
                 }
             }
         }
@@ -134,12 +134,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 if ((typeSymbol.IsSealed && serializationConstructor.DeclaredAccessibility != Accessibility.Private)
                     || (!typeSymbol.IsSealed && serializationConstructor.DeclaredAccessibility != Accessibility.Protected))
                 {
-                    yield return new(constructorSyntax.Identifier.GetLocation(), $"Make this constructor '{accessibility}'.");
+                    yield return new(constructorSyntax.Identifier.GetLocation(), $"Make the serialization constructor '{accessibility}'.");
                 }
 
                 if (ImplementsISerializable(typeSymbol.BaseType) && !IsCallingBaseConstructor(serializationConstructor))
                 {
-                    yield return new(constructorSyntax.Identifier.GetLocation(), $"Call constructor 'base(SerializationInfo, StreamingContext)'.");
+                    yield return new(constructorSyntax.Identifier.GetLocation(), $"Call 'base(SerializationInfo, StreamingContext)' on the serialization constructor.");
                 }
             }
             else

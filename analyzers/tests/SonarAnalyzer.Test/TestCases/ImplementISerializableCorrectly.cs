@@ -75,7 +75,7 @@ namespace Tests.Diagnostics
     {
         public Serializable_NoAttribute_1() { }
         protected Serializable_NoAttribute_1(SerializationInfo info, StreamingContext context) { }
-//                ^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary {{Call constructor 'base(SerializationInfo, StreamingContext)'.}}
+        //        ^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary {{Call 'base(SerializationInfo, StreamingContext)' on the serialization constructor.}}
     }
 
     [Serializable]
@@ -100,11 +100,11 @@ namespace Tests.Diagnostics
 
     [Serializable]
     public sealed class Serializable_Sealed : ISerializable
-//                      ^^^^^^^^^^^^^^^^^^^ Noncompliant
+    //                  ^^^^^^^^^^^^^^^^^^^ Noncompliant {{Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Make the serialization constructor 'private'.}}
     {
         public Serializable_Sealed() { }
         protected Serializable_Sealed(SerializationInfo info, StreamingContext context) { }
-//                ^^^^^^^^^^^^^^^^^^^ Secondary {{Make this constructor 'private'.}}
+        //        ^^^^^^^^^^^^^^^^^^^ Secondary {{Make the serialization constructor 'private'.}}
         public void GetObjectData(SerializationInfo info, StreamingContext context) { }
     }
 
@@ -128,23 +128,23 @@ namespace Tests.Diagnostics
 
     [Serializable]
     public class SerializableDerived_Not_CallingBase : Serializable
-//               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant
+    //           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant {{Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Call 'base(SerializationInfo, StreamingContext)' on the serialization constructor.}}
     {
         public SerializableDerived_Not_CallingBase() { }
         protected SerializableDerived_Not_CallingBase(SerializationInfo info, StreamingContext context) { }
-//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary {{Call constructor 'base(SerializationInfo, StreamingContext)'.}}
+        //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary {{Call 'base(SerializationInfo, StreamingContext)' on the serialization constructor.}}
     }
 
     [Serializable]
     public class SerializableDerived_Not_CallingBase_GetObjectData : Serializable
-//               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant
+    //           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant {{Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Invoke 'base.GetObjectData(SerializationInfo, StreamingContext)' in 'GetObjectData'.}}
     {
         private Serializable serializableField;
 
         public SerializableDerived_Not_CallingBase_GetObjectData() { }
         protected SerializableDerived_Not_CallingBase_GetObjectData(SerializationInfo info, StreamingContext context) : base(info, context) { }
         public override void GetObjectData(SerializationInfo info, StreamingContext context) { }
-//                           ^^^^^^^^^^^^^ Secondary {{Invoke 'base.GetObjectData(SerializationInfo, StreamingContext)' in this method.}}
+        //                   ^^^^^^^^^^^^^ Secondary {{Invoke 'base.GetObjectData(SerializationInfo, StreamingContext)' in 'GetObjectData'.}}
     }
 
     [Serializable]
@@ -154,7 +154,7 @@ namespace Tests.Diagnostics
 
         public SerializableDerived_Not_CallingBase_GetObjectData_Coverage() { }
         protected SerializableDerived_Not_CallingBase_GetObjectData_Coverage(SerializationInfo info, StreamingContext context) : base(info, context) { }
-        public override void GetObjectData(SerializationInfo info, StreamingContext context) // Secondary {{Invoke 'base.GetObjectData(SerializationInfo, StreamingContext)' in this method.}}
+        public override void GetObjectData(SerializationInfo info, StreamingContext context) // Secondary {{Invoke 'base.GetObjectData(SerializationInfo, StreamingContext)' in 'GetObjectData'.}}
         {
             var somethingElse = new SerializableDerived_Not_CallingBase_GetObjectData_Coverage();
             somethingElse.GetObjectData(info, context);
@@ -290,11 +290,11 @@ namespace Tests.Diagnostics
     }
 
     public class CustomLookup_OptInPerConstructor2 : Dictionary<string, object>
-    //           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  Noncompliant
+    //           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  Noncompliant {{Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'CustomLookup_OptInPerConstructor2' because it implements 'ISerializable'. Call 'base(SerializationInfo, StreamingContext)' on the serialization constructor.}}
     //     ^^^^^                                    Secondary@-1 {{Add 'System.SerializableAttribute' attribute on 'CustomLookup_OptInPerConstructor2' because it implements 'ISerializable'.}}
     {
         protected CustomLookup_OptInPerConstructor2(SerializationInfo info, StreamingContext context)
-        //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary {{Call constructor 'base(SerializationInfo, StreamingContext)'.}}
+        //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary {{Call 'base(SerializationInfo, StreamingContext)' on the serialization constructor.}}
         { }
     }
 }
