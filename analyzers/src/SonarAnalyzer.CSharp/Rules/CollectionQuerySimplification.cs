@@ -67,6 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
         };
 
         private const string WhereMethodName = "Where";
+        private const int WherePredicateTypeArgumentNumber = 2;
         private const string SelectMethodName = "Select";
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -338,6 +339,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             return lambda.Body as ExpressionSyntax;
         }
+
         private static string GetLambdaParameter(ExpressionSyntax expression)
         {
             if (expression is SimpleLambdaExpressionSyntax lambda)
@@ -420,7 +422,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (MethodIsNotUsingPredicate(outerMethodSymbol, outerInvocation)
                 && innerMethodSymbol.Name == WhereMethodName
-                && innerMethodSymbol.Parameters.Any(symbol => (symbol.Type as INamedTypeSymbol)?.TypeArguments.Length == 2))
+                && innerMethodSymbol.Parameters.Any(symbol => (symbol.Type as INamedTypeSymbol)?.TypeArguments.Length == WherePredicateTypeArgumentNumber))
             {
                 context.ReportIssue(Diagnostic.Create(rule, GetReportLocation(innerInvocation),
                     string.Format(MessageDropAndChange, WhereMethodName, outerMethodSymbol.Name)));
