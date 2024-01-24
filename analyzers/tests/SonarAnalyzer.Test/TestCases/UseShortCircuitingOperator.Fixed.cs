@@ -6,6 +6,9 @@ namespace Tests.Diagnostics
 {
     public class UseShortCircuitingOperator
     {
+        private bool field;
+        private bool Property { get; }
+
         public UseShortCircuitingOperator()
         {
             var b = true || false;   // Fixed
@@ -14,5 +17,21 @@ namespace Tests.Diagnostics
 
             var i = 1 | 2;
         }
+
+        public void ExtendedText(bool parameter)
+        {
+            var local = true;
+            var a = true || !true;                  // Fixed
+            a = true || parameter;                  // Fixed
+            a = true || local;                      // Fixed
+            a = true || field;                      // Fixed
+            a = true || Property;                   // Fixed
+            a = true || ReturnSomeBool();           // Fixed
+            a = true || !parameter;                 // Fixed
+            a = true || (parameter ? true : false); // Fixed
+        }
+
+        private bool ReturnSomeBool() =>
+            DateTime.Now.Second % 2 == 0;
     }
 }

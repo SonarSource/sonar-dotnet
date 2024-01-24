@@ -23,7 +23,7 @@ using Microsoft.CodeAnalysis.CodeFixes;
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [ExportCodeFixProvider(LanguageNames.VisualBasic)]
-    public sealed class UseShortCircuitingOperatorCodeFix : UseShortCircuitingOperatorCodeFixBase<BinaryExpressionSyntax>
+    public sealed class UseShortCircuitingOperatorCodeFix : UseShortCircuitingOperatorCodeFixBase<SyntaxKind, BinaryExpressionSyntax>
     {
         internal override bool IsCandidateExpression(BinaryExpressionSyntax expression)
         {

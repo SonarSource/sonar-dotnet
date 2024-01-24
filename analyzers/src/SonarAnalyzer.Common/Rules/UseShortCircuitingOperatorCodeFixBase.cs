@@ -20,12 +20,12 @@
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class UseShortCircuitingOperatorCodeFixBase<TBinaryExpression> : SonarCodeFix
+    public abstract class UseShortCircuitingOperatorCodeFixBase<TSyntaxKind, TBinaryExpression> : SonarCodeFix where TSyntaxKind : struct
         where TBinaryExpression : SyntaxNode
     {
         internal const string Title = "Use short-circuiting operators";
 
-        public override ImmutableArray<string> FixableDiagnosticIds =>  ImmutableArray.Create(UseShortCircuitingOperatorBase.DiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds =>  ImmutableArray.Create(UseShortCircuitingOperatorBase<TSyntaxKind>.DiagnosticId);
 
         protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
         {

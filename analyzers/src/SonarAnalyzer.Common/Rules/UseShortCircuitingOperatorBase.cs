@@ -20,12 +20,11 @@
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class UseShortCircuitingOperatorBase : SonarDiagnosticAnalyzer
+    public abstract class UseShortCircuitingOperatorBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind> where TSyntaxKind : struct
     {
         internal const string DiagnosticId = "S2178";
-        internal const string MessageFormat = "Correct this '{0}' to '{1}'.";
-
-        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
+        protected override string MessageFormat => "Correct this '{0}' to '{1}'{2}.";
+        protected UseShortCircuitingOperatorBase() : base(DiagnosticId) { }
 
         protected static bool IsBool(SyntaxNode node, SemanticModel semanticModel)
         {
@@ -39,35 +38,37 @@ namespace SonarAnalyzer.Rules
         }
     }
 
-    public abstract class UseShortCircuitingOperatorBase<TLanguageKindEnum, TBinaryExpression> : UseShortCircuitingOperatorBase
-        where TLanguageKindEnum : struct
+    public abstract class UseShortCircuitingOperatorBase<TSyntaxKind, TBinaryExpression> : UseShortCircuitingOperatorBase<TSyntaxKind>
+        where TSyntaxKind : struct
         where TBinaryExpression : SyntaxNode
     {
-        protected sealed override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterNodeAction(
-                GeneratedCodeRecognizer,
-                c =>
+        protected sealed override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
                 {
                     var node = (TBinaryExpression)c.Node;
 
-                    if (GetOperands(node).All(o => IsBool(o, c.SemanticModel)))
+                    if (GetOperands(node) is ({ } left, { } right) && IsBool(left, c.SemanticModel) && IsBool(right, c.SemanticModel))
                     {
+                        var extractText = c.SemanticModel.GetConstantValue(right) is { HasValue: true }
+                            || c.SemanticModel.GetSymbolInfo(right).Symbol is ILocalSymbol or IFieldSymbol or IPropertySymbol or IParameterSymbol
+                                ? string.Empty
+                                : " and extract the right operand to a variable if it should always be evaluated";
                         c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], GetOperator(node).GetLocation(),
-                            GetCurrentOpName(node), GetSuggestedOpName(node)));
+                            GetCurrentOpName(node), GetSuggestedOpName(node), extractText));
                     }
                 },
                 SyntaxKindsOfInterest.ToArray());
-        }
 
         protected abstract string GetSuggestedOpName(TBinaryExpression node);
 
         protected abstract string GetCurrentOpName(TBinaryExpression node);
 
-        protected abstract IEnumerable<SyntaxNode> GetOperands(TBinaryExpression expression);
+        protected abstract Operands GetOperands(TBinaryExpression expression);
 
         protected abstract SyntaxToken GetOperator(TBinaryExpression expression);
 
-        protected abstract ImmutableArray<TLanguageKindEnum> SyntaxKindsOfInterest { get; }
+        protected abstract ImmutableArray<TSyntaxKind> SyntaxKindsOfInterest { get; }
+
+        protected readonly record struct Operands(SyntaxNode Left, SyntaxNode Right);
     }
 }
