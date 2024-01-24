@@ -53,12 +53,10 @@ try {
     $buildConfiguration = if ($release) { "Release" } else { "Debug" }
     $binPath = "bin\${buildConfiguration}"
     $solutionName = "SonarAnalyzer.sln"
-    $msbuildVersion = "15.0"
 
     Write-Host "Solution to build: $solutionName"
     Write-Host "Build configuration: $buildConfiguration"
     Write-Host "Bin folder to use: $binPath"
-    Write-Host "MSBuild: ${msbuildVersion}"
 
     $StartDate=(Get-Date)
 
@@ -69,7 +67,7 @@ try {
         Get-ChildItem tests\*\bin\Debug | Remove-Item -Recurse
         Get-ChildItem tests\*\bin\Release | Remove-Item -Recurse
 
-        Invoke-MSBuild $msbuildVersion $solutionName /t:"Restore,Rebuild" `
+        Invoke-MSBuild $solutionName /t:"Restore,Rebuild" `
             /consoleloggerparameters:Summary `
             /m `
             /p:configuration=$buildConfiguration `
@@ -85,7 +83,7 @@ try {
     }
 
     if ($its) {
-        Invoke-IntegrationTests $msbuildVersion
+        Invoke-IntegrationTests
     }
 
     if ($coverage) {

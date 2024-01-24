@@ -1,11 +1,6 @@
 [CmdletBinding(PositionalBinding = $false)]
 param
 (
-    [Parameter(HelpMessage = "Version of MS Build: 15.0, 16.0 or Current")]
-    [ValidateSet("15.0", "16.0", "Current")]
-    [string]
-    $msbuildVersion = "Current",
-
     [Parameter(HelpMessage = "The key of the rule to test, e.g. S1234. If omitted, all rules will be tested.")]
     [ValidatePattern("^S[0-9]+")]
     [string]
@@ -69,8 +64,8 @@ function Build-Project-MSBuild([string]$ProjectName, [string]$SolutionRelativePa
     Write-Debug "Setting PROJECT environment variable to '${ProjectName}'"
     $Env:PROJECT = $ProjectName
 
-    Restore-Packages $msbuildVersion $solutionPath
-    Invoke-MSBuild $msbuildVersion $solutionPath `
+    Restore-Packages $solutionPath
+    Invoke-MSBuild $solutionPath `
         /m:$CpuCount `
         /t:rebuild `
         /p:Configuration=Debug `

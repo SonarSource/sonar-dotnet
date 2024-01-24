@@ -12,7 +12,7 @@ function Get-VsWherePath {
     return Get-ExecutablePath -name "vswhere.exe" -envVar "VSWHERE_PATH"
 }
 
-function Get-MsBuildPath([ValidateSet("15.0", "16.0", "17.0", "Current")][string]$msbuildVersion) {
+function Get-MsBuildPath {
     #If MSBUILD_PATH environment variable is found, the version is not checked and the value of input parameter is ignored.
     Write-Host "Trying to find 'msbuild.exe' using 'MSBUILD_PATH' environment variable"
     $msbuildPathEnvVar = "MSBUILD_PATH"
@@ -86,14 +86,11 @@ function New-NuGetPackages([string]$binPath) {
 }
 
 # Used by the integration tests in analyzers\its\regression-test.ps1
-function Restore-Packages (
-    [Parameter(Mandatory = $true, Position = 0)][ValidateSet("15.0", "16.0", "17.0", "Current")][string]$msbuildVersion,
-    [Parameter(Mandatory = $true, Position = 1)][string]$solutionPath) {
-
+function Restore-Packages ([Parameter(Mandatory = $true, Position = 1)][string]$solutionPath) {
     $solutionName = Split-Path $solutionPath -Leaf
     Write-Header "Restoring NuGet packages for ${solutionName}"
 
-    $msbuildBinDir = Split-Path -Parent (Get-MsBuildPath $msbuildVersion)
+    $msbuildBinDir = Split-Path -Parent (Get-MsBuildPath)
 
     if (Test-Debug) {
         Exec { & (Get-NuGetPath) restore -LockedMode -MSBuildPath $msbuildBinDir -Verbosity detailed $solutionPath`
@@ -107,7 +104,6 @@ function Restore-Packages (
 
 # Build
 function Invoke-MSBuild (
-    [Parameter(Mandatory = $true, Position = 0)][ValidateSet("15.0", "16.0", "17.0", "Current")][string]$msbuildVersion,
     [Parameter(Mandatory = $true, Position = 1)][string]$solutionPath,
     [parameter(ValueFromRemainingArguments = $true)][array]$remainingArgs) {
 
@@ -121,7 +117,7 @@ function Invoke-MSBuild (
         $remainingArgs += "/v:quiet"
     }
 
-    $msbuildExe = Get-MsBuildPath $msbuildVersion
+    $msbuildExe = Get-MsBuildPath
     Exec { & $msbuildExe $solutionPath $remainingArgs `
     } -errorMessage "ERROR: Build FAILED."
 }
@@ -156,13 +152,13 @@ function Invoke-UnitTests([string]$binPath, [string]$buildConfiguration) {
     Test-ExitCode "ERROR: Unit tests for .NET 6 FAILED."
 }
 
-function Invoke-IntegrationTests([ValidateSet("15.0", "16.0", "17.0", "Current")][string] $msbuildVersion) {
+function Invoke-IntegrationTests() {
     Write-Header "Running integration tests"
 
     Invoke-InLocation "its" {
         Exec { & git submodule update --init --recursive --depth 1 }
 
-        Exec { & .\regression-test.ps1 -msbuildVersion $msbuildVersion `
+        Exec { & .\regression-test.ps1
         } -errorMessage "ERROR: Integration tests FAILED."
     }
 }
