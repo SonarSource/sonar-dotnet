@@ -276,6 +276,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_DateTimeOffset = new("System.DateTimeOffset");
         public static readonly KnownType System_Decimal = new("System.Decimal");
         public static readonly KnownType System_Delegate = new("System.Delegate");
+        public static readonly KnownType System_Runtime_CompilerServices_DefaultInterpolatedStringHandler = new("System.Runtime.CompilerServices.DefaultInterpolatedStringHandler");
         public static readonly KnownType System_Diagnostics_CodeAnalysis_ExcludeFromCodeCoverageAttribute = new("System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute");
         public static readonly KnownType System_Diagnostics_CodeAnalysis_SuppressMessageAttribute = new("System.Diagnostics.CodeAnalysis.SuppressMessageAttribute");
         public static readonly KnownType System_Diagnostics_ConditionalAttribute = new("System.Diagnostics.ConditionalAttribute");

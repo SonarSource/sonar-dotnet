@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
+
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -37,7 +39,11 @@ public sealed class UseStringCreate : SonarDiagnosticAnalyzer
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterCompilationStartAction(c =>
         {
-            if (!CompilationTargetsValidNetVersion(c.Compilation))
+            if (!c.Compilation.IsMemberAvailable(
+                KnownType.System_String,
+                "Create",
+                KnownType.System_String,
+                new[] { KnownType.System_IFormatProvider, KnownType.System_Runtime_CompilerServices_DefaultInterpolatedStringHandler }))
             {
                 return;
             }
@@ -61,11 +67,4 @@ public sealed class UseStringCreate : SonarDiagnosticAnalyzer
 
     private static bool NameIsEqual(SyntaxNode node, string name) =>
         node.GetName().Equals(name, StringComparison.Ordinal);
-
-    private static bool CompilationTargetsValidNetVersion(Compilation compilation) =>
-        compilation.GetTypeByMetadataName(KnownType.System_String) is var stringType
-        && stringType.GetMembers("Create")
-            .Any(x => x is IMethodSymbol { IsStatic: true } createMethod
-                      && createMethod.Parameters.FirstOrDefault() is { Type: { } parameterType }
-                      && parameterType.Is(KnownType.System_IFormatProvider));
 }

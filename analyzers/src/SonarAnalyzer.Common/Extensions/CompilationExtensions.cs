@@ -35,4 +35,35 @@ internal static class CompilationExtensions
 
     public static bool References(this Compilation compilation, KnownAssembly assembly)
         => assembly.IsReferencedBy(compilation);
+
+    public static bool IsMemberAvailable(this Compilation compilation, KnownType type, string memberName, KnownType memberType = null, KnownType[] parameterTypes = null)
+    {
+        var containingType = compilation.GetTypeByMetadataName(type);
+        if (containingType is null)
+        {
+            return false;
+        }
+
+        var memberSymbols = containingType.GetMembers(memberName)
+                .Where(x => memberType is null || memberType.Matches(x.GetSymbolType()))
+                .ToArray();
+
+        if (memberSymbols.Length == 0)
+        {
+            return false;
+        }
+        else if (memberSymbols.OfType<IMethodSymbol>().ToArray() is { Length: > 0 } methods)
+        {
+            return parameterTypes is null || Array.Exists(methods, x => ParametersMatch(x, parameterTypes));
+        }
+        else
+        {
+            return true;
+        }
+
+        static bool ParametersMatch(IMethodSymbol methodSymbol, KnownType[] parameterTypes) =>
+            methodSymbol.Parameters.Length == parameterTypes.Length
+            && parameterTypes.Zip(methodSymbol.Parameters, (knownType, symbol) => (knownType, symbol))
+                .All(x => x.knownType.Matches(x.symbol.Type));
+    }
 }
