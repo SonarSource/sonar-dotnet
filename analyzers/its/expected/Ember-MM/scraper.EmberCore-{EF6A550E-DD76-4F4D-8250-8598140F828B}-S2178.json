@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S2178",
-"message":  "Correct this 'And' to 'AndAlso'.",
+"message":  "Correct this 'And' to 'AndAlso' and extract the right operand to a variable if it should always be evaluated.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L921",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S2178",
-"message":  "Correct this 'And' to 'AndAlso'.",
+"message":  "Correct this 'And' to 'AndAlso' and extract the right operand to a variable if it should always be evaluated.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L931",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S2178",
-"message":  "Correct this 'Or' to 'OrElse'.",
+"message":  "Correct this 'Or' to 'OrElse' and extract the right operand to a variable if it should always be evaluated.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L931",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S2178",
-"message":  "Correct this 'And' to 'AndAlso'.",
+"message":  "Correct this 'And' to 'AndAlso' and extract the right operand to a variable if it should always be evaluated.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L938",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S2178",
-"message":  "Correct this 'And' to 'AndAlso'.",
+"message":  "Correct this 'And' to 'AndAlso' and extract the right operand to a variable if it should always be evaluated.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L947",
 "region":  {

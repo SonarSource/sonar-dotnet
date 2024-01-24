@@ -15,7 +15,7 @@
 },
 {
 "id":  "S2178",
-"message":  "Correct this 'And' to 'AndAlso'.",
+"message":  "Correct this 'And' to 'AndAlso' and extract the right operand to a variable if it should always be evaluated.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L836",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S2178",
-"message":  "Correct this 'And' to 'AndAlso'.",
+"message":  "Correct this 'And' to 'AndAlso' and extract the right operand to a variable if it should always be evaluated.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L863",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S2178",
-"message":  "Correct this 'And' to 'AndAlso'.",
+"message":  "Correct this 'And' to 'AndAlso' and extract the right operand to a variable if it should always be evaluated.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1151",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S2178",
-"message":  "Correct this 'And' to 'AndAlso'.",
+"message":  "Correct this 'And' to 'AndAlso' and extract the right operand to a variable if it should always be evaluated.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1157",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S2178",
-"message":  "Correct this 'And' to 'AndAlso'.",
+"message":  "Correct this 'And' to 'AndAlso' and extract the right operand to a variable if it should always be evaluated.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1170",
 "region":  {
@@ -80,7 +80,7 @@
 },
 {
 "id":  "S2178",
-"message":  "Correct this 'And' to 'AndAlso'.",
+"message":  "Correct this 'And' to 'AndAlso' and extract the right operand to a variable if it should always be evaluated.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1176",
 "region":  {
