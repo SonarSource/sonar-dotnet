@@ -18,11 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Concurrent;
 using System.Text;
 using FluentAssertions.Execution;
-using Microsoft.CodeAnalysis.Text;
-using SonarAnalyzer.AnalysisContext;
 using SonarAnalyzer.TestFramework.Verification.IssueValidation;
 
 namespace SonarAnalyzer.Test.TestFramework
@@ -37,7 +34,7 @@ namespace SonarAnalyzer.Test.TestFramework
         };
 
         public static void VerifyExternalFile(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer, string fileName, string additionalFilePath) =>
-            Verify(compilation, new[] { diagnosticAnalyzer }, CompilationErrorBehavior.FailTest, new[] { new File(fileName) }, additionalFilePath);
+            Verify(compilation, new[] { diagnosticAnalyzer }, CompilationErrorBehavior.FailTest, new[] { new FileContent(fileName) }, additionalFilePath);
 
         public static void Verify(
                 Compilation compilation,
@@ -53,13 +50,13 @@ namespace SonarAnalyzer.Test.TestFramework
                 CompilationErrorBehavior checkMode,
                 string additionalFilePath = null,
                 string[] onlyDiagnostics = null) =>
-            Verify(compilation, diagnosticAnalyzers, checkMode, compilation.SyntaxTrees.ExceptExtraEmptyFile().Select(x => new File(x)), additionalFilePath, onlyDiagnostics);
+            Verify(compilation, diagnosticAnalyzers, checkMode, compilation.SyntaxTrees.ExceptExtraEmptyFile().Select(x => new FileContent(x)), additionalFilePath, onlyDiagnostics);
 
         public static void Verify(Compilation compilation,
                                   DiagnosticAnalyzer diagnosticAnalyzer,
                                   CompilationErrorBehavior checkMode,
                                   SyntaxTree syntaxTree) =>
-            Verify(compilation, new[] { diagnosticAnalyzer }, checkMode, new[] { new File(syntaxTree), });
+            Verify(compilation, new[] { diagnosticAnalyzer }, checkMode, new[] { new FileContent(syntaxTree), });
 
         public static void VerifyRazor(Compilation compilation,
                                        DiagnosticAnalyzer[] diagnosticAnalyzers,
@@ -72,16 +69,16 @@ namespace SonarAnalyzer.Test.TestFramework
                 compilation,
                 diagnosticAnalyzers,
                 checkMode,
-                compilation.SyntaxTrees.ExceptExtraEmptyFile().ExceptRazorGeneratedFile().Select(x => new File(x))
-                    .Concat(razorFiles.Select(x => new File(x)))
-                    .Concat(razorSnippets.Select(x => new File(x))),
+                compilation.SyntaxTrees.ExceptExtraEmptyFile().ExceptRazorGeneratedFile().Select(x => new FileContent(x))
+                    .Concat(razorFiles.Select(x => new FileContent(x)))
+                    .Concat(razorSnippets.Select(x => new FileContent(x))),
                 additionalFilePath,
                 onlyDiagnostics);
 
         private static void Verify(Compilation compilation,
                                    DiagnosticAnalyzer[] diagnosticAnalyzers,
                                    CompilationErrorBehavior checkMode,
-                                   IEnumerable<File> sources,
+                                   IEnumerable<FileContent> sources,
                                    string additionalFilePath = null,
                                    string[] onlyDiagnostics = null)
         {
@@ -110,7 +107,7 @@ namespace SonarAnalyzer.Test.TestFramework
         public static void VerifyFile(string path, IList<Diagnostic> allDiagnostics, string languageVersion)
         {
             var actualIssues = allDiagnostics.Where(x => x.Location.GetLineSpan().Path.EndsWith(path)).ToArray();
-            var fileSourceText = new File(path);
+            var fileSourceText = new FileContent(path);
             var expectedIssueLocations = fileSourceText.ToExpectedIssueLocations();
             CompareActualToExpected(languageVersion, actualIssues, new[] { expectedIssueLocations }, false);
         }
@@ -323,34 +320,7 @@ Actual  : '{message}'");
             return expectedIssue.IssueId;
         }
 
-        private static string IssueType(bool isPrimary) => isPrimary ? "primary" : "secondary";
-
-        internal class File
-        {
-            public string FileName { get; }
-            public SourceText Content { get; }
-
-            public File(string fileName)
-            {
-                FileName = fileName;
-                Content = SourceText.From(System.IO.File.ReadAllText(fileName));
-            }
-
-            public File(Snippet snippet)
-            {
-                FileName = snippet.FileName;
-                Content = SourceText.From(snippet.Content);
-            }
-
-            public File(SyntaxTree syntaxTree)
-            {
-                FileName = syntaxTree.FilePath;
-                Content = syntaxTree.GetText();
-            }
-
-            // ToDo: Remove
-            public FileIssueLocations ToExpectedIssueLocations() =>
-                new(FileName, IssueLocationCollector.GetExpectedIssueLocations(Content.Lines));
-        }
+        private static string IssueType(bool isPrimary) =>
+            isPrimary ? "primary" : "secondary";
     }
 }

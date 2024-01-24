@@ -27,7 +27,7 @@ internal sealed class CompilationIssues
     public string LanguageVersion { get; }
     private readonly FileIssueLocations[] fileIssues;
 
-    public CompilationIssues(string languageVersion, IEnumerable<DiagnosticVerifier.File> files)
+    public CompilationIssues(string languageVersion, IEnumerable<FileContent> files)
     {
         LanguageVersion = languageVersion;
         fileIssues = files.Select(x => new FileIssueLocations(x.FileName, IssueLocationCollector.GetExpectedIssueLocations(x.Content.Lines))).ToArray();
