@@ -88,6 +88,15 @@ namespace Tests.Diagnostics
             var bytes4 = 0;
             --bytes4;
             _ = bytes4 | 0x80; // Compliant
+
+            var bytes5 = 0;
+            var bytesOther = 0;
+            --bytesOther;      // Other variable is mutated
+            _ = bytes5 | 0x80; // Noncompliant
+
+            var bytes6 = 0;
+            bytesOther++;      // Other variable is mutated
+            _ = bytes6 | 0x80; // Noncompliant
         }
 
         private static long returnLong()
