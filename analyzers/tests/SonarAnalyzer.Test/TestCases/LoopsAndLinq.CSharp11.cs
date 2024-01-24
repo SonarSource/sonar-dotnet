@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 class IsPatternTests
 {
@@ -142,5 +143,26 @@ class Repro_8430
             ReadOnlySpan<char> chars = token.Span;
             Visit(chars);
         }
+    }
+}
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8566
+class Repro_8566
+{
+    IAsyncEnumerable<object> Bar() => throw new NotImplementedException();
+
+    bool Test(object item) => throw new NotImplementedException();
+
+    public async Task<int> ForEach_IAsyncEnumerable()
+    {
+        int count = 0;
+        await foreach (var item in Bar()) // Noncompliant FP
+        {
+            if (Test(item)) // Secondary FP
+            {
+                count++;
+            }
+        }
+        return count;
     }
 }
