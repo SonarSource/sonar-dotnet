@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Test.Rules
             builderCS.AddPaths("MarkAssemblyWithAssemblyVersionAttributeNoncompliant.cs")
                 .WithConcurrentAnalysis(false)
                 .Invoking(x => x.Verify())
-                .Should().Throw<UnexpectedDiagnosticException>().WithMessage("*Provide an 'AssemblyVersion' attribute for assembly 'project0'.*");
+                .Should().Throw<AssertFailedException>().WithMessage("*Provide an 'AssemblyVersion' attribute for assembly 'project0'.*");
 
         [TestMethod]
         public void MarkAssemblyWithAssemblyVersionAttributeNoncompliant_NoTargets_ShouldNotRaise_CS() =>
@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Test.Rules
                 .WithConcurrentAnalysis(false)
                 .Invoking(x => x.Verify())
                 // False positive. No assembly gets generated when Microsoft.Build.NoTargets is referenced.
-                .Should().Throw<UnexpectedDiagnosticException>().WithMessage("*Provide an 'AssemblyVersion' attribute for assembly 'project0'.*");
+                .Should().Throw<AssertFailedException>().WithMessage("*Provide an 'AssemblyVersion' attribute for assembly 'project0'.*");
 
         [TestMethod]
         public void MarkAssemblyWithAssemblyVersionAttribute_VB() =>
@@ -90,7 +90,7 @@ namespace SonarAnalyzer.Test.Rules
             builderVB.AddPaths("MarkAssemblyWithAssemblyVersionAttributeNoncompliant.vb")
                 .WithConcurrentAnalysis(false)
                 .Invoking(x => x.Verify())
-                .Should().Throw<UnexpectedDiagnosticException>().WithMessage("*Provide an 'AssemblyVersion' attribute for assembly 'project0'.*");
+                .Should().Throw<AssertFailedException>().WithMessage("*Provide an 'AssemblyVersion' attribute for assembly 'project0'.*");
 
         [TestMethod]
         public void MarkAssemblyWithAssemblyVersionAttributeNoncompliant_NoTargets_ShouldNotRaise_VB() =>
@@ -99,7 +99,7 @@ namespace SonarAnalyzer.Test.Rules
                 .WithConcurrentAnalysis(false)
                 .Invoking(x => x.Verify())
                 // False positive. No assembly gets generated when Microsoft.Build.NoTargets is referenced.
-                .Should().Throw<UnexpectedDiagnosticException>().WithMessage("*Provide an 'AssemblyVersion' attribute for assembly 'project0'.*");
+                .Should().Throw<AssertFailedException>().WithMessage("*Provide an 'AssemblyVersion' attribute for assembly 'project0'.*");
 
         private static IEnumerable<MetadataReference> GetAspNetCoreRazorReferences() =>
             NuGetMetadataReference.MicrosoftAspNetCoreMvcRazorRuntime(Constants.NuGetLatestVersion);
