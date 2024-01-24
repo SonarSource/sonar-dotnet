@@ -21,7 +21,7 @@
 namespace SonarAnalyzer.TestFramework.Verification.IssueValidation;
 
 [DebuggerDisplay("ID:{IssueId} @{LineNumber} Primary:{IsPrimary} Start:{Start} Length:{Length} '{Message}'")]
-internal class IssueLocation : IIssueLocation
+internal sealed class IssueLocation : IIssueLocation
 {
     public string FilePath { get; init; }
     public bool IsPrimary { get; init; }

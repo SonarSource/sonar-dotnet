@@ -28,7 +28,7 @@ namespace SonarAnalyzer.TestFramework.Verification.IssueValidation
     /// See <see href="https://github.com/SonarSource/sonar-dotnet/blob/master/docs/verifier-syntax.md">docs/verifier-syntax.md</see>
     /// for a comprehensive documentation of the verifier syntax.
     /// </summary>
-    internal static partial class IssueLocationCollector
+    internal static class IssueLocationCollector
     {
         private const string CommentPattern = @"(?<comment>//|'|<!--|/\*|@\*)";
         private const string PrecisePositionPattern = @"\s*(?<position>\^+)(\s+(?<invalid>\^+))*";

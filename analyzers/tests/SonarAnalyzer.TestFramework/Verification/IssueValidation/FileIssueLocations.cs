@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.TestFramework.Verification.IssueValidation;
 
-internal class FileIssueLocations
+internal sealed class FileIssueLocations
 {
     public string FileName { get; }
     public IList<IIssueLocation> IssueLocations { get; }

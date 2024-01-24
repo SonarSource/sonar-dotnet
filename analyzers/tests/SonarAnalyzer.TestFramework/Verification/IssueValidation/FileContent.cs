@@ -22,7 +22,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace SonarAnalyzer.TestFramework.Verification.IssueValidation;
 
-internal class FileContent
+internal sealed class FileContent
 {
     public string FileName { get; }
     public SourceText Content { get; }
