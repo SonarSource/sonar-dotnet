@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
-
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -39,11 +37,11 @@ public sealed class UseStringCreate : SonarDiagnosticAnalyzer
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterCompilationStartAction(c =>
         {
+            // The string.Create method with IFormatProvider parameter is only available from .NET 6.0
             if (!c.Compilation.IsMemberAvailable(
                 KnownType.System_String,
                 "Create",
-                KnownType.System_String,
-                new[] { KnownType.System_IFormatProvider, KnownType.System_Runtime_CompilerServices_DefaultInterpolatedStringHandler }))
+                symbol => ((IMethodSymbol)symbol).Parameters.Any(x => KnownType.System_IFormatProvider.Matches(x.Type))))
             {
                 return;
             }

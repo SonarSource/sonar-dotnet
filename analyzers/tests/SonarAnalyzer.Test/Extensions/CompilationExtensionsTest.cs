@@ -25,61 +25,36 @@ namespace SonarAnalyzer.Test.Extensions;
 [TestClass]
 public class CompilationExtensionsTest
 {
+    private const string Snippet = """
+        class Sample
+        {
+            int _field;
+            string Property { get; }
+            void MethodWithParameters(int arg1) { }
+            void MethodWithParameters(int arg1, string arg2) { }
+        }
+        """;
+
     [DataTestMethod]
-    [DataRow("NonExistingType", "NonExistingMember", null, false)]
-    [DataRow("Sample", "NonExistingMember", null, false)]
-    [DataRow("Sample", "_field", null, true)]
-    [DataRow("Sample", "_field", "System.Int32", true)]
-    [DataRow("Sample", "_field", "System.String", false)]
-    [DataRow("Sample", "Property", null, true)]
-    [DataRow("Sample", "Property", "System.String", true)]
-    [DataRow("Sample", "Property", "System.Int32", false)]
-    [DataRow("Sample", "Method", null, true)]
-    [DataRow("Sample", "Method", "System.Void", true)]
-    [DataRow("Sample", "Method", "System.Int32", false)]
-    public void IsMemberAvailable_NoParameters(string containingType, string memberName, string memberType, bool expectedResult)
+    [DataRow("NonExistingType", "NonExistingMember", false)]
+    [DataRow("Sample", "NonExistingMember", false)]
+    [DataRow("Sample", "_field", true)]
+    [DataRow("Sample", "Property", true)]
+    [DataRow("Sample", "MethodWithParameters", true)]
+    public void IsMemberAvailable_WithoutPredicate(string typeName, string memberName, bool expectedResult)
     {
-        var snippet = """
-            class Sample
-            {
-                int _field;
-                string Property { get; set; }
-                void Method() { }
-            }
-            """;
-        IsMemberAvailable(snippet, AnalyzerLanguage.CSharp, containingType, memberName, memberType)
+        var (_, semanticModel) = TestHelper.Compile(Snippet, false, AnalyzerLanguage.CSharp);
+        semanticModel.Compilation.IsMemberAvailable(new(typeName), memberName)
             .Should().Be(expectedResult);
     }
 
-    [DataTestMethod]
-    [DataRow(true, "System.Int32")]
-    [DataRow(true, "System.Int32", "System.String")]
-    [DataRow(false, "System.String", "System.Int32")]
-    [DataRow(false, "System.Int32", "System.String", "System.Int32")]
-    [DataRow(false)]
-    public void IsMemberAvailable_MethodParameters(bool expectedResult, params string[] parameterTypes)
+    [TestMethod]
+    public void IsMemberAvailable_WithPredicate()
     {
-        var snippet = """
-            class Sample
-            {
-                void MethodWithParameters(int arg1) { }
-                void MethodWithParameters(int arg1, string arg2) { }
-            }
-            """;
-        IsMemberAvailable(snippet, AnalyzerLanguage.CSharp, "Sample", "MethodWithParameters", null, parameterTypes)
-            .Should().Be(expectedResult);
-    }
-
-    private static bool IsMemberAvailable(
-        string snippet,
-        AnalyzerLanguage language,
-        string containingType,
-        string memberName,
-        string memberType,
-        params string[] parameterTypes)
-    {
-        var (_, semanticModel) = TestHelper.Compile(snippet, false, language);
-        var arguments = parameterTypes.Select(x => new KnownType(x)).ToArray();
-        return semanticModel.Compilation.IsMemberAvailable(new(containingType), memberName, memberType != null ? new(memberType) : null, arguments);
+        var (_, semanticModel) = TestHelper.Compile(Snippet, false, AnalyzerLanguage.CSharp);
+        semanticModel.Compilation.IsMemberAvailable(new("Sample"), "Property", x => x is IPropertySymbol { IsReadOnly: true })
+            .Should().BeTrue();
+        semanticModel.Compilation.IsMemberAvailable(new("Sample"), "MethodWithParameters", x => x is IMethodSymbol { Parameters.Length: 2 })
+            .Should().BeTrue();
     }
 }
