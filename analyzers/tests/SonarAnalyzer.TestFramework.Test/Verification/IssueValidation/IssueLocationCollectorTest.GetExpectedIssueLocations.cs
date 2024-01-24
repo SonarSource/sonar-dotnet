@@ -218,7 +218,7 @@ Noncompliant - this should not be detected as expected issue
 
             locations[0].IsPrimary.Should().BeTrue();
             locations[0].Message.Should().Be("A message with brackets [].");
-            locations[0].IssueId.Should().Be("myId1");
+            locations[0].RuleId.Should().Be("myId1");
         }
 
         [TestMethod]

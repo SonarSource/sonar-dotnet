@@ -27,14 +27,14 @@ internal sealed class IssueLocation
     public bool IsPrimary { get; init; }
     public int LineNumber { get; init; }
     public string Message { get; init; }
-    public string IssueId { get; init; }
+    public string RuleId { get; init; }
     public int? Start { get; set; }
     public int? Length { get; set; }
 
     public IssueLocation(Diagnostic diagnostic) : this(diagnostic.GetMessage(), diagnostic.Location)
     {
         IsPrimary = true;
-        IssueId = diagnostic.Id;
+        RuleId = diagnostic.Id;
     }
 
     public IssueLocation(SecondaryLocation secondaryLocation) : this(secondaryLocation.Message, secondaryLocation.Location) { }

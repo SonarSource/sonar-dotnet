@@ -184,7 +184,7 @@ namespace SonarAnalyzer.Test.TestFramework
             foreach (var diagnostic in diagnostics.OrderBy(x => x.Location.SourceSpan.Start))
             {
                 var expectedIssues = ExpectedIssues(expectedIssuesPerFile, diagnostic.Location);
-                var issueId = VerifyPrimaryIssue(languageVersion,
+                var ruleId = VerifyPrimaryIssue(languageVersion,
                     expectedIssues,
                     issue => issue.IsPrimary,
                     diagnostic.Location,
@@ -203,10 +203,10 @@ namespace SonarAnalyzer.Test.TestFramework
                     var expectedIssuesSecondaryLocation = ExpectedIssues(expectedIssuesPerFile, secondaryLocation.Location);
                     VerifySecondaryIssue(languageVersion,
                         expectedIssuesSecondaryLocation,
-                        issue => issue.IssueId == issueId && !issue.IsPrimary,
+                        issue => issue.RuleId == ruleId && !issue.IsPrimary,
                         secondaryLocation.Location,
                         secondaryLocation.Message,
-                        issueId);
+                        ruleId);
                 }
             }
 
@@ -216,7 +216,7 @@ namespace SonarAnalyzer.Test.TestFramework
                 foreach (var fileWithIssues in expectedIssuesPerFile.Where(x => x.IssueLocations.Any()).OrderBy(x => x.IssueLocations.First().Start))
                 {
                     issuesString.Append($"{Environment.NewLine}File: {fileWithIssues.FileName}");
-                    var expectedIssuesDescription = fileWithIssues.IssueLocations.Select(i => $"{Environment.NewLine}Line: {i.LineNumber}, Type: {IssueType(i.IsPrimary)}, Id: '{i.IssueId}'");
+                    var expectedIssuesDescription = fileWithIssues.IssueLocations.Select(i => $"{Environment.NewLine}Line: {i.LineNumber}, Type: {IssueType(i.IsPrimary)}, Id: '{i.RuleId}'");
                     issuesString.AppendLine(expectedIssuesDescription.JoinStr(string.Empty));
                 }
                 Execute.Assertion.FailWith($"{languageVersion}: Issue(s) expected but not raised in file(s):{issuesString}");
@@ -317,7 +317,7 @@ Actual  : '{message}'");
             }
 
             expectedIssues.Remove(expectedIssue);
-            return expectedIssue.IssueId;
+            return expectedIssue.RuleId;
         }
 
         private static string IssueType(bool isPrimary) =>

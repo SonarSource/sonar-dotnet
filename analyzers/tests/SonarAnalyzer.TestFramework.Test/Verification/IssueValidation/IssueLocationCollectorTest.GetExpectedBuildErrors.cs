@@ -74,7 +74,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
 
             expectedErrors.Select(l => l.IsPrimary).Should().Equal(true, true, true);
             expectedErrors.Select(l => l.LineNumber).Should().Equal(3, 3, 3);
-            expectedErrors.Select(l => l.IssueId).Should().Equal("CS1234", "CS2345", "CS3456");
+            expectedErrors.Select(l => l.RuleId).Should().Equal("CS1234", "CS2345", "CS3456");
         }
 
         [TestMethod]
@@ -87,7 +87,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
             expectedErrors.Should().ContainSingle();
             expectedErrors[0].IsPrimary.Should().BeTrue();
             expectedErrors[0].LineNumber.Should().Be(1);
-            expectedErrors[0].IssueId.Should().Be("CS1234");
+            expectedErrors[0].RuleId.Should().Be("CS1234");
         }
 
         [TestMethod]
@@ -99,7 +99,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
 
             expectedErrors.Select(l => l.IsPrimary).Should().Equal(true, true, true);
             expectedErrors.Select(l => l.LineNumber).Should().Equal(1, 1, 1);
-            expectedErrors.Select(l => l.IssueId).Should().Equal("CS1234", "CS2345", "CS3456");
+            expectedErrors.Select(l => l.RuleId).Should().Equal("CS1234", "CS2345", "CS3456");
         }
 
         [TestMethod]
@@ -112,7 +112,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
 
             expectedErrors[0].IsPrimary.Should().BeTrue();
             expectedErrors[0].LineNumber.Should().Be(2);
-            expectedErrors[0].IssueId.Should().Be("CS1234");
+            expectedErrors[0].RuleId.Should().Be("CS1234");
         }
     }
 }

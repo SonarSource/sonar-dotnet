@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
             result.Select(l => l.IsPrimary).Should().Equal(expectedIsPrimary);
             result.Select(l => l.LineNumber).Should().Equal(expectedLineNumbers);
             result.Select(l => l.Message).Should().Equal(expectedMessages);
-            result.Select(l => l.IssueId).Should().Equal(expectedIssueIds);
+            result.Select(l => l.RuleId).Should().Equal(expectedIssueIds);
         }
     }
 }
