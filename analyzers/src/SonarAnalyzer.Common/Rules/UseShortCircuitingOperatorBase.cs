@@ -45,10 +45,11 @@ namespace SonarAnalyzer.Rules
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
                 {
-                    var node = (TBinaryExpression)c.Node;
-                    var left = Language.Syntax.BinaryExpressionLeft(node);
-                    var right = Language.Syntax.BinaryExpressionRight(node);
-                    if (IsBool(left, c.SemanticModel) && IsBool(right, c.SemanticModel))
+                    if (c.Node is TBinaryExpression node
+                        && Language.Syntax.BinaryExpressionLeft(node) is { } left
+                        && Language.Syntax.BinaryExpressionRight(node) is { } right
+                        && IsBool(left, c.SemanticModel)
+                        && IsBool(right, c.SemanticModel))
                     {
                         var extractText = c.SemanticModel.GetConstantValue(right) is { HasValue: true }
                             || c.SemanticModel.GetSymbolInfo(right).Symbol is ILocalSymbol or IFieldSymbol or IPropertySymbol or IParameterSymbol
