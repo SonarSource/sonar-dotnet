@@ -27,7 +27,7 @@ using SonarAnalyzer.TestFramework.Verification.IssueValidation;
 
 namespace SonarAnalyzer.Test.TestFramework
 {
-    public static class DiagnosticVerifier
+    public static partial class DiagnosticVerifier
     {
         private const string AnalyzerFailedDiagnosticId = "AD0001";
 
@@ -363,50 +363,6 @@ Actual  : '{message}'");
                 FileName = fileName;
                 IssueLocations = issueLocations;
             }
-        }
-
-        public static class SuppressionHandler
-        {
-            private static readonly ConcurrentDictionary<string, int> Counters = new();
-            private static bool isHooked;
-
-            public static void HookSuppression()
-            {
-                if (isHooked)
-                {
-                    return;
-                }
-                isHooked = true;
-
-                SonarAnalysisContext.ShouldDiagnosticBeReported = (_, d) =>
-                {
-                    IncrementReportCount(d.Id);
-                    return true;
-                };
-            }
-
-            public static void UnHookSuppression()
-            {
-                if (!isHooked)
-                {
-                    return;
-                }
-                isHooked = false;
-
-                SonarAnalysisContext.ShouldDiagnosticBeReported = null;
-            }
-
-            public static void IncrementReportCount(string ruleId) =>
-                Counters.AddOrUpdate(ruleId, _ => 1, (_, count) => count + 1);
-
-            public static bool ExtensionMethodsCalledForAllDiagnostics(IEnumerable<DiagnosticAnalyzer> analyzers) =>
-                // In general this check is not very precise, because when the tests are run in parallel
-                // we cannot determine which diagnostic was reported from which analyzer instance. In other
-                // words, we cannot distinguish between diagnostics reported from different tests. That's
-                // why we require each diagnostic to be reported through the extension methods at least once.
-                analyzers.SelectMany(analyzer => analyzer.SupportedDiagnostics)
-                         .Select(d => DictionaryExtensions.GetValueOrDefault(Counters, d.Id))
-                         .Any(count => count > 0);
         }
     }
 }
