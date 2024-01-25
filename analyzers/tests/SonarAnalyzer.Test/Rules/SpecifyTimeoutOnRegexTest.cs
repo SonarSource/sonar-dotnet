@@ -45,8 +45,14 @@ public class SpecifyTimeoutOnRegexTest
     [TestMethod]
     public void SpecifyTimeoutOnRegex_CSharp8() =>
         builderCS.AddPaths("SpecifyTimeoutOnRegex.CSharp9.cs")
-        .WithOptions(ParseOptionsHelper.FromCSharp9)
-        .Verify();
+            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .Verify();
+
+    [TestMethod]
+    public void SpecifyTimeoutOnRegex_DefaultMatchTimeout() =>
+        builderCS.AddPaths("SpecifyTimeoutOnRegex.DefaultMatchTimeout.cs")
+            .WithTopLevelStatements()
+            .Verify();
 
     [TestMethod]
     public void SpecifyTimeoutOnRegex_VB() =>
