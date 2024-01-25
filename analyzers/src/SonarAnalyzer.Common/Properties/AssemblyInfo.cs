@@ -29,3 +29,4 @@ using SonarAnalyzer;
 [assembly: InternalsVisibleTo("SonarAnalyzer.CSharp" + Signing.InternalsVisibleToPublicKey)]
 [assembly: InternalsVisibleTo("SonarAnalyzer.VisualBasic" + Signing.InternalsVisibleToPublicKey)]
 [assembly: InternalsVisibleTo("SonarAnalyzer.Test" + Signing.InternalsVisibleToPublicKey)]
+[assembly: InternalsVisibleTo("SonarAnalyzer.TestFramework" + Signing.InternalsVisibleToPublicKey)]
