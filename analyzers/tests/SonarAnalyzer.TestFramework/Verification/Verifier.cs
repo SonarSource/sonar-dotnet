@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Test.TestFramework
     {
         private const string TestCases = "TestCases";
 
-        private static readonly Regex ImportsRegexVB = new(@"^\s*Imports\s+.+$", RegexOptions.Multiline | RegexOptions.RightToLeft);
+        private static readonly Regex ImportsRegexVB = new(@"^\s*Imports\s+.+$", RegexOptions.Multiline | RegexOptions.RightToLeft, RegexConstants.DefaultTimeout);
         private readonly string[] razorSupportedFrameworks = new[]
             {
                 "net6.0",

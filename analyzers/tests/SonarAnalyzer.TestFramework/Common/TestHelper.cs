@@ -19,18 +19,18 @@
  */
 
 using System.IO;
+using System.Security.Cryptography.Xml;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.CFG;
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.Extensions;
-using SonarAnalyzer.Test.PackagingTests;
 using StyleCop.Analyzers.Lightup;
 using CS = Microsoft.CodeAnalysis.CSharp;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 namespace SonarAnalyzer.Test
 {
-    internal static class TestHelper
+    public static class TestHelper
     {
         public static (SyntaxTree Tree, SemanticModel Model) CompileIgnoreErrorsCS(string snippet, params MetadataReference[] additionalReferences) =>
             Compile(snippet, true, AnalyzerLanguage.CSharp, additionalReferences);
@@ -111,12 +111,6 @@ End Class", AnalyzerLanguage.VisualBasic);
                 language == AnalyzerLanguage.CSharp
                     ? node.RawKind == (int)CS.SyntaxKind.MethodDeclaration
                     : node.RawKind == (int)VB.SyntaxKind.FunctionBlock || node.RawKind == (int)VB.SyntaxKind.SubBlock;
-        }
-
-        public static bool IsSecurityHotspot(DiagnosticDescriptor diagnostic)
-        {
-            var type = RuleTypeMappingCS.Rules.GetValueOrDefault(diagnostic.Id) ?? RuleTypeMappingVB.Rules.GetValueOrDefault(diagnostic.Id);
-            return type == "SECURITY_HOTSPOT";
         }
 
         public static IEnumerable<MetadataReference> ProjectTypeReference(ProjectType projectType) =>

@@ -27,7 +27,7 @@ using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext
 
 namespace SonarAnalyzer.Test
 {
-    internal static class AnalysisScaffolding
+    public static class AnalysisScaffolding
     {
         public static SonarAnalysisContext CreateSonarAnalysisContext() =>
             new(Mock.Of<RoslynAnalysisContext>(), ImmutableArray<DiagnosticDescriptor>.Empty);

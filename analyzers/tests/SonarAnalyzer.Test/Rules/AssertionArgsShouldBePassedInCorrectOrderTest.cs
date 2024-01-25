@@ -67,7 +67,7 @@ public class AssertionArgsShouldBePassedInCorrectOrderTest
     public void AssertionArgsShouldBePassedInCorrectOrder_XUnit(string testFwkVersion) =>
         builder.AddPaths("AssertionArgsShouldBePassedInCorrectOrder.Xunit.cs")
             .AddReferences(NuGetMetadataReference.XunitFramework(testFwkVersion)
-                            .Concat(NetStandardMetadataReference.Netstandard))
+                            .Concat(MetadataReferenceFacade.NetStandard))
             .Verify();
 
     [TestMethod]

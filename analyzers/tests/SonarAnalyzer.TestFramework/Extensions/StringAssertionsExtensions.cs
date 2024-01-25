@@ -18,13 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Test.TestFramework
+using FluentAssertions.Primitives;
+
+namespace SonarAnalyzer.Test.Helpers
 {
-    /// <summary>
-    /// This attribute is used to decorate custom assertion methods for rule S2699.
-    /// </summary>
-    [AttributeUsage(AttributeTargets.Method)]
-    public class AssertionMethodAttribute : Attribute
+    internal static class StringAssertionsExtensions
     {
+        public static void BeIgnoringLineEndings(this StringAssertions stringAssertions, string expected) =>
+            stringAssertions.Subject.ToUnixLineEndings().Should().Be(expected.ToUnixLineEndings());
     }
 }

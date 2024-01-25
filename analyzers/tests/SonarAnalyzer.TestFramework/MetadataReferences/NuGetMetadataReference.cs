@@ -18,12 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Helpers;
+using System.Linq;
 using static SonarAnalyzer.Test.MetadataReferences.NuGetMetadataFactory;
 using References = System.Collections.Generic.IEnumerable<Microsoft.CodeAnalysis.MetadataReference>;
 
 namespace SonarAnalyzer.Test.MetadataReferences
 {
-    internal static class NuGetMetadataReference
+    public static class NuGetMetadataReference
     {
 #pragma warning disable S103 // Lines should not be too long
         // Hardcoded version
