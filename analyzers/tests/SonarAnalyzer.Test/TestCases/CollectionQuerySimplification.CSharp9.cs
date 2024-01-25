@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
 
 List<object> list = null;
 
@@ -20,12 +19,12 @@ public class EntityFrameworkReproGH3604
         public int Id { get; set; }
     }
 
-    public class FirstContext : DbContext
+    public class MyDbContext : Microsoft.EntityFrameworkCore.DbContext
     {
-        public DbSet<MyEntity> MyEntities { get; set; }
+        public Microsoft.EntityFrameworkCore.DbSet<MyEntity> MyEntities { get; set; }
     }
 
-    public void GetEntities(FirstContext dbContext)
+    public void GetEntitiesFromEntityFrameworkCoreDbContext(MyDbContext dbContext)
     {
         _ = dbContext.MyEntities.OrderBy(v => v.Id).ToList().Where(SomeTest).ToList(); // Noncompliant {{Use 'AsEnumerable' here instead.}}
         //                                          ^^^^^^
@@ -37,7 +36,7 @@ public class EntityFrameworkReproGH3604
         //             ^^^^^^
     }
 
-    public void GetEntities(DbSet<MyEntity> entities)
+    public void GetEntitiesFromEntityFrameworkCoreDbSet(Microsoft.EntityFrameworkCore.DbSet<MyEntity> entities)
     {
         _ = entities.OrderBy(v => v.Id).ToList().Where(SomeTest).ToList(); // Noncompliant {{Use 'AsEnumerable' here instead.}}
         //                              ^^^^^^
@@ -49,7 +48,7 @@ public class EntityFrameworkReproGH3604
         //             ^^^^^^
     }
 
-    public void GetEntities(System.Data.Entity.DbSet<MyEntity> entities)
+    public void GetEntitiesFromEntityFrameworkDbSet_TEntity(System.Data.Entity.DbSet<MyEntity> entities)
     {
         _ = entities.OrderBy(v => v.Id).ToList().Where(SomeTest).ToList(); // Noncompliant {{Use 'AsEnumerable' here instead.}}
         //                              ^^^^^^
@@ -61,7 +60,7 @@ public class EntityFrameworkReproGH3604
         //             ^^^^^^
     }
 
-    public void GetEntities(System.Data.Entity.DbSet entities)
+    public void GetEntitiesFromEntityFrameworkDbSet(System.Data.Entity.DbSet entities)
     {
         _ = entities.Cast<MyEntity>().OrderBy(v => v.Id).ToList().Where(SomeTest).ToList(); // Noncompliant {{Use 'AsEnumerable' here instead.}}
         //                                               ^^^^^^
@@ -69,7 +68,7 @@ public class EntityFrameworkReproGH3604
         //                            ^^^^^^
     }
 
-    public void GetEntities(System.Data.Entity.Core.Objects.ObjectQuery<MyEntity> entities)
+    public void GetEntitiesFromEntityFrameworkObjectQuery_TEntity(System.Data.Entity.Core.Objects.ObjectQuery<MyEntity> entities)
     {
         _ = entities.OrderBy(v => v.Id).ToList().Where(SomeTest).ToList(); // Noncompliant {{Use 'AsEnumerable' here instead.}}
         //                              ^^^^^^

@@ -1,5 +1,4 @@
-﻿using System.Data.Linq;
-using System.Linq;
+﻿using System.Linq;
 
 public class MyEntity
 {
@@ -8,7 +7,7 @@ public class MyEntity
 
 public class DataLinq
 {
-    public void GetEntities(Table<MyEntity> entities)
+    public void GetEntitiesFromLinqToSqlTable(System.Data.Linq.Table<MyEntity> entities)
     {
         _ = entities.OrderBy(v => v.Id).ToList().Where(SomeTest).ToList(); // Noncompliant {{Use 'AsEnumerable' here instead.}}
         //                              ^^^^^^

@@ -198,7 +198,7 @@ namespace SonarAnalyzer.Rules.CSharp
             node.RemoveParentheses() switch
             {
                 QueryExpressionSyntax { FromClause: { } fromClause } => GetNodeTypeSymbol(fromClause.Expression, model),
-                var n => model.GetTypeInfo(n).Type
+                { } n => model.GetTypeInfo(n).Type
             };
 
         private static void CheckExtensionMethodsOnIEnumerable(SonarSyntaxNodeReportingContext context)
