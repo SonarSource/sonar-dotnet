@@ -182,6 +182,11 @@ namespace Tests.Diagnostics
     }
 }
 
+class PropertyWithoutAccessorList
+{
+    IEnumerable<string> Incomplete => ; // Error CS1525: Invalid expression term
+}
+
 // Reproducer for #6494 https://github.com/SonarSource/sonar-dotnet/issues/6494
 namespace Issue_6494
 {
