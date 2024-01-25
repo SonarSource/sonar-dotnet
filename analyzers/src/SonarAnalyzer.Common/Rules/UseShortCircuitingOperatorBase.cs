@@ -55,6 +55,6 @@ namespace SonarAnalyzer.Rules
                 SyntaxKindsOfInterest.ToArray());
 
         private static bool IsBool(SyntaxNode node, SemanticModel semanticModel) =>
-            node is not null && semanticModel.GetTypeInfo(node).Type.Is(KnownType.System_Boolean);
+            semanticModel.GetTypeInfo(node).Type.Is(KnownType.System_Boolean);
     }
 }
