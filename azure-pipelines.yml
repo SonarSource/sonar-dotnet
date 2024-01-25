@@ -35,9 +35,9 @@ variables:
   - name: UnitTestProjectPath
     value: 'analyzers\tests\SonarAnalyzer.Test\'
   - name: UnitTestResultsPath
-    value: '$(Agent.TempDirectory)\TestResults'
+    value: '$(Build.SourcesDirectory)\TestResults'
   - name: CoveragePath
-    value: '$(Agent.TempDirectory)\coverage'
+    value: '$(Build.SourcesDirectory)\coverage'
   - name: UnitTestExclusionsPattern
     value: 'analyzers/tests/SonarAnalyzer.Test/TestCases/**/*'
   - name: isReleaseBranch
@@ -222,25 +222,25 @@ stages:
       strategy:
         matrix:
           Net48:
+            CoverageArtifactName: 'DotNetCoverageNet48'
+            TestResultsArtifactName: 'DotNetTestResultsNet48'
+            ProjectFilePath: 'tests\SonarAnalyzer.Test\SonarAnalyzer.Test.csproj'
             FrameworkMoniker: 'net48'
-            CoverageArtifactName: 'DotnetCoverageNet48'
-            TestResultsArtifactName: 'DotnetTestResultsNet48'
-            ProjectFilePath: 'tests\SonarAnalyzer.Test\SonarAnalyzer.Test.csproj'
           Net70:
-            FrameworkMoniker: 'net7.0-windows'
-            CoverageArtifactName: 'DotnetCoverageNet7'
-            TestResultsArtifactName: 'DotnetTestResultsNet7'
+            CoverageArtifactName: 'DotNetCoverageNet7'
+            TestResultsArtifactName: 'DotNetTestResultsNet7'
             ProjectFilePath: 'tests\SonarAnalyzer.Test\SonarAnalyzer.Test.csproj'
-          Net80:
-            FrameworkMoniker: 'net8.0-windows'
-            CoverageArtifactName: 'DotnetCoverageNet8'
-            TestResultsArtifactName: 'DotnetTestResultsNet8'
-            ProjectFilePath: 'tests\SonarAnalyzer.Net8.Test\SonarAnalyzer.Net8.Test.csproj'
-          TestFramework:
             FrameworkMoniker: 'net7.0-windows'
-            CoverageArtifactName: 'DotnetCoverageTestFramework'
-            TestResultsArtifactName: 'DotnetTestResultsTestFramework'
+          Net80:
+            CoverageArtifactName: 'DotNetCoverageNet8'
+            TestResultsArtifactName: 'DotNetTestResultsNet8'
+            ProjectFilePath: 'tests\SonarAnalyzer.Net8.Test\SonarAnalyzer.Net8.Test.csproj'
+            FrameworkMoniker: 'net8.0-windows'
+          TestFramework:
+            CoverageArtifactName: 'DotNetCoverageTestFramework'
+            TestResultsArtifactName: 'DotNetTestResultsTestFramework'
             ProjectFilePath: 'tests\SonarAnalyzer.TestFramework.Test\SonarAnalyzer.TestFramework.Test.csproj'
+            FrameworkMoniker: 'net7.0-windows'
 
       steps:
       - task: DownloadPipelineArtifact@2
@@ -251,7 +251,7 @@ stages:
 
       - powershell: |
           cd analyzers
-          & dotnet test $(ProjectFilePath) -f $(FrameworkMoniker) -c $(BuildConfiguration) -l trx --results-directory $(UnitTestResultsPath) /p:AltCover=true,AltCoverForce=true,AltCoverVisibleBranches=true,AltCoverAssemblyFilter='Moq|Humanizer|AltCover|Microsoft.VisualStudio.TestPlatform.*|.*Test',AltCoverPathFilter='SonarAnalyzer\.CFG\\ShimLayer|SonarAnalyzer\.ShimLayer\.CodeGeneration',AltCoverAttributeFilter='ExcludeFromCodeCoverage',AltCoverReport=$(CoveragePath)/coverage.$(FrameworkMoniker).xml
+          & dotnet test $(ProjectFilePath) -f $(FrameworkMoniker) -c $(BuildConfiguration) -l trx --results-directory $(UnitTestResultsPath) /p:AltCover=true,AltCoverForce=true,AltCoverVisibleBranches=true,AltCoverAssemblyFilter="Moq|Humanizer|AltCover|Microsoft.VisualStudio.TestPlatform.*|\.Test^",AltCoverPathFilter="SonarAnalyzer\.CFG\\ShimLayer|SonarAnalyzer\.ShimLayer\.CodeGeneration",AltCoverAttributeFilter="ExcludeFromCodeCoverage",AltCoverReport="$(CoveragePath)/coverage.$(CoverageArtifactName).xml"
         displayName: '.Net UTs'
 
       - task: PublishPipelineArtifact@1
@@ -302,8 +302,8 @@ stages:
           projectVersion: '$(SONAR_PROJECT_VERSION)'
           extraProperties: |
             sonar.verbose=true
-            sonar.cs.opencover.reportsPaths="$(Build.SourcesDirectory)/coverage/**.xml"
-            sonar.cs.vstest.reportsPaths="$(Build.SourcesDirectory)/TestResults/*.trx"
+            sonar.cs.opencover.reportsPaths="$(CoveragePath)/*.xml"
+            sonar.cs.vstest.reportsPaths="$(UnitTestResultsPath)/*.trx"
             sonar.test.exclusions="$(UnitTestExclusionsPattern)"
             sonar.analysis.buildNumber=$(Build.BuildId)
             sonar.analysis.pipeline=$(Build.BuildId)
@@ -323,8 +323,8 @@ stages:
           projectVersion: '$(SONAR_PROJECT_VERSION)'
           extraProperties: |
             sonar.verbose=true
-            sonar.cs.opencover.reportsPaths="$(Build.SourcesDirectory)/coverage/**.xml"
-            sonar.cs.vstest.reportsPaths="$(Build.SourcesDirectory)/TestResults/*.trx"
+            sonar.cs.opencover.reportsPaths="$(CoveragePath)/*.xml"
+            sonar.cs.vstest.reportsPaths="$(UnitTestResultsPath)/*.trx"
             sonar.test.exclusions="$(UnitTestExclusionsPattern)"
             sonar.analysis.buildNumber=$(Build.BuildId)
             sonar.analysis.pipeline=$(Build.BuildId)
@@ -356,49 +356,49 @@ stages:
       - task: DownloadPipelineArtifact@2
         displayName: 'Download coverage reports'
         inputs:
-          artifact: DotnetCoverageNet48
+          artifact: DotNetCoverageNet48
           targetPath: 'coverage'
 
       - task: DownloadPipelineArtifact@2
         displayName: 'Download coverage reports'
         inputs:
-          artifact: DotnetCoverageNet7
+          artifact: DotNetCoverageNet7
           targetPath: 'coverage'
 
       - task: DownloadPipelineArtifact@2
         displayName: 'Download coverage reports'
         inputs:
-          artifact: DotnetCoverageNet8
+          artifact: DotNetCoverageNet8
           targetPath: 'coverage'
 
       - task: DownloadPipelineArtifact@2
         displayName: 'Download coverage reports'
         inputs:
-          artifact: DotnetCoverageTestFramework
+          artifact: DotNetCoverageTestFramework
           targetPath: 'coverage'
 
       - task: DownloadPipelineArtifact@2
         displayName: 'Download test results'
         inputs:
-          artifact: DotnetTestResultsNet48
+          artifact: DotNetTestResultsNet48
           targetPath: 'TestResults'
 
       - task: DownloadPipelineArtifact@2
         displayName: 'Download test results'
         inputs:
-          artifact: DotnetTestResultsNet7
+          artifact: DotNetTestResultsNet7
           targetPath: 'TestResults'
 
       - task: DownloadPipelineArtifact@2
         displayName: 'Download test results'
         inputs:
-          artifact: DotnetTestResultsNet8
+          artifact: DotNetTestResultsNet8
           targetPath: 'TestResults'
 
       - task: DownloadPipelineArtifact@2
         displayName: 'Download test results'
         inputs:
-          artifact: DotnetTestResultsTestFramework
+          artifact: DotNetTestResultsTestFramework
           targetPath: 'TestResults'
 
       - powershell: |
