@@ -37,6 +37,7 @@ namespace SonarAnalyzer.Test.MetadataReferences
         public static References SystemIOCompressionFileSystem { get; } = Create("System.IO.Compression.FileSystem.dll");
         public static References SystemCore { get; } = Create("System.Core.dll");
         public static References SystemData { get; } = Create("System.Data.dll");
+        public static References SystemDataLinq { get; } = Create("System.Data.Linq.dll");
         public static References SystemDataOracleClient { get; } = Create("System.Data.OracleClient.dll");
         public static References SystemDirectoryServices { get; } = Create("System.DirectoryServices.dll");
         public static References SystemDrawing { get; } = Create("System.Drawing.dll");

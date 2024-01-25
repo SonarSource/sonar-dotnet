@@ -262,6 +262,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Data_Entity_DbSet = new("System.Data.Entity.DbSet");
         public static readonly KnownType System_Data_Entity_DbSet_TEntity = new("System.Data.Entity.DbSet", "TEntity");
         public static readonly KnownType System_Data_Entity_Infrastructure_DbQuery = new("System.Data.Entity.Infrastructure.DbQuery");
+        public static readonly KnownType System_Data_Entity_Infrastructure_DbQuery_TResult = new("System.Data.Entity.Infrastructure.DbQuery", "TResult");
         public static readonly KnownType System_Data_IDbCommand = new("System.Data.IDbCommand");
         public static readonly KnownType System_Data_Linq_ITable = new("System.Data.Linq.ITable");
         public static readonly KnownType System_Data_Odbc_OdbcCommand = new("System.Data.Odbc.OdbcCommand");
@@ -604,6 +605,13 @@ namespace SonarAnalyzer.Helpers
                 System_Runtime_CompilerServices_CallerFilePathAttribute,
                 System_Runtime_CompilerServices_CallerLineNumberAttribute,
                 System_Runtime_CompilerServices_CallerMemberNameAttribute);
+        public static readonly ImmutableArray<KnownType> DatabaseBaseQueryTypes =
+            ImmutableArray.Create(
+                System_Data_Entity_Infrastructure_DbQuery,
+                System_Data_Entity_Infrastructure_DbQuery_TResult,
+                Microsoft_EntityFrameworkCore_DbSet_TEntity,
+                System_Data_Linq_ITable,
+                System_Data_Entity_Core_Objects_ObjectQuery);
         public static readonly ImmutableArray<KnownType> FloatingPointNumbers =
             ImmutableArray.Create(
                 System_Half,

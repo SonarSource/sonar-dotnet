@@ -35,13 +35,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        private static readonly ImmutableArray<KnownType> DatabaseLinqBaseTypes =
-            ImmutableArray.Create(
-                KnownType.System_Data_Entity_Infrastructure_DbQuery,
-                KnownType.Microsoft_EntityFrameworkCore_DbSet_TEntity,
-                KnownType.System_Data_Linq_ITable,
-                KnownType.System_Data_Entity_Core_Objects_ObjectQuery);
-
         private static readonly ISet<string> MethodNamesWithPredicate = new HashSet<string>
         {
             "Any", "LongCount", "Count",
@@ -89,11 +82,18 @@ namespace SonarAnalyzer.Rules.CSharp
             const string CountName = "Count";
 
             var invocation = (InvocationExpressionSyntax)context.Node;
-            if (invocation.ArgumentList?.Arguments.Count == 0
-                && invocation.Expression is MemberAccessExpressionSyntax { Name.Identifier.ValueText: CountName} memberAccess
+            if (invocation is
+                {
+                    ArgumentList.Arguments.Count: 0,
+                    Expression: MemberAccessExpressionSyntax
+                    {
+                        Name.Identifier.ValueText: CountName,
+                        Expression: { } memberAccessExpression
+                    }
+                }
                 && context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol { Name: CountName } methodSymbol
                 && methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T)
-                && HasCountProperty(memberAccess.Expression, context.SemanticModel))
+                && HasCountProperty(memberAccessExpression, context.SemanticModel))
             {
                 context.ReportIssue(Diagnostic.Create(Rule, GetReportLocation(invocation),
                     string.Format(MessageUseInstead, $"'{CountName}' property")));
@@ -183,7 +183,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             while (node is not null && node.TryGetOperands(out var left, out _))
             {
-                if (GetNodeTypeSymbol(left, model).DerivesOrImplementsAny(DatabaseLinqBaseTypes))
+                if (GetNodeTypeSymbol(left, model).DerivesOrImplementsAny(KnownType.DatabaseBaseQueryTypes))
                 {
                     return true;
                 }

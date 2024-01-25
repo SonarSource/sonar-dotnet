@@ -43,6 +43,42 @@ public class EntityFrameworkReproGH3604
         //                              ^^^^^^
         _ = entities.ToList().Where(SomeTest).ToList(); // Noncompliant {{Use 'AsEnumerable' here instead.}}
         //           ^^^^^^
+        _ = (from v in entities
+             orderby v.Id
+             select v).ToList().Where(SomeTest).ToList(); // Noncompliant {{Use 'AsEnumerable' here instead.}}
+        //             ^^^^^^
+    }
+
+    public void GetEntities(System.Data.Entity.DbSet<MyEntity> entities)
+    {
+        _ = entities.OrderBy(v => v.Id).ToList().Where(SomeTest).ToList(); // Noncompliant {{Use 'AsEnumerable' here instead.}}
+        //                              ^^^^^^
+        _ = entities.ToList().Where(SomeTest).ToList(); // Noncompliant {{Use 'AsEnumerable' here instead.}}
+        //           ^^^^^^
+        _ = (from v in entities
+             orderby v.Id
+             select v).ToList().Where(SomeTest).ToList(); // Noncompliant {{Use 'AsEnumerable' here instead.}}
+        //             ^^^^^^
+    }
+
+    public void GetEntities(System.Data.Entity.DbSet entities)
+    {
+        _ = entities.Cast<MyEntity>().OrderBy(v => v.Id).ToList().Where(SomeTest).ToList(); // Noncompliant {{Use 'AsEnumerable' here instead.}}
+        //                                               ^^^^^^
+        _ = entities.Cast<MyEntity>().ToList().Where(SomeTest).ToList(); // Noncompliant {{Use 'AsEnumerable' here instead.}}
+        //                            ^^^^^^
+    }
+
+    public void GetEntities(System.Data.Entity.Core.Objects.ObjectQuery<MyEntity> entities)
+    {
+        _ = entities.OrderBy(v => v.Id).ToList().Where(SomeTest).ToList(); // Noncompliant {{Use 'AsEnumerable' here instead.}}
+        //                              ^^^^^^
+        _ = entities.ToList().Where(SomeTest).ToList(); // Noncompliant {{Use 'AsEnumerable' here instead.}}
+        //           ^^^^^^
+        _ = (from v in entities
+             orderby v.Id
+             select v).ToList().Where(SomeTest).ToList(); // Noncompliant {{Use 'AsEnumerable' here instead.}}
+        //             ^^^^^^
     }
 
     public bool SomeTest(MyEntity entity)
