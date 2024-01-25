@@ -34,7 +34,6 @@ namespace SonarAnalyzer.Test.PackagingTests
         public void DetectRuleTypeChanges_VB() =>
             DetectTypeChanges(vbnet::SonarAnalyzer.RuleCatalog.Rules, RuleTypeMappingVB.Rules, LanguageNames.VisualBasic, nameof(RuleTypeMappingVB));
 
-        [AssertionMethod]
         private static void DetectTypeChanges(Dictionary<string, RuleDescriptor> rules, IImmutableDictionary<string, string> expectedTypes, string language, string expectedTypesName)
         {
             var rulesWithUnmatchingType = Enumerable.Range(1, 10000)

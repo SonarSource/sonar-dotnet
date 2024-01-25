@@ -121,7 +121,7 @@ namespace SonarAnalyzer.Test.Rules
             CreateBuilder(ProjectType.Product, fileName)
                 .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                 .VerifyUtilityAnalyzer<FileMetadataInfo>(messages =>
-                    messages.Select(x => Path.GetFileName(x.FilePath)).Should().BeEquivalentTo(expectedFiles));
+                    messages.Select(x => Path.GetFileName(x.FilePath)).Should().Contain(expectedFiles));    // There are more files on some PCs: JSExports.g.cs, LibraryImports.g.cs, JSImports.g.cs
 
 #endif
 

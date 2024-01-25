@@ -53,7 +53,6 @@ public class RestrictDeserializedTypesTest
     [TestMethod]
     public void RestrictDeserializedTypesFormatters_Sonar()
     {
-        using var _ = new AssertIgnoreScope(); // EnsureStackState fails an assertion in this test file
         sonar.AddPaths("RestrictDeserializedTypes.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp8)
             .Verify();

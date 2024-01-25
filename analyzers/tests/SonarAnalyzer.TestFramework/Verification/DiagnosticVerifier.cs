@@ -26,7 +26,7 @@ using SonarAnalyzer.AnalysisContext;
 
 namespace SonarAnalyzer.Test.TestFramework
 {
-    internal static class DiagnosticVerifier
+    public static class DiagnosticVerifier
     {
         private const string AnalyzerFailedDiagnosticId = "AD0001";
 
@@ -352,7 +352,7 @@ Actual  : '{message}'");
                 new(fileName, IssueLocationCollector.GetExpectedIssueLocations(Content.Lines));
         }
 
-        internal class FileIssueLocations
+        public class FileIssueLocations
         {
             public string FileName { get; }
             public IList<IIssueLocation> IssueLocations { get; }
@@ -364,7 +364,7 @@ Actual  : '{message}'");
             }
         }
 
-        internal static class SuppressionHandler
+        public static class SuppressionHandler
         {
             private static readonly ConcurrentDictionary<string, int> Counters = new();
             private static bool isHooked;

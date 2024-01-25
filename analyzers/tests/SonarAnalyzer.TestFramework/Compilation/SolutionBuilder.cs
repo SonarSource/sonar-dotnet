@@ -23,7 +23,7 @@ using Microsoft.CodeAnalysis.VisualBasic;
 
 namespace SonarAnalyzer.Test.TestFramework
 {
-    internal readonly struct SolutionBuilder
+    public readonly struct SolutionBuilder
     {
         private const string GeneratedAssemblyName = "project";
 
@@ -81,20 +81,17 @@ namespace SonarAnalyzer.Test.TestFramework
             var projectBuilder = ProjectBuilder
                 .FromProject(project)
                 .AddReferences(MetadataReferenceFacade.ProjectDefaultReferences);
-
             if (language == AnalyzerLanguage.VisualBasic)
             {
                 // Need a reference to the VB dll to be able to use the Module keyword
                 projectBuilder = projectBuilder.AddReferences(MetadataReferenceFacade.MicrosoftVisualBasic);
             }
-
             if (createExtraEmptyFile)
             {
                 // adding an extra file to the project this won't trigger any issues, but it keeps a reference to the original ParseOption, so
                 // if an analyzer/codefix changes the language version, Roslyn throws an ArgumentException
                 projectBuilder = projectBuilder.AddSnippet(string.Empty, fileName: "ExtraEmptyFile.g" + language.FileExtension);
             }
-
             return projectBuilder;
         }
     }

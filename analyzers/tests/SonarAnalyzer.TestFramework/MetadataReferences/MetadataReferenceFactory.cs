@@ -22,7 +22,7 @@ using System.IO;
 
 namespace SonarAnalyzer.Test.MetadataReferences
 {
-    internal static class MetadataReferenceFactory
+    public static class MetadataReferenceFactory
     {
         private static readonly string SystemAssembliesFolder = Path.GetDirectoryName(typeof(object).Assembly.Location);
 

@@ -18,12 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using static SonarAnalyzer.Test.MetadataReferences.MetadataReferenceFactory;
-
-namespace SonarAnalyzer.Test.MetadataReferences
+namespace SonarAnalyzer.Test
 {
-    internal static class NetStandardMetadataReference
+    public static class Constants
     {
-        internal static IEnumerable<MetadataReference> Netstandard { get; } = Create("netstandard.dll");
+        public const string NuGetLatestVersion = "LATEST";
+        public const string DotNet7Preview = "7.0.0-rc.1.22426.10";
+        public const string DotNet7PreviewAzureAppServices = "7.0.0-rc.1.22427.2";
+        public const string DotNetCore220Version = "2.2.0";
+        public const string WindowsLineEnding = "\r\n";
+        public const string UnixLineEnding = "\n";
     }
 }

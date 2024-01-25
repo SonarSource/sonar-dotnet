@@ -28,10 +28,7 @@ using VB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace SonarAnalyzer.Test.TestFramework
 {
-    /// <summary>
-    /// Helper class compiles snippets of code on the fly.
-    /// </summary>
-    internal class SnippetCompiler
+    public class SnippetCompiler
     {
         public Compilation Compilation { get; }
         public SyntaxTree SyntaxTree { get; }

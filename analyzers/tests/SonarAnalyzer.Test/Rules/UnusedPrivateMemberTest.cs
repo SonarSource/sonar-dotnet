@@ -223,7 +223,7 @@ namespace EntityFrameworkMigrations
                 .ExecutionTime().Should().BeLessOrEqualTo(30.Seconds());
 
         private static ImmutableArray<MetadataReference> EntityFrameworkCoreReferences(string entityFrameworkVersion) =>
-            NetStandardMetadataReference.Netstandard
+            MetadataReferenceFacade.NetStandard
                 .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreSqlServer(entityFrameworkVersion))
                 .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreRelational(entityFrameworkVersion))
                 .ToImmutableArray();

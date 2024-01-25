@@ -19,7 +19,6 @@
  */
 
 using System.Globalization;
-using System.Threading;
 
 namespace SonarAnalyzer.Test.Helpers
 {

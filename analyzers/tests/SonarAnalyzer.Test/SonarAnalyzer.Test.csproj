@@ -6,6 +6,7 @@
     <IsPackable>false</IsPackable>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+    <!-- FIXME: This should be likely moved to MetadataReferences -->
     <!--
       This allows, on AzureDevops builds, to restore the NuGet packages which are not targeting .Net Standard or a compatible version by
       usign as fallbacks .Net Framwework 4.0 client profile (net40-client) and Portable profile (portable-net45+win8+wp8+wpa81).
@@ -17,6 +18,7 @@
     <AssetTargetFallback>$(AssetTargetFallback);net40-client;portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
   </PropertyGroup>
 
+  <!-- FIXME: We should be able to remove this now -->
   <ItemGroup Condition="'$(TargetFramework)' != 'net48'">
     <!-- Class AspNetCoreMetadataReference needs this FrameworkReference to generate metadata references for ASP.NET Core related test cases. -->
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
@@ -25,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <!-- FIXME: Review what's still needed and what is not -->
     <PackageReference Include="altcover" Version="8.6.95" />
     <PackageReference Include="FluentAssertions" Version="6.12.0" />
     <PackageReference Include="FluentAssertions.Analyzers" Version="0.23.0">

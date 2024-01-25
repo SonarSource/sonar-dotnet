@@ -18,13 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using FluentAssertions.Primitives;
+using System.Runtime.CompilerServices;
+using SonarAnalyzer;
 
-namespace SonarAnalyzer.Test.Helpers
-{
-    internal static class FluentTestHelper
-    {
-        public static void BeIgnoringLineEndings(this StringAssertions stringAssertions, string expected) =>
-            stringAssertions.Subject.ToUnixLineEndings().Should().Be(expected.ToUnixLineEndings());
-    }
-}
+[assembly: InternalsVisibleTo("SonarAnalyzer.Test" + Signing.InternalsVisibleToPublicKey)]  // ToDo: Update to SonarAnalyzer.TestFramework.Test
