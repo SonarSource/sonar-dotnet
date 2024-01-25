@@ -106,6 +106,14 @@ namespace SonarAnalyzer.Test.TestFramework
             }
         }
 
+        public static void VerifyFile(string path, IList<Diagnostic> allDiagnostics, string languageVersion)
+        {
+            var actualIssues = allDiagnostics.Where(x => x.Location.GetLineSpan().Path.EndsWith(path)).ToArray();
+            var fileSourceText = new File(path);
+            var expectedIssueLocations = fileSourceText.ToExpectedIssueLocations();
+            CompareActualToExpected(languageVersion, actualIssues, new[] { expectedIssueLocations }, false);
+        }
+
         public static void VerifyNoIssueReported(Compilation compilation,
                                                  DiagnosticAnalyzer diagnosticAnalyzer,
                                                  CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,

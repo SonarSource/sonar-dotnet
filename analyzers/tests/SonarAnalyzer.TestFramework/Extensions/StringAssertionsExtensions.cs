@@ -22,7 +22,7 @@ using FluentAssertions.Primitives;
 
 namespace SonarAnalyzer.Test.Helpers
 {
-    internal static class StringAssertionsExtensions
+    public static class StringAssertionsExtensions
     {
         public static void BeIgnoringLineEndings(this StringAssertions stringAssertions, string expected) =>
             stringAssertions.Subject.ToUnixLineEndings().Should().Be(expected.ToUnixLineEndings());

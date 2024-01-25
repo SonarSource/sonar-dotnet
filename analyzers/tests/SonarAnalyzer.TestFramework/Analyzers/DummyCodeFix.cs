@@ -26,18 +26,18 @@ using VB = Microsoft.CodeAnalysis.VisualBasic;
 namespace SonarAnalyzer.Test.TestFramework.Tests
 {
     [ExportCodeFixProvider(LanguageNames.CSharp)]
-    internal class DummyCodeFixCS : DummyCodeFix
+    public class DummyCodeFixCS : DummyCodeFix
     {
         protected override SyntaxNode NewNode() => CS.SyntaxFactory.LiteralExpression(CS.SyntaxKind.DefaultLiteralExpression);
     }
 
     [ExportCodeFixProvider(LanguageNames.VisualBasic)]
-    internal class DummyCodeFixVB : DummyCodeFix
+    public class DummyCodeFixVB : DummyCodeFix
     {
         protected override SyntaxNode NewNode() => VB.SyntaxFactory.NothingLiteralExpression(VB.SyntaxFactory.Token(VB.SyntaxKind.NothingKeyword));
     }
 
-    internal abstract class DummyCodeFix : SonarCodeFix
+    public abstract class DummyCodeFix : SonarCodeFix
     {
         protected abstract SyntaxNode NewNode();
 

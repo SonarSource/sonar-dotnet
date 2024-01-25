@@ -25,26 +25,27 @@ using VB = Microsoft.CodeAnalysis.VisualBasic;
 namespace SonarAnalyzer.Test.TestFramework.Tests
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal class DummyAnalyzerCS : DummyAnalyzer<CS.SyntaxKind>
+    public class DummyAnalyzerCS : DummyAnalyzer<CS.SyntaxKind>
     {
         protected override CS.SyntaxKind NumericLiteralExpression => CS.SyntaxKind.NumericLiteralExpression;
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
     }
 
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    internal class DummyAnalyzerVB : DummyAnalyzer<VB.SyntaxKind>
+    public class DummyAnalyzerVB : DummyAnalyzer<VB.SyntaxKind>
     {
         protected override VB.SyntaxKind NumericLiteralExpression => VB.SyntaxKind.NumericLiteralExpression;
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
     }
 
-    internal abstract class DummyAnalyzer<TSyntaxKind> : TestAnalyzer where TSyntaxKind : struct
+    public abstract class DummyAnalyzer<TSyntaxKind> : SonarDiagnosticAnalyzer where TSyntaxKind : struct
     {
-        protected abstract TSyntaxKind NumericLiteralExpression { get; }
+        private static readonly DiagnosticDescriptor Rule = AnalysisScaffolding.CreateDescriptorMain("SDummy");
 
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
         public int DummyProperty { get; set; }
 
+        protected abstract TSyntaxKind NumericLiteralExpression { get; }
+
         protected sealed override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterNodeAction(GeneratedCodeRecognizer, c => c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation())), NumericLiteralExpression);
+            context.RegisterNodeAction(TestGeneratedCodeRecognizer.Instance, c => c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation())), NumericLiteralExpression);
     }
 }

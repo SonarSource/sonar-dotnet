@@ -21,4 +21,4 @@
 using System.Runtime.CompilerServices;
 using SonarAnalyzer;
 
-[assembly: InternalsVisibleTo("SonarAnalyzer.Test" + Signing.InternalsVisibleToPublicKey)]  // ToDo: Update to SonarAnalyzer.TestFramework.Test
+[assembly: InternalsVisibleTo("SonarAnalyzer.TestFramework.Test" + Signing.InternalsVisibleToPublicKey)]

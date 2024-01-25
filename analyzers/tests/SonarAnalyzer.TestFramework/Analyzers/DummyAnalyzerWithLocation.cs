@@ -18,17 +18,14 @@
 * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-extern alias csharp;
-
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.AnalysisContext;
-using ExtensionsCS = csharp::SonarAnalyzer.Extensions.SyntaxNodeExtensions;
 
 namespace SonarAnalyzer.Test.TestFramework.Tests;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-internal class DummyAnalyzerWithLocation : SonarDiagnosticAnalyzer
+public class DummyAnalyzerWithLocation : SonarDiagnosticAnalyzer
 {
     private readonly DiagnosticDescriptor rule;
 
@@ -40,12 +37,12 @@ internal class DummyAnalyzerWithLocation : SonarDiagnosticAnalyzer
         rule = AnalysisScaffolding.CreateDescriptor(id, customTags);
 
     protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(CSharpGeneratedCodeRecognizer.Instance, ReportIssue, SyntaxKind.InvocationExpression);
+        context.RegisterNodeAction(TestGeneratedCodeRecognizer.Instance, ReportIssue, SyntaxKind.InvocationExpression);
 
     private void ReportIssue(SonarSyntaxNodeReportingContext context)
     {
         if (context.Node is InvocationExpressionSyntax invocation
-            && ExtensionsCS.GetIdentifier(invocation) is { ValueText: "RaiseHere" } identifier)
+            && invocation.Expression is IdentifierNameSyntax { Identifier.ValueText: "RaiseHere" } identifier)
         {
             context.ReportIssue(Diagnostic.Create(rule, identifier.GetLocation(), invocation.ArgumentList.Arguments.Select(arg => arg.GetLocation())));
         }

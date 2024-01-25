@@ -29,57 +29,44 @@ public class ProjectBuilderTest
     [TestMethod]
     public void AddDocument_ValidExtension()
     {
-        EmptyCS.AddDocument("TestCases\\VariableUnused.cs").FindDocument("VariableUnused.cs").Should().NotBeNull();
-        EmptyVB.AddDocument("TestCases\\VariableUnused.vb").FindDocument("VariableUnused.vb").Should().NotBeNull();
+        EmptyCS.AddDocument(@"TestCases\ProjectBuilder.AddDocument.cs").FindDocument("ProjectBuilder.AddDocument.cs").Should().NotBeNull();
+        EmptyVB.AddDocument(@"TestCases\ProjectBuilder.AddDocument.vb").FindDocument("ProjectBuilder.AddDocument.vb").Should().NotBeNull();
     }
 
     [TestMethod]
     public void AddDocument_MismatchingExtension()
     {
-        Action f;
-
-        f = () => EmptyCS.AddDocument("TestCases\\VariableUnused.vb");
-        f.Should().Throw<ArgumentException>();
-
-        f = () => EmptyVB.AddDocument("TestCases\\VariableUnused.cs");
-        f.Should().Throw<ArgumentException>();
+        EmptyCS.Invoking(x => x.AddDocument(@"TestCases\ProjectBuilder.AddDocument.vb")).Should().Throw<ArgumentException>();
+        EmptyVB.Invoking(x => x.AddDocument(@"TestCases\ProjectBuilder.AddDocument.cs")).Should().Throw<ArgumentException>();
     }
 
     [TestMethod]
     public void AddDocument_InvalidExtension()
     {
-        Action f;
-
-        f = () => EmptyCS.AddDocument("TestCases\\VariableUnused.unknown");
-        f.Should().Throw<ArgumentException>();
-
-        f = () => EmptyVB.AddDocument("TestCases\\VariableUnused.unknown");
-        f.Should().Throw<ArgumentException>();
+        EmptyCS.Invoking(x => x.AddDocument(@"TestCases\ProjectBuilder.AddDocument.unknown")).Should().Throw<ArgumentException>();
+        EmptyVB.Invoking(x => x.AddDocument(@"TestCases\ProjectBuilder.AddDocument.unknown")).Should().Throw<ArgumentException>();
     }
 
     [TestMethod]
     public void AddDocument_SupportsRazorFiles()
     {
-        EmptyCS.AddDocument("TestCases\\UnusedPrivateMember.razor").FindDocument("UnusedPrivateMember.razor").Should().NotBeNull();
-        EmptyVB.AddDocument("TestCases\\UnusedPrivateMember.razor").FindDocument("UnusedPrivateMember.razor").Should().NotBeNull();
+        EmptyCS.AddDocument(@"TestCases\ProjectBuilder.AddDocument.razor").FindDocument("ProjectBuilder.AddDocument.razor").Should().NotBeNull();
+        EmptyVB.AddDocument(@"TestCases\ProjectBuilder.AddDocument.razor").FindDocument("ProjectBuilder.AddDocument.razor").Should().NotBeNull();
     }
 
     [TestMethod]
     public void AddDocument_CsharpSupportsCshtmlFiles() =>
-        EmptyCS.AddDocument("TestCases\\UnusedPrivateMember.cshtml").FindDocument("UnusedPrivateMember.cshtml").Should().NotBeNull();
+        EmptyCS.AddDocument(@"TestCases\ProjectBuilder.AddDocument.cshtml").FindDocument("ProjectBuilder.AddDocument.cshtml").Should().NotBeNull();
 
     [TestMethod]
     public void AddDocument_VbnetDoesntSupportCshtmlFiles() =>
-        new Action(() => EmptyVB.AddDocument("TestCases\\UnusedPrivateMember.cshtml").FindDocument("UnusedPrivateMember.cshtml").Should().NotBeNull())
-            .Should().Throw<ArgumentException>();
+        EmptyVB.Invoking(x => x.AddDocument(@"TestCases\ProjectBuilder.AddDocument.cshtml").FindDocument("ProjectBuilder.AddDocument.cshtml")).Should().Throw<ArgumentException>();
 
     [TestMethod]
     public void AddDocument_CsharpDoesntSupportVbnetFiles() =>
-        new Action(() => EmptyCS.AddDocument("TestCases\\UnusedPrivateMember.vbhtml").FindDocument("UnusedPrivateMember.vbhtml").Should().NotBeNull())
-            .Should().Throw<ArgumentException>();
+        EmptyCS.Invoking(x => x.AddDocument(@"TestCases\ProjectBuilder.AddDocument.vbhtml").FindDocument("ProjectBuilder.AddDocument.vbhtml").Should().NotBeNull()).Should().Throw<ArgumentException>();
 
     [TestMethod]
     public void AddDocument_VbnetDoesntSupportVbnetFiles() =>
-        new Action(() => EmptyVB.AddDocument("TestCases\\UnusedPrivateMember.vbhtml").FindDocument("UnusedPrivateMember.vbhtml").Should().NotBeNull())
-            .Should().Throw<ArgumentException>();
+        EmptyVB.Invoking(x => x.AddDocument(@"TestCases\ProjectBuilder.AddDocument.vbhtml").FindDocument("ProjectBuilder.AddDocument.vbhtml").Should().NotBeNull()).Should().Throw<ArgumentException>();
 }

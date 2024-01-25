@@ -217,7 +217,8 @@ namespace SonarAnalyzer.Test.TestFramework
                 {
                     Directory.CreateDirectory(Path.Combine(tempPath, lang));
                     // Copy all the files
-                    foreach (var file in Directory.GetFiles("TestFramework\\Razor\\EmptyProject").Concat(builder.Paths.Select(TestCasePath)))
+                    // To improve: Paths are currently relative to entry assembly => needs to be duplicated in different projects for now.
+                    foreach (var file in Directory.GetFiles(@"TestCases\Razor\EmptyProject").Concat(builder.Paths.Select(TestCasePath)))
                     {
                         File.Copy(file, Path.Combine(tempPath, lang, Path.GetFileName(file)));
                     }

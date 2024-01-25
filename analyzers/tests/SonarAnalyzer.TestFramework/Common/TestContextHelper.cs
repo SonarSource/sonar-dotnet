@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.Test.Helpers
 {
-    internal static class TestContextHelper
+    public static class TestContextHelper
     {
         public const string BuildReason = "BUILD_REASON";
 
