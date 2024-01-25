@@ -19,14 +19,11 @@
  */
 
 using System.IO;
-using System.Threading.Tasks;
 using NuGet.Common;
-using NuGet.Configuration;
 using NuGet.Packaging;
 using NuGet.Protocol;
 using NuGet.Protocol.Core.Types;
 using NuGet.Versioning;
-using SonarAnalyzer.Test.Common;
 
 namespace SonarAnalyzer.Test.MetadataReferences
 {
