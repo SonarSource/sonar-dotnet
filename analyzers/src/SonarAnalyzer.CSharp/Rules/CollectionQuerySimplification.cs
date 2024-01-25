@@ -35,6 +35,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
+        private static readonly ImmutableArray<KnownType> DatabaseLINQBaseTypes =
+            ImmutableArray.Create(
+                KnownType.System_Data_Entity_Infrastructure_DbQuery,
+                KnownType.Microsoft_EntityFrameworkCore_DbSet_TEntity,
+                KnownType.System_Data_Linq_ITable,
+                KnownType.System_Data_Entity_Core_Objects_ObjectQuery);
+
         private static readonly ISet<string> MethodNamesWithPredicate = new HashSet<string>
         {
             "Any", "LongCount", "Count",
@@ -83,8 +90,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var invocation = (InvocationExpressionSyntax)context.Node;
             if (invocation.ArgumentList?.Arguments.Count == 0
-                && invocation.Expression is MemberAccessExpressionSyntax memberAccess
-                && memberAccess.Name.Identifier.ValueText == CountName
+                && invocation.Expression is MemberAccessExpressionSyntax { Name.Identifier.ValueText: CountName} memberAccess
                 && context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol { Name: CountName } methodSymbol
                 && methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T)
                 && HasCountProperty(memberAccess.Expression, context.SemanticModel))
@@ -169,28 +175,31 @@ namespace SonarAnalyzer.Rules.CSharp
                 || methodSymbol.ContainingType.ConstructedFrom.Is(KnownType.System_Collections_Generic_List_T));
 
         private static string GetToCollectionCallsMessage(SonarSyntaxNodeReportingContext context, InvocationExpressionSyntax invocation, IMethodSymbol methodSymbol) =>
-            IsWithinEntityFrameworkContext(invocation, context.SemanticModel)
+            IsLINQDatabaseQuery(invocation, context.SemanticModel)
                 ? string.Format(MessageUseInstead, "'AsEnumerable'")
                 : string.Format(MessageDropFromMiddle, methodSymbol.Name);
 
-        private static bool IsWithinEntityFrameworkContext(InvocationExpressionSyntax node, SemanticModel model)
+        private static bool IsLINQDatabaseQuery(InvocationExpressionSyntax node, SemanticModel model)
         {
-            do
+            while (node is not null && node.TryGetOperands(out var left, out _))
             {
-                var memberAccess = node.Expression as MemberAccessExpressionSyntax;
-
-                if (memberAccess?.Expression is { } expression
-                    && model.GetTypeInfo(expression).Type.DerivesOrImplements(KnownType.System_Linq_IQueryable))
+                if (GetNodeTypeSymbol(left, model).DerivesOrImplementsAny(DatabaseLINQBaseTypes))
                 {
                     return true;
                 }
 
-                node = memberAccess?.Expression as InvocationExpressionSyntax;
+                node = left as InvocationExpressionSyntax;
             }
-            while (node is not null);
 
             return false;
         }
+
+        private static ITypeSymbol GetNodeTypeSymbol(SyntaxNode node, SemanticModel model) =>
+            node.RemoveParentheses() switch
+            {
+                QueryExpressionSyntax { FromClause: { } fromClause } => GetNodeTypeSymbol(fromClause.Expression, model),
+                var n => model.GetTypeInfo(n).Type
+            };
 
         private static void CheckExtensionMethodsOnIEnumerable(SonarSyntaxNodeReportingContext context)
         {
@@ -387,6 +396,7 @@ namespace SonarAnalyzer.Rules.CSharp
             type = lambdaBody.Right.ToString();
             return true;
         }
+
         private static bool TryGetCastInLambda(IMethodSymbol methodSymbol, InvocationExpressionSyntax invocation, out string type)
         {
             type = null;

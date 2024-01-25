@@ -31,6 +31,10 @@ public class EntityFrameworkReproGH3604
         //                                          ^^^^^^
         _ = dbContext.MyEntities.ToList().Where(SomeTest).ToList(); // Noncompliant {{Use 'AsEnumerable' here instead.}}
         //                       ^^^^^^
+        _ = (from v in dbContext.MyEntities
+             orderby v.Id
+             select v).ToList().Where(SomeTest).ToList(); // Noncompliant {{Use 'AsEnumerable' here instead.}}
+        //             ^^^^^^
     }
 
     public void GetEntities(DbSet<MyEntity> entities)
