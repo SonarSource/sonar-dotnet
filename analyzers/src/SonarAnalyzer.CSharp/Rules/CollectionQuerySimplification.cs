@@ -30,10 +30,10 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string MessageDropFromMiddle = "Drop this useless call to '{0}' or replace it by 'AsEnumerable' if " +
             "you are using LINQ to Entities.";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor Rule =
             DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         private static readonly ISet<string> MethodNamesWithPredicate = new HashSet<string>
         {
@@ -67,6 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
         };
 
         private const string WhereMethodName = "Where";
+        private const int WherePredicateTypeArgumentNumber = 2;
         private const string SelectMethodName = "Select";
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -81,15 +82,20 @@ namespace SonarAnalyzer.Rules.CSharp
             const string CountName = "Count";
 
             var invocation = (InvocationExpressionSyntax)context.Node;
-            if (invocation.ArgumentList?.Arguments.Count == 0 &&
-                invocation.Expression is MemberAccessExpressionSyntax memberAccess &&
-                memberAccess.Name.Identifier.ValueText == CountName &&
-                context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol &&
-                methodSymbol.Name == CountName &&
-                methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T) &&
-                HasCountProperty(memberAccess.Expression, context.SemanticModel))
+            if (invocation is
+                {
+                    ArgumentList.Arguments.Count: 0,
+                    Expression: MemberAccessExpressionSyntax
+                    {
+                        Name.Identifier.ValueText: CountName,
+                        Expression: { } memberAccessExpression
+                    }
+                }
+                && context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol { Name: CountName } methodSymbol
+                && methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T)
+                && HasCountProperty(memberAccessExpression, context.SemanticModel))
             {
-                context.ReportIssue(Diagnostic.Create(rule, GetReportLocation(invocation),
+                context.ReportIssue(Diagnostic.Create(Rule, GetReportLocation(invocation),
                     string.Format(MessageUseInstead, $"'{CountName}' property")));
             }
 
@@ -100,8 +106,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckToCollectionCalls(SonarSyntaxNodeReportingContext context)
         {
             var outerInvocation = (InvocationExpressionSyntax)context.Node;
-            if (!(context.SemanticModel.GetSymbolInfo(outerInvocation).Symbol is IMethodSymbol outerMethodSymbol) ||
-                !MethodExistsOnIEnumerable(outerMethodSymbol, context.SemanticModel))
+            if (context.SemanticModel.GetSymbolInfo(outerInvocation).Symbol is not IMethodSymbol outerMethodSymbol
+                || !MethodExistsOnIEnumerable(outerMethodSymbol, context.SemanticModel))
             {
                 return;
             }
@@ -112,11 +118,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (context.SemanticModel.GetSymbolInfo(innerInvocation).Symbol is IMethodSymbol innerMethodSymbol &&
-                IsToCollectionCall(innerMethodSymbol))
+            if (context.SemanticModel.GetSymbolInfo(innerInvocation).Symbol is IMethodSymbol innerMethodSymbol
+                && IsToCollectionCall(innerMethodSymbol))
             {
-                context.ReportIssue(Diagnostic.Create(rule, GetReportLocation(innerInvocation),
-                    string.Format(MessageDropFromMiddle, innerMethodSymbol.Name)));
+                context.ReportIssue(Diagnostic.Create(Rule,
+                    GetReportLocation(innerInvocation),
+                    GetToCollectionCallsMessage(context, innerInvocation, innerMethodSymbol)));
             }
         }
 
@@ -162,18 +169,43 @@ namespace SonarAnalyzer.Rules.CSharp
             return true;
         }
 
-        private static bool IsToCollectionCall(IMethodSymbol methodSymbol)
+        private static bool IsToCollectionCall(IMethodSymbol methodSymbol) =>
+            MethodNamesToCollection.Contains(methodSymbol.Name)
+            && (methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T)
+                || methodSymbol.ContainingType.ConstructedFrom.Is(KnownType.System_Collections_Generic_List_T));
+
+        private static string GetToCollectionCallsMessage(SonarSyntaxNodeReportingContext context, InvocationExpressionSyntax invocation, IMethodSymbol methodSymbol) =>
+            IsLinqDatabaseQuery(invocation, context.SemanticModel)
+                ? string.Format(MessageUseInstead, "'AsEnumerable'")
+                : string.Format(MessageDropFromMiddle, methodSymbol.Name);
+
+        private static bool IsLinqDatabaseQuery(InvocationExpressionSyntax node, SemanticModel model)
         {
-            return MethodNamesToCollection.Contains(methodSymbol.Name) &&
-                (methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T) ||
-                methodSymbol.ContainingType.ConstructedFrom.Is(KnownType.System_Collections_Generic_List_T));
+            while (node is not null && node.TryGetOperands(out var left, out _))
+            {
+                if (GetNodeTypeSymbol(left, model).DerivesOrImplementsAny(KnownType.DatabaseBaseQueryTypes))
+                {
+                    return true;
+                }
+
+                node = left as InvocationExpressionSyntax;
+            }
+
+            return false;
         }
+
+        private static ITypeSymbol GetNodeTypeSymbol(SyntaxNode node, SemanticModel model) =>
+            node.RemoveParentheses() switch
+            {
+                QueryExpressionSyntax { FromClause: { } fromClause } => GetNodeTypeSymbol(fromClause.Expression, model),
+                { } n => model.GetTypeInfo(n).Type
+            };
 
         private static void CheckExtensionMethodsOnIEnumerable(SonarSyntaxNodeReportingContext context)
         {
             var outerInvocation = (InvocationExpressionSyntax)context.Node;
-            if (!(context.SemanticModel.GetSymbolInfo(outerInvocation).Symbol is IMethodSymbol outerMethodSymbol) ||
-                !outerMethodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T))
+            if (context.SemanticModel.GetSymbolInfo(outerInvocation).Symbol is not IMethodSymbol outerMethodSymbol
+                || !outerMethodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T))
             {
                 return;
             }
@@ -184,8 +216,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (!(context.SemanticModel.GetSymbolInfo(innerInvocation).Symbol is IMethodSymbol innerMethodSymbol) ||
-                !innerMethodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T))
+            if (context.SemanticModel.GetSymbolInfo(innerInvocation).Symbol is not IMethodSymbol innerMethodSymbol
+                || !innerMethodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T))
             {
                 return;
             }
@@ -225,12 +257,10 @@ namespace SonarAnalyzer.Rules.CSharp
             return null;
         }
 
-        private static List<ArgumentSyntax> GetReducedArguments(IMethodSymbol methodSymbol, InvocationExpressionSyntax invocation)
-        {
-            return methodSymbol.MethodKind == MethodKind.ReducedExtension
+        private static List<ArgumentSyntax> GetReducedArguments(IMethodSymbol methodSymbol, InvocationExpressionSyntax invocation) =>
+            methodSymbol.MethodKind == MethodKind.ReducedExtension
                 ? invocation.ArgumentList.Arguments.ToList()
                 : invocation.ArgumentList.Arguments.Skip(1).ToList();
-        }
 
         private static void CheckForCastSimplification(SonarSyntaxNodeReportingContext context,
                                                        IMethodSymbol outerMethodSymbol,
@@ -238,38 +268,34 @@ namespace SonarAnalyzer.Rules.CSharp
                                                        IMethodSymbol innerMethodSymbol,
                                                        InvocationExpressionSyntax innerInvocation)
         {
-            if (MethodNamesForTypeCheckingWithSelect.Contains(outerMethodSymbol.Name) &&
-                innerMethodSymbol.Name == SelectMethodName &&
-                IsFirstExpressionInLambdaIsNullChecking(outerMethodSymbol, outerInvocation) &&
-                TryGetCastInLambda(SyntaxKind.AsExpression, innerMethodSymbol, innerInvocation, out var typeNameInInner))
+            if (MethodNamesForTypeCheckingWithSelect.Contains(outerMethodSymbol.Name)
+                && innerMethodSymbol.Name == SelectMethodName
+                && IsFirstExpressionInLambdaIsNullChecking(outerMethodSymbol, outerInvocation)
+                && TryGetCastInLambda(SyntaxKind.AsExpression, innerMethodSymbol, innerInvocation, out var typeNameInInner))
             {
-                context.ReportIssue(Diagnostic.Create(rule, GetReportLocation(innerInvocation),
+                context.ReportIssue(Diagnostic.Create(Rule, GetReportLocation(innerInvocation),
                     string.Format(MessageUseInstead, $"'OfType<{typeNameInInner}>()'")));
             }
 
-            if (outerMethodSymbol.Name == SelectMethodName &&
-                innerMethodSymbol.Name == WhereMethodName &&
-                IsExpressionInLambdaIsCast(outerMethodSymbol, outerInvocation, out var typeNameInOuter) &&
-                TryGetCastInLambda(SyntaxKind.IsExpression, innerMethodSymbol, innerInvocation, out typeNameInInner) &&
-                typeNameInOuter == typeNameInInner)
+            if (outerMethodSymbol.Name == SelectMethodName
+                && innerMethodSymbol.Name == WhereMethodName
+                && IsExpressionInLambdaIsCast(outerMethodSymbol, outerInvocation, out var typeNameInOuter)
+                && TryGetCastInLambda(SyntaxKind.IsExpression, innerMethodSymbol, innerInvocation, out typeNameInInner)
+                && typeNameInOuter == typeNameInInner)
             {
-                context.ReportIssue(Diagnostic.Create(rule, GetReportLocation(innerInvocation),
+                context.ReportIssue(Diagnostic.Create(Rule, GetReportLocation(innerInvocation),
                     string.Format(MessageUseInstead, $"'OfType<{typeNameInInner}>()'")));
             }
         }
 
-        private static Location GetReportLocation(InvocationExpressionSyntax invocation)
-        {
-            return !(invocation.Expression is MemberAccessExpressionSyntax memberAccess)
+        private static Location GetReportLocation(InvocationExpressionSyntax invocation) =>
+            invocation.Expression is not MemberAccessExpressionSyntax memberAccess
                 ? invocation.Expression.GetLocation()
                 : memberAccess.Name.GetLocation();
-        }
 
-        private static bool IsExpressionInLambdaIsCast(IMethodSymbol methodSymbol, InvocationExpressionSyntax invocation, out string typeName)
-        {
-            return TryGetCastInLambda(SyntaxKind.AsExpression, methodSymbol, invocation, out typeName) ||
-                TryGetCastInLambda(methodSymbol, invocation, out typeName);
-        }
+        private static bool IsExpressionInLambdaIsCast(IMethodSymbol methodSymbol, InvocationExpressionSyntax invocation, out string typeName) =>
+            TryGetCastInLambda(SyntaxKind.AsExpression, methodSymbol, invocation, out typeName)
+            || TryGetCastInLambda(methodSymbol, invocation, out typeName);
 
         private static bool IsFirstExpressionInLambdaIsNullChecking(IMethodSymbol methodSymbol, InvocationExpressionSyntax invocation)
         {
@@ -278,7 +304,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return false;
             }
-            var expression = arguments.First().Expression;
+            var expression = arguments[0].Expression;
 
             var binaryExpression = GetExpressionFromLambda(expression).RemoveParentheses() as BinaryExpressionSyntax;
             var lambdaParameter = GetLambdaParameter(expression);
@@ -287,8 +313,8 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (!binaryExpression.IsKind(SyntaxKind.LogicalAndExpression))
                 {
-                    return binaryExpression.IsKind(SyntaxKind.NotEqualsExpression) &&
-                           IsNullChecking(binaryExpression, lambdaParameter);
+                    return binaryExpression.IsKind(SyntaxKind.NotEqualsExpression)
+                           && IsNullChecking(binaryExpression, lambdaParameter);
                 }
                 binaryExpression = binaryExpression.Left.RemoveParentheses() as BinaryExpressionSyntax;
             }
@@ -297,14 +323,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsNullChecking(BinaryExpressionSyntax binaryExpression, string lambdaParameter)
         {
-            if (CSharpEquivalenceChecker.AreEquivalent(CSharpSyntaxHelper.NullLiteralExpression, binaryExpression.Left.RemoveParentheses()) &&
-                binaryExpression.Right.RemoveParentheses().ToString() == lambdaParameter)
+            if (CSharpEquivalenceChecker.AreEquivalent(CSharpSyntaxHelper.NullLiteralExpression, binaryExpression.Left.RemoveParentheses())
+                && binaryExpression.Right.RemoveParentheses().ToString() == lambdaParameter)
             {
                 return true;
             }
 
-            if (CSharpEquivalenceChecker.AreEquivalent(CSharpSyntaxHelper.NullLiteralExpression, binaryExpression.Right.RemoveParentheses()) &&
-                binaryExpression.Left.RemoveParentheses().ToString() == lambdaParameter)
+            if (CSharpEquivalenceChecker.AreEquivalent(CSharpSyntaxHelper.NullLiteralExpression, binaryExpression.Right.RemoveParentheses())
+                && binaryExpression.Left.RemoveParentheses().ToString() == lambdaParameter)
             {
                 return true;
             }
@@ -314,7 +340,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static ExpressionSyntax GetExpressionFromLambda(ExpressionSyntax expression)
         {
-            if (!(expression is SimpleLambdaExpressionSyntax lambda))
+            if (expression is not SimpleLambdaExpressionSyntax lambda)
             {
                 var parenthesizedLambda = expression as ParenthesizedLambdaExpressionSyntax;
                 return parenthesizedLambda?.Body as ExpressionSyntax;
@@ -322,6 +348,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             return lambda.Body as ExpressionSyntax;
         }
+
         private static string GetLambdaParameter(ExpressionSyntax expression)
         {
             if (expression is SimpleLambdaExpressionSyntax lambda)
@@ -329,12 +356,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 return lambda.Parameter.Identifier.ValueText;
             }
 
-            if (!(expression is ParenthesizedLambdaExpressionSyntax parenthesizedLambda) ||
-                parenthesizedLambda.ParameterList.Parameters.Count == 0)
+            if (expression is not ParenthesizedLambdaExpressionSyntax parenthesizedLambda
+                || parenthesizedLambda.ParameterList.Parameters.Count == 0)
             {
                 return null;
             }
-            return parenthesizedLambda.ParameterList.Parameters.First().Identifier.ValueText;
+            return parenthesizedLambda.ParameterList.Parameters[0].Identifier.ValueText;
         }
 
         private static bool TryGetCastInLambda(SyntaxKind asOrIs, IMethodSymbol methodSymbol, InvocationExpressionSyntax invocation, out string type)
@@ -351,11 +378,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            var expression = arguments.First().Expression;
+            var expression = arguments[0].Expression;
             var lambdaParameter = GetLambdaParameter(expression);
-            if (!(GetExpressionFromLambda(expression).RemoveParentheses() is BinaryExpressionSyntax lambdaBody) ||
-                lambdaParameter == null ||
-                !lambdaBody.IsKind(asOrIs))
+            if (GetExpressionFromLambda(expression).RemoveParentheses() is not BinaryExpressionSyntax lambdaBody
+                || lambdaParameter == null
+                || !lambdaBody.IsKind(asOrIs))
             {
                 return false;
             }
@@ -369,6 +396,7 @@ namespace SonarAnalyzer.Rules.CSharp
             type = lambdaBody.Right.ToString();
             return true;
         }
+
         private static bool TryGetCastInLambda(IMethodSymbol methodSymbol, InvocationExpressionSyntax invocation, out string type)
         {
             type = null;
@@ -378,10 +406,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            var expression = arguments.First().Expression;
+            var expression = arguments[0].Expression;
             var lambdaParameter = GetLambdaParameter(expression);
-            if (!(GetExpressionFromLambda(expression).RemoveParentheses() is CastExpressionSyntax castExpression) ||
-                lambdaParameter == null)
+            if (GetExpressionFromLambda(expression).RemoveParentheses() is not CastExpressionSyntax castExpression
+                || lambdaParameter == null)
             {
                 return false;
             }
@@ -402,11 +430,11 @@ namespace SonarAnalyzer.Rules.CSharp
                                                  IMethodSymbol innerMethodSymbol,
                                                  InvocationExpressionSyntax innerInvocation)
         {
-            if (MethodIsNotUsingPredicate(outerMethodSymbol, outerInvocation) &&
-                innerMethodSymbol.Name == WhereMethodName &&
-                innerMethodSymbol.Parameters.Any(symbol => (symbol.Type as INamedTypeSymbol)?.TypeArguments.Length == 2))
+            if (MethodIsNotUsingPredicate(outerMethodSymbol, outerInvocation)
+                && innerMethodSymbol.Name == WhereMethodName
+                && innerMethodSymbol.Parameters.Any(symbol => (symbol.Type as INamedTypeSymbol)?.TypeArguments.Length == WherePredicateTypeArgumentNumber))
             {
-                context.ReportIssue(Diagnostic.Create(rule, GetReportLocation(innerInvocation),
+                context.ReportIssue(Diagnostic.Create(Rule, GetReportLocation(innerInvocation),
                     string.Format(MessageDropAndChange, WhereMethodName, outerMethodSymbol.Name)));
                 return true;
             }
