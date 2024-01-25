@@ -60,6 +60,6 @@ class AnalysisWarningsTest {
     BuildResult buildResult = Tests.analyzeProject(temp, "Roslyn.1.3.1");
     Ce.Task task = TestUtils.getAnalysisWarningsTask(ORCHESTRATOR, buildResult);
     assertThat(task.getStatus()).isEqualTo(Ce.TaskStatus.SUCCESS);
-    assertThat(task.getWarningsList()).containsExactly("Analysis using MsBuild 14 and 15 build tools is deprecated. Please update your pipeline to MsBuild 16 or higher.");
+    assertThat(task.getWarningsList()).containsExactly("The analysis using MsBuild 15 is deprecated. Please update your pipeline to MsBuild 16 or higher.");
   }
 }
