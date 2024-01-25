@@ -64,21 +64,13 @@ namespace SonarAnalyzer.Test.TestFramework
             this with { Analyzers = Analyzers.Append(createConfiguredAnalyzer).ToImmutableArray() };
 
         public VerifierBuilder AddPaths(params string[] paths) =>
-            this with
-            {
-                Paths = Paths.Concat(paths).ToImmutableArray(),
-                IsRazor = IsRazor || Array.Exists(paths, IsRazorOrCshtmlFile)
-            };
+            UpdateIsRazor(paths) with { Paths = Paths.Concat(paths).ToImmutableArray(), };
 
         public VerifierBuilder AddReferences(IEnumerable<MetadataReference> references) =>
             this with { References = References.Concat(references).ToImmutableArray() };
 
         public VerifierBuilder AddSnippet(string snippet, string fileName = null) =>
-            this with
-            {
-                Snippets = Snippets.Add(new(snippet, fileName)),
-                IsRazor = IsRazor || IsRazorOrCshtmlFile(fileName)
-            };
+            UpdateIsRazor(fileName) with { Snippets = Snippets.Add(new(snippet, fileName)) };
 
         /// <summary>
         /// Add a test reference to change the project type to Test project.
@@ -154,8 +146,22 @@ namespace SonarAnalyzer.Test.TestFramework
         public Verifier Build() =>
             new(this);
 
-        internal bool IsRazorOrCshtmlFile(string fileName) =>
-            !string.IsNullOrEmpty(fileName) && (fileName.EndsWith(".razor", StringComparison.OrdinalIgnoreCase) || fileName.EndsWith(".cshtml", StringComparison.OrdinalIgnoreCase));
+        private VerifierBuilder UpdateIsRazor(params string[] paths)
+        {
+            if (!IsRazor && Array.Exists(paths, IsRazorOrCshtmlFile))
+            {
+                return ParseOptions.IsEmpty
+                    ? WithOptions(ParseOptionsHelper.FromCSharp10) with { IsRazor = true }
+                    : this with { IsRazor = true };
+            }
+            else
+            {
+                return this;
+            }
+
+            static bool IsRazorOrCshtmlFile(string fileName) =>
+                !string.IsNullOrEmpty(fileName) && (fileName.EndsWith(".razor", StringComparison.OrdinalIgnoreCase) || fileName.EndsWith(".cshtml", StringComparison.OrdinalIgnoreCase));
+        }
     }
 
     public record VerifierBuilder<TAnalyzer> : VerifierBuilder
