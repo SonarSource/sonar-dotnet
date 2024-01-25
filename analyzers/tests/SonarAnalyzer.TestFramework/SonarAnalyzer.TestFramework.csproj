@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net48;net7.0</TargetFrameworks>
+    <SonarQubeTestProject>false</SonarQubeTestProject>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' != 'net48'">
+    <!-- Class AspNetCoreMetadataReference needs this FrameworkReference to generate metadata references for ASP.NET Core related test cases. -->
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <!-- Class WindowsFormsMetadataReference needs this FrameworkReference to generate metadata references for Windows Forms related test cases. -->
+    <FrameworkReference Include="Microsoft.WindowsDesktop.App.WindowsForms" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="6.12.0" />
+    <PackageReference Include="FluentAssertions.Analyzers" Version="0.23.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Build.Locator" Version="1.5.5" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="4.8.0-2.final" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" Version="4.8.0-2.final" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.8.0-2.final" />
+    <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic.Workspaces" Version="4.8.0-2.final" />
+    <PackageReference Include="Moq" Version="4.18.4" />
+    <PackageReference Include="MSTest.TestFramework" Version="3.1.1" />
+    <PackageReference Include="NuGet.Protocol" Version="6.8.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\SonarAnalyzer.Common\SonarAnalyzer.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="FluentAssertions" />
+    <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
+    <Using Include="SonarAnalyzer.Common" />
+    <Using Include="SonarAnalyzer.Helpers" />
+  </ItemGroup>
+
+</Project>
