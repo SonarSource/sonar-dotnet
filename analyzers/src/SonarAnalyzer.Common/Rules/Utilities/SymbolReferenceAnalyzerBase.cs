@@ -82,7 +82,7 @@ namespace SonarAnalyzer.Rules
                             .GetOrAdd(currentDeclaration.Symbol, _ => new List<ReferenceInfo>())
                             .Add(currentDeclaration);
                         knownNodes.Add(currentDeclaration.Node);
-                        knownIdentifiers.Add(currentDeclaration.Identifier.Text);
+                        knownIdentifiers.Add(currentDeclaration.Identifier.ValueText);
                     }
                 }
             }
@@ -90,7 +90,7 @@ namespace SonarAnalyzer.Rules
             foreach (var token in root.DescendantTokens())
             {
                 if (Language.Syntax.IsKind(token, Language.SyntaxKind.IdentifierToken)
-                    && knownIdentifiers.Contains(token.Text)
+                    && knownIdentifiers.Contains(token.ValueText)
                     && GetBindableParent(token) is { } parent
                     && !knownNodes.Contains(parent)
                     && GetReferenceSymbol(parent, model) is { } symbol
@@ -122,12 +122,15 @@ namespace SonarAnalyzer.Rules
             var symbolReference = new SymbolReferenceInfo.Types.SymbolReference { Declaration = GetTextRange(declarationSpan.Value) };
             for (var i = 0; i < references.Count; i++)
             {
-                var reference = references[i];
-                if (!reference.IsDeclaration
-                    && reference.Identifier.GetLocation().GetMappedLineSpanIfAvailable() is var mappedLineSpan
-                    // Syntax tree can contain elements from external files (e.g. razor imports files)
-                    // We need to make sure that we don't count these elements.
-                    && string.Equals(mappedLineSpan.Path, filePath, StringComparison.OrdinalIgnoreCase))
+                if (references[i].IsDeclaration)
+                {
+                    continue;
+                }
+
+                // Syntax tree can contain elements from external files (e.g. razor imports files)
+                // We need to make sure that we don't count these elements.
+                var mappedLineSpan = references[i].Identifier.GetLocation().GetMappedLineSpanIfAvailable();
+                if (string.Equals(mappedLineSpan.Path, filePath, StringComparison.OrdinalIgnoreCase))
                 {
                     symbolReference.Reference.Add(GetTextRange(mappedLineSpan));
                 }
@@ -139,9 +142,13 @@ namespace SonarAnalyzer.Rules
         {
             for (var i = 0; i < references.Count; i++)
             {
-                if (references[i].IsDeclaration
-                    && references[i].Identifier.GetLocation().GetMappedLineSpanIfAvailable() is var mappedLineSpan
-                    && string.Equals(mappedLineSpan.Path, filePath, StringComparison.OrdinalIgnoreCase))
+                if (!references[i].IsDeclaration)
+                {
+                    continue;
+                }
+
+                var mappedLineSpan = references[i].Identifier.GetLocation().GetMappedLineSpanIfAvailable();
+                if (string.Equals(mappedLineSpan.Path, filePath, StringComparison.OrdinalIgnoreCase))
                 {
                     return mappedLineSpan;
                 }

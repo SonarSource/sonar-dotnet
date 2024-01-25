@@ -86,8 +86,16 @@ namespace SonarAnalyzer.Test.Rules
         [DataRow("Field.cs", ProjectType.Test)]
         [DataRow("Field.ReservedKeyword.cs", ProjectType.Product)]
         [DataRow("Field.ReservedKeyword.cs", ProjectType.Test)]
+        [DataRow("Field.EscapedNonKeyword.cs", ProjectType.Product)]
+        [DataRow("Field.EscapedNonKeyword.cs", ProjectType.Test)]
         public void Verify_Field_CS(string fileName, ProjectType projectType) =>
             Verify(fileName, projectType, 4, 3, 7, 8);
+
+        [DataTestMethod]
+        [DataRow(ProjectType.Product)]
+        [DataRow(ProjectType.Test)]
+        public void Verify_Field_EscapedSequences_CS(ProjectType projectType) =>
+            Verify("Field.EscapedSequences.cs", projectType, 3, 3, 7, 8, 9, 10, 11, 12);
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
