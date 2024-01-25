@@ -12,28 +12,28 @@
 <pre data-diff-id="1" data-diff-type="noncompliant">
 public class MyException : Exception // Noncompliant: several constructors are missing
 {
-  public MyException()
-  {
-  }
+    public MyException()
+    {
+    }
 }
 </pre>
 <h4>Compliant solution</h4>
 <pre data-diff-id="1" data-diff-type="compliant">
 public class MyException : Exception
 {
-  public MyException()
-  {
-  }
+    public MyException()
+    {
+    }
 
-  public MyException(string message)
-    :base(message)
-  {
-  }
+    public MyException(string message)
+        : base(message)
+    {
+    }
 
-  public MyException(string message, Exception innerException)
-    : base(message, innerException)
-  {
-  }
+    public MyException(string message, Exception innerException)
+        : base(message, innerException)
+    {
+    }
 }
 </pre>
 <h2>Resources</h2>
