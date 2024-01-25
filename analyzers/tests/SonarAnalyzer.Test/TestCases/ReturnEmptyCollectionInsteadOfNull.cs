@@ -29,6 +29,8 @@ namespace Tests.Diagnostics
             }
         }
 
+        IEnumerable<string> PropertyNoGetter { set { } }
+
         IEnumerable<string> ArrowedGetStrings1() => null; // Noncompliant
 //                                                  ^^^^
         IList<string> ArrowedGetStrings2 => null; // Noncompliant
