@@ -38,10 +38,10 @@ public sealed class UseStringCreate : SonarDiagnosticAnalyzer
         context.RegisterCompilationStartAction(c =>
         {
             // The string.Create method with IFormatProvider parameter is only available from .NET 6.0
-            if (!c.Compilation.IsMemberAvailable(
+            if (!c.Compilation.IsMemberAvailable<IMethodSymbol>(
                 KnownType.System_String,
                 "Create",
-                symbol => ((IMethodSymbol)symbol).Parameters.Any(x => KnownType.System_IFormatProvider.Matches(x.Type))))
+                method => method.Parameters.Any(x => KnownType.System_IFormatProvider.Matches(x.Type))))
             {
                 return;
             }

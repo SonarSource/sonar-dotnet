@@ -41,10 +41,10 @@ public class CompilationExtensionsTest
     [DataRow("Sample", "_field", true)]
     [DataRow("Sample", "Property", true)]
     [DataRow("Sample", "MethodWithParameters", true)]
-    public void IsMemberAvailable_WithoutPredicate(string typeName, string memberName, bool expectedResult)
+    public void IsMemberAvailable_WithoutTypeCheck(string typeName, string memberName, bool expectedResult)
     {
         var (_, semanticModel) = TestHelper.Compile(Snippet, false, AnalyzerLanguage.CSharp);
-        semanticModel.Compilation.IsMemberAvailable(new(typeName), memberName)
+        semanticModel.Compilation.IsMemberAvailable<ISymbol>(new(typeName), memberName)
             .Should().Be(expectedResult);
     }
 
@@ -52,9 +52,11 @@ public class CompilationExtensionsTest
     public void IsMemberAvailable_WithPredicate()
     {
         var (_, semanticModel) = TestHelper.Compile(Snippet, false, AnalyzerLanguage.CSharp);
-        semanticModel.Compilation.IsMemberAvailable(new("Sample"), "Property", x => x is IPropertySymbol { IsReadOnly: true })
+        semanticModel.Compilation.IsMemberAvailable<IFieldSymbol>(new("Sample"), "_field", x => KnownType.System_Int32.Matches(x.Type))
             .Should().BeTrue();
-        semanticModel.Compilation.IsMemberAvailable(new("Sample"), "MethodWithParameters", x => x is IMethodSymbol { Parameters.Length: 2 })
+        semanticModel.Compilation.IsMemberAvailable<IPropertySymbol>(new("Sample"), "Property", x => x is { IsReadOnly: true })
+            .Should().BeTrue();
+        semanticModel.Compilation.IsMemberAvailable<IMethodSymbol>(new("Sample"), "MethodWithParameters", x => x is { Parameters.Length: 2 })
             .Should().BeTrue();
     }
 }
