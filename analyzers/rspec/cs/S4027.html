@@ -4,52 +4,46 @@
   <li> <code>public MyException()</code> </li>
   <li> <code>public MyException(string)</code> </li>
   <li> <code>public MyException(string, Exception)</code> </li>
-  <li> <code>protected</code> or <code>private MyException(SerializationInfo, StreamingContext)</code> </li>
 </ul>
-<p>That fourth constructor should be <code>protected</code> in unsealed classes, and <code>private</code> in sealed classes.</p>
-<p>Not having this full set of constructors can make it difficult to handle exceptions.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-using System;
-
-namespace MyLibrary
+<p>The absence of these constructors can complicate exception handling and limit the information that can be provided when an exception is thrown.</p>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+public class MyException : Exception // Noncompliant: several constructors are missing
 {
-  public class MyException // Noncompliant: several constructors are missing
+  public MyException()
   {
-    public MyException()
-    {
-    }
   }
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
-using System;
-using System.Runtime.Serialization;
-
-namespace MyLibrary
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+public class MyException : Exception
 {
-  public class MyException : Exception
+  public MyException()
   {
-      public MyException()
-      {
-      }
+  }
 
-      public MyException(string message)
-          :base(message)
-      {
-      }
+  public MyException(string message)
+    :base(message)
+  {
+  }
 
-      public MyException(string message, Exception innerException)
-          : base(message, innerException)
-      {
-      }
-
-      protected MyException(SerializationInfo info, StreamingContext context)
-          : base(info, context)
-      {
-      }
+  public MyException(string message, Exception innerException)
+    : base(message, innerException)
+  {
   }
 }
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn: <a href="https://learn.microsoft.com/en-us/dotnet/standard/exceptions/how-to-create-user-defined-exceptions">How to create
+  user-defined exceptions</a> </li>
+  <li> Microsoft Learn: <a href="https://learn.microsoft.com/en-us/dotnet/api/system.exception">Exception Class</a> </li>
+  <li> Microsoft Learn: <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/exceptions/creating-and-throwing-exceptions#define-exception-classes">Define
+  exception classes</a> </li>
+</ul>
 
