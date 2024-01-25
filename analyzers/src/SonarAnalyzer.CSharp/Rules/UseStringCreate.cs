@@ -37,7 +37,11 @@ public sealed class UseStringCreate : SonarDiagnosticAnalyzer
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterCompilationStartAction(c =>
         {
-            if (!CompilationTargetsValidNetVersion(c.Compilation))
+            // The string.Create method with IFormatProvider parameter is only available from .NET 6.0
+            if (!c.Compilation.IsMemberAvailable<IMethodSymbol>(
+                KnownType.System_String,
+                "Create",
+                method => method.Parameters.Any(x => KnownType.System_IFormatProvider.Matches(x.Type))))
             {
                 return;
             }
@@ -61,11 +65,4 @@ public sealed class UseStringCreate : SonarDiagnosticAnalyzer
 
     private static bool NameIsEqual(SyntaxNode node, string name) =>
         node.GetName().Equals(name, StringComparison.Ordinal);
-
-    private static bool CompilationTargetsValidNetVersion(Compilation compilation) =>
-        compilation.GetTypeByMetadataName(KnownType.System_String) is var stringType
-        && stringType.GetMembers("Create")
-            .Any(x => x is IMethodSymbol { IsStatic: true } createMethod
-                      && createMethod.Parameters.FirstOrDefault() is { Type: { } parameterType }
-                      && parameterType.Is(KnownType.System_IFormatProvider));
 }

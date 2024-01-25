@@ -35,4 +35,18 @@ internal static class CompilationExtensions
 
     public static bool References(this Compilation compilation, KnownAssembly assembly)
         => assembly.IsReferencedBy(compilation);
+
+    public static bool IsMemberAvailable<TMemberType>(this Compilation compilation, KnownType type, string memberName, Func<TMemberType, bool> memberCheck = null)
+        where TMemberType : ISymbol
+    {
+        var containingType = compilation.GetTypeByMetadataName(type);
+        if (containingType is null)
+        {
+            return false;
+        }
+        var memberSymbols = containingType.GetMembers(memberName).OfType<TMemberType>();
+        return memberCheck == null
+            ? memberSymbols.Any()
+            : memberSymbols.Any(memberCheck);
+    }
 }
