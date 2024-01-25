@@ -82,7 +82,7 @@ namespace SonarAnalyzer.Rules
                             .GetOrAdd(currentDeclaration.Symbol, _ => new List<ReferenceInfo>())
                             .Add(currentDeclaration);
                         knownNodes.Add(currentDeclaration.Node);
-                        knownIdentifiers.Add(currentDeclaration.Identifier.ValueText);
+                        knownIdentifiers.Add(currentDeclaration.Identifier.Text);
                     }
                 }
             }
