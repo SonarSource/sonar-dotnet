@@ -18,13 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Test;
+using SonarAnalyzer.AnalysisContext;
 
-public static class SyntaxTreeExtensions
-{
-    public static T First<T>(this SyntaxTree tree) where T : SyntaxNode =>
-        tree.GetRoot().DescendantNodes().OfType<T>().First();
+namespace SonarAnalyzer.Test.TestFramework.Tests;
 
-    public static T Single<T>(this SyntaxTree tree) where T : SyntaxNode =>
-        tree.GetRoot().DescendantNodes().OfType<T>().Single();
-}

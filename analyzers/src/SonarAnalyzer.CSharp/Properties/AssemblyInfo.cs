@@ -27,3 +27,4 @@ using SonarAnalyzer;
 [assembly: AssemblyDescription("")]
 
 [assembly: InternalsVisibleTo("SonarAnalyzer.Test" + Signing.InternalsVisibleToPublicKey)]
+[assembly: InternalsVisibleTo("SonarAnalyzer.TestFramework.Test" + Signing.InternalsVisibleToPublicKey)]

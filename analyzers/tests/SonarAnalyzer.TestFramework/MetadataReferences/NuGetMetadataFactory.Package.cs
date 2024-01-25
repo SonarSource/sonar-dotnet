@@ -85,10 +85,7 @@ namespace SonarAnalyzer.Test.MetadataReferences
 
             private static async Task<FindPackageByIdResource> GetNuGetRepository()
             {
-                var nugetOrgUrl = Settings.LoadSpecificSettings(Paths.TestProjectRoot, "nuget.config")
-                                          .GetSection("packageSources").Items.OfType<AddItem>()
-                                          .Single(x => x.Key == "nuget.org").Value;
-                var repository = Repository.Factory.GetCoreV3(nugetOrgUrl);
+                var repository = Repository.Factory.GetCoreV3("https://api.nuget.org/v3/index.json");   // Can't use our default NuGet.config, because of trustedSigners
                 return await repository.GetResourceAsync<FindPackageByIdResource>();
             }
 

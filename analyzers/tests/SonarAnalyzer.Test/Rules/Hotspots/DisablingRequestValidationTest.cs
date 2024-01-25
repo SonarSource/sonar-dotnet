@@ -103,11 +103,11 @@ namespace SonarAnalyzer.Test.Rules
                 additionalFilePath: AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, filesToAnalyze.ToArray())).ToList();
             allDiagnostics.Should().NotBeEmpty();
             var rootWebConfig = Path.Combine(rootDirectory, WebConfig);
-            VerifyResults(rootWebConfig, allDiagnostics, languageVersion);
+            DiagnosticVerifier.VerifyFile(rootWebConfig, allDiagnostics, languageVersion);
             foreach (var subFolder in subFolders)
             {
                 var subFolderWebConfig = Path.Combine(rootDirectory, subFolder, WebConfig);
-                VerifyResults(subFolderWebConfig, allDiagnostics, languageVersion);
+                DiagnosticVerifier.VerifyFile(subFolderWebConfig, allDiagnostics, languageVersion);
             }
         }
 
@@ -158,15 +158,6 @@ namespace SonarAnalyzer.Test.Rules
                 new VB.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
                 webConfigPath,
                 AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath));
-        }
-
-        // Verifies the results for the given web.config file path.
-        private static void VerifyResults(string webConfigPath, IList<Diagnostic> allDiagnostics, string languageVersion)
-        {
-            var actualIssues = allDiagnostics.Where(d => d.Location.GetLineSpan().Path.EndsWith(webConfigPath)).ToArray();
-            var fileNameSourceText = new DiagnosticVerifier.File(webConfigPath);
-            var expectedIssueLocations = fileNameSourceText.ToExpectedIssueLocations();
-            DiagnosticVerifier.CompareActualToExpected(languageVersion, actualIssues, new[] { expectedIssueLocations }, false);
         }
     }
 }

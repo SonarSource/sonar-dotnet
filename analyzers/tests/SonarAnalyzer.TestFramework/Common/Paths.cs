@@ -24,7 +24,7 @@ namespace SonarAnalyzer.Test.Common
 {
     public static class Paths
     {
-        public static string TestProjectRoot { get; }
+        public static string TestsRoot { get; }
         public static string AnalyzersRoot { get; }
         public static string Rspec { get; }
 
@@ -32,18 +32,32 @@ namespace SonarAnalyzer.Test.Common
         {
             // The AltCover tool has a limitation. It has to be invoked without a parameter for the project/solution path.
             // Due to this we have to call it from the analyzers folder and the working directory is different when running in CI context.
-            var testProjectRoot = File.Exists(Path.Combine(@"..\..\..\", "nuget.config"))
-                                      ? @"..\..\..\"
-                                      : @"..\..\..\..\";
+            TestsRoot = FindTestsRoot();
+            Console.WriteLine("Test project root: " + TestsRoot);
 
-            TestProjectRoot = Path.GetFullPath(testProjectRoot);
-            Console.WriteLine("Test project root: " + TestProjectRoot);
-
-            AnalyzersRoot = Path.GetFullPath(Path.Combine(TestProjectRoot, "..", ".."));
+            AnalyzersRoot = Path.GetDirectoryName(TestsRoot);
             Console.WriteLine("Analyzers root: " + AnalyzersRoot);
 
             Rspec = Path.Combine(AnalyzersRoot, "rspec");
             Console.WriteLine("Rspec folder " + Rspec);
+        }
+
+        private static string FindTestsRoot()
+        {
+            var current = Path.GetFullPath(".");
+            var root = Path.GetPathRoot(current);
+            while (current != root)
+            {
+                if (Directory.Exists(Path.Combine(current, "SonarAnalyzer.Test")))
+                {
+                    return current;
+                }
+                else
+                {
+                    current = Path.GetDirectoryName(current);
+                }
+            }
+            throw new InvalidOperationException("Could not find TestProjectRoot directory from current path: " + Path.GetFullPath("."));
         }
     }
 }
