@@ -22,13 +22,16 @@ namespace SonarAnalyzer.CFG.Helpers
 {
     public static class RoslynHelper
     {
-        public const int UnsupportedVersionVS2017 = 2;
+        public const int VS2017MajorVersion = 2;
         public const int MinimalSupportedMajorVersion = 3;
 
         public static bool IsRoslynCfgSupported(int minimalVersion = MinimalSupportedMajorVersion) =>
-            typeof(SemanticModel).Assembly.GetName().Version.Major >= minimalVersion;
+            !IsVersionLessThan(minimalVersion);
 
         public static Type FlowAnalysisType(string typeName) =>
             typeof(SemanticModel).Assembly.GetType("Microsoft.CodeAnalysis.FlowAnalysis." + typeName);
+
+        public static bool IsVersionLessThan(int minimalVersion = MinimalSupportedMajorVersion) =>
+            typeof(SemanticModel).Assembly.GetName().Version.Major < minimalVersion;
     }
 }
