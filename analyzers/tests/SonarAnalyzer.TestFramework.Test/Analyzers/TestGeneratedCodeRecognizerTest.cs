@@ -21,16 +21,22 @@
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.VisualBasic;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Test.TestFramework.Tests.MetadataReferences;
+
+[TestClass]
+public class TestGeneratedCodeRecognizerTest
 {
-    public static class CompilationExtensions
+    [TestMethod]
+    public void IsGenerated_FromAttribute_CS()
     {
-        public static string LanguageVersionString(this Compilation compilation) =>
-            compilation switch
-            {
-                CSharpCompilation cs => cs.LanguageVersion.ToString(),
-                VisualBasicCompilation vb => vb.LanguageVersion.ToString(),
-                _ => throw new NotSupportedException($"Not supported compilation: {compilation.GetType()}")
-            };
+        var tree = CSharpSyntaxTree.ParseText("[GeneratedCode] public class Sample { }", null, "File.cs");
+        TestGeneratedCodeRecognizer.Instance.IsGenerated(tree).Should().BeTrue();
+    }
+
+    [TestMethod]
+    public void IsGenerated_FromAttribute_VB()
+    {
+        var tree = VisualBasicSyntaxTree.ParseText("<GeneratedCode>Public Class Sample : End Class", null, "File.vb");
+        TestGeneratedCodeRecognizer.Instance.IsGenerated(tree).Should().BeTrue();
     }
 }
