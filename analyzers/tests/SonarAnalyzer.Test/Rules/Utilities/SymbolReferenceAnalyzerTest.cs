@@ -108,6 +108,8 @@ namespace SonarAnalyzer.Test.Rules
         [DataRow("Field.vb", ProjectType.Test)]
         [DataRow("Field.ReservedKeyword.vb", ProjectType.Product)]
         [DataRow("Field.ReservedKeyword.vb", ProjectType.Test)]
+        [DataRow("Field.EscapedNonKeyword.vb", ProjectType.Product)]
+        [DataRow("Field.EscapedNonKeyword.vb", ProjectType.Test)]
         public void Verify_Field_VB(string fileName, ProjectType projectType) =>
             Verify(fileName, projectType, 4, 3, 6, 7);
 

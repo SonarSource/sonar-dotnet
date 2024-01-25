@@ -4,7 +4,7 @@
 
     public void Go()
     {
-        var x = @nonkeyword;
+        var x = nonkeyword;
         @nonkeyword = 42;
     }
 }
