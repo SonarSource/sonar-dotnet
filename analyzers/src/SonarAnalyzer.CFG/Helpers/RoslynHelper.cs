@@ -22,6 +22,7 @@ namespace SonarAnalyzer.CFG.Helpers
 {
     public static class RoslynHelper
     {
+        public const int UnsupportedVersionVS2017 = 2;
         public const int MinimalSupportedMajorVersion = 3;
 
         public static bool IsRoslynCfgSupported(int minimalVersion = MinimalSupportedMajorVersion) =>

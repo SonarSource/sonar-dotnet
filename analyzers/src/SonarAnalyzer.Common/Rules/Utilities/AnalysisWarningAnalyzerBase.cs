@@ -28,7 +28,8 @@ public abstract class AnalysisWarningAnalyzerBase : UtilityAnalyzerBase
     private const string DiagnosticId = "S9999-warning";
     private const string Title = "Analysis Warning generator";
 
-    protected virtual int MinimalSupportedRoslynVersion => RoslynHelper.MinimalSupportedMajorVersion;   // For testing
+    protected virtual int UnsupportedVersionVS2017 => RoslynHelper.UnsupportedVersionVS2017; // For testing
+    protected virtual int MinimalSupportedRoslynVersion => RoslynHelper.MinimalSupportedMajorVersion; // For testing
 
     protected AnalysisWarningAnalyzerBase() : base(DiagnosticId, Title) { }
 
@@ -36,21 +37,34 @@ public abstract class AnalysisWarningAnalyzerBase : UtilityAnalyzerBase
         context.RegisterCompilationAction(c =>
             {
                 var parameter = ReadParameters(c);
-                if (parameter.IsAnalyzerEnabled && !RoslynHelper.IsRoslynCfgSupported(MinimalSupportedRoslynVersion))     // MsBuild 15 is bound with Roslyn 2.x, where Roslyn CFG is not available.
+                var path = Path.GetFullPath(Path.Combine(parameter.OutPath, "../../AnalysisWarnings.MsBuild.json"));
+
+                if (!parameter.IsAnalyzerEnabled || File.Exists(path))
                 {
-                    // This can be removed after we bump Microsoft.CodeAnalysis references to 3.0 or higher.
-                    var path = Path.GetFullPath(Path.Combine(parameter.OutPath, "../../AnalysisWarnings.MsBuild.json"));
-                    if (!File.Exists(path))
-                    {
-                        try
-                        {
-                            File.WriteAllText(path, """[{"text": "Analysis using MsBuild 14 and 15 build tools is deprecated. Please update your pipeline to MsBuild 16 or higher."}]""");
-                        }
-                        catch
-                        {
-                            // Nothing to do here. Two compilations running on two different processes are unlikely to lock each other out on a small file write.
-                        }
-                    }
+                    return;
+                }
+
+                // This can be removed after we bump Microsoft.CodeAnalysis references to 2.0 or higher. MsBuild 14 is bound with Roslyn 1.x.
+                if (!RoslynHelper.IsRoslynCfgSupported(UnsupportedVersionVS2017)) // Roslyn CFG is not available.
+                {
+                    WriteAllText(path, "The analysis using MsBuild 14 is no longer supported and the analysis with MsBuild 15 is deprecated. Please update your pipeline to MsBuild 16 or higher.");
+                }
+                // This can be removed after we bump Microsoft.CodeAnalysis references to 3.0 or higher. MsBuild 15 is bound with Roslyn 2.x.
+                else if (!RoslynHelper.IsRoslynCfgSupported(MinimalSupportedRoslynVersion)) // Roslyn CFG is not available.
+                {
+                    WriteAllText(path, "The analysis using MsBuild 15 is deprecated. Please update your pipeline to MsBuild 16 or higher.");
                 }
             });
+
+    private void WriteAllText(string path, string text)
+    {
+        try
+        {
+            File.WriteAllText(path, $$"""[{"text": "{{text}}"}]""");
+        }
+        catch
+        {
+            // Nothing to do here. Two compilations running on two different processes are unlikely to lock each other out on a small file write.
+        }
+    }
 }
