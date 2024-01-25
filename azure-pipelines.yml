@@ -412,7 +412,7 @@ stages:
               $path
             )
             $localPath = (Get-Location).Path
-            $pattern = 'C:\\ProgramData\\vsts-agent\\\d+\\s'
+            $pattern = 'C:\\sonar-ci\\_work\\\d+\\s'
             (Get-Content -path $path -Raw) -replace $pattern,$localPath | Set-Content $path
           }
 
