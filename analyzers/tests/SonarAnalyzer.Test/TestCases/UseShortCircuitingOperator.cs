@@ -33,6 +33,6 @@ namespace Tests.Diagnostics
         }
 
         private bool ReturnSomeBool() =>
-            DateTime.Now.Second % 2 == 0;
+            Environment.Is64BitOperatingSystem;
     }
 }

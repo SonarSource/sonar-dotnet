@@ -25,13 +25,13 @@ namespace SonarAnalyzer.Rules
     {
         internal const string Title = "Use short-circuiting operators";
 
-        public override ImmutableArray<string> FixableDiagnosticIds =>  ImmutableArray.Create(UseShortCircuitingOperatorBase<TSyntaxKind>.DiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds =>  ImmutableArray.Create(UseShortCircuitingOperatorBase<TSyntaxKind, TBinaryExpression>.DiagnosticId);
 
         protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
-            if (!(root.FindNode(diagnosticSpan, getInnermostNodeForTie: true) is TBinaryExpression expression) ||
+            if (root.FindNode(diagnosticSpan, getInnermostNodeForTie: true) is not TBinaryExpression expression ||
                 !IsCandidateExpression(expression))
             {
                 return Task.CompletedTask;

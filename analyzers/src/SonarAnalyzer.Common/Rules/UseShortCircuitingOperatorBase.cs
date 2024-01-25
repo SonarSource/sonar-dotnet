@@ -25,7 +25,14 @@ namespace SonarAnalyzer.Rules
         where TBinaryExpression : SyntaxNode
     {
         internal const string DiagnosticId = "S2178";
+
+        protected abstract string GetSuggestedOpName(TBinaryExpression node);
+        protected abstract string GetCurrentOpName(TBinaryExpression node);
+        protected abstract SyntaxToken GetOperator(TBinaryExpression expression);
+        protected abstract ImmutableArray<TSyntaxKind> SyntaxKindsOfInterest { get; }
+
         protected override string MessageFormat => "Correct this '{0}' to '{1}'{2}.";
+
         protected UseShortCircuitingOperatorBase() : base(DiagnosticId) { }
 
         protected sealed override void Initialize(SonarAnalysisContext context) =>
@@ -46,11 +53,6 @@ namespace SonarAnalyzer.Rules
                     }
                 },
                 SyntaxKindsOfInterest.ToArray());
-
-        protected abstract string GetSuggestedOpName(TBinaryExpression node);
-        protected abstract string GetCurrentOpName(TBinaryExpression node);
-        protected abstract SyntaxToken GetOperator(TBinaryExpression expression);
-        protected abstract ImmutableArray<TSyntaxKind> SyntaxKindsOfInterest { get; }
 
         private static bool IsBool(SyntaxNode node, SemanticModel semanticModel) =>
             node != null && semanticModel.GetTypeInfo(node).Type.Is(KnownType.System_Boolean);
