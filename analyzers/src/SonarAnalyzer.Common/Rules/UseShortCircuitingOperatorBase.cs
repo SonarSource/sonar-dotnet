@@ -20,28 +20,14 @@
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class UseShortCircuitingOperatorBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind> where TSyntaxKind : struct
+    public abstract class UseShortCircuitingOperatorBase<TSyntaxKind, TBinaryExpression> : SonarDiagnosticAnalyzer<TSyntaxKind>
+        where TSyntaxKind : struct
+        where TBinaryExpression : SyntaxNode
     {
         internal const string DiagnosticId = "S2178";
         protected override string MessageFormat => "Correct this '{0}' to '{1}'{2}.";
         protected UseShortCircuitingOperatorBase() : base(DiagnosticId) { }
 
-        protected static bool IsBool(SyntaxNode node, SemanticModel semanticModel)
-        {
-            if (node == null)
-            {
-                return false;
-            }
-
-            var type = semanticModel.GetTypeInfo(node).Type;
-            return type.Is(KnownType.System_Boolean);
-        }
-    }
-
-    public abstract class UseShortCircuitingOperatorBase<TSyntaxKind, TBinaryExpression> : UseShortCircuitingOperatorBase<TSyntaxKind>
-        where TSyntaxKind : struct
-        where TBinaryExpression : SyntaxNode
-    {
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
                 {
@@ -62,11 +48,11 @@ namespace SonarAnalyzer.Rules
                 SyntaxKindsOfInterest.ToArray());
 
         protected abstract string GetSuggestedOpName(TBinaryExpression node);
-
         protected abstract string GetCurrentOpName(TBinaryExpression node);
-
         protected abstract SyntaxToken GetOperator(TBinaryExpression expression);
-
         protected abstract ImmutableArray<TSyntaxKind> SyntaxKindsOfInterest { get; }
+
+        private static bool IsBool(SyntaxNode node, SemanticModel semanticModel) =>
+            node != null && semanticModel.GetTypeInfo(node).Type.Is(KnownType.System_Boolean);
     }
 }
