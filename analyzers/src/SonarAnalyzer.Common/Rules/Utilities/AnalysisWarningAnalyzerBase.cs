@@ -58,7 +58,7 @@ public abstract class AnalysisWarningAnalyzerBase : UtilityAnalyzerBase
                 }
             });
 
-    private void WriteAllText(string path, string text)
+    private static void WriteAllText(string path, string text)
     {
         try
         {
