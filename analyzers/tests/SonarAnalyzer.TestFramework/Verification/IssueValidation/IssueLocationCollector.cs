@@ -22,13 +22,13 @@ using System.Text.RegularExpressions;
 using FluentAssertions.Execution;
 using Microsoft.CodeAnalysis.Text;
 
-namespace SonarAnalyzer.Test.TestFramework
+namespace SonarAnalyzer.TestFramework.Verification.IssueValidation
 {
     /// <summary>
     /// See <see href="https://github.com/SonarSource/sonar-dotnet/blob/master/docs/verifier-syntax.md">docs/verifier-syntax.md</see>
     /// for a comprehensive documentation of the verifier syntax.
     /// </summary>
-    public static class IssueLocationCollector
+    internal static class IssueLocationCollector
     {
         private const string CommentPattern = @"(?<comment>//|'|<!--|/\*|@\*)";
         private const string PrecisePositionPattern = @"\s*(?<position>\^+)(\s+(?<invalid>\^+))*";
@@ -40,10 +40,10 @@ namespace SonarAnalyzer.Test.TestFramework
         private const string IssueIdsPattern = @"(\s*\[(?<issueIds>[^]]+)\])?";
         private const string MessagePattern = @"(\s*\{\{(?<message>.+)\}\})?";
 
-        internal static readonly Regex RxIssue =
+        public static readonly Regex RxIssue =
             CreateRegex(CommentPattern + NoPrecisePositionPattern + IssueTypePattern + OffsetPattern + ExactColumnPattern + IssueIdsPattern + MessagePattern);
 
-        internal static readonly Regex RxPreciseLocation =
+        public static readonly Regex RxPreciseLocation =
             CreateRegex(@"^\s*" + CommentPattern + PrecisePositionPattern + IssueTypePattern + "?" + OffsetPattern + IssueIdsPattern + MessagePattern + @"\s*(-->|\*/|\*@)?$");
 
         private static readonly Regex RxBuildError = CreateRegex(CommentPattern + ErrorTypePattern + OffsetPattern + ExactColumnPattern + IssueIdsPattern);
@@ -75,10 +75,10 @@ namespace SonarAnalyzer.Test.TestFramework
             return EnsureNoDuplicatedPrimaryIds(MergeLocations(locations.ToArray(), preciseLocations.ToArray()));
         }
 
-        internal static IEnumerable<IIssueLocation> GetExpectedBuildErrors(IEnumerable<TextLine> lines) =>
+        public static IEnumerable<IIssueLocation> GetExpectedBuildErrors(IEnumerable<TextLine> lines) =>
             lines?.SelectMany(GetBuildErrorsLocations) ?? Enumerable.Empty<IIssueLocation>();
 
-        internal static IList<IIssueLocation> MergeLocations(IssueLocation[] locations, IssueLocation[] preciseLocations)
+        public static IList<IIssueLocation> MergeLocations(IssueLocation[] locations, IssueLocation[] preciseLocations)
         {
             var usedLocations = new List<IssueLocation>();
             foreach (var location in locations)
@@ -109,10 +109,10 @@ namespace SonarAnalyzer.Test.TestFramework
                    .ToList();
         }
 
-        internal static /*for testing*/ IEnumerable<IssueLocation> GetIssueLocations(TextLine line) =>
+        public static /*for testing*/ IEnumerable<IssueLocation> GetIssueLocations(TextLine line) =>
             GetLocations(line, RxIssue);
 
-        internal static /*for testing*/ IEnumerable<IssueLocation> GetPreciseIssueLocations(TextLine line)
+        public static /*for testing*/ IEnumerable<IssueLocation> GetPreciseIssueLocations(TextLine line)
         {
             var match = RxPreciseLocation.Match(line.ToString());
             if (match.Success)
@@ -155,18 +155,18 @@ namespace SonarAnalyzer.Test.TestFramework
 
             return GetIssueIds(match).Select(
                 issueId => new IssueLocation
-                           {
-                               IsPrimary = isPrimary,
-                               LineNumber = line,
-                               Message = message,
-                               IssueId = issueId,
-                               Start = start,
-                               Length = length,
-                           });
+                {
+                    IsPrimary = isPrimary,
+                    LineNumber = line,
+                    Message = message,
+                    IssueId = issueId,
+                    Start = start,
+                    Length = length,
+                });
         }
 
         private static int? GetStart(Match match) =>
-            match.Groups["position"] is {Success: true} position ? position.Index : null;
+            match.Groups["position"] is { Success: true } position ? position.Index : null;
 
         private static int? GetLength(Match match) =>
             match.Groups["position"] is { Success: true } position ? position.Length : null;
@@ -237,7 +237,7 @@ Either remove the Noncompliant/Secondary word or precise pattern '^^' from the c
             }
         }
 
-        private static void ThrowUnexpectedPreciseLocationCount(int  count, int line)
+        private static void ThrowUnexpectedPreciseLocationCount(int count, int line)
         {
             var message = $"Expecting only one precise location per line, found {count} on line {line}. " +
                 @"If you want to specify more than one precise location per line you need to omit the Noncompliant comment:
@@ -249,36 +249,5 @@ internal class MyClass : IInterface1 // there should be no Noncompliant comment
 
         private static Regex CreateRegex(string pattern) =>
             new Regex(pattern, RegexOptions.Compiled, RegexConstants.DefaultTimeout);
-
-        [DebuggerDisplay("ID:{IssueId} @{LineNumber} Primary:{IsPrimary} Start:{Start} Length:{Length} '{Message}'")]
-        internal class IssueLocation : IIssueLocation
-        {
-            public string FilePath { get; init; }
-            public bool IsPrimary { get; init; }
-            public int LineNumber { get; init; }
-            public string Message { get; init; }
-            public string IssueId { get; init; }
-            public int? Start { get; set; }
-            public int? Length { get; set; }
-
-            public IssueLocation(Diagnostic diagnostic) : this(diagnostic.GetMessage(), diagnostic.Location)
-            {
-                IsPrimary = true;
-                IssueId = diagnostic.Id;
-            }
-
-            public IssueLocation(SecondaryLocation secondaryLocation) : this(secondaryLocation.Message, secondaryLocation.Location) { }
-
-            public IssueLocation() { }
-
-            private IssueLocation(string message, Location location)
-            {
-                Message = message;
-                LineNumber = location.GetLineNumberToReport();
-                Start = location.GetLineSpan().StartLinePosition.Character;
-                Length = location.SourceSpan.Length;
-                FilePath = location.SourceTree?.FilePath;
-            }
-        }
     }
 }
