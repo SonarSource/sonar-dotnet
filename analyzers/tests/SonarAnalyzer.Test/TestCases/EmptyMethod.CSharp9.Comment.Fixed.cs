@@ -77,14 +77,6 @@ record MyR2 : MyR
     }
 }
 
-class WithProp
-{
-    public string Prop
-    {
-        init { } // FN https://github.com/SonarSource/sonar-dotnet/issues/3753
-    }
-}
-
 class M
 {
     [ModuleInitializer]
@@ -130,6 +122,162 @@ namespace D
         public partial void Qix()
         {
             Console.WriteLine();
+        }
+    }
+}
+
+class PropertyAccessors
+{
+    int NonEmptyInitProp { init { int x; } }
+    int EmptyInitProp {
+        init
+        {
+            // Method intentionally left empty.
+        }
+    }                   // Fixed
+    int EmptyInitPropWithGet { get => 42; init
+        {
+            // Method intentionally left empty.
+        }
+    } // Fixed
+    int AutoInitPropWithGet { get; init; }           // Compliant, auto-implemented, so not-empty
+
+    int NonEmptySetProp { set { int x; } }
+    int EmptySetProp {
+        set
+        {
+            // Method intentionally left empty.
+        }
+    }                     // Fixed
+    int EmptySetPropWithGet { get => 42; set
+        {
+            // Method intentionally left empty.
+        }
+    }   // Fixed
+    int AutoSetPropWithGet { get; set; }             // Compliant, auto-implemented, so not-empty
+
+    class Base
+    {
+        protected virtual int VirtualEmptyInitProp { init { } }  // Compliant, virtual
+    }
+
+    class Inherited : Base
+    {
+        protected override int VirtualEmptyInitProp {
+            init
+            {
+                // Method intentionally left empty.
+            }
+        } // Fixed
+    }
+
+    class Hidden : Base
+    {
+        protected new int VirtualEmptyInitProp {
+            init
+            {
+                // Method intentionally left empty.
+            }
+        }      // Fixed
+    }
+}
+
+class EmptyProperty
+{
+    int EmptyProp { } // Error CS0548 property or indexer must have at least one accessor
+}
+
+class LocalFunction
+{
+    void FirstLevelInMethod()
+    {
+        void NonEmpty() { int i; }              // Compliant
+        void Empty()
+        {
+            // Method intentionally left empty.
+        }                        // Fixed
+        static void EmptyStatic()
+        {
+            // Method intentionally left empty.
+        }           // Fixed
+        extern static void EmptyExternStatic(); // Compliant, no body
+        unsafe void EmptyUnsafe()
+        {
+            // Method intentionally left empty.
+        }           // Fixed
+        async void EmptyAsync()
+        {
+            // Method intentionally left empty.
+        }             // Fixed
+    }
+
+    void NestedInMethod()
+    {
+        void FirstLevelLocalFunction()
+        {
+            void NonEmpty() { int i; }          // Compliant
+            void Empty()
+            {
+                // Method intentionally left empty.
+            }                    // Fixed
+
+            void SecondLevelLocalFunction()     // Compliant, contains a local functions
+            {
+                void NonEmpty() { int i; }      // Compliant
+                void Empty()
+                {
+                    // Method intentionally left empty.
+                }                // Fixed
+            }
+        }
+    }
+
+    int FirstLevelInAccessor
+    {
+        set
+        {
+            void NonEmpty() { int i; }              // Compliant
+            void Empty()
+            {
+                // Method intentionally left empty.
+            }                        // Fixed
+            static void EmptyStatic()
+            {
+                // Method intentionally left empty.
+            }           // Fixed
+            extern static void EmptyExternStatic(); // Compliant, no body
+            unsafe void EmptyUnsafe()
+            {
+                // Method intentionally left empty.
+            }           // Fixed
+            async void EmptyAsync()
+            {
+                // Method intentionally left empty.
+            }             // Fixed
+        }
+    }
+
+    int NestedInAccessor
+    {
+        init
+        {
+            void FirstLevelLocalFunction()
+            {
+                void NonEmpty() { int i; }          // Compliant
+                void Empty()
+                {
+                    // Method intentionally left empty.
+                }                    // Fixed
+
+                void SecondLevelLocalFunction()     // Compliant, contains local functions
+                {
+                    void NonEmpty() { int i; }      // Compliant
+                    void Empty()
+                    {
+                        // Method intentionally left empty.
+                    }                // Fixed
+                }
+            }
         }
     }
 }

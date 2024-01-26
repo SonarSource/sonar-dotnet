@@ -42,6 +42,7 @@ namespace SonarAnalyzer.Test.Rules
         public void EmptyMethod_CSharp9() =>
             builderCS.AddPaths("EmptyMethod.CSharp9.cs")
                 .WithTopLevelStatements()
+                .WithOptions(ParseOptionsHelper.FromCSharp9)
                 .Verify();
 
         [TestMethod]

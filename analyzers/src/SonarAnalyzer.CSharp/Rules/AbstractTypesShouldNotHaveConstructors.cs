@@ -34,9 +34,9 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterNodeAction(
                 c =>
                 {
-                    if (GetModifiers(c.Node.Parent).Any(SyntaxKind.AbstractKeyword))
+                    if (c.Node.Parent.GetModifiers().Any(SyntaxKind.AbstractKeyword))
                     {
-                        var invalidAccessModifier = GetModifiers(c.Node).FirstOrDefault(IsPublicOrInternal);
+                        var invalidAccessModifier = c.Node.GetModifiers().FirstOrDefault(IsPublicOrInternal);
                         if (invalidAccessModifier != default)
                         {
                             c.ReportIssue(Diagnostic.Create(Rule, invalidAccessModifier.GetLocation(), SuggestModifier(invalidAccessModifier)));
@@ -44,15 +44,6 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 },
                 SyntaxKind.ConstructorDeclaration);
-
-        private static SyntaxTokenList GetModifiers(SyntaxNode node) =>
-            node switch
-            {
-                ClassDeclarationSyntax classDeclaration => classDeclaration.Modifiers,
-                ConstructorDeclarationSyntax ctorDeclaration => ctorDeclaration.Modifiers,
-                {} syntaxNode when RecordDeclarationSyntaxWrapper.IsInstance(syntaxNode) => ((RecordDeclarationSyntaxWrapper)syntaxNode).Modifiers,
-                _ => default
-            };
 
         private static bool IsPublicOrInternal(SyntaxToken token) =>
             token.IsKind(SyntaxKind.PublicKeyword) || token.IsKind(SyntaxKind.InternalKeyword);

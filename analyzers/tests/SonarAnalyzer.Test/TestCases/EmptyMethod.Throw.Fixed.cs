@@ -72,10 +72,7 @@ namespace Tests.Diagnostics
 
     public interface IInterface
     {
-        public void F1()
-        {
-            throw new NotSupportedException();
-        } // Fixed
+        public void F1() { } // Compliant, implemented interface methods are virtual by default
 
         public virtual void F2() { }
 
@@ -86,7 +83,10 @@ namespace Tests.Diagnostics
     {
         public string Prop
         {
-            set { } // FN https://github.com/SonarSource/sonar-dotnet/issues/3753
+            set
+            {
+                throw new NotSupportedException();
+            } // Fixed
         }
     }
 
