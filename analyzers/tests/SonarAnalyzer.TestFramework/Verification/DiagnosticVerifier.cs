@@ -23,6 +23,7 @@ using System.Text;
 using FluentAssertions.Execution;
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.AnalysisContext;
+using SonarAnalyzer.TestFramework.Verification.IssueValidation;
 
 namespace SonarAnalyzer.Test.TestFramework
 {
@@ -177,10 +178,12 @@ namespace SonarAnalyzer.Test.TestFramework
             }
         }
 
-        public static void CompareActualToExpected(string languageVersion, Diagnostic[] diagnostics, FileIssueLocations[] expectedIssuesPerFile, bool compareIdToMessage)
+        private static void CompareActualToExpected(string languageVersion, Diagnostic[] diagnostics, FileIssueLocations[] expectedIssuesPerFile, bool compareIdToMessage)
         {
-            DumpActualDiagnostics(languageVersion, diagnostics);
+            var actualIssues = new CompilationIssues(languageVersion, diagnostics);
+            actualIssues.Dump();
 
+            // ToDo: Throw this away
             foreach (var diagnostic in diagnostics.OrderBy(x => x.Location.SourceSpan.Start))
             {
                 var expectedIssues = ExpectedIssues(expectedIssuesPerFile, diagnostic.Location);
@@ -227,16 +230,6 @@ namespace SonarAnalyzer.Test.TestFramework
             location.SourceTree == null
                 ? expectedIssuesPerFile.SingleOrDefault(x => x.IssueLocations.Any())?.IssueLocations ?? new List<IIssueLocation>() // Issue locations get removed, so the list could become empty
                 : expectedIssuesPerFile.Single(x => x.FileName == location.SourceTree.FilePath).IssueLocations;
-
-        private static void DumpActualDiagnostics(string languageVersion, Diagnostic[] diagnostics)
-        {
-            Console.WriteLine($"{languageVersion}: Actual diagnostics: {diagnostics.Length}");
-            foreach (var d in diagnostics.OrderBy(x => x.GetLineNumberToReport()))
-            {
-                var lineSpan = d.Location.GetLineSpan();
-                Console.WriteLine($"  Id: {d.Id}, Line: {d.Location.GetLineNumberToReport()}, [{lineSpan.StartLinePosition.Character}, {lineSpan.EndLinePosition.Character}]");
-            }
-        }
 
         private static IEnumerable<SyntaxTree> ExceptExtraEmptyFile(this IEnumerable<SyntaxTree> syntaxTrees) =>
             syntaxTrees.Where(x =>
@@ -295,7 +288,7 @@ namespace SonarAnalyzer.Test.TestFramework
 
             if (expectedIssue == null)
             {
-                var issueId = primaryIssueId == null ? "" : $" [{ primaryIssueId}]";
+                var issueId = primaryIssueId == null ? "" : $" [{primaryIssueId}]";
                 var seeOutputMessage = $"{Environment.NewLine}See output to see all actual diagnostics raised on the file";
                 var lineSpan = location.GetLineSpan().Span.ToString();
                 var exceptionMessage = string.IsNullOrEmpty(extraInfo)
@@ -334,33 +327,33 @@ Actual  : '{message}'");
 
         internal class File
         {
-            private readonly string fileName;
-
+            public string FileName { get; }
             public SourceText Content { get; }
 
             public File(string fileName)
             {
-                this.fileName = fileName;
+                FileName = fileName;
                 Content = SourceText.From(System.IO.File.ReadAllText(fileName));
             }
 
             public File(Snippet snippet)
             {
-                fileName = snippet.FileName;
+                FileName = snippet.FileName;
                 Content = SourceText.From(snippet.Content);
             }
 
             public File(SyntaxTree syntaxTree)
             {
-                fileName = syntaxTree.FilePath;
+                FileName = syntaxTree.FilePath;
                 Content = syntaxTree.GetText();
             }
 
+            // ToDo: Remove
             public FileIssueLocations ToExpectedIssueLocations() =>
-                new(fileName, IssueLocationCollector.GetExpectedIssueLocations(Content.Lines));
+                new(FileName, IssueLocationCollector.GetExpectedIssueLocations(Content.Lines));
         }
 
-        public class FileIssueLocations
+        internal class FileIssueLocations
         {
             public string FileName { get; }
             public IList<IIssueLocation> IssueLocations { get; }
