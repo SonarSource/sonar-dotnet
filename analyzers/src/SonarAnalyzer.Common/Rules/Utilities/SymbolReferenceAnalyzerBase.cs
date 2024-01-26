@@ -120,16 +120,16 @@ namespace SonarAnalyzer.Rules
             }
 
             var symbolReference = new SymbolReferenceInfo.Types.SymbolReference { Declaration = GetTextRange(declarationSpan.Value) };
-            foreach (var reference in references)
+            for (var i = 0; i < references.Count; i++)
             {
-                if (reference.IsDeclaration)
+                if (references[i].IsDeclaration)
                 {
                     continue;
                 }
 
                 // Syntax tree can contain elements from external files (e.g. razor imports files)
                 // We need to make sure that we don't count these elements.
-                var mappedLineSpan = reference.Identifier.GetLocation().GetMappedLineSpanIfAvailable();
+                var mappedLineSpan = references[i].Identifier.GetLocation().GetMappedLineSpanIfAvailable();
                 if (string.Equals(mappedLineSpan.Path, filePath, StringComparison.OrdinalIgnoreCase))
                 {
                     symbolReference.Reference.Add(GetTextRange(mappedLineSpan));
@@ -140,14 +140,14 @@ namespace SonarAnalyzer.Rules
 
         private static FileLinePositionSpan? GetDeclarationSpan(IReadOnlyList<ReferenceInfo> references, string filePath)
         {
-            foreach (var reference in references)
+            for (var i = 0; i < references.Count; i++)
             {
-                if (!reference.IsDeclaration)
+                if (!references[i].IsDeclaration)
                 {
                     continue;
                 }
 
-                var mappedLineSpan = reference.Identifier.GetLocation().GetMappedLineSpanIfAvailable();
+                var mappedLineSpan = references[i].Identifier.GetLocation().GetMappedLineSpanIfAvailable();
                 if (string.Equals(mappedLineSpan.Path, filePath, StringComparison.OrdinalIgnoreCase))
                 {
                     return mappedLineSpan;
