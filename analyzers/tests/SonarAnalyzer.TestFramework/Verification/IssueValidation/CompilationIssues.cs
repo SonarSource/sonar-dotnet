@@ -29,7 +29,7 @@ internal sealed class CompilationIssues : IEnumerable<IssueLocation>
     private readonly List<IssueLocation> issues;
 
     public CompilationIssues(string languageVersion, IEnumerable<FileContent> files)
-        : this(languageVersion, files.SelectMany(x => IssueLocationCollector.GetExpectedIssueLocations(x.Content.Lines))) { }
+        : this(languageVersion, files.SelectMany(x => IssueLocationCollector.GetExpectedIssueLocations(x.FileName, x.Content.Lines))) { }
 
     public CompilationIssues(string languageVersion, Diagnostic[] diagnostics)
         : this(languageVersion, ToIssueLocations(diagnostics)) { }
@@ -40,8 +40,8 @@ internal sealed class CompilationIssues : IEnumerable<IssueLocation>
         this.issues = issues.ToList();
     }
 
-    public IEnumerable<IssueLocationKey> UniqueKeys() =>
-        issues.Select(x => new IssueLocationKey(x)).Distinct();
+    public IssueLocationKey[] UniqueKeys() =>
+        issues.Select(x => new IssueLocationKey(x)).Distinct().ToArray();
 
     public List<IssueLocation> Remove(IssueLocationKey key)
     {

@@ -27,25 +27,19 @@ internal sealed class FileContent
     public string FileName { get; }
     public SourceText Content { get; }
 
-    public FileContent(string fileName)
+    public FileContent(string fileName) : this(fileName, SourceText.From(System.IO.File.ReadAllText(fileName))) { }
+
+    public FileContent(Snippet snippet) : this(snippet.FileName, SourceText.From(snippet.Content)) { }  // FIXME: Is this needed?
+
+    public FileContent(SyntaxTree tree) : this(tree.FilePath, tree.GetText()) { }
+
+    private FileContent(string fileName, SourceText content)
     {
         FileName = fileName;
-        Content = SourceText.From(System.IO.File.ReadAllText(fileName));
-    }
-
-    public FileContent(Snippet snippet)
-    {
-        FileName = snippet.FileName;
-        Content = SourceText.From(snippet.Content);
-    }
-
-    public FileContent(SyntaxTree syntaxTree)
-    {
-        FileName = syntaxTree.FilePath;
-        Content = syntaxTree.GetText();
+        Content = content;
     }
 
     // ToDo: Remove
     public FileIssueLocations ToExpectedIssueLocations() =>
-        new(FileName, IssueLocationCollector.GetExpectedIssueLocations(Content.Lines));
+        new(FileName, IssueLocationCollector.GetExpectedIssueLocations(FileName, Content.Lines));
 }

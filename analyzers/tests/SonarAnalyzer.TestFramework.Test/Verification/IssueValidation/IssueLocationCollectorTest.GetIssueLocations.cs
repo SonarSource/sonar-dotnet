@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
 {
     Console.WriteLine(a); //Noncompliant [flow1,flow2]
 }");
-            var result = IssueLocationCollector.GetIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetIssueLocations("File.cs", line).ToList();
 
             result.Should().HaveCount(2);
 
@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
 {
     Console.WriteLine(a); //Noncompliant@-1 [flow1,flow2] {{Some message}}
 }");
-            var result = IssueLocationCollector.GetIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetIssueLocations("File.cs", line).ToList();
 
             result.Should().HaveCount(2);
 
@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
 {
     Console.WriteLine(a); //Noncompliant {{Some message}} [flow1,flow2]
 }");
-            var result = IssueLocationCollector.GetIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetIssueLocations("File.cs", line).ToList();
 
             result.Should().ContainSingle();
 
@@ -85,7 +85,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
 {
     Console.WriteLine(a); //Noncompliant@-1
 }");
-            var result = IssueLocationCollector.GetIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetIssueLocations("File.cs", line).ToList();
 
             result.Should().ContainSingle();
 
@@ -103,7 +103,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
 {
     Console.WriteLine(a); //Noncompliant [flow1,flow2] {{Some message}}
 }");
-            var result = IssueLocationCollector.GetIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetIssueLocations("File.cs", line).ToList();
 
             result.Should().HaveCount(2);
 
@@ -121,7 +121,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
 {
     Console.WriteLine(a); //Noncompliant {{Some message}}
 }");
-            var result = IssueLocationCollector.GetIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetIssueLocations("File.cs", line).ToList();
 
             result.Should().ContainSingle();
 
@@ -139,7 +139,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
 {
     Console.WriteLine(a); //Noncompliant@=1
 }");
-            var result = IssueLocationCollector.GetIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetIssueLocations("File.cs", line).ToList();
 
             result.Should().ContainSingle();
 
@@ -157,7 +157,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
 {
     Console.WriteLine(a); //Noncompliant [last,flow1,flow2]
 }");
-            var result = IssueLocationCollector.GetIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetIssueLocations("File.cs", line).ToList();
 
             result.Should().HaveCount(3);
 
@@ -175,7 +175,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
 {
     Console.WriteLine(a); //Noncompliant
 }");
-            var result = IssueLocationCollector.GetIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetIssueLocations("File.cs", line).ToList();
 
             result.Should().ContainSingle();
 
@@ -193,7 +193,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
 {
     Console.WriteLine(a); //Secondary@-1 [flow1,flow2] {{Some message}}
 }");
-            var result = IssueLocationCollector.GetIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetIssueLocations("File.cs", line).ToList();
 
             result.Should().HaveCount(2);
 
@@ -211,7 +211,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
 {
     Console.WriteLine(a);
 }");
-            var result = IssueLocationCollector.GetIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetIssueLocations("File.cs", line).ToList();
 
             result.Should().BeEmpty();
         }
@@ -223,7 +223,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
 {
     Console.WriteLine(a); //Noncompliant^5#7
 }");
-            var result = IssueLocationCollector.GetIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetIssueLocations("File.cs", line).ToList();
 
             result.Should().ContainSingle();
 
@@ -241,7 +241,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
 {
     Console.WriteLine(a); //Secondary ^13#9 [myId]
 }");
-            var result = IssueLocationCollector.GetIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetIssueLocations("File.cs", line).ToList();
 
             result.Should().ContainSingle();
 
@@ -259,7 +259,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
 {
     Console.WriteLine(a); // Noncompliant @-2 ^5#16 [myIssueId] {{MyMessage}}
 }");
-            var result = IssueLocationCollector.GetIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetIssueLocations("File.cs", line).ToList();
 
             result.Should().ContainSingle();
 
@@ -279,7 +279,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
 {
     Console.WriteLine(a); //Noncompliant@-2^5#16[myIssueId]{{MyMessage}}
 }");
-            var result = IssueLocationCollector.GetIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetIssueLocations("File.cs", line).ToList();
 
             result.Should().ContainSingle();
 
@@ -299,7 +299,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
 
 <!-- Noncompliant @-2 ^5#16 [myIssueId] {{MyMessage}} -->
 ");
-            var result = IssueLocationCollector.GetIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetIssueLocations("File.cs", line).ToList();
 
             result.Should().ContainSingle();
 

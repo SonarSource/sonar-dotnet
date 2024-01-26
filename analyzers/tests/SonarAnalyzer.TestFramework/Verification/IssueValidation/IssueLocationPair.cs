@@ -81,7 +81,7 @@ internal sealed record IssueLocationPair(IssueLocation Actual, IssueLocation Exp
         }
         else
         {
-            return null;
+            throw new InvalidOperationException("Something went wrong. This is not supposed to be called for same issues.");
         }
     }
 }

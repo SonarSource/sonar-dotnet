@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.TestFramework.Verification.IssueValidation;
 
-[DebuggerDisplay("ID:{RuleId} @{LineNumber} Primary:{IsPrimary} Start:{Start} Length:{Length} '{Message}'")]
+[DebuggerDisplay("ID:{RuleId} @{LineNumber} Primary:{IsPrimary} Start:{Start} Length:{Length} {Message} {FilePath}")]
 internal sealed class IssueLocation // ToDo: Refactor the relation between this and the Key
 {
     public string RuleId { get; init; }     // Diagnostic ID for actual issues
@@ -38,18 +38,33 @@ internal sealed class IssueLocation // ToDo: Refactor the relation between this 
         RuleId = diagnostic.Id;
     }
 
-    public IssueLocation(SecondaryLocation secondaryLocation) : this(secondaryLocation.Message, secondaryLocation.Location) { }
+    public IssueLocation(SecondaryLocation secondaryLocation) : this(secondaryLocation.Message ?? string.Empty, secondaryLocation.Location) { }
 
     public IssueLocation() { }
 
     private IssueLocation(string message, Location location)
     {
+        var span = location.GetLineSpan();
         Message = message;
         LineNumber = location.GetLineNumberToReport();
-        Start = location.GetLineSpan().StartLinePosition.Character;
+        Start = span.StartLinePosition.Character;
         Length = location.SourceSpan.Length;
-        FilePath = location.SourceTree?.FilePath;
+        FilePath = span.Path ?? string.Empty;   // Project-level issues do not have location
     }
+
+    public override int GetHashCode() =>
+        Helpers.HashCode.Combine(FilePath.GetHashCode(), LineNumber, IsPrimary ? 0 : 1);
+
+    public override bool Equals(object obj) =>
+        obj is IssueLocation issue
+        && issue.FilePath == FilePath
+        && issue.LineNumber == LineNumber
+        && issue.IsPrimary == IsPrimary
+        && (issue.RuleId is null || RuleId is null || issue.RuleId == RuleId)
+        && (issue.Message is null || Message is null || issue.Message == Message)
+        && (issue.IssueId is null || IssueId is null || issue.IssueId == IssueId)   // For consistency, Roslyn issues will not have IDs
+        && (issue.Start is null || Start is null || issue.Start == Start)
+        && (issue.Length is null || Length is null || issue.Length == Length);
 }
 
 [DebuggerDisplay("@{LineNumber} Primary:{IsPrimary} {FilePath}")]

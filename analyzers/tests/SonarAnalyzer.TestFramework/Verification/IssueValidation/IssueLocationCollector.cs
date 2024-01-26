@@ -50,19 +50,19 @@ namespace SonarAnalyzer.TestFramework.Verification.IssueValidation
         private static readonly Regex RxInvalidType = CreateRegex(CommentPattern + ".*" + IssueTypePattern);
         private static readonly Regex RxInvalidPreciseLocation = CreateRegex(@"^\s*" + CommentPattern + ".*" + PrecisePositionPattern);
 
-        public static IList<IssueLocation> GetExpectedIssueLocations(IEnumerable<TextLine> lines)
+        public static IList<IssueLocation> GetExpectedIssueLocations(string filePath, IEnumerable<TextLine> lines)
         {
             var preciseLocations = new List<IssueLocation>();
             var locations = new List<IssueLocation>();
 
             foreach (var line in lines)
             {
-                var newPreciseLocations = GetPreciseIssueLocations(line).ToList();
+                var newPreciseLocations = GetPreciseIssueLocations(filePath, line).ToList();
                 if (newPreciseLocations.Any())
                 {
                     preciseLocations.AddRange(newPreciseLocations);
                 }
-                else if (GetIssueLocations(line).ToList() is var newLocations && newLocations.Any())
+                else if (GetIssueLocations(filePath, line).ToList() is var newLocations && newLocations.Any())
                 {
                     locations.AddRange(newLocations);
                 }
@@ -72,18 +72,17 @@ namespace SonarAnalyzer.TestFramework.Verification.IssueValidation
                 }
             }
 
-            return EnsureNoDuplicatedPrimaryIds(MergeLocations(locations.ToArray(), preciseLocations.ToArray()));
+            return EnsureNoDuplicatedPrimaryIds(MergeLocations(locations.ToArray(), preciseLocations.ToList()));
         }
 
-        public static IEnumerable<IssueLocation> GetExpectedBuildErrors(IEnumerable<TextLine> lines) =>
-            lines?.SelectMany(GetBuildErrorsLocations) ?? Enumerable.Empty<IssueLocation>();
+        public static IEnumerable<IssueLocation> GetExpectedBuildErrors(string filePath, IEnumerable<TextLine> lines) =>
+            lines?.SelectMany(x => GetBuildErrorsLocations(filePath, x)) ?? Enumerable.Empty<IssueLocation>();
 
-        public static IList<IssueLocation> MergeLocations(IssueLocation[] locations, IssueLocation[] preciseLocations)
+        public static IList<IssueLocation> MergeLocations(IssueLocation[] locations, List<IssueLocation> preciseLocations)
         {
-            var usedLocations = new List<IssueLocation>();
             foreach (var location in locations)
             {
-                var preciseLocationsOnSameLine = preciseLocations.Where(l => l.LineNumber == location.LineNumber).ToList();
+                var preciseLocationsOnSameLine = preciseLocations.Where(x => x.LineNumber == location.LineNumber).ToList();
                 if (preciseLocationsOnSameLine.Count > 1)
                 {
                     ThrowUnexpectedPreciseLocationCount(preciseLocationsOnSameLine.Count, preciseLocationsOnSameLine[0].LineNumber);
@@ -99,46 +98,43 @@ namespace SonarAnalyzer.TestFramework.Verification.IssueValidation
 
                     location.Start = preciseLocation.Start;
                     location.Length = preciseLocation.Length;
-                    usedLocations.Add(preciseLocation);
+                    preciseLocations.Remove(preciseLocation);
                 }
             }
-
-            return locations
-                   .Union(preciseLocations.Except(usedLocations))
-                   .ToList();
+            return locations.Concat(preciseLocations).ToList();
         }
 
-        public static /*for testing*/ IEnumerable<IssueLocation> GetIssueLocations(TextLine line) =>
-            GetLocations(line, RxIssue);
+        public static /*for testing*/ IEnumerable<IssueLocation> GetIssueLocations(string filePath, TextLine line) =>
+            GetLocations(filePath, line, RxIssue);
 
-        public static /*for testing*/ IEnumerable<IssueLocation> GetPreciseIssueLocations(TextLine line)
+        public static /*for testing*/ IEnumerable<IssueLocation> GetPreciseIssueLocations(string filePath, TextLine line)
         {
             var match = RxPreciseLocation.Match(line.ToString());
             if (match.Success)
             {
                 EnsureNoRemainingCurlyBrace(line, match);
-                return CreateIssueLocations(match, line.LineNumber);
+                return CreateIssueLocations(match, filePath, line.LineNumber);
             }
 
             return Enumerable.Empty<IssueLocation>();
         }
 
-        private static IEnumerable<IssueLocation> GetBuildErrorsLocations(TextLine line) =>
-            GetLocations(line, RxBuildError);
+        private static IEnumerable<IssueLocation> GetBuildErrorsLocations(string filePath, TextLine line) =>
+            GetLocations(filePath, line, RxBuildError);
 
-        private static IEnumerable<IssueLocation> GetLocations(TextLine line, Regex rx)
+        private static IEnumerable<IssueLocation> GetLocations(string filePath, TextLine line, Regex rx)
         {
             var match = rx.Match(line.ToString());
             if (match.Success)
             {
                 EnsureNoRemainingCurlyBrace(line, match);
-                return CreateIssueLocations(match, line.LineNumber + 1);
+                return CreateIssueLocations(match, filePath, line.LineNumber + 1);
             }
 
             return Enumerable.Empty<IssueLocation>();
         }
 
-        private static IEnumerable<IssueLocation> CreateIssueLocations(Match match, int lineNumber)
+        private static IEnumerable<IssueLocation> CreateIssueLocations(Match match, string filePath, int lineNumber)
         {
             var line = lineNumber + GetOffset(match);
             var isPrimary = GetIsPrimary(match);
@@ -161,6 +157,7 @@ namespace SonarAnalyzer.TestFramework.Verification.IssueValidation
                     IssueId = issueId,
                     Start = start,
                     Length = length,
+                    FilePath = filePath
                 });
         }
 
