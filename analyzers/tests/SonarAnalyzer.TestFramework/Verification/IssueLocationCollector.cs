@@ -253,6 +253,7 @@ internal class MyClass : IInterface1 // there should be no Noncompliant comment
         [DebuggerDisplay("ID:{IssueId} @{LineNumber} Primary:{IsPrimary} Start:{Start} Length:{Length} '{Message}'")]
         internal class IssueLocation : IIssueLocation
         {
+            public string FilePath { get; init; }
             public bool IsPrimary { get; init; }
             public int LineNumber { get; init; }
             public string Message { get; init; }
@@ -276,6 +277,7 @@ internal class MyClass : IInterface1 // there should be no Noncompliant comment
                 LineNumber = location.GetLineNumberToReport();
                 Start = location.GetLineSpan().StartLinePosition.Character;
                 Length = location.SourceSpan.Length;
+                FilePath = location.SourceTree?.FilePath;
             }
         }
     }
