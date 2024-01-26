@@ -89,7 +89,7 @@ Line 21: Primary issue should start on column 22 but got column 18! ID: S2355
         private static Compilation CreateCompilation(AnalyzerLanguage language, params string[] filePaths) =>
             SolutionBuilder.Create().AddProject(language, false).AddDocuments(filePaths).GetCompilation();
 
-        private static Dictionary<string, IList<IIssueLocation>> GetExpectedIssues(Compilation compilation) =>
+        private static Dictionary<string, IList<IssueLocation>> GetExpectedIssues(Compilation compilation) =>
             compilation.SyntaxTrees.ToDictionary(x => x.FilePath, x => IssueLocationCollector.GetExpectedIssueLocations(x.GetText().Lines));
     }
 }
