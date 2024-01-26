@@ -19,6 +19,7 @@
  */
 
 using Microsoft.CodeAnalysis.Text;
+using SonarAnalyzer.TestFramework.Verification.IssueValidation;
 
 namespace SonarAnalyzer.Test.TestFramework.Tests
 {
