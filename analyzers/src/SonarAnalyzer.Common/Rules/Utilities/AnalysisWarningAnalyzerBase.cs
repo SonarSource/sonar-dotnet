@@ -28,7 +28,8 @@ public abstract class AnalysisWarningAnalyzerBase : UtilityAnalyzerBase
     private const string DiagnosticId = "S9999-warning";
     private const string Title = "Analysis Warning generator";
 
-    protected virtual int MinimalSupportedRoslynVersion => RoslynHelper.MinimalSupportedMajorVersion;   // For testing
+    protected virtual int VS2017MajorVersion => RoslynHelper.VS2017MajorVersion; // For testing
+    protected virtual int MinimalSupportedRoslynVersion => RoslynHelper.MinimalSupportedMajorVersion; // For testing
 
     protected AnalysisWarningAnalyzerBase() : base(DiagnosticId, Title) { }
 
@@ -36,21 +37,36 @@ public abstract class AnalysisWarningAnalyzerBase : UtilityAnalyzerBase
         context.RegisterCompilationAction(c =>
             {
                 var parameter = ReadParameters(c);
-                if (parameter.IsAnalyzerEnabled && !RoslynHelper.IsRoslynCfgSupported(MinimalSupportedRoslynVersion))     // MsBuild 15 is bound with Roslyn 2.x, where Roslyn CFG is not available.
+                if (!parameter.IsAnalyzerEnabled || parameter.OutPath is null)
                 {
-                    // This can be removed after we bump Microsoft.CodeAnalysis references to 3.0 or higher.
-                    var path = Path.GetFullPath(Path.Combine(parameter.OutPath, "../../AnalysisWarnings.MsBuild.json"));
-                    if (!File.Exists(path))
+                    return;
+                }
+
+                var path = Path.GetFullPath(Path.Combine(parameter.OutPath, "../../AnalysisWarnings.MsBuild.json"));
+                if (!File.Exists(path))
+                {
+                    // This can be removed after we bump Microsoft.CodeAnalysis references to 2.0 or higher. MsBuild 14 is bound with Roslyn 1.x.
+                    if (RoslynHelper.IsVersionLessThan(VS2017MajorVersion))
                     {
-                        try
-                        {
-                            File.WriteAllText(path, """[{"text": "Analysis using MsBuild 14 and 15 build tools is deprecated. Please update your pipeline to MsBuild 16 or higher."}]""");
-                        }
-                        catch
-                        {
-                            // Nothing to do here. Two compilations running on two different processes are unlikely to lock each other out on a small file write.
-                        }
+                        WriteAllText(path, "The analysis using MsBuild 14 is no longer supported and the analysis with MsBuild 15 is deprecated. Please update your pipeline to MsBuild 16 or higher.");
+                    }
+                    // This can be removed after we bump Microsoft.CodeAnalysis references to 3.0 or higher. MsBuild 15 is bound with Roslyn 2.x.
+                    else if (RoslynHelper.IsVersionLessThan(MinimalSupportedRoslynVersion))
+                    {
+                        WriteAllText(path, "The analysis using MsBuild 15 is deprecated. Please update your pipeline to MsBuild 16 or higher.");
                     }
                 }
             });
+
+    private static void WriteAllText(string path, string text)
+    {
+        try
+        {
+            File.WriteAllText(path, $$"""[{"text": "{{text}}"}]""");
+        }
+        catch
+        {
+            // Nothing to do here. Two compilations running on two different processes are unlikely to lock each other out on a small file write.
+        }
+    }
 }
