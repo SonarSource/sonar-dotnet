@@ -24,7 +24,7 @@ using SonarAnalyzer.TestFramework.Verification.IssueValidation;
 
 namespace SonarAnalyzer.Test.TestFramework
 {
-    public static partial class DiagnosticVerifier
+    public static class DiagnosticVerifier
     {
         private const string AnalyzerFailedDiagnosticId = "AD0001";
 
@@ -223,9 +223,9 @@ namespace SonarAnalyzer.Test.TestFramework
             }
         }
 
-        private static IList<IIssueLocation> ExpectedIssues(FileIssueLocations[] expectedIssuesPerFile, Location location) =>
+        private static IList<IssueLocation> ExpectedIssues(FileIssueLocations[] expectedIssuesPerFile, Location location) =>
             location.SourceTree == null
-                ? expectedIssuesPerFile.SingleOrDefault(x => x.IssueLocations.Any())?.IssueLocations ?? new List<IIssueLocation>() // Issue locations get removed, so the list could become empty
+                ? expectedIssuesPerFile.SingleOrDefault(x => x.IssueLocations.Any())?.IssueLocations ?? new List<IssueLocation>() // Issue locations get removed, so the list could become empty
                 : expectedIssuesPerFile.Single(x => x.FileName == location.SourceTree.FilePath).IssueLocations;
 
         private static IEnumerable<SyntaxTree> ExceptExtraEmptyFile(this IEnumerable<SyntaxTree> syntaxTrees) =>
@@ -258,17 +258,17 @@ namespace SonarAnalyzer.Test.TestFramework
         public static void VerifyNoExceptionThrown(IEnumerable<Diagnostic> diagnostics) =>
             diagnostics.Should().NotContain(d => d.Id == AnalyzerFailedDiagnosticId);
 
-        private static string VerifyPrimaryIssue(string languageVersion, IList<IIssueLocation> expectedIssues, Func<IIssueLocation, bool> issueFilter,
+        private static string VerifyPrimaryIssue(string languageVersion, IList<IssueLocation> expectedIssues, Func<IssueLocation, bool> issueFilter,
             Location location, string message, string extraInfo) =>
             VerifyIssue(languageVersion, expectedIssues, issueFilter, location, message, extraInfo, true, null);
 
-        private static void VerifySecondaryIssue(string languageVersion, IList<IIssueLocation> expectedIssues, Func<IIssueLocation, bool> issueFilter,
+        private static void VerifySecondaryIssue(string languageVersion, IList<IssueLocation> expectedIssues, Func<IssueLocation, bool> issueFilter,
             Location location, string message, string issueId) =>
             VerifyIssue(languageVersion, expectedIssues, issueFilter, location, message, null, false, issueId);
 
         private static string VerifyIssue(string languageVersion,
-                                          ICollection<IIssueLocation> expectedIssues,
-                                          Func<IIssueLocation, bool> issueFilter,
+                                          ICollection<IssueLocation> expectedIssues,
+                                          Func<IssueLocation, bool> issueFilter,
                                           Location location,
                                           string message,
                                           string extraInfo,
