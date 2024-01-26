@@ -57,9 +57,17 @@ class AnalysisWarningsTest {
 
   @Test
   void analysisWarnings_MSBuild14() throws IOException {
-    BuildResult buildResult = Tests.analyzeProject(temp, "Roslyn.1.3.1");
+    BuildResult buildResult = Tests.analyzeProject(temp, "Roslyn.1.3.2");
     Ce.Task task = TestUtils.getAnalysisWarningsTask(ORCHESTRATOR, buildResult);
     assertThat(task.getStatus()).isEqualTo(Ce.TaskStatus.SUCCESS);
     assertThat(task.getWarningsList()).containsExactly("The analysis using MsBuild 14 is no longer supported and the analysis with MsBuild 15 is deprecated. Please update your pipeline to MsBuild 16 or higher.");
+  }
+
+  @Test
+  void analysisWarnings_MSBuild15() throws IOException {
+    BuildResult buildResult = Tests.analyzeProject(temp, "Roslyn.2.4.0");
+    Ce.Task task = TestUtils.getAnalysisWarningsTask(ORCHESTRATOR, buildResult);
+    assertThat(task.getStatus()).isEqualTo(Ce.TaskStatus.SUCCESS);
+    assertThat(task.getWarningsList()).containsExactly("The analysis using MsBuild 15 is deprecated. Please update your pipeline to MsBuild 16 or higher.");
   }
 }
