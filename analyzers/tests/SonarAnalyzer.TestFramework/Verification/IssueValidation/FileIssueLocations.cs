@@ -23,9 +23,9 @@ namespace SonarAnalyzer.TestFramework.Verification.IssueValidation;
 internal sealed class FileIssueLocations
 {
     public string FileName { get; }
-    public IList<IIssueLocation> IssueLocations { get; }
+    public IList<IssueLocation> IssueLocations { get; }
 
-    public FileIssueLocations(string fileName, IList<IIssueLocation> issueLocations)
+    public FileIssueLocations(string fileName, IList<IssueLocation> issueLocations)
     {
         FileName = fileName;
         IssueLocations = issueLocations;
