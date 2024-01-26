@@ -18,9 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Test.TestFramework
+namespace SonarAnalyzer.TestFramework.Verification.IssueValidation
 {
-    public interface IIssueLocation
+    internal interface IIssueLocation
     {
         /// <summary>
         /// Gets the value specifying whether this issue is a location reported by a diagnostic.

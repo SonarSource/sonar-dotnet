@@ -18,10 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.TestFramework.Verification.IssueValidation;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.Test.Helpers
+namespace SonarAnalyzer.TestFramework.Test.Verification.IssueValidation
 {
     [TestClass]
     public class DiagnosticsComparerTest
@@ -89,6 +90,6 @@ Line 21: Primary issue should start on column 22 but got column 18! ID: S2355
             SolutionBuilder.Create().AddProject(language, false).AddDocuments(filePaths).GetCompilation();
 
         private static Dictionary<string, IList<IIssueLocation>> GetExpectedIssues(Compilation compilation) =>
-            compilation.SyntaxTrees.ToDictionary(x => x.FilePath, x => IssueLocationCollector.GetExpectedIssueLocations(new DiagnosticVerifier.File(x).Content.Lines));
+            compilation.SyntaxTrees.ToDictionary(x => x.FilePath, x => IssueLocationCollector.GetExpectedIssueLocations(x.GetText().Lines));
     }
 }
