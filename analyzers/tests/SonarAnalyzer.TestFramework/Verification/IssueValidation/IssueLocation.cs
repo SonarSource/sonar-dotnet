@@ -56,4 +56,9 @@ internal sealed class IssueLocation // ToDo: Refactor the relation between this 
 internal record IssueLocationKey(string FilePath, int LineNumber, bool IsPrimary)
 {
     public IssueLocationKey(IssueLocation issue) : this(issue.FilePath, issue.LineNumber, issue.IsPrimary) { }
+
+    public bool IsMatch(IssueLocation issue) =>
+        issue.FilePath == FilePath
+        && issue.LineNumber == LineNumber
+        && issue.IsPrimary == IsPrimary;
 }

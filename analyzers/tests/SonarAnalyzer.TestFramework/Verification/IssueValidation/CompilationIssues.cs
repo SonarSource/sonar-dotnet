@@ -18,51 +18,70 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections;
 using System.IO;
 
 namespace SonarAnalyzer.TestFramework.Verification.IssueValidation;
 
-internal sealed class CompilationIssues
+internal sealed class CompilationIssues : IEnumerable<IssueLocation>
 {
-    public string LanguageVersion { get; }
-    private readonly FileIssueLocations[] fileIssues;
+    public string LanguageVersion { get; }  // ToDo: Should this be here?
+    private readonly List<IssueLocation> issues;
 
     public CompilationIssues(string languageVersion, IEnumerable<FileContent> files)
-    {
-        LanguageVersion = languageVersion;
-        fileIssues = files.Select(x => new FileIssueLocations(x.FileName, IssueLocationCollector.GetExpectedIssueLocations(x.Content.Lines))).ToArray();
-    }
+        : this(languageVersion, files.SelectMany(x => IssueLocationCollector.GetExpectedIssueLocations(x.Content.Lines))) { }
 
     public CompilationIssues(string languageVersion, Diagnostic[] diagnostics)
-    {
-        var map = new Dictionary<string, List<IssueLocation>>();
-        foreach (var diagnostic in diagnostics)
-        {
-            Add(new IssueLocation(diagnostic));
-            for (var i = 0; i < diagnostic.AdditionalLocations.Count; i++)
-            {
-                Add(new IssueLocation(diagnostic.GetSecondaryLocation(i)));
-            }
-        }
-        LanguageVersion = languageVersion;
-        fileIssues = map.Select(x => new FileIssueLocations(x.Key, x.Value)).ToArray();
+        : this(languageVersion, ToIssueLocations(diagnostics)) { }
 
-        void Add(IssueLocation issue)
+    public CompilationIssues(string languageVersion, IEnumerable<IssueLocation> issues)
+    {
+        LanguageVersion = languageVersion;
+        this.issues = issues.ToList();
+    }
+
+    public IEnumerable<IssueLocationKey> UniqueKeys() =>
+        issues.Select(x => new IssueLocationKey(x)).Distinct();
+
+    public List<IssueLocation> Remove(IssueLocationKey key)
+    {
+        var ret = issues.Where(key.IsMatch).ToList();
+        foreach (var issue in ret)
         {
-            var list = map.GetOrAdd(issue.FilePath ?? string.Empty, _ => new List<IssueLocation>());
-            list.Add(issue);
+            issues.Remove(issue);
         }
+        return ret;
     }
 
     public void Dump()
     {
-        foreach (var file in fileIssues)
+        foreach (var file in issues.GroupBy(x => Path.GetFileName(x.FilePath)).OrderBy(x => x.Key))
         {
-            Console.WriteLine($"Actual {LanguageVersion} diagnostics {Path.GetFileName(file.FileName)}:");
-            foreach (var issue in file.IssueLocations.OrderBy(x => x.LineNumber))
+            Console.WriteLine($"Actual {LanguageVersion} diagnostics {file.Key}:");
+            foreach (var issue in file.OrderBy(x => x.LineNumber))
             {
-                Console.WriteLine($"  ID: {issue.IssueId}, Line: {issue.LineNumber}, [{issue.Start}, {issue.Length}] {issue.Message}");
+                Console.WriteLine($"    {issue.RuleId}, Line: {issue.LineNumber}, [{issue.Start}, {issue.Length}] {issue.Message}");
             }
         }
     }
+
+    private static IEnumerable<IssueLocation> ToIssueLocations(Diagnostic[] diagnostics)
+    {
+        var ret = new List<IssueLocation>();
+        foreach (var diagnostic in diagnostics)
+        {
+            ret.Add(new IssueLocation(diagnostic));
+            for (var i = 0; i < diagnostic.AdditionalLocations.Count; i++)
+            {
+                ret.Add(new IssueLocation(diagnostic.GetSecondaryLocation(i)));
+            }
+        }
+        return ret;
+    }
+
+    IEnumerator<IssueLocation> IEnumerable<IssueLocation>.GetEnumerator() =>
+        issues.GetEnumerator();
+
+    IEnumerator IEnumerable.GetEnumerator() =>
+        issues.GetEnumerator();
 }
