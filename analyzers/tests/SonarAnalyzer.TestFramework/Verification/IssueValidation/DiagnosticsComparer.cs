@@ -24,7 +24,7 @@ namespace SonarAnalyzer.TestFramework.Verification.IssueValidation;
 
 internal static class DiagnosticsComparer
 {
-    public static StringBuilder Compare(Diagnostic[] diagnostics, Dictionary<string, IList<IIssueLocation>> expectedIssuesPerFile, string languageVersion)
+    public static StringBuilder Compare(Diagnostic[] diagnostics, Dictionary<string, IList<IssueLocation>> expectedIssuesPerFile, string languageVersion)
     {
         throw new NotImplementedException();
 
@@ -53,7 +53,7 @@ internal static class DiagnosticsComparer
         //return summary;
     }
 
-    private static void AppendComparison(this StringBuilder summary, IIssueLocation actual, IIssueLocation expected)
+    private static void AppendComparison(this StringBuilder summary, IssueLocation actual, IssueLocation expected)
     {
         var prefix = $"Line {actual.LineNumber}";
         var issueType = IssueType(actual.IsPrimary);
