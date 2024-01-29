@@ -122,15 +122,12 @@ namespace SonarAnalyzer.Rules
             var symbolReference = new SymbolReferenceInfo.Types.SymbolReference { Declaration = GetTextRange(declarationSpan.Value) };
             for (var i = 0; i < references.Count; i++)
             {
-                if (references[i].IsDeclaration)
-                {
-                    continue;
-                }
-
-                // Syntax tree can contain elements from external files (e.g. razor imports files)
-                // We need to make sure that we don't count these elements.
-                var mappedLineSpan = references[i].Identifier.GetLocation().GetMappedLineSpanIfAvailable();
-                if (string.Equals(mappedLineSpan.Path, filePath, StringComparison.OrdinalIgnoreCase))
+                var reference = references[i];
+                if (!reference.IsDeclaration
+                    && reference.Identifier.GetLocation().GetMappedLineSpanIfAvailable() is var mappedLineSpan
+                    // Syntax tree can contain elements from external files (e.g. razor imports files)
+                    // We need to make sure that we don't count these elements.
+                    && string.Equals(mappedLineSpan.Path, filePath, StringComparison.OrdinalIgnoreCase))
                 {
                     symbolReference.Reference.Add(GetTextRange(mappedLineSpan));
                 }
@@ -142,13 +139,9 @@ namespace SonarAnalyzer.Rules
         {
             for (var i = 0; i < references.Count; i++)
             {
-                if (!references[i].IsDeclaration)
-                {
-                    continue;
-                }
-
-                var mappedLineSpan = references[i].Identifier.GetLocation().GetMappedLineSpanIfAvailable();
-                if (string.Equals(mappedLineSpan.Path, filePath, StringComparison.OrdinalIgnoreCase))
+                if (references[i].IsDeclaration
+                    && references[i].Identifier.GetLocation().GetMappedLineSpanIfAvailable() is var mappedLineSpan
+                    && string.Equals(mappedLineSpan.Path, filePath, StringComparison.OrdinalIgnoreCase))
                 {
                     return mappedLineSpan;
                 }
