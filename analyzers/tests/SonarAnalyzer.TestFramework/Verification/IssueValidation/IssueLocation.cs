@@ -57,7 +57,7 @@ internal sealed class IssueLocation // ToDo: Refactor the relation between this 
 
     public override bool Equals(object obj) =>
         obj is IssueLocation issue
-        && issue.FilePath == FilePath
+        && (issue.FilePath == string.Empty || FilePath == string.Empty || issue.FilePath == FilePath)
         && issue.LineNumber == LineNumber
         && issue.IsPrimary == IsPrimary
         && (issue.RuleId is null || RuleId is null || issue.RuleId == RuleId)
@@ -73,7 +73,7 @@ internal record IssueLocationKey(string FilePath, int LineNumber, bool IsPrimary
     public IssueLocationKey(IssueLocation issue) : this(issue.FilePath, issue.LineNumber, issue.IsPrimary) { }
 
     public bool IsMatch(IssueLocation issue) =>
-        issue.FilePath == FilePath
+        (FilePath == string.Empty || FilePath == issue.FilePath)
         && issue.LineNumber == LineNumber
         && issue.IsPrimary == IsPrimary;
 }

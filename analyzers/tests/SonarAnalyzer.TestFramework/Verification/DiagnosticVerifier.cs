@@ -146,7 +146,7 @@ namespace SonarAnalyzer.Test.TestFramework
             var assertionMessages = new StringBuilder();
             foreach (var filePairs in MatchPairs(actual, expected).GroupBy(x => x.FilePath).OrderBy(x => x.Key))
             {
-                assertionMessages.AppendLine($"There are differences for {actual.LanguageVersion} {filePairs.Key}:");
+                assertionMessages.AppendLine($"There are differences for {actual.LanguageVersion} {SerializePath(filePairs.Key)}:");
                 foreach (var pair in filePairs.OrderBy(x => x.LineNumber).ThenBy(x => x.Start))
                 {
                     pair.AppendAssertionMessage(assertionMessages);
@@ -161,6 +161,9 @@ namespace SonarAnalyzer.Test.TestFramework
             {
                 Execute.Assertion.FailWith(assertionMessages.ToString().Replace("{", "{{").Replace("}", "}}"));    // Replacing { and } to avoid invalid format for string.Format
             }
+
+            static string SerializePath(string path) =>
+                path == string.Empty ? "<project-level-issue>" : path;
         }
 
         private static IEnumerable<SyntaxTree> ExceptExtraEmptyFile(this IEnumerable<SyntaxTree> syntaxTrees) =>
@@ -186,7 +189,7 @@ namespace SonarAnalyzer.Test.TestFramework
         private static IEnumerable<IssueLocationPair> MatchPairs(CompilationIssues actual, CompilationIssues expected)
         {
             var ret = new List<IssueLocationPair>();
-            foreach (var key in actual.UniqueKeys())
+            foreach (var key in actual.UniqueKeys().OrderBy(x => x.FilePath == string.Empty ? 1 : 0)) // Process project-level issues last to properly match path-based issues first.
             {
                 ret.AddRange(MatchDifferences(actual.Remove(key), expected.Remove(key)));
             }

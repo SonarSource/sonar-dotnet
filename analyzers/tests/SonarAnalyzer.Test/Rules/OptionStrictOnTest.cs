@@ -29,13 +29,11 @@ namespace SonarAnalyzer.Test.Rules
     {
         [TestMethod]
         public void OptionStrictOn_IsOff_ForProject() =>
-            // ToDo: Fix this assertion in https://github.com/SonarSource/sonar-dotnet/issues/8624
-            ((Action)(() => VerifyAnalyzer("' Noncompliant ^1#0 {{Configure 'Option Strict On' for assembly 'project0'.}}", OptionStrict.Off))).Should().Throw<AssertFailedException>();
+            VerifyAnalyzer("' Noncompliant ^1#0 {{Configure 'Option Strict On' for assembly 'project0'.}}", OptionStrict.Off);
 
         [TestMethod]
         public void OptionStrictOn_IsCustom_ForProject() =>
-            // ToDo: Fix this assertion in https://github.com/SonarSource/sonar-dotnet/issues/8624
-            ((Action)(() => VerifyAnalyzer("' Noncompliant ^1#0 {{Configure 'Option Strict On' for assembly 'project0'.}}", OptionStrict.Custom))).Should().Throw<AssertFailedException>();
+            VerifyAnalyzer("' Noncompliant ^1#0 {{Configure 'Option Strict On' for assembly 'project0'.}}", OptionStrict.Custom);
 
         [TestMethod]
         public void OptionStrictOn_IsOff() =>
