@@ -82,10 +82,20 @@ namespace SonarAnalyzer.Test.Rules
             Verify("Event.vb", projectType, 4, 3, 6, 8, 11);
 
         [DataTestMethod]
+        [DataRow("Field.cs", ProjectType.Product)]
+        [DataRow("Field.cs", ProjectType.Test)]
+        [DataRow("Field.ReservedKeyword.cs", ProjectType.Product)]
+        [DataRow("Field.ReservedKeyword.cs", ProjectType.Test)]
+        [DataRow("Field.EscapedNonKeyword.cs", ProjectType.Product)]
+        [DataRow("Field.EscapedNonKeyword.cs", ProjectType.Test)]
+        public void Verify_Field_CS(string fileName, ProjectType projectType) =>
+            Verify(fileName, projectType, 4, 3, 7, 8);
+
+        [DataTestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
-        public void Verify_Field_CS(ProjectType projectType) =>
-            Verify("Field.cs", projectType, 4, 3, 7, 8);
+        public void Verify_Field_EscapedSequences_CS(ProjectType projectType) =>
+            Verify("Field.EscapedSequences.cs", projectType, 3, 3, 7, 8, 9, 10, 11, 12);
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
@@ -94,10 +104,14 @@ namespace SonarAnalyzer.Test.Rules
             Verify("MissingDeclaration.cs", projectType, 1, 3);
 
         [DataTestMethod]
-        [DataRow(ProjectType.Product)]
-        [DataRow(ProjectType.Test)]
-        public void Verify_Field_VB(ProjectType projectType) =>
-            Verify("Field.vb", projectType, 4, 3, 6, 7);
+        [DataRow("Field.vb", ProjectType.Product)]
+        [DataRow("Field.vb", ProjectType.Test)]
+        [DataRow("Field.ReservedKeyword.vb", ProjectType.Product)]
+        [DataRow("Field.ReservedKeyword.vb", ProjectType.Test)]
+        [DataRow("Field.EscapedNonKeyword.vb", ProjectType.Product)]
+        [DataRow("Field.EscapedNonKeyword.vb", ProjectType.Test)]
+        public void Verify_Field_VB(string fileName, ProjectType projectType) =>
+            Verify(fileName, projectType, 4, 3, 6, 7);
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
@@ -124,28 +138,36 @@ namespace SonarAnalyzer.Test.Rules
             Verify("Method.cs", projectType, 4, 3, 9);
 
         [DataTestMethod]
-        [DataRow(ProjectType.Product)]
-        [DataRow(ProjectType.Test)]
-        public void Verify_NamedType_CS(ProjectType projectType) =>
-            Verify("NamedType.cs", projectType, 4, 3, 7);
+        [DataRow("NamedType.cs", ProjectType.Product)]
+        [DataRow("NamedType.cs", ProjectType.Test)]
+        [DataRow("NamedType.ReservedKeyword.cs", ProjectType.Product)]
+        [DataRow("NamedType.ReservedKeyword.cs", ProjectType.Test)]
+        public void Verify_NamedType_CS(string fileName, ProjectType projectType) =>
+            Verify(fileName, projectType, 4, 3, 7);
 
         [DataTestMethod]
-        [DataRow(ProjectType.Product)]
-        [DataRow(ProjectType.Test)]
-        public void Verify_NamedType_VB(ProjectType projectType) =>
-            Verify("NamedType.vb", projectType, 5, 1, 4, 4, 5);
+        [DataRow("NamedType.vb", ProjectType.Product)]
+        [DataRow("NamedType.vb", ProjectType.Test)]
+        [DataRow("NamedType.ReservedKeyword.vb", ProjectType.Product)]
+        [DataRow("NamedType.ReservedKeyword.vb", ProjectType.Test)]
+        public void Verify_NamedType_VB(string fileName, ProjectType projectType) =>
+            Verify(fileName, projectType, 5, 1, 4, 4, 5);
 
         [DataTestMethod]
-        [DataRow(ProjectType.Product)]
-        [DataRow(ProjectType.Test)]
-        public void Verify_Parameter_CS(ProjectType projectType) =>
-            Verify("Parameter.cs", projectType, 4, 4, 6, 7);
+        [DataRow("Parameter.cs", ProjectType.Product)]
+        [DataRow("Parameter.cs", ProjectType.Test)]
+        [DataRow("Parameter.ReservedKeyword.cs", ProjectType.Product)]
+        [DataRow("Parameter.ReservedKeyword.cs", ProjectType.Test)]
+        public void Verify_Parameter_CS(string fileName, ProjectType projectType) =>
+            Verify(fileName, projectType, 4, 4, 6, 7);
 
         [DataTestMethod]
-        [DataRow(ProjectType.Product)]
-        [DataRow(ProjectType.Test)]
-        public void Verify_Parameter_VB(ProjectType projectType) =>
-            Verify("Parameter.vb", projectType, 4, 4, 5, 6);
+        [DataRow("Parameter.vb", ProjectType.Product)]
+        [DataRow("Parameter.vb", ProjectType.Test)]
+        [DataRow("Parameter.ReservedKeyword.vb", ProjectType.Product)]
+        [DataRow("Parameter.ReservedKeyword.vb", ProjectType.Test)]
+        public void Verify_Parameter_VB(string fileName, ProjectType projectType) =>
+            Verify(fileName, projectType, 4, 4, 5, 6);
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]

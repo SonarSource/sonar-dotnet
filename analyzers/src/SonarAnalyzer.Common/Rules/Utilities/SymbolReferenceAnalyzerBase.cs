@@ -90,7 +90,7 @@ namespace SonarAnalyzer.Rules
             foreach (var token in root.DescendantTokens())
             {
                 if (Language.Syntax.IsKind(token, Language.SyntaxKind.IdentifierToken)
-                    && knownIdentifiers.Contains(token.Text)
+                    && knownIdentifiers.Contains(token.ValueText)
                     && GetBindableParent(token) is { } parent
                     && !knownNodes.Contains(parent)
                     && GetReferenceSymbol(parent, model) is { } symbol
