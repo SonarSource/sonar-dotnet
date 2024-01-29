@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4158",
+"message":  "Remove this call, the collection is known to be empty here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2579",
+"region":  {
+"startLine":  2579,
+"startColumn":  17,
+"endLine":  2579,
+"endColumn":  37
+}
+}
+}
+]
+}
