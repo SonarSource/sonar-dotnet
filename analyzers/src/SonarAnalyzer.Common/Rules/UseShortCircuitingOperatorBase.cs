@@ -20,54 +20,41 @@
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class UseShortCircuitingOperatorBase : SonarDiagnosticAnalyzer
-    {
-        internal const string DiagnosticId = "S2178";
-        internal const string MessageFormat = "Correct this '{0}' to '{1}'.";
-
-        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
-
-        protected static bool IsBool(SyntaxNode node, SemanticModel semanticModel)
-        {
-            if (node == null)
-            {
-                return false;
-            }
-
-            var type = semanticModel.GetTypeInfo(node).Type;
-            return type.Is(KnownType.System_Boolean);
-        }
-    }
-
-    public abstract class UseShortCircuitingOperatorBase<TLanguageKindEnum, TBinaryExpression> : UseShortCircuitingOperatorBase
-        where TLanguageKindEnum : struct
+    public abstract class UseShortCircuitingOperatorBase<TSyntaxKind, TBinaryExpression> : SonarDiagnosticAnalyzer<TSyntaxKind>
+        where TSyntaxKind : struct
         where TBinaryExpression : SyntaxNode
     {
-        protected sealed override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterNodeAction(
-                GeneratedCodeRecognizer,
-                c =>
-                {
-                    var node = (TBinaryExpression)c.Node;
+        internal const string DiagnosticId = "S2178";
 
-                    if (GetOperands(node).All(o => IsBool(o, c.SemanticModel)))
+        protected abstract string GetSuggestedOpName(TBinaryExpression node);
+        protected abstract string GetCurrentOpName(TBinaryExpression node);
+        protected abstract SyntaxToken GetOperator(TBinaryExpression expression);
+        protected abstract ImmutableArray<TSyntaxKind> SyntaxKindsOfInterest { get; }
+
+        protected override string MessageFormat => "Correct this '{0}' to '{1}'{2}.";
+
+        protected UseShortCircuitingOperatorBase() : base(DiagnosticId) { }
+
+        protected sealed override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
+                {
+                    if (c.Node is TBinaryExpression node
+                        && Language.Syntax.BinaryExpressionLeft(node) is { } left
+                        && Language.Syntax.BinaryExpressionRight(node) is { } right
+                        && IsBool(left, c.SemanticModel)
+                        && IsBool(right, c.SemanticModel))
                     {
+                        var extractText = c.SemanticModel.GetConstantValue(right) is { HasValue: true }
+                            || c.SemanticModel.GetSymbolInfo(right).Symbol is ILocalSymbol or IFieldSymbol or IPropertySymbol or IParameterSymbol
+                                ? string.Empty
+                                : " and extract the right operand to a variable if it should always be evaluated";
                         c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], GetOperator(node).GetLocation(),
-                            GetCurrentOpName(node), GetSuggestedOpName(node)));
+                            GetCurrentOpName(node), GetSuggestedOpName(node), extractText));
                     }
                 },
                 SyntaxKindsOfInterest.ToArray());
-        }
 
-        protected abstract string GetSuggestedOpName(TBinaryExpression node);
-
-        protected abstract string GetCurrentOpName(TBinaryExpression node);
-
-        protected abstract IEnumerable<SyntaxNode> GetOperands(TBinaryExpression expression);
-
-        protected abstract SyntaxToken GetOperator(TBinaryExpression expression);
-
-        protected abstract ImmutableArray<TLanguageKindEnum> SyntaxKindsOfInterest { get; }
+        private static bool IsBool(SyntaxNode node, SemanticModel semanticModel) =>
+            semanticModel.GetTypeInfo(node).Type.Is(KnownType.System_Boolean);
     }
 }

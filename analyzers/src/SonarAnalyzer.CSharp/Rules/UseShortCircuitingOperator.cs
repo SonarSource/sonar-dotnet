@@ -23,21 +23,13 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class UseShortCircuitingOperator : UseShortCircuitingOperatorBase<SyntaxKind, BinaryExpressionSyntax>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
         protected override string GetSuggestedOpName(BinaryExpressionSyntax node) =>
             OperatorNames[ShortCircuitingAlternative[node.Kind()]];
 
         protected override string GetCurrentOpName(BinaryExpressionSyntax node) =>
             OperatorNames[node.Kind()];
-
-        protected override IEnumerable<SyntaxNode> GetOperands(BinaryExpressionSyntax expression)
-        {
-            yield return expression.Left;
-            yield return expression.Right;
-        }
 
         protected override SyntaxToken GetOperator(BinaryExpressionSyntax expression) =>
             expression.OperatorToken;
@@ -55,9 +47,6 @@ namespace SonarAnalyzer.Rules.CSharp
             { SyntaxKind.LogicalAndExpression, "&&" },
             { SyntaxKind.LogicalOrExpression, "||" },
         }.ToImmutableDictionary();
-
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
-             CSharpGeneratedCodeRecognizer.Instance;
 
         protected override ImmutableArray<SyntaxKind> SyntaxKindsOfInterest => ImmutableArray.Create<SyntaxKind>(
             SyntaxKind.BitwiseAndExpression,
