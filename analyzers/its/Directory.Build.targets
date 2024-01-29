@@ -5,8 +5,8 @@
     <PropertyGroup>
       <BinariesFolder>$(MSBuildStartupDirectory)\..\packaging\binaries</BinariesFolder>
       <AnalysisOutputPath>$(MSBuildStartupDirectory)\output\$(PROJECT)\$(AssemblyName)</AnalysisOutputPath>
-      <DiagnosticsPath>$(MSBuildStartupDirectory)\output\$(PROJECT)\$(PROJECT)-$(AssemblyName)</DiagnosticsPath>
-      <DiagnosticsPathWithTFM>$(MSBuildStartupDirectory)\output\$(PROJECT)\$(TargetFramework)-$(PROJECT)-$(AssemblyName)</DiagnosticsPathWithTFM>
+      <ErrorLogPrefix Condition="'$(TargetFramework)' == ''">$(MSBuildStartupDirectory)\output\$(PROJECT)\$(AssemblyName)</ErrorLogPrefix>
+      <ErrorLogPrefix Condition="'$(TargetFramework)' != ''">$(MSBuildStartupDirectory)\output\$(PROJECT)\$(AssemblyName)-$(TargetFramework)</ErrorLogPrefix>
       <SonarAnalysisConfigPath>$(MSBuildStartupDirectory)\SonarQubeAnalysisConfig.xml</SonarAnalysisConfigPath>
       <SonarProjectOutputPath Condition="'$(TargetFramework)' != ''">$(AnalysisOutputPath)\$(TargetFramework)</SonarProjectOutputPath>
       <SonarProjectOutputPath Condition="'$(TargetFramework)' == ''">$(AnalysisOutputPath)</SonarProjectOutputPath>
@@ -58,10 +58,8 @@
 
     <PropertyGroup>
       <!-- Set the path to the SARIF report -->
-      <ErrorLog Condition="'$(TargetFramework)' != ''">$(DiagnosticsPathWithTFM).json</ErrorLog>
-      <ErrorLog Condition="'$(TargetFramework)' == ''">$(DiagnosticsPath).json</ErrorLog>
-      <RazorCompilationErrorLog Condition="'$(TargetFramework)' != ''">$(DiagnosticsPathWithTFM).Views.json</RazorCompilationErrorLog>
-      <RazorCompilationErrorLog Condition="'$(TargetFramework)' == ''">$(DiagnosticsPath).Views.json</RazorCompilationErrorLog>
+      <ErrorLog>$(ErrorLogPrefix).json</ErrorLog>
+      <RazorCompilationErrorLog>$(ErrorLogPrefix).Views.json</RazorCompilationErrorLog>
 
       <!-- Override the ruleset with all SonarAnalyzer rules -->
       <ResolvedCodeAnalysisRuleSet>$(MSBuildStartupDirectory)\output\AllSonarAnalyzerRules.ruleset</ResolvedCodeAnalysisRuleSet>
