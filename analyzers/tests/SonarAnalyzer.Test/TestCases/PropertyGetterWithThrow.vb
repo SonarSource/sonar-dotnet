@@ -65,5 +65,14 @@ Namespace Tests.Diagnostics
         private Function FactoryMethod() as NotSupportedException
             return new NotSupportedException()
         End Function
+        Public ReadOnly Property Foo10() As Integer
+            Get
+                Throw FactoryMethod2() ' Noncompliant
+'               ^^^^^^^^^^^^^^^^^^^^^^
+            End Get
+        End Property
+        private Function FactoryMethod2() as Exception
+            return new Exception()
+        End Function
     End Class
 End Namespace
