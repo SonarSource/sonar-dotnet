@@ -183,9 +183,7 @@ namespace SonarAnalyzer.Test.TestFramework
         private static void VerifyBuildErrors(ImmutableArray<Diagnostic> diagnostics, Compilation compilation)
         {
             var buildErrors = diagnostics.Where(x => x.Severity == DiagnosticSeverity.Error && (x.Id.StartsWith("CS") || x.Id.StartsWith("BC")) && !BuildErrorsToIgnore.Contains(x.Id)).ToArray();
-            var expected = new CompilationIssues(compilation.LanguageVersionString(), compilation.SyntaxTrees
-                .ExceptExtraEmptyFile() // FIXME: Is this really needed?
-                .SelectMany(x => IssueLocationCollector.GetExpectedBuildErrors(x.FilePath, x.GetText().Lines).ToList()));
+            var expected = new CompilationIssues(compilation.LanguageVersionString(), compilation.SyntaxTrees.SelectMany(x => IssueLocationCollector.GetExpectedBuildErrors(x.FilePath, x.GetText().Lines).ToList()));
             CompareActualToExpected(buildErrors, expected, true);
         }
 
