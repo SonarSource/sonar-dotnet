@@ -24,7 +24,7 @@ under test. Those tests increase the coverage without enforcing anything on the 
 meaningful validation of the expected behavior.</p>
 <h3>Exceptions</h3>
 <p>Test methods that include a call to a custom assertion method will not raise any issues.</p>
-<h2>How to fix it</h2>
+<h3>How to fix it</h3>
 <p>To address this issue, you should include assertions to validate the expected behavior. Choose an appropriate assertion method provided by your
 testing framework (such as MSTest, NUnit, xUnit) or select a suitable assertion library like FluentAssertions, NFluent, NSubstitute, or Shouldly.</p>
 <p>In addition to using built-in assertion methods, you also have the option to create custom assertion methods. To do this, declare an attribute
@@ -57,7 +57,7 @@ public static class Validator
 
 public class AssertionMethodAttribute : Attribute { }
 </pre>
-<h2>Hot to fix it in MSTest</h2>
+<h2>How to fix it in MSTest</h2>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
@@ -78,7 +78,7 @@ public void Add_SingleNumber_ReturnsSameNumber()
     Assert.AreEqual(0, actual);
 }
 </pre>
-<h2>Hot to fix it in NUnit</h2>
+<h2>How to fix it in NUnit</h2>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="2" data-diff-type="noncompliant">
@@ -99,7 +99,7 @@ public void Add_SingleNumber_ReturnsSameNumber()
     Assert.That(0, Is.EqualTo(actual));
 }
 </pre>
-<h2>Hot to fix it in xUnit</h2>
+<h2>How to fix it in xUnit</h2>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="3" data-diff-type="noncompliant">
