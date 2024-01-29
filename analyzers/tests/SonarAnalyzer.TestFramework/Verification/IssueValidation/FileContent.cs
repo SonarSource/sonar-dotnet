@@ -29,8 +29,6 @@ internal sealed class FileContent
 
     public FileContent(string fileName) : this(fileName, SourceText.From(System.IO.File.ReadAllText(fileName))) { }
 
-    public FileContent(Snippet snippet) : this(snippet.FileName, SourceText.From(snippet.Content)) { }  // FIXME: Is this needed?
-
     public FileContent(SyntaxTree tree) : this(tree.FilePath, tree.GetText()) { }
 
     private FileContent(string fileName, SourceText content)
