@@ -170,7 +170,7 @@ function New-IssueReports([string]$sarifReportPath) {
         $object = New-Object –Type System.Object
         $object | Add-Member –Type NoteProperty –Name issues –Value $_.Group
 
-        $issueFileName = $file.BaseName + '-' + $_.Name + $file.Extension
+        $issueFileName = $_.Name + '-' + $file.BaseName + $file.Extension
         $path = Join-Path $actualProjectFolder $issueFileName
 
         $lines =
