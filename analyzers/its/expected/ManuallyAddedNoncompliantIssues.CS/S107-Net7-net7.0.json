@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S107",
+"message":  "Method has 8 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/Net7/S107.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  44,
+"endLine":  7,
+"endColumn":  108
+}
+}
+}
+]
+}

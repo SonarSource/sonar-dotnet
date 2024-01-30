@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3884",
+"message":  "Refactor the code to remove this use of 'CoSetProxyBlanket'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S3884.vb#L56",
+"region":  {
+"startLine":  56,
+"startColumn":  32,
+"endLine":  56,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3884",
+"message":  "Refactor the code to remove this use of 'CoInitializeSecurity'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S3884.vb#L58",
+"region":  {
+"startLine":  58,
+"startColumn":  32,
+"endLine":  58,
+"endColumn":  52
+}
+}
+}
+]
+}

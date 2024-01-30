@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3363",
+"message":  "'Date' should not be used as a type for primary keys",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S3363.vb#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  31,
+"endLine":  9,
+"endColumn":  35
+}
+}
+}
+]
+}

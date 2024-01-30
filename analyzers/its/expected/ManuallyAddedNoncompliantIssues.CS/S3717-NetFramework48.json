@@ -1,0 +1,160 @@
+{
+"issues":  [
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/JavaScriptSerializerTest.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  60,
+"endLine":  27,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/JavaScriptSerializerTest.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  64,
+"endLine":  29,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/UsingNonstandardCryptographyTest.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  50,
+"endLine":  25,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/UsingNonstandardCryptographyTest.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  88,
+"endLine":  27,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/UsingNonstandardCryptographyTest.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  54,
+"endLine":  29,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/UsingNonstandardCryptographyTest.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  38,
+"endLine":  39,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/UsingNonstandardCryptographyTest.cs#L41",
+"region":  {
+"startLine":  41,
+"startColumn":  39,
+"endLine":  41,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/UsingNonstandardCryptographyTest.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  51,
+"endLine":  43,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/UsingNonstandardCryptographyTest.cs#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  42,
+"endLine":  45,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/UsingNonstandardCryptographyTest.cs#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  34,
+"endLine":  47,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/UsingNonstandardCryptographyTest.cs#L49",
+"region":  {
+"startLine":  49,
+"startColumn":  130,
+"endLine":  49,
+"endColumn":  165
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/UsingNonstandardCryptographyTest.cs#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  99,
+"endLine":  51,
+"endColumn":  134
+}
+}
+}
+]
+}

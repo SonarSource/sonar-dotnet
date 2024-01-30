@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4039",
+"message":  "Make 'NoConditionals' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'ISerializable.GetObjectData'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/InsecureDeserialization.cs#L44",
+"region":  {
+"startLine":  44,
+"startColumn":  28,
+"endLine":  44,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'CtorWithConditionsAndMissingDeserializationCtor' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'ISerializable.GetObjectData'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/InsecureDeserialization.cs#L57",
+"region":  {
+"startLine":  57,
+"startColumn":  28,
+"endLine":  57,
+"endColumn":  41
+}
+}
+}
+]
+}

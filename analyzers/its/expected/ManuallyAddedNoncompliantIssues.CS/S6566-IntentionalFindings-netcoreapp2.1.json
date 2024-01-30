@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S6566",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S6561.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  25,
+"endLine":  9,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S6566",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S6561.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  35,
+"endLine":  11,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S6566",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S6588.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  37,
+"endLine":  7,
+"endColumn":  61
+}
+}
+}
+]
+}

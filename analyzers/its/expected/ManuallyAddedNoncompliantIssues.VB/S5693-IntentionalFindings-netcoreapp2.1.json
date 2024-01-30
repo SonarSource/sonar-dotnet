@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S5693",
+"message":  "Make sure the content length limit is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S5693.vb#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  10,
+"endLine":  15,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S5693",
+"message":  "Make sure the content length limit is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S5693.vb#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  10,
+"endLine":  21,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S5693",
+"message":  "Make sure the content length limit is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S5693.vb#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  10,
+"endLine":  33,
+"endColumn":  95
+}
+}
+}
+]
+}

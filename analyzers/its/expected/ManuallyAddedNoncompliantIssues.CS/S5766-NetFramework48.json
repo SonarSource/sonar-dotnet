@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/InsecureDeserialization.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  16,
+"endLine":  30,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/InsecureDeserialization.cs#L52",
+"region":  {
+"startLine":  52,
+"startColumn":  16,
+"endLine":  52,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/InsecureDeserialization.cs#L65",
+"region":  {
+"startLine":  65,
+"startColumn":  16,
+"endLine":  65,
+"endColumn":  41
+}
+}
+}
+]
+}

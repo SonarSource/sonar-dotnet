@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4214",
+"message":  "Make this 'P/Invoke' method private or internal.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/Net7/S4200.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  32,
+"endLine":  9,
+"endColumn":  71
+}
+}
+}
+]
+}
