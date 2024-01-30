@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'dateTime'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S6588.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  9,
+"endLine":  7,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'dateTimeOffset'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S6588.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  9,
+"endLine":  8,
+"endColumn":  104
+}
+}
+}
+]
+}

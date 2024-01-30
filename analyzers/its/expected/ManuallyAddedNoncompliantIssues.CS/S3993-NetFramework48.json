@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3993",
+"message":  "Specify AttributeUsage on 'AllowCrossSiteAttribute' to improve readability, even though it inherits it from its base type.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/PermissiveCors.cs#L38",
+"region":  {
+"startLine":  38,
+"startColumn":  18,
+"endLine":  38,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3993",
+"message":  "Specify AttributeUsage on 'AllowCrossSiteJsonAttribute' to improve readability, even though it inherits it from its base type.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/PermissiveCors.cs#L56",
+"region":  {
+"startLine":  56,
+"startColumn":  18,
+"endLine":  56,
+"endColumn":  45
+}
+}
+}
+]
+}

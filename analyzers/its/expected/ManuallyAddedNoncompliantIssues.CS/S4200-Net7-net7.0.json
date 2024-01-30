@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4200",
+"message":  "Make this native method private and provide a wrapper.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/Net7/S4200.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  32,
+"endLine":  9,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S4200",
+"message":  "Make this native method private and provide a wrapper.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/Net7/S4200.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  32,
+"endLine":  12,
+"endColumn":  81
+}
+}
+}
+]
+}

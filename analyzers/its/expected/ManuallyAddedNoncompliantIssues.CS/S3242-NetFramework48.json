@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Security.AccessControl.FileSystemSecurity' instead of 'System.Security.AccessControl.FileSecurity'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/LooseFilePermissions.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  70,
+"endLine":  15,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Security.AccessControl.FileSystemSecurity' instead of 'System.Security.AccessControl.DirectorySecurity'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/LooseFilePermissions.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  102,
+"endLine":  15,
+"endColumn":  119
+}
+}
+}
+]
+}

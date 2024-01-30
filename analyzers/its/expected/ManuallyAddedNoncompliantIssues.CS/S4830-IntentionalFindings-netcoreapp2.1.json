@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4830",
+"message":  "Enable server certificate validation on this SSL/TLS connection",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S4830.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  44,
+"endLine":  15,
+"endColumn":  79
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S4830.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  126,
+"endLine":  15,
+"endColumn":  130
+}
+}
+]
+}
+]
+}

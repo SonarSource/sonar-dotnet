@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'XmlReader_SafeByDefault' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework45/XmlReaderTest.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  21,
+"endLine":  27,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'UnsafeByDefault' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework45/XPathDocumentTest.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  21,
+"endLine":  16,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'XmlReaderAsParameter' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework45/XPathDocumentTest.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  21,
+"endLine":  33,
+"endColumn":  41
+}
+}
+}
+]
+}

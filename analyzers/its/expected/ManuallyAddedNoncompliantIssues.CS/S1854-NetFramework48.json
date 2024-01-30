@@ -1,0 +1,173 @@
+{
+"issues":  [
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'tmp'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/PubliclyWritableDirectoriesTest.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  17,
+"endLine":  18,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'tmp'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/PubliclyWritableDirectoriesTest.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  13,
+"endLine":  19,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'tmp'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/PubliclyWritableDirectoriesTest.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  13,
+"endLine":  20,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'tmp'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/PubliclyWritableDirectoriesTest.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  13,
+"endLine":  22,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'tmp'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/PubliclyWritableDirectoriesTest.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  13,
+"endLine":  23,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'tmp'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/PubliclyWritableDirectoriesTest.cs#L24",
+"region":  {
+"startLine":  24,
+"startColumn":  13,
+"endLine":  24,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'tmp'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/PubliclyWritableDirectoriesTest.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  13,
+"endLine":  25,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'tmp'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/PubliclyWritableDirectoriesTest.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  13,
+"endLine":  26,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'tmp'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/PubliclyWritableDirectoriesTest.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  13,
+"endLine":  27,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'tmp'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/PubliclyWritableDirectoriesTest.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  13,
+"endLine":  28,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'tmp'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/PubliclyWritableDirectoriesTest.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  13,
+"endLine":  29,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'tmp'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/PubliclyWritableDirectoriesTest.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  13,
+"endLine":  30,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'tmp'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/PubliclyWritableDirectoriesTest.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  13,
+"endLine":  33,
+"endColumn":  39
+}
+}
+}
+]
+}
