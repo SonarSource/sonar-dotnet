@@ -208,6 +208,20 @@ namespace SonarAnalyzer.Test.Extensions
         }
 
         [TestMethod]
+        public void GetBody_LocalFunctionStatement_ArrowExpression()
+        {
+            var code = "class AClass { void AMethod() { int ALocalFunction() => 42; } }";
+            ExtensionsCS.GetBody(CSharpSyntaxTree.ParseText(code).Single<LocalFunctionStatementSyntax>()).Should().BeNull();
+        }
+
+        [TestMethod]
+        public void GetBody_LocalFunctionStatement_BodyBlock()
+        {
+            var code = "class AClass { void AMethod() { int ALocalFunction() { return 42; } } }";
+            ExtensionsCS.GetBody(CSharpSyntaxTree.ParseText(code).Single<LocalFunctionStatementSyntax>()).Should().NotBeNull();
+        }
+
+        [TestMethod]
         public void CreateCfg_MethodDeclaration_ReturnsCfg_CS()
         {
             const string code = """
