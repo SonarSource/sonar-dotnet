@@ -171,7 +171,7 @@ public class Repro_8633
             ExceptionHelper.ThrowBecauseOfMissingTime();
         }
 
-        return time.Value; // Compliant TP: The old engine raises here an FP.
+        return time.Value; // Compliant TN: The old engine raises here an FP.
     }
 
     private TimeOnly? LoadCurrentTimeFromProvider() => null;
