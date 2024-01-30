@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S5122",
+"message":  "Make sure this permissive CORS policy is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/PermissiveCors.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  6,
+"endLine":  16,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S5122",
+"message":  "Make sure this permissive CORS policy is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/PermissiveCors.cs#L24",
+"region":  {
+"startLine":  24,
+"startColumn":  13,
+"endLine":  24,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S5122",
+"message":  "Make sure this permissive CORS policy is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/PermissiveCors.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  13,
+"endLine":  26,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S5122",
+"message":  "Make sure this permissive CORS policy is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/PermissiveCors.cs#L42",
+"region":  {
+"startLine":  42,
+"startColumn":  13,
+"endLine":  42,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S5122",
+"message":  "Make sure this permissive CORS policy is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/PermissiveCors.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  13,
+"endLine":  43,
+"endColumn":  109
+}
+}
+},
+{
+"id":  "S5122",
+"message":  "Make sure this permissive CORS policy is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/PermissiveCors.cs#L60",
+"region":  {
+"startLine":  60,
+"startColumn":  13,
+"endLine":  60,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S5122",
+"message":  "Make sure this permissive CORS policy is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/PermissiveCors.cs#L61",
+"region":  {
+"startLine":  61,
+"startColumn":  13,
+"endLine":  61,
+"endColumn":  84
+}
+}
+}
+]
+}

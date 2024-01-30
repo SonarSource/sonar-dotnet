@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/UsingNonstandardCryptographyTest.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  23,
+"endLine":  23,
+"endColumn":  42
+}
+}
+}
+]
+}

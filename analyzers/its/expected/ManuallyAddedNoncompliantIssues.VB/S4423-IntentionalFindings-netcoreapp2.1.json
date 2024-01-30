@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4423",
+"message":  "Change this code to use a stronger protocol.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S4423.vb#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  69,
+"endLine":  14,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4423",
+"message":  "Change this code to use a stronger protocol.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S4423.vb#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  86,
+"endLine":  16,
+"endColumn":  93
+}
+}
+}
+]
+}

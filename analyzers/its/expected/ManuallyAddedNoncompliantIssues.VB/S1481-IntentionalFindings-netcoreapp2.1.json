@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'Hres1'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S3884.vb#L56",
+"region":  {
+"startLine":  56,
+"startColumn":  13,
+"endLine":  56,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'Hres2'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S3884.vb#L58",
+"region":  {
+"startLine":  58,
+"startColumn":  13,
+"endLine":  58,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'HttpHandler'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S4423.vb#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  13,
+"endLine":  16,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'HttpHandler'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S4423.vb#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  13,
+"endLine":  22,
+"endColumn":  24
+}
+}
+}
+]
+}

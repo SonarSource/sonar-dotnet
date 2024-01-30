@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6561",
+"message":  "Avoid using "DateTime.Now" for benchmarking or timespan calculation operations.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S6561.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  35,
+"endLine":  11,
+"endColumn":  55
+}
+}
+}
+]
+}

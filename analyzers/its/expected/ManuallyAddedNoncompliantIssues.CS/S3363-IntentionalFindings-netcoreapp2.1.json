@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3363",
+"message":  "'DateTime' should not be used as a type for primary keys",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S3363.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  10,
+"endLine":  15,
+"endColumn":  18
+}
+}
+}
+]
+}

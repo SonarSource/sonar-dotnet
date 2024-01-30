@@ -17,8 +17,6 @@ $ErrorActionPreference = "Stop"
 
 . .\create-issue-reports.ps1
 
-$InternalProjects = @("ManuallyAddedNoncompliantIssues.CS", "ManuallyAddedNoncompliantIssues.VB")
-
 if ($PSBoundParameters['Verbose'] -Or $PSBoundParameters['Debug']) {
     $global:DebugPreference = "Continue"
 }
@@ -188,7 +186,6 @@ function Show-DiffResults() {
 
     $errorMsg = "ERROR: There are differences between the actual and the expected issues."
 
-
     if (!$ruleId -And !$project)
     {
         Write-Host "Will find differences for all projects, all rules."
@@ -229,197 +226,6 @@ function Show-DiffResults() {
     } -errorMessage $errorMsg
 }
 
-function CreateIssue($fileName, $lineNumber, $issueId, $message){
-    $uri = Create-FullUriForIssue $fileName $lineNumber $lineNumber
-    return New-Object PSObject -Property @{
-        FileName = $uri
-        LineNumber = $lineNumber
-        IssueId = $issueId
-        Message = $message
-    }
-}
-
-function LoadExpectedIssues($file, $regex){
-    # Unfortunately regex named groups don't work.
-    # In the current context:
-    # - $_.Matches.Groups[3].Value is IssueId
-    # - $_.Matches.Groups[4].Value is Message
-    $issues = $file | Select-String -Pattern $regex | ForEach-Object { CreateIssue $_.Path $_.LineNumber $_.Matches.Groups[3].Value $_.Matches.Groups[4].Value }
-
-    if ($issues -eq $null){
-        return @()
-    }
-
-    $id = $issues | where { $_.IssueId -ne "" } | select -ExpandProperty IssueId | unique
-
-    if ($id -eq $null){
-        throw "Please specify the rule id in the following file: $($file.FullName)"
-    }
-
-    if ($id -is [system.array]){
-        throw "Only one rule can be verified per file. Multiple rule identifiers are defined ($id) in $($file.FullName)"
-    }
-
-    foreach($issue in $issues){
-        $issue.IssueId = $id
-    }
-
-    return $issues
-}
-
-function LoadExpectedIssuesByProjectType($project, $regex, $extension){
-    $issues = @()
-
-    foreach($file in Get-ChildItem sources/$project -filter $extension -recurse){
-        $fileIssues = LoadExpectedIssues $file $regex
-        $issues = $issues + $fileIssues
-    }
-
-    return ,$issues # "," to avoid reducing empty array to $null
-}
-
-function LoadExpectedIssuesForInternalProject($project){
-    $csRegex = "\/\/\s*Noncompliant(\s*\((?<ID>S\d+)\))?(\s*\{\{(?<Message>.+)\}\})?"
-    $vbRegex = "'\s*Noncompliant(\s*\((?<ID>S\d+)\))?(\s*\{\{(?<Message>.+)\}\})?"
-
-    return (LoadExpectedIssuesByProjectType $project $csRegex "*.cs") +
-           (LoadExpectedIssuesByProjectType $project $vbRegex "*.vb")
-}
-
-function IssuesAreEqual($actual, $expected){
-    return ($expected.issueId -eq $actual.issueId) -and
-           ($expected.lineNumber -eq $actual.lineNumber) -and
-           # The file name extracted from roslyn report ($actual) is relative but the one from expected issue is absolute.
-           ($expected.fileName.endswith($actual.fileName) -and
-           ($expected.message -eq "" -or $expected.message -eq $actual.message))
-}
-
-# checks if both paths point to the same file
-# e.g.
-# path1: a/b/Program.cs#12
-# path2: b/Program.cs#34
-# Result: true
-function IsSameFile([string]$path1, [string]$path2) {
-    $path1WithoutLineNumbers = $path1 -replace "#L\d.*", ""
-    $path2WithoutLineNumbers = $path2 -replace "#L\d.*", ""
-    return $path1WithoutLineNumbers.EndsWith($path2WithoutLineNumbers)
-}
-
-function VerifyUnexpectedIssues($actualIssues, $expectedIssues){
-    $unexpectedIssues = @()
-
-    foreach ($actualIssue in $actualIssues | Where-Object { $ruleId -eq "" -or $_.IssueId -eq $ruleId }){
-        $found = $false
-
-        foreach($expectedIssue in $expectedIssues){
-            if (IssuesAreEqual $actualIssue $expectedIssue){
-                $found = $true
-                break
-            }
-        }
-
-        if ($found -eq $false) {
-            # There might be the case when different rules fire for the same class. Since we want to reduce the noise and narrow the focus,
-            # we can have only one rule verified per class (this is done by checking the specified id in the first Noncompliant message).
-            $expectedIssueInFile = $expectedIssues | where { IsSameFile($_.FileName, $actualIssue.FileName) } | unique
-
-            # There are three cases to cover:
-            # - the issue was raised for a file that has a Noncompliant comment with that issue id
-            # - the issue was raised for a file that doesn't have a Noncompliant comment with an issue id
-            # - the issue was raised for a file that has a Noncompliant comment with a different issue id
-            # In the first two cases the unexpected issue needs to be reported but in the last one we should ignore it.
-            if ($expectedIssueInFile -eq $null -or $expectedIssueInFile.issueId -eq $actualIssue.issueId){
-                $unexpectedIssues = $unexpectedIssues + $actualIssue
-            }
-        }
-    }
-
-    if ($unexpectedIssues.Count -ne 0){
-        Write-Warning "Unexpected issues:"
-        Write-Host ($unexpectedIssues | Format-Table | Out-String)
-    }
-
-    return $unexpectedIssues
-}
-
-function VerifyExpectedIssues ($actualIssues, $expectedIssues){
-    $expectedButNotRaisedIssues = @()
-
-    foreach ($expectedIssue in $expectedIssues | Where-Object { $ruleId -eq "" -or $_.IssueId -eq $ruleId }){
-        $found = $false
-        foreach($actualIssue in $actualIssues){
-            if (IssuesAreEqual $actualIssue $expectedIssue){
-                $found = $true
-                break
-            }
-        }
-
-        if ($found -eq $false) {
-            $expectedButNotRaisedIssues = $expectedButNotRaisedIssues + $expectedIssue
-        }
-    }
-
-    if ($expectedButNotRaisedIssues.Count -ne 0){
-        Write-Warning "Issues not raised:"
-        Write-Host ($expectedButNotRaisedIssues | Format-Table | Out-String)
-    }
-
-    return $expectedButNotRaisedIssues
-}
-
-function CompareIssues($actualIssues, $expectedIssues){
-    $unexpectedIssues = VerifyUnexpectedIssues $actualIssues $expectedIssues
-    $expectedButNotRaisedIssues = VerifyExpectedIssues $actualIssues $expectedIssues
-
-    return $unexpectedIssues.Count -eq 0 -and $expectedButNotRaisedIssues.Count -eq 0
-}
-
-function LoadActualIssues($project){
-    $analysisResults = Get-ChildItem output/$project -filter *.json -recurse
-    $issues = @()
-
-    foreach($fileName in $analysisResults){
-        $issues += GetActualIssues($fileName.FullName) | Foreach-Object {
-            $location = $_.location
-
-            # location can be an array if the "relatedLocations" node is populated (since these are appended by "Get-IssueV3" function).
-            # Since we only care about the real location we consider only the first element of the array.
-            if ($location -is [system.array]){
-                $location = $location[0]
-            }
-
-            CreateIssue $location.uri $location.region.startLine $_.id $_.message
-        }
-    }
-
-    return $issues
-}
-
-function CheckDiffsForInternalProject($project){
-    $actualIssues = LoadActualIssues $project
-    $expectedIssues = LoadExpectedIssuesForInternalProject $project
-    $result = CompareIssues $actualIssues $expectedIssues
-
-    if ($result -eq $false){
-       throw "There are differences between actual and expected issues for $project!"
-    }
-}
-
-function CheckInternalProjectsDifferences(){
-    Write-Host "Check differences for internal projects"
-    $internalProjTimer = [system.diagnostics.stopwatch]::StartNew()
-
-    foreach ($currentProject in $InternalProjects){
-        # we need to verify only the specified project if the "-project" parameter has a value
-        if ($project -eq "" -or $currentProject -eq $project){
-            CheckDiffsForInternalProject $currentProject
-        }
-    }
-
-    $internalProjTimerElapsed = $internalProjTimer.Elapsed.TotalSeconds
-    Write-Debug "Internal project differences verified in '${internalProjTimerElapsed}'"
-}
-
 try {
     $scriptTimer = [system.diagnostics.stopwatch]::StartNew()
     . (Join-Path $PSScriptRoot "..\..\scripts\build\build-utils.ps1")
@@ -441,8 +247,6 @@ try {
     # Do not forget to update ValidateSet of -project parameter when new project is added.
     Build-Project-MSBuild "ManuallyAddedNoncompliantIssues.CS" "ManuallyAddedNoncompliantIssues.CS.sln"
     Build-Project-MSBuild "ManuallyAddedNoncompliantIssues.VB" "ManuallyAddedNoncompliantIssues.VB.sln"
-    CheckInternalProjectsDifferences
-
     Build-Project-MSBuild "AnalyzeGenerated.CS" "AnalyzeGenerated.CS.sln"
     Build-Project-MSBuild "AnalyzeGenerated.VB" "AnalyzeGenerated.VB.sln"
     Build-Project-MSBuild "Ember-MM" "Ember Media Manager.sln"
@@ -466,23 +270,20 @@ try {
 
     Write-Header "Processing analyzer results"
 
-    # Not needed when $project is internal
-    if ($project -eq "" -or -not $InternalProjects.Contains($project)) {
-        Write-Host "Normalizing the SARIF reports"
-        $sarifTimer = [system.diagnostics.stopwatch]::StartNew()
+    Write-Host "Normalizing the SARIF reports"
+    $sarifTimer = [system.diagnostics.stopwatch]::StartNew()
 
-        # Normalize & overwrite all *.json SARIF files found under the "actual" folder
-        Get-ChildItem output -filter *.json -recurse | where { $_.FullName -notmatch 'ManuallyAddedNoncompliantIssues' } | Foreach-Object { New-IssueReports $_.FullName }
+    # Normalize & overwrite all *.json SARIF files found under the "actual" folder
+    Get-ChildItem output -filter *.json -recurse | Foreach-Object { New-IssueReports $_.FullName }
 
-        $sarifTimerElapsed = $sarifTimer.Elapsed.TotalSeconds
-        Write-Debug "Normalized the SARIF reports in '${sarifTimerElapsed}'"
+    $sarifTimerElapsed = $sarifTimer.Elapsed.TotalSeconds
+    Write-Debug "Normalized the SARIF reports in '${sarifTimerElapsed}'"
 
-        Write-Host "Checking for differences..."
-        $diffTimer = [system.diagnostics.stopwatch]::StartNew()
-        Show-DiffResults
-        $diffTimerElapsed = $diffTimer.Elapsed.TotalSeconds
-        Write-Debug "Checked for differences in '${diffTimerElapsed}'"
-    }
+    Write-Host "Checking for differences..."
+    $diffTimer = [system.diagnostics.stopwatch]::StartNew()
+    Show-DiffResults
+    $diffTimerElapsed = $diffTimer.Elapsed.TotalSeconds
+    Write-Debug "Checked for differences in '${diffTimerElapsed}'"
 
     Write-Host -ForegroundColor Green "SUCCESS: ITs were successful! No differences were found!"
     exit 0

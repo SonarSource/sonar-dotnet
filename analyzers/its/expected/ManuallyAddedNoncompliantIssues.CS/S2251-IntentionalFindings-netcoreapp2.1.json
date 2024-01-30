@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S2251",
+"message":  "'i' is incremented and will never reach 'stop condition'.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S2251.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  41,
+"endLine":  18,
+"endColumn":  44
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S2251.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  30,
+"endLine":  18,
+"endColumn":  39
+}
+}
+]
+}
+]
+}

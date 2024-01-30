@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3655",
+"message":  "'i' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S3655.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  17,
+"endLine":  16,
+"endColumn":  18
+}
+}
+}
+]
+}
