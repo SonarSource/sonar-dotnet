@@ -196,7 +196,7 @@ namespace SonarAnalyzer.Test.TestFramework
             Directory.CreateDirectory(tempPath);
             try
             {
-                foreach (var langVersion in builder.ParseOptions.Cast<CSharpParseOptions>().Select(LanguageVersionReference).ToArray())
+                foreach (var langVersion in builder.ParseOptions.Cast<CSharpParseOptions>().Select(LangVersion))
                 {
                     var projectRoot = Path.Combine(tempPath, langVersion);
                     Directory.CreateDirectory(projectRoot);
@@ -209,19 +209,19 @@ namespace SonarAnalyzer.Test.TestFramework
             {
                 Directory.Delete(tempPath, true);
             }
-        }
 
-        private static string LanguageVersionReference(CSharpParseOptions options) =>
-            options.LanguageVersion switch
-            {
-                // 5 and 6 should not be needed here
-                // 7 also does not support with Nullable context
-                // 8 and 9 do not support global using directives
-                LanguageVersion.CSharp10 => "10.0",
-                LanguageVersion.CSharp11 => "11.0",
-                LanguageVersion.CSharp12 => "12.0",
-                _ => throw new NotSupportedException($"Unexpected language version {options.LanguageVersion}. Update this switch to add the new version.")
-            };
+            static string LangVersion(CSharpParseOptions options) =>
+                options.LanguageVersion switch
+                {
+                    // 5 and 6 should not be needed here
+                    // 7 also does not support with Nullable context
+                    // 8 and 9 do not support global using directives
+                    LanguageVersion.CSharp10 => "10.0",
+                    LanguageVersion.CSharp11 => "11.0",
+                    LanguageVersion.CSharp12 => "12.0",
+                    _ => throw new NotSupportedException($"Unexpected language version {options.LanguageVersion}. Update this switch to add the new version.")
+                };
+        }
 
         private string PrepareRazorProject(string projectRoot, string langVersion)
         {
@@ -322,10 +322,6 @@ namespace SonarAnalyzer.Test.TestFramework
             }
         }
 
-        private static bool IsRazorOrCshtml(string path) =>
-            Path.GetExtension(path) is var extension
-            && (extension.Equals(".razor", StringComparison.OrdinalIgnoreCase) || extension.Equals(".cshtml", StringComparison.OrdinalIgnoreCase));
-
         private void ValidateCodeFix()
         {
             _ = builder.CodeFixedPath ?? throw new ArgumentException($"{nameof(builder.CodeFixedPath)} was not set.");
@@ -359,6 +355,10 @@ namespace SonarAnalyzer.Test.TestFramework
                 throw new ArgumentException($"{analyzers.Single().GetType().Name} does not support diagnostics fixable by the {codeFix.GetType().Name}.");
             }
         }
+
+        private static bool IsRazorOrCshtml(string path) =>
+            Path.GetExtension(path) is var extension
+            && (extension.Equals(".razor", StringComparison.OrdinalIgnoreCase) || extension.Equals(".cshtml", StringComparison.OrdinalIgnoreCase));
 
         public sealed record CompilationData(Compilation Compilation, string[] AdditionalSourceFiles);
     }
