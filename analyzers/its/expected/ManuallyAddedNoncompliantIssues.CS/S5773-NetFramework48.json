@@ -1,0 +1,143 @@
+{
+"issues":  [
+{
+"id":  "S5773",
+"message":  "Restrict types of objects allowed to be deserialized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/BinaryFormatterTest.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  13,
+"endLine":  18,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S5773",
+"message":  "Restrict types of objects allowed to be deserialized.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/BinaryFormatterTest.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  13,
+"endLine":  22,
+"endColumn":  82
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/UnsafeBinder.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  30,
+"endLine":  17,
+"endColumn":  40
+}
+}
+]
+},
+{
+"id":  "S5773",
+"message":  "Restrict types of objects allowed to be deserialized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/JavaScriptSerializerTest.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  13,
+"endLine":  18,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S5773",
+"message":  "Restrict types of objects allowed to be deserialized.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/JavaScriptSerializerTest.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  13,
+"endLine":  22,
+"endColumn":  89
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/UnsafeTypeResolver.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  30,
+"endLine":  16,
+"endColumn":  41
+}
+}
+]
+},
+{
+"id":  "S5773",
+"message":  "Serialized data signature (MAC) should be verified.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/LosFormatterTest.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  13,
+"endLine":  17,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S5773",
+"message":  "Serialized data signature (MAC) should be verified.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/LosFormatterTest.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  13,
+"endLine":  19,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S5773",
+"message":  "Serialized data signature (MAC) should be verified.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/LosFormatterTest.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  13,
+"endLine":  20,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S5773",
+"message":  "Restrict types of objects allowed to be deserialized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/NetDataContractSerializerDeserializeTest.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  13,
+"endLine":  18,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S5773",
+"message":  "Restrict types of objects allowed to be deserialized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/SoapFormatterTest.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  13,
+"endLine":  18,
+"endColumn":  52
+}
+}
+}
+]
+}

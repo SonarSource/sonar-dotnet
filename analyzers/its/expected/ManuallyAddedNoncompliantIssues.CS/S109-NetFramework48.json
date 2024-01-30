@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '16' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/AesCngTest.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  51,
+"endLine":  19,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '16' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/AesCryptoServiceProviderTest.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  53,
+"endLine":  20,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '16' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/AesTest.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  55,
+"endLine":  20,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '16' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/SymmetricAlgorithmTest.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  53,
+"endLine":  20,
+"endColumn":  55
+}
+}
+}
+]
+}

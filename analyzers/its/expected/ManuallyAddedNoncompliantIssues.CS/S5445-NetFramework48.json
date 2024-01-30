@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S5445",
+"message":  "'Path.GetTempFileName()' is insecure. Use 'Path.GetRandomFileName()' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/InsecureTemporaryFilesCreation.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  28,
+"endLine":  17,
+"endColumn":  48
+}
+}
+}
+]
+}

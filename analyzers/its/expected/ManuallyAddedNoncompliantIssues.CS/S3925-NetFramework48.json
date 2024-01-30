@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add a 'protected' constructor 'CtorWithConditionsAndMissingDeserializationCtor(SerializationInfo, StreamingContext)'.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/InsecureDeserialization.cs#L48",
+"region":  {
+"startLine":  48,
+"startColumn":  18,
+"endLine":  48,
+"endColumn":  65
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/InsecureDeserialization.cs#L48",
+"region":  {
+"startLine":  48,
+"startColumn":  12,
+"endLine":  48,
+"endColumn":  17
+}
+}
+]
+}
+]
+}

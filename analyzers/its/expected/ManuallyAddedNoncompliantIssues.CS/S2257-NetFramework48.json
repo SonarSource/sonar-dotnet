@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S2257",
+"message":  "Make sure using a non-standard cryptographic algorithm is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/UsingNonstandardCryptographyTest.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  23,
+"endLine":  23,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2257",
+"message":  "Make sure using a non-standard cryptographic algorithm is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/UsingNonstandardCryptographyTest.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  22,
+"endLine":  33,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2257",
+"message":  "Make sure using a non-standard cryptographic algorithm is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/UsingNonstandardCryptographyTest.cs#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  18,
+"endLine":  37,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2257",
+"message":  "Make sure using a non-standard cryptographic algorithm is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/UsingNonstandardCryptographyTest.cs#L54",
+"region":  {
+"startLine":  54,
+"startColumn":  18,
+"endLine":  54,
+"endColumn":  43
+}
+}
+}
+]
+}
