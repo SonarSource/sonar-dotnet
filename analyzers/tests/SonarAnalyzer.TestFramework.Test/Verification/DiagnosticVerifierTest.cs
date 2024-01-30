@@ -64,8 +64,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                 """);
 
         [TestMethod]
-        [Ignore] // ToDo: Fix in
-        public void UnexpectedSecondaryIssueWrongId() =>
+        public void UnexpectedSecondaryIssue_WrongId() =>
             VerifyThrows<AssertFailedException>("""
                 public class UnexpectedSecondary
                 {
@@ -76,9 +75,99 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                         { }
                     }
                 }
-                """,
-                "CSharp*: Unexpected secondary issue [myId] on line 7, span (6,12)-(6,13) with message ''." + Environment.NewLine +
-                "See output to see all actual diagnostics raised on the file");
+                """, """
+                There are differences for CSharp7 snippet1.cs:
+                  Line 6 Secondary location: The expected issueId 'myWrongId' does not match the actual issueId 'myId' ID myId
+                """);
+
+        [TestMethod]
+        public void UnexpectedSecondaryIssue_WrongIdWithWrongPrimaryMessageAndLocation() =>
+            VerifyThrows<AssertFailedException>("""
+                public class UnexpectedSecondary
+                {
+                    public void Test(bool a, bool b)
+                    {
+                        // Secondary@+1 [myWrongId]
+                        if (a == a) // Noncompliant ^1#1 {{This has wrong message and location and still needs to match secondary ID}} [myId]
+                        { }
+                    }
+                }
+                """, """
+                There are differences for CSharp7 snippet1.cs:
+                  Line 6: The expected message 'This has wrong message and location and still needs to match secondary ID' does not match the actual message 'Correct one of the identical expressions on both sides of operator '=='.' Rule S1764
+                  Line 6 Secondary location: The expected issueId 'myWrongId' does not match the actual issueId '' ID myWrongId
+                """);
+
+        [TestMethod]
+        public void UnexpectedSecondaryIssue_MissingExpectedId() =>
+            VerifyThrows<AssertFailedException>("""
+                public class UnexpectedSecondary
+                {
+                    public void Test(bool a, bool b)
+                    {
+                        // Secondary@+1
+                        if (a == a) // Noncompliant [myId]
+                        { }
+                    }
+                }
+                """, """
+                There are differences for CSharp7 snippet1.cs:
+                  Line 6 Secondary location: The expected issueId '' does not match the actual issueId 'myId' ID myId
+                """);
+
+        [TestMethod]
+        public void UnexpectedSecondaryIssue_MissingActualId() =>
+            VerifyThrows<AssertFailedException>("""
+                public class UnexpectedSecondary
+                {
+                    public void Test(bool a, bool b)
+                    {
+                        // Secondary@+1 [myWrongId]
+                        if (a == a) // Noncompliant
+                        { }
+                    }
+                }
+                """, """
+                There are differences for CSharp7 snippet1.cs:
+                  Line 6 Secondary location: The expected issueId 'myWrongId' does not match the actual issueId '' ID myWrongId
+                """);
+
+        [TestMethod]
+        public void UnexpectedSecondaryIssue_WrongIdWithMultipleIssues() =>
+            VerifyThrows<AssertFailedException>("""
+                public class UnexpectedSecondary
+                {
+                    public void Test(bool a, bool b)
+                    {
+                        if (a == a) { if ( b == b) { } } // Noncompliant [idForAA, idForBB]
+                        // Secondary@-1 [wrongId]
+                        // Secondary@-2 [idForAA]
+                    }
+                }
+                """, """
+                There are differences for CSharp7 snippet1.cs:
+                  Line 5 Secondary location: The expected issueId 'wrongId' does not match the actual issueId 'idForBB' ID idForBB
+                """);
+
+        [TestMethod]
+        public void UnexpectedSecondaryIssue_WrongIdsWithWrongLocations() =>
+            VerifyThrows<AssertFailedException>("""
+                public class UnexpectedSecondary
+                {
+                    public void Test(bool a, bool b, bool c)
+                    {
+                        if (a == a) { if ( b == b) { if ( c == c) { } } } // Noncompliant [idForAA, idForBB, idForCC]
+                        // Secondary@-1 ^0#0 [idForAA] All are on wrong location
+                        // Secondary@-2 ^0#0 [wrongId] They should prefer to match on ID first, then on the closest location
+                        // Secondary@-3 ^0#0 [idForCC]
+                    }
+                }
+                """, """
+                There are differences for CSharp7 snippet1.cs:
+                  Line 5 Secondary location: Should start on column -1 but got column 12 ID idForAA
+                  Line 5 Secondary location: The expected issueId 'wrongId' does not match the actual issueId 'idForBB' ID idForBB
+                  Line 5 Secondary location: Should start on column -1 but got column 42 ID idForCC
+                """);
 
         [TestMethod]
         public void SecondaryIssueUnexpectedMessage() =>

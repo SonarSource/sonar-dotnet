@@ -201,26 +201,26 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
         [DataTestMethod]
         [DataRow("net6.0")]
         [DataRow("net7.0")]
-        public void Compile_Razor_WithFramework(string framework)
+        public void Compile_Razor_WithFramework(string framework) 
         {
-            var compilations = DummyWithLocation.AddPaths("Dummy.razor")
+            var compilation = DummyWithLocation.AddPaths("Dummy.razor")
                 .WithFramework(framework)
+                .WithLanguageVersion(LanguageVersion.CSharp12)
                 .Build()
-                .Compile(false);
-
-            var reference = compilations.Single().Compilation.ExternalReferences.First().Display;
-            reference.Contains(framework).Should().BeTrue();
+                .Compile(false)
+                .Single();
+            compilation.Compilation.ExternalReferences.First().Display.Should().Contain(framework);
         }
 
         [TestMethod]
         public void Compile_Razor_DefaultFramework()
         {
-            var compilations = DummyWithLocation.AddPaths("Dummy.razor")
+            var compilation = DummyWithLocation.AddPaths("Dummy.razor")
+                .WithLanguageVersion(LanguageVersion.CSharp12)
                 .Build()
-                .Compile(false);
-
-            var reference = compilations.Single().Compilation.ExternalReferences.First().Display;
-            reference.Contains("net7.0").Should().BeTrue();
+                .Compile(false)
+                .Single();
+            compilation.Compilation.ExternalReferences.First().Display.Should().Contain("net7.0", "This version is used in EmptyProject.csproj");
         }
 
         [DataTestMethod]
