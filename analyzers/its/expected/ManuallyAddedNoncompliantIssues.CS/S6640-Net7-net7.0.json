@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6640",
+"message":  "Make sure that using "unsafe" is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/Net7/S107.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  19,
+"endLine":  5,
+"endColumn":  25
+}
+}
+}
+]
+}

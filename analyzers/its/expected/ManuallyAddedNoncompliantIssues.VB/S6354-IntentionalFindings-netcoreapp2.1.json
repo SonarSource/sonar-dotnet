@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S6561.vb#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  21,
+"endLine":  5,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S6561.vb#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  31,
+"endLine":  7,
+"endColumn":  39
+}
+}
+}
+]
+}

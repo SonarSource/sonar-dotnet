@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2857",
+"message":  "Add a space before 'FROM'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S2857.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  13,
+"endLine":  16,
+"endColumn":  25
+}
+}
+}
+]
+}

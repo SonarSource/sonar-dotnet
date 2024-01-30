@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2166",
+"message":  "Rename this class to remove "Exception" or correct its inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S2166.vb#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  18,
+"endLine":  8,
+"endColumn":  33
+}
+}
+}
+]
+}
