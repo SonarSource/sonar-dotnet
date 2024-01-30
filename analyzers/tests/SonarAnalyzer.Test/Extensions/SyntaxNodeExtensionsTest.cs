@@ -203,7 +203,7 @@ namespace SonarAnalyzer.Test.Extensions
         [TestMethod]
         public void GetBody_AccessorDeclaration_BodyBlock()
         {
-            var code = "class AClass { int AProperty { set { var x1; var x2; var x3; } } }";
+            var code = "class AClass { int AProperty { set { int i = 1; i++; i++; } } }";
             ExtensionsCS.GetBody(CSharpSyntaxTree.ParseText(code).Single<AccessorDeclarationSyntax>())
                 .Should().BeOfType<BlockSyntax>().Which.Statements.Should().HaveCount(3);
         }
@@ -218,7 +218,7 @@ namespace SonarAnalyzer.Test.Extensions
         [TestMethod]
         public void GetBody_LocalFunctionStatement_BodyBlock()
         {
-            var code = "class AClass { void AMethod() { int ALocalFunction() { var x1; var x2; var x3; return 42; } } }";
+            var code = "class AClass { void AMethod() { int ALocalFunction(int i) { i++; i++; i++; return i; } } }";
             ExtensionsCS.GetBody(CSharpSyntaxTree.ParseText(code).Single<LocalFunctionStatementSyntax>())
                 .Should().BeOfType<BlockSyntax>().Which.Statements.Should().HaveCount(4);
         }
