@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6618",
+"message":  "Use "string.Create" instead of "FormattableString".",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/Net6/S6618.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  27,
+"endLine":  9,
+"endColumn":  41
+}
+}
+}
+]
+}

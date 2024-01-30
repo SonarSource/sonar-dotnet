@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2612",
+"message":  "Make sure this permission is safe.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S2612.vb#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  9,
+"endLine":  13,
+"endColumn":  122
+}
+}
+},
+{
+"id":  "S2612",
+"message":  "Make sure this permission is safe.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S2612.vb#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  9,
+"endLine":  17,
+"endColumn":  127
+}
+}
+}
+]
+}
