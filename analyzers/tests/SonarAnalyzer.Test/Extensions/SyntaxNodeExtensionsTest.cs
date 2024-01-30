@@ -23,6 +23,7 @@ extern alias vbnet;
 
 using FluentAssertions.Extensions;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Operations;
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.CFG.Roslyn;
@@ -173,6 +174,40 @@ namespace SonarAnalyzer.Test.Extensions
             ExtensionsCS.GetDeclarationTypeName(SyntaxFactory.StructDeclaration("MyStruct")).Should().Be("struct");
 
         [TestMethod]
+        public void GetBody_FieldDeclaration()
+        {
+            ExtensionsCS.GetBody(SyntaxFactory.FieldDeclaration(SyntaxFactory.VariableDeclaration(SyntaxFactory.ParseTypeName("int")))).Should().BeNull();
+        }
+
+        [TestMethod]
+        public void GetBody_PropertyDeclaration_SingleAccessor()
+        {
+            var code = "class AClass { int APropertyWithGetOnly { get => 42; } }";
+            ExtensionsCS.GetBody(CSharpSyntaxTree.ParseText(code).Single<PropertyDeclarationSyntax>()).Should().BeNull();
+        }
+
+        [TestMethod]
+        public void GetBody_PropertyDeclaration_MultipleAccessors()
+        {
+            var code = "class AClass { int APropertyWithGetOnly { get => 42; set { } } }";
+            ExtensionsCS.GetBody(CSharpSyntaxTree.ParseText(code).Single<PropertyDeclarationSyntax>()).Should().BeNull();
+        }
+
+        [TestMethod]
+        public void GetBody_AccessorDeclaration_ArrowExpression()
+        {
+            var code = "class AClass { int APropertyWithGetOnly { get => 42; } }";
+            ExtensionsCS.GetBody(CSharpSyntaxTree.ParseText(code).Single<AccessorDeclarationSyntax>()).Should().BeNull();
+        }
+
+        [TestMethod]
+        public void GetBody_AccessorDeclaration_BodyBlock()
+        {
+            var code = "class AClass { int APropertyWithGetOnly { set { } } }";
+            ExtensionsCS.GetBody(CSharpSyntaxTree.ParseText(code).Single<AccessorDeclarationSyntax>()).Should().NotBeNull();
+        }
+
+        [TestMethod]
         public void CreateCfg_MethodDeclaration_ReturnsCfg_CS()
         {
             const string code = """
@@ -230,7 +265,7 @@ namespace SonarAnalyzer.Test.Extensions
             const string code = """
                 public class Sample
                 {
-                    private string field = null!;   // null! itself doens't have operation, and we can still generate CFG for it from the equals clause
+                    private string field = null!;   // null! itself doesn't have operation, and we can still generate CFG for it from the equals clause
                 }
                 """;
             CreateCfgCS<SyntaxCS.EqualsValueClauseSyntax>(code).Should().NotBeNull();
