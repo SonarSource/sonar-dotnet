@@ -203,8 +203,8 @@ namespace SonarAnalyzer.Test.Extensions
         [TestMethod]
         public void GetBody_AccessorDeclaration_BodyBlock()
         {
-            var code = "class AClass { int AProperty { set { } } }";
-            ExtensionsCS.GetBody(CSharpSyntaxTree.ParseText(code).Single<AccessorDeclarationSyntax>()).Should().NotBeNull();
+            var code = "class AClass { int AProperty { set { var x1; var x2; var x3; } } }";
+            ExtensionsCS.GetBody(CSharpSyntaxTree.ParseText(code).Single<AccessorDeclarationSyntax>()).Statements.Should().HaveCount(3);
         }
 
         [TestMethod]
@@ -217,8 +217,8 @@ namespace SonarAnalyzer.Test.Extensions
         [TestMethod]
         public void GetBody_LocalFunctionStatement_BodyBlock()
         {
-            var code = "class AClass { void AMethod() { int ALocalFunction() { return 42; } } }";
-            ExtensionsCS.GetBody(CSharpSyntaxTree.ParseText(code).Single<LocalFunctionStatementSyntax>()).Should().NotBeNull();
+            var code = "class AClass { void AMethod() { int ALocalFunction() { var x1; var x2; var x3; return 42; } } }";
+            ExtensionsCS.GetBody(CSharpSyntaxTree.ParseText(code).Single<LocalFunctionStatementSyntax>()).Statements.Should().HaveCount(4);
         }
 
         [TestMethod]
