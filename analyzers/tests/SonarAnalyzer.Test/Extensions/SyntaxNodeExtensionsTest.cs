@@ -182,28 +182,28 @@ namespace SonarAnalyzer.Test.Extensions
         [TestMethod]
         public void GetBody_PropertyDeclaration_SingleAccessor()
         {
-            var code = "class AClass { int APropertyWithGetOnly { get => 42; } }";
+            var code = "class AClass { int AProperty { get => 42; } }";
             ExtensionsCS.GetBody(CSharpSyntaxTree.ParseText(code).Single<PropertyDeclarationSyntax>()).Should().BeNull();
         }
 
         [TestMethod]
         public void GetBody_PropertyDeclaration_MultipleAccessors()
         {
-            var code = "class AClass { int APropertyWithGetOnly { get => 42; set { } } }";
+            var code = "class AClass { int AProperty { get => 42; set { } } }";
             ExtensionsCS.GetBody(CSharpSyntaxTree.ParseText(code).Single<PropertyDeclarationSyntax>()).Should().BeNull();
         }
 
         [TestMethod]
         public void GetBody_AccessorDeclaration_ArrowExpression()
         {
-            var code = "class AClass { int APropertyWithGetOnly { get => 42; } }";
+            var code = "class AClass { int AProperty { get => 42; } }";
             ExtensionsCS.GetBody(CSharpSyntaxTree.ParseText(code).Single<AccessorDeclarationSyntax>()).Should().BeNull();
         }
 
         [TestMethod]
         public void GetBody_AccessorDeclaration_BodyBlock()
         {
-            var code = "class AClass { int APropertyWithGetOnly { set { } } }";
+            var code = "class AClass { int AProperty { set { } } }";
             ExtensionsCS.GetBody(CSharpSyntaxTree.ParseText(code).Single<AccessorDeclarationSyntax>()).Should().NotBeNull();
         }
 
