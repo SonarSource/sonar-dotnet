@@ -34,24 +34,21 @@ internal sealed record IssueLocationPair(IssueLocation Actual, IssueLocation Exp
         {
             throw new InvalidOperationException("Something went horribly wrong. This is supposed to be called only for issues with the same key.");
         }
-        if (AssertionMessage() is { } message)
+        builder.Append("  Line ").Append(LineNumber);
+        if (!Actual?.IsPrimary ?? !Expected.IsPrimary)
         {
-            builder.Append("  Line ").Append(LineNumber);
-            if (!Actual?.IsPrimary ?? !Expected.IsPrimary)
-            {
-                builder.Append(" Secondary location");
-            }
-            builder.Append(": ").Append(message);
-            if (Actual?.RuleId is not null)
-            {
-                builder.Append(" Rule ").Append(Actual.RuleId);
-            }
-            if (Expected?.IssueId is not null)
-            {
-                builder.Append(" ID ").Append(Expected.IssueId);
-            }
-            builder.AppendLine();
+            builder.Append(" Secondary location");
         }
+        builder.Append(": ").Append(AssertionMessage());
+        if (Actual?.RuleId is not null)
+        {
+            builder.Append(" Rule ").Append(Actual.RuleId);
+        }
+        if (Expected?.IssueId is not null)
+        {
+            builder.Append(" ID ").Append(Expected.IssueId);
+        }
+        builder.AppendLine();
     }
 
     private string AssertionMessage()
