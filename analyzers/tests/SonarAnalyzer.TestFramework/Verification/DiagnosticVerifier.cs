@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Test.TestFramework
                 var sources = compilation.SyntaxTrees.ExceptExtraEmptyFile().ExceptRazorGeneratedFiles()
                     .Select(x => new FileContent(x))
                     .Concat((additionalSourceFiles ?? Array.Empty<string>()).Select(x => new FileContent(x)));
-                var diagnostics = GetAnalyzerDiagnostics(compilation, analyzers, checkMode, additionalFilePath, onlyDiagnostics).ToArray();
+                var diagnostics = DiagnosticsAndErrors(compilation, analyzers, checkMode, additionalFilePath, onlyDiagnostics).ToArray();
                 var expected = new CompilationIssues(compilation.LanguageVersionString(), sources);
                 VerifyNoExceptionThrown(diagnostics);
                 Compare(new(compilation.LanguageVersionString(), diagnostics), expected, false);
@@ -83,27 +83,22 @@ namespace SonarAnalyzer.Test.TestFramework
                                                  CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
                                                  string additionalFilePath = null,
                                                  string[] onlyDiagnostics = null) =>
-            GetDiagnosticsNoExceptions(compilation, analyzer, checkMode, additionalFilePath, onlyDiagnostics).Should().BeEmpty();
+            AnalyzerDiagnostics(compilation, analyzer, checkMode, additionalFilePath, onlyDiagnostics).Should().BeEmpty();
 
-        public static IEnumerable<Diagnostic> GetDiagnosticsNoExceptions(Compilation compilation,
-                                                                         DiagnosticAnalyzer analyzer,
-                                                                         CompilationErrorBehavior checkMode,
-                                                                         string additionalFilePath = null,
-                                                                         string[] onlyDiagnostics = null)
-        {
-            var ret = GetAnalyzerDiagnostics(compilation, new[] { analyzer }, checkMode, additionalFilePath, onlyDiagnostics);
-            VerifyNoExceptionThrown(ret);
-            return ret;
-        }
+        public static IEnumerable<Diagnostic> AnalyzerDiagnostics(Compilation compilation, DiagnosticAnalyzer analyzer, CompilationErrorBehavior checkMode, string additionalFilePath = null, string[] onlyDiagnostics = null) =>
+            AnalyzerDiagnostics(compilation, new[] { analyzer }, checkMode, additionalFilePath, onlyDiagnostics);
+
+        public static IEnumerable<Diagnostic> AnalyzerDiagnostics(Compilation compilation, DiagnosticAnalyzer[] analyzers, CompilationErrorBehavior checkMode, string additionalFilePath = null, string[] onlyDiagnostics = null) =>
+            VerifyNoExceptionThrown(DiagnosticsAndErrors(compilation, analyzers, checkMode, additionalFilePath, onlyDiagnostics));
 
         public static IEnumerable<Diagnostic> AnalyzerExceptions(Compilation compilation, DiagnosticAnalyzer analyzer) =>
-            GetAnalyzerDiagnostics(compilation, new[] { analyzer }, CompilationErrorBehavior.FailTest).Where(x => x.Id == AD0001);
+            DiagnosticsAndErrors(compilation, new[] { analyzer }, CompilationErrorBehavior.FailTest).Where(x => x.Id == AD0001);
 
-        public static ImmutableArray<Diagnostic> GetAnalyzerDiagnostics(Compilation compilation,
-                                                                        DiagnosticAnalyzer[] analyzer,
-                                                                        CompilationErrorBehavior checkMode,
-                                                                        string additionalFilePath = null,
-                                                                        string[] onlyDiagnostics = null)
+        private static ImmutableArray<Diagnostic> DiagnosticsAndErrors(Compilation compilation,
+                                                                       DiagnosticAnalyzer[] analyzer,
+                                                                       CompilationErrorBehavior checkMode,
+                                                                       string additionalFilePath = null,
+                                                                       string[] onlyDiagnostics = null)
         {
             onlyDiagnostics ??= Array.Empty<string>();
             var supportedDiagnostics = analyzer
@@ -183,8 +178,8 @@ namespace SonarAnalyzer.Test.TestFramework
             Compare(new(compilation.LanguageVersionString(), buildErrors), expected, true);
         }
 
-        public static void VerifyNoExceptionThrown(IEnumerable<Diagnostic> diagnostics) =>
-            diagnostics.Should().NotContain(d => d.Id == AD0001);
+        private static IEnumerable<Diagnostic> VerifyNoExceptionThrown(IEnumerable<Diagnostic> diagnostics) =>
+            diagnostics.Should().NotContain(d => d.Id == AD0001).And.Subject;
 
         private static IEnumerable<IssueLocationPair> MatchPairs(CompilationIssues actual, CompilationIssues expected)
         {

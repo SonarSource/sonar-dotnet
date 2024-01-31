@@ -118,7 +118,7 @@ internal class CodeFixVerifier
 
             compilation = project.GetCompilationAsync().Result;
             Document = document;
-            Diagnostics = DiagnosticVerifier.GetDiagnosticsNoExceptions(compilation, analyzer, CompilationErrorBehavior.Ignore).ToImmutableArray();
+            Diagnostics = DiagnosticVerifier.AnalyzerDiagnostics(compilation, analyzer, CompilationErrorBehavior.Ignore).ToImmutableArray();
             ActualCode = document.GetSyntaxRootAsync().Result.GetText().ToString();
         }
 
