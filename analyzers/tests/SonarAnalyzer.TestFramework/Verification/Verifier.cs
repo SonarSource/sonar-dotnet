@@ -183,13 +183,20 @@ namespace SonarAnalyzer.Test.TestFramework
                 MSBuildLocator.RegisterDefaults();
             }
 
+            Console.WriteLine("Visual studio instances: ");
+            foreach (var instance in MSBuildLocator.QueryVisualStudioInstances())
+            {
+                Console.WriteLine(instance.Name + " Version: " + instance.Version + "  MSBuildPath: " + instance.MSBuildPath + " Visual Studio Path: " + instance.VisualStudioRootPath);
+            }
+
             if (!razorSupportedFrameworks.Contains(builder.RazorFramework))
             {
                 throw new InvalidOperationException("Razor compilation is supported only for .NET 6 and .NET 7 frameworks.");
             }
 
             using var workspace = MSBuildWorkspace.Create();
-            workspace.WorkspaceFailed += (_, failure) => Console.WriteLine(failure.Diagnostic);
+            workspace.LoadMetadataForReferencedProjects = true;
+            workspace.WorkspaceFailed += (_, failure) => Console.WriteLine("Workspace operation failed: " + failure.Diagnostic);
 
             // Copy razor project directory and test case files to a temporary build location
             var tempPath = Path.Combine(Path.GetTempPath(), $"ut-razor-{Guid.NewGuid()}");
@@ -198,7 +205,7 @@ namespace SonarAnalyzer.Test.TestFramework
                 Directory.CreateDirectory(tempPath);
 
                 List<string> languages = new();
-                if (builder.ParseOptions != null && builder.ParseOptions.Any())
+                if (builder.ParseOptions.Any())
                 {
                     foreach (var parseOption in builder.ParseOptions)
                     {
@@ -241,7 +248,29 @@ namespace SonarAnalyzer.Test.TestFramework
                     destinationXml.Descendants("LangVersion").Single().Value = lang;
                     destinationXml.Save(csprojPath);
 
-                    yield return workspace.OpenProjectAsync(csprojPath).Result.GetCompilationAsync().Result;
+                    Process.Start("dotnet", $"restore {csprojPath}")!.WaitForExit();
+
+                    Console.WriteLine("Project file content");
+                    Console.WriteLine(File.ReadAllText(csprojPath));
+
+                    Console.WriteLine("Project file path: " + csprojPath);
+                    var openedProject = workspace.OpenProjectAsync(csprojPath).Result;
+
+
+
+                    Console.WriteLine("Writing metadata references for project: " + openedProject.Name);
+                    foreach (var metadataReference in openedProject.MetadataReferences)
+                    {
+                        Console.WriteLine("MetadataReference: " + metadataReference.Display);
+                    }
+
+                    Console.WriteLine("Writing diagnostics for project: " + openedProject.Name);
+                    foreach (var workspaceDiagnostic in workspace.Diagnostics)
+                    {
+                        Console.WriteLine("WorkspaceDiagnostic: " + workspaceDiagnostic.Message);
+                    }
+
+                    yield return openedProject.GetCompilationAsync().Result;
                 }
             }
             finally

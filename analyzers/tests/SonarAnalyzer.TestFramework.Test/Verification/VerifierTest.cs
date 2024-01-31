@@ -188,18 +188,20 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                 .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Unknown))
                 .VerifyNoIssueReported();
 
-        [Ignore("Revert after 9.19 release")]
         [DataTestMethod]
         [DataRow("net6.0")]
         [DataRow("net7.0")]
         public void Verify_Razor_WithFramework(string framework)
         {
-            var compilations = DummyWithLocation.AddPaths("Dummy.razor")
+            var compilation = DummyWithLocation.AddPaths("Dummy.razor")
                 .WithFramework(framework)
                 .Build()
-                .Compile(false);
+                .Compile(false)
+                .Single();
 
-            var reference = compilations.Single().ExternalReferences.First().Display;
+            Console.WriteLine(string.Join('\n', compilation.GetDiagnostics().Select(d => $"{d.Id} {d.GetMessage()} {d.Location.GetLineSpan()} {d.Location.GetLineSpan().Path}")));
+
+            var reference = compilation.ExternalReferences.First().Display;
             reference.Contains(framework).Should().BeTrue();
         }
 

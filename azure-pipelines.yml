@@ -251,6 +251,7 @@ stages:
 
       - powershell: |
           cd analyzers
+          & dotnet --info
           & dotnet test $(ProjectFilePath) -f $(FrameworkMoniker) -c $(BuildConfiguration) -l trx --results-directory $(UnitTestResultsPath) /p:AltCover=true,AltCoverForce=true,AltCoverVisibleBranches=true,AltCoverAssemblyFilter="Moq|Humanizer|AltCover|Microsoft.VisualStudio.TestPlatform.*|\.Test^",AltCoverPathFilter="SonarAnalyzer\.CFG\\ShimLayer|SonarAnalyzer\.ShimLayer\.CodeGeneration",AltCoverAttributeFilter="ExcludeFromCodeCoverage",AltCoverReport="$(CoveragePath)/coverage.$(CoverageArtifactName).xml"
         displayName: '.Net UTs'
         env:
