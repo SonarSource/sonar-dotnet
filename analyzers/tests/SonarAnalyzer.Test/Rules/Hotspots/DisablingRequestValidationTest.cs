@@ -20,7 +20,6 @@
 
 using System.Globalization;
 using System.IO;
-using System.Threading;
 using SonarAnalyzer.Test.Helpers;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
@@ -82,9 +81,7 @@ namespace SonarAnalyzer.Test.Rules
         [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\EdgeValues", "3.9", "5.6")]
         public void DisablingRequestValidation_CS_WebConfig_SubFolders(string rootDirectory, params string[] subFolders)
         {
-            List<Diagnostic> allDiagnostics;
             var compilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation();
-            var languageVersion = compilation.LanguageVersionString();
             var newCulture = (CultureInfo)Thread.CurrentThread.CurrentCulture.Clone();
             // decimal.TryParse() from the implementation might not recognize "1.2" under different culture
             newCulture.NumberFormat.NumberDecimalSeparator = ",";
@@ -95,20 +92,9 @@ namespace SonarAnalyzer.Test.Rules
             {
                 filesToAnalyze.Add(Path.Combine(rootDirectory, subFolder, WebConfig));
             }
-
-            allDiagnostics = DiagnosticVerifier.GetDiagnosticsNoExceptions(
-                compilation,
-                new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
-                CompilationErrorBehavior.Default,
-                additionalFilePath: AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, filesToAnalyze.ToArray())).ToList();
-            allDiagnostics.Should().NotBeEmpty();
-            var rootWebConfig = Path.Combine(rootDirectory, WebConfig);
-            DiagnosticVerifier.VerifyFile(rootWebConfig, allDiagnostics, languageVersion);
-            foreach (var subFolder in subFolders)
-            {
-                var subFolderWebConfig = Path.Combine(rootDirectory, subFolder, WebConfig);
-                DiagnosticVerifier.VerifyFile(subFolderWebConfig, allDiagnostics, languageVersion);
-            }
+            var analyzer = new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled);
+            var additionalFilePath = AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, filesToAnalyze.ToArray());
+            DiagnosticVerifier.Verify(compilation, analyzer, CompilationErrorBehavior.FailTest, additionalFilePath, null, filesToAnalyze.ToArray());
         }
 
         [TestMethod]
