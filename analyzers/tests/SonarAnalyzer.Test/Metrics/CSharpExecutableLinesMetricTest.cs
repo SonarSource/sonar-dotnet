@@ -1044,8 +1044,8 @@ class Program
                 .Compile(false)
                 .Single();
 
-            var syntaxTree = compilation.SyntaxTrees.Single(x => x.ToString().Contains(fileName));
-            var semanticModel = compilation.GetSemanticModel(syntaxTree);
+            var syntaxTree = compilation.Compilation.SyntaxTrees.Single(x => x.ToString().Contains(fileName));
+            var semanticModel = compilation.Compilation.GetSemanticModel(syntaxTree);
 
             var lineNumbers = Metrics.CSharp.CSharpExecutableLinesMetric.GetLineNumbers(syntaxTree, semanticModel);
             lineNumbers.Should().BeEquivalentTo(expectedExecutableLines);

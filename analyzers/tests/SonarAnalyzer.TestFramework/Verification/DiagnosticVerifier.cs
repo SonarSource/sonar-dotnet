@@ -33,59 +33,33 @@ namespace SonarAnalyzer.Test.TestFramework
             "BC36716" // VB12 does not support line continuation comments" i.e. a comment at the end of a multi-line statement.
         };
 
-        public static void VerifyExternalFile(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer, string fileName, string additionalFilePath) =>
-            Verify(compilation, new[] { diagnosticAnalyzer }, CompilationErrorBehavior.FailTest, new[] { new FileContent(fileName) }, additionalFilePath);
+        public static void VerifyExternalFile(Compilation compilation, DiagnosticAnalyzer analyzer, string externalFilePath, string additionalFilePath) =>
+            Verify(compilation, new[] { analyzer }, CompilationErrorBehavior.FailTest, additionalFilePath, null, new[] { externalFilePath });
 
         public static void Verify(
                 Compilation compilation,
-                DiagnosticAnalyzer diagnosticAnalyzer,
+                DiagnosticAnalyzer analyzer,
                 CompilationErrorBehavior checkMode,
                 string additionalFilePath = null,
-                string[] onlyDiagnostics = null) =>
-            Verify(compilation, new[] { diagnosticAnalyzer }, checkMode, additionalFilePath, onlyDiagnostics);
+                string[] onlyDiagnostics = null,
+                string[] additionalSourceFiles = null) =>
+            Verify(compilation, new[] { analyzer }, checkMode, additionalFilePath, onlyDiagnostics, additionalSourceFiles);
 
         public static void Verify(
                 Compilation compilation,
-                DiagnosticAnalyzer[] diagnosticAnalyzers,
+                DiagnosticAnalyzer[] analyzers,
                 CompilationErrorBehavior checkMode,
                 string additionalFilePath = null,
-                string[] onlyDiagnostics = null) =>
-            Verify(compilation, diagnosticAnalyzers, checkMode, compilation.SyntaxTrees.ExceptExtraEmptyFile().Select(x => new FileContent(x)), additionalFilePath, onlyDiagnostics);
-
-        public static void Verify(Compilation compilation,
-                                  DiagnosticAnalyzer diagnosticAnalyzer,
-                                  CompilationErrorBehavior checkMode,
-                                  SyntaxTree syntaxTree) =>
-            Verify(compilation, new[] { diagnosticAnalyzer }, checkMode, new[] { new FileContent(syntaxTree), });
-
-        public static void VerifyRazor(Compilation compilation,
-                                       DiagnosticAnalyzer[] diagnosticAnalyzers,
-                                       CompilationErrorBehavior checkMode,
-                                       string additionalFilePath,
-                                       string[] onlyDiagnostics,
-                                       IEnumerable<string> razorFiles,
-                                       IEnumerable<Snippet> razorSnippets) =>
-            Verify(
-                compilation,
-                diagnosticAnalyzers,
-                checkMode,
-                compilation.SyntaxTrees.ExceptExtraEmptyFile().ExceptRazorGeneratedFile().Select(x => new FileContent(x))
-                    .Concat(razorFiles.Select(x => new FileContent(x)))
-                    .Concat(razorSnippets.Select(x => new FileContent(x))),
-                additionalFilePath,
-                onlyDiagnostics);
-
-        private static void Verify(Compilation compilation,
-                                   DiagnosticAnalyzer[] diagnosticAnalyzers,
-                                   CompilationErrorBehavior checkMode,
-                                   IEnumerable<FileContent> sources,
-                                   string additionalFilePath = null,
-                                   string[] onlyDiagnostics = null)
+                string[] onlyDiagnostics = null,
+                string[] additionalSourceFiles = null)
         {
             SuppressionHandler.HookSuppression();
             try
             {
-                var diagnostics = GetAnalyzerDiagnostics(compilation, diagnosticAnalyzers, checkMode, additionalFilePath, onlyDiagnostics).ToArray();
+                var sources = compilation.SyntaxTrees.ExceptExtraEmptyFile().ExceptRazorGeneratedFiles()
+                    .Select(x => new FileContent(x))
+                    .Concat((additionalSourceFiles ?? Array.Empty<string>()).Select(x => new FileContent(x)));
+                var diagnostics = GetAnalyzerDiagnostics(compilation, analyzers, checkMode, additionalFilePath, onlyDiagnostics).ToArray();
                 var expectedIssues = sources.Select(x => x.ToExpectedIssueLocations()).ToArray();
                 VerifyNoExceptionThrown(diagnostics);
                 CompareActualToExpected(compilation.LanguageVersionString(), diagnostics, expectedIssues, false);
@@ -95,7 +69,7 @@ namespace SonarAnalyzer.Test.TestFramework
                 // method.
                 if (diagnostics.Any())
                 {
-                    SuppressionHandler.ExtensionMethodsCalledForAllDiagnostics(diagnosticAnalyzers).Should().BeTrue("The ReportIssue should be used instead of ReportDiagnostic");
+                    SuppressionHandler.ExtensionMethodsCalledForAllDiagnostics(analyzers).Should().BeTrue("The ReportIssue should be used instead of ReportDiagnostic");
                 }
             }
             finally
@@ -104,43 +78,35 @@ namespace SonarAnalyzer.Test.TestFramework
             }
         }
 
-        public static void VerifyFile(string path, IList<Diagnostic> allDiagnostics, string languageVersion)
-        {
-            var actualIssues = allDiagnostics.Where(x => x.Location.GetLineSpan().Path.EndsWith(path)).ToArray();
-            var fileSourceText = new FileContent(path);
-            var expectedIssueLocations = fileSourceText.ToExpectedIssueLocations();
-            CompareActualToExpected(languageVersion, actualIssues, new[] { expectedIssueLocations }, false);
-        }
-
         public static void VerifyNoIssueReported(Compilation compilation,
-                                                 DiagnosticAnalyzer diagnosticAnalyzer,
+                                                 DiagnosticAnalyzer analyzer,
                                                  CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
                                                  string additionalFilePath = null,
                                                  string[] onlyDiagnostics = null) =>
-            GetDiagnosticsNoExceptions(compilation, diagnosticAnalyzer, checkMode, additionalFilePath, onlyDiagnostics).Should().BeEmpty();
+            GetDiagnosticsNoExceptions(compilation, analyzer, checkMode, additionalFilePath, onlyDiagnostics).Should().BeEmpty();
 
         public static IEnumerable<Diagnostic> GetDiagnosticsNoExceptions(Compilation compilation,
-                                                                         DiagnosticAnalyzer diagnosticAnalyzer,
+                                                                         DiagnosticAnalyzer analyzer,
                                                                          CompilationErrorBehavior checkMode,
                                                                          string additionalFilePath = null,
                                                                          string[] onlyDiagnostics = null)
         {
-            var ret = GetAnalyzerDiagnostics(compilation, new[] { diagnosticAnalyzer }, checkMode, additionalFilePath, onlyDiagnostics);
+            var ret = GetAnalyzerDiagnostics(compilation, new[] { analyzer }, checkMode, additionalFilePath, onlyDiagnostics);
             VerifyNoExceptionThrown(ret);
             return ret;
         }
 
-        public static IEnumerable<Diagnostic> GetDiagnosticsIgnoreExceptions(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer) =>
-            GetAnalyzerDiagnostics(compilation, new[] { diagnosticAnalyzer }, CompilationErrorBehavior.FailTest);
+        public static IEnumerable<Diagnostic> GetDiagnosticsIgnoreExceptions(Compilation compilation, DiagnosticAnalyzer analyzer) =>
+            GetAnalyzerDiagnostics(compilation, new[] { analyzer }, CompilationErrorBehavior.FailTest);
 
         public static ImmutableArray<Diagnostic> GetAnalyzerDiagnostics(Compilation compilation,
-                                                                        DiagnosticAnalyzer[] diagnosticAnalyzers,
+                                                                        DiagnosticAnalyzer[] analyzer,
                                                                         CompilationErrorBehavior checkMode,
                                                                         string additionalFilePath = null,
                                                                         string[] onlyDiagnostics = null)
         {
             onlyDiagnostics ??= Array.Empty<string>();
-            var supportedDiagnostics = diagnosticAnalyzers
+            var supportedDiagnostics = analyzer
                 .SelectMany(x => x.SupportedDiagnostics.Select(d => d.Id))
                 .Concat(new[] { AnalyzerFailedDiagnosticId })
                 .Select(x => new KeyValuePair<string, ReportDiagnostic>(x, Severity(x)))
@@ -152,7 +118,7 @@ namespace SonarAnalyzer.Test.TestFramework
             var analyzerOptions = string.IsNullOrWhiteSpace(additionalFilePath) ? null : AnalysisScaffolding.CreateOptions(additionalFilePath);
             var diagnostics = compilation
                 .WithOptions(compilationOptions)
-                .WithAnalyzers(diagnosticAnalyzers.ToImmutableArray(), analyzerOptions)
+                .WithAnalyzers(analyzer.ToImmutableArray(), analyzerOptions)
                 .GetAllDiagnosticsAsync(default)
                 .Result;
 
@@ -224,16 +190,16 @@ namespace SonarAnalyzer.Test.TestFramework
         }
 
         private static IList<IssueLocation> ExpectedIssues(FileIssueLocations[] expectedIssuesPerFile, Location location) =>
-            location.SourceTree == null
-                ? expectedIssuesPerFile.SingleOrDefault(x => x.IssueLocations.Any())?.IssueLocations ?? new List<IssueLocation>() // Issue locations get removed, so the list could become empty
-                : expectedIssuesPerFile.Single(x => x.FileName == location.SourceTree.FilePath).IssueLocations;
+            location.GetLineSpan().Path is { } path
+                ? expectedIssuesPerFile.Single(x => x.FileName == path).IssueLocations
+                : expectedIssuesPerFile.SingleOrDefault(x => x.IssueLocations.Any())?.IssueLocations ?? new List<IssueLocation>(); // Issue locations get removed, so the list could become empty
 
         private static IEnumerable<SyntaxTree> ExceptExtraEmptyFile(this IEnumerable<SyntaxTree> syntaxTrees) =>
             syntaxTrees.Where(x =>
                 !x.FilePath.EndsWith("ExtraEmptyFile.g.cs", StringComparison.OrdinalIgnoreCase)
                 && !x.FilePath.EndsWith("ExtraEmptyFile.g.vbnet", StringComparison.OrdinalIgnoreCase));
 
-        private static IEnumerable<SyntaxTree> ExceptRazorGeneratedFile(this IEnumerable<SyntaxTree> syntaxTrees) =>
+        private static IEnumerable<SyntaxTree> ExceptRazorGeneratedFiles(this IEnumerable<SyntaxTree> syntaxTrees) =>
             syntaxTrees.Where(x =>
                 !x.FilePath.EndsWith("razor.g.cs", StringComparison.OrdinalIgnoreCase)
                 && !x.FilePath.EndsWith("cshtml.g.cs", StringComparison.OrdinalIgnoreCase));
