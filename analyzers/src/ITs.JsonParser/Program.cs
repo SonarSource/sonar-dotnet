@@ -1,24 +1,30 @@
-﻿using CommandLine;
+﻿using System.IO;
+using CommandLine;
 using ITs.JsonParser;
 
 Parser.Default.ParseArguments<CommandLineOptions>(args).MapResult(Execute, errs => 1);
 
 int Execute(CommandLineOptions options)
 {
-    WriteLineColor("Processing analyzer results", ConsoleColor.Yellow);
-    NewIssueReports();
-    ShowDiffResults(options.Project, options.RuleId);
+    ConsoleHelper.WriteLineColor("Processing analyzer results", ConsoleColor.Yellow);
+    ParseIssues();
+    ShowDiff(options.Project, options.RuleId);
     return 0;
 }
 
-// TODO: Reimplement this functionality from the powershell function.
-void NewIssueReports()
+void ParseIssues()
 {
-    Console.WriteLine("Normalizing the SARIF reports");
+    var sw = Stopwatch.StartNew();
+    ConsoleHelper.WriteLineColor("Normalizing the SARIF reports", ConsoleColor.Yellow);
+    var here = Directory.GetCurrentDirectory();
+    var inputRoot = Path.Combine(here, "output");
+    var outputRoot = Path.Combine(here, "actual");
+    IssueParser.Execute(inputRoot, outputRoot);
+    ConsoleHelper.WriteLineColor($"Normalized the SARIF reports in '{sw.Elapsed}'", ConsoleColor.Yellow);
 }
 
 // TODO: Reimplement this functionality from the powershell function.
-void ShowDiffResults(string project, string ruleId)
+void ShowDiff(string project, string ruleId)
 {
     // Placeholder, to be deleted
     if (project is not null)
@@ -29,12 +35,4 @@ void ShowDiffResults(string project, string ruleId)
     {
         Console.WriteLine($"Target Rule: {ruleId}");
     }
-}
-
-void WriteLineColor(string value, ConsoleColor color)
-{
-    var before = Console.ForegroundColor;
-    Console.ForegroundColor = color;
-    Console.WriteLine(value);
-    Console.ForegroundColor = before;
 }

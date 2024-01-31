@@ -15,8 +15,6 @@ param
 Set-StrictMode -version 2.0
 $ErrorActionPreference = "Stop"
 
-. .\create-issue-reports.ps1
-
 if ($PSBoundParameters['Verbose'] -Or $PSBoundParameters['Debug']) {
     $global:DebugPreference = "Continue"
 }
@@ -247,6 +245,7 @@ try {
     Push-Location $PSScriptRoot
     Test-FileExists "..\packaging\binaries\SonarAnalyzer.dll"
     Test-FileExists "..\packaging\binaries\SonarAnalyzer.CFG.dll"
+    Test-FileExists "..\packaging\binaries\ITs.JsonParser\ITs.JsonParser.exe"
 
     Write-Header "Initializing the environment"
     Initialize-ActualFolder
@@ -286,15 +285,6 @@ try {
     Invoke-JsonParser
 
     # TODO: Migrate all of the remaining logic to JsonParser
-    Write-Host "Normalizing the SARIF reports"
-    $sarifTimer = [system.diagnostics.stopwatch]::StartNew()
-
-    # Normalize & overwrite all *.json SARIF files found under the "actual" folder
-    Get-ChildItem output -filter *.json -recurse | Foreach-Object { New-IssueReports $_.FullName }
-
-    $sarifTimerElapsed = $sarifTimer.Elapsed.TotalSeconds
-    Write-Debug "Normalized the SARIF reports in '${sarifTimerElapsed}'"
-
     Write-Host "Checking for differences..."
     $diffTimer = [system.diagnostics.stopwatch]::StartNew()
     Show-DiffResults

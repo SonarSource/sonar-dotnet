@@ -1,0 +1,3 @@
+# This project expects to be run from "sonar-dotnet/analyzers/its".
+# Feel free to configure your local launchSettings.json.
+launchSettings.json
