@@ -241,6 +241,11 @@ stages:
             TestResultsArtifactName: 'DotNetTestResultsTestFramework'
             ProjectFilePath: 'tests\SonarAnalyzer.TestFramework.Test\SonarAnalyzer.TestFramework.Test.csproj'
             FrameworkMoniker: 'net7.0-windows'
+          ITs.JsonParser:
+            CoverageArtifactName: 'ITs.JsonParserCoverage'
+            TestResultsArtifactName: 'ITs.JsonParserResults'
+            ProjectFilePath: 'tests\ITs.JsonParser.Test\ITs.JsonParser.Test.csproj'
+            FrameworkMoniker: 'net8.0'
 
       steps:
       - task: DownloadPipelineArtifact@2

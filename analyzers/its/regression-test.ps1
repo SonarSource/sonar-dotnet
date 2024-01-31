@@ -228,13 +228,8 @@ function Show-DiffResults() {
 
 function Invoke-JsonParser()
 {
-    $jsonParser = Join-Path $PSScriptRoot "..\src\ITs.JsonParser\"
-    $arguments = @(
-        "run"
-        "--project"
-        $jsonParser
-        "--" # separates 'dotnet run' arguments from the command-line arguments of the program.
-    )
+    $jsonParser = Join-Path $PSScriptRoot "..\packaging\binaries\ITs.JsonParser\ITs.JsonParser.exe"
+    $arguments = @(" ")
     if ($ruleId){
         $arguments += "--rule"
         $arguments += $ruleId
@@ -243,7 +238,7 @@ function Invoke-JsonParser()
         $arguments += "--project"
         $arguments += $project
     }
-    Start-Process dotnet -ArgumentList $arguments -NoNewWindow -Wait
+    Start-Process $jsonParser -ArgumentList $arguments -NoNewWindow -Wait
 }
 
 try {
