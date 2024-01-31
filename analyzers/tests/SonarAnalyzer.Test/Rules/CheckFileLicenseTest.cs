@@ -176,9 +176,13 @@ namespace SonarAnalyzer.Test.Rules
         public void CheckFileLicense_WhenEmptyFile_ShouldBeNonCompliant_CS()
         {
             Action action = () => Builder(SingleLineHeader).AddPaths("CheckFileLicense_EmptyFile.cs").Verify();
-            action.Should().Throw<UnexpectedDiagnosticException>().WithMessage(
-                "CSharp*: Unexpected primary issue on line 1, span (0,0)-(0,0) with message 'Add or update the header of this file.'." + Environment.NewLine
-                + "See output to see all actual diagnostics raised on the file");
+            action.Should().Throw<AssertFailedException>().WithMessage("""
+                There are differences for CSharp7 CheckFileLicense_EmptyFile.Concurrent.cs:
+                  Line 1: Unexpected issue 'Add or update the header of this file.' Rule S1451
+
+                There are differences for CSharp7 CheckFileLicense_EmptyFile.cs:
+                  Line 1: Unexpected issue 'Add or update the header of this file.' Rule S1451
+                """);
         }
 
         [TestMethod]

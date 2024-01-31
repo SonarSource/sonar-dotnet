@@ -140,13 +140,13 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
         public void Verify_RazorWithAssociatedCS() =>
             DummyCS.AddPaths(WriteFile("File.razor", """<p @bind="pValue">Dynamic content</p>"""))
                 .AddPaths(WriteFile("File.razor.cs", """public partial class File { string pValue = "The value bound"; int a = 42;  }"""))
-                .Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>();
+                .Invoking(x => x.Verify()).Should().Throw<AssertFailedException>();
 
         [TestMethod]
         public void Verify_RazorWithUnrelatedCS() =>
             DummyCS.AddPaths(WriteFile("File.razor", """<p @bind="pValue">Dynamic content</p>"""))
                 .AddPaths(WriteFile("SomeSource.cs", """class SomeSource { int a = 42; }"""))
-                .Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>();
+                .Invoking(x => x.Verify()).Should().Throw<AssertFailedException>();
 
         [TestMethod]
         public void Verify_RazorWithUnrelatedIssues() =>
@@ -160,7 +160,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                         private bool c = true;
                     }
                     """))
-                .Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>();
+                .Invoking(x => x.Verify()).Should().Throw<AssertFailedException>();
 
         [DataTestMethod]
         [DataRow("Dummy.SecondaryLocation.razor")]
@@ -299,116 +299,139 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
 
         [TestMethod]
         public void Verify_RaiseExpectedIssues_CS() =>
-            WithSnippetCS(
-@"public class Sample
-{
-    private int a = 42;     // Noncompliant {{Message for SDummy}}
-    private int b = 42;     // Noncompliant
-    private bool c = true;
-}").Invoking(x => x.Verify()).Should().NotThrow();
+            WithSnippetCS("""
+                public class Sample
+                {
+                    private int a = 42;     // Noncompliant {{Message for SDummy}}
+                    private int b = 42;     // Noncompliant
+                    private bool c = true;
+                }
+                """).Invoking(x => x.Verify()).Should().NotThrow();
 
         [TestMethod]
         public void Verify_RaiseExpectedIssues_VB() =>
-            WithSnippetVB(
-@"Public Class Sample
-    Private A As Integer = 42   ' Noncompliant {{Message for SDummy}}
-    Private B As Integer = 42   ' Noncompliant
-    Private C As Boolean = True
-End Class").Invoking(x => x.Verify()).Should().NotThrow();
+            WithSnippetVB("""
+                Public Class Sample
+                    Private A As Integer = 42   ' Noncompliant {{Message for SDummy}}
+                    Private B As Integer = 42   ' Noncompliant
+                    Private C As Boolean = True
+                End Class
+                """).Invoking(x => x.Verify()).Should().NotThrow();
 
         [TestMethod]
         public void Verify_RaiseUnexpectedIssues_CS() =>
-            WithSnippetCS(
-@"public class Sample
-{
-    private int a = 42;     // FP
-    private int b = 42;     // FP
-    private bool c = true;
-}").Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>().WithMessage("CSharp7: Unexpected primary issue on line 3, span (2,20)-(2,22) with message 'Message for SDummy'*");
+            WithSnippetCS("""
+                public class Sample
+                {
+                    private int a = 42;     // FP
+                    private int b = 42;     // FP
+                    private bool c = true;
+                }
+                """).Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage("""
+                There are differences for CSharp7 File.Concurrent.cs:
+                  Line 3: Unexpected issue 'Message for SDummy' Rule SDummy
+                  Line 4: Unexpected issue 'Message for SDummy' Rule SDummy
+
+                There are differences for CSharp7 File.cs:
+                  Line 3: Unexpected issue 'Message for SDummy' Rule SDummy
+                  Line 4: Unexpected issue 'Message for SDummy' Rule SDummy
+                """);
 
         [TestMethod]
         public void Verify_RaiseUnexpectedIssues_VB() =>
-            WithSnippetVB(
-@"Public Class Sample
-    Private A As Integer = 42   ' FP
-    Private B As Integer = 42   ' FP
-    Private C As Boolean = True
-End Class").Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>().WithMessage("VisualBasic12: Unexpected primary issue on line 2, span (1,27)-(1,29) with message 'Message for SDummy'*");
+            WithSnippetVB("""
+                Public Class Sample
+                    Private A As Integer = 42   ' FP
+                    Private B As Integer = 42   ' FP
+                    Private C As Boolean = True
+                End Class
+                """).Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage("""
+                There are differences for VisualBasic12 File.Concurrent.vb:
+                  Line 2: Unexpected issue 'Message for SDummy' Rule SDummy
+                  Line 3: Unexpected issue 'Message for SDummy' Rule SDummy
+
+                There are differences for VisualBasic12 File.vb:
+                  Line 2: Unexpected issue 'Message for SDummy' Rule SDummy
+                  Line 3: Unexpected issue 'Message for SDummy' Rule SDummy
+                """);
 
         [TestMethod]
         public void Verify_MissingExpectedIssues() =>
-            WithSnippetCS(
-@"public class Sample
-{
-    private bool a = true;   // Noncompliant - FN
-    private bool b = true;   // Noncompliant - FN
-    private bool c = true;
-}").Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage(
-@"CSharp7: Issue(s) expected but not raised in file(s):
-File: File.cs
-Line: 3, Type: primary, Id: ''
-Line: 4, Type: primary, Id: ''
+            WithSnippetCS("""
+                public class Sample
+                {
+                    private bool a = true;   // Noncompliant - FN
+                    private bool b = true;   // Noncompliant - FN
+                    private bool c = true;
+                }
+                """).Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage("""
+                There are differences for CSharp7 File.Concurrent.cs:
+                  Line 3: Missing expected issue
+                  Line 4: Missing expected issue
 
-File: File.Concurrent.cs
-Line: 3, Type: primary, Id: ''
-Line: 4, Type: primary, Id: ''
-");
+                There are differences for CSharp7 File.cs:
+                  Line 3: Missing expected issue
+                  Line 4: Missing expected issue
+
+                """);
 
         [TestMethod]
         public void Verify_TwoAnalyzers() =>
-            WithSnippetCS(
-@"public class Sample
-{
-    private int a = 42;     // Noncompliant {{Message for SDummy}}
-                            // Noncompliant@-1
-    private int b = 42;     // Noncompliant
-                            // Noncompliant@-1
-    private bool c = true;
-}")
+            WithSnippetCS("""
+                public class Sample
+                {
+                    private int a = 42;     // Noncompliant {{Message for SDummy}}
+                                            // Noncompliant@-1
+                    private int b = 42;     // Noncompliant
+                                            // Noncompliant@-1
+                    private bool c = true;
+                }
+                """)
             .AddAnalyzer(() => new DummyAnalyzerCS()) // Duplicate
             .Invoking(x => x.Verify()).Should().NotThrow();
 
         [TestMethod]
         public void Verify_TwoPaths() =>
-            WithSnippetCS(
-@"public class First
-{
-    private bool a = true;     // Noncompliant - FN in File.cs
-}")
-            .AddPaths(WriteFile("Second.cs",
-@"public class Second
-{
-    private bool a = true;     // Noncompliant - FN in Second.cs
-}"))
+            WithSnippetCS("""
+                public class First
+                {
+                    private bool a = true;     // Noncompliant - FN in File.cs
+                }
+                """)
+            .AddPaths(WriteFile("Second.cs", """
+                public class Second
+                {
+                    private bool a = true;     // Noncompliant - FN in Second.cs
+                }
+                """))
             .WithConcurrentAnalysis(false)
-            .Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage(
-@"CSharp7: Issue(s) expected but not raised in file(s):
-File: File.cs
-Line: 3, Type: primary, Id: ''
+            .Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage("""
+                There are differences for CSharp7 File.cs:
+                  Line 3: Missing expected issue
 
-File: Second.cs
-Line: 3, Type: primary, Id: ''
-");
+                There are differences for CSharp7 Second.cs:
+                  Line 3: Missing expected issue
+                """);
 
         [TestMethod]
         public void Verify_AutogenerateConcurrentFiles()
         {
             var builder = WithSnippetCS("// Noncompliant - FN");
             // Concurrent analysis by-default automatically generates concurrent files - File.Concurrent.cs
-            builder.Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage(
-    @"CSharp7: Issue(s) expected but not raised in file(s):
-File: File.cs
-Line: 1, Type: primary, Id: ''
+            builder.Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage("""
+                There are differences for CSharp7 File.Concurrent.cs:
+                  Line 1: Missing expected issue
 
-File: File.Concurrent.cs
-Line: 1, Type: primary, Id: ''
-");
+                There are differences for CSharp7 File.cs:
+                  Line 1: Missing expected issue
+
+                """);
             // When AutogenerateConcurrentFiles is turned off, only the provided snippet is analyzed
-            builder.WithAutogenerateConcurrentFiles(false).Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage(
-    @"CSharp7: Issue(s) expected but not raised in file(s):
-File: File.cs
-Line: 1, Type: primary, Id: ''
-");
+            builder.WithAutogenerateConcurrentFiles(false).Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage("""
+                There are differences for CSharp7 File.cs:
+                  Line 1: Missing expected issue
+
+                """);
         }
 
         [TestMethod]
@@ -416,28 +439,34 @@ Line: 1, Type: primary, Id: ''
         {
             var builder = new VerifierBuilder<DoNotWriteToStandardOutput>() // Rule with scope Main
                 .AddSnippet("public class Sample { public void Main() { System.Console.WriteLine(); } }");
-            builder.Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>();
+            builder.Invoking(x => x.Verify()).Should().Throw<AssertFailedException>();
             builder.AddTestReference().Invoking(x => x.Verify()).Should().NotThrow("Project references should be recognized as Test code.");
         }
 
         [TestMethod]
         public void Verify_ParseOptions()
         {
-            var builder = WithSnippetCS(
-@"public class Sample
-{
-    private System.Exception ex = new(); // C# 9 target-typed new
-}");
+            var builder = WithSnippetCS("""
+                public class Sample
+                {
+                    private System.Exception ex = new(); // C# 9 target-typed new
+                }
+                """);
             builder.WithOptions(ParseOptionsHelper.FromCSharp9).Invoking(x => x.Verify()).Should().NotThrow();
-            builder.WithOptions(ParseOptionsHelper.BeforeCSharp9).Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>()
-                .WithMessage("CSharp5: Unexpected build error [CS8026]: Feature 'target-typed object creation' is not available in C# 5. Please use language version 9.0 or greater. on line 3");
+            builder.WithOptions(ParseOptionsHelper.BeforeCSharp9).Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage("""
+                There are differences for CSharp5 File.Concurrent.cs:
+                  Line 3: Unexpected issue 'Feature 'target-typed object creation' is not available in C# 5. Please use language version 9.0 or greater.' Rule CS8026
+
+                There are differences for CSharp5 File.cs:
+                  Line 3: Unexpected issue 'Feature 'target-typed object creation' is not available in C# 5. Please use language version 9.0 or greater.' Rule CS8026
+                """);
         }
 
         [TestMethod]
         public void Verify_BasePath()
         {
             DummyCS.AddPaths("Nonexistent.cs").Invoking(x => x.Verify()).Should().Throw<FileNotFoundException>("This file should not exist in TestCases directory.");
-            DummyCS.AddPaths("Verifier.BasePathAssertFails.cs").Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>("File should be found in TestCases directory.");
+            DummyCS.AddPaths("Verifier.BasePathAssertFails.cs").Invoking(x => x.Verify()).Should().Throw<AssertFailedException>("File should be found in TestCases directory.");
             DummyCS.WithBasePath("Verifier").AddPaths("Verifier.BasePath.cs").Invoking(x => x.Verify()).Should().NotThrow();
         }
 
@@ -445,18 +474,36 @@ Line: 1, Type: primary, Id: ''
         public void Verify_ErrorBehavior()
         {
             var builder = WithSnippetCS("undefined");
-            builder.Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>()
-                .WithMessage("CSharp7: Unexpected build error [CS8805]: Program using top-level statements must be an executable. on line 1");
-            builder.WithErrorBehavior(CompilationErrorBehavior.FailTest).Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>()
-                .WithMessage("CSharp7: Unexpected build error [CS8805]: Program using top-level statements must be an executable. on line 1");
+            builder.Invoking(x => x.Verify()).Should().Throw<AssertFailedException>()
+                .WithMessage("""
+                There are differences for CSharp7 File.Concurrent.cs:
+                  Line 1: Unexpected issue 'A namespace cannot directly contain members such as fields, methods or statements' Rule CS0116
+
+                There are differences for CSharp7 File.cs:
+                  Line 1: Unexpected issue 'Program using top-level statements must be an executable.' Rule CS8805
+                  Line 1: Unexpected issue 'Feature 'top-level statements' is not available in C# 7.0. Please use language version 9.0 or greater.' Rule CS8107
+                  Line 1: Unexpected issue 'The type or namespace name 'undefined' could not be found (are you missing a using directive or an assembly reference?)' Rule CS0246
+                  Line 1: Unexpected issue 'Identifier expected' Rule CS1001
+                  Line 1: Unexpected issue '; expected' Rule CS1002
+                """);
+            builder.WithErrorBehavior(CompilationErrorBehavior.FailTest).Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage("""
+                There are differences for CSharp7 File.Concurrent.cs:
+                  Line 1: Unexpected issue 'A namespace cannot directly contain members such as fields, methods or statements' Rule CS0116
+
+                There are differences for CSharp7 File.cs:
+                  Line 1: Unexpected issue 'Program using top-level statements must be an executable.' Rule CS8805
+                  Line 1: Unexpected issue 'Feature 'top-level statements' is not available in C# 7.0. Please use language version 9.0 or greater.' Rule CS8107
+                  Line 1: Unexpected issue 'The type or namespace name 'undefined' could not be found (are you missing a using directive or an assembly reference?)' Rule CS0246
+                  Line 1: Unexpected issue 'Identifier expected' Rule CS1001
+                  Line 1: Unexpected issue '; expected' Rule CS1002
+                """);
             builder.WithErrorBehavior(CompilationErrorBehavior.Ignore).Invoking(x => x.Verify()).Should().NotThrow();
         }
 
         [TestMethod]
         public void Verify_OnlyDiagnostics()
         {
-            var builder = new VerifierBuilder<SymbolicExecutionRunner>().AddPaths(WriteFile("File.cs",
-                """
+            var builder = new VerifierBuilder<SymbolicExecutionRunner>().AddPaths(WriteFile("File.cs", """
                 public class Sample
                 {
                     public void Method()
@@ -471,10 +518,24 @@ Line: 1, Type: primary, Id: ''
                     }
                 }
                 """));
-            builder.Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>().WithMessage(
-@"CSharp7: Unexpected primary issue on line 6, span (5,12)-(5,13) with message 'Change this condition so that it does not always evaluate to 'True'. Some code paths are unreachable.'.*");
-            builder.WithOnlyDiagnostics(ConditionEvaluatesToConstant.S2589).Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>().WithMessage(
-@"CSharp7: Unexpected primary issue on line 10, span (9,12)-(9,13) with message 'Change this condition so that it does not always evaluate to 'True'.'*");
+            builder.Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage("""
+                There are differences for CSharp7 File.Concurrent.cs:
+                  Line 6: Unexpected issue 'Change this condition so that it does not always evaluate to 'True'. Some code paths are unreachable.' Rule S2583
+                  Line 9 Secondary location: Unexpected issue ''*
+                  Line 10: Unexpected issue 'Change this condition so that it does not always evaluate to 'True'.' Rule S2589
+
+                There are differences for CSharp7 File.cs:
+                  Line 6: Unexpected issue 'Change this condition so that it does not always evaluate to 'True'. Some code paths are unreachable.' Rule S2583
+                  Line 9 Secondary location: Unexpected issue ''*
+                  Line 10: Unexpected issue 'Change this condition so that it does not always evaluate to 'True'.' Rule S2589
+                """);
+            builder.WithOnlyDiagnostics(ConditionEvaluatesToConstant.S2589).Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage("""
+                There are differences for CSharp7 File.Concurrent.cs:
+                  Line 10: Unexpected issue 'Change this condition so that it does not always evaluate to 'True'.' Rule S2589
+
+                There are differences for CSharp7 File.cs:
+                  Line 10: Unexpected issue 'Change this condition so that it does not always evaluate to 'True'.' Rule S2589
+                """);
             builder.WithOnlyDiagnostics(NullPointerDereference.S2259).Invoking(x => x.Verify()).Should().NotThrow();
         }
 
@@ -482,8 +543,11 @@ Line: 1, Type: primary, Id: ''
         public void Verify_NonConcurrentAnalysis()
         {
             var builder = WithSnippetCS("var topLevelStatement = true;").WithOptions(ParseOptionsHelper.FromCSharp9).WithOutputKind(OutputKind.ConsoleApplication);
-            builder.Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>("Default Verifier behavior duplicates the source file.")
-                .WithMessage("CSharp9: Unexpected build error [CS0825]: The contextual keyword 'var' may only appear within a local variable declaration or in script code on line 1");
+            builder.Invoking(x => x.Verify()).Should().Throw<AssertFailedException>("Default Verifier behavior duplicates the source file.").WithMessage("""
+                There are differences for CSharp9 File.Concurrent.cs:
+                  Line 1: Unexpected issue 'The contextual keyword 'var' may only appear within a local variable declaration or in script code' Rule CS0825
+                  Line 1: Unexpected issue 'A namespace cannot directly contain members such as fields, methods or statements' Rule CS0116
+                """);
             builder.WithConcurrentAnalysis(false).Invoking(x => x.Verify()).Should().NotThrow();
         }
 
@@ -493,108 +557,121 @@ Line: 1, Type: primary, Id: ''
             var builder = WithSnippetCS("var topLevelStatement = true;").WithOptions(ParseOptionsHelper.FromCSharp9);
             builder.WithTopLevelStatements().Invoking(x => x.Verify()).Should().NotThrow();
             builder.WithOutputKind(OutputKind.ConsoleApplication).WithConcurrentAnalysis(false).Invoking(x => x.Verify()).Should().NotThrow();
-            builder.Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>()
-                .WithMessage("CSharp9: Unexpected build error [CS8805]: Program using top-level statements must be an executable. on line 1");
+            builder.Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage("""
+                There are differences for CSharp9 File.Concurrent.cs:
+                  Line 1: Unexpected issue 'The contextual keyword 'var' may only appear within a local variable declaration or in script code' Rule CS0825
+                  Line 1: Unexpected issue 'A namespace cannot directly contain members such as fields, methods or statements' Rule CS0116
+
+                There are differences for CSharp9 File.cs:
+                  Line 1: Unexpected issue 'Program using top-level statements must be an executable.' Rule CS8805
+                """);
         }
 
         [TestMethod]
         public void Verify_Snippets() =>
             DummyCS.AddSnippet("public class First { } // Noncompliant [first]  - not raised")
                 .AddSnippet("public class Second { } // Noncompliant [second] - not raised")
-                .Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage(
-@"CSharp7: Issue(s) expected but not raised in file(s):
-File: snippet1.cs
-Line: 1, Type: primary, Id: 'first'
+                .Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage("""
+                    There are differences for CSharp7 snippet1.cs:
+                      Line 1: Missing expected issue ID first
 
-File: snippet2.cs
-Line: 1, Type: primary, Id: 'second'
-");
+                    There are differences for CSharp7 snippet2.cs:
+                      Line 1: Missing expected issue ID second
+                    """);
 
         [TestMethod]
         public void VerifyCodeFix_FixExpected_CS()
         {
-            var originalPath = WriteFile("File.cs",
-@"public class Sample
-{
-    private int a = 0;     // Noncompliant
-    private int b = 0;     // Noncompliant
-    private bool c = true;
-}");
-            var fixedPath = WriteFile("File.Fixed.cs",
-@"public class Sample
-{
-    private int a = default;     // Fixed
-    private int b = default;     // Fixed
-    private bool c = true;
-}");
+            var originalPath = WriteFile("File.cs", """
+                public class Sample
+                {
+                    private int a = 0;     // Noncompliant
+                    private int b = 0;     // Noncompliant
+                    private bool c = true;
+                }
+                """);
+            var fixedPath = WriteFile("File.Fixed.cs", """
+                public class Sample
+                {
+                    private int a = default;     // Fixed
+                    private int b = default;     // Fixed
+                    private bool c = true;
+                }
+                """);
             DummyCS.AddPaths(originalPath).WithCodeFix<DummyCodeFixCS>().WithCodeFixedPaths(fixedPath).Invoking(x => x.VerifyCodeFix()).Should().NotThrow();
         }
 
         [TestMethod]
         public void VerifyCodeFix_FixExpected_VB()
         {
-            var originalPath = WriteFile("File.vb",
-@"Public Class Sample
-    Private A As Integer = 42   ' Noncompliant
-    Private B As Integer = 42   ' Noncompliant
-    Private C As Boolean = True
-End Class");
-            var fixedPath = WriteFile("File.Fixed.vb",
-@"Public Class Sample
-    Private A As Integer = Nothing   ' Fixed
-    Private B As Integer = Nothing   ' Fixed
-    Private C As Boolean = True
-End Class");
+            var originalPath = WriteFile("File.vb", """
+                Public Class Sample
+                    Private A As Integer = 42   ' Noncompliant
+                    Private B As Integer = 42   ' Noncompliant
+                    Private C As Boolean = True
+                End Class
+                """);
+            var fixedPath = WriteFile("File.Fixed.vb", """
+                Public Class Sample
+                    Private A As Integer = Nothing   ' Fixed
+                    Private B As Integer = Nothing   ' Fixed
+                    Private C As Boolean = True
+                End Class
+                """);
             DummyVB.AddPaths(originalPath).WithCodeFix<DummyCodeFixVB>().WithCodeFixedPaths(fixedPath).Invoking(x => x.VerifyCodeFix()).Should().NotThrow();
         }
 
         [TestMethod]
         public void VerifyCodeFix_NotFixed_CS()
         {
-            var originalPath = WriteFile("File.cs",
-@"public class Sample
-{
-    private int a = 0;     // Noncompliant
-    private int b = 0;     // Noncompliant
-    private bool c = true;
-}");
-            DummyCS.AddPaths(originalPath).WithCodeFix<DummyCodeFixCS>().WithCodeFixedPaths(originalPath).Invoking(x => x.VerifyCodeFix()).Should().Throw<AssertFailedException>().WithMessage(
-@"Expected * to be*
-""public class Sample
-{
-    private int a = 0;     // Noncompliant
-    private int b = 0;     // Noncompliant
-    private bool c = true;
-}"" with a length of 136 because VerifyWhileDocumentChanges updates the document until all issues are fixed, even if the fix itself creates a new issue again. Language: CSharp7, but*
-""public class Sample
-{
-    private int a = default;     // Fixed
-    private int b = default;     // Fixed
-    private bool c = true;
-}"" has a length of 134, differs near ""def"" (index 42).");
+            var originalPath = WriteFile("File.cs", """
+                public class Sample
+                {
+                    private int a = 0;     // Noncompliant
+                    private int b = 0;     // Noncompliant
+                    private bool c = true;
+                }
+                """);
+            DummyCS.AddPaths(originalPath).WithCodeFix<DummyCodeFixCS>().WithCodeFixedPaths(originalPath).Invoking(x => x.VerifyCodeFix()).Should().Throw<AssertFailedException>().WithMessage("""
+                Expected * to be*
+                "public class Sample
+                {
+                    private int a = 0;     // Noncompliant
+                    private int b = 0;     // Noncompliant
+                    private bool c = true;
+                }" with a length of 136 because VerifyWhileDocumentChanges updates the document until all issues are fixed, even if the fix itself creates a new issue again. Language: CSharp7, but*
+                "public class Sample
+                {
+                    private int a = default;     // Fixed
+                    private int b = default;     // Fixed
+                    private bool c = true;
+                }" has a length of 134, differs near "def" (index 42).
+                """);
         }
 
         [TestMethod]
         public void VerifyCodeFix_NotFixed_VB()
         {
-            var originalPath = WriteFile("File.vb",
-@"Public Class Sample
-    Private A As Integer = 42   ' Noncompliant
-    Private B As Integer = 42   ' Noncompliant
-    Private C As Boolean = True
-End Class");
-            DummyVB.AddPaths(originalPath).WithCodeFix<DummyCodeFixVB>().WithCodeFixedPaths(originalPath).Invoking(x => x.VerifyCodeFix()).Should().Throw<AssertFailedException>().WithMessage(
-@"Expected * to be*
-""Public Class Sample
-    Private A As Integer = 42   ' Noncompliant
-    Private B As Integer = 42   ' Noncompliant
-    Private C As Boolean = True
-End Class"" with a length of 155 because VerifyWhileDocumentChanges updates the document until all issues are fixed, even if the fix itself creates a new issue again. Language: VisualBasic12, but*
-""Public Class Sample
-    Private A As Integer = Nothing   ' Fixed
-    Private B As Integer = Nothing   ' Fixed
-    Private C As Boolean = True
-End Class"" has a length of 151, differs near ""Not"" (index 47).");
+            var originalPath = WriteFile("File.vb", """
+                Public Class Sample
+                    Private A As Integer = 42   ' Noncompliant
+                    Private B As Integer = 42   ' Noncompliant
+                    Private C As Boolean = True
+                End Class
+                """);
+            DummyVB.AddPaths(originalPath).WithCodeFix<DummyCodeFixVB>().WithCodeFixedPaths(originalPath).Invoking(x => x.VerifyCodeFix()).Should().Throw<AssertFailedException>().WithMessage("""
+                Expected * to be*
+                "Public Class Sample
+                    Private A As Integer = 42   ' Noncompliant
+                    Private B As Integer = 42   ' Noncompliant
+                    Private C As Boolean = True
+                End Class" with a length of 155 because VerifyWhileDocumentChanges updates the document until all issues are fixed, even if the fix itself creates a new issue again. Language: VisualBasic12, but*
+                "Public Class Sample
+                    Private A As Integer = Nothing   ' Fixed
+                    Private B As Integer = Nothing   ' Fixed
+                    Private C As Boolean = True
+                End Class" has a length of 151, differs near "Not" (index 47).
+                """);
         }
 
         [TestMethod]
@@ -603,11 +680,12 @@ End Class"" has a length of 151, differs near ""Not"" (index 47).");
 
         [TestMethod]
         public void VerifyNoIssueReported_WithIssues_Throws() =>
-            WithSnippetCS(
-@"public class Sample
-{
-    private int a = 42;     // This will raise an issue
-}").Invoking(x => x.VerifyNoIssueReported()).Should().Throw<AssertFailedException>();
+            WithSnippetCS("""
+                public class Sample
+                {
+                    private int a = 42;     // This will raise an issue
+                }
+                """).Invoking(x => x.VerifyNoIssueReported()).Should().Throw<AssertFailedException>();
 
         [TestMethod]
         public void Verify_ConcurrentAnalysis_FileEndingWithComment_CS() =>

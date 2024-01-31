@@ -41,14 +41,14 @@ namespace SonarAnalyzer.Test.Rules
         public void MarkAssemblyWithClsCompliantAttributeNoncompliant_CS()
         {
             Action action = () => builderCS.AddPaths(@"MarkAssemblyWithClsCompliantAttributeNoncompliant.cs").Verify();
-            action.Should().Throw<UnexpectedDiagnosticException>().WithMessage("*Provide a 'CLSCompliant' attribute for assembly 'project0'.*");
+            action.Should().Throw<AssertFailedException>().WithMessage("*Provide a 'CLSCompliant' attribute for assembly 'project0'.*");
         }
 
         [TestMethod]
         public void MarkAssemblyWithClsCompliantAttributeNoncompliant_VB()
         {
             Action action = () => builderVB.AddPaths(@"MarkAssemblyWithClsCompliantAttributeNoncompliant.vb").Verify();
-            action.Should().Throw<UnexpectedDiagnosticException>().WithMessage("*Provide a 'CLSCompliant' attribute for assembly 'project0'.*");
+            action.Should().Throw<AssertFailedException>().WithMessage("*Provide a 'CLSCompliant' attribute for assembly 'project0'.*");
         }
     }
 }
