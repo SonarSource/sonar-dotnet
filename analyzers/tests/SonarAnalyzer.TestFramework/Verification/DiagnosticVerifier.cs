@@ -60,9 +60,9 @@ namespace SonarAnalyzer.Test.TestFramework
                     .Select(x => new FileContent(x))
                     .Concat((additionalSourceFiles ?? Array.Empty<string>()).Select(x => new FileContent(x)));
                 var diagnostics = GetAnalyzerDiagnostics(compilation, analyzers, checkMode, additionalFilePath, onlyDiagnostics).ToArray();
-                var expectedIssues = sources.Select(x => x.ToExpectedIssueLocations()).ToArray();
+                var expected = new CompilationIssues(compilation.LanguageVersionString(), sources);
                 VerifyNoExceptionThrown(diagnostics);
-                CompareActualToExpected(compilation.LanguageVersionString(), diagnostics, expectedIssues, false);
+                Compare(new(compilation.LanguageVersionString(), diagnostics), expected, false);
 
                 // When there are no diagnostics reported from the test (for example the FileLines analyzer
                 // does not report in each call to Verifier.VerifyAnalyzer) we skip the check for the extension
@@ -141,58 +141,27 @@ namespace SonarAnalyzer.Test.TestFramework
             }
         }
 
-        private static void CompareActualToExpected(string languageVersion, Diagnostic[] diagnostics, FileIssueLocations[] expectedIssuesPerFile, bool compareIdToMessage)
+        private static void Compare(CompilationIssues actual, CompilationIssues expected, bool compareIdToMessage)
         {
-            var actualIssues = new CompilationIssues(languageVersion, diagnostics);
-            actualIssues.Dump();
-
-            // ToDo: Throw this away
-            foreach (var diagnostic in diagnostics.OrderBy(x => x.Location.SourceSpan.Start))
+            var assertionMessages = new StringBuilder();
+            foreach (var filePairs in MatchPairs(actual, expected).GroupBy(x => x.FilePath).OrderBy(x => x.Key))
             {
-                var expectedIssues = ExpectedIssues(expectedIssuesPerFile, diagnostic.Location);
-                var issueId = VerifyPrimaryIssue(languageVersion,
-                    expectedIssues,
-                    issue => issue.IsPrimary,
-                    diagnostic.Location,
-                    compareIdToMessage ? diagnostic.Id : diagnostic.GetMessage(),
-                    compareIdToMessage
-                        ? $"{languageVersion}: Unexpected build error [{diagnostic.Id}]: {diagnostic.GetMessage()} on line {diagnostic.Location.GetLineNumberToReport()}"
-                        : null);
-
-                var secondaryLocations = diagnostic.AdditionalLocations
-                    .Select((_, i) => diagnostic.GetSecondaryLocation(i))
-                    .OrderBy(x => x.Location.GetLineNumberToReport())
-                    .ThenBy(x => x.Location.GetLineSpan().StartLinePosition.Character);
-
-                foreach (var secondaryLocation in secondaryLocations)
+                assertionMessages.AppendLine($"There are differences for {actual.LanguageVersion} {filePairs.Key}:");
+                foreach (var pair in filePairs.OrderBy(x => x.LineNumber).ThenBy(x => x.Start))
                 {
-                    var expectedIssuesSecondaryLocation = ExpectedIssues(expectedIssuesPerFile, secondaryLocation.Location);
-                    VerifySecondaryIssue(languageVersion,
-                        expectedIssuesSecondaryLocation,
-                        issue => issue.IssueId == issueId && !issue.IsPrimary,
-                        secondaryLocation.Location,
-                        secondaryLocation.Message,
-                        issueId);
+                    pair.AppendAssertionMessage(assertionMessages);
                 }
+                assertionMessages.AppendLine();
             }
-
-            if (expectedIssuesPerFile.Any(x => x.IssueLocations.Any()))
+            if (assertionMessages.Length == 0)
             {
-                var issuesString = new StringBuilder();
-                foreach (var fileWithIssues in expectedIssuesPerFile.Where(x => x.IssueLocations.Any()).OrderBy(x => x.IssueLocations.First().Start))
-                {
-                    issuesString.Append($"{Environment.NewLine}File: {fileWithIssues.FileName}");
-                    var expectedIssuesDescription = fileWithIssues.IssueLocations.Select(i => $"{Environment.NewLine}Line: {i.LineNumber}, Type: {IssueType(i.IsPrimary)}, Id: '{i.IssueId}'");
-                    issuesString.AppendLine(expectedIssuesDescription.JoinStr(string.Empty));
-                }
-                Execute.Assertion.FailWith($"{languageVersion}: Issue(s) expected but not raised in file(s):{issuesString}");
+                actual.Dump();
+            }
+            else
+            {
+                Execute.Assertion.FailWith(assertionMessages.ToString().Replace("{", "{{").Replace("}", "}}"));    // Replacing { and } to avoid invalid format for string.Format
             }
         }
-
-        private static IList<IssueLocation> ExpectedIssues(FileIssueLocations[] expectedIssuesPerFile, Location location) =>
-            location.GetLineSpan().Path is { } path
-                ? expectedIssuesPerFile.Single(x => x.FileName == path).IssueLocations
-                : expectedIssuesPerFile.SingleOrDefault(x => x.IssueLocations.Any())?.IssueLocations ?? new List<IssueLocation>(); // Issue locations get removed, so the list could become empty
 
         private static IEnumerable<SyntaxTree> ExceptExtraEmptyFile(this IEnumerable<SyntaxTree> syntaxTrees) =>
             syntaxTrees.Where(x =>
@@ -206,87 +175,44 @@ namespace SonarAnalyzer.Test.TestFramework
 
         private static void VerifyBuildErrors(ImmutableArray<Diagnostic> diagnostics, Compilation compilation)
         {
-            var buildErrors = GetBuildErrors(diagnostics).ToArray();
-
-            var expectedBuildErrors = compilation.SyntaxTrees
-                                                 .ExceptExtraEmptyFile()
-                                                 .Select(x => new FileIssueLocations(x.FilePath, IssueLocationCollector.GetExpectedBuildErrors(x.FilePath, x.GetText().Lines).ToList()))
-                                                 .ToArray();
-
-            CompareActualToExpected(compilation.LanguageVersionString(), buildErrors, expectedBuildErrors, true);
+            var buildErrors = diagnostics.Where(x => x.Severity == DiagnosticSeverity.Error && (x.Id.StartsWith("CS") || x.Id.StartsWith("BC")) && !BuildErrorsToIgnore.Contains(x.Id)).ToArray();
+            var expected = new CompilationIssues(compilation.LanguageVersionString(), compilation.SyntaxTrees.SelectMany(x => IssueLocationCollector.GetExpectedBuildErrors(x.FilePath, x.GetText().Lines).ToList()));
+            Compare(new(compilation.LanguageVersionString(), buildErrors), expected, true);
         }
-
-        private static IEnumerable<Diagnostic> GetBuildErrors(IEnumerable<Diagnostic> diagnostics) =>
-            diagnostics.Where(d => d.Severity == DiagnosticSeverity.Error
-                && (d.Id.StartsWith("CS") || d.Id.StartsWith("BC"))
-                && !BuildErrorsToIgnore.Contains(d.Id));
 
         public static void VerifyNoExceptionThrown(IEnumerable<Diagnostic> diagnostics) =>
             diagnostics.Should().NotContain(d => d.Id == AnalyzerFailedDiagnosticId);
 
-        private static string VerifyPrimaryIssue(string languageVersion, IList<IssueLocation> expectedIssues, Func<IssueLocation, bool> issueFilter,
-            Location location, string message, string extraInfo) =>
-            VerifyIssue(languageVersion, expectedIssues, issueFilter, location, message, extraInfo, true, null);
-
-        private static void VerifySecondaryIssue(string languageVersion, IList<IssueLocation> expectedIssues, Func<IssueLocation, bool> issueFilter,
-            Location location, string message, string issueId) =>
-            VerifyIssue(languageVersion, expectedIssues, issueFilter, location, message, null, false, issueId);
-
-        private static string VerifyIssue(string languageVersion,
-                                          ICollection<IssueLocation> expectedIssues,
-                                          Func<IssueLocation, bool> issueFilter,
-                                          Location location,
-                                          string message,
-                                          string extraInfo,
-                                          bool isPrimary,
-                                          string primaryIssueId)
+        private static IEnumerable<IssueLocationPair> MatchPairs(CompilationIssues actual, CompilationIssues expected)
         {
-            var lineNumber = location.GetLineNumberToReport();
-            var expectedIssue = expectedIssues
-                .Where(issueFilter)
-                .OrderBy(x => x.Start == null ? 0 : Math.Abs(location.GetLineSpan().StartLinePosition.Character - x.Start.Value))
-                .ThenBy(x => x.Message == message ? 0 : 1)  // Prefer issue with explicit matching message when possible. There can be more with different messages
-                .FirstOrDefault(issue => issue.LineNumber == lineNumber);
-            var issueType = IssueType(isPrimary);
-
-            if (expectedIssue == null)
+            var ret = new List<IssueLocationPair>();
+            foreach (var key in actual.UniqueKeys())
             {
-                var issueId = primaryIssueId == null ? "" : $" [{primaryIssueId}]";
-                var seeOutputMessage = $"{Environment.NewLine}See output to see all actual diagnostics raised on the file";
-                var lineSpan = location.GetLineSpan().Span.ToString();
-                var exceptionMessage = string.IsNullOrEmpty(extraInfo)
-                    ? $"{languageVersion}: Unexpected {issueType} issue{issueId} on line {lineNumber}, span {lineSpan} with message '{message}'.{seeOutputMessage}"
-                    : extraInfo;
-                throw new UnexpectedDiagnosticException(location, exceptionMessage);
+                ret.AddRange(MatchDifferences(actual.Remove(key), expected.Remove(key)));
             }
-
-            if (expectedIssue.Message != null && expectedIssue.Message != message)
-            {
-                throw new UnexpectedDiagnosticException(location,
-$@"{languageVersion}: Expected {issueType} message on line {lineNumber} does not match actual message.
-Expected: '{expectedIssue.Message}'
-Actual  : '{message}'");
-            }
-
-            var diagnosticStart = location.GetLineSpan().StartLinePosition.Character;
-
-            if (expectedIssue.Start.HasValue && expectedIssue.Start != diagnosticStart)
-            {
-                throw new UnexpectedDiagnosticException(location,
-                    $"{languageVersion}: Expected {issueType} issue on line {lineNumber} to start on column {expectedIssue.Start} but got column {diagnosticStart}.");
-            }
-
-            if (expectedIssue.Length.HasValue && expectedIssue.Length != location.SourceSpan.Length)
-            {
-                throw new UnexpectedDiagnosticException(location,
-                    $"{languageVersion}: Expected {issueType} issue on line {lineNumber} to have a length of {expectedIssue.Length} but got a length of {location.SourceSpan.Length}.");
-            }
-
-            expectedIssues.Remove(expectedIssue);
-            return expectedIssue.IssueId;
+            ret.AddRange(expected.Select(x => new IssueLocationPair(null, x)));
+            return ret;
         }
 
-        private static string IssueType(bool isPrimary) =>
-            isPrimary ? "primary" : "secondary";
+        private static IEnumerable<IssueLocationPair> MatchDifferences(List<IssueLocation> actualIssues, List<IssueLocation> expectedIssues)
+        {
+            foreach (var actual in actualIssues.ToArray())  // First round removes all perfect matches, so we don't mismatch possible perfect match by imperfect one on the same line.
+            {
+                if (expectedIssues.Remove(actual))
+                {
+                    actualIssues.Remove(actual);
+                }
+            }
+            foreach (var actual in actualIssues)
+            {
+                var expected = expectedIssues.OrderBy(x => Math.Abs(actual.Start ?? 0 - x.Start ?? 0)).ThenBy(x => Math.Abs(actual.Length ?? 0 - x.Length ?? 0)).FirstOrDefault();
+                expectedIssues.Remove(expected);
+                yield return new(actual, expected); // expected can be null
+            }
+            foreach (var expected in expectedIssues)
+            {
+                yield return new(null, expected);
+            }
+        }
     }
 }

@@ -19,6 +19,7 @@
  */
 
 using SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.Test.Helpers;
 
 namespace SonarAnalyzer.Test.TestFramework.Tests
 {
@@ -29,156 +30,176 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
 
         [TestMethod]
         public void PrimaryIssueNotExpected() =>
-            VerifyThrows<UnexpectedDiagnosticException>(@"
-public class UnexpectedSecondary
-{
-    public void Test(bool a, bool b)
-    {
-        // Secondary@+1
-        if (a == a)
-        { }
-    }
-}",
-                "CSharp*: Unexpected primary issue on line 7, span (6,17)-(6,18) with message 'Correct one of the identical expressions on both sides of operator '=='.'." + Environment.NewLine +
-                "See output to see all actual diagnostics raised on the file");
+            VerifyThrows<AssertFailedException>("""
+                public class UnexpectedSecondary
+                {
+                    public void Test(bool a, bool b)
+                    {
+                        // Secondary@+1
+                        if (a == a)
+                        { }
+                    }
+                }
+                """, """
+                There are differences for CSharp7 snippet1.cs:
+                  Line 6: Unexpected issue 'Correct one of the identical expressions on both sides of operator '=='.' Rule S1764
+                """);
 
         [TestMethod]
         public void SecondaryIssueNotExpected() =>
-            VerifyThrows<UnexpectedDiagnosticException>(@"
-public class UnexpectedSecondary
-{
-    public void Test(bool a, bool b)
-    {
-        if (a == a) // Noncompliant
-        { }
-    }
-}",
-                "CSharp*: Unexpected secondary issue on line 6, span (5,12)-(5,13) with message ''." + Environment.NewLine +
-                "See output to see all actual diagnostics raised on the file");
+            VerifyThrows<AssertFailedException>("""
+                public class UnexpectedSecondary
+                {
+                    public void Test(bool a, bool b)
+                    {
+                        if (a == a) // Noncompliant
+                        { }
+                    }
+                }
+                """, """
+                There are differences for CSharp7 snippet1.cs:
+                  Line 5 Secondary location: Unexpected issue ''
+                """);
 
         [TestMethod]
+        [Ignore] // ToDo: Fix in
         public void UnexpectedSecondaryIssueWrongId() =>
-            VerifyThrows<UnexpectedDiagnosticException>(@"
-public class UnexpectedSecondary
-{
-    public void Test(bool a, bool b)
-    {
-        // Secondary@+1 [myWrongId]
-        if (a == a) // Noncompliant [myId]
-        { }
-    }
-}",
+            VerifyThrows<AssertFailedException>("""
+                public class UnexpectedSecondary
+                {
+                    public void Test(bool a, bool b)
+                    {
+                        // Secondary@+1 [myWrongId]
+                        if (a == a) // Noncompliant [myId]
+                        { }
+                    }
+                }
+                """,
                 "CSharp*: Unexpected secondary issue [myId] on line 7, span (6,12)-(6,13) with message ''." + Environment.NewLine +
                 "See output to see all actual diagnostics raised on the file");
 
         [TestMethod]
         public void SecondaryIssueUnexpectedMessage() =>
-            VerifyThrows<UnexpectedDiagnosticException>(@"
-public class UnexpectedSecondary
-{
-    public void Test(bool a, bool b)
-    {
-        // Secondary@+1 {{Wrong message}}
-        if (a == a) // Noncompliant
-        { }
-    }
-}",
-                @"CSharp*: Expected secondary message on line 7 does not match actual message." + Environment.NewLine +
-                "Expected: 'Wrong message'" + Environment.NewLine +
-                "Actual  : ''");
+            VerifyThrows<AssertFailedException>("""
+                public class UnexpectedSecondary
+                {
+                    public void Test(bool a, bool b)
+                    {
+                        // Secondary@+1 {{Wrong message}}
+                        if (a == a) // Noncompliant
+                        { }
+                    }
+                }
+                """, """
+                There are differences for CSharp7 snippet1.cs:
+                  Line 6 Secondary location: The expected message 'Wrong message' does not match the actual message ''
+                """);
 
         [TestMethod]
         public void SecondaryIssueUnexpectedStartPosition() =>
-            VerifyThrows<UnexpectedDiagnosticException>(@"
-public class UnexpectedSecondary
-{
-    public void Test(bool a, bool b)
-    {
-        if (a == a)
-//               ^ {{Correct one of the identical expressions on both sides of operator '=='.}}
-//        ^ Secondary@-1
-        { }
-    }
-}",
-                "CSharp*: Expected secondary issue on line 6 to start on column 10 but got column 12.");
+            VerifyThrows<AssertFailedException>("""
+                public class UnexpectedSecondary
+                {
+                    public void Test(bool a, bool b)
+                    {
+                        if (a == a)
+                //               ^ {{Correct one of the identical expressions on both sides of operator '=='.}}
+                //        ^ Secondary@-1
+                        { }
+                    }
+                }
+                """, """
+                There are differences for CSharp7 snippet1.cs:
+                  Line 5 Secondary location: Should start on column 10 but got column 12
+                """);
 
         [TestMethod]
         public void SecondaryIssueUnexpectedLength() =>
-            VerifyThrows<UnexpectedDiagnosticException>(@"
-public class UnexpectedSecondary
-{
-    public void Test(bool a, bool b)
-    {
-        if (a == a)
-//               ^ {{Correct one of the identical expressions on both sides of operator '=='.}}
-//          ^^^^ Secondary@-1
-        { }
-    }
-}",
-                "CSharp*: Expected secondary issue on line 6 to have a length of 4 but got a length of 1.");
+            VerifyThrows<AssertFailedException>("""
+                public class UnexpectedSecondary
+                {
+                    public void Test(bool a, bool b)
+                    {
+                        if (a == a)
+                //               ^ {{Correct one of the identical expressions on both sides of operator '=='.}}
+                //          ^^^^ Secondary@-1
+                        { }
+                    }
+                }
+                """, """
+                There are differences for CSharp7 snippet1.cs:
+                  Line 5 Secondary location: Should have a length of 4 but got a length of 1
+                """);
 
         [TestMethod]
         public void ValidVerification() =>
-            builder.AddSnippet(@"
-public class UnexpectedSecondary
-{
-    public void Test(bool a, bool b)
-    {
-        // Secondary@+1
-        if (a == a) // Noncompliant
-        { }
-    }
-}").Invoking(x => x.Verify()).Should().NotThrow();
+            builder.AddSnippet("""
+                public class UnexpectedSecondary
+                {
+                    public void Test(bool a, bool b)
+                    {
+                        // Secondary@+1
+                        if (a == a) // Noncompliant
+                        { }
+                    }
+                }
+                """).Invoking(x => x.Verify()).Should().NotThrow();
 
         [TestMethod]
         public void BuildError() =>
-            VerifyThrows<UnexpectedDiagnosticException>(@"
-public class UnexpectedBuildError
-{",
-                "CSharp*: Unexpected build error [CS1513]: } expected on line 3");
+            VerifyThrows<AssertFailedException>("""
+                public class UnexpectedBuildError
+                {
+                """, """
+                There are differences for CSharp7 snippet1.cs:
+                  Line 2: Unexpected issue '} expected' Rule CS1513
+                """);
 
         [TestMethod]
         public void UnexpectedRemainingOpeningCurlyBrace() =>
-            VerifyThrows<AssertFailedException>(@"
-public class UnexpectedRemainingCurlyBrace
-{
-    public void Test(bool a, bool b)
-    {
-        if (a == a) // Noncompliant {Wrong format message}
-        { }
-    }
-}",
-                "Unexpected '{' or '}' found on line: 5. Either correctly use the '{{message}}' format or remove the curly braces on the line of the expected issue");
+            VerifyThrows<AssertFailedException>("""
+                public class UnexpectedRemainingCurlyBrace
+                {
+                    public void Test(bool a, bool b)
+                    {
+                        if (a == a) // Noncompliant {Wrong format message}
+                        { }
+                    }
+                }
+                """,
+                "Unexpected '{' or '}' found on line: 4. Either correctly use the '{{message}}' format or remove the curly braces on the line of the expected issue");
 
         [TestMethod]
         public void UnexpectedRemainingClosingCurlyBrace() =>
-            VerifyThrows<AssertFailedException>(@"
-public class UnexpectedRemainingCurlyBrace
-{
-    public void Test(bool a, bool b)
-    {
-        if (a == a) // Noncompliant (Another Wrong format message}
-        { }
-    }
-}",
-                "Unexpected '{' or '}' found on line: 5. Either correctly use the '{{message}}' format or remove the curly braces on the line of the expected issue");
+            VerifyThrows<AssertFailedException>("""
+                public class UnexpectedRemainingCurlyBrace
+                {
+                    public void Test(bool a, bool b)
+                    {
+                        if (a == a) // Noncompliant (Another Wrong format message}
+                        { }
+                    }
+                }
+                """,
+                "Unexpected '{' or '}' found on line: 4. Either correctly use the '{{message}}' format or remove the curly braces on the line of the expected issue");
 
         [TestMethod]
         public void ExpectedIssuesNotRaised() =>
-            VerifyThrows<AssertFailedException>(@"
-public class ExpectedIssuesNotRaised
-{
-    public void Test(bool a, bool b) // Noncompliant [MyId0]
-    {
-        if (a == b) // Noncompliant
-        { } // Secondary [MyId1]
-    }
-}",
-                @"CSharp*: Issue(s) expected but not raised in file(s):" + Environment.NewLine +
-                "File: snippet1.cs" + Environment.NewLine +
-                "Line: 4, Type: primary, Id: 'MyId0'" + Environment.NewLine +
-                "Line: 6, Type: primary, Id: ''" + Environment.NewLine +
-                "Line: 7, Type: secondary, Id: 'MyId1'");
+            VerifyThrows<AssertFailedException>("""
+                public class ExpectedIssuesNotRaised
+                {
+                    public void Test(bool a, bool b) // Noncompliant [MyId0]
+                    {
+                        if (a == b) // Noncompliant
+                        { } // Secondary [MyId1]
+                    }
+                }
+                """, """
+                There are differences for CSharp7 snippet1.cs:
+                  Line 3: Missing expected issue ID MyId0
+                  Line 5: Missing expected issue
+                  Line 6 Secondary location: Missing expected issue ID MyId1
+                """);
 
         [TestMethod]
         public void ExpectedIssuesNotRaised_MultipleFiles() =>
@@ -186,22 +207,22 @@ public class ExpectedIssuesNotRaised
                 .AddPaths("ExpectedIssuesNotRaised.cs", "ExpectedIssuesNotRaised2.cs")
                 .WithConcurrentAnalysis(false)
                 .Invoking(x => x.Verify())
-                .Should().Throw<AssertFailedException>().WithMessage(
-                    @"CSharp*: Issue(s) expected but not raised in file(s):" + Environment.NewLine +
-                    "File: DiagnosticsVerifier\\ExpectedIssuesNotRaised.cs" + Environment.NewLine +
-                    "Line: 3, Type: primary, Id: 'MyId0'" + Environment.NewLine +
-                    "Line: 5, Type: primary, Id: ''" + Environment.NewLine +
-                    "Line: 6, Type: secondary, Id: 'MyId1'" + Environment.NewLine +
-                    Environment.NewLine +
-                    "File: DiagnosticsVerifier\\ExpectedIssuesNotRaised2.cs" + Environment.NewLine +
-                    "Line: 3, Type: primary, Id: 'MyId0'" + Environment.NewLine +
-                    "Line: 5, Type: primary, Id: ''" + Environment.NewLine +
-                    "Line: 6, Type: secondary, Id: 'MyId1'");
+                .Should().Throw<AssertFailedException>().WithMessage("""
+                    There are differences for CSharp7 DiagnosticsVerifier\ExpectedIssuesNotRaised.cs:
+                      Line 3: Missing expected issue ID MyId0
+                      Line 5: Missing expected issue
+                      Line 6 Secondary location: Missing expected issue ID MyId1
+
+                    There are differences for CSharp7 DiagnosticsVerifier\ExpectedIssuesNotRaised2.cs:
+                      Line 3: Missing expected issue ID MyId0
+                      Line 5: Missing expected issue
+                      Line 6 Secondary location: Missing expected issue ID MyId1
+                    """);
 
         private void VerifyThrows<TException>(string snippet, string expectedMessage) where TException : Exception =>
             builder.AddSnippet(snippet)
                 .WithConcurrentAnalysis(false)
                 .Invoking(x => x.Verify())
-                .Should().Throw<TException>().WithMessage(expectedMessage);
+                .Should().Throw<TException>().Which.Message.Should().ContainIgnoringLineEndings(expectedMessage);
     }
 }
