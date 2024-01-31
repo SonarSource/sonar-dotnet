@@ -241,6 +241,9 @@ namespace SonarAnalyzer.Test.TestFramework
                     destinationXml.Descendants("LangVersion").Single().Value = lang;
                     destinationXml.Save(csprojPath);
 
+                    // To avoid reference loading issues, ensure that the project references are restored before compilation.
+                    Process.Start(Environment.GetEnvironmentVariable("MSBUILD_PATH"), $"restore {csprojPath}").WaitForExit();
+
                     yield return workspace.OpenProjectAsync(csprojPath).Result.GetCompilationAsync().Result;
                 }
             }
