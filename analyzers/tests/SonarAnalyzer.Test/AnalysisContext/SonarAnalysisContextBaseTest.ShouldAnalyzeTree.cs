@@ -198,8 +198,7 @@ public partial class SonarAnalysisContextBaseTest
            .AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false)
            .AddSnippet(content, "Foo.cs")
            .GetCompilation();
-
-        DiagnosticVerifier.Verify(compilation, new CS.EmptyStatement(), CompilationErrorBehavior.FailTest, compilation.SyntaxTrees.First());
+        DiagnosticVerifier.Verify(compilation, new CS.EmptyStatement(), CompilationErrorBehavior.FailTest);
     }
 
     [TestMethod]
