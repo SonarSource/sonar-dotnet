@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Test.TestFramework
                 var diagnostics = GetAnalyzerDiagnostics(compilation, analyzers, checkMode, additionalFilePath, onlyDiagnostics).ToArray();
                 var expected = new CompilationIssues(compilation.LanguageVersionString(), sources);
                 VerifyNoExceptionThrown(diagnostics);
-                CompareActualToExpected(diagnostics, expected, false);
+                Compare(new(compilation.LanguageVersionString(), diagnostics), expected, false);
 
                 // When there are no diagnostics reported from the test (for example the FileLines analyzer
                 // does not report in each call to Verifier.VerifyAnalyzer) we skip the check for the extension
@@ -141,24 +141,17 @@ namespace SonarAnalyzer.Test.TestFramework
             }
         }
 
-        private static void CompareActualToExpected(Diagnostic[] diagnostics, CompilationIssues expected, bool compareIdToMessage)
+        private static void Compare(CompilationIssues actual, CompilationIssues expected, bool compareIdToMessage)
         {
-            var actual = new CompilationIssues(expected.LanguageVersion, diagnostics);
-            var pairs = MatchPairs(actual, expected);
             var assertionMessages = new StringBuilder();
-            string previousFilePath = null;
-            foreach (var pair in pairs.OrderBy(x => x.FilePath).ThenBy(x => x.LineNumber).ThenBy(x => x.Start))
+            foreach (var filePairs in MatchPairs(actual, expected).GroupBy(x => x.FilePath).OrderBy(x => x.Key))
             {
-                if (previousFilePath != pair.FilePath)
+                assertionMessages.AppendLine($"There are differences for {actual.LanguageVersion} {filePairs.Key}:");
+                foreach (var pair in filePairs.OrderBy(x => x.LineNumber).ThenBy(x => x.Start))
                 {
-                    if (assertionMessages.Length > 0)
-                    {
-                        assertionMessages.AppendLine();
-                    }
-                    assertionMessages.AppendLine($"There are differences for {actual.LanguageVersion} {pair.FilePath}:");
-                    previousFilePath = pair.FilePath;
+                    pair.AppendAssertionMessage(assertionMessages);
                 }
-                pair.AppendAssertionMessage(assertionMessages);
+                assertionMessages.AppendLine();
             }
             if (assertionMessages.Length == 0)
             {
@@ -184,24 +177,24 @@ namespace SonarAnalyzer.Test.TestFramework
         {
             var buildErrors = diagnostics.Where(x => x.Severity == DiagnosticSeverity.Error && (x.Id.StartsWith("CS") || x.Id.StartsWith("BC")) && !BuildErrorsToIgnore.Contains(x.Id)).ToArray();
             var expected = new CompilationIssues(compilation.LanguageVersionString(), compilation.SyntaxTrees.SelectMany(x => IssueLocationCollector.GetExpectedBuildErrors(x.FilePath, x.GetText().Lines).ToList()));
-            CompareActualToExpected(buildErrors, expected, true);
+            Compare(new(compilation.LanguageVersionString(), buildErrors), expected, true);
         }
 
         public static void VerifyNoExceptionThrown(IEnumerable<Diagnostic> diagnostics) =>
             diagnostics.Should().NotContain(d => d.Id == AnalyzerFailedDiagnosticId);
 
-        private static IEnumerable<IssueLocationPair> MatchPairs(CompilationIssues actualIssues, CompilationIssues expectedIssues)
+        private static IEnumerable<IssueLocationPair> MatchPairs(CompilationIssues actual, CompilationIssues expected)
         {
             var ret = new List<IssueLocationPair>();
-            foreach (var key in actualIssues.UniqueKeys())
+            foreach (var key in actual.UniqueKeys())
             {
-                ret.AddRange(BestMatch(actualIssues.Remove(key), expectedIssues.Remove(key)));
+                ret.AddRange(MatchDifferences(actual.Remove(key), expected.Remove(key)));
             }
-            ret.AddRange(expectedIssues.Select(x => new IssueLocationPair(null, x)));
+            ret.AddRange(expected.Select(x => new IssueLocationPair(null, x)));
             return ret;
         }
 
-        private static IEnumerable<IssueLocationPair> BestMatch(List<IssueLocation> actualIssues, List<IssueLocation> expectedIssues)
+        private static IEnumerable<IssueLocationPair> MatchDifferences(List<IssueLocation> actualIssues, List<IssueLocation> expectedIssues)
         {
             foreach (var actual in actualIssues.ToArray())  // First round removes all perfect matches, so we don't mismatch possible perfect match by imperfect one on the same line.
             {
