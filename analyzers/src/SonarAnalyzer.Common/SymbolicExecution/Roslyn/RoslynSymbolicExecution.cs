@@ -52,6 +52,7 @@ internal class RoslynSymbolicExecution
         this.checks = new(new SymbolicCheck[] { new NonNullableValueTypeCheck(), new ConstantCheck() }.Concat(checks).ToArray());
         this.cancel = cancel;
         exceptionCandidate = new(cfg.OriginalOperation.ToSonar().SemanticModel.Compilation);
+        loopBlockOrdinals = DetectLoopBlockOrdinals(cfg).ToHashSet();
         lva = new(cfg, cancel);
         logger.Log(cfg);
     }
@@ -312,4 +313,30 @@ internal class RoslynSymbolicExecution
         region.Kind == ControlFlowRegionKind.Finally
         || thrown == ExceptionState.UnknownException
         || thrown.Type.DerivesFrom(region.ExceptionType);
+
+    private static IEnumerable<int> DetectLoopBlockOrdinals(ControlFlowGraph cfg)
+    {
+        var reachableFrom = cfg.Blocks.ToImmutableDictionary(x => x.Ordinal, x => new HashSet<int>());
+        var toProcess = new SortedSet<int>(new[] { 0 });
+        while (toProcess.Any())
+        {
+            var current = toProcess.Min;
+            toProcess.Remove(current);
+            var currentReachableFrom = reachableFrom[current];
+            foreach (var successor in cfg.Blocks[current].SuccessorBlocks.Select(x => x.Ordinal))
+            {
+                var successorReachableFrom = reachableFrom[successor];
+                var changed = false;
+                foreach (var block in currentReachableFrom.Append(current))
+                {
+                    changed |= successorReachableFrom.Add(block);
+                }
+                if (changed)
+                {
+                    toProcess.Add(successor);
+                }
+            }
+        }
+        return cfg.Blocks.Select(x => x.Ordinal).Where(x => reachableFrom[x].Contains(x));
+    }
 }

@@ -38,8 +38,8 @@ public partial class RoslynSymbolicExecutionTest
             """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.PostProcessed.GroupBy(x => x.Block.Ordinal).Should().HaveCount(5);
-        validator.PostProcessed.Where(x => x.Block.Ordinal is 2 or 3 or 4).Should().AllSatisfy(x => x.IsInLoop.Should().BeFalse()); // Should be true
-        validator.PostProcessed.Where(x => x.Block.Ordinal is 1 or 5).Should().AllSatisfy(x => x.IsInLoop.Should().BeFalse());
+        validator.PostProcessed.Where(x => x.Block.Ordinal is 3 or 4).Should().AllSatisfy(x => x.IsInLoop.Should().BeTrue());
+        validator.PostProcessed.Where(x => x.Block.Ordinal is 1 or 2 or 5).Should().AllSatisfy(x => x.IsInLoop.Should().BeFalse());
     }
 
     [TestMethod]
@@ -55,7 +55,7 @@ public partial class RoslynSymbolicExecutionTest
             """;
         var validator = SETestContext.CreateCS(code, "int[] items").Validator;
         validator.PostProcessed.GroupBy(x => x.Block.Ordinal).Should().HaveCount(7);
-        validator.PostProcessed.Where(x => x.Block.Ordinal is 3 or 4).Should().AllSatisfy(x => x.IsInLoop.Should().BeFalse()); // Should be true
+        validator.PostProcessed.Where(x => x.Block.Ordinal is 3 or 4).Should().AllSatisfy(x => x.IsInLoop.Should().BeTrue());
         validator.PostProcessed.Where(x => x.Block.Ordinal is 1 or 2 or 5 or 6 or 8).Should().AllSatisfy(x => x.IsInLoop.Should().BeFalse());
     }
 
@@ -72,7 +72,7 @@ public partial class RoslynSymbolicExecutionTest
             """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.PostProcessed.GroupBy(x => x.Block.Ordinal).Should().HaveCount(4);
-        validator.PostProcessed.Where(x => x.Block.Ordinal is 2 or 3).Should().AllSatisfy(x => x.IsInLoop.Should().BeFalse()); // Should be true
+        validator.PostProcessed.Where(x => x.Block.Ordinal is 2 or 3).Should().AllSatisfy(x => x.IsInLoop.Should().BeTrue());
         validator.PostProcessed.Where(x => x.Block.Ordinal is 1 or 4).Should().AllSatisfy(x => x.IsInLoop.Should().BeFalse());
     }
 
@@ -90,7 +90,7 @@ public partial class RoslynSymbolicExecutionTest
             """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.PostProcessed.GroupBy(x => x.Block.Ordinal).Should().HaveCount(3);
-        validator.PostProcessed.Where(x => x.Block.Ordinal is 2).Should().AllSatisfy(x => x.IsInLoop.Should().BeFalse()); // Should be true
+        validator.PostProcessed.Where(x => x.Block.Ordinal is 2).Should().AllSatisfy(x => x.IsInLoop.Should().BeTrue());
         validator.PostProcessed.Where(x => x.Block.Ordinal is 1 or 3).Should().AllSatisfy(x => x.IsInLoop.Should().BeFalse());
     }
 
@@ -107,7 +107,7 @@ public partial class RoslynSymbolicExecutionTest
             """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.PostProcessed.GroupBy(x => x.Block.Ordinal).Should().HaveCount(3);
-        validator.PostProcessed.Where(x => x.Block.Ordinal is 2).Should().AllSatisfy(x => x.IsInLoop.Should().BeFalse()); // Should be true
+        validator.PostProcessed.Where(x => x.Block.Ordinal is 2).Should().AllSatisfy(x => x.IsInLoop.Should().BeTrue());
         validator.PostProcessed.Where(x => x.Block.Ordinal is 1 or 3).Should().AllSatisfy(x => x.IsInLoop.Should().BeFalse());
     }
 
