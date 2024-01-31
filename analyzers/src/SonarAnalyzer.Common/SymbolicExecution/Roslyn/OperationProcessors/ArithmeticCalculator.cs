@@ -25,22 +25,23 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
 internal static class ArithmeticCalculator
 {
-    public static NumberConstraint Calculate(BinaryOperatorKind kind, NumberConstraint left, NumberConstraint right) => kind switch
-    {
-        BinaryOperatorKind.Add => NumberConstraint.From(left.Min + right.Min, left.Max + right.Max),
-        BinaryOperatorKind.Subtract => NumberConstraint.From(left.Min - right.Max, left.Max - right.Min),
-        BinaryOperatorKind.Multiply => CalculateMultiply(left, right),
-        BinaryOperatorKind.Divide => CalculateDivide(left, right),
-        BinaryOperatorKind.Remainder when left.IsSingleValue && right.IsSingleValue && right.Min != 0 => NumberConstraint.From(left.Min.Value % right.Min.Value),
-        BinaryOperatorKind.Remainder => CalculateRemainder(left, right),
-        BinaryOperatorKind.And when left.IsSingleValue && right.IsSingleValue => NumberConstraint.From(left.Min.Value & right.Min.Value),
-        BinaryOperatorKind.And => NumberConstraint.From(CalculateAndMin(left, right), CalculateAndMax(left, right)),
-        BinaryOperatorKind.Or when left.IsSingleValue && right.IsSingleValue => NumberConstraint.From(left.Min.Value | right.Min.Value),
-        BinaryOperatorKind.Or => NumberConstraint.From(CalculateOrMin(left, right), CalculateOrMax(left, right)),
-        BinaryOperatorKind.ExclusiveOr when left.IsSingleValue && right.IsSingleValue => NumberConstraint.From(left.Min.Value ^ right.Min.Value),
-        BinaryOperatorKind.ExclusiveOr => NumberConstraint.From(CalculateXorMin(left, right), CalculateXorMax(left, right)),
-        _ => null
-    };
+    public static NumberConstraint Calculate(BinaryOperatorKind kind, NumberConstraint left, NumberConstraint right, bool isInLoop) =>
+        isInLoop ? null : kind switch
+        {
+            BinaryOperatorKind.Add => NumberConstraint.From(left.Min + right.Min, left.Max + right.Max),
+            BinaryOperatorKind.Subtract => NumberConstraint.From(left.Min - right.Max, left.Max - right.Min),
+            BinaryOperatorKind.Multiply => CalculateMultiply(left, right),
+            BinaryOperatorKind.Divide => CalculateDivide(left, right),
+            BinaryOperatorKind.Remainder when left.IsSingleValue && right.IsSingleValue && right.Min != 0 => NumberConstraint.From(left.Min.Value % right.Min.Value),
+            BinaryOperatorKind.Remainder => CalculateRemainder(left, right),
+            BinaryOperatorKind.And when left.IsSingleValue && right.IsSingleValue => NumberConstraint.From(left.Min.Value & right.Min.Value),
+            BinaryOperatorKind.And => NumberConstraint.From(CalculateAndMin(left, right), CalculateAndMax(left, right)),
+            BinaryOperatorKind.Or when left.IsSingleValue && right.IsSingleValue => NumberConstraint.From(left.Min.Value | right.Min.Value),
+            BinaryOperatorKind.Or => NumberConstraint.From(CalculateOrMin(left, right), CalculateOrMax(left, right)),
+            BinaryOperatorKind.ExclusiveOr when left.IsSingleValue && right.IsSingleValue => NumberConstraint.From(left.Min.Value ^ right.Min.Value),
+            BinaryOperatorKind.ExclusiveOr => NumberConstraint.From(CalculateXorMin(left, right), CalculateXorMax(left, right)),
+            _ => null
+        };
 
     public static BigInteger? BiggestMinimum(NumberConstraint left, NumberConstraint right)
     {

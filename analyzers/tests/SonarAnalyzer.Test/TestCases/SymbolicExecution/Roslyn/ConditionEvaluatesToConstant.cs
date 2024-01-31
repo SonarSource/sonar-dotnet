@@ -1614,6 +1614,129 @@ namespace Tests.Diagnostics
         }
     }
 
+    class LoopBoundaries
+    {
+        void ForLoop_Regular()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                _ = i > -1 ? 0 : 42;            // Noncompliant
+                                                // Secondary@-1
+                _ = i >= -1 ? 0 : 42;           // Noncompliant
+                                                // Secondary@-1
+                _ = i > 0 ? 0 : 42;             // Compliant
+                _ = i >= 0 ? 0 : 42;            // Noncompliant
+                                                // Secondary@-1
+                _ = i > 9 ? 0 : 42;             // Noncompliant
+                                                // Secondary@-1
+                _ = i >= 9 ? 0 : 42;            // Compliant
+                _ = i > 10 ? 0 : 42;            // Noncompliant
+                                                // Secondary@-1
+                _ = i >= 10 ? 0 : 42;           // Noncompliant
+                                                // Secondary@-1
+                _ = i >= 10 ? 0 : 42;           // Noncompliant
+                                                // Secondary@-1
+                _ = i >= i + 1 ? 0 : 42;        // FN
+            }
+        }
+
+        void ForLoop_IncreaseInside()
+        {
+            for (int i = 0; i < 10;)
+            {
+                _ = i > -1 ? 0 : 42;            // Noncompliant
+                                                // Secondary@-1
+                _ = i >= -1 ? 0 : 42;           // Noncompliant
+                                                // Secondary@-1
+                _ = i > 0 ? 0 : 42;             // Compliant
+                _ = i >= 0 ? 0 : 42;            // Noncompliant
+                                                // Secondary@-1
+                _ = i > 9 ? 0 : 42;             // Noncompliant
+                                                // Secondary@-1
+                _ = i >= 9 ? 0 : 42;            // Compliant
+                _ = i > 10 ? 0 : 42;            // Noncompliant
+                                                // Secondary@-1
+                _ = i >= 10 ? 0 : 42;           // Noncompliant
+                                                // Secondary@-1
+                _ = i >= 10 ? 0 : 42;           // Noncompliant
+                                                // Secondary@-1
+                _ = i >= i + 1 ? 0 : 42;        // FN
+                i++;
+            }
+        }
+
+        void ForLoop_Nested()
+        {
+            for (int i = 0; i < 10; i++)
+                for (int j = i + 1; j < i + 10; j++)
+                {
+                    _ = j >= 0 ? 0 : 42;        // FN
+                    _ = j > 0 ? 0 : 42;         // FN
+                    _ = j < 18 ? 0 : 42;        // Compliant
+                    _ = j < 19 ? 0 : 42;        // FN
+                    _ = i + j < 27 ? 0 : 42;    // Compliant
+                    _ = i + j < 28 ? 0 : 42;    // FN
+                    _ = i != j ? 0 : 42;        // FN
+                    _ = i > j ? 0 : 42;         // FN
+                }
+        }
+
+        void ForLoop_Nested_IncrementInside()
+        {
+            for (int i = 0; i < 10;)
+            {
+                for (int j = i + 1; j < i + 10;)
+                {
+                    _ = j >= 0 ? 0 : 42;        // FN
+                    _ = j > 0 ? 0 : 42;         // FN
+                    _ = j < 18 ? 0 : 42;        // Compliant
+                    _ = j < 19 ? 0 : 42;        // FN
+                    _ = i + j < 27 ? 0 : 42;    // Compliant
+                    _ = i + j < 28 ? 0 : 42;    // FN
+                    _ = i != j ? 0 : 42;        // FN
+                    _ = i > j ? 0 : 42;         // FN
+                    j++;
+                }
+                i++;
+            }
+        }
+
+        void ForLoop_MultipleLoopVariables()
+        {
+            for (int i = 0, j = 1; i < 10; i++, j++)
+            {
+                _ = i >= 0 ? 0 : 42;            // Noncompliant
+                                                // Secondary@-1
+                _ = j > 0 ? 0 : 42;             // Noncompliant
+                                                // Secondary@-1
+                _ = j < 3 ? 0 : 42;             // Compliant
+                _ = i + j > 0 ? 0 : 42;         // FN
+                _ = i + j > 1 ? 0 : 42;         // Compliant
+            }
+        }
+
+        void ForLoop_ZeroOrOneExecutions()
+        {
+            for (int i = 0; i < 0; i++)         // Noncompliant
+                                                // Secondary@-1
+            {
+                _ = i > 0 ? 0 : 42;             // Compliant - unreachable
+            }
+
+            for (int i = 0; i < 1; i++)
+            {
+                _ = i > 0 ? 0 : 42;             // Noncompliant
+                                                // Secondary@-1
+            }
+
+            for (int i = 0; i < 1; ++i)
+            {
+                _ = i > 0 ? 0 : 42;             // Noncompliant
+                                                // Secondary@-1
+            }
+        }
+    }
+
     public class GuardedTests
     {
         public void Guarded(string s1)
@@ -2143,6 +2266,8 @@ namespace Tests.Diagnostics
         private bool Cond = new Random().Next() % 2 == 1;
     }
 
+    
+
     class Repro2442
     {
         public void Method(bool unknown)
@@ -2271,7 +2396,7 @@ namespace Tests.Diagnostics
             var steps = 0;
             while (list.Any())
             {
-                if (steps++ > MaxStepCount) // Noncompliant FP
+                if (steps++ > MaxStepCount) // Compliant
                 {
                     return;
                 }
@@ -2285,7 +2410,7 @@ namespace Tests.Diagnostics
             while (list.Any())
             {
                 steps = steps + 1;
-                if (steps > MaxStepCount) // Noncompliant FP
+                if (steps > MaxStepCount) // Compliant
                 {
                     return;
                 }
@@ -3407,21 +3532,21 @@ public class Repro_8262
             switch (i)
             {
                 case 1:
-                case 4:   // Noncompliant {{Change this condition so that it does not always evaluate to 'False'.}} FP
-                case 7:   // Noncompliant FP
-                case 10:  // Noncompliant FP
-                case 13:  // Noncompliant FP
-                case 16:  // Noncompliant FP
+                case 4:   // Compliant
+                case 7:   // Compliant
+                case 10:  // Compliant
+                case 13:  // Compliant
+                case 16:  // Compliant
                     Console.WriteLine(i);
                     break;
-                case 2:   // Noncompliant FP
-                case 5:   // Secondary
+                case 2:   // Compliant
+                case 5:
                 case 8:
                 case 11:
                 case 14:
                     Console.WriteLine(i);
                     break;
-                case 3:   // Secondary
+                case 3:
                 case 6:
                 case 9:
                 case 12:
@@ -3492,7 +3617,7 @@ public class Repro_8428
         var ids = new int[1000];
         for (var i = 0; i < ids.Length; i++)
         {
-            if (i % 100 != 0 || i <= 0)   // Noncompliant FP
+            if (i % 100 != 0 || i <= 0)   // Compliant
             {
                 System.Diagnostics.Debug.WriteLine(i);
             }
@@ -3545,8 +3670,7 @@ public class Repro_8449
         int delay = 100;
         while (true)
         {
-            if (delay < 1000) // Noncompliant {{Change this condition so that it does not always evaluate to 'True'.}} FP
-            //  ^^^^^^^^^^^^
+            if (delay < 1000) // Compliant
             {
                 delay = delay * 2;
             }
