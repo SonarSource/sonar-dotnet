@@ -201,7 +201,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
         [DataTestMethod]
         [DataRow("net6.0")]
         [DataRow("net7.0")]
-        public void Compile_Razor_WithFramework(string framework) 
+        public void Compile_Razor_WithFramework(string framework)
         {
             var compilation = DummyWithLocation.AddPaths("Dummy.razor")
                 .WithFramework(framework)
@@ -521,13 +521,13 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
             builder.Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage("""
                 There are differences for CSharp7 File.Concurrent.cs:
                   Line 6: Unexpected issue 'Change this condition so that it does not always evaluate to 'True'. Some code paths are unreachable.' Rule S2583
-                  Line 9 Secondary location: Unexpected issue ''*
                   Line 10: Unexpected issue 'Change this condition so that it does not always evaluate to 'True'.' Rule S2589
+                  Line 9 Secondary location: Unexpected issue ''
 
                 There are differences for CSharp7 File.cs:
                   Line 6: Unexpected issue 'Change this condition so that it does not always evaluate to 'True'. Some code paths are unreachable.' Rule S2583
-                  Line 9 Secondary location: Unexpected issue ''*
                   Line 10: Unexpected issue 'Change this condition so that it does not always evaluate to 'True'.' Rule S2589
+                  Line 9 Secondary location: Unexpected issue ''
                 """);
             builder.WithOnlyDiagnostics(ConditionEvaluatesToConstant.S2589).Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage("""
                 There are differences for CSharp7 File.Concurrent.cs:
