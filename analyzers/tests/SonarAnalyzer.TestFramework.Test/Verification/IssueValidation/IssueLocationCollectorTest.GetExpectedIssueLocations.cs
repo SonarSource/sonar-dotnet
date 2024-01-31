@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
         Console.WriteLine(o);
     }
 }";
-            var locations = IssueLocationCollector.GetExpectedIssueLocations(SourceText.From(code).Lines);
+            var locations = IssueLocationCollector.GetExpectedIssueLocations("File.cs", SourceText.From(code).Lines);
 
             locations.Should().BeEmpty();
         }
@@ -52,7 +52,7 @@ public class Foo
         Console.WriteLine(o);
     }
 }";
-            var locations = IssueLocationCollector.GetExpectedIssueLocations(SourceText.From(code).Lines);
+            var locations = IssueLocationCollector.GetExpectedIssueLocations("File.cs", SourceText.From(code).Lines);
 
             locations.Should().HaveCount(2);
 
@@ -72,7 +72,7 @@ Public Class Foo
     End Sub
 
 End Class";
-            var locations = IssueLocationCollector.GetExpectedIssueLocations(SourceText.From(code).Lines);
+            var locations = IssueLocationCollector.GetExpectedIssueLocations("File.cs", SourceText.From(code).Lines);
 
             locations.Should().HaveCount(2);
 
@@ -95,7 +95,7 @@ End Class";
 Noncompliant - this should not be detected as expected issue
 -->
 </Root>";
-            var locations = IssueLocationCollector.GetExpectedIssueLocations(SourceText.From(code).Lines);
+            var locations = IssueLocationCollector.GetExpectedIssueLocations("File.cs", SourceText.From(code).Lines);
 
             locations.Should().HaveCount(5);
 
@@ -112,7 +112,7 @@ Noncompliant - this should not be detected as expected issue
 *@
 <p>The solution to all problems is: 42</p>@* Secondary *@
 ";
-            var locations = IssueLocationCollector.GetExpectedIssueLocations(SourceText.From(code).Lines);
+            var locations = IssueLocationCollector.GetExpectedIssueLocations("File.cs", SourceText.From(code).Lines);
 
             locations.Should().HaveCount(3);
 
@@ -130,7 +130,7 @@ Noncompliant - this should not be detected as expected issue
         Console.WriteLine(o); // Noncompliant
     }
 }";
-            var locations = IssueLocationCollector.GetExpectedIssueLocations(SourceText.From(code).Lines);
+            var locations = IssueLocationCollector.GetExpectedIssueLocations("File.cs", SourceText.From(code).Lines);
 
             locations.Should().ContainSingle();
             locations.Select(l => l.IsPrimary).Should().Equal(true);
@@ -151,7 +151,7 @@ Noncompliant - this should not be detected as expected issue
         Console.WriteLine(o);
     }
 }";
-            var locations = IssueLocationCollector.GetExpectedIssueLocations(SourceText.From(code).Lines);
+            var locations = IssueLocationCollector.GetExpectedIssueLocations("File.cs", SourceText.From(code).Lines);
 
             locations.Should().HaveCount(4);
 
@@ -172,7 +172,7 @@ Noncompliant - this should not be detected as expected issue
         Console.WriteLine(o);
     }
 }";
-            var locations = IssueLocationCollector.GetExpectedIssueLocations(SourceText.From(code).Lines);
+            var locations = IssueLocationCollector.GetExpectedIssueLocations("File.cs", SourceText.From(code).Lines);
 
             locations.Should().HaveCount(2);
 
@@ -194,7 +194,7 @@ Noncompliant - this should not be detected as expected issue
     }
 }";
 
-            Action action = () => IssueLocationCollector.GetExpectedIssueLocations(SourceText.From(code).Lines);
+            Action action = () => IssueLocationCollector.GetExpectedIssueLocations("File.cs", SourceText.From(code).Lines);
 
             action.Should()
                   .Throw<InvalidOperationException>()
@@ -212,7 +212,7 @@ Noncompliant - this should not be detected as expected issue
     }
 }";
 
-            var locations = IssueLocationCollector.GetExpectedIssueLocations(SourceText.From(code).Lines);
+            var locations = IssueLocationCollector.GetExpectedIssueLocations("File.cs", SourceText.From(code).Lines);
 
             locations.Should().ContainSingle();
 
@@ -232,7 +232,7 @@ Noncompliant - this should not be detected as expected issue
     }
 }";
 
-            Action action = () => IssueLocationCollector.GetExpectedIssueLocations(SourceText.From(code).Lines);
+            Action action = () => IssueLocationCollector.GetExpectedIssueLocations("File.cs", SourceText.From(code).Lines);
 
             action.Should().Throw<InvalidOperationException>().WithMessage("Primary location with id [myId1] found on multiple lines: 3, 5");
         }
@@ -248,7 +248,7 @@ Noncompliant - this should not be detected as expected issue
     }
 }";
 
-            Action action = () => IssueLocationCollector.GetExpectedIssueLocations(SourceText.From(code).Lines);
+            Action action = () => IssueLocationCollector.GetExpectedIssueLocations("File.cs", SourceText.From(code).Lines);
 
             action.Should()
                   .Throw<InvalidOperationException>()
@@ -268,7 +268,7 @@ Either remove the Noncompliant/Secondary word or precise pattern '^^' from the c
     }
 }";
 
-            Action action = () => IssueLocationCollector.GetExpectedIssueLocations(SourceText.From(code).Lines);
+            Action action = () => IssueLocationCollector.GetExpectedIssueLocations("File.cs", SourceText.From(code).Lines);
 
             action.Should()
                   .Throw<InvalidOperationException>()
