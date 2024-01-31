@@ -36,8 +36,4 @@ internal sealed class FileContent
         FileName = fileName;
         Content = content;
     }
-
-    // ToDo: Remove
-    public FileIssueLocations ToExpectedIssueLocations() =>
-        new(FileName, IssueLocationCollector.GetExpectedIssueLocations(FileName, Content.Lines));
 }
