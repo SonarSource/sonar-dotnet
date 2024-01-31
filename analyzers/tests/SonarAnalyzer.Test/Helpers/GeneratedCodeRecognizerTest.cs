@@ -63,6 +63,8 @@ namespace SonarAnalyzer.Test.Helpers
         [DataRow("C:\\SonarSource\\SomeFile_razor.g.cs")]
         [DataRow("C:\\SonarSource\\SomeFile_cshtml.g.cs")]
         [DataRow("C:\\SonarSource\\SomeFile_RAZOR.g.cS")]
+        [DataRow("C:\\SonarSource\\SomeFile_razor.ide.g.cs")]
+        [DataRow("C:\\SonarSource\\SomeFile_cshtml.ide.g.cs")]
         public void IsRazorGeneratedFile_RazorGeneratedFiles_ReturnsTrue(string path)
         {
             // GetRoot() cannot be mocked - not virtual, so we use Loose behaviour to return null Root
