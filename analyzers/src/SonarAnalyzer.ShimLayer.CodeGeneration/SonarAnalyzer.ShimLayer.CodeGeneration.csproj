@@ -13,4 +13,9 @@
     <PackageDownload Include="Microsoft.NETCore.App.Ref" Version="[3.1.0]" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Using Include="Microsoft.CodeAnalysis"/>
+    <Using Include="Microsoft.CodeAnalysis.Diagnostics"/>
+  </ItemGroup>
+
 </Project>

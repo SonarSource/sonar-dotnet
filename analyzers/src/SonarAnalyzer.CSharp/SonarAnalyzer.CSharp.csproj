@@ -40,6 +40,8 @@
     <Using Include="SonarAnalyzer.Helpers" />
     <Using Include="SonarAnalyzer.Wrappers" />
     <Using Include="StyleCop.Analyzers.Lightup" />
+    <Using Include="Microsoft.CodeAnalysis" />
+    <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
   </ItemGroup>
 
   <Target Name="SignDlls" Condition="'$(SignAssembly)' == 'true'">

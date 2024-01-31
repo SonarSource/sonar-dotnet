@@ -39,6 +39,8 @@
     <Using Include="SonarAnalyzer.Helpers" />
     <Using Include="SonarAnalyzer.Test.MetadataReferences" />
     <Using Include="SonarAnalyzer.Test.TestFramework" />
+    <Using Include="Microsoft.CodeAnalysis" />
+    <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
   </ItemGroup>
 
 </Project>

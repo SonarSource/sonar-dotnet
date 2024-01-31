@@ -64,6 +64,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.TestFramework
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.TestFramework", "tests\SonarAnalyzer.TestFramework\SonarAnalyzer.TestFramework.csproj", "{4C1DB1C4-C1FC-4AA1-B855-0D1948E68FB8}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITs.JsonParser", "src\ITs.JsonParser\ITs.JsonParser.csproj", "{0F9FD323-6E4A-42BE-ADBD-9D7958838E37}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -114,6 +116,10 @@ Global
 		{4C1DB1C4-C1FC-4AA1-B855-0D1948E68FB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C1DB1C4-C1FC-4AA1-B855-0D1948E68FB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C1DB1C4-C1FC-4AA1-B855-0D1948E68FB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F9FD323-6E4A-42BE-ADBD-9D7958838E37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F9FD323-6E4A-42BE-ADBD-9D7958838E37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F9FD323-6E4A-42BE-ADBD-9D7958838E37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F9FD323-6E4A-42BE-ADBD-9D7958838E37}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -129,6 +135,7 @@ Global
 		{DB0A158B-D003-47ED-8209-E70277EB0693} = {B7233F78-E142-4882-B084-7C83BE472109}
 		{ADBE6CFE-980F-4D4F-8E25-E391581D291E} = {B7233F78-E142-4882-B084-7C83BE472109}
 		{4C1DB1C4-C1FC-4AA1-B855-0D1948E68FB8} = {B7233F78-E142-4882-B084-7C83BE472109}
+		{0F9FD323-6E4A-42BE-ADBD-9D7958838E37} = {314A0C27-4768-4F15-B7FA-DC3C33C08180}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4259CA71-C565-42DD-8D58-F59819A11065}

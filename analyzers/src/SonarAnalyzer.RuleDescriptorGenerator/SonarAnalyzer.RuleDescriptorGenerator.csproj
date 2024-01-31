@@ -25,4 +25,9 @@
     <Copy SourceFiles="@(BinariesToCopy)" DestinationFolder="$(BinariesFolder)\RuleDescriptorGenerator" />
   </Target>
 
+  <ItemGroup>
+    <Using Include="Microsoft.CodeAnalysis" />
+    <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
+  </ItemGroup>
+
 </Project>
