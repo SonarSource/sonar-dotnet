@@ -100,8 +100,7 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
     }
 
     public bool IsRazorAnalysisEnabled() =>
-        ProjectConfiguration().ProjectType != ProjectType.Unknown
-        && SonarLintXml().AnalyzeRazorCode(Compilation.Language);
+        SonarLintXml().AnalyzeRazorCode(Compilation.Language);
 
     public bool IsTestProject()
     {
