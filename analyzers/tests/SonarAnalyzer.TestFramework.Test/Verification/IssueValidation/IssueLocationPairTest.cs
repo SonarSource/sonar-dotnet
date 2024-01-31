@@ -37,7 +37,7 @@ public class IssueLocationPairTest
 
     [TestMethod]
     public void AppendAssertionMessage_PerfectMatch() =>
-        AssertionMessage(Actual, Actual).Should().BeEmpty();
+        new IssueLocationPair(Actual, Actual).Invoking(x => x.AppendAssertionMessage(new())).Should().Throw<InvalidOperationException>();
 
     [TestMethod]
     public void AppendAssertionMessage_MissingIssue_NoMessage() =>
@@ -74,13 +74,6 @@ public class IssueLocationPairTest
     {
         var expected = new IssueLocation { LineNumber = 42, IsPrimary = true, Message = "Lorem ipsum", Start = 42, Length = 2, IssueId = "Flag1" };
         AssertionMessage(Actual, expected).Should().Be("  Line 42: Should have a length of 2 but got a length of 10 Rule S1234 ID Flag1");
-    }
-
-    [TestMethod]
-    public void AppendAssertionMessage_NoExpectationForMessageAndLocation()
-    {
-        var expected = new IssueLocation { LineNumber = 42, IsPrimary = true };
-        AssertionMessage(Actual, expected).Should().BeEmpty();
     }
 
     private static string AssertionMessage(IssueLocation actual, IssueLocation expected)

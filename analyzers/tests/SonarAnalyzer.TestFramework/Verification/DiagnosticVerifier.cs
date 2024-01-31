@@ -210,7 +210,7 @@ namespace SonarAnalyzer.Test.TestFramework
 
             var expectedBuildErrors = compilation.SyntaxTrees
                                                  .ExceptExtraEmptyFile()
-                                                 .Select(x => new FileIssueLocations(x.FilePath, IssueLocationCollector.GetExpectedBuildErrors(x.GetText().Lines).ToList()))
+                                                 .Select(x => new FileIssueLocations(x.FilePath, IssueLocationCollector.GetExpectedBuildErrors(x.FilePath, x.GetText().Lines).ToList()))
                                                  .ToArray();
 
             CompareActualToExpected(compilation.LanguageVersionString(), buildErrors, expectedBuildErrors, true);

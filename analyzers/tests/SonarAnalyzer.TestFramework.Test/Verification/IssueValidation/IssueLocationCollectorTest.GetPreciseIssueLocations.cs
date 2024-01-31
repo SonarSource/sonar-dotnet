@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
     Console.WriteLine(a);
 //          ^^^^^^^^^
 }");
-            var result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetPreciseIssueLocations("File.cs", line).ToList();
 
             result.Should().ContainSingle();
 
@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
     Console.WriteLine(a);
 //          ^^^^^^^^^ @-1
 }");
-            var result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetPreciseIssueLocations("File.cs", line).ToList();
 
             result.Should().ContainSingle();
 
@@ -70,7 +70,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
     Console.WriteLine(a);
 //          ^^^^^^^^^ Secondary
 }");
-            var result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetPreciseIssueLocations("File.cs", line).ToList();
 
             result.Should().ContainSingle();
 
@@ -89,7 +89,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
     Console.WriteLine(a);
 //          ^^^^^^^^^ Secondary@-1
 }");
-            var result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetPreciseIssueLocations("File.cs", line).ToList();
 
             result.Should().ContainSingle();
 
@@ -108,7 +108,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
     Console.WriteLine(a);
 //          ^^^^^^^^^ [flow1,flow2]
 }");
-            var result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetPreciseIssueLocations("File.cs", line).ToList();
 
             result.Should().HaveCount(2);
 
@@ -127,7 +127,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
     Console.WriteLine(a);
 //          ^^^^^^^^^ Secondary [last1,flow1,flow2]
 }");
-            var result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetPreciseIssueLocations("File.cs", line).ToList();
 
             result.Should().HaveCount(3);
 
@@ -146,7 +146,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
     Console.WriteLine(a);
 //          ^^^^^^^^^ [flow1,flow2] {{Some message}}
 }");
-            var result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetPreciseIssueLocations("File.cs", line).ToList();
 
             result.Should().HaveCount(2);
 
@@ -165,7 +165,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
     Console.WriteLine(a);
 //          ^^^^^^^^^ Secondary [flow1,flow2] {{Some message}}
 }");
-            var result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetPreciseIssueLocations("File.cs", line).ToList();
 
             result.Should().HaveCount(2);
 
@@ -183,7 +183,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
             <Baaad />
 <!--        ^^^^^^^^^ Secondary [flow1,flow2] {{Some message}}         -->
 </Root>");
-            var result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetPreciseIssueLocations("File.cs", line).ToList();
 
             result.Should().HaveCount(2);
 
@@ -202,7 +202,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
     Console.WriteLine(a);
 //          ^^^^^^^^^ {{Some message}}
 }");
-            var result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetPreciseIssueLocations("File.cs", line).ToList();
 
             result.Should().ContainSingle();
 
@@ -221,7 +221,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
     Console.WriteLine(a);
 //          ^^^^^^^^^ Secondary {{Some message}}
 }");
-            var result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetPreciseIssueLocations("File.cs", line).ToList();
 
             result.Should().ContainSingle();
 
@@ -239,7 +239,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
 {
     Console.WriteLine(a);
 }");
-            var result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetPreciseIssueLocations("File.cs", line).ToList();
 
             result.Should().BeEmpty();
         }
@@ -252,7 +252,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
     Console.WriteLine(a);
     //      ^^^^^^^^^
 }");
-            var result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetPreciseIssueLocations("File.cs", line).ToList();
             result.Should().ContainSingle();
             var issueLocation = result.First();
 
@@ -270,7 +270,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
     Console.WriteLine(a);
 //          ^^^^^^^^^ SecondaryNoncompliantSecondary {{Some message}}
 }");
-            var result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetPreciseIssueLocations("File.cs", line).ToList();
 
             result.Should().BeEmpty();
         }
@@ -283,7 +283,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
     Console.WriteLine(a);
 //  ^^^^^^^ ^^^^^^^^^ ^
 }");
-            Action action = () => IssueLocationCollector.GetPreciseIssueLocations(line);
+            Action action = () => IssueLocationCollector.GetPreciseIssueLocations("File.cs", line);
             action.Should()
                   .Throw<InvalidOperationException>()
                   .WithMessage(@"Expecting only one precise location per line, found 3 on line 3. If you want to specify more than one precise location per line you need to omit the Noncompliant comment:
@@ -305,21 +305,21 @@ internal class MyClass : IInterface1 // there should be no Noncompliant comment
 -->
 </Root>";
             var line = GetLine(2, code);
-            var result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetPreciseIssueLocations("File.cs", line).ToList();
             result.Should().ContainSingle();
             var issueLocation = result.Single();
             issueLocation.Start.Should().Be(7);
             issueLocation.Length.Should().Be(15);
 
             line = GetLine(4, code);
-            result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
+            result = IssueLocationCollector.GetPreciseIssueLocations("File.cs", line).ToList();
             result.Should().ContainSingle();
             issueLocation = result.Single();
             issueLocation.Start.Should().Be(9);
             issueLocation.Length.Should().Be(15);
 
             line = GetLine(6, code);
-            result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
+            result = IssueLocationCollector.GetPreciseIssueLocations("File.cs", line).ToList();
             result.Should().ContainSingle();
             issueLocation = result.Single();
             issueLocation.Start.Should().Be(11);
@@ -334,7 +334,7 @@ internal class MyClass : IInterface1 // there should be no Noncompliant comment
 @*              ^^ *@";
 
             var line = GetLine(2, code);
-            var result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetPreciseIssueLocations("File.cs", line).ToList();
             result.Should().ContainSingle();
             var issueLocation = result.Single();
             issueLocation.Start.Should().Be(16);
@@ -349,7 +349,7 @@ internal class MyClass : IInterface1 // there should be no Noncompliant comment
                  @*^^*@";
 
             var line = GetLine(2, code);
-            var result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetPreciseIssueLocations("File.cs", line).ToList();
             result.Should().ContainSingle();
             var issueLocation = result.Single();
             issueLocation.Start.Should().Be(19);
@@ -365,7 +365,7 @@ internal class MyClass : IInterface1 // there should be no Noncompliant comment
 *@
 ";
             var line = GetLine(2, code);
-            var result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetPreciseIssueLocations("File.cs", line).ToList();
             result.Should().ContainSingle();
             var issueLocation = result.Single();
             issueLocation.Start.Should().Be(14);
@@ -378,7 +378,7 @@ internal class MyClass : IInterface1 // there should be no Noncompliant comment
             var line = GetLine(2, @"
             <p>The solution is: 42</p>
 @*                              ^^ Secondary [flow1,flow2] {{Some message}}         *@");
-            var result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
+            var result = IssueLocationCollector.GetPreciseIssueLocations("File.cs", line).ToList();
 
             result.Should().HaveCount(2);
 
