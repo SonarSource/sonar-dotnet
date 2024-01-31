@@ -8,27 +8,27 @@ class Sample
         int[] knownLength = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
         for (var i = 0; i < knownLength.Length; i++)
         {
-            if (i > 5)                  // Noncompliant FP
+            if (i > 5)                  // Compliant
             {
-                Console.WriteLine(i);   // Secondary
+                Console.WriteLine(i);
             }
         }
 
         int[] unknownLength = [1, 2, .. array, 3, 4];
         for (var i = 0; i < unknownLength.Length; i++)
         {
-            if (i > 5)                  // Noncompliant FP
+            if (i > 5)                  // Compliant
             {
-                Console.WriteLine(i);   // Secondary
+                Console.WriteLine(i);
             }
         }
 
         int[] knownLength2 = [1, 2, .. knownLength, 3, 4];
         for (var i = 0; i < knownLength.Length; i++)
         {
-            if (i > 5)                  // Noncompliant FP
+            if (i > 5)                  // Compliant
             {
-                Console.WriteLine(i);   // Secondary
+                Console.WriteLine(i);
             }
         }
     }

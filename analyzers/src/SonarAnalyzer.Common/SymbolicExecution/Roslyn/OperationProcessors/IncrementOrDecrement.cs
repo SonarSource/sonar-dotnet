@@ -29,21 +29,35 @@ internal sealed class IncrementOrDecrement : SimpleProcessor<IIncrementOrDecreme
 
     protected override ProgramState Process(SymbolicContext context, IIncrementOrDecrementOperationWrapper incrementOrDecrement)
     {
-        if (context.State[incrementOrDecrement.Target]?.Constraint<NumberConstraint>() is { } oldNumber)
+        if (context.State[incrementOrDecrement.Target] is { } oldOperationValue
+            && oldOperationValue.Constraint<NumberConstraint>() is { } oldNumber)
         {
-            var newNumber = incrementOrDecrement.WrappedOperation.Kind == OperationKindEx.Increment
-                ? NumberConstraint.From(oldNumber.Min + 1, oldNumber.Max + 1)
-                : NumberConstraint.From(oldNumber.Min - 1, oldNumber.Max - 1);
+            var newNumber = incrementOrDecrement.WrappedOperation.Kind switch
+            {
+                OperationKindEx.Increment when context.IsInLoop => NumberConstraint.From(oldNumber.Min + 1, null),
+                OperationKindEx.Increment when !context.IsInLoop => NumberConstraint.From(oldNumber.Min + 1, oldNumber.Max + 1),
+                OperationKindEx.Decrement when context.IsInLoop => NumberConstraint.From(null, oldNumber.Max - 1),
+                _ => NumberConstraint.From(oldNumber.Min - 1, oldNumber.Max - 1),
+            };
+
             var state = incrementOrDecrement.Target.TrackedSymbol(context.State) is { } symbol
-                ? context.SetSymbolConstraint(symbol, newNumber)
+                ? context.State.SetSymbolValue(symbol, NewValue(context.State[symbol], newNumber))
                 : context.State;
             return incrementOrDecrement.IsPostfix
-                ? state.SetOperationConstraint(context.Operation, oldNumber)
-                : state.SetOperationConstraint(context.Operation, newNumber);
+                ? state.SetOperationValue(context.Operation, oldOperationValue)
+                : state.SetOperationValue(context.Operation, NewValue(oldOperationValue, newNumber));
         }
         else
         {
             return context.State;
         }
+    }
+
+    private static SymbolicValue NewValue(SymbolicValue oldValue, NumberConstraint newNumber)
+    {
+        oldValue ??= SymbolicValue.Empty;
+        return newNumber is null
+            ? oldValue.WithoutConstraint<NumberConstraint>()
+            : oldValue.WithConstraint(newNumber);
     }
 }
