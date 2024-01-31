@@ -71,7 +71,7 @@ public class TestUtils {
     return OrchestratorExtension.builderEnv()
       .useDefaultAdminCredentialsForBuilds(true)
       // See https://github.com/SonarSource/orchestrator#version-aliases
-      .setSonarVersion(System.getProperty("sonar.runtimeVersion", "LATEST_RELEASE"))
+      .setSonarVersion(System.getProperty("sonar.runtimeVersion", "DEV"))
       .setEdition(Edition.DEVELOPER)
       .activateLicense();
   }
@@ -258,8 +258,10 @@ public class TestUtils {
   }
 
   private static List<String> extractCeTaskIds(BuildResult buildResult) {
+    // The log looks like this:
+    // INFO: More about the report processing at http://127.0.0.1:53395/api/ce/task?id=0f639b4c-6421-4620-81d0-eac0f5759f06
     return buildResult.getLogsLines(s -> s.contains("More about the report processing at")).stream()
-      .map(s -> s.substring(s.length() - 20))
+      .map(s -> s.substring(s.lastIndexOf("=") + 1))
       .collect(Collectors.toList());
   }
 }
