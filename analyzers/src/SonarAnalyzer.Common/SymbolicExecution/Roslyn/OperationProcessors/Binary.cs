@@ -28,10 +28,10 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
     protected override IBinaryOperationWrapper Convert(IOperation operation) =>
         IBinaryOperationWrapper.FromOperation(operation);
 
-    protected override SymbolicConstraint BoolConstraintFromOperation(ProgramState state, IBinaryOperationWrapper operation, bool isLoopCondition, int visitCount) =>
+    protected override SymbolicConstraint BoolConstraintFromOperation(ProgramState state, IBinaryOperationWrapper operation) =>
         BinaryConstraint(operation.OperatorKind, state[operation.LeftOperand], state[operation.RightOperand]);
 
-    protected override ProgramState LearnBranchingConstraint(ProgramState state, IBinaryOperationWrapper operation, bool isLoopCondition, int visitCount, bool falseBranch)
+    protected override ProgramState LearnBranchingConstraint(ProgramState state, IBinaryOperationWrapper operation, bool falseBranch)
     {
         if (operation.OperatorKind.IsAnyEquality())
         {

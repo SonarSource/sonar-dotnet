@@ -125,7 +125,7 @@ internal class RoslynSymbolicExecution
         if (node.Block.Kind == BasicBlockKind.Exit)
         {
             logger.Log(node.State, "Exit Reached");
-            checks.ExitReached(new(node, lva.CapturedVariables, false, false));
+            checks.ExitReached(new(node, lva.CapturedVariables, false));
         }
         else if (node.Block.Successors.Length == 1 && ThrownException(node, node.Block.Successors.Single().Semantics) is { } exception)
         {
@@ -164,7 +164,7 @@ internal class RoslynSymbolicExecution
             {
                 // If a branch has no Destination but is part of conditional branching we need to call ConditionEvaluated. This happens when a Rethrow is following a condition.
                 var state = SetBranchingConstraints(branch, node.State, branchValue);
-                checks.ConditionEvaluated(new(node.Block, branchValue.ToSonar(), state, false, loopDetector.IsInLoop(node.Block), node.VisitCount, lva.CapturedVariables));
+                checks.ConditionEvaluated(new(node.Block, branchValue.ToSonar(), state, loopDetector.IsInLoop(node.Block), lva.CapturedVariables));
             }
             return null;    // We don't know where to continue
         }
@@ -173,10 +173,10 @@ internal class RoslynSymbolicExecution
             CreateNode(cfg.Blocks[finallyPoint.BlockIndex], finallyPoint.IsFinallyBlock ? finallyPoint : finallyPoint.Previous);
 
         ExplodedNode CreateNode(BasicBlock block, FinallyPoint finallyPoint) =>
-            ProcessBranchState(node.Block, branch, node.State, node.VisitCount) is { } newState ? new(block, newState, finallyPoint) : null;
+            ProcessBranchState(node.Block, branch, node.State) is { } newState ? new(block, newState, finallyPoint) : null;
     }
 
-    private ProgramState ProcessBranchState(BasicBlock block, ControlFlowBranch branch, ProgramState state, int visitCount)
+    private ProgramState ProcessBranchState(BasicBlock block, ControlFlowBranch branch, ProgramState state)
     {
         if (cfg.OriginalOperation.Syntax.Language == LanguageNames.VisualBasic) // Avoid C# FPs as we don't support tuple deconstructions yet
         {
@@ -185,7 +185,7 @@ internal class RoslynSymbolicExecution
         if (branch.Source.BranchValue is { } branchValue && branch.Source.ConditionalSuccessor is not null) // This branching was conditional
         {
             state = SetBranchingConstraints(branch, state, branchValue);
-            SymbolicContext context = new(block, branchValue.ToSonar(), state, syntaxClassifier.IsInLoopCondition(branchValue.Syntax), loopDetector.IsInLoop(block), visitCount, lva.CapturedVariables);
+            SymbolicContext context = new(block, branchValue.ToSonar(), state, loopDetector.IsInLoop(block), lva.CapturedVariables);
             state = checks.ConditionEvaluated(context);
             if (state is null)
             {
@@ -209,7 +209,7 @@ internal class RoslynSymbolicExecution
 
     private IEnumerable<ExplodedNode> ProcessOperation(ExplodedNode node)
     {
-        foreach (var preProcessed in checks.PreProcess(new(node, lva.CapturedVariables, syntaxClassifier.IsInLoopCondition(node.Operation.Instance.Syntax), loopDetector.IsInLoop(node.Block))))
+        foreach (var preProcessed in checks.PreProcess(new(node, lva.CapturedVariables, loopDetector.IsInLoop(node.Block))))
         {
             foreach (var processed in OperationDispatcher.Process(preProcessed))
             {
