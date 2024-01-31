@@ -23,7 +23,6 @@ using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.Protobuf;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
-using SonarAnalyzer.Test.Helpers;
 
 namespace SonarAnalyzer.Test.TestFramework.Tests
 {
@@ -125,6 +124,16 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
             DummyCS.AddSnippet("//Empty").WithProtobufPath("Proto.pb")
                 .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("DummyAnalyzerCS does not inherit from UtilityAnalyzerBase.");
 
+        [TestMethod]
+        public void Constructor_IsRazor_NoOptions_Throws() =>
+            DummyCS.AddSnippet("//Empty", "File.razor").WithOptions(ImmutableArray<ParseOptions>.Empty)
+                .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("IsRazor was set. ParseOptions must be specified.");
+
+        [TestMethod]
+        public void Constructor_IsRazor_VB_Throws() =>
+            DummyVB.AddSnippet("//Empty", "File.razor")
+                .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("IsRazor was set for Visual Basic analyzer. Only C# is supported.");
+
 #if NET
 
         [TestMethod]
@@ -192,25 +201,25 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
         [DataTestMethod]
         [DataRow("net6.0")]
         [DataRow("net7.0")]
-        public void Verify_Razor_WithFramework(string framework)
+        public void Compile_Razor_WithFramework(string framework)
         {
             var compilations = DummyWithLocation.AddPaths("Dummy.razor")
                 .WithFramework(framework)
                 .Build()
                 .Compile(false);
 
-            var reference = compilations.Single().ExternalReferences.First().Display;
+            var reference = compilations.Single().Compilation.ExternalReferences.First().Display;
             reference.Contains(framework).Should().BeTrue();
         }
 
         [TestMethod]
-        public void Verify_Razor_DefaultFramework()
+        public void Compile_Razor_DefaultFramework()
         {
             var compilations = DummyWithLocation.AddPaths("Dummy.razor")
                 .Build()
                 .Compile(false);
 
-            var reference = compilations.Single().ExternalReferences.First().Display;
+            var reference = compilations.Single().Compilation.ExternalReferences.First().Display;
             reference.Contains("net7.0").Should().BeTrue();
         }
 
@@ -229,56 +238,51 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
         }
 
         [TestMethod]
-        public void Verify_Razor_ParseOptions()
+        public void Compile_Razor_ParseOptions_OldVersion() =>
+            DummyWithLocation.AddPaths("Dummy.razor").WithOptions(ImmutableArray.Create<ParseOptions>(new CSharpParseOptions(LanguageVersion.CSharp6))).Build().Compile(false)
+                .Invoking(x => x.ToArray()) // Force evaluation of the collection
+                .Should()
+                .Throw<NotSupportedException>();
+
+        [TestMethod]
+        public void Compile_Razor_ParseOptions_DefaultLanguageVersion()
         {
-            var compilations = DummyWithLocation.AddPaths("Dummy.razor")
-                .WithOptions(ParseOptionsHelper.BeforeCSharp10)
-                .Build()
-                .Compile(false);
+            // Version below C# 10 are not compatible with our EmptyProject scaffolding due to nullable context and global using statements.
+            var expectedLanguageVersions = ParseOptionsHelper.FromCSharp10.Cast<CSharpParseOptions>().Select(x => x.LanguageVersion.ToString());
+            var compilations = DummyWithLocation.AddPaths("Dummy.razor").Build().Compile(false);
+            compilations.Select(c => c.Compilation.LanguageVersionString()).Should().BeEquivalentTo(expectedLanguageVersions);
+        }
 
-            if (!TestContextHelper.IsAzureDevOpsContext || TestContextHelper.IsPullRequestBuild)
+        [TestMethod]
+        public void Compile_Razor_ParseOptions_WithSpecificVersion()
+        {
+            var builder = DummyWithLocation.AddPaths("Dummy.razor");
+            // Version below C# 10 are not compatible with our EmptyProject scaffolding due to nullable context and global using statements.
+            foreach (var options in ParseOptionsHelper.FromCSharp10)
             {
-                compilations.Should().ContainSingle();
-
-                compilations.Single().LanguageVersionString().Should().BeEquivalentTo(LanguageVersion.CSharp5.ToString());
-            }
-            else
-            {
-                compilations.Should().HaveCount(8);
-                var languages = compilations.Select(c => c.LanguageVersionString()).ToList();
-
-                languages.Should().BeEquivalentTo(new List<string>()
-                    {
-                        LanguageVersion.CSharp9.ToString(),
-                        LanguageVersion.CSharp8.ToString(),
-                        LanguageVersion.CSharp7_3.ToString(),
-                        LanguageVersion.CSharp7_2.ToString(),
-                        LanguageVersion.CSharp7_1.ToString(),
-                        LanguageVersion.CSharp7.ToString(),
-                        LanguageVersion.CSharp6.ToString(),
-                        LanguageVersion.CSharp5.ToString()
-                    });
+                // Update Verifier.LanguageVersionReference() in case this breaks
+                builder.WithOptions(ImmutableArray.Create(options)).Build().Compile(false).Should().ContainSingle();
             }
         }
 
         [TestMethod]
-        public void Verify_Razor_AddReferences()
+        public void Compile_Razor_AddReferences()
         {
             var compilations = DummyWithLocation.AddPaths("Dummy.razor")
                 .AddReferences(NuGetMetadataReference.MicrosoftAzureDocumentDB())
                 .Build()
                 .Compile(false);
-            var references = compilations.Single().References;
+            var references = compilations.Single().Compilation.References;
             references.Should().Contain(x => x.Display.Contains("Microsoft.Azure.DocumentDB"));
         }
 
         [TestMethod]
-        public void Verify_Razor_NoReferences()
+        public void Compile_Razor_NoReferences()
         {
             var compilations = DummyWithLocation.AddPaths("Dummy.razor")
                 .Build()
                 .Compile(false);
-            var references = compilations.Single().References;
+            var references = compilations.Single().Compilation.References;
             references.Should().NotContain(x => x.Display.Contains("Microsoft.Azure.DocumentDB"));
         }
 

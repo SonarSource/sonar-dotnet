@@ -89,6 +89,17 @@ namespace SonarAnalyzer.Test.TestFramework
                 codeFix = builder.CodeFix();
                 ValidateCodeFix();
             }
+            if (builder.IsRazor)
+            {
+                if (builder.ParseOptions.IsEmpty)
+                {
+                    throw new ArgumentException($"{nameof(builder.IsRazor)} was set. {nameof(ParseOptions)} must be specified.");
+                }
+                else if (language != AnalyzerLanguage.CSharp)
+                {
+                    throw new ArgumentException($"{nameof(builder.IsRazor)} was set for {language} analyzer. Only C# is supported.");
+                }
+            }
         }
 
         public void Verify()    // This should never have any arguments
@@ -99,21 +110,7 @@ namespace SonarAnalyzer.Test.TestFramework
             }
             foreach (var compilation in Compile(builder.ConcurrentAnalysis))
             {
-                if (builder.IsRazor)
-                {
-                    DiagnosticVerifier.VerifyRazor(
-                        compilation,
-                        analyzers,
-                        builder.ErrorBehavior,
-                        builder.AdditionalFilePath,
-                        onlyDiagnosticIds,
-                        builder.Paths.Where(builder.IsRazorOrCshtmlFile).Select(TestCasePath),
-                        builder.Snippets.Where(x => builder.IsRazorOrCshtmlFile(x.FileName)));
-                }
-                else
-                {
-                    DiagnosticVerifier.Verify(compilation, analyzers, builder.ErrorBehavior, builder.AdditionalFilePath, onlyDiagnosticIds);
-                }
+                DiagnosticVerifier.Verify(compilation.Compilation, analyzers, builder.ErrorBehavior, builder.AdditionalFilePath, onlyDiagnosticIds, compilation.AdditionalSourceFiles);
             }
         }
 
@@ -123,7 +120,7 @@ namespace SonarAnalyzer.Test.TestFramework
             {
                 foreach (var analyzer in analyzers)
                 {
-                    DiagnosticVerifier.VerifyNoIssueReported(compilation, analyzer, builder.ErrorBehavior, builder.AdditionalFilePath, onlyDiagnosticIds);
+                    DiagnosticVerifier.VerifyNoIssueReported(compilation.Compilation, analyzer, builder.ErrorBehavior, builder.AdditionalFilePath, onlyDiagnosticIds);
                 }
             }
         }
@@ -148,7 +145,7 @@ namespace SonarAnalyzer.Test.TestFramework
         {
             foreach (var compilation in Compile(false))
             {
-                DiagnosticVerifier.Verify(compilation, analyzers.Single(), CompilationErrorBehavior.Default, builder.AdditionalFilePath);
+                DiagnosticVerifier.Verify(compilation.Compilation, analyzers.Single(), CompilationErrorBehavior.Default, builder.AdditionalFilePath);
                 new FileInfo(builder.ProtobufPath).Length.Should().Be(0, "protobuf file should be empty");
             }
         }
@@ -158,7 +155,7 @@ namespace SonarAnalyzer.Test.TestFramework
         {
             foreach (var compilation in Compile(false))
             {
-                DiagnosticVerifier.Verify(compilation, analyzers.Single(), builder.ErrorBehavior, builder.AdditionalFilePath);
+                DiagnosticVerifier.Verify(compilation.Compilation, analyzers.Single(), builder.ErrorBehavior, builder.AdditionalFilePath);
                 verifyProtobuf(ReadProtobuf().ToList());
             }
 
@@ -173,105 +170,106 @@ namespace SonarAnalyzer.Test.TestFramework
             }
         }
 
-        public IEnumerable<Compilation> Compile(bool concurrentAnalysis) =>
-            builder.IsRazor ? CompileRazor() : CreateProject(concurrentAnalysis).Solution.Compile(builder.ParseOptions.ToArray());
+        public IEnumerable<CompilationData> Compile(bool concurrentAnalysis)
+        {
+            using var scope = new EnvironmentVariableScope { EnableConcurrentAnalysis = concurrentAnalysis };
+            return builder.IsRazor
+                ? CompileRazor()
+                : CreateProject(concurrentAnalysis).Solution.Compile(builder.ParseOptions.ToArray()).Select(x => new CompilationData(x, null));
+        }
 
-        private IEnumerable<Compilation> CompileRazor()
+        private IEnumerable<CompilationData> CompileRazor()
         {
             if (!MSBuildLocator.IsRegistered)
             {
                 MSBuildLocator.RegisterDefaults();
             }
-
             if (!razorSupportedFrameworks.Contains(builder.RazorFramework))
             {
                 throw new InvalidOperationException("Razor compilation is supported only for .NET 6 and .NET 7 frameworks.");
             }
-
             using var workspace = MSBuildWorkspace.Create();
             workspace.WorkspaceFailed += (_, failure) => Console.WriteLine(failure.Diagnostic);
 
             // Copy razor project directory and test case files to a temporary build location
             var tempPath = Path.Combine(Path.GetTempPath(), $"ut-razor-{Guid.NewGuid()}");
+            Directory.CreateDirectory(tempPath);
             try
             {
-                Directory.CreateDirectory(tempPath);
-
-                List<string> languages = new();
-                if (builder.ParseOptions != null && builder.ParseOptions.Any())
+                foreach (var langVersion in builder.ParseOptions.Cast<CSharpParseOptions>().Select(LangVersion))
                 {
-                    foreach (var parseOption in builder.ParseOptions)
-                    {
-                        if (parseOption is CSharpParseOptions csharpParseOptions)
-                        {
-                            languages.Add(GetLanguageVersionReference(csharpParseOptions));
-                        }
-                    }
-                }
-                else
-                {
-                    languages.Add("latest");
-                }
-
-                foreach (var lang in languages)
-                {
-                    Directory.CreateDirectory(Path.Combine(tempPath, lang));
-                    // Copy all the files
-                    // To improve: Paths are currently relative to entry assembly => needs to be duplicated in different projects for now.
-                    foreach (var file in Directory.GetFiles(@"TestCases\Razor\EmptyProject").Concat(builder.Paths.Select(TestCasePath)))
-                    {
-                        File.Copy(file, Path.Combine(tempPath, lang, Path.GetFileName(file)));
-                    }
-                    foreach (var snippet in builder.Snippets)
-                    {
-                        File.WriteAllText(Path.Combine(tempPath, lang, snippet.FileName), snippet.Content);
-                    }
-                    var csprojPath = Path.Combine(tempPath, lang, "EmptyProject.csproj");
-                    var destinationXml = XElement.Load(csprojPath);
-
-                    // Set TargetFramework
-                    destinationXml.Descendants("TargetFramework").Single().Value = builder.RazorFramework;
-                    // Add References
-                    var itemGroup = destinationXml.Descendants("ItemGroup").Single();
-                    foreach (var reference in builder.References)
-                    {
-                        itemGroup.Add(new XElement("Reference", new XAttribute("Include", reference.Display)));
-                    }
-                    // Set LangVersion
-                    destinationXml.Descendants("LangVersion").Single().Value = lang;
-                    destinationXml.Save(csprojPath);
-
-                    yield return workspace.OpenProjectAsync(csprojPath).Result.GetCompilationAsync().Result;
+                    var projectRoot = Path.Combine(tempPath, langVersion);
+                    Directory.CreateDirectory(projectRoot);
+                    var csProjPath = PrepareRazorProject(projectRoot, langVersion);
+                    var razorFiles = PrepareRazorFiles(projectRoot);
+                    yield return new(workspace.OpenProjectAsync(csProjPath).Result.GetCompilationAsync().Result, razorFiles.ToArray());
                 }
             }
             finally
             {
-                if (Directory.Exists(tempPath))
-                {
-                    Directory.Delete(tempPath, true);
-                }
+                Directory.Delete(tempPath, true);
             }
+
+            static string LangVersion(CSharpParseOptions options) =>
+                options.LanguageVersion switch
+                {
+                    // 5 and 6 should not be needed here
+                    // 7 also does not support with Nullable context
+                    // 8 and 9 do not support global using directives
+                    LanguageVersion.CSharp10 => "10.0",
+                    LanguageVersion.CSharp11 => "11.0",
+                    LanguageVersion.CSharp12 => "12.0",
+                    _ => throw new NotSupportedException($"Unexpected language version {options.LanguageVersion}. Update this switch to add the new version.")
+                };
         }
 
-        private static string GetLanguageVersionReference(CSharpParseOptions parseOption) =>
-            parseOption.LanguageVersion switch
+        private string PrepareRazorProject(string projectRoot, string langVersion)
+        {
+            // To improve: Paths are currently relative to entry assembly => needs to be duplicated in different projects for now.
+            foreach (var file in Directory.GetFiles(@"TestCases\Razor\EmptyProject"))
             {
-                LanguageVersion.CSharp5 => "5.0",
-                LanguageVersion.CSharp6 => "6.0",
-                LanguageVersion.CSharp7 => "7.0",
-                LanguageVersion.CSharp7_1 => "7.1",
-                LanguageVersion.CSharp7_2 => "7.2",
-                LanguageVersion.CSharp7_3 => "7.3",
-                LanguageVersion.CSharp8 => "8.0",
-                LanguageVersion.CSharp9 => "9.0",
-                LanguageVersion.CSharp10 => "10.0",
-                LanguageVersion.CSharp11 => "11.0",
-                _ => "latest"
-            };
+                File.Copy(file, Path.Combine(projectRoot, Path.GetFileName(file)));
+            }
+            var csProjPath = Path.Combine(projectRoot, "EmptyProject.csproj");
+            var xml = XElement.Load(csProjPath);
+            xml.Descendants("TargetFramework").Single().Value = builder.RazorFramework;
+            xml.Descendants("LangVersion").Single().Value = langVersion;
+            var references = xml.Descendants("ItemGroup").Single();
+            foreach (var reference in builder.References)
+            {
+                references.Add(new XElement("Reference", new XAttribute("Include", reference.Display)));
+            }
+            xml.Save(csProjPath);
+            return csProjPath;
+        }
+
+        private List<string> PrepareRazorFiles(string projectRoot)
+        {
+            var razorFiles = new List<string>();
+            // To improve: Paths are currently relative to entry assembly => needs to be duplicated in different projects for now.
+            foreach (var file in builder.Paths.Select(TestCasePath))
+            {
+                var filePath = Path.Combine(projectRoot, Path.GetFileName(file));
+                File.Copy(file, filePath);
+                if (IsRazorOrCshtml(filePath))
+                {
+                    razorFiles.Add(filePath);
+                }
+            }
+            foreach (var snippet in builder.Snippets.Where(x => IsRazorOrCshtml(x.FileName)))
+            {
+                var filePath = Path.Combine(projectRoot, snippet.FileName);
+                File.WriteAllText(filePath, snippet.Content);
+                if (IsRazorOrCshtml(filePath))
+                {
+                    razorFiles.Add(filePath);
+                }
+            }
+            return razorFiles;
+        }
 
         private ProjectBuilder CreateProject(bool concurrentAnalysis)
         {
-            using var scope = new EnvironmentVariableScope { EnableConcurrentAnalysis = concurrentAnalysis };
             var paths = builder.Paths.Select(TestCasePath).ToArray();
             return SolutionBuilder.Create()
                 .AddProject(language, true, builder.OutputKind)
@@ -318,10 +316,7 @@ namespace SonarAnalyzer.Test.TestFramework
 
         private void ValidateExtension(string path)
         {
-            var extension = Path.GetExtension(path);
-            if (!extension.Equals(language.FileExtension, StringComparison.OrdinalIgnoreCase)
-                && !extension.Equals(".razor", StringComparison.OrdinalIgnoreCase)
-                && !extension.Equals(".cshtml", StringComparison.OrdinalIgnoreCase))
+            if (!Path.GetExtension(path).Equals(language.FileExtension, StringComparison.OrdinalIgnoreCase) && !IsRazorOrCshtml(path))
             {
                 throw new ArgumentException($"Path '{path}' doesn't match {language.LanguageName} file extension '{language.FileExtension}'.");
             }
@@ -360,5 +355,11 @@ namespace SonarAnalyzer.Test.TestFramework
                 throw new ArgumentException($"{analyzers.Single().GetType().Name} does not support diagnostics fixable by the {codeFix.GetType().Name}.");
             }
         }
+
+        private static bool IsRazorOrCshtml(string path) =>
+            Path.GetExtension(path) is var extension
+            && (extension.Equals(".razor", StringComparison.OrdinalIgnoreCase) || extension.Equals(".cshtml", StringComparison.OrdinalIgnoreCase));
+
+        public sealed record CompilationData(Compilation Compilation, string[] AdditionalSourceFiles);
     }
 }
