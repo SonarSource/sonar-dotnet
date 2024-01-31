@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 int? topLevel = 42;
 var v = topLevel.Value;
@@ -147,5 +148,28 @@ public struct Repro_6682
         {
             var value = arg.Value;  // Noncompliant FP
         }
+    }
+}
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8633
+public class Repro_8633
+{
+    public TimeOnly ThrowHelper()
+    {
+        var time = LoadCurrentTimeFromProvider();
+        if (!time.HasValue)
+        {
+            ExceptionHelper.ThrowBecauseOfMissingTime();
+        }
+
+        return time.Value; // Noncompliant FP
+    }
+
+    private TimeOnly? LoadCurrentTimeFromProvider() => null;
+
+    public static class ExceptionHelper
+    {
+        [DoesNotReturn]
+        public static void ThrowBecauseOfMissingTime() => throw new ArgumentNullException();
     }
 }
