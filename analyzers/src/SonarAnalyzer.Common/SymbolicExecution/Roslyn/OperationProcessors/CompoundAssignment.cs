@@ -28,16 +28,16 @@ internal sealed class CompoundAssignment : SimpleProcessor<ICompoundAssignmentOp
         ICompoundAssignmentOperationWrapper.FromOperation(operation);
 
     protected override ProgramState Process(SymbolicContext context, ICompoundAssignmentOperationWrapper assignment) =>
-        ProcessNumericalCompoundAssignment(context.State, assignment)
+        ProcessNumericalCompoundAssignment(context.State, assignment, context.IsInLoop)
         ?? ProcessDelegateCompoundAssignment(context.State, assignment)
         ?? ProcessCompoundAssignment(context.State, assignment)
         ?? context.State;
 
-    private static ProgramState ProcessNumericalCompoundAssignment(ProgramState state, ICompoundAssignmentOperationWrapper assignment)
+    private static ProgramState ProcessNumericalCompoundAssignment(ProgramState state, ICompoundAssignmentOperationWrapper assignment, bool isInLoop)
     {
         if (state.Constraint<NumberConstraint>(assignment.Target) is { } leftNumber
             && state.Constraint<NumberConstraint>(assignment.Value) is { } rightNumber
-            && ArithmeticCalculator.Calculate(assignment.OperatorKind, leftNumber, rightNumber) is { } constraint)
+            && ArithmeticCalculator.Calculate(assignment.OperatorKind, leftNumber, rightNumber, isInLoop) is { } constraint)
         {
             state = state.SetOperationConstraint(assignment, constraint);
             if (assignment.Target.TrackedSymbol(state) is { } symbol)

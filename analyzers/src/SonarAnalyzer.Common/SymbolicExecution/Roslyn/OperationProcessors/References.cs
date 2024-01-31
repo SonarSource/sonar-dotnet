@@ -71,7 +71,7 @@ internal sealed class PropertyReference : BranchingProcessor<IPropertyReferenceO
     protected override IPropertyReferenceOperationWrapper Convert(IOperation operation) =>
         IPropertyReferenceOperationWrapper.FromOperation(operation);
 
-    protected override ProgramState PreProcess(ProgramState state, IPropertyReferenceOperationWrapper operation)
+    protected override ProgramState PreProcess(ProgramState state, IPropertyReferenceOperationWrapper operation, bool isInLoop)
     {
         if (operation.Instance.TrackedSymbol(state) is { } symbol)
         {
@@ -87,12 +87,12 @@ internal sealed class PropertyReference : BranchingProcessor<IPropertyReferenceO
         return state;
     }
 
-    protected override SymbolicConstraint BoolConstraintFromOperation(ProgramState state, IPropertyReferenceOperationWrapper operation, bool isLoopCondition, int visitCount) =>
+    protected override SymbolicConstraint BoolConstraintFromOperation(ProgramState state, IPropertyReferenceOperationWrapper operation) =>
         IsNullableProperty(operation, "HasValue") && state[operation.Instance]?.Constraint<ObjectConstraint>() is { } objectConstraint
             ? BoolConstraint.From(objectConstraint == ObjectConstraint.NotNull)
             : null;
 
-    protected override ProgramState LearnBranchingConstraint(ProgramState state, IPropertyReferenceOperationWrapper operation, bool isLoopCondition, int visitCount, bool falseBranch) =>
+    protected override ProgramState LearnBranchingConstraint(ProgramState state, IPropertyReferenceOperationWrapper operation, bool falseBranch) =>
         IsNullableProperty(operation, "HasValue") && operation.Instance.TrackedSymbol(state) is { } testedSymbol
             // Can't use ObjectConstraint.ApplyOpposite() because here, we are sure that it is either Null or NotNull
             ? state.SetSymbolConstraint(testedSymbol, falseBranch ? ObjectConstraint.Null : ObjectConstraint.NotNull)

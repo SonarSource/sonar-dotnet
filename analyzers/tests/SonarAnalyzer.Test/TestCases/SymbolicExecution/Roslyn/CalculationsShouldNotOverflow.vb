@@ -123,13 +123,13 @@ Public Class Sample
             __ = i + 100        ' Compliant
         Next
         For i = 0 To 2147483547
-            __ = i + 101        ' Noncompliant {{This calculation is likely to overflow the maximum value of '2147483647'.}}
+            __ = i + 101        ' FN
         Next
         For i = 2147483546 To 2147483547
             __ = i + 100        ' Compliant
         Next
         For i = 2147483546 To 2147483547
-            __ = i + 101        ' Noncompliant
+            __ = i + 101        ' FN
         Next
     End Sub
 
