@@ -37,6 +37,16 @@ public class CompilationIssuesTest
         });
 
     [TestMethod]
+    public void UniqueKeys_IteratingIsResilientToRemoval()
+    {
+        var sut = CreateSut();
+        var enumerator = sut.UniqueKeys().GetEnumerator();
+        enumerator.MoveNext();
+        sut.Remove((IssueLocationKey)enumerator.Current);
+        enumerator.Invoking(x => x.MoveNext()).Should().NotThrow();
+    }
+
+    [TestMethod]
     public void Remove_NoMatch()
     {
         var sut = CreateSut();
