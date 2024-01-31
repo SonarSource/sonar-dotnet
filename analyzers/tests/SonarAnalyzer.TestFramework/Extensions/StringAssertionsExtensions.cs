@@ -24,9 +24,11 @@ namespace SonarAnalyzer.Test.Helpers
 {
     public static class StringAssertionsExtensions
     {
+        [CustomAssertion]
         public static void BeIgnoringLineEndings(this StringAssertions stringAssertions, string expected) =>
             stringAssertions.Subject.ToUnixLineEndings().Should().Be(expected.ToUnixLineEndings());
 
+        [CustomAssertion]
         public static void ContainIgnoringLineEndings(this StringAssertions stringAssertions, string expected) =>
             stringAssertions.Subject.ToUnixLineEndings().Should().Contain(expected.ToUnixLineEndings());
     }
