@@ -37,18 +37,10 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void MarkAssemblyWithNeutralResourcesLanguageAttribute_HasResx_HasInvalidAttribute_Noncompliant() =>
-            builder.AddPaths("MarkAssemblyWithNeutralResourcesLanguageAttributeNonCompliant.Invalid.cs", @"Resources\SomeResources.Designer.cs")
-                .Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage("""
-                There are differences for CSharp7 :
-                  Line 1: Unexpected issue 'Provide a 'System.Resources.NeutralResourcesLanguageAttribute' attribute for assembly 'project0'.' Rule S4026*
-                """);
+            builder.AddPaths("MarkAssemblyWithNeutralResourcesLanguageAttributeNonCompliant.Invalid.cs", @"Resources\SomeResources.Designer.cs").Verify();
 
         [TestMethod]
         public void MarkAssemblyWithNeutralResourcesLanguageAttribute_HasResx_NoAttribute_Noncompliant() =>
-            builder.AddPaths("MarkAssemblyWithNeutralResourcesLanguageAttributeNonCompliant.cs", @"Resources\SomeResources.Designer.cs")
-                .Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage("""
-                There are differences for CSharp7 :
-                  Line 1: Unexpected issue 'Provide a 'System.Resources.NeutralResourcesLanguageAttribute' attribute for assembly 'project0'.' Rule S4026*
-                """);
+            builder.AddPaths("MarkAssemblyWithNeutralResourcesLanguageAttributeNonCompliant.cs", @"Resources\SomeResources.Designer.cs").Verify();
     }
 }

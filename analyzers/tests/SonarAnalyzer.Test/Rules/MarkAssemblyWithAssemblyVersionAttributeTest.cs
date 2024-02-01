@@ -53,17 +53,15 @@ namespace SonarAnalyzer.Test.Rules
         public void MarkAssemblyWithAssemblyVersionAttributeNoncompliant_CS() =>
             builderCS.AddPaths("MarkAssemblyWithAssemblyVersionAttributeNoncompliant.cs")
                 .WithConcurrentAnalysis(false)
-                .Invoking(x => x.Verify())
-                .Should().Throw<AssertFailedException>().WithMessage("*Provide an 'AssemblyVersion' attribute for assembly 'project0'.*");
+                .Verify();
 
         [TestMethod]
         public void MarkAssemblyWithAssemblyVersionAttributeNoncompliant_NoTargets_ShouldNotRaise_CS() =>
-            builderCS.AddPaths("MarkAssemblyWithAssemblyVersionAttributeNoncompliant.cs")
+            // False positive. No assembly gets generated when Microsoft.Build.NoTargets is referenced.
+            builderCS.AddSnippet("// Noncompliant ^1#0 {{Provide an 'AssemblyVersion' attribute for assembly 'project0'.}}")
                 .AddReferences(NuGetMetadataReference.MicrosoftBuildNoTargets())
                 .WithConcurrentAnalysis(false)
-                .Invoking(x => x.Verify())
-                // False positive. No assembly gets generated when Microsoft.Build.NoTargets is referenced.
-                .Should().Throw<AssertFailedException>().WithMessage("*Provide an 'AssemblyVersion' attribute for assembly 'project0'.*");
+                .Verify();
 
         [TestMethod]
         public void MarkAssemblyWithAssemblyVersionAttribute_VB() =>
@@ -89,17 +87,15 @@ namespace SonarAnalyzer.Test.Rules
         public void MarkAssemblyWithAssemblyVersionAttributeNoncompliant_VB() =>
             builderVB.AddPaths("MarkAssemblyWithAssemblyVersionAttributeNoncompliant.vb")
                 .WithConcurrentAnalysis(false)
-                .Invoking(x => x.Verify())
-                .Should().Throw<AssertFailedException>().WithMessage("*Provide an 'AssemblyVersion' attribute for assembly 'project0'.*");
+                .Verify();
 
         [TestMethod]
         public void MarkAssemblyWithAssemblyVersionAttributeNoncompliant_NoTargets_ShouldNotRaise_VB() =>
-            builderVB.AddPaths("MarkAssemblyWithAssemblyVersionAttributeNoncompliant.vb")
+            // False positive. No assembly gets generated when Microsoft.Build.NoTargets is referenced.
+            builderVB.AddSnippet("' Noncompliant ^1#0 {{Provide an 'AssemblyVersion' attribute for assembly 'project0'.}}")
                 .AddReferences(NuGetMetadataReference.MicrosoftBuildNoTargets())
                 .WithConcurrentAnalysis(false)
-                .Invoking(x => x.Verify())
-                // False positive. No assembly gets generated when Microsoft.Build.NoTargets is referenced.
-                .Should().Throw<AssertFailedException>().WithMessage("*Provide an 'AssemblyVersion' attribute for assembly 'project0'.*");
+                .Verify();
 
         private static IEnumerable<MetadataReference> GetAspNetCoreRazorReferences() =>
             NuGetMetadataReference.MicrosoftAspNetCoreMvcRazorRuntime(Constants.NuGetLatestVersion);

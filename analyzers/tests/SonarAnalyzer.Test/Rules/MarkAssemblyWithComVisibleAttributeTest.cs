@@ -38,17 +38,11 @@ namespace SonarAnalyzer.Test.Rules
             builderVB.AddPaths(@"MarkAssemblyWithComVisibleAttribute.vb").Verify();
 
         [TestMethod]
-        public void MarkAssemblyWithComVisibleAttributeNoncompliant_CS()
-        {
-            var action = () => builderCS.AddPaths(@"MarkAssemblyWithComVisibleAttributeNoncompliant.cs").Verify();
-            action.Should().Throw<AssertFailedException>().WithMessage("*Provide a 'ComVisible' attribute for assembly 'project0'.*");
-        }
+        public void MarkAssemblyWithComVisibleAttributeNoncompliant_CS() =>
+            builderCS.AddPaths(@"MarkAssemblyWithComVisibleAttributeNoncompliant.cs").Verify();
 
         [TestMethod]
-        public void MarkAssemblyWithComVisibleAttributeNoncompliant_VB()
-        {
-            var action = () => builderVB.AddPaths(@"MarkAssemblyWithComVisibleAttributeNoncompliant.vb").Verify();
-            action.Should().Throw<AssertFailedException>().WithMessage("*Provide a 'ComVisible' attribute for assembly 'project0'.*");
-        }
+        public void MarkAssemblyWithComVisibleAttributeNoncompliant_VB() =>
+            builderVB.AddPaths(@"MarkAssemblyWithComVisibleAttributeNoncompliant.vb").Verify();
     }
 }
