@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn;
 public class ProgramStatesTest
 {
     [TestMethod]
-    public void IterateEmtpyStates()
+    public void IterateEmptyStates()
     {
         var sut = new ProgramStates();
         sut.Length.Should().Be(0);
