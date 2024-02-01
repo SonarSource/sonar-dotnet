@@ -30,11 +30,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Regression tests for scanning projects with the scanner-cli.
- * <p>
- * Note that this uses a different orchestrator instance than {@link com.sonar.it.csharp.Tests} or {@link com.sonar.it.vbnet.Tests}
  */
 @ExtendWith(Tests.class)
-public class ScannerCliTest {
+class ScannerCliTest {
   private static final String RAZOR_PAGES_PROJECT = "WebApplication";
   private static final String HTML_IN_MAIN_AND_CSHARP_IN_TEST_SUBFOLDERS = "ScannerCli";
 
@@ -42,7 +40,7 @@ public class ScannerCliTest {
   private static final String INCREMENTAL_PR_ANALYSIS_WARNING = "WARN: Incremental PR analysis: Could not determine common base path, cache will not be computed. Consider setting 'sonar.projectBaseDir' property.";
 
   @Test
-  public void givenRazorPagesMainCode_whenScannerForCliIsUsed_logsCSharpWarning() {
+  void givenRazorPagesMainCode_whenScannerForCliIsUsed_logsCSharpWarning() {
     // by default, the `sonar.sources` are in the scan base directory
     SonarScanner scanner = getSonarScanner(RAZOR_PAGES_PROJECT, "projects/" + RAZOR_PAGES_PROJECT);
     BuildResult result = ORCHESTRATOR.executeBuild(scanner);
@@ -60,7 +58,7 @@ public class ScannerCliTest {
   }
 
   @Test
-  public void givenMainHtmlCodeAndTestCSharpCode_whenScannerForCliIsUsed_logsCSharpWarning() {
+  void givenMainHtmlCodeAndTestCSharpCode_whenScannerForCliIsUsed_logsCSharpWarning() {
     SonarScanner scanner = getSonarScanner(HTML_IN_MAIN_AND_CSHARP_IN_TEST_SUBFOLDERS, "projects/" + HTML_IN_MAIN_AND_CSHARP_IN_TEST_SUBFOLDERS)
       .setSourceDirs("main")
       .setTestDirs("test");
@@ -77,7 +75,7 @@ public class ScannerCliTest {
   }
 
   @Test
-  public void givenTestHtmlAndCSharpCode_whenScannerForCliIsUsed_logsCSharpWarning() {
+  void givenTestHtmlAndCSharpCode_whenScannerForCliIsUsed_logsCSharpWarning() {
     SonarScanner scanner = getSonarScanner(HTML_IN_MAIN_AND_CSHARP_IN_TEST_SUBFOLDERS, "projects/" + HTML_IN_MAIN_AND_CSHARP_IN_TEST_SUBFOLDERS)
       .setSourceDirs("")
       .setTestDirs("main,test");
@@ -92,11 +90,11 @@ public class ScannerCliTest {
   }
 
   @Test
-  public void givenTestHtmlCode_whenScannerForCliIsUsed_doesNotLogCsharpWarning() {
+  void givenTestHtmlCode_whenScannerForCliIsUsed_doesNotLogCsharpWarning() {
     SonarScanner scanner = getSonarScanner(HTML_IN_MAIN_AND_CSHARP_IN_TEST_SUBFOLDERS, "projects/" + HTML_IN_MAIN_AND_CSHARP_IN_TEST_SUBFOLDERS)
       .setSourceDirs("")
       .setTestDirs("main,test")
-      .setProperty("sonar.cs.file.suffixes=", ".no_extension");
+      .setProperty("sonar.cs.file.suffixes", ".no_extension");
     BuildResult result = ORCHESTRATOR.executeBuild(scanner);
 
     assertThat(result.getLogsLines(l -> l.contains("WARN"))).isEmpty();
@@ -110,6 +108,9 @@ public class ScannerCliTest {
       // This is set just to underline that the message regarding Incremental PR Analysis is confusing when the Scanner for .NET is not used.
       // The Scanner for .NET under the hood sets the `sonar.pullrequest.cache.basepath` property (which is needed by the plugin) based on `sonar.projectBaseDir` property.
       .setProperty("sonar.projectBaseDir", projectDirPath.getAbsolutePath())
+      // Without this property the following warning message appear:
+      //   WARN: sonar.plugins.downloadOnlyRequired is false, so ALL available plugins will be downloaded
+      .setProperty("sonar.plugins.downloadOnlyRequired", "true")
       .setSourceDirs(".");
   }
 }
