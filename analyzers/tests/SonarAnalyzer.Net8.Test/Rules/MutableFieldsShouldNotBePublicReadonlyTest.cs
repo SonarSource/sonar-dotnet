@@ -25,11 +25,12 @@ namespace SonarAnalyzer.Net8.Test.Rules;
 [TestClass]
 public class MutableFieldsShouldNotBePublicReadonlyTest
 {
-    private readonly VerifierBuilder builderCS = new VerifierBuilder<MutableFieldsShouldNotBePublicReadonly>().WithOptions(ParseOptionsHelper.FromCSharp12);
+    private readonly VerifierBuilder builder = new VerifierBuilder<MutableFieldsShouldNotBePublicReadonly>();
 
     [TestMethod]
     public void MutableFieldsShouldNotBePublicReadonly() =>
-        builderCS
+        builder
             .AddReferences(MetadataReferenceFacade.SystemCollections)
-            .AddPaths("MutableFieldsShouldNotBePublicReadonly.cs").Verify();
+            .AddPaths("MutableFieldsShouldNotBePublicReadonly.cs")
+            .Verify();
 }
