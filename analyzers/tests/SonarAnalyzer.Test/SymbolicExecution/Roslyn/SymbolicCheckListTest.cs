@@ -24,7 +24,6 @@ using SonarAnalyzer.Test.TestFramework.SymbolicExecution;
 
 using ProgramStates = SonarAnalyzer.SymbolicExecution.Roslyn.States<SonarAnalyzer.SymbolicExecution.Roslyn.ProgramState>;
 
-
 namespace SonarAnalyzer.Test.SymbolicExecution.Roslyn;
 
 [TestClass]
@@ -74,7 +73,7 @@ public class SymbolicCheckListTest
     {
         var triple = new PostProcessTestCheck(x => new ProgramStates(x.State, x.State, x.State));
         var sut = new SymbolicCheckList(new[] { triple, triple });
-        sut.PostProcess(new(null, default, ProgramState.Empty, false, Array.Empty<ISymbol>())).Should().HaveCount(9);
+        sut.PostProcess(new(null, default, ProgramState.Empty, false, Array.Empty<ISymbol>())).Length.Should().Be(9);
     }
 
     [TestMethod]
@@ -82,6 +81,6 @@ public class SymbolicCheckListTest
     {
         var empty = new PostProcessTestCheck(x => new ProgramStates());
         var sut = new SymbolicCheckList(new[] { empty });
-        sut.PostProcess(new(null, default, ProgramState.Empty, false, Array.Empty<ISymbol>())).Should().HaveCount(0);
+        sut.PostProcess(new(null, default, ProgramState.Empty, false, Array.Empty<ISymbol>())).Length.Should().Be(0);
     }
 }
