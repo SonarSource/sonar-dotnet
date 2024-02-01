@@ -30,7 +30,7 @@ internal sealed record IssueLocationPair(IssueLocation Actual, IssueLocation Exp
 
     public void AppendAssertionMessage(StringBuilder builder)
     {
-        if (Actual is not null && Expected is not null && new IssueLocationKey(Actual) != new IssueLocationKey(Expected))
+        if (Actual is not null && Expected is not null && !new IssueLocationKey(Actual).IsMatch(Expected))
         {
             throw new InvalidOperationException("Something went horribly wrong. This is supposed to be called only for issues with the same key.");
         }

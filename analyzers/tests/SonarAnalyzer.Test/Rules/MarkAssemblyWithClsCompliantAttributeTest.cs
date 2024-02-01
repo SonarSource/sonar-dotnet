@@ -38,17 +38,11 @@ namespace SonarAnalyzer.Test.Rules
             builderVB.AddPaths(@"MarkAssemblyWithClsCompliantAttribute.vb").Verify();
 
         [TestMethod]
-        public void MarkAssemblyWithClsCompliantAttributeNoncompliant_CS()
-        {
-            Action action = () => builderCS.AddPaths(@"MarkAssemblyWithClsCompliantAttributeNoncompliant.cs").Verify();
-            action.Should().Throw<AssertFailedException>().WithMessage("*Provide a 'CLSCompliant' attribute for assembly 'project0'.*");
-        }
+        public void MarkAssemblyWithClsCompliantAttributeNoncompliant_CS() =>
+            builderCS.AddPaths(@"MarkAssemblyWithClsCompliantAttributeNoncompliant.cs").Verify();
 
         [TestMethod]
-        public void MarkAssemblyWithClsCompliantAttributeNoncompliant_VB()
-        {
-            Action action = () => builderVB.AddPaths(@"MarkAssemblyWithClsCompliantAttributeNoncompliant.vb").Verify();
-            action.Should().Throw<AssertFailedException>().WithMessage("*Provide a 'CLSCompliant' attribute for assembly 'project0'.*");
-        }
+        public void MarkAssemblyWithClsCompliantAttributeNoncompliant_VB() =>
+            builderVB.AddPaths(@"MarkAssemblyWithClsCompliantAttributeNoncompliant.vb").Verify();
     }
 }

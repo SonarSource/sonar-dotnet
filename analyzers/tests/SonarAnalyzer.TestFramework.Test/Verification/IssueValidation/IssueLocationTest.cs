@@ -57,7 +57,10 @@ public class IssueLocationTest
     {
         var orig = new IssueLocation { RuleId = "Sxxxx", FilePath = "File.cs", LineNumber = 1, IsPrimary = true, Message = "Msg1", IssueId = "id1", Start = 2, Length = 4 };
         var same = new IssueLocation { RuleId = "Sxxxx", FilePath = "File.cs", LineNumber = 1, IsPrimary = true, Message = "Msg1", IssueId = "id1", Start = 2, Length = 4 };
+        var proj = new IssueLocation { RuleId = "Sxxxx", FilePath = string.Empty, LineNumber = 1, IsPrimary = true, Message = "Msg1", IssueId = "id1", Start = 2, Length = 4 };
         orig.Equals(same).Should().BeTrue();
+        orig.Equals(proj).Should().BeTrue();
+        proj.Equals(same).Should().BeTrue();
         orig.Equals(null).Should().BeFalse();
         orig.Equals("different type").Should().BeFalse();
         orig.Equals(new IssueLocation { RuleId = "Syyyy", FilePath = "File.cs", LineNumber = 1, IsPrimary = true, Message = "Msg1", IssueId = "id1", Start = 2, Length = 4 }).Should().BeFalse();
@@ -117,6 +120,10 @@ public class IssueLocationTest
     [TestMethod]
     public void IssueLocationKey_IsMatch_MatchesSameKey() =>
         new IssueLocationKey("File.cs", 42, true).IsMatch(Issue).Should().BeTrue();
+
+    [TestMethod]
+    public void IssueLocationKey_IsMatch_ProjectLevelMatchesAnyPath() =>
+        new IssueLocationKey(string.Empty, 42, true).IsMatch(Issue).Should().BeTrue();
 
     [TestMethod]
     public void IssueLocationKey_IsMatch_DifferentFilePath() =>

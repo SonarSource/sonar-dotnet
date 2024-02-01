@@ -18,15 +18,17 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Rules.CSharp;
+using Microsoft.CodeAnalysis.VisualBasic;
 using SonarAnalyzer.Test.Helpers;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.Test.TestFramework.Tests
 {
     [TestClass]
     public class DiagnosticVerifierTest
     {
-        private readonly VerifierBuilder builder = new VerifierBuilder<BinaryOperationWithIdenticalExpressions>();
+        private readonly VerifierBuilder builder = new VerifierBuilder<CS.BinaryOperationWithIdenticalExpressions>();
 
         [TestMethod]
         public void PrimaryIssueNotExpected() =>
@@ -218,6 +220,62 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                       Line 5: Missing expected issue
                       Line 6 Secondary location: Missing expected issue ID MyId1
                     """);
+
+        [TestMethod]
+        public void ProjectLevelIssues_CorrectLocation_WrongMessage()
+        {
+            var project = SolutionBuilder.Create()
+                .AddProject(AnalyzerLanguage.VisualBasic)
+                .AddSnippet("' Noncompliant ^1#0 {{This is not the correct message.}}");
+            var compilation = project.GetCompilation(null, new VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary, optionExplicit: false));
+            ((Action)(() => DiagnosticVerifier.Verify(compilation, new VB.OptionExplicitOn(), CompilationErrorBehavior.Default))).Should().Throw<AssertFailedException>().WithMessage("""
+                There are differences for VisualBasic16_9 <project-level-issue>:
+                  Line 1: The expected message 'This is not the correct message.' does not match the actual message 'Configure 'Option Explicit On' for assembly 'project0'.' Rule S6146
+                """);
+        }
+
+        [TestMethod]
+        public void ProjectLevelIssues_WrongLocation()
+        {
+            var project = SolutionBuilder.Create()
+                .AddProject(AnalyzerLanguage.VisualBasic)
+                .AddSnippet("' Noncompliant@+1 {{This is expected on a wrong line.}}");
+            var compilation = project.GetCompilation(null, new VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary, optionExplicit: false));
+            ((Action)(() => DiagnosticVerifier.Verify(compilation, new VB.OptionExplicitOn(), CompilationErrorBehavior.Default))).Should().Throw<AssertFailedException>().WithMessage("""
+                There are differences for VisualBasic16_9 <project-level-issue>:
+                  Line 1: Unexpected issue 'Configure 'Option Explicit On' for assembly 'project0'.' Rule S6146
+
+                There are differences for VisualBasic16_9 snippet1.vb:
+                  Line 2: Missing issue 'This is expected on a wrong line.'
+                """);
+        }
+
+        [DataTestMethod]
+        [DataRow("First.vb", "Second.vb")]  // File ordering should not confuse the matching
+        [DataRow("Second.vb", "First.vb")]
+        public void ProjectLevelIssues_HaveExpectedAnnotationWithPath(string projectLevelIssueFile, string fileLevelIssueFile)
+        {
+            var project = SolutionBuilder.Create()
+                .AddProject(AnalyzerLanguage.VisualBasic)
+                .AddSnippet("' Noncompliant ^1#0 {{Configure 'Option Explicit On' for assembly 'project0'.}}", projectLevelIssueFile)
+                .AddSnippet("Option Explicit Off ' Noncompliant ^1#19 {{Change this to 'Option Explicit On'.}}", fileLevelIssueFile);
+            var compilation = project.GetCompilation(null, new VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary, optionExplicit: false));
+            ((Action)(() => DiagnosticVerifier.Verify(compilation, new VB.OptionExplicitOn(), CompilationErrorBehavior.Default))).Should().NotThrow();
+        }
+
+        [TestMethod]
+        public void ProjectLevelIssues_MultipleIssuesRaised()
+        {
+            var project = SolutionBuilder.Create()
+                .AddProject(AnalyzerLanguage.VisualBasic)
+                .AddSnippet("""
+                ' Noncompliant ^1#0 {{Configure 'Option Explicit On' for assembly 'project0'.}}
+                ' Noncompliant@-1 ^1#0 {{Configure 'Option Strict On' for assembly 'project0'.}}
+                """);
+            var compilation = project.GetCompilation(null, new VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary, optionExplicit: false, optionStrict: OptionStrict.Off));
+            var analyzers = new DiagnosticAnalyzer[] { new VB.OptionExplicitOn(), new VB.OptionStrictOn() };
+            ((Action)(() => DiagnosticVerifier.Verify(compilation, analyzers, CompilationErrorBehavior.Default))).Should().NotThrow();
+        }
 
         private void VerifyThrows<TException>(string snippet, string expectedMessage) where TException : Exception =>
             builder.AddSnippet(snippet)
