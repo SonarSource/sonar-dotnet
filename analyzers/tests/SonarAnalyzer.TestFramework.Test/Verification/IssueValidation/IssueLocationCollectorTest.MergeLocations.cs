@@ -49,13 +49,13 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
         {
             var primary = new[]
             {
-                new IssueLocation { FilePath = "File.cs", LineNumber = 1, IsPrimary = true, Message = "Primary 1" },
-                new IssueLocation { FilePath = "File.cs", LineNumber = 2, IsPrimary = true, Message = "Primary 2" }
+                new IssueLocation { FilePath = "File.cs", LineNumber = 1, Type = IssueType.Primary, Message = "Primary 1" },
+                new IssueLocation { FilePath = "File.cs", LineNumber = 2, Type = IssueType.Primary, Message = "Primary 2" }
             };
             var preciseSecondary = new List<IssueLocation>
             {
-                new() { FilePath = "File.cs", LineNumber = 3, IsPrimary = false, Message = "Secondary with same message and location", Start = 10, Length = 5 },
-                new() { FilePath = "File.cs", LineNumber = 3, IsPrimary = false, Message = "Secondary with same message and location", Start = 10, Length = 5 }
+                new() { FilePath = "File.cs", LineNumber = 3, Type = IssueType.Secondary, Message = "Secondary with same message and location", Start = 10, Length = 5 },
+                new() { FilePath = "File.cs", LineNumber = 3, Type = IssueType.Secondary, Message = "Secondary with same message and location", Start = 10, Length = 5 }
             };
             IssueLocationCollector.MergeLocations(primary, preciseSecondary).Should().BeEquivalentTo(primary.Concat(preciseSecondary));
         }

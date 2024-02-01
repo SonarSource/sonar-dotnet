@@ -142,7 +142,7 @@ namespace SonarAnalyzer.Test.TestFramework
             foreach (var filePairs in MatchPairs(actual, expected).GroupBy(x => x.FilePath).OrderBy(x => x.Key))
             {
                 assertionMessages.AppendLine($"There are differences for {actual.LanguageVersion} {SerializePath(filePairs.Key)}:");
-                foreach (var pair in filePairs.OrderBy(x => x.IsPrimary ? 0 : 1).ThenBy(x => x.LineNumber).ThenBy(x => x.Start))
+                foreach (var pair in filePairs.OrderBy(x => x.Type).ThenBy(x => x.LineNumber).ThenBy(x => x.Start))
                 {
                     pair.AppendAssertionMessage(assertionMessages);
                 }
