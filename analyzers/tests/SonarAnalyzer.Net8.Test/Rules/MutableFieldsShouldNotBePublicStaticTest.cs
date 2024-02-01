@@ -25,11 +25,12 @@ namespace SonarAnalyzer.Net8.Test.Rules;
 [TestClass]
 public class MutableFieldsShouldNotBePublicStaticTest
 {
-    private readonly VerifierBuilder builderCS = new VerifierBuilder<MutableFieldsShouldNotBePublicStatic>().WithOptions(ParseOptionsHelper.FromCSharp12);
+    private readonly VerifierBuilder builder = new VerifierBuilder<MutableFieldsShouldNotBePublicStatic>();
 
     [TestMethod]
     public void MutableFieldsShouldNotBePublicStatic() =>
-        builderCS
+        builder
             .AddReferences(MetadataReferenceFacade.SystemCollections)
-            .AddPaths("MutableFieldsShouldNotBePublicStatic.cs").Verify();
+            .AddPaths("MutableFieldsShouldNotBePublicStatic.cs")
+            .Verify();
 }
