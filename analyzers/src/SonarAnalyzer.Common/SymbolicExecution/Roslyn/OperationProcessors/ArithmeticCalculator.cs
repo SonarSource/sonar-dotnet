@@ -26,7 +26,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 internal static class ArithmeticCalculator
 {
     public static NumberConstraint Calculate(BinaryOperatorKind kind, NumberConstraint left, NumberConstraint right, bool isInLoop) =>
-        isInLoop ? null : kind switch
+        isInLoop ? null : kind switch  // TODO: Always calculate result if both operands are constants
         {
             BinaryOperatorKind.Add => NumberConstraint.From(left.Min + right.Min, left.Max + right.Max),
             BinaryOperatorKind.Subtract => NumberConstraint.From(left.Min - right.Max, left.Max - right.Min),
