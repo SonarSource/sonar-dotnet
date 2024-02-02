@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.ComponentModel;
+
 namespace SonarAnalyzer.TestFramework.Verification.IssueValidation;
 
 [DebuggerDisplay("ID:{RuleId} @{LineNumber} Primary:{IsPrimary} Start:{Start} Length:{Length} ID:{IssueId} {Message} {FilePath}")]
@@ -73,10 +75,16 @@ internal sealed class IssueLocation // ToDo: Refactor the relation between this 
         && issue.LineNumber == LineNumber
         && issue.IsPrimary == IsPrimary
         && (IsPrimary || issue.IssueId == IssueId)   // We ignore issueId for primary issues, as we need to match them only for secondary
-        && (issue.RuleId is null || RuleId is null || issue.RuleId == RuleId)
-        && (issue.Message is null || Message is null || issue.Message == Message)
-        && (issue.Start is null || Start is null || issue.Start == Start)
-        && (issue.Length is null || Length is null || issue.Length == Length);
+        && EqualOrNull(issue.RuleId, RuleId)
+        && EqualOrNull(issue.Message, Message)
+        && EqualOrNull(issue.Start, Start)
+        && EqualOrNull(issue.Length, Length);
+
+    private static bool EqualOrNull(string first, string second) =>
+        first is null || second is null || first == second;
+
+    private static bool EqualOrNull(int? first, int? second) =>
+        first is null || second is null || first == second;
 }
 
 [DebuggerDisplay("@{LineNumber} Primary:{IsPrimary} {FilePath}")]

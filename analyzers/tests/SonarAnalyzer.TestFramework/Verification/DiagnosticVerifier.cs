@@ -189,8 +189,8 @@ namespace SonarAnalyzer.Test.TestFramework
         private static IEnumerable<IssueLocationPair> MatchPairs(CompilationIssues actual, CompilationIssues expected)
         {
             var ret = new List<IssueLocationPair>();
-            // Process project-level issues last to properly match path-based issues first.
-            // Then process primary issues first, so we can update their IssueId for the purpose of matching secondary issues with their IssueId
+            // Process file-level issues before project-level that match to any expected file issue
+            // Then process primary before secondary, so we can update primary.IssueId for the purpose of matching seconday issues correctly.
             foreach (var key in actual.UniqueKeys().OrderBy(x => x.FilePath == string.Empty ? 1 : 0).ThenBy(x => x.IsPrimary ? 0 : 1))
             {
                 ret.AddRange(MatchDifferences(actual.Remove(key), expected.Remove(key)));
@@ -223,7 +223,7 @@ namespace SonarAnalyzer.Test.TestFramework
                     actual.UpdatePrimaryIssueIdFrom(expected);
                     expectedIssues.Remove(expected);
                 }
-                yield return new(actual, expected); // expected can be null
+                yield return new(actual, expected);
             }
             foreach (var expected in expectedIssues)
             {
