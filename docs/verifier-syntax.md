@@ -71,9 +71,11 @@ To declare that multiple issues are expected, each issue must be assigned an `[I
 `Error` will mark the line as the location of a compilation error. This is useful to test code snippets that cannot be compiled, as it is usually the case inside an IDE/Editor. To increase comprehensibility, the error code as well as some comments can be specified. These are ignored by the verification process.
 
 ```csharp
-    string x = 2; // Error
     string x = 2; // Error [CS0029]
-    string x = 2; // Error [CS0029] - cannot implicitly convert int to string
+    string x = 2; // Error [CS0029] Cannot implicitly convert int to string
+    string x == 2 // Error [CS1002, CS1525]
+    // Error@+1 [CS0029] Cannot implicitly convert int to string
+    string x = 2; 
 ```
 
 ### Combining multiple patterns
@@ -88,4 +90,4 @@ Note that most of the previous patterns can be used together when needed.
     //                            ^^^^^^ @-1 {{Message for issue 2}}
 ```
 
-The code comment syntax logic is implemented by the [`IssueLocationCollector`](https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/tests/SonarAnalyzer.Test/TestFramework/IssueLocationCollector.cs) class.
+The code comment syntax logic is implemented by the [`IssueLocationCollector`](https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/tests/SonarAnalyzer.TestFramework/Verification/IssueLocationCollector.cs) class.
