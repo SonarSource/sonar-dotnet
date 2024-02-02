@@ -23,8 +23,7 @@
   </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\ITs.JsonParser\ITs.JsonParser.csproj">
-      </ProjectReference>
+      <ProjectReference Include="..\..\src\ITs.JsonParser\ITs.JsonParser.csproj"/>
     </ItemGroup>
 
 </Project>

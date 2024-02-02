@@ -386,6 +386,12 @@ stages:
           targetPath: 'coverage'
 
       - task: DownloadPipelineArtifact@2
+        displayName: 'Download coverage reports'
+        inputs:
+          artifact: ITs.JsonParserCoverage
+          targetPath: 'coverage'
+
+      - task: DownloadPipelineArtifact@2
         displayName: 'Download test results'
         inputs:
           artifact: DotNetTestResultsNet48
@@ -407,6 +413,12 @@ stages:
         displayName: 'Download test results'
         inputs:
           artifact: DotNetTestResultsTestFramework
+          targetPath: 'TestResults'
+
+      - task: DownloadPipelineArtifact@2
+        displayName: 'Download test results'
+        inputs:
+          artifact: ITs.JsonParserResults
           targetPath: 'TestResults'
 
       - powershell: |

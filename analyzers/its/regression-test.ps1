@@ -228,17 +228,17 @@ function Show-DiffResults() {
 
 function Invoke-JsonParser()
 {
-    $jsonParser = Join-Path $PSScriptRoot "..\packaging\binaries\ITs.JsonParser\ITs.JsonParser.exe"
-    $arguments = @(" ")
+    $JsonParser = Join-Path $PSScriptRoot "..\packaging\binaries\ITs.JsonParser\ITs.JsonParser.exe"
+    $Arguments = @(" ")
     if ($ruleId){
-        $arguments += "--rule"
-        $arguments += $ruleId
+        $Arguments += "--rule"
+        $Arguments += $ruleId
     }
     if ($project){
-        $arguments += "--project"
-        $arguments += $project
+        $Arguments += "--project"
+        $Arguments += $project
     }
-    Start-Process $jsonParser -ArgumentList $arguments -NoNewWindow -Wait
+    Start-Process $JsonParser -ArgumentList $Arguments -NoNewWindow -Wait
 }
 
 try {
