@@ -241,6 +241,11 @@ stages:
             TestResultsArtifactName: 'DotNetTestResultsTestFramework'
             ProjectFilePath: 'tests\SonarAnalyzer.TestFramework.Test\SonarAnalyzer.TestFramework.Test.csproj'
             FrameworkMoniker: 'net7.0-windows'
+          ITs.JsonParser:
+            CoverageArtifactName: 'ITs.JsonParserCoverage'
+            TestResultsArtifactName: 'ITs.JsonParserResults'
+            ProjectFilePath: 'tests\ITs.JsonParser.Test\ITs.JsonParser.Test.csproj'
+            FrameworkMoniker: 'net8.0'
 
       steps:
       - task: DownloadPipelineArtifact@2
@@ -381,6 +386,12 @@ stages:
           targetPath: 'coverage'
 
       - task: DownloadPipelineArtifact@2
+        displayName: 'Download coverage reports'
+        inputs:
+          artifact: ITs.JsonParserCoverage
+          targetPath: 'coverage'
+
+      - task: DownloadPipelineArtifact@2
         displayName: 'Download test results'
         inputs:
           artifact: DotNetTestResultsNet48
@@ -402,6 +413,12 @@ stages:
         displayName: 'Download test results'
         inputs:
           artifact: DotNetTestResultsTestFramework
+          targetPath: 'TestResults'
+
+      - task: DownloadPipelineArtifact@2
+        displayName: 'Download test results'
+        inputs:
+          artifact: ITs.JsonParserResults
           targetPath: 'TestResults'
 
       - powershell: |

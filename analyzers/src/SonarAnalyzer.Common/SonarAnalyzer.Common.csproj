@@ -44,6 +44,8 @@
     <Using Include="SonarAnalyzer.Extensions" />
     <Using Include="SonarAnalyzer.Helpers" />
     <Using Include="StyleCop.Analyzers.Lightup" />
+    <Using Include="Microsoft.CodeAnalysis" />
+    <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
   </ItemGroup>
 
   <!-- Generate protobuf classes, supports windows and linux execution -->
