@@ -26,6 +26,7 @@ internal sealed record IssueLocationPair(IssueLocation Actual, IssueLocation Exp
 {
     public string FilePath => Actual?.FilePath ?? Expected.FilePath;
     public int LineNumber => Actual?.LineNumber ?? Expected.LineNumber;
+    public bool IsPrimary => Actual?.IsPrimary ?? Expected.IsPrimary;
     public int? Start => Actual?.Start ?? Expected.Start;
 
     public void AppendAssertionMessage(StringBuilder builder)
@@ -44,9 +45,9 @@ internal sealed record IssueLocationPair(IssueLocation Actual, IssueLocation Exp
         {
             builder.Append(" Rule ").Append(Actual.RuleId);
         }
-        if (Expected?.IssueId is not null)
+        if ((Actual?.IssueId ?? Expected?.IssueId) is { } issueId)
         {
-            builder.Append(" ID ").Append(Expected.IssueId);
+            builder.Append(" ID ").Append(issueId);
         }
         builder.AppendLine();
     }
@@ -63,6 +64,10 @@ internal sealed record IssueLocationPair(IssueLocation Actual, IssueLocation Exp
         else if (Expected is null)
         {
             return $"Unexpected issue '{Actual.Message}'";
+        }
+        else if (Expected.IssueId != Actual.IssueId)
+        {
+            return $"The expected issueId '{Expected.IssueId}' does not match the actual issueId '{Actual.IssueId}'";
         }
         else if (Expected.Message is not null && Actual.Message != Expected.Message)
         {

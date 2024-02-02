@@ -70,10 +70,11 @@ internal sealed class CompilationIssues : IEnumerable<IssueLocation>
         var ret = new List<IssueLocation>();
         foreach (var diagnostic in diagnostics)
         {
-            ret.Add(new IssueLocation(diagnostic));
+            var primary = new IssueLocation(diagnostic);
+            ret.Add(primary);
             for (var i = 0; i < diagnostic.AdditionalLocations.Count; i++)
             {
-                ret.Add(new IssueLocation(diagnostic.GetSecondaryLocation(i)));
+                ret.Add(new IssueLocation(primary, diagnostic.GetSecondaryLocation(i)));
             }
         }
         return ret;
