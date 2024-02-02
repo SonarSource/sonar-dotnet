@@ -33,6 +33,7 @@ import com.sonar.orchestrator.util.Command;
 import com.sonar.orchestrator.util.CommandExecutor;
 import java.io.File;
 import java.io.IOException;
+import java.io.StringWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -42,6 +43,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
+
+import com.sonar.orchestrator.util.StreamConsumer;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -180,9 +183,11 @@ public class TestUtils {
       .setDirectory(projectDir.toFile());
 
     LOG.info(String.format("Running `dotnet build` in working directory '%s'", command.getDirectory()));
-
-    int r = CommandExecutor.create().execute(command, 2 * 60 * 1000);
-    assertThat(r).isZero();
+    var logWriter = new StringWriter();
+    StreamConsumer.Pipe logsConsumer = new StreamConsumer.Pipe(logWriter);
+    int buildResult = CommandExecutor.create().execute(command, logsConsumer, 2 * 60 * 1000);
+    LOG.info(logWriter.toString());
+    assertThat(buildResult).isZero();
   }
 
   @CheckForNull
