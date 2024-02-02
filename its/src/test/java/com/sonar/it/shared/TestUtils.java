@@ -65,6 +65,8 @@ import static org.sonarqube.ws.Hotspots.SearchWsResponse.Hotspot;
 
 public class TestUtils {
 
+  final private static String NUGET_CONFIG_FILE_NAME = "NuGet.config";
+
   final private static Logger LOG = LoggerFactory.getLogger(TestUtils.class);
 
   public static OrchestratorExtensionBuilder prepareOrchestrator() {
@@ -79,9 +81,10 @@ public class TestUtils {
   public static Path projectDir(Path temp, String projectName) throws IOException {
     Path projectDir = Paths.get("projects").resolve(projectName);
     Path newFolder = temp.resolve(projectName);
-    FileUtils.deleteDirectory(newFolder.toFile());  // FIXME: Files instead? Recursive?
+    FileUtils.deleteDirectory(newFolder.toFile());
     Files.createDirectory(newFolder);
     FileUtils.copyDirectory(projectDir.toFile(), newFolder.toFile());
+    FileUtils.copyFile(Paths.get("projects", NUGET_CONFIG_FILE_NAME).toFile(), Paths.get(newFolder.toString(), NUGET_CONFIG_FILE_NAME).toFile());
     return newFolder.toRealPath();
   }
 

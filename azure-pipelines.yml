@@ -606,6 +606,8 @@ stages:
       - task: Maven@3
         displayName: 'Maven ITs'
         env:
+          ARTIFACTORY_USER: $(ARTIFACTORY_PRIVATE_READER_USERNAME)
+          ARTIFACTORY_PASSWORD: $(ARTIFACTORY_PRIVATE_READER_ACCESS_TOKEN)
           # For Orchestrator (https://github.com/SonarSource/orchestrator/commit/d5396c75ab77e6088afe58e61b0cd0693ac885f0)
           ARTIFACTORY_ACCESS_TOKEN: $(ARTIFACTORY_PRIVATE_READER_ACCESS_TOKEN)
           GITHUB_TOKEN: $(GITHUB_TOKEN)
