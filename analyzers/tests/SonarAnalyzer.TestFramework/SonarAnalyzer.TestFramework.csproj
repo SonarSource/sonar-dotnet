@@ -34,6 +34,8 @@
 
   <ItemGroup>
     <Using Include="FluentAssertions" />
+	  <Using Include="Microsoft.CodeAnalysis" />
+	  <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
     <Using Include="SonarAnalyzer.Common" />
     <Using Include="SonarAnalyzer.Helpers" />

@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommandLineParser" Version="2.9.1" />
+  </ItemGroup>
+
+  <Target Name="CopyBinaries" AfterTargets="Build">
+    <ItemGroup>
+      <BinariesToCopy Include="$(OutputPath)\*.exe" />
+      <BinariesToCopy Include="$(OutputPath)\*.dll" />
+      <BinariesToCopy Include="$(OutputPath)\*.json" />
+    </ItemGroup>
+    <Copy SourceFiles="@(BinariesToCopy)" DestinationFolder="$(BinariesFolder)\ITs.JsonParser" />
+  </Target>
+
+</Project>
