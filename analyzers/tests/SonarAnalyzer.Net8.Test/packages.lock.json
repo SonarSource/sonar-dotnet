@@ -460,29 +460,6 @@
           "System.Collections.Immutable": "[1.1.37, )"
         }
       },
-      "sonaranalyzer.test": {
-        "type": "Project",
-        "dependencies": {
-          "FluentAssertions": "[6.12.0, )",
-          "MSTest.TestAdapter": "[3.1.1, )",
-          "MSTest.TestFramework": "[3.1.1, )",
-          "Microsoft.Build.Locator": "[1.5.5, )",
-          "Microsoft.CodeAnalysis.CSharp.Workspaces": "[4.8.0-2.final, )",
-          "Microsoft.CodeAnalysis.VisualBasic.Workspaces": "[4.8.0-2.final, )",
-          "Microsoft.CodeAnalysis.Workspaces.Common": "[4.8.0-2.final, )",
-          "Microsoft.CodeAnalysis.Workspaces.MSBuild": "[4.8.0-2.final, )",
-          "Microsoft.Composition": "[1.0.27, )",
-          "Microsoft.NET.Test.Sdk": "[17.6.3, )",
-          "Moq": "[4.18.4, )",
-          "NuGet.Protocol": "[6.8.0, )",
-          "SonarAnalyzer": "[1.0.0, )",
-          "SonarAnalyzer.CFG": "[1.0.0, )",
-          "SonarAnalyzer.CSharp": "[1.0.0, )",
-          "SonarAnalyzer.TestFramework": "[1.0.0, )",
-          "SonarAnalyzer.VisualBasic": "[1.0.0, )",
-          "altcover": "[8.6.95, )"
-        }
-      },
       "sonaranalyzer.testframework": {
         "type": "Project",
         "dependencies": {
