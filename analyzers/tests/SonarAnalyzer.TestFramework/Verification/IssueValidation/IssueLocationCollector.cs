@@ -30,10 +30,11 @@ namespace SonarAnalyzer.TestFramework.Verification.IssueValidation
     /// </summary>
     internal static class IssueLocationCollector
     {
+        private const string IssueTypeGroup = "IssueType";
         private const string CommentPattern = @"(?<Comment>//|'|<!--|/\*|@\*)";
         private const string PrecisePositionPattern = @"\s*(?<Position>\^+)(\s+(?<Invalid>\^+))*";
         private const string NoPrecisePositionPattern = @"(?<!\s*\^+\s)";
-        private const string IssueTypePattern = @"\s*(?<IssueType>Noncompliant|Secondary|Error)";
+        private const string IssueTypePattern = @$"\s*(?<{IssueTypeGroup}>Noncompliant|Secondary|Error)";
         private const string OffsetPattern = @"(\s*@(?<Offset>[+-]?\d+))?";
         private const string ExactColumnPattern = @"(\s*\^(?<ColumnStart>\d+)#(?<Length>\d+))?";
         private const string IssueIdsPattern = @"(\s*\[(?<IssueIds>[^]]+)\])?";
@@ -154,13 +155,13 @@ namespace SonarAnalyzer.TestFramework.Verification.IssueValidation
                 Group("Length") is { } length ? int.Parse(length.Value) : null;
 
             IssueType Type() =>
-                match.Groups["IssueType"] switch
+                match.Groups[IssueTypeGroup] switch
                 {
                     { Success: false } => IssueType.Primary,
                     { Value: "Noncompliant" } => IssueType.Primary,
                     { Value: "Secondary" } => IssueType.Secondary,
                     { Value: "Error" } => IssueType.Error,
-                    _ => throw new  UnexpectedValueException("IssueType", match.Groups["IssueType"].Value)
+                    _ => throw new  UnexpectedValueException(IssueTypeGroup, match.Groups[IssueTypeGroup].Value)
                 };
 
             string Message() =>
@@ -184,7 +185,7 @@ namespace SonarAnalyzer.TestFramework.Verification.IssueValidation
             var match = RxInvalidType.Match(value);
             if (match.Success)
             {
-                var type = match.Groups["IssueType"].Value;
+                var type = match.Groups[IssueTypeGroup].Value;
                 throw new InvalidOperationException($"""
                     {Path.GetFileName(filePath)} line {line.LineNumber} contains '// ... {type}' comment, but it is not recognized as one of the expected patterns.
                     Either remove the '{type}' word or fix the pattern.

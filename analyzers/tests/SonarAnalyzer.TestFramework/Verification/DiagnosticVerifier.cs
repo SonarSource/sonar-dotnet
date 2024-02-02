@@ -79,7 +79,7 @@ namespace SonarAnalyzer.Test.TestFramework
                                                  CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
                                                  string additionalFilePath = null,
                                                  string[] onlyDiagnostics = null) =>
-            AnalyzerDiagnostics(compilation, analyzer, checkMode, additionalFilePath, onlyDiagnostics).Where(x => x.Id == AD0001 || x.Severity != DiagnosticSeverity.Error).Should().BeEmpty();
+            AnalyzerDiagnostics(compilation, analyzer, checkMode, additionalFilePath, onlyDiagnostics).Should().NotContain(x => x.Id == AD0001 || x.Severity != DiagnosticSeverity.Error);
 
         public static IEnumerable<Diagnostic> AnalyzerDiagnostics(Compilation compilation, DiagnosticAnalyzer analyzer, CompilationErrorBehavior checkMode, string additionalFilePath = null, string[] onlyDiagnostics = null) =>
             AnalyzerDiagnostics(compilation, new[] { analyzer }, checkMode, additionalFilePath, onlyDiagnostics);
