@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.ComponentModel;
-
 namespace SonarAnalyzer.TestFramework.Verification.IssueValidation;
 
 [DebuggerDisplay("ID:{RuleId} @{LineNumber} Primary:{IsPrimary} Start:{Start} Length:{Length} ID:{IssueId} {Message} {FilePath}")]
