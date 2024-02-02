@@ -4,12 +4,12 @@
 "id":  "S2589",
 "message":  "Change this condition so that it does not always evaluate to 'True'.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L404",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L403",
 "region":  {
-"startLine":  404,
-"startColumn":  30,
-"endLine":  404,
-"endColumn":  40
+"startLine":  403,
+"startColumn":  38,
+"endLine":  403,
+"endColumn":  47
 }
 }
 }
