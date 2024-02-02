@@ -186,7 +186,7 @@ namespace SonarAnalyzer.Test.TestFramework
             var ret = new List<IssueLocationPair>();
             // Process file-level issues before project-level that match to any expected file issue
             // Then process primary before secondary, so we can update primary.IssueId for the purpose of matching seconday issues correctly.
-            foreach (var key in actual.UniqueKeys().OrderBy(x => x.FilePath == string.Empty ? 1 : 0).ThenBy(x => x.IsPrimary ? 0 : 1))
+            foreach (var key in actual.UniqueKeys().OrderBy(x => x.FilePath == string.Empty ? 1 : 0).ThenBy(x => x.Type))
             {
                 ret.AddRange(MatchDifferences(actual.Remove(key), expected.Remove(key)));
             }

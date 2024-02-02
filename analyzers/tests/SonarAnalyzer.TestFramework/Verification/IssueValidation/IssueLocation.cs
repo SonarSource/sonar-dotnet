@@ -22,6 +22,7 @@ namespace SonarAnalyzer.TestFramework.Verification.IssueValidation;
 
 internal enum IssueType
 {
+    // Order of these member is important for DiagnosticVerifier.
     Primary,
     Secondary,
     Error
@@ -77,7 +78,7 @@ internal sealed class IssueLocation // ToDo: Refactor the relation between this 
         && (issue.FilePath == string.Empty || FilePath == string.Empty || issue.FilePath == FilePath)
         && issue.LineNumber == LineNumber
         && issue.Type == Type
-        && (IsPrimary || issue.IssueId == IssueId)   // We ignore issueId for primary issues, as we need to match them only for secondary
+        && (Type == IssueType.Primary || issue.IssueId == IssueId)   // We ignore issueId for primary issues, as we need to match them only for secondary
         && EqualOrNull(issue.RuleId, RuleId)
         && EqualOrNull(issue.Message, Message)
         && EqualOrNull(issue.Start, Start)
