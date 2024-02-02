@@ -149,7 +149,13 @@ namespace SonarAnalyzer.Test.Rules
             var compilation = CreateCompilation(language);
             foreach (var path in paths)
             {
-                DiagnosticVerifier.VerifyExternalFile(compilation, analyzer, path, AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, path));
+                DiagnosticVerifier.Verify(
+                    compilation,
+                    analyzer,
+                    CompilationErrorBehavior.FailTest,
+                    AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, path),
+                    null,
+                    [path]);
             }
         }
 

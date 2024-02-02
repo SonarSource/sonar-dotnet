@@ -29,9 +29,6 @@ namespace SonarAnalyzer.Test.TestFramework
         private const string AD0001 = nameof(AD0001);
         private const string LineContinuationVB12 = "BC36716";  // Visual Basic 12.0 does not support line continuation comments.
 
-        public static void VerifyExternalFile(Compilation compilation, DiagnosticAnalyzer analyzer, string externalFilePath, string additionalFilePath) =>
-            Verify(compilation, new[] { analyzer }, CompilationErrorBehavior.FailTest, additionalFilePath, null, new[] { externalFilePath });
-
         public static void Verify(
                 Compilation compilation,
                 DiagnosticAnalyzer analyzer,

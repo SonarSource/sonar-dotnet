@@ -55,11 +55,13 @@ namespace SonarAnalyzer.Test.Rules
         public void DisablingRequestValidation_CS_WebConfig(string root)
         {
             var webConfigPath = Path.Combine(root, WebConfig);
-            DiagnosticVerifier.VerifyExternalFile(
+            DiagnosticVerifier.Verify(
                 SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation(),
                 new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
-                webConfigPath,
-                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath));
+                CompilationErrorBehavior.FailTest,
+                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath),
+                null,
+                [webConfigPath]);
         }
 
         [TestMethod]
@@ -69,11 +71,13 @@ namespace SonarAnalyzer.Test.Rules
             var nonexisting = @"TestCases\WebConfig\DisablingRequestValidation\NonExsitingDirectory";
             var corruptFilePath = Path.Combine(root, WebConfig);
             var nonExistingFilePath = Path.Combine(nonexisting, WebConfig);
-            DiagnosticVerifier.VerifyExternalFile(
+            DiagnosticVerifier.Verify(
                 SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation(),
                 new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
-                corruptFilePath,
-                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, corruptFilePath, nonExistingFilePath));
+                CompilationErrorBehavior.FailTest,
+                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, corruptFilePath, nonExistingFilePath),
+                null,
+                [corruptFilePath]);
         }
 
         [DataTestMethod]
@@ -102,11 +106,13 @@ namespace SonarAnalyzer.Test.Rules
         {
             var root = @"TestCases\WebConfig\DisablingRequestValidation\LowerCase";
             var webConfigPath = Path.Combine(root, "web.config");
-            DiagnosticVerifier.VerifyExternalFile(
+            DiagnosticVerifier.Verify(
                 SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation(),
                 new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
-                webConfigPath,
-                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath));
+                CompilationErrorBehavior.FailTest,
+                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath),
+                null,
+                [webConfigPath]);
         }
 
         [DataTestMethod]
@@ -114,11 +120,13 @@ namespace SonarAnalyzer.Test.Rules
         [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\TransformDebug\Web.Debug.config")]
         [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\TransformRelease\Web.Release.config")]
         public void DisablingRequestValidation_CS_WebConfig_Transformation(string configPath) =>
-            DiagnosticVerifier.VerifyExternalFile(
+            DiagnosticVerifier.Verify(
                 SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation(),
                 new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
-                configPath,
-                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, configPath));
+                CompilationErrorBehavior.FailTest,
+                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, configPath),
+                null,
+                [configPath]);
 
         [TestMethod]
         public void DisablingRequestValidation_VB() =>
@@ -140,11 +148,13 @@ namespace SonarAnalyzer.Test.Rules
         {
             var root = @"TestCases\WebConfig\DisablingRequestValidation\Values";
             var webConfigPath = Path.Combine(root, WebConfig);
-            DiagnosticVerifier.VerifyExternalFile(
+            DiagnosticVerifier.Verify(
                 SolutionBuilder.Create().AddProject(AnalyzerLanguage.VisualBasic).GetCompilation(),
                 new VB.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
-                webConfigPath,
-                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath));
+                CompilationErrorBehavior.FailTest,
+                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath),
+                null,
+                [webConfigPath]);
         }
     }
 }
