@@ -21,8 +21,6 @@
     <Using Include="System.Linq" />
     <Using Include="System.Threading" />
     <Using Include="System.Threading.Tasks" />
-    <Using Include="Microsoft.CodeAnalysis" />
-    <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
   </ItemGroup>
 
   <ItemGroup>
