@@ -203,24 +203,24 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
         [DataRow("net7.0")]
         public void Compile_Razor_WithFramework(string framework)
         {
-            var compilations = DummyWithLocation.AddPaths("Dummy.razor")
+            var compilation = DummyWithLocation.AddPaths("Dummy.razor")
                 .WithFramework(framework)
+                .WithLanguageVersion(LanguageVersion.CSharp12)
                 .Build()
-                .Compile(false);
-
-            var reference = compilations.Single().Compilation.ExternalReferences.First().Display;
-            reference.Contains(framework).Should().BeTrue();
+                .Compile(false)
+                .Single();
+            compilation.Compilation.ExternalReferences.First().Display.Should().Contain(framework);
         }
 
         [TestMethod]
         public void Compile_Razor_DefaultFramework()
         {
-            var compilations = DummyWithLocation.AddPaths("Dummy.razor")
+            var compilation = DummyWithLocation.AddPaths("Dummy.razor")
+                .WithLanguageVersion(LanguageVersion.CSharp12)
                 .Build()
-                .Compile(false);
-
-            var reference = compilations.Single().Compilation.ExternalReferences.First().Display;
-            reference.Contains("net7.0").Should().BeTrue();
+                .Compile(false)
+                .Single();
+            compilation.Compilation.ExternalReferences.First().Display.Should().Contain("net7.0", "This version is used in EmptyProject.csproj");
         }
 
         [DataTestMethod]
@@ -521,13 +521,13 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
             builder.Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage("""
                 There are differences for CSharp7 File.Concurrent.cs:
                   Line 6: Unexpected issue 'Change this condition so that it does not always evaluate to 'True'. Some code paths are unreachable.' Rule S2583
-                  Line 9 Secondary location: Unexpected issue ''*
                   Line 10: Unexpected issue 'Change this condition so that it does not always evaluate to 'True'.' Rule S2589
+                  Line 9 Secondary location: Unexpected issue ''
 
                 There are differences for CSharp7 File.cs:
                   Line 6: Unexpected issue 'Change this condition so that it does not always evaluate to 'True'. Some code paths are unreachable.' Rule S2583
-                  Line 9 Secondary location: Unexpected issue ''*
                   Line 10: Unexpected issue 'Change this condition so that it does not always evaluate to 'True'.' Rule S2589
+                  Line 9 Secondary location: Unexpected issue ''
                 """);
             builder.WithOnlyDiagnostics(ConditionEvaluatesToConstant.S2589).Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage("""
                 There are differences for CSharp7 File.Concurrent.cs:
