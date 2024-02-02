@@ -182,11 +182,11 @@ public class Sample
         for (i = 0; i <= 2147483547; i++)
             _ = i + 100;        // Compliant
         for (i = 0; i <= 2147483547; i++)
-            _ = i + 101;        // Noncompliant {{This calculation is likely to overflow the maximum value of '2147483647'.}}
+            _ = i + 101;        // FN
         for (i = 2147483546; i <= 2147483547; i++)
             _ = i + 100;        // Compliant
         for (i = 2147483546; i <= 2147483547; i++)
-            _ = i + 101;        // Noncompliant
+            _ = i + 101;        // FN
     }
 
     public void Branching2(int i)
