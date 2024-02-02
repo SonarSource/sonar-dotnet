@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.IO;
 using System.Text.RegularExpressions;
 using FluentAssertions.Execution;
 using Microsoft.CodeAnalysis.Text;
@@ -32,8 +33,7 @@ namespace SonarAnalyzer.TestFramework.Verification.IssueValidation
         private const string CommentPattern = @"(?<Comment>//|'|<!--|/\*|@\*)";
         private const string PrecisePositionPattern = @"\s*(?<Position>\^+)(\s+(?<Invalid>\^+))*";
         private const string NoPrecisePositionPattern = @"(?<!\s*\^+\s)";
-        private const string IssueTypePattern = @"\s*(?<IssueType>Noncompliant|Secondary)";
-        private const string ErrorTypePattern = @"\s*Error";
+        private const string IssueTypePattern = @"\s*(?<IssueType>Noncompliant|Secondary|Error)";
         private const string OffsetPattern = @"(\s*@(?<Offset>[+-]?\d+))?";
         private const string ExactColumnPattern = @"(\s*\^(?<ColumnStart>\d+)#(?<Length>\d+))?";
         private const string IssueIdsPattern = @"(\s*\[(?<IssueIds>[^]]+)\])?";
@@ -45,7 +45,6 @@ namespace SonarAnalyzer.TestFramework.Verification.IssueValidation
         public static readonly Regex RxPreciseLocation =
             CreateRegex(@"^\s*" + CommentPattern + PrecisePositionPattern + IssueTypePattern + "?" + OffsetPattern + IssueIdsPattern + MessagePattern + @"\s*(-->|\*/|\*@)?$");
 
-        private static readonly Regex RxBuildError = CreateRegex(CommentPattern + ErrorTypePattern + OffsetPattern + ExactColumnPattern + IssueIdsPattern);
         private static readonly Regex RxInvalidType = CreateRegex(CommentPattern + ".*" + IssueTypePattern);
         private static readonly Regex RxInvalidPreciseLocation = CreateRegex(@"^\s*" + CommentPattern + ".*" + PrecisePositionPattern);
 
@@ -66,15 +65,11 @@ namespace SonarAnalyzer.TestFramework.Verification.IssueValidation
                 }
                 else
                 {
-                    EnsureNoInvalidFormat(line);
+                    EnsureNoInvalidFormat(filePath, line);
                 }
             }
             return EnsureNoDuplicatedPrimaryIds(MergeLocations(locations.ToArray(), preciseLocations.ToList()));
         }
-
-        // ToDo: Throw away
-        public static IEnumerable<IssueLocation> ExpectedBuildErrors(string filePath, IEnumerable<TextLine> lines) =>
-            lines?.SelectMany(x => GetBuildErrorsLocations(filePath, x)) ?? Enumerable.Empty<IssueLocation>();
 
         internal static /* for testing */ IList<IssueLocation> MergeLocations(IssueLocation[] locations, List<IssueLocation> preciseLocations)
         {
@@ -102,8 +97,16 @@ namespace SonarAnalyzer.TestFramework.Verification.IssueValidation
             return locations.Concat(preciseLocations).ToList();
         }
 
-        internal static /* for testing */ IEnumerable<IssueLocation> FindIssueLocations(string filePath, TextLine line) =>
-            FindLocations(filePath, line, RxIssue);
+        internal static /* for testing */ IEnumerable<IssueLocation> FindIssueLocations(string filePath, TextLine line)
+        {
+            var match = RxIssue.Match(line.ToString());
+            if (match.Success)
+            {
+                EnsureNoRemainingCurlyBrace(line, match);
+                return CreateIssueLocations(match, filePath, line.LineNumber + 1);
+            }
+            return Enumerable.Empty<IssueLocation>();
+        }
 
         internal static /* for testing */ IEnumerable<IssueLocation> FindPreciseIssueLocations(string filePath, TextLine line)
         {
@@ -114,22 +117,6 @@ namespace SonarAnalyzer.TestFramework.Verification.IssueValidation
                 return CreateIssueLocations(match, filePath, line.LineNumber);
             }
 
-            return Enumerable.Empty<IssueLocation>();
-        }
-
-        // ToDo: Throw away
-        private static IEnumerable<IssueLocation> GetBuildErrorsLocations(string filePath, TextLine line) =>
-            FindLocations(filePath, line, RxBuildError);
-
-        // ToDo: Merge with its invocation site
-        private static IEnumerable<IssueLocation> FindLocations(string filePath, TextLine line, Regex rx)
-        {
-            var match = rx.Match(line.ToString());
-            if (match.Success)
-            {
-                EnsureNoRemainingCurlyBrace(line, match);
-                return CreateIssueLocations(match, filePath, line.LineNumber + 1);
-            }
             return Enumerable.Empty<IssueLocation>();
         }
 
@@ -172,6 +159,7 @@ namespace SonarAnalyzer.TestFramework.Verification.IssueValidation
                     { Success: false } => IssueType.Primary,
                     { Value: "Noncompliant" } => IssueType.Primary,
                     { Value: "Secondary" } => IssueType.Secondary,
+                    { Value: "Error" } => IssueType.Error,
                     _ => throw new  UnexpectedValueException("IssueType", match.Groups["IssueType"].Value)
                 };
 
@@ -190,14 +178,23 @@ namespace SonarAnalyzer.TestFramework.Verification.IssueValidation
                 match.Groups[name] is { Success: true } group ? group : null;
         }
 
-        private static void EnsureNoInvalidFormat(TextLine line)
+        private static void EnsureNoInvalidFormat(string filePath, TextLine line)
         {
             var value = line.ToString();
-            if (RxInvalidType.IsMatch(value) || RxInvalidPreciseLocation.IsMatch(value))
+            var match = RxInvalidType.Match(value);
+            if (match.Success)
+            {
+                var type = match.Groups["IssueType"].Value;
+                throw new InvalidOperationException($"""
+                    {Path.GetFileName(filePath)} line {line.LineNumber} contains '// ... {type}' comment, but it is not recognized as one of the expected patterns.
+                    Either remove the '{type}' word or fix the pattern.
+                    """);
+            }
+            else if (RxInvalidPreciseLocation.IsMatch(value))
             {
                 throw new InvalidOperationException($"""
-                    Line {line.LineNumber} looks like it contains comment for noncompliant code, but it is not recognized as one of the expected pattern.
-                    Either remove the Noncompliant/Secondary word or precise pattern '^^' from the comment, or fix the pattern.
+                    {Path.GetFileName(filePath)} line {line.LineNumber} looks like it contains comment for precise location '^^'.
+                    Either remove the precise pattern '^^' from the comment, or fix the pattern.
                     """);
             }
         }

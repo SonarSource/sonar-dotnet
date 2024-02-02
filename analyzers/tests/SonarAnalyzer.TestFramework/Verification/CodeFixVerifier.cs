@@ -118,7 +118,7 @@ internal class CodeFixVerifier
 
             compilation = project.GetCompilationAsync().Result;
             Document = document;
-            Diagnostics = DiagnosticVerifier.AnalyzerDiagnostics(compilation, analyzer, CompilationErrorBehavior.Ignore).ToImmutableArray();
+            Diagnostics = DiagnosticVerifier.AnalyzerDiagnostics(compilation, analyzer, CompilationErrorBehavior.Ignore).Where(x => x.Severity != DiagnosticSeverity.Error).ToImmutableArray();
             ActualCode = document.GetSyntaxRootAsync().Result.GetText().ToString();
         }
 
@@ -138,7 +138,7 @@ internal class CodeFixVerifier
         private static string ReplaceNonCompliantComment(string line)
         {
             var match = IssueLocationCollector.RxIssue.Match(line);
-            if (!match.Success)
+            if (!match.Success || match.Groups["IssueType"].Value == "Error")
             {
                 return line;
             }

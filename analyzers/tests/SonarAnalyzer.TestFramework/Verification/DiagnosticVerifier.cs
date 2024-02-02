@@ -27,11 +27,7 @@ namespace SonarAnalyzer.Test.TestFramework
     public static class DiagnosticVerifier
     {
         private const string AD0001 = nameof(AD0001);
-
-        private static readonly string[] BuildErrorsToIgnore =
-        {
-            "BC36716" // VB12 does not support line continuation comments" i.e. a comment at the end of a multi-line statement.
-        };
+        private const string LineContinuationVB12 = "BC36716";  // Visual Basic 12.0 does not support line continuation comments.
 
         public static void VerifyExternalFile(Compilation compilation, DiagnosticAnalyzer analyzer, string externalFilePath, string additionalFilePath) =>
             Verify(compilation, new[] { analyzer }, CompilationErrorBehavior.FailTest, additionalFilePath, null, new[] { externalFilePath });
@@ -62,12 +58,12 @@ namespace SonarAnalyzer.Test.TestFramework
                 var diagnostics = DiagnosticsAndErrors(compilation, analyzers, checkMode, additionalFilePath, onlyDiagnostics).ToArray();
                 var expected = new CompilationIssues(compilation.LanguageVersionString(), sources);
                 VerifyNoExceptionThrown(diagnostics);
-                Compare(new(compilation.LanguageVersionString(), diagnostics), expected, false);
+                Compare(new(compilation.LanguageVersionString(), diagnostics), expected);
 
                 // When there are no diagnostics reported from the test (for example the FileLines analyzer
                 // does not report in each call to Verifier.VerifyAnalyzer) we skip the check for the extension
                 // method.
-                if (diagnostics.Any())
+                if (diagnostics.Any(x => x.Severity != DiagnosticSeverity.Error))
                 {
                     SuppressionHandler.ExtensionMethodsCalledForAllDiagnostics(analyzers).Should().BeTrue("The ReportIssue should be used instead of ReportDiagnostic");
                 }
@@ -83,7 +79,7 @@ namespace SonarAnalyzer.Test.TestFramework
                                                  CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
                                                  string additionalFilePath = null,
                                                  string[] onlyDiagnostics = null) =>
-            AnalyzerDiagnostics(compilation, analyzer, checkMode, additionalFilePath, onlyDiagnostics).Should().BeEmpty();
+            AnalyzerDiagnostics(compilation, analyzer, checkMode, additionalFilePath, onlyDiagnostics).Where(x => x.Id == AD0001 || x.Severity != DiagnosticSeverity.Error).Should().BeEmpty();
 
         public static IEnumerable<Diagnostic> AnalyzerDiagnostics(Compilation compilation, DiagnosticAnalyzer analyzer, CompilationErrorBehavior checkMode, string additionalFilePath = null, string[] onlyDiagnostics = null) =>
             AnalyzerDiagnostics(compilation, new[] { analyzer }, checkMode, additionalFilePath, onlyDiagnostics);
@@ -96,7 +92,7 @@ namespace SonarAnalyzer.Test.TestFramework
 
         private static ImmutableArray<Diagnostic> DiagnosticsAndErrors(Compilation compilation,
                                                                        DiagnosticAnalyzer[] analyzer,
-                                                                       CompilationErrorBehavior checkMode,
+                                                                       CompilationErrorBehavior checkMode, // ToDo: Remove in https://github.com/SonarSource/sonar-dotnet/issues/8588
                                                                        string additionalFilePath = null,
                                                                        string[] onlyDiagnostics = null)
         {
@@ -115,13 +111,16 @@ namespace SonarAnalyzer.Test.TestFramework
                 .WithOptions(compilationOptions)
                 .WithAnalyzers(analyzer.ToImmutableArray(), analyzerOptions)
                 .GetAllDiagnosticsAsync(default)
-                .Result;
+                .Result
+                .Where(x => (x.Severity == DiagnosticSeverity.Error && x.Id != LineContinuationVB12) || ids.Contains(x.Id))   // No compiler info about new syntax or unused usings
+                .ToImmutableArray();
 
-            if (checkMode == CompilationErrorBehavior.FailTest)
+            if (checkMode == CompilationErrorBehavior.Ignore)    // ToDo: Remove in https://github.com/SonarSource/sonar-dotnet/issues/8588
             {
-                VerifyBuildErrors(diagnostics, compilation);
+                diagnostics = diagnostics.Where(x => x.Id == AD0001 || x.Severity != DiagnosticSeverity.Error).ToImmutableArray();
             }
-            return diagnostics.Where(x => ids.Contains(x.Id)).ToImmutableArray();
+
+            return diagnostics;
 
             ReportDiagnostic Severity(string id)
             {
@@ -136,13 +135,13 @@ namespace SonarAnalyzer.Test.TestFramework
             }
         }
 
-        private static void Compare(CompilationIssues actual, CompilationIssues expected, bool compareIdToMessage)
+        private static void Compare(CompilationIssues actual, CompilationIssues expected)
         {
             var assertionMessages = new StringBuilder();
             foreach (var filePairs in MatchPairs(actual, expected).GroupBy(x => x.FilePath).OrderBy(x => x.Key))
             {
                 assertionMessages.AppendLine($"There are differences for {actual.LanguageVersion} {SerializePath(filePairs.Key)}:");
-                foreach (var pair in filePairs.OrderBy(x => x.Type).ThenBy(x => x.LineNumber).ThenBy(x => x.Start))
+                foreach (var pair in filePairs.OrderBy(x => x.Type).ThenBy(x => x.LineNumber).ThenBy(x => x.Start).ThenBy(x => x.IssueId).ThenBy(x => x.RuleId))
                 {
                     pair.AppendAssertionMessage(assertionMessages);
                 }
@@ -170,13 +169,6 @@ namespace SonarAnalyzer.Test.TestFramework
             syntaxTrees.Where(x =>
                 !x.FilePath.EndsWith("razor.g.cs", StringComparison.OrdinalIgnoreCase)
                 && !x.FilePath.EndsWith("cshtml.g.cs", StringComparison.OrdinalIgnoreCase));
-
-        private static void VerifyBuildErrors(ImmutableArray<Diagnostic> diagnostics, Compilation compilation)
-        {
-            var buildErrors = diagnostics.Where(x => x.Severity == DiagnosticSeverity.Error && (x.Id.StartsWith("CS") || x.Id.StartsWith("BC")) && !BuildErrorsToIgnore.Contains(x.Id)).ToArray();
-            var expected = new CompilationIssues(compilation.LanguageVersionString(), compilation.SyntaxTrees.SelectMany(x => IssueLocationCollector.ExpectedBuildErrors(x.FilePath, x.GetText().Lines).ToList()));
-            Compare(new(compilation.LanguageVersionString(), buildErrors), expected, true);
-        }
 
         private static IEnumerable<Diagnostic> VerifyNoExceptionThrown(IEnumerable<Diagnostic> diagnostics) =>
             diagnostics.Should().NotContain(d => d.Id == AD0001).And.Subject;

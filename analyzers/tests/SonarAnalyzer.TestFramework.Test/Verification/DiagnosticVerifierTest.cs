@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using SonarAnalyzer.Test.Helpers;
 using CS = SonarAnalyzer.Rules.CSharp;
@@ -32,7 +33,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
 
         [TestMethod]
         public void PrimaryIssueNotExpected() =>
-            VerifyThrows<AssertFailedException>("""
+            VerifyThrows("""
                 public class UnexpectedSecondary
                 {
                     public void Test(bool a, bool b)
@@ -49,7 +50,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
 
         [TestMethod]
         public void SecondaryIssueNotExpected() =>
-            VerifyThrows<AssertFailedException>("""
+            VerifyThrows("""
                 public class UnexpectedSecondary
                 {
                     public void Test(bool a, bool b)
@@ -65,7 +66,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
 
         [TestMethod]
         public void UnexpectedSecondaryIssue_WrongId() =>
-            VerifyThrows<AssertFailedException>("""
+            VerifyThrows("""
                 public class UnexpectedSecondary
                 {
                     public void Test(bool a, bool b)
@@ -77,12 +78,12 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                 }
                 """, """
                 There are differences for CSharp7 snippet1.cs:
-                  Line 6 Secondary location: The expected issueId 'myWrongId' does not match the actual issueId 'myId' ID myId
+                  Line 6 Secondary location: The expected issueId 'myWrongId' does not match the actual issueId 'myId' Rule S1764 ID myId
                 """);
 
         [TestMethod]
         public void UnexpectedSecondaryIssue_WrongIdWithWrongPrimaryMessageAndLocation() =>
-            VerifyThrows<AssertFailedException>("""
+            VerifyThrows("""
                 public class UnexpectedSecondary
                 {
                     public void Test(bool a, bool b)
@@ -95,12 +96,12 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                 """, """
                 There are differences for CSharp7 snippet1.cs:
                   Line 6: The expected message 'This has wrong message and location and still needs to match secondary ID' does not match the actual message 'Correct one of the identical expressions on both sides of operator '=='.' Rule S1764
-                  Line 6 Secondary location: The expected issueId 'myWrongId' does not match the actual issueId '' ID myWrongId
+                  Line 6 Secondary location: The expected issueId 'myWrongId' does not match the actual issueId '' Rule S1764 ID myWrongId
                 """);
 
         [TestMethod]
         public void UnexpectedSecondaryIssue_MissingExpectedId() =>
-            VerifyThrows<AssertFailedException>("""
+            VerifyThrows("""
                 public class UnexpectedSecondary
                 {
                     public void Test(bool a, bool b)
@@ -112,12 +113,12 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                 }
                 """, """
                 There are differences for CSharp7 snippet1.cs:
-                  Line 6 Secondary location: The expected issueId '' does not match the actual issueId 'myId' ID myId
+                  Line 6 Secondary location: The expected issueId '' does not match the actual issueId 'myId' Rule S1764 ID myId
                 """);
 
         [TestMethod]
         public void UnexpectedSecondaryIssue_MissingActualId() =>
-            VerifyThrows<AssertFailedException>("""
+            VerifyThrows("""
                 public class UnexpectedSecondary
                 {
                     public void Test(bool a, bool b)
@@ -129,12 +130,12 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                 }
                 """, """
                 There are differences for CSharp7 snippet1.cs:
-                  Line 6 Secondary location: The expected issueId 'myWrongId' does not match the actual issueId '' ID myWrongId
+                  Line 6 Secondary location: The expected issueId 'myWrongId' does not match the actual issueId '' Rule S1764 ID myWrongId
                 """);
 
         [TestMethod]
         public void UnexpectedSecondaryIssue_WrongIdWithMultipleIssues() =>
-            VerifyThrows<AssertFailedException>("""
+            VerifyThrows("""
                 public class UnexpectedSecondary
                 {
                     public void Test(bool a, bool b)
@@ -146,12 +147,12 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                 }
                 """, """
                 There are differences for CSharp7 snippet1.cs:
-                  Line 5 Secondary location: The expected issueId 'wrongId' does not match the actual issueId 'idForBB' ID idForBB
+                  Line 5 Secondary location: The expected issueId 'wrongId' does not match the actual issueId 'idForBB' Rule S1764 ID idForBB
                 """);
 
         [TestMethod]
         public void UnexpectedSecondaryIssue_WrongIdsWithWrongLocations() =>
-            VerifyThrows<AssertFailedException>("""
+            VerifyThrows("""
                 public class UnexpectedSecondary
                 {
                     public void Test(bool a, bool b, bool c)
@@ -164,14 +165,14 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                 }
                 """, """
                 There are differences for CSharp7 snippet1.cs:
-                  Line 5 Secondary location: Should start on column -1 but got column 12 ID idForAA
-                  Line 5 Secondary location: The expected issueId 'wrongId' does not match the actual issueId 'idForBB' ID idForBB
-                  Line 5 Secondary location: Should start on column -1 but got column 42 ID idForCC
+                  Line 5 Secondary location: Should start on column -1 but got column 12 Rule S1764 ID idForAA
+                  Line 5 Secondary location: The expected issueId 'wrongId' does not match the actual issueId 'idForBB' Rule S1764 ID idForBB
+                  Line 5 Secondary location: Should start on column -1 but got column 42 Rule S1764 ID idForCC
                 """);
 
         [TestMethod]
         public void SecondaryIssueUnexpectedMessage() =>
-            VerifyThrows<AssertFailedException>("""
+            VerifyThrows("""
                 public class UnexpectedSecondary
                 {
                     public void Test(bool a, bool b)
@@ -188,7 +189,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
 
         [TestMethod]
         public void SecondaryIssueUnexpectedStartPosition() =>
-            VerifyThrows<AssertFailedException>("""
+            VerifyThrows("""
                 public class UnexpectedSecondary
                 {
                     public void Test(bool a, bool b)
@@ -206,7 +207,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
 
         [TestMethod]
         public void SecondaryIssueUnexpectedLength() =>
-            VerifyThrows<AssertFailedException>("""
+            VerifyThrows("""
                 public class UnexpectedSecondary
                 {
                     public void Test(bool a, bool b)
@@ -238,7 +239,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
 
         [TestMethod]
         public void BuildError() =>
-            VerifyThrows<AssertFailedException>("""
+            VerifyThrows("""
                 public class UnexpectedBuildError
                 {
                 """, """
@@ -248,7 +249,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
 
         [TestMethod]
         public void UnexpectedRemainingOpeningCurlyBrace() =>
-            VerifyThrows<AssertFailedException>("""
+            VerifyThrows("""
                 public class UnexpectedRemainingCurlyBrace
                 {
                     public void Test(bool a, bool b)
@@ -262,7 +263,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
 
         [TestMethod]
         public void UnexpectedRemainingClosingCurlyBrace() =>
-            VerifyThrows<AssertFailedException>("""
+            VerifyThrows("""
                 public class UnexpectedRemainingCurlyBrace
                 {
                     public void Test(bool a, bool b)
@@ -276,7 +277,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
 
         [TestMethod]
         public void ExpectedIssuesNotRaised() =>
-            VerifyThrows<AssertFailedException>("""
+            VerifyThrows("""
                 public class ExpectedIssuesNotRaised
                 {
                     public void Test(bool a, bool b) // Noncompliant [MyId0]
@@ -366,10 +367,35 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
             ((Action)(() => DiagnosticVerifier.Verify(compilation, analyzers, CompilationErrorBehavior.Default))).Should().NotThrow();
         }
 
-        private void VerifyThrows<TException>(string snippet, string expectedMessage) where TException : Exception =>
+        [TestMethod]
+        public void DiagnosticsAndErrors_IgnoresLineContinuation_VB()
+        {
+            const string code = """
+                <AttributeUsage(AttributeTargets.All)>  ' This linecontinuation comment is not valid in VB 12
+                Public Class Sample
+                End Class
+                """;
+            var compilation = new SnippetCompiler(code, true, AnalyzerLanguage.VisualBasic, parseOptions: new VisualBasicParseOptions(LanguageVersion.VisualBasic12)).Compilation;
+            // We need to place many "' Noncompliant" annotations all over the place, so we ignore this error to avoid doing Noncompliant@+1 on too many places
+            DiagnosticVerifier.AnalyzerDiagnostics(compilation, new DummyAnalyzerVB(), CompilationErrorBehavior.FailTest).Should().BeEmpty();
+        }
+
+        [TestMethod]
+        public void Verify_BuildErrors_AreSortedById() =>
+            VerifyThrows("""
+                var almostTopLevel =
+                """, """
+                There are differences for CSharp7 snippet1.cs:
+                  Line 1: Unexpected issue 'Feature 'top-level statements' is not available in C# 7.0. Please use language version 9.0 or greater.' Rule CS8107
+                  Line 1: Unexpected issue 'Program using top-level statements must be an executable.' Rule CS8805
+                  Line 1: Unexpected issue '; expected' Rule CS1002
+                  Line 1: Unexpected issue 'Expected expression' Rule CS1733
+                """);
+
+        private void VerifyThrows(string snippet, string expectedMessage) =>
             builder.AddSnippet(snippet)
                 .WithConcurrentAnalysis(false)
                 .Invoking(x => x.Verify())
-                .Should().Throw<TException>().Which.Message.Should().ContainIgnoringLineEndings(expectedMessage);
+                .Should().Throw<AssertFailedException>().Which.Message.Should().ContainIgnoringLineEndings(expectedMessage);
     }
 }

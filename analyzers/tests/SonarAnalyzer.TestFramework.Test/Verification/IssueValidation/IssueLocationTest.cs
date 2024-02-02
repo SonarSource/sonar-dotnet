@@ -30,7 +30,33 @@ public class IssueLocationTest
 
     [TestMethod]
     public void IssueLocation_Ctor_NoSecondaryMessage_HasEmptyMessage() =>
-        new IssueLocation(null, new SecondaryLocation(Location.None, null)).Message.Should().BeEmpty();
+        new IssueLocation(Issue, new SecondaryLocation(Location.None, null)).Message.Should().BeEmpty();
+
+    [TestMethod]
+    public void IssueLocation_Ctor_Primary()
+    {
+        var sut = new IssueLocation(Diagnostic.Create(AnalysisScaffolding.CreateDescriptor("Sxxxx"), null));
+        sut.Type.Should().Be(IssueType.Primary);
+        sut.RuleId.Should().Be("Sxxxx");
+        sut.IssueId.Should().BeNull();
+    }
+
+    [TestMethod]
+    public void IssueLocation_Ctor_Error()
+    {
+        var sut = new IssueLocation(Diagnostic.Create("CSxxxx", "Category", "Message", DiagnosticSeverity.Error, DiagnosticSeverity.Error, true, 0));
+        sut.Type.Should().Be(IssueType.Error);
+        sut.RuleId.Should().Be("CSxxxx");
+        sut.IssueId.Should().Be("CSxxxx");
+    }
+
+    [TestMethod]
+    public void IssueLocation_Ctor_SecondaryLocation()
+    {
+        var sut = new IssueLocation(Issue, new SecondaryLocation(Location.None, null));
+        sut.Type.Should().Be(IssueType.Secondary);
+        sut.RuleId.Should().Be("S1234");
+    }
 
     [TestMethod]
     public void IssueLocation_Ctor_NoLocation_HasEmptyFilePath()
