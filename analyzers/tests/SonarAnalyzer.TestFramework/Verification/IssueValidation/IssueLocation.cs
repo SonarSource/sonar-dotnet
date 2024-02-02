@@ -29,40 +29,41 @@ internal enum IssueType
 }
 
 [DebuggerDisplay("ID:{RuleId} {Type} @{LineNumber} Start:{Start} Length:{Length} ID:{IssueId} {Message} {FilePath}")]
-internal sealed class IssueLocation // ToDo: Refactor the relation between this and the Key
+internal sealed class IssueLocation
 {
     public IssueLocation Primary { get; }   // Only for actual secondary issues
-    public string RuleId { get; init; }     // Diagnostic ID for actual issues
-    public string FilePath { get; init; }
-    public int LineNumber { get; init; }
-    public IssueType Type { get; init; }
-    public string Message { get; init; }
-    public string IssueId { get => Primary?.IssueId ?? issueId; init => issueId = value; }    // Issue location ID to pair primary and secondary locations
+    public string RuleId { get; }           // Diagnostic ID for actual issues
+    public string FilePath { get; }
+    public int LineNumber { get; }
+    public IssueType Type { get; }
+    public string Message { get; }
+    public string IssueId { get => Primary?.IssueId ?? issueId; }    // Issue location ID to pair primary and secondary locations
     public int? Start { get; set; }
     public int? Length { get; set; }
 
     private string issueId;
 
     public IssueLocation(Diagnostic diagnostic)
-        : this(diagnostic.Severity == DiagnosticSeverity.Error ? IssueType.Error : IssueType.Primary, diagnostic.Id, diagnostic.GetMessage(), diagnostic.Location) =>
-        IssueId = diagnostic.Severity == DiagnosticSeverity.Error ? diagnostic.Id : null;   // Error [CS1001] should assert that expected issueId matches the actual RuleId
+        : this(diagnostic.Severity == DiagnosticSeverity.Error ? IssueType.Error : IssueType.Primary, diagnostic.Id, diagnostic.GetMessage(), diagnostic.Location, diagnostic.Location.GetLineSpan()) =>
+        issueId = diagnostic.Severity == DiagnosticSeverity.Error ? diagnostic.Id : null;   // Error [CS1001] should assert that expected issueId matches the actual RuleId
 
-    public IssueLocation(IssueLocation primary, SecondaryLocation secondaryLocation) : this(IssueType.Secondary, primary.RuleId, secondaryLocation.Message, secondaryLocation.Location) =>
+    public IssueLocation(IssueLocation primary, SecondaryLocation secondary) : this(IssueType.Secondary, primary.RuleId, secondary.Message, secondary.Location, secondary.Location.GetLineSpan()) =>
         Primary = primary;
 
-    public IssueLocation() { }
-
-    private IssueLocation(IssueType type, string ruleId, string message, Location location)
+    public IssueLocation(IssueType type, string filePath, int lineNumber, string message, string issueId, int? start, int? length, string ruleId = null)
     {
-        var span = location.GetLineSpan();
-        RuleId = ruleId;
         Type = type;
-        Message = message ?? string.Empty;
-        LineNumber = location.GetLineNumberToReport();
-        Start = span.StartLinePosition.Character;
-        Length = location.SourceSpan.Length;
-        FilePath = span.Path ?? string.Empty;   // Project-level issues do not have location
+        FilePath = filePath;
+        LineNumber = lineNumber;
+        Message = message;
+        this.issueId = issueId;
+        Start = start;
+        Length = length;
+        RuleId = ruleId;
     }
+
+    private IssueLocation(IssueType type, string ruleId, string message, Location location, FileLinePositionSpan span)
+        : this(type, span.Path ?? string.Empty, location.GetLineNumberToReport(), message ?? string.Empty, null, span.StartLinePosition.Character, location.SourceSpan.Length, ruleId) { }
 
     public void UpdatePrimaryIssueIdFrom(IssueLocation expected)
     {
@@ -94,9 +95,9 @@ internal sealed class IssueLocation // ToDo: Refactor the relation between this 
 }
 
 [DebuggerDisplay("{Type} @{LineNumber} {FilePath}")]
-internal record IssueLocationKey(string FilePath, int LineNumber, IssueType Type)
+internal record IssueLocationKey(IssueType Type, string FilePath, int LineNumber)
 {
-    public IssueLocationKey(IssueLocation issue) : this(issue.FilePath, issue.LineNumber, issue.Type) { }
+    public IssueLocationKey(IssueLocation issue) : this(issue.Type, issue.FilePath, issue.LineNumber) { }
 
     public bool IsMatch(IssueLocation issue) =>
         (FilePath == string.Empty || FilePath == issue.FilePath)
