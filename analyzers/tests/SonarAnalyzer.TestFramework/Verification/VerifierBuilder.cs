@@ -24,6 +24,8 @@ using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 namespace SonarAnalyzer.Test.TestFramework
 {
+    // ToDo: Remove this enum https://github.com/SonarSource/sonar-dotnet/issues/8588
+    [Obsolete("This will be removed. Use FailTest if you really have to provide this argument somewhere.")]
     public enum CompilationErrorBehavior
     {
         FailTest,
@@ -101,6 +103,7 @@ namespace SonarAnalyzer.Test.TestFramework
         public VerifierBuilder WithConcurrentAnalysis(bool concurrentAnalysis) =>
             this with { ConcurrentAnalysis = concurrentAnalysis };
 
+        [Obsolete("Do not use CompilationErrorBehavior. Assert errors with // Error [CSxxxx, CSyyyy] instead")]
         public VerifierBuilder WithErrorBehavior(CompilationErrorBehavior errorBehavior) =>
             this with { ErrorBehavior = errorBehavior };
 

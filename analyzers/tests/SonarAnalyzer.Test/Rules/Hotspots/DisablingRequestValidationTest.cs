@@ -58,7 +58,6 @@ namespace SonarAnalyzer.Test.Rules
             DiagnosticVerifier.Verify(
                 SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation(),
                 new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
-                CompilationErrorBehavior.FailTest,
                 AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath),
                 null,
                 [webConfigPath]);
@@ -74,7 +73,6 @@ namespace SonarAnalyzer.Test.Rules
             DiagnosticVerifier.Verify(
                 SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation(),
                 new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
-                CompilationErrorBehavior.FailTest,
                 AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, corruptFilePath, nonExistingFilePath),
                 null,
                 [corruptFilePath]);
@@ -98,7 +96,7 @@ namespace SonarAnalyzer.Test.Rules
             }
             var analyzer = new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled);
             var additionalFilePath = AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, filesToAnalyze.ToArray());
-            DiagnosticVerifier.Verify(compilation, analyzer, CompilationErrorBehavior.FailTest, additionalFilePath, null, filesToAnalyze.ToArray());
+            DiagnosticVerifier.Verify(compilation, analyzer, additionalFilePath, null, filesToAnalyze.ToArray());
         }
 
         [TestMethod]
@@ -109,7 +107,6 @@ namespace SonarAnalyzer.Test.Rules
             DiagnosticVerifier.Verify(
                 SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation(),
                 new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
-                CompilationErrorBehavior.FailTest,
                 AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath),
                 null,
                 [webConfigPath]);
@@ -123,7 +120,6 @@ namespace SonarAnalyzer.Test.Rules
             DiagnosticVerifier.Verify(
                 SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation(),
                 new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
-                CompilationErrorBehavior.FailTest,
                 AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, configPath),
                 null,
                 [configPath]);
@@ -151,7 +147,6 @@ namespace SonarAnalyzer.Test.Rules
             DiagnosticVerifier.Verify(
                 SolutionBuilder.Create().AddProject(AnalyzerLanguage.VisualBasic).GetCompilation(),
                 new VB.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
-                CompilationErrorBehavior.FailTest,
                 AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath),
                 null,
                 [webConfigPath]);
