@@ -30,7 +30,7 @@ public class IssueLocationTest
 
     [TestMethod]
     public void IssueLocation_Ctor_NoSecondaryMessage_HasEmptyMessage() =>
-        new IssueLocation(new SecondaryLocation(Location.None, null)).Message.Should().BeEmpty();
+        new IssueLocation(null, new SecondaryLocation(Location.None, null)).Message.Should().BeEmpty();
 
     [TestMethod]
     public void IssueLocation_Ctor_NoLocation_HasEmptyFilePath()
@@ -68,9 +68,11 @@ public class IssueLocationTest
         orig.Equals(new IssueLocation { RuleId = "Sxxxx", FilePath = "File.cs", LineNumber = 9, IsPrimary = true, Message = "Msg1", IssueId = "id1", Start = 2, Length = 4 }).Should().BeFalse();
         orig.Equals(new IssueLocation { RuleId = "Sxxxx", FilePath = "File.cs", LineNumber = 1, IsPrimary = false, Message = "Msg1", IssueId = "id1", Start = 2, Length = 4 }).Should().BeFalse();
         orig.Equals(new IssueLocation { RuleId = "Sxxxx", FilePath = "File.cs", LineNumber = 1, IsPrimary = true, Message = "Xxxx", IssueId = "id1", Start = 2, Length = 4 }).Should().BeFalse();
-        orig.Equals(new IssueLocation { RuleId = "Sxxxx", FilePath = "File.cs", LineNumber = 1, IsPrimary = true, Message = "Msg1", IssueId = "xxx", Start = 2, Length = 4 }).Should().BeFalse();
         orig.Equals(new IssueLocation { RuleId = "Sxxxx", FilePath = "File.cs", LineNumber = 1, IsPrimary = true, Message = "Msg1", IssueId = "id1", Start = 9, Length = 4 }).Should().BeFalse();
         orig.Equals(new IssueLocation { RuleId = "Sxxxx", FilePath = "File.cs", LineNumber = 1, IsPrimary = true, Message = "Msg1", IssueId = "id1", Start = 2, Length = 9 }).Should().BeFalse();
+        // Special case, IssueId is not checked for IsPrimary issues
+        orig.Equals(new IssueLocation { RuleId = "Sxxxx", FilePath = "File.cs", LineNumber = 1, IsPrimary = true, Message = "Msg1", IssueId = "xxxx", Start = 2, Length = 4 }).Should().BeTrue();
+        orig.Equals(new IssueLocation { RuleId = "Sxxxx", FilePath = "File.cs", LineNumber = 1, IsPrimary = false, Message = "Msg1", IssueId = "xxx", Start = 2, Length = 4 }).Should().BeFalse();
     }
 
     [TestMethod]

@@ -147,7 +147,7 @@ namespace SonarAnalyzer.Test.TestFramework
             foreach (var filePairs in MatchPairs(actual, expected).GroupBy(x => x.FilePath).OrderBy(x => x.Key))
             {
                 assertionMessages.AppendLine($"There are differences for {actual.LanguageVersion} {SerializePath(filePairs.Key)}:");
-                foreach (var pair in filePairs.OrderBy(x => x.LineNumber).ThenBy(x => x.Start))
+                foreach (var pair in filePairs.OrderBy(x => x.IsPrimary ? 0 : 1).ThenBy(x => x.LineNumber).ThenBy(x => x.Start))
                 {
                     pair.AppendAssertionMessage(assertionMessages);
                 }
@@ -189,7 +189,9 @@ namespace SonarAnalyzer.Test.TestFramework
         private static IEnumerable<IssueLocationPair> MatchPairs(CompilationIssues actual, CompilationIssues expected)
         {
             var ret = new List<IssueLocationPair>();
-            foreach (var key in actual.UniqueKeys().OrderBy(x => x.FilePath == string.Empty ? 1 : 0)) // Process project-level issues last to properly match path-based issues first.
+            // Process file-level issues before project-level that match to any expected file issue
+            // Then process primary before secondary, so we can update primary.IssueId for the purpose of matching seconday issues correctly.
+            foreach (var key in actual.UniqueKeys().OrderBy(x => x.FilePath == string.Empty ? 1 : 0).ThenBy(x => x.IsPrimary ? 0 : 1))
             {
                 ret.AddRange(MatchDifferences(actual.Remove(key), expected.Remove(key)));
             }
@@ -201,16 +203,27 @@ namespace SonarAnalyzer.Test.TestFramework
         {
             foreach (var actual in actualIssues.ToArray())  // First round removes all perfect matches, so we don't mismatch possible perfect match by imperfect one on the same line.
             {
-                if (expectedIssues.Remove(actual))
+                var expectedIndex = expectedIssues.IndexOf(actual);
+                if (expectedIndex >= 0)
                 {
+                    actual.UpdatePrimaryIssueIdFrom(expectedIssues[expectedIndex]);
+                    expectedIssues.RemoveAt(expectedIndex);
                     actualIssues.Remove(actual);
                 }
             }
             foreach (var actual in actualIssues)
             {
-                var expected = expectedIssues.OrderBy(x => Math.Abs(actual.Start ?? 0 - x.Start ?? 0)).ThenBy(x => Math.Abs(actual.Length ?? 0 - x.Length ?? 0)).FirstOrDefault();
-                expectedIssues.Remove(expected);
-                yield return new(actual, expected); // expected can be null
+                var expected = expectedIssues
+                    .OrderBy(x => actual.IssueId == x.IssueId ? 0 : 1)
+                    .ThenBy(x => Math.Abs(actual.Start ?? 0 - x.Start ?? 0))
+                    .ThenBy(x => Math.Abs(actual.Length ?? 0 - x.Length ?? 0))
+                    .FirstOrDefault();
+                if (expected is not null)
+                {
+                    actual.UpdatePrimaryIssueIdFrom(expected);
+                    expectedIssues.Remove(expected);
+                }
+                yield return new(actual, expected);
             }
             foreach (var expected in expectedIssues)
             {
