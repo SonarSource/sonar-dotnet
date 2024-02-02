@@ -15,7 +15,7 @@ int Execute(CommandLineOptions options)
 void ParseIssues()
 {
     var sw = Stopwatch.StartNew();
-    ConsoleHelper.WriteLineColor("Normalizing the SARIF reports", ConsoleColor.Yellow);
+    ConsoleHelper.WriteLineColor("Splitting the SARIF reports to actual folder", ConsoleColor.Yellow);
     var here = Directory.GetCurrentDirectory();
     var inputRoot = Path.Combine(here, "output");
     var outputRoot = Path.Combine(here, "actual");

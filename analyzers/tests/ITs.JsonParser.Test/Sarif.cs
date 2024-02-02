@@ -2,15 +2,22 @@
 
 internal static class Sarif
 {
-    internal static string CreateReport(string rootPath, string project, string subProject, string assembly, params string[] issues)
+    internal static string CreateReport(string rootPath, string solution, string project, string tfm, params string[] issues)
     {
-        var contents = $"""
-        {Prefix}
-        {string.Join($",{Environment.NewLine}", issues)}
-        {Suffix}
-        """;
-        File.WriteAllText(Path.Combine(rootPath, project, $"{subProject}-{assembly}.json"), contents);
-        return contents;
+        var content = $$"""
+            {
+              "runs": [
+                {
+                  "results": [
+                    {{string.Join($",{Environment.NewLine}", issues)}}
+                  ]
+                }
+              ]
+            }
+            """;
+        var suffix = tfm is null ? string.Empty : $"-{tfm}";
+        File.WriteAllText(Path.Combine(rootPath, solution, $"{project}{suffix}.json"), content);
+        return content;
     }
 
     internal static string CreateIssue(string ruleId, string message, string relativePath, int startLine, int endLine) =>
@@ -34,26 +41,12 @@ internal static class Sarif
         }
         """;
 
-    internal static string CreateIssue(string ruleId, string message, string relativePath) =>
+    internal static string CreateIssue(string ruleId, string message) =>
         $$"""
         {
           "ruleId": "{{ruleId}}",
           "message": "{{message}}.",
           "locations": [ ]
-        }
-        """;
-
-    private const string Prefix = """
-        {
-          "runs": [
-            {
-              "results": [
-        """;
-
-    private const string Suffix = """
-              ]
-            }
-          ]
         }
         """;
 }

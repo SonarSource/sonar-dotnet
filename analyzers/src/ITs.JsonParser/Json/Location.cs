@@ -1,6 +1,6 @@
 ﻿namespace ITs.JsonParser.Json;
 
-internal class Location
+internal class Location // TODO: This should be moved to SarifReport file and not re-used by the output JSON format.
 {
     public string Uri { get; set; }
     public Region Region { get; set; }

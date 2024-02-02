@@ -11,74 +11,57 @@ namespace ITs.JsonParser;
 /// </summary>
 public static class IssueParser
 {
+    private static readonly Regex RxSonarRule = new("^S[0-9]+$", RegexOptions.Compiled);
     private static readonly JsonSerializerOptions SerializerOptions = new() { PropertyNameCaseInsensitive = true, WriteIndented = true };
 
     public static void Execute(string inputRootPath, string outputRootPath)
     {
         Console.WriteLine($"Searching for SARIF reports in {inputRootPath}...");
         var sarifReports = Read(inputRootPath);
-        ConsoleHelper.WriteLineColor("Successfully parsed all SARIF reports!", ConsoleColor.Green);
+        ConsoleHelper.WriteLineColor($"Successfully parsed {sarifReports.Length} SARIF reports.", ConsoleColor.Green);
 
         Console.WriteLine("Mapping SARIF reports to Rule reports..");
-        var customReports = Map(sarifReports);
-        ConsoleHelper.WriteLineColor($"Successfully mapped all SARIF reports to {customReports.Length} Rule reports!", ConsoleColor.Green);
+        var customReports = sarifReports.SelectMany(ExplodeToRuleIssues).ToArray();
+        ConsoleHelper.WriteLineColor($"Successfully mapped all SARIF reports to {customReports.Length} Rule reports.", ConsoleColor.Green);
 
         Console.WriteLine($"Writing results to {outputRootPath}");
-        Write(outputRootPath, customReports);
-        ConsoleHelper.WriteLineColor("Successfully wrote all Rule reports.!", ConsoleColor.Green);
+        WriteOutput(outputRootPath, customReports);
+        ConsoleHelper.WriteLineColor("Successfully wrote all Rule reports.", ConsoleColor.Green);
     }
 
-    private static List<InputReport> Read(string rootPath)
-    {
-        var sarifPaths = Directory.GetFiles(rootPath, "*.json", SearchOption.AllDirectories);
-        ConsoleHelper.WriteLineColor($"Found {sarifPaths.Length} SARIF reports in {rootPath}.", ConsoleColor.Green);
-        var result = new List<InputReport>();
-        foreach (var path in sarifPaths.Where(x => !x.Contains("AnalysisWarnings.MsBuild"))) // Remove non-SARIF JSONs
-        {
-            // .../project/assembly{-TFM}?.json
-            var filename = Path.GetFileNameWithoutExtension(path);
-            var splitted = filename.Split('-');
-
-            Console.WriteLine($"Processing {path}...");
-            var project = Path.GetFileName(Path.GetDirectoryName(path));
-            var assembly = splitted[0];
-            var tfm = splitted.ElementAtOrDefault(1) ?? "UNSET"; // some projects have only one TFM, so it is not included in the name.
-            var sarif = JsonSerializer.Deserialize<SarifIssues>(File.ReadAllText(path), SerializerOptions);
-            ConsoleHelper.WriteLineColor($"Successfully parsed {project}/{assembly} [{tfm}]", ConsoleColor.Green);
-            result.Add(new(project, assembly, tfm, sarif));
-        }
-        return result;
-    }
-
-    private static OutputReport[] Map(List<InputReport> inputReports) =>
-        inputReports.SelectMany(ExplodeToRuleIssues).ToArray();
+    private static InputReport[] Read(string rootPath) =>
+        Directory.GetFiles(rootPath, "*.json", SearchOption.AllDirectories)
+            .Where(x => !x.Contains("AnalysisWarnings.MsBuild", StringComparison.InvariantCulture))
+            .Select(x => new InputReport(x, SerializerOptions))
+            .ToArray();
 
     // One SARIF contains all the issues for the project. We need to split it by rule Id.
     private static IEnumerable<OutputReport> ExplodeToRuleIssues(InputReport inputReport)
     {
         var allIssues = inputReport.Sarif
             .AllIssues()
-            .Where(x => Regex.IsMatch(x.RuleId, "^S[0-9]+$"))
+            .Where(x => RxSonarRule.IsMatch(x.RuleId))
             .OrderBy(x => x.Order())
             .GroupBy(x => x.RuleId);
         foreach (var issuesByRule in allIssues)
         {
-            var issues = new RuleIssues { Issues = issuesByRule.Select(RuleIssue.From).ToArray() };
+            var issues = new RuleIssues { Issues = issuesByRule.Select(x => new RuleIssue(x)).ToArray() };
             yield return new OutputReport(inputReport.Project, issuesByRule.Key, inputReport.Assembly, inputReport.TFM, issues);
         }
     }
 
-    private static void Write(string rootPath, OutputReport[] outputReports)
+    private static void WriteOutput(string root, OutputReport[] reports)
     {
-        foreach (var project in outputReports.Select(x => x.Project).Distinct())
+        foreach (var project in reports.Select(x => x.Project).Distinct())
         {
-            Directory.CreateDirectory(Path.Combine(rootPath, project));
+            Directory.CreateDirectory(Path.Combine(root, project));
         }
-        foreach (var outputReport in outputReports)
+        foreach (var report in reports)
         {
-            // projectName/rule-assembly-TFM.json
-            var resultPath = Path.Combine(rootPath, outputReport.Project, $"{outputReport.RuleId}-{outputReport.Assembly}-{outputReport.TFM}.json");
-            File.WriteAllText(resultPath, JsonSerializer.Serialize(outputReport.RuleIssues, SerializerOptions));
+            // projectName/rule-assembly{-TFM}?.json
+            var suffix = report.TFM is null ? string.Empty : $"-{report.TFM}";
+            var resultPath = Path.Combine(root, report.Project, $"{report.RuleId}-{report.Assembly}{suffix}.json");
+            File.WriteAllText(resultPath, JsonSerializer.Serialize(report.RuleIssues, SerializerOptions));
         }
     }
 }

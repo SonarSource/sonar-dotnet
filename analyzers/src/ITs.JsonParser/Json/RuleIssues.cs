@@ -12,15 +12,14 @@ internal class RuleIssue
     public string Message { get; set; }
     public Location Location { get; set; }
 
-    public static RuleIssue From(SarifIssue issue) =>
-        new()
+    public RuleIssue(SarifIssue issue)
+    {
+        Id = issue.RuleId;
+        Message = issue.Message;
+        Location = new()
         {
-            Id = issue.RuleId,
-            Message = issue.Message,
-            Location = new()
-            {
-                Uri = issue.NormalizedUri(),
-                Region = issue.Location?.Region
-            }
+            Uri = issue.NormalizedUri(),
+            Region = issue.Location?.Region
         };
+    }
 }
