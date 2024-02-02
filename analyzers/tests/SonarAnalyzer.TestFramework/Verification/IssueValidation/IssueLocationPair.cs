@@ -49,7 +49,7 @@ internal sealed record IssueLocationPair(IssueLocation Actual, IssueLocation Exp
             {
                 builder.Append(" Rule ").Append(Actual.RuleId);
             }
-            if ((Actual?.IssueId ?? Expected?.IssueId) is { } issueId && Actual?.RuleId != issueId)
+            if ((Actual?.IssueId ?? Expected?.IssueId) is { } issueId)
             {
                 builder.Append(" ID ").Append(issueId);
             }
