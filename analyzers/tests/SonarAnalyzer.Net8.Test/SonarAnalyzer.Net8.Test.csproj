@@ -1,20 +1,22 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <!-- `-windows` is required in order to be able to reference SonarAnalyzer.Test to resolve e.g. WinForms references -->
-        <TargetFramework>net8.0-windows</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-    </PropertyGroup>
-
-    <ItemGroup>
-      <PackageReference Include="altcover" Version="8.6.95" />
-      <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.3" />
-      <PackageReference Include="MSTest.TestAdapter" Version="3.1.1" />
-      <PackageReference Include="MSTest.TestFramework" Version="3.1.1" />
-    </ItemGroup>
+  <PropertyGroup>
+    <!-- `-windows` is required in order to be able to reference SonarAnalyzer.Test to resolve e.g. WinForms references -->
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="altcover" Version="8.6.95" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.3" />
+    <PackageReference Include="MSTest.TestAdapter" Version="3.1.1" />
+    <PackageReference Include="MSTest.TestFramework" Version="3.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Microsoft.CodeAnalysis" />
+    <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
     <Using Include="SonarAnalyzer.TestFramework.Build" />
     <Using Include="SonarAnalyzer.TestFramework.MetadataReferences" />
@@ -22,20 +24,20 @@
   </ItemGroup>
 
   <ItemGroup>
-      <Compile Remove="TestCases\**\*" />
-      <None Include="TestCases\**\*">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-    </ItemGroup>
+    <Compile Remove="TestCases\**\*" />
+    <None Include="TestCases\**\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\SonarAnalyzer.TestFramework\SonarAnalyzer.TestFramework.csproj" />
-      <ProjectReference Include="..\..\src\SonarAnalyzer.CSharp\SonarAnalyzer.CSharp.csproj">
-        <Aliases>global,csharp</Aliases>
-      </ProjectReference>
-      <ProjectReference Include="..\..\src\SonarAnalyzer.VisualBasic\SonarAnalyzer.VisualBasic.csproj">
-        <Aliases>global,vbnet</Aliases>
-      </ProjectReference>
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SonarAnalyzer.TestFramework\SonarAnalyzer.TestFramework.csproj" />
+    <ProjectReference Include="..\..\src\SonarAnalyzer.CSharp\SonarAnalyzer.CSharp.csproj">
+      <Aliases>global,csharp</Aliases>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\SonarAnalyzer.VisualBasic\SonarAnalyzer.VisualBasic.csproj">
+      <Aliases>global,vbnet</Aliases>
+    </ProjectReference>
+  </ItemGroup>
 
 </Project>

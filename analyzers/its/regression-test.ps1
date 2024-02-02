@@ -226,6 +226,21 @@ function Show-DiffResults() {
     } -errorMessage $errorMsg
 }
 
+function Invoke-JsonParser()
+{
+    $JsonParser = Join-Path $PSScriptRoot "..\packaging\binaries\ITs.JsonParser\ITs.JsonParser.exe"
+    $Arguments = @(" ")
+    if ($ruleId){
+        $Arguments += "--rule"
+        $Arguments += $ruleId
+    }
+    if ($project){
+        $Arguments += "--project"
+        $Arguments += $project
+    }
+    Start-Process $JsonParser -ArgumentList $Arguments -NoNewWindow -Wait
+}
+
 try {
     $scriptTimer = [system.diagnostics.stopwatch]::StartNew()
     . (Join-Path $PSScriptRoot "..\..\scripts\build\build-utils.ps1")
@@ -268,8 +283,9 @@ try {
     Build-Project-DotnetTool "RazorSample" "RazorSample.sln"
     Build-Project-DotnetTool "BlazorSample" "BlazorSample.sln"
 
-    Write-Header "Processing analyzer results"
+    Invoke-JsonParser
 
+    # TODO: Migrate all of the remaining logic to JsonParser
     Write-Host "Normalizing the SARIF reports"
     $sarifTimer = [system.diagnostics.stopwatch]::StartNew()
 
