@@ -81,7 +81,7 @@ interface IFoo { }
 interface IBar { }
 interface IQix { }
 
-[PartCreationPolicy(CreationPolicy.Any)] // Error [CS0116] - Compliant, illegal use, don't raise
+[PartCreationPolicy(CreationPolicy.Any)] // Error [CS1671] - Compliant, illegal use, don't raise
 
 namespace Aliases
 {

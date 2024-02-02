@@ -2,69 +2,85 @@
 Imports System.Diagnostics.CodeAnalysis
 Imports [Alias] = System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute
 
-<ExcludeFromCodeCoverage> ' Noncompliant^2#23 {{Add a justification.}}
+' Noncompliant@+1 ^2#23 {{Add a justification.}}
+<ExcludeFromCodeCoverage>
 Class Noncompliant
     <ExcludeFromCodeCoverage()> Sub WithBrackets() ' Noncompliant^6#25
     End Sub
 
-    <System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage> ' Noncompliant
+    ' Noncompliant@+1
+    <System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage>
     Sub FullyDeclaredNamespace()
     End Sub
 
-    <Global.System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage> ' Noncompliant
+    ' Noncompliant@+1
+    <Global.System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage>
     Sub GloballyDeclaredNamespace()
     End Sub
 
-    <[Alias](Justification:="")> ' Noncompliant
+    ' Noncompliant@+1
+    <[Alias](Justification:="")>
     Sub WithAlias()
     End Sub
 
-    <ExcludeFromCodeCoverage(Justification:=Nothing)> ' Noncompliant
+    ' Noncompliant@+1
+    <ExcludeFromCodeCoverage(Justification:=Nothing)>
     Sub WithNothing()
     End Sub
 
-    <ExcludeFromCodeCoverage(Justification:="")> ' Noncompliant
+    ' Noncompliant@+1
+    <ExcludeFromCodeCoverage(Justification:="")>
     Sub WithEmptyString()
     End Sub
 
-    <ExcludeFromCodeCoverage(Justification:="  ")> ' Noncompliant
+    ' Noncompliant@+1
+    <ExcludeFromCodeCoverage(Justification:="  ")>
     Sub WithWhiteSpace()
     End Sub
 
-    <ExcludeFromCodeCoverage> ' Noncompliant
+    ' Noncompliant@+1
+    <ExcludeFromCodeCoverage>
     <CLSCompliant(False)>
     Function Multiple() As UInteger
         Return 0
     End Function
 
-    <ExcludeFromCodeCoverage, CLSCompliant(False)> Function Combined() As UInteger ' Noncompliant
+    ' Noncompliant@+1
+    <ExcludeFromCodeCoverage, CLSCompliant(False)> Function Combined() As UInteger
         Return 0
     End Function
 
-    <ExcludeFromCodeCoverage> ' Noncompliant
+    ' Noncompliant@+1
+    <ExcludeFromCodeCoverage>
     Sub New()
     End Sub
 
-    <ExcludeFromCodeCoverage> ' Noncompliant
+    ' Noncompliant@+1
+    <ExcludeFromCodeCoverage>
     Sub Method()
     End Sub
 
-    <ExcludeFromCodeCoverage> ' Noncompliant
+    ' Noncompliant@+1
+    <ExcludeFromCodeCoverage>
     Property [Property] As Integer
 
-    <ExcludeFromCodeCoverage> ' Noncompliant
+    ' Noncompliant@+1
+    <ExcludeFromCodeCoverage>
     Event [Event] As EventHandler
 
 End Class
 
 Interface IInterface
-    <ExcludeFromCodeCoverage> ' Noncompliant
+    ' Noncompliant@+1
+    <ExcludeFromCodeCoverage>
     Sub Method()
 End Interface
 
-<ExcludeFromCodeCoverage> ' Noncompliant
+' Noncompliant@+1
+<ExcludeFromCodeCoverage>
 Structure ProgramStruct
-    <ExcludeFromCodeCoverage> ' Noncompliant
+    ' Noncompliant@+1
+    <ExcludeFromCodeCoverage>
     Sub Method()
     End Sub
 End Structure

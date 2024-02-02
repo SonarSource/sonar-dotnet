@@ -3,7 +3,8 @@ Imports System.Xml.Linq
 
 Module Module1
     Sub Main()
-        Console.WriteLine("1" & ' Fixed
+        ' Fixed
+        Console.WriteLine("1" &
                           2 & "3") ' Fixed
         Console.WriteLine("1" & "2") ' Fixed
         Console.WriteLine(1 & 2)   ' Compliant - will display "12"

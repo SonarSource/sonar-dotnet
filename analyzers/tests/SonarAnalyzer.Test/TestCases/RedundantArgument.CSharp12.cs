@@ -25,7 +25,7 @@ class DefaultLambdaParameters
     void NamedArguments()
     {
         var f = (int i = 41, int j = 42, int z = 43) => i;
-        f(i: 42); // Error CS1746  The delegate '<anonymous delegate>' does not have a parameter named 'i'
+        f(i: 42); // Error [CS1746] The delegate '<anonymous delegate>' does not have a parameter named 'i'
     }
 }
 

@@ -50,7 +50,7 @@ record TestRecord
         provider = new (validKeySize);
         provider = new (invalidKeySize);                   // Noncompliant
 
-        var malformed = new UnknownCryptoServiceProvider();// Error [CS0264]
+        var malformed = new UnknownCryptoServiceProvider();// Error [CS0246]
     }
 
     public void KeySize()

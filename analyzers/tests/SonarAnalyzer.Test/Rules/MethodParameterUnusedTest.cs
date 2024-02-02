@@ -82,7 +82,7 @@ public class Sample
 
         [TestMethod]
         public void MethodParameterUnused_VB() =>
-            new VerifierBuilder<VB.MethodParameterUnused>().AddPaths("MethodParameterUnused.vb").Verify();
+            new VerifierBuilder<VB.MethodParameterUnused>().AddPaths("MethodParameterUnused.vb").WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
 
 #if NET
 

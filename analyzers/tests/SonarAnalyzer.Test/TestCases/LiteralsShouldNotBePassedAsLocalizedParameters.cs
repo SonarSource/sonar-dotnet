@@ -88,8 +88,8 @@ namespace Tests.Diagnostics
         public void Foo()
         {
             Bar("some string", "other string", "third string"); // Compliant, this cannot be compiled // Error [CS1501]
-            Bar("some string"); // Compliant, this cannot be compiled // Error [CS1501]
-            Bar(); // Compliant // Error [CS1501]
+            Bar("some string"); // Error [CS7036] Compliant, this cannot be compiled
+            Bar();              // Error [CS7036] Compliant
             Console.Write(true); // Compliant
             Console.WriteLine(); // Compliant
         }

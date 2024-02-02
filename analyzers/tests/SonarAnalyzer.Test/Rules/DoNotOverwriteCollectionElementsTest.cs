@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void DoNotOverwriteCollectionElements_VB() =>
-            builderVB.AddPaths("DoNotOverwriteCollectionElements.vb").Verify();
+            builderVB.AddPaths("DoNotOverwriteCollectionElements.vb").WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
 
 #if NET
 

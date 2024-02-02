@@ -3,7 +3,8 @@ Imports System.Xml.Linq
 
 Module Module1
     Sub Main()
-        Console.WriteLine("1" + ' Noncompliant
+        ' Noncompliant@+1
+        Console.WriteLine("1" +
                           2 + "3") ' Noncompliant - will display "6"
         Console.WriteLine("1" + "2") ' Noncompliant {{Switch this use of the '+' operator to the '&'.}}
 '                             ^

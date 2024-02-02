@@ -50,7 +50,8 @@ Public Class Foo
     End Function
 
     <OnDeserializing>
-    Public Function () As String ' Noncompliant ' Error [BC30203]
+    Public Function () As String ' Noncompliant
+        ' Error@-1 [BC30203]
         Throw New NotImplementedException()
     End Function
 

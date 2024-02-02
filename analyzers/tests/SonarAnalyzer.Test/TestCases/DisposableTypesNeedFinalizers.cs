@@ -46,17 +46,20 @@ namespace MyLibrary
         }
     }
 
-    public class Foo_01 : IDisposable // Noncompliant // Error [CS0535]
+    // Error@+1 [CS0535]
+    public class Foo_01 : IDisposable // Noncompliant
     {
         private UIntPtr myResource;
     }
 
-    public class Foo_02 : IDisposable // Noncompliant // Error [CS0535]
+    // Error@+1 [CS0535]
+    public class Foo_02 : IDisposable // Noncompliant
     {
         private UIntPtr myResource;
     }
 
-    public class Foo_03 : IDisposable // Noncompliant // Error [CS0535]
+    // Error@+1 [CS0535]
+    public class Foo_03 : IDisposable // Noncompliant
     {
         private HandleRef myResource;
     }

@@ -25,8 +25,9 @@ namespace Tests.Diagnostics
         public string Bar // Noncompliant {{Change either the name of property 'Bar' or the name of method 'Bar' to make them distinguishable.}}
 //                    ^^^
         { get; }
-        public int Bar() // Error [CS0102]
-//                 ^^^ Secondary
+        // Error@+1 [CS0102]
+        public int Bar()    // Secondary
+//                 ^^^
         {
             return 42;
         }

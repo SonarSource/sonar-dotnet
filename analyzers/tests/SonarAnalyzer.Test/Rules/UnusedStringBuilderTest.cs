@@ -35,7 +35,7 @@ public class UnusedStringBuilderTest
 
     [TestMethod]
     public void UnusedStringBuilder_VB() =>
-        builderVB.AddPaths("UnusedStringBuilder.vb").Verify();
+        builderVB.AddPaths("UnusedStringBuilder.vb").WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
 
 #if NET
 

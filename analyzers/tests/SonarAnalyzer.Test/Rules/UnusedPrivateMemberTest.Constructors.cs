@@ -139,7 +139,7 @@ public interface IInterface
     // UnusedPrivateMember rule does not trigger AD0001 error from NullReferenceException
     IInterface() {} // Error [CS0526]
 }
-").WithErrorBehavior(CompilationErrorBehavior.Ignore).Verify();
+").Verify();
 
 #if NET
 
@@ -164,8 +164,8 @@ public abstract record Foo
         builder.AddSnippet(@"
 public abstract record Foo
 {
-    public sealed record Bar(string Value) : RandomRecord(Value); // Error [CS0115] no suitable method found to override
-}").WithOptions(ParseOptionsHelper.FromCSharp10).WithErrorBehavior(CompilationErrorBehavior.Ignore).Verify();
+    public sealed record Bar(string Value) : RandomRecord(Value); // Error [CS0246, CS1729] no suitable method found to override
+}").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
 
 #endif
 

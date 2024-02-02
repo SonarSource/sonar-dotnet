@@ -19,7 +19,8 @@ namespace Tests.Diagnostics
         }
         private static bool HasContent2b(List<string> l)
         {
-            return l.Any(); // Fixed
+            return l.Any();    // Fixed
+                               // Error@-1 [CS0034]
         }
         private static bool IsNotEmpty1(List<string> l)
         {

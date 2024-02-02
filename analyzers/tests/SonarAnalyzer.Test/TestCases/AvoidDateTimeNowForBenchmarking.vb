@@ -24,20 +24,20 @@ Public Class Program
     End Sub
 
     Private Sub Combinations(ByVal timeSpan As TimeSpan, ByVal dateTime As Date)
-        Dim a1 = (Date.Now - dateTime).Milliseconds ' Noncompliant
-        Dim a2 = Date.Now.Subtract(dateTime).Milliseconds ' Noncompliant
+        Dim a1 = (Date.Now - dateTime).Milliseconds         ' Noncompliant
+        Dim a2 = Date.Now.Subtract(dateTime).Milliseconds   ' Noncompliant
 
-        Dim b1 = (Date.Now - TimeSpan.FromSeconds(1)).Millisecond ' Compliant
-        Dim b2 = Date.Now.Subtract(TimeSpan.FromDays(1)).Millisecond ' Compliant
+        Dim b1 = (Date.Now - TimeSpan.FromSeconds(1)).Millisecond       ' Compliant
+        Dim b2 = Date.Now.Subtract(TimeSpan.FromDays(1)).Millisecond    ' Compliant
 
-        Dim c1 = (Date.Now - timeSpan).Millisecond ' Compliant
-        Dim c2 = Date.Now.Subtract(timeSpan).Millisecond ' Compliant
+        Dim c1 = (Date.Now - timeSpan).Millisecond              ' Compliant
+        Dim c2 = Date.Now.Subtract(timeSpan).Millisecond        ' Compliant
 
-        Dim d1 = (Date.UtcNow - dateTime).Milliseconds ' Compliant
-        Dim d2 = Date.UtcNow.Subtract(dateTime).Milliseconds ' Compliant
+        Dim d1 = (Date.UtcNow - dateTime).Milliseconds          ' Compliant
+        Dim d2 = Date.UtcNow.Subtract(dateTime).Milliseconds    ' Compliant
 
-        Dim e1 = (New DateTime(1) - dateTime).Milliseconds ' Compliant
-        Dim e2 = New DateTime(1).Subtract(dateTime).Milliseconds ' Compliant
+        Dim e1 = (New DateTime(1) - dateTime).Milliseconds          ' Compliant
+        Dim e2 = New DateTime(1).Subtract(dateTime).Milliseconds    ' Compliant
     End Sub
 
     Private timeField As TimeSpan

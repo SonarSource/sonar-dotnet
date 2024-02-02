@@ -32,6 +32,10 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void FileLines_VB() =>
-            new VerifierBuilder().AddAnalyzer(() => new VB.FileLines { Maximum = 10 }).AddPaths("FileLines20.vb", "FileLines9.vb").WithAutogenerateConcurrentFiles(false).Verify();
+            new VerifierBuilder().AddAnalyzer(() => new VB.FileLines { Maximum = 10 })
+                .AddPaths("FileLines20.vb", "FileLines9.vb")
+                .WithAutogenerateConcurrentFiles(false)
+                .WithOptions(ParseOptionsHelper.FromVisualBasic14)
+                .Verify();
     }
 }

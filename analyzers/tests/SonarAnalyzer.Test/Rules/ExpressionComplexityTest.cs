@@ -118,7 +118,7 @@ namespace SonarAnalyzer.Test.Rules
 #endif
 
         [TestMethod]
-        public void ExpressionComplexity_VisualBasic() =>
+        public void ExpressionComplexity_VB() =>
             new VerifierBuilder().AddAnalyzer(() => new VB.ExpressionComplexity { Maximum = 3 }).AddPaths("ExpressionComplexity.vb").Verify();
     }
 }

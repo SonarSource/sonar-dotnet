@@ -92,7 +92,7 @@ namespace Repro_6630
         public void BrokeSyntax()
         {
             double d = 42;
-            Assert.Equual(d, 42);   // Error
+            Assert.Equual(d, 42);   // Error [CS0117]
         }
     }
 }

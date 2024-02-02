@@ -67,7 +67,7 @@ public class AssertionsShouldBeCompleteTest
                 public void MissingParen()
                 {
                     var s = "Test";
-                    s.Should(;  // Error
+                    s.Should(;  // Error [CS1026]
                 }
             }
             """)

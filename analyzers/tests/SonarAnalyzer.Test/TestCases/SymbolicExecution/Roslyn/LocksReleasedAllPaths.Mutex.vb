@@ -60,7 +60,7 @@ Namespace Mutex_Type
             If mIsAcquired Then
                 ' here it should be released
             Else
-                m.ReleaseMutex() ' this Is a programming Error, not detected by this rule
+                m.ReleaseMutex() ' This is a programming mistake, not detected by this rule
             End If
 
             Dim paramMutexIsAcquired = ParamMutex.WaitOne(400, False) ' Noncompliant

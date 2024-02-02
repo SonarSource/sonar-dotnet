@@ -74,21 +74,22 @@
 
         Public Sub GoodName() Implements ISomething.rqSixth ' Compliant as the rename is compliant
             Throw New NotImplementedException()
-        End Sub 
+        End Sub
 
         Public Sub VeryNiceRenaming() Implements ISomething.rqSeventh, ISomething.rqEight ' Compliant as the rename is compliant
             Throw New NotImplementedException()
-        End Sub 
+        End Sub
 
         Public Sub ValidName() Implements ISomething.ValidName ' Compliant
             Throw New NotImplementedException()
-        End Sub 
+        End Sub
 
         <System.Runtime.InteropServices.DllImport("foo.dll")>
         Public Shared Sub rqExtern(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer, ByVal p4 As Integer) ' Compliant as it is extern
         End Sub
 
-        <System.Runtime.InteropServices.DllImport("foo.dll")> ' Error [BC31529]
+        ' Error@+1 [BC31529]
+        <System.Runtime.InteropServices.DllImport("foo.dll")>
         Public Sub rqNotShared(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer, ByVal p4 As Integer) ' Noncompliant
         End Sub
 

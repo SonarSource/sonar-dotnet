@@ -29,13 +29,13 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void NativeMethodsShouldBeWrapped() =>
-            builder.AddPaths("NativeMethodsShouldBeWrapped.cs").WithErrorBehavior(CompilationErrorBehavior.Ignore).Verify();
+            builder.AddPaths("NativeMethodsShouldBeWrapped.cs").Verify();
 
 #if NET
 
         [TestMethod]
         public void NativeMethodsShouldBeWrapped_CSharp9() =>
-            builder.AddPaths("NativeMethodsShouldBeWrapped.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+            builder.AddPaths("NativeMethodsShouldBeWrapped.CSharp9.cs").WithTopLevelStatements().Verify();
 
         [TestMethod]
         public void NativeMethodsShouldBeWrapped_CSharp10() =>
@@ -59,24 +59,25 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void NativeMethodsShouldBeWrapped_InvalidCode() =>
-            builder.AddSnippet(@"
-public class InvalidSyntax
-{
-    extern public void Extern1
-    extern public void Extern2;
-    extern private void Extern3(int x);
-    public void Wrapper
-    {
-        Extern3(x);
-    }
-    public void Wrapper(
-    {
-        Extern3(x);
-    }
-    public void Wrapper()
-    {
-        Extern3(x);
-    }
-}").WithErrorBehavior(CompilationErrorBehavior.Ignore).Verify();
+            builder.AddSnippet("""
+                public class InvalidSyntax
+                {
+                    extern public void Extern1  // Error [CS0670, CS0106, CS1002]
+                    extern public void Extern2; // Error [CS0670, CS0106]
+                    extern private void Extern3(int x);
+                    public void Wrapper         // Error [CS0547, CS0548]
+                    {
+                        Extern3(x);             // Error [CS1014, CS1513, CS8124, CS1519]
+                    }
+                    public void Wrapper(        // Error [CS8803, CS0106, CS8805, CS8107, CS8112, CS1001]
+                    {
+                        Extern3(x);             // Error [CS0246, CS1003, CS0246, CS8124, CS1001, CS1026, CS1001]
+                    }                           // Error [CS1022]
+                    public void Wrapper()       // Error [CS0106, CS0128]
+                    {
+                        Extern3(x);             // Error [CS0103, CS0103]
+                    }
+                }                               // Error [CS1022]
+                """).Verify();
     }
 }

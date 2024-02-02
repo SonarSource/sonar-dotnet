@@ -62,7 +62,7 @@ public class InsteadOfAnyTest
 
     [TestMethod]
     public void ExistsInsteadOfAny_VB() =>
-        builderVB.AddPaths("InsteadOfAny.vb").Verify();
+        builderVB.AddPaths("InsteadOfAny.vb").WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
 
     [TestMethod]
     public void InsteadOfAny_EntityFramework_VB() =>

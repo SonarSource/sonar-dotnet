@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
-using System.Collections.Immutable;
 
 namespace Tests.Diagnostics
 {
@@ -26,7 +25,7 @@ namespace Tests.Diagnostics
             {
             }
         }
-        public void My(ImmutableArray<B> analyzers) // Error [CS0122]
+        public void My(IEnumerable<B> analyzers)
         {
             if (analyzers.Any(x => x == null)) //compliant, B is a class
             {

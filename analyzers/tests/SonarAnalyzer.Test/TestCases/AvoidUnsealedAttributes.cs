@@ -22,4 +22,4 @@ public sealed class Attr : Attribute
     protected class InnerAttr2 : Attribute { } // Noncompliant
 }
 
-public class { }    // Error CS1001  Identifier expected
+public class { }    // Error [CS1001]  Identifier expected

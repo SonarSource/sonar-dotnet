@@ -62,7 +62,7 @@ namespace Tests.Diagnostics
             var hres2 = CoInitializeSecurity(0, -1, 0, 0, RpcAuthnLevel.None, RpcImpLevel.Impersonate, 0, EoAuthnCap.None, 0); // Noncompliant
 //                      ^^^^^^^^^^^^^^^^^^^^
 
-            CoSetProxyBlanket();            // Error [CS0103]
+            CoSetProxyBlanket();            // Error [CS7036]
             CoInitializeSecurity(5);        // Compliant
             var p = new Program();
             p.CoInitializeSecurity("");     // Compliant

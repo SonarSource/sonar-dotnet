@@ -84,15 +84,15 @@ namespace Tests.Diagnostics
             const string s0 = $"{constOne}";                // Compliant
             const string s1 = $"{constOne}Two";             // Noncompliant FP
             const string s2 = $"{nameof(constOne)}Two";     // Noncompliant FP
-            const string s3 = $"{parameter}";               // Error CS0133
-            const string s4 = $"{parameter}Two";            // Error CS0133
+            const string s3 = $"{parameter}";               // Error [CS0133]
+            const string s4 = $"{parameter}Two";            // Error [CS0133]
             const string s5 = $"{nameof(parameter)}Two";    // Noncompliant FP
-            const string s6 = $"{nonConstOne}";             // Error CS0133
-            const string s7 = $"{nonConstOne}Two";          // Error CS0133
+            const string s6 = $"{nonConstOne}";             // Error [CS0133]
+            const string s7 = $"{nonConstOne}Two";          // Error [CS0133]
                                                             // Noncompliant@-1 FP
             const string s8 = $"{nameof(nonConstOne)}Two";  // Noncompliant FP
-            const string s9 = $"{empty}";                   // Error CS0133
-            const string s10 = $"{empty}Two";               // Error CS0133
+            const string s9 = $"{empty}";                   // Error [CS0133]
+            const string s10 = $"{empty}Two";               // Error [CS0133]
             const string s11 = $"{nameof(empty)}Two";       // Noncompliant FP
 
             string s12 = $"{constOne}";                     // Compliant

@@ -32,7 +32,7 @@ namespace Tests.Diagnostics
             NUnit.Framework.Assert.AreEqual(false, i); // Noncompliant
             NUnit.Framework.Assert.AreEqual(); // Error [CS1501] (code coverage)
 
-            FooBar(); // Error [CS1501] (code coverage)
+            FooBar(); // Error [CS0103] (code coverage)
         }
     }
 }
