@@ -43,20 +43,22 @@ internal sealed record IssueLocationPair(IssueLocation Actual, IssueLocation Exp
             builder.Append(" Secondary location");
         }
         builder.Append(": ").Append(AssertionMessage());
-        if (Actual?.RuleId is not null)
+        if (Type != IssueType.Error)
         {
-            builder.Append(" Rule ").Append(Actual.RuleId);
-        }
-        if ((Actual?.IssueId ?? Expected?.IssueId) is { } issueId && Actual?.RuleId != issueId)
-        {
-            builder.Append(" ID ").Append(issueId);
+            if (Actual?.RuleId is not null)
+            {
+                builder.Append(" Rule ").Append(Actual.RuleId);
+            }
+            if ((Actual?.IssueId ?? Expected?.IssueId) is { } issueId && Actual?.RuleId != issueId)
+            {
+                builder.Append(" ID ").Append(issueId);
+            }
         }
         builder.AppendLine();
     }
 
     private string AssertionMessage()
     {
-        // ToDo: Better template for compilation errors, so it can be copied
         if (Actual is null)
         {
             return Expected.Message is null
@@ -65,7 +67,10 @@ internal sealed record IssueLocationPair(IssueLocation Actual, IssueLocation Exp
         }
         else if (Expected is null)
         {
-            return $"Unexpected issue '{Actual.Message}'";
+            var comment = FilePath.EndsWith(".vb", StringComparison.InvariantCultureIgnoreCase) ? "'" : "//";
+            return Actual.Type == IssueType.Error
+                ? $"Unexpected error, use {comment} Error [{Actual.RuleId}] {Actual.Message}"   // We don't want to assert the precise {{Message}}
+                : $"Unexpected issue '{Actual.Message}'";
         }
         else if (Expected.IssueId != Actual.IssueId)
         {
