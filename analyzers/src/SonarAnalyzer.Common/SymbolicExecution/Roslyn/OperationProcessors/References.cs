@@ -71,7 +71,7 @@ internal sealed class PropertyReference : BranchingProcessor<IPropertyReferenceO
     protected override IPropertyReferenceOperationWrapper Convert(IOperation operation) =>
         IPropertyReferenceOperationWrapper.FromOperation(operation);
 
-    protected override ProgramState PreProcess(ProgramState state, IPropertyReferenceOperationWrapper operation)
+    protected override ProgramState PreProcess(ProgramState state, IPropertyReferenceOperationWrapper operation, bool isInLoop)
     {
         if (operation.Instance.TrackedSymbol(state) is { } symbol)
         {

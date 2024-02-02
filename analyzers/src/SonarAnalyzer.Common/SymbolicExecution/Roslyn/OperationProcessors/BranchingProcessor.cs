@@ -33,12 +33,12 @@ internal abstract class BranchingProcessor<T> : MultiProcessor<T>
     protected abstract SymbolicConstraint BoolConstraintFromOperation(ProgramState state, T operation);
     protected abstract ProgramState LearnBranchingConstraint(ProgramState state, T operation, bool falseBranch);
 
-    protected virtual ProgramState PreProcess(ProgramState state, T operation) =>
+    protected virtual ProgramState PreProcess(ProgramState state, T operation, bool isInLoop) =>
         state;
 
     protected override ProgramState[] Process(SymbolicContext context, T operation)
     {
-        var state = PreProcess(context.State, operation);
+        var state = PreProcess(context.State, operation, context.IsInLoop);
         if (BoolConstraintFromOperation(state, operation) is { } constraint)
         {
             return state.SetOperationConstraint(context.Operation, constraint).ToArray();    // We already know the answer from existing constraints

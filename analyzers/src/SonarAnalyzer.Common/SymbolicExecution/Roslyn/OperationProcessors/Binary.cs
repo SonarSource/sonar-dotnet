@@ -49,11 +49,11 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
         return state;
     }
 
-    protected override ProgramState PreProcess(ProgramState state, IBinaryOperationWrapper operation)
+    protected override ProgramState PreProcess(ProgramState state, IBinaryOperationWrapper operation, bool isInLoop)
     {
         if (state[operation.LeftOperand]?.Constraint<NumberConstraint>() is { } leftNumber
             && state[operation.RightOperand]?.Constraint<NumberConstraint>() is { } rightNumber
-            && ArithmeticCalculator.Calculate(operation.OperatorKind, leftNumber, rightNumber) is { } constraint)
+            && ArithmeticCalculator.Calculate(operation.OperatorKind, leftNumber, rightNumber, isInLoop) is { } constraint)
         {
             state = state.SetOperationConstraint(operation, constraint);
         }
