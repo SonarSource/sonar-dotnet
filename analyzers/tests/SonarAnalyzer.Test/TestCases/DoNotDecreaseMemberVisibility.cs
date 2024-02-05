@@ -199,3 +199,17 @@ namespace DefaultInterfaceMembers
         }
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8666
+namespace Repro_8666
+{
+    public class BaseClass
+    {
+        protected virtual void DoSomething(IEnumerable<int> numbers) { }
+    }
+
+    public class DerivedClass : BaseClass
+    {
+        private void DoSomething(IEnumerable<string> numbers) { }   // Noncompliant - FP: the method in the derived class has different arguments
+    }
+}
