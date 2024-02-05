@@ -3797,3 +3797,38 @@ public class Repro_8495
         }
     }
 }
+
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8678
+public class Repro_8678
+{
+    public void Method(bool condition1, bool condition2)
+    {
+        var success = true;
+        try
+        {
+            if (condition1)
+            {
+                return;
+            }
+            Console.WriteLine("invocation");
+        }
+        catch
+        {
+            success = false;
+            if (condition2)
+            {
+                throw;
+            }
+        }
+        finally
+        {
+            Console.WriteLine("do something");
+        }
+
+        if (success)                                // Noncompliant FP
+        {
+            Console.WriteLine("Notify of success"); // Secondary FP
+        }
+    }
+}
