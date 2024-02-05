@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Test.TestFramework
 {
     public static class DiagnosticVerifier
     {
-        private const string AnalyzerFailedDiagnosticId = "AD0001";
+        private const string AD0001 = nameof(AD0001);
 
         private static readonly string[] BuildErrorsToIgnore =
         {
@@ -96,8 +96,8 @@ namespace SonarAnalyzer.Test.TestFramework
             return ret;
         }
 
-        public static IEnumerable<Diagnostic> GetDiagnosticsIgnoreExceptions(Compilation compilation, DiagnosticAnalyzer analyzer) =>
-            GetAnalyzerDiagnostics(compilation, new[] { analyzer }, CompilationErrorBehavior.FailTest);
+        public static IEnumerable<Diagnostic> AnalyzerExceptions(Compilation compilation, DiagnosticAnalyzer analyzer) =>
+            GetAnalyzerDiagnostics(compilation, new[] { analyzer }, CompilationErrorBehavior.FailTest).Where(x => x.Id == AD0001);
 
         public static ImmutableArray<Diagnostic> GetAnalyzerDiagnostics(Compilation compilation,
                                                                         DiagnosticAnalyzer[] analyzer,
@@ -108,7 +108,7 @@ namespace SonarAnalyzer.Test.TestFramework
             onlyDiagnostics ??= Array.Empty<string>();
             var supportedDiagnostics = analyzer
                 .SelectMany(x => x.SupportedDiagnostics.Select(d => d.Id))
-                .Concat(new[] { AnalyzerFailedDiagnosticId })
+                .Concat(new[] { AD0001 })
                 .Select(x => new KeyValuePair<string, ReportDiagnostic>(x, Severity(x)))
                 .ToArray();
 
@@ -130,7 +130,7 @@ namespace SonarAnalyzer.Test.TestFramework
 
             ReportDiagnostic Severity(string id)
             {
-                if (id == AnalyzerFailedDiagnosticId)
+                if (id == AD0001)
                 {
                     return ReportDiagnostic.Error;
                 }
@@ -184,7 +184,7 @@ namespace SonarAnalyzer.Test.TestFramework
         }
 
         public static void VerifyNoExceptionThrown(IEnumerable<Diagnostic> diagnostics) =>
-            diagnostics.Should().NotContain(d => d.Id == AnalyzerFailedDiagnosticId);
+            diagnostics.Should().NotContain(d => d.Id == AD0001);
 
         private static IEnumerable<IssueLocationPair> MatchPairs(CompilationIssues actual, CompilationIssues expected)
         {
