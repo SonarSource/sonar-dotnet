@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                 }
                 """);
             VerifyIssueLocations(IssueLocationCollector.FindIssueLocations("File.cs", line),
-                expectedIsPrimary: new[] { true, true },
+                expectedTypes: new[] { IssueType.Primary, IssueType.Primary },
                 expectedLineNumbers: new[] { 3, 3 },
                 expectedMessages: new string[] { null, null },
                 expectedIssueIds: new[] { "flow1", "flow2" });
@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                 }
                 """);
             VerifyIssueLocations(IssueLocationCollector.FindIssueLocations("File.cs", line),
-                expectedIsPrimary: new[] { true, true },
+                expectedTypes: new[] { IssueType.Primary, IssueType.Primary },
                 expectedLineNumbers: new[] { 2, 2 },
                 expectedMessages: new[] { "Some message", "Some message" },
                 expectedIssueIds: new[] { "flow1", "flow2" });
@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                 }
                 """);
             VerifyIssueLocations(IssueLocationCollector.FindIssueLocations("File.cs", line),
-                expectedIsPrimary: new[] { true },
+                expectedTypes: new[] { IssueType.Primary },
                 expectedLineNumbers: new[] { 3 },
                 expectedMessages: new[] { "Some message" },
                 expectedIssueIds: new string[] { null });
@@ -82,7 +82,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                 }
                 """);
             VerifyIssueLocations(IssueLocationCollector.FindIssueLocations("File.cs", line),
-                expectedIsPrimary: new[] { true },
+                expectedTypes: new[] { IssueType.Primary },
                 expectedLineNumbers: new[] { 2 },
                 expectedMessages: new string[] { null },
                 expectedIssueIds: new string[] { null });
@@ -98,7 +98,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                 }
                 """);
             VerifyIssueLocations(IssueLocationCollector.FindIssueLocations("File.cs", line),
-                expectedIsPrimary: new[] { true, true },
+                expectedTypes: new[] { IssueType.Primary, IssueType.Primary },
                 expectedLineNumbers: new[] { 3, 3 },
                 expectedMessages: new[] { "Some message", "Some message" },
                 expectedIssueIds: new[] { "flow1", "flow2" });
@@ -114,7 +114,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                 }
                 """);
             VerifyIssueLocations(IssueLocationCollector.FindIssueLocations("File.cs", line),
-                expectedIsPrimary: new[] { true },
+                expectedTypes: new[] { IssueType.Primary },
                 expectedLineNumbers: new[] { 3 },
                 expectedMessages: new[] { "Some message" },
                 expectedIssueIds: new string[] { null });
@@ -130,7 +130,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                 }
                 """);
             VerifyIssueLocations(IssueLocationCollector.FindIssueLocations("File.cs", line),
-                expectedIsPrimary: new[] { true },
+                expectedTypes: new[] { IssueType.Primary },
                 expectedLineNumbers: new[] { 3 },
                 expectedMessages: new string[] { null },
                 expectedIssueIds: new string[] { null });
@@ -146,7 +146,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                 }
                 """);
             VerifyIssueLocations(IssueLocationCollector.FindIssueLocations("File.cs", line),
-                expectedIsPrimary: new[] { true, true, true },
+                expectedTypes: new[] { IssueType.Primary, IssueType.Primary, IssueType.Primary },
                 expectedLineNumbers: new[] { 3, 3, 3 },
                 expectedMessages: new string[] { null, null, null },
                 expectedIssueIds: new[] { "flow1", "flow2", "last" });
@@ -162,7 +162,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                 }
                 """);
             VerifyIssueLocations(IssueLocationCollector.FindIssueLocations("File.cs", line),
-                expectedIsPrimary: new[] { true },
+                expectedTypes: new[] { IssueType.Primary },
                 expectedLineNumbers: new[] { 3 },
                 expectedMessages: new string[] { null },
                 expectedIssueIds: new string[] { null });
@@ -178,7 +178,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                 }
                 """);
             VerifyIssueLocations(IssueLocationCollector.FindIssueLocations("File.cs", line),
-                expectedIsPrimary: new[] { false, false },
+                expectedTypes: new[] { IssueType.Secondary, IssueType.Secondary },
                 expectedLineNumbers: new[] { 2, 2 },
                 expectedMessages: new[] { "Some message", "Some message" },
                 expectedIssueIds: new[] { "flow1", "flow2" });
@@ -206,7 +206,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                 }
                 """);
             VerifyIssueLocations(IssueLocationCollector.FindIssueLocations("File.cs", line),
-                expectedIsPrimary: new[] { true },
+                expectedTypes: new[] { IssueType.Primary },
                 expectedLineNumbers: new[] { 3 },
                 expectedMessages: new string[] { null },
                 expectedIssueIds: new string[] { null });
@@ -222,7 +222,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                 }
                 """);
             VerifyIssueLocations(IssueLocationCollector.FindIssueLocations("File.cs", line),
-                expectedIsPrimary: new[] { false },
+                expectedTypes: new[] { IssueType.Secondary },
                 expectedLineNumbers: new[] { 3 },
                 expectedMessages: new string[] { null },
                 expectedIssueIds: new[] { "myId" });
@@ -239,7 +239,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                 """);
             var result = IssueLocationCollector.FindIssueLocations("File.cs", line).ToArray();
             VerifyIssueLocations(result,
-                expectedIsPrimary: new[] { true },
+                expectedTypes: new[] { IssueType.Primary },
                 expectedLineNumbers: new[] { 1 },
                 expectedMessages: new[] { "MyMessage" },
                 expectedIssueIds: new[] { "myIssueId" });
@@ -258,7 +258,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                 """);
             var result = IssueLocationCollector.FindIssueLocations("File.cs", line).ToArray();
             VerifyIssueLocations(result,
-                expectedIsPrimary: new[] { true },
+                expectedTypes: new[] { IssueType.Primary },
                 expectedLineNumbers: new[] { 1 },
                 expectedMessages: new[] { "MyMessage" },
                 expectedIssueIds: new[] { "myIssueId" });
@@ -277,7 +277,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                 """);
             var result = IssueLocationCollector.FindIssueLocations("File.cs", line).ToArray();
             VerifyIssueLocations(result,
-                expectedIsPrimary: new[] { true },
+                expectedTypes: new[] { IssueType.Primary },
                 expectedLineNumbers: new[] { 1 },
                 expectedMessages: new[] { "MyMessage" },
                 expectedIssueIds: new[] { "myIssueId" });

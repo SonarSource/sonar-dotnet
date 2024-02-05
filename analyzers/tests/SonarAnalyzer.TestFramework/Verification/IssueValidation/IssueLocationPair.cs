@@ -26,7 +26,7 @@ internal sealed record IssueLocationPair(IssueLocation Actual, IssueLocation Exp
 {
     public string FilePath => Actual?.FilePath ?? Expected.FilePath;
     public int LineNumber => Actual?.LineNumber ?? Expected.LineNumber;
-    public bool IsPrimary => Actual?.IsPrimary ?? Expected.IsPrimary;
+    public IssueType Type => Actual?.Type ?? Expected.Type;
     public int? Start => Actual?.Start ?? Expected.Start;
 
     public void AppendAssertionMessage(StringBuilder builder)
@@ -36,7 +36,7 @@ internal sealed record IssueLocationPair(IssueLocation Actual, IssueLocation Exp
             throw new InvalidOperationException("Something went horribly wrong. This is supposed to be called only for issues with the same key.");
         }
         builder.Append("  Line ").Append(LineNumber);
-        if (!Actual?.IsPrimary ?? !Expected.IsPrimary)
+        if ((Actual?.Type ?? Expected.Type) == IssueType.Secondary)
         {
             builder.Append(" Secondary location");
         }
