@@ -237,14 +237,24 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                 """).Invoking(x => x.Verify()).Should().NotThrow();
 
         [TestMethod]
-        public void BuildError() =>
+        public void BuildError_CS() =>
             VerifyThrows("""
                 public class UnexpectedBuildError
                 {
                 """, """
                 There are differences for CSharp7 snippet1.cs:
-                  Line 2: Unexpected issue '} expected' Rule CS1513
+                  Line 2: Unexpected error, use // Error [CS1513] } expected
                 """);
+
+        [TestMethod]
+        public void BuildError_VB() =>
+            new VerifierBuilder<DummyAnalyzerVB>().AddSnippet("Public Class UnexpectedBuildError")
+                .WithConcurrentAnalysis(false)
+                .Invoking(x => x.Verify())
+                .Should().Throw<AssertFailedException>().Which.Message.Should().ContainIgnoringLineEndings("""
+                    There are differences for VisualBasic12 snippet1.vb:
+                      Line 1: Unexpected error, use ' Error [BC30481] 'Class' statement must end with a matching 'End Class'.
+                    """);
 
         [TestMethod]
         public void UnexpectedRemainingOpeningCurlyBrace() =>
@@ -385,10 +395,10 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                 var almostTopLevel =
                 """, """
                 There are differences for CSharp7 snippet1.cs:
-                  Line 1: Unexpected issue 'Feature 'top-level statements' is not available in C# 7.0. Please use language version 9.0 or greater.' Rule CS8107
-                  Line 1: Unexpected issue 'Program using top-level statements must be an executable.' Rule CS8805
-                  Line 1: Unexpected issue '; expected' Rule CS1002
-                  Line 1: Unexpected issue 'Expected expression' Rule CS1733
+                  Line 1: Unexpected error, use // Error [CS8107] Feature 'top-level statements' is not available in C# 7.0. Please use language version 9.0 or greater.
+                  Line 1: Unexpected error, use // Error [CS8805] Program using top-level statements must be an executable.
+                  Line 1: Unexpected error, use // Error [CS1002] ; expected
+                  Line 1: Unexpected error, use // Error [CS1733] Expected expression
                 """);
 
         private void VerifyThrows(string snippet, string expectedMessage) =>

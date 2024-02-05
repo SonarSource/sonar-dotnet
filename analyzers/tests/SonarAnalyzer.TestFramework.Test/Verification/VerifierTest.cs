@@ -455,10 +455,10 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
             builder.WithOptions(ParseOptionsHelper.FromCSharp9).Invoking(x => x.Verify()).Should().NotThrow();
             builder.WithOptions(ParseOptionsHelper.BeforeCSharp9).Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage("""
                 There are differences for CSharp5 File.Concurrent.cs:
-                  Line 3: Unexpected issue 'Feature 'target-typed object creation' is not available in C# 5. Please use language version 9.0 or greater.' Rule CS8026
+                  Line 3: Unexpected error, use // Error [CS8026] Feature 'target-typed object creation' is not available in C# 5. Please use language version 9.0 or greater.
 
                 There are differences for CSharp5 File.cs:
-                  Line 3: Unexpected issue 'Feature 'target-typed object creation' is not available in C# 5. Please use language version 9.0 or greater.' Rule CS8026
+                  Line 3: Unexpected error, use // Error [CS8026] Feature 'target-typed object creation' is not available in C# 5. Please use language version 9.0 or greater.
                 """);
         }
 
@@ -477,25 +477,25 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
             builder.Invoking(x => x.Verify()).Should().Throw<AssertFailedException>()
                 .WithMessage("""
                 There are differences for CSharp7 File.Concurrent.cs:
-                  Line 1: Unexpected issue 'A namespace cannot directly contain members such as fields, methods or statements' Rule CS0116
+                  Line 1: Unexpected error, use // Error [CS0116] A namespace cannot directly contain members such as fields, methods or statements
 
                 There are differences for CSharp7 File.cs:
-                  Line 1: Unexpected issue 'The type or namespace name 'undefined' could not be found (are you missing a using directive or an assembly reference?)' Rule CS0246
-                  Line 1: Unexpected issue 'Feature 'top-level statements' is not available in C# 7.0. Please use language version 9.0 or greater.' Rule CS8107
-                  Line 1: Unexpected issue 'Program using top-level statements must be an executable.' Rule CS8805
-                  Line 1: Unexpected issue 'Identifier expected' Rule CS1001
-                  Line 1: Unexpected issue '; expected' Rule CS1002
+                  Line 1: Unexpected error, use // Error [CS0246] The type or namespace name 'undefined' could not be found (are you missing a using directive or an assembly reference?)
+                  Line 1: Unexpected error, use // Error [CS8107] Feature 'top-level statements' is not available in C# 7.0. Please use language version 9.0 or greater.
+                  Line 1: Unexpected error, use // Error [CS8805] Program using top-level statements must be an executable.
+                  Line 1: Unexpected error, use // Error [CS1001] Identifier expected
+                  Line 1: Unexpected error, use // Error [CS1002] ; expected
                 """);
             builder.WithErrorBehavior(CompilationErrorBehavior.FailTest).Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage("""
                 There are differences for CSharp7 File.Concurrent.cs:
-                  Line 1: Unexpected issue 'A namespace cannot directly contain members such as fields, methods or statements' Rule CS0116
+                  Line 1: Unexpected error, use // Error [CS0116] A namespace cannot directly contain members such as fields, methods or statements
 
                 There are differences for CSharp7 File.cs:
-                  Line 1: Unexpected issue 'The type or namespace name 'undefined' could not be found (are you missing a using directive or an assembly reference?)' Rule CS0246
-                  Line 1: Unexpected issue 'Feature 'top-level statements' is not available in C# 7.0. Please use language version 9.0 or greater.' Rule CS8107
-                  Line 1: Unexpected issue 'Program using top-level statements must be an executable.' Rule CS8805
-                  Line 1: Unexpected issue 'Identifier expected' Rule CS1001
-                  Line 1: Unexpected issue '; expected' Rule CS1002
+                  Line 1: Unexpected error, use // Error [CS0246] The type or namespace name 'undefined' could not be found (are you missing a using directive or an assembly reference?)
+                  Line 1: Unexpected error, use // Error [CS8107] Feature 'top-level statements' is not available in C# 7.0. Please use language version 9.0 or greater.
+                  Line 1: Unexpected error, use // Error [CS8805] Program using top-level statements must be an executable.
+                  Line 1: Unexpected error, use // Error [CS1001] Identifier expected
+                  Line 1: Unexpected error, use // Error [CS1002] ; expected
                 """);
             builder.WithErrorBehavior(CompilationErrorBehavior.Ignore).Invoking(x => x.Verify()).Should().NotThrow();
         }
@@ -545,8 +545,8 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
             var builder = WithSnippetCS("var topLevelStatement = true;").WithOptions(ParseOptionsHelper.FromCSharp9).WithOutputKind(OutputKind.ConsoleApplication);
             builder.Invoking(x => x.Verify()).Should().Throw<AssertFailedException>("Default Verifier behavior duplicates the source file.").WithMessage("""
                 There are differences for CSharp9 File.Concurrent.cs:
-                  Line 1: Unexpected issue 'The contextual keyword 'var' may only appear within a local variable declaration or in script code' Rule CS0825
-                  Line 1: Unexpected issue 'A namespace cannot directly contain members such as fields, methods or statements' Rule CS0116
+                  Line 1: Unexpected error, use // Error [CS0825] The contextual keyword 'var' may only appear within a local variable declaration or in script code
+                  Line 1: Unexpected error, use // Error [CS0116] A namespace cannot directly contain members such as fields, methods or statements
                 """);
             builder.WithConcurrentAnalysis(false).Invoking(x => x.Verify()).Should().NotThrow();
         }
@@ -559,11 +559,11 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
             builder.WithOutputKind(OutputKind.ConsoleApplication).WithConcurrentAnalysis(false).Invoking(x => x.Verify()).Should().NotThrow();
             builder.Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage("""
                 There are differences for CSharp9 File.Concurrent.cs:
-                  Line 1: Unexpected issue 'The contextual keyword 'var' may only appear within a local variable declaration or in script code' Rule CS0825
-                  Line 1: Unexpected issue 'A namespace cannot directly contain members such as fields, methods or statements' Rule CS0116
+                  Line 1: Unexpected error, use // Error [CS0825] The contextual keyword 'var' may only appear within a local variable declaration or in script code
+                  Line 1: Unexpected error, use // Error [CS0116] A namespace cannot directly contain members such as fields, methods or statements
 
                 There are differences for CSharp9 File.cs:
-                  Line 1: Unexpected issue 'Program using top-level statements must be an executable.' Rule CS8805
+                  Line 1: Unexpected error, use // Error [CS8805] Program using top-level statements must be an executable.
                 """);
         }
 
