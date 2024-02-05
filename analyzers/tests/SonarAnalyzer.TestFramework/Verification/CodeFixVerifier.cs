@@ -143,9 +143,9 @@ internal class CodeFixVerifier
                 return line;
             }
 
-            if (match.Groups["issueType"].Value == "Noncompliant")
+            if (match.Groups["IssueType"].Value == "Noncompliant")
             {
-                var startIndex = line.IndexOf(match.Groups["issueType"].Value);
+                var startIndex = line.IndexOf(match.Groups["IssueType"].Value);
                 return string.Concat(line.Remove(startIndex), FixedMessage);
             }
 
