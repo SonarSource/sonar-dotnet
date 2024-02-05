@@ -29,7 +29,8 @@ internal sealed class IncrementOrDecrement : SimpleProcessor<IIncrementOrDecreme
 
     protected override ProgramState Process(SymbolicContext context, IIncrementOrDecrementOperationWrapper incrementOrDecrement)
     {
-        if (context.State[incrementOrDecrement.Target]?.Constraint<NumberConstraint>() is { } oldNumber)
+        var oldOperationValue = context.State[incrementOrDecrement.Target];
+        if (oldOperationValue?.Constraint<NumberConstraint>() is { } oldNumber)
         {
             var newNumber = incrementOrDecrement.WrappedOperation.Kind switch
             {
@@ -39,29 +40,24 @@ internal sealed class IncrementOrDecrement : SimpleProcessor<IIncrementOrDecreme
                 _ => NumberConstraint.From(oldNumber.Min - 1, oldNumber.Max - 1),
             };
 
-            if (newNumber is null)
-            {
-                var state = incrementOrDecrement.Target.TrackedSymbol(context.State) is { } symbol
-                    && context.State[symbol] is { } symbolValue
-                        ? context.State.SetSymbolValue(symbol, symbolValue.WithoutConstraint<NumberConstraint>() ?? SymbolicValue.Empty)
-                        : context.State;
-                return incrementOrDecrement.IsPostfix
-                    ? state.SetOperationConstraint(context.Operation, oldNumber)
-                    : state.SetOperationValue(context.Operation, state[context.Operation]?.WithoutConstraint<NumberConstraint>());
-            }
-            else
-            {
-                var state = incrementOrDecrement.Target.TrackedSymbol(context.State) is { } symbol
-                    ? context.SetSymbolConstraint(symbol, newNumber)
-                    : context.State;
-                return incrementOrDecrement.IsPostfix
-                    ? state.SetOperationConstraint(context.Operation, oldNumber)
-                    : state.SetOperationConstraint(context.Operation, newNumber);
-            }
+            var state = incrementOrDecrement.Target.TrackedSymbol(context.State) is { } symbol
+                ? context.State.SetSymbolValue(symbol, NewValue(context.State[symbol], newNumber))
+                : context.State;
+            return incrementOrDecrement.IsPostfix
+                ? state.SetOperationValue(context.Operation, oldOperationValue)
+                : state.SetOperationValue(context.Operation, NewValue(oldOperationValue, newNumber));
         }
         else
         {
             return context.State;
         }
+    }
+
+    private static SymbolicValue NewValue(SymbolicValue oldValue, NumberConstraint newNumber)
+    {
+        oldValue ??= SymbolicValue.Empty;
+        return newNumber is null
+            ? oldValue.WithoutConstraint<NumberConstraint>()
+            : oldValue.WithConstraint(newNumber);
     }
 }
