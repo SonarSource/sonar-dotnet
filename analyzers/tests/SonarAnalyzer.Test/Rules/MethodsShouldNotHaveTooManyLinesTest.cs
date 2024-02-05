@@ -106,8 +106,8 @@ public class Foo
         {
             var compilation = SolutionBuilder.CreateSolutionFromPath(@"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.cs")
                 .Compile(ParseOptionsHelper.CSharpLatest.ToArray()).Single();
-            var diagnostics = DiagnosticVerifier.GetDiagnosticsIgnoreExceptions(compilation, new CS.MethodsShouldNotHaveTooManyLines { Max = max });
-            diagnostics.Should().OnlyContain(x => x.Id == "AD0001" && x.GetMessage(null).Contains("Invalid rule parameter: maximum number of lines = ")).And.HaveCount(12);
+            var errors = DiagnosticVerifier.AnalyzerExceptions(compilation, new CS.MethodsShouldNotHaveTooManyLines { Max = max });
+            errors.Should().OnlyContain(x => x.GetMessage(null).Contains("Invalid rule parameter: maximum number of lines = ")).And.HaveCount(12);
         }
 
         [TestMethod]
@@ -134,8 +134,8 @@ public class Foo
         {
             var compilation = SolutionBuilder.CreateSolutionFromPath(@"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.vb")
                 .Compile(ParseOptionsHelper.VisualBasicLatest.ToArray()).Single();
-            var diagnostics = DiagnosticVerifier.GetDiagnosticsIgnoreExceptions(compilation, new VB.MethodsShouldNotHaveTooManyLines { Max = max });
-            diagnostics.Should().OnlyContain(x => x.Id == "AD0001" && x.GetMessage(null).Contains("Invalid rule parameter: maximum number of lines = ")).And.HaveCount(7);
+            var errors = DiagnosticVerifier.AnalyzerExceptions(compilation, new VB.MethodsShouldNotHaveTooManyLines { Max = max });
+            errors.Should().OnlyContain(x => x.GetMessage(null).Contains("Invalid rule parameter: maximum number of lines = ")).And.HaveCount(7);
         }
 
         private static VerifierBuilder CreateCSBuilder(int maxLines) =>
