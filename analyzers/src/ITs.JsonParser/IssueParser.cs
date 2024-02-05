@@ -1,6 +1,4 @@
-﻿using System.IO;
-using System.Text.Json;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using ITs.JsonParser.Json;
 using ITs.JsonParser.Reports;
 
@@ -11,27 +9,26 @@ namespace ITs.JsonParser;
 /// </summary>
 public static class IssueParser
 {
-    private static readonly Regex RxSonarRule = new("^S[0-9]+$", RegexOptions.Compiled);
+    private static readonly Regex RxSonarRule = new("^S[0-9]+$", RegexOptions.None, TimeSpan.FromMilliseconds(100));
     private static readonly JsonSerializerOptions SerializerOptions = new() { PropertyNameCaseInsensitive = true, WriteIndented = true };
 
-    public static void Execute(string inputRootPath, string outputRootPath)
+    public static void Execute(string inputPath, string outputPath)
     {
-        Console.WriteLine($"Searching for SARIF reports in {inputRootPath}...");
-        var sarifReports = Read(inputRootPath);
+        Console.WriteLine($"Searching for SARIF reports in {inputPath}...");
+        var sarifReports = Read(inputPath);
         ConsoleHelper.WriteLineColor($"Successfully parsed {sarifReports.Length} SARIF reports.", ConsoleColor.Green);
 
-        Console.WriteLine("Mapping SARIF reports to Rule reports..");
+        Console.WriteLine("Converting SARIF reports to Rule reports..");
         var customReports = sarifReports.SelectMany(ExplodeToRuleIssues).ToArray();
-        ConsoleHelper.WriteLineColor($"Successfully mapped all SARIF reports to {customReports.Length} Rule reports.", ConsoleColor.Green);
+        ConsoleHelper.WriteLineColor($"Successfully converted all SARIF reports to {customReports.Length} Rule reports.", ConsoleColor.Green);
 
-        Console.WriteLine($"Writing results to {outputRootPath}");
-        WriteOutput(outputRootPath, customReports);
+        Console.WriteLine($"Writing results to {outputPath}");
+        WriteOutput(outputPath, customReports);
         ConsoleHelper.WriteLineColor("Successfully wrote all Rule reports.", ConsoleColor.Green);
     }
 
     private static InputReport[] Read(string rootPath) =>
         Directory.GetFiles(rootPath, "*.json", SearchOption.AllDirectories)
-            .Where(x => !x.Contains("AnalysisWarnings.MsBuild", StringComparison.InvariantCulture))
             .Select(x => new InputReport(x, SerializerOptions))
             .ToArray();
 
@@ -46,22 +43,19 @@ public static class IssueParser
         foreach (var issuesByRule in allIssues)
         {
             var issues = new RuleIssues { Issues = issuesByRule.Select(x => new RuleIssue(x)).ToArray() };
-            yield return new OutputReport(inputReport.Project, issuesByRule.Key, inputReport.Assembly, inputReport.TFM, issues);
+            yield return new OutputReport(inputReport.Project, issuesByRule.Key, inputReport.Assembly, inputReport.Tfm, issues);
         }
     }
 
     private static void WriteOutput(string root, OutputReport[] reports)
     {
-        foreach (var project in reports.Select(x => x.Project).Distinct())
+        foreach (var projectReports in reports.GroupBy(x => x.Project))
         {
-            Directory.CreateDirectory(Path.Combine(root, project));
-        }
-        foreach (var report in reports)
-        {
-            // projectName/rule-assembly{-TFM}?.json
-            var suffix = report.TFM is null ? string.Empty : $"-{report.TFM}";
-            var resultPath = Path.Combine(root, report.Project, $"{report.RuleId}-{report.Assembly}{suffix}.json");
-            File.WriteAllText(resultPath, JsonSerializer.Serialize(report.RuleIssues, SerializerOptions));
+            Directory.CreateDirectory(Path.Combine(root, projectReports.Key));
+            foreach (var report in projectReports)
+            {
+                File.WriteAllText(report.Path(root), JsonSerializer.Serialize(report.RuleIssues, SerializerOptions));
+            }
         }
     }
 }

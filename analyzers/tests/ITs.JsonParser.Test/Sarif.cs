@@ -1,15 +1,17 @@
-﻿namespace ITs.JsonParser.Test;
+﻿using SonarAnalyzer.Helpers;
 
-internal static class Sarif
+namespace ITs.JsonParser.Test;
+
+public static class Sarif
 {
-    internal static string CreateReport(string rootPath, string solution, string project, string tfm, params string[] issues)
+    public static string CreateReport(string rootPath, string solution, string project, string tfm, params string[] issues)
     {
         var content = $$"""
             {
               "runs": [
                 {
                   "results": [
-                    {{string.Join($",{Environment.NewLine}", issues)}}
+                    {{issues.JoinStr($",{Environment.NewLine}")}}
                   ]
                 }
               ]
@@ -20,11 +22,11 @@ internal static class Sarif
         return content;
     }
 
-    internal static string CreateIssue(string ruleId, string message, string relativePath, int startLine, int endLine) =>
+    public static string CreateIssue(string ruleId, string message, string relativePath, int startLine, int endLine) =>
         $$"""
         {
           "ruleId": "{{ruleId}}",
-          "message": "{{message}}.",
+          "message": "{{message}}",
           "locations": [
             {
               "resultFile": {
@@ -33,7 +35,7 @@ internal static class Sarif
                   "startLine": {{startLine}},
                   "startColumn": 42,
                   "endLine": {{endLine}},
-                  "endColumn": 69
+                  "endColumn": 99
                 }
               }
             }
@@ -41,11 +43,11 @@ internal static class Sarif
         }
         """;
 
-    internal static string CreateIssue(string ruleId, string message) =>
+    public static string CreateIssue(string ruleId, string message) =>
         $$"""
         {
           "ruleId": "{{ruleId}}",
-          "message": "{{message}}.",
+          "message": "{{message}}",
           "locations": [ ]
         }
         """;

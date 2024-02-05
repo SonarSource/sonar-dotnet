@@ -1,16 +1,16 @@
 ﻿namespace ITs.JsonParser.Json;
 
 // Format of JSONs in "actual/" and "expected/"
-internal class RuleIssues
+public class RuleIssues
 {
     public RuleIssue[] Issues { get; set; }
 }
 
-internal class RuleIssue
+public class RuleIssue
 {
     public string Id { get; set; }
     public string Message { get; set; }
-    public Location Location { get; set; }
+    public SarifLocationFile Location { get; set; } // TODO: This should not re-use SarifLocationFile type.
 
     public RuleIssue(SarifIssue issue)
     {

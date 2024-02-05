@@ -1,32 +1,32 @@
-﻿using System.IO;
-using System.Text.Json;
-using ITs.JsonParser.Json;
+﻿using ITs.JsonParser.Json;
 
 namespace ITs.JsonParser.Reports;
 
 /// <summary>
 /// SARIF report generated during the build process.
 /// </summary>
-internal class InputReport
+public class InputReport
 {
-    public string Project { get; init; }
-    public string Assembly { get; init; }
-    public string TFM { get; init; }
-    public SarifReport Sarif { get; init; }
+    public string Project { get; }
+    public string Assembly { get; }
+    public string Tfm { get; }
+    public SarifReport Sarif { get; }
 
     public InputReport(string path, JsonSerializerOptions options)
     {
         Console.WriteLine($"Processing {path}...");
         // .../project/assembly{-TFM}?.json
-        var filename = Path.GetFileNameWithoutExtension(path);
-        var splitted = filename.Split('-');
+        var fileName = Path.GetFileNameWithoutExtension(path);
+        var index = fileName.LastIndexOf('-');
+        (Assembly, Tfm) = index >= 0
+            ? (fileName.Substring(0, index), fileName.Substring(index + 1))
+            : (fileName, null);
 
         Project = Path.GetFileName(Path.GetDirectoryName(path));
-        Assembly = splitted[0];
-        TFM = splitted.Length > 1 ? splitted[^1] : null; // some projects have only one TFM, so it is not included in the name.
         Sarif = JsonSerializer.Deserialize<SarifReport>(File.ReadAllText(path), options);
         ConsoleHelper.WriteLineColor($"Successfully parsed {this}", ConsoleColor.Green);
     }
 
-    public override string ToString() => $"{Project}/{Assembly} [{TFM}]";
+    public override string ToString() =>
+        $"{Project}/{Assembly} [{Tfm}]";
 }

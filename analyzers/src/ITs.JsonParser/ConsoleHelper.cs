@@ -1,6 +1,6 @@
 ﻿namespace ITs.JsonParser;
 
-internal static class ConsoleHelper
+public static class ConsoleHelper
 {
     public static void WriteLineColor(string value, ConsoleColor color)
     {

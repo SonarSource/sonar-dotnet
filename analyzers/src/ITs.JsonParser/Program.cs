@@ -1,5 +1,4 @@
-﻿using System.IO;
-using CommandLine;
+﻿using CommandLine;
 using ITs.JsonParser;
 
 Parser.Default.ParseArguments<CommandLineOptions>(args).MapResult(Execute, errs => 1);
@@ -17,7 +16,7 @@ void ParseIssues()
     var sw = Stopwatch.StartNew();
     ConsoleHelper.WriteLineColor("Splitting the SARIF reports to actual folder", ConsoleColor.Yellow);
     var here = Directory.GetCurrentDirectory();
-    var inputRoot = Path.Combine(here, "output");
+    var inputRoot = Path.Combine(here, "output", "Issues");
     var outputRoot = Path.Combine(here, "actual");
     IssueParser.Execute(inputRoot, outputRoot);
     ConsoleHelper.WriteLineColor($"Normalized the SARIF reports in '{sw.Elapsed}'", ConsoleColor.Yellow);
