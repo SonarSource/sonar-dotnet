@@ -15,7 +15,7 @@
 },
 {
 "id":  "S2589",
-"message":  "Change this expression which always evaluates to the same result.",
+"message":  "Remove this unnecessary check for null.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/AtomicState.cs#L145",
 "region":  {
