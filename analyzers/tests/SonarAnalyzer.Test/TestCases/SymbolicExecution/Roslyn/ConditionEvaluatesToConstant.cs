@@ -2881,12 +2881,12 @@ namespace Tests.Diagnostics
 
             //Combo/Fatality
             ret = notNull ?? isNull;
-            //    ^^^^^^^                                  Noncompliant {{Change this expression which always evaluates to the same result. Some code paths are unreachable.}}
+            //    ^^^^^^^                                  Noncompliant {{Remove this unnecessary check for null. Some code paths are unreachable.}}
             //               ^^^^^^                        Secondary@-1
-            ret = isNull ?? null;                       // Noncompliant {{Change this expression which always evaluates to the same result.}}
+            ret = isNull ?? null;                       // Noncompliant {{Remove this unnecessary check for null.}}
             //    ^^^^^^
             ret = "Value" ?? a;
-            //    ^^^^^^^                                  Noncompliant {{Change this expression which always evaluates to the same result. Some code paths are unreachable.}}
+            //    ^^^^^^^                                  Noncompliant {{Remove this unnecessary check for null. Some code paths are unreachable.}}
             //               ^                             Secondary@-1
         }
 

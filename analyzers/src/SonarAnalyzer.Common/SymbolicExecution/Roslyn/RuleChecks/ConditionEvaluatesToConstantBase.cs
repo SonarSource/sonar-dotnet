@@ -30,7 +30,7 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
 
     protected const string MessageFormat = "{0}{1}";
     private const string MessageBool = "Change this condition so that it does not always evaluate to '{0}'.";
-    private const string MessageNull = "Change this expression which always evaluates to the same result.";
+    private const string MessageNull = "Remove this unnecessary check for null.";
     private const string S2583MessageSuffix = " Some code paths are unreachable.";
 
     protected abstract DiagnosticDescriptor Rule2583 { get; }
