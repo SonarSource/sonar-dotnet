@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Test.Common.FixAllProviders
             var document1Before = project.FindDocument("MyFile1.cs");
             var document2Before = project.FindDocument("MyFile2.cs");
             var compilation = project.GetCompilation();
-            var diagnostics = DiagnosticVerifier.GetDiagnosticsNoExceptions(compilation, new DummyAnalyzerCS(), CompilationErrorBehavior.Ignore).ToImmutableArray();
+            var diagnostics = DiagnosticVerifier.AnalyzerDiagnostics(compilation, new DummyAnalyzerCS(), CompilationErrorBehavior.Ignore).ToImmutableArray();
 
             var fixAllContext = new FixAllContext(document1Before, codeFix, FixAllScope.Document, "Dummy Action", codeFix.FixableDiagnosticIds, new FixAllDiagnosticProvider(diagnostics), default);
             var result = await SonarAnalyzer.Common.DocumentBasedFixAllProvider.Instance.GetFixAsync(fixAllContext);
@@ -92,7 +92,7 @@ namespace SonarAnalyzer.Test.Common.FixAllProviders
             var document1Before = project.FindDocument("MyFile1.cs");
             var document2Before = project.FindDocument("MyFile2.cs");
             var compilation = project.GetCompilation();
-            var diagnostics = DiagnosticVerifier.GetDiagnosticsNoExceptions(compilation, new DummyAnalyzerCS(), CompilationErrorBehavior.Ignore).ToImmutableArray();
+            var diagnostics = DiagnosticVerifier.AnalyzerDiagnostics(compilation, new DummyAnalyzerCS(), CompilationErrorBehavior.Ignore).ToImmutableArray();
 
             var fixAllContext = new FixAllContext(project.Project, codeFix, scope, "Dummy Action", codeFix.FixableDiagnosticIds, new FixAllDiagnosticProvider(diagnostics), default);
             var result = await SonarAnalyzer.Common.DocumentBasedFixAllProvider.Instance.GetFixAsync(fixAllContext);

@@ -391,16 +391,14 @@ namespace SonarAnalyzer.Test.Common
             }
         }
 
-        private static void VerifyNoExceptionThrown(string path, DiagnosticAnalyzer[] diagnosticAnalyzers, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default)
+        private static void VerifyNoExceptionThrown(string path, DiagnosticAnalyzer[] analyzers, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default)
         {
             var compilation = SolutionBuilder
                 .Create()
                 .AddProject(AnalyzerLanguage.FromPath(path))
                 .AddDocument(path)
                 .GetCompilation();
-
-            var diagnostics = DiagnosticVerifier.GetAnalyzerDiagnostics(compilation, diagnosticAnalyzers, checkMode);
-            DiagnosticVerifier.VerifyNoExceptionThrown(diagnostics);
+            ((Action)(() => DiagnosticVerifier.AnalyzerDiagnostics(compilation, analyzers, checkMode))).Should().NotThrow();
         }
 
         private static bool IsSecurityHotspot(DiagnosticDescriptor diagnostic)

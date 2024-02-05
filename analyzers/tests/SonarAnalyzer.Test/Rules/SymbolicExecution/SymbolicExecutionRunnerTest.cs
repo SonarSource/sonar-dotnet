@@ -505,7 +505,7 @@ public class Sample
         }
         var compilation = builder.GetCompilation();
         compilation = compilation.WithOptions(compilation.Options.WithSyntaxTreeOptionsProvider(provider));
-        var allDiagnostics = DiagnosticVerifier.GetAnalyzerDiagnostics(compilation, new DiagnosticAnalyzer[] { new CS.SymbolicExecutionRunner() }, CompilationErrorBehavior.Default);
+        var allDiagnostics = DiagnosticVerifier.AnalyzerDiagnostics(compilation, new CS.SymbolicExecutionRunner(), CompilationErrorBehavior.Default);
         var diagnostic = allDiagnostics.Should().ContainSingle().Subject;
         diagnostic.Id.Should().Be("S3900");
         diagnostic.Descriptor.IsEnabledByDefault.Should().BeFalse("we're explicitly activating non-SonarWay rule that is not active by default");
