@@ -116,7 +116,7 @@ function Initialize-ActualFolder() {
     }
 
     # this copies no files if ruleId is not set, and all but ending with ruleId if set
-    Copy-FolderRecursively -From .\expected -To .\actual -Exclude "*${ruleId}.json"
+    Copy-FolderRecursively -From .\expected -To .\actual -Exclude "${ruleId}*.json"
     $methodTimerElapsed = $methodTimer.Elapsed.TotalSeconds
     Write-Debug "Initialized actual folder in '${methodTimerElapsed}'"
 }
@@ -130,8 +130,8 @@ function Initialize-OutputFolder() {
         Remove-Item -Recurse -Force output
     }
 
-    Write-Debug "Creating folder 'output'"
-    New-Item -ItemType directory -Path .\output | out-null
+    Write-Debug "Creating folder 'output\Issues'"
+    New-Item -ItemType directory -Path .\output\Issues | out-null
 
     if ($ruleId) {
         Write-Host "Running ITs with only rule ${ruleId} turned on."
