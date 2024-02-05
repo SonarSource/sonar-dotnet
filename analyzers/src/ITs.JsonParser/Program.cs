@@ -45,7 +45,7 @@ public static class Program
         var inputRoot = Path.Combine(here, "output", "Issues");
         var outputRoot = Path.Combine(here, "actual");
         IssueParser.Execute(inputRoot, outputRoot);
-        ConsoleHelper.WriteLineColor($"Normalized the SARIF reports in '{sw.Elapsed}'", ConsoleColor.Yellow);
+        ConsoleHelper.WriteLineColor($"Finished splitting the SARIF reports in '{sw.Elapsed}'", ConsoleColor.Yellow);
     }
 
     // TODO: Reimplement this functionality from the powershell function.
