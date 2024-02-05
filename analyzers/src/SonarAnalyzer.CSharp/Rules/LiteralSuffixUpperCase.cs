@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterNodeAction(
-                c =>
+                static c =>
                 {
                     var literal = (LiteralExpressionSyntax)c.Node;
                     var text = literal.Token.Text;
@@ -48,6 +48,6 @@ namespace SonarAnalyzer.Rules.CSharp
         // We know that @text is a number that ends with 'l'. Being a number, it has at least one digit (thus 2 characters).
         // If it has 3 characters or more, it could be `2ul` or `2Ul` and we ignore this, because 'l' is easier to read.
         private static bool ShouldIgnore(string text) =>
-            text.Length > 2 && char.ToUpperInvariant(text[text.Length - 2]) == 'U';
+            text.Length > 2 && text[text.Length - 2] is 'U' or 'u';
     }
 }
