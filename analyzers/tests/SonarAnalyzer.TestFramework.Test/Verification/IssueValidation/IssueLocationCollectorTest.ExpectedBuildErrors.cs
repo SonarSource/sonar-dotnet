@@ -26,63 +26,66 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
     public partial class IssueLocationCollectorTest
     {
         [TestMethod]
-        public void GetExpectedBuildErrors_No_Comments()
+        public void ExpectedBuildErrors_No_Comments()
         {
-            const string code = @"public class Foo
-{
-    public void Bar(object o)
-    {
-        Console.WriteLine(o);
-    }
-}";
-            var expectedErrors = IssueLocationCollector.GetExpectedBuildErrors("File.cs", SourceText.From(code).Lines);
+            const string code = """
+                public class Foo
+                {
+                    public void Bar(object o)
+                    {
+                        Console.WriteLine(o);
+                    }
+                }
+                """;
+            var expectedErrors = IssueLocationCollector.ExpectedBuildErrors("File.cs", SourceText.From(code).Lines);
 
             expectedErrors.Should().BeEmpty();
         }
 
         [TestMethod]
-        public void GetExpectedBuildErrors_ExpectedErrors()
+        public void ExpectedBuildErrors_ExpectedErrors()
         {
-            const string code = @"public class Foo
-{
-    public void Bar(object o) // Error [CS1234]
-    {
-        // Error@+1 [CS3456]
-        Console.WriteLine(o);
-    }
-}";
-            var expectedErrors = IssueLocationCollector.GetExpectedBuildErrors("File.cs", SourceText.From(code).Lines).ToList();
+            const string code = """
+                public class Foo
+                {
+                    public void Bar(object o) // Error [CS1234]
+                    {
+                        // Error@+1 [CS3456]
+                        Console.WriteLine(o);
+                    }
+                }
+                """;
+            var expectedErrors = IssueLocationCollector.ExpectedBuildErrors("File.cs", SourceText.From(code).Lines).ToList();
 
             expectedErrors.Should().HaveCount(2);
-
             expectedErrors.Select(l => l.IsPrimary).Should().Equal(true, true);
             expectedErrors.Select(l => l.LineNumber).Should().Equal(3, 6);
         }
 
         [TestMethod]
-        public void GetExpectedBuildErrors_Multiple_ExpectedErrors()
+        public void ExpectedBuildErrors_Multiple_ExpectedErrors()
         {
-            const string code = @"public class Foo
-{
-    public void Bar(object o) // Error [CS1234,CS2345,CS3456]
-    {
-    }
-}";
-            var expectedErrors = IssueLocationCollector.GetExpectedBuildErrors("File.cs", SourceText.From(code).Lines).ToList();
+            const string code = """
+                public class Foo
+                {
+                    public void Bar(object o) // Error [CS1234,CS2345,CS3456]
+                    {
+                    }
+                }
+                """;
+            var expectedErrors = IssueLocationCollector.ExpectedBuildErrors("File.cs", SourceText.From(code).Lines).ToList();
 
             expectedErrors.Should().HaveCount(3);
-
             expectedErrors.Select(l => l.IsPrimary).Should().Equal(true, true, true);
             expectedErrors.Select(l => l.LineNumber).Should().Equal(3, 3, 3);
             expectedErrors.Select(l => l.IssueId).Should().Equal("CS1234", "CS2345", "CS3456");
         }
 
         [TestMethod]
-        public void GetExpectedBuildErrors_ExpectedError_Razor()
+        public void ExpectedBuildErrors_ExpectedError_Razor()
         {
-            const string code = @"<p>Test @Content something</p> @* Error [CS1234] *@";
-
-            var expectedErrors = IssueLocationCollector.GetExpectedBuildErrors("File.cs", SourceText.From(code).Lines).ToList();
+            const string code = "<p>Test @Content something</p> @* Error [CS1234] *@";
+            var expectedErrors = IssueLocationCollector.ExpectedBuildErrors("File.cs", SourceText.From(code).Lines).ToList();
 
             expectedErrors.Should().ContainSingle();
             expectedErrors[0].IsPrimary.Should().BeTrue();
@@ -91,11 +94,10 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
         }
 
         [TestMethod]
-        public void GetExpectedBuildErrors_MultipleExpectedErrors_Razor()
+        public void ExpectedBuildErrors_MultipleExpectedErrors_Razor()
         {
-            const string code = @"<p>Test @Content something</p> @* Error [CS1234,CS2345,CS3456] *@";
-
-            var expectedErrors = IssueLocationCollector.GetExpectedBuildErrors("File.cs", SourceText.From(code).Lines).ToList();
+            const string code = "<p>Test @Content something</p> @* Error [CS1234,CS2345,CS3456] *@";
+            var expectedErrors = IssueLocationCollector.ExpectedBuildErrors("File.cs", SourceText.From(code).Lines).ToList();
 
             expectedErrors.Select(l => l.IsPrimary).Should().Equal(true, true, true);
             expectedErrors.Select(l => l.LineNumber).Should().Equal(1, 1, 1);
@@ -103,12 +105,13 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
         }
 
         [TestMethod]
-        public void GetExpectedBuildErrors_ExpectedErrorWithOffset_Razor()
+        public void ExpectedBuildErrors_ExpectedErrorWithOffset_Razor()
         {
-            const string code = @"@* Error@+1 [CS1234] *@
-<p>Test @Content something</p>";
-
-            var expectedErrors = IssueLocationCollector.GetExpectedBuildErrors("File.cs", SourceText.From(code).Lines).ToList();
+            const string code = """
+                @* Error@+1 [CS1234] *@
+                <p>Test @Content something</p>
+                """;
+            var expectedErrors = IssueLocationCollector.ExpectedBuildErrors("File.cs", SourceText.From(code).Lines).ToList();
 
             expectedErrors[0].IsPrimary.Should().BeTrue();
             expectedErrors[0].LineNumber.Should().Be(2);

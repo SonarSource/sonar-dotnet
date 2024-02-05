@@ -29,7 +29,7 @@ internal sealed class CompilationIssues : IEnumerable<IssueLocation>
     private readonly List<IssueLocation> issues;
 
     public CompilationIssues(string languageVersion, IEnumerable<FileContent> files)
-        : this(languageVersion, files.SelectMany(x => IssueLocationCollector.GetExpectedIssueLocations(x.FileName, x.Content.Lines))) { }
+        : this(languageVersion, files.SelectMany(x => IssueLocationCollector.ExpectedIssueLocations(x.FileName, x.Content.Lines))) { }
 
     public CompilationIssues(string languageVersion, Diagnostic[] diagnostics)
         : this(languageVersion, ToIssueLocations(diagnostics)) { }

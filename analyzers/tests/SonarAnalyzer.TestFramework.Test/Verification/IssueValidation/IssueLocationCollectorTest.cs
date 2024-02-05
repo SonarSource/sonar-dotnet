@@ -29,16 +29,18 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
         private static TextLine GetLine(int lineNumber, string code) =>
             SourceText.From(code).Lines[lineNumber];
 
-        private static void VerifyIssueLocations(IReadOnlyCollection<IssueLocation> result,
+        private static void VerifyIssueLocations(IEnumerable<IssueLocation> result,
                                                  IEnumerable<bool> expectedIsPrimary,
                                                  IEnumerable<int> expectedLineNumbers,
                                                  IEnumerable<string> expectedMessages,
                                                  IEnumerable<string> expectedIssueIds)
         {
-            result.Select(l => l.IsPrimary).Should().Equal(expectedIsPrimary);
-            result.Select(l => l.LineNumber).Should().Equal(expectedLineNumbers);
-            result.Select(l => l.Message).Should().Equal(expectedMessages);
-            result.Select(l => l.IssueId).Should().Equal(expectedIssueIds);
+            var values = result.ToArray();
+            values.Should().HaveCount(expectedIsPrimary.Count());
+            result.Select(x => x.IsPrimary).Should().Equal(expectedIsPrimary);
+            result.Select(x => x.LineNumber).Should().Equal(expectedLineNumbers);
+            result.Select(x => x.Message).Should().Equal(expectedMessages);
+            result.Select(x => x.IssueId).Should().Equal(expectedIssueIds);
         }
     }
 }
