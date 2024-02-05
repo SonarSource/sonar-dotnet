@@ -3452,7 +3452,7 @@ public class Repro_8368
             lastException = ex;
         }
 
-        if (lastException != null) // Noncompliant - FP
+        if (lastException != null) // Noncompliant
         {
             LogError(lastException);
         }
