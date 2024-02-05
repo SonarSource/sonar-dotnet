@@ -104,8 +104,7 @@ namespace SonarAnalyzer.Helpers
         private static bool HasGeneratedFileName(SyntaxTree tree)
         {
             var fileName = Path.GetFileName(tree.FilePath);
-            return !string.IsNullOrEmpty(fileName)
-                && GeneratedFileParts.Exists(part => fileName.IndexOf(part, StringComparison.OrdinalIgnoreCase) >= 0);
+            return GeneratedFileParts.Exists(part => fileName.IndexOf(part, StringComparison.OrdinalIgnoreCase) >= 0);
         }
     }
 }
