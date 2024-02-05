@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
             var locations = IssueLocationCollector.ExpectedIssueLocations("File.cs", SourceText.From(code).Lines);
 
             locations.Should().HaveCount(2);
-            locations.Select(x => x.IsPrimary).Should().Equal(true, true);
+            locations.Select(x => x.Type).Should().Equal(IssueType.Primary, IssueType.Primary);
             locations.Select(x => x.LineNumber).Should().Equal(3, 6);
         }
 
@@ -76,7 +76,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
             var locations = IssueLocationCollector.ExpectedIssueLocations("File.cs", SourceText.From(code).Lines);
 
             locations.Should().HaveCount(2);
-            locations.Select(x => x.IsPrimary).Should().Equal(true, true);
+            locations.Select(x => x.Type).Should().Equal(IssueType.Primary, IssueType.Primary);
             locations.Select(x => x.LineNumber).Should().Equal(3, 5);
         }
 
@@ -100,7 +100,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
             var locations = IssueLocationCollector.ExpectedIssueLocations("File.cs", SourceText.From(code).Lines);
 
             locations.Should().HaveCount(5);
-            locations.Select(x => x.IsPrimary).Should().Equal(true, true, true, false, true);
+            locations.Select(x => x.Type).Should().Equal(IssueType.Primary, IssueType.Primary, IssueType.Primary, IssueType.Secondary, IssueType.Primary);
             locations.Select(x => x.LineNumber).Should().Equal(2, 3, 5, 6, 8);
         }
 
@@ -117,7 +117,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
             var locations = IssueLocationCollector.ExpectedIssueLocations("File.cs", SourceText.From(code).Lines);
 
             locations.Should().HaveCount(3);
-            locations.Select(x => x.IsPrimary).Should().Equal(true, true, false);
+            locations.Select(x => x.Type).Should().Equal(IssueType.Primary, IssueType.Primary, IssueType.Secondary);
             locations.Select(x => x.LineNumber).Should().Equal(1, 2, 4);
         }
 
@@ -136,7 +136,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
             var locations = IssueLocationCollector.ExpectedIssueLocations("File.cs", SourceText.From(code).Lines);
 
             locations.Should().ContainSingle();
-            locations.Select(x => x.IsPrimary).Should().Equal(true);
+            locations.Select(x => x.Type).Should().Equal(IssueType.Primary);
             locations.Select(x => x.LineNumber).Should().Equal(5);
         }
 
@@ -159,7 +159,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
             var locations = IssueLocationCollector.ExpectedIssueLocations("File.cs", SourceText.From(code).Lines);
 
             locations.Should().HaveCount(4);
-            locations.Select(x => x.IsPrimary).Should().BeEquivalentTo(new[] { true, false, false, false });
+            locations.Select(x => x.Type).Should().BeEquivalentTo(new[] { IssueType.Primary, IssueType.Secondary, IssueType.Secondary, IssueType.Secondary });
             locations.Select(x => x.LineNumber).Should().Equal(3, 3, 3, 3);
             locations.Select(x => x.Start).Should().Equal(16, 27, 20, 21);
             locations.Select(x => x.Length).Should().Equal(3, 1, 6, 4);
@@ -180,7 +180,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                 """;
             var locations = IssueLocationCollector.ExpectedIssueLocations("File.cs", SourceText.From(code).Lines);
             locations.Should().HaveCount(2);
-            locations.Select(x => x.IsPrimary).Should().BeEquivalentTo(new[] { true, false });
+            locations.Select(x => x.Type).Should().BeEquivalentTo(new[] { IssueType.Primary, IssueType.Secondary });
             locations.Select(x => x.LineNumber).Should().Equal(3, 3);
             locations.Select(x => x.Start).Should().Equal(16, 27);
             locations.Select(x => x.Length).Should().Equal(3, 1);
@@ -219,7 +219,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                 }
                 """;
             var location = IssueLocationCollector.ExpectedIssueLocations("File.cs", SourceText.From(code).Lines).Should().ContainSingle().Subject;
-            location.IsPrimary.Should().BeTrue();
+            location.Type.Should().Be(IssueType.Primary);
             location.Message.Should().Be("A message with brackets [].");
             location.IssueId.Should().Be("myId1");
         }

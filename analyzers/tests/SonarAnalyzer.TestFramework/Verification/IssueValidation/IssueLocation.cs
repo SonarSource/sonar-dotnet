@@ -20,14 +20,22 @@
 
 namespace SonarAnalyzer.TestFramework.Verification.IssueValidation;
 
-[DebuggerDisplay("ID:{RuleId} @{LineNumber} Primary:{IsPrimary} Start:{Start} Length:{Length} ID:{IssueId} {Message} {FilePath}")]
+internal enum IssueType
+{
+    // Order of these member is important for DiagnosticVerifier.
+    Primary,
+    Secondary,
+    Error
+}
+
+[DebuggerDisplay("ID:{RuleId} {Type} @{LineNumber} Start:{Start} Length:{Length} ID:{IssueId} {Message} {FilePath}")]
 internal sealed class IssueLocation // ToDo: Refactor the relation between this and the Key
 {
     public IssueLocation Primary { get; }   // Only for actual secondary issues
     public string RuleId { get; init; }     // Diagnostic ID for actual issues
     public string FilePath { get; init; }
     public int LineNumber { get; init; }
-    public bool IsPrimary { get; init; }
+    public IssueType Type { get; init; }
     public string Message { get; init; }
     public string IssueId { get => Primary?.IssueId ?? issueId; init => issueId = value; }    // Issue location ID to pair primary and secondary locations
     public int? Start { get; set; }
@@ -35,21 +43,19 @@ internal sealed class IssueLocation // ToDo: Refactor the relation between this 
 
     private string issueId;
 
-    public IssueLocation(Diagnostic diagnostic) : this(diagnostic.GetMessage(), diagnostic.Location)
-    {
-        IsPrimary = true;
+    public IssueLocation(Diagnostic diagnostic) : this(IssueType.Primary, diagnostic.GetMessage(), diagnostic.Location) =>
         RuleId = diagnostic.Id;
-    }
 
-    public IssueLocation(IssueLocation primary, SecondaryLocation secondaryLocation) : this(secondaryLocation.Message ?? string.Empty, secondaryLocation.Location) =>
+    public IssueLocation(IssueLocation primary, SecondaryLocation secondaryLocation) : this(IssueType.Secondary, secondaryLocation.Message, secondaryLocation.Location) =>
         Primary = primary;
 
     public IssueLocation() { }
 
-    private IssueLocation(string message, Location location)
+    private IssueLocation(IssueType type, string message, Location location)
     {
         var span = location.GetLineSpan();
-        Message = message;
+        Type = type;
+        Message = message ?? string.Empty;
         LineNumber = location.GetLineNumberToReport();
         Start = span.StartLinePosition.Character;
         Length = location.SourceSpan.Length;
@@ -58,21 +64,21 @@ internal sealed class IssueLocation // ToDo: Refactor the relation between this 
 
     public void UpdatePrimaryIssueIdFrom(IssueLocation expected)
     {
-        if (IsPrimary)
+        if (Type == IssueType.Primary)
         {
             issueId = expected.IssueId;  // Let actual secondary issues find issueId of their expected primary via secondaryIssue.Primary.IssueId
         }
     }
 
     public override int GetHashCode() =>
-        Helpers.HashCode.Combine(FilePath.GetHashCode(), LineNumber, IsPrimary ? 0 : 1);
+        Helpers.HashCode.Combine(FilePath.GetHashCode(), LineNumber, Type);
 
     public override bool Equals(object obj) =>
         obj is IssueLocation issue
         && (issue.FilePath == string.Empty || FilePath == string.Empty || issue.FilePath == FilePath)
         && issue.LineNumber == LineNumber
-        && issue.IsPrimary == IsPrimary
-        && (IsPrimary || issue.IssueId == IssueId)   // We ignore issueId for primary issues, as we need to match them only for secondary
+        && issue.Type == Type
+        && (Type == IssueType.Primary || issue.IssueId == IssueId)   // We ignore issueId for primary issues, as we need to match them only for secondary
         && EqualOrNull(issue.RuleId, RuleId)
         && EqualOrNull(issue.Message, Message)
         && EqualOrNull(issue.Start, Start)
@@ -85,13 +91,13 @@ internal sealed class IssueLocation // ToDo: Refactor the relation between this 
         first is null || second is null || first == second;
 }
 
-[DebuggerDisplay("@{LineNumber} Primary:{IsPrimary} {FilePath}")]
-internal record IssueLocationKey(string FilePath, int LineNumber, bool IsPrimary)
+[DebuggerDisplay("{Type} @{LineNumber} {FilePath}")]
+internal record IssueLocationKey(string FilePath, int LineNumber, IssueType Type)
 {
-    public IssueLocationKey(IssueLocation issue) : this(issue.FilePath, issue.LineNumber, issue.IsPrimary) { }
+    public IssueLocationKey(IssueLocation issue) : this(issue.FilePath, issue.LineNumber, issue.Type) { }
 
     public bool IsMatch(IssueLocation issue) =>
         (FilePath == string.Empty || FilePath == issue.FilePath)
         && issue.LineNumber == LineNumber
-        && issue.IsPrimary == IsPrimary;
+        && issue.Type == Type;
 }

@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
             var expectedErrors = IssueLocationCollector.ExpectedBuildErrors("File.cs", SourceText.From(code).Lines).ToList();
 
             expectedErrors.Should().HaveCount(2);
-            expectedErrors.Select(l => l.IsPrimary).Should().Equal(true, true);
+            expectedErrors.Select(l => l.Type).Should().Equal(IssueType.Primary, IssueType.Primary);
             expectedErrors.Select(l => l.LineNumber).Should().Equal(3, 6);
         }
 
@@ -76,7 +76,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
             var expectedErrors = IssueLocationCollector.ExpectedBuildErrors("File.cs", SourceText.From(code).Lines).ToList();
 
             expectedErrors.Should().HaveCount(3);
-            expectedErrors.Select(l => l.IsPrimary).Should().Equal(true, true, true);
+            expectedErrors.Select(l => l.Type).Should().Equal(IssueType.Primary, IssueType.Primary, IssueType.Primary);
             expectedErrors.Select(l => l.LineNumber).Should().Equal(3, 3, 3);
             expectedErrors.Select(l => l.IssueId).Should().Equal("CS1234", "CS2345", "CS3456");
         }
@@ -88,7 +88,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
             var expectedErrors = IssueLocationCollector.ExpectedBuildErrors("File.cs", SourceText.From(code).Lines).ToList();
 
             expectedErrors.Should().ContainSingle();
-            expectedErrors[0].IsPrimary.Should().BeTrue();
+            expectedErrors[0].Type.Should().Be(IssueType.Primary);
             expectedErrors[0].LineNumber.Should().Be(1);
             expectedErrors[0].IssueId.Should().Be("CS1234");
         }
@@ -99,7 +99,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
             const string code = "<p>Test @Content something</p> @* Error [CS1234,CS2345,CS3456] *@";
             var expectedErrors = IssueLocationCollector.ExpectedBuildErrors("File.cs", SourceText.From(code).Lines).ToList();
 
-            expectedErrors.Select(l => l.IsPrimary).Should().Equal(true, true, true);
+            expectedErrors.Select(l => l.Type).Should().Equal(IssueType.Primary, IssueType.Primary, IssueType.Primary);
             expectedErrors.Select(l => l.LineNumber).Should().Equal(1, 1, 1);
             expectedErrors.Select(l => l.IssueId).Should().Equal("CS1234", "CS2345", "CS3456");
         }
@@ -113,7 +113,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                 """;
             var expectedErrors = IssueLocationCollector.ExpectedBuildErrors("File.cs", SourceText.From(code).Lines).ToList();
 
-            expectedErrors[0].IsPrimary.Should().BeTrue();
+            expectedErrors[0].Type.Should().Be(IssueType.Primary);
             expectedErrors[0].LineNumber.Should().Be(2);
             expectedErrors[0].IssueId.Should().Be("CS1234");
         }

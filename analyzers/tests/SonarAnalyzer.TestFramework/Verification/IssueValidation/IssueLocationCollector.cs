@@ -136,7 +136,7 @@ namespace SonarAnalyzer.TestFramework.Verification.IssueValidation
         private static IEnumerable<IssueLocation> CreateIssueLocations(Match match, string filePath, int lineNumber)
         {
             var line = lineNumber + Offset();
-            var isPrimary = IsPrimary();
+            var type = Type();
             var message = Message();
             var start = Start() ?? ColumnStart();
             var length = Length() ?? ColumnLength();
@@ -145,7 +145,7 @@ namespace SonarAnalyzer.TestFramework.Verification.IssueValidation
                 ? throw UnexpectedPreciseLocationCount(invalid.Captures.Count + 1, line)
                 : IssueIds().Select(x => new IssueLocation
                     {
-                        IsPrimary = isPrimary,
+                        Type = type,
                         LineNumber = line,
                         Message = message,
                         IssueId = x,
@@ -166,9 +166,14 @@ namespace SonarAnalyzer.TestFramework.Verification.IssueValidation
             int? ColumnLength() =>
                 Group("Length") is { } length ? int.Parse(length.Value) : null;
 
-            bool IsPrimary() =>
-                match.Groups["IssueType"] is var issueType
-                && (!issueType.Success || issueType.Value == "Noncompliant");
+            IssueType Type() =>
+                match.Groups["IssueType"] switch
+                {
+                    { Success: false } => IssueType.Primary,
+                    { Value: "Noncompliant" } => IssueType.Primary,
+                    { Value: "Secondary" } => IssueType.Secondary,
+                    _ => throw new  UnexpectedValueException("IssueType", match.Groups["IssueType"].Value)
+                };
 
             string Message() =>
                 Group("Message")?.Value;
@@ -200,7 +205,7 @@ namespace SonarAnalyzer.TestFramework.Verification.IssueValidation
         private static IList<IssueLocation> EnsureNoDuplicatedPrimaryIds(IList<IssueLocation> mergedLocations)
         {
             var duplicateLocationsIds = mergedLocations
-                .Where(x => x.IsPrimary && x.IssueId != null)
+                .Where(x => x.Type == IssueType.Primary && x.IssueId != null)
                 .GroupBy(x => x.IssueId)
                 .FirstOrDefault(x => x.Count() > 1);
             if (duplicateLocationsIds is not null)
