@@ -57,6 +57,6 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void PubliclyWritableDirectories_VB() =>
-            builderVB.AddPaths(@"Hotspots\PubliclyWritableDirectories.vb").Verify();
+            builderVB.AddPaths(@"Hotspots\PubliclyWritableDirectories.vb").WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
     }
 }

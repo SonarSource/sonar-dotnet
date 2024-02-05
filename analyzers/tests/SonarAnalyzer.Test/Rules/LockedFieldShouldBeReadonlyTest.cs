@@ -31,12 +31,16 @@ public class LockedFieldShouldBeReadonlyTest
     public void LockedFieldShouldBeReadonly_CS() =>
         builder.AddPaths("LockedFieldShouldBeReadonly.cs").Verify();
 
+#if NET
+
     [TestMethod]
     public void LockedFieldShouldBeReadonly_CSharp8() =>
         builder
             .AddPaths("LockedFieldShouldBeReadonly.CSharp8.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp8)
             .Verify();
+
+#endif
 
     [TestMethod]
     public void LockedFieldShouldBeReadonly_CSharp9() =>

@@ -62,7 +62,7 @@ public class ConditionEvaluatesToConstantTest
 
     [TestMethod]
     public void ConditionEvaluatesToConstant_Roslyn_VB() =>
-        roslynVB.AddPaths("ConditionEvaluatesToConstant.vb").Verify();
+        roslynVB.AddPaths("ConditionEvaluatesToConstant.vb").WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
 
     [TestMethod]
     public void ConditionEvaluatesToConstant_Roslyn_VB14() =>

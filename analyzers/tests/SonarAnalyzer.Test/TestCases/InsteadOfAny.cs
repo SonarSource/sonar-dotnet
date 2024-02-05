@@ -15,7 +15,7 @@ public class TestClass
 
         list.Append(1).Any(x => x > 1); // Compliant (Appended list becomes an IEnumerable)
         list.Append(1).Append(2).Any(x => x > 1); // Compliant
-        list.Append(1).Append(2).Any(x => x > 1).ToString(); // Compliant 
+        list.Append(1).Append(2).Any(x => x > 1).ToString(); // Compliant
 
         list.Any(); // Compliant (you can't use Exists with no arguments, CS7036)
         list.Exists(x => x > 0); // Compliant
@@ -123,9 +123,9 @@ public class TestClass
         intList.Any(x => x.Equals(0));  // Noncompliant {{Collection-specific "Contains" method should be used instead of the "Any" extension.}}
         intList.Any(x => 0.Equals(x));  // Noncompliant {{Collection-specific "Contains" method should be used instead of the "Any" extension.}}
         intList.Any(x => x is 1); // Noncompliant {{Collection-specific "Exists" method should be used instead of the "Any" extension.}} Should be Contains
-        intList.Any(x => 1 is x); // Error [CS0150]
-        intList.Any(x => x is someInt); // Error [CS0150]
-        intList.Any(x => someInt is x); // Error [CS0150]
+        intList.Any(x => 1 is x); // Error [CS9135]
+        intList.Any(x => x is someInt); // Error [CS9135]
+        intList.Any(x => someInt is x); // Error [CS9135]
 
         intList.Any(x => x == x); // Noncompliant
         intList.Any(x => someInt == anotherInt); // Noncompliant {{Collection-specific "Exists" method should be used instead of the "Any" extension.}}
@@ -156,9 +156,9 @@ public class TestClass
         stringList.Any(x => Equals(x, "")); // Noncompliant {{Collection-specific "Contains" method should be used instead of the "Any" extension.}}
         stringList.Any(x => x is ""); // Noncompliant {{Collection-specific "Exists" method should be used instead of the "Any" extension.}} FP
         stringList.Any(x => x is null); // Noncompliant {{Collection-specific "Exists" method should be used instead of the "Any" extension.}} Should raise Contains
-        stringList.Any(x => "" is x); // Error [CS0150]
-        stringList.Any(x => x is someString); // Error [CS0150]
-        stringList.Any(x => someString is x); // Error [CS0150]
+        stringList.Any(x => "" is x); // Error [CS9135]
+        stringList.Any(x => x is someString); // Error [CS9135]
+        stringList.Any(x => someString is x); // Error [CS9135]
 
         stringList.Any(x => MyStringCheck(x)); // Noncompliant {{Collection-specific "Exists" method should be used instead of the "Any" extension.}}
         stringList.Any(MyStringCheck);  // Noncompliant {{Collection-specific "Exists" method should be used instead of the "Any" extension.}}
@@ -182,8 +182,8 @@ public class TestClass
         refList.Any(x => someRef.Equals(x));  // Noncompliant {{Collection-specific "Contains" method should be used instead of the "Any" extension.}}
         refList.Any(x => Equals(someRef, x)); // Noncompliant {{Collection-specific "Contains" method should be used instead of the "Any" extension.}}
         refList.Any(x => Equals(x, someRef)); // Noncompliant {{Collection-specific "Contains" method should be used instead of the "Any" extension.}}
-        refList.Any(x => x is someRef); // Error [CS0150]
-        refList.Any(x => someRef is x); // Error [CS0150]
+        refList.Any(x => x is someRef); // Error [CS9135]
+        refList.Any(x => someRef is x); // Error [CS9135]
 
         intList.Any(x => x == null); // Noncompliant {{Collection-specific "Contains" method should be used instead of the "Any" extension.}} (warning: the result of this expression will always be false since a value-type is never equal to null)
         intList.Any(x => x.Equals(null));  // Noncompliant {{Collection-specific "Contains" method should be used instead of the "Any" extension.}} (warning: the result of this expression will always be false since a value-type is never equal to null)

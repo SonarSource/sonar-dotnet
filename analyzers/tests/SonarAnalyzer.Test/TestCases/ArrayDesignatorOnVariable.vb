@@ -9,7 +9,8 @@
         Dim matrix(5, 5) As Double
         Dim matrix2(,) As Double ' Noncompliant
         Dim matrix3 As Double(,)
-        Dim matrix4()(), ' Noncompliant
+        ' Noncompliant@+1
+        Dim matrix4()(),
             aaa As Double
         Dim matrix5 As Double()()
         Dim sales As Double()() = New Double(11)() {}

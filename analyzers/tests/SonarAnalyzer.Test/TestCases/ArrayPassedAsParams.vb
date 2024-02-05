@@ -45,7 +45,7 @@ Public Class Program
     Public Sub Method3(ByVal a As String(), ParamArray args As String())
     End Sub
 
-    Public Sub Method4(ParamArray a As String(), ParamArray args As String()) 'Error [CS0231]
+    Public Sub Method4(ParamArray a As String(), ParamArray args As String()) 'Error [BC30192]
     End Sub
 
     Public ReadOnly Property Prop(ParamArray param() As String) As Integer

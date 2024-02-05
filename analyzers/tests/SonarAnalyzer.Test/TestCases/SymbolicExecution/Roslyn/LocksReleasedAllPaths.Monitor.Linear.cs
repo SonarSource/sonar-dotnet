@@ -194,7 +194,7 @@ namespace Monitor_Linear
         {
             Monitor.Exit(obj);
             Console.WriteLine(arg.Length);
-            Monitor.Enter(); // Error CS1501 No overload for method 'Enter' takes 0 arguments
+            Monitor.Enter(); // Error [CS1501] No overload for method 'Enter' takes 0 arguments
         }
 
         public void DifferentFields(Program first, Program second)

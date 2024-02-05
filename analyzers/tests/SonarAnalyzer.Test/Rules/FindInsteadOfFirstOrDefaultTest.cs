@@ -60,5 +60,5 @@ public class FindInsteadOfFirstOrDefaultTest
 
     [TestMethod]
     public void FindInsteadOfFirstOrDefault_VB() =>
-        builderVB.AddPaths("FindInsteadOfFirstOrDefault.vb").Verify();
+        builderVB.AddPaths("FindInsteadOfFirstOrDefault.vb").WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
 }

@@ -52,6 +52,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void ConstructorArgumentValueShouldExist_VB() =>
             new VerifierBuilder<VB.ConstructorArgumentValueShouldExist>().AddPaths("ConstructorArgumentValueShouldExist.vb")
+                .WithOptions(ParseOptionsHelper.FromVisualBasic14)
                 .AddReferences(MetadataReferenceFacade.SystemXaml)
                 .Verify();
 

@@ -153,7 +153,7 @@ class PropertyAccessors
 
 class EmptyProperty
 {
-    int EmptyProp { } // Error CS0548 property or indexer must have at least one accessor
+    int EmptyProp { } // Error [CS0548] property or indexer must have at least one accessor
 }
 
 class LocalFunction

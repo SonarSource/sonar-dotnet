@@ -253,7 +253,7 @@ public class AttributeTargets
 public class InvalidAttributes
 {
     [DebuggerDisplay] int NoArgs => 1;                                         // Error [CS7036]
-    [DebuggerDisplay(Type = nameof(InvalidAttributes))] int MissingValue => 1; // Error [CS0029]
+    [DebuggerDisplay(Type = nameof(InvalidAttributes))] int MissingValue => 1; // Error [CS7036]
 }
 
 namespace WithTypeAlias

@@ -1,4 +1,5 @@
-﻿Imports System
+﻿' Error [BC30738] 'Sub Main' is declared more than once in 'project0'
+Imports System
 Imports System.Windows.Forms
 Imports System.Threading
 Imports System.Threading.Tasks
@@ -6,10 +7,11 @@ Imports System.Threading.Tasks
 Namespace Tests.TestCases
 
   Class Program_00
-    <Nonsense> ' Error [BC30002] Attribute doesn't exist
-    Shared Sub Main() ' Noncompliant
-    End Sub
-  End Class
+        ' Error@+1 [BC30002] Attribute doesn't exist
+        <Nonsense>
+        Shared Sub Main() ' Noncompliant
+        End Sub
+    End Class
 
   Public Class Program_01
     Shared Sub Main() ' Noncompliant {{Add the 'STAThread' attribute to this entry point.}}
@@ -53,10 +55,11 @@ Namespace Tests.TestCases
   End Class
 
   Class Program_09
-    <STAThread("random", 1)> ' Error [BC30057] Invalid code
-    Shared Sub Main()
-    End Sub
-  End Class
+        ' Error@+1 [BC30057] Invalid code
+        <STAThread("random", 1)>
+        Shared Sub Main()
+        End Sub
+    End Class
 
   Class Program_10
     <MTAThread>

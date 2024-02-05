@@ -57,6 +57,6 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void BeginInvokePairedWithEndInvoke_VB() =>
-            builderVB.AddPaths("BeginInvokePairedWithEndInvoke.vb").Verify();
+            builderVB.AddPaths("BeginInvokePairedWithEndInvoke.vb").WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
     }
 }

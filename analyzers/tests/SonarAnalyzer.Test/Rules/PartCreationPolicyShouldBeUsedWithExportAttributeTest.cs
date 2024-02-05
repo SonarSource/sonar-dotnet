@@ -31,14 +31,13 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void PartCreationPolicyShouldBeUsedWithExportAttribute_CS() =>
-            builderCS.AddPaths("PartCreationPolicyShouldBeUsedWithExportAttribute.cs").Verify();
+            builderCS.AddPaths("PartCreationPolicyShouldBeUsedWithExportAttribute.cs").WithConcurrentAnalysis(false).Verify();
 
         [TestMethod]
         public void PartCreationPolicyShouldBeUsedWithExportAttribute_UnresolvedSymbol_CS() =>
             builderCS.AddSnippet(@"
-[UnresolvedAttribute] // Error [CS0246]
+[UnresolvedAttribute] // Error [CS0246, CS0246]
 class Bar { }")
-                .WithErrorBehavior(CompilationErrorBehavior.Ignore)
                 .Verify();
 
 #if NET

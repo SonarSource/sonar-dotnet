@@ -5,6 +5,6 @@ public class BaseClass(__arglist) // Nomcompliant {{Use the 'params' keyword ins
 {
     void Foo()
     {
-        ArgIterator argumentIterator = new ArgIterator(__arglist); // Error CS0190
+        ArgIterator argumentIterator = new ArgIterator(__arglist); // Error [CS0190]
     }
 }

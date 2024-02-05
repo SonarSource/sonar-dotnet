@@ -57,5 +57,5 @@ public class DebuggerDisplayUsesExistingMembersTest
 
     [TestMethod]
     public void DebuggerDisplayUsesExistingMembers_VB() =>
-        builderVB.AddPaths("DebuggerDisplayUsesExistingMembers.vb").Verify();
+        builderVB.AddPaths("DebuggerDisplayUsesExistingMembers.vb").WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
 }

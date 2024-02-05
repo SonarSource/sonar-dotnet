@@ -32,5 +32,5 @@ public class DoNotUseDateTimeNowTest
 
     [TestMethod]
     public void DoNotUseDateTimeNow_VB() =>
-        new VerifierBuilder<VB.DoNotUseDateTimeNow>().AddPaths("DoNotUseDateTimeNow.vb").Verify();
+        new VerifierBuilder<VB.DoNotUseDateTimeNow>().AddPaths("DoNotUseDateTimeNow.vb").WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
 }

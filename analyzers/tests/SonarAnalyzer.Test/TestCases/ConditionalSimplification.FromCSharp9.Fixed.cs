@@ -14,7 +14,7 @@ if (a is not null) // Compliant
 }
 else
 {
-    x = c; // Error [CS0128]
+    x = c; // Error [CS0029]
 }
 
 x = a ?? b;
@@ -26,8 +26,8 @@ a ??= b;
 a ??= Identity(new()); // Fixed
 b = Identity(a ?? new()); // Fixed
 a ??= new(); // Fixed
-a = a is not null ? Wrong(a, b) : Identity(new()); // Error [CS1501]
-a = a is not null ? Identity(new()) : Wrong(a, b); // Error [CS1501]
+a = a is not null ? Wrong(a, b) : Identity(new()); // Error [CS0103]
+a = a is not null ? Identity(new()) : Wrong(a, b); // Error [CS0103]
 a = a is not null ? Identity(a) : IdentityOther(a, b);
 
 var p = a is null; // Fixed

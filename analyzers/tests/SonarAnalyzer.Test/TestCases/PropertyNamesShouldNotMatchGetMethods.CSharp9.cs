@@ -22,8 +22,9 @@ namespace Tests.Diagnostics
 
         public string Bar // Noncompliant
         { get; }
-        public int Bar() // Error [CS0102]
-        //         ^^^ Secondary
+        // Error@+1 [CS0102]
+        public int Bar()    // Secondary
+        //         ^^^
         {
             return 42;
         }

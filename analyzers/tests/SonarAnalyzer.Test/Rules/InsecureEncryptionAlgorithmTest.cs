@@ -73,6 +73,7 @@ namespace SonarAnalyzer.Test.Rules
         public void InsecureEncryptionAlgorithm_VB() =>
             builderVB.AddPaths("InsecureEncryptionAlgorithm.vb")
                 .AddReferences(GetAdditionalReferences())
+                .WithOptions(ParseOptionsHelper.FromVisualBasic14)
                 .Verify();
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences() =>

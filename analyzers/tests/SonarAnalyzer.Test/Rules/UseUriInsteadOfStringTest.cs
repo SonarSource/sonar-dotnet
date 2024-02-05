@@ -58,15 +58,15 @@ public class NoMembers
 
 public class InvalidCode : NoMembers
 {
-    public override string UriProperty { get; set; }    // Error CS0115 'Bar.UriProperty': no suitable method found to override
-    public override string UriMethod() => """";         // Error CS0115 'Bar.UriMethod()': no suitable method found to override
+    public override string UriProperty { get; set; }    // Error [CS0115] 'Bar.UriProperty': no suitable method found to override
+    public override string UriMethod() => """";         // Error [CS0115] 'Bar.UriMethod()': no suitable method found to override
 
     public void Main()
     {
         Uri.TryCreate(new object(), UriKind.Absolute, out result); // Compliant - invalid code
-        // Error@-1 CS0103 The name 'UriKind' does not exist in the current context
-        // Error@-2 CS0103 The name 'Uri' does not exist in the current context
-        // Error@-3 CS0103 The name 'result' does not exist in the current context
+        // Error@-1 [CS0103 ]The name 'UriKind' does not exist in the current context
+        // Error@-2 [CS0103] The name 'Uri' does not exist in the current context
+        // Error@-3 [CS0103] The name 'result' does not exist in the current context
     }
 }").Verify();
     }

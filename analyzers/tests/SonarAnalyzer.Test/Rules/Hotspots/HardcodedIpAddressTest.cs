@@ -57,6 +57,6 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void HardcodedIpAddress_VB() =>
-            builderVB.AddPaths(@"Hotspots\HardcodedIpAddress.vb").Verify();
+            builderVB.AddPaths(@"Hotspots\HardcodedIpAddress.vb").WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
     }
 }

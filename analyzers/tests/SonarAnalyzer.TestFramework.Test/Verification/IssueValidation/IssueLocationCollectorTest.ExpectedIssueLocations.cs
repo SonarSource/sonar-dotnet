@@ -29,9 +29,9 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
         public void ExpectedIssueLocations_No_Comments()
         {
             const string code = """
-                public class Foo
+                public class Sample
                 {
-                    public void Bar(object o)
+                    public void Method(object o)
                     {
                         Console.WriteLine(o);
                     }
@@ -44,9 +44,9 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
         public void ExpectedIssueLocations_Locations_CS()
         {
             const string code = """
-                public class Foo
+                public class Sample
                 {
-                    public void Bar(object o) // Noncompliant
+                    public void Method(object o) // Noncompliant
                     {
                         // Noncompliant@+1
                         Console.WriteLine(o);
@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
         public void ExpectedIssueLocations_Locations_VB()
         {
             const string code = """
-                Public Class Foo
+                Public class Sample
 
                     Public Sub Bar(o As Object) ' Noncompliant
                         ' Noncompliant@+1
@@ -144,9 +144,9 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
         public void ExpectedIssueLocations_ExactLocations()
         {
             const string code = """
-                public class Foo
+                public class Sample
                 {
-                    public void Bar(object o)
+                    public void Method(object o)
                 //              ^^^
                 //                         ^ Secondary@-1
                 //                  ^^^^^^ Secondary@-2 [flow]
@@ -169,9 +169,9 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
         public void ExpectedIssueLocations_ExactColumns()
         {
             const string code = """
-                public class Foo
+                public class Sample
                 {
-                    public void Bar(object o) // Noncompliant ^17#3
+                    public void Method(object o) // Noncompliant ^17#3
                                               // Secondary@-1 ^28#1
                     {
                         Console.WriteLine(o);
@@ -190,9 +190,9 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
         public void ExpectedIssueLocations_Redundant_Locations()
         {
             const string code = """
-                public class Foo
+                public class Sample
                 {
-                    public void Bar(object o) // Noncompliant ^17#3
+                    public void Method(object o) // Noncompliant ^17#3
                 //              ^^^
                     {
                         Console.WriteLine(o);
@@ -210,9 +210,9 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
         public void ExpectedIssueLocations_PrimaryIdWithAndBracketInMessage()
         {
             const string code = """
-                public class Foo
+                public class Sample
                 {
-                    public void Bar(object o) // Noncompliant [myId1] {{A message with brackets [].}}
+                    public void Method(object o) // Noncompliant [myId1] {{A message with brackets [].}}
                     {
                         Console.WriteLine(o);
                     }
@@ -228,9 +228,9 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
         public void ExpectedIssueLocations_Multiple_PrimaryIds()
         {
             const string code = """
-                public class Foo
+                public class Sample
                 {
-                    public void Bar(object o) // Noncompliant [myId1]
+                    public void Method(object o) // Noncompliant [myId1]
                     {
                         Console.WriteLine(o); // Noncompliant [myId1]
                     }
@@ -245,9 +245,9 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
         public void ExpectedIssueLocations_Invalid_Type_Format()
         {
             const string code = """
-                public class Foo
+                public class Sample
                 {
-                    public void Bar(object o) // Is Noncompliant
+                    public void Method(object o) // Is Noncompliant
                     {
                         Console.WriteLine(o);
                     }
@@ -256,8 +256,8 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
             Action action = () => IssueLocationCollector.ExpectedIssueLocations("File.cs", SourceText.From(code).Lines);
 
             action.Should().Throw<InvalidOperationException>().WithMessage("""
-                Line 2 looks like it contains comment for noncompliant code, but it is not recognized as one of the expected pattern.
-                Either remove the Noncompliant/Secondary word or precise pattern '^^' from the comment, or fix the pattern.
+                File.cs line 2 contains '// ... Noncompliant' comment, but it is not recognized as one of the expected patterns.
+                Either remove the 'Noncompliant' word or fix the pattern.
                 """);
         }
 
@@ -265,9 +265,9 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
         public void ExpectedIssueLocations_Invalid_Precise_Format()
         {
             const string code = """
-                public class Foo
+                public class Sample
                 {
-                    public void Bar(object o) // Noncompliant
+                    public void Method(object o) // Noncompliant
                 //  issue is here   ^^^^^^
                     {
                         Console.WriteLine(o);
@@ -277,9 +277,46 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
             Action action = () => IssueLocationCollector.ExpectedIssueLocations("File.cs", SourceText.From(code).Lines);
 
             action.Should().Throw<InvalidOperationException>().WithMessage("""
-                Line 3 looks like it contains comment for noncompliant code, but it is not recognized as one of the expected pattern.
-                Either remove the Noncompliant/Secondary word or precise pattern '^^' from the comment, or fix the pattern.
+                File.cs line 3 looks like it contains comment for precise location '^^'.
+                Either remove the precise pattern '^^' from the comment, or fix the pattern.
                 """);
+        }
+
+        [TestMethod]
+        public void ExpectedBuildErrors_ExpectedErrors()
+        {
+            const string code = """
+                public class Sample
+                {
+                    public void Method(object o) // Error [CS1234]
+                    {
+                        // Error@+1 [CS3456]
+                        Console.WriteLine(o);
+                    }
+                }
+                """;
+            var expectedErrors = IssueLocationCollector.ExpectedIssueLocations("File.cs", SourceText.From(code).Lines).ToList();
+
+            expectedErrors.Should().HaveCount(2);
+            expectedErrors.Select(x => x.Type).Should().Equal(IssueType.Error, IssueType.Error);
+            expectedErrors.Select(x => x.LineNumber).Should().Equal(3, 6);
+        }
+
+        [TestMethod]
+        public void ExpectedBuildErrors_Multiple_ExpectedErrors()
+        {
+            const string code = """
+                public class Sample
+                {
+                    public void Method(object o) { } // Error [CS1234,CS2345,CS3456]
+                }
+                """;
+            var expectedErrors = IssueLocationCollector.ExpectedIssueLocations("File.cs", SourceText.From(code).Lines).ToList();
+
+            expectedErrors.Should().HaveCount(3);
+            expectedErrors.Select(x => x.Type).Should().Equal(IssueType.Error, IssueType.Error, IssueType.Error);
+            expectedErrors.Select(x => x.LineNumber).Should().Equal(3, 3, 3);
+            expectedErrors.Select(x => x.IssueId).Should().Equal("CS1234", "CS2345", "CS3456");
         }
     }
 }

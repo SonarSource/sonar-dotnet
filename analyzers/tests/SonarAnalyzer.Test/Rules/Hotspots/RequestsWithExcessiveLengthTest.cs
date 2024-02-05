@@ -72,7 +72,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void RequestsWithExcessiveLength_VB() =>
-            builderVB.AddPaths(@"RequestsWithExcessiveLength.vb").Verify();
+            builderVB.AddPaths(@"RequestsWithExcessiveLength.vb").WithOptions(ParseOptionsHelper.FromVisualBasic15).Verify();
 
         [TestMethod]
         public void RequestsWithExcessiveLength_VB_CustomValues() =>

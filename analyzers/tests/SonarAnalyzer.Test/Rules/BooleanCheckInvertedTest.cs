@@ -41,6 +41,6 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void BooleanCheckInverted_VB() =>
-            new VerifierBuilder<VB.BooleanCheckInverted>().AddPaths("BooleanCheckInverted.vb").Verify();
+            new VerifierBuilder<VB.BooleanCheckInverted>().AddPaths("BooleanCheckInverted.vb").WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
     }
 }

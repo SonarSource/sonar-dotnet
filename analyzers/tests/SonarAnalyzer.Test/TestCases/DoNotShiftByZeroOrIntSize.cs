@@ -100,10 +100,12 @@ namespace Tests.Diagnostics
 
         private int RightShift()
         {
-            int i = i >> 60; // Noncompliant {{Correct this shift; '60' is larger than the type size.}} // Error [CS0165] - use of unassigned var
+            // Error@+1 [CS0165] - use of unassigned var
+            int i = i >> 60; // Noncompliant {{Correct this shift; '60' is larger than the type size.}}
             i >>= 60; // Noncompliant {{Correct this shift; '60' is larger than the type size.}}
             int i2 = i >> 31; // Compliant
-            ulong ul = ul >> 64; // Noncompliant {{Correct this shift; '64' is larger than the type size.}} // Error [CS0165] - use of unassigned var
+            // Error@+1 [CS0165] - use of unassigned var
+            ulong ul = ul >> 64; // Noncompliant {{Correct this shift; '64' is larger than the type size.}}
             i = i >> 0; // Compliant
 
 

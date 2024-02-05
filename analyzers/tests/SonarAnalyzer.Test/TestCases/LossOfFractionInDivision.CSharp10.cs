@@ -19,7 +19,7 @@ public struct S
         var (a, b) = (1 / 3, 2);
         var (a1, (b1, c1)) = (1, (1 / 3, 2));
         var d = (1 / 3, 2);
-        (int, int) d2 = (1 / 3, 2); 
+        (int, int) d2 = (1 / 3, 2);
         (decimal, decimal) d3 = (1 / 3, 2); // Noncompliant
         (int, (decimal, (int, decimal))) nested = (3, (1 / 3, (0, 1 / 3)));
         //                                             ^^^^^ {{Cast one of the operands of this division to 'decimal'.}}
@@ -39,7 +39,7 @@ public struct S
         (int, decimal) result = (1, p1 / p2); // Noncompliant
 
         (int, ValueTuple<int, int>) vt = (1, (1 / 3, 3)); // FN
-        (int, (int, int)) vt1 = (1, 1 / 3, 3); // Error
+        (int, (int, int)) vt1 = (1, 1 / 3, 3); // Error [CS0029]
 
         decimal FooDecimal(decimal d)
         {

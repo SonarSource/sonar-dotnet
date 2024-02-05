@@ -1,5 +1,8 @@
 ﻿using System.Runtime.InteropServices;
 
+// Invalid method, testing if IMethodSymbol.ContainingType returns null (it currently doesn't)
+private void Do(int x) { } // Error [CS0106]
+
 public record Record
 {
     extern private static void Extern0(); // Compliant

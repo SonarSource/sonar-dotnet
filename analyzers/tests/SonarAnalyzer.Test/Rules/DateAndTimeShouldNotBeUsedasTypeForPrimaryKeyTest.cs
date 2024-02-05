@@ -60,7 +60,7 @@ public class DateAndTimeShouldNotBeUsedAsTypeForPrimaryKeyTest
 
     [TestMethod]
     public void DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey_EntityFrameworkCore_VB() =>
-        verifierVB.AddPaths("DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey.EntityFrameworkCore.vb").Verify();
+        verifierVB.AddPaths("DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey.EntityFrameworkCore.vb").WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
 
     [TestMethod]
     public void DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey_FluentApi_CS() =>

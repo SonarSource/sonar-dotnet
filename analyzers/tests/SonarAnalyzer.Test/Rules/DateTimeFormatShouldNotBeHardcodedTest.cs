@@ -32,7 +32,7 @@ public class DateTimeFormatShouldNotBeHardcodedTest
 
     [TestMethod]
     public void DateTimeFormatShouldNotBeHardcoded_VB() =>
-        new VerifierBuilder<VB.DateTimeFormatShouldNotBeHardcoded>().AddPaths("DateTimeFormatShouldNotBeHardcoded.vb").Verify();
+        new VerifierBuilder<VB.DateTimeFormatShouldNotBeHardcoded>().AddPaths("DateTimeFormatShouldNotBeHardcoded.vb").WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
 
 #if NET
 
