@@ -28,7 +28,7 @@ public class SymbolicCheck
     /// <summary>
     /// Stop processing this branch of the exploded graph. There will be no follow up states.
     /// </summary>
-    protected static readonly ProgramState[] EmptyStates =  Array.Empty<ProgramState>();
+    protected static readonly ProgramStates EmptyStates = new();
 
     protected SymbolicCheck() { } // Avoid abstract class, fixes S1694
 
@@ -38,14 +38,14 @@ public class SymbolicCheck
     /// <summary>
     /// Override this if you need to return multiple states.
     /// </summary>
-    public virtual ProgramState[] PreProcess(SymbolicContext context) =>
-        PreProcessSimple(context) is { } newState ? newState.ToArray() : EmptyStates;
+    public virtual ProgramStates PreProcess(SymbolicContext context) =>
+        PreProcessSimple(context) is { } newState ? new(newState) : EmptyStates;
 
     /// <summary>
     /// Override this if you need to return multiple states.
     /// </summary>
-    public virtual ProgramState[] PostProcess(SymbolicContext context) =>
-        PostProcessSimple(context) is { } newState ? newState.ToArray() : EmptyStates;
+    public virtual ProgramStates PostProcess(SymbolicContext context) =>
+        PostProcessSimple(context) is { } newState ? new(newState) : EmptyStates;
 
     /// <summary>
     /// Method is invoked for each execution flow that reaches exit block. Once for each unique state after LVA cleanup.

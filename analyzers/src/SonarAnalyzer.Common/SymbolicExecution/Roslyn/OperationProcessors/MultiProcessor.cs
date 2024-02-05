@@ -22,7 +22,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
 internal interface IMultiProcessor
 {
-    public ProgramState[] Process(SymbolicContext context);
+    public ProgramStates Process(SymbolicContext context);
 }
 
 /// <summary>
@@ -33,8 +33,8 @@ internal interface IMultiProcessor
 internal abstract class MultiProcessor<T> : Processor<T>, IMultiProcessor
     where T : IOperationWrapper
 {
-    protected abstract ProgramState[] Process(SymbolicContext context, T operation);
+    protected abstract ProgramStates Process(SymbolicContext context, T operation);
 
-    public ProgramState[] Process(SymbolicContext context) =>
+    public ProgramStates Process(SymbolicContext context) =>
         Process(context, Convert(context.Operation.Instance));
 }

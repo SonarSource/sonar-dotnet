@@ -55,7 +55,7 @@ internal sealed partial class Invocation
         nameof(string.TrimStart)
     };
 
-    private static ProgramState[] ProcessSystemStringInvocation(ProgramState state, IInvocationOperationWrapper invocation)
+    private static ProgramStates ProcessSystemStringInvocation(ProgramState state, IInvocationOperationWrapper invocation)
     {
         if (invocation.TargetMethod.Name is nameof(string.IsNullOrEmpty) or nameof(string.IsNullOrWhiteSpace))
         {
@@ -63,11 +63,11 @@ internal sealed partial class Invocation
         }
         else if (StringMethodReturningNotNull.Contains(invocation.TargetMethod.Name))
         {
-            return state.SetOperationConstraint(invocation, ObjectConstraint.NotNull).ToArray();
+            return new(state.SetOperationConstraint(invocation, ObjectConstraint.NotNull));
         }
         else
         {
-            return state.ToArray();
+            return new(state);
         }
     }
 }

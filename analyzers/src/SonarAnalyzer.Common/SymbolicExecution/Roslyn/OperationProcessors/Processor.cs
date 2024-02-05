@@ -23,10 +23,5 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 internal abstract class Processor<T>
     where T : IOperationWrapper
 {
-    /// <summary>
-    /// Stop processing this branch of the exploded graph. There will be no follow up states.
-    /// </summary>
-    protected static readonly ProgramState[] EmptyStates = Array.Empty<ProgramState>();
-
     protected abstract T Convert(IOperation operation);
 }

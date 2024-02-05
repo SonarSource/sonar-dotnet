@@ -73,25 +73,21 @@ public abstract class LocksReleasedAllPathsBase : SymbolicRuleCheck
         return collector.LockAcquiredAndReleased;
     }
 
-    public override ProgramState[] PostProcess(SymbolicContext context)
+    public override ProgramStates PostProcess(SymbolicContext context)
     {
         if (context.Operation.Instance.Kind == OperationKindEx.Invocation)
         {
             if (FindRefParam(context) is { } refParamContext)
             {
-                return new[]
-                {
+                return new(
                   refParamContext.SetRefConstraint(BoolConstraint.True, AddLock(refParamContext.SymbolicContext, refParamContext.LockSymbol)),
-                  refParamContext.SetRefConstraint(BoolConstraint.False, refParamContext.SymbolicContext.State),
-                };
+                  refParamContext.SetRefConstraint(BoolConstraint.False, refParamContext.SymbolicContext.State));
             }
             else if (FindLockSymbolWithConditionalReturnValue(context) is { } lockSymbol)
             {
-                return new[]
-                {
+                return new(
                     AddLock(context, lockSymbol).SetOperationConstraint(context.Operation, BoolConstraint.True),
-                    context.SetOperationConstraint(BoolConstraint.False)
-                };
+                    context.SetOperationConstraint(BoolConstraint.False));
             }
         }
         else if (context.Operation.Instance.AsObjectCreation() is { } objectCreation
@@ -105,12 +101,10 @@ public abstract class LocksReleasedAllPathsBase : SymbolicRuleCheck
             lastSymbolLock[symbol] = objectCreation.ToSonar();
             return objectCreation.ArgumentValue("createdNew") is { } createdNew
                 && createdNew.TrackedSymbol(context.State) is { } trackedCreatedNew
-                ? new[]
-                    {
-                        AddLock(context, objectCreation.WrappedOperation).Preserve(symbol).SetSymbolConstraint(trackedCreatedNew, BoolConstraint.True),
-                        context.SetSymbolConstraint(trackedCreatedNew, BoolConstraint.False),
-                    }
-                : AddLock(context, objectCreation.WrappedOperation).Preserve(symbol).ToArray();
+                ? new(
+                    AddLock(context, objectCreation.WrappedOperation).Preserve(symbol).SetSymbolConstraint(trackedCreatedNew, BoolConstraint.True),
+                    context.SetSymbolConstraint(trackedCreatedNew, BoolConstraint.False))
+                : new(AddLock(context, objectCreation.WrappedOperation).Preserve(symbol));
         }
 
         return base.PostProcess(context);
