@@ -1,7 +1,5 @@
 ﻿using System;
-
-// Invalid method, testing if IMethodSymbol.ContainingType returns null (it currently doesn't)
-private void Do(int x) { } // Error [CS0116]
+using System.Runtime.InteropServices;
 
 namespace Tests.Diagnostics
 {

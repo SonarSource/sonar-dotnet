@@ -60,6 +60,7 @@ namespace SonarAnalyzer.Test.Rules
                 .AddPaths("ExecutingSqlQueries.Net46.MonoSqlLite.vb")
                 .AddReferences(FrameworkMetadataReference.SystemData)
                 .AddReferences(NuGetMetadataReference.MonoDataSqlite())
+                .WithOptions(ParseOptionsHelper.FromVisualBasic14)
                 .Verify();
 
         internal static IEnumerable<MetadataReference> GetReferencesNet46(string sqlServerCeVersion) =>

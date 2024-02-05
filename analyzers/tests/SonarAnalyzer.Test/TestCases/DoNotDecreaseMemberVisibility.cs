@@ -80,9 +80,11 @@ namespace MyLibrary
 
         private void Method_06<T>(T count) { } // Noncompliant
 
-        private virtual void Method_07(int count) { } // Error [CS0621] // Noncompliant
+        // Error@+1 [CS0621]
+        private virtual void Method_07(int count) { } // Noncompliant
 
-        private override void Method_08(int count) { } // Error [CS0621,CS0507] // Noncompliant
+        // Error@+1 [CS0621, CS0507]
+        private override void Method_08(int count) { } // Noncompliant
 
         private new void Method_09(int count) { }
 
@@ -100,7 +102,8 @@ namespace MyLibrary
 
         private void Method_16(out int count) { count = 2; }
 
-        private override void Method_17(int count) { } // Noncompliant // Error [CS0621,CS0507]
+        // Error@+1 [CS0621,CS0507]
+        private override void Method_17(int count) { } // Noncompliant
 
 
         private int Property_01 { get; set; } // Noncompliant
@@ -120,9 +123,10 @@ namespace MyLibrary
         // Note this cannot be auto-property, as it is a compiler error.
         public override int Property_07 { get { return i; } }
 
-        public override int Property_08 { get { return i; } private set { i = value; } } // Noncompliant // Error [CS0507] - cannot change modifier
+        // Error@+1 [CS0507] - cannot change modifier
+        public override int Property_08 { get { return i; } private set { i = value; } } // Noncompliant
 
-        public override int Property_09 { get; } // Error [CS8080].
+        public override int Property_09 { get; } // Error [CS8080]
 
         private string Property_10 { get; set; } // Noncompliant, return type is irrelevant for method resolution
     }

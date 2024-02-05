@@ -17,11 +17,13 @@ Namespace Tests.Diagnostics
     Class AnyClass
     End Class
 
-    <PartCreationPolicy(Foo)>       ' Error [CS0103] - Foo doesn't exist
+    ' Error@+1 [BC30451] - Foo doesn't exist
+    <PartCreationPolicy(Foo)>
     Class InvalidAttrParameter
     End Class
 
-    <PartCreationPolicy()>  ' Error [BC30455] Argument not specified for parameter 'creationPolicy' of ... 
+    ' Error@+1 [BC30455] Argument not specified for parameter 'creationPolicy' of ...
+    <PartCreationPolicy()>
     Class NoAttrParameter
     End Class
 

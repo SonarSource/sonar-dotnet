@@ -184,7 +184,7 @@ Public Class Other
 
         o = TypeOf Bar Is IFoo
         o = TypeOf IBar Is IFoo
-        o = TypeOf Bar Is Foo       ' Error BC31430	Expression Of type 'Bar' can never be of type 'Foo'
+        o = TypeOf Bar Is Foo       ' Error [BC31430]	Expression Of type 'Bar' can never be of type 'Foo'
         o = TypeOf IBar Is Foo
         o = TypeOf FinalBar Is IFoo
         o = TypeOf Generic Is Bar

@@ -15,7 +15,7 @@ if (r is R { SomeOtherProperty.SomeProperty.Rank: >= 0 }) // Compliant
 {
 }
 
-if (r is R { SomeProperty.Length: not >= 0 }) // Error [CS8502] - this case is now covered by the compiler -> `An expression of type 'R' can never match the provided pattern`
+if (r is R { SomeProperty.Length: not >= 0 }) // Error [CS8518] - this case is now covered by the compiler -> `An expression of type 'R' can never match the provided pattern`
 // Noncompliant@-1
 {
 }

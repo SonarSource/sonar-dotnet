@@ -49,7 +49,7 @@ y = y;
 y = y switch
 {
     4 => 4,      // Fixed
-    not x => 5,  // Error [CS0150]
+    not x => 5,  // Error [CS9135]
 };
 
 int z = y switch

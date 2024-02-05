@@ -20,7 +20,8 @@ namespace Tests.Diagnostics
         }
         private static bool HasContent2b(List<string> l)
         {
-            return 1UL <= l.Count(); // Noncompliant // Error[CS0034]
+            return 1UL <= l.Count();    // Noncompliant
+                                        // Error@-1 [CS0034]
         }
         private static bool IsNotEmpty1(List<string> l)
         {

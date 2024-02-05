@@ -72,7 +72,8 @@ namespace Tests.Diagnostics
         public int Method8_0(Class1 arg) { return (arg).instanceInterface.InterfaceProperty1; } // Noncompliant
         public int Method8_1(Class1 arg) { return (int)arg?.instanceInterface?.InterfaceProperty1; } // Noncompliant
         public int Method8_2(Class1 arg) { return (int)((arg))?.instanceInterface?.InterfaceProperty1; } // Noncompliant
-        public int Method8_3(Class1 arg) { return ((int)arg)?.instanceInterface?.InterfaceProperty1; } // Noncompliant // Error [CS0030]
+        // Error@+1 [CS0030]
+        public int Method8_3(Class1 arg) { return ((int)arg)?.instanceInterface?.InterfaceProperty1; } // Noncompliant
         public void Method9() { (Property2 + 1).ToString(); }
 
         public int Method10() => 0; // Noncompliant

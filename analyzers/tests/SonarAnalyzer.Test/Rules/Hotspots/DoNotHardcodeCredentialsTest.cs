@@ -92,7 +92,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void DoNotHardcodeCredentials_VB_DefaultValues() =>
-            builderVB.AddPaths("DoNotHardcodeCredentials.DefaultValues.vb").Verify();
+            builderVB.AddPaths("DoNotHardcodeCredentials.DefaultValues.vb").WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
 
         [TestMethod]
         public void DoNotHardcodeCredentials_VB_CustomValues() =>

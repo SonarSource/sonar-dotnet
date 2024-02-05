@@ -162,7 +162,7 @@ namespace Tests.Diagnostics
             {
             }
 
-            if ((x, y) is (R { SomeProperty: { Count: 5 } }))  // Error[CS8121]
+            if ((x, y) is (R { SomeProperty: { Count: 5 } }))  // Error [CS0246]
             {
             }
         }

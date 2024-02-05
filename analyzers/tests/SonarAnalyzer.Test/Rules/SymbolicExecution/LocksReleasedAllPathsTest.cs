@@ -59,6 +59,7 @@ namespace SonarAnalyzer.Test.Rules
                 "LocksReleasedAllPaths.ReaderWriterLock.vb",
                 "LocksReleasedAllPaths.ReaderWriterLockSlim.vb",
                 "LocksReleasedAllPaths.SpinLock.vb")
+                .WithOptions(ParseOptionsHelper.FromVisualBasic14)
                 .Verify();
 
         [TestMethod]

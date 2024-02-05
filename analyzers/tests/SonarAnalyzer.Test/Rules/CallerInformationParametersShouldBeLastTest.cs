@@ -49,9 +49,6 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void CallerInformationParametersShouldBeLastInvalidSyntax() =>
-            builder.AddPaths("CallerInformationParametersShouldBeLastInvalidSyntax.cs")
-                    .WithErrorBehavior(CompilationErrorBehavior.Ignore)
-                    .WithConcurrentAnalysis(false)
-                    .Verify();
+            builder.AddPaths("CallerInformationParametersShouldBeLastInvalidSyntax.cs").WithConcurrentAnalysis(false).Verify();
     }
 }

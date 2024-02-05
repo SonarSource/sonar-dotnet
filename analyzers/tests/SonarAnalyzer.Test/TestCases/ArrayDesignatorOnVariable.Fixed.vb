@@ -8,7 +8,8 @@
         Dim matrix(5, 5) As Double
         Dim matrix2 As Double(,) ' Fixed
         Dim matrix3 As Double(,)
-        Dim matrix4()(), ' Fixed
+        ' Fixed
+        Dim matrix4()(),
             aaa As Double
         Dim matrix5 As Double()()
         Dim sales As Double()() = New Double(11)() {}

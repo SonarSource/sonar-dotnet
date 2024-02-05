@@ -29,8 +29,8 @@ record Derived : Base
     /// </summary>
     public override int MyProperty4 { get => base.MyProperty1; init => base.MyProperty1 = value; }
     public override sealed int MyProperty5 { get => base.MyProperty5; init => base.MyProperty5 = value; }
-    public override int MyProperty6 { get => base.MyProperty6; init => base.MyProperty6 = value; } // Error [CS0154, CS0154] The property or indexer 'property' cannot be used in this context because it lacks the get accessor
-    public override int MyProperty7 { get => base.MyProperty7; init => base.MyProperty7 = value; } // Error [CS0200, CS0200] Property or indexer 'property' cannot be assigned to -- it is read only
+    public override int MyProperty6 { get => base.MyProperty6; init => base.MyProperty6 = value; } // Error [CS0154, CS0545] The property or indexer 'property' cannot be used in this context because it lacks the get accessor
+    public override int MyProperty7 { get => base.MyProperty7; init => base.MyProperty7 = value; } // Error [CS0200, CS0546] Property or indexer 'property' cannot be assigned to -- it is read only
     public override int MyProperty8 { init => base.MyProperty8 = value; } // Noncompliant
     public override int MyProperty9 { get => base.MyProperty9; } // Noncompliant
     public sealed int MyProperty10 { get => base.MyProperty10; init => base.MyProperty10 = value; } // Error [CS0238] 'member' cannot be sealed because it is not an override
@@ -56,7 +56,7 @@ namespace CompilerGeneratedMethods
         protected override bool PrintMembers(System.Text.StringBuilder builder) =>
             base.PrintMembers(builder); // Compliant. The generated PrintMembers implementation would add the properties of Derived to the builder.
 
-        public override bool Equals(Base other) // Error CS0111 Type 'Derived' already defines a member called 'Equals' with the same parameter types
+        public override bool Equals(Base other) // Error [CS0111] Type 'Derived' already defines a member called 'Equals' with the same parameter types
             => base.Equals(other);
 
         public override int GetHashCode() =>

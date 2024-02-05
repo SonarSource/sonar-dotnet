@@ -34,8 +34,9 @@ Namespace NS
             subLambda = Sub(x) Console.Write(
                                         True Or False Or True OrElse False Xor False) ' Noncompliant
 
+            ' Noncompliant@+2
             Dim namedCust = New Customer With {
-                .IsMale = True Or False Or True OrElse False Xor False, ' Noncompliant
+                .IsMale = True Or False Or True OrElse False Xor False,
                 .IsFemale = False Or True
             }
 

@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void PropertiesAccessCorrectField_VB() =>
-            builderVB.AddPaths("PropertiesAccessCorrectField.vb").AddReferences(AdditionalReferences).Verify();
+            builderVB.AddPaths("PropertiesAccessCorrectField.vb").AddReferences(AdditionalReferences).WithOptions(ParseOptionsHelper.FromVisualBasic14).Verify();
 
         private static IEnumerable<MetadataReference> AdditionalReferences =>
             NuGetMetadataReference.MvvmLightLibs("5.4.1.1")

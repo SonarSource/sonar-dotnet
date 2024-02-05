@@ -2,8 +2,9 @@
     Sub Print(ByVal str As String)
         Try
 
-            End        ' Error [BC30615] 'End' statement cannot be used in class library projects
-'           ^^^ {{Remove this call to 'End' or ensure it is really required.}}
+            ' Error@+1 [BC30615] 'End' statement cannot be used in class library projects
+            End ' Noncompliant{{Remove this call to 'End' or ensure it is really required.}}
+'           ^^^
 
 
             Dim a As Integer

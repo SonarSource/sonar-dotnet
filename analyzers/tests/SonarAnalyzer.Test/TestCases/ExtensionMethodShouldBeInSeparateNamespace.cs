@@ -14,7 +14,7 @@ static class GlobalNamespaceClass
     {
     }
 
-    static void Quux(this SomeNonExistingClass snec) // ErrorType is considered as part of global namespace but we don't want to report on it
+    static void Quux(this SomeNonExistingClass snec) // Error [CS0246] ErrorType is considered as part of global namespace but we don't want to report on it
     {
     }
 
@@ -27,7 +27,8 @@ namespace SomeNamespace
     {
         static class SubClass
         {
-            static void Foobar(this Program p) // Noncompliant // Error [CS1109] - extensions method can't be on inner classes
+            // Error@+1 [CS1109] - extensions method can't be on inner classes
+            static void Foobar(this Program p) // Noncompliant
             {
             }
         }

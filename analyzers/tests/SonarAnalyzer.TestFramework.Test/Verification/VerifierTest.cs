@@ -480,9 +480,9 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                   Line 1: Unexpected issue 'A namespace cannot directly contain members such as fields, methods or statements' Rule CS0116
 
                 There are differences for CSharp7 File.cs:
-                  Line 1: Unexpected issue 'Program using top-level statements must be an executable.' Rule CS8805
-                  Line 1: Unexpected issue 'Feature 'top-level statements' is not available in C# 7.0. Please use language version 9.0 or greater.' Rule CS8107
                   Line 1: Unexpected issue 'The type or namespace name 'undefined' could not be found (are you missing a using directive or an assembly reference?)' Rule CS0246
+                  Line 1: Unexpected issue 'Feature 'top-level statements' is not available in C# 7.0. Please use language version 9.0 or greater.' Rule CS8107
+                  Line 1: Unexpected issue 'Program using top-level statements must be an executable.' Rule CS8805
                   Line 1: Unexpected issue 'Identifier expected' Rule CS1001
                   Line 1: Unexpected issue '; expected' Rule CS1002
                 """);
@@ -491,9 +491,9 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                   Line 1: Unexpected issue 'A namespace cannot directly contain members such as fields, methods or statements' Rule CS0116
 
                 There are differences for CSharp7 File.cs:
-                  Line 1: Unexpected issue 'Program using top-level statements must be an executable.' Rule CS8805
-                  Line 1: Unexpected issue 'Feature 'top-level statements' is not available in C# 7.0. Please use language version 9.0 or greater.' Rule CS8107
                   Line 1: Unexpected issue 'The type or namespace name 'undefined' could not be found (are you missing a using directive or an assembly reference?)' Rule CS0246
+                  Line 1: Unexpected issue 'Feature 'top-level statements' is not available in C# 7.0. Please use language version 9.0 or greater.' Rule CS8107
+                  Line 1: Unexpected issue 'Program using top-level statements must be an executable.' Rule CS8805
                   Line 1: Unexpected issue 'Identifier expected' Rule CS1001
                   Line 1: Unexpected issue '; expected' Rule CS1002
                 """);
@@ -522,12 +522,12 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                 There are differences for CSharp7 File.Concurrent.cs:
                   Line 6: Unexpected issue 'Change this condition so that it does not always evaluate to 'True'. Some code paths are unreachable.' Rule S2583
                   Line 10: Unexpected issue 'Change this condition so that it does not always evaluate to 'True'.' Rule S2589
-                  Line 9 Secondary location: Unexpected issue ''
+                  Line 9 Secondary location: Unexpected issue '' Rule S2583
 
                 There are differences for CSharp7 File.cs:
                   Line 6: Unexpected issue 'Change this condition so that it does not always evaluate to 'True'. Some code paths are unreachable.' Rule S2583
                   Line 10: Unexpected issue 'Change this condition so that it does not always evaluate to 'True'.' Rule S2589
-                  Line 9 Secondary location: Unexpected issue ''
+                  Line 9 Secondary location: Unexpected issue '' Rule S2583
                 """);
             builder.WithOnlyDiagnostics(ConditionEvaluatesToConstant.S2589).Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage("""
                 There are differences for CSharp7 File.Concurrent.cs:

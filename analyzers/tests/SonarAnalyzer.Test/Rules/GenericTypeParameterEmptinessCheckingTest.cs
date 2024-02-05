@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void GenericTypeParameterEmptinessChecking() =>
-            builder.AddPaths("GenericTypeParameterEmptinessChecking.cs").WithErrorBehavior(CompilationErrorBehavior.Ignore).Verify();
+            builder.AddPaths("GenericTypeParameterEmptinessChecking.cs").Verify();
 
 #if NET
 

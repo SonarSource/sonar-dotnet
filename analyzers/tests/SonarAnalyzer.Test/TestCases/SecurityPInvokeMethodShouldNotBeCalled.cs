@@ -70,7 +70,7 @@ namespace Tests.Diagnostics
             var hres2 = CoInitializeSecurity(IntPtr.Zero, -1, IntPtr.Zero, IntPtr.Zero, RpcAuthnLevel.None, RpcImpLevel.Impersonate, IntPtr.Zero, EoAuthnCap.None, IntPtr.Zero); // Noncompliant
 //                      ^^^^^^^^^^^^^^^^^^^^
 
-            CoSetProxyBlanket();                             // Error [CS0103]
+            CoSetProxyBlanket();                             // Error [CS7036]
             CoInitializeSecurity(5);                         // Compliant
             var p = new Program();
             p.CoInitializeSecurity("");                      // Compliant

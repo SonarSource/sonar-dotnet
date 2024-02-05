@@ -60,7 +60,7 @@ namespace Tests.Diagnostics
             Console.Write((false ? false : true) ? 0 : 1);
             Console.Write((foo()) ? 0 : 1); // Error [CS0841] - undeclared var
             Console.Write((foo) ? 0 : 1); // Error [CS0841] - undeclared var
-            Invoke(((int)plop)); // Error [CS0841] - undeclared var
+            Invoke(((int)plop)); // Error [CS0103] - undeclared var
 
             int[] tab;
             tab[(1 + 2)]; // Error [CS0201] - not a statement

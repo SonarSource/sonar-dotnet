@@ -28,6 +28,8 @@ internal sealed record IssueLocationPair(IssueLocation Actual, IssueLocation Exp
     public int LineNumber => Actual?.LineNumber ?? Expected.LineNumber;
     public IssueType Type => Actual?.Type ?? Expected.Type;
     public int? Start => Actual?.Start ?? Expected.Start;
+    public string IssueId => Actual?.IssueId ?? Expected?.IssueId;
+    public string RuleId => Actual?.RuleId ?? Expected.RuleId;
 
     public void AppendAssertionMessage(StringBuilder builder)
     {
@@ -45,7 +47,7 @@ internal sealed record IssueLocationPair(IssueLocation Actual, IssueLocation Exp
         {
             builder.Append(" Rule ").Append(Actual.RuleId);
         }
-        if ((Actual?.IssueId ?? Expected?.IssueId) is { } issueId)
+        if ((Actual?.IssueId ?? Expected?.IssueId) is { } issueId && Actual?.RuleId != issueId)
         {
             builder.Append(" ID ").Append(issueId);
         }

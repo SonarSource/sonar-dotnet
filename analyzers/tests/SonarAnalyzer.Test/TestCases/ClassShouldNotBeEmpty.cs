@@ -114,13 +114,13 @@ namespace NonCompliant
 
 namespace Ignore
 {
-    class { }                                    // Error
+    class { }                                    // Error [CS1001]
 
-    []                                           // Error
+    []                                           // Error [CS1001]
     class AttributeError { }
 
     interface IMarker { }                        // Compliant - this rule only deals with classes
-    
+
     class ImplementsMarker: IMarker { }          // Compliant - implements a marker interface
 
     struct EmptyStruct { }                       // Compliant - this rule only deals with classes

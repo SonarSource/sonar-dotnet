@@ -110,7 +110,7 @@ Namespace Monitor_Linear
         Public Sub WrongCallNoArgs(Arg As String)
             Monitor.Exit(Obj)
             Console.WriteLine(Arg.Length)
-            Monitor.Enter() ' Error BC30516	Overload resolution failed because no accessible 'Enter' accepts this number of arguments.
+            Monitor.Enter() ' Error [BC30516] Overload resolution failed because no accessible 'Enter' accepts this number of arguments.
         End Sub
 
         Public Sub DifferentFields(First As Program, Second As Program)

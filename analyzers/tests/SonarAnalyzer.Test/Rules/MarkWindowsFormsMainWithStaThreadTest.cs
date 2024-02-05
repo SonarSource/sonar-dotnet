@@ -33,7 +33,6 @@ namespace SonarAnalyzer.Test.Rules
         public void MarkWindowsFormsMainWithStaThread_CS() =>
             builderCS
                 .AddPaths(@"MarkWindowsFormsMainWithStaThread.cs")
-                .WithErrorBehavior(CompilationErrorBehavior.Ignore)
                 .WithOutputKind(OutputKind.WindowsApplication)
                 .AddReferences(MetadataReferenceFacade.SystemWindowsForms)
                 .Verify();
@@ -42,7 +41,6 @@ namespace SonarAnalyzer.Test.Rules
         public void MarkWindowsFormsMainWithStaThread_VB() =>
             builderVB
                 .AddPaths(@"MarkWindowsFormsMainWithStaThread.vb")
-                .WithErrorBehavior(CompilationErrorBehavior.Ignore)
                 .WithOutputKind(OutputKind.WindowsApplication)
                 .AddReferences(MetadataReferenceFacade.SystemWindowsForms)
                 .Verify();
@@ -60,7 +58,6 @@ namespace SonarAnalyzer.Test.Rules
         public void MarkWindowsFormsMainWithStaThread_ClassLibrary_VB() =>
             builderVB
                 .AddPaths(@"MarkWindowsFormsMainWithStaThread.vb")
-                .WithErrorBehavior(CompilationErrorBehavior.Ignore)
                 .WithOutputKind(OutputKind.DynamicallyLinkedLibrary)
                 .AddReferences(MetadataReferenceFacade.SystemWindowsForms)
                 .VerifyNoIssueReported();
@@ -69,7 +66,6 @@ namespace SonarAnalyzer.Test.Rules
         public void MarkWindowsFormsMainWithStaThread_CS_NoWindowsForms() =>
             builderCS
                 .AddPaths(@"MarkWindowsFormsMainWithStaThread_NoWindowsForms.cs")
-                .WithErrorBehavior(CompilationErrorBehavior.Ignore)
                 .WithOutputKind(OutputKind.WindowsApplication)
                 .Verify();
 

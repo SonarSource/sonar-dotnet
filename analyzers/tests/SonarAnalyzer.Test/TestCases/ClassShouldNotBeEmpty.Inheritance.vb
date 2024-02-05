@@ -36,7 +36,7 @@ End Namespace
 
 Namespace Ignore
 
-    Class NoImplementation              ' Error - abstract methods should be implemented
+    Class NoImplementation              ' Error [BC30610]- abstract methods should be implemented
         Inherits AbstractBaseWithAbstractMethods
     End Class
 

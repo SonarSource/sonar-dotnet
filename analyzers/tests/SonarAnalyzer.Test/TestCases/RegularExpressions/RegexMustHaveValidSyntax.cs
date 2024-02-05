@@ -109,7 +109,7 @@ class DoesNotCrash
 {
     bool UnknownVariable(string input)
     {
-        return Regex.IsMatch(input, "a" + undefined); // Error CS0103 The name 'undefined' does not exist in the current context
+        return Regex.IsMatch(input, "a" + undefined); // Error [CS0103] The name 'undefined' does not exist in the current context
     }
 }
 

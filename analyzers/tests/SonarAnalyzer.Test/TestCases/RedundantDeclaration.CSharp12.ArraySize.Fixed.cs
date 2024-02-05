@@ -53,7 +53,7 @@ namespace Repro_8115
 
         void VarDeclarationWithInlineAssignment()
         {
-            var invalid = [1, 2, 3];            // Error CS9176  There is no target type for the collection expression.
+            var invalid = [1, 2, 3];            // Error [CS9176] There is no target type for the collection expression.
         }
 
         void VarDeclarationWithReassignment()
@@ -68,8 +68,8 @@ namespace Repro_8115
         void VarDeclarationWithReassignmentToEmptyCollection()
         {
             var typeInferredAndReassigned = new[] { 1, 2, 3 };
-            typeInferredAndReassigned = new[] { };             // Error CS0826 No best type found for implicitly-typed array
-                                                               // Error@-1 CS0029 Cannot implicitly convert type '?[]' to 'int[]'
+            typeInferredAndReassigned = new[] { };             // Error [CS0826] No best type found for implicitly-typed array
+                                                               // Error@-1 [CS0029] Cannot implicitly convert type '?[]' to 'int[]'
         }
     }
 }

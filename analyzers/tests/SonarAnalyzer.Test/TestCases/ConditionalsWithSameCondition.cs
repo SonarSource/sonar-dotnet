@@ -94,7 +94,7 @@ namespace Tests.TestCases
         {
             if (sameAsUndefinedField == sameAsUndefinedField)
             {
-                this.sameAsUndefinedField = null; // Error [CS0103]: The name 'unresolvedSymbol' does not exist in the current context
+                this.sameAsUndefinedField = null; // Error [CS1061]: 'Coverage' does not contain a definition for 'sameAsUndefinedField'
             }
             if (sameAsUndefinedField == sameAsUndefinedField) { } // Noncompliant
         }

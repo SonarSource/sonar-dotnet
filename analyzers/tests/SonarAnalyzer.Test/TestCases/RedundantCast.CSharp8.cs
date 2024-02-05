@@ -23,7 +23,7 @@ namespace Tests.Diagnostics
             GetObjects().Cast<int>();       // Compliant
             GetInts()?.Cast<int>();         // Noncompliant
             GetObjects()?.Cast<int>();      // Compliant
-            Enumerable.Cast<int>();         // Error - overload resolution failure
+            Enumerable.Cast<int>();         // Error [CS7036] - overload resolution failure
         }
 
         public static int[] GetInts() => null;

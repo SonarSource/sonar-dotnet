@@ -9,16 +9,20 @@ Namespace Classes
     Interface MyInterface
     End Interface
 
-    <Export(GetType(MyInterface))> ' Noncompliant {{Implement 'MyInterface' on 'NotExported' or remove this export attribute.}}
-    <Export(GetType(Exported))> ' Noncompliant {{Derive from 'Exported' on 'NotExported' or remove this export attribute.}}
+    ' Noncompliant@+2 {{Implement 'MyInterface' on 'NotExported' or remove this export attribute.}}
+    ' Noncompliant@+2 {{Derive from 'Exported' on 'NotExported' or remove this export attribute.}}
+    <Export(GetType(MyInterface))>
+    <Export(GetType(Exported))>
     Class NotExported
 '    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ @-2
 '    ^^^^^^^^^^^^^^^^^^^^^^^^^ @-2
     End Class
 
-    <Export("something", GetType(MyInterface))> ' Noncompliant
-    <Export(Constants.ContractName, GetType(IDisposable))> ' Noncompliant
-    class NotExported_MultipleArgs
+    ' Noncompliant@+2
+    ' Noncompliant@+2
+    <Export("something", GetType(MyInterface))>
+    <Export(Constants.ContractName, GetType(IDisposable))>
+    Class NotExported_MultipleArgs
     End Class
 
     <Export(GetType(MyInterface)), Export(GetType(IComparable)), Export(GetType(IDisposable))>
@@ -30,23 +34,27 @@ Namespace Classes
         End Sub
     End Class
 
-    <ExportAttribute(GetType(MyInterface))> ' Noncompliant
+    ' Noncompliant@+1
+    <ExportAttribute(GetType(MyInterface))>
     Class NotExported_FullAttributeName
     End Class
 
+    ' Noncompliant@+2
     <Export(GetType(MyInterface))>
-    <Export(GetType(Descendant))> ' Noncompliant
+    <Export(GetType(Descendant))>
     Class Exported
         Implements MyInterface
     End Class
 
+    ' Exposing ourselves
     <Export>
-    <Export("something")> ' Exposing ourselves
+    <Export("something")>
     <Export(GetType(Exporting_Ourselves))>
     Class Exporting_Ourselves
     End Class
 
-    <InheritedExport(GetType(MyInterface))> ' Noncompliant
+    ' Noncompliant@+1
+    <InheritedExport(GetType(MyInterface))>
     <InheritedExport(GetType(OtherAttributes))>
     Class OtherAttributes
     End Class
@@ -85,12 +93,14 @@ Namespace Classes
         Implements ISomething(Of BaseThing)
     End Class
 
-    <Export(GetType(ISomething(Of BaseThing)))> ' Noncompliant {{Implement 'ISomething(Of BaseThing)' on 'Something(Of BaseThing)' or remove this export attribute.}}
+    ' Noncompliant@+1 {{Implement 'ISomething(Of BaseThing)' on 'Something(Of BaseThing)' or remove this export attribute.}}
+    <Export(GetType(ISomething(Of BaseThing)))>
     Public Class Something(Of BaseThing)
     End Class
 
-    <Export(GetType(ISomething(Of BaseThing)))> ' Noncompliant
-    public Class SomethingImplementation
+    ' Noncompliant@+1
+    <Export(GetType(ISomething(Of BaseThing)))>
+    Public Class SomethingImplementation
         Implements ISomething(Of BaseThing2)
     End Class
 
@@ -99,8 +109,9 @@ Namespace Classes
         Implements ISomething(Of T)
     End Class
 
-                                                 ' Noncompliant@+1
-    <Export(ContractType:=GetType(IDisposable))> ' Error [BC31501]
+    ' Noncompliant@+2
+    ' Error@+1 [BC31501]
+    <Export(ContractType:=GetType(IDisposable))>
     Class Exporting_InvalidSyntax
     End Class
 End Namespace

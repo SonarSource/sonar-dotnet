@@ -85,5 +85,5 @@ public class FirstException : Exception { }
 
 namespace ShouldNotThrow
 {
-    public class /* Missing identifier */ : Exception { } // Error CS1001
+    public class /* Missing identifier */ : Exception { } // Error [CS1001]
 }

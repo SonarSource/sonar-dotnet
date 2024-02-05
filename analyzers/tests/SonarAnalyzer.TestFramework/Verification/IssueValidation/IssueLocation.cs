@@ -43,17 +43,19 @@ internal sealed class IssueLocation // ToDo: Refactor the relation between this 
 
     private string issueId;
 
-    public IssueLocation(Diagnostic diagnostic) : this(IssueType.Primary, diagnostic.GetMessage(), diagnostic.Location) =>
-        RuleId = diagnostic.Id;
+    public IssueLocation(Diagnostic diagnostic)
+        : this(diagnostic.Severity == DiagnosticSeverity.Error ? IssueType.Error : IssueType.Primary, diagnostic.Id, diagnostic.GetMessage(), diagnostic.Location) =>
+        IssueId = diagnostic.Severity == DiagnosticSeverity.Error ? diagnostic.Id : null;   // Error [CS1001] should assert that expected issueId matches the actual RuleId
 
-    public IssueLocation(IssueLocation primary, SecondaryLocation secondaryLocation) : this(IssueType.Secondary, secondaryLocation.Message, secondaryLocation.Location) =>
+    public IssueLocation(IssueLocation primary, SecondaryLocation secondaryLocation) : this(IssueType.Secondary, primary.RuleId, secondaryLocation.Message, secondaryLocation.Location) =>
         Primary = primary;
 
     public IssueLocation() { }
 
-    private IssueLocation(IssueType type, string message, Location location)
+    private IssueLocation(IssueType type, string ruleId, string message, Location location)
     {
         var span = location.GetLineSpan();
+        RuleId = ruleId;
         Type = type;
         Message = message ?? string.Empty;
         LineNumber = location.GetLineNumberToReport();

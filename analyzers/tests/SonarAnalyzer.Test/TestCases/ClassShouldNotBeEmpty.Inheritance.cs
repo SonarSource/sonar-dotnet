@@ -18,7 +18,7 @@ namespace NonCompliant
 
 namespace Ignore
 {
-    class NoImplementation : AbstractBaseWithAbstractMethods { }         // Error - abstract methods should be implemented
+    class NoImplementation : AbstractBaseWithAbstractMethods { }         // Error [CS0534]- abstract methods should be implemented
 }
 
 class BaseClass

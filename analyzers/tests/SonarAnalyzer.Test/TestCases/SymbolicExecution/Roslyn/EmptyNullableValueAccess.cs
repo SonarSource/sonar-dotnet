@@ -926,7 +926,7 @@ class InParams
     void InParamOfTheMethodItself(in int? iParam)
     {
         _ = iParam.Value;       // Compliant, unknown
-        iParam = null;          // Error, CS8331
+        iParam = null;          // Error [CS8331]
         _ = iParam.Value;       // Compliant, iParam is "in" and its value can't be modified
     }
 

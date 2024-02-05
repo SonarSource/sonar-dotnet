@@ -149,8 +149,8 @@ class Test
 
     void NoIdentifier()
     {
-        lock () { }   // Error
-        lock (()) { } // Error
+        lock () { }   // Error [CS1525]
+        lock (()) { } // Error [CS1525]
     }
 
     delegate object ADelegate(object oPar);

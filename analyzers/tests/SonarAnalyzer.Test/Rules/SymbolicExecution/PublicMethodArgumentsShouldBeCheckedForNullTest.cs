@@ -67,6 +67,7 @@ namespace SonarAnalyzer.Test.Rules
         public void PublicMethodArgumentsShouldBeCheckedForNull_Roslyn_VB(ProjectType projectType) =>
             roslynVB.AddReferences(TestHelper.ProjectTypeReference(projectType))
                 .AddPaths("PublicMethodArgumentsShouldBeCheckedForNull.vb")
+                .WithOptions(ParseOptionsHelper.FromVisualBasic14)
                 .Verify();
 
 #if NET

@@ -28,7 +28,7 @@ public class EntityFrameworkReproGH7286
         _ = dbContext.MyEntities.Where(e => ids.Any(i => e.Equals(i))); // Compliant
         _ = dbContext.MyEntities.Where(e => ids.Any(i => e.Id > i)); // Compliant
 
-        _ = dbContext.MyEntities.Where(e => ids.Any(i => e.Id is i)); // Error [CS0150]
+        _ = dbContext.MyEntities.Where(e => ids.Any(i => e.Id is i)); // Error [CS9135]
         _ = dbContext.MyEntities.Where(e => ids.Any(i => e.Id is 2)); // Error [CS8122]
 
         var iqueryable = dbContext.MyEntities.OrderBy(e => e.Id);

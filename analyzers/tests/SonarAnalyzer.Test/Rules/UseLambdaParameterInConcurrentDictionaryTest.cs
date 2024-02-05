@@ -36,6 +36,7 @@ public class UseLambdaParameterInConcurrentDictionaryTest
     [TestMethod]
     public void UseLambdaParameterInConcurrentDictionary_VB() =>
         new VerifierBuilder<VB.UseLambdaParameterInConcurrentDictionary>().AddPaths("UseLambdaParameterInConcurrentDictionary.vb")
+            .WithOptions(ParseOptionsHelper.FromVisualBasic14)
             .AddReferences(MetadataReferenceFacade.SystemCollections)
             .Verify();
 }
