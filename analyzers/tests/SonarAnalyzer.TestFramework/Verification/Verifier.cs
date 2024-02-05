@@ -203,7 +203,7 @@ namespace SonarAnalyzer.Test.TestFramework
                     var csProjPath = PrepareRazorProject(projectRoot, langVersion);
                     var razorFiles = PrepareRazorFiles(projectRoot);
                     // To avoid reference loading issues, ensure that the project references are restored before compilation.
-                    Process.Start(Environment.GetEnvironmentVariable("MSBUILD_PATH"), $"restore {csprojPath}").WaitForExit();
+                    Process.Start(Environment.GetEnvironmentVariable("MSBUILD_PATH"), $"restore {csProjPath}").WaitForExit();
                     yield return new(workspace.OpenProjectAsync(csProjPath).Result.GetCompilationAsync().Result, razorFiles.ToArray());
                 }
             }
