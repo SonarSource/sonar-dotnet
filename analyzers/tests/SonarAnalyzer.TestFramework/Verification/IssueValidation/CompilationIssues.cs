@@ -83,6 +83,7 @@ internal sealed class CompilationIssues : IEnumerable<IssueLocation>
     IEnumerator<IssueLocation> IEnumerable<IssueLocation>.GetEnumerator() =>
         issues.GetEnumerator();
 
+    [ExcludeFromCodeCoverage]
     IEnumerator IEnumerable.GetEnumerator() =>
         issues.GetEnumerator();
 }
