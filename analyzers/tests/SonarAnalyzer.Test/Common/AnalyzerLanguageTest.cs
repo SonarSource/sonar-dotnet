@@ -50,9 +50,15 @@ namespace SonarAnalyzer.Test.Common
         public void FromPath_VB(string path) =>
             AnalyzerLanguage.FromPath(path).Should().Be(AnalyzerLanguage.VisualBasic);
 
-        [TestMethod]
-        public void FromPath_UnexpectedThrows() =>
-            ((Func<AnalyzerLanguage>)(() => AnalyzerLanguage.FromPath("File.txt"))).Should().Throw<NotSupportedException>().WithMessage("Unsupported file extension: .txt");
+        [DataTestMethod]
+        [DataRow("File.txt", ".txt")]
+        [DataRow("", "")]
+        [DataRow(null, "")]
+        public void FromPath_UnexpectedThrows(string path, string message)
+        {
+            var action = () => AnalyzerLanguage.FromPath(path);
+            action.Should().Throw<NotSupportedException>().WithMessage($"Unsupported file extension: {message}");
+        }
 
         [TestMethod]
         public void FromName()
