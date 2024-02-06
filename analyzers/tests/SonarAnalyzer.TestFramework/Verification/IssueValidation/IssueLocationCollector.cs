@@ -121,26 +121,17 @@ namespace SonarAnalyzer.TestFramework.Verification.IssueValidation
             return Enumerable.Empty<IssueLocation>();
         }
 
-        private static IEnumerable<IssueLocation> CreateIssueLocations(Match match, string filePath, int lineNumber)
+        private static IEnumerable<IssueLocation> CreateIssueLocations(Match match, string filePath, int originalLineNumber)
         {
-            var line = lineNumber + Offset();
+            var lineNumber = originalLineNumber + Offset();
             var type = Type();
             var message = Message();
             var start = Start() ?? ColumnStart();
             var length = Length() ?? ColumnLength();
             var invalid = match.Groups["Invalid"];
             return invalid.Success
-                ? throw UnexpectedPreciseLocationCount(invalid.Captures.Count + 1, line)
-                : IssueIds().Select(x => new IssueLocation
-                    {
-                        Type = type,
-                        LineNumber = line,
-                        Message = message,
-                        IssueId = x,
-                        Start = start,
-                        Length = length,
-                        FilePath = filePath
-                    });
+                ? throw UnexpectedPreciseLocationCount(invalid.Captures.Count + 1, lineNumber)
+                : IssueIds().Select(x => new IssueLocation(type, filePath, lineNumber, message, x, start, length));
 
             int? Start() =>
                 Group("Position")?.Index;

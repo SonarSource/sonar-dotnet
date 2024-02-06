@@ -26,7 +26,7 @@ namespace SonarAnalyzer.TestFramework.Test.Verification.IssueValidation;
 [TestClass]
 public class IssueLocationTest
 {
-    private static readonly IssueLocation Issue = new() { RuleId = "S1234", FilePath = "File.cs", LineNumber = 42, Type = IssueType.Primary, Message = "Lorem ipsum", Start = 42, Length = 10 };
+    private static readonly IssueLocation Issue = new(IssueType.Primary, "File.cs", 42, "Lorem ipsum", null, 42, 10, "S1234");
 
     [TestMethod]
     public void IssueLocation_Ctor_NoSecondaryMessage_HasEmptyMessage() =>
@@ -70,42 +70,42 @@ public class IssueLocationTest
     [TestMethod]
     public void IssueLocation_GetHashCode_DependsOnlyOnKey()
     {
-        var hashcode = new IssueLocation { RuleId = "Sxxxx", FilePath = "File.cs", LineNumber = 1, Type = IssueType.Primary, Message = "Msg1", IssueId = "id1", Start = 2, Length = 4 }.GetHashCode();
-        hashcode.Should().Be(new IssueLocation { RuleId = "Sdiff", FilePath = "File.cs", LineNumber = 1, Type = IssueType.Primary, Message = "Diff", IssueId = "diff", Start = 99, Length = 99 }.GetHashCode());
+        var hashcode = new IssueLocation(IssueType.Primary, "File.cs", 1, "Msg1", "id1", 2, 4, "Sxxxx").GetHashCode();
+        hashcode.Should().Be(new IssueLocation(IssueType.Primary, "File.cs", 1, "Diff", "diff", 99, 99, "Sdiff").GetHashCode());
         hashcode.Should().NotBe(0);
-        hashcode.Should().NotBe(new IssueLocation { RuleId = "Sxxx", FilePath = "Diff.cs", LineNumber = 1, Type = IssueType.Primary, Message = "Msg1", IssueId = "id1", Start = 2, Length = 4 }.GetHashCode());
-        hashcode.Should().NotBe(new IssueLocation { RuleId = "Sxxx", FilePath = "File.cs", LineNumber = 9, Type = IssueType.Primary, Message = "Msg1", IssueId = "id1", Start = 2, Length = 4 }.GetHashCode());
-        hashcode.Should().NotBe(new IssueLocation { RuleId = "Sxxx", FilePath = "File.cs", LineNumber = 1, Type = IssueType.Secondary, Message = "Msg1", IssueId = "id1", Start = 2, Length = 4 }.GetHashCode());
+        hashcode.Should().NotBe(new IssueLocation(IssueType.Primary, "Diff.cs", 1, "Msg1", "id1", 2, 4, "Sxxxx").GetHashCode());
+        hashcode.Should().NotBe(new IssueLocation(IssueType.Primary, "File.cs", 9, "Msg1", "id1", 2, 4, "Sxxxx").GetHashCode());
+        hashcode.Should().NotBe(new IssueLocation(IssueType.Secondary, "File.cs", 1, "Msg1", "id1", 2, 4, "Sxxxx").GetHashCode());
     }
 
     [TestMethod]
     public void IssueLocation_Equals_FullMatch()
     {
-        var orig = new IssueLocation { RuleId = "Sxxxx", FilePath = "File.cs", LineNumber = 1, Type = IssueType.Primary, Message = "Msg1", IssueId = "id1", Start = 2, Length = 4 };
-        var same = new IssueLocation { RuleId = "Sxxxx", FilePath = "File.cs", LineNumber = 1, Type = IssueType.Primary, Message = "Msg1", IssueId = "id1", Start = 2, Length = 4 };
-        var proj = new IssueLocation { RuleId = "Sxxxx", FilePath = string.Empty, LineNumber = 1, Type = IssueType.Primary, Message = "Msg1", IssueId = "id1", Start = 2, Length = 4 };
+        var orig = new IssueLocation(IssueType.Primary, "File.cs", 1, "Msg1", "id1", 2, 4, "Sxxxx");
+        var same = new IssueLocation(IssueType.Primary, "File.cs", 1, "Msg1", "id1", 2, 4, "Sxxxx");
+        var proj = new IssueLocation(IssueType.Primary, string.Empty, 1, "Msg1", "id1", 2, 4, "Sxxxx");
         orig.Equals(same).Should().BeTrue();
         orig.Equals(proj).Should().BeTrue();
         proj.Equals(same).Should().BeTrue();
         orig.Equals(null).Should().BeFalse();
         orig.Equals("different type").Should().BeFalse();
-        orig.Equals(new IssueLocation { RuleId = "Syyyy", FilePath = "File.cs", LineNumber = 1, Type = IssueType.Primary, Message = "Msg1", IssueId = "id1", Start = 2, Length = 4 }).Should().BeFalse();
-        orig.Equals(new IssueLocation { RuleId = "Sxxxx", FilePath = "Diff.cs", LineNumber = 1, Type = IssueType.Primary, Message = "Msg1", IssueId = "id1", Start = 2, Length = 4 }).Should().BeFalse();
-        orig.Equals(new IssueLocation { RuleId = "Sxxxx", FilePath = "File.cs", LineNumber = 9, Type = IssueType.Primary, Message = "Msg1", IssueId = "id1", Start = 2, Length = 4 }).Should().BeFalse();
-        orig.Equals(new IssueLocation { RuleId = "Sxxxx", FilePath = "File.cs", LineNumber = 1, Type = IssueType.Secondary, Message = "Msg1", IssueId = "id1", Start = 2, Length = 4 }).Should().BeFalse();
-        orig.Equals(new IssueLocation { RuleId = "Sxxxx", FilePath = "File.cs", LineNumber = 1, Type = IssueType.Primary, Message = "Xxxx", IssueId = "id1", Start = 2, Length = 4 }).Should().BeFalse();
-        orig.Equals(new IssueLocation { RuleId = "Sxxxx", FilePath = "File.cs", LineNumber = 1, Type = IssueType.Primary, Message = "Msg1", IssueId = "id1", Start = 9, Length = 4 }).Should().BeFalse();
-        orig.Equals(new IssueLocation { RuleId = "Sxxxx", FilePath = "File.cs", LineNumber = 1, Type = IssueType.Primary, Message = "Msg1", IssueId = "id1", Start = 2, Length = 9 }).Should().BeFalse();
+        orig.Equals(new IssueLocation(IssueType.Secondary, "File.cs", 1, "Msg1", "id1", 2, 4, "Sxxxx")).Should().BeFalse();
+        orig.Equals(new IssueLocation(IssueType.Primary, "Diff.cs", 1, "Msg1", "id1", 2, 4, "Sxxxx")).Should().BeFalse();
+        orig.Equals(new IssueLocation(IssueType.Primary, "File.cs", 9, "Msg1", "id1", 2, 4, "Sxxxx")).Should().BeFalse();
+        orig.Equals(new IssueLocation(IssueType.Primary, "File.cs", 1, "Xxxx", "id1", 2, 4, "Sxxxx")).Should().BeFalse();
+        orig.Equals(new IssueLocation(IssueType.Primary, "File.cs", 1, "Msg1", "id1", 9, 4, "Sxxxx")).Should().BeFalse();
+        orig.Equals(new IssueLocation(IssueType.Primary, "File.cs", 1, "Msg1", "id1", 2, 9, "Sxxxx")).Should().BeFalse();
+        orig.Equals(new IssueLocation(IssueType.Primary, "File.cs", 1, "Msg1", "id1", 2, 4, "Syyyy")).Should().BeFalse();
         // Special case, IssueId is not checked for IsPrimary issues
-        orig.Equals(new IssueLocation { RuleId = "Sxxxx", FilePath = "File.cs", LineNumber = 1, Type = IssueType.Primary, Message = "Msg1", IssueId = "xxxx", Start = 2, Length = 4 }).Should().BeTrue();
-        orig.Equals(new IssueLocation { RuleId = "Sxxxx", FilePath = "File.cs", LineNumber = 1, Type = IssueType.Secondary, Message = "Msg1", IssueId = "xxx", Start = 2, Length = 4 }).Should().BeFalse();
+        orig.Equals(new IssueLocation(IssueType.Primary, "File.cs", 1, "Msg1", "xxxx", 2, 4, "Sxxxx")).Should().BeTrue();
+        orig.Equals(new IssueLocation(IssueType.Secondary, "File.cs", 1, "Msg1", "xxxx", 2, 4, "Sxxxx")).Should().BeFalse();
     }
 
     [TestMethod]
     public void IssueLocation_Equals_IgnoreNull_RuleId()
     {
-        var hasValue = new IssueLocation { RuleId = "Sxxxx", FilePath = "File.cs", LineNumber = 1, Type = IssueType.Primary, Message = "Msg1", IssueId = "id1", Start = 2, Length = 4 };
-        var withNull = new IssueLocation { RuleId = "Sxxxx", FilePath = "File.cs", LineNumber = 1, Type = IssueType.Primary, Message = "Msg1", IssueId = "id1", Start = 2, Length = 4 };
+        var hasValue = new IssueLocation(IssueType.Primary, "File.cs", 1, "Msg1", "id1", 2, 4, "Sxxxx");
+        var withNull = new IssueLocation(IssueType.Primary, "File.cs", 1, "Msg1", "id1", 2, 4, "Sxxxx");
         hasValue.Equals(withNull).Should().BeTrue();
         withNull.Equals(hasValue).Should().BeTrue();
         withNull.Equals(withNull).Should().BeTrue();
@@ -115,26 +115,26 @@ public class IssueLocationTest
     [TestMethod]
     public void IssueLocation_Equals_IgnoreNull_Message() =>
         ValidateEqualsIgnoreNull(
-            new IssueLocation { RuleId = "Sxxxx", FilePath = "File.cs", LineNumber = 1, Type = IssueType.Primary, Message = "M1", IssueId = "id1", Start = 2, Length = 4 },
-            new IssueLocation { RuleId = "Sxxxx", FilePath = "File.cs", LineNumber = 1, Type = IssueType.Primary, Message = null, IssueId = "id1", Start = 2, Length = 4 });
+            new IssueLocation(IssueType.Primary, "File.cs", 1, "M1", "id1", 2, 4, "Sxxxx"),
+            new IssueLocation(IssueType.Primary, "File.cs", 1, null, "id1", 2, 4, "Sxxxx"));
 
     [TestMethod]
     public void IssueLocation_Equals_IgnoreNull_IssueId() =>
         ValidateEqualsIgnoreNull(
-            new IssueLocation { RuleId = "Sxxxx", FilePath = "File.cs", LineNumber = 1, Type = IssueType.Primary, Message = "M1", IssueId = "i1", Start = 2, Length = 4 },
-            new IssueLocation { RuleId = "Sxxxx", FilePath = "File.cs", LineNumber = 1, Type = IssueType.Primary, Message = "M1", IssueId = null, Start = 2, Length = 4 });
+            new IssueLocation(IssueType.Primary, "File.cs", 1, "M1", "i1", 2, 4, "Sxxxx"),
+            new IssueLocation(IssueType.Primary, "File.cs", 1, "M1", null, 2, 4, "Sxxxx"));
 
     [TestMethod]
     public void IssueLocation_Equals_IgnoreNull_Start() =>
         ValidateEqualsIgnoreNull(
-            new IssueLocation { RuleId = "Sxxxx", FilePath = "File.cs", LineNumber = 1, Type = IssueType.Primary, Message = "M1", IssueId = "id1", Start = 2, Length = 4 },
-            new IssueLocation { RuleId = "Sxxxx", FilePath = "File.cs", LineNumber = 1, Type = IssueType.Primary, Message = "M1", IssueId = "id1", Start = null, Length = 4 });
+            new IssueLocation(IssueType.Primary, "File.cs", 1, "M1", "id1", 2, 4, "Sxxxx"),
+            new IssueLocation(IssueType.Primary, "File.cs", 1, "M1", "id1", null, 4, "Sxxxx"));
 
     [TestMethod]
     public void IssueLocation__Equals_IgnoreNull_Length() =>
         ValidateEqualsIgnoreNull(
-            new IssueLocation { RuleId = "Sxxxx", FilePath = "File.cs", LineNumber = 1, Type = IssueType.Primary, Message = "M1", IssueId = "id1", Start = 2, Length = 4 },
-            new IssueLocation { RuleId = "Sxxxx", FilePath = "File.cs", LineNumber = 1, Type = IssueType.Primary, Message = "M1", IssueId = "id1", Start = 2, Length = null });
+            new IssueLocation(IssueType.Primary, "File.cs", 1, "M1", "id1", 2, 4, "Sxxxx"),
+            new IssueLocation(IssueType.Primary, "File.cs", 1, "M1", "id1", 2, null, "Sxxxx"));
 
     [TestMethod]
     public void IssueLocationKey_CreatedFromIssue()
@@ -147,23 +147,23 @@ public class IssueLocationTest
 
     [TestMethod]
     public void IssueLocationKey_IsMatch_MatchesSameKey() =>
-        new IssueLocationKey("File.cs", 42, IssueType.Primary).IsMatch(Issue).Should().BeTrue();
+        new IssueLocationKey(IssueType.Primary, "File.cs", 42).IsMatch(Issue).Should().BeTrue();
 
     [TestMethod]
     public void IssueLocationKey_IsMatch_ProjectLevelMatchesAnyPath() =>
-        new IssueLocationKey(string.Empty, 42, IssueType.Primary).IsMatch(Issue).Should().BeTrue();
+        new IssueLocationKey(IssueType.Primary, string.Empty, 42).IsMatch(Issue).Should().BeTrue();
 
     [TestMethod]
     public void IssueLocationKey_IsMatch_DifferentFilePath() =>
-        new IssueLocationKey("Another.cs", 42, IssueType.Primary).IsMatch(Issue).Should().BeFalse();
+        new IssueLocationKey(IssueType.Primary, "Another.cs", 42).IsMatch(Issue).Should().BeFalse();
 
     [TestMethod]
     public void IssueLocationKey_IsMatch_DifferentLineNumber() =>
-        new IssueLocationKey("File.cs", 1024, IssueType.Primary).IsMatch(Issue).Should().BeFalse();
+        new IssueLocationKey(IssueType.Primary, "File.cs", 1024).IsMatch(Issue).Should().BeFalse();
 
     [TestMethod]
     public void IssueLocationKey_IsMatch_DifferentIsPrimary() =>
-        new IssueLocationKey("File.cs", 42, IssueType.Secondary).IsMatch(Issue).Should().BeFalse();
+        new IssueLocationKey(IssueType.Secondary, "File.cs", 42).IsMatch(Issue).Should().BeFalse();
 
     private static void ValidateEqualsIgnoreNull(IssueLocation hasValue, IssueLocation withNull)
     {
