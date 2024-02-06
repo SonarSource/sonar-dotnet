@@ -40,6 +40,8 @@ namespace SonarAnalyzer.Test
 
             var vbVersions = ParseOptionsHelper.Default(LanguageNames.VisualBasic).Cast<VisualBasicParseOptions>().Select(x => x.LanguageVersion.ToDisplayString());
             Console.WriteLine(@"VB.Net versions used for analysis: " + string.Join(", ", vbVersions));
+
+            throw new Exception("BUILD_REASON: " + TestContextHelper.BuildReason());
         }
 
         private static void ConfigureFluentValidation()
