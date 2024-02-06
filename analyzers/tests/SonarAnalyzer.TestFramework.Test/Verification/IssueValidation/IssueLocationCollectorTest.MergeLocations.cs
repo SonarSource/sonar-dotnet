@@ -32,8 +32,8 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
         public void MergeLocations_IssuesSameLine()
         {
             var result = IssueLocationCollector.MergeLocations(
-                new[] { new IssueLocation { FilePath = "File.cs", LineNumber = 3, Message = "message 1" } },
-                new[] { new IssueLocation { FilePath = "File.cs", LineNumber = 3, Start = 10, Length = 5, Message = "message 2" } }.ToList());
+                [new(IssueType.Primary, "File.cs", 3, "message 1", null, null, null)],
+                [new(IssueType.Primary, "File.cs", 3, "message 2", null, 10, 5)]);
 
             result.Should().ContainSingle();
 
@@ -47,15 +47,15 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
         [TestMethod]
         public void MergeLocations_DifferentIssues_SameSecondaryLocations()
         {
-            var primary = new[]
+            var primary = new IssueLocation[]
             {
-                new IssueLocation { FilePath = "File.cs", LineNumber = 1, Type = IssueType.Primary, Message = "Primary 1" },
-                new IssueLocation { FilePath = "File.cs", LineNumber = 2, Type = IssueType.Primary, Message = "Primary 2" }
+                new(IssueType.Primary, "File.cs", 1, "Primary 1", null, null, null),
+                new(IssueType.Primary, "File.cs", 2, "Primary 2", null, null, null)
             };
             var preciseSecondary = new List<IssueLocation>
             {
-                new() { FilePath = "File.cs", LineNumber = 3, Type = IssueType.Secondary, Message = "Secondary with same message and location", Start = 10, Length = 5 },
-                new() { FilePath = "File.cs", LineNumber = 3, Type = IssueType.Secondary, Message = "Secondary with same message and location", Start = 10, Length = 5 }
+                new(IssueType.Secondary, "File.cs", 3, "Secondary with same message and location", null, 10, 5),
+                new(IssueType.Secondary, "File.cs", 3, "Secondary with same message and location", null, 10, 5)
             };
             IssueLocationCollector.MergeLocations(primary, preciseSecondary).Should().BeEquivalentTo(primary.Concat(preciseSecondary));
         }
@@ -64,8 +64,8 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
         public void MergeLocations_IssuesDifferentLines()
         {
             var result = IssueLocationCollector.MergeLocations(
-                new[] { new IssueLocation { FilePath = "File.cs", LineNumber = 3, Message = "message 1" } },
-                new[] { new IssueLocation { FilePath = "File.cs", LineNumber = 10, Start = 10, Length = 5, Message = "message 2" } }.ToList());
+                [new(IssueType.Primary, "File.cs", 3, "message 1", null, null, null)],
+                [new(IssueType.Primary, "File.cs", 10, "message 2", null, 10, 5)]);
 
             result.Should().HaveCount(2);
 
@@ -82,22 +82,20 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
         public void MergeLocations_MoreThanOnePreciseLocationForSameIssue()
         {
             Action action = () => IssueLocationCollector.MergeLocations(
-                new[] { new IssueLocation { LineNumber = 3 } },
-                new List<IssueLocation>
-                {
-                    new() { LineNumber = 3 },
-                    new() { LineNumber = 3 }
-                });
-
+                [new(IssueType.Primary, "File.cs", 3, "Message", null, null, null)],
+                [
+                    new(IssueType.Primary, "File.cs", 3, "Message", null, null, null),
+                    new(IssueType.Primary, "File.cs", 3, "Message", null, null, null)
+                ]);
             action.Should().Throw<InvalidOperationException>();
         }
 
         [TestMethod]
         public void MergeLocations_EmptyIssues_NonEmptyPreciseLocations() =>
-            IssueLocationCollector.MergeLocations(Array.Empty<IssueLocation>(), new List<IssueLocation> { new IssueLocation { FilePath = "File.cs", LineNumber = 3 } }).Should().ContainSingle();
+            IssueLocationCollector.MergeLocations([], [new(IssueType.Primary, "File.cs", 3, "Message", null, null, null)]).Should().ContainSingle();
 
         [TestMethod]
         public void MergeLocations_NonEmptyIssues_EmptyPreciseLocations() =>
-            IssueLocationCollector.MergeLocations(new[] { new IssueLocation { LineNumber = 3 } }, new List<IssueLocation>()).Should().ContainSingle();
+            IssueLocationCollector.MergeLocations([new(IssueType.Primary, "File.cs", 3, "Message", null, null, null)], []).Should().ContainSingle();
     }
 }

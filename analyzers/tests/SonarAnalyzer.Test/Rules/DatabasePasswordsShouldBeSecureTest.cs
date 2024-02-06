@@ -70,11 +70,13 @@ namespace SonarAnalyzer.Test.Rules
         public void DatabasePasswordsShouldBeSecure_CS_WebConfig(string root)
         {
             var webConfigPath = GetWebConfigPath(root);
-            DiagnosticVerifier.VerifyExternalFile(
+            DiagnosticVerifier.Verify(
                 CreateCompilation(),
                 new DatabasePasswordsShouldBeSecure(),
-                webConfigPath,
-                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath));
+                CompilationErrorBehavior.FailTest,
+                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath),
+                null,
+                [webConfigPath]);
         }
 
         [TestMethod]
@@ -83,11 +85,13 @@ namespace SonarAnalyzer.Test.Rules
             var root = @"TestCases\WebConfig\DatabasePasswordsShouldBeSecure\ExternalConfig";
             var webConfigPath = GetWebConfigPath(root);
             var externalConfigPath = Path.Combine(root, "external.config");
-            DiagnosticVerifier.VerifyExternalFile(
+            DiagnosticVerifier.Verify(
                 CreateCompilation(),
                 new DatabasePasswordsShouldBeSecure(),
-                webConfigPath,
-                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath, externalConfigPath));
+                CompilationErrorBehavior.FailTest,
+                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath, externalConfigPath),
+                null,
+                [webConfigPath]);
         }
 
         [TestMethod]
@@ -97,11 +101,13 @@ namespace SonarAnalyzer.Test.Rules
             var missingDirectory = @"TestCases\WebConfig\DatabasePasswordsShouldBeSecure\NonExistingDirectory";
             var corruptFilePath = GetWebConfigPath(root);
             var nonExistingFilePath = GetWebConfigPath(missingDirectory);
-            DiagnosticVerifier.VerifyExternalFile(
+            DiagnosticVerifier.Verify(
                 CreateCompilation(),
                 new DatabasePasswordsShouldBeSecure(),
-                corruptFilePath,
-                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, corruptFilePath, nonExistingFilePath));
+                CompilationErrorBehavior.FailTest,
+                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, corruptFilePath, nonExistingFilePath),
+                null,
+                [corruptFilePath]);
         }
 
         [DataTestMethod]
@@ -117,11 +123,13 @@ namespace SonarAnalyzer.Test.Rules
         public void DatabasePasswordsShouldBeSecure_CS_AppSettings(string root)
         {
             var appSettingsPath = GetAppSettingsPath(root);
-            DiagnosticVerifier.VerifyExternalFile(
+            DiagnosticVerifier.Verify(
                 CreateCompilation(),
                 new DatabasePasswordsShouldBeSecure(),
-                appSettingsPath,
-                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, appSettingsPath));
+                CompilationErrorBehavior.FailTest,
+                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, appSettingsPath),
+                null,
+                [appSettingsPath]);
         }
 
         [TestMethod]
@@ -131,11 +139,13 @@ namespace SonarAnalyzer.Test.Rules
             var missingDirectory = @"TestCases\AppSettings\DatabasePasswordsShouldBeSecure\NonExistingDirectory";
             var corruptFilePath = GetAppSettingsPath(root);
             var nonExistingFilePath = GetAppSettingsPath(missingDirectory);
-            DiagnosticVerifier.VerifyExternalFile(
+            DiagnosticVerifier.Verify(
                 CreateCompilation(),
                 new DatabasePasswordsShouldBeSecure(),
-                corruptFilePath,
-                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, corruptFilePath, nonExistingFilePath));
+                CompilationErrorBehavior.FailTest,
+                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, corruptFilePath, nonExistingFilePath),
+                null,
+                [corruptFilePath]);
         }
 
         private static string GetWebConfigPath(string rootFolder) => Path.Combine(rootFolder, "Web.config");

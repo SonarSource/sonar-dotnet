@@ -26,13 +26,13 @@ namespace SonarAnalyzer.TestFramework.Test.Verification.IssueValidation;
 [TestClass]
 public class IssueLocationPairTest
 {
-    private static readonly IssueLocation ActualPrimary = new() { FilePath = "File.cs", RuleId = "S1234", LineNumber = 42, Type = IssueType.Primary, Message = "Lorem ipsum", Start = 42, Length = 10 };
-    private static readonly IssueLocation ActualSecondary = new() { FilePath = "File.cs", RuleId = "S1234", LineNumber = 42, Type = IssueType.Secondary, Message = "Lorem ipsum", Start = 42, Length = 10, IssueId = "Flag1" };
+    private static readonly IssueLocation ActualPrimary = new(IssueType.Primary, "File.cs", 42, "Lorem ipsum", null, 42, 10, "S1234");
+    private static readonly IssueLocation ActualSecondary = new(IssueType.Secondary, "File.cs", 42, "Lorem ipsum", "Flag1", 42, 10, "S1234");
 
     [TestMethod]
     public void AppendAssertionMessage_DifferentKeys()
     {
-        var sut = new IssueLocationPair(new IssueLocation() { FilePath = "SomeFile.cs" }, new IssueLocation() { FilePath = "AnotherFile.cs" });
+        var sut = new IssueLocationPair(new(IssueType.Primary, "SomeFile.cs", 1, "Message", null, null, null), new(IssueType.Primary, "AnotherFile.cs", 1, "Message", null, null, null));
         sut.Invoking(x => x.AppendAssertionMessage(new())).Should().Throw<InvalidOperationException>();
     }
 
@@ -42,7 +42,7 @@ public class IssueLocationPairTest
 
     [TestMethod]
     public void AppendAssertionMessage_MissingIssue_NoMessage() =>
-        AssertionMessage(null, new() { FilePath = "File.cs", LineNumber = 42, Type = IssueType.Primary }).Should().Be("  Line 42: Missing expected issue");
+        AssertionMessage(null, new(IssueType.Primary, "File.cs", 42, null, null, null, null)).Should().Be("  Line 42: Missing expected issue");
 
     [TestMethod]
     public void AppendAssertionMessage_MissingIssue_WithExpectedMessage() =>
@@ -54,34 +54,34 @@ public class IssueLocationPairTest
 
     [TestMethod]
     public void AppendAssertionMessage_SecondaryText() =>
-        AssertionMessage(new IssueLocation { FilePath = "File.cs", RuleId = "S1234", LineNumber = 42, Type = IssueType.Secondary, Message = "Lorem ipsum" }, null)
+        AssertionMessage(new(IssueType.Secondary, "File.cs", 42, "Lorem ipsum", null, null, null, "S1234"), null)
             .Should().Be("  Line 42 Secondary location: Unexpected issue 'Lorem ipsum' Rule S1234");
 
     [TestMethod]
     public void AppendAssertionMessage_WrongMessage()
     {
-        var expected = new IssueLocation { FilePath = "File.cs", LineNumber = 42, Type = IssueType.Secondary, Message = "Dolor sit", Start = 2, Length = 2, IssueId = "Flag1" };
+        var expected = new IssueLocation(IssueType.Secondary, "File.cs", 42, "Dolor sit", "Flag1", 2, 2);
         AssertionMessage(ActualSecondary, expected).Should().Be("  Line 42 Secondary location: The expected message 'Dolor sit' does not match the actual message 'Lorem ipsum' Rule S1234 ID Flag1");
     }
 
     [TestMethod]
     public void AppendAssertionMessage_WrongStartLocation()
     {
-        var expected = new IssueLocation { FilePath = "File.cs", LineNumber = 42, Type = IssueType.Secondary, Message = "Lorem ipsum", Start = 2, Length = 2, IssueId = "Flag1" };
+        var expected = new IssueLocation(IssueType.Secondary, "File.cs", 42, "Lorem ipsum", "Flag1", 2, 2);
         AssertionMessage(ActualSecondary, expected).Should().Be("  Line 42 Secondary location: Should start on column 2 but got column 42 Rule S1234 ID Flag1");
     }
 
     [TestMethod]
     public void AppendAssertionMessage_WrongLength()
     {
-        var expected = new IssueLocation { FilePath = "File.cs", LineNumber = 42, Type = IssueType.Secondary, Message = "Lorem ipsum", Start = 42, Length = 2, IssueId = "Flag1" };
+        var expected = new IssueLocation(IssueType.Secondary, "File.cs", 42, "Lorem ipsum", "Flag1", 42, 2);
         AssertionMessage(ActualSecondary, expected).Should().Be("  Line 42 Secondary location: Should have a length of 2 but got a length of 10 Rule S1234 ID Flag1");
     }
 
     [TestMethod]
     public void AppendAssertionMessage_WrongIssueId()
     {
-        var expected = new IssueLocation { FilePath = "File.cs", LineNumber = 42, Type = IssueType.Secondary, Message = "Lorem ipsum", Start = 42, Length = 10, IssueId = "DifferentId" };
+        var expected = new IssueLocation(IssueType.Secondary, "File.cs", 42, "Lorem ipsum", "DifferentId", 42, 10);
         AssertionMessage(ActualSecondary, expected).Should().Be("  Line 42 Secondary location: The expected issueId 'DifferentId' does not match the actual issueId 'Flag1' Rule S1234 ID Flag1");
     }
 

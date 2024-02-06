@@ -99,11 +99,13 @@ namespace SonarAnalyzer.Test.Rules
         public void RequestsWithExcessiveLength_CS_WebConfig(string root)
         {
             var webConfigPath = GetWebConfigPath(root);
-            DiagnosticVerifier.VerifyExternalFile(
+            DiagnosticVerifier.Verify(
                 CreateCompilation(),
                 new CS.RequestsWithExcessiveLength(),
-                webConfigPath,
-                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath));
+                CompilationErrorBehavior.FailTest,
+                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath),
+                null,
+                [webConfigPath]);
         }
 
         [TestMethod]
@@ -111,11 +113,13 @@ namespace SonarAnalyzer.Test.Rules
         public void RequestsWithExcessiveLength_CS_WebConfig_CustomParameterValue()
         {
             var webConfigPath = GetWebConfigPath(@"TestCases\WebConfig\RequestsWithExcessiveLength\Values\ContentLength_Compliant"); // 83886080
-            DiagnosticVerifier.VerifyExternalFile(
+            DiagnosticVerifier.Verify(
                 CreateCompilation(),
                 new CS.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled) { FileUploadSizeLimit = 83_8860_800 },
-                webConfigPath,
-                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath));
+                CompilationErrorBehavior.FailTest,
+                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath),
+                null,
+                [webConfigPath]);
         }
 
         [TestMethod]
@@ -125,11 +129,13 @@ namespace SonarAnalyzer.Test.Rules
             const string missingDirectory = @"TestCases\WebConfig\RequestsWithExcessiveLength\NonExistingDirectory";
             var corruptFilePath = GetWebConfigPath(root);
             var nonExistingFilePath = GetWebConfigPath(missingDirectory);
-            DiagnosticVerifier.VerifyExternalFile(
+            DiagnosticVerifier.Verify(
                 CreateCompilation(),
                 new CS.RequestsWithExcessiveLength(),
-                corruptFilePath,
-                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, corruptFilePath, nonExistingFilePath));
+                CompilationErrorBehavior.FailTest,
+                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, corruptFilePath, nonExistingFilePath),
+                null,
+                [corruptFilePath]);
         }
 
         private static string GetWebConfigPath(string rootFolder) => Path.Combine(rootFolder, "Web.config");

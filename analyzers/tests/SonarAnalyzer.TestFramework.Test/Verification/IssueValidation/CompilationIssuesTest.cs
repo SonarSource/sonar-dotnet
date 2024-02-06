@@ -29,12 +29,12 @@ public class CompilationIssuesTest
     public void UniqueKeys() =>
         CreateSut().UniqueKeys().Should().BeEquivalentTo(new IssueLocationKey[]
         {
-            new("First.cs", 11, IssueType.Primary),
-            new("First.cs", 11, IssueType.Secondary),
-            new("First.cs", 11, IssueType.Error),
-            new("First.cs", 99, IssueType.Primary),
-            new("Second.cs", 11, IssueType.Primary),
-            new("Third.cs", 1, IssueType.Secondary)
+            new(IssueType.Primary, "First.cs", 11),
+            new(IssueType.Secondary, "First.cs", 11),
+            new(IssueType.Error, "First.cs", 11),
+            new(IssueType.Primary, "First.cs", 99),
+            new(IssueType.Primary, "Second.cs", 11),
+            new(IssueType.Secondary, "Third.cs", 1)
         });
 
     [TestMethod]
@@ -52,7 +52,7 @@ public class CompilationIssuesTest
     {
         var sut = CreateSut();
         sut.Should().HaveCount(14);
-        sut.Remove(new("ThisKeyIsNotPresent.cs", 11, IssueType.Primary)).Should().BeEmpty();
+        sut.Remove(new(IssueType.Primary, "ThisKeyIsNotPresent.cs", 11)).Should().BeEmpty();
         sut.Should().HaveCount(14);
     }
 
@@ -61,7 +61,7 @@ public class CompilationIssuesTest
     {
         var sut = CreateSut();
         sut.Should().HaveCount(14);
-        sut.Remove(new("Second.cs", 11, IssueType.Primary)).Should().HaveCount(5);
+        sut.Remove(new(IssueType.Primary, "Second.cs", 11)).Should().HaveCount(5);
         sut.Should().HaveCount(9);
     }
 
@@ -70,7 +70,7 @@ public class CompilationIssuesTest
     {
         var sut = CreateSut();
         sut.Should().HaveCount(14);
-        sut.Remove(new("Third.cs", 1, IssueType.Secondary)).Should().HaveCount(3);
+        sut.Remove(new(IssueType.Secondary, "Third.cs", 1)).Should().HaveCount(3);
         sut.Should().HaveCount(11);
     }
 
@@ -99,19 +99,19 @@ public class CompilationIssuesTest
     private static CompilationIssues CreateSut() =>
         new("C# 99", new IssueLocation[]
         {
-            new() { RuleId = "S1111", FilePath = "First.cs", LineNumber = 11, Type = IssueType.Primary, Start = 1, Length = 10, Message = "Lorem ipsum" },
-            new() { RuleId = "S1111", FilePath = "First.cs", LineNumber = 11, Type = IssueType.Primary, Start = 9, Length = 10, Message = "Lorem ipsum" },
-            new() { RuleId = "S2222", FilePath = "First.cs", LineNumber = 99, Type = IssueType.Primary, Start = 1, Length = 10, Message = "Lorem 2222 ipsum" },
-            new() { RuleId = "S2222", FilePath = "First.cs", LineNumber = 11, Type = IssueType.Primary, Start = 1, Length = 10, Message = "Lorem 2222 ipsum" },
-            new() { RuleId = "S2222", FilePath = "First.cs", LineNumber = 11, Type = IssueType.Secondary, Start = 1, Length = 10, Message = "Lorem 2222 ipsum" },
-            new() { RuleId = "CS000", FilePath = "First.cs", LineNumber = 11, Type = IssueType.Error, Start = 1, Length = 10, Message = "Compilation error" },
-            new() { RuleId = "S2222", FilePath = "Second.cs", LineNumber = 11, Type = IssueType.Primary, Start = 1, Length = 11, Message = "Lorem 2222 ipsum" },
-            new() { RuleId = "S2222", FilePath = "Second.cs", LineNumber = 11, Type = IssueType.Primary, Start = 2, Length = 12, Message = "Lorem 2222 ipsum" },
-            new() { RuleId = "S2222", FilePath = "Second.cs", LineNumber = 11, Type = IssueType.Primary, Start = 3, Length = 13, Message = "Lorem 2222 ipsum" },
-            new() { RuleId = "S2222", FilePath = "Second.cs", LineNumber = 11, Type = IssueType.Primary, Start = 4, Length = 14, Message = "Lorem 2222 ipsum" },
-            new() { RuleId = "S2222", FilePath = "Second.cs", LineNumber = 11, Type = IssueType.Primary, Start = 5, Length = 15, Message = "Lorem 2222 ipsum" },
-            new() { RuleId = "S3333", FilePath = "Third.cs", LineNumber = 1, Type = IssueType.Secondary, Start = 1, Length = 10, Message = "Multiple identical secondaries" },
-            new() { RuleId = "S3333", FilePath = "Third.cs", LineNumber = 1, Type = IssueType.Secondary, Start = 1, Length = 10, Message = "Multiple identical secondaries" },
-            new() { RuleId = "S3333", FilePath = "Third.cs", LineNumber = 1, Type = IssueType.Secondary, Start = 1, Length = 10, Message = "Multiple identical secondaries" }
+            new(IssueType.Primary, "First.cs", 11, "Lorem ipsum", null, 1, 10, "S1111"),
+            new(IssueType.Primary, "First.cs", 11, "Lorem ipsum", null, 9, 10, "S1111"),
+            new(IssueType.Primary, "First.cs", 99, "Lorem 2222 ipsum", null, 1, 10, "S2222"),
+            new(IssueType.Primary, "First.cs", 11, "Lorem 2222 ipsum", null, 1, 10, "S2222"),
+            new(IssueType.Secondary, "First.cs", 11, "Lorem 2222 ipsum", null, 1, 10, "S2222"),
+            new(IssueType.Error, "First.cs", 11, "Compilation error", null, 1, 10, "CS000"),
+            new(IssueType.Primary, "Second.cs", 11, "Lorem 2222 ipsum", null, 1, 11, "S2222"),
+            new(IssueType.Primary, "Second.cs", 11, "Lorem 2222 ipsum", null, 2, 12,  "S2222"),
+            new(IssueType.Primary, "Second.cs", 11, "Lorem 2222 ipsum", null, 3, 13,  "S2222"),
+            new(IssueType.Primary, "Second.cs", 11, "Lorem 2222 ipsum", null, 4, 14,  "S2222"),
+            new(IssueType.Primary, "Second.cs", 11, "Lorem 2222 ipsum", null, 5, 15,  "S2222"),
+            new(IssueType.Secondary, "Third.cs", 1, "Identical secondaries", null, 1, 10,  "S3333"),
+            new(IssueType.Secondary, "Third.cs", 1, "Identical secondaries", null, 1, 10,  "S3333"),
+            new(IssueType.Secondary, "Third.cs", 1, "Identical secondaries", null, 1, 10,  "S3333")
         });
 }
