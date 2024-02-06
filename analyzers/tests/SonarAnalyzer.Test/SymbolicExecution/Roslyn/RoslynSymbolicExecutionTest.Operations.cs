@@ -562,7 +562,7 @@ Tag(""S"", s);";
         Verify("valueType", ObjectConstraint.NotNull); // This is questionable, value types should not have ObjectConstraint
         Verify("obj", ObjectConstraint.NotNull);
         Verify("collection1", ObjectConstraint.NotNull); // The CollectionConstraint here is deleted when collection1 is used as an argument
-        Verify("collection2", ObjectConstraint.NotNull, CollectionConstraint.Empty);
+        Verify("collection2", ObjectConstraint.NotNull, CollectionConstraint.NotEmpty);
 
         void Verify(string symbol, params SymbolicConstraint[] constraints) =>
             validator.TagValue("tag", symbol).Should().HaveOnlyConstraints(constraints);

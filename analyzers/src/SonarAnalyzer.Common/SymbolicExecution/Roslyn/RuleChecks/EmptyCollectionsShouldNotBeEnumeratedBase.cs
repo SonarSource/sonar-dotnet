@@ -21,7 +21,6 @@
 using System.Collections;
 using System.Collections.ObjectModel;
 using SonarAnalyzer.SymbolicExecution.Constraints;
-using SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
 
@@ -87,11 +86,6 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
     private readonly HashSet<IOperation> emptyAccess = new();
     private readonly HashSet<IOperation> nonEmptyAccess = new();
 
-    protected override ProgramState PreProcessSimple(SymbolicContext context) =>
-        context.Operation.Instance.AsInvocation() is { } invocation
-            ? ProcessInvocation(context, invocation)
-            : context.State;
-
     public override void ExecutionCompleted()
     {
         foreach (var operation in emptyAccess.Except(nonEmptyAccess))
@@ -100,82 +94,24 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         }
     }
 
+    protected override ProgramState PreProcessSimple(SymbolicContext context) =>
+        context.Operation.Instance.AsInvocation() is { } invocation
+            ? ProcessInvocation(context, invocation)
+            : context.State;
+
     private ProgramState ProcessInvocation(SymbolicContext context, IInvocationOperationWrapper invocation)
     {
-        var targetMethod = invocation.TargetMethod;
-        if (targetMethod.Is(KnownType.System_Linq_Enumerable, nameof(Enumerable.Count))
-            && SizeConstraint(context.State, invocation.Instance ?? invocation.Arguments[0].ToArgument().Value, HasFilteringPredicate()) is { } constraint)
+        if (invocation.Instance is { } instance && RaisingMethods.Contains(invocation.TargetMethod.Name))
         {
-            return context.SetOperationConstraint(constraint);
-        }
-        else if (invocation.Instance is { } instance)
-        {
-            if (RaisingMethods.Contains(targetMethod.Name))
+            if (context.State[instance]?.HasConstraint(CollectionConstraint.Empty) is true)
             {
-                if (context.State[instance]?.HasConstraint(CollectionConstraint.Empty) is true)
-                {
-                    emptyAccess.Add(context.Operation.Instance);
-                }
-                else
-                {
-                    nonEmptyAccess.Add(context.Operation.Instance);
-                }
+                emptyAccess.Add(context.Operation.Instance);
             }
-            if (instance.Type.DerivesOrImplementsAny(CollectionTracker.CollectionTypes))
+            else
             {
-                return ProcessAddMethod(context.State, targetMethod, instance)
-                    ?? ProcessRemoveMethod(context.State, targetMethod, instance)
-                    ?? ProcessClearMethod(context.State, targetMethod, instance)
-                    ?? context.State;
+                nonEmptyAccess.Add(context.Operation.Instance);
             }
         }
         return context.State;
-
-        bool HasFilteringPredicate() =>
-            invocation.Arguments.Any(x => x.ToArgument().Parameter.Type.Is(KnownType.System_Func_T_TResult));
-    }
-
-    private static ProgramState ProcessAddMethod(ProgramState state, IMethodSymbol method, IOperation instance) =>
-        CollectionTracker.AddMethods.Contains(method.Name)
-            ? SetOperationAndSymbolConstraint(state, instance, CollectionConstraint.NotEmpty)
-            : null;
-
-    private static ProgramState ProcessRemoveMethod(ProgramState state, IMethodSymbol method, IOperation instance) =>
-        CollectionTracker.RemoveMethods.Contains(method.Name)
-            ? SetOperationAndSymbolValue(state, instance, (state[instance] ?? SymbolicValue.Empty).WithoutConstraint(CollectionConstraint.NotEmpty))
-            : null;
-
-    private static ProgramState ProcessClearMethod(ProgramState state, IMethodSymbol method, IOperation instance) =>
-        method.Name == nameof(ICollection<int>.Clear)
-            ? SetOperationAndSymbolConstraint(state, instance, CollectionConstraint.Empty)
-            : null;
-
-    private static ProgramState SetOperationAndSymbolConstraint(ProgramState state, IOperation instance, SymbolicConstraint constraint) =>
-        SetOperationAndSymbolValue(state, instance, (state[instance] ?? SymbolicValue.Empty).WithConstraint(constraint));
-
-    private static ProgramState SetOperationAndSymbolValue(ProgramState state, IOperation instance, SymbolicValue value)
-    {
-        state = state.SetOperationValue(instance, value);
-        if (instance.TrackedSymbol(state) is { } symbol)
-        {
-            state = state.SetSymbolValue(symbol, value);
-        }
-        return state;
-    }
-
-    private static NumberConstraint SizeConstraint(ProgramState state, IOperation instance, bool hasFilteringPredicate = false)
-    {
-        if (instance.TrackedSymbol(state) is { } symbol && state[symbol]?.Constraint<CollectionConstraint>() is { } collection)
-        {
-            if (collection == CollectionConstraint.Empty)
-            {
-                return NumberConstraint.From(0);
-            }
-            else if (!hasFilteringPredicate)    // nonEmpty.Count(predicate) can be Empty or NotEmpty
-            {
-                return NumberConstraint.From(1, null);
-            }
-        }
-        return instance.Type.DerivesOrImplementsAny(CollectionTracker.CollectionTypes) ? NumberConstraint.From(0, null) : null;
     }
 }

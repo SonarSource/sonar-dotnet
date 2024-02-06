@@ -3085,6 +3085,28 @@ namespace Tests.Diagnostics
         }
     }
 
+    public class CollectionsCount
+    {
+        public void Method(List<int> list)
+        {
+            if (list.Count() == 0) // Compliant
+            { }
+
+            list.Clear();
+
+            if (list.Count() == 0) // Noncompliant
+            { }
+
+            list.Add(42);
+            if (list.Count() >= 1) // Noncompliant
+            { }
+
+            if (list.Count(Condition) == 1) // Compliant, we don't know how many elements satisfy the condition
+            { }
+        }
+
+        private bool Condition(int x) => true;
+    }
 }
 
 // https://github.com/SonarSource/sonar-dotnet/issues/3565
