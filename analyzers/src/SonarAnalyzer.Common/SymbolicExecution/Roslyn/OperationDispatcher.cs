@@ -37,7 +37,7 @@ internal static class OperationDispatcher
     private static readonly Dictionary<OperationKind, ISimpleProcessor> Simple = new()
     {
         { OperationKindEx.Argument, new Argument() },
-        { OperationKindEx.ArrayCreation, new NotNullOperation() },
+        { OperationKindEx.ArrayCreation, new ArrayCreation() },
         { OperationKindEx.ArrayElementReference, new ArrayElementReference() },
         { OperationKindEx.AnonymousObjectCreation, new NotNullOperation() },
         { OperationKindEx.Await, new Await() },

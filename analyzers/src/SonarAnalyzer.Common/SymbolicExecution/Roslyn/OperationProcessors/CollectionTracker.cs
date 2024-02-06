@@ -59,4 +59,9 @@ internal static class CollectionTracker
         static bool IsEnumerable(IOperation operation) =>
             operation.ToArgument().Parameter.Type.DerivesOrImplements(KnownType.System_Collections_IEnumerable);
     }
+
+    public static CollectionConstraint ArrayCreationConstraint(IArrayCreationOperationWrapper operation) =>
+        operation.DimensionSizes.Any(x => x.ConstantValue.Value is 0)
+            ? CollectionConstraint.Empty
+            : CollectionConstraint.NotEmpty;
 }

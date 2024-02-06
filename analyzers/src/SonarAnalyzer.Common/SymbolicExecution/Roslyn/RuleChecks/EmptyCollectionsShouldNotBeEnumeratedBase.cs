@@ -119,11 +119,7 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
         var operation = context.Operation.Instance;
-        if (operation.AsArrayCreation() is { } arrayCreation)
-        {
-            return context.State.SetOperationConstraint(operation, arrayCreation.DimensionSizes.Any(x => x.ConstantValue.Value is 0) ? CollectionConstraint.Empty : CollectionConstraint.NotEmpty);
-        }
-        else if (operation.AsInvocation() is { } invocation)
+        if (operation.AsInvocation() is { } invocation)
         {
             return ProcessInvocation(context, invocation);
         }
