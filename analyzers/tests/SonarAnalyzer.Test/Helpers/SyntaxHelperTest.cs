@@ -161,7 +161,7 @@ End Class";
         [DataTestMethod]
         [DataRow(false, "Strasse", "Straße")]
         [DataRow(false, "\u00F6", "\u006F\u0308")] // 00F6 = ö; 006F = o; 0308 = https://www.fileformat.info/info/unicode/char/0308/index.htm
-        [DataRow(false, "ö", "\u006F\u0308", "ä")] // 00F6 = ö; 006F = o; 0308 = https://www.fileformat.info/info/unicode/char/0308/index.htm
+        [DataRow(false, "ö", "\u006F\u0308", "ä", "oe")] // 00F6 = ö; 006F = o; 0308 = https://www.fileformat.info/info/unicode/char/0308/index.htm
         public void NameIsOrNamesCulture_CS(bool expected, string name1, string name2, params string[] orNames)
         {
             var identifier = Microsoft.CodeAnalysis.CSharp.SyntaxFactory.IdentifierName(name1);
