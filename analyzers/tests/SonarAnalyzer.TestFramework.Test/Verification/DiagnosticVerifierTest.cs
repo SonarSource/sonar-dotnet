@@ -327,7 +327,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                 .AddProject(AnalyzerLanguage.VisualBasic)
                 .AddSnippet("' Noncompliant ^1#0 {{This is not the correct message.}}");
             var compilation = project.GetCompilation(null, new VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary, optionExplicit: false));
-            ((Action)(() => DiagnosticVerifier.Verify(compilation, new VB.OptionExplicitOn(), CompilationErrorBehavior.Default))).Should().Throw<AssertFailedException>().WithMessage("""
+            ((Action)(() => DiagnosticVerifier.Verify(compilation, new VB.OptionExplicitOn()))).Should().Throw<AssertFailedException>().WithMessage("""
                 There are differences for VisualBasic16_9 <project-level-issue>:
                   Line 1: The expected message 'This is not the correct message.' does not match the actual message 'Configure 'Option Explicit On' for assembly 'project0'.' Rule S6146
                 """);
@@ -340,7 +340,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                 .AddProject(AnalyzerLanguage.VisualBasic)
                 .AddSnippet("' Noncompliant@+1 {{This is expected on a wrong line.}}");
             var compilation = project.GetCompilation(null, new VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary, optionExplicit: false));
-            ((Action)(() => DiagnosticVerifier.Verify(compilation, new VB.OptionExplicitOn(), CompilationErrorBehavior.Default))).Should().Throw<AssertFailedException>().WithMessage("""
+            ((Action)(() => DiagnosticVerifier.Verify(compilation, new VB.OptionExplicitOn()))).Should().Throw<AssertFailedException>().WithMessage("""
                 There are differences for VisualBasic16_9 <project-level-issue>:
                   Line 1: Unexpected issue 'Configure 'Option Explicit On' for assembly 'project0'.' Rule S6146
 
@@ -359,7 +359,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                 .AddSnippet("' Noncompliant ^1#0 {{Configure 'Option Explicit On' for assembly 'project0'.}}", projectLevelIssueFile)
                 .AddSnippet("Option Explicit Off ' Noncompliant ^1#19 {{Change this to 'Option Explicit On'.}}", fileLevelIssueFile);
             var compilation = project.GetCompilation(null, new VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary, optionExplicit: false));
-            ((Action)(() => DiagnosticVerifier.Verify(compilation, new VB.OptionExplicitOn(), CompilationErrorBehavior.Default))).Should().NotThrow();
+            ((Action)(() => DiagnosticVerifier.Verify(compilation, new VB.OptionExplicitOn()))).Should().NotThrow();
         }
 
         [TestMethod]

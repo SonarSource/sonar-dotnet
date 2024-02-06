@@ -102,7 +102,6 @@ namespace SonarAnalyzer.Test.Rules
             DiagnosticVerifier.Verify(
                 CreateCompilation(),
                 new CS.RequestsWithExcessiveLength(),
-                CompilationErrorBehavior.FailTest,
                 AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath),
                 null,
                 [webConfigPath]);
@@ -116,7 +115,6 @@ namespace SonarAnalyzer.Test.Rules
             DiagnosticVerifier.Verify(
                 CreateCompilation(),
                 new CS.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled) { FileUploadSizeLimit = 83_8860_800 },
-                CompilationErrorBehavior.FailTest,
                 AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath),
                 null,
                 [webConfigPath]);
@@ -132,7 +130,6 @@ namespace SonarAnalyzer.Test.Rules
             DiagnosticVerifier.Verify(
                 CreateCompilation(),
                 new CS.RequestsWithExcessiveLength(),
-                CompilationErrorBehavior.FailTest,
                 AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, corruptFilePath, nonExistingFilePath),
                 null,
                 [corruptFilePath]);

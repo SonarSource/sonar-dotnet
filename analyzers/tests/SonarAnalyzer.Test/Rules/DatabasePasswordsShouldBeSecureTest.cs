@@ -73,7 +73,6 @@ namespace SonarAnalyzer.Test.Rules
             DiagnosticVerifier.Verify(
                 CreateCompilation(),
                 new DatabasePasswordsShouldBeSecure(),
-                CompilationErrorBehavior.FailTest,
                 AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath),
                 null,
                 [webConfigPath]);
@@ -88,7 +87,6 @@ namespace SonarAnalyzer.Test.Rules
             DiagnosticVerifier.Verify(
                 CreateCompilation(),
                 new DatabasePasswordsShouldBeSecure(),
-                CompilationErrorBehavior.FailTest,
                 AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath, externalConfigPath),
                 null,
                 [webConfigPath]);
@@ -104,7 +102,6 @@ namespace SonarAnalyzer.Test.Rules
             DiagnosticVerifier.Verify(
                 CreateCompilation(),
                 new DatabasePasswordsShouldBeSecure(),
-                CompilationErrorBehavior.FailTest,
                 AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, corruptFilePath, nonExistingFilePath),
                 null,
                 [corruptFilePath]);
@@ -126,7 +123,6 @@ namespace SonarAnalyzer.Test.Rules
             DiagnosticVerifier.Verify(
                 CreateCompilation(),
                 new DatabasePasswordsShouldBeSecure(),
-                CompilationErrorBehavior.FailTest,
                 AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, appSettingsPath),
                 null,
                 [appSettingsPath]);
@@ -142,7 +138,6 @@ namespace SonarAnalyzer.Test.Rules
             DiagnosticVerifier.Verify(
                 CreateCompilation(),
                 new DatabasePasswordsShouldBeSecure(),
-                CompilationErrorBehavior.FailTest,
                 AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, corruptFilePath, nonExistingFilePath),
                 null,
                 [corruptFilePath]);
