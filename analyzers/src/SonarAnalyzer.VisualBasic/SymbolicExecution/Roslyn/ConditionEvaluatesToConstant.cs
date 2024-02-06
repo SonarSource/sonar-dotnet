@@ -27,6 +27,7 @@ public class ConditionEvaluatesToConstant : ConditionEvaluatesToConstantBase
     protected override DiagnosticDescriptor Rule => null;
     protected override DiagnosticDescriptor Rule2583 => S2583;
     protected override DiagnosticDescriptor Rule2589 => S2589;
+    protected override string NullName => "Nothing";
 
     public override bool ShouldExecute()
     {

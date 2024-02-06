@@ -30,11 +30,12 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
 
     protected const string MessageFormat = "{0}{1}";
     private const string MessageBool = "Change this condition so that it does not always evaluate to '{0}'.";
-    private const string MessageNull = "Remove this unnecessary check for null.";
     private const string S2583MessageSuffix = " Some code paths are unreachable.";
 
     protected abstract DiagnosticDescriptor Rule2583 { get; }
     protected abstract DiagnosticDescriptor Rule2589 { get; }
+    protected abstract string NullName { get; }
+    private string MessageNull => $"Remove this unnecessary check for {NullName}.";
 
     private readonly Dictionary<IOperation, BasicBlock> trueOperations = new();
     private readonly Dictionary<IOperation, BasicBlock> falseOperations = new();

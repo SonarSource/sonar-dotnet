@@ -1711,12 +1711,12 @@ Public Class NullOrEmpty
 
         'Combo/Fatality
         ret = If(isNotNothing, isNothing)
-        '        ^^^^^^^^^^^^                             Noncompliant {{Remove this unnecessary check for null. Some code paths are unreachable.}}
+        '        ^^^^^^^^^^^^                             Noncompliant {{Remove this unnecessary check for Nothing. Some code paths are unreachable.}}
         '                      ^^^^^^^^^                  Secondary@-1
-        ret = If(isNothing, Nothing)                    ' Noncompliant {{Remove this unnecessary check for null.}}
+        ret = If(isNothing, Nothing)                    ' Noncompliant {{Remove this unnecessary check for Nothing.}}
         '        ^^^^^^^^^
         ret = If("Value", a)
-        '        ^^^^^^^                                Noncompliant {{Remove this unnecessary check for null. Some code paths are unreachable.}}
+        '        ^^^^^^^                                Noncompliant {{Remove this unnecessary check for Nothing. Some code paths are unreachable.}}
         '                 ^                             Secondary@-1
     End Sub
 
