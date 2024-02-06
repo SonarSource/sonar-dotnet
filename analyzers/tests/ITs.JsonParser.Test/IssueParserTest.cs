@@ -46,15 +46,8 @@ public class IssueParserTest
                 {
                   "Id": "S100",
                   "Message": "Message_1",
-                  "Location": {
-                    "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/foo/bar/File1.cs#L1",
-                    "Region": {
-                      "StartLine": 1,
-                      "StartColumn": 42,
-                      "EndLine": 1,
-                      "EndColumn": 99
-                    }
-                  }
+                  "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/foo/bar/File1.cs#L1",
+                  "Location": "Line(s) 1 Position 42#99"
                 }
               ]
             }
@@ -109,28 +102,14 @@ public class IssueParserTest
                 {
                   "Id": "S100",
                   "Message": "Message_1",
-                  "Location": {
-                    "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/foo/bar/File1.cs#L1",
-                    "Region": {
-                      "StartLine": 1,
-                      "StartColumn": 42,
-                      "EndLine": 1,
-                      "EndColumn": 99
-                    }
-                  }
+                  "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/foo/bar/File1.cs#L1",
+                  "Location": "Line(s) 1 Position 42#99"
                 },
                 {
                   "Id": "S100",
                   "Message": "Message_2",
-                  "Location": {
-                    "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/foo/bar/File1.cs#L42-L43",
-                    "Region": {
-                      "StartLine": 42,
-                      "StartColumn": 42,
-                      "EndLine": 43,
-                      "EndColumn": 99
-                    }
-                  }
+                  "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/foo/bar/File1.cs#L42-L43",
+                  "Location": "Line(s) 42-43 Position 42#99"
                 }
               ]
             }
@@ -142,10 +121,8 @@ public class IssueParserTest
                 {
                   "Id": "S142",
                   "Message": "Message_3",
-                  "Location": {
-                    "Uri": null,
-                    "Region": null
-                  }
+                  "Uri": null,
+                  "Location": null
                 }
               ]
             }
@@ -157,15 +134,8 @@ public class IssueParserTest
                 {
                   "Id": "S200",
                   "Message": "Message_1",
-                  "Location": {
-                    "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/foo/bar/File1.cs#L0",
-                    "Region": {
-                      "StartLine": 0,
-                      "StartColumn": 42,
-                      "EndLine": 0,
-                      "EndColumn": 99
-                    }
-                  }
+                  "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/foo/bar/File1.cs#L0",
+                  "Location": "Line(s) 0 Position 42#99"
                 }
               ]
             }
@@ -177,15 +147,8 @@ public class IssueParserTest
                 {
                   "Id": "S100",
                   "Message": "Message_1",
-                  "Location": {
-                    "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/foo/bar/File1.cs#L1",
-                    "Region": {
-                      "StartLine": 1,
-                      "StartColumn": 42,
-                      "EndLine": 1,
-                      "EndColumn": 99
-                    }
-                  }
+                  "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/foo/bar/File1.cs#L1",
+                  "Location": "Line(s) 1 Position 42#99"
                 }
               ]
             }

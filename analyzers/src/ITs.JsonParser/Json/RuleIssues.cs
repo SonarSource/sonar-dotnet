@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Data.Common;
+
 namespace ITs.JsonParser.Json;
 
 // Format of JSONs in "actual/" and "expected/"
@@ -30,16 +32,19 @@ public class RuleIssue
 {
     public string Id { get; set; }
     public string Message { get; set; }
-    public SarifLocationFile Location { get; set; } // TODO: This should not re-use SarifLocationFile type.
+    public string Uri { get; set; }
+    public string Location { get; set; }
 
     public RuleIssue(SarifIssue issue)
     {
         Id = issue.RuleId;
         Message = issue.Message;
-        Location = new()
+        Uri = issue.NormalizedUri();
+        if (issue.Location is { } location)
         {
-            Uri = issue.NormalizedUri(),
-            Region = issue.Location?.Region
-        };
+            Location = location.Region.StartLine == location.Region.EndLine
+                ? $"Line(s) {location.Region.StartLine} Position {location.Region.StartColumn}#{location.Region.EndColumn}"
+                : $"Line(s) {location.Region.StartLine}-{location.Region.EndLine} Position {location.Region.StartColumn}#{location.Region.EndColumn}";
+        }
     }
 }
