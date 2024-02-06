@@ -18,16 +18,28 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using CommandLine;
+namespace ITs.JsonParser.Json;
 
-namespace ITs.JsonParser;
-
-[Verb("parse", isDefault: true, HelpText = "Parses the JSONs from 'output/' to 'actual/' and generates a diff report")]
-public class CommandLineOptions
+// Format of JSONs in "actual/" and "expected/"
+public class RuleIssues
 {
-    [Option('p', "project", Required = false, HelpText = "The name of single project to parse. If ommited, all projects will be parsed")]
-    public string Project { get; set; }
+    public RuleIssue[] Issues { get; set; }
+}
 
-    [Option('r', "rule", Required = false, HelpText = "The key of the rule to parse, e.g. S1234. If omitted, all rules will be parsed")]
-    public string RuleId { get; set; }
+public class RuleIssue
+{
+    public string Id { get; set; }
+    public string Message { get; set; }
+    public SarifLocationFile Location { get; set; } // TODO: This should not re-use SarifLocationFile type.
+
+    public RuleIssue(SarifIssue issue)
+    {
+        Id = issue.RuleId;
+        Message = issue.Message;
+        Location = new()
+        {
+            Uri = issue.NormalizedUri(),
+            Region = issue.Location?.Region
+        };
+    }
 }
