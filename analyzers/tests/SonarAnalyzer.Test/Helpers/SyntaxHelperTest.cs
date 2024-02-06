@@ -149,6 +149,25 @@ End Class";
             identifier.NameIs("other", orNames).Should().Be(expected);
         }
 
+        [DataTestMethod]
+        [DataRow(false, "Strasse", "Straße")]
+        [DataRow(false, "\u00F6", "\u006F\u0308")] // 00F6 = ö; 006F = o; 0308 = https://www.fileformat.info/info/unicode/char/0308/index.htm
+        public void NameIsCulture_CS(bool expected, string name1, string name2)
+        {
+            var identifier = Microsoft.CodeAnalysis.CSharp.SyntaxFactory.IdentifierName(name1);
+            identifier.NameIs(name2).Should().Be(expected);
+        }
+
+        [DataTestMethod]
+        [DataRow(false, "Strasse", "Straße")]
+        [DataRow(false, "\u00F6", "\u006F\u0308")] // 00F6 = ö; 006F = o; 0308 = https://www.fileformat.info/info/unicode/char/0308/index.htm
+        [DataRow(false, "ö", "\u006F\u0308", "ä")] // 00F6 = ö; 006F = o; 0308 = https://www.fileformat.info/info/unicode/char/0308/index.htm
+        public void NameIsOrNamesCulture_CS(bool expected, string name1, string name2, params string[] orNames)
+        {
+            var identifier = Microsoft.CodeAnalysis.CSharp.SyntaxFactory.IdentifierName(name1);
+            identifier.NameIs(name2, orNames).Should().Be(expected);
+        }
+
         [TestMethod]
         public void NameIsOrNamesNodeWithoutName_CS()
         {
