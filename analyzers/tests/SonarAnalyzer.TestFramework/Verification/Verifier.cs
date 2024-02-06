@@ -145,7 +145,7 @@ namespace SonarAnalyzer.Test.TestFramework
         {
             foreach (var compilation in Compile(false))
             {
-                DiagnosticVerifier.Verify(compilation.Compilation, analyzers.Single(), CompilationErrorBehavior.Default, builder.AdditionalFilePath);
+                DiagnosticVerifier.Verify(compilation.Compilation, analyzers.Single(), builder.AdditionalFilePath);
                 new FileInfo(builder.ProtobufPath).Length.Should().Be(0, "protobuf file should be empty");
             }
         }
@@ -155,7 +155,7 @@ namespace SonarAnalyzer.Test.TestFramework
         {
             foreach (var compilation in Compile(false))
             {
-                DiagnosticVerifier.Verify(compilation.Compilation, analyzers.Single(), builder.ErrorBehavior, builder.AdditionalFilePath);
+                DiagnosticVerifier.Verify(compilation.Compilation, analyzers.Single(), builder.AdditionalFilePath);
                 verifyProtobuf(ReadProtobuf().ToList());
             }
 

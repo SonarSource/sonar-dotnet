@@ -152,7 +152,6 @@ namespace SonarAnalyzer.Test.Rules
                 DiagnosticVerifier.Verify(
                     compilation,
                     analyzer,
-                    CompilationErrorBehavior.FailTest,
                     AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, path),
                     null,
                     [path]);

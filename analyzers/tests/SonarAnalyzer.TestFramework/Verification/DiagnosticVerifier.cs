@@ -32,16 +32,15 @@ namespace SonarAnalyzer.Test.TestFramework
         public static void Verify(
                 Compilation compilation,
                 DiagnosticAnalyzer analyzer,
-                CompilationErrorBehavior checkMode,
                 string additionalFilePath = null,
                 string[] onlyDiagnostics = null,
                 string[] additionalSourceFiles = null) =>
-            Verify(compilation, new[] { analyzer }, checkMode, additionalFilePath, onlyDiagnostics, additionalSourceFiles);
+            Verify(compilation, [analyzer], CompilationErrorBehavior.FailTest, additionalFilePath, onlyDiagnostics, additionalSourceFiles);
 
         public static void Verify(
                 Compilation compilation,
                 DiagnosticAnalyzer[] analyzers,
-                CompilationErrorBehavior checkMode,
+                CompilationErrorBehavior checkMode, // ToDo: Remove this parameter in https://github.com/SonarSource/sonar-dotnet/issues/8588
                 string additionalFilePath = null,
                 string[] onlyDiagnostics = null,
                 string[] additionalSourceFiles = null)
