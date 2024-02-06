@@ -139,12 +139,7 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
         var operation = context.Operation.Instance;
-        if (operation.AsObjectCreation() is { } objectCreation && objectCreation.Type.IsAny(TrackedCollectionTypes)
-            && CollectionCreationConstraint(context.State, objectCreation) is { } objectCreationConstraint)
-        {
-            return context.State.SetOperationConstraint(objectCreation, objectCreationConstraint);
-        }
-        else if (operation.AsArrayCreation() is { } arrayCreation)
+        if (operation.AsArrayCreation() is { } arrayCreation)
         {
             return context.State.SetOperationConstraint(operation, arrayCreation.DimensionSizes.Any(x => x.ConstantValue.Value is 0) ? CollectionConstraint.Empty : CollectionConstraint.NotEmpty);
         }
@@ -246,11 +241,6 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         }
         return state;
     }
-
-    private static CollectionConstraint CollectionCreationConstraint(ProgramState state, IObjectCreationOperationWrapper objectCreation) =>
-        objectCreation.Arguments.SingleOrDefault(x => x.ToArgument().Parameter.Type.DerivesOrImplements(KnownType.System_Collections_IEnumerable)) is { } collectionArgument
-            ? state[collectionArgument]?.Constraint<CollectionConstraint>()
-            : CollectionConstraint.Empty;
 
     private static NumberConstraint PropertyReferenceConstraint(ProgramState state, IPropertyReferenceOperationWrapper propertyReference) =>
         propertyReference.Property.Name is nameof(Array.Length) or nameof(List<int>.Count)
