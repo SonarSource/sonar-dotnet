@@ -245,7 +245,7 @@ stages:
             CoverageArtifactName: 'ITs.JsonParserCoverage'
             TestResultsArtifactName: 'ITs.JsonParserResults'
             ProjectFilePath: 'tests\ITs.JsonParser.Test\ITs.JsonParser.Test.csproj'
-            FrameworkMoniker: 'net8.0'
+            FrameworkMoniker: 'net8.0-windows'
 
       steps:
       - task: DownloadPipelineArtifact@2

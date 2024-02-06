@@ -18,16 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using CommandLine;
-
 namespace ITs.JsonParser;
 
-[Verb("parse", isDefault: true, HelpText = "Parses the JSONs from 'output/' to 'actual/' and generates a diff report")]
-public class CommandLineOptions
+public static class ConsoleHelper
 {
-    [Option('p', "project", Required = false, HelpText = "The name of single project to parse. If ommited, all projects will be parsed")]
-    public string Project { get; set; }
-
-    [Option('r', "rule", Required = false, HelpText = "The key of the rule to parse, e.g. S1234. If omitted, all rules will be parsed")]
-    public string RuleId { get; set; }
+    public static void WriteLineColor(string value, ConsoleColor color)
+    {
+        var before = Console.ForegroundColor;
+        Console.ForegroundColor = color;
+        Console.WriteLine(value);
+        Console.ForegroundColor = before;
+    }
 }
