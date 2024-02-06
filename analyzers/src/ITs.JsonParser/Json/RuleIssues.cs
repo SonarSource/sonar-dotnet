@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Data.Common;
-
 namespace ITs.JsonParser.Json;
 
 // Format of JSONs in "actual/" and "expected/"
