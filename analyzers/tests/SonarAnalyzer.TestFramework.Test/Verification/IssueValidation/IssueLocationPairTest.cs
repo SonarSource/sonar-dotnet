@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Text;
 using SonarAnalyzer.TestFramework.Verification.IssueValidation;
 
 namespace SonarAnalyzer.TestFramework.Test.Verification.IssueValidation;
@@ -30,74 +29,73 @@ public class IssueLocationPairTest
     private static readonly IssueLocation ActualSecondary = new(IssueType.Secondary, "File.cs", 42, "Lorem ipsum", "Flag1", 42, 10, "S1234");
 
     [TestMethod]
-    public void AppendAssertionMessage_DifferentKeys()
+    public void CreateMessage_DifferentKeys() =>
+        new IssueLocationPair(new(IssueType.Primary, "SomeFile.cs", 1, "Message", null, null, null), new(IssueType.Primary, "AnotherFile.cs", 1, "Message", null, null, null))
+            .Invoking(x => x.CreateMessage())
+            .Should()
+            .Throw<InvalidOperationException>();
+
+    [TestMethod]
+    public void CreateMessage_PerfectMatch() =>
+        new IssueLocationPair(ActualPrimary, ActualPrimary).Invoking(x => x.CreateMessage()).Should().Throw<InvalidOperationException>();
+
+    [TestMethod]
+    public void CreateMessage_MissingIssue_NoMessage() =>
+        ValidateMessage(null, new(IssueType.Primary, "File.cs", 42, null, null, null, null), "Primary Missing", "  Line 42: Missing expected issue");
+
+    [TestMethod]
+    public void CreateMessage_MissingIssue_WithExpectedMessage() =>
+        ValidateMessage(null, ActualPrimary, "Primary Missing", "  Line 42: Missing expected issue 'Lorem ipsum'");
+
+    [TestMethod]
+    public void CreateMessage_UnexpectedIssue() =>
+        ValidateMessage(ActualPrimary, null, "Primary Unexpected", "  Line 42: Unexpected issue 'Lorem ipsum' Rule S1234");
+
+    [TestMethod]
+    public void CreateMessage_SecondaryText() =>
+        ValidateMessage(
+            new(IssueType.Secondary, "File.cs", 42, "Lorem ipsum", null, null, null, "S1234"),
+            null,
+            "Secondary Unexpected",
+            "  Line 42 Secondary location: Unexpected issue 'Lorem ipsum' Rule S1234");
+
+    [TestMethod]
+    public void CreateMessage_WrongMessage() =>
+        ValidateMessage(
+            ActualSecondary,
+            new(IssueType.Secondary, "File.cs", 42, "Dolor sit", "Flag1", 2, 2),
+            "Secondary Different Message",
+            "  Line 42 Secondary location: The expected message 'Dolor sit' does not match the actual message 'Lorem ipsum' Rule S1234 ID Flag1");
+
+    [TestMethod]
+    public void CreateMessage_WrongStartLocation()
     {
-        var sut = new IssueLocationPair(new(IssueType.Primary, "SomeFile.cs", 1, "Message", null, null, null), new(IssueType.Primary, "AnotherFile.cs", 1, "Message", null, null, null));
-        sut.Invoking(x => x.AppendAssertionMessage(new())).Should().Throw<InvalidOperationException>();
+        ValidateMessage(ActualSecondary,
+            new(IssueType.Secondary, "File.cs", 42, "Lorem ipsum", "Flag1", 2, 2),
+            "Secondary Different Location",
+            "  Line 42 Secondary location: Should start on column 2 but got column 42 Rule S1234 ID Flag1");
     }
 
     [TestMethod]
-    public void AppendAssertionMessage_PerfectMatch() =>
-        new IssueLocationPair(ActualPrimary, ActualPrimary).Invoking(x => x.AppendAssertionMessage(new())).Should().Throw<InvalidOperationException>();
+    public void CreateMessage_WrongLength() =>
+        ValidateMessage(
+            ActualSecondary,
+            new(IssueType.Secondary, "File.cs", 42, "Lorem ipsum", "Flag1", 42, 2),
+            "Secondary Different Length",
+            "  Line 42 Secondary location: Should have a length of 2 but got a length of 10 Rule S1234 ID Flag1");
 
     [TestMethod]
-    public void AppendAssertionMessage_MissingIssue_NoMessage() =>
-        AssertionMessage(null, new(IssueType.Primary, "File.cs", 42, null, null, null, null)).Should().Be("  Line 42: Missing expected issue");
+    public void CreateMessage_WrongIssueId() =>
+        ValidateMessage(
+            ActualSecondary,
+            new IssueLocation(IssueType.Secondary, "File.cs", 42, "Lorem ipsum", "DifferentId", 42, 10),
+            "Secondary Different ID",
+            "  Line 42 Secondary location: The expected issueId 'DifferentId' does not match the actual issueId 'Flag1' Rule S1234 ID Flag1");
 
-    [TestMethod]
-    public void AppendAssertionMessage_MissingIssue_WithExpectedMessage() =>
-        AssertionMessage(null, ActualPrimary).Should().Be("  Line 42: Missing issue 'Lorem ipsum'");
-
-    [TestMethod]
-    public void AppendAssertionMessage_UnexpectedIssue() =>
-        AssertionMessage(ActualPrimary, null).Should().Be("  Line 42: Unexpected issue 'Lorem ipsum' Rule S1234");
-
-    [TestMethod]
-    public void AppendAssertionMessage_SecondaryText() =>
-        AssertionMessage(new(IssueType.Secondary, "File.cs", 42, "Lorem ipsum", null, null, null, "S1234"), null)
-            .Should().Be("  Line 42 Secondary location: Unexpected issue 'Lorem ipsum' Rule S1234");
-
-    [TestMethod]
-    public void AppendAssertionMessage_WrongMessage()
+    private static void ValidateMessage(IssueLocation actualIssue, IssueLocation expectedIssue, string expectedShortDescription, string expectedFullDescription)
     {
-        var expected = new IssueLocation(IssueType.Secondary, "File.cs", 42, "Dolor sit", "Flag1", 2, 2);
-        AssertionMessage(ActualSecondary, expected).Should().Be("  Line 42 Secondary location: The expected message 'Dolor sit' does not match the actual message 'Lorem ipsum' Rule S1234 ID Flag1");
-    }
-
-    [TestMethod]
-    public void AppendAssertionMessage_WrongStartLocation()
-    {
-        var expected = new IssueLocation(IssueType.Secondary, "File.cs", 42, "Lorem ipsum", "Flag1", 2, 2);
-        AssertionMessage(ActualSecondary, expected).Should().Be("  Line 42 Secondary location: Should start on column 2 but got column 42 Rule S1234 ID Flag1");
-    }
-
-    [TestMethod]
-    public void AppendAssertionMessage_WrongLength()
-    {
-        var expected = new IssueLocation(IssueType.Secondary, "File.cs", 42, "Lorem ipsum", "Flag1", 42, 2);
-        AssertionMessage(ActualSecondary, expected).Should().Be("  Line 42 Secondary location: Should have a length of 2 but got a length of 10 Rule S1234 ID Flag1");
-    }
-
-    [TestMethod]
-    public void AppendAssertionMessage_WrongIssueId()
-    {
-        var expected = new IssueLocation(IssueType.Secondary, "File.cs", 42, "Lorem ipsum", "DifferentId", 42, 10);
-        AssertionMessage(ActualSecondary, expected).Should().Be("  Line 42 Secondary location: The expected issueId 'DifferentId' does not match the actual issueId 'Flag1' Rule S1234 ID Flag1");
-    }
-
-    private static string AssertionMessage(IssueLocation actual, IssueLocation expected)
-    {
-        var builder = new StringBuilder();
-        new IssueLocationPair(actual, expected).AppendAssertionMessage(builder);
-        var line = builder.ToString();
-        if (line.Length == 0)
-        {
-            return line;
-        }
-        else
-        {
-            line.Should().EndWith(Environment.NewLine);
-            return line.Substring(0, line.Length - Environment.NewLine.Length);
-        }
+        var message = new IssueLocationPair(actualIssue, expectedIssue).CreateMessage();
+        message.ShortDescription.Should().Be(expectedShortDescription);
+        message.FullDescription.Should().Be(expectedFullDescription);
     }
 }

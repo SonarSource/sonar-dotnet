@@ -31,18 +31,20 @@ internal sealed record IssueLocationPair(IssueLocation Actual, IssueLocation Exp
     public string IssueId => Actual?.IssueId ?? Expected?.IssueId;
     public string RuleId => Actual?.RuleId ?? Expected.RuleId;
 
-    public void AppendAssertionMessage(StringBuilder builder)
+    public VerificationMessage CreateMessage()
     {
         if (Actual is not null && Expected is not null && !new IssueLocationKey(Actual).IsMatch(Expected))
         {
             throw new InvalidOperationException("Something went horribly wrong. This is supposed to be called only for issues with the same key.");
         }
+        var builder = new StringBuilder();
+        var (concise, detailed) = AssertionMessage();
         builder.Append("  Line ").Append(LineNumber);
         if ((Actual?.Type ?? Expected.Type) == IssueType.Secondary)
         {
             builder.Append(" Secondary location");
         }
-        builder.Append(": ").Append(AssertionMessage());
+        builder.Append(": ").Append(detailed);
         if (Type != IssueType.Error)
         {
             if (Actual?.RuleId is not null)
@@ -54,43 +56,51 @@ internal sealed record IssueLocationPair(IssueLocation Actual, IssueLocation Exp
                 builder.Append(" ID ").Append(issueId);
             }
         }
-        builder.AppendLine();
+        return new($"{Type} {concise}", builder.ToString(), FilePath, LineNumber);
     }
 
-    private string AssertionMessage()
+    private (string Concise, string Detailed) AssertionMessage()
     {
         if (Actual is null)
         {
-            return Expected.Message is null
-                ? "Missing expected issue"
-                : $"Missing issue '{Expected.Message}'";
+            return ("Missing", MissingMessage());
         }
         else if (Expected is null)
         {
-            var comment = FilePath.EndsWith(".vb", StringComparison.InvariantCultureIgnoreCase) ? "'" : "//";
-            return Actual.Type == IssueType.Error
-                ? $"Unexpected error, use {comment} Error [{Actual.RuleId}] {Actual.Message}"   // We don't want to assert the precise {{Message}}
-                : $"Unexpected issue '{Actual.Message}'";
+            return ("Unexpected", UnexpectedMessage());
         }
         else if (Expected.IssueId != Actual.IssueId)
         {
-            return $"The expected issueId '{Expected.IssueId}' does not match the actual issueId '{Actual.IssueId}'";
+            return ("Different ID", $"The expected issueId '{Expected.IssueId}' does not match the actual issueId '{Actual.IssueId}'");
         }
         else if (Expected.Message is not null && Actual.Message != Expected.Message)
         {
-            return $"The expected message '{Expected.Message}' does not match the actual message '{Actual.Message}'";
+            return ("Different Message", $"The expected message '{Expected.Message}' does not match the actual message '{Actual.Message}'");
         }
         else if (Expected.Start.HasValue && Actual.Start != Expected.Start)
         {
-            return $"Should start on column {Expected.Start} but got column {Actual.Start}";
+            return ("Different Location", $"Should start on column {Expected.Start} but got column {Actual.Start}");
         }
         else if (Expected.Length.HasValue && Actual.Length != Expected.Length)
         {
-            return $"Should have a length of {Expected.Length} but got a length of {Actual.Length}";
+            return ("Different Length", $"Should have a length of {Expected.Length} but got a length of {Actual.Length}");
         }
         else
         {
             throw new InvalidOperationException("Something went wrong. This is not supposed to be called for same issues.");
         }
+    }
+
+    private string MissingMessage() =>
+        Expected.Message is null
+            ? "Missing expected issue"
+            : $"Missing expected issue '{Expected.Message}'";
+
+    private string UnexpectedMessage()
+    {
+        var comment = FilePath.EndsWith(".vb", StringComparison.InvariantCultureIgnoreCase) ? "'" : "//";
+        return Actual.Type == IssueType.Error
+            ? $"Unexpected error, use {comment} Error [{Actual.RuleId}] {Actual.Message}"   // We don't want to assert the precise {{Message}}
+            : $"Unexpected issue '{Actual.Message}'";
     }
 }
