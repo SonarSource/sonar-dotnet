@@ -303,6 +303,23 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                 """);
 
         [TestMethod]
+        public void ExpectedIssuesNotRaised_WhileBeingRaisedOnceOnTheSameLine() =>
+            VerifyThrows("""
+                public class Sample
+                {
+                    public void Test(bool a, bool b)
+                    {
+                        if (a == a) { if (a == b) {  }  }   // Noncompliant
+                                                            // Noncompliant@-1
+                                                            // Secondary@-2
+                    }
+                }
+                """, """
+                There are differences for CSharp7 snippet1.cs:
+                  Line 5: Missing expected issue
+                """);
+
+        [TestMethod]
         public void ExpectedIssuesNotRaised_MultipleFiles() =>
             builder.WithBasePath("DiagnosticsVerifier")
                 .AddPaths("ExpectedIssuesNotRaised.cs", "ExpectedIssuesNotRaised2.cs")
