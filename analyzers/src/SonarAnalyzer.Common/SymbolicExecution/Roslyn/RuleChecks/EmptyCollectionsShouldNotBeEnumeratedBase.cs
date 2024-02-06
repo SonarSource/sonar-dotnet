@@ -84,53 +84,13 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         nameof(Dictionary<int, int>.TryGetValue)
     };
 
-    private static readonly HashSet<string> AddMethods = new()
-    {
-        nameof(ICollection<int>.Add),
-        nameof(List<int>.AddRange),
-        nameof(List<int>.Insert),
-        nameof(List<int>.InsertRange),
-        nameof(HashSet<int>.UnionWith),
-        nameof(HashSet<int>.SymmetricExceptWith),   // This can add and/or remove items => It should remove all CollectionConstraints.
-                                                    // However, just learning NotEmpty (and thus unlearning Empty) is good enough for now.
-        nameof(Queue<int>.Enqueue),
-        nameof(Stack<int>.Push),
-        nameof(Collection<int>.Insert),
-        "TryAdd"
-    };
-
-    private static readonly HashSet<string> RemoveMethods = new()
-    {
-        nameof(ICollection<int>.Remove),
-        nameof(List<int>.RemoveAll),
-        nameof(List<int>.RemoveAt),
-        nameof(List<int>.RemoveRange),
-        nameof(HashSet<int>.ExceptWith),
-        nameof(HashSet<int>.IntersectWith),
-        nameof(HashSet<int>.RemoveWhere),
-        nameof(Queue<int>.Dequeue),
-        nameof(Stack<int>.Pop)
-    };
-
     private readonly HashSet<IOperation> emptyAccess = new();
     private readonly HashSet<IOperation> nonEmptyAccess = new();
 
-    protected override ProgramState PreProcessSimple(SymbolicContext context)
-    {
-        var operation = context.Operation.Instance;
-        if (operation.AsInvocation() is { } invocation)
-        {
-            return ProcessInvocation(context, invocation);
-        }
-        else if (operation.AsMethodReference() is { Instance: not null } methodReference)
-        {
-            return ProcessAddMethod(context.State, methodReference.Method, methodReference.Instance) ?? context.State;
-        }
-        else
-        {
-            return context.State;
-        }
-    }
+    protected override ProgramState PreProcessSimple(SymbolicContext context) =>
+        context.Operation.Instance.AsInvocation() is { } invocation
+            ? ProcessInvocation(context, invocation)
+            : context.State;
 
     public override void ExecutionCompleted()
     {
@@ -176,12 +136,12 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
     }
 
     private static ProgramState ProcessAddMethod(ProgramState state, IMethodSymbol method, IOperation instance) =>
-        AddMethods.Contains(method.Name)
+        CollectionTracker.AddMethods.Contains(method.Name)
             ? SetOperationAndSymbolConstraint(state, instance, CollectionConstraint.NotEmpty)
             : null;
 
     private static ProgramState ProcessRemoveMethod(ProgramState state, IMethodSymbol method, IOperation instance) =>
-        RemoveMethods.Contains(method.Name)
+        CollectionTracker.RemoveMethods.Contains(method.Name)
             ? SetOperationAndSymbolValue(state, instance, (state[instance] ?? SymbolicValue.Empty).WithoutConstraint(CollectionConstraint.NotEmpty))
             : null;
 
