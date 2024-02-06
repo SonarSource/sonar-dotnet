@@ -74,6 +74,26 @@ internal static class ArithmeticCalculator
         }
     }
 
+    public static NumberConstraint PropertyReferenceConstraint(ProgramState state, IPropertyReferenceOperationWrapper operation, ISymbol instanceSymbol)
+    {
+        if (operation.Instance is not null
+            && operation.Property.Name is nameof(Array.Length) or nameof(List<int>.Count))
+        {
+            if (instanceSymbol is not null
+                && state[instanceSymbol]?.Constraint<CollectionConstraint>() is { } constraint)
+            {
+                return constraint == CollectionConstraint.Empty
+                    ? NumberConstraint.From(0)
+                    : NumberConstraint.From(1, null);
+            }
+            else if (operation.Instance.Type.DerivesOrImplementsAny(CollectionTracker.CollectionTypes))
+            {
+                return NumberConstraint.From(0, null);
+            }
+        }
+        return null;
+    }
+
     private static NumberConstraint CalculateMultiply(NumberConstraint left, NumberConstraint right)
     {
         var products = new[] { left.Min * right.Min, left.Min * right.Max, left.Max * right.Min, left.Max * right.Max };

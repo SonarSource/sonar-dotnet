@@ -64,4 +64,17 @@ internal static class CollectionTracker
         operation.DimensionSizes.Any(x => x.ConstantValue.Value is 0)
             ? CollectionConstraint.Empty
             : CollectionConstraint.NotEmpty;
+
+    public static ProgramState ApplyConstraints(ProgramState state, IPropertyReferenceOperationWrapper operation, ISymbol instanceSymbol)
+    {
+        if (operation.Property.IsIndexer)
+        {
+            state = state.SetOperationConstraint(operation.Instance, CollectionConstraint.NotEmpty);
+            if (instanceSymbol is not null)
+            {
+                state = state.SetSymbolConstraint(instanceSymbol, CollectionConstraint.NotEmpty);
+            }
+        }
+        return state;
+    }
 }
