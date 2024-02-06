@@ -18,16 +18,19 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using CommandLine;
+using ITs.JsonParser.Json;
 
-namespace ITs.JsonParser;
+namespace ITs.JsonParser.Reports;
 
-[Verb("parse", isDefault: true, HelpText = "Parses the JSONs from 'output/' to 'actual/' and generates a diff report")]
-public class CommandLineOptions
+/// <summary>
+/// Custom report extracted from the SARIF report.
+/// </summary>
+public record OutputReport(string Project, string RuleId, string Assembly, string Tfm, RuleIssues RuleIssues)
 {
-    [Option('p', "project", Required = false, HelpText = "The name of single project to parse. If ommited, all projects will be parsed")]
-    public string Project { get; set; }
-
-    [Option('r', "rule", Required = false, HelpText = "The key of the rule to parse, e.g. S1234. If omitted, all rules will be parsed")]
-    public string RuleId { get; set; }
+    public string Path(string root)
+    {
+        // projectName/rule-assembly{-TFM}?.json
+        var suffix = Tfm is null ? string.Empty : $"-{Tfm}";
+        return System.IO.Path.Combine(root, Project, $"{RuleId}-{Assembly}{suffix}.json");
+    }
 }
