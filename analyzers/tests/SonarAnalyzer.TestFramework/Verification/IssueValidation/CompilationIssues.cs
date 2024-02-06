@@ -25,20 +25,16 @@ namespace SonarAnalyzer.TestFramework.Verification.IssueValidation;
 
 internal sealed class CompilationIssues : IEnumerable<IssueLocation>
 {
-    public string LanguageVersion { get; }  // ToDo: Should this be here?
     private readonly List<IssueLocation> issues;
 
-    public CompilationIssues(string languageVersion, IEnumerable<FileContent> files)
-        : this(languageVersion, files.SelectMany(x => IssueLocationCollector.ExpectedIssueLocations(x.FileName, x.Content.Lines))) { }
+    public CompilationIssues(IEnumerable<FileContent> files)
+        : this(files.SelectMany(x => IssueLocationCollector.ExpectedIssueLocations(x.FileName, x.Content.Lines))) { }
 
-    public CompilationIssues(string languageVersion, Diagnostic[] diagnostics)
-        : this(languageVersion, ToIssueLocations(diagnostics)) { }
+    public CompilationIssues(Diagnostic[] diagnostics)
+        : this(ToIssueLocations(diagnostics)) { }
 
-    public CompilationIssues(string languageVersion, IEnumerable<IssueLocation> issues)
-    {
-        LanguageVersion = languageVersion;
+    public CompilationIssues(IEnumerable<IssueLocation> issues) =>
         this.issues = issues.ToList();
-    }
 
     public IssueLocationKey[] UniqueKeys() =>
         issues.Select(x => new IssueLocationKey(x)).Distinct().ToArray();
@@ -53,11 +49,11 @@ internal sealed class CompilationIssues : IEnumerable<IssueLocation>
         return ret;
     }
 
-    public void Dump()
+    public void Dump(string languageVersion)
     {
         foreach (var file in issues.GroupBy(x => Path.GetFileName(x.FilePath)).OrderBy(x => x.Key))
         {
-            Console.WriteLine($"Actual {LanguageVersion} diagnostics {file.Key}:");
+            Console.WriteLine($"Actual {languageVersion} diagnostics {file.Key}:");
             foreach (var issue in file.OrderBy(x => x.LineNumber))
             {
                 Console.WriteLine($"    {issue.RuleId}, Line: {issue.LineNumber}, [{issue.Start}, {issue.Length}] {issue.Message}");
