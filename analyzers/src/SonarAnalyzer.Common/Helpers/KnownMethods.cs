@@ -87,14 +87,28 @@ public static class KnownMethods
         && methodSymbol.Parameters.Length == 0
         && methodSymbol.ReturnType.Is(KnownType.System_String);
 
+    // The Dispose method is either coming from System.IDisposable for classes and records or declared manually for ref struct types:
+    // https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-8.0/using#pattern-based-using
     public static bool IsIDisposableDispose(this IMethodSymbol methodSymbol) =>
-        // ref struct types can also use the Disposable Pattern: https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-8.0/using#pattern-based-using
-        methodSymbol is { IsStatic: false, Name: "Dispose" or "System.IDisposable.Dispose", Arity: 0, ReturnsVoid: true, Parameters.Length: 0 }
-        && ((ContainingInterface(methodSymbol) is { } containingInterface && containingInterface.Is(KnownType.System_IDisposable))
-            || (methodSymbol.ContainingType is { IsValueType: true } && methodSymbol.ContainingType.IsRefLikeType()));
+        methodSymbol is
+        {
+            IsStatic: false,
+            Name: "Dispose" or "System.IDisposable.Dispose",
+            Arity: 0,
+            ReturnsVoid: true,
+            Parameters.Length: 0
+        }
+        && ((ContainingInterface(methodSymbol) is { } containingInterface && containingInterface.Is(KnownType.System_IDisposable))  // class/record implementing System.IDisposable
+            || (methodSymbol.ContainingType is { IsValueType: true } && methodSymbol.ContainingType.IsRefLikeType()));              // or a ref struct type
 
     public static bool IsIAsyncDisposableDisposeAsync(this IMethodSymbol methodSymbol) =>
-        methodSymbol is { IsStatic: false, Name: "DisposeAsync" or "System.IAsyncDisposable.DisposeAsync", Arity: 0, Parameters.Length: 0 }
+        methodSymbol is
+        {
+            IsStatic: false,
+            Name: "DisposeAsync" or "System.IAsyncDisposable.DisposeAsync",
+            Arity: 0,
+            Parameters.Length: 0
+        }
         && methodSymbol.ReturnType.Is(KnownType.System_Threading_Tasks_ValueTask)
         && ContainingInterface(methodSymbol) is { } containingInterface
         && containingInterface.Is(KnownType.System_IAsyncDisposable);
