@@ -21,8 +21,8 @@
 using Microsoft.CodeAnalysis.Operations;
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.Extensions;
+using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
-using SonarAnalyzer.Test.Helpers;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Test.TestFramework.SymbolicExecution
@@ -67,6 +67,9 @@ namespace SonarAnalyzer.Test.TestFramework.SymbolicExecution
         public void Validate(string operation, Action<SymbolicContext> action) =>
             action(postProcessed.Single(x => TestHelper.Serialize(x.Operation) == operation));
 
+        public ProgramState TagState(string tag) =>
+            TagStates(tag).Should().ContainSingle().Subject;
+
         public ProgramState[] TagStates(string tag) =>
             tags.Where(x => x.Name == tag).Select(x => x.Context.State).ToArray();
 
@@ -96,6 +99,9 @@ namespace SonarAnalyzer.Test.TestFramework.SymbolicExecution
 
         public void ValidateHasSingleExitStateAndNoException() =>
             ExitStates.Should().ContainSingle().And.ContainSingle(x => x.Exception == null);
+
+        public void ValidateSymbolConstraintsAtTag(string tag, string symbol, params SymbolicConstraint[] constraints) =>
+            TagState(tag)[Symbol(symbol)].Should().HaveOnlyConstraints(constraints);
 
         protected override ProgramState PostProcessSimple(SymbolicContext context)
         {

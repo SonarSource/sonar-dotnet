@@ -475,34 +475,35 @@ Tag(""Anonymous"", anonymous);";
     public void ArrayCreation_SetsNotNull()
     {
         const string code = """
+            string tag;
             var arr1 = new int[] { 42 };
             var arr2 = new int[0];
             int[] arr3 = { };
+
             int[,] arrMulti1 = new int[2, 3];
             int[,] arrMulti2 = new int[0, 3];
             int[,] arrMulti3 = new int[2, 0];
+
             int[][] arrJagged1 = new int[2][];
             int[][] arrJagged2 = new int[0][];
 
-            Tag("Arr1", arr1);
-            Tag("Arr2", arr2);
-            Tag("Arr3", arr3);
-            Tag("ArrMulti1", arrMulti1);
-            Tag("ArrMulti2", arrMulti2);
-            Tag("ArrMulti3", arrMulti3);
-            Tag("ArrJagged1", arrJagged1);
-            Tag("ArrJagged2", arrJagged2);
+            tag = "tag";
             """;
-        var validator = SETestContext.CreateCS(code).Validator;
+
+        var preserved = new string[] { "arr1", "arr2", "arr3", "arrMulti1", "arrMulti2", "arrMulti3", "arrJagged1", "arrJagged2" };
+        var validator = SETestContext.CreateCS(code, new PreserveTestCheck(preserved)).Validator;
         validator.ValidateContainsOperation(OperationKind.ArrayCreation);
-        validator.TagValue("Arr1").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, CollectionConstraint.NotEmpty);
-        validator.TagValue("Arr2").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, CollectionConstraint.Empty);
-        validator.TagValue("Arr3").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, CollectionConstraint.Empty);
-        validator.TagValue("ArrMulti1").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, CollectionConstraint.NotEmpty);
-        validator.TagValue("ArrMulti2").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, CollectionConstraint.Empty);
-        validator.TagValue("ArrMulti3").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, CollectionConstraint.Empty);
-        validator.TagValue("ArrJagged1").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, CollectionConstraint.NotEmpty);
-        validator.TagValue("ArrJagged2").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, CollectionConstraint.Empty);
+        Verify("arr1", CollectionConstraint.NotEmpty);
+        Verify("arr2", CollectionConstraint.Empty);
+        Verify("arr3", CollectionConstraint.Empty);
+        Verify("arrMulti1", CollectionConstraint.NotEmpty);
+        Verify("arrMulti2", CollectionConstraint.Empty);
+        Verify("arrMulti3", CollectionConstraint.Empty);
+        Verify("arrJagged1", CollectionConstraint.NotEmpty);
+        Verify("arrJagged2", CollectionConstraint.Empty);
+
+        void Verify(string symbol, CollectionConstraint collectionConstraint) =>
+            validator.ValidateSymbolConstraintsAtTag("tag", symbol, ObjectConstraint.NotNull, collectionConstraint);
     }
 
     [TestMethod]
@@ -537,6 +538,8 @@ Tag(""S"", s);";
     public void ObjectCreation_SetsNotNull()
     {
         const string code = """
+            string tag;
+
             object assigned;
             var obj = new Object();
             var valueType = new Guid();
@@ -546,21 +549,22 @@ Tag(""S"", s);";
             collection1.Add(42);
             var collection2 = new List<int>(collection1);
 
-            Tag("Declared", declared);
-            Tag("Assigned", assigned);
-            Tag("ValueType", valueType);
-            Tag("Object", obj);
-            Tag("Collection1", collection1);
-            Tag("Collection2", collection2);
+            tag = "tag";
             """;
-        var validator = SETestContext.CreateCS(code).Validator;
+
+        var preserved = new string[] { "obj", "valueType", "declared", "assigned", "collection1", "collection2" };
+        var validator = SETestContext.CreateCS(code, new PreserveTestCheck(preserved)).Validator;
         validator.ValidateContainsOperation(OperationKind.ObjectCreation);
-        validator.TagValue("Declared").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-        validator.TagValue("Assigned").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-        validator.TagValue("ValueType").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);   // This is questionable, value types should not have ObjectConstraint
-        validator.TagValue("Object").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-        validator.TagValue("Collection1").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, CollectionConstraint.Empty);
-        validator.TagValue("Collection2").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, CollectionConstraint.Empty); // This should fail when the Invocation logic is moved to CollectionTracker
+
+        Verify("declared", ObjectConstraint.NotNull);
+        Verify("assigned", ObjectConstraint.NotNull);
+        Verify("valueType", ObjectConstraint.NotNull); // This is questionable, value types should not have ObjectConstraint
+        Verify("obj", ObjectConstraint.NotNull);
+        Verify("collection1", ObjectConstraint.NotNull); // The CollectionConstraint here is deleted when collection1 is used as an argument
+        Verify("collection2", ObjectConstraint.NotNull, CollectionConstraint.Empty);
+
+        void Verify(string symbol, params SymbolicConstraint[] constraints) =>
+            validator.ValidateSymbolConstraintsAtTag("tag", symbol, constraints);
     }
 
     [TestMethod]
@@ -1138,48 +1142,64 @@ Tag(""AfterRemove"", remove);";
     [TestMethod]
     public void ReDim_SetsNotNull()
     {
-        const string code = @"
-Dim First(), Second(), Third(4242) As Object
-Dim Fourth As Object()
-Tag(""BeforeFirst"", First)
-Tag(""BeforeSecond"", Second)
-Tag(""BeforeThird"", Third)
-Tag(""BeforeFourth"", Fourth)
-ReDim First(42), Second(1042), Third(4444), Fourth(4), Arg.FieldArray(42)
-Tag(""AfterFirst"", First)
-Tag(""AfterSecond"", Second)
-Tag(""AfterThird"", Third)
-Tag(""AfterFourth"", Fourth)
-Tag(""AfterNotTracked"", Arg.FieldArray)";
-        var validator = SETestContext.CreateVB(code, "Arg As Sample").Validator;
+        const string code = """
+            Dim tag as String
+
+            Dim First(), Second(), Third(4242) As Object
+            Dim Fourth As Object()
+            tag = "before"
+
+            ReDim First(42), Second(1042), Third(4444), Fourth(4), Arg.FieldArray(42)
+            tag = "after"
+            """;
+
+        var preserved = new string[] { "First", "Second", "Third", "Fourth" };
+        var validator = SETestContext.CreateVB(code, "Arg As Sample", new PreserveTestCheck(preserved)).Validator;
         validator.ValidateContainsOperation(OperationKind.ReDim);
-        validator.TagValue("BeforeFirst").Should().HaveOnlyConstraint(ObjectConstraint.Null);
-        validator.TagValue("BeforeSecond").Should().HaveOnlyConstraint(ObjectConstraint.Null);
-        validator.TagValue("BeforeThird").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, CollectionConstraint.NotEmpty);
-        validator.TagValue("BeforeFourth").Should().HaveOnlyConstraint(ObjectConstraint.Null);
-        validator.TagValue("AfterFirst").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-        validator.TagValue("AfterSecond").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-        validator.TagValue("AfterThird").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, CollectionConstraint.NotEmpty);
-        validator.TagValue("AfterFourth").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-        validator.TagValue("AfterNotTracked").Should().BeNull();
+
+        VerifyBefore("First", ObjectConstraint.Null);
+        VerifyBefore("Second", ObjectConstraint.Null);
+        VerifyBefore("Third", ObjectConstraint.NotNull, CollectionConstraint.NotEmpty);
+        VerifyBefore("Fourth", ObjectConstraint.Null);
+
+        VerifyAfter("First", ObjectConstraint.NotNull);
+        VerifyAfter("Second", ObjectConstraint.NotNull);
+        VerifyAfter("Third", ObjectConstraint.NotNull, CollectionConstraint.NotEmpty);
+        VerifyAfter("Fourth", ObjectConstraint.NotNull);
+
+        void VerifyBefore(string symbol, params SymbolicConstraint[] constraints) =>
+            validator.ValidateSymbolConstraintsAtTag("before", symbol, constraints);
+
+        void VerifyAfter(string symbol, params SymbolicConstraint[] constraints) =>
+            validator.ValidateSymbolConstraintsAtTag("after", symbol, constraints);
     }
 
     [TestMethod]
     public void ReDimPreserve_SetsNotNull()
     {
-        const string code = @"
-Dim First(), Second(10) As Object
-Tag(""BeforeFirst"", First)
-Tag(""BeforeSecond"", Second)
-ReDim Preserve First(42), Second(42)
-Tag(""AfterFirst"", First)
-Tag(""AfterSecond"", Second)";
-        var validator = SETestContext.CreateVB(code, "Arg As Sample").Validator;
+        const string code = """
+            Dim tag as String
+            Dim First(), Second(10) As Object
+            tag = "before"
+            ReDim Preserve First(42), Second(42)
+            tag = "after"
+            """;
+
+        var preserved = new string[] { "First", "Second" };
+        var validator = SETestContext.CreateVB(code, "Arg As Sample", new PreserveTestCheck(preserved)).Validator;
         validator.ValidateContainsOperation(OperationKind.ReDim);
-        validator.TagValue("BeforeFirst").Should().HaveOnlyConstraint(ObjectConstraint.Null);
-        validator.TagValue("BeforeSecond").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, CollectionConstraint.NotEmpty);
-        validator.TagValue("AfterFirst").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-        validator.TagValue("AfterSecond").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, CollectionConstraint.NotEmpty);
+
+        VerifyBefore("First", ObjectConstraint.Null);
+        VerifyBefore("Second", ObjectConstraint.NotNull, CollectionConstraint.NotEmpty);
+
+        VerifyAfter("First", ObjectConstraint.NotNull);
+        VerifyAfter("Second", ObjectConstraint.NotNull, CollectionConstraint.NotEmpty);
+
+        void VerifyBefore(string symbol, params SymbolicConstraint[] constraints) =>
+            validator.ValidateSymbolConstraintsAtTag("before", symbol, constraints);
+
+        void VerifyAfter(string symbol, params SymbolicConstraint[] constraints) =>
+            validator.ValidateSymbolConstraintsAtTag("after", symbol, constraints);
     }
 
     [TestMethod]
