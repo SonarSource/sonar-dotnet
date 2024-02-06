@@ -78,7 +78,7 @@ public class CompilationIssuesTest
     public void Dump()
     {
         using var log = new LogTester();
-        CreateSut().Dump();
+        CreateSut().Dump("C# 99");
         log.AssertContain("""
             Actual C# 99 diagnostics First.cs:
                 S1111, Line: 11, [1, 10] Lorem ipsum
@@ -97,7 +97,7 @@ public class CompilationIssuesTest
     }
 
     private static CompilationIssues CreateSut() =>
-        new("C# 99", new IssueLocation[]
+        new(new IssueLocation[]
         {
             new(IssueType.Primary, "First.cs", 11, "Lorem ipsum", null, 1, 10, "S1111"),
             new(IssueType.Primary, "First.cs", 11, "Lorem ipsum", null, 9, 10, "S1111"),

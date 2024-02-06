@@ -52,9 +52,9 @@ namespace SonarAnalyzer.Test.TestFramework
                     .Select(x => new FileContent(x))
                     .Concat((additionalSourceFiles ?? Array.Empty<string>()).Select(x => new FileContent(x)));
                 var diagnostics = DiagnosticsAndErrors(compilation, analyzers, checkMode, additionalFilePath, onlyDiagnostics).ToArray();
-                var expected = new CompilationIssues(compilation.LanguageVersionString(), sources);
+                var expected = new CompilationIssues(sources);
                 VerifyNoExceptionThrown(diagnostics);
-                Compare(new(compilation.LanguageVersionString(), diagnostics), expected);
+                Compare(compilation.LanguageVersionString(), new(diagnostics), expected);
                 // When there are no issues reported from the test (the FileLines analyzer does not report in each call to Verifier.VerifyAnalyzer) we skip the check for the extension method.
                 if (diagnostics.Any(x => x.Severity != DiagnosticSeverity.Error))
                 {
@@ -111,12 +111,12 @@ namespace SonarAnalyzer.Test.TestFramework
                 onlyDiagnostics.Length == 0 || onlyDiagnostics.Contains(id) ? ReportDiagnostic.Warn : ReportDiagnostic.Suppress;
         }
 
-        private static void Compare(CompilationIssues actual, CompilationIssues expected)
+        private static void Compare(string languageVersion, CompilationIssues actual, CompilationIssues expected)
         {
             var assertionMessages = new StringBuilder();
             foreach (var filePairs in MatchPairs(actual, expected).GroupBy(x => x.FilePath).OrderBy(x => x.Key))
             {
-                assertionMessages.AppendLine($"There are differences for {actual.LanguageVersion} {SerializePath(filePairs.Key)}:");
+                assertionMessages.AppendLine($"There are differences for {languageVersion} {SerializePath(filePairs.Key)}:");
                 foreach (var pair in filePairs.OrderBy(x => (x.Type, x.LineNumber, x.Start, x.IssueId, x.RuleId)))
                 {
                     pair.AppendAssertionMessage(assertionMessages);
@@ -125,7 +125,7 @@ namespace SonarAnalyzer.Test.TestFramework
             }
             if (assertionMessages.Length == 0)
             {
-                actual.Dump();
+                actual.Dump(languageVersion);
             }
             else
             {
