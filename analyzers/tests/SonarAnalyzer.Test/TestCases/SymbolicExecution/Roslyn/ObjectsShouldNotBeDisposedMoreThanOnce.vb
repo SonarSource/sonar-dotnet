@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports System.Threading.Tasks
 
 Interface IWithDispose
     Inherits IDisposable
@@ -41,7 +42,7 @@ Class Program
     Public Sub NotReallyDisposable()
         Dim d As New DoesNotImplementDisposable()
         d.Dispose()
-        d.Dispose() ' Noncompliant^9#11 - IDisposal interface implementation is not checked
+        d.Dispose() ' Compliant - this is not a call to System.IDisposable.Dispose()
     End Sub
 
     Public Sub DisposedTwice_Conditional(d As IDisposable)
@@ -213,4 +214,26 @@ Class UsingDeclaration
         End Using
     End Sub
 
+End Class
+
+
+' Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/8642
+Public Class Repro_8642
+    Sub Method(instance As InstanceDisposable)
+        StaticDisposable.Dispose()
+        StaticDisposable.Dispose()             ' Compliant - none of these methods are coming from the System.IDisposable interface
+
+        instance.Dispose()
+        instance.Dispose()                     ' Compliant
+    End Sub
+
+    Public NotInheritable Class StaticDisposable
+        Public Shared Sub Dispose()
+        End Sub
+    End Class
+
+    Public Class InstanceDisposable
+        Public Sub Dispose()
+        End Sub
+    End Class
 End Class

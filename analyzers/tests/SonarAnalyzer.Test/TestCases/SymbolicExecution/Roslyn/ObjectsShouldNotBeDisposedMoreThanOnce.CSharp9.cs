@@ -7,6 +7,13 @@ topLevel.Dispose(); // Noncompliant
 
 using var top = new MemoryStream(); // Compliant
 
+Dispose();
+Dispose();  // Compliant
+
+void Dispose()
+{
+}
+
 void TopLevelLocalFunction()
 {
     var local = new MemoryStream();

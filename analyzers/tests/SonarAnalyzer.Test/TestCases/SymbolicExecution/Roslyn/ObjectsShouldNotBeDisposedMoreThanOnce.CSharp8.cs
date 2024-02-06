@@ -163,3 +163,32 @@ public class ExpressionsTest
         y.Dispose(); // Noncompliant
     }
 }
+
+// Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/8642
+public class Repro_8642
+{
+    async Task Method(InstanceDisposable instance)
+    {
+        StaticDisposable.Dispose();
+        StaticDisposable.Dispose();             // Compliant - none of these methods are coming from the System.IDisposable or System.IAsyncDisposable interfaces
+        await StaticDisposable.DisposeAsync();
+        await StaticDisposable.DisposeAsync();  // Compliant
+
+        instance.Dispose();
+        instance.Dispose();                     // Compliant
+        await instance.DisposeAsync();
+        await instance.DisposeAsync();          // Compliant
+    }
+
+    public static class StaticDisposable
+    {
+        public static void Dispose() { }
+        public static ValueTask DisposeAsync() => ValueTask.CompletedTask;
+    }
+
+    public class InstanceDisposable
+    {
+        public void Dispose() { }
+        public ValueTask DisposeAsync() => ValueTask.CompletedTask;
+    }
+}
