@@ -26,33 +26,15 @@ namespace SonarAnalyzer.Test.TestFramework;
 public static class SuppressionHandler
 {
     private static readonly ConcurrentDictionary<string, int> Counters = new();
-    private static bool isHooked;   // ToDo: Is this really needed?
 
-    public static void HookSuppression()
-    {
-        if (isHooked)
-        {
-            return;
-        }
-        isHooked = true;
-
+    public static void HookSuppression() =>
         SonarAnalysisContext.ShouldDiagnosticBeReported = (_, d) =>
-        {
-            IncrementReportCount(d.Id);
-            return true;
-        };
-    }
+            {
+                IncrementReportCount(d.Id);
+                return true;
+            };
 
-    public static void UnHookSuppression()
-    {
-        if (!isHooked)
-        {
-            return;
-        }
-        isHooked = false;
-
-        SonarAnalysisContext.ShouldDiagnosticBeReported = null;
-    }
+    public static void UnHookSuppression() => SonarAnalysisContext.ShouldDiagnosticBeReported = null;
 
     public static void IncrementReportCount(string ruleId) =>
         Counters.AddOrUpdate(ruleId, _ => 1, (_, count) => count + 1);
