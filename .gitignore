@@ -82,3 +82,8 @@ analyzers/its/diff/
 
 /its/projects/WebApplication/.scannerwork/report-task.txt
 /its/projects/WebApplication/.scannerwork/.sonar_lock
+
+
+# ITs.JsonParser expects to be run from "sonar-dotnet/analyzers/its".
+# Feel free to configure your local launchSettings.json.
+analyzers/src/ITs.JsonParser/Properties/launchSettings.json

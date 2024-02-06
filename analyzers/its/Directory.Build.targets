@@ -5,6 +5,9 @@
     <PropertyGroup>
       <BinariesFolder>$(MSBuildStartupDirectory)\..\packaging\binaries</BinariesFolder>
       <AnalysisOutputPath>$(MSBuildStartupDirectory)\output\$(PROJECT)\$(AssemblyName)</AnalysisOutputPath>
+      <ErrorLogFolder>$(MSBuildStartupDirectory)\output\Issues\$(PROJECT)</ErrorLogFolder>
+      <ErrorLogPrefix Condition="'$(TargetFramework)' == ''">$(ErrorLogFolder)\$(AssemblyName)</ErrorLogPrefix>
+      <ErrorLogPrefix Condition="'$(TargetFramework)' != ''">$(ErrorLogFolder)\$(AssemblyName)-$(TargetFramework)</ErrorLogPrefix>
       <SonarAnalysisConfigPath>$(MSBuildStartupDirectory)\SonarQubeAnalysisConfig.xml</SonarAnalysisConfigPath>
       <SonarProjectOutputPath Condition="'$(TargetFramework)' != ''">$(AnalysisOutputPath)\$(TargetFramework)</SonarProjectOutputPath>
       <SonarProjectOutputPath Condition="'$(TargetFramework)' == ''">$(AnalysisOutputPath)</SonarProjectOutputPath>
@@ -34,6 +37,7 @@
 
     <MakeDir Directories="$(AnalysisOutputPath)"/>
     <MakeDir Directories="$(SonarProjectOutputPath)"/>
+    <MakeDir Directories="$(ErrorLogFolder)"/>
 
     <!-- First FINDSTR removes \bin\, \obj\ and \packages\ subdirectories from FilesToAnalyze.txt. Second FINDSTR includes only files with an extension, because DIR lists also directories themselves.-->
     <Exec Command="dir &quot;$(MSBuildStartupDirectory)\sources\$(PROJECT)&quot; /s /b | findstr /v &quot;\\bin\\ \\obj\\ \\packages\\&quot; | findstr /e /r &quot;\\[^\\]*\.[^\\]*&quot; > &quot;$(SonarFilesToAnalyzePath)&quot;" Condition="'$(TargetFrameworks)' == ''"/>
@@ -56,10 +60,8 @@
 
     <PropertyGroup>
       <!-- Set the path to the SARIF report -->
-      <ErrorLog Condition="'$(TargetFramework)' != ''">$(AnalysisOutputPath)-$(ProjectGuid)-$(TargetFramework).json</ErrorLog>
-      <ErrorLog Condition="'$(TargetFramework)' == ''">$(AnalysisOutputPath)-$(ProjectGuid).json</ErrorLog>
-      <RazorCompilationErrorLog Condition="'$(TargetFramework)' != ''">$(AnalysisOutputPath)-$(ProjectGuid)-$(TargetFramework).Views.json</RazorCompilationErrorLog>
-      <RazorCompilationErrorLog Condition="'$(TargetFramework)' == ''">$(AnalysisOutputPath)-$(ProjectGuid).Views.json</RazorCompilationErrorLog>
+      <ErrorLog>$(ErrorLogPrefix).json</ErrorLog>
+      <RazorCompilationErrorLog>$(ErrorLogPrefix).Views.json</RazorCompilationErrorLog>
 
       <!-- Override the ruleset with all SonarAnalyzer rules -->
       <ResolvedCodeAnalysisRuleSet>$(MSBuildStartupDirectory)\output\AllSonarAnalyzerRules.ruleset</ResolvedCodeAnalysisRuleSet>
