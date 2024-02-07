@@ -526,23 +526,31 @@ Tag(""S"", s);";
     [TestMethod]
     public void ObjectCreation_SetsNotNull()
     {
-        const string code = @"
-object assigned;
-var obj = new Object();
-var valueType = new Guid();
-var declared = new Exception();
-assigned = new EventArgs();
+        const string code = """
+            object assigned;
+            var obj = new Object();
+            var valueType = new Guid();
+            var declared = new Exception();
+            assigned = new EventArgs();
+            var collection1 = new List<int>();
+            collection1.Add(42);
+            var collection2 = new List<int>(collection1);
 
-Tag(""Declared"", declared);
-Tag(""Assigned"", assigned);
-Tag(""ValueType"", valueType);
-Tag(""Object"", obj);";
+            Tag("Declared", declared);
+            Tag("Assigned", assigned);
+            Tag("ValueType", valueType);
+            Tag("Object", obj);
+            Tag("Collection1", collection1);
+            Tag("Collection2", collection2);
+            """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.ValidateContainsOperation(OperationKind.ObjectCreation);
         validator.TagValue("Declared").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
         validator.TagValue("Assigned").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
         validator.TagValue("ValueType").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);   // This is questionable, value types should not have ObjectConstraint
         validator.TagValue("Object").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("Collection1").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, CollectionConstraint.Empty);
+        validator.TagValue("Collection2").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, CollectionConstraint.Empty); // This should fail when the Invocation logic is moved to CollectionTracker
     }
 
     [TestMethod]
