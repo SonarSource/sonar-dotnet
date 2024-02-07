@@ -84,5 +84,28 @@
             {
             }
         }
+        public int MyProperty9
+        {
+            get
+            {
+                throw FactoryMethod(); // Compliant
+            }
+        }
+        private NotSupportedException FactoryMethod()
+        {
+            return new NotSupportedException();
+        }
+        public int MyProperty10
+        {
+            get
+            {
+                throw FactoryMethod2(); // Noncompliant {{Remove the exception throwing from this property getter, or refactor the property into a method.}}
+//              ^^^^^^^^^^^^^^^^^^^^^^^
+            }
+        }
+        private Exception FactoryMethod2()
+        {
+            return new Exception();
+        }
     }
 }

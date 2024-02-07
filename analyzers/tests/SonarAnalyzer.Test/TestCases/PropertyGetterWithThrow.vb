@@ -57,5 +57,22 @@ Namespace Tests.Diagnostics
 
             End Set
         End Property
+        Public ReadOnly Property Foo9() As Integer
+            Get
+                Throw FactoryMethod() ' Compliant
+            End Get
+        End Property
+        private Function FactoryMethod() as NotSupportedException
+            return new NotSupportedException()
+        End Function
+        Public ReadOnly Property Foo10() As Integer
+            Get
+                Throw FactoryMethod2() ' Noncompliant
+'               ^^^^^^^^^^^^^^^^^^^^^^
+            End Get
+        End Property
+        private Function FactoryMethod2() as Exception
+            return new Exception()
+        End Function
     End Class
 End Namespace
