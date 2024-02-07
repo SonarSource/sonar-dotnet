@@ -29,12 +29,12 @@ public partial class RoslynSymbolicExecutionTest
     public void Loops_IsInLoop_For()
     {
         var code = """
-            Console.WriteLine("Before loop");
-            for (var i = 0; i < 10; i++)
+            Console.WriteLine("Before loop");       // Block 1
+            for (var i = 0; i < 10; i++)            // Block 2: assignment, Block 3: condition, Block 4: increment
             {
-                Console.WriteLine("Inside loop");
+                Console.WriteLine("Inside loop");   // Block 4
             }
-            Console.WriteLine("After loop");
+            Console.WriteLine("After loop");        // Block 5
             """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.PostProcessed.GroupBy(x => x.Block.Ordinal).Should().HaveCount(5);
@@ -46,12 +46,12 @@ public partial class RoslynSymbolicExecutionTest
     public void Loops_IsInLoop_ForEach()
     {
         var code = """
-            Console.WriteLine("Before loop");
-            foreach (var i in items)
+            Console.WriteLine("Before loop");       // Block 1
+            foreach (var i in items)                // Block 2: capture, Block 3: MoveNext
             {
-                Console.WriteLine("Inside loop");
-            }
-            Console.WriteLine("After loop");
+                Console.WriteLine("Inside loop");   // Block 4
+            }                                       // Block 5-7: finally
+            Console.WriteLine("After loop");        // Block 8
             """;
         var validator = SETestContext.CreateCS(code, "int[] items").Validator;
         validator.PostProcessed.GroupBy(x => x.Block.Ordinal).Should().HaveCount(7);
@@ -63,12 +63,12 @@ public partial class RoslynSymbolicExecutionTest
     public void Loops_IsInLoop_While()
     {
         var code = """
-            Console.WriteLine("Before loop");
-            while (Condition)
+            Console.WriteLine("Before loop");       // Block 1
+            while (Condition)                       // Block 2
             {
-                Console.WriteLine("Inside loop");
+                Console.WriteLine("Inside loop");   // Block 3
             }
-            Console.WriteLine("After loop");
+            Console.WriteLine("After loop");        // Block 4
             """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.PostProcessed.GroupBy(x => x.Block.Ordinal).Should().HaveCount(4);
@@ -80,13 +80,13 @@ public partial class RoslynSymbolicExecutionTest
     public void Loops_IsInLoop_DoWhile()
     {
         var code = """
-            Console.WriteLine("Before loop");
+            Console.WriteLine("Before loop");       // Block 1
             do
             {
-                Console.WriteLine("Inside loop");
+                Console.WriteLine("Inside loop");   // Block 2
             }
-            while (Condition);
-            Console.WriteLine("After loop");
+            while (Condition);                      // Block 2
+            Console.WriteLine("After loop");        // Block 3
             """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.PostProcessed.GroupBy(x => x.Block.Ordinal).Should().HaveCount(3);
@@ -98,17 +98,169 @@ public partial class RoslynSymbolicExecutionTest
     public void Loops_IsInLoop_GoTo()
     {
         var code = """
-            Console.WriteLine("Before loop");
+            Console.WriteLine("Before loop");   // Block 1
             Start:
-            Console.WriteLine("Inside loop");
-            if (Condition)
+            Console.WriteLine("Inside loop");   // Block 2
+            if (Condition)                      // Block 2
                 goto Start;
-            Console.WriteLine("After loop");
+            Console.WriteLine("After loop");    // Block 3
             """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.PostProcessed.GroupBy(x => x.Block.Ordinal).Should().HaveCount(3);
         validator.PostProcessed.Where(x => x.Block.Ordinal is 2).Should().AllSatisfy(x => x.IsInLoop.Should().BeTrue());
         validator.PostProcessed.Where(x => x.Block.Ordinal is 1 or 3).Should().AllSatisfy(x => x.IsInLoop.Should().BeFalse());
+    }
+
+    [TestMethod]
+    public void Loops_IsInLoop_Nested()
+    {
+        var code = """
+            Console.WriteLine("Before loop");               // Block 1
+            while (Condition)                               // Block 2
+            {
+                Console.WriteLine("Inside outer loop");     // Block 3
+                while (Condition)                           // Block 4
+                {
+                    Console.WriteLine("Inside inner loop"); // Block 5
+                }
+                Console.WriteLine("Inside outer loop");     // Block 6
+            }
+            Console.WriteLine("After loop");                // Block 7
+            """;
+        var validator = SETestContext.CreateCS(code).Validator;
+        validator.PostProcessed.GroupBy(x => x.Block.Ordinal).Should().HaveCount(7);
+        validator.PostProcessed.Where(x => x.Block.Ordinal is 2 or 3 or 4 or 5 or 6).Should().AllSatisfy(x => x.IsInLoop.Should().BeTrue());
+        validator.PostProcessed.Where(x => x.Block.Ordinal is 1 or 7).Should().AllSatisfy(x => x.IsInLoop.Should().BeFalse());
+    }
+
+    [TestMethod]
+    public void Loops_IsInLoop_NotReducable()
+    {
+        var code = """
+            Console.WriteLine("Before loop");   // Block 1
+            Entry1:
+            Console.WriteLine("Entry 1");       // Block 2
+            Entry2:
+            Console.WriteLine("Entry 2");       // Block 3
+            if (Condition)                      // Block 3
+                goto Entry1;
+            if (Condition)                      // Block 4
+                goto Entry2;
+            Console.WriteLine("After loop");    // Block 5
+            """;
+        var validator = SETestContext.CreateCS(code).Validator;
+        validator.PostProcessed.GroupBy(x => x.Block.Ordinal).Should().HaveCount(5);
+        validator.PostProcessed.Where(x => x.Block.Ordinal is 2 or 3 or 4).Should().AllSatisfy(x => x.IsInLoop.Should().BeTrue());
+        validator.PostProcessed.Where(x => x.Block.Ordinal is 1 or 5).Should().AllSatisfy(x => x.IsInLoop.Should().BeFalse());
+    }
+
+    [TestMethod]
+    public void Loops_IsInLoop_If()
+    {
+        var code = """
+            Console.WriteLine("Before If");
+            if (Condition)
+            {
+                Console.WriteLine("Inside If");
+            }
+            else
+            {
+                Console.WriteLine("Inside Else");
+            }
+            Console.WriteLine("After If");
+            _ = Condition ? "Inside Ternary" : "Inside Ternary Else";
+            _ = ObjectField?.ToString() ?? "Inside Coalesce";
+            """;
+        var validator = SETestContext.CreateCS(code).Validator;
+        validator.PostProcessed.Should().AllSatisfy(x => x.IsInLoop.Should().BeFalse());
+    }
+
+    [TestMethod]
+    public void Loops_IsInLoop_IfInLoop()
+    {
+        var code = """
+            Console.WriteLine("Before Loop");   // Block 1
+            while (Condition)                   // Block 2
+            {
+                Console.WriteLine("Before If"); // Block 3
+                if (Condition)                  // Block 3
+                {
+                    Console.WriteLine("If");    // Block 4
+                }
+                else
+                {
+                    Console.WriteLine("Else");  // Block 5
+                }
+                Console.WriteLine("After If");  // Block 6
+            }
+            Console.WriteLine("After Loop");    // Block 7
+            """;
+        var validator = SETestContext.CreateCS(code).Validator;
+        validator.PostProcessed.GroupBy(x => x.Block.Ordinal).Should().HaveCount(7);
+        validator.PostProcessed.Where(x => x.Block.Ordinal is 2 or 3 or 4 or 5 or 6).Should().AllSatisfy(x => x.IsInLoop.Should().BeTrue());
+        validator.PostProcessed.Where(x => x.Block.Ordinal is 1 or 7).Should().AllSatisfy(x => x.IsInLoop.Should().BeFalse());
+    }
+
+    [TestMethod]
+    public void Loops_IsInLoop_TryCatch()
+    {
+        var code = """
+            Console.WriteLine("Before loop");               // Block 1
+            while (Condition)                               // Block 2
+            {
+                Console.WriteLine("Inside loop");           // Block 3
+                try
+                {
+                    Console.WriteLine("Inside try");        // Block 4
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Inside catch");      // Block 5
+                }
+                finally
+                {
+                    Console.WriteLine("Inside finally");    // Block 6
+                }
+            }
+            Console.WriteLine("After loop");                // Block 7
+            """;
+        var validator = SETestContext.CreateCS(code).Validator;
+        validator.PostProcessed.GroupBy(x => x.Block.Ordinal).Should().HaveCount(7);
+        validator.PostProcessed.Where(x => x.Block.Ordinal is 2 or 3 or 4).Should().AllSatisfy(x => x.IsInLoop.Should().BeTrue());      // should be 2-6
+        validator.PostProcessed.Where(x => x.Block.Ordinal is 1 or 5 or 6 or 7).Should().AllSatisfy(x => x.IsInLoop.Should().BeFalse());
+    }
+
+    [TestMethod]
+    public void Loops_IsInLoop_Complex()
+    {
+        var code = """
+            if (Condition)                          // Block 1
+            {
+                goto AlternativeEntry;
+            }
+            Loop:
+            if (Condition)                          // Block 2
+            {
+                goto AfterLoop;
+            }
+            AlternativeEntry:
+            if (Condition)                          // Block 3
+            {
+                goto Skip;
+            }
+            Console.WriteLine("Skippable");         // Block 4
+            Skip:
+            if (Condition)                          // Block 5
+            {
+                goto Loop;
+            }
+            AfterLoop:
+            Console.WriteLine("After loop");        // Block 6
+            """;
+        var validator = SETestContext.CreateCS(code).Validator;
+        validator.PostProcessed.GroupBy(x => x.Block.Ordinal).Should().HaveCount(6);
+        validator.PostProcessed.Where(x => x.Block.Ordinal is 2 or 3 or 4 or 5).Should().AllSatisfy(x => x.IsInLoop.Should().BeTrue());
+        validator.PostProcessed.Where(x => x.Block.Ordinal is 1 or 6).Should().AllSatisfy(x => x.IsInLoop.Should().BeFalse());
     }
 
     [DataTestMethod]
