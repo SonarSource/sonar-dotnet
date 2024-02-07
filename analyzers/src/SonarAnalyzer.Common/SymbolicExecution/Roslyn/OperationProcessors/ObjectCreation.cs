@@ -19,7 +19,6 @@
  */
 
 using SonarAnalyzer.SymbolicExecution.Constraints;
-using SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
@@ -30,13 +29,7 @@ internal sealed class ObjectCreation : SimpleProcessor<IObjectCreationOperationW
 
     protected override ProgramState Process(SymbolicContext context, IObjectCreationOperationWrapper operation)
     {
-        if (operation.Type.IsAny(EmptyCollectionsShouldNotBeEnumeratedBase.TrackedCollectionTypes)
-            && CollectionCreationConstraint(context.State, operation) is { } constraint)
-        {
-            return context.SetOperationConstraint(constraint)
-                .SetOperationConstraint(operation, ObjectConstraint.NotNull);
-        }
-        else if (operation.Type.IsNullableValueType())
+        if (operation.Type.IsNullableValueType())
         {
             if (operation.Arguments.IsEmpty)
             {
@@ -53,15 +46,10 @@ internal sealed class ObjectCreation : SimpleProcessor<IObjectCreationOperationW
         }
         else
         {
-            return context.SetOperationConstraint(ObjectConstraint.NotNull);
+            var newState = context.SetOperationConstraint(ObjectConstraint.NotNull);
+            return CollectionTracker.ObjectCreationConstraint(context.State, operation) is { } constraint
+                ? newState.SetOperationConstraint(operation, constraint)
+                : newState;
         }
     }
-
-    private static CollectionConstraint CollectionCreationConstraint(ProgramState state, IObjectCreationOperationWrapper operation) =>
-        operation.Arguments.SingleOrDefault(IsEnumerable) is { } argument
-            ? state.Constraint<CollectionConstraint>(argument)
-            : CollectionConstraint.Empty;
-
-    private static bool IsEnumerable(IOperation operation) =>
-            operation.ToArgument().Parameter.Type.DerivesOrImplements(KnownType.System_Collections_IEnumerable);
 }
