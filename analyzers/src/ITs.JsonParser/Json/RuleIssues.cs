@@ -37,7 +37,7 @@ public class RuleIssue
     {
         Id = issue.RuleId;
         Message = issue.Message;
-        Uri = issue.NormalizedUri();
+        Uri = SarifIssue.NormalizedUri(issue.Location);
         if (issue.Location?.Region is { } region)
         {
             Location = region.StartLine == region.EndLine
