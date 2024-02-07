@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.Test.Rules
@@ -49,6 +50,6 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void CallerInformationParametersShouldBeLastInvalidSyntax() =>
-            builder.AddPaths("CallerInformationParametersShouldBeLastInvalidSyntax.cs").WithConcurrentAnalysis(false).Verify();
+            builder.AddPaths("CallerInformationParametersShouldBeLastInvalidSyntax.cs").WithLanguageVersion(LanguageVersion.CSharp7).WithConcurrentAnalysis(false).Verify();
     }
 }

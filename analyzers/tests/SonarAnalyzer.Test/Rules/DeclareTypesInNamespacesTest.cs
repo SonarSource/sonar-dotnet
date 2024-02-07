@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.CSharp;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
@@ -34,8 +35,8 @@ namespace SonarAnalyzer.Test.Rules
             builder.AddPaths("DeclareTypesInNamespaces.cs", "DeclareTypesInNamespaces2.cs").WithAutogenerateConcurrentFiles(false).Verify();
 
         [TestMethod]
-        public void DeclareTypesInNamespaces_CS_Before8() =>
-            nonConcurrent.AddPaths("DeclareTypesInNamespaces.BeforeCSharp8.cs").WithOptions(ParseOptionsHelper.BeforeCSharp8).Verify();
+        public void DeclareTypesInNamespaces_CSharp7() =>
+            nonConcurrent.AddPaths("DeclareTypesInNamespaces.CSharp7.cs").WithLanguageVersion(LanguageVersion.CSharp7).Verify();
 
         [TestMethod]
         public void DeclareTypesInNamespaces_CS_After8() =>

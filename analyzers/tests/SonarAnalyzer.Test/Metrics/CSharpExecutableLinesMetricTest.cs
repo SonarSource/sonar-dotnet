@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.Test.Helpers;
 using SonarAnalyzer.Test.TestFramework.Tests;
 
@@ -1040,6 +1041,7 @@ class Program
         {
             var compilation = new VerifierBuilder<DummyAnalyzerWithLocation>()
                 .AddSnippet(code, fileName)
+                .WithLanguageVersion(LanguageVersion.Latest)
                 .Build()
                 .Compile(false)
                 .Single();
