@@ -474,25 +474,35 @@ Tag(""Anonymous"", anonymous);";
     [TestMethod]
     public void ArrayCreation_SetsNotNull()
     {
-        const string code = @"
-var arr1 = new int[] { 42 };
-var arr2 = new int[0];
-int[] arr3 = { };
-int[,] arrMulti = new int[2, 3];
-int[][] arrJagged = new int[2][];
+        const string code = """
+            var arr1 = new int[] { 42 };
+            var arr2 = new int[0];
+            int[] arr3 = { };
+            int[,] arrMulti1 = new int[2, 3];
+            int[,] arrMulti2 = new int[0, 3];
+            int[,] arrMulti3 = new int[2, 0];
+            int[][] arrJagged1 = new int[2][];
+            int[][] arrJagged2 = new int[0][];
 
-Tag(""Arr1"", arr1);
-Tag(""Arr2"", arr2);
-Tag(""Arr3"", arr3);
-Tag(""ArrMulti"", arrMulti);
-Tag(""ArrJagged"", arrJagged);";
+            Tag("Arr1", arr1);
+            Tag("Arr2", arr2);
+            Tag("Arr3", arr3);
+            Tag("ArrMulti1", arrMulti1);
+            Tag("ArrMulti2", arrMulti2);
+            Tag("ArrMulti3", arrMulti3);
+            Tag("ArrJagged1", arrJagged1);
+            Tag("ArrJagged2", arrJagged2);
+            """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.ValidateContainsOperation(OperationKind.ArrayCreation);
-        validator.TagValue("Arr1").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-        validator.TagValue("Arr2").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-        validator.TagValue("Arr3").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-        validator.TagValue("ArrMulti").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-        validator.TagValue("ArrJagged").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("Arr1").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, CollectionConstraint.NotEmpty);
+        validator.TagValue("Arr2").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, CollectionConstraint.Empty);
+        validator.TagValue("Arr3").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, CollectionConstraint.Empty);
+        validator.TagValue("ArrMulti1").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, CollectionConstraint.NotEmpty);
+        validator.TagValue("ArrMulti2").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, CollectionConstraint.Empty);
+        validator.TagValue("ArrMulti3").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, CollectionConstraint.Empty);
+        validator.TagValue("ArrJagged1").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, CollectionConstraint.NotEmpty);
+        validator.TagValue("ArrJagged2").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, CollectionConstraint.Empty);
     }
 
     [TestMethod]
@@ -1145,11 +1155,11 @@ Tag(""AfterNotTracked"", Arg.FieldArray)";
         validator.ValidateContainsOperation(OperationKind.ReDim);
         validator.TagValue("BeforeFirst").Should().HaveOnlyConstraint(ObjectConstraint.Null);
         validator.TagValue("BeforeSecond").Should().HaveOnlyConstraint(ObjectConstraint.Null);
-        validator.TagValue("BeforeThird").Should().HaveOnlyConstraint(ObjectConstraint.NotNull, "has size in declaration");
+        validator.TagValue("BeforeThird").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, CollectionConstraint.NotEmpty);
         validator.TagValue("BeforeFourth").Should().HaveOnlyConstraint(ObjectConstraint.Null);
         validator.TagValue("AfterFirst").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
         validator.TagValue("AfterSecond").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-        validator.TagValue("AfterThird").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("AfterThird").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, CollectionConstraint.NotEmpty);
         validator.TagValue("AfterFourth").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
         validator.TagValue("AfterNotTracked").Should().BeNull();
     }
@@ -1167,9 +1177,9 @@ Tag(""AfterSecond"", Second)";
         var validator = SETestContext.CreateVB(code, "Arg As Sample").Validator;
         validator.ValidateContainsOperation(OperationKind.ReDim);
         validator.TagValue("BeforeFirst").Should().HaveOnlyConstraint(ObjectConstraint.Null);
-        validator.TagValue("BeforeSecond").Should().HaveOnlyConstraint(ObjectConstraint.NotNull, "has size in declaration");
+        validator.TagValue("BeforeSecond").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, CollectionConstraint.NotEmpty);
         validator.TagValue("AfterFirst").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-        validator.TagValue("AfterSecond").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("AfterSecond").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, CollectionConstraint.NotEmpty);
     }
 
     [TestMethod]
