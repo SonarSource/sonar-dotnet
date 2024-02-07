@@ -152,7 +152,7 @@ End Class";
         [DataTestMethod]
         [DataRow("Strasse", "Straße")]
         [DataRow("\u00F6", "\u006F\u0308")] // 00F6 = ö; 006F = o; 0308 = https://www.fileformat.info/info/unicode/char/0308/index.htm
-        public void NameIsCulture_CS(string identifierName, string actual)
+        public void NameIs_StringComparisonOrdinal_ReturnsFalse(string identifierName, string actual)
         {
             var identifier = Microsoft.CodeAnalysis.CSharp.SyntaxFactory.IdentifierName(identifierName);
             identifier.NameIs(actual).Should().BeFalse();
@@ -162,7 +162,7 @@ End Class";
         [DataRow("Strasse", "Straße")]
         [DataRow("\u00F6", "\u006F\u0308")] // 00F6 = ö; 006F = o; 0308 = https://www.fileformat.info/info/unicode/char/0308/index.htm
         [DataRow("ö", "\u006F\u0308", "ä", "oe")] // 006F = o; 0308 = https://www.fileformat.info/info/unicode/char/0308/index.htm
-        public void NameIsOrNamesCulture_CS(string identifierName, string name, params string[] orNames)
+        public void NameIsOrNames_StringComparisonOrdinal_ReturnsFalse(string identifierName, string name, params string[] orNames)
         {
             var identifier = Microsoft.CodeAnalysis.CSharp.SyntaxFactory.IdentifierName(identifierName);
             identifier.NameIs(name, orNames).Should().BeFalse();
