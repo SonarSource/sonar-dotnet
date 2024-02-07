@@ -29,7 +29,8 @@ public abstract class SonarReportingContextBase<TContext> : SonarAnalysisContext
     protected void ReportIssueCore(Diagnostic diagnostic)
     {
         diagnostic = EnsureDiagnosticLocation(diagnostic);
-        if (HasMatchingScope(diagnostic.Descriptor)
+        if (!GeneratedCodeRecognizer.IsRazorGeneratedFile(diagnostic.Location.SourceTree) // In case of Razor generated content, we don't want to raise any issues
+            && HasMatchingScope(diagnostic.Descriptor)
             && SonarAnalysisContext.LegacyIsRegisteredActionEnabled(diagnostic.Descriptor, diagnostic.Location?.SourceTree))
         {
             var reportingContext = CreateReportingContext(diagnostic);

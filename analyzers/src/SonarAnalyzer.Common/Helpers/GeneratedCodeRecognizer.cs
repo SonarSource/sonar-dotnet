@@ -19,6 +19,7 @@
  */
 
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -61,10 +62,17 @@ namespace SonarAnalyzer.Helpers
         public static bool IsRazorGeneratedFile(SyntaxTree tree) =>
             tree is not null && (IsRazor(tree) || IsCshtml(tree));
 
-        public static bool IsRazor(SyntaxTree tree) =>
-            tree.FilePath.EndsWith("razor.g.cs", StringComparison.OrdinalIgnoreCase)
-            || tree.FilePath.EndsWith("razor.ide.g.cs", StringComparison.OrdinalIgnoreCase);
+        // match also ViewContact.razor.hyYZFFeGwGnGotaj.ide.g.cs
+        // but it can also be just ViewContact.razor.ide.g.cs
+        static Regex regex = new Regex(".*razor(\\.[a-zA-Z0-9]*)?(\\.ide)?\\.g\\.cs$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
+        public static bool IsRazor(SyntaxTree tree) =>
+            regex.IsMatch(tree.FilePath);
+            // tree.FilePath.EndsWith("razor.g.cs", StringComparison.OrdinalIgnoreCase)
+            // || tree.FilePath.EndsWith("razor.ide.g.cs", StringComparison.OrdinalIgnoreCase);
+
+        // FIXME how can I test if the new behavior for CSHTML is the same with Razor
+        // ViewContact.cshtml.hyYZFFeGwGnGotaj.ide.g.cs
         public static bool IsCshtml(SyntaxTree tree) =>
             tree.FilePath.EndsWith("cshtml.g.cs", StringComparison.OrdinalIgnoreCase)
             || tree.FilePath.EndsWith("cshtml.ide.g.cs", StringComparison.OrdinalIgnoreCase);
