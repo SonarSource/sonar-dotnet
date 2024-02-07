@@ -1,56 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L299",
-"region":  {
-"startLine":  299,
-"startColumn":  25,
-"endLine":  299,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L311",
-"region":  {
-"startLine":  311,
-"startColumn":  25,
-"endLine":  311,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L317",
-"region":  {
-"startLine":  317,
-"startColumn":  25,
-"endLine":  317,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L448",
-"region":  {
-"startLine":  448,
-"startColumn":  29,
-"endLine":  448,
-"endColumn":  31
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S134",
+      "Message": "Refactor this code to not nest more than 3 control flow statements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L299",
+      "Location": "Line 299 Position 25-32"
+    },
+    {
+      "Id": "S134",
+      "Message": "Refactor this code to not nest more than 3 control flow statements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L311",
+      "Location": "Line 311 Position 25-32"
+    },
+    {
+      "Id": "S134",
+      "Message": "Refactor this code to not nest more than 3 control flow statements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L317",
+      "Location": "Line 317 Position 25-32"
+    },
+    {
+      "Id": "S134",
+      "Message": "Refactor this code to not nest more than 3 control flow statements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L448",
+      "Location": "Line 448 Position 29-31"
+    }
+  ]
 }

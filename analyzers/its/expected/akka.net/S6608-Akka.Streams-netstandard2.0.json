@@ -1,134 +1,64 @@
 {
-"issues":  [
-{
-"id":  "S6608",
-"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L846",
-"region":  {
-"startLine":  846,
-"startColumn":  51,
-"endLine":  846,
-"endColumn":  56
-}
-}
-},
-{
-"id":  "S6608",
-"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L199",
-"region":  {
-"startLine":  199,
-"startColumn":  77,
-"endLine":  199,
-"endColumn":  82
-}
-}
-},
-{
-"id":  "S6608",
-"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L210",
-"region":  {
-"startLine":  210,
-"startColumn":  78,
-"endLine":  210,
-"endColumn":  83
-}
-}
-},
-{
-"id":  "S6608",
-"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorPublisher.cs#L297",
-"region":  {
-"startLine":  297,
-"startColumn":  77,
-"endLine":  297,
-"endColumn":  82
-}
-}
-},
-{
-"id":  "S6608",
-"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L217",
-"region":  {
-"startLine":  217,
-"startColumn":  84,
-"endLine":  217,
-"endColumn":  89
-}
-}
-},
-{
-"id":  "S6608",
-"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L498",
-"region":  {
-"startLine":  498,
-"startColumn":  84,
-"endLine":  498,
-"endColumn":  89
-}
-}
-},
-{
-"id":  "S6608",
-"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L680",
-"region":  {
-"startLine":  680,
-"startColumn":  36,
-"endLine":  680,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S6608",
-"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/FilePublisher.cs#L152",
-"region":  {
-"startLine":  152,
-"startColumn":  31,
-"endLine":  152,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S6608",
-"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/TypeExtensions.cs#L32",
-"region":  {
-"startLine":  32,
-"startColumn":  22,
-"endLine":  32,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S6608",
-"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/TypeExtensions.cs#L47",
-"region":  {
-"startLine":  47,
-"startColumn":  22,
-"endLine":  47,
-"endColumn":  27
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6608",
+      "Message": "Indexing at 0 should be used instead of the \u0022Enumerable\u0022 extension method \u0022First\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L846",
+      "Location": "Line 846 Position 51-56"
+    },
+    {
+      "Id": "S6608",
+      "Message": "Indexing at 0 should be used instead of the \u0022Enumerable\u0022 extension method \u0022First\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L199",
+      "Location": "Line 199 Position 77-82"
+    },
+    {
+      "Id": "S6608",
+      "Message": "Indexing at 0 should be used instead of the \u0022Enumerable\u0022 extension method \u0022First\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L210",
+      "Location": "Line 210 Position 78-83"
+    },
+    {
+      "Id": "S6608",
+      "Message": "Indexing at 0 should be used instead of the \u0022Enumerable\u0022 extension method \u0022First\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorPublisher.cs#L297",
+      "Location": "Line 297 Position 77-82"
+    },
+    {
+      "Id": "S6608",
+      "Message": "Indexing at 0 should be used instead of the \u0022Enumerable\u0022 extension method \u0022First\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L217",
+      "Location": "Line 217 Position 84-89"
+    },
+    {
+      "Id": "S6608",
+      "Message": "Indexing at 0 should be used instead of the \u0022Enumerable\u0022 extension method \u0022First\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L498",
+      "Location": "Line 498 Position 84-89"
+    },
+    {
+      "Id": "S6608",
+      "Message": "Indexing at 0 should be used instead of the \u0022Enumerable\u0022 extension method \u0022First\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L680",
+      "Location": "Line 680 Position 36-41"
+    },
+    {
+      "Id": "S6608",
+      "Message": "Indexing at 0 should be used instead of the \u0022Enumerable\u0022 extension method \u0022First\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/FilePublisher.cs#L152",
+      "Location": "Line 152 Position 31-36"
+    },
+    {
+      "Id": "S6608",
+      "Message": "Indexing at 0 should be used instead of the \u0022Enumerable\u0022 extension method \u0022First\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/TypeExtensions.cs#L32",
+      "Location": "Line 32 Position 22-27"
+    },
+    {
+      "Id": "S6608",
+      "Message": "Indexing at 0 should be used instead of the \u0022Enumerable\u0022 extension method \u0022First\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/TypeExtensions.cs#L47",
+      "Location": "Line 47 Position 22-27"
+    }
+  ]
 }

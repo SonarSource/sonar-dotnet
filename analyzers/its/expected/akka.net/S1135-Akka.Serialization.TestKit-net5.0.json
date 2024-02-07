@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/AkkaSerializationSpec.cs#L470",
-"region":  {
-"startLine":  470,
-"startColumn":  11,
-"endLine":  470,
-"endColumn":  15
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1135",
+      "Message": "Complete the task associated to this \u0027TODO\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/AkkaSerializationSpec.cs#L470",
+      "Location": "Line 470 Position 11-15"
+    }
+  ]
 }

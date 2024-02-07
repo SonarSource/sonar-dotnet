@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S3260",
-"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L113",
-"region":  {
-"startLine":  113,
-"startColumn":  23,
-"endLine":  113,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S3260",
-"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L114",
-"region":  {
-"startLine":  114,
-"startColumn":  23,
-"endLine":  114,
-"endColumn":  44
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3260",
+      "Message": "Private classes which are not derived in the current assembly should be marked as \u0027sealed\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L113",
+      "Location": "Line 113 Position 23-45"
+    },
+    {
+      "Id": "S3260",
+      "Message": "Private classes which are not derived in the current assembly should be marked as \u0027sealed\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L114",
+      "Location": "Line 114 Position 23-44"
+    }
+  ]
 }

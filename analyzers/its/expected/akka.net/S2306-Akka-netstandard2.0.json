@@ -1,95 +1,46 @@
 {
-"issues":  [
-{
-"id":  "S2306",
-"message":  "Rename 'async' to not use a contextual keyword as an identifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.Children.cs#L452",
-"region":  {
-"startLine":  452,
-"startColumn":  76,
-"endLine":  452,
-"endColumn":  81
-}
-}
-},
-{
-"id":  "S2306",
-"message":  "Rename 'async' to not use a contextual keyword as an identifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.DefaultMessages.cs#L384",
-"region":  {
-"startLine":  384,
-"startColumn":  54,
-"endLine":  384,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S2306",
-"message":  "Rename 'async' to not use a contextual keyword as an identifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.DefaultMessages.cs#L404",
-"region":  {
-"startLine":  404,
-"startColumn":  60,
-"endLine":  404,
-"endColumn":  65
-}
-}
-},
-{
-"id":  "S2306",
-"message":  "Rename 'async' to not use a contextual keyword as an identifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRefProvider.cs#L112",
-"region":  {
-"startLine":  112,
-"startColumn":  177,
-"endLine":  112,
-"endColumn":  182
-}
-}
-},
-{
-"id":  "S2306",
-"message":  "Rename 'async' to not use a contextual keyword as an identifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRefProvider.cs#L514",
-"region":  {
-"startLine":  514,
-"startColumn":  184,
-"endLine":  514,
-"endColumn":  189
-}
-}
-},
-{
-"id":  "S2306",
-"message":  "Rename 'async' to not use a contextual keyword as an identifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/RepointableActorRef.cs#L118",
-"region":  {
-"startLine":  118,
-"startColumn":  52,
-"endLine":  118,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S2306",
-"message":  "Rename 'async' to not use a contextual keyword as an identifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/SysMsg/ISystemMessage.cs#L419",
-"region":  {
-"startLine":  419,
-"startColumn":  48,
-"endLine":  419,
-"endColumn":  53
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2306",
+      "Message": "Rename \u0027async\u0027 to not use a contextual keyword as an identifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.Children.cs#L452",
+      "Location": "Line 452 Position 76-81"
+    },
+    {
+      "Id": "S2306",
+      "Message": "Rename \u0027async\u0027 to not use a contextual keyword as an identifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.DefaultMessages.cs#L384",
+      "Location": "Line 384 Position 54-59"
+    },
+    {
+      "Id": "S2306",
+      "Message": "Rename \u0027async\u0027 to not use a contextual keyword as an identifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.DefaultMessages.cs#L404",
+      "Location": "Line 404 Position 60-65"
+    },
+    {
+      "Id": "S2306",
+      "Message": "Rename \u0027async\u0027 to not use a contextual keyword as an identifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRefProvider.cs#L112",
+      "Location": "Line 112 Position 177-182"
+    },
+    {
+      "Id": "S2306",
+      "Message": "Rename \u0027async\u0027 to not use a contextual keyword as an identifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRefProvider.cs#L514",
+      "Location": "Line 514 Position 184-189"
+    },
+    {
+      "Id": "S2306",
+      "Message": "Rename \u0027async\u0027 to not use a contextual keyword as an identifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/RepointableActorRef.cs#L118",
+      "Location": "Line 118 Position 52-57"
+    },
+    {
+      "Id": "S2306",
+      "Message": "Rename \u0027async\u0027 to not use a contextual keyword as an identifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/SysMsg/ISystemMessage.cs#L419",
+      "Location": "Line 419 Position 48-53"
+    }
+  ]
 }

@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S6575",
-"message":  "Use "TimeZoneInfo.FindSystemTimeZoneById" directly instead of "TZConvert.IanaToWindows"",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/Net7/S6575.cs#L8",
-"region":  {
-"startLine":  8,
-"startColumn":  23,
-"endLine":  8,
-"endColumn":  36
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6575",
+      "Message": "Use \u0022TimeZoneInfo.FindSystemTimeZoneById\u0022 directly instead of \u0022TZConvert.IanaToWindows\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/Net7/S6575.cs#L8",
+      "Location": "Line 8 Position 23-36"
+    }
+  ]
 }

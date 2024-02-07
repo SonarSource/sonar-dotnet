@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2357",
-"message":  "Make 'Reports' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/JsonSerializerPreserveReference/Program.cs#L47",
-"region":  {
-"startLine":  47,
-"startColumn":  27,
-"endLine":  47,
-"endColumn":  34
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Reports\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/JsonSerializerPreserveReference/Program.cs#L47",
+      "Location": "Line 47 Position 27-34"
+    }
+  ]
 }

@@ -1,28 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S4059",
-"message":  "Change either the name of property 'Pounds' or the name of method 'GetPounds' to make them distinguishable.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/RecordWithStaticHelper/Program.cs#L13",
-"region":  {
-"startLine":  13,
-"startColumn":  19,
-"endLine":  13,
-"endColumn":  25
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/RecordWithStaticHelper/Program.cs#L15",
-"region":  {
-"startLine":  15,
-"startColumn":  26,
-"endLine":  15,
-"endColumn":  35
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S4059",
+      "Message": "Change either the name of property \u0027Pounds\u0027 or the name of method \u0027GetPounds\u0027 to make them distinguishable.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/RecordWithStaticHelper/Program.cs#L13",
+      "Location": "Line 13 Position 19-25"
+    }
+  ]
 }

@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2148",
-"message":  "Add underscores to this numeric value for readability.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L373",
-"region":  {
-"startLine":  373,
-"startColumn":  34,
-"endLine":  373,
-"endColumn":  45
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2148",
+      "Message": "Add underscores to this numeric value for readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L373",
+      "Location": "Line 373 Position 34-45"
+    }
+  ]
 }

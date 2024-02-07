@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2971",
-"message":  "Drop this useless call to 'ToList' or replace it by 'AsEnumerable' if you are using LINQ to Entities.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/ReachabilityBenchmarks.cs#L41",
-"region":  {
-"startLine":  41,
-"startColumn":  65,
-"endLine":  41,
-"endColumn":  71
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2971",
+      "Message": "Drop this useless call to \u0027ToList\u0027 or replace it by \u0027AsEnumerable\u0027 if you are using LINQ to Entities.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/ReachabilityBenchmarks.cs#L41",
+      "Location": "Line 41 Position 65-71"
+    }
+  ]
 }

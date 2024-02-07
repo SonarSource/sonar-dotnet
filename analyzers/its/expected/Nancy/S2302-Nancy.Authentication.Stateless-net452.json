@@ -1,95 +1,46 @@
 {
-"issues":  [
-{
-"id":  "S2302",
-"message":  "Replace the string 'pipelines' with 'nameof(pipelines)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Stateless/StatelessAuthentication.cs#L21",
-"region":  {
-"startLine":  21,
-"startColumn":  49,
-"endLine":  21,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'configuration' with 'nameof(configuration)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Stateless/StatelessAuthentication.cs#L26",
-"region":  {
-"startLine":  26,
-"startColumn":  49,
-"endLine":  26,
-"endColumn":  64
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'configuration' with 'nameof(configuration)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Stateless/StatelessAuthentication.cs#L31",
-"region":  {
-"startLine":  31,
-"startColumn":  73,
-"endLine":  31,
-"endColumn":  88
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'module' with 'nameof(module)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Stateless/StatelessAuthentication.cs#L46",
-"region":  {
-"startLine":  46,
-"startColumn":  49,
-"endLine":  46,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'configuration' with 'nameof(configuration)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Stateless/StatelessAuthentication.cs#L51",
-"region":  {
-"startLine":  51,
-"startColumn":  49,
-"endLine":  51,
-"endColumn":  64
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'configuration' with 'nameof(configuration)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Stateless/StatelessAuthentication.cs#L56",
-"region":  {
-"startLine":  56,
-"startColumn":  73,
-"endLine":  56,
-"endColumn":  88
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'configuration' with 'nameof(configuration)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Stateless/StatelessAuthentication.cs#L72",
-"region":  {
-"startLine":  72,
-"startColumn":  49,
-"endLine":  72,
-"endColumn":  64
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027pipelines\u0027 with \u0027nameof(pipelines)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Stateless/StatelessAuthentication.cs#L21",
+      "Location": "Line 21 Position 49-60"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027configuration\u0027 with \u0027nameof(configuration)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Stateless/StatelessAuthentication.cs#L26",
+      "Location": "Line 26 Position 49-64"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027configuration\u0027 with \u0027nameof(configuration)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Stateless/StatelessAuthentication.cs#L31",
+      "Location": "Line 31 Position 73-88"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027module\u0027 with \u0027nameof(module)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Stateless/StatelessAuthentication.cs#L46",
+      "Location": "Line 46 Position 49-57"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027configuration\u0027 with \u0027nameof(configuration)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Stateless/StatelessAuthentication.cs#L51",
+      "Location": "Line 51 Position 49-64"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027configuration\u0027 with \u0027nameof(configuration)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Stateless/StatelessAuthentication.cs#L56",
+      "Location": "Line 56 Position 73-88"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027configuration\u0027 with \u0027nameof(configuration)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Stateless/StatelessAuthentication.cs#L72",
+      "Location": "Line 72 Position 49-64"
+    }
+  ]
 }

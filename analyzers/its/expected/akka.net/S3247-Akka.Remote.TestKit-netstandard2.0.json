@@ -1,220 +1,58 @@
 {
-"issues":  [
-{
-"id":  "S3247",
-"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L101",
-"region":  {
-"startLine":  101,
-"startColumn":  22,
-"endLine":  101,
-"endColumn":  46
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L103",
-"region":  {
-"startLine":  103,
-"startColumn":  37,
-"endLine":  103,
-"endColumn":  59
-}
-}
-]
-},
-{
-"id":  "S3247",
-"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L112",
-"region":  {
-"startLine":  112,
-"startColumn":  22,
-"endLine":  112,
-"endColumn":  45
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L114",
-"region":  {
-"startLine":  114,
-"startColumn":  33,
-"endLine":  114,
-"endColumn":  54
-}
-}
-]
-},
-{
-"id":  "S3247",
-"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L138",
-"region":  {
-"startLine":  138,
-"startColumn":  22,
-"endLine":  138,
-"endColumn":  43
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L140",
-"region":  {
-"startLine":  140,
-"startColumn":  34,
-"endLine":  140,
-"endColumn":  53
-}
-}
-]
-},
-{
-"id":  "S3247",
-"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L143",
-"region":  {
-"startLine":  143,
-"startColumn":  22,
-"endLine":  143,
-"endColumn":  45
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L145",
-"region":  {
-"startLine":  145,
-"startColumn":  36,
-"endLine":  145,
-"endColumn":  57
-}
-}
-]
-},
-{
-"id":  "S3247",
-"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L51",
-"region":  {
-"startLine":  51,
-"startColumn":  17,
-"endLine":  51,
-"endColumn":  33
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L53",
-"region":  {
-"startLine":  53,
-"startColumn":  29,
-"endLine":  53,
-"endColumn":  43
-}
-}
-]
-},
-{
-"id":  "S3247",
-"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L60",
-"region":  {
-"startLine":  60,
-"startColumn":  22,
-"endLine":  60,
-"endColumn":  45
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L62",
-"region":  {
-"startLine":  62,
-"startColumn":  36,
-"endLine":  62,
-"endColumn":  57
-}
-}
-]
-},
-{
-"id":  "S3247",
-"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L70",
-"region":  {
-"startLine":  70,
-"startColumn":  22,
-"endLine":  70,
-"endColumn":  46
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L72",
-"region":  {
-"startLine":  72,
-"startColumn":  37,
-"endLine":  72,
-"endColumn":  59
-}
-}
-]
-},
-{
-"id":  "S3247",
-"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L81",
-"region":  {
-"startLine":  81,
-"startColumn":  22,
-"endLine":  81,
-"endColumn":  44
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L83",
-"region":  {
-"startLine":  83,
-"startColumn":  35,
-"endLine":  83,
-"endColumn":  55
-}
-}
-]
-},
-{
-"id":  "S3247",
-"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L90",
-"region":  {
-"startLine":  90,
-"startColumn":  22,
-"endLine":  90,
-"endColumn":  44
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L92",
-"region":  {
-"startLine":  92,
-"startColumn":  35,
-"endLine":  92,
-"endColumn":  55
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L101",
+      "Location": "Line 101 Position 22-46"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L112",
+      "Location": "Line 112 Position 22-45"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L138",
+      "Location": "Line 138 Position 22-43"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L143",
+      "Location": "Line 143 Position 22-45"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L51",
+      "Location": "Line 51 Position 17-33"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L60",
+      "Location": "Line 60 Position 22-45"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L70",
+      "Location": "Line 70 Position 22-46"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L81",
+      "Location": "Line 81 Position 22-44"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L90",
+      "Location": "Line 90 Position 22-44"
+    }
+  ]
 }

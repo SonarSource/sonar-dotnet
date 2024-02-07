@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S105",
-"message":  "Replace all tab characters in this file by sequences of white-spaces.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/frmSettingsHolder.vb#L45",
-"region":  {
-"startLine":  45,
-"startColumn":  1,
-"endLine":  45,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S105",
-"message":  "Replace all tab characters in this file by sequences of white-spaces.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Module.WebServer.vb#L53",
-"region":  {
-"startLine":  53,
-"startColumn":  1,
-"endLine":  53,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S105",
-"message":  "Replace all tab characters in this file by sequences of white-spaces.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L70",
-"region":  {
-"startLine":  70,
-"startColumn":  1,
-"endLine":  70,
-"endColumn":  1
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S105",
+      "Message": "Replace all tab characters in this file by sequences of white-spaces.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/frmSettingsHolder.vb#L45",
+      "Location": "Line 45 Position 1-1"
+    },
+    {
+      "Id": "S105",
+      "Message": "Replace all tab characters in this file by sequences of white-spaces.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Module.WebServer.vb#L53",
+      "Location": "Line 53 Position 1-1"
+    },
+    {
+      "Id": "S105",
+      "Message": "Replace all tab characters in this file by sequences of white-spaces.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L70",
+      "Location": "Line 70 Position 1-1"
+    }
+  ]
 }

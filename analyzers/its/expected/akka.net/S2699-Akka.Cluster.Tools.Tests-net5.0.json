@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools.Tests/PublishSubscribe/DistributedPubSubMediatorRouterSpec.cs#L185",
-"region":  {
-"startLine":  185,
-"startColumn":  21,
-"endLine":  185,
-"endColumn":  114
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools.Tests/PublishSubscribe/DistributedPubSubMediatorRouterSpec.cs#L185",
+      "Location": "Line 185 Position 21-114"
+    }
+  ]
 }

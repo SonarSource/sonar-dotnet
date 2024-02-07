@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1151",
-"message":  "Reduce this switch section number of statements from 10 to at most 8, for example by extracting code into a method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Discovery.cs#L45",
-"region":  {
-"startLine":  45,
-"startColumn":  17,
-"endLine":  45,
-"endColumn":  73
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1151",
+      "Message": "Reduce this switch section number of statements from 10 to at most 8, for example by extracting code into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Discovery.cs#L45",
+      "Location": "Line 45 Position 17-73"
+    }
+  ]
 }

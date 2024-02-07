@@ -1,108 +1,52 @@
 {
-"issues":  [
-{
-"id":  "S2364",
-"message":  "Rename 'base_template' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L33",
-"region":  {
-"startLine":  33,
-"startColumn":  13,
-"endLine":  33,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'DontSaveExtra' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L39",
-"region":  {
-"startLine":  39,
-"startColumn":  13,
-"endLine":  39,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'FilterMovies' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L40",
-"region":  {
-"startLine":  40,
-"startColumn":  9,
-"endLine":  40,
-"endColumn":  21
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'HTMLBody' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L41",
-"region":  {
-"startLine":  41,
-"startColumn":  13,
-"endLine":  41,
-"endColumn":  21
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'TempPath' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L43",
-"region":  {
-"startLine":  43,
-"startColumn":  13,
-"endLine":  43,
-"endColumn":  21
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'use_filter' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L44",
-"region":  {
-"startLine":  44,
-"startColumn":  13,
-"endLine":  44,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename '_AssemblyName' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/Module.MovieExporter.vb#L30",
-"region":  {
-"startLine":  30,
-"startColumn":  10,
-"endLine":  30,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename '_Name' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/Module.MovieExporter.vb#L32",
-"region":  {
-"startLine":  32,
-"startColumn":  13,
-"endLine":  32,
-"endColumn":  18
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027base_template\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L33",
+      "Location": "Line 33 Position 13-26"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027DontSaveExtra\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L39",
+      "Location": "Line 39 Position 13-26"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027FilterMovies\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L40",
+      "Location": "Line 40 Position 9-21"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027HTMLBody\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L41",
+      "Location": "Line 41 Position 13-21"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027TempPath\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L43",
+      "Location": "Line 43 Position 13-21"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027use_filter\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L44",
+      "Location": "Line 44 Position 13-23"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027_AssemblyName\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/Module.MovieExporter.vb#L30",
+      "Location": "Line 30 Position 10-23"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027_Name\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/Module.MovieExporter.vb#L32",
+      "Location": "Line 32 Position 13-18"
+    }
+  ]
 }

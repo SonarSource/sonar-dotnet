@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S4635",
-"message":  "Replace 'IndexOf' with the overload that accepts a startIndex parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S4635.cs#L16",
-"region":  {
-"startLine":  16,
-"startColumn":  13,
-"endLine":  16,
-"endColumn":  80
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4635",
+      "Message": "Replace \u0027IndexOf\u0027 with the overload that accepts a startIndex parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S4635.cs#L16",
+      "Location": "Line 16 Position 13-80"
+    }
+  ]
 }

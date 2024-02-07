@@ -1,472 +1,220 @@
 {
-"issues":  [
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.Children.cs#L359",
-"region":  {
-"startLine":  359,
-"startColumn":  10,
-"endLine":  359,
-"endColumn":  51
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.cs#L236",
-"region":  {
-"startLine":  236,
-"startColumn":  10,
-"endLine":  236,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorProducerPipeline.cs#L21",
-"region":  {
-"startLine":  21,
-"startColumn":  6,
-"endLine":  21,
-"endColumn":  70
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorProducerPipeline.cs#L49",
-"region":  {
-"startLine":  49,
-"startColumn":  6,
-"endLine":  49,
-"endColumn":  70
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorProducerPipeline.cs#L80",
-"region":  {
-"startLine":  80,
-"startColumn":  6,
-"endLine":  80,
-"endColumn":  70
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorProducerPipeline.cs#L121",
-"region":  {
-"startLine":  121,
-"startColumn":  6,
-"endLine":  121,
-"endColumn":  70
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorProducerPipeline.cs#L237",
-"region":  {
-"startLine":  237,
-"startColumn":  6,
-"endLine":  237,
-"endColumn":  70
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L399",
-"region":  {
-"startLine":  399,
-"startColumn":  10,
-"endLine":  399,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L444",
-"region":  {
-"startLine":  444,
-"startColumn":  10,
-"endLine":  444,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L493",
-"region":  {
-"startLine":  493,
-"startColumn":  10,
-"endLine":  493,
-"endColumn":  68
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L568",
-"region":  {
-"startLine":  568,
-"startColumn":  10,
-"endLine":  568,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Cancellation/Cancelable.cs#L79",
-"region":  {
-"startLine":  79,
-"startColumn":  10,
-"endLine":  79,
-"endColumn":  81
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Cell.cs#L92",
-"region":  {
-"startLine":  92,
-"startColumn":  10,
-"endLine":  92,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/EmptyLocalActorRef.cs#L50",
-"region":  {
-"startLine":  50,
-"startColumn":  10,
-"endLine":  50,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ExtendedActorSystem.cs#L46",
-"region":  {
-"startLine":  46,
-"startColumn":  10,
-"endLine":  46,
-"endColumn":  74
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/FSM.cs#L740",
-"region":  {
-"startLine":  740,
-"startColumn":  10,
-"endLine":  740,
-"endColumn":  99
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L384",
-"region":  {
-"startLine":  384,
-"startColumn":  10,
-"endLine":  384,
-"endColumn":  113
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L562",
-"region":  {
-"startLine":  562,
-"startColumn":  10,
-"endLine":  562,
-"endColumn":  121
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/DeprecatedSchedulerExtensions.cs#L16",
-"region":  {
-"startLine":  16,
-"startColumn":  6,
-"endLine":  16,
-"endColumn":  53
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/DeprecatedSchedulerExtensions.cs#L27",
-"region":  {
-"startLine":  27,
-"startColumn":  10,
-"endLine":  27,
-"endColumn":  245
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Stash/IWithBoundedStash.cs#L20",
-"region":  {
-"startLine":  20,
-"startColumn":  6,
-"endLine":  20,
-"endColumn":  106
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/TypedActor.cs#L29",
-"region":  {
-"startLine":  29,
-"startColumn":  6,
-"endLine":  29,
-"endColumn":  73
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/MessageQueues/UnboundedPriorityMessageQueue.cs#L28",
-"region":  {
-"startLine":  28,
-"startColumn":  10,
-"endLine":  28,
-"endColumn":  130
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Udp.cs#L173",
-"region":  {
-"startLine":  173,
-"startColumn":  14,
-"endLine":  173,
-"endColumn":  142
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnected.cs#L155",
-"region":  {
-"startLine":  155,
-"startColumn":  14,
-"endLine":  155,
-"endColumn":  142
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L26",
-"region":  {
-"startLine":  26,
-"startColumn":  10,
-"endLine":  26,
-"endColumn":  82
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L55",
-"region":  {
-"startLine":  55,
-"startColumn":  10,
-"endLine":  55,
-"endColumn":  82
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/PatternMatch.cs#L15",
-"region":  {
-"startLine":  15,
-"startColumn":  6,
-"endLine":  15,
-"endColumn":  79
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Broadcast.cs#L284",
-"region":  {
-"startLine":  284,
-"startColumn":  10,
-"endLine":  284,
-"endColumn":  102
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ConsistentHashRouter.cs#L653",
-"region":  {
-"startLine":  653,
-"startColumn":  10,
-"endLine":  653,
-"endColumn":  110
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RoundRobin.cs#L334",
-"region":  {
-"startLine":  334,
-"startColumn":  10,
-"endLine":  334,
-"endColumn":  96
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RouterConfig.cs#L47",
-"region":  {
-"startLine":  47,
-"startColumn":  10,
-"endLine":  47,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RouterConfig.cs#L160",
-"region":  {
-"startLine":  160,
-"startColumn":  10,
-"endLine":  160,
-"endColumn":  85
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ScatterGatherFirstCompleted.cs#L405",
-"region":  {
-"startLine":  405,
-"startColumn":  10,
-"endLine":  405,
-"endColumn":  128
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Serialization/Serialization.cs#L134",
-"region":  {
-"startLine":  134,
-"startColumn":  10,
-"endLine":  134,
-"endColumn":  102
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Serialization/Serialization.cs#L325",
-"region":  {
-"startLine":  325,
-"startColumn":  10,
-"endLine":  325,
-"endColumn":  106
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.Children.cs#L359",
+      "Location": "Line 359 Position 10-51"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.cs#L236",
+      "Location": "Line 236 Position 10-62"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorProducerPipeline.cs#L121",
+      "Location": "Line 121 Position 6-70"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorProducerPipeline.cs#L21",
+      "Location": "Line 21 Position 6-70"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorProducerPipeline.cs#L237",
+      "Location": "Line 237 Position 6-70"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorProducerPipeline.cs#L49",
+      "Location": "Line 49 Position 6-70"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorProducerPipeline.cs#L80",
+      "Location": "Line 80 Position 6-70"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L399",
+      "Location": "Line 399 Position 10-71"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L444",
+      "Location": "Line 444 Position 10-60"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L493",
+      "Location": "Line 493 Position 10-68"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L568",
+      "Location": "Line 568 Position 10-71"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Cancellation/Cancelable.cs#L79",
+      "Location": "Line 79 Position 10-81"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Cell.cs#L92",
+      "Location": "Line 92 Position 10-55"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/EmptyLocalActorRef.cs#L50",
+      "Location": "Line 50 Position 10-71"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ExtendedActorSystem.cs#L46",
+      "Location": "Line 46 Position 10-74"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/FSM.cs#L740",
+      "Location": "Line 740 Position 10-99"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L384",
+      "Location": "Line 384 Position 10-113"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L562",
+      "Location": "Line 562 Position 10-121"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/DeprecatedSchedulerExtensions.cs#L16",
+      "Location": "Line 16 Position 6-53"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/DeprecatedSchedulerExtensions.cs#L27",
+      "Location": "Line 27 Position 10-245"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Stash/IWithBoundedStash.cs#L20",
+      "Location": "Line 20 Position 6-106"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/TypedActor.cs#L29",
+      "Location": "Line 29 Position 6-73"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/MessageQueues/UnboundedPriorityMessageQueue.cs#L28",
+      "Location": "Line 28 Position 10-130"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Udp.cs#L173",
+      "Location": "Line 173 Position 14-142"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnected.cs#L155",
+      "Location": "Line 155 Position 14-142"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L26",
+      "Location": "Line 26 Position 10-82"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L55",
+      "Location": "Line 55 Position 10-82"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/PatternMatch.cs#L15",
+      "Location": "Line 15 Position 6-79"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Broadcast.cs#L284",
+      "Location": "Line 284 Position 10-102"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ConsistentHashRouter.cs#L653",
+      "Location": "Line 653 Position 10-110"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RoundRobin.cs#L334",
+      "Location": "Line 334 Position 10-96"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RouterConfig.cs#L160",
+      "Location": "Line 160 Position 10-85"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RouterConfig.cs#L47",
+      "Location": "Line 47 Position 10-59"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ScatterGatherFirstCompleted.cs#L405",
+      "Location": "Line 405 Position 10-128"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Serialization/Serialization.cs#L134",
+      "Location": "Line 134 Position 10-102"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Serialization/Serialization.cs#L325",
+      "Location": "Line 325 Position 10-106"
+    }
+  ]
 }

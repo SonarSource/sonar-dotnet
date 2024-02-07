@@ -1,220 +1,58 @@
 {
-"issues":  [
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1185",
-"region":  {
-"startLine":  1185,
-"startColumn":  21,
-"endLine":  1185,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1183",
-"region":  {
-"startLine":  1183,
-"startColumn":  17,
-"endLine":  1183,
-"endColumn":  19
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1420",
-"region":  {
-"startLine":  1420,
-"startColumn":  17,
-"endLine":  1420,
-"endColumn":  19
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1418",
-"region":  {
-"startLine":  1418,
-"startColumn":  13,
-"endLine":  1418,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1905",
-"region":  {
-"startLine":  1905,
-"startColumn":  17,
-"endLine":  1905,
-"endColumn":  19
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1903",
-"region":  {
-"startLine":  1903,
-"startColumn":  13,
-"endLine":  1903,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointRegistry.cs#L46",
-"region":  {
-"startLine":  46,
-"startColumn":  17,
-"endLine":  46,
-"endColumn":  19
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointRegistry.cs#L44",
-"region":  {
-"startLine":  44,
-"startColumn":  13,
-"endLine":  44,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointRegistry.cs#L68",
-"region":  {
-"startLine":  68,
-"startColumn":  17,
-"endLine":  68,
-"endColumn":  19
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointRegistry.cs#L66",
-"region":  {
-"startLine":  66,
-"startColumn":  13,
-"endLine":  66,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L336",
-"region":  {
-"startLine":  336,
-"startColumn":  21,
-"endLine":  336,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L335",
-"region":  {
-"startLine":  335,
-"startColumn":  17,
-"endLine":  335,
-"endColumn":  19
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteWatcher.cs#L631",
-"region":  {
-"startLine":  631,
-"startColumn":  17,
-"endLine":  631,
-"endColumn":  19
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteWatcher.cs#L629",
-"region":  {
-"startLine":  629,
-"startColumn":  13,
-"endLine":  629,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L498",
-"region":  {
-"startLine":  498,
-"startColumn":  17,
-"endLine":  498,
-"endColumn":  19
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L497",
-"region":  {
-"startLine":  497,
-"startColumn":  13,
-"endLine":  497,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L507",
-"region":  {
-"startLine":  507,
-"startColumn":  17,
-"endLine":  507,
-"endColumn":  19
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L506",
-"region":  {
-"startLine":  506,
-"startColumn":  13,
-"endLine":  506,
-"endColumn":  15
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1185",
+      "Location": "Line 1185 Position 21-23"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1420",
+      "Location": "Line 1420 Position 17-19"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1905",
+      "Location": "Line 1905 Position 17-19"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointRegistry.cs#L46",
+      "Location": "Line 46 Position 17-19"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointRegistry.cs#L68",
+      "Location": "Line 68 Position 17-19"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L336",
+      "Location": "Line 336 Position 21-23"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteWatcher.cs#L631",
+      "Location": "Line 631 Position 17-19"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L498",
+      "Location": "Line 498 Position 17-19"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L507",
+      "Location": "Line 507 Position 17-19"
+    }
+  ]
 }

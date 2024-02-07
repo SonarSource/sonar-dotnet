@@ -1,290 +1,136 @@
 {
-"issues":  [
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'AutoMapper.MemberMap' instead of 'AutoMapper.PropertyMap'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/MappingExpression.cs#L133",
-"region":  {
-"startLine":  133,
-"startColumn":  58,
-"endLine":  133,
-"endColumn":  69
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<string>' instead of 'System.Collections.Generic.IReadOnlyCollection<string>'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L152",
-"region":  {
-"startLine":  152,
-"startColumn":  81,
-"endLine":  152,
-"endColumn":  94
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'AutoMapper.MemberMap' instead of 'AutoMapper.PropertyMap'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L291",
-"region":  {
-"startLine":  291,
-"startColumn":  86,
-"endLine":  291,
-"endColumn":  97
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'AutoMapper.MemberMap' instead of 'AutoMapper.PropertyMap'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L305",
-"region":  {
-"startLine":  305,
-"startColumn":  69,
-"endLine":  305,
-"endColumn":  80
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyCollection<AutoMapper.Execution.Member>' instead of 'System.Collections.Generic.Stack<AutoMapper.Execution.Member>'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L186",
-"region":  {
-"startLine":  186,
-"startColumn":  69,
-"endLine":  186,
-"endColumn":  74
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'AutoMapper.Execution.ExpressionBuilder.ReplaceVisitorBase' instead of 'AutoMapper.Execution.ExpressionBuilder.ParameterReplaceVisitor'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L315",
-"region":  {
-"startLine":  315,
-"startColumn":  72,
-"endLine":  315,
-"endColumn":  79
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyCollection<AutoMapper.Features.IGlobalFeature>' instead of 'AutoMapper.Features.Features<AutoMapper.Features.IGlobalFeature>'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Features.cs#L57",
-"region":  {
-"startLine":  57,
-"startColumn":  70,
-"endLine":  57,
-"endColumn":  78
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'AutoMapper.Internal.IGlobalConfiguration' instead of 'AutoMapper.MapperConfiguration'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Features.cs#L57",
-"region":  {
-"startLine":  57,
-"startColumn":  100,
-"endLine":  57,
-"endColumn":  119
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyCollection<AutoMapper.Features.IMappingFeature>' instead of 'AutoMapper.Features.Features<AutoMapper.Features.IMappingFeature>'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Features.cs#L68",
-"region":  {
-"startLine":  68,
-"startColumn":  69,
-"endLine":  68,
-"endColumn":  77
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyCollection<AutoMapper.Features.IMappingFeature>' instead of 'AutoMapper.Features.Features<AutoMapper.Features.IMappingFeature>'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Features.cs#L83",
-"region":  {
-"startLine":  83,
-"startColumn":  71,
-"endLine":  83,
-"endColumn":  79
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyCollection<AutoMapper.Features.IRuntimeFeature>' instead of 'AutoMapper.Features.Features<AutoMapper.Features.IRuntimeFeature>'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Features.cs#L94",
-"region":  {
-"startLine":  94,
-"startColumn":  66,
-"endLine":  94,
-"endColumn":  74
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<string, System.Reflection.MemberInfo>' instead of 'System.Collections.Generic.Dictionary<string, System.Reflection.MemberInfo>'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Internal/TypeDetails.cs#L63",
-"region":  {
-"startLine":  63,
-"startColumn":  54,
-"endLine":  63,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'System.Reflection.IReflect' instead of 'System.Type'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Internal/TypeExtensions.cs#L103",
-"region":  {
-"startLine":  103,
-"startColumn":  60,
-"endLine":  103,
-"endColumn":  64
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'System.Reflection.IReflect' instead of 'System.Type'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Mappers/ConversionOperatorMapper.cs#L11",
-"region":  {
-"startLine":  11,
-"startColumn":  72,
-"endLine":  11,
-"endColumn":  87
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'System.Collections.Generic.ICollection<AutoMapper.ValueTransformerConfiguration>' instead of 'System.Collections.Generic.List<AutoMapper.ValueTransformerConfiguration>'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/MemberMap.cs#L104",
-"region":  {
-"startLine":  104,
-"startColumn":  81,
-"endLine":  104,
-"endColumn":  98
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'System.Linq.Expressions.LambdaExpression' instead of 'System.Linq.Expressions.Expression<System.Func<TValue, TValue>>'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/MemberMap.cs#L104",
-"region":  {
-"startLine":  104,
-"startColumn":  133,
-"endLine":  104,
-"endColumn":  144
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'System.Reflection.ICustomAttributeProvider' instead of 'System.Reflection.MethodInfo'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/NullsafeQueryRewriter.cs#L156",
-"region":  {
-"startLine":  156,
-"startColumn":  50,
-"endLine":  156,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'System.Linq.IQueryable' instead of 'System.Linq.IQueryable<TSource>'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/QueryMapperVisitor.cs#L33",
-"region":  {
-"startLine":  33,
-"startColumn":  95,
-"endLine":  33,
-"endColumn":  106
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'System.Linq.IQueryable' instead of 'System.Linq.IQueryable<TDestination>'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/QueryMapperVisitor.cs#L33",
-"region":  {
-"startLine":  33,
-"startColumn":  133,
-"endLine":  33,
-"endColumn":  142
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'System.Reflection.MemberInfo' instead of 'System.Type'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/QueryMapperVisitor.cs#L252",
-"region":  {
-"startLine":  252,
-"startColumn":  58,
-"endLine":  252,
-"endColumn":  68
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'System.Reflection.MemberInfo' instead of 'System.Type'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/QueryMapperVisitor.cs#L252",
-"region":  {
-"startLine":  252,
-"startColumn":  75,
-"endLine":  252,
-"endColumn":  90
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'AutoMapper.MemberMap' instead of 'AutoMapper.PropertyMap'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/TypeMap.cs#L327",
-"region":  {
-"startLine":  327,
-"startColumn":  56,
-"endLine":  327,
-"endColumn":  67
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027AutoMapper.MemberMap\u0027 instead of \u0027AutoMapper.PropertyMap\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/MappingExpression.cs#L133",
+      "Location": "Line 133 Position 58-69"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Collections.Generic.IEnumerable\u003Cstring\u003E\u0027 instead of \u0027System.Collections.Generic.IReadOnlyCollection\u003Cstring\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L152",
+      "Location": "Line 152 Position 81-94"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027AutoMapper.MemberMap\u0027 instead of \u0027AutoMapper.PropertyMap\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L291",
+      "Location": "Line 291 Position 86-97"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027AutoMapper.MemberMap\u0027 instead of \u0027AutoMapper.PropertyMap\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L305",
+      "Location": "Line 305 Position 69-80"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Collections.Generic.IReadOnlyCollection\u003CAutoMapper.Execution.Member\u003E\u0027 instead of \u0027System.Collections.Generic.Stack\u003CAutoMapper.Execution.Member\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L186",
+      "Location": "Line 186 Position 69-74"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027AutoMapper.Execution.ExpressionBuilder.ReplaceVisitorBase\u0027 instead of \u0027AutoMapper.Execution.ExpressionBuilder.ParameterReplaceVisitor\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L315",
+      "Location": "Line 315 Position 72-79"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Collections.Generic.IReadOnlyCollection\u003CAutoMapper.Features.IGlobalFeature\u003E\u0027 instead of \u0027AutoMapper.Features.Features\u003CAutoMapper.Features.IGlobalFeature\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Features.cs#L57",
+      "Location": "Line 57 Position 70-78"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027AutoMapper.Internal.IGlobalConfiguration\u0027 instead of \u0027AutoMapper.MapperConfiguration\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Features.cs#L57",
+      "Location": "Line 57 Position 100-119"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Collections.Generic.IReadOnlyCollection\u003CAutoMapper.Features.IMappingFeature\u003E\u0027 instead of \u0027AutoMapper.Features.Features\u003CAutoMapper.Features.IMappingFeature\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Features.cs#L68",
+      "Location": "Line 68 Position 69-77"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Collections.Generic.IReadOnlyCollection\u003CAutoMapper.Features.IMappingFeature\u003E\u0027 instead of \u0027AutoMapper.Features.Features\u003CAutoMapper.Features.IMappingFeature\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Features.cs#L83",
+      "Location": "Line 83 Position 71-79"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Collections.Generic.IReadOnlyCollection\u003CAutoMapper.Features.IRuntimeFeature\u003E\u0027 instead of \u0027AutoMapper.Features.Features\u003CAutoMapper.Features.IRuntimeFeature\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Features.cs#L94",
+      "Location": "Line 94 Position 66-74"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Collections.Generic.IDictionary\u003Cstring, System.Reflection.MemberInfo\u003E\u0027 instead of \u0027System.Collections.Generic.Dictionary\u003Cstring, System.Reflection.MemberInfo\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Internal/TypeDetails.cs#L63",
+      "Location": "Line 63 Position 54-66"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Reflection.IReflect\u0027 instead of \u0027System.Type\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Internal/TypeExtensions.cs#L103",
+      "Location": "Line 103 Position 60-64"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Reflection.IReflect\u0027 instead of \u0027System.Type\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Mappers/ConversionOperatorMapper.cs#L11",
+      "Location": "Line 11 Position 72-87"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Collections.Generic.ICollection\u003CAutoMapper.ValueTransformerConfiguration\u003E\u0027 instead of \u0027System.Collections.Generic.List\u003CAutoMapper.ValueTransformerConfiguration\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/MemberMap.cs#L104",
+      "Location": "Line 104 Position 81-98"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Linq.Expressions.LambdaExpression\u0027 instead of \u0027System.Linq.Expressions.Expression\u003CSystem.Func\u003CTValue, TValue\u003E\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/MemberMap.cs#L104",
+      "Location": "Line 104 Position 133-144"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Reflection.ICustomAttributeProvider\u0027 instead of \u0027System.Reflection.MethodInfo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/NullsafeQueryRewriter.cs#L156",
+      "Location": "Line 156 Position 50-57"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Reflection.MemberInfo\u0027 instead of \u0027System.Type\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/QueryMapperVisitor.cs#L252",
+      "Location": "Line 252 Position 58-68"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Reflection.MemberInfo\u0027 instead of \u0027System.Type\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/QueryMapperVisitor.cs#L252",
+      "Location": "Line 252 Position 75-90"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Linq.IQueryable\u0027 instead of \u0027System.Linq.IQueryable\u003CTSource\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/QueryMapperVisitor.cs#L33",
+      "Location": "Line 33 Position 95-106"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Linq.IQueryable\u0027 instead of \u0027System.Linq.IQueryable\u003CTDestination\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/QueryMapperVisitor.cs#L33",
+      "Location": "Line 33 Position 133-142"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027AutoMapper.MemberMap\u0027 instead of \u0027AutoMapper.PropertyMap\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/TypeMap.cs#L327",
+      "Location": "Line 327 Position 56-67"
+    }
+  ]
 }

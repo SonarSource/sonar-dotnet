@@ -1,82 +1,40 @@
 {
-"issues":  [
-{
-"id":  "S1144",
-"message":  "Remove the unused internal class 'GenericAttribute'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/GenericAttributes.cs#L5",
-"region":  {
-"startLine":  5,
-"startColumn":  22,
-"endLine":  5,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused internal class 'GenericType'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/GenericAttributes.cs#L10",
-"region":  {
-"startLine":  10,
-"startColumn":  22,
-"endLine":  10,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused internal struct 'CustomRef'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/RefFieldsAndRefScopedVariables.cs#L5",
-"region":  {
-"startLine":  5,
-"startColumn":  27,
-"endLine":  5,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused internal struct 'ConversionRequest'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/RefFieldsAndRefScopedVariables.cs#L13",
-"region":  {
-"startLine":  13,
-"startColumn":  36,
-"endLine":  13,
-"endColumn":  53
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private method 'Method'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/SetPropertiesInsteadOfLinqMethods.cs#L8",
-"region":  {
-"startLine":  8,
-"startColumn":  20,
-"endLine":  8,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused internal class 'lowercasename'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/WarningWave7.cs#L5",
-"region":  {
-"startLine":  5,
-"startColumn":  22,
-"endLine":  5,
-"endColumn":  35
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused internal class \u0027GenericType\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/GenericAttributes.cs#L10",
+      "Location": "Line 10 Position 22-33"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused internal class \u0027GenericAttribute\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/GenericAttributes.cs#L5",
+      "Location": "Line 5 Position 22-38"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused internal struct \u0027ConversionRequest\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/RefFieldsAndRefScopedVariables.cs#L13",
+      "Location": "Line 13 Position 36-53"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused internal struct \u0027CustomRef\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/RefFieldsAndRefScopedVariables.cs#L5",
+      "Location": "Line 5 Position 27-36"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private method \u0027Method\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/SetPropertiesInsteadOfLinqMethods.cs#L8",
+      "Location": "Line 8 Position 20-26"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused internal class \u0027lowercasename\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/WarningWave7.cs#L5",
+      "Location": "Line 5 Position 22-35"
+    }
+  ]
 }

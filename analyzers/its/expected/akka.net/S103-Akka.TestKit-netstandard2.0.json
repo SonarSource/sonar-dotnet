@@ -1,186 +1,88 @@
 {
-"issues":  [
-{
-"id":  "S103",
-"message":  "Split this 212 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/EventFilterFactory.cs#L92",
-"region":  {
-"startLine":  92,
-"startColumn":  1,
-"endLine":  92,
-"endColumn":  213
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 212 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/EventFilterFactory.cs#L151",
-"region":  {
-"startLine":  151,
-"startColumn":  1,
-"endLine":  151,
-"endColumn":  213
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 276 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L299",
-"region":  {
-"startLine":  299,
-"startColumn":  1,
-"endLine":  299,
-"endColumn":  277
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 328 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L303",
-"region":  {
-"startLine":  303,
-"startColumn":  1,
-"endLine":  303,
-"endColumn":  329
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 238 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L362",
-"region":  {
-"startLine":  362,
-"startColumn":  1,
-"endLine":  362,
-"endColumn":  239
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 290 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L366",
-"region":  {
-"startLine":  366,
-"startColumn":  1,
-"endLine":  366,
-"endColumn":  291
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 202 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L336",
-"region":  {
-"startLine":  336,
-"startColumn":  1,
-"endLine":  336,
-"endColumn":  203
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 287 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Expect.cs#L121",
-"region":  {
-"startLine":  121,
-"startColumn":  1,
-"endLine":  121,
-"endColumn":  288
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 249 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Expect.cs#L189",
-"region":  {
-"startLine":  189,
-"startColumn":  1,
-"endLine":  189,
-"endColumn":  250
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 206 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Expect.cs#L380",
-"region":  {
-"startLine":  380,
-"startColumn":  1,
-"endLine":  380,
-"endColumn":  207
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 231 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Expect.cs#L385",
-"region":  {
-"startLine":  385,
-"startColumn":  1,
-"endLine":  385,
-"endColumn":  232
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 212 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ExpectMsgFrom.cs#L53",
-"region":  {
-"startLine":  53,
-"startColumn":  1,
-"endLine":  53,
-"endColumn":  213
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 203 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Receive.cs#L286",
-"region":  {
-"startLine":  286,
-"startColumn":  1,
-"endLine":  286,
-"endColumn":  204
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 276 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Receive.cs#L291",
-"region":  {
-"startLine":  291,
-"startColumn":  1,
-"endLine":  291,
-"endColumn":  277
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S103",
+      "Message": "Split this 212 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/EventFilterFactory.cs#L151",
+      "Location": "Line 151 Position 1-213"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 212 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/EventFilterFactory.cs#L92",
+      "Location": "Line 92 Position 1-213"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 276 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L299",
+      "Location": "Line 299 Position 1-277"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 328 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L303",
+      "Location": "Line 303 Position 1-329"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 238 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L362",
+      "Location": "Line 362 Position 1-239"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 290 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L366",
+      "Location": "Line 366 Position 1-291"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 202 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L336",
+      "Location": "Line 336 Position 1-203"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 287 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Expect.cs#L121",
+      "Location": "Line 121 Position 1-288"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 249 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Expect.cs#L189",
+      "Location": "Line 189 Position 1-250"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 206 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Expect.cs#L380",
+      "Location": "Line 380 Position 1-207"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 231 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Expect.cs#L385",
+      "Location": "Line 385 Position 1-232"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 212 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ExpectMsgFrom.cs#L53",
+      "Location": "Line 53 Position 1-213"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 203 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Receive.cs#L286",
+      "Location": "Line 286 Position 1-204"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 276 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Receive.cs#L291",
+      "Location": "Line 291 Position 1-277"
+    }
+  ]
 }

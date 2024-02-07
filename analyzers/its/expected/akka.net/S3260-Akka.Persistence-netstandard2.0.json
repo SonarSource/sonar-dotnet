@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S3260",
-"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.cs#L654",
-"region":  {
-"startLine":  654,
-"startColumn":  23,
-"endLine":  654,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S3260",
-"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/PersistencePluginProxy.cs#L79",
-"region":  {
-"startLine":  79,
-"startColumn":  23,
-"endLine":  79,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S3260",
-"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/PersistencePluginProxy.cs#L84",
-"region":  {
-"startLine":  84,
-"startColumn":  23,
-"endLine":  84,
-"endColumn":  36
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3260",
+      "Message": "Private classes which are not derived in the current assembly should be marked as \u0027sealed\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.cs#L654",
+      "Location": "Line 654 Position 23-46"
+    },
+    {
+      "Id": "S3260",
+      "Message": "Private classes which are not derived in the current assembly should be marked as \u0027sealed\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/PersistencePluginProxy.cs#L79",
+      "Location": "Line 79 Position 23-30"
+    },
+    {
+      "Id": "S3260",
+      "Message": "Private classes which are not derived in the current assembly should be marked as \u0027sealed\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/PersistencePluginProxy.cs#L84",
+      "Location": "Line 84 Position 23-36"
+    }
+  ]
 }

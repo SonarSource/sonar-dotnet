@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3903",
-"message":  "Move 'Record' into a named namespace.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L224",
-"region":  {
-"startLine":  224,
-"startColumn":  15,
-"endLine":  224,
-"endColumn":  21
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3903",
+      "Message": "Move \u0027Record\u0027 into a named namespace.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L224",
+      "Location": "Line 224 Position 15-21"
+    }
+  ]
 }

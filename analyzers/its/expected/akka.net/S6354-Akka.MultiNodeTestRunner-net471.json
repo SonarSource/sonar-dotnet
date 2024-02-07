@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S6354",
-"message":  "Use a testable (date) time provider instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L476",
-"region":  {
-"startLine":  476,
-"startColumn":  23,
-"endLine":  476,
-"endColumn":  38
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6354",
+      "Message": "Use a testable (date) time provider instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L476",
+      "Location": "Line 476 Position 23-38"
+    }
+  ]
 }

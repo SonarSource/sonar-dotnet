@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1206",
-"message":  "This class overrides 'Equals' and should therefore also override 'GetHashCode'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L286",
-"region":  {
-"startLine":  286,
-"startColumn":  24,
-"endLine":  286,
-"endColumn":  32
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1206",
+      "Message": "This class overrides \u0027Equals\u0027 and should therefore also override \u0027GetHashCode\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L286",
+      "Location": "Line 286 Position 24-32"
+    }
+  ]
 }

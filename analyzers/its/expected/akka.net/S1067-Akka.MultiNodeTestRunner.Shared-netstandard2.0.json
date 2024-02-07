@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S1067",
-"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/MultiNodeMessage.cs#L101-L105",
-"region":  {
-"startLine":  101,
-"startColumn":  20,
-"endLine":  105,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S1067",
-"message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/TestRunTree.cs#L251-L256",
-"region":  {
-"startLine":  251,
-"startColumn":  20,
-"endLine":  256,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S1067",
-"message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/TestRunTree.cs#L396-L401",
-"region":  {
-"startLine":  396,
-"startColumn":  20,
-"endLine":  401,
-"endColumn":  47
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/MultiNodeMessage.cs#L101-L105",
+      "Location": "Lines 101-105 Position 20-57"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/TestRunTree.cs#L251-L256",
+      "Location": "Lines 251-256 Position 20-47"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/TestRunTree.cs#L396-L401",
+      "Location": "Lines 396-401 Position 20-47"
+    }
+  ]
 }

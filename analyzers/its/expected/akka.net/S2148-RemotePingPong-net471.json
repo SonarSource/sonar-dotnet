@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2148",
-"message":  "Add underscores to this numeric value for readability.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L109",
-"region":  {
-"startLine":  109,
-"startColumn":  29,
-"endLine":  109,
-"endColumn":  36
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2148",
+      "Message": "Add underscores to this numeric value for readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L109",
+      "Location": "Line 109 Position 29-36"
+    }
+  ]
 }

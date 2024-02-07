@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S4055",
-"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/Program.cs#L2",
-"region":  {
-"startLine":  2,
-"startColumn":  19,
-"endLine":  2,
-"endColumn":  34
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4055",
+      "Message": "Replace this string literal with a string retrieved through an instance of the \u0027ResourceManager\u0027 class.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/Program.cs#L2",
+      "Location": "Line 2 Position 19-34"
+    }
+  ]
 }

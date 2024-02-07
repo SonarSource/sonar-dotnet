@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1168",
-"message":  "Return an empty collection instead of null.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/JournalSerializationSpec.cs#L198",
-"region":  {
-"startLine":  198,
-"startColumn":  24,
-"endLine":  198,
-"endColumn":  28
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1168",
+      "Message": "Return an empty collection instead of null.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/JournalSerializationSpec.cs#L198",
+      "Location": "Line 198 Position 24-28"
+    }
+  ]
 }

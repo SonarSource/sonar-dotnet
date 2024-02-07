@@ -1,95 +1,46 @@
 {
-"issues":  [
-{
-"id":  "S4049",
-"message":  "Consider making method 'GetAttributeList' a property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L346",
-"region":  {
-"startLine":  346,
-"startColumn":  35,
-"endLine":  346,
-"endColumn":  51
-}
-}
-},
-{
-"id":  "S4049",
-"message":  "Consider making method 'GetAttribute' a property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L375",
-"region":  {
-"startLine":  375,
-"startColumn":  22,
-"endLine":  375,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S4049",
-"message":  "Consider making method 'GetFirstAttribute' a property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L384",
-"region":  {
-"startLine":  384,
-"startColumn":  22,
-"endLine":  384,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S4049",
-"message":  "Consider making method 'GetMandatoryAttribute' a property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L393",
-"region":  {
-"startLine":  393,
-"startColumn":  22,
-"endLine":  393,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S4049",
-"message":  "Consider making method 'GetNameLifted' a property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L425",
-"region":  {
-"startLine":  425,
-"startColumn":  23,
-"endLine":  425,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S4049",
-"message":  "Consider making method 'GetAsyncCallback' a property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Context.cs#L256",
-"region":  {
-"startLine":  256,
-"startColumn":  23,
-"endLine":  256,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S4049",
-"message":  "Consider making method 'GetAsyncCallback' a property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Context.cs#L283",
-"region":  {
-"startLine":  283,
-"startColumn":  33,
-"endLine":  283,
-"endColumn":  49
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetAttributeList\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L346",
+      "Location": "Line 346 Position 35-51"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetAttribute\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L375",
+      "Location": "Line 375 Position 22-34"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetFirstAttribute\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L384",
+      "Location": "Line 384 Position 22-39"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetMandatoryAttribute\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L393",
+      "Location": "Line 393 Position 22-43"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetNameLifted\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L425",
+      "Location": "Line 425 Position 23-36"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetAsyncCallback\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Context.cs#L256",
+      "Location": "Line 256 Position 23-39"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetAsyncCallback\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Context.cs#L283",
+      "Location": "Line 283 Position 33-49"
+    }
+  ]
 }

@@ -1,100 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Invoke 'base.GetObjectData(SerializationInfo, StreamingContext)' in 'GetObjectData'.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3925.Part1.cs#L15",
-"region":  {
-"startLine":  15,
-"startColumn":  27,
-"endLine":  15,
-"endColumn":  91
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3925.Part1.cs#L19",
-"region":  {
-"startLine":  19,
-"startColumn":  38,
-"endLine":  19,
-"endColumn":  51
-}
-}
-]
-},
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Invoke 'base.GetObjectData(SerializationInfo, StreamingContext)' in 'GetObjectData'.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3925.Part1.cs#L22",
-"region":  {
-"startLine":  22,
-"startColumn":  27,
-"endLine":  22,
-"endColumn":  91
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3925.Part1.cs#L24",
-"region":  {
-"startLine":  24,
-"startColumn":  38,
-"endLine":  24,
-"endColumn":  51
-}
-}
-]
-},
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Invoke 'base.GetObjectData(SerializationInfo, StreamingContext)' in 'GetObjectData'.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3925.Part1.cs#L36",
-"region":  {
-"startLine":  36,
-"startColumn":  26,
-"endLine":  36,
-"endColumn":  103
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3925.Part1.cs#L40",
-"region":  {
-"startLine":  40,
-"startColumn":  38,
-"endLine":  40,
-"endColumn":  51
-}
-}
-]
-},
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Invoke 'base.GetObjectData(SerializationInfo, StreamingContext)' in 'GetObjectData'.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3925.Part2.cs#L5",
-"region":  {
-"startLine":  5,
-"startColumn":  26,
-"endLine":  5,
-"endColumn":  103
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3925.Part2.cs#L7",
-"region":  {
-"startLine":  7,
-"startColumn":  38,
-"endLine":  7,
-"endColumn":  51
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S3925",
+      "Message": "Update this implementation of \u0027ISerializable\u0027 to conform to the recommended serialization pattern. Invoke \u0027base.GetObjectData(SerializationInfo, StreamingContext)\u0027 in \u0027GetObjectData\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3925.Part1.cs#L15",
+      "Location": "Line 15 Position 27-91"
+    },
+    {
+      "Id": "S3925",
+      "Message": "Update this implementation of \u0027ISerializable\u0027 to conform to the recommended serialization pattern. Invoke \u0027base.GetObjectData(SerializationInfo, StreamingContext)\u0027 in \u0027GetObjectData\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3925.Part1.cs#L22",
+      "Location": "Line 22 Position 27-91"
+    },
+    {
+      "Id": "S3925",
+      "Message": "Update this implementation of \u0027ISerializable\u0027 to conform to the recommended serialization pattern. Invoke \u0027base.GetObjectData(SerializationInfo, StreamingContext)\u0027 in \u0027GetObjectData\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3925.Part1.cs#L36",
+      "Location": "Line 36 Position 26-103"
+    },
+    {
+      "Id": "S3925",
+      "Message": "Update this implementation of \u0027ISerializable\u0027 to conform to the recommended serialization pattern. Invoke \u0027base.GetObjectData(SerializationInfo, StreamingContext)\u0027 in \u0027GetObjectData\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3925.Part2.cs#L5",
+      "Location": "Line 5 Position 26-103"
+    }
+  ]
 }

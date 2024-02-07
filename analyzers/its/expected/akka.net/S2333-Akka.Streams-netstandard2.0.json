@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S2333",
-"message":  "'unchecked' is redundant in this context.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ResizableMultiReaderRingBuffer.cs#L181",
-"region":  {
-"startLine":  181,
-"startColumn":  29,
-"endLine":  181,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S2333",
-"message":  "'unchecked' is redundant in this context.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ResizableMultiReaderRingBuffer.cs#L330",
-"region":  {
-"startLine":  330,
-"startColumn":  33,
-"endLine":  330,
-"endColumn":  42
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2333",
+      "Message": "\u0027unchecked\u0027 is redundant in this context.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ResizableMultiReaderRingBuffer.cs#L181",
+      "Location": "Line 181 Position 29-38"
+    },
+    {
+      "Id": "S2333",
+      "Message": "\u0027unchecked\u0027 is redundant in this context.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ResizableMultiReaderRingBuffer.cs#L330",
+      "Location": "Line 330 Position 33-42"
+    }
+  ]
 }

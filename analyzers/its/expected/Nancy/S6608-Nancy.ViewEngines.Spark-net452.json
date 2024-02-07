@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S6608",
-"message":  "Indexing at Count-1 should be used instead of the "Enumerable" extension method "Last"",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DefaultDescriptorBuilder.cs#L114",
-"region":  {
-"startLine":  114,
-"startColumn":  53,
-"endLine":  114,
-"endColumn":  57
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6608",
+      "Message": "Indexing at Count-1 should be used instead of the \u0022Enumerable\u0022 extension method \u0022Last\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DefaultDescriptorBuilder.cs#L114",
+      "Location": "Line 114 Position 53-57"
+    }
+  ]
 }

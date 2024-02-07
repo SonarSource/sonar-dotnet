@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2325",
-"message":  "Make 'ExpectEnvelope' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByTagSpec.cs#L109",
-"region":  {
-"startLine":  109,
-"startColumn":  31,
-"endLine":  109,
-"endColumn":  45
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027ExpectEnvelope\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByTagSpec.cs#L109",
+      "Location": "Line 109 Position 31-45"
+    }
+  ]
 }

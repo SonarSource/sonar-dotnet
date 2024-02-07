@@ -1,719 +1,334 @@
 {
-"issues":  [
-{
-"id":  "S2357",
-"message":  "Make 'DefaultValue' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L404",
-"region":  {
-"startLine":  404,
-"startColumn":  16,
-"endLine":  404,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'Name' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L405",
-"region":  {
-"startLine":  405,
-"startColumn":  16,
-"endLine":  405,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'Section' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L406",
-"region":  {
-"startLine":  406,
-"startColumn":  16,
-"endLine":  406,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'Value' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L407",
-"region":  {
-"startLine":  407,
-"startColumn":  16,
-"endLine":  407,
-"endColumn":  21
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'Name' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L411",
-"region":  {
-"startLine":  411,
-"startColumn":  16,
-"endLine":  411,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'Section' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L412",
-"region":  {
-"startLine":  412,
-"startColumn":  16,
-"endLine":  412,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'TableItem' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L413",
-"region":  {
-"startLine":  413,
-"startColumn":  16,
-"endLine":  413,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'Command' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L40",
-"region":  {
-"startLine":  40,
-"startColumn":  16,
-"endLine":  40,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'CommandDescription' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L70",
-"region":  {
-"startLine":  70,
-"startColumn":  16,
-"endLine":  70,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'CommandExecute' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L72",
-"region":  {
-"startLine":  72,
-"startColumn":  16,
-"endLine":  72,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'CommandType' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L74",
-"region":  {
-"startLine":  74,
-"startColumn":  16,
-"endLine":  74,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'Saved' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILog.vb#L38",
-"region":  {
-"startLine":  38,
-"startColumn":  12,
-"endLine":  38,
-"endColumn":  17
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'MediaType' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILog.vb#L40",
-"region":  {
-"startLine":  40,
-"startColumn":  12,
-"endLine":  40,
-"endColumn":  21
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'MediaID' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILog.vb#L41",
-"region":  {
-"startLine":  41,
-"startColumn":  12,
-"endLine":  41,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'ID' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILog.vb#L43",
-"region":  {
-"startLine":  43,
-"startColumn":  12,
-"endLine":  43,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'LastDateAdd' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILog.vb#L44",
-"region":  {
-"startLine":  44,
-"startColumn":  12,
-"endLine":  44,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'LogItems' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILog.vb#L45",
-"region":  {
-"startLine":  45,
-"startColumn":  12,
-"endLine":  45,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'Saved' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILog.vb#L49",
-"region":  {
-"startLine":  49,
-"startColumn":  16,
-"endLine":  49,
-"endColumn":  21
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'ID' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILog.vb#L50",
-"region":  {
-"startLine":  50,
-"startColumn":  16,
-"endLine":  50,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'ItemType' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILog.vb#L51",
-"region":  {
-"startLine":  51,
-"startColumn":  16,
-"endLine":  51,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'Message' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILog.vb#L52",
-"region":  {
-"startLine":  52,
-"startColumn":  16,
-"endLine":  52,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'Details' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILog.vb#L53",
-"region":  {
-"startLine":  53,
-"startColumn":  16,
-"endLine":  53,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'DateAdd' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILog.vb#L54",
-"region":  {
-"startLine":  54,
-"startColumn":  16,
-"endLine":  54,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'MovieID' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L425",
-"region":  {
-"startLine":  425,
-"startColumn":  16,
-"endLine":  425,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'externalProcessorModules' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L35",
-"region":  {
-"startLine":  35,
-"startColumn":  12,
-"endLine":  35,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'externalScrapersModules' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L36",
-"region":  {
-"startLine":  36,
-"startColumn":  12,
-"endLine":  36,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'externalTVScrapersModules' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L37",
-"region":  {
-"startLine":  37,
-"startColumn":  12,
-"endLine":  37,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'RuntimeObjects' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L38",
-"region":  {
-"startLine":  38,
-"startColumn":  12,
-"endLine":  38,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'AssemblyFileName' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L777",
-"region":  {
-"startLine":  777,
-"startColumn":  16,
-"endLine":  777,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'AssemblyName' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L780",
-"region":  {
-"startLine":  780,
-"startColumn":  16,
-"endLine":  780,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'ModuleOrder' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L781",
-"region":  {
-"startLine":  781,
-"startColumn":  16,
-"endLine":  781,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'ProcessorModule' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L782",
-"region":  {
-"startLine":  782,
-"startColumn":  16,
-"endLine":  782,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'Type' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L783",
-"region":  {
-"startLine":  783,
-"startColumn":  16,
-"endLine":  783,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'AssemblyFileName' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L793",
-"region":  {
-"startLine":  793,
-"startColumn":  16,
-"endLine":  793,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'AssemblyName' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L794",
-"region":  {
-"startLine":  794,
-"startColumn":  16,
-"endLine":  794,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'PostScraperOrder' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L795",
-"region":  {
-"startLine":  795,
-"startColumn":  16,
-"endLine":  795,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'ProcessorModule' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L796",
-"region":  {
-"startLine":  796,
-"startColumn":  16,
-"endLine":  796,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'ScraperOrder' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L797",
-"region":  {
-"startLine":  797,
-"startColumn":  16,
-"endLine":  797,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'AssemblyFileName' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L807",
-"region":  {
-"startLine":  807,
-"startColumn":  16,
-"endLine":  807,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'AssemblyName' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L808",
-"region":  {
-"startLine":  808,
-"startColumn":  16,
-"endLine":  808,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'PostScraperOrder' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L809",
-"region":  {
-"startLine":  809,
-"startColumn":  16,
-"endLine":  809,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'ProcessorModule' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L810",
-"region":  {
-"startLine":  810,
-"startColumn":  16,
-"endLine":  810,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'ScraperOrder' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L811",
-"region":  {
-"startLine":  811,
-"startColumn":  16,
-"endLine":  811,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'AssemblyFileName' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L822",
-"region":  {
-"startLine":  822,
-"startColumn":  16,
-"endLine":  822,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'AssemblyName' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L823",
-"region":  {
-"startLine":  823,
-"startColumn":  16,
-"endLine":  823,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'Enabled' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L824",
-"region":  {
-"startLine":  824,
-"startColumn":  16,
-"endLine":  824,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'PostScraperEnabled' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L825",
-"region":  {
-"startLine":  825,
-"startColumn":  16,
-"endLine":  825,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'PostScraperOrder' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L826",
-"region":  {
-"startLine":  826,
-"startColumn":  16,
-"endLine":  826,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'ScraperEnabled' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L827",
-"region":  {
-"startLine":  827,
-"startColumn":  16,
-"endLine":  827,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'ScraperOrder' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L828",
-"region":  {
-"startLine":  828,
-"startColumn":  16,
-"endLine":  828,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'htTVShows' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L29",
-"region":  {
-"startLine":  29,
-"startColumn":  12,
-"endLine":  29,
-"endColumn":  21
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'MoviePaths' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L30",
-"region":  {
-"startLine":  30,
-"startColumn":  12,
-"endLine":  30,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'ShowPath' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L31",
-"region":  {
-"startLine":  31,
-"startColumn":  12,
-"endLine":  31,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'SourceLastScan' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L32",
-"region":  {
-"startLine":  32,
-"startColumn":  12,
-"endLine":  32,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'TVPaths' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L33",
-"region":  {
-"startLine":  33,
-"startColumn":  12,
-"endLine":  33,
-"endColumn":  19
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027DefaultValue\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L404",
+      "Location": "Line 404 Position 16-28"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Name\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L405",
+      "Location": "Line 405 Position 16-20"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Section\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L406",
+      "Location": "Line 406 Position 16-23"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Value\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L407",
+      "Location": "Line 407 Position 16-21"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Name\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L411",
+      "Location": "Line 411 Position 16-20"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Section\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L412",
+      "Location": "Line 412 Position 16-23"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027TableItem\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L413",
+      "Location": "Line 413 Position 16-25"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Command\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L40",
+      "Location": "Line 40 Position 16-23"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027CommandDescription\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L70",
+      "Location": "Line 70 Position 16-34"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027CommandExecute\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L72",
+      "Location": "Line 72 Position 16-30"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027CommandType\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L74",
+      "Location": "Line 74 Position 16-27"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Saved\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILog.vb#L38",
+      "Location": "Line 38 Position 12-17"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027MediaType\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILog.vb#L40",
+      "Location": "Line 40 Position 12-21"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027MediaID\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILog.vb#L41",
+      "Location": "Line 41 Position 12-19"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027ID\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILog.vb#L43",
+      "Location": "Line 43 Position 12-14"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027LastDateAdd\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILog.vb#L44",
+      "Location": "Line 44 Position 12-23"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027LogItems\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILog.vb#L45",
+      "Location": "Line 45 Position 12-20"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Saved\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILog.vb#L49",
+      "Location": "Line 49 Position 16-21"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027ID\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILog.vb#L50",
+      "Location": "Line 50 Position 16-18"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027ItemType\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILog.vb#L51",
+      "Location": "Line 51 Position 16-24"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Message\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILog.vb#L52",
+      "Location": "Line 52 Position 16-23"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Details\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILog.vb#L53",
+      "Location": "Line 53 Position 16-23"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027DateAdd\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILog.vb#L54",
+      "Location": "Line 54 Position 16-23"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027MovieID\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L425",
+      "Location": "Line 425 Position 16-23"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027externalProcessorModules\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L35",
+      "Location": "Line 35 Position 12-36"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027externalScrapersModules\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L36",
+      "Location": "Line 36 Position 12-35"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027externalTVScrapersModules\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L37",
+      "Location": "Line 37 Position 12-37"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027RuntimeObjects\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L38",
+      "Location": "Line 38 Position 12-26"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027AssemblyFileName\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L777",
+      "Location": "Line 777 Position 16-32"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027AssemblyName\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L780",
+      "Location": "Line 780 Position 16-28"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027ModuleOrder\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L781",
+      "Location": "Line 781 Position 16-27"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027ProcessorModule\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L782",
+      "Location": "Line 782 Position 16-31"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Type\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L783",
+      "Location": "Line 783 Position 16-20"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027AssemblyFileName\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L793",
+      "Location": "Line 793 Position 16-32"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027AssemblyName\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L794",
+      "Location": "Line 794 Position 16-28"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027PostScraperOrder\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L795",
+      "Location": "Line 795 Position 16-32"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027ProcessorModule\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L796",
+      "Location": "Line 796 Position 16-31"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027ScraperOrder\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L797",
+      "Location": "Line 797 Position 16-28"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027AssemblyFileName\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L807",
+      "Location": "Line 807 Position 16-32"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027AssemblyName\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L808",
+      "Location": "Line 808 Position 16-28"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027PostScraperOrder\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L809",
+      "Location": "Line 809 Position 16-32"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027ProcessorModule\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L810",
+      "Location": "Line 810 Position 16-31"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027ScraperOrder\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L811",
+      "Location": "Line 811 Position 16-28"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027AssemblyFileName\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L822",
+      "Location": "Line 822 Position 16-32"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027AssemblyName\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L823",
+      "Location": "Line 823 Position 16-28"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Enabled\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L824",
+      "Location": "Line 824 Position 16-23"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027PostScraperEnabled\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L825",
+      "Location": "Line 825 Position 16-34"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027PostScraperOrder\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L826",
+      "Location": "Line 826 Position 16-32"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027ScraperEnabled\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L827",
+      "Location": "Line 827 Position 16-30"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027ScraperOrder\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L828",
+      "Location": "Line 828 Position 16-28"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027htTVShows\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L29",
+      "Location": "Line 29 Position 12-21"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027MoviePaths\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L30",
+      "Location": "Line 30 Position 12-22"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027ShowPath\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L31",
+      "Location": "Line 31 Position 12-20"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027SourceLastScan\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L32",
+      "Location": "Line 32 Position 12-26"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027TVPaths\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L33",
+      "Location": "Line 33 Position 12-19"
+    }
+  ]
 }

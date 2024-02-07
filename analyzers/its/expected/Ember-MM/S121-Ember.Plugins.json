@@ -1,589 +1,274 @@
 {
-"issues":  [
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Dummy/DummyPlugin.cs#L54",
-"region":  {
-"startLine":  54,
-"startColumn":  13,
-"endLine":  54,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Dummy/DummyPlugin.cs#L62",
-"region":  {
-"startLine":  62,
-"startColumn":  13,
-"endLine":  62,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Dummy/DummyPlugin.cs#L70",
-"region":  {
-"startLine":  70,
-"startColumn":  13,
-"endLine":  70,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Dummy/DummyPlugin.cs#L78",
-"region":  {
-"startLine":  78,
-"startColumn":  13,
-"endLine":  78,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Ember/EmberWorkAroundPlugin.cs#L63",
-"region":  {
-"startLine":  63,
-"startColumn":  13,
-"endLine":  63,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Ember/EmberWorkAroundPlugin.cs#L65",
-"region":  {
-"startLine":  65,
-"startColumn":  18,
-"endLine":  65,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Ember/EmberWorkAroundPlugin.cs#L67",
-"region":  {
-"startLine":  67,
-"startColumn":  18,
-"endLine":  67,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Ember/EmberWorkAroundPlugin.cs#L74",
-"region":  {
-"startLine":  74,
-"startColumn":  17,
-"endLine":  74,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Ember/EmberWorkAroundPlugin.cs#L78",
-"region":  {
-"startLine":  78,
-"startColumn":  17,
-"endLine":  78,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginBase.cs#L70",
-"region":  {
-"startLine":  70,
-"startColumn":  13,
-"endLine":  70,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L87",
-"region":  {
-"startLine":  87,
-"startColumn":  13,
-"endLine":  87,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L115",
-"region":  {
-"startLine":  115,
-"startColumn":  21,
-"endLine":  115,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L138",
-"region":  {
-"startLine":  138,
-"startColumn":  13,
-"endLine":  138,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L203",
-"region":  {
-"startLine":  203,
-"startColumn":  21,
-"endLine":  203,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L289",
-"region":  {
-"startLine":  289,
-"startColumn":  17,
-"endLine":  289,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L318",
-"region":  {
-"startLine":  318,
-"startColumn":  17,
-"endLine":  318,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L337",
-"region":  {
-"startLine":  337,
-"startColumn":  17,
-"endLine":  337,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L340",
-"region":  {
-"startLine":  340,
-"startColumn":  17,
-"endLine":  340,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L53",
-"region":  {
-"startLine":  53,
-"startColumn":  17,
-"endLine":  53,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L63",
-"region":  {
-"startLine":  63,
-"startColumn":  21,
-"endLine":  63,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L66",
-"region":  {
-"startLine":  66,
-"startColumn":  21,
-"endLine":  66,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L69",
-"region":  {
-"startLine":  69,
-"startColumn":  21,
-"endLine":  69,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L74",
-"region":  {
-"startLine":  74,
-"startColumn":  21,
-"endLine":  74,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L77",
-"region":  {
-"startLine":  77,
-"startColumn":  21,
-"endLine":  77,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L84",
-"region":  {
-"startLine":  84,
-"startColumn":  21,
-"endLine":  84,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L100",
-"region":  {
-"startLine":  100,
-"startColumn":  21,
-"endLine":  100,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L69",
-"region":  {
-"startLine":  69,
-"startColumn":  13,
-"endLine":  69,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L71",
-"region":  {
-"startLine":  71,
-"startColumn":  13,
-"endLine":  71,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L74",
-"region":  {
-"startLine":  74,
-"startColumn":  13,
-"endLine":  74,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L85",
-"region":  {
-"startLine":  85,
-"startColumn":  17,
-"endLine":  85,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L88",
-"region":  {
-"startLine":  88,
-"startColumn":  13,
-"endLine":  88,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L91",
-"region":  {
-"startLine":  91,
-"startColumn":  13,
-"endLine":  91,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L109",
-"region":  {
-"startLine":  109,
-"startColumn":  13,
-"endLine":  109,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L111",
-"region":  {
-"startLine":  111,
-"startColumn":  13,
-"endLine":  111,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L114",
-"region":  {
-"startLine":  114,
-"startColumn":  13,
-"endLine":  114,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L125",
-"region":  {
-"startLine":  125,
-"startColumn":  17,
-"endLine":  125,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L128",
-"region":  {
-"startLine":  128,
-"startColumn":  13,
-"endLine":  128,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L131",
-"region":  {
-"startLine":  131,
-"startColumn":  13,
-"endLine":  131,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L187",
-"region":  {
-"startLine":  187,
-"startColumn":  17,
-"endLine":  187,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L189",
-"region":  {
-"startLine":  189,
-"startColumn":  17,
-"endLine":  189,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Utility.cs#L22",
-"region":  {
-"startLine":  22,
-"startColumn":  13,
-"endLine":  22,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Utility.cs#L36",
-"region":  {
-"startLine":  36,
-"startColumn":  13,
-"endLine":  36,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Utility.cs#L40",
-"region":  {
-"startLine":  40,
-"startColumn":  13,
-"endLine":  40,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Utility.cs#L44",
-"region":  {
-"startLine":  44,
-"startColumn":  17,
-"endLine":  44,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Utility.cs#L46",
-"region":  {
-"startLine":  46,
-"startColumn":  17,
-"endLine":  46,
-"endColumn":  19
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Dummy/DummyPlugin.cs#L54",
+      "Location": "Line 54 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Dummy/DummyPlugin.cs#L62",
+      "Location": "Line 62 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Dummy/DummyPlugin.cs#L70",
+      "Location": "Line 70 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Dummy/DummyPlugin.cs#L78",
+      "Location": "Line 78 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Ember/EmberWorkAroundPlugin.cs#L63",
+      "Location": "Line 63 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Ember/EmberWorkAroundPlugin.cs#L65",
+      "Location": "Line 65 Position 18-20"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Ember/EmberWorkAroundPlugin.cs#L67",
+      "Location": "Line 67 Position 18-20"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Ember/EmberWorkAroundPlugin.cs#L74",
+      "Location": "Line 74 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Ember/EmberWorkAroundPlugin.cs#L78",
+      "Location": "Line 78 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginBase.cs#L70",
+      "Location": "Line 70 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L115",
+      "Location": "Line 115 Position 21-23"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L138",
+      "Location": "Line 138 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027foreach\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L203",
+      "Location": "Line 203 Position 21-28"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L289",
+      "Location": "Line 289 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L318",
+      "Location": "Line 318 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L337",
+      "Location": "Line 337 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L340",
+      "Location": "Line 340 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L87",
+      "Location": "Line 87 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L100",
+      "Location": "Line 100 Position 21-23"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L53",
+      "Location": "Line 53 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L63",
+      "Location": "Line 63 Position 21-23"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L66",
+      "Location": "Line 66 Position 21-23"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L69",
+      "Location": "Line 69 Position 21-23"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L74",
+      "Location": "Line 74 Position 21-23"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L77",
+      "Location": "Line 77 Position 21-23"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L84",
+      "Location": "Line 84 Position 21-23"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L109",
+      "Location": "Line 109 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L111",
+      "Location": "Line 111 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L114",
+      "Location": "Line 114 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L125",
+      "Location": "Line 125 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L128",
+      "Location": "Line 128 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L131",
+      "Location": "Line 131 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027foreach\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L187",
+      "Location": "Line 187 Position 17-24"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027foreach\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L189",
+      "Location": "Line 189 Position 17-24"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L69",
+      "Location": "Line 69 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L71",
+      "Location": "Line 71 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L74",
+      "Location": "Line 74 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L85",
+      "Location": "Line 85 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L88",
+      "Location": "Line 88 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L91",
+      "Location": "Line 91 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Utility.cs#L22",
+      "Location": "Line 22 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Utility.cs#L36",
+      "Location": "Line 36 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Utility.cs#L40",
+      "Location": "Line 40 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Utility.cs#L44",
+      "Location": "Line 44 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Utility.cs#L46",
+      "Location": "Line 46 Position 17-19"
+    }
+  ]
 }

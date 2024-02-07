@@ -1,134 +1,64 @@
 {
-"issues":  [
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1642",
-"region":  {
-"startLine":  1642,
-"startColumn":  25,
-"endLine":  1642,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2113",
-"region":  {
-"startLine":  2113,
-"startColumn":  25,
-"endLine":  2113,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2467",
-"region":  {
-"startLine":  2467,
-"startColumn":  25,
-"endLine":  2467,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2471",
-"region":  {
-"startLine":  2471,
-"startColumn":  25,
-"endLine":  2471,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2475",
-"region":  {
-"startLine":  2475,
-"startColumn":  25,
-"endLine":  2475,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L672",
-"region":  {
-"startLine":  672,
-"startColumn":  29,
-"endLine":  672,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L229",
-"region":  {
-"startLine":  229,
-"startColumn":  25,
-"endLine":  229,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L233",
-"region":  {
-"startLine":  233,
-"startColumn":  25,
-"endLine":  233,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L328",
-"region":  {
-"startLine":  328,
-"startColumn":  33,
-"endLine":  328,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L408",
-"region":  {
-"startLine":  408,
-"startColumn":  37,
-"endLine":  408,
-"endColumn":  39
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S134",
+      "Message": "Refactor this code to not nest more than 3 control flow statements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1642",
+      "Location": "Line 1642 Position 25-27"
+    },
+    {
+      "Id": "S134",
+      "Message": "Refactor this code to not nest more than 3 control flow statements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2113",
+      "Location": "Line 2113 Position 25-27"
+    },
+    {
+      "Id": "S134",
+      "Message": "Refactor this code to not nest more than 3 control flow statements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2467",
+      "Location": "Line 2467 Position 25-27"
+    },
+    {
+      "Id": "S134",
+      "Message": "Refactor this code to not nest more than 3 control flow statements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2471",
+      "Location": "Line 2471 Position 25-27"
+    },
+    {
+      "Id": "S134",
+      "Message": "Refactor this code to not nest more than 3 control flow statements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2475",
+      "Location": "Line 2475 Position 25-27"
+    },
+    {
+      "Id": "S134",
+      "Message": "Refactor this code to not nest more than 3 control flow statements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L672",
+      "Location": "Line 672 Position 29-31"
+    },
+    {
+      "Id": "S134",
+      "Message": "Refactor this code to not nest more than 3 control flow statements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L229",
+      "Location": "Line 229 Position 25-32"
+    },
+    {
+      "Id": "S134",
+      "Message": "Refactor this code to not nest more than 3 control flow statements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L233",
+      "Location": "Line 233 Position 25-32"
+    },
+    {
+      "Id": "S134",
+      "Message": "Refactor this code to not nest more than 3 control flow statements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L328",
+      "Location": "Line 328 Position 33-35"
+    },
+    {
+      "Id": "S134",
+      "Message": "Refactor this code to not nest more than 3 control flow statements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L408",
+      "Location": "Line 408 Position 37-39"
+    }
+  ]
 }

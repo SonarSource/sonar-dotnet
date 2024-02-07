@@ -1,394 +1,184 @@
 {
-"issues":  [
-{
-"id":  "S1227",
-"message":  "Refactor the code in order to remove this break statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.Children.cs#L159",
-"region":  {
-"startLine":  159,
-"startColumn":  73,
-"endLine":  159,
-"endColumn":  79
-}
-}
-},
-{
-"id":  "S1227",
-"message":  "Refactor the code in order to remove this break statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.Children.cs#L183",
-"region":  {
-"startLine":  183,
-"startColumn":  65,
-"endLine":  183,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S1227",
-"message":  "Refactor the code in order to remove this break statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.Children.cs#L198",
-"region":  {
-"startLine":  198,
-"startColumn":  65,
-"endLine":  198,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S1227",
-"message":  "Refactor the code in order to remove this break statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.DefaultMessages.cs#L313",
-"region":  {
-"startLine":  313,
-"startColumn":  21,
-"endLine":  313,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S1227",
-"message":  "Refactor the code in order to remove this break statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.DefaultMessages.cs#L315",
-"region":  {
-"startLine":  315,
-"startColumn":  40,
-"endLine":  315,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S1227",
-"message":  "Refactor the code in order to remove this break statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L1080",
-"region":  {
-"startLine":  1080,
-"startColumn":  17,
-"endLine":  1080,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S1227",
-"message":  "Refactor the code in order to remove this break statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L1113",
-"region":  {
-"startLine":  1113,
-"startColumn":  17,
-"endLine":  1113,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S1227",
-"message":  "Refactor the code in order to remove this break statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Futures.cs#L586",
-"region":  {
-"startLine":  586,
-"startColumn":  17,
-"endLine":  586,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S1227",
-"message":  "Refactor the code in order to remove this break statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L239",
-"region":  {
-"startLine":  239,
-"startColumn":  21,
-"endLine":  239,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S1227",
-"message":  "Refactor the code in order to remove this break statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconTokenizer.cs#L214",
-"region":  {
-"startLine":  214,
-"startColumn":  21,
-"endLine":  214,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S1227",
-"message":  "Refactor the code in order to remove this break statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailbox.cs#L390",
-"region":  {
-"startLine":  390,
-"startColumn":  17,
-"endLine":  390,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S1227",
-"message":  "Refactor the code in order to remove this break statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L208",
-"region":  {
-"startLine":  208,
-"startColumn":  21,
-"endLine":  208,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S1227",
-"message":  "Refactor the code in order to remove this break statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L222",
-"region":  {
-"startLine":  222,
-"startColumn":  21,
-"endLine":  222,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S1227",
-"message":  "Refactor the code in order to remove this break statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L246",
-"region":  {
-"startLine":  246,
-"startColumn":  33,
-"endLine":  246,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S1227",
-"message":  "Refactor the code in order to remove this break statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L434",
-"region":  {
-"startLine":  434,
-"startColumn":  25,
-"endLine":  434,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S1227",
-"message":  "Refactor the code in order to remove this break statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L465",
-"region":  {
-"startLine":  465,
-"startColumn":  25,
-"endLine":  465,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S1227",
-"message":  "Refactor the code in order to remove this break statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L492",
-"region":  {
-"startLine":  492,
-"startColumn":  25,
-"endLine":  492,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S1227",
-"message":  "Refactor the code in order to remove this break statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L506",
-"region":  {
-"startLine":  506,
-"startColumn":  25,
-"endLine":  506,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S1227",
-"message":  "Refactor the code in order to remove this break statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L601",
-"region":  {
-"startLine":  601,
-"startColumn":  29,
-"endLine":  601,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S1227",
-"message":  "Refactor the code in order to remove this break statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L631",
-"region":  {
-"startLine":  631,
-"startColumn":  33,
-"endLine":  631,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S1227",
-"message":  "Refactor the code in order to remove this break statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L706",
-"region":  {
-"startLine":  706,
-"startColumn":  25,
-"endLine":  706,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S1227",
-"message":  "Refactor the code in order to remove this break statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Buffers/DirectBufferPool.cs#L176",
-"region":  {
-"startLine":  176,
-"startColumn":  56,
-"endLine":  176,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S1227",
-"message":  "Refactor the code in order to remove this break statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Serialization/Serialization.cs#L480",
-"region":  {
-"startLine":  480,
-"startColumn":  21,
-"endLine":  480,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S1227",
-"message":  "Refactor the code in order to remove this break statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ByteString.cs#L304",
-"region":  {
-"startLine":  304,
-"startColumn":  38,
-"endLine":  304,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S1227",
-"message":  "Refactor the code in order to remove this break statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ListPriorityQueue.cs#L52",
-"region":  {
-"startLine":  52,
-"startColumn":  116,
-"endLine":  52,
-"endColumn":  122
-}
-}
-},
-{
-"id":  "S1227",
-"message":  "Refactor the code in order to remove this break statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ListPriorityQueue.cs#L75",
-"region":  {
-"startLine":  75,
-"startColumn":  30,
-"endLine":  75,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S1227",
-"message":  "Refactor the code in order to remove this break statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ListPriorityQueue.cs#L79",
-"region":  {
-"startLine":  79,
-"startColumn":  116,
-"endLine":  79,
-"endColumn":  122
-}
-}
-},
-{
-"id":  "S1227",
-"message":  "Refactor the code in order to remove this break statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/StableListPriorityQueue.cs#L86",
-"region":  {
-"startLine":  86,
-"startColumn":  68,
-"endLine":  86,
-"endColumn":  74
-}
-}
-},
-{
-"id":  "S1227",
-"message":  "Refactor the code in order to remove this break statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/StableListPriorityQueue.cs#L109",
-"region":  {
-"startLine":  109,
-"startColumn":  30,
-"endLine":  109,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S1227",
-"message":  "Refactor the code in order to remove this break statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/StableListPriorityQueue.cs#L113",
-"region":  {
-"startLine":  113,
-"startColumn":  68,
-"endLine":  113,
-"endColumn":  74
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1227",
+      "Message": "Refactor the code in order to remove this break statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.Children.cs#L159",
+      "Location": "Line 159 Position 73-79"
+    },
+    {
+      "Id": "S1227",
+      "Message": "Refactor the code in order to remove this break statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.Children.cs#L183",
+      "Location": "Line 183 Position 65-71"
+    },
+    {
+      "Id": "S1227",
+      "Message": "Refactor the code in order to remove this break statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.Children.cs#L198",
+      "Location": "Line 198 Position 65-71"
+    },
+    {
+      "Id": "S1227",
+      "Message": "Refactor the code in order to remove this break statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.DefaultMessages.cs#L313",
+      "Location": "Line 313 Position 21-27"
+    },
+    {
+      "Id": "S1227",
+      "Message": "Refactor the code in order to remove this break statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.DefaultMessages.cs#L315",
+      "Location": "Line 315 Position 40-46"
+    },
+    {
+      "Id": "S1227",
+      "Message": "Refactor the code in order to remove this break statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L1080",
+      "Location": "Line 1080 Position 17-23"
+    },
+    {
+      "Id": "S1227",
+      "Message": "Refactor the code in order to remove this break statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L1113",
+      "Location": "Line 1113 Position 17-23"
+    },
+    {
+      "Id": "S1227",
+      "Message": "Refactor the code in order to remove this break statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Futures.cs#L586",
+      "Location": "Line 586 Position 17-23"
+    },
+    {
+      "Id": "S1227",
+      "Message": "Refactor the code in order to remove this break statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L239",
+      "Location": "Line 239 Position 21-27"
+    },
+    {
+      "Id": "S1227",
+      "Message": "Refactor the code in order to remove this break statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconTokenizer.cs#L214",
+      "Location": "Line 214 Position 21-27"
+    },
+    {
+      "Id": "S1227",
+      "Message": "Refactor the code in order to remove this break statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailbox.cs#L390",
+      "Location": "Line 390 Position 17-23"
+    },
+    {
+      "Id": "S1227",
+      "Message": "Refactor the code in order to remove this break statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L208",
+      "Location": "Line 208 Position 21-27"
+    },
+    {
+      "Id": "S1227",
+      "Message": "Refactor the code in order to remove this break statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L222",
+      "Location": "Line 222 Position 21-27"
+    },
+    {
+      "Id": "S1227",
+      "Message": "Refactor the code in order to remove this break statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L246",
+      "Location": "Line 246 Position 33-39"
+    },
+    {
+      "Id": "S1227",
+      "Message": "Refactor the code in order to remove this break statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L434",
+      "Location": "Line 434 Position 25-31"
+    },
+    {
+      "Id": "S1227",
+      "Message": "Refactor the code in order to remove this break statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L465",
+      "Location": "Line 465 Position 25-31"
+    },
+    {
+      "Id": "S1227",
+      "Message": "Refactor the code in order to remove this break statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L492",
+      "Location": "Line 492 Position 25-31"
+    },
+    {
+      "Id": "S1227",
+      "Message": "Refactor the code in order to remove this break statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L506",
+      "Location": "Line 506 Position 25-31"
+    },
+    {
+      "Id": "S1227",
+      "Message": "Refactor the code in order to remove this break statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L601",
+      "Location": "Line 601 Position 29-35"
+    },
+    {
+      "Id": "S1227",
+      "Message": "Refactor the code in order to remove this break statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L631",
+      "Location": "Line 631 Position 33-39"
+    },
+    {
+      "Id": "S1227",
+      "Message": "Refactor the code in order to remove this break statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L706",
+      "Location": "Line 706 Position 25-31"
+    },
+    {
+      "Id": "S1227",
+      "Message": "Refactor the code in order to remove this break statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Buffers/DirectBufferPool.cs#L176",
+      "Location": "Line 176 Position 56-62"
+    },
+    {
+      "Id": "S1227",
+      "Message": "Refactor the code in order to remove this break statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Serialization/Serialization.cs#L480",
+      "Location": "Line 480 Position 21-27"
+    },
+    {
+      "Id": "S1227",
+      "Message": "Refactor the code in order to remove this break statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ByteString.cs#L304",
+      "Location": "Line 304 Position 38-44"
+    },
+    {
+      "Id": "S1227",
+      "Message": "Refactor the code in order to remove this break statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ListPriorityQueue.cs#L52",
+      "Location": "Line 52 Position 116-122"
+    },
+    {
+      "Id": "S1227",
+      "Message": "Refactor the code in order to remove this break statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ListPriorityQueue.cs#L75",
+      "Location": "Line 75 Position 30-36"
+    },
+    {
+      "Id": "S1227",
+      "Message": "Refactor the code in order to remove this break statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ListPriorityQueue.cs#L79",
+      "Location": "Line 79 Position 116-122"
+    },
+    {
+      "Id": "S1227",
+      "Message": "Refactor the code in order to remove this break statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/StableListPriorityQueue.cs#L109",
+      "Location": "Line 109 Position 30-36"
+    },
+    {
+      "Id": "S1227",
+      "Message": "Refactor the code in order to remove this break statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/StableListPriorityQueue.cs#L113",
+      "Location": "Line 113 Position 68-74"
+    },
+    {
+      "Id": "S1227",
+      "Message": "Refactor the code in order to remove this break statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/StableListPriorityQueue.cs#L86",
+      "Location": "Line 86 Position 68-74"
+    }
+  ]
 }

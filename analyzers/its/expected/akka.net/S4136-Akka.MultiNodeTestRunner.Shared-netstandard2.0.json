@@ -1,28 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S4136",
-"message":  "All 'PublishToChildren' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/SinkCoordinator.cs#L165",
-"region":  {
-"startLine":  165,
-"startColumn":  22,
-"endLine":  165,
-"endColumn":  39
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/SinkCoordinator.cs#L186",
-"region":  {
-"startLine":  186,
-"startColumn":  22,
-"endLine":  186,
-"endColumn":  39
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S4136",
+      "Message": "All \u0027PublishToChildren\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/SinkCoordinator.cs#L165",
+      "Location": "Line 165 Position 22-39"
+    }
+  ]
 }

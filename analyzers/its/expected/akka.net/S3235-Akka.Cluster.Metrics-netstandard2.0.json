@@ -1,147 +1,70 @@
 {
-"issues":  [
-{
-"id":  "S3235",
-"message":  "Remove these redundant parentheses.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Collectors/DefaultCollector.cs#L58",
-"region":  {
-"startLine":  58,
-"startColumn":  65,
-"endLine":  58,
-"endColumn":  67
-}
-}
-},
-{
-"id":  "S3235",
-"message":  "Remove these redundant parentheses.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Routing/ClusterMetricsRouting.cs#L185",
-"region":  {
-"startLine":  185,
-"startColumn":  58,
-"endLine":  185,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S3235",
-"message":  "Remove these redundant parentheses.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Routing/ClusterMetricsRouting.cs#L337",
-"region":  {
-"startLine":  337,
-"startColumn":  59,
-"endLine":  337,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S3235",
-"message":  "Remove these redundant parentheses.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L133",
-"region":  {
-"startLine":  133,
-"startColumn":  54,
-"endLine":  133,
-"endColumn":  56
-}
-}
-},
-{
-"id":  "S3235",
-"message":  "Remove these redundant parentheses.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L152",
-"region":  {
-"startLine":  152,
-"startColumn":  39,
-"endLine":  152,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S3235",
-"message":  "Remove these redundant parentheses.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L162",
-"region":  {
-"startLine":  162,
-"startColumn":  47,
-"endLine":  162,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S3235",
-"message":  "Remove these redundant parentheses.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L174",
-"region":  {
-"startLine":  174,
-"startColumn":  35,
-"endLine":  174,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S3235",
-"message":  "Remove these redundant parentheses.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L252",
-"region":  {
-"startLine":  252,
-"startColumn":  58,
-"endLine":  252,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S3235",
-"message":  "Remove these redundant parentheses.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L267",
-"region":  {
-"startLine":  267,
-"startColumn":  39,
-"endLine":  267,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S3235",
-"message":  "Remove these redundant parentheses.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L277",
-"region":  {
-"startLine":  277,
-"startColumn":  45,
-"endLine":  277,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S3235",
-"message":  "Remove these redundant parentheses.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L281",
-"region":  {
-"startLine":  281,
-"startColumn":  43,
-"endLine":  281,
-"endColumn":  45
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3235",
+      "Message": "Remove these redundant parentheses.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Collectors/DefaultCollector.cs#L58",
+      "Location": "Line 58 Position 65-67"
+    },
+    {
+      "Id": "S3235",
+      "Message": "Remove these redundant parentheses.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Routing/ClusterMetricsRouting.cs#L185",
+      "Location": "Line 185 Position 58-60"
+    },
+    {
+      "Id": "S3235",
+      "Message": "Remove these redundant parentheses.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Routing/ClusterMetricsRouting.cs#L337",
+      "Location": "Line 337 Position 59-61"
+    },
+    {
+      "Id": "S3235",
+      "Message": "Remove these redundant parentheses.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L133",
+      "Location": "Line 133 Position 54-56"
+    },
+    {
+      "Id": "S3235",
+      "Message": "Remove these redundant parentheses.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L152",
+      "Location": "Line 152 Position 39-41"
+    },
+    {
+      "Id": "S3235",
+      "Message": "Remove these redundant parentheses.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L162",
+      "Location": "Line 162 Position 47-49"
+    },
+    {
+      "Id": "S3235",
+      "Message": "Remove these redundant parentheses.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L174",
+      "Location": "Line 174 Position 35-37"
+    },
+    {
+      "Id": "S3235",
+      "Message": "Remove these redundant parentheses.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L252",
+      "Location": "Line 252 Position 58-60"
+    },
+    {
+      "Id": "S3235",
+      "Message": "Remove these redundant parentheses.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L267",
+      "Location": "Line 267 Position 39-41"
+    },
+    {
+      "Id": "S3235",
+      "Message": "Remove these redundant parentheses.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L277",
+      "Location": "Line 277 Position 45-47"
+    },
+    {
+      "Id": "S3235",
+      "Message": "Remove these redundant parentheses.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L281",
+      "Location": "Line 281 Position 43-45"
+    }
+  ]
 }

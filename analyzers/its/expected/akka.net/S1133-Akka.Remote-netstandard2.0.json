@@ -1,56 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L286",
-"region":  {
-"startLine":  286,
-"startColumn":  10,
-"endLine":  286,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/DeadlineFailureDetector.cs#L32",
-"region":  {
-"startLine":  32,
-"startColumn":  10,
-"endLine":  32,
-"endColumn":  118
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteActorRef.cs#L99",
-"region":  {
-"startLine":  99,
-"startColumn":  10,
-"endLine":  99,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S1133",
-"message":  "Do not forget to remove this deprecated code someday.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/Transport.cs#L385",
-"region":  {
-"startLine":  385,
-"startColumn":  10,
-"endLine":  385,
-"endColumn":  104
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L286",
+      "Location": "Line 286 Position 10-55"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/DeadlineFailureDetector.cs#L32",
+      "Location": "Line 32 Position 10-118"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteActorRef.cs#L99",
+      "Location": "Line 99 Position 10-71"
+    },
+    {
+      "Id": "S1133",
+      "Message": "Do not forget to remove this deprecated code someday.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/Transport.cs#L385",
+      "Location": "Line 385 Position 10-104"
+    }
+  ]
 }

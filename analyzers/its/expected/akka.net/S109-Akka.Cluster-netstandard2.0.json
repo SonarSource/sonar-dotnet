@@ -1,212 +1,100 @@
 {
-"issues":  [
-{
-"id":  "S109",
-"message":  "Assign this magic number '3' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2035",
-"region":  {
-"startLine":  2035,
-"startColumn":  107,
-"endLine":  2035,
-"endColumn":  108
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2037",
-"region":  {
-"startLine":  2037,
-"startColumn":  107,
-"endLine":  2037,
-"endColumn":  108
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '3' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2037",
-"region":  {
-"startLine":  2037,
-"startColumn":  111,
-"endLine":  2037,
-"endColumn":  112
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2056",
-"region":  {
-"startLine":  2056,
-"startColumn":  81,
-"endLine":  2056,
-"endColumn":  82
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2583",
-"region":  {
-"startLine":  2583,
-"startColumn":  77,
-"endLine":  2583,
-"endColumn":  78
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2752",
-"region":  {
-"startLine":  2752,
-"startColumn":  38,
-"endLine":  2752,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L472",
-"region":  {
-"startLine":  472,
-"startColumn":  50,
-"endLine":  472,
-"endColumn":  51
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L633",
-"region":  {
-"startLine":  633,
-"startColumn":  66,
-"endLine":  633,
-"endColumn":  67
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L638",
-"region":  {
-"startLine":  638,
-"startColumn":  62,
-"endLine":  638,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L716",
-"region":  {
-"startLine":  716,
-"startColumn":  39,
-"endLine":  716,
-"endColumn":  40
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L719",
-"region":  {
-"startLine":  719,
-"startColumn":  39,
-"endLine":  719,
-"endColumn":  40
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L591",
-"region":  {
-"startLine":  591,
-"startColumn":  44,
-"endLine":  591,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '3' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolverSettings.cs#L55",
-"region":  {
-"startLine":  55,
-"startColumn":  97,
-"endLine":  55,
-"endColumn":  98
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '4' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolverSettings.cs#L55",
-"region":  {
-"startLine":  55,
-"startColumn":  101,
-"endLine":  55,
-"endColumn":  102
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '23' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L77",
-"region":  {
-"startLine":  77,
-"startColumn":  38,
-"endLine":  77,
-"endColumn":  40
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '31' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L92",
-"region":  {
-"startLine":  92,
-"startColumn":  68,
-"endLine":  92,
-"endColumn":  70
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2035",
+      "Location": "Line 2035 Position 107-108"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2037",
+      "Location": "Line 2037 Position 107-108"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2037",
+      "Location": "Line 2037 Position 111-112"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2056",
+      "Location": "Line 2056 Position 81-82"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2583",
+      "Location": "Line 2583 Position 77-78"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2752",
+      "Location": "Line 2752 Position 38-39"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L472",
+      "Location": "Line 472 Position 50-51"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L633",
+      "Location": "Line 633 Position 66-67"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L638",
+      "Location": "Line 638 Position 62-63"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L716",
+      "Location": "Line 716 Position 39-40"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L719",
+      "Location": "Line 719 Position 39-40"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L591",
+      "Location": "Line 591 Position 44-45"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolverSettings.cs#L55",
+      "Location": "Line 55 Position 97-98"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00274\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolverSettings.cs#L55",
+      "Location": "Line 55 Position 101-102"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002723\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L77",
+      "Location": "Line 77 Position 38-40"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002731\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L92",
+      "Location": "Line 92 Position 68-70"
+    }
+  ]
 }

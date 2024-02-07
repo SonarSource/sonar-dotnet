@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S3928",
-"message":  "ArgumentException constructor arguments have been inverted.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L23",
-"region":  {
-"startLine":  23,
-"startColumn":  11,
-"endLine":  23,
-"endColumn":  51
-}
-}
-},
-{
-"id":  "S3928",
-"message":  "The parameter name 'foo' is not declared in the argument list.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3928.cs#L7",
-"region":  {
-"startLine":  7,
-"startColumn":  39,
-"endLine":  7,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S3928",
-"message":  "The parameter name 'foo' is not declared in the argument list.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3928.cs#L13",
-"region":  {
-"startLine":  13,
-"startColumn":  23,
-"endLine":  13,
-"endColumn":  55
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3928",
+      "Message": "ArgumentException constructor arguments have been inverted.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L23",
+      "Location": "Line 23 Position 11-51"
+    },
+    {
+      "Id": "S3928",
+      "Message": "The parameter name \u0027foo\u0027 is not declared in the argument list.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3928.cs#L13",
+      "Location": "Line 13 Position 23-55"
+    },
+    {
+      "Id": "S3928",
+      "Message": "The parameter name \u0027foo\u0027 is not declared in the argument list.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3928.cs#L7",
+      "Location": "Line 7 Position 39-55"
+    }
+  ]
 }

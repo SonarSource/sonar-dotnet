@@ -1,69 +1,34 @@
 {
-"issues":  [
-{
-"id":  "S2347",
-"message":  "Rename event handler 'OK_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L22",
-"region":  {
-"startLine":  22,
-"startColumn":  17,
-"endLine":  22,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2347",
-"message":  "Rename event handler 'Cancel_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L77",
-"region":  {
-"startLine":  77,
-"startColumn":  17,
-"endLine":  77,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S2347",
-"message":  "Rename event handler 'dlgXBMCHost_Load' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L143",
-"region":  {
-"startLine":  143,
-"startColumn":  17,
-"endLine":  143,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S2347",
-"message":  "Rename event handler 'lbXBMCCom_KeyDown' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/frmSettingsHolder.vb#L89",
-"region":  {
-"startLine":  89,
-"startColumn":  17,
-"endLine":  89,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S2347",
-"message":  "Rename event handler 'lbXBMCCom_SelectedIndexChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/frmSettingsHolder.vb#L93",
-"region":  {
-"startLine":  93,
-"startColumn":  17,
-"endLine":  93,
-"endColumn":  47
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2347",
+      "Message": "Rename event handler \u0027dlgXBMCHost_Load\u0027 to match the regular expression: \u0027^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L143",
+      "Location": "Line 143 Position 17-33"
+    },
+    {
+      "Id": "S2347",
+      "Message": "Rename event handler \u0027OK_Button_Click\u0027 to match the regular expression: \u0027^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L22",
+      "Location": "Line 22 Position 17-32"
+    },
+    {
+      "Id": "S2347",
+      "Message": "Rename event handler \u0027Cancel_Button_Click\u0027 to match the regular expression: \u0027^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L77",
+      "Location": "Line 77 Position 17-36"
+    },
+    {
+      "Id": "S2347",
+      "Message": "Rename event handler \u0027lbXBMCCom_KeyDown\u0027 to match the regular expression: \u0027^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/frmSettingsHolder.vb#L89",
+      "Location": "Line 89 Position 17-34"
+    },
+    {
+      "Id": "S2347",
+      "Message": "Rename event handler \u0027lbXBMCCom_SelectedIndexChanged\u0027 to match the regular expression: \u0027^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/frmSettingsHolder.vb#L93",
+      "Location": "Line 93 Position 17-47"
+    }
+  ]
 }

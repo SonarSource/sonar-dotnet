@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S112",
-"message":  "'System.Exception' should not be thrown by user code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L202",
-"region":  {
-"startLine":  202,
-"startColumn":  23,
-"endLine":  202,
-"endColumn":  123
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S112",
+      "Message": "\u0027System.Exception\u0027 should not be thrown by user code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L202",
+      "Location": "Line 202 Position 23-123"
+    }
+  ]
 }

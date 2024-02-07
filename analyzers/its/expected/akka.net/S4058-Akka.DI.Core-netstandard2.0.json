@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S4058",
-"message":  "Change this call to 't.Name.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.Core/Extensions.cs#L68",
-"region":  {
-"startLine":  68,
-"startColumn":  42,
-"endLine":  68,
-"endColumn":  65
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027t.Name.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.Core/Extensions.cs#L68",
+      "Location": "Line 68 Position 42-65"
+    }
+  ]
 }

@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S2376",
-"message":  "Provide a getter for 'isEdit' or replace the property with a 'SetisEdit' method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L67",
-"region":  {
-"startLine":  67,
-"startColumn":  35,
-"endLine":  67,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S2376",
-"message":  "Provide a getter for 'Movie' or replace the property with a 'SetMovie' method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L73",
-"region":  {
-"startLine":  73,
-"startColumn":  35,
-"endLine":  73,
-"endColumn":  40
-}
-}
-},
-{
-"id":  "S2376",
-"message":  "Provide a getter for 'ThumbCount' or replace the property with a 'SetThumbCount' method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L85",
-"region":  {
-"startLine":  85,
-"startColumn":  35,
-"endLine":  85,
-"endColumn":  45
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2376",
+      "Message": "Provide a getter for \u0027isEdit\u0027 or replace the property with a \u0027SetisEdit\u0027 method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L67",
+      "Location": "Line 67 Position 35-41"
+    },
+    {
+      "Id": "S2376",
+      "Message": "Provide a getter for \u0027Movie\u0027 or replace the property with a \u0027SetMovie\u0027 method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L73",
+      "Location": "Line 73 Position 35-40"
+    },
+    {
+      "Id": "S2376",
+      "Message": "Provide a getter for \u0027ThumbCount\u0027 or replace the property with a \u0027SetThumbCount\u0027 method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L85",
+      "Location": "Line 85 Position 35-45"
+    }
+  ]
 }

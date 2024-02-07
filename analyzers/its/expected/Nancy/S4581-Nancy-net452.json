@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S4581",
-"message":  "Use 'Guid.NewGuid()' or 'Guid.Empty' or add arguments to this GUID instantiation.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L495",
-"region":  {
-"startLine":  495,
-"startColumn":  24,
-"endLine":  495,
-"endColumn":  37
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4581",
+      "Message": "Use \u0027Guid.NewGuid()\u0027 or \u0027Guid.Empty\u0027 or add arguments to this GUID instantiation.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L495",
+      "Location": "Line 495 Position 24-37"
+    }
+  ]
 }

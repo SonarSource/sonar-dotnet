@@ -1,108 +1,52 @@
 {
-"issues":  [
-{
-"id":  "S2357",
-"message":  "Make 'listOfLanguages' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L244",
-"region":  {
-"startLine":  244,
-"startColumn":  16,
-"endLine":  244,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'listOfGenres' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L246",
-"region":  {
-"startLine":  246,
-"startColumn":  16,
-"endLine":  246,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'defaulticon' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L248",
-"region":  {
-"startLine":  248,
-"startColumn":  16,
-"endLine":  248,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'icon' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L281",
-"region":  {
-"startLine":  281,
-"startColumn":  16,
-"endLine":  281,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'Langs' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L285",
-"region":  {
-"startLine":  285,
-"startColumn":  16,
-"endLine":  285,
-"endColumn":  21
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'searchstring' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L287",
-"region":  {
-"startLine":  287,
-"startColumn":  16,
-"endLine":  287,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'language' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L289",
-"region":  {
-"startLine":  289,
-"startColumn":  16,
-"endLine":  289,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'icon' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L292",
-"region":  {
-"startLine":  292,
-"startColumn":  16,
-"endLine":  292,
-"endColumn":  20
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027listOfLanguages\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L244",
+      "Location": "Line 244 Position 16-31"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027listOfGenres\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L246",
+      "Location": "Line 246 Position 16-28"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027defaulticon\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L248",
+      "Location": "Line 248 Position 16-27"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027icon\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L281",
+      "Location": "Line 281 Position 16-20"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Langs\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L285",
+      "Location": "Line 285 Position 16-21"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027searchstring\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L287",
+      "Location": "Line 287 Position 16-28"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027language\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L289",
+      "Location": "Line 289 Position 16-24"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027icon\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L292",
+      "Location": "Line 292 Position 16-20"
+    }
+  ]
 }

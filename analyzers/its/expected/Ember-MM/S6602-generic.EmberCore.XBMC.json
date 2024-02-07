@@ -1,95 +1,46 @@
 {
-"issues":  [
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L145",
-"region":  {
-"startLine":  145,
-"startColumn":  22,
-"endLine":  145,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L235",
-"region":  {
-"startLine":  235,
-"startColumn":  58,
-"endLine":  235,
-"endColumn":  72
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L299",
-"region":  {
-"startLine":  299,
-"startColumn":  48,
-"endLine":  299,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/frmSettingsHolder.vb#L106",
-"region":  {
-"startLine":  106,
-"startColumn":  38,
-"endLine":  106,
-"endColumn":  52
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L130",
-"region":  {
-"startLine":  130,
-"startColumn":  43,
-"endLine":  130,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L165",
-"region":  {
-"startLine":  165,
-"startColumn":  35,
-"endLine":  165,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L268",
-"region":  {
-"startLine":  268,
-"startColumn":  76,
-"endLine":  268,
-"endColumn":  90
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L145",
+      "Location": "Line 145 Position 22-36"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L235",
+      "Location": "Line 235 Position 58-72"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L299",
+      "Location": "Line 299 Position 48-62"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/frmSettingsHolder.vb#L106",
+      "Location": "Line 106 Position 38-52"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L130",
+      "Location": "Line 130 Position 43-57"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L165",
+      "Location": "Line 165 Position 35-49"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L268",
+      "Location": "Line 268 Position 76-90"
+    }
+  ]
 }

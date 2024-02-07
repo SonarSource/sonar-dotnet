@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S4487",
-"message":  "Remove this unread private field '_echo' or refactor the code to use its value.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Actor/ActorSelectionBenchmark.cs#L20",
-"region":  {
-"startLine":  20,
-"startColumn":  27,
-"endLine":  20,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S4487",
-"message":  "Remove this unread private field '_nodes' or refactor the code to use its value.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/VectorClockBenchmarks.cs#L49",
-"region":  {
-"startLine":  49,
-"startColumn":  42,
-"endLine":  49,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S4487",
-"message":  "Remove this unread private field '_server' or refactor the code to use its value.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/IO/TcpOperationsBenchmarks.cs#L31",
-"region":  {
-"startLine":  31,
-"startColumn":  27,
-"endLine":  31,
-"endColumn":  34
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4487",
+      "Message": "Remove this unread private field \u0027_echo\u0027 or refactor the code to use its value.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Actor/ActorSelectionBenchmark.cs#L20",
+      "Location": "Line 20 Position 27-32"
+    },
+    {
+      "Id": "S4487",
+      "Message": "Remove this unread private field \u0027_nodes\u0027 or refactor the code to use its value.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/VectorClockBenchmarks.cs#L49",
+      "Location": "Line 49 Position 42-48"
+    },
+    {
+      "Id": "S4487",
+      "Message": "Remove this unread private field \u0027_server\u0027 or refactor the code to use its value.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/IO/TcpOperationsBenchmarks.cs#L31",
+      "Location": "Line 31 Position 27-34"
+    }
+  ]
 }

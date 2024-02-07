@@ -1,615 +1,286 @@
 {
-"issues":  [
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L852",
-"region":  {
-"startLine":  852,
-"startColumn":  47,
-"endLine":  852,
-"endColumn":  74
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L894",
-"region":  {
-"startLine":  894,
-"startColumn":  49,
-"endLine":  894,
-"endColumn":  152
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L896",
-"region":  {
-"startLine":  896,
-"startColumn":  148,
-"endLine":  896,
-"endColumn":  230
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L920",
-"region":  {
-"startLine":  920,
-"startColumn":  16,
-"endLine":  920,
-"endColumn":  111
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L427",
-"region":  {
-"startLine":  427,
-"startColumn":  35,
-"endLine":  427,
-"endColumn":  91
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L393",
-"region":  {
-"startLine":  393,
-"startColumn":  42,
-"endLine":  393,
-"endColumn":  110
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L527",
-"region":  {
-"startLine":  527,
-"startColumn":  34,
-"endLine":  527,
-"endColumn":  98
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L257",
-"region":  {
-"startLine":  257,
-"startColumn":  41,
-"endLine":  257,
-"endColumn":  157
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L267",
-"region":  {
-"startLine":  267,
-"startColumn":  31,
-"endLine":  267,
-"endColumn":  147
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L441",
-"region":  {
-"startLine":  441,
-"startColumn":  55,
-"endLine":  441,
-"endColumn":  211
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L616",
-"region":  {
-"startLine":  616,
-"startColumn":  59,
-"endLine":  616,
-"endColumn":  215
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L55",
-"region":  {
-"startLine":  55,
-"startColumn":  45,
-"endLine":  55,
-"endColumn":  207
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L62",
-"region":  {
-"startLine":  62,
-"startColumn":  36,
-"endLine":  62,
-"endColumn":  118
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L66",
-"region":  {
-"startLine":  66,
-"startColumn":  66,
-"endLine":  66,
-"endColumn":  156
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L69",
-"region":  {
-"startLine":  69,
-"startColumn":  48,
-"endLine":  69,
-"endColumn":  131
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L79",
-"region":  {
-"startLine":  79,
-"startColumn":  62,
-"endLine":  79,
-"endColumn":  152
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L82",
-"region":  {
-"startLine":  82,
-"startColumn":  44,
-"endLine":  82,
-"endColumn":  127
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L93",
-"region":  {
-"startLine":  93,
-"startColumn":  61,
-"endLine":  93,
-"endColumn":  152
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L97",
-"region":  {
-"startLine":  97,
-"startColumn":  61,
-"endLine":  97,
-"endColumn":  160
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L102",
-"region":  {
-"startLine":  102,
-"startColumn":  65,
-"endLine":  102,
-"endColumn":  137
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L332",
-"region":  {
-"startLine":  332,
-"startColumn":  24,
-"endLine":  332,
-"endColumn":  235
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L333",
-"region":  {
-"startLine":  333,
-"startColumn":  33,
-"endLine":  333,
-"endColumn":  237
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L832",
-"region":  {
-"startLine":  832,
-"startColumn":  34,
-"endLine":  832,
-"endColumn":  110
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L883",
-"region":  {
-"startLine":  883,
-"startColumn":  25,
-"endLine":  883,
-"endColumn":  101
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L43",
-"region":  {
-"startLine":  43,
-"startColumn":  33,
-"endLine":  43,
-"endColumn":  196
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L45",
-"region":  {
-"startLine":  45,
-"startColumn":  20,
-"endLine":  45,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L143",
-"region":  {
-"startLine":  143,
-"startColumn":  68,
-"endLine":  143,
-"endColumn":  106
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L145",
-"region":  {
-"startLine":  145,
-"startColumn":  68,
-"endLine":  145,
-"endColumn":  95
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L177",
-"region":  {
-"startLine":  177,
-"startColumn":  20,
-"endLine":  177,
-"endColumn":  94
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L178",
-"region":  {
-"startLine":  178,
-"startColumn":  58,
-"endLine":  178,
-"endColumn":  146
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L178",
-"region":  {
-"startLine":  178,
-"startColumn":  153,
-"endLine":  178,
-"endColumn":  267
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L178",
-"region":  {
-"startLine":  178,
-"startColumn":  192,
-"endLine":  178,
-"endColumn":  240
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L205",
-"region":  {
-"startLine":  205,
-"startColumn":  62,
-"endLine":  205,
-"endColumn":  99
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L207",
-"region":  {
-"startLine":  207,
-"startColumn":  62,
-"endLine":  207,
-"endColumn":  88
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L250",
-"region":  {
-"startLine":  250,
-"startColumn":  66,
-"endLine":  250,
-"endColumn":  105
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L252",
-"region":  {
-"startLine":  252,
-"startColumn":  66,
-"endLine":  252,
-"endColumn":  94
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L274",
-"region":  {
-"startLine":  274,
-"startColumn":  16,
-"endLine":  274,
-"endColumn":  75
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L308",
-"region":  {
-"startLine":  308,
-"startColumn":  23,
-"endLine":  308,
-"endColumn":  161
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L308",
-"region":  {
-"startLine":  308,
-"startColumn":  169,
-"endLine":  308,
-"endColumn":  236
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L310",
-"region":  {
-"startLine":  310,
-"startColumn":  23,
-"endLine":  310,
-"endColumn":  161
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L317",
-"region":  {
-"startLine":  317,
-"startColumn":  16,
-"endLine":  317,
-"endColumn":  119
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L334",
-"region":  {
-"startLine":  334,
-"startColumn":  39,
-"endLine":  334,
-"endColumn":  95
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L344",
-"region":  {
-"startLine":  344,
-"startColumn":  33,
-"endLine":  344,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L345",
-"region":  {
-"startLine":  345,
-"startColumn":  16,
-"endLine":  345,
-"endColumn":  65
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L349",
-"region":  {
-"startLine":  349,
-"startColumn":  12,
-"endLine":  349,
-"endColumn":  78
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L223",
-"region":  {
-"startLine":  223,
-"startColumn":  28,
-"endLine":  223,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L453",
-"region":  {
-"startLine":  453,
-"startColumn":  43,
-"endLine":  453,
-"endColumn":  100
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L852",
+      "Location": "Line 852 Position 47-74"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L894",
+      "Location": "Line 894 Position 49-152"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L896",
+      "Location": "Line 896 Position 148-230"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L920",
+      "Location": "Line 920 Position 16-111"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L427",
+      "Location": "Line 427 Position 35-91"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L393",
+      "Location": "Line 393 Position 42-110"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L527",
+      "Location": "Line 527 Position 34-98"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L257",
+      "Location": "Line 257 Position 41-157"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L267",
+      "Location": "Line 267 Position 31-147"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L441",
+      "Location": "Line 441 Position 55-211"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L616",
+      "Location": "Line 616 Position 59-215"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L102",
+      "Location": "Line 102 Position 65-137"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L332",
+      "Location": "Line 332 Position 24-235"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L333",
+      "Location": "Line 333 Position 33-237"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L55",
+      "Location": "Line 55 Position 45-207"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L62",
+      "Location": "Line 62 Position 36-118"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L66",
+      "Location": "Line 66 Position 66-156"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L69",
+      "Location": "Line 69 Position 48-131"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L79",
+      "Location": "Line 79 Position 62-152"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L82",
+      "Location": "Line 82 Position 44-127"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L832",
+      "Location": "Line 832 Position 34-110"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L883",
+      "Location": "Line 883 Position 25-101"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L93",
+      "Location": "Line 93 Position 61-152"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L97",
+      "Location": "Line 97 Position 61-160"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L143",
+      "Location": "Line 143 Position 68-106"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L145",
+      "Location": "Line 145 Position 68-95"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L177",
+      "Location": "Line 177 Position 20-94"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L178",
+      "Location": "Line 178 Position 58-146"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L178",
+      "Location": "Line 178 Position 153-267"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L178",
+      "Location": "Line 178 Position 192-240"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L205",
+      "Location": "Line 205 Position 62-99"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L207",
+      "Location": "Line 207 Position 62-88"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L250",
+      "Location": "Line 250 Position 66-105"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L252",
+      "Location": "Line 252 Position 66-94"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L274",
+      "Location": "Line 274 Position 16-75"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L308",
+      "Location": "Line 308 Position 23-161"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L308",
+      "Location": "Line 308 Position 169-236"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L310",
+      "Location": "Line 310 Position 23-161"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L317",
+      "Location": "Line 317 Position 16-119"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L334",
+      "Location": "Line 334 Position 39-95"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L344",
+      "Location": "Line 344 Position 33-66"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L345",
+      "Location": "Line 345 Position 16-65"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L349",
+      "Location": "Line 349 Position 12-78"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L43",
+      "Location": "Line 43 Position 33-196"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L45",
+      "Location": "Line 45 Position 20-61"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L223",
+      "Location": "Line 223 Position 28-66"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L453",
+      "Location": "Line 453 Position 43-100"
+    }
+  ]
 }

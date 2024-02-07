@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2365",
-"message":  "Refactor 'Elements' into a method, properties should not copy collections.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorPath.cs#L672",
-"region":  {
-"startLine":  672,
-"startColumn":  32,
-"endLine":  672,
-"endColumn":  42
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2365",
+      "Message": "Refactor \u0027Elements\u0027 into a method, properties should not copy collections.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorPath.cs#L672",
+      "Location": "Line 672 Position 32-42"
+    }
+  ]
 }

@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3903",
-"message":  "Move 'Forecast' into a named namespace.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/JsonSerializerImmutableTypes/Program.cs#L23",
-"region":  {
-"startLine":  23,
-"startColumn":  15,
-"endLine":  23,
-"endColumn":  23
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3903",
+      "Message": "Move \u0027Forecast\u0027 into a named namespace.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/JsonSerializerImmutableTypes/Program.cs#L23",
+      "Location": "Line 23 Position 15-23"
+    }
+  ]
 }

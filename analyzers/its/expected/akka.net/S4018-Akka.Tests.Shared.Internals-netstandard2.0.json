@@ -1,69 +1,34 @@
 {
-"issues":  [
-{
-"id":  "S4018",
-"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L140",
-"region":  {
-"startLine":  140,
-"startColumn":  21,
-"endLine":  140,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L172",
-"region":  {
-"startLine":  172,
-"startColumn":  24,
-"endLine":  172,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpecExtensions.cs#L218",
-"region":  {
-"startLine":  218,
-"startColumn":  34,
-"endLine":  218,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AskExtensions.cs#L17",
-"region":  {
-"startLine":  17,
-"startColumn":  31,
-"endLine":  17,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/Helpers/XAssert.cs#L41",
-"region":  {
-"startLine":  41,
-"startColumn":  25,
-"endLine":  41,
-"endColumn":  31
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L140",
+      "Location": "Line 140 Position 21-30"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L172",
+      "Location": "Line 172 Position 24-33"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpecExtensions.cs#L218",
+      "Location": "Line 218 Position 34-45"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AskExtensions.cs#L17",
+      "Location": "Line 17 Position 31-41"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/Helpers/XAssert.cs#L41",
+      "Location": "Line 41 Position 25-31"
+    }
+  ]
 }

@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1226",
-"message":  "Introduce a new variable instead of reusing the parameter 'value'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1854.cs#L9",
-"region":  {
-"startLine":  9,
-"startColumn":  17,
-"endLine":  9,
-"endColumn":  22
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1226",
+      "Message": "Introduce a new variable instead of reusing the parameter \u0027value\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1854.cs#L9",
+      "Location": "Line 9 Position 17-22"
+    }
+  ]
 }

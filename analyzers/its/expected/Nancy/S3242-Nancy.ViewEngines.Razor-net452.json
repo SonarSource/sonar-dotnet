@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<TSymbol>' instead of 'System.Collections.Generic.List<TSymbol>'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/ClrTypeResolver.cs#L61",
-"region":  {
-"startLine":  61,
-"startColumn":  43,
-"endLine":  61,
-"endColumn":  50
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Collections.Generic.IEnumerable\u003CTSymbol\u003E\u0027 instead of \u0027System.Collections.Generic.List\u003CTSymbol\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/ClrTypeResolver.cs#L61",
+      "Location": "Line 61 Position 43-50"
+    }
+  ]
 }

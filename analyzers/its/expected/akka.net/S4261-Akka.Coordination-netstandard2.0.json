@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S4261",
-"message":  "Add the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Coordination/Lease.cs#L52",
-"region":  {
-"startLine":  52,
-"startColumn":  36,
-"endLine":  52,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Add the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Coordination/Lease.cs#L63",
-"region":  {
-"startLine":  63,
-"startColumn":  36,
-"endLine":  63,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Add the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Coordination/Lease.cs#L69",
-"region":  {
-"startLine":  69,
-"startColumn":  36,
-"endLine":  69,
-"endColumn":  43
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4261",
+      "Message": "Add the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Coordination/Lease.cs#L52",
+      "Location": "Line 52 Position 36-43"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Add the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Coordination/Lease.cs#L63",
+      "Location": "Line 63 Position 36-43"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Add the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Coordination/Lease.cs#L69",
+      "Location": "Line 69 Position 36-43"
+    }
+  ]
 }

@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2325",
-"message":  "Make 'GetDisplayAttribute' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.DataAnnotations/DataAnnotationsValidatorAdapter.cs#L109",
-"region":  {
-"startLine":  109,
-"startColumn":  34,
-"endLine":  109,
-"endColumn":  53
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027GetDisplayAttribute\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.DataAnnotations/DataAnnotationsValidatorAdapter.cs#L109",
+      "Location": "Line 109 Position 34-53"
+    }
+  ]
 }

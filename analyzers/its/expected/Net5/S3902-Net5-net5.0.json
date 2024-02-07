@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3902",
-"message":  "Replace this call to 'Assembly.GetExecutingAssembly()' with 'Type.Assembly'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L78",
-"region":  {
-"startLine":  78,
-"startColumn":  27,
-"endLine":  78,
-"endColumn":  47
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3902",
+      "Message": "Replace this call to \u0027Assembly.GetExecutingAssembly()\u0027 with \u0027Type.Assembly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L78",
+      "Location": "Line 78 Position 27-47"
+    }
+  ]
 }

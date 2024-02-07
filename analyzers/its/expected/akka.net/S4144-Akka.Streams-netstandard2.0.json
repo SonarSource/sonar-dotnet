@@ -1,100 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S4144",
-"message":  "Update this method so that its implementation is not identical to 'OnUpstreamFinish'.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphStages.cs#L333",
-"region":  {
-"startLine":  333,
-"startColumn":  34,
-"endLine":  333,
-"endColumn":  52
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphStages.cs#L317",
-"region":  {
-"startLine":  317,
-"startColumn":  34,
-"endLine":  317,
-"endColumn":  50
-}
-}
-]
-},
-{
-"id":  "S4144",
-"message":  "Update this method so that its implementation is not identical to 'OnUpstreamFinish'.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphStages.cs#L460",
-"region":  {
-"startLine":  460,
-"startColumn":  34,
-"endLine":  460,
-"endColumn":  52
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphStages.cs#L446",
-"region":  {
-"startLine":  446,
-"startColumn":  34,
-"endLine":  446,
-"endColumn":  50
-}
-}
-]
-},
-{
-"id":  "S4144",
-"message":  "Update this method so that its implementation is not identical to 'Push'.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/AbstractStage.cs#L213",
-"region":  {
-"startLine":  213,
-"startColumn":  35,
-"endLine":  213,
-"endColumn":  54
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/AbstractStage.cs#L97",
-"region":  {
-"startLine":  97,
-"startColumn":  37,
-"endLine":  97,
-"endColumn":  41
-}
-}
-]
-},
-{
-"id":  "S4144",
-"message":  "Update this method so that its implementation is not identical to 'Pull'.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/AbstractStage.cs#L223",
-"region":  {
-"startLine":  223,
-"startColumn":  37,
-"endLine":  223,
-"endColumn":  58
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/AbstractStage.cs#L107",
-"region":  {
-"startLine":  107,
-"startColumn":  35,
-"endLine":  107,
-"endColumn":  39
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S4144",
+      "Message": "Update this method so that its implementation is not identical to \u0027OnUpstreamFinish\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphStages.cs#L333",
+      "Location": "Line 333 Position 34-52"
+    },
+    {
+      "Id": "S4144",
+      "Message": "Update this method so that its implementation is not identical to \u0027OnUpstreamFinish\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphStages.cs#L460",
+      "Location": "Line 460 Position 34-52"
+    },
+    {
+      "Id": "S4144",
+      "Message": "Update this method so that its implementation is not identical to \u0027Push\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/AbstractStage.cs#L213",
+      "Location": "Line 213 Position 35-54"
+    },
+    {
+      "Id": "S4144",
+      "Message": "Update this method so that its implementation is not identical to \u0027Pull\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/AbstractStage.cs#L223",
+      "Location": "Line 223 Position 37-58"
+    }
+  ]
 }

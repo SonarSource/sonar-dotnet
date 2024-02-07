@@ -1,28 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S4136",
-"message":  "All 'ImmutableMessage' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/ImmutableMessage.cs#L17",
-"region":  {
-"startLine":  17,
-"startColumn":  16,
-"endLine":  17,
-"endColumn":  32
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/ImmutableMessage.cs#L43",
-"region":  {
-"startLine":  43,
-"startColumn":  16,
-"endLine":  43,
-"endColumn":  32
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S4136",
+      "Message": "All \u0027ImmutableMessage\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/ImmutableMessage.cs#L17",
+      "Location": "Line 17 Position 16-32"
+    }
+  ]
 }

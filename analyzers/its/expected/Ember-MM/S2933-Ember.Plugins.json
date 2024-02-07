@@ -1,173 +1,82 @@
 {
-"issues":  [
-{
-"id":  "S2933",
-"message":  "Make 'form' 'readonly'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Events/ShowFormOnUIThread.cs#L23",
-"region":  {
-"startLine":  23,
-"startColumn":  22,
-"endLine":  23,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S2933",
-"message":  "Make 'asDialog' 'readonly'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Events/ShowFormOnUIThread.cs#L24",
-"region":  {
-"startLine":  24,
-"startColumn":  22,
-"endLine":  24,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S2933",
-"message":  "Make 'cancelled' 'readonly'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginActionResult.cs#L13",
-"region":  {
-"startLine":  13,
-"startColumn":  22,
-"endLine":  13,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S2933",
-"message":  "Make 'breakChain' 'readonly'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginActionResult.cs#L14",
-"region":  {
-"startLine":  14,
-"startColumn":  22,
-"endLine":  14,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2933",
-"message":  "Make 'result' 'readonly'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginActionResult.cs#L15",
-"region":  {
-"startLine":  15,
-"startColumn":  24,
-"endLine":  15,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S2933",
-"message":  "Make 'error' 'readonly'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginActionResult.cs#L16",
-"region":  {
-"startLine":  16,
-"startColumn":  27,
-"endLine":  16,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2933",
-"message":  "Make 'plugins' 'readonly'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L30",
-"region":  {
-"startLine":  30,
-"startColumn":  49,
-"endLine":  30,
-"endColumn":  56
-}
-}
-},
-{
-"id":  "S2933",
-"message":  "Make 'movieScraper' 'readonly'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L31",
-"region":  {
-"startLine":  31,
-"startColumn":  45,
-"endLine":  31,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S2933",
-"message":  "Make 'plugin' 'readonly'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L237",
-"region":  {
-"startLine":  237,
-"startColumn":  29,
-"endLine":  237,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S2933",
-"message":  "Make 'imageScrapeType' 'readonly'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/ImageScrapeActionContext.cs#L30",
-"region":  {
-"startLine":  30,
-"startColumn":  33,
-"endLine":  30,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S2933",
-"message":  "Make 'manager' 'readonly'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L45",
-"region":  {
-"startLine":  45,
-"startColumn":  31,
-"endLine":  45,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S2933",
-"message":  "Make 'scrapeType' 'readonly'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/ScraperActionContext.cs#L30",
-"region":  {
-"startLine":  30,
-"startColumn":  28,
-"endLine":  30,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S2933",
-"message":  "Make 'askIfMultipleResults' 'readonly'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/ScraperActionContext.cs#L31",
-"region":  {
-"startLine":  31,
-"startColumn":  22,
-"endLine":  31,
-"endColumn":  42
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2933",
+      "Message": "Make \u0027form\u0027 \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Events/ShowFormOnUIThread.cs#L23",
+      "Location": "Line 23 Position 22-26"
+    },
+    {
+      "Id": "S2933",
+      "Message": "Make \u0027asDialog\u0027 \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Events/ShowFormOnUIThread.cs#L24",
+      "Location": "Line 24 Position 22-30"
+    },
+    {
+      "Id": "S2933",
+      "Message": "Make \u0027cancelled\u0027 \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginActionResult.cs#L13",
+      "Location": "Line 13 Position 22-31"
+    },
+    {
+      "Id": "S2933",
+      "Message": "Make \u0027breakChain\u0027 \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginActionResult.cs#L14",
+      "Location": "Line 14 Position 22-32"
+    },
+    {
+      "Id": "S2933",
+      "Message": "Make \u0027result\u0027 \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginActionResult.cs#L15",
+      "Location": "Line 15 Position 24-30"
+    },
+    {
+      "Id": "S2933",
+      "Message": "Make \u0027error\u0027 \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginActionResult.cs#L16",
+      "Location": "Line 16 Position 27-32"
+    },
+    {
+      "Id": "S2933",
+      "Message": "Make \u0027plugin\u0027 \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L237",
+      "Location": "Line 237 Position 29-35"
+    },
+    {
+      "Id": "S2933",
+      "Message": "Make \u0027plugins\u0027 \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L30",
+      "Location": "Line 30 Position 49-56"
+    },
+    {
+      "Id": "S2933",
+      "Message": "Make \u0027movieScraper\u0027 \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L31",
+      "Location": "Line 31 Position 45-57"
+    },
+    {
+      "Id": "S2933",
+      "Message": "Make \u0027imageScrapeType\u0027 \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/ImageScrapeActionContext.cs#L30",
+      "Location": "Line 30 Position 33-48"
+    },
+    {
+      "Id": "S2933",
+      "Message": "Make \u0027manager\u0027 \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L45",
+      "Location": "Line 45 Position 31-38"
+    },
+    {
+      "Id": "S2933",
+      "Message": "Make \u0027scrapeType\u0027 \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/ScraperActionContext.cs#L30",
+      "Location": "Line 30 Position 28-38"
+    },
+    {
+      "Id": "S2933",
+      "Message": "Make \u0027askIfMultipleResults\u0027 \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/ScraperActionContext.cs#L31",
+      "Location": "Line 31 Position 22-42"
+    }
+  ]
 }

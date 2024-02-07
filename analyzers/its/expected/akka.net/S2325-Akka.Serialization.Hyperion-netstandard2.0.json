@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2325",
-"message":  "Make 'CreateKnownTypesProvider' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.Hyperion/HyperionSerializer.cs#L146",
-"region":  {
-"startLine":  146,
-"startColumn":  37,
-"endLine":  146,
-"endColumn":  61
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027CreateKnownTypesProvider\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.Hyperion/HyperionSerializer.cs#L146",
+      "Location": "Line 146 Position 37-61"
+    }
+  ]
 }

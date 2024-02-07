@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S4050",
-"message":  "Provide an implementation for: 'operator==', 'operator!=', 'Object.Equals' and 'Object.GetHashCode'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/AfterPipeline.cs#L14",
-"region":  {
-"startLine":  14,
-"startColumn":  18,
-"endLine":  14,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S4050",
-"message":  "Provide an implementation for: 'operator==', 'operator!=', 'Object.Equals' and 'Object.GetHashCode'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/BeforePipeline.cs#L14",
-"region":  {
-"startLine":  14,
-"startColumn":  18,
-"endLine":  14,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S4050",
-"message":  "Provide an implementation for: 'operator==', 'operator!=', 'Object.Equals' and 'Object.GetHashCode'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ErrorPipeline.cs#L16",
-"region":  {
-"startLine":  16,
-"startColumn":  18,
-"endLine":  16,
-"endColumn":  31
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4050",
+      "Message": "Provide an implementation for: \u0027operator==\u0027, \u0027operator!=\u0027, \u0027Object.Equals\u0027 and \u0027Object.GetHashCode\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/AfterPipeline.cs#L14",
+      "Location": "Line 14 Position 18-31"
+    },
+    {
+      "Id": "S4050",
+      "Message": "Provide an implementation for: \u0027operator==\u0027, \u0027operator!=\u0027, \u0027Object.Equals\u0027 and \u0027Object.GetHashCode\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/BeforePipeline.cs#L14",
+      "Location": "Line 14 Position 18-32"
+    },
+    {
+      "Id": "S4050",
+      "Message": "Provide an implementation for: \u0027operator==\u0027, \u0027operator!=\u0027, \u0027Object.Equals\u0027 and \u0027Object.GetHashCode\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ErrorPipeline.cs#L16",
+      "Location": "Line 16 Position 18-31"
+    }
+  ]
 }

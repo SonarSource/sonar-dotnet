@@ -1,95 +1,46 @@
 {
-"issues":  [
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L583",
-"region":  {
-"startLine":  583,
-"startColumn":  78,
-"endLine":  583,
-"endColumn":  96
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L587",
-"region":  {
-"startLine":  587,
-"startColumn":  76,
-"endLine":  587,
-"endColumn":  94
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L660",
-"region":  {
-"startLine":  660,
-"startColumn":  75,
-"endLine":  660,
-"endColumn":  93
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L921",
-"region":  {
-"startLine":  921,
-"startColumn":  34,
-"endLine":  921,
-"endColumn":  64
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L76",
-"region":  {
-"startLine":  76,
-"startColumn":  42,
-"endLine":  76,
-"endColumn":  108
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L92",
-"region":  {
-"startLine":  92,
-"startColumn":  46,
-"endLine":  92,
-"endColumn":  139
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L55",
-"region":  {
-"startLine":  55,
-"startColumn":  55,
-"endLine":  55,
-"endColumn":  147
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L583",
+      "Location": "Line 583 Position 78-96"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L587",
+      "Location": "Line 587 Position 76-94"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L660",
+      "Location": "Line 660 Position 75-93"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L921",
+      "Location": "Line 921 Position 34-64"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L76",
+      "Location": "Line 76 Position 42-108"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L92",
+      "Location": "Line 92 Position 46-139"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L55",
+      "Location": "Line 55 Position 55-147"
+    }
+  ]
 }

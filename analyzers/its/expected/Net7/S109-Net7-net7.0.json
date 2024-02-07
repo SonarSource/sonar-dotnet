@@ -1,316 +1,148 @@
 {
-"issues":  [
-{
-"id":  "S109",
-"message":  "Assign this magic number '42' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/FileScopeAccess.cs#L10",
-"region":  {
-"startLine":  10,
-"startColumn":  30,
-"endLine":  10,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '3' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/ListPatterns.cs#L12",
-"region":  {
-"startLine":  12,
-"startColumn":  42,
-"endLine":  12,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '5' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/ListPatterns.cs#L12",
-"region":  {
-"startLine":  12,
-"startColumn":  45,
-"endLine":  12,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '3' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/ListPatterns.cs#L13",
-"region":  {
-"startLine":  13,
-"startColumn":  43,
-"endLine":  13,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '5' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/ListPatterns.cs#L13",
-"region":  {
-"startLine":  13,
-"startColumn":  46,
-"endLine":  13,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '3' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/ListPatterns.cs#L14",
-"region":  {
-"startLine":  14,
-"startColumn":  42,
-"endLine":  14,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '5' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/ListPatterns.cs#L14",
-"region":  {
-"startLine":  14,
-"startColumn":  45,
-"endLine":  14,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '3' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/ListPatterns.cs#L17",
-"region":  {
-"startLine":  17,
-"startColumn":  42,
-"endLine":  17,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '5' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/ListPatterns.cs#L18",
-"region":  {
-"startLine":  18,
-"startColumn":  46,
-"endLine":  18,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '3' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/ListPatterns.cs#L20",
-"region":  {
-"startLine":  20,
-"startColumn":  46,
-"endLine":  20,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '3' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/ListPatterns.cs#L21",
-"region":  {
-"startLine":  21,
-"startColumn":  46,
-"endLine":  21,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '5' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/ListPatterns.cs#L23",
-"region":  {
-"startLine":  23,
-"startColumn":  45,
-"endLine":  23,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '5' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/ListPatterns.cs#L24",
-"region":  {
-"startLine":  24,
-"startColumn":  45,
-"endLine":  24,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '10' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/StaticVirtualMembersInInterfaces.cs#L28",
-"region":  {
-"startLine":  28,
-"startColumn":  33,
-"endLine":  28,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '11' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L8",
-"region":  {
-"startLine":  8,
-"startColumn":  47,
-"endLine":  8,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '8' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L8",
-"region":  {
-"startLine":  8,
-"startColumn":  60,
-"endLine":  8,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '32' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L8",
-"region":  {
-"startLine":  8,
-"startColumn":  106,
-"endLine":  8,
-"endColumn":  108
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '11' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L11",
-"region":  {
-"startLine":  11,
-"startColumn":  47,
-"endLine":  11,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '8' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L11",
-"region":  {
-"startLine":  11,
-"startColumn":  60,
-"endLine":  11,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '32' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L11",
-"region":  {
-"startLine":  11,
-"startColumn":  106,
-"endLine":  11,
-"endColumn":  108
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '11' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L14",
-"region":  {
-"startLine":  14,
-"startColumn":  47,
-"endLine":  14,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '8' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L14",
-"region":  {
-"startLine":  14,
-"startColumn":  60,
-"endLine":  14,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '32' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L14",
-"region":  {
-"startLine":  14,
-"startColumn":  114,
-"endLine":  14,
-"endColumn":  116
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '32' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L14",
-"region":  {
-"startLine":  14,
-"startColumn":  123,
-"endLine":  14,
-"endColumn":  125
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002742\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/FileScopeAccess.cs#L10",
+      "Location": "Line 10 Position 30-32"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/ListPatterns.cs#L12",
+      "Location": "Line 12 Position 42-43"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/ListPatterns.cs#L12",
+      "Location": "Line 12 Position 45-46"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/ListPatterns.cs#L13",
+      "Location": "Line 13 Position 43-44"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/ListPatterns.cs#L13",
+      "Location": "Line 13 Position 46-47"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/ListPatterns.cs#L14",
+      "Location": "Line 14 Position 42-43"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/ListPatterns.cs#L14",
+      "Location": "Line 14 Position 45-46"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/ListPatterns.cs#L17",
+      "Location": "Line 17 Position 42-43"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/ListPatterns.cs#L18",
+      "Location": "Line 18 Position 46-47"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/ListPatterns.cs#L20",
+      "Location": "Line 20 Position 46-47"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/ListPatterns.cs#L21",
+      "Location": "Line 21 Position 46-47"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/ListPatterns.cs#L23",
+      "Location": "Line 23 Position 45-46"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/ListPatterns.cs#L24",
+      "Location": "Line 24 Position 45-46"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002710\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/StaticVirtualMembersInInterfaces.cs#L28",
+      "Location": "Line 28 Position 33-35"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002711\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L11",
+      "Location": "Line 11 Position 47-49"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00278\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L11",
+      "Location": "Line 11 Position 60-61"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002732\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L11",
+      "Location": "Line 11 Position 106-108"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002711\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L14",
+      "Location": "Line 14 Position 47-49"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00278\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L14",
+      "Location": "Line 14 Position 60-61"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002732\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L14",
+      "Location": "Line 14 Position 114-116"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002732\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L14",
+      "Location": "Line 14 Position 123-125"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002711\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L8",
+      "Location": "Line 8 Position 47-49"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00278\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L8",
+      "Location": "Line 8 Position 60-61"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002732\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L8",
+      "Location": "Line 8 Position 106-108"
+    }
+  ]
 }

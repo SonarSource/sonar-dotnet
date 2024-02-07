@@ -1,238 +1,112 @@
 {
-"issues":  [
-{
-"id":  "S109",
-"message":  "Assign this magic number '100000' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorPathSpec.cs#L141",
-"region":  {
-"startLine":  141,
-"startColumn":  33,
-"endLine":  141,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '1000' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorSystemShutdownSpec.cs#L48",
-"region":  {
-"startLine":  48,
-"startColumn":  53,
-"endLine":  48,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '20000' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorSystemShutdownSpec.cs#L53",
-"region":  {
-"startLine":  53,
-"startColumn":  54,
-"endLine":  53,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '100000' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorSystemShutdownSpec.cs#L60",
-"region":  {
-"startLine":  60,
-"startColumn":  55,
-"endLine":  60,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '20' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L43",
-"region":  {
-"startLine":  43,
-"startColumn":  53,
-"endLine":  43,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '20' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L96",
-"region":  {
-"startLine":  96,
-"startColumn":  49,
-"endLine":  96,
-"endColumn":  51
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '20' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L137",
-"region":  {
-"startLine":  137,
-"startColumn":  82,
-"endLine":  137,
-"endColumn":  84
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '20' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L138",
-"region":  {
-"startLine":  138,
-"startColumn":  83,
-"endLine":  138,
-"endColumn":  85
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '3' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L218",
-"region":  {
-"startLine":  218,
-"startColumn":  145,
-"endLine":  218,
-"endColumn":  146
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '3' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L219",
-"region":  {
-"startLine":  219,
-"startColumn":  117,
-"endLine":  219,
-"endColumn":  118
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '3' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L220",
-"region":  {
-"startLine":  220,
-"startColumn":  117,
-"endLine":  220,
-"endColumn":  118
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '100000' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/AddressSpec.cs#L56",
-"region":  {
-"startLine":  56,
-"startColumn":  33,
-"endLine":  56,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '10' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/Scheduler/DefaultSchedulerPerformanceTests.cs#L58",
-"region":  {
-"startLine":  58,
-"startColumn":  79,
-"endLine":  58,
-"endColumn":  81
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '40' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/Scheduler/DefaultSchedulerPerformanceTests.cs#L61",
-"region":  {
-"startLine":  61,
-"startColumn":  34,
-"endLine":  61,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '50' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/IO/TcpHorizontalScaleSpec.cs#L153",
-"region":  {
-"startLine":  153,
-"startColumn":  37,
-"endLine":  153,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '50' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/IO/TcpInboundOnlySpec.cs#L84",
-"region":  {
-"startLine":  84,
-"startColumn":  32,
-"endLine":  84,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '50' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/IO/TcpSingleConnectionSpec.cs#L142",
-"region":  {
-"startLine":  142,
-"startColumn":  32,
-"endLine":  142,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '1000000' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Util/SerializationBenchmarks.cs#L36",
-"region":  {
-"startLine":  36,
-"startColumn":  33,
-"endLine":  36,
-"endColumn":  40
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u0027100000\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorPathSpec.cs#L141",
+      "Location": "Line 141 Position 33-39"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00271000\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorSystemShutdownSpec.cs#L48",
+      "Location": "Line 48 Position 53-57"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002720000\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorSystemShutdownSpec.cs#L53",
+      "Location": "Line 53 Position 54-59"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u0027100000\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorSystemShutdownSpec.cs#L60",
+      "Location": "Line 60 Position 55-61"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002720\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L137",
+      "Location": "Line 137 Position 82-84"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002720\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L138",
+      "Location": "Line 138 Position 83-85"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L218",
+      "Location": "Line 218 Position 145-146"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L219",
+      "Location": "Line 219 Position 117-118"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L220",
+      "Location": "Line 220 Position 117-118"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002720\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L43",
+      "Location": "Line 43 Position 53-55"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002720\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L96",
+      "Location": "Line 96 Position 49-51"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u0027100000\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/AddressSpec.cs#L56",
+      "Location": "Line 56 Position 33-39"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002710\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/Scheduler/DefaultSchedulerPerformanceTests.cs#L58",
+      "Location": "Line 58 Position 79-81"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002740\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/Scheduler/DefaultSchedulerPerformanceTests.cs#L61",
+      "Location": "Line 61 Position 34-36"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002750\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/IO/TcpHorizontalScaleSpec.cs#L153",
+      "Location": "Line 153 Position 37-39"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002750\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/IO/TcpInboundOnlySpec.cs#L84",
+      "Location": "Line 84 Position 32-34"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002750\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/IO/TcpSingleConnectionSpec.cs#L142",
+      "Location": "Line 142 Position 32-34"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00271000000\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Util/SerializationBenchmarks.cs#L36",
+      "Location": "Line 36 Position 33-40"
+    }
+  ]
 }

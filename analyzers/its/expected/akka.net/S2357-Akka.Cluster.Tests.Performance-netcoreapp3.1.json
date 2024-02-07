@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2357",
-"message":  "Make '_clusterMemberUp' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests.Performance/Startup/ClusterStartupSpec.cs#L33",
-"region":  {
-"startLine":  33,
-"startColumn":  43,
-"endLine":  33,
-"endColumn":  59
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027_clusterMemberUp\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests.Performance/Startup/ClusterStartupSpec.cs#L33",
+      "Location": "Line 33 Position 43-59"
+    }
+  ]
 }

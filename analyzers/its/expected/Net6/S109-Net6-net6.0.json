@@ -1,82 +1,40 @@
 {
-"issues":  [
-{
-"id":  "S109",
-"message":  "Assign this magic number '16' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/AssignmentAndDeclarationInSameDeconstruction.cs#L8",
-"region":  {
-"startLine":  8,
-"startColumn":  27,
-"endLine":  8,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '23' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/AssignmentAndDeclarationInSameDeconstruction.cs#L8",
-"region":  {
-"startLine":  8,
-"startColumn":  31,
-"endLine":  8,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '24' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/Deconstruction.cs#L12",
-"region":  {
-"startLine":  12,
-"startColumn":  55,
-"endLine":  12,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '7' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/Deconstruction.cs#L12",
-"region":  {
-"startLine":  12,
-"startColumn":  60,
-"endLine":  12,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '42' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/ExtendedPropertyPatterns.cs#L9",
-"region":  {
-"startLine":  9,
-"startColumn":  65,
-"endLine":  9,
-"endColumn":  67
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '42' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/Program.cs#L4",
-"region":  {
-"startLine":  4,
-"startColumn":  42,
-"endLine":  4,
-"endColumn":  44
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002716\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/AssignmentAndDeclarationInSameDeconstruction.cs#L8",
+      "Location": "Line 8 Position 27-29"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002723\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/AssignmentAndDeclarationInSameDeconstruction.cs#L8",
+      "Location": "Line 8 Position 31-33"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002724\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/Deconstruction.cs#L12",
+      "Location": "Line 12 Position 55-57"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00277\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/Deconstruction.cs#L12",
+      "Location": "Line 12 Position 60-61"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002742\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/ExtendedPropertyPatterns.cs#L9",
+      "Location": "Line 9 Position 65-67"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002742\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/Program.cs#L4",
+      "Location": "Line 4 Position 42-44"
+    }
+  ]
 }

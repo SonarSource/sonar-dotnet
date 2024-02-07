@@ -1,147 +1,70 @@
 {
-"issues":  [
-{
-"id":  "S101",
-"message":  "Rename interface 'ILWWDictionaryKey' to match pascal case naming rules, consider using 'ILwwDictionaryKey'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/LWWDictionary.cs#L25",
-"region":  {
-"startLine":  25,
-"startColumn":  24,
-"endLine":  25,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename interface 'ILWWDictionaryDeltaOperation' to match pascal case naming rules, consider using 'ILwwDictionaryDeltaOperation'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/LWWDictionary.cs#L37",
-"region":  {
-"startLine":  37,
-"startColumn":  24,
-"endLine":  37,
-"endColumn":  52
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename class 'LWWDictionaryKey' to match pascal case naming rules, consider using 'LwwDictionaryKey'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/LWWDictionary.cs#L49",
-"region":  {
-"startLine":  49,
-"startColumn":  25,
-"endLine":  49,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename interface 'ILWWDictionary' to match pascal case naming rules, consider using 'ILwwDictionary'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/LWWDictionary.cs#L66",
-"region":  {
-"startLine":  66,
-"startColumn":  24,
-"endLine":  66,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename class 'LWWDictionary' to match pascal case naming rules, consider using 'LwwDictionary'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/LWWDictionary.cs#L76",
-"region":  {
-"startLine":  76,
-"startColumn":  25,
-"endLine":  76,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename class 'LWWDictionary' to match pascal case naming rules, consider using 'LwwDictionary'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/LWWDictionary.cs#L131",
-"region":  {
-"startLine":  131,
-"startColumn":  25,
-"endLine":  131,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename class 'LWWDictionaryDelta' to match pascal case naming rules, consider using 'LwwDictionaryDelta'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/LWWDictionary.cs#L344",
-"region":  {
-"startLine":  344,
-"startColumn":  31,
-"endLine":  344,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename interface 'ILWWRegisterKey' to match pascal case naming rules, consider using 'ILwwRegisterKey'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/LWWRegister.cs#L28",
-"region":  {
-"startLine":  28,
-"startColumn":  24,
-"endLine":  28,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename class 'LWWRegisterKey' to match pascal case naming rules, consider using 'LwwRegisterKey'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/LWWRegister.cs#L38",
-"region":  {
-"startLine":  38,
-"startColumn":  25,
-"endLine":  38,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename interface 'ILWWRegister' to match pascal case naming rules, consider using 'ILwwRegister'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/LWWRegister.cs#L56",
-"region":  {
-"startLine":  56,
-"startColumn":  24,
-"endLine":  56,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename class 'LWWRegister' to match pascal case naming rules, consider using 'LwwRegister'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/LWWRegister.cs#L85",
-"region":  {
-"startLine":  85,
-"startColumn":  25,
-"endLine":  85,
-"endColumn":  36
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S101",
+      "Message": "Rename class \u0027LWWDictionary\u0027 to match pascal case naming rules, consider using \u0027LwwDictionary\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/LWWDictionary.cs#L131",
+      "Location": "Line 131 Position 25-38"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename interface \u0027ILWWDictionaryKey\u0027 to match pascal case naming rules, consider using \u0027ILwwDictionaryKey\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/LWWDictionary.cs#L25",
+      "Location": "Line 25 Position 24-41"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename class \u0027LWWDictionaryDelta\u0027 to match pascal case naming rules, consider using \u0027LwwDictionaryDelta\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/LWWDictionary.cs#L344",
+      "Location": "Line 344 Position 31-49"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename interface \u0027ILWWDictionaryDeltaOperation\u0027 to match pascal case naming rules, consider using \u0027ILwwDictionaryDeltaOperation\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/LWWDictionary.cs#L37",
+      "Location": "Line 37 Position 24-52"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename class \u0027LWWDictionaryKey\u0027 to match pascal case naming rules, consider using \u0027LwwDictionaryKey\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/LWWDictionary.cs#L49",
+      "Location": "Line 49 Position 25-41"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename interface \u0027ILWWDictionary\u0027 to match pascal case naming rules, consider using \u0027ILwwDictionary\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/LWWDictionary.cs#L66",
+      "Location": "Line 66 Position 24-38"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename class \u0027LWWDictionary\u0027 to match pascal case naming rules, consider using \u0027LwwDictionary\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/LWWDictionary.cs#L76",
+      "Location": "Line 76 Position 25-38"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename interface \u0027ILWWRegisterKey\u0027 to match pascal case naming rules, consider using \u0027ILwwRegisterKey\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/LWWRegister.cs#L28",
+      "Location": "Line 28 Position 24-39"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename class \u0027LWWRegisterKey\u0027 to match pascal case naming rules, consider using \u0027LwwRegisterKey\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/LWWRegister.cs#L38",
+      "Location": "Line 38 Position 25-39"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename interface \u0027ILWWRegister\u0027 to match pascal case naming rules, consider using \u0027ILwwRegister\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/LWWRegister.cs#L56",
+      "Location": "Line 56 Position 24-36"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename class \u0027LWWRegister\u0027 to match pascal case naming rules, consider using \u0027LwwRegister\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/LWWRegister.cs#L85",
+      "Location": "Line 85 Position 25-36"
+    }
+  ]
 }

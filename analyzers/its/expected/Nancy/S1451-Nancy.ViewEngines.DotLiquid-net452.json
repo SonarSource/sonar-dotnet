@@ -1,82 +1,40 @@
 {
-"issues":  [
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.DotLiquid/DefaultFileSystemFactory.cs#L1",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.DotLiquid/DotLiquidRegistrations.cs#L1",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.DotLiquid/DotLiquidViewEngine.cs#L1",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.DotLiquid/DynamicDrop.cs#L1",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.DotLiquid/IFileSystemFactory.cs#L1",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.DotLiquid/LiquidNancyFileSystem.cs#L1",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.DotLiquid/DefaultFileSystemFactory.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.DotLiquid/DotLiquidRegistrations.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.DotLiquid/DotLiquidViewEngine.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.DotLiquid/DynamicDrop.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.DotLiquid/IFileSystemFactory.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.DotLiquid/LiquidNancyFileSystem.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    }
+  ]
 }

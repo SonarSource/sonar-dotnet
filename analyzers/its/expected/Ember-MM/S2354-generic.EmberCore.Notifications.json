@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L132",
-"region":  {
-"startLine":  132,
-"startColumn":  51,
-"endLine":  132,
-"endColumn":  52
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L132",
+      "Location": "Line 132 Position 51-52"
+    }
+  ]
 }

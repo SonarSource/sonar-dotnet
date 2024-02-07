@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3875",
-"message":  "Remove this overload of 'operator =='.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L323",
-"region":  {
-"startLine":  323,
-"startColumn":  37,
-"endLine":  323,
-"endColumn":  39
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3875",
+      "Message": "Remove this overload of \u0027operator ==\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L323",
+      "Location": "Line 323 Position 37-39"
+    }
+  ]
 }

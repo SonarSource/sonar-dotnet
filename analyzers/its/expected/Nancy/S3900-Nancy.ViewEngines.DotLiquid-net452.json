@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'context' before using it.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.DotLiquid/LiquidNancyFileSystem.cs#L43",
-"region":  {
-"startLine":  43,
-"startColumn":  44,
-"endLine":  43,
-"endColumn":  51
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3900",
+      "Message": "Refactor this method to add validation of parameter \u0027context\u0027 before using it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.DotLiquid/LiquidNancyFileSystem.cs#L43",
+      "Location": "Line 43 Position 44-51"
+    }
+  ]
 }

@@ -1,69 +1,34 @@
 {
-"issues":  [
-{
-"id":  "S2115",
-"message":  "Use a secure password when connecting to this database.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/Controllers/S2115.cs#L9",
-"region":  {
-"startLine":  9,
-"startColumn":  13,
-"endLine":  9,
-"endColumn":  115
-}
-}
-},
-{
-"id":  "S2115",
-"message":  "Use a secure password when connecting to this database.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/Controllers/S2115.cs#L10",
-"region":  {
-"startLine":  10,
-"startColumn":  13,
-"endLine":  10,
-"endColumn":  112
-}
-}
-},
-{
-"id":  "S2115",
-"message":  "Use a secure password when connecting to this database.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/Controllers/S2115.cs#L11",
-"region":  {
-"startLine":  11,
-"startColumn":  13,
-"endLine":  11,
-"endColumn":  111
-}
-}
-},
-{
-"id":  "S2115",
-"message":  "Use a secure password when connecting to this database.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/Controllers/S2115.cs#L12",
-"region":  {
-"startLine":  12,
-"startColumn":  13,
-"endLine":  12,
-"endColumn":  112
-}
-}
-},
-{
-"id":  "S2115",
-"message":  "Use a secure password when connecting to this database.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/Controllers/S2115.cs#L13",
-"region":  {
-"startLine":  13,
-"startColumn":  13,
-"endLine":  13,
-"endColumn":  112
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2115",
+      "Message": "Use a secure password when connecting to this database.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/Controllers/S2115.cs#L10",
+      "Location": "Line 10 Position 13-112"
+    },
+    {
+      "Id": "S2115",
+      "Message": "Use a secure password when connecting to this database.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/Controllers/S2115.cs#L11",
+      "Location": "Line 11 Position 13-111"
+    },
+    {
+      "Id": "S2115",
+      "Message": "Use a secure password when connecting to this database.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/Controllers/S2115.cs#L12",
+      "Location": "Line 12 Position 13-112"
+    },
+    {
+      "Id": "S2115",
+      "Message": "Use a secure password when connecting to this database.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/Controllers/S2115.cs#L13",
+      "Location": "Line 13 Position 13-112"
+    },
+    {
+      "Id": "S2115",
+      "Message": "Use a secure password when connecting to this database.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/Controllers/S2115.cs#L9",
+      "Location": "Line 9 Position 13-115"
+    }
+  ]
 }

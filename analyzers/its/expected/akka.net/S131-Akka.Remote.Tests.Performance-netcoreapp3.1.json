@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S131",
-"message":  "Add a 'default' clause to this 'switch' statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.Tests.Performance/Transports/RemoteMessagingThroughputSpecBase.cs#L50",
-"region":  {
-"startLine":  50,
-"startColumn":  17,
-"endLine":  50,
-"endColumn":  23
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S131",
+      "Message": "Add a \u0027default\u0027 clause to this \u0027switch\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.Tests.Performance/Transports/RemoteMessagingThroughputSpecBase.cs#L50",
+      "Location": "Line 50 Position 17-23"
+    }
+  ]
 }

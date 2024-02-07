@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S106",
-"message":  "Remove this logging statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.CS/generated_region.cs#L10",
-"region":  {
-"startLine":  10,
-"startColumn":  13,
-"endLine":  10,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S106",
-"message":  "Remove this logging statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.CS/generated_region_2.cs#L10",
-"region":  {
-"startLine":  10,
-"startColumn":  13,
-"endLine":  10,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S106",
-"message":  "Remove this logging statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.CS/handwritten.cs#L11",
-"region":  {
-"startLine":  11,
-"startColumn":  13,
-"endLine":  11,
-"endColumn":  30
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S106",
+      "Message": "Remove this logging statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.CS/generated_region_2.cs#L10",
+      "Location": "Line 10 Position 13-30"
+    },
+    {
+      "Id": "S106",
+      "Message": "Remove this logging statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.CS/generated_region.cs#L10",
+      "Location": "Line 10 Position 13-30"
+    },
+    {
+      "Id": "S106",
+      "Message": "Remove this logging statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.CS/handwritten.cs#L11",
+      "Location": "Line 11 Position 13-30"
+    }
+  ]
 }

@@ -1,76 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L70",
-"region":  {
-"startLine":  70,
-"startColumn":  17,
-"endLine":  70,
-"endColumn":  19
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L69",
-"region":  {
-"startLine":  69,
-"startColumn":  13,
-"endLine":  69,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L81",
-"region":  {
-"startLine":  81,
-"startColumn":  17,
-"endLine":  81,
-"endColumn":  19
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L80",
-"region":  {
-"startLine":  80,
-"startColumn":  13,
-"endLine":  80,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L92",
-"region":  {
-"startLine":  92,
-"startColumn":  17,
-"endLine":  92,
-"endColumn":  19
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L91",
-"region":  {
-"startLine":  91,
-"startColumn":  13,
-"endLine":  91,
-"endColumn":  15
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L70",
+      "Location": "Line 70 Position 17-19"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L81",
+      "Location": "Line 81 Position 17-19"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L92",
+      "Location": "Line 92 Position 17-19"
+    }
+  ]
 }

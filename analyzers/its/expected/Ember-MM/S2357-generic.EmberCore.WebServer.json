@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2357",
-"message":  "Make 'MimeTypes' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Module.WebServer.vb#L40",
-"region":  {
-"startLine":  40,
-"startColumn":  17,
-"endLine":  40,
-"endColumn":  26
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027MimeTypes\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Module.WebServer.vb#L40",
+      "Location": "Line 40 Position 17-26"
+    }
+  ]
 }

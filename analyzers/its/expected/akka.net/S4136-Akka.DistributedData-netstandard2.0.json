@@ -1,496 +1,100 @@
 {
-"issues":  [
-{
-"id":  "S4136",
-"message":  "All 'Equals' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/GSet.cs#L153",
-"region":  {
-"startLine":  153,
-"startColumn":  21,
-"endLine":  153,
-"endColumn":  27
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/GSet.cs#L165",
-"region":  {
-"startLine":  165,
-"startColumn":  30,
-"endLine":  165,
-"endColumn":  36
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'Equals' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/LWWDictionary.cs#L310",
-"region":  {
-"startLine":  310,
-"startColumn":  21,
-"endLine":  310,
-"endColumn":  27
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/LWWDictionary.cs#L326",
-"region":  {
-"startLine":  326,
-"startColumn":  30,
-"endLine":  326,
-"endColumn":  36
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'Merge' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L318",
-"region":  {
-"startLine":  318,
-"startColumn":  43,
-"endLine":  318,
-"endColumn":  48
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L353",
-"region":  {
-"startLine":  353,
-"startColumn":  32,
-"endLine":  353,
-"endColumn":  37
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'Merge' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORMultiValueDictionary.cs#L186",
-"region":  {
-"startLine":  186,
-"startColumn":  53,
-"endLine":  186,
-"endColumn":  58
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORMultiValueDictionary.cs#L258",
-"region":  {
-"startLine":  258,
-"startColumn":  32,
-"endLine":  258,
-"endColumn":  37
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'Equals' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORMultiValueDictionary.cs#L273",
-"region":  {
-"startLine":  273,
-"startColumn":  21,
-"endLine":  273,
-"endColumn":  27
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORMultiValueDictionary.cs#L284",
-"region":  {
-"startLine":  284,
-"startColumn":  30,
-"endLine":  284,
-"endColumn":  36
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'Equals' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORSet.cs#L436",
-"region":  {
-"startLine":  436,
-"startColumn":  21,
-"endLine":  436,
-"endColumn":  27
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORSet.cs#L449",
-"region":  {
-"startLine":  449,
-"startColumn":  30,
-"endLine":  449,
-"endColumn":  36
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'Equals' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/PNCounter.cs#L104",
-"region":  {
-"startLine":  104,
-"startColumn":  21,
-"endLine":  104,
-"endColumn":  27
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/PNCounter.cs#L116",
-"region":  {
-"startLine":  116,
-"startColumn":  30,
-"endLine":  116,
-"endColumn":  36
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'Merge' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/PNCounter.cs#L85",
-"region":  {
-"startLine":  85,
-"startColumn":  26,
-"endLine":  85,
-"endColumn":  31
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/PNCounter.cs#L121",
-"region":  {
-"startLine":  121,
-"startColumn":  32,
-"endLine":  121,
-"endColumn":  37
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'Equals' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/PNCounterDictionary.cs#L183",
-"region":  {
-"startLine":  183,
-"startColumn":  21,
-"endLine":  183,
-"endColumn":  27
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/PNCounterDictionary.cs#L197",
-"region":  {
-"startLine":  197,
-"startColumn":  30,
-"endLine":  197,
-"endColumn":  36
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'Equals' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ReadAggregator.cs#L196",
-"region":  {
-"startLine":  196,
-"startColumn":  30,
-"endLine":  196,
-"endColumn":  36
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ReadAggregator.cs#L205",
-"region":  {
-"startLine":  205,
-"startColumn":  21,
-"endLine":  205,
-"endColumn":  27
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'Equals' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ReadAggregator.cs#L232",
-"region":  {
-"startLine":  232,
-"startColumn":  30,
-"endLine":  232,
-"endColumn":  36
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ReadAggregator.cs#L241",
-"region":  {
-"startLine":  241,
-"startColumn":  21,
-"endLine":  241,
-"endColumn":  27
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'Equals' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L436",
-"region":  {
-"startLine":  436,
-"startColumn":  21,
-"endLine":  436,
-"endColumn":  27
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L451",
-"region":  {
-"startLine":  451,
-"startColumn":  30,
-"endLine":  451,
-"endColumn":  36
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'ToProto' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L268",
-"region":  {
-"startLine":  268,
-"startColumn":  33,
-"endLine":  268,
-"endColumn":  40
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L399",
-"region":  {
-"startLine":  399,
-"startColumn":  43,
-"endLine":  399,
-"endColumn":  50
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L506",
-"region":  {
-"startLine":  506,
-"startColumn":  32,
-"endLine":  506,
-"endColumn":  39
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L598",
-"region":  {
-"startLine":  598,
-"startColumn":  36,
-"endLine":  598,
-"endColumn":  43
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L626",
-"region":  {
-"startLine":  626,
-"startColumn":  37,
-"endLine":  626,
-"endColumn":  44
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L652",
-"region":  {
-"startLine":  652,
-"startColumn":  32,
-"endLine":  652,
-"endColumn":  39
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L673",
-"region":  {
-"startLine":  673,
-"startColumn":  39,
-"endLine":  673,
-"endColumn":  46
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L748",
-"region":  {
-"startLine":  748,
-"startColumn":  33,
-"endLine":  748,
-"endColumn":  40
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L928",
-"region":  {
-"startLine":  928,
-"startColumn":  43,
-"endLine":  928,
-"endColumn":  50
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1097",
-"region":  {
-"startLine":  1097,
-"startColumn":  34,
-"endLine":  1097,
-"endColumn":  41
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1223",
-"region":  {
-"startLine":  1223,
-"startColumn":  40,
-"endLine":  1223,
-"endColumn":  47
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1345",
-"region":  {
-"startLine":  1345,
-"startColumn":  38,
-"endLine":  1345,
-"endColumn":  45
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1354",
-"region":  {
-"startLine":  1354,
-"startColumn":  43,
-"endLine":  1354,
-"endColumn":  50
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1482",
-"region":  {
-"startLine":  1482,
-"startColumn":  31,
-"endLine":  1482,
-"endColumn":  38
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'Equals' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/WriteAggregator.cs#L203",
-"region":  {
-"startLine":  203,
-"startColumn":  30,
-"endLine":  203,
-"endColumn":  36
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/WriteAggregator.cs#L207",
-"region":  {
-"startLine":  207,
-"startColumn":  21,
-"endLine":  207,
-"endColumn":  27
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'Equals' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/WriteAggregator.cs#L235",
-"region":  {
-"startLine":  235,
-"startColumn":  30,
-"endLine":  235,
-"endColumn":  36
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/WriteAggregator.cs#L239",
-"region":  {
-"startLine":  239,
-"startColumn":  21,
-"endLine":  239,
-"endColumn":  27
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'Equals' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/WriteAggregator.cs#L265",
-"region":  {
-"startLine":  265,
-"startColumn":  30,
-"endLine":  265,
-"endColumn":  36
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/WriteAggregator.cs#L269",
-"region":  {
-"startLine":  269,
-"startColumn":  21,
-"endLine":  269,
-"endColumn":  27
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S4136",
+      "Message": "All \u0027Equals\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/GSet.cs#L153",
+      "Location": "Line 153 Position 21-27"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027Equals\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/LWWDictionary.cs#L310",
+      "Location": "Line 310 Position 21-27"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027Merge\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L318",
+      "Location": "Line 318 Position 43-48"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027Merge\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORMultiValueDictionary.cs#L186",
+      "Location": "Line 186 Position 53-58"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027Equals\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORMultiValueDictionary.cs#L273",
+      "Location": "Line 273 Position 21-27"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027Equals\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORSet.cs#L436",
+      "Location": "Line 436 Position 21-27"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027Equals\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/PNCounter.cs#L104",
+      "Location": "Line 104 Position 21-27"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027Merge\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/PNCounter.cs#L85",
+      "Location": "Line 85 Position 26-31"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027Equals\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/PNCounterDictionary.cs#L183",
+      "Location": "Line 183 Position 21-27"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027Equals\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ReadAggregator.cs#L196",
+      "Location": "Line 196 Position 30-36"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027Equals\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ReadAggregator.cs#L232",
+      "Location": "Line 232 Position 30-36"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027Equals\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L436",
+      "Location": "Line 436 Position 21-27"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027ToProto\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L268",
+      "Location": "Line 268 Position 33-40"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027Equals\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/WriteAggregator.cs#L203",
+      "Location": "Line 203 Position 30-36"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027Equals\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/WriteAggregator.cs#L235",
+      "Location": "Line 235 Position 30-36"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027Equals\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/WriteAggregator.cs#L265",
+      "Location": "Line 265 Position 30-36"
+    }
+  ]
 }

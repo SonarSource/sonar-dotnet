@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S4158",
-"message":  "Remove this call, the collection is known to be empty here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/SqlJournal.cs#L181",
-"region":  {
-"startLine":  181,
-"startColumn":  47,
-"endLine":  181,
-"endColumn":  61
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4158",
+      "Message": "Remove this call, the collection is known to be empty here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/SqlJournal.cs#L181",
+      "Location": "Line 181 Position 47-61"
+    }
+  ]
 }

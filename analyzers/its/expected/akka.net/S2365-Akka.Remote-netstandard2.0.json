@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2365",
-"message":  "Refactor 'AllEndpoints' into a method, properties should not copy collections.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointRegistry.cs#L304",
-"region":  {
-"startLine":  304,
-"startColumn":  26,
-"endLine":  304,
-"endColumn":  88
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2365",
+      "Message": "Refactor \u0027AllEndpoints\u0027 into a method, properties should not copy collections.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointRegistry.cs#L304",
+      "Location": "Line 304 Position 26-88"
+    }
+  ]
 }

@@ -1,134 +1,64 @@
 {
-"issues":  [
-{
-"id":  "S1151",
-"message":  "Reduce this switch section number of statements from 12 to at most 8, for example by extracting code into a method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorSelection.cs#L249",
-"region":  {
-"startLine":  249,
-"startColumn":  29,
-"endLine":  249,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S1151",
-"message":  "Reduce this switch section number of statements from 10 to at most 8, for example by extracting code into a method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/FSM.cs#L1109",
-"region":  {
-"startLine":  1109,
-"startColumn":  17,
-"endLine":  1109,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S1151",
-"message":  "Reduce this switch section number of statements from 11 to at most 8, for example by extracting code into a method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/RepointableActorRef.cs#L294",
-"region":  {
-"startLine":  294,
-"startColumn":  17,
-"endLine":  294,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S1151",
-"message":  "Reduce this switch section number of statements from 17 to at most 8, for example by extracting code into a method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L154",
-"region":  {
-"startLine":  154,
-"startColumn":  21,
-"endLine":  154,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S1151",
-"message":  "Reduce this switch section number of statements from 9 to at most 8, for example by extracting code into a method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L312",
-"region":  {
-"startLine":  312,
-"startColumn":  21,
-"endLine":  312,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S1151",
-"message":  "Reduce this switch section number of statements from 20 to at most 8, for example by extracting code into a method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L332",
-"region":  {
-"startLine":  332,
-"startColumn":  21,
-"endLine":  332,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S1151",
-"message":  "Reduce this switch section number of statements from 10 to at most 8, for example by extracting code into a method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnection.cs#L131",
-"region":  {
-"startLine":  131,
-"startColumn":  17,
-"endLine":  131,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S1151",
-"message":  "Reduce this switch section number of statements from 18 to at most 8, for example by extracting code into a method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/WithUdpSend.cs#L42",
-"region":  {
-"startLine":  42,
-"startColumn":  17,
-"endLine":  42,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S1151",
-"message":  "Reduce this switch section number of statements from 16 to at most 8, for example by extracting code into a method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/WithUdpSend.cs#L84",
-"region":  {
-"startLine":  84,
-"startColumn":  17,
-"endLine":  84,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S1151",
-"message":  "Reduce this switch section number of statements from 12 to at most 8, for example by extracting code into a method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffSupervisorBase.cs#L88",
-"region":  {
-"startLine":  88,
-"startColumn":  17,
-"endLine":  88,
-"endColumn":  25
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1151",
+      "Message": "Reduce this switch section number of statements from 12 to at most 8, for example by extracting code into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorSelection.cs#L249",
+      "Location": "Line 249 Position 29-61"
+    },
+    {
+      "Id": "S1151",
+      "Message": "Reduce this switch section number of statements from 10 to at most 8, for example by extracting code into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/FSM.cs#L1109",
+      "Location": "Line 1109 Position 17-34"
+    },
+    {
+      "Id": "S1151",
+      "Message": "Reduce this switch section number of statements from 11 to at most 8, for example by extracting code into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/RepointableActorRef.cs#L294",
+      "Location": "Line 294 Position 17-25"
+    },
+    {
+      "Id": "S1151",
+      "Message": "Reduce this switch section number of statements from 17 to at most 8, for example by extracting code into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L154",
+      "Location": "Line 154 Position 21-44"
+    },
+    {
+      "Id": "S1151",
+      "Message": "Reduce this switch section number of statements from 9 to at most 8, for example by extracting code into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L312",
+      "Location": "Line 312 Position 21-39"
+    },
+    {
+      "Id": "S1151",
+      "Message": "Reduce this switch section number of statements from 20 to at most 8, for example by extracting code into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L332",
+      "Location": "Line 332 Position 21-45"
+    },
+    {
+      "Id": "S1151",
+      "Message": "Reduce this switch section number of statements from 10 to at most 8, for example by extracting code into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnection.cs#L131",
+      "Location": "Line 131 Position 17-32"
+    },
+    {
+      "Id": "S1151",
+      "Message": "Reduce this switch section number of statements from 18 to at most 8, for example by extracting code into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/WithUdpSend.cs#L42",
+      "Location": "Line 42 Position 17-32"
+    },
+    {
+      "Id": "S1151",
+      "Message": "Reduce this switch section number of statements from 16 to at most 8, for example by extracting code into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/WithUdpSend.cs#L84",
+      "Location": "Line 84 Position 17-38"
+    },
+    {
+      "Id": "S1151",
+      "Message": "Reduce this switch section number of statements from 12 to at most 8, for example by extracting code into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffSupervisorBase.cs#L88",
+      "Location": "Line 88 Position 17-25"
+    }
+  ]
 }

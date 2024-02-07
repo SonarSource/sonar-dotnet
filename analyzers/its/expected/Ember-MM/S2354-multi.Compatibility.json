@@ -1,758 +1,352 @@
 {
-"issues":  [
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L165",
-"region":  {
-"startLine":  165,
-"startColumn":  21,
-"endLine":  165,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L191",
-"region":  {
-"startLine":  191,
-"startColumn":  22,
-"endLine":  191,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L201",
-"region":  {
-"startLine":  201,
-"startColumn":  17,
-"endLine":  201,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L208",
-"region":  {
-"startLine":  208,
-"startColumn":  36,
-"endLine":  208,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L218",
-"region":  {
-"startLine":  218,
-"startColumn":  17,
-"endLine":  218,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L225",
-"region":  {
-"startLine":  225,
-"startColumn":  24,
-"endLine":  225,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L235",
-"region":  {
-"startLine":  235,
-"startColumn":  17,
-"endLine":  235,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L242",
-"region":  {
-"startLine":  242,
-"startColumn":  30,
-"endLine":  242,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L252",
-"region":  {
-"startLine":  252,
-"startColumn":  17,
-"endLine":  252,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L259",
-"region":  {
-"startLine":  259,
-"startColumn":  33,
-"endLine":  259,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L269",
-"region":  {
-"startLine":  269,
-"startColumn":  17,
-"endLine":  269,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L276",
-"region":  {
-"startLine":  276,
-"startColumn":  29,
-"endLine":  276,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L286",
-"region":  {
-"startLine":  286,
-"startColumn":  17,
-"endLine":  286,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L293",
-"region":  {
-"startLine":  293,
-"startColumn":  31,
-"endLine":  293,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L303",
-"region":  {
-"startLine":  303,
-"startColumn":  17,
-"endLine":  303,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L310",
-"region":  {
-"startLine":  310,
-"startColumn":  30,
-"endLine":  310,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L320",
-"region":  {
-"startLine":  320,
-"startColumn":  17,
-"endLine":  320,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L327",
-"region":  {
-"startLine":  327,
-"startColumn":  30,
-"endLine":  327,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L337",
-"region":  {
-"startLine":  337,
-"startColumn":  17,
-"endLine":  337,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L344",
-"region":  {
-"startLine":  344,
-"startColumn":  34,
-"endLine":  344,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L354",
-"region":  {
-"startLine":  354,
-"startColumn":  17,
-"endLine":  354,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L361",
-"region":  {
-"startLine":  361,
-"startColumn":  25,
-"endLine":  361,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L371",
-"region":  {
-"startLine":  371,
-"startColumn":  17,
-"endLine":  371,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L378",
-"region":  {
-"startLine":  378,
-"startColumn":  24,
-"endLine":  378,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L388",
-"region":  {
-"startLine":  388,
-"startColumn":  17,
-"endLine":  388,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L395",
-"region":  {
-"startLine":  395,
-"startColumn":  26,
-"endLine":  395,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L405",
-"region":  {
-"startLine":  405,
-"startColumn":  17,
-"endLine":  405,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L412",
-"region":  {
-"startLine":  412,
-"startColumn":  31,
-"endLine":  412,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L422",
-"region":  {
-"startLine":  422,
-"startColumn":  17,
-"endLine":  422,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L429",
-"region":  {
-"startLine":  429,
-"startColumn":  26,
-"endLine":  429,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L439",
-"region":  {
-"startLine":  439,
-"startColumn":  17,
-"endLine":  439,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L446",
-"region":  {
-"startLine":  446,
-"startColumn":  25,
-"endLine":  446,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L447",
-"region":  {
-"startLine":  447,
-"startColumn":  28,
-"endLine":  447,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L457",
-"region":  {
-"startLine":  457,
-"startColumn":  17,
-"endLine":  457,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L464",
-"region":  {
-"startLine":  464,
-"startColumn":  32,
-"endLine":  464,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L474",
-"region":  {
-"startLine":  474,
-"startColumn":  17,
-"endLine":  474,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L481",
-"region":  {
-"startLine":  481,
-"startColumn":  25,
-"endLine":  481,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L482",
-"region":  {
-"startLine":  482,
-"startColumn":  28,
-"endLine":  482,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L492",
-"region":  {
-"startLine":  492,
-"startColumn":  36,
-"endLine":  492,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L494",
-"region":  {
-"startLine":  494,
-"startColumn":  17,
-"endLine":  494,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L501",
-"region":  {
-"startLine":  501,
-"startColumn":  24,
-"endLine":  501,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L502",
-"region":  {
-"startLine":  502,
-"startColumn":  27,
-"endLine":  502,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L512",
-"region":  {
-"startLine":  512,
-"startColumn":  17,
-"endLine":  512,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L519",
-"region":  {
-"startLine":  519,
-"startColumn":  31,
-"endLine":  519,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L529",
-"region":  {
-"startLine":  529,
-"startColumn":  17,
-"endLine":  529,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L536",
-"region":  {
-"startLine":  536,
-"startColumn":  29,
-"endLine":  536,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L537",
-"region":  {
-"startLine":  537,
-"startColumn":  32,
-"endLine":  537,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L547",
-"region":  {
-"startLine":  547,
-"startColumn":  17,
-"endLine":  547,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L554",
-"region":  {
-"startLine":  554,
-"startColumn":  27,
-"endLine":  554,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L555",
-"region":  {
-"startLine":  555,
-"startColumn":  30,
-"endLine":  555,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L566",
-"region":  {
-"startLine":  566,
-"startColumn":  32,
-"endLine":  566,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L568",
-"region":  {
-"startLine":  568,
-"startColumn":  17,
-"endLine":  568,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L576",
-"region":  {
-"startLine":  576,
-"startColumn":  16,
-"endLine":  576,
-"endColumn":  17
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L589",
-"region":  {
-"startLine":  589,
-"startColumn":  16,
-"endLine":  589,
-"endColumn":  17
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L594",
-"region":  {
-"startLine":  594,
-"startColumn":  31,
-"endLine":  594,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L596",
-"region":  {
-"startLine":  596,
-"startColumn":  27,
-"endLine":  596,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L598",
-"region":  {
-"startLine":  598,
-"startColumn":  31,
-"endLine":  598,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L603",
-"region":  {
-"startLine":  603,
-"startColumn":  31,
-"endLine":  603,
-"endColumn":  32
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L165",
+      "Location": "Line 165 Position 21-22"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L191",
+      "Location": "Line 191 Position 22-23"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L201",
+      "Location": "Line 201 Position 17-18"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L208",
+      "Location": "Line 208 Position 36-37"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L218",
+      "Location": "Line 218 Position 17-18"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L225",
+      "Location": "Line 225 Position 24-25"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L235",
+      "Location": "Line 235 Position 17-18"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L242",
+      "Location": "Line 242 Position 30-31"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L252",
+      "Location": "Line 252 Position 17-18"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L259",
+      "Location": "Line 259 Position 33-34"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L269",
+      "Location": "Line 269 Position 17-18"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L276",
+      "Location": "Line 276 Position 29-30"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L286",
+      "Location": "Line 286 Position 17-18"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L293",
+      "Location": "Line 293 Position 31-32"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L303",
+      "Location": "Line 303 Position 17-18"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L310",
+      "Location": "Line 310 Position 30-31"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L320",
+      "Location": "Line 320 Position 17-18"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L327",
+      "Location": "Line 327 Position 30-31"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L337",
+      "Location": "Line 337 Position 17-18"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L344",
+      "Location": "Line 344 Position 34-35"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L354",
+      "Location": "Line 354 Position 17-18"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L361",
+      "Location": "Line 361 Position 25-26"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L371",
+      "Location": "Line 371 Position 17-18"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L378",
+      "Location": "Line 378 Position 24-25"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L388",
+      "Location": "Line 388 Position 17-18"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L395",
+      "Location": "Line 395 Position 26-27"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L405",
+      "Location": "Line 405 Position 17-18"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L412",
+      "Location": "Line 412 Position 31-32"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L422",
+      "Location": "Line 422 Position 17-18"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L429",
+      "Location": "Line 429 Position 26-27"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L439",
+      "Location": "Line 439 Position 17-18"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L446",
+      "Location": "Line 446 Position 25-26"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L447",
+      "Location": "Line 447 Position 28-29"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L457",
+      "Location": "Line 457 Position 17-18"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L464",
+      "Location": "Line 464 Position 32-33"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L474",
+      "Location": "Line 474 Position 17-18"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L481",
+      "Location": "Line 481 Position 25-26"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L482",
+      "Location": "Line 482 Position 28-29"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L492",
+      "Location": "Line 492 Position 36-37"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L494",
+      "Location": "Line 494 Position 17-18"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L501",
+      "Location": "Line 501 Position 24-25"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L502",
+      "Location": "Line 502 Position 27-28"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L512",
+      "Location": "Line 512 Position 17-18"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L519",
+      "Location": "Line 519 Position 31-32"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L529",
+      "Location": "Line 529 Position 17-18"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L536",
+      "Location": "Line 536 Position 29-30"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L537",
+      "Location": "Line 537 Position 32-33"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L547",
+      "Location": "Line 547 Position 17-18"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L554",
+      "Location": "Line 554 Position 27-28"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L555",
+      "Location": "Line 555 Position 30-31"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L566",
+      "Location": "Line 566 Position 32-33"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L568",
+      "Location": "Line 568 Position 17-18"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L576",
+      "Location": "Line 576 Position 16-17"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L589",
+      "Location": "Line 589 Position 16-17"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L594",
+      "Location": "Line 594 Position 31-32"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L596",
+      "Location": "Line 596 Position 27-28"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L598",
+      "Location": "Line 598 Position 31-32"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L603",
+      "Location": "Line 603 Position 31-32"
+    }
+  ]
 }

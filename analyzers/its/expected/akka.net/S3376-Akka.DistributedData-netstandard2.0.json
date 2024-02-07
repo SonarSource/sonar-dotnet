@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3376",
-"message":  "Make this class name end with 'Exception'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L897",
-"region":  {
-"startLine":  897,
-"startColumn":  25,
-"endLine":  897,
-"endColumn":  36
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3376",
+      "Message": "Make this class name end with \u0027Exception\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L897",
+      "Location": "Line 897 Position 25-36"
+    }
+  ]
 }

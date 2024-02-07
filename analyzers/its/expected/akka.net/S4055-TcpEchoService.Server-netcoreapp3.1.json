@@ -1,95 +1,46 @@
 {
-"issues":  [
-{
-"id":  "S4055",
-"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/TcpEchoService.Server/Actors.cs#L32",
-"region":  {
-"startLine":  32,
-"startColumn":  35,
-"endLine":  32,
-"endColumn":  65
-}
-}
-},
-{
-"id":  "S4055",
-"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/TcpEchoService.Server/Actors.cs#L44",
-"region":  {
-"startLine":  44,
-"startColumn":  60,
-"endLine":  44,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S4055",
-"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/TcpEchoService.Server/Actors.cs#L63",
-"region":  {
-"startLine":  63,
-"startColumn":  35,
-"endLine":  63,
-"endColumn":  77
-}
-}
-},
-{
-"id":  "S4055",
-"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/TcpEchoService.Server/Actors.cs#L71",
-"region":  {
-"startLine":  71,
-"startColumn":  35,
-"endLine":  71,
-"endColumn":  76
-}
-}
-},
-{
-"id":  "S4055",
-"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/TcpEchoService.Server/Actors.cs#L76",
-"region":  {
-"startLine":  76,
-"startColumn":  35,
-"endLine":  76,
-"endColumn":  74
-}
-}
-},
-{
-"id":  "S4055",
-"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/TcpEchoService.Server/Program.cs#L29",
-"region":  {
-"startLine":  29,
-"startColumn":  35,
-"endLine":  29,
-"endColumn":  69
-}
-}
-},
-{
-"id":  "S4055",
-"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/TcpEchoService.Server/Program.cs#L30",
-"region":  {
-"startLine":  30,
-"startColumn":  35,
-"endLine":  30,
-"endColumn":  53
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4055",
+      "Message": "Replace this string literal with a string retrieved through an instance of the \u0027ResourceManager\u0027 class.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/TcpEchoService.Server/Actors.cs#L32",
+      "Location": "Line 32 Position 35-65"
+    },
+    {
+      "Id": "S4055",
+      "Message": "Replace this string literal with a string retrieved through an instance of the \u0027ResourceManager\u0027 class.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/TcpEchoService.Server/Actors.cs#L44",
+      "Location": "Line 44 Position 60-66"
+    },
+    {
+      "Id": "S4055",
+      "Message": "Replace this string literal with a string retrieved through an instance of the \u0027ResourceManager\u0027 class.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/TcpEchoService.Server/Actors.cs#L63",
+      "Location": "Line 63 Position 35-77"
+    },
+    {
+      "Id": "S4055",
+      "Message": "Replace this string literal with a string retrieved through an instance of the \u0027ResourceManager\u0027 class.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/TcpEchoService.Server/Actors.cs#L71",
+      "Location": "Line 71 Position 35-76"
+    },
+    {
+      "Id": "S4055",
+      "Message": "Replace this string literal with a string retrieved through an instance of the \u0027ResourceManager\u0027 class.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/TcpEchoService.Server/Actors.cs#L76",
+      "Location": "Line 76 Position 35-74"
+    },
+    {
+      "Id": "S4055",
+      "Message": "Replace this string literal with a string retrieved through an instance of the \u0027ResourceManager\u0027 class.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/TcpEchoService.Server/Program.cs#L29",
+      "Location": "Line 29 Position 35-69"
+    },
+    {
+      "Id": "S4055",
+      "Message": "Replace this string literal with a string retrieved through an instance of the \u0027ResourceManager\u0027 class.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/TcpEchoService.Server/Program.cs#L30",
+      "Location": "Line 30 Position 35-53"
+    }
+  ]
 }

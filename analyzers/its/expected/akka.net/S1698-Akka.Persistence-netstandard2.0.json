@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1698",
-"message":  "Consider using 'Equals' if value comparison was intended.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/SnapshotStore.cs#L60",
-"region":  {
-"startLine":  60,
-"startColumn":  43,
-"endLine":  60,
-"endColumn":  45
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1698",
+      "Message": "Consider using \u0027Equals\u0027 if value comparison was intended.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/SnapshotStore.cs#L60",
+      "Location": "Line 60 Position 43-45"
+    }
+  ]
 }

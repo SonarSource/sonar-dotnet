@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Ember/EmberWorkAroundPlugin.cs#L75",
-"region":  {
-"startLine":  75,
-"startColumn":  33,
-"endLine":  75,
-"endColumn":  74
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Ember/EmberWorkAroundPlugin.cs#L75",
+      "Location": "Line 75 Position 33-74"
+    }
+  ]
 }

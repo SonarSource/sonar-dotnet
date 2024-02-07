@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S6802",
-"message":  "Avoid using lambda expressions in loops in Blazor markup.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6802/S6802.cs#L35",
-"region":  {
-"startLine":  35,
-"startColumn":  30,
-"endLine":  35,
-"endColumn":  68
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6802",
+      "Message": "Avoid using lambda expressions in loops in Blazor markup.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6802/S6802.cs#L35",
+      "Location": "Line 35 Position 30-68"
+    }
+  ]
 }

@@ -1,1317 +1,610 @@
 {
-"issues":  [
-{
-"id":  "S2302",
-"message":  "Replace the string 'registrationType' with 'nameof(registrationType)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/CollectionTypeRegistration.cs#L26",
-"region":  {
-"startLine":  26,
-"startColumn":  49,
-"endLine":  26,
-"endColumn":  67
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'implementationTypes' with 'nameof(implementationTypes)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/CollectionTypeRegistration.cs#L31",
-"region":  {
-"startLine":  31,
-"startColumn":  49,
-"endLine":  31,
-"endColumn":  70
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'registrationType' with 'nameof(registrationType)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/InstanceRegistration.cs#L19",
-"region":  {
-"startLine":  19,
-"startColumn":  49,
-"endLine":  19,
-"endColumn":  67
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'implementation' with 'nameof(implementation)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/InstanceRegistration.cs#L24",
-"region":  {
-"startLine":  24,
-"startColumn":  49,
-"endLine":  24,
-"endColumn":  65
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'registrationType' with 'nameof(registrationType)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/TypeRegistration.cs#L20",
-"region":  {
-"startLine":  20,
-"startColumn":  49,
-"endLine":  20,
-"endColumn":  67
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'implementationType' with 'nameof(implementationType)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/TypeRegistration.cs#L25",
-"region":  {
-"startLine":  25,
-"startColumn":  49,
-"endLine":  25,
-"endColumn":  69
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'salt' with 'nameof(salt)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Cryptography/PassphraseKeyGenerator.cs#L28",
-"region":  {
-"startLine":  28,
-"startColumn":  55,
-"endLine":  28,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'bytes' with 'nameof(bytes)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L236",
-"region":  {
-"startLine":  236,
-"startColumn":  49,
-"endLine":  236,
-"endColumn":  56
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'offset' with 'nameof(offset)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L243",
-"region":  {
-"startLine":  243,
-"startColumn":  55,
-"endLine":  243,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'count' with 'nameof(count)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L246",
-"region":  {
-"startLine":  246,
-"startColumn":  55,
-"endLine":  246,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'digit' with 'nameof(digit)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L589",
-"region":  {
-"startLine":  589,
-"startColumn":  41,
-"endLine":  589,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'offset' with 'nameof(offset)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L261",
-"region":  {
-"startLine":  261,
-"startColumn":  55,
-"endLine":  261,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'count' with 'nameof(count)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L264",
-"region":  {
-"startLine":  264,
-"startColumn":  55,
-"endLine":  264,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'e' with 'nameof(e)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L342",
-"region":  {
-"startLine":  342,
-"startColumn":  49,
-"endLine":  342,
-"endColumn":  52
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'offset' with 'nameof(offset)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L356",
-"region":  {
-"startLine":  356,
-"startColumn":  55,
-"endLine":  356,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'count' with 'nameof(count)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L359",
-"region":  {
-"startLine":  359,
-"startColumn":  55,
-"endLine":  359,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'query' with 'nameof(query)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L707",
-"region":  {
-"startLine":  707,
-"startColumn":  49,
-"endLine":  707,
-"endColumn":  56
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'encoding' with 'nameof(encoding)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L709",
-"region":  {
-"startLine":  709,
-"startColumn":  49,
-"endLine":  709,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 't' with 'nameof(t)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L39",
-"region":  {
-"startLine":  39,
-"startColumn":  49,
-"endLine":  39,
-"endColumn":  52
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 't' with 'nameof(t)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L57",
-"region":  {
-"startLine":  57,
-"startColumn":  49,
-"endLine":  57,
-"endColumn":  52
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'to' with 'nameof(to)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L70",
-"region":  {
-"startLine":  70,
-"startColumn":  49,
-"endLine":  70,
-"endColumn":  53
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'type' with 'nameof(type)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L123",
-"region":  {
-"startLine":  123,
-"startColumn":  49,
-"endLine":  123,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'type' with 'nameof(type)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L142",
-"region":  {
-"startLine":  142,
-"startColumn":  49,
-"endLine":  142,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'member' with 'nameof(member)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L201",
-"region":  {
-"startLine":  201,
-"startColumn":  112,
-"endLine":  201,
-"endColumn":  120
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'member' with 'nameof(member)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L217",
-"region":  {
-"startLine":  217,
-"startColumn":  49,
-"endLine":  217,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'property' with 'nameof(property)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L243",
-"region":  {
-"startLine":  243,
-"startColumn":  49,
-"endLine":  243,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'member' with 'nameof(member)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L269",
-"region":  {
-"startLine":  269,
-"startColumn":  84,
-"endLine":  269,
-"endColumn":  92
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'member' with 'nameof(member)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L272",
-"region":  {
-"startLine":  272,
-"startColumn":  96,
-"endLine":  272,
-"endColumn":  104
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'member' with 'nameof(member)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L293",
-"region":  {
-"startLine":  293,
-"startColumn":  97,
-"endLine":  293,
-"endColumn":  105
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'targetUri' with 'nameof(targetUri)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLink.cs#L68",
-"region":  {
-"startLine":  68,
-"startColumn":  49,
-"endLine":  68,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'relation' with 'nameof(relation)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLink.cs#L73",
-"region":  {
-"startLine":  73,
-"startColumn":  49,
-"endLine":  73,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'uri' with 'nameof(uri)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLink.cs#L277",
-"region":  {
-"startLine":  277,
-"startColumn":  99,
-"endLine":  277,
-"endColumn":  104
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'link' with 'nameof(link)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLinkBuilder.cs#L31",
-"region":  {
-"startLine":  31,
-"startColumn":  49,
-"endLine":  31,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'relation' with 'nameof(relation)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLinkRelation.cs#L137",
-"region":  {
-"startLine":  137,
-"startColumn":  49,
-"endLine":  137,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'relation' with 'nameof(relation)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLinkRelation.cs#L148",
-"region":  {
-"startLine":  148,
-"startColumn":  61,
-"endLine":  148,
-"endColumn":  98
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'relation' with 'nameof(relation)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLinkRelation.cs#L164",
-"region":  {
-"startLine":  164,
-"startColumn":  53,
-"endLine":  164,
-"endColumn":  90
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'stream' with 'nameof(stream)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/RequestStream.cs#L517",
-"region":  {
-"startLine":  517,
-"startColumn":  53,
-"endLine":  517,
-"endColumn":  87
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'expectedLength' with 'nameof(expectedLength)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/RequestStream.cs#L522",
-"region":  {
-"startLine":  522,
-"startColumn":  55,
-"endLine":  522,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'expectedLength' with 'nameof(expectedLength)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/RequestStream.cs#L522",
-"region":  {
-"startLine":  522,
-"startColumn":  89,
-"endLine":  522,
-"endColumn":  158
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'thresholdLength' with 'nameof(thresholdLength)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/RequestStream.cs#L527",
-"region":  {
-"startLine":  527,
-"startColumn":  55,
-"endLine":  527,
-"endColumn":  72
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'baseStream' with 'nameof(baseStream)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/UnclosableStreamWrapper.cs#L27",
-"region":  {
-"startLine":  27,
-"startColumn":  49,
-"endLine":  27,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'converters' with 'nameof(converters)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Json/JavaScriptSerializer.cs#L113",
-"region":  {
-"startLine":  113,
-"startColumn":  49,
-"endLine":  113,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'primitiveConverters' with 'nameof(primitiveConverters)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Json/JavaScriptSerializer.cs#L128",
-"region":  {
-"startLine":  128,
-"startColumn":  49,
-"endLine":  128,
-"endColumn":  70
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'propertyInfo' with 'nameof(propertyInfo)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/BindingMemberInfo.cs#L58",
-"region":  {
-"startLine":  58,
-"startColumn":  49,
-"endLine":  58,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'fieldInfo' with 'nameof(fieldInfo)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/BindingMemberInfo.cs#L72",
-"region":  {
-"startLine":  72,
-"startColumn":  49,
-"endLine":  72,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'typeConverters' with 'nameof(typeConverters)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L54",
-"region":  {
-"startLine":  54,
-"startColumn":  49,
-"endLine":  54,
-"endColumn":  65
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'bodyDeserializers' with 'nameof(bodyDeserializers)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L59",
-"region":  {
-"startLine":  59,
-"startColumn":  49,
-"endLine":  59,
-"endColumn":  68
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'fieldNameConverter' with 'nameof(fieldNameConverter)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L64",
-"region":  {
-"startLine":  64,
-"startColumn":  49,
-"endLine":  64,
-"endColumn":  69
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'defaults' with 'nameof(defaults)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L69",
-"region":  {
-"startLine":  69,
-"startColumn":  49,
-"endLine":  69,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'modelType' with 'nameof(modelType)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L107",
-"region":  {
-"startLine":  107,
-"startColumn":  49,
-"endLine":  107,
-"endColumn":  108
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'modelType' with 'nameof(modelType)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L107",
-"region":  {
-"startLine":  107,
-"startColumn":  110,
-"endLine":  107,
-"endColumn":  121
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'locator' with 'nameof(locator)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DynamicModelBinderAdapter.cs#L29",
-"region":  {
-"startLine":  29,
-"startColumn":  49,
-"endLine":  29,
-"endColumn":  58
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'context' with 'nameof(context)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DynamicModelBinderAdapter.cs#L34",
-"region":  {
-"startLine":  34,
-"startColumn":  49,
-"endLine":  34,
-"endColumn":  58
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'configuration' with 'nameof(configuration)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DynamicModelBinderAdapter.cs#L39",
-"region":  {
-"startLine":  39,
-"startColumn":  49,
-"endLine":  39,
-"endColumn":  64
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'boundType' with 'nameof(boundType)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/ModelBindingException.cs#L36",
-"region":  {
-"startLine":  36,
-"startColumn":  49,
-"endLine":  36,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'dispatcher' with 'nameof(dispatcher)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L64",
-"region":  {
-"startLine":  64,
-"startColumn":  49,
-"endLine":  64,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'contextFactory' with 'nameof(contextFactory)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L69",
-"region":  {
-"startLine":  69,
-"startColumn":  49,
-"endLine":  69,
-"endColumn":  65
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'statusCodeHandlers' with 'nameof(statusCodeHandlers)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L74",
-"region":  {
-"startLine":  74,
-"startColumn":  49,
-"endLine":  74,
-"endColumn":  69
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'requestTracing' with 'nameof(requestTracing)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L79",
-"region":  {
-"startLine":  79,
-"startColumn":  49,
-"endLine":  79,
-"endColumn":  65
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'staticContentProvider' with 'nameof(staticContentProvider)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L84",
-"region":  {
-"startLine":  84,
-"startColumn":  49,
-"endLine":  84,
-"endColumn":  72
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'negotiator' with 'nameof(negotiator)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L89",
-"region":  {
-"startLine":  89,
-"startColumn":  49,
-"endLine":  89,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'request' with 'nameof(request)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L123",
-"region":  {
-"startLine":  123,
-"startColumn":  53,
-"endLine":  123,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'request' with 'nameof(request)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L123",
-"region":  {
-"startLine":  123,
-"startColumn":  64,
-"endLine":  123,
-"endColumn":  103
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'method' with 'nameof(method)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Request.cs#L61",
-"region":  {
-"startLine":  61,
-"startColumn":  55,
-"endLine":  61,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'url' with 'nameof(url)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Request.cs#L66",
-"region":  {
-"startLine":  66,
-"startColumn":  49,
-"endLine":  66,
-"endColumn":  54
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'fileName' with 'nameof(fileName)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ResponseExtensions.cs#L33",
-"region":  {
-"startLine":  33,
-"startColumn":  45,
-"endLine":  33,
-"endColumn":  79
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'module' with 'nameof(module)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/Negotiation/NegotiationContext.cs#L110",
-"region":  {
-"startLine":  110,
-"startColumn":  49,
-"endLine":  110,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'context' with 'nameof(context)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/Negotiation/Negotiator.cs#L26",
-"region":  {
-"startLine":  26,
-"startColumn":  49,
-"endLine":  26,
-"endColumn":  58
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'method' with 'nameof(method)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/RouteDescription.cs#L27",
-"region":  {
-"startLine":  27,
-"startColumn":  73,
-"endLine":  27,
-"endColumn":  81
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'path' with 'nameof(path)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/RouteDescription.cs#L32",
-"region":  {
-"startLine":  32,
-"startColumn":  71,
-"endLine":  32,
-"endColumn":  77
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'configuration' with 'nameof(configuration)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Session/CookieBasedSessions.cs#L52",
-"region":  {
-"startLine":  52,
-"startColumn":  49,
-"endLine":  52,
-"endColumn":  64
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'configuration' with 'nameof(configuration)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Session/CookieBasedSessions.cs#L57",
-"region":  {
-"startLine":  57,
-"startColumn":  73,
-"endLine":  57,
-"endColumn":  88
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'pipelines' with 'nameof(pipelines)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Session/CookieBasedSessions.cs#L72",
-"region":  {
-"startLine":  72,
-"startColumn":  49,
-"endLine":  72,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'instance' with 'nameof(instance)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1100",
-"region":  {
-"startLine":  1100,
-"startColumn":  53,
-"endLine":  1100,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'instance' with 'nameof(instance)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1100",
-"region":  {
-"startLine":  1100,
-"startColumn":  65,
-"endLine":  1100,
-"endColumn":  84
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'lifetimeProvider' with 'nameof(lifetimeProvider)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1103",
-"region":  {
-"startLine":  1103,
-"startColumn":  53,
-"endLine":  1103,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'lifetimeProvider' with 'nameof(lifetimeProvider)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1103",
-"region":  {
-"startLine":  1103,
-"startColumn":  73,
-"endLine":  1103,
-"endColumn":  100
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'errorString' with 'nameof(errorString)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1106",
-"region":  {
-"startLine":  1106,
-"startColumn":  49,
-"endLine":  1106,
-"endColumn":  80
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'errorString' with 'nameof(errorString)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1106",
-"region":  {
-"startLine":  1106,
-"startColumn":  82,
-"endLine":  1106,
-"endColumn":  95
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'instance' with 'nameof(instance)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1170",
-"region":  {
-"startLine":  1170,
-"startColumn":  53,
-"endLine":  1170,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'instance' with 'nameof(instance)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1170",
-"region":  {
-"startLine":  1170,
-"startColumn":  65,
-"endLine":  1170,
-"endColumn":  84
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'lifetimeProvider' with 'nameof(lifetimeProvider)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1173",
-"region":  {
-"startLine":  1173,
-"startColumn":  53,
-"endLine":  1173,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'lifetimeProvider' with 'nameof(lifetimeProvider)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1173",
-"region":  {
-"startLine":  1173,
-"startColumn":  73,
-"endLine":  1173,
-"endColumn":  100
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'errorString' with 'nameof(errorString)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1176",
-"region":  {
-"startLine":  1176,
-"startColumn":  49,
-"endLine":  1176,
-"endColumn":  80
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'errorString' with 'nameof(errorString)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1176",
-"region":  {
-"startLine":  1176,
-"startColumn":  82,
-"endLine":  1176,
-"endColumn":  95
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'factory' with 'nameof(factory)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1549",
-"region":  {
-"startLine":  1549,
-"startColumn":  49,
-"endLine":  1549,
-"endColumn":  58
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'factory' with 'nameof(factory)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1567",
-"region":  {
-"startLine":  1567,
-"startColumn":  49,
-"endLine":  1567,
-"endColumn":  58
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'factory' with 'nameof(factory)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2777",
-"region":  {
-"startLine":  2777,
-"startColumn":  53,
-"endLine":  2777,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'factory' with 'nameof(factory)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2840",
-"region":  {
-"startLine":  2840,
-"startColumn":  53,
-"endLine":  2840,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'parameters' with 'nameof(parameters)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3053",
-"region":  {
-"startLine":  3053,
-"startColumn":  49,
-"endLine":  3053,
-"endColumn":  96
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'lifetimeProvider' with 'nameof(lifetimeProvider)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3117",
-"region":  {
-"startLine":  3117,
-"startColumn":  53,
-"endLine":  3117,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'lifetimeProvider' with 'nameof(lifetimeProvider)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3117",
-"region":  {
-"startLine":  3117,
-"startColumn":  73,
-"endLine":  3117,
-"endColumn":  100
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'parameters' with 'nameof(parameters)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3456",
-"region":  {
-"startLine":  3456,
-"startColumn":  49,
-"endLine":  3456,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'parameters' with 'nameof(parameters)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3786",
-"region":  {
-"startLine":  3786,
-"startColumn":  49,
-"endLine":  3786,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'parameters' with 'nameof(parameters)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3812",
-"region":  {
-"startLine":  3812,
-"startColumn":  49,
-"endLine":  3812,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'ruleType' with 'nameof(ruleType)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Validation/ModelValidationRule.cs#L22",
-"region":  {
-"startLine":  22,
-"startColumn":  49,
-"endLine":  22,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'errorMessageFormatter' with 'nameof(errorMessageFormatter)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Validation/ModelValidationRule.cs#L27",
-"region":  {
-"startLine":  27,
-"startColumn":  49,
-"endLine":  27,
-"endColumn":  72
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'viewLocationContext' with 'nameof(viewLocationContext)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/DefaultViewFactory.cs#L65",
-"region":  {
-"startLine":  65,
-"startColumn":  49,
-"endLine":  65,
-"endColumn":  70
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'viewLocationContext' with 'nameof(viewLocationContext)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/DefaultViewFactory.cs#L65",
-"region":  {
-"startLine":  65,
-"startColumn":  72,
-"endLine":  65,
-"endColumn":  136
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'conventions' with 'nameof(conventions)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/DefaultViewResolver.cs#L29",
-"region":  {
-"startLine":  29,
-"startColumn":  53,
-"endLine":  29,
-"endColumn":  149
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'model' with 'nameof(model)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L194",
-"region":  {
-"startLine":  194,
-"startColumn":  115,
-"endLine":  194,
-"endColumn":  122
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027registrationType\u0027 with \u0027nameof(registrationType)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/CollectionTypeRegistration.cs#L26",
+      "Location": "Line 26 Position 49-67"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027implementationTypes\u0027 with \u0027nameof(implementationTypes)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/CollectionTypeRegistration.cs#L31",
+      "Location": "Line 31 Position 49-70"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027registrationType\u0027 with \u0027nameof(registrationType)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/InstanceRegistration.cs#L19",
+      "Location": "Line 19 Position 49-67"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027implementation\u0027 with \u0027nameof(implementation)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/InstanceRegistration.cs#L24",
+      "Location": "Line 24 Position 49-65"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027registrationType\u0027 with \u0027nameof(registrationType)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/TypeRegistration.cs#L20",
+      "Location": "Line 20 Position 49-67"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027implementationType\u0027 with \u0027nameof(implementationType)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/TypeRegistration.cs#L25",
+      "Location": "Line 25 Position 49-69"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027salt\u0027 with \u0027nameof(salt)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Cryptography/PassphraseKeyGenerator.cs#L28",
+      "Location": "Line 28 Position 55-61"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027bytes\u0027 with \u0027nameof(bytes)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L236",
+      "Location": "Line 236 Position 49-56"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027offset\u0027 with \u0027nameof(offset)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L243",
+      "Location": "Line 243 Position 55-63"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027count\u0027 with \u0027nameof(count)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L246",
+      "Location": "Line 246 Position 55-62"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027digit\u0027 with \u0027nameof(digit)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L589",
+      "Location": "Line 589 Position 41-48"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027offset\u0027 with \u0027nameof(offset)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L261",
+      "Location": "Line 261 Position 55-63"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027count\u0027 with \u0027nameof(count)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L264",
+      "Location": "Line 264 Position 55-62"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027e\u0027 with \u0027nameof(e)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L342",
+      "Location": "Line 342 Position 49-52"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027offset\u0027 with \u0027nameof(offset)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L356",
+      "Location": "Line 356 Position 55-63"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027count\u0027 with \u0027nameof(count)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L359",
+      "Location": "Line 359 Position 55-62"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027query\u0027 with \u0027nameof(query)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L707",
+      "Location": "Line 707 Position 49-56"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027encoding\u0027 with \u0027nameof(encoding)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L709",
+      "Location": "Line 709 Position 49-59"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027type\u0027 with \u0027nameof(type)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L123",
+      "Location": "Line 123 Position 49-55"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027type\u0027 with \u0027nameof(type)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L142",
+      "Location": "Line 142 Position 49-55"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027member\u0027 with \u0027nameof(member)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L201",
+      "Location": "Line 201 Position 112-120"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027member\u0027 with \u0027nameof(member)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L217",
+      "Location": "Line 217 Position 49-57"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027property\u0027 with \u0027nameof(property)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L243",
+      "Location": "Line 243 Position 49-59"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027member\u0027 with \u0027nameof(member)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L269",
+      "Location": "Line 269 Position 84-92"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027member\u0027 with \u0027nameof(member)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L272",
+      "Location": "Line 272 Position 96-104"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027member\u0027 with \u0027nameof(member)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L293",
+      "Location": "Line 293 Position 97-105"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027t\u0027 with \u0027nameof(t)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L39",
+      "Location": "Line 39 Position 49-52"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027t\u0027 with \u0027nameof(t)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L57",
+      "Location": "Line 57 Position 49-52"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027to\u0027 with \u0027nameof(to)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L70",
+      "Location": "Line 70 Position 49-53"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027uri\u0027 with \u0027nameof(uri)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLink.cs#L277",
+      "Location": "Line 277 Position 99-104"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027targetUri\u0027 with \u0027nameof(targetUri)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLink.cs#L68",
+      "Location": "Line 68 Position 49-60"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027relation\u0027 with \u0027nameof(relation)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLink.cs#L73",
+      "Location": "Line 73 Position 49-59"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027link\u0027 with \u0027nameof(link)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLinkBuilder.cs#L31",
+      "Location": "Line 31 Position 49-55"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027relation\u0027 with \u0027nameof(relation)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLinkRelation.cs#L137",
+      "Location": "Line 137 Position 49-59"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027relation\u0027 with \u0027nameof(relation)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLinkRelation.cs#L148",
+      "Location": "Line 148 Position 61-98"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027relation\u0027 with \u0027nameof(relation)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLinkRelation.cs#L164",
+      "Location": "Line 164 Position 53-90"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027stream\u0027 with \u0027nameof(stream)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/RequestStream.cs#L517",
+      "Location": "Line 517 Position 53-87"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027expectedLength\u0027 with \u0027nameof(expectedLength)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/RequestStream.cs#L522",
+      "Location": "Line 522 Position 55-71"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027expectedLength\u0027 with \u0027nameof(expectedLength)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/RequestStream.cs#L522",
+      "Location": "Line 522 Position 89-158"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027thresholdLength\u0027 with \u0027nameof(thresholdLength)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/RequestStream.cs#L527",
+      "Location": "Line 527 Position 55-72"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027baseStream\u0027 with \u0027nameof(baseStream)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/UnclosableStreamWrapper.cs#L27",
+      "Location": "Line 27 Position 49-61"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027converters\u0027 with \u0027nameof(converters)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Json/JavaScriptSerializer.cs#L113",
+      "Location": "Line 113 Position 49-61"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027primitiveConverters\u0027 with \u0027nameof(primitiveConverters)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Json/JavaScriptSerializer.cs#L128",
+      "Location": "Line 128 Position 49-70"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027propertyInfo\u0027 with \u0027nameof(propertyInfo)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/BindingMemberInfo.cs#L58",
+      "Location": "Line 58 Position 49-63"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027fieldInfo\u0027 with \u0027nameof(fieldInfo)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/BindingMemberInfo.cs#L72",
+      "Location": "Line 72 Position 49-60"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027modelType\u0027 with \u0027nameof(modelType)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L107",
+      "Location": "Line 107 Position 49-108"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027modelType\u0027 with \u0027nameof(modelType)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L107",
+      "Location": "Line 107 Position 110-121"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027typeConverters\u0027 with \u0027nameof(typeConverters)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L54",
+      "Location": "Line 54 Position 49-65"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027bodyDeserializers\u0027 with \u0027nameof(bodyDeserializers)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L59",
+      "Location": "Line 59 Position 49-68"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027fieldNameConverter\u0027 with \u0027nameof(fieldNameConverter)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L64",
+      "Location": "Line 64 Position 49-69"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027defaults\u0027 with \u0027nameof(defaults)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L69",
+      "Location": "Line 69 Position 49-59"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027locator\u0027 with \u0027nameof(locator)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DynamicModelBinderAdapter.cs#L29",
+      "Location": "Line 29 Position 49-58"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027context\u0027 with \u0027nameof(context)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DynamicModelBinderAdapter.cs#L34",
+      "Location": "Line 34 Position 49-58"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027configuration\u0027 with \u0027nameof(configuration)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DynamicModelBinderAdapter.cs#L39",
+      "Location": "Line 39 Position 49-64"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027boundType\u0027 with \u0027nameof(boundType)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/ModelBindingException.cs#L36",
+      "Location": "Line 36 Position 49-60"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027request\u0027 with \u0027nameof(request)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L123",
+      "Location": "Line 123 Position 53-62"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027request\u0027 with \u0027nameof(request)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L123",
+      "Location": "Line 123 Position 64-103"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027dispatcher\u0027 with \u0027nameof(dispatcher)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L64",
+      "Location": "Line 64 Position 49-61"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027contextFactory\u0027 with \u0027nameof(contextFactory)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L69",
+      "Location": "Line 69 Position 49-65"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027statusCodeHandlers\u0027 with \u0027nameof(statusCodeHandlers)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L74",
+      "Location": "Line 74 Position 49-69"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027requestTracing\u0027 with \u0027nameof(requestTracing)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L79",
+      "Location": "Line 79 Position 49-65"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027staticContentProvider\u0027 with \u0027nameof(staticContentProvider)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L84",
+      "Location": "Line 84 Position 49-72"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027negotiator\u0027 with \u0027nameof(negotiator)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L89",
+      "Location": "Line 89 Position 49-61"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027method\u0027 with \u0027nameof(method)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Request.cs#L61",
+      "Location": "Line 61 Position 55-63"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027url\u0027 with \u0027nameof(url)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Request.cs#L66",
+      "Location": "Line 66 Position 49-54"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027fileName\u0027 with \u0027nameof(fileName)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ResponseExtensions.cs#L33",
+      "Location": "Line 33 Position 45-79"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027module\u0027 with \u0027nameof(module)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/Negotiation/NegotiationContext.cs#L110",
+      "Location": "Line 110 Position 49-57"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027context\u0027 with \u0027nameof(context)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/Negotiation/Negotiator.cs#L26",
+      "Location": "Line 26 Position 49-58"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027method\u0027 with \u0027nameof(method)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/RouteDescription.cs#L27",
+      "Location": "Line 27 Position 73-81"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027path\u0027 with \u0027nameof(path)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/RouteDescription.cs#L32",
+      "Location": "Line 32 Position 71-77"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027configuration\u0027 with \u0027nameof(configuration)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Session/CookieBasedSessions.cs#L52",
+      "Location": "Line 52 Position 49-64"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027configuration\u0027 with \u0027nameof(configuration)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Session/CookieBasedSessions.cs#L57",
+      "Location": "Line 57 Position 73-88"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027pipelines\u0027 with \u0027nameof(pipelines)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Session/CookieBasedSessions.cs#L72",
+      "Location": "Line 72 Position 49-60"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027instance\u0027 with \u0027nameof(instance)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1100",
+      "Location": "Line 1100 Position 53-63"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027instance\u0027 with \u0027nameof(instance)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1100",
+      "Location": "Line 1100 Position 65-84"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027lifetimeProvider\u0027 with \u0027nameof(lifetimeProvider)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1103",
+      "Location": "Line 1103 Position 53-71"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027lifetimeProvider\u0027 with \u0027nameof(lifetimeProvider)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1103",
+      "Location": "Line 1103 Position 73-100"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027errorString\u0027 with \u0027nameof(errorString)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1106",
+      "Location": "Line 1106 Position 49-80"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027errorString\u0027 with \u0027nameof(errorString)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1106",
+      "Location": "Line 1106 Position 82-95"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027instance\u0027 with \u0027nameof(instance)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1170",
+      "Location": "Line 1170 Position 53-63"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027instance\u0027 with \u0027nameof(instance)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1170",
+      "Location": "Line 1170 Position 65-84"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027lifetimeProvider\u0027 with \u0027nameof(lifetimeProvider)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1173",
+      "Location": "Line 1173 Position 53-71"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027lifetimeProvider\u0027 with \u0027nameof(lifetimeProvider)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1173",
+      "Location": "Line 1173 Position 73-100"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027errorString\u0027 with \u0027nameof(errorString)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1176",
+      "Location": "Line 1176 Position 49-80"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027errorString\u0027 with \u0027nameof(errorString)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1176",
+      "Location": "Line 1176 Position 82-95"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027factory\u0027 with \u0027nameof(factory)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1549",
+      "Location": "Line 1549 Position 49-58"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027factory\u0027 with \u0027nameof(factory)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1567",
+      "Location": "Line 1567 Position 49-58"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027factory\u0027 with \u0027nameof(factory)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2777",
+      "Location": "Line 2777 Position 53-62"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027factory\u0027 with \u0027nameof(factory)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2840",
+      "Location": "Line 2840 Position 53-62"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027parameters\u0027 with \u0027nameof(parameters)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3053",
+      "Location": "Line 3053 Position 49-96"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027lifetimeProvider\u0027 with \u0027nameof(lifetimeProvider)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3117",
+      "Location": "Line 3117 Position 53-71"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027lifetimeProvider\u0027 with \u0027nameof(lifetimeProvider)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3117",
+      "Location": "Line 3117 Position 73-100"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027parameters\u0027 with \u0027nameof(parameters)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3456",
+      "Location": "Line 3456 Position 49-61"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027parameters\u0027 with \u0027nameof(parameters)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3786",
+      "Location": "Line 3786 Position 49-61"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027parameters\u0027 with \u0027nameof(parameters)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3812",
+      "Location": "Line 3812 Position 49-61"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027ruleType\u0027 with \u0027nameof(ruleType)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Validation/ModelValidationRule.cs#L22",
+      "Location": "Line 22 Position 49-59"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027errorMessageFormatter\u0027 with \u0027nameof(errorMessageFormatter)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Validation/ModelValidationRule.cs#L27",
+      "Location": "Line 27 Position 49-72"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027viewLocationContext\u0027 with \u0027nameof(viewLocationContext)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/DefaultViewFactory.cs#L65",
+      "Location": "Line 65 Position 49-70"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027viewLocationContext\u0027 with \u0027nameof(viewLocationContext)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/DefaultViewFactory.cs#L65",
+      "Location": "Line 65 Position 72-136"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027conventions\u0027 with \u0027nameof(conventions)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/DefaultViewResolver.cs#L29",
+      "Location": "Line 29 Position 53-149"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027model\u0027 with \u0027nameof(model)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L194",
+      "Location": "Line 194 Position 115-122"
+    }
+  ]
 }

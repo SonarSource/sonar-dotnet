@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S3353",
-"message":  "Add the 'const' modifier to 'bindFlags'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/IPExtensions.cs#L31",
-"region":  {
-"startLine":  31,
-"startColumn":  26,
-"endLine":  31,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S3353",
-"message":  "Add the 'const' modifier to 'bufferSizeLogKey', and replace 'var' with 'string'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L36",
-"region":  {
-"startLine":  36,
-"startColumn":  17,
-"endLine":  36,
-"endColumn":  33
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3353",
+      "Message": "Add the \u0027const\u0027 modifier to \u0027bindFlags\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/IPExtensions.cs#L31",
+      "Location": "Line 31 Position 26-35"
+    },
+    {
+      "Id": "S3353",
+      "Message": "Add the \u0027const\u0027 modifier to \u0027bufferSizeLogKey\u0027, and replace \u0027var\u0027 with \u0027string\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L36",
+      "Location": "Line 36 Position 17-33"
+    }
+  ]
 }

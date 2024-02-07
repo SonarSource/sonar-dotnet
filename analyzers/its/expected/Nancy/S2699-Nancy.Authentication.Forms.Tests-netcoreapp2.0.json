@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/test/Nancy.Authentication.Forms.Tests/FormsAuthenticationConfigurationFixture.cs#L28",
-"region":  {
-"startLine":  28,
-"startColumn":  21,
-"endLine":  28,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/test/Nancy.Authentication.Forms.Tests/FormsAuthenticationConfigurationFixture.cs#L35",
-"region":  {
-"startLine":  35,
-"startColumn":  21,
-"endLine":  35,
-"endColumn":  86
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/test/Nancy.Authentication.Forms.Tests/FormsAuthenticationConfigurationFixture.cs#L28",
+      "Location": "Line 28 Position 21-60"
+    },
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/test/Nancy.Authentication.Forms.Tests/FormsAuthenticationConfigurationFixture.cs#L35",
+      "Location": "Line 35 Position 21-86"
+    }
+  ]
 }

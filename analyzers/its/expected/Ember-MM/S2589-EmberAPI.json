@@ -1,82 +1,40 @@
 {
-"issues":  [
-{
-"id":  "S2589",
-"message":  "Change this condition so that it does not always evaluate to 'False'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L275",
-"region":  {
-"startLine":  275,
-"startColumn":  66,
-"endLine":  275,
-"endColumn":  76
-}
-}
-},
-{
-"id":  "S2589",
-"message":  "Change this condition so that it does not always evaluate to 'False'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L308",
-"region":  {
-"startLine":  308,
-"startColumn":  20,
-"endLine":  308,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S2589",
-"message":  "Change this condition so that it does not always evaluate to 'False'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L311",
-"region":  {
-"startLine":  311,
-"startColumn":  24,
-"endLine":  311,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S2589",
-"message":  "Change this condition so that it does not always evaluate to 'False'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L314",
-"region":  {
-"startLine":  314,
-"startColumn":  28,
-"endLine":  314,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S2589",
-"message":  "Change this condition so that it does not always evaluate to 'False'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L461",
-"region":  {
-"startLine":  461,
-"startColumn":  32,
-"endLine":  461,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S2589",
-"message":  "Change this condition so that it does not always evaluate to 'True'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L978",
-"region":  {
-"startLine":  978,
-"startColumn":  20,
-"endLine":  978,
-"endColumn":  30
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2589",
+      "Message": "Change this condition so that it does not always evaluate to \u0027False\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L275",
+      "Location": "Line 275 Position 66-76"
+    },
+    {
+      "Id": "S2589",
+      "Message": "Change this condition so that it does not always evaluate to \u0027False\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L308",
+      "Location": "Line 308 Position 20-30"
+    },
+    {
+      "Id": "S2589",
+      "Message": "Change this condition so that it does not always evaluate to \u0027False\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L311",
+      "Location": "Line 311 Position 24-34"
+    },
+    {
+      "Id": "S2589",
+      "Message": "Change this condition so that it does not always evaluate to \u0027False\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L314",
+      "Location": "Line 314 Position 28-38"
+    },
+    {
+      "Id": "S2589",
+      "Message": "Change this condition so that it does not always evaluate to \u0027False\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L461",
+      "Location": "Line 461 Position 32-49"
+    },
+    {
+      "Id": "S2589",
+      "Message": "Change this condition so that it does not always evaluate to \u0027True\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L978",
+      "Location": "Line 978 Position 20-30"
+    }
+  ]
 }

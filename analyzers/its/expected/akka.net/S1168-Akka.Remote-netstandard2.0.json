@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1168",
-"message":  "Return an empty collection instead of null.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L240",
-"region":  {
-"startLine":  240,
-"startColumn":  28,
-"endLine":  240,
-"endColumn":  32
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1168",
+      "Message": "Return an empty collection instead of null.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L240",
+      "Location": "Line 240 Position 28-32"
+    }
+  ]
 }

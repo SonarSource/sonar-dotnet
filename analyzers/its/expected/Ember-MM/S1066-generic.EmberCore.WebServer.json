@@ -1,28 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L205",
-"region":  {
-"startLine":  205,
-"startColumn":  45,
-"endLine":  205,
-"endColumn":  47
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L204",
-"region":  {
-"startLine":  204,
-"startColumn":  41,
-"endLine":  204,
-"endColumn":  43
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L205",
+      "Location": "Line 205 Position 45-47"
+    }
+  ]
 }

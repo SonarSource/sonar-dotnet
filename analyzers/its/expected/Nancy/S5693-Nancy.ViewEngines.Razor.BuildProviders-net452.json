@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S5693",
-"message":  "Make sure the content length limit is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/samples/Nancy.Demo.Hosting.Owin/Web.config#L20",
-"region":  {
-"startLine":  20,
-"startColumn":  18,
-"endLine":  20,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S5693",
-"message":  "Make sure the content length limit is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/samples/Nancy.Demo.Hosting.Owin/Web.config#L26",
-"region":  {
-"startLine":  26,
-"startColumn":  24,
-"endLine":  26,
-"endColumn":  47
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S5693",
+      "Message": "Make sure the content length limit is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/samples/Nancy.Demo.Hosting.Owin/Web.config#L20",
+      "Location": "Line 20 Position 18-34"
+    },
+    {
+      "Id": "S5693",
+      "Message": "Make sure the content length limit is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/samples/Nancy.Demo.Hosting.Owin/Web.config#L26",
+      "Location": "Line 26 Position 24-47"
+    }
+  ]
 }

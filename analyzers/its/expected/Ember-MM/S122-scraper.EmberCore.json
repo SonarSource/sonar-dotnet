@@ -1,2591 +1,1198 @@
 {
-"issues":  [
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L91",
-"region":  {
-"startLine":  91,
-"startColumn":  8,
-"endLine":  91,
-"endColumn":  88
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L111",
-"region":  {
-"startLine":  111,
-"startColumn":  9,
-"endLine":  111,
-"endColumn":  92
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L160",
-"region":  {
-"startLine":  160,
-"startColumn":  12,
-"endLine":  160,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L165",
-"region":  {
-"startLine":  165,
-"startColumn":  12,
-"endLine":  165,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L170",
-"region":  {
-"startLine":  170,
-"startColumn":  12,
-"endLine":  170,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L175",
-"region":  {
-"startLine":  175,
-"startColumn":  12,
-"endLine":  175,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L195",
-"region":  {
-"startLine":  195,
-"startColumn":  11,
-"endLine":  195,
-"endColumn":  91
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L243",
-"region":  {
-"startLine":  243,
-"startColumn":  11,
-"endLine":  243,
-"endColumn":  91
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L288",
-"region":  {
-"startLine":  288,
-"startColumn":  10,
-"endLine":  288,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L294",
-"region":  {
-"startLine":  294,
-"startColumn":  10,
-"endLine":  294,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L300",
-"region":  {
-"startLine":  300,
-"startColumn":  10,
-"endLine":  300,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L306",
-"region":  {
-"startLine":  306,
-"startColumn":  10,
-"endLine":  306,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L866",
-"region":  {
-"startLine":  866,
-"startColumn":  4,
-"endLine":  866,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L918",
-"region":  {
-"startLine":  918,
-"startColumn":  5,
-"endLine":  918,
-"endColumn":  54
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L130",
-"region":  {
-"startLine":  130,
-"startColumn":  13,
-"endLine":  130,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L145",
-"region":  {
-"startLine":  145,
-"startColumn":  17,
-"endLine":  145,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L150",
-"region":  {
-"startLine":  150,
-"startColumn":  21,
-"endLine":  150,
-"endColumn":  93
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L151",
-"region":  {
-"startLine":  151,
-"startColumn":  21,
-"endLine":  151,
-"endColumn":  101
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L152",
-"region":  {
-"startLine":  152,
-"startColumn":  21,
-"endLine":  152,
-"endColumn":  89
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L153",
-"region":  {
-"startLine":  153,
-"startColumn":  21,
-"endLine":  153,
-"endColumn":  93
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L156",
-"region":  {
-"startLine":  156,
-"startColumn":  17,
-"endLine":  156,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L162",
-"region":  {
-"startLine":  162,
-"startColumn":  17,
-"endLine":  162,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L170",
-"region":  {
-"startLine":  170,
-"startColumn":  17,
-"endLine":  170,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L192",
-"region":  {
-"startLine":  192,
-"startColumn":  17,
-"endLine":  192,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L198",
-"region":  {
-"startLine":  198,
-"startColumn":  17,
-"endLine":  198,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L200",
-"region":  {
-"startLine":  200,
-"startColumn":  17,
-"endLine":  200,
-"endColumn":  139
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L214",
-"region":  {
-"startLine":  214,
-"startColumn":  17,
-"endLine":  214,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L244",
-"region":  {
-"startLine":  244,
-"startColumn":  17,
-"endLine":  244,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L258",
-"region":  {
-"startLine":  258,
-"startColumn":  17,
-"endLine":  258,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L269",
-"region":  {
-"startLine":  269,
-"startColumn":  17,
-"endLine":  269,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L297",
-"region":  {
-"startLine":  297,
-"startColumn":  17,
-"endLine":  297,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L299",
-"region":  {
-"startLine":  299,
-"startColumn":  17,
-"endLine":  299,
-"endColumn":  138
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L303",
-"region":  {
-"startLine":  303,
-"startColumn":  17,
-"endLine":  303,
-"endColumn":  178
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L305",
-"region":  {
-"startLine":  305,
-"startColumn":  17,
-"endLine":  305,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L341",
-"region":  {
-"startLine":  341,
-"startColumn":  17,
-"endLine":  341,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L343",
-"region":  {
-"startLine":  343,
-"startColumn":  17,
-"endLine":  343,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L353",
-"region":  {
-"startLine":  353,
-"startColumn":  21,
-"endLine":  353,
-"endColumn":  96
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L358",
-"region":  {
-"startLine":  358,
-"startColumn":  17,
-"endLine":  358,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L377",
-"region":  {
-"startLine":  377,
-"startColumn":  17,
-"endLine":  377,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L397",
-"region":  {
-"startLine":  397,
-"startColumn":  17,
-"endLine":  397,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L404",
-"region":  {
-"startLine":  404,
-"startColumn":  25,
-"endLine":  404,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L424",
-"region":  {
-"startLine":  424,
-"startColumn":  17,
-"endLine":  424,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L432",
-"region":  {
-"startLine":  432,
-"startColumn":  25,
-"endLine":  432,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L437",
-"region":  {
-"startLine":  437,
-"startColumn":  33,
-"endLine":  437,
-"endColumn":  76
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L441",
-"region":  {
-"startLine":  441,
-"startColumn":  33,
-"endLine":  441,
-"endColumn":  91
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L475",
-"region":  {
-"startLine":  475,
-"startColumn":  17,
-"endLine":  475,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L500",
-"region":  {
-"startLine":  500,
-"startColumn":  17,
-"endLine":  500,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L503",
-"region":  {
-"startLine":  503,
-"startColumn":  17,
-"endLine":  503,
-"endColumn":  163
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L507",
-"region":  {
-"startLine":  507,
-"startColumn":  21,
-"endLine":  507,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L510",
-"region":  {
-"startLine":  510,
-"startColumn":  25,
-"endLine":  510,
-"endColumn":  67
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L520",
-"region":  {
-"startLine":  520,
-"startColumn":  25,
-"endLine":  520,
-"endColumn":  68
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L527",
-"region":  {
-"startLine":  527,
-"startColumn":  17,
-"endLine":  527,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L531",
-"region":  {
-"startLine":  531,
-"startColumn":  21,
-"endLine":  531,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L533",
-"region":  {
-"startLine":  533,
-"startColumn":  21,
-"endLine":  533,
-"endColumn":  64
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L548",
-"region":  {
-"startLine":  548,
-"startColumn":  17,
-"endLine":  548,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L553",
-"region":  {
-"startLine":  553,
-"startColumn":  21,
-"endLine":  553,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L555",
-"region":  {
-"startLine":  555,
-"startColumn":  21,
-"endLine":  555,
-"endColumn":  65
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L561",
-"region":  {
-"startLine":  561,
-"startColumn":  29,
-"endLine":  561,
-"endColumn":  78
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L591",
-"region":  {
-"startLine":  591,
-"startColumn":  21,
-"endLine":  591,
-"endColumn":  70
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L596",
-"region":  {
-"startLine":  596,
-"startColumn":  25,
-"endLine":  596,
-"endColumn":  67
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L624",
-"region":  {
-"startLine":  624,
-"startColumn":  13,
-"endLine":  624,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L792",
-"region":  {
-"startLine":  792,
-"startColumn":  17,
-"endLine":  792,
-"endColumn":  84
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L794",
-"region":  {
-"startLine":  794,
-"startColumn":  17,
-"endLine":  794,
-"endColumn":  107
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L805",
-"region":  {
-"startLine":  805,
-"startColumn":  17,
-"endLine":  805,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L862",
-"region":  {
-"startLine":  862,
-"startColumn":  17,
-"endLine":  862,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L876",
-"region":  {
-"startLine":  876,
-"startColumn":  17,
-"endLine":  876,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L890",
-"region":  {
-"startLine":  890,
-"startColumn":  17,
-"endLine":  890,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L909",
-"region":  {
-"startLine":  909,
-"startColumn":  17,
-"endLine":  909,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMPA.vb#L50",
-"region":  {
-"startLine":  50,
-"startColumn":  13,
-"endLine":  50,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMPA.vb#L74",
-"region":  {
-"startLine":  74,
-"startColumn":  17,
-"endLine":  74,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMPA.vb#L83",
-"region":  {
-"startLine":  83,
-"startColumn":  21,
-"endLine":  83,
-"endColumn":  70
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMPA.vb#L90",
-"region":  {
-"startLine":  90,
-"startColumn":  25,
-"endLine":  90,
-"endColumn":  74
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeMPDB.vb#L50",
-"region":  {
-"startLine":  50,
-"startColumn":  13,
-"endLine":  50,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeMPDB.vb#L73",
-"region":  {
-"startLine":  73,
-"startColumn":  13,
-"endLine":  73,
-"endColumn":  65
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeMPDB.vb#L80",
-"region":  {
-"startLine":  80,
-"startColumn":  17,
-"endLine":  80,
-"endColumn":  69
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeMPDB.vb#L92",
-"region":  {
-"startLine":  92,
-"startColumn":  25,
-"endLine":  92,
-"endColumn":  77
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L97",
-"region":  {
-"startLine":  97,
-"startColumn":  13,
-"endLine":  97,
-"endColumn":  80
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L99",
-"region":  {
-"startLine":  99,
-"startColumn":  13,
-"endLine":  99,
-"endColumn":  103
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L174",
-"region":  {
-"startLine":  174,
-"startColumn":  21,
-"endLine":  174,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L194",
-"region":  {
-"startLine":  194,
-"startColumn":  21,
-"endLine":  194,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L48",
-"region":  {
-"startLine":  48,
-"startColumn":  13,
-"endLine":  48,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L73",
-"region":  {
-"startLine":  73,
-"startColumn":  13,
-"endLine":  73,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L88",
-"region":  {
-"startLine":  88,
-"startColumn":  21,
-"endLine":  88,
-"endColumn":  70
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L96",
-"region":  {
-"startLine":  96,
-"startColumn":  37,
-"endLine":  96,
-"endColumn":  86
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L106",
-"region":  {
-"startLine":  106,
-"startColumn":  37,
-"endLine":  106,
-"endColumn":  86
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L134",
-"region":  {
-"startLine":  134,
-"startColumn":  13,
-"endLine":  134,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L149",
-"region":  {
-"startLine":  149,
-"startColumn":  21,
-"endLine":  149,
-"endColumn":  70
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L176",
-"region":  {
-"startLine":  176,
-"startColumn":  37,
-"endLine":  176,
-"endColumn":  86
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeYouTube.vb#L60",
-"region":  {
-"startLine":  60,
-"startColumn":  13,
-"endLine":  60,
-"endColumn":  51
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeYouTube.vb#L138",
-"region":  {
-"startLine":  138,
-"startColumn":  17,
-"endLine":  138,
-"endColumn":  70
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeYouTube.vb#L145",
-"region":  {
-"startLine":  145,
-"startColumn":  17,
-"endLine":  145,
-"endColumn":  77
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeYouTube.vb#L146",
-"region":  {
-"startLine":  146,
-"startColumn":  17,
-"endLine":  146,
-"endColumn":  70
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeYouTube.vb#L254",
-"region":  {
-"startLine":  254,
-"startColumn":  29,
-"endLine":  254,
-"endColumn":  82
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeYouTube.vb#L260",
-"region":  {
-"startLine":  260,
-"startColumn":  29,
-"endLine":  260,
-"endColumn":  82
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeYouTube.vb#L329",
-"region":  {
-"startLine":  329,
-"startColumn":  13,
-"endLine":  329,
-"endColumn":  100
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L269",
-"region":  {
-"startLine":  269,
-"startColumn":  17,
-"endLine":  269,
-"endColumn":  114
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L320",
-"region":  {
-"startLine":  320,
-"startColumn":  21,
-"endLine":  320,
-"endColumn":  118
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L472",
-"region":  {
-"startLine":  472,
-"startColumn":  9,
-"endLine":  472,
-"endColumn":  67
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L473",
-"region":  {
-"startLine":  473,
-"startColumn":  9,
-"endLine":  473,
-"endColumn":  67
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L474",
-"region":  {
-"startLine":  474,
-"startColumn":  9,
-"endLine":  474,
-"endColumn":  67
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L518",
-"region":  {
-"startLine":  518,
-"startColumn":  9,
-"endLine":  518,
-"endColumn":  128
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L522",
-"region":  {
-"startLine":  522,
-"startColumn":  9,
-"endLine":  522,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1156",
-"region":  {
-"startLine":  1156,
-"startColumn":  13,
-"endLine":  1156,
-"endColumn":  74
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1164",
-"region":  {
-"startLine":  1164,
-"startColumn":  13,
-"endLine":  1164,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgTrailer.vb#L325",
-"region":  {
-"startLine":  325,
-"startColumn":  17,
-"endLine":  325,
-"endColumn":  130
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgTrailer.vb#L333",
-"region":  {
-"startLine":  333,
-"startColumn":  9,
-"endLine":  333,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgTrailer.vb#L334",
-"region":  {
-"startLine":  334,
-"startColumn":  9,
-"endLine":  334,
-"endColumn":  79
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L118",
-"region":  {
-"startLine":  118,
-"startColumn":  17,
-"endLine":  118,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L120",
-"region":  {
-"startLine":  120,
-"startColumn":  17,
-"endLine":  120,
-"endColumn":  107
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L122",
-"region":  {
-"startLine":  122,
-"startColumn":  17,
-"endLine":  122,
-"endColumn":  64
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L555",
-"region":  {
-"startLine":  555,
-"startColumn":  17,
-"endLine":  555,
-"endColumn":  148
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L616",
-"region":  {
-"startLine":  616,
-"startColumn":  13,
-"endLine":  616,
-"endColumn":  141
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L634",
-"region":  {
-"startLine":  634,
-"startColumn":  13,
-"endLine":  634,
-"endColumn":  152
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L220",
-"region":  {
-"startLine":  220,
-"startColumn":  13,
-"endLine":  220,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L252",
-"region":  {
-"startLine":  252,
-"startColumn":  25,
-"endLine":  252,
-"endColumn":  111
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L254",
-"region":  {
-"startLine":  254,
-"startColumn":  25,
-"endLine":  254,
-"endColumn":  112
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L256",
-"region":  {
-"startLine":  256,
-"startColumn":  25,
-"endLine":  256,
-"endColumn":  113
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L342",
-"region":  {
-"startLine":  342,
-"startColumn":  45,
-"endLine":  342,
-"endColumn":  118
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L360",
-"region":  {
-"startLine":  360,
-"startColumn":  41,
-"endLine":  360,
-"endColumn":  163
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L589",
-"region":  {
-"startLine":  589,
-"startColumn":  29,
-"endLine":  589,
-"endColumn":  155
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L590",
-"region":  {
-"startLine":  590,
-"startColumn":  29,
-"endLine":  590,
-"endColumn":  149
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L592",
-"region":  {
-"startLine":  592,
-"startColumn":  29,
-"endLine":  592,
-"endColumn":  114
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L610",
-"region":  {
-"startLine":  610,
-"startColumn":  25,
-"endLine":  610,
-"endColumn":  151
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L611",
-"region":  {
-"startLine":  611,
-"startColumn":  25,
-"endLine":  611,
-"endColumn":  145
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L613",
-"region":  {
-"startLine":  613,
-"startColumn":  25,
-"endLine":  613,
-"endColumn":  110
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L628",
-"region":  {
-"startLine":  628,
-"startColumn":  33,
-"endLine":  628,
-"endColumn":  159
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L630",
-"region":  {
-"startLine":  630,
-"startColumn":  33,
-"endLine":  630,
-"endColumn":  153
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L632",
-"region":  {
-"startLine":  632,
-"startColumn":  33,
-"endLine":  632,
-"endColumn":  118
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L798",
-"region":  {
-"startLine":  798,
-"startColumn":  21,
-"endLine":  798,
-"endColumn":  128
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L804",
-"region":  {
-"startLine":  804,
-"startColumn":  21,
-"endLine":  804,
-"endColumn":  130
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L834",
-"region":  {
-"startLine":  834,
-"startColumn":  29,
-"endLine":  834,
-"endColumn":  73
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L844",
-"region":  {
-"startLine":  844,
-"startColumn":  33,
-"endLine":  844,
-"endColumn":  91
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L848",
-"region":  {
-"startLine":  848,
-"startColumn":  29,
-"endLine":  848,
-"endColumn":  73
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L851",
-"region":  {
-"startLine":  851,
-"startColumn":  33,
-"endLine":  851,
-"endColumn":  148
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L853",
-"region":  {
-"startLine":  853,
-"startColumn":  33,
-"endLine":  853,
-"endColumn":  77
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L855",
-"region":  {
-"startLine":  855,
-"startColumn":  33,
-"endLine":  855,
-"endColumn":  194
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L857",
-"region":  {
-"startLine":  857,
-"startColumn":  33,
-"endLine":  857,
-"endColumn":  77
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L861",
-"region":  {
-"startLine":  861,
-"startColumn":  37,
-"endLine":  861,
-"endColumn":  150
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L863",
-"region":  {
-"startLine":  863,
-"startColumn":  37,
-"endLine":  863,
-"endColumn":  81
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L881",
-"region":  {
-"startLine":  881,
-"startColumn":  33,
-"endLine":  881,
-"endColumn":  77
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L883",
-"region":  {
-"startLine":  883,
-"startColumn":  33,
-"endLine":  883,
-"endColumn":  110
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L887",
-"region":  {
-"startLine":  887,
-"startColumn":  33,
-"endLine":  887,
-"endColumn":  77
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L925",
-"region":  {
-"startLine":  925,
-"startColumn":  21,
-"endLine":  925,
-"endColumn":  65
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1063",
-"region":  {
-"startLine":  1063,
-"startColumn":  17,
-"endLine":  1063,
-"endColumn":  109
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1092",
-"region":  {
-"startLine":  1092,
-"startColumn":  37,
-"endLine":  1092,
-"endColumn":  245
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1093",
-"region":  {
-"startLine":  1093,
-"startColumn":  37,
-"endLine":  1093,
-"endColumn":  337
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1094",
-"region":  {
-"startLine":  1094,
-"startColumn":  37,
-"endLine":  1094,
-"endColumn":  309
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1095",
-"region":  {
-"startLine":  1095,
-"startColumn":  37,
-"endLine":  1095,
-"endColumn":  167
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1096",
-"region":  {
-"startLine":  1096,
-"startColumn":  37,
-"endLine":  1096,
-"endColumn":  289
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1097",
-"region":  {
-"startLine":  1097,
-"startColumn":  37,
-"endLine":  1097,
-"endColumn":  176
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1098",
-"region":  {
-"startLine":  1098,
-"startColumn":  37,
-"endLine":  1098,
-"endColumn":  242
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1099",
-"region":  {
-"startLine":  1099,
-"startColumn":  37,
-"endLine":  1099,
-"endColumn":  244
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1100",
-"region":  {
-"startLine":  1100,
-"startColumn":  37,
-"endLine":  1100,
-"endColumn":  87
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1117",
-"region":  {
-"startLine":  1117,
-"startColumn":  33,
-"endLine":  1117,
-"endColumn":  98
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1153",
-"region":  {
-"startLine":  1153,
-"startColumn":  41,
-"endLine":  1153,
-"endColumn":  257
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1156",
-"region":  {
-"startLine":  1156,
-"startColumn":  49,
-"endLine":  1156,
-"endColumn":  242
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1157",
-"region":  {
-"startLine":  1157,
-"startColumn":  49,
-"endLine":  1157,
-"endColumn":  265
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1159",
-"region":  {
-"startLine":  1159,
-"startColumn":  49,
-"endLine":  1159,
-"endColumn":  92
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1160",
-"region":  {
-"startLine":  1160,
-"startColumn":  49,
-"endLine":  1160,
-"endColumn":  259
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1162",
-"region":  {
-"startLine":  1162,
-"startColumn":  49,
-"endLine":  1162,
-"endColumn":  248
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1163",
-"region":  {
-"startLine":  1163,
-"startColumn":  49,
-"endLine":  1163,
-"endColumn":  253
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1166",
-"region":  {
-"startLine":  1166,
-"startColumn":  41,
-"endLine":  1166,
-"endColumn":  160
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1167",
-"region":  {
-"startLine":  1167,
-"startColumn":  41,
-"endLine":  1167,
-"endColumn":  236
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1168",
-"region":  {
-"startLine":  1168,
-"startColumn":  41,
-"endLine":  1168,
-"endColumn":  283
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1170",
-"region":  {
-"startLine":  1170,
-"startColumn":  41,
-"endLine":  1170,
-"endColumn":  239
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1171",
-"region":  {
-"startLine":  1171,
-"startColumn":  41,
-"endLine":  1171,
-"endColumn":  264
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1172",
-"region":  {
-"startLine":  1172,
-"startColumn":  41,
-"endLine":  1172,
-"endColumn":  89
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L182",
-"region":  {
-"startLine":  182,
-"startColumn":  13,
-"endLine":  182,
-"endColumn":  116
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L379",
-"region":  {
-"startLine":  379,
-"startColumn":  17,
-"endLine":  379,
-"endColumn":  83
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L75",
-"region":  {
-"startLine":  75,
-"startColumn":  25,
-"endLine":  75,
-"endColumn":  176
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L78",
-"region":  {
-"startLine":  78,
-"startColumn":  21,
-"endLine":  78,
-"endColumn":  179
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L81",
-"region":  {
-"startLine":  81,
-"startColumn":  21,
-"endLine":  81,
-"endColumn":  121
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L91",
-"region":  {
-"startLine":  91,
-"startColumn":  25,
-"endLine":  91,
-"endColumn":  130
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L103",
-"region":  {
-"startLine":  103,
-"startColumn":  25,
-"endLine":  103,
-"endColumn":  181
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L106",
-"region":  {
-"startLine":  106,
-"startColumn":  21,
-"endLine":  106,
-"endColumn":  202
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L109",
-"region":  {
-"startLine":  109,
-"startColumn":  21,
-"endLine":  109,
-"endColumn":  126
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L118",
-"region":  {
-"startLine":  118,
-"startColumn":  25,
-"endLine":  118,
-"endColumn":  125
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L137",
-"region":  {
-"startLine":  137,
-"startColumn":  17,
-"endLine":  137,
-"endColumn":  189
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L140",
-"region":  {
-"startLine":  140,
-"startColumn":  17,
-"endLine":  140,
-"endColumn":  113
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L168",
-"region":  {
-"startLine":  168,
-"startColumn":  21,
-"endLine":  168,
-"endColumn":  179
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L171",
-"region":  {
-"startLine":  171,
-"startColumn":  21,
-"endLine":  171,
-"endColumn":  121
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L181",
-"region":  {
-"startLine":  181,
-"startColumn":  25,
-"endLine":  181,
-"endColumn":  130
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L192",
-"region":  {
-"startLine":  192,
-"startColumn":  21,
-"endLine":  192,
-"endColumn":  202
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L195",
-"region":  {
-"startLine":  195,
-"startColumn":  21,
-"endLine":  195,
-"endColumn":  126
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L204",
-"region":  {
-"startLine":  204,
-"startColumn":  25,
-"endLine":  204,
-"endColumn":  125
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L226",
-"region":  {
-"startLine":  226,
-"startColumn":  29,
-"endLine":  226,
-"endColumn":  214
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L227",
-"region":  {
-"startLine":  227,
-"startColumn":  29,
-"endLine":  227,
-"endColumn":  154
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L228",
-"region":  {
-"startLine":  228,
-"startColumn":  29,
-"endLine":  228,
-"endColumn":  96
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L230",
-"region":  {
-"startLine":  230,
-"startColumn":  25,
-"endLine":  230,
-"endColumn":  343
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L360",
-"region":  {
-"startLine":  360,
-"startColumn":  9,
-"endLine":  360,
-"endColumn":  65
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L361",
-"region":  {
-"startLine":  361,
-"startColumn":  9,
-"endLine":  361,
-"endColumn":  69
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L660",
-"region":  {
-"startLine":  660,
-"startColumn":  25,
-"endLine":  660,
-"endColumn":  157
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L661",
-"region":  {
-"startLine":  661,
-"startColumn":  25,
-"endLine":  661,
-"endColumn":  154
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L662",
-"region":  {
-"startLine":  662,
-"startColumn":  25,
-"endLine":  662,
-"endColumn":  115
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L894",
-"region":  {
-"startLine":  894,
-"startColumn":  13,
-"endLine":  894,
-"endColumn":  249
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L895",
-"region":  {
-"startLine":  895,
-"startColumn":  13,
-"endLine":  895,
-"endColumn":  393
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L896",
-"region":  {
-"startLine":  896,
-"startColumn":  13,
-"endLine":  896,
-"endColumn":  310
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L904",
-"region":  {
-"startLine":  904,
-"startColumn":  25,
-"endLine":  904,
-"endColumn":  250
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L913",
-"region":  {
-"startLine":  913,
-"startColumn":  17,
-"endLine":  913,
-"endColumn":  224
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L111",
+      "Location": "Line 111 Position 9-92"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L160",
+      "Location": "Line 160 Position 12-59"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L165",
+      "Location": "Line 165 Position 12-59"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L170",
+      "Location": "Line 170 Position 12-59"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L175",
+      "Location": "Line 175 Position 12-59"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L195",
+      "Location": "Line 195 Position 11-91"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L243",
+      "Location": "Line 243 Position 11-91"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L288",
+      "Location": "Line 288 Position 10-57"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L294",
+      "Location": "Line 294 Position 10-57"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L300",
+      "Location": "Line 300 Position 10-57"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L306",
+      "Location": "Line 306 Position 10-57"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L866",
+      "Location": "Line 866 Position 4-38"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L91",
+      "Location": "Line 91 Position 8-88"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L918",
+      "Location": "Line 918 Position 5-54"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L130",
+      "Location": "Line 130 Position 13-55"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L145",
+      "Location": "Line 145 Position 17-66"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L150",
+      "Location": "Line 150 Position 21-93"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L151",
+      "Location": "Line 151 Position 21-101"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L152",
+      "Location": "Line 152 Position 21-89"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L153",
+      "Location": "Line 153 Position 21-93"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L156",
+      "Location": "Line 156 Position 17-66"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L162",
+      "Location": "Line 162 Position 17-66"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L170",
+      "Location": "Line 170 Position 17-66"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L192",
+      "Location": "Line 192 Position 17-66"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L198",
+      "Location": "Line 198 Position 17-66"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L200",
+      "Location": "Line 200 Position 17-139"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L214",
+      "Location": "Line 214 Position 17-66"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L244",
+      "Location": "Line 244 Position 17-66"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L258",
+      "Location": "Line 258 Position 17-66"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L269",
+      "Location": "Line 269 Position 17-66"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L297",
+      "Location": "Line 297 Position 17-66"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L299",
+      "Location": "Line 299 Position 17-138"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L303",
+      "Location": "Line 303 Position 17-178"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L305",
+      "Location": "Line 305 Position 17-66"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L341",
+      "Location": "Line 341 Position 17-66"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L343",
+      "Location": "Line 343 Position 17-30"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L353",
+      "Location": "Line 353 Position 21-96"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L358",
+      "Location": "Line 358 Position 17-66"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L377",
+      "Location": "Line 377 Position 17-66"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L397",
+      "Location": "Line 397 Position 17-66"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L404",
+      "Location": "Line 404 Position 25-38"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L424",
+      "Location": "Line 424 Position 17-66"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L432",
+      "Location": "Line 432 Position 25-38"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L437",
+      "Location": "Line 437 Position 33-76"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L441",
+      "Location": "Line 441 Position 33-91"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L475",
+      "Location": "Line 475 Position 17-66"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L500",
+      "Location": "Line 500 Position 17-66"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L503",
+      "Location": "Line 503 Position 17-163"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L507",
+      "Location": "Line 507 Position 21-34"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L510",
+      "Location": "Line 510 Position 25-67"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L520",
+      "Location": "Line 520 Position 25-68"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L527",
+      "Location": "Line 527 Position 17-66"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L531",
+      "Location": "Line 531 Position 21-34"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L533",
+      "Location": "Line 533 Position 21-64"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L548",
+      "Location": "Line 548 Position 17-66"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L553",
+      "Location": "Line 553 Position 21-34"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L555",
+      "Location": "Line 555 Position 21-65"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L561",
+      "Location": "Line 561 Position 29-78"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L591",
+      "Location": "Line 591 Position 21-70"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L596",
+      "Location": "Line 596 Position 25-67"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L624",
+      "Location": "Line 624 Position 13-55"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L792",
+      "Location": "Line 792 Position 17-84"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L794",
+      "Location": "Line 794 Position 17-107"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L805",
+      "Location": "Line 805 Position 17-66"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L862",
+      "Location": "Line 862 Position 17-45"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L876",
+      "Location": "Line 876 Position 17-44"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L890",
+      "Location": "Line 890 Position 17-43"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L909",
+      "Location": "Line 909 Position 17-44"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMPA.vb#L50",
+      "Location": "Line 50 Position 13-61"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMPA.vb#L74",
+      "Location": "Line 74 Position 17-66"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMPA.vb#L83",
+      "Location": "Line 83 Position 21-70"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMPA.vb#L90",
+      "Location": "Line 90 Position 25-74"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeMPDB.vb#L50",
+      "Location": "Line 50 Position 13-61"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeMPDB.vb#L73",
+      "Location": "Line 73 Position 13-65"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeMPDB.vb#L80",
+      "Location": "Line 80 Position 17-69"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeMPDB.vb#L92",
+      "Location": "Line 92 Position 25-77"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L174",
+      "Location": "Line 174 Position 21-34"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L194",
+      "Location": "Line 194 Position 21-34"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L97",
+      "Location": "Line 97 Position 13-80"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L99",
+      "Location": "Line 99 Position 13-103"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L106",
+      "Location": "Line 106 Position 37-86"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L134",
+      "Location": "Line 134 Position 13-62"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L149",
+      "Location": "Line 149 Position 21-70"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L176",
+      "Location": "Line 176 Position 37-86"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L48",
+      "Location": "Line 48 Position 13-55"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L73",
+      "Location": "Line 73 Position 13-62"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L88",
+      "Location": "Line 88 Position 21-70"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L96",
+      "Location": "Line 96 Position 37-86"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeYouTube.vb#L138",
+      "Location": "Line 138 Position 17-70"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeYouTube.vb#L145",
+      "Location": "Line 145 Position 17-77"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeYouTube.vb#L146",
+      "Location": "Line 146 Position 17-70"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeYouTube.vb#L254",
+      "Location": "Line 254 Position 29-82"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeYouTube.vb#L260",
+      "Location": "Line 260 Position 29-82"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeYouTube.vb#L329",
+      "Location": "Line 329 Position 13-100"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeYouTube.vb#L60",
+      "Location": "Line 60 Position 13-51"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1156",
+      "Location": "Line 1156 Position 13-74"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1164",
+      "Location": "Line 1164 Position 13-71"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L269",
+      "Location": "Line 269 Position 17-114"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L320",
+      "Location": "Line 320 Position 21-118"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L472",
+      "Location": "Line 472 Position 9-67"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L473",
+      "Location": "Line 473 Position 9-67"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L474",
+      "Location": "Line 474 Position 9-67"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L518",
+      "Location": "Line 518 Position 9-128"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L522",
+      "Location": "Line 522 Position 9-34"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgTrailer.vb#L325",
+      "Location": "Line 325 Position 17-130"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgTrailer.vb#L333",
+      "Location": "Line 333 Position 9-71"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgTrailer.vb#L334",
+      "Location": "Line 334 Position 9-79"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L118",
+      "Location": "Line 118 Position 17-55"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L120",
+      "Location": "Line 120 Position 17-107"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L122",
+      "Location": "Line 122 Position 17-64"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L555",
+      "Location": "Line 555 Position 17-148"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L616",
+      "Location": "Line 616 Position 13-141"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L634",
+      "Location": "Line 634 Position 13-152"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1063",
+      "Location": "Line 1063 Position 17-109"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1092",
+      "Location": "Line 1092 Position 37-245"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1093",
+      "Location": "Line 1093 Position 37-337"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1094",
+      "Location": "Line 1094 Position 37-309"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1095",
+      "Location": "Line 1095 Position 37-167"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1096",
+      "Location": "Line 1096 Position 37-289"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1097",
+      "Location": "Line 1097 Position 37-176"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1098",
+      "Location": "Line 1098 Position 37-242"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1099",
+      "Location": "Line 1099 Position 37-244"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1100",
+      "Location": "Line 1100 Position 37-87"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1117",
+      "Location": "Line 1117 Position 33-98"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1153",
+      "Location": "Line 1153 Position 41-257"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1156",
+      "Location": "Line 1156 Position 49-242"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1157",
+      "Location": "Line 1157 Position 49-265"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1159",
+      "Location": "Line 1159 Position 49-92"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1160",
+      "Location": "Line 1160 Position 49-259"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1162",
+      "Location": "Line 1162 Position 49-248"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1163",
+      "Location": "Line 1163 Position 49-253"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1166",
+      "Location": "Line 1166 Position 41-160"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1167",
+      "Location": "Line 1167 Position 41-236"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1168",
+      "Location": "Line 1168 Position 41-283"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1170",
+      "Location": "Line 1170 Position 41-239"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1171",
+      "Location": "Line 1171 Position 41-264"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1172",
+      "Location": "Line 1172 Position 41-89"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L220",
+      "Location": "Line 220 Position 13-55"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L252",
+      "Location": "Line 252 Position 25-111"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L254",
+      "Location": "Line 254 Position 25-112"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L256",
+      "Location": "Line 256 Position 25-113"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L342",
+      "Location": "Line 342 Position 45-118"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L360",
+      "Location": "Line 360 Position 41-163"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L589",
+      "Location": "Line 589 Position 29-155"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L590",
+      "Location": "Line 590 Position 29-149"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L592",
+      "Location": "Line 592 Position 29-114"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L610",
+      "Location": "Line 610 Position 25-151"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L611",
+      "Location": "Line 611 Position 25-145"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L613",
+      "Location": "Line 613 Position 25-110"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L628",
+      "Location": "Line 628 Position 33-159"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L630",
+      "Location": "Line 630 Position 33-153"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L632",
+      "Location": "Line 632 Position 33-118"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L798",
+      "Location": "Line 798 Position 21-128"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L804",
+      "Location": "Line 804 Position 21-130"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L834",
+      "Location": "Line 834 Position 29-73"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L844",
+      "Location": "Line 844 Position 33-91"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L848",
+      "Location": "Line 848 Position 29-73"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L851",
+      "Location": "Line 851 Position 33-148"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L853",
+      "Location": "Line 853 Position 33-77"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L855",
+      "Location": "Line 855 Position 33-194"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L857",
+      "Location": "Line 857 Position 33-77"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L861",
+      "Location": "Line 861 Position 37-150"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L863",
+      "Location": "Line 863 Position 37-81"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L881",
+      "Location": "Line 881 Position 33-77"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L883",
+      "Location": "Line 883 Position 33-110"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L887",
+      "Location": "Line 887 Position 33-77"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L925",
+      "Location": "Line 925 Position 21-65"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L182",
+      "Location": "Line 182 Position 13-116"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L379",
+      "Location": "Line 379 Position 17-83"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L103",
+      "Location": "Line 103 Position 25-181"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L106",
+      "Location": "Line 106 Position 21-202"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L109",
+      "Location": "Line 109 Position 21-126"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L118",
+      "Location": "Line 118 Position 25-125"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L137",
+      "Location": "Line 137 Position 17-189"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L140",
+      "Location": "Line 140 Position 17-113"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L168",
+      "Location": "Line 168 Position 21-179"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L171",
+      "Location": "Line 171 Position 21-121"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L181",
+      "Location": "Line 181 Position 25-130"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L192",
+      "Location": "Line 192 Position 21-202"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L195",
+      "Location": "Line 195 Position 21-126"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L204",
+      "Location": "Line 204 Position 25-125"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L226",
+      "Location": "Line 226 Position 29-214"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L227",
+      "Location": "Line 227 Position 29-154"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L228",
+      "Location": "Line 228 Position 29-96"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L230",
+      "Location": "Line 230 Position 25-343"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L360",
+      "Location": "Line 360 Position 9-65"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L361",
+      "Location": "Line 361 Position 9-69"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L660",
+      "Location": "Line 660 Position 25-157"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L661",
+      "Location": "Line 661 Position 25-154"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L662",
+      "Location": "Line 662 Position 25-115"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L75",
+      "Location": "Line 75 Position 25-176"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L78",
+      "Location": "Line 78 Position 21-179"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L81",
+      "Location": "Line 81 Position 21-121"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L894",
+      "Location": "Line 894 Position 13-249"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L895",
+      "Location": "Line 895 Position 13-393"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L896",
+      "Location": "Line 896 Position 13-310"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L904",
+      "Location": "Line 904 Position 25-250"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L91",
+      "Location": "Line 91 Position 25-130"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L913",
+      "Location": "Line 913 Position 17-224"
+    }
+  ]
 }

@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S6562",
-"message":  "Provide the "DateTimeKind" when creating this object.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S6588.cs#L7",
-"region":  {
-"startLine":  7,
-"startColumn":  37,
-"endLine":  7,
-"endColumn":  61
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6562",
+      "Message": "Provide the \u0022DateTimeKind\u0022 when creating this object.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S6588.cs#L7",
+      "Location": "Line 7 Position 37-61"
+    }
+  ]
 }

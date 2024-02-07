@@ -1,56 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S3366",
-"message":  "Make sure the use of 'this' doesn't expose partially-constructed instances of this class in multi-threaded environments.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteMetricsExtension.cs#L71",
-"region":  {
-"startLine":  71,
-"startColumn":  46,
-"endLine":  71,
-"endColumn":  50
-}
-}
-},
-{
-"id":  "S3366",
-"message":  "Make sure the use of 'this' doesn't expose partially-constructed instances of this class in multi-threaded environments.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L100",
-"region":  {
-"startLine":  100,
-"startColumn":  58,
-"endLine":  100,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S3366",
-"message":  "Make sure the use of 'this' doesn't expose partially-constructed instances of this class in multi-threaded environments.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L196",
-"region":  {
-"startLine":  196,
-"startColumn":  59,
-"endLine":  196,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S3366",
-"message":  "Make sure the use of 'this' doesn't expose partially-constructed instances of this class in multi-threaded environments.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L422",
-"region":  {
-"startLine":  422,
-"startColumn":  59,
-"endLine":  422,
-"endColumn":  63
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3366",
+      "Message": "Make sure the use of \u0027this\u0027 doesn\u0027t expose partially-constructed instances of this class in multi-threaded environments.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteMetricsExtension.cs#L71",
+      "Location": "Line 71 Position 46-50"
+    },
+    {
+      "Id": "S3366",
+      "Message": "Make sure the use of \u0027this\u0027 doesn\u0027t expose partially-constructed instances of this class in multi-threaded environments.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L100",
+      "Location": "Line 100 Position 58-62"
+    },
+    {
+      "Id": "S3366",
+      "Message": "Make sure the use of \u0027this\u0027 doesn\u0027t expose partially-constructed instances of this class in multi-threaded environments.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L196",
+      "Location": "Line 196 Position 59-63"
+    },
+    {
+      "Id": "S3366",
+      "Message": "Make sure the use of \u0027this\u0027 doesn\u0027t expose partially-constructed instances of this class in multi-threaded environments.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L422",
+      "Location": "Line 422 Position 59-63"
+    }
+  ]
 }

@@ -1,1460 +1,676 @@
 {
-"issues":  [
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/ContainerRegistration.cs#L45",
-"region":  {
-"startLine":  45,
-"startColumn":  21,
-"endLine":  45,
-"endColumn":  168
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/MultipleRootPathProvidersLocatedException.cs#L119",
-"region":  {
-"startLine":  119,
-"startColumn":  17,
-"endLine":  119,
-"endColumn":  73
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/MultipleRootPathProvidersLocatedException.cs#L122",
-"region":  {
-"startLine":  122,
-"startColumn":  13,
-"endLine":  122,
-"endColumn":  69
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperBase.cs#L275",
-"region":  {
-"startLine":  275,
-"startColumn":  53,
-"endLine":  275,
-"endColumn":  135
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperLocator.cs#L39",
-"region":  {
-"startLine":  39,
-"startColumn":  36,
-"endLine":  39,
-"endColumn":  128
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Configuration/DefaultNancyEnvironmentConfigurator.cs#L73",
-"region":  {
-"startLine":  73,
-"startColumn":  50,
-"endLine":  73,
-"endColumn":  137
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L211",
-"region":  {
-"startLine":  211,
-"startColumn":  76,
-"endLine":  211,
-"endColumn":  114
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Cookies/NancyCookie.cs#L147",
-"region":  {
-"startLine":  147,
-"startColumn":  13,
-"endLine":  147,
-"endColumn":  99
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DefaultSerializerFactory.cs#L72",
-"region":  {
-"startLine":  72,
-"startColumn":  20,
-"endLine":  72,
-"endColumn":  168
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsHook.cs#L98",
-"region":  {
-"startLine":  98,
-"startColumn":  54,
-"endLine":  98,
-"endColumn":  123
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsHook.cs#L214",
-"region":  {
-"startLine":  214,
-"startColumn":  79,
-"endLine":  214,
-"endColumn":  132
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/InteractiveDiagnostics.cs#L66",
-"region":  {
-"startLine":  66,
-"startColumn":  45,
-"endLine":  66,
-"endColumn":  130
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/InteractiveDiagnostics.cs#L178",
-"region":  {
-"startLine":  178,
-"startColumn":  32,
-"endLine":  178,
-"endColumn":  107
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/InteractiveDiagnostics.cs#L200",
-"region":  {
-"startLine":  200,
-"startColumn":  32,
-"endLine":  200,
-"endColumn":  87
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/Modules/InfoModule.cs#L49",
-"region":  {
-"startLine":  49,
-"startColumn":  38,
-"endLine":  49,
-"endColumn":  127
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/Modules/InfoModule.cs#L91",
-"region":  {
-"startLine":  91,
-"startColumn":  17,
-"endLine":  91,
-"endColumn":  87
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/Modules/InfoModule.cs#L103",
-"region":  {
-"startLine":  103,
-"startColumn":  17,
-"endLine":  103,
-"endColumn":  87
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/TestingDiagnosticProvider.cs#L75",
-"region":  {
-"startLine":  75,
-"startColumn":  24,
-"endLine":  75,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/TestingDiagnosticProvider.cs#L110",
-"region":  {
-"startLine":  110,
-"startColumn":  24,
-"endLine":  110,
-"endColumn":  89
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/TestingDiagnosticProvider.cs#L123",
-"region":  {
-"startLine":  123,
-"startColumn":  24,
-"endLine":  123,
-"endColumn":  89
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L80",
-"region":  {
-"startLine":  80,
-"startColumn":  35,
-"endLine":  80,
-"endColumn":  126
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L272",
-"region":  {
-"startLine":  272,
-"startColumn":  26,
-"endLine":  272,
-"endColumn":  54
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L279",
-"region":  {
-"startLine":  279,
-"startColumn":  35,
-"endLine":  279,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L288",
-"region":  {
-"startLine":  288,
-"startColumn":  21,
-"endLine":  288,
-"endColumn":  82
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L288",
-"region":  {
-"startLine":  288,
-"startColumn":  39,
-"endLine":  288,
-"endColumn":  67
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L340",
-"region":  {
-"startLine":  340,
-"startColumn":  26,
-"endLine":  340,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L358",
-"region":  {
-"startLine":  358,
-"startColumn":  59,
-"endLine":  358,
-"endColumn":  87
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L397",
-"region":  {
-"startLine":  397,
-"startColumn":  25,
-"endLine":  397,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L401",
-"region":  {
-"startLine":  401,
-"startColumn":  31,
-"endLine":  401,
-"endColumn":  54
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L419",
-"region":  {
-"startLine":  419,
-"startColumn":  26,
-"endLine":  419,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L459",
-"region":  {
-"startLine":  459,
-"startColumn":  24,
-"endLine":  459,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L462",
-"region":  {
-"startLine":  462,
-"startColumn":  20,
-"endLine":  462,
-"endColumn":  54
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L462",
-"region":  {
-"startLine":  462,
-"startColumn":  30,
-"endLine":  462,
-"endColumn":  53
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L503",
-"region":  {
-"startLine":  503,
-"startColumn":  31,
-"endLine":  503,
-"endColumn":  54
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L546",
-"region":  {
-"startLine":  546,
-"startColumn":  35,
-"endLine":  546,
-"endColumn":  58
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L588",
-"region":  {
-"startLine":  588,
-"startColumn":  20,
-"endLine":  588,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L588",
-"region":  {
-"startLine":  588,
-"startColumn":  35,
-"endLine":  588,
-"endColumn":  58
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L623",
-"region":  {
-"startLine":  623,
-"startColumn":  24,
-"endLine":  623,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L626",
-"region":  {
-"startLine":  626,
-"startColumn":  20,
-"endLine":  626,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L626",
-"region":  {
-"startLine":  626,
-"startColumn":  31,
-"endLine":  626,
-"endColumn":  54
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L666",
-"region":  {
-"startLine":  666,
-"startColumn":  24,
-"endLine":  666,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L669",
-"region":  {
-"startLine":  669,
-"startColumn":  20,
-"endLine":  669,
-"endColumn":  56
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L669",
-"region":  {
-"startLine":  669,
-"startColumn":  32,
-"endLine":  669,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L709",
-"region":  {
-"startLine":  709,
-"startColumn":  24,
-"endLine":  709,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L712",
-"region":  {
-"startLine":  712,
-"startColumn":  20,
-"endLine":  712,
-"endColumn":  58
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L712",
-"region":  {
-"startLine":  712,
-"startColumn":  34,
-"endLine":  712,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L751",
-"region":  {
-"startLine":  751,
-"startColumn":  24,
-"endLine":  751,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L754",
-"region":  {
-"startLine":  754,
-"startColumn":  20,
-"endLine":  754,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L754",
-"region":  {
-"startLine":  754,
-"startColumn":  33,
-"endLine":  754,
-"endColumn":  56
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ErrorHandling/DefaultStatusCodeHandler.cs#L147",
-"region":  {
-"startLine":  147,
-"startColumn":  104,
-"endLine":  147,
-"endColumn":  164
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/ContextExtensions.cs#L51",
-"region":  {
-"startLine":  51,
-"startColumn":  20,
-"endLine":  51,
-"endColumn":  94
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/ContextExtensions.cs#L169",
-"region":  {
-"startLine":  169,
-"startColumn":  39,
-"endLine":  169,
-"endColumn":  78
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L153",
-"region":  {
-"startLine":  153,
-"startColumn":  41,
-"endLine":  153,
-"endColumn":  74
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L484",
-"region":  {
-"startLine":  484,
-"startColumn":  35,
-"endLine":  484,
-"endColumn":  51
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L663",
-"region":  {
-"startLine":  663,
-"startColumn":  53,
-"endLine":  663,
-"endColumn":  65
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L67",
-"region":  {
-"startLine":  67,
-"startColumn":  21,
-"endLine":  67,
-"endColumn":  72
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLink.cs#L277",
-"region":  {
-"startLine":  277,
-"startColumn":  45,
-"endLine":  277,
-"endColumn":  97
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLinkRelation.cs#L148",
-"region":  {
-"startLine":  148,
-"startColumn":  47,
-"endLine":  148,
-"endColumn":  109
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLinkRelation.cs#L164",
-"region":  {
-"startLine":  164,
-"startColumn":  39,
-"endLine":  164,
-"endColumn":  101
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/RequestStream.cs#L409",
-"region":  {
-"startLine":  409,
-"startColumn":  61,
-"endLine":  409,
-"endColumn":  89
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Localization/ResourceBasedTextResource.cs#L47",
-"region":  {
-"startLine":  47,
-"startColumn":  49,
-"endLine":  47,
-"endColumn":  98
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L245",
-"region":  {
-"startLine":  245,
-"startColumn":  24,
-"endLine":  245,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L252",
-"region":  {
-"startLine":  252,
-"startColumn":  24,
-"endLine":  252,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/ModelBindingException.cs#L32",
-"region":  {
-"startLine":  32,
-"startColumn":  20,
-"endLine":  32,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/PropertyBindingException.cs#L30",
-"region":  {
-"startLine":  30,
-"startColumn":  20,
-"endLine":  30,
-"endColumn":  81
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Request.cs#L321",
-"region":  {
-"startLine":  321,
-"startColumn":  21,
-"endLine":  321,
-"endColumn":  134
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Request.cs#L331",
-"region":  {
-"startLine":  331,
-"startColumn":  26,
-"endLine":  331,
-"endColumn":  99
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RequestHeaders.cs#L116",
-"region":  {
-"startLine":  116,
-"startColumn":  63,
-"endLine":  116,
-"endColumn":  89
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RequestHeaders.cs#L216",
-"region":  {
-"startLine":  216,
-"startColumn":  61,
-"endLine":  216,
-"endColumn":  87
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/EmbeddedFileResponse.cs#L89",
-"region":  {
-"startLine":  89,
-"startColumn":  31,
-"endLine":  89,
-"endColumn":  53
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/GenericFileResponse.cs#L121",
-"region":  {
-"startLine":  121,
-"startColumn":  44,
-"endLine":  121,
-"endColumn":  80
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/GenericFileResponse.cs#L122",
-"region":  {
-"startLine":  122,
-"startColumn":  32,
-"endLine":  122,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/GenericFileResponse.cs#L136",
-"region":  {
-"startLine":  136,
-"startColumn":  46,
-"endLine":  136,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/Negotiation/DefaultResponseNegotiator.cs#L136",
-"region":  {
-"startLine":  136,
-"startColumn":  21,
-"endLine":  136,
-"endColumn":  134
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/Negotiation/DefaultResponseNegotiator.cs#L172",
-"region":  {
-"startLine":  172,
-"startColumn":  13,
-"endLine":  172,
-"endColumn":  105
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/Negotiation/DefaultResponseNegotiator.cs#L173",
-"region":  {
-"startLine":  173,
-"startColumn":  13,
-"endLine":  173,
-"endColumn":  103
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/Negotiation/DefaultResponseNegotiator.cs#L174",
-"region":  {
-"startLine":  174,
-"startColumn":  13,
-"endLine":  174,
-"endColumn":  108
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/Negotiation/DefaultResponseNegotiator.cs#L298",
-"region":  {
-"startLine":  298,
-"startColumn":  25,
-"endLine":  298,
-"endColumn":  112
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/DefaultRouteInvoker.cs#L45-L47",
-"region":  {
-"startLine":  45,
-"startColumn":  27,
-"endLine":  47,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/RouteDescription.cs#L97",
-"region":  {
-"startLine":  97,
-"startColumn":  21,
-"endLine":  97,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/RouteDescription.cs#L100",
-"region":  {
-"startLine":  100,
-"startColumn":  17,
-"endLine":  100,
-"endColumn":  72
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/Nodes/CaptureNodeWithDefaultValue.cs#L76",
-"region":  {
-"startLine":  76,
-"startColumn":  53,
-"endLine":  76,
-"endColumn":  125
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/Nodes/GreedyCaptureNode.cs#L72",
-"region":  {
-"startLine":  72,
-"startColumn":  17,
-"endLine":  72,
-"endColumn":  56
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/Nodes/TrieNode.cs#L154",
-"region":  {
-"startLine":  154,
-"startColumn":  34,
-"endLine":  154,
-"endColumn":  147
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/Csrf.cs#L113",
-"region":  {
-"startLine":  113,
-"startColumn":  13,
-"endLine":  113,
-"endColumn":  113
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/Csrf.cs#L115",
-"region":  {
-"startLine":  115,
-"startColumn":  13,
-"endLine":  115,
-"endColumn":  99
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/Csrf.cs#L117",
-"region":  {
-"startLine":  117,
-"startColumn":  13,
-"endLine":  117,
-"endColumn":  133
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Session/CookieBasedSessions.cs#L147",
-"region":  {
-"startLine":  147,
-"startColumn":  52,
-"endLine":  147,
-"endColumn":  125
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L587",
-"region":  {
-"startLine":  587,
-"startColumn":  20,
-"endLine":  587,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L592",
-"region":  {
-"startLine":  592,
-"startColumn":  20,
-"endLine":  592,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L615",
-"region":  {
-"startLine":  615,
-"startColumn":  20,
-"endLine":  615,
-"endColumn":  78
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L620",
-"region":  {
-"startLine":  620,
-"startColumn":  20,
-"endLine":  620,
-"endColumn":  78
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L644",
-"region":  {
-"startLine":  644,
-"startColumn":  20,
-"endLine":  644,
-"endColumn":  76
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L649",
-"region":  {
-"startLine":  649,
-"startColumn":  20,
-"endLine":  649,
-"endColumn":  76
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L654",
-"region":  {
-"startLine":  654,
-"startColumn":  20,
-"endLine":  654,
-"endColumn":  116
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L659",
-"region":  {
-"startLine":  659,
-"startColumn":  20,
-"endLine":  659,
-"endColumn":  116
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L682",
-"region":  {
-"startLine":  682,
-"startColumn":  20,
-"endLine":  682,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L687",
-"region":  {
-"startLine":  687,
-"startColumn":  20,
-"endLine":  687,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L710",
-"region":  {
-"startLine":  710,
-"startColumn":  20,
-"endLine":  710,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L715",
-"region":  {
-"startLine":  715,
-"startColumn":  20,
-"endLine":  715,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L748",
-"region":  {
-"startLine":  748,
-"startColumn":  20,
-"endLine":  748,
-"endColumn":  82
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L753",
-"region":  {
-"startLine":  753,
-"startColumn":  20,
-"endLine":  753,
-"endColumn":  82
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1605",
-"region":  {
-"startLine":  1605,
-"startColumn":  49,
-"endLine":  1605,
-"endColumn":  154
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1616",
-"region":  {
-"startLine":  1616,
-"startColumn":  42,
-"endLine":  1616,
-"endColumn":  199
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Url.cs#L226",
-"region":  {
-"startLine":  226,
-"startColumn":  23,
-"endLine":  226,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/DefaultViewLocator.cs#L191",
-"region":  {
-"startLine":  191,
-"startColumn":  20,
-"endLine":  191,
-"endColumn":  215
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/ResourceViewLocationProvider.cs#L98",
-"region":  {
-"startLine":  98,
-"startColumn":  21,
-"endLine":  98,
-"endColumn":  139
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/NancyViewEngineHost.cs#L90",
-"region":  {
-"startLine":  90,
-"startColumn":  20,
-"endLine":  90,
-"endColumn":  129
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L53-L56",
-"region":  {
-"startLine":  53,
-"startColumn":  13,
-"endLine":  56,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L620",
-"region":  {
-"startLine":  620,
-"startColumn":  28,
-"endLine":  620,
-"endColumn":  90
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/ViewNotFoundException.cs#L55-L62",
-"region":  {
-"startLine":  55,
-"startColumn":  28,
-"endLine":  62,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/ViewNotFoundException.cs#L76-L80",
-"region":  {
-"startLine":  76,
-"startColumn":  28,
-"endLine":  80,
-"endColumn":  41
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/ContainerRegistration.cs#L45",
+      "Location": "Line 45 Position 21-168"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/MultipleRootPathProvidersLocatedException.cs#L119",
+      "Location": "Line 119 Position 17-73"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/MultipleRootPathProvidersLocatedException.cs#L122",
+      "Location": "Line 122 Position 13-69"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperBase.cs#L275",
+      "Location": "Line 275 Position 53-135"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperLocator.cs#L39",
+      "Location": "Line 39 Position 36-128"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Configuration/DefaultNancyEnvironmentConfigurator.cs#L73",
+      "Location": "Line 73 Position 50-137"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L211",
+      "Location": "Line 211 Position 76-114"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Cookies/NancyCookie.cs#L147",
+      "Location": "Line 147 Position 13-99"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DefaultSerializerFactory.cs#L72",
+      "Location": "Line 72 Position 20-168"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsHook.cs#L214",
+      "Location": "Line 214 Position 79-132"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsHook.cs#L98",
+      "Location": "Line 98 Position 54-123"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/InteractiveDiagnostics.cs#L178",
+      "Location": "Line 178 Position 32-107"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/InteractiveDiagnostics.cs#L200",
+      "Location": "Line 200 Position 32-87"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/InteractiveDiagnostics.cs#L66",
+      "Location": "Line 66 Position 45-130"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/Modules/InfoModule.cs#L103",
+      "Location": "Line 103 Position 17-87"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/Modules/InfoModule.cs#L49",
+      "Location": "Line 49 Position 38-127"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/Modules/InfoModule.cs#L91",
+      "Location": "Line 91 Position 17-87"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/TestingDiagnosticProvider.cs#L110",
+      "Location": "Line 110 Position 24-89"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/TestingDiagnosticProvider.cs#L123",
+      "Location": "Line 123 Position 24-89"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/TestingDiagnosticProvider.cs#L75",
+      "Location": "Line 75 Position 24-57"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L272",
+      "Location": "Line 272 Position 26-54"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L279",
+      "Location": "Line 279 Position 35-63"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L288",
+      "Location": "Line 288 Position 21-82"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L288",
+      "Location": "Line 288 Position 39-67"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L340",
+      "Location": "Line 340 Position 26-66"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L358",
+      "Location": "Line 358 Position 59-87"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L397",
+      "Location": "Line 397 Position 25-62"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L401",
+      "Location": "Line 401 Position 31-54"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L419",
+      "Location": "Line 419 Position 26-62"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L459",
+      "Location": "Line 459 Position 24-59"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L462",
+      "Location": "Line 462 Position 20-54"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L462",
+      "Location": "Line 462 Position 30-53"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L503",
+      "Location": "Line 503 Position 31-54"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L546",
+      "Location": "Line 546 Position 35-58"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L588",
+      "Location": "Line 588 Position 20-59"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L588",
+      "Location": "Line 588 Position 35-58"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L623",
+      "Location": "Line 623 Position 24-59"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L626",
+      "Location": "Line 626 Position 20-55"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L626",
+      "Location": "Line 626 Position 31-54"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L666",
+      "Location": "Line 666 Position 24-60"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L669",
+      "Location": "Line 669 Position 20-56"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L669",
+      "Location": "Line 669 Position 32-55"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L709",
+      "Location": "Line 709 Position 24-61"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L712",
+      "Location": "Line 712 Position 20-58"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L712",
+      "Location": "Line 712 Position 34-57"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L751",
+      "Location": "Line 751 Position 24-60"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L754",
+      "Location": "Line 754 Position 20-57"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L754",
+      "Location": "Line 754 Position 33-56"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L80",
+      "Location": "Line 80 Position 35-126"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ErrorHandling/DefaultStatusCodeHandler.cs#L147",
+      "Location": "Line 147 Position 104-164"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/ContextExtensions.cs#L169",
+      "Location": "Line 169 Position 39-78"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/ContextExtensions.cs#L51",
+      "Location": "Line 51 Position 20-94"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L153",
+      "Location": "Line 153 Position 41-74"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L484",
+      "Location": "Line 484 Position 35-51"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L663",
+      "Location": "Line 663 Position 53-65"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L67",
+      "Location": "Line 67 Position 21-72"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLink.cs#L277",
+      "Location": "Line 277 Position 45-97"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLinkRelation.cs#L148",
+      "Location": "Line 148 Position 47-109"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLinkRelation.cs#L164",
+      "Location": "Line 164 Position 39-101"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/RequestStream.cs#L409",
+      "Location": "Line 409 Position 61-89"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Localization/ResourceBasedTextResource.cs#L47",
+      "Location": "Line 47 Position 49-98"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L245",
+      "Location": "Line 245 Position 24-63"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L252",
+      "Location": "Line 252 Position 24-66"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/ModelBindingException.cs#L32",
+      "Location": "Line 32 Position 20-62"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/PropertyBindingException.cs#L30",
+      "Location": "Line 30 Position 20-81"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Request.cs#L321",
+      "Location": "Line 321 Position 21-134"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Request.cs#L331",
+      "Location": "Line 331 Position 26-99"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RequestHeaders.cs#L116",
+      "Location": "Line 116 Position 63-89"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RequestHeaders.cs#L216",
+      "Location": "Line 216 Position 61-87"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/EmbeddedFileResponse.cs#L89",
+      "Location": "Line 89 Position 31-53"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/GenericFileResponse.cs#L121",
+      "Location": "Line 121 Position 44-80"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/GenericFileResponse.cs#L122",
+      "Location": "Line 122 Position 32-62"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/GenericFileResponse.cs#L136",
+      "Location": "Line 136 Position 46-63"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/Negotiation/DefaultResponseNegotiator.cs#L136",
+      "Location": "Line 136 Position 21-134"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/Negotiation/DefaultResponseNegotiator.cs#L172",
+      "Location": "Line 172 Position 13-105"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/Negotiation/DefaultResponseNegotiator.cs#L173",
+      "Location": "Line 173 Position 13-103"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/Negotiation/DefaultResponseNegotiator.cs#L174",
+      "Location": "Line 174 Position 13-108"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/Negotiation/DefaultResponseNegotiator.cs#L298",
+      "Location": "Line 298 Position 25-112"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/DefaultRouteInvoker.cs#L45-L47",
+      "Location": "Lines 45-47 Position 27-55"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/RouteDescription.cs#L100",
+      "Location": "Line 100 Position 17-72"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/RouteDescription.cs#L97",
+      "Location": "Line 97 Position 21-62"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/Nodes/CaptureNodeWithDefaultValue.cs#L76",
+      "Location": "Line 76 Position 53-125"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/Nodes/GreedyCaptureNode.cs#L72",
+      "Location": "Line 72 Position 17-56"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/Nodes/TrieNode.cs#L154",
+      "Location": "Line 154 Position 34-147"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/Csrf.cs#L113",
+      "Location": "Line 113 Position 13-113"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/Csrf.cs#L115",
+      "Location": "Line 115 Position 13-99"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/Csrf.cs#L117",
+      "Location": "Line 117 Position 13-133"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Session/CookieBasedSessions.cs#L147",
+      "Location": "Line 147 Position 52-125"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1605",
+      "Location": "Line 1605 Position 49-154"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1616",
+      "Location": "Line 1616 Position 42-199"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L587",
+      "Location": "Line 587 Position 20-60"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L592",
+      "Location": "Line 592 Position 20-60"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L615",
+      "Location": "Line 615 Position 20-78"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L620",
+      "Location": "Line 620 Position 20-78"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L644",
+      "Location": "Line 644 Position 20-76"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L649",
+      "Location": "Line 649 Position 20-76"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L654",
+      "Location": "Line 654 Position 20-116"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L659",
+      "Location": "Line 659 Position 20-116"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L682",
+      "Location": "Line 682 Position 20-60"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L687",
+      "Location": "Line 687 Position 20-60"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L710",
+      "Location": "Line 710 Position 20-60"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L715",
+      "Location": "Line 715 Position 20-60"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L748",
+      "Location": "Line 748 Position 20-82"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L753",
+      "Location": "Line 753 Position 20-82"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Url.cs#L226",
+      "Location": "Line 226 Position 23-60"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/DefaultViewLocator.cs#L191",
+      "Location": "Line 191 Position 20-215"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/ResourceViewLocationProvider.cs#L98",
+      "Location": "Line 98 Position 21-139"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/NancyViewEngineHost.cs#L90",
+      "Location": "Line 90 Position 20-129"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L53-L56",
+      "Location": "Lines 53-56 Position 13-63"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L620",
+      "Location": "Line 620 Position 28-90"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/ViewNotFoundException.cs#L55-L62",
+      "Location": "Lines 55-62 Position 28-37"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/ViewNotFoundException.cs#L76-L80",
+      "Location": "Lines 76-80 Position 28-41"
+    }
+  ]
 }

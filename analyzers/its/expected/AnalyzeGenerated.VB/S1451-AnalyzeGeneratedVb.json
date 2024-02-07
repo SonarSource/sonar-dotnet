@@ -1,108 +1,52 @@
 {
-"issues":  [
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.VB/CompilerGenerated.vb#L1",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.VB/GeneratedCode.vb#L1",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.VB/Module.g.vb#L1",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.VB/Module1.vb#L1",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.VB/NotIgnored.vb#L1",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.VB/Region.vb#L1",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.VB/TEMPORARYGENERATEDFILE_Class.vb#L1",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "Replaced-Temporary-Path/.NETFramework,Version=v4.5.2.AssemblyAttributes.vb",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AnalyzeGenerated.VB/obj/Debug/.NETFramework,Version=v4.5.2.AssemblyAttributes.vb#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.VB/CompilerGenerated.vb#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.VB/GeneratedCode.vb#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.VB/Module.g.vb#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.VB/Module1.vb#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.VB/NotIgnored.vb#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.VB/Region.vb#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.VB/TEMPORARYGENERATEDFILE_Class.vb#L1",
+      "Location": "Line 1 Position 1-1"
+    }
+  ]
 }

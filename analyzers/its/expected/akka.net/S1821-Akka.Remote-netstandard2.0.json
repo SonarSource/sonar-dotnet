@@ -1,95 +1,46 @@
 {
-"issues":  [
-{
-"id":  "S1821",
-"message":  "Refactor the code to eliminate this nested 'switch'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L839",
-"region":  {
-"startLine":  839,
-"startColumn":  25,
-"endLine":  839,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S1821",
-"message":  "Refactor the code to eliminate this nested 'switch'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L848",
-"region":  {
-"startLine":  848,
-"startColumn":  25,
-"endLine":  848,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S1821",
-"message":  "Refactor the code to eliminate this nested 'switch'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L907",
-"region":  {
-"startLine":  907,
-"startColumn":  29,
-"endLine":  907,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S1821",
-"message":  "Refactor the code to eliminate this nested 'switch'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L955",
-"region":  {
-"startLine":  955,
-"startColumn":  29,
-"endLine":  955,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S1821",
-"message":  "Refactor the code to eliminate this nested 'switch'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L1009",
-"region":  {
-"startLine":  1009,
-"startColumn":  29,
-"endLine":  1009,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S1821",
-"message":  "Refactor the code to eliminate this nested 'switch'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L1019",
-"region":  {
-"startLine":  1019,
-"startColumn":  37,
-"endLine":  1019,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S1821",
-"message":  "Refactor the code to eliminate this nested 'switch'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L1047",
-"region":  {
-"startLine":  1047,
-"startColumn":  33,
-"endLine":  1047,
-"endColumn":  39
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1821",
+      "Message": "Refactor the code to eliminate this nested \u0027switch\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L1009",
+      "Location": "Line 1009 Position 29-35"
+    },
+    {
+      "Id": "S1821",
+      "Message": "Refactor the code to eliminate this nested \u0027switch\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L1019",
+      "Location": "Line 1019 Position 37-43"
+    },
+    {
+      "Id": "S1821",
+      "Message": "Refactor the code to eliminate this nested \u0027switch\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L1047",
+      "Location": "Line 1047 Position 33-39"
+    },
+    {
+      "Id": "S1821",
+      "Message": "Refactor the code to eliminate this nested \u0027switch\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L839",
+      "Location": "Line 839 Position 25-31"
+    },
+    {
+      "Id": "S1821",
+      "Message": "Refactor the code to eliminate this nested \u0027switch\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L848",
+      "Location": "Line 848 Position 25-31"
+    },
+    {
+      "Id": "S1821",
+      "Message": "Refactor the code to eliminate this nested \u0027switch\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L907",
+      "Location": "Line 907 Position 29-35"
+    },
+    {
+      "Id": "S1821",
+      "Message": "Refactor the code to eliminate this nested \u0027switch\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L955",
+      "Location": "Line 955 Position 29-35"
+    }
+  ]
 }

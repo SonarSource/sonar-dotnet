@@ -1,511 +1,238 @@
 {
-"issues":  [
-{
-"id":  "S2259",
-"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmInfoSettingsHolder.vb#L37",
-"region":  {
-"startLine":  37,
-"startColumn":  32,
-"endLine":  37,
-"endColumn":  163
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.ScraperOrder = order + 1)' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmInfoSettingsHolder.vb#L39",
-"region":  {
-"startLine":  39,
-"startColumn":  13,
-"endLine":  39,
-"endColumn":  115
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmInfoSettingsHolder.vb#L40",
-"region":  {
-"startLine":  40,
-"startColumn":  13,
-"endLine":  40,
-"endColumn":  144
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmInfoSettingsHolder.vb#L47",
-"region":  {
-"startLine":  47,
-"startColumn":  32,
-"endLine":  47,
-"endColumn":  163
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.ScraperOrder = order - 1)' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmInfoSettingsHolder.vb#L49",
-"region":  {
-"startLine":  49,
-"startColumn":  13,
-"endLine":  49,
-"endColumn":  115
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmInfoSettingsHolder.vb#L50",
-"region":  {
-"startLine":  50,
-"startColumn":  13,
-"endLine":  50,
-"endColumn":  144
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmInfoSettingsHolder.vb#L188",
-"region":  {
-"startLine":  188,
-"startColumn":  32,
-"endLine":  188,
-"endColumn":  163
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmMediaSettingsHolder.vb#L37",
-"region":  {
-"startLine":  37,
-"startColumn":  32,
-"endLine":  37,
-"endColumn":  163
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.PostScraperOrder = order + 1)' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmMediaSettingsHolder.vb#L39",
-"region":  {
-"startLine":  39,
-"startColumn":  13,
-"endLine":  39,
-"endColumn":  119
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmMediaSettingsHolder.vb#L40",
-"region":  {
-"startLine":  40,
-"startColumn":  13,
-"endLine":  40,
-"endColumn":  144
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmMediaSettingsHolder.vb#L47",
-"region":  {
-"startLine":  47,
-"startColumn":  32,
-"endLine":  47,
-"endColumn":  163
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.PostScraperOrder = order - 1)' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmMediaSettingsHolder.vb#L49",
-"region":  {
-"startLine":  49,
-"startColumn":  13,
-"endLine":  49,
-"endColumn":  119
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmMediaSettingsHolder.vb#L50",
-"region":  {
-"startLine":  50,
-"startColumn":  13,
-"endLine":  50,
-"endColumn":  144
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmMediaSettingsHolder.vb#L120",
-"region":  {
-"startLine":  120,
-"startColumn":  32,
-"endLine":  120,
-"endColumn":  163
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVInfoSettingsHolder.vb#L37",
-"region":  {
-"startLine":  37,
-"startColumn":  32,
-"endLine":  37,
-"endColumn":  163
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.ScraperOrder = order + 1)' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVInfoSettingsHolder.vb#L39",
-"region":  {
-"startLine":  39,
-"startColumn":  13,
-"endLine":  39,
-"endColumn":  115
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVInfoSettingsHolder.vb#L40",
-"region":  {
-"startLine":  40,
-"startColumn":  13,
-"endLine":  40,
-"endColumn":  144
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVInfoSettingsHolder.vb#L47",
-"region":  {
-"startLine":  47,
-"startColumn":  32,
-"endLine":  47,
-"endColumn":  163
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.ScraperOrder = order - 1)' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVInfoSettingsHolder.vb#L49",
-"region":  {
-"startLine":  49,
-"startColumn":  13,
-"endLine":  49,
-"endColumn":  115
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVInfoSettingsHolder.vb#L50",
-"region":  {
-"startLine":  50,
-"startColumn":  13,
-"endLine":  50,
-"endColumn":  144
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVInfoSettingsHolder.vb#L67",
-"region":  {
-"startLine":  67,
-"startColumn":  32,
-"endLine":  67,
-"endColumn":  163
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVMediaSettingsHolder.vb#L37",
-"region":  {
-"startLine":  37,
-"startColumn":  32,
-"endLine":  37,
-"endColumn":  163
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.ScraperOrder = order + 1)' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVMediaSettingsHolder.vb#L39",
-"region":  {
-"startLine":  39,
-"startColumn":  13,
-"endLine":  39,
-"endColumn":  115
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVMediaSettingsHolder.vb#L40",
-"region":  {
-"startLine":  40,
-"startColumn":  13,
-"endLine":  40,
-"endColumn":  144
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVMediaSettingsHolder.vb#L47",
-"region":  {
-"startLine":  47,
-"startColumn":  32,
-"endLine":  47,
-"endColumn":  163
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.ScraperOrder = order - 1)' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVMediaSettingsHolder.vb#L49",
-"region":  {
-"startLine":  49,
-"startColumn":  13,
-"endLine":  49,
-"endColumn":  115
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVMediaSettingsHolder.vb#L50",
-"region":  {
-"startLine":  50,
-"startColumn":  13,
-"endLine":  50,
-"endColumn":  144
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVMediaSettingsHolder.vb#L67",
-"region":  {
-"startLine":  67,
-"startColumn":  32,
-"endLine":  67,
-"endColumn":  163
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'ModulesManager.Instance.externalScrapersModules.OrderBy(Function(y) y.ScraperOrder).FirstOrDefault(Function(e) e.ProcessorModule.IsScraper AndAlso e.ProcessorModule.ScraperEnabled)' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L560",
-"region":  {
-"startLine":  560,
-"startColumn":  21,
-"endLine":  560,
-"endColumn":  201
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'sResults' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L336",
-"region":  {
-"startLine":  336,
-"startColumn":  24,
-"endLine":  336,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'sResults' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L347",
-"region":  {
-"startLine":  347,
-"startColumn":  28,
-"endLine":  347,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'sResults' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L358",
-"region":  {
-"startLine":  358,
-"startColumn":  54,
-"endLine":  358,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'sResults.OrderBy(Function(s) s.Lev).FirstOrDefault(Function(s) s.Language.ShortLang = "en")' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L358",
-"region":  {
-"startLine":  358,
-"startColumn":  54,
-"endLine":  358,
-"endColumn":  145
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'DefaultImages.SeasonImageList.FirstOrDefault(Function(s) s.Season = Me.SelSeason)' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1018",
-"region":  {
-"startLine":  1018,
-"startColumn":  39,
-"endLine":  1018,
-"endColumn":  120
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'Scraper.TVDBImages.SeasonImageList.FirstOrDefault(Function(s) s.Season = Me.SelSeason)' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1019",
-"region":  {
-"startLine":  1019,
-"startColumn":  17,
-"endLine":  1019,
-"endColumn":  103
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'DefaultImages.SeasonImageList.FirstOrDefault(Function(s) s.Season = Me.SelSeason)' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1022",
-"region":  {
-"startLine":  1022,
-"startColumn":  51,
-"endLine":  1022,
-"endColumn":  132
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'Scraper.TVDBImages.SeasonImageList.FirstOrDefault(Function(s) s.Season = Me.SelSeason)' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1023",
-"region":  {
-"startLine":  1023,
-"startColumn":  51,
-"endLine":  1023,
-"endColumn":  137
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'Scraper.TVDBImages.SeasonImageList.FirstOrDefault(Function(s) s.Season = Me.SelSeason)' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1058",
-"region":  {
-"startLine":  1058,
-"startColumn":  17,
-"endLine":  1058,
-"endColumn":  103
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'Scraper.TVDBImages.SeasonImageList.FirstOrDefault(Function(s) s.Season = Me.SelSeason)' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1060",
-"region":  {
-"startLine":  1060,
-"startColumn":  50,
-"endLine":  1060,
-"endColumn":  136
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2259",
+      "Message": "\u0027ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmInfoSettingsHolder.vb#L188",
+      "Location": "Line 188 Position 32-163"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmInfoSettingsHolder.vb#L37",
+      "Location": "Line 37 Position 32-163"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.ScraperOrder = order \u002B 1)\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmInfoSettingsHolder.vb#L39",
+      "Location": "Line 39 Position 13-115"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmInfoSettingsHolder.vb#L40",
+      "Location": "Line 40 Position 13-144"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmInfoSettingsHolder.vb#L47",
+      "Location": "Line 47 Position 32-163"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.ScraperOrder = order - 1)\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmInfoSettingsHolder.vb#L49",
+      "Location": "Line 49 Position 13-115"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmInfoSettingsHolder.vb#L50",
+      "Location": "Line 50 Position 13-144"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmMediaSettingsHolder.vb#L120",
+      "Location": "Line 120 Position 32-163"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmMediaSettingsHolder.vb#L37",
+      "Location": "Line 37 Position 32-163"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.PostScraperOrder = order \u002B 1)\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmMediaSettingsHolder.vb#L39",
+      "Location": "Line 39 Position 13-119"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmMediaSettingsHolder.vb#L40",
+      "Location": "Line 40 Position 13-144"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmMediaSettingsHolder.vb#L47",
+      "Location": "Line 47 Position 32-163"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.PostScraperOrder = order - 1)\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmMediaSettingsHolder.vb#L49",
+      "Location": "Line 49 Position 13-119"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmMediaSettingsHolder.vb#L50",
+      "Location": "Line 50 Position 13-144"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVInfoSettingsHolder.vb#L37",
+      "Location": "Line 37 Position 32-163"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.ScraperOrder = order \u002B 1)\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVInfoSettingsHolder.vb#L39",
+      "Location": "Line 39 Position 13-115"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVInfoSettingsHolder.vb#L40",
+      "Location": "Line 40 Position 13-144"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVInfoSettingsHolder.vb#L47",
+      "Location": "Line 47 Position 32-163"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.ScraperOrder = order - 1)\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVInfoSettingsHolder.vb#L49",
+      "Location": "Line 49 Position 13-115"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVInfoSettingsHolder.vb#L50",
+      "Location": "Line 50 Position 13-144"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVInfoSettingsHolder.vb#L67",
+      "Location": "Line 67 Position 32-163"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVMediaSettingsHolder.vb#L37",
+      "Location": "Line 37 Position 32-163"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.ScraperOrder = order \u002B 1)\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVMediaSettingsHolder.vb#L39",
+      "Location": "Line 39 Position 13-115"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVMediaSettingsHolder.vb#L40",
+      "Location": "Line 40 Position 13-144"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVMediaSettingsHolder.vb#L47",
+      "Location": "Line 47 Position 32-163"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.ScraperOrder = order - 1)\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVMediaSettingsHolder.vb#L49",
+      "Location": "Line 49 Position 13-115"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVMediaSettingsHolder.vb#L50",
+      "Location": "Line 50 Position 13-144"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVMediaSettingsHolder.vb#L67",
+      "Location": "Line 67 Position 32-163"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027ModulesManager.Instance.externalScrapersModules.OrderBy(Function(y) y.ScraperOrder).FirstOrDefault(Function(e) e.ProcessorModule.IsScraper AndAlso e.ProcessorModule.ScraperEnabled)\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L560",
+      "Location": "Line 560 Position 21-201"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027sResults\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L336",
+      "Location": "Line 336 Position 24-32"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027sResults\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L347",
+      "Location": "Line 347 Position 28-36"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027sResults\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L358",
+      "Location": "Line 358 Position 54-62"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027sResults.OrderBy(Function(s) s.Lev).FirstOrDefault(Function(s) s.Language.ShortLang = \u0022en\u0022)\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L358",
+      "Location": "Line 358 Position 54-145"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027DefaultImages.SeasonImageList.FirstOrDefault(Function(s) s.Season = Me.SelSeason)\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1018",
+      "Location": "Line 1018 Position 39-120"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027Scraper.TVDBImages.SeasonImageList.FirstOrDefault(Function(s) s.Season = Me.SelSeason)\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1019",
+      "Location": "Line 1019 Position 17-103"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027DefaultImages.SeasonImageList.FirstOrDefault(Function(s) s.Season = Me.SelSeason)\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1022",
+      "Location": "Line 1022 Position 51-132"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027Scraper.TVDBImages.SeasonImageList.FirstOrDefault(Function(s) s.Season = Me.SelSeason)\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1023",
+      "Location": "Line 1023 Position 51-137"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027Scraper.TVDBImages.SeasonImageList.FirstOrDefault(Function(s) s.Season = Me.SelSeason)\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1058",
+      "Location": "Line 1058 Position 17-103"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027Scraper.TVDBImages.SeasonImageList.FirstOrDefault(Function(s) s.Season = Me.SelSeason)\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1060",
+      "Location": "Line 1060 Position 50-136"
+    }
+  ]
 }

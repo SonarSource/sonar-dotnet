@@ -1,108 +1,52 @@
 {
-"issues":  [
-{
-"id":  "S1940",
-"message":  "Use the opposite operator ('<>') instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L135",
-"region":  {
-"startLine":  135,
-"startColumn":  20,
-"endLine":  135,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S1940",
-"message":  "Use the opposite operator ('<>') instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L135",
-"region":  {
-"startLine":  135,
-"startColumn":  46,
-"endLine":  135,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S1940",
-"message":  "Use the opposite operator ('<>') instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L135",
-"region":  {
-"startLine":  135,
-"startColumn":  72,
-"endLine":  135,
-"endColumn":  89
-}
-}
-},
-{
-"id":  "S1940",
-"message":  "Use the opposite operator ('<>') instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L136",
-"region":  {
-"startLine":  136,
-"startColumn":  17,
-"endLine":  136,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S1940",
-"message":  "Use the opposite operator ('<>') instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L136",
-"region":  {
-"startLine":  136,
-"startColumn":  43,
-"endLine":  136,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S1940",
-"message":  "Use the opposite operator ('<>') instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L184",
-"region":  {
-"startLine":  184,
-"startColumn":  32,
-"endLine":  184,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S1940",
-"message":  "Use the opposite operator ('<>') instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L30",
-"region":  {
-"startLine":  30,
-"startColumn":  11,
-"endLine":  30,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S1940",
-"message":  "Use the opposite operator ('<>') instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L61",
-"region":  {
-"startLine":  61,
-"startColumn":  32,
-"endLine":  61,
-"endColumn":  49
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1940",
+      "Message": "Use the opposite operator (\u0027\u003C\u003E\u0027) instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L135",
+      "Location": "Line 135 Position 20-37"
+    },
+    {
+      "Id": "S1940",
+      "Message": "Use the opposite operator (\u0027\u003C\u003E\u0027) instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L135",
+      "Location": "Line 135 Position 46-63"
+    },
+    {
+      "Id": "S1940",
+      "Message": "Use the opposite operator (\u0027\u003C\u003E\u0027) instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L135",
+      "Location": "Line 135 Position 72-89"
+    },
+    {
+      "Id": "S1940",
+      "Message": "Use the opposite operator (\u0027\u003C\u003E\u0027) instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L136",
+      "Location": "Line 136 Position 17-34"
+    },
+    {
+      "Id": "S1940",
+      "Message": "Use the opposite operator (\u0027\u003C\u003E\u0027) instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L136",
+      "Location": "Line 136 Position 43-60"
+    },
+    {
+      "Id": "S1940",
+      "Message": "Use the opposite operator (\u0027\u003C\u003E\u0027) instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L184",
+      "Location": "Line 184 Position 32-49"
+    },
+    {
+      "Id": "S1940",
+      "Message": "Use the opposite operator (\u0027\u003C\u003E\u0027) instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L30",
+      "Location": "Line 30 Position 11-28"
+    },
+    {
+      "Id": "S1940",
+      "Message": "Use the opposite operator (\u0027\u003C\u003E\u0027) instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L61",
+      "Location": "Line 61 Position 32-49"
+    }
+  ]
 }

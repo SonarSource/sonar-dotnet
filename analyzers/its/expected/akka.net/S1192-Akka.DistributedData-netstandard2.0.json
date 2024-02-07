@@ -1,46 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'Unknown response type: ' 4 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L113",
-"region":  {
-"startLine":  113,
-"startColumn":  58,
-"endLine":  113,
-"endColumn":  83
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L148",
-"region":  {
-"startLine":  148,
-"startColumn":  58,
-"endLine":  148,
-"endColumn":  83
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L185",
-"region":  {
-"startLine":  185,
-"startColumn":  58,
-"endLine":  185,
-"endColumn":  83
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L218",
-"region":  {
-"startLine":  218,
-"startColumn":  58,
-"endLine":  218,
-"endColumn":  83
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S1192",
+      "Message": "Define a constant instead of using this literal \u0027Unknown response type: \u0027 4 times.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L113",
+      "Location": "Line 113 Position 58-83"
+    }
+  ]
 }

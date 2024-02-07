@@ -1,69 +1,34 @@
 {
-"issues":  [
-{
-"id":  "S4040",
-"message":  "Change this normalization to 'ToUpperInvariant()'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteMetricsExtension.cs#L33",
-"region":  {
-"startLine":  33,
-"startColumn":  18,
-"endLine":  33,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S4040",
-"message":  "Change this normalization to 'ToUpperInvariant()'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L37",
-"region":  {
-"startLine":  37,
-"startColumn":  85,
-"endLine":  37,
-"endColumn":  101
-}
-}
-},
-{
-"id":  "S4040",
-"message":  "Change this normalization to 'ToUpperInvariant()'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransport.cs#L147",
-"region":  {
-"startLine":  147,
-"startColumn":  113,
-"endLine":  147,
-"endColumn":  129
-}
-}
-},
-{
-"id":  "S4040",
-"message":  "Change this normalization to 'ToUpperInvariant()'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L43",
-"region":  {
-"startLine":  43,
-"startColumn":  39,
-"endLine":  43,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S4040",
-"message":  "Change this normalization to 'ToUpperInvariant()'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L69",
-"region":  {
-"startLine":  69,
-"startColumn":  83,
-"endLine":  69,
-"endColumn":  99
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4040",
+      "Message": "Change this normalization to \u0027ToUpperInvariant()\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteMetricsExtension.cs#L33",
+      "Location": "Line 33 Position 18-34"
+    },
+    {
+      "Id": "S4040",
+      "Message": "Change this normalization to \u0027ToUpperInvariant()\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L37",
+      "Location": "Line 37 Position 85-101"
+    },
+    {
+      "Id": "S4040",
+      "Message": "Change this normalization to \u0027ToUpperInvariant()\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransport.cs#L147",
+      "Location": "Line 147 Position 113-129"
+    },
+    {
+      "Id": "S4040",
+      "Message": "Change this normalization to \u0027ToUpperInvariant()\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L43",
+      "Location": "Line 43 Position 39-55"
+    },
+    {
+      "Id": "S4040",
+      "Message": "Change this normalization to \u0027ToUpperInvariant()\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L69",
+      "Location": "Line 69 Position 83-99"
+    }
+  ]
 }

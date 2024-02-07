@@ -1,484 +1,124 @@
 {
-"issues":  [
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L242",
-"region":  {
-"startLine":  242,
-"startColumn":  29,
-"endLine":  242,
-"endColumn":  31
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L241",
-"region":  {
-"startLine":  241,
-"startColumn":  25,
-"endLine":  241,
-"endColumn":  27
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L266",
-"region":  {
-"startLine":  266,
-"startColumn":  33,
-"endLine":  266,
-"endColumn":  35
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L265",
-"region":  {
-"startLine":  265,
-"startColumn":  29,
-"endLine":  265,
-"endColumn":  31
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L279",
-"region":  {
-"startLine":  279,
-"startColumn":  33,
-"endLine":  279,
-"endColumn":  35
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L278",
-"region":  {
-"startLine":  278,
-"startColumn":  29,
-"endLine":  278,
-"endColumn":  31
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L293",
-"region":  {
-"startLine":  293,
-"startColumn":  33,
-"endLine":  293,
-"endColumn":  35
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L292",
-"region":  {
-"startLine":  292,
-"startColumn":  29,
-"endLine":  292,
-"endColumn":  31
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L307",
-"region":  {
-"startLine":  307,
-"startColumn":  33,
-"endLine":  307,
-"endColumn":  35
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L306",
-"region":  {
-"startLine":  306,
-"startColumn":  29,
-"endLine":  306,
-"endColumn":  31
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L321",
-"region":  {
-"startLine":  321,
-"startColumn":  33,
-"endLine":  321,
-"endColumn":  35
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L320",
-"region":  {
-"startLine":  320,
-"startColumn":  29,
-"endLine":  320,
-"endColumn":  31
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L335",
-"region":  {
-"startLine":  335,
-"startColumn":  33,
-"endLine":  335,
-"endColumn":  35
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L334",
-"region":  {
-"startLine":  334,
-"startColumn":  29,
-"endLine":  334,
-"endColumn":  31
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L367",
-"region":  {
-"startLine":  367,
-"startColumn":  29,
-"endLine":  367,
-"endColumn":  31
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L366",
-"region":  {
-"startLine":  366,
-"startColumn":  25,
-"endLine":  366,
-"endColumn":  27
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L249",
-"region":  {
-"startLine":  249,
-"startColumn":  33,
-"endLine":  249,
-"endColumn":  35
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L248",
-"region":  {
-"startLine":  248,
-"startColumn":  29,
-"endLine":  248,
-"endColumn":  31
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L255",
-"region":  {
-"startLine":  255,
-"startColumn":  33,
-"endLine":  255,
-"endColumn":  35
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L254",
-"region":  {
-"startLine":  254,
-"startColumn":  29,
-"endLine":  254,
-"endColumn":  31
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L1039",
-"region":  {
-"startLine":  1039,
-"startColumn":  17,
-"endLine":  1039,
-"endColumn":  19
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L1038",
-"region":  {
-"startLine":  1038,
-"startColumn":  13,
-"endLine":  1038,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L44",
-"region":  {
-"startLine":  44,
-"startColumn":  17,
-"endLine":  44,
-"endColumn":  19
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L42",
-"region":  {
-"startLine":  42,
-"startColumn":  13,
-"endLine":  42,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L276",
-"region":  {
-"startLine":  276,
-"startColumn":  21,
-"endLine":  276,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L275",
-"region":  {
-"startLine":  275,
-"startColumn":  17,
-"endLine":  275,
-"endColumn":  19
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L293",
-"region":  {
-"startLine":  293,
-"startColumn":  21,
-"endLine":  293,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L292",
-"region":  {
-"startLine":  292,
-"startColumn":  17,
-"endLine":  292,
-"endColumn":  19
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L320",
-"region":  {
-"startLine":  320,
-"startColumn":  21,
-"endLine":  320,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L319",
-"region":  {
-"startLine":  319,
-"startColumn":  17,
-"endLine":  319,
-"endColumn":  19
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L332",
-"region":  {
-"startLine":  332,
-"startColumn":  21,
-"endLine":  332,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L331",
-"region":  {
-"startLine":  331,
-"startColumn":  17,
-"endLine":  331,
-"endColumn":  19
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L404",
-"region":  {
-"startLine":  404,
-"startColumn":  17,
-"endLine":  404,
-"endColumn":  19
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L403",
-"region":  {
-"startLine":  403,
-"startColumn":  13,
-"endLine":  403,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L419",
-"region":  {
-"startLine":  419,
-"startColumn":  17,
-"endLine":  419,
-"endColumn":  19
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L418",
-"region":  {
-"startLine":  418,
-"startColumn":  13,
-"endLine":  418,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L791",
-"region":  {
-"startLine":  791,
-"startColumn":  21,
-"endLine":  791,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L790",
-"region":  {
-"startLine":  790,
-"startColumn":  17,
-"endLine":  790,
-"endColumn":  19
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L837",
-"region":  {
-"startLine":  837,
-"startColumn":  25,
-"endLine":  837,
-"endColumn":  27
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L835",
-"region":  {
-"startLine":  835,
-"startColumn":  21,
-"endLine":  835,
-"endColumn":  23
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L242",
+      "Location": "Line 242 Position 29-31"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L266",
+      "Location": "Line 266 Position 33-35"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L279",
+      "Location": "Line 279 Position 33-35"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L293",
+      "Location": "Line 293 Position 33-35"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L307",
+      "Location": "Line 307 Position 33-35"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L321",
+      "Location": "Line 321 Position 33-35"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L335",
+      "Location": "Line 335 Position 33-35"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L367",
+      "Location": "Line 367 Position 29-31"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L249",
+      "Location": "Line 249 Position 33-35"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L255",
+      "Location": "Line 255 Position 33-35"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L1039",
+      "Location": "Line 1039 Position 17-19"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L44",
+      "Location": "Line 44 Position 17-19"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L276",
+      "Location": "Line 276 Position 21-23"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L293",
+      "Location": "Line 293 Position 21-23"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L320",
+      "Location": "Line 320 Position 21-23"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L332",
+      "Location": "Line 332 Position 21-23"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L404",
+      "Location": "Line 404 Position 17-19"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L419",
+      "Location": "Line 419 Position 17-19"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L791",
+      "Location": "Line 791 Position 21-23"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L837",
+      "Location": "Line 837 Position 25-27"
+    }
+  ]
 }

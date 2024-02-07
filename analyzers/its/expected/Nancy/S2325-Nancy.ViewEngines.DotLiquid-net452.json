@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2325",
-"message":  "Make 'GetCleanTemplateName' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.DotLiquid/LiquidNancyFileSystem.cs#L79",
-"region":  {
-"startLine":  79,
-"startColumn":  24,
-"endLine":  79,
-"endColumn":  44
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027GetCleanTemplateName\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.DotLiquid/LiquidNancyFileSystem.cs#L79",
+      "Location": "Line 79 Position 24-44"
+    }
+  ]
 }

@@ -1,108 +1,52 @@
 {
-"issues":  [
-{
-"id":  "S1654",
-"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/frmSettingsHolder.vb#L33",
-"region":  {
-"startLine":  33,
-"startColumn":  45,
-"endLine":  33,
-"endColumn":  50
-}
-}
-},
-{
-"id":  "S1654",
-"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L52",
-"region":  {
-"startLine":  52,
-"startColumn":  75,
-"endLine":  52,
-"endColumn":  82
-}
-}
-},
-{
-"id":  "S1654",
-"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L54",
-"region":  {
-"startLine":  54,
-"startColumn":  45,
-"endLine":  54,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S1654",
-"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L54",
-"region":  {
-"startLine":  54,
-"startColumn":  67,
-"endLine":  54,
-"endColumn":  72
-}
-}
-},
-{
-"id":  "S1654",
-"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L128",
-"region":  {
-"startLine":  128,
-"startColumn":  76,
-"endLine":  128,
-"endColumn":  83
-}
-}
-},
-{
-"id":  "S1654",
-"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L128",
-"region":  {
-"startLine":  128,
-"startColumn":  110,
-"endLine":  128,
-"endColumn":  119
-}
-}
-},
-{
-"id":  "S1654",
-"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L253",
-"region":  {
-"startLine":  253,
-"startColumn":  51,
-"endLine":  253,
-"endColumn":  56
-}
-}
-},
-{
-"id":  "S1654",
-"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L319",
-"region":  {
-"startLine":  319,
-"startColumn":  32,
-"endLine":  319,
-"endColumn":  41
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/frmSettingsHolder.vb#L33",
+      "Location": "Line 33 Position 45-50"
+    },
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L128",
+      "Location": "Line 128 Position 76-83"
+    },
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L128",
+      "Location": "Line 128 Position 110-119"
+    },
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L253",
+      "Location": "Line 253 Position 51-56"
+    },
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L319",
+      "Location": "Line 319 Position 32-41"
+    },
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L52",
+      "Location": "Line 52 Position 75-82"
+    },
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L54",
+      "Location": "Line 54 Position 45-49"
+    },
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L54",
+      "Location": "Line 54 Position 67-72"
+    }
+  ]
 }

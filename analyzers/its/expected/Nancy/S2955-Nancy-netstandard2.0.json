@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2955",
-"message":  "Use a comparison to 'default(TModel)' instead or add a constraint to 'TModel' so that it can't be a value type.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/JsonResponse.cs#L32",
-"region":  {
-"startLine":  32,
-"startColumn":  38,
-"endLine":  32,
-"endColumn":  42
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2955",
+      "Message": "Use a comparison to \u0027default(TModel)\u0027 instead or add a constraint to \u0027TModel\u0027 so that it can\u0027t be a value type.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/JsonResponse.cs#L32",
+      "Location": "Line 32 Position 38-42"
+    }
+  ]
 }

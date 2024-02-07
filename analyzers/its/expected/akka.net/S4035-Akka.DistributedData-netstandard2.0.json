@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S4035",
-"message":  "Seal class 'Key' or implement 'IEqualityComparer<T>' instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Key.cs#L38",
-"region":  {
-"startLine":  38,
-"startColumn":  27,
-"endLine":  38,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S4035",
-"message":  "Seal class 'VersionVector' or implement 'IEqualityComparer<T>' instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/VersionVector.cs#L26",
-"region":  {
-"startLine":  26,
-"startColumn":  27,
-"endLine":  26,
-"endColumn":  40
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4035",
+      "Message": "Seal class \u0027Key\u0027 or implement \u0027IEqualityComparer\u003CT\u003E\u0027 instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Key.cs#L38",
+      "Location": "Line 38 Position 27-30"
+    },
+    {
+      "Id": "S4035",
+      "Message": "Seal class \u0027VersionVector\u0027 or implement \u0027IEqualityComparer\u003CT\u003E\u0027 instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/VersionVector.cs#L26",
+      "Location": "Line 26 Position 27-40"
+    }
+  ]
 }

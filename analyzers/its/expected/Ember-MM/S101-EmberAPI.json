@@ -1,134 +1,64 @@
 {
-"issues":  [
-{
-"id":  "S101",
-"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L24",
-"region":  {
-"startLine":  24,
-"startColumn":  14,
-"endLine":  24,
-"endColumn":  17
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L27",
-"region":  {
-"startLine":  27,
-"startColumn":  14,
-"endLine":  27,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1070",
-"region":  {
-"startLine":  1070,
-"startColumn":  15,
-"endLine":  1070,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L773",
-"region":  {
-"startLine":  773,
-"startColumn":  11,
-"endLine":  773,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L789",
-"region":  {
-"startLine":  789,
-"startColumn":  11,
-"endLine":  789,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L803",
-"region":  {
-"startLine":  803,
-"startColumn":  11,
-"endLine":  803,
-"endColumn":  40
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L818",
-"region":  {
-"startLine":  818,
-"startColumn":  11,
-"endLine":  818,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L27",
-"region":  {
-"startLine":  27,
-"startColumn":  14,
-"endLine":  27,
-"endColumn":  17
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L30",
-"region":  {
-"startLine":  30,
-"startColumn":  14,
-"endLine":  30,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/dlgVersions.vb#L24",
-"region":  {
-"startLine":  24,
-"startColumn":  14,
-"endLine":  24,
-"endColumn":  25
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S101",
+      "Message": "Rename this class to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L24",
+      "Location": "Line 24 Position 14-17"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename this class to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L27",
+      "Location": "Line 27 Position 14-18"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename this class to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1070",
+      "Location": "Line 1070 Position 15-23"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename this class to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L773",
+      "Location": "Line 773 Position 11-38"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename this class to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L789",
+      "Location": "Line 789 Position 11-38"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename this class to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L803",
+      "Location": "Line 803 Position 11-40"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename this class to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L818",
+      "Location": "Line 818 Position 11-31"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename this class to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L27",
+      "Location": "Line 27 Position 14-17"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename this class to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L30",
+      "Location": "Line 30 Position 14-20"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename this class to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/dlgVersions.vb#L24",
+      "Location": "Line 24 Position 14-25"
+    }
+  ]
 }

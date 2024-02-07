@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'Tagged'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/Tagged.cs#L22",
-"region":  {
-"startLine":  22,
-"startColumn":  19,
-"endLine":  22,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'PluginHolder'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistence.cs#L21",
-"region":  {
-"startLine":  21,
-"startColumn":  21,
-"endLine":  21,
-"endColumn":  33
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3898",
+      "Message": "Implement \u0027IEquatable\u003CT\u003E\u0027 in value type \u0027Tagged\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/Tagged.cs#L22",
+      "Location": "Line 22 Position 19-25"
+    },
+    {
+      "Id": "S3898",
+      "Message": "Implement \u0027IEquatable\u003CT\u003E\u0027 in value type \u0027PluginHolder\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistence.cs#L21",
+      "Location": "Line 21 Position 21-33"
+    }
+  ]
 }

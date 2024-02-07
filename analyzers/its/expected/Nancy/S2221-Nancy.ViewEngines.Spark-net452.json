@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2221",
-"message":  "Catch a list of specific exception subtype or use exception filters instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/NancyBindingProvider.cs#L50",
-"region":  {
-"startLine":  50,
-"startColumn":  20,
-"endLine":  50,
-"endColumn":  29
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2221",
+      "Message": "Catch a list of specific exception subtype or use exception filters instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/NancyBindingProvider.cs#L50",
+      "Location": "Line 50 Position 20-29"
+    }
+  ]
 }

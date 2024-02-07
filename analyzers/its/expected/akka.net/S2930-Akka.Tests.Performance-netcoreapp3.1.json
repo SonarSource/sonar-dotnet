@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2930",
-"message":  "Dispose 'cancel' when it is no longer needed.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/IO/TcpInboundOnlySpec.cs#L73",
-"region":  {
-"startLine":  73,
-"startColumn":  41,
-"endLine":  73,
-"endColumn":  79
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2930",
+      "Message": "Dispose \u0027cancel\u0027 when it is no longer needed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/IO/TcpInboundOnlySpec.cs#L73",
+      "Location": "Line 73 Position 41-79"
+    }
+  ]
 }

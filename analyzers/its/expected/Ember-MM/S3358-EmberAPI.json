@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S3358",
-"message":  "Extract this nested If operator into independent If...Then...Else statements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1083",
-"region":  {
-"startLine":  1083,
-"startColumn":  64,
-"endLine":  1083,
-"endColumn":  183
-}
-}
-},
-{
-"id":  "S3358",
-"message":  "Extract this nested If operator into independent If...Then...Else statements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1083",
-"region":  {
-"startLine":  1083,
-"startColumn":  185,
-"endLine":  1083,
-"endColumn":  253
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3358",
+      "Message": "Extract this nested If operator into independent If...Then...Else statements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1083",
+      "Location": "Line 1083 Position 64-183"
+    },
+    {
+      "Id": "S3358",
+      "Message": "Extract this nested If operator into independent If...Then...Else statements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1083",
+      "Location": "Line 1083 Position 185-253"
+    }
+  ]
 }

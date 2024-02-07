@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S6580",
-"message":  "Use a format provider when parsing date and time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L250",
-"region":  {
-"startLine":  250,
-"startColumn":  28,
-"endLine":  250,
-"endColumn":  60
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6580",
+      "Message": "Use a format provider when parsing date and time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L250",
+      "Location": "Line 250 Position 28-60"
+    }
+  ]
 }

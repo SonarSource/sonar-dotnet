@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S6563",
-"message":  "Use UTC when recording DateTime instants",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L832",
-"region":  {
-"startLine":  832,
-"startColumn":  85,
-"endLine":  832,
-"endColumn":  97
-}
-}
-},
-{
-"id":  "S6563",
-"message":  "Use UTC when recording DateTime instants",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L839",
-"region":  {
-"startLine":  839,
-"startColumn":  28,
-"endLine":  839,
-"endColumn":  40
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6563",
+      "Message": "Use UTC when recording DateTime instants",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L832",
+      "Location": "Line 832 Position 85-97"
+    },
+    {
+      "Id": "S6563",
+      "Message": "Use UTC when recording DateTime instants",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L839",
+      "Location": "Line 839 Position 28-40"
+    }
+  ]
 }

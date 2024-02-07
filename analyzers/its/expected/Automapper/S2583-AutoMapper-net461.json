@@ -1,28 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2583",
-"message":  "Change this condition so that it does not always evaluate to 'True'. Some code paths are unreachable.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L340",
-"region":  {
-"startLine":  340,
-"startColumn":  20,
-"endLine":  340,
-"endColumn":  37
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L340",
-"region":  {
-"startLine":  340,
-"startColumn":  64,
-"endLine":  340,
-"endColumn":  103
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S2583",
+      "Message": "Change this condition so that it does not always evaluate to \u0027True\u0027. Some code paths are unreachable.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L340",
+      "Location": "Line 340 Position 20-37"
+    }
+  ]
 }

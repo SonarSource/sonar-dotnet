@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'readJournal'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.TestKit/DefaultConfigSpec.cs#L27",
-"region":  {
-"startLine":  27,
-"startColumn":  17,
-"endLine":  27,
-"endColumn":  28
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027readJournal\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.TestKit/DefaultConfigSpec.cs#L27",
+      "Location": "Line 27 Position 17-28"
+    }
+  ]
 }

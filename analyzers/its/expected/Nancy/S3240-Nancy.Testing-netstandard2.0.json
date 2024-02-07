@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S3240",
-"message":  "Use the '??' operator here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L56",
-"region":  {
-"startLine":  56,
-"startColumn":  13,
-"endLine":  56,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S3240",
-"message":  "Use the '??' operator here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L78",
-"region":  {
-"startLine":  78,
-"startColumn":  13,
-"endLine":  78,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S3240",
-"message":  "Use the '??' operator here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserResponseBodyWrapper.cs#L67",
-"region":  {
-"startLine":  67,
-"startColumn":  17,
-"endLine":  67,
-"endColumn":  19
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027??\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L56",
+      "Location": "Line 56 Position 13-15"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027??\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L78",
+      "Location": "Line 78 Position 13-15"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027??\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserResponseBodyWrapper.cs#L67",
+      "Location": "Line 67 Position 17-19"
+    }
+  ]
 }

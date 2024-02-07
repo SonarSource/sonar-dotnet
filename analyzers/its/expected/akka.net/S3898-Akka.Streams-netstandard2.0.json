@@ -1,433 +1,202 @@
 {
-"issues":  [
-{
-"id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'ServerBinding'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L36",
-"region":  {
-"startLine":  36,
-"startColumn":  23,
-"endLine":  36,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'IncomingConnection'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L66",
-"region":  {
-"startLine":  66,
-"startColumn":  23,
-"endLine":  66,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'OutgoingConnection'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L113",
-"region":  {
-"startLine":  113,
-"startColumn":  23,
-"endLine":  113,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'MaterializationContext'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/IMaterializer.cs#L190",
-"region":  {
-"startLine":  190,
-"startColumn":  19,
-"endLine":  190,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'OnError'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanIn.cs#L412",
-"region":  {
-"startLine":  412,
-"startColumn":  23,
-"endLine":  412,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'OnComplete'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanIn.cs#L439",
-"region":  {
-"startLine":  439,
-"startColumn":  23,
-"endLine":  439,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'OnNext'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanIn.cs#L460",
-"region":  {
-"startLine":  460,
-"startColumn":  23,
-"endLine":  460,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'OnSubscribe'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanIn.cs#L487",
-"region":  {
-"startLine":  487,
-"startColumn":  23,
-"endLine":  487,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'SubInput'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanIn.cs#L544",
-"region":  {
-"startLine":  544,
-"startColumn":  23,
-"endLine":  544,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'SubstreamRequestMore'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanOut.cs#L406",
-"region":  {
-"startLine":  406,
-"startColumn":  23,
-"endLine":  406,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'SubstreamCancel'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanOut.cs#L433",
-"region":  {
-"startLine":  433,
-"startColumn":  23,
-"endLine":  433,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'SubstreamSubscribePending'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanOut.cs#L454",
-"region":  {
-"startLine":  454,
-"startColumn":  23,
-"endLine":  454,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'ExposedPublishers'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanOut.cs#L510",
-"region":  {
-"startLine":  510,
-"startColumn":  23,
-"endLine":  510,
-"endColumn":  40
-}
-}
-},
-{
-"id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'OnError'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L457",
-"region":  {
-"startLine":  457,
-"startColumn":  23,
-"endLine":  457,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'OnComplete'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L489",
-"region":  {
-"startLine":  489,
-"startColumn":  23,
-"endLine":  489,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'OnNext'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L515",
-"region":  {
-"startLine":  515,
-"startColumn":  23,
-"endLine":  515,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'OnSubscribe'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L547",
-"region":  {
-"startLine":  547,
-"startColumn":  23,
-"endLine":  547,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'RequestMore'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L579",
-"region":  {
-"startLine":  579,
-"startColumn":  23,
-"endLine":  579,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'Cancel'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L611",
-"region":  {
-"startLine":  611,
-"startColumn":  23,
-"endLine":  611,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'SubscribePending'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L637",
-"region":  {
-"startLine":  637,
-"startColumn":  23,
-"endLine":  637,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'ExposedPublisher'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L663",
-"region":  {
-"startLine":  663,
-"startColumn":  23,
-"endLine":  663,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'AsyncInput'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L695",
-"region":  {
-"startLine":  695,
-"startColumn":  23,
-"endLine":  695,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'Resume'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L734",
-"region":  {
-"startLine":  734,
-"startColumn":  23,
-"endLine":  734,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'Abort'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L751",
-"region":  {
-"startLine":  751,
-"startColumn":  23,
-"endLine":  751,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'Continue'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/FilePublisher.cs#L64",
-"region":  {
-"startLine":  64,
-"startColumn":  24,
-"endLine":  64,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'Continue'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/InputStreamPublisher.cs#L43",
-"region":  {
-"startLine":  43,
-"startColumn":  24,
-"endLine":  43,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'Data'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/InputStreamSinkStage.cs#L75",
-"region":  {
-"startLine":  75,
-"startColumn":  25,
-"endLine":  75,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'Failed'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/InputStreamSinkStage.cs#L127",
-"region":  {
-"startLine":  127,
-"startColumn":  25,
-"endLine":  127,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'Outbound'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L320",
-"region":  {
-"startLine":  320,
-"startColumn":  25,
-"endLine":  320,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'Inbound'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L361",
-"region":  {
-"startLine":  361,
-"startColumn":  25,
-"endLine":  361,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'TransferPhase'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Transfer.cs#L365",
-"region":  {
-"startLine":  365,
-"startColumn":  19,
-"endLine":  365,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'IOResult'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/IO/IOResult.cs#L17",
-"region":  {
-"startLine":  17,
-"startColumn":  19,
-"endLine":  17,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S3898",
-"message":  "Implement 'IEquatable<T>' in value type 'LogicAndMaterializedValue'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L49",
-"region":  {
-"startLine":  49,
-"startColumn":  19,
-"endLine":  49,
-"endColumn":  44
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3898",
+      "Message": "Implement \u0027IEquatable\u003CT\u003E\u0027 in value type \u0027OutgoingConnection\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L113",
+      "Location": "Line 113 Position 23-41"
+    },
+    {
+      "Id": "S3898",
+      "Message": "Implement \u0027IEquatable\u003CT\u003E\u0027 in value type \u0027ServerBinding\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L36",
+      "Location": "Line 36 Position 23-36"
+    },
+    {
+      "Id": "S3898",
+      "Message": "Implement \u0027IEquatable\u003CT\u003E\u0027 in value type \u0027IncomingConnection\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L66",
+      "Location": "Line 66 Position 23-41"
+    },
+    {
+      "Id": "S3898",
+      "Message": "Implement \u0027IEquatable\u003CT\u003E\u0027 in value type \u0027MaterializationContext\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/IMaterializer.cs#L190",
+      "Location": "Line 190 Position 19-41"
+    },
+    {
+      "Id": "S3898",
+      "Message": "Implement \u0027IEquatable\u003CT\u003E\u0027 in value type \u0027OnError\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanIn.cs#L412",
+      "Location": "Line 412 Position 23-30"
+    },
+    {
+      "Id": "S3898",
+      "Message": "Implement \u0027IEquatable\u003CT\u003E\u0027 in value type \u0027OnComplete\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanIn.cs#L439",
+      "Location": "Line 439 Position 23-33"
+    },
+    {
+      "Id": "S3898",
+      "Message": "Implement \u0027IEquatable\u003CT\u003E\u0027 in value type \u0027OnNext\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanIn.cs#L460",
+      "Location": "Line 460 Position 23-29"
+    },
+    {
+      "Id": "S3898",
+      "Message": "Implement \u0027IEquatable\u003CT\u003E\u0027 in value type \u0027OnSubscribe\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanIn.cs#L487",
+      "Location": "Line 487 Position 23-34"
+    },
+    {
+      "Id": "S3898",
+      "Message": "Implement \u0027IEquatable\u003CT\u003E\u0027 in value type \u0027SubInput\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanIn.cs#L544",
+      "Location": "Line 544 Position 23-31"
+    },
+    {
+      "Id": "S3898",
+      "Message": "Implement \u0027IEquatable\u003CT\u003E\u0027 in value type \u0027SubstreamRequestMore\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanOut.cs#L406",
+      "Location": "Line 406 Position 23-43"
+    },
+    {
+      "Id": "S3898",
+      "Message": "Implement \u0027IEquatable\u003CT\u003E\u0027 in value type \u0027SubstreamCancel\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanOut.cs#L433",
+      "Location": "Line 433 Position 23-38"
+    },
+    {
+      "Id": "S3898",
+      "Message": "Implement \u0027IEquatable\u003CT\u003E\u0027 in value type \u0027SubstreamSubscribePending\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanOut.cs#L454",
+      "Location": "Line 454 Position 23-48"
+    },
+    {
+      "Id": "S3898",
+      "Message": "Implement \u0027IEquatable\u003CT\u003E\u0027 in value type \u0027ExposedPublishers\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanOut.cs#L510",
+      "Location": "Line 510 Position 23-40"
+    },
+    {
+      "Id": "S3898",
+      "Message": "Implement \u0027IEquatable\u003CT\u003E\u0027 in value type \u0027OnError\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L457",
+      "Location": "Line 457 Position 23-30"
+    },
+    {
+      "Id": "S3898",
+      "Message": "Implement \u0027IEquatable\u003CT\u003E\u0027 in value type \u0027OnComplete\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L489",
+      "Location": "Line 489 Position 23-33"
+    },
+    {
+      "Id": "S3898",
+      "Message": "Implement \u0027IEquatable\u003CT\u003E\u0027 in value type \u0027OnNext\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L515",
+      "Location": "Line 515 Position 23-29"
+    },
+    {
+      "Id": "S3898",
+      "Message": "Implement \u0027IEquatable\u003CT\u003E\u0027 in value type \u0027OnSubscribe\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L547",
+      "Location": "Line 547 Position 23-34"
+    },
+    {
+      "Id": "S3898",
+      "Message": "Implement \u0027IEquatable\u003CT\u003E\u0027 in value type \u0027RequestMore\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L579",
+      "Location": "Line 579 Position 23-34"
+    },
+    {
+      "Id": "S3898",
+      "Message": "Implement \u0027IEquatable\u003CT\u003E\u0027 in value type \u0027Cancel\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L611",
+      "Location": "Line 611 Position 23-29"
+    },
+    {
+      "Id": "S3898",
+      "Message": "Implement \u0027IEquatable\u003CT\u003E\u0027 in value type \u0027SubscribePending\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L637",
+      "Location": "Line 637 Position 23-39"
+    },
+    {
+      "Id": "S3898",
+      "Message": "Implement \u0027IEquatable\u003CT\u003E\u0027 in value type \u0027ExposedPublisher\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L663",
+      "Location": "Line 663 Position 23-39"
+    },
+    {
+      "Id": "S3898",
+      "Message": "Implement \u0027IEquatable\u003CT\u003E\u0027 in value type \u0027AsyncInput\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L695",
+      "Location": "Line 695 Position 23-33"
+    },
+    {
+      "Id": "S3898",
+      "Message": "Implement \u0027IEquatable\u003CT\u003E\u0027 in value type \u0027Resume\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L734",
+      "Location": "Line 734 Position 23-29"
+    },
+    {
+      "Id": "S3898",
+      "Message": "Implement \u0027IEquatable\u003CT\u003E\u0027 in value type \u0027Abort\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L751",
+      "Location": "Line 751 Position 23-28"
+    },
+    {
+      "Id": "S3898",
+      "Message": "Implement \u0027IEquatable\u003CT\u003E\u0027 in value type \u0027Continue\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/FilePublisher.cs#L64",
+      "Location": "Line 64 Position 24-32"
+    },
+    {
+      "Id": "S3898",
+      "Message": "Implement \u0027IEquatable\u003CT\u003E\u0027 in value type \u0027Continue\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/InputStreamPublisher.cs#L43",
+      "Location": "Line 43 Position 24-32"
+    },
+    {
+      "Id": "S3898",
+      "Message": "Implement \u0027IEquatable\u003CT\u003E\u0027 in value type \u0027Failed\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/InputStreamSinkStage.cs#L127",
+      "Location": "Line 127 Position 25-31"
+    },
+    {
+      "Id": "S3898",
+      "Message": "Implement \u0027IEquatable\u003CT\u003E\u0027 in value type \u0027Data\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/InputStreamSinkStage.cs#L75",
+      "Location": "Line 75 Position 25-29"
+    },
+    {
+      "Id": "S3898",
+      "Message": "Implement \u0027IEquatable\u003CT\u003E\u0027 in value type \u0027Outbound\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L320",
+      "Location": "Line 320 Position 25-33"
+    },
+    {
+      "Id": "S3898",
+      "Message": "Implement \u0027IEquatable\u003CT\u003E\u0027 in value type \u0027Inbound\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L361",
+      "Location": "Line 361 Position 25-32"
+    },
+    {
+      "Id": "S3898",
+      "Message": "Implement \u0027IEquatable\u003CT\u003E\u0027 in value type \u0027TransferPhase\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Transfer.cs#L365",
+      "Location": "Line 365 Position 19-32"
+    },
+    {
+      "Id": "S3898",
+      "Message": "Implement \u0027IEquatable\u003CT\u003E\u0027 in value type \u0027IOResult\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/IO/IOResult.cs#L17",
+      "Location": "Line 17 Position 19-27"
+    },
+    {
+      "Id": "S3898",
+      "Message": "Implement \u0027IEquatable\u003CT\u003E\u0027 in value type \u0027LogicAndMaterializedValue\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L49",
+      "Location": "Line 49 Position 19-44"
+    }
+  ]
 }

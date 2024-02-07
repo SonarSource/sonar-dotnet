@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S4487",
-"message":  "Remove this unread private field '_log' or refactor the code to use its value.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/EventAdapters.cs#L293",
-"region":  {
-"startLine":  293,
-"startColumn":  42,
-"endLine":  293,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S4487",
-"message":  "Remove this unread private field '_defaultSerializer' or refactor the code to use its value.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/LocalSnapshotStore.cs#L41",
-"region":  {
-"startLine":  41,
-"startColumn":  33,
-"endLine":  41,
-"endColumn":  51
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4487",
+      "Message": "Remove this unread private field \u0027_log\u0027 or refactor the code to use its value.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/EventAdapters.cs#L293",
+      "Location": "Line 293 Position 42-46"
+    },
+    {
+      "Id": "S4487",
+      "Message": "Remove this unread private field \u0027_defaultSerializer\u0027 or refactor the code to use its value.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/LocalSnapshotStore.cs#L41",
+      "Location": "Line 41 Position 33-51"
+    }
+  ]
 }

@@ -1,56 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S2221",
-"message":  "Catch a list of specific exception subtype or use exception filters instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData.LightningDB/LmdbDurableStore.cs#L149",
-"region":  {
-"startLine":  149,
-"startColumn":  40,
-"endLine":  149,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S2221",
-"message":  "Catch a list of specific exception subtype or use exception filters instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData.LightningDB/LmdbDurableStore.cs#L150",
-"region":  {
-"startLine":  150,
-"startColumn":  41,
-"endLine":  150,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S2221",
-"message":  "Catch a list of specific exception subtype or use exception filters instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData.LightningDB/LmdbDurableStore.cs#L178",
-"region":  {
-"startLine":  178,
-"startColumn":  24,
-"endLine":  178,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S2221",
-"message":  "Catch a list of specific exception subtype or use exception filters instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData.LightningDB/LmdbDurableStore.cs#L269",
-"region":  {
-"startLine":  269,
-"startColumn":  28,
-"endLine":  269,
-"endColumn":  37
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2221",
+      "Message": "Catch a list of specific exception subtype or use exception filters instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData.LightningDB/LmdbDurableStore.cs#L149",
+      "Location": "Line 149 Position 40-45"
+    },
+    {
+      "Id": "S2221",
+      "Message": "Catch a list of specific exception subtype or use exception filters instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData.LightningDB/LmdbDurableStore.cs#L150",
+      "Location": "Line 150 Position 41-46"
+    },
+    {
+      "Id": "S2221",
+      "Message": "Catch a list of specific exception subtype or use exception filters instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData.LightningDB/LmdbDurableStore.cs#L178",
+      "Location": "Line 178 Position 24-33"
+    },
+    {
+      "Id": "S2221",
+      "Message": "Catch a list of specific exception subtype or use exception filters instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData.LightningDB/LmdbDurableStore.cs#L269",
+      "Location": "Line 269 Position 28-37"
+    }
+  ]
 }

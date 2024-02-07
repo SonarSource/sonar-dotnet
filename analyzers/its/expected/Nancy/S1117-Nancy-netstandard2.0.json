@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S1117",
-"message":  "Rename 'parameters' which hides the field with the same name.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLink.cs#L230",
-"region":  {
-"startLine":  230,
-"startColumn":  17,
-"endLine":  230,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S1117",
-"message":  "Rename 'prefix' which hides the field with the same name.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLinkRelation.cs#L152",
-"region":  {
-"startLine":  152,
-"startColumn":  21,
-"endLine":  152,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S1117",
-"message":  "Rename 'value' which hides the field with the same name.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLinkRelation.cs#L153",
-"region":  {
-"startLine":  153,
-"startColumn":  21,
-"endLine":  153,
-"endColumn":  26
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1117",
+      "Message": "Rename \u0027parameters\u0027 which hides the field with the same name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLink.cs#L230",
+      "Location": "Line 230 Position 17-27"
+    },
+    {
+      "Id": "S1117",
+      "Message": "Rename \u0027prefix\u0027 which hides the field with the same name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLinkRelation.cs#L152",
+      "Location": "Line 152 Position 21-27"
+    },
+    {
+      "Id": "S1117",
+      "Message": "Rename \u0027value\u0027 which hides the field with the same name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLinkRelation.cs#L153",
+      "Location": "Line 153 Position 21-26"
+    }
+  ]
 }

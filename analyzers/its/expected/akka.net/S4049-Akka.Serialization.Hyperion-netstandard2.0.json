@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S4049",
-"message":  "Consider making method 'GetKnownTypes' a property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.Hyperion/IKnownTypesProvider.cs#L21",
-"region":  {
-"startLine":  21,
-"startColumn":  27,
-"endLine":  21,
-"endColumn":  40
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetKnownTypes\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.Hyperion/IKnownTypesProvider.cs#L21",
+      "Location": "Line 21 Position 27-40"
+    }
+  ]
 }

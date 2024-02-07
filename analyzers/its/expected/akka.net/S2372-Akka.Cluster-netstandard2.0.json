@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S2372",
-"message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/AutoDown.cs#L307",
-"region":  {
-"startLine":  307,
-"startColumn":  21,
-"endLine":  307,
-"endColumn":  150
-}
-}
-},
-{
-"id":  "S2372",
-"message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L3041",
-"region":  {
-"startLine":  3041,
-"startColumn":  25,
-"endLine":  3041,
-"endColumn":  130
-}
-}
-},
-{
-"id":  "S2372",
-"message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L330",
-"region":  {
-"startLine":  330,
-"startColumn":  38,
-"endLine":  330,
-"endColumn":  89
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2372",
+      "Message": "Remove the exception throwing from this property getter, or refactor the property into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/AutoDown.cs#L307",
+      "Location": "Line 307 Position 21-150"
+    },
+    {
+      "Id": "S2372",
+      "Message": "Remove the exception throwing from this property getter, or refactor the property into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L3041",
+      "Location": "Line 3041 Position 25-130"
+    },
+    {
+      "Id": "S2372",
+      "Message": "Remove the exception throwing from this property getter, or refactor the property into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L330",
+      "Location": "Line 330 Position 38-89"
+    }
+  ]
 }

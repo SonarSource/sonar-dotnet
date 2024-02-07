@@ -1,69 +1,34 @@
 {
-"issues":  [
-{
-"id":  "S4058",
-"message":  "Change this call to 'useReconnect.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterClientSettings.cs#L54",
-"region":  {
-"startLine":  54,
-"startColumn":  17,
-"endLine":  54,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S4058",
-"message":  "Change this call to 'useReconnect.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterClientSettings.cs#L55",
-"region":  {
-"startLine":  55,
-"startColumn":  17,
-"endLine":  55,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S4058",
-"message":  "Change this call to 'useReconnect.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterClientSettings.cs#L56",
-"region":  {
-"startLine":  56,
-"startColumn":  17,
-"endLine":  56,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S4058",
-"message":  "Change this call to 'pathElements.Last().StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterReceptionist.cs#L630",
-"region":  {
-"startLine":  630,
-"startColumn":  76,
-"endLine":  630,
-"endColumn":  111
-}
-}
-},
-{
-"id":  "S4058",
-"message":  "Change this call to 'key.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedPubSubMediator.cs#L469",
-"region":  {
-"startLine":  469,
-"startColumn":  25,
-"endLine":  469,
-"endColumn":  52
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027useReconnect.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterClientSettings.cs#L54",
+      "Location": "Line 54 Position 17-43"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027useReconnect.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterClientSettings.cs#L55",
+      "Location": "Line 55 Position 17-45"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027useReconnect.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterClientSettings.cs#L56",
+      "Location": "Line 56 Position 17-42"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027pathElements.Last().StartsWith\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterReceptionist.cs#L630",
+      "Location": "Line 630 Position 76-111"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027key.StartsWith\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedPubSubMediator.cs#L469",
+      "Location": "Line 469 Position 25-52"
+    }
+  ]
 }

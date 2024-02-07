@@ -1,225 +1,106 @@
 {
-"issues":  [
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteActorRefProvider.cs#L735",
-"region":  {
-"startLine":  735,
-"startColumn":  20,
-"endLine":  735,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteDeployer.cs#L75",
-"region":  {
-"startLine":  75,
-"startColumn":  19,
-"endLine":  75,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteMetricsExtension.cs#L30",
-"region":  {
-"startLine":  30,
-"startColumn":  16,
-"endLine":  30,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteMetricsExtension.cs#L69",
-"region":  {
-"startLine":  69,
-"startColumn":  16,
-"endLine":  69,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L27",
-"region":  {
-"startLine":  27,
-"startColumn":  15,
-"endLine":  27,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L35",
-"region":  {
-"startLine":  35,
-"startColumn":  16,
-"endLine":  35,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L283",
-"region":  {
-"startLine":  283,
-"startColumn":  27,
-"endLine":  283,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteWatcher.cs#L531",
-"region":  {
-"startLine":  531,
-"startColumn":  16,
-"endLine":  531,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Routing/RemoteRouterConfig.cs#L98",
-"region":  {
-"startLine":  98,
-"startColumn":  12,
-"endLine":  98,
-"endColumn":  16
-}
-}
-},
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/DaemonMsgCreateSerializer.cs#L143",
-"region":  {
-"startLine":  143,
-"startColumn":  56,
-"endLine":  143,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/DaemonMsgCreateSerializer.cs#L157",
-"region":  {
-"startLine":  157,
-"startColumn":  62,
-"endLine":  157,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/DaemonMsgCreateSerializer.cs#L170",
-"region":  {
-"startLine":  170,
-"startColumn":  55,
-"endLine":  170,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L179",
-"region":  {
-"startLine":  179,
-"startColumn":  40,
-"endLine":  179,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L200",
-"region":  {
-"startLine":  200,
-"startColumn":  62,
-"endLine":  200,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/SystemMessageSerializer.cs#L37",
-"region":  {
-"startLine":  37,
-"startColumn":  66,
-"endLine":  37,
-"endColumn":  70
-}
-}
-},
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/WrappedPayloadSupport.cs#L26",
-"region":  {
-"startLine":  26,
-"startColumn":  37,
-"endLine":  26,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L325",
-"region":  {
-"startLine":  325,
-"startColumn":  84,
-"endLine":  325,
-"endColumn":  88
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1135",
+      "Message": "Complete the task associated to this \u0027TODO\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteActorRefProvider.cs#L735",
+      "Location": "Line 735 Position 20-24"
+    },
+    {
+      "Id": "S1135",
+      "Message": "Complete the task associated to this \u0027TODO\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteDeployer.cs#L75",
+      "Location": "Line 75 Position 19-23"
+    },
+    {
+      "Id": "S1135",
+      "Message": "Complete the task associated to this \u0027TODO\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteMetricsExtension.cs#L30",
+      "Location": "Line 30 Position 16-20"
+    },
+    {
+      "Id": "S1135",
+      "Message": "Complete the task associated to this \u0027TODO\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteMetricsExtension.cs#L69",
+      "Location": "Line 69 Position 16-20"
+    },
+    {
+      "Id": "S1135",
+      "Message": "Complete the task associated to this \u0027TODO\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L27",
+      "Location": "Line 27 Position 15-19"
+    },
+    {
+      "Id": "S1135",
+      "Message": "Complete the task associated to this \u0027TODO\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L35",
+      "Location": "Line 35 Position 16-20"
+    },
+    {
+      "Id": "S1135",
+      "Message": "Complete the task associated to this \u0027TODO\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L283",
+      "Location": "Line 283 Position 27-31"
+    },
+    {
+      "Id": "S1135",
+      "Message": "Complete the task associated to this \u0027TODO\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteWatcher.cs#L531",
+      "Location": "Line 531 Position 16-20"
+    },
+    {
+      "Id": "S1135",
+      "Message": "Complete the task associated to this \u0027TODO\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Routing/RemoteRouterConfig.cs#L98",
+      "Location": "Line 98 Position 12-16"
+    },
+    {
+      "Id": "S1135",
+      "Message": "Complete the task associated to this \u0027TODO\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/DaemonMsgCreateSerializer.cs#L143",
+      "Location": "Line 143 Position 56-60"
+    },
+    {
+      "Id": "S1135",
+      "Message": "Complete the task associated to this \u0027TODO\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/DaemonMsgCreateSerializer.cs#L157",
+      "Location": "Line 157 Position 62-66"
+    },
+    {
+      "Id": "S1135",
+      "Message": "Complete the task associated to this \u0027TODO\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/DaemonMsgCreateSerializer.cs#L170",
+      "Location": "Line 170 Position 55-59"
+    },
+    {
+      "Id": "S1135",
+      "Message": "Complete the task associated to this \u0027TODO\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L179",
+      "Location": "Line 179 Position 40-44"
+    },
+    {
+      "Id": "S1135",
+      "Message": "Complete the task associated to this \u0027TODO\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L200",
+      "Location": "Line 200 Position 62-66"
+    },
+    {
+      "Id": "S1135",
+      "Message": "Complete the task associated to this \u0027TODO\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/SystemMessageSerializer.cs#L37",
+      "Location": "Line 37 Position 66-70"
+    },
+    {
+      "Id": "S1135",
+      "Message": "Complete the task associated to this \u0027TODO\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/WrappedPayloadSupport.cs#L26",
+      "Location": "Line 26 Position 37-41"
+    },
+    {
+      "Id": "S1135",
+      "Message": "Complete the task associated to this \u0027TODO\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L325",
+      "Location": "Line 325 Position 84-88"
+    }
+  ]
 }

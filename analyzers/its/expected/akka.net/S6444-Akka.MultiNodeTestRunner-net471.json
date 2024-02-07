@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/WildcardPatterns.cs#L35",
-"region":  {
-"startLine":  35,
-"startColumn":  34,
-"endLine":  35,
-"endColumn":  106
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/WildcardPatterns.cs#L35",
+      "Location": "Line 35 Position 34-106"
+    }
+  ]
 }

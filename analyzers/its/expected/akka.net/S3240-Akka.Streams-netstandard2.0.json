@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S3240",
-"message":  "Use the '?:' operator here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/DelayFlow.cs#L90",
-"region":  {
-"startLine":  90,
-"startColumn":  17,
-"endLine":  90,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S3240",
-"message":  "Use the '??' operator here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L1351",
-"region":  {
-"startLine":  1351,
-"startColumn":  13,
-"endLine":  1351,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S3240",
-"message":  "Use the '?:' operator here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L891",
-"region":  {
-"startLine":  891,
-"startColumn":  21,
-"endLine":  891,
-"endColumn":  23
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/DelayFlow.cs#L90",
+      "Location": "Line 90 Position 17-19"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027??\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L1351",
+      "Location": "Line 1351 Position 13-15"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L891",
+      "Location": "Line 891 Position 21-23"
+    }
+  ]
 }

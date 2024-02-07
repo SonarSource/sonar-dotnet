@@ -1,147 +1,70 @@
 {
-"issues":  [
-{
-"id":  "S2325",
-"message":  "Make 'Method' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/CheckedAndUncheckedUserDefinedOperators.cs#L5",
-"region":  {
-"startLine":  5,
-"startColumn":  21,
-"endLine":  5,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'Work' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/FileScopeAccess.cs#L10",
-"region":  {
-"startLine":  10,
-"startColumn":  20,
-"endLine":  10,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'Method' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/ListPatterns.cs#L5",
-"region":  {
-"startLine":  5,
-"startColumn":  21,
-"endLine":  5,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'Method' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/NewlinesInStringInterpolations.cs#L5",
-"region":  {
-"startLine":  5,
-"startColumn":  21,
-"endLine":  5,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'Method' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/NumericIntPtrAndUIntPtr.cs#L5",
-"region":  {
-"startLine":  5,
-"startColumn":  21,
-"endLine":  5,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'Method' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/PatternMatchSpanOrReadOnlySpanOnAConstantString.cs#L5",
-"region":  {
-"startLine":  5,
-"startColumn":  21,
-"endLine":  5,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'Method' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/RawStringLiterals.cs#L5",
-"region":  {
-"startLine":  5,
-"startColumn":  23,
-"endLine":  5,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'Method' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/RelaxedShiftOperator.cs#L8",
-"region":  {
-"startLine":  8,
-"startColumn":  21,
-"endLine":  8,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'Method' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/StaticVirtualMembersInInterfaces.cs#L24",
-"region":  {
-"startLine":  24,
-"startColumn":  21,
-"endLine":  24,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'Method' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L5",
-"region":  {
-"startLine":  5,
-"startColumn":  21,
-"endLine":  5,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'Method' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UTF8StringLiterals.cs#L5",
-"region":  {
-"startLine":  5,
-"startColumn":  21,
-"endLine":  5,
-"endColumn":  27
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Method\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/CheckedAndUncheckedUserDefinedOperators.cs#L5",
+      "Location": "Line 5 Position 21-27"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Work\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/FileScopeAccess.cs#L10",
+      "Location": "Line 10 Position 20-24"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Method\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/ListPatterns.cs#L5",
+      "Location": "Line 5 Position 21-27"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Method\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/NewlinesInStringInterpolations.cs#L5",
+      "Location": "Line 5 Position 21-27"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Method\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/NumericIntPtrAndUIntPtr.cs#L5",
+      "Location": "Line 5 Position 21-27"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Method\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/PatternMatchSpanOrReadOnlySpanOnAConstantString.cs#L5",
+      "Location": "Line 5 Position 21-27"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Method\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/RawStringLiterals.cs#L5",
+      "Location": "Line 5 Position 23-29"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Method\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/RelaxedShiftOperator.cs#L8",
+      "Location": "Line 8 Position 21-27"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Method\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/StaticVirtualMembersInInterfaces.cs#L24",
+      "Location": "Line 24 Position 21-27"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Method\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L5",
+      "Location": "Line 5 Position 21-27"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Method\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UTF8StringLiterals.cs#L5",
+      "Location": "Line 5 Position 21-27"
+    }
+  ]
 }

@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2357",
-"message":  "Make 'Store' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/AsyncWriteProxy.cs#L75",
-"region":  {
-"startLine":  75,
-"startColumn":  35,
-"endLine":  75,
-"endColumn":  40
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Store\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/AsyncWriteProxy.cs#L75",
+      "Location": "Line 75 Position 35-40"
+    }
+  ]
 }

@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S6608",
-"message":  "Indexing at Count-1 should be used instead of the "Enumerable" extension method "Last"",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Routing/WeightedRoutees.cs#L49",
-"region":  {
-"startLine":  49,
-"startColumn":  65,
-"endLine":  49,
-"endColumn":  69
-}
-}
-},
-{
-"id":  "S6608",
-"message":  "Indexing at Count-1 should be used instead of the "Enumerable" extension method "Last"",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Routing/WeightedRoutees.cs#L58",
-"region":  {
-"startLine":  58,
-"startColumn":  33,
-"endLine":  58,
-"endColumn":  37
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6608",
+      "Message": "Indexing at Count-1 should be used instead of the \u0022Enumerable\u0022 extension method \u0022Last\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Routing/WeightedRoutees.cs#L49",
+      "Location": "Line 49 Position 65-69"
+    },
+    {
+      "Id": "S6608",
+      "Message": "Indexing at Count-1 should be used instead of the \u0022Enumerable\u0022 extension method \u0022Last\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Routing/WeightedRoutees.cs#L58",
+      "Location": "Line 58 Position 33-37"
+    }
+  ]
 }

@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S4040",
-"message":  "Change this normalization to 'ToUpperInvariant()'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData.LightningDB/LmdbDurableStore.cs#L118",
-"region":  {
-"startLine":  118,
-"startColumn":  81,
-"endLine":  118,
-"endColumn":  97
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4040",
+      "Message": "Change this normalization to \u0027ToUpperInvariant()\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData.LightningDB/LmdbDurableStore.cs#L118",
+      "Location": "Line 118 Position 81-97"
+    }
+  ]
 }

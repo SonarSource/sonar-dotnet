@@ -1,368 +1,172 @@
 {
-"issues":  [
-{
-"id":  "S103",
-"message":  "Split this 317 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/AutoMapperMappingException.cs#L180",
-"region":  {
-"startLine":  180,
-"startColumn":  1,
-"endLine":  180,
-"endColumn":  318
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 221 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/Conventions/MemberConfiguration.cs#L28",
-"region":  {
-"startLine":  28,
-"startColumn":  1,
-"endLine":  28,
-"endColumn":  222
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 249 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/Conventions/MemberConfiguration.cs#L35",
-"region":  {
-"startLine":  35,
-"startColumn":  1,
-"endLine":  35,
-"endColumn":  250
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 227 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/Conventions/MemberConfiguration.cs#L104",
-"region":  {
-"startLine":  104,
-"startColumn":  1,
-"endLine":  104,
-"endColumn":  228
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 275 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/IMappingExpressionBase.cs#L147",
-"region":  {
-"startLine":  147,
-"startColumn":  1,
-"endLine":  147,
-"endColumn":  276
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 367 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/IMappingExpressionBase.cs#L152",
-"region":  {
-"startLine":  152,
-"startColumn":  1,
-"endLine":  152,
-"endColumn":  368
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 220 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/MappingExpression.cs#L173",
-"region":  {
-"startLine":  173,
-"startColumn":  1,
-"endLine":  173,
-"endColumn":  221
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 204 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/MappingExpression.cs#L266",
-"region":  {
-"startLine":  266,
-"startColumn":  1,
-"endLine":  266,
-"endColumn":  205
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 208 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L175",
-"region":  {
-"startLine":  175,
-"startColumn":  1,
-"endLine":  175,
-"endColumn":  209
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 245 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/PathConfigurationExpression.cs#L62",
-"region":  {
-"startLine":  62,
-"startColumn":  1,
-"endLine":  62,
-"endColumn":  246
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 212 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L460",
-"region":  {
-"startLine":  460,
-"startColumn":  1,
-"endLine":  460,
-"endColumn":  213
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 204 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Internal/ReflectionHelper.cs#L40",
-"region":  {
-"startLine":  40,
-"startColumn":  1,
-"endLine":  40,
-"endColumn":  205
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 224 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Internal/ReflectionHelper.cs#L91",
-"region":  {
-"startLine":  91,
-"startColumn":  1,
-"endLine":  91,
-"endColumn":  225
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 216 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Mappers/FromStringDictionaryMapper.cs#L36",
-"region":  {
-"startLine":  36,
-"startColumn":  1,
-"endLine":  36,
-"endColumn":  217
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 203 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/AssignableProjectionMapper.cs#L13",
-"region":  {
-"startLine":  13,
-"startColumn":  1,
-"endLine":  13,
-"endColumn":  204
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 203 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/CustomProjectionMapper.cs#L11",
-"region":  {
-"startLine":  11,
-"startColumn":  1,
-"endLine":  11,
-"endColumn":  204
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 204 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/EnumerableProjectionMapper.cs#L20",
-"region":  {
-"startLine":  20,
-"startColumn":  1,
-"endLine":  20,
-"endColumn":  205
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 203 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/EnumProjectionMapper.cs#L11",
-"region":  {
-"startLine":  11,
-"startColumn":  1,
-"endLine":  11,
-"endColumn":  204
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 220 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/Extensions.cs#L39",
-"region":  {
-"startLine":  39,
-"startColumn":  1,
-"endLine":  39,
-"endColumn":  221
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 209 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/Extensions.cs#L62",
-"region":  {
-"startLine":  62,
-"startColumn":  1,
-"endLine":  62,
-"endColumn":  210
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 203 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/Extensions.cs#L83",
-"region":  {
-"startLine":  83,
-"startColumn":  1,
-"endLine":  83,
-"endColumn":  204
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 204 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/MappedTypeProjectionMapper.cs#L13",
-"region":  {
-"startLine":  13,
-"startColumn":  1,
-"endLine":  13,
-"endColumn":  205
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 206 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/NullableSourceProjectionMapper.cs#L8",
-"region":  {
-"startLine":  8,
-"startColumn":  1,
-"endLine":  8,
-"endColumn":  207
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 203 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L168",
-"region":  {
-"startLine":  168,
-"startColumn":  1,
-"endLine":  168,
-"endColumn":  204
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 240 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L200",
-"region":  {
-"startLine":  200,
-"startColumn":  1,
-"endLine":  200,
-"endColumn":  241
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 202 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L227",
-"region":  {
-"startLine":  227,
-"startColumn":  1,
-"endLine":  227,
-"endColumn":  203
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 209 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L382",
-"region":  {
-"startLine":  382,
-"startColumn":  1,
-"endLine":  382,
-"endColumn":  210
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 203 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/StringProjectionMapper.cs#L11",
-"region":  {
-"startLine":  11,
-"startColumn":  1,
-"endLine":  11,
-"endColumn":  204
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S103",
+      "Message": "Split this 317 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/AutoMapperMappingException.cs#L180",
+      "Location": "Line 180 Position 1-318"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 227 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/Conventions/MemberConfiguration.cs#L104",
+      "Location": "Line 104 Position 1-228"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 221 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/Conventions/MemberConfiguration.cs#L28",
+      "Location": "Line 28 Position 1-222"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 249 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/Conventions/MemberConfiguration.cs#L35",
+      "Location": "Line 35 Position 1-250"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 275 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/IMappingExpressionBase.cs#L147",
+      "Location": "Line 147 Position 1-276"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 367 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/IMappingExpressionBase.cs#L152",
+      "Location": "Line 152 Position 1-368"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 220 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/MappingExpression.cs#L173",
+      "Location": "Line 173 Position 1-221"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 204 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/MappingExpression.cs#L266",
+      "Location": "Line 266 Position 1-205"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 208 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L175",
+      "Location": "Line 175 Position 1-209"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 245 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/PathConfigurationExpression.cs#L62",
+      "Location": "Line 62 Position 1-246"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 212 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L460",
+      "Location": "Line 460 Position 1-213"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 204 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Internal/ReflectionHelper.cs#L40",
+      "Location": "Line 40 Position 1-205"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 224 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Internal/ReflectionHelper.cs#L91",
+      "Location": "Line 91 Position 1-225"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 216 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Mappers/FromStringDictionaryMapper.cs#L36",
+      "Location": "Line 36 Position 1-217"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 203 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/AssignableProjectionMapper.cs#L13",
+      "Location": "Line 13 Position 1-204"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 203 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/CustomProjectionMapper.cs#L11",
+      "Location": "Line 11 Position 1-204"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 204 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/EnumerableProjectionMapper.cs#L20",
+      "Location": "Line 20 Position 1-205"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 203 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/EnumProjectionMapper.cs#L11",
+      "Location": "Line 11 Position 1-204"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 220 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/Extensions.cs#L39",
+      "Location": "Line 39 Position 1-221"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 209 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/Extensions.cs#L62",
+      "Location": "Line 62 Position 1-210"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 203 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/Extensions.cs#L83",
+      "Location": "Line 83 Position 1-204"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 204 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/MappedTypeProjectionMapper.cs#L13",
+      "Location": "Line 13 Position 1-205"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 206 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/NullableSourceProjectionMapper.cs#L8",
+      "Location": "Line 8 Position 1-207"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 203 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L168",
+      "Location": "Line 168 Position 1-204"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 240 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L200",
+      "Location": "Line 200 Position 1-241"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 202 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L227",
+      "Location": "Line 227 Position 1-203"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 209 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L382",
+      "Location": "Line 382 Position 1-210"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 203 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/StringProjectionMapper.cs#L11",
+      "Location": "Line 11 Position 1-204"
+    }
+  ]
 }

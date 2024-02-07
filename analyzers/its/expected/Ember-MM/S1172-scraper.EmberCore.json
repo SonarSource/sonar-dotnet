@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S1172",
-"message":  "Remove this unused procedure parameter 'doProgress'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeYouTube.vb#L133",
-"region":  {
-"startLine":  133,
-"startColumn":  62,
-"endLine":  133,
-"endColumn":  89
-}
-}
-},
-{
-"id":  "S1172",
-"message":  "Remove this unused procedure parameter 'iProgress'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L313",
-"region":  {
-"startLine":  313,
-"startColumn":  73,
-"endLine":  313,
-"endColumn":  99
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1172",
+      "Message": "Remove this unused procedure parameter \u0027doProgress\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeYouTube.vb#L133",
+      "Location": "Line 133 Position 62-89"
+    },
+    {
+      "Id": "S1172",
+      "Message": "Remove this unused procedure parameter \u0027iProgress\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L313",
+      "Location": "Line 313 Position 73-99"
+    }
+  ]
 }

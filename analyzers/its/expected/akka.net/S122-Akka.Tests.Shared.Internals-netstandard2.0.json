@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/Helpers/XAssert.cs#L51",
-"region":  {
-"startLine":  51,
-"startColumn":  17,
-"endLine":  51,
-"endColumn":  46
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/Helpers/XAssert.cs#L51",
+      "Location": "Line 51 Position 17-46"
+    }
+  ]
 }

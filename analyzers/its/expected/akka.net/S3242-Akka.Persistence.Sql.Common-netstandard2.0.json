@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'System.Data.IDataRecord' instead of 'System.Data.Common.DbDataReader'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/QueryExecutor.cs#L588",
-"region":  {
-"startLine":  588,
-"startColumn":  51,
-"endLine":  588,
-"endColumn":  57
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Data.IDataRecord\u0027 instead of \u0027System.Data.Common.DbDataReader\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/QueryExecutor.cs#L588",
+      "Location": "Line 588 Position 51-57"
+    }
+  ]
 }

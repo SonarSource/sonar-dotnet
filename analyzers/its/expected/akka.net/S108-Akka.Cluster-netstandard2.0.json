@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S108",
-"message":  "Either remove or fill this block of code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1418",
-"region":  {
-"startLine":  1418,
-"startColumn":  56,
-"endLine":  1418,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S108",
-"message":  "Either remove or fill this block of code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L673-L674",
-"region":  {
-"startLine":  673,
-"startColumn":  29,
-"endLine":  674,
-"endColumn":  30
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1418",
+      "Location": "Line 1418 Position 56-59"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L673-L674",
+      "Location": "Lines 673-674 Position 29-30"
+    }
+  ]
 }

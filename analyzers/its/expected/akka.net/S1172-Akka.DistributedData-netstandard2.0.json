@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1172",
-"message":  "Remove this unused method parameter 'gset'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L487",
-"region":  {
-"startLine":  487,
-"startColumn":  47,
-"endLine":  487,
-"endColumn":  59
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1172",
+      "Message": "Remove this unused method parameter \u0027gset\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L487",
+      "Location": "Line 487 Position 47-59"
+    }
+  ]
 }

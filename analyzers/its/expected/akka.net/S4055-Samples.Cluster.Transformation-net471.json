@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S4055",
-"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Cluster/Roles/Samples.Cluster.Transformation/Program.cs#L31",
-"region":  {
-"startLine":  31,
-"startColumn":  31,
-"endLine":  31,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S4055",
-"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Cluster/Roles/Samples.Cluster.Transformation/TransformationBackend.cs#L68",
-"region":  {
-"startLine":  68,
-"startColumn":  80,
-"endLine":  68,
-"endColumn":  123
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4055",
+      "Message": "Replace this string literal with a string retrieved through an instance of the \u0027ResourceManager\u0027 class.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Cluster/Roles/Samples.Cluster.Transformation/Program.cs#L31",
+      "Location": "Line 31 Position 31-55"
+    },
+    {
+      "Id": "S4055",
+      "Message": "Replace this string literal with a string retrieved through an instance of the \u0027ResourceManager\u0027 class.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Cluster/Roles/Samples.Cluster.Transformation/TransformationBackend.cs#L68",
+      "Location": "Line 68 Position 80-123"
+    }
+  ]
 }

@@ -1,732 +1,340 @@
 {
-"issues":  [
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L35",
-"region":  {
-"startLine":  35,
-"startColumn":  47,
-"endLine":  35,
-"endColumn":  52
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L35",
-"region":  {
-"startLine":  35,
-"startColumn":  83,
-"endLine":  35,
-"endColumn":  88
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L35",
-"region":  {
-"startLine":  35,
-"startColumn":  112,
-"endLine":  35,
-"endColumn":  117
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L68",
-"region":  {
-"startLine":  68,
-"startColumn":  17,
-"endLine":  68,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L74",
-"region":  {
-"startLine":  74,
-"startColumn":  17,
-"endLine":  74,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L86",
-"region":  {
-"startLine":  86,
-"startColumn":  17,
-"endLine":  86,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L10",
-"region":  {
-"startLine":  10,
-"startColumn":  24,
-"endLine":  10,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L12",
-"region":  {
-"startLine":  12,
-"startColumn":  33,
-"endLine":  12,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L12",
-"region":  {
-"startLine":  12,
-"startColumn":  64,
-"endLine":  12,
-"endColumn":  69
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L68",
-"region":  {
-"startLine":  68,
-"startColumn":  28,
-"endLine":  68,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L68",
-"region":  {
-"startLine":  68,
-"startColumn":  52,
-"endLine":  68,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L74",
-"region":  {
-"startLine":  74,
-"startColumn":  30,
-"endLine":  74,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L74",
-"region":  {
-"startLine":  74,
-"startColumn":  54,
-"endLine":  74,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L79",
-"region":  {
-"startLine":  79,
-"startColumn":  29,
-"endLine":  79,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L79",
-"region":  {
-"startLine":  79,
-"startColumn":  60,
-"endLine":  79,
-"endColumn":  65
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L145",
-"region":  {
-"startLine":  145,
-"startColumn":  33,
-"endLine":  145,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L145",
-"region":  {
-"startLine":  145,
-"startColumn":  64,
-"endLine":  145,
-"endColumn":  69
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L167",
-"region":  {
-"startLine":  167,
-"startColumn":  30,
-"endLine":  167,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L167",
-"region":  {
-"startLine":  167,
-"startColumn":  61,
-"endLine":  167,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L172",
-"region":  {
-"startLine":  172,
-"startColumn":  31,
-"endLine":  172,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L172",
-"region":  {
-"startLine":  172,
-"startColumn":  62,
-"endLine":  172,
-"endColumn":  67
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L187",
-"region":  {
-"startLine":  187,
-"startColumn":  37,
-"endLine":  187,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L187",
-"region":  {
-"startLine":  187,
-"startColumn":  61,
-"endLine":  187,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L190",
-"region":  {
-"startLine":  190,
-"startColumn":  40,
-"endLine":  190,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L190",
-"region":  {
-"startLine":  190,
-"startColumn":  71,
-"endLine":  190,
-"endColumn":  76
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L195",
-"region":  {
-"startLine":  195,
-"startColumn":  36,
-"endLine":  195,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L195",
-"region":  {
-"startLine":  195,
-"startColumn":  60,
-"endLine":  195,
-"endColumn":  65
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmSettingsHolder.vb#L33",
-"region":  {
-"startLine":  33,
-"startColumn":  39,
-"endLine":  33,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmSettingsHolder.vb#L33",
-"region":  {
-"startLine":  33,
-"startColumn":  63,
-"endLine":  33,
-"endColumn":  68
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmSettingsHolder.vb#L41",
-"region":  {
-"startLine":  41,
-"startColumn":  42,
-"endLine":  41,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmSettingsHolder.vb#L41",
-"region":  {
-"startLine":  41,
-"startColumn":  73,
-"endLine":  41,
-"endColumn":  78
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L9",
-"region":  {
-"startLine":  9,
-"startColumn":  24,
-"endLine":  9,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L11",
-"region":  {
-"startLine":  11,
-"startColumn":  36,
-"endLine":  11,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L11",
-"region":  {
-"startLine":  11,
-"startColumn":  60,
-"endLine":  11,
-"endColumn":  65
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L15",
-"region":  {
-"startLine":  15,
-"startColumn":  31,
-"endLine":  15,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L15",
-"region":  {
-"startLine":  15,
-"startColumn":  55,
-"endLine":  15,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L21",
-"region":  {
-"startLine":  21,
-"startColumn":  33,
-"endLine":  21,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L21",
-"region":  {
-"startLine":  21,
-"startColumn":  57,
-"endLine":  21,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L27",
-"region":  {
-"startLine":  27,
-"startColumn":  32,
-"endLine":  27,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L27",
-"region":  {
-"startLine":  27,
-"startColumn":  63,
-"endLine":  27,
-"endColumn":  68
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L37",
-"region":  {
-"startLine":  37,
-"startColumn":  36,
-"endLine":  37,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L37",
-"region":  {
-"startLine":  37,
-"startColumn":  67,
-"endLine":  37,
-"endColumn":  72
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L43",
-"region":  {
-"startLine":  43,
-"startColumn":  36,
-"endLine":  43,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L43",
-"region":  {
-"startLine":  43,
-"startColumn":  67,
-"endLine":  43,
-"endColumn":  72
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/Module.Extractor.vb#L45",
-"region":  {
-"startLine":  45,
-"startColumn":  31,
-"endLine":  45,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/Module.Extractor.vb#L47",
-"region":  {
-"startLine":  47,
-"startColumn":  39,
-"endLine":  47,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/Module.Extractor.vb#L47",
-"region":  {
-"startLine":  47,
-"startColumn":  61,
-"endLine":  47,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/Module.Extractor.vb#L47",
-"region":  {
-"startLine":  47,
-"startColumn":  85,
-"endLine":  47,
-"endColumn":  90
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/Module.Extractor.vb#L59",
-"region":  {
-"startLine":  59,
-"startColumn":  13,
-"endLine":  59,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/Module.Extractor.vb#L92",
-"region":  {
-"startLine":  92,
-"startColumn":  18,
-"endLine":  92,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/Module.Extractor.vb#L92",
-"region":  {
-"startLine":  92,
-"startColumn":  49,
-"endLine":  92,
-"endColumn":  54
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/Module.Extractor.vb#L113",
-"region":  {
-"startLine":  113,
-"startColumn":  32,
-"endLine":  113,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/Module.Extractor.vb#L130",
-"region":  {
-"startLine":  130,
-"startColumn":  29,
-"endLine":  130,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/Module.Extractor.vb#L134",
-"region":  {
-"startLine":  134,
-"startColumn":  26,
-"endLine":  134,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/Module.Extractor.vb#L158",
-"region":  {
-"startLine":  158,
-"startColumn":  37,
-"endLine":  158,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/Module.Extractor.vb#L158",
-"region":  {
-"startLine":  158,
-"startColumn":  61,
-"endLine":  158,
-"endColumn":  66
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L35",
+      "Location": "Line 35 Position 47-52"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L35",
+      "Location": "Line 35 Position 83-88"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L35",
+      "Location": "Line 35 Position 112-117"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L68",
+      "Location": "Line 68 Position 17-22"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L74",
+      "Location": "Line 74 Position 17-22"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L86",
+      "Location": "Line 86 Position 17-22"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L10",
+      "Location": "Line 10 Position 24-29"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L12",
+      "Location": "Line 12 Position 33-38"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L12",
+      "Location": "Line 12 Position 64-69"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L145",
+      "Location": "Line 145 Position 33-38"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L145",
+      "Location": "Line 145 Position 64-69"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L167",
+      "Location": "Line 167 Position 30-35"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L167",
+      "Location": "Line 167 Position 61-66"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L172",
+      "Location": "Line 172 Position 31-36"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L172",
+      "Location": "Line 172 Position 62-67"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L187",
+      "Location": "Line 187 Position 37-42"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L187",
+      "Location": "Line 187 Position 61-66"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L190",
+      "Location": "Line 190 Position 40-45"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L190",
+      "Location": "Line 190 Position 71-76"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L195",
+      "Location": "Line 195 Position 36-41"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L195",
+      "Location": "Line 195 Position 60-65"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L68",
+      "Location": "Line 68 Position 28-33"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L68",
+      "Location": "Line 68 Position 52-57"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L74",
+      "Location": "Line 74 Position 30-35"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L74",
+      "Location": "Line 74 Position 54-59"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L79",
+      "Location": "Line 79 Position 29-34"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L79",
+      "Location": "Line 79 Position 60-65"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmSettingsHolder.vb#L33",
+      "Location": "Line 33 Position 39-44"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmSettingsHolder.vb#L33",
+      "Location": "Line 33 Position 63-68"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmSettingsHolder.vb#L41",
+      "Location": "Line 41 Position 42-47"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmSettingsHolder.vb#L41",
+      "Location": "Line 41 Position 73-78"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L11",
+      "Location": "Line 11 Position 36-41"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L11",
+      "Location": "Line 11 Position 60-65"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L15",
+      "Location": "Line 15 Position 31-36"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L15",
+      "Location": "Line 15 Position 55-60"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L21",
+      "Location": "Line 21 Position 33-38"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L21",
+      "Location": "Line 21 Position 57-62"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L27",
+      "Location": "Line 27 Position 32-37"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L27",
+      "Location": "Line 27 Position 63-68"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L37",
+      "Location": "Line 37 Position 36-41"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L37",
+      "Location": "Line 37 Position 67-72"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L43",
+      "Location": "Line 43 Position 36-41"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L43",
+      "Location": "Line 43 Position 67-72"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L9",
+      "Location": "Line 9 Position 24-29"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/Module.Extractor.vb#L113",
+      "Location": "Line 113 Position 32-37"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/Module.Extractor.vb#L130",
+      "Location": "Line 130 Position 29-34"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/Module.Extractor.vb#L134",
+      "Location": "Line 134 Position 26-31"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/Module.Extractor.vb#L158",
+      "Location": "Line 158 Position 37-42"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/Module.Extractor.vb#L158",
+      "Location": "Line 158 Position 61-66"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/Module.Extractor.vb#L45",
+      "Location": "Line 45 Position 31-36"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/Module.Extractor.vb#L47",
+      "Location": "Line 47 Position 39-44"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/Module.Extractor.vb#L47",
+      "Location": "Line 47 Position 61-66"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/Module.Extractor.vb#L47",
+      "Location": "Line 47 Position 85-90"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/Module.Extractor.vb#L59",
+      "Location": "Line 59 Position 13-18"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/Module.Extractor.vb#L92",
+      "Location": "Line 92 Position 18-23"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/Module.Extractor.vb#L92",
+      "Location": "Line 92 Position 49-54"
+    }
+  ]
 }

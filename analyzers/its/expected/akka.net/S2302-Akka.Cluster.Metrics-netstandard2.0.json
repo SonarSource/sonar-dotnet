@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S2302",
-"message":  "Replace the string 'manifest' with 'nameof(manifest)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L112",
-"region":  {
-"startLine":  112,
-"startColumn":  51,
-"endLine":  112,
-"endColumn":  107
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'halfLife' with 'nameof(halfLife)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/EWMA.cs#L86",
-"region":  {
-"startLine":  86,
-"startColumn":  71,
-"endLine":  86,
-"endColumn":  95
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027manifest\u0027 with \u0027nameof(manifest)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L112",
+      "Location": "Line 112 Position 51-107"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027halfLife\u0027 with \u0027nameof(halfLife)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/EWMA.cs#L86",
+      "Location": "Line 86 Position 71-95"
+    }
+  ]
 }

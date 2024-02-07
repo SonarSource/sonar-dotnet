@@ -1,56 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S2302",
-"message":  "Replace the string 'plugin' with 'nameof(plugin)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L290",
-"region":  {
-"startLine":  290,
-"startColumn":  53,
-"endLine":  290,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'context' with 'nameof(context)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L70",
-"region":  {
-"startLine":  70,
-"startColumn":  49,
-"endLine":  70,
-"endColumn":  58
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'context' with 'nameof(context)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L110",
-"region":  {
-"startLine":  110,
-"startColumn":  49,
-"endLine":  110,
-"endColumn":  58
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'paths' with 'nameof(paths)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Utility.cs#L23",
-"region":  {
-"startLine":  23,
-"startColumn":  49,
-"endLine":  23,
-"endColumn":  56
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027plugin\u0027 with \u0027nameof(plugin)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L290",
+      "Location": "Line 290 Position 53-61"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027context\u0027 with \u0027nameof(context)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L110",
+      "Location": "Line 110 Position 49-58"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027context\u0027 with \u0027nameof(context)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L70",
+      "Location": "Line 70 Position 49-58"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027paths\u0027 with \u0027nameof(paths)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Utility.cs#L23",
+      "Location": "Line 23 Position 49-56"
+    }
+  ]
 }

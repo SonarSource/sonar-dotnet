@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'System.Security.AccessControl.FileSystemSecurity' instead of 'System.Security.AccessControl.FileSecurity'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/LooseFilePermissions.cs#L15",
-"region":  {
-"startLine":  15,
-"startColumn":  70,
-"endLine":  15,
-"endColumn":  82
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'System.Security.AccessControl.FileSystemSecurity' instead of 'System.Security.AccessControl.DirectorySecurity'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/LooseFilePermissions.cs#L15",
-"region":  {
-"startLine":  15,
-"startColumn":  102,
-"endLine":  15,
-"endColumn":  119
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Security.AccessControl.FileSystemSecurity\u0027 instead of \u0027System.Security.AccessControl.FileSecurity\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/LooseFilePermissions.cs#L15",
+      "Location": "Line 15 Position 70-82"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Security.AccessControl.FileSystemSecurity\u0027 instead of \u0027System.Security.AccessControl.DirectorySecurity\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/LooseFilePermissions.cs#L15",
+      "Location": "Line 15 Position 102-119"
+    }
+  ]
 }

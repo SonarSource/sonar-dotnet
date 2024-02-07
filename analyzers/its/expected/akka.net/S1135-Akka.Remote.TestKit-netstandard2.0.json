@@ -1,186 +1,88 @@
 {
-"issues":  [
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/CommandLine.cs#L15",
-"region":  {
-"startLine":  15,
-"startColumn":  7,
-"endLine":  15,
-"endColumn":  11
-}
-}
-},
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/DataTypes.cs#L58",
-"region":  {
-"startLine":  58,
-"startColumn":  7,
-"endLine":  58,
-"endColumn":  11
-}
-}
-},
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/DataTypes.cs#L129",
-"region":  {
-"startLine":  129,
-"startColumn":  7,
-"endLine":  129,
-"endColumn":  11
-}
-}
-},
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Extension.cs#L29",
-"region":  {
-"startLine":  29,
-"startColumn":  11,
-"endLine":  29,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Extension.cs#L37",
-"region":  {
-"startLine":  37,
-"startColumn":  11,
-"endLine":  37,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L177",
-"region":  {
-"startLine":  177,
-"startColumn":  7,
-"endLine":  177,
-"endColumn":  11
-}
-}
-},
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L188",
-"region":  {
-"startLine":  188,
-"startColumn":  11,
-"endLine":  188,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L542",
-"region":  {
-"startLine":  542,
-"startColumn":  15,
-"endLine":  542,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L568",
-"region":  {
-"startLine":  568,
-"startColumn":  19,
-"endLine":  568,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L695",
-"region":  {
-"startLine":  695,
-"startColumn":  7,
-"endLine":  695,
-"endColumn":  11
-}
-}
-},
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L62",
-"region":  {
-"startLine":  62,
-"startColumn":  15,
-"endLine":  62,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L177",
-"region":  {
-"startLine":  177,
-"startColumn":  11,
-"endLine":  177,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L550",
-"region":  {
-"startLine":  550,
-"startColumn":  72,
-"endLine":  550,
-"endColumn":  76
-}
-}
-},
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/RemoteConnection.cs#L119",
-"region":  {
-"startLine":  119,
-"startColumn":  64,
-"endLine":  119,
-"endColumn":  68
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1135",
+      "Message": "Complete the task associated to this \u0027TODO\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/CommandLine.cs#L15",
+      "Location": "Line 15 Position 7-11"
+    },
+    {
+      "Id": "S1135",
+      "Message": "Complete the task associated to this \u0027TODO\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/DataTypes.cs#L129",
+      "Location": "Line 129 Position 7-11"
+    },
+    {
+      "Id": "S1135",
+      "Message": "Complete the task associated to this \u0027TODO\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/DataTypes.cs#L58",
+      "Location": "Line 58 Position 7-11"
+    },
+    {
+      "Id": "S1135",
+      "Message": "Complete the task associated to this \u0027TODO\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Extension.cs#L29",
+      "Location": "Line 29 Position 11-15"
+    },
+    {
+      "Id": "S1135",
+      "Message": "Complete the task associated to this \u0027TODO\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Extension.cs#L37",
+      "Location": "Line 37 Position 11-15"
+    },
+    {
+      "Id": "S1135",
+      "Message": "Complete the task associated to this \u0027TODO\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L177",
+      "Location": "Line 177 Position 7-11"
+    },
+    {
+      "Id": "S1135",
+      "Message": "Complete the task associated to this \u0027TODO\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L188",
+      "Location": "Line 188 Position 11-15"
+    },
+    {
+      "Id": "S1135",
+      "Message": "Complete the task associated to this \u0027TODO\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L542",
+      "Location": "Line 542 Position 15-19"
+    },
+    {
+      "Id": "S1135",
+      "Message": "Complete the task associated to this \u0027TODO\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L568",
+      "Location": "Line 568 Position 19-23"
+    },
+    {
+      "Id": "S1135",
+      "Message": "Complete the task associated to this \u0027TODO\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L695",
+      "Location": "Line 695 Position 7-11"
+    },
+    {
+      "Id": "S1135",
+      "Message": "Complete the task associated to this \u0027TODO\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L177",
+      "Location": "Line 177 Position 11-15"
+    },
+    {
+      "Id": "S1135",
+      "Message": "Complete the task associated to this \u0027TODO\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L550",
+      "Location": "Line 550 Position 72-76"
+    },
+    {
+      "Id": "S1135",
+      "Message": "Complete the task associated to this \u0027TODO\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L62",
+      "Location": "Line 62 Position 15-19"
+    },
+    {
+      "Id": "S1135",
+      "Message": "Complete the task associated to this \u0027TODO\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/RemoteConnection.cs#L119",
+      "Location": "Line 119 Position 64-68"
+    }
+  ]
 }

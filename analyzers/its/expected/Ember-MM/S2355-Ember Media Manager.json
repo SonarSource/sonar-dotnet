@@ -1,563 +1,262 @@
 {
-"issues":  [
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditShow.vb#L801",
-"region":  {
-"startLine":  801,
-"startColumn":  38,
-"endLine":  801,
-"endColumn":  169
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L67",
-"region":  {
-"startLine":  67,
-"startColumn":  48,
-"endLine":  67,
-"endColumn":  86
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2945",
-"region":  {
-"startLine":  2945,
-"startColumn":  48,
-"endLine":  2945,
-"endColumn":  215
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2947",
-"region":  {
-"startLine":  2947,
-"startColumn":  48,
-"endLine":  2947,
-"endColumn":  253
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2958",
-"region":  {
-"startLine":  2958,
-"startColumn":  48,
-"endLine":  2958,
-"endColumn":  215
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2960",
-"region":  {
-"startLine":  2960,
-"startColumn":  48,
-"endLine":  2960,
-"endColumn":  253
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4073",
-"region":  {
-"startLine":  4073,
-"startColumn":  40,
-"endLine":  4073,
-"endColumn":  245
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4075",
-"region":  {
-"startLine":  4075,
-"startColumn":  40,
-"endLine":  4075,
-"endColumn":  168
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4077",
-"region":  {
-"startLine":  4077,
-"startColumn":  40,
-"endLine":  4077,
-"endColumn":  168
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4079",
-"region":  {
-"startLine":  4079,
-"startColumn":  44,
-"endLine":  4079,
-"endColumn":  172
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4081",
-"region":  {
-"startLine":  4081,
-"startColumn":  42,
-"endLine":  4081,
-"endColumn":  170
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4083",
-"region":  {
-"startLine":  4083,
-"startColumn":  43,
-"endLine":  4083,
-"endColumn":  149
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4085",
-"region":  {
-"startLine":  4085,
-"startColumn":  43,
-"endLine":  4085,
-"endColumn":  171
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4088",
-"region":  {
-"startLine":  4088,
-"startColumn":  39,
-"endLine":  4088,
-"endColumn":  246
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4091",
-"region":  {
-"startLine":  4091,
-"startColumn":  38,
-"endLine":  4091,
-"endColumn":  169
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4094",
-"region":  {
-"startLine":  4094,
-"startColumn":  45,
-"endLine":  4094,
-"endColumn":  142
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4097",
-"region":  {
-"startLine":  4097,
-"startColumn":  41,
-"endLine":  4097,
-"endColumn":  183
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6583",
-"region":  {
-"startLine":  6583,
-"startColumn":  71,
-"endLine":  6583,
-"endColumn":  102
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6881",
-"region":  {
-"startLine":  6881,
-"startColumn":  47,
-"endLine":  6881,
-"endColumn":  94
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6882",
-"region":  {
-"startLine":  6882,
-"startColumn":  47,
-"endLine":  6882,
-"endColumn":  130
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6883",
-"region":  {
-"startLine":  6883,
-"startColumn":  47,
-"endLine":  6883,
-"endColumn":  130
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6884",
-"region":  {
-"startLine":  6884,
-"startColumn":  47,
-"endLine":  6884,
-"endColumn":  132
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6885",
-"region":  {
-"startLine":  6885,
-"startColumn":  47,
-"endLine":  6885,
-"endColumn":  79
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7017",
-"region":  {
-"startLine":  7017,
-"startColumn":  47,
-"endLine":  7017,
-"endColumn":  93
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7018",
-"region":  {
-"startLine":  7018,
-"startColumn":  47,
-"endLine":  7018,
-"endColumn":  94
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7019",
-"region":  {
-"startLine":  7019,
-"startColumn":  47,
-"endLine":  7019,
-"endColumn":  83
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7020",
-"region":  {
-"startLine":  7020,
-"startColumn":  47,
-"endLine":  7020,
-"endColumn":  83
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7021",
-"region":  {
-"startLine":  7021,
-"startColumn":  47,
-"endLine":  7021,
-"endColumn":  80
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7022",
-"region":  {
-"startLine":  7022,
-"startColumn":  47,
-"endLine":  7022,
-"endColumn":  84
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7023",
-"region":  {
-"startLine":  7023,
-"startColumn":  47,
-"endLine":  7023,
-"endColumn":  80
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7024",
-"region":  {
-"startLine":  7024,
-"startColumn":  47,
-"endLine":  7024,
-"endColumn":  82
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7025",
-"region":  {
-"startLine":  7025,
-"startColumn":  47,
-"endLine":  7025,
-"endColumn":  80
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7026",
-"region":  {
-"startLine":  7026,
-"startColumn":  47,
-"endLine":  7026,
-"endColumn":  97
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7027",
-"region":  {
-"startLine":  7027,
-"startColumn":  47,
-"endLine":  7027,
-"endColumn":  101
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7028",
-"region":  {
-"startLine":  7028,
-"startColumn":  47,
-"endLine":  7028,
-"endColumn":  97
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7107",
-"region":  {
-"startLine":  7107,
-"startColumn":  43,
-"endLine":  7107,
-"endColumn":  137
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7109",
-"region":  {
-"startLine":  7109,
-"startColumn":  47,
-"endLine":  7109,
-"endColumn":  141
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7111",
-"region":  {
-"startLine":  7111,
-"startColumn":  43,
-"endLine":  7111,
-"endColumn":  75
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7193",
-"region":  {
-"startLine":  7193,
-"startColumn":  47,
-"endLine":  7193,
-"endColumn":  96
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7194",
-"region":  {
-"startLine":  7194,
-"startColumn":  47,
-"endLine":  7194,
-"endColumn":  130
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7195",
-"region":  {
-"startLine":  7195,
-"startColumn":  47,
-"endLine":  7195,
-"endColumn":  130
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7196",
-"region":  {
-"startLine":  7196,
-"startColumn":  47,
-"endLine":  7196,
-"endColumn":  134
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7197",
-"region":  {
-"startLine":  7197,
-"startColumn":  47,
-"endLine":  7197,
-"endColumn":  79
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditShow.vb#L801",
+      "Location": "Line 801 Position 38-169"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L67",
+      "Location": "Line 67 Position 48-86"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2945",
+      "Location": "Line 2945 Position 48-215"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2947",
+      "Location": "Line 2947 Position 48-253"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2958",
+      "Location": "Line 2958 Position 48-215"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2960",
+      "Location": "Line 2960 Position 48-253"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4073",
+      "Location": "Line 4073 Position 40-245"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4075",
+      "Location": "Line 4075 Position 40-168"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4077",
+      "Location": "Line 4077 Position 40-168"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4079",
+      "Location": "Line 4079 Position 44-172"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4081",
+      "Location": "Line 4081 Position 42-170"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4083",
+      "Location": "Line 4083 Position 43-149"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4085",
+      "Location": "Line 4085 Position 43-171"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4088",
+      "Location": "Line 4088 Position 39-246"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4091",
+      "Location": "Line 4091 Position 38-169"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4094",
+      "Location": "Line 4094 Position 45-142"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4097",
+      "Location": "Line 4097 Position 41-183"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6583",
+      "Location": "Line 6583 Position 71-102"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6881",
+      "Location": "Line 6881 Position 47-94"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6882",
+      "Location": "Line 6882 Position 47-130"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6883",
+      "Location": "Line 6883 Position 47-130"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6884",
+      "Location": "Line 6884 Position 47-132"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6885",
+      "Location": "Line 6885 Position 47-79"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7017",
+      "Location": "Line 7017 Position 47-93"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7018",
+      "Location": "Line 7018 Position 47-94"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7019",
+      "Location": "Line 7019 Position 47-83"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7020",
+      "Location": "Line 7020 Position 47-83"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7021",
+      "Location": "Line 7021 Position 47-80"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7022",
+      "Location": "Line 7022 Position 47-84"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7023",
+      "Location": "Line 7023 Position 47-80"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7024",
+      "Location": "Line 7024 Position 47-82"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7025",
+      "Location": "Line 7025 Position 47-80"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7026",
+      "Location": "Line 7026 Position 47-97"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7027",
+      "Location": "Line 7027 Position 47-101"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7028",
+      "Location": "Line 7028 Position 47-97"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7107",
+      "Location": "Line 7107 Position 43-137"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7109",
+      "Location": "Line 7109 Position 47-141"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7111",
+      "Location": "Line 7111 Position 43-75"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7193",
+      "Location": "Line 7193 Position 47-96"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7194",
+      "Location": "Line 7194 Position 47-130"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7195",
+      "Location": "Line 7195 Position 47-130"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7196",
+      "Location": "Line 7196 Position 47-134"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7197",
+      "Location": "Line 7197 Position 47-79"
+    }
+  ]
 }

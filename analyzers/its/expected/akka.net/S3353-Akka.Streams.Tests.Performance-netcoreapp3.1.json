@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3353",
-"message":  "Add the 'const' modifier to 'i', and replace 'var' with 'int'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/FusedGraphsBenchmark.cs#L90",
-"region":  {
-"startLine":  90,
-"startColumn":  29,
-"endLine":  90,
-"endColumn":  30
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3353",
+      "Message": "Add the \u0027const\u0027 modifier to \u0027i\u0027, and replace \u0027var\u0027 with \u0027int\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/FusedGraphsBenchmark.cs#L90",
+      "Location": "Line 90 Position 29-30"
+    }
+  ]
 }

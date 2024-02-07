@@ -1,524 +1,244 @@
 {
-"issues":  [
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/frmSettingsHolder.vb#L27",
-"region":  {
-"startLine":  27,
-"startColumn":  39,
-"endLine":  27,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/frmSettingsHolder.vb#L35",
-"region":  {
-"startLine":  35,
-"startColumn":  42,
-"endLine":  35,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/frmSettingsHolder.vb#L35",
-"region":  {
-"startLine":  35,
-"startColumn":  73,
-"endLine":  35,
-"endColumn":  78
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Module.WebServer.vb#L42",
-"region":  {
-"startLine":  42,
-"startColumn":  33,
-"endLine":  42,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Module.WebServer.vb#L65",
-"region":  {
-"startLine":  65,
-"startColumn":  31,
-"endLine":  65,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Module.WebServer.vb#L67",
-"region":  {
-"startLine":  67,
-"startColumn":  39,
-"endLine":  67,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Module.WebServer.vb#L67",
-"region":  {
-"startLine":  67,
-"startColumn":  61,
-"endLine":  67,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Module.WebServer.vb#L67",
-"region":  {
-"startLine":  67,
-"startColumn":  85,
-"endLine":  67,
-"endColumn":  90
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Module.WebServer.vb#L85",
-"region":  {
-"startLine":  85,
-"startColumn":  13,
-"endLine":  85,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Module.WebServer.vb#L112",
-"region":  {
-"startLine":  112,
-"startColumn":  32,
-"endLine":  112,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Module.WebServer.vb#L124",
-"region":  {
-"startLine":  124,
-"startColumn":  45,
-"endLine":  124,
-"endColumn":  50
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Module.WebServer.vb#L132",
-"region":  {
-"startLine":  132,
-"startColumn":  11,
-"endLine":  132,
-"endColumn":  16
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Module.WebServer.vb#L132",
-"region":  {
-"startLine":  132,
-"startColumn":  42,
-"endLine":  132,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Module.WebServer.vb#L152",
-"region":  {
-"startLine":  152,
-"startColumn":  19,
-"endLine":  152,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L23",
-"region":  {
-"startLine":  23,
-"startColumn":  20,
-"endLine":  23,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L23",
-"region":  {
-"startLine":  23,
-"startColumn":  39,
-"endLine":  23,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L23",
-"region":  {
-"startLine":  23,
-"startColumn":  65,
-"endLine":  23,
-"endColumn":  70
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L31",
-"region":  {
-"startLine":  31,
-"startColumn":  33,
-"endLine":  31,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L161",
-"region":  {
-"startLine":  161,
-"startColumn":  34,
-"endLine":  161,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L182",
-"region":  {
-"startLine":  182,
-"startColumn":  28,
-"endLine":  182,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L182",
-"region":  {
-"startLine":  182,
-"startColumn":  58,
-"endLine":  182,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L182",
-"region":  {
-"startLine":  182,
-"startColumn":  87,
-"endLine":  182,
-"endColumn":  92
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L182",
-"region":  {
-"startLine":  182,
-"startColumn":  115,
-"endLine":  182,
-"endColumn":  120
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L195",
-"region":  {
-"startLine":  195,
-"startColumn":  31,
-"endLine":  195,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L199",
-"region":  {
-"startLine":  199,
-"startColumn":  31,
-"endLine":  199,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsUtils.vb#L3",
-"region":  {
-"startLine":  3,
-"startColumn":  20,
-"endLine":  3,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsUtils.vb#L3",
-"region":  {
-"startLine":  3,
-"startColumn":  41,
-"endLine":  3,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L21",
-"region":  {
-"startLine":  21,
-"startColumn":  36,
-"endLine":  21,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L21",
-"region":  {
-"startLine":  21,
-"startColumn":  62,
-"endLine":  21,
-"endColumn":  67
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L240",
-"region":  {
-"startLine":  240,
-"startColumn":  39,
-"endLine":  240,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L254",
-"region":  {
-"startLine":  254,
-"startColumn":  35,
-"endLine":  254,
-"endColumn":  40
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L263",
-"region":  {
-"startLine":  263,
-"startColumn":  33,
-"endLine":  263,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L277",
-"region":  {
-"startLine":  277,
-"startColumn":  37,
-"endLine":  277,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L291",
-"region":  {
-"startLine":  291,
-"startColumn":  42,
-"endLine":  291,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L305",
-"region":  {
-"startLine":  305,
-"startColumn":  39,
-"endLine":  305,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L319",
-"region":  {
-"startLine":  319,
-"startColumn":  34,
-"endLine":  319,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L319",
-"region":  {
-"startLine":  319,
-"startColumn":  68,
-"endLine":  319,
-"endColumn":  73
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L319",
-"region":  {
-"startLine":  319,
-"startColumn":  90,
-"endLine":  319,
-"endColumn":  95
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L391",
-"region":  {
-"startLine":  391,
-"startColumn":  24,
-"endLine":  391,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S3860",
-"message":  "Remove this redundant 'ByVal' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L429",
-"region":  {
-"startLine":  429,
-"startColumn":  39,
-"endLine":  429,
-"endColumn":  44
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/frmSettingsHolder.vb#L27",
+      "Location": "Line 27 Position 39-44"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/frmSettingsHolder.vb#L35",
+      "Location": "Line 35 Position 42-47"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/frmSettingsHolder.vb#L35",
+      "Location": "Line 35 Position 73-78"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Module.WebServer.vb#L112",
+      "Location": "Line 112 Position 32-37"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Module.WebServer.vb#L124",
+      "Location": "Line 124 Position 45-50"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Module.WebServer.vb#L132",
+      "Location": "Line 132 Position 11-16"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Module.WebServer.vb#L132",
+      "Location": "Line 132 Position 42-47"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Module.WebServer.vb#L152",
+      "Location": "Line 152 Position 19-24"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Module.WebServer.vb#L42",
+      "Location": "Line 42 Position 33-38"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Module.WebServer.vb#L65",
+      "Location": "Line 65 Position 31-36"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Module.WebServer.vb#L67",
+      "Location": "Line 67 Position 39-44"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Module.WebServer.vb#L67",
+      "Location": "Line 67 Position 61-66"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Module.WebServer.vb#L67",
+      "Location": "Line 67 Position 85-90"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Module.WebServer.vb#L85",
+      "Location": "Line 85 Position 13-18"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L161",
+      "Location": "Line 161 Position 34-39"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L182",
+      "Location": "Line 182 Position 28-33"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L182",
+      "Location": "Line 182 Position 58-63"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L182",
+      "Location": "Line 182 Position 87-92"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L182",
+      "Location": "Line 182 Position 115-120"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L195",
+      "Location": "Line 195 Position 31-36"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L199",
+      "Location": "Line 199 Position 31-36"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L23",
+      "Location": "Line 23 Position 20-25"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L23",
+      "Location": "Line 23 Position 39-44"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L23",
+      "Location": "Line 23 Position 65-70"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L31",
+      "Location": "Line 31 Position 33-38"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsUtils.vb#L3",
+      "Location": "Line 3 Position 20-25"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsUtils.vb#L3",
+      "Location": "Line 3 Position 41-46"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L21",
+      "Location": "Line 21 Position 36-41"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L21",
+      "Location": "Line 21 Position 62-67"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L240",
+      "Location": "Line 240 Position 39-44"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L254",
+      "Location": "Line 254 Position 35-40"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L263",
+      "Location": "Line 263 Position 33-38"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L277",
+      "Location": "Line 277 Position 37-42"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L291",
+      "Location": "Line 291 Position 42-47"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L305",
+      "Location": "Line 305 Position 39-44"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L319",
+      "Location": "Line 319 Position 34-39"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L319",
+      "Location": "Line 319 Position 68-73"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L319",
+      "Location": "Line 319 Position 90-95"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L391",
+      "Location": "Line 391 Position 24-29"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L429",
+      "Location": "Line 429 Position 39-44"
+    }
+  ]
 }

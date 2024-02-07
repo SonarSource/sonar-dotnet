@@ -1,69 +1,34 @@
 {
-"issues":  [
-{
-"id":  "S1067",
-"message":  "Reduce the number of conditional operators (19) used in the expression (maximum allowed 3).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L68-L72",
-"region":  {
-"startLine":  68,
-"startColumn":  5,
-"endLine":  72,
-"endColumn":  80
-}
-}
-},
-{
-"id":  "S1067",
-"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1067.cs#L8",
-"region":  {
-"startLine":  8,
-"startColumn":  22,
-"endLine":  8,
-"endColumn":  58
-}
-}
-},
-{
-"id":  "S1067",
-"message":  "Reduce the number of conditional operators (19) used in the expression (maximum allowed 3).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L12-L16",
-"region":  {
-"startLine":  12,
-"startColumn":  21,
-"endLine":  16,
-"endColumn":  96
-}
-}
-},
-{
-"id":  "S1067",
-"message":  "Reduce the number of conditional operators (19) used in the expression (maximum allowed 3).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L24-L28",
-"region":  {
-"startLine":  24,
-"startColumn":  13,
-"endLine":  28,
-"endColumn":  88
-}
-}
-},
-{
-"id":  "S1067",
-"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4201.cs#L37",
-"region":  {
-"startLine":  37,
-"startColumn":  20,
-"endLine":  37,
-"endColumn":  46
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (19) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L68-L72",
+      "Location": "Lines 68-72 Position 5-80"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1067.cs#L8",
+      "Location": "Line 8 Position 22-58"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (19) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L12-L16",
+      "Location": "Lines 12-16 Position 21-96"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (19) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L24-L28",
+      "Location": "Lines 24-28 Position 13-88"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4201.cs#L37",
+      "Location": "Line 37 Position 20-46"
+    }
+  ]
 }

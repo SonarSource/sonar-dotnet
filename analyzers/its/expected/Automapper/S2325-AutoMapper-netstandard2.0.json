@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S2325",
-"message":  "Make 'GetAssociatedTypes' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Mappers/NullableDestinationMapper.cs#L12",
-"region":  {
-"startLine":  12,
-"startColumn":  18,
-"endLine":  12,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'GetAssociatedTypes' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Mappers/NullableSourceMapper.cs#L13",
-"region":  {
-"startLine":  13,
-"startColumn":  18,
-"endLine":  13,
-"endColumn":  36
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027GetAssociatedTypes\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Mappers/NullableDestinationMapper.cs#L12",
+      "Location": "Line 12 Position 18-36"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027GetAssociatedTypes\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Mappers/NullableSourceMapper.cs#L13",
+      "Location": "Line 13 Position 18-36"
+    }
+  ]
 }

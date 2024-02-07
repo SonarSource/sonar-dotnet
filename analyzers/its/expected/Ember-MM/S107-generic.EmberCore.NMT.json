@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S107",
-"message":  "Function has 8 parameters, which is greater than the 7 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L686",
-"region":  {
-"startLine":  686,
-"startColumn":  33,
-"endLine":  686,
-"endColumn":  258
-}
-}
-},
-{
-"id":  "S107",
-"message":  "Function has 8 parameters, which is greater than the 7 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L718",
-"region":  {
-"startLine":  718,
-"startColumn":  34,
-"endLine":  718,
-"endColumn":  255
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S107",
+      "Message": "Function has 8 parameters, which is greater than the 7 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L686",
+      "Location": "Line 686 Position 33-258"
+    },
+    {
+      "Id": "S107",
+      "Message": "Function has 8 parameters, which is greater than the 7 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L718",
+      "Location": "Line 718 Position 34-255"
+    }
+  ]
 }

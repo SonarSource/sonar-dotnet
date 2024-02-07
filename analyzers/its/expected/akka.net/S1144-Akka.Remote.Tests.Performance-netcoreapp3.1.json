@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S1144",
-"message":  "Remove the unused private field '_echo'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.Tests.Performance/Transports/RemoteMessagingThroughputSpecBase.cs#L31",
-"region":  {
-"startLine":  31,
-"startColumn":  9,
-"endLine":  31,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private field '_remoteEcho'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.Tests.Performance/Transports/RemoteMessagingThroughputSpecBase.cs#L32",
-"region":  {
-"startLine":  32,
-"startColumn":  9,
-"endLine":  32,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private field '_remoteReceiver'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.Tests.Performance/Transports/RemoteMessagingThroughputSpecBase.cs#L33",
-"region":  {
-"startLine":  33,
-"startColumn":  9,
-"endLine":  33,
-"endColumn":  43
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private field \u0027_echo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.Tests.Performance/Transports/RemoteMessagingThroughputSpecBase.cs#L31",
+      "Location": "Line 31 Position 9-33"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private field \u0027_remoteEcho\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.Tests.Performance/Transports/RemoteMessagingThroughputSpecBase.cs#L32",
+      "Location": "Line 32 Position 9-39"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private field \u0027_remoteReceiver\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.Tests.Performance/Transports/RemoteMessagingThroughputSpecBase.cs#L33",
+      "Location": "Line 33 Position 9-43"
+    }
+  ]
 }

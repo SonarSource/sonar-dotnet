@@ -1,52 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S1862",
-"message":  "This branch duplicates the one on line 10.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1862.cs#L11",
-"region":  {
-"startLine":  11,
-"startColumn":  22,
-"endLine":  11,
-"endColumn":  31
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1862.cs#L10",
-"region":  {
-"startLine":  10,
-"startColumn":  17,
-"endLine":  10,
-"endColumn":  26
-}
-}
-]
-},
-{
-"id":  "S1862",
-"message":  "This branch duplicates the one on line 7.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1862.cs#L8",
-"region":  {
-"startLine":  8,
-"startColumn":  22,
-"endLine":  8,
-"endColumn":  31
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1862.cs#L7",
-"region":  {
-"startLine":  7,
-"startColumn":  17,
-"endLine":  7,
-"endColumn":  30
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S1862",
+      "Message": "This branch duplicates the one on line 10.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1862.cs#L11",
+      "Location": "Line 11 Position 22-31"
+    },
+    {
+      "Id": "S1862",
+      "Message": "This branch duplicates the one on line 7.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1862.cs#L8",
+      "Location": "Line 8 Position 22-31"
+    }
+  ]
 }

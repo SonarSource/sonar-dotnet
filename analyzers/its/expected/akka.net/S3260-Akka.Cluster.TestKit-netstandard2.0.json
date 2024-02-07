@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3260",
-"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.TestKit/FailureDetectorPuppet.cs#L76",
-"region":  {
-"startLine":  76,
-"startColumn":  23,
-"endLine":  76,
-"endColumn":  38
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3260",
+      "Message": "Private classes which are not derived in the current assembly should be marked as \u0027sealed\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.TestKit/FailureDetectorPuppet.cs#L76",
+      "Location": "Line 76 Position 23-38"
+    }
+  ]
 }

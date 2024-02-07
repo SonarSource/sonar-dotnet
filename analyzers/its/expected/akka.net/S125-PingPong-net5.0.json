@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S125",
-"message":  "Remove this commented out code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PingPong/ClientActorBase.cs#L41",
-"region":  {
-"startLine":  41,
-"startColumn":  21,
-"endLine":  41,
-"endColumn":  71
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S125",
+      "Message": "Remove this commented out code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PingPong/ClientActorBase.cs#L41",
+      "Location": "Line 41 Position 21-71"
+    }
+  ]
 }

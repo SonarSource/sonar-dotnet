@@ -1,199 +1,94 @@
 {
-"issues":  [
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L108",
-"region":  {
-"startLine":  108,
-"startColumn":  21,
-"endLine":  108,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L199",
-"region":  {
-"startLine":  199,
-"startColumn":  21,
-"endLine":  199,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L206",
-"region":  {
-"startLine":  206,
-"startColumn":  21,
-"endLine":  206,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L214",
-"region":  {
-"startLine":  214,
-"startColumn":  21,
-"endLine":  214,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L333",
-"region":  {
-"startLine":  333,
-"startColumn":  29,
-"endLine":  333,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L548",
-"region":  {
-"startLine":  548,
-"startColumn":  21,
-"endLine":  548,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L573",
-"region":  {
-"startLine":  573,
-"startColumn":  21,
-"endLine":  573,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L609",
-"region":  {
-"startLine":  609,
-"startColumn":  21,
-"endLine":  609,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L620",
-"region":  {
-"startLine":  620,
-"startColumn":  21,
-"endLine":  620,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L630",
-"region":  {
-"startLine":  630,
-"startColumn":  21,
-"endLine":  630,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L640",
-"region":  {
-"startLine":  640,
-"startColumn":  21,
-"endLine":  640,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L650",
-"region":  {
-"startLine":  650,
-"startColumn":  21,
-"endLine":  650,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L682",
-"region":  {
-"startLine":  682,
-"startColumn":  21,
-"endLine":  682,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L687",
-"region":  {
-"startLine":  687,
-"startColumn":  21,
-"endLine":  687,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L692",
-"region":  {
-"startLine":  692,
-"startColumn":  21,
-"endLine":  692,
-"endColumn":  24
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S134",
+      "Message": "Refactor this code to not nest more than 3 control flow statements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L108",
+      "Location": "Line 108 Position 21-23"
+    },
+    {
+      "Id": "S134",
+      "Message": "Refactor this code to not nest more than 3 control flow statements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L199",
+      "Location": "Line 199 Position 21-23"
+    },
+    {
+      "Id": "S134",
+      "Message": "Refactor this code to not nest more than 3 control flow statements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L206",
+      "Location": "Line 206 Position 21-23"
+    },
+    {
+      "Id": "S134",
+      "Message": "Refactor this code to not nest more than 3 control flow statements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L214",
+      "Location": "Line 214 Position 21-23"
+    },
+    {
+      "Id": "S134",
+      "Message": "Refactor this code to not nest more than 3 control flow statements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L333",
+      "Location": "Line 333 Position 29-31"
+    },
+    {
+      "Id": "S134",
+      "Message": "Refactor this code to not nest more than 3 control flow statements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L548",
+      "Location": "Line 548 Position 21-23"
+    },
+    {
+      "Id": "S134",
+      "Message": "Refactor this code to not nest more than 3 control flow statements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L573",
+      "Location": "Line 573 Position 21-23"
+    },
+    {
+      "Id": "S134",
+      "Message": "Refactor this code to not nest more than 3 control flow statements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L609",
+      "Location": "Line 609 Position 21-23"
+    },
+    {
+      "Id": "S134",
+      "Message": "Refactor this code to not nest more than 3 control flow statements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L620",
+      "Location": "Line 620 Position 21-23"
+    },
+    {
+      "Id": "S134",
+      "Message": "Refactor this code to not nest more than 3 control flow statements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L630",
+      "Location": "Line 630 Position 21-23"
+    },
+    {
+      "Id": "S134",
+      "Message": "Refactor this code to not nest more than 3 control flow statements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L640",
+      "Location": "Line 640 Position 21-23"
+    },
+    {
+      "Id": "S134",
+      "Message": "Refactor this code to not nest more than 3 control flow statements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L650",
+      "Location": "Line 650 Position 21-23"
+    },
+    {
+      "Id": "S134",
+      "Message": "Refactor this code to not nest more than 3 control flow statements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L682",
+      "Location": "Line 682 Position 21-24"
+    },
+    {
+      "Id": "S134",
+      "Message": "Refactor this code to not nest more than 3 control flow statements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L687",
+      "Location": "Line 687 Position 21-24"
+    },
+    {
+      "Id": "S134",
+      "Message": "Refactor this code to not nest more than 3 control flow statements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L692",
+      "Location": "Line 692 Position 21-24"
+    }
+  ]
 }

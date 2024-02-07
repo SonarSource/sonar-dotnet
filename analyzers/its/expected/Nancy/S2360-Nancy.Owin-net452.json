@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2360",
-"message":  "Use the overloading mechanism instead of the optional parameters.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Owin/AppBuilderExtensions.cs#L23",
-"region":  {
-"startLine":  23,
-"startColumn":  91,
-"endLine":  23,
-"endColumn":  97
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2360",
+      "Message": "Use the overloading mechanism instead of the optional parameters.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Owin/AppBuilderExtensions.cs#L23",
+      "Location": "Line 23 Position 91-97"
+    }
+  ]
 }

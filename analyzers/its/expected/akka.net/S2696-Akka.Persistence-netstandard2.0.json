@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S2696",
-"message":  "Make the enclosing instance method 'static' or remove this set on the 'static' field.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Serialization/PersistenceMessageSerializer.cs#L82",
-"region":  {
-"startLine":  82,
-"startColumn":  21,
-"endLine":  82,
-"endColumn":  83
-}
-}
-},
-{
-"id":  "S2696",
-"message":  "Make the enclosing instance method 'static' or remove this set on the 'static' field.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Serialization/PersistenceSnapshotSerializer.cs#L55",
-"region":  {
-"startLine":  55,
-"startColumn":  21,
-"endLine":  55,
-"endColumn":  83
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2696",
+      "Message": "Make the enclosing instance method \u0027static\u0027 or remove this set on the \u0027static\u0027 field.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Serialization/PersistenceMessageSerializer.cs#L82",
+      "Location": "Line 82 Position 21-83"
+    },
+    {
+      "Id": "S2696",
+      "Message": "Make the enclosing instance method \u0027static\u0027 or remove this set on the \u0027static\u0027 field.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Serialization/PersistenceSnapshotSerializer.cs#L55",
+      "Location": "Line 55 Position 21-83"
+    }
+  ]
 }

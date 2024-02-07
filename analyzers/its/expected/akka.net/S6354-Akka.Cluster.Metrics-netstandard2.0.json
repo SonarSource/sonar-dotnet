@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S6354",
-"message":  "Use a testable (date) time provider instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Collectors/DefaultCollector.cs#L78",
-"region":  {
-"startLine":  78,
-"startColumn":  50,
-"endLine":  78,
-"endColumn":  65
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6354",
+      "Message": "Use a testable (date) time provider instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Collectors/DefaultCollector.cs#L78",
+      "Location": "Line 78 Position 50-65"
+    }
+  ]
 }

@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1659",
-"message":  "Declare 'h' in a separate statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L412",
-"region":  {
-"startLine":  412,
-"startColumn":  16,
-"endLine":  412,
-"endColumn":  17
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1659",
+      "Message": "Declare \u0027h\u0027 in a separate statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L412",
+      "Location": "Line 412 Position 16-17"
+    }
+  ]
 }

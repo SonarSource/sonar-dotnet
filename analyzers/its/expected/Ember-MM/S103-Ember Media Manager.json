@@ -1,1564 +1,724 @@
 {
-"issues":  [
-{
-"id":  "S103",
-"message":  "Split this 207 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/clsTheming.vb#L128",
-"region":  {
-"startLine":  128,
-"startColumn":  1,
-"endLine":  128,
-"endColumn":  208
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 448 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/clsTheming.vb#L139",
-"region":  {
-"startLine":  139,
-"startColumn":  1,
-"endLine":  139,
-"endColumn":  449
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 237 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L122",
-"region":  {
-"startLine":  122,
-"startColumn":  1,
-"endLine":  122,
-"endColumn":  238
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 240 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L245",
-"region":  {
-"startLine":  245,
-"startColumn":  1,
-"endLine":  245,
-"endColumn":  241
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 208 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L247",
-"region":  {
-"startLine":  247,
-"startColumn":  1,
-"endLine":  247,
-"endColumn":  209
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 240 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L249",
-"region":  {
-"startLine":  249,
-"startColumn":  1,
-"endLine":  249,
-"endColumn":  241
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 208 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L251",
-"region":  {
-"startLine":  251,
-"startColumn":  1,
-"endLine":  251,
-"endColumn":  209
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 217 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L259",
-"region":  {
-"startLine":  259,
-"startColumn":  1,
-"endLine":  259,
-"endColumn":  218
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 201 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L264",
-"region":  {
-"startLine":  264,
-"startColumn":  1,
-"endLine":  264,
-"endColumn":  202
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 201 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L265",
-"region":  {
-"startLine":  265,
-"startColumn":  1,
-"endLine":  265,
-"endColumn":  202
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 233 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L266",
-"region":  {
-"startLine":  266,
-"startColumn":  1,
-"endLine":  266,
-"endColumn":  234
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 201 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L268",
-"region":  {
-"startLine":  268,
-"startColumn":  1,
-"endLine":  268,
-"endColumn":  202
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 233 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L270",
-"region":  {
-"startLine":  270,
-"startColumn":  1,
-"endLine":  270,
-"endColumn":  234
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 201 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L272",
-"region":  {
-"startLine":  272,
-"startColumn":  1,
-"endLine":  272,
-"endColumn":  202
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 201 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L303",
-"region":  {
-"startLine":  303,
-"startColumn":  1,
-"endLine":  303,
-"endColumn":  202
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 283 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditEpisode.vb#L110",
-"region":  {
-"startLine":  110,
-"startColumn":  1,
-"endLine":  110,
-"endColumn":  284
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 336 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditEpisode.vb#L122",
-"region":  {
-"startLine":  122,
-"startColumn":  1,
-"endLine":  122,
-"endColumn":  337
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 211 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L119",
-"region":  {
-"startLine":  119,
-"startColumn":  1,
-"endLine":  119,
-"endColumn":  212
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 258 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L188",
-"region":  {
-"startLine":  188,
-"startColumn":  1,
-"endLine":  188,
-"endColumn":  259
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 348 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L1124",
-"region":  {
-"startLine":  1124,
-"startColumn":  1,
-"endLine":  1124,
-"endColumn":  349
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 315 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L1223",
-"region":  {
-"startLine":  1223,
-"startColumn":  1,
-"endLine":  1223,
-"endColumn":  316
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 202 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L1225",
-"region":  {
-"startLine":  1225,
-"startColumn":  1,
-"endLine":  1225,
-"endColumn":  203
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 272 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L1229",
-"region":  {
-"startLine":  1229,
-"startColumn":  1,
-"endLine":  1229,
-"endColumn":  273
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 233 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L1315",
-"region":  {
-"startLine":  1315,
-"startColumn":  1,
-"endLine":  1315,
-"endColumn":  234
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 298 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L1317",
-"region":  {
-"startLine":  1317,
-"startColumn":  1,
-"endLine":  1317,
-"endColumn":  299
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 250 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L1321",
-"region":  {
-"startLine":  1321,
-"startColumn":  1,
-"endLine":  1321,
-"endColumn":  251
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 308 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditSeason.vb#L62",
-"region":  {
-"startLine":  62,
-"startColumn":  1,
-"endLine":  62,
-"endColumn":  309
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 308 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditSeason.vb#L110",
-"region":  {
-"startLine":  110,
-"startColumn":  1,
-"endLine":  110,
-"endColumn":  309
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 224 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditSeason.vb#L162",
-"region":  {
-"startLine":  162,
-"startColumn":  1,
-"endLine":  162,
-"endColumn":  225
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 287 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditShow.vb#L79",
-"region":  {
-"startLine":  79,
-"startColumn":  1,
-"endLine":  79,
-"endColumn":  288
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 280 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditShow.vb#L174",
-"region":  {
-"startLine":  174,
-"startColumn":  1,
-"endLine":  174,
-"endColumn":  281
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 280 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditShow.vb#L222",
-"region":  {
-"startLine":  222,
-"startColumn":  1,
-"endLine":  222,
-"endColumn":  281
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 248 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditShow.vb#L671",
-"region":  {
-"startLine":  671,
-"startColumn":  1,
-"endLine":  671,
-"endColumn":  249
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 229 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L132",
-"region":  {
-"startLine":  132,
-"startColumn":  1,
-"endLine":  132,
-"endColumn":  230
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 216 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgNewVersion.vb#L76",
-"region":  {
-"startLine":  76,
-"startColumn":  1,
-"endLine":  76,
-"endColumn":  217
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 201 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgRestart.vb#L23",
-"region":  {
-"startLine":  23,
-"startColumn":  1,
-"endLine":  23,
-"endColumn":  202
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 269 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSetsManager.vb#L152",
-"region":  {
-"startLine":  152,
-"startColumn":  1,
-"endLine":  152,
-"endColumn":  270
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 206 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L250",
-"region":  {
-"startLine":  250,
-"startColumn":  1,
-"endLine":  250,
-"endColumn":  207
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 202 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L260",
-"region":  {
-"startLine":  260,
-"startColumn":  1,
-"endLine":  260,
-"endColumn":  203
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 210 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L270",
-"region":  {
-"startLine":  270,
-"startColumn":  1,
-"endLine":  270,
-"endColumn":  211
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 206 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L302",
-"region":  {
-"startLine":  302,
-"startColumn":  1,
-"endLine":  302,
-"endColumn":  207
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 206 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L306",
-"region":  {
-"startLine":  306,
-"startColumn":  1,
-"endLine":  306,
-"endColumn":  207
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 210 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L309",
-"region":  {
-"startLine":  309,
-"startColumn":  1,
-"endLine":  309,
-"endColumn":  211
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 333 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L380",
-"region":  {
-"startLine":  380,
-"startColumn":  1,
-"endLine":  380,
-"endColumn":  334
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 230 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L695",
-"region":  {
-"startLine":  695,
-"startColumn":  1,
-"endLine":  695,
-"endColumn":  231
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 233 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L703",
-"region":  {
-"startLine":  703,
-"startColumn":  1,
-"endLine":  703,
-"endColumn":  234
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 231 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L711",
-"region":  {
-"startLine":  711,
-"startColumn":  1,
-"endLine":  711,
-"endColumn":  232
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 240 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L719",
-"region":  {
-"startLine":  719,
-"startColumn":  1,
-"endLine":  719,
-"endColumn":  241
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 228 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L738",
-"region":  {
-"startLine":  738,
-"startColumn":  1,
-"endLine":  738,
-"endColumn":  229
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 225 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2582",
-"region":  {
-"startLine":  2582,
-"startColumn":  1,
-"endLine":  2582,
-"endColumn":  226
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 211 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2623",
-"region":  {
-"startLine":  2623,
-"startColumn":  1,
-"endLine":  2623,
-"endColumn":  212
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 215 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2945",
-"region":  {
-"startLine":  2945,
-"startColumn":  1,
-"endLine":  2945,
-"endColumn":  216
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 253 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2947",
-"region":  {
-"startLine":  2947,
-"startColumn":  1,
-"endLine":  2947,
-"endColumn":  254
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 215 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2958",
-"region":  {
-"startLine":  2958,
-"startColumn":  1,
-"endLine":  2958,
-"endColumn":  216
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 253 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2960",
-"region":  {
-"startLine":  2960,
-"startColumn":  1,
-"endLine":  2960,
-"endColumn":  254
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 296 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3100",
-"region":  {
-"startLine":  3100,
-"startColumn":  1,
-"endLine":  3100,
-"endColumn":  297
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 298 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3196",
-"region":  {
-"startLine":  3196,
-"startColumn":  1,
-"endLine":  3196,
-"endColumn":  299
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 245 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4073",
-"region":  {
-"startLine":  4073,
-"startColumn":  1,
-"endLine":  4073,
-"endColumn":  246
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 246 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4088",
-"region":  {
-"startLine":  4088,
-"startColumn":  1,
-"endLine":  4088,
-"endColumn":  247
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 213 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4371",
-"region":  {
-"startLine":  4371,
-"startColumn":  1,
-"endLine":  4371,
-"endColumn":  214
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 225 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4569",
-"region":  {
-"startLine":  4569,
-"startColumn":  1,
-"endLine":  4569,
-"endColumn":  226
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 344 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSortFiles.vb#L52",
-"region":  {
-"startLine":  52,
-"startColumn":  1,
-"endLine":  52,
-"endColumn":  345
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 284 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgWizard.vb#L262",
-"region":  {
-"startLine":  262,
-"startColumn":  1,
-"endLine":  262,
-"endColumn":  285
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 286 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgWizard.vb#L293",
-"region":  {
-"startLine":  293,
-"startColumn":  1,
-"endLine":  293,
-"endColumn":  287
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 514 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgWizard.vb#L406",
-"region":  {
-"startLine":  406,
-"startColumn":  1,
-"endLine":  406,
-"endColumn":  515
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 317 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgWizard.vb#L407",
-"region":  {
-"startLine":  407,
-"startColumn":  1,
-"endLine":  407,
-"endColumn":  318
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 814 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgWizard.vb#L409",
-"region":  {
-"startLine":  409,
-"startColumn":  1,
-"endLine":  409,
-"endColumn":  815
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 287 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgWizard.vb#L413",
-"region":  {
-"startLine":  413,
-"startColumn":  1,
-"endLine":  413,
-"endColumn":  288
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 214 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1268",
-"region":  {
-"startLine":  1268,
-"startColumn":  1,
-"endLine":  1268,
-"endColumn":  215
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 303 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1336",
-"region":  {
-"startLine":  1336,
-"startColumn":  1,
-"endLine":  1336,
-"endColumn":  304
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 226 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1339",
-"region":  {
-"startLine":  1339,
-"startColumn":  1,
-"endLine":  1339,
-"endColumn":  227
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 363 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1346",
-"region":  {
-"startLine":  1346,
-"startColumn":  1,
-"endLine":  1346,
-"endColumn":  364
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 256 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1349",
-"region":  {
-"startLine":  1349,
-"startColumn":  1,
-"endLine":  1349,
-"endColumn":  257
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 218 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1356",
-"region":  {
-"startLine":  1356,
-"startColumn":  1,
-"endLine":  1356,
-"endColumn":  219
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 216 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1438",
-"region":  {
-"startLine":  1438,
-"startColumn":  1,
-"endLine":  1438,
-"endColumn":  217
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 239 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1681",
-"region":  {
-"startLine":  1681,
-"startColumn":  1,
-"endLine":  1681,
-"endColumn":  240
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 278 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1696",
-"region":  {
-"startLine":  1696,
-"startColumn":  1,
-"endLine":  1696,
-"endColumn":  279
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 311 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1790",
-"region":  {
-"startLine":  1790,
-"startColumn":  1,
-"endLine":  1790,
-"endColumn":  312
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 455 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1830",
-"region":  {
-"startLine":  1830,
-"startColumn":  1,
-"endLine":  1830,
-"endColumn":  456
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 314 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2021",
-"region":  {
-"startLine":  2021,
-"startColumn":  1,
-"endLine":  2021,
-"endColumn":  315
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 393 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2688",
-"region":  {
-"startLine":  2688,
-"startColumn":  1,
-"endLine":  2688,
-"endColumn":  394
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 393 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2708",
-"region":  {
-"startLine":  2708,
-"startColumn":  1,
-"endLine":  2708,
-"endColumn":  394
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 313 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2746",
-"region":  {
-"startLine":  2746,
-"startColumn":  1,
-"endLine":  2746,
-"endColumn":  314
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 298 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2779",
-"region":  {
-"startLine":  2779,
-"startColumn":  1,
-"endLine":  2779,
-"endColumn":  299
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 238 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2782",
-"region":  {
-"startLine":  2782,
-"startColumn":  1,
-"endLine":  2782,
-"endColumn":  239
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 262 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2793",
-"region":  {
-"startLine":  2793,
-"startColumn":  1,
-"endLine":  2793,
-"endColumn":  263
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 228 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3296",
-"region":  {
-"startLine":  3296,
-"startColumn":  1,
-"endLine":  3296,
-"endColumn":  229
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 232 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3429",
-"region":  {
-"startLine":  3429,
-"startColumn":  1,
-"endLine":  3429,
-"endColumn":  233
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 262 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3627",
-"region":  {
-"startLine":  3627,
-"startColumn":  1,
-"endLine":  3627,
-"endColumn":  263
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 266 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3753",
-"region":  {
-"startLine":  3753,
-"startColumn":  1,
-"endLine":  3753,
-"endColumn":  267
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 262 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3890",
-"region":  {
-"startLine":  3890,
-"startColumn":  1,
-"endLine":  3890,
-"endColumn":  263
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 266 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4017",
-"region":  {
-"startLine":  4017,
-"startColumn":  1,
-"endLine":  4017,
-"endColumn":  267
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 231 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4172",
-"region":  {
-"startLine":  4172,
-"startColumn":  1,
-"endLine":  4172,
-"endColumn":  232
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 216 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4326",
-"region":  {
-"startLine":  4326,
-"startColumn":  1,
-"endLine":  4326,
-"endColumn":  217
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 239 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4329",
-"region":  {
-"startLine":  4329,
-"startColumn":  1,
-"endLine":  4329,
-"endColumn":  240
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 295 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4673",
-"region":  {
-"startLine":  4673,
-"startColumn":  1,
-"endLine":  4673,
-"endColumn":  296
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 234 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4676",
-"region":  {
-"startLine":  4676,
-"startColumn":  1,
-"endLine":  4676,
-"endColumn":  235
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 202 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5521",
-"region":  {
-"startLine":  5521,
-"startColumn":  1,
-"endLine":  5521,
-"endColumn":  203
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 201 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5582",
-"region":  {
-"startLine":  5582,
-"startColumn":  1,
-"endLine":  5582,
-"endColumn":  202
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 236 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5947",
-"region":  {
-"startLine":  5947,
-"startColumn":  1,
-"endLine":  5947,
-"endColumn":  237
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 221 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6368",
-"region":  {
-"startLine":  6368,
-"startColumn":  1,
-"endLine":  6368,
-"endColumn":  222
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 205 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6370",
-"region":  {
-"startLine":  6370,
-"startColumn":  1,
-"endLine":  6370,
-"endColumn":  206
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 232 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6517",
-"region":  {
-"startLine":  6517,
-"startColumn":  1,
-"endLine":  6517,
-"endColumn":  233
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 313 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6649",
-"region":  {
-"startLine":  6649,
-"startColumn":  1,
-"endLine":  6649,
-"endColumn":  314
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 203 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6824",
-"region":  {
-"startLine":  6824,
-"startColumn":  1,
-"endLine":  6824,
-"endColumn":  204
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 289 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6951",
-"region":  {
-"startLine":  6951,
-"startColumn":  1,
-"endLine":  6951,
-"endColumn":  290
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 204 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7103",
-"region":  {
-"startLine":  7103,
-"startColumn":  1,
-"endLine":  7103,
-"endColumn":  205
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 297 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7305",
-"region":  {
-"startLine":  7305,
-"startColumn":  1,
-"endLine":  7305,
-"endColumn":  298
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 284 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7474",
-"region":  {
-"startLine":  7474,
-"startColumn":  1,
-"endLine":  7474,
-"endColumn":  285
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 363 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7480",
-"region":  {
-"startLine":  7480,
-"startColumn":  1,
-"endLine":  7480,
-"endColumn":  364
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 212 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7544",
-"region":  {
-"startLine":  7544,
-"startColumn":  1,
-"endLine":  7544,
-"endColumn":  213
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 365 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7549",
-"region":  {
-"startLine":  7549,
-"startColumn":  1,
-"endLine":  7549,
-"endColumn":  366
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 294 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7573",
-"region":  {
-"startLine":  7573,
-"startColumn":  1,
-"endLine":  7573,
-"endColumn":  295
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 206 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7592",
-"region":  {
-"startLine":  7592,
-"startColumn":  1,
-"endLine":  7592,
-"endColumn":  207
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 294 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7600",
-"region":  {
-"startLine":  7600,
-"startColumn":  1,
-"endLine":  7600,
-"endColumn":  295
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 267 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7638",
-"region":  {
-"startLine":  7638,
-"startColumn":  1,
-"endLine":  7638,
-"endColumn":  268
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 216 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7817",
-"region":  {
-"startLine":  7817,
-"startColumn":  1,
-"endLine":  7817,
-"endColumn":  217
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 225 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7819",
-"region":  {
-"startLine":  7819,
-"startColumn":  1,
-"endLine":  7819,
-"endColumn":  226
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 218 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7838",
-"region":  {
-"startLine":  7838,
-"startColumn":  1,
-"endLine":  7838,
-"endColumn":  219
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 223 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7840",
-"region":  {
-"startLine":  7840,
-"startColumn":  1,
-"endLine":  7840,
-"endColumn":  224
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S103",
+      "Message": "Split this 207 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/clsTheming.vb#L128",
+      "Location": "Line 128 Position 1-208"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 448 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/clsTheming.vb#L139",
+      "Location": "Line 139 Position 1-449"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 237 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L122",
+      "Location": "Line 122 Position 1-238"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 240 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L245",
+      "Location": "Line 245 Position 1-241"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 208 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L247",
+      "Location": "Line 247 Position 1-209"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 240 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L249",
+      "Location": "Line 249 Position 1-241"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 208 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L251",
+      "Location": "Line 251 Position 1-209"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 217 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L259",
+      "Location": "Line 259 Position 1-218"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 201 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L264",
+      "Location": "Line 264 Position 1-202"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 201 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L265",
+      "Location": "Line 265 Position 1-202"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 233 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L266",
+      "Location": "Line 266 Position 1-234"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 201 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L268",
+      "Location": "Line 268 Position 1-202"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 233 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L270",
+      "Location": "Line 270 Position 1-234"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 201 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L272",
+      "Location": "Line 272 Position 1-202"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 201 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L303",
+      "Location": "Line 303 Position 1-202"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 283 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditEpisode.vb#L110",
+      "Location": "Line 110 Position 1-284"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 336 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditEpisode.vb#L122",
+      "Location": "Line 122 Position 1-337"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 348 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L1124",
+      "Location": "Line 1124 Position 1-349"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 211 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L119",
+      "Location": "Line 119 Position 1-212"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 315 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L1223",
+      "Location": "Line 1223 Position 1-316"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 202 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L1225",
+      "Location": "Line 1225 Position 1-203"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 272 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L1229",
+      "Location": "Line 1229 Position 1-273"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 233 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L1315",
+      "Location": "Line 1315 Position 1-234"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 298 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L1317",
+      "Location": "Line 1317 Position 1-299"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 250 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L1321",
+      "Location": "Line 1321 Position 1-251"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 258 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L188",
+      "Location": "Line 188 Position 1-259"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 308 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditSeason.vb#L110",
+      "Location": "Line 110 Position 1-309"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 224 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditSeason.vb#L162",
+      "Location": "Line 162 Position 1-225"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 308 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditSeason.vb#L62",
+      "Location": "Line 62 Position 1-309"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 280 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditShow.vb#L174",
+      "Location": "Line 174 Position 1-281"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 280 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditShow.vb#L222",
+      "Location": "Line 222 Position 1-281"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 248 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditShow.vb#L671",
+      "Location": "Line 671 Position 1-249"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 287 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditShow.vb#L79",
+      "Location": "Line 79 Position 1-288"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 229 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L132",
+      "Location": "Line 132 Position 1-230"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 216 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgNewVersion.vb#L76",
+      "Location": "Line 76 Position 1-217"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 201 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgRestart.vb#L23",
+      "Location": "Line 23 Position 1-202"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 269 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSetsManager.vb#L152",
+      "Location": "Line 152 Position 1-270"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 206 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L250",
+      "Location": "Line 250 Position 1-207"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 225 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2582",
+      "Location": "Line 2582 Position 1-226"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 202 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L260",
+      "Location": "Line 260 Position 1-203"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 211 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2623",
+      "Location": "Line 2623 Position 1-212"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 210 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L270",
+      "Location": "Line 270 Position 1-211"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 215 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2945",
+      "Location": "Line 2945 Position 1-216"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 253 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2947",
+      "Location": "Line 2947 Position 1-254"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 215 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2958",
+      "Location": "Line 2958 Position 1-216"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 253 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2960",
+      "Location": "Line 2960 Position 1-254"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 206 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L302",
+      "Location": "Line 302 Position 1-207"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 206 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L306",
+      "Location": "Line 306 Position 1-207"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 210 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L309",
+      "Location": "Line 309 Position 1-211"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 296 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3100",
+      "Location": "Line 3100 Position 1-297"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 298 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3196",
+      "Location": "Line 3196 Position 1-299"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 333 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L380",
+      "Location": "Line 380 Position 1-334"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 245 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4073",
+      "Location": "Line 4073 Position 1-246"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 246 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4088",
+      "Location": "Line 4088 Position 1-247"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 213 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4371",
+      "Location": "Line 4371 Position 1-214"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 225 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4569",
+      "Location": "Line 4569 Position 1-226"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 230 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L695",
+      "Location": "Line 695 Position 1-231"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 233 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L703",
+      "Location": "Line 703 Position 1-234"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 231 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L711",
+      "Location": "Line 711 Position 1-232"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 240 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L719",
+      "Location": "Line 719 Position 1-241"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 228 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L738",
+      "Location": "Line 738 Position 1-229"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 344 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSortFiles.vb#L52",
+      "Location": "Line 52 Position 1-345"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 284 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgWizard.vb#L262",
+      "Location": "Line 262 Position 1-285"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 286 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgWizard.vb#L293",
+      "Location": "Line 293 Position 1-287"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 514 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgWizard.vb#L406",
+      "Location": "Line 406 Position 1-515"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 317 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgWizard.vb#L407",
+      "Location": "Line 407 Position 1-318"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 814 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgWizard.vb#L409",
+      "Location": "Line 409 Position 1-815"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 287 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgWizard.vb#L413",
+      "Location": "Line 413 Position 1-288"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 214 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1268",
+      "Location": "Line 1268 Position 1-215"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 303 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1336",
+      "Location": "Line 1336 Position 1-304"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 226 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1339",
+      "Location": "Line 1339 Position 1-227"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 363 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1346",
+      "Location": "Line 1346 Position 1-364"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 256 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1349",
+      "Location": "Line 1349 Position 1-257"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 218 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1356",
+      "Location": "Line 1356 Position 1-219"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 216 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1438",
+      "Location": "Line 1438 Position 1-217"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 239 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1681",
+      "Location": "Line 1681 Position 1-240"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 278 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1696",
+      "Location": "Line 1696 Position 1-279"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 311 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1790",
+      "Location": "Line 1790 Position 1-312"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 455 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1830",
+      "Location": "Line 1830 Position 1-456"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 314 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2021",
+      "Location": "Line 2021 Position 1-315"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 393 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2688",
+      "Location": "Line 2688 Position 1-394"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 393 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2708",
+      "Location": "Line 2708 Position 1-394"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 313 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2746",
+      "Location": "Line 2746 Position 1-314"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 298 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2779",
+      "Location": "Line 2779 Position 1-299"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 238 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2782",
+      "Location": "Line 2782 Position 1-239"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 262 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2793",
+      "Location": "Line 2793 Position 1-263"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 228 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3296",
+      "Location": "Line 3296 Position 1-229"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 232 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3429",
+      "Location": "Line 3429 Position 1-233"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 262 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3627",
+      "Location": "Line 3627 Position 1-263"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 266 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3753",
+      "Location": "Line 3753 Position 1-267"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 262 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3890",
+      "Location": "Line 3890 Position 1-263"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 266 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4017",
+      "Location": "Line 4017 Position 1-267"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 231 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4172",
+      "Location": "Line 4172 Position 1-232"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 216 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4326",
+      "Location": "Line 4326 Position 1-217"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 239 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4329",
+      "Location": "Line 4329 Position 1-240"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 295 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4673",
+      "Location": "Line 4673 Position 1-296"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 234 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4676",
+      "Location": "Line 4676 Position 1-235"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 202 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5521",
+      "Location": "Line 5521 Position 1-203"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 201 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5582",
+      "Location": "Line 5582 Position 1-202"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 236 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5947",
+      "Location": "Line 5947 Position 1-237"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 221 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6368",
+      "Location": "Line 6368 Position 1-222"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 205 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6370",
+      "Location": "Line 6370 Position 1-206"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 232 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6517",
+      "Location": "Line 6517 Position 1-233"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 313 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6649",
+      "Location": "Line 6649 Position 1-314"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 203 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6824",
+      "Location": "Line 6824 Position 1-204"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 289 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6951",
+      "Location": "Line 6951 Position 1-290"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 204 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7103",
+      "Location": "Line 7103 Position 1-205"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 297 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7305",
+      "Location": "Line 7305 Position 1-298"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 284 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7474",
+      "Location": "Line 7474 Position 1-285"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 363 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7480",
+      "Location": "Line 7480 Position 1-364"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 212 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7544",
+      "Location": "Line 7544 Position 1-213"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 365 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7549",
+      "Location": "Line 7549 Position 1-366"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 294 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7573",
+      "Location": "Line 7573 Position 1-295"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 206 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7592",
+      "Location": "Line 7592 Position 1-207"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 294 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7600",
+      "Location": "Line 7600 Position 1-295"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 267 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7638",
+      "Location": "Line 7638 Position 1-268"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 216 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7817",
+      "Location": "Line 7817 Position 1-217"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 225 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7819",
+      "Location": "Line 7819 Position 1-226"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 218 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7838",
+      "Location": "Line 7838 Position 1-219"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 223 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7840",
+      "Location": "Line 7840 Position 1-224"
+    }
+  ]
 }

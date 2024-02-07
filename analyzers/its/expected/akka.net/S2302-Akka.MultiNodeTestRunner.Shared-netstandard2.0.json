@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S2302",
-"message":  "Replace the string 'data' with 'nameof(data)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Persistence/JsonPersistentTestRunStore.cs#L63",
-"region":  {
-"startLine":  63,
-"startColumn":  63,
-"endLine":  63,
-"endColumn":  69
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'filePath' with 'nameof(filePath)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Persistence/JsonPersistentTestRunStore.cs#L64",
-"region":  {
-"startLine":  64,
-"startColumn":  77,
-"endLine":  64,
-"endColumn":  113
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'filePath' with 'nameof(filePath)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Persistence/JsonPersistentTestRunStore.cs#L84",
-"region":  {
-"startLine":  84,
-"startColumn":  77,
-"endLine":  84,
-"endColumn":  113
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027data\u0027 with \u0027nameof(data)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Persistence/JsonPersistentTestRunStore.cs#L63",
+      "Location": "Line 63 Position 63-69"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027filePath\u0027 with \u0027nameof(filePath)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Persistence/JsonPersistentTestRunStore.cs#L64",
+      "Location": "Line 64 Position 77-113"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027filePath\u0027 with \u0027nameof(filePath)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Persistence/JsonPersistentTestRunStore.cs#L84",
+      "Location": "Line 84 Position 77-113"
+    }
+  ]
 }

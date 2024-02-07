@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2930",
-"message":  "Dispose 'cts' when it is no longer needed.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L239",
-"region":  {
-"startLine":  239,
-"startColumn":  29,
-"endLine":  239,
-"endColumn":  88
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2930",
+      "Message": "Dispose \u0027cts\u0027 when it is no longer needed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L239",
+      "Location": "Line 239 Position 29-88"
+    }
+  ]
 }

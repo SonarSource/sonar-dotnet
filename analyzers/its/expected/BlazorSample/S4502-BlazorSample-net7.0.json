@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S4502",
-"message":  "Make sure disabling CSRF protection is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/Error.cshtml.cs#L8",
-"region":  {
-"startLine":  8,
-"startColumn":  6,
-"endLine":  8,
-"endColumn":  28
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4502",
+      "Message": "Make sure disabling CSRF protection is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/Error.cshtml.cs#L8",
+      "Location": "Line 8 Position 6-28"
+    }
+  ]
 }

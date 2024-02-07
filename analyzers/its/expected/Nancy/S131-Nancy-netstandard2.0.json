@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S131",
-"message":  "Add a 'default' clause to this 'switch' statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpMultipartSubStream.cs#L85",
-"region":  {
-"startLine":  85,
-"startColumn":  13,
-"endLine":  85,
-"endColumn":  19
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S131",
+      "Message": "Add a \u0027default\u0027 clause to this \u0027switch\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpMultipartSubStream.cs#L85",
+      "Location": "Line 85 Position 13-19"
+    }
+  ]
 }

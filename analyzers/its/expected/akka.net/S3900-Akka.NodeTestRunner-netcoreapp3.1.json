@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'discovery' before using it.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.NodeTestRunner/Discovery.cs#L32",
-"region":  {
-"startLine":  32,
-"startColumn":  24,
-"endLine":  32,
-"endColumn":  33
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3900",
+      "Message": "Refactor this method to add validation of parameter \u0027discovery\u0027 before using it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.NodeTestRunner/Discovery.cs#L32",
+      "Location": "Line 32 Position 24-33"
+    }
+  ]
 }

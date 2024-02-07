@@ -1,28 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S4059",
-"message":  "Change either the name of property 'Alpha' or the name of method 'GetAlpha' to make them distinguishable.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessages.g.cs#L865",
-"region":  {
-"startLine":  865,
-"startColumn":  23,
-"endLine":  865,
-"endColumn":  28
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/EWMA.cs#L80",
-"region":  {
-"startLine":  80,
-"startColumn":  38,
-"endLine":  80,
-"endColumn":  46
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S4059",
+      "Message": "Change either the name of property \u0027Alpha\u0027 or the name of method \u0027GetAlpha\u0027 to make them distinguishable.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessages.g.cs#L865",
+      "Location": "Line 865 Position 23-28"
+    }
+  ]
 }

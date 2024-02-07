@@ -1,537 +1,250 @@
 {
-"issues":  [
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L166",
-"region":  {
-"startLine":  166,
-"startColumn":  106,
-"endLine":  166,
-"endColumn":  120
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L298",
-"region":  {
-"startLine":  298,
-"startColumn":  72,
-"endLine":  298,
-"endColumn":  86
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L299",
-"region":  {
-"startLine":  299,
-"startColumn":  79,
-"endLine":  299,
-"endColumn":  93
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L339",
-"region":  {
-"startLine":  339,
-"startColumn":  75,
-"endLine":  339,
-"endColumn":  89
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L341",
-"region":  {
-"startLine":  341,
-"startColumn":  96,
-"endLine":  341,
-"endColumn":  110
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L380",
-"region":  {
-"startLine":  380,
-"startColumn":  72,
-"endLine":  380,
-"endColumn":  86
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L381",
-"region":  {
-"startLine":  381,
-"startColumn":  83,
-"endLine":  381,
-"endColumn":  97
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L382",
-"region":  {
-"startLine":  382,
-"startColumn":  85,
-"endLine":  382,
-"endColumn":  99
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L383",
-"region":  {
-"startLine":  383,
-"startColumn":  81,
-"endLine":  383,
-"endColumn":  95
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L413",
-"region":  {
-"startLine":  413,
-"startColumn":  75,
-"endLine":  413,
-"endColumn":  89
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L427",
-"region":  {
-"startLine":  427,
-"startColumn":  90,
-"endLine":  427,
-"endColumn":  104
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L443",
-"region":  {
-"startLine":  443,
-"startColumn":  96,
-"endLine":  443,
-"endColumn":  110
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L464",
-"region":  {
-"startLine":  464,
-"startColumn":  97,
-"endLine":  464,
-"endColumn":  111
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L531",
-"region":  {
-"startLine":  531,
-"startColumn":  83,
-"endLine":  531,
-"endColumn":  97
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L533",
-"region":  {
-"startLine":  533,
-"startColumn":  84,
-"endLine":  533,
-"endColumn":  98
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L549",
-"region":  {
-"startLine":  549,
-"startColumn":  60,
-"endLine":  549,
-"endColumn":  74
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L644",
-"region":  {
-"startLine":  644,
-"startColumn":  57,
-"endLine":  644,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L697",
-"region":  {
-"startLine":  697,
-"startColumn":  57,
-"endLine":  697,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L729",
-"region":  {
-"startLine":  729,
-"startColumn":  57,
-"endLine":  729,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L960",
-"region":  {
-"startLine":  960,
-"startColumn":  51,
-"endLine":  960,
-"endColumn":  65
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L969",
-"region":  {
-"startLine":  969,
-"startColumn":  64,
-"endLine":  969,
-"endColumn":  78
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L976",
-"region":  {
-"startLine":  976,
-"startColumn":  64,
-"endLine":  976,
-"endColumn":  78
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L987",
-"region":  {
-"startLine":  987,
-"startColumn":  68,
-"endLine":  987,
-"endColumn":  82
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L997",
-"region":  {
-"startLine":  997,
-"startColumn":  75,
-"endLine":  997,
-"endColumn":  89
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L998",
-"region":  {
-"startLine":  998,
-"startColumn":  32,
-"endLine":  998,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1220",
-"region":  {
-"startLine":  1220,
-"startColumn":  61,
-"endLine":  1220,
-"endColumn":  75
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1224",
-"region":  {
-"startLine":  1224,
-"startColumn":  46,
-"endLine":  1224,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1231",
-"region":  {
-"startLine":  1231,
-"startColumn":  64,
-"endLine":  1231,
-"endColumn":  78
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1235",
-"region":  {
-"startLine":  1235,
-"startColumn":  49,
-"endLine":  1235,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1241",
-"region":  {
-"startLine":  1241,
-"startColumn":  63,
-"endLine":  1241,
-"endColumn":  77
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1245",
-"region":  {
-"startLine":  1245,
-"startColumn":  48,
-"endLine":  1245,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1251",
-"region":  {
-"startLine":  1251,
-"startColumn":  63,
-"endLine":  1251,
-"endColumn":  77
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1255",
-"region":  {
-"startLine":  1255,
-"startColumn":  48,
-"endLine":  1255,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1261",
-"region":  {
-"startLine":  1261,
-"startColumn":  62,
-"endLine":  1261,
-"endColumn":  76
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1265",
-"region":  {
-"startLine":  1265,
-"startColumn":  47,
-"endLine":  1265,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1498",
-"region":  {
-"startLine":  1498,
-"startColumn":  82,
-"endLine":  1498,
-"endColumn":  96
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1498",
-"region":  {
-"startLine":  1498,
-"startColumn":  179,
-"endLine":  1498,
-"endColumn":  193
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1561",
-"region":  {
-"startLine":  1561,
-"startColumn":  82,
-"endLine":  1561,
-"endColumn":  96
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1561",
-"region":  {
-"startLine":  1561,
-"startColumn":  176,
-"endLine":  1561,
-"endColumn":  190
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1695",
-"region":  {
-"startLine":  1695,
-"startColumn":  41,
-"endLine":  1695,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1706",
-"region":  {
-"startLine":  1706,
-"startColumn":  45,
-"endLine":  1706,
-"endColumn":  59
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1220",
+      "Location": "Line 1220 Position 61-75"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1224",
+      "Location": "Line 1224 Position 46-60"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1231",
+      "Location": "Line 1231 Position 64-78"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1235",
+      "Location": "Line 1235 Position 49-63"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1241",
+      "Location": "Line 1241 Position 63-77"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1245",
+      "Location": "Line 1245 Position 48-62"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1251",
+      "Location": "Line 1251 Position 63-77"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1255",
+      "Location": "Line 1255 Position 48-62"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1261",
+      "Location": "Line 1261 Position 62-76"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1265",
+      "Location": "Line 1265 Position 47-61"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1498",
+      "Location": "Line 1498 Position 82-96"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1498",
+      "Location": "Line 1498 Position 179-193"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1561",
+      "Location": "Line 1561 Position 82-96"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1561",
+      "Location": "Line 1561 Position 176-190"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L166",
+      "Location": "Line 166 Position 106-120"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1695",
+      "Location": "Line 1695 Position 41-55"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1706",
+      "Location": "Line 1706 Position 45-59"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L298",
+      "Location": "Line 298 Position 72-86"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L299",
+      "Location": "Line 299 Position 79-93"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L339",
+      "Location": "Line 339 Position 75-89"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L341",
+      "Location": "Line 341 Position 96-110"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L380",
+      "Location": "Line 380 Position 72-86"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L381",
+      "Location": "Line 381 Position 83-97"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L382",
+      "Location": "Line 382 Position 85-99"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L383",
+      "Location": "Line 383 Position 81-95"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L413",
+      "Location": "Line 413 Position 75-89"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L427",
+      "Location": "Line 427 Position 90-104"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L443",
+      "Location": "Line 443 Position 96-110"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L464",
+      "Location": "Line 464 Position 97-111"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L531",
+      "Location": "Line 531 Position 83-97"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L533",
+      "Location": "Line 533 Position 84-98"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L549",
+      "Location": "Line 549 Position 60-74"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L644",
+      "Location": "Line 644 Position 57-71"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L697",
+      "Location": "Line 697 Position 57-71"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L729",
+      "Location": "Line 729 Position 57-71"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L960",
+      "Location": "Line 960 Position 51-65"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L969",
+      "Location": "Line 969 Position 64-78"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L976",
+      "Location": "Line 976 Position 64-78"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L987",
+      "Location": "Line 987 Position 68-82"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L997",
+      "Location": "Line 997 Position 75-89"
+    },
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L998",
+      "Location": "Line 998 Position 32-46"
+    }
+  ]
 }

@@ -1,56 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S2486",
-"message":  "Handle the exception or explain in a comment why it can be ignored.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/FavIconApplicationStartup.cs#L115-L117",
-"region":  {
-"startLine":  115,
-"startColumn":  13,
-"endLine":  117,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S2486",
-"message":  "Handle the exception or explain in a comment why it can be ignored.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L109-L111",
-"region":  {
-"startLine":  109,
-"startColumn":  13,
-"endLine":  111,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S2486",
-"message":  "Handle the exception or explain in a comment why it can be ignored.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L122-L124",
-"region":  {
-"startLine":  122,
-"startColumn":  13,
-"endLine":  124,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S2486",
-"message":  "Handle the exception or explain in a comment why it can be ignored.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/RequestStream.cs#L445-L447",
-"region":  {
-"startLine":  445,
-"startColumn":  13,
-"endLine":  447,
-"endColumn":  14
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2486",
+      "Message": "Handle the exception or explain in a comment why it can be ignored.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/FavIconApplicationStartup.cs#L115-L117",
+      "Location": "Lines 115-117 Position 13-14"
+    },
+    {
+      "Id": "S2486",
+      "Message": "Handle the exception or explain in a comment why it can be ignored.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L109-L111",
+      "Location": "Lines 109-111 Position 13-14"
+    },
+    {
+      "Id": "S2486",
+      "Message": "Handle the exception or explain in a comment why it can be ignored.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L122-L124",
+      "Location": "Lines 122-124 Position 13-14"
+    },
+    {
+      "Id": "S2486",
+      "Message": "Handle the exception or explain in a comment why it can be ignored.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/RequestStream.cs#L445-L447",
+      "Location": "Lines 445-447 Position 13-14"
+    }
+  ]
 }

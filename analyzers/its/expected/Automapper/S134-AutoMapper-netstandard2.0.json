@@ -1,56 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/AutoMapperMappingException.cs#L199",
-"region":  {
-"startLine":  199,
-"startColumn":  29,
-"endLine":  199,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/MapperConfigurationExpression.cs#L203",
-"region":  {
-"startLine":  203,
-"startColumn":  25,
-"endLine":  203,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L178",
-"region":  {
-"startLine":  178,
-"startColumn":  25,
-"endLine":  178,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S134",
-"message":  "Refactor this code to not nest more than 3 control flow statements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L100",
-"region":  {
-"startLine":  100,
-"startColumn":  25,
-"endLine":  100,
-"endColumn":  27
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S134",
+      "Message": "Refactor this code to not nest more than 3 control flow statements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/AutoMapperMappingException.cs#L199",
+      "Location": "Line 199 Position 29-36"
+    },
+    {
+      "Id": "S134",
+      "Message": "Refactor this code to not nest more than 3 control flow statements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/MapperConfigurationExpression.cs#L203",
+      "Location": "Line 203 Position 25-32"
+    },
+    {
+      "Id": "S134",
+      "Message": "Refactor this code to not nest more than 3 control flow statements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L178",
+      "Location": "Line 178 Position 25-27"
+    },
+    {
+      "Id": "S134",
+      "Message": "Refactor this code to not nest more than 3 control flow statements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L100",
+      "Location": "Line 100 Position 25-27"
+    }
+  ]
 }

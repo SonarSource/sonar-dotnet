@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2325",
-"message":  "Make 'ConvertTimeZone' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/Net7/S6575.cs#L7",
-"region":  {
-"startLine":  7,
-"startColumn":  21,
-"endLine":  7,
-"endColumn":  36
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027ConvertTimeZone\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/Net7/S6575.cs#L7",
+      "Location": "Line 7 Position 21-36"
+    }
+  ]
 }

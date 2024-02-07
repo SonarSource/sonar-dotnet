@@ -1,238 +1,112 @@
 {
-"issues":  [
-{
-"id":  "S2357",
-"message":  "Make 'HasTaste' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/CovariantReturn.cs#L5",
-"region":  {
-"startLine":  5,
-"startColumn":  37,
-"endLine":  5,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'IsRed' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/CovariantReturn.cs#L6",
-"region":  {
-"startLine":  6,
-"startColumn":  44,
-"endLine":  6,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'Nested' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/LambdaDiscardParameters.cs#L28",
-"region":  {
-"startLine":  28,
-"startColumn":  53,
-"endLine":  28,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'FirstName' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Records.cs#L29",
-"region":  {
-"startLine":  29,
-"startColumn":  54,
-"endLine":  29,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'LastName' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Records.cs#L29",
-"region":  {
-"startLine":  29,
-"startColumn":  79,
-"endLine":  29,
-"endColumn":  87
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'ID' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Records.cs#L31",
-"region":  {
-"startLine":  31,
-"startColumn":  71,
-"endLine":  31,
-"endColumn":  73
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'Name' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Records.cs#L67",
-"region":  {
-"startLine":  67,
-"startColumn":  55,
-"endLine":  67,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'Property' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Records.cs#L115",
-"region":  {
-"startLine":  115,
-"startColumn":  27,
-"endLine":  115,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'Property' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Records.cs#L120",
-"region":  {
-"startLine":  120,
-"startColumn":  27,
-"endLine":  120,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'Field1' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3052.cs#L5",
-"region":  {
-"startLine":  5,
-"startColumn":  21,
-"endLine":  5,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'Field2' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3052.cs#L6",
-"region":  {
-"startLine":  6,
-"startColumn":  21,
-"endLine":  6,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'Field3' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3052.cs#L7",
-"region":  {
-"startLine":  7,
-"startColumn":  22,
-"endLine":  7,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'Field4' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3052.cs#L8",
-"region":  {
-"startLine":  8,
-"startColumn":  22,
-"endLine":  8,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'p2' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4000.cs#L8",
-"region":  {
-"startLine":  8,
-"startColumn":  23,
-"endLine":  8,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'f1' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4000.cs#L9",
-"region":  {
-"startLine":  9,
-"startColumn":  53,
-"endLine":  9,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'Name' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/TargetTypedConditionals.cs#L5",
-"region":  {
-"startLine":  5,
-"startColumn":  45,
-"endLine":  5,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'Grade' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/TargetTypedConditionals.cs#L6",
-"region":  {
-"startLine":  6,
-"startColumn":  52,
-"endLine":  6,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'HasMoney' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/TargetTypedConditionals.cs#L7",
-"region":  {
-"startLine":  7,
-"startColumn":  54,
-"endLine":  7,
-"endColumn":  62
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027HasTaste\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/CovariantReturn.cs#L5",
+      "Location": "Line 5 Position 37-45"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027IsRed\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/CovariantReturn.cs#L6",
+      "Location": "Line 6 Position 44-49"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Nested\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/LambdaDiscardParameters.cs#L28",
+      "Location": "Line 28 Position 53-59"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Property\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Records.cs#L115",
+      "Location": "Line 115 Position 27-35"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Property\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Records.cs#L120",
+      "Location": "Line 120 Position 27-35"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027FirstName\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Records.cs#L29",
+      "Location": "Line 29 Position 54-63"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027LastName\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Records.cs#L29",
+      "Location": "Line 29 Position 79-87"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027ID\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Records.cs#L31",
+      "Location": "Line 31 Position 71-73"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Name\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Records.cs#L67",
+      "Location": "Line 67 Position 55-59"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Field1\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3052.cs#L5",
+      "Location": "Line 5 Position 21-27"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Field2\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3052.cs#L6",
+      "Location": "Line 6 Position 21-27"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Field3\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3052.cs#L7",
+      "Location": "Line 7 Position 22-28"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Field4\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3052.cs#L8",
+      "Location": "Line 8 Position 22-28"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027p2\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4000.cs#L8",
+      "Location": "Line 8 Position 23-25"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027f1\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4000.cs#L9",
+      "Location": "Line 9 Position 53-55"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Name\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/TargetTypedConditionals.cs#L5",
+      "Location": "Line 5 Position 45-49"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Grade\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/TargetTypedConditionals.cs#L6",
+      "Location": "Line 6 Position 52-57"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027HasMoney\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/TargetTypedConditionals.cs#L7",
+      "Location": "Line 7 Position 54-62"
+    }
+  ]
 }

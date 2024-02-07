@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S2115",
-"message":  "Use a secure password when connecting to this database.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/WebConfig/Views/appsettings.json#L3",
-"region":  {
-"startLine":  3,
-"startColumn":  27,
-"endLine":  3,
-"endColumn":  98
-}
-}
-},
-{
-"id":  "S2115",
-"message":  "Use a secure password when connecting to this database.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/WebConfig/Views/Web.config#L44",
-"region":  {
-"startLine":  44,
-"startColumn":  31,
-"endLine":  44,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S2115",
-"message":  "Use a secure password when connecting to this database.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/WebConfig/Web.config#L20",
-"region":  {
-"startLine":  20,
-"startColumn":  31,
-"endLine":  20,
-"endColumn":  47
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2115",
+      "Message": "Use a secure password when connecting to this database.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/WebConfig/Views/appsettings.json#L3",
+      "Location": "Line 3 Position 27-98"
+    },
+    {
+      "Id": "S2115",
+      "Message": "Use a secure password when connecting to this database.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/WebConfig/Views/Web.config#L44",
+      "Location": "Line 44 Position 31-47"
+    },
+    {
+      "Id": "S2115",
+      "Message": "Use a secure password when connecting to this database.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/WebConfig/Web.config#L20",
+      "Location": "Line 20 Position 31-47"
+    }
+  ]
 }

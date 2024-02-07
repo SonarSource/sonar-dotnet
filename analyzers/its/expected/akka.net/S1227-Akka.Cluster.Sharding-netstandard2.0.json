@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1227",
-"message":  "Refactor the code in order to remove this break statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L500",
-"region":  {
-"startLine":  500,
-"startColumn":  29,
-"endLine":  500,
-"endColumn":  35
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1227",
+      "Message": "Refactor the code in order to remove this break statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L500",
+      "Location": "Line 500 Position 29-35"
+    }
+  ]
 }

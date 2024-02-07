@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/Internal/Topics.cs#L291",
-"region":  {
-"startLine":  291,
-"startColumn":  74,
-"endLine":  291,
-"endColumn":  139
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/Internal/Topics.cs#L291",
+      "Location": "Line 291 Position 74-139"
+    }
+  ]
 }

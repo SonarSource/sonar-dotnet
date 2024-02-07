@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1151",
-"message":  "Reduce this 'Case' block number of statements from 11 to at most 8, for example by extracting code into a procedure.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L97",
-"region":  {
-"startLine":  97,
-"startColumn":  13,
-"endLine":  97,
-"endColumn":  37
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1151",
+      "Message": "Reduce this \u0027Case\u0027 block number of statements from 11 to at most 8, for example by extracting code into a procedure.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L97",
+      "Location": "Line 97 Position 13-37"
+    }
+  ]
 }

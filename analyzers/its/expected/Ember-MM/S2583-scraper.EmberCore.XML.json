@@ -1,244 +1,64 @@
 {
-"issues":  [
-{
-"id":  "S2583",
-"message":  "Change this condition so that it does not always evaluate to 'True'. Some code paths are unreachable.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/frmXMLSettingsHolder.vb#L44",
-"region":  {
-"startLine":  44,
-"startColumn":  15,
-"endLine":  44,
-"endColumn":  28
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/frmXMLSettingsHolder.vb#L48-L51",
-"region":  {
-"startLine":  48,
-"startColumn":  9,
-"endLine":  51,
-"endColumn":  35
-}
-}
-]
-},
-{
-"id":  "S2583",
-"message":  "Change this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/AlbumTag.vb#L380",
-"region":  {
-"startLine":  380,
-"startColumn":  20,
-"endLine":  380,
-"endColumn":  33
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/AlbumTag.vb#L381-L384",
-"region":  {
-"startLine":  381,
-"startColumn":  24,
-"endLine":  384,
-"endColumn":  33
-}
-}
-]
-},
-{
-"id":  "S2583",
-"message":  "Change this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/PersonInfo.vb#L221",
-"region":  {
-"startLine":  221,
-"startColumn":  20,
-"endLine":  221,
-"endColumn":  33
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/PersonInfo.vb#L222-L225",
-"region":  {
-"startLine":  222,
-"startColumn":  24,
-"endLine":  225,
-"endColumn":  34
-}
-}
-]
-},
-{
-"id":  "S2583",
-"message":  "Change this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L398",
-"region":  {
-"startLine":  398,
-"startColumn":  20,
-"endLine":  398,
-"endColumn":  33
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L399-L402",
-"region":  {
-"startLine":  399,
-"startColumn":  24,
-"endLine":  402,
-"endColumn":  33
-}
-}
-]
-},
-{
-"id":  "S2583",
-"message":  "Change this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L414",
-"region":  {
-"startLine":  414,
-"startColumn":  20,
-"endLine":  414,
-"endColumn":  33
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L415-L418",
-"region":  {
-"startLine":  415,
-"startColumn":  24,
-"endLine":  418,
-"endColumn":  33
-}
-}
-]
-},
-{
-"id":  "S2583",
-"message":  "Change this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L430",
-"region":  {
-"startLine":  430,
-"startColumn":  20,
-"endLine":  430,
-"endColumn":  33
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L431-L434",
-"region":  {
-"startLine":  431,
-"startColumn":  24,
-"endLine":  434,
-"endColumn":  33
-}
-}
-]
-},
-{
-"id":  "S2583",
-"message":  "Change this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L446",
-"region":  {
-"startLine":  446,
-"startColumn":  20,
-"endLine":  446,
-"endColumn":  33
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L447-L450",
-"region":  {
-"startLine":  447,
-"startColumn":  24,
-"endLine":  450,
-"endColumn":  33
-}
-}
-]
-},
-{
-"id":  "S2583",
-"message":  "Change this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L462",
-"region":  {
-"startLine":  462,
-"startColumn":  20,
-"endLine":  462,
-"endColumn":  33
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L463-L466",
-"region":  {
-"startLine":  463,
-"startColumn":  24,
-"endLine":  466,
-"endColumn":  33
-}
-}
-]
-},
-{
-"id":  "S2583",
-"message":  "Change this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperEvaluation.vb#L101",
-"region":  {
-"startLine":  101,
-"startColumn":  20,
-"endLine":  101,
-"endColumn":  33
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperEvaluation.vb#L102-L105",
-"region":  {
-"startLine":  102,
-"startColumn":  24,
-"endLine":  105,
-"endColumn":  33
-}
-}
-]
-},
-{
-"id":  "S2583",
-"message":  "Change this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperInfo.vb#L190",
-"region":  {
-"startLine":  190,
-"startColumn":  20,
-"endLine":  190,
-"endColumn":  33
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperInfo.vb#L191-L194",
-"region":  {
-"startLine":  191,
-"startColumn":  24,
-"endLine":  194,
-"endColumn":  33
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S2583",
+      "Message": "Change this condition so that it does not always evaluate to \u0027True\u0027. Some code paths are unreachable.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/frmXMLSettingsHolder.vb#L44",
+      "Location": "Line 44 Position 15-28"
+    },
+    {
+      "Id": "S2583",
+      "Message": "Change this condition so that it does not always evaluate to \u0027False\u0027. Some code paths are unreachable.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/AlbumTag.vb#L380",
+      "Location": "Line 380 Position 20-33"
+    },
+    {
+      "Id": "S2583",
+      "Message": "Change this condition so that it does not always evaluate to \u0027False\u0027. Some code paths are unreachable.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/PersonInfo.vb#L221",
+      "Location": "Line 221 Position 20-33"
+    },
+    {
+      "Id": "S2583",
+      "Message": "Change this condition so that it does not always evaluate to \u0027False\u0027. Some code paths are unreachable.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L398",
+      "Location": "Line 398 Position 20-33"
+    },
+    {
+      "Id": "S2583",
+      "Message": "Change this condition so that it does not always evaluate to \u0027False\u0027. Some code paths are unreachable.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L414",
+      "Location": "Line 414 Position 20-33"
+    },
+    {
+      "Id": "S2583",
+      "Message": "Change this condition so that it does not always evaluate to \u0027False\u0027. Some code paths are unreachable.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L430",
+      "Location": "Line 430 Position 20-33"
+    },
+    {
+      "Id": "S2583",
+      "Message": "Change this condition so that it does not always evaluate to \u0027False\u0027. Some code paths are unreachable.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L446",
+      "Location": "Line 446 Position 20-33"
+    },
+    {
+      "Id": "S2583",
+      "Message": "Change this condition so that it does not always evaluate to \u0027False\u0027. Some code paths are unreachable.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L462",
+      "Location": "Line 462 Position 20-33"
+    },
+    {
+      "Id": "S2583",
+      "Message": "Change this condition so that it does not always evaluate to \u0027False\u0027. Some code paths are unreachable.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperEvaluation.vb#L101",
+      "Location": "Line 101 Position 20-33"
+    },
+    {
+      "Id": "S2583",
+      "Message": "Change this condition so that it does not always evaluate to \u0027False\u0027. Some code paths are unreachable.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperInfo.vb#L190",
+      "Location": "Line 190 Position 20-33"
+    }
+  ]
 }

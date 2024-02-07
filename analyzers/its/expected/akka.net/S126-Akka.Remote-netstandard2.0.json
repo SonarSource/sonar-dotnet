@@ -1,147 +1,70 @@
 {
-"issues":  [
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L217",
-"region":  {
-"startLine":  217,
-"startColumn":  17,
-"endLine":  217,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L593",
-"region":  {
-"startLine":  593,
-"startColumn":  21,
-"endLine":  593,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1384",
-"region":  {
-"startLine":  1384,
-"startColumn":  13,
-"endLine":  1384,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L2030",
-"region":  {
-"startLine":  2030,
-"startColumn":  17,
-"endLine":  2030,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointRegistry.cs#L118",
-"region":  {
-"startLine":  118,
-"startColumn":  13,
-"endLine":  118,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointRegistry.cs#L260",
-"region":  {
-"startLine":  260,
-"startColumn":  21,
-"endLine":  260,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointRegistry.cs#L271",
-"region":  {
-"startLine":  271,
-"startColumn":  13,
-"endLine":  271,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteActorRefProvider.cs#L366",
-"region":  {
-"startLine":  366,
-"startColumn":  17,
-"endLine":  366,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L190",
-"region":  {
-"startLine":  190,
-"startColumn":  13,
-"endLine":  190,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MessageContainerSerializer.cs#L55",
-"region":  {
-"startLine":  55,
-"startColumn":  21,
-"endLine":  55,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L478",
-"region":  {
-"startLine":  478,
-"startColumn":  13,
-"endLine":  478,
-"endColumn":  20
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L217",
+      "Location": "Line 217 Position 17-24"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L593",
+      "Location": "Line 593 Position 21-28"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1384",
+      "Location": "Line 1384 Position 13-20"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L2030",
+      "Location": "Line 2030 Position 17-24"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointRegistry.cs#L118",
+      "Location": "Line 118 Position 13-20"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointRegistry.cs#L260",
+      "Location": "Line 260 Position 21-28"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointRegistry.cs#L271",
+      "Location": "Line 271 Position 13-20"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteActorRefProvider.cs#L366",
+      "Location": "Line 366 Position 17-24"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L190",
+      "Location": "Line 190 Position 13-20"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MessageContainerSerializer.cs#L55",
+      "Location": "Line 55 Position 21-28"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L478",
+      "Location": "Line 478 Position 13-20"
+    }
+  ]
 }

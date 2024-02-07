@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S4004",
-"message":  "Make the 'AggregatedTimelineLog' property read-only by removing the property setter or making it private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/SpecLog.cs#L20",
-"region":  {
-"startLine":  20,
-"startColumn":  29,
-"endLine":  20,
-"endColumn":  50
-}
-}
-},
-{
-"id":  "S4004",
-"message":  "Make the 'NodeLogs' property read-only by removing the property setter or making it private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/SpecLog.cs#L24",
-"region":  {
-"startLine":  24,
-"startColumn":  73,
-"endLine":  24,
-"endColumn":  81
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4004",
+      "Message": "Make the \u0027AggregatedTimelineLog\u0027 property read-only by removing the property setter or making it private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/SpecLog.cs#L20",
+      "Location": "Line 20 Position 29-50"
+    },
+    {
+      "Id": "S4004",
+      "Message": "Make the \u0027NodeLogs\u0027 property read-only by removing the property setter or making it private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/SpecLog.cs#L24",
+      "Location": "Line 24 Position 73-81"
+    }
+  ]
 }
