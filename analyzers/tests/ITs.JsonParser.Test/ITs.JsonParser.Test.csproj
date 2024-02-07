@@ -18,7 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SonarAnalyzer.TestFramework\SonarAnalyzer.TestFramework.csproj" />
-    <ProjectReference Include="..\..\src\ITs.JsonParser\ITs.JsonParser.csproj"/>
+    <ProjectReference Include="..\..\src\ITs.JsonParser\ITs.JsonParser.csproj" />
   </ItemGroup>
 
   <ItemGroup>
