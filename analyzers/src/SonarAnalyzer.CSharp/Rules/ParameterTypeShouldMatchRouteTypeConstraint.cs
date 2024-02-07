@@ -67,6 +67,9 @@ public sealed class ParameterTypeShouldMatchRouteTypeConstraint : SonarDiagnosti
                 {
                     foreach (var property in GetPropertyTypeMismatches((INamedTypeSymbol)c.Symbol, cc.Compilation))
                     {
+
+                        System.Diagnostics.Debugger.Launch();
+
                         c.ReportIssue(Diagnostic.Create(Rule,
                             property.Type.GetLocation(),
                             property.ToAdditionalLocation(),

@@ -26,11 +26,42 @@ public abstract class SonarReportingContextBase<TContext> : SonarAnalysisContext
 
     protected SonarReportingContextBase(SonarAnalysisContext analysisContext, TContext context) : base(analysisContext, context) { }
 
+    private readonly HashSet<string> rulesDisabledForRazor = new()
+        {
+            "S103",
+            "S104",
+            "S109",
+            "S113",
+            "S1147",
+            "S1192",
+            "S1451",
+        };
+
+
     protected void ReportIssueCore(Diagnostic diagnostic)
     {
-        diagnostic = EnsureDiagnosticLocation(diagnostic);
-        if (!GeneratedCodeRecognizer.IsRazorGeneratedFile(diagnostic.Location.SourceTree) // In case of Razor generated content, we don't want to raise any issues
-            && HasMatchingScope(diagnostic.Descriptor)
+        // FIXME: this logic works for VS 17.9 and newer
+        // for older versions, we need to
+        // `diagnostic = EnsureDiagnosticLocation(diagnostic);`
+        // and return if the diagnostic is still on a generated file
+        // `!GeneratedCodeRecognizer.IsRazorGeneratedFile(diagnostic.Location.SourceTree)`
+        if (!diagnostic.Location.GetMappedLineSpan().HasMappedPath)
+        {
+            return;
+        }
+        if (GeneratedCodeRecognizer.IsRazorGeneratedFile(diagnostic.Location.SourceTree)
+            && (rulesDisabledForRazor.Contains(diagnostic.Id) ||
+            (diagnostic.Descriptor.CustomTags.Count() == 1 && diagnostic.Descriptor.CustomTags.Contains(DiagnosticDescriptorFactory.TestSourceScopeTag))))
+        {
+            return;
+        }
+        // don't report twice
+
+        // Razor generated issues with mapped paths will be handled by the compiler in VS 17.9 and newer
+        // https://github.com/dotnet/razor/issues/9308
+        // https://github.com/dotnet/roslyn/issues/71449
+        // https://github.com/dotnet/roslyn/pull/71454
+        if (HasMatchingScope(diagnostic.Descriptor)
             && SonarAnalysisContext.LegacyIsRegisteredActionEnabled(diagnostic.Descriptor, diagnostic.Location?.SourceTree))
         {
             var reportingContext = CreateReportingContext(diagnostic);

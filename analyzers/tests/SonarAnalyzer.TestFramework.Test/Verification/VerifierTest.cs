@@ -191,11 +191,11 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
         [DataTestMethod]
         [DataRow("Dummy.razor")]
         [DataRow("Dummy.cshtml")]
-        public void Verify_RazorAnalysisInSLAndNugetContext_DoesNotRaise(string path) =>
+        public void Verify_RazorAnalysisInSLAndNugetContext(string path) =>
             DummyWithLocation
                 .AddPaths(path)
                 .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Unknown))
-                .VerifyNoIssueReported();
+                .Verify();
 
         [Ignore("Revert after 9.19 release")]
         [DataTestMethod]
