@@ -133,6 +133,8 @@ public class SonarAnalysisContext
     public void RegisterNodeActionInAllFiles<TSyntaxKind>(Action<SonarSyntaxNodeReportingContext> action, params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct =>
         analysisContext.RegisterSyntaxNodeAction(c => action(new(this, c)), syntaxKinds);
 
+    // This function will always return true for non-Razor files.
+    // Otherwise, it returns true if the rule is not noisy on Razor files and not a test-only rule.
     internal bool ShouldAnalyzeRazorFile(SyntaxTree sourceTree) =>
         !GeneratedCodeRecognizer.IsRazorGeneratedFile(sourceTree)
         || !SupportedDiagnostics.Any(x => (x.CustomTags.Count() == 1 && x.CustomTags.Contains(DiagnosticDescriptorFactory.TestSourceScopeTag))
