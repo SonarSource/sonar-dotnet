@@ -29,8 +29,8 @@ internal sealed class IncrementOrDecrement : SimpleProcessor<IIncrementOrDecreme
 
     protected override ProgramState Process(SymbolicContext context, IIncrementOrDecrementOperationWrapper incrementOrDecrement)
     {
-        var oldOperationValue = context.State[incrementOrDecrement.Target];
-        if (oldOperationValue?.Constraint<NumberConstraint>() is { } oldNumber)
+        if (context.State[incrementOrDecrement.Target] is { } oldOperationValue
+            && oldOperationValue.Constraint<NumberConstraint>() is { } oldNumber)
         {
             var newNumber = incrementOrDecrement.WrappedOperation.Kind switch
             {
