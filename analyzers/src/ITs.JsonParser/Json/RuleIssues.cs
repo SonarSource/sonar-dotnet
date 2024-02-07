@@ -38,11 +38,11 @@ public class RuleIssue
         Id = issue.RuleId;
         Message = issue.Message;
         Uri = issue.NormalizedUri();
-        if (issue.Location is { } location)
+        if (issue.Location?.Region is { } region)
         {
-            Location = location.Region.StartLine == location.Region.EndLine
-                ? $"Line(s) {location.Region.StartLine} Position {location.Region.StartColumn}#{location.Region.EndColumn}"
-                : $"Line(s) {location.Region.StartLine}-{location.Region.EndLine} Position {location.Region.StartColumn}#{location.Region.EndColumn}";
+            Location = region.StartLine == region.EndLine
+                ? $"Line {region.StartLine} Position {region.StartColumn}-{region.EndColumn}"
+                : $"Lines {region.StartLine}-{region.EndLine} Position {region.StartColumn}-{region.EndColumn}";
         }
     }
 }
