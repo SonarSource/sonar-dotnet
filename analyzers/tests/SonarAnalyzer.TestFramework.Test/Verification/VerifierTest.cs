@@ -270,6 +270,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
         {
             var compilations = DummyWithLocation.AddPaths("Dummy.razor")
                 .AddReferences(NuGetMetadataReference.MicrosoftAzureDocumentDB())
+                .WithLanguageVersion(LanguageVersion.Latest)
                 .Build()
                 .Compile(false);
             var references = compilations.Single().Compilation.References;
@@ -280,6 +281,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
         public void Compile_Razor_NoReferences()
         {
             var compilations = DummyWithLocation.AddPaths("Dummy.razor")
+                .WithLanguageVersion(LanguageVersion.Latest)
                 .Build()
                 .Compile(false);
             var references = compilations.Single().Compilation.References;

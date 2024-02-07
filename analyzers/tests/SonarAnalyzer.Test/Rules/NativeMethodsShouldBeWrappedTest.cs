@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.Test.Rules
@@ -69,7 +70,7 @@ namespace SonarAnalyzer.Test.Rules
                     {
                         Extern3(x);             // Error [CS1014, CS1513, CS8124, CS1519]
                     }
-                    public void Wrapper(        // Error [CS8803, CS0106, CS8805, CS8107, CS8112, CS1001]
+                    public void Wrapper(        // Error [CS0106, CS8107, CS8803, CS8805, CS8112, CS1001]
                     {
                         Extern3(x);             // Error [CS0246, CS1003, CS0246, CS8124, CS1001, CS1026, CS1001]
                     }                           // Error [CS1022]
@@ -78,6 +79,6 @@ namespace SonarAnalyzer.Test.Rules
                         Extern3(x);             // Error [CS0103, CS0103]
                     }
                 }                               // Error [CS1022]
-                """).Verify();
+                """).WithLanguageVersion(LanguageVersion.CSharp7).Verify();
     }
 }
