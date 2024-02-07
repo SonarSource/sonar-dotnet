@@ -50,13 +50,16 @@ namespace SonarAnalyzer.Common
                 _ => throw new NotSupportedException("Unsupported language name: " + name)
             };
 
-        public static AnalyzerLanguage FromPath(string path) =>
-            Path.GetExtension(path).ToUpperInvariant() switch
+        public static AnalyzerLanguage FromPath(string path)
+        {
+            var comparer = StringComparer.OrdinalIgnoreCase;
+            return Path.GetExtension(path) switch
             {
-                ".CS" or ".RAZOR" or ".CSHTML" => CSharp,
-                ".VB" => VisualBasic,
+                { } ext when comparer.Equals(ext, ".cs") || comparer.Equals(ext, ".razor") || comparer.Equals(ext, ".cshtml") => CSharp,
+                { } ext when comparer.Equals(ext, ".vb") => VisualBasic,
                 _ => throw new NotSupportedException("Unsupported file extension: " + Path.GetExtension(path))
             };
+        }
 
         public string HelpLink(string id) =>
             string.Format(helpLinkFormat, id.Substring(1));
