@@ -166,6 +166,7 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
     private ImmutableHashSet<string> CreateUnchangedFilesHashSet() =>
         ImmutableHashSet.Create(StringComparer.OrdinalIgnoreCase, ProjectConfiguration().AnalysisConfig?.UnchangedFiles() ?? Array.Empty<string>());
 
+    // FIXME this needs to be updated as well
     private static string MapFilePath(SyntaxTree tree) =>
         // Currently only .razor file hashes are stored in the cache.
         //
