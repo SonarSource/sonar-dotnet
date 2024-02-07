@@ -266,7 +266,8 @@ internal class RoslynSymbolicExecution
             };
     }
 
-    private bool IsInLoop(BasicBlock block) => loopBlockOrdinals.Contains(block.Ordinal);
+    private bool IsInLoop(BasicBlock block) =>
+        loopBlockOrdinals.Contains(block.Ordinal);
 
     private static ExceptionState ThrownException(ExplodedNode node, ControlFlowBranchSemantics semantics) =>
         semantics switch
@@ -316,27 +317,48 @@ internal class RoslynSymbolicExecution
 
     private static IEnumerable<int> DetectLoopBlockOrdinals(ControlFlowGraph cfg)
     {
-        var reachableFrom = cfg.Blocks.ToImmutableDictionary(x => x.Ordinal, x => new HashSet<int>());
-        var toProcess = new SortedSet<int>(new[] { 0 });
-        while (toProcess.Any())
+        var processed = new HashSet<int>();
+        var loops = new List<HashSet<int>>();
+        var toProcess = new Stack<List<int>>();
+        toProcess.Push(new() { 1 });
+        while (toProcess.TryPop(out var path))
         {
-            var current = toProcess.Min;
-            toProcess.Remove(current);
-            var currentReachableFrom = reachableFrom[current];
-            foreach (var successor in cfg.Blocks[current].SuccessorBlocks.Select(x => x.Ordinal))
+            var last = path[path.Count - 1];
+            if (processed.Add(last))
             {
-                var successorReachableFrom = reachableFrom[successor];
-                var changed = false;
-                foreach (var block in currentReachableFrom.Append(current))
+                ScheduleSuccessors(path, last);
+            }
+            else if (path.IndexOf(last) is var index && index < path.Count - 1)         // detect loop in current path
+            {
+                loops.Add(path.GetRange(index, path.Count - 1 - index).ToHashSet());    // equivalent to [index..^1]
+            }
+            else
+            {
+                MergeWithIntersectingLoops(path, last);
+            }
+            // Due to the nature of DFS:
+            // If a block is processed already, is not a loop in the current path and is not intersecting with already detected loops, it is not part of any loop.
+        }
+        return loops.SelectMany(x => x);
+
+        void ScheduleSuccessors(List<int> path, int last)
+        {
+            foreach (var successor in cfg.Blocks[last].SuccessorBlocks.Select(x => x.Ordinal))
+            {
+                toProcess.Push(path.Append(successor).ToList());
+            }
+        }
+
+        void MergeWithIntersectingLoops(List<int> path, int last)
+        {
+            foreach (var loop in loops.Where(x => x.Contains(last)))
+            {
+                var intersection = path.IndexOf(loop.Contains);
+                if (intersection < path.Count - 1)
                 {
-                    changed |= successorReachableFrom.Add(block);
-                }
-                if (changed)
-                {
-                    toProcess.Add(successor);
+                    loop.AddRange(path.GetRange(intersection + 1, path.Count - 1 - intersection));  // equivalent to [index + 1..^1]
                 }
             }
         }
-        return cfg.Blocks.Select(x => x.Ordinal).Where(x => reachableFrom[x].Contains(x));
     }
 }
