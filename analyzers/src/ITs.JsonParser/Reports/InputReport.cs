@@ -42,7 +42,8 @@ public class InputReport
             ? (fileName.Substring(0, index), fileName.Substring(index + 1))
             : (fileName, null);
 
-        Project = Path.GetFileName(Path.GetDirectoryName(path));
+        var projectDirectory = Directory.GetParent(Path.GetDirectoryName(path)).FullName;
+        Project = Path.GetFileName(projectDirectory);
         Sarif = JsonSerializer.Deserialize<SarifReport>(File.ReadAllText(path), options);
         ConsoleHelper.WriteLineColor($"Successfully parsed {this}", ConsoleColor.Green);
     }
