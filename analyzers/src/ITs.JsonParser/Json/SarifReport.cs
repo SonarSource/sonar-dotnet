@@ -41,11 +41,6 @@ public class SarifIssue
 
     public SarifLocationFile Location => Locations is { Length: > 0 } ? Locations[0].ResultFile : null;
 
-    public object Order() =>
-        Location is null
-            ? null
-            : (NormalizedUri(), Location.Region.StartLine, Location.Region.StartColumn, Location.Region.EndLine, Location.Region.EndColumn, Message);
-
     public string NormalizedUri()
     {
         if (Location is null)

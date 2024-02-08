@@ -58,11 +58,17 @@ public static class IssueParser
         var allIssues = inputReport.Sarif
             .AllIssues()
             .Where(x => RxSonarRule.IsMatch(x.RuleId))
-            .OrderBy(x => x.Order())
             .GroupBy(x => x.RuleId);
         foreach (var issuesByRule in allIssues)
         {
-            var issues = new RuleIssues { Issues = issuesByRule.Select(x => new RuleIssue(x)).ToArray() };
+            var issues = new RuleIssues
+            {
+                Issues = issuesByRule.Select(x => new RuleIssue(x))
+                    .OrderBy(x => x.Uri)
+                    .ThenBy(x => x?.Location)
+                    .ThenBy(x => x.Message)
+                    .ToArray()
+            };
             yield return new OutputReport(inputReport.Project, issuesByRule.Key, inputReport.Assembly, inputReport.Tfm, issues);
         }
     }
