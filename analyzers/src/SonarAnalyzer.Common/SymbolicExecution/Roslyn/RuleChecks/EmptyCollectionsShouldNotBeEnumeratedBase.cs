@@ -64,7 +64,6 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         nameof(HashSet<int>.Overlaps),
         nameof(HashSet<int>.RemoveWhere),
         nameof(HashSet<int>.SymmetricExceptWith),
-        nameof(HashSet<int>.UnionWith),
         nameof(Queue<int>.Dequeue),
         nameof(Queue<int>.Peek),
         "TryDequeue",

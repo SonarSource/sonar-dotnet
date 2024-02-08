@@ -232,7 +232,7 @@ class CollectionTests
         set.SymmetricExceptWith(items); // Noncompliant, also learns NotEmpty
         set = new HashSet<int>();
         set.TryGetValue(5, out i);      // Noncompliant
-        set.UnionWith(items);           // Noncompliant, also learns NotEmpty
+        set.UnionWith(items);           // Compliant, also learns NotEmpty
 
         var queue = new Queue<int>();
         queue.Clear();                  // Noncompliant
@@ -372,7 +372,7 @@ class CollectionTests
         set.SymmetricExceptWith(items); // Noncompliant
         set.Clear();                    // Compliant
         set = new HashSet<int>();
-        set.UnionWith(items);           // Noncompliant
+        set.UnionWith(items);           // Compliant
         set.Clear();                    // Compliant
 
         var queue = new Queue<int>();
