@@ -39,7 +39,7 @@ internal class RoslynSymbolicExecution
     private readonly RoslynLiveVariableAnalysis lva;
     private readonly DebugLogger logger = new();
     private readonly ExceptionCandidate exceptionCandidate;
-    private readonly HashSet<int> loopBlockOrdinals = new();
+    private readonly LoopDetector loopDetector;
 
     public RoslynSymbolicExecution(ControlFlowGraph cfg, SyntaxClassifierBase syntaxClassifier, SymbolicCheck[] checks, CancellationToken cancel)
     {
@@ -52,7 +52,7 @@ internal class RoslynSymbolicExecution
         this.checks = new(new SymbolicCheck[] { new NonNullableValueTypeCheck(), new ConstantCheck() }.Concat(checks).ToArray());
         this.cancel = cancel;
         exceptionCandidate = new(cfg.OriginalOperation.ToSonar().SemanticModel.Compilation);
-        loopBlockOrdinals = DetectLoopBlockOrdinals(cfg).ToHashSet();
+        loopDetector = new(cfg);
         lva = new(cfg, cancel);
         logger.Log(cfg);
     }
@@ -164,7 +164,7 @@ internal class RoslynSymbolicExecution
             {
                 // If a branch has no Destination but is part of conditional branching we need to call ConditionEvaluated. This happens when a Rethrow is following a condition.
                 var state = SetBranchingConstraints(branch, node.State, branchValue);
-                checks.ConditionEvaluated(new(node.Block, branchValue.ToSonar(), state, false, IsInLoop(node.Block), node.VisitCount, lva.CapturedVariables));
+                checks.ConditionEvaluated(new(node.Block, branchValue.ToSonar(), state, false, loopDetector.IsInLoop(node.Block), node.VisitCount, lva.CapturedVariables));
             }
             return null;    // We don't know where to continue
         }
@@ -185,7 +185,8 @@ internal class RoslynSymbolicExecution
         if (branch.Source.BranchValue is { } branchValue && branch.Source.ConditionalSuccessor is not null) // This branching was conditional
         {
             state = SetBranchingConstraints(branch, state, branchValue);
-            state = checks.ConditionEvaluated(new(block, branchValue.ToSonar(), state, syntaxClassifier.IsInLoopCondition(branchValue.Syntax), IsInLoop(block), visitCount, lva.CapturedVariables));
+            SymbolicContext context = new(block, branchValue.ToSonar(), state, syntaxClassifier.IsInLoopCondition(branchValue.Syntax), loopDetector.IsInLoop(block), visitCount, lva.CapturedVariables);
+            state = checks.ConditionEvaluated(context);
             if (state is null)
             {
                 return null;
@@ -208,7 +209,7 @@ internal class RoslynSymbolicExecution
 
     private IEnumerable<ExplodedNode> ProcessOperation(ExplodedNode node)
     {
-        foreach (var preProcessed in checks.PreProcess(new(node, lva.CapturedVariables, syntaxClassifier.IsInLoopCondition(node.Operation.Instance.Syntax), IsInLoop(node.Block))))
+        foreach (var preProcessed in checks.PreProcess(new(node, lva.CapturedVariables, syntaxClassifier.IsInLoopCondition(node.Operation.Instance.Syntax), loopDetector.IsInLoop(node.Block))))
         {
             foreach (var processed in OperationDispatcher.Process(preProcessed))
             {
@@ -266,9 +267,6 @@ internal class RoslynSymbolicExecution
             };
     }
 
-    private bool IsInLoop(BasicBlock block) =>
-        loopBlockOrdinals.Contains(block.Ordinal);
-
     private static ExceptionState ThrownException(ExplodedNode node, ControlFlowBranchSemantics semantics) =>
         semantics switch
         {
@@ -314,51 +312,4 @@ internal class RoslynSymbolicExecution
         region.Kind == ControlFlowRegionKind.Finally
         || thrown == ExceptionState.UnknownException
         || thrown.Type.DerivesFrom(region.ExceptionType);
-
-    private static IEnumerable<int> DetectLoopBlockOrdinals(ControlFlowGraph cfg)
-    {
-        var processed = new HashSet<int>();
-        var loops = new List<HashSet<int>>();
-        var toProcess = new Stack<List<int>>();
-        toProcess.Push(new() { 1 });
-        while (toProcess.TryPop(out var path))
-        {
-            var last = path[path.Count - 1];
-            if (processed.Add(last))
-            {
-                ScheduleSuccessors(path, last);
-            }
-            else if (path.IndexOf(last) is var index && index < path.Count - 1)         // detect loop in current path
-            {
-                loops.Add(path.GetRange(index, path.Count - 1 - index).ToHashSet());    // equivalent to [index..^1]
-            }
-            else
-            {
-                MergeWithIntersectingLoops(path, last);
-            }
-            // Due to the nature of DFS:
-            // If a block is processed already, is not a loop in the current path and is not intersecting with already detected loops, it is not part of any loop.
-        }
-        return loops.SelectMany(x => x);
-
-        void ScheduleSuccessors(List<int> path, int last)
-        {
-            foreach (var successor in cfg.Blocks[last].SuccessorBlocks.Select(x => x.Ordinal))
-            {
-                toProcess.Push(path.Append(successor).ToList());
-            }
-        }
-
-        void MergeWithIntersectingLoops(List<int> path, int last)
-        {
-            foreach (var loop in loops.Where(x => x.Contains(last)))
-            {
-                var intersection = path.IndexOf(loop.Contains);
-                if (intersection < path.Count - 1)
-                {
-                    loop.AddRange(path.GetRange(intersection + 1, path.Count - 1 - intersection));  // equivalent to [index + 1..^1]
-                }
-            }
-        }
-    }
 }
