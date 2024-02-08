@@ -42,7 +42,7 @@ public sealed class DiagnosticVerifierException : AssertFailedException
             builder.AppendLine(Path.GetFileName(fileMessages.Key));
             foreach (var message in fileMessages)
             {
-                builder.AppendLine($"at {message.ShortDescription} in {message.FullPath}:line {message.LineNumber}");
+                builder.AppendLine($"at {message.ToInvocation()} in {message.FullPath}:line {message.LineNumber}");
             }
             builder.AppendLine("---");    // Empty lines are not rendered => force it with content
         }

@@ -30,6 +30,12 @@ public class DiagnosticVerifierExceptionTest
         ((Func<DiagnosticVerifierException>)(() => new([]))).Should().Throw<ArgumentException>().WithMessage("messages cannot be empty*");
 
     [TestMethod]
+    public void Ctor_ShortMessageWithoutSpace_Throws() =>
+        ((Func<DiagnosticVerifierException>)(() => new([new("NoSpace", "Full Descriptin", "DiagnosticVerifierException.File1.cs", 1)]))).Should()
+            .Throw<InvalidOperationException>()
+            .WithMessage("Short description must contain space for Rider to display clickable link.");
+
+    [TestMethod]
     public void Message_SerializesAllFullDescriptions() =>
         new DiagnosticVerifierException(
             [
@@ -60,10 +66,10 @@ public class DiagnosticVerifierExceptionTest
             .Should()
             .BeIgnoringLineEndings($"""
                 DiagnosticVerifierException.File1.cs
-                at Short 1 in {Paths.TestsRoot}\SonarAnalyzer.TestFramework.Test\TestCases\DiagnosticVerifierException.File1.cs:line 11
-                at Short 2 in {Paths.TestsRoot}\SonarAnalyzer.TestFramework.Test\TestCases\DiagnosticVerifierException.File1.cs:line 22
-                at Short 3 in {Paths.TestsRoot}\SonarAnalyzer.TestFramework.Test\TestCases\DiagnosticVerifierException.File1.cs:line 33
-                at Short 4 in {Paths.TestsRoot}\SonarAnalyzer.TestFramework.Test\TestCases\DiagnosticVerifierException.File1.cs:line 44
+                at Short.1() in {Paths.TestsRoot}\SonarAnalyzer.TestFramework.Test\TestCases\DiagnosticVerifierException.File1.cs:line 11
+                at Short.2() in {Paths.TestsRoot}\SonarAnalyzer.TestFramework.Test\TestCases\DiagnosticVerifierException.File1.cs:line 22
+                at Short.3() in {Paths.TestsRoot}\SonarAnalyzer.TestFramework.Test\TestCases\DiagnosticVerifierException.File1.cs:line 33
+                at Short.4() in {Paths.TestsRoot}\SonarAnalyzer.TestFramework.Test\TestCases\DiagnosticVerifierException.File1.cs:line 44
                 ---
 
                 """);
@@ -76,21 +82,21 @@ public class DiagnosticVerifierExceptionTest
                 new("Short 2", "Full 2", "DiagnosticVerifierException.File1.cs", 22),
                 new("Short 3", "Full 3", "DiagnosticVerifierException.File2.cs", 33),
                 new("Short 4", "Full 4", "DiagnosticVerifierException.File2.cs", 44),
-                new("Concurrent", "Full 5", "DiagnosticVerifierException.Concurrent.cs", 55) // This file has ".Concurent." in the name and exists on the disk, so it should be listed.
+                new("Concurrent File", "Full 5", "DiagnosticVerifierException.Concurrent.cs", 55) // This file has ".Concurent." in the name and exists on the disk, so it should be listed.
             ])
             .StackTrace
             .Should()
             .BeIgnoringLineEndings($"""
                 DiagnosticVerifierException.Concurrent.cs
-                at Concurrent in {Paths.TestsRoot}\SonarAnalyzer.TestFramework.Test\TestCases\DiagnosticVerifierException.Concurrent.cs:line 55
+                at Concurrent.File() in {Paths.TestsRoot}\SonarAnalyzer.TestFramework.Test\TestCases\DiagnosticVerifierException.Concurrent.cs:line 55
                 ---
                 DiagnosticVerifierException.File1.cs
-                at Short 1 in {Paths.TestsRoot}\SonarAnalyzer.TestFramework.Test\TestCases\DiagnosticVerifierException.File1.cs:line 11
-                at Short 2 in {Paths.TestsRoot}\SonarAnalyzer.TestFramework.Test\TestCases\DiagnosticVerifierException.File1.cs:line 22
+                at Short.1() in {Paths.TestsRoot}\SonarAnalyzer.TestFramework.Test\TestCases\DiagnosticVerifierException.File1.cs:line 11
+                at Short.2() in {Paths.TestsRoot}\SonarAnalyzer.TestFramework.Test\TestCases\DiagnosticVerifierException.File1.cs:line 22
                 ---
                 DiagnosticVerifierException.File2.cs
-                at Short 3 in {Paths.TestsRoot}\SonarAnalyzer.TestFramework.Test\TestCases\DiagnosticVerifierException.File2.cs:line 33
-                at Short 4 in {Paths.TestsRoot}\SonarAnalyzer.TestFramework.Test\TestCases\DiagnosticVerifierException.File2.cs:line 44
+                at Short.3() in {Paths.TestsRoot}\SonarAnalyzer.TestFramework.Test\TestCases\DiagnosticVerifierException.File2.cs:line 33
+                at Short.4() in {Paths.TestsRoot}\SonarAnalyzer.TestFramework.Test\TestCases\DiagnosticVerifierException.File2.cs:line 44
                 ---
 
                 """);
