@@ -31,12 +31,13 @@ internal class LoopDetector
         loopBlock = DetectLoopBlockOrdinals(cfg).ToHashSet();
     }
 
-    public bool IsInLoop(BasicBlock block) => loopBlock.Contains(block.Ordinal);
+    public bool IsInLoop(BasicBlock block) =>
+        loopBlock.Contains(block.Ordinal);
 
     // Detects loops in the cfg using a modified DFS algorithm:
     // Explore the cfg depth-first, keeping track of the path from the root to the current block.
     // If the current block is already in the path, a loop is detected.
-    // If the current path is intersecting with an already detected loop, merge the relevant part of the path with the loop.
+    // Otherwise, if the last block in the path is part of an already detected loop that intersects with an earlier part of the path, merge the relevant sub-path with the loop.
     // Due to the nature of DFS:
     // If a block is processed already, current path has no loop and is not intersecting with already detected loops, the block is not part of any loop.
     private static IEnumerable<int> DetectLoopBlockOrdinals(ControlFlowGraph cfg)
@@ -52,7 +53,7 @@ internal class LoopDetector
             {
                 ScheduleSuccessors(path, last);
             }
-            else if (path.IndexOf(last) is var index && index < path.Count - 1)         // detect loop in current path
+            else if (path.IndexOf(last) is var index && index < path.Count - 1)         // is the block in the path twice? -> loop
             {
                 loops.Add(path.GetRange(index, path.Count - 1 - index).ToHashSet());    // equivalent to [index..^1]
             }
@@ -67,18 +68,19 @@ internal class LoopDetector
         {
             foreach (var successor in cfg.Blocks[last].SuccessorBlocks.Select(x => x.Ordinal))
             {
-                toProcess.Push([.. path, successor]);
+                toProcess.Push([.. path, successor]);   // add successor to the path and schedule it for processing
             }
         }
 
+        // For a given path [..A..B], if we find a loop that both A and B are part of, all blocks between A and B should also be considered part of that loop.
         void MergeWithIntersectingLoops(List<int> path, int last)
         {
-            foreach (var loop in loops.Where(x => x.Contains(last)))
+            foreach (var loop in loops.Where(x => x.Contains(last)))    // B is part of the loop
             {
                 var intersection = path.IndexOf(loop.Contains);
-                if (intersection < path.Count - 1)
+                if (intersection < path.Count - 1)                      // A is part of the loop
                 {
-                    loop.AddRange(path.GetRange(intersection + 1, path.Count - 1 - intersection));  // equivalent to [index + 1..^1]
+                    loop.AddRange(path.GetRange(intersection + 1, path.Count - 1 - intersection));  // add all blocks between A and B to the loop
                 }
             }
         }
