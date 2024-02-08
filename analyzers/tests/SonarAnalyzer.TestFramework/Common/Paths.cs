@@ -47,7 +47,9 @@ namespace SonarAnalyzer.Test.Common
         /// </summary>
         public static string CurrentTestCases()
         {
-            var current = Path.GetDirectoryName(Path.GetFullPath("."));
+            // Under AltCover, this starts deeper than usually and we need to avoid the copied TestCases from TFM folder
+            // C:\...\sonar-dotnet\analyzers\tests\SonarAnalyzer.TestFramework.Test\bin\Debug\net7.0-windows\__Instrumented_SonarAnalyzer.TestFramework.Test\
+            var current = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetFullPath(".")));
             while (current != TestsRoot)
             {
                 var testCases = Path.Combine(current, "TestCases");
