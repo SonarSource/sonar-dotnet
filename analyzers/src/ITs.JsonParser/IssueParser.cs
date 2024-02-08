@@ -58,11 +58,17 @@ public static class IssueParser
         var allIssues = inputReport.Sarif
             .AllIssues()
             .Where(x => RxSonarRule.IsMatch(x.RuleId))
-            .OrderBy(x => x.Order())
             .GroupBy(x => x.RuleId);
         foreach (var issuesByRule in allIssues)
         {
-            var issues = new RuleIssues { Issues = issuesByRule.Select(x => new RuleIssue(x)).ToArray() };
+            var issues = new RuleIssues
+            {
+                Issues = issuesByRule.Select(x => new RuleIssue(x))
+                    .OrderBy(x => x.Uri, StringComparer.InvariantCulture)
+                    .ThenBy(x => x.Location, StringComparer.InvariantCulture)
+                    .ThenBy(x => x.Message, StringComparer.InvariantCulture)
+                    .ToArray()
+            };
             yield return new OutputReport(inputReport.Project, issuesByRule.Key, inputReport.Assembly, inputReport.Tfm, issues);
         }
     }
@@ -74,7 +80,7 @@ public static class IssueParser
             Directory.CreateDirectory(Path.Combine(root, projectReports.Key));
             foreach (var report in projectReports)
             {
-                File.WriteAllText(report.Path(root), JsonSerializer.Serialize(report.RuleIssues, SerializerOptions));
+                File.WriteAllText(report.Path(root), JsonSerializer.Serialize(report.RuleIssues, SerializerOptions).Replace("\r\n", "\n"));
             }
         }
     }
