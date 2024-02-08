@@ -150,22 +150,26 @@ End Class";
         }
 
         [DataTestMethod]
-        [DataRow("Strasse", "Straße")]
-        [DataRow("\u00F6", "\u006F\u0308")] // 00F6 = ö; 006F = o; 0308 = https://www.fileformat.info/info/unicode/char/0308/index.htm
-        public void NameIs_StringComparisonOrdinal_ReturnsFalse(string identifierName, string actual)
+        [DataRow("Strasse", "Straße", false)]
+        [DataRow("\u00F6", "\u006F\u0308", false)] // 00F6 = ö; 006F = o; 0308 = https://www.fileformat.info/info/unicode/char/0308/index.htm
+        [DataRow("ö", "Ö", false)]
+        [DataRow("ö", "\u00F6", true)]
+        public void NameIs_CultureSensitivity(string identifierName, string actual, bool expected)
         {
             var identifier = Microsoft.CodeAnalysis.CSharp.SyntaxFactory.IdentifierName(identifierName);
-            identifier.NameIs(actual).Should().BeFalse();
+            identifier.NameIs(actual).Should().Be(expected);
         }
 
         [DataTestMethod]
-        [DataRow("Strasse", "Straße")]
-        [DataRow("\u00F6", "\u006F\u0308")] // 00F6 = ö; 006F = o; 0308 = https://www.fileformat.info/info/unicode/char/0308/index.htm
-        [DataRow("ö", "\u006F\u0308", "ä", "oe")] // 006F = o; 0308 = https://www.fileformat.info/info/unicode/char/0308/index.htm
-        public void NameIsOrNames_StringComparisonOrdinal_ReturnsFalse(string identifierName, string name, params string[] orNames)
+        [DataRow(false, "Strasse", "Straße")]
+        [DataRow(false, "\u00F6", "\u006F\u0308")] // 00F6 = ö; 006F = o; 0308 = https://www.fileformat.info/info/unicode/char/0308/index.htm
+        [DataRow(false, "ö", "\u006F\u0308", "ä", "oe")] // 006F = o; 0308 = https://www.fileformat.info/info/unicode/char/0308/index.htm
+        [DataRow(false, "Köln", "Koeln", "Cologne, ", "köln")]
+        [DataRow(true, "Köln", "Koeln", "Cologne, ", "K\u00F6ln")] // 00F6 = ö
+        public void NameIsOrNames_CultureSensitivity(bool expected, string identifierName, string name, params string[] orNames)
         {
             var identifier = Microsoft.CodeAnalysis.CSharp.SyntaxFactory.IdentifierName(identifierName);
-            identifier.NameIs(name, orNames).Should().BeFalse();
+            identifier.NameIs(name, orNames).Should().Be(expected);
         }
 
         [TestMethod]
