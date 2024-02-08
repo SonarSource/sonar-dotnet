@@ -80,7 +80,7 @@ public static class IssueParser
             Directory.CreateDirectory(Path.Combine(root, projectReports.Key));
             foreach (var report in projectReports)
             {
-                File.WriteAllText(report.Path(root), JsonSerializer.Serialize(report.RuleIssues, SerializerOptions));
+                File.WriteAllText(report.Path(root), JsonSerializer.Serialize(report.RuleIssues, SerializerOptions).Replace("\r\n", "\n"));
             }
         }
     }
