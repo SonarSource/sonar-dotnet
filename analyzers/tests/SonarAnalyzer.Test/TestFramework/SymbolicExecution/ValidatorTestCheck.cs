@@ -76,6 +76,9 @@ namespace SonarAnalyzer.Test.TestFramework.SymbolicExecution
         public SymbolicValue TagValue(string tag) =>
             TagValues(tag).Should().ContainSingle().Subject;
 
+        public SymbolicValue TagValue(string tag, string symbol) =>
+            TagState(tag)[Symbol(symbol)];
+
         public SymbolicValue[] TagValues(string tag) =>
             tags.Where(x => x.Name == tag).Select(x => TagValue(x.Context)).ToArray();
 
@@ -99,9 +102,6 @@ namespace SonarAnalyzer.Test.TestFramework.SymbolicExecution
 
         public void ValidateHasSingleExitStateAndNoException() =>
             ExitStates.Should().ContainSingle().And.ContainSingle(x => x.Exception == null);
-
-        public void ValidateSymbolConstraintsAtTag(string tag, string symbol, params SymbolicConstraint[] constraints) =>
-            TagState(tag)[Symbol(symbol)].Should().HaveOnlyConstraints(constraints);
 
         protected override ProgramState PostProcessSimple(SymbolicContext context)
         {

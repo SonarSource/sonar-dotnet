@@ -768,8 +768,8 @@ Tag(""End"")";
 
         // Canot use Tag("If", list) because the Tag invocation will clear the CollectionConstraint from "list".
         var validator = SETestContext.CreateCS(code, "List<int> list", new PreserveTestCheck("list")).Validator;
-        validator.ValidateSymbolConstraintsAtTag("if", "list", ObjectConstraint.NotNull, Constraint(emptyInIf));
-        validator.ValidateSymbolConstraintsAtTag("else", "list", ObjectConstraint.NotNull, Constraint(emptyInElse));
+        validator.TagValue("if", "list").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, Constraint(emptyInIf));
+        validator.TagValue("else", "list").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, Constraint(emptyInElse));
 
         static CollectionConstraint Constraint(bool? empty) =>
             empty switch

@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Data;
 using Microsoft.CodeAnalysis.Operations;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
@@ -503,7 +504,7 @@ Tag(""Anonymous"", anonymous);";
         Verify("arrJagged2", CollectionConstraint.Empty);
 
         void Verify(string symbol, CollectionConstraint collectionConstraint) =>
-            validator.ValidateSymbolConstraintsAtTag("tag", symbol, ObjectConstraint.NotNull, collectionConstraint);
+            validator.TagValue("tag", symbol).Should().HaveOnlyConstraints(ObjectConstraint.NotNull, collectionConstraint);
     }
 
     [TestMethod]
@@ -564,7 +565,7 @@ Tag(""S"", s);";
         Verify("collection2", ObjectConstraint.NotNull, CollectionConstraint.Empty);
 
         void Verify(string symbol, params SymbolicConstraint[] constraints) =>
-            validator.ValidateSymbolConstraintsAtTag("tag", symbol, constraints);
+            validator.TagValue("tag", symbol).Should().HaveOnlyConstraints(constraints);
     }
 
     [TestMethod]
@@ -1168,10 +1169,10 @@ Tag(""AfterRemove"", remove);";
         VerifyAfter("Fourth", ObjectConstraint.NotNull);
 
         void VerifyBefore(string symbol, params SymbolicConstraint[] constraints) =>
-            validator.ValidateSymbolConstraintsAtTag("before", symbol, constraints);
+            validator.TagValue("before", symbol).Should().HaveOnlyConstraints(constraints);
 
         void VerifyAfter(string symbol, params SymbolicConstraint[] constraints) =>
-            validator.ValidateSymbolConstraintsAtTag("after", symbol, constraints);
+            validator.TagValue("after", symbol).Should().HaveOnlyConstraints(constraints);
     }
 
     [TestMethod]
@@ -1196,10 +1197,10 @@ Tag(""AfterRemove"", remove);";
         VerifyAfter("Second", ObjectConstraint.NotNull, CollectionConstraint.NotEmpty);
 
         void VerifyBefore(string symbol, params SymbolicConstraint[] constraints) =>
-            validator.ValidateSymbolConstraintsAtTag("before", symbol, constraints);
+            validator.TagValue("before", symbol).Should().HaveOnlyConstraints(constraints);
 
         void VerifyAfter(string symbol, params SymbolicConstraint[] constraints) =>
-            validator.ValidateSymbolConstraintsAtTag("after", symbol, constraints);
+            validator.TagValue("after", symbol).Should().HaveOnlyConstraints(constraints);
     }
 
     [TestMethod]
