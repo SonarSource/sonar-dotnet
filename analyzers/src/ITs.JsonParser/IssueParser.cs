@@ -47,10 +47,17 @@ public static class IssueParser
         ConsoleHelper.WriteLineColor("Successfully wrote all Rule reports.", ConsoleColor.Green);
     }
 
-    private static InputReport[] Read(string rootPath) =>
-        Directory.GetFiles(rootPath, "*.json", SearchOption.AllDirectories)
-            .Select(x => new InputReport(x, SerializerOptions))
-            .ToArray();
+    private static InputReport[] Read(string rootPath)
+    {
+        var projects = Directory.GetDirectories(rootPath);
+        var inputReports = new List<InputReport>();
+        foreach (var project in projects)
+        {
+            inputReports.AddRange(Directory.GetFiles(Path.Combine(rootPath, project, "issues"))
+                .Select(x => new InputReport(x, SerializerOptions)));
+        }
+        return inputReports.ToArray();
+    }
 
     // One SARIF contains all the issues for the project. We need to split it by rule Id.
     private static IEnumerable<OutputReport> ExplodeToRuleIssues(InputReport inputReport)

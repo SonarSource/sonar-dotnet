@@ -132,8 +132,8 @@ function Initialize-OutputFolder() {
         Remove-Item -Recurse -Force output
     }
 
-    Write-Debug "Creating folder 'output\Issues'"
-    New-Item -ItemType directory -Path .\output\Issues | out-null
+    Write-Debug "Creating folder 'output'"
+    New-Item -ItemType directory -Path .\output | out-null
 
     if ($ruleId) {
         Write-Host "Running ITs with only rule ${ruleId} turned on."
