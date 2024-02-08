@@ -21,7 +21,7 @@
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.VisualBasic;
 
-namespace SonarAnalyzer.Test.TestFramework.Tests.MetadataReferences;
+namespace SonarAnalyzer.Test.TestFramework.Tests.Analyzers;
 
 [TestClass]
 public class TestGeneratedCodeRecognizerTest

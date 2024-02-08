@@ -21,7 +21,7 @@
 using CS = Microsoft.CodeAnalysis.CSharp;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 
-namespace SonarAnalyzer.Test.TestFramework.Tests;
+namespace SonarAnalyzer.TestFramework.Analyzers;
 
 internal sealed class TestGeneratedCodeRecognizer : GeneratedCodeRecognizer
 {

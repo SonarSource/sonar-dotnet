@@ -20,7 +20,7 @@
 
 using SonarAnalyzer.TestFramework.Verification.IssueValidation;
 
-namespace SonarAnalyzer.Test.TestFramework
+namespace SonarAnalyzer.TestFramework.Verification
 {
     public static class DiagnosticVerifier
     {

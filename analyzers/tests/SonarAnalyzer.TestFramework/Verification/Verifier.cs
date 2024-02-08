@@ -31,7 +31,7 @@ using Microsoft.CodeAnalysis.MSBuild;
 using SonarAnalyzer.Rules;
 using SonarAnalyzer.Test.Helpers;
 
-namespace SonarAnalyzer.Test.TestFramework
+namespace SonarAnalyzer.TestFramework.Verification
 {
     public class Verifier
     {

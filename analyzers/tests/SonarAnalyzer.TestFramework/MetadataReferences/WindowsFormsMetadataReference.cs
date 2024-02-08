@@ -22,7 +22,7 @@
 
 using static SonarAnalyzer.Test.MetadataReferences.MetadataReferenceFactory;
 
-namespace SonarAnalyzer.Test.MetadataReferences
+namespace SonarAnalyzer.TestFramework.MetadataReferences
 {
     internal static class WindowsFormsMetadataReference
     {

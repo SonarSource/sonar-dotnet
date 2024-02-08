@@ -22,7 +22,7 @@ using System.IO;
 using System.Text;
 using SonarAnalyzer.TestFramework.Verification.IssueValidation;
 
-namespace SonarAnalyzer.Test.TestFramework;
+namespace SonarAnalyzer.TestFramework.Verification;
 
 public sealed class DiagnosticVerifierException : AssertFailedException
 {

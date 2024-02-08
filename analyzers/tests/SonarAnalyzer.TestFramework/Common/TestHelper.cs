@@ -27,7 +27,7 @@ using StyleCop.Analyzers.Lightup;
 using CS = Microsoft.CodeAnalysis.CSharp;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 
-namespace SonarAnalyzer.Test
+namespace SonarAnalyzer.TestFramework.Common
 {
     public static class TestHelper
     {

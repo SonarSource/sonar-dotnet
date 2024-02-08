@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Test.Helpers
+namespace SonarAnalyzer.TestFramework.Common
 {
     /// <summary>
     /// Defines a scope inside which new environment variables can be set.

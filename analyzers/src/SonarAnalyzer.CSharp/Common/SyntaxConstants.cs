@@ -18,7 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.AnalysisContext;
-
-namespace SonarAnalyzer.Test.TestFramework.Tests;
-
+namespace SonarAnalyzer.Common
+{
+    internal static class SyntaxConstants
+    {
+        public static readonly string Discard = "_";
+        public static readonly string Private = "private";
+        public static readonly string Protected = "protected";
+        public static readonly string Internal = "internal";
+    }
+}

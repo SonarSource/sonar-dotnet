@@ -23,7 +23,7 @@ using SonarAnalyzer.AnalysisContext;
 using CS = Microsoft.CodeAnalysis.CSharp;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 
-namespace SonarAnalyzer.Test.TestFramework.Tests
+namespace SonarAnalyzer.TestFramework.Analyzers
 {
     [ExportCodeFixProvider(LanguageNames.CSharp)]
     public class DummyCodeFixCS : DummyCodeFix

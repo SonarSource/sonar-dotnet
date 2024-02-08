@@ -25,7 +25,7 @@ using NuGet.Protocol;
 using NuGet.Protocol.Core.Types;
 using NuGet.Versioning;
 
-namespace SonarAnalyzer.Test.MetadataReferences
+namespace SonarAnalyzer.TestFramework.MetadataReferences
 {
     public static partial class NuGetMetadataFactory
     {

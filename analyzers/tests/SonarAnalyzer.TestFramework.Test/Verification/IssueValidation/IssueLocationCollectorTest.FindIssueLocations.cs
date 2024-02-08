@@ -20,7 +20,7 @@
 
 using SonarAnalyzer.TestFramework.Verification.IssueValidation;
 
-namespace SonarAnalyzer.Test.TestFramework.Tests
+namespace SonarAnalyzer.Test.TestFramework.Tests.Verification.IssueValidation
 {
     public partial class IssueLocationCollectorTest
     {

@@ -21,7 +21,7 @@
 using SonarAnalyzer.Test.Common;
 using SonarAnalyzer.Test.Helpers;
 
-namespace SonarAnalyzer.Test.TestFramework.Tests
+namespace SonarAnalyzer.Test.TestFramework.Tests.Verification
 {
     [TestClass]
     public class DiagnosticVerifierExceptionTest

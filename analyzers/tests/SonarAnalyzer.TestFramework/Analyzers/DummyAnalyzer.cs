@@ -22,7 +22,7 @@ using SonarAnalyzer.AnalysisContext;
 using CS = Microsoft.CodeAnalysis.CSharp;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 
-namespace SonarAnalyzer.Test.TestFramework.Tests
+namespace SonarAnalyzer.TestFramework.Analyzers
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class DummyAnalyzerCS : DummyAnalyzer<CS.SyntaxKind>

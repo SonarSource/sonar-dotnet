@@ -21,7 +21,7 @@
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.VisualBasic;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.TestFramework.Extensions
 {
     public static class CompilationExtensions
     {
