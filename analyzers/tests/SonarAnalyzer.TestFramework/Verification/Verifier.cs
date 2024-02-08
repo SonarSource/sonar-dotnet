@@ -33,7 +33,7 @@ using SonarAnalyzer.TestFramework.Build;
 
 namespace SonarAnalyzer.TestFramework.Verification;
 
-public class Verifier
+internal class Verifier
 {
     private const string TestCases = "TestCases";
 

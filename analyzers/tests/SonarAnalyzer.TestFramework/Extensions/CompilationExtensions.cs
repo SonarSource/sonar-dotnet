@@ -23,7 +23,7 @@ using Microsoft.CodeAnalysis.VisualBasic;
 
 namespace SonarAnalyzer.TestFramework.Extensions;
 
-public static class CompilationExtensions
+internal static class CompilationExtensions
 {
     public static string LanguageVersionString(this Compilation compilation) =>
         compilation switch

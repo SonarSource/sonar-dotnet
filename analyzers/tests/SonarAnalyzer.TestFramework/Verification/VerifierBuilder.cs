@@ -19,6 +19,7 @@
  */
 
 using Google.Protobuf;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.TestFramework.Build;
 using CS = Microsoft.CodeAnalysis.CSharp;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
@@ -147,7 +148,7 @@ public record VerifierBuilder
             .WithConcurrentAnalysis(false);
     }
 
-    public Verifier Build() =>
+    internal Verifier Build() =>
         new(this);
 
     private VerifierBuilder UpdateIsRazor(params string[] paths)
@@ -177,6 +178,9 @@ public record VerifierBuilder<TAnalyzer> : VerifierBuilder
 
 public static class VerifierBuilderExtensions
 {
+    public static IEnumerable<Compilation> Compile(this VerifierBuilder builder) =>
+        builder.Build().Compile(false).Select(x => x.Compilation);
+
     public static void Verify(this VerifierBuilder builder) =>
         builder.Build().Verify();
 
