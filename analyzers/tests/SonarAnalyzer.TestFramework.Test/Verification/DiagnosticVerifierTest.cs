@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                     }
                 }
                 """, """
-                There are differences for CSharp7 snippet1.cs:
+                There are differences for CSharp7 snippet0.cs:
                   Line 6: Unexpected issue 'Correct one of the identical expressions on both sides of operator '=='.' Rule S1764
                 """);
 
@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                     }
                 }
                 """, """
-                There are differences for CSharp7 snippet1.cs:
+                There are differences for CSharp7 snippet0.cs:
                   Line 5 Secondary location: Unexpected issue ''
                 """);
 
@@ -76,7 +76,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                     }
                 }
                 """, """
-                There are differences for CSharp7 snippet1.cs:
+                There are differences for CSharp7 snippet0.cs:
                   Line 6 Secondary location: The expected issueId 'myWrongId' does not match the actual issueId 'myId' Rule S1764 ID myId
                 """);
 
@@ -93,7 +93,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                     }
                 }
                 """, """
-                There are differences for CSharp7 snippet1.cs:
+                There are differences for CSharp7 snippet0.cs:
                   Line 6: The expected message 'This has wrong message and location and still needs to match secondary ID' does not match the actual message 'Correct one of the identical expressions on both sides of operator '=='.' Rule S1764
                   Line 6 Secondary location: The expected issueId 'myWrongId' does not match the actual issueId '' Rule S1764 ID myWrongId
                 """);
@@ -111,7 +111,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                     }
                 }
                 """, """
-                There are differences for CSharp7 snippet1.cs:
+                There are differences for CSharp7 snippet0.cs:
                   Line 6 Secondary location: The expected issueId '' does not match the actual issueId 'myId' Rule S1764 ID myId
                 """);
 
@@ -128,7 +128,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                     }
                 }
                 """, """
-                There are differences for CSharp7 snippet1.cs:
+                There are differences for CSharp7 snippet0.cs:
                   Line 6 Secondary location: The expected issueId 'myWrongId' does not match the actual issueId '' Rule S1764 ID myWrongId
                 """);
 
@@ -145,7 +145,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                     }
                 }
                 """, """
-                There are differences for CSharp7 snippet1.cs:
+                There are differences for CSharp7 snippet0.cs:
                   Line 5 Secondary location: The expected issueId 'wrongId' does not match the actual issueId 'idForBB' Rule S1764 ID idForBB
                 """);
 
@@ -163,7 +163,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                     }
                 }
                 """, """
-                There are differences for CSharp7 snippet1.cs:
+                There are differences for CSharp7 snippet0.cs:
                   Line 5 Secondary location: Should start on column -1 but got column 12 Rule S1764 ID idForAA
                   Line 5 Secondary location: The expected issueId 'wrongId' does not match the actual issueId 'idForBB' Rule S1764 ID idForBB
                   Line 5 Secondary location: Should start on column -1 but got column 42 Rule S1764 ID idForCC
@@ -182,7 +182,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                     }
                 }
                 """, """
-                There are differences for CSharp7 snippet1.cs:
+                There are differences for CSharp7 snippet0.cs:
                   Line 6 Secondary location: The expected message 'Wrong message' does not match the actual message ''
                 """);
 
@@ -200,7 +200,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                     }
                 }
                 """, """
-                There are differences for CSharp7 snippet1.cs:
+                There are differences for CSharp7 snippet0.cs:
                   Line 5 Secondary location: Should start on column 10 but got column 12
                 """);
 
@@ -218,7 +218,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                     }
                 }
                 """, """
-                There are differences for CSharp7 snippet1.cs:
+                There are differences for CSharp7 snippet0.cs:
                   Line 5 Secondary location: Should have a length of 4 but got a length of 1
                 """);
 
@@ -242,7 +242,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                 public class UnexpectedBuildError
                 {
                 """, """
-                There are differences for CSharp7 snippet1.cs:
+                There are differences for CSharp7 snippet0.cs:
                   Line 2: Unexpected error, use // Error [CS1513] } expected
                 """);
 
@@ -252,7 +252,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                 .WithConcurrentAnalysis(false)
                 .Invoking(x => x.Verify())
                 .Should().Throw<AssertFailedException>().Which.Message.Should().ContainIgnoringLineEndings("""
-                    There are differences for VisualBasic12 snippet1.vb:
+                    There are differences for VisualBasic12 snippet0.vb:
                       Line 1: Unexpected error, use ' Error [BC30481] 'Class' statement must end with a matching 'End Class'.
                     """);
 
@@ -296,7 +296,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                     }
                 }
                 """, """
-                There are differences for CSharp7 snippet1.cs:
+                There are differences for CSharp7 snippet0.cs:
                   Line 3: Missing expected issue ID MyId0
                   Line 5: Missing expected issue
                   Line 6 Secondary location: Missing expected issue ID MyId1
@@ -315,7 +315,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                     }
                 }
                 """, """
-                There are differences for CSharp7 snippet1.cs:
+                There are differences for CSharp7 snippet0.cs:
                   Line 5: Missing expected issue
                 """);
 
@@ -361,7 +361,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                 There are differences for VisualBasic16_9 <project-level-issue>:
                   Line 1: Unexpected issue 'Configure 'Option Explicit On' for assembly 'project0'.' Rule S6146
 
-                There are differences for VisualBasic16_9 snippet1.vb:
+                There are differences for VisualBasic16_9 snippet0.vb:
                   Line 2: Missing issue 'This is expected on a wrong line.'
                 """);
         }
@@ -411,7 +411,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
             VerifyThrows("""
                 var almostTopLevel =
                 """, """
-                There are differences for CSharp7 snippet1.cs:
+                There are differences for CSharp7 snippet0.cs:
                   Line 1: Unexpected error, use // Error [CS8107] Feature 'top-level statements' is not available in C# 7.0. Please use language version 9.0 or greater.
                   Line 1: Unexpected error, use // Error [CS8805] Program using top-level statements must be an executable.
                   Line 1: Unexpected error, use // Error [CS1002] ; expected

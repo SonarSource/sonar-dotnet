@@ -176,7 +176,7 @@ public partial class SonarAnalysisContextBaseTest
     public void SonarLintFile_LoadsExpectedValues(string language)
     {
         var analyzerLanguage = language == "cs" ? AnalyzerLanguage.CSharp : AnalyzerLanguage.VisualBasic;
-        var (compilation, _) = CreateDummyCompilation(analyzerLanguage, "ExtraEmptyFile");
+        var (compilation, _) = CreateDummyCompilation(analyzerLanguage, GeneratedFileName);
         var options = AnalysisScaffolding.CreateOptions($@"TestResources\SonarLintXml\All_properties_{language}\SonarLint.xml");
         var sut = CreateSut(compilation, options).SonarLintXml();
 

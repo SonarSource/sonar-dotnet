@@ -574,10 +574,10 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
             DummyCS.AddSnippet("public class First { } // Noncompliant [first]  - not raised")
                 .AddSnippet("public class Second { } // Noncompliant [second] - not raised")
                 .Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage("""
-                    There are differences for CSharp7 snippet1.cs:
+                    There are differences for CSharp7 snippet0.cs:
                       Line 1: Missing expected issue ID first
 
-                    There are differences for CSharp7 snippet2.cs:
+                    There are differences for CSharp7 snippet1.cs:
                       Line 1: Missing expected issue ID second
                     """);
 

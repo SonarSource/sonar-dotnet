@@ -28,7 +28,7 @@ namespace SonarAnalyzer.Test.AnalysisContext;
 
 public partial class SonarAnalysisContextBaseTest
 {
-    private const string GeneratedFileName = "ExtraEmptyFile.g.";
+    private const string GeneratedFileName = "Generated.g.";
     private const string OtherFileName = "OtherFile";
 
     [TestMethod]
@@ -449,7 +449,10 @@ public partial class SonarAnalysisContextBaseTest
 
     private static (Compilation Compilation, SyntaxTree Tree) CreateDummyCompilation(AnalyzerLanguage language, string treeFileName)
     {
-        var compilation = SolutionBuilder.Create().AddProject(language).AddSnippet(string.Empty, OtherFileName + language.FileExtension).GetCompilation();
+        var compilation = SolutionBuilder.Create().AddProject(language)
+            .AddSnippet(string.Empty, GeneratedFileName + language.FileExtension)
+            .AddSnippet(string.Empty, OtherFileName + language.FileExtension)
+            .GetCompilation();
         return (compilation, compilation.SyntaxTrees.Single(x => x.FilePath.Contains(treeFileName)));
     }
 
