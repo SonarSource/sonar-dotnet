@@ -65,7 +65,7 @@ public static class IssueParser
             {
                 Issues = issuesByRule.Select(x => new RuleIssue(x))
                     .OrderBy(x => x.Uri)
-                    .ThenBy(x => x?.Location)
+                    .ThenBy(x => x.Location)
                     .ThenBy(x => x.Message)
                     .ToArray()
             };
