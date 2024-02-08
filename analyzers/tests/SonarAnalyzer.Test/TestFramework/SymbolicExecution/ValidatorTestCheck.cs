@@ -21,8 +21,8 @@
 using Microsoft.CodeAnalysis.Operations;
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.Extensions;
+using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
-using SonarAnalyzer.Test.Helpers;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Test.TestFramework.SymbolicExecution
@@ -67,11 +67,17 @@ namespace SonarAnalyzer.Test.TestFramework.SymbolicExecution
         public void Validate(string operation, Action<SymbolicContext> action) =>
             action(postProcessed.Single(x => TestHelper.Serialize(x.Operation) == operation));
 
+        public ProgramState TagState(string tag) =>
+            TagStates(tag).Should().ContainSingle().Subject;
+
         public ProgramState[] TagStates(string tag) =>
             tags.Where(x => x.Name == tag).Select(x => x.Context.State).ToArray();
 
         public SymbolicValue TagValue(string tag) =>
             TagValues(tag).Should().ContainSingle().Subject;
+
+        public SymbolicValue TagValue(string tag, string symbol) =>
+            TagState(tag)[Symbol(symbol)];
 
         public SymbolicValue[] TagValues(string tag) =>
             tags.Where(x => x.Name == tag).Select(x => TagValue(x.Context)).ToArray();

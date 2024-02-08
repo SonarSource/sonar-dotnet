@@ -44,6 +44,11 @@ internal sealed class Argument : SimpleProcessor<IArgumentOperationWrapper>
         {
             state = state.SetSymbolConstraint(notNullSymbol, ObjectConstraint.NotNull);
         }
+        if (argument.WrappedOperation.TrackedSymbol(state) is { } symbol
+            && state[symbol] is { } symbolValue)
+        {
+            state = state.SetSymbolValue(symbol, symbolValue.WithoutConstraint<CollectionConstraint>());
+        }
         return state.SetOperationValue(argument, state[argument.Value]);
     }
 }
