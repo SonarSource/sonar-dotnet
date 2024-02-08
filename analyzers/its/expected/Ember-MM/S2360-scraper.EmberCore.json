@@ -16,13 +16,13 @@
       "Id": "S2360",
       "Message": "Use the overloading mechanism instead of the optional parameters.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L864",
-      "Location": "Line 864 Position 71-79"
+      "Location": "Line 864 Position 108-116"
     },
     {
       "Id": "S2360",
       "Message": "Use the overloading mechanism instead of the optional parameters.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L864",
-      "Location": "Line 864 Position 108-116"
+      "Location": "Line 864 Position 71-79"
     },
     {
       "Id": "S2360",

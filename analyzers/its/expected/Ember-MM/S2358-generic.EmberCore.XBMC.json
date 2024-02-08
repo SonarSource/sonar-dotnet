@@ -10,6 +10,12 @@
       "Id": "S2358",
       "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L128",
+      "Location": "Line 128 Position 116-148"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L128",
       "Location": "Line 128 Position 24-49"
     },
     {
@@ -17,12 +23,6 @@
       "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L128",
       "Location": "Line 128 Position 87-107"
-    },
-    {
-      "Id": "S2358",
-      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L128",
-      "Location": "Line 128 Position 116-148"
     },
     {
       "Id": "S2358",

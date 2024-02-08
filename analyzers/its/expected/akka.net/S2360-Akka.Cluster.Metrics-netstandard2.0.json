@@ -4,12 +4,6 @@
       "Id": "S2360",
       "Message": "Use the overloading mechanism instead of the optional parameters.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Routing/ClusterMetricsRouting.cs#L153",
-      "Location": "Line 153 Position 75-81"
-    },
-    {
-      "Id": "S2360",
-      "Message": "Use the overloading mechanism instead of the optional parameters.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Routing/ClusterMetricsRouting.cs#L153",
       "Location": "Line 153 Position 101-104"
     },
     {
@@ -17,6 +11,12 @@
       "Message": "Use the overloading mechanism instead of the optional parameters.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Routing/ClusterMetricsRouting.cs#L153",
       "Location": "Line 153 Position 144-150"
+    },
+    {
+      "Id": "S2360",
+      "Message": "Use the overloading mechanism instead of the optional parameters.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Routing/ClusterMetricsRouting.cs#L153",
+      "Location": "Line 153 Position 75-81"
     },
     {
       "Id": "S2360",
@@ -34,12 +34,6 @@
       "Id": "S2360",
       "Message": "Use the overloading mechanism instead of the optional parameters.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Routing/ClusterMetricsRouting.cs#L308",
-      "Location": "Line 308 Position 76-82"
-    },
-    {
-      "Id": "S2360",
-      "Message": "Use the overloading mechanism instead of the optional parameters.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Routing/ClusterMetricsRouting.cs#L308",
       "Location": "Line 308 Position 110-116"
     },
     {
@@ -47,6 +41,12 @@
       "Message": "Use the overloading mechanism instead of the optional parameters.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Routing/ClusterMetricsRouting.cs#L308",
       "Location": "Line 308 Position 142-148"
+    },
+    {
+      "Id": "S2360",
+      "Message": "Use the overloading mechanism instead of the optional parameters.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Routing/ClusterMetricsRouting.cs#L308",
+      "Location": "Line 308 Position 76-82"
     },
     {
       "Id": "S2360",

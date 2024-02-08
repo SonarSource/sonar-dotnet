@@ -40,6 +40,12 @@
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeImages.vb#L29",
+      "Location": "Line 29 Position 123-128"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeImages.vb#L29",
       "Location": "Line 29 Position 42-47"
     },
     {
@@ -47,12 +53,6 @@
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeImages.vb#L29",
       "Location": "Line 29 Position 99-104"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeImages.vb#L29",
-      "Location": "Line 29 Position 123-128"
     },
     {
       "Id": "S3860",
@@ -65,6 +65,12 @@
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeTrailers.vb#L101",
       "Location": "Line 101 Position 60-65"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeTrailers.vb#L116",
+      "Location": "Line 116 Position 128-133"
     },
     {
       "Id": "S3860",
@@ -83,12 +89,6 @@
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeTrailers.vb#L116",
       "Location": "Line 116 Position 87-92"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeTrailers.vb#L116",
-      "Location": "Line 116 Position 128-133"
     },
     {
       "Id": "S3860",
@@ -118,18 +118,6 @@
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeTrailers.vb#L74",
-      "Location": "Line 74 Position 43-48"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeTrailers.vb#L74",
-      "Location": "Line 74 Position 66-71"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeTrailers.vb#L74",
       "Location": "Line 74 Position 104-109"
     },
     {
@@ -137,6 +125,18 @@
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeTrailers.vb#L74",
       "Location": "Line 74 Position 131-136"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeTrailers.vb#L74",
+      "Location": "Line 74 Position 43-48"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeTrailers.vb#L74",
+      "Location": "Line 74 Position 66-71"
     },
     {
       "Id": "S3860",
@@ -352,6 +352,12 @@
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L62",
+      "Location": "Line 62 Position 103-108"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L62",
       "Location": "Line 62 Position 24-29"
     },
     {
@@ -359,12 +365,6 @@
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L62",
       "Location": "Line 62 Position 60-65"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L62",
-      "Location": "Line 62 Position 103-108"
     },
     {
       "Id": "S3860",
@@ -394,6 +394,12 @@
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L71",
+      "Location": "Line 71 Position 121-126"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L71",
       "Location": "Line 71 Position 42-47"
     },
     {
@@ -401,12 +407,6 @@
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L71",
       "Location": "Line 71 Position 78-83"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L71",
-      "Location": "Line 71 Position 121-126"
     },
     {
       "Id": "S3860",
@@ -484,6 +484,18 @@
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L92",
+      "Location": "Line 92 Position 104-109"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L92",
+      "Location": "Line 92 Position 126-131"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L92",
       "Location": "Line 92 Position 26-31"
     },
     {
@@ -497,18 +509,6 @@
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L92",
       "Location": "Line 92 Position 79-84"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L92",
-      "Location": "Line 92 Position 104-109"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L92",
-      "Location": "Line 92 Position 126-131"
     },
     {
       "Id": "S3860",
@@ -676,12 +676,6 @@
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgSearchResults.vb#L47",
-      "Location": "Line 47 Position 42-47"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgSearchResults.vb#L47",
       "Location": "Line 47 Position 107-112"
     },
     {
@@ -701,6 +695,12 @@
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgSearchResults.vb#L47",
       "Location": "Line 47 Position 195-200"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgSearchResults.vb#L47",
+      "Location": "Line 47 Position 42-47"
     },
     {
       "Id": "S3860",
@@ -1426,13 +1426,13 @@
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L343",
-      "Location": "Line 343 Position 56-61"
+      "Location": "Line 343 Position 106-111"
     },
     {
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L343",
-      "Location": "Line 343 Position 106-111"
+      "Location": "Line 343 Position 56-61"
     },
     {
       "Id": "S3860",
@@ -1540,12 +1540,6 @@
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L762",
-      "Location": "Line 762 Position 68-73"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L762",
       "Location": "Line 762 Position 151-156"
     },
     {
@@ -1553,6 +1547,12 @@
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L762",
       "Location": "Line 762 Position 194-199"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L762",
+      "Location": "Line 762 Position 68-73"
     },
     {
       "Id": "S3860",
@@ -1684,18 +1684,6 @@
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/AlbumTag.vb#L303",
-      "Location": "Line 303 Position 49-54"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/AlbumTag.vb#L303",
-      "Location": "Line 303 Position 82-87"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/AlbumTag.vb#L303",
       "Location": "Line 303 Position 110-115"
     },
     {
@@ -1703,6 +1691,18 @@
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/AlbumTag.vb#L303",
       "Location": "Line 303 Position 139-144"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/AlbumTag.vb#L303",
+      "Location": "Line 303 Position 49-54"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/AlbumTag.vb#L303",
+      "Location": "Line 303 Position 82-87"
     },
     {
       "Id": "S3860",
@@ -1756,18 +1756,6 @@
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/AlbumTag.vb#L410",
-      "Location": "Line 410 Position 39-44"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/AlbumTag.vb#L410",
-      "Location": "Line 410 Position 72-77"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/AlbumTag.vb#L410",
       "Location": "Line 410 Position 100-105"
     },
     {
@@ -1775,6 +1763,18 @@
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/AlbumTag.vb#L410",
       "Location": "Line 410 Position 129-134"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/AlbumTag.vb#L410",
+      "Location": "Line 410 Position 39-44"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/AlbumTag.vb#L410",
+      "Location": "Line 410 Position 72-77"
     },
     {
       "Id": "S3860",
@@ -1918,18 +1918,6 @@
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/ArtistTag.vb#L290",
-      "Location": "Line 290 Position 49-54"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/ArtistTag.vb#L290",
-      "Location": "Line 290 Position 82-87"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/ArtistTag.vb#L290",
       "Location": "Line 290 Position 110-115"
     },
     {
@@ -1937,6 +1925,18 @@
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/ArtistTag.vb#L290",
       "Location": "Line 290 Position 139-144"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/ArtistTag.vb#L290",
+      "Location": "Line 290 Position 49-54"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/ArtistTag.vb#L290",
+      "Location": "Line 290 Position 82-87"
     },
     {
       "Id": "S3860",
@@ -2284,18 +2284,6 @@
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MovieTag.vb#L445",
-      "Location": "Line 445 Position 49-54"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MovieTag.vb#L445",
-      "Location": "Line 445 Position 82-87"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MovieTag.vb#L445",
       "Location": "Line 445 Position 110-115"
     },
     {
@@ -2303,6 +2291,18 @@
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MovieTag.vb#L445",
       "Location": "Line 445 Position 139-144"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MovieTag.vb#L445",
+      "Location": "Line 445 Position 49-54"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MovieTag.vb#L445",
+      "Location": "Line 445 Position 82-87"
     },
     {
       "Id": "S3860",
@@ -2386,18 +2386,6 @@
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MusicVideoTag.vb#L159",
-      "Location": "Line 159 Position 49-54"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MusicVideoTag.vb#L159",
-      "Location": "Line 159 Position 82-87"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MusicVideoTag.vb#L159",
       "Location": "Line 159 Position 110-115"
     },
     {
@@ -2405,6 +2393,18 @@
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MusicVideoTag.vb#L159",
       "Location": "Line 159 Position 139-144"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MusicVideoTag.vb#L159",
+      "Location": "Line 159 Position 49-54"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MusicVideoTag.vb#L159",
+      "Location": "Line 159 Position 82-87"
     },
     {
       "Id": "S3860",
@@ -2536,18 +2536,6 @@
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/PersonInfo.vb#L271",
-      "Location": "Line 271 Position 49-54"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/PersonInfo.vb#L271",
-      "Location": "Line 271 Position 82-87"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/PersonInfo.vb#L271",
       "Location": "Line 271 Position 110-115"
     },
     {
@@ -2555,6 +2543,18 @@
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/PersonInfo.vb#L271",
       "Location": "Line 271 Position 139-144"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/PersonInfo.vb#L271",
+      "Location": "Line 271 Position 49-54"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/PersonInfo.vb#L271",
+      "Location": "Line 271 Position 82-87"
     },
     {
       "Id": "S3860",
@@ -2602,6 +2602,12 @@
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/PersonInfo.vb#L49",
+      "Location": "Line 49 Position 113-118"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/PersonInfo.vb#L49",
       "Location": "Line 49 Position 28-33"
     },
     {
@@ -2615,12 +2621,6 @@
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/PersonInfo.vb#L49",
       "Location": "Line 49 Position 85-90"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/PersonInfo.vb#L49",
-      "Location": "Line 49 Position 113-118"
     },
     {
       "Id": "S3860",
@@ -2776,18 +2776,6 @@
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/TVEpisodeTag.vb#L223",
-      "Location": "Line 223 Position 49-54"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/TVEpisodeTag.vb#L223",
-      "Location": "Line 223 Position 82-87"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/TVEpisodeTag.vb#L223",
       "Location": "Line 223 Position 110-115"
     },
     {
@@ -2795,6 +2783,18 @@
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/TVEpisodeTag.vb#L223",
       "Location": "Line 223 Position 139-144"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/TVEpisodeTag.vb#L223",
+      "Location": "Line 223 Position 49-54"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/TVEpisodeTag.vb#L223",
+      "Location": "Line 223 Position 82-87"
     },
     {
       "Id": "S3860",
@@ -2938,18 +2938,6 @@
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/TVShow.vb#L260",
-      "Location": "Line 260 Position 49-54"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/TVShow.vb#L260",
-      "Location": "Line 260 Position 82-87"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/TVShow.vb#L260",
       "Location": "Line 260 Position 110-115"
     },
     {
@@ -2957,6 +2945,18 @@
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/TVShow.vb#L260",
       "Location": "Line 260 Position 139-144"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/TVShow.vb#L260",
+      "Location": "Line 260 Position 49-54"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/TVShow.vb#L260",
+      "Location": "Line 260 Position 82-87"
     },
     {
       "Id": "S3860",
@@ -3718,18 +3718,6 @@
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperFunction.vb#L239",
-      "Location": "Line 239 Position 34-39"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperFunction.vb#L239",
-      "Location": "Line 239 Position 66-71"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperFunction.vb#L239",
       "Location": "Line 239 Position 102-107"
     },
     {
@@ -3749,6 +3737,18 @@
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperFunction.vb#L239",
       "Location": "Line 239 Position 181-186"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperFunction.vb#L239",
+      "Location": "Line 239 Position 34-39"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperFunction.vb#L239",
+      "Location": "Line 239 Position 66-71"
     },
     {
       "Id": "S3860",
@@ -3982,18 +3982,6 @@
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L275",
-      "Location": "Line 275 Position 34-39"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L275",
-      "Location": "Line 275 Position 66-71"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L275",
       "Location": "Line 275 Position 102-107"
     },
     {
@@ -4013,6 +4001,18 @@
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L275",
       "Location": "Line 275 Position 181-186"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L275",
+      "Location": "Line 275 Position 34-39"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L275",
+      "Location": "Line 275 Position 66-71"
     },
     {
       "Id": "S3860",
@@ -4054,18 +4054,6 @@
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L489",
-      "Location": "Line 489 Position 38-43"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L489",
-      "Location": "Line 489 Position 69-74"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L489",
       "Location": "Line 489 Position 102-107"
     },
     {
@@ -4085,6 +4073,18 @@
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L489",
       "Location": "Line 489 Position 187-192"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L489",
+      "Location": "Line 489 Position 38-43"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L489",
+      "Location": "Line 489 Position 69-74"
     },
     {
       "Id": "S3860",
@@ -4162,24 +4162,6 @@
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperSettings.vb#L177",
-      "Location": "Line 177 Position 28-33"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperSettings.vb#L177",
-      "Location": "Line 177 Position 65-70"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperSettings.vb#L177",
-      "Location": "Line 177 Position 88-93"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperSettings.vb#L177",
       "Location": "Line 177 Position 114-119"
     },
     {
@@ -4193,6 +4175,24 @@
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperSettings.vb#L177",
       "Location": "Line 177 Position 168-173"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperSettings.vb#L177",
+      "Location": "Line 177 Position 28-33"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperSettings.vb#L177",
+      "Location": "Line 177 Position 65-70"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperSettings.vb#L177",
+      "Location": "Line 177 Position 88-93"
     },
     {
       "Id": "S3860",
@@ -4366,24 +4366,6 @@
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Tester.vb#L207",
-      "Location": "Line 207 Position 43-48"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Tester.vb#L207",
-      "Location": "Line 207 Position 67-72"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Tester.vb#L207",
-      "Location": "Line 207 Position 93-98"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Tester.vb#L207",
       "Location": "Line 207 Position 117-122"
     },
     {
@@ -4397,6 +4379,24 @@
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Tester.vb#L207",
       "Location": "Line 207 Position 164-169"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Tester.vb#L207",
+      "Location": "Line 207 Position 43-48"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Tester.vb#L207",
+      "Location": "Line 207 Position 67-72"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Tester.vb#L207",
+      "Location": "Line 207 Position 93-98"
     },
     {
       "Id": "S3860",
@@ -4426,6 +4426,12 @@
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Tester.vb#L259",
+      "Location": "Line 259 Position 130-135"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Tester.vb#L259",
       "Location": "Line 259 Position 40-45"
     },
     {
@@ -4439,12 +4445,6 @@
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Tester.vb#L259",
       "Location": "Line 259 Position 99-104"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Tester.vb#L259",
-      "Location": "Line 259 Position 130-135"
     },
     {
       "Id": "S3860",
@@ -4528,6 +4528,12 @@
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/Delegates.vb#L188",
+      "Location": "Line 188 Position 111-116"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/Delegates.vb#L188",
       "Location": "Line 188 Position 28-33"
     },
     {
@@ -4541,12 +4547,6 @@
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/Delegates.vb#L188",
       "Location": "Line 188 Position 81-86"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/Delegates.vb#L188",
-      "Location": "Line 188 Position 111-116"
     },
     {
       "Id": "S3860",
@@ -4762,6 +4762,12 @@
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/GenericScraper.vb#L59",
+      "Location": "Line 59 Position 121-126"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/GenericScraper.vb#L59",
       "Location": "Line 59 Position 28-33"
     },
     {
@@ -4775,12 +4781,6 @@
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/GenericScraper.vb#L59",
       "Location": "Line 59 Position 93-98"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/GenericScraper.vb#L59",
-      "Location": "Line 59 Position 121-126"
     },
     {
       "Id": "S3860",
@@ -4960,6 +4960,12 @@
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperManager.vb#L199",
+      "Location": "Line 199 Position 121-126"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperManager.vb#L199",
       "Location": "Line 199 Position 40-45"
     },
     {
@@ -4973,12 +4979,6 @@
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperManager.vb#L199",
       "Location": "Line 199 Position 94-99"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperManager.vb#L199",
-      "Location": "Line 199 Position 121-126"
     },
     {
       "Id": "S3860",
@@ -5044,18 +5044,6 @@
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperManager.vb#L305",
-      "Location": "Line 305 Position 42-47"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperManager.vb#L305",
-      "Location": "Line 305 Position 97-102"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperManager.vb#L305",
       "Location": "Line 305 Position 122-127"
     },
     {
@@ -5063,6 +5051,18 @@
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperManager.vb#L305",
       "Location": "Line 305 Position 149-154"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperManager.vb#L305",
+      "Location": "Line 305 Position 42-47"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperManager.vb#L305",
+      "Location": "Line 305 Position 97-102"
     },
     {
       "Id": "S3860",
@@ -5086,6 +5086,12 @@
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperManager.vb#L340",
+      "Location": "Line 340 Position 119-124"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperManager.vb#L340",
       "Location": "Line 340 Position 37-42"
     },
     {
@@ -5099,12 +5105,6 @@
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperManager.vb#L340",
       "Location": "Line 340 Position 92-97"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperManager.vb#L340",
-      "Location": "Line 340 Position 119-124"
     },
     {
       "Id": "S3860",
@@ -5194,6 +5194,24 @@
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L393",
+      "Location": "Line 393 Position 117-122"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L393",
+      "Location": "Line 393 Position 142-147"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L393",
+      "Location": "Line 393 Position 164-169"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L393",
       "Location": "Line 393 Position 43-48"
     },
     {
@@ -5211,20 +5229,8 @@
     {
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L393",
-      "Location": "Line 393 Position 117-122"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L393",
-      "Location": "Line 393 Position 142-147"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L393",
-      "Location": "Line 393 Position 164-169"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L394",
+      "Location": "Line 394 Position 113-118"
     },
     {
       "Id": "S3860",
@@ -5253,14 +5259,14 @@
     {
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L394",
-      "Location": "Line 394 Position 113-118"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L468",
+      "Location": "Line 468 Position 35-40"
     },
     {
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L468",
-      "Location": "Line 468 Position 35-40"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L482",
+      "Location": "Line 482 Position 130-135"
     },
     {
       "Id": "S3860",
@@ -5279,12 +5285,6 @@
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L482",
       "Location": "Line 482 Position 99-104"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L482",
-      "Location": "Line 482 Position 130-135"
     },
     {
       "Id": "S3860",
@@ -5320,6 +5320,12 @@
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L102",
+      "Location": "Line 102 Position 114-119"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L102",
       "Location": "Line 102 Position 42-47"
     },
     {
@@ -5337,8 +5343,8 @@
     {
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L102",
-      "Location": "Line 102 Position 114-119"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L112",
+      "Location": "Line 112 Position 115-120"
     },
     {
       "Id": "S3860",
@@ -5361,8 +5367,8 @@
     {
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L112",
-      "Location": "Line 112 Position 115-120"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L119",
+      "Location": "Line 119 Position 113-118"
     },
     {
       "Id": "S3860",
@@ -5385,8 +5391,8 @@
     {
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L119",
-      "Location": "Line 119 Position 113-118"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L126",
+      "Location": "Line 126 Position 113-118"
     },
     {
       "Id": "S3860",
@@ -5409,8 +5415,8 @@
     {
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L126",
-      "Location": "Line 126 Position 113-118"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L133",
+      "Location": "Line 133 Position 111-116"
     },
     {
       "Id": "S3860",
@@ -5429,12 +5435,6 @@
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L133",
       "Location": "Line 133 Position 87-92"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L133",
-      "Location": "Line 133 Position 111-116"
     },
     {
       "Id": "S3860",
@@ -5740,6 +5740,12 @@
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L36",
+      "Location": "Line 36 Position 117-122"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L36",
       "Location": "Line 36 Position 44-49"
     },
     {
@@ -5757,8 +5763,8 @@
     {
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L36",
-      "Location": "Line 36 Position 117-122"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L43",
+      "Location": "Line 43 Position 116-121"
     },
     {
       "Id": "S3860",
@@ -5777,12 +5783,6 @@
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L43",
       "Location": "Line 43 Position 93-98"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L43",
-      "Location": "Line 43 Position 116-121"
     },
     {
       "Id": "S3860",
@@ -5824,6 +5824,12 @@
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L70",
+      "Location": "Line 70 Position 115-120"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L70",
       "Location": "Line 70 Position 42-47"
     },
     {
@@ -5841,8 +5847,14 @@
     {
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L70",
-      "Location": "Line 70 Position 115-120"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L77",
+      "Location": "Line 77 Position 114-119"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L77",
+      "Location": "Line 77 Position 144-149"
     },
     {
       "Id": "S3860",
@@ -5861,18 +5873,6 @@
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L77",
       "Location": "Line 77 Position 91-96"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L77",
-      "Location": "Line 77 Position 114-119"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L77",
-      "Location": "Line 77 Position 144-149"
     },
     {
       "Id": "S3860",

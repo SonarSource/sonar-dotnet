@@ -4,6 +4,12 @@
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L35",
+      "Location": "Line 35 Position 112-117"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L35",
       "Location": "Line 35 Position 47-52"
     },
     {
@@ -11,12 +17,6 @@
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L35",
       "Location": "Line 35 Position 83-88"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L35",
-      "Location": "Line 35 Position 112-117"
     },
     {
       "Id": "S3860",

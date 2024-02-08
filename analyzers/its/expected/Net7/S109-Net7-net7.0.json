@@ -86,6 +86,12 @@
     },
     {
       "Id": "S109",
+      "Message": "Assign this magic number \u002732\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L11",
+      "Location": "Line 11 Position 106-108"
+    },
+    {
+      "Id": "S109",
       "Message": "Assign this magic number \u002711\u0027 to a well-named variable or constant, and use that instead.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L11",
       "Location": "Line 11 Position 47-49"
@@ -95,24 +101,6 @@
       "Message": "Assign this magic number \u00278\u0027 to a well-named variable or constant, and use that instead.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L11",
       "Location": "Line 11 Position 60-61"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u002732\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L11",
-      "Location": "Line 11 Position 106-108"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u002711\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L14",
-      "Location": "Line 14 Position 47-49"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00278\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L14",
-      "Location": "Line 14 Position 60-61"
     },
     {
       "Id": "S109",
@@ -129,6 +117,24 @@
     {
       "Id": "S109",
       "Message": "Assign this magic number \u002711\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L14",
+      "Location": "Line 14 Position 47-49"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00278\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L14",
+      "Location": "Line 14 Position 60-61"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002732\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L8",
+      "Location": "Line 8 Position 106-108"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002711\u0027 to a well-named variable or constant, and use that instead.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L8",
       "Location": "Line 8 Position 47-49"
     },
@@ -137,12 +143,6 @@
       "Message": "Assign this magic number \u00278\u0027 to a well-named variable or constant, and use that instead.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L8",
       "Location": "Line 8 Position 60-61"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u002732\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L8",
-      "Location": "Line 8 Position 106-108"
     }
   ]
 }

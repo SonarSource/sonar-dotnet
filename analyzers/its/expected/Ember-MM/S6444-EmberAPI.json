@@ -166,12 +166,6 @@
       "Id": "S6444",
       "Message": "Pass a timeout to limit the execution time.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L178",
-      "Location": "Line 178 Position 58-146"
-    },
-    {
-      "Id": "S6444",
-      "Message": "Pass a timeout to limit the execution time.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L178",
       "Location": "Line 178 Position 153-267"
     },
     {
@@ -179,6 +173,12 @@
       "Message": "Pass a timeout to limit the execution time.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L178",
       "Location": "Line 178 Position 192-240"
+    },
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L178",
+      "Location": "Line 178 Position 58-146"
     },
     {
       "Id": "S6444",
@@ -214,13 +214,13 @@
       "Id": "S6444",
       "Message": "Pass a timeout to limit the execution time.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L308",
-      "Location": "Line 308 Position 23-161"
+      "Location": "Line 308 Position 169-236"
     },
     {
       "Id": "S6444",
       "Message": "Pass a timeout to limit the execution time.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L308",
-      "Location": "Line 308 Position 169-236"
+      "Location": "Line 308 Position 23-161"
     },
     {
       "Id": "S6444",

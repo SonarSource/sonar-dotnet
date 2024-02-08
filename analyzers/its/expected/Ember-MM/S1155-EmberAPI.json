@@ -64,6 +64,12 @@
       "Id": "S1155",
       "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of System.IO.DirectoryInfo)\u0027 is empty or not.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L976",
+      "Location": "Line 976 Position 177-182"
+    },
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of System.IO.DirectoryInfo)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L976",
       "Location": "Line 976 Position 42-47"
     },
     {
@@ -71,12 +77,6 @@
       "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of System.IO.FileInfo)\u0027 is empty or not.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L976",
       "Location": "Line 976 Position 75-80"
-    },
-    {
-      "Id": "S1155",
-      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of System.IO.DirectoryInfo)\u0027 is empty or not.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L976",
-      "Location": "Line 976 Position 177-182"
     },
     {
       "Id": "S1155",

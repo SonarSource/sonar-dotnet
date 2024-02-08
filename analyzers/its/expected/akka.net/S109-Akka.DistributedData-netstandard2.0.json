@@ -2,15 +2,15 @@
   "Issues": [
     {
       "Id": "S109",
-      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DeltaPropagationSelector.cs#L54",
-      "Location": "Line 54 Position 75-76"
-    },
-    {
-      "Id": "S109",
       "Message": "Assign this magic number \u002710\u0027 to a well-named variable or constant, and use that instead.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DeltaPropagationSelector.cs#L54",
       "Location": "Line 54 Position 102-104"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DeltaPropagationSelector.cs#L54",
+      "Location": "Line 54 Position 75-76"
     },
     {
       "Id": "S109",

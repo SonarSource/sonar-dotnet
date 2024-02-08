@@ -4,13 +4,13 @@
       "Id": "S2374",
       "Message": "Change this unsigned type to \u0027Integer\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L379",
-      "Location": "Line 379 Position 95-103"
+      "Location": "Line 379 Position 106-114"
     },
     {
       "Id": "S2374",
       "Message": "Change this unsigned type to \u0027Integer\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L379",
-      "Location": "Line 379 Position 106-114"
+      "Location": "Line 379 Position 95-103"
     },
     {
       "Id": "S2374",

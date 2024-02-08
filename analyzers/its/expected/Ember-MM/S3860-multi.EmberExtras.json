@@ -580,12 +580,6 @@
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/scraperMoviesEmberModule.vb#L105",
-      "Location": "Line 105 Position 76-81"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/scraperMoviesEmberModule.vb#L105",
       "Location": "Line 105 Position 159-164"
     },
     {
@@ -593,6 +587,12 @@
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/scraperMoviesEmberModule.vb#L105",
       "Location": "Line 105 Position 202-207"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/scraperMoviesEmberModule.vb#L105",
+      "Location": "Line 105 Position 76-81"
     },
     {
       "Id": "S3860",

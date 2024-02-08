@@ -40,6 +40,12 @@
       "Id": "S4058",
       "Message": "Change this call to \u0027string.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Address.cs#L150",
+      "Location": "Line 150 Position 116-155"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027string.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Address.cs#L150",
       "Location": "Line 150 Position 42-73"
     },
     {
@@ -47,12 +53,6 @@
       "Message": "Change this call to \u0027string.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Address.cs#L150",
       "Location": "Line 150 Position 77-112"
-    },
-    {
-      "Id": "S4058",
-      "Message": "Change this call to \u0027string.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Address.cs#L150",
-      "Location": "Line 150 Position 116-155"
     },
     {
       "Id": "S4058",

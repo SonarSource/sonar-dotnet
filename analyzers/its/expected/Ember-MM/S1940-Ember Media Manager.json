@@ -34,6 +34,12 @@
       "Id": "S1940",
       "Message": "Use the opposite operator (\u0027\u003C\u003E\u0027) instead.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/clsTheming.vb#L128",
+      "Location": "Line 128 Position 128-167"
+    },
+    {
+      "Id": "S1940",
+      "Message": "Use the opposite operator (\u0027\u003C\u003E\u0027) instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/clsTheming.vb#L128",
       "Location": "Line 128 Position 20-46"
     },
     {
@@ -47,12 +53,6 @@
       "Message": "Use the opposite operator (\u0027\u003C\u003E\u0027) instead.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/clsTheming.vb#L128",
       "Location": "Line 128 Position 91-119"
-    },
-    {
-      "Id": "S1940",
-      "Message": "Use the opposite operator (\u0027\u003C\u003E\u0027) instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/clsTheming.vb#L128",
-      "Location": "Line 128 Position 128-167"
     },
     {
       "Id": "S1940",
@@ -208,13 +208,13 @@
       "Id": "S1940",
       "Message": "Use the opposite operator (\u0027\u003C\u003E\u0027) instead.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1718",
-      "Location": "Line 1718 Position 86-114"
+      "Location": "Line 1718 Position 123-152"
     },
     {
       "Id": "S1940",
       "Message": "Use the opposite operator (\u0027\u003C\u003E\u0027) instead.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1718",
-      "Location": "Line 1718 Position 123-152"
+      "Location": "Line 1718 Position 86-114"
     },
     {
       "Id": "S1940",

@@ -26,15 +26,15 @@
     },
     {
       "Id": "S3900",
-      "Message": "Refactor this method to add validation of parameter \u0027context\u0027 before using it.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L86",
-      "Location": "Line 86 Position 29-36"
-    },
-    {
-      "Id": "S3900",
       "Message": "Refactor this method to add validation of parameter \u0027settings\u0027 before using it.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L86",
       "Location": "Line 86 Position 107-115"
+    },
+    {
+      "Id": "S3900",
+      "Message": "Refactor this method to add validation of parameter \u0027context\u0027 before using it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L86",
+      "Location": "Line 86 Position 29-36"
     },
     {
       "Id": "S3900",
@@ -886,13 +886,13 @@
       "Id": "S3900",
       "Message": "Refactor this constructor to avoid using members of parameter \u0027symbolicStage\u0027 because it could be null.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Stages/Stages.cs#L448",
-      "Location": "Line 448 Position 83-96"
+      "Location": "Line 448 Position 105-118"
     },
     {
       "Id": "S3900",
       "Message": "Refactor this constructor to avoid using members of parameter \u0027symbolicStage\u0027 because it could be null.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Stages/Stages.cs#L448",
-      "Location": "Line 448 Position 105-118"
+      "Location": "Line 448 Position 83-96"
     },
     {
       "Id": "S3900",

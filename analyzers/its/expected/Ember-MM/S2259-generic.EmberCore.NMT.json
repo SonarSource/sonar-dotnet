@@ -4,25 +4,25 @@
       "Id": "S2259",
       "Message": "\u0027conf.Files.FirstOrDefault(Function(y) y.Process = True AndAlso y.Type = \u0022movieindex\u0022)\u0027 is Nothing on at least one execution path.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1498",
-      "Location": "Line 1498 Position 71-156"
+      "Location": "Line 1498 Position 168-253"
     },
     {
       "Id": "S2259",
       "Message": "\u0027conf.Files.FirstOrDefault(Function(y) y.Process = True AndAlso y.Type = \u0022movieindex\u0022)\u0027 is Nothing on at least one execution path.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1498",
-      "Location": "Line 1498 Position 168-253"
-    },
-    {
-      "Id": "S2259",
-      "Message": "\u0027conf.Files.FirstOrDefault(Function(y) y.Process = True AndAlso y.Type = \u0022tvindex\u0022)\u0027 is Nothing on at least one execution path.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1561",
-      "Location": "Line 1561 Position 71-153"
+      "Location": "Line 1498 Position 71-156"
     },
     {
       "Id": "S2259",
       "Message": "\u0027conf.Files.FirstOrDefault(Function(y) y.Process = True AndAlso y.Type = \u0022tvindex\u0022)\u0027 is Nothing on at least one execution path.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1561",
       "Location": "Line 1561 Position 165-247"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027conf.Files.FirstOrDefault(Function(y) y.Process = True AndAlso y.Type = \u0022tvindex\u0022)\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1561",
+      "Location": "Line 1561 Position 71-153"
     },
     {
       "Id": "S2259",

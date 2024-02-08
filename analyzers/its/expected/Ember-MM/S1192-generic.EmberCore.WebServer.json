@@ -26,12 +26,6 @@
     },
     {
       "Id": "S1192",
-      "Message": "Define a constant instead of using this literal \u0027\u003C$MFLAG_ACHAN\u003E\u0027 5 times.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L198",
-      "Location": "Line 198 Position 84-100"
-    },
-    {
-      "Id": "S1192",
       "Message": "Define a constant instead of using this literal \u0027\u003C$MFLAG_ATYPE\u003E\u0027 5 times.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L198",
       "Location": "Line 198 Position 102-118"
@@ -53,6 +47,12 @@
       "Message": "Define a constant instead of using this literal \u0027\u003C$MFLAG_VRES\u003E\u0027 5 times.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L198",
       "Location": "Line 198 Position 158-173"
+    },
+    {
+      "Id": "S1192",
+      "Message": "Define a constant instead of using this literal \u0027\u003C$MFLAG_ACHAN\u003E\u0027 5 times.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L198",
+      "Location": "Line 198 Position 84-100"
     },
     {
       "Id": "S1192",

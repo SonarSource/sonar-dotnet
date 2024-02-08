@@ -10,6 +10,12 @@
       "Id": "S2360",
       "Message": "Use the overloading mechanism instead of the optional parameters.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L53",
+      "Location": "Line 53 Position 109-115"
+    },
+    {
+      "Id": "S2360",
+      "Message": "Use the overloading mechanism instead of the optional parameters.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L53",
       "Location": "Line 53 Position 45-51"
     },
     {
@@ -21,20 +27,14 @@
     {
       "Id": "S2360",
       "Message": "Use the overloading mechanism instead of the optional parameters.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L53",
-      "Location": "Line 53 Position 109-115"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L58",
+      "Location": "Line 58 Position 111-117"
     },
     {
       "Id": "S2360",
       "Message": "Use the overloading mechanism instead of the optional parameters.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L58",
       "Location": "Line 58 Position 78-84"
-    },
-    {
-      "Id": "S2360",
-      "Message": "Use the overloading mechanism instead of the optional parameters.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L58",
-      "Location": "Line 58 Position 111-117"
     },
     {
       "Id": "S2360",
@@ -52,13 +52,19 @@
       "Id": "S2360",
       "Message": "Use the overloading mechanism instead of the optional parameters.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L83",
-      "Location": "Line 83 Position 72-78"
+      "Location": "Line 83 Position 105-111"
     },
     {
       "Id": "S2360",
       "Message": "Use the overloading mechanism instead of the optional parameters.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L83",
-      "Location": "Line 83 Position 105-111"
+      "Location": "Line 83 Position 72-78"
+    },
+    {
+      "Id": "S2360",
+      "Message": "Use the overloading mechanism instead of the optional parameters.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/PluginSpec.cs#L23",
+      "Location": "Line 23 Position 108-114"
     },
     {
       "Id": "S2360",
@@ -75,20 +81,14 @@
     {
       "Id": "S2360",
       "Message": "Use the overloading mechanism instead of the optional parameters.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/PluginSpec.cs#L23",
-      "Location": "Line 23 Position 108-114"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/PluginSpec.cs#L31",
+      "Location": "Line 31 Position 110-116"
     },
     {
       "Id": "S2360",
       "Message": "Use the overloading mechanism instead of the optional parameters.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/PluginSpec.cs#L31",
       "Location": "Line 31 Position 77-83"
-    },
-    {
-      "Id": "S2360",
-      "Message": "Use the overloading mechanism instead of the optional parameters.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/PluginSpec.cs#L31",
-      "Location": "Line 31 Position 110-116"
     },
     {
       "Id": "S2360",
@@ -148,6 +148,12 @@
       "Id": "S2360",
       "Message": "Use the overloading mechanism instead of the optional parameters.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByPersistenceIdSpec.cs#L28",
+      "Location": "Line 28 Position 130-136"
+    },
+    {
+      "Id": "S2360",
+      "Message": "Use the overloading mechanism instead of the optional parameters.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByPersistenceIdSpec.cs#L28",
       "Location": "Line 28 Position 66-72"
     },
     {
@@ -159,8 +165,8 @@
     {
       "Id": "S2360",
       "Message": "Use the overloading mechanism instead of the optional parameters.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByPersistenceIdSpec.cs#L28",
-      "Location": "Line 28 Position 130-136"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L27",
+      "Location": "Line 27 Position 120-126"
     },
     {
       "Id": "S2360",
@@ -177,8 +183,8 @@
     {
       "Id": "S2360",
       "Message": "Use the overloading mechanism instead of the optional parameters.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L27",
-      "Location": "Line 27 Position 120-126"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentPersistenceIdsSpec.cs#L27",
+      "Location": "Line 27 Position 123-129"
     },
     {
       "Id": "S2360",
@@ -195,8 +201,8 @@
     {
       "Id": "S2360",
       "Message": "Use the overloading mechanism instead of the optional parameters.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentPersistenceIdsSpec.cs#L27",
-      "Location": "Line 27 Position 123-129"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByPersistenceIdSpec.cs#L28",
+      "Location": "Line 28 Position 123-129"
     },
     {
       "Id": "S2360",
@@ -213,8 +219,8 @@
     {
       "Id": "S2360",
       "Message": "Use the overloading mechanism instead of the optional parameters.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByPersistenceIdSpec.cs#L28",
-      "Location": "Line 28 Position 123-129"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByTagSpec.cs#L28",
+      "Location": "Line 28 Position 113-119"
     },
     {
       "Id": "S2360",
@@ -231,8 +237,8 @@
     {
       "Id": "S2360",
       "Message": "Use the overloading mechanism instead of the optional parameters.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByTagSpec.cs#L28",
-      "Location": "Line 28 Position 113-119"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/PersistenceIdsSpec.cs#L37",
+      "Location": "Line 37 Position 116-122"
     },
     {
       "Id": "S2360",
@@ -249,8 +255,8 @@
     {
       "Id": "S2360",
       "Message": "Use the overloading mechanism instead of the optional parameters.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/PersistenceIdsSpec.cs#L37",
-      "Location": "Line 37 Position 116-122"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Snapshot/SnapshotStoreSpec.cs#L54",
+      "Location": "Line 54 Position 115-121"
     },
     {
       "Id": "S2360",
@@ -267,20 +273,14 @@
     {
       "Id": "S2360",
       "Message": "Use the overloading mechanism instead of the optional parameters.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Snapshot/SnapshotStoreSpec.cs#L54",
-      "Location": "Line 54 Position 115-121"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Snapshot/SnapshotStoreSpec.cs#L60",
+      "Location": "Line 60 Position 117-123"
     },
     {
       "Id": "S2360",
       "Message": "Use the overloading mechanism instead of the optional parameters.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Snapshot/SnapshotStoreSpec.cs#L60",
       "Location": "Line 60 Position 84-90"
-    },
-    {
-      "Id": "S2360",
-      "Message": "Use the overloading mechanism instead of the optional parameters.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Snapshot/SnapshotStoreSpec.cs#L60",
-      "Location": "Line 60 Position 117-123"
     },
     {
       "Id": "S2360",

@@ -626,15 +626,15 @@
     },
     {
       "Id": "S3900",
-      "Message": "Refactor this method to add validation of parameter \u0027destExpression\u0027 before using it.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Mappers/ConvertMapper.cs#L14",
-      "Location": "Line 14 Position 66-80"
-    },
-    {
-      "Id": "S3900",
       "Message": "Refactor this method to add validation of parameter \u0027sourceExpression\u0027 before using it.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Mappers/ConvertMapper.cs#L14",
       "Location": "Line 14 Position 100-116"
+    },
+    {
+      "Id": "S3900",
+      "Message": "Refactor this method to add validation of parameter \u0027destExpression\u0027 before using it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Mappers/ConvertMapper.cs#L14",
+      "Location": "Line 14 Position 66-80"
     },
     {
       "Id": "S3900",
@@ -686,12 +686,6 @@
     },
     {
       "Id": "S3900",
-      "Message": "Refactor this method to add validation of parameter \u0027sourceExpression\u0027 before using it.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Mappers/NullableDestinationMapper.cs#L10",
-      "Location": "Line 10 Position 80-96"
-    },
-    {
-      "Id": "S3900",
       "Message": "Refactor this method to add validation of parameter \u0027destExpression\u0027 before using it.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Mappers/NullableDestinationMapper.cs#L10",
       "Location": "Line 10 Position 103-117"
@@ -699,7 +693,7 @@
     {
       "Id": "S3900",
       "Message": "Refactor this method to add validation of parameter \u0027sourceExpression\u0027 before using it.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Mappers/NullableSourceMapper.cs#L10",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Mappers/NullableDestinationMapper.cs#L10",
       "Location": "Line 10 Position 80-96"
     },
     {
@@ -707,6 +701,12 @@
       "Message": "Refactor this method to add validation of parameter \u0027destExpression\u0027 before using it.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Mappers/NullableSourceMapper.cs#L10",
       "Location": "Line 10 Position 103-117"
+    },
+    {
+      "Id": "S3900",
+      "Message": "Refactor this method to add validation of parameter \u0027sourceExpression\u0027 before using it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Mappers/NullableSourceMapper.cs#L10",
+      "Location": "Line 10 Position 80-96"
     },
     {
       "Id": "S3900",
@@ -896,15 +896,15 @@
     },
     {
       "Id": "S3900",
-      "Message": "Refactor this method to add validation of parameter \u0027configuration\u0027 before using it.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/EnumerableProjectionMapper.cs#L28",
-      "Location": "Line 28 Position 46-59"
-    },
-    {
-      "Id": "S3900",
       "Message": "Refactor this method to add validation of parameter \u0027letPropertyMaps\u0027 before using it.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/EnumerableProjectionMapper.cs#L28",
       "Location": "Line 28 Position 109-124"
+    },
+    {
+      "Id": "S3900",
+      "Message": "Refactor this method to add validation of parameter \u0027configuration\u0027 before using it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/EnumerableProjectionMapper.cs#L28",
+      "Location": "Line 28 Position 46-59"
     },
     {
       "Id": "S3900",
@@ -926,15 +926,15 @@
     },
     {
       "Id": "S3900",
-      "Message": "Refactor this method to add validation of parameter \u0027memberMap\u0027 before using it.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/MappedTypeProjectionMapper.cs#L21",
-      "Location": "Line 21 Position 17-26"
-    },
-    {
-      "Id": "S3900",
       "Message": "Refactor this method to add validation of parameter \u0027resolvedSource\u0027 before using it.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/MappedTypeProjectionMapper.cs#L21",
       "Location": "Line 21 Position 106-120"
+    },
+    {
+      "Id": "S3900",
+      "Message": "Refactor this method to add validation of parameter \u0027memberMap\u0027 before using it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/MappedTypeProjectionMapper.cs#L21",
+      "Location": "Line 21 Position 17-26"
     },
     {
       "Id": "S3900",

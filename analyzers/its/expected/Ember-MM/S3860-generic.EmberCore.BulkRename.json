@@ -58,12 +58,6 @@
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L241",
-      "Location": "Line 241 Position 75-80"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L241",
       "Location": "Line 241 Position 106-111"
     },
     {
@@ -83,6 +77,12 @@
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L241",
       "Location": "Line 241 Position 187-192"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L241",
+      "Location": "Line 241 Position 75-80"
     },
     {
       "Id": "S3860",
@@ -172,12 +172,6 @@
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L662",
-      "Location": "Line 662 Position 39-44"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L662",
       "Location": "Line 662 Position 105-110"
     },
     {
@@ -191,6 +185,12 @@
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L662",
       "Location": "Line 662 Position 157-162"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L662",
+      "Location": "Line 662 Position 39-44"
     },
     {
       "Id": "S3860",
@@ -214,6 +214,12 @@
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L778",
+      "Location": "Line 778 Position 123-128"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L778",
       "Location": "Line 778 Position 73-78"
     },
     {
@@ -221,12 +227,6 @@
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L778",
       "Location": "Line 778 Position 98-103"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L778",
-      "Location": "Line 778 Position 123-128"
     },
     {
       "Id": "S3860",

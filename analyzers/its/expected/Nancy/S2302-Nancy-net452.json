@@ -274,13 +274,13 @@
       "Id": "S2302",
       "Message": "Replace the string \u0027modelType\u0027 with \u0027nameof(modelType)\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L107",
-      "Location": "Line 107 Position 49-108"
+      "Location": "Line 107 Position 110-121"
     },
     {
       "Id": "S2302",
       "Message": "Replace the string \u0027modelType\u0027 with \u0027nameof(modelType)\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L107",
-      "Location": "Line 107 Position 110-121"
+      "Location": "Line 107 Position 49-108"
     },
     {
       "Id": "S2302",

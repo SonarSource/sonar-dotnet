@@ -38,15 +38,15 @@
     },
     {
       "Id": "S3242",
-      "Message": "Consider using more general type \u0027System.Collections.Generic.IReadOnlyCollection\u003CAutoMapper.Features.IGlobalFeature\u003E\u0027 instead of \u0027AutoMapper.Features.Features\u003CAutoMapper.Features.IGlobalFeature\u003E\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Features.cs#L57",
-      "Location": "Line 57 Position 70-78"
-    },
-    {
-      "Id": "S3242",
       "Message": "Consider using more general type \u0027AutoMapper.Internal.IGlobalConfiguration\u0027 instead of \u0027AutoMapper.MapperConfiguration\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Features.cs#L57",
       "Location": "Line 57 Position 100-119"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Collections.Generic.IReadOnlyCollection\u003CAutoMapper.Features.IGlobalFeature\u003E\u0027 instead of \u0027AutoMapper.Features.Features\u003CAutoMapper.Features.IGlobalFeature\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Features.cs#L57",
+      "Location": "Line 57 Position 70-78"
     },
     {
       "Id": "S3242",
@@ -74,15 +74,15 @@
     },
     {
       "Id": "S3242",
-      "Message": "Consider using more general type \u0027System.Collections.Generic.ICollection\u003CAutoMapper.ValueTransformerConfiguration\u003E\u0027 instead of \u0027System.Collections.Generic.List\u003CAutoMapper.ValueTransformerConfiguration\u003E\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/MemberMap.cs#L104",
-      "Location": "Line 104 Position 81-98"
-    },
-    {
-      "Id": "S3242",
       "Message": "Consider using more general type \u0027System.Linq.Expressions.LambdaExpression\u0027 instead of \u0027System.Linq.Expressions.Expression\u003CSystem.Func\u003CTValue, TValue\u003E\u003E\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/MemberMap.cs#L104",
       "Location": "Line 104 Position 133-144"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Collections.Generic.ICollection\u003CAutoMapper.ValueTransformerConfiguration\u003E\u0027 instead of \u0027System.Collections.Generic.List\u003CAutoMapper.ValueTransformerConfiguration\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/MemberMap.cs#L104",
+      "Location": "Line 104 Position 81-98"
     },
     {
       "Id": "S3242",
@@ -92,15 +92,15 @@
     },
     {
       "Id": "S3242",
-      "Message": "Consider using more general type \u0027System.Linq.IQueryable\u0027 instead of \u0027System.Linq.IQueryable\u003CTSource\u003E\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/QueryMapperVisitor.cs#L33",
-      "Location": "Line 33 Position 95-106"
-    },
-    {
-      "Id": "S3242",
       "Message": "Consider using more general type \u0027System.Linq.IQueryable\u0027 instead of \u0027System.Linq.IQueryable\u003CTDestination\u003E\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/QueryMapperVisitor.cs#L33",
       "Location": "Line 33 Position 133-142"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027System.Linq.IQueryable\u0027 instead of \u0027System.Linq.IQueryable\u003CTSource\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/QueryMapperVisitor.cs#L33",
+      "Location": "Line 33 Position 95-106"
     },
     {
       "Id": "S3242",

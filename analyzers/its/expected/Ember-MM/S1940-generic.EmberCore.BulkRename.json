@@ -112,13 +112,13 @@
       "Id": "S1940",
       "Message": "Use the opposite operator (\u0027\u003C\u003E\u0027) instead.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L457",
-      "Location": "Line 457 Position 33-63"
+      "Location": "Line 457 Position 103-131"
     },
     {
       "Id": "S1940",
       "Message": "Use the opposite operator (\u0027\u003C\u003E\u0027) instead.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L457",
-      "Location": "Line 457 Position 103-131"
+      "Location": "Line 457 Position 33-63"
     },
     {
       "Id": "S1940",
@@ -172,13 +172,13 @@
       "Id": "S1940",
       "Message": "Use the opposite operator (\u0027\u003C\u003E\u0027) instead.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L703",
-      "Location": "Line 703 Position 25-69"
+      "Location": "Line 703 Position 116-151"
     },
     {
       "Id": "S1940",
       "Message": "Use the opposite operator (\u0027\u003C\u003E\u0027) instead.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L703",
-      "Location": "Line 703 Position 116-151"
+      "Location": "Line 703 Position 25-69"
     },
     {
       "Id": "S1940",
@@ -196,6 +196,12 @@
       "Id": "S1940",
       "Message": "Use the opposite operator (\u0027\u003C\u003E\u0027) instead.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L91",
+      "Location": "Line 91 Position 113-128"
+    },
+    {
+      "Id": "S1940",
+      "Message": "Use the opposite operator (\u0027\u003C\u003E\u0027) instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L91",
       "Location": "Line 91 Position 66-80"
     },
     {
@@ -203,12 +209,6 @@
       "Message": "Use the opposite operator (\u0027\u003C\u003E\u0027) instead.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L91",
       "Location": "Line 91 Position 89-104"
-    },
-    {
-      "Id": "S1940",
-      "Message": "Use the opposite operator (\u0027\u003C\u003E\u0027) instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L91",
-      "Location": "Line 91 Position 113-128"
     },
     {
       "Id": "S1940",

@@ -22,6 +22,18 @@
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L70",
+      "Location": "Line 70 Position 108-116"
+    },
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L70",
+      "Location": "Line 70 Position 134-145"
+    },
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L70",
       "Location": "Line 70 Position 37-42"
     },
     {
@@ -39,18 +51,6 @@
     {
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L70",
-      "Location": "Line 70 Position 108-116"
-    },
-    {
-      "Id": "S1654",
-      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L70",
-      "Location": "Line 70 Position 134-145"
-    },
-    {
-      "Id": "S1654",
-      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmSettingsHolder.vb#L27",
       "Location": "Line 27 Position 45-50"
     },
@@ -58,13 +58,13 @@
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/Module.Notifications.vb#L106",
-      "Location": "Line 106 Position 76-83"
+      "Location": "Line 106 Position 110-119"
     },
     {
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/Module.Notifications.vb#L106",
-      "Location": "Line 106 Position 110-119"
+      "Location": "Line 106 Position 76-83"
     },
     {
       "Id": "S1654",

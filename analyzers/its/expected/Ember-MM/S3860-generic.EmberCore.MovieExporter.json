@@ -16,6 +16,18 @@
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L134",
+      "Location": "Line 134 Position 103-108"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L134",
+      "Location": "Line 134 Position 129-134"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L134",
       "Location": "Line 134 Position 27-32"
     },
     {
@@ -29,18 +41,6 @@
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L134",
       "Location": "Line 134 Position 80-85"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L134",
-      "Location": "Line 134 Position 103-108"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L134",
-      "Location": "Line 134 Position 129-134"
     },
     {
       "Id": "S3860",
@@ -202,6 +202,12 @@
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L52",
+      "Location": "Line 52 Position 115-120"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L52",
       "Location": "Line 52 Position 32-37"
     },
     {
@@ -209,12 +215,6 @@
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L52",
       "Location": "Line 52 Position 67-72"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L52",
-      "Location": "Line 52 Position 115-120"
     },
     {
       "Id": "S3860",
@@ -280,6 +280,12 @@
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L716",
+      "Location": "Line 716 Position 111-116"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L716",
       "Location": "Line 716 Position 25-30"
     },
     {
@@ -297,12 +303,6 @@
     {
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L716",
-      "Location": "Line 716 Position 111-116"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L744",
       "Location": "Line 744 Position 35-40"
     },
@@ -316,6 +316,12 @@
       "Id": "S3860",
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L75",
+      "Location": "Line 75 Position 101-106"
+    },
+    {
+      "Id": "S3860",
+      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L75",
       "Location": "Line 75 Position 38-43"
     },
     {
@@ -323,12 +329,6 @@
       "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L75",
       "Location": "Line 75 Position 66-71"
-    },
-    {
-      "Id": "S3860",
-      "Message": "Remove this redundant \u0027ByVal\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L75",
-      "Location": "Line 75 Position 101-106"
     },
     {
       "Id": "S3860",

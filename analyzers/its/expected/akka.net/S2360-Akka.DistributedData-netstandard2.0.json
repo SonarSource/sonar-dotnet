@@ -10,19 +10,13 @@
       "Id": "S2360",
       "Message": "Use the overloading mechanism instead of the optional parameters.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L131",
-      "Location": "Line 131 Position 84-90"
-    },
-    {
-      "Id": "S2360",
-      "Message": "Use the overloading mechanism instead of the optional parameters.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L131",
       "Location": "Line 131 Position 123-151"
     },
     {
       "Id": "S2360",
       "Message": "Use the overloading mechanism instead of the optional parameters.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L169",
-      "Location": "Line 169 Position 96-102"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L131",
+      "Location": "Line 131 Position 84-90"
     },
     {
       "Id": "S2360",
@@ -33,14 +27,20 @@
     {
       "Id": "S2360",
       "Message": "Use the overloading mechanism instead of the optional parameters.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L204",
-      "Location": "Line 204 Position 85-91"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L169",
+      "Location": "Line 169 Position 96-102"
     },
     {
       "Id": "S2360",
       "Message": "Use the overloading mechanism instead of the optional parameters.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L204",
       "Location": "Line 204 Position 124-152"
+    },
+    {
+      "Id": "S2360",
+      "Message": "Use the overloading mechanism instead of the optional parameters.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L204",
+      "Location": "Line 204 Position 85-91"
     },
     {
       "Id": "S2360",

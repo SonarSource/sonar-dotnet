@@ -94,25 +94,25 @@
       "Id": "S4017",
       "Message": "Refactor this method to remove the nested type argument.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Flow.cs#L489",
-      "Location": "Line 489 Position 83-116"
-    },
-    {
-      "Id": "S4017",
-      "Message": "Refactor this method to remove the nested type argument.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Flow.cs#L489",
       "Location": "Line 489 Position 118-156"
     },
     {
       "Id": "S4017",
       "Message": "Refactor this method to remove the nested type argument.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Flow.cs#L508",
-      "Location": "Line 508 Position 94-128"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Flow.cs#L489",
+      "Location": "Line 489 Position 83-116"
     },
     {
       "Id": "S4017",
       "Message": "Refactor this method to remove the nested type argument.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Flow.cs#L508",
       "Location": "Line 508 Position 130-169"
+    },
+    {
+      "Id": "S4017",
+      "Message": "Refactor this method to remove the nested type argument.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Flow.cs#L508",
+      "Location": "Line 508 Position 94-128"
     },
     {
       "Id": "S4017",
@@ -670,13 +670,13 @@
       "Id": "S4017",
       "Message": "Refactor this method to remove the nested type argument.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceGen.cs#L143",
-      "Location": "Line 143 Position 89-149"
+      "Location": "Line 143 Position 151-197"
     },
     {
       "Id": "S4017",
       "Message": "Refactor this method to remove the nested type argument.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceGen.cs#L143",
-      "Location": "Line 143 Position 151-197"
+      "Location": "Line 143 Position 89-149"
     },
     {
       "Id": "S4017",

@@ -14,27 +14,27 @@
     },
     {
       "Id": "S3353",
-      "Message": "Add the \u0027const\u0027 modifier to \u0027a\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L27",
-      "Location": "Line 27 Position 5-6"
-    },
-    {
-      "Id": "S3353",
       "Message": "Add the \u0027const\u0027 modifier to \u0027b\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L27",
       "Location": "Line 27 Position 12-13"
     },
     {
       "Id": "S3353",
-      "Message": "Add the \u0027const\u0027 modifier to \u0027one\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L67",
-      "Location": "Line 67 Position 5-8"
+      "Message": "Add the \u0027const\u0027 modifier to \u0027a\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L27",
+      "Location": "Line 27 Position 5-6"
     },
     {
       "Id": "S3353",
       "Message": "Add the \u0027const\u0027 modifier to \u0027two\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L67",
       "Location": "Line 67 Position 14-17"
+    },
+    {
+      "Id": "S3353",
+      "Message": "Add the \u0027const\u0027 modifier to \u0027one\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L67",
+      "Location": "Line 67 Position 5-8"
     },
     {
       "Id": "S3353",

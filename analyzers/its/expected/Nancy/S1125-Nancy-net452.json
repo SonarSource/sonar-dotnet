@@ -40,13 +40,13 @@
       "Id": "S1125",
       "Message": "Remove the unnecessary Boolean literal(s).",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3518",
-      "Location": "Line 3518 Position 87-91"
+      "Location": "Line 3518 Position 178-183"
     },
     {
       "Id": "S1125",
       "Message": "Remove the unnecessary Boolean literal(s).",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3518",
-      "Location": "Line 3518 Position 178-183"
+      "Location": "Line 3518 Position 87-91"
     },
     {
       "Id": "S1125",

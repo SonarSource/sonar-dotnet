@@ -58,19 +58,13 @@
       "Id": "S2360",
       "Message": "Use the overloading mechanism instead of the optional parameters.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FileIO.cs#L38",
-      "Location": "Line 38 Position 93-99"
-    },
-    {
-      "Id": "S2360",
-      "Message": "Use the overloading mechanism instead of the optional parameters.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FileIO.cs#L38",
       "Location": "Line 38 Position 120-123"
     },
     {
       "Id": "S2360",
       "Message": "Use the overloading mechanism instead of the optional parameters.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FileIO.cs#L57",
-      "Location": "Line 57 Position 94-100"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FileIO.cs#L38",
+      "Location": "Line 38 Position 93-99"
     },
     {
       "Id": "S2360",
@@ -83,6 +77,12 @@
       "Message": "Use the overloading mechanism instead of the optional parameters.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FileIO.cs#L57",
       "Location": "Line 57 Position 141-148"
+    },
+    {
+      "Id": "S2360",
+      "Message": "Use the overloading mechanism instead of the optional parameters.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FileIO.cs#L57",
+      "Location": "Line 57 Position 94-100"
     },
     {
       "Id": "S2360",
@@ -418,6 +418,12 @@
       "Id": "S2360",
       "Message": "Use the overloading mechanism instead of the optional parameters.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L184",
+      "Location": "Line 184 Position 109-115"
+    },
+    {
+      "Id": "S2360",
+      "Message": "Use the overloading mechanism instead of the optional parameters.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L184",
       "Location": "Line 184 Position 55-61"
     },
     {
@@ -429,14 +435,14 @@
     {
       "Id": "S2360",
       "Message": "Use the overloading mechanism instead of the optional parameters.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L184",
-      "Location": "Line 184 Position 109-115"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L219",
+      "Location": "Line 219 Position 164-169"
     },
     {
       "Id": "S2360",
       "Message": "Use the overloading mechanism instead of the optional parameters.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L219",
-      "Location": "Line 219 Position 164-169"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L220",
+      "Location": "Line 220 Position 109-115"
     },
     {
       "Id": "S2360",
@@ -453,26 +459,8 @@
     {
       "Id": "S2360",
       "Message": "Use the overloading mechanism instead of the optional parameters.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L220",
-      "Location": "Line 220 Position 109-115"
-    },
-    {
-      "Id": "S2360",
-      "Message": "Use the overloading mechanism instead of the optional parameters.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L248",
       "Location": "Line 248 Position 140-146"
-    },
-    {
-      "Id": "S2360",
-      "Message": "Use the overloading mechanism instead of the optional parameters.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L249",
-      "Location": "Line 249 Position 55-61"
-    },
-    {
-      "Id": "S2360",
-      "Message": "Use the overloading mechanism instead of the optional parameters.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L249",
-      "Location": "Line 249 Position 78-84"
     },
     {
       "Id": "S2360",
@@ -485,6 +473,18 @@
       "Message": "Use the overloading mechanism instead of the optional parameters.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L249",
       "Location": "Line 249 Position 144-150"
+    },
+    {
+      "Id": "S2360",
+      "Message": "Use the overloading mechanism instead of the optional parameters.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L249",
+      "Location": "Line 249 Position 55-61"
+    },
+    {
+      "Id": "S2360",
+      "Message": "Use the overloading mechanism instead of the optional parameters.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L249",
+      "Location": "Line 249 Position 78-84"
     },
     {
       "Id": "S2360",
@@ -544,12 +544,6 @@
       "Id": "S2360",
       "Message": "Use the overloading mechanism instead of the optional parameters.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L1559",
-      "Location": "Line 1559 Position 93-99"
-    },
-    {
-      "Id": "S2360",
-      "Message": "Use the overloading mechanism instead of the optional parameters.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L1559",
       "Location": "Line 1559 Position 113-119"
     },
     {
@@ -561,6 +555,12 @@
     {
       "Id": "S2360",
       "Message": "Use the overloading mechanism instead of the optional parameters.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L1559",
+      "Location": "Line 1559 Position 93-99"
+    },
+    {
+      "Id": "S2360",
+      "Message": "Use the overloading mechanism instead of the optional parameters.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L2383",
       "Location": "Line 2383 Position 25-31"
     },
@@ -568,13 +568,13 @@
       "Id": "S2360",
       "Message": "Use the overloading mechanism instead of the optional parameters.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L660",
-      "Location": "Line 660 Position 75-81"
+      "Location": "Line 660 Position 119-125"
     },
     {
       "Id": "S2360",
       "Message": "Use the overloading mechanism instead of the optional parameters.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L660",
-      "Location": "Line 660 Position 119-125"
+      "Location": "Line 660 Position 75-81"
     },
     {
       "Id": "S2360",

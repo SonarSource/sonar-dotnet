@@ -74,15 +74,15 @@
     },
     {
       "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolverSettings.cs#L55",
-      "Location": "Line 55 Position 97-98"
-    },
-    {
-      "Id": "S109",
       "Message": "Assign this magic number \u00274\u0027 to a well-named variable or constant, and use that instead.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolverSettings.cs#L55",
       "Location": "Line 55 Position 101-102"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolverSettings.cs#L55",
+      "Location": "Line 55 Position 97-98"
     },
     {
       "Id": "S109",

@@ -244,12 +244,6 @@
       "Id": "S2360",
       "Message": "Use the overloading mechanism instead of the optional parameters.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Json/JsonConfigurationExtensions.cs#L22",
-      "Location": "Line 22 Position 94-100"
-    },
-    {
-      "Id": "S2360",
-      "Message": "Use the overloading mechanism instead of the optional parameters.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Json/JsonConfigurationExtensions.cs#L22",
       "Location": "Line 22 Position 140-146"
     },
     {
@@ -275,6 +269,12 @@
       "Message": "Use the overloading mechanism instead of the optional parameters.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Json/JsonConfigurationExtensions.cs#L22",
       "Location": "Line 22 Position 299-306"
+    },
+    {
+      "Id": "S2360",
+      "Message": "Use the overloading mechanism instead of the optional parameters.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Json/JsonConfigurationExtensions.cs#L22",
+      "Location": "Line 22 Position 94-100"
     },
     {
       "Id": "S2360",
@@ -862,19 +862,13 @@
       "Id": "S2360",
       "Message": "Use the overloading mechanism instead of the optional parameters.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ResponseExtensions.cs#L22",
-      "Location": "Line 22 Position 85-91"
-    },
-    {
-      "Id": "S2360",
-      "Message": "Use the overloading mechanism instead of the optional parameters.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ResponseExtensions.cs#L22",
       "Location": "Line 22 Position 112-118"
     },
     {
       "Id": "S2360",
       "Message": "Use the overloading mechanism instead of the optional parameters.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/HtmlResponse.cs#L23",
-      "Location": "Line 23 Position 55-74"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ResponseExtensions.cs#L22",
+      "Location": "Line 22 Position 85-91"
     },
     {
       "Id": "S2360",
@@ -893,6 +887,12 @@
       "Message": "Use the overloading mechanism instead of the optional parameters.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/HtmlResponse.cs#L23",
       "Location": "Line 23 Position 186-192"
+    },
+    {
+      "Id": "S2360",
+      "Message": "Use the overloading mechanism instead of the optional parameters.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/HtmlResponse.cs#L23",
+      "Location": "Line 23 Position 55-74"
     },
     {
       "Id": "S2360",
@@ -916,18 +916,6 @@
       "Id": "S2360",
       "Message": "Use the overloading mechanism instead of the optional parameters.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/TextResponse.cs#L57",
-      "Location": "Line 57 Position 55-74"
-    },
-    {
-      "Id": "S2360",
-      "Message": "Use the overloading mechanism instead of the optional parameters.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/TextResponse.cs#L57",
-      "Location": "Line 57 Position 92-98"
-    },
-    {
-      "Id": "S2360",
-      "Message": "Use the overloading mechanism instead of the optional parameters.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/TextResponse.cs#L57",
       "Location": "Line 57 Position 118-124"
     },
     {
@@ -945,14 +933,26 @@
     {
       "Id": "S2360",
       "Message": "Use the overloading mechanism instead of the optional parameters.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RouteConfiguration.cs#L20",
-      "Location": "Line 20 Position 73-80"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/TextResponse.cs#L57",
+      "Location": "Line 57 Position 55-74"
+    },
+    {
+      "Id": "S2360",
+      "Message": "Use the overloading mechanism instead of the optional parameters.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/TextResponse.cs#L57",
+      "Location": "Line 57 Position 92-98"
     },
     {
       "Id": "S2360",
       "Message": "Use the overloading mechanism instead of the optional parameters.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RouteConfiguration.cs#L20",
       "Location": "Line 20 Position 107-114"
+    },
+    {
+      "Id": "S2360",
+      "Message": "Use the overloading mechanism instead of the optional parameters.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RouteConfiguration.cs#L20",
+      "Location": "Line 20 Position 73-80"
     },
     {
       "Id": "S2360",
@@ -1018,13 +1018,13 @@
       "Id": "S2360",
       "Message": "Use the overloading mechanism instead of the optional parameters.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewConfigurationExtensions.cs#L16",
-      "Location": "Line 16 Position 97-104"
+      "Location": "Line 16 Position 131-138"
     },
     {
       "Id": "S2360",
       "Message": "Use the overloading mechanism instead of the optional parameters.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewConfigurationExtensions.cs#L16",
-      "Location": "Line 16 Position 131-138"
+      "Location": "Line 16 Position 97-104"
     },
     {
       "Id": "S2360",

@@ -10,13 +10,13 @@
       "Id": "S2692",
       "Message": "0 is a valid index, but this check ignores it.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L320",
-      "Location": "Line 320 Position 83-86"
+      "Location": "Line 320 Position 142-145"
     },
     {
       "Id": "S2692",
       "Message": "0 is a valid index, but this check ignores it.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L320",
-      "Location": "Line 320 Position 142-145"
+      "Location": "Line 320 Position 83-86"
     },
     {
       "Id": "S2692",

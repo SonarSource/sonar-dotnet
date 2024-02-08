@@ -4,13 +4,13 @@
       "Id": "S109",
       "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorPath.cs#L143",
-      "Location": "Line 143 Position 53-54"
+      "Location": "Line 143 Position 115-116"
     },
     {
       "Id": "S109",
       "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorPath.cs#L143",
-      "Location": "Line 143 Position 115-116"
+      "Location": "Line 143 Position 53-54"
     },
     {
       "Id": "S109",

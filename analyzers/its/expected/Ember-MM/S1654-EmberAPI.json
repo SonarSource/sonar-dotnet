@@ -4,6 +4,12 @@
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1010",
+      "Location": "Line 1010 Position 107-114"
+    },
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1010",
       "Location": "Line 1010 Position 43-48"
     },
     {
@@ -11,12 +17,6 @@
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1010",
       "Location": "Line 1010 Position 73-79"
-    },
-    {
-      "Id": "S1654",
-      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1010",
-      "Location": "Line 1010 Position 107-114"
     },
     {
       "Id": "S1654",
@@ -40,13 +40,13 @@
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L968",
-      "Location": "Line 968 Position 56-63"
+      "Location": "Line 968 Position 100-108"
     },
     {
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L968",
-      "Location": "Line 968 Position 100-108"
+      "Location": "Line 968 Position 56-63"
     },
     {
       "Id": "S1654",
@@ -64,6 +64,18 @@
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1087",
+      "Location": "Line 1087 Position 112-121"
+    },
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1087",
+      "Location": "Line 1087 Position 157-162"
+    },
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1087",
       "Location": "Line 1087 Position 41-49"
     },
     {
@@ -75,14 +87,14 @@
     {
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1087",
-      "Location": "Line 1087 Position 112-121"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1426",
+      "Location": "Line 1426 Position 131-140"
     },
     {
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1087",
-      "Location": "Line 1087 Position 157-162"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1426",
+      "Location": "Line 1426 Position 176-181"
     },
     {
       "Id": "S1654",
@@ -105,14 +117,8 @@
     {
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1426",
-      "Location": "Line 1426 Position 131-140"
-    },
-    {
-      "Id": "S1654",
-      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1426",
-      "Location": "Line 1426 Position 176-181"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1663",
+      "Location": "Line 1663 Position 110-119"
     },
     {
       "Id": "S1654",
@@ -129,8 +135,14 @@
     {
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1663",
-      "Location": "Line 1663 Position 110-119"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1704",
+      "Location": "Line 1704 Position 106-115"
+    },
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1704",
+      "Location": "Line 1704 Position 151-156"
     },
     {
       "Id": "S1654",
@@ -143,18 +155,6 @@
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1704",
       "Location": "Line 1704 Position 73-78"
-    },
-    {
-      "Id": "S1654",
-      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1704",
-      "Location": "Line 1704 Position 106-115"
-    },
-    {
-      "Id": "S1654",
-      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1704",
-      "Location": "Line 1704 Position 151-156"
     },
     {
       "Id": "S1654",
@@ -196,6 +196,12 @@
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L333",
+      "Location": "Line 333 Position 128-137"
+    },
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L333",
       "Location": "Line 333 Position 44-46"
     },
     {
@@ -213,8 +219,8 @@
     {
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L333",
-      "Location": "Line 333 Position 128-137"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L378",
+      "Location": "Line 378 Position 106-115"
     },
     {
       "Id": "S1654",
@@ -225,20 +231,14 @@
     {
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L378",
-      "Location": "Line 378 Position 106-115"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L441",
+      "Location": "Line 441 Position 105-114"
     },
     {
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L441",
       "Location": "Line 441 Position 48-54"
-    },
-    {
-      "Id": "S1654",
-      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L441",
-      "Location": "Line 441 Position 105-114"
     },
     {
       "Id": "S1654",
@@ -370,13 +370,13 @@
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L388",
-      "Location": "Line 388 Position 93-109"
+      "Location": "Line 388 Position 127-133"
     },
     {
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L388",
-      "Location": "Line 388 Position 127-133"
+      "Location": "Line 388 Position 93-109"
     },
     {
       "Id": "S1654",
@@ -424,6 +424,12 @@
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L214",
+      "Location": "Line 214 Position 119-123"
+    },
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L214",
       "Location": "Line 214 Position 40-43"
     },
     {
@@ -437,12 +443,6 @@
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L214",
       "Location": "Line 214 Position 88-100"
-    },
-    {
-      "Id": "S1654",
-      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L214",
-      "Location": "Line 214 Position 119-123"
     },
     {
       "Id": "S1654",
@@ -490,13 +490,13 @@
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImageUtils.vb#L80",
-      "Location": "Line 80 Position 41-47"
+      "Location": "Line 80 Position 174-185"
     },
     {
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImageUtils.vb#L80",
-      "Location": "Line 80 Position 174-185"
+      "Location": "Line 80 Position 41-47"
     },
     {
       "Id": "S1654",
@@ -544,6 +544,12 @@
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L122",
+      "Location": "Line 122 Position 107-114"
+    },
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L122",
       "Location": "Line 122 Position 32-39"
     },
     {
@@ -555,8 +561,8 @@
     {
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L122",
-      "Location": "Line 122 Position 107-114"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L124",
+      "Location": "Line 124 Position 162-169"
     },
     {
       "Id": "S1654",
@@ -569,12 +575,6 @@
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L124",
       "Location": "Line 124 Position 79-86"
-    },
-    {
-      "Id": "S1654",
-      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L124",
-      "Location": "Line 124 Position 162-169"
     },
     {
       "Id": "S1654",
@@ -622,24 +622,6 @@
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L170",
-      "Location": "Line 170 Position 41-47"
-    },
-    {
-      "Id": "S1654",
-      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L170",
-      "Location": "Line 170 Position 66-72"
-    },
-    {
-      "Id": "S1654",
-      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L170",
-      "Location": "Line 170 Position 90-96"
-    },
-    {
-      "Id": "S1654",
-      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L170",
       "Location": "Line 170 Position 115-122"
     },
     {
@@ -663,20 +645,20 @@
     {
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L172",
-      "Location": "Line 172 Position 39-44"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L170",
+      "Location": "Line 170 Position 41-47"
     },
     {
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L172",
-      "Location": "Line 172 Position 62-68"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L170",
+      "Location": "Line 170 Position 66-72"
     },
     {
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L172",
-      "Location": "Line 172 Position 87-93"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L170",
+      "Location": "Line 170 Position 90-96"
     },
     {
       "Id": "S1654",
@@ -723,6 +705,24 @@
     {
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L172",
+      "Location": "Line 172 Position 39-44"
+    },
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L172",
+      "Location": "Line 172 Position 62-68"
+    },
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L172",
+      "Location": "Line 172 Position 87-93"
+    },
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L180",
       "Location": "Line 180 Position 36-40"
     },
@@ -748,24 +748,6 @@
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L188",
-      "Location": "Line 188 Position 38-44"
-    },
-    {
-      "Id": "S1654",
-      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L188",
-      "Location": "Line 188 Position 63-72"
-    },
-    {
-      "Id": "S1654",
-      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L188",
-      "Location": "Line 188 Position 90-96"
-    },
-    {
-      "Id": "S1654",
-      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L188",
       "Location": "Line 188 Position 167-171"
     },
     {
@@ -783,20 +765,20 @@
     {
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L190",
-      "Location": "Line 190 Position 32-38"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L188",
+      "Location": "Line 188 Position 38-44"
     },
     {
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L190",
-      "Location": "Line 190 Position 57-66"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L188",
+      "Location": "Line 188 Position 63-72"
     },
     {
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L190",
-      "Location": "Line 190 Position 84-90"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L188",
+      "Location": "Line 188 Position 90-96"
     },
     {
       "Id": "S1654",
@@ -831,20 +813,20 @@
     {
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L192",
-      "Location": "Line 192 Position 37-43"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L190",
+      "Location": "Line 190 Position 32-38"
     },
     {
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L192",
-      "Location": "Line 192 Position 62-71"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L190",
+      "Location": "Line 190 Position 57-66"
     },
     {
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L192",
-      "Location": "Line 192 Position 89-95"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L190",
+      "Location": "Line 190 Position 84-90"
     },
     {
       "Id": "S1654",
@@ -863,6 +845,24 @@
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L192",
       "Location": "Line 192 Position 195-202"
+    },
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L192",
+      "Location": "Line 192 Position 37-43"
+    },
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L192",
+      "Location": "Line 192 Position 62-71"
+    },
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L192",
+      "Location": "Line 192 Position 89-95"
     },
     {
       "Id": "S1654",
@@ -886,13 +886,13 @@
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L58",
-      "Location": "Line 58 Position 73-80"
+      "Location": "Line 58 Position 107-116"
     },
     {
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L58",
-      "Location": "Line 58 Position 107-116"
+      "Location": "Line 58 Position 73-80"
     },
     {
       "Id": "S1654",
@@ -1024,18 +1024,6 @@
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L300",
-      "Location": "Line 300 Position 50-56"
-    },
-    {
-      "Id": "S1654",
-      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L300",
-      "Location": "Line 300 Position 74-84"
-    },
-    {
-      "Id": "S1654",
-      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L300",
       "Location": "Line 300 Position 103-115"
     },
     {
@@ -1059,6 +1047,18 @@
     {
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L300",
+      "Location": "Line 300 Position 50-56"
+    },
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L300",
+      "Location": "Line 300 Position 74-84"
+    },
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L304",
       "Location": "Line 304 Position 51-57"
     },
@@ -1078,6 +1078,12 @@
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L312",
+      "Location": "Line 312 Position 108-120"
+    },
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L312",
       "Location": "Line 312 Position 55-61"
     },
     {
@@ -1089,26 +1095,8 @@
     {
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L312",
-      "Location": "Line 312 Position 108-120"
-    },
-    {
-      "Id": "S1654",
-      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L316",
       "Location": "Line 316 Position 47-53"
-    },
-    {
-      "Id": "S1654",
-      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L320",
-      "Location": "Line 320 Position 49-55"
-    },
-    {
-      "Id": "S1654",
-      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L320",
-      "Location": "Line 320 Position 73-83"
     },
     {
       "Id": "S1654",
@@ -1137,14 +1125,26 @@
     {
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L328",
-      "Location": "Line 328 Position 50-56"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L320",
+      "Location": "Line 320 Position 49-55"
+    },
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L320",
+      "Location": "Line 320 Position 73-83"
     },
     {
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L328",
       "Location": "Line 328 Position 108-116"
+    },
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L328",
+      "Location": "Line 328 Position 50-56"
     },
     {
       "Id": "S1654",
@@ -1174,6 +1174,18 @@
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L403",
+      "Location": "Line 403 Position 132-142"
+    },
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L403",
+      "Location": "Line 403 Position 187-199"
+    },
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L403",
       "Location": "Line 403 Position 33-43"
     },
     {
@@ -1187,18 +1199,6 @@
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L403",
       "Location": "Line 403 Position 96-105"
-    },
-    {
-      "Id": "S1654",
-      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L403",
-      "Location": "Line 403 Position 132-142"
-    },
-    {
-      "Id": "S1654",
-      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L403",
-      "Location": "Line 403 Position 187-199"
     },
     {
       "Id": "S1654",
@@ -1318,6 +1318,12 @@
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L349",
+      "Location": "Line 349 Position 118-125"
+    },
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L349",
       "Location": "Line 349 Position 43-50"
     },
     {
@@ -1325,18 +1331,6 @@
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L349",
       "Location": "Line 349 Position 80-90"
-    },
-    {
-      "Id": "S1654",
-      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L349",
-      "Location": "Line 349 Position 118-125"
-    },
-    {
-      "Id": "S1654",
-      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L363",
-      "Location": "Line 363 Position 76-83"
     },
     {
       "Id": "S1654",
@@ -1349,6 +1343,12 @@
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L363",
       "Location": "Line 363 Position 165-175"
+    },
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L363",
+      "Location": "Line 363 Position 76-83"
     },
     {
       "Id": "S1654",
@@ -1384,24 +1384,6 @@
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L483",
-      "Location": "Line 483 Position 43-49"
-    },
-    {
-      "Id": "S1654",
-      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L483",
-      "Location": "Line 483 Position 68-77"
-    },
-    {
-      "Id": "S1654",
-      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L483",
-      "Location": "Line 483 Position 95-101"
-    },
-    {
-      "Id": "S1654",
-      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L483",
       "Location": "Line 483 Position 172-176"
     },
     {
@@ -1419,26 +1401,26 @@
     {
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L483",
+      "Location": "Line 483 Position 43-49"
+    },
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L483",
+      "Location": "Line 483 Position 68-77"
+    },
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L483",
+      "Location": "Line 483 Position 95-101"
+    },
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L49",
       "Location": "Line 49 Position 75-82"
-    },
-    {
-      "Id": "S1654",
-      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L495",
-      "Location": "Line 495 Position 40-46"
-    },
-    {
-      "Id": "S1654",
-      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L495",
-      "Location": "Line 495 Position 65-74"
-    },
-    {
-      "Id": "S1654",
-      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L495",
-      "Location": "Line 495 Position 92-98"
     },
     {
       "Id": "S1654",
@@ -1473,20 +1455,20 @@
     {
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L507",
-      "Location": "Line 507 Position 42-48"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L495",
+      "Location": "Line 495 Position 40-46"
     },
     {
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L507",
-      "Location": "Line 507 Position 67-76"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L495",
+      "Location": "Line 495 Position 65-74"
     },
     {
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L507",
-      "Location": "Line 507 Position 94-100"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L495",
+      "Location": "Line 495 Position 92-98"
     },
     {
       "Id": "S1654",
@@ -1509,20 +1491,20 @@
     {
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L519",
-      "Location": "Line 519 Position 45-50"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L507",
+      "Location": "Line 507 Position 42-48"
     },
     {
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L519",
-      "Location": "Line 519 Position 68-74"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L507",
+      "Location": "Line 507 Position 67-76"
     },
     {
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L519",
-      "Location": "Line 519 Position 93-99"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L507",
+      "Location": "Line 507 Position 94-100"
     },
     {
       "Id": "S1654",
@@ -1559,6 +1541,24 @@
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L519",
       "Location": "Line 519 Position 257-269"
+    },
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L519",
+      "Location": "Line 519 Position 45-50"
+    },
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L519",
+      "Location": "Line 519 Position 68-74"
+    },
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L519",
+      "Location": "Line 519 Position 93-99"
     },
     {
       "Id": "S1654",
@@ -1612,6 +1612,12 @@
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L609",
+      "Location": "Line 609 Position 165-172"
+    },
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L609",
       "Location": "Line 609 Position 45-52"
     },
     {
@@ -1619,12 +1625,6 @@
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L609",
       "Location": "Line 609 Position 82-89"
-    },
-    {
-      "Id": "S1654",
-      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L609",
-      "Location": "Line 609 Position 165-172"
     },
     {
       "Id": "S1654",
@@ -1672,24 +1672,6 @@
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L88",
-      "Location": "Line 88 Position 44-50"
-    },
-    {
-      "Id": "S1654",
-      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L88",
-      "Location": "Line 88 Position 69-75"
-    },
-    {
-      "Id": "S1654",
-      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L88",
-      "Location": "Line 88 Position 93-99"
-    },
-    {
-      "Id": "S1654",
-      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L88",
       "Location": "Line 88 Position 118-125"
     },
     {
@@ -1709,6 +1691,24 @@
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L88",
       "Location": "Line 88 Position 200-207"
+    },
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L88",
+      "Location": "Line 88 Position 44-50"
+    },
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L88",
+      "Location": "Line 88 Position 69-75"
+    },
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L88",
+      "Location": "Line 88 Position 93-99"
     },
     {
       "Id": "S1654",
@@ -1750,13 +1750,13 @@
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L606",
-      "Location": "Line 606 Position 73-85"
+      "Location": "Line 606 Position 104-117"
     },
     {
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L606",
-      "Location": "Line 606 Position 104-117"
+      "Location": "Line 606 Position 73-85"
     },
     {
       "Id": "S1654",
@@ -1870,19 +1870,25 @@
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L357",
-      "Location": "Line 357 Position 71-80"
+      "Location": "Line 357 Position 108-115"
     },
     {
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L357",
-      "Location": "Line 357 Position 108-115"
+      "Location": "Line 357 Position 71-80"
     },
     {
       "Id": "S1654",
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L40",
       "Location": "Line 40 Position 87-95"
+    },
+    {
+      "Id": "S1654",
+      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L409",
+      "Location": "Line 409 Position 124-134"
     },
     {
       "Id": "S1654",
@@ -1895,12 +1901,6 @@
       "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L409",
       "Location": "Line 409 Position 81-97"
-    },
-    {
-      "Id": "S1654",
-      "Message": "Rename this parameter to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L409",
-      "Location": "Line 409 Position 124-134"
     },
     {
       "Id": "S1654",

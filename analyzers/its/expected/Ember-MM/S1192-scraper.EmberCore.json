@@ -14,15 +14,15 @@
     },
     {
       "Id": "S1192",
-      "Message": "Define a constant instead of using this literal \u0027)_(url=\u0027 9 times.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L113",
-      "Location": "Line 113 Position 93-102"
-    },
-    {
-      "Id": "S1192",
       "Message": "Define a constant instead of using this literal \u0027).jpg\u0027 9 times.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L113",
       "Location": "Line 113 Position 141-148"
+    },
+    {
+      "Id": "S1192",
+      "Message": "Define a constant instead of using this literal \u0027)_(url=\u0027 9 times.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L113",
+      "Location": "Line 113 Position 93-102"
     },
     {
       "Id": "S1192",
@@ -308,15 +308,15 @@
     },
     {
       "Id": "S1192",
-      "Message": "Define a constant instead of using this literal \u0027GuestStars\u0027 4 times.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L379",
-      "Location": "Line 379 Position 95-107"
-    },
-    {
-      "Id": "S1192",
       "Message": "Define a constant instead of using this literal \u0027Writer\u0027 5 times.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L379",
       "Location": "Line 379 Position 192-200"
+    },
+    {
+      "Id": "S1192",
+      "Message": "Define a constant instead of using this literal \u0027GuestStars\u0027 4 times.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L379",
+      "Location": "Line 379 Position 95-107"
     },
     {
       "Id": "S1192",

@@ -4,13 +4,13 @@
       "Id": "S1449",
       "Message": "Use \u0027CompareOrdinal\u0027 or \u0027Compare\u0027 with the locale specified instead of \u0027CompareTo\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedPubSubMediator.cs#L559",
-      "Location": "Line 559 Position 74-83"
+      "Location": "Line 559 Position 108-117"
     },
     {
       "Id": "S1449",
       "Message": "Use \u0027CompareOrdinal\u0027 or \u0027Compare\u0027 with the locale specified instead of \u0027CompareTo\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedPubSubMediator.cs#L559",
-      "Location": "Line 559 Position 108-117"
+      "Location": "Line 559 Position 74-83"
     }
   ]
 }

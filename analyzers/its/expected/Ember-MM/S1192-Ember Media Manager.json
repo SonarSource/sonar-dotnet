@@ -284,15 +284,15 @@
     },
     {
       "Id": "S1192",
-      "Message": "Define a constant instead of using this literal \u0027You have selected {0} folders to open. Are you sure you want to do this?\u0027 4 times.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1790",
-      "Location": "Line 1790 Position 73-147"
-    },
-    {
-      "Id": "S1192",
       "Message": "Define a constant instead of using this literal \u0027Are You Sure?\u0027 4 times.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1790",
       "Location": "Line 1790 Position 256-271"
+    },
+    {
+      "Id": "S1192",
+      "Message": "Define a constant instead of using this literal \u0027You have selected {0} folders to open. Are you sure you want to do this?\u0027 4 times.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1790",
+      "Location": "Line 1790 Position 73-147"
     },
     {
       "Id": "S1192",
@@ -314,27 +314,27 @@
     },
     {
       "Id": "S1192",
-      "Message": "Define a constant instead of using this literal \u0027parSeaID\u0027 4 times.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2090",
-      "Location": "Line 2090 Position 95-105"
-    },
-    {
-      "Id": "S1192",
       "Message": "Define a constant instead of using this literal \u0027TVShowID\u0027 10 times.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2090",
       "Location": "Line 2090 Position 124-134"
     },
     {
       "Id": "S1192",
-      "Message": "Define a constant instead of using this literal \u0027parSeason\u0027 4 times.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2091",
-      "Location": "Line 2091 Position 96-107"
+      "Message": "Define a constant instead of using this literal \u0027parSeaID\u0027 4 times.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2090",
+      "Location": "Line 2090 Position 95-105"
     },
     {
       "Id": "S1192",
       "Message": "Define a constant instead of using this literal \u0027Season\u0027 8 times.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2091",
       "Location": "Line 2091 Position 126-134"
+    },
+    {
+      "Id": "S1192",
+      "Message": "Define a constant instead of using this literal \u0027parSeason\u0027 4 times.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2091",
+      "Location": "Line 2091 Position 96-107"
     },
     {
       "Id": "S1192",
@@ -440,15 +440,15 @@
     },
     {
       "Id": "S1192",
-      "Message": "Define a constant instead of using this literal \u0027addtiny.gif\u0027 4 times.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4512",
-      "Location": "Line 4512 Position 62-75"
-    },
-    {
-      "Id": "S1192",
       "Message": "Define a constant instead of using this literal \u0027no_photo\u0027 4 times.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4512",
       "Location": "Line 4512 Position 123-133"
+    },
+    {
+      "Id": "S1192",
+      "Message": "Define a constant instead of using this literal \u0027addtiny.gif\u0027 4 times.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4512",
+      "Location": "Line 4512 Position 62-75"
     },
     {
       "Id": "S1192",

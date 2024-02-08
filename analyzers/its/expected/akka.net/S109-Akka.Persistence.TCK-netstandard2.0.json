@@ -802,13 +802,13 @@
       "Id": "S109",
       "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Snapshot/SnapshotStoreSpec.cs#L217",
-      "Location": "Line 217 Position 93-94"
+      "Location": "Line 217 Position 117-118"
     },
     {
       "Id": "S109",
       "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Snapshot/SnapshotStoreSpec.cs#L217",
-      "Location": "Line 217 Position 117-118"
+      "Location": "Line 217 Position 93-94"
     },
     {
       "Id": "S109",

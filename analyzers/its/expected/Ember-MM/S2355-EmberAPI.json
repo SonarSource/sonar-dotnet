@@ -4,13 +4,13 @@
       "Id": "S2355",
       "Message": "Use an array literal here instead.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L34",
-      "Location": "Line 34 Position 43-100"
+      "Location": "Line 34 Position 102-159"
     },
     {
       "Id": "S2355",
       "Message": "Use an array literal here instead.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L34",
-      "Location": "Line 34 Position 102-159"
+      "Location": "Line 34 Position 43-100"
     },
     {
       "Id": "S2355",

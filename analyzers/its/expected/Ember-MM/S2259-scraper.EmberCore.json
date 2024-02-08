@@ -188,15 +188,15 @@
     },
     {
       "Id": "S2259",
-      "Message": "\u0027sResults\u0027 is Nothing on at least one execution path.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L358",
-      "Location": "Line 358 Position 54-62"
-    },
-    {
-      "Id": "S2259",
       "Message": "\u0027sResults.OrderBy(Function(s) s.Lev).FirstOrDefault(Function(s) s.Language.ShortLang = \u0022en\u0022)\u0027 is Nothing on at least one execution path.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L358",
       "Location": "Line 358 Position 54-145"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027sResults\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L358",
+      "Location": "Line 358 Position 54-62"
     },
     {
       "Id": "S2259",

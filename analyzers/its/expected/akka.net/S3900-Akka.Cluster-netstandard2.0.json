@@ -80,15 +80,15 @@
     },
     {
       "Id": "S3900",
-      "Message": "Refactor this constructor to avoid using members of parameter \u0027settings\u0027 because it could be null.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L467",
-      "Location": "Line 467 Position 20-28"
-    },
-    {
-      "Id": "S3900",
       "Message": "Refactor this constructor to avoid using members of parameter \u0027local\u0027 because it could be null.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L467",
       "Location": "Line 467 Position 111-116"
+    },
+    {
+      "Id": "S3900",
+      "Message": "Refactor this constructor to avoid using members of parameter \u0027settings\u0027 because it could be null.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L467",
+      "Location": "Line 467 Position 20-28"
     },
     {
       "Id": "S3900",

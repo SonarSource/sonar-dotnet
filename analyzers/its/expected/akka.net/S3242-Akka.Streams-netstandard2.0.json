@@ -14,6 +14,12 @@
     },
     {
       "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.IGraph\u003CTShape3\u003E\u0027 instead of \u0027Akka.Streams.IGraph\u003CTShape3, TMat3\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/GraphApply.cs#L161",
+      "Location": "Line 161 Position 117-119"
+    },
+    {
+      "Id": "S3242",
       "Message": "Consider using more general type \u0027Akka.Streams.IGraph\u003CTShape1\u003E\u0027 instead of \u0027Akka.Streams.IGraph\u003CTShape1, TMat1\u003E\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/GraphApply.cs#L161",
       "Location": "Line 161 Position 63-65"
@@ -27,8 +33,14 @@
     {
       "Id": "S3242",
       "Message": "Consider using more general type \u0027Akka.Streams.IGraph\u003CTShape3\u003E\u0027 instead of \u0027Akka.Streams.IGraph\u003CTShape3, TMat3\u003E\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/GraphApply.cs#L161",
-      "Location": "Line 161 Position 117-119"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/GraphApply.cs#L207",
+      "Location": "Line 207 Position 117-119"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.IGraph\u003CTShape4\u003E\u0027 instead of \u0027Akka.Streams.IGraph\u003CTShape4, TMat4\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/GraphApply.cs#L207",
+      "Location": "Line 207 Position 144-146"
     },
     {
       "Id": "S3242",
@@ -41,18 +53,6 @@
       "Message": "Consider using more general type \u0027Akka.Streams.IGraph\u003CTShape2\u003E\u0027 instead of \u0027Akka.Streams.IGraph\u003CTShape2, TMat2\u003E\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/GraphApply.cs#L207",
       "Location": "Line 207 Position 90-92"
-    },
-    {
-      "Id": "S3242",
-      "Message": "Consider using more general type \u0027Akka.Streams.IGraph\u003CTShape3\u003E\u0027 instead of \u0027Akka.Streams.IGraph\u003CTShape3, TMat3\u003E\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/GraphApply.cs#L207",
-      "Location": "Line 207 Position 117-119"
-    },
-    {
-      "Id": "S3242",
-      "Message": "Consider using more general type \u0027Akka.Streams.IGraph\u003CTShape4\u003E\u0027 instead of \u0027Akka.Streams.IGraph\u003CTShape4, TMat4\u003E\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/GraphApply.cs#L207",
-      "Location": "Line 207 Position 144-146"
     },
     {
       "Id": "S3242",
