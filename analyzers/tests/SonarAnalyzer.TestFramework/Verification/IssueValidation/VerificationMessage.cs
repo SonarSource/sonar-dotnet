@@ -19,6 +19,7 @@
  */
 
 using System.IO;
+using SonarAnalyzer.Test.Common;
 
 namespace SonarAnalyzer.TestFramework.Verification.IssueValidation;
 
@@ -26,5 +27,5 @@ internal sealed record VerificationMessage(string ShortDescription, string FullD
 {
     public static readonly VerificationMessage EmptyLine = new(null, null, null, 0);
 
-    public string FullPath => Path.GetFullPath(Path.Combine(@"..\..\..\TestCases", FilePath));
+    public string FullPath => Path.Combine(Paths.CurrentTestCases(), FilePath);
 }
