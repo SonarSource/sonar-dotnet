@@ -30,16 +30,19 @@ public class RuleIssue
 {
     public string Id { get; set; }
     public string Message { get; set; }
-    public SarifLocationFile Location { get; set; } // TODO: This should not re-use SarifLocationFile type.
+    public string Uri { get; set; }
+    public string Location { get; set; }
 
     public RuleIssue(SarifIssue issue)
     {
         Id = issue.RuleId;
         Message = issue.Message;
-        Location = new()
+        Uri = issue.NormalizedUri();
+        if (issue.Location?.Region is { } region)
         {
-            Uri = issue.NormalizedUri(),
-            Region = issue.Location?.Region
-        };
+            Location = region.StartLine == region.EndLine
+                ? $"Line {region.StartLine} Position {region.StartColumn}-{region.EndColumn}"
+                : $"Lines {region.StartLine}-{region.EndLine} Position {region.StartColumn}-{region.EndColumn}";
+        }
     }
 }
