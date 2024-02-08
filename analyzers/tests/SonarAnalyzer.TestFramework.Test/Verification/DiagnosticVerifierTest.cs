@@ -19,7 +19,8 @@
  */
 
 using Microsoft.CodeAnalysis.VisualBasic;
-using SonarAnalyzer.Test.Helpers;
+using SonarAnalyzer.TestFramework.Analyzers;
+using SonarAnalyzer.TestFramework.Verification;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 

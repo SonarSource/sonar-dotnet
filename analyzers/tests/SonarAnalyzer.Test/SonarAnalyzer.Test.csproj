@@ -77,8 +77,12 @@
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
     <Using Include="SonarAnalyzer.Common" />
     <Using Include="SonarAnalyzer.Helpers" />
-    <Using Include="SonarAnalyzer.Test.MetadataReferences" />
-    <Using Include="SonarAnalyzer.Test.TestFramework" />
+    <Using Include="SonarAnalyzer.TestFramework.Analyzers" />
+    <Using Include="SonarAnalyzer.TestFramework.Build" />
+    <Using Include="SonarAnalyzer.TestFramework.Common" />
+    <Using Include="SonarAnalyzer.TestFramework.Extensions" />
+    <Using Include="SonarAnalyzer.TestFramework.MetadataReferences" />
+    <Using Include="SonarAnalyzer.TestFramework.Verification" />
   </ItemGroup>
 
 </Project>

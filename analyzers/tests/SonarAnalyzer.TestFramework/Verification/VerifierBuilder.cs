@@ -19,6 +19,7 @@
  */
 
 using Google.Protobuf;
+using SonarAnalyzer.TestFramework.Build;
 using CS = Microsoft.CodeAnalysis.CSharp;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 

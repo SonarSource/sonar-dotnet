@@ -20,7 +20,7 @@
 
 using System.IO;
 using System.Text.RegularExpressions;
-using SonarAnalyzer.Test.Common;
+using SonarAnalyzer.Test.TestFramework;
 
 namespace SonarAnalyzer.Test.PackagingTests
 {

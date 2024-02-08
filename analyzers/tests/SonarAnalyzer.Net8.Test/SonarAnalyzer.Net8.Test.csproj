@@ -16,8 +16,9 @@
 
   <ItemGroup>
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
-    <Using Include="SonarAnalyzer.Test.MetadataReferences" />
-    <Using Include="SonarAnalyzer.Test.TestFramework" />
+    <Using Include="SonarAnalyzer.TestFramework.Build" />
+    <Using Include="SonarAnalyzer.TestFramework.MetadataReferences" />
+    <Using Include="SonarAnalyzer.TestFramework.Verification" />
   </ItemGroup>
 
   <ItemGroup>

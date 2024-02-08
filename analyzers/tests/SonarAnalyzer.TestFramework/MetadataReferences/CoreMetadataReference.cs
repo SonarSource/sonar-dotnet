@@ -20,7 +20,7 @@
 
 #if NET
 
-using static SonarAnalyzer.Test.MetadataReferences.MetadataReferenceFactory;
+using static SonarAnalyzer.TestFramework.MetadataReferences.MetadataReferenceFactory;
 
 namespace SonarAnalyzer.TestFramework.MetadataReferences
 {

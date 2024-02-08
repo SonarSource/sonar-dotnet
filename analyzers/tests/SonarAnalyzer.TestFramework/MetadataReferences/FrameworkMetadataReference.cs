@@ -20,7 +20,7 @@
 
 #if NETFRAMEWORK
 
-using static SonarAnalyzer.Test.MetadataReferences.MetadataReferenceFactory;
+using static SonarAnalyzer.TestFramework.MetadataReferences.MetadataReferenceFactory;
 using References = System.Collections.Generic.IEnumerable<Microsoft.CodeAnalysis.MetadataReference>;
 
 namespace SonarAnalyzer.TestFramework.MetadataReferences

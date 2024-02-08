@@ -19,7 +19,6 @@
  */
 
 using System.IO;
-using SonarAnalyzer.Test.Helpers;
 
 namespace SonarAnalyzer.TestFramework.Common
 {

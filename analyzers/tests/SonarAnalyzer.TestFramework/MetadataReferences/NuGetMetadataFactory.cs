@@ -19,7 +19,6 @@
  */
 
 using System.IO;
-using SonarAnalyzer.Test.Common;
 
 namespace SonarAnalyzer.TestFramework.MetadataReferences
 {
