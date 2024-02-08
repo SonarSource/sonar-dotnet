@@ -149,6 +149,29 @@ End Class";
             identifier.NameIs("other", orNames).Should().Be(expected);
         }
 
+        [DataTestMethod]
+        [DataRow("Strasse", "Straße", false)] // StringComparison.InvariantCulture returns in this case and so do other cultures like de-DE
+        [DataRow("\u00F6", "\u006F\u0308", false)] // 00F6 = ö; 006F = o; 0308 = https://www.fileformat.info/info/unicode/char/0308/index.htm
+        [DataRow("ö", "Ö", false)]
+        [DataRow("ö", "\u00F6", true)]
+        public void NameIs_CultureSensitivity(string identifierName, string actual, bool expected)
+        {
+            var identifier = Microsoft.CodeAnalysis.CSharp.SyntaxFactory.IdentifierName(identifierName);
+            identifier.NameIs(actual).Should().Be(expected);
+        }
+
+        [DataTestMethod]
+        [DataRow(false, "Strasse", "Straße")] // StringComparison.InvariantCulture returns in this case and so do other cultures like de-DE
+        [DataRow(false, "\u00F6", "\u006F\u0308")] // 00F6 = ö; 006F = o; 0308 = https://www.fileformat.info/info/unicode/char/0308/index.htm
+        [DataRow(false, "ö", "\u006F\u0308", "ä", "oe")] // 006F = o; 0308 = https://www.fileformat.info/info/unicode/char/0308/index.htm
+        [DataRow(false, "Köln", "Koeln", "Cologne, ", "köln")]
+        [DataRow(true, "Köln", "Koeln", "Cologne, ", "K\u00F6ln")] // 00F6 = ö
+        public void NameIsOrNames_CultureSensitivity(bool expected, string identifierName, string name, params string[] orNames)
+        {
+            var identifier = Microsoft.CodeAnalysis.CSharp.SyntaxFactory.IdentifierName(identifierName);
+            identifier.NameIs(name, orNames).Should().Be(expected);
+        }
+
         [TestMethod]
         public void NameIsOrNamesNodeWithoutName_CS()
         {
