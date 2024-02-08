@@ -53,13 +53,17 @@ internal class LoopDetector
             {
                 ScheduleSuccessors(path, last);
             }
-            else if (path.IndexOf(last) is var index && index < path.Count - 1)         // is the block in the path twice? -> loop
-            {
-                loops.Add(path.GetRange(index, path.Count - 1 - index).ToHashSet());    // equivalent to [index..^1]
-            }
             else
             {
-                MergeWithIntersectingLoops(path, last);
+                var index = path.IndexOf(last);
+                if (index < path.Count - 1)         // is the block in the path twice? -> loop
+                {
+                    loops.Add(path.GetRange(index, path.Count - 1 - index).ToHashSet());    // equivalent to [index..^1]
+                }
+                else
+                {
+                    MergeWithIntersectingLoops(path, last);
+                }
             }
         }
         return loops.SelectMany(x => x);
