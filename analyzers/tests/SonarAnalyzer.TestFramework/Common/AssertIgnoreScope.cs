@@ -18,30 +18,29 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.TestFramework.Common
+namespace SonarAnalyzer.TestFramework.Common;
+
+/// <summary>
+/// Some of the tests cover exceptions in which we have asserts as well, we want to ignore those asserts during tests
+/// </summary>
+public sealed class AssertIgnoreScope : IDisposable
 {
-    /// <summary>
-    /// Some of the tests cover exceptions in which we have asserts as well, we want to ignore those asserts during tests
-    /// </summary>
-    public sealed class AssertIgnoreScope : IDisposable
+    private readonly DefaultTraceListener listener;
+
+    public AssertIgnoreScope()
     {
-        private readonly DefaultTraceListener listener;
-
-        public AssertIgnoreScope()
+        listener = Trace.Listeners.OfType<DefaultTraceListener>().FirstOrDefault();
+        if (listener != null)
         {
-            listener = Trace.Listeners.OfType<DefaultTraceListener>().FirstOrDefault();
-            if (listener != null)
-            {
-                Trace.Listeners.Remove(listener);
-            }
+            Trace.Listeners.Remove(listener);
         }
+    }
 
-        public void Dispose()
+    public void Dispose()
+    {
+        if (listener != null)
         {
-            if (listener != null)
-            {
-                Trace.Listeners.Add(listener);
-            }
+            Trace.Listeners.Add(listener);
         }
     }
 }

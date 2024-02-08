@@ -18,51 +18,50 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.TestFramework.Common
+namespace SonarAnalyzer.TestFramework.Common;
+
+/// <summary>
+/// Defines a scope inside which new environment variables can be set.
+/// The variables will be cleared when the scope is disposed.
+/// </summary>
+public sealed class EnvironmentVariableScope : IDisposable
 {
-    /// <summary>
-    /// Defines a scope inside which new environment variables can be set.
-    /// The variables will be cleared when the scope is disposed.
-    /// </summary>
-    public sealed class EnvironmentVariableScope : IDisposable
-    {
-        private readonly bool setOnlyInAzureDevOpsContext;
-        private IDictionary<string, string> originalValues = new Dictionary<string, string>();
+    private readonly bool setOnlyInAzureDevOpsContext;
+    private IDictionary<string, string> originalValues = new Dictionary<string, string>();
 
 #pragma warning disable S2376 // Write-only properties should not be used
-        public bool EnableConcurrentAnalysis
-        {
-            set => SetVariable(SonarDiagnosticAnalyzer.EnableConcurrentExecutionVariable, value.ToString());
-        }
+    public bool EnableConcurrentAnalysis
+    {
+        set => SetVariable(SonarDiagnosticAnalyzer.EnableConcurrentExecutionVariable, value.ToString());
+    }
 #pragma warning restore S2376
 
-        public EnvironmentVariableScope(bool setVariablesOnlyInAzureDevOpsContext = true) =>
-            setOnlyInAzureDevOpsContext = setVariablesOnlyInAzureDevOpsContext;
+    public EnvironmentVariableScope(bool setVariablesOnlyInAzureDevOpsContext = true) =>
+        setOnlyInAzureDevOpsContext = setVariablesOnlyInAzureDevOpsContext;
 
-        public void SetVariable(string name, string value)
+    public void SetVariable(string name, string value)
+    {
+        if (setOnlyInAzureDevOpsContext && !TestContextHelper.IsAzureDevOpsContext)
         {
-            if (setOnlyInAzureDevOpsContext && !TestContextHelper.IsAzureDevOpsContext)
-            {
-                return;
-            }
-            // Store the original value, or null if there isn't one
-            if (!originalValues.ContainsKey(name))
-            {
-                originalValues.Add(name, Environment.GetEnvironmentVariable(name));
-            }
-            Environment.SetEnvironmentVariable(name, value, EnvironmentVariableTarget.Process);
+            return;
         }
-
-        public void Dispose()
+        // Store the original value, or null if there isn't one
+        if (!originalValues.ContainsKey(name))
         {
-            if (originalValues != null)
+            originalValues.Add(name, Environment.GetEnvironmentVariable(name));
+        }
+        Environment.SetEnvironmentVariable(name, value, EnvironmentVariableTarget.Process);
+    }
+
+    public void Dispose()
+    {
+        if (originalValues != null)
+        {
+            foreach (var kvp in originalValues)
             {
-                foreach (var kvp in originalValues)
-                {
-                    Environment.SetEnvironmentVariable(kvp.Key, kvp.Value);
-                }
-                originalValues = null;
+                Environment.SetEnvironmentVariable(kvp.Key, kvp.Value);
             }
+            originalValues = null;
         }
     }
 }

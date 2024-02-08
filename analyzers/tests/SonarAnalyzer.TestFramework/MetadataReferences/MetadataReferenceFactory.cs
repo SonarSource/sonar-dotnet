@@ -20,22 +20,21 @@
 
 using System.IO;
 
-namespace SonarAnalyzer.TestFramework.MetadataReferences
+namespace SonarAnalyzer.TestFramework.MetadataReferences;
+
+public static class MetadataReferenceFactory
 {
-    public static class MetadataReferenceFactory
-    {
-        private static readonly string SystemAssembliesFolder = Path.GetDirectoryName(typeof(object).Assembly.Location);
+    private static readonly string SystemAssembliesFolder = Path.GetDirectoryName(typeof(object).Assembly.Location);
 
-        public static IEnumerable<MetadataReference> Create(string assemblyName) =>
-            ImmutableArray.Create(CreateReference(assemblyName));
+    public static IEnumerable<MetadataReference> Create(string assemblyName) =>
+        ImmutableArray.Create(CreateReference(assemblyName));
 
-        public static MetadataReference Create(Type type) =>
-            MetadataReference.CreateFromFile(type.Assembly.Location);
+    public static MetadataReference Create(Type type) =>
+        MetadataReference.CreateFromFile(type.Assembly.Location);
 
-        public static MetadataReference CreateReference(string assemblyName) =>
-            MetadataReference.CreateFromFile(Path.Combine(SystemAssembliesFolder, assemblyName));
+    public static MetadataReference CreateReference(string assemblyName) =>
+        MetadataReference.CreateFromFile(Path.Combine(SystemAssembliesFolder, assemblyName));
 
-        public static MetadataReference CreateReference(string assemblyName, string subFolder) =>
-            MetadataReference.CreateFromFile(Path.Combine(SystemAssembliesFolder, subFolder, assemblyName));
-    }
+    public static MetadataReference CreateReference(string assemblyName, string subFolder) =>
+        MetadataReference.CreateFromFile(Path.Combine(SystemAssembliesFolder, subFolder, assemblyName));
 }

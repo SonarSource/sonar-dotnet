@@ -23,40 +23,39 @@ using SonarAnalyzer.AnalysisContext;
 using CS = Microsoft.CodeAnalysis.CSharp;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 
-namespace SonarAnalyzer.TestFramework.Analyzers
+namespace SonarAnalyzer.TestFramework.Analyzers;
+
+[ExportCodeFixProvider(LanguageNames.CSharp)]
+public class DummyCodeFixCS : DummyCodeFix
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp)]
-    public class DummyCodeFixCS : DummyCodeFix
+    protected override SyntaxNode NewNode() => CS.SyntaxFactory.LiteralExpression(CS.SyntaxKind.DefaultLiteralExpression);
+}
+
+[ExportCodeFixProvider(LanguageNames.VisualBasic)]
+public class DummyCodeFixVB : DummyCodeFix
+{
+    protected override SyntaxNode NewNode() => VB.SyntaxFactory.NothingLiteralExpression(VB.SyntaxFactory.Token(VB.SyntaxKind.NothingKeyword));
+}
+
+public abstract class DummyCodeFix : SonarCodeFix
+{
+    protected abstract SyntaxNode NewNode();
+
+    public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create("SDummy");
+
+    protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
     {
-        protected override SyntaxNode NewNode() => CS.SyntaxFactory.LiteralExpression(CS.SyntaxKind.DefaultLiteralExpression);
-    }
-
-    [ExportCodeFixProvider(LanguageNames.VisualBasic)]
-    public class DummyCodeFixVB : DummyCodeFix
-    {
-        protected override SyntaxNode NewNode() => VB.SyntaxFactory.NothingLiteralExpression(VB.SyntaxFactory.Token(VB.SyntaxKind.NothingKeyword));
-    }
-
-    public abstract class DummyCodeFix : SonarCodeFix
-    {
-        protected abstract SyntaxNode NewNode();
-
-        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create("SDummy");
-
-        protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
+        context.RegisterCodeFix("Dummy Action", _ =>
         {
-            context.RegisterCodeFix("Dummy Action", _ =>
-            {
-                var oldNode = root.FindNode(context.Diagnostics.Single().Location.SourceSpan);
-                var newRoot = root.ReplaceNode(oldNode, NewNode().WithTriviaFrom(oldNode));
-                return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-            }, context.Diagnostics);
-            return Task.CompletedTask;
-        }
+            var oldNode = root.FindNode(context.Diagnostics.Single().Location.SourceSpan);
+            var newRoot = root.ReplaceNode(oldNode, NewNode().WithTriviaFrom(oldNode));
+            return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+        }, context.Diagnostics);
+        return Task.CompletedTask;
     }
+}
 
-    internal class DummyCodeFixNoAttribute : DummyCodeFix
-    {
-        protected override SyntaxNode NewNode() => throw new System.NotImplementedException();
-    }
+internal class DummyCodeFixNoAttribute : DummyCodeFix
+{
+    protected override SyntaxNode NewNode() => throw new System.NotImplementedException();
 }

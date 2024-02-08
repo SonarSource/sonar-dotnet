@@ -22,12 +22,11 @@
 
 using static SonarAnalyzer.TestFramework.MetadataReferences.MetadataReferenceFactory;
 
-namespace SonarAnalyzer.TestFramework.MetadataReferences
+namespace SonarAnalyzer.TestFramework.MetadataReferences;
+
+internal static class WindowsFormsMetadataReference
 {
-    internal static class WindowsFormsMetadataReference
-    {
-        internal static MetadataReference SystemWindowsForms { get; } = Create(typeof(System.Windows.Forms.Application));
-    }
+    internal static MetadataReference SystemWindowsForms { get; } = Create(typeof(System.Windows.Forms.Application));
 }
 
 #endif

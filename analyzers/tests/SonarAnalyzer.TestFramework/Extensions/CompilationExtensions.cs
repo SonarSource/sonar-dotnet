@@ -21,16 +21,15 @@
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.VisualBasic;
 
-namespace SonarAnalyzer.TestFramework.Extensions
+namespace SonarAnalyzer.TestFramework.Extensions;
+
+public static class CompilationExtensions
 {
-    public static class CompilationExtensions
-    {
-        public static string LanguageVersionString(this Compilation compilation) =>
-            compilation switch
-            {
-                CSharpCompilation cs => cs.LanguageVersion.ToString(),
-                VisualBasicCompilation vb => vb.LanguageVersion.ToString(),
-                _ => throw new NotSupportedException($"Not supported compilation: {compilation.GetType()}")
-            };
-    }
+    public static string LanguageVersionString(this Compilation compilation) =>
+        compilation switch
+        {
+            CSharpCompilation cs => cs.LanguageVersion.ToString(),
+            VisualBasicCompilation vb => vb.LanguageVersion.ToString(),
+            _ => throw new NotSupportedException($"Not supported compilation: {compilation.GetType()}")
+        };
 }

@@ -23,51 +23,50 @@ using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.AnalysisContext;
 using SonarAnalyzer.TestFramework.Verification;
 
-namespace SonarAnalyzer.Test.TestFramework.Tests.Verification
+namespace SonarAnalyzer.Test.TestFramework.Tests.Verification;
+
+[TestClass]
+public class CodeFixProviderTest
 {
-    [TestClass]
-    public class CodeFixProviderTest
+    [TestMethod]
+    public void VerifyCodeFix_WithDuplicateIssues()
     {
-        [TestMethod]
-        public void VerifyCodeFix_WithDuplicateIssues()
-        {
-            const string filename = "VerifyCodeFix.Empty.cs";
-            var verifier = new VerifierBuilder<TestDuplicateLocationRule>()
-                .WithCodeFix<TestDuplicateLocationRuleCodeFix>()
-                .AddPaths(filename)
-                .WithCodeFixedPaths(filename);
-            Action a = () => verifier.VerifyCodeFix();
-            a.Should().NotThrow();
-        }
+        const string filename = "VerifyCodeFix.Empty.cs";
+        var verifier = new VerifierBuilder<TestDuplicateLocationRule>()
+            .WithCodeFix<TestDuplicateLocationRuleCodeFix>()
+            .AddPaths(filename)
+            .WithCodeFixedPaths(filename);
+        Action a = () => verifier.VerifyCodeFix();
+        a.Should().NotThrow();
+    }
 
-        [DiagnosticAnalyzer(LanguageNames.CSharp)]
-        private class TestDuplicateLocationRule : SonarDiagnosticAnalyzer
-        {
-            public const string DiagnosticId = "Test42";
+    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    private class TestDuplicateLocationRule : SonarDiagnosticAnalyzer
+    {
+        public const string DiagnosticId = "Test42";
 
-            private readonly DiagnosticDescriptor rule = AnalysisScaffolding.CreateDescriptorMain(DiagnosticId);
+        private readonly DiagnosticDescriptor rule = AnalysisScaffolding.CreateDescriptorMain(DiagnosticId);
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-            protected override void Initialize(SonarAnalysisContext context) =>
-                context.RegisterNodeAction(TestGeneratedCodeRecognizer.Instance, c =>
-                {
-                    // Duplicate issues from different analyzer versions, see https://github.com/SonarSource/sonar-dotnet/issues/1109
-                    c.ReportIssue(Diagnostic.Create(rule, c.Context.Node.GetLocation()));
-                    c.ReportIssue(Diagnostic.Create(rule, c.Context.Node.GetLocation()));
-                }, SyntaxKind.NamespaceDeclaration);
-        }
-
-        [ExportCodeFixProvider(LanguageNames.CSharp)]
-        private class TestDuplicateLocationRuleCodeFix : SonarCodeFix
-        {
-            public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(TestDuplicateLocationRule.DiagnosticId);
-
-            protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterNodeAction(TestGeneratedCodeRecognizer.Instance, c =>
             {
-                context.RegisterCodeFix("TestTitle", c => Task.FromResult(context.Document), context.Diagnostics);
-                return Task.CompletedTask;
-            }
+                // Duplicate issues from different analyzer versions, see https://github.com/SonarSource/sonar-dotnet/issues/1109
+                c.ReportIssue(Diagnostic.Create(rule, c.Context.Node.GetLocation()));
+                c.ReportIssue(Diagnostic.Create(rule, c.Context.Node.GetLocation()));
+            }, SyntaxKind.NamespaceDeclaration);
+    }
+
+    [ExportCodeFixProvider(LanguageNames.CSharp)]
+    private class TestDuplicateLocationRuleCodeFix : SonarCodeFix
+    {
+        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(TestDuplicateLocationRule.DiagnosticId);
+
+        protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
+        {
+            context.RegisterCodeFix("TestTitle", c => Task.FromResult(context.Document), context.Diagnostics);
+            return Task.CompletedTask;
         }
     }
 }

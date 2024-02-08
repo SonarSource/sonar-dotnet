@@ -23,36 +23,35 @@ using Google.Protobuf;
 using SonarAnalyzer.AnalysisContext;
 using SonarAnalyzer.Rules;
 
-namespace SonarAnalyzer.TestFramework.Analyzers
+namespace SonarAnalyzer.TestFramework.Analyzers;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+internal class DummyUtilityAnalyzerCS : DummyUtilityAnalyzer
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal class DummyUtilityAnalyzerCS : DummyUtilityAnalyzer
+    public DummyUtilityAnalyzerCS(string protobufPath, IMessage message) : base(protobufPath, message) { }
+}
+
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+internal class DummyUtilityAnalyzerVB : DummyUtilityAnalyzer
+{
+    public DummyUtilityAnalyzerVB(string protobufPath, IMessage message) : base(protobufPath, message) { }
+}
+
+internal abstract class DummyUtilityAnalyzer : UtilityAnalyzerBase
+{
+    private readonly string protobufPath;
+    private readonly IMessage message;
+
+    protected DummyUtilityAnalyzer(string protobufPath, IMessage message) : base("SDummyUtility", "Dummy title")
     {
-        public DummyUtilityAnalyzerCS(string protobufPath, IMessage message) : base(protobufPath, message) { }
+        this.protobufPath = protobufPath;
+        this.message = message;
     }
 
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    internal class DummyUtilityAnalyzerVB : DummyUtilityAnalyzer
-    {
-        public DummyUtilityAnalyzerVB(string protobufPath, IMessage message) : base(protobufPath, message) { }
-    }
-
-    internal abstract class DummyUtilityAnalyzer : UtilityAnalyzerBase
-    {
-        private readonly string protobufPath;
-        private readonly IMessage message;
-
-        protected DummyUtilityAnalyzer(string protobufPath, IMessage message) : base("SDummyUtility", "Dummy title")
+    protected sealed override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterCompilationAction(c =>
         {
-            this.protobufPath = protobufPath;
-            this.message = message;
-        }
-
-        protected sealed override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterCompilationAction(c =>
-            {
-                using var output = File.Create(protobufPath);
-                message?.WriteDelimitedTo(output);
-            });
-    }
+            using var output = File.Create(protobufPath);
+            message?.WriteDelimitedTo(output);
+        });
 }

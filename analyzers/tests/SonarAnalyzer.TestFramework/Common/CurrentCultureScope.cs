@@ -20,30 +20,29 @@
 
 using System.Globalization;
 
-namespace SonarAnalyzer.TestFramework.Common
+namespace SonarAnalyzer.TestFramework.Common;
+
+public sealed class CurrentCultureScope : IDisposable
 {
-    public sealed class CurrentCultureScope : IDisposable
+    private readonly CultureInfo oldCulture;
+    private readonly CultureInfo oldUiCulture;
+
+    public CurrentCultureScope() : this(CultureInfo.InvariantCulture) { }
+    public CurrentCultureScope(string culture) : this(new CultureInfo(culture)) { }
+
+    public CurrentCultureScope(CultureInfo culture)
     {
-        private readonly CultureInfo oldCulture;
-        private readonly CultureInfo oldUiCulture;
+        var thread = Thread.CurrentThread;
+        oldCulture = thread.CurrentCulture;
+        oldUiCulture = thread.CurrentUICulture;
+        thread.CurrentCulture = culture;
+        thread.CurrentUICulture = culture;
+    }
 
-        public CurrentCultureScope() : this(CultureInfo.InvariantCulture) { }
-        public CurrentCultureScope(string culture) : this(new CultureInfo(culture)) { }
-
-        public CurrentCultureScope(CultureInfo culture)
-        {
-            var thread = Thread.CurrentThread;
-            oldCulture = thread.CurrentCulture;
-            oldUiCulture = thread.CurrentUICulture;
-            thread.CurrentCulture = culture;
-            thread.CurrentUICulture = culture;
-        }
-
-        public void Dispose()
-        {
-            var thread = Thread.CurrentThread;
-            thread.CurrentCulture = oldCulture;
-            thread.CurrentUICulture = oldUiCulture;
-        }
+    public void Dispose()
+    {
+        var thread = Thread.CurrentThread;
+        thread.CurrentCulture = oldCulture;
+        thread.CurrentUICulture = oldUiCulture;
     }
 }

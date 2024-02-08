@@ -18,15 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.TestFramework.Common
+namespace SonarAnalyzer.TestFramework.Common;
+
+public static class Constants
 {
-    public static class Constants
-    {
-        public const string NuGetLatestVersion = "LATEST";
-        public const string DotNet7Preview = "7.0.0-rc.1.22426.10";
-        public const string DotNet7PreviewAzureAppServices = "7.0.0-rc.1.22427.2";
-        public const string DotNetCore220Version = "2.2.0";
-        public const string WindowsLineEnding = "\r\n";
-        public const string UnixLineEnding = "\n";
-    }
+    public const string NuGetLatestVersion = "LATEST";
+    public const string DotNet7Preview = "7.0.0-rc.1.22426.10";
+    public const string DotNet7PreviewAzureAppServices = "7.0.0-rc.1.22427.2";
+    public const string DotNetCore220Version = "2.2.0";
+    public const string WindowsLineEnding = "\r\n";
+    public const string UnixLineEnding = "\n";
 }

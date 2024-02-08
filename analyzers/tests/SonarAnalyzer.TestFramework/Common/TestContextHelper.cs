@@ -18,17 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.TestFramework.Common
+namespace SonarAnalyzer.TestFramework.Common;
+
+public static class TestContextHelper
 {
-    public static class TestContextHelper
-    {
-        public static bool IsAzureDevOpsContext =>
-            BuildReason() is not null;
+    public static bool IsAzureDevOpsContext =>
+        BuildReason() is not null;
 
-        public static bool IsPullRequestBuild =>
-             BuildReason() == "PullRequest";
+    public static bool IsPullRequestBuild =>
+         BuildReason() == "PullRequest";
 
-        public static string BuildReason() =>
-            Environment.GetEnvironmentVariable("BUILD_REASON");
-    }
+    public static string BuildReason() =>
+        Environment.GetEnvironmentVariable("BUILD_REASON");
 }
