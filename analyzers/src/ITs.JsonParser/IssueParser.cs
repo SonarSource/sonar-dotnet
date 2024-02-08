@@ -64,9 +64,9 @@ public static class IssueParser
             var issues = new RuleIssues
             {
                 Issues = issuesByRule.Select(x => new RuleIssue(x))
-                    .OrderBy(x => x.Uri)
-                    .ThenBy(x => x.Location)
-                    .ThenBy(x => x.Message)
+                    .OrderBy(x => x.Uri, StringComparer.InvariantCulture)
+                    .ThenBy(x => x.Location, StringComparer.InvariantCulture)
+                    .ThenBy(x => x.Message, StringComparer.InvariantCulture)
                     .ToArray()
             };
             yield return new OutputReport(inputReport.Project, issuesByRule.Key, inputReport.Assembly, inputReport.Tfm, issues);
