@@ -42,7 +42,7 @@ public partial class Sample
         return Field;
     }
 }";
-            var compilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false).AddSnippets(code1, code2).GetCompilation();
+            var compilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).AddSnippets(code1, code2).GetCompilation();
             var tree = compilation.SyntaxTrees.Single(x => x.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Any());
             var returnExpression = tree.Single<ReturnStatementSyntax>().Expression;
             var finder = new CSharpConstantValueFinder(compilation.GetSemanticModel(tree));
@@ -67,8 +67,8 @@ public class Bar
         return Field;
     }
 }";
-            var firstCompilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false).AddSnippet(firstSnippet).GetCompilation();
-            var secondCompilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false).AddSnippet(secondSnippet).GetCompilation();
+            var firstCompilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).AddSnippet(firstSnippet).GetCompilation();
+            var secondCompilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).AddSnippet(secondSnippet).GetCompilation();
             var secondCompilationReturnExpression = secondCompilation.SyntaxTrees.Single().Single<ReturnStatementSyntax>().Expression;
             var firstCompilationFinder = new CSharpConstantValueFinder(firstCompilation.GetSemanticModel(firstCompilation.SyntaxTrees.Single()));
             firstCompilationFinder.FindConstant(secondCompilationReturnExpression).Should().BeNull();

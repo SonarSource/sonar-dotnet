@@ -491,7 +491,7 @@ public class Sample
 
     private static void VerifyActivation(TestSyntaxTreeOptionProvider provider, string additionalSnippet = null)
     {
-        var builder = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp, false);
+        var builder = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp);
         builder = builder.AddSnippet("""
             public class Sample
             {

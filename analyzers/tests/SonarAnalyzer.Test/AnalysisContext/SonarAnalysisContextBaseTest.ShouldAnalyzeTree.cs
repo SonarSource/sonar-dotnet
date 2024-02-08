@@ -195,7 +195,7 @@ public partial class SonarAnalysisContextBaseTest
             """;
         var compilation = SolutionBuilder
            .Create()
-           .AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false)
+           .AddProject(AnalyzerLanguage.CSharp)
            .AddSnippet(content, "Foo.cs")
            .GetCompilation();
         DiagnosticVerifier.Verify(compilation, new CS.EmptyStatement());
@@ -430,7 +430,7 @@ public partial class SonarAnalysisContextBaseTest
 
         var compilation = SolutionBuilder
             .Create()
-            .AddProject(analyzerLanguage, createExtraEmptyFile: false)
+            .AddProject(analyzerLanguage)
             .AddReferences(TestHelper.ProjectTypeReference(projectType))
             .AddSnippet(string.Empty, fileName)
             .GetCompilation();

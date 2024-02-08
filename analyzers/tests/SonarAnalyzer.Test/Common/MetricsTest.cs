@@ -499,7 +499,7 @@ End Class")
             CognitiveComplexity(AnalyzerLanguage.CSharp, csharpText).Should().Be(109);
 
             var csharp9Text = System.IO.File.ReadAllText(@"TestCases\CognitiveComplexity.CSharp9.cs");
-            var csharp9Compilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp, false, Microsoft.CodeAnalysis.OutputKind.ConsoleApplication)
+            var csharp9Compilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp, Microsoft.CodeAnalysis.OutputKind.ConsoleApplication)
                 .AddSnippet(csharp9Text)
                 .GetCompilation();
             var csharp9SyntaxTree = csharp9Compilation.SyntaxTrees.Single();

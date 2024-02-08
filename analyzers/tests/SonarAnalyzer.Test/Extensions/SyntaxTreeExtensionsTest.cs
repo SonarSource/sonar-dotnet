@@ -87,7 +87,7 @@ public class SyntaxTreeExtensionsTest
     {
         var compilation = SolutionBuilder
            .Create()
-           .AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false)
+           .AddProject(AnalyzerLanguage.CSharp)
            .AddSnippet(content)
            .GetCompilation();
         return compilation.SyntaxTrees.First().IsGenerated(generatedCodeRecognizer, compilation);

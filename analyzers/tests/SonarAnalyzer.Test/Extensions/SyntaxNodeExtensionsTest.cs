@@ -1219,7 +1219,7 @@ public class X
         private static SyntaxTree GetSyntaxTree(string content, string fileName = null) =>
             SolutionBuilder
                 .Create()
-                .AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false)
+                .AddProject(AnalyzerLanguage.CSharp)
                 .AddSnippet(content, fileName)
                 .GetCompilation()
                 .SyntaxTrees

@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Test.TestFramework
         {
             Compilation = SolutionBuilder
                 .Create()
-                .AddProject(language, createExtraEmptyFile: false, outputKind)
+                .AddProject(language, outputKind)
                 .AddSnippet(code)
                 .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
                 .GetCompilation(parseOptions);

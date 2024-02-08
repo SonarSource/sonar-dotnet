@@ -117,7 +117,7 @@ namespace SonarAnalyzer.Test.Common.FixAllProviders
 
         private static ProjectBuilder CreateProject() =>
             SolutionBuilder.Create()
-                .AddProject(AnalyzerLanguage.CSharp, false)
+                .AddProject(AnalyzerLanguage.CSharp)
                 .AddSnippet(@"public class C1 { public void M1() { int number1 = 1 } };", "MyFile1.cs")
                 .AddSnippet(@"public class C2 { public void M2() { int number2 = 2 } };", "MyFile2.cs");
     }
