@@ -18,30 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Globalization;
+using Moq;
 
-namespace SonarAnalyzer.TestFramework.Common;
+namespace SonarAnalyzer.Test.TestFramework.Tests.MetadataReferences;
 
-public sealed class CurrentCultureScope : IDisposable
+[TestClass]
+public class CompilationExtensionsTest
 {
-    private readonly CultureInfo oldCulture;
-    private readonly CultureInfo oldUiCulture;
-
-    public CurrentCultureScope() : this(CultureInfo.InvariantCulture) { }
-
-    public CurrentCultureScope(CultureInfo culture)
-    {
-        var thread = Thread.CurrentThread;
-        oldCulture = thread.CurrentCulture;
-        oldUiCulture = thread.CurrentUICulture;
-        thread.CurrentCulture = culture;
-        thread.CurrentUICulture = culture;
-    }
-
-    public void Dispose()
-    {
-        var thread = Thread.CurrentThread;
-        thread.CurrentCulture = oldCulture;
-        thread.CurrentUICulture = oldUiCulture;
-    }
+    [TestMethod]
+    public void LanguageVersionString_Null() =>
+        ((Func<string>)(() => CompilationExtensions.LanguageVersionString(null))).Should().Throw<NotSupportedException>().WithMessage("Not supported compilation type: ''");
 }

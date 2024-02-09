@@ -79,7 +79,7 @@ public class SnippetCompiler
         else
         {
             var type = GetNodes<VB.TypeStatementSyntax>().First(m => m.Identifier.ValueText == nameParts[0]);
-            method = type.DescendantNodes().OfType<VB.MethodStatementSyntax>().First(m => m.Identifier.ValueText == nameParts[1]);
+            method = type.Parent.DescendantNodes().OfType<VB.MethodStatementSyntax>().First(m => m.Identifier.ValueText == nameParts[1]);
         }
 
         method.Should().NotBeNull("Test setup error: could not find method declaration in code snippet: Type: {nameParts[0]}, Method: {nameParts[1]}");
@@ -139,7 +139,7 @@ public class SnippetCompiler
 
     public SonarSyntaxNodeReportingContext CreateAnalysisContext(SyntaxNode node)
     {
-        var nodeContext =  new SyntaxNodeAnalysisContext(node, SemanticModel, null, null, null, default);
+        var nodeContext = new SyntaxNodeAnalysisContext(node, SemanticModel, null, null, null, default);
         return new(AnalysisScaffolding.CreateSonarAnalysisContext(), nodeContext);
     }
 

@@ -27,6 +27,24 @@ public class ProjectBuilderTest
     private static readonly ProjectBuilder EmptyVB = SolutionBuilder.Create().AddProject(AnalyzerLanguage.VisualBasic);
 
     [TestMethod]
+    public void AddDocument_Null_Throws() =>
+        EmptyCS.Invoking(x => x.AddDocument(null)).Should().Throw<ArgumentNullException>().Which.ParamName.Should().Be("path");
+
+    [TestMethod]
+    public void AddDocument_NoTestCases_Throws() =>
+        EmptyCS.Invoking(x => x.AddDocument("FileOutsideExpectedDirectory.cs")).Should()
+            .Throw<ArgumentException>()
+            .WithMessage(@"path must contain 'TestCases\'*")
+            .Which.ParamName.Should().Be("path");
+
+    [TestMethod]
+    public void AddDocument_UnsupportedExtension_Throws() =>
+        EmptyCS.Invoking(x => x.AddDocument(@"TestCases\File.vb")).Should()
+            .Throw<ArgumentException>()
+            .WithMessage("The file extension '.vb' does not match the project language 'C#' nor Razor.*")
+            .Which.ParamName.Should().Be("path");
+
+    [TestMethod]
     public void AddDocument_ValidExtension()
     {
         EmptyCS.AddDocument(@"TestCases\ProjectBuilder.AddDocument.cs").FindDocument("ProjectBuilder.AddDocument.cs").Should().NotBeNull();
@@ -69,4 +87,8 @@ public class ProjectBuilderTest
     [TestMethod]
     public void AddDocument_VbnetDoesntSupportVbnetFiles() =>
         EmptyVB.Invoking(x => x.AddDocument(@"TestCases\ProjectBuilder.AddDocument.vbhtml").FindDocument("ProjectBuilder.AddDocument.vbhtml").Should().NotBeNull()).Should().Throw<ArgumentException>();
+
+    [TestMethod]
+    public void AddSnippet_Null_Throws() =>
+        EmptyCS.Invoking(x => x.AddSnippet(null)).Should().Throw<ArgumentNullException>().Which.ParamName.Should().Be("code");
 }

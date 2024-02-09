@@ -72,8 +72,7 @@ internal class CodeFixVerifier
         state.Diagnostics.Should().NotBeEmpty();
 
         var fixAllDiagnosticProvider = new FixAllDiagnosticProvider(state.Diagnostics);
-
-        var codeActionEquivalenceKey = codeFixTitle ?? RetrieveCodeFixTitle(codeFix, state);    // We need to find the title of the single action to use
+        var codeActionEquivalenceKey = codeFixTitle ?? CodeFixTitle(codeFix, state);    // We need to find the title of the single action to use
         var fixAllContext = new FixAllContext(state.Document, codeFix, FixAllScope.Document, codeActionEquivalenceKey, codeFix.FixableDiagnosticIds, fixAllDiagnosticProvider, default);
         var codeActionToExecute = fixAllProvider.GetFixAsync(fixAllContext).Result;
         codeActionToExecute.Should().NotBeNull();
@@ -82,8 +81,8 @@ internal class CodeFixVerifier
             .AssertExpected(pathToExpected, $"{nameof(VerifyFixAllProvider)} runs {fixAllProvider.GetType().Name} once");
     }
 
-    private string RetrieveCodeFixTitle(CodeFixProvider codeFix, State state) =>
-        state.Diagnostics.SelectMany(diagnostic => ActionToApply(codeFix, state.Document, diagnostic)).FirstOrDefault()?.Title;
+    private string CodeFixTitle(CodeFixProvider codeFix, State state) =>
+        state.Diagnostics.SelectMany(x => ActionToApply(codeFix, state.Document, x)).First().Title;
 
     private static Document ApplyCodeFix(Document document, CodeAction codeAction)
     {
@@ -109,13 +108,8 @@ internal class CodeFixVerifier
 
         public State(DiagnosticAnalyzer analyzer, Document document, ParseOptions parseOptions)
         {
-            var project = document.Project;
-            if (parseOptions != null)
-            {
-                project = project.WithParseOptions(parseOptions);
-                document = project.GetDocument(document.Id);    // There's a new instance with the same ID
-            }
-
+            var project = document.Project.WithParseOptions(parseOptions);
+            document = project.GetDocument(document.Id);    // There's a new instance with the same ID
             compilation = project.GetCompilationAsync().Result;
             Document = document;
             Diagnostics = DiagnosticVerifier.AnalyzerDiagnostics(compilation, analyzer, CompilationErrorBehavior.Ignore).Where(x => x.Severity != DiagnosticSeverity.Error).ToImmutableArray();

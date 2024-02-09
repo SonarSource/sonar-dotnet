@@ -582,6 +582,10 @@ public class VerifierTest
                 """);
 
     [TestMethod]
+    public void VerifyCodeFix_NoCodeFix() =>
+        DummyCS.AddSnippet("// Nothing to see here").Invoking(x => x.VerifyCodeFix()).Should().Throw<InvalidOperationException>().WithMessage("CodeFix was not set.");
+
+    [TestMethod]
     public void VerifyCodeFix_FixExpected_CS()
     {
         var originalPath = WriteFile("File.cs", """
@@ -674,6 +678,14 @@ public class VerifierTest
                 Private C As Boolean = True
             End Class" has a length of 151, differs near "Not" (index 47).
             """);
+    }
+
+    [TestMethod]
+    public void VerifyCodeFix_NoIssueRaised()
+    {
+        var path = WriteFile("File.cs", "// Nothing to see here");
+        DummyCS.AddPaths(path).WithCodeFix<DummyCodeFixCS>().WithCodeFixedPaths(path).Invoking(x => x.VerifyCodeFix()).Should().Throw<AssertFailedException>()
+            .WithMessage("Expected state.Diagnostics not to be empty.");
     }
 
     [TestMethod]

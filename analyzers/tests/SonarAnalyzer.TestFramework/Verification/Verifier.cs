@@ -268,10 +268,7 @@ internal class Verifier
         {
             var filePath = Path.Combine(projectRoot, snippet.FileName);
             File.WriteAllText(filePath, snippet.Content);
-            if (IsRazorOrCshtml(filePath))
-            {
-                razorFiles.Add(filePath);
-            }
+            razorFiles.Add(filePath);
         }
         return razorFiles;
     }
