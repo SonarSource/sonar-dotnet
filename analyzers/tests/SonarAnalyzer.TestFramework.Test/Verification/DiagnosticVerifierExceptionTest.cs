@@ -18,10 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Test.Common;
-using SonarAnalyzer.Test.Helpers;
+using SonarAnalyzer.TestFramework.Verification;
 
-namespace SonarAnalyzer.Test.TestFramework.Tests
+namespace SonarAnalyzer.Test.TestFramework.Tests.Verification
 {
     [TestClass]
     public class DiagnosticVerifierExceptionTest

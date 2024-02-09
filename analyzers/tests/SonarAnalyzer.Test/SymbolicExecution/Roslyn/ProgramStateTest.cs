@@ -23,7 +23,6 @@ using SonarAnalyzer.Extensions;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
-using SonarAnalyzer.Test.Helpers;
 using SonarAnalyzer.Test.TestFramework.SymbolicExecution;
 using StyleCop.Analyzers.Lightup;
 

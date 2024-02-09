@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Test.TestFramework.Tests
+namespace SonarAnalyzer.Test.TestFramework.Tests.Build
 {
     [TestClass]
     public class SnippetCompilerTest

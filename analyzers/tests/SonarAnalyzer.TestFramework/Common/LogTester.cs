@@ -19,9 +19,8 @@
  */
 
 using System.IO;
-using SonarAnalyzer.Test.Helpers;
 
-namespace SonarAnalyzer.Test.TestFramework
+namespace SonarAnalyzer.TestFramework.Common
 {
     public sealed class LogTester : IDisposable
     {

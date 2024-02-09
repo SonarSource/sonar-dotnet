@@ -20,9 +20,9 @@
 
 #if NET
 
-using static SonarAnalyzer.Test.MetadataReferences.MetadataReferenceFactory;
+using static SonarAnalyzer.TestFramework.MetadataReferences.MetadataReferenceFactory;
 
-namespace SonarAnalyzer.Test.MetadataReferences
+namespace SonarAnalyzer.TestFramework.MetadataReferences
 {
     public static class AspNetCoreMetadataReference
     {

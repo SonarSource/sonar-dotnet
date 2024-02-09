@@ -18,14 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Test.Helpers;
-
 using static Microsoft.CodeAnalysis.CSharp.LanguageVersion;
 using static Microsoft.CodeAnalysis.VisualBasic.LanguageVersion;
 using CS = Microsoft.CodeAnalysis.CSharp;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 
-namespace SonarAnalyzer.Test.TestFramework
+namespace SonarAnalyzer.TestFramework.Build
 {
     /// <summary>
     /// Returned values depend on the build environment.

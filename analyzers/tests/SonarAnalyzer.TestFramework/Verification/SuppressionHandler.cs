@@ -21,7 +21,7 @@
 using System.Collections.Concurrent;
 using SonarAnalyzer.AnalysisContext;
 
-namespace SonarAnalyzer.Test.TestFramework;
+namespace SonarAnalyzer.TestFramework.Verification;
 
 public static class SuppressionHandler
 {

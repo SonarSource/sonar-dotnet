@@ -21,6 +21,7 @@
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.Test.PackagingTests;
 using SonarAnalyzer.Test.Rules;
+using SonarAnalyzer.Test.TestFramework;
 
 namespace SonarAnalyzer.Test.Common
 {

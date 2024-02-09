@@ -19,7 +19,6 @@
  */
 
 using Microsoft.CodeAnalysis.Text;
-using SonarAnalyzer.Constants;
 
 namespace SonarAnalyzer.Rules.CSharp
 {

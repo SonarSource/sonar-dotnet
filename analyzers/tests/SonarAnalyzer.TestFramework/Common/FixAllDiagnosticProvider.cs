@@ -20,7 +20,7 @@
 
 using Microsoft.CodeAnalysis.CodeFixes;
 
-namespace SonarAnalyzer.Test
+namespace SonarAnalyzer.TestFramework.Common
 {
     public class FixAllDiagnosticProvider : FixAllContext.DiagnosticProvider
     {

@@ -19,10 +19,11 @@
  */
 
 using Google.Protobuf;
+using SonarAnalyzer.TestFramework.Build;
 using CS = Microsoft.CodeAnalysis.CSharp;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 
-namespace SonarAnalyzer.Test.TestFramework
+namespace SonarAnalyzer.TestFramework.Verification
 {
     // ToDo: Remove this enum https://github.com/SonarSource/sonar-dotnet/issues/8588
     [Obsolete("This will be removed. Use FailTest if you really have to provide this argument somewhere.")]

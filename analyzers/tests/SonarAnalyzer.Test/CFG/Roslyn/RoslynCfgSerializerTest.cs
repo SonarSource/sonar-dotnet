@@ -19,7 +19,6 @@
  */
 
 using SonarAnalyzer.CFG;
-using SonarAnalyzer.Test.Helpers;
 
 namespace SonarAnalyzer.Test.CFG.Sonar
 {

@@ -20,7 +20,7 @@
 
 using System.Globalization;
 
-namespace SonarAnalyzer.Test.Helpers
+namespace SonarAnalyzer.TestFramework.Common
 {
     public sealed class CurrentCultureScope : IDisposable
     {

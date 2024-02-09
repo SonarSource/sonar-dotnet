@@ -22,7 +22,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.AnalysisContext;
 
-namespace SonarAnalyzer.Test.TestFramework.Tests;
+namespace SonarAnalyzer.TestFramework.Analyzers;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public class DummyAnalyzerWithLocation : SonarDiagnosticAnalyzer

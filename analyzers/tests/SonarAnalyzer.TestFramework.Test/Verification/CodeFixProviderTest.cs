@@ -21,8 +21,9 @@
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.AnalysisContext;
+using SonarAnalyzer.TestFramework.Verification;
 
-namespace SonarAnalyzer.Test.TestFramework.Tests
+namespace SonarAnalyzer.Test.TestFramework.Tests.Verification
 {
     [TestClass]
     public class CodeFixProviderTest

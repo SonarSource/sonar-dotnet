@@ -19,10 +19,11 @@
  */
 
 using SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
+using SonarAnalyzer.TestFramework.Verification;
 using CS = Microsoft.CodeAnalysis.CSharp;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 
-namespace SonarAnalyzer.Test.TestFramework.Tests
+namespace SonarAnalyzer.Test.TestFramework.Tests.Verification
 {
     [TestClass]
     public class VerifierBuilderTest

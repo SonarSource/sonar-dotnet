@@ -29,9 +29,9 @@ using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.MSBuild;
 using SonarAnalyzer.Rules;
-using SonarAnalyzer.Test.Helpers;
+using SonarAnalyzer.TestFramework.Build;
 
-namespace SonarAnalyzer.Test.TestFramework
+namespace SonarAnalyzer.TestFramework.Verification
 {
     public class Verifier
     {

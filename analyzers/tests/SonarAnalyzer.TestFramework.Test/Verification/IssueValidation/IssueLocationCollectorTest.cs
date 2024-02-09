@@ -21,7 +21,7 @@
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.TestFramework.Verification.IssueValidation;
 
-namespace SonarAnalyzer.Test.TestFramework.Tests
+namespace SonarAnalyzer.Test.TestFramework.Tests.Verification.IssueValidation
 {
     [TestClass]
     public partial class IssueLocationCollectorTest

@@ -20,7 +20,7 @@
 
 using FluentAssertions.Primitives;
 
-namespace SonarAnalyzer.Test.Helpers
+namespace SonarAnalyzer.TestFramework.Extensions
 {
     public static class StringAssertionsExtensions
     {
