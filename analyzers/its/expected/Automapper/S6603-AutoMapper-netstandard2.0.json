@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S6603",
-"message":  "The collection-specific "TrueForAll" method should be used instead of the "All" extension",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L473",
-"region":  {
-"startLine":  473,
-"startColumn":  26,
-"endLine":  473,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S6603",
-"message":  "The collection-specific "TrueForAll" method should be used instead of the "All" extension",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/ObjectFactory.cs#L36",
-"region":  {
-"startLine":  36,
-"startColumn":  109,
-"endLine":  36,
-"endColumn":  112
-}
-}
-},
-{
-"id":  "S6603",
-"message":  "The collection-specific "TrueForAll" method should be used instead of the "All" extension",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Internal/TypeDetails.cs#L183",
-"region":  {
-"startLine":  183,
-"startColumn":  59,
-"endLine":  183,
-"endColumn":  62
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6603",
+      "Message": "The collection-specific \u0022TrueForAll\u0022 method should be used instead of the \u0022All\u0022 extension",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L473",
+      "Location": "Line 473 Position 26-29"
+    },
+    {
+      "Id": "S6603",
+      "Message": "The collection-specific \u0022TrueForAll\u0022 method should be used instead of the \u0022All\u0022 extension",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/ObjectFactory.cs#L36",
+      "Location": "Line 36 Position 109-112"
+    },
+    {
+      "Id": "S6603",
+      "Message": "The collection-specific \u0022TrueForAll\u0022 method should be used instead of the \u0022All\u0022 extension",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Internal/TypeDetails.cs#L183",
+      "Location": "Line 183 Position 59-62"
+    }
+  ]
 }

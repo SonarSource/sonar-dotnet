@@ -1,46 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1168",
-"message":  "Return an empty collection instead of null.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Basic/BasicAuthentication.cs#L114",
-"region":  {
-"startLine":  114,
-"startColumn":  24,
-"endLine":  114,
-"endColumn":  28
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Basic/BasicAuthentication.cs#L119",
-"region":  {
-"startLine":  119,
-"startColumn":  24,
-"endLine":  119,
-"endColumn":  28
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Basic/BasicAuthentication.cs#L127",
-"region":  {
-"startLine":  127,
-"startColumn":  62,
-"endLine":  127,
-"endColumn":  66
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Basic/BasicAuthentication.cs#L131",
-"region":  {
-"startLine":  131,
-"startColumn":  24,
-"endLine":  131,
-"endColumn":  28
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S1168",
+      "Message": "Return an empty collection instead of null.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Basic/BasicAuthentication.cs#L114",
+      "Location": "Line 114 Position 24-28"
+    }
+  ]
 }

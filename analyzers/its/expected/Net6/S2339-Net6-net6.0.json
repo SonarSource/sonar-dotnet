@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2339",
-"message":  "Change this constant to a 'static' read-only property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/RecordStructs.cs#L6",
-"region":  {
-"startLine":  6,
-"startColumn":  29,
-"endLine":  6,
-"endColumn":  34
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2339",
+      "Message": "Change this constant to a \u0027static\u0027 read-only property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/RecordStructs.cs#L6",
+      "Location": "Line 6 Position 29-34"
+    }
+  ]
 }

@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S127",
-"message":  "Do not update the loop counter 'i' within the loop body.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/CommandLine.cs#L46",
-"region":  {
-"startLine":  46,
-"startColumn":  23,
-"endLine":  46,
-"endColumn":  24
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S127",
+      "Message": "Do not update the loop counter \u0027i\u0027 within the loop body.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/CommandLine.cs#L46",
+      "Location": "Line 46 Position 23-24"
+    }
+  ]
 }

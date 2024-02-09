@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S4663",
-"message":  "Remove this empty comment",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L577",
-"region":  {
-"startLine":  577,
-"startColumn":  19,
-"endLine":  577,
-"endColumn":  21
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4663",
+      "Message": "Remove this empty comment",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L577",
+      "Location": "Line 577 Position 19-21"
+    }
+  ]
 }

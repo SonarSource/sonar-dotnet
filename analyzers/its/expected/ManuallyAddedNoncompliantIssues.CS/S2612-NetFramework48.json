@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S2612",
-"message":  "Make sure this permission is safe.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/LooseFilePermissions.cs#L19",
-"region":  {
-"startLine":  19,
-"startColumn":  13,
-"endLine":  19,
-"endColumn":  126
-}
-}
-},
-{
-"id":  "S2612",
-"message":  "Make sure this permission is safe.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/LooseFilePermissions.cs#L23",
-"region":  {
-"startLine":  23,
-"startColumn":  13,
-"endLine":  23,
-"endColumn":  131
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2612",
+      "Message": "Make sure this permission is safe.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/LooseFilePermissions.cs#L19",
+      "Location": "Line 19 Position 13-126"
+    },
+    {
+      "Id": "S2612",
+      "Message": "Make sure this permission is safe.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/LooseFilePermissions.cs#L23",
+      "Location": "Line 23 Position 13-131"
+    }
+  ]
 }

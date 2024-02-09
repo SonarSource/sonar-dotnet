@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S138",
-"message":  "This method 'CreateRandom' has 100 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L131",
-"region":  {
-"startLine":  131,
-"startColumn":  21,
-"endLine":  131,
-"endColumn":  33
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S138",
+      "Message": "This method \u0027CreateRandom\u0027 has 100 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L131",
+      "Location": "Line 131 Position 21-33"
+    }
+  ]
 }

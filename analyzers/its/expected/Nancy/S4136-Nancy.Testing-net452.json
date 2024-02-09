@@ -1,28 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S4136",
-"message":  "All 'Contains' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Asserts.cs#L12",
-"region":  {
-"startLine":  12,
-"startColumn":  28,
-"endLine":  12,
-"endColumn":  36
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Asserts.cs#L45",
-"region":  {
-"startLine":  45,
-"startColumn":  28,
-"endLine":  45,
-"endColumn":  36
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S4136",
+      "Message": "All \u0027Contains\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Asserts.cs#L12",
+      "Location": "Line 12 Position 28-36"
+    }
+  ]
 }

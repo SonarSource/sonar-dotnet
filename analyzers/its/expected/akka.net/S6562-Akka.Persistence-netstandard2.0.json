@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S6562",
-"message":  "Provide the "DateTimeKind" when creating this object.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/LocalSnapshotStore.cs#L295",
-"region":  {
-"startLine":  295,
-"startColumn":  66,
-"endLine":  295,
-"endColumn":  85
-}
-}
-},
-{
-"id":  "S6562",
-"message":  "Provide the "DateTimeKind" when creating this object.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/MemorySnapshotStore.cs#L102",
-"region":  {
-"startLine":  102,
-"startColumn":  101,
-"endLine":  102,
-"endColumn":  130
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6562",
+      "Message": "Provide the \u0022DateTimeKind\u0022 when creating this object.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/LocalSnapshotStore.cs#L295",
+      "Location": "Line 295 Position 66-85"
+    },
+    {
+      "Id": "S6562",
+      "Message": "Provide the \u0022DateTimeKind\u0022 when creating this object.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/MemorySnapshotStore.cs#L102",
+      "Location": "Line 102 Position 101-130"
+    }
+  ]
 }

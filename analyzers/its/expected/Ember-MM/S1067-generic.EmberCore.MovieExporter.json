@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1067",
-"message":  "Reduce the number of conditional operators (7) used in the expression (maximum allowed 3).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L225-L228",
-"region":  {
-"startLine":  225,
-"startColumn":  28,
-"endLine":  228,
-"endColumn":  149
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (7) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L225-L228",
+      "Location": "Lines 225-228 Position 28-149"
+    }
+  ]
 }

@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1104",
-"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests.Performance/Startup/ClusterStartupSpec.cs#L33",
-"region":  {
-"startLine":  33,
-"startColumn":  43,
-"endLine":  33,
-"endColumn":  94
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1104",
+      "Message": "Make this field \u0027private\u0027 and encapsulate it in a \u0027public\u0027 property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests.Performance/Startup/ClusterStartupSpec.cs#L33",
+      "Location": "Line 33 Position 43-94"
+    }
+  ]
 }

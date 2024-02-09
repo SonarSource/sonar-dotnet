@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3903",
-"message":  "Move 'Forecast' into a named namespace.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/GetWeatherForecastWithRecords/Program.cs#L15",
-"region":  {
-"startLine":  15,
-"startColumn":  15,
-"endLine":  15,
-"endColumn":  23
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3903",
+      "Message": "Move \u0027Forecast\u0027 into a named namespace.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/GetWeatherForecastWithRecords/Program.cs#L15",
+      "Location": "Line 15 Position 15-23"
+    }
+  ]
 }

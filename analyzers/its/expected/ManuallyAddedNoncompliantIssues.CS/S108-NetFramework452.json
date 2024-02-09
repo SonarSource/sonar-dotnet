@@ -1,56 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S108",
-"message":  "Either remove or fill this block of code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework452/XmlReaderTest.cs#L19",
-"region":  {
-"startLine":  19,
-"startColumn":  55,
-"endLine":  19,
-"endColumn":  58
-}
-}
-},
-{
-"id":  "S108",
-"message":  "Either remove or fill this block of code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework452/XmlReaderTest.cs#L24",
-"region":  {
-"startLine":  24,
-"startColumn":  106,
-"endLine":  24,
-"endColumn":  109
-}
-}
-},
-{
-"id":  "S108",
-"message":  "Either remove or fill this block of code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework452/XmlReaderTest.cs#L29",
-"region":  {
-"startLine":  29,
-"startColumn":  70,
-"endLine":  29,
-"endColumn":  73
-}
-}
-},
-{
-"id":  "S108",
-"message":  "Either remove or fill this block of code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework452/XmlReaderTest.cs#L34",
-"region":  {
-"startLine":  34,
-"startColumn":  143,
-"endLine":  34,
-"endColumn":  146
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework452/XmlReaderTest.cs#L19",
+      "Location": "Line 19 Position 55-58"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework452/XmlReaderTest.cs#L24",
+      "Location": "Line 24 Position 106-109"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework452/XmlReaderTest.cs#L29",
+      "Location": "Line 29 Position 70-73"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework452/XmlReaderTest.cs#L34",
+      "Location": "Line 34 Position 143-146"
+    }
+  ]
 }

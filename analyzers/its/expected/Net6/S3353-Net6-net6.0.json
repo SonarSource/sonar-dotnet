@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3353",
-"message":  "Add the 'const' modifier to 'a'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/Program.cs#L3",
-"region":  {
-"startLine":  3,
-"startColumn":  5,
-"endLine":  3,
-"endColumn":  6
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3353",
+      "Message": "Add the \u0027const\u0027 modifier to \u0027a\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/Program.cs#L3",
+      "Location": "Line 3 Position 5-6"
+    }
+  ]
 }

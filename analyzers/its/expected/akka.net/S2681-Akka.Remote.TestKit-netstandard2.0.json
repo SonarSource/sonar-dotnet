@@ -1,28 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2681",
-"message":  "This line will not be executed conditionally; only the first line of this 2-line block will be. The rest will execute unconditionally.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L59",
-"region":  {
-"startLine":  59,
-"startColumn":  17,
-"endLine":  59,
-"endColumn":  26
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L58",
-"region":  {
-"startLine":  58,
-"startColumn":  33,
-"endLine":  58,
-"endColumn":  104
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S2681",
+      "Message": "This line will not be executed conditionally; only the first line of this 2-line block will be. The rest will execute unconditionally.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L59",
+      "Location": "Line 59 Position 17-26"
+    }
+  ]
 }

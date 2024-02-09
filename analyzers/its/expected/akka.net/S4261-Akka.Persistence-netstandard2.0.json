@@ -1,147 +1,70 @@
 {
-"issues":  [
-{
-"id":  "S4261",
-"message":  "Remove the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.cs#L369",
-"region":  {
-"startLine":  369,
-"startColumn":  21,
-"endLine":  369,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Remove the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.cs#L389",
-"region":  {
-"startLine":  389,
-"startColumn":  21,
-"endLine":  389,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Remove the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.cs#L429",
-"region":  {
-"startLine":  429,
-"startColumn":  21,
-"endLine":  429,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Add the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/AsyncWriteProxy.cs#L400",
-"region":  {
-"startLine":  400,
-"startColumn":  25,
-"endLine":  400,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Remove the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/PersistentActor.cs#L533",
-"region":  {
-"startLine":  533,
-"startColumn":  24,
-"endLine":  533,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Remove the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/PersistentActor.cs#L550",
-"region":  {
-"startLine":  550,
-"startColumn":  24,
-"endLine":  550,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Remove the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/PersistentActor.cs#L567",
-"region":  {
-"startLine":  567,
-"startColumn":  24,
-"endLine":  567,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Remove the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/PersistentActor.cs#L584",
-"region":  {
-"startLine":  584,
-"startColumn":  24,
-"endLine":  584,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Remove the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/PersistentActor.cs#L598",
-"region":  {
-"startLine":  598,
-"startColumn":  24,
-"endLine":  598,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Add the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/LocalSnapshotStore.cs#L362",
-"region":  {
-"startLine":  362,
-"startColumn":  25,
-"endLine":  362,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Add the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/NoSnapshotStore.cs#L114",
-"region":  {
-"startLine":  114,
-"startColumn":  22,
-"endLine":  114,
-"endColumn":  26
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4261",
+      "Message": "Remove the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.cs#L369",
+      "Location": "Line 369 Position 21-33"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Remove the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.cs#L389",
+      "Location": "Line 389 Position 21-36"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Remove the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.cs#L429",
+      "Location": "Line 429 Position 21-31"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Add the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/AsyncWriteProxy.cs#L400",
+      "Location": "Line 400 Position 25-44"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Remove the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/PersistentActor.cs#L533",
+      "Location": "Line 533 Position 24-36"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Remove the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/PersistentActor.cs#L550",
+      "Location": "Line 550 Position 24-36"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Remove the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/PersistentActor.cs#L567",
+      "Location": "Line 567 Position 24-36"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Remove the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/PersistentActor.cs#L584",
+      "Location": "Line 584 Position 24-36"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Remove the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/PersistentActor.cs#L598",
+      "Location": "Line 598 Position 24-39"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Add the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/LocalSnapshotStore.cs#L362",
+      "Location": "Line 362 Position 25-48"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Add the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/NoSnapshotStore.cs#L114",
+      "Location": "Line 114 Position 22-26"
+    }
+  ]
 }

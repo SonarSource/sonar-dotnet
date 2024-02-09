@@ -1,56 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S2931",
-"message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on '_current'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/ActorPathCache.cs#L17",
-"region":  {
-"startLine":  17,
-"startColumn":  27,
-"endLine":  17,
-"endColumn":  52
-}
-}
-},
-{
-"id":  "S2931",
-"message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on '_current'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/ActorRefResolveCache.cs#L17",
-"region":  {
-"startLine":  17,
-"startColumn":  27,
-"endLine":  17,
-"endColumn":  58
-}
-}
-},
-{
-"id":  "S2931",
-"message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on '_current'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/AddressCache.cs#L17",
-"region":  {
-"startLine":  17,
-"startColumn":  27,
-"endLine":  17,
-"endColumn":  50
-}
-}
-},
-{
-"id":  "S2931",
-"message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on '_nextScheduledFlush'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/BatchWriter.cs#L37",
-"region":  {
-"startLine":  37,
-"startColumn":  20,
-"endLine":  37,
-"endColumn":  45
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2931",
+      "Message": "Implement \u0027IDisposable\u0027 in this class and use the \u0027Dispose\u0027 method to call \u0027Dispose\u0027 on \u0027_current\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/ActorPathCache.cs#L17",
+      "Location": "Line 17 Position 27-52"
+    },
+    {
+      "Id": "S2931",
+      "Message": "Implement \u0027IDisposable\u0027 in this class and use the \u0027Dispose\u0027 method to call \u0027Dispose\u0027 on \u0027_current\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/ActorRefResolveCache.cs#L17",
+      "Location": "Line 17 Position 27-58"
+    },
+    {
+      "Id": "S2931",
+      "Message": "Implement \u0027IDisposable\u0027 in this class and use the \u0027Dispose\u0027 method to call \u0027Dispose\u0027 on \u0027_current\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/AddressCache.cs#L17",
+      "Location": "Line 17 Position 27-50"
+    },
+    {
+      "Id": "S2931",
+      "Message": "Implement \u0027IDisposable\u0027 in this class and use the \u0027Dispose\u0027 method to call \u0027Dispose\u0027 on \u0027_nextScheduledFlush\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/BatchWriter.cs#L37",
+      "Location": "Line 37 Position 20-45"
+    }
+  ]
 }

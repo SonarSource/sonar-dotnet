@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S5693",
-"message":  "Make sure the content length limit is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/Controllers/S5693Controller.cs#L8",
-"region":  {
-"startLine":  8,
-"startColumn":  10,
-"endLine":  8,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S5693",
-"message":  "Make sure the content length limit is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/Controllers/S5693Controller.cs#L15",
-"region":  {
-"startLine":  15,
-"startColumn":  10,
-"endLine":  15,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S5693",
-"message":  "Make sure the content length limit is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/Controllers/S5693Controller.cs#L29",
-"region":  {
-"startLine":  29,
-"startColumn":  10,
-"endLine":  29,
-"endColumn":  99
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S5693",
+      "Message": "Make sure the content length limit is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/Controllers/S5693Controller.cs#L15",
+      "Location": "Line 15 Position 10-38"
+    },
+    {
+      "Id": "S5693",
+      "Message": "Make sure the content length limit is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/Controllers/S5693Controller.cs#L29",
+      "Location": "Line 29 Position 10-99"
+    },
+    {
+      "Id": "S5693",
+      "Message": "Make sure the content length limit is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/Controllers/S5693Controller.cs#L8",
+      "Location": "Line 8 Position 10-33"
+    }
+  ]
 }

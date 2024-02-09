@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S2339",
-"message":  "Change this constant to a 'static' read-only property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Actor/PingPongBenchmarks.cs#L22",
-"region":  {
-"startLine":  22,
-"startColumn":  26,
-"endLine":  22,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S2339",
-"message":  "Change this constant to a 'static' read-only property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Hocon/HoconBenchmarks.cs#L19",
-"region":  {
-"startLine":  19,
-"startColumn":  29,
-"endLine":  19,
-"endColumn":  40
-}
-}
-},
-{
-"id":  "S2339",
-"message":  "Change this constant to a 'static' read-only property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Serialization/SerializationBenchmarks.cs#L19",
-"region":  {
-"startLine":  19,
-"startColumn":  26,
-"endLine":  19,
-"endColumn":  36
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2339",
+      "Message": "Change this constant to a \u0027static\u0027 read-only property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Actor/PingPongBenchmarks.cs#L22",
+      "Location": "Line 22 Position 26-36"
+    },
+    {
+      "Id": "S2339",
+      "Message": "Change this constant to a \u0027static\u0027 read-only property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Hocon/HoconBenchmarks.cs#L19",
+      "Location": "Line 19 Position 29-40"
+    },
+    {
+      "Id": "S2339",
+      "Message": "Change this constant to a \u0027static\u0027 read-only property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Serialization/SerializationBenchmarks.cs#L19",
+      "Location": "Line 19 Position 26-36"
+    }
+  ]
 }

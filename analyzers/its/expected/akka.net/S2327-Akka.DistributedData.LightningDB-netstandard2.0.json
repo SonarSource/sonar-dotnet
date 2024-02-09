@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2327",
-"message":  "Combine this 'try' with the one starting on line 149.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData.LightningDB/LmdbDurableStore.cs#L150",
-"region":  {
-"startLine":  150,
-"startColumn":  17,
-"endLine":  150,
-"endColumn":  50
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2327",
+      "Message": "Combine this \u0027try\u0027 with the one starting on line 149.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData.LightningDB/LmdbDurableStore.cs#L150",
+      "Location": "Line 150 Position 17-50"
+    }
+  ]
 }

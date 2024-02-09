@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S109",
-"message":  "Assign this magic number '1000' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PersistenceBenchmark/Program.cs#L78",
-"region":  {
-"startLine":  78,
-"startColumn":  107,
-"endLine":  78,
-"endColumn":  113
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '1000' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PersistenceBenchmark/Program.cs#L78",
-"region":  {
-"startLine":  78,
-"startColumn":  158,
-"endLine":  78,
-"endColumn":  164
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00271000\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PersistenceBenchmark/Program.cs#L78",
+      "Location": "Line 78 Position 107-113"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00271000\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PersistenceBenchmark/Program.cs#L78",
+      "Location": "Line 78 Position 158-164"
+    }
+  ]
 }

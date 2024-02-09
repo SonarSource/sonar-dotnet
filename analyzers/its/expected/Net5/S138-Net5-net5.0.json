@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S138",
-"message":  "This local function has 81 lines, which is greater than the 80 lines authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L139",
-"region":  {
-"startLine":  139,
-"startColumn":  6,
-"endLine":  139,
-"endColumn":  18
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S138",
+      "Message": "This local function has 81 lines, which is greater than the 80 lines authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L139",
+      "Location": "Line 139 Position 6-18"
+    }
+  ]
 }

@@ -1,69 +1,34 @@
 {
-"issues":  [
-{
-"id":  "S1905",
-"message":  "Remove this unnecessary cast to 'int'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1197",
-"region":  {
-"startLine":  1197,
-"startColumn":  60,
-"endLine":  1197,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S1905",
-"message":  "Remove this unnecessary cast to 'int'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1339",
-"region":  {
-"startLine":  1339,
-"startColumn":  39,
-"endLine":  1339,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S1905",
-"message":  "Remove this unnecessary cast to 'Exception'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/SystemMessageSerializer.cs#L104",
-"region":  {
-"startLine":  104,
-"startColumn":  28,
-"endLine":  104,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S1905",
-"message":  "Remove this unnecessary cast to 'Exception'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/SystemMessageSerializer.cs#L121",
-"region":  {
-"startLine":  121,
-"startColumn":  28,
-"endLine":  121,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S1905",
-"message":  "Remove this unnecessary cast to 'Exception'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/SystemMessageSerializer.cs#L204",
-"region":  {
-"startLine":  204,
-"startColumn":  18,
-"endLine":  204,
-"endColumn":  27
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1905",
+      "Message": "Remove this unnecessary cast to \u0027int\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1197",
+      "Location": "Line 1197 Position 60-63"
+    },
+    {
+      "Id": "S1905",
+      "Message": "Remove this unnecessary cast to \u0027int\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1339",
+      "Location": "Line 1339 Position 39-42"
+    },
+    {
+      "Id": "S1905",
+      "Message": "Remove this unnecessary cast to \u0027Exception\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/SystemMessageSerializer.cs#L104",
+      "Location": "Line 104 Position 28-37"
+    },
+    {
+      "Id": "S1905",
+      "Message": "Remove this unnecessary cast to \u0027Exception\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/SystemMessageSerializer.cs#L121",
+      "Location": "Line 121 Position 28-37"
+    },
+    {
+      "Id": "S1905",
+      "Message": "Remove this unnecessary cast to \u0027Exception\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/SystemMessageSerializer.cs#L204",
+      "Location": "Line 204 Position 18-27"
+    }
+  ]
 }

@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S2223",
-"message":  "Change the visibility of 'Empty' or make it 'const' or 'readonly'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/EventSequences.cs#L140",
-"region":  {
-"startLine":  140,
-"startColumn":  38,
-"endLine":  140,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S2223",
-"message":  "Change the visibility of 'TimestampNotSpecified' or make it 'const' or 'readonly'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L62",
-"region":  {
-"startLine":  62,
-"startColumn":  32,
-"endLine":  62,
-"endColumn":  53
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2223",
+      "Message": "Change the visibility of \u0027Empty\u0027 or make it \u0027const\u0027 or \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/EventSequences.cs#L140",
+      "Location": "Line 140 Position 38-43"
+    },
+    {
+      "Id": "S2223",
+      "Message": "Change the visibility of \u0027TimestampNotSpecified\u0027 or make it \u0027const\u0027 or \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L62",
+      "Location": "Line 62 Position 32-53"
+    }
+  ]
 }

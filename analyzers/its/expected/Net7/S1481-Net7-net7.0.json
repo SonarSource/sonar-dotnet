@@ -1,121 +1,58 @@
 {
-"issues":  [
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'd'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/CheckedAndUncheckedUserDefinedOperators.cs#L13",
-"region":  {
-"startLine":  13,
-"startColumn":  21,
-"endLine":  13,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'message'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/NewlinesInStringInterpolations.cs#L7",
-"region":  {
-"startLine":  7,
-"startColumn":  20,
-"endLine":  7,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'pointMessage'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/NewlinesInStringInterpolations.cs#L19",
-"region":  {
-"startLine":  19,
-"startColumn":  17,
-"endLine":  19,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'x'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/NumericIntPtrAndUIntPtr.cs#L10",
-"region":  {
-"startLine":  10,
-"startColumn":  20,
-"endLine":  10,
-"endColumn":  21
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'y'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/NumericIntPtrAndUIntPtr.cs#L11",
-"region":  {
-"startLine":  11,
-"startColumn":  21,
-"endLine":  11,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'longMessage'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/RawStringLiterals.cs#L7",
-"region":  {
-"startLine":  7,
-"startColumn":  20,
-"endLine":  7,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'AuthWithTrailingSpace'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UTF8StringLiterals.cs#L7",
-"region":  {
-"startLine":  7,
-"startColumn":  32,
-"endLine":  7,
-"endColumn":  53
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'AuthStringLiteral'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UTF8StringLiterals.cs#L8",
-"region":  {
-"startLine":  8,
-"startColumn":  32,
-"endLine":  8,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'AuthStringLiteralAsByteArray'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UTF8StringLiterals.cs#L9",
-"region":  {
-"startLine":  9,
-"startColumn":  20,
-"endLine":  9,
-"endColumn":  48
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027d\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/CheckedAndUncheckedUserDefinedOperators.cs#L13",
+      "Location": "Line 13 Position 21-22"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027pointMessage\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/NewlinesInStringInterpolations.cs#L19",
+      "Location": "Line 19 Position 17-29"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027message\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/NewlinesInStringInterpolations.cs#L7",
+      "Location": "Line 7 Position 20-27"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027x\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/NumericIntPtrAndUIntPtr.cs#L10",
+      "Location": "Line 10 Position 20-21"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027y\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/NumericIntPtrAndUIntPtr.cs#L11",
+      "Location": "Line 11 Position 21-22"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027longMessage\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/RawStringLiterals.cs#L7",
+      "Location": "Line 7 Position 20-31"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027AuthWithTrailingSpace\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UTF8StringLiterals.cs#L7",
+      "Location": "Line 7 Position 32-53"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027AuthStringLiteral\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UTF8StringLiterals.cs#L8",
+      "Location": "Line 8 Position 32-49"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027AuthStringLiteralAsByteArray\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UTF8StringLiterals.cs#L9",
+      "Location": "Line 9 Position 20-48"
+    }
+  ]
 }

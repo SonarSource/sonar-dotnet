@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S103",
-"message":  "Split this 201 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/TestJournal.cs#L75",
-"region":  {
-"startLine":  75,
-"startColumn":  1,
-"endLine":  75,
-"endColumn":  202
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S103",
+      "Message": "Split this 201 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/TestJournal.cs#L75",
+      "Location": "Line 75 Position 1-202"
+    }
+  ]
 }

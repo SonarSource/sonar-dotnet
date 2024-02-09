@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S109",
-"message":  "Assign this magic number '9' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/SpawnBenchmark/SpawnActor.cs#L43",
-"region":  {
-"startLine":  43,
-"startColumn":  42,
-"endLine":  43,
-"endColumn":  43
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00279\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/SpawnBenchmark/SpawnActor.cs#L43",
+      "Location": "Line 43 Position 42-43"
+    }
+  ]
 }

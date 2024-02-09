@@ -1,69 +1,34 @@
 {
-"issues":  [
-{
-"id":  "S2357",
-"message":  "Make 'ItemName' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Cluster/ClusterSharding/ClusterSharding.Node/Customers.cs#L21",
-"region":  {
-"startLine":  21,
-"startColumn":  36,
-"endLine":  21,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'ItemName' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Cluster/ClusterSharding/ClusterSharding.Node/Customers.cs#L31",
-"region":  {
-"startLine":  31,
-"startColumn":  36,
-"endLine":  31,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make '_purchasedItems' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Cluster/ClusterSharding/ClusterSharding.Node/Customers.cs#L43",
-"region":  {
-"startLine":  43,
-"startColumn":  36,
-"endLine":  43,
-"endColumn":  51
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'EntityId' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Cluster/ClusterSharding/ClusterSharding.Node/MessageExtractor.cs#L14",
-"region":  {
-"startLine":  14,
-"startColumn":  32,
-"endLine":  14,
-"endColumn":  40
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'Payload' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Cluster/ClusterSharding/ClusterSharding.Node/MessageExtractor.cs#L15",
-"region":  {
-"startLine":  15,
-"startColumn":  32,
-"endLine":  15,
-"endColumn":  39
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027ItemName\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Cluster/ClusterSharding/ClusterSharding.Node/Customers.cs#L21",
+      "Location": "Line 21 Position 36-44"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027ItemName\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Cluster/ClusterSharding/ClusterSharding.Node/Customers.cs#L31",
+      "Location": "Line 31 Position 36-44"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027_purchasedItems\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Cluster/ClusterSharding/ClusterSharding.Node/Customers.cs#L43",
+      "Location": "Line 43 Position 36-51"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027EntityId\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Cluster/ClusterSharding/ClusterSharding.Node/MessageExtractor.cs#L14",
+      "Location": "Line 14 Position 32-40"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Payload\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Cluster/ClusterSharding/ClusterSharding.Node/MessageExtractor.cs#L15",
+      "Location": "Line 15 Position 32-39"
+    }
+  ]
 }

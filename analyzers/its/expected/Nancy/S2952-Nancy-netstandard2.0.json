@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2952",
-"message":  "Move this 'Dispose' call into this class' own 'Dispose' method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/RequestStream.cs#L487",
-"region":  {
-"startLine":  487,
-"startColumn":  29,
-"endLine":  487,
-"endColumn":  36
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2952",
+      "Message": "Move this \u0027Dispose\u0027 call into this class\u0027 own \u0027Dispose\u0027 method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/RequestStream.cs#L487",
+      "Location": "Line 487 Position 29-36"
+    }
+  ]
 }

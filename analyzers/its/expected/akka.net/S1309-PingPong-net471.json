@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1309",
-"message":  "Do not suppress issues.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PingPong/ClientAsyncActor.cs#L12",
-"region":  {
-"startLine":  12,
-"startColumn":  1,
-"endLine":  12,
-"endColumn":  24
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1309",
+      "Message": "Do not suppress issues.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PingPong/ClientAsyncActor.cs#L12",
+      "Location": "Line 12 Position 1-24"
+    }
+  ]
 }

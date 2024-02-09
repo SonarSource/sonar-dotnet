@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S3376",
-"message":  "Make this class name end with 'Exception'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L213",
-"region":  {
-"startLine":  213,
-"startColumn":  27,
-"endLine":  213,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S3376",
-"message":  "Make this class name end with 'Exception'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L243",
-"region":  {
-"startLine":  243,
-"startColumn":  27,
-"endLine":  243,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S3376",
-"message":  "Make this class name end with 'Exception'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L280",
-"region":  {
-"startLine":  280,
-"startColumn":  27,
-"endLine":  280,
-"endColumn":  46
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3376",
+      "Message": "Make this class name end with \u0027Exception\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L213",
+      "Location": "Line 213 Position 27-46"
+    },
+    {
+      "Id": "S3376",
+      "Message": "Make this class name end with \u0027Exception\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L243",
+      "Location": "Line 243 Position 27-45"
+    },
+    {
+      "Id": "S3376",
+      "Message": "Make this class name end with \u0027Exception\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L280",
+      "Location": "Line 280 Position 27-46"
+    }
+  ]
 }

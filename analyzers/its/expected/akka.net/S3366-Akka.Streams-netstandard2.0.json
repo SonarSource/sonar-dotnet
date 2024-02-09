@@ -1,95 +1,46 @@
 {
-"issues":  [
-{
-"id":  "S3366",
-"message":  "Make sure the use of 'this' doesn't expose partially-constructed instances of this class in multi-threaded environments.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L140",
-"region":  {
-"startLine":  140,
-"startColumn":  64,
-"endLine":  140,
-"endColumn":  68
-}
-}
-},
-{
-"id":  "S3366",
-"message":  "Make sure the use of 'this' doesn't expose partially-constructed instances of this class in multi-threaded environments.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L141",
-"region":  {
-"startLine":  141,
-"startColumn":  84,
-"endLine":  141,
-"endColumn":  88
-}
-}
-},
-{
-"id":  "S3366",
-"message":  "Make sure the use of 'this' doesn't expose partially-constructed instances of this class in multi-threaded environments.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L388",
-"region":  {
-"startLine":  388,
-"startColumn":  67,
-"endLine":  388,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S3366",
-"message":  "Make sure the use of 'this' doesn't expose partially-constructed instances of this class in multi-threaded environments.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L389",
-"region":  {
-"startLine":  389,
-"startColumn":  83,
-"endLine":  389,
-"endColumn":  87
-}
-}
-},
-{
-"id":  "S3366",
-"message":  "Make sure the use of 'this' doesn't expose partially-constructed instances of this class in multi-threaded environments.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanoutProcessorImpl.cs#L87",
-"region":  {
-"startLine":  87,
-"startColumn":  67,
-"endLine":  87,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S3366",
-"message":  "Make sure the use of 'this' doesn't expose partially-constructed instances of this class in multi-threaded environments.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanoutProcessorImpl.cs#L88",
-"region":  {
-"startLine":  88,
-"startColumn":  83,
-"endLine":  88,
-"endColumn":  87
-}
-}
-},
-{
-"id":  "S3366",
-"message":  "Make sure the use of 'this' doesn't expose partially-constructed instances of this class in multi-threaded environments.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/SubscriberManagement.cs#L166",
-"region":  {
-"startLine":  166,
-"startColumn":  121,
-"endLine":  166,
-"endColumn":  125
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3366",
+      "Message": "Make sure the use of \u0027this\u0027 doesn\u0027t expose partially-constructed instances of this class in multi-threaded environments.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L140",
+      "Location": "Line 140 Position 64-68"
+    },
+    {
+      "Id": "S3366",
+      "Message": "Make sure the use of \u0027this\u0027 doesn\u0027t expose partially-constructed instances of this class in multi-threaded environments.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L141",
+      "Location": "Line 141 Position 84-88"
+    },
+    {
+      "Id": "S3366",
+      "Message": "Make sure the use of \u0027this\u0027 doesn\u0027t expose partially-constructed instances of this class in multi-threaded environments.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L388",
+      "Location": "Line 388 Position 67-71"
+    },
+    {
+      "Id": "S3366",
+      "Message": "Make sure the use of \u0027this\u0027 doesn\u0027t expose partially-constructed instances of this class in multi-threaded environments.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L389",
+      "Location": "Line 389 Position 83-87"
+    },
+    {
+      "Id": "S3366",
+      "Message": "Make sure the use of \u0027this\u0027 doesn\u0027t expose partially-constructed instances of this class in multi-threaded environments.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanoutProcessorImpl.cs#L87",
+      "Location": "Line 87 Position 67-71"
+    },
+    {
+      "Id": "S3366",
+      "Message": "Make sure the use of \u0027this\u0027 doesn\u0027t expose partially-constructed instances of this class in multi-threaded environments.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanoutProcessorImpl.cs#L88",
+      "Location": "Line 88 Position 83-87"
+    },
+    {
+      "Id": "S3366",
+      "Message": "Make sure the use of \u0027this\u0027 doesn\u0027t expose partially-constructed instances of this class in multi-threaded environments.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/SubscriberManagement.cs#L166",
+      "Location": "Line 166 Position 121-125"
+    }
+  ]
 }

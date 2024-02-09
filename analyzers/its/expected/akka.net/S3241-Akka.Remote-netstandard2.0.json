@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S3241",
-"message":  "Change return type to 'void'; not a single caller uses the returned value.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L1322",
-"region":  {
-"startLine":  1322,
-"startColumn":  17,
-"endLine":  1322,
-"endColumn":  21
-}
-}
-},
-{
-"id":  "S3241",
-"message":  "Change return type to 'void'; not a single caller uses the returned value.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L513",
-"region":  {
-"startLine":  513,
-"startColumn":  17,
-"endLine":  513,
-"endColumn":  37
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3241",
+      "Message": "Change return type to \u0027void\u0027; not a single caller uses the returned value.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L1322",
+      "Location": "Line 1322 Position 17-21"
+    },
+    {
+      "Id": "S3241",
+      "Message": "Change return type to \u0027void\u0027; not a single caller uses the returned value.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L513",
+      "Location": "Line 513 Position 17-37"
+    }
+  ]
 }

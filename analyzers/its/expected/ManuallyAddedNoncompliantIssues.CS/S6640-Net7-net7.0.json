@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S6640",
-"message":  "Make sure that using "unsafe" is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/Net7/S107.cs#L5",
-"region":  {
-"startLine":  5,
-"startColumn":  19,
-"endLine":  5,
-"endColumn":  25
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6640",
+      "Message": "Make sure that using \u0022unsafe\u0022 is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/Net7/S107.cs#L5",
+      "Location": "Line 5 Position 19-25"
+    }
+  ]
 }

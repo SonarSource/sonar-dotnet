@@ -1,134 +1,64 @@
 {
-"issues":  [
-{
-"id":  "S2325",
-"message":  "Make 'TestCases' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/HashesShouldHaveUnpredictableSaltTest.cs#L15",
-"region":  {
-"startLine":  15,
-"startColumn":  21,
-"endLine":  15,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'Noncompliant' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/InsecureTemporaryFilesCreation.cs#L15",
-"region":  {
-"startLine":  15,
-"startColumn":  21,
-"endLine":  15,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'Compliant' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/InsecureTemporaryFilesCreation.cs#L25",
-"region":  {
-"startLine":  25,
-"startColumn":  21,
-"endLine":  25,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'SimpleTypeResolverIsNotSafe' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/JavaScriptSerializerTest.cs#L16",
-"region":  {
-"startLine":  16,
-"startColumn":  21,
-"endLine":  16,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'UpdatePermissionsUsingAccessControl' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/LooseFilePermissions.cs#L15",
-"region":  {
-"startLine":  15,
-"startColumn":  21,
-"endLine":  15,
-"endColumn":  56
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'Constructors' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/LosFormatterTest.cs#L15",
-"region":  {
-"startLine":  15,
-"startColumn":  21,
-"endLine":  15,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'NonCompliant' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/PubliclyWritableDirectoriesTest.cs#L16",
-"region":  {
-"startLine":  16,
-"startColumn":  21,
-"endLine":  16,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'XmlReader_SafeByDefault' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/XmlReaderTest.cs#L25",
-"region":  {
-"startLine":  25,
-"startColumn":  21,
-"endLine":  25,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'UnsafeByDefault' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/XPathDocumentTest.cs#L16",
-"region":  {
-"startLine":  16,
-"startColumn":  21,
-"endLine":  16,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'XmlReaderAsParameter' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/XPathDocumentTest.cs#L33",
-"region":  {
-"startLine":  33,
-"startColumn":  21,
-"endLine":  33,
-"endColumn":  41
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027TestCases\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/HashesShouldHaveUnpredictableSaltTest.cs#L15",
+      "Location": "Line 15 Position 21-30"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Noncompliant\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/InsecureTemporaryFilesCreation.cs#L15",
+      "Location": "Line 15 Position 21-33"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Compliant\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/InsecureTemporaryFilesCreation.cs#L25",
+      "Location": "Line 25 Position 21-30"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027SimpleTypeResolverIsNotSafe\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/JavaScriptSerializerTest.cs#L16",
+      "Location": "Line 16 Position 21-48"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027UpdatePermissionsUsingAccessControl\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/LooseFilePermissions.cs#L15",
+      "Location": "Line 15 Position 21-56"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Constructors\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/LosFormatterTest.cs#L15",
+      "Location": "Line 15 Position 21-33"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027NonCompliant\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/PubliclyWritableDirectoriesTest.cs#L16",
+      "Location": "Line 16 Position 21-33"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027XmlReader_SafeByDefault\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/XmlReaderTest.cs#L25",
+      "Location": "Line 25 Position 21-44"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027UnsafeByDefault\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/XPathDocumentTest.cs#L16",
+      "Location": "Line 16 Position 21-36"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027XmlReaderAsParameter\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/XPathDocumentTest.cs#L33",
+      "Location": "Line 33 Position 21-41"
+    }
+  ]
 }

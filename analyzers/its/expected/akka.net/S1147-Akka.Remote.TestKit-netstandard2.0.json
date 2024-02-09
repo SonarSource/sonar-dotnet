@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1147",
-"message":  "Remove this call to 'Environment.Exit' or ensure it is really required.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L522",
-"region":  {
-"startLine":  522,
-"startColumn":  41,
-"endLine":  522,
-"endColumn":  45
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1147",
+      "Message": "Remove this call to \u0027Environment.Exit\u0027 or ensure it is really required.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L522",
+      "Location": "Line 522 Position 41-45"
+    }
+  ]
 }

@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S2302",
-"message":  "Replace the string 'source' with 'NameOf(source)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L933",
-"region":  {
-"startLine":  933,
-"startColumn":  67,
-"endLine":  933,
-"endColumn":  103
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'separator' with 'NameOf(separator)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L934",
-"region":  {
-"startLine":  934,
-"startColumn":  77,
-"endLine":  934,
-"endColumn":  125
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027source\u0027 with \u0027NameOf(source)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L933",
+      "Location": "Line 933 Position 67-103"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027separator\u0027 with \u0027NameOf(separator)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L934",
+      "Location": "Line 934 Position 77-125"
+    }
+  ]
 }

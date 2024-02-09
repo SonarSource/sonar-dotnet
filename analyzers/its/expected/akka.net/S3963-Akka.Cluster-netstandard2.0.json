@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3963",
-"message":  "Initialize all 'static fields' inline and remove the 'static constructor'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Cluster.cs#L66",
-"region":  {
-"startLine":  66,
-"startColumn":  16,
-"endLine":  66,
-"endColumn":  23
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3963",
+      "Message": "Initialize all \u0027static fields\u0027 inline and remove the \u0027static constructor\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Cluster.cs#L66",
+      "Location": "Line 66 Position 16-23"
+    }
+  ]
 }

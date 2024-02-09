@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S4487",
-"message":  "Remove this unread private field '_di' or refactor the code to use its value.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L168",
-"region":  {
-"startLine":  168,
-"startColumn":  38,
-"endLine":  168,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S4487",
-"message":  "Remove this unread private field '_di' or refactor the code to use its value.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L180",
-"region":  {
-"startLine":  180,
-"startColumn":  38,
-"endLine":  180,
-"endColumn":  41
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4487",
+      "Message": "Remove this unread private field \u0027_di\u0027 or refactor the code to use its value.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L168",
+      "Location": "Line 168 Position 38-41"
+    },
+    {
+      "Id": "S4487",
+      "Message": "Remove this unread private field \u0027_di\u0027 or refactor the code to use its value.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L180",
+      "Location": "Line 180 Position 38-41"
+    }
+  ]
 }

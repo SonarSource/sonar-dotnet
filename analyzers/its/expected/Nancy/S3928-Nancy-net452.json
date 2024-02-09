@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S3928",
-"message":  "Use a constructor overloads that allows a more meaningful exception message to be provided.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DefaultNancyBootstrapper.cs#L122",
-"region":  {
-"startLine":  122,
-"startColumn":  31,
-"endLine":  122,
-"endColumn":  64
-}
-}
-},
-{
-"id":  "S3928",
-"message":  "Use a constructor overloads that allows a more meaningful exception message to be provided.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DefaultNancyBootstrapper.cs#L148",
-"region":  {
-"startLine":  148,
-"startColumn":  31,
-"endLine":  148,
-"endColumn":  64
-}
-}
-},
-{
-"id":  "S3928",
-"message":  "The parameter name 'types' is not declared in the argument list.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1597",
-"region":  {
-"startLine":  1597,
-"startColumn":  23,
-"endLine":  1597,
-"endColumn":  75
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3928",
+      "Message": "Use a constructor overloads that allows a more meaningful exception message to be provided.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DefaultNancyBootstrapper.cs#L122",
+      "Location": "Line 122 Position 31-64"
+    },
+    {
+      "Id": "S3928",
+      "Message": "Use a constructor overloads that allows a more meaningful exception message to be provided.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DefaultNancyBootstrapper.cs#L148",
+      "Location": "Line 148 Position 31-64"
+    },
+    {
+      "Id": "S3928",
+      "Message": "The parameter name \u0027types\u0027 is not declared in the argument list.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1597",
+      "Location": "Line 1597 Position 23-75"
+    }
+  ]
 }

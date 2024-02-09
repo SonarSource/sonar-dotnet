@@ -1,56 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S2339",
-"message":  "Change this constant to a 'static' read-only property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L28",
-"region":  {
-"startLine":  28,
-"startColumn":  29,
-"endLine":  28,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S2339",
-"message":  "Change this constant to a 'static' read-only property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L33",
-"region":  {
-"startLine":  33,
-"startColumn":  29,
-"endLine":  33,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S2339",
-"message":  "Change this constant to a 'static' read-only property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Owin/NancyMiddleware.cs#L32",
-"region":  {
-"startLine":  32,
-"startColumn":  29,
-"endLine":  32,
-"endColumn":  50
-}
-}
-},
-{
-"id":  "S2339",
-"message":  "Change this constant to a 'static' read-only property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/CsrfToken.cs#L17",
-"region":  {
-"startLine":  17,
-"startColumn":  29,
-"endLine":  17,
-"endColumn":  45
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2339",
+      "Message": "Change this constant to a \u0027static\u0027 read-only property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L28",
+      "Location": "Line 28 Position 29-38"
+    },
+    {
+      "Id": "S2339",
+      "Message": "Change this constant to a \u0027static\u0027 read-only property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L33",
+      "Location": "Line 33 Position 29-44"
+    },
+    {
+      "Id": "S2339",
+      "Message": "Change this constant to a \u0027static\u0027 read-only property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Owin/NancyMiddleware.cs#L32",
+      "Location": "Line 32 Position 29-50"
+    },
+    {
+      "Id": "S2339",
+      "Message": "Change this constant to a \u0027static\u0027 read-only property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/CsrfToken.cs#L17",
+      "Location": "Line 17 Position 29-45"
+    }
+  ]
 }

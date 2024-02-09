@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.WaitAll' with 'await Task.WhenAll'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L299",
-"region":  {
-"startLine":  299,
-"startColumn":  16,
-"endLine":  299,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.WaitAll' with 'await Task.WhenAll'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L337",
-"region":  {
-"startLine":  337,
-"startColumn":  17,
-"endLine":  337,
-"endColumn":  29
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.WaitAll\u0027 with \u0027await Task.WhenAll\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L299",
+      "Location": "Line 299 Position 16-28"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.WaitAll\u0027 with \u0027await Task.WhenAll\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L337",
+      "Location": "Line 337 Position 17-29"
+    }
+  ]
 }

@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S4017",
-"message":  "Refactor this method to remove the nested type argument.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Hosting.Aspnet/NancyHandler.cs#L93",
-"region":  {
-"startLine":  93,
-"startColumn":  54,
-"endLine":  93,
-"endColumn":  110
-}
-}
-},
-{
-"id":  "S4017",
-"message":  "Refactor this method to remove the nested type argument.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Hosting.Aspnet/NancyHandler.cs#L122",
-"region":  {
-"startLine":  122,
-"startColumn":  48,
-"endLine":  122,
-"endColumn":  104
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4017",
+      "Message": "Refactor this method to remove the nested type argument.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Hosting.Aspnet/NancyHandler.cs#L122",
+      "Location": "Line 122 Position 48-104"
+    },
+    {
+      "Id": "S4017",
+      "Message": "Refactor this method to remove the nested type argument.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Hosting.Aspnet/NancyHandler.cs#L93",
+      "Location": "Line 93 Position 54-110"
+    }
+  ]
 }

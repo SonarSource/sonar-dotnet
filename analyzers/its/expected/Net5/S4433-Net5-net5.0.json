@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S4433",
-"message":  "Set the 'AuthenticationType' property of this DirectoryEntry to 'AuthenticationTypes.Secure'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4433.cs#L7",
-"region":  {
-"startLine":  7,
-"startColumn":  40,
-"endLine":  7,
-"endColumn":  94
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4433",
+      "Message": "Set the \u0027AuthenticationType\u0027 property of this DirectoryEntry to \u0027AuthenticationTypes.Secure\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4433.cs#L7",
+      "Location": "Line 7 Position 40-94"
+    }
+  ]
 }

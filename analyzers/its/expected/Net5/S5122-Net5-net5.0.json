@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S5122",
-"message":  "Make sure this permissive CORS policy is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S5122.cs#L7",
-"region":  {
-"startLine":  7,
-"startColumn":  37,
-"endLine":  7,
-"endColumn":  46
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S5122",
+      "Message": "Make sure this permissive CORS policy is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S5122.cs#L7",
+      "Location": "Line 7 Position 37-46"
+    }
+  ]
 }

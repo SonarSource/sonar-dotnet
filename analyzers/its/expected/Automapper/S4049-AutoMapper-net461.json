@@ -1,95 +1,46 @@
 {
-"issues":  [
-{
-"id":  "S4049",
-"message":  "Consider making method 'GetDestinationExpression' a property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L15",
-"region":  {
-"startLine":  15,
-"startColumn":  26,
-"endLine":  15,
-"endColumn":  50
-}
-}
-},
-{
-"id":  "S4049",
-"message":  "Consider making method 'GetAllTypeMaps' a property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Internal/InternalApi.cs#L65",
-"region":  {
-"startLine":  65,
-"startColumn":  38,
-"endLine":  65,
-"endColumn":  52
-}
-}
-},
-{
-"id":  "S4049",
-"message":  "Consider making method 'GetMappers' a property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Internal/InternalApi.cs#L118",
-"region":  {
-"startLine":  118,
-"startColumn":  36,
-"endLine":  118,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S4049",
-"message":  "Consider making method 'GetTypeDefinitionIfGeneric' a property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Internal/TypePair.cs#L56",
-"region":  {
-"startLine":  56,
-"startColumn":  25,
-"endLine":  56,
-"endColumn":  51
-}
-}
-},
-{
-"id":  "S4049",
-"message":  "Consider making method 'GetCurrentPath' a property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L335",
-"region":  {
-"startLine":  335,
-"startColumn":  35,
-"endLine":  335,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S4049",
-"message":  "Consider making method 'GetAllIncludedMembers' a property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/TypeMap.cs#L147",
-"region":  {
-"startLine":  147,
-"startColumn":  46,
-"endLine":  147,
-"endColumn":  67
-}
-}
-},
-{
-"id":  "S4049",
-"message":  "Consider making method 'GetAsPair' a property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/TypeMap.cs#L218",
-"region":  {
-"startLine":  218,
-"startColumn":  25,
-"endLine":  218,
-"endColumn":  34
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetDestinationExpression\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L15",
+      "Location": "Line 15 Position 26-50"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetMappers\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Internal/InternalApi.cs#L118",
+      "Location": "Line 118 Position 36-46"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetAllTypeMaps\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Internal/InternalApi.cs#L65",
+      "Location": "Line 65 Position 38-52"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetTypeDefinitionIfGeneric\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Internal/TypePair.cs#L56",
+      "Location": "Line 56 Position 25-51"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetCurrentPath\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L335",
+      "Location": "Line 335 Position 35-49"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetAllIncludedMembers\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/TypeMap.cs#L147",
+      "Location": "Line 147 Position 46-67"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetAsPair\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/TypeMap.cs#L218",
+      "Location": "Line 218 Position 25-34"
+    }
+  ]
 }

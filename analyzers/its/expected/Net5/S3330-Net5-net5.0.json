@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3330",
-"message":  "Make sure creating this cookie without the "HttpOnly" flag is safe.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3330.cs#L7",
-"region":  {
-"startLine":  7,
-"startColumn":  30,
-"endLine":  7,
-"endColumn":  51
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3330",
+      "Message": "Make sure creating this cookie without the \u0022HttpOnly\u0022 flag is safe.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3330.cs#L7",
+      "Location": "Line 7 Position 30-51"
+    }
+  ]
 }

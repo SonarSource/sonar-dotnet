@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S6580",
-"message":  "Use a format provider when parsing date and time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/OpenCircuitException.cs#L94",
-"region":  {
-"startLine":  94,
-"startColumn":  33,
-"endLine":  94,
-"endColumn":  57
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6580",
+      "Message": "Use a format provider when parsing date and time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/OpenCircuitException.cs#L94",
+      "Location": "Line 94 Position 33-57"
+    }
+  ]
 }

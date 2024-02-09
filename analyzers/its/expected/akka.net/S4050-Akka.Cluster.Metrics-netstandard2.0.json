@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S4050",
-"message":  "Provide an implementation for: 'operator==' and 'operator!='.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/EWMA.cs#L34",
-"region":  {
-"startLine":  34,
-"startColumn":  41,
-"endLine":  34,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S4050",
-"message":  "Provide an implementation for: 'operator==', 'operator!=' and 'Object.Equals'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/Metric.cs#L26",
-"region":  {
-"startLine":  26,
-"startColumn":  41,
-"endLine":  26,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S4050",
-"message":  "Provide an implementation for: 'operator==' and 'operator!='.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/MetricsGossip.cs#L24",
-"region":  {
-"startLine":  24,
-"startColumn":  33,
-"endLine":  24,
-"endColumn":  46
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4050",
+      "Message": "Provide an implementation for: \u0027operator==\u0027 and \u0027operator!=\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/EWMA.cs#L34",
+      "Location": "Line 34 Position 41-45"
+    },
+    {
+      "Id": "S4050",
+      "Message": "Provide an implementation for: \u0027operator==\u0027, \u0027operator!=\u0027 and \u0027Object.Equals\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/Metric.cs#L26",
+      "Location": "Line 26 Position 41-47"
+    },
+    {
+      "Id": "S4050",
+      "Message": "Provide an implementation for: \u0027operator==\u0027 and \u0027operator!=\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/MetricsGossip.cs#L24",
+      "Location": "Line 24 Position 33-46"
+    }
+  ]
 }

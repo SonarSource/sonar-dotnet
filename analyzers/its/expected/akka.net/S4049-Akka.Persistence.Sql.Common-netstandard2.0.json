@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S4049",
-"message":  "Consider making method 'GetConnectionString' a property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/SqlJournal.cs#L505",
-"region":  {
-"startLine":  505,
-"startColumn":  34,
-"endLine":  505,
-"endColumn":  53
-}
-}
-},
-{
-"id":  "S4049",
-"message":  "Consider making method 'GetConnectionString' a property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/SqlSnapshotStore.cs#L148",
-"region":  {
-"startLine":  148,
-"startColumn":  34,
-"endLine":  148,
-"endColumn":  53
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetConnectionString\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/SqlJournal.cs#L505",
+      "Location": "Line 505 Position 34-53"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetConnectionString\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/SqlSnapshotStore.cs#L148",
+      "Location": "Line 148 Position 34-53"
+    }
+  ]
 }

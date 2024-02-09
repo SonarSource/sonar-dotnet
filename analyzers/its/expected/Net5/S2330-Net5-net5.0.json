@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S2330",
-"message":  "Refactor the code to not rely on potentially unsafe array conversions.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2330.cs#L12",
-"region":  {
-"startLine":  12,
-"startColumn":  19,
-"endLine":  12,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S2330",
-"message":  "Refactor the code to not rely on potentially unsafe array conversions.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2330.cs#L13",
-"region":  {
-"startLine":  13,
-"startColumn":  19,
-"endLine":  13,
-"endColumn":  32
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2330",
+      "Message": "Refactor the code to not rely on potentially unsafe array conversions.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2330.cs#L12",
+      "Location": "Line 12 Position 19-31"
+    },
+    {
+      "Id": "S2330",
+      "Message": "Refactor the code to not rely on potentially unsafe array conversions.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2330.cs#L13",
+      "Location": "Line 13 Position 19-32"
+    }
+  ]
 }

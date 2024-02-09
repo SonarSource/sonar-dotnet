@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1117",
-"message":  "Rename 'sonar' which hides the field with the same name.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/Deconstruction.cs#L12",
-"region":  {
-"startLine":  12,
-"startColumn":  18,
-"endLine":  12,
-"endColumn":  23
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1117",
+      "Message": "Rename \u0027sonar\u0027 which hides the field with the same name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/Deconstruction.cs#L12",
+      "Location": "Line 12 Position 18-23"
+    }
+  ]
 }

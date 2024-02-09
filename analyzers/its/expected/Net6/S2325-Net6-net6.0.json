@@ -1,56 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S2325",
-"message":  "Make 'Example' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/AssignmentAndDeclarationInSameDeconstruction.cs#L5",
-"region":  {
-"startLine":  5,
-"startColumn":  21,
-"endLine":  5,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'DoSomething' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/FileScopedNamespaceDeclaration.cs#L5",
-"region":  {
-"startLine":  5,
-"startColumn":  17,
-"endLine":  5,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'Example' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/GlobalUsingDirectives.cs#L7",
-"region":  {
-"startLine":  7,
-"startColumn":  17,
-"endLine":  7,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'Example' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/LambdasWithExplicitReturnType.cs#L5",
-"region":  {
-"startLine":  5,
-"startColumn":  21,
-"endLine":  5,
-"endColumn":  28
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Example\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/AssignmentAndDeclarationInSameDeconstruction.cs#L5",
+      "Location": "Line 5 Position 21-28"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027DoSomething\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/FileScopedNamespaceDeclaration.cs#L5",
+      "Location": "Line 5 Position 17-28"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Example\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/GlobalUsingDirectives.cs#L7",
+      "Location": "Line 7 Position 17-24"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Example\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/LambdasWithExplicitReturnType.cs#L5",
+      "Location": "Line 5 Position 21-28"
+    }
+  ]
 }

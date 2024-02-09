@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S4158",
-"message":  "Remove this call, the collection is known to be empty here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L615",
-"region":  {
-"startLine":  615,
-"startColumn":  13,
-"endLine":  615,
-"endColumn":  29
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4158",
+      "Message": "Remove this call, the collection is known to be empty here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L615",
+      "Location": "Line 615 Position 13-29"
+    }
+  ]
 }

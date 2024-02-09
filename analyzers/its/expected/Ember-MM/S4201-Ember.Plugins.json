@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S4201",
-"message":  "Remove this unnecessary null check; 'is' returns false for nulls.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L77",
-"region":  {
-"startLine":  77,
-"startColumn":  25,
-"endLine":  77,
-"endColumn":  45
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4201",
+      "Message": "Remove this unnecessary null check; \u0027is\u0027 returns false for nulls.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L77",
+      "Location": "Line 77 Position 25-45"
+    }
+  ]
 }

@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S6613",
-"message":  "'First' property of 'LinkedList' should be used instead of the 'First()' extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L84",
-"region":  {
-"startLine":  84,
-"startColumn":  35,
-"endLine":  84,
-"endColumn":  40
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6613",
+      "Message": "\u0027First\u0027 property of \u0027LinkedList\u0027 should be used instead of the \u0027First()\u0027 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L84",
+      "Location": "Line 84 Position 35-40"
+    }
+  ]
 }

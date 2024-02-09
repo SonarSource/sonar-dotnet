@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S106",
-"message":  "Remove this logging statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L687",
-"region":  {
-"startLine":  687,
-"startColumn":  21,
-"endLine":  687,
-"endColumn":  38
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S106",
+      "Message": "Remove this logging statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L687",
+      "Location": "Line 687 Position 21-38"
+    }
+  ]
 }

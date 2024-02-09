@@ -1,56 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S101",
-"message":  "Rename class 'ServerFSM' to match pascal case naming rules, consider using 'ServerFsm'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Conductor.cs#L334",
-"region":  {
-"startLine":  334,
-"startColumn":  20,
-"endLine":  334,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename class 'CreateServerFSM' to match pascal case naming rules, consider using 'CreateServerFsm'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L203",
-"region":  {
-"startLine":  203,
-"startColumn":  29,
-"endLine":  203,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename class 'WaitForClientFSMToConnect' to match pascal case naming rules, consider using 'WaitForClientFsmToConnect'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L68",
-"region":  {
-"startLine":  68,
-"startColumn":  23,
-"endLine":  68,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename class 'ClientFSM' to match pascal case naming rules, consider using 'ClientFsm'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L176",
-"region":  {
-"startLine":  176,
-"startColumn":  11,
-"endLine":  176,
-"endColumn":  20
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S101",
+      "Message": "Rename class \u0027ServerFSM\u0027 to match pascal case naming rules, consider using \u0027ServerFsm\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Conductor.cs#L334",
+      "Location": "Line 334 Position 20-29"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename class \u0027CreateServerFSM\u0027 to match pascal case naming rules, consider using \u0027CreateServerFsm\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L203",
+      "Location": "Line 203 Position 29-44"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename class \u0027ClientFSM\u0027 to match pascal case naming rules, consider using \u0027ClientFsm\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L176",
+      "Location": "Line 176 Position 11-20"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename class \u0027WaitForClientFSMToConnect\u0027 to match pascal case naming rules, consider using \u0027WaitForClientFsmToConnect\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L68",
+      "Location": "Line 68 Position 23-48"
+    }
+  ]
 }

@@ -1,28 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S4136",
-"message":  "All 'MakeKey' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/Internal/Topics.cs#L317",
-"region":  {
-"startLine":  317,
-"startColumn":  30,
-"endLine":  317,
-"endColumn":  37
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/Internal/Topics.cs#L337",
-"region":  {
-"startLine":  337,
-"startColumn":  30,
-"endLine":  337,
-"endColumn":  37
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S4136",
+      "Message": "All \u0027MakeKey\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/Internal/Topics.cs#L317",
+      "Location": "Line 317 Position 30-37"
+    }
+  ]
 }

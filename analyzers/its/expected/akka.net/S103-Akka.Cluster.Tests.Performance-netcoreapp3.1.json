@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S103",
-"message":  "Split this 217 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests.Performance/Serialization/ClusterMessageSerializerSpec.cs#L63",
-"region":  {
-"startLine":  63,
-"startColumn":  1,
-"endLine":  63,
-"endColumn":  218
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 215 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests.Performance/Serialization/ClusterMessageSerializerSpec.cs#L77",
-"region":  {
-"startLine":  77,
-"startColumn":  1,
-"endLine":  77,
-"endColumn":  216
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S103",
+      "Message": "Split this 217 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests.Performance/Serialization/ClusterMessageSerializerSpec.cs#L63",
+      "Location": "Line 63 Position 1-218"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 215 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests.Performance/Serialization/ClusterMessageSerializerSpec.cs#L77",
+      "Location": "Line 77 Position 1-216"
+    }
+  ]
 }

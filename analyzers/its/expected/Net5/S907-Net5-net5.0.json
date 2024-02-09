@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S907",
-"message":  "Remove this use of 'goto'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3626.cs#L9",
-"region":  {
-"startLine":  9,
-"startColumn":  17,
-"endLine":  9,
-"endColumn":  21
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S907",
+      "Message": "Remove this use of \u0027goto\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3626.cs#L9",
+      "Location": "Line 9 Position 17-21"
+    }
+  ]
 }

@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S3052",
-"message":  "Remove this initialization to '_failed', the compiler will do that for you.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L486",
-"region":  {
-"startLine":  486,
-"startColumn":  30,
-"endLine":  486,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S3052",
-"message":  "Remove this initialization to '_testTransport', the compiler will do that for you.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L43",
-"region":  {
-"startLine":  43,
-"startColumn":  29,
-"endLine":  43,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S3052",
-"message":  "Remove this initialization to '_loggedDisconnect', the compiler will do that for you.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L576",
-"region":  {
-"startLine":  576,
-"startColumn":  40,
-"endLine":  576,
-"endColumn":  47
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_failed\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L486",
+      "Location": "Line 486 Position 30-37"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_testTransport\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L43",
+      "Location": "Line 43 Position 29-36"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_loggedDisconnect\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L576",
+      "Location": "Line 576 Position 40-47"
+    }
+  ]
 }

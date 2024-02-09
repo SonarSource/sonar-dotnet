@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2996",
-"message":  "Remove this initialization of '_threadRunning' or make it lazy.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Dispatchers.cs#L104",
-"region":  {
-"startLine":  104,
-"startColumn":  44,
-"endLine":  104,
-"endColumn":  51
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2996",
+      "Message": "Remove this initialization of \u0027_threadRunning\u0027 or make it lazy.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Dispatchers.cs#L104",
+      "Location": "Line 104 Position 44-51"
+    }
+  ]
 }

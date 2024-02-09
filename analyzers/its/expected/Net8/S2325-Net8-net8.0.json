@@ -1,56 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S2325",
-"message":  "Make 'Copy' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net8/Net8/features/AliasAnyType.cs#L11",
-"region":  {
-"startLine":  11,
-"startColumn":  15,
-"endLine":  11,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'Examples' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net8/Net8/features/CollectionExpressions.cs#L5",
-"region":  {
-"startLine":  5,
-"startColumn":  14,
-"endLine":  5,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'Example' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net8/Net8/features/DefaultLambdaParameters.cs#L5",
-"region":  {
-"startLine":  5,
-"startColumn":  14,
-"endLine":  5,
-"endColumn":  21
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'Example' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net8/Net8/features/InlineArrays.cs#L11",
-"region":  {
-"startLine":  11,
-"startColumn":  14,
-"endLine":  11,
-"endColumn":  21
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Copy\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net8/Net8/features/AliasAnyType.cs#L11",
+      "Location": "Line 11 Position 15-19"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Examples\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net8/Net8/features/CollectionExpressions.cs#L5",
+      "Location": "Line 5 Position 14-22"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Example\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net8/Net8/features/DefaultLambdaParameters.cs#L5",
+      "Location": "Line 5 Position 14-21"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Example\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net8/Net8/features/InlineArrays.cs#L11",
+      "Location": "Line 11 Position 14-21"
+    }
+  ]
 }

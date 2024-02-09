@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S6603",
-"message":  "The collection-specific "TrueForAll" method should be used instead of the "All" extension",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/ClaimsPrincipalExtensions.cs#L31",
-"region":  {
-"startLine":  31,
-"startColumn":  51,
-"endLine":  31,
-"endColumn":  54
-}
-}
-},
-{
-"id":  "S6603",
-"message":  "The collection-specific "TrueForAll" method should be used instead of the "All" extension",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/ClaimsPrincipalExtensions.cs#L68",
-"region":  {
-"startLine":  68,
-"startColumn":  75,
-"endLine":  68,
-"endColumn":  78
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6603",
+      "Message": "The collection-specific \u0022TrueForAll\u0022 method should be used instead of the \u0022All\u0022 extension",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/ClaimsPrincipalExtensions.cs#L31",
+      "Location": "Line 31 Position 51-54"
+    },
+    {
+      "Id": "S6603",
+      "Message": "The collection-specific \u0022TrueForAll\u0022 method should be used instead of the \u0022All\u0022 extension",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/ClaimsPrincipalExtensions.cs#L68",
+      "Location": "Line 68 Position 75-78"
+    }
+  ]
 }

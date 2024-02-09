@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.Tests/EndToEndEventAdapterSpec.cs#L392",
-"region":  {
-"startLine":  392,
-"startColumn":  21,
-"endLine":  392,
-"endColumn":  140
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.Tests/EndToEndEventAdapterSpec.cs#L392",
+      "Location": "Line 392 Position 21-140"
+    }
+  ]
 }

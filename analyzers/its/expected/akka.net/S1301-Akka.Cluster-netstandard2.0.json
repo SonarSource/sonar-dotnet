@@ -1,212 +1,100 @@
 {
-"issues":  [
-{
-"id":  "S1301",
-"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Cluster.cs#L71",
-"region":  {
-"startLine":  71,
-"startColumn":  17,
-"endLine":  71,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S1301",
-"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2768",
-"region":  {
-"startLine":  2768,
-"startColumn":  13,
-"endLine":  2768,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S1301",
-"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L43",
-"region":  {
-"startLine":  43,
-"startColumn":  13,
-"endLine":  43,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S1301",
-"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L514",
-"region":  {
-"startLine":  514,
-"startColumn":  13,
-"endLine":  514,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S1301",
-"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L518",
-"region":  {
-"startLine":  518,
-"startColumn":  21,
-"endLine":  518,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S1301",
-"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L608",
-"region":  {
-"startLine":  608,
-"startColumn":  13,
-"endLine":  608,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S1301",
-"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L612",
-"region":  {
-"startLine":  612,
-"startColumn":  21,
-"endLine":  612,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S1301",
-"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L321",
-"region":  {
-"startLine":  321,
-"startColumn":  17,
-"endLine":  321,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S1301",
-"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L325",
-"region":  {
-"startLine":  325,
-"startColumn":  25,
-"endLine":  325,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S1301",
-"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L364",
-"region":  {
-"startLine":  364,
-"startColumn":  13,
-"endLine":  364,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S1301",
-"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L401",
-"region":  {
-"startLine":  401,
-"startColumn":  29,
-"endLine":  401,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S1301",
-"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L449",
-"region":  {
-"startLine":  449,
-"startColumn":  13,
-"endLine":  449,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S1301",
-"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L581",
-"region":  {
-"startLine":  581,
-"startColumn":  13,
-"endLine":  581,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S1301",
-"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L637",
-"region":  {
-"startLine":  637,
-"startColumn":  21,
-"endLine":  637,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S1301",
-"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L290",
-"region":  {
-"startLine":  290,
-"startColumn":  21,
-"endLine":  290,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S1301",
-"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L303",
-"region":  {
-"startLine":  303,
-"startColumn":  21,
-"endLine":  303,
-"endColumn":  27
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027switch\u0027 statement with \u0027if\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Cluster.cs#L71",
+      "Location": "Line 71 Position 17-23"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027switch\u0027 statement with \u0027if\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2768",
+      "Location": "Line 2768 Position 13-19"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027switch\u0027 statement with \u0027if\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L43",
+      "Location": "Line 43 Position 13-19"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027switch\u0027 statement with \u0027if\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L514",
+      "Location": "Line 514 Position 13-19"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027switch\u0027 statement with \u0027if\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L518",
+      "Location": "Line 518 Position 21-27"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027switch\u0027 statement with \u0027if\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L608",
+      "Location": "Line 608 Position 13-19"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027switch\u0027 statement with \u0027if\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L612",
+      "Location": "Line 612 Position 21-27"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027switch\u0027 statement with \u0027if\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L321",
+      "Location": "Line 321 Position 17-23"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027switch\u0027 statement with \u0027if\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L325",
+      "Location": "Line 325 Position 25-31"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027switch\u0027 statement with \u0027if\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L364",
+      "Location": "Line 364 Position 13-19"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027switch\u0027 statement with \u0027if\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L401",
+      "Location": "Line 401 Position 29-35"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027switch\u0027 statement with \u0027if\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L449",
+      "Location": "Line 449 Position 13-19"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027switch\u0027 statement with \u0027if\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L581",
+      "Location": "Line 581 Position 13-19"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027switch\u0027 statement with \u0027if\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L637",
+      "Location": "Line 637 Position 21-27"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027switch\u0027 statement with \u0027if\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L290",
+      "Location": "Line 290 Position 21-27"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027switch\u0027 statement with \u0027if\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L303",
+      "Location": "Line 303 Position 21-27"
+    }
+  ]
 }

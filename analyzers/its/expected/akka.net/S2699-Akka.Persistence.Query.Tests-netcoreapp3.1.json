@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.Query.Tests/PersistenceQuerySpec.cs#L25",
-"region":  {
-"startLine":  25,
-"startColumn":  21,
-"endLine":  25,
-"endColumn":  67
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.Query.Tests/PersistenceQuerySpec.cs#L25",
+      "Location": "Line 25 Position 21-67"
+    }
+  ]
 }

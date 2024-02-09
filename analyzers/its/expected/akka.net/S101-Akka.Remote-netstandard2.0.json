@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S101",
-"message":  "Rename class 'RARP' to match pascal case naming rules, consider using 'Rarp'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Remoting.cs#L45",
-"region":  {
-"startLine":  45,
-"startColumn":  27,
-"endLine":  45,
-"endColumn":  31
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S101",
+      "Message": "Rename class \u0027RARP\u0027 to match pascal case naming rules, consider using \u0027Rarp\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Remoting.cs#L45",
+      "Location": "Line 45 Position 27-31"
+    }
+  ]
 }

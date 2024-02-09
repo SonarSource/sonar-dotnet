@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S1858",
-"message":  "There's no need to call 'ToString()', the compiler will do it for you.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/TargetTypedNew.cs#L18",
-"region":  {
-"startLine":  18,
-"startColumn":  33,
-"endLine":  18,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S1858",
-"message":  "There's no need to call 'ToString()', the compiler will do it for you.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/TargetTypedNew.cs#L18",
-"region":  {
-"startLine":  18,
-"startColumn":  50,
-"endLine":  18,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S1858",
-"message":  "There's no need to call 'ToString()', the compiler will do it for you.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/TargetTypedNew.cs#L18",
-"region":  {
-"startLine":  18,
-"startColumn":  67,
-"endLine":  18,
-"endColumn":  78
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1858",
+      "Message": "There\u0027s no need to call \u0027ToString()\u0027, the compiler will do it for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/TargetTypedNew.cs#L18",
+      "Location": "Line 18 Position 33-44"
+    },
+    {
+      "Id": "S1858",
+      "Message": "There\u0027s no need to call \u0027ToString()\u0027, the compiler will do it for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/TargetTypedNew.cs#L18",
+      "Location": "Line 18 Position 50-61"
+    },
+    {
+      "Id": "S1858",
+      "Message": "There\u0027s no need to call \u0027ToString()\u0027, the compiler will do it for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/TargetTypedNew.cs#L18",
+      "Location": "Line 18 Position 67-78"
+    }
+  ]
 }

@@ -1,28 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DependencyInjection/ServiceProvider.cs#L92",
-"region":  {
-"startLine":  92,
-"startColumn":  27,
-"endLine":  92,
-"endColumn":  55
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DependencyInjection/ServiceProvider.cs#L97",
-"region":  {
-"startLine":  97,
-"startColumn":  9,
-"endLine":  97,
-"endColumn":  15
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DependencyInjection/ServiceProvider.cs#L92",
+      "Location": "Line 92 Position 27-55"
+    }
+  ]
 }

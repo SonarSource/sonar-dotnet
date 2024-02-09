@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3358",
-"message":  "Extract this nested If operator into independent If...Then...Else statements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L1229",
-"region":  {
-"startLine":  1229,
-"startColumn":  157,
-"endLine":  1229,
-"endColumn":  272
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3358",
+      "Message": "Extract this nested If operator into independent If...Then...Else statements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L1229",
+      "Location": "Line 1229 Position 157-272"
+    }
+  ]
 }

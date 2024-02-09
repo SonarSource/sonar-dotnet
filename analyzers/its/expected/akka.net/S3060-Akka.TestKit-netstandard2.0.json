@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S3060",
-"message":  "Offload the code that's conditional on this type test to the appropriate subclass and remove the condition.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L177",
-"region":  {
-"startLine":  177,
-"startColumn":  19,
-"endLine":  177,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S3060",
-"message":  "Offload the code that's conditional on this type test to the appropriate subclass and remove the condition.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L181",
-"region":  {
-"startLine":  181,
-"startColumn":  24,
-"endLine":  181,
-"endColumn":  41
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3060",
+      "Message": "Offload the code that\u0027s conditional on this type test to the appropriate subclass and remove the condition.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L177",
+      "Location": "Line 177 Position 19-44"
+    },
+    {
+      "Id": "S3060",
+      "Message": "Offload the code that\u0027s conditional on this type test to the appropriate subclass and remove the condition.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L181",
+      "Location": "Line 181 Position 24-41"
+    }
+  ]
 }

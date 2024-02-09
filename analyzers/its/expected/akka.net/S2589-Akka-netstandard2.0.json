@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S2589",
-"message":  "Change this condition so that it does not always evaluate to 'True'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/RetrySupport.cs#L121",
-"region":  {
-"startLine":  121,
-"startColumn":  34,
-"endLine":  121,
-"endColumn":  56
-}
-}
-},
-{
-"id":  "S2589",
-"message":  "Remove this unnecessary check for null.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/AtomicState.cs#L145",
-"region":  {
-"startLine":  145,
-"startColumn":  27,
-"endLine":  145,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S2589",
-"message":  "Change this condition so that it does not always evaluate to 'True'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/CachedMatchCompiler.cs#L58",
-"region":  {
-"startLine":  58,
-"startColumn":  16,
-"endLine":  58,
-"endColumn":  41
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2589",
+      "Message": "Change this condition so that it does not always evaluate to \u0027True\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/RetrySupport.cs#L121",
+      "Location": "Line 121 Position 34-56"
+    },
+    {
+      "Id": "S2589",
+      "Message": "Change this expression which always evaluates to the same result.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/AtomicState.cs#L145",
+      "Location": "Line 145 Position 27-44"
+    },
+    {
+      "Id": "S2589",
+      "Message": "Change this condition so that it does not always evaluate to \u0027True\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/CachedMatchCompiler.cs#L58",
+      "Location": "Line 58 Position 16-41"
+    }
+  ]
 }

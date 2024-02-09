@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S3400",
-"message":  "Remove this method and declare a constant for this value.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/FileScopeAccess.cs#L10",
-"region":  {
-"startLine":  10,
-"startColumn":  20,
-"endLine":  10,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S3400",
-"message":  "Remove this method and declare a constant for this value.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/GenericAttributes.cs#L8",
-"region":  {
-"startLine":  8,
-"startColumn":  23,
-"endLine":  8,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S3400",
-"message":  "Remove this method and declare a constant for this value.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/GenericAttributes.cs#L13",
-"region":  {
-"startLine":  13,
-"startColumn":  27,
-"endLine":  13,
-"endColumn":  33
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3400",
+      "Message": "Remove this method and declare a constant for this value.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/FileScopeAccess.cs#L10",
+      "Location": "Line 10 Position 20-24"
+    },
+    {
+      "Id": "S3400",
+      "Message": "Remove this method and declare a constant for this value.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/GenericAttributes.cs#L13",
+      "Location": "Line 13 Position 27-33"
+    },
+    {
+      "Id": "S3400",
+      "Message": "Remove this method and declare a constant for this value.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/GenericAttributes.cs#L8",
+      "Location": "Line 8 Position 23-29"
+    }
+  ]
 }

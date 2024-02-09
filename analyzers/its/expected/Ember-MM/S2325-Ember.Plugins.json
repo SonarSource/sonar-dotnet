@@ -1,69 +1,34 @@
 {
-"issues":  [
-{
-"id":  "S2325",
-"message":  "Make 'PreMovieInfoScraperAction' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Dummy/DummyPlugin.cs#L51",
-"region":  {
-"startLine":  51,
-"startColumn":  47,
-"endLine":  51,
-"endColumn":  72
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'PostMovieInfoScraperAction' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Dummy/DummyPlugin.cs#L59",
-"region":  {
-"startLine":  59,
-"startColumn":  36,
-"endLine":  59,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'PreMovieImageScraperAction' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Dummy/DummyPlugin.cs#L67",
-"region":  {
-"startLine":  67,
-"startColumn":  48,
-"endLine":  67,
-"endColumn":  74
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'PostMovieImageScraperAction' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Dummy/DummyPlugin.cs#L75",
-"region":  {
-"startLine":  75,
-"startColumn":  36,
-"endLine":  75,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'Settings' a static property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L49",
-"region":  {
-"startLine":  49,
-"startColumn":  36,
-"endLine":  49,
-"endColumn":  44
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027PreMovieInfoScraperAction\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Dummy/DummyPlugin.cs#L51",
+      "Location": "Line 51 Position 47-72"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027PostMovieInfoScraperAction\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Dummy/DummyPlugin.cs#L59",
+      "Location": "Line 59 Position 36-62"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027PreMovieImageScraperAction\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Dummy/DummyPlugin.cs#L67",
+      "Location": "Line 67 Position 48-74"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027PostMovieImageScraperAction\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Dummy/DummyPlugin.cs#L75",
+      "Location": "Line 75 Position 36-63"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Settings\u0027 a static property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L49",
+      "Location": "Line 49 Position 36-44"
+    }
+  ]
 }

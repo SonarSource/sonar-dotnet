@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2737",
-"message":  "Add logic to this catch clause or eliminate it and rethrow the exception automatically.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1964-L1967",
-"region":  {
-"startLine":  1964,
-"startColumn":  29,
-"endLine":  1967,
-"endColumn":  30
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2737",
+      "Message": "Add logic to this catch clause or eliminate it and rethrow the exception automatically.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1964-L1967",
+      "Location": "Lines 1964-1967 Position 29-30"
+    }
+  ]
 }

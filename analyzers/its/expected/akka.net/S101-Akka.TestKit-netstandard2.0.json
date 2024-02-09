@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S101",
-"message":  "Rename class 'FSMSpecHelpers' to match pascal case naming rules, consider using 'FsmSpecHelpers'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/FSMSpecHelpers.cs#L17",
-"region":  {
-"startLine":  17,
-"startColumn":  25,
-"endLine":  17,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename class 'TestFSMRef' to match pascal case naming rules, consider using 'TestFsmRef'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestFSMRef.cs#L21",
-"region":  {
-"startLine":  21,
-"startColumn":  18,
-"endLine":  21,
-"endColumn":  28
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S101",
+      "Message": "Rename class \u0027FSMSpecHelpers\u0027 to match pascal case naming rules, consider using \u0027FsmSpecHelpers\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/FSMSpecHelpers.cs#L17",
+      "Location": "Line 17 Position 25-39"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename class \u0027TestFSMRef\u0027 to match pascal case naming rules, consider using \u0027TestFsmRef\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestFSMRef.cs#L21",
+      "Location": "Line 21 Position 18-28"
+    }
+  ]
 }

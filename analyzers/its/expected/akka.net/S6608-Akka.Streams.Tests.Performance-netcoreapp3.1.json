@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S6608",
-"message":  "Indexing at Count-1 should be used instead of the "Enumerable" extension method "Last"",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/InterpreterBenchmark.cs#L60",
-"region":  {
-"startLine":  60,
-"startColumn":  41,
-"endLine":  60,
-"endColumn":  45
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6608",
+      "Message": "Indexing at Count-1 should be used instead of the \u0022Enumerable\u0022 extension method \u0022Last\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/InterpreterBenchmark.cs#L60",
+      "Location": "Line 60 Position 41-45"
+    }
+  ]
 }

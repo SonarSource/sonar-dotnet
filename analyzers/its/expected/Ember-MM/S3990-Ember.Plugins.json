@@ -1,9 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3990",
-"message":  "Provide a 'CLSCompliant' attribute for assembly 'Ember.Plugins'.",
-"location":  null
-}
-]
+  "Issues": [
+    {
+      "Id": "S3990",
+      "Message": "Provide a \u0027CLSCompliant\u0027 attribute for assembly \u0027Ember.Plugins\u0027.",
+      "Uri": null,
+      "Location": null
+    }
+  ]
 }

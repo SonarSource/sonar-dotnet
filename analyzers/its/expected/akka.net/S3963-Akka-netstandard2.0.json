@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S3963",
-"message":  "Initialize all 'static fields' inline and remove the 'static constructor'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/LogEvent.cs#L25",
-"region":  {
-"startLine":  25,
-"startColumn":  16,
-"endLine":  25,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S3963",
-"message":  "Initialize all 'static fields' inline and remove the 'static constructor'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MurmurHash.cs#L55",
-"region":  {
-"startLine":  55,
-"startColumn":  16,
-"endLine":  55,
-"endColumn":  26
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3963",
+      "Message": "Initialize all \u0027static fields\u0027 inline and remove the \u0027static constructor\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/LogEvent.cs#L25",
+      "Location": "Line 25 Position 16-26"
+    },
+    {
+      "Id": "S3963",
+      "Message": "Initialize all \u0027static fields\u0027 inline and remove the \u0027static constructor\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MurmurHash.cs#L55",
+      "Location": "Line 55 Position 16-26"
+    }
+  ]
 }

@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S927",
-"message":  "Rename parameter 'obj' to 'o' to match the base class declaration.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/SnapshotStoreSerializationSpec.cs#L179",
-"region":  {
-"startLine":  179,
-"startColumn":  52,
-"endLine":  179,
-"endColumn":  55
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S927",
+      "Message": "Rename parameter \u0027obj\u0027 to \u0027o\u0027 to match the base class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/SnapshotStoreSerializationSpec.cs#L179",
+      "Location": "Line 179 Position 52-55"
+    }
+  ]
 }

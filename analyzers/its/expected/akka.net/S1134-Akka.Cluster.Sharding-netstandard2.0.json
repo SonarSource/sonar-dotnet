@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1134",
-"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Internal/AbstractLeastShardAllocationStrategy.cs#L112",
-"region":  {
-"startLine":  112,
-"startColumn":  16,
-"endLine":  112,
-"endColumn":  21
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1134",
+      "Message": "Take the required action to fix the issue indicated by this \u0027FIXME\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Internal/AbstractLeastShardAllocationStrategy.cs#L112",
+      "Location": "Line 112 Position 16-21"
+    }
+  ]
 }

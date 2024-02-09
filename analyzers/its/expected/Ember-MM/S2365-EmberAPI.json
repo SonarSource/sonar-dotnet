@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S2365",
-"message":  "Refactor 'GetIFOAudio' into a method, properties should not be based on arrays.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L62",
-"region":  {
-"startLine":  62,
-"startColumn":  30,
-"endLine":  62,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S2365",
-"message":  "Refactor 'GetIFOVideo' into a method, properties should not be based on arrays.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L110",
-"region":  {
-"startLine":  110,
-"startColumn":  30,
-"endLine":  110,
-"endColumn":  41
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2365",
+      "Message": "Refactor \u0027GetIFOVideo\u0027 into a method, properties should not be based on arrays.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L110",
+      "Location": "Line 110 Position 30-41"
+    },
+    {
+      "Id": "S2365",
+      "Message": "Refactor \u0027GetIFOAudio\u0027 into a method, properties should not be based on arrays.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L62",
+      "Location": "Line 62 Position 30-41"
+    }
+  ]
 }

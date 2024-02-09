@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3993",
-"message":  "Specify AttributeUsage on 'GenericAttribute'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/GenericAttributes.cs#L5",
-"region":  {
-"startLine":  5,
-"startColumn":  22,
-"endLine":  5,
-"endColumn":  38
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3993",
+      "Message": "Specify AttributeUsage on \u0027GenericAttribute\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/GenericAttributes.cs#L5",
+      "Location": "Line 5 Position 22-38"
+    }
+  ]
 }

@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1144",
-"message":  "Remove the unused private field 'sonar'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/Deconstruction.cs#L7",
-"region":  {
-"startLine":  7,
-"startColumn":  9,
-"endLine":  7,
-"endColumn":  31
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private field \u0027sonar\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/Deconstruction.cs#L7",
+      "Location": "Line 7 Position 9-31"
+    }
+  ]
 }

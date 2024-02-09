@@ -1,56 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'localSeen'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1733",
-"region":  {
-"startLine":  1733,
-"startColumn":  17,
-"endLine":  1733,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'member'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L780",
-"region":  {
-"startLine":  780,
-"startColumn":  51,
-"endLine":  780,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'poolSize'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L1004",
-"region":  {
-"startLine":  1004,
-"startColumn":  37,
-"endLine":  1004,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'lr'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L432",
-"region":  {
-"startLine":  432,
-"startColumn":  45,
-"endLine":  432,
-"endColumn":  47
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027localSeen\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1733",
+      "Location": "Line 1733 Position 17-26"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027poolSize\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L1004",
+      "Location": "Line 1004 Position 37-45"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027member\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L780",
+      "Location": "Line 780 Position 51-57"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027lr\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L432",
+      "Location": "Line 432 Position 45-47"
+    }
+  ]
 }

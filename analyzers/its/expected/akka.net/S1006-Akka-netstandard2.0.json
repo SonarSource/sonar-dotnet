@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S1006",
-"message":  "Remove the default parameter value to match the signature of overridden method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.ReceiveTimeout.cs#L28",
-"region":  {
-"startLine":  28,
-"startColumn":  57,
-"endLine":  28,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S1006",
-"message":  "Remove the default parameter value to match the signature of overridden method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorSelection.cs#L116",
-"region":  {
-"startLine":  116,
-"startColumn":  59,
-"endLine":  116,
-"endColumn":  65
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1006",
+      "Message": "Remove the default parameter value to match the signature of overridden method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.ReceiveTimeout.cs#L28",
+      "Location": "Line 28 Position 57-63"
+    },
+    {
+      "Id": "S1006",
+      "Message": "Remove the default parameter value to match the signature of overridden method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorSelection.cs#L116",
+      "Location": "Line 116 Position 59-65"
+    }
+  ]
 }

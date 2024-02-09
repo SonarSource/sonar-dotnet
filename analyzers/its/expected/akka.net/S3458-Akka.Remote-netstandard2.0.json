@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3458",
-"message":  "Remove this empty 'case' clause.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L2051",
-"region":  {
-"startLine":  2051,
-"startColumn":  17,
-"endLine":  2051,
-"endColumn":  47
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3458",
+      "Message": "Remove this empty \u0027case\u0027 clause.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L2051",
+      "Location": "Line 2051 Position 17-47"
+    }
+  ]
 }

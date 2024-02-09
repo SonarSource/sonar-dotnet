@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2292",
-"message":  "Make this an auto-implemented property and remove its backing field.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/MessageQueues/BlockingMessageQueue.cs#L29",
-"region":  {
-"startLine":  29,
-"startColumn":  25,
-"endLine":  29,
-"endColumn":  37
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2292",
+      "Message": "Make this an auto-implemented property and remove its backing field.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/MessageQueues/BlockingMessageQueue.cs#L29",
+      "Location": "Line 29 Position 25-37"
+    }
+  ]
 }

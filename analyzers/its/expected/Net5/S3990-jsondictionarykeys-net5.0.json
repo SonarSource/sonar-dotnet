@@ -1,9 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3990",
-"message":  "Provide a 'CLSCompliant' attribute for assembly 'jsondictionarykeys'.",
-"location":  null
-}
-]
+  "Issues": [
+    {
+      "Id": "S3990",
+      "Message": "Provide a \u0027CLSCompliant\u0027 attribute for assembly \u0027jsondictionarykeys\u0027.",
+      "Uri": null,
+      "Location": null
+    }
+  ]
 }

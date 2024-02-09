@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2259",
-"message":  "'e' is null on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L567",
-"region":  {
-"startLine":  567,
-"startColumn":  33,
-"endLine":  567,
-"endColumn":  34
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2259",
+      "Message": "\u0027e\u0027 is null on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L567",
+      "Location": "Line 567 Position 33-34"
+    }
+  ]
 }

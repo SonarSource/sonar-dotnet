@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S109",
-"message":  "Assign this magic number '422' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/samples/Nancy.Demo.Hosting.Kestrel/HomeModule.cs#L30",
-"region":  {
-"startLine":  30,
-"startColumn":  28,
-"endLine":  30,
-"endColumn":  31
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u0027422\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/samples/Nancy.Demo.Hosting.Kestrel/HomeModule.cs#L30",
+      "Location": "Line 30 Position 28-31"
+    }
+  ]
 }

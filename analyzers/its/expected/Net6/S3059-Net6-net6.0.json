@@ -1,319 +1,76 @@
 {
-"issues":  [
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/AllowAsyncMethodBuilderAttributeOnMethods.cs#L3",
-"region":  {
-"startLine":  3,
-"startColumn":  20,
-"endLine":  3,
-"endColumn":  61
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/AllowAsyncMethodBuilderAttributeOnMethods.cs#L6",
-"region":  {
-"startLine":  6,
-"startColumn":  9,
-"endLine":  6,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/AnonymousTypesInWithExpressions.cs#L3",
-"region":  {
-"startLine":  3,
-"startColumn":  20,
-"endLine":  3,
-"endColumn":  51
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/AnonymousTypesInWithExpressions.cs#L5",
-"region":  {
-"startLine":  5,
-"startColumn":  9,
-"endLine":  5,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/AssignmentAndDeclarationInSameDeconstruction.cs#L3",
-"region":  {
-"startLine":  3,
-"startColumn":  20,
-"endLine":  3,
-"endColumn":  64
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/AssignmentAndDeclarationInSameDeconstruction.cs#L5",
-"region":  {
-"startLine":  5,
-"startColumn":  9,
-"endLine":  5,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/CallerArgumentExpression.cs#L3",
-"region":  {
-"startLine":  3,
-"startColumn":  20,
-"endLine":  3,
-"endColumn":  44
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/CallerArgumentExpression.cs#L6",
-"region":  {
-"startLine":  6,
-"startColumn":  9,
-"endLine":  6,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/ConstantInterpolatedStrings.cs#L3",
-"region":  {
-"startLine":  3,
-"startColumn":  20,
-"endLine":  3,
-"endColumn":  47
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/ConstantInterpolatedStrings.cs#L5",
-"region":  {
-"startLine":  5,
-"startColumn":  9,
-"endLine":  5,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/ConstantInterpolatedStrings.cs#L6",
-"region":  {
-"startLine":  6,
-"startColumn":  9,
-"endLine":  6,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/ConstantInterpolatedStrings.cs#L7",
-"region":  {
-"startLine":  7,
-"startColumn":  9,
-"endLine":  7,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/ExtendedPropertyPatterns.cs#L3",
-"region":  {
-"startLine":  3,
-"startColumn":  16,
-"endLine":  3,
-"endColumn":  40
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/ExtendedPropertyPatterns.cs#L5",
-"region":  {
-"startLine":  5,
-"startColumn":  5,
-"endLine":  5,
-"endColumn":  11
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/ExtendedPropertyPatterns.cs#L7",
-"region":  {
-"startLine":  7,
-"startColumn":  5,
-"endLine":  7,
-"endColumn":  11
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/FileScopedNamespaceDeclaration.cs#L3",
-"region":  {
-"startLine":  3,
-"startColumn":  16,
-"endLine":  3,
-"endColumn":  46
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/FileScopedNamespaceDeclaration.cs#L5",
-"region":  {
-"startLine":  5,
-"startColumn":  5,
-"endLine":  5,
-"endColumn":  11
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/GenericAttributes.cs#L11",
-"region":  {
-"startLine":  11,
-"startColumn":  20,
-"endLine":  11,
-"endColumn":  41
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/GenericAttributes.cs#L14",
-"region":  {
-"startLine":  14,
-"startColumn":  9,
-"endLine":  14,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/ImplicitUsingOfNamespaces.cs#L3",
-"region":  {
-"startLine":  3,
-"startColumn":  20,
-"endLine":  3,
-"endColumn":  45
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/ImplicitUsingOfNamespaces.cs#L6",
-"region":  {
-"startLine":  6,
-"startColumn":  9,
-"endLine":  6,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/LambdaAttributes.cs#L3",
-"region":  {
-"startLine":  3,
-"startColumn":  20,
-"endLine":  3,
-"endColumn":  36
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/LambdaAttributes.cs#L5",
-"region":  {
-"startLine":  5,
-"startColumn":  9,
-"endLine":  5,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/LambdasWithExplicitReturnType.cs#L3",
-"region":  {
-"startLine":  3,
-"startColumn":  20,
-"endLine":  3,
-"endColumn":  49
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/LambdasWithExplicitReturnType.cs#L5",
-"region":  {
-"startLine":  5,
-"startColumn":  9,
-"endLine":  5,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/StructuresAsLeftHandOperandsInWithExpressions.cs#L3",
-"region":  {
-"startLine":  3,
-"startColumn":  20,
-"endLine":  3,
-"endColumn":  65
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/StructuresAsLeftHandOperandsInWithExpressions.cs#L5",
-"region":  {
-"startLine":  5,
-"startColumn":  9,
-"endLine":  5,
-"endColumn":  15
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/AllowAsyncMethodBuilderAttributeOnMethods.cs#L3",
+      "Location": "Line 3 Position 20-61"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/AnonymousTypesInWithExpressions.cs#L3",
+      "Location": "Line 3 Position 20-51"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/AssignmentAndDeclarationInSameDeconstruction.cs#L3",
+      "Location": "Line 3 Position 20-64"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/CallerArgumentExpression.cs#L3",
+      "Location": "Line 3 Position 20-44"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/ConstantInterpolatedStrings.cs#L3",
+      "Location": "Line 3 Position 20-47"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/ExtendedPropertyPatterns.cs#L3",
+      "Location": "Line 3 Position 16-40"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/FileScopedNamespaceDeclaration.cs#L3",
+      "Location": "Line 3 Position 16-46"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/GenericAttributes.cs#L11",
+      "Location": "Line 11 Position 20-41"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/ImplicitUsingOfNamespaces.cs#L3",
+      "Location": "Line 3 Position 20-45"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/LambdaAttributes.cs#L3",
+      "Location": "Line 3 Position 20-36"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/LambdasWithExplicitReturnType.cs#L3",
+      "Location": "Line 3 Position 20-49"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/StructuresAsLeftHandOperandsInWithExpressions.cs#L3",
+      "Location": "Line 3 Position 20-65"
+    }
+  ]
 }

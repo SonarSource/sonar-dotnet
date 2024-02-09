@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S4275",
-"message":  "Refactor this getter so that it actually refers to the field '_messages'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/MemoryJournal.cs#L251",
-"region":  {
-"startLine":  251,
-"startColumn":  120,
-"endLine":  251,
-"endColumn":  134
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4275",
+      "Message": "Refactor this getter so that it actually refers to the field \u0027_messages\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/MemoryJournal.cs#L251",
+      "Location": "Line 251 Position 120-134"
+    }
+  ]
 }

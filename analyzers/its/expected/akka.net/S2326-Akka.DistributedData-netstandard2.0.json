@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2326",
-"message":  "'T' is not used in the interface.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Key.cs#L27",
-"region":  {
-"startLine":  27,
-"startColumn":  27,
-"endLine":  27,
-"endColumn":  32
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2326",
+      "Message": "\u0027T\u0027 is not used in the interface.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Key.cs#L27",
+      "Location": "Line 27 Position 27-32"
+    }
+  ]
 }

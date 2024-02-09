@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'deserialized'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests.Performance/Serialization/ClusterMessageSerializerSpec.cs#L72",
-"region":  {
-"startLine":  72,
-"startColumn":  21,
-"endLine":  72,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'deserialized'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests.Performance/Serialization/ClusterMessageSerializerSpec.cs#L86",
-"region":  {
-"startLine":  86,
-"startColumn":  21,
-"endLine":  86,
-"endColumn":  33
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027deserialized\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests.Performance/Serialization/ClusterMessageSerializerSpec.cs#L72",
+      "Location": "Line 72 Position 21-33"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027deserialized\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests.Performance/Serialization/ClusterMessageSerializerSpec.cs#L86",
+      "Location": "Line 86 Position 21-33"
+    }
+  ]
 }

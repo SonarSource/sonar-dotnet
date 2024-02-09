@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'uni'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L238",
-"region":  {
-"startLine":  238,
-"startColumn":  21,
-"endLine":  238,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'oFile'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L673",
-"region":  {
-"startLine":  673,
-"startColumn":  21,
-"endLine":  673,
-"endColumn":  26
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027uni\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L238",
+      "Location": "Line 238 Position 21-24"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027oFile\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L673",
+      "Location": "Line 673 Position 21-26"
+    }
+  ]
 }

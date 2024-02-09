@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3400",
-"message":  "Remove this method and declare a constant for this value.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/TestingDiagnosticProvider.cs#L63",
-"region":  {
-"startLine":  63,
-"startColumn":  27,
-"endLine":  63,
-"endColumn":  44
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3400",
+      "Message": "Remove this method and declare a constant for this value.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/TestingDiagnosticProvider.cs#L63",
+      "Location": "Line 63 Position 27-44"
+    }
+  ]
 }
