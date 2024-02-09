@@ -1,95 +1,46 @@
 {
-"issues":  [
-{
-"id":  "S1854",
-"message":  "Remove this useless assignment to local variable 'i'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L221",
-"region":  {
-"startLine":  221,
-"startColumn":  5,
-"endLine":  221,
-"endColumn":  8
-}
-}
-},
-{
-"id":  "S1854",
-"message":  "Remove this useless assignment to local variable 'value'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1854.cs#L9",
-"region":  {
-"startLine":  9,
-"startColumn":  17,
-"endLine":  9,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S1854",
-"message":  "Remove this useless assignment to local variable 'a'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1854.cs#L10",
-"region":  {
-"startLine":  10,
-"startColumn":  21,
-"endLine":  10,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S1854",
-"message":  "Remove this useless assignment to local variable 'a'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1854.cs#L11",
-"region":  {
-"startLine":  11,
-"startColumn":  17,
-"endLine":  11,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S1854",
-"message":  "Remove this useless assignment to local variable 'b'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2219.cs#L12",
-"region":  {
-"startLine":  12,
-"startColumn":  17,
-"endLine":  12,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S1854",
-"message":  "Remove this useless assignment to local variable 'b'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2219.cs#L13",
-"region":  {
-"startLine":  13,
-"startColumn":  13,
-"endLine":  13,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S1854",
-"message":  "Remove this useless assignment to local variable 'result'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2437.cs#L10",
-"region":  {
-"startLine":  10,
-"startColumn":  13,
-"endLine":  10,
-"endColumn":  34
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1854",
+      "Message": "Remove this useless assignment to local variable \u0027i\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L221",
+      "Location": "Line 221 Position 5-8"
+    },
+    {
+      "Id": "S1854",
+      "Message": "Remove this useless assignment to local variable \u0027a\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1854.cs#L10",
+      "Location": "Line 10 Position 21-28"
+    },
+    {
+      "Id": "S1854",
+      "Message": "Remove this useless assignment to local variable \u0027a\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1854.cs#L11",
+      "Location": "Line 11 Position 17-22"
+    },
+    {
+      "Id": "S1854",
+      "Message": "Remove this useless assignment to local variable \u0027value\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1854.cs#L9",
+      "Location": "Line 9 Position 17-26"
+    },
+    {
+      "Id": "S1854",
+      "Message": "Remove this useless assignment to local variable \u0027b\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2219.cs#L12",
+      "Location": "Line 12 Position 17-31"
+    },
+    {
+      "Id": "S1854",
+      "Message": "Remove this useless assignment to local variable \u0027b\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2219.cs#L13",
+      "Location": "Line 13 Position 13-35"
+    },
+    {
+      "Id": "S1854",
+      "Message": "Remove this useless assignment to local variable \u0027result\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2437.cs#L10",
+      "Location": "Line 10 Position 13-34"
+    }
+  ]
 }

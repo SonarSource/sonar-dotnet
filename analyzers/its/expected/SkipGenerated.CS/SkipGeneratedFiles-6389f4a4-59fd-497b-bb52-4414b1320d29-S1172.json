@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S1172",
-"message":  "Remove this unused method parameter 'args'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.CS/generated_region.cs#L7",
-"region":  {
-"startLine":  7,
-"startColumn":  28,
-"endLine":  7,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S1172",
-"message":  "Remove this unused method parameter 'args'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.CS/generated_region_2.cs#L7",
-"region":  {
-"startLine":  7,
-"startColumn":  28,
-"endLine":  7,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S1172",
-"message":  "Remove this unused method parameter 'args'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.CS/handwritten.cs#L8",
-"region":  {
-"startLine":  8,
-"startColumn":  28,
-"endLine":  8,
-"endColumn":  41
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1172",
+      "Message": "Remove this unused method parameter \u0027args\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.CS/generated_region_2.cs#L7",
+      "Location": "Line 7 Position 28-41"
+    },
+    {
+      "Id": "S1172",
+      "Message": "Remove this unused method parameter \u0027args\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.CS/generated_region.cs#L7",
+      "Location": "Line 7 Position 28-41"
+    },
+    {
+      "Id": "S1172",
+      "Message": "Remove this unused method parameter \u0027args\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.CS/handwritten.cs#L8",
+      "Location": "Line 8 Position 28-41"
+    }
+  ]
 }

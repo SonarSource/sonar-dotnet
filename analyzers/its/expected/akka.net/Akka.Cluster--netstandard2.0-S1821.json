@@ -1,82 +1,40 @@
 {
-"issues":  [
-{
-"id":  "S1821",
-"message":  "Refactor the code to eliminate this nested 'switch'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L518",
-"region":  {
-"startLine":  518,
-"startColumn":  21,
-"endLine":  518,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S1821",
-"message":  "Refactor the code to eliminate this nested 'switch'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L612",
-"region":  {
-"startLine":  612,
-"startColumn":  21,
-"endLine":  612,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S1821",
-"message":  "Refactor the code to eliminate this nested 'switch'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L325",
-"region":  {
-"startLine":  325,
-"startColumn":  25,
-"endLine":  325,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S1821",
-"message":  "Refactor the code to eliminate this nested 'switch'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L401",
-"region":  {
-"startLine":  401,
-"startColumn":  29,
-"endLine":  401,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S1821",
-"message":  "Refactor the code to eliminate this nested 'switch'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L290",
-"region":  {
-"startLine":  290,
-"startColumn":  21,
-"endLine":  290,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S1821",
-"message":  "Refactor the code to eliminate this nested 'switch'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L303",
-"region":  {
-"startLine":  303,
-"startColumn":  21,
-"endLine":  303,
-"endColumn":  27
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1821",
+      "Message": "Refactor the code to eliminate this nested \u0027switch\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L518",
+      "Location": "Line 518 Position 21-27"
+    },
+    {
+      "Id": "S1821",
+      "Message": "Refactor the code to eliminate this nested \u0027switch\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L612",
+      "Location": "Line 612 Position 21-27"
+    },
+    {
+      "Id": "S1821",
+      "Message": "Refactor the code to eliminate this nested \u0027switch\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L325",
+      "Location": "Line 325 Position 25-31"
+    },
+    {
+      "Id": "S1821",
+      "Message": "Refactor the code to eliminate this nested \u0027switch\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L401",
+      "Location": "Line 401 Position 29-35"
+    },
+    {
+      "Id": "S1821",
+      "Message": "Refactor the code to eliminate this nested \u0027switch\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L290",
+      "Location": "Line 290 Position 21-27"
+    },
+    {
+      "Id": "S1821",
+      "Message": "Refactor the code to eliminate this nested \u0027switch\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L303",
+      "Location": "Line 303 Position 21-27"
+    }
+  ]
 }

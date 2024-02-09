@@ -1,82 +1,40 @@
 {
-"issues":  [
-{
-"id":  "S3235",
-"message":  "Remove these redundant parentheses.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsViewRenderer.cs#L65",
-"region":  {
-"startLine":  65,
-"startColumn":  111,
-"endLine":  65,
-"endColumn":  113
-}
-}
-},
-{
-"id":  "S3235",
-"message":  "Remove these redundant parentheses.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L871",
-"region":  {
-"startLine":  871,
-"startColumn":  101,
-"endLine":  871,
-"endColumn":  103
-}
-}
-},
-{
-"id":  "S3235",
-"message":  "Remove these redundant parentheses.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L872",
-"region":  {
-"startLine":  872,
-"startColumn":  90,
-"endLine":  872,
-"endColumn":  92
-}
-}
-},
-{
-"id":  "S3235",
-"message":  "Remove these redundant parentheses.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L873",
-"region":  {
-"startLine":  873,
-"startColumn":  90,
-"endLine":  873,
-"endColumn":  92
-}
-}
-},
-{
-"id":  "S3235",
-"message":  "Remove these redundant parentheses.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3353",
-"region":  {
-"startLine":  3353,
-"startColumn":  62,
-"endLine":  3353,
-"endColumn":  64
-}
-}
-},
-{
-"id":  "S3235",
-"message":  "Remove these redundant parentheses.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3377",
-"region":  {
-"startLine":  3377,
-"startColumn":  58,
-"endLine":  3377,
-"endColumn":  60
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3235",
+      "Message": "Remove these redundant parentheses.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsViewRenderer.cs#L65",
+      "Location": "Line 65 Position 111-113"
+    },
+    {
+      "Id": "S3235",
+      "Message": "Remove these redundant parentheses.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3353",
+      "Location": "Line 3353 Position 62-64"
+    },
+    {
+      "Id": "S3235",
+      "Message": "Remove these redundant parentheses.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3377",
+      "Location": "Line 3377 Position 58-60"
+    },
+    {
+      "Id": "S3235",
+      "Message": "Remove these redundant parentheses.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L871",
+      "Location": "Line 871 Position 101-103"
+    },
+    {
+      "Id": "S3235",
+      "Message": "Remove these redundant parentheses.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L872",
+      "Location": "Line 872 Position 90-92"
+    },
+    {
+      "Id": "S3235",
+      "Message": "Remove these redundant parentheses.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L873",
+      "Location": "Line 873 Position 90-92"
+    }
+  ]
 }

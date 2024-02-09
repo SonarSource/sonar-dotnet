@@ -1,41 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S3267",
-"message":  "Loop should be simplified by calling Select(node => node.Value))",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/ConsoleMessageSinkActor.cs#L43",
-"region":  {
-"startLine":  43,
-"startColumn":  34,
-"endLine":  43,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S3267",
-"message":  "Loops should be simplified using the "Where" LINQ method",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/TimelineLogCollectorActor.cs#L125",
-"region":  {
-"startLine":  125,
-"startColumn":  46,
-"endLine":  125,
-"endColumn":  121
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/TimelineLogCollectorActor.cs#L127",
-"region":  {
-"startLine":  127,
-"startColumn":  25,
-"endLine":  127,
-"endColumn":  108
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S3267",
+      "Message": "Loop should be simplified by calling Select(node =\u003E node.Value))",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/ConsoleMessageSinkActor.cs#L43",
+      "Location": "Line 43 Position 34-48"
+    },
+    {
+      "Id": "S3267",
+      "Message": "Loops should be simplified using the \u0022Where\u0022 LINQ method",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/TimelineLogCollectorActor.cs#L125",
+      "Location": "Line 125 Position 46-121"
+    }
+  ]
 }

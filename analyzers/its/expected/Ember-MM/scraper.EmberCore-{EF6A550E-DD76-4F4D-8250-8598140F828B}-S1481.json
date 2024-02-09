@@ -1,95 +1,46 @@
 {
-"issues":  [
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'IMPA'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L661",
-"region":  {
-"startLine":  661,
-"startColumn":  7,
-"endLine":  661,
-"endColumn":  11
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'MPDB'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L662",
-"region":  {
-"startLine":  662,
-"startColumn":  7,
-"endLine":  662,
-"endColumn":  11
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'thumbLink'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L719",
-"region":  {
-"startLine":  719,
-"startColumn":  11,
-"endLine":  719,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'popularHaveYear'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L679",
-"region":  {
-"startLine":  679,
-"startColumn":  29,
-"endLine":  679,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'movieInfo'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L780",
-"region":  {
-"startLine":  780,
-"startColumn":  29,
-"endLine":  780,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'doSave'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L321",
-"region":  {
-"startLine":  321,
-"startColumn":  13,
-"endLine":  321,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'iEpisode'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L62",
-"region":  {
-"startLine":  62,
-"startColumn":  13,
-"endLine":  62,
-"endColumn":  21
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027IMPA\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L661",
+      "Location": "Line 661 Position 7-11"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027MPDB\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L662",
+      "Location": "Line 662 Position 7-11"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027thumbLink\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L719",
+      "Location": "Line 719 Position 11-20"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027popularHaveYear\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L679",
+      "Location": "Line 679 Position 29-44"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027movieInfo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L780",
+      "Location": "Line 780 Position 29-38"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027doSave\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L321",
+      "Location": "Line 321 Position 13-19"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027iEpisode\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L62",
+      "Location": "Line 62 Position 13-21"
+    }
+  ]
 }

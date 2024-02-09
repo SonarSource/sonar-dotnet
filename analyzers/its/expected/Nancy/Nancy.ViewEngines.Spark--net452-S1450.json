@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1450",
-"message":  "Remove the field 'settings' and declare it as a local variable in the relevant methods.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/SparkViewEngine.cs#L22",
-"region":  {
-"startLine":  22,
-"startColumn":  41,
-"endLine":  22,
-"endColumn":  49
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1450",
+      "Message": "Remove the field \u0027settings\u0027 and declare it as a local variable in the relevant methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/SparkViewEngine.cs#L22",
+      "Location": "Line 22 Position 41-49"
+    }
+  ]
 }

@@ -1,95 +1,46 @@
 {
-"issues":  [
-{
-"id":  "S2369",
-"message":  "Rename 'selIndex' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAddEditActor.vb#L28",
-"region":  {
-"startLine":  28,
-"startColumn":  19,
-"endLine":  28,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S2369",
-"message":  "Rename 'pURL' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8987",
-"region":  {
-"startLine":  8987,
-"startColumn":  13,
-"endLine":  8987,
-"endColumn":  17
-}
-}
-},
-{
-"id":  "S2369",
-"message":  "Rename 'scrapeType' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8988",
-"region":  {
-"startLine":  8988,
-"startColumn":  13,
-"endLine":  8988,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S2369",
-"message":  "Rename 'setEnabled' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8990",
-"region":  {
-"startLine":  8990,
-"startColumn":  13,
-"endLine":  8990,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S2369",
-"message":  "Rename 'fileInfo' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L9001",
-"region":  {
-"startLine":  9001,
-"startColumn":  13,
-"endLine":  9001,
-"endColumn":  21
-}
-}
-},
-{
-"id":  "S2369",
-"message":  "Rename 'scrapeType' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L9007",
-"region":  {
-"startLine":  9007,
-"startColumn":  13,
-"endLine":  9007,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S2369",
-"message":  "Rename 'setEnabled' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L9008",
-"region":  {
-"startLine":  9008,
-"startColumn":  13,
-"endLine":  9008,
-"endColumn":  23
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2369",
+      "Message": "Rename \u0027selIndex\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAddEditActor.vb#L28",
+      "Location": "Line 28 Position 19-27"
+    },
+    {
+      "Id": "S2369",
+      "Message": "Rename \u0027pURL\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8987",
+      "Location": "Line 8987 Position 13-17"
+    },
+    {
+      "Id": "S2369",
+      "Message": "Rename \u0027scrapeType\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8988",
+      "Location": "Line 8988 Position 13-23"
+    },
+    {
+      "Id": "S2369",
+      "Message": "Rename \u0027setEnabled\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8990",
+      "Location": "Line 8990 Position 13-23"
+    },
+    {
+      "Id": "S2369",
+      "Message": "Rename \u0027fileInfo\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L9001",
+      "Location": "Line 9001 Position 13-21"
+    },
+    {
+      "Id": "S2369",
+      "Message": "Rename \u0027scrapeType\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L9007",
+      "Location": "Line 9007 Position 13-23"
+    },
+    {
+      "Id": "S2369",
+      "Message": "Rename \u0027setEnabled\u0027 to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L9008",
+      "Location": "Line 9008 Position 13-23"
+    }
+  ]
 }

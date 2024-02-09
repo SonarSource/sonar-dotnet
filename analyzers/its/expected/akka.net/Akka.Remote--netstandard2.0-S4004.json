@@ -1,56 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S4004",
-"message":  "Make the 'TrustedSelectionPaths' property read-only by removing the property setter or making it private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L98",
-"region":  {
-"startLine":  98,
-"startColumn":  32,
-"endLine":  98,
-"endColumn":  53
-}
-}
-},
-{
-"id":  "S4004",
-"message":  "Make the 'TransportNames' property read-only by removing the property setter or making it private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L143",
-"region":  {
-"startLine":  143,
-"startColumn":  30,
-"endLine":  143,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S4004",
-"message":  "Make the 'Adapters' property read-only by removing the property setter or making it private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L148",
-"region":  {
-"startLine":  148,
-"startColumn":  44,
-"endLine":  148,
-"endColumn":  52
-}
-}
-},
-{
-"id":  "S4004",
-"message":  "Make the 'Adapters' property read-only by removing the property setter or making it private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L268",
-"region":  {
-"startLine":  268,
-"startColumn":  34,
-"endLine":  268,
-"endColumn":  42
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4004",
+      "Message": "Make the \u0027TransportNames\u0027 property read-only by removing the property setter or making it private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L143",
+      "Location": "Line 143 Position 30-44"
+    },
+    {
+      "Id": "S4004",
+      "Message": "Make the \u0027Adapters\u0027 property read-only by removing the property setter or making it private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L148",
+      "Location": "Line 148 Position 44-52"
+    },
+    {
+      "Id": "S4004",
+      "Message": "Make the \u0027Adapters\u0027 property read-only by removing the property setter or making it private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L268",
+      "Location": "Line 268 Position 34-42"
+    },
+    {
+      "Id": "S4004",
+      "Message": "Make the \u0027TrustedSelectionPaths\u0027 property read-only by removing the property setter or making it private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L98",
+      "Location": "Line 98 Position 32-53"
+    }
+  ]
 }

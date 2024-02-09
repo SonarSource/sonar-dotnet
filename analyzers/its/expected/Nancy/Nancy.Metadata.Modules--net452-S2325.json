@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2325",
-"message":  "Make 'ConfigureMetadataModuleConventions' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Metadata.Modules/DefaultMetadataModuleConventions.cs#L42",
-"region":  {
-"startLine":  42,
-"startColumn":  96,
-"endLine":  42,
-"endColumn":  130
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027ConfigureMetadataModuleConventions\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Metadata.Modules/DefaultMetadataModuleConventions.cs#L42",
+      "Location": "Line 42 Position 96-130"
+    }
+  ]
 }

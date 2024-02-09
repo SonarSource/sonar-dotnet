@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S2353",
-"message":  "Rename this property to 'Item'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L62",
-"region":  {
-"startLine":  62,
-"startColumn":  30,
-"endLine":  62,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S2353",
-"message":  "Rename this property to 'Item'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L90",
-"region":  {
-"startLine":  90,
-"startColumn":  30,
-"endLine":  90,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S2353",
-"message":  "Rename this property to 'Item'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L149",
-"region":  {
-"startLine":  149,
-"startColumn":  30,
-"endLine":  149,
-"endColumn":  57
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2353",
+      "Message": "Rename this property to \u0027Item\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L149",
+      "Location": "Line 149 Position 30-57"
+    },
+    {
+      "Id": "S2353",
+      "Message": "Rename this property to \u0027Item\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L62",
+      "Location": "Line 62 Position 30-41"
+    },
+    {
+      "Id": "S2353",
+      "Message": "Rename this property to \u0027Item\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L90",
+      "Location": "Line 90 Position 30-42"
+    }
+  ]
 }

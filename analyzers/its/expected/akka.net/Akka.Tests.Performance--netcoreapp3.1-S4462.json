@@ -1,277 +1,130 @@
 {
-"issues":  [
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Wait' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorMemoryFootprintSpec.cs#L114",
-"region":  {
-"startLine":  114,
-"startColumn":  13,
-"endLine":  114,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Result' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorSelectionSpecs.cs#L113",
-"region":  {
-"startLine":  113,
-"startColumn":  27,
-"endLine":  113,
-"endColumn":  111
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Result' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorSelectionSpecs.cs#L124",
-"region":  {
-"startLine":  124,
-"startColumn":  29,
-"endLine":  124,
-"endColumn":  108
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Wait' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorSelectionSpecs.cs#L131",
-"region":  {
-"startLine":  131,
-"startColumn":  13,
-"endLine":  131,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Wait' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorSystemShutdownSpec.cs#L42",
-"region":  {
-"startLine":  42,
-"startColumn":  13,
-"endLine":  42,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Wait' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L299",
-"region":  {
-"startLine":  299,
-"startColumn":  13,
-"endLine":  299,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Wait' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/Pattern/AskSpec.cs#L49",
-"region":  {
-"startLine":  49,
-"startColumn":  13,
-"endLine":  49,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Wait' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/Pattern/AskSpec.cs#L59",
-"region":  {
-"startLine":  59,
-"startColumn":  22,
-"endLine":  59,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Wait' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/Scheduler/DefaultSchedulerPerformanceTests.cs#L77",
-"region":  {
-"startLine":  77,
-"startColumn":  13,
-"endLine":  77,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Wait' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/Scheduler/DefaultSchedulerPerformanceTests.cs#L84",
-"region":  {
-"startLine":  84,
-"startColumn":  13,
-"endLine":  84,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Wait' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Dispatch/DispatcherThroughputSpecBase.cs#L93",
-"region":  {
-"startLine":  93,
-"startColumn":  13,
-"endLine":  93,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Wait' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Dispatch/GetMailboxTypeSpec.cs#L62",
-"region":  {
-"startLine":  62,
-"startColumn":  13,
-"endLine":  62,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Result' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Dispatch/MailboxBenchmarks.cs#L38",
-"region":  {
-"startLine":  38,
-"startColumn":  22,
-"endLine":  38,
-"endColumn":  102
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Wait' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Dispatch/MailboxBenchmarks.cs#L91",
-"region":  {
-"startLine":  91,
-"startColumn":  13,
-"endLine":  91,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Wait' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Dispatch/MailboxMemoryFootprintSpec.cs#L104",
-"region":  {
-"startLine":  104,
-"startColumn":  33,
-"endLine":  104,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Wait' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Dispatch/MessageDispatchAndReceiveBenchmark.cs#L56",
-"region":  {
-"startLine":  56,
-"startColumn":  13,
-"endLine":  56,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Wait' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Dispatch/ReceiveOnlyBenchmark.cs#L67",
-"region":  {
-"startLine":  67,
-"startColumn":  13,
-"endLine":  67,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Wait' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Event/EventStreamThroughputSpec.cs#L77",
-"region":  {
-"startLine":  77,
-"startColumn":  13,
-"endLine":  77,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Wait' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/IO/TcpSingleConnectionSpec.cs#L149",
-"region":  {
-"startLine":  149,
-"startColumn":  13,
-"endLine":  149,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Wait' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/IO/TcpSingleConnectionSpec.cs#L167",
-"region":  {
-"startLine":  167,
-"startColumn":  13,
-"endLine":  167,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Wait' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Util/SerializationBenchmarks.cs#L51",
-"region":  {
-"startLine":  51,
-"startColumn":  13,
-"endLine":  51,
-"endColumn":  36
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Wait\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorMemoryFootprintSpec.cs#L114",
+      "Location": "Line 114 Position 13-37"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Result\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorSelectionSpecs.cs#L113",
+      "Location": "Line 113 Position 27-111"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Result\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorSelectionSpecs.cs#L124",
+      "Location": "Line 124 Position 29-108"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Wait\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorSelectionSpecs.cs#L131",
+      "Location": "Line 131 Position 13-36"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Wait\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorSystemShutdownSpec.cs#L42",
+      "Location": "Line 42 Position 13-42"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Wait\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L299",
+      "Location": "Line 299 Position 13-36"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Wait\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/Pattern/AskSpec.cs#L49",
+      "Location": "Line 49 Position 13-61"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Wait\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/Pattern/AskSpec.cs#L59",
+      "Location": "Line 59 Position 22-39"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Wait\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/Scheduler/DefaultSchedulerPerformanceTests.cs#L77",
+      "Location": "Line 77 Position 13-37"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Wait\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/Scheduler/DefaultSchedulerPerformanceTests.cs#L84",
+      "Location": "Line 84 Position 13-42"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Wait\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Dispatch/DispatcherThroughputSpecBase.cs#L93",
+      "Location": "Line 93 Position 13-33"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Wait\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Dispatch/GetMailboxTypeSpec.cs#L62",
+      "Location": "Line 62 Position 13-37"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Result\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Dispatch/MailboxBenchmarks.cs#L38",
+      "Location": "Line 38 Position 22-102"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Wait\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Dispatch/MailboxBenchmarks.cs#L91",
+      "Location": "Line 91 Position 13-36"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Wait\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Dispatch/MailboxMemoryFootprintSpec.cs#L104",
+      "Location": "Line 104 Position 33-62"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Wait\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Dispatch/MessageDispatchAndReceiveBenchmark.cs#L56",
+      "Location": "Line 56 Position 13-36"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Wait\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Dispatch/ReceiveOnlyBenchmark.cs#L67",
+      "Location": "Line 67 Position 13-36"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Wait\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Event/EventStreamThroughputSpec.cs#L77",
+      "Location": "Line 77 Position 13-36"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Wait\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/IO/TcpSingleConnectionSpec.cs#L149",
+      "Location": "Line 149 Position 13-33"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Wait\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/IO/TcpSingleConnectionSpec.cs#L167",
+      "Location": "Line 167 Position 13-36"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Wait\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Util/SerializationBenchmarks.cs#L51",
+      "Location": "Line 51 Position 13-36"
+    }
+  ]
 }

@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2386",
-"message":  "Use an immutable collection or reduce the accessibility of the public static field 'TestAssemblySuffixes'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L46",
-"region":  {
-"startLine":  46,
-"startColumn":  23,
-"endLine":  46,
-"endColumn":  36
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2386",
+      "Message": "Use an immutable collection or reduce the accessibility of the public static field \u0027TestAssemblySuffixes\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L46",
+      "Location": "Line 46 Position 23-36"
+    }
+  ]
 }

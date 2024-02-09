@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S139",
-"message":  "Move this trailing comment on the previous empty line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L101",
-"region":  {
-"startLine":  101,
-"startColumn":  97,
-"endLine":  101,
-"endColumn":  156
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S139",
+      "Message": "Move this trailing comment on the previous empty line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L101",
+      "Location": "Line 101 Position 97-156"
+    }
+  ]
 }

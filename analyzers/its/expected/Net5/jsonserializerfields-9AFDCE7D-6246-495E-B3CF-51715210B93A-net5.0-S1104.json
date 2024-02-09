@@ -1,56 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S1104",
-"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/JsonSerializerSupportsFields/Program.cs#L23",
-"region":  {
-"startLine":  23,
-"startColumn":  21,
-"endLine":  23,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S1104",
-"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/JsonSerializerSupportsFields/Program.cs#L24",
-"region":  {
-"startLine":  24,
-"startColumn":  16,
-"endLine":  24,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S1104",
-"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/JsonSerializerSupportsFields/Program.cs#L25",
-"region":  {
-"startLine":  25,
-"startColumn":  16,
-"endLine":  25,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S1104",
-"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/JsonSerializerSupportsFields/Program.cs#L26",
-"region":  {
-"startLine":  26,
-"startColumn":  19,
-"endLine":  26,
-"endColumn":  26
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1104",
+      "Message": "Make this field \u0027private\u0027 and encapsulate it in a \u0027public\u0027 property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/JsonSerializerSupportsFields/Program.cs#L23",
+      "Location": "Line 23 Position 21-25"
+    },
+    {
+      "Id": "S1104",
+      "Message": "Make this field \u0027private\u0027 and encapsulate it in a \u0027public\u0027 property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/JsonSerializerSupportsFields/Program.cs#L24",
+      "Location": "Line 24 Position 16-28"
+    },
+    {
+      "Id": "S1104",
+      "Message": "Make this field \u0027private\u0027 and encapsulate it in a \u0027public\u0027 property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/JsonSerializerSupportsFields/Program.cs#L25",
+      "Location": "Line 25 Position 16-28"
+    },
+    {
+      "Id": "S1104",
+      "Message": "Make this field \u0027private\u0027 and encapsulate it in a \u0027public\u0027 property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/JsonSerializerSupportsFields/Program.cs#L26",
+      "Location": "Line 26 Position 19-26"
+    }
+  ]
 }

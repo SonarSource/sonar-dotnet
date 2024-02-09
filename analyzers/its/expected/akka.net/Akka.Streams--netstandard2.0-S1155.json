@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S1155",
-"message":  "Use '.Any()' to test whether this 'IEnumerable<Akka.Streams.Attributes.IAttribute>' is empty or not.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L331",
-"region":  {
-"startLine":  331,
-"startColumn":  28,
-"endLine":  331,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S1155",
-"message":  "Use '.Any()' to test whether this 'IEnumerable<Akka.Streams.Attributes.IAttribute>' is empty or not.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L828",
-"region":  {
-"startLine":  828,
-"startColumn":  93,
-"endLine":  828,
-"endColumn":  98
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable\u003CAkka.Streams.Attributes.IAttribute\u003E\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L331",
+      "Location": "Line 331 Position 28-33"
+    },
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable\u003CAkka.Streams.Attributes.IAttribute\u003E\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L828",
+      "Location": "Line 828 Position 93-98"
+    }
+  ]
 }

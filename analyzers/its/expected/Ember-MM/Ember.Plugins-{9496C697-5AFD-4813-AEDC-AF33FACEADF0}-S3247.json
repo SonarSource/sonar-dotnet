@@ -1,28 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3247",
-"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L196",
-"region":  {
-"startLine":  196,
-"startColumn":  25,
-"endLine":  196,
-"endColumn":  53
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L198",
-"region":  {
-"startLine":  198,
-"startColumn":  50,
-"endLine":  198,
-"endColumn":  76
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L196",
+      "Location": "Line 196 Position 25-53"
+    }
+  ]
 }

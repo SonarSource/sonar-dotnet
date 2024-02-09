@@ -1,342 +1,160 @@
 {
-"issues":  [
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/BasicFlattening.cs#L83",
-"region":  {
-"startLine":  83,
-"startColumn":  21,
-"endLine":  83,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/BasicFlattening.cs#L89",
-"region":  {
-"startLine":  89,
-"startColumn":  21,
-"endLine":  89,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/BidirectionalRelationshipsWithoutPR.cs#L59",
-"region":  {
-"startLine":  59,
-"startColumn":  21,
-"endLine":  59,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/Bug/CollectionMapperMapsISetIncorrectly.cs#L26",
-"region":  {
-"startLine":  26,
-"startColumn":  21,
-"endLine":  26,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/Bug/ConvertMapperThreading.cs#L24",
-"region":  {
-"startLine":  24,
-"startColumn":  21,
-"endLine":  24,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/Bug/ExistingArrays.cs#L17",
-"region":  {
-"startLine":  17,
-"startColumn":  21,
-"endLine":  17,
-"endColumn":  51
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/Bug/ExistingArrays.cs#L25",
-"region":  {
-"startLine":  25,
-"startColumn":  21,
-"endLine":  25,
-"endColumn":  53
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/Bug/GenericCreateMapWithCircularReferences.cs#L21",
-"region":  {
-"startLine":  21,
-"startColumn":  21,
-"endLine":  21,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/Bug/MapAtRuntime/MapAtRuntime.cs#L88",
-"region":  {
-"startLine":  88,
-"startColumn":  21,
-"endLine":  88,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/Bug/MapAtRuntimeWithCollections/MapAtRuntimeWithCollections.cs#L110",
-"region":  {
-"startLine":  110,
-"startColumn":  21,
-"endLine":  110,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/Bug/MemberNamedTypeBug.cs#L30",
-"region":  {
-"startLine":  30,
-"startColumn":  21,
-"endLine":  30,
-"endColumn":  58
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/Bug/MultiThreadingIssues.cs#L54",
-"region":  {
-"startLine":  54,
-"startColumn":  21,
-"endLine":  54,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/Bug/MultiThreadingIssues.cs#L628",
-"region":  {
-"startLine":  628,
-"startColumn":  21,
-"endLine":  628,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/Bug/MultiThreadingIssues.cs#L1159",
-"region":  {
-"startLine":  1159,
-"startColumn":  21,
-"endLine":  1159,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/Bug/NullConstructorParameterName.cs#L12",
-"region":  {
-"startLine":  12,
-"startColumn":  21,
-"endLine":  12,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/Bug/RepeatedMappingConfigurationTest.cs#L28",
-"region":  {
-"startLine":  28,
-"startColumn":  21,
-"endLine":  28,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/Bug/SubclassMappings.cs#L28",
-"region":  {
-"startLine":  28,
-"startColumn":  21,
-"endLine":  28,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/Constructors.cs#L134",
-"region":  {
-"startLine":  134,
-"startColumn":  21,
-"endLine":  134,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/Constructors.cs#L199",
-"region":  {
-"startLine":  199,
-"startColumn":  21,
-"endLine":  199,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/CustomCollectionTester.cs#L8",
-"region":  {
-"startLine":  8,
-"startColumn":  21,
-"endLine":  8,
-"endColumn":  83
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/InterfaceMapping.cs#L170",
-"region":  {
-"startLine":  170,
-"startColumn":  21,
-"endLine":  170,
-"endColumn":  58
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/Internal/CreateProxyThreading.cs#L12",
-"region":  {
-"startLine":  12,
-"startColumn":  21,
-"endLine":  12,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/Mappers/StringDictionaryMapperTests.cs#L247",
-"region":  {
-"startLine":  247,
-"startColumn":  21,
-"endLine":  247,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/ReverseMapping.cs#L125",
-"region":  {
-"startLine":  125,
-"startColumn":  21,
-"endLine":  125,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/TypeExtensionsTests.cs#L24",
-"region":  {
-"startLine":  24,
-"startColumn":  25,
-"endLine":  24,
-"endColumn":  56
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/ValueTypes.cs#L36",
-"region":  {
-"startLine":  36,
-"startColumn":  21,
-"endLine":  36,
-"endColumn":  32
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/BasicFlattening.cs#L83",
+      "Location": "Line 83 Position 21-31"
+    },
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/BasicFlattening.cs#L89",
+      "Location": "Line 89 Position 21-35"
+    },
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/BidirectionalRelationshipsWithoutPR.cs#L59",
+      "Location": "Line 59 Position 21-34"
+    },
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/Bug/CollectionMapperMapsISetIncorrectly.cs#L26",
+      "Location": "Line 26 Position 21-39"
+    },
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/Bug/ConvertMapperThreading.cs#L24",
+      "Location": "Line 24 Position 21-32"
+    },
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/Bug/ExistingArrays.cs#L17",
+      "Location": "Line 17 Position 21-51"
+    },
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/Bug/ExistingArrays.cs#L25",
+      "Location": "Line 25 Position 21-53"
+    },
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/Bug/GenericCreateMapWithCircularReferences.cs#L21",
+      "Location": "Line 21 Position 21-25"
+    },
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/Bug/MapAtRuntime/MapAtRuntime.cs#L88",
+      "Location": "Line 88 Position 21-36"
+    },
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/Bug/MapAtRuntimeWithCollections/MapAtRuntimeWithCollections.cs#L110",
+      "Location": "Line 110 Position 21-36"
+    },
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/Bug/MemberNamedTypeBug.cs#L30",
+      "Location": "Line 30 Position 21-58"
+    },
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/Bug/MultiThreadingIssues.cs#L1159",
+      "Location": "Line 1159 Position 21-32"
+    },
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/Bug/MultiThreadingIssues.cs#L54",
+      "Location": "Line 54 Position 21-39"
+    },
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/Bug/MultiThreadingIssues.cs#L628",
+      "Location": "Line 628 Position 21-32"
+    },
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/Bug/NullConstructorParameterName.cs#L12",
+      "Location": "Line 12 Position 21-36"
+    },
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/Bug/RepeatedMappingConfigurationTest.cs#L28",
+      "Location": "Line 28 Position 21-62"
+    },
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/Bug/SubclassMappings.cs#L28",
+      "Location": "Line 28 Position 21-29"
+    },
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/Constructors.cs#L134",
+      "Location": "Line 134 Position 21-32"
+    },
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/Constructors.cs#L199",
+      "Location": "Line 199 Position 21-32"
+    },
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/CustomCollectionTester.cs#L8",
+      "Location": "Line 8 Position 21-83"
+    },
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/InterfaceMapping.cs#L170",
+      "Location": "Line 170 Position 21-58"
+    },
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/Internal/CreateProxyThreading.cs#L12",
+      "Location": "Line 12 Position 21-49"
+    },
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/Mappers/StringDictionaryMapperTests.cs#L247",
+      "Location": "Line 247 Position 21-34"
+    },
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/ReverseMapping.cs#L125",
+      "Location": "Line 125 Position 21-32"
+    },
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/TypeExtensionsTests.cs#L24",
+      "Location": "Line 24 Position 25-56"
+    },
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/UnitTests/ValueTypes.cs#L36",
+      "Location": "Line 36 Position 21-32"
+    }
+  ]
 }

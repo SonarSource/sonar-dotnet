@@ -1,556 +1,124 @@
 {
-"issues":  [
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'MaterializationException' because it implements 'ISerializable'.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L259",
-"region":  {
-"startLine":  259,
-"startColumn":  18,
-"endLine":  259,
-"endColumn":  42
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L259",
-"region":  {
-"startLine":  259,
-"startColumn":  12,
-"endLine":  259,
-"endColumn":  17
-}
-}
-]
-},
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'AbruptStageTerminationException' because it implements 'ISerializable'. Make the serialization constructor 'private'.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L281",
-"region":  {
-"startLine":  281,
-"startColumn":  25,
-"endLine":  281,
-"endColumn":  56
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L281",
-"region":  {
-"startLine":  281,
-"startColumn":  19,
-"endLine":  281,
-"endColumn":  24
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L294",
-"region":  {
-"startLine":  294,
-"startColumn":  19,
-"endLine":  294,
-"endColumn":  50
-}
-}
-]
-},
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'FramingException' because it implements 'ISerializable'.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Framing.cs#L117",
-"region":  {
-"startLine":  117,
-"startColumn":  22,
-"endLine":  117,
-"endColumn":  38
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Framing.cs#L117",
-"region":  {
-"startLine":  117,
-"startColumn":  16,
-"endLine":  117,
-"endColumn":  21
-}
-}
-]
-},
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'PartitionOutOfBoundsException' because it implements 'ISerializable'. Make the serialization constructor 'private'.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L1205",
-"region":  {
-"startLine":  1205,
-"startColumn":  25,
-"endLine":  1205,
-"endColumn":  54
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L1205",
-"region":  {
-"startLine":  1205,
-"startColumn":  19,
-"endLine":  1205,
-"endColumn":  24
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L1221",
-"region":  {
-"startLine":  1221,
-"startColumn":  19,
-"endLine":  1221,
-"endColumn":  48
-}
-}
-]
-},
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'UnexpectedOutputException' because it implements 'ISerializable'.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/One2OneBidiFlow.cs#L36",
-"region":  {
-"startLine":  36,
-"startColumn":  18,
-"endLine":  36,
-"endColumn":  43
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/One2OneBidiFlow.cs#L36",
-"region":  {
-"startLine":  36,
-"startColumn":  12,
-"endLine":  36,
-"endColumn":  17
-}
-}
-]
-},
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'OutputTruncationException' because it implements 'ISerializable'.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/One2OneBidiFlow.cs#L58",
-"region":  {
-"startLine":  58,
-"startColumn":  18,
-"endLine":  58,
-"endColumn":  43
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/One2OneBidiFlow.cs#L58",
-"region":  {
-"startLine":  58,
-"startColumn":  12,
-"endLine":  58,
-"endColumn":  17
-}
-}
-]
-},
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'TcpIdleTimeoutException' because it implements 'ISerializable'. Make the serialization constructor 'private'.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L300",
-"region":  {
-"startLine":  300,
-"startColumn":  25,
-"endLine":  300,
-"endColumn":  48
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L300",
-"region":  {
-"startLine":  300,
-"startColumn":  19,
-"endLine":  300,
-"endColumn":  24
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L312",
-"region":  {
-"startLine":  312,
-"startColumn":  19,
-"endLine":  312,
-"endColumn":  42
-}
-}
-]
-},
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'MaterializationPanicException' because it implements 'ISerializable'.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2134",
-"region":  {
-"startLine":  2134,
-"startColumn":  22,
-"endLine":  2134,
-"endColumn":  51
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2134",
-"region":  {
-"startLine":  2134,
-"startColumn":  16,
-"endLine":  2134,
-"endColumn":  21
-}
-}
-]
-},
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'SubscriptionTimeoutException' because it implements 'ISerializable'.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamSubscriptionTimeout.cs#L20",
-"region":  {
-"startLine":  20,
-"startColumn":  18,
-"endLine":  20,
-"endColumn":  46
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamSubscriptionTimeout.cs#L20",
-"region":  {
-"startLine":  20,
-"startColumn":  12,
-"endLine":  20,
-"endColumn":  17
-}
-}
-]
-},
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'NoSuchElementException' because it implements 'ISerializable'.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StageException.cs#L16",
-"region":  {
-"startLine":  16,
-"startColumn":  18,
-"endLine":  16,
-"endColumn":  40
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StageException.cs#L16",
-"region":  {
-"startLine":  16,
-"startColumn":  12,
-"endLine":  16,
-"endColumn":  17
-}
-}
-]
-},
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'StreamLimitReachedException' because it implements 'ISerializable'.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamLimitReachedException.cs#L16",
-"region":  {
-"startLine":  16,
-"startColumn":  18,
-"endLine":  16,
-"endColumn":  45
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamLimitReachedException.cs#L16",
-"region":  {
-"startLine":  16,
-"startColumn":  12,
-"endLine":  16,
-"endColumn":  17
-}
-}
-]
-},
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'InvalidSequenceNumberException' because it implements 'ISerializable'. Make the serialization constructor 'private'.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamRefs.cs#L112",
-"region":  {
-"startLine":  112,
-"startColumn":  25,
-"endLine":  112,
-"endColumn":  55
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamRefs.cs#L112",
-"region":  {
-"startLine":  112,
-"startColumn":  19,
-"endLine":  112,
-"endColumn":  24
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamRefs.cs#L129",
-"region":  {
-"startLine":  129,
-"startColumn":  19,
-"endLine":  129,
-"endColumn":  49
-}
-}
-]
-},
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'InvalidPartnerActorException' because it implements 'ISerializable'. Make the serialization constructor 'private'.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamRefs.cs#L145",
-"region":  {
-"startLine":  145,
-"startColumn":  25,
-"endLine":  145,
-"endColumn":  53
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamRefs.cs#L145",
-"region":  {
-"startLine":  145,
-"startColumn":  19,
-"endLine":  145,
-"endColumn":  24
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamRefs.cs#L163",
-"region":  {
-"startLine":  163,
-"startColumn":  19,
-"endLine":  163,
-"endColumn":  47
-}
-}
-]
-},
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'TargetRefNotInitializedYetException' because it implements 'ISerializable'. Make the serialization constructor 'private'.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamRefs.cs#L56",
-"region":  {
-"startLine":  56,
-"startColumn":  25,
-"endLine":  56,
-"endColumn":  60
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamRefs.cs#L56",
-"region":  {
-"startLine":  56,
-"startColumn":  19,
-"endLine":  56,
-"endColumn":  24
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamRefs.cs#L69",
-"region":  {
-"startLine":  69,
-"startColumn":  19,
-"endLine":  69,
-"endColumn":  54
-}
-}
-]
-},
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'StreamRefSubscriptionTimeoutException' because it implements 'ISerializable'. Make the serialization constructor 'private'.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamRefs.cs#L75",
-"region":  {
-"startLine":  75,
-"startColumn":  25,
-"endLine":  75,
-"endColumn":  62
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamRefs.cs#L75",
-"region":  {
-"startLine":  75,
-"startColumn":  19,
-"endLine":  75,
-"endColumn":  24
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamRefs.cs#L86",
-"region":  {
-"startLine":  86,
-"startColumn":  19,
-"endLine":  86,
-"endColumn":  56
-}
-}
-]
-},
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'RemoteStreamRefActorTerminatedException' because it implements 'ISerializable'. Make the serialization constructor 'private'.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamRefs.cs#L92",
-"region":  {
-"startLine":  92,
-"startColumn":  25,
-"endLine":  92,
-"endColumn":  64
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamRefs.cs#L92",
-"region":  {
-"startLine":  92,
-"startColumn":  19,
-"endLine":  92,
-"endColumn":  24
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamRefs.cs#L106",
-"region":  {
-"startLine":  106,
-"startColumn":  19,
-"endLine":  106,
-"endColumn":  58
-}
-}
-]
-},
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'StreamTcpException' because it implements 'ISerializable'.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamTcpException.cs#L16",
-"region":  {
-"startLine":  16,
-"startColumn":  18,
-"endLine":  16,
-"endColumn":  36
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamTcpException.cs#L16",
-"region":  {
-"startLine":  16,
-"startColumn":  12,
-"endLine":  16,
-"endColumn":  17
-}
-}
-]
-},
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'BindFailedException' because it implements 'ISerializable'.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamTcpException.cs#L64",
-"region":  {
-"startLine":  64,
-"startColumn":  18,
-"endLine":  64,
-"endColumn":  37
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamTcpException.cs#L64",
-"region":  {
-"startLine":  64,
-"startColumn":  12,
-"endLine":  64,
-"endColumn":  17
-}
-}
-]
-},
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'ConnectionException' because it implements 'ISerializable'.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamTcpException.cs#L88",
-"region":  {
-"startLine":  88,
-"startColumn":  18,
-"endLine":  88,
-"endColumn":  37
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamTcpException.cs#L88",
-"region":  {
-"startLine":  88,
-"startColumn":  12,
-"endLine":  88,
-"endColumn":  17
-}
-}
-]
-},
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'WatchedActorTerminatedException' because it implements 'ISerializable'.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/WatchedActorTerminatedException.cs#L21",
-"region":  {
-"startLine":  21,
-"startColumn":  18,
-"endLine":  21,
-"endColumn":  49
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/WatchedActorTerminatedException.cs#L21",
-"region":  {
-"startLine":  21,
-"startColumn":  12,
-"endLine":  21,
-"endColumn":  17
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S3925",
+      "Message": "Update this implementation of \u0027ISerializable\u0027 to conform to the recommended serialization pattern. Add \u0027System.SerializableAttribute\u0027 attribute on \u0027MaterializationException\u0027 because it implements \u0027ISerializable\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L259",
+      "Location": "Line 259 Position 18-42"
+    },
+    {
+      "Id": "S3925",
+      "Message": "Update this implementation of \u0027ISerializable\u0027 to conform to the recommended serialization pattern. Add \u0027System.SerializableAttribute\u0027 attribute on \u0027AbruptStageTerminationException\u0027 because it implements \u0027ISerializable\u0027. Make the serialization constructor \u0027private\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L281",
+      "Location": "Line 281 Position 25-56"
+    },
+    {
+      "Id": "S3925",
+      "Message": "Update this implementation of \u0027ISerializable\u0027 to conform to the recommended serialization pattern. Add \u0027System.SerializableAttribute\u0027 attribute on \u0027FramingException\u0027 because it implements \u0027ISerializable\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Framing.cs#L117",
+      "Location": "Line 117 Position 22-38"
+    },
+    {
+      "Id": "S3925",
+      "Message": "Update this implementation of \u0027ISerializable\u0027 to conform to the recommended serialization pattern. Add \u0027System.SerializableAttribute\u0027 attribute on \u0027PartitionOutOfBoundsException\u0027 because it implements \u0027ISerializable\u0027. Make the serialization constructor \u0027private\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L1205",
+      "Location": "Line 1205 Position 25-54"
+    },
+    {
+      "Id": "S3925",
+      "Message": "Update this implementation of \u0027ISerializable\u0027 to conform to the recommended serialization pattern. Add \u0027System.SerializableAttribute\u0027 attribute on \u0027UnexpectedOutputException\u0027 because it implements \u0027ISerializable\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/One2OneBidiFlow.cs#L36",
+      "Location": "Line 36 Position 18-43"
+    },
+    {
+      "Id": "S3925",
+      "Message": "Update this implementation of \u0027ISerializable\u0027 to conform to the recommended serialization pattern. Add \u0027System.SerializableAttribute\u0027 attribute on \u0027OutputTruncationException\u0027 because it implements \u0027ISerializable\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/One2OneBidiFlow.cs#L58",
+      "Location": "Line 58 Position 18-43"
+    },
+    {
+      "Id": "S3925",
+      "Message": "Update this implementation of \u0027ISerializable\u0027 to conform to the recommended serialization pattern. Add \u0027System.SerializableAttribute\u0027 attribute on \u0027TcpIdleTimeoutException\u0027 because it implements \u0027ISerializable\u0027. Make the serialization constructor \u0027private\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L300",
+      "Location": "Line 300 Position 25-48"
+    },
+    {
+      "Id": "S3925",
+      "Message": "Update this implementation of \u0027ISerializable\u0027 to conform to the recommended serialization pattern. Add \u0027System.SerializableAttribute\u0027 attribute on \u0027MaterializationPanicException\u0027 because it implements \u0027ISerializable\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2134",
+      "Location": "Line 2134 Position 22-51"
+    },
+    {
+      "Id": "S3925",
+      "Message": "Update this implementation of \u0027ISerializable\u0027 to conform to the recommended serialization pattern. Add \u0027System.SerializableAttribute\u0027 attribute on \u0027SubscriptionTimeoutException\u0027 because it implements \u0027ISerializable\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamSubscriptionTimeout.cs#L20",
+      "Location": "Line 20 Position 18-46"
+    },
+    {
+      "Id": "S3925",
+      "Message": "Update this implementation of \u0027ISerializable\u0027 to conform to the recommended serialization pattern. Add \u0027System.SerializableAttribute\u0027 attribute on \u0027NoSuchElementException\u0027 because it implements \u0027ISerializable\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StageException.cs#L16",
+      "Location": "Line 16 Position 18-40"
+    },
+    {
+      "Id": "S3925",
+      "Message": "Update this implementation of \u0027ISerializable\u0027 to conform to the recommended serialization pattern. Add \u0027System.SerializableAttribute\u0027 attribute on \u0027StreamLimitReachedException\u0027 because it implements \u0027ISerializable\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamLimitReachedException.cs#L16",
+      "Location": "Line 16 Position 18-45"
+    },
+    {
+      "Id": "S3925",
+      "Message": "Update this implementation of \u0027ISerializable\u0027 to conform to the recommended serialization pattern. Add \u0027System.SerializableAttribute\u0027 attribute on \u0027InvalidSequenceNumberException\u0027 because it implements \u0027ISerializable\u0027. Make the serialization constructor \u0027private\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamRefs.cs#L112",
+      "Location": "Line 112 Position 25-55"
+    },
+    {
+      "Id": "S3925",
+      "Message": "Update this implementation of \u0027ISerializable\u0027 to conform to the recommended serialization pattern. Add \u0027System.SerializableAttribute\u0027 attribute on \u0027InvalidPartnerActorException\u0027 because it implements \u0027ISerializable\u0027. Make the serialization constructor \u0027private\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamRefs.cs#L145",
+      "Location": "Line 145 Position 25-53"
+    },
+    {
+      "Id": "S3925",
+      "Message": "Update this implementation of \u0027ISerializable\u0027 to conform to the recommended serialization pattern. Add \u0027System.SerializableAttribute\u0027 attribute on \u0027TargetRefNotInitializedYetException\u0027 because it implements \u0027ISerializable\u0027. Make the serialization constructor \u0027private\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamRefs.cs#L56",
+      "Location": "Line 56 Position 25-60"
+    },
+    {
+      "Id": "S3925",
+      "Message": "Update this implementation of \u0027ISerializable\u0027 to conform to the recommended serialization pattern. Add \u0027System.SerializableAttribute\u0027 attribute on \u0027StreamRefSubscriptionTimeoutException\u0027 because it implements \u0027ISerializable\u0027. Make the serialization constructor \u0027private\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamRefs.cs#L75",
+      "Location": "Line 75 Position 25-62"
+    },
+    {
+      "Id": "S3925",
+      "Message": "Update this implementation of \u0027ISerializable\u0027 to conform to the recommended serialization pattern. Add \u0027System.SerializableAttribute\u0027 attribute on \u0027RemoteStreamRefActorTerminatedException\u0027 because it implements \u0027ISerializable\u0027. Make the serialization constructor \u0027private\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamRefs.cs#L92",
+      "Location": "Line 92 Position 25-64"
+    },
+    {
+      "Id": "S3925",
+      "Message": "Update this implementation of \u0027ISerializable\u0027 to conform to the recommended serialization pattern. Add \u0027System.SerializableAttribute\u0027 attribute on \u0027StreamTcpException\u0027 because it implements \u0027ISerializable\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamTcpException.cs#L16",
+      "Location": "Line 16 Position 18-36"
+    },
+    {
+      "Id": "S3925",
+      "Message": "Update this implementation of \u0027ISerializable\u0027 to conform to the recommended serialization pattern. Add \u0027System.SerializableAttribute\u0027 attribute on \u0027BindFailedException\u0027 because it implements \u0027ISerializable\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamTcpException.cs#L64",
+      "Location": "Line 64 Position 18-37"
+    },
+    {
+      "Id": "S3925",
+      "Message": "Update this implementation of \u0027ISerializable\u0027 to conform to the recommended serialization pattern. Add \u0027System.SerializableAttribute\u0027 attribute on \u0027ConnectionException\u0027 because it implements \u0027ISerializable\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamTcpException.cs#L88",
+      "Location": "Line 88 Position 18-37"
+    },
+    {
+      "Id": "S3925",
+      "Message": "Update this implementation of \u0027ISerializable\u0027 to conform to the recommended serialization pattern. Add \u0027System.SerializableAttribute\u0027 attribute on \u0027WatchedActorTerminatedException\u0027 because it implements \u0027ISerializable\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/WatchedActorTerminatedException.cs#L21",
+      "Location": "Line 21 Position 18-49"
+    }
+  ]
 }

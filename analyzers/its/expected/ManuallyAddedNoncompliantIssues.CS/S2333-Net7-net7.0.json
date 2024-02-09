@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2333",
-"message":  "'unsafe' is redundant in this context.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/Net7/S107.cs#L5",
-"region":  {
-"startLine":  5,
-"startColumn":  19,
-"endLine":  5,
-"endColumn":  25
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2333",
+      "Message": "\u0027unsafe\u0027 is redundant in this context.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/Net7/S107.cs#L5",
+      "Location": "Line 5 Position 19-25"
+    }
+  ]
 }

@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S4035",
-"message":  "Seal class 'ImmutableMessage' or implement 'IEqualityComparer<T>' instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/ImmutableMessage.cs#L12",
-"region":  {
-"startLine":  12,
-"startColumn":  18,
-"endLine":  12,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S4035",
-"message":  "Seal class 'ImmutableMessageWithPrivateCtor' or implement 'IEqualityComparer<T>' instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/ImmutableMessageWithPrivateCtor.cs#L12",
-"region":  {
-"startLine":  12,
-"startColumn":  18,
-"endLine":  12,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S4035",
-"message":  "Seal class 'UntypedContainerMessage' or implement 'IEqualityComparer<T>' instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/UntypedContainerMessage.cs#L12",
-"region":  {
-"startLine":  12,
-"startColumn":  18,
-"endLine":  12,
-"endColumn":  41
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4035",
+      "Message": "Seal class \u0027ImmutableMessage\u0027 or implement \u0027IEqualityComparer\u003CT\u003E\u0027 instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/ImmutableMessage.cs#L12",
+      "Location": "Line 12 Position 18-34"
+    },
+    {
+      "Id": "S4035",
+      "Message": "Seal class \u0027ImmutableMessageWithPrivateCtor\u0027 or implement \u0027IEqualityComparer\u003CT\u003E\u0027 instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/ImmutableMessageWithPrivateCtor.cs#L12",
+      "Location": "Line 12 Position 18-49"
+    },
+    {
+      "Id": "S4035",
+      "Message": "Seal class \u0027UntypedContainerMessage\u0027 or implement \u0027IEqualityComparer\u003CT\u003E\u0027 instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/UntypedContainerMessage.cs#L12",
+      "Location": "Line 12 Position 18-41"
+    }
+  ]
 }

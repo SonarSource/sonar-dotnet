@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S138",
-"message":  "This method 'Main' has 251 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L136",
-"region":  {
-"startLine":  136,
-"startColumn":  21,
-"endLine":  136,
-"endColumn":  25
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S138",
+      "Message": "This method \u0027Main\u0027 has 251 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L136",
+      "Location": "Line 136 Position 21-25"
+    }
+  ]
 }

@@ -1,238 +1,112 @@
 {
-"issues":  [
-{
-"id":  "S2333",
-"message":  "'unchecked' is redundant in this context.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L303",
-"region":  {
-"startLine":  303,
-"startColumn":  17,
-"endLine":  303,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S2333",
-"message":  "'unchecked' is redundant in this context.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L351",
-"region":  {
-"startLine":  351,
-"startColumn":  17,
-"endLine":  351,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S2333",
-"message":  "'unchecked' is redundant in this context.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L398",
-"region":  {
-"startLine":  398,
-"startColumn":  17,
-"endLine":  398,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S2333",
-"message":  "'unchecked' is redundant in this context.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L447",
-"region":  {
-"startLine":  447,
-"startColumn":  17,
-"endLine":  447,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S2333",
-"message":  "'unchecked' is redundant in this context.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L552",
-"region":  {
-"startLine":  552,
-"startColumn":  17,
-"endLine":  552,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S2333",
-"message":  "'unchecked' is redundant in this context.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L600",
-"region":  {
-"startLine":  600,
-"startColumn":  17,
-"endLine":  600,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S2333",
-"message":  "'unchecked' is redundant in this context.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L653",
-"region":  {
-"startLine":  653,
-"startColumn":  17,
-"endLine":  653,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S2333",
-"message":  "'unchecked' is redundant in this context.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L701",
-"region":  {
-"startLine":  701,
-"startColumn":  17,
-"endLine":  701,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S2333",
-"message":  "'unchecked' is redundant in this context.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L752",
-"region":  {
-"startLine":  752,
-"startColumn":  17,
-"endLine":  752,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S2333",
-"message":  "'unchecked' is redundant in this context.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L800",
-"region":  {
-"startLine":  800,
-"startColumn":  17,
-"endLine":  800,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S2333",
-"message":  "'unchecked' is redundant in this context.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L908",
-"region":  {
-"startLine":  908,
-"startColumn":  17,
-"endLine":  908,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S2333",
-"message":  "'unchecked' is redundant in this context.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L961",
-"region":  {
-"startLine":  961,
-"startColumn":  17,
-"endLine":  961,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S2333",
-"message":  "'unchecked' is redundant in this context.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1009",
-"region":  {
-"startLine":  1009,
-"startColumn":  17,
-"endLine":  1009,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S2333",
-"message":  "'unchecked' is redundant in this context.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1057",
-"region":  {
-"startLine":  1057,
-"startColumn":  17,
-"endLine":  1057,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S2333",
-"message":  "'unchecked' is redundant in this context.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1105",
-"region":  {
-"startLine":  1105,
-"startColumn":  17,
-"endLine":  1105,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S2333",
-"message":  "'unchecked' is redundant in this context.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1210",
-"region":  {
-"startLine":  1210,
-"startColumn":  17,
-"endLine":  1210,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S2333",
-"message":  "'unchecked' is redundant in this context.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L212",
-"region":  {
-"startLine":  212,
-"startColumn":  17,
-"endLine":  212,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S2333",
-"message":  "'unchecked' is redundant in this context.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L128",
-"region":  {
-"startLine":  128,
-"startColumn":  17,
-"endLine":  128,
-"endColumn":  26
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2333",
+      "Message": "\u0027unchecked\u0027 is redundant in this context.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1009",
+      "Location": "Line 1009 Position 17-26"
+    },
+    {
+      "Id": "S2333",
+      "Message": "\u0027unchecked\u0027 is redundant in this context.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1057",
+      "Location": "Line 1057 Position 17-26"
+    },
+    {
+      "Id": "S2333",
+      "Message": "\u0027unchecked\u0027 is redundant in this context.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1105",
+      "Location": "Line 1105 Position 17-26"
+    },
+    {
+      "Id": "S2333",
+      "Message": "\u0027unchecked\u0027 is redundant in this context.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1210",
+      "Location": "Line 1210 Position 17-26"
+    },
+    {
+      "Id": "S2333",
+      "Message": "\u0027unchecked\u0027 is redundant in this context.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L303",
+      "Location": "Line 303 Position 17-26"
+    },
+    {
+      "Id": "S2333",
+      "Message": "\u0027unchecked\u0027 is redundant in this context.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L351",
+      "Location": "Line 351 Position 17-26"
+    },
+    {
+      "Id": "S2333",
+      "Message": "\u0027unchecked\u0027 is redundant in this context.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L398",
+      "Location": "Line 398 Position 17-26"
+    },
+    {
+      "Id": "S2333",
+      "Message": "\u0027unchecked\u0027 is redundant in this context.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L447",
+      "Location": "Line 447 Position 17-26"
+    },
+    {
+      "Id": "S2333",
+      "Message": "\u0027unchecked\u0027 is redundant in this context.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L552",
+      "Location": "Line 552 Position 17-26"
+    },
+    {
+      "Id": "S2333",
+      "Message": "\u0027unchecked\u0027 is redundant in this context.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L600",
+      "Location": "Line 600 Position 17-26"
+    },
+    {
+      "Id": "S2333",
+      "Message": "\u0027unchecked\u0027 is redundant in this context.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L653",
+      "Location": "Line 653 Position 17-26"
+    },
+    {
+      "Id": "S2333",
+      "Message": "\u0027unchecked\u0027 is redundant in this context.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L701",
+      "Location": "Line 701 Position 17-26"
+    },
+    {
+      "Id": "S2333",
+      "Message": "\u0027unchecked\u0027 is redundant in this context.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L752",
+      "Location": "Line 752 Position 17-26"
+    },
+    {
+      "Id": "S2333",
+      "Message": "\u0027unchecked\u0027 is redundant in this context.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L800",
+      "Location": "Line 800 Position 17-26"
+    },
+    {
+      "Id": "S2333",
+      "Message": "\u0027unchecked\u0027 is redundant in this context.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L908",
+      "Location": "Line 908 Position 17-26"
+    },
+    {
+      "Id": "S2333",
+      "Message": "\u0027unchecked\u0027 is redundant in this context.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L961",
+      "Location": "Line 961 Position 17-26"
+    },
+    {
+      "Id": "S2333",
+      "Message": "\u0027unchecked\u0027 is redundant in this context.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L212",
+      "Location": "Line 212 Position 17-26"
+    },
+    {
+      "Id": "S2333",
+      "Message": "\u0027unchecked\u0027 is redundant in this context.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L128",
+      "Location": "Line 128 Position 17-26"
+    }
+  ]
 }

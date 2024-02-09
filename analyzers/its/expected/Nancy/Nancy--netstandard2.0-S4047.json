@@ -1,28 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S4047",
-"message":  "Make this method generic and replace the 'object' parameter with a type parameter.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Json/Simple/NancySerializationStrategy.cs#L216",
-"region":  {
-"startLine":  216,
-"startColumn":  22,
-"endLine":  216,
-"endColumn":  52
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Json/Simple/NancySerializationStrategy.cs#L216",
-"region":  {
-"startLine":  216,
-"startColumn":  78,
-"endLine":  216,
-"endColumn":  84
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S4047",
+      "Message": "Make this method generic and replace the \u0027object\u0027 parameter with a type parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Json/Simple/NancySerializationStrategy.cs#L216",
+      "Location": "Line 216 Position 22-52"
+    }
+  ]
 }

@@ -1,56 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S2325",
-"message":  "Make 'GetDeadline' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L649",
-"region":  {
-"startLine":  649,
-"startColumn":  25,
-"endLine":  649,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'FailBarrier' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L271",
-"region":  {
-"startLine":  271,
-"startColumn":  27,
-"endLine":  271,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'ComputeWps' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Extension.cs#L129",
-"region":  {
-"startLine":  129,
-"startColumn":  20,
-"endLine":  129,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'DebugConfig' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L66",
-"region":  {
-"startLine":  66,
-"startColumn":  23,
-"endLine":  66,
-"endColumn":  34
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027GetDeadline\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L649",
+      "Location": "Line 649 Position 25-36"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027FailBarrier\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L271",
+      "Location": "Line 271 Position 27-38"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027ComputeWps\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Extension.cs#L129",
+      "Location": "Line 129 Position 20-30"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027DebugConfig\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L66",
+      "Location": "Line 66 Position 23-34"
+    }
+  ]
 }

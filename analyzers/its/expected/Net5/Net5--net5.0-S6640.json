@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S6640",
-"message":  "Make sure that using "unsafe" is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/FunctionPointers.cs#L3",
-"region":  {
-"startLine":  3,
-"startColumn":  12,
-"endLine":  3,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S6640",
-"message":  "Make sure that using "unsafe" is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4000.cs#L5",
-"region":  {
-"startLine":  5,
-"startColumn":  12,
-"endLine":  5,
-"endColumn":  18
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6640",
+      "Message": "Make sure that using \u0022unsafe\u0022 is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/FunctionPointers.cs#L3",
+      "Location": "Line 3 Position 12-18"
+    },
+    {
+      "Id": "S6640",
+      "Message": "Make sure that using \u0022unsafe\u0022 is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4000.cs#L5",
+      "Location": "Line 5 Position 12-18"
+    }
+  ]
 }

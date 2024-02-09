@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S6797",
-"message":  "Query parameter type 'TimeSpan' is not supported.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6797/S6797.CsharpOnly.cs#L11",
-"region":  {
-"startLine":  11,
-"startColumn":  16,
-"endLine":  11,
-"endColumn":  24
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6797",
+      "Message": "Query parameter type \u0027TimeSpan\u0027 is not supported.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6797/S6797.CsharpOnly.cs#L11",
+      "Location": "Line 11 Position 16-24"
+    }
+  ]
 }

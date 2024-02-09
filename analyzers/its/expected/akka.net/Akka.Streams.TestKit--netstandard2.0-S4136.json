@@ -1,76 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S4136",
-"message":  "All 'ExpectEvent' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.TestKit/TestSubscriber.cs#L122",
-"region":  {
-"startLine":  122,
-"startColumn":  37,
-"endLine":  122,
-"endColumn":  48
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.TestKit/TestSubscriber.cs#L434",
-"region":  {
-"startLine":  434,
-"startColumn":  27,
-"endLine":  434,
-"endColumn":  38
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'ExpectNext' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.TestKit/TestSubscriber.cs#L141",
-"region":  {
-"startLine":  141,
-"startColumn":  22,
-"endLine":  141,
-"endColumn":  32
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.TestKit/TestSubscriber.cs#L420",
-"region":  {
-"startLine":  420,
-"startColumn":  27,
-"endLine":  420,
-"endColumn":  37
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'RequestNext' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.TestKit/TestSubscriber.cs#L554",
-"region":  {
-"startLine":  554,
-"startColumn":  29,
-"endLine":  554,
-"endColumn":  40
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.TestKit/TestSubscriber.cs#L570",
-"region":  {
-"startLine":  570,
-"startColumn":  22,
-"endLine":  570,
-"endColumn":  33
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S4136",
+      "Message": "All \u0027ExpectEvent\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.TestKit/TestSubscriber.cs#L122",
+      "Location": "Line 122 Position 37-48"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027ExpectNext\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.TestKit/TestSubscriber.cs#L141",
+      "Location": "Line 141 Position 22-32"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027RequestNext\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.TestKit/TestSubscriber.cs#L554",
+      "Location": "Line 554 Position 29-40"
+    }
+  ]
 }

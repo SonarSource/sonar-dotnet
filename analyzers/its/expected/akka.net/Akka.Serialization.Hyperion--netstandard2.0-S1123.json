@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1123",
-"message":  "Add an explanation.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.Hyperion/HyperionSerializer.cs#L265",
-"region":  {
-"startLine":  265,
-"startColumn":  10,
-"endLine":  265,
-"endColumn":  18
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1123",
+      "Message": "Add an explanation.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.Hyperion/HyperionSerializer.cs#L265",
+      "Location": "Line 265 Position 10-18"
+    }
+  ]
 }

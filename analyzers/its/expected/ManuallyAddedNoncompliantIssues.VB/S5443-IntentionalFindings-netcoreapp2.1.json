@@ -1,173 +1,82 @@
 {
-"issues":  [
-{
-"id":  "S5443",
-"message":  "Make sure publicly writable directories are used safely here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S5443.vb#L12",
-"region":  {
-"startLine":  12,
-"startColumn":  29,
-"endLine":  12,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S5443",
-"message":  "Make sure publicly writable directories are used safely here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S5443.vb#L13",
-"region":  {
-"startLine":  13,
-"startColumn":  15,
-"endLine":  13,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S5443",
-"message":  "Make sure publicly writable directories are used safely here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S5443.vb#L14",
-"region":  {
-"startLine":  14,
-"startColumn":  15,
-"endLine":  14,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S5443",
-"message":  "Make sure publicly writable directories are used safely here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S5443.vb#L16",
-"region":  {
-"startLine":  16,
-"startColumn":  15,
-"endLine":  16,
-"endColumn":  56
-}
-}
-},
-{
-"id":  "S5443",
-"message":  "Make sure publicly writable directories are used safely here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S5443.vb#L17",
-"region":  {
-"startLine":  17,
-"startColumn":  15,
-"endLine":  17,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S5443",
-"message":  "Make sure publicly writable directories are used safely here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S5443.vb#L18",
-"region":  {
-"startLine":  18,
-"startColumn":  54,
-"endLine":  18,
-"endColumn":  64
-}
-}
-},
-{
-"id":  "S5443",
-"message":  "Make sure publicly writable directories are used safely here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S5443.vb#L19",
-"region":  {
-"startLine":  19,
-"startColumn":  54,
-"endLine":  19,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S5443",
-"message":  "Make sure publicly writable directories are used safely here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S5443.vb#L20",
-"region":  {
-"startLine":  20,
-"startColumn":  54,
-"endLine":  20,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S5443",
-"message":  "Make sure publicly writable directories are used safely here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S5443.vb#L21",
-"region":  {
-"startLine":  21,
-"startColumn":  15,
-"endLine":  21,
-"endColumn":  51
-}
-}
-},
-{
-"id":  "S5443",
-"message":  "Make sure publicly writable directories are used safely here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S5443.vb#L22",
-"region":  {
-"startLine":  22,
-"startColumn":  15,
-"endLine":  22,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S5443",
-"message":  "Make sure publicly writable directories are used safely here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S5443.vb#L23",
-"region":  {
-"startLine":  23,
-"startColumn":  15,
-"endLine":  23,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S5443",
-"message":  "Make sure publicly writable directories are used safely here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S5443.vb#L24",
-"region":  {
-"startLine":  24,
-"startColumn":  15,
-"endLine":  24,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S5443",
-"message":  "Make sure publicly writable directories are used safely here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S5443.vb#L26",
-"region":  {
-"startLine":  26,
-"startColumn":  15,
-"endLine":  26,
-"endColumn":  35
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S5443",
+      "Message": "Make sure publicly writable directories are used safely here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S5443.vb#L12",
+      "Location": "Line 12 Position 29-47"
+    },
+    {
+      "Id": "S5443",
+      "Message": "Make sure publicly writable directories are used safely here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S5443.vb#L13",
+      "Location": "Line 13 Position 15-33"
+    },
+    {
+      "Id": "S5443",
+      "Message": "Make sure publicly writable directories are used safely here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S5443.vb#L14",
+      "Location": "Line 14 Position 15-59"
+    },
+    {
+      "Id": "S5443",
+      "Message": "Make sure publicly writable directories are used safely here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S5443.vb#L16",
+      "Location": "Line 16 Position 15-56"
+    },
+    {
+      "Id": "S5443",
+      "Message": "Make sure publicly writable directories are used safely here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S5443.vb#L17",
+      "Location": "Line 17 Position 15-57"
+    },
+    {
+      "Id": "S5443",
+      "Message": "Make sure publicly writable directories are used safely here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S5443.vb#L18",
+      "Location": "Line 18 Position 54-64"
+    },
+    {
+      "Id": "S5443",
+      "Message": "Make sure publicly writable directories are used safely here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S5443.vb#L19",
+      "Location": "Line 19 Position 54-61"
+    },
+    {
+      "Id": "S5443",
+      "Message": "Make sure publicly writable directories are used safely here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S5443.vb#L20",
+      "Location": "Line 20 Position 54-62"
+    },
+    {
+      "Id": "S5443",
+      "Message": "Make sure publicly writable directories are used safely here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S5443.vb#L21",
+      "Location": "Line 21 Position 15-51"
+    },
+    {
+      "Id": "S5443",
+      "Message": "Make sure publicly writable directories are used safely here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S5443.vb#L22",
+      "Location": "Line 22 Position 15-25"
+    },
+    {
+      "Id": "S5443",
+      "Message": "Make sure publicly writable directories are used safely here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S5443.vb#L23",
+      "Location": "Line 23 Position 15-24"
+    },
+    {
+      "Id": "S5443",
+      "Message": "Make sure publicly writable directories are used safely here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S5443.vb#L24",
+      "Location": "Line 24 Position 15-27"
+    },
+    {
+      "Id": "S5443",
+      "Message": "Make sure publicly writable directories are used safely here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S5443.vb#L26",
+      "Location": "Line 26 Position 15-35"
+    }
+  ]
 }

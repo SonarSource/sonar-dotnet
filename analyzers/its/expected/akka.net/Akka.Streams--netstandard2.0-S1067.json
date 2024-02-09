@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1067",
-"message":  "Reduce the number of conditional operators (11) used in the expression (maximum allowed 3).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L617-L628",
-"region":  {
-"startLine":  617,
-"startColumn":  17,
-"endLine":  628,
-"endColumn":  57
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (11) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L617-L628",
+      "Location": "Lines 617-628 Position 17-57"
+    }
+  ]
 }

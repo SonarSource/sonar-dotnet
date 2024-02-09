@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3717",
-"message":  "Implement this method or throw 'NotSupportedException' instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L319",
-"region":  {
-"startLine":  319,
-"startColumn":  25,
-"endLine":  319,
-"endColumn":  134
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3717",
+      "Message": "Implement this method or throw \u0027NotSupportedException\u0027 instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L319",
+      "Location": "Line 319 Position 25-134"
+    }
+  ]
 }

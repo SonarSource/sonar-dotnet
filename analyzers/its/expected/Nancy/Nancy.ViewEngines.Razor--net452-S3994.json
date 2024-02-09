@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3994",
-"message":  "Either change this parameter type to 'System.Uri' or provide an overload which takes a 'System.Uri' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/NancyRazorViewBase.cs#L385",
-"region":  {
-"startLine":  385,
-"startColumn":  42,
-"endLine":  385,
-"endColumn":  48
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3994",
+      "Message": "Either change this parameter type to \u0027System.Uri\u0027 or provide an overload which takes a \u0027System.Uri\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/NancyRazorViewBase.cs#L385",
+      "Location": "Line 385 Position 42-48"
+    }
+  ]
 }

@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S101",
-"message":  "Rename class 'SSLProxy' to match pascal case naming rules, consider using 'SslProxy'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/SSLProxy.cs#L11",
-"region":  {
-"startLine":  11,
-"startColumn":  25,
-"endLine":  11,
-"endColumn":  33
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S101",
+      "Message": "Rename class \u0027SSLProxy\u0027 to match pascal case naming rules, consider using \u0027SslProxy\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/SSLProxy.cs#L11",
+      "Location": "Line 11 Position 25-33"
+    }
+  ]
 }

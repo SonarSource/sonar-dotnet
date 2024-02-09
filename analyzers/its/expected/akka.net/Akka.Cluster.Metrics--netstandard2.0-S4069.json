@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S4069",
-"message":  "Implement alternative method 'Add' for the operator '+'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/EWMA.cs#L62",
-"region":  {
-"startLine":  62,
-"startColumn":  45,
-"endLine":  62,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S4069",
-"message":  "Implement alternative method 'Add' for the operator '+'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/MetricsGossip.cs#L65",
-"region":  {
-"startLine":  65,
-"startColumn":  46,
-"endLine":  65,
-"endColumn":  47
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4069",
+      "Message": "Implement alternative method \u0027Add\u0027 for the operator \u0027\u002B\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/EWMA.cs#L62",
+      "Location": "Line 62 Position 45-46"
+    },
+    {
+      "Id": "S4069",
+      "Message": "Implement alternative method \u0027Add\u0027 for the operator \u0027\u002B\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/MetricsGossip.cs#L65",
+      "Location": "Line 65 Position 46-47"
+    }
+  ]
 }

@@ -1,160 +1,76 @@
 {
-"issues":  [
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Wait' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/FlowSelectBenchmark.cs#L71",
-"region":  {
-"startLine":  71,
-"startColumn":  35,
-"endLine":  71,
-"endColumn":  64
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Wait' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/FusedGraphsBenchmark.cs#L271",
-"region":  {
-"startLine":  271,
-"startColumn":  34,
-"endLine":  271,
-"endColumn":  58
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Wait' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/IO/FileSourcesBenchmark.cs#L56",
-"region":  {
-"startLine":  56,
-"startColumn":  13,
-"endLine":  56,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Wait' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/IO/FileSourcesBenchmark.cs#L75-L77",
-"region":  {
-"startLine":  75,
-"startColumn":  16,
-"endLine":  77,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Wait' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/IO/FileSourcesBenchmark.cs#L85-L88",
-"region":  {
-"startLine":  85,
-"startColumn":  16,
-"endLine":  88,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Wait' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/IO/FileSourcesBenchmark.cs#L96-L98",
-"region":  {
-"startLine":  96,
-"startColumn":  16,
-"endLine":  98,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Wait' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/IO/FileSourcesBenchmark.cs#L111",
-"region":  {
-"startLine":  111,
-"startColumn":  13,
-"endLine":  111,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Wait' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/MaterializationBenchmark.cs#L35",
-"region":  {
-"startLine":  35,
-"startColumn":  35,
-"endLine":  35,
-"endColumn":  64
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Wait' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/MergeManyBenchmark.cs#L59",
-"region":  {
-"startLine":  59,
-"startColumn":  35,
-"endLine":  59,
-"endColumn":  64
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Wait' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/MergeManyBenchmark.cs#L66",
-"region":  {
-"startLine":  66,
-"startColumn":  45,
-"endLine":  66,
-"endColumn":  79
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Wait' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/MergeManyBenchmark.cs#L73",
-"region":  {
-"startLine":  73,
-"startColumn":  66,
-"endLine":  73,
-"endColumn":  102
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Wait' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/MergeManyBenchmark.cs#L80",
-"region":  {
-"startLine":  80,
-"startColumn":  72,
-"endLine":  80,
-"endColumn":  105
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Wait\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/FlowSelectBenchmark.cs#L71",
+      "Location": "Line 71 Position 35-64"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Wait\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/FusedGraphsBenchmark.cs#L271",
+      "Location": "Line 271 Position 34-58"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Wait\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/IO/FileSourcesBenchmark.cs#L111",
+      "Location": "Line 111 Position 13-24"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Wait\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/IO/FileSourcesBenchmark.cs#L56",
+      "Location": "Line 56 Position 13-42"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Wait\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/IO/FileSourcesBenchmark.cs#L75-L77",
+      "Location": "Lines 75-77 Position 16-22"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Wait\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/IO/FileSourcesBenchmark.cs#L85-L88",
+      "Location": "Lines 85-88 Position 16-22"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Wait\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/IO/FileSourcesBenchmark.cs#L96-L98",
+      "Location": "Lines 96-98 Position 16-22"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Wait\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/MaterializationBenchmark.cs#L35",
+      "Location": "Line 35 Position 35-64"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Wait\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/MergeManyBenchmark.cs#L59",
+      "Location": "Line 59 Position 35-64"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Wait\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/MergeManyBenchmark.cs#L66",
+      "Location": "Line 66 Position 45-79"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Wait\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/MergeManyBenchmark.cs#L73",
+      "Location": "Line 73 Position 66-102"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Wait\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/MergeManyBenchmark.cs#L80",
+      "Location": "Line 80 Position 72-105"
+    }
+  ]
 }

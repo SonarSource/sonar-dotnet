@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S4058",
-"message":  "Change this call to 'moduleName.LastIndexOf' to an overload that accepts a 'StringComparison' as a parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Metadata.Modules/DefaultMetadataModuleConventions.cs#L38",
-"region":  {
-"startLine":  38,
-"startColumn":  21,
-"endLine":  38,
-"endColumn":  53
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027moduleName.LastIndexOf\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Metadata.Modules/DefaultMetadataModuleConventions.cs#L38",
+      "Location": "Line 38 Position 21-53"
+    }
+  ]
 }

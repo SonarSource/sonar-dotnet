@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S112",
-"message":  "'System.Exception' should not be thrown by user code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/PassThroughStatusHandler.cs#L23",
-"region":  {
-"startLine":  23,
-"startColumn":  19,
-"endLine":  23,
-"endColumn":  94
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S112",
+      "Message": "\u0027System.Exception\u0027 should not be thrown by user code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/PassThroughStatusHandler.cs#L23",
+      "Location": "Line 23 Position 19-94"
+    }
+  ]
 }

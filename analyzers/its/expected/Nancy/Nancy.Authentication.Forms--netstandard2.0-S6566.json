@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Forms/FormsAuthentication.cs#L301",
-"region":  {
-"startLine":  301,
-"startColumn":  120,
-"endLine":  301,
-"endColumn":  128
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6566",
+      "Message": "Prefer using \u0022DateTimeOffset\u0022 instead of \u0022DateTime\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Forms/FormsAuthentication.cs#L301",
+      "Location": "Line 301 Position 120-128"
+    }
+  ]
 }

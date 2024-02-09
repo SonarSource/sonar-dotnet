@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S1118",
-"message":  "Add a 'protected' constructor or the 'static' keyword to the class declaration.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/ConfigurationFactory.cs#L22",
-"region":  {
-"startLine":  22,
-"startColumn":  18,
-"endLine":  22,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S1118",
-"message":  "Add a 'protected' constructor or the 'static' keyword to the class declaration.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L1105",
-"region":  {
-"startLine":  1105,
-"startColumn":  18,
-"endLine":  1105,
-"endColumn":  28
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1118",
+      "Message": "Add a \u0027protected\u0027 constructor or the \u0027static\u0027 keyword to the class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/ConfigurationFactory.cs#L22",
+      "Location": "Line 22 Position 18-38"
+    },
+    {
+      "Id": "S1118",
+      "Message": "Add a \u0027protected\u0027 constructor or the \u0027static\u0027 keyword to the class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L1105",
+      "Location": "Line 1105 Position 18-28"
+    }
+  ]
 }

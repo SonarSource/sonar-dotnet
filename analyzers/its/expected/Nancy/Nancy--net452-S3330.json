@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S3330",
-"message":  "Make sure creating this cookie without the "HttpOnly" flag is safe.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RequestHeaders.cs#L425",
-"region":  {
-"startLine":  425,
-"startColumn":  38,
-"endLine":  425,
-"endColumn":  148
-}
-}
-},
-{
-"id":  "S3330",
-"message":  "Make sure creating this cookie without the "HttpOnly" flag is safe.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ResponseExtensions.cs#L81",
-"region":  {
-"startLine":  81,
-"startColumn":  41,
-"endLine":  81,
-"endColumn":  121
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3330",
+      "Message": "Make sure creating this cookie without the \u0022HttpOnly\u0022 flag is safe.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RequestHeaders.cs#L425",
+      "Location": "Line 425 Position 38-148"
+    },
+    {
+      "Id": "S3330",
+      "Message": "Make sure creating this cookie without the \u0022HttpOnly\u0022 flag is safe.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ResponseExtensions.cs#L81",
+      "Location": "Line 81 Position 41-121"
+    }
+  ]
 }

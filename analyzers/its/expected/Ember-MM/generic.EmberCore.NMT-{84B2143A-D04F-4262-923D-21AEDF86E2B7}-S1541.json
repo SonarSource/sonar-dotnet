@@ -1,225 +1,106 @@
 {
-"issues":  [
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this constructor is 11 which is greater than 10 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L75",
-"region":  {
-"startLine":  75,
-"startColumn":  5,
-"endLine":  75,
-"endColumn":  21
-}
-}
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this procedure is 11 which is greater than 10 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L151",
-"region":  {
-"startLine":  151,
-"startColumn":  5,
-"endLine":  151,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this procedure is 17 which is greater than 10 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L204",
-"region":  {
-"startLine":  204,
-"startColumn":  5,
-"endLine":  204,
-"endColumn":  136
-}
-}
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this procedure is 12 which is greater than 10 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L292",
-"region":  {
-"startLine":  292,
-"startColumn":  5,
-"endLine":  292,
-"endColumn":  85
-}
-}
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this procedure is 31 which is greater than 10 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L374",
-"region":  {
-"startLine":  374,
-"startColumn":  5,
-"endLine":  374,
-"endColumn":  82
-}
-}
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this function is 24 which is greater than 10 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L539",
-"region":  {
-"startLine":  539,
-"startColumn":  5,
-"endLine":  539,
-"endColumn":  168
-}
-}
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this function is 20 which is greater than 10 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L813",
-"region":  {
-"startLine":  813,
-"startColumn":  5,
-"endLine":  813,
-"endColumn":  85
-}
-}
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this procedure is 14 which is greater than 10 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L901",
-"region":  {
-"startLine":  901,
-"startColumn":  5,
-"endLine":  901,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this procedure is 20 which is greater than 10 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1022",
-"region":  {
-"startLine":  1022,
-"startColumn":  5,
-"endLine":  1022,
-"endColumn":  91
-}
-}
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this procedure is 20 which is greater than 10 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1101",
-"region":  {
-"startLine":  1101,
-"startColumn":  5,
-"endLine":  1101,
-"endColumn":  90
-}
-}
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this function is 23 which is greater than 10 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1213",
-"region":  {
-"startLine":  1213,
-"startColumn":  5,
-"endLine":  1213,
-"endColumn":  192
-}
-}
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this function is 13 which is greater than 10 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1278",
-"region":  {
-"startLine":  1278,
-"startColumn":  5,
-"endLine":  1278,
-"endColumn":  54
-}
-}
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this procedure is 20 which is greater than 10 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1349",
-"region":  {
-"startLine":  1349,
-"startColumn":  5,
-"endLine":  1349,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this procedure is 19 which is greater than 10 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1456",
-"region":  {
-"startLine":  1456,
-"startColumn":  5,
-"endLine":  1456,
-"endColumn":  82
-}
-}
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this procedure is 20 which is greater than 10 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1516",
-"region":  {
-"startLine":  1516,
-"startColumn":  5,
-"endLine":  1516,
-"endColumn":  79
-}
-}
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this procedure is 19 which is greater than 10 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1601",
-"region":  {
-"startLine":  1601,
-"startColumn":  5,
-"endLine":  1601,
-"endColumn":  128
-}
-}
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this procedure is 11 which is greater than 10 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L51",
-"region":  {
-"startLine":  51,
-"startColumn":  5,
-"endLine":  51,
-"endColumn":  65
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 20 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1022",
+      "Location": "Line 1022 Position 5-91"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 20 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1101",
+      "Location": "Line 1101 Position 5-90"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this function is 23 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1213",
+      "Location": "Line 1213 Position 5-192"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this function is 13 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1278",
+      "Location": "Line 1278 Position 5-54"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 20 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1349",
+      "Location": "Line 1349 Position 5-25"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 19 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1456",
+      "Location": "Line 1456 Position 5-82"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 11 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L151",
+      "Location": "Line 151 Position 5-28"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 20 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1516",
+      "Location": "Line 1516 Position 5-79"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 19 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1601",
+      "Location": "Line 1601 Position 5-128"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 17 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L204",
+      "Location": "Line 204 Position 5-136"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 12 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L292",
+      "Location": "Line 292 Position 5-85"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 31 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L374",
+      "Location": "Line 374 Position 5-82"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this function is 24 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L539",
+      "Location": "Line 539 Position 5-168"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this constructor is 11 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L75",
+      "Location": "Line 75 Position 5-21"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this function is 20 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L813",
+      "Location": "Line 813 Position 5-85"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 14 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L901",
+      "Location": "Line 901 Position 5-33"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 11 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L51",
+      "Location": "Line 51 Position 5-65"
+    }
+  ]
 }

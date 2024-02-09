@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2674",
-"message":  "Check the return value of the 'Read' call to see how many bytes were read.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/LocalSnapshotStore.cs#L209",
-"region":  {
-"startLine":  209,
-"startColumn":  13,
-"endLine":  209,
-"endColumn":  50
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2674",
+      "Message": "Check the return value of the \u0027Read\u0027 call to see how many bytes were read.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/LocalSnapshotStore.cs#L209",
+      "Location": "Line 209 Position 13-50"
+    }
+  ]
 }

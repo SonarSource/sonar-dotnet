@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2374",
-"message":  "Change this unsigned type to 'Integer'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L133",
-"region":  {
-"startLine":  133,
-"startColumn":  195,
-"endLine":  133,
-"endColumn":  201
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2374",
+      "Message": "Change this unsigned type to \u0027Integer\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L133",
+      "Location": "Line 133 Position 195-201"
+    }
+  ]
 }

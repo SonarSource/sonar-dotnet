@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1155",
-"message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L295",
-"region":  {
-"startLine":  295,
-"startColumn":  85,
-"endLine":  295,
-"endColumn":  90
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of String)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L295",
+      "Location": "Line 295 Position 85-90"
+    }
+  ]
 }

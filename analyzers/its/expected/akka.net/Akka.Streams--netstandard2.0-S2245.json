@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2245",
-"message":  "Make sure that using this pseudorandom number generator is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L450",
-"region":  {
-"startLine":  450,
-"startColumn":  50,
-"endLine":  450,
-"endColumn":  62
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2245",
+      "Message": "Make sure that using this pseudorandom number generator is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L450",
+      "Location": "Line 450 Position 50-62"
+    }
+  ]
 }

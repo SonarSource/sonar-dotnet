@@ -1,56 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S4023",
-"message":  "Remove this interface or add members to it.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L82",
-"region":  {
-"startLine":  82,
-"startColumn":  26,
-"endLine":  82,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S4023",
-"message":  "Remove this interface or add members to it.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L134",
-"region":  {
-"startLine":  134,
-"startColumn":  26,
-"endLine":  134,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S4023",
-"message":  "Remove this interface or add members to it.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/Transport.cs#L116",
-"region":  {
-"startLine":  116,
-"startColumn":  22,
-"endLine":  116,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S4023",
-"message":  "Remove this interface or add members to it.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/Transport.cs#L256",
-"region":  {
-"startLine":  256,
-"startColumn":  22,
-"endLine":  256,
-"endColumn":  39
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4023",
+      "Message": "Remove this interface or add members to it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L134",
+      "Location": "Line 134 Position 26-38"
+    },
+    {
+      "Id": "S4023",
+      "Message": "Remove this interface or add members to it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L82",
+      "Location": "Line 82 Position 26-49"
+    },
+    {
+      "Id": "S4023",
+      "Message": "Remove this interface or add members to it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/Transport.cs#L116",
+      "Location": "Line 116 Position 22-34"
+    },
+    {
+      "Id": "S4023",
+      "Message": "Remove this interface or add members to it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/Transport.cs#L256",
+      "Location": "Line 256 Position 22-39"
+    }
+  ]
 }

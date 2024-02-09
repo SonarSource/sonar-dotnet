@@ -1,121 +1,58 @@
 {
-"issues":  [
-{
-"id":  "S3220",
-"message":  "Review this call, which partially matches an overload without 'params'. The partial match is 'BlockExpression Expression.Block(Expression arg0, Expression arg1, Expression arg2, Expression arg3)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L109-L112",
-"region":  {
-"startLine":  109,
-"startColumn":  24,
-"endLine":  112,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S3220",
-"message":  "Review this call, which partially matches an overload without 'params'. The partial match is 'BlockExpression Expression.Block(Expression arg0, Expression arg1, Expression arg2)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L257-L266",
-"region":  {
-"startLine":  257,
-"startColumn":  24,
-"endLine":  266,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S3220",
-"message":  "Review this call, which partially matches an overload without 'params'. The partial match is 'BlockExpression Expression.Block(Expression arg0, Expression arg1, Expression arg2)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L273-L281",
-"region":  {
-"startLine":  273,
-"startColumn":  28,
-"endLine":  281,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S3220",
-"message":  "Review this call, which partially matches an overload without 'params'. The partial match is 'BlockExpression Expression.Block(Expression arg0, Expression arg1, Expression arg2)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L299",
-"region":  {
-"startLine":  299,
-"startColumn":  35,
-"endLine":  299,
-"endColumn":  179
-}
-}
-},
-{
-"id":  "S3220",
-"message":  "Review this call, which partially matches an overload without 'params'. The partial match is 'BlockExpression Expression.Block(Expression arg0, Expression arg1)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L340",
-"region":  {
-"startLine":  340,
-"startColumn":  64,
-"endLine":  340,
-"endColumn":  103
-}
-}
-},
-{
-"id":  "S3220",
-"message":  "Review this call, which partially matches an overload without 'params'. The partial match is 'BlockExpression Expression.Block(Expression arg0, Expression arg1, Expression arg2)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L280-L282",
-"region":  {
-"startLine":  280,
-"startColumn":  26,
-"endLine":  282,
-"endColumn":  156
-}
-}
-},
-{
-"id":  "S3220",
-"message":  "Review this call, which partially matches an overload without 'params'. The partial match is 'BlockExpression Expression.Block(Expression arg0, Expression arg1, Expression arg2, Expression arg3, Expression arg4)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Mappers/CollectionMapper.cs#L184-L188",
-"region":  {
-"startLine":  184,
-"startColumn":  24,
-"endLine":  188,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S3220",
-"message":  "Review this call, which partially matches an overload without 'params'. The partial match is 'BlockExpression Expression.Block(Expression arg0, Expression arg1, Expression arg2, Expression arg3)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Mappers/CollectionMapper.cs#L198-L201",
-"region":  {
-"startLine":  198,
-"startColumn":  28,
-"endLine":  201,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S3220",
-"message":  "Review this call, which partially matches an overload without 'params'. The partial match is 'BlockExpression Expression.Block(Expression arg0, Expression arg1)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Mappers/EnumToEnumMapper.cs#L20",
-"region":  {
-"startLine":  20,
-"startColumn":  20,
-"endLine":  20,
-"endColumn":  116
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3220",
+      "Message": "Review this call, which partially matches an overload without \u0027params\u0027. The partial match is \u0027BlockExpression Expression.Block(Expression arg0, Expression arg1, Expression arg2, Expression arg3)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L109-L112",
+      "Location": "Lines 109-112 Position 24-41"
+    },
+    {
+      "Id": "S3220",
+      "Message": "Review this call, which partially matches an overload without \u0027params\u0027. The partial match is \u0027BlockExpression Expression.Block(Expression arg0, Expression arg1, Expression arg2)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L257-L266",
+      "Location": "Lines 257-266 Position 24-34"
+    },
+    {
+      "Id": "S3220",
+      "Message": "Review this call, which partially matches an overload without \u0027params\u0027. The partial match is \u0027BlockExpression Expression.Block(Expression arg0, Expression arg1, Expression arg2)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L273-L281",
+      "Location": "Lines 273-281 Position 28-33"
+    },
+    {
+      "Id": "S3220",
+      "Message": "Review this call, which partially matches an overload without \u0027params\u0027. The partial match is \u0027BlockExpression Expression.Block(Expression arg0, Expression arg1, Expression arg2)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L299",
+      "Location": "Line 299 Position 35-179"
+    },
+    {
+      "Id": "S3220",
+      "Message": "Review this call, which partially matches an overload without \u0027params\u0027. The partial match is \u0027BlockExpression Expression.Block(Expression arg0, Expression arg1)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L340",
+      "Location": "Line 340 Position 64-103"
+    },
+    {
+      "Id": "S3220",
+      "Message": "Review this call, which partially matches an overload without \u0027params\u0027. The partial match is \u0027BlockExpression Expression.Block(Expression arg0, Expression arg1, Expression arg2)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L280-L282",
+      "Location": "Lines 280-282 Position 26-156"
+    },
+    {
+      "Id": "S3220",
+      "Message": "Review this call, which partially matches an overload without \u0027params\u0027. The partial match is \u0027BlockExpression Expression.Block(Expression arg0, Expression arg1, Expression arg2, Expression arg3, Expression arg4)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Mappers/CollectionMapper.cs#L184-L188",
+      "Location": "Lines 184-188 Position 24-33"
+    },
+    {
+      "Id": "S3220",
+      "Message": "Review this call, which partially matches an overload without \u0027params\u0027. The partial match is \u0027BlockExpression Expression.Block(Expression arg0, Expression arg1, Expression arg2, Expression arg3)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Mappers/CollectionMapper.cs#L198-L201",
+      "Location": "Lines 198-201 Position 28-37"
+    },
+    {
+      "Id": "S3220",
+      "Message": "Review this call, which partially matches an overload without \u0027params\u0027. The partial match is \u0027BlockExpression Expression.Block(Expression arg0, Expression arg1)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Mappers/EnumToEnumMapper.cs#L20",
+      "Location": "Line 20 Position 20-116"
+    }
+  ]
 }

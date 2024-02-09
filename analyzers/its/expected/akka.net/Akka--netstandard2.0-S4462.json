@@ -1,173 +1,82 @@
 {
-"issues":  [
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Wait' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorSystem.cs#L415",
-"region":  {
-"startLine":  415,
-"startColumn":  25,
-"endLine":  415,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Wait' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L647",
-"region":  {
-"startLine":  647,
-"startColumn":  34,
-"endLine":  647,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Wait' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L706",
-"region":  {
-"startLine":  706,
-"startColumn":  33,
-"endLine":  706,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Wait' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L724",
-"region":  {
-"startLine":  724,
-"startColumn":  17,
-"endLine":  724,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Wait' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Inbox.cs#L580",
-"region":  {
-"startLine":  580,
-"startColumn":  18,
-"endLine":  580,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Wait' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L377",
-"region":  {
-"startLine":  377,
-"startColumn":  18,
-"endLine":  377,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Result' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/LoggingBus.cs#L191",
-"region":  {
-"startLine":  191,
-"startColumn":  28,
-"endLine":  191,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.WaitAll' with 'await Task.WhenAll'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L332",
-"region":  {
-"startLine":  332,
-"startColumn":  13,
-"endLine":  332,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Result' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/InetAddressDnsResolver.cs#L55",
-"region":  {
-"startLine":  55,
-"startColumn":  68,
-"endLine":  55,
-"endColumn":  121
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Wait' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/CircuitBreaker.cs#L230",
-"region":  {
-"startLine":  230,
-"startColumn":  18,
-"endLine":  230,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Wait' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/CircuitBreaker.cs#L257",
-"region":  {
-"startLine":  257,
-"startColumn":  20,
-"endLine":  257,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Result' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/CircuitBreaker.cs#L257",
-"region":  {
-"startLine":  257,
-"startColumn":  47,
-"endLine":  257,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Result' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Result.cs#L140",
-"region":  {
-"startLine":  140,
-"startColumn":  102,
-"endLine":  140,
-"endColumn":  113
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Wait\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorSystem.cs#L415",
+      "Location": "Line 415 Position 25-41"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Wait\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L647",
+      "Location": "Line 647 Position 34-60"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Wait\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L706",
+      "Location": "Line 706 Position 33-71"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Wait\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L724",
+      "Location": "Line 724 Position 17-41"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Wait\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Inbox.cs#L580",
+      "Location": "Line 580 Position 18-27"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Wait\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L377",
+      "Location": "Line 377 Position 18-30"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Result\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/LoggingBus.cs#L191",
+      "Location": "Line 191 Position 28-42"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.WaitAll\u0027 with \u0027await Task.WhenAll\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L332",
+      "Location": "Line 332 Position 13-25"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Result\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/InetAddressDnsResolver.cs#L55",
+      "Location": "Line 55 Position 68-121"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Wait\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/CircuitBreaker.cs#L230",
+      "Location": "Line 230 Position 18-29"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Wait\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/CircuitBreaker.cs#L257",
+      "Location": "Line 257 Position 20-31"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Result\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/CircuitBreaker.cs#L257",
+      "Location": "Line 257 Position 47-60"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Result\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Result.cs#L140",
+      "Location": "Line 140 Position 102-113"
+    }
+  ]
 }

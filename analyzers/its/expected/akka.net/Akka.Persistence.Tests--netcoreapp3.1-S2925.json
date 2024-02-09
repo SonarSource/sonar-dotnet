@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S2925",
-"message":  "Do not use 'Thread.Sleep()' in a test.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.Tests/PersistentActorSpec.cs#L209",
-"region":  {
-"startLine":  209,
-"startColumn":  17,
-"endLine":  209,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S2925",
-"message":  "Do not use 'Thread.Sleep()' in a test.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.Tests/PersistentActorSpecAsyncAwait.cs#L208",
-"region":  {
-"startLine":  208,
-"startColumn":  17,
-"endLine":  208,
-"endColumn":  47
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2925",
+      "Message": "Do not use \u0027Thread.Sleep()\u0027 in a test.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.Tests/PersistentActorSpec.cs#L209",
+      "Location": "Line 209 Position 17-47"
+    },
+    {
+      "Id": "S2925",
+      "Message": "Do not use \u0027Thread.Sleep()\u0027 in a test.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.Tests/PersistentActorSpecAsyncAwait.cs#L208",
+      "Location": "Line 208 Position 17-47"
+    }
+  ]
 }

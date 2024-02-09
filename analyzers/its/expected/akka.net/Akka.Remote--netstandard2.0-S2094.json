@@ -1,82 +1,40 @@
 {
-"issues":  [
-{
-"id":  "S2094",
-"message":  "Remove this empty class, write its code or make it an "interface".",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L794",
-"region":  {
-"startLine":  794,
-"startColumn":  22,
-"endLine":  794,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S2094",
-"message":  "Remove this empty class, write its code or make it an "interface".",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L799",
-"region":  {
-"startLine":  799,
-"startColumn":  22,
-"endLine":  799,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2094",
-"message":  "Remove this empty class, write its code or make it an "interface".",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L538",
-"region":  {
-"startLine":  538,
-"startColumn":  29,
-"endLine":  538,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S2094",
-"message":  "Remove this empty class, write its code or make it an "interface".",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L722",
-"region":  {
-"startLine":  722,
-"startColumn":  20,
-"endLine":  722,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S2094",
-"message":  "Remove this empty class, write its code or make it an "interface".",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L297",
-"region":  {
-"startLine":  297,
-"startColumn":  27,
-"endLine":  297,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S2094",
-"message":  "Remove this empty class, write its code or make it an "interface".",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L947",
-"region":  {
-"startLine":  947,
-"startColumn":  22,
-"endLine":  947,
-"endColumn":  29
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2094",
+      "Message": "Remove this empty class, write its code or make it an \u0022interface\u0022.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L794",
+      "Location": "Line 794 Position 22-45"
+    },
+    {
+      "Id": "S2094",
+      "Message": "Remove this empty class, write its code or make it an \u0022interface\u0022.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L799",
+      "Location": "Line 799 Position 22-28"
+    },
+    {
+      "Id": "S2094",
+      "Message": "Remove this empty class, write its code or make it an \u0022interface\u0022.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L538",
+      "Location": "Line 538 Position 29-46"
+    },
+    {
+      "Id": "S2094",
+      "Message": "Remove this empty class, write its code or make it an \u0022interface\u0022.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L722",
+      "Location": "Line 722 Position 20-38"
+    },
+    {
+      "Id": "S2094",
+      "Message": "Remove this empty class, write its code or make it an \u0022interface\u0022.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L297",
+      "Location": "Line 297 Position 27-35"
+    },
+    {
+      "Id": "S2094",
+      "Message": "Remove this empty class, write its code or make it an \u0022interface\u0022.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L947",
+      "Location": "Line 947 Position 22-29"
+    }
+  ]
 }

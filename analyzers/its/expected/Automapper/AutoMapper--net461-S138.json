@@ -1,56 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S138",
-"message":  "This method 'EmitProxy' has 91 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/ProxyGenerator.cs#L25",
-"region":  {
-"startLine":  25,
-"startColumn":  29,
-"endLine":  25,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S138",
-"message":  "This method 'CreatePropertyMapFunc' has 86 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L295",
-"region":  {
-"startLine":  295,
-"startColumn":  28,
-"endLine":  295,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S138",
-"message":  "This method 'MapExpression' has 110 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Mappers/CollectionMapper.cs#L19",
-"region":  {
-"startLine":  19,
-"startColumn":  27,
-"endLine":  19,
-"endColumn":  40
-}
-}
-},
-{
-"id":  "S138",
-"message":  "This method 'CreateProjectionCore' has 116 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L80",
-"region":  {
-"startLine":  80,
-"startColumn":  28,
-"endLine":  80,
-"endColumn":  48
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S138",
+      "Message": "This method \u0027EmitProxy\u0027 has 91 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/ProxyGenerator.cs#L25",
+      "Location": "Line 25 Position 29-38"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027CreatePropertyMapFunc\u0027 has 86 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L295",
+      "Location": "Line 295 Position 28-49"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027MapExpression\u0027 has 110 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Mappers/CollectionMapper.cs#L19",
+      "Location": "Line 19 Position 27-40"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027CreateProjectionCore\u0027 has 116 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L80",
+      "Location": "Line 80 Position 28-48"
+    }
+  ]
 }

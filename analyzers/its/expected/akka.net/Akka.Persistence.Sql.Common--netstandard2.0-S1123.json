@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1123",
-"message":  "Add an explanation.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L472",
-"region":  {
-"startLine":  472,
-"startColumn":  10,
-"endLine":  472,
-"endColumn":  18
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1123",
+      "Message": "Add an explanation.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L472",
+      "Location": "Line 472 Position 10-18"
+    }
+  ]
 }

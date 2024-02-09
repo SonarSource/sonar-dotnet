@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S3249",
-"message":  "Remove this 'base' call to 'object.Equals', which is directly based on the object reference.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperBase.cs#L456",
-"region":  {
-"startLine":  456,
-"startColumn":  20,
-"endLine":  456,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S3249",
-"message":  "Remove this 'base' call to 'object.GetHashCode', which is directly based on the object reference.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperBase.cs#L465",
-"region":  {
-"startLine":  465,
-"startColumn":  20,
-"endLine":  465,
-"endColumn":  38
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3249",
+      "Message": "Remove this \u0027base\u0027 call to \u0027object.Equals\u0027, which is directly based on the object reference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperBase.cs#L456",
+      "Location": "Line 456 Position 20-36"
+    },
+    {
+      "Id": "S3249",
+      "Message": "Remove this \u0027base\u0027 call to \u0027object.GetHashCode\u0027, which is directly based on the object reference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperBase.cs#L465",
+      "Location": "Line 465 Position 20-38"
+    }
+  ]
 }

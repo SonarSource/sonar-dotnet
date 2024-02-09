@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S1134",
-"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L349",
-"region":  {
-"startLine":  349,
-"startColumn":  44,
-"endLine":  349,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S1134",
-"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L505",
-"region":  {
-"startLine":  505,
-"startColumn":  42,
-"endLine":  505,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S1134",
-"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L526",
-"region":  {
-"startLine":  526,
-"startColumn":  67,
-"endLine":  526,
-"endColumn":  72
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1134",
+      "Message": "Take the required action to fix the issue indicated by this \u0027FIXME\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L349",
+      "Location": "Line 349 Position 44-49"
+    },
+    {
+      "Id": "S1134",
+      "Message": "Take the required action to fix the issue indicated by this \u0027FIXME\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L505",
+      "Location": "Line 505 Position 42-47"
+    },
+    {
+      "Id": "S1134",
+      "Message": "Take the required action to fix the issue indicated by this \u0027FIXME\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L526",
+      "Location": "Line 526 Position 67-72"
+    }
+  ]
 }

@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1905",
-"message":  "Remove this unnecessary cast to 'ActorSystemImpl'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActorRef.cs#L63",
-"region":  {
-"startLine":  63,
-"startColumn":  39,
-"endLine":  63,
-"endColumn":  54
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1905",
+      "Message": "Remove this unnecessary cast to \u0027ActorSystemImpl\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActorRef.cs#L63",
+      "Location": "Line 63 Position 39-54"
+    }
+  ]
 }

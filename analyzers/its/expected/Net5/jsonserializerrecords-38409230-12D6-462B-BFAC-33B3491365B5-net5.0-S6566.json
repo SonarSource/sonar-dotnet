@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S6566",
-"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/JsonSerializerRecords/Program.cs#L4",
-"region":  {
-"startLine":  4,
-"startColumn":  25,
-"endLine":  4,
-"endColumn":  33
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6566",
+      "Message": "Prefer using \u0022DateTimeOffset\u0022 instead of \u0022DateTime\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/JsonSerializerRecords/Program.cs#L4",
+      "Location": "Line 4 Position 25-33"
+    }
+  ]
 }

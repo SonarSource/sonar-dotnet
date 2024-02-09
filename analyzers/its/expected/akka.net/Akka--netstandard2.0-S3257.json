@@ -1,199 +1,94 @@
 {
-"issues":  [
-{
-"id":  "S3257",
-"message":  "Remove the array type; it is redundant.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L449",
-"region":  {
-"startLine":  449,
-"startColumn":  17,
-"endLine":  449,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S3257",
-"message":  "Remove the array type; it is redundant.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L451",
-"region":  {
-"startLine":  451,
-"startColumn":  102,
-"endLine":  451,
-"endColumn":  108
-}
-}
-},
-{
-"id":  "S3257",
-"message":  "Remove the array type; it is redundant.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L452",
-"region":  {
-"startLine":  452,
-"startColumn":  103,
-"endLine":  452,
-"endColumn":  109
-}
-}
-},
-{
-"id":  "S3257",
-"message":  "Remove the array type; it is redundant.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L453",
-"region":  {
-"startLine":  453,
-"startColumn":  95,
-"endLine":  453,
-"endColumn":  101
-}
-}
-},
-{
-"id":  "S3257",
-"message":  "Remove the array type; it is redundant.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L454",
-"region":  {
-"startLine":  454,
-"startColumn":  95,
-"endLine":  454,
-"endColumn":  101
-}
-}
-},
-{
-"id":  "S3257",
-"message":  "Remove the array type; it is redundant.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L455",
-"region":  {
-"startLine":  455,
-"startColumn":  87,
-"endLine":  455,
-"endColumn":  93
-}
-}
-},
-{
-"id":  "S3257",
-"message":  "Remove the array type; it is redundant.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L456",
-"region":  {
-"startLine":  456,
-"startColumn":  87,
-"endLine":  456,
-"endColumn":  93
-}
-}
-},
-{
-"id":  "S3257",
-"message":  "Remove the array type; it is redundant.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L457",
-"region":  {
-"startLine":  457,
-"startColumn":  79,
-"endLine":  457,
-"endColumn":  85
-}
-}
-},
-{
-"id":  "S3257",
-"message":  "Remove the array type; it is redundant.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L458",
-"region":  {
-"startLine":  458,
-"startColumn":  79,
-"endLine":  458,
-"endColumn":  85
-}
-}
-},
-{
-"id":  "S3257",
-"message":  "Remove the array type; it is redundant.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L459",
-"region":  {
-"startLine":  459,
-"startColumn":  71,
-"endLine":  459,
-"endColumn":  77
-}
-}
-},
-{
-"id":  "S3257",
-"message":  "Remove the array type; it is redundant.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L460",
-"region":  {
-"startLine":  460,
-"startColumn":  71,
-"endLine":  460,
-"endColumn":  77
-}
-}
-},
-{
-"id":  "S3257",
-"message":  "Remove the array type; it is redundant.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L461",
-"region":  {
-"startLine":  461,
-"startColumn":  63,
-"endLine":  461,
-"endColumn":  69
-}
-}
-},
-{
-"id":  "S3257",
-"message":  "Remove the array type; it is redundant.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L462",
-"region":  {
-"startLine":  462,
-"startColumn":  63,
-"endLine":  462,
-"endColumn":  69
-}
-}
-},
-{
-"id":  "S3257",
-"message":  "Remove the array type; it is redundant.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L463",
-"region":  {
-"startLine":  463,
-"startColumn":  59,
-"endLine":  463,
-"endColumn":  65
-}
-}
-},
-{
-"id":  "S3257",
-"message":  "Remove the array size specification; it is redundant.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/IPExtensions.cs#L78",
-"region":  {
-"startLine":  78,
-"startColumn":  41,
-"endLine":  78,
-"endColumn":  43
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3257",
+      "Message": "Remove the array type; it is redundant.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L449",
+      "Location": "Line 449 Position 17-25"
+    },
+    {
+      "Id": "S3257",
+      "Message": "Remove the array type; it is redundant.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L451",
+      "Location": "Line 451 Position 102-108"
+    },
+    {
+      "Id": "S3257",
+      "Message": "Remove the array type; it is redundant.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L452",
+      "Location": "Line 452 Position 103-109"
+    },
+    {
+      "Id": "S3257",
+      "Message": "Remove the array type; it is redundant.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L453",
+      "Location": "Line 453 Position 95-101"
+    },
+    {
+      "Id": "S3257",
+      "Message": "Remove the array type; it is redundant.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L454",
+      "Location": "Line 454 Position 95-101"
+    },
+    {
+      "Id": "S3257",
+      "Message": "Remove the array type; it is redundant.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L455",
+      "Location": "Line 455 Position 87-93"
+    },
+    {
+      "Id": "S3257",
+      "Message": "Remove the array type; it is redundant.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L456",
+      "Location": "Line 456 Position 87-93"
+    },
+    {
+      "Id": "S3257",
+      "Message": "Remove the array type; it is redundant.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L457",
+      "Location": "Line 457 Position 79-85"
+    },
+    {
+      "Id": "S3257",
+      "Message": "Remove the array type; it is redundant.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L458",
+      "Location": "Line 458 Position 79-85"
+    },
+    {
+      "Id": "S3257",
+      "Message": "Remove the array type; it is redundant.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L459",
+      "Location": "Line 459 Position 71-77"
+    },
+    {
+      "Id": "S3257",
+      "Message": "Remove the array type; it is redundant.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L460",
+      "Location": "Line 460 Position 71-77"
+    },
+    {
+      "Id": "S3257",
+      "Message": "Remove the array type; it is redundant.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L461",
+      "Location": "Line 461 Position 63-69"
+    },
+    {
+      "Id": "S3257",
+      "Message": "Remove the array type; it is redundant.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L462",
+      "Location": "Line 462 Position 63-69"
+    },
+    {
+      "Id": "S3257",
+      "Message": "Remove the array type; it is redundant.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L463",
+      "Location": "Line 463 Position 59-65"
+    },
+    {
+      "Id": "S3257",
+      "Message": "Remove the array size specification; it is redundant.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/IPExtensions.cs#L78",
+      "Location": "Line 78 Position 41-43"
+    }
+  ]
 }

@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1117",
-"message":  "Rename 'identifier' which hides the field with the same name.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/ClrTypeResolver.cs#L96",
-"region":  {
-"startLine":  96,
-"startColumn":  17,
-"endLine":  96,
-"endColumn":  27
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1117",
+      "Message": "Rename \u0027identifier\u0027 which hides the field with the same name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/ClrTypeResolver.cs#L96",
+      "Location": "Line 96 Position 17-27"
+    }
+  ]
 }

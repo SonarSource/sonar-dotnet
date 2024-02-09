@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2551",
-"message":  "Lock on a dedicated object instance instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L2548",
-"region":  {
-"startLine":  2548,
-"startColumn":  19,
-"endLine":  2548,
-"endColumn":  23
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2551",
+      "Message": "Lock on a dedicated object instance instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L2548",
+      "Location": "Line 2548 Position 19-23"
+    }
+  ]
 }

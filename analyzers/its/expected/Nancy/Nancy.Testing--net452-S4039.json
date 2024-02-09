@@ -1,121 +1,58 @@
 {
-"issues":  [
-{
-"id":  "S4039",
-"message":  "Make 'BrowserContext' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IBrowserContextValues.Body'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContext.cs#L42",
-"region":  {
-"startLine":  42,
-"startColumn":  38,
-"endLine":  42,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S4039",
-"message":  "Make 'BrowserContext' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IBrowserContextValues.Protocol'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContext.cs#L48",
-"region":  {
-"startLine":  48,
-"startColumn":  38,
-"endLine":  48,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S4039",
-"message":  "Make 'BrowserContext' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IBrowserContextValues.QueryString'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContext.cs#L53",
-"region":  {
-"startLine":  53,
-"startColumn":  38,
-"endLine":  53,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S4039",
-"message":  "Make 'BrowserContext' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IBrowserContextValues.HostName'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContext.cs#L58",
-"region":  {
-"startLine":  58,
-"startColumn":  38,
-"endLine":  58,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S4039",
-"message":  "Make 'BrowserContext' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IBrowserContextValues.UserHostAddress'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContext.cs#L63",
-"region":  {
-"startLine":  63,
-"startColumn":  38,
-"endLine":  63,
-"endColumn":  53
-}
-}
-},
-{
-"id":  "S4039",
-"message":  "Make 'BrowserContext' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IBrowserContextValues.ClientCertificate'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContext.cs#L68",
-"region":  {
-"startLine":  68,
-"startColumn":  48,
-"endLine":  68,
-"endColumn":  65
-}
-}
-},
-{
-"id":  "S4039",
-"message":  "Make 'BrowserContext' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IBrowserContextValues.BodyString'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContext.cs#L73",
-"region":  {
-"startLine":  73,
-"startColumn":  38,
-"endLine":  73,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S4039",
-"message":  "Make 'BrowserContext' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IBrowserContextValues.FormValues'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContext.cs#L78",
-"region":  {
-"startLine":  78,
-"startColumn":  38,
-"endLine":  78,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S4039",
-"message":  "Make 'BrowserContext' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IBrowserContextValues.Headers'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContext.cs#L84",
-"region":  {
-"startLine":  84,
-"startColumn":  72,
-"endLine":  84,
-"endColumn":  79
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027BrowserContext\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IBrowserContextValues.Body\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContext.cs#L42",
+      "Location": "Line 42 Position 38-42"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027BrowserContext\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IBrowserContextValues.Protocol\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContext.cs#L48",
+      "Location": "Line 48 Position 38-46"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027BrowserContext\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IBrowserContextValues.QueryString\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContext.cs#L53",
+      "Location": "Line 53 Position 38-49"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027BrowserContext\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IBrowserContextValues.HostName\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContext.cs#L58",
+      "Location": "Line 58 Position 38-46"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027BrowserContext\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IBrowserContextValues.UserHostAddress\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContext.cs#L63",
+      "Location": "Line 63 Position 38-53"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027BrowserContext\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IBrowserContextValues.ClientCertificate\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContext.cs#L68",
+      "Location": "Line 68 Position 48-65"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027BrowserContext\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IBrowserContextValues.BodyString\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContext.cs#L73",
+      "Location": "Line 73 Position 38-48"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027BrowserContext\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IBrowserContextValues.FormValues\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContext.cs#L78",
+      "Location": "Line 78 Position 38-48"
+    },
+    {
+      "Id": "S4039",
+      "Message": "Make \u0027BrowserContext\u0027 sealed, change to a non-explicit declaration or provide a new method exposing the functionality of \u0027IBrowserContextValues.Headers\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContext.cs#L84",
+      "Location": "Line 84 Position 72-79"
+    }
+  ]
 }

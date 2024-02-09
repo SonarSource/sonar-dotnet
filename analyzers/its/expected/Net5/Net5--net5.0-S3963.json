@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3963",
-"message":  "Initialize all 'static fields' inline and remove the 'static constructor'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3604.cs#L16",
-"region":  {
-"startLine":  16,
-"startColumn":  16,
-"endLine":  16,
-"endColumn":  21
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3963",
+      "Message": "Initialize all \u0027static fields\u0027 inline and remove the \u0027static constructor\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3604.cs#L16",
+      "Location": "Line 16 Position 16-21"
+    }
+  ]
 }

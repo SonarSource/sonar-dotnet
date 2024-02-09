@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S4005",
-"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4005.cs#L7",
-"region":  {
-"startLine":  7,
-"startColumn":  19,
-"endLine":  7,
-"endColumn":  46
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4005",
+      "Message": "Call the overload that takes a \u0027System.Uri\u0027 as an argument instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4005.cs#L7",
+      "Location": "Line 7 Position 19-46"
+    }
+  ]
 }

@@ -1,28 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2234",
-"message":  "Parameters to 'Equals' have the same names but not the same order as the method arguments.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Asserts.cs#L58",
-"region":  {
-"startLine":  58,
-"startColumn":  27,
-"endLine":  58,
-"endColumn":  33
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/AssertEqualityComparer.cs#L14",
-"region":  {
-"startLine":  14,
-"startColumn":  21,
-"endLine":  14,
-"endColumn":  27
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S2234",
+      "Message": "Parameters to \u0027Equals\u0027 have the same names but not the same order as the method arguments.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Asserts.cs#L58",
+      "Location": "Line 58 Position 27-33"
+    }
+  ]
 }

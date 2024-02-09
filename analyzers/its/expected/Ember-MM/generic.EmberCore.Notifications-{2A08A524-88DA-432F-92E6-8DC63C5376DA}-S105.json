@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S105",
-"message":  "Replace all tab characters in this file by sequences of white-spaces.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/Module.Notifications.vb#L33",
-"region":  {
-"startLine":  33,
-"startColumn":  1,
-"endLine":  33,
-"endColumn":  1
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S105",
+      "Message": "Replace all tab characters in this file by sequences of white-spaces.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/Module.Notifications.vb#L33",
+      "Location": "Line 33 Position 1-1"
+    }
+  ]
 }

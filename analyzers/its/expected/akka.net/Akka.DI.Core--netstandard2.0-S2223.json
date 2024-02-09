@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2223",
-"message":  "Change the visibility of 'DIExtensionProvider' or make it 'const' or 'readonly'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.Core/DIExtension.cs#L20",
-"region":  {
-"startLine":  20,
-"startColumn":  35,
-"endLine":  20,
-"endColumn":  54
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2223",
+      "Message": "Change the visibility of \u0027DIExtensionProvider\u0027 or make it \u0027const\u0027 or \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.Core/DIExtension.cs#L20",
+      "Location": "Line 20 Position 35-54"
+    }
+  ]
 }

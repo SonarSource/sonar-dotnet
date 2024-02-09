@@ -1,251 +1,118 @@
 {
-"issues":  [
-{
-"id":  "S3011",
-"message":  "Make sure that this accessibility bypass is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L356",
-"region":  {
-"startLine":  356,
-"startColumn":  102,
-"endLine":  356,
-"endColumn":  124
-}
-}
-},
-{
-"id":  "S3011",
-"message":  "Make sure that this accessibility bypass is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L366",
-"region":  {
-"startLine":  366,
-"startColumn":  109,
-"endLine":  366,
-"endColumn":  131
-}
-}
-},
-{
-"id":  "S3011",
-"message":  "Make sure that this accessibility bypass is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L504",
-"region":  {
-"startLine":  504,
-"startColumn":  108,
-"endLine":  504,
-"endColumn":  130
-}
-}
-},
-{
-"id":  "S3011",
-"message":  "Make sure that this accessibility bypass is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L587",
-"region":  {
-"startLine":  587,
-"startColumn":  101,
-"endLine":  587,
-"endColumn":  123
-}
-}
-},
-{
-"id":  "S3011",
-"message":  "Make sure that this accessibility bypass is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L680",
-"region":  {
-"startLine":  680,
-"startColumn":  100,
-"endLine":  680,
-"endColumn":  122
-}
-}
-},
-{
-"id":  "S3011",
-"message":  "Make sure that this accessibility bypass is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L734",
-"region":  {
-"startLine":  734,
-"startColumn":  117,
-"endLine":  734,
-"endColumn":  139
-}
-}
-},
-{
-"id":  "S3011",
-"message":  "Make sure that this accessibility bypass is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L755",
-"region":  {
-"startLine":  755,
-"startColumn":  103,
-"endLine":  755,
-"endColumn":  125
-}
-}
-},
-{
-"id":  "S3011",
-"message":  "Make sure that this accessibility bypass is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L796",
-"region":  {
-"startLine":  796,
-"startColumn":  118,
-"endLine":  796,
-"endColumn":  140
-}
-}
-},
-{
-"id":  "S3011",
-"message":  "Make sure that this accessibility bypass is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L856",
-"region":  {
-"startLine":  856,
-"startColumn":  119,
-"endLine":  856,
-"endColumn":  141
-}
-}
-},
-{
-"id":  "S3011",
-"message":  "Make sure that this accessibility bypass is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L973",
-"region":  {
-"startLine":  973,
-"startColumn":  128,
-"endLine":  973,
-"endColumn":  150
-}
-}
-},
-{
-"id":  "S3011",
-"message":  "Make sure that this accessibility bypass is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1104",
-"region":  {
-"startLine":  1104,
-"startColumn":  104,
-"endLine":  1104,
-"endColumn":  126
-}
-}
-},
-{
-"id":  "S3011",
-"message":  "Make sure that this accessibility bypass is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1146",
-"region":  {
-"startLine":  1146,
-"startColumn":  113,
-"endLine":  1146,
-"endColumn":  135
-}
-}
-},
-{
-"id":  "S3011",
-"message":  "Make sure that this accessibility bypass is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1211",
-"region":  {
-"startLine":  1211,
-"startColumn":  117,
-"endLine":  1211,
-"endColumn":  139
-}
-}
-},
-{
-"id":  "S3011",
-"message":  "Make sure that this accessibility bypass is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1230",
-"region":  {
-"startLine":  1230,
-"startColumn":  123,
-"endLine":  1230,
-"endColumn":  145
-}
-}
-},
-{
-"id":  "S3011",
-"message":  "Make sure that this accessibility bypass is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1285",
-"region":  {
-"startLine":  1285,
-"startColumn":  125,
-"endLine":  1285,
-"endColumn":  147
-}
-}
-},
-{
-"id":  "S3011",
-"message":  "Make sure that this accessibility bypass is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1332",
-"region":  {
-"startLine":  1332,
-"startColumn":  113,
-"endLine":  1332,
-"endColumn":  135
-}
-}
-},
-{
-"id":  "S3011",
-"message":  "Make sure that this accessibility bypass is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1352",
-"region":  {
-"startLine":  1352,
-"startColumn":  105,
-"endLine":  1352,
-"endColumn":  127
-}
-}
-},
-{
-"id":  "S3011",
-"message":  "Make sure that this accessibility bypass is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1421",
-"region":  {
-"startLine":  1421,
-"startColumn":  122,
-"endLine":  1421,
-"endColumn":  144
-}
-}
-},
-{
-"id":  "S3011",
-"message":  "Make sure that this accessibility bypass is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1470",
-"region":  {
-"startLine":  1470,
-"startColumn":  121,
-"endLine":  1470,
-"endColumn":  143
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3011",
+      "Message": "Make sure that this accessibility bypass is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1104",
+      "Location": "Line 1104 Position 104-126"
+    },
+    {
+      "Id": "S3011",
+      "Message": "Make sure that this accessibility bypass is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1146",
+      "Location": "Line 1146 Position 113-135"
+    },
+    {
+      "Id": "S3011",
+      "Message": "Make sure that this accessibility bypass is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1211",
+      "Location": "Line 1211 Position 117-139"
+    },
+    {
+      "Id": "S3011",
+      "Message": "Make sure that this accessibility bypass is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1230",
+      "Location": "Line 1230 Position 123-145"
+    },
+    {
+      "Id": "S3011",
+      "Message": "Make sure that this accessibility bypass is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1285",
+      "Location": "Line 1285 Position 125-147"
+    },
+    {
+      "Id": "S3011",
+      "Message": "Make sure that this accessibility bypass is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1332",
+      "Location": "Line 1332 Position 113-135"
+    },
+    {
+      "Id": "S3011",
+      "Message": "Make sure that this accessibility bypass is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1352",
+      "Location": "Line 1352 Position 105-127"
+    },
+    {
+      "Id": "S3011",
+      "Message": "Make sure that this accessibility bypass is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1421",
+      "Location": "Line 1421 Position 122-144"
+    },
+    {
+      "Id": "S3011",
+      "Message": "Make sure that this accessibility bypass is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1470",
+      "Location": "Line 1470 Position 121-143"
+    },
+    {
+      "Id": "S3011",
+      "Message": "Make sure that this accessibility bypass is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L356",
+      "Location": "Line 356 Position 102-124"
+    },
+    {
+      "Id": "S3011",
+      "Message": "Make sure that this accessibility bypass is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L366",
+      "Location": "Line 366 Position 109-131"
+    },
+    {
+      "Id": "S3011",
+      "Message": "Make sure that this accessibility bypass is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L504",
+      "Location": "Line 504 Position 108-130"
+    },
+    {
+      "Id": "S3011",
+      "Message": "Make sure that this accessibility bypass is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L587",
+      "Location": "Line 587 Position 101-123"
+    },
+    {
+      "Id": "S3011",
+      "Message": "Make sure that this accessibility bypass is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L680",
+      "Location": "Line 680 Position 100-122"
+    },
+    {
+      "Id": "S3011",
+      "Message": "Make sure that this accessibility bypass is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L734",
+      "Location": "Line 734 Position 117-139"
+    },
+    {
+      "Id": "S3011",
+      "Message": "Make sure that this accessibility bypass is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L755",
+      "Location": "Line 755 Position 103-125"
+    },
+    {
+      "Id": "S3011",
+      "Message": "Make sure that this accessibility bypass is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L796",
+      "Location": "Line 796 Position 118-140"
+    },
+    {
+      "Id": "S3011",
+      "Message": "Make sure that this accessibility bypass is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L856",
+      "Location": "Line 856 Position 119-141"
+    },
+    {
+      "Id": "S3011",
+      "Message": "Make sure that this accessibility bypass is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L973",
+      "Location": "Line 973 Position 128-150"
+    }
+  ]
 }

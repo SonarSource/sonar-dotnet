@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S108",
-"message":  "Either remove or fill this block of code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6798/S6798.Partial.razor.cs#L13",
-"region":  {
-"startLine":  13,
-"startColumn":  70,
-"endLine":  13,
-"endColumn":  73
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6798/S6798.Partial.razor.cs#L13",
+      "Location": "Line 13 Position 70-73"
+    }
+  ]
 }

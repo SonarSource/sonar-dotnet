@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3261",
-"message":  "Remove this empty namespace.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/IDispatcherPrerequisites.cs#L11-L14",
-"region":  {
-"startLine":  11,
-"startColumn":  1,
-"endLine":  14,
-"endColumn":  2
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3261",
+      "Message": "Remove this empty namespace.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/IDispatcherPrerequisites.cs#L11-L14",
+      "Location": "Lines 11-14 Position 1-2"
+    }
+  ]
 }

@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S3253",
-"message":  "Remove this redundant constructor.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L114-L116",
-"region":  {
-"startLine":  114,
-"startColumn":  9,
-"endLine":  116,
-"endColumn":  10
-}
-}
-},
-{
-"id":  "S3253",
-"message":  "Remove this redundant constructor.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L77-L79",
-"region":  {
-"startLine":  77,
-"startColumn":  9,
-"endLine":  79,
-"endColumn":  10
-}
-}
-},
-{
-"id":  "S3253",
-"message":  "Remove this redundant constructor.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3199-L3201",
-"region":  {
-"startLine":  3199,
-"startColumn":  9,
-"endLine":  3201,
-"endColumn":  10
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3253",
+      "Message": "Remove this redundant constructor.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L114-L116",
+      "Location": "Lines 114-116 Position 9-10"
+    },
+    {
+      "Id": "S3253",
+      "Message": "Remove this redundant constructor.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L77-L79",
+      "Location": "Lines 77-79 Position 9-10"
+    },
+    {
+      "Id": "S3253",
+      "Message": "Remove this redundant constructor.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3199-L3201",
+      "Location": "Lines 3199-3201 Position 9-10"
+    }
+  ]
 }

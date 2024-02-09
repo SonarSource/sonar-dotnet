@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S1450",
-"message":  "Remove the field '_firstNode' and declare it as a local variable in the relevant methods.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/VectorClockBenchmarks.cs#L46",
-"region":  {
-"startLine":  46,
-"startColumn":  22,
-"endLine":  46,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S1450",
-"message":  "Remove the field '_lastNode' and declare it as a local variable in the relevant methods.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/VectorClockBenchmarks.cs#L47",
-"region":  {
-"startLine":  47,
-"startColumn":  22,
-"endLine":  47,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S1450",
-"message":  "Remove the field '_middleNode' and declare it as a local variable in the relevant methods.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/VectorClockBenchmarks.cs#L48",
-"region":  {
-"startLine":  48,
-"startColumn":  22,
-"endLine":  48,
-"endColumn":  33
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1450",
+      "Message": "Remove the field \u0027_firstNode\u0027 and declare it as a local variable in the relevant methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/VectorClockBenchmarks.cs#L46",
+      "Location": "Line 46 Position 22-32"
+    },
+    {
+      "Id": "S1450",
+      "Message": "Remove the field \u0027_lastNode\u0027 and declare it as a local variable in the relevant methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/VectorClockBenchmarks.cs#L47",
+      "Location": "Line 47 Position 22-31"
+    },
+    {
+      "Id": "S1450",
+      "Message": "Remove the field \u0027_middleNode\u0027 and declare it as a local variable in the relevant methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/VectorClockBenchmarks.cs#L48",
+      "Location": "Line 48 Position 22-33"
+    }
+  ]
 }

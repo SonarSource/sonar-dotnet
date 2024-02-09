@@ -1,64 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal '*EmberAPP' 6 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L20",
-"region":  {
-"startLine":  20,
-"startColumn":  105,
-"endLine":  20,
-"endColumn":  116
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L28",
-"region":  {
-"startLine":  28,
-"startColumn":  87,
-"endLine":  28,
-"endColumn":  98
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L91",
-"region":  {
-"startLine":  91,
-"startColumn":  46,
-"endLine":  91,
-"endColumn":  57
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L100",
-"region":  {
-"startLine":  100,
-"startColumn":  69,
-"endLine":  100,
-"endColumn":  80
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L101",
-"region":  {
-"startLine":  101,
-"startColumn":  93,
-"endLine":  101,
-"endColumn":  104
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L104",
-"region":  {
-"startLine":  104,
-"startColumn":  142,
-"endLine":  104,
-"endColumn":  153
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S1192",
+      "Message": "Define a constant instead of using this literal \u0027*EmberAPP\u0027 6 times.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L20",
+      "Location": "Line 20 Position 105-116"
+    }
+  ]
 }

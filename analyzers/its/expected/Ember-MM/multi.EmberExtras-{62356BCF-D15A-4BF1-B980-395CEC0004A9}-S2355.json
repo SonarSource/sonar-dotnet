@@ -1,56 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L30",
-"region":  {
-"startLine":  30,
-"startColumn":  52,
-"endLine":  30,
-"endColumn":  109
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/genericGenresEditor.vb#L41",
-"region":  {
-"startLine":  41,
-"startColumn":  46,
-"endLine":  41,
-"endColumn":  105
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/genericMediaSources.vb#L41",
-"region":  {
-"startLine":  41,
-"startColumn":  46,
-"endLine":  41,
-"endColumn":  105
-}
-}
-},
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/genericMetadataEditor.vb#L41",
-"region":  {
-"startLine":  41,
-"startColumn":  46,
-"endLine":  41,
-"endColumn":  105
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L30",
+      "Location": "Line 30 Position 52-109"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/genericGenresEditor.vb#L41",
+      "Location": "Line 41 Position 46-105"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/genericMediaSources.vb#L41",
+      "Location": "Line 41 Position 46-105"
+    },
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/genericMetadataEditor.vb#L41",
+      "Location": "Line 41 Position 46-105"
+    }
+  ]
 }

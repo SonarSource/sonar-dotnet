@@ -1,108 +1,52 @@
 {
-"issues":  [
-{
-"id":  "S105",
-"message":  "Replace all tab characters in this file by sequences of white-spaces.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HeadResponse.cs#L8",
-"region":  {
-"startLine":  8,
-"startColumn":  2,
-"endLine":  8,
-"endColumn":  2
-}
-}
-},
-{
-"id":  "S105",
-"message":  "Replace all tab characters in this file by sequences of white-spaces.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L43",
-"region":  {
-"startLine":  43,
-"startColumn":  1,
-"endLine":  43,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S105",
-"message":  "Replace all tab characters in this file by sequences of white-spaces.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L90",
-"region":  {
-"startLine":  90,
-"startColumn":  1,
-"endLine":  90,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S105",
-"message":  "Replace all tab characters in this file by sequences of white-spaces.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L211",
-"region":  {
-"startLine":  211,
-"startColumn":  13,
-"endLine":  211,
-"endColumn":  13
-}
-}
-},
-{
-"id":  "S105",
-"message":  "Replace all tab characters in this file by sequences of white-spaces.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Json/JavaScriptConverter.cs#L38",
-"region":  {
-"startLine":  38,
-"startColumn":  1,
-"endLine":  38,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S105",
-"message":  "Replace all tab characters in this file by sequences of white-spaces.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Json/ScriptIgnoreAttribute.cs#L39",
-"region":  {
-"startLine":  39,
-"startColumn":  1,
-"endLine":  39,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S105",
-"message":  "Replace all tab characters in this file by sequences of white-spaces.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L5",
-"region":  {
-"startLine":  5,
-"startColumn":  3,
-"endLine":  5,
-"endColumn":  3
-}
-}
-},
-{
-"id":  "S105",
-"message":  "Replace all tab characters in this file by sequences of white-spaces.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L108",
-"region":  {
-"startLine":  108,
-"startColumn":  1,
-"endLine":  108,
-"endColumn":  1
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S105",
+      "Message": "Replace all tab characters in this file by sequences of white-spaces.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HeadResponse.cs#L8",
+      "Location": "Line 8 Position 2-2"
+    },
+    {
+      "Id": "S105",
+      "Message": "Replace all tab characters in this file by sequences of white-spaces.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L43",
+      "Location": "Line 43 Position 1-1"
+    },
+    {
+      "Id": "S105",
+      "Message": "Replace all tab characters in this file by sequences of white-spaces.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L90",
+      "Location": "Line 90 Position 1-1"
+    },
+    {
+      "Id": "S105",
+      "Message": "Replace all tab characters in this file by sequences of white-spaces.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L211",
+      "Location": "Line 211 Position 13-13"
+    },
+    {
+      "Id": "S105",
+      "Message": "Replace all tab characters in this file by sequences of white-spaces.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Json/JavaScriptConverter.cs#L38",
+      "Location": "Line 38 Position 1-1"
+    },
+    {
+      "Id": "S105",
+      "Message": "Replace all tab characters in this file by sequences of white-spaces.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Json/ScriptIgnoreAttribute.cs#L39",
+      "Location": "Line 39 Position 1-1"
+    },
+    {
+      "Id": "S105",
+      "Message": "Replace all tab characters in this file by sequences of white-spaces.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L5",
+      "Location": "Line 5 Position 3-3"
+    },
+    {
+      "Id": "S105",
+      "Message": "Replace all tab characters in this file by sequences of white-spaces.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L108",
+      "Location": "Line 108 Position 1-1"
+    }
+  ]
 }

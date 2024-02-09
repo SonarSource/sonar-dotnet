@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S1067",
-"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/ObjectFactory.cs#L47-L51",
-"region":  {
-"startLine":  47,
-"startColumn":  13,
-"endLine":  51,
-"endColumn":  86
-}
-}
-},
-{
-"id":  "S1067",
-"message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/TypeMap.cs#L73-L74",
-"region":  {
-"startLine":  73,
-"startColumn":  46,
-"endLine":  74,
-"endColumn":  91
-}
-}
-},
-{
-"id":  "S1067",
-"message":  "Reduce the number of conditional operators (7) used in the expression (maximum allowed 3).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/TypeMap.cs#L122-L129",
-"region":  {
-"startLine":  122,
-"startColumn":  13,
-"endLine":  129,
-"endColumn":  105
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/ObjectFactory.cs#L47-L51",
+      "Location": "Lines 47-51 Position 13-86"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (7) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/TypeMap.cs#L122-L129",
+      "Location": "Lines 122-129 Position 13-105"
+    },
+    {
+      "Id": "S1067",
+      "Message": "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/TypeMap.cs#L73-L74",
+      "Location": "Lines 73-74 Position 46-91"
+    }
+  ]
 }

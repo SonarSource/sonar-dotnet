@@ -1,100 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S3010",
-"message":  "Remove this assignment of 'rootPathProvider' or initialize it statically.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/FavIconApplicationStartup.cs#L29",
-"region":  {
-"startLine":  29,
-"startColumn":  13,
-"endLine":  29,
-"endColumn":  57
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/FavIconApplicationStartup.cs#L18",
-"region":  {
-"startLine":  18,
-"startColumn":  42,
-"endLine":  18,
-"endColumn":  58
-}
-}
-]
-},
-{
-"id":  "S3010",
-"message":  "Remove this assignment of 'traceConfiguration' or initialize it statically.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/FavIconApplicationStartup.cs#L30",
-"region":  {
-"startLine":  30,
-"startColumn":  13,
-"endLine":  30,
-"endColumn":  59
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/FavIconApplicationStartup.cs#L17",
-"region":  {
-"startLine":  17,
-"startColumn":  43,
-"endLine":  17,
-"endColumn":  61
-}
-}
-]
-},
-{
-"id":  "S3010",
-"message":  "Remove this assignment of 'rootPathProvider' or initialize it statically.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/StaticContent.cs#L25",
-"region":  {
-"startLine":  25,
-"startColumn":  13,
-"endLine":  25,
-"endColumn":  45
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/StaticContent.cs#L14",
-"region":  {
-"startLine":  14,
-"startColumn":  42,
-"endLine":  14,
-"endColumn":  58
-}
-}
-]
-},
-{
-"id":  "S3010",
-"message":  "Remove this assignment of 'conventions' or initialize it statically.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/StaticContent.cs#L26",
-"region":  {
-"startLine":  26,
-"startColumn":  13,
-"endLine":  26,
-"endColumn":  40
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/StaticContent.cs#L15",
-"region":  {
-"startLine":  15,
-"startColumn":  50,
-"endLine":  15,
-"endColumn":  61
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S3010",
+      "Message": "Remove this assignment of \u0027rootPathProvider\u0027 or initialize it statically.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/FavIconApplicationStartup.cs#L29",
+      "Location": "Line 29 Position 13-57"
+    },
+    {
+      "Id": "S3010",
+      "Message": "Remove this assignment of \u0027traceConfiguration\u0027 or initialize it statically.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/FavIconApplicationStartup.cs#L30",
+      "Location": "Line 30 Position 13-59"
+    },
+    {
+      "Id": "S3010",
+      "Message": "Remove this assignment of \u0027rootPathProvider\u0027 or initialize it statically.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/StaticContent.cs#L25",
+      "Location": "Line 25 Position 13-45"
+    },
+    {
+      "Id": "S3010",
+      "Message": "Remove this assignment of \u0027conventions\u0027 or initialize it statically.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/StaticContent.cs#L26",
+      "Location": "Line 26 Position 13-40"
+    }
+  ]
 }

@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S125",
-"message":  "Remove this commented out code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L388",
-"region":  {
-"startLine":  388,
-"startColumn":  35,
-"endLine":  388,
-"endColumn":  72
-}
-}
-},
-{
-"id":  "S125",
-"message":  "Remove this commented out code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/RemoteConnection.cs#L122",
-"region":  {
-"startLine":  122,
-"startColumn":  17,
-"endLine":  122,
-"endColumn":  143
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S125",
+      "Message": "Remove this commented out code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L388",
+      "Location": "Line 388 Position 35-72"
+    },
+    {
+      "Id": "S125",
+      "Message": "Remove this commented out code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/RemoteConnection.cs#L122",
+      "Location": "Line 122 Position 17-143"
+    }
+  ]
 }

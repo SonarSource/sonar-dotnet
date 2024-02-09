@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2696",
-"message":  "Remove this set, which updates a 'static' field from an instance method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.DotLiquid/DotLiquidViewEngine.cs#L60",
-"region":  {
-"startLine":  60,
-"startColumn":  13,
-"endLine":  60,
-"endColumn":  40
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2696",
+      "Message": "Remove this set, which updates a \u0027static\u0027 field from an instance method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.DotLiquid/DotLiquidViewEngine.cs#L60",
+      "Location": "Line 60 Position 13-40"
+    }
+  ]
 }

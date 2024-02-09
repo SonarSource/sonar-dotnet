@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'Akka.Streams.TestKit.TestSubscriber.ManualProbe<Akka.Persistence.Query.EventEnvelope>' instead of 'Akka.Streams.TestKit.TestSubscriber.Probe<Akka.Persistence.Query.EventEnvelope>'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByTagSpec.cs#L109",
-"region":  {
-"startLine":  109,
-"startColumn":  82,
-"endLine":  109,
-"endColumn":  87
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.TestKit.TestSubscriber.ManualProbe\u003CAkka.Persistence.Query.EventEnvelope\u003E\u0027 instead of \u0027Akka.Streams.TestKit.TestSubscriber.Probe\u003CAkka.Persistence.Query.EventEnvelope\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByTagSpec.cs#L109",
+      "Location": "Line 109 Position 82-87"
+    }
+  ]
 }

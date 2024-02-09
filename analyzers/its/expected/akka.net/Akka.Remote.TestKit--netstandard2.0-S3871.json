@@ -1,95 +1,46 @@
 {
-"issues":  [
-{
-"id":  "S3871",
-"message":  "Make this exception 'public'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L138",
-"region":  {
-"startLine":  138,
-"startColumn":  29,
-"endLine":  138,
-"endColumn":  52
-}
-}
-},
-{
-"id":  "S3871",
-"message":  "Make this exception 'public'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L190",
-"region":  {
-"startLine":  190,
-"startColumn":  29,
-"endLine":  190,
-"endColumn":  51
-}
-}
-},
-{
-"id":  "S3871",
-"message":  "Make this exception 'public'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L242",
-"region":  {
-"startLine":  242,
-"startColumn":  29,
-"endLine":  242,
-"endColumn":  51
-}
-}
-},
-{
-"id":  "S3871",
-"message":  "Make this exception 'public'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L300",
-"region":  {
-"startLine":  300,
-"startColumn":  29,
-"endLine":  300,
-"endColumn":  50
-}
-}
-},
-{
-"id":  "S3871",
-"message":  "Make this exception 'public'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L364",
-"region":  {
-"startLine":  364,
-"startColumn":  29,
-"endLine":  364,
-"endColumn":  50
-}
-}
-},
-{
-"id":  "S3871",
-"message":  "Make this exception 'public'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L416",
-"region":  {
-"startLine":  416,
-"startColumn":  29,
-"endLine":  416,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S3871",
-"message":  "Make this exception 'public'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L309",
-"region":  {
-"startLine":  309,
-"startColumn":  24,
-"endLine":  309,
-"endColumn":  41
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3871",
+      "Message": "Make this exception \u0027public\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L138",
+      "Location": "Line 138 Position 29-52"
+    },
+    {
+      "Id": "S3871",
+      "Message": "Make this exception \u0027public\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L190",
+      "Location": "Line 190 Position 29-51"
+    },
+    {
+      "Id": "S3871",
+      "Message": "Make this exception \u0027public\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L242",
+      "Location": "Line 242 Position 29-51"
+    },
+    {
+      "Id": "S3871",
+      "Message": "Make this exception \u0027public\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L300",
+      "Location": "Line 300 Position 29-50"
+    },
+    {
+      "Id": "S3871",
+      "Message": "Make this exception \u0027public\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L364",
+      "Location": "Line 364 Position 29-50"
+    },
+    {
+      "Id": "S3871",
+      "Message": "Make this exception \u0027public\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L416",
+      "Location": "Line 416 Position 29-48"
+    },
+    {
+      "Id": "S3871",
+      "Message": "Make this exception \u0027public\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L309",
+      "Location": "Line 309 Position 24-41"
+    }
+  ]
 }

@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S4035",
-"message":  "Seal class 'PersistentFSMSnapshot' or implement 'IEqualityComparer<T>' instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSM.cs#L203",
-"region":  {
-"startLine":  203,
-"startColumn":  22,
-"endLine":  203,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S4035",
-"message":  "Seal class 'EventSequence' or implement 'IEqualityComparer<T>' instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/EventSequences.cs#L66",
-"region":  {
-"startLine":  66,
-"startColumn":  18,
-"endLine":  66,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S4035",
-"message":  "Seal class 'Persistent' or implement 'IEqualityComparer<T>' instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistent.cs#L297",
-"region":  {
-"startLine":  297,
-"startColumn":  18,
-"endLine":  297,
-"endColumn":  28
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4035",
+      "Message": "Seal class \u0027PersistentFSMSnapshot\u0027 or implement \u0027IEqualityComparer\u003CT\u003E\u0027 instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSM.cs#L203",
+      "Location": "Line 203 Position 22-43"
+    },
+    {
+      "Id": "S4035",
+      "Message": "Seal class \u0027EventSequence\u0027 or implement \u0027IEqualityComparer\u003CT\u003E\u0027 instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/EventSequences.cs#L66",
+      "Location": "Line 66 Position 18-31"
+    },
+    {
+      "Id": "S4035",
+      "Message": "Seal class \u0027Persistent\u0027 or implement \u0027IEqualityComparer\u003CT\u003E\u0027 instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistent.cs#L297",
+      "Location": "Line 297 Position 18-28"
+    }
+  ]
 }

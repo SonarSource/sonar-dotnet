@@ -1,199 +1,94 @@
 {
-"issues":  [
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'notFound'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L142",
-"region":  {
-"startLine":  142,
-"startColumn":  31,
-"endLine":  142,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'deleted'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L143",
-"region":  {
-"startLine":  143,
-"startColumn":  34,
-"endLine":  143,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'failure'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L144",
-"region":  {
-"startLine":  144,
-"startColumn":  33,
-"endLine":  144,
-"endColumn":  40
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'deleted'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L180",
-"region":  {
-"startLine":  180,
-"startColumn":  34,
-"endLine":  180,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'timeout'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L183",
-"region":  {
-"startLine":  183,
-"startColumn":  36,
-"endLine":  183,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'failure'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L214",
-"region":  {
-"startLine":  214,
-"startColumn":  47,
-"endLine":  214,
-"endColumn":  54
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'deleted'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L216",
-"region":  {
-"startLine":  216,
-"startColumn":  34,
-"endLine":  216,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'c'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L568",
-"region":  {
-"startLine":  568,
-"startColumn":  32,
-"endLine":  568,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'r'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L584",
-"region":  {
-"startLine":  584,
-"startColumn":  45,
-"endLine":  584,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'value'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1032",
-"region":  {
-"startLine":  1032,
-"startColumn":  39,
-"endLine":  1032,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'gKey'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1500",
-"region":  {
-"startLine":  1500,
-"startColumn":  34,
-"endLine":  1500,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'pKey'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1505",
-"region":  {
-"startLine":  1505,
-"startColumn":  35,
-"endLine":  1505,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'flagKey'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1510",
-"region":  {
-"startLine":  1510,
-"startColumn":  30,
-"endLine":  1510,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'write'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/WriteAggregator.cs#L68",
-"region":  {
-"startLine":  68,
-"startColumn":  31,
-"endLine":  68,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'write'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/WriteAggregator.cs#L73",
-"region":  {
-"startLine":  73,
-"startColumn":  33,
-"endLine":  73,
-"endColumn":  38
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027notFound\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L142",
+      "Location": "Line 142 Position 31-39"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027deleted\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L143",
+      "Location": "Line 143 Position 34-41"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027failure\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L144",
+      "Location": "Line 144 Position 33-40"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027deleted\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L180",
+      "Location": "Line 180 Position 34-41"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027timeout\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L183",
+      "Location": "Line 183 Position 36-43"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027failure\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L214",
+      "Location": "Line 214 Position 47-54"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027deleted\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L216",
+      "Location": "Line 216 Position 34-41"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027c\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L568",
+      "Location": "Line 568 Position 32-33"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027r\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L584",
+      "Location": "Line 584 Position 45-46"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027value\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1032",
+      "Location": "Line 1032 Position 39-44"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027gKey\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1500",
+      "Location": "Line 1500 Position 34-38"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027pKey\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1505",
+      "Location": "Line 1505 Position 35-39"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027flagKey\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1510",
+      "Location": "Line 1510 Position 30-37"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027write\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/WriteAggregator.cs#L68",
+      "Location": "Line 68 Position 31-36"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027write\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/WriteAggregator.cs#L73",
+      "Location": "Line 73 Position 33-38"
+    }
+  ]
 }

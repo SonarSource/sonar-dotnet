@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S103",
-"message":  "Split this 209 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L128",
-"region":  {
-"startLine":  128,
-"startColumn":  1,
-"endLine":  128,
-"endColumn":  210
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 261 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L230",
-"region":  {
-"startLine":  230,
-"startColumn":  1,
-"endLine":  230,
-"endColumn":  262
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 261 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L238",
-"region":  {
-"startLine":  238,
-"startColumn":  1,
-"endLine":  238,
-"endColumn":  262
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S103",
+      "Message": "Split this 209 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L128",
+      "Location": "Line 128 Position 1-210"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 261 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L230",
+      "Location": "Line 230 Position 1-262"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 261 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L238",
+      "Location": "Line 238 Position 1-262"
+    }
+  ]
 }

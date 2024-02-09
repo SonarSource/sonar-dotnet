@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2971",
-"message":  "Use 'Count' property here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3981.cs#L12",
-"region":  {
-"startLine":  12,
-"startColumn":  32,
-"endLine":  12,
-"endColumn":  37
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2971",
+      "Message": "Use \u0027Count\u0027 property here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3981.cs#L12",
+      "Location": "Line 12 Position 32-37"
+    }
+  ]
 }

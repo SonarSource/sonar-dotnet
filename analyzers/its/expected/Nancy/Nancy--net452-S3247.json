@@ -1,244 +1,64 @@
 {
-"issues":  [
-{
-"id":  "S3247",
-"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L187",
-"region":  {
-"startLine":  187,
-"startColumn":  17,
-"endLine":  187,
-"endColumn":  36
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L189",
-"region":  {
-"startLine":  189,
-"startColumn":  25,
-"endLine":  189,
-"endColumn":  42
-}
-}
-]
-},
-{
-"id":  "S3247",
-"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L191",
-"region":  {
-"startLine":  191,
-"startColumn":  22,
-"endLine":  191,
-"endColumn":  44
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L193",
-"region":  {
-"startLine":  193,
-"startColumn":  25,
-"endLine":  193,
-"endColumn":  45
-}
-}
-]
-},
-{
-"id":  "S3247",
-"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L195",
-"region":  {
-"startLine":  195,
-"startColumn":  22,
-"endLine":  195,
-"endColumn":  41
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L197",
-"region":  {
-"startLine":  197,
-"startColumn":  25,
-"endLine":  197,
-"endColumn":  42
-}
-}
-]
-},
-{
-"id":  "S3247",
-"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L257",
-"region":  {
-"startLine":  257,
-"startColumn":  17,
-"endLine":  257,
-"endColumn":  36
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L259",
-"region":  {
-"startLine":  259,
-"startColumn":  25,
-"endLine":  259,
-"endColumn":  42
-}
-}
-]
-},
-{
-"id":  "S3247",
-"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L261",
-"region":  {
-"startLine":  261,
-"startColumn":  22,
-"endLine":  261,
-"endColumn":  44
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L265",
-"region":  {
-"startLine":  265,
-"startColumn":  29,
-"endLine":  265,
-"endColumn":  49
-}
-}
-]
-},
-{
-"id":  "S3247",
-"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L283",
-"region":  {
-"startLine":  283,
-"startColumn":  17,
-"endLine":  283,
-"endColumn":  36
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L285",
-"region":  {
-"startLine":  285,
-"startColumn":  18,
-"endLine":  285,
-"endColumn":  35
-}
-}
-]
-},
-{
-"id":  "S3247",
-"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L288",
-"region":  {
-"startLine":  288,
-"startColumn":  22,
-"endLine":  288,
-"endColumn":  44
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L290",
-"region":  {
-"startLine":  290,
-"startColumn":  18,
-"endLine":  290,
-"endColumn":  38
-}
-}
-]
-},
-{
-"id":  "S3247",
-"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L309",
-"region":  {
-"startLine":  309,
-"startColumn":  22,
-"endLine":  309,
-"endColumn":  44
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L311",
-"region":  {
-"startLine":  311,
-"startColumn":  25,
-"endLine":  311,
-"endColumn":  45
-}
-}
-]
-},
-{
-"id":  "S3247",
-"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L329",
-"region":  {
-"startLine":  329,
-"startColumn":  22,
-"endLine":  329,
-"endColumn":  44
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L331",
-"region":  {
-"startLine":  331,
-"startColumn":  25,
-"endLine":  331,
-"endColumn":  45
-}
-}
-]
-},
-{
-"id":  "S3247",
-"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/Negotiation/DefaultResponseNegotiator.cs#L83",
-"region":  {
-"startLine":  83,
-"startColumn":  17,
-"endLine":  83,
-"endColumn":  40
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/Negotiation/DefaultResponseNegotiator.cs#L85",
-"region":  {
-"startLine":  85,
-"startColumn":  28,
-"endLine":  85,
-"endColumn":  49
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L187",
+      "Location": "Line 187 Position 17-36"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L191",
+      "Location": "Line 191 Position 22-44"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L195",
+      "Location": "Line 195 Position 22-41"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L257",
+      "Location": "Line 257 Position 17-36"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L261",
+      "Location": "Line 261 Position 22-44"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L283",
+      "Location": "Line 283 Position 17-36"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L288",
+      "Location": "Line 288 Position 22-44"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L309",
+      "Location": "Line 309 Position 22-44"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L329",
+      "Location": "Line 329 Position 22-44"
+    },
+    {
+      "Id": "S3247",
+      "Message": "Replace this type-check-and-cast sequence with an \u0027as\u0027 and a null check.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/Negotiation/DefaultResponseNegotiator.cs#L83",
+      "Location": "Line 83 Position 17-40"
+    }
+  ]
 }

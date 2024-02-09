@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S3626",
-"message":  "Remove this redundant jump.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3626.cs#L9",
-"region":  {
-"startLine":  9,
-"startColumn":  17,
-"endLine":  9,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S3626",
-"message":  "Remove this redundant jump.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3626.cs#L11",
-"region":  {
-"startLine":  11,
-"startColumn":  17,
-"endLine":  11,
-"endColumn":  24
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3626",
+      "Message": "Remove this redundant jump.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3626.cs#L11",
+      "Location": "Line 11 Position 17-24"
+    },
+    {
+      "Id": "S3626",
+      "Message": "Remove this redundant jump.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3626.cs#L9",
+      "Location": "Line 9 Position 17-24"
+    }
+  ]
 }

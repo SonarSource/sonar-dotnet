@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1699",
-"message":  "Remove this call from a constructor to the overridable 'NewActorCell' method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/LocalActorRef.cs#L75",
-"region":  {
-"startLine":  75,
-"startColumn":  21,
-"endLine":  75,
-"endColumn":  33
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1699",
+      "Message": "Remove this call from a constructor to the overridable \u0027NewActorCell\u0027 method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/LocalActorRef.cs#L75",
+      "Location": "Line 75 Position 21-33"
+    }
+  ]
 }

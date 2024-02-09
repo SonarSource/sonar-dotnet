@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S2743",
-"message":  "A static field in a generic type is not shared among instances of different close constructed types.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphStages.cs#L690",
-"region":  {
-"startLine":  690,
-"startColumn":  44,
-"endLine":  690,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S2743",
-"message":  "A static field in a generic type is not shared among instances of different close constructed types.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L2857",
-"region":  {
-"startLine":  2857,
-"startColumn":  54,
-"endLine":  2857,
-"endColumn":  70
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2743",
+      "Message": "A static field in a generic type is not shared among instances of different close constructed types.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphStages.cs#L690",
+      "Location": "Line 690 Position 44-48"
+    },
+    {
+      "Id": "S2743",
+      "Message": "A static field in a generic type is not shared among instances of different close constructed types.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L2857",
+      "Location": "Line 2857 Position 54-70"
+    }
+  ]
 }

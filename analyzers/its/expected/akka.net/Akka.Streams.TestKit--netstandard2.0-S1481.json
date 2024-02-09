@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable '_'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.TestKit/TestPublisher.cs#L189",
-"region":  {
-"startLine":  189,
-"startColumn":  21,
-"endLine":  189,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable '_'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.TestKit/TestSubscriber.cs#L544",
-"region":  {
-"startLine":  544,
-"startColumn":  21,
-"endLine":  544,
-"endColumn":  22
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027_\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.TestKit/TestPublisher.cs#L189",
+      "Location": "Line 189 Position 21-22"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027_\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.TestKit/TestSubscriber.cs#L544",
+      "Location": "Line 544 Position 21-22"
+    }
+  ]
 }

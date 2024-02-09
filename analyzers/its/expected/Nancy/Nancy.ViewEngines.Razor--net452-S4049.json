@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S4049",
-"message":  "Consider making method 'GetAssemblyNames' a property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/IRazorConfiguration.cs#L21",
-"region":  {
-"startLine":  21,
-"startColumn":  29,
-"endLine":  21,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S4049",
-"message":  "Consider making method 'GetDefaultNamespaces' a property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/IRazorConfiguration.cs#L26",
-"region":  {
-"startLine":  26,
-"startColumn":  29,
-"endLine":  26,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S4049",
-"message":  "Consider making method 'GetAssemblies' a property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/RazorAssemblyProvider.cs#L42",
-"region":  {
-"startLine":  42,
-"startColumn":  46,
-"endLine":  42,
-"endColumn":  59
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetAssemblyNames\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/IRazorConfiguration.cs#L21",
+      "Location": "Line 21 Position 29-45"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetDefaultNamespaces\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/IRazorConfiguration.cs#L26",
+      "Location": "Line 26 Position 29-49"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetAssemblies\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/RazorAssemblyProvider.cs#L42",
+      "Location": "Line 42 Position 46-59"
+    }
+  ]
 }

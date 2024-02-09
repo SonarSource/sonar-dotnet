@@ -1,56 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S3329",
-"message":  "Use a dynamically-generated, random IV.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/AesCngTest.cs#L19",
-"region":  {
-"startLine":  19,
-"startColumn":  13,
-"endLine":  19,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S3329",
-"message":  "Use a dynamically-generated, random IV.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/AesCryptoServiceProviderTest.cs#L20",
-"region":  {
-"startLine":  20,
-"startColumn":  17,
-"endLine":  20,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S3329",
-"message":  "Use a dynamically-generated, random IV.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/AesTest.cs#L20",
-"region":  {
-"startLine":  20,
-"startColumn":  17,
-"endLine":  20,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S3329",
-"message":  "Use a dynamically-generated, random IV.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/SymmetricAlgorithmTest.cs#L20",
-"region":  {
-"startLine":  20,
-"startColumn":  17,
-"endLine":  20,
-"endColumn":  57
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3329",
+      "Message": "Use a dynamically-generated, random IV.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/AesCngTest.cs#L19",
+      "Location": "Line 19 Position 13-55"
+    },
+    {
+      "Id": "S3329",
+      "Message": "Use a dynamically-generated, random IV.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/AesCryptoServiceProviderTest.cs#L20",
+      "Location": "Line 20 Position 17-57"
+    },
+    {
+      "Id": "S3329",
+      "Message": "Use a dynamically-generated, random IV.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/AesTest.cs#L20",
+      "Location": "Line 20 Position 17-59"
+    },
+    {
+      "Id": "S3329",
+      "Message": "Use a dynamically-generated, random IV.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/SymmetricAlgorithmTest.cs#L20",
+      "Location": "Line 20 Position 17-57"
+    }
+  ]
 }

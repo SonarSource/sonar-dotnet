@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3626",
-"message":  "Remove this redundant jump.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Futures.cs#L487",
-"region":  {
-"startLine":  487,
-"startColumn":  21,
-"endLine":  487,
-"endColumn":  30
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3626",
+      "Message": "Remove this redundant jump.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Futures.cs#L487",
+      "Location": "Line 487 Position 21-30"
+    }
+  ]
 }

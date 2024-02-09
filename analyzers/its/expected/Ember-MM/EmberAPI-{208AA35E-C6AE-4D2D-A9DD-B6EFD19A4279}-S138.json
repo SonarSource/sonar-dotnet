@@ -1,303 +1,142 @@
 {
-"issues":  [
-{
-"id":  "S138",
-"message":  "This method 'Clean' has 100 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L58",
-"region":  {
-"startLine":  58,
-"startColumn":  16,
-"endLine":  58,
-"endColumn":  21
-}
-}
-},
-{
-"id":  "S138",
-"message":  "This function 'LoadMovieFromDB' has 152 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L574",
-"region":  {
-"startLine":  574,
-"startColumn":  21,
-"endLine":  574,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S138",
-"message":  "This function 'LoadTVEpFromDB' has 106 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L792",
-"region":  {
-"startLine":  792,
-"startColumn":  21,
-"endLine":  792,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S138",
-"message":  "This function 'SaveMovieToDB' has 305 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1087",
-"region":  {
-"startLine":  1087,
-"startColumn":  21,
-"endLine":  1087,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S138",
-"message":  "This method 'SaveTVEpToDB' has 211 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1426",
-"region":  {
-"startLine":  1426,
-"startColumn":  16,
-"endLine":  1426,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S138",
-"message":  "This method 'SaveTVShowToDB' has 113 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1704",
-"region":  {
-"startLine":  1704,
-"startColumn":  16,
-"endLine":  1704,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S138",
-"message":  "This function 'GetItemsToDelete' has 183 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L178",
-"region":  {
-"startLine":  178,
-"startColumn":  25,
-"endLine":  178,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S138",
-"message":  "This function 'SaveAsFanart' has 114 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L671",
-"region":  {
-"startLine":  671,
-"startColumn":  21,
-"endLine":  671,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S138",
-"message":  "This function 'SaveAsPoster' has 146 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L799",
-"region":  {
-"startLine":  799,
-"startColumn":  21,
-"endLine":  799,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S138",
-"message":  "This function 'SaveAsSeasonPoster' has 102 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L1061",
-"region":  {
-"startLine":  1061,
-"startColumn":  21,
-"endLine":  1061,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S138",
-"message":  "This method 'GetMIFromPath' has 133 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L131",
-"region":  {
-"startLine":  131,
-"startColumn":  16,
-"endLine":  131,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S138",
-"message":  "This function 'ScanMI' has 91 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L424",
-"region":  {
-"startLine":  424,
-"startColumn":  22,
-"endLine":  424,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S138",
-"message":  "This method 'SaveMovieToNFO' has 127 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L697",
-"region":  {
-"startLine":  697,
-"startColumn":  23,
-"endLine":  697,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S138",
-"message":  "This function 'GetSeasons' has 81 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L49",
-"region":  {
-"startLine":  49,
-"startColumn":  28,
-"endLine":  49,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S138",
-"message":  "This method 'GetMovieFolderContents' has 140 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L214",
-"region":  {
-"startLine":  214,
-"startColumn":  16,
-"endLine":  214,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S138",
-"message":  "This method 'GetSeasonImages' has 113 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L378",
-"region":  {
-"startLine":  378,
-"startColumn":  16,
-"endLine":  378,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S138",
-"message":  "This method 'LoadMovie' has 82 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L658",
-"region":  {
-"startLine":  658,
-"startColumn":  16,
-"endLine":  658,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S138",
-"message":  "This method 'ScanForFiles' has 94 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L760",
-"region":  {
-"startLine":  760,
-"startColumn":  16,
-"endLine":  760,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S138",
-"message":  "This method 'bwPrelim_DoWork' has 108 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1070",
-"region":  {
-"startLine":  1070,
-"startColumn":  17,
-"endLine":  1070,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S138",
-"message":  "This method 'LoadShow' has 115 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1210",
-"region":  {
-"startLine":  1210,
-"startColumn":  17,
-"endLine":  1210,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S138",
-"message":  "This method 'Clear' has 317 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPISettings.vb#L3225",
-"region":  {
-"startLine":  3225,
-"startColumn":  16,
-"endLine":  3225,
-"endColumn":  21
-}
-}
-},
-{
-"id":  "S138",
-"message":  "This method 'SetDefaultsForLists' has 94 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPISettings.vb#L3585",
-"region":  {
-"startLine":  3585,
-"startColumn":  16,
-"endLine":  3585,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S138",
-"message":  "This function 'GetAVImages' has 89 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L110",
-"region":  {
-"startLine":  110,
-"startColumn":  28,
-"endLine":  110,
-"endColumn":  39
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S138",
+      "Message": "This function \u0027SaveMovieToDB\u0027 has 305 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1087",
+      "Location": "Line 1087 Position 21-34"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027SaveTVEpToDB\u0027 has 211 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1426",
+      "Location": "Line 1426 Position 16-28"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027SaveTVShowToDB\u0027 has 113 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1704",
+      "Location": "Line 1704 Position 16-30"
+    },
+    {
+      "Id": "S138",
+      "Message": "This function \u0027LoadMovieFromDB\u0027 has 152 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L574",
+      "Location": "Line 574 Position 21-36"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027Clean\u0027 has 100 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L58",
+      "Location": "Line 58 Position 16-21"
+    },
+    {
+      "Id": "S138",
+      "Message": "This function \u0027LoadTVEpFromDB\u0027 has 106 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L792",
+      "Location": "Line 792 Position 21-35"
+    },
+    {
+      "Id": "S138",
+      "Message": "This function \u0027GetItemsToDelete\u0027 has 183 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L178",
+      "Location": "Line 178 Position 25-41"
+    },
+    {
+      "Id": "S138",
+      "Message": "This function \u0027SaveAsSeasonPoster\u0027 has 102 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L1061",
+      "Location": "Line 1061 Position 21-39"
+    },
+    {
+      "Id": "S138",
+      "Message": "This function \u0027SaveAsFanart\u0027 has 114 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L671",
+      "Location": "Line 671 Position 21-33"
+    },
+    {
+      "Id": "S138",
+      "Message": "This function \u0027SaveAsPoster\u0027 has 146 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L799",
+      "Location": "Line 799 Position 21-33"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027GetMIFromPath\u0027 has 133 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L131",
+      "Location": "Line 131 Position 16-29"
+    },
+    {
+      "Id": "S138",
+      "Message": "This function \u0027ScanMI\u0027 has 91 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L424",
+      "Location": "Line 424 Position 22-28"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027SaveMovieToNFO\u0027 has 127 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L697",
+      "Location": "Line 697 Position 23-37"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027bwPrelim_DoWork\u0027 has 108 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1070",
+      "Location": "Line 1070 Position 17-32"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027LoadShow\u0027 has 115 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1210",
+      "Location": "Line 1210 Position 17-25"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027GetMovieFolderContents\u0027 has 140 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L214",
+      "Location": "Line 214 Position 16-38"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027GetSeasonImages\u0027 has 113 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L378",
+      "Location": "Line 378 Position 16-31"
+    },
+    {
+      "Id": "S138",
+      "Message": "This function \u0027GetSeasons\u0027 has 81 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L49",
+      "Location": "Line 49 Position 28-38"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027LoadMovie\u0027 has 82 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L658",
+      "Location": "Line 658 Position 16-25"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027ScanForFiles\u0027 has 94 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L760",
+      "Location": "Line 760 Position 16-28"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027Clear\u0027 has 317 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPISettings.vb#L3225",
+      "Location": "Line 3225 Position 16-21"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027SetDefaultsForLists\u0027 has 94 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPISettings.vb#L3585",
+      "Location": "Line 3585 Position 16-35"
+    },
+    {
+      "Id": "S138",
+      "Message": "This function \u0027GetAVImages\u0027 has 89 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L110",
+      "Location": "Line 110 Position 28-39"
+    }
+  ]
 }

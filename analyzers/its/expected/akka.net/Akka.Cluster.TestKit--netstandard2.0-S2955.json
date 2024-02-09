@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S2955",
-"message":  "Use a comparison to 'default(T)' instead or add a constraint to 'T' so that it can't be a value type.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.TestKit/FailureDetectorPuppet.cs#L123",
-"region":  {
-"startLine":  123,
-"startColumn":  30,
-"endLine":  123,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S2955",
-"message":  "Use a comparison to 'default(T)' instead or add a constraint to 'T' so that it can't be a value type.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.TestKit/FailureDetectorPuppet.cs#L125",
-"region":  {
-"startLine":  125,
-"startColumn":  37,
-"endLine":  125,
-"endColumn":  41
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2955",
+      "Message": "Use a comparison to \u0027default(T)\u0027 instead or add a constraint to \u0027T\u0027 so that it can\u0027t be a value type.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.TestKit/FailureDetectorPuppet.cs#L123",
+      "Location": "Line 123 Position 30-34"
+    },
+    {
+      "Id": "S2955",
+      "Message": "Use a comparison to \u0027default(T)\u0027 instead or add a constraint to \u0027T\u0027 so that it can\u0027t be a value type.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.TestKit/FailureDetectorPuppet.cs#L125",
+      "Location": "Line 125 Position 37-41"
+    }
+  ]
 }

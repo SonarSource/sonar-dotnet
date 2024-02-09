@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S2375",
-"message":  "Wrap this and the following 18 statements that use 'Master.eLang' in a 'With' statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1318",
-"region":  {
-"startLine":  1318,
-"startColumn":  9,
-"endLine":  1318,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S2375",
-"message":  "Wrap this and the following 7 statements that use 'Master.eLang' in a 'With' statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L199",
-"region":  {
-"startLine":  199,
-"startColumn":  3,
-"endLine":  199,
-"endColumn":  67
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 18 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1318",
+      "Location": "Line 1318 Position 9-63"
+    },
+    {
+      "Id": "S2375",
+      "Message": "Wrap this and the following 7 statements that use \u0027Master.eLang\u0027 in a \u0027With\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L199",
+      "Location": "Line 199 Position 3-67"
+    }
+  ]
 }

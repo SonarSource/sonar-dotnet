@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Docs.Tutorials/Tutorial1/ActorHierarchyExperiments.cs#L100",
-"region":  {
-"startLine":  100,
-"startColumn":  21,
-"endLine":  100,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Docs.Tutorials/Tutorial1/ActorHierarchyExperiments.cs#L110",
-"region":  {
-"startLine":  110,
-"startColumn":  21,
-"endLine":  110,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Docs.Tutorials/Tutorial1/ActorHierarchyExperiments.cs#L119",
-"region":  {
-"startLine":  119,
-"startColumn":  21,
-"endLine":  119,
-"endColumn":  37
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Docs.Tutorials/Tutorial1/ActorHierarchyExperiments.cs#L100",
+      "Location": "Line 100 Position 21-47"
+    },
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Docs.Tutorials/Tutorial1/ActorHierarchyExperiments.cs#L110",
+      "Location": "Line 110 Position 21-42"
+    },
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Docs.Tutorials/Tutorial1/ActorHierarchyExperiments.cs#L119",
+      "Location": "Line 119 Position 21-37"
+    }
+  ]
 }

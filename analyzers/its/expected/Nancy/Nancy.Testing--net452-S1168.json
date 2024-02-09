@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1168",
-"message":  "Return an empty collection instead of null.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L201",
-"region":  {
-"startLine":  201,
-"startColumn":  44,
-"endLine":  201,
-"endColumn":  48
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1168",
+      "Message": "Return an empty collection instead of null.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L201",
+      "Location": "Line 201 Position 44-48"
+    }
+  ]
 }

@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1226",
-"message":  "Introduce a new variable instead of reusing the parameter 'bSingle'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L774",
-"region":  {
-"startLine":  774,
-"startColumn":  17,
-"endLine":  774,
-"endColumn":  24
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1226",
+      "Message": "Introduce a new variable instead of reusing the parameter \u0027bSingle\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L774",
+      "Location": "Line 774 Position 17-24"
+    }
+  ]
 }

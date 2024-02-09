@@ -1,56 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S1118",
-"message":  "Add a 'protected' constructor or the 'static' keyword to the class declaration.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/AesCngTest.cs#L13",
-"region":  {
-"startLine":  13,
-"startColumn":  18,
-"endLine":  13,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S1118",
-"message":  "Add a 'protected' constructor or the 'static' keyword to the class declaration.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/AesCryptoServiceProviderTest.cs#L13",
-"region":  {
-"startLine":  13,
-"startColumn":  18,
-"endLine":  13,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S1118",
-"message":  "Add a 'protected' constructor or the 'static' keyword to the class declaration.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/AesTest.cs#L13",
-"region":  {
-"startLine":  13,
-"startColumn":  18,
-"endLine":  13,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S1118",
-"message":  "Add a 'protected' constructor or the 'static' keyword to the class declaration.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/SymmetricAlgorithmTest.cs#L13",
-"region":  {
-"startLine":  13,
-"startColumn":  18,
-"endLine":  13,
-"endColumn":  40
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1118",
+      "Message": "Add a \u0027protected\u0027 constructor or the \u0027static\u0027 keyword to the class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/AesCngTest.cs#L13",
+      "Location": "Line 13 Position 18-28"
+    },
+    {
+      "Id": "S1118",
+      "Message": "Add a \u0027protected\u0027 constructor or the \u0027static\u0027 keyword to the class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/AesCryptoServiceProviderTest.cs#L13",
+      "Location": "Line 13 Position 18-46"
+    },
+    {
+      "Id": "S1118",
+      "Message": "Add a \u0027protected\u0027 constructor or the \u0027static\u0027 keyword to the class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/AesTest.cs#L13",
+      "Location": "Line 13 Position 18-25"
+    },
+    {
+      "Id": "S1118",
+      "Message": "Add a \u0027protected\u0027 constructor or the \u0027static\u0027 keyword to the class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/SymmetricAlgorithmTest.cs#L13",
+      "Location": "Line 13 Position 18-40"
+    }
+  ]
 }

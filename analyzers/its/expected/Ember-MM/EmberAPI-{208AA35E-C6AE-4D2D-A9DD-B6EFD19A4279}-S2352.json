@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2352",
-"message":  "This indexed property has 2 parameters, use methods instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L149",
-"region":  {
-"startLine":  149,
-"startColumn":  30,
-"endLine":  149,
-"endColumn":  57
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2352",
+      "Message": "This indexed property has 2 parameters, use methods instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L149",
+      "Location": "Line 149 Position 30-57"
+    }
+  ]
 }

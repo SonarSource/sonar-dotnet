@@ -1,28 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S4136",
-"message":  "All 'JournalSpec' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L53",
-"region":  {
-"startLine":  53,
-"startColumn":  19,
-"endLine":  53,
-"endColumn":  30
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L83",
-"region":  {
-"startLine":  83,
-"startColumn":  19,
-"endLine":  83,
-"endColumn":  30
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S4136",
+      "Message": "All \u0027JournalSpec\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L53",
+      "Location": "Line 53 Position 19-30"
+    }
+  ]
 }

@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3903",
-"message":  "Move 'WeightMeasurement' into a named namespace.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/RecordWithStaticHelper/Program.cs#L11",
-"region":  {
-"startLine":  11,
-"startColumn":  15,
-"endLine":  11,
-"endColumn":  32
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3903",
+      "Message": "Move \u0027WeightMeasurement\u0027 into a named namespace.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/RecordWithStaticHelper/Program.cs#L11",
+      "Location": "Line 11 Position 15-32"
+    }
+  ]
 }

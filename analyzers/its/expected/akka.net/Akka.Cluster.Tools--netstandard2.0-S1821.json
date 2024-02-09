@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1821",
-"message":  "Refactor the code to eliminate this nested 'switch'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L1058",
-"region":  {
-"startLine":  1058,
-"startColumn":  33,
-"endLine":  1058,
-"endColumn":  39
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1821",
+      "Message": "Refactor the code to eliminate this nested \u0027switch\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L1058",
+      "Location": "Line 1058 Position 33-39"
+    }
+  ]
 }

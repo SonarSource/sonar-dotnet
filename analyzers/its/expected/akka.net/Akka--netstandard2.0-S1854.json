@@ -1,82 +1,40 @@
 {
-"issues":  [
-{
-"id":  "S1854",
-"message":  "Remove this useless assignment to local variable 'actor'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L587",
-"region":  {
-"startLine":  587,
-"startColumn":  17,
-"endLine":  587,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S1854",
-"message":  "Remove this useless assignment to local variable 'actor'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L655",
-"region":  {
-"startLine":  655,
-"startColumn":  17,
-"endLine":  655,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S1854",
-"message":  "Remove this useless assignment to local variable 'actor'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L679",
-"region":  {
-"startLine":  679,
-"startColumn":  17,
-"endLine":  679,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S1854",
-"message":  "Remove this useless assignment to local variable 'actor'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L702",
-"region":  {
-"startLine":  702,
-"startColumn":  17,
-"endLine":  702,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S1854",
-"message":  "Remove this useless assignment to local variable 'diff'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/AppVersion.cs#L231",
-"region":  {
-"startLine":  231,
-"startColumn":  37,
-"endLine":  231,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S1854",
-"message":  "Remove this useless assignment to local variable 'actor'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Resolver.cs#L63",
-"region":  {
-"startLine":  63,
-"startColumn":  13,
-"endLine":  63,
-"endColumn":  25
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1854",
+      "Message": "Remove this useless assignment to local variable \u0027actor\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L587",
+      "Location": "Line 587 Position 17-29"
+    },
+    {
+      "Id": "S1854",
+      "Message": "Remove this useless assignment to local variable \u0027actor\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L655",
+      "Location": "Line 655 Position 17-29"
+    },
+    {
+      "Id": "S1854",
+      "Message": "Remove this useless assignment to local variable \u0027actor\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L679",
+      "Location": "Line 679 Position 17-29"
+    },
+    {
+      "Id": "S1854",
+      "Message": "Remove this useless assignment to local variable \u0027actor\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L702",
+      "Location": "Line 702 Position 17-29"
+    },
+    {
+      "Id": "S1854",
+      "Message": "Remove this useless assignment to local variable \u0027diff\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/AppVersion.cs#L231",
+      "Location": "Line 231 Position 37-45"
+    },
+    {
+      "Id": "S1854",
+      "Message": "Remove this useless assignment to local variable \u0027actor\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Resolver.cs#L63",
+      "Location": "Line 63 Position 13-25"
+    }
+  ]
 }

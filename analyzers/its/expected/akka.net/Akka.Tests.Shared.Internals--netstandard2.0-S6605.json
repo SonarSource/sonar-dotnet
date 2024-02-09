@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S6605",
-"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L127",
-"region":  {
-"startLine":  127,
-"startColumn":  76,
-"endLine":  127,
-"endColumn":  79
-}
-}
-},
-{
-"id":  "S6605",
-"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L135",
-"region":  {
-"startLine":  135,
-"startColumn":  70,
-"endLine":  135,
-"endColumn":  73
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6605",
+      "Message": "Collection-specific \u0022Exists\u0022 method should be used instead of the \u0022Any\u0022 extension.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L127",
+      "Location": "Line 127 Position 76-79"
+    },
+    {
+      "Id": "S6605",
+      "Message": "Collection-specific \u0022Exists\u0022 method should be used instead of the \u0022Any\u0022 extension.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L135",
+      "Location": "Line 135 Position 70-73"
+    }
+  ]
 }

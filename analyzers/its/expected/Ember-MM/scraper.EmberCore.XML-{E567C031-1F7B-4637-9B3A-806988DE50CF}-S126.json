@@ -1,199 +1,94 @@
 {
-"issues":  [
-{
-"id":  "S126",
-"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeTrailers.vb#L64",
-"region":  {
-"startLine":  64,
-"startColumn":  13,
-"endLine":  64,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeTrailers.vb#L90",
-"region":  {
-"startLine":  90,
-"startColumn":  13,
-"endLine":  90,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L327",
-"region":  {
-"startLine":  327,
-"startColumn":  13,
-"endLine":  327,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L288",
-"region":  {
-"startLine":  288,
-"startColumn":  13,
-"endLine":  288,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L365",
-"region":  {
-"startLine":  365,
-"startColumn":  13,
-"endLine":  365,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/TVEpisodeTag.vb#L195",
-"region":  {
-"startLine":  195,
-"startColumn":  17,
-"endLine":  195,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/IncludeManager.vb#L111",
-"region":  {
-"startLine":  111,
-"startColumn":  21,
-"endLine":  111,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L102",
-"region":  {
-"startLine":  102,
-"startColumn":  25,
-"endLine":  102,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L129",
-"region":  {
-"startLine":  129,
-"startColumn":  25,
-"endLine":  129,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperFunction.vb#L365",
-"region":  {
-"startLine":  365,
-"startColumn":  25,
-"endLine":  365,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L645",
-"region":  {
-"startLine":  645,
-"startColumn":  21,
-"endLine":  645,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperSettings.vb#L54",
-"region":  {
-"startLine":  54,
-"startColumn":  21,
-"endLine":  54,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Tester.vb#L142",
-"region":  {
-"startLine":  142,
-"startColumn":  21,
-"endLine":  142,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Tester.vb#L174",
-"region":  {
-"startLine":  174,
-"startColumn":  21,
-"endLine":  174,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Util.vb#L130",
-"region":  {
-"startLine":  130,
-"startColumn":  25,
-"endLine":  130,
-"endColumn":  31
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027Else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeTrailers.vb#L64",
+      "Location": "Line 64 Position 13-19"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027Else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeTrailers.vb#L90",
+      "Location": "Line 90 Position 13-19"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027Else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L327",
+      "Location": "Line 327 Position 13-19"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027Else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L288",
+      "Location": "Line 288 Position 13-19"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027Else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L365",
+      "Location": "Line 365 Position 13-19"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027Else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/TVEpisodeTag.vb#L195",
+      "Location": "Line 195 Position 17-23"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027Else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/IncludeManager.vb#L111",
+      "Location": "Line 111 Position 21-27"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027Else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L102",
+      "Location": "Line 102 Position 25-31"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027Else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L129",
+      "Location": "Line 129 Position 25-31"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027Else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperFunction.vb#L365",
+      "Location": "Line 365 Position 25-31"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027Else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L645",
+      "Location": "Line 645 Position 21-27"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027Else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperSettings.vb#L54",
+      "Location": "Line 54 Position 21-27"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027Else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Tester.vb#L142",
+      "Location": "Line 142 Position 21-27"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027Else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Tester.vb#L174",
+      "Location": "Line 174 Position 21-27"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027Else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Util.vb#L130",
+      "Location": "Line 130 Position 25-31"
+    }
+  ]
 }

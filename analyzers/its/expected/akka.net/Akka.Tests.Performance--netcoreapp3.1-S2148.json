@@ -1,134 +1,64 @@
 {
-"issues":  [
-{
-"id":  "S2148",
-"message":  "Add underscores to this numeric value for readability.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorPathEqualitySpec.cs#L20",
-"region":  {
-"startLine":  20,
-"startColumn":  69,
-"endLine":  20,
-"endColumn":  79
-}
-}
-},
-{
-"id":  "S2148",
-"message":  "Add underscores to this numeric value for readability.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorPathSpec.cs#L20",
-"region":  {
-"startLine":  20,
-"startColumn":  69,
-"endLine":  20,
-"endColumn":  79
-}
-}
-},
-{
-"id":  "S2148",
-"message":  "Add underscores to this numeric value for readability.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L200",
-"region":  {
-"startLine":  200,
-"startColumn":  50,
-"endLine":  200,
-"endColumn":  58
-}
-}
-},
-{
-"id":  "S2148",
-"message":  "Add underscores to this numeric value for readability.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/AddressSpec.cs#L21",
-"region":  {
-"startLine":  21,
-"startColumn":  69,
-"endLine":  21,
-"endColumn":  79
-}
-}
-},
-{
-"id":  "S2148",
-"message":  "Add underscores to this numeric value for readability.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Dispatch/DispatcherThroughputSpecBase.cs#L28",
-"region":  {
-"startLine":  28,
-"startColumn":  44,
-"endLine":  28,
-"endColumn":  52
-}
-}
-},
-{
-"id":  "S2148",
-"message":  "Add underscores to this numeric value for readability.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Dispatch/GetMailboxTypeSpec.cs#L31",
-"region":  {
-"startLine":  31,
-"startColumn":  50,
-"endLine":  31,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S2148",
-"message":  "Add underscores to this numeric value for readability.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Event/EventStreamThroughputSpec.cs#L41",
-"region":  {
-"startLine":  41,
-"startColumn":  50,
-"endLine":  41,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S2148",
-"message":  "Add underscores to this numeric value for readability.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/IO/TcpHorizontalScaleSpec.cs#L130",
-"region":  {
-"startLine":  130,
-"startColumn":  40,
-"endLine":  130,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S2148",
-"message":  "Add underscores to this numeric value for readability.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/IO/TcpHorizontalScaleSpec.cs#L131",
-"region":  {
-"startLine":  131,
-"startColumn":  46,
-"endLine":  131,
-"endColumn":  53
-}
-}
-},
-{
-"id":  "S2148",
-"message":  "Add underscores to this numeric value for readability.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Util/SerializationBenchmarks.cs#L36",
-"region":  {
-"startLine":  36,
-"startColumn":  33,
-"endLine":  36,
-"endColumn":  40
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2148",
+      "Message": "Add underscores to this numeric value for readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorPathEqualitySpec.cs#L20",
+      "Location": "Line 20 Position 69-79"
+    },
+    {
+      "Id": "S2148",
+      "Message": "Add underscores to this numeric value for readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorPathSpec.cs#L20",
+      "Location": "Line 20 Position 69-79"
+    },
+    {
+      "Id": "S2148",
+      "Message": "Add underscores to this numeric value for readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L200",
+      "Location": "Line 200 Position 50-58"
+    },
+    {
+      "Id": "S2148",
+      "Message": "Add underscores to this numeric value for readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/AddressSpec.cs#L21",
+      "Location": "Line 21 Position 69-79"
+    },
+    {
+      "Id": "S2148",
+      "Message": "Add underscores to this numeric value for readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Dispatch/DispatcherThroughputSpecBase.cs#L28",
+      "Location": "Line 28 Position 44-52"
+    },
+    {
+      "Id": "S2148",
+      "Message": "Add underscores to this numeric value for readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Dispatch/GetMailboxTypeSpec.cs#L31",
+      "Location": "Line 31 Position 50-57"
+    },
+    {
+      "Id": "S2148",
+      "Message": "Add underscores to this numeric value for readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Event/EventStreamThroughputSpec.cs#L41",
+      "Location": "Line 41 Position 50-59"
+    },
+    {
+      "Id": "S2148",
+      "Message": "Add underscores to this numeric value for readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/IO/TcpHorizontalScaleSpec.cs#L130",
+      "Location": "Line 130 Position 40-47"
+    },
+    {
+      "Id": "S2148",
+      "Message": "Add underscores to this numeric value for readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/IO/TcpHorizontalScaleSpec.cs#L131",
+      "Location": "Line 131 Position 46-53"
+    },
+    {
+      "Id": "S2148",
+      "Message": "Add underscores to this numeric value for readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Util/SerializationBenchmarks.cs#L36",
+      "Location": "Line 36 Position 33-40"
+    }
+  ]
 }

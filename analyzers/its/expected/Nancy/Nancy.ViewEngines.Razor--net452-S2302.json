@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S2302",
-"message":  "Replace the string 'action' with 'nameof(action)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/HelperResult.cs#L23",
-"region":  {
-"startLine":  23,
-"startColumn":  49,
-"endLine":  23,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'action' with 'nameof(action)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/HelperResult.cs#L23",
-"region":  {
-"startLine":  23,
-"startColumn":  59,
-"endLine":  23,
-"endColumn":  97
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'required' with 'nameof(required)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/NancyRazorViewBase.cs#L358",
-"region":  {
-"startLine":  358,
-"startColumn":  85,
-"endLine":  358,
-"endColumn":  114
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027action\u0027 with \u0027nameof(action)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/HelperResult.cs#L23",
+      "Location": "Line 23 Position 49-57"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027action\u0027 with \u0027nameof(action)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/HelperResult.cs#L23",
+      "Location": "Line 23 Position 59-97"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027required\u0027 with \u0027nameof(required)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/NancyRazorViewBase.cs#L358",
+      "Location": "Line 358 Position 85-114"
+    }
+  ]
 }

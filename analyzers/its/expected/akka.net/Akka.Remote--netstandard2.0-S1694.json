@@ -1,160 +1,76 @@
 {
-"issues":  [
-{
-"id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L931",
-"region":  {
-"startLine":  931,
-"startColumn":  29,
-"endLine":  931,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L35",
-"region":  {
-"startLine":  35,
-"startColumn":  31,
-"endLine":  35,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L115",
-"region":  {
-"startLine":  115,
-"startColumn":  31,
-"endLine":  115,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S1694",
-"message":  "Convert this 'abstract' class to an interface.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/FailureDetector.cs#L17",
-"region":  {
-"startLine":  17,
-"startColumn":  27,
-"endLine":  17,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteWatcher.cs#L64",
-"region":  {
-"startLine":  64,
-"startColumn":  31,
-"endLine":  64,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S1694",
-"message":  "Convert this 'abstract' class to an interface.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemotingLifecycleEvent.cs#L21",
-"region":  {
-"startLine":  21,
-"startColumn":  27,
-"endLine":  21,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L538",
-"region":  {
-"startLine":  538,
-"startColumn":  29,
-"endLine":  538,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L542",
-"region":  {
-"startLine":  542,
-"startColumn":  29,
-"endLine":  542,
-"endColumn":  53
-}
-}
-},
-{
-"id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/TcpTransport.cs#L23",
-"region":  {
-"startLine":  23,
-"startColumn":  29,
-"endLine":  23,
-"endColumn":  40
-}
-}
-},
-{
-"id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L297",
-"region":  {
-"startLine":  297,
-"startColumn":  27,
-"endLine":  297,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S1694",
-"message":  "Convert this 'abstract' class to an interface.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L570",
-"region":  {
-"startLine":  570,
-"startColumn":  27,
-"endLine":  570,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TransportAdapters.cs#L388",
-"region":  {
-"startLine":  388,
-"startColumn":  29,
-"endLine":  388,
-"endColumn":  47
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1694",
+      "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L931",
+      "Location": "Line 931 Position 29-42"
+    },
+    {
+      "Id": "S1694",
+      "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L115",
+      "Location": "Line 115 Position 31-46"
+    },
+    {
+      "Id": "S1694",
+      "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L35",
+      "Location": "Line 35 Position 31-45"
+    },
+    {
+      "Id": "S1694",
+      "Message": "Convert this \u0027abstract\u0027 class to an interface.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/FailureDetector.cs#L17",
+      "Location": "Line 17 Position 27-42"
+    },
+    {
+      "Id": "S1694",
+      "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteWatcher.cs#L64",
+      "Location": "Line 64 Position 31-43"
+    },
+    {
+      "Id": "S1694",
+      "Message": "Convert this \u0027abstract\u0027 class to an interface.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemotingLifecycleEvent.cs#L21",
+      "Location": "Line 21 Position 27-49"
+    },
+    {
+      "Id": "S1694",
+      "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L538",
+      "Location": "Line 538 Position 29-46"
+    },
+    {
+      "Id": "S1694",
+      "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L542",
+      "Location": "Line 542 Position 29-53"
+    },
+    {
+      "Id": "S1694",
+      "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/TcpTransport.cs#L23",
+      "Location": "Line 23 Position 29-40"
+    },
+    {
+      "Id": "S1694",
+      "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L297",
+      "Location": "Line 297 Position 27-35"
+    },
+    {
+      "Id": "S1694",
+      "Message": "Convert this \u0027abstract\u0027 class to an interface.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L570",
+      "Location": "Line 570 Position 27-39"
+    },
+    {
+      "Id": "S1694",
+      "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TransportAdapters.cs#L388",
+      "Location": "Line 388 Position 29-47"
+    }
+  ]
 }

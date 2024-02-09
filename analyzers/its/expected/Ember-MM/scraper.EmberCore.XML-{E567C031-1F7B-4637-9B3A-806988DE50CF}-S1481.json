@@ -1,121 +1,58 @@
 {
-"issues":  [
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'selNode'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgSearchResults.vb#L220",
-"region":  {
-"startLine":  220,
-"startColumn":  17,
-"endLine":  220,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'url'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L476",
-"region":  {
-"startLine":  476,
-"startColumn":  25,
-"endLine":  476,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'Poster'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L764",
-"region":  {
-"startLine":  764,
-"startColumn":  13,
-"endLine":  764,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'Fanart'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L765",
-"region":  {
-"startLine":  765,
-"startColumn":  13,
-"endLine":  765,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'url'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L799",
-"region":  {
-"startLine":  799,
-"startColumn":  25,
-"endLine":  799,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'tmp'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L620",
-"region":  {
-"startLine":  620,
-"startColumn":  29,
-"endLine":  620,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'xSettings'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Tester.vb#L91",
-"region":  {
-"startLine":  91,
-"startColumn":  21,
-"endLine":  91,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'detailsType'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperManager.vb#L286",
-"region":  {
-"startLine":  286,
-"startColumn":  21,
-"endLine":  286,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'encoding__1'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Util.vb#L102",
-"region":  {
-"startLine":  102,
-"startColumn":  25,
-"endLine":  102,
-"endColumn":  36
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027selNode\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgSearchResults.vb#L220",
+      "Location": "Line 220 Position 17-24"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027url\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L476",
+      "Location": "Line 476 Position 25-28"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027Poster\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L764",
+      "Location": "Line 764 Position 13-19"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027Fanart\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L765",
+      "Location": "Line 765 Position 13-19"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027url\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L799",
+      "Location": "Line 799 Position 25-28"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027tmp\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L620",
+      "Location": "Line 620 Position 29-32"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027xSettings\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Tester.vb#L91",
+      "Location": "Line 91 Position 21-30"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027detailsType\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperManager.vb#L286",
+      "Location": "Line 286 Position 21-32"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027encoding__1\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Util.vb#L102",
+      "Location": "Line 102 Position 25-36"
+    }
+  ]
 }

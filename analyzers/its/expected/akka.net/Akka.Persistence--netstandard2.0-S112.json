@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S112",
-"message":  "'System.NullReferenceException' should not be thrown by user code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistence.cs#L82",
-"region":  {
-"startLine":  82,
-"startColumn":  61,
-"endLine":  82,
-"endColumn":  131
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S112",
+      "Message": "\u0027System.NullReferenceException\u0027 should not be thrown by user code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistence.cs#L82",
+      "Location": "Line 82 Position 61-131"
+    }
+  ]
 }

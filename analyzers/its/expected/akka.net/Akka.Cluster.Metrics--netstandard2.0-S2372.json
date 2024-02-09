@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2372",
-"message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Routing/WeightedRoutees.cs#L56",
-"region":  {
-"startLine":  56,
-"startColumn":  21,
-"endLine":  56,
-"endColumn":  100
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2372",
+      "Message": "Remove the exception throwing from this property getter, or refactor the property into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Routing/WeightedRoutees.cs#L56",
+      "Location": "Line 56 Position 21-100"
+    }
+  ]
 }

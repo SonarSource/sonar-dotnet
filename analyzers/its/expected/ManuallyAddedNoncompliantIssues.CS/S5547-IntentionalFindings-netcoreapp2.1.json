@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S5547",
-"message":  "Use a strong cipher algorithm.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S5547.cs#L16",
-"region":  {
-"startLine":  16,
-"startColumn":  34,
-"endLine":  16,
-"endColumn":  64
-}
-}
-},
-{
-"id":  "S5547",
-"message":  "Use a strong cipher algorithm.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S5547.cs#L18",
-"region":  {
-"startLine":  18,
-"startColumn":  33,
-"endLine":  18,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S5547",
-"message":  "Use a strong cipher algorithm.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S5547.cs#L20",
-"region":  {
-"startLine":  20,
-"startColumn":  27,
-"endLine":  20,
-"endColumn":  51
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S5547",
+      "Message": "Use a strong cipher algorithm.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S5547.cs#L16",
+      "Location": "Line 16 Position 34-64"
+    },
+    {
+      "Id": "S5547",
+      "Message": "Use a strong cipher algorithm.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S5547.cs#L18",
+      "Location": "Line 18 Position 33-57"
+    },
+    {
+      "Id": "S5547",
+      "Message": "Use a strong cipher algorithm.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S5547.cs#L20",
+      "Location": "Line 20 Position 27-51"
+    }
+  ]
 }

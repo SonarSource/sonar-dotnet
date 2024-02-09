@@ -1,52 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S4059",
-"message":  "Change either the name of property 'Paths' or the name of method 'GetPaths' to make them distinguishable.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RouterConfig.cs#L161",
-"region":  {
-"startLine":  161,
-"startColumn":  36,
-"endLine":  161,
-"endColumn":  41
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RouterConfig.cs#L168",
-"region":  {
-"startLine":  168,
-"startColumn":  45,
-"endLine":  168,
-"endColumn":  53
-}
-}
-]
-},
-{
-"id":  "S4059",
-"message":  "Change either the name of property 'NrOfInstances' or the name of method 'GetNrOfInstances' to make them distinguishable.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RouterConfig.cs#L255",
-"region":  {
-"startLine":  255,
-"startColumn":  20,
-"endLine":  255,
-"endColumn":  33
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RouterConfig.cs#L262",
-"region":  {
-"startLine":  262,
-"startColumn":  29,
-"endLine":  262,
-"endColumn":  45
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S4059",
+      "Message": "Change either the name of property \u0027Paths\u0027 or the name of method \u0027GetPaths\u0027 to make them distinguishable.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RouterConfig.cs#L161",
+      "Location": "Line 161 Position 36-41"
+    },
+    {
+      "Id": "S4059",
+      "Message": "Change either the name of property \u0027NrOfInstances\u0027 or the name of method \u0027GetNrOfInstances\u0027 to make them distinguishable.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RouterConfig.cs#L255",
+      "Location": "Line 255 Position 20-33"
+    }
+  ]
 }

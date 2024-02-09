@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2339",
-"message":  "Change this constant to a 'Shared Read-Only' property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L32",
-"region":  {
-"startLine":  32,
-"startColumn":  18,
-"endLine":  32,
-"endColumn":  24
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2339",
+      "Message": "Change this constant to a \u0027Shared Read-Only\u0027 property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L32",
+      "Location": "Line 32 Position 18-24"
+    }
+  ]
 }

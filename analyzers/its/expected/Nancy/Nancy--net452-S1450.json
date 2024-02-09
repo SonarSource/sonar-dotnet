@@ -1,69 +1,34 @@
 {
-"issues":  [
-{
-"id":  "S1450",
-"message":  "Remove the field 'rootPathProvider' and declare it as a local variable in the relevant methods.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DefaultStaticContentProvider.cs#L11",
-"region":  {
-"startLine":  11,
-"startColumn":  44,
-"endLine":  11,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S1450",
-"message":  "Remove the field 'boundaryAsBytes' and declare it as a local variable in the relevant methods.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpMultipart.cs#L14",
-"region":  {
-"startLine":  14,
-"startColumn":  33,
-"endLine":  14,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S1450",
-"message":  "Remove the field 'closingBoundaryAsBytes' and declare it as a local variable in the relevant methods.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpMultipart.cs#L17",
-"region":  {
-"startLine":  17,
-"startColumn":  33,
-"endLine":  17,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S1450",
-"message":  "Remove the field 'resourceAssemblyProvider' and declare it as a local variable in the relevant methods.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Localization/ResourceBasedTextResource.cs#L14",
-"region":  {
-"startLine":  14,
-"startColumn":  52,
-"endLine":  14,
-"endColumn":  76
-}
-}
-},
-{
-"id":  "S1450",
-"message":  "Remove the field 'rootPathProvider' and declare it as a local variable in the relevant methods.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/ViewNotFoundException.cs#L11",
-"region":  {
-"startLine":  11,
-"startColumn":  44,
-"endLine":  11,
-"endColumn":  60
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1450",
+      "Message": "Remove the field \u0027rootPathProvider\u0027 and declare it as a local variable in the relevant methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DefaultStaticContentProvider.cs#L11",
+      "Location": "Line 11 Position 44-60"
+    },
+    {
+      "Id": "S1450",
+      "Message": "Remove the field \u0027boundaryAsBytes\u0027 and declare it as a local variable in the relevant methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpMultipart.cs#L14",
+      "Location": "Line 14 Position 33-48"
+    },
+    {
+      "Id": "S1450",
+      "Message": "Remove the field \u0027closingBoundaryAsBytes\u0027 and declare it as a local variable in the relevant methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpMultipart.cs#L17",
+      "Location": "Line 17 Position 33-55"
+    },
+    {
+      "Id": "S1450",
+      "Message": "Remove the field \u0027resourceAssemblyProvider\u0027 and declare it as a local variable in the relevant methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Localization/ResourceBasedTextResource.cs#L14",
+      "Location": "Line 14 Position 52-76"
+    },
+    {
+      "Id": "S1450",
+      "Message": "Remove the field \u0027rootPathProvider\u0027 and declare it as a local variable in the relevant methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/ViewNotFoundException.cs#L11",
+      "Location": "Line 11 Position 44-60"
+    }
+  ]
 }

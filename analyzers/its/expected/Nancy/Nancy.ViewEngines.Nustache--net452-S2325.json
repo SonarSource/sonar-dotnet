@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2325",
-"message":  "Make 'GetCompiledTemplate' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Nustache/NustacheViewEngine.cs#L49",
-"region":  {
-"startLine":  49,
-"startColumn":  32,
-"endLine":  49,
-"endColumn":  51
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027GetCompiledTemplate\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Nustache/NustacheViewEngine.cs#L49",
+      "Location": "Line 49 Position 32-51"
+    }
+  ]
 }

@@ -1,69 +1,34 @@
 {
-"issues":  [
-{
-"id":  "S3928",
-"message":  "The parameter name 'execution' is not declared in the argument list.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L157",
-"region":  {
-"startLine":  157,
-"startColumn":  46,
-"endLine":  157,
-"endColumn":  90
-}
-}
-},
-{
-"id":  "S3928",
-"message":  "The parameter name 'execution' is not declared in the argument list.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L175",
-"region":  {
-"startLine":  175,
-"startColumn":  46,
-"endLine":  175,
-"endColumn":  90
-}
-}
-},
-{
-"id":  "S3928",
-"message":  "The parameter name 'execution' is not declared in the argument list.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L268",
-"region":  {
-"startLine":  268,
-"startColumn":  46,
-"endLine":  268,
-"endColumn":  90
-}
-}
-},
-{
-"id":  "S3928",
-"message":  "The parameter name 'execution' is not declared in the argument list.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L286",
-"region":  {
-"startLine":  286,
-"startColumn":  46,
-"endLine":  286,
-"endColumn":  90
-}
-}
-},
-{
-"id":  "S3928",
-"message":  "The parameter name 'execution' is not declared in the argument list.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L304",
-"region":  {
-"startLine":  304,
-"startColumn":  46,
-"endLine":  304,
-"endColumn":  90
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3928",
+      "Message": "The parameter name \u0027execution\u0027 is not declared in the argument list.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L157",
+      "Location": "Line 157 Position 46-90"
+    },
+    {
+      "Id": "S3928",
+      "Message": "The parameter name \u0027execution\u0027 is not declared in the argument list.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L175",
+      "Location": "Line 175 Position 46-90"
+    },
+    {
+      "Id": "S3928",
+      "Message": "The parameter name \u0027execution\u0027 is not declared in the argument list.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L268",
+      "Location": "Line 268 Position 46-90"
+    },
+    {
+      "Id": "S3928",
+      "Message": "The parameter name \u0027execution\u0027 is not declared in the argument list.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L286",
+      "Location": "Line 286 Position 46-90"
+    },
+    {
+      "Id": "S3928",
+      "Message": "The parameter name \u0027execution\u0027 is not declared in the argument list.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L304",
+      "Location": "Line 304 Position 46-90"
+    }
+  ]
 }

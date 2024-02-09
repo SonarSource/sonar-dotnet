@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3427",
-"message":  "This method signature overlaps the one defined on line 15, the default parameter value can only be used with named arguments.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewConfiguration.cs#L24",
-"region":  {
-"startLine":  24,
-"startColumn":  34,
-"endLine":  24,
-"endColumn":  67
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3427",
+      "Message": "This method signature overlaps the one defined on line 15, the default parameter value can only be used with named arguments.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewConfiguration.cs#L24",
+      "Location": "Line 24 Position 34-67"
+    }
+  ]
 }

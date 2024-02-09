@@ -1,69 +1,34 @@
 {
-"issues":  [
-{
-"id":  "S127",
-"message":  "Do not update the loop counter 'i' within the loop body.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L167",
-"region":  {
-"startLine":  167,
-"startColumn":  29,
-"endLine":  167,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S127",
-"message":  "Do not update the loop counter 'i' within the loop body.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L175",
-"region":  {
-"startLine":  175,
-"startColumn":  25,
-"endLine":  175,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S127",
-"message":  "Do not update the loop counter 'i' within the loop body.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L286",
-"region":  {
-"startLine":  286,
-"startColumn":  29,
-"endLine":  286,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S127",
-"message":  "Do not update the loop counter 'i' within the loop body.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L293",
-"region":  {
-"startLine":  293,
-"startColumn":  25,
-"endLine":  293,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S127",
-"message":  "Do not update the loop counter 'i' within the loop body.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L376",
-"region":  {
-"startLine":  376,
-"startColumn":  25,
-"endLine":  376,
-"endColumn":  26
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S127",
+      "Message": "Do not update the loop counter \u0027i\u0027 within the loop body.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L167",
+      "Location": "Line 167 Position 29-30"
+    },
+    {
+      "Id": "S127",
+      "Message": "Do not update the loop counter \u0027i\u0027 within the loop body.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L175",
+      "Location": "Line 175 Position 25-26"
+    },
+    {
+      "Id": "S127",
+      "Message": "Do not update the loop counter \u0027i\u0027 within the loop body.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L286",
+      "Location": "Line 286 Position 29-30"
+    },
+    {
+      "Id": "S127",
+      "Message": "Do not update the loop counter \u0027i\u0027 within the loop body.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L293",
+      "Location": "Line 293 Position 25-26"
+    },
+    {
+      "Id": "S127",
+      "Message": "Do not update the loop counter \u0027i\u0027 within the loop body.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L376",
+      "Location": "Line 376 Position 25-26"
+    }
+  ]
 }

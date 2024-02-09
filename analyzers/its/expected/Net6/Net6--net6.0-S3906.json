@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S3906",
-"message":  "Change the signature of that event handler to match the specified signature.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/StaticAbstractMembersInInterfaces.cs#L9",
-"region":  {
-"startLine":  9,
-"startColumn":  31,
-"endLine":  9,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S3906",
-"message":  "Change the signature of that event handler to match the specified signature.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/StaticAbstractMembersInInterfaces.cs#L26",
-"region":  {
-"startLine":  26,
-"startColumn":  29,
-"endLine":  26,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S3906",
-"message":  "Change the signature of that event handler to match the specified signature.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/StaticAbstractMembersInInterfaces.cs#L27",
-"region":  {
-"startLine":  27,
-"startColumn":  29,
-"endLine":  27,
-"endColumn":  35
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3906",
+      "Message": "Change the signature of that event handler to match the specified signature.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/StaticAbstractMembersInInterfaces.cs#L26",
+      "Location": "Line 26 Position 29-35"
+    },
+    {
+      "Id": "S3906",
+      "Message": "Change the signature of that event handler to match the specified signature.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/StaticAbstractMembersInInterfaces.cs#L27",
+      "Location": "Line 27 Position 29-35"
+    },
+    {
+      "Id": "S3906",
+      "Message": "Change the signature of that event handler to match the specified signature.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/StaticAbstractMembersInInterfaces.cs#L9",
+      "Location": "Line 9 Position 31-37"
+    }
+  ]
 }

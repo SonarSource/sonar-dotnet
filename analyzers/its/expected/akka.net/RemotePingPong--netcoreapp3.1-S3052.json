@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S3052",
-"message":  "Remove this initialization to '_correlationId', the compiler will do that for you.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L229",
-"region":  {
-"startLine":  229,
-"startColumn":  40,
-"endLine":  229,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S3052",
-"message":  "Remove this initialization to '_currentMessages', the compiler will do that for you.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L266",
-"region":  {
-"startLine":  266,
-"startColumn":  43,
-"endLine":  266,
-"endColumn":  46
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_correlationId\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L229",
+      "Location": "Line 229 Position 40-43"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_currentMessages\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L266",
+      "Location": "Line 266 Position 43-46"
+    }
+  ]
 }

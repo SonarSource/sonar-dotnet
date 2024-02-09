@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2302",
-"message":  "Replace the string 'adapters' with 'nameof(adapters)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/EventAdapters.cs#L370",
-"region":  {
-"startLine":  370,
-"startColumn":  45,
-"endLine":  370,
-"endColumn":  111
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027adapters\u0027 with \u0027nameof(adapters)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/EventAdapters.cs#L370",
+      "Location": "Line 370 Position 45-111"
+    }
+  ]
 }

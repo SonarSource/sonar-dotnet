@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2357",
-"message":  "Make 'Types' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/TypeMap.cs#L75",
-"region":  {
-"startLine":  75,
-"startColumn":  25,
-"endLine":  75,
-"endColumn":  30
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Types\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/TypeMap.cs#L75",
+      "Location": "Line 75 Position 25-30"
+    }
+  ]
 }
