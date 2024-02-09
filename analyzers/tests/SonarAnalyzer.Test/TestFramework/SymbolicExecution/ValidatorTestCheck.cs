@@ -22,24 +22,25 @@ using Microsoft.CodeAnalysis.Operations;
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
+using SonarAnalyzer.Test.Helpers;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Test.TestFramework.SymbolicExecution
 {
     /// <summary>
     /// This checks looks for specific tags in the source and collects them:
-    /// tag = "TagName" - registers TagName, doesn't change the flow.
-    /// Tag("TagName") - can change flow, because invocations can throw exceptions in the engine.
-    /// Tag("TagName", variable) - can change flow, enables asserting on variable state.
+    /// tag = "TagName" - registers TagName, doesn't change the flow
+    /// Tag("TagName") - can change flow, because invocations can throw exceptions in the engine
+    /// Tag("TagName", variable) - can change flow, enables asserting on variable state
     /// </summary>
     internal class ValidatorTestCheck : SymbolicCheck
     {
         private readonly ControlFlowGraph cfg;
+        private readonly List<SymbolicContext> postProcessed = new();
         private readonly List<(string Name, SymbolicContext Context)> tags = new();
         private readonly Dictionary<string, ISymbol> symbols = new();
         private int executionCompletedCount;
 
-        public List<SymbolicContext> PostProcessed { get; } = new();
         public List<ProgramState> ExitStates { get; } = new();
 
         public ValidatorTestCheck(ControlFlowGraph cfg) =>
@@ -58,13 +59,13 @@ namespace SonarAnalyzer.Test.TestFramework.SymbolicExecution
         }
 
         public void ValidateOrder(params string[] expected) =>
-            PostProcessed.Select(x => TestHelper.Serialize(x.Operation)).Should().Equal(expected);
+            postProcessed.Select(x => TestHelper.Serialize(x.Operation)).Should().Equal(expected);
 
         public void ValidateTagOrder(params string[] expected) =>
             tags.Select(x => x.Name).Should().Equal(expected);
 
         public void Validate(string operation, Action<SymbolicContext> action) =>
-            action(PostProcessed.Single(x => TestHelper.Serialize(x.Operation) == operation));
+            action(postProcessed.Single(x => TestHelper.Serialize(x.Operation) == operation));
 
         public ProgramState[] TagStates(string tag) =>
             tags.Where(x => x.Name == tag).Select(x => x.Context.State).ToArray();
@@ -85,10 +86,10 @@ namespace SonarAnalyzer.Test.TestFramework.SymbolicExecution
             executionCompletedCount.Should().Be(0);
 
         public void ValidatePostProcessCount(int expected) =>
-            PostProcessed.Should().HaveCount(expected);
+            postProcessed.Should().HaveCount(expected);
 
         public void ValidateOperationValuesAreNull() =>
-            PostProcessed.Should().OnlyContain(x => x.State[x.Operation] == null);
+            postProcessed.Should().OnlyContain(x => x.State[x.Operation] == null);
 
         public void ValidateContainsOperation(OperationKind operationKind) =>
             cfg.Blocks.Any(x => x.OperationsAndBranchValue.ToExecutionOrder().Any(op => op.Instance.Kind == operationKind));
@@ -98,7 +99,7 @@ namespace SonarAnalyzer.Test.TestFramework.SymbolicExecution
 
         protected override ProgramState PostProcessSimple(SymbolicContext context)
         {
-            PostProcessed.Add(context);
+            postProcessed.Add(context);
             if (context.Operation.Instance is IAssignmentOperation assignment && assignment.Target.TrackedSymbol(context.State) is { Name: "tag" or "Tag" })
             {
                 AddTagName(assignment.Value.ConstantValue, context);

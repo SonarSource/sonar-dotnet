@@ -24,15 +24,13 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn;
 
 internal class LoopDetector
 {
-    private readonly HashSet<int> loopBlock;
+    private readonly HashSet<int> loopBlocks;
 
-    public LoopDetector(ControlFlowGraph cfg)
-    {
-        loopBlock = DetectLoopBlockOrdinals(cfg).ToHashSet();
-    }
+    public LoopDetector(ControlFlowGraph cfg) =>
+        loopBlocks = DetectLoopBlockOrdinals(cfg).ToHashSet();
 
     public bool IsInLoop(BasicBlock block) =>
-        loopBlock.Contains(block.Ordinal);
+        loopBlocks.Contains(block.Ordinal);
 
     // Detects loops in the cfg using a modified DFS algorithm:
     // Explore the cfg depth-first, keeping track of the path from the root to the current block.
@@ -51,7 +49,10 @@ internal class LoopDetector
             var last = path[path.Count - 1];
             if (processed.Add(last))
             {
-                ScheduleSuccessors(path, last);
+                foreach (var successor in Successors(last))
+                {
+                    toProcess.Push([.. path, successor]);   // add successor to the path and schedule it for processing
+                }
             }
             else
             {
@@ -68,13 +69,8 @@ internal class LoopDetector
         }
         return loops.SelectMany(x => x);
 
-        void ScheduleSuccessors(List<int> path, int last)
-        {
-            foreach (var successor in cfg.Blocks[last].SuccessorBlocks.Select(x => x.Ordinal))
-            {
-                toProcess.Push([.. path, successor]);   // add successor to the path and schedule it for processing
-            }
-        }
+        IEnumerable<int> Successors(int last) =>
+            cfg.Blocks[last].SuccessorBlocks.Select(x => x.Ordinal);
 
         // For a given path [..A..B], if we find a loop that both A and B are part of, all blocks between A and B should also be considered part of that loop.
         void MergeWithIntersectingLoops(List<int> path, int last)
