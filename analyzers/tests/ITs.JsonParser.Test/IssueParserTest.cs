@@ -34,7 +34,7 @@ public class IssueParserTest
         var root = TestDirectory();
         var inputPath = Path.Combine(root, "read");
         var outputPath = Path.Combine(root, "write");
-        Directory.CreateDirectory(Path.Combine(inputPath, "solution"));
+        Directory.CreateDirectory(Path.Combine(inputPath, "solution", "issues"));
         Sarif.CreateReport(inputPath, "solution", "project", "net6.0", Sarif.CreateIssue("S100", "Message_1", "foo/bar/File1.cs", 1, 1));
         var outFile = Path.Combine(outputPath, "solution", "S100-project-net6.0.json");
 
@@ -60,8 +60,8 @@ public class IssueParserTest
         var root = TestDirectory();
         var inputPath = Path.Combine(root, "read");
         var outputPath = Path.Combine(root, "write");
-        Directory.CreateDirectory(Path.Combine(inputPath, "solution1"));
-        Directory.CreateDirectory(Path.Combine(inputPath, "solution2"));
+        Directory.CreateDirectory(Path.Combine(inputPath, "solution1", "issues"));
+        Directory.CreateDirectory(Path.Combine(inputPath, "solution2", "issues"));
 
         // solution1/project1-net6.0.json
         Sarif.CreateReport(
