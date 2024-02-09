@@ -22,25 +22,24 @@
 
 using static SonarAnalyzer.TestFramework.MetadataReferences.MetadataReferenceFactory;
 
-namespace SonarAnalyzer.TestFramework.MetadataReferences
+namespace SonarAnalyzer.TestFramework.MetadataReferences;
+
+public static class AspNetCoreMetadataReference
 {
-    public static class AspNetCoreMetadataReference
-    {
-        public static MetadataReference MicrosoftAspNetCoreCors { get; } = Create(typeof(Microsoft.Extensions.DependencyInjection.CorsServiceCollectionExtensions));
-        public static MetadataReference MicrosoftAspNetCoreDiagnostics { get; } = Create(typeof(Microsoft.AspNetCore.Diagnostics.StatusCodeContext));
-        public static MetadataReference MicrosoftAspNetCoreEventSourceLoggerFactoryExtensions { get; } = Create(typeof(Microsoft.Extensions.Logging.EventSourceLoggerFactoryExtensions));
-        public static MetadataReference MicrosoftAspNetCoreHostingAbstractions { get; } = Create(typeof(Microsoft.AspNetCore.Hosting.IWebHost));
-        public static MetadataReference MicrosoftAspNetCoreHostingWebHostBuilderExtensions { get; } = Create(typeof(Microsoft.AspNetCore.Hosting.WebHostBuilderExtensions));
-        public static MetadataReference MicrosoftAspNetCoreHttpAbstractions { get; } = Create(typeof(Microsoft.AspNetCore.Http.IHttpContextFactory));
-        public static MetadataReference MicrosoftAspNetCoreHttpFeatures { get; } = Create(typeof(Microsoft.AspNetCore.Http.IHeaderDictionary));
-        public static MetadataReference MicrosoftAspNetCoreMvc { get; } = Create(typeof(Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions));
-        public static MetadataReference MicrosoftAspNetCoreMvcAbstractions { get; } = Create(typeof(Microsoft.AspNetCore.Mvc.IActionResult));
-        public static MetadataReference MicrosoftAspNetCoreMvcCore { get; } = Create(typeof(Microsoft.AspNetCore.Mvc.ControllerBase));
-        public static MetadataReference MicrosoftAspNetCoreMvcViewFeatures { get; } = Create(typeof(Microsoft.AspNetCore.Mvc.Controller));
-        public static MetadataReference MicrosoftAspNetCoreRazorPages { get; } = Create(typeof(Microsoft.AspNetCore.Mvc.RazorPages.PageModel));
-        public static MetadataReference MicrosoftAspNetCoreRouting { get; } = Create(typeof(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder));
-        public static MetadataReference MicrosoftAspNetCoreWebHost { get; } = Create(typeof(Microsoft.AspNetCore.WebHost));
-        public static MetadataReference MicrosoftExtensionsHostingAbstractions { get; } = Create(typeof(Microsoft.Extensions.Hosting.IHost));
-    }
+    public static MetadataReference MicrosoftAspNetCoreCors { get; } = Create(typeof(Microsoft.Extensions.DependencyInjection.CorsServiceCollectionExtensions));
+    public static MetadataReference MicrosoftAspNetCoreDiagnostics { get; } = Create(typeof(Microsoft.AspNetCore.Diagnostics.StatusCodeContext));
+    public static MetadataReference MicrosoftAspNetCoreEventSourceLoggerFactoryExtensions { get; } = Create(typeof(Microsoft.Extensions.Logging.EventSourceLoggerFactoryExtensions));
+    public static MetadataReference MicrosoftAspNetCoreHostingAbstractions { get; } = Create(typeof(Microsoft.AspNetCore.Hosting.IWebHost));
+    public static MetadataReference MicrosoftAspNetCoreHostingWebHostBuilderExtensions { get; } = Create(typeof(Microsoft.AspNetCore.Hosting.WebHostBuilderExtensions));
+    public static MetadataReference MicrosoftAspNetCoreHttpAbstractions { get; } = Create(typeof(Microsoft.AspNetCore.Http.IHttpContextFactory));
+    public static MetadataReference MicrosoftAspNetCoreHttpFeatures { get; } = Create(typeof(Microsoft.AspNetCore.Http.IHeaderDictionary));
+    public static MetadataReference MicrosoftAspNetCoreMvc { get; } = Create(typeof(Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions));
+    public static MetadataReference MicrosoftAspNetCoreMvcAbstractions { get; } = Create(typeof(Microsoft.AspNetCore.Mvc.IActionResult));
+    public static MetadataReference MicrosoftAspNetCoreMvcCore { get; } = Create(typeof(Microsoft.AspNetCore.Mvc.ControllerBase));
+    public static MetadataReference MicrosoftAspNetCoreMvcViewFeatures { get; } = Create(typeof(Microsoft.AspNetCore.Mvc.Controller));
+    public static MetadataReference MicrosoftAspNetCoreRazorPages { get; } = Create(typeof(Microsoft.AspNetCore.Mvc.RazorPages.PageModel));
+    public static MetadataReference MicrosoftAspNetCoreRouting { get; } = Create(typeof(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder));
+    public static MetadataReference MicrosoftAspNetCoreWebHost { get; } = Create(typeof(Microsoft.AspNetCore.WebHost));
+    public static MetadataReference MicrosoftExtensionsHostingAbstractions { get; } = Create(typeof(Microsoft.Extensions.Hosting.IHost));
 }
 #endif

@@ -20,16 +20,15 @@
 
 using FluentAssertions.Primitives;
 
-namespace SonarAnalyzer.TestFramework.Extensions
-{
-    public static class StringAssertionsExtensions
-    {
-        [CustomAssertion]
-        public static void BeIgnoringLineEndings(this StringAssertions stringAssertions, string expected) =>
-            stringAssertions.Subject.ToUnixLineEndings().Should().Be(expected.ToUnixLineEndings());
+namespace SonarAnalyzer.TestFramework.Extensions;
 
-        [CustomAssertion]
-        public static void ContainIgnoringLineEndings(this StringAssertions stringAssertions, string expected) =>
-            stringAssertions.Subject.ToUnixLineEndings().Should().Contain(expected.ToUnixLineEndings());
-    }
+public static class StringAssertionsExtensions
+{
+    [CustomAssertion]
+    public static void BeIgnoringLineEndings(this StringAssertions stringAssertions, string expected) =>
+        stringAssertions.Subject.ToUnixLineEndings().Should().Be(expected.ToUnixLineEndings());
+
+    [CustomAssertion]
+    public static void ContainIgnoringLineEndings(this StringAssertions stringAssertions, string expected) =>
+        stringAssertions.Subject.ToUnixLineEndings().Should().Contain(expected.ToUnixLineEndings());
 }

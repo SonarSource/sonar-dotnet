@@ -21,93 +21,92 @@
 using System.IO;
 using System.Text;
 
-namespace SonarAnalyzer.TestFramework.Build
+namespace SonarAnalyzer.TestFramework.Build;
+
+public readonly struct ProjectBuilder
 {
-    public readonly struct ProjectBuilder
+    private readonly Lazy<SolutionBuilder> solution;
+    private readonly Project project;
+    private readonly string fileExtension;
+
+    public SolutionBuilder Solution => solution.Value;
+    public Project Project => project;
+
+    private ProjectBuilder(Project project)
     {
-        private readonly Lazy<SolutionBuilder> solution;
-        private readonly Project project;
-        private readonly string fileExtension;
-
-        public SolutionBuilder Solution => solution.Value;
-        public Project Project => project;
-
-        private ProjectBuilder(Project project)
-        {
-            this.project = project;
-            fileExtension = project.Language == LanguageNames.CSharp ? ".cs" : ".vb";
-            solution = new Lazy<SolutionBuilder>(() => SolutionBuilder.FromSolution(project.Solution));
-        }
-
-        public Compilation GetCompilation(ParseOptions parseOptions = null, CompilationOptions compilationOptions = null)
-        {
-            var projectWithOptions = parseOptions == null ? project : project.WithParseOptions(parseOptions);
-            var compilation = projectWithOptions.GetCompilationAsync().Result;
-            return compilationOptions == null ? compilation : compilation.WithOptions(compilationOptions);
-        }
-
-        public Document FindDocument(string name) =>
-            project.Documents.Single(d => d.Name == name);
-
-        public ProjectBuilder AddReferences(IEnumerable<MetadataReference> references)
-        {
-            if (references == null || !references.Any())
-            {
-                return this;
-            }
-            if (references.Any(x => x.Display.Contains("\\netstandard")))
-            {
-                references = references.Concat(MetadataReferenceFacade.NetStandard);
-            }
-            var existingReferences = project.MetadataReferences.ToHashSet();
-            return FromProject(project.AddMetadataReferences(references.Distinct().Where(x => !existingReferences.Contains(x))));
-        }
-
-        public ProjectBuilder AddProjectReference(Func<SolutionBuilder, ProjectId> getProjectId) =>
-            FromProject(project.AddProjectReference(new ProjectReference(getProjectId(Solution))));
-
-        public ProjectBuilder AddDocuments(IEnumerable<string> paths) =>
-            paths.Aggregate(this, (projectBuilder, path) => projectBuilder.AddDocument(path));
-
-        public ProjectBuilder AddDocument(string path)
-        {
-            const string TestCases = @"TestCases\";
-            _ = path ?? throw new ArgumentNullException(nameof(path));
-            var fileInfo = new FileInfo(path);
-            var testCasesIndex = fileInfo.FullName.IndexOf(TestCases);
-            var relativePathFromTestCases = testCasesIndex < 0
-                ? throw new ArgumentException($"{nameof(path)} must contain '{TestCases}'", nameof(path))
-                : fileInfo.FullName.Substring(testCasesIndex + TestCases.Length);
-            return
-                IsExtensionOfSupportedType(fileInfo)
-                ? AddDocument(project, relativePathFromTestCases, File.ReadAllText(fileInfo.FullName, Encoding.UTF8))
-                : throw new ArgumentException($"The file extension '{fileInfo.Extension}' does not match the project language '{project.Language}' nor razor.", nameof(path));
-        }
-
-        public ProjectBuilder AddSnippets(params string[] snippets) =>
-            snippets.Aggregate(this, (current, snippet) => current.AddSnippet(snippet));
-
-        public ProjectBuilder AddSnippets(IEnumerable<Snippet> snippets) =>
-            snippets.Aggregate(this, (current, snippet) => current.AddSnippet(snippet.Content, snippet.FileName));
-
-        public ProjectBuilder AddSnippet(string code, string fileName = null)
-        {
-            _ = code ?? throw new ArgumentNullException(nameof(code));
-            fileName ??= $"snippet{project.Documents.Count()}{fileExtension}";
-            return AddDocument(project, fileName, code);
-        }
-
-        public static ProjectBuilder FromProject(Project project) =>
-            new(project);
-
-        private bool IsExtensionOfSupportedType(FileInfo fileInfo) =>
-            fileInfo.Extension.Equals(fileExtension, StringComparison.OrdinalIgnoreCase)
-            || fileInfo.Extension.Equals(".razor", StringComparison.OrdinalIgnoreCase)
-            || (fileInfo.Extension.Equals(".cshtml", StringComparison.OrdinalIgnoreCase) && project.Language == LanguageNames.CSharp);
-
-        private static ProjectBuilder AddDocument(Project project, string fileName, string fileContent) =>
-            FromProject(project.AddDocument(fileName, fileContent).Project);
+        this.project = project;
+        fileExtension = project.Language == LanguageNames.CSharp ? ".cs" : ".vb";
+        solution = new Lazy<SolutionBuilder>(() => SolutionBuilder.FromSolution(project.Solution));
     }
 
-    public record Snippet(string Content, string FileName);
+    public Compilation GetCompilation(ParseOptions parseOptions = null, CompilationOptions compilationOptions = null)
+    {
+        var projectWithOptions = parseOptions == null ? project : project.WithParseOptions(parseOptions);
+        var compilation = projectWithOptions.GetCompilationAsync().Result;
+        return compilationOptions == null ? compilation : compilation.WithOptions(compilationOptions);
+    }
+
+    public Document FindDocument(string name) =>
+        project.Documents.Single(d => d.Name == name);
+
+    public ProjectBuilder AddReferences(IEnumerable<MetadataReference> references)
+    {
+        if (references == null || !references.Any())
+        {
+            return this;
+        }
+        if (references.Any(x => x.Display.Contains("\\netstandard")))
+        {
+            references = references.Concat(MetadataReferenceFacade.NetStandard);
+        }
+        var existingReferences = project.MetadataReferences.ToHashSet();
+        return FromProject(project.AddMetadataReferences(references.Distinct().Where(x => !existingReferences.Contains(x))));
+    }
+
+    public ProjectBuilder AddProjectReference(Func<SolutionBuilder, ProjectId> getProjectId) =>
+        FromProject(project.AddProjectReference(new ProjectReference(getProjectId(Solution))));
+
+    public ProjectBuilder AddDocuments(IEnumerable<string> paths) =>
+        paths.Aggregate(this, (projectBuilder, path) => projectBuilder.AddDocument(path));
+
+    public ProjectBuilder AddDocument(string path)
+    {
+        const string TestCases = @"TestCases\";
+        _ = path ?? throw new ArgumentNullException(nameof(path));
+        var fileInfo = new FileInfo(path);
+        var testCasesIndex = fileInfo.FullName.IndexOf(TestCases);
+        var relativePathFromTestCases = testCasesIndex < 0
+            ? throw new ArgumentException($"{nameof(path)} must contain '{TestCases}'", nameof(path))
+            : fileInfo.FullName.Substring(testCasesIndex + TestCases.Length);
+        return
+            IsExtensionOfSupportedType(fileInfo)
+            ? AddDocument(project, relativePathFromTestCases, File.ReadAllText(fileInfo.FullName, Encoding.UTF8))
+            : throw new ArgumentException($"The file extension '{fileInfo.Extension}' does not match the project language '{project.Language}' nor razor.", nameof(path));
+    }
+
+    public ProjectBuilder AddSnippets(params string[] snippets) =>
+        snippets.Aggregate(this, (current, snippet) => current.AddSnippet(snippet));
+
+    public ProjectBuilder AddSnippets(IEnumerable<Snippet> snippets) =>
+        snippets.Aggregate(this, (current, snippet) => current.AddSnippet(snippet.Content, snippet.FileName));
+
+    public ProjectBuilder AddSnippet(string code, string fileName = null)
+    {
+        _ = code ?? throw new ArgumentNullException(nameof(code));
+        fileName ??= $"snippet{project.Documents.Count()}{fileExtension}";
+        return AddDocument(project, fileName, code);
+    }
+
+    public static ProjectBuilder FromProject(Project project) =>
+        new(project);
+
+    private bool IsExtensionOfSupportedType(FileInfo fileInfo) =>
+        fileInfo.Extension.Equals(fileExtension, StringComparison.OrdinalIgnoreCase)
+        || fileInfo.Extension.Equals(".razor", StringComparison.OrdinalIgnoreCase)
+        || (fileInfo.Extension.Equals(".cshtml", StringComparison.OrdinalIgnoreCase) && project.Language == LanguageNames.CSharp);
+
+    private static ProjectBuilder AddDocument(Project project, string fileName, string fileContent) =>
+        FromProject(project.AddDocument(fileName, fileContent).Project);
 }
+
+public record Snippet(string Content, string FileName);

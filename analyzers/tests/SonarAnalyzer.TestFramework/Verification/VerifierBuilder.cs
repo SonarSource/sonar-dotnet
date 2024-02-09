@@ -23,174 +23,173 @@ using SonarAnalyzer.TestFramework.Build;
 using CS = Microsoft.CodeAnalysis.CSharp;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 
-namespace SonarAnalyzer.TestFramework.Verification
+namespace SonarAnalyzer.TestFramework.Verification;
+
+// ToDo: Remove this enum https://github.com/SonarSource/sonar-dotnet/issues/8588
+[Obsolete("This will be removed. Use FailTest if you really have to provide this argument somewhere.")]
+public enum CompilationErrorBehavior
 {
-    // ToDo: Remove this enum https://github.com/SonarSource/sonar-dotnet/issues/8588
-    [Obsolete("This will be removed. Use FailTest if you really have to provide this argument somewhere.")]
-    public enum CompilationErrorBehavior
-    {
-        FailTest,
-        Ignore,
-        Default = FailTest
-    }
+    FailTest,
+    Ignore,
+    Default = FailTest
+}
+
+/// <summary>
+/// Immutable builder that holds all parameters for rule verification.
+/// </summary>
+public record VerifierBuilder
+{
+    // All properties are (and should be) immutable.
+    public ImmutableArray<Func<DiagnosticAnalyzer>> Analyzers { get; init; } = ImmutableArray<Func<DiagnosticAnalyzer>>.Empty;
+    public bool AutogenerateConcurrentFiles { get; init; } = true;
+    public string BasePath { get; init; }
+    public Func<SonarCodeFix> CodeFix { get; init; }
+    public string CodeFixedPath { get; init; }
+    public string CodeFixedPathBatch { get; init; }
+    public string CodeFixTitle { get; init; }
+    public bool ConcurrentAnalysis { get; init; } = true;
+    public CompilationErrorBehavior ErrorBehavior { get; init; } = CompilationErrorBehavior.Default;
+    public string RazorFramework { get; init; } = "net7.0";
+    public bool IsRazor { get; init; }
+    public ImmutableArray<DiagnosticDescriptor> OnlyDiagnostics { get; init; } = ImmutableArray<DiagnosticDescriptor>.Empty;
+    public OutputKind OutputKind { get; init; } = OutputKind.DynamicallyLinkedLibrary;
+    public ImmutableArray<string> Paths { get; init; } = ImmutableArray<string>.Empty;
+    public ImmutableArray<ParseOptions> ParseOptions { get; init; } = ImmutableArray<ParseOptions>.Empty;
+    public string ProtobufPath { get; init; }
+    public ImmutableArray<MetadataReference> References { get; init; } = ImmutableArray<MetadataReference>.Empty;
+    public ImmutableArray<Snippet> Snippets { get; init; } = ImmutableArray<Snippet>.Empty;
+    public string AdditionalFilePath { get; init; }
 
     /// <summary>
-    /// Immutable builder that holds all parameters for rule verification.
+    /// This method solves complicated scenarios. Use 'new VerifierBuilder&lt;TAnalyzer&gt;()' for single analyzer cases with no rule parameters.
     /// </summary>
-    public record VerifierBuilder
+    public VerifierBuilder AddAnalyzer(Func<DiagnosticAnalyzer> createConfiguredAnalyzer) =>
+        this with { Analyzers = Analyzers.Append(createConfiguredAnalyzer).ToImmutableArray() };
+
+    public VerifierBuilder AddPaths(params string[] paths) =>
+        UpdateIsRazor(paths) with { Paths = Paths.Concat(paths).ToImmutableArray(), };
+
+    public VerifierBuilder AddReferences(IEnumerable<MetadataReference> references) =>
+        this with { References = References.Concat(references).ToImmutableArray() };
+
+    public VerifierBuilder AddSnippet(string snippet, string fileName = null) =>
+        UpdateIsRazor(fileName) with { Snippets = Snippets.Add(new(snippet, fileName)) };
+
+    /// <summary>
+    /// Add a test reference to change the project type to Test project.
+    /// </summary>
+    public VerifierBuilder AddTestReference() =>
+        AddReferences(NuGetMetadataReference.MSTestTestFrameworkV1);
+
+    public VerifierBuilder WithAutogenerateConcurrentFiles(bool autogenerateConcurrentFiles) =>
+        this with { AutogenerateConcurrentFiles = autogenerateConcurrentFiles };
+
+    /// <summary>
+    /// Path infix relative to TestCases directory.
+    /// </summary>
+    /// <remarks>If we ever need to change the root outside the .\TestCases directory, add WithRootPath(..) while WithBasePath(..) would still append another part after the root path.</remarks>
+    public VerifierBuilder WithBasePath(string basePath) =>
+        this with { BasePath = basePath };
+
+    public VerifierBuilder WithCodeFix<TCodeFix>() where TCodeFix : SonarCodeFix, new() =>
+        this with { CodeFix = () => new TCodeFix() };
+
+    /// <param name="codeFixedPathBatch">Fixed file for cases when FixAllProvider produces different results than applying all code fixes on the same original document.</param>
+    public VerifierBuilder WithCodeFixedPaths(string codeFixedPath, string codeFixedPathBatch = null) =>
+        this with { CodeFixedPath = codeFixedPath, CodeFixedPathBatch = codeFixedPathBatch };
+
+    public VerifierBuilder WithCodeFixTitle(string codeFixTitle) =>
+        this with { CodeFixTitle = codeFixTitle };
+
+    public VerifierBuilder WithConcurrentAnalysis(bool concurrentAnalysis) =>
+        this with { ConcurrentAnalysis = concurrentAnalysis };
+
+    [Obsolete("Do not use CompilationErrorBehavior. Assert errors with // Error [CSxxxx, CSyyyy] instead")]
+    public VerifierBuilder WithErrorBehavior(CompilationErrorBehavior errorBehavior) =>
+        this with { ErrorBehavior = errorBehavior };
+
+    public VerifierBuilder WithFramework(string framework) =>
+        this with { RazorFramework = framework };
+
+    public VerifierBuilder WithLanguageVersion(CS.LanguageVersion languageVersion) =>
+        WithOptions(ImmutableArray.Create<ParseOptions>(new CS.CSharpParseOptions(languageVersion)));
+
+    public VerifierBuilder WithLanguageVersion(VB.LanguageVersion languageVersion) =>
+        WithOptions(ImmutableArray.Create<ParseOptions>(new VB.VisualBasicParseOptions(languageVersion)));
+
+    public VerifierBuilder WithOnlyDiagnostics(params DiagnosticDescriptor[] onlyDiagnostics) =>
+        this with { OnlyDiagnostics = onlyDiagnostics.ToImmutableArray() };
+
+    public VerifierBuilder WithOptions(ImmutableArray<ParseOptions> parseOptions) =>
+        this with { ParseOptions = parseOptions };
+
+    public VerifierBuilder WithOutputKind(OutputKind outputKind) =>
+        this with { OutputKind = outputKind };
+
+    public VerifierBuilder WithProtobufPath(string protobufPath) =>
+        this with { ProtobufPath = protobufPath };
+
+    public VerifierBuilder WithAdditionalFilePath(string additionalFilePath) =>
+        this with { AdditionalFilePath = additionalFilePath };
+
+    public VerifierBuilder WithTopLevelStatements()
     {
-        // All properties are (and should be) immutable.
-        public ImmutableArray<Func<DiagnosticAnalyzer>> Analyzers { get; init; } = ImmutableArray<Func<DiagnosticAnalyzer>>.Empty;
-        public bool AutogenerateConcurrentFiles { get; init; } = true;
-        public string BasePath { get; init; }
-        public Func<SonarCodeFix> CodeFix { get; init; }
-        public string CodeFixedPath { get; init; }
-        public string CodeFixedPathBatch { get; init; }
-        public string CodeFixTitle { get; init; }
-        public bool ConcurrentAnalysis { get; init; } = true;
-        public CompilationErrorBehavior ErrorBehavior { get; init; } = CompilationErrorBehavior.Default;
-        public string RazorFramework { get; init; } = "net7.0";
-        public bool IsRazor { get; init; }
-        public ImmutableArray<DiagnosticDescriptor> OnlyDiagnostics { get; init; } = ImmutableArray<DiagnosticDescriptor>.Empty;
-        public OutputKind OutputKind { get; init; } = OutputKind.DynamicallyLinkedLibrary;
-        public ImmutableArray<string> Paths { get; init; } = ImmutableArray<string>.Empty;
-        public ImmutableArray<ParseOptions> ParseOptions { get; init; } = ImmutableArray<ParseOptions>.Empty;
-        public string ProtobufPath { get; init; }
-        public ImmutableArray<MetadataReference> References { get; init; } = ImmutableArray<MetadataReference>.Empty;
-        public ImmutableArray<Snippet> Snippets { get; init; } = ImmutableArray<Snippet>.Empty;
-        public string AdditionalFilePath { get; init; }
-
-        /// <summary>
-        /// This method solves complicated scenarios. Use 'new VerifierBuilder&lt;TAnalyzer&gt;()' for single analyzer cases with no rule parameters.
-        /// </summary>
-        public VerifierBuilder AddAnalyzer(Func<DiagnosticAnalyzer> createConfiguredAnalyzer) =>
-            this with { Analyzers = Analyzers.Append(createConfiguredAnalyzer).ToImmutableArray() };
-
-        public VerifierBuilder AddPaths(params string[] paths) =>
-            UpdateIsRazor(paths) with { Paths = Paths.Concat(paths).ToImmutableArray(), };
-
-        public VerifierBuilder AddReferences(IEnumerable<MetadataReference> references) =>
-            this with { References = References.Concat(references).ToImmutableArray() };
-
-        public VerifierBuilder AddSnippet(string snippet, string fileName = null) =>
-            UpdateIsRazor(fileName) with { Snippets = Snippets.Add(new(snippet, fileName)) };
-
-        /// <summary>
-        /// Add a test reference to change the project type to Test project.
-        /// </summary>
-        public VerifierBuilder AddTestReference() =>
-            AddReferences(NuGetMetadataReference.MSTestTestFrameworkV1);
-
-        public VerifierBuilder WithAutogenerateConcurrentFiles(bool autogenerateConcurrentFiles) =>
-            this with { AutogenerateConcurrentFiles = autogenerateConcurrentFiles };
-
-        /// <summary>
-        /// Path infix relative to TestCases directory.
-        /// </summary>
-        /// <remarks>If we ever need to change the root outside the .\TestCases directory, add WithRootPath(..) while WithBasePath(..) would still append another part after the root path.</remarks>
-        public VerifierBuilder WithBasePath(string basePath) =>
-            this with { BasePath = basePath };
-
-        public VerifierBuilder WithCodeFix<TCodeFix>() where TCodeFix : SonarCodeFix, new() =>
-            this with { CodeFix = () => new TCodeFix() };
-
-        /// <param name="codeFixedPathBatch">Fixed file for cases when FixAllProvider produces different results than applying all code fixes on the same original document.</param>
-        public VerifierBuilder WithCodeFixedPaths(string codeFixedPath, string codeFixedPathBatch = null) =>
-            this with { CodeFixedPath = codeFixedPath, CodeFixedPathBatch = codeFixedPathBatch };
-
-        public VerifierBuilder WithCodeFixTitle(string codeFixTitle) =>
-            this with { CodeFixTitle = codeFixTitle };
-
-        public VerifierBuilder WithConcurrentAnalysis(bool concurrentAnalysis) =>
-            this with { ConcurrentAnalysis = concurrentAnalysis };
-
-        [Obsolete("Do not use CompilationErrorBehavior. Assert errors with // Error [CSxxxx, CSyyyy] instead")]
-        public VerifierBuilder WithErrorBehavior(CompilationErrorBehavior errorBehavior) =>
-            this with { ErrorBehavior = errorBehavior };
-
-        public VerifierBuilder WithFramework(string framework) =>
-            this with { RazorFramework = framework };
-
-        public VerifierBuilder WithLanguageVersion(CS.LanguageVersion languageVersion) =>
-            WithOptions(ImmutableArray.Create<ParseOptions>(new CS.CSharpParseOptions(languageVersion)));
-
-        public VerifierBuilder WithLanguageVersion(VB.LanguageVersion languageVersion) =>
-            WithOptions(ImmutableArray.Create<ParseOptions>(new VB.VisualBasicParseOptions(languageVersion)));
-
-        public VerifierBuilder WithOnlyDiagnostics(params DiagnosticDescriptor[] onlyDiagnostics) =>
-            this with { OnlyDiagnostics = onlyDiagnostics.ToImmutableArray() };
-
-        public VerifierBuilder WithOptions(ImmutableArray<ParseOptions> parseOptions) =>
-            this with { ParseOptions = parseOptions };
-
-        public VerifierBuilder WithOutputKind(OutputKind outputKind) =>
-            this with { OutputKind = outputKind };
-
-        public VerifierBuilder WithProtobufPath(string protobufPath) =>
-            this with { ProtobufPath = protobufPath };
-
-        public VerifierBuilder WithAdditionalFilePath(string additionalFilePath) =>
-            this with { AdditionalFilePath = additionalFilePath };
-
-        public VerifierBuilder WithTopLevelStatements()
+        if (ParseOptions.OfType<VB.VisualBasicParseOptions>().Any())
         {
-            if (ParseOptions.OfType<VB.VisualBasicParseOptions>().Any())
-            {
-                throw new InvalidOperationException($"{nameof(WithTopLevelStatements)} is not supported with {nameof(VB.VisualBasicParseOptions)}.");
-            }
-            if (ParseOptions.Cast<CS.CSharpParseOptions>().Any(x => x.LanguageVersion < CS.LanguageVersion.CSharp9))
-            {
-                throw new InvalidOperationException($"{nameof(WithTopLevelStatements)} is supported from {nameof(CS.LanguageVersion.CSharp9)}.");
-            }
-            return (ParseOptions.IsEmpty ? WithOptions(ParseOptionsHelper.FromCSharp9) : this)
-                .WithOutputKind(OutputKind.ConsoleApplication)
-                .WithConcurrentAnalysis(false);
+            throw new InvalidOperationException($"{nameof(WithTopLevelStatements)} is not supported with {nameof(VB.VisualBasicParseOptions)}.");
+        }
+        if (ParseOptions.Cast<CS.CSharpParseOptions>().Any(x => x.LanguageVersion < CS.LanguageVersion.CSharp9))
+        {
+            throw new InvalidOperationException($"{nameof(WithTopLevelStatements)} is supported from {nameof(CS.LanguageVersion.CSharp9)}.");
+        }
+        return (ParseOptions.IsEmpty ? WithOptions(ParseOptionsHelper.FromCSharp9) : this)
+            .WithOutputKind(OutputKind.ConsoleApplication)
+            .WithConcurrentAnalysis(false);
+    }
+
+    public Verifier Build() =>
+        new(this);
+
+    private VerifierBuilder UpdateIsRazor(params string[] paths)
+    {
+        if (!IsRazor && Array.Exists(paths, IsRazorOrCshtmlFile))
+        {
+            return ParseOptions.IsEmpty
+                ? WithOptions(ParseOptionsHelper.FromCSharp10) with { IsRazor = true }
+                : this with { IsRazor = true };
+        }
+        else
+        {
+            return this;
         }
 
-        public Verifier Build() =>
-            new(this);
-
-        private VerifierBuilder UpdateIsRazor(params string[] paths)
-        {
-            if (!IsRazor && Array.Exists(paths, IsRazorOrCshtmlFile))
-            {
-                return ParseOptions.IsEmpty
-                    ? WithOptions(ParseOptionsHelper.FromCSharp10) with { IsRazor = true }
-                    : this with { IsRazor = true };
-            }
-            else
-            {
-                return this;
-            }
-
-            static bool IsRazorOrCshtmlFile(string fileName) =>
-                !string.IsNullOrEmpty(fileName) && (fileName.EndsWith(".razor", StringComparison.OrdinalIgnoreCase) || fileName.EndsWith(".cshtml", StringComparison.OrdinalIgnoreCase));
-        }
+        static bool IsRazorOrCshtmlFile(string fileName) =>
+            !string.IsNullOrEmpty(fileName) && (fileName.EndsWith(".razor", StringComparison.OrdinalIgnoreCase) || fileName.EndsWith(".cshtml", StringComparison.OrdinalIgnoreCase));
     }
+}
 
-    public record VerifierBuilder<TAnalyzer> : VerifierBuilder
-        where TAnalyzer : DiagnosticAnalyzer, new()
-    {
-        public VerifierBuilder() =>
-            Analyzers = new Func<DiagnosticAnalyzer>[] { () => new TAnalyzer() }.ToImmutableArray();
-    }
+public record VerifierBuilder<TAnalyzer> : VerifierBuilder
+    where TAnalyzer : DiagnosticAnalyzer, new()
+{
+    public VerifierBuilder() =>
+        Analyzers = new Func<DiagnosticAnalyzer>[] { () => new TAnalyzer() }.ToImmutableArray();
+}
 
-    public static class VerifierBuilderExtensions
-    {
-        public static void Verify(this VerifierBuilder builder) =>
-            builder.Build().Verify();
+public static class VerifierBuilderExtensions
+{
+    public static void Verify(this VerifierBuilder builder) =>
+        builder.Build().Verify();
 
-        public static void VerifyNoIssueReported(this VerifierBuilder builder) =>
-            builder.Build().VerifyNoIssueReported();
+    public static void VerifyNoIssueReported(this VerifierBuilder builder) =>
+        builder.Build().VerifyNoIssueReported();
 
-        public static void VerifyCodeFix(this VerifierBuilder builder) =>
-            builder.Build().VerifyCodeFix();
+    public static void VerifyCodeFix(this VerifierBuilder builder) =>
+        builder.Build().VerifyCodeFix();
 
-        public static void VerifyUtilityAnalyzerProducesEmptyProtobuf(this VerifierBuilder builder) =>
-            builder.Build().VerifyUtilityAnalyzerProducesEmptyProtobuf();
+    public static void VerifyUtilityAnalyzerProducesEmptyProtobuf(this VerifierBuilder builder) =>
+        builder.Build().VerifyUtilityAnalyzerProducesEmptyProtobuf();
 
-        public static void VerifyUtilityAnalyzer<TMessage>(this VerifierBuilder builder, Action<IReadOnlyList<TMessage>> verifyProtobuf)
-            where TMessage : IMessage<TMessage>, new() =>
-            builder.Build().VerifyUtilityAnalyzer(verifyProtobuf);
-    }
+    public static void VerifyUtilityAnalyzer<TMessage>(this VerifierBuilder builder, Action<IReadOnlyList<TMessage>> verifyProtobuf)
+        where TMessage : IMessage<TMessage>, new() =>
+        builder.Build().VerifyUtilityAnalyzer(verifyProtobuf);
 }

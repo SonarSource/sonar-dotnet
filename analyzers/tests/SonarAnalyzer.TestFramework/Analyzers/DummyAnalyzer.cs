@@ -22,30 +22,29 @@ using SonarAnalyzer.AnalysisContext;
 using CS = Microsoft.CodeAnalysis.CSharp;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 
-namespace SonarAnalyzer.TestFramework.Analyzers
+namespace SonarAnalyzer.TestFramework.Analyzers;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public class DummyAnalyzerCS : DummyAnalyzer<CS.SyntaxKind>
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class DummyAnalyzerCS : DummyAnalyzer<CS.SyntaxKind>
-    {
-        protected override CS.SyntaxKind NumericLiteralExpression => CS.SyntaxKind.NumericLiteralExpression;
-    }
+    protected override CS.SyntaxKind NumericLiteralExpression => CS.SyntaxKind.NumericLiteralExpression;
+}
 
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public class DummyAnalyzerVB : DummyAnalyzer<VB.SyntaxKind>
-    {
-        protected override VB.SyntaxKind NumericLiteralExpression => VB.SyntaxKind.NumericLiteralExpression;
-    }
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public class DummyAnalyzerVB : DummyAnalyzer<VB.SyntaxKind>
+{
+    protected override VB.SyntaxKind NumericLiteralExpression => VB.SyntaxKind.NumericLiteralExpression;
+}
 
-    public abstract class DummyAnalyzer<TSyntaxKind> : SonarDiagnosticAnalyzer where TSyntaxKind : struct
-    {
-        private static readonly DiagnosticDescriptor Rule = AnalysisScaffolding.CreateDescriptorMain("SDummy");
+public abstract class DummyAnalyzer<TSyntaxKind> : SonarDiagnosticAnalyzer where TSyntaxKind : struct
+{
+    private static readonly DiagnosticDescriptor Rule = AnalysisScaffolding.CreateDescriptorMain("SDummy");
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
-        public int DummyProperty { get; set; }
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+    public int DummyProperty { get; set; }
 
-        protected abstract TSyntaxKind NumericLiteralExpression { get; }
+    protected abstract TSyntaxKind NumericLiteralExpression { get; }
 
-        protected sealed override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterNodeAction(TestGeneratedCodeRecognizer.Instance, c => c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation())), NumericLiteralExpression);
-    }
+    protected sealed override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(TestGeneratedCodeRecognizer.Instance, c => c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation())), NumericLiteralExpression);
 }

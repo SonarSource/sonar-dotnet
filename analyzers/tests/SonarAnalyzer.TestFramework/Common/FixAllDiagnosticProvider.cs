@@ -20,22 +20,21 @@
 
 using Microsoft.CodeAnalysis.CodeFixes;
 
-namespace SonarAnalyzer.TestFramework.Common
+namespace SonarAnalyzer.TestFramework.Common;
+
+public class FixAllDiagnosticProvider : FixAllContext.DiagnosticProvider
 {
-    public class FixAllDiagnosticProvider : FixAllContext.DiagnosticProvider
-    {
-        private readonly IEnumerable<Diagnostic> diagnostics;
+    private readonly IEnumerable<Diagnostic> diagnostics;
 
-        public FixAllDiagnosticProvider(IEnumerable<Diagnostic> diagnostics) =>
-            this.diagnostics = diagnostics;
+    public FixAllDiagnosticProvider(IEnumerable<Diagnostic> diagnostics) =>
+        this.diagnostics = diagnostics;
 
-        public override Task<IEnumerable<Diagnostic>> GetDocumentDiagnosticsAsync(Document document, CancellationToken cancel) =>
-            Task.FromResult(diagnostics);
+    public override Task<IEnumerable<Diagnostic>> GetDocumentDiagnosticsAsync(Document document, CancellationToken cancel) =>
+        Task.FromResult(diagnostics);
 
-        public override Task<IEnumerable<Diagnostic>> GetAllDiagnosticsAsync(Project project, CancellationToken cancel) =>
-            throw new NotImplementedException();
+    public override Task<IEnumerable<Diagnostic>> GetAllDiagnosticsAsync(Project project, CancellationToken cancel) =>
+        throw new NotImplementedException();
 
-        public override Task<IEnumerable<Diagnostic>> GetProjectDiagnosticsAsync(Project project, CancellationToken cancel) =>
-            throw new NotImplementedException();
-    }
+    public override Task<IEnumerable<Diagnostic>> GetProjectDiagnosticsAsync(Project project, CancellationToken cancel) =>
+        throw new NotImplementedException();
 }

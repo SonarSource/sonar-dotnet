@@ -28,124 +28,123 @@ using StyleCop.Analyzers.Lightup;
 using CS = Microsoft.CodeAnalysis.CSharp;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 
-namespace SonarAnalyzer.TestFramework.Common
+namespace SonarAnalyzer.TestFramework.Common;
+
+public static class TestHelper
 {
-    public static class TestHelper
+    public static (SyntaxTree Tree, SemanticModel Model) CompileIgnoreErrorsCS(string snippet, params MetadataReference[] additionalReferences) =>
+        Compile(snippet, true, AnalyzerLanguage.CSharp, additionalReferences);
+
+    public static (SyntaxTree Tree, SemanticModel Model) CompileIgnoreErrorsVB(string snippet, params MetadataReference[] additionalReferences) =>
+        Compile(snippet, true, AnalyzerLanguage.VisualBasic, additionalReferences);
+
+    public static (SyntaxTree Tree, SemanticModel Model) CompileCS(string snippet, params MetadataReference[] additionalReferences) =>
+        Compile(snippet, false, AnalyzerLanguage.CSharp, additionalReferences);
+
+    public static (SyntaxTree Tree, SemanticModel Model) CompileVB(string snippet, params MetadataReference[] additionalReferences) =>
+        Compile(snippet, false, AnalyzerLanguage.VisualBasic, additionalReferences);
+
+    public static (SyntaxTree Tree, SemanticModel Model) Compile(string snippet,
+                                                                 bool ignoreErrors,
+                                                                 AnalyzerLanguage language,
+                                                                 MetadataReference[] additionalReferences = null,
+                                                                 OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
+                                                                 ParseOptions parseOptions = null)
     {
-        public static (SyntaxTree Tree, SemanticModel Model) CompileIgnoreErrorsCS(string snippet, params MetadataReference[] additionalReferences) =>
-            Compile(snippet, true, AnalyzerLanguage.CSharp, additionalReferences);
+        var compiled = new SnippetCompiler(snippet, ignoreErrors, language, additionalReferences, outputKind, parseOptions);
+        return (compiled.SyntaxTree, compiled.SemanticModel);
+    }
 
-        public static (SyntaxTree Tree, SemanticModel Model) CompileIgnoreErrorsVB(string snippet, params MetadataReference[] additionalReferences) =>
-            Compile(snippet, true, AnalyzerLanguage.VisualBasic, additionalReferences);
+    public static ControlFlowGraph CompileCfgBodyCS(string body = null, string additionalParameters = null) =>
+        CompileCfg($"public class Sample {{ public void Main({additionalParameters}) {{ {body} }} }}", AnalyzerLanguage.CSharp);
 
-        public static (SyntaxTree Tree, SemanticModel Model) CompileCS(string snippet, params MetadataReference[] additionalReferences) =>
-            Compile(snippet, false, AnalyzerLanguage.CSharp, additionalReferences);
-
-        public static (SyntaxTree Tree, SemanticModel Model) CompileVB(string snippet, params MetadataReference[] additionalReferences) =>
-            Compile(snippet, false, AnalyzerLanguage.VisualBasic, additionalReferences);
-
-        public static (SyntaxTree Tree, SemanticModel Model) Compile(string snippet,
-                                                                     bool ignoreErrors,
-                                                                     AnalyzerLanguage language,
-                                                                     MetadataReference[] additionalReferences = null,
-                                                                     OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
-                                                                     ParseOptions parseOptions = null)
-        {
-            var compiled = new SnippetCompiler(snippet, ignoreErrors, language, additionalReferences, outputKind, parseOptions);
-            return (compiled.SyntaxTree, compiled.SemanticModel);
-        }
-
-        public static ControlFlowGraph CompileCfgBodyCS(string body = null, string additionalParameters = null) =>
-            CompileCfg($"public class Sample {{ public void Main({additionalParameters}) {{ {body} }} }}", AnalyzerLanguage.CSharp);
-
-        public static ControlFlowGraph CompileCfgBodyVB(string body = null) =>
-            CompileCfg(
+    public static ControlFlowGraph CompileCfgBodyVB(string body = null) =>
+        CompileCfg(
 $@"Public Class Sample
     Public Sub Main()
         {body}
     End Sub
 End Class", AnalyzerLanguage.VisualBasic);
 
-        public static ControlFlowGraph CompileCfgCS(string snippet, bool ignoreErrors = false) =>
-            CompileCfg(snippet, AnalyzerLanguage.CSharp, ignoreErrors);
+    public static ControlFlowGraph CompileCfgCS(string snippet, bool ignoreErrors = false) =>
+        CompileCfg(snippet, AnalyzerLanguage.CSharp, ignoreErrors);
 
-        public static ControlFlowGraph CompileCfg(string snippet,
-                                                  AnalyzerLanguage language,
-                                                  bool ignoreErrors = false,
-                                                  string localFunctionName = null,
-                                                  string anonymousFunctionFragment = null,
-                                                  OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)
+    public static ControlFlowGraph CompileCfg(string snippet,
+                                              AnalyzerLanguage language,
+                                              bool ignoreErrors = false,
+                                              string localFunctionName = null,
+                                              string anonymousFunctionFragment = null,
+                                              OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)
+    {
+        var (tree, semanticModel) = Compile(snippet, ignoreErrors, language, outputKind: outputKind);
+        var root = tree.GetRoot();
+        var method = outputKind == OutputKind.ConsoleApplication && root.ChildNodes().OfType<GlobalStatementSyntax>().Any()
+            ? root                                      // Top level statements
+            : root.DescendantNodes().First(IsMethod);
+        var cfg = ControlFlowGraph.Create(method, semanticModel, default);
+        if (localFunctionName is not null && anonymousFunctionFragment is not null)
         {
-            var (tree, semanticModel) = Compile(snippet, ignoreErrors, language, outputKind: outputKind);
-            var root = tree.GetRoot();
-            var method = outputKind == OutputKind.ConsoleApplication && root.ChildNodes().OfType<GlobalStatementSyntax>().Any()
-                ? root                                      // Top level statements
-                : root.DescendantNodes().First(IsMethod);
-            var cfg = ControlFlowGraph.Create(method, semanticModel, default);
-            if (localFunctionName is not null && anonymousFunctionFragment is not null)
+            throw new InvalidOperationException($"Specify {nameof(localFunctionName)} or {nameof(anonymousFunctionFragment)}.");
+        }
+        if (localFunctionName is not null)
+        {
+            cfg = cfg.GetLocalFunctionControlFlowGraph(cfg.LocalFunctions.Single(x => x.Name == localFunctionName), default);
+        }
+        else if (anonymousFunctionFragment is not null)
+        {
+            var anonymousFunction = cfg.FlowAnonymousFunctionOperations().SingleOrDefault(x => x.WrappedOperation.Syntax.ToString().Contains(anonymousFunctionFragment));
+            if (anonymousFunction.WrappedOperation is null)
             {
-                throw new InvalidOperationException($"Specify {nameof(localFunctionName)} or {nameof(anonymousFunctionFragment)}.");
+                throw new ArgumentException($"Anonymous function with '{anonymousFunctionFragment}' fragment was not found.");
             }
-            if (localFunctionName is not null)
-            {
-                cfg = cfg.GetLocalFunctionControlFlowGraph(cfg.LocalFunctions.Single(x => x.Name == localFunctionName), default);
-            }
-            else if (anonymousFunctionFragment is not null)
-            {
-                var anonymousFunction = cfg.FlowAnonymousFunctionOperations().SingleOrDefault(x => x.WrappedOperation.Syntax.ToString().Contains(anonymousFunctionFragment));
-                if (anonymousFunction.WrappedOperation is null)
-                {
-                    throw new ArgumentException($"Anonymous function with '{anonymousFunctionFragment}' fragment was not found.");
-                }
-                cfg = cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunction, default);
-            }
-
-            const string Separator = "----------";
-            Console.WriteLine(Separator);
-            Console.Write(CfgSerializer.Serialize(cfg));
-            Console.WriteLine(Separator);
-
-            return cfg;
-
-            bool IsMethod(SyntaxNode node) =>
-                language == AnalyzerLanguage.CSharp
-                    ? node.RawKind == (int)CS.SyntaxKind.MethodDeclaration
-                    : node.RawKind == (int)VB.SyntaxKind.FunctionBlock || node.RawKind == (int)VB.SyntaxKind.SubBlock;
+            cfg = cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunction, default);
         }
 
-        public static IEnumerable<MetadataReference> ProjectTypeReference(ProjectType projectType) =>
-            projectType == ProjectType.Test
-                ? NuGetMetadataReference.MSTestTestFrameworkV1  // Any reference to detect a test project
-                : Enumerable.Empty<MetadataReference>();
+        const string Separator = "----------";
+        Console.WriteLine(Separator);
+        Console.Write(CfgSerializer.Serialize(cfg));
+        Console.WriteLine(Separator);
 
-        public static string Serialize(IOperationWrapperSonar operation)
-        {
-            _ = operation.Instance ?? throw new ArgumentNullException(nameof(operation));
-            return operation.Instance.Kind + ": " + operation.Instance.Syntax + (operation.IsImplicit ? " (Implicit)" : null);
-        }
+        return cfg;
 
-        public static string ToUnixLineEndings(this string value) =>
-            value.Replace(Constants.WindowsLineEnding, Constants.UnixLineEnding);
+        bool IsMethod(SyntaxNode node) =>
+            language == AnalyzerLanguage.CSharp
+                ? node.RawKind == (int)CS.SyntaxKind.MethodDeclaration
+                : node.RawKind == (int)VB.SyntaxKind.FunctionBlock || node.RawKind == (int)VB.SyntaxKind.SubBlock;
+    }
 
-        public static string TestPath(TestContext context, string fileName)
-        {
-            var root = Path.Combine(context.TestDir, context.FullyQualifiedTestClassName.Replace("SonarAnalyzer.Test.", null));
-            var directoryName = root.Length + context.TestName.Length + fileName.Length > 250   // 260 can throw PathTooLongException
-                ? $"TooLongTestName.{RootSubdirectoryCount()}"
-                : context.TestName;
-            var path = Path.Combine(root, directoryName, fileName);
-            Directory.CreateDirectory(Path.GetDirectoryName(path));
-            return path;
+    public static IEnumerable<MetadataReference> ProjectTypeReference(ProjectType projectType) =>
+        projectType == ProjectType.Test
+            ? NuGetMetadataReference.MSTestTestFrameworkV1  // Any reference to detect a test project
+            : Enumerable.Empty<MetadataReference>();
 
-            int RootSubdirectoryCount() =>
-                Directory.Exists(root) ? Directory.GetDirectories(root).Length : 0;
-        }
+    public static string Serialize(IOperationWrapperSonar operation)
+    {
+        _ = operation.Instance ?? throw new ArgumentNullException(nameof(operation));
+        return operation.Instance.Kind + ": " + operation.Instance.Syntax + (operation.IsImplicit ? " (Implicit)" : null);
+    }
 
-        public static string WriteFile(TestContext context, string fileName, string content = null)
-        {
-            var path = TestPath(context, fileName);
-            File.WriteAllText(path, content);
-            return path;
-        }
+    public static string ToUnixLineEndings(this string value) =>
+        value.Replace(Constants.WindowsLineEnding, Constants.UnixLineEnding);
+
+    public static string TestPath(TestContext context, string fileName)
+    {
+        var root = Path.Combine(context.TestDir, context.FullyQualifiedTestClassName.Replace("SonarAnalyzer.Test.", null));
+        var directoryName = root.Length + context.TestName.Length + fileName.Length > 250   // 260 can throw PathTooLongException
+            ? $"TooLongTestName.{RootSubdirectoryCount()}"
+            : context.TestName;
+        var path = Path.Combine(root, directoryName, fileName);
+        Directory.CreateDirectory(Path.GetDirectoryName(path));
+        return path;
+
+        int RootSubdirectoryCount() =>
+            Directory.Exists(root) ? Directory.GetDirectories(root).Length : 0;
+    }
+
+    public static string WriteFile(TestContext context, string fileName, string content = null)
+    {
+        var path = TestPath(context, fileName);
+        File.WriteAllText(path, content);
+        return path;
     }
 }

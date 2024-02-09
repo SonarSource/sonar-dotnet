@@ -20,33 +20,32 @@
 
 using System.IO;
 
-namespace SonarAnalyzer.TestFramework.Common
+namespace SonarAnalyzer.TestFramework.Common;
+
+public sealed class LogTester : IDisposable
 {
-    public sealed class LogTester : IDisposable
+    private readonly TextWriter originalOut;
+    private readonly TextWriter originalError;
+    private readonly StringWriter outWriter = new();
+    private readonly StringWriter errorWriter = new();
+
+    public LogTester()
     {
-        private readonly TextWriter originalOut;
-        private readonly TextWriter originalError;
-        private readonly StringWriter outWriter = new();
-        private readonly StringWriter errorWriter = new();
+        originalOut = Console.Out;
+        Console.SetOut(outWriter);
+        originalError = Console.Error;
+        Console.SetError(errorWriter);
+    }
 
-        public LogTester()
-        {
-            originalOut = Console.Out;
-            Console.SetOut(outWriter);
-            originalError = Console.Error;
-            Console.SetError(errorWriter);
-        }
+    public void AssertContain(string value) =>
+        outWriter.ToString().Should().ContainIgnoringLineEndings(value);
 
-        public void AssertContain(string value) =>
-            outWriter.ToString().Should().ContainIgnoringLineEndings(value);
+    public void AssertContainError(string value) =>
+        errorWriter.ToString().Should().ContainIgnoringLineEndings(value);
 
-        public void AssertContainError(string value) =>
-            errorWriter.ToString().Should().ContainIgnoringLineEndings(value);
-
-        public void Dispose()
-        {
-            Console.SetOut(originalOut);
-            Console.SetError(originalError);
-        }
+    public void Dispose()
+    {
+        Console.SetOut(originalOut);
+        Console.SetError(originalError);
     }
 }
