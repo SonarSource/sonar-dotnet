@@ -1,82 +1,40 @@
 {
-"issues":  [
-{
-"id":  "S2366",
-"message":  "Rename this property to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeYouTube.vb#L301",
-"region":  {
-"startLine":  301,
-"startColumn":  25,
-"endLine":  301,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2366",
-"message":  "Rename this property to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1341",
-"region":  {
-"startLine":  1341,
-"startColumn":  25,
-"endLine":  1341,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S2366",
-"message":  "Rename this property to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1350",
-"region":  {
-"startLine":  1350,
-"startColumn":  25,
-"endLine":  1350,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2366",
-"message":  "Rename this property to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1435",
-"region":  {
-"startLine":  1435,
-"startColumn":  25,
-"endLine":  1435,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2366",
-"message":  "Rename this property to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1590",
-"region":  {
-"startLine":  1590,
-"startColumn":  25,
-"endLine":  1590,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2366",
-"message":  "Rename this property to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1780",
-"region":  {
-"startLine":  1780,
-"startColumn":  25,
-"endLine":  1780,
-"endColumn":  28
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeYouTube.vb#L301",
+      "Location": "Line 301 Position 25-28"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1341",
+      "Location": "Line 1341 Position 25-37"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1350",
+      "Location": "Line 1350 Position 25-28"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1435",
+      "Location": "Line 1435 Position 25-28"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1590",
+      "Location": "Line 1590 Position 25-28"
+    },
+    {
+      "Id": "S2366",
+      "Message": "Rename this property to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1780",
+      "Location": "Line 1780 Position 25-28"
+    }
+  ]
 }

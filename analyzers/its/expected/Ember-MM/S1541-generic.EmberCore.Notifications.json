@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this function is 14 which is greater than 10 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/Module.Notifications.vb#L106",
-"region":  {
-"startLine":  106,
-"startColumn":  5,
-"endLine":  106,
-"endColumn":  210
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this function is 14 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/Module.Notifications.vb#L106",
+      "Location": "Line 106 Position 5-210"
+    }
+  ]
 }

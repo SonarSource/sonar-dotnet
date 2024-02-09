@@ -1,41 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S3267",
-"message":  "Loop should be simplified by calling Select(element => element.Length))",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3267.cs#L27",
-"region":  {
-"startLine":  27,
-"startColumn":  37,
-"endLine":  27,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S3267",
-"message":  "Loops should be simplified using the "Where" LINQ method",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3267.cs#L12",
-"region":  {
-"startLine":  12,
-"startColumn":  37,
-"endLine":  12,
-"endColumn":  47
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3267.cs#L14",
-"region":  {
-"startLine":  14,
-"startColumn":  21,
-"endLine":  14,
-"endColumn":  39
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S3267",
+      "Message": "Loops should be simplified using the \u0022Where\u0022 LINQ method",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3267.cs#L12",
+      "Location": "Line 12 Position 37-47"
+    },
+    {
+      "Id": "S3267",
+      "Message": "Loop should be simplified by calling Select(element =\u003E element.Length))",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3267.cs#L27",
+      "Location": "Line 27 Position 37-47"
+    }
+  ]
 }

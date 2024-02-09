@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S1944",
-"message":  "Review this cast; in this project there's no type that implements both 'ORDictionary<TKey, LWWRegister<TValue>>.IDeltaOperation' and 'ORDictionary.IDeltaOperation'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/LWWDictionary.cs#L404",
-"region":  {
-"startLine":  404,
-"startColumn":  86,
-"endLine":  404,
-"endColumn":  114
-}
-}
-},
-{
-"id":  "S1944",
-"message":  "Review this cast; in this project there's no type that implements both 'ORDictionary<TKey, ORSet<TValue>>.IDeltaOperation' and 'ORDictionary.IDeltaOperation'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORMultiValueDictionary.cs#L371",
-"region":  {
-"startLine":  371,
-"startColumn":  95,
-"endLine":  371,
-"endColumn":  123
-}
-}
-},
-{
-"id":  "S1944",
-"message":  "Review this cast; in this project there's no type that implements both 'ORDictionary<TKey, PNCounter>.IDeltaOperation' and 'ORDictionary.IDeltaOperation'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/PNCounterDictionary.cs#L276",
-"region":  {
-"startLine":  276,
-"startColumn":  92,
-"endLine":  276,
-"endColumn":  120
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1944",
+      "Message": "Review this cast; in this project there\u0027s no type that implements both \u0027ORDictionary\u003CTKey, LWWRegister\u003CTValue\u003E\u003E.IDeltaOperation\u0027 and \u0027ORDictionary.IDeltaOperation\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/LWWDictionary.cs#L404",
+      "Location": "Line 404 Position 86-114"
+    },
+    {
+      "Id": "S1944",
+      "Message": "Review this cast; in this project there\u0027s no type that implements both \u0027ORDictionary\u003CTKey, ORSet\u003CTValue\u003E\u003E.IDeltaOperation\u0027 and \u0027ORDictionary.IDeltaOperation\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORMultiValueDictionary.cs#L371",
+      "Location": "Line 371 Position 95-123"
+    },
+    {
+      "Id": "S1944",
+      "Message": "Review this cast; in this project there\u0027s no type that implements both \u0027ORDictionary\u003CTKey, PNCounter\u003E.IDeltaOperation\u0027 and \u0027ORDictionary.IDeltaOperation\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/PNCounterDictionary.cs#L276",
+      "Location": "Line 276 Position 92-120"
+    }
+  ]
 }

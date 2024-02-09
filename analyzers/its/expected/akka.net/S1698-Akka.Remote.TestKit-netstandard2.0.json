@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1698",
-"message":  "Consider using 'Equals' if value comparison was intended.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L523",
-"region":  {
-"startLine":  523,
-"startColumn":  138,
-"endLine":  523,
-"endColumn":  140
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1698",
+      "Message": "Consider using \u0027Equals\u0027 if value comparison was intended.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L523",
+      "Location": "Line 523 Position 138-140"
+    }
+  ]
 }

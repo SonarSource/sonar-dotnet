@@ -1,173 +1,82 @@
 {
-"issues":  [
-{
-"id":  "S2347",
-"message":  "Rename event handler 'Cancel_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L278",
-"region":  {
-"startLine":  278,
-"startColumn":  17,
-"endLine":  278,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S2347",
-"message":  "Rename event handler 'OK_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L585",
-"region":  {
-"startLine":  585,
-"startColumn":  17,
-"endLine":  585,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2347",
-"message":  "Rename event handler 'Cancel_Button_Click_1' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgPleaseWait.vb#L25",
-"region":  {
-"startLine":  25,
-"startColumn":  17,
-"endLine":  25,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S2347",
-"message":  "Rename event handler 'Cancel_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgSearchResults.vb#L142",
-"region":  {
-"startLine":  142,
-"startColumn":  17,
-"endLine":  142,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S2347",
-"message":  "Rename event handler 'dlgIMDBSearchResults_GotFocus' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgSearchResults.vb#L174",
-"region":  {
-"startLine":  174,
-"startColumn":  17,
-"endLine":  174,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S2347",
-"message":  "Rename event handler 'dlgIMDBSearchResults_Shown' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgSearchResults.vb#L195",
-"region":  {
-"startLine":  195,
-"startColumn":  17,
-"endLine":  195,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S2347",
-"message":  "Rename event handler 'OK_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgSearchResults.vb#L200",
-"region":  {
-"startLine":  200,
-"startColumn":  17,
-"endLine":  200,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2347",
-"message":  "Rename event handler 'Cancel_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgTrailer.vb#L246",
-"region":  {
-"startLine":  246,
-"startColumn":  17,
-"endLine":  246,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S2347",
-"message":  "Rename event handler 'OK_Button_Click' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgTrailer.vb#L277",
-"region":  {
-"startLine":  277,
-"startColumn":  17,
-"endLine":  277,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2347",
-"message":  "Rename event handler 'frmXMLSettingsHolder_Load' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/frmXMLMediaSettingsHolder.vb#L36",
-"region":  {
-"startLine":  36,
-"startColumn":  17,
-"endLine":  36,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S2347",
-"message":  "Rename event handler 'frmXMLSettingsHolder_Load' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/frmXMLSettingsHolder.vb#L55",
-"region":  {
-"startLine":  55,
-"startColumn":  17,
-"endLine":  55,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S2347",
-"message":  "Rename event handler 'chkMPAA_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/frmXMLSettingsHolder.vb#L154",
-"region":  {
-"startLine":  154,
-"startColumn":  17,
-"endLine":  154,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S2347",
-"message":  "Rename event handler 'XMLScraperSettingClick' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L753",
-"region":  {
-"startLine":  753,
-"startColumn":  9,
-"endLine":  753,
-"endColumn":  31
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2347",
+      "Message": "Rename event handler \u0027Cancel_Button_Click\u0027 to match the regular expression: \u0027^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L278",
+      "Location": "Line 278 Position 17-36"
+    },
+    {
+      "Id": "S2347",
+      "Message": "Rename event handler \u0027OK_Button_Click\u0027 to match the regular expression: \u0027^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L585",
+      "Location": "Line 585 Position 17-32"
+    },
+    {
+      "Id": "S2347",
+      "Message": "Rename event handler \u0027Cancel_Button_Click_1\u0027 to match the regular expression: \u0027^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgPleaseWait.vb#L25",
+      "Location": "Line 25 Position 17-38"
+    },
+    {
+      "Id": "S2347",
+      "Message": "Rename event handler \u0027Cancel_Button_Click\u0027 to match the regular expression: \u0027^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgSearchResults.vb#L142",
+      "Location": "Line 142 Position 17-36"
+    },
+    {
+      "Id": "S2347",
+      "Message": "Rename event handler \u0027dlgIMDBSearchResults_GotFocus\u0027 to match the regular expression: \u0027^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgSearchResults.vb#L174",
+      "Location": "Line 174 Position 17-46"
+    },
+    {
+      "Id": "S2347",
+      "Message": "Rename event handler \u0027dlgIMDBSearchResults_Shown\u0027 to match the regular expression: \u0027^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgSearchResults.vb#L195",
+      "Location": "Line 195 Position 17-43"
+    },
+    {
+      "Id": "S2347",
+      "Message": "Rename event handler \u0027OK_Button_Click\u0027 to match the regular expression: \u0027^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgSearchResults.vb#L200",
+      "Location": "Line 200 Position 17-32"
+    },
+    {
+      "Id": "S2347",
+      "Message": "Rename event handler \u0027Cancel_Button_Click\u0027 to match the regular expression: \u0027^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgTrailer.vb#L246",
+      "Location": "Line 246 Position 17-36"
+    },
+    {
+      "Id": "S2347",
+      "Message": "Rename event handler \u0027OK_Button_Click\u0027 to match the regular expression: \u0027^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgTrailer.vb#L277",
+      "Location": "Line 277 Position 17-32"
+    },
+    {
+      "Id": "S2347",
+      "Message": "Rename event handler \u0027frmXMLSettingsHolder_Load\u0027 to match the regular expression: \u0027^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/frmXMLMediaSettingsHolder.vb#L36",
+      "Location": "Line 36 Position 17-42"
+    },
+    {
+      "Id": "S2347",
+      "Message": "Rename event handler \u0027chkMPAA_CheckedChanged\u0027 to match the regular expression: \u0027^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/frmXMLSettingsHolder.vb#L154",
+      "Location": "Line 154 Position 17-39"
+    },
+    {
+      "Id": "S2347",
+      "Message": "Rename event handler \u0027frmXMLSettingsHolder_Load\u0027 to match the regular expression: \u0027^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/frmXMLSettingsHolder.vb#L55",
+      "Location": "Line 55 Position 17-42"
+    },
+    {
+      "Id": "S2347",
+      "Message": "Rename event handler \u0027XMLScraperSettingClick\u0027 to match the regular expression: \u0027^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L753",
+      "Location": "Line 753 Position 9-31"
+    }
+  ]
 }

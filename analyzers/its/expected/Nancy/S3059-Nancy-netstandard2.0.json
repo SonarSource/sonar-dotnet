@@ -1,226 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsModuleBuilder.cs#L7",
-"region":  {
-"startLine":  7,
-"startColumn":  20,
-"endLine":  7,
-"endColumn":  44
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsModuleBuilder.cs#L14",
-"region":  {
-"startLine":  14,
-"startColumn":  9,
-"endLine":  14,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsModuleCatalog.cs#L13",
-"region":  {
-"startLine":  13,
-"startColumn":  20,
-"endLine":  13,
-"endColumn":  44
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsModuleCatalog.cs#L17",
-"region":  {
-"startLine":  17,
-"startColumn":  9,
-"endLine":  17,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsSerializerFactory.cs#L7",
-"region":  {
-"startLine":  7,
-"startColumn":  20,
-"endLine":  7,
-"endColumn":  48
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsSerializerFactory.cs#L11",
-"region":  {
-"startLine":  11,
-"startColumn":  9,
-"endLine":  11,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L34",
-"region":  {
-"startLine":  34,
-"startColumn":  27,
-"endLine":  34,
-"endColumn":  42
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L36",
-"region":  {
-"startLine":  36,
-"startColumn":  9,
-"endLine":  36,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L53",
-"region":  {
-"startLine":  53,
-"startColumn":  9,
-"endLine":  53,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L66",
-"region":  {
-"startLine":  66,
-"startColumn":  9,
-"endLine":  66,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L86",
-"region":  {
-"startLine":  86,
-"startColumn":  9,
-"endLine":  86,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L120",
-"region":  {
-"startLine":  120,
-"startColumn":  9,
-"endLine":  120,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L138",
-"region":  {
-"startLine":  138,
-"startColumn":  9,
-"endLine":  138,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L163",
-"region":  {
-"startLine":  163,
-"startColumn":  9,
-"endLine":  163,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L185",
-"region":  {
-"startLine":  185,
-"startColumn":  9,
-"endLine":  185,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L213",
-"region":  {
-"startLine":  213,
-"startColumn":  9,
-"endLine":  213,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L239",
-"region":  {
-"startLine":  239,
-"startColumn":  9,
-"endLine":  239,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L255",
-"region":  {
-"startLine":  255,
-"startColumn":  9,
-"endLine":  255,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L281",
-"region":  {
-"startLine":  281,
-"startColumn":  9,
-"endLine":  281,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L303",
-"region":  {
-"startLine":  303,
-"startColumn":  9,
-"endLine":  303,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L323",
-"region":  {
-"startLine":  323,
-"startColumn":  9,
-"endLine":  323,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L336",
-"region":  {
-"startLine":  336,
-"startColumn":  9,
-"endLine":  336,
-"endColumn":  15
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsModuleBuilder.cs#L7",
+      "Location": "Line 7 Position 20-44"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsModuleCatalog.cs#L13",
+      "Location": "Line 13 Position 20-44"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsSerializerFactory.cs#L7",
+      "Location": "Line 7 Position 20-48"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L34",
+      "Location": "Line 34 Position 27-42"
+    }
+  ]
 }

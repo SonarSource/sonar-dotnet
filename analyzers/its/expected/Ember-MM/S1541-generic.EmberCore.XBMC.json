@@ -1,56 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this procedure is 14 which is greater than 10 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L22",
-"region":  {
-"startLine":  22,
-"startColumn":  5,
-"endLine":  22,
-"endColumn":  116
-}
-}
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this procedure is 12 which is greater than 10 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L110",
-"region":  {
-"startLine":  110,
-"startColumn":  5,
-"endLine":  110,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this procedure is 20 which is greater than 10 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L155",
-"region":  {
-"startLine":  155,
-"startColumn":  2,
-"endLine":  155,
-"endColumn":  140
-}
-}
-},
-{
-"id":  "S1541",
-"message":  "The Cyclomatic Complexity of this function is 13 which is greater than 10 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L581",
-"region":  {
-"startLine":  581,
-"startColumn":  9,
-"endLine":  581,
-"endColumn":  52
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 12 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L110",
+      "Location": "Line 110 Position 5-26"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 14 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L22",
+      "Location": "Line 22 Position 5-116"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this procedure is 20 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L155",
+      "Location": "Line 155 Position 2-140"
+    },
+    {
+      "Id": "S1541",
+      "Message": "The Cyclomatic Complexity of this function is 13 which is greater than 10 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L581",
+      "Location": "Line 581 Position 9-52"
+    }
+  ]
 }

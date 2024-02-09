@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2360",
-"message":  "Use the overloading mechanism instead of the optional parameters.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Basic/BasicAuthenticationConfiguration.cs#L16",
-"region":  {
-"startLine":  16,
-"startColumn":  133,
-"endLine":  16,
-"endColumn":  162
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2360",
+      "Message": "Use the overloading mechanism instead of the optional parameters.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Basic/BasicAuthenticationConfiguration.cs#L16",
+      "Location": "Line 16 Position 133-162"
+    }
+  ]
 }

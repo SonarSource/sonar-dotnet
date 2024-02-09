@@ -1,368 +1,172 @@
 {
-"issues":  [
-{
-"id":  "S139",
-"message":  "Move this trailing comment on the previous empty line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L515",
-"region":  {
-"startLine":  515,
-"startColumn":  41,
-"endLine":  515,
-"endColumn":  86
-}
-}
-},
-{
-"id":  "S139",
-"message":  "Move this trailing comment on the previous empty line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L516",
-"region":  {
-"startLine":  516,
-"startColumn":  41,
-"endLine":  516,
-"endColumn":  101
-}
-}
-},
-{
-"id":  "S139",
-"message":  "Move this trailing comment on the previous empty line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L517",
-"region":  {
-"startLine":  517,
-"startColumn":  41,
-"endLine":  517,
-"endColumn":  102
-}
-}
-},
-{
-"id":  "S139",
-"message":  "Move this trailing comment on the previous empty line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L521",
-"region":  {
-"startLine":  521,
-"startColumn":  36,
-"endLine":  521,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S139",
-"message":  "Move this trailing comment on the previous empty line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L523",
-"region":  {
-"startLine":  523,
-"startColumn":  41,
-"endLine":  523,
-"endColumn":  92
-}
-}
-},
-{
-"id":  "S139",
-"message":  "Move this trailing comment on the previous empty line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L524",
-"region":  {
-"startLine":  524,
-"startColumn":  41,
-"endLine":  524,
-"endColumn":  92
-}
-}
-},
-{
-"id":  "S139",
-"message":  "Move this trailing comment on the previous empty line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L525",
-"region":  {
-"startLine":  525,
-"startColumn":  41,
-"endLine":  525,
-"endColumn":  89
-}
-}
-},
-{
-"id":  "S139",
-"message":  "Move this trailing comment on the previous empty line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L577",
-"region":  {
-"startLine":  577,
-"startColumn":  19,
-"endLine":  577,
-"endColumn":  21
-}
-}
-},
-{
-"id":  "S139",
-"message":  "Move this trailing comment on the previous empty line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L357",
-"region":  {
-"startLine":  357,
-"startColumn":  85,
-"endLine":  357,
-"endColumn":  138
-}
-}
-},
-{
-"id":  "S139",
-"message":  "Move this trailing comment on the previous empty line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L749",
-"region":  {
-"startLine":  749,
-"startColumn":  71,
-"endLine":  749,
-"endColumn":  87
-}
-}
-},
-{
-"id":  "S139",
-"message":  "Move this trailing comment on the previous empty line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L921",
-"region":  {
-"startLine":  921,
-"startColumn":  70,
-"endLine":  921,
-"endColumn":  86
-}
-}
-},
-{
-"id":  "S139",
-"message":  "Move this trailing comment on the previous empty line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L254",
-"region":  {
-"startLine":  254,
-"startColumn":  96,
-"endLine":  254,
-"endColumn":  127
-}
-}
-},
-{
-"id":  "S139",
-"message":  "Move this trailing comment on the previous empty line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L154",
-"region":  {
-"startLine":  154,
-"startColumn":  38,
-"endLine":  154,
-"endColumn":  82
-}
-}
-},
-{
-"id":  "S139",
-"message":  "Move this trailing comment on the previous empty line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L964",
-"region":  {
-"startLine":  964,
-"startColumn":  40,
-"endLine":  964,
-"endColumn":  102
-}
-}
-},
-{
-"id":  "S139",
-"message":  "Move this trailing comment on the previous empty line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImageUtils.vb#L83",
-"region":  {
-"startLine":  83,
-"startColumn":  47,
-"endLine":  83,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S139",
-"message":  "Move this trailing comment on the previous empty line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImageUtils.vb#L138",
-"region":  {
-"startLine":  138,
-"startColumn":  47,
-"endLine":  138,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S139",
-"message":  "Move this trailing comment on the previous empty line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILocalization.vb#L215",
-"region":  {
-"startLine":  215,
-"startColumn":  52,
-"endLine":  215,
-"endColumn":  97
-}
-}
-},
-{
-"id":  "S139",
-"message":  "Move this trailing comment on the previous empty line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILog.vb#L41",
-"region":  {
-"startLine":  41,
-"startColumn":  28,
-"endLine":  41,
-"endColumn":  67
-}
-}
-},
-{
-"id":  "S139",
-"message":  "Move this trailing comment on the previous empty line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L342",
-"region":  {
-"startLine":  342,
-"startColumn":  46,
-"endLine":  342,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S139",
-"message":  "Move this trailing comment on the previous empty line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L344",
-"region":  {
-"startLine":  344,
-"startColumn":  47,
-"endLine":  344,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S139",
-"message":  "Move this trailing comment on the previous empty line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L354",
-"region":  {
-"startLine":  354,
-"startColumn":  36,
-"endLine":  354,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S139",
-"message":  "Move this trailing comment on the previous empty line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L242",
-"region":  {
-"startLine":  242,
-"startColumn":  120,
-"endLine":  242,
-"endColumn":  174
-}
-}
-},
-{
-"id":  "S139",
-"message":  "Move this trailing comment on the previous empty line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L247",
-"region":  {
-"startLine":  247,
-"startColumn":  124,
-"endLine":  247,
-"endColumn":  181
-}
-}
-},
-{
-"id":  "S139",
-"message":  "Move this trailing comment on the previous empty line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L781",
-"region":  {
-"startLine":  781,
-"startColumn":  39,
-"endLine":  781,
-"endColumn":  83
-}
-}
-},
-{
-"id":  "S139",
-"message":  "Move this trailing comment on the previous empty line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L655",
-"region":  {
-"startLine":  655,
-"startColumn":  21,
-"endLine":  655,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S139",
-"message":  "Move this trailing comment on the previous empty line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPISettings.vb#L3593",
-"region":  {
-"startLine":  3593,
-"startColumn":  66,
-"endLine":  3593,
-"endColumn":  206
-}
-}
-},
-{
-"id":  "S139",
-"message":  "Move this trailing comment on the previous empty line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPISettings.vb#L3623",
-"region":  {
-"startLine":  3623,
-"startColumn":  70,
-"endLine":  3623,
-"endColumn":  210
-}
-}
-},
-{
-"id":  "S139",
-"message":  "Move this trailing comment on the previous empty line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPISettings.vb#L3652",
-"region":  {
-"startLine":  3652,
-"startColumn":  68,
-"endLine":  3652,
-"endColumn":  208
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S139",
+      "Message": "Move this trailing comment on the previous empty line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L515",
+      "Location": "Line 515 Position 41-86"
+    },
+    {
+      "Id": "S139",
+      "Message": "Move this trailing comment on the previous empty line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L516",
+      "Location": "Line 516 Position 41-101"
+    },
+    {
+      "Id": "S139",
+      "Message": "Move this trailing comment on the previous empty line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L517",
+      "Location": "Line 517 Position 41-102"
+    },
+    {
+      "Id": "S139",
+      "Message": "Move this trailing comment on the previous empty line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L521",
+      "Location": "Line 521 Position 36-62"
+    },
+    {
+      "Id": "S139",
+      "Message": "Move this trailing comment on the previous empty line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L523",
+      "Location": "Line 523 Position 41-92"
+    },
+    {
+      "Id": "S139",
+      "Message": "Move this trailing comment on the previous empty line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L524",
+      "Location": "Line 524 Position 41-92"
+    },
+    {
+      "Id": "S139",
+      "Message": "Move this trailing comment on the previous empty line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L525",
+      "Location": "Line 525 Position 41-89"
+    },
+    {
+      "Id": "S139",
+      "Message": "Move this trailing comment on the previous empty line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L577",
+      "Location": "Line 577 Position 19-21"
+    },
+    {
+      "Id": "S139",
+      "Message": "Move this trailing comment on the previous empty line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L357",
+      "Location": "Line 357 Position 85-138"
+    },
+    {
+      "Id": "S139",
+      "Message": "Move this trailing comment on the previous empty line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L749",
+      "Location": "Line 749 Position 71-87"
+    },
+    {
+      "Id": "S139",
+      "Message": "Move this trailing comment on the previous empty line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L921",
+      "Location": "Line 921 Position 70-86"
+    },
+    {
+      "Id": "S139",
+      "Message": "Move this trailing comment on the previous empty line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L254",
+      "Location": "Line 254 Position 96-127"
+    },
+    {
+      "Id": "S139",
+      "Message": "Move this trailing comment on the previous empty line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L154",
+      "Location": "Line 154 Position 38-82"
+    },
+    {
+      "Id": "S139",
+      "Message": "Move this trailing comment on the previous empty line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L964",
+      "Location": "Line 964 Position 40-102"
+    },
+    {
+      "Id": "S139",
+      "Message": "Move this trailing comment on the previous empty line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImageUtils.vb#L138",
+      "Location": "Line 138 Position 47-66"
+    },
+    {
+      "Id": "S139",
+      "Message": "Move this trailing comment on the previous empty line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImageUtils.vb#L83",
+      "Location": "Line 83 Position 47-66"
+    },
+    {
+      "Id": "S139",
+      "Message": "Move this trailing comment on the previous empty line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILocalization.vb#L215",
+      "Location": "Line 215 Position 52-97"
+    },
+    {
+      "Id": "S139",
+      "Message": "Move this trailing comment on the previous empty line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILog.vb#L41",
+      "Location": "Line 41 Position 28-67"
+    },
+    {
+      "Id": "S139",
+      "Message": "Move this trailing comment on the previous empty line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L342",
+      "Location": "Line 342 Position 46-59"
+    },
+    {
+      "Id": "S139",
+      "Message": "Move this trailing comment on the previous empty line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L344",
+      "Location": "Line 344 Position 47-63"
+    },
+    {
+      "Id": "S139",
+      "Message": "Move this trailing comment on the previous empty line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L354",
+      "Location": "Line 354 Position 36-49"
+    },
+    {
+      "Id": "S139",
+      "Message": "Move this trailing comment on the previous empty line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L242",
+      "Location": "Line 242 Position 120-174"
+    },
+    {
+      "Id": "S139",
+      "Message": "Move this trailing comment on the previous empty line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L247",
+      "Location": "Line 247 Position 124-181"
+    },
+    {
+      "Id": "S139",
+      "Message": "Move this trailing comment on the previous empty line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L781",
+      "Location": "Line 781 Position 39-83"
+    },
+    {
+      "Id": "S139",
+      "Message": "Move this trailing comment on the previous empty line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L655",
+      "Location": "Line 655 Position 21-38"
+    },
+    {
+      "Id": "S139",
+      "Message": "Move this trailing comment on the previous empty line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPISettings.vb#L3593",
+      "Location": "Line 3593 Position 66-206"
+    },
+    {
+      "Id": "S139",
+      "Message": "Move this trailing comment on the previous empty line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPISettings.vb#L3623",
+      "Location": "Line 3623 Position 70-210"
+    },
+    {
+      "Id": "S139",
+      "Message": "Move this trailing comment on the previous empty line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPISettings.vb#L3652",
+      "Location": "Line 3652 Position 68-208"
+    }
+  ]
 }

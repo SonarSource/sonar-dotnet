@@ -1,124 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'Self downed, stopping ClusterSingletonManager' 5 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L935",
-"region":  {
-"startLine":  935,
-"startColumn":  30,
-"endLine":  935,
-"endColumn":  77
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L1004",
-"region":  {
-"startLine":  1004,
-"startColumn":  30,
-"endLine":  1004,
-"endColumn":  77
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L1171",
-"region":  {
-"startLine":  1171,
-"startColumn":  30,
-"endLine":  1171,
-"endColumn":  77
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L1210",
-"region":  {
-"startLine":  1210,
-"startColumn":  34,
-"endLine":  1210,
-"endColumn":  81
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L1301",
-"region":  {
-"startLine":  1301,
-"startColumn":  34,
-"endLine":  1301,
-"endColumn":  81
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'Self removed, stopping ClusterSingletonManager' 7 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L842",
-"region":  {
-"startLine":  842,
-"startColumn":  26,
-"endLine":  842,
-"endColumn":  74
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L942",
-"region":  {
-"startLine":  942,
-"startColumn":  34,
-"endLine":  942,
-"endColumn":  82
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L1011",
-"region":  {
-"startLine":  1011,
-"startColumn":  34,
-"endLine":  1011,
-"endColumn":  82
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L1271",
-"region":  {
-"startLine":  1271,
-"startColumn":  34,
-"endLine":  1271,
-"endColumn":  82
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L1359",
-"region":  {
-"startLine":  1359,
-"startColumn":  30,
-"endLine":  1359,
-"endColumn":  78
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L1385",
-"region":  {
-"startLine":  1385,
-"startColumn":  34,
-"endLine":  1385,
-"endColumn":  82
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L1483",
-"region":  {
-"startLine":  1483,
-"startColumn":  34,
-"endLine":  1483,
-"endColumn":  82
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S1192",
+      "Message": "Define a constant instead of using this literal \u0027Self removed, stopping ClusterSingletonManager\u0027 7 times.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L842",
+      "Location": "Line 842 Position 26-74"
+    },
+    {
+      "Id": "S1192",
+      "Message": "Define a constant instead of using this literal \u0027Self downed, stopping ClusterSingletonManager\u0027 5 times.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L935",
+      "Location": "Line 935 Position 30-77"
+    }
+  ]
 }

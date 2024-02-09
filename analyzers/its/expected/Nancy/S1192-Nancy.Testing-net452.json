@@ -1,55 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'accept' 5 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L184",
-"region":  {
-"startLine":  184,
-"startColumn":  51,
-"endLine":  184,
-"endColumn":  59
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L186",
-"region":  {
-"startLine":  186,
-"startColumn":  43,
-"endLine":  186,
-"endColumn":  51
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L188",
-"region":  {
-"startLine":  188,
-"startColumn":  47,
-"endLine":  188,
-"endColumn":  55
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L190",
-"region":  {
-"startLine":  190,
-"startColumn":  54,
-"endLine":  190,
-"endColumn":  62
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L198",
-"region":  {
-"startLine":  198,
-"startColumn":  35,
-"endLine":  198,
-"endColumn":  43
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S1192",
+      "Message": "Define a constant instead of using this literal \u0027accept\u0027 5 times.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L184",
+      "Location": "Line 184 Position 51-59"
+    }
+  ]
 }

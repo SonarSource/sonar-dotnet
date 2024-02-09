@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S1144",
-"message":  "Remove the unused private field 'AckIdleTimerName'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1839",
-"region":  {
-"startLine":  1839,
-"startColumn":  9,
-"endLine":  1839,
-"endColumn":  64
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private method 'ResolveNameAsync'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransport.cs#L402",
-"region":  {
-"startLine":  402,
-"startColumn":  40,
-"endLine":  402,
-"endColumn":  56
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private field \u0027AckIdleTimerName\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1839",
+      "Location": "Line 1839 Position 9-64"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private method \u0027ResolveNameAsync\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransport.cs#L402",
+      "Location": "Line 402 Position 40-56"
+    }
+  ]
 }

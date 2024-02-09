@@ -1,1993 +1,922 @@
 {
-"issues":  [
-{
-"id":  "S103",
-"message":  "Split this 260 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L30",
-"region":  {
-"startLine":  30,
-"startColumn":  1,
-"endLine":  30,
-"endColumn":  261
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 264 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L138",
-"region":  {
-"startLine":  138,
-"startColumn":  1,
-"endLine":  138,
-"endColumn":  265
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 207 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L195",
-"region":  {
-"startLine":  195,
-"startColumn":  1,
-"endLine":  195,
-"endColumn":  208
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 257 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L225",
-"region":  {
-"startLine":  225,
-"startColumn":  1,
-"endLine":  225,
-"endColumn":  258
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 251 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L230",
-"region":  {
-"startLine":  230,
-"startColumn":  1,
-"endLine":  230,
-"endColumn":  252
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 274 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L231",
-"region":  {
-"startLine":  231,
-"startColumn":  1,
-"endLine":  231,
-"endColumn":  275
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 239 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L320",
-"region":  {
-"startLine":  320,
-"startColumn":  1,
-"endLine":  320,
-"endColumn":  240
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 208 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L355",
-"region":  {
-"startLine":  355,
-"startColumn":  1,
-"endLine":  355,
-"endColumn":  209
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 232 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L414",
-"region":  {
-"startLine":  414,
-"startColumn":  1,
-"endLine":  414,
-"endColumn":  233
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 211 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L483",
-"region":  {
-"startLine":  483,
-"startColumn":  1,
-"endLine":  483,
-"endColumn":  212
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 210 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L484",
-"region":  {
-"startLine":  484,
-"startColumn":  1,
-"endLine":  484,
-"endColumn":  211
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 208 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L635",
-"region":  {
-"startLine":  635,
-"startColumn":  1,
-"endLine":  635,
-"endColumn":  209
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 217 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L683",
-"region":  {
-"startLine":  683,
-"startColumn":  1,
-"endLine":  683,
-"endColumn":  218
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 207 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L684",
-"region":  {
-"startLine":  684,
-"startColumn":  1,
-"endLine":  684,
-"endColumn":  208
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 202 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L686",
-"region":  {
-"startLine":  686,
-"startColumn":  1,
-"endLine":  686,
-"endColumn":  203
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 201 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L693",
-"region":  {
-"startLine":  693,
-"startColumn":  1,
-"endLine":  693,
-"endColumn":  202
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 326 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L820",
-"region":  {
-"startLine":  820,
-"startColumn":  1,
-"endLine":  820,
-"endColumn":  327
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 215 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L848",
-"region":  {
-"startLine":  848,
-"startColumn":  1,
-"endLine":  848,
-"endColumn":  216
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 229 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L849",
-"region":  {
-"startLine":  849,
-"startColumn":  1,
-"endLine":  849,
-"endColumn":  230
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 379 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L870",
-"region":  {
-"startLine":  870,
-"startColumn":  1,
-"endLine":  870,
-"endColumn":  380
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 368 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L883",
-"region":  {
-"startLine":  883,
-"startColumn":  1,
-"endLine":  883,
-"endColumn":  369
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 368 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L898",
-"region":  {
-"startLine":  898,
-"startColumn":  1,
-"endLine":  898,
-"endColumn":  369
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 368 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L918",
-"region":  {
-"startLine":  918,
-"startColumn":  1,
-"endLine":  918,
-"endColumn":  369
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 243 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L156",
-"region":  {
-"startLine":  156,
-"startColumn":  1,
-"endLine":  156,
-"endColumn":  244
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 201 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L97",
-"region":  {
-"startLine":  97,
-"startColumn":  1,
-"endLine":  97,
-"endColumn":  202
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 201 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L107",
-"region":  {
-"startLine":  107,
-"startColumn":  1,
-"endLine":  107,
-"endColumn":  202
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 348 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgIMDBSearchResults.vb#L227",
-"region":  {
-"startLine":  227,
-"startColumn":  1,
-"endLine":  227,
-"endColumn":  349
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 230 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgIMDBSearchResults.vb#L287",
-"region":  {
-"startLine":  287,
-"startColumn":  1,
-"endLine":  287,
-"endColumn":  231
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 213 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgIMDBSearchResults.vb#L312",
-"region":  {
-"startLine":  312,
-"startColumn":  1,
-"endLine":  312,
-"endColumn":  214
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 213 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgIMDBSearchResults.vb#L328",
-"region":  {
-"startLine":  328,
-"startColumn":  1,
-"endLine":  328,
-"endColumn":  214
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 213 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgIMDBSearchResults.vb#L344",
-"region":  {
-"startLine":  344,
-"startColumn":  1,
-"endLine":  344,
-"endColumn":  214
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 202 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgIMDBSearchResults.vb#L474",
-"region":  {
-"startLine":  474,
-"startColumn":  1,
-"endLine":  474,
-"endColumn":  203
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 205 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L412",
-"region":  {
-"startLine":  412,
-"startColumn":  1,
-"endLine":  412,
-"endColumn":  206
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 217 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L601",
-"region":  {
-"startLine":  601,
-"startColumn":  1,
-"endLine":  601,
-"endColumn":  218
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 239 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1196",
-"region":  {
-"startLine":  1196,
-"startColumn":  1,
-"endLine":  1196,
-"endColumn":  240
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 235 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1204",
-"region":  {
-"startLine":  1204,
-"startColumn":  1,
-"endLine":  1204,
-"endColumn":  236
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 235 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1212",
-"region":  {
-"startLine":  1212,
-"startColumn":  1,
-"endLine":  1212,
-"endColumn":  236
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 235 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1220",
-"region":  {
-"startLine":  1220,
-"startColumn":  1,
-"endLine":  1220,
-"endColumn":  236
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 233 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1224",
-"region":  {
-"startLine":  1224,
-"startColumn":  1,
-"endLine":  1224,
-"endColumn":  234
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 233 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1228",
-"region":  {
-"startLine":  1228,
-"startColumn":  1,
-"endLine":  1228,
-"endColumn":  234
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 238 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgTrailer.vb#L98",
-"region":  {
-"startLine":  98,
-"startColumn":  1,
-"endLine":  98,
-"endColumn":  239
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 256 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgTrailer.vb#L196",
-"region":  {
-"startLine":  196,
-"startColumn":  1,
-"endLine":  196,
-"endColumn":  257
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 234 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgTrailer.vb#L223",
-"region":  {
-"startLine":  223,
-"startColumn":  1,
-"endLine":  223,
-"endColumn":  235
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 336 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L326",
-"region":  {
-"startLine":  326,
-"startColumn":  1,
-"endLine":  326,
-"endColumn":  337
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 205 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L336",
-"region":  {
-"startLine":  336,
-"startColumn":  1,
-"endLine":  336,
-"endColumn":  206
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 210 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L337",
-"region":  {
-"startLine":  337,
-"startColumn":  1,
-"endLine":  337,
-"endColumn":  211
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 358 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L359",
-"region":  {
-"startLine":  359,
-"startColumn":  1,
-"endLine":  359,
-"endColumn":  359
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 205 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L369",
-"region":  {
-"startLine":  369,
-"startColumn":  1,
-"endLine":  369,
-"endColumn":  206
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 209 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L370",
-"region":  {
-"startLine":  370,
-"startColumn":  1,
-"endLine":  370,
-"endColumn":  210
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 219 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L540",
-"region":  {
-"startLine":  540,
-"startColumn":  1,
-"endLine":  540,
-"endColumn":  220
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 234 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L560",
-"region":  {
-"startLine":  560,
-"startColumn":  1,
-"endLine":  560,
-"endColumn":  235
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 317 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L640",
-"region":  {
-"startLine":  640,
-"startColumn":  1,
-"endLine":  640,
-"endColumn":  318
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 235 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperTVNativeModule.vb#L112",
-"region":  {
-"startLine":  112,
-"startColumn":  1,
-"endLine":  112,
-"endColumn":  236
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 375 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperTVNativeModule.vb#L122",
-"region":  {
-"startLine":  122,
-"startColumn":  1,
-"endLine":  122,
-"endColumn":  376
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 382 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperTVNativeModule.vb#L127",
-"region":  {
-"startLine":  127,
-"startColumn":  1,
-"endLine":  127,
-"endColumn":  383
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 347 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperTVNativeModule.vb#L204",
-"region":  {
-"startLine":  204,
-"startColumn":  1,
-"endLine":  204,
-"endColumn":  348
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 350 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperTVNativeModule.vb#L209",
-"region":  {
-"startLine":  209,
-"startColumn":  1,
-"endLine":  209,
-"endColumn":  351
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 318 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperTVNativeModule.vb#L214",
-"region":  {
-"startLine":  214,
-"startColumn":  1,
-"endLine":  214,
-"endColumn":  319
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 271 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L93",
-"region":  {
-"startLine":  93,
-"startColumn":  1,
-"endLine":  93,
-"endColumn":  272
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 212 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L94",
-"region":  {
-"startLine":  94,
-"startColumn":  1,
-"endLine":  94,
-"endColumn":  213
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 284 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L97",
-"region":  {
-"startLine":  97,
-"startColumn":  1,
-"endLine":  97,
-"endColumn":  285
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 259 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L98",
-"region":  {
-"startLine":  98,
-"startColumn":  1,
-"endLine":  98,
-"endColumn":  260
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 258 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L113",
-"region":  {
-"startLine":  113,
-"startColumn":  1,
-"endLine":  113,
-"endColumn":  259
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 228 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L114",
-"region":  {
-"startLine":  114,
-"startColumn":  1,
-"endLine":  114,
-"endColumn":  229
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 230 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L117",
-"region":  {
-"startLine":  117,
-"startColumn":  1,
-"endLine":  117,
-"endColumn":  231
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 205 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L118",
-"region":  {
-"startLine":  118,
-"startColumn":  1,
-"endLine":  118,
-"endColumn":  206
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 272 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L121",
-"region":  {
-"startLine":  121,
-"startColumn":  1,
-"endLine":  121,
-"endColumn":  273
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 256 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L122",
-"region":  {
-"startLine":  122,
-"startColumn":  1,
-"endLine":  122,
-"endColumn":  257
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 220 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L231",
-"region":  {
-"startLine":  231,
-"startColumn":  1,
-"endLine":  231,
-"endColumn":  221
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 430 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L320",
-"region":  {
-"startLine":  320,
-"startColumn":  1,
-"endLine":  320,
-"endColumn":  431
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 403 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L343",
-"region":  {
-"startLine":  343,
-"startColumn":  1,
-"endLine":  343,
-"endColumn":  404
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 291 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L349",
-"region":  {
-"startLine":  349,
-"startColumn":  1,
-"endLine":  349,
-"endColumn":  292
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 285 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L355",
-"region":  {
-"startLine":  355,
-"startColumn":  1,
-"endLine":  355,
-"endColumn":  286
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 226 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L372",
-"region":  {
-"startLine":  372,
-"startColumn":  1,
-"endLine":  372,
-"endColumn":  227
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 230 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L373",
-"region":  {
-"startLine":  373,
-"startColumn":  1,
-"endLine":  373,
-"endColumn":  231
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 217 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L378",
-"region":  {
-"startLine":  378,
-"startColumn":  1,
-"endLine":  378,
-"endColumn":  218
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 250 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L379",
-"region":  {
-"startLine":  379,
-"startColumn":  1,
-"endLine":  379,
-"endColumn":  251
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 214 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L381",
-"region":  {
-"startLine":  381,
-"startColumn":  1,
-"endLine":  381,
-"endColumn":  215
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 376 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L382",
-"region":  {
-"startLine":  382,
-"startColumn":  1,
-"endLine":  382,
-"endColumn":  377
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 210 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L950",
-"region":  {
-"startLine":  950,
-"startColumn":  1,
-"endLine":  950,
-"endColumn":  211
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 209 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L967",
-"region":  {
-"startLine":  967,
-"startColumn":  1,
-"endLine":  967,
-"endColumn":  210
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 202 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L983",
-"region":  {
-"startLine":  983,
-"startColumn":  1,
-"endLine":  983,
-"endColumn":  203
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 276 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1009",
-"region":  {
-"startLine":  1009,
-"startColumn":  1,
-"endLine":  1009,
-"endColumn":  277
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 374 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1072",
-"region":  {
-"startLine":  1072,
-"startColumn":  1,
-"endLine":  1072,
-"endColumn":  375
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 244 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1092",
-"region":  {
-"startLine":  1092,
-"startColumn":  1,
-"endLine":  1092,
-"endColumn":  245
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 336 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1093",
-"region":  {
-"startLine":  1093,
-"startColumn":  1,
-"endLine":  1093,
-"endColumn":  337
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 308 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1094",
-"region":  {
-"startLine":  1094,
-"startColumn":  1,
-"endLine":  1094,
-"endColumn":  309
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 288 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1096",
-"region":  {
-"startLine":  1096,
-"startColumn":  1,
-"endLine":  1096,
-"endColumn":  289
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 241 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1098",
-"region":  {
-"startLine":  1098,
-"startColumn":  1,
-"endLine":  1098,
-"endColumn":  242
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 243 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1099",
-"region":  {
-"startLine":  1099,
-"startColumn":  1,
-"endLine":  1099,
-"endColumn":  244
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 445 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1125",
-"region":  {
-"startLine":  1125,
-"startColumn":  1,
-"endLine":  1125,
-"endColumn":  446
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 278 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1129",
-"region":  {
-"startLine":  1129,
-"startColumn":  1,
-"endLine":  1129,
-"endColumn":  279
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 490 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1135",
-"region":  {
-"startLine":  1135,
-"startColumn":  1,
-"endLine":  1135,
-"endColumn":  491
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 299 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1138",
-"region":  {
-"startLine":  1138,
-"startColumn":  1,
-"endLine":  1138,
-"endColumn":  300
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 362 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1140",
-"region":  {
-"startLine":  1140,
-"startColumn":  1,
-"endLine":  1140,
-"endColumn":  363
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 219 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1143",
-"region":  {
-"startLine":  1143,
-"startColumn":  1,
-"endLine":  1143,
-"endColumn":  220
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 256 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1153",
-"region":  {
-"startLine":  1153,
-"startColumn":  1,
-"endLine":  1153,
-"endColumn":  257
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 241 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1156",
-"region":  {
-"startLine":  1156,
-"startColumn":  1,
-"endLine":  1156,
-"endColumn":  242
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 264 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1157",
-"region":  {
-"startLine":  1157,
-"startColumn":  1,
-"endLine":  1157,
-"endColumn":  265
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 258 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1160",
-"region":  {
-"startLine":  1160,
-"startColumn":  1,
-"endLine":  1160,
-"endColumn":  259
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 247 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1162",
-"region":  {
-"startLine":  1162,
-"startColumn":  1,
-"endLine":  1162,
-"endColumn":  248
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 252 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1163",
-"region":  {
-"startLine":  1163,
-"startColumn":  1,
-"endLine":  1163,
-"endColumn":  253
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 235 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1167",
-"region":  {
-"startLine":  1167,
-"startColumn":  1,
-"endLine":  1167,
-"endColumn":  236
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 282 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1168",
-"region":  {
-"startLine":  1168,
-"startColumn":  1,
-"endLine":  1168,
-"endColumn":  283
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 245 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1169",
-"region":  {
-"startLine":  1169,
-"startColumn":  1,
-"endLine":  1169,
-"endColumn":  246
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 238 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1170",
-"region":  {
-"startLine":  1170,
-"startColumn":  1,
-"endLine":  1170,
-"endColumn":  239
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 263 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1171",
-"region":  {
-"startLine":  1171,
-"startColumn":  1,
-"endLine":  1171,
-"endColumn":  264
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 262 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1173",
-"region":  {
-"startLine":  1173,
-"startColumn":  1,
-"endLine":  1173,
-"endColumn":  263
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 415 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1174",
-"region":  {
-"startLine":  1174,
-"startColumn":  1,
-"endLine":  1174,
-"endColumn":  416
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 221 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1194",
-"region":  {
-"startLine":  1194,
-"startColumn":  1,
-"endLine":  1194,
-"endColumn":  222
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 316 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1200",
-"region":  {
-"startLine":  1200,
-"startColumn":  1,
-"endLine":  1200,
-"endColumn":  317
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 285 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1201",
-"region":  {
-"startLine":  1201,
-"startColumn":  1,
-"endLine":  1201,
-"endColumn":  286
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 326 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1202",
-"region":  {
-"startLine":  1202,
-"startColumn":  1,
-"endLine":  1202,
-"endColumn":  327
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 330 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1203",
-"region":  {
-"startLine":  1203,
-"startColumn":  1,
-"endLine":  1203,
-"endColumn":  331
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 226 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1204",
-"region":  {
-"startLine":  1204,
-"startColumn":  1,
-"endLine":  1204,
-"endColumn":  227
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 286 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1208",
-"region":  {
-"startLine":  1208,
-"startColumn":  1,
-"endLine":  1208,
-"endColumn":  287
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 328 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1209",
-"region":  {
-"startLine":  1209,
-"startColumn":  1,
-"endLine":  1209,
-"endColumn":  329
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 227 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1210",
-"region":  {
-"startLine":  1210,
-"startColumn":  1,
-"endLine":  1210,
-"endColumn":  228
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 228 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1214",
-"region":  {
-"startLine":  1214,
-"startColumn":  1,
-"endLine":  1214,
-"endColumn":  229
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 276 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1215",
-"region":  {
-"startLine":  1215,
-"startColumn":  1,
-"endLine":  1215,
-"endColumn":  277
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 336 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1216",
-"region":  {
-"startLine":  1216,
-"startColumn":  1,
-"endLine":  1216,
-"endColumn":  337
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 229 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1217",
-"region":  {
-"startLine":  1217,
-"startColumn":  1,
-"endLine":  1217,
-"endColumn":  230
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 270 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1221",
-"region":  {
-"startLine":  1221,
-"startColumn":  1,
-"endLine":  1221,
-"endColumn":  271
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 334 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1222",
-"region":  {
-"startLine":  1222,
-"startColumn":  1,
-"endLine":  1222,
-"endColumn":  335
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 227 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1223",
-"region":  {
-"startLine":  1223,
-"startColumn":  1,
-"endLine":  1223,
-"endColumn":  228
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 206 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L84",
-"region":  {
-"startLine":  84,
-"startColumn":  1,
-"endLine":  84,
-"endColumn":  207
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 236 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L72",
-"region":  {
-"startLine":  72,
-"startColumn":  1,
-"endLine":  72,
-"endColumn":  237
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 254 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L100",
-"region":  {
-"startLine":  100,
-"startColumn":  1,
-"endLine":  100,
-"endColumn":  255
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 201 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L106",
-"region":  {
-"startLine":  106,
-"startColumn":  1,
-"endLine":  106,
-"endColumn":  202
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 212 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L134",
-"region":  {
-"startLine":  134,
-"startColumn":  1,
-"endLine":  134,
-"endColumn":  213
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 242 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L135",
-"region":  {
-"startLine":  135,
-"startColumn":  1,
-"endLine":  135,
-"endColumn":  243
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 220 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L164",
-"region":  {
-"startLine":  164,
-"startColumn":  1,
-"endLine":  164,
-"endColumn":  221
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 236 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L166",
-"region":  {
-"startLine":  166,
-"startColumn":  1,
-"endLine":  166,
-"endColumn":  237
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 254 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L190",
-"region":  {
-"startLine":  190,
-"startColumn":  1,
-"endLine":  190,
-"endColumn":  255
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 201 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L192",
-"region":  {
-"startLine":  192,
-"startColumn":  1,
-"endLine":  192,
-"endColumn":  202
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 240 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L225",
-"region":  {
-"startLine":  225,
-"startColumn":  1,
-"endLine":  225,
-"endColumn":  241
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 213 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L226",
-"region":  {
-"startLine":  226,
-"startColumn":  1,
-"endLine":  226,
-"endColumn":  214
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 342 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L230",
-"region":  {
-"startLine":  230,
-"startColumn":  1,
-"endLine":  230,
-"endColumn":  343
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 238 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L711",
-"region":  {
-"startLine":  711,
-"startColumn":  1,
-"endLine":  711,
-"endColumn":  239
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 248 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L894",
-"region":  {
-"startLine":  894,
-"startColumn":  1,
-"endLine":  894,
-"endColumn":  249
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 392 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L895",
-"region":  {
-"startLine":  895,
-"startColumn":  1,
-"endLine":  895,
-"endColumn":  393
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 309 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L896",
-"region":  {
-"startLine":  896,
-"startColumn":  1,
-"endLine":  896,
-"endColumn":  310
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 205 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L903",
-"region":  {
-"startLine":  903,
-"startColumn":  1,
-"endLine":  903,
-"endColumn":  206
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 249 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L904",
-"region":  {
-"startLine":  904,
-"startColumn":  1,
-"endLine":  904,
-"endColumn":  250
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 223 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L913",
-"region":  {
-"startLine":  913,
-"startColumn":  1,
-"endLine":  913,
-"endColumn":  224
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 280 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1097",
-"region":  {
-"startLine":  1097,
-"startColumn":  1,
-"endLine":  1097,
-"endColumn":  281
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 304 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1103",
-"region":  {
-"startLine":  1103,
-"startColumn":  1,
-"endLine":  1103,
-"endColumn":  305
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 245 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1119",
-"region":  {
-"startLine":  1119,
-"startColumn":  1,
-"endLine":  1119,
-"endColumn":  246
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 211 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1126",
-"region":  {
-"startLine":  1126,
-"startColumn":  1,
-"endLine":  1126,
-"endColumn":  212
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 295 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1135",
-"region":  {
-"startLine":  1135,
-"startColumn":  1,
-"endLine":  1135,
-"endColumn":  296
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 289 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1141",
-"region":  {
-"startLine":  1141,
-"startColumn":  1,
-"endLine":  1141,
-"endColumn":  290
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 253 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1158",
-"region":  {
-"startLine":  1158,
-"startColumn":  1,
-"endLine":  1158,
-"endColumn":  254
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 238 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1173",
-"region":  {
-"startLine":  1173,
-"startColumn":  1,
-"endLine":  1173,
-"endColumn":  239
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S103",
+      "Message": "Split this 260 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L30",
+      "Location": "Line 30 Position 1-261"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 264 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L138",
+      "Location": "Line 138 Position 1-265"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 207 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L195",
+      "Location": "Line 195 Position 1-208"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 257 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L225",
+      "Location": "Line 225 Position 1-258"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 251 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L230",
+      "Location": "Line 230 Position 1-252"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 274 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L231",
+      "Location": "Line 231 Position 1-275"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 239 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L320",
+      "Location": "Line 320 Position 1-240"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 208 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L355",
+      "Location": "Line 355 Position 1-209"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 232 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L414",
+      "Location": "Line 414 Position 1-233"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 211 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L483",
+      "Location": "Line 483 Position 1-212"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 210 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L484",
+      "Location": "Line 484 Position 1-211"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 208 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L635",
+      "Location": "Line 635 Position 1-209"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 217 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L683",
+      "Location": "Line 683 Position 1-218"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 207 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L684",
+      "Location": "Line 684 Position 1-208"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 202 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L686",
+      "Location": "Line 686 Position 1-203"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 201 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L693",
+      "Location": "Line 693 Position 1-202"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 326 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L820",
+      "Location": "Line 820 Position 1-327"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 215 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L848",
+      "Location": "Line 848 Position 1-216"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 229 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L849",
+      "Location": "Line 849 Position 1-230"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 379 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L870",
+      "Location": "Line 870 Position 1-380"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 368 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L883",
+      "Location": "Line 883 Position 1-369"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 368 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L898",
+      "Location": "Line 898 Position 1-369"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 368 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L918",
+      "Location": "Line 918 Position 1-369"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 243 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L156",
+      "Location": "Line 156 Position 1-244"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 201 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L107",
+      "Location": "Line 107 Position 1-202"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 201 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L97",
+      "Location": "Line 97 Position 1-202"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 348 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgIMDBSearchResults.vb#L227",
+      "Location": "Line 227 Position 1-349"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 230 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgIMDBSearchResults.vb#L287",
+      "Location": "Line 287 Position 1-231"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 213 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgIMDBSearchResults.vb#L312",
+      "Location": "Line 312 Position 1-214"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 213 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgIMDBSearchResults.vb#L328",
+      "Location": "Line 328 Position 1-214"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 213 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgIMDBSearchResults.vb#L344",
+      "Location": "Line 344 Position 1-214"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 202 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgIMDBSearchResults.vb#L474",
+      "Location": "Line 474 Position 1-203"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 239 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1196",
+      "Location": "Line 1196 Position 1-240"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 235 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1204",
+      "Location": "Line 1204 Position 1-236"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 235 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1212",
+      "Location": "Line 1212 Position 1-236"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 235 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1220",
+      "Location": "Line 1220 Position 1-236"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 233 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1224",
+      "Location": "Line 1224 Position 1-234"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 233 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1228",
+      "Location": "Line 1228 Position 1-234"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 205 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L412",
+      "Location": "Line 412 Position 1-206"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 217 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L601",
+      "Location": "Line 601 Position 1-218"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 256 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgTrailer.vb#L196",
+      "Location": "Line 196 Position 1-257"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 234 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgTrailer.vb#L223",
+      "Location": "Line 223 Position 1-235"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 238 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgTrailer.vb#L98",
+      "Location": "Line 98 Position 1-239"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 336 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L326",
+      "Location": "Line 326 Position 1-337"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 205 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L336",
+      "Location": "Line 336 Position 1-206"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 210 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L337",
+      "Location": "Line 337 Position 1-211"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 358 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L359",
+      "Location": "Line 359 Position 1-359"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 205 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L369",
+      "Location": "Line 369 Position 1-206"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 209 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L370",
+      "Location": "Line 370 Position 1-210"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 219 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L540",
+      "Location": "Line 540 Position 1-220"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 234 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L560",
+      "Location": "Line 560 Position 1-235"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 317 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L640",
+      "Location": "Line 640 Position 1-318"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 235 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperTVNativeModule.vb#L112",
+      "Location": "Line 112 Position 1-236"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 375 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperTVNativeModule.vb#L122",
+      "Location": "Line 122 Position 1-376"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 382 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperTVNativeModule.vb#L127",
+      "Location": "Line 127 Position 1-383"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 347 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperTVNativeModule.vb#L204",
+      "Location": "Line 204 Position 1-348"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 350 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperTVNativeModule.vb#L209",
+      "Location": "Line 209 Position 1-351"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 318 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperTVNativeModule.vb#L214",
+      "Location": "Line 214 Position 1-319"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 276 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1009",
+      "Location": "Line 1009 Position 1-277"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 374 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1072",
+      "Location": "Line 1072 Position 1-375"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 244 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1092",
+      "Location": "Line 1092 Position 1-245"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 336 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1093",
+      "Location": "Line 1093 Position 1-337"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 308 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1094",
+      "Location": "Line 1094 Position 1-309"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 288 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1096",
+      "Location": "Line 1096 Position 1-289"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 241 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1098",
+      "Location": "Line 1098 Position 1-242"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 243 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1099",
+      "Location": "Line 1099 Position 1-244"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 445 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1125",
+      "Location": "Line 1125 Position 1-446"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 278 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1129",
+      "Location": "Line 1129 Position 1-279"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 258 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L113",
+      "Location": "Line 113 Position 1-259"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 490 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1135",
+      "Location": "Line 1135 Position 1-491"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 299 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1138",
+      "Location": "Line 1138 Position 1-300"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 228 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L114",
+      "Location": "Line 114 Position 1-229"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 362 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1140",
+      "Location": "Line 1140 Position 1-363"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 219 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1143",
+      "Location": "Line 1143 Position 1-220"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 256 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1153",
+      "Location": "Line 1153 Position 1-257"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 241 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1156",
+      "Location": "Line 1156 Position 1-242"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 264 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1157",
+      "Location": "Line 1157 Position 1-265"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 258 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1160",
+      "Location": "Line 1160 Position 1-259"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 247 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1162",
+      "Location": "Line 1162 Position 1-248"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 252 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1163",
+      "Location": "Line 1163 Position 1-253"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 235 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1167",
+      "Location": "Line 1167 Position 1-236"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 282 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1168",
+      "Location": "Line 1168 Position 1-283"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 245 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1169",
+      "Location": "Line 1169 Position 1-246"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 230 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L117",
+      "Location": "Line 117 Position 1-231"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 238 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1170",
+      "Location": "Line 1170 Position 1-239"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 263 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1171",
+      "Location": "Line 1171 Position 1-264"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 262 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1173",
+      "Location": "Line 1173 Position 1-263"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 415 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1174",
+      "Location": "Line 1174 Position 1-416"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 205 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L118",
+      "Location": "Line 118 Position 1-206"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 221 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1194",
+      "Location": "Line 1194 Position 1-222"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 316 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1200",
+      "Location": "Line 1200 Position 1-317"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 285 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1201",
+      "Location": "Line 1201 Position 1-286"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 326 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1202",
+      "Location": "Line 1202 Position 1-327"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 330 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1203",
+      "Location": "Line 1203 Position 1-331"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 226 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1204",
+      "Location": "Line 1204 Position 1-227"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 286 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1208",
+      "Location": "Line 1208 Position 1-287"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 328 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1209",
+      "Location": "Line 1209 Position 1-329"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 272 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L121",
+      "Location": "Line 121 Position 1-273"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 227 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1210",
+      "Location": "Line 1210 Position 1-228"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 228 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1214",
+      "Location": "Line 1214 Position 1-229"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 276 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1215",
+      "Location": "Line 1215 Position 1-277"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 336 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1216",
+      "Location": "Line 1216 Position 1-337"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 229 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1217",
+      "Location": "Line 1217 Position 1-230"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 256 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L122",
+      "Location": "Line 122 Position 1-257"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 270 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1221",
+      "Location": "Line 1221 Position 1-271"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 334 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1222",
+      "Location": "Line 1222 Position 1-335"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 227 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1223",
+      "Location": "Line 1223 Position 1-228"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 220 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L231",
+      "Location": "Line 231 Position 1-221"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 430 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L320",
+      "Location": "Line 320 Position 1-431"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 403 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L343",
+      "Location": "Line 343 Position 1-404"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 291 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L349",
+      "Location": "Line 349 Position 1-292"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 285 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L355",
+      "Location": "Line 355 Position 1-286"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 226 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L372",
+      "Location": "Line 372 Position 1-227"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 230 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L373",
+      "Location": "Line 373 Position 1-231"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 217 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L378",
+      "Location": "Line 378 Position 1-218"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 250 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L379",
+      "Location": "Line 379 Position 1-251"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 214 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L381",
+      "Location": "Line 381 Position 1-215"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 376 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L382",
+      "Location": "Line 382 Position 1-377"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 271 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L93",
+      "Location": "Line 93 Position 1-272"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 212 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L94",
+      "Location": "Line 94 Position 1-213"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 210 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L950",
+      "Location": "Line 950 Position 1-211"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 209 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L967",
+      "Location": "Line 967 Position 1-210"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 284 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L97",
+      "Location": "Line 97 Position 1-285"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 259 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L98",
+      "Location": "Line 98 Position 1-260"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 202 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L983",
+      "Location": "Line 983 Position 1-203"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 206 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L84",
+      "Location": "Line 84 Position 1-207"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 254 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L100",
+      "Location": "Line 100 Position 1-255"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 201 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L106",
+      "Location": "Line 106 Position 1-202"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 280 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1097",
+      "Location": "Line 1097 Position 1-281"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 304 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1103",
+      "Location": "Line 1103 Position 1-305"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 245 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1119",
+      "Location": "Line 1119 Position 1-246"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 211 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1126",
+      "Location": "Line 1126 Position 1-212"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 295 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1135",
+      "Location": "Line 1135 Position 1-296"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 289 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1141",
+      "Location": "Line 1141 Position 1-290"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 253 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1158",
+      "Location": "Line 1158 Position 1-254"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 238 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1173",
+      "Location": "Line 1173 Position 1-239"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 212 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L134",
+      "Location": "Line 134 Position 1-213"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 242 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L135",
+      "Location": "Line 135 Position 1-243"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 220 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L164",
+      "Location": "Line 164 Position 1-221"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 236 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L166",
+      "Location": "Line 166 Position 1-237"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 254 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L190",
+      "Location": "Line 190 Position 1-255"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 201 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L192",
+      "Location": "Line 192 Position 1-202"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 240 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L225",
+      "Location": "Line 225 Position 1-241"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 213 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L226",
+      "Location": "Line 226 Position 1-214"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 342 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L230",
+      "Location": "Line 230 Position 1-343"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 238 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L711",
+      "Location": "Line 711 Position 1-239"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 236 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L72",
+      "Location": "Line 72 Position 1-237"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 248 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L894",
+      "Location": "Line 894 Position 1-249"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 392 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L895",
+      "Location": "Line 895 Position 1-393"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 309 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L896",
+      "Location": "Line 896 Position 1-310"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 205 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L903",
+      "Location": "Line 903 Position 1-206"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 249 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L904",
+      "Location": "Line 904 Position 1-250"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 223 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L913",
+      "Location": "Line 913 Position 1-224"
+    }
+  ]
 }

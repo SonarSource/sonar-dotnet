@@ -1,56 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S1227",
-"message":  "Refactor the code in order to remove this break statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/Conventions/Mappers.cs#L31",
-"region":  {
-"startLine":  31,
-"startColumn":  21,
-"endLine":  31,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S1227",
-"message":  "Refactor the code in order to remove this break statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/Conventions/MemberConfiguration.cs#L142",
-"region":  {
-"startLine":  142,
-"startColumn":  25,
-"endLine":  142,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S1227",
-"message":  "Refactor the code in order to remove this break statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L193",
-"region":  {
-"startLine":  193,
-"startColumn":  21,
-"endLine":  193,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S1227",
-"message":  "Refactor the code in order to remove this break statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L213",
-"region":  {
-"startLine":  213,
-"startColumn":  21,
-"endLine":  213,
-"endColumn":  27
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1227",
+      "Message": "Refactor the code in order to remove this break statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/Conventions/Mappers.cs#L31",
+      "Location": "Line 31 Position 21-27"
+    },
+    {
+      "Id": "S1227",
+      "Message": "Refactor the code in order to remove this break statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/Conventions/MemberConfiguration.cs#L142",
+      "Location": "Line 142 Position 25-31"
+    },
+    {
+      "Id": "S1227",
+      "Message": "Refactor the code in order to remove this break statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L193",
+      "Location": "Line 193 Position 21-27"
+    },
+    {
+      "Id": "S1227",
+      "Message": "Refactor the code in order to remove this break statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L213",
+      "Location": "Line 213 Position 21-27"
+    }
+  ]
 }

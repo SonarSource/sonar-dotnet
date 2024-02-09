@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S3358",
-"message":  "Extract this nested ternary operation into an independent statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/Models/ResultSummary.cs#L52-L54",
-"region":  {
-"startLine":  52,
-"startColumn":  19,
-"endLine":  54,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S3358",
-"message":  "Extract this nested ternary operation into an independent statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/TrxSinkActor.cs#L222-L224",
-"region":  {
-"startLine":  222,
-"startColumn":  19,
-"endLine":  224,
-"endColumn":  47
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3358",
+      "Message": "Extract this nested ternary operation into an independent statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/Models/ResultSummary.cs#L52-L54",
+      "Location": "Lines 52-54 Position 19-41"
+    },
+    {
+      "Id": "S3358",
+      "Message": "Extract this nested ternary operation into an independent statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/TrxSinkActor.cs#L222-L224",
+      "Location": "Lines 222-224 Position 19-47"
+    }
+  ]
 }

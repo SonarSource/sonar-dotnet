@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1186",
-"message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L489",
-"region":  {
-"startLine":  489,
-"startColumn":  33,
-"endLine":  489,
-"endColumn":  43
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1186",
+      "Message": "Add a nested comment explaining why this method is empty, throw a \u0027NotSupportedException\u0027 or complete the implementation.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L489",
+      "Location": "Line 489 Position 33-43"
+    }
+  ]
 }

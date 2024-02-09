@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S2292",
-"message":  "Make this an auto-implemented property and remove its backing field.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L259",
-"region":  {
-"startLine":  259,
-"startColumn":  25,
-"endLine":  259,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2292",
-"message":  "Make this an auto-implemented property and remove its backing field.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L271",
-"region":  {
-"startLine":  271,
-"startColumn":  24,
-"endLine":  271,
-"endColumn":  29
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2292",
+      "Message": "Make this an auto-implemented property and remove its backing field.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L259",
+      "Location": "Line 259 Position 25-32"
+    },
+    {
+      "Id": "S2292",
+      "Message": "Make this an auto-implemented property and remove its backing field.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L271",
+      "Location": "Line 271 Position 24-29"
+    }
+  ]
 }

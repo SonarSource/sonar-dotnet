@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S4586",
-"message":  "Do not return null from this method, instead return 'Task.FromResult<T>(null)', 'Task.CompletedTask' or 'Task.Delay(0)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L240",
-"region":  {
-"startLine":  240,
-"startColumn":  67,
-"endLine":  240,
-"endColumn":  71
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4586",
+      "Message": "Do not return null from this method, instead return \u0027Task.FromResult\u003CT\u003E(null)\u0027, \u0027Task.CompletedTask\u0027 or \u0027Task.Delay(0)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L240",
+      "Location": "Line 240 Position 67-71"
+    }
+  ]
 }

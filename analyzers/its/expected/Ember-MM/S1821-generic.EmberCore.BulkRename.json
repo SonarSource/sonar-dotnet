@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1821",
-"message":  "Refactor the code to eliminate this nested 'Select Case'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/Module.BulkRenamer.vb#L108",
-"region":  {
-"startLine":  108,
-"startColumn":  21,
-"endLine":  108,
-"endColumn":  59
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1821",
+      "Message": "Refactor the code to eliminate this nested \u0027Select Case\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/Module.BulkRenamer.vb#L108",
+      "Location": "Line 108 Position 21-59"
+    }
+  ]
 }

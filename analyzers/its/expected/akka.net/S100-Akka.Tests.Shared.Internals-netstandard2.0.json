@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S100",
-"message":  "Rename method 'intercept' to match pascal case naming rules, consider using 'Intercept'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L172",
-"region":  {
-"startLine":  172,
-"startColumn":  24,
-"endLine":  172,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S100",
-"message":  "Rename method 'expectMsgPF' to match pascal case naming rules, consider using 'ExpectMsgPf'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L178",
-"region":  {
-"startLine":  178,
-"startColumn":  21,
-"endLine":  178,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S100",
-"message":  "Rename method 'expectMsgPF' to match pascal case naming rules, consider using 'ExpectMsgPf'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L184",
-"region":  {
-"startLine":  184,
-"startColumn":  21,
-"endLine":  184,
-"endColumn":  32
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S100",
+      "Message": "Rename method \u0027intercept\u0027 to match pascal case naming rules, consider using \u0027Intercept\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L172",
+      "Location": "Line 172 Position 24-33"
+    },
+    {
+      "Id": "S100",
+      "Message": "Rename method \u0027expectMsgPF\u0027 to match pascal case naming rules, consider using \u0027ExpectMsgPf\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L178",
+      "Location": "Line 178 Position 21-32"
+    },
+    {
+      "Id": "S100",
+      "Message": "Rename method \u0027expectMsgPF\u0027 to match pascal case naming rules, consider using \u0027ExpectMsgPf\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L184",
+      "Location": "Line 184 Position 21-32"
+    }
+  ]
 }

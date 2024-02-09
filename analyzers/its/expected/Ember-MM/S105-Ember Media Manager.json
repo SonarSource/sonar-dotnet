@@ -1,69 +1,34 @@
 {
-"issues":  [
-{
-"id":  "S105",
-"message":  "Replace all tab characters in this file by sequences of white-spaces.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L560",
-"region":  {
-"startLine":  560,
-"startColumn":  1,
-"endLine":  560,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S105",
-"message":  "Replace all tab characters in this file by sequences of white-spaces.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4048",
-"region":  {
-"startLine":  4048,
-"startColumn":  1,
-"endLine":  4048,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S105",
-"message":  "Replace all tab characters in this file by sequences of white-spaces.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgWizard.vb#L29",
-"region":  {
-"startLine":  29,
-"startColumn":  1,
-"endLine":  29,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S105",
-"message":  "Replace all tab characters in this file by sequences of white-spaces.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4229",
-"region":  {
-"startLine":  4229,
-"startColumn":  1,
-"endLine":  4229,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S105",
-"message":  "Replace all tab characters in this file by sequences of white-spaces.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmSplash.vb#L42",
-"region":  {
-"startLine":  42,
-"startColumn":  1,
-"endLine":  42,
-"endColumn":  1
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S105",
+      "Message": "Replace all tab characters in this file by sequences of white-spaces.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L560",
+      "Location": "Line 560 Position 1-1"
+    },
+    {
+      "Id": "S105",
+      "Message": "Replace all tab characters in this file by sequences of white-spaces.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4048",
+      "Location": "Line 4048 Position 1-1"
+    },
+    {
+      "Id": "S105",
+      "Message": "Replace all tab characters in this file by sequences of white-spaces.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgWizard.vb#L29",
+      "Location": "Line 29 Position 1-1"
+    },
+    {
+      "Id": "S105",
+      "Message": "Replace all tab characters in this file by sequences of white-spaces.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4229",
+      "Location": "Line 4229 Position 1-1"
+    },
+    {
+      "Id": "S105",
+      "Message": "Replace all tab characters in this file by sequences of white-spaces.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmSplash.vb#L42",
+      "Location": "Line 42 Position 1-1"
+    }
+  ]
 }

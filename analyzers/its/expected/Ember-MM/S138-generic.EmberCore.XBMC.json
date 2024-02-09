@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S138",
-"message":  "This method 'bwRunUpdate_DoWork' has 97 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L155",
-"region":  {
-"startLine":  155,
-"startColumn":  14,
-"endLine":  155,
-"endColumn":  32
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S138",
+      "Message": "This method \u0027bwRunUpdate_DoWork\u0027 has 97 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L155",
+      "Location": "Line 155 Position 14-32"
+    }
+  ]
 }

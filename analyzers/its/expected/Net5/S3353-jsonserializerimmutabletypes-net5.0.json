@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3353",
-"message":  "Add the 'const' modifier to 'json', and replace 'var' with 'string'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/JsonSerializerImmutableTypes/Program.cs#L5",
-"region":  {
-"startLine":  5,
-"startColumn":  5,
-"endLine":  5,
-"endColumn":  9
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3353",
+      "Message": "Add the \u0027const\u0027 modifier to \u0027json\u0027, and replace \u0027var\u0027 with \u0027string\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/JsonSerializerImmutableTypes/Program.cs#L5",
+      "Location": "Line 5 Position 5-9"
+    }
+  ]
 }

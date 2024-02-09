@@ -1,52 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S4059",
-"message":  "Change either the name of property 'Constructors' or the name of method 'GetConstructors' to make them distinguishable.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Internal/TypeDetails.cs#L108",
-"region":  {
-"startLine":  108,
-"startColumn":  40,
-"endLine":  108,
-"endColumn":  52
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Internal/TypeDetails.cs#L28",
-"region":  {
-"startLine":  28,
-"startColumn":  58,
-"endLine":  28,
-"endColumn":  73
-}
-}
-]
-},
-{
-"id":  "S4059",
-"message":  "Change either the name of property 'MemberPath' or the name of method 'GetMemberPath' to make them distinguishable.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/Extensions.cs#L124",
-"region":  {
-"startLine":  124,
-"startColumn":  48,
-"endLine":  124,
-"endColumn":  58
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/Extensions.cs#L113",
-"region":  {
-"startLine":  113,
-"startColumn":  36,
-"endLine":  113,
-"endColumn":  49
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S4059",
+      "Message": "Change either the name of property \u0027Constructors\u0027 or the name of method \u0027GetConstructors\u0027 to make them distinguishable.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Internal/TypeDetails.cs#L108",
+      "Location": "Line 108 Position 40-52"
+    },
+    {
+      "Id": "S4059",
+      "Message": "Change either the name of property \u0027MemberPath\u0027 or the name of method \u0027GetMemberPath\u0027 to make them distinguishable.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/Extensions.cs#L124",
+      "Location": "Line 124 Position 48-58"
+    }
+  ]
 }

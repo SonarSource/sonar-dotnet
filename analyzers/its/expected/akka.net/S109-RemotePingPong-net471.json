@@ -1,147 +1,70 @@
 {
-"issues":  [
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L97",
-"region":  {
-"startLine":  97,
-"startColumn":  90,
-"endLine":  97,
-"endColumn":  91
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L98",
-"region":  {
-"startLine":  98,
-"startColumn":  91,
-"endLine":  98,
-"endColumn":  92
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '5' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L132",
-"region":  {
-"startLine":  132,
-"startColumn":  26,
-"endLine":  132,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '10' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L133",
-"region":  {
-"startLine":  133,
-"startColumn":  26,
-"endLine":  133,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '15' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L134",
-"region":  {
-"startLine":  134,
-"startColumn":  26,
-"endLine":  134,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '20' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L135",
-"region":  {
-"startLine":  135,
-"startColumn":  26,
-"endLine":  135,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '25' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L136",
-"region":  {
-"startLine":  136,
-"startColumn":  26,
-"endLine":  136,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '30' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L137",
-"region":  {
-"startLine":  137,
-"startColumn":  26,
-"endLine":  137,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L142",
-"region":  {
-"startLine":  142,
-"startColumn":  56,
-"endLine":  142,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '50' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L194",
-"region":  {
-"startLine":  194,
-"startColumn":  37,
-"endLine":  194,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '3' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L221",
-"region":  {
-"startLine":  221,
-"startColumn":  33,
-"endLine":  221,
-"endColumn":  34
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L132",
+      "Location": "Line 132 Position 26-27"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002710\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L133",
+      "Location": "Line 133 Position 26-28"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002715\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L134",
+      "Location": "Line 134 Position 26-28"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002720\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L135",
+      "Location": "Line 135 Position 26-28"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002725\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L136",
+      "Location": "Line 136 Position 26-28"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002730\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L137",
+      "Location": "Line 137 Position 26-28"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L142",
+      "Location": "Line 142 Position 56-57"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002750\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L194",
+      "Location": "Line 194 Position 37-39"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L221",
+      "Location": "Line 221 Position 33-34"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L97",
+      "Location": "Line 97 Position 90-91"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L98",
+      "Location": "Line 98 Position 91-92"
+    }
+  ]
 }

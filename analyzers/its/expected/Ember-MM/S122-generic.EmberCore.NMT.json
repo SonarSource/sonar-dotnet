@@ -1,849 +1,394 @@
 {
-"issues":  [
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L169",
-"region":  {
-"startLine":  169,
-"startColumn":  17,
-"endLine":  169,
-"endColumn":  84
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L170",
-"region":  {
-"startLine":  170,
-"startColumn":  17,
-"endLine":  170,
-"endColumn":  65
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L171",
-"region":  {
-"startLine":  171,
-"startColumn":  17,
-"endLine":  171,
-"endColumn":  77
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L230",
-"region":  {
-"startLine":  230,
-"startColumn":  17,
-"endLine":  230,
-"endColumn":  164
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L246",
-"region":  {
-"startLine":  246,
-"startColumn":  17,
-"endLine":  246,
-"endColumn":  107
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L331",
-"region":  {
-"startLine":  331,
-"startColumn":  17,
-"endLine":  331,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L393",
-"region":  {
-"startLine":  393,
-"startColumn":  13,
-"endLine":  393,
-"endColumn":  112
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L394",
-"region":  {
-"startLine":  394,
-"startColumn":  13,
-"endLine":  394,
-"endColumn":  118
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L395",
-"region":  {
-"startLine":  395,
-"startColumn":  13,
-"endLine":  395,
-"endColumn":  106
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L407",
-"region":  {
-"startLine":  407,
-"startColumn":  17,
-"endLine":  407,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L454",
-"region":  {
-"startLine":  454,
-"startColumn":  25,
-"endLine":  454,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L522",
-"region":  {
-"startLine":  522,
-"startColumn":  13,
-"endLine":  522,
-"endColumn":  89
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L534",
-"region":  {
-"startLine":  534,
-"startColumn":  13,
-"endLine":  534,
-"endColumn":  52
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L584",
-"region":  {
-"startLine":  584,
-"startColumn":  17,
-"endLine":  584,
-"endColumn":  89
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L588",
-"region":  {
-"startLine":  588,
-"startColumn":  17,
-"endLine":  588,
-"endColumn":  83
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L661",
-"region":  {
-"startLine":  661,
-"startColumn":  17,
-"endLine":  661,
-"endColumn":  85
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L821",
-"region":  {
-"startLine":  821,
-"startColumn":  21,
-"endLine":  821,
-"endColumn":  126
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L822",
-"region":  {
-"startLine":  822,
-"startColumn":  21,
-"endLine":  822,
-"endColumn":  129
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L823",
-"region":  {
-"startLine":  823,
-"startColumn":  21,
-"endLine":  823,
-"endColumn":  126
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L824",
-"region":  {
-"startLine":  824,
-"startColumn":  21,
-"endLine":  824,
-"endColumn":  135
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L825",
-"region":  {
-"startLine":  825,
-"startColumn":  21,
-"endLine":  825,
-"endColumn":  135
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L826",
-"region":  {
-"startLine":  826,
-"startColumn":  21,
-"endLine":  826,
-"endColumn":  153
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L827",
-"region":  {
-"startLine":  827,
-"startColumn":  21,
-"endLine":  827,
-"endColumn":  135
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L828",
-"region":  {
-"startLine":  828,
-"startColumn":  21,
-"endLine":  828,
-"endColumn":  147
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L840",
-"region":  {
-"startLine":  840,
-"startColumn":  21,
-"endLine":  840,
-"endColumn":  135
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L841",
-"region":  {
-"startLine":  841,
-"startColumn":  21,
-"endLine":  841,
-"endColumn":  147
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L842",
-"region":  {
-"startLine":  842,
-"startColumn":  21,
-"endLine":  842,
-"endColumn":  126
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L843",
-"region":  {
-"startLine":  843,
-"startColumn":  21,
-"endLine":  843,
-"endColumn":  133
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L854",
-"region":  {
-"startLine":  854,
-"startColumn":  21,
-"endLine":  854,
-"endColumn":  136
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L855",
-"region":  {
-"startLine":  855,
-"startColumn":  21,
-"endLine":  855,
-"endColumn":  148
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L856",
-"region":  {
-"startLine":  856,
-"startColumn":  21,
-"endLine":  856,
-"endColumn":  128
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L857",
-"region":  {
-"startLine":  857,
-"startColumn":  21,
-"endLine":  857,
-"endColumn":  128
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L963",
-"region":  {
-"startLine":  963,
-"startColumn":  17,
-"endLine":  963,
-"endColumn":  56
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L988",
-"region":  {
-"startLine":  988,
-"startColumn":  13,
-"endLine":  988,
-"endColumn":  73
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1017",
-"region":  {
-"startLine":  1017,
-"startColumn":  13,
-"endLine":  1017,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1028",
-"region":  {
-"startLine":  1028,
-"startColumn":  17,
-"endLine":  1028,
-"endColumn":  102
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1107",
-"region":  {
-"startLine":  1107,
-"startColumn":  17,
-"endLine":  1107,
-"endColumn":  102
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1186",
-"region":  {
-"startLine":  1186,
-"startColumn":  17,
-"endLine":  1186,
-"endColumn":  102
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1364",
-"region":  {
-"startLine":  1364,
-"startColumn":  9,
-"endLine":  1364,
-"endColumn":  171
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1365",
-"region":  {
-"startLine":  1365,
-"startColumn":  9,
-"endLine":  1365,
-"endColumn":  82
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1430",
-"region":  {
-"startLine":  1430,
-"startColumn":  9,
-"endLine":  1430,
-"endColumn":  64
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1438",
-"region":  {
-"startLine":  1438,
-"startColumn":  13,
-"endLine":  1438,
-"endColumn":  75
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1439",
-"region":  {
-"startLine":  1439,
-"startColumn":  13,
-"endLine":  1439,
-"endColumn":  68
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1469",
-"region":  {
-"startLine":  1469,
-"startColumn":  21,
-"endLine":  1469,
-"endColumn":  67
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1474",
-"region":  {
-"startLine":  1474,
-"startColumn":  21,
-"endLine":  1474,
-"endColumn":  131
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1475",
-"region":  {
-"startLine":  1475,
-"startColumn":  21,
-"endLine":  1475,
-"endColumn":  134
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1477",
-"region":  {
-"startLine":  1477,
-"startColumn":  21,
-"endLine":  1477,
-"endColumn":  67
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1485",
-"region":  {
-"startLine":  1485,
-"startColumn":  17,
-"endLine":  1485,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1490",
-"region":  {
-"startLine":  1490,
-"startColumn":  17,
-"endLine":  1490,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1495",
-"region":  {
-"startLine":  1495,
-"startColumn":  17,
-"endLine":  1495,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1530",
-"region":  {
-"startLine":  1530,
-"startColumn":  25,
-"endLine":  1530,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1535",
-"region":  {
-"startLine":  1535,
-"startColumn":  25,
-"endLine":  1535,
-"endColumn":  135
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1536",
-"region":  {
-"startLine":  1536,
-"startColumn":  25,
-"endLine":  1536,
-"endColumn":  138
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1538",
-"region":  {
-"startLine":  1538,
-"startColumn":  25,
-"endLine":  1538,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1548",
-"region":  {
-"startLine":  1548,
-"startColumn":  17,
-"endLine":  1548,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1553",
-"region":  {
-"startLine":  1553,
-"startColumn":  17,
-"endLine":  1553,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1558",
-"region":  {
-"startLine":  1558,
-"startColumn":  17,
-"endLine":  1558,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1630",
-"region":  {
-"startLine":  1630,
-"startColumn":  29,
-"endLine":  1630,
-"endColumn":  85
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1631",
-"region":  {
-"startLine":  1631,
-"startColumn":  29,
-"endLine":  1631,
-"endColumn":  92
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L186",
-"region":  {
-"startLine":  186,
-"startColumn":  25,
-"endLine":  186,
-"endColumn":  129
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L257",
-"region":  {
-"startLine":  257,
-"startColumn":  21,
-"endLine":  257,
-"endColumn":  81
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L64",
-"region":  {
-"startLine":  64,
-"startColumn":  13,
-"endLine":  64,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L111",
-"region":  {
-"startLine":  111,
-"startColumn":  9,
-"endLine":  111,
-"endColumn":  72
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L125",
-"region":  {
-"startLine":  125,
-"startColumn":  9,
-"endLine":  125,
-"endColumn":  69
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L259",
-"region":  {
-"startLine":  259,
-"startColumn":  17,
-"endLine":  259,
-"endColumn":  65
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1017",
+      "Location": "Line 1017 Position 13-48"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1028",
+      "Location": "Line 1028 Position 17-102"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1107",
+      "Location": "Line 1107 Position 17-102"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1186",
+      "Location": "Line 1186 Position 17-102"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1364",
+      "Location": "Line 1364 Position 9-171"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1365",
+      "Location": "Line 1365 Position 9-82"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1430",
+      "Location": "Line 1430 Position 9-64"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1438",
+      "Location": "Line 1438 Position 13-75"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1439",
+      "Location": "Line 1439 Position 13-68"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1469",
+      "Location": "Line 1469 Position 21-67"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1474",
+      "Location": "Line 1474 Position 21-131"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1475",
+      "Location": "Line 1475 Position 21-134"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1477",
+      "Location": "Line 1477 Position 21-67"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1485",
+      "Location": "Line 1485 Position 17-63"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1490",
+      "Location": "Line 1490 Position 17-63"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1495",
+      "Location": "Line 1495 Position 17-63"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1530",
+      "Location": "Line 1530 Position 25-71"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1535",
+      "Location": "Line 1535 Position 25-135"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1536",
+      "Location": "Line 1536 Position 25-138"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1538",
+      "Location": "Line 1538 Position 25-71"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1548",
+      "Location": "Line 1548 Position 17-63"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1553",
+      "Location": "Line 1553 Position 17-63"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1558",
+      "Location": "Line 1558 Position 17-63"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1630",
+      "Location": "Line 1630 Position 29-85"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1631",
+      "Location": "Line 1631 Position 29-92"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L169",
+      "Location": "Line 169 Position 17-84"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L170",
+      "Location": "Line 170 Position 17-65"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L171",
+      "Location": "Line 171 Position 17-77"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L230",
+      "Location": "Line 230 Position 17-164"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L246",
+      "Location": "Line 246 Position 17-107"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L331",
+      "Location": "Line 331 Position 17-63"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L393",
+      "Location": "Line 393 Position 13-112"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L394",
+      "Location": "Line 394 Position 13-118"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L395",
+      "Location": "Line 395 Position 13-106"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L407",
+      "Location": "Line 407 Position 17-63"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L454",
+      "Location": "Line 454 Position 25-71"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L522",
+      "Location": "Line 522 Position 13-89"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L534",
+      "Location": "Line 534 Position 13-52"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L584",
+      "Location": "Line 584 Position 17-89"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L588",
+      "Location": "Line 588 Position 17-83"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L661",
+      "Location": "Line 661 Position 17-85"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L821",
+      "Location": "Line 821 Position 21-126"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L822",
+      "Location": "Line 822 Position 21-129"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L823",
+      "Location": "Line 823 Position 21-126"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L824",
+      "Location": "Line 824 Position 21-135"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L825",
+      "Location": "Line 825 Position 21-135"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L826",
+      "Location": "Line 826 Position 21-153"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L827",
+      "Location": "Line 827 Position 21-135"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L828",
+      "Location": "Line 828 Position 21-147"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L840",
+      "Location": "Line 840 Position 21-135"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L841",
+      "Location": "Line 841 Position 21-147"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L842",
+      "Location": "Line 842 Position 21-126"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L843",
+      "Location": "Line 843 Position 21-133"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L854",
+      "Location": "Line 854 Position 21-136"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L855",
+      "Location": "Line 855 Position 21-148"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L856",
+      "Location": "Line 856 Position 21-128"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L857",
+      "Location": "Line 857 Position 21-128"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L963",
+      "Location": "Line 963 Position 17-56"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L988",
+      "Location": "Line 988 Position 13-73"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L186",
+      "Location": "Line 186 Position 25-129"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L257",
+      "Location": "Line 257 Position 21-81"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L111",
+      "Location": "Line 111 Position 9-72"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L125",
+      "Location": "Line 125 Position 9-69"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L259",
+      "Location": "Line 259 Position 17-65"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L64",
+      "Location": "Line 64 Position 13-44"
+    }
+  ]
 }

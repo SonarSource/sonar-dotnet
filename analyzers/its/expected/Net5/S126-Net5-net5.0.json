@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1862.cs#L8",
-"region":  {
-"startLine":  8,
-"startColumn":  13,
-"endLine":  8,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1862.cs#L11",
-"region":  {
-"startLine":  11,
-"startColumn":  13,
-"endLine":  11,
-"endColumn":  20
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1862.cs#L11",
+      "Location": "Line 11 Position 13-20"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1862.cs#L8",
+      "Location": "Line 8 Position 13-20"
+    }
+  ]
 }

@@ -1,64 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'remote' 6 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteActorRefProvider.cs#L143",
-"region":  {
-"startLine":  143,
-"startColumn":  64,
-"endLine":  143,
-"endColumn":  72
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteActorRefProvider.cs#L144",
-"region":  {
-"startLine":  144,
-"startColumn":  38,
-"endLine":  144,
-"endColumn":  46
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteActorRefProvider.cs#L366",
-"region":  {
-"startLine":  366,
-"startColumn":  49,
-"endLine":  366,
-"endColumn":  57
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteActorRefProvider.cs#L405",
-"region":  {
-"startLine":  405,
-"startColumn":  60,
-"endLine":  405,
-"endColumn":  68
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteActorRefProvider.cs#L432",
-"region":  {
-"startLine":  432,
-"startColumn":  33,
-"endLine":  432,
-"endColumn":  41
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteActorRefProvider.cs#L608",
-"region":  {
-"startLine":  608,
-"startColumn":  92,
-"endLine":  608,
-"endColumn":  100
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S1192",
+      "Message": "Define a constant instead of using this literal \u0027remote\u0027 6 times.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteActorRefProvider.cs#L143",
+      "Location": "Line 143 Position 64-72"
+    }
+  ]
 }

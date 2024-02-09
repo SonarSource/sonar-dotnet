@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/AllEventsPublisher.cs#L56",
-"region":  {
-"startLine":  56,
-"startColumn":  95,
-"endLine":  56,
-"endColumn":  96
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/EventsByPersistenceIdPublisher.cs#L63",
-"region":  {
-"startLine":  63,
-"startColumn":  95,
-"endLine":  63,
-"endColumn":  96
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/EventsByTagPublisher.cs#L60",
-"region":  {
-"startLine":  60,
-"startColumn":  95,
-"endLine":  60,
-"endColumn":  96
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/AllEventsPublisher.cs#L56",
+      "Location": "Line 56 Position 95-96"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/EventsByPersistenceIdPublisher.cs#L63",
+      "Location": "Line 63 Position 95-96"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/EventsByTagPublisher.cs#L60",
+      "Location": "Line 60 Position 95-96"
+    }
+  ]
 }

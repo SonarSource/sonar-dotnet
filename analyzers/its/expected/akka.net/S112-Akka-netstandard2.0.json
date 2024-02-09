@@ -1,95 +1,46 @@
 {
-"issues":  [
-{
-"id":  "S112",
-"message":  "'System.Exception' should not be thrown by user code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconParser.cs#L142",
-"region":  {
-"startLine":  142,
-"startColumn":  23,
-"endLine":  142,
-"endColumn":  88
-}
-}
-},
-{
-"id":  "S112",
-"message":  "'System.Exception' should not be thrown by user code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Dns.cs#L133",
-"region":  {
-"startLine":  133,
-"startColumn":  46,
-"endLine":  133,
-"endColumn":  75
-}
-}
-},
-{
-"id":  "S112",
-"message":  "'System.Exception' should not be thrown by user code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/IPExtensions.cs#L48",
-"region":  {
-"startLine":  48,
-"startColumn":  23,
-"endLine":  48,
-"endColumn":  69
-}
-}
-},
-{
-"id":  "S112",
-"message":  "'System.Exception' should not be thrown by user code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/IPExtensions.cs#L54",
-"region":  {
-"startLine":  54,
-"startColumn":  23,
-"endLine":  54,
-"endColumn":  98
-}
-}
-},
-{
-"id":  "S112",
-"message":  "'System.Exception' should not be thrown by user code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/IPExtensions.cs#L75",
-"region":  {
-"startLine":  75,
-"startColumn":  23,
-"endLine":  75,
-"endColumn":  98
-}
-}
-},
-{
-"id":  "S112",
-"message":  "'System.IndexOutOfRangeException' should not be thrown by user code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ByteString.cs#L243",
-"region":  {
-"startLine":  243,
-"startColumn":  44,
-"endLine":  243,
-"endColumn":  134
-}
-}
-},
-{
-"id":  "S112",
-"message":  "'System.IndexOutOfRangeException' should not be thrown by user code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ByteString.cs#L349",
-"region":  {
-"startLine":  349,
-"startColumn":  19,
-"endLine":  349,
-"endColumn":  125
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S112",
+      "Message": "\u0027System.Exception\u0027 should not be thrown by user code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconParser.cs#L142",
+      "Location": "Line 142 Position 23-88"
+    },
+    {
+      "Id": "S112",
+      "Message": "\u0027System.Exception\u0027 should not be thrown by user code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Dns.cs#L133",
+      "Location": "Line 133 Position 46-75"
+    },
+    {
+      "Id": "S112",
+      "Message": "\u0027System.Exception\u0027 should not be thrown by user code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/IPExtensions.cs#L48",
+      "Location": "Line 48 Position 23-69"
+    },
+    {
+      "Id": "S112",
+      "Message": "\u0027System.Exception\u0027 should not be thrown by user code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/IPExtensions.cs#L54",
+      "Location": "Line 54 Position 23-98"
+    },
+    {
+      "Id": "S112",
+      "Message": "\u0027System.Exception\u0027 should not be thrown by user code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/IPExtensions.cs#L75",
+      "Location": "Line 75 Position 23-98"
+    },
+    {
+      "Id": "S112",
+      "Message": "\u0027System.IndexOutOfRangeException\u0027 should not be thrown by user code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ByteString.cs#L243",
+      "Location": "Line 243 Position 44-134"
+    },
+    {
+      "Id": "S112",
+      "Message": "\u0027System.IndexOutOfRangeException\u0027 should not be thrown by user code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ByteString.cs#L349",
+      "Location": "Line 349 Position 19-125"
+    }
+  ]
 }

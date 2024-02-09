@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1210",
-"message":  "When implementing IComparable<T> or IComparable, you should also override ==, !=, <, <=, >, and >=.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Flag.cs#L19",
-"region":  {
-"startLine":  19,
-"startColumn":  25,
-"endLine":  19,
-"endColumn":  29
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1210",
+      "Message": "When implementing IComparable\u003CT\u003E or IComparable, you should also override ==, !=, \u003C, \u003C=, \u003E, and \u003E=.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Flag.cs#L19",
+      "Location": "Line 19 Position 25-29"
+    }
+  ]
 }

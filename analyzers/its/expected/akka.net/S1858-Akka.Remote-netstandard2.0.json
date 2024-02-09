@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1858",
-"message":  "There's no need to call 'ToString()' on a string.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Remoting.cs#L404",
-"region":  {
-"startLine":  404,
-"startColumn":  69,
-"endLine":  404,
-"endColumn":  80
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1858",
+      "Message": "There\u0027s no need to call \u0027ToString()\u0027 on a string.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Remoting.cs#L404",
+      "Location": "Line 404 Position 69-80"
+    }
+  ]
 }

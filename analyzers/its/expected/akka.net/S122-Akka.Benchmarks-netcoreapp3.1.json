@@ -1,121 +1,58 @@
 {
-"issues":  [
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Utils/ConsistentHashBenchmarks.cs#L71",
-"region":  {
-"startLine":  71,
-"startColumn":  17,
-"endLine":  71,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Utils/ConsistentHashBenchmarks.cs#L72",
-"region":  {
-"startLine":  72,
-"startColumn":  17,
-"endLine":  72,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Utils/ConsistentHashBenchmarks.cs#L73",
-"region":  {
-"startLine":  73,
-"startColumn":  17,
-"endLine":  73,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Utils/ConsistentHashBenchmarks.cs#L74",
-"region":  {
-"startLine":  74,
-"startColumn":  17,
-"endLine":  74,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Utils/ConsistentHashBenchmarks.cs#L75",
-"region":  {
-"startLine":  75,
-"startColumn":  17,
-"endLine":  75,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Utils/ConsistentHashBenchmarks.cs#L76",
-"region":  {
-"startLine":  76,
-"startColumn":  17,
-"endLine":  76,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Utils/ConsistentHashBenchmarks.cs#L77",
-"region":  {
-"startLine":  77,
-"startColumn":  17,
-"endLine":  77,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Utils/ConsistentHashBenchmarks.cs#L78",
-"region":  {
-"startLine":  78,
-"startColumn":  17,
-"endLine":  78,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Utils/ConsistentHashBenchmarks.cs#L79",
-"region":  {
-"startLine":  79,
-"startColumn":  17,
-"endLine":  79,
-"endColumn":  48
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Utils/ConsistentHashBenchmarks.cs#L71",
+      "Location": "Line 71 Position 17-48"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Utils/ConsistentHashBenchmarks.cs#L72",
+      "Location": "Line 72 Position 17-47"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Utils/ConsistentHashBenchmarks.cs#L73",
+      "Location": "Line 73 Position 17-48"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Utils/ConsistentHashBenchmarks.cs#L74",
+      "Location": "Line 74 Position 17-48"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Utils/ConsistentHashBenchmarks.cs#L75",
+      "Location": "Line 75 Position 17-48"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Utils/ConsistentHashBenchmarks.cs#L76",
+      "Location": "Line 76 Position 17-47"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Utils/ConsistentHashBenchmarks.cs#L77",
+      "Location": "Line 77 Position 17-47"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Utils/ConsistentHashBenchmarks.cs#L78",
+      "Location": "Line 78 Position 17-48"
+    },
+    {
+      "Id": "S122",
+      "Message": "Reformat the code to have only one statement per line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Utils/ConsistentHashBenchmarks.cs#L79",
+      "Location": "Line 79 Position 17-48"
+    }
+  ]
 }

@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S5332",
-"message":  "Using http protocol is insecure. Use https instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/Models/XmlHelper.cs#L16",
-"region":  {
-"startLine":  16,
-"startColumn":  48,
-"endLine":  16,
-"endColumn":  106
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S5332",
+      "Message": "Using http protocol is insecure. Use https instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/Models/XmlHelper.cs#L16",
+      "Location": "Line 16 Position 48-106"
+    }
+  ]
 }

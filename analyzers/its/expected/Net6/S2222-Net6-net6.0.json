@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S2222",
-"message":  "Unlock this lock along all executions paths of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/MutexAclTest.cs#L17",
-"region":  {
-"startLine":  17,
-"startColumn":  13,
-"endLine":  17,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S2222",
-"message":  "Unlock this lock along all executions paths of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/MutexAclTest.cs#L24",
-"region":  {
-"startLine":  24,
-"startColumn":  17,
-"endLine":  24,
-"endColumn":  32
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2222",
+      "Message": "Unlock this lock along all executions paths of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/MutexAclTest.cs#L17",
+      "Location": "Line 17 Position 13-25"
+    },
+    {
+      "Id": "S2222",
+      "Message": "Unlock this lock along all executions paths of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/MutexAclTest.cs#L24",
+      "Location": "Line 24 Position 17-32"
+    }
+  ]
 }

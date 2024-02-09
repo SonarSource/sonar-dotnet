@@ -1,160 +1,76 @@
 {
-"issues":  [
-{
-"id":  "S2357",
-"message":  "Make 'IMDBURL' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L77",
-"region":  {
-"startLine":  77,
-"startColumn":  16,
-"endLine":  77,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'UseOFDBGenre' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L78",
-"region":  {
-"startLine":  78,
-"startColumn":  16,
-"endLine":  78,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'UseOFDBOutline' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L79",
-"region":  {
-"startLine":  79,
-"startColumn":  16,
-"endLine":  79,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'UseOFDBPlot' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L80",
-"region":  {
-"startLine":  80,
-"startColumn":  16,
-"endLine":  80,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'UseOFDBTitle' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L81",
-"region":  {
-"startLine":  81,
-"startColumn":  16,
-"endLine":  81,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'IMDBURL' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMPA.vb#L33",
-"region":  {
-"startLine":  33,
-"startColumn":  16,
-"endLine":  33,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'IMDBURL' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeMPDB.vb#L33",
-"region":  {
-"startLine":  33,
-"startColumn":  16,
-"endLine":  33,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'IMDBURL' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L29",
-"region":  {
-"startLine":  29,
-"startColumn":  16,
-"endLine":  29,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'IMDBURL' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTrailers.vb#L33",
-"region":  {
-"startLine":  33,
-"startColumn":  12,
-"endLine":  33,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'IMDBURL' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgIMDBSearchResults.vb#L28",
-"region":  {
-"startLine":  28,
-"startColumn":  12,
-"endLine":  28,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'IMDBURL' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L31",
-"region":  {
-"startLine":  31,
-"startColumn":  12,
-"endLine":  31,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'IMDBURL' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgTrailer.vb#L29",
-"region":  {
-"startLine":  29,
-"startColumn":  12,
-"endLine":  29,
-"endColumn":  19
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027IMDBURL\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L77",
+      "Location": "Line 77 Position 16-23"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027UseOFDBGenre\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L78",
+      "Location": "Line 78 Position 16-28"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027UseOFDBOutline\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L79",
+      "Location": "Line 79 Position 16-30"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027UseOFDBPlot\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L80",
+      "Location": "Line 80 Position 16-27"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027UseOFDBTitle\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L81",
+      "Location": "Line 81 Position 16-28"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027IMDBURL\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMPA.vb#L33",
+      "Location": "Line 33 Position 16-23"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027IMDBURL\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeMPDB.vb#L33",
+      "Location": "Line 33 Position 16-23"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027IMDBURL\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L29",
+      "Location": "Line 29 Position 16-23"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027IMDBURL\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTrailers.vb#L33",
+      "Location": "Line 33 Position 12-19"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027IMDBURL\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgIMDBSearchResults.vb#L28",
+      "Location": "Line 28 Position 12-19"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027IMDBURL\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L31",
+      "Location": "Line 31 Position 12-19"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027IMDBURL\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgTrailer.vb#L29",
+      "Location": "Line 29 Position 12-19"
+    }
+  ]
 }

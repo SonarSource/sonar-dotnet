@@ -1,745 +1,346 @@
 {
-"issues":  [
-{
-"id":  "S103",
-"message":  "Split this 203 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L499",
-"region":  {
-"startLine":  499,
-"startColumn":  1,
-"endLine":  499,
-"endColumn":  204
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 216 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L117",
-"region":  {
-"startLine":  117,
-"startColumn":  1,
-"endLine":  117,
-"endColumn":  217
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 237 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L140",
-"region":  {
-"startLine":  140,
-"startColumn":  1,
-"endLine":  140,
-"endColumn":  238
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 212 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L196",
-"region":  {
-"startLine":  196,
-"startColumn":  1,
-"endLine":  196,
-"endColumn":  213
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 240 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L212",
-"region":  {
-"startLine":  212,
-"startColumn":  1,
-"endLine":  212,
-"endColumn":  241
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 268 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L229",
-"region":  {
-"startLine":  229,
-"startColumn":  1,
-"endLine":  229,
-"endColumn":  269
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 296 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L247",
-"region":  {
-"startLine":  247,
-"startColumn":  1,
-"endLine":  247,
-"endColumn":  297
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 210 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L120",
-"region":  {
-"startLine":  120,
-"startColumn":  1,
-"endLine":  120,
-"endColumn":  211
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 228 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L139",
-"region":  {
-"startLine":  139,
-"startColumn":  1,
-"endLine":  139,
-"endColumn":  229
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 210 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1466",
-"region":  {
-"startLine":  1466,
-"startColumn":  1,
-"endLine":  1466,
-"endColumn":  211
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 204 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Flow.cs#L508",
-"region":  {
-"startLine":  508,
-"startColumn":  1,
-"endLine":  508,
-"endColumn":  205
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 201 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L93",
-"region":  {
-"startLine":  93,
-"startColumn":  1,
-"endLine":  93,
-"endColumn":  202
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 255 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Framing.cs#L54",
-"region":  {
-"startLine":  54,
-"startColumn":  1,
-"endLine":  54,
-"endColumn":  256
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 252 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Framing.cs#L86",
-"region":  {
-"startLine":  86,
-"startColumn":  1,
-"endLine":  86,
-"endColumn":  253
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 237 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L35",
-"region":  {
-"startLine":  35,
-"startColumn":  1,
-"endLine":  35,
-"endColumn":  238
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 237 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L52",
-"region":  {
-"startLine":  52,
-"startColumn":  1,
-"endLine":  52,
-"endColumn":  238
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 222 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L53",
-"region":  {
-"startLine":  53,
-"startColumn":  1,
-"endLine":  53,
-"endColumn":  223
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 237 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L69",
-"region":  {
-"startLine":  69,
-"startColumn":  1,
-"endLine":  69,
-"endColumn":  238
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 237 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L85",
-"region":  {
-"startLine":  85,
-"startColumn":  1,
-"endLine":  85,
-"endColumn":  238
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 222 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L86",
-"region":  {
-"startLine":  86,
-"startColumn":  1,
-"endLine":  86,
-"endColumn":  223
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 237 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L173",
-"region":  {
-"startLine":  173,
-"startColumn":  1,
-"endLine":  173,
-"endColumn":  238
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 237 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L193",
-"region":  {
-"startLine":  193,
-"startColumn":  1,
-"endLine":  193,
-"endColumn":  238
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 222 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L194",
-"region":  {
-"startLine":  194,
-"startColumn":  1,
-"endLine":  194,
-"endColumn":  223
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 237 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L275",
-"region":  {
-"startLine":  275,
-"startColumn":  1,
-"endLine":  275,
-"endColumn":  238
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 237 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L294",
-"region":  {
-"startLine":  294,
-"startColumn":  1,
-"endLine":  294,
-"endColumn":  238
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 222 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L295",
-"region":  {
-"startLine":  295,
-"startColumn":  1,
-"endLine":  295,
-"endColumn":  223
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 237 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L315",
-"region":  {
-"startLine":  315,
-"startColumn":  1,
-"endLine":  315,
-"endColumn":  238
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 237 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L335",
-"region":  {
-"startLine":  335,
-"startColumn":  1,
-"endLine":  335,
-"endColumn":  238
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 222 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L336",
-"region":  {
-"startLine":  336,
-"startColumn":  1,
-"endLine":  336,
-"endColumn":  223
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 206 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L337",
-"region":  {
-"startLine":  337,
-"startColumn":  1,
-"endLine":  337,
-"endColumn":  207
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 211 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Retry.cs#L288",
-"region":  {
-"startLine":  288,
-"startColumn":  1,
-"endLine":  288,
-"endColumn":  212
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 222 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Sink.cs#L290",
-"region":  {
-"startLine":  290,
-"startColumn":  1,
-"endLine":  290,
-"endColumn":  223
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 220 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Sink.cs#L326",
-"region":  {
-"startLine":  326,
-"startColumn":  1,
-"endLine":  326,
-"endColumn":  221
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 208 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L375",
-"region":  {
-"startLine":  375,
-"startColumn":  1,
-"endLine":  375,
-"endColumn":  209
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 215 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L759",
-"region":  {
-"startLine":  759,
-"startColumn":  1,
-"endLine":  759,
-"endColumn":  216
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 262 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L784",
-"region":  {
-"startLine":  784,
-"startColumn":  1,
-"endLine":  784,
-"endColumn":  263
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 215 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceGen.cs#L83",
-"region":  {
-"startLine":  83,
-"startColumn":  1,
-"endLine":  83,
-"endColumn":  216
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 202 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceGen.cs#L114",
-"region":  {
-"startLine":  114,
-"startColumn":  1,
-"endLine":  114,
-"endColumn":  203
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 264 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L2075",
-"region":  {
-"startLine":  2075,
-"startColumn":  1,
-"endLine":  2075,
-"endColumn":  265
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 265 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L2087",
-"region":  {
-"startLine":  2087,
-"startColumn":  1,
-"endLine":  2087,
-"endColumn":  266
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 205 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L93",
-"region":  {
-"startLine":  93,
-"startColumn":  1,
-"endLine":  93,
-"endColumn":  206
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 209 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1398",
-"region":  {
-"startLine":  1398,
-"startColumn":  1,
-"endLine":  1398,
-"endColumn":  210
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 212 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1479",
-"region":  {
-"startLine":  1479,
-"startColumn":  1,
-"endLine":  1479,
-"endColumn":  213
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 215 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1760",
-"region":  {
-"startLine":  1760,
-"startColumn":  1,
-"endLine":  1760,
-"endColumn":  216
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 205 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Extra/Timed.cs#L63",
-"region":  {
-"startLine":  63,
-"startColumn":  1,
-"endLine":  63,
-"endColumn":  206
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 201 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L150",
-"region":  {
-"startLine":  150,
-"startColumn":  1,
-"endLine":  150,
-"endColumn":  202
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 229 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L258",
-"region":  {
-"startLine":  258,
-"startColumn":  1,
-"endLine":  258,
-"endColumn":  230
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 212 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L467",
-"region":  {
-"startLine":  467,
-"startColumn":  1,
-"endLine":  467,
-"endColumn":  213
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 214 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L519",
-"region":  {
-"startLine":  519,
-"startColumn":  1,
-"endLine":  519,
-"endColumn":  215
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 210 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L28",
-"region":  {
-"startLine":  28,
-"startColumn":  1,
-"endLine":  28,
-"endColumn":  211
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 217 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L691",
-"region":  {
-"startLine":  691,
-"startColumn":  1,
-"endLine":  691,
-"endColumn":  218
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 217 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L701",
-"region":  {
-"startLine":  701,
-"startColumn":  1,
-"endLine":  701,
-"endColumn":  218
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 258 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L613",
-"region":  {
-"startLine":  613,
-"startColumn":  1,
-"endLine":  613,
-"endColumn":  259
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 253 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamRef/SourceRefImpl.cs#L266",
-"region":  {
-"startLine":  266,
-"startColumn":  1,
-"endLine":  266,
-"endColumn":  254
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 213 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/AbstractStage.cs#L523",
-"region":  {
-"startLine":  523,
-"startColumn":  1,
-"endLine":  523,
-"endColumn":  214
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 231 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Stage.cs#L70",
-"region":  {
-"startLine":  70,
-"startColumn":  1,
-"endLine":  70,
-"endColumn":  232
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 211 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Stage.cs#L116",
-"region":  {
-"startLine":  116,
-"startColumn":  1,
-"endLine":  116,
-"endColumn":  212
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S103",
+      "Message": "Split this 203 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L499",
+      "Location": "Line 499 Position 1-204"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 216 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L117",
+      "Location": "Line 117 Position 1-217"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 237 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L140",
+      "Location": "Line 140 Position 1-238"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 212 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L196",
+      "Location": "Line 196 Position 1-213"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 240 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L212",
+      "Location": "Line 212 Position 1-241"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 268 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L229",
+      "Location": "Line 229 Position 1-269"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 296 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L247",
+      "Location": "Line 247 Position 1-297"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 210 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L120",
+      "Location": "Line 120 Position 1-211"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 228 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L139",
+      "Location": "Line 139 Position 1-229"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 210 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1466",
+      "Location": "Line 1466 Position 1-211"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 204 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Flow.cs#L508",
+      "Location": "Line 508 Position 1-205"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 201 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L93",
+      "Location": "Line 93 Position 1-202"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 255 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Framing.cs#L54",
+      "Location": "Line 54 Position 1-256"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 252 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Framing.cs#L86",
+      "Location": "Line 86 Position 1-253"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 237 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L173",
+      "Location": "Line 173 Position 1-238"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 237 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L193",
+      "Location": "Line 193 Position 1-238"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 222 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L194",
+      "Location": "Line 194 Position 1-223"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 237 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L275",
+      "Location": "Line 275 Position 1-238"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 237 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L294",
+      "Location": "Line 294 Position 1-238"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 222 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L295",
+      "Location": "Line 295 Position 1-223"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 237 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L315",
+      "Location": "Line 315 Position 1-238"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 237 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L335",
+      "Location": "Line 335 Position 1-238"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 222 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L336",
+      "Location": "Line 336 Position 1-223"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 206 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L337",
+      "Location": "Line 337 Position 1-207"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 237 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L35",
+      "Location": "Line 35 Position 1-238"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 237 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L52",
+      "Location": "Line 52 Position 1-238"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 222 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L53",
+      "Location": "Line 53 Position 1-223"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 237 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L69",
+      "Location": "Line 69 Position 1-238"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 237 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L85",
+      "Location": "Line 85 Position 1-238"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 222 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L86",
+      "Location": "Line 86 Position 1-223"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 211 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Retry.cs#L288",
+      "Location": "Line 288 Position 1-212"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 222 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Sink.cs#L290",
+      "Location": "Line 290 Position 1-223"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 220 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Sink.cs#L326",
+      "Location": "Line 326 Position 1-221"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 208 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L375",
+      "Location": "Line 375 Position 1-209"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 215 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L759",
+      "Location": "Line 759 Position 1-216"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 262 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L784",
+      "Location": "Line 784 Position 1-263"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 202 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceGen.cs#L114",
+      "Location": "Line 114 Position 1-203"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 215 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceGen.cs#L83",
+      "Location": "Line 83 Position 1-216"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 264 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L2075",
+      "Location": "Line 2075 Position 1-265"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 265 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L2087",
+      "Location": "Line 2087 Position 1-266"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 209 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1398",
+      "Location": "Line 1398 Position 1-210"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 212 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1479",
+      "Location": "Line 1479 Position 1-213"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 215 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1760",
+      "Location": "Line 1760 Position 1-216"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 205 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L93",
+      "Location": "Line 93 Position 1-206"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 205 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Extra/Timed.cs#L63",
+      "Location": "Line 63 Position 1-206"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 201 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L150",
+      "Location": "Line 150 Position 1-202"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 229 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L258",
+      "Location": "Line 258 Position 1-230"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 212 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L467",
+      "Location": "Line 467 Position 1-213"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 214 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L519",
+      "Location": "Line 519 Position 1-215"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 210 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L28",
+      "Location": "Line 28 Position 1-211"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 217 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L691",
+      "Location": "Line 691 Position 1-218"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 217 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L701",
+      "Location": "Line 701 Position 1-218"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 258 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L613",
+      "Location": "Line 613 Position 1-259"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 253 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamRef/SourceRefImpl.cs#L266",
+      "Location": "Line 266 Position 1-254"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 213 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/AbstractStage.cs#L523",
+      "Location": "Line 523 Position 1-214"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 211 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Stage.cs#L116",
+      "Location": "Line 116 Position 1-212"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 231 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Stage.cs#L70",
+      "Location": "Line 70 Position 1-232"
+    }
+  ]
 }

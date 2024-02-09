@@ -1,108 +1,52 @@
 {
-"issues":  [
-{
-"id":  "S117",
-"message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L277",
-"region":  {
-"startLine":  277,
-"startColumn":  13,
-"endLine":  277,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S117",
-"message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L284",
-"region":  {
-"startLine":  284,
-"startColumn":  26,
-"endLine":  284,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S117",
-"message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L291",
-"region":  {
-"startLine":  291,
-"startColumn":  23,
-"endLine":  291,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S117",
-"message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L293",
-"region":  {
-"startLine":  293,
-"startColumn":  27,
-"endLine":  293,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S117",
-"message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L475",
-"region":  {
-"startLine":  475,
-"startColumn":  17,
-"endLine":  475,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S117",
-"message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L514",
-"region":  {
-"startLine":  514,
-"startColumn":  19,
-"endLine":  514,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S117",
-"message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L516",
-"region":  {
-"startLine":  516,
-"startColumn":  23,
-"endLine":  516,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S117",
-"message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/Module.OfflineMediaManager.vb#L127",
-"region":  {
-"startLine":  127,
-"startColumn":  13,
-"endLine":  127,
-"endColumn":  19
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L277",
+      "Location": "Line 277 Position 13-19"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L284",
+      "Location": "Line 284 Position 26-33"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L291",
+      "Location": "Line 291 Position 23-36"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L293",
+      "Location": "Line 293 Position 27-36"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L475",
+      "Location": "Line 475 Position 17-22"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L514",
+      "Location": "Line 514 Position 19-32"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L516",
+      "Location": "Line 516 Position 23-32"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/Module.OfflineMediaManager.vb#L127",
+      "Location": "Line 127 Position 13-19"
+    }
+  ]
 }

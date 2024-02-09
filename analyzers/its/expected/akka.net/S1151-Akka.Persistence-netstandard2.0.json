@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S1151",
-"message":  "Reduce this switch section number of statements from 16 to at most 8, for example by extracting code into a method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.Recovery.cs#L92",
-"region":  {
-"startLine":  92,
-"startColumn":  25,
-"endLine":  92,
-"endColumn":  53
-}
-}
-},
-{
-"id":  "S1151",
-"message":  "Reduce this switch section number of statements from 10 to at most 8, for example by extracting code into a method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.Recovery.cs#L187",
-"region":  {
-"startLine":  187,
-"startColumn":  25,
-"endLine":  187,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S1151",
-"message":  "Reduce this switch section number of statements from 11 to at most 8, for example by extracting code into a method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.Recovery.cs#L208",
-"region":  {
-"startLine":  208,
-"startColumn":  25,
-"endLine":  208,
-"endColumn":  54
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1151",
+      "Message": "Reduce this switch section number of statements from 10 to at most 8, for example by extracting code into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.Recovery.cs#L187",
+      "Location": "Line 187 Position 25-55"
+    },
+    {
+      "Id": "S1151",
+      "Message": "Reduce this switch section number of statements from 11 to at most 8, for example by extracting code into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.Recovery.cs#L208",
+      "Location": "Line 208 Position 25-54"
+    },
+    {
+      "Id": "S1151",
+      "Message": "Reduce this switch section number of statements from 16 to at most 8, for example by extracting code into a method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.Recovery.cs#L92",
+      "Location": "Line 92 Position 25-53"
+    }
+  ]
 }

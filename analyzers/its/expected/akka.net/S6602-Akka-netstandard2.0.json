@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Serialization/NewtonSoftJsonSerializer.cs#L189",
-"region":  {
-"startLine":  189,
-"startColumn":  18,
-"endLine":  189,
-"endColumn":  32
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Serialization/NewtonSoftJsonSerializer.cs#L189",
+      "Location": "Line 189 Position 18-32"
+    }
+  ]
 }

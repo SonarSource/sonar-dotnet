@@ -1,56 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S1128",
-"message":  "Remove this unnecessary 'using'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Extension.cs#L10",
-"region":  {
-"startLine":  10,
-"startColumn":  1,
-"endLine":  10,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S1128",
-"message":  "Remove this unnecessary 'using'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Journal/SqliteJournal.cs#L8",
-"region":  {
-"startLine":  8,
-"startColumn":  1,
-"endLine":  8,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S1128",
-"message":  "Remove this unnecessary 'using'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Properties/AssemblyInfo.cs#L8",
-"region":  {
-"startLine":  8,
-"startColumn":  1,
-"endLine":  8,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S1128",
-"message":  "Remove this unnecessary 'using'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Properties/AssemblyInfo.cs#L9",
-"region":  {
-"startLine":  9,
-"startColumn":  1,
-"endLine":  9,
-"endColumn":  39
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Extension.cs#L10",
+      "Location": "Line 10 Position 1-35"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Journal/SqliteJournal.cs#L8",
+      "Location": "Line 8 Position 1-14"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Properties/AssemblyInfo.cs#L8",
+      "Location": "Line 8 Position 1-25"
+    },
+    {
+      "Id": "S1128",
+      "Message": "Remove this unnecessary \u0027using\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Properties/AssemblyInfo.cs#L9",
+      "Location": "Line 9 Position 1-39"
+    }
+  ]
 }

@@ -1,56 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'failure'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/DDataShard.cs#L213",
-"region":  {
-"startLine":  213,
-"startColumn":  33,
-"endLine":  213,
-"endColumn":  40
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'o'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Serialization/ClusterShardingMessageSerializer.cs#L155",
-"region":  {
-"startLine":  155,
-"startColumn":  42,
-"endLine":  155,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'o'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Serialization/ClusterShardingMessageSerializer.cs#L157",
-"region":  {
-"startLine":  157,
-"startColumn":  42,
-"endLine":  157,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'msg'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardCoordinator.cs#L97",
-"region":  {
-"startLine":  97,
-"startColumn":  55,
-"endLine":  97,
-"endColumn":  58
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027failure\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/DDataShard.cs#L213",
+      "Location": "Line 213 Position 33-40"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027o\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Serialization/ClusterShardingMessageSerializer.cs#L155",
+      "Location": "Line 155 Position 42-43"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027o\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Serialization/ClusterShardingMessageSerializer.cs#L157",
+      "Location": "Line 157 Position 42-43"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027msg\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardCoordinator.cs#L97",
+      "Location": "Line 97 Position 55-58"
+    }
+  ]
 }

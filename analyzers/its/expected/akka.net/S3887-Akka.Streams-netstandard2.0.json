@@ -1,121 +1,58 @@
 {
-"issues":  [
-{
-"id":  "S3887",
-"message":  "Use an immutable collection or reduce the accessibility of the non-private readonly field 'MaterializedValueIds'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L33",
-"region":  {
-"startLine":  33,
-"startColumn":  25,
-"endLine":  33,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S3887",
-"message":  "Use an immutable collection or reduce the accessibility of the non-private readonly field 'Stages'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L99",
-"region":  {
-"startLine":  99,
-"startColumn":  25,
-"endLine":  99,
-"endColumn":  74
-}
-}
-},
-{
-"id":  "S3887",
-"message":  "Use an immutable collection or reduce the accessibility of the non-private readonly field 'OriginalAttributes'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L103",
-"region":  {
-"startLine":  103,
-"startColumn":  25,
-"endLine":  103,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S3887",
-"message":  "Use an immutable collection or reduce the accessibility of the non-private readonly field 'Inlets'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L107",
-"region":  {
-"startLine":  107,
-"startColumn":  25,
-"endLine":  107,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S3887",
-"message":  "Use an immutable collection or reduce the accessibility of the non-private readonly field 'InletOwners'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L111",
-"region":  {
-"startLine":  111,
-"startColumn":  25,
-"endLine":  111,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S3887",
-"message":  "Use an immutable collection or reduce the accessibility of the non-private readonly field 'Outlets'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L115",
-"region":  {
-"startLine":  115,
-"startColumn":  25,
-"endLine":  115,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S3887",
-"message":  "Use an immutable collection or reduce the accessibility of the non-private readonly field 'OutletOwners'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L119",
-"region":  {
-"startLine":  119,
-"startColumn":  25,
-"endLine":  119,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S3887",
-"message":  "Use an immutable collection or reduce the accessibility of the non-private readonly field 'Logics'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L376",
-"region":  {
-"startLine":  376,
-"startColumn":  25,
-"endLine":  376,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S3887",
-"message":  "Use an immutable collection or reduce the accessibility of the non-private readonly field 'Connections'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L392",
-"region":  {
-"startLine":  392,
-"startColumn":  25,
-"endLine":  392,
-"endColumn":  37
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3887",
+      "Message": "Use an immutable collection or reduce the accessibility of the non-private readonly field \u0027MaterializedValueIds\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L33",
+      "Location": "Line 33 Position 25-34"
+    },
+    {
+      "Id": "S3887",
+      "Message": "Use an immutable collection or reduce the accessibility of the non-private readonly field \u0027OriginalAttributes\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L103",
+      "Location": "Line 103 Position 25-37"
+    },
+    {
+      "Id": "S3887",
+      "Message": "Use an immutable collection or reduce the accessibility of the non-private readonly field \u0027Inlets\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L107",
+      "Location": "Line 107 Position 25-32"
+    },
+    {
+      "Id": "S3887",
+      "Message": "Use an immutable collection or reduce the accessibility of the non-private readonly field \u0027InletOwners\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L111",
+      "Location": "Line 111 Position 25-30"
+    },
+    {
+      "Id": "S3887",
+      "Message": "Use an immutable collection or reduce the accessibility of the non-private readonly field \u0027Outlets\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L115",
+      "Location": "Line 115 Position 25-33"
+    },
+    {
+      "Id": "S3887",
+      "Message": "Use an immutable collection or reduce the accessibility of the non-private readonly field \u0027OutletOwners\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L119",
+      "Location": "Line 119 Position 25-30"
+    },
+    {
+      "Id": "S3887",
+      "Message": "Use an immutable collection or reduce the accessibility of the non-private readonly field \u0027Stages\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L99",
+      "Location": "Line 99 Position 25-74"
+    },
+    {
+      "Id": "S3887",
+      "Message": "Use an immutable collection or reduce the accessibility of the non-private readonly field \u0027Logics\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L376",
+      "Location": "Line 376 Position 25-42"
+    },
+    {
+      "Id": "S3887",
+      "Message": "Use an immutable collection or reduce the accessibility of the non-private readonly field \u0027Connections\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L392",
+      "Location": "Line 392 Position 25-37"
+    }
+  ]
 }

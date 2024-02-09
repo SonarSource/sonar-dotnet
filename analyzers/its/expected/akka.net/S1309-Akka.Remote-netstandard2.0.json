@@ -1,95 +1,46 @@
 {
-"issues":  [
-{
-"id":  "S1309",
-"message":  "Do not suppress issues.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L424",
-"region":  {
-"startLine":  424,
-"startColumn":  1,
-"endLine":  424,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S1309",
-"message":  "Do not suppress issues.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransport.cs#L201",
-"region":  {
-"startLine":  201,
-"startColumn":  1,
-"endLine":  201,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S1309",
-"message":  "Do not suppress issues.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransport.cs#L255",
-"region":  {
-"startLine":  255,
-"startColumn":  1,
-"endLine":  255,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S1309",
-"message":  "Do not suppress issues.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L183",
-"region":  {
-"startLine":  183,
-"startColumn":  1,
-"endLine":  183,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S1309",
-"message":  "Do not suppress issues.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L285",
-"region":  {
-"startLine":  285,
-"startColumn":  1,
-"endLine":  285,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S1309",
-"message":  "Do not suppress issues.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L505",
-"region":  {
-"startLine":  505,
-"startColumn":  1,
-"endLine":  505,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S1309",
-"message":  "Do not suppress issues.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/Transport.cs#L402",
-"region":  {
-"startLine":  402,
-"startColumn":  1,
-"endLine":  402,
-"endColumn":  24
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1309",
+      "Message": "Do not suppress issues.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L424",
+      "Location": "Line 424 Position 1-24"
+    },
+    {
+      "Id": "S1309",
+      "Message": "Do not suppress issues.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransport.cs#L201",
+      "Location": "Line 201 Position 1-24"
+    },
+    {
+      "Id": "S1309",
+      "Message": "Do not suppress issues.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransport.cs#L255",
+      "Location": "Line 255 Position 1-24"
+    },
+    {
+      "Id": "S1309",
+      "Message": "Do not suppress issues.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L183",
+      "Location": "Line 183 Position 1-24"
+    },
+    {
+      "Id": "S1309",
+      "Message": "Do not suppress issues.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L285",
+      "Location": "Line 285 Position 1-24"
+    },
+    {
+      "Id": "S1309",
+      "Message": "Do not suppress issues.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L505",
+      "Location": "Line 505 Position 1-24"
+    },
+    {
+      "Id": "S1309",
+      "Message": "Do not suppress issues.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/Transport.cs#L402",
+      "Location": "Line 402 Position 1-24"
+    }
+  ]
 }

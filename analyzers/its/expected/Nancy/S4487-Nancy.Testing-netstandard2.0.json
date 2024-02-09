@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S4487",
-"message":  "Remove this unread private field 'hostBrowser' or refactor the code to use its value.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserResponse.cs#L12",
-"region":  {
-"startLine":  12,
-"startColumn":  34,
-"endLine":  12,
-"endColumn":  45
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4487",
+      "Message": "Remove this unread private field \u0027hostBrowser\u0027 or refactor the code to use its value.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserResponse.cs#L12",
+      "Location": "Line 12 Position 34-45"
+    }
+  ]
 }

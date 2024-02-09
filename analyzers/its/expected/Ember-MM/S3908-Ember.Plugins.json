@@ -1,69 +1,34 @@
 {
-"issues":  [
-{
-"id":  "S3908",
-"message":  "Refactor this delegate to use 'System.EventHandler<TEventArgs>'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L20",
-"region":  {
-"startLine":  20,
-"startColumn":  22,
-"endLine":  20,
-"endColumn":  54
-}
-}
-},
-{
-"id":  "S3908",
-"message":  "Refactor this delegate to use 'System.EventHandler<TEventArgs>'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L20",
-"region":  {
-"startLine":  20,
-"startColumn":  22,
-"endLine":  20,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S3908",
-"message":  "Refactor this delegate to use 'System.EventHandler<TEventArgs>'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L25",
-"region":  {
-"startLine":  25,
-"startColumn":  22,
-"endLine":  25,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S3908",
-"message":  "Refactor this delegate to use 'System.EventHandler<TEventArgs>'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L30",
-"region":  {
-"startLine":  30,
-"startColumn":  22,
-"endLine":  30,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S3908",
-"message":  "Refactor this delegate to use 'System.EventHandler<TEventArgs>'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L35",
-"region":  {
-"startLine":  35,
-"startColumn":  22,
-"endLine":  35,
-"endColumn":  63
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3908",
+      "Message": "Refactor this delegate to use \u0027System.EventHandler\u003CTEventArgs\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L20",
+      "Location": "Line 20 Position 22-54"
+    },
+    {
+      "Id": "S3908",
+      "Message": "Refactor this delegate to use \u0027System.EventHandler\u003CTEventArgs\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L20",
+      "Location": "Line 20 Position 22-61"
+    },
+    {
+      "Id": "S3908",
+      "Message": "Refactor this delegate to use \u0027System.EventHandler\u003CTEventArgs\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L25",
+      "Location": "Line 25 Position 22-62"
+    },
+    {
+      "Id": "S3908",
+      "Message": "Refactor this delegate to use \u0027System.EventHandler\u003CTEventArgs\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L30",
+      "Location": "Line 30 Position 22-62"
+    },
+    {
+      "Id": "S3908",
+      "Message": "Refactor this delegate to use \u0027System.EventHandler\u003CTEventArgs\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L35",
+      "Location": "Line 35 Position 22-63"
+    }
+  ]
 }

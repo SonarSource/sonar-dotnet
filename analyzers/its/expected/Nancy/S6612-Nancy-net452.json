@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S6612",
-"message":  "Use the lambda parameter instead of capturing the argument 'type'",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DefaultTypeCatalog.cs#L36",
-"region":  {
-"startLine":  36,
-"startColumn":  46,
-"endLine":  36,
-"endColumn":  82
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6612",
+      "Message": "Use the lambda parameter instead of capturing the argument \u0027type\u0027",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DefaultTypeCatalog.cs#L36",
+      "Location": "Line 36 Position 46-82"
+    }
+  ]
 }

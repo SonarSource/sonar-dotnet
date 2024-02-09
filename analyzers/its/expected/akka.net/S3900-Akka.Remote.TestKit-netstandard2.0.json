@@ -1,134 +1,64 @@
 {
-"issues":  [
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'system' before using it.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Extension.cs#L77",
-"region":  {
-"startLine":  77,
-"startColumn":  51,
-"endLine":  77,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'config' before using it.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Extension.cs#L119",
-"region":  {
-"startLine":  119,
-"startColumn":  31,
-"endLine":  119,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'config' before using it.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Extension.cs#L135",
-"region":  {
-"startLine":  135,
-"startColumn":  17,
-"endLine":  135,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'config' because it could be null.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L395",
-"region":  {
-"startLine":  395,
-"startColumn":  18,
-"endLine":  395,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this constructor to avoid using members of parameter 'type' because it could be null.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L395",
-"region":  {
-"startLine":  395,
-"startColumn":  52,
-"endLine":  395,
-"endColumn":  56
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'myself' before using it.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L422",
-"region":  {
-"startLine":  422,
-"startColumn":  63,
-"endLine":  422,
-"endColumn":  69
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'thunkAsync' before using it.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L514",
-"region":  {
-"startLine":  514,
-"startColumn":  38,
-"endLine":  514,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'messageClasses' before using it.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L552",
-"region":  {
-"startLine":  552,
-"startColumn":  44,
-"endLine":  552,
-"endColumn":  58
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'tc' before using it.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L565",
-"region":  {
-"startLine":  565,
-"startColumn":  27,
-"endLine":  565,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'names' before using it.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L127",
-"region":  {
-"startLine":  127,
-"startColumn":  34,
-"endLine":  127,
-"endColumn":  39
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3900",
+      "Message": "Refactor this method to add validation of parameter \u0027config\u0027 before using it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Extension.cs#L119",
+      "Location": "Line 119 Position 31-37"
+    },
+    {
+      "Id": "S3900",
+      "Message": "Refactor this method to add validation of parameter \u0027config\u0027 before using it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Extension.cs#L135",
+      "Location": "Line 135 Position 17-23"
+    },
+    {
+      "Id": "S3900",
+      "Message": "Refactor this method to add validation of parameter \u0027system\u0027 before using it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Extension.cs#L77",
+      "Location": "Line 77 Position 51-57"
+    },
+    {
+      "Id": "S3900",
+      "Message": "Refactor this constructor to avoid using members of parameter \u0027config\u0027 because it could be null.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L395",
+      "Location": "Line 395 Position 18-24"
+    },
+    {
+      "Id": "S3900",
+      "Message": "Refactor this constructor to avoid using members of parameter \u0027type\u0027 because it could be null.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L395",
+      "Location": "Line 395 Position 52-56"
+    },
+    {
+      "Id": "S3900",
+      "Message": "Refactor this method to add validation of parameter \u0027myself\u0027 before using it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L422",
+      "Location": "Line 422 Position 63-69"
+    },
+    {
+      "Id": "S3900",
+      "Message": "Refactor this method to add validation of parameter \u0027thunkAsync\u0027 before using it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L514",
+      "Location": "Line 514 Position 38-48"
+    },
+    {
+      "Id": "S3900",
+      "Message": "Refactor this method to add validation of parameter \u0027messageClasses\u0027 before using it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L552",
+      "Location": "Line 552 Position 44-58"
+    },
+    {
+      "Id": "S3900",
+      "Message": "Refactor this method to add validation of parameter \u0027tc\u0027 before using it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L565",
+      "Location": "Line 565 Position 27-29"
+    },
+    {
+      "Id": "S3900",
+      "Message": "Refactor this method to add validation of parameter \u0027names\u0027 before using it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L127",
+      "Location": "Line 127 Position 34-39"
+    }
+  ]
 }

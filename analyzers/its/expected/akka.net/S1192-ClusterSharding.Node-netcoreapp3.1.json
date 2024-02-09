@@ -1,46 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal '@addr' 4 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Cluster/ClusterSharding/ClusterSharding.Node/AutomaticJoin/DBHelper.cs#L60",
-"region":  {
-"startLine":  60,
-"startColumn":  36,
-"endLine":  60,
-"endColumn":  43
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Cluster/ClusterSharding/ClusterSharding.Node/AutomaticJoin/DBHelper.cs#L61",
-"region":  {
-"startLine":  61,
-"startColumn":  32,
-"endLine":  61,
-"endColumn":  39
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Cluster/ClusterSharding/ClusterSharding.Node/AutomaticJoin/DBHelper.cs#L75",
-"region":  {
-"startLine":  75,
-"startColumn":  36,
-"endLine":  75,
-"endColumn":  43
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Cluster/ClusterSharding/ClusterSharding.Node/AutomaticJoin/DBHelper.cs#L76",
-"region":  {
-"startLine":  76,
-"startColumn":  32,
-"endLine":  76,
-"endColumn":  39
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S1192",
+      "Message": "Define a constant instead of using this literal \u0027@addr\u0027 4 times.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Cluster/ClusterSharding/ClusterSharding.Node/AutomaticJoin/DBHelper.cs#L60",
+      "Location": "Line 60 Position 36-43"
+    }
+  ]
 }

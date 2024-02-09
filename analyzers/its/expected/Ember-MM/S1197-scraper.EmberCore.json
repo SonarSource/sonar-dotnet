@@ -1,147 +1,70 @@
 {
-"issues":  [
-{
-"id":  "S1197",
-"message":  "Move the array designator from the variable to the type.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L885",
-"region":  {
-"startLine":  885,
-"startColumn":  11,
-"endLine":  885,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S1197",
-"message":  "Move the array designator from the variable to the type.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L896",
-"region":  {
-"startLine":  896,
-"startColumn":  11,
-"endLine":  896,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S1197",
-"message":  "Move the array designator from the variable to the type.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L925",
-"region":  {
-"startLine":  925,
-"startColumn":  7,
-"endLine":  925,
-"endColumn":  17
-}
-}
-},
-{
-"id":  "S1197",
-"message":  "Move the array designator from the variable to the type.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeYouTube.vb#L155",
-"region":  {
-"startLine":  155,
-"startColumn":  25,
-"endLine":  155,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S1197",
-"message":  "Move the array designator from the variable to the type.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L38",
-"region":  {
-"startLine":  38,
-"startColumn":  13,
-"endLine":  38,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S1197",
-"message":  "Move the array designator from the variable to the type.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L48",
-"region":  {
-"startLine":  48,
-"startColumn":  13,
-"endLine":  48,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S1197",
-"message":  "Move the array designator from the variable to the type.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L52",
-"region":  {
-"startLine":  52,
-"startColumn":  13,
-"endLine":  52,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S1197",
-"message":  "Move the array designator from the variable to the type.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L53",
-"region":  {
-"startLine":  53,
-"startColumn":  13,
-"endLine":  53,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S1197",
-"message":  "Move the array designator from the variable to the type.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L42",
-"region":  {
-"startLine":  42,
-"startColumn":  13,
-"endLine":  42,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S1197",
-"message":  "Move the array designator from the variable to the type.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L43",
-"region":  {
-"startLine":  43,
-"startColumn":  13,
-"endLine":  43,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S1197",
-"message":  "Move the array designator from the variable to the type.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L44",
-"region":  {
-"startLine":  44,
-"startColumn":  13,
-"endLine":  44,
-"endColumn":  23
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1197",
+      "Message": "Move the array designator from the variable to the type.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L885",
+      "Location": "Line 885 Position 11-24"
+    },
+    {
+      "Id": "S1197",
+      "Message": "Move the array designator from the variable to the type.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L896",
+      "Location": "Line 896 Position 11-20"
+    },
+    {
+      "Id": "S1197",
+      "Message": "Move the array designator from the variable to the type.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L925",
+      "Location": "Line 925 Position 7-17"
+    },
+    {
+      "Id": "S1197",
+      "Message": "Move the array designator from the variable to the type.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeYouTube.vb#L155",
+      "Location": "Line 155 Position 25-38"
+    },
+    {
+      "Id": "S1197",
+      "Message": "Move the array designator from the variable to the type.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L38",
+      "Location": "Line 38 Position 13-23"
+    },
+    {
+      "Id": "S1197",
+      "Message": "Move the array designator from the variable to the type.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L48",
+      "Location": "Line 48 Position 13-23"
+    },
+    {
+      "Id": "S1197",
+      "Message": "Move the array designator from the variable to the type.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L52",
+      "Location": "Line 52 Position 13-22"
+    },
+    {
+      "Id": "S1197",
+      "Message": "Move the array designator from the variable to the type.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L53",
+      "Location": "Line 53 Position 13-23"
+    },
+    {
+      "Id": "S1197",
+      "Message": "Move the array designator from the variable to the type.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L42",
+      "Location": "Line 42 Position 13-23"
+    },
+    {
+      "Id": "S1197",
+      "Message": "Move the array designator from the variable to the type.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L43",
+      "Location": "Line 43 Position 13-22"
+    },
+    {
+      "Id": "S1197",
+      "Message": "Move the array designator from the variable to the type.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L44",
+      "Location": "Line 44 Position 13-23"
+    }
+  ]
 }

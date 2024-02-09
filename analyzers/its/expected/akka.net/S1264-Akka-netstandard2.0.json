@@ -1,56 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S1264",
-"message":  "Replace this 'for' loop with a 'while' loop.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorPath.cs#L246",
-"region":  {
-"startLine":  246,
-"startColumn":  13,
-"endLine":  246,
-"endColumn":  16
-}
-}
-},
-{
-"id":  "S1264",
-"message":  "Replace this 'for' loop with a 'while' loop.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L211",
-"region":  {
-"startLine":  211,
-"startColumn":  17,
-"endLine":  211,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S1264",
-"message":  "Replace this 'for' loop with a 'while' loop.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L568",
-"region":  {
-"startLine":  568,
-"startColumn":  17,
-"endLine":  568,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S1264",
-"message":  "Replace this 'for' loop with a 'while' loop.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L585",
-"region":  {
-"startLine":  585,
-"startColumn":  17,
-"endLine":  585,
-"endColumn":  20
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1264",
+      "Message": "Replace this \u0027for\u0027 loop with a \u0027while\u0027 loop.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorPath.cs#L246",
+      "Location": "Line 246 Position 13-16"
+    },
+    {
+      "Id": "S1264",
+      "Message": "Replace this \u0027for\u0027 loop with a \u0027while\u0027 loop.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L211",
+      "Location": "Line 211 Position 17-20"
+    },
+    {
+      "Id": "S1264",
+      "Message": "Replace this \u0027for\u0027 loop with a \u0027while\u0027 loop.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L568",
+      "Location": "Line 568 Position 17-20"
+    },
+    {
+      "Id": "S1264",
+      "Message": "Replace this \u0027for\u0027 loop with a \u0027while\u0027 loop.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L585",
+      "Location": "Line 585 Position 17-20"
+    }
+  ]
 }

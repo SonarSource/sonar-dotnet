@@ -1,52 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S4059",
-"message":  "Change either the name of property 'AttributeList' or the name of method 'GetAttributeList' to make them distinguishable.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L322",
-"region":  {
-"startLine":  322,
-"startColumn":  40,
-"endLine":  322,
-"endColumn":  53
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L346",
-"region":  {
-"startLine":  346,
-"startColumn":  35,
-"endLine":  346,
-"endColumn":  51
-}
-}
-]
-},
-{
-"id":  "S4059",
-"message":  "Change either the name of property 'StageActor' or the name of method 'GetStageActor' to make them distinguishable.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L867",
-"region":  {
-"startLine":  867,
-"startColumn":  27,
-"endLine":  867,
-"endColumn":  37
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L1622",
-"region":  {
-"startLine":  1622,
-"startColumn":  30,
-"endLine":  1622,
-"endColumn":  43
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S4059",
+      "Message": "Change either the name of property \u0027AttributeList\u0027 or the name of method \u0027GetAttributeList\u0027 to make them distinguishable.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L322",
+      "Location": "Line 322 Position 40-53"
+    },
+    {
+      "Id": "S4059",
+      "Message": "Change either the name of property \u0027StageActor\u0027 or the name of method \u0027GetStageActor\u0027 to make them distinguishable.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L867",
+      "Location": "Line 867 Position 27-37"
+    }
+  ]
 }

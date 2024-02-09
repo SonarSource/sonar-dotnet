@@ -1,56 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'id' before using it.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L550",
-"region":  {
-"startLine":  550,
-"startColumn":  40,
-"endLine":  550,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'id' before using it.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L645",
-"region":  {
-"startLine":  645,
-"startColumn":  44,
-"endLine":  645,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter '_curSeason' before using it.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L701",
-"region":  {
-"startLine":  701,
-"startColumn":  72,
-"endLine":  701,
-"endColumn":  82
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'epid' before using it.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L730",
-"region":  {
-"startLine":  730,
-"startColumn":  47,
-"endLine":  730,
-"endColumn":  51
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3900",
+      "Message": "Refactor this method to add validation of parameter \u0027id\u0027 before using it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L550",
+      "Location": "Line 550 Position 40-42"
+    },
+    {
+      "Id": "S3900",
+      "Message": "Refactor this method to add validation of parameter \u0027id\u0027 before using it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L645",
+      "Location": "Line 645 Position 44-46"
+    },
+    {
+      "Id": "S3900",
+      "Message": "Refactor this method to add validation of parameter \u0027_curSeason\u0027 before using it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L701",
+      "Location": "Line 701 Position 72-82"
+    },
+    {
+      "Id": "S3900",
+      "Message": "Refactor this method to add validation of parameter \u0027epid\u0027 before using it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L730",
+      "Location": "Line 730 Position 47-51"
+    }
+  ]
 }

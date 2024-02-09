@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S4487",
-"message":  "Remove this unread private field 'name' or refactor the code to use its value.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/InsecureDeserialization.cs#L50",
-"region":  {
-"startLine":  50,
-"startColumn":  24,
-"endLine":  50,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S4487",
-"message":  "Remove this unread private field 'hashAlgorithm' or refactor the code to use its value.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/UsingNonstandardCryptographyTest.cs#L16",
-"region":  {
-"startLine":  16,
-"startColumn":  46,
-"endLine":  16,
-"endColumn":  59
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4487",
+      "Message": "Remove this unread private field \u0027name\u0027 or refactor the code to use its value.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/InsecureDeserialization.cs#L50",
+      "Location": "Line 50 Position 24-28"
+    },
+    {
+      "Id": "S4487",
+      "Message": "Remove this unread private field \u0027hashAlgorithm\u0027 or refactor the code to use its value.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/UsingNonstandardCryptographyTest.cs#L16",
+      "Location": "Line 16 Position 46-59"
+    }
+  ]
 }

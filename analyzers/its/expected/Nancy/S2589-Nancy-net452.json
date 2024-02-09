@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2589",
-"message":  "Change this condition so that it does not always evaluate to 'False'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L250",
-"region":  {
-"startLine":  250,
-"startColumn":  50,
-"endLine":  250,
-"endColumn":  71
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2589",
+      "Message": "Change this condition so that it does not always evaluate to \u0027False\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L250",
+      "Location": "Line 250 Position 50-71"
+    }
+  ]
 }

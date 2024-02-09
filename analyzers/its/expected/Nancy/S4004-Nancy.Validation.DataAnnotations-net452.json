@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S4004",
-"message":  "Make the 'AttributeAdaptors' property read-only by removing the property setter or making it private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.DataAnnotations/IPropertyValidator.cs#L16",
-"region":  {
-"startLine":  16,
-"startColumn":  89,
-"endLine":  16,
-"endColumn":  106
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4004",
+      "Message": "Make the \u0027AttributeAdaptors\u0027 property read-only by removing the property setter or making it private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.DataAnnotations/IPropertyValidator.cs#L16",
+      "Location": "Line 16 Position 89-106"
+    }
+  ]
 }

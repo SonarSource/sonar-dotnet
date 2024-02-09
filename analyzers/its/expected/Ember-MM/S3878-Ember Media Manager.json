@@ -1,342 +1,160 @@
 {
-"issues":  [
-{
-"id":  "S3878",
-"message":  "Remove this array creation and simply pass the elements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6583",
-"region":  {
-"startLine":  6583,
-"startColumn":  71,
-"endLine":  6583,
-"endColumn":  102
-}
-}
-},
-{
-"id":  "S3878",
-"message":  "Remove this array creation and simply pass the elements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6881",
-"region":  {
-"startLine":  6881,
-"startColumn":  47,
-"endLine":  6881,
-"endColumn":  94
-}
-}
-},
-{
-"id":  "S3878",
-"message":  "Remove this array creation and simply pass the elements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6882",
-"region":  {
-"startLine":  6882,
-"startColumn":  47,
-"endLine":  6882,
-"endColumn":  130
-}
-}
-},
-{
-"id":  "S3878",
-"message":  "Remove this array creation and simply pass the elements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6883",
-"region":  {
-"startLine":  6883,
-"startColumn":  47,
-"endLine":  6883,
-"endColumn":  130
-}
-}
-},
-{
-"id":  "S3878",
-"message":  "Remove this array creation and simply pass the elements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6884",
-"region":  {
-"startLine":  6884,
-"startColumn":  47,
-"endLine":  6884,
-"endColumn":  132
-}
-}
-},
-{
-"id":  "S3878",
-"message":  "Remove this array creation and simply pass the elements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6885",
-"region":  {
-"startLine":  6885,
-"startColumn":  47,
-"endLine":  6885,
-"endColumn":  79
-}
-}
-},
-{
-"id":  "S3878",
-"message":  "Remove this array creation and simply pass the elements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7017",
-"region":  {
-"startLine":  7017,
-"startColumn":  47,
-"endLine":  7017,
-"endColumn":  93
-}
-}
-},
-{
-"id":  "S3878",
-"message":  "Remove this array creation and simply pass the elements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7018",
-"region":  {
-"startLine":  7018,
-"startColumn":  47,
-"endLine":  7018,
-"endColumn":  94
-}
-}
-},
-{
-"id":  "S3878",
-"message":  "Remove this array creation and simply pass the elements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7019",
-"region":  {
-"startLine":  7019,
-"startColumn":  47,
-"endLine":  7019,
-"endColumn":  83
-}
-}
-},
-{
-"id":  "S3878",
-"message":  "Remove this array creation and simply pass the elements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7020",
-"region":  {
-"startLine":  7020,
-"startColumn":  47,
-"endLine":  7020,
-"endColumn":  83
-}
-}
-},
-{
-"id":  "S3878",
-"message":  "Remove this array creation and simply pass the elements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7021",
-"region":  {
-"startLine":  7021,
-"startColumn":  47,
-"endLine":  7021,
-"endColumn":  80
-}
-}
-},
-{
-"id":  "S3878",
-"message":  "Remove this array creation and simply pass the elements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7022",
-"region":  {
-"startLine":  7022,
-"startColumn":  47,
-"endLine":  7022,
-"endColumn":  84
-}
-}
-},
-{
-"id":  "S3878",
-"message":  "Remove this array creation and simply pass the elements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7023",
-"region":  {
-"startLine":  7023,
-"startColumn":  47,
-"endLine":  7023,
-"endColumn":  80
-}
-}
-},
-{
-"id":  "S3878",
-"message":  "Remove this array creation and simply pass the elements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7024",
-"region":  {
-"startLine":  7024,
-"startColumn":  47,
-"endLine":  7024,
-"endColumn":  82
-}
-}
-},
-{
-"id":  "S3878",
-"message":  "Remove this array creation and simply pass the elements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7025",
-"region":  {
-"startLine":  7025,
-"startColumn":  47,
-"endLine":  7025,
-"endColumn":  80
-}
-}
-},
-{
-"id":  "S3878",
-"message":  "Remove this array creation and simply pass the elements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7026",
-"region":  {
-"startLine":  7026,
-"startColumn":  47,
-"endLine":  7026,
-"endColumn":  97
-}
-}
-},
-{
-"id":  "S3878",
-"message":  "Remove this array creation and simply pass the elements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7027",
-"region":  {
-"startLine":  7027,
-"startColumn":  47,
-"endLine":  7027,
-"endColumn":  101
-}
-}
-},
-{
-"id":  "S3878",
-"message":  "Remove this array creation and simply pass the elements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7028",
-"region":  {
-"startLine":  7028,
-"startColumn":  47,
-"endLine":  7028,
-"endColumn":  97
-}
-}
-},
-{
-"id":  "S3878",
-"message":  "Remove this array creation and simply pass the elements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7107",
-"region":  {
-"startLine":  7107,
-"startColumn":  43,
-"endLine":  7107,
-"endColumn":  137
-}
-}
-},
-{
-"id":  "S3878",
-"message":  "Remove this array creation and simply pass the elements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7109",
-"region":  {
-"startLine":  7109,
-"startColumn":  47,
-"endLine":  7109,
-"endColumn":  141
-}
-}
-},
-{
-"id":  "S3878",
-"message":  "Remove this array creation and simply pass the elements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7111",
-"region":  {
-"startLine":  7111,
-"startColumn":  43,
-"endLine":  7111,
-"endColumn":  75
-}
-}
-},
-{
-"id":  "S3878",
-"message":  "Remove this array creation and simply pass the elements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7193",
-"region":  {
-"startLine":  7193,
-"startColumn":  47,
-"endLine":  7193,
-"endColumn":  96
-}
-}
-},
-{
-"id":  "S3878",
-"message":  "Remove this array creation and simply pass the elements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7194",
-"region":  {
-"startLine":  7194,
-"startColumn":  47,
-"endLine":  7194,
-"endColumn":  130
-}
-}
-},
-{
-"id":  "S3878",
-"message":  "Remove this array creation and simply pass the elements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7195",
-"region":  {
-"startLine":  7195,
-"startColumn":  47,
-"endLine":  7195,
-"endColumn":  130
-}
-}
-},
-{
-"id":  "S3878",
-"message":  "Remove this array creation and simply pass the elements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7196",
-"region":  {
-"startLine":  7196,
-"startColumn":  47,
-"endLine":  7196,
-"endColumn":  134
-}
-}
-},
-{
-"id":  "S3878",
-"message":  "Remove this array creation and simply pass the elements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7197",
-"region":  {
-"startLine":  7197,
-"startColumn":  47,
-"endLine":  7197,
-"endColumn":  79
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3878",
+      "Message": "Remove this array creation and simply pass the elements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6583",
+      "Location": "Line 6583 Position 71-102"
+    },
+    {
+      "Id": "S3878",
+      "Message": "Remove this array creation and simply pass the elements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6881",
+      "Location": "Line 6881 Position 47-94"
+    },
+    {
+      "Id": "S3878",
+      "Message": "Remove this array creation and simply pass the elements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6882",
+      "Location": "Line 6882 Position 47-130"
+    },
+    {
+      "Id": "S3878",
+      "Message": "Remove this array creation and simply pass the elements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6883",
+      "Location": "Line 6883 Position 47-130"
+    },
+    {
+      "Id": "S3878",
+      "Message": "Remove this array creation and simply pass the elements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6884",
+      "Location": "Line 6884 Position 47-132"
+    },
+    {
+      "Id": "S3878",
+      "Message": "Remove this array creation and simply pass the elements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6885",
+      "Location": "Line 6885 Position 47-79"
+    },
+    {
+      "Id": "S3878",
+      "Message": "Remove this array creation and simply pass the elements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7017",
+      "Location": "Line 7017 Position 47-93"
+    },
+    {
+      "Id": "S3878",
+      "Message": "Remove this array creation and simply pass the elements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7018",
+      "Location": "Line 7018 Position 47-94"
+    },
+    {
+      "Id": "S3878",
+      "Message": "Remove this array creation and simply pass the elements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7019",
+      "Location": "Line 7019 Position 47-83"
+    },
+    {
+      "Id": "S3878",
+      "Message": "Remove this array creation and simply pass the elements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7020",
+      "Location": "Line 7020 Position 47-83"
+    },
+    {
+      "Id": "S3878",
+      "Message": "Remove this array creation and simply pass the elements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7021",
+      "Location": "Line 7021 Position 47-80"
+    },
+    {
+      "Id": "S3878",
+      "Message": "Remove this array creation and simply pass the elements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7022",
+      "Location": "Line 7022 Position 47-84"
+    },
+    {
+      "Id": "S3878",
+      "Message": "Remove this array creation and simply pass the elements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7023",
+      "Location": "Line 7023 Position 47-80"
+    },
+    {
+      "Id": "S3878",
+      "Message": "Remove this array creation and simply pass the elements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7024",
+      "Location": "Line 7024 Position 47-82"
+    },
+    {
+      "Id": "S3878",
+      "Message": "Remove this array creation and simply pass the elements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7025",
+      "Location": "Line 7025 Position 47-80"
+    },
+    {
+      "Id": "S3878",
+      "Message": "Remove this array creation and simply pass the elements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7026",
+      "Location": "Line 7026 Position 47-97"
+    },
+    {
+      "Id": "S3878",
+      "Message": "Remove this array creation and simply pass the elements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7027",
+      "Location": "Line 7027 Position 47-101"
+    },
+    {
+      "Id": "S3878",
+      "Message": "Remove this array creation and simply pass the elements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7028",
+      "Location": "Line 7028 Position 47-97"
+    },
+    {
+      "Id": "S3878",
+      "Message": "Remove this array creation and simply pass the elements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7107",
+      "Location": "Line 7107 Position 43-137"
+    },
+    {
+      "Id": "S3878",
+      "Message": "Remove this array creation and simply pass the elements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7109",
+      "Location": "Line 7109 Position 47-141"
+    },
+    {
+      "Id": "S3878",
+      "Message": "Remove this array creation and simply pass the elements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7111",
+      "Location": "Line 7111 Position 43-75"
+    },
+    {
+      "Id": "S3878",
+      "Message": "Remove this array creation and simply pass the elements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7193",
+      "Location": "Line 7193 Position 47-96"
+    },
+    {
+      "Id": "S3878",
+      "Message": "Remove this array creation and simply pass the elements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7194",
+      "Location": "Line 7194 Position 47-130"
+    },
+    {
+      "Id": "S3878",
+      "Message": "Remove this array creation and simply pass the elements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7195",
+      "Location": "Line 7195 Position 47-130"
+    },
+    {
+      "Id": "S3878",
+      "Message": "Remove this array creation and simply pass the elements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7196",
+      "Location": "Line 7196 Position 47-134"
+    },
+    {
+      "Id": "S3878",
+      "Message": "Remove this array creation and simply pass the elements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7197",
+      "Location": "Line 7197 Position 47-79"
+    }
+  ]
 }

@@ -1,56 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S3937",
-"message":  "Review this number; its irregular pattern indicates an error.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L172",
-"region":  {
-"startLine":  172,
-"startColumn":  30,
-"endLine":  172,
-"endColumn":  52
-}
-}
-},
-{
-"id":  "S3937",
-"message":  "Review this number; its irregular pattern indicates an error.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L173",
-"region":  {
-"startLine":  173,
-"startColumn":  30,
-"endLine":  173,
-"endColumn":  52
-}
-}
-},
-{
-"id":  "S3937",
-"message":  "Review this number; its irregular pattern indicates an error.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L174",
-"region":  {
-"startLine":  174,
-"startColumn":  30,
-"endLine":  174,
-"endColumn":  52
-}
-}
-},
-{
-"id":  "S3937",
-"message":  "Review this number; its irregular pattern indicates an error.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L175",
-"region":  {
-"startLine":  175,
-"startColumn":  30,
-"endLine":  175,
-"endColumn":  52
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3937",
+      "Message": "Review this number; its irregular pattern indicates an error.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L172",
+      "Location": "Line 172 Position 30-52"
+    },
+    {
+      "Id": "S3937",
+      "Message": "Review this number; its irregular pattern indicates an error.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L173",
+      "Location": "Line 173 Position 30-52"
+    },
+    {
+      "Id": "S3937",
+      "Message": "Review this number; its irregular pattern indicates an error.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L174",
+      "Location": "Line 174 Position 30-52"
+    },
+    {
+      "Id": "S3937",
+      "Message": "Review this number; its irregular pattern indicates an error.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/BitOperations.cs#L175",
+      "Location": "Line 175 Position 30-52"
+    }
+  ]
 }

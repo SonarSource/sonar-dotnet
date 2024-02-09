@@ -1,1486 +1,688 @@
 {
-"issues":  [
-{
-"id":  "S103",
-"message":  "Split this 202 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/AppDomainAssemblyCatalog.cs#L72",
-"region":  {
-"startLine":  72,
-"startColumn":  1,
-"endLine":  72,
-"endColumn":  203
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 242 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/MultipleRootPathProvidersLocatedException.cs#L16",
-"region":  {
-"startLine":  16,
-"startColumn":  1,
-"endLine":  16,
-"endColumn":  243
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 220 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperBase.cs#L21",
-"region":  {
-"startLine":  21,
-"startColumn":  1,
-"endLine":  21,
-"endColumn":  221
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 230 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperBase.cs#L648",
-"region":  {
-"startLine":  648,
-"startColumn":  1,
-"endLine":  648,
-"endColumn":  231
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 218 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/NancyInternalConfiguration.cs#L73",
-"region":  {
-"startLine":  73,
-"startColumn":  1,
-"endLine":  73,
-"endColumn":  219
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 256 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Configuration/DefaultNancyEnvironment.cs#L57",
-"region":  {
-"startLine":  57,
-"startColumn":  1,
-"endLine":  57,
-"endColumn":  257
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 237 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Configuration/DefaultNancyEnvironment.cs#L107",
-"region":  {
-"startLine":  107,
-"startColumn":  1,
-"endLine":  107,
-"endColumn":  238
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 237 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Configuration/INancyEnvironment.cs#L24",
-"region":  {
-"startLine":  24,
-"startColumn":  1,
-"endLine":  24,
-"endColumn":  238
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 235 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/DefaultViewLocationConventions.cs#L90",
-"region":  {
-"startLine":  90,
-"startColumn":  1,
-"endLine":  90,
-"endColumn":  236
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 225 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/DefaultViewLocationConventions.cs#L99",
-"region":  {
-"startLine":  99,
-"startColumn":  1,
-"endLine":  99,
-"endColumn":  226
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 225 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L31",
-"region":  {
-"startLine":  31,
-"startColumn":  1,
-"endLine":  31,
-"endColumn":  226
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 232 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L58",
-"region":  {
-"startLine":  58,
-"startColumn":  1,
-"endLine":  58,
-"endColumn":  233
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 212 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L92",
-"region":  {
-"startLine":  92,
-"startColumn":  1,
-"endLine":  92,
-"endColumn":  213
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 223 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L142",
-"region":  {
-"startLine":  142,
-"startColumn":  1,
-"endLine":  142,
-"endColumn":  224
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 270 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L158",
-"region":  {
-"startLine":  158,
-"startColumn":  1,
-"endLine":  158,
-"endColumn":  271
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 277 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L188",
-"region":  {
-"startLine":  188,
-"startColumn":  1,
-"endLine":  188,
-"endColumn":  278
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 225 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L194",
-"region":  {
-"startLine":  194,
-"startColumn":  1,
-"endLine":  194,
-"endColumn":  226
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 225 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentsConventionsExtensions.cs#L16",
-"region":  {
-"startLine":  16,
-"startColumn":  1,
-"endLine":  16,
-"endColumn":  226
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 204 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DefaultNancyBootstrapper.cs#L285",
-"region":  {
-"startLine":  285,
-"startColumn":  1,
-"endLine":  285,
-"endColumn":  205
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 222 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsConfigurationExtensions.cs#L21",
-"region":  {
-"startLine":  21,
-"startColumn":  1,
-"endLine":  21,
-"endColumn":  223
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 236 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsConfigurationExtensions.cs#L43",
-"region":  {
-"startLine":  43,
-"startColumn":  1,
-"endLine":  43,
-"endColumn":  237
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 682 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsHook.cs#L37",
-"region":  {
-"startLine":  37,
-"startColumn":  1,
-"endLine":  37,
-"endColumn":  683
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 244 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsHook.cs#L160",
-"region":  {
-"startLine":  160,
-"startColumn":  1,
-"endLine":  160,
-"endColumn":  245
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 296 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsModuleCatalog.cs#L17",
-"region":  {
-"startLine":  17,
-"startColumn":  1,
-"endLine":  17,
-"endColumn":  297
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 315 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsModuleCatalog.cs#L43",
-"region":  {
-"startLine":  43,
-"startColumn":  1,
-"endLine":  43,
-"endColumn":  316
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 262 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionary.cs#L67",
-"region":  {
-"startLine":  67,
-"startColumn":  1,
-"endLine":  67,
-"endColumn":  263
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 243 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionary.cs#L69",
-"region":  {
-"startLine":  69,
-"startColumn":  1,
-"endLine":  69,
-"endColumn":  244
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 785 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionary.cs#L70",
-"region":  {
-"startLine":  70,
-"startColumn":  1,
-"endLine":  70,
-"endColumn":  786
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 262 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionary.cs#L78",
-"region":  {
-"startLine":  78,
-"startColumn":  1,
-"endLine":  78,
-"endColumn":  263
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 225 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionary.cs#L80",
-"region":  {
-"startLine":  80,
-"startColumn":  1,
-"endLine":  80,
-"endColumn":  226
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 710 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionary.cs#L81",
-"region":  {
-"startLine":  81,
-"startColumn":  1,
-"endLine":  81,
-"endColumn":  711
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 256 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionary.cs#L243",
-"region":  {
-"startLine":  243,
-"startColumn":  1,
-"endLine":  243,
-"endColumn":  257
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 241 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionary.cs#L284",
-"region":  {
-"startLine":  284,
-"startColumn":  1,
-"endLine":  284,
-"endColumn":  242
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 239 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L226",
-"region":  {
-"startLine":  226,
-"startColumn":  1,
-"endLine":  226,
-"endColumn":  240
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 298 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L228",
-"region":  {
-"startLine":  228,
-"startColumn":  1,
-"endLine":  228,
-"endColumn":  299
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 650 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L229",
-"region":  {
-"startLine":  229,
-"startColumn":  1,
-"endLine":  229,
-"endColumn":  651
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 260 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L256",
-"region":  {
-"startLine":  256,
-"startColumn":  1,
-"endLine":  256,
-"endColumn":  261
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 298 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L258",
-"region":  {
-"startLine":  258,
-"startColumn":  1,
-"endLine":  258,
-"endColumn":  299
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 694 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L259",
-"region":  {
-"startLine":  259,
-"startColumn":  1,
-"endLine":  259,
-"endColumn":  695
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 219 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L957",
-"region":  {
-"startLine":  957,
-"startColumn":  1,
-"endLine":  957,
-"endColumn":  220
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 318 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L962",
-"region":  {
-"startLine":  962,
-"startColumn":  1,
-"endLine":  962,
-"endColumn":  319
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 396 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ErrorHandling/DefaultStatusCodeHandler.cs#L19",
-"region":  {
-"startLine":  19,
-"startColumn":  1,
-"endLine":  19,
-"endColumn":  397
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 312 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLink.cs#L36",
-"region":  {
-"startLine":  36,
-"startColumn":  1,
-"endLine":  36,
-"endColumn":  313
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 312 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLink.cs#L48",
-"region":  {
-"startLine":  48,
-"startColumn":  1,
-"endLine":  48,
-"endColumn":  313
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 264 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLink.cs#L49",
-"region":  {
-"startLine":  49,
-"startColumn":  1,
-"endLine":  49,
-"endColumn":  265
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 312 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLink.cs#L61",
-"region":  {
-"startLine":  61,
-"startColumn":  1,
-"endLine":  61,
-"endColumn":  313
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 264 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLink.cs#L62",
-"region":  {
-"startLine":  62,
-"startColumn":  1,
-"endLine":  62,
-"endColumn":  265
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 236 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLink.cs#L118",
-"region":  {
-"startLine":  118,
-"startColumn":  1,
-"endLine":  118,
-"endColumn":  237
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 285 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLink.cs#L126",
-"region":  {
-"startLine":  126,
-"startColumn":  1,
-"endLine":  126,
-"endColumn":  286
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 217 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpMultipartBuffer.cs#L78",
-"region":  {
-"startLine":  78,
-"startColumn":  1,
-"endLine":  78,
-"endColumn":  218
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 229 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpMultipartSubStream.cs#L62",
-"region":  {
-"startLine":  62,
-"startColumn":  1,
-"endLine":  62,
-"endColumn":  230
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 331 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpMultipartSubStream.cs#L74",
-"region":  {
-"startLine":  74,
-"startColumn":  1,
-"endLine":  74,
-"endColumn":  332
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 234 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpMultipartSubStream.cs#L121",
-"region":  {
-"startLine":  121,
-"startColumn":  1,
-"endLine":  121,
-"endColumn":  235
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 296 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpMultipartSubStream.cs#L122",
-"region":  {
-"startLine":  122,
-"startColumn":  1,
-"endLine":  122,
-"endColumn":  297
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 359 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/INancyModule.cs#L51",
-"region":  {
-"startLine":  51,
-"startColumn":  1,
-"endLine":  51,
-"endColumn":  360
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 232 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/INancyModule.cs#L82",
-"region":  {
-"startLine":  82,
-"startColumn":  1,
-"endLine":  82,
-"endColumn":  233
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 231 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/RequestStream.cs#L237",
-"region":  {
-"startLine":  237,
-"startColumn":  1,
-"endLine":  237,
-"endColumn":  232
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 233 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/RequestStream.cs#L326",
-"region":  {
-"startLine":  326,
-"startColumn":  1,
-"endLine":  326,
-"endColumn":  234
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 296 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/RequestStream.cs#L327",
-"region":  {
-"startLine":  327,
-"startColumn":  1,
-"endLine":  327,
-"endColumn":  297
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 273 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/UnclosableStreamWrapper.cs#L95",
-"region":  {
-"startLine":  95,
-"startColumn":  1,
-"endLine":  95,
-"endColumn":  274
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 331 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/UnclosableStreamWrapper.cs#L110",
-"region":  {
-"startLine":  110,
-"startColumn":  1,
-"endLine":  110,
-"endColumn":  332
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 234 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/UnclosableStreamWrapper.cs#L145",
-"region":  {
-"startLine":  145,
-"startColumn":  1,
-"endLine":  145,
-"endColumn":  235
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 235 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/UnclosableStreamWrapper.cs#L165",
-"region":  {
-"startLine":  165,
-"startColumn":  1,
-"endLine":  165,
-"endColumn":  236
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 641 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/UnclosableStreamWrapper.cs#L211",
-"region":  {
-"startLine":  211,
-"startColumn":  1,
-"endLine":  211,
-"endColumn":  642
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 495 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/UnclosableStreamWrapper.cs#L220",
-"region":  {
-"startLine":  220,
-"startColumn":  1,
-"endLine":  220,
-"endColumn":  496
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 214 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/UnclosableStreamWrapper.cs#L230",
-"region":  {
-"startLine":  230,
-"startColumn":  1,
-"endLine":  230,
-"endColumn":  215
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 1244 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/UnclosableStreamWrapper.cs#L232",
-"region":  {
-"startLine":  232,
-"startColumn":  1,
-"endLine":  232,
-"endColumn":  1245
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 1096 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/UnclosableStreamWrapper.cs#L241",
-"region":  {
-"startLine":  241,
-"startColumn":  1,
-"endLine":  241,
-"endColumn":  1097
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 1019 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/UnclosableStreamWrapper.cs#L254",
-"region":  {
-"startLine":  254,
-"startColumn":  1,
-"endLine":  254,
-"endColumn":  1020
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 997 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/UnclosableStreamWrapper.cs#L266",
-"region":  {
-"startLine":  266,
-"startColumn":  1,
-"endLine":  266,
-"endColumn":  998
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 231 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/UnclosableStreamWrapper.cs#L277",
-"region":  {
-"startLine":  277,
-"startColumn":  1,
-"endLine":  277,
-"endColumn":  232
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 613 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/UnclosableStreamWrapper.cs#L279",
-"region":  {
-"startLine":  279,
-"startColumn":  1,
-"endLine":  279,
-"endColumn":  614
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 610 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/UnclosableStreamWrapper.cs#L288",
-"region":  {
-"startLine":  288,
-"startColumn":  1,
-"endLine":  288,
-"endColumn":  611
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 256 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/UnclosableStreamWrapper.cs#L300",
-"region":  {
-"startLine":  300,
-"startColumn":  1,
-"endLine":  300,
-"endColumn":  257
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 425 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/UnclosableStreamWrapper.cs#L309",
-"region":  {
-"startLine":  309,
-"startColumn":  1,
-"endLine":  309,
-"endColumn":  426
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 206 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Json/JavaScriptSerializer.cs#L73",
-"region":  {
-"startLine":  73,
-"startColumn":  1,
-"endLine":  73,
-"endColumn":  207
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 228 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Json/JsonConfiguration.cs#L38",
-"region":  {
-"startLine":  38,
-"startColumn":  1,
-"endLine":  38,
-"endColumn":  229
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 306 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Json/JsonConfigurationExtensions.cs#L22",
-"region":  {
-"startLine":  22,
-"startColumn":  1,
-"endLine":  22,
-"endColumn":  307
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 233 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Json/Simple/NancySerializationStrategy.cs#L230",
-"region":  {
-"startLine":  230,
-"startColumn":  1,
-"endLine":  230,
-"endColumn":  234
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 215 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Json/Simple/NancySerializationStrategy.cs#L248",
-"region":  {
-"startLine":  248,
-"startColumn":  1,
-"endLine":  248,
-"endColumn":  216
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 236 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Localization/ResourceBasedTextResource.cs#L89",
-"region":  {
-"startLine":  89,
-"startColumn":  1,
-"endLine":  89,
-"endColumn":  237
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 261 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Localization/TextResourceFinder.cs#L62",
-"region":  {
-"startLine":  62,
-"startColumn":  1,
-"endLine":  62,
-"endColumn":  262
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 537 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Localization/TextResourceFinder.cs#L86",
-"region":  {
-"startLine":  86,
-"startColumn":  1,
-"endLine":  86,
-"endColumn":  538
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 210 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Localization/TextResourceFinder.cs#L89",
-"region":  {
-"startLine":  89,
-"startColumn":  1,
-"endLine":  89,
-"endColumn":  211
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 627 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Localization/TextResourceFinder.cs#L104",
-"region":  {
-"startLine":  104,
-"startColumn":  1,
-"endLine":  104,
-"endColumn":  628
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 228 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Localization/TextResourceFinder.cs#L107",
-"region":  {
-"startLine":  107,
-"startColumn":  1,
-"endLine":  107,
-"endColumn":  229
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 260 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DynamicModelBinderAdapter.cs#L50",
-"region":  {
-"startLine":  50,
-"startColumn":  1,
-"endLine":  50,
-"endColumn":  261
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 224 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DynamicModelBinderAdapter.cs#L53",
-"region":  {
-"startLine":  53,
-"startColumn":  1,
-"endLine":  53,
-"endColumn":  225
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 694 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DynamicModelBinderAdapter.cs#L55",
-"region":  {
-"startLine":  55,
-"startColumn":  1,
-"endLine":  55,
-"endColumn":  695
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 359 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyModule.cs#L700",
-"region":  {
-"startLine":  700,
-"startColumn":  1,
-"endLine":  700,
-"endColumn":  360
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 226 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RequestHeaders.cs#L151",
-"region":  {
-"startLine":  151,
-"startColumn":  1,
-"endLine":  151,
-"endColumn":  227
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 206 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/GenericFileResponse.cs#L12",
-"region":  {
-"startLine":  12,
-"startColumn":  1,
-"endLine":  12,
-"endColumn":  207
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 261 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/GenericFileResponse.cs#L27",
-"region":  {
-"startLine":  27,
-"startColumn":  1,
-"endLine":  27,
-"endColumn":  262
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 210 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/TextResponse.cs#L57",
-"region":  {
-"startLine":  57,
-"startColumn":  1,
-"endLine":  57,
-"endColumn":  211
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 350 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/MatchResult.cs#L63",
-"region":  {
-"startLine":  63,
-"startColumn":  1,
-"endLine":  63,
-"endColumn":  351
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 212 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/Nodes/TrieNode.cs#L242",
-"region":  {
-"startLine":  242,
-"startColumn":  1,
-"endLine":  242,
-"endColumn":  213
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 265 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/ModuleSecurity.cs#L81",
-"region":  {
-"startLine":  81,
-"startColumn":  1,
-"endLine":  81,
-"endColumn":  266
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 248 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/ModuleSecurity.cs#L91",
-"region":  {
-"startLine":  91,
-"startColumn":  1,
-"endLine":  91,
-"endColumn":  249
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 265 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/SecurityHooks.cs#L141",
-"region":  {
-"startLine":  141,
-"startColumn":  1,
-"endLine":  141,
-"endColumn":  266
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 240 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L871",
-"region":  {
-"startLine":  871,
-"startColumn":  1,
-"endLine":  871,
-"endColumn":  241
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 249 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L872",
-"region":  {
-"startLine":  872,
-"startColumn":  1,
-"endLine":  872,
-"endColumn":  250
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 239 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L873",
-"region":  {
-"startLine":  873,
-"startColumn":  1,
-"endLine":  873,
-"endColumn":  240
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 220 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3517",
-"region":  {
-"startLine":  3517,
-"startColumn":  1,
-"endLine":  3517,
-"endColumn":  221
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 204 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3561",
-"region":  {
-"startLine":  3561,
-"startColumn":  1,
-"endLine":  3561,
-"endColumn":  205
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 228 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3681",
-"region":  {
-"startLine":  3681,
-"startColumn":  1,
-"endLine":  3681,
-"endColumn":  229
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 215 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3729",
-"region":  {
-"startLine":  3729,
-"startColumn":  1,
-"endLine":  3729,
-"endColumn":  216
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 285 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3756",
-"region":  {
-"startLine":  3756,
-"startColumn":  1,
-"endLine":  3756,
-"endColumn":  286
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 218 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Validation/DefaultValidatorLocator.cs#L37",
-"region":  {
-"startLine":  37,
-"startColumn":  1,
-"endLine":  37,
-"endColumn":  219
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 216 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/DefaultViewFactory.cs#L33",
-"region":  {
-"startLine":  33,
-"startColumn":  1,
-"endLine":  33,
-"endColumn":  217
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 215 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/DefaultViewLocator.cs#L191",
-"region":  {
-"startLine":  191,
-"startColumn":  1,
-"endLine":  191,
-"endColumn":  216
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 202 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/DefaultViewResolver.cs#L67",
-"region":  {
-"startLine":  67,
-"startColumn":  1,
-"endLine":  67,
-"endColumn":  203
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 237 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L38",
-"region":  {
-"startLine":  38,
-"startColumn":  1,
-"endLine":  38,
-"endColumn":  238
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 214 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L63",
-"region":  {
-"startLine":  63,
-"startColumn":  1,
-"endLine":  63,
-"endColumn":  215
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 202 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L73",
-"region":  {
-"startLine":  73,
-"startColumn":  1,
-"endLine":  73,
-"endColumn":  203
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S103",
+      "Message": "Split this 202 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/AppDomainAssemblyCatalog.cs#L72",
+      "Location": "Line 72 Position 1-203"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 242 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/MultipleRootPathProvidersLocatedException.cs#L16",
+      "Location": "Line 16 Position 1-243"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 220 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperBase.cs#L21",
+      "Location": "Line 21 Position 1-221"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 230 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperBase.cs#L648",
+      "Location": "Line 648 Position 1-231"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 218 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/NancyInternalConfiguration.cs#L73",
+      "Location": "Line 73 Position 1-219"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 237 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Configuration/DefaultNancyEnvironment.cs#L107",
+      "Location": "Line 107 Position 1-238"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 256 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Configuration/DefaultNancyEnvironment.cs#L57",
+      "Location": "Line 57 Position 1-257"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 237 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Configuration/INancyEnvironment.cs#L24",
+      "Location": "Line 24 Position 1-238"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 235 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/DefaultViewLocationConventions.cs#L90",
+      "Location": "Line 90 Position 1-236"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 225 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/DefaultViewLocationConventions.cs#L99",
+      "Location": "Line 99 Position 1-226"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 223 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L142",
+      "Location": "Line 142 Position 1-224"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 270 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L158",
+      "Location": "Line 158 Position 1-271"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 277 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L188",
+      "Location": "Line 188 Position 1-278"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 225 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L194",
+      "Location": "Line 194 Position 1-226"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 225 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L31",
+      "Location": "Line 31 Position 1-226"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 232 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L58",
+      "Location": "Line 58 Position 1-233"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 212 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L92",
+      "Location": "Line 92 Position 1-213"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 225 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentsConventionsExtensions.cs#L16",
+      "Location": "Line 16 Position 1-226"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 204 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DefaultNancyBootstrapper.cs#L285",
+      "Location": "Line 285 Position 1-205"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 222 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsConfigurationExtensions.cs#L21",
+      "Location": "Line 21 Position 1-223"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 236 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsConfigurationExtensions.cs#L43",
+      "Location": "Line 43 Position 1-237"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 244 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsHook.cs#L160",
+      "Location": "Line 160 Position 1-245"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 682 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsHook.cs#L37",
+      "Location": "Line 37 Position 1-683"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 296 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsModuleCatalog.cs#L17",
+      "Location": "Line 17 Position 1-297"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 315 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsModuleCatalog.cs#L43",
+      "Location": "Line 43 Position 1-316"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 256 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionary.cs#L243",
+      "Location": "Line 243 Position 1-257"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 241 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionary.cs#L284",
+      "Location": "Line 284 Position 1-242"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 262 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionary.cs#L67",
+      "Location": "Line 67 Position 1-263"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 243 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionary.cs#L69",
+      "Location": "Line 69 Position 1-244"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 785 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionary.cs#L70",
+      "Location": "Line 70 Position 1-786"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 262 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionary.cs#L78",
+      "Location": "Line 78 Position 1-263"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 225 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionary.cs#L80",
+      "Location": "Line 80 Position 1-226"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 710 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionary.cs#L81",
+      "Location": "Line 81 Position 1-711"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 239 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L226",
+      "Location": "Line 226 Position 1-240"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 298 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L228",
+      "Location": "Line 228 Position 1-299"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 650 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L229",
+      "Location": "Line 229 Position 1-651"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 260 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L256",
+      "Location": "Line 256 Position 1-261"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 298 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L258",
+      "Location": "Line 258 Position 1-299"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 694 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L259",
+      "Location": "Line 259 Position 1-695"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 219 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L957",
+      "Location": "Line 957 Position 1-220"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 318 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L962",
+      "Location": "Line 962 Position 1-319"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 396 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ErrorHandling/DefaultStatusCodeHandler.cs#L19",
+      "Location": "Line 19 Position 1-397"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 236 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLink.cs#L118",
+      "Location": "Line 118 Position 1-237"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 285 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLink.cs#L126",
+      "Location": "Line 126 Position 1-286"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 312 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLink.cs#L36",
+      "Location": "Line 36 Position 1-313"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 312 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLink.cs#L48",
+      "Location": "Line 48 Position 1-313"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 264 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLink.cs#L49",
+      "Location": "Line 49 Position 1-265"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 312 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLink.cs#L61",
+      "Location": "Line 61 Position 1-313"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 264 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLink.cs#L62",
+      "Location": "Line 62 Position 1-265"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 217 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpMultipartBuffer.cs#L78",
+      "Location": "Line 78 Position 1-218"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 234 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpMultipartSubStream.cs#L121",
+      "Location": "Line 121 Position 1-235"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 296 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpMultipartSubStream.cs#L122",
+      "Location": "Line 122 Position 1-297"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 229 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpMultipartSubStream.cs#L62",
+      "Location": "Line 62 Position 1-230"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 331 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpMultipartSubStream.cs#L74",
+      "Location": "Line 74 Position 1-332"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 359 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/INancyModule.cs#L51",
+      "Location": "Line 51 Position 1-360"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 232 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/INancyModule.cs#L82",
+      "Location": "Line 82 Position 1-233"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 231 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/RequestStream.cs#L237",
+      "Location": "Line 237 Position 1-232"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 233 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/RequestStream.cs#L326",
+      "Location": "Line 326 Position 1-234"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 296 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/RequestStream.cs#L327",
+      "Location": "Line 327 Position 1-297"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 331 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/UnclosableStreamWrapper.cs#L110",
+      "Location": "Line 110 Position 1-332"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 234 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/UnclosableStreamWrapper.cs#L145",
+      "Location": "Line 145 Position 1-235"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 235 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/UnclosableStreamWrapper.cs#L165",
+      "Location": "Line 165 Position 1-236"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 641 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/UnclosableStreamWrapper.cs#L211",
+      "Location": "Line 211 Position 1-642"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 495 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/UnclosableStreamWrapper.cs#L220",
+      "Location": "Line 220 Position 1-496"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 214 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/UnclosableStreamWrapper.cs#L230",
+      "Location": "Line 230 Position 1-215"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 1244 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/UnclosableStreamWrapper.cs#L232",
+      "Location": "Line 232 Position 1-1245"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 1096 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/UnclosableStreamWrapper.cs#L241",
+      "Location": "Line 241 Position 1-1097"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 1019 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/UnclosableStreamWrapper.cs#L254",
+      "Location": "Line 254 Position 1-1020"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 997 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/UnclosableStreamWrapper.cs#L266",
+      "Location": "Line 266 Position 1-998"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 231 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/UnclosableStreamWrapper.cs#L277",
+      "Location": "Line 277 Position 1-232"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 613 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/UnclosableStreamWrapper.cs#L279",
+      "Location": "Line 279 Position 1-614"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 610 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/UnclosableStreamWrapper.cs#L288",
+      "Location": "Line 288 Position 1-611"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 256 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/UnclosableStreamWrapper.cs#L300",
+      "Location": "Line 300 Position 1-257"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 425 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/UnclosableStreamWrapper.cs#L309",
+      "Location": "Line 309 Position 1-426"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 273 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/UnclosableStreamWrapper.cs#L95",
+      "Location": "Line 95 Position 1-274"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 206 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Json/JavaScriptSerializer.cs#L73",
+      "Location": "Line 73 Position 1-207"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 228 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Json/JsonConfiguration.cs#L38",
+      "Location": "Line 38 Position 1-229"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 306 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Json/JsonConfigurationExtensions.cs#L22",
+      "Location": "Line 22 Position 1-307"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 233 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Json/Simple/NancySerializationStrategy.cs#L230",
+      "Location": "Line 230 Position 1-234"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 215 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Json/Simple/NancySerializationStrategy.cs#L248",
+      "Location": "Line 248 Position 1-216"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 236 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Localization/ResourceBasedTextResource.cs#L89",
+      "Location": "Line 89 Position 1-237"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 627 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Localization/TextResourceFinder.cs#L104",
+      "Location": "Line 104 Position 1-628"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 228 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Localization/TextResourceFinder.cs#L107",
+      "Location": "Line 107 Position 1-229"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 261 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Localization/TextResourceFinder.cs#L62",
+      "Location": "Line 62 Position 1-262"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 537 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Localization/TextResourceFinder.cs#L86",
+      "Location": "Line 86 Position 1-538"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 210 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Localization/TextResourceFinder.cs#L89",
+      "Location": "Line 89 Position 1-211"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 260 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DynamicModelBinderAdapter.cs#L50",
+      "Location": "Line 50 Position 1-261"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 224 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DynamicModelBinderAdapter.cs#L53",
+      "Location": "Line 53 Position 1-225"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 694 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DynamicModelBinderAdapter.cs#L55",
+      "Location": "Line 55 Position 1-695"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 359 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyModule.cs#L700",
+      "Location": "Line 700 Position 1-360"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 226 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RequestHeaders.cs#L151",
+      "Location": "Line 151 Position 1-227"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 206 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/GenericFileResponse.cs#L12",
+      "Location": "Line 12 Position 1-207"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 261 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/GenericFileResponse.cs#L27",
+      "Location": "Line 27 Position 1-262"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 210 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/TextResponse.cs#L57",
+      "Location": "Line 57 Position 1-211"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 350 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/MatchResult.cs#L63",
+      "Location": "Line 63 Position 1-351"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 212 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/Nodes/TrieNode.cs#L242",
+      "Location": "Line 242 Position 1-213"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 265 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/ModuleSecurity.cs#L81",
+      "Location": "Line 81 Position 1-266"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 248 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/ModuleSecurity.cs#L91",
+      "Location": "Line 91 Position 1-249"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 265 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/SecurityHooks.cs#L141",
+      "Location": "Line 141 Position 1-266"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 220 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3517",
+      "Location": "Line 3517 Position 1-221"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 204 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3561",
+      "Location": "Line 3561 Position 1-205"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 228 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3681",
+      "Location": "Line 3681 Position 1-229"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 215 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3729",
+      "Location": "Line 3729 Position 1-216"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 285 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3756",
+      "Location": "Line 3756 Position 1-286"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 240 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L871",
+      "Location": "Line 871 Position 1-241"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 249 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L872",
+      "Location": "Line 872 Position 1-250"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 239 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L873",
+      "Location": "Line 873 Position 1-240"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 218 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Validation/DefaultValidatorLocator.cs#L37",
+      "Location": "Line 37 Position 1-219"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 216 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/DefaultViewFactory.cs#L33",
+      "Location": "Line 33 Position 1-217"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 215 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/DefaultViewLocator.cs#L191",
+      "Location": "Line 191 Position 1-216"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 202 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/DefaultViewResolver.cs#L67",
+      "Location": "Line 67 Position 1-203"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 237 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L38",
+      "Location": "Line 38 Position 1-238"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 214 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L63",
+      "Location": "Line 63 Position 1-215"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 202 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L73",
+      "Location": "Line 73 Position 1-203"
+    }
+  ]
 }

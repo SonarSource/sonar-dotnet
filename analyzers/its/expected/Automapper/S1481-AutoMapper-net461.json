@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'memberExpression'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L222",
-"region":  {
-"startLine":  222,
-"startColumn":  52,
-"endLine":  222,
-"endColumn":  68
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027memberExpression\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L222",
+      "Location": "Line 222 Position 52-68"
+    }
+  ]
 }

@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S2930",
-"message":  "Dispose 'fs0' when it is no longer needed.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L88",
-"region":  {
-"startLine":  88,
-"startColumn":  5,
-"endLine":  88,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S2930",
-"message":  "Dispose 'backing_field' when it is no longer needed.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2930.cs#L12",
-"region":  {
-"startLine":  12,
-"startColumn":  17,
-"endLine":  12,
-"endColumn":  56
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2930",
+      "Message": "Dispose \u0027fs0\u0027 when it is no longer needed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L88",
+      "Location": "Line 88 Position 5-55"
+    },
+    {
+      "Id": "S2930",
+      "Message": "Dispose \u0027backing_field\u0027 when it is no longer needed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2930.cs#L12",
+      "Location": "Line 12 Position 17-56"
+    }
+  ]
 }

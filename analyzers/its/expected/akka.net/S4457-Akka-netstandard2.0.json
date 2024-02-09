@@ -1,28 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S4457",
-"message":  "Split this method into two, one handling parameters check and the other handling the asynchronous code.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ByteString.cs#L525",
-"region":  {
-"startLine":  525,
-"startColumn":  27,
-"endLine":  525,
-"endColumn":  39
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ByteString.cs#L527",
-"region":  {
-"startLine":  527,
-"startColumn":  39,
-"endLine":  527,
-"endColumn":  80
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S4457",
+      "Message": "Split this method into two, one handling parameters check and the other handling the asynchronous code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ByteString.cs#L525",
+      "Location": "Line 525 Position 27-39"
+    }
+  ]
 }

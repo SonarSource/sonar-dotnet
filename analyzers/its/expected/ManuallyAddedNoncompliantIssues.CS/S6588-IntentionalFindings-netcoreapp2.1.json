@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S6588",
-"message":  "Use "DateTime.UnixEpoch" instead of creating DateTime instances that point to the unix epoch time",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S6588.cs#L7",
-"region":  {
-"startLine":  7,
-"startColumn":  37,
-"endLine":  7,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S6588",
-"message":  "Use "DateTimeOffset.UnixEpoch" instead of creating DateTimeOffset instances that point to the unix epoch time",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S6588.cs#L8",
-"region":  {
-"startLine":  8,
-"startColumn":  49,
-"endLine":  8,
-"endColumn":  103
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6588",
+      "Message": "Use \u0022DateTime.UnixEpoch\u0022 instead of creating DateTime instances that point to the unix epoch time",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S6588.cs#L7",
+      "Location": "Line 7 Position 37-61"
+    },
+    {
+      "Id": "S6588",
+      "Message": "Use \u0022DateTimeOffset.UnixEpoch\u0022 instead of creating DateTimeOffset instances that point to the unix epoch time",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S6588.cs#L8",
+      "Location": "Line 8 Position 49-103"
+    }
+  ]
 }

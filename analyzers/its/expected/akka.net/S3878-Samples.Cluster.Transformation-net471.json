@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3878",
-"message":  "Remove this array creation and simply pass the elements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Cluster/Roles/Samples.Cluster.Transformation/TransformationBackend.cs#L22",
-"region":  {
-"startLine":  22,
-"startColumn":  37,
-"endLine":  22,
-"endColumn":  76
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3878",
+      "Message": "Remove this array creation and simply pass the elements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Cluster/Roles/Samples.Cluster.Transformation/TransformationBackend.cs#L22",
+      "Location": "Line 22 Position 37-76"
+    }
+  ]
 }

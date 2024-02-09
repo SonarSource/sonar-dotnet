@@ -1,95 +1,46 @@
 {
-"issues":  [
-{
-"id":  "S6354",
-"message":  "Use a testable (date) time provider instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsHook.cs#L169",
-"region":  {
-"startLine":  169,
-"startColumn":  106,
-"endLine":  169,
-"endColumn":  118
-}
-}
-},
-{
-"id":  "S6354",
-"message":  "Use a testable (date) time provider instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsHook.cs#L207",
-"region":  {
-"startLine":  207,
-"startColumn":  30,
-"endLine":  207,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S6354",
-"message":  "Use a testable (date) time provider instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsHook.cs#L253",
-"region":  {
-"startLine":  253,
-"startColumn":  53,
-"endLine":  253,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S6354",
-"message":  "Use a testable (date) time provider instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsHook.cs#L283",
-"region":  {
-"startLine":  283,
-"startColumn":  26,
-"endLine":  283,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S6354",
-"message":  "Use a testable (date) time provider instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L215",
-"region":  {
-"startLine":  215,
-"startColumn":  27,
-"endLine":  215,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S6354",
-"message":  "Use a testable (date) time provider instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/Csrf.cs#L105",
-"region":  {
-"startLine":  105,
-"startColumn":  31,
-"endLine":  105,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S6354",
-"message":  "Use a testable (date) time provider instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/DefaultCsrfTokenValidator.cs#L64",
-"region":  {
-"startLine":  64,
-"startColumn":  21,
-"endLine":  64,
-"endColumn":  39
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6354",
+      "Message": "Use a testable (date) time provider instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsHook.cs#L169",
+      "Location": "Line 169 Position 106-118"
+    },
+    {
+      "Id": "S6354",
+      "Message": "Use a testable (date) time provider instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsHook.cs#L207",
+      "Location": "Line 207 Position 30-42"
+    },
+    {
+      "Id": "S6354",
+      "Message": "Use a testable (date) time provider instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsHook.cs#L253",
+      "Location": "Line 253 Position 53-71"
+    },
+    {
+      "Id": "S6354",
+      "Message": "Use a testable (date) time provider instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsHook.cs#L283",
+      "Location": "Line 283 Position 26-38"
+    },
+    {
+      "Id": "S6354",
+      "Message": "Use a testable (date) time provider instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L215",
+      "Location": "Line 215 Position 27-39"
+    },
+    {
+      "Id": "S6354",
+      "Message": "Use a testable (date) time provider instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/Csrf.cs#L105",
+      "Location": "Line 105 Position 31-49"
+    },
+    {
+      "Id": "S6354",
+      "Message": "Use a testable (date) time provider instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/DefaultCsrfTokenValidator.cs#L64",
+      "Location": "Line 64 Position 21-39"
+    }
+  ]
 }

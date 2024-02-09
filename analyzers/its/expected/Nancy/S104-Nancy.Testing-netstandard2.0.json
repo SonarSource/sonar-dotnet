@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S104",
-"message":  "This file has 1065 lines, which is greater than 1000 authorized. Split it into smaller files.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S104",
+      "Message": "This file has 1065 lines, which is greater than 1000 authorized. Split it into smaller files.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    }
+  ]
 }

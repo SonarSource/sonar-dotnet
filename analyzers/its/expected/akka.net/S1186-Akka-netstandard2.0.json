@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S1186",
-"message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/DeadLetterListener.cs#L27",
-"region":  {
-"startLine":  27,
-"startColumn":  33,
-"endLine":  27,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S1186",
-"message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/DeadLetterListener.cs#L34",
-"region":  {
-"startLine":  34,
-"startColumn":  33,
-"endLine":  34,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S1186",
-"message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/ILoggingAdapter.cs#L200",
-"region":  {
-"startLine":  200,
-"startColumn":  21,
-"endLine":  200,
-"endColumn":  25
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1186",
+      "Message": "Add a nested comment explaining why this method is empty, throw a \u0027NotSupportedException\u0027 or complete the implementation.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/DeadLetterListener.cs#L27",
+      "Location": "Line 27 Position 33-44"
+    },
+    {
+      "Id": "S1186",
+      "Message": "Add a nested comment explaining why this method is empty, throw a \u0027NotSupportedException\u0027 or complete the implementation.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/DeadLetterListener.cs#L34",
+      "Location": "Line 34 Position 33-43"
+    },
+    {
+      "Id": "S1186",
+      "Message": "Add a nested comment explaining why this method is empty, throw a \u0027NotSupportedException\u0027 or complete the implementation.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/ILoggingAdapter.cs#L200",
+      "Location": "Line 200 Position 21-25"
+    }
+  ]
 }

@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S6444",
-"message":  "Pass a timeout to limit the execution time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L137",
-"region":  {
-"startLine":  137,
-"startColumn":  34,
-"endLine":  137,
-"endColumn":  117
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6444",
+      "Message": "Pass a timeout to limit the execution time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L137",
+      "Location": "Line 137 Position 34-117"
+    }
+  ]
 }

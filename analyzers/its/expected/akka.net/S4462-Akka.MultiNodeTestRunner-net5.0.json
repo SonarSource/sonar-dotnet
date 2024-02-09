@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Wait' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L506",
-"region":  {
-"startLine":  506,
-"startColumn":  13,
-"endLine":  506,
-"endColumn":  127
-}
-}
-},
-{
-"id":  "S4462",
-"message":  "Replace this use of 'Task.Result' with 'await'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L527",
-"region":  {
-"startLine":  527,
-"startColumn":  23,
-"endLine":  527,
-"endColumn":  129
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Wait\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L506",
+      "Location": "Line 506 Position 13-127"
+    },
+    {
+      "Id": "S4462",
+      "Message": "Replace this use of \u0027Task.Result\u0027 with \u0027await\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L527",
+      "Location": "Line 527 Position 23-129"
+    }
+  ]
 }

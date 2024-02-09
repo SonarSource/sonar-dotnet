@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S138",
-"message":  "This method 'Receive' has 97 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterReceptionist.cs#L436",
-"region":  {
-"startLine":  436,
-"startColumn":  33,
-"endLine":  436,
-"endColumn":  40
-}
-}
-},
-{
-"id":  "S138",
-"message":  "This constructor 'DistributedPubSubMediator' has 230 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedPubSubMediator.cs#L150",
-"region":  {
-"startLine":  150,
-"startColumn":  16,
-"endLine":  150,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S138",
-"message":  "This method 'InitializeFSM' has 546 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L875",
-"region":  {
-"startLine":  875,
-"startColumn":  22,
-"endLine":  875,
-"endColumn":  35
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S138",
+      "Message": "This method \u0027Receive\u0027 has 97 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterReceptionist.cs#L436",
+      "Location": "Line 436 Position 33-40"
+    },
+    {
+      "Id": "S138",
+      "Message": "This constructor \u0027DistributedPubSubMediator\u0027 has 230 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedPubSubMediator.cs#L150",
+      "Location": "Line 150 Position 16-41"
+    },
+    {
+      "Id": "S138",
+      "Message": "This method \u0027InitializeFSM\u0027 has 546 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L875",
+      "Location": "Line 875 Position 22-35"
+    }
+  ]
 }

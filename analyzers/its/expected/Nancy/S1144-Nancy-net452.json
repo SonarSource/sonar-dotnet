@@ -1,56 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S1144",
-"message":  "Remove the unused private method 'IsNancyReferencing'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperLocator.cs#L66",
-"region":  {
-"startLine":  66,
-"startColumn":  29,
-"endLine":  66,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private property 'RootPath'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L277",
-"region":  {
-"startLine":  277,
-"startColumn":  27,
-"endLine":  277,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private method 'GetAllRoutes'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/DefaultRouteCacheProvider.cs#L76",
-"region":  {
-"startLine":  76,
-"startColumn":  55,
-"endLine":  76,
-"endColumn":  67
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private method 'ConstructType'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3843",
-"region":  {
-"startLine":  3843,
-"startColumn":  24,
-"endLine":  3843,
-"endColumn":  37
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private method \u0027IsNancyReferencing\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperLocator.cs#L66",
+      "Location": "Line 66 Position 29-47"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private property \u0027RootPath\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L277",
+      "Location": "Line 277 Position 27-35"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private method \u0027GetAllRoutes\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/DefaultRouteCacheProvider.cs#L76",
+      "Location": "Line 76 Position 55-67"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private method \u0027ConstructType\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3843",
+      "Location": "Line 3843 Position 24-37"
+    }
+  ]
 }

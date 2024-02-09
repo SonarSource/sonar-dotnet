@@ -1,69 +1,34 @@
 {
-"issues":  [
-{
-"id":  "S3928",
-"message":  "Use a constructor overloads that allows a more meaningful exception message to be provided.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L775",
-"region":  {
-"startLine":  775,
-"startColumn":  38,
-"endLine":  775,
-"endColumn":  65
-}
-}
-},
-{
-"id":  "S3928",
-"message":  "Use a constructor overloads that allows a more meaningful exception message to be provided.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORSet.cs#L676",
-"region":  {
-"startLine":  676,
-"startColumn":  38,
-"endLine":  676,
-"endColumn":  65
-}
-}
-},
-{
-"id":  "S3928",
-"message":  "The parameter name 'Can't deserialize key/value pair in ORDictionary delta - too many pairs on the wire' is not declared in the argument list.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1015-L1016",
-"region":  {
-"startLine":  1015,
-"startColumn":  39,
-"endLine":  1016,
-"endColumn":  124
-}
-}
-},
-{
-"id":  "S3928",
-"message":  "The parameter name 'Can't deserialize key/value pair in ORDictionary delta - too many pairs on the wire' is not declared in the argument list.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1030-L1031",
-"region":  {
-"startLine":  1030,
-"startColumn":  39,
-"endLine":  1031,
-"endColumn":  124
-}
-}
-},
-{
-"id":  "S3928",
-"message":  "The parameter name 'Timeouts must fit in a 32-bit unsigned int' is not declared in the argument list.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L374",
-"region":  {
-"startLine":  374,
-"startColumn":  23,
-"endLine":  374,
-"endColumn":  100
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3928",
+      "Message": "Use a constructor overloads that allows a more meaningful exception message to be provided.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L775",
+      "Location": "Line 775 Position 38-65"
+    },
+    {
+      "Id": "S3928",
+      "Message": "Use a constructor overloads that allows a more meaningful exception message to be provided.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORSet.cs#L676",
+      "Location": "Line 676 Position 38-65"
+    },
+    {
+      "Id": "S3928",
+      "Message": "The parameter name \u0027Can\u0027t deserialize key/value pair in ORDictionary delta - too many pairs on the wire\u0027 is not declared in the argument list.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1015-L1016",
+      "Location": "Lines 1015-1016 Position 39-124"
+    },
+    {
+      "Id": "S3928",
+      "Message": "The parameter name \u0027Can\u0027t deserialize key/value pair in ORDictionary delta - too many pairs on the wire\u0027 is not declared in the argument list.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1030-L1031",
+      "Location": "Lines 1030-1031 Position 39-124"
+    },
+    {
+      "Id": "S3928",
+      "Message": "The parameter name \u0027Timeouts must fit in a 32-bit unsigned int\u0027 is not declared in the argument list.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L374",
+      "Location": "Line 374 Position 23-100"
+    }
+  ]
 }

@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S109",
-"message":  "Assign this magic number '10' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Coordination/TimeoutSettings.cs#L33",
-"region":  {
-"startLine":  33,
-"startColumn":  109,
-"endLine":  33,
-"endColumn":  111
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '5000' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Coordination/TimeoutSettings.cs#L33",
-"region":  {
-"startLine":  33,
-"startColumn":  113,
-"endLine":  33,
-"endColumn":  117
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Coordination/TimeoutSettings.cs#L37",
-"region":  {
-"startLine":  37,
-"startColumn":  94,
-"endLine":  37,
-"endColumn":  95
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002710\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Coordination/TimeoutSettings.cs#L33",
+      "Location": "Line 33 Position 109-111"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00275000\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Coordination/TimeoutSettings.cs#L33",
+      "Location": "Line 33 Position 113-117"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Coordination/TimeoutSettings.cs#L37",
+      "Location": "Line 37 Position 94-95"
+    }
+  ]
 }

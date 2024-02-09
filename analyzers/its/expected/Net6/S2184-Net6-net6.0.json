@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2184",
-"message":  "Cast one of the operands of this division to 'double'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/Deconstruction.cs#L12",
-"region":  {
-"startLine":  12,
-"startColumn":  55,
-"endLine":  12,
-"endColumn":  61
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2184",
+      "Message": "Cast one of the operands of this division to \u0027double\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/Deconstruction.cs#L12",
+      "Location": "Line 12 Position 55-61"
+    }
+  ]
 }

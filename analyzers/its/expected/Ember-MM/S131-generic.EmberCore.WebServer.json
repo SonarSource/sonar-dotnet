@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S131",
-"message":  "Add a 'Case Else' clause to this 'Select' statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L131",
-"region":  {
-"startLine":  131,
-"startColumn":  25,
-"endLine":  131,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S131",
-"message":  "Add a 'Case Else' clause to this 'Select' statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L200",
-"region":  {
-"startLine":  200,
-"startColumn":  33,
-"endLine":  200,
-"endColumn":  39
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S131",
+      "Message": "Add a \u0027Case Else\u0027 clause to this \u0027Select\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L131",
+      "Location": "Line 131 Position 25-31"
+    },
+    {
+      "Id": "S131",
+      "Message": "Add a \u0027Case Else\u0027 clause to this \u0027Select\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L200",
+      "Location": "Line 200 Position 33-39"
+    }
+  ]
 }

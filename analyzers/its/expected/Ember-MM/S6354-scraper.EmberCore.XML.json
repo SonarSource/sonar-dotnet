@@ -1,56 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S6354",
-"message":  "Use a testable (date) time provider instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MediaTag.vb#L59",
-"region":  {
-"startLine":  59,
-"startColumn":  34,
-"endLine":  59,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S6354",
-"message":  "Use a testable (date) time provider instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L69",
-"region":  {
-"startLine":  69,
-"startColumn":  31,
-"endLine":  69,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S6354",
-"message":  "Use a testable (date) time provider instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L290",
-"region":  {
-"startLine":  290,
-"startColumn":  35,
-"endLine":  290,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S6354",
-"message":  "Use a testable (date) time provider instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L511",
-"region":  {
-"startLine":  511,
-"startColumn":  34,
-"endLine":  511,
-"endColumn":  46
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6354",
+      "Message": "Use a testable (date) time provider instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MediaTag.vb#L59",
+      "Location": "Line 59 Position 34-46"
+    },
+    {
+      "Id": "S6354",
+      "Message": "Use a testable (date) time provider instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L290",
+      "Location": "Line 290 Position 35-47"
+    },
+    {
+      "Id": "S6354",
+      "Message": "Use a testable (date) time provider instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L511",
+      "Location": "Line 511 Position 34-46"
+    },
+    {
+      "Id": "S6354",
+      "Message": "Use a testable (date) time provider instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L69",
+      "Location": "Line 69 Position 31-43"
+    }
+  ]
 }

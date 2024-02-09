@@ -1,56 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S1226",
-"message":  "Introduce a new variable instead of reusing the parameter 'actor'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L655",
-"region":  {
-"startLine":  655,
-"startColumn":  17,
-"endLine":  655,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S1226",
-"message":  "Introduce a new variable instead of reusing the parameter 'actor'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L679",
-"region":  {
-"startLine":  679,
-"startColumn":  17,
-"endLine":  679,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S1226",
-"message":  "Introduce a new variable instead of reusing the parameter 'actor'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L702",
-"region":  {
-"startLine":  702,
-"startColumn":  17,
-"endLine":  702,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S1226",
-"message":  "Introduce a new variable instead of reusing the parameter 'actor'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Resolver.cs#L63",
-"region":  {
-"startLine":  63,
-"startColumn":  13,
-"endLine":  63,
-"endColumn":  18
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1226",
+      "Message": "Introduce a new variable instead of reusing the parameter \u0027actor\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L655",
+      "Location": "Line 655 Position 17-22"
+    },
+    {
+      "Id": "S1226",
+      "Message": "Introduce a new variable instead of reusing the parameter \u0027actor\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L679",
+      "Location": "Line 679 Position 17-22"
+    },
+    {
+      "Id": "S1226",
+      "Message": "Introduce a new variable instead of reusing the parameter \u0027actor\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L702",
+      "Location": "Line 702 Position 17-22"
+    },
+    {
+      "Id": "S1226",
+      "Message": "Introduce a new variable instead of reusing the parameter \u0027actor\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Resolver.cs#L63",
+      "Location": "Line 63 Position 13-18"
+    }
+  ]
 }

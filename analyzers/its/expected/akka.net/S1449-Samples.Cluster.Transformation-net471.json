@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1449",
-"message":  "Define the locale to be used in this string operation.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Cluster/Roles/Samples.Cluster.Transformation/TransformationBackend.cs#L42",
-"region":  {
-"startLine":  42,
-"startColumn":  153,
-"endLine":  42,
-"endColumn":  160
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1449",
+      "Message": "Define the locale to be used in this string operation.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Cluster/Roles/Samples.Cluster.Transformation/TransformationBackend.cs#L42",
+      "Location": "Line 42 Position 153-160"
+    }
+  ]
 }

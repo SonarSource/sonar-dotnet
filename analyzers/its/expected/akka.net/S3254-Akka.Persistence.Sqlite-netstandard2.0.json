@@ -1,173 +1,82 @@
 {
-"issues":  [
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'default'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Journal/BatchingSqliteJournal.cs#L31",
-"region":  {
-"startLine":  31,
-"startColumn":  76,
-"endLine":  31,
-"endColumn":  80
-}
-}
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'default'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Journal/BatchingSqliteJournal.cs#L32",
-"region":  {
-"startLine":  32,
-"startColumn":  76,
-"endLine":  32,
-"endColumn":  80
-}
-}
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'default'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Journal/BatchingSqliteJournal.cs#L42",
-"region":  {
-"startLine":  42,
-"startColumn":  71,
-"endLine":  42,
-"endColumn":  75
-}
-}
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'default'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Journal/BatchingSqliteJournal.cs#L43",
-"region":  {
-"startLine":  43,
-"startColumn":  71,
-"endLine":  43,
-"endColumn":  75
-}
-}
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'default'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Journal/BatchingSqliteJournal.cs#L44",
-"region":  {
-"startLine":  44,
-"startColumn":  85,
-"endLine":  44,
-"endColumn":  90
-}
-}
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'default'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Journal/SqliteJournal.cs#L35",
-"region":  {
-"startLine":  35,
-"startColumn":  72,
-"endLine":  35,
-"endColumn":  76
-}
-}
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'default'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Journal/SqliteJournal.cs#L36",
-"region":  {
-"startLine":  36,
-"startColumn":  72,
-"endLine":  36,
-"endColumn":  76
-}
-}
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'default'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Journal/SqliteJournal.cs#L46",
-"region":  {
-"startLine":  46,
-"startColumn":  67,
-"endLine":  46,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'default'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Journal/SqliteJournal.cs#L47",
-"region":  {
-"startLine":  47,
-"startColumn":  67,
-"endLine":  47,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'default'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Journal/SqliteJournal.cs#L48",
-"region":  {
-"startLine":  48,
-"startColumn":  81,
-"endLine":  48,
-"endColumn":  86
-}
-}
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'default'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Journal/SqliteJournal.cs#L50",
-"region":  {
-"startLine":  50,
-"startColumn":  81,
-"endLine":  50,
-"endColumn":  85
-}
-}
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'default'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Snapshot/SqliteSnapshotStore.cs#L125",
-"region":  {
-"startLine":  125,
-"startColumn":  67,
-"endLine":  125,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'default'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Snapshot/SqliteSnapshotStore.cs#L126",
-"region":  {
-"startLine":  126,
-"startColumn":  81,
-"endLine":  126,
-"endColumn":  86
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Journal/BatchingSqliteJournal.cs#L31",
+      "Location": "Line 31 Position 76-80"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Journal/BatchingSqliteJournal.cs#L32",
+      "Location": "Line 32 Position 76-80"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Journal/BatchingSqliteJournal.cs#L42",
+      "Location": "Line 42 Position 71-75"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Journal/BatchingSqliteJournal.cs#L43",
+      "Location": "Line 43 Position 71-75"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Journal/BatchingSqliteJournal.cs#L44",
+      "Location": "Line 44 Position 85-90"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Journal/SqliteJournal.cs#L35",
+      "Location": "Line 35 Position 72-76"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Journal/SqliteJournal.cs#L36",
+      "Location": "Line 36 Position 72-76"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Journal/SqliteJournal.cs#L46",
+      "Location": "Line 46 Position 67-71"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Journal/SqliteJournal.cs#L47",
+      "Location": "Line 47 Position 67-71"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Journal/SqliteJournal.cs#L48",
+      "Location": "Line 48 Position 81-86"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Journal/SqliteJournal.cs#L50",
+      "Location": "Line 50 Position 81-85"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Snapshot/SqliteSnapshotStore.cs#L125",
+      "Location": "Line 125 Position 67-71"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Snapshot/SqliteSnapshotStore.cs#L126",
+      "Location": "Line 126 Position 81-86"
+    }
+  ]
 }

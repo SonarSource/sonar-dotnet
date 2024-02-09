@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S2302",
-"message":  "Replace the string 'manifest' with 'nameof(manifest)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/JournalSerializationSpec.cs#L215",
-"region":  {
-"startLine":  215,
-"startColumn":  45,
-"endLine":  215,
-"endColumn":  67
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'manifest' with 'nameof(manifest)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/SnapshotStoreSerializationSpec.cs#L188",
-"region":  {
-"startLine":  188,
-"startColumn":  47,
-"endLine":  188,
-"endColumn":  103
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027manifest\u0027 with \u0027nameof(manifest)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/JournalSerializationSpec.cs#L215",
+      "Location": "Line 215 Position 45-67"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027manifest\u0027 with \u0027nameof(manifest)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/SnapshotStoreSerializationSpec.cs#L188",
+      "Location": "Line 188 Position 47-103"
+    }
+  ]
 }

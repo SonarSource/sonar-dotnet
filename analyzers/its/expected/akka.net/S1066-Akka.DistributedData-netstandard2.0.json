@@ -1,52 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORSet.cs#L721",
-"region":  {
-"startLine":  721,
-"startColumn":  17,
-"endLine":  721,
-"endColumn":  19
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORSet.cs#L719",
-"region":  {
-"startLine":  719,
-"startColumn":  13,
-"endLine":  719,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1393",
-"region":  {
-"startLine":  1393,
-"startColumn":  29,
-"endLine":  1393,
-"endColumn":  31
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1391",
-"region":  {
-"startLine":  1391,
-"startColumn":  25,
-"endLine":  1391,
-"endColumn":  27
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORSet.cs#L721",
+      "Location": "Line 721 Position 17-19"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1393",
+      "Location": "Line 1393 Position 29-31"
+    }
+  ]
 }

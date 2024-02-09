@@ -1,95 +1,46 @@
 {
-"issues":  [
-{
-"id":  "S3903",
-"message":  "Move 'UserManager' into a named namespace.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfPatterns/Program.cs#L73",
-"region":  {
-"startLine":  73,
-"startColumn":  14,
-"endLine":  73,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S3903",
-"message":  "Move 'Person' into a named namespace.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfPatterns/Program.cs#L109",
-"region":  {
-"startLine":  109,
-"startColumn":  15,
-"endLine":  109,
-"endColumn":  21
-}
-}
-},
-{
-"id":  "S3903",
-"message":  "Move 'OpenCaseFile' into a named namespace.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfPatterns/Program.cs#L111",
-"region":  {
-"startLine":  111,
-"startColumn":  15,
-"endLine":  111,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S3903",
-"message":  "Move 'Mycroft' into a named namespace.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfPatterns/Program.cs#L113",
-"region":  {
-"startLine":  113,
-"startColumn":  15,
-"endLine":  113,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S3903",
-"message":  "Move 'Content' into a named namespace.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfPatterns/Program.cs#L118",
-"region":  {
-"startLine":  118,
-"startColumn":  15,
-"endLine":  118,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S3903",
-"message":  "Move 'AccessType' into a named namespace.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfPatterns/Program.cs#L120",
-"region":  {
-"startLine":  120,
-"startColumn":  13,
-"endLine":  120,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S3903",
-"message":  "Move 'ContentType' into a named namespace.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfPatterns/Program.cs#L128",
-"region":  {
-"startLine":  128,
-"startColumn":  13,
-"endLine":  128,
-"endColumn":  24
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3903",
+      "Message": "Move \u0027Person\u0027 into a named namespace.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfPatterns/Program.cs#L109",
+      "Location": "Line 109 Position 15-21"
+    },
+    {
+      "Id": "S3903",
+      "Message": "Move \u0027OpenCaseFile\u0027 into a named namespace.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfPatterns/Program.cs#L111",
+      "Location": "Line 111 Position 15-27"
+    },
+    {
+      "Id": "S3903",
+      "Message": "Move \u0027Mycroft\u0027 into a named namespace.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfPatterns/Program.cs#L113",
+      "Location": "Line 113 Position 15-22"
+    },
+    {
+      "Id": "S3903",
+      "Message": "Move \u0027Content\u0027 into a named namespace.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfPatterns/Program.cs#L118",
+      "Location": "Line 118 Position 15-22"
+    },
+    {
+      "Id": "S3903",
+      "Message": "Move \u0027AccessType\u0027 into a named namespace.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfPatterns/Program.cs#L120",
+      "Location": "Line 120 Position 13-23"
+    },
+    {
+      "Id": "S3903",
+      "Message": "Move \u0027ContentType\u0027 into a named namespace.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfPatterns/Program.cs#L128",
+      "Location": "Line 128 Position 13-24"
+    },
+    {
+      "Id": "S3903",
+      "Message": "Move \u0027UserManager\u0027 into a named namespace.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfPatterns/Program.cs#L73",
+      "Location": "Line 73 Position 14-25"
+    }
+  ]
 }

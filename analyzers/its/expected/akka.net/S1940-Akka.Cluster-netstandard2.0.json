@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1940",
-"message":  "Use the opposite operator ('<=') instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L113",
-"region":  {
-"startLine":  113,
-"startColumn":  28,
-"endLine":  113,
-"endColumn":  50
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1940",
+      "Message": "Use the opposite operator (\u0027\u003C=\u0027) instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L113",
+      "Location": "Line 113 Position 28-50"
+    }
+  ]
 }

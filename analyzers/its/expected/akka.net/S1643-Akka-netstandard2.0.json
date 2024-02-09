@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S1643",
-"message":  "Use a StringBuilder instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ListPriorityQueue.cs#L113",
-"region":  {
-"startLine":  113,
-"startColumn":  17,
-"endLine":  113,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S1643",
-"message":  "Use a StringBuilder instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/StableListPriorityQueue.cs#L146",
-"region":  {
-"startLine":  146,
-"startColumn":  17,
-"endLine":  146,
-"endColumn":  47
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1643",
+      "Message": "Use a StringBuilder instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ListPriorityQueue.cs#L113",
+      "Location": "Line 113 Position 17-47"
+    },
+    {
+      "Id": "S1643",
+      "Message": "Use a StringBuilder instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/StableListPriorityQueue.cs#L146",
+      "Location": "Line 146 Position 17-47"
+    }
+  ]
 }

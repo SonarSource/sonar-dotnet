@@ -1,121 +1,58 @@
 {
-"issues":  [
-{
-"id":  "S103",
-"message":  "Split this 223 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L198",
-"region":  {
-"startLine":  198,
-"startColumn":  1,
-"endLine":  198,
-"endColumn":  224
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 231 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L214",
-"region":  {
-"startLine":  214,
-"startColumn":  1,
-"endLine":  214,
-"endColumn":  232
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 201 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L17",
-"region":  {
-"startLine":  17,
-"startColumn":  1,
-"endLine":  17,
-"endColumn":  202
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 228 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L96",
-"region":  {
-"startLine":  96,
-"startColumn":  1,
-"endLine":  96,
-"endColumn":  229
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 212 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L48",
-"region":  {
-"startLine":  48,
-"startColumn":  1,
-"endLine":  48,
-"endColumn":  213
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 214 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L106",
-"region":  {
-"startLine":  106,
-"startColumn":  1,
-"endLine":  106,
-"endColumn":  215
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 201 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/Module.Extractor.vb#L45",
-"region":  {
-"startLine":  45,
-"startColumn":  1,
-"endLine":  45,
-"endColumn":  202
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 207 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/Module.Extractor.vb#L78",
-"region":  {
-"startLine":  78,
-"startColumn":  1,
-"endLine":  78,
-"endColumn":  208
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 263 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/Module.Extractor.vb#L113",
-"region":  {
-"startLine":  113,
-"startColumn":  1,
-"endLine":  113,
-"endColumn":  264
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S103",
+      "Message": "Split this 223 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L198",
+      "Location": "Line 198 Position 1-224"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 231 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L214",
+      "Location": "Line 214 Position 1-232"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 201 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L17",
+      "Location": "Line 17 Position 1-202"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 228 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L96",
+      "Location": "Line 96 Position 1-229"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 214 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L106",
+      "Location": "Line 106 Position 1-215"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 212 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L48",
+      "Location": "Line 48 Position 1-213"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 263 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/Module.Extractor.vb#L113",
+      "Location": "Line 113 Position 1-264"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 201 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/Module.Extractor.vb#L45",
+      "Location": "Line 45 Position 1-202"
+    },
+    {
+      "Id": "S103",
+      "Message": "Split this 207 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/Module.Extractor.vb#L78",
+      "Location": "Line 78 Position 1-208"
+    }
+  ]
 }

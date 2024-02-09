@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S4261",
-"message":  "Add the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PingPong/Program.cs#L167",
-"region":  {
-"startLine":  167,
-"startColumn":  54,
-"endLine":  167,
-"endColumn":  63
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4261",
+      "Message": "Add the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PingPong/Program.cs#L167",
+      "Location": "Line 167 Position 54-63"
+    }
+  ]
 }

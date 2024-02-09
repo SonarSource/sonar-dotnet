@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S138",
-"message":  "This method 'HandleCoordinatorMessage' has 87 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L982",
-"region":  {
-"startLine":  982,
-"startColumn":  22,
-"endLine":  982,
-"endColumn":  46
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S138",
+      "Message": "This method \u0027HandleCoordinatorMessage\u0027 has 87 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L982",
+      "Location": "Line 982 Position 22-46"
+    }
+  ]
 }

@@ -1,186 +1,88 @@
 {
-"issues":  [
-{
-"id":  "S2077",
-"message":  "Make sure using a dynamically formatted SQL query is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L235",
-"region":  {
-"startLine":  235,
-"startColumn":  33,
-"endLine":  235,
-"endColumn":  58
-}
-}
-},
-{
-"id":  "S2077",
-"message":  "Make sure using a dynamically formatted SQL query is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L239",
-"region":  {
-"startLine":  239,
-"startColumn":  45,
-"endLine":  239,
-"endColumn":  67
-}
-}
-},
-{
-"id":  "S2077",
-"message":  "Make sure using a dynamically formatted SQL query is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L299",
-"region":  {
-"startLine":  299,
-"startColumn":  33,
-"endLine":  299,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S2077",
-"message":  "Make sure using a dynamically formatted SQL query is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgMovieSource.vb#L78",
-"region":  {
-"startLine":  78,
-"startColumn":  21,
-"endLine":  78,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S2077",
-"message":  "Make sure using a dynamically formatted SQL query is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgMovieSource.vb#L132",
-"region":  {
-"startLine":  132,
-"startColumn":  25,
-"endLine":  132,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S2077",
-"message":  "Make sure using a dynamically formatted SQL query is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgTVSource.vb#L73",
-"region":  {
-"startLine":  73,
-"startColumn":  21,
-"endLine":  73,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S2077",
-"message":  "Make sure using a dynamically formatted SQL query is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgTVSource.vb#L98",
-"region":  {
-"startLine":  98,
-"startColumn":  21,
-"endLine":  98,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S2077",
-"message":  "Make sure using a dynamically formatted SQL query is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgTVSource.vb#L120",
-"region":  {
-"startLine":  120,
-"startColumn":  25,
-"endLine":  120,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S2077",
-"message":  "Make sure using a dynamically formatted SQL query is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L359",
-"region":  {
-"startLine":  359,
-"startColumn":  17,
-"endLine":  359,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S2077",
-"message":  "Make sure using a dynamically formatted SQL query is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L375",
-"region":  {
-"startLine":  375,
-"startColumn":  17,
-"endLine":  375,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S2077",
-"message":  "Make sure using a dynamically formatted SQL query is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2027",
-"region":  {
-"startLine":  2027,
-"startColumn":  25,
-"endLine":  2027,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S2077",
-"message":  "Make sure using a dynamically formatted SQL query is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2575",
-"region":  {
-"startLine":  2575,
-"startColumn":  25,
-"endLine":  2575,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S2077",
-"message":  "Make sure using a dynamically formatted SQL query is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7141",
-"region":  {
-"startLine":  7141,
-"startColumn":  17,
-"endLine":  7141,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S2077",
-"message":  "Make sure using a dynamically formatted SQL query is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7216",
-"region":  {
-"startLine":  7216,
-"startColumn":  25,
-"endLine":  7216,
-"endColumn":  47
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L235",
+      "Location": "Line 235 Position 33-58"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L239",
+      "Location": "Line 239 Position 45-67"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L299",
+      "Location": "Line 299 Position 33-55"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgMovieSource.vb#L132",
+      "Location": "Line 132 Position 25-47"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgMovieSource.vb#L78",
+      "Location": "Line 78 Position 21-43"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgTVSource.vb#L120",
+      "Location": "Line 120 Position 25-47"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgTVSource.vb#L73",
+      "Location": "Line 73 Position 21-43"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgTVSource.vb#L98",
+      "Location": "Line 98 Position 21-43"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2027",
+      "Location": "Line 2027 Position 25-47"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2575",
+      "Location": "Line 2575 Position 25-47"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L359",
+      "Location": "Line 359 Position 17-39"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L375",
+      "Location": "Line 375 Position 17-39"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7141",
+      "Location": "Line 7141 Position 17-39"
+    },
+    {
+      "Id": "S2077",
+      "Message": "Make sure using a dynamically formatted SQL query is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7216",
+      "Location": "Line 7216 Position 25-47"
+    }
+  ]
 }

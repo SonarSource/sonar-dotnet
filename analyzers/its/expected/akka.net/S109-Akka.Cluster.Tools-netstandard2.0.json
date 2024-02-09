@@ -1,95 +1,46 @@
 {
-"issues":  [
-{
-"id":  "S109",
-"message":  "Assign this magic number '10000' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterClientSettings.cs#L131",
-"region":  {
-"startLine":  131,
-"startColumn":  48,
-"endLine":  131,
-"endColumn":  53
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '10' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterReceptionist.cs#L381",
-"region":  {
-"startLine":  381,
-"startColumn":  35,
-"endLine":  381,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedPubSubMediator.cs#L162",
-"region":  {
-"startLine":  162,
-"startColumn":  79,
-"endLine":  162,
-"endColumn":  80
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/Internal/Topics.cs#L54",
-"region":  {
-"startLine":  54,
-"startColumn":  66,
-"endLine":  54,
-"endColumn":  67
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '3' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L677",
-"region":  {
-"startLine":  677,
-"startColumn":  60,
-"endLine":  677,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '3' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L678",
-"region":  {
-"startLine":  678,
-"startColumn":  69,
-"endLine":  678,
-"endColumn":  70
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '3' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L1247",
-"region":  {
-"startLine":  1247,
-"startColumn":  74,
-"endLine":  1247,
-"endColumn":  75
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002710000\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterClientSettings.cs#L131",
+      "Location": "Line 131 Position 48-53"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u002710\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterReceptionist.cs#L381",
+      "Location": "Line 381 Position 35-37"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedPubSubMediator.cs#L162",
+      "Location": "Line 162 Position 79-80"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/Internal/Topics.cs#L54",
+      "Location": "Line 54 Position 66-67"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L1247",
+      "Location": "Line 1247 Position 74-75"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L677",
+      "Location": "Line 677 Position 60-61"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L678",
+      "Location": "Line 678 Position 69-70"
+    }
+  ]
 }

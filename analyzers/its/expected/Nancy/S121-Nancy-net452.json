@@ -1,2812 +1,1300 @@
 {
-"issues":  [
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L176",
-"region":  {
-"startLine":  176,
-"startColumn":  13,
-"endLine":  176,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L178",
-"region":  {
-"startLine":  178,
-"startColumn":  18,
-"endLine":  178,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L180",
-"region":  {
-"startLine":  180,
-"startColumn":  18,
-"endLine":  180,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L182",
-"region":  {
-"startLine":  182,
-"startColumn":  18,
-"endLine":  182,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L184",
-"region":  {
-"startLine":  184,
-"startColumn":  18,
-"endLine":  184,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L186",
-"region":  {
-"startLine":  186,
-"startColumn":  18,
-"endLine":  186,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L188",
-"region":  {
-"startLine":  188,
-"startColumn":  18,
-"endLine":  188,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L190",
-"region":  {
-"startLine":  190,
-"startColumn":  18,
-"endLine":  190,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L192",
-"region":  {
-"startLine":  192,
-"startColumn":  18,
-"endLine":  192,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L194",
-"region":  {
-"startLine":  194,
-"startColumn":  18,
-"endLine":  194,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L196",
-"region":  {
-"startLine":  196,
-"startColumn":  18,
-"endLine":  196,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L198",
-"region":  {
-"startLine":  198,
-"startColumn":  18,
-"endLine":  198,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L200",
-"region":  {
-"startLine":  200,
-"startColumn":  18,
-"endLine":  200,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L202",
-"region":  {
-"startLine":  202,
-"startColumn":  18,
-"endLine":  202,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L204",
-"region":  {
-"startLine":  204,
-"startColumn":  18,
-"endLine":  204,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L206",
-"region":  {
-"startLine":  206,
-"startColumn":  18,
-"endLine":  206,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'else' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L208",
-"region":  {
-"startLine":  208,
-"startColumn":  13,
-"endLine":  208,
-"endColumn":  17
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L64",
-"region":  {
-"startLine":  64,
-"startColumn":  21,
-"endLine":  64,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L124",
-"region":  {
-"startLine":  124,
-"startColumn":  13,
-"endLine":  124,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'else' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L126",
-"region":  {
-"startLine":  126,
-"startColumn":  13,
-"endLine":  126,
-"endColumn":  17
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L129",
-"region":  {
-"startLine":  129,
-"startColumn":  13,
-"endLine":  129,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'else' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L131",
-"region":  {
-"startLine":  131,
-"startColumn":  13,
-"endLine":  131,
-"endColumn":  17
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L137",
-"region":  {
-"startLine":  137,
-"startColumn":  13,
-"endLine":  137,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'else' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L139",
-"region":  {
-"startLine":  139,
-"startColumn":  13,
-"endLine":  139,
-"endColumn":  17
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L152",
-"region":  {
-"startLine":  152,
-"startColumn":  17,
-"endLine":  152,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L156",
-"region":  {
-"startLine":  156,
-"startColumn":  13,
-"endLine":  156,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L222",
-"region":  {
-"startLine":  222,
-"startColumn":  13,
-"endLine":  222,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'for' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L227",
-"region":  {
-"startLine":  227,
-"startColumn":  13,
-"endLine":  227,
-"endColumn":  16
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L235",
-"region":  {
-"startLine":  235,
-"startColumn":  13,
-"endLine":  235,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L239",
-"region":  {
-"startLine":  239,
-"startColumn":  13,
-"endLine":  239,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L242",
-"region":  {
-"startLine":  242,
-"startColumn":  13,
-"endLine":  242,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L245",
-"region":  {
-"startLine":  245,
-"startColumn":  13,
-"endLine":  245,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'for' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L250",
-"region":  {
-"startLine":  250,
-"startColumn":  13,
-"endLine":  250,
-"endColumn":  16
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L258",
-"region":  {
-"startLine":  258,
-"startColumn":  13,
-"endLine":  258,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L261",
-"region":  {
-"startLine":  261,
-"startColumn":  13,
-"endLine":  261,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L279",
-"region":  {
-"startLine":  279,
-"startColumn":  13,
-"endLine":  279,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'else' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L323",
-"region":  {
-"startLine":  323,
-"startColumn":  25,
-"endLine":  323,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L338",
-"region":  {
-"startLine":  338,
-"startColumn":  13,
-"endLine":  338,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L341",
-"region":  {
-"startLine":  341,
-"startColumn":  13,
-"endLine":  341,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L359",
-"region":  {
-"startLine":  359,
-"startColumn":  13,
-"endLine":  359,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'for' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L364",
-"region":  {
-"startLine":  364,
-"startColumn":  13,
-"endLine":  364,
-"endColumn":  16
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L391",
-"region":  {
-"startLine":  391,
-"startColumn":  13,
-"endLine":  391,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L394",
-"region":  {
-"startLine":  394,
-"startColumn":  13,
-"endLine":  394,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L397",
-"region":  {
-"startLine":  397,
-"startColumn":  13,
-"endLine":  397,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L483",
-"region":  {
-"startLine":  483,
-"startColumn":  25,
-"endLine":  483,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'else' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L647",
-"region":  {
-"startLine":  647,
-"startColumn":  17,
-"endLine":  647,
-"endColumn":  21
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'else' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L655",
-"region":  {
-"startLine":  655,
-"startColumn":  13,
-"endLine":  655,
-"endColumn":  17
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'else' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L679",
-"region":  {
-"startLine":  679,
-"startColumn":  13,
-"endLine":  679,
-"endColumn":  17
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L61",
-"region":  {
-"startLine":  61,
-"startColumn":  17,
-"endLine":  61,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L69",
-"region":  {
-"startLine":  69,
-"startColumn":  17,
-"endLine":  69,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L132",
-"region":  {
-"startLine":  132,
-"startColumn":  17,
-"endLine":  132,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'else' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L135",
-"region":  {
-"startLine":  135,
-"startColumn":  13,
-"endLine":  135,
-"endColumn":  17
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L141",
-"region":  {
-"startLine":  141,
-"startColumn":  13,
-"endLine":  141,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L144",
-"region":  {
-"startLine":  144,
-"startColumn":  13,
-"endLine":  144,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L147",
-"region":  {
-"startLine":  147,
-"startColumn":  13,
-"endLine":  147,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'else' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L169",
-"region":  {
-"startLine":  169,
-"startColumn":  25,
-"endLine":  169,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L184",
-"region":  {
-"startLine":  184,
-"startColumn":  17,
-"endLine":  184,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'else' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L186",
-"region":  {
-"startLine":  186,
-"startColumn":  17,
-"endLine":  186,
-"endColumn":  21
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L198",
-"region":  {
-"startLine":  198,
-"startColumn":  13,
-"endLine":  198,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L207",
-"region":  {
-"startLine":  207,
-"startColumn":  13,
-"endLine":  207,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L210",
-"region":  {
-"startLine":  210,
-"startColumn":  13,
-"endLine":  210,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L213",
-"region":  {
-"startLine":  213,
-"startColumn":  13,
-"endLine":  213,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L226",
-"region":  {
-"startLine":  226,
-"startColumn":  17,
-"endLine":  226,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L241",
-"region":  {
-"startLine":  241,
-"startColumn":  17,
-"endLine":  241,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L245",
-"region":  {
-"startLine":  245,
-"startColumn":  17,
-"endLine":  245,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L255",
-"region":  {
-"startLine":  255,
-"startColumn":  13,
-"endLine":  255,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L257",
-"region":  {
-"startLine":  257,
-"startColumn":  13,
-"endLine":  257,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L260",
-"region":  {
-"startLine":  260,
-"startColumn":  13,
-"endLine":  260,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L263",
-"region":  {
-"startLine":  263,
-"startColumn":  13,
-"endLine":  263,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L325",
-"region":  {
-"startLine":  325,
-"startColumn":  13,
-"endLine":  325,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L338",
-"region":  {
-"startLine":  338,
-"startColumn":  13,
-"endLine":  338,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L341",
-"region":  {
-"startLine":  341,
-"startColumn":  13,
-"endLine":  341,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L349",
-"region":  {
-"startLine":  349,
-"startColumn":  13,
-"endLine":  349,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L351",
-"region":  {
-"startLine":  351,
-"startColumn":  13,
-"endLine":  351,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L355",
-"region":  {
-"startLine":  355,
-"startColumn":  13,
-"endLine":  355,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L358",
-"region":  {
-"startLine":  358,
-"startColumn":  13,
-"endLine":  358,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L392",
-"region":  {
-"startLine":  392,
-"startColumn":  13,
-"endLine":  392,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L395",
-"region":  {
-"startLine":  395,
-"startColumn":  13,
-"endLine":  395,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L405",
-"region":  {
-"startLine":  405,
-"startColumn":  21,
-"endLine":  405,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L413",
-"region":  {
-"startLine":  413,
-"startColumn":  13,
-"endLine":  413,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L424",
-"region":  {
-"startLine":  424,
-"startColumn":  13,
-"endLine":  424,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L427",
-"region":  {
-"startLine":  427,
-"startColumn":  13,
-"endLine":  427,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L435",
-"region":  {
-"startLine":  435,
-"startColumn":  13,
-"endLine":  435,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L438",
-"region":  {
-"startLine":  438,
-"startColumn":  13,
-"endLine":  438,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L451",
-"region":  {
-"startLine":  451,
-"startColumn":  13,
-"endLine":  451,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L454",
-"region":  {
-"startLine":  454,
-"startColumn":  13,
-"endLine":  454,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L463",
-"region":  {
-"startLine":  463,
-"startColumn":  13,
-"endLine":  463,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L466",
-"region":  {
-"startLine":  466,
-"startColumn":  13,
-"endLine":  466,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L474",
-"region":  {
-"startLine":  474,
-"startColumn":  13,
-"endLine":  474,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L485",
-"region":  {
-"startLine":  485,
-"startColumn":  13,
-"endLine":  485,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L493",
-"region":  {
-"startLine":  493,
-"startColumn":  13,
-"endLine":  493,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L496",
-"region":  {
-"startLine":  496,
-"startColumn":  13,
-"endLine":  496,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L706",
-"region":  {
-"startLine":  706,
-"startColumn":  13,
-"endLine":  706,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L708",
-"region":  {
-"startLine":  708,
-"startColumn":  13,
-"endLine":  708,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L710",
-"region":  {
-"startLine":  710,
-"startColumn":  13,
-"endLine":  710,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L712",
-"region":  {
-"startLine":  712,
-"startColumn":  13,
-"endLine":  712,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L722",
-"region":  {
-"startLine":  722,
-"startColumn":  13,
-"endLine":  722,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L731",
-"region":  {
-"startLine":  731,
-"startColumn":  17,
-"endLine":  731,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L738",
-"region":  {
-"startLine":  738,
-"startColumn":  13,
-"endLine":  738,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L38",
-"region":  {
-"startLine":  38,
-"startColumn":  13,
-"endLine":  38,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L41",
-"region":  {
-"startLine":  41,
-"startColumn":  13,
-"endLine":  41,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L44",
-"region":  {
-"startLine":  44,
-"startColumn":  13,
-"endLine":  44,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L47",
-"region":  {
-"startLine":  47,
-"startColumn":  13,
-"endLine":  47,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L102",
-"region":  {
-"startLine":  102,
-"startColumn":  21,
-"endLine":  102,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L107",
-"region":  {
-"startLine":  107,
-"startColumn":  17,
-"endLine":  107,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L122",
-"region":  {
-"startLine":  122,
-"startColumn":  13,
-"endLine":  122,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L125",
-"region":  {
-"startLine":  125,
-"startColumn":  13,
-"endLine":  125,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L177",
-"region":  {
-"startLine":  177,
-"startColumn":  21,
-"endLine":  177,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpMultipartSubStream.cs#L221",
-"region":  {
-"startLine":  221,
-"startColumn":  13,
-"endLine":  221,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/RequestStream.cs#L170",
-"region":  {
-"startLine":  170,
-"startColumn":  17,
-"endLine":  170,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/RequestStream.cs#L173",
-"region":  {
-"startLine":  173,
-"startColumn":  17,
-"endLine":  173,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L610",
-"region":  {
-"startLine":  610,
-"startColumn":  13,
-"endLine":  610,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L613",
-"region":  {
-"startLine":  613,
-"startColumn":  13,
-"endLine":  613,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/EmbeddedFileResponse.cs#L64",
-"region":  {
-"startLine":  64,
-"startColumn":  13,
-"endLine":  64,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/CsrfToken.cs#L43",
-"region":  {
-"startLine":  43,
-"startColumn":  13,
-"endLine":  43,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/CsrfToken.cs#L44",
-"region":  {
-"startLine":  44,
-"startColumn":  13,
-"endLine":  44,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/CsrfToken.cs#L60",
-"region":  {
-"startLine":  60,
-"startColumn":  13,
-"endLine":  60,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/CsrfToken.cs#L61",
-"region":  {
-"startLine":  61,
-"startColumn":  13,
-"endLine":  61,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/CsrfToken.cs#L62",
-"region":  {
-"startLine":  62,
-"startColumn":  13,
-"endLine":  62,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L139",
-"region":  {
-"startLine":  139,
-"startColumn":  25,
-"endLine":  139,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L499",
-"region":  {
-"startLine":  499,
-"startColumn":  17,
-"endLine":  499,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L502",
-"region":  {
-"startLine":  502,
-"startColumn":  17,
-"endLine":  502,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L505",
-"region":  {
-"startLine":  505,
-"startColumn":  17,
-"endLine":  505,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L508",
-"region":  {
-"startLine":  508,
-"startColumn":  17,
-"endLine":  508,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L511",
-"region":  {
-"startLine":  511,
-"startColumn":  17,
-"endLine":  511,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L516",
-"region":  {
-"startLine":  516,
-"startColumn":  21,
-"endLine":  516,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L522",
-"region":  {
-"startLine":  522,
-"startColumn":  21,
-"endLine":  522,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1013",
-"region":  {
-"startLine":  1013,
-"startColumn":  17,
-"endLine":  1013,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1028",
-"region":  {
-"startLine":  1028,
-"startColumn":  17,
-"endLine":  1028,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1043",
-"region":  {
-"startLine":  1043,
-"startColumn":  17,
-"endLine":  1043,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1058",
-"region":  {
-"startLine":  1058,
-"startColumn":  17,
-"endLine":  1058,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1068",
-"region":  {
-"startLine":  1068,
-"startColumn":  17,
-"endLine":  1068,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1072",
-"region":  {
-"startLine":  1072,
-"startColumn":  17,
-"endLine":  1072,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1076",
-"region":  {
-"startLine":  1076,
-"startColumn":  17,
-"endLine":  1076,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1080",
-"region":  {
-"startLine":  1080,
-"startColumn":  17,
-"endLine":  1080,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1099",
-"region":  {
-"startLine":  1099,
-"startColumn":  17,
-"endLine":  1099,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1102",
-"region":  {
-"startLine":  1102,
-"startColumn":  17,
-"endLine":  1102,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1105",
-"region":  {
-"startLine":  1105,
-"startColumn":  17,
-"endLine":  1105,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1110",
-"region":  {
-"startLine":  1110,
-"startColumn":  17,
-"endLine":  1110,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1169",
-"region":  {
-"startLine":  1169,
-"startColumn":  17,
-"endLine":  1169,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1172",
-"region":  {
-"startLine":  1172,
-"startColumn":  17,
-"endLine":  1172,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1175",
-"region":  {
-"startLine":  1175,
-"startColumn":  17,
-"endLine":  1175,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1596",
-"region":  {
-"startLine":  1596,
-"startColumn":  13,
-"endLine":  1596,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1599",
-"region":  {
-"startLine":  1599,
-"startColumn":  13,
-"endLine":  1599,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1603",
-"region":  {
-"startLine":  1603,
-"startColumn":  17,
-"endLine":  1603,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2705",
-"region":  {
-"startLine":  2705,
-"startColumn":  17,
-"endLine":  2705,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2708",
-"region":  {
-"startLine":  2708,
-"startColumn":  17,
-"endLine":  2708,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2776",
-"region":  {
-"startLine":  2776,
-"startColumn":  17,
-"endLine":  2776,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2824",
-"region":  {
-"startLine":  2824,
-"startColumn":  17,
-"endLine":  2824,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2839",
-"region":  {
-"startLine":  2839,
-"startColumn":  17,
-"endLine":  2839,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2853",
-"region":  {
-"startLine":  2853,
-"startColumn":  21,
-"endLine":  2853,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2887",
-"region":  {
-"startLine":  2887,
-"startColumn":  17,
-"endLine":  2887,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2935",
-"region":  {
-"startLine":  2935,
-"startColumn":  17,
-"endLine":  2935,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2953",
-"region":  {
-"startLine":  2953,
-"startColumn":  17,
-"endLine":  2953,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2970",
-"region":  {
-"startLine":  2970,
-"startColumn":  17,
-"endLine":  2970,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2998",
-"region":  {
-"startLine":  2998,
-"startColumn":  21,
-"endLine":  2998,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3014",
-"region":  {
-"startLine":  3014,
-"startColumn":  17,
-"endLine":  3014,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3034",
-"region":  {
-"startLine":  3034,
-"startColumn":  17,
-"endLine":  3034,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3038",
-"region":  {
-"startLine":  3038,
-"startColumn":  17,
-"endLine":  3038,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3052",
-"region":  {
-"startLine":  3052,
-"startColumn":  17,
-"endLine":  3052,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3056",
-"region":  {
-"startLine":  3056,
-"startColumn":  21,
-"endLine":  3056,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3094",
-"region":  {
-"startLine":  3094,
-"startColumn":  17,
-"endLine":  3094,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3099",
-"region":  {
-"startLine":  3099,
-"startColumn":  17,
-"endLine":  3099,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3116",
-"region":  {
-"startLine":  3116,
-"startColumn":  17,
-"endLine":  3116,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3119",
-"region":  {
-"startLine":  3119,
-"startColumn":  17,
-"endLine":  3119,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3125",
-"region":  {
-"startLine":  3125,
-"startColumn":  17,
-"endLine":  3125,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3240",
-"region":  {
-"startLine":  3240,
-"startColumn":  17,
-"endLine":  3240,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3243",
-"region":  {
-"startLine":  3243,
-"startColumn":  17,
-"endLine":  3243,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3246",
-"region":  {
-"startLine":  3246,
-"startColumn":  17,
-"endLine":  3246,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3321",
-"region":  {
-"startLine":  3321,
-"startColumn":  25,
-"endLine":  3321,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3367",
-"region":  {
-"startLine":  3367,
-"startColumn":  17,
-"endLine":  3367,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3395",
-"region":  {
-"startLine":  3395,
-"startColumn":  17,
-"endLine":  3395,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3446",
-"region":  {
-"startLine":  3446,
-"startColumn":  13,
-"endLine":  3446,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3455",
-"region":  {
-"startLine":  3455,
-"startColumn":  13,
-"endLine":  3455,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3464",
-"region":  {
-"startLine":  3464,
-"startColumn":  17,
-"endLine":  3464,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3467",
-"region":  {
-"startLine":  3467,
-"startColumn":  17,
-"endLine":  3467,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'else' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3469",
-"region":  {
-"startLine":  3469,
-"startColumn":  17,
-"endLine":  3469,
-"endColumn":  21
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3479",
-"region":  {
-"startLine":  3479,
-"startColumn":  21,
-"endLine":  3479,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3482",
-"region":  {
-"startLine":  3482,
-"startColumn":  21,
-"endLine":  3482,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'else' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3484",
-"region":  {
-"startLine":  3484,
-"startColumn":  21,
-"endLine":  3484,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3492",
-"region":  {
-"startLine":  3492,
-"startColumn":  13,
-"endLine":  3492,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3500",
-"region":  {
-"startLine":  3500,
-"startColumn":  21,
-"endLine":  3500,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3508",
-"region":  {
-"startLine":  3508,
-"startColumn":  13,
-"endLine":  3508,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3512",
-"region":  {
-"startLine":  3512,
-"startColumn":  13,
-"endLine":  3512,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3517",
-"region":  {
-"startLine":  3517,
-"startColumn":  13,
-"endLine":  3517,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3521",
-"region":  {
-"startLine":  3521,
-"startColumn":  13,
-"endLine":  3521,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3529",
-"region":  {
-"startLine":  3529,
-"startColumn":  13,
-"endLine":  3529,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3534",
-"region":  {
-"startLine":  3534,
-"startColumn":  13,
-"endLine":  3534,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3542",
-"region":  {
-"startLine":  3542,
-"startColumn":  13,
-"endLine":  3542,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3548",
-"region":  {
-"startLine":  3548,
-"startColumn":  13,
-"endLine":  3548,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3555",
-"region":  {
-"startLine":  3555,
-"startColumn":  13,
-"endLine":  3555,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3563",
-"region":  {
-"startLine":  3563,
-"startColumn":  13,
-"endLine":  3563,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3572",
-"region":  {
-"startLine":  3572,
-"startColumn":  13,
-"endLine":  3572,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3649",
-"region":  {
-"startLine":  3649,
-"startColumn":  13,
-"endLine":  3649,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3674",
-"region":  {
-"startLine":  3674,
-"startColumn":  13,
-"endLine":  3674,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3677",
-"region":  {
-"startLine":  3677,
-"startColumn":  13,
-"endLine":  3677,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3683",
-"region":  {
-"startLine":  3683,
-"startColumn":  17,
-"endLine":  3683,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3694",
-"region":  {
-"startLine":  3694,
-"startColumn":  13,
-"endLine":  3694,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3785",
-"region":  {
-"startLine":  3785,
-"startColumn":  13,
-"endLine":  3785,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3790",
-"region":  {
-"startLine":  3790,
-"startColumn":  17,
-"endLine":  3790,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3798",
-"region":  {
-"startLine":  3798,
-"startColumn":  17,
-"endLine":  3798,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3802",
-"region":  {
-"startLine":  3802,
-"startColumn":  17,
-"endLine":  3802,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3811",
-"region":  {
-"startLine":  3811,
-"startColumn":  13,
-"endLine":  3811,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3817",
-"region":  {
-"startLine":  3817,
-"startColumn":  13,
-"endLine":  3817,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3827",
-"region":  {
-"startLine":  3827,
-"startColumn":  17,
-"endLine":  3827,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3865",
-"region":  {
-"startLine":  3865,
-"startColumn":  17,
-"endLine":  3865,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3880",
-"region":  {
-"startLine":  3880,
-"startColumn":  13,
-"endLine":  3880,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3932",
-"region":  {
-"startLine":  3932,
-"startColumn":  13,
-"endLine":  3932,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3991",
-"region":  {
-"startLine":  3991,
-"startColumn":  13,
-"endLine":  3991,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L4003",
-"region":  {
-"startLine":  4003,
-"startColumn":  13,
-"endLine":  4003,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L4035",
-"region":  {
-"startLine":  4035,
-"startColumn":  17,
-"endLine":  4035,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L4046",
-"region":  {
-"startLine":  4046,
-"startColumn":  21,
-"endLine":  4046,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/ViewLocationResult.cs#L77",
-"region":  {
-"startLine":  77,
-"startColumn":  13,
-"endLine":  77,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/ViewLocationResult.cs#L78",
-"region":  {
-"startLine":  78,
-"startColumn":  13,
-"endLine":  78,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/ViewLocationResult.cs#L89",
-"region":  {
-"startLine":  89,
-"startColumn":  13,
-"endLine":  89,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/ViewLocationResult.cs#L90",
-"region":  {
-"startLine":  90,
-"startColumn":  13,
-"endLine":  90,
-"endColumn":  15
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L176",
+      "Location": "Line 176 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L178",
+      "Location": "Line 178 Position 18-20"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L180",
+      "Location": "Line 180 Position 18-20"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L182",
+      "Location": "Line 182 Position 18-20"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L184",
+      "Location": "Line 184 Position 18-20"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L186",
+      "Location": "Line 186 Position 18-20"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L188",
+      "Location": "Line 188 Position 18-20"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L190",
+      "Location": "Line 190 Position 18-20"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L192",
+      "Location": "Line 192 Position 18-20"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L194",
+      "Location": "Line 194 Position 18-20"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L196",
+      "Location": "Line 196 Position 18-20"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L198",
+      "Location": "Line 198 Position 18-20"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L200",
+      "Location": "Line 200 Position 18-20"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L202",
+      "Location": "Line 202 Position 18-20"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L204",
+      "Location": "Line 204 Position 18-20"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L206",
+      "Location": "Line 206 Position 18-20"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027else\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L208",
+      "Location": "Line 208 Position 13-17"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L124",
+      "Location": "Line 124 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027else\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L126",
+      "Location": "Line 126 Position 13-17"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L129",
+      "Location": "Line 129 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027else\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L131",
+      "Location": "Line 131 Position 13-17"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L137",
+      "Location": "Line 137 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027else\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L139",
+      "Location": "Line 139 Position 13-17"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L152",
+      "Location": "Line 152 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L156",
+      "Location": "Line 156 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L222",
+      "Location": "Line 222 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027for\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L227",
+      "Location": "Line 227 Position 13-16"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L235",
+      "Location": "Line 235 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L239",
+      "Location": "Line 239 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L242",
+      "Location": "Line 242 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L245",
+      "Location": "Line 245 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027for\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L250",
+      "Location": "Line 250 Position 13-16"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L258",
+      "Location": "Line 258 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L261",
+      "Location": "Line 261 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L279",
+      "Location": "Line 279 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027else\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L323",
+      "Location": "Line 323 Position 25-29"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L338",
+      "Location": "Line 338 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L341",
+      "Location": "Line 341 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L359",
+      "Location": "Line 359 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027for\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L364",
+      "Location": "Line 364 Position 13-16"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L391",
+      "Location": "Line 391 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L394",
+      "Location": "Line 394 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L397",
+      "Location": "Line 397 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L483",
+      "Location": "Line 483 Position 25-27"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L64",
+      "Location": "Line 64 Position 21-23"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027else\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L647",
+      "Location": "Line 647 Position 17-21"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027else\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L655",
+      "Location": "Line 655 Position 13-17"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027else\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L679",
+      "Location": "Line 679 Position 13-17"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027foreach\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L132",
+      "Location": "Line 132 Position 17-24"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027else\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L135",
+      "Location": "Line 135 Position 13-17"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L141",
+      "Location": "Line 141 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L144",
+      "Location": "Line 144 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L147",
+      "Location": "Line 147 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027else\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L169",
+      "Location": "Line 169 Position 25-29"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L184",
+      "Location": "Line 184 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027else\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L186",
+      "Location": "Line 186 Position 17-21"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L198",
+      "Location": "Line 198 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L207",
+      "Location": "Line 207 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L210",
+      "Location": "Line 210 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L213",
+      "Location": "Line 213 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L226",
+      "Location": "Line 226 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L241",
+      "Location": "Line 241 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L245",
+      "Location": "Line 245 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L255",
+      "Location": "Line 255 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L257",
+      "Location": "Line 257 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L260",
+      "Location": "Line 260 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L263",
+      "Location": "Line 263 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L325",
+      "Location": "Line 325 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L338",
+      "Location": "Line 338 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L341",
+      "Location": "Line 341 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L349",
+      "Location": "Line 349 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L351",
+      "Location": "Line 351 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L355",
+      "Location": "Line 355 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L358",
+      "Location": "Line 358 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L392",
+      "Location": "Line 392 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L395",
+      "Location": "Line 395 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L405",
+      "Location": "Line 405 Position 21-23"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L413",
+      "Location": "Line 413 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L424",
+      "Location": "Line 424 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L427",
+      "Location": "Line 427 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L435",
+      "Location": "Line 435 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L438",
+      "Location": "Line 438 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L451",
+      "Location": "Line 451 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L454",
+      "Location": "Line 454 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L463",
+      "Location": "Line 463 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L466",
+      "Location": "Line 466 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L474",
+      "Location": "Line 474 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L485",
+      "Location": "Line 485 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L493",
+      "Location": "Line 493 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L496",
+      "Location": "Line 496 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L61",
+      "Location": "Line 61 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L69",
+      "Location": "Line 69 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L706",
+      "Location": "Line 706 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L708",
+      "Location": "Line 708 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L710",
+      "Location": "Line 710 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L712",
+      "Location": "Line 712 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L722",
+      "Location": "Line 722 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L731",
+      "Location": "Line 731 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L738",
+      "Location": "Line 738 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L102",
+      "Location": "Line 102 Position 21-23"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L107",
+      "Location": "Line 107 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L122",
+      "Location": "Line 122 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L125",
+      "Location": "Line 125 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L177",
+      "Location": "Line 177 Position 21-23"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L38",
+      "Location": "Line 38 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L41",
+      "Location": "Line 41 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L44",
+      "Location": "Line 44 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L47",
+      "Location": "Line 47 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpMultipartSubStream.cs#L221",
+      "Location": "Line 221 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/RequestStream.cs#L170",
+      "Location": "Line 170 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/RequestStream.cs#L173",
+      "Location": "Line 173 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L610",
+      "Location": "Line 610 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L613",
+      "Location": "Line 613 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/EmbeddedFileResponse.cs#L64",
+      "Location": "Line 64 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/CsrfToken.cs#L43",
+      "Location": "Line 43 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/CsrfToken.cs#L44",
+      "Location": "Line 44 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/CsrfToken.cs#L60",
+      "Location": "Line 60 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/CsrfToken.cs#L61",
+      "Location": "Line 61 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/CsrfToken.cs#L62",
+      "Location": "Line 62 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1013",
+      "Location": "Line 1013 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1028",
+      "Location": "Line 1028 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1043",
+      "Location": "Line 1043 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1058",
+      "Location": "Line 1058 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1068",
+      "Location": "Line 1068 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1072",
+      "Location": "Line 1072 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1076",
+      "Location": "Line 1076 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1080",
+      "Location": "Line 1080 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1099",
+      "Location": "Line 1099 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1102",
+      "Location": "Line 1102 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1105",
+      "Location": "Line 1105 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1110",
+      "Location": "Line 1110 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1169",
+      "Location": "Line 1169 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1172",
+      "Location": "Line 1172 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1175",
+      "Location": "Line 1175 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L139",
+      "Location": "Line 139 Position 25-27"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1596",
+      "Location": "Line 1596 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027foreach\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1599",
+      "Location": "Line 1599 Position 13-20"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1603",
+      "Location": "Line 1603 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2705",
+      "Location": "Line 2705 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2708",
+      "Location": "Line 2708 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2776",
+      "Location": "Line 2776 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2824",
+      "Location": "Line 2824 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2839",
+      "Location": "Line 2839 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2853",
+      "Location": "Line 2853 Position 21-23"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2887",
+      "Location": "Line 2887 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2935",
+      "Location": "Line 2935 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2953",
+      "Location": "Line 2953 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2970",
+      "Location": "Line 2970 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2998",
+      "Location": "Line 2998 Position 21-23"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3014",
+      "Location": "Line 3014 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3034",
+      "Location": "Line 3034 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3038",
+      "Location": "Line 3038 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3052",
+      "Location": "Line 3052 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3056",
+      "Location": "Line 3056 Position 21-23"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3094",
+      "Location": "Line 3094 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3099",
+      "Location": "Line 3099 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3116",
+      "Location": "Line 3116 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3119",
+      "Location": "Line 3119 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3125",
+      "Location": "Line 3125 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3240",
+      "Location": "Line 3240 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3243",
+      "Location": "Line 3243 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3246",
+      "Location": "Line 3246 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3321",
+      "Location": "Line 3321 Position 25-27"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3367",
+      "Location": "Line 3367 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3395",
+      "Location": "Line 3395 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3446",
+      "Location": "Line 3446 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3455",
+      "Location": "Line 3455 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3464",
+      "Location": "Line 3464 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3467",
+      "Location": "Line 3467 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027else\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3469",
+      "Location": "Line 3469 Position 17-21"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3479",
+      "Location": "Line 3479 Position 21-23"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3482",
+      "Location": "Line 3482 Position 21-23"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027else\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3484",
+      "Location": "Line 3484 Position 21-25"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3492",
+      "Location": "Line 3492 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3500",
+      "Location": "Line 3500 Position 21-23"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3508",
+      "Location": "Line 3508 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3512",
+      "Location": "Line 3512 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3517",
+      "Location": "Line 3517 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3521",
+      "Location": "Line 3521 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3529",
+      "Location": "Line 3529 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3534",
+      "Location": "Line 3534 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3542",
+      "Location": "Line 3542 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3548",
+      "Location": "Line 3548 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3555",
+      "Location": "Line 3555 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3563",
+      "Location": "Line 3563 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3572",
+      "Location": "Line 3572 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3649",
+      "Location": "Line 3649 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3674",
+      "Location": "Line 3674 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3677",
+      "Location": "Line 3677 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3683",
+      "Location": "Line 3683 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3694",
+      "Location": "Line 3694 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3785",
+      "Location": "Line 3785 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3790",
+      "Location": "Line 3790 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3798",
+      "Location": "Line 3798 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3802",
+      "Location": "Line 3802 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3811",
+      "Location": "Line 3811 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3817",
+      "Location": "Line 3817 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3827",
+      "Location": "Line 3827 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3865",
+      "Location": "Line 3865 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3880",
+      "Location": "Line 3880 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3932",
+      "Location": "Line 3932 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3991",
+      "Location": "Line 3991 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L4003",
+      "Location": "Line 4003 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L4035",
+      "Location": "Line 4035 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L4046",
+      "Location": "Line 4046 Position 21-23"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L499",
+      "Location": "Line 499 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L502",
+      "Location": "Line 502 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L505",
+      "Location": "Line 505 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L508",
+      "Location": "Line 508 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L511",
+      "Location": "Line 511 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L516",
+      "Location": "Line 516 Position 21-23"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L522",
+      "Location": "Line 522 Position 21-23"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/ViewLocationResult.cs#L77",
+      "Location": "Line 77 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/ViewLocationResult.cs#L78",
+      "Location": "Line 78 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/ViewLocationResult.cs#L89",
+      "Location": "Line 89 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/ViewLocationResult.cs#L90",
+      "Location": "Line 90 Position 13-15"
+    }
+  ]
 }

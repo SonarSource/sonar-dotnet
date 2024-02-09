@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1116",
-"message":  "Remove this empty statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L63",
-"region":  {
-"startLine":  63,
-"startColumn":  104,
-"endLine":  63,
-"endColumn":  105
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1116",
+      "Message": "Remove this empty statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L63",
+      "Location": "Line 63 Position 104-105"
+    }
+  ]
 }

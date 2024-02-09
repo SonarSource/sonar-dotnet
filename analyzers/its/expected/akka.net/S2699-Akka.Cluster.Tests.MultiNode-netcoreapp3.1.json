@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests.MultiNode/Bugfix4353Specs.cs#L39",
-"region":  {
-"startLine":  39,
-"startColumn":  21,
-"endLine":  39,
-"endColumn":  71
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests.MultiNode/Bugfix4353Specs.cs#L39",
+      "Location": "Line 39 Position 21-71"
+    }
+  ]
 }

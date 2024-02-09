@@ -1,56 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S4069",
-"message":  "Implement alternative method 'Add' for the operator '+'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2991",
-"region":  {
-"startLine":  2991,
-"startColumn":  44,
-"endLine":  2991,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S4069",
-"message":  "Implement alternative method 'Subtract' for the operator '-'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L3006",
-"region":  {
-"startLine":  3006,
-"startColumn":  44,
-"endLine":  3006,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S4069",
-"message":  "Implement alternative method 'Add' for the operator '+'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L723",
-"region":  {
-"startLine":  723,
-"startColumn":  50,
-"endLine":  723,
-"endColumn":  51
-}
-}
-},
-{
-"id":  "S4069",
-"message":  "Implement alternative method 'Subtract' for the operator '-'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L734",
-"region":  {
-"startLine":  734,
-"startColumn":  50,
-"endLine":  734,
-"endColumn":  51
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4069",
+      "Message": "Implement alternative method \u0027Add\u0027 for the operator \u0027\u002B\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2991",
+      "Location": "Line 2991 Position 44-45"
+    },
+    {
+      "Id": "S4069",
+      "Message": "Implement alternative method \u0027Subtract\u0027 for the operator \u0027-\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L3006",
+      "Location": "Line 3006 Position 44-45"
+    },
+    {
+      "Id": "S4069",
+      "Message": "Implement alternative method \u0027Add\u0027 for the operator \u0027\u002B\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L723",
+      "Location": "Line 723 Position 50-51"
+    },
+    {
+      "Id": "S4069",
+      "Message": "Implement alternative method \u0027Subtract\u0027 for the operator \u0027-\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L734",
+      "Location": "Line 734 Position 50-51"
+    }
+  ]
 }

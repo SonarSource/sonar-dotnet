@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1871",
-"message":  "Either merge this case with the identical one on line 726 or change one of the implementations.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L733-L738",
-"region":  {
-"startLine":  733,
-"startColumn":  41,
-"endLine":  738,
-"endColumn":  67
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1871",
+      "Message": "Either merge this case with the identical one on line 726 or change one of the implementations.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L733-L738",
+      "Location": "Lines 733-738 Position 41-67"
+    }
+  ]
 }

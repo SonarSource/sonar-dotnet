@@ -1,121 +1,58 @@
 {
-"issues":  [
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'default'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L90",
-"region":  {
-"startLine":  90,
-"startColumn":  50,
-"endLine":  90,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'default'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L260",
-"region":  {
-"startLine":  260,
-"startColumn":  74,
-"endLine":  260,
-"endColumn":  78
-}
-}
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'default'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L288",
-"region":  {
-"startLine":  288,
-"startColumn":  67,
-"endLine":  288,
-"endColumn":  72
-}
-}
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'default'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L294",
-"region":  {
-"startLine":  294,
-"startColumn":  64,
-"endLine":  294,
-"endColumn":  68
-}
-}
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'writerGuid'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L1361",
-"region":  {
-"startLine":  1361,
-"startColumn":  117,
-"endLine":  1361,
-"endColumn":  121
-}
-}
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'writerGuid'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L866",
-"region":  {
-"startLine":  866,
-"startColumn":  117,
-"endLine":  866,
-"endColumn":  121
-}
-}
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'default'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Settings.cs#L74",
-"region":  {
-"startLine":  74,
-"startColumn":  58,
-"endLine":  74,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'default'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Settings.cs#L137",
-"region":  {
-"startLine":  137,
-"startColumn":  58,
-"endLine":  137,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S3254",
-"message":  "Remove this default value assigned to parameter 'default'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Settings.cs#L140",
-"region":  {
-"startLine":  140,
-"startColumn":  64,
-"endLine":  140,
-"endColumn":  68
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027writerGuid\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L1361",
+      "Location": "Line 1361 Position 117-121"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L260",
+      "Location": "Line 260 Position 74-78"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L288",
+      "Location": "Line 288 Position 67-72"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L294",
+      "Location": "Line 294 Position 64-68"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L90",
+      "Location": "Line 90 Position 50-55"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027writerGuid\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L866",
+      "Location": "Line 866 Position 117-121"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Settings.cs#L137",
+      "Location": "Line 137 Position 58-62"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Settings.cs#L140",
+      "Location": "Line 140 Position 64-68"
+    },
+    {
+      "Id": "S3254",
+      "Message": "Remove this default value assigned to parameter \u0027default\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Settings.cs#L74",
+      "Location": "Line 74 Position 58-62"
+    }
+  ]
 }

@@ -1,9 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S6145",
-"message":  "Configure 'Option Strict On' for assembly 'SkipGeneratedVb'.",
-"location":  null
-}
-]
+  "Issues": [
+    {
+      "Id": "S6145",
+      "Message": "Configure \u0027Option Strict On\u0027 for assembly \u0027SkipGeneratedVb\u0027.",
+      "Uri": null,
+      "Location": null
+    }
+  ]
 }

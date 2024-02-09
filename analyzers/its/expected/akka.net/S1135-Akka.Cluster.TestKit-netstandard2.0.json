@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.TestKit/MultiNodeClusterSpec.cs#L27",
-"region":  {
-"startLine":  27,
-"startColumn":  7,
-"endLine":  27,
-"endColumn":  11
-}
-}
-},
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.TestKit/MultiNodeClusterSpec.cs#L176",
-"region":  {
-"startLine":  176,
-"startColumn":  11,
-"endLine":  176,
-"endColumn":  15
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1135",
+      "Message": "Complete the task associated to this \u0027TODO\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.TestKit/MultiNodeClusterSpec.cs#L176",
+      "Location": "Line 176 Position 11-15"
+    },
+    {
+      "Id": "S1135",
+      "Message": "Complete the task associated to this \u0027TODO\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.TestKit/MultiNodeClusterSpec.cs#L27",
+      "Location": "Line 27 Position 7-11"
+    }
+  ]
 }

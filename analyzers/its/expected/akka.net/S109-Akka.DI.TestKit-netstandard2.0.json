@@ -1,56 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L276",
-"region":  {
-"startLine":  276,
-"startColumn":  26,
-"endLine":  276,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '3' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L313",
-"region":  {
-"startLine":  313,
-"startColumn":  26,
-"endLine":  313,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '3' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L316",
-"region":  {
-"startLine":  316,
-"startColumn":  26,
-"endLine":  316,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L330",
-"region":  {
-"startLine":  330,
-"startColumn":  26,
-"endLine":  330,
-"endColumn":  27
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L276",
+      "Location": "Line 276 Position 26-27"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L313",
+      "Location": "Line 313 Position 26-27"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L316",
+      "Location": "Line 316 Position 26-27"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L330",
+      "Location": "Line 330 Position 26-27"
+    }
+  ]
 }

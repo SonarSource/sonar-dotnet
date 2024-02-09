@@ -1,85 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'MaxUnconfirmedMessagesExceededException' because it implements 'ISerializable'.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/AtLeastOnceDeliverySemantic.cs#L202",
-"region":  {
-"startLine":  202,
-"startColumn":  18,
-"endLine":  202,
-"endColumn":  57
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/AtLeastOnceDeliverySemantic.cs#L202",
-"region":  {
-"startLine":  202,
-"startColumn":  12,
-"endLine":  202,
-"endColumn":  17
-}
-}
-]
-},
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'RecoveryTimedOutException' because it implements 'ISerializable'. Make the serialization constructor 'private'.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/PersistentActor.cs#L121",
-"region":  {
-"startLine":  121,
-"startColumn":  25,
-"endLine":  121,
-"endColumn":  50
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/PersistentActor.cs#L121",
-"region":  {
-"startLine":  121,
-"startColumn":  19,
-"endLine":  121,
-"endColumn":  24
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/PersistentActor.cs#L144",
-"region":  {
-"startLine":  144,
-"startColumn":  16,
-"endLine":  144,
-"endColumn":  41
-}
-}
-]
-},
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'NoSnapshotStoreException' because it implements 'ISerializable'.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/NoSnapshotStore.cs#L26",
-"region":  {
-"startLine":  26,
-"startColumn":  22,
-"endLine":  26,
-"endColumn":  46
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/NoSnapshotStore.cs#L26",
-"region":  {
-"startLine":  26,
-"startColumn":  16,
-"endLine":  26,
-"endColumn":  21
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S3925",
+      "Message": "Update this implementation of \u0027ISerializable\u0027 to conform to the recommended serialization pattern. Add \u0027System.SerializableAttribute\u0027 attribute on \u0027MaxUnconfirmedMessagesExceededException\u0027 because it implements \u0027ISerializable\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/AtLeastOnceDeliverySemantic.cs#L202",
+      "Location": "Line 202 Position 18-57"
+    },
+    {
+      "Id": "S3925",
+      "Message": "Update this implementation of \u0027ISerializable\u0027 to conform to the recommended serialization pattern. Add \u0027System.SerializableAttribute\u0027 attribute on \u0027RecoveryTimedOutException\u0027 because it implements \u0027ISerializable\u0027. Make the serialization constructor \u0027private\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/PersistentActor.cs#L121",
+      "Location": "Line 121 Position 25-50"
+    },
+    {
+      "Id": "S3925",
+      "Message": "Update this implementation of \u0027ISerializable\u0027 to conform to the recommended serialization pattern. Add \u0027System.SerializableAttribute\u0027 attribute on \u0027NoSnapshotStoreException\u0027 because it implements \u0027ISerializable\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/NoSnapshotStore.cs#L26",
+      "Location": "Line 26 Position 22-46"
+    }
+  ]
 }

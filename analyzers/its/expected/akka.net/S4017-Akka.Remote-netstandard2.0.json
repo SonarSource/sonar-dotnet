@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S4017",
-"message":  "Refactor this method to remove the nested type argument.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Remoting.cs#L378",
-"region":  {
-"startLine":  378,
-"startColumn":  13,
-"endLine":  378,
-"endColumn":  88
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4017",
+      "Message": "Refactor this method to remove the nested type argument.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Remoting.cs#L378",
+      "Location": "Line 378 Position 13-88"
+    }
+  ]
 }

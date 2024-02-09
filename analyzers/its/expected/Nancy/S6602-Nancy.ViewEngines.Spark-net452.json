@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S6602",
-"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/NancyViewFolder.cs#L62",
-"region":  {
-"startLine":  62,
-"startColumn":  31,
-"endLine":  62,
-"endColumn":  45
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6602",
+      "Message": "\u0022Find\u0022 method should be used instead of the \u0022FirstOrDefault\u0022 extension method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/NancyViewFolder.cs#L62",
+      "Location": "Line 62 Position 31-45"
+    }
+  ]
 }

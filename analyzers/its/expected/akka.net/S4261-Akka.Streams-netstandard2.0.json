@@ -1,407 +1,190 @@
 {
-"issues":  [
-{
-"id":  "S4261",
-"message":  "Remove the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Flow.cs#L184",
-"region":  {
-"startLine":  184,
-"startColumn":  38,
-"endLine":  184,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Remove the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L292",
-"region":  {
-"startLine":  292,
-"startColumn":  43,
-"endLine":  292,
-"endColumn":  54
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Remove the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L701",
-"region":  {
-"startLine":  701,
-"startColumn":  46,
-"endLine":  701,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Remove the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L769",
-"region":  {
-"startLine":  769,
-"startColumn":  46,
-"endLine":  769,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Remove the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L32",
-"region":  {
-"startLine":  32,
-"startColumn":  69,
-"endLine":  32,
-"endColumn":  80
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Remove the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L177",
-"region":  {
-"startLine":  177,
-"startColumn":  60,
-"endLine":  177,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Remove the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L306",
-"region":  {
-"startLine":  306,
-"startColumn":  41,
-"endLine":  306,
-"endColumn":  52
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Remove the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L688",
-"region":  {
-"startLine":  688,
-"startColumn":  41,
-"endLine":  688,
-"endColumn":  50
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Remove the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L750",
-"region":  {
-"startLine":  750,
-"startColumn":  41,
-"endLine":  750,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Remove the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/RunnableGraph.cs#L114",
-"region":  {
-"startLine":  114,
-"startColumn":  37,
-"endLine":  114,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Remove the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Sink.cs#L164",
-"region":  {
-"startLine":  164,
-"startColumn":  32,
-"endLine":  164,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Remove the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Sink.cs#L399",
-"region":  {
-"startLine":  399,
-"startColumn":  45,
-"endLine":  399,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Remove the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L164",
-"region":  {
-"startLine":  164,
-"startColumn":  35,
-"endLine":  164,
-"endColumn":  40
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Add the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L319",
-"region":  {
-"startLine":  319,
-"startColumn":  28,
-"endLine":  319,
-"endColumn":  40
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Add the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L349",
-"region":  {
-"startLine":  349,
-"startColumn":  27,
-"endLine":  349,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Add the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L362",
-"region":  {
-"startLine":  362,
-"startColumn":  21,
-"endLine":  362,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Remove the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L599",
-"region":  {
-"startLine":  599,
-"startColumn":  46,
-"endLine":  599,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Remove the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L932",
-"region":  {
-"startLine":  932,
-"startColumn":  42,
-"endLine":  932,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Remove the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L280",
-"region":  {
-"startLine":  280,
-"startColumn":  42,
-"endLine":  280,
-"endColumn":  53
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Remove the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L659",
-"region":  {
-"startLine":  659,
-"startColumn":  43,
-"endLine":  659,
-"endColumn":  52
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Remove the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L719",
-"region":  {
-"startLine":  719,
-"startColumn":  43,
-"endLine":  719,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Remove the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L287",
-"region":  {
-"startLine":  287,
-"startColumn":  52,
-"endLine":  287,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Remove the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L649",
-"region":  {
-"startLine":  649,
-"startColumn":  53,
-"endLine":  649,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Remove the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L711",
-"region":  {
-"startLine":  711,
-"startColumn":  52,
-"endLine":  711,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Add the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L60",
-"region":  {
-"startLine":  60,
-"startColumn":  25,
-"endLine":  60,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Add the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L219",
-"region":  {
-"startLine":  219,
-"startColumn":  40,
-"endLine":  219,
-"endColumn":  53
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Add the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Valve.cs#L33",
-"region":  {
-"startLine":  33,
-"startColumn":  20,
-"endLine":  33,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Add the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Valve.cs#L39",
-"region":  {
-"startLine":  39,
-"startColumn":  26,
-"endLine":  39,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Remove the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Graph.cs#L70",
-"region":  {
-"startLine":  70,
-"startColumn":  39,
-"endLine":  70,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Remove the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L543",
-"region":  {
-"startLine":  543,
-"startColumn":  29,
-"endLine":  543,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S4261",
-"message":  "Add the 'Async' suffix to the name of this method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/OutputStreamSourceStage.cs#L114",
-"region":  {
-"startLine":  114,
-"startColumn":  18,
-"endLine":  114,
-"endColumn":  24
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4261",
+      "Message": "Remove the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Flow.cs#L184",
+      "Location": "Line 184 Position 38-43"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Remove the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L292",
+      "Location": "Line 292 Position 43-54"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Remove the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L701",
+      "Location": "Line 701 Position 46-55"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Remove the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L769",
+      "Location": "Line 769 Position 46-60"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Remove the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L177",
+      "Location": "Line 177 Position 60-71"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Remove the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L32",
+      "Location": "Line 32 Position 69-80"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Remove the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L306",
+      "Location": "Line 306 Position 41-52"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Remove the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L688",
+      "Location": "Line 688 Position 41-50"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Remove the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L750",
+      "Location": "Line 750 Position 41-55"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Remove the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/RunnableGraph.cs#L114",
+      "Location": "Line 114 Position 37-42"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Remove the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Sink.cs#L164",
+      "Location": "Line 164 Position 32-37"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Remove the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Sink.cs#L399",
+      "Location": "Line 399 Position 45-59"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Remove the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L164",
+      "Location": "Line 164 Position 35-40"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Add the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L319",
+      "Location": "Line 319 Position 28-40"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Add the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L349",
+      "Location": "Line 349 Position 27-33"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Add the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L362",
+      "Location": "Line 362 Position 21-31"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Remove the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L599",
+      "Location": "Line 599 Position 46-57"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Remove the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L932",
+      "Location": "Line 932 Position 42-61"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Remove the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L280",
+      "Location": "Line 280 Position 42-53"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Remove the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L659",
+      "Location": "Line 659 Position 43-52"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Remove the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L719",
+      "Location": "Line 719 Position 43-57"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Remove the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L287",
+      "Location": "Line 287 Position 52-63"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Remove the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L649",
+      "Location": "Line 649 Position 53-62"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Remove the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L711",
+      "Location": "Line 711 Position 52-66"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Add the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L219",
+      "Location": "Line 219 Position 40-53"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Add the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L60",
+      "Location": "Line 60 Position 25-31"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Add the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Valve.cs#L33",
+      "Location": "Line 33 Position 20-24"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Add the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Valve.cs#L39",
+      "Location": "Line 39 Position 26-33"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Remove the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Graph.cs#L70",
+      "Location": "Line 70 Position 39-44"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Remove the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L543",
+      "Location": "Line 543 Position 29-36"
+    },
+    {
+      "Id": "S4261",
+      "Message": "Add the \u0027Async\u0027 suffix to the name of this method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/OutputStreamSourceStage.cs#L114",
+      "Location": "Line 114 Position 18-24"
+    }
+  ]
 }

@@ -1,134 +1,64 @@
 {
-"issues":  [
-{
-"id":  "S131",
-"message":  "Add a 'Case Else' clause to this 'Select' statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1023",
-"region":  {
-"startLine":  1023,
-"startColumn":  13,
-"endLine":  1023,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S131",
-"message":  "Add a 'Case Else' clause to this 'Select' statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L47",
-"region":  {
-"startLine":  47,
-"startColumn":  13,
-"endLine":  47,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S131",
-"message":  "Add a 'Case Else' clause to this 'Select' statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L153",
-"region":  {
-"startLine":  153,
-"startColumn":  21,
-"endLine":  153,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S131",
-"message":  "Add a 'Case Else' clause to this 'Select' statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L240",
-"region":  {
-"startLine":  240,
-"startColumn":  17,
-"endLine":  240,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S131",
-"message":  "Add a 'Case Else' clause to this 'Select' statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILog.vb#L63",
-"region":  {
-"startLine":  63,
-"startColumn":  9,
-"endLine":  63,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S131",
-"message":  "Add a 'Case Else' clause to this 'Select' statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L339",
-"region":  {
-"startLine":  339,
-"startColumn":  13,
-"endLine":  339,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S131",
-"message":  "Add a 'Case Else' clause to this 'Select' statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L91",
-"region":  {
-"startLine":  91,
-"startColumn":  25,
-"endLine":  91,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S131",
-"message":  "Add a 'Case Else' clause to this 'Select' statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L341",
-"region":  {
-"startLine":  341,
-"startColumn":  25,
-"endLine":  341,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S131",
-"message":  "Add a 'Case Else' clause to this 'Select' statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1196",
-"region":  {
-"startLine":  1196,
-"startColumn":  9,
-"endLine":  1196,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S131",
-"message":  "Add a 'Case Else' clause to this 'Select' statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L386",
-"region":  {
-"startLine":  386,
-"startColumn":  9,
-"endLine":  386,
-"endColumn":  15
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S131",
+      "Message": "Add a \u0027Case Else\u0027 clause to this \u0027Select\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L1023",
+      "Location": "Line 1023 Position 13-19"
+    },
+    {
+      "Id": "S131",
+      "Message": "Add a \u0027Case Else\u0027 clause to this \u0027Select\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L47",
+      "Location": "Line 47 Position 13-19"
+    },
+    {
+      "Id": "S131",
+      "Message": "Add a \u0027Case Else\u0027 clause to this \u0027Select\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L153",
+      "Location": "Line 153 Position 21-27"
+    },
+    {
+      "Id": "S131",
+      "Message": "Add a \u0027Case Else\u0027 clause to this \u0027Select\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L240",
+      "Location": "Line 240 Position 17-23"
+    },
+    {
+      "Id": "S131",
+      "Message": "Add a \u0027Case Else\u0027 clause to this \u0027Select\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILog.vb#L63",
+      "Location": "Line 63 Position 9-15"
+    },
+    {
+      "Id": "S131",
+      "Message": "Add a \u0027Case Else\u0027 clause to this \u0027Select\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L339",
+      "Location": "Line 339 Position 13-19"
+    },
+    {
+      "Id": "S131",
+      "Message": "Add a \u0027Case Else\u0027 clause to this \u0027Select\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1196",
+      "Location": "Line 1196 Position 9-15"
+    },
+    {
+      "Id": "S131",
+      "Message": "Add a \u0027Case Else\u0027 clause to this \u0027Select\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L341",
+      "Location": "Line 341 Position 25-31"
+    },
+    {
+      "Id": "S131",
+      "Message": "Add a \u0027Case Else\u0027 clause to this \u0027Select\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L91",
+      "Location": "Line 91 Position 25-31"
+    },
+    {
+      "Id": "S131",
+      "Message": "Add a \u0027Case Else\u0027 clause to this \u0027Select\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L386",
+      "Location": "Line 386 Position 9-15"
+    }
+  ]
 }

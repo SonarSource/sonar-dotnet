@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S106",
-"message":  "Remove this logging statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/NullableReferenceTypesExample/NullableReferenceTypesExample.cs#L20",
-"region":  {
-"startLine":  20,
-"startColumn":  13,
-"endLine":  20,
-"endColumn":  30
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S106",
+      "Message": "Remove this logging statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/NullableReferenceTypesExample/NullableReferenceTypesExample.cs#L20",
+      "Location": "Line 20 Position 13-30"
+    }
+  ]
 }

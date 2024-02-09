@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1075",
-"message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Chat/ChatClient/Program.cs#L81",
-"region":  {
-"startLine":  81,
-"startColumn":  74,
-"endLine":  81,
-"endColumn":  126
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1075",
+      "Message": "Refactor your code not to use hardcoded absolute paths or URIs.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Chat/ChatClient/Program.cs#L81",
+      "Location": "Line 81 Position 74-126"
+    }
+  ]
 }

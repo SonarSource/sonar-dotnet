@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S131",
-"message":  "Add a 'Case Else' clause to this 'Select' statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L228",
-"region":  {
-"startLine":  228,
-"startColumn":  25,
-"endLine":  228,
-"endColumn":  31
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S131",
+      "Message": "Add a \u0027Case Else\u0027 clause to this \u0027Select\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L228",
+      "Location": "Line 228 Position 25-31"
+    }
+  ]
 }

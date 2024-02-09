@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S6562",
-"message":  "Provide the "DateTimeKind" when creating this object.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Extensions/DateTimeExtensions.cs#L22",
-"region":  {
-"startLine":  22,
-"startColumn":  38,
-"endLine":  22,
-"endColumn":  62
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6562",
+      "Message": "Provide the \u0022DateTimeKind\u0022 when creating this object.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Extensions/DateTimeExtensions.cs#L22",
+      "Location": "Line 22 Position 38-62"
+    }
+  ]
 }

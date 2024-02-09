@@ -1,95 +1,46 @@
 {
-"issues":  [
-{
-"id":  "S2302",
-"message":  "Replace the string 'pipelines' with 'nameof(pipelines)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Basic/BasicAuthentication.cs#L26",
-"region":  {
-"startLine":  26,
-"startColumn":  49,
-"endLine":  26,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'configuration' with 'nameof(configuration)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Basic/BasicAuthentication.cs#L31",
-"region":  {
-"startLine":  31,
-"startColumn":  49,
-"endLine":  31,
-"endColumn":  64
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'module' with 'nameof(module)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Basic/BasicAuthentication.cs#L47",
-"region":  {
-"startLine":  47,
-"startColumn":  49,
-"endLine":  47,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'configuration' with 'nameof(configuration)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Basic/BasicAuthentication.cs#L52",
-"region":  {
-"startLine":  52,
-"startColumn":  49,
-"endLine":  52,
-"endColumn":  64
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'configuration' with 'nameof(configuration)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Basic/BasicAuthentication.cs#L70",
-"region":  {
-"startLine":  70,
-"startColumn":  49,
-"endLine":  70,
-"endColumn":  64
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'userValidator' with 'nameof(userValidator)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Basic/BasicAuthenticationConfiguration.cs#L20",
-"region":  {
-"startLine":  20,
-"startColumn":  49,
-"endLine":  20,
-"endColumn":  64
-}
-}
-},
-{
-"id":  "S2302",
-"message":  "Replace the string 'realm' with 'nameof(realm)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Basic/BasicAuthenticationConfiguration.cs#L25",
-"region":  {
-"startLine":  25,
-"startColumn":  45,
-"endLine":  25,
-"endColumn":  52
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027pipelines\u0027 with \u0027nameof(pipelines)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Basic/BasicAuthentication.cs#L26",
+      "Location": "Line 26 Position 49-60"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027configuration\u0027 with \u0027nameof(configuration)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Basic/BasicAuthentication.cs#L31",
+      "Location": "Line 31 Position 49-64"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027module\u0027 with \u0027nameof(module)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Basic/BasicAuthentication.cs#L47",
+      "Location": "Line 47 Position 49-57"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027configuration\u0027 with \u0027nameof(configuration)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Basic/BasicAuthentication.cs#L52",
+      "Location": "Line 52 Position 49-64"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027configuration\u0027 with \u0027nameof(configuration)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Basic/BasicAuthentication.cs#L70",
+      "Location": "Line 70 Position 49-64"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027userValidator\u0027 with \u0027nameof(userValidator)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Basic/BasicAuthenticationConfiguration.cs#L20",
+      "Location": "Line 20 Position 49-64"
+    },
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027realm\u0027 with \u0027nameof(realm)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Basic/BasicAuthenticationConfiguration.cs#L25",
+      "Location": "Line 25 Position 45-52"
+    }
+  ]
 }

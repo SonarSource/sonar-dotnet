@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1449",
-"message":  "Define the locale to be used in this string operation.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Helpers/AnyNumber.cs#L38",
-"region":  {
-"startLine":  38,
-"startColumn":  32,
-"endLine":  38,
-"endColumn":  40
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1449",
+      "Message": "Define the locale to be used in this string operation.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Helpers/AnyNumber.cs#L38",
+      "Location": "Line 38 Position 32-40"
+    }
+  ]
 }

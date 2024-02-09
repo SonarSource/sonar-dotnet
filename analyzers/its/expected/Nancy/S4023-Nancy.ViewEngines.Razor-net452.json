@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S4023",
-"message":  "Remove this interface or add members to it.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/INancyRazorView.cs#L3",
-"region":  {
-"startLine":  3,
-"startColumn":  22,
-"endLine":  3,
-"endColumn":  37
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4023",
+      "Message": "Remove this interface or add members to it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/INancyRazorView.cs#L3",
+      "Location": "Line 3 Position 22-37"
+    }
+  ]
 }

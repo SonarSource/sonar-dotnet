@@ -1,76 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S2583",
-"message":  "Change this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L437",
-"region":  {
-"startLine":  437,
-"startColumn":  25,
-"endLine":  437,
-"endColumn":  45
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L439-L440",
-"region":  {
-"startLine":  439,
-"startColumn":  25,
-"endLine":  440,
-"endColumn":  54
-}
-}
-]
-},
-{
-"id":  "S2583",
-"message":  "Change this condition so that it does not always evaluate to 'True'. Some code paths are unreachable.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L449",
-"region":  {
-"startLine":  449,
-"startColumn":  21,
-"endLine":  449,
-"endColumn":  31
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L476-L551",
-"region":  {
-"startLine":  476,
-"startColumn":  26,
-"endLine":  551,
-"endColumn":  42
-}
-}
-]
-},
-{
-"id":  "S2583",
-"message":  "Change this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L560",
-"region":  {
-"startLine":  560,
-"startColumn":  22,
-"endLine":  560,
-"endColumn":  42
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L562",
-"region":  {
-"startLine":  562,
-"startColumn":  17,
-"endLine":  562,
-"endColumn":  78
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S2583",
+      "Message": "Change this condition so that it does not always evaluate to \u0027False\u0027. Some code paths are unreachable.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L437",
+      "Location": "Line 437 Position 25-45"
+    },
+    {
+      "Id": "S2583",
+      "Message": "Change this condition so that it does not always evaluate to \u0027True\u0027. Some code paths are unreachable.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L449",
+      "Location": "Line 449 Position 21-31"
+    },
+    {
+      "Id": "S2583",
+      "Message": "Change this condition so that it does not always evaluate to \u0027False\u0027. Some code paths are unreachable.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L560",
+      "Location": "Line 560 Position 22-42"
+    }
+  ]
 }

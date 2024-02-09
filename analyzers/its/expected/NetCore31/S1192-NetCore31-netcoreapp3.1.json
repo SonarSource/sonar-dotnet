@@ -1,55 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password=' 5 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/Controllers/S2115.cs#L9",
-"region":  {
-"startLine":  9,
-"startColumn":  41,
-"endLine":  9,
-"endColumn":  114
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/Controllers/S2115.cs#L10",
-"region":  {
-"startLine":  10,
-"startColumn":  38,
-"endLine":  10,
-"endColumn":  111
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/Controllers/S2115.cs#L11",
-"region":  {
-"startLine":  11,
-"startColumn":  37,
-"endLine":  11,
-"endColumn":  110
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/Controllers/S2115.cs#L12",
-"region":  {
-"startLine":  12,
-"startColumn":  38,
-"endLine":  12,
-"endColumn":  111
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/Controllers/S2115.cs#L13",
-"region":  {
-"startLine":  13,
-"startColumn":  38,
-"endLine":  13,
-"endColumn":  111
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S1192",
+      "Message": "Define a constant instead of using this literal \u0027Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password=\u0027 5 times.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/Controllers/S2115.cs#L9",
+      "Location": "Line 9 Position 41-114"
+    }
+  ]
 }

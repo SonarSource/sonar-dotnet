@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S1125",
-"message":  "Remove the unnecessary Boolean literal(s).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/ConsoleMessageSinkActor.cs#L54",
-"region":  {
-"startLine":  54,
-"startColumn":  54,
-"endLine":  54,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S1125",
-"message":  "Remove the unnecessary Boolean literal(s).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/ConsoleMessageSinkActor.cs#L59",
-"region":  {
-"startLine":  59,
-"startColumn":  68,
-"endLine":  59,
-"endColumn":  76
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1125",
+      "Message": "Remove the unnecessary Boolean literal(s).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/ConsoleMessageSinkActor.cs#L54",
+      "Location": "Line 54 Position 54-62"
+    },
+    {
+      "Id": "S1125",
+      "Message": "Remove the unnecessary Boolean literal(s).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/ConsoleMessageSinkActor.cs#L59",
+      "Location": "Line 59 Position 68-76"
+    }
+  ]
 }

@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DefaultDescriptorBuilder.cs#L235",
-"region":  {
-"startLine":  235,
-"startColumn":  33,
-"endLine":  235,
-"endColumn":  35
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DefaultDescriptorBuilder.cs#L235",
+      "Location": "Line 235 Position 33-35"
+    }
+  ]
 }

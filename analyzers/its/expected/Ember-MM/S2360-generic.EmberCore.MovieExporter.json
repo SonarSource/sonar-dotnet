@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S2360",
-"message":  "Use the overloading mechanism instead of the optional parameters.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L52",
-"region":  {
-"startLine":  52,
-"startColumn":  58,
-"endLine":  52,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S2360",
-"message":  "Use the overloading mechanism instead of the optional parameters.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L52",
-"region":  {
-"startLine":  52,
-"startColumn":  106,
-"endLine":  52,
-"endColumn":  114
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2360",
+      "Message": "Use the overloading mechanism instead of the optional parameters.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L52",
+      "Location": "Line 52 Position 106-114"
+    },
+    {
+      "Id": "S2360",
+      "Message": "Use the overloading mechanism instead of the optional parameters.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L52",
+      "Location": "Line 52 Position 58-66"
+    }
+  ]
 }

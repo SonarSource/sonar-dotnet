@@ -1,1525 +1,706 @@
 {
-"issues":  [
-{
-"id":  "S2364",
-"message":  "Rename 'WebPage' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeTrailers.vb#L29",
-"region":  {
-"startLine":  29,
-"startColumn":  13,
-"endLine":  29,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'CachePath' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L32",
-"region":  {
-"startLine":  32,
-"startColumn":  13,
-"endLine":  32,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'DLType' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L34",
-"region":  {
-"startLine":  34,
-"startColumn":  13,
-"endLine":  34,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'ETHashes' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L35",
-"region":  {
-"startLine":  35,
-"startColumn":  13,
-"endLine":  35,
-"endColumn":  21
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'MovieImages' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L38",
-"region":  {
-"startLine":  38,
-"startColumn":  13,
-"endLine":  38,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'PreDL' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L46",
-"region":  {
-"startLine":  46,
-"startColumn":  13,
-"endLine":  46,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'Results' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L47",
-"region":  {
-"startLine":  47,
-"startColumn":  13,
-"endLine":  47,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'XMLManager' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgSearchResults.vb#L35",
-"region":  {
-"startLine":  35,
-"startColumn":  13,
-"endLine":  35,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'sHTTP' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgSearchResults.vb#L37",
-"region":  {
-"startLine":  37,
-"startColumn":  13,
-"endLine":  37,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'tURL' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgTrailer.vb#L34",
-"region":  {
-"startLine":  34,
-"startColumn":  13,
-"endLine":  34,
-"endColumn":  17
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename '_Name' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L33",
-"region":  {
-"startLine":  33,
-"startColumn":  13,
-"endLine":  33,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename '_PostScraperEnabled' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L34",
-"region":  {
-"startLine":  34,
-"startColumn":  13,
-"endLine":  34,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename '_ScraperEnabled' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L35",
-"region":  {
-"startLine":  35,
-"startColumn":  13,
-"endLine":  35,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'XMLManager' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L38",
-"region":  {
-"startLine":  38,
-"startColumn":  13,
-"endLine":  38,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'ScrapersLoaded' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L41",
-"region":  {
-"startLine":  41,
-"startColumn":  13,
-"endLine":  41,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'LastDBMovieID' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L43",
-"region":  {
-"startLine":  43,
-"startColumn":  13,
-"endLine":  43,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Discography' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/ArtistTag.vb#L37",
-"region":  {
-"startLine":  37,
-"startColumn":  21,
-"endLine":  37,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_LastScraped' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MediaTag.vb#L41",
-"region":  {
-"startLine":  41,
-"startColumn":  21,
-"endLine":  41,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_LastScraper' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MediaTag.vb#L42",
-"region":  {
-"startLine":  42,
-"startColumn":  21,
-"endLine":  42,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_LastUpdated' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MediaTag.vb#L43",
-"region":  {
-"startLine":  43,
-"startColumn":  21,
-"endLine":  43,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm__Fanart' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MediaTag.vb#L44",
-"region":  {
-"startLine":  44,
-"startColumn":  21,
-"endLine":  44,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm__People' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MediaTag.vb#L45",
-"region":  {
-"startLine":  45,
-"startColumn":  21,
-"endLine":  45,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm__Thumbs' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MediaTag.vb#L46",
-"region":  {
-"startLine":  46,
-"startColumn":  21,
-"endLine":  46,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_YearsActive' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/PersonInfo.vb#L39",
-"region":  {
-"startLine":  39,
-"startColumn":  21,
-"endLine":  39,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Colors' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/Thumbnail.vb#L35",
-"region":  {
-"startLine":  35,
-"startColumn":  21,
-"endLine":  35,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Dimensions' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/Thumbnail.vb#L36",
-"region":  {
-"startLine":  36,
-"startColumn":  21,
-"endLine":  36,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Preview' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/Thumbnail.vb#L37",
-"region":  {
-"startLine":  37,
-"startColumn":  21,
-"endLine":  37,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_EpisodeGuide' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/TVShow.vb#L38",
-"region":  {
-"startLine":  38,
-"startColumn":  21,
-"endLine":  38,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Episodes' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/TVShow.vb#L39",
-"region":  {
-"startLine":  39,
-"startColumn":  21,
-"endLine":  39,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename '_Buffer' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/FunctionInformation.vb#L37",
-"region":  {
-"startLine":  37,
-"startColumn":  21,
-"endLine":  37,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename '_Contents' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/FunctionInformation.vb#L38",
-"region":  {
-"startLine":  38,
-"startColumn":  21,
-"endLine":  38,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename '_FunctionType' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/FunctionInformation.vb#L79",
-"region":  {
-"startLine":  79,
-"startColumn":  21,
-"endLine":  79,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename '_Tag' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/FunctionInformation.vb#L80",
-"region":  {
-"startLine":  80,
-"startColumn":  21,
-"endLine":  80,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Content' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Include.vb#L36",
-"region":  {
-"startLine":  36,
-"startColumn":  21,
-"endLine":  36,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Content' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/IncludeManager.vb#L36",
-"region":  {
-"startLine":  36,
-"startColumn":  21,
-"endLine":  36,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_IncludeList' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/IncludeManager.vb#L37",
-"region":  {
-"startLine":  37,
-"startColumn":  21,
-"endLine":  37,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_CacheHours' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L47",
-"region":  {
-"startLine":  47,
-"startColumn":  21,
-"endLine":  47,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_CacheMinutes' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L48",
-"region":  {
-"startLine":  48,
-"startColumn":  21,
-"endLine":  48,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_CachePersistence' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L49",
-"region":  {
-"startLine":  49,
-"startColumn":  21,
-"endLine":  49,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_GetSettingsFunction' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L50",
-"region":  {
-"startLine":  50,
-"startColumn":  21,
-"endLine":  50,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_ScraperDate' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L51",
-"region":  {
-"startLine":  51,
-"startColumn":  21,
-"endLine":  51,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_ScraperEncoding' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L52",
-"region":  {
-"startLine":  52,
-"startColumn":  21,
-"endLine":  52,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_ScraperFramework' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L53",
-"region":  {
-"startLine":  53,
-"startColumn":  21,
-"endLine":  53,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_ScraperIncludes' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L54",
-"region":  {
-"startLine":  54,
-"startColumn":  21,
-"endLine":  54,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_ScraperLanguage' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L55",
-"region":  {
-"startLine":  55,
-"startColumn":  21,
-"endLine":  55,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_ScraperThumb' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L56",
-"region":  {
-"startLine":  56,
-"startColumn":  21,
-"endLine":  56,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_ThumbLocation' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L57",
-"region":  {
-"startLine":  57,
-"startColumn":  21,
-"endLine":  57,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_ID' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L631",
-"region":  {
-"startLine":  631,
-"startColumn":  21,
-"endLine":  631,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_ImplementingFunctions' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L632",
-"region":  {
-"startLine":  632,
-"startColumn":  21,
-"endLine":  632,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Type' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L633",
-"region":  {
-"startLine":  633,
-"startColumn":  21,
-"endLine":  633,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Description' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L41",
-"region":  {
-"startLine":  41,
-"startColumn":  21,
-"endLine":  41,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Genres' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L42",
-"region":  {
-"startLine":  42,
-"startColumn":  21,
-"endLine":  42,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_ID' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L43",
-"region":  {
-"startLine":  43,
-"startColumn":  21,
-"endLine":  43,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Number' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L44",
-"region":  {
-"startLine":  44,
-"startColumn":  21,
-"endLine":  44,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_ReleaseDate' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L45",
-"region":  {
-"startLine":  45,
-"startColumn":  21,
-"endLine":  45,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_ReleasedBy' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L46",
-"region":  {
-"startLine":  46,
-"startColumn":  21,
-"endLine":  46,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Relevance' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L47",
-"region":  {
-"startLine":  47,
-"startColumn":  21,
-"endLine":  47,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Thumb' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L48",
-"region":  {
-"startLine":  48,
-"startColumn":  21,
-"endLine":  48,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Title' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L49",
-"region":  {
-"startLine":  49,
-"startColumn":  21,
-"endLine":  49,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_TypeOfSearch' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L50",
-"region":  {
-"startLine":  50,
-"startColumn":  21,
-"endLine":  50,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Urls' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L51",
-"region":  {
-"startLine":  51,
-"startColumn":  21,
-"endLine":  51,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Volume' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L52",
-"region":  {
-"startLine":  52,
-"startColumn":  21,
-"endLine":  52,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Year' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L53",
-"region":  {
-"startLine":  53,
-"startColumn":  21,
-"endLine":  53,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_ErrorType' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperEvaluation.vb#L35",
-"region":  {
-"startLine":  35,
-"startColumn":  21,
-"endLine":  35,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Location' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperEvaluation.vb#L36",
-"region":  {
-"startLine":  36,
-"startColumn":  21,
-"endLine":  36,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Message' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperEvaluation.vb#L37",
-"region":  {
-"startLine":  37,
-"startColumn":  21,
-"endLine":  37,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_CaseSensitive' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L39",
-"region":  {
-"startLine":  39,
-"startColumn":  21,
-"endLine":  39,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Clear' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L40",
-"region":  {
-"startLine":  40,
-"startColumn":  21,
-"endLine":  40,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Encode1' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L41",
-"region":  {
-"startLine":  41,
-"startColumn":  21,
-"endLine":  41,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Encode2' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L42",
-"region":  {
-"startLine":  42,
-"startColumn":  21,
-"endLine":  42,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Encode3' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L43",
-"region":  {
-"startLine":  43,
-"startColumn":  21,
-"endLine":  43,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Encode4' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L44",
-"region":  {
-"startLine":  44,
-"startColumn":  21,
-"endLine":  44,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Encode5' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L45",
-"region":  {
-"startLine":  45,
-"startColumn":  21,
-"endLine":  45,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Encode6' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L46",
-"region":  {
-"startLine":  46,
-"startColumn":  21,
-"endLine":  46,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Encode7' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L47",
-"region":  {
-"startLine":  47,
-"startColumn":  21,
-"endLine":  47,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Encode8' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L48",
-"region":  {
-"startLine":  48,
-"startColumn":  21,
-"endLine":  48,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Encode9' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L49",
-"region":  {
-"startLine":  49,
-"startColumn":  21,
-"endLine":  49,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Expression' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L50",
-"region":  {
-"startLine":  50,
-"startColumn":  21,
-"endLine":  50,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_NoClean1' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L51",
-"region":  {
-"startLine":  51,
-"startColumn":  21,
-"endLine":  51,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_NoClean2' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L52",
-"region":  {
-"startLine":  52,
-"startColumn":  21,
-"endLine":  52,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_NoClean3' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L53",
-"region":  {
-"startLine":  53,
-"startColumn":  21,
-"endLine":  53,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_NoClean4' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L54",
-"region":  {
-"startLine":  54,
-"startColumn":  21,
-"endLine":  54,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_NoClean5' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L55",
-"region":  {
-"startLine":  55,
-"startColumn":  21,
-"endLine":  55,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_NoClean6' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L56",
-"region":  {
-"startLine":  56,
-"startColumn":  21,
-"endLine":  56,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_NoClean7' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L57",
-"region":  {
-"startLine":  57,
-"startColumn":  21,
-"endLine":  57,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_NoClean8' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L58",
-"region":  {
-"startLine":  58,
-"startColumn":  21,
-"endLine":  58,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_NoClean9' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L59",
-"region":  {
-"startLine":  59,
-"startColumn":  21,
-"endLine":  59,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Repeat' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L60",
-"region":  {
-"startLine":  60,
-"startColumn":  21,
-"endLine":  60,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Trim1' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L61",
-"region":  {
-"startLine":  61,
-"startColumn":  21,
-"endLine":  61,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Trim2' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L62",
-"region":  {
-"startLine":  62,
-"startColumn":  21,
-"endLine":  62,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Trim3' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L63",
-"region":  {
-"startLine":  63,
-"startColumn":  21,
-"endLine":  63,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Trim4' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L64",
-"region":  {
-"startLine":  64,
-"startColumn":  21,
-"endLine":  64,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Trim5' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L65",
-"region":  {
-"startLine":  65,
-"startColumn":  21,
-"endLine":  65,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Trim6' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L66",
-"region":  {
-"startLine":  66,
-"startColumn":  21,
-"endLine":  66,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Trim7' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L67",
-"region":  {
-"startLine":  67,
-"startColumn":  21,
-"endLine":  67,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Trim8' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L68",
-"region":  {
-"startLine":  68,
-"startColumn":  21,
-"endLine":  68,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Trim9' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L69",
-"region":  {
-"startLine":  69,
-"startColumn":  21,
-"endLine":  69,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Parent' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperFunction.vb#L39",
-"region":  {
-"startLine":  39,
-"startColumn":  29,
-"endLine":  39,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_ClearBuffers' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperFunction.vb#L41",
-"region":  {
-"startLine":  41,
-"startColumn":  21,
-"endLine":  41,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Dest' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperFunction.vb#L42",
-"region":  {
-"startLine":  42,
-"startColumn":  21,
-"endLine":  42,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_RegExps' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperFunction.vb#L43",
-"region":  {
-"startLine":  43,
-"startColumn":  21,
-"endLine":  43,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_SearchStringEncoding' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperFunction.vb#L44",
-"region":  {
-"startLine":  44,
-"startColumn":  21,
-"endLine":  44,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Name' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperFunctionContainer.vb#L35",
-"region":  {
-"startLine":  35,
-"startColumn":  21,
-"endLine":  35,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_ScraperFunctions' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperFunctionContainer.vb#L36",
-"region":  {
-"startLine":  36,
-"startColumn":  21,
-"endLine":  36,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Comment' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperNode.vb#L40",
-"region":  {
-"startLine":  40,
-"startColumn":  21,
-"endLine":  40,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_IsInclude' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperNode.vb#L41",
-"region":  {
-"startLine":  41,
-"startColumn":  21,
-"endLine":  41,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Name' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperNode.vb#L42",
-"region":  {
-"startLine":  42,
-"startColumn":  21,
-"endLine":  42,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Parent' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperNode.vb#L43",
-"region":  {
-"startLine":  43,
-"startColumn":  21,
-"endLine":  43,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Append' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L39",
-"region":  {
-"startLine":  39,
-"startColumn":  21,
-"endLine":  39,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Conditional' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L40",
-"region":  {
-"startLine":  40,
-"startColumn":  21,
-"endLine":  40,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_ConditionalInverse' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L41",
-"region":  {
-"startLine":  41,
-"startColumn":  21,
-"endLine":  41,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Dest' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L42",
-"region":  {
-"startLine":  42,
-"startColumn":  21,
-"endLine":  42,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Expression' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L43",
-"region":  {
-"startLine":  43,
-"startColumn":  21,
-"endLine":  43,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Input' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L44",
-"region":  {
-"startLine":  44,
-"startColumn":  21,
-"endLine":  44,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_Output' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L45",
-"region":  {
-"startLine":  45,
-"startColumn":  21,
-"endLine":  45,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'm_RegExps' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L46",
-"region":  {
-"startLine":  46,
-"startColumn":  21,
-"endLine":  46,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S2364",
-"message":  "Rename 'Common' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperManager.vb#L44",
-"region":  {
-"startLine":  44,
-"startColumn":  21,
-"endLine":  44,
-"endColumn":  27
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027WebPage\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeTrailers.vb#L29",
+      "Location": "Line 29 Position 13-20"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027CachePath\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L32",
+      "Location": "Line 32 Position 13-22"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027DLType\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L34",
+      "Location": "Line 34 Position 13-19"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027ETHashes\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L35",
+      "Location": "Line 35 Position 13-21"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027MovieImages\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L38",
+      "Location": "Line 38 Position 13-24"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027PreDL\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L46",
+      "Location": "Line 46 Position 13-18"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027Results\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L47",
+      "Location": "Line 47 Position 13-20"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027XMLManager\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgSearchResults.vb#L35",
+      "Location": "Line 35 Position 13-23"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027sHTTP\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgSearchResults.vb#L37",
+      "Location": "Line 37 Position 13-18"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027tURL\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgTrailer.vb#L34",
+      "Location": "Line 34 Position 13-17"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027_Name\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L33",
+      "Location": "Line 33 Position 13-18"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027_PostScraperEnabled\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L34",
+      "Location": "Line 34 Position 13-32"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027_ScraperEnabled\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L35",
+      "Location": "Line 35 Position 13-28"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027XMLManager\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L38",
+      "Location": "Line 38 Position 13-23"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027ScrapersLoaded\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L41",
+      "Location": "Line 41 Position 13-27"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027LastDBMovieID\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L43",
+      "Location": "Line 43 Position 13-26"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Discography\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/ArtistTag.vb#L37",
+      "Location": "Line 37 Position 21-34"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_LastScraped\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MediaTag.vb#L41",
+      "Location": "Line 41 Position 21-34"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_LastScraper\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MediaTag.vb#L42",
+      "Location": "Line 42 Position 21-34"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_LastUpdated\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MediaTag.vb#L43",
+      "Location": "Line 43 Position 21-34"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m__Fanart\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MediaTag.vb#L44",
+      "Location": "Line 44 Position 21-30"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m__People\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MediaTag.vb#L45",
+      "Location": "Line 45 Position 21-30"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m__Thumbs\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MediaTag.vb#L46",
+      "Location": "Line 46 Position 21-30"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_YearsActive\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/PersonInfo.vb#L39",
+      "Location": "Line 39 Position 21-34"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Colors\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/Thumbnail.vb#L35",
+      "Location": "Line 35 Position 21-29"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Dimensions\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/Thumbnail.vb#L36",
+      "Location": "Line 36 Position 21-33"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Preview\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/Thumbnail.vb#L37",
+      "Location": "Line 37 Position 21-30"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_EpisodeGuide\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/TVShow.vb#L38",
+      "Location": "Line 38 Position 21-35"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Episodes\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/TVShow.vb#L39",
+      "Location": "Line 39 Position 21-31"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027_Buffer\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/FunctionInformation.vb#L37",
+      "Location": "Line 37 Position 21-28"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027_Contents\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/FunctionInformation.vb#L38",
+      "Location": "Line 38 Position 21-30"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027_FunctionType\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/FunctionInformation.vb#L79",
+      "Location": "Line 79 Position 21-34"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027_Tag\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/FunctionInformation.vb#L80",
+      "Location": "Line 80 Position 21-25"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Content\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Include.vb#L36",
+      "Location": "Line 36 Position 21-30"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Content\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/IncludeManager.vb#L36",
+      "Location": "Line 36 Position 21-30"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_IncludeList\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/IncludeManager.vb#L37",
+      "Location": "Line 37 Position 21-34"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_CacheHours\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L47",
+      "Location": "Line 47 Position 21-33"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_CacheMinutes\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L48",
+      "Location": "Line 48 Position 21-35"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_CachePersistence\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L49",
+      "Location": "Line 49 Position 21-39"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_GetSettingsFunction\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L50",
+      "Location": "Line 50 Position 21-42"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_ScraperDate\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L51",
+      "Location": "Line 51 Position 21-34"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_ScraperEncoding\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L52",
+      "Location": "Line 52 Position 21-38"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_ScraperFramework\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L53",
+      "Location": "Line 53 Position 21-39"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_ScraperIncludes\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L54",
+      "Location": "Line 54 Position 21-38"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_ScraperLanguage\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L55",
+      "Location": "Line 55 Position 21-38"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_ScraperThumb\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L56",
+      "Location": "Line 56 Position 21-35"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_ThumbLocation\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L57",
+      "Location": "Line 57 Position 21-36"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_ID\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L631",
+      "Location": "Line 631 Position 21-25"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_ImplementingFunctions\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L632",
+      "Location": "Line 632 Position 21-44"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Type\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L633",
+      "Location": "Line 633 Position 21-27"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Description\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L41",
+      "Location": "Line 41 Position 21-34"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Genres\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L42",
+      "Location": "Line 42 Position 21-29"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_ID\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L43",
+      "Location": "Line 43 Position 21-25"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Number\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L44",
+      "Location": "Line 44 Position 21-29"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_ReleaseDate\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L45",
+      "Location": "Line 45 Position 21-34"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_ReleasedBy\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L46",
+      "Location": "Line 46 Position 21-33"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Relevance\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L47",
+      "Location": "Line 47 Position 21-32"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Thumb\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L48",
+      "Location": "Line 48 Position 21-28"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Title\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L49",
+      "Location": "Line 49 Position 21-28"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_TypeOfSearch\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L50",
+      "Location": "Line 50 Position 21-35"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Urls\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L51",
+      "Location": "Line 51 Position 21-27"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Volume\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L52",
+      "Location": "Line 52 Position 21-29"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Year\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L53",
+      "Location": "Line 53 Position 21-27"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_ErrorType\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperEvaluation.vb#L35",
+      "Location": "Line 35 Position 21-32"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Location\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperEvaluation.vb#L36",
+      "Location": "Line 36 Position 21-31"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Message\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperEvaluation.vb#L37",
+      "Location": "Line 37 Position 21-30"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_CaseSensitive\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L39",
+      "Location": "Line 39 Position 21-36"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Clear\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L40",
+      "Location": "Line 40 Position 21-28"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Encode1\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L41",
+      "Location": "Line 41 Position 21-30"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Encode2\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L42",
+      "Location": "Line 42 Position 21-30"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Encode3\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L43",
+      "Location": "Line 43 Position 21-30"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Encode4\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L44",
+      "Location": "Line 44 Position 21-30"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Encode5\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L45",
+      "Location": "Line 45 Position 21-30"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Encode6\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L46",
+      "Location": "Line 46 Position 21-30"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Encode7\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L47",
+      "Location": "Line 47 Position 21-30"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Encode8\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L48",
+      "Location": "Line 48 Position 21-30"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Encode9\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L49",
+      "Location": "Line 49 Position 21-30"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Expression\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L50",
+      "Location": "Line 50 Position 21-33"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_NoClean1\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L51",
+      "Location": "Line 51 Position 21-31"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_NoClean2\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L52",
+      "Location": "Line 52 Position 21-31"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_NoClean3\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L53",
+      "Location": "Line 53 Position 21-31"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_NoClean4\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L54",
+      "Location": "Line 54 Position 21-31"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_NoClean5\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L55",
+      "Location": "Line 55 Position 21-31"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_NoClean6\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L56",
+      "Location": "Line 56 Position 21-31"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_NoClean7\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L57",
+      "Location": "Line 57 Position 21-31"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_NoClean8\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L58",
+      "Location": "Line 58 Position 21-31"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_NoClean9\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L59",
+      "Location": "Line 59 Position 21-31"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Repeat\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L60",
+      "Location": "Line 60 Position 21-29"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Trim1\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L61",
+      "Location": "Line 61 Position 21-28"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Trim2\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L62",
+      "Location": "Line 62 Position 21-28"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Trim3\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L63",
+      "Location": "Line 63 Position 21-28"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Trim4\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L64",
+      "Location": "Line 64 Position 21-28"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Trim5\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L65",
+      "Location": "Line 65 Position 21-28"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Trim6\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L66",
+      "Location": "Line 66 Position 21-28"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Trim7\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L67",
+      "Location": "Line 67 Position 21-28"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Trim8\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L68",
+      "Location": "Line 68 Position 21-28"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Trim9\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L69",
+      "Location": "Line 69 Position 21-28"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Parent\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperFunction.vb#L39",
+      "Location": "Line 39 Position 29-37"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_ClearBuffers\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperFunction.vb#L41",
+      "Location": "Line 41 Position 21-35"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Dest\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperFunction.vb#L42",
+      "Location": "Line 42 Position 21-27"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_RegExps\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperFunction.vb#L43",
+      "Location": "Line 43 Position 21-30"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_SearchStringEncoding\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperFunction.vb#L44",
+      "Location": "Line 44 Position 21-43"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Name\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperFunctionContainer.vb#L35",
+      "Location": "Line 35 Position 21-27"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_ScraperFunctions\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperFunctionContainer.vb#L36",
+      "Location": "Line 36 Position 21-39"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Comment\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperNode.vb#L40",
+      "Location": "Line 40 Position 21-30"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_IsInclude\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperNode.vb#L41",
+      "Location": "Line 41 Position 21-32"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Name\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperNode.vb#L42",
+      "Location": "Line 42 Position 21-27"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Parent\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperNode.vb#L43",
+      "Location": "Line 43 Position 21-29"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Append\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L39",
+      "Location": "Line 39 Position 21-29"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Conditional\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L40",
+      "Location": "Line 40 Position 21-34"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_ConditionalInverse\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L41",
+      "Location": "Line 41 Position 21-41"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Dest\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L42",
+      "Location": "Line 42 Position 21-27"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Expression\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L43",
+      "Location": "Line 43 Position 21-33"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Input\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L44",
+      "Location": "Line 44 Position 21-28"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_Output\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L45",
+      "Location": "Line 45 Position 21-29"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027m_RegExps\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L46",
+      "Location": "Line 46 Position 21-30"
+    },
+    {
+      "Id": "S2364",
+      "Message": "Rename \u0027Common\u0027 to match the regular expression: \u0027^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperManager.vb#L44",
+      "Location": "Line 44 Position 21-27"
+    }
+  ]
 }

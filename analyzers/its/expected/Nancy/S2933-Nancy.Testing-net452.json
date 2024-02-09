@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2933",
-"message":  "Make 'source' 'readonly'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/AndConnector.cs#L5",
-"region":  {
-"startLine":  5,
-"startColumn":  25,
-"endLine":  5,
-"endColumn":  31
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2933",
+      "Message": "Make \u0027source\u0027 \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/AndConnector.cs#L5",
+      "Location": "Line 5 Position 25-31"
+    }
+  ]
 }

@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S1659",
-"message":  "Declare 'otherIdx' in a separate statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ByteString.cs#L408",
-"region":  {
-"startLine":  408,
-"startColumn":  30,
-"endLine":  408,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S1659",
-"message":  "Declare 'b' in a separate statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MurmurHash.cs#L235",
-"region":  {
-"startLine":  235,
-"startColumn":  29,
-"endLine":  235,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S1659",
-"message":  "Declare 'n' in a separate statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MurmurHash.cs#L235",
-"region":  {
-"startLine":  235,
-"startColumn":  36,
-"endLine":  235,
-"endColumn":  37
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1659",
+      "Message": "Declare \u0027otherIdx\u0027 in a separate statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ByteString.cs#L408",
+      "Location": "Line 408 Position 30-38"
+    },
+    {
+      "Id": "S1659",
+      "Message": "Declare \u0027b\u0027 in a separate statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MurmurHash.cs#L235",
+      "Location": "Line 235 Position 29-30"
+    },
+    {
+      "Id": "S1659",
+      "Message": "Declare \u0027n\u0027 in a separate statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MurmurHash.cs#L235",
+      "Location": "Line 235 Position 36-37"
+    }
+  ]
 }

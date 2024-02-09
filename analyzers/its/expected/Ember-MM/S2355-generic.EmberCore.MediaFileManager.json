@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2355",
-"message":  "Use an array literal here instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L64",
-"region":  {
-"startLine":  64,
-"startColumn":  55,
-"endLine":  64,
-"endColumn":  114
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2355",
+      "Message": "Use an array literal here instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L64",
+      "Location": "Line 64 Position 55-114"
+    }
+  ]
 }

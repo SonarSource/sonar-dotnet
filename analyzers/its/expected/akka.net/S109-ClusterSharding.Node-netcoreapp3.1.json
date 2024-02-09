@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S109",
-"message":  "Assign this magic number '5000' to a well-named variable or constant, and use that instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Cluster/ClusterSharding/ClusterSharding.Node/Program.cs#L96",
-"region":  {
-"startLine":  96,
-"startColumn":  26,
-"endLine":  96,
-"endColumn":  30
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00275000\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Cluster/ClusterSharding/ClusterSharding.Node/Program.cs#L96",
+      "Location": "Line 96 Position 26-30"
+    }
+  ]
 }

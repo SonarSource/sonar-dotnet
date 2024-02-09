@@ -1,52 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Mappers/MapperRegistry.cs#L4",
-"region":  {
-"startLine":  4,
-"startColumn":  27,
-"endLine":  4,
-"endColumn":  41
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Mappers/MapperRegistry.cs#L6",
-"region":  {
-"startLine":  6,
-"startColumn":  9,
-"endLine":  6,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S3059",
-"message":  "Types should not have members with visibility set higher than the type's visibility",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/NullsafeQueryRewriter.cs#L41",
-"region":  {
-"startLine":  41,
-"startColumn":  20,
-"endLine":  41,
-"endColumn":  41
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/NullsafeQueryRewriter.cs#L45",
-"region":  {
-"startLine":  45,
-"startColumn":  9,
-"endLine":  45,
-"endColumn":  15
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Mappers/MapperRegistry.cs#L4",
+      "Location": "Line 4 Position 27-41"
+    },
+    {
+      "Id": "S3059",
+      "Message": "Types should not have members with visibility set higher than the type\u0027s visibility",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/NullsafeQueryRewriter.cs#L41",
+      "Location": "Line 41 Position 20-41"
+    }
+  ]
 }

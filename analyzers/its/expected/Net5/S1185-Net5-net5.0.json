@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1185",
-"message":  "Remove this property 'MyProperty1' to simply inherit its behavior.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1185.cs#L12",
-"region":  {
-"startLine":  12,
-"startColumn":  13,
-"endLine":  12,
-"endColumn":  107
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1185",
+      "Message": "Remove this property \u0027MyProperty1\u0027 to simply inherit its behavior.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1185.cs#L12",
+      "Location": "Line 12 Position 13-107"
+    }
+  ]
 }

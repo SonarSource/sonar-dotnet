@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3366",
-"message":  "Make sure the use of 'this' doesn't expose partially-constructed instances of this class in multi-threaded environments.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistence.cs#L77",
-"region":  {
-"startLine":  77,
-"startColumn":  47,
-"endLine":  77,
-"endColumn":  51
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3366",
+      "Message": "Make sure the use of \u0027this\u0027 doesn\u0027t expose partially-constructed instances of this class in multi-threaded environments.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistence.cs#L77",
+      "Location": "Line 77 Position 47-51"
+    }
+  ]
 }

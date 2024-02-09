@@ -1,108 +1,52 @@
 {
-"issues":  [
-{
-"id":  "S108",
-"message":  "Either remove or fill this block of code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L553",
-"region":  {
-"startLine":  553,
-"startColumn":  17,
-"endLine":  553,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S108",
-"message":  "Either remove or fill this block of code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L584",
-"region":  {
-"startLine":  584,
-"startColumn":  17,
-"endLine":  584,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S108",
-"message":  "Either remove or fill this block of code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L684",
-"region":  {
-"startLine":  684,
-"startColumn":  21,
-"endLine":  684,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S108",
-"message":  "Either remove or fill this block of code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L689",
-"region":  {
-"startLine":  689,
-"startColumn":  21,
-"endLine":  689,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S108",
-"message":  "Either remove or fill this block of code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L694",
-"region":  {
-"startLine":  694,
-"startColumn":  21,
-"endLine":  694,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S108",
-"message":  "Either remove or fill this block of code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L701",
-"region":  {
-"startLine":  701,
-"startColumn":  13,
-"endLine":  701,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S108",
-"message":  "Either remove or fill this block of code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L819",
-"region":  {
-"startLine":  819,
-"startColumn":  9,
-"endLine":  819,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S108",
-"message":  "Either remove or fill this block of code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/Module.MovieExporter.vb#L90",
-"region":  {
-"startLine":  90,
-"startColumn":  9,
-"endLine":  90,
-"endColumn":  30
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L553",
+      "Location": "Line 553 Position 17-22"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L584",
+      "Location": "Line 584 Position 17-22"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L684",
+      "Location": "Line 684 Position 21-26"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L689",
+      "Location": "Line 689 Position 21-26"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L694",
+      "Location": "Line 694 Position 21-26"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L701",
+      "Location": "Line 701 Position 13-34"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L819",
+      "Location": "Line 819 Position 9-30"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/Module.MovieExporter.vb#L90",
+      "Location": "Line 90 Position 9-30"
+    }
+  ]
 }

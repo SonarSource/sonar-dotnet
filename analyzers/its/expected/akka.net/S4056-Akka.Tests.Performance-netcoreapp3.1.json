@@ -1,56 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/Internal/ChildrenContainerSpec.cs#L50",
-"region":  {
-"startLine":  50,
-"startColumn":  28,
-"endLine":  50,
-"endColumn":  40
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/Internal/ChildrenContainerSpec.cs#L64",
-"region":  {
-"startLine":  64,
-"startColumn":  24,
-"endLine":  64,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/Internal/ChildrenContainerSpec.cs#L76",
-"region":  {
-"startLine":  76,
-"startColumn":  24,
-"endLine":  76,
-"endColumn":  74
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/Internal/ChildrenContainerSpec.cs#L88",
-"region":  {
-"startLine":  88,
-"startColumn":  24,
-"endLine":  88,
-"endColumn":  48
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/Internal/ChildrenContainerSpec.cs#L50",
+      "Location": "Line 50 Position 28-40"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/Internal/ChildrenContainerSpec.cs#L64",
+      "Location": "Line 64 Position 24-48"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/Internal/ChildrenContainerSpec.cs#L76",
+      "Location": "Line 76 Position 24-74"
+    },
+    {
+      "Id": "S4056",
+      "Message": "Use the overload that takes a \u0027CultureInfo\u0027 or \u0027IFormatProvider\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/Internal/ChildrenContainerSpec.cs#L88",
+      "Location": "Line 88 Position 24-48"
+    }
+  ]
 }

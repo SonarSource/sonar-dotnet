@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S4790",
-"message":  "Make sure this weak hash algorithm is not used in a sensitive context here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHashing.vb#L96",
-"region":  {
-"startLine":  96,
-"startColumn":  26,
-"endLine":  96,
-"endColumn":  54
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4790",
+      "Message": "Make sure this weak hash algorithm is not used in a sensitive context here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHashing.vb#L96",
+      "Location": "Line 96 Position 26-54"
+    }
+  ]
 }

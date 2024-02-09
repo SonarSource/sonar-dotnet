@@ -1,95 +1,46 @@
 {
-"issues":  [
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit.Tests/TestEventListenerTests/AllTestForEventFilterBase.cs#L174",
-"region":  {
-"startLine":  174,
-"startColumn":  21,
-"endLine":  174,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit.Tests/TestEventListenerTests/AllTestForEventFilterBase.cs#L186",
-"region":  {
-"startLine":  186,
-"startColumn":  21,
-"endLine":  186,
-"endColumn":  54
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit.Tests/TestEventListenerTests/AllTestForEventFilterBase.cs#L196",
-"region":  {
-"startLine":  196,
-"startColumn":  21,
-"endLine":  196,
-"endColumn":  65
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit.Tests/TestKitBaseTests/ReceiveTests.cs#L29",
-"region":  {
-"startLine":  29,
-"startColumn":  21,
-"endLine":  29,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit.Tests/TestKitBaseTests/ReceiveTests.cs#L35",
-"region":  {
-"startLine":  35,
-"startColumn":  21,
-"endLine":  35,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit.Tests/TestKitBaseTests/ReceiveTests.cs#L54",
-"region":  {
-"startLine":  54,
-"startColumn":  21,
-"endLine":  54,
-"endColumn":  65
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit.Tests/TestKitBaseTests/ReceiveTests.cs#L60",
-"region":  {
-"startLine":  60,
-"startColumn":  21,
-"endLine":  60,
-"endColumn":  69
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit.Tests/TestEventListenerTests/AllTestForEventFilterBase.cs#L174",
+      "Location": "Line 174 Position 21-42"
+    },
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit.Tests/TestEventListenerTests/AllTestForEventFilterBase.cs#L186",
+      "Location": "Line 186 Position 21-54"
+    },
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit.Tests/TestEventListenerTests/AllTestForEventFilterBase.cs#L196",
+      "Location": "Line 196 Position 21-65"
+    },
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit.Tests/TestKitBaseTests/ReceiveTests.cs#L29",
+      "Location": "Line 29 Position 21-59"
+    },
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit.Tests/TestKitBaseTests/ReceiveTests.cs#L35",
+      "Location": "Line 35 Position 21-63"
+    },
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit.Tests/TestKitBaseTests/ReceiveTests.cs#L54",
+      "Location": "Line 54 Position 21-65"
+    },
+    {
+      "Id": "S2699",
+      "Message": "Add at least one assertion to this test case.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit.Tests/TestKitBaseTests/ReceiveTests.cs#L60",
+      "Location": "Line 60 Position 21-69"
+    }
+  ]
 }

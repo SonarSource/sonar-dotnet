@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S4023",
-"message":  "Remove this interface or add members to it.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/INoImplicitSender.cs#L42",
-"region":  {
-"startLine":  42,
-"startColumn":  22,
-"endLine":  42,
-"endColumn":  39
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4023",
+      "Message": "Remove this interface or add members to it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/INoImplicitSender.cs#L42",
+      "Location": "Line 42 Position 22-39"
+    }
+  ]
 }

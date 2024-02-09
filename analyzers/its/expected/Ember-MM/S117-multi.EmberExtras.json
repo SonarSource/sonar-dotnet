@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S117",
-"message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/genericGenresEditor.vb#L61",
-"region":  {
-"startLine":  61,
-"startColumn":  7,
-"endLine":  61,
-"endColumn":  13
-}
-}
-},
-{
-"id":  "S117",
-"message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/genericMediaSources.vb#L62",
-"region":  {
-"startLine":  62,
-"startColumn":  13,
-"endLine":  62,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S117",
-"message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/genericMetadataEditor.vb#L62",
-"region":  {
-"startLine":  62,
-"startColumn":  13,
-"endLine":  62,
-"endColumn":  19
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/genericGenresEditor.vb#L61",
+      "Location": "Line 61 Position 7-13"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/genericMediaSources.vb#L62",
+      "Location": "Line 62 Position 13-19"
+    },
+    {
+      "Id": "S117",
+      "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/genericMetadataEditor.vb#L62",
+      "Location": "Line 62 Position 13-19"
+    }
+  ]
 }

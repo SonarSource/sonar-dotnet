@@ -1,251 +1,118 @@
 {
-"issues":  [
-{
-"id":  "S6354",
-"message":  "Use a testable (date) time provider instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L603",
-"region":  {
-"startLine":  603,
-"startColumn":  47,
-"endLine":  603,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S6354",
-"message":  "Use a testable (date) time provider instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L605",
-"region":  {
-"startLine":  605,
-"startColumn":  65,
-"endLine":  605,
-"endColumn":  80
-}
-}
-},
-{
-"id":  "S6354",
-"message":  "Use a testable (date) time provider instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Extra/Timed.cs#L296",
-"region":  {
-"startLine":  296,
-"startColumn":  36,
-"endLine":  296,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S6354",
-"message":  "Use a testable (date) time provider instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L3237",
-"region":  {
-"startLine":  3237,
-"startColumn":  90,
-"endLine":  3237,
-"endColumn":  105
-}
-}
-},
-{
-"id":  "S6354",
-"message":  "Use a testable (date) time provider instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L3267",
-"region":  {
-"startLine":  3267,
-"startColumn":  34,
-"endLine":  3267,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S6354",
-"message":  "Use a testable (date) time provider instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L212",
-"region":  {
-"startLine":  212,
-"startColumn":  33,
-"endLine":  212,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S6354",
-"message":  "Use a testable (date) time provider instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L220",
-"region":  {
-"startLine":  220,
-"startColumn":  33,
-"endLine":  220,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S6354",
-"message":  "Use a testable (date) time provider instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L234",
-"region":  {
-"startLine":  234,
-"startColumn":  37,
-"endLine":  234,
-"endColumn":  52
-}
-}
-},
-{
-"id":  "S6354",
-"message":  "Use a testable (date) time provider instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L295",
-"region":  {
-"startLine":  295,
-"startColumn":  33,
-"endLine":  295,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S6354",
-"message":  "Use a testable (date) time provider instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L304",
-"region":  {
-"startLine":  304,
-"startColumn":  33,
-"endLine":  304,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S6354",
-"message":  "Use a testable (date) time provider instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L322",
-"region":  {
-"startLine":  322,
-"startColumn":  56,
-"endLine":  322,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S6354",
-"message":  "Use a testable (date) time provider instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L383",
-"region":  {
-"startLine":  383,
-"startColumn":  33,
-"endLine":  383,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S6354",
-"message":  "Use a testable (date) time provider instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L416",
-"region":  {
-"startLine":  416,
-"startColumn":  37,
-"endLine":  416,
-"endColumn":  52
-}
-}
-},
-{
-"id":  "S6354",
-"message":  "Use a testable (date) time provider instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L423",
-"region":  {
-"startLine":  423,
-"startColumn":  58,
-"endLine":  423,
-"endColumn":  73
-}
-}
-},
-{
-"id":  "S6354",
-"message":  "Use a testable (date) time provider instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L589",
-"region":  {
-"startLine":  589,
-"startColumn":  33,
-"endLine":  589,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S6354",
-"message":  "Use a testable (date) time provider instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L597",
-"region":  {
-"startLine":  597,
-"startColumn":  33,
-"endLine":  597,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S6354",
-"message":  "Use a testable (date) time provider instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L626",
-"region":  {
-"startLine":  626,
-"startColumn":  32,
-"endLine":  626,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S6354",
-"message":  "Use a testable (date) time provider instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L641",
-"region":  {
-"startLine":  641,
-"startColumn":  28,
-"endLine":  641,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S6354",
-"message":  "Use a testable (date) time provider instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L645",
-"region":  {
-"startLine":  645,
-"startColumn":  37,
-"endLine":  645,
-"endColumn":  52
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6354",
+      "Message": "Use a testable (date) time provider instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L603",
+      "Location": "Line 603 Position 47-62"
+    },
+    {
+      "Id": "S6354",
+      "Message": "Use a testable (date) time provider instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L605",
+      "Location": "Line 605 Position 65-80"
+    },
+    {
+      "Id": "S6354",
+      "Message": "Use a testable (date) time provider instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Extra/Timed.cs#L296",
+      "Location": "Line 296 Position 36-48"
+    },
+    {
+      "Id": "S6354",
+      "Message": "Use a testable (date) time provider instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L3237",
+      "Location": "Line 3237 Position 90-105"
+    },
+    {
+      "Id": "S6354",
+      "Message": "Use a testable (date) time provider instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L3267",
+      "Location": "Line 3267 Position 34-49"
+    },
+    {
+      "Id": "S6354",
+      "Message": "Use a testable (date) time provider instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L212",
+      "Location": "Line 212 Position 33-48"
+    },
+    {
+      "Id": "S6354",
+      "Message": "Use a testable (date) time provider instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L220",
+      "Location": "Line 220 Position 33-48"
+    },
+    {
+      "Id": "S6354",
+      "Message": "Use a testable (date) time provider instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L234",
+      "Location": "Line 234 Position 37-52"
+    },
+    {
+      "Id": "S6354",
+      "Message": "Use a testable (date) time provider instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L295",
+      "Location": "Line 295 Position 33-48"
+    },
+    {
+      "Id": "S6354",
+      "Message": "Use a testable (date) time provider instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L304",
+      "Location": "Line 304 Position 33-48"
+    },
+    {
+      "Id": "S6354",
+      "Message": "Use a testable (date) time provider instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L322",
+      "Location": "Line 322 Position 56-71"
+    },
+    {
+      "Id": "S6354",
+      "Message": "Use a testable (date) time provider instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L383",
+      "Location": "Line 383 Position 33-48"
+    },
+    {
+      "Id": "S6354",
+      "Message": "Use a testable (date) time provider instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L416",
+      "Location": "Line 416 Position 37-52"
+    },
+    {
+      "Id": "S6354",
+      "Message": "Use a testable (date) time provider instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L423",
+      "Location": "Line 423 Position 58-73"
+    },
+    {
+      "Id": "S6354",
+      "Message": "Use a testable (date) time provider instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L589",
+      "Location": "Line 589 Position 33-48"
+    },
+    {
+      "Id": "S6354",
+      "Message": "Use a testable (date) time provider instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L597",
+      "Location": "Line 597 Position 33-48"
+    },
+    {
+      "Id": "S6354",
+      "Message": "Use a testable (date) time provider instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L626",
+      "Location": "Line 626 Position 32-47"
+    },
+    {
+      "Id": "S6354",
+      "Message": "Use a testable (date) time provider instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L641",
+      "Location": "Line 641 Position 28-43"
+    },
+    {
+      "Id": "S6354",
+      "Message": "Use a testable (date) time provider instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L645",
+      "Location": "Line 645 Position 37-52"
+    }
+  ]
 }

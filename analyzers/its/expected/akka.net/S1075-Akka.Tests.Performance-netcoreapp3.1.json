@@ -1,82 +1,40 @@
 {
-"issues":  [
-{
-"id":  "S1075",
-"message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorPathSpec.cs#L38",
-"region":  {
-"startLine":  38,
-"startColumn":  29,
-"endLine":  38,
-"endColumn":  50
-}
-}
-},
-{
-"id":  "S1075",
-"message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorPathSpec.cs#L50",
-"region":  {
-"startLine":  50,
-"startColumn":  29,
-"endLine":  50,
-"endColumn":  69
-}
-}
-},
-{
-"id":  "S1075",
-"message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorPathSpec.cs#L63",
-"region":  {
-"startLine":  63,
-"startColumn":  32,
-"endLine":  63,
-"endColumn":  53
-}
-}
-},
-{
-"id":  "S1075",
-"message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorPathSpec.cs#L76",
-"region":  {
-"startLine":  76,
-"startColumn":  32,
-"endLine":  76,
-"endColumn":  72
-}
-}
-},
-{
-"id":  "S1075",
-"message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorPathSpec.cs#L89",
-"region":  {
-"startLine":  89,
-"startColumn":  39,
-"endLine":  89,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S1075",
-"message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorPathSpec.cs#L102",
-"region":  {
-"startLine":  102,
-"startColumn":  39,
-"endLine":  102,
-"endColumn":  78
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1075",
+      "Message": "Refactor your code not to use hardcoded absolute paths or URIs.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorPathSpec.cs#L102",
+      "Location": "Line 102 Position 39-78"
+    },
+    {
+      "Id": "S1075",
+      "Message": "Refactor your code not to use hardcoded absolute paths or URIs.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorPathSpec.cs#L38",
+      "Location": "Line 38 Position 29-50"
+    },
+    {
+      "Id": "S1075",
+      "Message": "Refactor your code not to use hardcoded absolute paths or URIs.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorPathSpec.cs#L50",
+      "Location": "Line 50 Position 29-69"
+    },
+    {
+      "Id": "S1075",
+      "Message": "Refactor your code not to use hardcoded absolute paths or URIs.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorPathSpec.cs#L63",
+      "Location": "Line 63 Position 32-53"
+    },
+    {
+      "Id": "S1075",
+      "Message": "Refactor your code not to use hardcoded absolute paths or URIs.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorPathSpec.cs#L76",
+      "Location": "Line 76 Position 32-72"
+    },
+    {
+      "Id": "S1075",
+      "Message": "Refactor your code not to use hardcoded absolute paths or URIs.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorPathSpec.cs#L89",
+      "Location": "Line 89 Position 39-60"
+    }
+  ]
 }

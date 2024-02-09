@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2326",
-"message":  "'TModel' is not used in the class.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/UrlHelpers.cs#L7",
-"region":  {
-"startLine":  7,
-"startColumn":  29,
-"endLine":  7,
-"endColumn":  35
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2326",
+      "Message": "\u0027TModel\u0027 is not used in the class.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/UrlHelpers.cs#L7",
+      "Location": "Line 7 Position 29-35"
+    }
+  ]
 }

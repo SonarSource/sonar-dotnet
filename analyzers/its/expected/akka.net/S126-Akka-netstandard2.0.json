@@ -1,277 +1,130 @@
 {
-"issues":  [
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.Children.cs#L382",
-"region":  {
-"startLine":  382,
-"startColumn":  17,
-"endLine":  382,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.Children.cs#L400",
-"region":  {
-"startLine":  400,
-"startColumn":  17,
-"endLine":  400,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.DeathWatch.cs#L327",
-"region":  {
-"startLine":  327,
-"startColumn":  17,
-"endLine":  327,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.DefaultMessages.cs#L315",
-"region":  {
-"startLine":  315,
-"startColumn":  17,
-"endLine":  315,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.FaultHandling.cs#L441",
-"region":  {
-"startLine":  441,
-"startColumn":  13,
-"endLine":  441,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorPath.cs#L252",
-"region":  {
-"startLine":  252,
-"startColumn":  17,
-"endLine":  252,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/EmptyLocalActorRef.cs#L63",
-"region":  {
-"startLine":  63,
-"startColumn":  13,
-"endLine":  63,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Futures.cs#L536",
-"region":  {
-"startLine":  536,
-"startColumn":  13,
-"endLine":  536,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Futures.cs#L581",
-"region":  {
-"startLine":  581,
-"startColumn":  17,
-"endLine":  581,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/PipeToSupport.cs#L40",
-"region":  {
-"startLine":  40,
-"startColumn":  17,
-"endLine":  40,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/PipeToSupport.cs#L66",
-"region":  {
-"startLine":  66,
-"startColumn":  17,
-"endLine":  66,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/RepointableActorRef.cs#L308",
-"region":  {
-"startLine":  308,
-"startColumn":  21,
-"endLine":  308,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L692",
-"region":  {
-"startLine":  692,
-"startColumn":  17,
-"endLine":  692,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/AbstractDispatcher.cs#L579",
-"region":  {
-"startLine":  579,
-"startColumn":  17,
-"endLine":  579,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L169",
-"region":  {
-"startLine":  169,
-"startColumn":  25,
-"endLine":  169,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnection.cs#L197",
-"region":  {
-"startLine":  197,
-"startColumn":  17,
-"endLine":  197,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/WithUdpSend.cs#L128",
-"region":  {
-"startLine":  128,
-"startColumn":  17,
-"endLine":  128,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ResizablePoolCell.cs#L108",
-"region":  {
-"startLine":  108,
-"startColumn":  21,
-"endLine":  108,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RoutedActorCell.cs#L163",
-"region":  {
-"startLine":  163,
-"startColumn":  13,
-"endLine":  163,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RouterPoolActor.cs#L69",
-"region":  {
-"startLine":  69,
-"startColumn":  17,
-"endLine":  69,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S126",
-"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Reflection/ExpressionExtensions.cs#L91",
-"region":  {
-"startLine":  91,
-"startColumn":  33,
-"endLine":  91,
-"endColumn":  40
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.Children.cs#L382",
+      "Location": "Line 382 Position 17-24"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.Children.cs#L400",
+      "Location": "Line 400 Position 17-24"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.DeathWatch.cs#L327",
+      "Location": "Line 327 Position 17-24"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.DefaultMessages.cs#L315",
+      "Location": "Line 315 Position 17-24"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.FaultHandling.cs#L441",
+      "Location": "Line 441 Position 13-20"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorPath.cs#L252",
+      "Location": "Line 252 Position 17-24"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/EmptyLocalActorRef.cs#L63",
+      "Location": "Line 63 Position 13-20"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Futures.cs#L536",
+      "Location": "Line 536 Position 13-20"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Futures.cs#L581",
+      "Location": "Line 581 Position 17-24"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/PipeToSupport.cs#L40",
+      "Location": "Line 40 Position 17-24"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/PipeToSupport.cs#L66",
+      "Location": "Line 66 Position 17-24"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/RepointableActorRef.cs#L308",
+      "Location": "Line 308 Position 21-28"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L692",
+      "Location": "Line 692 Position 17-24"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/AbstractDispatcher.cs#L579",
+      "Location": "Line 579 Position 17-24"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L169",
+      "Location": "Line 169 Position 25-32"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnection.cs#L197",
+      "Location": "Line 197 Position 17-24"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/WithUdpSend.cs#L128",
+      "Location": "Line 128 Position 17-24"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ResizablePoolCell.cs#L108",
+      "Location": "Line 108 Position 21-28"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RoutedActorCell.cs#L163",
+      "Location": "Line 163 Position 13-20"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RouterPoolActor.cs#L69",
+      "Location": "Line 69 Position 17-24"
+    },
+    {
+      "Id": "S126",
+      "Message": "Add the missing \u0027else\u0027 clause with either the appropriate action or a suitable comment as to why no action is taken.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Reflection/ExpressionExtensions.cs#L91",
+      "Location": "Line 91 Position 33-40"
+    }
+  ]
 }

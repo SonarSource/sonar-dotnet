@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S112",
-"message":  "'System.Exception' should not be thrown by user code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L182",
-"region":  {
-"startLine":  182,
-"startColumn":  23,
-"endLine":  182,
-"endColumn":  126
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S112",
+      "Message": "\u0027System.Exception\u0027 should not be thrown by user code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L182",
+      "Location": "Line 182 Position 23-126"
+    }
+  ]
 }

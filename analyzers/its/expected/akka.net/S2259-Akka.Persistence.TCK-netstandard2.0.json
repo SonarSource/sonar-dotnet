@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2259",
-"message":  "'fieldInfo' is null on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/PersistenceIdsSpec.cs#L209",
-"region":  {
-"startLine":  209,
-"startColumn":  29,
-"endLine":  209,
-"endColumn":  38
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2259",
+      "Message": "\u0027fieldInfo\u0027 is null on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/PersistenceIdsSpec.cs#L209",
+      "Location": "Line 209 Position 29-38"
+    }
+  ]
 }

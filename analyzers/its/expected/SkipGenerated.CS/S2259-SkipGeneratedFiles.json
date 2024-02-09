@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S2259",
-"message":  "'obj' is null on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.CS/generated_region.cs#L10",
-"region":  {
-"startLine":  10,
-"startColumn":  31,
-"endLine":  10,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'obj' is null on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.CS/generated_region_2.cs#L10",
-"region":  {
-"startLine":  10,
-"startColumn":  31,
-"endLine":  10,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S2259",
-"message":  "'obj' is null on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.CS/handwritten.cs#L11",
-"region":  {
-"startLine":  11,
-"startColumn":  31,
-"endLine":  11,
-"endColumn":  34
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2259",
+      "Message": "\u0027obj\u0027 is null on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.CS/generated_region_2.cs#L10",
+      "Location": "Line 10 Position 31-34"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027obj\u0027 is null on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.CS/generated_region.cs#L10",
+      "Location": "Line 10 Position 31-34"
+    },
+    {
+      "Id": "S2259",
+      "Message": "\u0027obj\u0027 is null on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.CS/handwritten.cs#L11",
+      "Location": "Line 11 Position 31-34"
+    }
+  ]
 }

@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'unused'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/Views/Home/Index.cshtml#L6",
-"region":  {
-"startLine":  6,
-"startColumn":  5,
-"endLine":  6,
-"endColumn":  11
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027unused\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/Views/Home/Index.cshtml#L6",
+      "Location": "Line 6 Position 5-11"
+    }
+  ]
 }

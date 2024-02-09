@@ -1,69 +1,34 @@
 {
-"issues":  [
-{
-"id":  "S101",
-"message":  "Rename record 'S3604_Record' to match pascal case naming rules, consider using 'S3604Record'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3604.cs#L22",
-"region":  {
-"startLine":  22,
-"startColumn":  19,
-"endLine":  22,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename record 'Partial_SerializableDerived_Not_CallingBase_GetObjectData_Record' to match pascal case naming rules, consider using 'PartialSerializableDerivedNotCallingBaseGetObjectDataRecord'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3925.Part1.cs#L15",
-"region":  {
-"startLine":  15,
-"startColumn":  27,
-"endLine":  15,
-"endColumn":  91
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename record 'Partial_SerializableDerived_Not_CallingBase_GetObjectData_Record' to match pascal case naming rules, consider using 'PartialSerializableDerivedNotCallingBaseGetObjectDataRecord'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3925.Part1.cs#L22",
-"region":  {
-"startLine":  22,
-"startColumn":  27,
-"endLine":  22,
-"endColumn":  91
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename class 'Partial_SerializableDerived_Not_CallingBase_GetObjectData_SeparateFiles_Class' to match pascal case naming rules, consider using 'PartialSerializableDerivedNotCallingBaseGetObjectDataSeparateFilesClass'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3925.Part1.cs#L36",
-"region":  {
-"startLine":  36,
-"startColumn":  26,
-"endLine":  36,
-"endColumn":  103
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename class 'Partial_SerializableDerived_Not_CallingBase_GetObjectData_SeparateFiles_Class' to match pascal case naming rules, consider using 'PartialSerializableDerivedNotCallingBaseGetObjectDataSeparateFilesClass'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3925.Part2.cs#L5",
-"region":  {
-"startLine":  5,
-"startColumn":  26,
-"endLine":  5,
-"endColumn":  103
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S101",
+      "Message": "Rename record \u0027S3604_Record\u0027 to match pascal case naming rules, consider using \u0027S3604Record\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3604.cs#L22",
+      "Location": "Line 22 Position 19-31"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename record \u0027Partial_SerializableDerived_Not_CallingBase_GetObjectData_Record\u0027 to match pascal case naming rules, consider using \u0027PartialSerializableDerivedNotCallingBaseGetObjectDataRecord\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3925.Part1.cs#L15",
+      "Location": "Line 15 Position 27-91"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename record \u0027Partial_SerializableDerived_Not_CallingBase_GetObjectData_Record\u0027 to match pascal case naming rules, consider using \u0027PartialSerializableDerivedNotCallingBaseGetObjectDataRecord\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3925.Part1.cs#L22",
+      "Location": "Line 22 Position 27-91"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename class \u0027Partial_SerializableDerived_Not_CallingBase_GetObjectData_SeparateFiles_Class\u0027 to match pascal case naming rules, consider using \u0027PartialSerializableDerivedNotCallingBaseGetObjectDataSeparateFilesClass\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3925.Part1.cs#L36",
+      "Location": "Line 36 Position 26-103"
+    },
+    {
+      "Id": "S101",
+      "Message": "Rename class \u0027Partial_SerializableDerived_Not_CallingBase_GetObjectData_SeparateFiles_Class\u0027 to match pascal case naming rules, consider using \u0027PartialSerializableDerivedNotCallingBaseGetObjectDataSeparateFilesClass\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3925.Part2.cs#L5",
+      "Location": "Line 5 Position 26-103"
+    }
+  ]
 }

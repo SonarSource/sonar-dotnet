@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2187",
-"message":  "Add some tests to this class.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Test/S3433_Mstest.cs#L6",
-"region":  {
-"startLine":  6,
-"startColumn":  18,
-"endLine":  6,
-"endColumn":  30
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2187",
+      "Message": "Add some tests to this class.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Test/S3433_Mstest.cs#L6",
+      "Location": "Line 6 Position 18-30"
+    }
+  ]
 }

@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S927",
-"message":  "Rename parameter 'context' to 'filterContext' to match the base class declaration.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/PermissiveCors.cs#L40",
-"region":  {
-"startLine":  40,
-"startColumn":  71,
-"endLine":  40,
-"endColumn":  78
-}
-}
-},
-{
-"id":  "S927",
-"message":  "Rename parameter 'context' to 'actionExecutedContext' to match the base class declaration.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/PermissiveCors.cs#L58",
-"region":  {
-"startLine":  58,
-"startColumn":  73,
-"endLine":  58,
-"endColumn":  80
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S927",
+      "Message": "Rename parameter \u0027context\u0027 to \u0027filterContext\u0027 to match the base class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/PermissiveCors.cs#L40",
+      "Location": "Line 40 Position 71-78"
+    },
+    {
+      "Id": "S927",
+      "Message": "Rename parameter \u0027context\u0027 to \u0027actionExecutedContext\u0027 to match the base class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/PermissiveCors.cs#L58",
+      "Location": "Line 58 Position 73-80"
+    }
+  ]
 }

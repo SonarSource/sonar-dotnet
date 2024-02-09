@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3235",
-"message":  "Remove these redundant parentheses.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/JsonSerializerImmutableTypes/Program.cs#L6",
-"region":  {
-"startLine":  6,
-"startColumn":  40,
-"endLine":  6,
-"endColumn":  42
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3235",
+      "Message": "Remove these redundant parentheses.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/JsonSerializerImmutableTypes/Program.cs#L6",
+      "Location": "Line 6 Position 40-42"
+    }
+  ]
 }

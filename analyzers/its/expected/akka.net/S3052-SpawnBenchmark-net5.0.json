@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3052",
-"message":  "Remove this initialization to '_count', the compiler will do that for you.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/SpawnBenchmark/SpawnActor.cs#L28",
-"region":  {
-"startLine":  28,
-"startColumn":  29,
-"endLine":  28,
-"endColumn":  33
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_count\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/SpawnBenchmark/SpawnActor.cs#L28",
+      "Location": "Line 28 Position 29-33"
+    }
+  ]
 }

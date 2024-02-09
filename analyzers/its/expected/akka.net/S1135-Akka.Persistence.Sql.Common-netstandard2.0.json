@@ -1,82 +1,40 @@
 {
-"issues":  [
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L1302",
-"region":  {
-"startLine":  1302,
-"startColumn":  16,
-"endLine":  1302,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L784",
-"region":  {
-"startLine":  784,
-"startColumn":  16,
-"endLine":  784,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L849",
-"region":  {
-"startLine":  849,
-"startColumn":  20,
-"endLine":  849,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L862",
-"region":  {
-"startLine":  862,
-"startColumn":  20,
-"endLine":  862,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/QueryExecutor.cs#L340",
-"region":  {
-"startLine":  340,
-"startColumn":  16,
-"endLine":  340,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S1135",
-"message":  "Complete the task associated to this 'TODO' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/QueryExecutor.cs#L597",
-"region":  {
-"startLine":  597,
-"startColumn":  20,
-"endLine":  597,
-"endColumn":  24
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1135",
+      "Message": "Complete the task associated to this \u0027TODO\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L1302",
+      "Location": "Line 1302 Position 16-20"
+    },
+    {
+      "Id": "S1135",
+      "Message": "Complete the task associated to this \u0027TODO\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L784",
+      "Location": "Line 784 Position 16-20"
+    },
+    {
+      "Id": "S1135",
+      "Message": "Complete the task associated to this \u0027TODO\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L849",
+      "Location": "Line 849 Position 20-24"
+    },
+    {
+      "Id": "S1135",
+      "Message": "Complete the task associated to this \u0027TODO\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L862",
+      "Location": "Line 862 Position 20-24"
+    },
+    {
+      "Id": "S1135",
+      "Message": "Complete the task associated to this \u0027TODO\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/QueryExecutor.cs#L340",
+      "Location": "Line 340 Position 16-20"
+    },
+    {
+      "Id": "S1135",
+      "Message": "Complete the task associated to this \u0027TODO\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/QueryExecutor.cs#L597",
+      "Location": "Line 597 Position 20-24"
+    }
+  ]
 }

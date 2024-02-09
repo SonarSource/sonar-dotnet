@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1215",
-"message":  "Refactor the code to remove this use of 'GC.Collect'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L84",
-"region":  {
-"startLine":  84,
-"startColumn":  16,
-"endLine":  84,
-"endColumn":  23
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1215",
+      "Message": "Refactor the code to remove this use of \u0027GC.Collect\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L84",
+      "Location": "Line 84 Position 16-23"
+    }
+  ]
 }

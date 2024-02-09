@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3878",
-"message":  "Remove this array creation and simply pass the elements.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1304",
-"region":  {
-"startLine":  1304,
-"startColumn":  101,
-"endLine":  1304,
-"endColumn":  151
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3878",
+      "Message": "Remove this array creation and simply pass the elements.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1304",
+      "Location": "Line 1304 Position 101-151"
+    }
+  ]
 }

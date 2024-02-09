@@ -1,147 +1,70 @@
 {
-"issues":  [
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'defaultDispatcher'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRefProvider.cs#L397",
-"region":  {
-"startLine":  397,
-"startColumn":  17,
-"endLine":  397,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'routeeDispatcher'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRefProvider.cs#L586",
-"region":  {
-"startLine":  586,
-"startColumn":  25,
-"endLine":  586,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'force'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L460",
-"region":  {
-"startLine":  460,
-"startColumn":  37,
-"endLine":  460,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'r'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L505",
-"region":  {
-"startLine":  505,
-"startColumn":  33,
-"endLine":  505,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'original'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L483",
-"region":  {
-"startLine":  483,
-"startColumn":  17,
-"endLine":  483,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'unhandled'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/DeadLetterListener.cs#L192",
-"region":  {
-"startLine":  192,
-"startColumn":  39,
-"endLine":  192,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'str'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/Logging.cs#L84",
-"region":  {
-"startLine":  84,
-"startColumn":  29,
-"endLine":  84,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'level'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/LoggingBus.cs#L159",
-"region":  {
-"startLine":  159,
-"startColumn":  17,
-"endLine":  159,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'sender'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnection.cs#L188",
-"region":  {
-"startLine":  188,
-"startColumn":  21,
-"endLine":  188,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'getRoutees'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RouterActor.cs#L46",
-"region":  {
-"startLine":  46,
-"startColumn":  33,
-"endLine":  46,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'fallbackVal'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Reflection/ExpressionExtensions.cs#L118",
-"region":  {
-"startLine":  118,
-"startColumn":  32,
-"endLine":  118,
-"endColumn":  43
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027defaultDispatcher\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRefProvider.cs#L397",
+      "Location": "Line 397 Position 17-34"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027routeeDispatcher\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRefProvider.cs#L586",
+      "Location": "Line 586 Position 25-41"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027force\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L460",
+      "Location": "Line 460 Position 37-42"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027r\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L505",
+      "Location": "Line 505 Position 33-34"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027original\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L483",
+      "Location": "Line 483 Position 17-25"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027unhandled\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/DeadLetterListener.cs#L192",
+      "Location": "Line 192 Position 39-48"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027str\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/Logging.cs#L84",
+      "Location": "Line 84 Position 29-32"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027level\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/LoggingBus.cs#L159",
+      "Location": "Line 159 Position 17-22"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027sender\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnection.cs#L188",
+      "Location": "Line 188 Position 21-27"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027getRoutees\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RouterActor.cs#L46",
+      "Location": "Line 46 Position 33-43"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027fallbackVal\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Reflection/ExpressionExtensions.cs#L118",
+      "Location": "Line 118 Position 32-43"
+    }
+  ]
 }

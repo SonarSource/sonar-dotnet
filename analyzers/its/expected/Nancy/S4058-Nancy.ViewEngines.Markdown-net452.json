@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S4058",
-"message":  "Change this call to 'content.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Markdown/MarkDownViewEngine.cs#L104",
-"region":  {
-"startLine":  104,
-"startColumn":  17,
-"endLine":  104,
-"endColumn":  54
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027content.StartsWith\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Markdown/MarkDownViewEngine.cs#L104",
+      "Location": "Line 104 Position 17-54"
+    }
+  ]
 }

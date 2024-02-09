@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S3240",
-"message":  "Use the '??' operator here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/Models/TestRun.cs#L32",
-"region":  {
-"startLine":  32,
-"startColumn":  13,
-"endLine":  32,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S3240",
-"message":  "Use the '??' operator here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/TrxSinkActor.cs#L191",
-"region":  {
-"startLine":  191,
-"startColumn":  21,
-"endLine":  191,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S3240",
-"message":  "Use the '??' operator here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/TrxSinkActor.cs#L200",
-"region":  {
-"startLine":  200,
-"startColumn":  21,
-"endLine":  200,
-"endColumn":  23
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027??\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/Models/TestRun.cs#L32",
+      "Location": "Line 32 Position 13-15"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027??\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/TrxSinkActor.cs#L191",
+      "Location": "Line 191 Position 21-23"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027??\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/TrxSinkActor.cs#L200",
+      "Location": "Line 200 Position 21-23"
+    }
+  ]
 }

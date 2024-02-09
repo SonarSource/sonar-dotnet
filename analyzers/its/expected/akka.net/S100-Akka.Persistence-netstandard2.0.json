@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S100",
-"message":  "Rename method 'GetPersistentFSMSnapshot' to match pascal case naming rules, consider using 'GetPersistentFsmSnapshot'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Serialization/PersistenceMessageSerializer.cs#L134",
-"region":  {
-"startLine":  134,
-"startColumn":  39,
-"endLine":  134,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S100",
-"message":  "Rename method 'GetPersistentFSMSnapshot' to match pascal case naming rules, consider using 'GetPersistentFsmSnapshot'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Serialization/PersistenceMessageSerializer.cs#L229",
-"region":  {
-"startLine":  229,
-"startColumn":  24,
-"endLine":  229,
-"endColumn":  48
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S100",
+      "Message": "Rename method \u0027GetPersistentFSMSnapshot\u0027 to match pascal case naming rules, consider using \u0027GetPersistentFsmSnapshot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Serialization/PersistenceMessageSerializer.cs#L134",
+      "Location": "Line 134 Position 39-63"
+    },
+    {
+      "Id": "S100",
+      "Message": "Rename method \u0027GetPersistentFSMSnapshot\u0027 to match pascal case naming rules, consider using \u0027GetPersistentFsmSnapshot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Serialization/PersistenceMessageSerializer.cs#L229",
+      "Location": "Line 229 Position 24-48"
+    }
+  ]
 }

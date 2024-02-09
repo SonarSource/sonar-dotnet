@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S112",
-"message":  "'System.Exception' should not be thrown by user code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/IPExtensions.cs#L47",
-"region":  {
-"startLine":  47,
-"startColumn":  23,
-"endLine":  47,
-"endColumn":  69
-}
-}
-},
-{
-"id":  "S112",
-"message":  "'System.Exception' should not be thrown by user code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/IPExtensions.cs#L53",
-"region":  {
-"startLine":  53,
-"startColumn":  23,
-"endLine":  53,
-"endColumn":  98
-}
-}
-},
-{
-"id":  "S112",
-"message":  "'System.Exception' should not be thrown by user code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/IPExtensions.cs#L74",
-"region":  {
-"startLine":  74,
-"startColumn":  23,
-"endLine":  74,
-"endColumn":  98
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S112",
+      "Message": "\u0027System.Exception\u0027 should not be thrown by user code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/IPExtensions.cs#L47",
+      "Location": "Line 47 Position 23-69"
+    },
+    {
+      "Id": "S112",
+      "Message": "\u0027System.Exception\u0027 should not be thrown by user code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/IPExtensions.cs#L53",
+      "Location": "Line 53 Position 23-98"
+    },
+    {
+      "Id": "S112",
+      "Message": "\u0027System.Exception\u0027 should not be thrown by user code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/IPExtensions.cs#L74",
+      "Location": "Line 74 Position 23-98"
+    }
+  ]
 }

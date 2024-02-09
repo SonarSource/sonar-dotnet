@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3887",
-"message":  "Use an immutable collection or reduce the accessibility of the non-private readonly field 'EntryTags'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/Messages.cs#L107",
-"region":  {
-"startLine":  107,
-"startColumn":  25,
-"endLine":  107,
-"endColumn":  86
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3887",
+      "Message": "Use an immutable collection or reduce the accessibility of the non-private readonly field \u0027EntryTags\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/Messages.cs#L107",
+      "Location": "Line 107 Position 25-86"
+    }
+  ]
 }

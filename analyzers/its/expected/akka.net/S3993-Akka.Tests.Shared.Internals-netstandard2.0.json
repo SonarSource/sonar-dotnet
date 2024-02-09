@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3993",
-"message":  "Specify AttributeUsage on 'RepeatAttribute' to improve readability, even though it inherits it from its base type.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/RepeatAttribute.cs#L33",
-"region":  {
-"startLine":  33,
-"startColumn":  25,
-"endLine":  33,
-"endColumn":  40
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3993",
+      "Message": "Specify AttributeUsage on \u0027RepeatAttribute\u0027 to improve readability, even though it inherits it from its base type.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/RepeatAttribute.cs#L33",
+      "Location": "Line 33 Position 25-40"
+    }
+  ]
 }

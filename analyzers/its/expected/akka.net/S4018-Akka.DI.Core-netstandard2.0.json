@@ -1,56 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S4018",
-"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.Core/DIActorContextAdapter.cs#L47",
-"region":  {
-"startLine":  47,
-"startColumn":  26,
-"endLine":  47,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.Core/DIActorContextAdapter.cs#L67",
-"region":  {
-"startLine":  67,
-"startColumn":  22,
-"endLine":  67,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.Core/DIActorSystemAdapter.cs#L55",
-"region":  {
-"startLine":  55,
-"startColumn":  22,
-"endLine":  55,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.Core/IDependencyResolver.cs#L35",
-"region":  {
-"startLine":  35,
-"startColumn":  15,
-"endLine":  35,
-"endColumn":  21
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.Core/DIActorContextAdapter.cs#L47",
+      "Location": "Line 47 Position 26-33"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.Core/DIActorContextAdapter.cs#L67",
+      "Location": "Line 67 Position 22-27"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.Core/DIActorSystemAdapter.cs#L55",
+      "Location": "Line 55 Position 22-27"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.Core/IDependencyResolver.cs#L35",
+      "Location": "Line 35 Position 15-21"
+    }
+  ]
 }

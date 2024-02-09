@@ -1,134 +1,64 @@
 {
-"issues":  [
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'otherPerson'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/AnonymousTypesInWithExpressions.cs#L10",
-"region":  {
-"startLine":  10,
-"startColumn":  17,
-"endLine":  10,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'b'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/AssignmentAndDeclarationInSameDeconstruction.cs#L8",
-"region":  {
-"startLine":  8,
-"startColumn":  21,
-"endLine":  8,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'sonar'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/Deconstruction.cs#L12",
-"region":  {
-"startLine":  12,
-"startColumn":  18,
-"endLine":  12,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'a'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/LambdaAttributes.cs#L8",
-"region":  {
-"startLine":  8,
-"startColumn":  20,
-"endLine":  8,
-"endColumn":  21
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'f'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/LambdasWithExplicitReturnType.cs#L8",
-"region":  {
-"startLine":  8,
-"startColumn":  17,
-"endLine":  8,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'm0'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/MutexAclTest.cs#L34",
-"region":  {
-"startLine":  34,
-"startColumn":  17,
-"endLine":  34,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'm0'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/MutexAclTest.cs#L41",
-"region":  {
-"startLine":  41,
-"startColumn":  17,
-"endLine":  41,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'm1'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/MutexAclTest.cs#L42",
-"region":  {
-"startLine":  42,
-"startColumn":  17,
-"endLine":  42,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'rs2'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/StructuresAsLeftHandOperandsInWithExpressions.cs#L10",
-"region":  {
-"startLine":  10,
-"startColumn":  26,
-"endLine":  10,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 's2'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/StructuresAsLeftHandOperandsInWithExpressions.cs#L15",
-"region":  {
-"startLine":  15,
-"startColumn":  20,
-"endLine":  15,
-"endColumn":  22
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027otherPerson\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/AnonymousTypesInWithExpressions.cs#L10",
+      "Location": "Line 10 Position 17-28"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027b\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/AssignmentAndDeclarationInSameDeconstruction.cs#L8",
+      "Location": "Line 8 Position 21-22"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027sonar\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/Deconstruction.cs#L12",
+      "Location": "Line 12 Position 18-23"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027a\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/LambdaAttributes.cs#L8",
+      "Location": "Line 8 Position 20-21"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027f\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/LambdasWithExplicitReturnType.cs#L8",
+      "Location": "Line 8 Position 17-18"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027m0\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/MutexAclTest.cs#L34",
+      "Location": "Line 34 Position 17-19"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027m0\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/MutexAclTest.cs#L41",
+      "Location": "Line 41 Position 17-19"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027m1\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/MutexAclTest.cs#L42",
+      "Location": "Line 42 Position 17-19"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027rs2\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/StructuresAsLeftHandOperandsInWithExpressions.cs#L10",
+      "Location": "Line 10 Position 26-29"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027s2\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/StructuresAsLeftHandOperandsInWithExpressions.cs#L15",
+      "Location": "Line 15 Position 20-22"
+    }
+  ]
 }

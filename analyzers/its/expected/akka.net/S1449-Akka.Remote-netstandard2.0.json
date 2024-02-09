@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1449",
-"message":  "Define the locale to be used in this string operation.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L62",
-"region":  {
-"startLine":  62,
-"startColumn":  79,
-"endLine":  62,
-"endColumn":  86
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1449",
+      "Message": "Define the locale to be used in this string operation.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L62",
+      "Location": "Line 62 Position 79-86"
+    }
+  ]
 }

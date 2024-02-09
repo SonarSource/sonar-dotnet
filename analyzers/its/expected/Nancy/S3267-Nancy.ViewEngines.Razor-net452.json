@@ -1,28 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3267",
-"message":  "Loops should be simplified using the "Where" LINQ method",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/NancyRazorViewBase.cs#L207",
-"region":  {
-"startLine":  207,
-"startColumn":  35,
-"endLine":  207,
-"endColumn":  41
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/NancyRazorViewBase.cs#L209",
-"region":  {
-"startLine":  209,
-"startColumn":  21,
-"endLine":  209,
-"endColumn":  61
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S3267",
+      "Message": "Loops should be simplified using the \u0022Where\u0022 LINQ method",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/NancyRazorViewBase.cs#L207",
+      "Location": "Line 207 Position 35-41"
+    }
+  ]
 }

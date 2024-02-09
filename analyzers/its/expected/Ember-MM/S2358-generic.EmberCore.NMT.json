@@ -1,147 +1,70 @@
 {
-"issues":  [
-{
-"id":  "S2358",
-"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L138",
-"region":  {
-"startLine":  138,
-"startColumn":  16,
-"endLine":  138,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S2358",
-"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L970",
-"region":  {
-"startLine":  970,
-"startColumn":  12,
-"endLine":  970,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2358",
-"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L977",
-"region":  {
-"startLine":  977,
-"startColumn":  12,
-"endLine":  977,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2358",
-"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L988",
-"region":  {
-"startLine":  988,
-"startColumn":  16,
-"endLine":  988,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2358",
-"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1444",
-"region":  {
-"startLine":  1444,
-"startColumn":  12,
-"endLine":  1444,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S2358",
-"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1641",
-"region":  {
-"startLine":  1641,
-"startColumn":  47,
-"endLine":  1641,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S2358",
-"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L60",
-"region":  {
-"startLine":  60,
-"startColumn":  20,
-"endLine":  60,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S2358",
-"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L87",
-"region":  {
-"startLine":  87,
-"startColumn":  24,
-"endLine":  87,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S2358",
-"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L129",
-"region":  {
-"startLine":  129,
-"startColumn":  12,
-"endLine":  129,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S2358",
-"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L111",
-"region":  {
-"startLine":  111,
-"startColumn":  12,
-"endLine":  111,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S2358",
-"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L125",
-"region":  {
-"startLine":  125,
-"startColumn":  12,
-"endLine":  125,
-"endColumn":  30
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L138",
+      "Location": "Line 138 Position 16-35"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1444",
+      "Location": "Line 1444 Position 12-38"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1641",
+      "Location": "Line 1641 Position 47-66"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L970",
+      "Location": "Line 970 Position 12-28"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L977",
+      "Location": "Line 977 Position 12-28"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L988",
+      "Location": "Line 988 Position 16-32"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L129",
+      "Location": "Line 129 Position 12-31"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L60",
+      "Location": "Line 60 Position 20-39"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L87",
+      "Location": "Line 87 Position 24-43"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L111",
+      "Location": "Line 111 Position 12-30"
+    },
+    {
+      "Id": "S2358",
+      "Message": "Replace this use of \u0027Not...Is...\u0027 with \u0027IsNot\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L125",
+      "Location": "Line 125 Position 12-30"
+    }
+  ]
 }

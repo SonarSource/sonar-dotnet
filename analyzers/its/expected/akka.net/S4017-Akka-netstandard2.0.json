@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S4017",
-"message":  "Refactor this method to remove the nested type argument.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/SupervisorStrategy.cs#L868",
-"region":  {
-"startLine":  868,
-"startColumn":  74,
-"endLine":  868,
-"endColumn":  122
-}
-}
-},
-{
-"id":  "S4017",
-"message":  "Refactor this method to remove the nested type argument.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/ImmutabilityUtils.cs#L79",
-"region":  {
-"startLine":  79,
-"startColumn":  13,
-"endLine":  79,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S4017",
-"message":  "Refactor this method to remove the nested type argument.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/ImmutabilityUtils.cs#L96",
-"region":  {
-"startLine":  96,
-"startColumn":  13,
-"endLine":  96,
-"endColumn":  59
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4017",
+      "Message": "Refactor this method to remove the nested type argument.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/SupervisorStrategy.cs#L868",
+      "Location": "Line 868 Position 74-122"
+    },
+    {
+      "Id": "S4017",
+      "Message": "Refactor this method to remove the nested type argument.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/ImmutabilityUtils.cs#L79",
+      "Location": "Line 79 Position 13-59"
+    },
+    {
+      "Id": "S4017",
+      "Message": "Refactor this method to remove the nested type argument.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/ImmutabilityUtils.cs#L96",
+      "Location": "Line 96 Position 13-59"
+    }
+  ]
 }

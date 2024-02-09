@@ -1,251 +1,118 @@
 {
-"issues":  [
-{
-"id":  "S108",
-"message":  "Either remove or fill this block of code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L69",
-"region":  {
-"startLine":  69,
-"startColumn":  7,
-"endLine":  69,
-"endColumn":  12
-}
-}
-},
-{
-"id":  "S108",
-"message":  "Either remove or fill this block of code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L391",
-"region":  {
-"startLine":  391,
-"startColumn":  8,
-"endLine":  391,
-"endColumn":  13
-}
-}
-},
-{
-"id":  "S108",
-"message":  "Either remove or fill this block of code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L685",
-"region":  {
-"startLine":  685,
-"startColumn":  6,
-"endLine":  685,
-"endColumn":  11
-}
-}
-},
-{
-"id":  "S108",
-"message":  "Either remove or fill this block of code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L274",
-"region":  {
-"startLine":  274,
-"startColumn":  21,
-"endLine":  274,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S108",
-"message":  "Either remove or fill this block of code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L277",
-"region":  {
-"startLine":  277,
-"startColumn":  13,
-"endLine":  277,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S108",
-"message":  "Either remove or fill this block of code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L325",
-"region":  {
-"startLine":  325,
-"startColumn":  25,
-"endLine":  325,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S108",
-"message":  "Either remove or fill this block of code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L328",
-"region":  {
-"startLine":  328,
-"startColumn":  17,
-"endLine":  328,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S108",
-"message":  "Either remove or fill this block of code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L330",
-"region":  {
-"startLine":  330,
-"startColumn":  13,
-"endLine":  330,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S108",
-"message":  "Either remove or fill this block of code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L432",
-"region":  {
-"startLine":  432,
-"startColumn":  29,
-"endLine":  432,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S108",
-"message":  "Either remove or fill this block of code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L435",
-"region":  {
-"startLine":  435,
-"startColumn":  21,
-"endLine":  435,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S108",
-"message":  "Either remove or fill this block of code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L438",
-"region":  {
-"startLine":  438,
-"startColumn":  13,
-"endLine":  438,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S108",
-"message":  "Either remove or fill this block of code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L632",
-"region":  {
-"startLine":  632,
-"startColumn":  21,
-"endLine":  632,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S108",
-"message":  "Either remove or fill this block of code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L719",
-"region":  {
-"startLine":  719,
-"startColumn":  21,
-"endLine":  719,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S108",
-"message":  "Either remove or fill this block of code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1034",
-"region":  {
-"startLine":  1034,
-"startColumn":  9,
-"endLine":  1034,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S108",
-"message":  "Either remove or fill this block of code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgTrailer.vb#L263",
-"region":  {
-"startLine":  263,
-"startColumn":  9,
-"endLine":  263,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S108",
-"message":  "Either remove or fill this block of code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgTrailer.vb#L299",
-"region":  {
-"startLine":  299,
-"startColumn":  9,
-"endLine":  299,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S108",
-"message":  "Either remove or fill this block of code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgTrailerFormat.vb#L73",
-"region":  {
-"startLine":  73,
-"startColumn":  9,
-"endLine":  73,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S108",
-"message":  "Either remove or fill this block of code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L409",
-"region":  {
-"startLine":  409,
-"startColumn":  17,
-"endLine":  409,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S108",
-"message":  "Either remove or fill this block of code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L89",
-"region":  {
-"startLine":  89,
-"startColumn":  17,
-"endLine":  89,
-"endColumn":  22
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L391",
+      "Location": "Line 391 Position 8-13"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L685",
+      "Location": "Line 685 Position 6-11"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L69",
+      "Location": "Line 69 Position 7-12"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1034",
+      "Location": "Line 1034 Position 9-14"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L274",
+      "Location": "Line 274 Position 21-26"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L277",
+      "Location": "Line 277 Position 13-18"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L325",
+      "Location": "Line 325 Position 25-30"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L328",
+      "Location": "Line 328 Position 17-22"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L330",
+      "Location": "Line 330 Position 13-18"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L432",
+      "Location": "Line 432 Position 29-34"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L435",
+      "Location": "Line 435 Position 21-26"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L438",
+      "Location": "Line 438 Position 13-18"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L632",
+      "Location": "Line 632 Position 21-26"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L719",
+      "Location": "Line 719 Position 21-26"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgTrailer.vb#L263",
+      "Location": "Line 263 Position 9-14"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgTrailer.vb#L299",
+      "Location": "Line 299 Position 9-14"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgTrailerFormat.vb#L73",
+      "Location": "Line 73 Position 9-14"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L409",
+      "Location": "Line 409 Position 17-38"
+    },
+    {
+      "Id": "S108",
+      "Message": "Either remove or fill this block of code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L89",
+      "Location": "Line 89 Position 17-22"
+    }
+  ]
 }

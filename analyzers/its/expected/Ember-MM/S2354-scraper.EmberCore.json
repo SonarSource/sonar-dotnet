@@ -1,1070 +1,496 @@
 {
-"issues":  [
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L817",
-"region":  {
-"startLine":  817,
-"startColumn":  117,
-"endLine":  817,
-"endColumn":  118
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L818",
-"region":  {
-"startLine":  818,
-"startColumn":  132,
-"endLine":  818,
-"endColumn":  133
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L825",
-"region":  {
-"startLine":  825,
-"startColumn":  117,
-"endLine":  825,
-"endColumn":  118
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L826",
-"region":  {
-"startLine":  826,
-"startColumn":  110,
-"endLine":  826,
-"endColumn":  111
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L827",
-"region":  {
-"startLine":  827,
-"startColumn":  148,
-"endLine":  827,
-"endColumn":  149
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L147",
-"region":  {
-"startLine":  147,
-"startColumn":  114,
-"endLine":  147,
-"endColumn":  115
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L314",
-"region":  {
-"startLine":  314,
-"startColumn":  49,
-"endLine":  314,
-"endColumn":  50
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L315",
-"region":  {
-"startLine":  315,
-"startColumn":  116,
-"endLine":  315,
-"endColumn":  117
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L316",
-"region":  {
-"startLine":  316,
-"startColumn":  89,
-"endLine":  316,
-"endColumn":  90
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L317",
-"region":  {
-"startLine":  317,
-"startColumn":  115,
-"endLine":  317,
-"endColumn":  116
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L318",
-"region":  {
-"startLine":  318,
-"startColumn":  128,
-"endLine":  318,
-"endColumn":  129
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L319",
-"region":  {
-"startLine":  319,
-"startColumn":  79,
-"endLine":  319,
-"endColumn":  80
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L320",
-"region":  {
-"startLine":  320,
-"startColumn":  239,
-"endLine":  320,
-"endColumn":  240
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L368",
-"region":  {
-"startLine":  368,
-"startColumn":  122,
-"endLine":  368,
-"endColumn":  123
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L388",
-"region":  {
-"startLine":  388,
-"startColumn":  122,
-"endLine":  388,
-"endColumn":  123
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L413",
-"region":  {
-"startLine":  413,
-"startColumn":  61,
-"endLine":  413,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L457",
-"region":  {
-"startLine":  457,
-"startColumn":  156,
-"endLine":  457,
-"endColumn":  157
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L513",
-"region":  {
-"startLine":  513,
-"startColumn":  103,
-"endLine":  513,
-"endColumn":  104
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L514",
-"region":  {
-"startLine":  514,
-"startColumn":  109,
-"endLine":  514,
-"endColumn":  110
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L535",
-"region":  {
-"startLine":  535,
-"startColumn":  97,
-"endLine":  535,
-"endColumn":  98
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L536",
-"region":  {
-"startLine":  536,
-"startColumn":  102,
-"endLine":  536,
-"endColumn":  103
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L537",
-"region":  {
-"startLine":  537,
-"startColumn":  106,
-"endLine":  537,
-"endColumn":  107
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L538",
-"region":  {
-"startLine":  538,
-"startColumn":  103,
-"endLine":  538,
-"endColumn":  104
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L539",
-"region":  {
-"startLine":  539,
-"startColumn":  116,
-"endLine":  539,
-"endColumn":  117
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L565",
-"region":  {
-"startLine":  565,
-"startColumn":  113,
-"endLine":  565,
-"endColumn":  114
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L566",
-"region":  {
-"startLine":  566,
-"startColumn":  113,
-"endLine":  566,
-"endColumn":  114
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L567",
-"region":  {
-"startLine":  567,
-"startColumn":  83,
-"endLine":  567,
-"endColumn":  84
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L568",
-"region":  {
-"startLine":  568,
-"startColumn":  92,
-"endLine":  568,
-"endColumn":  93
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L578",
-"region":  {
-"startLine":  578,
-"startColumn":  113,
-"endLine":  578,
-"endColumn":  114
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L579",
-"region":  {
-"startLine":  579,
-"startColumn":  81,
-"endLine":  579,
-"endColumn":  82
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L580",
-"region":  {
-"startLine":  580,
-"startColumn":  92,
-"endLine":  580,
-"endColumn":  93
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L598",
-"region":  {
-"startLine":  598,
-"startColumn":  103,
-"endLine":  598,
-"endColumn":  104
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L599",
-"region":  {
-"startLine":  599,
-"startColumn":  116,
-"endLine":  599,
-"endColumn":  117
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L626",
-"region":  {
-"startLine":  626,
-"startColumn":  91,
-"endLine":  626,
-"endColumn":  92
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L627",
-"region":  {
-"startLine":  627,
-"startColumn":  97,
-"endLine":  627,
-"endColumn":  98
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L673",
-"region":  {
-"startLine":  673,
-"startColumn":  134,
-"endLine":  673,
-"endColumn":  135
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L674",
-"region":  {
-"startLine":  674,
-"startColumn":  128,
-"endLine":  674,
-"endColumn":  129
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L734",
-"region":  {
-"startLine":  734,
-"startColumn":  99,
-"endLine":  734,
-"endColumn":  100
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L855",
-"region":  {
-"startLine":  855,
-"startColumn":  131,
-"endLine":  855,
-"endColumn":  132
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L867",
-"region":  {
-"startLine":  867,
-"startColumn":  80,
-"endLine":  867,
-"endColumn":  81
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L868",
-"region":  {
-"startLine":  868,
-"startColumn":  180,
-"endLine":  868,
-"endColumn":  181
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L869",
-"region":  {
-"startLine":  869,
-"startColumn":  124,
-"endLine":  869,
-"endColumn":  125
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L880",
-"region":  {
-"startLine":  880,
-"startColumn":  80,
-"endLine":  880,
-"endColumn":  81
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L881",
-"region":  {
-"startLine":  881,
-"startColumn":  169,
-"endLine":  881,
-"endColumn":  170
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L882",
-"region":  {
-"startLine":  882,
-"startColumn":  113,
-"endLine":  882,
-"endColumn":  114
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L895",
-"region":  {
-"startLine":  895,
-"startColumn":  79,
-"endLine":  895,
-"endColumn":  80
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L896",
-"region":  {
-"startLine":  896,
-"startColumn":  169,
-"endLine":  896,
-"endColumn":  170
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L897",
-"region":  {
-"startLine":  897,
-"startColumn":  113,
-"endLine":  897,
-"endColumn":  114
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L915",
-"region":  {
-"startLine":  915,
-"startColumn":  78,
-"endLine":  915,
-"endColumn":  79
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L916",
-"region":  {
-"startLine":  916,
-"startColumn":  180,
-"endLine":  916,
-"endColumn":  181
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L917",
-"region":  {
-"startLine":  917,
-"startColumn":  124,
-"endLine":  917,
-"endColumn":  125
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L201",
-"region":  {
-"startLine":  201,
-"startColumn":  61,
-"endLine":  201,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L559",
-"region":  {
-"startLine":  559,
-"startColumn":  95,
-"endLine":  559,
-"endColumn":  96
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L129",
-"region":  {
-"startLine":  129,
-"startColumn":  22,
-"endLine":  129,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L338",
-"region":  {
-"startLine":  338,
-"startColumn":  180,
-"endLine":  338,
-"endColumn":  181
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L339",
-"region":  {
-"startLine":  339,
-"startColumn":  173,
-"endLine":  339,
-"endColumn":  174
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L346",
-"region":  {
-"startLine":  346,
-"startColumn":  180,
-"endLine":  346,
-"endColumn":  181
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1193",
-"region":  {
-"startLine":  1193,
-"startColumn":  155,
-"endLine":  1193,
-"endColumn":  156
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1194",
-"region":  {
-"startLine":  1194,
-"startColumn":  221,
-"endLine":  1194,
-"endColumn":  222
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1198",
-"region":  {
-"startLine":  1198,
-"startColumn":  86,
-"endLine":  1198,
-"endColumn":  87
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1199",
-"region":  {
-"startLine":  1199,
-"startColumn":  175,
-"endLine":  1199,
-"endColumn":  176
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1200",
-"region":  {
-"startLine":  1200,
-"startColumn":  316,
-"endLine":  1200,
-"endColumn":  317
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1201",
-"region":  {
-"startLine":  1201,
-"startColumn":  285,
-"endLine":  1201,
-"endColumn":  286
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1202",
-"region":  {
-"startLine":  1202,
-"startColumn":  326,
-"endLine":  1202,
-"endColumn":  327
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1203",
-"region":  {
-"startLine":  1203,
-"startColumn":  330,
-"endLine":  1203,
-"endColumn":  331
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1206",
-"region":  {
-"startLine":  1206,
-"startColumn":  87,
-"endLine":  1206,
-"endColumn":  88
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1207",
-"region":  {
-"startLine":  1207,
-"startColumn":  176,
-"endLine":  1207,
-"endColumn":  177
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1208",
-"region":  {
-"startLine":  1208,
-"startColumn":  286,
-"endLine":  1208,
-"endColumn":  287
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1209",
-"region":  {
-"startLine":  1209,
-"startColumn":  328,
-"endLine":  1209,
-"endColumn":  329
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1212",
-"region":  {
-"startLine":  1212,
-"startColumn":  99,
-"endLine":  1212,
-"endColumn":  100
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1213",
-"region":  {
-"startLine":  1213,
-"startColumn":  178,
-"endLine":  1213,
-"endColumn":  179
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1214",
-"region":  {
-"startLine":  1214,
-"startColumn":  228,
-"endLine":  1214,
-"endColumn":  229
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1215",
-"region":  {
-"startLine":  1215,
-"startColumn":  276,
-"endLine":  1215,
-"endColumn":  277
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1216",
-"region":  {
-"startLine":  1216,
-"startColumn":  336,
-"endLine":  1216,
-"endColumn":  337
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1219",
-"region":  {
-"startLine":  1219,
-"startColumn":  95,
-"endLine":  1219,
-"endColumn":  96
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1220",
-"region":  {
-"startLine":  1220,
-"startColumn":  176,
-"endLine":  1220,
-"endColumn":  177
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1221",
-"region":  {
-"startLine":  1221,
-"startColumn":  270,
-"endLine":  1221,
-"endColumn":  271
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1222",
-"region":  {
-"startLine":  1222,
-"startColumn":  334,
-"endLine":  1222,
-"endColumn":  335
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1280",
-"region":  {
-"startLine":  1280,
-"startColumn":  22,
-"endLine":  1280,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1469",
-"region":  {
-"startLine":  1469,
-"startColumn":  22,
-"endLine":  1469,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1730",
-"region":  {
-"startLine":  1730,
-"startColumn":  22,
-"endLine":  1730,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S2354",
-"message":  "Reformat the code to remove this use of the line continuation character.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L827",
-"region":  {
-"startLine":  827,
-"startColumn":  103,
-"endLine":  827,
-"endColumn":  104
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L817",
+      "Location": "Line 817 Position 117-118"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L818",
+      "Location": "Line 818 Position 132-133"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L825",
+      "Location": "Line 825 Position 117-118"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L826",
+      "Location": "Line 826 Position 110-111"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L827",
+      "Location": "Line 827 Position 148-149"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L147",
+      "Location": "Line 147 Position 114-115"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L314",
+      "Location": "Line 314 Position 49-50"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L315",
+      "Location": "Line 315 Position 116-117"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L316",
+      "Location": "Line 316 Position 89-90"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L317",
+      "Location": "Line 317 Position 115-116"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L318",
+      "Location": "Line 318 Position 128-129"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L319",
+      "Location": "Line 319 Position 79-80"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L320",
+      "Location": "Line 320 Position 239-240"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L368",
+      "Location": "Line 368 Position 122-123"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L388",
+      "Location": "Line 388 Position 122-123"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L413",
+      "Location": "Line 413 Position 61-62"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L457",
+      "Location": "Line 457 Position 156-157"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L513",
+      "Location": "Line 513 Position 103-104"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L514",
+      "Location": "Line 514 Position 109-110"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L535",
+      "Location": "Line 535 Position 97-98"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L536",
+      "Location": "Line 536 Position 102-103"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L537",
+      "Location": "Line 537 Position 106-107"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L538",
+      "Location": "Line 538 Position 103-104"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L539",
+      "Location": "Line 539 Position 116-117"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L565",
+      "Location": "Line 565 Position 113-114"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L566",
+      "Location": "Line 566 Position 113-114"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L567",
+      "Location": "Line 567 Position 83-84"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L568",
+      "Location": "Line 568 Position 92-93"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L578",
+      "Location": "Line 578 Position 113-114"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L579",
+      "Location": "Line 579 Position 81-82"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L580",
+      "Location": "Line 580 Position 92-93"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L598",
+      "Location": "Line 598 Position 103-104"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L599",
+      "Location": "Line 599 Position 116-117"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L626",
+      "Location": "Line 626 Position 91-92"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L627",
+      "Location": "Line 627 Position 97-98"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L673",
+      "Location": "Line 673 Position 134-135"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L674",
+      "Location": "Line 674 Position 128-129"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L734",
+      "Location": "Line 734 Position 99-100"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L855",
+      "Location": "Line 855 Position 131-132"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L867",
+      "Location": "Line 867 Position 80-81"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L868",
+      "Location": "Line 868 Position 180-181"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L869",
+      "Location": "Line 869 Position 124-125"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L880",
+      "Location": "Line 880 Position 80-81"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L881",
+      "Location": "Line 881 Position 169-170"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L882",
+      "Location": "Line 882 Position 113-114"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L895",
+      "Location": "Line 895 Position 79-80"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L896",
+      "Location": "Line 896 Position 169-170"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L897",
+      "Location": "Line 897 Position 113-114"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L915",
+      "Location": "Line 915 Position 78-79"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L916",
+      "Location": "Line 916 Position 180-181"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L917",
+      "Location": "Line 917 Position 124-125"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L201",
+      "Location": "Line 201 Position 61-62"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L559",
+      "Location": "Line 559 Position 95-96"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1193",
+      "Location": "Line 1193 Position 155-156"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1194",
+      "Location": "Line 1194 Position 221-222"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1198",
+      "Location": "Line 1198 Position 86-87"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1199",
+      "Location": "Line 1199 Position 175-176"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1200",
+      "Location": "Line 1200 Position 316-317"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1201",
+      "Location": "Line 1201 Position 285-286"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1202",
+      "Location": "Line 1202 Position 326-327"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1203",
+      "Location": "Line 1203 Position 330-331"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1206",
+      "Location": "Line 1206 Position 87-88"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1207",
+      "Location": "Line 1207 Position 176-177"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1208",
+      "Location": "Line 1208 Position 286-287"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1209",
+      "Location": "Line 1209 Position 328-329"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1212",
+      "Location": "Line 1212 Position 99-100"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1213",
+      "Location": "Line 1213 Position 178-179"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1214",
+      "Location": "Line 1214 Position 228-229"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1215",
+      "Location": "Line 1215 Position 276-277"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1216",
+      "Location": "Line 1216 Position 336-337"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1219",
+      "Location": "Line 1219 Position 95-96"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1220",
+      "Location": "Line 1220 Position 176-177"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1221",
+      "Location": "Line 1221 Position 270-271"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1222",
+      "Location": "Line 1222 Position 334-335"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1280",
+      "Location": "Line 1280 Position 22-23"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L129",
+      "Location": "Line 129 Position 22-23"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1469",
+      "Location": "Line 1469 Position 22-23"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1730",
+      "Location": "Line 1730 Position 22-23"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L338",
+      "Location": "Line 338 Position 180-181"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L339",
+      "Location": "Line 339 Position 173-174"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L346",
+      "Location": "Line 346 Position 180-181"
+    },
+    {
+      "Id": "S2354",
+      "Message": "Reformat the code to remove this use of the line continuation character.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L827",
+      "Location": "Line 827 Position 103-104"
+    }
+  ]
 }

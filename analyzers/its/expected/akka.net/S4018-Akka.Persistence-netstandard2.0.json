@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S4018",
-"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/AsyncWriteProxy.cs#L400",
-"region":  {
-"startLine":  400,
-"startColumn":  25,
-"endLine":  400,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/EventAdapters.cs#L399",
-"region":  {
-"startLine":  399,
-"startColumn":  30,
-"endLine":  399,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S4018",
-"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/EventAdapters.cs#L434",
-"region":  {
-"startLine":  434,
-"startColumn":  26,
-"endLine":  434,
-"endColumn":  37
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/AsyncWriteProxy.cs#L400",
+      "Location": "Line 400 Position 25-44"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/EventAdapters.cs#L399",
+      "Location": "Line 399 Position 30-33"
+    },
+    {
+      "Id": "S4018",
+      "Message": "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/EventAdapters.cs#L434",
+      "Location": "Line 434 Position 26-37"
+    }
+  ]
 }

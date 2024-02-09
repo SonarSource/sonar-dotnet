@@ -1,64 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal 'BoxeeTVShowId' 6 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericBoxee.vb#L67",
-"region":  {
-"startLine":  67,
-"startColumn":  69,
-"endLine":  67,
-"endColumn":  84
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericBoxee.vb#L93",
-"region":  {
-"startLine":  93,
-"startColumn":  38,
-"endLine":  93,
-"endColumn":  53
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericBoxee.vb#L105",
-"region":  {
-"startLine":  105,
-"startColumn":  45,
-"endLine":  105,
-"endColumn":  60
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericBoxee.vb#L118",
-"region":  {
-"startLine":  118,
-"startColumn":  45,
-"endLine":  118,
-"endColumn":  60
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericBoxee.vb#L147",
-"region":  {
-"startLine":  147,
-"startColumn":  70,
-"endLine":  147,
-"endColumn":  85
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericBoxee.vb#L153",
-"region":  {
-"startLine":  153,
-"startColumn":  39,
-"endLine":  153,
-"endColumn":  54
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S1192",
+      "Message": "Define a constant instead of using this literal \u0027BoxeeTVShowId\u0027 6 times.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericBoxee.vb#L67",
+      "Location": "Line 67 Position 69-84"
+    }
+  ]
 }

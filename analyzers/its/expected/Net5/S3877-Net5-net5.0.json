@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S3877",
-"message":  "Remove this 'throw' statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3877.cs#L11",
-"region":  {
-"startLine":  11,
-"startColumn":  13,
-"endLine":  11,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S3877",
-"message":  "Remove this 'throw' expression.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3877.cs#L15",
-"region":  {
-"startLine":  15,
-"startColumn":  38,
-"endLine":  15,
-"endColumn":  59
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3877",
+      "Message": "Remove this \u0027throw\u0027 statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3877.cs#L11",
+      "Location": "Line 11 Position 13-35"
+    },
+    {
+      "Id": "S3877",
+      "Message": "Remove this \u0027throw\u0027 expression.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3877.cs#L15",
+      "Location": "Line 15 Position 38-59"
+    }
+  ]
 }

@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S6605",
-"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/TrxSinkActor.cs#L222",
-"region":  {
-"startLine":  222,
-"startColumn":  28,
-"endLine":  222,
-"endColumn":  31
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6605",
+      "Message": "Collection-specific \u0022Exists\u0022 method should be used instead of the \u0022Any\u0022 extension.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/TrxSinkActor.cs#L222",
+      "Location": "Line 222 Position 28-31"
+    }
+  ]
 }

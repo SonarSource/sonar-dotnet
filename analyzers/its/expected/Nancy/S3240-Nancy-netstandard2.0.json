@@ -1,251 +1,118 @@
 {
-"issues":  [
-{
-"id":  "S3240",
-"message":  "Use the '?:' operator here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/InteractiveDiagnostics.cs#L40",
-"region":  {
-"startLine":  40,
-"startColumn":  13,
-"endLine":  40,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S3240",
-"message":  "Use the '??' operator here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ErrorHandling/DefaultStatusCodeHandler.cs#L123",
-"region":  {
-"startLine":  123,
-"startColumn":  13,
-"endLine":  123,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S3240",
-"message":  "Use the '?:' operator here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L124",
-"region":  {
-"startLine":  124,
-"startColumn":  13,
-"endLine":  124,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S3240",
-"message":  "Use the '?:' operator here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L129",
-"region":  {
-"startLine":  129,
-"startColumn":  13,
-"endLine":  129,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S3240",
-"message":  "Use the '?:' operator here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L462",
-"region":  {
-"startLine":  462,
-"startColumn":  25,
-"endLine":  462,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S3240",
-"message":  "Use the '??' operator here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L147",
-"region":  {
-"startLine":  147,
-"startColumn":  13,
-"endLine":  147,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S3240",
-"message":  "Use the '?:' operator here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L184",
-"region":  {
-"startLine":  184,
-"startColumn":  17,
-"endLine":  184,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S3240",
-"message":  "Use the '?:' operator here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L304",
-"region":  {
-"startLine":  304,
-"startColumn":  17,
-"endLine":  304,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S3240",
-"message":  "Use the '?:' operator here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L222",
-"region":  {
-"startLine":  222,
-"startColumn":  13,
-"endLine":  222,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S3240",
-"message":  "Use the '??' operator here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L613",
-"region":  {
-"startLine":  613,
-"startColumn":  13,
-"endLine":  613,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S3240",
-"message":  "Use the '?:' operator here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/BindingMemberInfo.cs#L39",
-"region":  {
-"startLine":  39,
-"startColumn":  17,
-"endLine":  39,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S3240",
-"message":  "Use the '?:' operator here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/BindingMemberInfo.cs#L85",
-"region":  {
-"startLine":  85,
-"startColumn":  13,
-"endLine":  85,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S3240",
-"message":  "Use the '?:' operator here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Request.cs#L192",
-"region":  {
-"startLine":  192,
-"startColumn":  17,
-"endLine":  192,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S3240",
-"message":  "Use the '??' operator here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ResponseExtensions.cs#L133",
-"region":  {
-"startLine":  133,
-"startColumn":  13,
-"endLine":  133,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S3240",
-"message":  "Use the '?:' operator here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/GenericFileResponse.cs#L93",
-"region":  {
-"startLine":  93,
-"startColumn":  17,
-"endLine":  93,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S3240",
-"message":  "Use the '??' operator here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/TextResponse.cs#L24",
-"region":  {
-"startLine":  24,
-"startColumn":  13,
-"endLine":  24,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S3240",
-"message":  "Use the '??' operator here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/TextResponse.cs#L59",
-"region":  {
-"startLine":  59,
-"startColumn":  13,
-"endLine":  59,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S3240",
-"message":  "Use the '??' operator here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3056",
-"region":  {
-"startLine":  3056,
-"startColumn":  21,
-"endLine":  3056,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S3240",
-"message":  "Use the '??' operator here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3871",
-"region":  {
-"startLine":  3871,
-"startColumn":  13,
-"endLine":  3871,
-"endColumn":  15
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/InteractiveDiagnostics.cs#L40",
+      "Location": "Line 40 Position 13-15"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027??\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ErrorHandling/DefaultStatusCodeHandler.cs#L123",
+      "Location": "Line 123 Position 13-15"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L124",
+      "Location": "Line 124 Position 13-15"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L129",
+      "Location": "Line 129 Position 13-15"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L462",
+      "Location": "Line 462 Position 25-27"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027??\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L147",
+      "Location": "Line 147 Position 13-15"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L184",
+      "Location": "Line 184 Position 17-19"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L304",
+      "Location": "Line 304 Position 17-19"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L222",
+      "Location": "Line 222 Position 13-15"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027??\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L613",
+      "Location": "Line 613 Position 13-15"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/BindingMemberInfo.cs#L39",
+      "Location": "Line 39 Position 17-19"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/BindingMemberInfo.cs#L85",
+      "Location": "Line 85 Position 13-15"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Request.cs#L192",
+      "Location": "Line 192 Position 17-19"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027??\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ResponseExtensions.cs#L133",
+      "Location": "Line 133 Position 13-15"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/GenericFileResponse.cs#L93",
+      "Location": "Line 93 Position 17-19"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027??\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/TextResponse.cs#L24",
+      "Location": "Line 24 Position 13-15"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027??\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/TextResponse.cs#L59",
+      "Location": "Line 59 Position 13-15"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027??\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3056",
+      "Location": "Line 3056 Position 21-23"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027??\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3871",
+      "Location": "Line 3871 Position 13-15"
+    }
+  ]
 }

@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S2357",
-"message":  "Make 'DefaultJournalConfig' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Extension.cs#L44",
-"region":  {
-"startLine":  44,
-"startColumn":  32,
-"endLine":  44,
-"endColumn":  52
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'DefaultSnapshotConfig' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Extension.cs#L49",
-"region":  {
-"startLine":  49,
-"startColumn":  32,
-"endLine":  49,
-"endColumn":  53
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027DefaultJournalConfig\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Extension.cs#L44",
+      "Location": "Line 44 Position 32-52"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027DefaultSnapshotConfig\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Extension.cs#L49",
+      "Location": "Line 49 Position 32-53"
+    }
+  ]
 }

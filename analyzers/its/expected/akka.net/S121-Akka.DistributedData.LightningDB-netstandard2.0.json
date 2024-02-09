@@ -1,95 +1,46 @@
 {
-"issues":  [
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData.LightningDB/LmdbDurableStore.cs#L69",
-"region":  {
-"startLine":  69,
-"startColumn":  17,
-"endLine":  69,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData.LightningDB/LmdbDurableStore.cs#L75",
-"region":  {
-"startLine":  75,
-"startColumn":  17,
-"endLine":  75,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData.LightningDB/LmdbDurableStore.cs#L95",
-"region":  {
-"startLine":  95,
-"startColumn":  21,
-"endLine":  95,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData.LightningDB/LmdbDurableStore.cs#L109",
-"region":  {
-"startLine":  109,
-"startColumn":  13,
-"endLine":  109,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData.LightningDB/LmdbDurableStore.cs#L171",
-"region":  {
-"startLine":  171,
-"startColumn":  25,
-"endLine":  171,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData.LightningDB/LmdbDurableStore.cs#L224",
-"region":  {
-"startLine":  224,
-"startColumn":  25,
-"endLine":  224,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData.LightningDB/LmdbDurableStore.cs#L231",
-"region":  {
-"startLine":  231,
-"startColumn":  25,
-"endLine":  231,
-"endColumn":  27
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData.LightningDB/LmdbDurableStore.cs#L109",
+      "Location": "Line 109 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData.LightningDB/LmdbDurableStore.cs#L171",
+      "Location": "Line 171 Position 25-27"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData.LightningDB/LmdbDurableStore.cs#L224",
+      "Location": "Line 224 Position 25-27"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData.LightningDB/LmdbDurableStore.cs#L231",
+      "Location": "Line 231 Position 25-27"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData.LightningDB/LmdbDurableStore.cs#L69",
+      "Location": "Line 69 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData.LightningDB/LmdbDurableStore.cs#L75",
+      "Location": "Line 75 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData.LightningDB/LmdbDurableStore.cs#L95",
+      "Location": "Line 95 Position 21-23"
+    }
+  ]
 }

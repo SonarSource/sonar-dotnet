@@ -1,157 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal '@PersistenceId' 5 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L1051",
-"region":  {
-"startLine":  1051,
-"startColumn":  35,
-"endLine":  1051,
-"endColumn":  51
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L1061",
-"region":  {
-"startLine":  1061,
-"startColumn":  39,
-"endLine":  1061,
-"endColumn":  55
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L1073",
-"region":  {
-"startLine":  1073,
-"startColumn":  35,
-"endLine":  1073,
-"endColumn":  51
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L1216",
-"region":  {
-"startLine":  1216,
-"startColumn":  39,
-"endLine":  1216,
-"endColumn":  55
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L1320",
-"region":  {
-"startLine":  1320,
-"startColumn":  39,
-"endLine":  1320,
-"endColumn":  55
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal '@Ordering' 4 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L493",
-"region":  {
-"startLine":  493,
-"startColumn":  39,
-"endLine":  493,
-"endColumn":  50
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L568",
-"region":  {
-"startLine":  568,
-"startColumn":  39,
-"endLine":  568,
-"endColumn":  50
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L596",
-"region":  {
-"startLine":  596,
-"startColumn":  39,
-"endLine":  596,
-"endColumn":  50
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L620",
-"region":  {
-"startLine":  620,
-"startColumn":  39,
-"endLine":  620,
-"endColumn":  50
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using this literal '@PersistenceId' 6 times.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L523",
-"region":  {
-"startLine":  523,
-"startColumn":  39,
-"endLine":  523,
-"endColumn":  55
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L652",
-"region":  {
-"startLine":  652,
-"startColumn":  39,
-"endLine":  652,
-"endColumn":  55
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L709",
-"region":  {
-"startLine":  709,
-"startColumn":  51,
-"endLine":  709,
-"endColumn":  67
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L711",
-"region":  {
-"startLine":  711,
-"startColumn":  45,
-"endLine":  711,
-"endColumn":  61
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L730",
-"region":  {
-"startLine":  730,
-"startColumn":  57,
-"endLine":  730,
-"endColumn":  73
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L808",
-"region":  {
-"startLine":  808,
-"startColumn":  35,
-"endLine":  808,
-"endColumn":  51
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S1192",
+      "Message": "Define a constant instead of using this literal \u0027@PersistenceId\u0027 5 times.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L1051",
+      "Location": "Line 1051 Position 35-51"
+    },
+    {
+      "Id": "S1192",
+      "Message": "Define a constant instead of using this literal \u0027@Ordering\u0027 4 times.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L493",
+      "Location": "Line 493 Position 39-50"
+    },
+    {
+      "Id": "S1192",
+      "Message": "Define a constant instead of using this literal \u0027@PersistenceId\u0027 6 times.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L523",
+      "Location": "Line 523 Position 39-55"
+    }
+  ]
 }

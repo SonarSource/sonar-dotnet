@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3962",
-"message":  "Replace this 'static readonly' declaration with 'const'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Dispatchers.cs#L313",
-"region":  {
-"startLine":  313,
-"startColumn":  41,
-"endLine":  313,
-"endColumn":  61
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3962",
+      "Message": "Replace this \u0027static readonly\u0027 declaration with \u0027const\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Dispatchers.cs#L313",
+      "Location": "Line 313 Position 41-61"
+    }
+  ]
 }

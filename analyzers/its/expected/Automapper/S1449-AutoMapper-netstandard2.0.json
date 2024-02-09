@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S1449",
-"message":  "Define the locale to be used in this string operation.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/INamingConvention.cs#L29",
-"region":  {
-"startLine":  29,
-"startColumn":  78,
-"endLine":  29,
-"endColumn":  85
-}
-}
-},
-{
-"id":  "S1449",
-"message":  "Define the locale to be used in this string operation.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/INamingConvention.cs#L37",
-"region":  {
-"startLine":  37,
-"startColumn":  64,
-"endLine":  37,
-"endColumn":  71
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1449",
+      "Message": "Define the locale to be used in this string operation.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/INamingConvention.cs#L29",
+      "Location": "Line 29 Position 78-85"
+    },
+    {
+      "Id": "S1449",
+      "Message": "Define the locale to be used in this string operation.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/INamingConvention.cs#L37",
+      "Location": "Line 37 Position 64-71"
+    }
+  ]
 }

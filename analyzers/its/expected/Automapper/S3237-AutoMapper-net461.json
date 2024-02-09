@@ -1,186 +1,88 @@
 {
-"issues":  [
-{
-"id":  "S3237",
-"message":  "Use the 'value' contextual keyword in this property set accessor declaration.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/MemberMap.cs#L21",
-"region":  {
-"startLine":  21,
-"startColumn":  68,
-"endLine":  21,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S3237",
-"message":  "Use the 'value' contextual keyword in this property set accessor declaration.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/MemberMap.cs#L25",
-"region":  {
-"startLine":  25,
-"startColumn":  73,
-"endLine":  25,
-"endColumn":  76
-}
-}
-},
-{
-"id":  "S3237",
-"message":  "Use the 'value' contextual keyword in this property set accessor declaration.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/MemberMap.cs#L27",
-"region":  {
-"startLine":  27,
-"startColumn":  63,
-"endLine":  27,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S3237",
-"message":  "Use the 'value' contextual keyword in this property set accessor declaration.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/MemberMap.cs#L29",
-"region":  {
-"startLine":  29,
-"startColumn":  55,
-"endLine":  29,
-"endColumn":  58
-}
-}
-},
-{
-"id":  "S3237",
-"message":  "Use the 'value' contextual keyword in this property set accessor declaration.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/MemberMap.cs#L30",
-"region":  {
-"startLine":  30,
-"startColumn":  51,
-"endLine":  30,
-"endColumn":  54
-}
-}
-},
-{
-"id":  "S3237",
-"message":  "Use the 'value' contextual keyword in this property set accessor declaration.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/MemberMap.cs#L31",
-"region":  {
-"startLine":  31,
-"startColumn":  55,
-"endLine":  31,
-"endColumn":  58
-}
-}
-},
-{
-"id":  "S3237",
-"message":  "Use the 'value' contextual keyword in this property set accessor declaration.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/MemberMap.cs#L33",
-"region":  {
-"startLine":  33,
-"startColumn":  68,
-"endLine":  33,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S3237",
-"message":  "Use the 'value' contextual keyword in this property set accessor declaration.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/MemberMap.cs#L34",
-"region":  {
-"startLine":  34,
-"startColumn":  64,
-"endLine":  34,
-"endColumn":  67
-}
-}
-},
-{
-"id":  "S3237",
-"message":  "Use the 'value' contextual keyword in this property set accessor declaration.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/MemberMap.cs#L35",
-"region":  {
-"startLine":  35,
-"startColumn":  72,
-"endLine":  35,
-"endColumn":  75
-}
-}
-},
-{
-"id":  "S3237",
-"message":  "Use the 'value' contextual keyword in this property set accessor declaration.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/MemberMap.cs#L36",
-"region":  {
-"startLine":  36,
-"startColumn":  69,
-"endLine":  36,
-"endColumn":  72
-}
-}
-},
-{
-"id":  "S3237",
-"message":  "Use the 'value' contextual keyword in this property set accessor declaration.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/MemberMap.cs#L37",
-"region":  {
-"startLine":  37,
-"startColumn":  79,
-"endLine":  37,
-"endColumn":  82
-}
-}
-},
-{
-"id":  "S3237",
-"message":  "Use the 'value' contextual keyword in this property set accessor declaration.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/MemberMap.cs#L38",
-"region":  {
-"startLine":  38,
-"startColumn":  77,
-"endLine":  38,
-"endColumn":  80
-}
-}
-},
-{
-"id":  "S3237",
-"message":  "Use the 'value' contextual keyword in this property set accessor declaration.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/MemberMap.cs#L39",
-"region":  {
-"startLine":  39,
-"startColumn":  89,
-"endLine":  39,
-"endColumn":  92
-}
-}
-},
-{
-"id":  "S3237",
-"message":  "Use the 'value' contextual keyword in this property set accessor declaration.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/MemberMap.cs#L40",
-"region":  {
-"startLine":  40,
-"startColumn":  90,
-"endLine":  40,
-"endColumn":  93
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3237",
+      "Message": "Use the \u0027value\u0027 contextual keyword in this property set accessor declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/MemberMap.cs#L21",
+      "Location": "Line 21 Position 68-71"
+    },
+    {
+      "Id": "S3237",
+      "Message": "Use the \u0027value\u0027 contextual keyword in this property set accessor declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/MemberMap.cs#L25",
+      "Location": "Line 25 Position 73-76"
+    },
+    {
+      "Id": "S3237",
+      "Message": "Use the \u0027value\u0027 contextual keyword in this property set accessor declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/MemberMap.cs#L27",
+      "Location": "Line 27 Position 63-66"
+    },
+    {
+      "Id": "S3237",
+      "Message": "Use the \u0027value\u0027 contextual keyword in this property set accessor declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/MemberMap.cs#L29",
+      "Location": "Line 29 Position 55-58"
+    },
+    {
+      "Id": "S3237",
+      "Message": "Use the \u0027value\u0027 contextual keyword in this property set accessor declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/MemberMap.cs#L30",
+      "Location": "Line 30 Position 51-54"
+    },
+    {
+      "Id": "S3237",
+      "Message": "Use the \u0027value\u0027 contextual keyword in this property set accessor declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/MemberMap.cs#L31",
+      "Location": "Line 31 Position 55-58"
+    },
+    {
+      "Id": "S3237",
+      "Message": "Use the \u0027value\u0027 contextual keyword in this property set accessor declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/MemberMap.cs#L33",
+      "Location": "Line 33 Position 68-71"
+    },
+    {
+      "Id": "S3237",
+      "Message": "Use the \u0027value\u0027 contextual keyword in this property set accessor declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/MemberMap.cs#L34",
+      "Location": "Line 34 Position 64-67"
+    },
+    {
+      "Id": "S3237",
+      "Message": "Use the \u0027value\u0027 contextual keyword in this property set accessor declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/MemberMap.cs#L35",
+      "Location": "Line 35 Position 72-75"
+    },
+    {
+      "Id": "S3237",
+      "Message": "Use the \u0027value\u0027 contextual keyword in this property set accessor declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/MemberMap.cs#L36",
+      "Location": "Line 36 Position 69-72"
+    },
+    {
+      "Id": "S3237",
+      "Message": "Use the \u0027value\u0027 contextual keyword in this property set accessor declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/MemberMap.cs#L37",
+      "Location": "Line 37 Position 79-82"
+    },
+    {
+      "Id": "S3237",
+      "Message": "Use the \u0027value\u0027 contextual keyword in this property set accessor declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/MemberMap.cs#L38",
+      "Location": "Line 38 Position 77-80"
+    },
+    {
+      "Id": "S3237",
+      "Message": "Use the \u0027value\u0027 contextual keyword in this property set accessor declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/MemberMap.cs#L39",
+      "Location": "Line 39 Position 89-92"
+    },
+    {
+      "Id": "S3237",
+      "Message": "Use the \u0027value\u0027 contextual keyword in this property set accessor declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/MemberMap.cs#L40",
+      "Location": "Line 40 Position 90-93"
+    }
+  ]
 }

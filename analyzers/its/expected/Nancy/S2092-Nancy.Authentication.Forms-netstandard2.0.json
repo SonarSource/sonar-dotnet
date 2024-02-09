@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S2092",
-"message":  "Make sure creating this cookie without setting the 'Secure' property is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Forms/FormsAuthentication.cs#L279",
-"region":  {
-"startLine":  279,
-"startColumn":  26,
-"endLine":  279,
-"endColumn":  135
-}
-}
-},
-{
-"id":  "S2092",
-"message":  "Make sure creating this cookie without setting the 'Secure' property is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Forms/FormsAuthentication.cs#L301",
-"region":  {
-"startLine":  301,
-"startColumn":  26,
-"endLine":  301,
-"endColumn":  145
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2092",
+      "Message": "Make sure creating this cookie without setting the \u0027Secure\u0027 property is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Forms/FormsAuthentication.cs#L279",
+      "Location": "Line 279 Position 26-135"
+    },
+    {
+      "Id": "S2092",
+      "Message": "Make sure creating this cookie without setting the \u0027Secure\u0027 property is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Forms/FormsAuthentication.cs#L301",
+      "Location": "Line 301 Position 26-145"
+    }
+  ]
 }

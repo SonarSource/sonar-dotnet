@@ -1,1132 +1,286 @@
 {
-"issues":  [
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeImages.vb#L59",
-"region":  {
-"startLine":  59,
-"startColumn":  33,
-"endLine":  59,
-"endColumn":  35
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeImages.vb#L58",
-"region":  {
-"startLine":  58,
-"startColumn":  29,
-"endLine":  58,
-"endColumn":  31
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeImages.vb#L65",
-"region":  {
-"startLine":  65,
-"startColumn":  33,
-"endLine":  65,
-"endColumn":  35
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeImages.vb#L64",
-"region":  {
-"startLine":  64,
-"startColumn":  29,
-"endLine":  64,
-"endColumn":  31
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeImages.vb#L71",
-"region":  {
-"startLine":  71,
-"startColumn":  33,
-"endLine":  71,
-"endColumn":  35
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeImages.vb#L70",
-"region":  {
-"startLine":  70,
-"startColumn":  29,
-"endLine":  70,
-"endColumn":  31
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeImages.vb#L89",
-"region":  {
-"startLine":  89,
-"startColumn":  33,
-"endLine":  89,
-"endColumn":  35
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeImages.vb#L88",
-"region":  {
-"startLine":  88,
-"startColumn":  29,
-"endLine":  88,
-"endColumn":  31
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeTrailers.vb#L108",
-"region":  {
-"startLine":  108,
-"startColumn":  17,
-"endLine":  108,
-"endColumn":  19
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeTrailers.vb#L106",
-"region":  {
-"startLine":  106,
-"startColumn":  13,
-"endLine":  106,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeTrailers.vb#L84",
-"region":  {
-"startLine":  84,
-"startColumn":  29,
-"endLine":  84,
-"endColumn":  31
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeTrailers.vb#L82",
-"region":  {
-"startLine":  82,
-"startColumn":  25,
-"endLine":  82,
-"endColumn":  27
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L426",
-"region":  {
-"startLine":  426,
-"startColumn":  41,
-"endLine":  426,
-"endColumn":  43
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L425",
-"region":  {
-"startLine":  425,
-"startColumn":  37,
-"endLine":  425,
-"endColumn":  39
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L433",
-"region":  {
-"startLine":  433,
-"startColumn":  41,
-"endLine":  433,
-"endColumn":  43
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L432",
-"region":  {
-"startLine":  432,
-"startColumn":  37,
-"endLine":  432,
-"endColumn":  39
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L440",
-"region":  {
-"startLine":  440,
-"startColumn":  41,
-"endLine":  440,
-"endColumn":  43
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L439",
-"region":  {
-"startLine":  439,
-"startColumn":  37,
-"endLine":  439,
-"endColumn":  39
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L381",
-"region":  {
-"startLine":  381,
-"startColumn":  17,
-"endLine":  381,
-"endColumn":  19
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L380",
-"region":  {
-"startLine":  380,
-"startColumn":  13,
-"endLine":  380,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L495",
-"region":  {
-"startLine":  495,
-"startColumn":  17,
-"endLine":  495,
-"endColumn":  19
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L494",
-"region":  {
-"startLine":  494,
-"startColumn":  13,
-"endLine":  494,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L515",
-"region":  {
-"startLine":  515,
-"startColumn":  17,
-"endLine":  515,
-"endColumn":  19
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L514",
-"region":  {
-"startLine":  514,
-"startColumn":  13,
-"endLine":  514,
-"endColumn":  15
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/TVEpisodeTag.vb#L200",
-"region":  {
-"startLine":  200,
-"startColumn":  21,
-"endLine":  200,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/TVEpisodeTag.vb#L199",
-"region":  {
-"startLine":  199,
-"startColumn":  17,
-"endLine":  199,
-"endColumn":  19
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/TVEpisodeTag.vb#L208",
-"region":  {
-"startLine":  208,
-"startColumn":  21,
-"endLine":  208,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/TVEpisodeTag.vb#L207",
-"region":  {
-"startLine":  207,
-"startColumn":  17,
-"endLine":  207,
-"endColumn":  19
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L276",
-"region":  {
-"startLine":  276,
-"startColumn":  21,
-"endLine":  276,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L275",
-"region":  {
-"startLine":  275,
-"startColumn":  17,
-"endLine":  275,
-"endColumn":  19
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L318",
-"region":  {
-"startLine":  318,
-"startColumn":  21,
-"endLine":  318,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L317",
-"region":  {
-"startLine":  317,
-"startColumn":  17,
-"endLine":  317,
-"endColumn":  19
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L527",
-"region":  {
-"startLine":  527,
-"startColumn":  25,
-"endLine":  527,
-"endColumn":  27
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L526",
-"region":  {
-"startLine":  526,
-"startColumn":  21,
-"endLine":  526,
-"endColumn":  23
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L462",
-"region":  {
-"startLine":  462,
-"startColumn":  21,
-"endLine":  462,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L461",
-"region":  {
-"startLine":  461,
-"startColumn":  17,
-"endLine":  461,
-"endColumn":  19
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L472",
-"region":  {
-"startLine":  472,
-"startColumn":  21,
-"endLine":  472,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L471",
-"region":  {
-"startLine":  471,
-"startColumn":  17,
-"endLine":  471,
-"endColumn":  19
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L482",
-"region":  {
-"startLine":  482,
-"startColumn":  21,
-"endLine":  482,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L481",
-"region":  {
-"startLine":  481,
-"startColumn":  17,
-"endLine":  481,
-"endColumn":  19
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L492",
-"region":  {
-"startLine":  492,
-"startColumn":  21,
-"endLine":  492,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L491",
-"region":  {
-"startLine":  491,
-"startColumn":  17,
-"endLine":  491,
-"endColumn":  19
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L498",
-"region":  {
-"startLine":  498,
-"startColumn":  21,
-"endLine":  498,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L497",
-"region":  {
-"startLine":  497,
-"startColumn":  17,
-"endLine":  497,
-"endColumn":  19
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L504",
-"region":  {
-"startLine":  504,
-"startColumn":  21,
-"endLine":  504,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L503",
-"region":  {
-"startLine":  503,
-"startColumn":  17,
-"endLine":  503,
-"endColumn":  19
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L367",
-"region":  {
-"startLine":  367,
-"startColumn":  21,
-"endLine":  367,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L366",
-"region":  {
-"startLine":  366,
-"startColumn":  17,
-"endLine":  366,
-"endColumn":  19
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L373",
-"region":  {
-"startLine":  373,
-"startColumn":  21,
-"endLine":  373,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L372",
-"region":  {
-"startLine":  372,
-"startColumn":  17,
-"endLine":  372,
-"endColumn":  19
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L379",
-"region":  {
-"startLine":  379,
-"startColumn":  21,
-"endLine":  379,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L378",
-"region":  {
-"startLine":  378,
-"startColumn":  17,
-"endLine":  378,
-"endColumn":  19
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L385",
-"region":  {
-"startLine":  385,
-"startColumn":  21,
-"endLine":  385,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L384",
-"region":  {
-"startLine":  384,
-"startColumn":  17,
-"endLine":  384,
-"endColumn":  19
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L458",
-"region":  {
-"startLine":  458,
-"startColumn":  33,
-"endLine":  458,
-"endColumn":  35
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L457",
-"region":  {
-"startLine":  457,
-"startColumn":  29,
-"endLine":  457,
-"endColumn":  31
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L512",
-"region":  {
-"startLine":  512,
-"startColumn":  25,
-"endLine":  512,
-"endColumn":  27
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L511",
-"region":  {
-"startLine":  511,
-"startColumn":  21,
-"endLine":  511,
-"endColumn":  23
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperSettings.vb#L190",
-"region":  {
-"startLine":  190,
-"startColumn":  25,
-"endLine":  190,
-"endColumn":  27
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperSettings.vb#L189",
-"region":  {
-"startLine":  189,
-"startColumn":  21,
-"endLine":  189,
-"endColumn":  23
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperSettings.vb#L191",
-"region":  {
-"startLine":  191,
-"startColumn":  29,
-"endLine":  191,
-"endColumn":  31
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperSettings.vb#L190",
-"region":  {
-"startLine":  190,
-"startColumn":  25,
-"endLine":  190,
-"endColumn":  27
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperSettings.vb#L481",
-"region":  {
-"startLine":  481,
-"startColumn":  25,
-"endLine":  481,
-"endColumn":  27
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperSettings.vb#L480",
-"region":  {
-"startLine":  480,
-"startColumn":  21,
-"endLine":  480,
-"endColumn":  23
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Tester.vb#L248",
-"region":  {
-"startLine":  248,
-"startColumn":  33,
-"endLine":  248,
-"endColumn":  35
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Tester.vb#L247",
-"region":  {
-"startLine":  247,
-"startColumn":  29,
-"endLine":  247,
-"endColumn":  31
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/GenericScraper.vb#L207",
-"region":  {
-"startLine":  207,
-"startColumn":  21,
-"endLine":  207,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/GenericScraper.vb#L206",
-"region":  {
-"startLine":  206,
-"startColumn":  17,
-"endLine":  206,
-"endColumn":  19
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/GenericScraper.vb#L208",
-"region":  {
-"startLine":  208,
-"startColumn":  25,
-"endLine":  208,
-"endColumn":  27
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/GenericScraper.vb#L207",
-"region":  {
-"startLine":  207,
-"startColumn":  21,
-"endLine":  207,
-"endColumn":  23
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/GenericScraper.vb#L410",
-"region":  {
-"startLine":  410,
-"startColumn":  21,
-"endLine":  410,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/GenericScraper.vb#L409",
-"region":  {
-"startLine":  409,
-"startColumn":  17,
-"endLine":  409,
-"endColumn":  19
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperManager.vb#L233",
-"region":  {
-"startLine":  233,
-"startColumn":  33,
-"endLine":  233,
-"endColumn":  35
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperManager.vb#L232",
-"region":  {
-"startLine":  232,
-"startColumn":  29,
-"endLine":  232,
-"endColumn":  31
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperManager.vb#L260",
-"region":  {
-"startLine":  260,
-"startColumn":  33,
-"endLine":  260,
-"endColumn":  35
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperManager.vb#L259",
-"region":  {
-"startLine":  259,
-"startColumn":  29,
-"endLine":  259,
-"endColumn":  31
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperManager.vb#L354",
-"region":  {
-"startLine":  354,
-"startColumn":  21,
-"endLine":  354,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperManager.vb#L353",
-"region":  {
-"startLine":  353,
-"startColumn":  17,
-"endLine":  353,
-"endColumn":  19
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L442",
-"region":  {
-"startLine":  442,
-"startColumn":  33,
-"endLine":  442,
-"endColumn":  35
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L441",
-"region":  {
-"startLine":  441,
-"startColumn":  29,
-"endLine":  441,
-"endColumn":  31
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L470",
-"region":  {
-"startLine":  470,
-"startColumn":  21,
-"endLine":  470,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L469",
-"region":  {
-"startLine":  469,
-"startColumn":  17,
-"endLine":  469,
-"endColumn":  19
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L231",
-"region":  {
-"startLine":  231,
-"startColumn":  21,
-"endLine":  231,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L230",
-"region":  {
-"startLine":  230,
-"startColumn":  17,
-"endLine":  230,
-"endColumn":  19
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L272",
-"region":  {
-"startLine":  272,
-"startColumn":  21,
-"endLine":  272,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L271",
-"region":  {
-"startLine":  271,
-"startColumn":  17,
-"endLine":  271,
-"endColumn":  19
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L283",
-"region":  {
-"startLine":  283,
-"startColumn":  21,
-"endLine":  283,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L282",
-"region":  {
-"startLine":  282,
-"startColumn":  17,
-"endLine":  282,
-"endColumn":  19
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/UrlInfo.vb#L244",
-"region":  {
-"startLine":  244,
-"startColumn":  21,
-"endLine":  244,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/UrlInfo.vb#L243",
-"region":  {
-"startLine":  243,
-"startColumn":  17,
-"endLine":  243,
-"endColumn":  19
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Util.vb#L146",
-"region":  {
-"startLine":  146,
-"startColumn":  21,
-"endLine":  146,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Util.vb#L145",
-"region":  {
-"startLine":  145,
-"startColumn":  17,
-"endLine":  145,
-"endColumn":  19
-}
-}
-]
-},
-{
-"id":  "S1066",
-"message":  "Merge this if statement with the enclosing one.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Util.vb#L79",
-"region":  {
-"startLine":  79,
-"startColumn":  21,
-"endLine":  79,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Util.vb#L78",
-"region":  {
-"startLine":  78,
-"startColumn":  17,
-"endLine":  78,
-"endColumn":  19
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeImages.vb#L59",
+      "Location": "Line 59 Position 33-35"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeImages.vb#L65",
+      "Location": "Line 65 Position 33-35"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeImages.vb#L71",
+      "Location": "Line 71 Position 33-35"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeImages.vb#L89",
+      "Location": "Line 89 Position 33-35"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeTrailers.vb#L108",
+      "Location": "Line 108 Position 17-19"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeTrailers.vb#L84",
+      "Location": "Line 84 Position 29-31"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L426",
+      "Location": "Line 426 Position 41-43"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L433",
+      "Location": "Line 433 Position 41-43"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L440",
+      "Location": "Line 440 Position 41-43"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L381",
+      "Location": "Line 381 Position 17-19"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L495",
+      "Location": "Line 495 Position 17-19"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L515",
+      "Location": "Line 515 Position 17-19"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/TVEpisodeTag.vb#L200",
+      "Location": "Line 200 Position 21-23"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/TVEpisodeTag.vb#L208",
+      "Location": "Line 208 Position 21-23"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L276",
+      "Location": "Line 276 Position 21-23"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L318",
+      "Location": "Line 318 Position 21-23"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L527",
+      "Location": "Line 527 Position 25-27"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L462",
+      "Location": "Line 462 Position 21-23"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L472",
+      "Location": "Line 472 Position 21-23"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L482",
+      "Location": "Line 482 Position 21-23"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L492",
+      "Location": "Line 492 Position 21-23"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L498",
+      "Location": "Line 498 Position 21-23"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L504",
+      "Location": "Line 504 Position 21-23"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L367",
+      "Location": "Line 367 Position 21-23"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L373",
+      "Location": "Line 373 Position 21-23"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L379",
+      "Location": "Line 379 Position 21-23"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L385",
+      "Location": "Line 385 Position 21-23"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L458",
+      "Location": "Line 458 Position 33-35"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L512",
+      "Location": "Line 512 Position 25-27"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperSettings.vb#L190",
+      "Location": "Line 190 Position 25-27"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperSettings.vb#L191",
+      "Location": "Line 191 Position 29-31"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperSettings.vb#L481",
+      "Location": "Line 481 Position 25-27"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Tester.vb#L248",
+      "Location": "Line 248 Position 33-35"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/GenericScraper.vb#L207",
+      "Location": "Line 207 Position 21-23"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/GenericScraper.vb#L208",
+      "Location": "Line 208 Position 25-27"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/GenericScraper.vb#L410",
+      "Location": "Line 410 Position 21-23"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperManager.vb#L233",
+      "Location": "Line 233 Position 33-35"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperManager.vb#L260",
+      "Location": "Line 260 Position 33-35"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperManager.vb#L354",
+      "Location": "Line 354 Position 21-23"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L442",
+      "Location": "Line 442 Position 33-35"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L470",
+      "Location": "Line 470 Position 21-23"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L231",
+      "Location": "Line 231 Position 21-23"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L272",
+      "Location": "Line 272 Position 21-23"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L283",
+      "Location": "Line 283 Position 21-23"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/UrlInfo.vb#L244",
+      "Location": "Line 244 Position 21-23"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Util.vb#L146",
+      "Location": "Line 146 Position 21-23"
+    },
+    {
+      "Id": "S1066",
+      "Message": "Merge this if statement with the enclosing one.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Util.vb#L79",
+      "Location": "Line 79 Position 21-23"
+    }
+  ]
 }

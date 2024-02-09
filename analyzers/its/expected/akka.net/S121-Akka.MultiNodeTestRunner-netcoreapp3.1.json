@@ -1,95 +1,46 @@
 {
-"issues":  [
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Discovery.cs#L47",
-"region":  {
-"startLine":  47,
-"startColumn":  21,
-"endLine":  47,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Discovery.cs#L53",
-"region":  {
-"startLine":  53,
-"startColumn":  25,
-"endLine":  53,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'else' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Discovery.cs#L55",
-"region":  {
-"startLine":  55,
-"startColumn":  25,
-"endLine":  55,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Discovery.cs#L118",
-"region":  {
-"startLine":  118,
-"startColumn":  17,
-"endLine":  118,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L161",
-"region":  {
-"startLine":  161,
-"startColumn":  13,
-"endLine":  161,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L172",
-"region":  {
-"startLine":  172,
-"startColumn":  13,
-"endLine":  172,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S121",
-"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L462",
-"region":  {
-"startLine":  462,
-"startColumn":  13,
-"endLine":  462,
-"endColumn":  15
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Discovery.cs#L118",
+      "Location": "Line 118 Position 17-19"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Discovery.cs#L47",
+      "Location": "Line 47 Position 21-23"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Discovery.cs#L53",
+      "Location": "Line 53 Position 25-27"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027else\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Discovery.cs#L55",
+      "Location": "Line 55 Position 25-29"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L161",
+      "Location": "Line 161 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L172",
+      "Location": "Line 172 Position 13-15"
+    },
+    {
+      "Id": "S121",
+      "Message": "Add curly braces around the nested statement(s) in this \u0027if\u0027 block.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L462",
+      "Location": "Line 462 Position 13-15"
+    }
+  ]
 }

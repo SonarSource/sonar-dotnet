@@ -1,9 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3992",
-"message":  "Provide a 'ComVisible' attribute for assembly 'recordsusingwith'.",
-"location":  null
-}
-]
+  "Issues": [
+    {
+      "Id": "S3992",
+      "Message": "Provide a \u0027ComVisible\u0027 attribute for assembly \u0027recordsusingwith\u0027.",
+      "Uri": null,
+      "Location": null
+    }
+  ]
 }

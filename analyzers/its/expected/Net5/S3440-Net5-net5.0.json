@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S3440",
-"message":  "Remove this useless conditional.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3440.cs#L10",
-"region":  {
-"startLine":  10,
-"startColumn":  17,
-"endLine":  10,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S3440",
-"message":  "Remove this useless conditional.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3440.cs#L11",
-"region":  {
-"startLine":  11,
-"startColumn":  17,
-"endLine":  11,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S3440",
-"message":  "Remove this useless conditional.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3440.cs#L21",
-"region":  {
-"startLine":  21,
-"startColumn":  21,
-"endLine":  21,
-"endColumn":  30
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3440",
+      "Message": "Remove this useless conditional.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3440.cs#L10",
+      "Location": "Line 10 Position 17-18"
+    },
+    {
+      "Id": "S3440",
+      "Message": "Remove this useless conditional.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3440.cs#L11",
+      "Location": "Line 11 Position 17-18"
+    },
+    {
+      "Id": "S3440",
+      "Message": "Remove this useless conditional.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3440.cs#L21",
+      "Location": "Line 21 Position 21-30"
+    }
+  ]
 }

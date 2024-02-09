@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1450",
-"message":  "Remove the field '_completedObject' and declare it as a local variable in the relevant methods.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/JsonObjectParser.cs#L53",
-"region":  {
-"startLine":  53,
-"startColumn":  22,
-"endLine":  53,
-"endColumn":  38
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1450",
+      "Message": "Remove the field \u0027_completedObject\u0027 and declare it as a local variable in the relevant methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/JsonObjectParser.cs#L53",
+      "Location": "Line 53 Position 22-38"
+    }
+  ]
 }

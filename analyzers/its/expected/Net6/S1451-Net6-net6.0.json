@@ -1,264 +1,124 @@
 {
-"issues":  [
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/AllowAsyncMethodBuilderAttributeOnMethods.cs#L1",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/AnonymousTypesInWithExpressions.cs#L1",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/AssignmentAndDeclarationInSameDeconstruction.cs#L1",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/CallerArgumentExpression.cs#L1",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/ConstantInterpolatedStrings.cs#L1",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/Deconstruction.cs#L1",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/ExtendedPropertyPatterns.cs#L1",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/FileScopedNamespaceDeclaration.cs#L1",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/GenericAttributes.cs#L1",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/GlobalUsingDirectives.cs#L1",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/ImplicitUsingOfNamespaces.cs#L1",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/LambdaAttributes.cs#L1",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/LambdasWithExplicitReturnType.cs#L1",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/MutexAclTest.cs#L1",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/ParameterlessConstructorsAndFieldInitializersInStructs.cs#L1",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/Program.cs#L1",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/RecordStructs.cs#L1",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/RecordTypesCanSealToString.cs#L1",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/StaticAbstractMembersInInterfaces.cs#L1",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/StructuresAsLeftHandOperandsInWithExpressions.cs#L1",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/AllowAsyncMethodBuilderAttributeOnMethods.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/AnonymousTypesInWithExpressions.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/AssignmentAndDeclarationInSameDeconstruction.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/CallerArgumentExpression.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/ConstantInterpolatedStrings.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/Deconstruction.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/ExtendedPropertyPatterns.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/FileScopedNamespaceDeclaration.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/GenericAttributes.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/GlobalUsingDirectives.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/ImplicitUsingOfNamespaces.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/LambdaAttributes.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/LambdasWithExplicitReturnType.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/MutexAclTest.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/ParameterlessConstructorsAndFieldInitializersInStructs.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/Program.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/RecordStructs.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/RecordTypesCanSealToString.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/StaticAbstractMembersInInterfaces.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    },
+    {
+      "Id": "S1451",
+      "Message": "Add or update the header of this file.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/StructuresAsLeftHandOperandsInWithExpressions.cs#L1",
+      "Location": "Line 1 Position 1-1"
+    }
+  ]
 }

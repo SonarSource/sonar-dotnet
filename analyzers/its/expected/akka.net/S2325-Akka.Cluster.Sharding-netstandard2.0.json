@@ -1,69 +1,34 @@
 {
-"issues":  [
-{
-"id":  "S2325",
-"message":  "Make 'DefaultShardAllocationStrategy' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L1113",
-"region":  {
-"startLine":  1113,
-"startColumn":  41,
-"endLine":  1113,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'GetReplicatorSettings' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L252",
-"region":  {
-"startLine":  252,
-"startColumn":  36,
-"endLine":  252,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'MostSuitableRegion' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Internal/AbstractLeastShardAllocationStrategy.cs#L121",
-"region":  {
-"startLine":  121,
-"startColumn":  70,
-"endLine":  121,
-"endColumn":  88
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'ActorRefMessageToProto' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Serialization/ClusterShardingMessageSerializer.cs#L387",
-"region":  {
-"startLine":  387,
-"startColumn":  33,
-"endLine":  387,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'ShardIdMessageToProto' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Serialization/ClusterShardingMessageSerializer.cs#L419",
-"region":  {
-"startLine":  419,
-"startColumn":  42,
-"endLine":  419,
-"endColumn":  63
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027DefaultShardAllocationStrategy\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L1113",
+      "Location": "Line 1113 Position 41-71"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027GetReplicatorSettings\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L252",
+      "Location": "Line 252 Position 36-57"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027MostSuitableRegion\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Internal/AbstractLeastShardAllocationStrategy.cs#L121",
+      "Location": "Line 121 Position 70-88"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027ActorRefMessageToProto\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Serialization/ClusterShardingMessageSerializer.cs#L387",
+      "Location": "Line 387 Position 33-55"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027ShardIdMessageToProto\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Serialization/ClusterShardingMessageSerializer.cs#L419",
+      "Location": "Line 419 Position 42-63"
+    }
+  ]
 }

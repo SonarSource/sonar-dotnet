@@ -1,69 +1,34 @@
 {
-"issues":  [
-{
-"id":  "S112",
-"message":  "'System.Exception' should not be thrown by user code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.TestKit/TestSubscriber.cs#L155",
-"region":  {
-"startLine":  155,
-"startColumn":  31,
-"endLine":  155,
-"endColumn":  109
-}
-}
-},
-{
-"id":  "S112",
-"message":  "'System.Exception' should not be thrown by user code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.TestKit/TestSubscriber.cs#L159",
-"region":  {
-"startLine":  159,
-"startColumn":  31,
-"endLine":  159,
-"endColumn":  79
-}
-}
-},
-{
-"id":  "S112",
-"message":  "'System.Exception' should not be thrown by user code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.TestKit/TestSubscriber.cs#L513",
-"region":  {
-"startLine":  513,
-"startColumn":  39,
-"endLine":  513,
-"endColumn":  81
-}
-}
-},
-{
-"id":  "S112",
-"message":  "'System.Exception' should not be thrown by user code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.TestKit/TestSubscriber.cs#L518",
-"region":  {
-"startLine":  518,
-"startColumn":  41,
-"endLine":  518,
-"endColumn":  83
-}
-}
-},
-{
-"id":  "S112",
-"message":  "'System.Exception' should not be thrown by user code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.TestKit/TestSubscriber.cs#L523",
-"region":  {
-"startLine":  523,
-"startColumn":  42,
-"endLine":  523,
-"endColumn":  84
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S112",
+      "Message": "\u0027System.Exception\u0027 should not be thrown by user code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.TestKit/TestSubscriber.cs#L155",
+      "Location": "Line 155 Position 31-109"
+    },
+    {
+      "Id": "S112",
+      "Message": "\u0027System.Exception\u0027 should not be thrown by user code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.TestKit/TestSubscriber.cs#L159",
+      "Location": "Line 159 Position 31-79"
+    },
+    {
+      "Id": "S112",
+      "Message": "\u0027System.Exception\u0027 should not be thrown by user code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.TestKit/TestSubscriber.cs#L513",
+      "Location": "Line 513 Position 39-81"
+    },
+    {
+      "Id": "S112",
+      "Message": "\u0027System.Exception\u0027 should not be thrown by user code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.TestKit/TestSubscriber.cs#L518",
+      "Location": "Line 518 Position 41-83"
+    },
+    {
+      "Id": "S112",
+      "Message": "\u0027System.Exception\u0027 should not be thrown by user code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.TestKit/TestSubscriber.cs#L523",
+      "Location": "Line 523 Position 42-84"
+    }
+  ]
 }
