@@ -203,7 +203,7 @@ namespace SonarAnalyzer.TestFramework.Verification
                     var csProjPath = PrepareRazorProject(projectRoot, langVersion);
                     var razorFiles = PrepareRazorFiles(projectRoot);
                     // To avoid reference loading issues, ensure that the project references are restored before compilation.
-                    if (RestorePackages(csProjPath, projectRoot) == 0)
+                    if (RestorePackages(csProjPath, projectRoot))
                     {
                         yield return new(workspace.OpenProjectAsync(csProjPath).Result.GetCompilationAsync().Result, razorFiles.ToArray());
                     }
@@ -370,22 +370,19 @@ namespace SonarAnalyzer.TestFramework.Verification
 
         public sealed record CompilationData(Compilation Compilation, string[] AdditionalSourceFiles);
 
-        private static int RestorePackages(string path, string workingDirectory)
+        private static bool RestorePackages(string path, string workingDirectory)
         {
             using var process = new Process();
             process.StartInfo = new ProcessStartInfo
-                                {
-                                    FileName = GetDotnetFilePath(),
-                                    Arguments = $"restore \"{path}\"",
-                                    WorkingDirectory = workingDirectory
-                                };
+                {
+                    FileName = Environment.GetEnvironmentVariable("DOTNET_PATH") ?? "dotnet",
+                    Arguments = $"restore \"{path}\"",
+                    WorkingDirectory = workingDirectory
+                };
 
             process.Start();
             process.WaitForExit();
-            return process.ExitCode;
+            return process.ExitCode == 0;
         }
-
-        private static string GetDotnetFilePath() =>
-            Environment.GetEnvironmentVariable("DOTNET_PATH") ?? "dotnet";
     }
 }
