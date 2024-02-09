@@ -28,8 +28,7 @@ public sealed class DiagnosticVerifierException : AssertFailedException
 {
     private readonly string stackTrace;
 
-    public override string StackTrace =>
-        stackTrace;
+    public override string StackTrace => stackTrace;
 
     internal DiagnosticVerifierException(List<VerificationMessage> messages) : base(messages.Select(x => x.FullDescription).JoinStr(Environment.NewLine))
     {

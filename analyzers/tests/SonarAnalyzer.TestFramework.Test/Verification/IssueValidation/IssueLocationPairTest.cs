@@ -70,7 +70,8 @@ public class IssueLocationPairTest
     [TestMethod]
     public void CreateMessage_WrongStartLocation()
     {
-        ValidateMessage(ActualSecondary,
+        ValidateMessage(
+            ActualSecondary,
             new(IssueType.Secondary, "File.cs", 42, "Lorem ipsum", "Flag1", 2, 2),
             "Secondary Different Location",
             "  Line 42 Secondary location: Should start on column 2 but got column 42 Rule S1234 ID Flag1");
