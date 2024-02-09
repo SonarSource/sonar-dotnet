@@ -147,7 +147,26 @@ public record VerifierBuilder
             .WithConcurrentAnalysis(false);
     }
 
-    public Verifier Build() =>
+    public IEnumerable<Compilation> Compile() =>
+        Build().Compile(false).Select(x => x.Compilation);
+
+    public void Verify() =>
+        Build().Verify();
+
+    public void VerifyNoIssueReported() =>
+        Build().VerifyNoIssueReported();
+
+    public void VerifyCodeFix() =>
+        Build().VerifyCodeFix();
+
+    public void VerifyUtilityAnalyzerProducesEmptyProtobuf() =>
+        Build().VerifyUtilityAnalyzerProducesEmptyProtobuf();
+
+    public void VerifyUtilityAnalyzer<TMessage>(Action<IReadOnlyList<TMessage>> verifyProtobuf)
+        where TMessage : IMessage<TMessage>, new() =>
+        Build().VerifyUtilityAnalyzer(verifyProtobuf);
+
+    internal Verifier Build() =>
         new(this);
 
     private VerifierBuilder UpdateIsRazor(params string[] paths)
@@ -173,23 +192,4 @@ public record VerifierBuilder<TAnalyzer> : VerifierBuilder
 {
     public VerifierBuilder() =>
         Analyzers = new Func<DiagnosticAnalyzer>[] { () => new TAnalyzer() }.ToImmutableArray();
-}
-
-public static class VerifierBuilderExtensions
-{
-    public static void Verify(this VerifierBuilder builder) =>
-        builder.Build().Verify();
-
-    public static void VerifyNoIssueReported(this VerifierBuilder builder) =>
-        builder.Build().VerifyNoIssueReported();
-
-    public static void VerifyCodeFix(this VerifierBuilder builder) =>
-        builder.Build().VerifyCodeFix();
-
-    public static void VerifyUtilityAnalyzerProducesEmptyProtobuf(this VerifierBuilder builder) =>
-        builder.Build().VerifyUtilityAnalyzerProducesEmptyProtobuf();
-
-    public static void VerifyUtilityAnalyzer<TMessage>(this VerifierBuilder builder, Action<IReadOnlyList<TMessage>> verifyProtobuf)
-        where TMessage : IMessage<TMessage>, new() =>
-        builder.Build().VerifyUtilityAnalyzer(verifyProtobuf);
 }

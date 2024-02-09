@@ -22,7 +22,7 @@ using System.IO;
 
 namespace SonarAnalyzer.TestFramework.MetadataReferences;
 
-public static partial class NuGetMetadataFactory
+internal static partial class NuGetMetadataFactory
 {
     // We use the global nuget cache for storing our packages if the NUGET_PACKAGES environment variable is defined.
     // This is especially helpful on the build agents where the packages are precached

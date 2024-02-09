@@ -1042,12 +1042,11 @@ class Program
             var compilation = new VerifierBuilder<DummyAnalyzerWithLocation>()
                 .AddSnippet(code, fileName)
                 .WithLanguageVersion(LanguageVersion.Latest)
-                .Build()
-                .Compile(false)
+                .Compile()
                 .Single();
 
-            var syntaxTree = compilation.Compilation.SyntaxTrees.Single(x => x.ToString().Contains(fileName));
-            var semanticModel = compilation.Compilation.GetSemanticModel(syntaxTree);
+            var syntaxTree = compilation.SyntaxTrees.Single(x => x.ToString().Contains(fileName));
+            var semanticModel = compilation.GetSemanticModel(syntaxTree);
 
             var lineNumbers = Metrics.CSharp.CSharpExecutableLinesMetric.GetLineNumbers(syntaxTree, semanticModel);
             lineNumbers.Should().BeEquivalentTo(expectedExecutableLines);

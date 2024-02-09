@@ -27,7 +27,7 @@ using NuGet.Versioning;
 
 namespace SonarAnalyzer.TestFramework.MetadataReferences;
 
-public static partial class NuGetMetadataFactory
+internal static partial class NuGetMetadataFactory
 {
     private const string PackageVersionPrefix = "Sonar.";
 
