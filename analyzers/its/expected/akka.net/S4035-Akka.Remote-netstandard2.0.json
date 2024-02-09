@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S4035",
-"message":  "Seal class 'AssociationHandle' or implement 'IEqualityComparer<T>' instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/Transport.cs#L331",
-"region":  {
-"startLine":  331,
-"startColumn":  27,
-"endLine":  331,
-"endColumn":  44
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4035",
+      "Message": "Seal class \u0027AssociationHandle\u0027 or implement \u0027IEqualityComparer\u003CT\u003E\u0027 instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/Transport.cs#L331",
+      "Location": "Line 331 Position 27-44"
+    }
+  ]
 }

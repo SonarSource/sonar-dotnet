@@ -1,160 +1,76 @@
 {
-"issues":  [
-{
-"id":  "S1075",
-"message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L184",
-"region":  {
-"startLine":  184,
-"startColumn":  27,
-"endLine":  184,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S1075",
-"message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L196",
-"region":  {
-"startLine":  196,
-"startColumn":  27,
-"endLine":  196,
-"endColumn":  54
-}
-}
-},
-{
-"id":  "S1075",
-"message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L208",
-"region":  {
-"startLine":  208,
-"startColumn":  27,
-"endLine":  208,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S1075",
-"message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L220",
-"region":  {
-"startLine":  220,
-"startColumn":  27,
-"endLine":  220,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S1075",
-"message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L232",
-"region":  {
-"startLine":  232,
-"startColumn":  27,
-"endLine":  232,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S1075",
-"message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L244",
-"region":  {
-"startLine":  244,
-"startColumn":  27,
-"endLine":  244,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S1075",
-"message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L256",
-"region":  {
-"startLine":  256,
-"startColumn":  27,
-"endLine":  256,
-"endColumn":  52
-}
-}
-},
-{
-"id":  "S1075",
-"message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L268",
-"region":  {
-"startLine":  268,
-"startColumn":  27,
-"endLine":  268,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S1075",
-"message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgErrorViewer.vb#L129",
-"region":  {
-"startLine":  129,
-"startColumn":  27,
-"endLine":  129,
-"endColumn":  69
-}
-}
-},
-{
-"id":  "S1075",
-"message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgTVRegExProfiles.vb#L54",
-"region":  {
-"startLine":  54,
-"startColumn":  54,
-"endLine":  54,
-"endColumn":  118
-}
-}
-},
-{
-"id":  "S1075",
-"message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4137",
-"region":  {
-"startLine":  4137,
-"startColumn":  27,
-"endLine":  4137,
-"endColumn":  111
-}
-}
-},
-{
-"id":  "S1075",
-"message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8907",
-"region":  {
-"startLine":  8907,
-"startColumn":  27,
-"endLine":  8907,
-"endColumn":  73
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1075",
+      "Message": "Refactor your code not to use hardcoded absolute paths or URIs.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L184",
+      "Location": "Line 184 Position 27-49"
+    },
+    {
+      "Id": "S1075",
+      "Message": "Refactor your code not to use hardcoded absolute paths or URIs.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L196",
+      "Location": "Line 196 Position 27-54"
+    },
+    {
+      "Id": "S1075",
+      "Message": "Refactor your code not to use hardcoded absolute paths or URIs.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L208",
+      "Location": "Line 208 Position 27-61"
+    },
+    {
+      "Id": "S1075",
+      "Message": "Refactor your code not to use hardcoded absolute paths or URIs.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L220",
+      "Location": "Line 220 Position 27-59"
+    },
+    {
+      "Id": "S1075",
+      "Message": "Refactor your code not to use hardcoded absolute paths or URIs.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L232",
+      "Location": "Line 232 Position 27-55"
+    },
+    {
+      "Id": "S1075",
+      "Message": "Refactor your code not to use hardcoded absolute paths or URIs.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L244",
+      "Location": "Line 244 Position 27-49"
+    },
+    {
+      "Id": "S1075",
+      "Message": "Refactor your code not to use hardcoded absolute paths or URIs.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L256",
+      "Location": "Line 256 Position 27-52"
+    },
+    {
+      "Id": "S1075",
+      "Message": "Refactor your code not to use hardcoded absolute paths or URIs.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L268",
+      "Location": "Line 268 Position 27-55"
+    },
+    {
+      "Id": "S1075",
+      "Message": "Refactor your code not to use hardcoded absolute paths or URIs.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgErrorViewer.vb#L129",
+      "Location": "Line 129 Position 27-69"
+    },
+    {
+      "Id": "S1075",
+      "Message": "Refactor your code not to use hardcoded absolute paths or URIs.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgTVRegExProfiles.vb#L54",
+      "Location": "Line 54 Position 54-118"
+    },
+    {
+      "Id": "S1075",
+      "Message": "Refactor your code not to use hardcoded absolute paths or URIs.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4137",
+      "Location": "Line 4137 Position 27-111"
+    },
+    {
+      "Id": "S1075",
+      "Message": "Refactor your code not to use hardcoded absolute paths or URIs.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8907",
+      "Location": "Line 8907 Position 27-73"
+    }
+  ]
 }

@@ -1,52 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S3267",
-"message":  "Loops should be simplified using the "Where" LINQ method",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1389",
-"region":  {
-"startLine":  1389,
-"startColumn":  45,
-"endLine":  1389,
-"endColumn":  55
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1391",
-"region":  {
-"startLine":  1391,
-"startColumn":  29,
-"endLine":  1391,
-"endColumn":  62
-}
-}
-]
-},
-{
-"id":  "S3267",
-"message":  "Loops should be simplified using the "Where" LINQ method",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L313",
-"region":  {
-"startLine":  313,
-"startColumn":  31,
-"endLine":  313,
-"endColumn":  55
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L315",
-"region":  {
-"startLine":  315,
-"startColumn":  21,
-"endLine":  315,
-"endColumn":  48
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S3267",
+      "Message": "Loops should be simplified using the \u0022Where\u0022 LINQ method",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1389",
+      "Location": "Line 1389 Position 45-55"
+    },
+    {
+      "Id": "S3267",
+      "Message": "Loops should be simplified using the \u0022Where\u0022 LINQ method",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L313",
+      "Location": "Line 313 Position 31-55"
+    }
+  ]
 }

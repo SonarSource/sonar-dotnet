@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2701",
-"message":  "Remove or correct this assertion.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Test/S3433_Mstest.cs#L13",
-"region":  {
-"startLine":  13,
-"startColumn":  17,
-"endLine":  13,
-"endColumn":  36
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2701",
+      "Message": "Remove or correct this assertion.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Test/S3433_Mstest.cs#L13",
+      "Location": "Line 13 Position 17-36"
+    }
+  ]
 }

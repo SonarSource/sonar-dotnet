@@ -1,22 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S6145",
-"message":  "Configure 'Option Strict On' for assembly 'AnalyzeGeneratedVb'.",
-"location":  null
-},
-{
-"id":  "S6145",
-"message":  "Change this to 'Option Strict On'.",
-"location":  {
-"uri":  "Replaced-Temporary-Path/.NETFramework,Version=v4.5.2.AssemblyAttributes.vb",
-"region":  {
-"startLine":  2,
-"startColumn":  13,
-"endLine":  2,
-"endColumn":  30
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6145",
+      "Message": "Configure \u0027Option Strict On\u0027 for assembly \u0027AnalyzeGeneratedVb\u0027.",
+      "Uri": null,
+      "Location": null
+    },
+    {
+      "Id": "S6145",
+      "Message": "Change this to \u0027Option Strict On\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AnalyzeGenerated.VB/obj/Debug/.NETFramework,Version=v4.5.2.AssemblyAttributes.vb#L2",
+      "Location": "Line 2 Position 13-30"
+    }
+  ]
 }

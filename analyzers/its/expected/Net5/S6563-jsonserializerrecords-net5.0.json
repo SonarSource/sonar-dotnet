@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S6563",
-"message":  "Use UTC when recording DateTime instants",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/JsonSerializerRecords/Program.cs#L4",
-"region":  {
-"startLine":  4,
-"startColumn":  25,
-"endLine":  4,
-"endColumn":  37
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6563",
+      "Message": "Use UTC when recording DateTime instants",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/JsonSerializerRecords/Program.cs#L4",
+      "Location": "Line 4 Position 25-37"
+    }
+  ]
 }

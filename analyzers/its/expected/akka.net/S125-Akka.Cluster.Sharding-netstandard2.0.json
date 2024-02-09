@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S125",
-"message":  "Remove this commented out code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardAllocationStrategy.cs#L174",
-"region":  {
-"startLine":  174,
-"startColumn":  21,
-"endLine":  174,
-"endColumn":  179
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S125",
+      "Message": "Remove this commented out code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardAllocationStrategy.cs#L174",
+      "Location": "Line 174 Position 21-179"
+    }
+  ]
 }

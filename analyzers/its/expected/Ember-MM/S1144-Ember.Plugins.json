@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S1144",
-"message":  "Remove the unused private field 'log'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Ember/EmberWorkAroundPlugin.cs#L12-L13",
-"region":  {
-"startLine":  12,
-"startColumn":  9,
-"endLine":  13,
-"endColumn":  76
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private field 'log'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L42-L43",
-"region":  {
-"startLine":  42,
-"startColumn":  9,
-"endLine":  43,
-"endColumn":  76
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private field \u0027log\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Ember/EmberWorkAroundPlugin.cs#L12-L13",
+      "Location": "Lines 12-13 Position 9-76"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private field \u0027log\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L42-L43",
+      "Location": "Lines 42-43 Position 9-76"
+    }
+  ]
 }

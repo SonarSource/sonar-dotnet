@@ -1,56 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S4040",
-"message":  "Change this normalization to 'ToUpperInvariant()'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSM.cs#L462",
-"region":  {
-"startLine":  462,
-"startColumn":  29,
-"endLine":  462,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S4040",
-"message":  "Change this normalization to 'ToUpperInvariant()'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSM.cs#L463",
-"region":  {
-"startLine":  463,
-"startColumn":  29,
-"endLine":  463,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S4040",
-"message":  "Change this normalization to 'ToUpperInvariant()'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSM.cs#L464",
-"region":  {
-"startLine":  464,
-"startColumn":  29,
-"endLine":  464,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S4040",
-"message":  "Change this normalization to 'ToUpperInvariant()'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/AsyncWriteJournal.cs#L62",
-"region":  {
-"startLine":  62,
-"startColumn":  79,
-"endLine":  62,
-"endColumn":  95
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4040",
+      "Message": "Change this normalization to \u0027ToUpperInvariant()\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSM.cs#L462",
+      "Location": "Line 462 Position 29-45"
+    },
+    {
+      "Id": "S4040",
+      "Message": "Change this normalization to \u0027ToUpperInvariant()\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSM.cs#L463",
+      "Location": "Line 463 Position 29-45"
+    },
+    {
+      "Id": "S4040",
+      "Message": "Change this normalization to \u0027ToUpperInvariant()\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSM.cs#L464",
+      "Location": "Line 464 Position 29-45"
+    },
+    {
+      "Id": "S4040",
+      "Message": "Change this normalization to \u0027ToUpperInvariant()\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/AsyncWriteJournal.cs#L62",
+      "Location": "Line 62 Position 79-95"
+    }
+  ]
 }

@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1450",
-"message":  "Remove the field '_senderProbe' and declare it as a local variable in the relevant methods.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L50",
-"region":  {
-"startLine":  50,
-"startColumn":  27,
-"endLine":  50,
-"endColumn":  39
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1450",
+      "Message": "Remove the field \u0027_senderProbe\u0027 and declare it as a local variable in the relevant methods.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L50",
+      "Location": "Line 50 Position 27-39"
+    }
+  ]
 }

@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S4583",
-"message":  "Pair this "BeginInvoke" with an "EndInvoke".",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4583.Part1.cs#L22",
-"region":  {
-"startLine":  22,
-"startColumn":  20,
-"endLine":  22,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S4583",
-"message":  "Pair this "BeginInvoke" with an "EndInvoke".",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4583.Part1.cs#L38",
-"region":  {
-"startLine":  38,
-"startColumn":  20,
-"endLine":  38,
-"endColumn":  31
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4583",
+      "Message": "Pair this \u0022BeginInvoke\u0022 with an \u0022EndInvoke\u0022.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4583.Part1.cs#L22",
+      "Location": "Line 22 Position 20-31"
+    },
+    {
+      "Id": "S4583",
+      "Message": "Pair this \u0022BeginInvoke\u0022 with an \u0022EndInvoke\u0022.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4583.Part1.cs#L38",
+      "Location": "Line 38 Position 20-31"
+    }
+  ]
 }

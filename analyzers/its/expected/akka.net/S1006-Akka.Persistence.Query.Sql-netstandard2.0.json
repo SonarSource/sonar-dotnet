@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S1006",
-"message":  "Remove the default parameter value to match the signature of overridden method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/SqlReadJournal.cs#L199",
-"region":  {
-"startLine":  199,
-"startColumn":  85,
-"endLine":  199,
-"endColumn":  91
-}
-}
-},
-{
-"id":  "S1006",
-"message":  "Remove the default parameter value to match the signature of overridden method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/SqlReadJournal.cs#L220",
-"region":  {
-"startLine":  220,
-"startColumn":  92,
-"endLine":  220,
-"endColumn":  98
-}
-}
-},
-{
-"id":  "S1006",
-"message":  "Remove the default parameter value to match the signature of overridden method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/SqlReadJournal.cs#L236",
-"region":  {
-"startLine":  236,
-"startColumn":  71,
-"endLine":  236,
-"endColumn":  77
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1006",
+      "Message": "Remove the default parameter value to match the signature of overridden method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/SqlReadJournal.cs#L199",
+      "Location": "Line 199 Position 85-91"
+    },
+    {
+      "Id": "S1006",
+      "Message": "Remove the default parameter value to match the signature of overridden method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/SqlReadJournal.cs#L220",
+      "Location": "Line 220 Position 92-98"
+    },
+    {
+      "Id": "S1006",
+      "Message": "Remove the default parameter value to match the signature of overridden method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/SqlReadJournal.cs#L236",
+      "Location": "Line 236 Position 71-77"
+    }
+  ]
 }

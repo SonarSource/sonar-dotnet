@@ -1,82 +1,40 @@
 {
-"issues":  [
-{
-"id":  "S1104",
-"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L656",
-"region":  {
-"startLine":  656,
-"startColumn":  30,
-"endLine":  656,
-"endColumn":  53
-}
-}
-},
-{
-"id":  "S1104",
-"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/SupervisorStrategy.cs#L90-L93",
-"region":  {
-"startLine":  90,
-"startColumn":  32,
-"endLine":  93,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S1104",
-"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L684",
-"region":  {
-"startLine":  684,
-"startColumn":  42,
-"endLine":  684,
-"endColumn":  73
-}
-}
-},
-{
-"id":  "S1104",
-"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L700",
-"region":  {
-"startLine":  700,
-"startColumn":  41,
-"endLine":  700,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S1104",
-"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L835",
-"region":  {
-"startLine":  835,
-"startColumn":  42,
-"endLine":  835,
-"endColumn":  73
-}
-}
-},
-{
-"id":  "S1104",
-"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L872",
-"region":  {
-"startLine":  872,
-"startColumn":  35,
-"endLine":  872,
-"endColumn":  59
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1104",
+      "Message": "Make this field \u0027private\u0027 and encapsulate it in a \u0027public\u0027 property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L656",
+      "Location": "Line 656 Position 30-53"
+    },
+    {
+      "Id": "S1104",
+      "Message": "Make this field \u0027private\u0027 and encapsulate it in a \u0027public\u0027 property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/SupervisorStrategy.cs#L90-L93",
+      "Location": "Lines 90-93 Position 32-55"
+    },
+    {
+      "Id": "S1104",
+      "Message": "Make this field \u0027private\u0027 and encapsulate it in a \u0027public\u0027 property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L684",
+      "Location": "Line 684 Position 42-73"
+    },
+    {
+      "Id": "S1104",
+      "Message": "Make this field \u0027private\u0027 and encapsulate it in a \u0027public\u0027 property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L700",
+      "Location": "Line 700 Position 41-71"
+    },
+    {
+      "Id": "S1104",
+      "Message": "Make this field \u0027private\u0027 and encapsulate it in a \u0027public\u0027 property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L835",
+      "Location": "Line 835 Position 42-73"
+    },
+    {
+      "Id": "S1104",
+      "Message": "Make this field \u0027private\u0027 and encapsulate it in a \u0027public\u0027 property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L872",
+      "Location": "Line 872 Position 35-59"
+    }
+  ]
 }

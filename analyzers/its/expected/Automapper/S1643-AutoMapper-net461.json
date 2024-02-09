@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1643",
-"message":  "Use a StringBuilder instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/AutoMapperMappingException.cs#L166-L168",
-"region":  {
-"startLine":  166,
-"startColumn":  29,
-"endLine":  168,
-"endColumn":  196
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1643",
+      "Message": "Use a StringBuilder instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/AutoMapperMappingException.cs#L166-L168",
+      "Location": "Lines 166-168 Position 29-196"
+    }
+  ]
 }

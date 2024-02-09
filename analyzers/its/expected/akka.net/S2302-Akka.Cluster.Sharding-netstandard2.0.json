@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2302",
-"message":  "Replace the string 'manifest' with 'nameof(manifest)'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Serialization/ClusterShardingMessageSerializer.cs#L179",
-"region":  {
-"startLine":  179,
-"startColumn":  48,
-"endLine":  179,
-"endColumn":  104
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2302",
+      "Message": "Replace the string \u0027manifest\u0027 with \u0027nameof(manifest)\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Serialization/ClusterShardingMessageSerializer.cs#L179",
+      "Location": "Line 179 Position 48-104"
+    }
+  ]
 }

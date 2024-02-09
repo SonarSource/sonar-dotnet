@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1172",
-"message":  "Remove this unused procedure parameter '_fixamp'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L394",
-"region":  {
-"startLine":  394,
-"startColumn":  113,
-"endLine":  394,
-"endColumn":  136
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1172",
+      "Message": "Remove this unused procedure parameter \u0027_fixamp\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L394",
+      "Location": "Line 394 Position 113-136"
+    }
+  ]
 }

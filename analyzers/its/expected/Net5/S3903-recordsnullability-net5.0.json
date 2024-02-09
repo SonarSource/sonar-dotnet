@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S3903",
-"message":  "Move 'Author' into a named namespace.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/RecordsAndNullability/Program.cs#L35",
-"region":  {
-"startLine":  35,
-"startColumn":  15,
-"endLine":  35,
-"endColumn":  21
-}
-}
-},
-{
-"id":  "S3903",
-"message":  "Move 'Book' into a named namespace.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/RecordsAndNullability/Program.cs#L46",
-"region":  {
-"startLine":  46,
-"startColumn":  15,
-"endLine":  46,
-"endColumn":  19
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3903",
+      "Message": "Move \u0027Author\u0027 into a named namespace.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/RecordsAndNullability/Program.cs#L35",
+      "Location": "Line 35 Position 15-21"
+    },
+    {
+      "Id": "S3903",
+      "Message": "Move \u0027Book\u0027 into a named namespace.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/RecordsAndNullability/Program.cs#L46",
+      "Location": "Line 46 Position 15-19"
+    }
+  ]
 }

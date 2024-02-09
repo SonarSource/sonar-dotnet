@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3956",
-"message":  "Refactor this field to use a generic collection designed for inheritance.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/JsonSerializerPreserveReference/Program.cs#L47",
-"region":  {
-"startLine":  47,
-"startColumn":  12,
-"endLine":  47,
-"endColumn":  26
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3956",
+      "Message": "Refactor this field to use a generic collection designed for inheritance.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/JsonSerializerPreserveReference/Program.cs#L47",
+      "Location": "Line 47 Position 12-26"
+    }
+  ]
 }

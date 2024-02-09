@@ -1,766 +1,136 @@
 {
-"issues":  [
-{
-"id":  "S4136",
-"message":  "All 'MuteAsync' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/IEventFilterApplier.cs#L242",
-"region":  {
-"startLine":  242,
-"startColumn":  17,
-"endLine":  242,
-"endColumn":  26
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/IEventFilterApplier.cs#L256",
-"region":  {
-"startLine":  256,
-"startColumn":  14,
-"endLine":  256,
-"endColumn":  23
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'Mute' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/IEventFilterApplier.cs#L234",
-"region":  {
-"startLine":  234,
-"startColumn":  11,
-"endLine":  234,
-"endColumn":  15
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/IEventFilterApplier.cs#L249",
-"region":  {
-"startLine":  249,
-"startColumn":  14,
-"endLine":  249,
-"endColumn":  18
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/IEventFilterApplier.cs#L279",
-"region":  {
-"startLine":  279,
-"startColumn":  26,
-"endLine":  279,
-"endColumn":  30
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'ExpectOne' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/IEventFilterApplier.cs#L27",
-"region":  {
-"startLine":  27,
-"startColumn":  14,
-"endLine":  27,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/IEventFilterApplier.cs#L57",
-"region":  {
-"startLine":  57,
-"startColumn":  14,
-"endLine":  57,
-"endColumn":  23
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/IEventFilterApplier.cs#L136",
-"region":  {
-"startLine":  136,
-"startColumn":  11,
-"endLine":  136,
-"endColumn":  20
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/IEventFilterApplier.cs#L160",
-"region":  {
-"startLine":  160,
-"startColumn":  11,
-"endLine":  160,
-"endColumn":  20
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'ExpectOneAsync' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/IEventFilterApplier.cs#L37",
-"region":  {
-"startLine":  37,
-"startColumn":  14,
-"endLine":  37,
-"endColumn":  28
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/IEventFilterApplier.cs#L67",
-"region":  {
-"startLine":  67,
-"startColumn":  14,
-"endLine":  67,
-"endColumn":  28
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/IEventFilterApplier.cs#L148",
-"region":  {
-"startLine":  148,
-"startColumn":  17,
-"endLine":  148,
-"endColumn":  31
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/IEventFilterApplier.cs#L172",
-"region":  {
-"startLine":  172,
-"startColumn":  17,
-"endLine":  172,
-"endColumn":  31
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'Expect' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/IEventFilterApplier.cs#L78",
-"region":  {
-"startLine":  78,
-"startColumn":  14,
-"endLine":  78,
-"endColumn":  20
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/IEventFilterApplier.cs#L112",
-"region":  {
-"startLine":  112,
-"startColumn":  14,
-"endLine":  112,
-"endColumn":  20
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/IEventFilterApplier.cs#L185",
-"region":  {
-"startLine":  185,
-"startColumn":  11,
-"endLine":  185,
-"endColumn":  17
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/IEventFilterApplier.cs#L212",
-"region":  {
-"startLine":  212,
-"startColumn":  11,
-"endLine":  212,
-"endColumn":  17
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'ExpectAsync' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/IEventFilterApplier.cs#L89",
-"region":  {
-"startLine":  89,
-"startColumn":  14,
-"endLine":  89,
-"endColumn":  25
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/IEventFilterApplier.cs#L124",
-"region":  {
-"startLine":  124,
-"startColumn":  14,
-"endLine":  124,
-"endColumn":  25
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/IEventFilterApplier.cs#L198",
-"region":  {
-"startLine":  198,
-"startColumn":  17,
-"endLine":  198,
-"endColumn":  28
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/IEventFilterApplier.cs#L226",
-"region":  {
-"startLine":  226,
-"startColumn":  17,
-"endLine":  226,
-"endColumn":  28
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'MuteAsync' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L221",
-"region":  {
-"startLine":  221,
-"startColumn":  30,
-"endLine":  221,
-"endColumn":  39
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L238",
-"region":  {
-"startLine":  238,
-"startColumn":  27,
-"endLine":  238,
-"endColumn":  36
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'Mute' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L213",
-"region":  {
-"startLine":  213,
-"startColumn":  18,
-"endLine":  213,
-"endColumn":  22
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L230",
-"region":  {
-"startLine":  230,
-"startColumn":  21,
-"endLine":  230,
-"endColumn":  25
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L247",
-"region":  {
-"startLine":  247,
-"startColumn":  33,
-"endLine":  247,
-"endColumn":  37
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'ExpectOne' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L44",
-"region":  {
-"startLine":  44,
-"startColumn":  21,
-"endLine":  44,
-"endColumn":  30
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L68",
-"region":  {
-"startLine":  68,
-"startColumn":  21,
-"endLine":  68,
-"endColumn":  30
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L133",
-"region":  {
-"startLine":  133,
-"startColumn":  18,
-"endLine":  133,
-"endColumn":  27
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L153",
-"region":  {
-"startLine":  153,
-"startColumn":  18,
-"endLine":  153,
-"endColumn":  27
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'ExpectOneAsync' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L49",
-"region":  {
-"startLine":  49,
-"startColumn":  21,
-"endLine":  49,
-"endColumn":  35
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L77",
-"region":  {
-"startLine":  77,
-"startColumn":  27,
-"endLine":  77,
-"endColumn":  41
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L141",
-"region":  {
-"startLine":  141,
-"startColumn":  30,
-"endLine":  141,
-"endColumn":  44
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L161",
-"region":  {
-"startLine":  161,
-"startColumn":  30,
-"endLine":  161,
-"endColumn":  44
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'Expect' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L87",
-"region":  {
-"startLine":  87,
-"startColumn":  21,
-"endLine":  87,
-"endColumn":  27
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L114",
-"region":  {
-"startLine":  114,
-"startColumn":  21,
-"endLine":  114,
-"endColumn":  27
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L173",
-"region":  {
-"startLine":  173,
-"startColumn":  18,
-"endLine":  173,
-"endColumn":  24
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L194",
-"region":  {
-"startLine":  194,
-"startColumn":  18,
-"endLine":  194,
-"endColumn":  24
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'ExpectAsync' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L95",
-"region":  {
-"startLine":  95,
-"startColumn":  21,
-"endLine":  95,
-"endColumn":  32
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L122",
-"region":  {
-"startLine":  122,
-"startColumn":  27,
-"endLine":  122,
-"endColumn":  38
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L181",
-"region":  {
-"startLine":  181,
-"startColumn":  30,
-"endLine":  181,
-"endColumn":  41
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L202",
-"region":  {
-"startLine":  202,
-"startColumn":  30,
-"endLine":  202,
-"endColumn":  41
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'Equals' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestActorRefBase.cs#L149",
-"region":  {
-"startLine":  149,
-"startColumn":  30,
-"endLine":  149,
-"endColumn":  36
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestActorRefBase.cs#L167",
-"region":  {
-"startLine":  167,
-"startColumn":  21,
-"endLine":  167,
-"endColumn":  27
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'Tell' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestActorRefBase.cs#L87",
-"region":  {
-"startLine":  87,
-"startColumn":  21,
-"endLine":  87,
-"endColumn":  25
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestActorRefBase.cs#L110",
-"region":  {
-"startLine":  110,
-"startColumn":  21,
-"endLine":  110,
-"endColumn":  25
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'InternalAwaitCondition' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitConditions.cs#L305",
-"region":  {
-"startLine":  305,
-"startColumn":  31,
-"endLine":  305,
-"endColumn":  53
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitConditions.cs#L351",
-"region":  {
-"startLine":  351,
-"startColumn":  31,
-"endLine":  351,
-"endColumn":  53
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'InternalAwaitConditionAsync' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitConditions.cs#L318",
-"region":  {
-"startLine":  318,
-"startColumn":  37,
-"endLine":  318,
-"endColumn":  64
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitConditions.cs#L379",
-"region":  {
-"startLine":  379,
-"startColumn":  43,
-"endLine":  379,
-"endColumn":  70
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'AwaitCondition' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitConditions.cs#L34",
-"region":  {
-"startLine":  34,
-"startColumn":  21,
-"endLine":  34,
-"endColumn":  35
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitConditions.cs#L81",
-"region":  {
-"startLine":  81,
-"startColumn":  21,
-"endLine":  81,
-"endColumn":  35
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitConditions.cs#L134",
-"region":  {
-"startLine":  134,
-"startColumn":  21,
-"endLine":  134,
-"endColumn":  35
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitConditions.cs#L196",
-"region":  {
-"startLine":  196,
-"startColumn":  21,
-"endLine":  196,
-"endColumn":  35
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'AwaitConditionAsync' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitConditions.cs#L55",
-"region":  {
-"startLine":  55,
-"startColumn":  27,
-"endLine":  55,
-"endColumn":  46
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitConditions.cs#L107",
-"region":  {
-"startLine":  107,
-"startColumn":  27,
-"endLine":  107,
-"endColumn":  46
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitConditions.cs#L161",
-"region":  {
-"startLine":  161,
-"startColumn":  27,
-"endLine":  161,
-"endColumn":  46
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitConditions.cs#L230",
-"region":  {
-"startLine":  230,
-"startColumn":  27,
-"endLine":  230,
-"endColumn":  46
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'ExpectMsgFrom' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ExpectMsgFrom.cs#L31",
-"region":  {
-"startLine":  31,
-"startColumn":  18,
-"endLine":  31,
-"endColumn":  31
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ExpectMsgFrom.cs#L133",
-"region":  {
-"startLine":  133,
-"startColumn":  18,
-"endLine":  133,
-"endColumn":  31
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'Within' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L30",
-"region":  {
-"startLine":  30,
-"startColumn":  21,
-"endLine":  30,
-"endColumn":  27
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L55",
-"region":  {
-"startLine":  55,
-"startColumn":  21,
-"endLine":  55,
-"endColumn":  27
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L80",
-"region":  {
-"startLine":  80,
-"startColumn":  18,
-"endLine":  80,
-"endColumn":  24
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L116",
-"region":  {
-"startLine":  116,
-"startColumn":  18,
-"endLine":  116,
-"endColumn":  24
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'WithinAsync' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L38",
-"region":  {
-"startLine":  38,
-"startColumn":  21,
-"endLine":  38,
-"endColumn":  32
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L63",
-"region":  {
-"startLine":  63,
-"startColumn":  21,
-"endLine":  63,
-"endColumn":  32
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L97",
-"region":  {
-"startLine":  97,
-"startColumn":  24,
-"endLine":  97,
-"endColumn":  35
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L178",
-"region":  {
-"startLine":  178,
-"startColumn":  30,
-"endLine":  178,
-"endColumn":  41
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'SendSystemMessage' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestProbe.cs#L162",
-"region":  {
-"startLine":  162,
-"startColumn":  21,
-"endLine":  162,
-"endColumn":  38
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestProbe.cs#L239",
-"region":  {
-"startLine":  239,
-"startColumn":  21,
-"endLine":  239,
-"endColumn":  38
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S4136",
+      "Message": "All \u0027Mute\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/IEventFilterApplier.cs#L234",
+      "Location": "Line 234 Position 11-15"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027MuteAsync\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/IEventFilterApplier.cs#L242",
+      "Location": "Line 242 Position 17-26"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027ExpectOne\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/IEventFilterApplier.cs#L27",
+      "Location": "Line 27 Position 14-23"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027ExpectOneAsync\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/IEventFilterApplier.cs#L37",
+      "Location": "Line 37 Position 14-28"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027Expect\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/IEventFilterApplier.cs#L78",
+      "Location": "Line 78 Position 14-20"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027ExpectAsync\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/IEventFilterApplier.cs#L89",
+      "Location": "Line 89 Position 14-25"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027Mute\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L213",
+      "Location": "Line 213 Position 18-22"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027MuteAsync\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L221",
+      "Location": "Line 221 Position 30-39"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027ExpectOne\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L44",
+      "Location": "Line 44 Position 21-30"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027ExpectOneAsync\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L49",
+      "Location": "Line 49 Position 21-35"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027Expect\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L87",
+      "Location": "Line 87 Position 21-27"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027ExpectAsync\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L95",
+      "Location": "Line 95 Position 21-32"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027Equals\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestActorRefBase.cs#L149",
+      "Location": "Line 149 Position 30-36"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027Tell\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestActorRefBase.cs#L87",
+      "Location": "Line 87 Position 21-25"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027InternalAwaitCondition\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitConditions.cs#L305",
+      "Location": "Line 305 Position 31-53"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027InternalAwaitConditionAsync\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitConditions.cs#L318",
+      "Location": "Line 318 Position 37-64"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027AwaitCondition\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitConditions.cs#L34",
+      "Location": "Line 34 Position 21-35"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027AwaitConditionAsync\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitConditions.cs#L55",
+      "Location": "Line 55 Position 27-46"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027ExpectMsgFrom\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ExpectMsgFrom.cs#L31",
+      "Location": "Line 31 Position 18-31"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027Within\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L30",
+      "Location": "Line 30 Position 21-27"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027WithinAsync\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L38",
+      "Location": "Line 38 Position 21-32"
+    },
+    {
+      "Id": "S4136",
+      "Message": "All \u0027SendSystemMessage\u0027 method overloads should be adjacent.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestProbe.cs#L162",
+      "Location": "Line 162 Position 21-38"
+    }
+  ]
 }

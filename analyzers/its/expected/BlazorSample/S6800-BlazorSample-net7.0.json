@@ -1,28 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S6800",
-"message":  "Parameter type 'string' does not match route parameter type constraint.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6800/S6800CsharpOnly.cs#L10",
-"region":  {
-"startLine":  10,
-"startColumn":  12,
-"endLine":  10,
-"endColumn":  18
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6800/S6800CsharpOnly.cs#L5",
-"region":  {
-"startLine":  5,
-"startColumn":  28,
-"endLine":  5,
-"endColumn":  44
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S6800",
+      "Message": "Parameter type \u0027string\u0027 does not match route parameter type constraint.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/S6800/S6800CsharpOnly.cs#L10",
+      "Location": "Line 10 Position 12-18"
+    }
+  ]
 }

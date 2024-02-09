@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2436",
-"message":  "Reduce the number of generic parameters in the 'LocalBar' method to no more than the 3 authorized.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L102",
-"region":  {
-"startLine":  102,
-"startColumn":  6,
-"endLine":  102,
-"endColumn":  14
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2436",
+      "Message": "Reduce the number of generic parameters in the \u0027LocalBar\u0027 method to no more than the 3 authorized.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L102",
+      "Location": "Line 102 Position 6-14"
+    }
+  ]
 }

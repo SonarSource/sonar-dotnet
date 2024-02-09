@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1449",
-"message":  "Define the locale to be used in this string operation.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Markdown/MarkdownViewEngineHost.cs#L68",
-"region":  {
-"startLine":  68,
-"startColumn":  41,
-"endLine":  68,
-"endColumn":  48
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1449",
+      "Message": "Define the locale to be used in this string operation.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Markdown/MarkdownViewEngineHost.cs#L68",
+      "Location": "Line 68 Position 41-48"
+    }
+  ]
 }

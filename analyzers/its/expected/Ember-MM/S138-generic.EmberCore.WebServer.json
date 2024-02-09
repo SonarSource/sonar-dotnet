@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S138",
-"message":  "This method 'HandleConnection' has 111 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L39",
-"region":  {
-"startLine":  39,
-"startColumn":  16,
-"endLine":  39,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S138",
-"message":  "This function 'MovieBuildHTML' has 203 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L21",
-"region":  {
-"startLine":  21,
-"startColumn":  21,
-"endLine":  21,
-"endColumn":  35
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S138",
+      "Message": "This method \u0027HandleConnection\u0027 has 111 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L39",
+      "Location": "Line 39 Position 16-32"
+    },
+    {
+      "Id": "S138",
+      "Message": "This function \u0027MovieBuildHTML\u0027 has 203 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L21",
+      "Location": "Line 21 Position 21-35"
+    }
+  ]
 }

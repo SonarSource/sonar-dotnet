@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1751",
-"message":  "Refactor the containing loop to do more than one iteration.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1413",
-"region":  {
-"startLine":  1413,
-"startColumn":  17,
-"endLine":  1413,
-"endColumn":  27
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1751",
+      "Message": "Refactor the containing loop to do more than one iteration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1413",
+      "Location": "Line 1413 Position 17-27"
+    }
+  ]
 }

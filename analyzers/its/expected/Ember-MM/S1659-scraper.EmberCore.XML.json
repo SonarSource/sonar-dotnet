@@ -1,69 +1,34 @@
 {
-"issues":  [
-{
-"id":  "S1659",
-"message":  "Declare 'iVal' in a separate statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeImages.vb#L127",
-"region":  {
-"startLine":  127,
-"startColumn":  19,
-"endLine":  127,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S1659",
-"message":  "Declare 'bCleanString' in a separate statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L419",
-"region":  {
-"startLine":  419,
-"startColumn":  72,
-"endLine":  419,
-"endColumn":  84
-}
-}
-},
-{
-"id":  "S1659",
-"message":  "Declare 'bTrimString' in a separate statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L419",
-"region":  {
-"startLine":  419,
-"startColumn":  105,
-"endLine":  419,
-"endColumn":  116
-}
-}
-},
-{
-"id":  "S1659",
-"message":  "Declare 'bCleanString' in a separate statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L443",
-"region":  {
-"startLine":  443,
-"startColumn":  72,
-"endLine":  443,
-"endColumn":  84
-}
-}
-},
-{
-"id":  "S1659",
-"message":  "Declare 'bTrimString' in a separate statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L443",
-"region":  {
-"startLine":  443,
-"startColumn":  105,
-"endLine":  443,
-"endColumn":  116
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1659",
+      "Message": "Declare \u0027iVal\u0027 in a separate statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeImages.vb#L127",
+      "Location": "Line 127 Position 19-23"
+    },
+    {
+      "Id": "S1659",
+      "Message": "Declare \u0027bTrimString\u0027 in a separate statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L419",
+      "Location": "Line 419 Position 105-116"
+    },
+    {
+      "Id": "S1659",
+      "Message": "Declare \u0027bCleanString\u0027 in a separate statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L419",
+      "Location": "Line 419 Position 72-84"
+    },
+    {
+      "Id": "S1659",
+      "Message": "Declare \u0027bTrimString\u0027 in a separate statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L443",
+      "Location": "Line 443 Position 105-116"
+    },
+    {
+      "Id": "S1659",
+      "Message": "Declare \u0027bCleanString\u0027 in a separate statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L443",
+      "Location": "Line 443 Position 72-84"
+    }
+  ]
 }

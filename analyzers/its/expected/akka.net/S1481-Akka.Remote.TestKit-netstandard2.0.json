@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'barrierEmpty'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L257",
-"region":  {
-"startLine":  257,
-"startColumn":  67,
-"endLine":  257,
-"endColumn":  79
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'result'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L140",
-"region":  {
-"startLine":  140,
-"startColumn":  25,
-"endLine":  140,
-"endColumn":  31
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027barrierEmpty\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L257",
+      "Location": "Line 257 Position 67-79"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027result\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L140",
+      "Location": "Line 140 Position 25-31"
+    }
+  ]
 }

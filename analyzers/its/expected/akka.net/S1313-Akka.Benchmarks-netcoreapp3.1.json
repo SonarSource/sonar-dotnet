@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S1313",
-"message":  "Make sure using this hardcoded IP address '10.62.0.101' is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Actor/AddressBenchmarks.cs#L23",
-"region":  {
-"startLine":  23,
-"startColumn":  56,
-"endLine":  23,
-"endColumn":  69
-}
-}
-},
-{
-"id":  "S1313",
-"message":  "Make sure using this hardcoded IP address '10.62.0.101' is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Actor/AddressBenchmarks.cs#L24",
-"region":  {
-"startLine":  24,
-"startColumn":  56,
-"endLine":  24,
-"endColumn":  69
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1313",
+      "Message": "Make sure using this hardcoded IP address \u002710.62.0.101\u0027 is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Actor/AddressBenchmarks.cs#L23",
+      "Location": "Line 23 Position 56-69"
+    },
+    {
+      "Id": "S1313",
+      "Message": "Make sure using this hardcoded IP address \u002710.62.0.101\u0027 is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Actor/AddressBenchmarks.cs#L24",
+      "Location": "Line 24 Position 56-69"
+    }
+  ]
 }

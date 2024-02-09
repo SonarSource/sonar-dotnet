@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S125",
-"message":  "Remove this commented out code.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L857",
-"region":  {
-"startLine":  857,
-"startColumn":  17,
-"endLine":  857,
-"endColumn":  158
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S125",
+      "Message": "Remove this commented out code.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L857",
+      "Location": "Line 857 Position 17-158"
+    }
+  ]
 }

@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S3052",
-"message":  "Remove this initialization to '_asyncTaskRunning', the compiler will do that for you.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.cs#L89",
-"region":  {
-"startLine":  89,
-"startColumn":  40,
-"endLine":  89,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S3052",
-"message":  "Remove this initialization to '_pendingStashingPersistInvocations', the compiler will do that for you.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.cs#L92",
-"region":  {
-"startLine":  92,
-"startColumn":  57,
-"endLine":  92,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S3052",
-"message":  "Remove this initialization to '_delivered', the compiler will do that for you.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/AsyncWriteJournal.cs#L437",
-"region":  {
-"startLine":  437,
-"startColumn":  37,
-"endLine":  437,
-"endColumn":  41
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_asyncTaskRunning\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.cs#L89",
+      "Location": "Line 89 Position 40-47"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_pendingStashingPersistInvocations\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.cs#L92",
+      "Location": "Line 92 Position 57-61"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_delivered\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/AsyncWriteJournal.cs#L437",
+      "Location": "Line 437 Position 37-41"
+    }
+  ]
 }

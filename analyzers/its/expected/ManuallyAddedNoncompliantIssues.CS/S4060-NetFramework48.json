@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S4060",
-"message":  "Seal this attribute or make it abstract.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/PermissiveCors.cs#L38",
-"region":  {
-"startLine":  38,
-"startColumn":  18,
-"endLine":  38,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S4060",
-"message":  "Seal this attribute or make it abstract.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/PermissiveCors.cs#L56",
-"region":  {
-"startLine":  56,
-"startColumn":  18,
-"endLine":  56,
-"endColumn":  45
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4060",
+      "Message": "Seal this attribute or make it abstract.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/PermissiveCors.cs#L38",
+      "Location": "Line 38 Position 18-41"
+    },
+    {
+      "Id": "S4060",
+      "Message": "Seal this attribute or make it abstract.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework48/PermissiveCors.cs#L56",
+      "Location": "Line 56 Position 18-45"
+    }
+  ]
 }

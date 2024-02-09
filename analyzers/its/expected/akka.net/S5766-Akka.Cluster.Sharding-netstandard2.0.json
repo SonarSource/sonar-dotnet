@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S5766",
-"message":  "Make sure not performing data validation after deserialization is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L93",
-"region":  {
-"startLine":  93,
-"startColumn":  20,
-"endLine":  93,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S5766",
-"message":  "Make sure not performing data validation after deserialization is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L142",
-"region":  {
-"startLine":  142,
-"startColumn":  20,
-"endLine":  142,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S5766",
-"message":  "Make sure not performing data validation after deserialization is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingSettings.cs#L113",
-"region":  {
-"startLine":  113,
-"startColumn":  16,
-"endLine":  113,
-"endColumn":  32
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S5766",
+      "Message": "Make sure not performing data validation after deserialization is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L142",
+      "Location": "Line 142 Position 20-30"
+    },
+    {
+      "Id": "S5766",
+      "Message": "Make sure not performing data validation after deserialization is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L93",
+      "Location": "Line 93 Position 20-25"
+    },
+    {
+      "Id": "S5766",
+      "Message": "Make sure not performing data validation after deserialization is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingSettings.cs#L113",
+      "Location": "Line 113 Position 16-32"
+    }
+  ]
 }

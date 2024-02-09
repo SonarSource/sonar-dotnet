@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S4058",
-"message":  "Change this call to 'name.Contains' to an overload that accepts a 'StringComparison' as a parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfPatterns/Program.cs#L91",
-"region":  {
-"startLine":  91,
-"startColumn":  43,
-"endLine":  91,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S4058",
-"message":  "Change this call to 'c.Name.Contains' to an overload that accepts a 'StringComparison' as a parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfPatterns/Program.cs#L93",
-"region":  {
-"startLine":  93,
-"startColumn":  39,
-"endLine":  93,
-"endColumn":  69
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027name.Contains\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfPatterns/Program.cs#L91",
+      "Location": "Line 91 Position 43-71"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027c.Name.Contains\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfPatterns/Program.cs#L93",
+      "Location": "Line 93 Position 39-69"
+    }
+  ]
 }

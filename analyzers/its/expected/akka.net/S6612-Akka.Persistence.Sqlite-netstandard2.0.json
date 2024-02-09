@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S6612",
-"message":  "Use the lambda parameter instead of capturing the argument 'connectionString'",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/ConnectionContext.cs#L34",
-"region":  {
-"startLine":  34,
-"startColumn":  62,
-"endLine":  34,
-"endColumn":  105
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6612",
+      "Message": "Use the lambda parameter instead of capturing the argument \u0027connectionString\u0027",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/ConnectionContext.cs#L34",
+      "Location": "Line 34 Position 62-105"
+    }
+  ]
 }

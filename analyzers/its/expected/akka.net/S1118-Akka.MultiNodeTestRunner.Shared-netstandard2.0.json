@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1118",
-"message":  "Add a 'protected' constructor or the 'static' keyword to the class declaration.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Persistence/FileNameGenerator.cs#L13",
-"region":  {
-"startLine":  13,
-"startColumn":  18,
-"endLine":  13,
-"endColumn":  35
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1118",
+      "Message": "Add a \u0027protected\u0027 constructor or the \u0027static\u0027 keyword to the class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Persistence/FileNameGenerator.cs#L13",
+      "Location": "Line 13 Position 18-35"
+    }
+  ]
 }

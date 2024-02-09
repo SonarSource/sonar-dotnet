@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2326",
-"message":  "'T' is not used in the class.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/GenericAttributes.cs#L4",
-"region":  {
-"startLine":  4,
-"startColumn":  30,
-"endLine":  4,
-"endColumn":  31
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2326",
+      "Message": "\u0027T\u0027 is not used in the class.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/GenericAttributes.cs#L4",
+      "Location": "Line 4 Position 30-31"
+    }
+  ]
 }

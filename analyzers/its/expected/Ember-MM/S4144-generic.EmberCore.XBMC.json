@@ -1,28 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S4144",
-"message":  "Update this method so that its implementation is not identical to 'rbLinux_CheckedChanged'.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L319",
-"region":  {
-"startLine":  319,
-"startColumn":  17,
-"endLine":  319,
-"endColumn":  41
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L314",
-"region":  {
-"startLine":  314,
-"startColumn":  17,
-"endLine":  314,
-"endColumn":  39
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S4144",
+      "Message": "Update this method so that its implementation is not identical to \u0027rbLinux_CheckedChanged\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L319",
+      "Location": "Line 319 Position 17-41"
+    }
+  ]
 }

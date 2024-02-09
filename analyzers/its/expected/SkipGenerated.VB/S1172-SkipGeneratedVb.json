@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S1172",
-"message":  "Remove this unused procedure parameter 'args'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.VB/NotIgnored.vb#L6",
-"region":  {
-"startLine":  6,
-"startColumn":  35,
-"endLine":  6,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S1172",
-"message":  "Remove this unused procedure parameter 'args'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.VB/Region.vb#L4",
-"region":  {
-"startLine":  4,
-"startColumn":  31,
-"endLine":  4,
-"endColumn":  53
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1172",
+      "Message": "Remove this unused procedure parameter \u0027args\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.VB/NotIgnored.vb#L6",
+      "Location": "Line 6 Position 35-57"
+    },
+    {
+      "Id": "S1172",
+      "Message": "Remove this unused procedure parameter \u0027args\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.VB/Region.vb#L4",
+      "Location": "Line 4 Position 31-53"
+    }
+  ]
 }

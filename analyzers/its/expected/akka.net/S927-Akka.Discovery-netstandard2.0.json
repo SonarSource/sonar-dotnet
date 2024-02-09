@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S927",
-"message":  "Rename parameter 'query' to 'lookup' to match the base class declaration.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Discovery/Aggregate/AggregateServiceDiscovery.cs#L54",
-"region":  {
-"startLine":  54,
-"startColumn":  54,
-"endLine":  54,
-"endColumn":  59
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S927",
+      "Message": "Rename parameter \u0027query\u0027 to \u0027lookup\u0027 to match the base class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Discovery/Aggregate/AggregateServiceDiscovery.cs#L54",
+      "Location": "Line 54 Position 54-59"
+    }
+  ]
 }

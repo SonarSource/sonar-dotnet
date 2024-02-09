@@ -1,82 +1,40 @@
 {
-"issues":  [
-{
-"id":  "S6563",
-"message":  "Use UTC when recording DateTime instants",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L185",
-"region":  {
-"startLine":  185,
-"startColumn":  91,
-"endLine":  185,
-"endColumn":  105
-}
-}
-},
-{
-"id":  "S6563",
-"message":  "Use UTC when recording DateTime instants",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L185",
-"region":  {
-"startLine":  185,
-"startColumn":  145,
-"endLine":  185,
-"endColumn":  159
-}
-}
-},
-{
-"id":  "S6563",
-"message":  "Use UTC when recording DateTime instants",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L31",
-"region":  {
-"startLine":  31,
-"startColumn":  67,
-"endLine":  31,
-"endColumn":  81
-}
-}
-},
-{
-"id":  "S6563",
-"message":  "Use UTC when recording DateTime instants",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L31",
-"region":  {
-"startLine":  31,
-"startColumn":  121,
-"endLine":  31,
-"endColumn":  135
-}
-}
-},
-{
-"id":  "S6563",
-"message":  "Use UTC when recording DateTime instants",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L62",
-"region":  {
-"startLine":  62,
-"startColumn":  91,
-"endLine":  62,
-"endColumn":  105
-}
-}
-},
-{
-"id":  "S6563",
-"message":  "Use UTC when recording DateTime instants",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L62",
-"region":  {
-"startLine":  62,
-"startColumn":  145,
-"endLine":  62,
-"endColumn":  159
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6563",
+      "Message": "Use UTC when recording DateTime instants",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L185",
+      "Location": "Line 185 Position 145-159"
+    },
+    {
+      "Id": "S6563",
+      "Message": "Use UTC when recording DateTime instants",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L185",
+      "Location": "Line 185 Position 91-105"
+    },
+    {
+      "Id": "S6563",
+      "Message": "Use UTC when recording DateTime instants",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L31",
+      "Location": "Line 31 Position 121-135"
+    },
+    {
+      "Id": "S6563",
+      "Message": "Use UTC when recording DateTime instants",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L31",
+      "Location": "Line 31 Position 67-81"
+    },
+    {
+      "Id": "S6563",
+      "Message": "Use UTC when recording DateTime instants",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L62",
+      "Location": "Line 62 Position 145-159"
+    },
+    {
+      "Id": "S6563",
+      "Message": "Use UTC when recording DateTime instants",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L62",
+      "Location": "Line 62 Position 91-105"
+    }
+  ]
 }

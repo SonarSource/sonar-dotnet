@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S1134",
-"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1367",
-"region":  {
-"startLine":  1367,
-"startColumn":  12,
-"endLine":  1367,
-"endColumn":  17
-}
-}
-},
-{
-"id":  "S1134",
-"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1579",
-"region":  {
-"startLine":  1579,
-"startColumn":  20,
-"endLine":  1579,
-"endColumn":  25
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1134",
+      "Message": "Take the required action to fix the issue indicated by this \u0027FIXME\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1367",
+      "Location": "Line 1367 Position 12-17"
+    },
+    {
+      "Id": "S1134",
+      "Message": "Take the required action to fix the issue indicated by this \u0027FIXME\u0027 comment.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1579",
+      "Location": "Line 1579 Position 20-25"
+    }
+  ]
 }

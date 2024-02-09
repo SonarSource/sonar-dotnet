@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S6585",
-"message":  "Do not hardcode the format specifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L550",
-"region":  {
-"startLine":  550,
-"startColumn":  82,
-"endLine":  550,
-"endColumn":  94
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6585",
+      "Message": "Do not hardcode the format specifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L550",
+      "Location": "Line 550 Position 82-94"
+    }
+  ]
 }

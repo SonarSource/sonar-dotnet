@@ -1,56 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S1848",
-"message":  "Either remove this useless object instantiation of class 'XPathDocument' or use it.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework4/XPathDocumentTest.cs#L18",
-"region":  {
-"startLine":  18,
-"startColumn":  13,
-"endLine":  18,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S1848",
-"message":  "Either remove this useless object instantiation of class 'XPathDocument' or use it.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework4/XPathDocumentTest.cs#L24",
-"region":  {
-"startLine":  24,
-"startColumn":  13,
-"endLine":  24,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S1848",
-"message":  "Either remove this useless object instantiation of class 'XPathDocument' or use it.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework4/XPathDocumentTest.cs#L30",
-"region":  {
-"startLine":  30,
-"startColumn":  13,
-"endLine":  30,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S1848",
-"message":  "Either remove this useless object instantiation of class 'XPathDocument' or use it.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework4/XPathDocumentTest.cs#L35",
-"region":  {
-"startLine":  35,
-"startColumn":  13,
-"endLine":  35,
-"endColumn":  41
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1848",
+      "Message": "Either remove this useless object instantiation of class \u0027XPathDocument\u0027 or use it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework4/XPathDocumentTest.cs#L18",
+      "Location": "Line 18 Position 13-41"
+    },
+    {
+      "Id": "S1848",
+      "Message": "Either remove this useless object instantiation of class \u0027XPathDocument\u0027 or use it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework4/XPathDocumentTest.cs#L24",
+      "Location": "Line 24 Position 13-41"
+    },
+    {
+      "Id": "S1848",
+      "Message": "Either remove this useless object instantiation of class \u0027XPathDocument\u0027 or use it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework4/XPathDocumentTest.cs#L30",
+      "Location": "Line 30 Position 13-41"
+    },
+    {
+      "Id": "S1848",
+      "Message": "Either remove this useless object instantiation of class \u0027XPathDocument\u0027 or use it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework4/XPathDocumentTest.cs#L35",
+      "Location": "Line 35 Position 13-41"
+    }
+  ]
 }

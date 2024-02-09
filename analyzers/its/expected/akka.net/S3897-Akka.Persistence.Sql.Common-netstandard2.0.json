@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S3897",
-"message":  "Implement 'IEquatable<EventReplaySuccess>'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L251",
-"region":  {
-"startLine":  251,
-"startColumn":  25,
-"endLine":  251,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S3897",
-"message":  "Implement 'IEquatable<EventReplayFailure>'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L285",
-"region":  {
-"startLine":  285,
-"startColumn":  25,
-"endLine":  285,
-"endColumn":  43
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3897",
+      "Message": "Implement \u0027IEquatable\u003CEventReplaySuccess\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L251",
+      "Location": "Line 251 Position 25-43"
+    },
+    {
+      "Id": "S3897",
+      "Message": "Implement \u0027IEquatable\u003CEventReplayFailure\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L285",
+      "Location": "Line 285 Position 25-43"
+    }
+  ]
 }

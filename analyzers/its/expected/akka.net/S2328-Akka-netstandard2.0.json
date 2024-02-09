@@ -1,61 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S2328",
-"message":  "Refactor 'GetHashCode' to not reference mutable fields.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L332",
-"region":  {
-"startLine":  332,
-"startColumn":  29,
-"endLine":  332,
-"endColumn":  40
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L339",
-"region":  {
-"startLine":  339,
-"startColumn":  48,
-"endLine":  339,
-"endColumn":  58
-}
-}
-]
-},
-{
-"id":  "S2328",
-"message":  "Refactor 'GetHashCode' to not reference mutable fields.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/AppVersion.cs#L266",
-"region":  {
-"startLine":  266,
-"startColumn":  29,
-"endLine":  266,
-"endColumn":  40
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/AppVersion.cs#L270",
-"region":  {
-"startLine":  270,
-"startColumn":  43,
-"endLine":  270,
-"endColumn":  51
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/AppVersion.cs#L274",
-"region":  {
-"startLine":  274,
-"startColumn":  43,
-"endLine":  274,
-"endColumn":  48
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S2328",
+      "Message": "Refactor \u0027GetHashCode\u0027 to not reference mutable fields.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L332",
+      "Location": "Line 332 Position 29-40"
+    },
+    {
+      "Id": "S2328",
+      "Message": "Refactor \u0027GetHashCode\u0027 to not reference mutable fields.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/AppVersion.cs#L266",
+      "Location": "Line 266 Position 29-40"
+    }
+  ]
 }

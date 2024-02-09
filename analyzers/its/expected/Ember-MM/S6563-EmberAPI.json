@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S6563",
-"message":  "Use UTC when recording DateTime instants",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIErrorLog.vb#L60",
-"region":  {
-"startLine":  60,
-"startColumn":  63,
-"endLine":  60,
-"endColumn":  75
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6563",
+      "Message": "Use UTC when recording DateTime instants",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIErrorLog.vb#L60",
+      "Location": "Line 60 Position 63-75"
+    }
+  ]
 }

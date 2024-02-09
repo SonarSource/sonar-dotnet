@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2743",
-"message":  "A static field in a generic type is not shared among instances of different close constructed types.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/MatchExpressionBuilder.cs#L27",
-"region":  {
-"startLine":  27,
-"startColumn":  53,
-"endLine":  27,
-"endColumn":  77
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2743",
+      "Message": "A static field in a generic type is not shared among instances of different close constructed types.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/MatchExpressionBuilder.cs#L27",
+      "Location": "Line 27 Position 53-77"
+    }
+  ]
 }

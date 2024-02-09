@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2445",
-"message":  "Do not lock on writable field 'entitiesLock', use a readonly field instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L62",
-"region":  {
-"startLine":  62,
-"startColumn":  23,
-"endLine":  62,
-"endColumn":  35
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2445",
+      "Message": "Do not lock on writable field \u0027entitiesLock\u0027, use a readonly field instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L62",
+      "Location": "Line 62 Position 23-35"
+    }
+  ]
 }

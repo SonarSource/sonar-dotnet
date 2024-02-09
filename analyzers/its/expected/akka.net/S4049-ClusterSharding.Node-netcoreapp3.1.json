@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S4049",
-"message":  "Consider making method 'GetClusterMembers' a property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Cluster/ClusterSharding/ClusterSharding.Node/AutomaticJoin/DBHelper.cs#L36",
-"region":  {
-"startLine":  36,
-"startColumn":  37,
-"endLine":  36,
-"endColumn":  54
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetClusterMembers\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Cluster/ClusterSharding/ClusterSharding.Node/AutomaticJoin/DBHelper.cs#L36",
+      "Location": "Line 36 Position 37-54"
+    }
+  ]
 }

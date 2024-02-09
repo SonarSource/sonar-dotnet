@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1301",
-"message":  "Replace this 'switch' expression with a ternary conditional operator to increase readability.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/ShouldRichGoToTheDoctor/Program.cs#L10",
-"region":  {
-"startLine":  10,
-"startColumn":  53,
-"endLine":  10,
-"endColumn":  59
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027switch\u0027 expression with a ternary conditional operator to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/ShouldRichGoToTheDoctor/Program.cs#L10",
+      "Location": "Line 10 Position 53-59"
+    }
+  ]
 }

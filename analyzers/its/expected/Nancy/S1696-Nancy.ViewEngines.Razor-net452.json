@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S1696",
-"message":  "Do not catch NullReferenceException; test for null instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/NancyRazorViewBase.cs#L404",
-"region":  {
-"startLine":  404,
-"startColumn":  20,
-"endLine":  404,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S1696",
-"message":  "Do not catch NullReferenceException; test for null instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/NancyRazorViewBase.cs#L419",
-"region":  {
-"startLine":  419,
-"startColumn":  24,
-"endLine":  419,
-"endColumn":  46
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1696",
+      "Message": "Do not catch NullReferenceException; test for null instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/NancyRazorViewBase.cs#L404",
+      "Location": "Line 404 Position 20-42"
+    },
+    {
+      "Id": "S1696",
+      "Message": "Do not catch NullReferenceException; test for null instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/NancyRazorViewBase.cs#L419",
+      "Location": "Line 419 Position 24-46"
+    }
+  ]
 }

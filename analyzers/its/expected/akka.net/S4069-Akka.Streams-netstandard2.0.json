@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S4069",
-"message":  "Implement alternative method 'Add' for the operator '+'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L607",
-"region":  {
-"startLine":  607,
-"startColumn":  41,
-"endLine":  607,
-"endColumn":  42
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4069",
+      "Message": "Implement alternative method \u0027Add\u0027 for the operator \u0027\u002B\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Restart.cs#L607",
+      "Location": "Line 607 Position 41-42"
+    }
+  ]
 }

@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S3235",
-"message":  "Remove these redundant parentheses.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Chat/ChatClient/Program.cs#L37",
-"region":  {
-"startLine":  37,
-"startColumn":  51,
-"endLine":  37,
-"endColumn":  53
-}
-}
-},
-{
-"id":  "S3235",
-"message":  "Remove these redundant parentheses.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Chat/ChatClient/Program.cs#L66",
-"region":  {
-"startLine":  66,
-"startColumn":  55,
-"endLine":  66,
-"endColumn":  57
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3235",
+      "Message": "Remove these redundant parentheses.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Chat/ChatClient/Program.cs#L37",
+      "Location": "Line 37 Position 51-53"
+    },
+    {
+      "Id": "S3235",
+      "Message": "Remove these redundant parentheses.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Chat/ChatClient/Program.cs#L66",
+      "Location": "Line 66 Position 55-57"
+    }
+  ]
 }

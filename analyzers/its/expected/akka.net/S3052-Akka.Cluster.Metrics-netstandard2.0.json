@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3052",
-"message":  "Remove this initialization to '_collectorInstance', the compiler will do that for you.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/ClusterMetricsSupervisor.cs#L24",
-"region":  {
-"startLine":  24,
-"startColumn":  40,
-"endLine":  24,
-"endColumn":  43
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_collectorInstance\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/ClusterMetricsSupervisor.cs#L24",
+      "Location": "Line 24 Position 40-43"
+    }
+  ]
 }

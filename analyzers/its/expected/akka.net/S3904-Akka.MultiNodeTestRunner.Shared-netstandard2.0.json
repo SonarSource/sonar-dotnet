@@ -1,9 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3904",
-"message":  "Provide an 'AssemblyVersion' attribute for assembly 'Akka.MultiNodeTestRunner.Shared'.",
-"location":  null
-}
-]
+  "Issues": [
+    {
+      "Id": "S3904",
+      "Message": "Provide an \u0027AssemblyVersion\u0027 attribute for assembly \u0027Akka.MultiNodeTestRunner.Shared\u0027.",
+      "Uri": null,
+      "Location": null
+    }
+  ]
 }

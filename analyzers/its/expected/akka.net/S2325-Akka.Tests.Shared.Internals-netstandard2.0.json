@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S2325",
-"message":  "Make 'Intercept' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L140",
-"region":  {
-"startLine":  140,
-"startColumn":  21,
-"endLine":  140,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'Intercept' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L145",
-"region":  {
-"startLine":  145,
-"startColumn":  24,
-"endLine":  145,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'InterceptAsync' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L158",
-"region":  {
-"startLine":  158,
-"startColumn":  30,
-"endLine":  158,
-"endColumn":  44
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Intercept\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L140",
+      "Location": "Line 140 Position 21-30"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Intercept\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L145",
+      "Location": "Line 145 Position 24-33"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027InterceptAsync\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L158",
+      "Location": "Line 158 Position 30-44"
+    }
+  ]
 }

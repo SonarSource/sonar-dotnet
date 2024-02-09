@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S2325",
-"message":  "Make 'AwaitConditionNoThrow' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitConditions.cs#L254",
-"region":  {
-"startLine":  254,
-"startColumn":  21,
-"endLine":  254,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'AwaitConditionNoThrowAsync' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitConditions.cs#L272",
-"region":  {
-"startLine":  272,
-"startColumn":  27,
-"endLine":  272,
-"endColumn":  53
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'FormatWrongSenderMessage' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ExpectMsgFrom.cs#L108",
-"region":  {
-"startLine":  108,
-"startColumn":  24,
-"endLine":  108,
-"endColumn":  48
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027AwaitConditionNoThrow\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitConditions.cs#L254",
+      "Location": "Line 254 Position 21-42"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027AwaitConditionNoThrowAsync\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitConditions.cs#L272",
+      "Location": "Line 272 Position 27-53"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027FormatWrongSenderMessage\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ExpectMsgFrom.cs#L108",
+      "Location": "Line 108 Position 24-48"
+    }
+  ]
 }

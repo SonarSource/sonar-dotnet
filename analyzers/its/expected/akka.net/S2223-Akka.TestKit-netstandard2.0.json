@@ -1,56 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S2223",
-"message":  "Change the visibility of 'Instance' or make it 'const' or 'readonly'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/AutoPilots.cs#L60",
-"region":  {
-"startLine":  60,
-"startColumn":  35,
-"endLine":  60,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S2223",
-"message":  "Change the visibility of 'Instance' or make it 'const' or 'readonly'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/AutoPilots.cs#L85",
-"region":  {
-"startLine":  85,
-"startColumn":  35,
-"endLine":  85,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S2223",
-"message":  "Change the visibility of 'Id' or make it 'const' or 'readonly'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/CallingThreadDispatcher.cs#L46",
-"region":  {
-"startLine":  46,
-"startColumn":  30,
-"endLine":  46,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2223",
-"message":  "Change the visibility of 'Instance' or make it 'const' or 'readonly'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/NullMessageEnvelope.cs#L20",
-"region":  {
-"startLine":  20,
-"startColumn":  43,
-"endLine":  20,
-"endColumn":  51
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2223",
+      "Message": "Change the visibility of \u0027Instance\u0027 or make it \u0027const\u0027 or \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/AutoPilots.cs#L60",
+      "Location": "Line 60 Position 35-43"
+    },
+    {
+      "Id": "S2223",
+      "Message": "Change the visibility of \u0027Instance\u0027 or make it \u0027const\u0027 or \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/AutoPilots.cs#L85",
+      "Location": "Line 85 Position 35-43"
+    },
+    {
+      "Id": "S2223",
+      "Message": "Change the visibility of \u0027Id\u0027 or make it \u0027const\u0027 or \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/CallingThreadDispatcher.cs#L46",
+      "Location": "Line 46 Position 30-32"
+    },
+    {
+      "Id": "S2223",
+      "Message": "Change the visibility of \u0027Instance\u0027 or make it \u0027const\u0027 or \u0027readonly\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/NullMessageEnvelope.cs#L20",
+      "Location": "Line 20 Position 43-51"
+    }
+  ]
 }

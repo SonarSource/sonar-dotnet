@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1854",
-"message":  "Remove this useless assignment to local variable 'order'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L68",
-"region":  {
-"startLine":  68,
-"startColumn":  17,
-"endLine":  68,
-"endColumn":  47
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1854",
+      "Message": "Remove this useless assignment to local variable \u0027order\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L68",
+      "Location": "Line 68 Position 17-47"
+    }
+  ]
 }

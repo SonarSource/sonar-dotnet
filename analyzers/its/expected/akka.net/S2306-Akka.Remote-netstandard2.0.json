@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S2306",
-"message":  "Rename 'async' to not use a contextual keyword as an identifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteActorRefProvider.cs#L332",
-"region":  {
-"startLine":  332,
-"startColumn":  184,
-"endLine":  332,
-"endColumn":  189
-}
-}
-},
-{
-"id":  "S2306",
-"message":  "Rename 'async' to not use a contextual keyword as an identifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteActorRefProvider.cs#L457",
-"region":  {
-"startLine":  457,
-"startColumn":  88,
-"endLine":  457,
-"endColumn":  93
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2306",
+      "Message": "Rename \u0027async\u0027 to not use a contextual keyword as an identifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteActorRefProvider.cs#L332",
+      "Location": "Line 332 Position 184-189"
+    },
+    {
+      "Id": "S2306",
+      "Message": "Rename \u0027async\u0027 to not use a contextual keyword as an identifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteActorRefProvider.cs#L457",
+      "Location": "Line 457 Position 88-93"
+    }
+  ]
 }

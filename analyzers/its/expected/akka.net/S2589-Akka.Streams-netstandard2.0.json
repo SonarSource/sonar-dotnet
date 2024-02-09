@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2589",
-"message":  "Change this condition so that it does not always evaluate to 'False'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ResizableMultiReaderRingBuffer.cs#L251",
-"region":  {
-"startLine":  251,
-"startColumn":  51,
-"endLine":  251,
-"endColumn":  63
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2589",
+      "Message": "Change this condition so that it does not always evaluate to \u0027False\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ResizableMultiReaderRingBuffer.cs#L251",
+      "Location": "Line 251 Position 51-63"
+    }
+  ]
 }

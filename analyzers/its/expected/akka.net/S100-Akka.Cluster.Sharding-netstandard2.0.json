@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S100",
-"message":  "Rename local function 'extractEntityId' to match pascal case naming rules, consider using 'ExtractEntityId'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L1035",
-"region":  {
-"startLine":  1035,
-"startColumn":  37,
-"endLine":  1035,
-"endColumn":  52
-}
-}
-},
-{
-"id":  "S100",
-"message":  "Rename local function 'extractEntityId' to match pascal case naming rules, consider using 'ExtractEntityId'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L1062",
-"region":  {
-"startLine":  1062,
-"startColumn":  37,
-"endLine":  1062,
-"endColumn":  52
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S100",
+      "Message": "Rename local function \u0027extractEntityId\u0027 to match pascal case naming rules, consider using \u0027ExtractEntityId\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L1035",
+      "Location": "Line 1035 Position 37-52"
+    },
+    {
+      "Id": "S100",
+      "Message": "Rename local function \u0027extractEntityId\u0027 to match pascal case naming rules, consider using \u0027ExtractEntityId\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L1062",
+      "Location": "Line 1062 Position 37-52"
+    }
+  ]
 }

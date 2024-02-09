@@ -1,108 +1,52 @@
 {
-"issues":  [
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'oldwidth'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditEpisode.vb#L248",
-"region":  {
-"startLine":  248,
-"startColumn":  13,
-"endLine":  248,
-"endColumn":  21
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'oldwidth'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L551",
-"region":  {
-"startLine":  551,
-"startColumn":  17,
-"endLine":  551,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'isFirst'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L1256",
-"region":  {
-"startLine":  1256,
-"startColumn":  29,
-"endLine":  1256,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'isFirst'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditShow.vb#L715",
-"region":  {
-"startLine":  715,
-"startColumn":  29,
-"endLine":  715,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'i'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L282",
-"region":  {
-"startLine":  282,
-"startColumn":  17,
-"endLine":  282,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'didEts'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1224",
-"region":  {
-"startLine":  1224,
-"startColumn":  29,
-"endLine":  1224,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'movie'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2904",
-"region":  {
-"startLine":  2904,
-"startColumn":  21,
-"endLine":  2904,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'tmpShow'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7083",
-"region":  {
-"startLine":  7083,
-"startColumn":  13,
-"endLine":  7083,
-"endColumn":  20
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027oldwidth\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditEpisode.vb#L248",
+      "Location": "Line 248 Position 13-21"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027isFirst\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L1256",
+      "Location": "Line 1256 Position 29-36"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027oldwidth\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L551",
+      "Location": "Line 551 Position 17-25"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027isFirst\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditShow.vb#L715",
+      "Location": "Line 715 Position 29-36"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027i\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L282",
+      "Location": "Line 282 Position 17-18"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027didEts\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1224",
+      "Location": "Line 1224 Position 29-35"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027movie\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2904",
+      "Location": "Line 2904 Position 21-26"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027tmpShow\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7083",
+      "Location": "Line 7083 Position 13-20"
+    }
+  ]
 }

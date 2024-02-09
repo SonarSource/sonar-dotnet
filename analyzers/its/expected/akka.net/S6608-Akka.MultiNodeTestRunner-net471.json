@@ -1,69 +1,34 @@
 {
-"issues":  [
-{
-"id":  "S6608",
-"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Discovery.cs#L52",
-"region":  {
-"startLine":  52,
-"startColumn":  47,
-"endLine":  52,
-"endColumn":  52
-}
-}
-},
-{
-"id":  "S6608",
-"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Discovery.cs#L101",
-"region":  {
-"startLine":  101,
-"startColumn":  61,
-"endLine":  101,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S6608",
-"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Discovery.cs#L131",
-"region":  {
-"startLine":  131,
-"startColumn":  25,
-"endLine":  131,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S6608",
-"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L256",
-"region":  {
-"startLine":  256,
-"startColumn":  51,
-"endLine":  256,
-"endColumn":  56
-}
-}
-},
-{
-"id":  "S6608",
-"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L526",
-"region":  {
-"startLine":  526,
-"startColumn":  30,
-"endLine":  526,
-"endColumn":  35
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6608",
+      "Message": "Indexing at 0 should be used instead of the \u0022Enumerable\u0022 extension method \u0022First\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Discovery.cs#L101",
+      "Location": "Line 101 Position 61-66"
+    },
+    {
+      "Id": "S6608",
+      "Message": "Indexing at 0 should be used instead of the \u0022Enumerable\u0022 extension method \u0022First\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Discovery.cs#L131",
+      "Location": "Line 131 Position 25-30"
+    },
+    {
+      "Id": "S6608",
+      "Message": "Indexing at 0 should be used instead of the \u0022Enumerable\u0022 extension method \u0022First\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Discovery.cs#L52",
+      "Location": "Line 52 Position 47-52"
+    },
+    {
+      "Id": "S6608",
+      "Message": "Indexing at 0 should be used instead of the \u0022Enumerable\u0022 extension method \u0022First\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L256",
+      "Location": "Line 256 Position 51-56"
+    },
+    {
+      "Id": "S6608",
+      "Message": "Indexing at 0 should be used instead of the \u0022Enumerable\u0022 extension method \u0022First\u0022",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L526",
+      "Location": "Line 526 Position 30-35"
+    }
+  ]
 }

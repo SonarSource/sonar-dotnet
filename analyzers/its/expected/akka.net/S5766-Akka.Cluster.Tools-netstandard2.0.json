@@ -1,82 +1,40 @@
 {
-"issues":  [
-{
-"id":  "S5766",
-"message":  "Make sure not performing data validation after deserialization is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedMessages.cs#L140",
-"region":  {
-"startLine":  140,
-"startColumn":  16,
-"endLine":  140,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S5766",
-"message":  "Make sure not performing data validation after deserialization is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedMessages.cs#L214",
-"region":  {
-"startLine":  214,
-"startColumn":  16,
-"endLine":  214,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S5766",
-"message":  "Make sure not performing data validation after deserialization is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedMessages.cs#L583",
-"region":  {
-"startLine":  583,
-"startColumn":  16,
-"endLine":  583,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S5766",
-"message":  "Make sure not performing data validation after deserialization is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/Internal/TopicMessages.cs#L202",
-"region":  {
-"startLine":  202,
-"startColumn":  16,
-"endLine":  202,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S5766",
-"message":  "Make sure not performing data validation after deserialization is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/Internal/TopicMessages.cs#L265",
-"region":  {
-"startLine":  265,
-"startColumn":  16,
-"endLine":  265,
-"endColumn":  21
-}
-}
-},
-{
-"id":  "S5766",
-"message":  "Make sure not performing data validation after deserialization is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManagerSettings.cs#L147",
-"region":  {
-"startLine":  147,
-"startColumn":  16,
-"endLine":  147,
-"endColumn":  47
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S5766",
+      "Message": "Make sure not performing data validation after deserialization is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedMessages.cs#L140",
+      "Location": "Line 140 Position 16-25"
+    },
+    {
+      "Id": "S5766",
+      "Message": "Make sure not performing data validation after deserialization is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedMessages.cs#L214",
+      "Location": "Line 214 Position 16-27"
+    },
+    {
+      "Id": "S5766",
+      "Message": "Make sure not performing data validation after deserialization is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedMessages.cs#L583",
+      "Location": "Line 583 Position 16-29"
+    },
+    {
+      "Id": "S5766",
+      "Message": "Make sure not performing data validation after deserialization is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/Internal/TopicMessages.cs#L202",
+      "Location": "Line 202 Position 16-22"
+    },
+    {
+      "Id": "S5766",
+      "Message": "Make sure not performing data validation after deserialization is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/Internal/TopicMessages.cs#L265",
+      "Location": "Line 265 Position 16-21"
+    },
+    {
+      "Id": "S5766",
+      "Message": "Make sure not performing data validation after deserialization is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManagerSettings.cs#L147",
+      "Location": "Line 147 Position 16-47"
+    }
+  ]
 }

@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1848",
-"message":  "Either remove this useless object instantiation of class 'InitOnlyProperties' or use it.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L11",
-"region":  {
-"startLine":  11,
-"startColumn":  1,
-"endLine":  11,
-"endColumn":  50
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1848",
+      "Message": "Either remove this useless object instantiation of class \u0027InitOnlyProperties\u0027 or use it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L11",
+      "Location": "Line 11 Position 1-50"
+    }
+  ]
 }

@@ -1,95 +1,46 @@
 {
-"issues":  [
-{
-"id":  "S1301",
-"message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L47",
-"region":  {
-"startLine":  47,
-"startColumn":  13,
-"endLine":  47,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S1301",
-"message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L111",
-"region":  {
-"startLine":  111,
-"startColumn":  17,
-"endLine":  111,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S1301",
-"message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L153",
-"region":  {
-"startLine":  153,
-"startColumn":  21,
-"endLine":  153,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S1301",
-"message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L190",
-"region":  {
-"startLine":  190,
-"startColumn":  17,
-"endLine":  190,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S1301",
-"message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L403",
-"region":  {
-"startLine":  403,
-"startColumn":  13,
-"endLine":  403,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S1301",
-"message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L339",
-"region":  {
-"startLine":  339,
-"startColumn":  13,
-"endLine":  339,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S1301",
-"message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1196",
-"region":  {
-"startLine":  1196,
-"startColumn":  9,
-"endLine":  1196,
-"endColumn":  15
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027Select\u0027 statement with \u0027If\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L47",
+      "Location": "Line 47 Position 13-19"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027Select\u0027 statement with \u0027If\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L111",
+      "Location": "Line 111 Position 17-23"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027Select\u0027 statement with \u0027If\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L153",
+      "Location": "Line 153 Position 21-27"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027Select\u0027 statement with \u0027If\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L190",
+      "Location": "Line 190 Position 17-23"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027Select\u0027 statement with \u0027If\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L403",
+      "Location": "Line 403 Position 13-19"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027Select\u0027 statement with \u0027If\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L339",
+      "Location": "Line 339 Position 13-19"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027Select\u0027 statement with \u0027If\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1196",
+      "Location": "Line 1196 Position 9-15"
+    }
+  ]
 }

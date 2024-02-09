@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1123",
-"message":  "Add an explanation.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/AttributesOnLocalFunctions.cs#L11",
-"region":  {
-"startLine":  11,
-"startColumn":  14,
-"endLine":  11,
-"endColumn":  22
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1123",
+      "Message": "Add an explanation.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/AttributesOnLocalFunctions.cs#L11",
+      "Location": "Line 11 Position 14-22"
+    }
+  ]
 }

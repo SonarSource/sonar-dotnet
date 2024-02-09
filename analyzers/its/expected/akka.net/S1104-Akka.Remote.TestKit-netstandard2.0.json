@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1104",
-"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeFact.cs#L20-L29",
-"region":  {
-"startLine":  20,
-"startColumn":  34,
-"endLine":  29,
-"endColumn":  15
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1104",
+      "Message": "Make this field \u0027private\u0027 and encapsulate it in a \u0027public\u0027 property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeFact.cs#L20-L29",
+      "Location": "Lines 20-29 Position 34-15"
+    }
+  ]
 }

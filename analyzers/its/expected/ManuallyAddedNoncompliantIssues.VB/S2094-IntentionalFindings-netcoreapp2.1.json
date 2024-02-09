@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2094",
-"message":  "Remove this empty class, write its code or make it an "interface".",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S2166.vb#L8",
-"region":  {
-"startLine":  8,
-"startColumn":  18,
-"endLine":  8,
-"endColumn":  33
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2094",
+      "Message": "Remove this empty class, write its code or make it an \u0022interface\u0022.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.VB/IntentionalFindings/S2166.vb#L8",
+      "Location": "Line 8 Position 18-33"
+    }
+  ]
 }

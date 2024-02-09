@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2292",
-"message":  "Make this an auto-implemented property and remove its backing field.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Forms/FormsAuthentication.cs#L24",
-"region":  {
-"startLine":  24,
-"startColumn":  30,
-"endLine":  24,
-"endColumn":  59
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2292",
+      "Message": "Make this an auto-implemented property and remove its backing field.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Forms/FormsAuthentication.cs#L24",
+      "Location": "Line 24 Position 30-59"
+    }
+  ]
 }

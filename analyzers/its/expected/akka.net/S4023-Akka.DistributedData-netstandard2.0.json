@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S4023",
-"message":  "Remove this interface or add members to it.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/IReplicatedDataSerialization.cs#L15",
-"region":  {
-"startLine":  15,
-"startColumn":  22,
-"endLine":  15,
-"endColumn":  50
-}
-}
-},
-{
-"id":  "S4023",
-"message":  "Remove this interface or add members to it.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ReplicatedData.cs#L176",
-"region":  {
-"startLine":  176,
-"startColumn":  22,
-"endLine":  176,
-"endColumn":  53
-}
-}
-},
-{
-"id":  "S4023",
-"message":  "Remove this interface or add members to it.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L1019",
-"region":  {
-"startLine":  1019,
-"startColumn":  22,
-"endLine":  1019,
-"endColumn":  40
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4023",
+      "Message": "Remove this interface or add members to it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/IReplicatedDataSerialization.cs#L15",
+      "Location": "Line 15 Position 22-50"
+    },
+    {
+      "Id": "S4023",
+      "Message": "Remove this interface or add members to it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ReplicatedData.cs#L176",
+      "Location": "Line 176 Position 22-53"
+    },
+    {
+      "Id": "S4023",
+      "Message": "Remove this interface or add members to it.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L1019",
+      "Location": "Line 1019 Position 22-40"
+    }
+  ]
 }

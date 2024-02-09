@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S4060",
-"message":  "Seal this attribute or make it abstract.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeFact.cs#L13",
-"region":  {
-"startLine":  13,
-"startColumn":  18,
-"endLine":  13,
-"endColumn":  40
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4060",
+      "Message": "Seal this attribute or make it abstract.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeFact.cs#L13",
+      "Location": "Line 13 Position 18-40"
+    }
+  ]
 }

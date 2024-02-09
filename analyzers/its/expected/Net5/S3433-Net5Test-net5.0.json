@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3433",
-"message":  "Make this test method a public method instead of a local function.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Test/S3433_Mstest.cs#L11",
-"region":  {
-"startLine":  11,
-"startColumn":  18,
-"endLine":  11,
-"endColumn":  28
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3433",
+      "Message": "Make this test method a public method instead of a local function.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Test/S3433_Mstest.cs#L11",
+      "Location": "Line 11 Position 18-28"
+    }
+  ]
 }

@@ -1,238 +1,112 @@
 {
-"issues":  [
-{
-"id":  "S1144",
-"message":  "Remove the unused private class 'FactoryConsumer'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L683",
-"region":  {
-"startLine":  683,
-"startColumn":  23,
-"endLine":  683,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private constructor 'FactoryConsumer'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L687",
-"region":  {
-"startLine":  687,
-"startColumn":  20,
-"endLine":  687,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private field '_stopped'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/RootGuardianSupervisor.cs#L25",
-"region":  {
-"startLine":  25,
-"startColumn":  9,
-"endLine":  25,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private field 'ExecuteRunnableWithState'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L596",
-"region":  {
-"startLine":  596,
-"startColumn":  13,
-"endLine":  596,
-"endColumn":  105
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private field 'CurrentSynchronizationContextExecutorConfig'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Dispatchers.cs#L522-L523",
-"region":  {
-"startLine":  522,
-"startColumn":  9,
-"endLine":  523,
-"endColumn":  84
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private field '_mailboxNonZeroPushTimeoutWarningIssued'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailboxes.cs#L153",
-"region":  {
-"startLine":  153,
-"startColumn":  9,
-"endLine":  153,
-"endColumn":  70
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private property 'HasTimeLeft'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/DeadLetterListener.cs#L240",
-"region":  {
-"startLine":  240,
-"startColumn":  25,
-"endLine":  240,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private property 'TimeLeft'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/DeadLetterListener.cs#L255",
-"region":  {
-"startLine":  255,
-"startColumn":  29,
-"endLine":  255,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private field 'm_padding1'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L567",
-"region":  {
-"startLine":  567,
-"startColumn":  13,
-"endLine":  567,
-"endColumn":  58
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private field 'm_padding2'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L569",
-"region":  {
-"startLine":  569,
-"startColumn":  13,
-"endLine":  569,
-"endColumn":  58
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private property 'TotalBufferSize'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Buffers/DirectBufferPool.cs#L105",
-"region":  {
-"startLine":  105,
-"startColumn":  21,
-"endLine":  105,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private constructor 'UpdatePendingWriteAndThen'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L892",
-"region":  {
-"startLine":  892,
-"startColumn":  20,
-"endLine":  892,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private constructor 'WriteFileFailed'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L903",
-"region":  {
-"startLine":  903,
-"startColumn":  20,
-"endLine":  903,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private field 'acceptLimit'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpListener.cs#L30",
-"region":  {
-"startLine":  30,
-"startColumn":  9,
-"endLine":  30,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private method 'SendAsync'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnection.cs#L245",
-"region":  {
-"startLine":  245,
-"startColumn":  22,
-"endLine":  245,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private field '_objectArrayType'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialActionBuilder.cs#L23",
-"region":  {
-"startLine":  23,
-"startColumn":  9,
-"endLine":  23,
-"endColumn":  74
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private method 'RotateLeft64'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MurmurHash.cs#L155",
-"region":  {
-"startLine":  155,
-"startColumn":  30,
-"endLine":  155,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private field 'paramNameDictionary'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Reflection/ExpressionExtensions.cs#L36-L38",
-"region":  {
-"startLine":  36,
-"startColumn":  9,
-"endLine":  38,
-"endColumn":  71
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private class \u0027FactoryConsumer\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L683",
+      "Location": "Line 683 Position 23-38"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private constructor \u0027FactoryConsumer\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L687",
+      "Location": "Line 687 Position 20-35"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private field \u0027_stopped\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/RootGuardianSupervisor.cs#L25",
+      "Location": "Line 25 Position 9-62"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private field \u0027ExecuteRunnableWithState\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L596",
+      "Location": "Line 596 Position 13-105"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private field \u0027CurrentSynchronizationContextExecutorConfig\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Dispatchers.cs#L522-L523",
+      "Location": "Lines 522-523 Position 9-84"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private field \u0027_mailboxNonZeroPushTimeoutWarningIssued\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailboxes.cs#L153",
+      "Location": "Line 153 Position 9-70"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private property \u0027HasTimeLeft\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/DeadLetterListener.cs#L240",
+      "Location": "Line 240 Position 25-36"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private property \u0027TimeLeft\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/DeadLetterListener.cs#L255",
+      "Location": "Line 255 Position 29-37"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private field \u0027m_padding1\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L567",
+      "Location": "Line 567 Position 13-58"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private field \u0027m_padding2\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L569",
+      "Location": "Line 569 Position 13-58"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private property \u0027TotalBufferSize\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Buffers/DirectBufferPool.cs#L105",
+      "Location": "Line 105 Position 21-36"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private constructor \u0027UpdatePendingWriteAndThen\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L892",
+      "Location": "Line 892 Position 20-45"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private constructor \u0027WriteFileFailed\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L903",
+      "Location": "Line 903 Position 20-35"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private field \u0027acceptLimit\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpListener.cs#L30",
+      "Location": "Line 30 Position 9-33"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private method \u0027SendAsync\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnection.cs#L245",
+      "Location": "Line 245 Position 22-31"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private field \u0027_objectArrayType\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialActionBuilder.cs#L23",
+      "Location": "Line 23 Position 9-74"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private method \u0027RotateLeft64\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MurmurHash.cs#L155",
+      "Location": "Line 155 Position 30-42"
+    },
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private field \u0027paramNameDictionary\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Reflection/ExpressionExtensions.cs#L36-L38",
+      "Location": "Lines 36-38 Position 9-71"
+    }
+  ]
 }

@@ -1,69 +1,34 @@
 {
-"issues":  [
-{
-"id":  "S3353",
-"message":  "Add the 'const' modifier to 'numGroup'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L229",
-"region":  {
-"startLine":  229,
-"startColumn":  17,
-"endLine":  229,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S3353",
-"message":  "Add the 'const' modifier to 'numGroup'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L237",
-"region":  {
-"startLine":  237,
-"startColumn":  17,
-"endLine":  237,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S3353",
-"message":  "Add the 'const' modifier to 'numGroup'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L245",
-"region":  {
-"startLine":  245,
-"startColumn":  17,
-"endLine":  245,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S3353",
-"message":  "Add the 'const' modifier to 'numGroup'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L253",
-"region":  {
-"startLine":  253,
-"startColumn":  17,
-"endLine":  253,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S3353",
-"message":  "Add the 'const' modifier to 'numGroup'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L261",
-"region":  {
-"startLine":  261,
-"startColumn":  17,
-"endLine":  261,
-"endColumn":  25
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3353",
+      "Message": "Add the \u0027const\u0027 modifier to \u0027numGroup\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L229",
+      "Location": "Line 229 Position 17-25"
+    },
+    {
+      "Id": "S3353",
+      "Message": "Add the \u0027const\u0027 modifier to \u0027numGroup\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L237",
+      "Location": "Line 237 Position 17-25"
+    },
+    {
+      "Id": "S3353",
+      "Message": "Add the \u0027const\u0027 modifier to \u0027numGroup\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L245",
+      "Location": "Line 245 Position 17-25"
+    },
+    {
+      "Id": "S3353",
+      "Message": "Add the \u0027const\u0027 modifier to \u0027numGroup\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L253",
+      "Location": "Line 253 Position 17-25"
+    },
+    {
+      "Id": "S3353",
+      "Message": "Add the \u0027const\u0027 modifier to \u0027numGroup\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L261",
+      "Location": "Line 261 Position 17-25"
+    }
+  ]
 }

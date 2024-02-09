@@ -1,134 +1,64 @@
 {
-"issues":  [
-{
-"id":  "S4017",
-"message":  "Refactor this method to remove the nested type argument.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/DDataShardCoordinator.cs#L117",
-"region":  {
-"startLine":  117,
-"startColumn":  41,
-"endLine":  117,
-"endColumn":  94
-}
-}
-},
-{
-"id":  "S4017",
-"message":  "Refactor this method to remove the nested type argument.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/DDataShardCoordinator.cs#L217",
-"region":  {
-"startLine":  217,
-"startColumn":  96,
-"endLine":  217,
-"endColumn":  149
-}
-}
-},
-{
-"id":  "S4017",
-"message":  "Refactor this method to remove the nested type argument.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Internal/AbstractLeastShardAllocationStrategy.cs#L86",
-"region":  {
-"startLine":  86,
-"startColumn":  89,
-"endLine":  86,
-"endColumn":  168
-}
-}
-},
-{
-"id":  "S4017",
-"message":  "Refactor this method to remove the nested type argument.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Internal/AbstractLeastShardAllocationStrategy.cs#L128",
-"region":  {
-"startLine":  128,
-"startColumn":  63,
-"endLine":  128,
-"endColumn":  142
-}
-}
-},
-{
-"id":  "S4017",
-"message":  "Refactor this method to remove the nested type argument.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Internal/AbstractLeastShardAllocationStrategy.cs#L145",
-"region":  {
-"startLine":  145,
-"startColumn":  63,
-"endLine":  145,
-"endColumn":  142
-}
-}
-},
-{
-"id":  "S4017",
-"message":  "Refactor this method to remove the nested type argument.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Internal/LeastShardAllocationStrategy.cs#L60",
-"region":  {
-"startLine":  60,
-"startColumn":  64,
-"endLine":  60,
-"endColumn":  144
-}
-}
-},
-{
-"id":  "S4017",
-"message":  "Refactor this method to remove the nested type argument.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L192",
-"region":  {
-"startLine":  192,
-"startColumn":  17,
-"endLine":  192,
-"endColumn":  88
-}
-}
-},
-{
-"id":  "S4017",
-"message":  "Refactor this method to remove the nested type argument.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardAllocationStrategy.cs#L40",
-"region":  {
-"startLine":  40,
-"startColumn":  77,
-"endLine":  40,
-"endColumn":  157
-}
-}
-},
-{
-"id":  "S4017",
-"message":  "Refactor this method to remove the nested type argument.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardAllocationStrategy.cs#L52",
-"region":  {
-"startLine":  52,
-"startColumn":  48,
-"endLine":  52,
-"endColumn":  128
-}
-}
-},
-{
-"id":  "S4017",
-"message":  "Refactor this method to remove the nested type argument.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardAllocationStrategy.cs#L165",
-"region":  {
-"startLine":  165,
-"startColumn":  64,
-"endLine":  165,
-"endColumn":  144
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4017",
+      "Message": "Refactor this method to remove the nested type argument.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/DDataShardCoordinator.cs#L117",
+      "Location": "Line 117 Position 41-94"
+    },
+    {
+      "Id": "S4017",
+      "Message": "Refactor this method to remove the nested type argument.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/DDataShardCoordinator.cs#L217",
+      "Location": "Line 217 Position 96-149"
+    },
+    {
+      "Id": "S4017",
+      "Message": "Refactor this method to remove the nested type argument.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Internal/AbstractLeastShardAllocationStrategy.cs#L128",
+      "Location": "Line 128 Position 63-142"
+    },
+    {
+      "Id": "S4017",
+      "Message": "Refactor this method to remove the nested type argument.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Internal/AbstractLeastShardAllocationStrategy.cs#L145",
+      "Location": "Line 145 Position 63-142"
+    },
+    {
+      "Id": "S4017",
+      "Message": "Refactor this method to remove the nested type argument.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Internal/AbstractLeastShardAllocationStrategy.cs#L86",
+      "Location": "Line 86 Position 89-168"
+    },
+    {
+      "Id": "S4017",
+      "Message": "Refactor this method to remove the nested type argument.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Internal/LeastShardAllocationStrategy.cs#L60",
+      "Location": "Line 60 Position 64-144"
+    },
+    {
+      "Id": "S4017",
+      "Message": "Refactor this method to remove the nested type argument.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L192",
+      "Location": "Line 192 Position 17-88"
+    },
+    {
+      "Id": "S4017",
+      "Message": "Refactor this method to remove the nested type argument.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardAllocationStrategy.cs#L165",
+      "Location": "Line 165 Position 64-144"
+    },
+    {
+      "Id": "S4017",
+      "Message": "Refactor this method to remove the nested type argument.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardAllocationStrategy.cs#L40",
+      "Location": "Line 40 Position 77-157"
+    },
+    {
+      "Id": "S4017",
+      "Message": "Refactor this method to remove the nested type argument.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardAllocationStrategy.cs#L52",
+      "Location": "Line 52 Position 48-128"
+    }
+  ]
 }

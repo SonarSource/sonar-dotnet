@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/AkkaSerializationSpec.cs#L41",
-"region":  {
-"startLine":  41,
-"startColumn":  27,
-"endLine":  41,
-"endColumn":  48
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1694",
+      "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/AkkaSerializationSpec.cs#L41",
+      "Location": "Line 41 Position 27-48"
+    }
+  ]
 }

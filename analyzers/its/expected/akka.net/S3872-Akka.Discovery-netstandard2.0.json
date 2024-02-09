@@ -1,52 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S3872",
-"message":  "Rename the parameter 'lookup' so that it does not duplicate the method name.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Discovery/Config/ConfigServiceDiscovery.cs#L53",
-"region":  {
-"startLine":  53,
-"startColumn":  54,
-"endLine":  53,
-"endColumn":  60
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Discovery/Config/ConfigServiceDiscovery.cs#L53",
-"region":  {
-"startLine":  53,
-"startColumn":  40,
-"endLine":  53,
-"endColumn":  46
-}
-}
-]
-},
-{
-"id":  "S3872",
-"message":  "Rename the parameter 'lookup' so that it does not duplicate the method name.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Discovery/ServiceDiscovery.cs#L118",
-"region":  {
-"startLine":  118,
-"startColumn":  54,
-"endLine":  118,
-"endColumn":  60
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Discovery/ServiceDiscovery.cs#L118",
-"region":  {
-"startLine":  118,
-"startColumn":  40,
-"endLine":  118,
-"endColumn":  46
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S3872",
+      "Message": "Rename the parameter \u0027lookup\u0027 so that it does not duplicate the method name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Discovery/Config/ConfigServiceDiscovery.cs#L53",
+      "Location": "Line 53 Position 54-60"
+    },
+    {
+      "Id": "S3872",
+      "Message": "Rename the parameter \u0027lookup\u0027 so that it does not duplicate the method name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Discovery/ServiceDiscovery.cs#L118",
+      "Location": "Line 118 Position 54-60"
+    }
+  ]
 }

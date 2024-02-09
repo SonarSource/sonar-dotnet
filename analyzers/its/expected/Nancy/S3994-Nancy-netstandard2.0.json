@@ -1,69 +1,34 @@
 {
-"issues":  [
-{
-"id":  "S3994",
-"message":  "Either change this parameter type to 'System.Uri' or provide an overload which takes a 'System.Uri' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/ContextExtensions.cs#L148",
-"region":  {
-"startLine":  148,
-"startColumn":  66,
-"endLine":  148,
-"endColumn":  72
-}
-}
-},
-{
-"id":  "S3994",
-"message":  "Either change this parameter type to 'System.Uri' or provide an overload which takes a 'System.Uri' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLink.cs#L26",
-"region":  {
-"startLine":  26,
-"startColumn":  25,
-"endLine":  26,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S3994",
-"message":  "Either change this parameter type to 'System.Uri' or provide an overload which takes a 'System.Uri' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLink.cs#L38",
-"region":  {
-"startLine":  38,
-"startColumn":  25,
-"endLine":  38,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S3994",
-"message":  "Either change this parameter type to 'System.Uri' or provide an overload which takes a 'System.Uri' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLink.cs#L270",
-"region":  {
-"startLine":  270,
-"startColumn":  37,
-"endLine":  270,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S3994",
-"message":  "Either change this parameter type to 'System.Uri' or provide an overload which takes a 'System.Uri' parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Url.cs#L37",
-"region":  {
-"startLine":  37,
-"startColumn":  20,
-"endLine":  37,
-"endColumn":  26
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3994",
+      "Message": "Either change this parameter type to \u0027System.Uri\u0027 or provide an overload which takes a \u0027System.Uri\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/ContextExtensions.cs#L148",
+      "Location": "Line 148 Position 66-72"
+    },
+    {
+      "Id": "S3994",
+      "Message": "Either change this parameter type to \u0027System.Uri\u0027 or provide an overload which takes a \u0027System.Uri\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLink.cs#L26",
+      "Location": "Line 26 Position 25-31"
+    },
+    {
+      "Id": "S3994",
+      "Message": "Either change this parameter type to \u0027System.Uri\u0027 or provide an overload which takes a \u0027System.Uri\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLink.cs#L270",
+      "Location": "Line 270 Position 37-43"
+    },
+    {
+      "Id": "S3994",
+      "Message": "Either change this parameter type to \u0027System.Uri\u0027 or provide an overload which takes a \u0027System.Uri\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLink.cs#L38",
+      "Location": "Line 38 Position 25-31"
+    },
+    {
+      "Id": "S3994",
+      "Message": "Either change this parameter type to \u0027System.Uri\u0027 or provide an overload which takes a \u0027System.Uri\u0027 parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Url.cs#L37",
+      "Location": "Line 37 Position 20-26"
+    }
+  ]
 }

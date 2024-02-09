@@ -1,69 +1,34 @@
 {
-"issues":  [
-{
-"id":  "S4058",
-"message":  "Change this call to 'requestedPath.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Embedded/Conventions/EmbeddedStaticContentConventionBuilder.cs#L32",
-"region":  {
-"startLine":  32,
-"startColumn":  18,
-"endLine":  32,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S4058",
-"message":  "Change this call to 'contentPath.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Embedded/Conventions/EmbeddedStaticContentConventionBuilder.cs#L136",
-"region":  {
-"startLine":  136,
-"startColumn":  18,
-"endLine":  136,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S4058",
-"message":  "Change this call to 'requestedPath.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Embedded/Conventions/EmbeddedStaticContentConventionBuilder.cs#L138",
-"region":  {
-"startLine":  138,
-"startColumn":  17,
-"endLine":  138,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S4058",
-"message":  "Change this call to 'contentPath.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Embedded/Conventions/EmbeddedStaticContentConventionBuilder.cs#L154",
-"region":  {
-"startLine":  154,
-"startColumn":  18,
-"endLine":  154,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S4058",
-"message":  "Change this call to 'pathWithoutFileName.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Embedded/Conventions/EmbeddedStaticContentConventionBuilder.cs#L167",
-"region":  {
-"startLine":  167,
-"startColumn":  21,
-"endLine":  167,
-"endColumn":  52
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027contentPath.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Embedded/Conventions/EmbeddedStaticContentConventionBuilder.cs#L136",
+      "Location": "Line 136 Position 18-41"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027requestedPath.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Embedded/Conventions/EmbeddedStaticContentConventionBuilder.cs#L138",
+      "Location": "Line 138 Position 17-42"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027contentPath.StartsWith\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Embedded/Conventions/EmbeddedStaticContentConventionBuilder.cs#L154",
+      "Location": "Line 154 Position 18-45"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027pathWithoutFileName.Equals\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Embedded/Conventions/EmbeddedStaticContentConventionBuilder.cs#L167",
+      "Location": "Line 167 Position 21-52"
+    },
+    {
+      "Id": "S4058",
+      "Message": "Change this call to \u0027requestedPath.StartsWith\u0027 to an overload that accepts a \u0027StringComparison\u0027 as a parameter.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Embedded/Conventions/EmbeddedStaticContentConventionBuilder.cs#L32",
+      "Location": "Line 32 Position 18-47"
+    }
+  ]
 }

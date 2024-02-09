@@ -1,147 +1,70 @@
 {
-"issues":  [
-{
-"id":  "S3240",
-"message":  "Use the '?:' operator here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DeltaPropagationSelector.cs#L154",
-"region":  {
-"startLine":  154,
-"startColumn":  13,
-"endLine":  154,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S3240",
-"message":  "Use the '?:' operator here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L475",
-"region":  {
-"startLine":  475,
-"startColumn":  17,
-"endLine":  475,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S3240",
-"message":  "Use the '?:' operator here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/LWWDictionary.cs#L351",
-"region":  {
-"startLine":  351,
-"startColumn":  17,
-"endLine":  351,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S3240",
-"message":  "Use the '?:' operator here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L852",
-"region":  {
-"startLine":  852,
-"startColumn":  33,
-"endLine":  852,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S3240",
-"message":  "Use the '?:' operator here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L878",
-"region":  {
-"startLine":  878,
-"startColumn":  13,
-"endLine":  878,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S3240",
-"message":  "Use the '?:' operator here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORMultiValueDictionary.cs#L230",
-"region":  {
-"startLine":  230,
-"startColumn":  17,
-"endLine":  230,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S3240",
-"message":  "Use the '?:' operator here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORMultiValueDictionary.cs#L318",
-"region":  {
-"startLine":  318,
-"startColumn":  17,
-"endLine":  318,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S3240",
-"message":  "Use the '?:' operator here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORMultiValueDictionary.cs#L382",
-"region":  {
-"startLine":  382,
-"startColumn":  13,
-"endLine":  382,
-"endColumn":  15
-}
-}
-},
-{
-"id":  "S3240",
-"message":  "Use the '?:' operator here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/PNCounterDictionary.cs#L224",
-"region":  {
-"startLine":  224,
-"startColumn":  17,
-"endLine":  224,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S3240",
-"message":  "Use the '??' operator here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/SerializationSupport.cs#L47",
-"region":  {
-"startLine":  47,
-"startColumn":  17,
-"endLine":  47,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S3240",
-"message":  "Use the '??' operator here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/SerializationSupport.cs#L62",
-"region":  {
-"startLine":  62,
-"startColumn":  17,
-"endLine":  62,
-"endColumn":  19
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DeltaPropagationSelector.cs#L154",
+      "Location": "Line 154 Position 13-15"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L475",
+      "Location": "Line 475 Position 17-19"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/LWWDictionary.cs#L351",
+      "Location": "Line 351 Position 17-19"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L852",
+      "Location": "Line 852 Position 33-35"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L878",
+      "Location": "Line 878 Position 13-15"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORMultiValueDictionary.cs#L230",
+      "Location": "Line 230 Position 17-19"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORMultiValueDictionary.cs#L318",
+      "Location": "Line 318 Position 17-19"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORMultiValueDictionary.cs#L382",
+      "Location": "Line 382 Position 13-15"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027?:\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/PNCounterDictionary.cs#L224",
+      "Location": "Line 224 Position 17-19"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027??\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/SerializationSupport.cs#L47",
+      "Location": "Line 47 Position 17-19"
+    },
+    {
+      "Id": "S3240",
+      "Message": "Use the \u0027??\u0027 operator here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/SerializationSupport.cs#L62",
+      "Location": "Line 62 Position 17-19"
+    }
+  ]
 }

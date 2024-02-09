@@ -1,124 +1,34 @@
 {
-"issues":  [
-{
-"id":  "S4144",
-"message":  "Update this method so that its implementation is not identical to 'chkNoDisplayFanart_CheckedChanged'.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1486",
-"region":  {
-"startLine":  1486,
-"startColumn":  17,
-"endLine":  1486,
-"endColumn":  50
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1476",
-"region":  {
-"startLine":  1476,
-"startColumn":  17,
-"endLine":  1476,
-"endColumn":  50
-}
-}
-]
-},
-{
-"id":  "S4144",
-"message":  "Update this method so that its implementation is not identical to 'chkEpProperCase_CheckedChanged'.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1599",
-"region":  {
-"startLine":  1599,
-"startColumn":  17,
-"endLine":  1599,
-"endColumn":  45
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1249",
-"region":  {
-"startLine":  1249,
-"startColumn":  17,
-"endLine":  1249,
-"endColumn":  47
-}
-}
-]
-},
-{
-"id":  "S4144",
-"message":  "Update this method so that its implementation is not identical to 'chkEpProperCase_CheckedChanged'.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1952",
-"region":  {
-"startLine":  1952,
-"startColumn":  17,
-"endLine":  1952,
-"endColumn":  49
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1249",
-"region":  {
-"startLine":  1249,
-"startColumn":  17,
-"endLine":  1249,
-"endColumn":  47
-}
-}
-]
-},
-{
-"id":  "S4144",
-"message":  "Update this method so that its implementation is not identical to 'chkVideoTSParent_CheckedChanged'.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4550",
-"region":  {
-"startLine":  4550,
-"startColumn":  17,
-"endLine":  4550,
-"endColumn":  44
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2062",
-"region":  {
-"startLine":  2062,
-"startColumn":  17,
-"endLine":  2062,
-"endColumn":  48
-}
-}
-]
-},
-{
-"id":  "S4144",
-"message":  "Update this method so that its implementation is not identical to 'chkVideoTSParent_CheckedChanged'.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4559",
-"region":  {
-"startLine":  4559,
-"startColumn":  17,
-"endLine":  4559,
-"endColumn":  46
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2062",
-"region":  {
-"startLine":  2062,
-"startColumn":  17,
-"endLine":  2062,
-"endColumn":  48
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S4144",
+      "Message": "Update this method so that its implementation is not identical to \u0027chkNoDisplayFanart_CheckedChanged\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1486",
+      "Location": "Line 1486 Position 17-50"
+    },
+    {
+      "Id": "S4144",
+      "Message": "Update this method so that its implementation is not identical to \u0027chkEpProperCase_CheckedChanged\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1599",
+      "Location": "Line 1599 Position 17-45"
+    },
+    {
+      "Id": "S4144",
+      "Message": "Update this method so that its implementation is not identical to \u0027chkEpProperCase_CheckedChanged\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1952",
+      "Location": "Line 1952 Position 17-49"
+    },
+    {
+      "Id": "S4144",
+      "Message": "Update this method so that its implementation is not identical to \u0027chkVideoTSParent_CheckedChanged\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4550",
+      "Location": "Line 4550 Position 17-44"
+    },
+    {
+      "Id": "S4144",
+      "Message": "Update this method so that its implementation is not identical to \u0027chkVideoTSParent_CheckedChanged\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4559",
+      "Location": "Line 4559 Position 17-46"
+    }
+  ]
 }

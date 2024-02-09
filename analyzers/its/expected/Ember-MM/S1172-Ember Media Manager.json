@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S1172",
-"message":  "Remove this unused procedure parameter 'Language'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2994",
-"region":  {
-"startLine":  2994,
-"startColumn":  36,
-"endLine":  2994,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S1172",
-"message":  "Remove this unused procedure parameter 'iIndex'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4312",
-"region":  {
-"startLine":  4312,
-"startColumn":  26,
-"endLine":  4312,
-"endColumn":  49
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1172",
+      "Message": "Remove this unused procedure parameter \u0027Language\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2994",
+      "Location": "Line 2994 Position 36-60"
+    },
+    {
+      "Id": "S1172",
+      "Message": "Remove this unused procedure parameter \u0027iIndex\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4312",
+      "Location": "Line 4312 Position 26-49"
+    }
+  ]
 }

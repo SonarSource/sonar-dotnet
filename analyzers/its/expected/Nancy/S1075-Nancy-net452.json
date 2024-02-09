@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1075",
-"message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLinkRelation.cs#L15",
-"region":  {
-"startLine":  15,
-"startColumn":  69,
-"endLine":  15,
-"endColumn":  112
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1075",
+      "Message": "Refactor your code not to use hardcoded absolute paths or URIs.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLinkRelation.cs#L15",
+      "Location": "Line 15 Position 69-112"
+    }
+  ]
 }

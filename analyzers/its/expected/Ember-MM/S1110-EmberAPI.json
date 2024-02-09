@@ -1,28 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1110",
-"message":  "Remove these redundant parentheses.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L322",
-"region":  {
-"startLine":  322,
-"startColumn":  21,
-"endLine":  322,
-"endColumn":  22
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L325",
-"region":  {
-"startLine":  325,
-"startColumn":  130,
-"endLine":  325,
-"endColumn":  131
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S1110",
+      "Message": "Remove these redundant parentheses.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L322",
+      "Location": "Line 322 Position 21-22"
+    }
+  ]
 }

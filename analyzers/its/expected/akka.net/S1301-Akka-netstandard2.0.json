@@ -1,56 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S1301",
-"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.Children.cs#L215",
-"region":  {
-"startLine":  215,
-"startColumn":  21,
-"endLine":  215,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S1301",
-"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L716",
-"region":  {
-"startLine":  716,
-"startColumn":  17,
-"endLine":  716,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S1301",
-"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/ActorTaskScheduler.cs#L168",
-"region":  {
-"startLine":  168,
-"startColumn":  13,
-"endLine":  168,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S1301",
-"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/WildcardIndex.cs#L38",
-"region":  {
-"startLine":  38,
-"startColumn":  13,
-"endLine":  38,
-"endColumn":  19
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027switch\u0027 statement with \u0027if\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.Children.cs#L215",
+      "Location": "Line 215 Position 21-27"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027switch\u0027 statement with \u0027if\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L716",
+      "Location": "Line 716 Position 17-23"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027switch\u0027 statement with \u0027if\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/ActorTaskScheduler.cs#L168",
+      "Location": "Line 168 Position 13-19"
+    },
+    {
+      "Id": "S1301",
+      "Message": "Replace this \u0027switch\u0027 statement with \u0027if\u0027 statements to increase readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/WildcardIndex.cs#L38",
+      "Location": "Line 38 Position 13-19"
+    }
+  ]
 }

@@ -1,82 +1,40 @@
 {
-"issues":  [
-{
-"id":  "S1659",
-"message":  "Declare 'CurrentY' in a separate statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L279",
-"region":  {
-"startLine":  279,
-"startColumn":  33,
-"endLine":  279,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S1659",
-"message":  "Declare 'FontMod' in a separate statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L279",
-"region":  {
-"startLine":  279,
-"startColumn":  53,
-"endLine":  279,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S1659",
-"message":  "Declare 'i' in a separate statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L138",
-"region":  {
-"startLine":  138,
-"startColumn":  33,
-"endLine":  138,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S1659",
-"message":  "Declare 'j' in a separate statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L169",
-"region":  {
-"startLine":  169,
-"startColumn":  25,
-"endLine":  169,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S1659",
-"message":  "Declare 'TabC' in a separate statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L169",
-"region":  {
-"startLine":  169,
-"startColumn":  39,
-"endLine":  169,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S1659",
-"message":  "Declare 'colN' in a separate statement.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L272",
-"region":  {
-"startLine":  272,
-"startColumn":  19,
-"endLine":  272,
-"endColumn":  23
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1659",
+      "Message": "Declare \u0027CurrentY\u0027 in a separate statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L279",
+      "Location": "Line 279 Position 33-41"
+    },
+    {
+      "Id": "S1659",
+      "Message": "Declare \u0027FontMod\u0027 in a separate statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L279",
+      "Location": "Line 279 Position 53-60"
+    },
+    {
+      "Id": "S1659",
+      "Message": "Declare \u0027i\u0027 in a separate statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L138",
+      "Location": "Line 138 Position 33-34"
+    },
+    {
+      "Id": "S1659",
+      "Message": "Declare \u0027j\u0027 in a separate statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L169",
+      "Location": "Line 169 Position 25-26"
+    },
+    {
+      "Id": "S1659",
+      "Message": "Declare \u0027TabC\u0027 in a separate statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L169",
+      "Location": "Line 169 Position 39-43"
+    },
+    {
+      "Id": "S1659",
+      "Message": "Declare \u0027colN\u0027 in a separate statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L272",
+      "Location": "Line 272 Position 19-23"
+    }
+  ]
 }

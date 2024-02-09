@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S6618",
-"message":  "Use "string.Create" instead of "FormattableString".",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UseStringCreate.cs#L6",
-"region":  {
-"startLine":  6,
-"startColumn":  31,
-"endLine":  6,
-"endColumn":  45
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6618",
+      "Message": "Use \u0022string.Create\u0022 instead of \u0022FormattableString\u0022.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UseStringCreate.cs#L6",
+      "Location": "Line 6 Position 31-45"
+    }
+  ]
 }

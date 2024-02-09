@@ -1,56 +1,28 @@
 {
-"issues":  [
-{
-"id":  "S2357",
-"message":  "Make 'XComs' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L6",
-"region":  {
-"startLine":  6,
-"startColumn":  12,
-"endLine":  6,
-"endColumn":  17
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'hostid' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L7",
-"region":  {
-"startLine":  7,
-"startColumn":  12,
-"endLine":  7,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'XComs' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/frmSettingsHolder.vb#L27",
-"region":  {
-"startLine":  27,
-"startColumn":  12,
-"endLine":  27,
-"endColumn":  17
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'XComs' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L575",
-"region":  {
-"startLine":  575,
-"startColumn":  16,
-"endLine":  575,
-"endColumn":  21
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027XComs\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L6",
+      "Location": "Line 6 Position 12-17"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027hostid\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L7",
+      "Location": "Line 7 Position 12-18"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027XComs\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/frmSettingsHolder.vb#L27",
+      "Location": "Line 27 Position 12-17"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027XComs\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L575",
+      "Location": "Line 575 Position 16-21"
+    }
+  ]
 }

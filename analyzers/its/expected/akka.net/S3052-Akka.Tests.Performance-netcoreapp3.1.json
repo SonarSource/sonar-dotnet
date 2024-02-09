@@ -1,108 +1,52 @@
 {
-"issues":  [
-{
-"id":  "S3052",
-"message":  "Remove this initialization to '_currentMessages', the compiler will do that for you.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorSelectionSpecs.cs#L38",
-"region":  {
-"startLine":  38,
-"startColumn":  43,
-"endLine":  38,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S3052",
-"message":  "Remove this initialization to '_currentMessages', the compiler will do that for you.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L26",
-"region":  {
-"startLine":  26,
-"startColumn":  43,
-"endLine":  26,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S3052",
-"message":  "Remove this initialization to '_currentMessages', the compiler will do that for you.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L71",
-"region":  {
-"startLine":  71,
-"startColumn":  43,
-"endLine":  71,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S3052",
-"message":  "Remove this initialization to '_currentMessages', the compiler will do that for you.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L126",
-"region":  {
-"startLine":  126,
-"startColumn":  43,
-"endLine":  126,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S3052",
-"message":  "Remove this initialization to '_currentMessages', the compiler will do that for you.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L160",
-"region":  {
-"startLine":  160,
-"startColumn":  43,
-"endLine":  160,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S3052",
-"message":  "Remove this initialization to 'nameCounter', the compiler will do that for you.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/Internal/ChildrenContainerSpec.cs#L28",
-"region":  {
-"startLine":  28,
-"startColumn":  33,
-"endLine":  28,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S3052",
-"message":  "Remove this initialization to '_messagesSeen', the compiler will do that for you.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Dispatch/DispatcherThroughputSpecBase.cs#L35",
-"region":  {
-"startLine":  35,
-"startColumn":  36,
-"endLine":  35,
-"endColumn":  40
-}
-}
-},
-{
-"id":  "S3052",
-"message":  "Remove this initialization to 'i', the compiler will do that for you.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/IO/TcpInboundOnlySpec.cs#L40",
-"region":  {
-"startLine":  40,
-"startColumn":  27,
-"endLine":  40,
-"endColumn":  30
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_currentMessages\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorSelectionSpecs.cs#L38",
+      "Location": "Line 38 Position 43-46"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_currentMessages\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L126",
+      "Location": "Line 126 Position 43-46"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_currentMessages\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L160",
+      "Location": "Line 160 Position 43-46"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_currentMessages\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L26",
+      "Location": "Line 26 Position 43-46"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_currentMessages\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L71",
+      "Location": "Line 71 Position 43-46"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027nameCounter\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/Internal/ChildrenContainerSpec.cs#L28",
+      "Location": "Line 28 Position 33-36"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027_messagesSeen\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Dispatch/DispatcherThroughputSpecBase.cs#L35",
+      "Location": "Line 35 Position 36-40"
+    },
+    {
+      "Id": "S3052",
+      "Message": "Remove this initialization to \u0027i\u0027, the compiler will do that for you.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/IO/TcpInboundOnlySpec.cs#L40",
+      "Location": "Line 40 Position 27-30"
+    }
+  ]
 }

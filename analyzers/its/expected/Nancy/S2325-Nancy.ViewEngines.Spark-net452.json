@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S2325",
-"message":  "Make 'H' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/NancySparkView.cs#L28",
-"region":  {
-"startLine":  28,
-"startColumn":  23,
-"endLine":  28,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'HTML' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/NancySparkView.cs#L33",
-"region":  {
-"startLine":  33,
-"startColumn":  23,
-"endLine":  33,
-"endColumn":  27
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027H\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/NancySparkView.cs#L28",
+      "Location": "Line 28 Position 23-24"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027HTML\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/NancySparkView.cs#L33",
+      "Location": "Line 33 Position 23-27"
+    }
+  ]
 }

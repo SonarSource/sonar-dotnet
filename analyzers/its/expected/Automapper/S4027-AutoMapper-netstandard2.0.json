@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S4027",
-"message":  "Implement the missing constructors for this exception.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/AutoMapperMappingException.cs#L79",
-"region":  {
-"startLine":  79,
-"startColumn":  18,
-"endLine":  79,
-"endColumn":  56
-}
-}
-},
-{
-"id":  "S4027",
-"message":  "Implement the missing constructors for this exception.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/AutoMapperMappingException.cs#L113",
-"region":  {
-"startLine":  113,
-"startColumn":  18,
-"endLine":  113,
-"endColumn":  50
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4027",
+      "Message": "Implement the missing constructors for this exception.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/AutoMapperMappingException.cs#L113",
+      "Location": "Line 113 Position 18-50"
+    },
+    {
+      "Id": "S4027",
+      "Message": "Implement the missing constructors for this exception.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/AutoMapperMappingException.cs#L79",
+      "Location": "Line 79 Position 18-56"
+    }
+  ]
 }

@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S2348",
-"message":  "Rename this event to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L70",
-"region":  {
-"startLine":  70,
-"startColumn":  19,
-"endLine":  70,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S2348",
-"message":  "Rename this event to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L72",
-"region":  {
-"startLine":  72,
-"startColumn":  19,
-"endLine":  72,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S2348",
-"message":  "Rename this event to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L74",
-"region":  {
-"startLine":  74,
-"startColumn":  19,
-"endLine":  74,
-"endColumn":  27
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2348",
+      "Message": "Rename this event to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L70",
+      "Location": "Line 70 Position 19-27"
+    },
+    {
+      "Id": "S2348",
+      "Message": "Rename this event to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L72",
+      "Location": "Line 72 Position 19-27"
+    },
+    {
+      "Id": "S2348",
+      "Message": "Rename this event to match the regular expression: \u0027^([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L74",
+      "Location": "Line 74 Position 19-27"
+    }
+  ]
 }

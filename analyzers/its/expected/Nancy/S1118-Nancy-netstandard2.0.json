@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S1118",
-"message":  "Add a 'protected' constructor or the 'static' keyword to the class declaration.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ArrayCache.cs#L6",
-"region":  {
-"startLine":  6,
-"startColumn":  18,
-"endLine":  6,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S1118",
-"message":  "Add a 'private' constructor or the 'static' keyword to the class declaration.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L39",
-"region":  {
-"startLine":  39,
-"startColumn":  25,
-"endLine":  39,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S1118",
-"message":  "Add a 'protected' constructor or the 'static' keyword to the class declaration.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TypeResolveStrategies.cs#L10",
-"region":  {
-"startLine":  10,
-"startColumn":  18,
-"endLine":  10,
-"endColumn":  39
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1118",
+      "Message": "Add a \u0027protected\u0027 constructor or the \u0027static\u0027 keyword to the class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ArrayCache.cs#L6",
+      "Location": "Line 6 Position 18-28"
+    },
+    {
+      "Id": "S1118",
+      "Message": "Add a \u0027private\u0027 constructor or the \u0027static\u0027 keyword to the class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L39",
+      "Location": "Line 39 Position 25-34"
+    },
+    {
+      "Id": "S1118",
+      "Message": "Add a \u0027protected\u0027 constructor or the \u0027static\u0027 keyword to the class declaration.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TypeResolveStrategies.cs#L10",
+      "Location": "Line 10 Position 18-39"
+    }
+  ]
 }

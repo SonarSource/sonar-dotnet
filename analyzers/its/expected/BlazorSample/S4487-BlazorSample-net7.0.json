@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S4487",
-"message":  "Remove this unread private field '_logger' or refactor the code to use its value.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/Error.cshtml.cs#L15",
-"region":  {
-"startLine":  15,
-"startColumn":  46,
-"endLine":  15,
-"endColumn":  53
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4487",
+      "Message": "Remove this unread private field \u0027_logger\u0027 or refactor the code to use its value.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/Error.cshtml.cs#L15",
+      "Location": "Line 15 Position 46-53"
+    }
+  ]
 }

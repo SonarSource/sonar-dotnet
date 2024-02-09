@@ -1,69 +1,34 @@
 {
-"issues":  [
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'actorInitializationException'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/ClusterMetricsStrategy.cs#L33",
-"region":  {
-"startLine":  33,
-"startColumn":  51,
-"endLine":  33,
-"endColumn":  79
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'actorKilledException'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/ClusterMetricsStrategy.cs#L35",
-"region":  {
-"startLine":  35,
-"startColumn":  43,
-"endLine":  35,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'deathPactException'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/ClusterMetricsStrategy.cs#L37",
-"region":  {
-"startLine":  37,
-"startColumn":  41,
-"endLine":  37,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'start'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/ClusterMetricsSupervisor.cs#L60",
-"region":  {
-"startLine":  60,
-"startColumn":  78,
-"endLine":  60,
-"endColumn":  83
-}
-}
-},
-{
-"id":  "S1481",
-"message":  "Remove the unused local variable 'stop'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/ClusterMetricsSupervisor.cs#L66",
-"region":  {
-"startLine":  66,
-"startColumn":  77,
-"endLine":  66,
-"endColumn":  81
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027actorInitializationException\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/ClusterMetricsStrategy.cs#L33",
+      "Location": "Line 33 Position 51-79"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027actorKilledException\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/ClusterMetricsStrategy.cs#L35",
+      "Location": "Line 35 Position 43-63"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027deathPactException\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/ClusterMetricsStrategy.cs#L37",
+      "Location": "Line 37 Position 41-59"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027start\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/ClusterMetricsSupervisor.cs#L60",
+      "Location": "Line 60 Position 78-83"
+    },
+    {
+      "Id": "S1481",
+      "Message": "Remove the unused local variable \u0027stop\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/ClusterMetricsSupervisor.cs#L66",
+      "Location": "Line 66 Position 77-81"
+    }
+  ]
 }

@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'Akka.Streams.IMaterializer' instead of 'Akka.Streams.ActorMaterializer'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/FlowSelectBenchmark.cs#L234",
-"region":  {
-"startLine":  234,
-"startColumn":  48,
-"endLine":  234,
-"endColumn":  65
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'Akka.Streams.IGraph<Akka.Streams.ClosedShape, Akka.TestKit.TestLatch>' instead of 'Akka.Streams.Dsl.IRunnableGraph<Akka.TestKit.TestLatch>'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/FusedGraphsBenchmark.cs#L163",
-"region":  {
-"startLine":  163,
-"startColumn":  80,
-"endLine":  163,
-"endColumn":  85
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.IMaterializer\u0027 instead of \u0027Akka.Streams.ActorMaterializer\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/FlowSelectBenchmark.cs#L234",
+      "Location": "Line 234 Position 48-65"
+    },
+    {
+      "Id": "S3242",
+      "Message": "Consider using more general type \u0027Akka.Streams.IGraph\u003CAkka.Streams.ClosedShape, Akka.TestKit.TestLatch\u003E\u0027 instead of \u0027Akka.Streams.Dsl.IRunnableGraph\u003CAkka.TestKit.TestLatch\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/FusedGraphsBenchmark.cs#L163",
+      "Location": "Line 163 Position 80-85"
+    }
+  ]
 }

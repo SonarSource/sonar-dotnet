@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S2148",
-"message":  "Add underscores to this numeric value for readability.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L339",
-"region":  {
-"startLine":  339,
-"startColumn":  76,
-"endLine":  339,
-"endColumn":  86
-}
-}
-},
-{
-"id":  "S2148",
-"message":  "Add underscores to this numeric value for readability.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Buffers.cs#L99",
-"region":  {
-"startLine":  99,
-"startColumn":  70,
-"endLine":  99,
-"endColumn":  80
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2148",
+      "Message": "Add underscores to this numeric value for readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L339",
+      "Location": "Line 339 Position 76-86"
+    },
+    {
+      "Id": "S2148",
+      "Message": "Add underscores to this numeric value for readability.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Buffers.cs#L99",
+      "Location": "Line 99 Position 70-80"
+    }
+  ]
 }

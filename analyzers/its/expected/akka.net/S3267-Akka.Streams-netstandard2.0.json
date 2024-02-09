@@ -1,52 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S3267",
-"message":  "Loops should be simplified using the "Where" LINQ method",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L1518",
-"region":  {
-"startLine":  1518,
-"startColumn":  35,
-"endLine":  1518,
-"endColumn":  45
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L1520",
-"region":  {
-"startLine":  1520,
-"startColumn":  21,
-"endLine":  1520,
-"endColumn":  35
-}
-}
-]
-},
-{
-"id":  "S3267",
-"message":  "Loops should be simplified using the "Where" LINQ method",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L824",
-"region":  {
-"startLine":  824,
-"startColumn":  42,
-"endLine":  824,
-"endColumn":  47
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L826",
-"region":  {
-"startLine":  826,
-"startColumn":  25,
-"endLine":  826,
-"endColumn":  79
-}
-}
-]
-}
-]
+  "Issues": [
+    {
+      "Id": "S3267",
+      "Message": "Loops should be simplified using the \u0022Where\u0022 LINQ method",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L1518",
+      "Location": "Line 1518 Position 35-45"
+    },
+    {
+      "Id": "S3267",
+      "Message": "Loops should be simplified using the \u0022Where\u0022 LINQ method",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L824",
+      "Location": "Line 824 Position 42-47"
+    }
+  ]
 }

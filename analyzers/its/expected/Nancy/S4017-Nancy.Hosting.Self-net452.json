@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S4017",
-"message":  "Refactor this method to remove the nested type argument.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Hosting.Self/NancyHost.cs#L391",
-"region":  {
-"startLine":  391,
-"startColumn":  54,
-"endLine":  391,
-"endColumn":  110
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4017",
+      "Message": "Refactor this method to remove the nested type argument.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Hosting.Self/NancyHost.cs#L391",
+      "Location": "Line 391 Position 54-110"
+    }
+  ]
 }

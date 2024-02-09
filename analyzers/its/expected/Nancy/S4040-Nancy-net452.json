@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S4040",
-"message":  "Change this normalization to 'ToUpperInvariant()'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/StringExtensions.cs#L90",
-"region":  {
-"startLine":  90,
-"startColumn":  55,
-"endLine":  90,
-"endColumn":  71
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4040",
+      "Message": "Change this normalization to \u0027ToUpperInvariant()\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/StringExtensions.cs#L90",
+      "Location": "Line 90 Position 55-71"
+    }
+  ]
 }

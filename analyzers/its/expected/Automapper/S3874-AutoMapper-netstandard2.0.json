@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3874",
-"message":  "Consider refactoring this method in order to remove the need for this 'out' modifier.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L228",
-"region":  {
-"startLine":  228,
-"startColumn":  71,
-"endLine":  228,
-"endColumn":  74
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3874",
+      "Message": "Consider refactoring this method in order to remove the need for this \u0027out\u0027 modifier.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L228",
+      "Location": "Line 228 Position 71-74"
+    }
+  ]
 }

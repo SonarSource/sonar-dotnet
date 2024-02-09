@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S6580",
-"message":  "Use a format provider when parsing date and time.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L286",
-"region":  {
-"startLine":  286,
-"startColumn":  43,
-"endLine":  286,
-"endColumn":  66
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S6580",
+      "Message": "Use a format provider when parsing date and time.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L286",
+      "Location": "Line 286 Position 43-66"
+    }
+  ]
 }

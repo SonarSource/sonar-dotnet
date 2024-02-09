@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2221",
-"message":  "Catch a list of specific exception subtype or use exception filters instead.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/ConfigurationValidator.cs#L77",
-"region":  {
-"startLine":  77,
-"startColumn":  24,
-"endLine":  77,
-"endColumn":  33
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2221",
+      "Message": "Catch a list of specific exception subtype or use exception filters instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/ConfigurationValidator.cs#L77",
+      "Location": "Line 77 Position 24-33"
+    }
+  ]
 }

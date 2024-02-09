@@ -1,407 +1,190 @@
 {
-"issues":  [
-{
-"id":  "S3218",
-"message":  "Rename this field to not shadow the outer class' member with the same name.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L60",
-"region":  {
-"startLine":  60,
-"startColumn":  47,
-"endLine":  60,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S3218",
-"message":  "Rename this field to not shadow the outer class' member with the same name.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L66",
-"region":  {
-"startLine":  66,
-"startColumn":  51,
-"endLine":  66,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S3218",
-"message":  "Rename this field to not shadow the outer class' member with the same name.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L72",
-"region":  {
-"startLine":  72,
-"startColumn":  51,
-"endLine":  72,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S3218",
-"message":  "Rename this field to not shadow the outer class' member with the same name.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L78",
-"region":  {
-"startLine":  78,
-"startColumn":  52,
-"endLine":  78,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S3218",
-"message":  "Rename this field to not shadow the outer class' member with the same name.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L271",
-"region":  {
-"startLine":  271,
-"startColumn":  43,
-"endLine":  271,
-"endColumn":  51
-}
-}
-},
-{
-"id":  "S3218",
-"message":  "Rename this field to not shadow the outer class' member with the same name.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L299",
-"region":  {
-"startLine":  299,
-"startColumn":  42,
-"endLine":  299,
-"endColumn":  50
-}
-}
-},
-{
-"id":  "S3218",
-"message":  "Rename this field to not shadow the outer class' member with the same name.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L322",
-"region":  {
-"startLine":  322,
-"startColumn":  51,
-"endLine":  322,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S3218",
-"message":  "Rename this field to not shadow the outer class' member with the same name.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L346",
-"region":  {
-"startLine":  346,
-"startColumn":  42,
-"endLine":  346,
-"endColumn":  50
-}
-}
-},
-{
-"id":  "S3218",
-"message":  "Rename this field to not shadow the outer class' member with the same name.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L369",
-"region":  {
-"startLine":  369,
-"startColumn":  42,
-"endLine":  369,
-"endColumn":  50
-}
-}
-},
-{
-"id":  "S3218",
-"message":  "Rename this field to not shadow the outer class' member with the same name.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L671",
-"region":  {
-"startLine":  671,
-"startColumn":  50,
-"endLine":  671,
-"endColumn":  58
-}
-}
-},
-{
-"id":  "S3218",
-"message":  "Rename this field to not shadow the outer class' member with the same name.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L684",
-"region":  {
-"startLine":  684,
-"startColumn":  42,
-"endLine":  684,
-"endColumn":  50
-}
-}
-},
-{
-"id":  "S3218",
-"message":  "Rename this field to not shadow the outer class' member with the same name.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L700",
-"region":  {
-"startLine":  700,
-"startColumn":  41,
-"endLine":  700,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S3218",
-"message":  "Rename this field to not shadow the outer class' member with the same name.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L835",
-"region":  {
-"startLine":  835,
-"startColumn":  42,
-"endLine":  835,
-"endColumn":  50
-}
-}
-},
-{
-"id":  "S3218",
-"message":  "Rename this field to not shadow the outer class' member with the same name.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L872",
-"region":  {
-"startLine":  872,
-"startColumn":  35,
-"endLine":  872,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S3218",
-"message":  "Rename this field to not shadow the outer class' member with the same name.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L915",
-"region":  {
-"startLine":  915,
-"startColumn":  43,
-"endLine":  915,
-"endColumn":  51
-}
-}
-},
-{
-"id":  "S3218",
-"message":  "Rename this field to not shadow the outer class' member with the same name.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L930",
-"region":  {
-"startLine":  930,
-"startColumn":  44,
-"endLine":  930,
-"endColumn":  52
-}
-}
-},
-{
-"id":  "S3218",
-"message":  "Rename this field to not shadow the outer class' member with the same name.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L951",
-"region":  {
-"startLine":  951,
-"startColumn":  52,
-"endLine":  951,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S3218",
-"message":  "Rename this field to not shadow the outer class' member with the same name.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L971",
-"region":  {
-"startLine":  971,
-"startColumn":  47,
-"endLine":  971,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S3218",
-"message":  "Rename this field to not shadow the outer class' member with the same name.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Udp.cs#L135",
-"region":  {
-"startLine":  135,
-"startColumn":  42,
-"endLine":  135,
-"endColumn":  50
-}
-}
-},
-{
-"id":  "S3218",
-"message":  "Rename this field to not shadow the outer class' member with the same name.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Udp.cs#L278",
-"region":  {
-"startLine":  278,
-"startColumn":  43,
-"endLine":  278,
-"endColumn":  51
-}
-}
-},
-{
-"id":  "S3218",
-"message":  "Rename this field to not shadow the outer class' member with the same name.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Udp.cs#L298",
-"region":  {
-"startLine":  298,
-"startColumn":  49,
-"endLine":  298,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S3218",
-"message":  "Rename this field to not shadow the outer class' member with the same name.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Udp.cs#L326",
-"region":  {
-"startLine":  326,
-"startColumn":  51,
-"endLine":  326,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S3218",
-"message":  "Rename this field to not shadow the outer class' member with the same name.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Udp.cs#L341",
-"region":  {
-"startLine":  341,
-"startColumn":  50,
-"endLine":  341,
-"endColumn":  58
-}
-}
-},
-{
-"id":  "S3218",
-"message":  "Rename this field to not shadow the outer class' member with the same name.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Udp.cs#L434",
-"region":  {
-"startLine":  434,
-"startColumn":  54,
-"endLine":  434,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S3218",
-"message":  "Rename this field to not shadow the outer class' member with the same name.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Udp.cs#L448",
-"region":  {
-"startLine":  448,
-"startColumn":  44,
-"endLine":  448,
-"endColumn":  52
-}
-}
-},
-{
-"id":  "S3218",
-"message":  "Rename this field to not shadow the outer class' member with the same name.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnected.cs#L128",
-"region":  {
-"startLine":  128,
-"startColumn":  42,
-"endLine":  128,
-"endColumn":  50
-}
-}
-},
-{
-"id":  "S3218",
-"message":  "Rename this field to not shadow the outer class' member with the same name.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnected.cs#L253",
-"region":  {
-"startLine":  253,
-"startColumn":  47,
-"endLine":  253,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S3218",
-"message":  "Rename this field to not shadow the outer class' member with the same name.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnected.cs#L271",
-"region":  {
-"startLine":  271,
-"startColumn":  51,
-"endLine":  271,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S3218",
-"message":  "Rename this field to not shadow the outer class' member with the same name.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnected.cs#L286",
-"region":  {
-"startLine":  286,
-"startColumn":  50,
-"endLine":  286,
-"endColumn":  58
-}
-}
-},
-{
-"id":  "S3218",
-"message":  "Rename this field to not shadow the outer class' member with the same name.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnected.cs#L349",
-"region":  {
-"startLine":  349,
-"startColumn":  46,
-"endLine":  349,
-"endColumn":  54
-}
-}
-},
-{
-"id":  "S3218",
-"message":  "Rename this field to not shadow the outer class' member with the same name.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnected.cs#L364",
-"region":  {
-"startLine":  364,
-"startColumn":  49,
-"endLine":  364,
-"endColumn":  57
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3218",
+      "Message": "Rename this field to not shadow the outer class\u0027 member with the same name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L271",
+      "Location": "Line 271 Position 43-51"
+    },
+    {
+      "Id": "S3218",
+      "Message": "Rename this field to not shadow the outer class\u0027 member with the same name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L299",
+      "Location": "Line 299 Position 42-50"
+    },
+    {
+      "Id": "S3218",
+      "Message": "Rename this field to not shadow the outer class\u0027 member with the same name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L322",
+      "Location": "Line 322 Position 51-59"
+    },
+    {
+      "Id": "S3218",
+      "Message": "Rename this field to not shadow the outer class\u0027 member with the same name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L346",
+      "Location": "Line 346 Position 42-50"
+    },
+    {
+      "Id": "S3218",
+      "Message": "Rename this field to not shadow the outer class\u0027 member with the same name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L369",
+      "Location": "Line 369 Position 42-50"
+    },
+    {
+      "Id": "S3218",
+      "Message": "Rename this field to not shadow the outer class\u0027 member with the same name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L60",
+      "Location": "Line 60 Position 47-55"
+    },
+    {
+      "Id": "S3218",
+      "Message": "Rename this field to not shadow the outer class\u0027 member with the same name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L66",
+      "Location": "Line 66 Position 51-59"
+    },
+    {
+      "Id": "S3218",
+      "Message": "Rename this field to not shadow the outer class\u0027 member with the same name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L671",
+      "Location": "Line 671 Position 50-58"
+    },
+    {
+      "Id": "S3218",
+      "Message": "Rename this field to not shadow the outer class\u0027 member with the same name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L684",
+      "Location": "Line 684 Position 42-50"
+    },
+    {
+      "Id": "S3218",
+      "Message": "Rename this field to not shadow the outer class\u0027 member with the same name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L700",
+      "Location": "Line 700 Position 41-49"
+    },
+    {
+      "Id": "S3218",
+      "Message": "Rename this field to not shadow the outer class\u0027 member with the same name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L72",
+      "Location": "Line 72 Position 51-59"
+    },
+    {
+      "Id": "S3218",
+      "Message": "Rename this field to not shadow the outer class\u0027 member with the same name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L78",
+      "Location": "Line 78 Position 52-60"
+    },
+    {
+      "Id": "S3218",
+      "Message": "Rename this field to not shadow the outer class\u0027 member with the same name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L835",
+      "Location": "Line 835 Position 42-50"
+    },
+    {
+      "Id": "S3218",
+      "Message": "Rename this field to not shadow the outer class\u0027 member with the same name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L872",
+      "Location": "Line 872 Position 35-43"
+    },
+    {
+      "Id": "S3218",
+      "Message": "Rename this field to not shadow the outer class\u0027 member with the same name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L915",
+      "Location": "Line 915 Position 43-51"
+    },
+    {
+      "Id": "S3218",
+      "Message": "Rename this field to not shadow the outer class\u0027 member with the same name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L930",
+      "Location": "Line 930 Position 44-52"
+    },
+    {
+      "Id": "S3218",
+      "Message": "Rename this field to not shadow the outer class\u0027 member with the same name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L951",
+      "Location": "Line 951 Position 52-60"
+    },
+    {
+      "Id": "S3218",
+      "Message": "Rename this field to not shadow the outer class\u0027 member with the same name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L971",
+      "Location": "Line 971 Position 47-55"
+    },
+    {
+      "Id": "S3218",
+      "Message": "Rename this field to not shadow the outer class\u0027 member with the same name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Udp.cs#L135",
+      "Location": "Line 135 Position 42-50"
+    },
+    {
+      "Id": "S3218",
+      "Message": "Rename this field to not shadow the outer class\u0027 member with the same name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Udp.cs#L278",
+      "Location": "Line 278 Position 43-51"
+    },
+    {
+      "Id": "S3218",
+      "Message": "Rename this field to not shadow the outer class\u0027 member with the same name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Udp.cs#L298",
+      "Location": "Line 298 Position 49-57"
+    },
+    {
+      "Id": "S3218",
+      "Message": "Rename this field to not shadow the outer class\u0027 member with the same name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Udp.cs#L326",
+      "Location": "Line 326 Position 51-59"
+    },
+    {
+      "Id": "S3218",
+      "Message": "Rename this field to not shadow the outer class\u0027 member with the same name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Udp.cs#L341",
+      "Location": "Line 341 Position 50-58"
+    },
+    {
+      "Id": "S3218",
+      "Message": "Rename this field to not shadow the outer class\u0027 member with the same name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Udp.cs#L434",
+      "Location": "Line 434 Position 54-62"
+    },
+    {
+      "Id": "S3218",
+      "Message": "Rename this field to not shadow the outer class\u0027 member with the same name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Udp.cs#L448",
+      "Location": "Line 448 Position 44-52"
+    },
+    {
+      "Id": "S3218",
+      "Message": "Rename this field to not shadow the outer class\u0027 member with the same name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnected.cs#L128",
+      "Location": "Line 128 Position 42-50"
+    },
+    {
+      "Id": "S3218",
+      "Message": "Rename this field to not shadow the outer class\u0027 member with the same name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnected.cs#L253",
+      "Location": "Line 253 Position 47-55"
+    },
+    {
+      "Id": "S3218",
+      "Message": "Rename this field to not shadow the outer class\u0027 member with the same name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnected.cs#L271",
+      "Location": "Line 271 Position 51-59"
+    },
+    {
+      "Id": "S3218",
+      "Message": "Rename this field to not shadow the outer class\u0027 member with the same name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnected.cs#L286",
+      "Location": "Line 286 Position 50-58"
+    },
+    {
+      "Id": "S3218",
+      "Message": "Rename this field to not shadow the outer class\u0027 member with the same name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnected.cs#L349",
+      "Location": "Line 349 Position 46-54"
+    },
+    {
+      "Id": "S3218",
+      "Message": "Rename this field to not shadow the outer class\u0027 member with the same name.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnected.cs#L364",
+      "Location": "Line 364 Position 49-57"
+    }
+  ]
 }

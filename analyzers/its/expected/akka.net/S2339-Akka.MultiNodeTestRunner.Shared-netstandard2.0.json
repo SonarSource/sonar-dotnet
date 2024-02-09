@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2339",
-"message":  "Change this constant to a 'static' read-only property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/MessageSink.cs#L78",
-"region":  {
-"startLine":  78,
-"startColumn":  29,
-"endLine":  78,
-"endColumn":  38
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2339",
+      "Message": "Change this constant to a \u0027static\u0027 read-only property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/MessageSink.cs#L78",
+      "Location": "Line 78 Position 29-38"
+    }
+  ]
 }

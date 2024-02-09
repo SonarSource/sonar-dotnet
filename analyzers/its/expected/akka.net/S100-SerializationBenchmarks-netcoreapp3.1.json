@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S100",
-"message":  "Rename property 'payload' to match pascal case naming rules, consider using 'Payload'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/SerializationBenchmarks/Program.cs#L46",
-"region":  {
-"startLine":  46,
-"startColumn":  30,
-"endLine":  46,
-"endColumn":  37
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S100",
+      "Message": "Rename property \u0027payload\u0027 to match pascal case naming rules, consider using \u0027Payload\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/SerializationBenchmarks/Program.cs#L46",
+      "Location": "Line 46 Position 30-37"
+    }
+  ]
 }

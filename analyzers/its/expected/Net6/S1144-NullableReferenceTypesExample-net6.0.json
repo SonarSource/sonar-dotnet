@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1144",
-"message":  "Remove the unused private set accessor in property 'NullableReferenceType'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/NullableReferenceTypesExample/NullableReferenceTypesExample.cs#L5",
-"region":  {
-"startLine":  5,
-"startColumn":  57,
-"endLine":  5,
-"endColumn":  60
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1144",
+      "Message": "Remove the unused private set accessor in property \u0027NullableReferenceType\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/NullableReferenceTypesExample/NullableReferenceTypesExample.cs#L5",
+      "Location": "Line 5 Position 57-60"
+    }
+  ]
 }

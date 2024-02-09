@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S2094",
-"message":  "Remove this empty class, write its code or make it an "interface".",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/IO/TcpOperationsBenchmarks.cs#L76",
-"region":  {
-"startLine":  76,
-"startColumn":  22,
-"endLine":  76,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S2094",
-"message":  "Remove this empty class, write its code or make it an "interface".",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/IO/TcpOperationsBenchmarks.cs#L77",
-"region":  {
-"startLine":  77,
-"startColumn":  22,
-"endLine":  77,
-"endColumn":  48
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2094",
+      "Message": "Remove this empty class, write its code or make it an \u0022interface\u0022.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/IO/TcpOperationsBenchmarks.cs#L76",
+      "Location": "Line 76 Position 22-43"
+    },
+    {
+      "Id": "S2094",
+      "Message": "Remove this empty class, write its code or make it an \u0022interface\u0022.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/IO/TcpOperationsBenchmarks.cs#L77",
+      "Location": "Line 77 Position 22-48"
+    }
+  ]
 }

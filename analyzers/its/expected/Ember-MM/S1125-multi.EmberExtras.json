@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1125",
-"message":  "Remove the unnecessary Boolean literal(s).",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L100",
-"region":  {
-"startLine":  100,
-"startColumn":  82,
-"endLine":  100,
-"endColumn":  86
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1125",
+      "Message": "Remove the unnecessary Boolean literal(s).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L100",
+      "Location": "Line 100 Position 82-86"
+    }
+  ]
 }

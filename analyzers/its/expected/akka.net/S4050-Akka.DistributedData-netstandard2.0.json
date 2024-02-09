@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S4050",
-"message":  "Provide an implementation for: 'Object.GetHashCode'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/VersionVector.cs#L26",
-"region":  {
-"startLine":  26,
-"startColumn":  27,
-"endLine":  26,
-"endColumn":  40
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4050",
+      "Message": "Provide an implementation for: \u0027Object.GetHashCode\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/VersionVector.cs#L26",
+      "Location": "Line 26 Position 27-40"
+    }
+  ]
 }

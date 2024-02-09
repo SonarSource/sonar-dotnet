@@ -1,69 +1,34 @@
 {
-"issues":  [
-{
-"id":  "S1155",
-"message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperSettings.vb#L183",
-"region":  {
-"startLine":  183,
-"startColumn":  67,
-"endLine":  183,
-"endColumn":  72
-}
-}
-},
-{
-"id":  "S1155",
-"message":  "Use '.Any()' to test whether this 'IEnumerable(Of EmberScraperModule.XMLScraper.ScraperLib.ScraperSetting)' is empty or not.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperSettings.vb#L645",
-"region":  {
-"startLine":  645,
-"startColumn":  59,
-"endLine":  645,
-"endColumn":  64
-}
-}
-},
-{
-"id":  "S1155",
-"message":  "Use '.Any()' to test whether this 'IEnumerable(Of EmberScraperModule.XMLScraper.ScraperLib.ScraperSetting)' is empty or not.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperSettings.vb#L650",
-"region":  {
-"startLine":  650,
-"startColumn":  59,
-"endLine":  650,
-"endColumn":  64
-}
-}
-},
-{
-"id":  "S1155",
-"message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/GenericScraper.vb#L487",
-"region":  {
-"startLine":  487,
-"startColumn":  35,
-"endLine":  487,
-"endColumn":  40
-}
-}
-},
-{
-"id":  "S1155",
-"message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Util.vb#L200",
-"region":  {
-"startLine":  200,
-"startColumn":  40,
-"endLine":  200,
-"endColumn":  45
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of String)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperSettings.vb#L183",
+      "Location": "Line 183 Position 67-72"
+    },
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of EmberScraperModule.XMLScraper.ScraperLib.ScraperSetting)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperSettings.vb#L645",
+      "Location": "Line 645 Position 59-64"
+    },
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of EmberScraperModule.XMLScraper.ScraperLib.ScraperSetting)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperSettings.vb#L650",
+      "Location": "Line 650 Position 59-64"
+    },
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of System.Xml.Linq.XElement)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/GenericScraper.vb#L487",
+      "Location": "Line 487 Position 35-40"
+    },
+    {
+      "Id": "S1155",
+      "Message": "Use \u0027.Any()\u0027 to test whether this \u0027IEnumerable(Of System.Xml.Linq.XElement)\u0027 is empty or not.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Util.vb#L200",
+      "Location": "Line 200 Position 40-45"
+    }
+  ]
 }

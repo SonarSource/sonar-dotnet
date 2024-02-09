@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S4049",
-"message":  "Consider making method 'GetTestActorCell' a property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActorRef.cs#L70",
-"region":  {
-"startLine":  70,
-"startColumn":  33,
-"endLine":  70,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S4049",
-"message":  "Consider making method 'GetAll' a property.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/ITestActorQueue.cs#L39",
-"region":  {
-"startLine":  39,
-"startColumn":  24,
-"endLine":  39,
-"endColumn":  30
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetTestActorCell\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActorRef.cs#L70",
+      "Location": "Line 70 Position 33-49"
+    },
+    {
+      "Id": "S4049",
+      "Message": "Consider making method \u0027GetAll\u0027 a property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/ITestActorQueue.cs#L39",
+      "Location": "Line 39 Position 24-30"
+    }
+  ]
 }

@@ -1,43 +1,22 @@
 {
-"issues":  [
-{
-"id":  "S2325",
-"message":  "Make 'XmlReader_SafeByDefault' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework45/XmlReaderTest.cs#L27",
-"region":  {
-"startLine":  27,
-"startColumn":  21,
-"endLine":  27,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'UnsafeByDefault' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework45/XPathDocumentTest.cs#L16",
-"region":  {
-"startLine":  16,
-"startColumn":  21,
-"endLine":  16,
-"endColumn":  36
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'XmlReaderAsParameter' a static method.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework45/XPathDocumentTest.cs#L33",
-"region":  {
-"startLine":  33,
-"startColumn":  21,
-"endLine":  33,
-"endColumn":  41
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027XmlReader_SafeByDefault\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework45/XmlReaderTest.cs#L27",
+      "Location": "Line 27 Position 21-44"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027UnsafeByDefault\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework45/XPathDocumentTest.cs#L16",
+      "Location": "Line 16 Position 21-36"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027XmlReaderAsParameter\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/NetFramework45/XPathDocumentTest.cs#L33",
+      "Location": "Line 33 Position 21-41"
+    }
+  ]
 }

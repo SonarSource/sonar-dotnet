@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S2486",
-"message":  "Handle the exception or explain in a comment why it can be ignored.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/RazorAssemblyProvider.cs#L69-L71",
-"region":  {
-"startLine":  69,
-"startColumn":  17,
-"endLine":  71,
-"endColumn":  18
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2486",
+      "Message": "Handle the exception or explain in a comment why it can be ignored.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/RazorAssemblyProvider.cs#L69-L71",
+      "Location": "Lines 69-71 Position 17-18"
+    }
+  ]
 }

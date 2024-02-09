@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S1206",
-"message":  "This class overrides 'GetHashCode' and should therefore also override 'Equals'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/ProfileMap.cs#L283",
-"region":  {
-"startLine":  283,
-"startColumn":  18,
-"endLine":  283,
-"endColumn":  32
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S1206",
+      "Message": "This class overrides \u0027GetHashCode\u0027 and should therefore also override \u0027Equals\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/ProfileMap.cs#L283",
+      "Location": "Line 283 Position 18-32"
+    }
+  ]
 }

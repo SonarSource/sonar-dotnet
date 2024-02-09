@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S5766",
-"message":  "Make sure not performing data validation after deserialization is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L210",
-"region":  {
-"startLine":  210,
-"startColumn":  16,
-"endLine":  210,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S5766",
-"message":  "Make sure not performing data validation after deserialization is safe here.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L365",
-"region":  {
-"startLine":  365,
-"startColumn":  16,
-"endLine":  365,
-"endColumn":  36
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S5766",
+      "Message": "Make sure not performing data validation after deserialization is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L210",
+      "Location": "Line 210 Position 16-31"
+    },
+    {
+      "Id": "S5766",
+      "Message": "Make sure not performing data validation after deserialization is safe here.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L365",
+      "Location": "Line 365 Position 16-36"
+    }
+  ]
 }

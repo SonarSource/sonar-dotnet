@@ -1,17 +1,10 @@
 {
-"issues":  [
-{
-"id":  "S3459",
-"message":  "Remove unassigned field '_log', or set its value.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/SqlSnapshotStore.cs#L60",
-"region":  {
-"startLine":  60,
-"startColumn":  33,
-"endLine":  60,
-"endColumn":  37
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S3459",
+      "Message": "Remove unassigned field \u0027_log\u0027, or set its value.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/SqlSnapshotStore.cs#L60",
+      "Location": "Line 60 Position 33-37"
+    }
+  ]
 }

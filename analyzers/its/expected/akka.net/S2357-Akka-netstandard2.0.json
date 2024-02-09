@@ -1,30 +1,16 @@
 {
-"issues":  [
-{
-"id":  "S2357",
-"message":  "Make 'Status' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorBase.cs#L28",
-"region":  {
-"startLine":  28,
-"startColumn":  36,
-"endLine":  28,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'Cause' private.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorBase.cs#L49",
-"region":  {
-"startLine":  49,
-"startColumn":  39,
-"endLine":  49,
-"endColumn":  44
-}
-}
-}
-]
+  "Issues": [
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Status\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorBase.cs#L28",
+      "Location": "Line 28 Position 36-42"
+    },
+    {
+      "Id": "S2357",
+      "Message": "Make \u0027Cause\u0027 private.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorBase.cs#L49",
+      "Location": "Line 49 Position 39-44"
+    }
+  ]
 }
