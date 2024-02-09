@@ -414,7 +414,7 @@ stages:
           $Pattern = [Regex]::Escape($CurrentPath) -Replace "\\\\\d+\\\\","\\\d+\\" # We replace the existing escaped "\\1\\" digit(s) with actual pattern to search for any other digit(s)
           dir coverage\*.xml | % {
               $Path = $_.FullName
-              Write-Host "Updating ${Path} to ${CurrentPath}"
+              Write-Host "Updating ${Path} to common root ${CurrentPath}"
               (Get-Content -Path $Path -Raw) -Replace $Pattern,$CurrentPath | Set-Content $Path
           }
         displayName: Fix coverage paths
