@@ -198,7 +198,6 @@ namespace SonarAnalyzer.Test.TestFramework.Tests.Verification
                 .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Unknown))
                 .VerifyNoIssueReported();
 
-        [Ignore("Revert after 9.19 release")]
         [DataTestMethod]
         [DataRow("net6.0")]
         [DataRow("net7.0")]

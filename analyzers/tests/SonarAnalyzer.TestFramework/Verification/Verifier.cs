@@ -203,8 +203,14 @@ namespace SonarAnalyzer.TestFramework.Verification
                     var csProjPath = PrepareRazorProject(projectRoot, langVersion);
                     var razorFiles = PrepareRazorFiles(projectRoot);
                     // To avoid reference loading issues, ensure that the project references are restored before compilation.
-                    Process.Start(Environment.GetEnvironmentVariable("MSBUILD_PATH"), $"restore {csProjPath}").WaitForExit();
-                    yield return new(workspace.OpenProjectAsync(csProjPath).Result.GetCompilationAsync().Result, razorFiles.ToArray());
+                    if (RestorePackages(csProjPath, projectRoot))
+                    {
+                        yield return new(workspace.OpenProjectAsync(csProjPath).Result.GetCompilationAsync().Result, razorFiles.ToArray());
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException($"Failed to restore project {csProjPath}.");
+                    }
                 }
             }
             finally
@@ -363,5 +369,20 @@ namespace SonarAnalyzer.TestFramework.Verification
             && (extension.Equals(".razor", StringComparison.OrdinalIgnoreCase) || extension.Equals(".cshtml", StringComparison.OrdinalIgnoreCase));
 
         public sealed record CompilationData(Compilation Compilation, string[] AdditionalSourceFiles);
+
+        private static bool RestorePackages(string path, string workingDirectory)
+        {
+            using var process = new Process();
+            process.StartInfo = new ProcessStartInfo
+                {
+                    FileName = Environment.GetEnvironmentVariable("DOTNET_PATH") ?? "dotnet",
+                    Arguments = $"restore \"{path}\"",
+                    WorkingDirectory = workingDirectory
+                };
+
+            process.Start();
+            process.WaitForExit();
+            return process.ExitCode == 0;
+        }
     }
 }
