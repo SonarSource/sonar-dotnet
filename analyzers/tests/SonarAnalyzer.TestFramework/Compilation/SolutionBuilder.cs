@@ -44,8 +44,8 @@ namespace SonarAnalyzer.Test.TestFramework
         private SolutionBuilder(Solution solution) =>
             this.solution = solution;
 
-        public ProjectBuilder AddProject(AnalyzerLanguage language, bool createExtraEmptyFile = true, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary) =>
-            AddProject(language, $"{GeneratedAssemblyName}{ProjectIds.Count}", createExtraEmptyFile, outputKind);
+        public ProjectBuilder AddProject(AnalyzerLanguage language, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary) =>
+            AddProject(language, $"{GeneratedAssemblyName}{ProjectIds.Count}", outputKind);
 
         public static SolutionBuilder Create() =>
             FromSolution(new AdhocWorkspace().CurrentSolution);
@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Test.TestFramework
         private static IEnumerable<Compilation> Compile(Project project, ParseOptions[] parseOptions) =>
             parseOptions.OrDefault(project.Language).Select(x => project.WithParseOptions(x).GetCompilationAsync().Result);
 
-        private ProjectBuilder AddProject(AnalyzerLanguage language, string projectName, bool createExtraEmptyFile, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)
+        private ProjectBuilder AddProject(AnalyzerLanguage language, string projectName, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)
         {
             var project = solution.AddProject(projectName, projectName, language.LanguageName);
             var compilationOptions = project.CompilationOptions.WithOutputKind(outputKind);
@@ -78,21 +78,10 @@ namespace SonarAnalyzer.Test.TestFramework
             };
             project = project.WithCompilationOptions(compilationOptions);
 
-            var projectBuilder = ProjectBuilder
-                .FromProject(project)
-                .AddReferences(MetadataReferenceFacade.ProjectDefaultReferences);
-            if (language == AnalyzerLanguage.VisualBasic)
-            {
-                // Need a reference to the VB dll to be able to use the Module keyword
-                projectBuilder = projectBuilder.AddReferences(MetadataReferenceFacade.MicrosoftVisualBasic);
-            }
-            if (createExtraEmptyFile)
-            {
-                // adding an extra file to the project this won't trigger any issues, but it keeps a reference to the original ParseOption, so
-                // if an analyzer/codefix changes the language version, Roslyn throws an ArgumentException
-                projectBuilder = projectBuilder.AddSnippet(string.Empty, fileName: "ExtraEmptyFile.g" + language.FileExtension);
-            }
-            return projectBuilder;
+            var projectBuilder = ProjectBuilder.FromProject(project).AddReferences(MetadataReferenceFacade.ProjectDefaultReferences);
+            return language == AnalyzerLanguage.VisualBasic
+                ? projectBuilder.AddReferences(MetadataReferenceFacade.MicrosoftVisualBasic)
+                : projectBuilder;
         }
     }
 }

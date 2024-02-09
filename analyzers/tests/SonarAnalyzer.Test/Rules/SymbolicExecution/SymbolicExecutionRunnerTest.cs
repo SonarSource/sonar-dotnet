@@ -463,7 +463,7 @@ public class Sample
         var errors = DiagnosticVerifier.AnalyzerExceptions(compilation, sut);
         errors.Should().ContainSingle().Which.GetMessage().Should()
             .Contain("SonarAnalyzer.SymbolicExecution.SymbolicExecutionException")
-            .And.Contain("Error processing method: Method ## Method file: snippet1.cs ## Method line: 3,4 ## Inner exception: System.InvalidOperationException: This check is not useful.");
+            .And.Contain("Error processing method: Method ## Method file: snippet0.cs ## Method line: 3,4 ## Inner exception: System.InvalidOperationException: This check is not useful.");
     }
 
     [TestMethod]
@@ -491,7 +491,7 @@ public class Sample
 
     private static void VerifyActivation(TestSyntaxTreeOptionProvider provider, string additionalSnippet = null)
     {
-        var builder = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp, false);
+        var builder = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp);
         builder = builder.AddSnippet("""
             public class Sample
             {

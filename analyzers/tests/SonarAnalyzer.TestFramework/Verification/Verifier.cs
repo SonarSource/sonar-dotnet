@@ -274,7 +274,7 @@ namespace SonarAnalyzer.Test.TestFramework
         {
             var paths = builder.Paths.Select(TestCasePath).ToArray();
             return SolutionBuilder.Create()
-                .AddProject(language, true, builder.OutputKind)
+                .AddProject(language, builder.OutputKind)
                 .AddDocuments(paths)
                 .AddDocuments(concurrentAnalysis && builder.AutogenerateConcurrentFiles ? CreateConcurrencyTest(paths) : Enumerable.Empty<string>())
                 .AddSnippets(builder.Snippets.ToArray())

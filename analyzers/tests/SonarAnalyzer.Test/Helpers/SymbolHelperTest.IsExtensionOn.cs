@@ -57,15 +57,11 @@ namespace NS
         [TestInitialize]
         public void Compile()
         {
-            var compilation = SolutionBuilder
-                .Create()
-                .AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false)
-                .AddSnippet(TestInput)
-                .GetCompilation();
+            var compilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).AddSnippet(TestInput).GetCompilation();
 
             var tree = compilation.SyntaxTrees.First();
-            this.semanticModel = compilation.GetSemanticModel(tree);
-            this.statements = tree.GetRoot().DescendantNodes()
+            semanticModel = compilation.GetSemanticModel(tree);
+            statements = tree.GetRoot().DescendantNodes()
                 .OfType<MethodDeclarationSyntax>()
                 .First(m => m.Identifier.ValueText == "TestMethod").Body
                 .DescendantNodes()

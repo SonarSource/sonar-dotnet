@@ -47,12 +47,8 @@ public class Bar
         return Field;
     }
 }";
-            var firstCompilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false)
-                .AddSnippet(firstSnippet)
-                .GetCompilation();
-            var secondCompilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false)
-                .AddSnippet(secondSnippet)
-                .GetCompilation();
+            var firstCompilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).AddSnippet(firstSnippet).GetCompilation();
+            var secondCompilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).AddSnippet(secondSnippet).GetCompilation();
 
             var firstTree = firstCompilation.SyntaxTrees.Single();
             var fooMethod = firstTree.Single<MethodDeclarationSyntax>();
