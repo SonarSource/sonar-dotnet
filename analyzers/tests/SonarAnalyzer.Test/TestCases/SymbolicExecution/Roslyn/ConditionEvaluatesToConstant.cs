@@ -3956,3 +3956,32 @@ public class Repro_8678
         }
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8719
+class Repro_8719
+{
+    void Method()
+    {
+        var success = false;
+        Exception exception = null;
+        int retries = 0;
+        while (!success && retries < 5) // Noncompliant
+        {
+            exception = null;
+            try
+            {
+                Console.WriteLine();
+                success = true;
+            }
+            catch (Exception e)
+            {
+                exception = e;
+            }
+        }
+        if (exception != null)  // FN!
+        {
+            Console.WriteLine(exception);
+        }
+        Console.WriteLine(success);
+    }
+}
