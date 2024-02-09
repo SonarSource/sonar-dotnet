@@ -27,4 +27,15 @@ internal sealed record VerificationMessage(string ShortDescription, string FullD
     public static readonly VerificationMessage EmptyLine = new(null, null, null, 0);
 
     public string FullPath => Path.Combine(Paths.CurrentTestCases(), FilePath);
+
+    public string ToInvocation()
+    {
+        // VS can process "at What Ever in C:\...".
+        // Rider needs    "at What.Ever() in C:\..." to make it clickable.
+        if (!ShortDescription.Contains(' '))
+        {
+            throw new InvalidOperationException("Short description must contain space for Rider to display clickable link."); // We'll change it to dot: "What Ever" -> "What.Ever()"
+        }
+        return ShortDescription.Replace(' ', '.') + "()";
+    }
 }
