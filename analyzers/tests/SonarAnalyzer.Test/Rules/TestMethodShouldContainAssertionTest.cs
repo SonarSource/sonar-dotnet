@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Test.Rules
     [TestClass]
     public class TestMethodShouldContainAssertionTest
     {
-        private const string Latest = SonarAnalyzer.TestFramework.Common.Constants.NuGetLatestVersion; // Rename only
+        private const string Latest = Constants.NuGetLatestVersion; // Rename only
 
         private static class FluentAssertionVersions
         {
