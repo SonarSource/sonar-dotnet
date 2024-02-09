@@ -65,7 +65,9 @@ function Build-Project-MSBuild([string]$ProjectName, [string]$SolutionRelativePa
         /m:$CpuCount `
         /t:rebuild `
         /p:Configuration=Debug `
-        /clp:"Summary;ErrorsOnly"
+        /clp:"Summary;ErrorsOnly" `
+        /fl `
+        /flp:"logFile=output\${ProjectName}\Build.log;verbosity=d"
 }
 
 function Build-Project-DotnetTool([string]$ProjectName, [string]$SolutionRelativePath) {
@@ -100,7 +102,7 @@ function Build-Project-DotnetTool([string]$ProjectName, [string]$SolutionRelativ
         -p:Configuration=Debug `
         -clp:"Summary;ErrorsOnly" `
         -fl `
-        -flp:"logFile=output\${ProjectName}.log;verbosity=d" `
+        -flp:"logFile=output\${ProjectName}\Build.log;verbosity=d" `
     } -errorMessage "ERROR: Build FAILED."
 
     Remove-Item $tempGlobalJsonPath
