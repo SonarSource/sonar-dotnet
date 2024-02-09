@@ -140,13 +140,13 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
         public void Verify_RazorWithAssociatedCS() =>
             DummyCS.AddPaths(WriteFile("File.razor", """<p @bind="pValue">Dynamic content</p>"""))
                 .AddPaths(WriteFile("File.razor.cs", """public partial class File { string pValue = "The value bound"; int a = 42;  }"""))
-                .Invoking(x => x.Verify()).Should().Throw<AssertFailedException>();
+                .Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>();
 
         [TestMethod]
         public void Verify_RazorWithUnrelatedCS() =>
             DummyCS.AddPaths(WriteFile("File.razor", """<p @bind="pValue">Dynamic content</p>"""))
                 .AddPaths(WriteFile("SomeSource.cs", """class SomeSource { int a = 42; }"""))
-                .Invoking(x => x.Verify()).Should().Throw<AssertFailedException>();
+                .Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>();
 
         [TestMethod]
         public void Verify_RazorWithUnrelatedIssues() =>
@@ -160,7 +160,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                         private bool c = true;
                     }
                     """))
-                .Invoking(x => x.Verify()).Should().Throw<AssertFailedException>();
+                .Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>();
 
         [DataTestMethod]
         [DataRow("Dummy.SecondaryLocation.razor")]
@@ -329,7 +329,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                     private int b = 42;     // FP
                     private bool c = true;
                 }
-                """).Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage("""
+                """).Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>().WithMessage("""
                 There are differences for CSharp7 File.Concurrent.cs:
                   Line 3: Unexpected issue 'Message for SDummy' Rule SDummy
                   Line 4: Unexpected issue 'Message for SDummy' Rule SDummy
@@ -347,7 +347,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                     Private B As Integer = 42   ' FP
                     Private C As Boolean = True
                 End Class
-                """).Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage("""
+                """).Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>().WithMessage("""
                 There are differences for VisualBasic12 File.Concurrent.vb:
                   Line 2: Unexpected issue 'Message for SDummy' Rule SDummy
                   Line 3: Unexpected issue 'Message for SDummy' Rule SDummy
@@ -366,7 +366,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                     private bool b = true;   // Noncompliant - FN
                     private bool c = true;
                 }
-                """).Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage("""
+                """).Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>().WithMessage("""
                 There are differences for CSharp7 File.Concurrent.cs:
                   Line 3: Missing expected issue
                   Line 4: Missing expected issue
@@ -407,7 +407,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                 }
                 """))
             .WithConcurrentAnalysis(false)
-            .Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage("""
+            .Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>().WithMessage("""
                 There are differences for CSharp7 File.cs:
                   Line 3: Missing expected issue
 
@@ -420,7 +420,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
         {
             var builder = WithSnippetCS("// Noncompliant - FN");
             // Concurrent analysis by-default automatically generates concurrent files - File.Concurrent.cs
-            builder.Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage("""
+            builder.Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>().WithMessage("""
                 There are differences for CSharp7 File.Concurrent.cs:
                   Line 1: Missing expected issue
 
@@ -429,7 +429,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
 
                 """);
             // When AutogenerateConcurrentFiles is turned off, only the provided snippet is analyzed
-            builder.WithAutogenerateConcurrentFiles(false).Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage("""
+            builder.WithAutogenerateConcurrentFiles(false).Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>().WithMessage("""
                 There are differences for CSharp7 File.cs:
                   Line 1: Missing expected issue
 
@@ -455,7 +455,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                 }
                 """);
             builder.WithOptions(ParseOptionsHelper.FromCSharp9).Invoking(x => x.Verify()).Should().NotThrow();
-            builder.WithOptions(ParseOptionsHelper.BeforeCSharp9).Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage("""
+            builder.WithOptions(ParseOptionsHelper.BeforeCSharp9).Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>().WithMessage("""
                 There are differences for CSharp5 File.Concurrent.cs:
                   Line 3: Unexpected error, use // Error [CS8026] Feature 'target-typed object creation' is not available in C# 5. Please use language version 9.0 or greater.
 
@@ -476,7 +476,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
         public void Verify_ErrorBehavior()
         {
             var builder = WithSnippetCS("undefined");
-            builder.Invoking(x => x.Verify()).Should().Throw<AssertFailedException>()
+            builder.Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>()
                 .WithMessage("""
                 There are differences for CSharp7 File.Concurrent.cs:
                   Line 1: Unexpected error, use // Error [CS0116] A namespace cannot directly contain members such as fields, methods or statements
@@ -488,7 +488,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                   Line 1: Unexpected error, use // Error [CS1001] Identifier expected
                   Line 1: Unexpected error, use // Error [CS1002] ; expected
                 """);
-            builder.WithErrorBehavior(CompilationErrorBehavior.FailTest).Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage("""
+            builder.WithErrorBehavior(CompilationErrorBehavior.FailTest).Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>().WithMessage("""
                 There are differences for CSharp7 File.Concurrent.cs:
                   Line 1: Unexpected error, use // Error [CS0116] A namespace cannot directly contain members such as fields, methods or statements
 
@@ -520,7 +520,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                     }
                 }
                 """));
-            builder.Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage("""
+            builder.Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>().WithMessage("""
                 There are differences for CSharp7 File.Concurrent.cs:
                   Line 6: Unexpected issue 'Change this condition so that it does not always evaluate to 'True'. Some code paths are unreachable.' Rule S2583
                   Line 10: Unexpected issue 'Change this condition so that it does not always evaluate to 'True'.' Rule S2589
@@ -531,7 +531,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                   Line 10: Unexpected issue 'Change this condition so that it does not always evaluate to 'True'.' Rule S2589
                   Line 9 Secondary location: Unexpected issue '' Rule S2583
                 """);
-            builder.WithOnlyDiagnostics(ConditionEvaluatesToConstant.S2589).Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage("""
+            builder.WithOnlyDiagnostics(ConditionEvaluatesToConstant.S2589).Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>().WithMessage("""
                 There are differences for CSharp7 File.Concurrent.cs:
                   Line 10: Unexpected issue 'Change this condition so that it does not always evaluate to 'True'.' Rule S2589
 
@@ -545,7 +545,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
         public void Verify_NonConcurrentAnalysis()
         {
             var builder = WithSnippetCS("var topLevelStatement = true;").WithOptions(ParseOptionsHelper.FromCSharp9).WithOutputKind(OutputKind.ConsoleApplication);
-            builder.Invoking(x => x.Verify()).Should().Throw<AssertFailedException>("Default Verifier behavior duplicates the source file.").WithMessage("""
+            builder.Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>("Default Verifier behavior duplicates the source file.").WithMessage("""
                 There are differences for CSharp9 File.Concurrent.cs:
                   Line 1: Unexpected error, use // Error [CS0825] The contextual keyword 'var' may only appear within a local variable declaration or in script code
                   Line 1: Unexpected error, use // Error [CS0116] A namespace cannot directly contain members such as fields, methods or statements
@@ -559,7 +559,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
             var builder = WithSnippetCS("var topLevelStatement = true;").WithOptions(ParseOptionsHelper.FromCSharp9);
             builder.WithTopLevelStatements().Invoking(x => x.Verify()).Should().NotThrow();
             builder.WithOutputKind(OutputKind.ConsoleApplication).WithConcurrentAnalysis(false).Invoking(x => x.Verify()).Should().NotThrow();
-            builder.Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage("""
+            builder.Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>().WithMessage("""
                 There are differences for CSharp9 File.Concurrent.cs:
                   Line 1: Unexpected error, use // Error [CS0825] The contextual keyword 'var' may only appear within a local variable declaration or in script code
                   Line 1: Unexpected error, use // Error [CS0116] A namespace cannot directly contain members such as fields, methods or statements
@@ -573,7 +573,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
         public void Verify_Snippets() =>
             DummyCS.AddSnippet("public class First { } // Noncompliant [first]  - not raised")
                 .AddSnippet("public class Second { } // Noncompliant [second] - not raised")
-                .Invoking(x => x.Verify()).Should().Throw<AssertFailedException>().WithMessage("""
+                .Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>().WithMessage("""
                     There are differences for CSharp7 snippet0.cs:
                       Line 1: Missing expected issue ID first
 

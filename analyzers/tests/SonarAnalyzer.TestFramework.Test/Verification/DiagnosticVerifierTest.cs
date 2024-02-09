@@ -251,7 +251,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
             new VerifierBuilder<DummyAnalyzerVB>().AddSnippet("Public Class UnexpectedBuildError")
                 .WithConcurrentAnalysis(false)
                 .Invoking(x => x.Verify())
-                .Should().Throw<AssertFailedException>().Which.Message.Should().ContainIgnoringLineEndings("""
+                .Should().Throw<DiagnosticVerifierException>().Which.Message.Should().ContainIgnoringLineEndings("""
                     There are differences for VisualBasic12 snippet0.vb:
                       Line 1: Unexpected error, use ' Error [BC30481] 'Class' statement must end with a matching 'End Class'.
                     """);
@@ -325,7 +325,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                 .AddPaths("ExpectedIssuesNotRaised.cs", "ExpectedIssuesNotRaised2.cs")
                 .WithConcurrentAnalysis(false)
                 .Invoking(x => x.Verify())
-                .Should().Throw<AssertFailedException>().WithMessage("""
+                .Should().Throw<DiagnosticVerifierException>().WithMessage("""
                     There are differences for CSharp7 DiagnosticsVerifier\ExpectedIssuesNotRaised.cs:
                       Line 3: Missing expected issue ID MyId0
                       Line 5: Missing expected issue
@@ -344,7 +344,7 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                 .AddProject(AnalyzerLanguage.VisualBasic)
                 .AddSnippet("' Noncompliant ^1#0 {{This is not the correct message.}}");
             var compilation = project.GetCompilation(null, new VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary, optionExplicit: false));
-            ((Action)(() => DiagnosticVerifier.Verify(compilation, new VB.OptionExplicitOn()))).Should().Throw<AssertFailedException>().WithMessage("""
+            ((Action)(() => DiagnosticVerifier.Verify(compilation, new VB.OptionExplicitOn()))).Should().Throw<DiagnosticVerifierException>().WithMessage("""
                 There are differences for VisualBasic16_9 <project-level-issue>:
                   Line 1: The expected message 'This is not the correct message.' does not match the actual message 'Configure 'Option Explicit On' for assembly 'project0'.' Rule S6146
                 """);
@@ -357,12 +357,12 @@ namespace SonarAnalyzer.Test.TestFramework.Tests
                 .AddProject(AnalyzerLanguage.VisualBasic)
                 .AddSnippet("' Noncompliant@+1 {{This is expected on a wrong line.}}");
             var compilation = project.GetCompilation(null, new VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary, optionExplicit: false));
-            ((Action)(() => DiagnosticVerifier.Verify(compilation, new VB.OptionExplicitOn()))).Should().Throw<AssertFailedException>().WithMessage("""
+            ((Action)(() => DiagnosticVerifier.Verify(compilation, new VB.OptionExplicitOn()))).Should().Throw<DiagnosticVerifierException>().WithMessage("""
                 There are differences for VisualBasic16_9 <project-level-issue>:
                   Line 1: Unexpected issue 'Configure 'Option Explicit On' for assembly 'project0'.' Rule S6146
 
                 There are differences for VisualBasic16_9 snippet0.vb:
-                  Line 2: Missing issue 'This is expected on a wrong line.'
+                  Line 2: Missing expected issue 'This is expected on a wrong line.'
                 """);
         }
 

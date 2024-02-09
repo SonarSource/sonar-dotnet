@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Text;
-using FluentAssertions.Execution;
 using SonarAnalyzer.TestFramework.Verification.IssueValidation;
 
 namespace SonarAnalyzer.Test.TestFramework
@@ -113,23 +111,23 @@ namespace SonarAnalyzer.Test.TestFramework
 
         private static void Compare(string languageVersion, CompilationIssues actual, CompilationIssues expected)
         {
-            var assertionMessages = new StringBuilder();
+            var messages = new List<VerificationMessage>();
             foreach (var filePairs in MatchPairs(actual, expected).GroupBy(x => x.FilePath).OrderBy(x => x.Key))
             {
-                assertionMessages.AppendLine($"There are differences for {languageVersion} {SerializePath(filePairs.Key)}:");
+                messages.Add(new(null, $"There are differences for {languageVersion} {SerializePath(filePairs.Key)}:", null, 0));
                 foreach (var pair in filePairs.OrderBy(x => (x.Type, x.LineNumber, x.Start, x.IssueId, x.RuleId)))
                 {
-                    pair.AppendAssertionMessage(assertionMessages);
+                    messages.Add(pair.CreateMessage());
                 }
-                assertionMessages.AppendLine();
+                messages.Add(VerificationMessage.EmptyLine);
             }
-            if (assertionMessages.Length == 0)
+            if (messages.Any())
             {
-                actual.Dump(languageVersion);
+                throw new DiagnosticVerifierException(messages);
             }
             else
             {
-                Execute.Assertion.FailWith(assertionMessages.ToString().Replace("{", "{{").Replace("}", "}}"));    // Replacing { and } to avoid invalid format for string.Format
+                actual.Dump(languageVersion);
             }
 
             static string SerializePath(string path) =>

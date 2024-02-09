@@ -42,6 +42,29 @@ namespace SonarAnalyzer.Test.Common
             Console.WriteLine("Rspec folder " + Rspec);
         }
 
+        /// <summary>
+        /// Returns path to the TestCases folder from the currently executed test project.
+        /// </summary>
+        public static string CurrentTestCases()
+        {
+            // Under AltCover, this starts deeper than usually and we need to avoid the copied TestCases from TFM folder
+            // C:\...\sonar-dotnet\analyzers\tests\SonarAnalyzer.TestFramework.Test\bin\Debug\net7.0-windows\__Instrumented_SonarAnalyzer.TestFramework.Test\
+            var current = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetFullPath(".")));
+            while (current != TestsRoot)
+            {
+                var testCases = Path.Combine(current, "TestCases");
+                if (Directory.Exists(testCases))
+                {
+                    return testCases;
+                }
+                else
+                {
+                    current = Path.GetDirectoryName(current);
+                }
+            }
+            throw new InvalidOperationException("Could not find TestCases directory from current path: " + Path.GetFullPath("."));
+        }
+
         private static string FindTestsRoot()
         {
             var current = Path.GetFullPath(".");
