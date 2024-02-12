@@ -94,8 +94,8 @@ internal static partial class NuGetMetadataFactory
             var (nextCheck, latest) = File.Exists(path)
                 && File.ReadAllText(path).Split(';') is var values
                 && DateTime.TryParseExact(values[0], "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out var nextCheckValue)
-                ? (nextCheckValue, values[1])
-                : (DateTime.MinValue, null);
+                    ? (nextCheckValue, values[1])
+                    : (DateTime.MinValue, null);
             LogMessage($"Next check for latest NuGets: {nextCheck}");
             if (nextCheck < DateTime.Now)
             {
