@@ -1,21 +1,25 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <!-- `-windows` is required in order to be able to reference SonarAnalyzer.Test to resolve e.g. WinForms references -->
-        <TargetFramework>net8.0-windows</TargetFramework>
-        <Nullable>enable</Nullable>
+      <!-- `-windows` is required in order to be able to reference SonarAnalyzer.Test to resolve e.g. WinForms references -->
+      <TargetFramework>net8.0-windows</TargetFramework>
+      <Nullable>enable</Nullable>
+      <EnableMSTestRunner>true</EnableMSTestRunner>
+      <!-- MSTest runner needs an exe and not a dll -->
+      <OutputType>Exe</OutputType>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="altcover" Version="8.6.95" />
-      <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.3" />
-      <PackageReference Include="MSTest.TestAdapter" Version="3.1.1" />
-      <PackageReference Include="MSTest.TestFramework" Version="3.1.1" />
+      <PackageReference Include="altcover" Version="8.6.125" />
+      <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
+      <PackageReference Include="Microsoft.TestPlatform" Version="17.9.0" />
+      <PackageReference Include="MSTest.TestAdapter" Version="3.2.0" />
+      <PackageReference Include="MSTest.TestFramework" Version="3.2.0" />
     </ItemGroup>
 
   <ItemGroup>
-	<Using Include="Microsoft.CodeAnalysis" />
-	<Using Include="Microsoft.CodeAnalysis.Diagnostics" />
+    <Using Include="Microsoft.CodeAnalysis" />
+    <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
     <Using Include="SonarAnalyzer.TestFramework.Build" />
     <Using Include="SonarAnalyzer.TestFramework.MetadataReferences" />

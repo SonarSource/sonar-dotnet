@@ -4,31 +4,42 @@
     "net8.0-windows7.0": {
       "altcover": {
         "type": "Direct",
-        "requested": "[8.6.95, )",
-        "resolved": "8.6.95",
-        "contentHash": "/hjK4jymLaakUq9pih1pU8ITcVLPQD/pZh4Lga4m99y9dBH2CL4dJwgCc2kD9c6QZX2sZBT45wZmoebvUvn/pw=="
+        "requested": "[8.6.125, )",
+        "resolved": "8.6.125",
+        "contentHash": "BqYlne9exn3yzxgLfVK7hw7gKgpq8iYzNx32W/m+5QmoNxWGiMKMm9a1pJ1AT2AXxdPceYqUC41A3gr1jlzJ6w=="
       },
       "Microsoft.NET.Test.Sdk": {
         "type": "Direct",
-        "requested": "[17.6.3, )",
-        "resolved": "17.6.3",
-        "contentHash": "MglaNTl646dC2xpHKotSk1xscmHO5uV3x3NK057IUA9BM3Wgl16WMEb9ptGczk518JfLd1+Th5OAYwnoWgHQQQ==",
+        "requested": "[17.9.0, )",
+        "resolved": "17.9.0",
+        "contentHash": "7GUNAUbJYn644jzwLm5BD3a2p9C1dmP8Hr6fDPDxgItQk9hBs1Svdxzz07KQ/UphMSmgza9AbijBJGmw5D658A==",
         "dependencies": {
-          "Microsoft.CodeCoverage": "17.6.3",
-          "Microsoft.TestPlatform.TestHost": "17.6.3"
+          "Microsoft.CodeCoverage": "17.9.0",
+          "Microsoft.TestPlatform.TestHost": "17.9.0"
         }
+      },
+      "Microsoft.TestPlatform": {
+        "type": "Direct",
+        "requested": "[17.9.0, )",
+        "resolved": "17.9.0",
+        "contentHash": "lqPzfM6C5eIXLtp1TvLf329jBFkRrtatfvdxb79S6+t2X2XQVJxyigpoV4g3rBkqn1AGbLOa6/fGV0ef4CoHJQ=="
       },
       "MSTest.TestAdapter": {
         "type": "Direct",
-        "requested": "[3.1.1, )",
-        "resolved": "3.1.1",
-        "contentHash": "kMvdO5dhrUR3o1qk0fzS0St0prlKyMQAfz1ChVAUdGGobTU5ehR60szOFto0+Q7rFG5iXMvTlVIthXM9EcNYnw=="
+        "requested": "[3.2.0, )",
+        "resolved": "3.2.0",
+        "contentHash": "ddQhfk2d/w4pZ7wDAyxP1JFOUG09kB8U3Sso2Fj9lGr4kZYYpzmTrpG1Ghwvx3i/vPqwWhKvaVQIrQtsr7cPhg==",
+        "dependencies": {
+          "Microsoft.Testing.Extensions.Telemetry": "1.0.0",
+          "Microsoft.Testing.Extensions.VSTestBridge": "1.0.0",
+          "Microsoft.Testing.Platform.MSBuild": "1.0.0"
+        }
       },
       "MSTest.TestFramework": {
         "type": "Direct",
-        "requested": "[3.1.1, )",
-        "resolved": "3.1.1",
-        "contentHash": "3rjkGxciNHHmPW8cl1/QVIYjOpfptjmAH5JrLBw+dnMTYDoweg3I579N7OIbar3Zd3q9dfWFrCy2LEV/AmPn3A=="
+        "requested": "[3.2.0, )",
+        "resolved": "3.2.0",
+        "contentHash": "jrlSvf3DmE6nqMR194++GdpJfN4evGwDKlCzxC6mowvCj0QVWSPfTltkq9pyXO/ne4gpE8DpPl9dqTg4CNPiUQ=="
       },
       "StyleCop.Analyzers": {
         "type": "Direct",
@@ -72,6 +83,14 @@
         "type": "Transitive",
         "resolved": "2.14.1",
         "contentHash": "lQKvtaTDOXnoVJ20ibTuSIOf2i0uO0MPbDhd1jm238I+U/2ZnRENj0cktKZhtchBMtCUSRQ5v4xBCUbKNmyVMw=="
+      },
+      "Microsoft.ApplicationInsights": {
+        "type": "Transitive",
+        "resolved": "2.21.0",
+        "contentHash": "btZEDWAFNo9CoYliMCriSMTX3ruRGZTtYw4mo2XyyfLlowFicYVM2Xszi5evDG95QRYV7MbbH3D2RqVwfZlJHw==",
+        "dependencies": {
+          "System.Diagnostics.DiagnosticSource": "5.0.0"
+        }
       },
       "Microsoft.Bcl.AsyncInterfaces": {
         "type": "Transitive",
@@ -170,8 +189,8 @@
       },
       "Microsoft.CodeCoverage": {
         "type": "Transitive",
-        "resolved": "17.6.3",
-        "contentHash": "Gorg6F1dOxlI28yHYKhbQ3pOOfHeW6sUfsmwFQFaIV+xttUAZ+l8KarHIfsR+rBAnjY9VH71BXvPXBuObCkXsw=="
+        "resolved": "17.9.0",
+        "contentHash": "RGD37ZSrratfScYXm7M0HjvxMxZyWZL4jm+XgMZbkIY1UPgjUpbNA/t+WTGj/rC/0Hm9A3IrH3ywbKZkOCnoZA=="
       },
       "Microsoft.Composition": {
         "type": "Transitive",
@@ -183,21 +202,60 @@
         "resolved": "3.1.0",
         "contentHash": "z7aeg8oHln2CuNulfhiLYxCVMPEwBl3rzicjvIX+4sUuCwvXw5oXQEtbiU2c0z4qYL5L3Kmx0mMA/+t/SbY67w=="
       },
+      "Microsoft.Testing.Extensions.Telemetry": {
+        "type": "Transitive",
+        "resolved": "1.0.0",
+        "contentHash": "F3R3yjB93H3H0ak9DJm1W4lIhr9wxy/9n05eO8eKZpuHGsCyMj5qqLQOTxeGqUB0oG6Ok3FIvYxYZJa0GevshQ==",
+        "dependencies": {
+          "Microsoft.ApplicationInsights": "2.21.0",
+          "Microsoft.Testing.Platform": "1.0.0"
+        }
+      },
+      "Microsoft.Testing.Extensions.TrxReport.Abstractions": {
+        "type": "Transitive",
+        "resolved": "1.0.0",
+        "contentHash": "wQObn9m3xV/JiSatHYqlJNuEnoe7C3yIzHtr5jACHS67Y0/gITTAHdzWw8MInd/HWj0uVT+LwbeP8JQhSh8quA==",
+        "dependencies": {
+          "Microsoft.Testing.Platform": "1.0.0"
+        }
+      },
+      "Microsoft.Testing.Extensions.VSTestBridge": {
+        "type": "Transitive",
+        "resolved": "1.0.0",
+        "contentHash": "aIZ5l/3+DwRn4lxcXXKfgVVg2aWRTmf9BhSZO+y9JkGa3TjtZkGLw4pDx/OHcj32cS/MqssXUAtMjLEZV31bqw==",
+        "dependencies": {
+          "Microsoft.TestPlatform.ObjectModel": "17.5.0",
+          "Microsoft.Testing.Extensions.TrxReport.Abstractions": "1.0.0",
+          "Microsoft.Testing.Platform": "1.0.0"
+        }
+      },
+      "Microsoft.Testing.Platform": {
+        "type": "Transitive",
+        "resolved": "1.0.0",
+        "contentHash": "HTiRQgiIOTOd9yihyIIsJzOI5ZXx0CwjNVzv0bdxd7s5Y8utVXUBUY+P8jD4KusY8CI9+9T87VE5MCx+N5SYsw=="
+      },
+      "Microsoft.Testing.Platform.MSBuild": {
+        "type": "Transitive",
+        "resolved": "1.0.0",
+        "contentHash": "dw6Q3cVQELdj12ywijQwCIJmiwPRGMUyXlsao/M/uS3TuNg02JTazrTrY+O2GUi+2uvhCtLIc+sBQfvJ6GTAJw==",
+        "dependencies": {
+          "Microsoft.Testing.Platform": "1.0.0"
+        }
+      },
       "Microsoft.TestPlatform.ObjectModel": {
         "type": "Transitive",
-        "resolved": "17.6.3",
-        "contentHash": "gSqtX3RvcFisaLPs6sKXdZkSwUix83NQ9nOU/w6pYrHTl+d8GsVHSL9rvDNxMgoV5BNOdyU7zK7JOfbSaVMDWQ==",
+        "resolved": "17.9.0",
+        "contentHash": "1ilw/8vgmjLyKU+2SKXKXaOqpYFJCQfGqGz+x0cosl981VzjrY74Sv6qAJv+neZMZ9ZMxF3ArN6kotaQ4uvEBw==",
         "dependencies": {
-          "NuGet.Frameworks": "6.5.0",
           "System.Reflection.Metadata": "1.6.0"
         }
       },
       "Microsoft.TestPlatform.TestHost": {
         "type": "Transitive",
-        "resolved": "17.6.3",
-        "contentHash": "lrgRXKFfIZSPlhuoQGLtciO/osL+4oADYEYb0d5or7n7YyJATIWespq3lRgz2IQpRh6N7cm0DnCOWeZiCRGzxA==",
+        "resolved": "17.9.0",
+        "contentHash": "Spmg7Wx49Ya3SxBjyeAR+nQpjMTKZwTwpZ7KyeOTIqI/WHNPnBU4HUvl5kuHPQAwGWqMy4FGZja1HvEwvoaDiA==",
         "dependencies": {
-          "Microsoft.TestPlatform.ObjectModel": "17.6.3",
+          "Microsoft.TestPlatform.ObjectModel": "17.9.0",
           "Newtonsoft.Json": "13.0.1"
         }
       },
@@ -334,6 +392,11 @@
           "System.Security.Cryptography.ProtectedData": "4.4.0"
         }
       },
+      "System.Diagnostics.DiagnosticSource": {
+        "type": "Transitive",
+        "resolved": "5.0.0",
+        "contentHash": "tCQTzPsGZh/A9LhhA6zrqCRV4hOHsK90/G7q3Khxmn6tnB1PuNU0cRaKANP2AWcF9bn0zsuOoZOSrHuJk6oNBA=="
+      },
       "System.Diagnostics.EventLog": {
         "type": "Transitive",
         "resolved": "6.0.0",
@@ -464,7 +527,7 @@
         "type": "Project",
         "dependencies": {
           "FluentAssertions": "[6.12.0, )",
-          "MSTest.TestFramework": "[3.1.1, )",
+          "MSTest.TestFramework": "[3.2.0, )",
           "Microsoft.Build.Locator": "[1.5.5, )",
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "[4.8.0-2.final, )",
           "Microsoft.CodeAnalysis.VisualBasic.Workspaces": "[4.8.0-2.final, )",

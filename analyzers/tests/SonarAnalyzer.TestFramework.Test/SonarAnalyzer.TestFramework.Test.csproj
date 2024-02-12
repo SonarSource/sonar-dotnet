@@ -3,18 +3,22 @@
   <PropertyGroup>
     <!-- 01/2024: Using net8.0-windows breaks Verifier.CompileRazor -->
     <TargetFramework>net7.0-windows</TargetFramework>
+    <EnableMSTestRunner>true</EnableMSTestRunner>
+    <!-- MSTest runner needs an exe and not a dll -->
+    <OutputType>Exe</OutputType>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="altcover" Version="8.6.95" />
+    <PackageReference Include="altcover" Version="8.6.125" />
     <PackageReference Include="FluentAssertions" Version="6.12.0" />
     <PackageReference Include="FluentAssertions.Analyzers" Version="0.23.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.3" />
-    <PackageReference Include="MSTest.TestAdapter" Version="3.1.1" />
-    <PackageReference Include="MSTest.TestFramework" Version="3.1.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
+    <PackageReference Include="Microsoft.TestPlatform" Version="17.9.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="3.2.0" />
+    <PackageReference Include="MSTest.TestFramework" Version="3.2.0" />
   </ItemGroup>
 
   <ItemGroup>
