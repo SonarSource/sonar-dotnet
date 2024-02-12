@@ -38,7 +38,7 @@ public static class Sarif
             }
             """;
         var suffix = tfm is null ? string.Empty : $"-{tfm}";
-        File.WriteAllText(Path.Combine(rootPath, solution, $"{project}{suffix}.json"), content);
+        File.WriteAllText(Path.Combine(rootPath, solution, "issues", $"{project}{suffix}.json"), content);
         return content;
     }
 

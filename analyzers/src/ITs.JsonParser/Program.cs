@@ -42,7 +42,7 @@ public static class Program
         var sw = Stopwatch.StartNew();
         ConsoleHelper.WriteLineColor("Splitting the SARIF reports to actual folder", ConsoleColor.Yellow);
         var here = Directory.GetCurrentDirectory();
-        var inputRoot = Path.Combine(here, "output", "Issues");
+        var inputRoot = Path.Combine(here, "output");
         var outputRoot = Path.Combine(here, "actual");
         IssueParser.Execute(inputRoot, outputRoot);
         ConsoleHelper.WriteLineColor($"Finished splitting the SARIF reports in '{sw.Elapsed}'", ConsoleColor.Yellow);

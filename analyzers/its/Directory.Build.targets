@@ -5,7 +5,7 @@
     <PropertyGroup>
       <BinariesFolder>$(MSBuildStartupDirectory)\..\packaging\binaries</BinariesFolder>
       <AnalysisOutputPath>$(MSBuildStartupDirectory)\output\$(PROJECT)\$(AssemblyName)</AnalysisOutputPath>
-      <ErrorLogFolder>$(MSBuildStartupDirectory)\output\Issues\$(PROJECT)</ErrorLogFolder>
+      <ErrorLogFolder>$(MSBuildStartupDirectory)\output\$(PROJECT)\issues</ErrorLogFolder>
       <ErrorLogPrefix Condition="'$(TargetFramework)' == ''">$(ErrorLogFolder)\$(AssemblyName)</ErrorLogPrefix>
       <ErrorLogPrefix Condition="'$(TargetFramework)' != ''">$(ErrorLogFolder)\$(AssemblyName)-$(TargetFramework)</ErrorLogPrefix>
       <SonarAnalysisConfigPath>$(MSBuildStartupDirectory)\SonarQubeAnalysisConfig.xml</SonarAnalysisConfigPath>
