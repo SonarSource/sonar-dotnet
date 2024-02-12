@@ -183,11 +183,17 @@ public class Repro_8739
 {
     private object[] items;
 
-    public IEnumerable<T> GetNodes<T>() =>  // Noncompliant FP
+    public IEnumerable<T> GetNodes<T>() =>
         Calculate<T>();
 
-    public IEnumerable<T> GetNodesOriginal<T>() where T : Exception =>  // Noncompliant FP
+    public IEnumerable<T> GetNodesOriginal<T>() where T : Exception =>
         items.OfType<T>();
 
-    private IEnumerable<T> Calculate<T>() => null;
+    private static IEnumerable<T> Calculate<T>() => null;
+
+    public class GenericType<T>
+    {
+        public IEnumerable<T> GetNodes() =>  // Noncompliant, this can be a property
+            Calculate<T>();
+    }
 }
