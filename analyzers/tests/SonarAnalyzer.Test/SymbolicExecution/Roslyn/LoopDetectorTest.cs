@@ -26,165 +26,126 @@ namespace SonarAnalyzer.Test.SymbolicExecution.Roslyn;
 public class LoopDetectorTest
 {
     [TestMethod]
-    public void LoopDetector_For()
-    {
-        var code = """
-            _ = "Before loop";       // Block 1
-            for (var i = 0; i < 10; i++)            // Block 2: assignment, Block 3: condition, Block 4: increment
+    public void LoopDetector_For() =>
+        ValidateLoops("""
+            _ = "Before loop";              // Block 1
+            for (var i = 0; i < 10; i++)    // Block 2: assignment, Block 3: condition, Block 4: increment
             {
-                _ = "Inside loop";   // Block 4
+                _ = "Inside loop";          // Block 4
             }
-            _ = "After loop";        // Block 5
-            """;
-        var cfg = TestHelper.CompileCfgBodyCS(code, "bool condition");
-        LoopDetector loopDetector = new(cfg);
-        cfg.Blocks.Should().HaveCount(7);
-        cfg.Blocks.Where(x => x.Ordinal is 3 or 4).Should().AllSatisfy(x => loopDetector.IsInLoop(x).Should().BeTrue());
-        cfg.Blocks.Where(x => x.Ordinal is 0 or 1 or 2 or 5 or 6).Should().AllSatisfy(x => loopDetector.IsInLoop(x).Should().BeFalse());
-    }
+            _ = "After loop";               // Block 5
+            """,
+            [3, 4],
+            [1, 2, 5]);
 
     [TestMethod]
-    public void LoopDetector_ForEach()
-    {
-        var code = """
-            _ = "Before loop";       // Block 1
-            foreach (var i in items)                // Block 2: capture, Block 3: MoveNext
+    public void LoopDetector_ForEach() =>
+        ValidateLoops("""
+            _ = "Before loop";          // Block 1
+            foreach (var i in items)    // Block 2: capture, Block 3: MoveNext
             {
-                _ = "Inside loop";   // Block 4
-            }                                       // Block 5-7: finally
-            _ = "After loop";        // Block 8
-            """;
-        var cfg = TestHelper.CompileCfgBodyCS(code, "int[] items");
-        LoopDetector loopDetector = new(cfg);
-        cfg.Blocks.Should().HaveCount(10);
-        cfg.Blocks.Where(x => x.Ordinal is 3 or 4).Should().AllSatisfy(x => loopDetector.IsInLoop(x).Should().BeTrue());
-        cfg.Blocks.Where(x => x.Ordinal is 0 or 1 or 2 or 5 or 6 or 7 or 8 or 9).Should().AllSatisfy(x => loopDetector.IsInLoop(x).Should().BeFalse());
-    }
+                _ = "Inside loop";      // Block 4
+            }                           // Block 5-7: finally
+            _ = "After loop";           // Block 8
+            """,
+            [3, 4],
+            [1, 2, 5, 6, 7, 8]);
 
     [TestMethod]
-    public void LoopDetector_While()
-    {
-        var code = """
+    public void LoopDetector_While() =>
+        ValidateLoops("""
             _ = "Before loop";       // Block 1
-            while (condition)                       // Block 2
+            while (condition)        // Block 2
             {
                 _ = "Inside loop";   // Block 3
             }
             _ = "After loop";        // Block 4
-            """;
-        var cfg = TestHelper.CompileCfgBodyCS(code, "bool condition");
-        LoopDetector loopDetector = new(cfg);
-        cfg.Blocks.Should().HaveCount(6);
-        cfg.Blocks.Where(x => x.Ordinal is 2 or 3).Should().AllSatisfy(x => loopDetector.IsInLoop(x).Should().BeTrue());
-        cfg.Blocks.Where(x => x.Ordinal is 0 or 1 or 4 or 5).Should().AllSatisfy(x => loopDetector.IsInLoop(x).Should().BeFalse());
-    }
+            """,
+            [2, 3],
+            [1, 4]);
 
     [TestMethod]
-    public void LoopDetector_DoWhile()
-    {
-        var code = """
+    public void LoopDetector_DoWhile() =>
+        ValidateLoops("""
             _ = "Before loop";       // Block 1
             do
             {
                 _ = "Inside loop";   // Block 2
             }
-            while (condition);                      // Block 2
+            while (condition);       // Block 2
             _ = "After loop";        // Block 3
-            """;
-        var cfg = TestHelper.CompileCfgBodyCS(code, "bool condition");
-        LoopDetector loopDetector = new(cfg);
-        cfg.Blocks.Should().HaveCount(5);
-        cfg.Blocks.Where(x => x.Ordinal is 2).Should().AllSatisfy(x => loopDetector.IsInLoop(x).Should().BeTrue());
-        cfg.Blocks.Where(x => x.Ordinal is 0 or 1 or 3 or 4).Should().AllSatisfy(x => loopDetector.IsInLoop(x).Should().BeFalse());
-    }
+            """,
+            [2],
+            [1, 3]);
 
     [TestMethod]
-    public void LoopDetector_GoTo()
-    {
-        var code = """
+    public void LoopDetector_GoTo() =>
+        ValidateLoops("""
             _ = "Before loop";   // Block 1
             Start:
             _ = "Inside loop";   // Block 2
-            if (condition)                      // Block 2
+            if (condition)       // Block 2
                 goto Start;
             _ = "After loop";    // Block 3
-            """;
-        var cfg = TestHelper.CompileCfgBodyCS(code, "bool condition");
-        LoopDetector loopDetector = new(cfg);
-        cfg.Blocks.Should().HaveCount(5);
-        cfg.Blocks.Where(x => x.Ordinal is 2).Should().AllSatisfy(x => loopDetector.IsInLoop(x).Should().BeTrue());
-        cfg.Blocks.Where(x => x.Ordinal is 0 or 1 or 3 or 4).Should().AllSatisfy(x => loopDetector.IsInLoop(x).Should().BeFalse());
-    }
+            """,
+            [2],
+            [1, 3]);
 
     [TestMethod]
-    public void LoopDetector_GoTo_NoLoop()
-    {
-        var code = """
+    public void LoopDetector_GoTo_NoLoop() =>
+        ValidateLoops("""
             goto Three;
             One:
-            _ = "One";
+            _ = "Last";
             return;
             Two:
-            _ = "Two";
+            _ = "Middle";
             goto One;
             Three:
-            _ = "Three";
+            _ = "First";
             goto Two;
-            """;
-        var cfg = TestHelper.CompileCfgBodyCS(code, "bool condition");
-        LoopDetector loopDetector = new(cfg);
-        cfg.Blocks.Should().AllSatisfy(x => loopDetector.IsInLoop(x).Should().BeFalse());
-    }
+            """,
+            [],
+            [1, 2, 3]);
 
     [TestMethod]
-    public void LoopDetector_Nested()
-    {
-        var code = """
+    public void LoopDetector_Nested() =>
+        ValidateLoops("""
             _ = "Before loop";               // Block 1
-            while (condition)                               // Block 2
+            while (condition)                // Block 2
             {
                 _ = "Inside outer loop";     // Block 3
-                while (condition)                           // Block 4
+                while (condition)            // Block 4
                 {
                     _ = "Inside inner loop"; // Block 5
                 }
                 _ = "Inside outer loop";     // Block 6
             }
             _ = "After loop";                // Block 7
-            """;
-        var cfg = TestHelper.CompileCfgBodyCS(code, "bool condition");
-        LoopDetector loopDetector = new(cfg);
-        cfg.Blocks.Should().HaveCount(9);
-        cfg.Blocks.Where(x => x.Ordinal is 2 or 3 or 4 or 5 or 6).Should().AllSatisfy(x => loopDetector.IsInLoop(x).Should().BeTrue());
-        cfg.Blocks.Where(x => x.Ordinal is 0 or 1 or 7 or 8).Should().AllSatisfy(x => loopDetector.IsInLoop(x).Should().BeFalse());
-    }
+            """,
+            [2, 3, 4, 5, 6],
+            [1, 7]);
 
     [TestMethod]
-    public void LoopDetector_NotReducable()
-    {
-        var code = """
+    public void LoopDetector_NotReducable() =>
+        ValidateLoops("""
             _ = "Before loop";   // Block 1
             Entry1:
             _ = "Entry 1";       // Block 2
             Entry2:
             _ = "Entry 2";       // Block 3
-            if (condition)                      // Block 3
+            if (condition)       // Block 3
                 goto Entry1;
-            if (condition)                      // Block 4
+            if (condition)       // Block 4
                 goto Entry2;
             _ = "After loop";    // Block 5
-            """;
-        var cfg = TestHelper.CompileCfgBodyCS(code, "bool condition");
-        LoopDetector loopDetector = new(cfg);
-        cfg.Blocks.Should().HaveCount(7);
-        cfg.Blocks.Where(x => x.Ordinal is 2 or 3 or 4).Should().AllSatisfy(x => loopDetector.IsInLoop(x).Should().BeTrue());
-        cfg.Blocks.Where(x => x.Ordinal is 0 or 1 or 5 or 6).Should().AllSatisfy(x => loopDetector.IsInLoop(x).Should().BeFalse());
-    }
+            """,
+            [2, 3, 4],
+            [1, 5]);
 
     [TestMethod]
-    public void LoopDetector_If()
-    {
-        var code = """
+    public void LoopDetector_If() =>
+        ValidateLoops("""
             _ = "Before If";
             if (condition)
             {
@@ -197,21 +158,18 @@ public class LoopDetectorTest
             _ = "After If";
             _ = condition ? "Inside Ternary" : "Inside Ternary Else";
             _ = ""?.ToString() ?? "Inside Coalesce";
-            """;
-        var cfg = TestHelper.CompileCfgBodyCS(code, "bool condition");
-        LoopDetector loopDetector = new(cfg);
-        cfg.Blocks.Should().AllSatisfy(x => loopDetector.IsInLoop(x).Should().BeFalse());
-    }
+            """,
+            [],
+            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
 
     [TestMethod]
-    public void LoopDetector_IfInLoop()
-    {
-        var code = """
+    public void LoopDetector_IfInLoop() =>
+        ValidateLoops("""
             _ = "Before Loop";   // Block 1
-            while (condition)                   // Block 2
+            while (condition)    // Block 2
             {
                 _ = "Before If"; // Block 3
-                if (condition)                  // Block 3
+                if (condition)   // Block 3
                 {
                     _ = "If";    // Block 5
                 }
@@ -222,23 +180,18 @@ public class LoopDetectorTest
                 _ = "After If";  // Block 6
             }
             _ = "After Loop";    // Block 7
-            """;
-        var cfg = TestHelper.CompileCfgBodyCS(code, "bool condition");
-        LoopDetector loopDetector = new(cfg);
-        cfg.Blocks.Should().HaveCount(9);
-        cfg.Blocks.Where(x => x.Ordinal is 2 or 3 or 4 or 5 or 6).Should().AllSatisfy(x => loopDetector.IsInLoop(x).Should().BeTrue());
-        cfg.Blocks.Where(x => x.Ordinal is 0 or 1 or 7 or 8).Should().AllSatisfy(x => loopDetector.IsInLoop(x).Should().BeFalse());
-    }
+            """,
+            [2, 3, 4, 5, 6],
+            [1, 7]);
 
     [TestMethod]
-    public void LoopDetector_TwoIfsInLoop()
-    {
-        var code = """
+    public void LoopDetector_TwoIfsInLoop() =>
+        ValidateLoops("""
             _ = "Before Loop";       // Block 1
-            while (condition)                       // Block 2
+            while (condition)        // Block 2
             {
                 _ = "Before If";     // Block 3
-                if (condition)                      // Block 3
+                if (condition)       // Block 3
                 {
                     _ = "If 1";      // Block 5
                 }
@@ -246,7 +199,7 @@ public class LoopDetectorTest
                 {
                     _ = "Else 1";    // Block 4
                 }
-                if (condition)                      // Block 6
+                if (condition)       // Block 6
                 {
                     _ = "If 2";      // Block 8
                 }
@@ -257,26 +210,21 @@ public class LoopDetectorTest
                 _ = "After If";      // Block 9
             }
             _ = "After Loop";        // Block 10
-            """;
-        var cfg = TestHelper.CompileCfgBodyCS(code, "bool condition");
-        LoopDetector loopDetector = new(cfg);
-        cfg.Blocks.Should().HaveCount(12);
-        cfg.Blocks.Where(x => x.Ordinal is 2 or 3 or 4 or 5 or 6 or 7 or 8 or 9).Should().AllSatisfy(x => loopDetector.IsInLoop(x).Should().BeTrue());
-        cfg.Blocks.Where(x => x.Ordinal is 0 or 1 or 10 or 11).Should().AllSatisfy(x => loopDetector.IsInLoop(x).Should().BeFalse());
-    }
+            """,
+            [2, 3, 4, 5, 6, 7, 8, 9],
+            [1, 10]);
 
     [TestMethod]
-    public void LoopDetector_NestedIfsInLoop()
-    {
-        var code = """
+    public void LoopDetector_NestedIfsInLoop() =>
+        ValidateLoops("""
             _ = "Before Loop";               // Block 1
-            while (condition)                               // Block 2
+            while (condition)                // Block 2
             {
                 _ = "Before Outer If";       // Block 3
-                if (condition)                              // Block 3
+                if (condition)               // Block 3
                 {
                     _ = "Before Inner If";   // Block 4
-                    if (condition)                          // Block 4
+                    if (condition)           // Block 4
                     {
                         _ = "Inner If";      // Block 6
                     }
@@ -289,43 +237,33 @@ public class LoopDetectorTest
                 _ = "After If";              // Block 8
             }
             _ = "After Loop";                // Block 9
-            """;
-        var cfg = TestHelper.CompileCfgBodyCS(code, "bool condition");
-        LoopDetector loopDetector = new(cfg);
-        cfg.Blocks.Should().HaveCount(11);
-        cfg.Blocks.Where(x => x.Ordinal is 2 or 3 or 4 or 5 or 6 or 7 or 8).Should().AllSatisfy(x => loopDetector.IsInLoop(x).Should().BeTrue());
-        cfg.Blocks.Where(x => x.Ordinal is 0 or 1 or 9 or 10).Should().AllSatisfy(x => loopDetector.IsInLoop(x).Should().BeFalse());
-    }
+            """,
+            [2, 3, 4, 5, 6, 7, 8],
+            [1, 9]);
 
     [TestMethod]
-    public void LoopDetector_LoopInIf()
-    {
-        var code = """
+    public void LoopDetector_LoopInIf() =>
+        ValidateLoops("""
             _ = "Before If";         // Block 1
-            if (condition)                          // Block 1
+            if (condition)           // Block 1
             {
                 _ = "Before Loop";   // Block 2
-                while (condition)                   // Block 3
+                while (condition)    // Block 3
                 {
                     _ = "In Loop";   // Block 4
                 }
                 _ = "After Loop";    // Block 5
             }
             _ = "After If";          // Block 6
-            """;
-        var cfg = TestHelper.CompileCfgBodyCS(code, "bool condition");
-        LoopDetector loopDetector = new(cfg);
-        cfg.Blocks.Should().HaveCount(8);
-        cfg.Blocks.Where(x => x.Ordinal is 3 or 4).Should().AllSatisfy(x => loopDetector.IsInLoop(x).Should().BeTrue());
-        cfg.Blocks.Where(x => x.Ordinal is 0 or 1 or 2 or 5 or 6 or 7).Should().AllSatisfy(x => loopDetector.IsInLoop(x).Should().BeFalse());
-    }
+            """,
+            [3, 4],
+            [1, 2, 5, 6]);
 
     [TestMethod]
-    public void LoopDetector_LoopAndIfs()
-    {
-        var code = """
+    public void LoopDetector_LoopAndIfs() =>
+        ValidateLoops("""
             _ = "Before If 1";   // Block 1
-            if (condition)                      // Block 1
+            if (condition)       // Block 1
             {
                 _ = "If 1";      // Block 3
             }
@@ -334,12 +272,12 @@ public class LoopDetectorTest
                 _ = "Else 1";    // Block 2
             }
             _ = "Before Loop";   // Block 4
-            while (condition)                   // Block 5
+            while (condition)    // Block 5
             {
                 _ = "In Loop";   // Block 6
             }
             _ = "After Loop";    // Block 7
-            if (condition)                      // Block 7
+            if (condition)       // Block 7
             {
                 _ = "If 2";      // Block 9
             }
@@ -348,20 +286,15 @@ public class LoopDetectorTest
                 _ = "Else 2";    // Block 8
             }
             _ = "After If 2";    // Block 10
-            """;
-        var cfg = TestHelper.CompileCfgBodyCS(code, "bool condition");
-        LoopDetector loopDetector = new(cfg);
-        cfg.Blocks.Should().HaveCount(12);
-        cfg.Blocks.Where(x => x.Ordinal is 5 or 6).Should().AllSatisfy(x => loopDetector.IsInLoop(x).Should().BeTrue());
-        cfg.Blocks.Where(x => x.Ordinal is 0 or 1 or 2 or 3 or 4 or 7 or 8 or 9 or 10 or 11).Should().AllSatisfy(x => loopDetector.IsInLoop(x).Should().BeFalse());
-    }
+            """,
+            [5, 6],
+            [1, 2, 3, 4, 7, 8, 9, 10]);
 
     [TestMethod]
-    public void LoopDetector_TryCatch()
-    {
-        var code = """
+    public void LoopDetector_TryCatch() =>
+        ValidateLoops("""
             _ = "Before loop";               // Block 1
-            while (condition)                               // Block 2
+            while (condition)                // Block 2
             {
                 _ = "Inside loop";           // Block 3
                 try
@@ -378,18 +311,13 @@ public class LoopDetectorTest
                 }
             }
             _ = "After loop";                // Block 7
-            """;
-        var cfg = TestHelper.CompileCfgBodyCS(code, "bool condition");
-        LoopDetector loopDetector = new(cfg);
-        cfg.Blocks.Should().HaveCount(9);
-        cfg.Blocks.Where(x => x.Ordinal is 2 or 3 or 4).Should().AllSatisfy(x => loopDetector.IsInLoop(x).Should().BeTrue());      // should be 2-6
-        cfg.Blocks.Where(x => x.Ordinal is 0 or 1 or 5 or 6 or 7 or 8).Should().AllSatisfy(x => loopDetector.IsInLoop(x).Should().BeFalse());
-    }
+            """,
+            [2, 3, 4],
+            [1, 5, 6, 7]);
 
     [TestMethod]
-    public void LoopDetector_TouchingLoops()
-    {
-        var code = """
+    public void LoopDetector_TouchingLoops() =>
+        ValidateLoops("""
             _ = "Start";    // Block 1
             First:
             _ = "First";    // Block 2
@@ -405,18 +333,13 @@ public class LoopDetectorTest
             if (condition)  // Block 4
                 goto Second;
             _ = "End";      // Block 5
-            """;
-        var cfg = TestHelper.CompileCfgBodyCS(code, "bool condition");
-        LoopDetector loopDetector = new(cfg);
-        cfg.Blocks.Should().HaveCount(7);
-        cfg.Blocks.Where(x => x.Ordinal is 2 or 3 or 4).Should().AllSatisfy(x => loopDetector.IsInLoop(x).Should().BeTrue());
-        cfg.Blocks.Where(x => x.Ordinal is 0 or 1 or 5 or 6).Should().AllSatisfy(x => loopDetector.IsInLoop(x).Should().BeFalse());
-    }
+            """,
+            [2, 3, 4],
+            [1, 5]);
 
     [TestMethod]
-    public void LoopDetector_ParallelLoops()
-    {
-        var code = """
+    public void LoopDetector_ParallelLoops() =>
+        ValidateLoops("""
             One:
             _ = "One";      // Block 1
             if (condition)  // Block 1
@@ -440,45 +363,52 @@ public class LoopDetectorTest
             goto Three;
             End:
             _ = "End";      // Block 7
-            """;
-        var cfg = TestHelper.CompileCfgBodyCS(code, "bool condition");
-        LoopDetector loopDetector = new(cfg);
-        cfg.Blocks.Should().HaveCount(9);
-        cfg.Blocks.Where(x => x.Ordinal is 1 or 3 or 4 or 6).Should().AllSatisfy(x => loopDetector.IsInLoop(x).Should().BeTrue());
-        cfg.Blocks.Where(x => x.Ordinal is 0 or 2 or 5 or 7 or 8).Should().AllSatisfy(x => loopDetector.IsInLoop(x).Should().BeFalse());
-    }
+            """,
+            [1, 3, 4, 6],
+            [2, 5, 7]);
 
     [TestMethod]
-    public void LoopDetector_Complex()
-    {
-        var code = """
-            if (condition)                          // Block 1
+    public void LoopDetector_Complex() =>
+        ValidateLoops("""
+            if (condition)      // Block 1
             {
                 goto AlternativeEntry;
             }
             Loop:
-            if (condition)                          // Block 2
+            if (condition)      // Block 2
             {
                 goto AfterLoop;
             }
             AlternativeEntry:
-            if (condition)                          // Block 3
+            if (condition)      // Block 3
             {
                 goto Skip;
             }
-            _ = "Skippable";         // Block 4
+            _ = "Skippable";    // Block 4
             Skip:
-            if (condition)                          // Block 5
+            if (condition)      // Block 5
             {
                 goto Loop;
             }
             AfterLoop:
-            _ = "After loop";        // Block 6
-            """;
-        var cfg = TestHelper.CompileCfgBodyCS(code, "bool condition");
-        LoopDetector loopDetector = new(cfg);
-        cfg.Blocks.Should().HaveCount(8);
-        cfg.Blocks.Where(x => x.Ordinal is 2 or 3 or 4 or 5).Should().AllSatisfy(x => loopDetector.IsInLoop(x).Should().BeTrue());
-        cfg.Blocks.Where(x => x.Ordinal is 0 or 1 or 6 or 7).Should().AllSatisfy(x => loopDetector.IsInLoop(x).Should().BeFalse());
+            _ = "After loop";   // Block 6
+            """,
+            [2, 3, 4, 5],
+            [1, 6]);
+
+    private static void ValidateLoops(string snippet, int[] expectedBlocksInLoop, int[] expectedBlocksOutsideLoop)
+    {
+        var cfg = TestHelper.CompileCfgBodyCS(snippet, "int[] items, bool condition");
+        var sut = new LoopDetector(cfg);
+        var count = expectedBlocksInLoop.Length + expectedBlocksOutsideLoop.Length;
+        cfg.Blocks.Should().HaveCount(count + 2);
+        if (expectedBlocksInLoop.Any())
+        {
+            cfg.Blocks.Where(x => expectedBlocksInLoop.Contains(x.Ordinal)).Should().AllSatisfy(x => sut.IsInLoop(x).Should().BeTrue());
+        }
+        if (expectedBlocksOutsideLoop.Any())
+        {
+            cfg.Blocks.Where(x => x.Ordinal is 0 || x.Ordinal == count + 1 || expectedBlocksOutsideLoop.Contains(x.Ordinal)).Should().AllSatisfy(x => sut.IsInLoop(x).Should().BeFalse());
+        }
     }
 }

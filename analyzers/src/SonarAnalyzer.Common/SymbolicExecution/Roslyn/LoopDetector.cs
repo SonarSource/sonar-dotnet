@@ -42,24 +42,24 @@ internal class LoopDetector
     {
         var processed = new HashSet<int>();
         var loops = new List<HashSet<int>>();
-        var toProcess = new Stack<List<int>>();
+        var toProcess = new Stack<int[]>();
         toProcess.Push([1]);
         while (toProcess.TryPop(out var path))
         {
-            var last = path[path.Count - 1];
+            var last = path[path.Length - 1];
             if (processed.Add(last))
             {
                 foreach (var successor in Successors(last))
                 {
-                    toProcess.Push([.. path, successor]);   // add successor to the path and schedule it for processing
+                    toProcess.Push([.. path, successor]);
                 }
             }
             else
             {
-                var index = path.IndexOf(last);
-                if (index < path.Count - 1)         // is the block in the path twice? -> loop
+                var index = path.IndexOf(x => x == last);
+                if (index < path.Length - 1)         // is the block in the path twice? -> loop
                 {
-                    loops.Add(path.GetRange(index, path.Count - 1 - index).ToHashSet());    // equivalent to [index..^1]
+                    loops.Add(path.Skip(index).Take(path.Length - 1 - index).ToHashSet());
                 }
                 else
                 {
@@ -73,14 +73,14 @@ internal class LoopDetector
             cfg.Blocks[last].SuccessorBlocks.Select(x => x.Ordinal);
 
         // For a given path [..A..B], if we find a loop that both A and B are part of, all blocks between A and B should also be considered part of that loop.
-        void MergeWithIntersectingLoops(List<int> path, int last)
+        void MergeWithIntersectingLoops(int[] path, int last)
         {
             foreach (var loop in loops.Where(x => x.Contains(last)))    // B is part of the loop
             {
                 var intersection = path.IndexOf(loop.Contains);
-                if (intersection < path.Count - 1)                      // A is part of the loop
+                if (intersection < path.Length - 1)                      // A is part of the loop
                 {
-                    loop.AddRange(path.GetRange(intersection + 1, path.Count - 1 - intersection));  // add all blocks between A and B to the loop
+                    loop.AddRange(path.Skip(intersection + 1).Take(path.Length - 1 - intersection));  // add all blocks between A and B to the loop
                 }
             }
         }

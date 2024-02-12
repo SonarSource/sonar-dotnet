@@ -185,8 +185,7 @@ internal class RoslynSymbolicExecution
         if (branch.Source.BranchValue is { } branchValue && branch.Source.ConditionalSuccessor is not null) // This branching was conditional
         {
             state = SetBranchingConstraints(branch, state, branchValue);
-            SymbolicContext context = new(block, branchValue.ToSonar(), state, syntaxClassifier.IsInLoopCondition(branchValue.Syntax), loopDetector.IsInLoop(block), visitCount, lva.CapturedVariables);
-            state = checks.ConditionEvaluated(context);
+            state = checks.ConditionEvaluated(new(block, branchValue.ToSonar(), state, false, loopDetector.IsInLoop(block), visitCount, lva.CapturedVariables));
             if (state is null)
             {
                 return null;
