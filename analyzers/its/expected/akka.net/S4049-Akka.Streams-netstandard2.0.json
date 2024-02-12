@@ -2,30 +2,6 @@
   "Issues": [
     {
       "Id": "S4049",
-      "Message": "Consider making method \u0027GetAttributeList\u0027 a property.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L346",
-      "Location": "Line 346 Position 35-51"
-    },
-    {
-      "Id": "S4049",
-      "Message": "Consider making method \u0027GetAttribute\u0027 a property.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L375",
-      "Location": "Line 375 Position 22-34"
-    },
-    {
-      "Id": "S4049",
-      "Message": "Consider making method \u0027GetFirstAttribute\u0027 a property.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L384",
-      "Location": "Line 384 Position 22-39"
-    },
-    {
-      "Id": "S4049",
-      "Message": "Consider making method \u0027GetMandatoryAttribute\u0027 a property.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L393",
-      "Location": "Line 393 Position 22-43"
-    },
-    {
-      "Id": "S4049",
       "Message": "Consider making method \u0027GetNameLifted\u0027 a property.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L425",
       "Location": "Line 425 Position 23-36"
