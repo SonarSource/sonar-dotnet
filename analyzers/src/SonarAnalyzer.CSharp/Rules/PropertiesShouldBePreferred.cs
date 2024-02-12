@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var propertyCandidates = typeSymbol
                         .GetMembers()
                         .OfType<IMethodSymbol>()
-                        .Where(x => HasCandidateName(x) && HasCandidateReturnType(x) && HasCandidateSignature(x) && UsageAttributesAllowProperties(x));
+                        .Where(x => HasCandidateName(x) && HasCandidateReturnType(x) && HasCandidateSignature(x) && UsageAttributesAllowProperties(x) && !x.IsGenericMethod);
 
                     foreach (var candidate in propertyCandidates)
                     {

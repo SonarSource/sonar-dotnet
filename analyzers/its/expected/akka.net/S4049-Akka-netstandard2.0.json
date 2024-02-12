@@ -14,12 +14,6 @@
     },
     {
       "Id": "S4049",
-      "Message": "Consider making method \u0027GetExtension\u0027 a property.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorSystem.cs#L302",
-      "Location": "Line 302 Position 27-39"
-    },
-    {
-      "Id": "S4049",
       "Message": "Consider making method \u0027GetChildren\u0027 a property.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Cell.cs#L93",
       "Location": "Line 93 Position 40-51"
