@@ -49,14 +49,13 @@ public static class IssueParser
 
     private static InputReport[] Read(string rootPath)
     {
-        var projects = Directory.GetDirectories(rootPath);
-        var inputReports = new List<InputReport>();
-        foreach (var project in projects)
+        var sarifs = new List<InputReport>();
+        foreach (var projectPath in Directory.GetDirectories(rootPath))
         {
-            inputReports.AddRange(Directory.GetFiles(Path.Combine(rootPath, project, "issues"))
-                .Select(x => new InputReport(x, SerializerOptions)));
+            sarifs.AddRange(Directory.GetFiles(Path.Combine(projectPath, "issues"))
+                .Select(x => new InputReport(x, Path.GetFileName(projectPath), SerializerOptions)));
         }
-        return inputReports.ToArray();
+        return sarifs.ToArray();
     }
 
     // One SARIF contains all the issues for the project. We need to split it by rule Id.
