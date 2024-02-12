@@ -80,7 +80,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void NullPointerDereference_Sonar_CSharp8() =>
-            sonar.AddPaths("NullPointerDereference.CSharp8.cs").AddReferences(MetadataReferenceFacade.NETStandard21).WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+            sonar.AddPaths("NullPointerDereference.CSharp8.cs").AddReferences(MetadataReferenceFacade.NetStandard21).WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
         [TestMethod]
         public void NullPointerDereference_Roslyn_CSharp8() =>

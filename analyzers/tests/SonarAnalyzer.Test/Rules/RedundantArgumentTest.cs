@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void RedundantArgument_CSharp8() =>
             builder.AddPaths("RedundantArgument.cs")
-                .AddReferences(MetadataReferenceFacade.NETStandard21)
+                .AddReferences(MetadataReferenceFacade.NetStandard21)
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .Verify();
 

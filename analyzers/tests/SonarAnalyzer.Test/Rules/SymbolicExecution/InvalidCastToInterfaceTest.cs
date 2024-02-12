@@ -47,7 +47,7 @@ public class InvalidCastToInterfaceTest
     [DataRow(ProjectType.Test)]
     public void InvalidCastToInterface_Sonar_CS(ProjectType projectType) =>
         sonar.AddPaths("InvalidCastToInterface.cs")
-            .AddReferences(TestHelper.ProjectTypeReference(projectType).Union(MetadataReferenceFacade.NETStandard21))
+            .AddReferences(TestHelper.ProjectTypeReference(projectType).Union(MetadataReferenceFacade.NetStandard21))
             .WithOptions(ParseOptionsHelper.FromCSharp8)
             .Verify();
 

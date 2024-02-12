@@ -57,5 +57,5 @@ public abstract class DummyCodeFix : SonarCodeFix
 
 internal class DummyCodeFixNoAttribute : DummyCodeFix
 {
-    protected override SyntaxNode NewNode() => throw new System.NotImplementedException();
+    protected override SyntaxNode NewNode() => throw new NotSupportedException();
 }

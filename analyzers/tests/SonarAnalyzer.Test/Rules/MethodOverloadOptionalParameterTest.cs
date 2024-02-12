@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void MethodOverloadOptionalParameter() =>
-            builder.AddPaths("MethodOverloadOptionalParameter.cs").AddReferences(MetadataReferenceFacade.NETStandard21).WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+            builder.AddPaths("MethodOverloadOptionalParameter.cs").AddReferences(MetadataReferenceFacade.NetStandard21).WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
 
 #if NET
 

@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void StaticFieldWrittenFromInstanceMember() =>
-            builder.AddPaths(@"StaticFieldWrittenFromInstanceMember.cs").WithOptions(ParseOptionsHelper.FromCSharp8).AddReferences(MetadataReferenceFacade.NETStandard21).Verify();
+            builder.AddPaths(@"StaticFieldWrittenFromInstanceMember.cs").WithOptions(ParseOptionsHelper.FromCSharp8).AddReferences(MetadataReferenceFacade.NetStandard21).Verify();
 
         [TestMethod]
         public async Task SecondaryIssueInReferencedCompilation()

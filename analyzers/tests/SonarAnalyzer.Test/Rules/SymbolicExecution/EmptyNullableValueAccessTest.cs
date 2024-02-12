@@ -47,7 +47,7 @@ public class EmptyNullableValueAccessTest
     [DataRow(ProjectType.Test)]
     public void EmptyNullableValueAccess_Sonar_CSharp8(ProjectType projectType) =>
         sonar.AddPaths("EmptyNullableValueAccess.cs")
-            .AddReferences(TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21))
+            .AddReferences(TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NetStandard21))
             .WithOptions(ParseOptionsHelper.FromCSharp8)
             .Verify();
 
@@ -56,7 +56,7 @@ public class EmptyNullableValueAccessTest
     [DataRow(ProjectType.Test)]
     public void EmptyNullableValueAccess_Roslyn_CSharp8(ProjectType projectType) =>
         roslynCS.AddPaths("EmptyNullableValueAccess.cs")
-            .AddReferences(TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21))
+            .AddReferences(TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NetStandard21))
             .WithOptions(ParseOptionsHelper.FromCSharp8)
             .Verify();
 
@@ -69,7 +69,7 @@ public class EmptyNullableValueAccessTest
     [DataRow(ProjectType.Test)]
     public void EmptyNullableValueAccess_Roslyn_VB(ProjectType projectType) =>
         roslynVB.AddPaths("EmptyNullableValueAccess.vb")
-            .AddReferences(TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NETStandard21))
+            .AddReferences(TestHelper.ProjectTypeReference(projectType).Concat(MetadataReferenceFacade.NetStandard21))
             .Verify();
 
 #if NET

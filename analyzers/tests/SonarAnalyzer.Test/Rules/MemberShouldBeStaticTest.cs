@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Test.Rules
         public void MemberShouldBeStatic_CSharp8() =>
             builder.AddPaths("MemberShouldBeStatic.CSharp8.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
-                .AddReferences(MetadataReferenceFacade.NETStandard21)
+                .AddReferences(MetadataReferenceFacade.NetStandard21)
                 .Verify();
 
 #if NETFRAMEWORK // HttpApplication is available only on .Net Framework

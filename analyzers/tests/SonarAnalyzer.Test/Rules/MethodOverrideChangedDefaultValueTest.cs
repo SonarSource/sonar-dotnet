@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void MethodOverrideChangedDefaultValue() =>
             builder.AddPaths("MethodOverrideChangedDefaultValue.cs")
-                .AddReferences(MetadataReferenceFacade.NETStandard21)
+                .AddReferences(MetadataReferenceFacade.NetStandard21)
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .Verify();
 

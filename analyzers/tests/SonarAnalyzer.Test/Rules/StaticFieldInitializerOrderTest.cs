@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Test.Rules
         public void StaticFieldInitializerOrder() =>
             builder.AddPaths("StaticFieldInitializerOrder.cs", "StaticFieldInitializerOrder_PartialClass.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
-                .AddReferences(MetadataReferenceFacade.NETStandard21)
+                .AddReferences(MetadataReferenceFacade.NetStandard21)
                 .Verify();
 
 #if NET

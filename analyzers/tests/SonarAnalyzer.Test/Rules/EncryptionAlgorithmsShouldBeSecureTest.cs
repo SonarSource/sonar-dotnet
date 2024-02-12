@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void EncryptionAlgorithmsShouldBeSecure_CS_NetStandard21() =>
-            builderCS.AddPaths(@"EncryptionAlgorithmsShouldBeSecure_NetStandard21.cs").AddReferences(MetadataReferenceFacade.NETStandard21.Concat(GetAdditionalReferences())).Verify();
+            builderCS.AddPaths(@"EncryptionAlgorithmsShouldBeSecure_NetStandard21.cs").AddReferences(MetadataReferenceFacade.NetStandard21.Concat(GetAdditionalReferences())).Verify();
 
         [TestMethod]
         public void EncryptionAlgorithmsShouldBeSecure_VB() =>
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void EncryptionAlgorithmsShouldBeSecure_VB_NetStandard21() =>
             builderVB.AddPaths(@"EncryptionAlgorithmsShouldBeSecure_NetStandard21.vb")
-                     .AddReferences(MetadataReferenceFacade.NETStandard21.Concat(GetAdditionalReferences()))
+                     .AddReferences(MetadataReferenceFacade.NetStandard21.Concat(GetAdditionalReferences()))
                      .Verify();
 
 #if NET
@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Test.Rules
         public void EncryptionAlgorithmsShouldBeSecure_VB_NetStandard21_Net7() =>
             builderVB.AddPaths(@"EncryptionAlgorithmsShouldBeSecure_NetStandard21.Net7.vb")
                 .WithOptions(ParseOptionsHelper.VisualBasicLatest)
-                .AddReferences(MetadataReferenceFacade.NETStandard21.Concat(GetAdditionalReferences()))
+                .AddReferences(MetadataReferenceFacade.NetStandard21.Concat(GetAdditionalReferences()))
                 .Verify();
 
 #else
@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Test.Rules
         public void EncryptionAlgorithmsShouldBeSecure_VB_NetStandard21_Net48() =>
             builderVB.AddPaths(@"EncryptionAlgorithmsShouldBeSecure_NetStandard21.Net48.vb")
                      .WithOptions(ParseOptionsHelper.VisualBasicLatest)
-                     .AddReferences(MetadataReferenceFacade.NETStandard21.Concat(GetAdditionalReferences()))
+                     .AddReferences(MetadataReferenceFacade.NetStandard21.Concat(GetAdditionalReferences()))
                      .Verify();
 
 #endif

@@ -28,10 +28,10 @@ namespace SonarAnalyzer.Test.Rules
         private readonly VerifierBuilder sonarCfg = new VerifierBuilder()
             .AddAnalyzer(() => new DeadStores(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg))
             .WithOptions(ParseOptionsHelper.FromCSharp8)
-            .AddReferences(MetadataReferenceFacade.NETStandard21);
+            .AddReferences(MetadataReferenceFacade.NetStandard21);
 
         private readonly VerifierBuilder roslynCfg = new VerifierBuilder<DeadStores>()
-            .AddReferences(MetadataReferenceFacade.NETStandard21);
+            .AddReferences(MetadataReferenceFacade.NetStandard21);
 
         [TestMethod]
         public void DeadStores_SonarCfg() =>

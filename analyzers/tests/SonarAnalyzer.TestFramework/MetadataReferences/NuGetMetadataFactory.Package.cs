@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Globalization;
 using System.IO;
 using NuGet.Common;
 using NuGet.Packaging;
@@ -31,7 +32,7 @@ internal static partial class NuGetMetadataFactory
 {
     private const string PackageVersionPrefix = "Sonar.";
 
-    private class Package
+    private sealed class Package
     {
         private readonly string runtime;
         private readonly string version;
@@ -62,9 +63,9 @@ internal static partial class NuGetMetadataFactory
 
         private async Task InstallPackageAsync(string packageDir)
         {
-            var resource = await GetNuGetRepository();
+            var resource = await GetNuGetRepository().ConfigureAwait(false);
             using var packageStream = new MemoryStream();
-            await resource.CopyNupkgToStreamAsync(Id, new NuGetVersion(version), packageStream, new SourceCacheContext(), NullLogger.Instance, default);
+            await resource.CopyNupkgToStreamAsync(Id, new NuGetVersion(version), packageStream, new SourceCacheContext(), NullLogger.Instance, default).ConfigureAwait(false);
             using var packageReader = new PackageArchiveReader(packageStream);
             var dllFiles = packageReader.GetFiles().Where(f => f.EndsWith(".dll", StringComparison.OrdinalIgnoreCase)).ToArray();
             if (dllFiles.Any())
@@ -76,28 +77,30 @@ internal static partial class NuGetMetadataFactory
             }
             else
             {
-                throw new ApplicationException($"Test setup error: required dlls files are missing in the downloaded package. Package: {Id} Runtime: {runtime}");
+                throw new InvalidOperationException($"Test setup error: required dlls files are missing in the downloaded package. Package: {Id} Runtime: {runtime}");
             }
         }
 
         private static async Task<FindPackageByIdResource> GetNuGetRepository()
         {
             var repository = Repository.Factory.GetCoreV3("https://api.nuget.org/v3/index.json");   // Can't use our default NuGet.config, because of trustedSigners
-            return await repository.GetResourceAsync<FindPackageByIdResource>();
+            return await repository.GetResourceAsync<FindPackageByIdResource>().ConfigureAwait(false);
         }
 
         private async Task<string> GetLatestVersion()
         {
             const int VersionCheckDays = 5;
             var path = Path.Combine(PackagesFolder, Id, "Sonar.Latest.txt");
-            var (nextCheck, latest) = File.Exists(path) && File.ReadAllText(path).Split(';') is var values && DateTime.TryParse(values[0], out var nextCheckValue)
-                ? (nextCheckValue, values[1])
-                : (DateTime.MinValue, null);
+            var (nextCheck, latest) = File.Exists(path)
+                && File.ReadAllText(path).Split(';') is var values
+                && DateTime.TryParseExact(values[0], "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out var nextCheckValue)
+                    ? (nextCheckValue, values[1])
+                    : (DateTime.MinValue, null);
             LogMessage($"Next check for latest NuGets: {nextCheck}");
             if (nextCheck < DateTime.Now)
             {
-                var resource = await GetNuGetRepository();
-                var versions = await resource.GetAllVersionsAsync(Id, new SourceCacheContext(), NullLogger.Instance, default);
+                var resource = await GetNuGetRepository().ConfigureAwait(false);
+                var versions = await resource.GetAllVersionsAsync(Id, new SourceCacheContext(), NullLogger.Instance, default).ConfigureAwait(false);
                 latest = versions.OrderByDescending(x => x.Version).First(x => !x.IsPrerelease).OriginalVersion;
                 new FileInfo(path).Directory.Create(); // Ensure that folder exists, if not create one
                 File.WriteAllText(path, $"{DateTime.Today.AddDays(VersionCheckDays):yyyy-MM-dd};{latest}");

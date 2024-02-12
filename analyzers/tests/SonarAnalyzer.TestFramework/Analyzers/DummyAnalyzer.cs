@@ -38,13 +38,13 @@ public class DummyAnalyzerVB : DummyAnalyzer<VB.SyntaxKind>
 
 public abstract class DummyAnalyzer<TSyntaxKind> : SonarDiagnosticAnalyzer where TSyntaxKind : struct
 {
-    private static readonly DiagnosticDescriptor Rule = AnalysisScaffolding.CreateDescriptorMain("SDummy");
+    private readonly DiagnosticDescriptor rule = AnalysisScaffolding.CreateDescriptorMain("SDummy");
 
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
     public int DummyProperty { get; set; }
 
     protected abstract TSyntaxKind NumericLiteralExpression { get; }
 
     protected sealed override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(TestGeneratedCodeRecognizer.Instance, c => c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation())), NumericLiteralExpression);
+        context.RegisterNodeAction(TestGeneratedCodeRecognizer.Instance, c => c.ReportIssue(Diagnostic.Create(rule, c.Node.GetLocation())), NumericLiteralExpression);
 }
