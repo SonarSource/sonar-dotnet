@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace MyLibrary
@@ -175,4 +176,18 @@ namespace MyLibrary
 
         private sealed class NoUsageDefinedAttribute : Attribute { }
     }
+}
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8739
+public class Repro_8739
+{
+    private object[] items;
+
+    public IEnumerable<T> GetNodes<T>() =>  // Noncompliant FP
+        Calculate<T>();
+
+    public IEnumerable<T> GetNodesOriginal<T>() where T : Exception =>  // Noncompliant FP
+        items.OfType<T>();
+
+    private IEnumerable<T> Calculate<T>() => null;
 }
