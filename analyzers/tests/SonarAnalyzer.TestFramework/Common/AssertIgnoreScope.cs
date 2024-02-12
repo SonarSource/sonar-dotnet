@@ -21,7 +21,7 @@
 namespace SonarAnalyzer.TestFramework.Common;
 
 /// <summary>
-/// Some of the tests cover exceptions in which we have asserts as well, we want to ignore those asserts during tests
+/// Some of the tests cover exceptions in which we have asserts as well, we want to ignore those asserts during tests.
 /// </summary>
 public sealed class AssertIgnoreScope : IDisposable
 {
@@ -30,17 +30,9 @@ public sealed class AssertIgnoreScope : IDisposable
     public AssertIgnoreScope()
     {
         listener = Trace.Listeners.OfType<DefaultTraceListener>().FirstOrDefault();
-        if (listener != null)
-        {
-            Trace.Listeners.Remove(listener);
-        }
+        Trace.Listeners.Remove(listener);
     }
 
-    public void Dispose()
-    {
-        if (listener != null)
-        {
-            Trace.Listeners.Add(listener);
-        }
-    }
+    public void Dispose() =>
+        Trace.Listeners.Add(listener);
 }

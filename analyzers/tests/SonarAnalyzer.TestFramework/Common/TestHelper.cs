@@ -129,7 +129,7 @@ End Class", AnalyzerLanguage.VisualBasic);
 
     public static string TestPath(TestContext context, string fileName)
     {
-        var root = Path.Combine(context.TestDir, context.FullyQualifiedTestClassName.Replace("SonarAnalyzer.Test.", null));
+        var root = Path.Combine(context.TestRunDirectory, context.FullyQualifiedTestClassName.Replace("SonarAnalyzer.Test.", null));
         var directoryName = root.Length + context.TestName.Length + fileName.Length > 250   // 260 can throw PathTooLongException
             ? $"TooLongTestName.{RootSubdirectoryCount()}"
             : context.TestName;

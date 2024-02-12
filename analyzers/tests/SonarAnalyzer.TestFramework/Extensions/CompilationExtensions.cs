@@ -30,6 +30,6 @@ internal static class CompilationExtensions
         {
             CSharpCompilation cs => cs.LanguageVersion.ToString(),
             VisualBasicCompilation vb => vb.LanguageVersion.ToString(),
-            _ => throw new NotSupportedException($"Not supported compilation: {compilation.GetType()}")
+            _ => throw new NotSupportedException($"Not supported compilation type: '{compilation?.GetType()}'")
         };
 }

@@ -78,10 +78,9 @@ public readonly struct ProjectBuilder
         var relativePathFromTestCases = testCasesIndex < 0
             ? throw new ArgumentException($"{nameof(path)} must contain '{TestCases}'", nameof(path))
             : fileInfo.FullName.Substring(testCasesIndex + TestCases.Length);
-        return
-            IsExtensionOfSupportedType(fileInfo)
+        return IsExtensionOfSupportedType(fileInfo)
             ? AddDocument(project, relativePathFromTestCases, File.ReadAllText(fileInfo.FullName, Encoding.UTF8))
-            : throw new ArgumentException($"The file extension '{fileInfo.Extension}' does not match the project language '{project.Language}' nor razor.", nameof(path));
+            : throw new ArgumentException($"The file extension '{fileInfo.Extension}' does not match the project language '{project.Language}' nor Razor.", nameof(path));
     }
 
     public ProjectBuilder AddSnippets(params string[] snippets) =>

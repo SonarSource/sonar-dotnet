@@ -18,30 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Globalization;
+using SonarAnalyzer.TestFramework.Common;
 
-namespace SonarAnalyzer.TestFramework.Common;
+namespace ITs.JsonParser.Test;
 
-public sealed class CurrentCultureScope : IDisposable
+// This file does not belong in this project. It must be here, because this is the only test project that doesn't have TestCases directory in it.
+[TestClass]
+public class PathsTest
 {
-    private readonly CultureInfo oldCulture;
-    private readonly CultureInfo oldUiCulture;
-
-    public CurrentCultureScope() : this(CultureInfo.InvariantCulture) { }
-
-    public CurrentCultureScope(CultureInfo culture)
-    {
-        var thread = Thread.CurrentThread;
-        oldCulture = thread.CurrentCulture;
-        oldUiCulture = thread.CurrentUICulture;
-        thread.CurrentCulture = culture;
-        thread.CurrentUICulture = culture;
-    }
-
-    public void Dispose()
-    {
-        var thread = Thread.CurrentThread;
-        thread.CurrentCulture = oldCulture;
-        thread.CurrentUICulture = oldUiCulture;
-    }
+    [TestMethod]
+    public void CurrentTestCases_NoTestCases_Throws() =>
+        ((Func<string>)(() => Paths.CurrentTestCases())).Should().Throw<InvalidOperationException>().WithMessage("Could not find TestCases directory from current path:*");
 }
