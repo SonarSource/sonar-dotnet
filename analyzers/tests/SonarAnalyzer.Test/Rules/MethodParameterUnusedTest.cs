@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void MethodParameterUnused_CSharp8_CS() =>
-            roslynCS.AddPaths("MethodParameterUnused.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).AddReferences(MetadataReferenceFacade.NETStandard21).Verify();
+            roslynCS.AddPaths("MethodParameterUnused.CSharp8.cs").WithOptions(ParseOptionsHelper.FromCSharp8).AddReferences(MetadataReferenceFacade.NetStandard21).Verify();
 
         [TestMethod]
         public void MethodParameterUnused_DoubleCompilation_CS()

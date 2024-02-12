@@ -99,7 +99,7 @@ internal class CodeFixVerifier
         return actions.Where(x => codeFixTitle is null || x.Title == codeFixTitle);
     }
 
-    private class State
+    private sealed class State
     {
         public readonly Document Document;
         public readonly ImmutableArray<Diagnostic> Diagnostics;

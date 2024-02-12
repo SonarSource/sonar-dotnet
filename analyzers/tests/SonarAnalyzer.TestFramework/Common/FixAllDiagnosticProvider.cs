@@ -33,8 +33,8 @@ public class FixAllDiagnosticProvider : FixAllContext.DiagnosticProvider
         Task.FromResult(diagnostics);
 
     public override Task<IEnumerable<Diagnostic>> GetAllDiagnosticsAsync(Project project, CancellationToken cancel) =>
-        throw new NotImplementedException();
+        throw new NotSupportedException();
 
     public override Task<IEnumerable<Diagnostic>> GetProjectDiagnosticsAsync(Project project, CancellationToken cancel) =>
-        throw new NotImplementedException();
+        throw new NotSupportedException();
 }

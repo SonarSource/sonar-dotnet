@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Test.Rules
             sonar.AddPaths("ObjectsShouldNotBeDisposedMoreThanOnce.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .AddReferences(TestHelper.ProjectTypeReference(projectType))
-                .AddReferences(MetadataReferenceFacade.NETStandard21)
+                .AddReferences(MetadataReferenceFacade.NetStandard21)
                 .Verify();
 
         [DataTestMethod]

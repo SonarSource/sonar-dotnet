@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void MethodOverrideAddsParams() =>
-            builder.AddPaths("MethodOverrideAddsParams.cs").WithOptions(ParseOptionsHelper.FromCSharp8).AddReferences(MetadataReferenceFacade.NETStandard21).Verify();
+            builder.AddPaths("MethodOverrideAddsParams.cs").WithOptions(ParseOptionsHelper.FromCSharp8).AddReferences(MetadataReferenceFacade.NetStandard21).Verify();
 
 #if NET
         [TestMethod]

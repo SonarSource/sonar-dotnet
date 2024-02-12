@@ -65,7 +65,7 @@ public static class MetadataReferenceFacade
         new[] {CoreMetadataReference.MicrosoftWin32Primitives};
 #endif
 
-    public static References NETStandard21 =>
+    public static References NetStandard21 =>
 #if NETFRAMEWORK
         NuGetMetadataFactory.Create("NETStandard.Library.Ref", "2.1.0", "netstandard2.1");
 #else

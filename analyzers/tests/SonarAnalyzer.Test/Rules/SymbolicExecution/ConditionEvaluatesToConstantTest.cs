@@ -85,14 +85,14 @@ public class ConditionEvaluatesToConstantTest
     [TestMethod]
     public void ConditionEvaluatesToConstant_Sonar_CSharp8() =>
         sonar.AddPaths("ConditionEvaluatesToConstant.CSharp8.cs")
-            .AddReferences(MetadataReferenceFacade.NETStandard21)
+            .AddReferences(MetadataReferenceFacade.NetStandard21)
             .WithOptions(ParseOptionsHelper.FromCSharp8)
             .Verify();
 
     [TestMethod]
     public void ConditionEvaluatesToConstant_Roslyn_CSharp8() =>
         roslynCS.AddPaths("ConditionEvaluatesToConstant.CSharp8.cs")
-            .AddReferences(MetadataReferenceFacade.NETStandard21)
+            .AddReferences(MetadataReferenceFacade.NetStandard21)
             .WithOptions(ParseOptionsHelper.FromCSharp8)
             .Verify();
 

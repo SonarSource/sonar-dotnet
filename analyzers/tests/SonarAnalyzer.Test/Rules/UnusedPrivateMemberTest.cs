@@ -166,7 +166,7 @@ namespace EntityFrameworkMigrations
         public void UnusedPrivateMember_FromCSharp8() =>
             builder.AddPaths("UnusedPrivateMember.CSharp8.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
-                .AddReferences(MetadataReferenceFacade.NETStandard21)
+                .AddReferences(MetadataReferenceFacade.NetStandard21)
                 .AddReferences(MetadataReferenceFacade.MicrosoftExtensionsDependencyInjectionAbstractions)
                 .Verify();
 

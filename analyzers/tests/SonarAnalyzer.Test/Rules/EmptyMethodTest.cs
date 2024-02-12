@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Test.Rules
         public void EmptyMethod() =>
             builderCS.AddPaths("EmptyMethod.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
-                .AddReferences(MetadataReferenceFacade.NETStandard21)
+                .AddReferences(MetadataReferenceFacade.NetStandard21)
                 .Verify();
 
 #if NET
