@@ -65,8 +65,24 @@ internal static class CollectionTracker
             ? CollectionConstraint.Empty
             : CollectionConstraint.NotEmpty;
 
-    public static ProgramState ApplyConstraints(ProgramState state, IPropertyReferenceOperationWrapper operation, ISymbol instanceSymbol)
+    public static ProgramState LearnFrom(ProgramState state, IPropertyReferenceOperationWrapper operation, ISymbol instanceSymbol)
     {
+        if (operation.Instance is not null
+            && operation.Property.Name is nameof(Array.Length) or nameof(List<int>.Count))
+        {
+            if (instanceSymbol is not null
+                && state[instanceSymbol]?.Constraint<CollectionConstraint>() is { } constraint)
+            {
+                var numberConstraint = constraint == CollectionConstraint.Empty
+                    ? NumberConstraint.From(0)
+                    : NumberConstraint.From(1, null);
+                state = state.SetOperationConstraint(operation, numberConstraint);
+            }
+            else if (operation.Instance.Type.DerivesOrImplementsAny(CollectionTypes))
+            {
+                state = state.SetOperationConstraint(operation, NumberConstraint.From(0, null));
+            }
+        }
         if (operation.Property.IsIndexer)
         {
             state = state.SetOperationConstraint(operation.Instance, CollectionConstraint.NotEmpty);

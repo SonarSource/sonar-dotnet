@@ -85,11 +85,7 @@ internal sealed class PropertyReference : BranchingProcessor<IPropertyReferenceO
                 state = state.SetOperationValue(operation, value);
             }
         }
-        if (ArithmeticCalculator.PropertyReferenceConstraint(state, operation, symbol) is { } constraint)
-        {
-            state = state.SetOperationConstraint(operation, constraint);
-        }
-        state = CollectionTracker.ApplyConstraints(state, operation, symbol);
+        state = CollectionTracker.LearnFrom(state, operation, symbol);
         return state;
     }
 

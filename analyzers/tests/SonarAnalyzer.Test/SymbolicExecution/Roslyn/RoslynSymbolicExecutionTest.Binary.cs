@@ -771,16 +771,16 @@ Tag(""End"")";
     }
 
     [DataTestMethod]
-    [DataRow("list.Count == -5", true)]    // if should be unreachable
-    [DataRow("list.Count != -5", false)]   // else should be unreachable
-    [DataRow("list.Count <  -5", true)]    // if should be unreachable
-    [DataRow("list.Count >  -5", false)]   // else should be unreachable
-    [DataRow("list.Count <   0", true)]    // if should be unreachable
-    [DataRow("list.Count >=  0", false)]   // else should be unreachable
-    [DataRow("-5 == list.Count", true)]    // if should be unreachable
-    [DataRow("-5 != list.Count", false)]   // else should be unreachable
-    [DataRow("0 >   list.Count", true)]    // if should be unreachable
-    [DataRow("0 <=  list.Count", false)]   // else should be unreachable
+    [DataRow("list.Count == -5", true)]
+    [DataRow("list.Count != -5", false)]
+    [DataRow("list.Count <  -5", true)]
+    [DataRow("list.Count >  -5", false)]
+    [DataRow("list.Count <   0", true)]
+    [DataRow("list.Count >=  0", false)]
+    [DataRow("-5 == list.Count", true)]
+    [DataRow("-5 != list.Count", false)]
+    [DataRow("0 >   list.Count", true)]
+    [DataRow("0 <=  list.Count", false)]
     public void Binary_Collections_UnreachableConditionalArm(string expression, bool unreachableIf)
     {
         var code = $$"""
