@@ -25,6 +25,22 @@ namespace SonarAnalyzer.Test.SymbolicExecution.Roslyn;
 
 public partial class RoslynSymbolicExecutionTest
 {
+    [TestMethod]
+    public void Loops_IsInLoop_For()
+    {
+        const string code = """
+            Console.WriteLine("Before loop");
+            while (Condition)
+            {
+                _ = "Inside Loop";
+            }
+            Console.WriteLine("After loop");
+            """;
+        var inLoopCheck = new PreProcessTestCheck(OperationKind.SimpleAssignment, x => { x.IsInLoop.Should().BeTrue(); return x.State; });
+        var notInLoopCheck = new PreProcessTestCheck(OperationKind.Invocation, x => { x.IsInLoop.Should().BeFalse(); return x.State; });
+        SETestContext.CreateCS(code, inLoopCheck, notInLoopCheck);
+    }
+
     [DataTestMethod]
     [DataRow("for (var i = 0; i < items.Length; i++)")]
     [DataRow("while (Condition)")]

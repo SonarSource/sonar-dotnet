@@ -526,6 +526,36 @@ Tag(""End"");";
     }
 
     [TestMethod]
+    public void Branching_ConditionEvaluated_IsInLoop()
+    {
+        const string code = """
+            Tag("Begin");
+            while (boolParameter)
+            {
+                Tag("While");
+            }
+            Tag("End");
+            """;
+        var check = new ConditionEvaluatedTestCheck(x => { x.IsInLoop.Should().BeTrue(); return x.State; });
+        SETestContext.CreateCS(code, check).Validator.ValidateTagOrder("Begin", "While", "End");
+    }
+
+    [TestMethod]
+    public void Branching_ConditionEvaluated_IsNotInLoop()
+    {
+        const string code = """
+            Tag("Begin");
+            if (boolParameter)
+            {
+                Tag("If");
+            }
+            Tag("End");
+            """;
+        var check = new ConditionEvaluatedTestCheck(x => { x.IsInLoop.Should().BeFalse(); return x.State; });
+        SETestContext.CreateCS(code, check).Validator.ValidateTagOrder("Begin", "If", "End");
+    }
+
+    [TestMethod]
     public void Branching_Rethrow_CallsConditionEvaluated()
     {
         const string code = """

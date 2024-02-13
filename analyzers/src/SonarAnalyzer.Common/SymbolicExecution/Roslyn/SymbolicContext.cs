@@ -29,18 +29,20 @@ public class SymbolicContext
     public ProgramState State { get; }
     public int VisitCount { get; }
     public bool IsLoopCondition { get; }
+    public bool IsInLoop { get; }
     public IReadOnlyCollection<ISymbol> CapturedVariables { get; }
 
-    public SymbolicContext(ExplodedNode node, IReadOnlyCollection<ISymbol> capturedVariables, bool isLoopCondition)
-        : this(node.Block, node.Operation, node.State, isLoopCondition, node.VisitCount, capturedVariables) { }
+    public SymbolicContext(ExplodedNode node, IReadOnlyCollection<ISymbol> capturedVariables, bool isLoopCondition, bool isInLoop)
+        : this(node.Block, node.Operation, node.State, isLoopCondition, isInLoop, node.VisitCount, capturedVariables) { }
 
-    public SymbolicContext(BasicBlock block, IOperationWrapperSonar operation, ProgramState state, bool isLoopCondition, int visitCount, IReadOnlyCollection<ISymbol> capturedVariables)
+    public SymbolicContext(BasicBlock block, IOperationWrapperSonar operation, ProgramState state, bool isLoopCondition, bool isInLoop, int visitCount, IReadOnlyCollection<ISymbol> capturedVariables)
     {
         Block = block;
         Operation = operation; // Operation can be null for the branch nodes.
         State = state ?? throw new ArgumentNullException(nameof(state));
         VisitCount = visitCount;
         IsLoopCondition = isLoopCondition;
+        IsInLoop = isInLoop;
         CapturedVariables = capturedVariables ?? throw new ArgumentNullException(nameof(capturedVariables));
     }
 
@@ -54,5 +56,5 @@ public class SymbolicContext
         State.SetOperationValue(Operation, value);
 
     public SymbolicContext WithState(ProgramState newState) =>
-        State == newState ? this : new(Block, Operation, newState, IsLoopCondition, VisitCount, CapturedVariables);
+        State == newState ? this : new(Block, Operation, newState, IsLoopCondition, IsInLoop, VisitCount, CapturedVariables);
 }

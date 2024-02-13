@@ -55,7 +55,15 @@ namespace SonarAnalyzer.Test
         }
 
         public static ControlFlowGraph CompileCfgBodyCS(string body = null, string additionalParameters = null) =>
-            CompileCfg($"public class Sample {{ public void Main({additionalParameters}) {{ {body} }} }}", AnalyzerLanguage.CSharp);
+            CompileCfg($$"""
+                public class Sample
+                {
+                    public void Main({{additionalParameters}})
+                    {
+                        {{body}}
+                    }
+                }
+                """, AnalyzerLanguage.CSharp);
 
         public static ControlFlowGraph CompileCfgBodyVB(string body = null) =>
             CompileCfg(
