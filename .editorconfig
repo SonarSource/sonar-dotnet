@@ -233,6 +233,7 @@ dotnet_diagnostic.CA1822.severity = warning # Increase visibility for Member 'xx
 dotnet_diagnostic.CS8785.severity = error   # Do not hide root cause for: Generator 'xxx' failed to generate source. It will not contribute to the output and compilation errors may occur as a result. Exception was of type 'xxx' with message 'xxx'
 dotnet_diagnostic.RS2008.severity = none    # Enable analyzer release tracking - we don't use the release tracking analyzer
 dotnet_diagnostic.IDE0057.severity = none   # Use range operator
+dotnet_diagnostic.IDE0290.severity = none   # Use primary constructors
 
 # ----------------------------------------------------------------------------------------------------------------------
 # SyleCop.Analyzers rules - note that the URLs below are for tag 1.1.118
