@@ -283,4 +283,28 @@ namespace Tests.Diagnostics
         }
     }
 
+    public class NameColon
+    {
+        string local = "hey";
+
+        public decimal UsingParameter(string parameter) // Noncompliant
+        {
+            throw new ArgumentNullException(paramName: parameter);
+        }
+
+        public decimal UsingLocal() // Compliant
+        {
+            throw new ArgumentNullException(paramName: local);
+        }
+    }
+
+    public class PropertyInitialization
+    {
+        public int Prop { get; set; }
+
+        public PropertyInitialization Create() // FN - because of the property initialization
+        {
+            return new PropertyInitialization { Prop = 42 };
+        }
+    }
 }

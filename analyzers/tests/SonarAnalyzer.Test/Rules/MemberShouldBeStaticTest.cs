@@ -49,6 +49,10 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void MemberShouldBeStatic_CSharp9() =>
             builder.AddPaths("MemberShouldBeStatic.CSharp9.cs").WithTopLevelStatements().Verify();
+
+        [TestMethod]
+        public void MemberShouldBeStatic_CSharp12() =>
+            builder.AddPaths("MemberShouldBeStatic.CSharp12.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
 #endif
 
         [TestMethod]

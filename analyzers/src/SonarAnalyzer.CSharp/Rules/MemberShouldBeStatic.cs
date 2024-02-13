@@ -27,10 +27,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Make '{0}' a static {1}.";
 
         private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        private static readonly ImmutableHashSet<string> MethodNameWhitelist =
-            ImmutableHashSet.Create(
+        private static readonly ImmutableHashSet<string> MethodNameWhitelist = ImmutableHashSet.Create(
                 "Application_AuthenticateRequest",
                 "Application_BeginRequest",
                 "Application_End",
@@ -39,22 +37,21 @@ namespace SonarAnalyzer.Rules.CSharp
                 "Application_Init",
                 "Application_Start",
                 "Session_End",
-                "Session_Start"
-            );
+                "Session_Start");
 
-        private static readonly ImmutableHashSet<SymbolKind> InstanceSymbolKinds =
-            ImmutableHashSet.Create(
+        private static readonly ImmutableHashSet<SymbolKind> InstanceSymbolKinds = ImmutableHashSet.Create(
                 SymbolKind.Field,
                 SymbolKind.Property,
                 SymbolKind.Event,
                 SymbolKind.Method);
 
-        private static readonly ImmutableArray<KnownType> WebControllerTypes =
-            ImmutableArray.Create(
+        private static readonly ImmutableArray<KnownType> WebControllerTypes = ImmutableArray.Create(
                 KnownType.System_Web_Mvc_Controller,
                 KnownType.System_Web_Http_ApiController,
                 KnownType.Microsoft_AspNetCore_Mvc_Controller,
                 KnownType.System_Web_HttpApplication);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -68,12 +65,12 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static IEnumerable<SyntaxNode> GetPropertyDescendants(PropertyDeclarationSyntax propertyDeclaration) =>
-            propertyDeclaration.ExpressionBody == null
+            propertyDeclaration.ExpressionBody is null
                 ? propertyDeclaration.AccessorList.Accessors.SelectMany(a => a.DescendantNodes())
                 : propertyDeclaration.ExpressionBody.DescendantNodes();
 
         private static IEnumerable<SyntaxNode> GetMethodDescendants(MethodDeclarationSyntax methodDeclaration) =>
-            methodDeclaration.ExpressionBody == null
+            methodDeclaration.ExpressionBody is null
                 ? methodDeclaration.Body?.DescendantNodes()
                 : methodDeclaration.ExpressionBody.DescendantNodes();
 
@@ -103,11 +100,10 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var descendants = getDescendants(declaration);
-            if (descendants == null || HasInstanceReferences(descendants, context.SemanticModel))
+            if (descendants is null || HasInstanceReferences(descendants, context.SemanticModel))
             {
                 return;
             }
-
             var identifier = getIdentifier(declaration);
             context.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation(), identifier.Text, memberKind));
 
@@ -115,7 +111,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 methodOrPropertySymbol.IsStatic || methodOrPropertySymbol.IsVirtual || methodOrPropertySymbol.IsAbstract || methodOrPropertySymbol.IsOverride;
 
             bool IsOverrideInterfaceOrNew() =>
-                methodOrPropertySymbol.GetInterfaceMember() != null
+                methodOrPropertySymbol.GetInterfaceMember() is not null
                 || IsNewMethod(methodOrPropertySymbol)
                 || IsNewProperty(methodOrPropertySymbol);
 
@@ -149,7 +145,7 @@ namespace SonarAnalyzer.Rules.CSharp
             symbol.DeclaringSyntaxReferences
                   .Select(r => r.GetSyntax())
                   .OfType<PropertyDeclarationSyntax>()
-                  .Any(s => s.AccessorList != null && s.AccessorList.Accessors.All(a => a.Body == null && a.ExpressionBody() == null));
+                  .Any(s => s.AccessorList is not null && s.AccessorList.Accessors.All(a => a.Body is null && a.ExpressionBody() is null));
 
         private static bool IsPublicControllerMethod(ISymbol symbol) =>
             symbol is IMethodSymbol methodSymbol
@@ -162,11 +158,11 @@ namespace SonarAnalyzer.Rules.CSharp
             && methodSymbol.Parameters[1].Type.DerivesFrom(KnownType.System_EventArgs)
             && methodSymbol.ContainingType.Implements(KnownType.System_Windows_Forms_IContainerControl);
 
-        private static bool HasInstanceReferences(IEnumerable<SyntaxNode> nodes, SemanticModel semanticModel) =>
+        private static bool HasInstanceReferences(IEnumerable<SyntaxNode> nodes, SemanticModel model) =>
             nodes.OfType<ExpressionSyntax>()
                  .Where(IsLeftmostIdentifierName)
-                 .Where(n => !n.IsInNameOfArgument(semanticModel))
-                 .Any(n => IsInstanceMember(n, semanticModel));
+                 .Where(n => !n.IsInNameOfArgument(model))
+                 .Any(n => IsInstanceMember(n, model));
 
         private static bool IsLeftmostIdentifierName(ExpressionSyntax node)
         {
@@ -174,7 +170,6 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return true;
             }
-
             if (node is not SimpleNameSyntax)
             {
                 return false;
@@ -184,20 +179,28 @@ namespace SonarAnalyzer.Rules.CSharp
             var conditional = node.Parent as ConditionalAccessExpressionSyntax;
             var memberBinding = node.Parent as MemberBindingExpressionSyntax;
 
-            return (memberAccess == null && conditional == null && memberBinding == null)
+            return (memberAccess is null && conditional is null && memberBinding is null)
                 || memberAccess?.Expression == node
                 || conditional?.Expression == node;
         }
 
-        private static bool IsInstanceMember(ExpressionSyntax node, SemanticModel semanticModel)
+        private static bool IsInstanceMember(ExpressionSyntax node, SemanticModel model)
         {
             if (node is InstanceExpressionSyntax)
             {
                 return true;
             }
+            // For ctor(foo: bar), 'IsConstructorParameter(foo)' returns true. This check prevents that case.
+            else if (node.Parent is NameColonSyntax)
+            {
+                return false;
+            }
+            return model.GetSymbolInfo(node).Symbol is { IsStatic: false } symbol
+                && (InstanceSymbolKinds.Contains(symbol.Kind) || IsConstructorParameter(symbol));
 
-            return semanticModel.GetSymbolInfo(node).Symbol is { IsStatic: false } symbol
-                   && InstanceSymbolKinds.Contains(symbol.Kind);
+            // Checking for primary constructor parameters
+            static bool IsConstructorParameter(ISymbol symbol) =>
+                symbol is IParameterSymbol {  ContainingSymbol: IMethodSymbol { MethodKind: MethodKind.Constructor } };
         }
     }
 }
