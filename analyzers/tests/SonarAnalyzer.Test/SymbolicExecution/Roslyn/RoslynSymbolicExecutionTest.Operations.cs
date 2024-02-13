@@ -546,15 +546,17 @@ Tag(""S"", s);";
             var valueType = new Guid();
             var declared = new Exception();
             assigned = new EventArgs();
+
             var collection1 = new List<int>();
             collection1.Add(42);
             var collection2 = new List<int>(collection1);
+            var collection3 = new List<int>(list);
 
             tag = "tag";
             """;
 
-        var preserved = new string[] { "obj", "valueType", "declared", "assigned", "collection1", "collection2" };
-        var validator = SETestContext.CreateCS(code, new PreserveTestCheck(preserved)).Validator;
+        var preserved = new string[] { "obj", "valueType", "declared", "assigned", "collection1", "collection2", "collection3" };
+        var validator = SETestContext.CreateCS(code, "List<int> list", new PreserveTestCheck(preserved)).Validator;
         validator.ValidateContainsOperation(OperationKind.ObjectCreation);
 
         Verify("declared", ObjectConstraint.NotNull);
@@ -563,6 +565,7 @@ Tag(""S"", s);";
         Verify("obj", ObjectConstraint.NotNull);
         Verify("collection1", ObjectConstraint.NotNull); // The CollectionConstraint here is deleted when collection1 is used as an argument
         Verify("collection2", ObjectConstraint.NotNull, CollectionConstraint.NotEmpty);
+        Verify("collection3", ObjectConstraint.NotNull);
 
         void Verify(string symbol, params SymbolicConstraint[] constraints) =>
             validator.TagValue("tag", symbol).Should().HaveOnlyConstraints(constraints);
@@ -1073,6 +1076,44 @@ Sample UntrackedSymbol() => this;";
         validator.ValidateContainsOperation(OperationKind.PropertyReference);
         validator.TagValue("AfterSetNull").Should().HaveOnlyConstraints(ObjectConstraint.Null);
         validator.TagValue("AfterReadReference").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
+    }
+
+    [TestMethod]
+    public void PropertyReference_Count_HasNumericConstraint()
+    {
+        const string code = $"""
+                var x = collection.Count;
+                Tag("Before", x);
+
+                collection.Add(42);
+                x = collection.Count;
+                Tag("AfterAdd", x);
+
+                collection.Clear();
+                x = collection.Count;
+                Tag("AfterClear", x);
+                """;
+
+        var validator = SETestContext.CreateCS(code, $"List<int> collection").Validator;
+        validator.ValidateContainsOperation(OperationKind.PropertyReference);
+        validator.TagValue("Before").Should().HaveOnlyConstraints(NumberConstraint.From(0, null), ObjectConstraint.NotNull);
+        validator.TagValue("AfterAdd").Should().HaveOnlyConstraints(NumberConstraint.From(1, null), ObjectConstraint.NotNull);
+        validator.TagValue("AfterClear").Should().HaveOnlyConstraints(NumberConstraint.From(0), ObjectConstraint.NotNull);
+    }
+
+    [TestMethod]
+    public void PropertyReference_Indexer_SetsCollectionConstraint()
+    {
+        const string code = """
+                var tag = "before";
+                _ = list[42];
+                tag = "after";
+                """;
+
+        var validator = SETestContext.CreateCS(code, "List<int> list").Validator;
+        validator.ValidateContainsOperation(OperationKind.PropertyReference);
+        validator.TagValue("before", "list").Should().HaveNoConstraints();
+        validator.TagValue("after", "list").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, CollectionConstraint.NotEmpty);
     }
 
     [TestMethod]

@@ -3101,7 +3101,7 @@ namespace Tests.Diagnostics
             if (list.Count() >= 1) // Noncompliant
             { }
 
-            if (list.Count(Condition) == 1) // Compliant, we don't know how many elements satisfy the condition
+            if (list.Count(Condition) >= 1) // Compliant, we don't know how many elements satisfy the condition
             { }
         }
 

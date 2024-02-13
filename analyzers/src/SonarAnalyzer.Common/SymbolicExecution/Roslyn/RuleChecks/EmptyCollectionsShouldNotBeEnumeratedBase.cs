@@ -29,8 +29,8 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
     protected const string DiagnosticId = "S4158";
     protected const string MessageFormat = "Remove this call, the collection is known to be empty here.";
 
-    protected static readonly HashSet<string> RaisingMethods = new()
-    {
+    protected static readonly HashSet<string> RaisingMethods =
+    [
         nameof(IEnumerable<int>.GetEnumerator),
         nameof(ICollection.CopyTo),
         nameof(ICollection<int>.Clear),
@@ -81,7 +81,7 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         nameof(Dictionary<int, int>.ContainsKey),
         nameof(Dictionary<int, int>.ContainsValue),
         nameof(Dictionary<int, int>.TryGetValue)
-    };
+    ];
 
     private readonly HashSet<IOperation> emptyAccess = new();
     private readonly HashSet<IOperation> nonEmptyAccess = new();
@@ -94,14 +94,11 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         }
     }
 
-    protected override ProgramState PreProcessSimple(SymbolicContext context) =>
-        context.Operation.Instance.AsInvocation() is { } invocation
-            ? ProcessInvocation(context, invocation)
-            : context.State;
-
-    private ProgramState ProcessInvocation(SymbolicContext context, IInvocationOperationWrapper invocation)
+    protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
-        if (invocation.Instance is { } instance && RaisingMethods.Contains(invocation.TargetMethod.Name))
+        if (context.Operation.Instance.AsInvocation() is { } invocation
+            && invocation.Instance is { } instance
+            && RaisingMethods.Contains(invocation.TargetMethod.Name))
         {
             if (context.State[instance]?.HasConstraint(CollectionConstraint.Empty) is true)
             {

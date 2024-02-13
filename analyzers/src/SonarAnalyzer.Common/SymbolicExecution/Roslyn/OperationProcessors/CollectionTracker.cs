@@ -74,27 +74,37 @@ internal static class CollectionTracker
 
     private static readonly HashSet<string> AddOrRemoveMethods = [.. AddMethods, .. RemoveMethods];
 
-    public static CollectionConstraint ObjectCreationConstraint(ProgramState state, IObjectCreationOperationWrapper operation)
+    public static ProgramState LearnFrom(ProgramState state, IObjectCreationOperationWrapper operation)
     {
         if (operation.Type.IsAny(CollectionTypes))
         {
-            return operation.Arguments.SingleOrDefault(IsEnumerable) is { } argument
-                ? state.Constraint<CollectionConstraint>(argument)
-                : CollectionConstraint.Empty;
+            if (operation.Arguments.SingleOrDefault(IsEnumerable) is { } argument)
+            {
+                return state.Constraint<CollectionConstraint>(argument) is { } constraint
+                    ? state.SetOperationConstraint(operation, constraint)
+                    : state;
+            }
+            else
+            {
+                return state.SetOperationConstraint(operation, CollectionConstraint.Empty);
+            }
         }
         else
         {
-            return null;
+            return state;
         }
 
         static bool IsEnumerable(IOperation operation) =>
             operation.ToArgument().Parameter.Type.DerivesOrImplements(KnownType.System_Collections_IEnumerable);
     }
 
-    public static CollectionConstraint ArrayCreationConstraint(IArrayCreationOperationWrapper operation) =>
-        operation.DimensionSizes.Any(x => x.ConstantValue.Value is 0)
+    public static ProgramState LearnFrom(ProgramState state, IArrayCreationOperationWrapper operation)
+    {
+        var constraint = operation.DimensionSizes.Any(x => x.ConstantValue.Value is 0)
             ? CollectionConstraint.Empty
             : CollectionConstraint.NotEmpty;
+        return state.SetOperationConstraint(operation, constraint);
+    }
 
     public static ProgramState LearnFrom(ProgramState state, IMethodReferenceOperationWrapper operation) =>
         operation.Instance is not null
@@ -139,9 +149,9 @@ internal static class CollectionTracker
         {
             return state.SetOperationConstraint(invocation, constraint);
         }
-        var targetMethod = invocation.TargetMethod;
         if (invocation.Instance is { } instance && instance.Type.DerivesOrImplementsAny(CollectionTypes))
         {
+            var targetMethod = invocation.TargetMethod;
             var symbolValue = state[instance] ?? SymbolicValue.Empty;
             if (AddMethods.Contains(targetMethod.Name))
             {
