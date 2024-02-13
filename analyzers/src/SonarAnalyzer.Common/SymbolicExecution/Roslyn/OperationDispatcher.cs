@@ -57,6 +57,7 @@ internal static class OperationDispatcher
         { OperationKindEx.Increment, new IncrementOrDecrement() },
         { OperationKindEx.InstanceReference, new InstanceReference() },
         { OperationKindEx.LocalReference, new LocalReference() },
+        { OperationKindEx.MethodReference, new MethodReference() },
         { OperationKindEx.ObjectCreation, new ObjectCreation() },
         { OperationKindEx.ParameterReference, new ParameterReference() },
         { OperationKindEx.RecursivePattern, new RecursivePattern() },
