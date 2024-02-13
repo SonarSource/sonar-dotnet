@@ -49,7 +49,7 @@ internal class LoopDetector
             var last = path[path.Length - 1];
             if (processed.Add(last))
             {
-                foreach (var successor in Successors(last))
+                foreach (var successor in Successors(cfg, last))
                 {
                     toProcess.Push([.. path, successor]);
                 }
@@ -69,9 +69,6 @@ internal class LoopDetector
         }
         return loops.SelectMany(x => x);
 
-        IEnumerable<int> Successors(int block) =>
-            cfg.Blocks[block].SuccessorBlocks.Select(x => x.Ordinal);
-
         // For a given path [..A..B], if we find a loop that both A and B are part of, all blocks between A and B should also be considered part of that loop.
         void MergeWithIntersectingLoops(int[] path, int last)
         {
@@ -84,5 +81,15 @@ internal class LoopDetector
                 }
             }
         }
+    }
+
+    private static IEnumerable<int> Successors(ControlFlowGraph cfg, int block)
+    {
+        var successors = cfg.Blocks[block].SuccessorBlocks.Select(x => x.Ordinal);
+        if (cfg.Blocks[block].EnclosingRegion(ControlFlowRegionKind.Try) is { } tryRegion)
+        {
+            successors = successors.Concat(tryRegion.ReachableHandlers().Select(x => x.FirstBlockOrdinal));
+        }
+        return successors;
     }
 }

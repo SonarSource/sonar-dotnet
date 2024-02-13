@@ -240,7 +240,7 @@ internal class RoslynSymbolicExecution
             ? state.PushException(exception)        // If we're nested inside catch, we need to preserve the exception chain
             : state.SetException(exception);        // Otherwise we track only the current exception to avoid explosion of states after each statement
 
-        foreach (var handler in ReachableHandlers(nearestTryRegion))
+        foreach (var handler in nearestTryRegion.ReachableHandlers().Where(x => IsReachable(x, exception)))
         {
             yield return new(cfg.Blocks[handler.FirstBlockOrdinal], state, null);
             if (IsExhaustive(handler))
@@ -250,12 +250,6 @@ internal class RoslynSymbolicExecution
         }
 
         yield return new(cfg.ExitBlock, node.State.SetException(exception), null);  // catch without finally or uncaught exception type
-
-        IEnumerable<ControlFlowRegion> ReachableHandlers(ControlFlowRegion tryRegion) =>
-            tryRegion is null
-                ? Enumerable.Empty<ControlFlowRegion>()
-                : tryRegion.EnclosingRegion.NestedRegions.Where(x => x.Kind != ControlFlowRegionKind.Try && IsReachable(x, exception))
-                    .Concat(ReachableHandlers(tryRegion.EnclosingRegion.EnclosingRegionOrSelf(ControlFlowRegionKind.Try)));  // Use also outer candidates for nested try/catch.
 
         bool IsExhaustive(ControlFlowRegion handler) =>
             handler.Kind switch
