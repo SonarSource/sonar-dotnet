@@ -28,7 +28,7 @@ public partial class RoslynSymbolicExecutionTest
     [TestMethod]
     public void Loops_IsInLoop_For()
     {
-        var code = """
+        const string code = """
             Console.WriteLine("Before loop");
             while (Condition)
             {

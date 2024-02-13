@@ -528,7 +528,7 @@ Tag(""End"");";
     [TestMethod]
     public void Branching_ConditionEvaluated_IsInLoop()
     {
-        var code = """
+        const string code = """
             Tag("Begin");
             while (boolParameter)
             {
@@ -543,7 +543,7 @@ Tag(""End"");";
     [TestMethod]
     public void Branching_ConditionEvaluated_IsNotInLoop()
     {
-        var code = """
+        const string code = """
             Tag("Begin");
             if (boolParameter)
             {
