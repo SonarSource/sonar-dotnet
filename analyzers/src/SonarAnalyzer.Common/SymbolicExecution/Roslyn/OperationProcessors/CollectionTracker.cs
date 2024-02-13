@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.ObjectModel;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
@@ -43,6 +44,36 @@ internal static class CollectionTracker
         KnownType.System_Collections_Generic_IDictionary_TKey_TValue,
         KnownType.System_Collections_Immutable_IImmutableDictionary_TKey_TValue);
 
+    public static readonly HashSet<string> AddMethods = new()
+    {
+        nameof(ICollection<int>.Add),
+        nameof(List<int>.AddRange),
+        nameof(List<int>.Insert),
+        nameof(List<int>.InsertRange),
+        nameof(HashSet<int>.UnionWith),
+        nameof(HashSet<int>.SymmetricExceptWith),   // This can add and/or remove items => It should remove all CollectionConstraints.
+                                                    // However, just learning NotEmpty (and thus unlearning Empty) is good enough for now.
+        nameof(Queue<int>.Enqueue),
+        nameof(Stack<int>.Push),
+        nameof(Collection<int>.Insert),
+        "TryAdd"
+    };
+
+    public static readonly HashSet<string> RemoveMethods = new()
+    {
+        nameof(ICollection<int>.Remove),
+        nameof(List<int>.RemoveAll),
+        nameof(List<int>.RemoveAt),
+        nameof(List<int>.RemoveRange),
+        nameof(HashSet<int>.ExceptWith),
+        nameof(HashSet<int>.IntersectWith),
+        nameof(HashSet<int>.RemoveWhere),
+        nameof(Queue<int>.Dequeue),
+        nameof(Stack<int>.Pop)
+    };
+
+    private static readonly HashSet<string> AddOrRemoveMethods = [.. AddMethods, .. RemoveMethods];
+
     public static CollectionConstraint ObjectCreationConstraint(ProgramState state, IObjectCreationOperationWrapper operation)
     {
         if (operation.Type.IsAny(CollectionTypes))
@@ -65,6 +96,14 @@ internal static class CollectionTracker
             ? CollectionConstraint.Empty
             : CollectionConstraint.NotEmpty;
 
+    public static ProgramState LearnFrom(ProgramState state, IMethodReferenceOperationWrapper operation) =>
+        operation.Instance is not null
+        && operation.Instance.Type.DerivesOrImplementsAny(CollectionTypes)
+        && AddOrRemoveMethods.Contains(operation.Method.Name)
+        && state[operation.Instance] is { } value
+            ? state.SetOperationAndSymbolValue(operation.Instance, value.WithoutConstraint<CollectionConstraint>())
+            : state;
+
     public static ProgramState LearnFrom(ProgramState state, IPropertyReferenceOperationWrapper operation, ISymbol instanceSymbol)
     {
         if (operation.Instance is not null
@@ -83,7 +122,7 @@ internal static class CollectionTracker
                 state = state.SetOperationConstraint(operation, NumberConstraint.From(0, null));
             }
         }
-        if (operation.Property.IsIndexer)
+        else if (operation.Property.IsIndexer)
         {
             state = state.SetOperationConstraint(operation.Instance, CollectionConstraint.NotEmpty);
             if (instanceSymbol is not null)
