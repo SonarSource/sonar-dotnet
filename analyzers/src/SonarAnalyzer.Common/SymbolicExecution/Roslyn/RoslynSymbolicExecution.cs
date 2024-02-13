@@ -39,6 +39,7 @@ internal class RoslynSymbolicExecution
     private readonly RoslynLiveVariableAnalysis lva;
     private readonly DebugLogger logger = new();
     private readonly ExceptionCandidate exceptionCandidate;
+    private readonly LoopDetector loopDetector;
 
     public RoslynSymbolicExecution(ControlFlowGraph cfg, SyntaxClassifierBase syntaxClassifier, SymbolicCheck[] checks, CancellationToken cancel)
     {
@@ -51,6 +52,7 @@ internal class RoslynSymbolicExecution
         this.checks = new(new SymbolicCheck[] { new NonNullableValueTypeCheck(), new ConstantCheck() }.Concat(checks).ToArray());
         this.cancel = cancel;
         exceptionCandidate = new(cfg.OriginalOperation.ToSonar().SemanticModel.Compilation);
+        loopDetector = new(cfg);
         lva = new(cfg, cancel);
         logger.Log(cfg);
     }
@@ -123,7 +125,7 @@ internal class RoslynSymbolicExecution
         if (node.Block.Kind == BasicBlockKind.Exit)
         {
             logger.Log(node.State, "Exit Reached");
-            checks.ExitReached(new(node, lva.CapturedVariables, false));
+            checks.ExitReached(new(node, lva.CapturedVariables, false, false));
         }
         else if (node.Block.Successors.Length == 1 && ThrownException(node, node.Block.Successors.Single().Semantics) is { } exception)
         {
@@ -162,7 +164,7 @@ internal class RoslynSymbolicExecution
             {
                 // If a branch has no Destination but is part of conditional branching we need to call ConditionEvaluated. This happens when a Rethrow is following a condition.
                 var state = SetBranchingConstraints(branch, node.State, branchValue);
-                checks.ConditionEvaluated(new(node.Block, branchValue.ToSonar(), state, false, node.VisitCount, lva.CapturedVariables));
+                checks.ConditionEvaluated(new(node.Block, branchValue.ToSonar(), state, false, loopDetector.IsInLoop(node.Block), node.VisitCount, lva.CapturedVariables));
             }
             return null;    // We don't know where to continue
         }
@@ -183,7 +185,7 @@ internal class RoslynSymbolicExecution
         if (branch.Source.BranchValue is { } branchValue && branch.Source.ConditionalSuccessor is not null) // This branching was conditional
         {
             state = SetBranchingConstraints(branch, state, branchValue);
-            state = checks.ConditionEvaluated(new(block, branchValue.ToSonar(), state, false, visitCount, lva.CapturedVariables));
+            state = checks.ConditionEvaluated(new(block, branchValue.ToSonar(), state, false, loopDetector.IsInLoop(block), visitCount, lva.CapturedVariables));
             if (state is null)
             {
                 return null;
@@ -206,7 +208,7 @@ internal class RoslynSymbolicExecution
 
     private IEnumerable<ExplodedNode> ProcessOperation(ExplodedNode node)
     {
-        foreach (var preProcessed in checks.PreProcess(new(node, lva.CapturedVariables, syntaxClassifier.IsInLoopCondition(node.Operation.Instance.Syntax))))
+        foreach (var preProcessed in checks.PreProcess(new(node, lva.CapturedVariables, syntaxClassifier.IsInLoopCondition(node.Operation.Instance.Syntax), loopDetector.IsInLoop(node.Block))))
         {
             foreach (var processed in OperationDispatcher.Process(preProcessed))
             {
