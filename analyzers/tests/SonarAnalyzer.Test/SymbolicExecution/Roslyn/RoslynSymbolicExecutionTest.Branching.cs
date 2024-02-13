@@ -552,7 +552,7 @@ Tag(""End"");";
             Tag("End");
             """;
         var check = new ConditionEvaluatedTestCheck(x => { x.IsInLoop.Should().BeFalse(); return x.State; });
-        SETestContext.CreateCS(code, check).Validator.ValidateTagOrder("Begin", "While", "End");
+        SETestContext.CreateCS(code, check).Validator.ValidateTagOrder("Begin", "If", "End");
     }
 
     [TestMethod]

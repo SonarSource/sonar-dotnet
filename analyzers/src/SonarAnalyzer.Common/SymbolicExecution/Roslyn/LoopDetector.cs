@@ -69,8 +69,8 @@ internal class LoopDetector
         }
         return loops.SelectMany(x => x);
 
-        IEnumerable<int> Successors(int last) =>
-            cfg.Blocks[last].SuccessorBlocks.Select(x => x.Ordinal);
+        IEnumerable<int> Successors(int block) =>
+            cfg.Blocks[block].SuccessorBlocks.Select(x => x.Ordinal);
 
         // For a given path [..A..B], if we find a loop that both A and B are part of, all blocks between A and B should also be considered part of that loop.
         void MergeWithIntersectingLoops(int[] path, int last)
@@ -78,7 +78,7 @@ internal class LoopDetector
             foreach (var loop in loops.Where(x => x.Contains(last)))    // B is part of the loop
             {
                 var intersection = path.IndexOf(loop.Contains);
-                if (intersection < path.Length - 1)                      // A is part of the loop
+                if (intersection < path.Length - 1)                     // A is part of the loop
                 {
                     loop.AddRange(path.Skip(intersection + 1).Take(path.Length - 1 - intersection));  // add all blocks between A and B to the loop
                 }
