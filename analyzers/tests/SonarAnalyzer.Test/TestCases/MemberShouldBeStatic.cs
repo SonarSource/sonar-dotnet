@@ -297,4 +297,14 @@ namespace Tests.Diagnostics
             throw new ArgumentNullException(paramName: local);
         }
     }
+
+    public class PropertyInitialization
+    {
+        public int Prop { get; set; }
+
+        public PropertyInitialization Create() // FN - because of the property initialization
+        {
+            return new PropertyInitialization { Prop = 42 };
+        }
+    }
 }

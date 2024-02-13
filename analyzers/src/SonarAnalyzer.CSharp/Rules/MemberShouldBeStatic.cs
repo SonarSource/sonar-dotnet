@@ -191,7 +191,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return true;
             }
             // For ctor(foo: bar), 'IsConstructorParameter(foo)' returns true. This check prevents that case.
-            if (node.Parent is NameColonSyntax)
+            else if (node.Parent is NameColonSyntax)
             {
                 return false;
             }
@@ -200,9 +200,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             // Checking for primary constructor parameters
             static bool IsConstructorParameter(ISymbol symbol) =>
-                symbol is IParameterSymbol
-                && symbol.ContainingSymbol is IMethodSymbol m
-                && m.MethodKind == MethodKind.Constructor;
+                symbol is IParameterSymbol {  ContainingSymbol: IMethodSymbol { MethodKind: MethodKind.Constructor } };
         }
     }
 }

@@ -236,6 +236,12 @@
     },
     {
       "Id": "S2325",
+      "Message": "Make \u0027Method\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4201.cs#L11",
+      "Location": "Line 11 Position 21-27"
+    },
+    {
+      "Id": "S2325",
       "Message": "Make \u0027Foo\u0027 a static method.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4830.cs#L5",
       "Location": "Line 5 Position 14-17"
