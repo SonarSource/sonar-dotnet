@@ -126,14 +126,6 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         {
             return ProcessAddMethod(context.State, methodReference.Method, methodReference.Instance) ?? context.State;
         }
-        else if (operation.AsPropertyReference() is { Property.IsIndexer: true } indexer)
-        {
-            return ProcessIndexerAccess(context.State, indexer);
-        }
-        else if (operation.AsPropertyReference() is { Instance: not null } propertyReference && PropertyReferenceConstraint(context.State, propertyReference) is { } constraint)
-        {
-            return context.State.SetOperationConstraint(operation, constraint);
-        }
         else
         {
             return context.State;
@@ -211,11 +203,6 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         return state;
     }
 
-    private static NumberConstraint PropertyReferenceConstraint(ProgramState state, IPropertyReferenceOperationWrapper propertyReference) =>
-        propertyReference.Property.Name is nameof(Array.Length) or nameof(List<int>.Count)
-            ? SizeConstraint(state, propertyReference.Instance)
-            : null;
-
     private static NumberConstraint SizeConstraint(ProgramState state, IOperation instance, bool hasFilteringPredicate = false)
     {
         if (instance.TrackedSymbol(state) is { } symbol && state[symbol]?.Constraint<CollectionConstraint>() is { } collection)
@@ -230,13 +217,5 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
             }
         }
         return instance.Type.DerivesOrImplementsAny(CollectionTracker.CollectionTypes) ? NumberConstraint.From(0, null) : null;
-    }
-
-    private static ProgramState ProcessIndexerAccess(ProgramState state, IPropertyReferenceOperationWrapper propertyReference)
-    {
-        state = state.SetOperationConstraint(propertyReference.Instance, CollectionConstraint.NotEmpty);
-        return propertyReference.Instance.TrackedSymbol(state) is { } symbol
-            ? state.SetSymbolConstraint(symbol, CollectionConstraint.NotEmpty)
-            : state;
     }
 }

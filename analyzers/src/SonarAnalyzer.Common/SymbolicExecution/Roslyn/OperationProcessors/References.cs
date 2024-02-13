@@ -73,7 +73,8 @@ internal sealed class PropertyReference : BranchingProcessor<IPropertyReferenceO
 
     protected override ProgramState PreProcess(ProgramState state, IPropertyReferenceOperationWrapper operation)
     {
-        if (operation.Instance.TrackedSymbol(state) is { } symbol)
+        var symbol = operation.Instance.TrackedSymbol(state);
+        if (symbol is not null)
         {
             if (!IsNullableProperty(operation, "HasValue"))
             {
@@ -84,6 +85,7 @@ internal sealed class PropertyReference : BranchingProcessor<IPropertyReferenceO
                 state = state.SetOperationValue(operation, value);
             }
         }
+        state = CollectionTracker.LearnFrom(state, operation, symbol);
         return state;
     }
 
