@@ -1391,9 +1391,6 @@ private static bool Equals(object a, object b, object c) => false;";
                 var x = list.Count();
                 Tag("Before", x);
 
-                x = list.Count(x => true);
-                Tag("Predicate", x);
-
                 list.Clear();
                 x = list.Count();
                 Tag("Clear", x);
@@ -1401,14 +1398,18 @@ private static bool Equals(object a, object b, object c) => false;";
                 list.Add(42);
                 x = list.Count();
                 Tag("Add", x);
+
+                x = list.Count(_ => true);
+                Tag("Predicate", x);
+
             """;
         var validator = SETestContext.CreateCS(code, "List<int> list").Validator;
         validator.ValidateContainsOperation(OperationKind.Invocation);
 
         validator.TagValue("Before").Should().HaveOnlyConstraints(NumberConstraint.From(0, null), ObjectConstraint.NotNull);
-        validator.TagValue("Predicate").Should().HaveOnlyConstraints(NumberConstraint.From(0, null), ObjectConstraint.NotNull);
         validator.TagValue("Clear").Should().HaveOnlyConstraints(NumberConstraint.From(0), ObjectConstraint.NotNull);
         validator.TagValue("Add").Should().HaveOnlyConstraints(NumberConstraint.From(1, null), ObjectConstraint.NotNull);
+        validator.TagValue("Predicate").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
     }
 
     [TestMethod]
@@ -1438,6 +1439,28 @@ private static bool Equals(object a, object b, object c) => false;";
 
         void Verify(string state, params SymbolicConstraint[] constraints) =>
             validator.TagValue(state, "list").Should().HaveOnlyConstraints(constraints);
+    }
+
+    [TestMethod]
+    public void Invocation_CollectionArgument_RemovesCollectionConstraint()
+    {
+        const string code = """
+                var tag = "before";
+
+                list.Add(42);
+                tag = "add";
+
+                Use(list);
+                tag = "argument";
+
+                void Use(List<int> arg) { }
+            """;
+        var validator = SETestContext.CreateCS(code, "List<int> list", new PreserveTestCheck("list")).Validator;
+        validator.ValidateContainsOperation(OperationKind.Argument);
+
+        validator.TagValue("before", "list").Should().HaveNoConstraints();
+        validator.TagValue("add", "list").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, CollectionConstraint.NotEmpty);
+        validator.TagValue("argument", "list").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     [TestMethod]

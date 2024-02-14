@@ -28,6 +28,6 @@ internal sealed class ArrayCreation : SimpleProcessor<IArrayCreationOperationWra
         IArrayCreationOperationWrapper.FromOperation(operation);
 
     protected override ProgramState Process(SymbolicContext context, IArrayCreationOperationWrapper operation) =>
-         CollectionTracker.LearnFrom(context.State, operation)
+        CollectionTracker.LearnFrom(context.State, operation)
             .SetOperationConstraint(operation, ObjectConstraint.NotNull);
 }
