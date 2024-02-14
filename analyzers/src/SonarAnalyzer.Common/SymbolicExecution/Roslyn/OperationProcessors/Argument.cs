@@ -44,7 +44,9 @@ internal sealed class Argument : SimpleProcessor<IArgumentOperationWrapper>
         {
             state = state.SetSymbolConstraint(notNullSymbol, ObjectConstraint.NotNull);
         }
-        if (argument.WrappedOperation.TrackedSymbol(state) is { } symbol
+        // Enumerable is static class with extensions, so the instance is passed as argument, but it does not get mutated
+        if (!argument.Parameter.ContainingType.Is(KnownType.System_Linq_Enumerable)
+            && argument.WrappedOperation.TrackedSymbol(state) is { } symbol
             && state[symbol] is { } symbolValue)
         {
             state = state.SetSymbolValue(symbol, symbolValue.WithoutConstraint<CollectionConstraint>());

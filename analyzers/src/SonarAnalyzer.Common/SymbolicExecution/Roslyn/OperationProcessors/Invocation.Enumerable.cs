@@ -24,7 +24,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
 internal sealed partial class Invocation
 {
-    private static readonly HashSet<string> EnumerableAndQueryableReturningNotNull = new()
+    private static readonly HashSet<string> ReturningNotNull = new()
     {
         nameof(Enumerable.Append),
         nameof(Enumerable.AsEnumerable),
@@ -71,28 +71,23 @@ internal sealed partial class Invocation
         nameof(Enumerable.Zip),
     };
 
-    private static ProgramState[] ProcessLinqEnumerableAndQueryable(SymbolicContext context, IInvocationOperationWrapper invocation)
+    private static ProgramState[] ProcessLinqEnumerableAndQueryable(ProgramState state, IInvocationOperationWrapper invocation)
     {
         var name = invocation.TargetMethod.Name;
-        if (EnumerableAndQueryableReturningNotNull.Contains(name))
+        if (ReturningNotNull.Contains(name))
         {
-            return context.SetOperationConstraint(ObjectConstraint.NotNull).ToArray();
+            return state.SetOperationConstraint(invocation, ObjectConstraint.NotNull).ToArray();
         }
-        else if (name == nameof(Enumerable.FirstOrDefault)   // ElementAtOrDefault is intentionally not supported. It's causing many FPs
-            || name == nameof(Enumerable.LastOrDefault)
-            || name == nameof(Enumerable.SingleOrDefault))
+        // ElementAtOrDefault is intentionally not supported. It's causing many FPs
+        else if (name is nameof(Enumerable.FirstOrDefault) or nameof(Enumerable.LastOrDefault) or nameof(Enumerable.SingleOrDefault))
         {
             return invocation.TargetMethod.ReturnType.IsReferenceType
-                ? new[]
-                {
-                    context.SetOperationConstraint(ObjectConstraint.Null),
-                    context.SetOperationConstraint(ObjectConstraint.NotNull),
-                }
-                : context.State.ToArray();
+                ? [state.SetOperationConstraint(invocation, ObjectConstraint.Null), state.SetOperationConstraint(invocation, ObjectConstraint.NotNull)]
+                : state.ToArray();
         }
         else
         {
-            return context.State.ToArray();
+            return state.ToArray();
         }
     }
 }

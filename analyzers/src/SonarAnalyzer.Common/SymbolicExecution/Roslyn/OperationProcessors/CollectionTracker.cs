@@ -44,8 +44,8 @@ internal static class CollectionTracker
         KnownType.System_Collections_Generic_IDictionary_TKey_TValue,
         KnownType.System_Collections_Immutable_IImmutableDictionary_TKey_TValue);
 
-    public static readonly HashSet<string> AddMethods = new()
-    {
+    private static readonly HashSet<string> AddMethods =
+    [
         nameof(ICollection<int>.Add),
         nameof(List<int>.AddRange),
         nameof(List<int>.Insert),
@@ -57,10 +57,10 @@ internal static class CollectionTracker
         nameof(Stack<int>.Push),
         nameof(Collection<int>.Insert),
         "TryAdd"
-    };
+    ];
 
-    public static readonly HashSet<string> RemoveMethods = new()
-    {
+    private static readonly HashSet<string> RemoveMethods =
+    [
         nameof(ICollection<int>.Remove),
         nameof(List<int>.RemoveAll),
         nameof(List<int>.RemoveAt),
@@ -70,31 +70,41 @@ internal static class CollectionTracker
         nameof(HashSet<int>.RemoveWhere),
         nameof(Queue<int>.Dequeue),
         nameof(Stack<int>.Pop)
-    };
+    ];
 
     private static readonly HashSet<string> AddOrRemoveMethods = [.. AddMethods, .. RemoveMethods];
 
-    public static CollectionConstraint ObjectCreationConstraint(ProgramState state, IObjectCreationOperationWrapper operation)
+    public static ProgramState LearnFrom(ProgramState state, IObjectCreationOperationWrapper operation)
     {
         if (operation.Type.IsAny(CollectionTypes))
         {
-            return operation.Arguments.SingleOrDefault(IsEnumerable) is { } argument
-                ? state.Constraint<CollectionConstraint>(argument)
-                : CollectionConstraint.Empty;
+            if (operation.Arguments.SingleOrDefault(IsEnumerable) is { } argument)
+            {
+                return state.Constraint<CollectionConstraint>(argument) is { } constraint
+                    ? state.SetOperationConstraint(operation, constraint)
+                    : state;
+            }
+            else
+            {
+                return state.SetOperationConstraint(operation, CollectionConstraint.Empty);
+            }
         }
         else
         {
-            return null;
+            return state;
         }
 
         static bool IsEnumerable(IOperation operation) =>
             operation.ToArgument().Parameter.Type.DerivesOrImplements(KnownType.System_Collections_IEnumerable);
     }
 
-    public static CollectionConstraint ArrayCreationConstraint(IArrayCreationOperationWrapper operation) =>
-        operation.DimensionSizes.Any(x => x.ConstantValue.Value is 0)
+    public static ProgramState LearnFrom(ProgramState state, IArrayCreationOperationWrapper operation)
+    {
+        var constraint = operation.DimensionSizes.Any(x => x.ConstantValue.Value is 0)
             ? CollectionConstraint.Empty
             : CollectionConstraint.NotEmpty;
+        return state.SetOperationConstraint(operation, constraint);
+    }
 
     public static ProgramState LearnFrom(ProgramState state, IMethodReferenceOperationWrapper operation) =>
         operation.Instance is not null
@@ -131,5 +141,70 @@ internal static class CollectionTracker
             }
         }
         return state;
+    }
+
+    public static ProgramState LearnFrom(ProgramState state, IInvocationOperationWrapper invocation)
+    {
+        if (EnumerableCountConstraint(state, invocation) is { } constraint)
+        {
+            return state.SetOperationConstraint(invocation, constraint);
+        }
+        if (invocation.Instance is { } instance && instance.Type.DerivesOrImplementsAny(CollectionTypes))
+        {
+            var targetMethod = invocation.TargetMethod;
+            var symbolValue = state[instance] ?? SymbolicValue.Empty;
+            if (AddMethods.Contains(targetMethod.Name))
+            {
+                return SetOperationAndSymbolValue(symbolValue.WithConstraint(CollectionConstraint.NotEmpty));
+            }
+            else if (RemoveMethods.Contains(targetMethod.Name))
+            {
+                return SetOperationAndSymbolValue(symbolValue.WithoutConstraint(CollectionConstraint.NotEmpty));
+            }
+            else if (targetMethod.Name == nameof(ICollection<int>.Clear))
+            {
+                return SetOperationAndSymbolValue(symbolValue.WithConstraint(CollectionConstraint.Empty));
+            }
+        }
+        return state;
+
+        ProgramState SetOperationAndSymbolValue(SymbolicValue value)
+        {
+            if (instance.TrackedSymbol(state) is { } symbol)
+            {
+                state = state.SetSymbolValue(symbol, value);
+            }
+            return state.SetOperationValue(instance, value);
+        }
+    }
+
+    private static NumberConstraint EnumerableCountConstraint(ProgramState state, IInvocationOperationWrapper invocation)
+    {
+        if (invocation.TargetMethod.Is(KnownType.System_Linq_Enumerable, nameof(Enumerable.Count)))
+        {
+            var instance = invocation.Instance ?? invocation.Arguments[0].ToArgument().Value;
+            if (instance.TrackedSymbol(state) is { } symbol
+                && state[symbol]?.Constraint<CollectionConstraint>() is { } collection)
+            {
+                if (collection == CollectionConstraint.Empty)
+                {
+                    return NumberConstraint.From(0);
+                }
+                else
+                {
+                    return HasFilteringPredicate()
+                        ? NumberConstraint.From(0, null) // nonEmpty.Count(predicate) can be Empty or NotEmpty
+                        : NumberConstraint.From(1, null);
+                }
+            }
+            else
+            {
+                return NumberConstraint.From(0, null);
+            }
+        }
+        return null;
+
+        bool HasFilteringPredicate() =>
+            invocation.Arguments.Any(x => x.ToArgument().Parameter.Type.Is(KnownType.System_Func_T_TResult));
     }
 }
