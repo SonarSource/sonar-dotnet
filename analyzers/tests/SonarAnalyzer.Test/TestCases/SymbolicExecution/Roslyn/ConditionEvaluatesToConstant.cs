@@ -1670,8 +1670,10 @@ namespace Tests.Diagnostics
             for (int i = 0; i < 10; i++)
                 for (int j = i + 1; j < i + 10; j++)
                 {
-                    _ = j >= 0 ? 0 : 42;        // FN
-                    _ = j > 0 ? 0 : 42;         // FN
+                    _ = j >= 0 ? 0 : 42;        // Noncompliant
+                                                // Secondary@-1
+                    _ = j > 0 ? 0 : 42;         // Noncompliant
+                                                // Secondary@-1
                     _ = j < 18 ? 0 : 42;        // Compliant
                     _ = j < 19 ? 0 : 42;        // FN
                     _ = i + j < 27 ? 0 : 42;    // Compliant
@@ -1687,8 +1689,10 @@ namespace Tests.Diagnostics
             {
                 for (int j = i + 1; j < i + 10;)
                 {
-                    _ = j >= 0 ? 0 : 42;        // FN
-                    _ = j > 0 ? 0 : 42;         // FN
+                    _ = j >= 0 ? 0 : 42;        // Noncompliant
+                                                // Secondary@-1
+                    _ = j > 0 ? 0 : 42;         // Noncompliant
+                                                // Secondary@-1
                     _ = j < 18 ? 0 : 42;        // Compliant
                     _ = j < 19 ? 0 : 42;        // FN
                     _ = i + j < 27 ? 0 : 42;    // Compliant
@@ -1710,7 +1714,8 @@ namespace Tests.Diagnostics
                 _ = j > 0 ? 0 : 42;             // Noncompliant
                                                 // Secondary@-1
                 _ = j < 3 ? 0 : 42;             // Compliant
-                _ = i + j > 0 ? 0 : 42;         // FN
+                _ = i + j > 0 ? 0 : 42;         // Noncompliant
+                                                // Secondary@-1
                 _ = i + j > 1 ? 0 : 42;         // Compliant
             }
         }
@@ -1745,7 +1750,7 @@ namespace Tests.Diagnostics
             {
                 var i = 0;
                 i = i + 1;
-                if (i != 0)                 // FN
+                if (i != 0)                 // Noncompliant
                 {
                     Console.WriteLine();
                 }
@@ -1759,7 +1764,7 @@ namespace Tests.Diagnostics
                 var i = 1;
                 var j = 1;
                 j = i + j;
-                if (j >= 0)         // FN
+                if (j >= 0)         // Noncompliant
                 {
                     Console.WriteLine();
                 }
@@ -1772,7 +1777,7 @@ namespace Tests.Diagnostics
             while (condition)
             {
                 i = i + 1;
-                if (i != 0)                 // FN
+                if (i != 0)                 // Noncompliant
                 {
                     Console.WriteLine();
                 }
@@ -1785,7 +1790,7 @@ namespace Tests.Diagnostics
             var j = 0;
             while (condition)
             {
-                if (j >= 0)         // Compliant
+                if (j >= 0)         // Noncompliant FP
                 {
                     Console.WriteLine();
                 }
@@ -1800,7 +1805,7 @@ namespace Tests.Diagnostics
             while (condition)
             {
                 var i = 0;
-                if (j >= 0)         // FN
+                if (j >= 0)         // Noncompliant
                 {
                     Console.WriteLine();
                 }

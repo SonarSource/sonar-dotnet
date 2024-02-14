@@ -209,7 +209,7 @@ public partial class RoslynSymbolicExecutionTest
             },
             x =>
             {
-                x[i].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(null, 9));
+                x[i].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(1, 9));
                 x[value].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(42));
             });
         validator.TagStates("Unreachable").Should().BeEmpty();
@@ -390,15 +390,16 @@ public partial class RoslynSymbolicExecutionTest
             End While
             """;
         var validator = SETestContext.CreateVB(code, new AddConstraintOnInvocationCheck()).Validator;
-        validator.ValidateExitReachCount(3);
-        validator.ValidateTagOrder("If", "After", "If", "Else", "After");
+        validator.ValidateExitReachCount(4);
+        validator.ValidateTagOrder("If", "After", "If", "Else", "After", "After");
         validator.TagValues("If").Should().SatisfyRespectively(
             x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(0)),
-            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(null, 9)));
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(1, 9)));
         validator.TagValue("Else").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(10, null));
         validator.TagValues("After").Should().SatisfyRespectively(
-            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull),                                      // Initial pass through "if"
-            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(10, null)));    // Second pass through "if", false branch
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(1, null)),      // Initial pass through "if"
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(10, null)),     // Second pass through "if", false branch
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(2, null)));     // Second pass through "if", true branch
     }
 
     [TestMethod]
