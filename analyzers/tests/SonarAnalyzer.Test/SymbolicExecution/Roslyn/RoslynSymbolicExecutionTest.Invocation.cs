@@ -1409,7 +1409,7 @@ private static bool Equals(object a, object b, object c) => false;";
         validator.TagValue("Before").Should().HaveOnlyConstraints(NumberConstraint.From(0, null), ObjectConstraint.NotNull);
         validator.TagValue("Clear").Should().HaveOnlyConstraints(NumberConstraint.From(0), ObjectConstraint.NotNull);
         validator.TagValue("Add").Should().HaveOnlyConstraints(NumberConstraint.From(1, null), ObjectConstraint.NotNull);
-        validator.TagValue("Predicate").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
+        validator.TagValue("Predicate").Should().HaveOnlyConstraints(NumberConstraint.From(0, null), ObjectConstraint.NotNull);
     }
 
     [TestMethod]

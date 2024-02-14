@@ -190,9 +190,11 @@ internal static class CollectionTracker
                 {
                     return NumberConstraint.From(0);
                 }
-                else if (!HasFilteringPredicate()) // nonEmpty.Count(predicate) can be Empty or NotEmpty
+                else
                 {
-                    return NumberConstraint.From(1, null);
+                    return HasFilteringPredicate()
+                    ? NumberConstraint.From(0, null) // nonEmpty.Count(predicate) can be Empty or NotEmpty
+                    : NumberConstraint.From(1, null);
                 }
             }
             else
