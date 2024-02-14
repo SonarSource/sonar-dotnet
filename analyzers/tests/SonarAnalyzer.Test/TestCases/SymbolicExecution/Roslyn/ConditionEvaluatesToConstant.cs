@@ -4064,8 +4064,7 @@ public class Repro_8707
         var success = false;
         Exception exception = null;
         int retries = 3;
-        while (!success && retries > 0) // Noncompliant FP
-        //                 ^^^^^^^^^^^
+        while (!success && retries > 0) // Compliant
         {
             try
             {
@@ -4084,6 +4083,7 @@ public class Repro_8707
         }
     }
 }
+
 // https://github.com/SonarSource/sonar-dotnet/issues/8719
 class Repro_8719
 {
