@@ -2266,7 +2266,7 @@ namespace Tests.Diagnostics
         private bool Cond = new Random().Next() % 2 == 1;
     }
 
-    
+
 
     class Repro2442
     {
@@ -4032,5 +4032,26 @@ class Repro_8719
             Console.WriteLine(exception);
         }
         Console.WriteLine(success);
+    }
+}
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8570
+class Repro_8570
+{
+    void Method(int[] more)
+    {
+        var list = new List<int>();
+        list.AddRange(more);
+
+        if (list.Count == 0)        // Noncompliant FP, we do not know if "more" is empty or not
+        {
+            Console.WriteLine(); // Secondary FP
+        }
+
+        if (list.Count() != 0)        // Noncompliant FP, we do not know if "more" is empty or not
+        {
+            Console.WriteLine();
+        }
+
     }
 }
