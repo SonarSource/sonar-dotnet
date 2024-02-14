@@ -4112,7 +4112,7 @@ public class Repro_8707
     public void Finally()
     {
         int count = 3;
-        while (count > 0)   // Noncompliant FP
+        while (count > 0)   // Compliant
         {
             try
             {
