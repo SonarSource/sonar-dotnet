@@ -1737,6 +1737,79 @@ namespace Tests.Diagnostics
         }
     }
 
+    class LoopVariableTracking
+    {
+        void InitializationInLoop(bool condition)
+        {
+            while (condition)
+            {
+                var i = 0;
+                i = i + 1;
+                if (i != 0)                 // FN
+                {
+                    Console.WriteLine();
+                }
+            }
+        }
+
+        void InitializationInLoop_TwoVariables(bool condition)
+        {
+            while (condition)
+            {
+                var i = 1;
+                var j = 1;
+                j = i + j;
+                if (j >= 0)         // FN
+                {
+                    Console.WriteLine();
+                }
+            }
+        }
+
+        void InitializationBeforeLoop(bool condition)
+        {
+            var i = 0;
+            while (condition)
+            {
+                i = i + 1;
+                if (i != 0)                 // FN
+                {
+                    Console.WriteLine();
+                }
+            }
+        }
+
+        void AssignmentToOtherVariable(bool condition)
+        {
+            var i = 0;
+            var j = 0;
+            while (condition)
+            {
+                if (j >= 0)         // Compliant
+                {
+                    Console.WriteLine();
+                }
+                j = i + 1;
+                i = -5;
+            }
+        }
+
+        void AssignmentFromInLoopVariable(bool condition)
+        {
+            var j = 0;
+            while (condition)
+            {
+                var i = 0;
+                if (j >= 0)         // FN
+                {
+                    Console.WriteLine();
+                }
+                j = i + 1;
+                i = -5;
+            }
+        }
+    }
+
     public class GuardedTests
     {
         public void Guarded(string s1)
