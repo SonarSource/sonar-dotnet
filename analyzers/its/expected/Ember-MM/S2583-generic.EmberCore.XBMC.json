@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S2583",
+      "Message": "Change this condition so that it does not always evaluate to \u0027False\u0027. Some code paths are unreachable.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L404",
+      "Location": "Line 404 Position 12-21"
+    }
+  ]
+}
