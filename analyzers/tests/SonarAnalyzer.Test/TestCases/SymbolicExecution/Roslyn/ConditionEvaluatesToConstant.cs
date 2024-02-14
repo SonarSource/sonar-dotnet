@@ -4043,15 +4043,16 @@ class Repro_8570
         var list = new List<int>();
         list.AddRange(more);
 
-        if (list.Count == 0)        // Noncompliant FP, we do not know if "more" is empty or not
+        if (list.Count == 0)            // Noncompliant {{Change this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.}}
+                                        // FP, we do not know if "more" is empty or not
         {
-            Console.WriteLine(); // Secondary FP
+            Console.WriteLine();        // Secondary FP
         }
 
-        if (list.Count() != 0)        // Noncompliant FP, we do not know if "more" is empty or not
+        if (list.Count() != 0)          // Noncompliant {{Change this condition so that it does not always evaluate to 'True'.}}
+                                        // FP, we do not know if "more" is empty or not
         {
             Console.WriteLine();
         }
-
     }
 }
