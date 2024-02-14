@@ -3922,7 +3922,6 @@ public class Repro_8495
     }
 }
 
-
 // https://github.com/SonarSource/sonar-dotnet/issues/8678
 public class Repro_8678
 {
@@ -3957,6 +3956,34 @@ public class Repro_8678
     }
 }
 
+// https://github.com/SonarSource/sonar-dotnet/issues/8707
+public class Repro_8707
+{
+    public void Method()
+    {
+        var success = false;
+        Exception exception = null;
+        int retries = 3;
+        while (!success && retries > 0) // Noncompliant FP
+        //                 ^^^^^^^^^^^
+        {
+            try
+            {
+                Console.WriteLine();
+                success = true;
+            }
+            catch (Exception e)
+            {
+                exception = e;
+                retries--;
+            }
+        }
+        if (exception != null)
+        {
+            Console.WriteLine(exception);
+        }
+    }
+}
 // https://github.com/SonarSource/sonar-dotnet/issues/8719
 class Repro_8719
 {
