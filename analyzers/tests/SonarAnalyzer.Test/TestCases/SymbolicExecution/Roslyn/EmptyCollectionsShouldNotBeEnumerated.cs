@@ -647,7 +647,7 @@ class AdvancedTests
 
         if (empty.Count() == 0)
         {
-            empty.Clear();  // FN
+            empty.Clear();  // Noncompliant
         }
         else
         {
@@ -656,7 +656,7 @@ class AdvancedTests
 
         if (empty.Count(x => condition) == 0)
         {
-            empty.Clear();  // FN
+            empty.Clear();  // Noncompliant
         }
         else
         {
@@ -674,7 +674,7 @@ class AdvancedTests
 
         if (Enumerable.Count(empty) == 0)
         {
-            empty.Clear();  // FN
+            empty.Clear();  // Noncompliant
         }
         else
         {
@@ -715,7 +715,7 @@ class AdvancedTests
 
         if (empty.Count() == 0)
         {
-            empty.Clone();  // FN
+            empty.Clone();  // Noncompliant
         }
         else
         {

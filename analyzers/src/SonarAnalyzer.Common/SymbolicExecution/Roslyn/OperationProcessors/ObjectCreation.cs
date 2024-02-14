@@ -46,10 +46,8 @@ internal sealed class ObjectCreation : SimpleProcessor<IObjectCreationOperationW
         }
         else
         {
-            var newState = context.SetOperationConstraint(ObjectConstraint.NotNull);
-            return CollectionTracker.ObjectCreationConstraint(context.State, operation) is { } constraint
-                ? newState.SetOperationConstraint(operation, constraint)
-                : newState;
+            return CollectionTracker.LearnFrom(context.State, operation)
+                .SetOperationConstraint(operation, ObjectConstraint.NotNull);
         }
     }
 }

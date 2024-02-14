@@ -42,9 +42,9 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
         }
         else if (invocation.Instance.TrackedSymbol(state) is { } symbol && !IsNullableGetValueOrDefault(invocation))
         {
-            state = state.SetSymbolConstraint(symbol, ObjectConstraint.NotNull);
+            state = state.SetSymbolConstraint(symbol, ObjectConstraint.NotNull)
+                .SetOperationConstraint(invocation.Instance, ObjectConstraint.NotNull);
         }
-
         if (invocation.HasThisReceiver(state))
         {
             state = state.ResetFieldConstraints();
@@ -56,6 +56,8 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
         {
             state = state.SetSymbolConstraint(instanceSymbol, ObjectConstraint.NotNull);
         }
+        state = CollectionTracker.LearnFrom(state, invocation);
+
         return invocation switch
         {
             _ when IsNullableGetValueOrDefault(invocation) => ProcessNullableGetValueOrDefault(context, invocation).ToArray(),
@@ -63,7 +65,7 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
             _ when invocation.TargetMethod.Is(KnownType.System_Diagnostics_Debug, nameof(Debug.Assert)) => ProcessDebugAssert(context, invocation),
             _ when invocation.TargetMethod.Is(KnownType.System_Object, nameof(ReferenceEquals)) => ProcessReferenceEquals(context, invocation),
             _ when invocation.TargetMethod.Is(KnownType.System_Nullable_T, "get_HasValue") => ProcessNullableHasValue(state, invocation),
-            _ when invocation.TargetMethod.ContainingType.IsAny(KnownType.System_Linq_Enumerable, KnownType.System_Linq_Queryable) => ProcessLinqEnumerableAndQueryable(context, invocation),
+            _ when invocation.TargetMethod.ContainingType.IsAny(KnownType.System_Linq_Enumerable, KnownType.System_Linq_Queryable) => ProcessLinqEnumerableAndQueryable(state, invocation),
             _ when invocation.TargetMethod.Name == nameof(Equals) => ProcessEquals(context, invocation),
             _ when invocation.TargetMethod.ContainingType.Is(KnownType.System_String) => ProcessSystemStringInvocation(state, invocation),
             _ => ProcessArgumentAttributes(state, invocation),
