@@ -193,8 +193,8 @@ internal static class CollectionTracker
                 else
                 {
                     return HasFilteringPredicate()
-                    ? NumberConstraint.From(0, null) // nonEmpty.Count(predicate) can be Empty or NotEmpty
-                    : NumberConstraint.From(1, null);
+                        ? NumberConstraint.From(0, null) // nonEmpty.Count(predicate) can be Empty or NotEmpty
+                        : NumberConstraint.From(1, null);
                 }
             }
             else

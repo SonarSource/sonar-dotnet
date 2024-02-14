@@ -53,6 +53,12 @@
       "Message": "Change this condition so that it does not always evaluate to \u0027True\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3440.cs#L11",
       "Location": "Line 11 Position 17-18"
+    },
+    {
+      "Id": "S2589",
+      "Message": "Change this condition so that it does not always evaluate to \u0027True\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3981.cs#L12",
+      "Location": "Line 12 Position 17-62"
     }
   ]
 }
