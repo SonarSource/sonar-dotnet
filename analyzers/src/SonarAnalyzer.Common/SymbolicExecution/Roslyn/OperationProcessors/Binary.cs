@@ -59,4 +59,14 @@ internal sealed class Binary : BinaryBase<IBinaryOperationWrapper>
         }
         return state;
     }
+
+    // We can take the left or right constraint and "testedSymbol" because they are exclusive. Symbols with NotNull constraint will be recognized as the constraining side.
+    // We only learn in the true branch because not being >, >=, <, <= than a non-empty nullable means either being null or non-null with non-matching value.
+    private static ProgramState LearnBranchingRelationalObjectConstraint(ProgramState state, IOperation leftOperand, IOperation rightOperand, bool falseBranch) =>
+        !falseBranch
+        && BinaryOperandConstraint<ObjectConstraint>(state, leftOperand, rightOperand) == ObjectConstraint.NotNull
+        && BinaryOperandSymbolWithoutConstraint<ObjectConstraint>(state, leftOperand, rightOperand) is { } testedSymbol
+        && testedSymbol.GetSymbolType().IsNullableValueType()
+            ? state.SetSymbolConstraint(testedSymbol, ObjectConstraint.NotNull)
+            : null;
 }
