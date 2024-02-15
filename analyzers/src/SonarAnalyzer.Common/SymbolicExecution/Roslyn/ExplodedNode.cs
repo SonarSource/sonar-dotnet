@@ -58,7 +58,7 @@ public sealed class ExplodedNode : IEquatable<ExplodedNode>
     }
 
     public override int GetHashCode() =>
-        HashCode.Combine(programPointHash, State);
+        HashCode.Combine(programPointHash, State, FinallyPoint?.BlockIndex);
 
     public override bool Equals(object obj) =>
         Equals(obj as ExplodedNode);
@@ -66,10 +66,29 @@ public sealed class ExplodedNode : IEquatable<ExplodedNode>
     public bool Equals(ExplodedNode other) =>
         other is not null
         && other.programPointHash == programPointHash
-        && other.State.Equals(State);
+        && other.State.Equals(State)
+        && HasSameFinallyPointChain(other.FinallyPoint);
 
     public override string ToString() =>
         Operation.Instance is { } operation
             ? $"Block #{Block.Ordinal}, Operation #{index}, {operation.Serialize()}{Environment.NewLine}{State}"
             : $"Block #{Block.Ordinal}, Branching{Environment.NewLine}{State}";
+
+    private bool HasSameFinallyPointChain(FinallyPoint other)
+    {
+        var current = FinallyPoint;
+        while (current is not null && other is not null)
+        {
+            if (current.BlockIndex == other.BlockIndex && current.BranchDestination == other.BranchDestination)
+            {
+                current = current.Previous;
+                other = other.Previous;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        return current is null && other is null;
+    }
 }

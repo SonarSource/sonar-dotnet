@@ -403,20 +403,20 @@ Tag(""AfterOuterFinally"");";
             "InOuterFinally",
             "InInnerTry",           // With Exception thrown by Tag("InOuterTry")
             "InInnerTry",
-            "InInnerFinally",       // With Exception thrown by Tag("InOuterTry")
-            "InInnerFinally",
-            "AfterInnerFinally",
+            "InInnerFinally",       // With Exception thrown by Tag("InOuterTry"), that visits AfterInnerFinally
+            "InInnerFinally",       // With Exception thrown by Tag("InInnerTry"), that skips AfterInnerFinally and goes to exit block
+            "InInnerFinally",       // No exception
+            "AfterInnerFinally",    // With Exception thrown by Tag("InOuterTry"), that visits AfterInnerFinally
+            "AfterInnerFinally",    // No exception
             "AfterOuterFinally");
-
         ValidateHasOnlyNoExceptionAndUnknownException(validator, "InOuterFinally");
-        ValidateHasOnlyNoExceptionAndUnknownException(validator, "InInnerFinally");
         ValidateHasOnlyNoExceptionAndUnknownException(validator, "InInnerTry");
-
-        validator.TagStates("AfterInnerFinally").Should().HaveCount(1)
-                 .And.ContainSingle(x => HasNoException(x));
-
-        validator.TagStates("AfterOuterFinally").Should().HaveCount(1)
-                 .And.ContainSingle(x => HasNoException(x));
+        ValidateHasOnlyNoExceptionAndUnknownException(validator, "AfterInnerFinally");
+        validator.TagStates("InInnerFinally").Should().SatisfyRespectively(
+            x => HasUnknownException(x).Should().BeTrue(),
+            x => HasUnknownException(x).Should().BeTrue(),
+            x => HasNoException(x).Should().BeTrue());
+        validator.TagStates("AfterOuterFinally").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
     }
 
     [TestMethod]
@@ -772,12 +772,13 @@ tag = ""End"";";
             "InInnerTry",
             "AfterInnerTry",
             "InInnerCatch",
-            "End");
+            "End",
+            "AfterInnerTry");
 
         validator.TagStates("InOuterCatch").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
         validator.TagStates("BeforeInnerTry").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
         validator.TagStates("InInnerCatch").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
-        validator.TagStates("AfterInnerTry").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+        validator.TagStates("AfterInnerTry").Should().HaveCount(2).And.OnlyContain(x => HasNoException(x));
         validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
     }
 

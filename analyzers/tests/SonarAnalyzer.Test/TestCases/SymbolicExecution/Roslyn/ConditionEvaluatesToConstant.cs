@@ -3857,9 +3857,9 @@ public class Repro_8495
                 flag = false;
             }
         }
-        if (flag)           // Noncompliant FP
+        if (flag)           // Compliant
         {
-            return true;    // Secondary FP
+            return true;
         }
         else
         {
@@ -3881,9 +3881,9 @@ public class Repro_8495
                 flag = false;
             }
         }
-        if (flag)           // Noncompliant FP
+        if (flag)           // Compliant
         {
-            return true;    // Secondary FP
+            return true;
         }
         else
         {
@@ -3954,13 +3954,13 @@ public class Repro_8678
         {
             if (condition1)
             {
-                return;
+                return;         // Goes via Finally with success=true directly to exit
             }
-            Console.WriteLine("invocation");
+            Console.WriteLine("Invocation can throw");  // Goes via Finally with success=true, follows to the final condition
         }
         catch
         {
-            success = false;
+            success = false;    // Goes via Finally with success=false
             if (condition2)
             {
                 throw;
@@ -3968,12 +3968,12 @@ public class Repro_8678
         }
         finally
         {
-            Console.WriteLine("do something");
+            Console.WriteLine("Finally");
         }
 
-        if (success)                                // Noncompliant FP
+        if (success)                                // Compliant
         {
-            Console.WriteLine("Notify of success"); // Secondary FP
+            Console.WriteLine("Final condition");
         }
     }
 }
