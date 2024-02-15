@@ -32,13 +32,13 @@ internal abstract class BinaryBase<TOperation> : BranchingProcessor<TOperation>
         var rightBool = right?.Constraint<BoolConstraint>();
         var leftIsNull = left?.Constraint<ObjectConstraint>() == ObjectConstraint.Null;
         var rightIsNull = right?.Constraint<ObjectConstraint>() == ObjectConstraint.Null;
-        if (leftBool is null ^ rightBool is null)
-        {
-            return BoolConstraintFromBoolAndNullConstraints(kind, leftBool, rightBool, leftIsNull, rightIsNull);
-        }
-        else if (leftBool is not null && rightBool is not null)
+        if (leftBool is not null && rightBool is not null)
         {
             return BoolConstraintFromBoolConstraints(kind, leftBool == BoolConstraint.True, rightBool == BoolConstraint.True);
+        }
+        else if (leftBool is null ^ rightBool is null)
+        {
+            return BoolConstraintFromBoolAndNullConstraints(kind, leftBool, rightBool, leftIsNull, rightIsNull);
         }
         else if (left?.Constraint<NumberConstraint>() is { } leftNumber
             && right?.Constraint<NumberConstraint>() is { } rightNumber)
@@ -59,11 +59,7 @@ internal abstract class BinaryBase<TOperation> : BranchingProcessor<TOperation>
         }
     }
 
-    protected static ProgramState LearnBranchingEqualityConstraint(ProgramState state,
-                                                                   IOperation leftOperand,
-                                                                   IOperation rightOperand,
-                                                                   BinaryOperatorKind operatorKind,
-                                                                   bool falseBranch)
+    protected static ProgramState LearnBranchingEqualityConstraint(ProgramState state, IOperation leftOperand, IOperation rightOperand, BinaryOperatorKind operatorKind, bool falseBranch)
     {
         state = LearnBranchingEqualityConstraint<ObjectConstraint>(state, leftOperand, rightOperand, operatorKind, falseBranch) ?? state;
         state = LearnBranchingEqualityConstraint<BoolConstraint>(state, leftOperand, rightOperand, operatorKind, falseBranch) ?? state;
@@ -72,11 +68,7 @@ internal abstract class BinaryBase<TOperation> : BranchingProcessor<TOperation>
         return state;
     }
 
-    protected static ProgramState LearnBranchingNumberConstraint(ProgramState state,
-                                                                 IOperation leftOperand,
-                                                                 IOperation rightOperand,
-                                                                 BinaryOperatorKind operatorKind,
-                                                                 bool falseBranch)
+    protected static ProgramState LearnBranchingNumberConstraint(ProgramState state, IOperation leftOperand, IOperation rightOperand, BinaryOperatorKind operatorKind, bool falseBranch)
     {
         var kind = falseBranch ? Opposite(operatorKind) : operatorKind;
         var leftNumber = state[leftOperand]?.Constraint<NumberConstraint>();
@@ -106,11 +98,7 @@ internal abstract class BinaryBase<TOperation> : BranchingProcessor<TOperation>
                 : state;
     }
 
-    protected static ProgramState LearnBranchingCollectionConstraint(ProgramState state,
-                                                                     IOperation leftOperand,
-                                                                     IOperation rightOperand,
-                                                                     BinaryOperatorKind binaryOperatorKind,
-                                                                     bool falseBranch)
+    protected static ProgramState LearnBranchingCollectionConstraint(ProgramState state, IOperation leftOperand, IOperation rightOperand, BinaryOperatorKind binaryOperatorKind, bool falseBranch)
     {
         var operatorKind = falseBranch ? Opposite(binaryOperatorKind) : binaryOperatorKind;
         IOperation otherOperand;
@@ -145,11 +133,7 @@ internal abstract class BinaryBase<TOperation> : BranchingProcessor<TOperation>
     protected static SymbolicConstraint BinaryOperandConstraint<T>(ProgramState state, IOperation leftOperand, IOperation rightOperand) where T : SymbolicConstraint =>
         state[leftOperand]?.Constraint<T>() ?? state[rightOperand]?.Constraint<T>();
 
-    private static ProgramState LearnBranchingEqualityConstraint<T>(ProgramState state,
-                                                                    IOperation leftOperand,
-                                                                    IOperation rightOperand,
-                                                                    BinaryOperatorKind operatorKind,
-                                                                    bool falseBranch)
+    private static ProgramState LearnBranchingEqualityConstraint<T>(ProgramState state, IOperation leftOperand, IOperation rightOperand, BinaryOperatorKind operatorKind, bool falseBranch)
         where T : SymbolicConstraint
     {
         var useOpposite = falseBranch ^ operatorKind.IsNotEquals();
