@@ -54,5 +54,14 @@ namespace SonarAnalyzer.Extensions
 
         public static ControlFlowRegion NestedRegion(this ControlFlowRegion region, ControlFlowRegionKind kind) =>
             region.NestedRegions.Single(x => x.Kind == kind);
+
+        /// <summary>
+        /// Returns all Catch, FilterAndHandler, and Finally regions that are reachable from the given try region.
+        /// </summary>
+        public static IEnumerable<ControlFlowRegion> ReachableHandlers(this ControlFlowRegion tryRegion) =>
+            tryRegion is null
+                ? Enumerable.Empty<ControlFlowRegion>()
+                : tryRegion.EnclosingRegion.NestedRegions.Where(x => x.Kind != ControlFlowRegionKind.Try)
+                    .Concat(ReachableHandlers(tryRegion.EnclosingRegion(ControlFlowRegionKind.Try)));   // Use also all outer candidates for nested try/catch.
     }
 }

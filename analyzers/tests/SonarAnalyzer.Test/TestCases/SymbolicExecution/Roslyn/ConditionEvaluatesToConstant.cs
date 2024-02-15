@@ -1813,6 +1813,32 @@ namespace Tests.Diagnostics
                 i = -5;
             }
         }
+
+        // based on https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L385
+        public void ModifiedInTryCatch()
+        {
+            var needRetry = false;
+            var retry = 3;
+            do
+            {
+                needRetry = false;
+                try
+                {
+                    Console.WriteLine("Can throw");
+                }
+                catch
+                {
+                    needRetry = true;
+                    retry--;
+                }
+            }
+            while (needRetry && retry > 0);
+            if (needRetry && retry <= 0)
+            //               ^^^^^^^^^^  Noncompliant
+            {
+                Console.WriteLine("Failed");
+            }
+        }
     }
 
     public class GuardedTests
