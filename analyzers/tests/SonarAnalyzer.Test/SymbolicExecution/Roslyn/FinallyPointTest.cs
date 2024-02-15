@@ -36,22 +36,23 @@ public class FinallyPointTest
     [TestMethod]
     public void CreateNext_ReturnsAllFinally_AndThenDestination()
     {
-        const string code = @"
-try
-{
-    try
-    {
-        true.ToString();
-    }
-    finally
-    {
-        true.ToString();
-    }
-}
-finally
-{
-    true.ToString();
-}";
+        const string code = """
+            try
+            {
+                try
+                {
+                    true.ToString();
+                }
+                finally
+                {
+                    true.ToString();
+                }
+            }
+            finally
+            {
+                true.ToString();
+            }
+            """;
         var cfg = TestHelper.CompileCfgBodyCS(code);
         var sut = new FinallyPoint(null, cfg.Blocks[1].FallThroughSuccessor);
         sut.BlockIndex.Should().Be(2);   // Inner finally

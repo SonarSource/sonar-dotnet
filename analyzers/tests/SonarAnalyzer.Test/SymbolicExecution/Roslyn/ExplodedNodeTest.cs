@@ -20,7 +20,6 @@
 
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
-using SonarAnalyzer.Test.Helpers;
 
 namespace SonarAnalyzer.Test.SymbolicExecution.Roslyn;
 
@@ -134,21 +133,24 @@ public class ExplodedNodeTest
         var cfg = TestHelper.CompileCfgBodyCS("var a = true;");
         var state = ProgramState.Empty.SetSymbolValue(cfg.Blocks[1].Operations[0].ChildOperations.First().TrackedSymbol(ProgramState.Empty), SymbolicValue.Empty);
 
-        new ExplodedNode(cfg.Blocks[0], ProgramState.Empty, null).ToString().Should().BeIgnoringLineEndings(
-@"Block #0, Branching
-Empty
-");
+        new ExplodedNode(cfg.Blocks[0], ProgramState.Empty, null).ToString().Should().BeIgnoringLineEndings("""
+            Block #0, Branching
+            Empty
 
-        new ExplodedNode(cfg.Blocks[1], state, null).ToString().Should().BeIgnoringLineEndings(
-@"Block #1, Operation #0, LocalReferenceOperation: a = true
-Symbols:
-a: No constraints
-");
-        new ExplodedNode(cfg.ExitBlock, state, null).ToString().Should().BeIgnoringLineEndings(
-@"Block #2, Branching
-Symbols:
-a: No constraints
-");
+            """);
+
+        new ExplodedNode(cfg.Blocks[1], state, null).ToString().Should().BeIgnoringLineEndings("""
+            Block #1, Operation #0, LocalReferenceOperation: a = true
+            Symbols:
+            a: No constraints
+
+            """);
+        new ExplodedNode(cfg.ExitBlock, state, null).ToString().Should().BeIgnoringLineEndings("""
+            Block #2, Branching
+            Symbols:
+            a: No constraints
+
+            """);
     }
 
     [TestMethod]
