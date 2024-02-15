@@ -18,33 +18,29 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Numerics;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
-internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrapper>
+internal sealed class Binary : BinaryBase<IBinaryOperationWrapper>
 {
     protected override IBinaryOperationWrapper Convert(IOperation operation) =>
         IBinaryOperationWrapper.FromOperation(operation);
 
     protected override SymbolicConstraint BoolConstraintFromOperation(ProgramState state, IBinaryOperationWrapper operation) =>
-        BinaryConstraint(operation.OperatorKind, state[operation.LeftOperand], state[operation.RightOperand]);
+        BoolConstraintFromBinaryOperation(operation.OperatorKind, state[operation.LeftOperand], state[operation.RightOperand]);
 
     protected override ProgramState LearnBranchingConstraint(ProgramState state, IBinaryOperationWrapper operation, bool falseBranch)
     {
         if (operation.OperatorKind.IsAnyEquality())
         {
-            state = LearnBranchingEqualityConstraint<ObjectConstraint>(state, operation, falseBranch) ?? state;
-            state = LearnBranchingEqualityConstraint<BoolConstraint>(state, operation, falseBranch) ?? state;
-            state = LearnBranchingNumberConstraint(state, operation, falseBranch);
-            state = LearnBranchingCollectionConstraint(state, operation, falseBranch);
+            state = LearnBranchingEqualityConstraint(state, operation.LeftOperand, operation.RightOperand, operation.OperatorKind, falseBranch);
         }
         else if (operation.OperatorKind.IsAnyRelational())
         {
-            state = LearnBranchingRelationalObjectConstraint(state, operation, falseBranch) ?? state;
-            state = LearnBranchingNumberConstraint(state, operation, falseBranch);
-            state = LearnBranchingCollectionConstraint(state, operation, falseBranch);
+            state = LearnBranchingRelationalObjectConstraint(state, operation.LeftOperand, operation.RightOperand, falseBranch) ?? state;
+            state = LearnBranchingNumberConstraint(state, operation.LeftOperand, operation.RightOperand, operation.OperatorKind, falseBranch);
+            state = LearnBranchingCollectionConstraint(state, operation.LeftOperand, operation.RightOperand, operation.OperatorKind, falseBranch);
         }
         return state;
     }
@@ -64,190 +60,13 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
         return state;
     }
 
-    private static ProgramState LearnBranchingEqualityConstraint<T>(ProgramState state, IBinaryOperationWrapper binary, bool falseBranch)
-        where T : SymbolicConstraint
-    {
-        var useOpposite = falseBranch ^ binary.OperatorKind.IsNotEquals();
-        // We can take left or right constraint and "testedSymbol" because they are exclusive. Symbols with T constraint will be recognized as the constraining side.
-        if (BinaryOperandConstraint<T>(state, binary) is { } constraint
-            && BinaryOperandSymbolWithoutConstraint<T>(state, binary) is { } testedSymbol
-            && !(useOpposite && constraint is BoolConstraint && testedSymbol.GetSymbolType().IsNullableBoolean()))  // Don't learn False for "nullableBool != true", because it could also be <null>.
-        {
-            constraint = constraint.ApplyOpposite(useOpposite);     // Beware that opposite of ObjectConstraint.NotNull doesn't exist and returns <null>
-            return constraint is null ? null : state.SetSymbolConstraint(testedSymbol, constraint);
-        }
-        else
-        {
-            return null;
-        }
-    }
-
     // We can take the left or right constraint and "testedSymbol" because they are exclusive. Symbols with NotNull constraint will be recognized as the constraining side.
     // We only learn in the true branch because not being >, >=, <, <= than a non-empty nullable means either being null or non-null with non-matching value.
-    private static ProgramState LearnBranchingRelationalObjectConstraint(ProgramState state, IBinaryOperationWrapper binary, bool falseBranch) =>
+    private static ProgramState LearnBranchingRelationalObjectConstraint(ProgramState state, IOperation leftOperand, IOperation rightOperand, bool falseBranch) =>
         !falseBranch
-        && BinaryOperandConstraint<ObjectConstraint>(state, binary) == ObjectConstraint.NotNull
-        && BinaryOperandSymbolWithoutConstraint<ObjectConstraint>(state, binary) is { } testedSymbol
+        && BinaryOperandConstraint<ObjectConstraint>(state, leftOperand, rightOperand) == ObjectConstraint.NotNull
+        && BinaryOperandSymbolWithoutConstraint<ObjectConstraint>(state, leftOperand, rightOperand) is { } testedSymbol
         && testedSymbol.GetSymbolType().IsNullableValueType()
             ? state.SetSymbolConstraint(testedSymbol, ObjectConstraint.NotNull)
-            : null;
-
-    private static ProgramState LearnBranchingNumberConstraint(ProgramState state, IBinaryOperationWrapper binary, bool falseBranch)
-    {
-        var kind = falseBranch ? Opposite(binary.OperatorKind) : binary.OperatorKind;
-        var leftNumber = state[binary.LeftOperand]?.Constraint<NumberConstraint>();
-        var rightNumber = state[binary.RightOperand]?.Constraint<NumberConstraint>();
-        if (rightNumber is not null && OperandSymbol(binary.LeftOperand) is { } leftSymbol)
-        {
-            state = LearnBranching(leftSymbol, leftNumber, kind, rightNumber);
-        }
-        if (leftNumber is not null && OperandSymbol(binary.RightOperand) is { } rightSymbol)
-        {
-            state = LearnBranching(rightSymbol, rightNumber, Flip(kind), leftNumber);
-        }
-        return state;
-
-        ISymbol OperandSymbol(IOperation operand) =>
-            !operand.ConstantValue.HasValue
-            && operand.TrackedSymbol(state) is { } symbol
-            && symbol.GetSymbolType() is INamedTypeSymbol type
-            && (type.IsAny(KnownType.IntegralNumbersIncludingNative) || type.IsNullableOfAny(KnownType.IntegralNumbersIncludingNative))
-                ? symbol
-                : null;
-
-        ProgramState LearnBranching(ISymbol symbol, NumberConstraint existingNumber, BinaryOperatorKind kind, NumberConstraint comparedNumber) =>
-            !(falseBranch && symbol.GetSymbolType().IsNullableValueType())  // Don't learn opposite for "nullable > 0", because it could also be <null>.
-            && RelationalNumberConstraint(existingNumber, kind, comparedNumber) is { } newConstraint
-                ? state.SetSymbolConstraint(symbol, newConstraint)
-                : state;
-    }
-
-    private static BinaryOperatorKind Flip(BinaryOperatorKind kind) =>
-        kind switch
-        {
-            BinaryOperatorKind.Equals => BinaryOperatorKind.Equals,
-            BinaryOperatorKind.NotEquals => BinaryOperatorKind.NotEquals,
-            BinaryOperatorKind.GreaterThan => BinaryOperatorKind.LessThan,
-            BinaryOperatorKind.GreaterThanOrEqual => BinaryOperatorKind.LessThanOrEqual,
-            BinaryOperatorKind.LessThan => BinaryOperatorKind.GreaterThan,
-            BinaryOperatorKind.LessThanOrEqual => BinaryOperatorKind.GreaterThanOrEqual,
-            _ => BinaryOperatorKind.None    // Unreachable under normal conditions, VB ObjectValueEquals would need comparison with a number
-        };
-
-    private static BinaryOperatorKind Opposite(BinaryOperatorKind kind) =>
-        kind switch
-        {
-            BinaryOperatorKind.Equals => BinaryOperatorKind.NotEquals,
-            BinaryOperatorKind.NotEquals => BinaryOperatorKind.Equals,
-            BinaryOperatorKind.GreaterThan => BinaryOperatorKind.LessThanOrEqual,
-            BinaryOperatorKind.GreaterThanOrEqual => BinaryOperatorKind.LessThan,
-            BinaryOperatorKind.LessThan => BinaryOperatorKind.GreaterThanOrEqual,
-            BinaryOperatorKind.LessThanOrEqual => BinaryOperatorKind.GreaterThan,
-            _ => BinaryOperatorKind.None    // We don't care about ObjectValueEquals
-        };
-
-    private static NumberConstraint RelationalNumberConstraint(NumberConstraint existingNumber, BinaryOperatorKind kind, NumberConstraint comparedNumber)
-    {
-        return kind switch
-        {
-            BinaryOperatorKind.Equals => NumberConstraint.From(ArithmeticCalculator.BiggestMinimum(comparedNumber, existingNumber), ArithmeticCalculator.SmallestMaximum(comparedNumber, existingNumber)),
-            BinaryOperatorKind.NotEquals when comparedNumber.IsSingleValue && comparedNumber.Min == existingNumber?.Min => NumberConstraint.From(existingNumber.Min + 1, existingNumber.Max),
-            BinaryOperatorKind.NotEquals when comparedNumber.IsSingleValue && comparedNumber.Min == existingNumber?.Max => NumberConstraint.From(existingNumber.Min, existingNumber.Max - 1),
-            BinaryOperatorKind.GreaterThan when comparedNumber.Min.HasValue => From(comparedNumber.Min + 1, null),
-            BinaryOperatorKind.GreaterThanOrEqual when comparedNumber.Min.HasValue => From(comparedNumber.Min, null),
-            BinaryOperatorKind.LessThan when comparedNumber.Max.HasValue => From(null, comparedNumber.Max - 1),
-            BinaryOperatorKind.LessThanOrEqual when comparedNumber.Max.HasValue => From(null, comparedNumber.Max),
-            _ => null
-        };
-
-        NumberConstraint From(BigInteger? newMin, BigInteger? newMax)
-        {
-            if (existingNumber is not null)
-            {
-                if ((newMin is null || existingNumber.Min > newMin) && !(existingNumber.Min > newMax))
-                {
-                    newMin = existingNumber.Min;
-                }
-                if ((newMax is null || existingNumber.Max < newMax) && !(existingNumber.Max < newMin))
-                {
-                    newMax = existingNumber.Max;
-                }
-            }
-            return NumberConstraint.From(newMin, newMax);
-        }
-    }
-
-    private static SymbolicConstraint BinaryOperandConstraint<T>(ProgramState state, IBinaryOperationWrapper binary) where T : SymbolicConstraint =>
-        state[binary.LeftOperand]?.Constraint<T>() ?? state[binary.RightOperand]?.Constraint<T>();
-
-    private static ISymbol BinaryOperandSymbolWithoutConstraint<T>(ProgramState state, IBinaryOperationWrapper binary) where T : SymbolicConstraint =>
-        OperandSymbolWithoutConstraint<T>(state, binary.LeftOperand) ?? OperandSymbolWithoutConstraint<T>(state, binary.RightOperand);
-
-    private static ISymbol OperandSymbolWithoutConstraint<T>(ProgramState state, IOperation candidate) where T : SymbolicConstraint =>
-        candidate.TrackedSymbol(state) is { } symbol
-        && (state[symbol] is null || !state[symbol].HasConstraint<T>())
-            ? symbol
-            : null;
-
-    private static SymbolicConstraint BinaryConstraint(BinaryOperatorKind kind, SymbolicValue left, SymbolicValue right)
-    {
-        var leftBool = left?.Constraint<BoolConstraint>();
-        var rightBool = right?.Constraint<BoolConstraint>();
-        var leftIsNull = left?.Constraint<ObjectConstraint>() == ObjectConstraint.Null;
-        var rightIsNull = right?.Constraint<ObjectConstraint>() == ObjectConstraint.Null;
-        if (leftBool is null ^ rightBool is null)
-        {
-            return kind switch
-            {
-                BinaryOperatorKind.Equals when leftIsNull || rightIsNull => BoolConstraint.False,
-                BinaryOperatorKind.NotEquals when leftIsNull || rightIsNull => BoolConstraint.True,
-                BinaryOperatorKind.Or or BinaryOperatorKind.ConditionalOr when (leftBool ?? rightBool) == BoolConstraint.True => BoolConstraint.True,
-                BinaryOperatorKind.And or BinaryOperatorKind.ConditionalAnd when (leftBool ?? rightBool) == BoolConstraint.False => BoolConstraint.False,
-                _ => null
-            };
-        }
-        else if (leftBool is not null && rightBool is not null)
-        {
-            return BinaryBoolConstraint(kind, leftBool == BoolConstraint.True, rightBool == BoolConstraint.True);
-        }
-        else if (left?.Constraint<NumberConstraint>() is { } leftNumber
-            && right?.Constraint<NumberConstraint>() is { } rightNumber)
-        {
-            return kind.BinaryNumberConstraint(leftNumber, rightNumber);
-        }
-        else if (left?.HasConstraint<ObjectConstraint>() is true && right?.HasConstraint<ObjectConstraint>() is true)
-        {
-            return BinaryNullConstraint(kind, leftIsNull, rightIsNull);
-        }
-        else if (leftIsNull || rightIsNull)
-        {
-            return kind.IsAnyRelational() ? BoolConstraint.False : null;
-        }
-        else
-        {
-            return null;
-        }
-    }
-
-    private static SymbolicConstraint BinaryBoolConstraint(BinaryOperatorKind kind, bool left, bool right) =>
-        kind switch
-        {
-            BinaryOperatorKind.Equals or BinaryOperatorKind.ObjectValueEquals => BoolConstraint.From(left == right),
-            BinaryOperatorKind.NotEquals or BinaryOperatorKind.ObjectValueNotEquals => BoolConstraint.From(left != right),
-            BinaryOperatorKind.And or BinaryOperatorKind.ConditionalAnd => BoolConstraint.From(left && right),
-            BinaryOperatorKind.Or or BinaryOperatorKind.ConditionalOr => BoolConstraint.From(left || right),
-            BinaryOperatorKind.ExclusiveOr => BoolConstraint.From(left ^ right),
-            _ => null
-        };
-
-    private static SymbolicConstraint BinaryNullConstraint(BinaryOperatorKind kind, bool isNullLeft, bool isNullRight) =>
-        isNullLeft || isNullRight
-            ? kind switch
-            {
-                BinaryOperatorKind.Equals or BinaryOperatorKind.ObjectValueEquals => BoolConstraint.From(isNullLeft && isNullRight),
-                BinaryOperatorKind.NotEquals or BinaryOperatorKind.ObjectValueNotEquals => BoolConstraint.From(isNullLeft != isNullRight),
-                _ when kind.IsAnyRelational() => BoolConstraint.False,
-                _ => null
-            }
             : null;
 }

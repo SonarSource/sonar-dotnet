@@ -566,3 +566,106 @@ public struct Repro_8382
         Equals((string?)null) // Compliant. This is a local method, it does not need to follow the Equals contract.
         || condition;
 }
+
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8486
+public class Repro_8486
+{
+    public void Method()
+    {
+        string text1 = SomeString();
+        string text2 = SomeString();
+        if ((text1, text2) == (null, null) && text1 != null)                    // Noncompliant
+        {
+            Console.WriteLine();                                                // Secondary
+        }
+        if ((text1, text2) == (null, null))
+        {
+            Console.WriteLine();
+        }
+        else if (text1 == null)                                                 // Compliant
+        {
+            Console.WriteLine();
+        }
+        if ((text1, text2) != (null, null))                                     // Compliant
+        {
+            Console.WriteLine();
+        }
+        else if (text1 == null)                                                 // Noncompliant
+        {
+            Console.WriteLine();
+        }
+        if ((text1, text2) != (null, null) && text1 == null && text2 == null)   // FN - the SE engine creates constraints for individual symbols, but not for groups (e.g. text1 and text2 cannot be both null)
+        {
+            Console.WriteLine();
+        }
+        if ((text1, text2) != (SomeString(), null) && text1 == null)            // Compliant
+        {
+            Console.WriteLine();
+        }
+
+        bool bool1 = SomeBool();
+        bool bool2 = SomeBool();
+        if ((bool1, bool2) == (true, true) && bool1)                            // Noncompliant
+        {
+            Console.WriteLine();
+        }
+        if ((bool1, bool2) != (true, true) && bool1 && bool2)                   // FN - the SE engine creates constraints for individual symbols, but not for groups (e.g. bool1 and bool22 cannot be both true)
+        {
+            Console.WriteLine();
+        }
+        if ((bool1, bool2) != (true, true))                                     // Compliant
+        {
+            Console.WriteLine();
+        }
+        else if (bool1)                                                         // Noncompliant
+        {
+            Console.WriteLine();
+        }
+        if ((bool1, bool2) != (SomeBool(), false) && bool1)                     // Compliant
+        {
+            Console.WriteLine();
+        }
+
+        string text3 = null;
+        string text4 = "";
+        string text5 = SomeString();
+        if ((text3, text4) == (null, null))                                     // Noncompliant
+        {
+            Console.WriteLine();                                                // Secondary
+        }
+        if ((text3, text4) != (null, null))                                     // Noncompliant
+        {
+            Console.WriteLine();
+        }
+        if ((text3, text5) == (null, null))                                     // Compliant
+        {
+            Console.WriteLine();
+        }
+        if ((text3, (text3, text3)) == (null, (null, null)))                    // Noncompliant
+        {
+            Console.WriteLine();
+        }
+        if ((text3, (text3, text3)) != (null, (null, null)))                    // Noncompliant
+        {
+            Console.WriteLine();                                                // Secondary
+        }
+
+        if ((1 > 0, (object)null) == (true, (object)null))                      // Noncompliant
+        {
+            Console.WriteLine();
+        }
+        if ((new object(), new object()) == ((object)null, (object)null))       // Noncompliant
+        {
+            Console.WriteLine();                                                // Secondary
+        }
+
+        if (("", (1 > 2, true)) == ("abc", 42))                                 // Error [CS0019]
+        {
+            Console.WriteLine();
+        }
+    }
+
+    private string SomeString() => "";
+    private bool SomeBool() => true;
+}

@@ -24,7 +24,7 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn;
 
 internal static class BinaryOperatorKindExtensions
 {
-    public static SymbolicConstraint BinaryNumberConstraint(this BinaryOperatorKind kind, NumberConstraint left, NumberConstraint right) =>
+    public static BoolConstraint BoolConstraintFromNumberConstraints(this BinaryOperatorKind kind, NumberConstraint left, NumberConstraint right) =>
         kind switch
         {
             BinaryOperatorKind.Equals when left.IsSingleValue && right.IsSingleValue => BoolConstraint.From(left.Equals(right)),

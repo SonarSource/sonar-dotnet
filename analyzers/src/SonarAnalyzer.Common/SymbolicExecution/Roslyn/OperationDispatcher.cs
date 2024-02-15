@@ -32,6 +32,7 @@ internal static class OperationDispatcher
         { OperationKindEx.IsPattern, new IsPattern() },
         { OperationKindEx.IsType, new IsType() },
         { OperationKindEx.PropertyReference, new PropertyReference() },
+        { OperationKindEx.TupleBinary, new TupleBinary() },
     };
 
     private static readonly Dictionary<OperationKind, ISimpleProcessor> Simple = new()
