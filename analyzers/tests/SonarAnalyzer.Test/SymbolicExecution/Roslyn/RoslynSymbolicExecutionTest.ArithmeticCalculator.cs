@@ -619,4 +619,31 @@ public partial class RoslynSymbolicExecutionTest
             validator.TagValue("I").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
         }
     }
+
+    [DataTestMethod]
+    [DataRow(5, 5, 10, null)]
+    [DataRow(5, -5, null, null)]
+    [DataRow(-5, 5, null, null)]
+    [DataRow(-5, -5, null, -10)]
+    public void Calculate_InLoop_Addition(int i, int j, int? valMin, int? valMax)
+    {
+        var code = $$"""
+            var i = {{i}};
+            var j = {{j}};
+            while (Condition)
+            {
+                var value = i + j;
+                Tag("Value", value);
+            }
+            """;
+        var validator = SETestContext.CreateCS(code).Validator;
+        if (valMin.HasValue || valMax.HasValue)
+        {
+            validator.TagValues("Value").Should().AllSatisfy(x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(valMin, valMax)));
+        }
+        else
+        {
+            validator.TagValues("Value").Should().AllSatisfy(x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull));
+        }
+    }
 }
