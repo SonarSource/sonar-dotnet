@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Extensions
         public static ControlFlowRegion EnclosingRegion(this BasicBlock block, ControlFlowRegionKind kind) =>
             block.EnclosingRegion.EnclosingRegionOrSelf(kind);
 
-        public static IEnumerable<ControlFlowRegion> EnclosingRegions(this BasicBlock block) =>
-            block.EnclosingRegion.EnclosingRegions();
+        public static bool IsIn(this BasicBlock block, ControlFlowRegion region) =>
+            block.Ordinal >= region.FirstBlockOrdinal && block.Ordinal <= region.LastBlockOrdinal;
     }
 }

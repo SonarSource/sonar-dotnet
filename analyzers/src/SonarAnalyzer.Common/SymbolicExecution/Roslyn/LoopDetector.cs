@@ -93,11 +93,11 @@ internal class LoopDetector
         }
         if (block.EnclosingRegion(ControlFlowRegionKind.Finally) is { } finallyRegion)
         {
-            var tryFinally = finallyRegion.EnclosingRegion;
             successors = successors.Concat(
-                cfg.Blocks.Where(x => x.Ordinal >= tryFinally.FirstBlockOrdinal && x.Ordinal <= tryFinally.LastBlockOrdinal)
-                    .SelectMany(x => x.SuccessorBlocks.Select(x => x.Ordinal))
-                    .Where(x => !cfg.Blocks[x].EnclosingRegions().Contains(tryFinally)));
+                cfg.Blocks.Where(x => x.IsIn(finallyRegion.EnclosingRegion.NestedRegion(ControlFlowRegionKind.Try)))
+                    .SelectMany(x => x.SuccessorBlocks)
+                    .Where(x => !x.IsIn(finallyRegion.EnclosingRegion))
+                    .Select(x => x.Ordinal));
         }
         return successors;
     }

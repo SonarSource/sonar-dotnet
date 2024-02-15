@@ -420,6 +420,35 @@ public class LoopDetectorTest
             [1, 2, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32]);
 
     [TestMethod]
+    public void LoopDetector_TryCatchWhenFinally() =>
+        ValidateLoops("""
+            _ = "Before loop";          // Block 1
+            while (condition)           // Block 2
+            {
+                _ = "Inside loop";      // Block 3
+                try
+                {
+                    _ = "Try";          // Block 4
+                }
+                catch when (condition)  // Block 5
+                {
+                    _ = "Catch where";  // Block 6
+                }
+                catch
+                {
+                    _ = "Catch";        // Block 7
+                }
+                finally
+                {
+                    _ = "Finally";      // Block 8
+                }
+            }
+            _ = "After loop";           // Block 9
+            """,
+            [2, 3, 4, 5, 6, 7, 8],
+            [1, 9]);
+
+    [TestMethod]
     public void LoopDetector_TouchingLoops() =>
         ValidateLoops("""
             _ = "Start";    // Block 1

@@ -52,15 +52,6 @@ namespace SonarAnalyzer.Extensions
         public static ControlFlowRegion EnclosingRegion(this ControlFlowRegion region, ControlFlowRegionKind kind) =>
             region.EnclosingRegion.EnclosingRegionOrSelf(kind);
 
-        public static IEnumerable<ControlFlowRegion> EnclosingRegions(this ControlFlowRegion region)
-        {
-            while (region.EnclosingRegion is { } enclosing && enclosing.Kind != ControlFlowRegionKind.Root)
-            {
-                yield return enclosing;
-                region = enclosing;
-            }
-        }
-
         public static ControlFlowRegion NestedRegion(this ControlFlowRegion region, ControlFlowRegionKind kind) =>
             region.NestedRegions.Single(x => x.Kind == kind);
 
