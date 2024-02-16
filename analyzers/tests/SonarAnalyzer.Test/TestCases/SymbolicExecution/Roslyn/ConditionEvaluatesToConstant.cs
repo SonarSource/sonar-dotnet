@@ -1813,6 +1813,32 @@ namespace Tests.Diagnostics
                 i = -5;
             }
         }
+
+        // based on https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L385
+        public void ModifiedInTryCatch()
+        {
+            var needRetry = false;
+            var retry = 3;
+            do
+            {
+                needRetry = false;
+                try
+                {
+                    Console.WriteLine("Can throw");
+                }
+                catch
+                {
+                    needRetry = true;
+                    retry--;
+                }
+            }
+            while (needRetry && retry > 0);
+            if (needRetry && retry <= 0)
+            //               ^^^^^^^^^^  Noncompliant
+            {
+                Console.WriteLine("Failed");
+            }
+        }
     }
 
     public class GuardedTests
@@ -4064,8 +4090,7 @@ public class Repro_8707
         var success = false;
         Exception exception = null;
         int retries = 3;
-        while (!success && retries > 0) // Noncompliant FP
-        //                 ^^^^^^^^^^^
+        while (!success && retries > 0) // Compliant
         {
             try
             {
@@ -4084,6 +4109,7 @@ public class Repro_8707
         }
     }
 }
+
 // https://github.com/SonarSource/sonar-dotnet/issues/8719
 class Repro_8719
 {

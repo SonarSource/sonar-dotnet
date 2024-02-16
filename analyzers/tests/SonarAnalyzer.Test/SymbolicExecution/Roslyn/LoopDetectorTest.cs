@@ -291,7 +291,7 @@ public class LoopDetectorTest
             [1, 2, 3, 4, 7, 8, 9, 10]);
 
     [TestMethod]
-    public void LoopDetector_TryCatch() =>
+    public void LoopDetector_TryCatchFinally() =>
         ValidateLoops("""
             _ = "Before loop";               // Block 1
             while (condition)                // Block 2
@@ -312,8 +312,112 @@ public class LoopDetectorTest
             }
             _ = "After loop";                // Block 7
             """,
-            [2, 3, 4],
-            [1, 5, 6, 7]);
+            [2, 3, 4, 5],   // Should be [2, 3, 4, 5, 6]
+            [1, 6, 7]);     // Should be [1, 7]
+
+    [TestMethod]
+    public void LoopDetector_TryCatchFinally_Nested() =>
+        ValidateLoops("""
+            _ = "Before try 1";                 // Block 1
+            try
+            {
+                _ = "Before loop";              // Block 2
+                while (condition)               // Block 3
+                {
+                    _ = "Before try 2";         // Block 4
+                    try
+                    {
+                        _ = "Before try 3";     // Block 5
+                        try
+                        {
+                            _ = "Try 3";        // Block 6
+                        }
+                        catch
+                        {
+                            _ = "Catch 3";      // Block 7
+                        }
+                        finally
+                        {
+                            _ = "Finally 3";    // Block 8
+                        }
+                        _ = "After try 3";      // Block 9
+                    }
+                    catch
+                    {
+                        _ = "Before try 4";     // Block 10
+                        try
+                        {
+                            _ = "Try 4";        // Block 11
+                        }
+                        catch
+                        {
+                            _ = "Catch 4";      // Block 12
+                        }
+                        finally
+                        {
+                            _ = "Finally 4";    // Block 13
+                        }
+                        _ = "After try 4";      // Block 14
+                    }
+                    finally
+                    {
+                        _ = "Before try 5";     // Block 15
+                        try
+                        {
+                            _ = "Try 5";        // Block 16
+                        }
+                        catch
+                        {
+                            _ = "Catch 5";      // Block 17
+                        }
+                        finally
+                        {
+                            _ = "Finally 5";    // Block 18
+                        }
+                        _ = "After try 5";      // Block 19
+                    }
+                    _ = "After try 2";          // Block 20
+                }
+                _ = "After loop";               // Block 21
+            }
+            catch
+            {
+                _ = "Before try 6";             // Block 22
+                try
+                {
+                    _ = "Try 6";                // Block 23
+                }
+                catch
+                {
+                    _ = "Catch 6";              // Block 24
+                }
+                finally
+                {
+                    _ = "Finally 6";            // Block 25
+                }
+                _ = "After try 6";              // Block 26
+            }
+            finally
+            {
+                _ = "Before try 7";             // Block 27
+                try
+                {
+                    _ = "Try 7";                // Block 28
+                }
+                catch
+                {
+                    _ = "Catch 7";              // Block 29
+                }
+                finally
+                {
+                    _ = "Finally 7";            // Block 30
+                }
+                _ = "After try 7";              // Block 31
+            }
+            _ = "After try 1";                  // Block 32
+            """,
+            [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 20],                                          // Should be [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+            [1, 2, 13, 15, 16, 17, 18, 19, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32]);    // Should be [1, 2, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32]
 
     [TestMethod]
     public void LoopDetector_TouchingLoops() =>
