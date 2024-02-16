@@ -1,4 +1,3 @@
-﻿using Net6;
-
-int a = 5;
-CallerArgumentExpression.SomeMethod(a == 42);
+﻿// See https://aka.ms/new-console-template for more information
+var foo = 42;
+Console.WriteLine("Hello, World!");
