@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Numerics;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
@@ -70,7 +69,7 @@ internal abstract class BinaryBase<TOperation> : BranchingProcessor<TOperation>
 
     protected static ProgramState LearnBranchingNumberConstraint(ProgramState state, IOperation leftOperand, IOperation rightOperand, BinaryOperatorKind operatorKind, bool falseBranch)
     {
-        var kind = falseBranch ? Opposite(operatorKind) : operatorKind;
+        var kind = operatorKind.ApplyOpposite(falseBranch);
         var leftNumber = state[leftOperand]?.Constraint<NumberConstraint>();
         var rightNumber = state[rightOperand]?.Constraint<NumberConstraint>();
         if (rightNumber is not null && OperandSymbol(leftOperand) is { } leftSymbol)
@@ -93,14 +92,14 @@ internal abstract class BinaryBase<TOperation> : BranchingProcessor<TOperation>
 
         ProgramState LearnBranching(ISymbol symbol, NumberConstraint existingNumber, BinaryOperatorKind kind, NumberConstraint comparedNumber) =>
             !(falseBranch && symbol.GetSymbolType().IsNullableValueType())  // Don't learn opposite for "nullable > 0", because it could also be <null>.
-            && NumberConstraintFromRelationalOperator(existingNumber, kind, comparedNumber) is { } newConstraint
+            && kind.NumberConstraintFromRelationalOperator(existingNumber, comparedNumber) is { } newConstraint
                 ? state.SetSymbolConstraint(symbol, newConstraint)
                 : state;
     }
 
     protected static ProgramState LearnBranchingCollectionConstraint(ProgramState state, IOperation leftOperand, IOperation rightOperand, BinaryOperatorKind binaryOperatorKind, bool falseBranch)
     {
-        var operatorKind = falseBranch ? Opposite(binaryOperatorKind) : binaryOperatorKind;
+        var operatorKind = binaryOperatorKind.ApplyOpposite(falseBranch);
         IOperation otherOperand;
         if (InstanceOfCountProperty(leftOperand) is { } collection)
         {
@@ -201,43 +200,6 @@ internal abstract class BinaryBase<TOperation> : BranchingProcessor<TOperation>
             _ => null
         };
 
-    private static NumberConstraint NumberConstraintFromRelationalOperator(NumberConstraint existingNumber, BinaryOperatorKind kind, NumberConstraint comparedNumber) =>
-        kind switch
-        {
-            BinaryOperatorKind.Equals => NumberConstraint.From(
-                ArithmeticCalculator.BiggestMinimum(comparedNumber, existingNumber),
-                ArithmeticCalculator.SmallestMaximum(comparedNumber, existingNumber)),
-            BinaryOperatorKind.NotEquals when comparedNumber.IsSingleValue && comparedNumber.Min == existingNumber?.Min =>
-                NumberConstraint.From(existingNumber!.Min + 1, existingNumber.Max),
-            BinaryOperatorKind.NotEquals when comparedNumber.IsSingleValue && comparedNumber.Min == existingNumber?.Max =>
-                NumberConstraint.From(existingNumber!.Min, existingNumber.Max - 1),
-            BinaryOperatorKind.GreaterThan when comparedNumber.Min.HasValue =>
-                From(comparedNumber.Min + 1, null, existingNumber),
-            BinaryOperatorKind.GreaterThanOrEqual when comparedNumber.Min.HasValue =>
-                From(comparedNumber.Min, null, existingNumber),
-            BinaryOperatorKind.LessThan when comparedNumber.Max.HasValue =>
-                From(null, comparedNumber.Max - 1, existingNumber),
-            BinaryOperatorKind.LessThanOrEqual when comparedNumber.Max.HasValue =>
-                From(null, comparedNumber.Max, existingNumber),
-            _ => null
-        };
-
-    private static NumberConstraint From(BigInteger? newMin, BigInteger? newMax, NumberConstraint existingNumber)
-    {
-        if (existingNumber is not null)
-        {
-            if (newMin is null || existingNumber.Min > newMin)
-            {
-                newMin = existingNumber.Min;
-            }
-            if (newMax is null || existingNumber.Max < newMax)
-            {
-                newMax = existingNumber.Max;
-            }
-        }
-        return NumberConstraint.From(newMin, newMax);
-    }
-
     private static ISymbol OperandSymbolWithoutConstraint<T>(ProgramState state, IOperation candidate) where T : SymbolicConstraint =>
         candidate.TrackedSymbol(state) is { } symbol
         && (state[symbol] is null || !state[symbol].HasConstraint<T>())
@@ -254,17 +216,5 @@ internal abstract class BinaryBase<TOperation> : BranchingProcessor<TOperation>
             BinaryOperatorKind.LessThan => BinaryOperatorKind.GreaterThan,
             BinaryOperatorKind.LessThanOrEqual => BinaryOperatorKind.GreaterThanOrEqual,
             _ => BinaryOperatorKind.None    // Unreachable under normal conditions, VB ObjectValueEquals would need comparison with a number
-        };
-
-    private static BinaryOperatorKind Opposite(BinaryOperatorKind kind) =>
-        kind switch
-        {
-            BinaryOperatorKind.Equals => BinaryOperatorKind.NotEquals,
-            BinaryOperatorKind.NotEquals => BinaryOperatorKind.Equals,
-            BinaryOperatorKind.GreaterThan => BinaryOperatorKind.LessThanOrEqual,
-            BinaryOperatorKind.GreaterThanOrEqual => BinaryOperatorKind.LessThan,
-            BinaryOperatorKind.LessThan => BinaryOperatorKind.GreaterThanOrEqual,
-            BinaryOperatorKind.LessThanOrEqual => BinaryOperatorKind.GreaterThan,
-            _ => BinaryOperatorKind.None    // We don't care about ObjectValueEquals
         };
 }

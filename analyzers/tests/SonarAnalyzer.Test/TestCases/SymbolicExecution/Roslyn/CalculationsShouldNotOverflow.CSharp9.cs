@@ -5,9 +5,9 @@ using System.Linq;
 int i = 2147483600;
 _ = i + 100; // Noncompliant
 
-public class NativeInt
+public class RelationalPattern
 {
-    public void RelationalPattern(int i)
+    public void Method(int i)
     {
         switch (i)
         {
@@ -15,16 +15,19 @@ public class NativeInt
                 _ = i + 100;    // Compliant
                 break;
             default:
-                _ = i + 100;    // FN
+                _ = i + 100;    // Noncompliant
                 break;
         }
         _ = i switch
         {
             <= 2147483547 => i + 100,   // Compliant
-            _ => i + 100,               // FN
+            _ => i + 100,               // Noncompliant
         };
     }
+}
 
+public class NativeInt
+{
     public void PositiveOverflowNativeInt()
     {
         nint i = 2147483600;
@@ -39,7 +42,10 @@ public class NativeInt
         nint i = -2147483600;
         _ = i - 100;  // Compliant, we can't tell what's the native MinValue for the run machine
     }
+}
 
+public class Lambdas
+{
     public void StaticLambda()
     {
         Action a = static () =>

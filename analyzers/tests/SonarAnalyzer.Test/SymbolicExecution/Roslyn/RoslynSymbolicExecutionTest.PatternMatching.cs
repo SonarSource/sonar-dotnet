@@ -562,7 +562,6 @@ static object Tag(string name, object value) => null;";
     }
 
     [DataTestMethod]
-    [DataRow("arg is > 42")]
     [DataRow("43.1 is > 43")]
     [DataRow("'A' is > 'a'")]
     public void RelationalPattern_SetsBoolConstraint_NotSet(string expression)
@@ -573,6 +572,55 @@ static object Tag(string name, object value) => null;";
             """;
         var validator = SETestContext.CreateCS(code, "int arg").Validator;
         validator.TagValue("Result").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+    }
+
+    [DataTestMethod]
+    [DataRow("arg is > 42")]
+    public void RelationalPattern_SetsBoolConstraint_Branches(string expression)
+    {
+        var code = $"""
+            var result = {expression};
+            Tag("Result", result);
+            """;
+        var validator = SETestContext.CreateCS(code, "int arg").Validator;
+        validator.TagValues("Result").Should().SatisfyRespectively(x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True),
+                                                                   x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.False));
+    }
+
+    [DataTestMethod]
+    [DataRow("arg is > 42", 43, null, null, 42)]
+    [DataRow("arg is >= 42", 42, null, null, 41)]
+    [DataRow("arg is < 42", null, 41, 42, null)]
+    [DataRow("arg is <= 42", null, 42, 43, null)]
+    public void RelationalPattern_SetsNumberConstraint(string expression, int? ifMin, int? ifMax, int? elseMin, int? elseMax)
+    {
+        var code = $$"""
+            if ({{expression}})
+            {
+                Tag("If", arg);
+            }
+            else
+            {
+                Tag("Else", arg);
+            }
+            """;
+        var validator = SETestContext.CreateCS(code, "int arg").Validator;
+        if (NumberConstraint.From(ifMin, ifMax) is { } expectedIf)
+        {
+            validator.TagValue("If").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, expectedIf);
+        }
+        else
+        {
+            validator.TagValue("If").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        }
+        if (NumberConstraint.From(elseMin, elseMax) is { } expectedElse)
+        {
+            validator.TagValue("Else").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, expectedElse);
+        }
+        else
+        {
+            validator.TagValue("Else").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        }
     }
 
     private static void ValidateSetBoolConstraint(string isPattern, OperationKind expectedOperation, bool? expectedBoolConstraint)
