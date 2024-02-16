@@ -26,15 +26,29 @@ public abstract class SonarReportingContextBase<TContext> : SonarAnalysisContext
 
     protected SonarReportingContextBase(SonarAnalysisContext analysisContext, TContext context) : base(analysisContext, context) { }
 
-    private readonly HashSet<string> rulesDisabledForRazor = new()
+    private readonly HashSet<string> rulesEnabledForRazor = new()
         {
+        /** Disabled rules, don't enable these
             "S103",
             "S104",
             "S109",
             "S113",
             "S1147",
             "S1192",
-            "S1451",
+            "S1451",*/
+            // blazor rules
+            "S6797",
+            "S6798",
+            "S6800",
+            "S6802",
+            "S6803",
+            // normal rules
+            "S2930",
+            "S3889",
+            "S3869",
+            "S2437",
+            "S1067",
+            "S3776"
         };
 
 
@@ -50,7 +64,7 @@ public abstract class SonarReportingContextBase<TContext> : SonarAnalysisContext
             return;
         }
         if (GeneratedCodeRecognizer.IsRazorGeneratedFile(diagnostic.Location.SourceTree)
-            && (rulesDisabledForRazor.Contains(diagnostic.Id) ||
+            && (!rulesEnabledForRazor.Contains(diagnostic.Id) ||
             (diagnostic.Descriptor.CustomTags.Count() == 1 && diagnostic.Descriptor.CustomTags.Contains(DiagnosticDescriptorFactory.TestSourceScopeTag))))
         {
             return;

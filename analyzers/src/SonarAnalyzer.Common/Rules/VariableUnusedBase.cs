@@ -46,6 +46,7 @@ namespace SonarAnalyzer.Rules
             {
                 foreach (var unused in declaredLocals.Except(usedLocals))
                 {
+                    //System.Diagnostics.Debugger.Launch();
                     c.ReportIssue(Diagnostic.Create(rule, unused.Locations.First(), unused.Name));
                 }
             }
