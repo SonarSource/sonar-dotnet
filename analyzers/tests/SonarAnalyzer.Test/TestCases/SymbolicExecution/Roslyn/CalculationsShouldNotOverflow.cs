@@ -186,7 +186,7 @@ public class Sample
         for (i = 2147483546; i <= 2147483547; i++)
             _ = i + 100;        // Compliant
         for (i = 2147483546; i <= 2147483547; i++)
-            _ = i + 101;        // FN
+            _ = i + 101;        // Noncompliant
     }
 
     public void Branching2(int i)

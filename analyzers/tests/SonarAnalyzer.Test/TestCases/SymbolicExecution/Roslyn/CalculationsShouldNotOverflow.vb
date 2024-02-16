@@ -129,7 +129,7 @@ Public Class Sample
             __ = i + 100        ' Compliant
         Next
         For i = 2147483546 To 2147483547
-            __ = i + 101        ' FN
+            __ = i + 101        ' Noncompliant
         Next
     End Sub
 
