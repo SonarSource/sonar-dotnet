@@ -1,0 +1,46 @@
+{
+  "Issues": [
+    {
+      "Id": "S3956",
+      "Message": "Refactor this method to use a generic collection designed for inheritance.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/ContainsInsteadOfAny.cs#L5",
+      "Location": "Line 5 Position 32-41"
+    },
+    {
+      "Id": "S3956",
+      "Message": "Refactor this method to use a generic collection designed for inheritance.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/OrderByBeforeWhere.cs#L5",
+      "Location": "Line 5 Position 23-32"
+    },
+    {
+      "Id": "S3956",
+      "Message": "Refactor this method to use a generic collection designed for inheritance.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/CovariantReturn.cs#L33",
+      "Location": "Line 33 Position 20-29"
+    },
+    {
+      "Id": "S3956",
+      "Message": "Refactor this property to use a generic collection designed for inheritance.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/RecordsAndNullability.cs#L44",
+      "Location": "Line 44 Position 16-26"
+    },
+    {
+      "Id": "S3956",
+      "Message": "Refactor this property to use a generic collection designed for inheritance.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/RecordsAndNullability.cs#L48",
+      "Location": "Line 48 Position 16-29"
+    },
+    {
+      "Id": "S3956",
+      "Message": "Refactor this method to use a generic collection designed for inheritance.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3267.cs#L23",
+      "Location": "Line 23 Position 16-25"
+    },
+    {
+      "Id": "S3956",
+      "Message": "Refactor this method to use a generic collection designed for inheritance.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3267.cs#L8",
+      "Location": "Line 8 Position 16-28"
+    }
+  ]
+}

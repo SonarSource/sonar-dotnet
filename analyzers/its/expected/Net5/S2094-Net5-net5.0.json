@@ -3,68 +3,8 @@
     {
       "Id": "S2094",
       "Message": "Remove this empty class, write its code or make it an \u0022interface\u0022.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/ModuleInitializers.cs#L3",
-      "Location": "Line 3 Position 18-36"
-    },
-    {
-      "Id": "S2094",
-      "Message": "Remove this empty class, write its code or make it an \u0022interface\u0022.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/ParameterValidation.cs#L3",
-      "Location": "Line 3 Position 18-37"
-    },
-    {
-      "Id": "S2094",
-      "Message": "Remove this empty record, write its code or make it an \u0022interface\u0022.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Records.cs#L109",
-      "Location": "Line 109 Position 19-20"
-    },
-    {
-      "Id": "S2094",
-      "Message": "Remove this empty record, write its code or make it an \u0022interface\u0022.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Records.cs#L130",
-      "Location": "Line 130 Position 19-20"
-    },
-    {
-      "Id": "S2094",
-      "Message": "Remove this empty record, write its code or make it an \u0022interface\u0022.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2219.cs#L5",
-      "Location": "Line 5 Position 16-21"
-    },
-    {
-      "Id": "S2094",
-      "Message": "Remove this empty record, write its code or make it an \u0022interface\u0022.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2219.cs#L6",
-      "Location": "Line 6 Position 23-28"
-    },
-    {
-      "Id": "S2094",
-      "Message": "Remove this empty class, write its code or make it an \u0022interface\u0022.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2330.cs#L5",
       "Location": "Line 5 Position 32-37"
-    },
-    {
-      "Id": "S2094",
-      "Message": "Remove this empty class, write its code or make it an \u0022interface\u0022.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3240.cs#L5",
-      "Location": "Line 5 Position 24-29"
-    },
-    {
-      "Id": "S2094",
-      "Message": "Remove this empty class, write its code or make it an \u0022interface\u0022.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3247.cs#L8",
-      "Location": "Line 8 Position 15-24"
-    },
-    {
-      "Id": "S2094",
-      "Message": "Remove this empty class, write its code or make it an \u0022interface\u0022.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3453.cs#L22",
-      "Location": "Line 22 Position 26-34"
-    },
-    {
-      "Id": "S2094",
-      "Message": "Remove this empty class, write its code or make it an \u0022interface\u0022.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/StaticLambdas.cs#L3",
-      "Location": "Line 3 Position 18-31"
     }
   ]
 }

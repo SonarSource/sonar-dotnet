@@ -2,921 +2,261 @@
   "Issues": [
     {
       "Id": "S109",
-      "Message": "Assign this magic number \u002740\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/LambdaDiscardParameters.cs#L22",
-      "Location": "Line 22 Position 27-29"
+      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L21",
+      "Location": "Line 21 Position 12-13"
     },
     {
       "Id": "S109",
       "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L32",
-      "Location": "Line 32 Position 12-13"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L26",
+      "Location": "Line 26 Position 12-13"
     },
     {
       "Id": "S109",
       "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L37",
-      "Location": "Line 37 Position 12-13"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L57",
+      "Location": "Line 57 Position 18-19"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L57",
+      "Location": "Line 57 Position 32-33"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L57",
+      "Location": "Line 57 Position 37-38"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L57",
+      "Location": "Line 57 Position 51-52"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L57",
+      "Location": "Line 57 Position 56-57"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L57",
+      "Location": "Line 57 Position 70-71"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L57",
+      "Location": "Line 57 Position 75-76"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L58",
+      "Location": "Line 58 Position 16-17"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L58",
+      "Location": "Line 58 Position 21-22"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L58",
+      "Location": "Line 58 Position 35-36"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L58",
+      "Location": "Line 58 Position 40-41"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L58",
+      "Location": "Line 58 Position 54-55"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L58",
+      "Location": "Line 58 Position 59-60"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L58",
+      "Location": "Line 58 Position 73-74"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L58",
+      "Location": "Line 58 Position 78-79"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L59",
+      "Location": "Line 59 Position 16-17"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L59",
+      "Location": "Line 59 Position 21-22"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L59",
+      "Location": "Line 59 Position 35-36"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L59",
+      "Location": "Line 59 Position 40-41"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L59",
+      "Location": "Line 59 Position 54-55"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L59",
+      "Location": "Line 59 Position 59-60"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L59",
+      "Location": "Line 59 Position 73-74"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L59",
+      "Location": "Line 59 Position 78-79"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L60",
+      "Location": "Line 60 Position 16-17"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L60",
+      "Location": "Line 60 Position 21-22"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L60",
+      "Location": "Line 60 Position 35-36"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L60",
+      "Location": "Line 60 Position 40-41"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L60",
+      "Location": "Line 60 Position 54-55"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L60",
+      "Location": "Line 60 Position 59-60"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L60",
+      "Location": "Line 60 Position 73-74"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L60",
+      "Location": "Line 60 Position 78-79"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L61",
+      "Location": "Line 61 Position 16-17"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L61",
+      "Location": "Line 61 Position 21-22"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L61",
+      "Location": "Line 61 Position 35-36"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L61",
+      "Location": "Line 61 Position 40-41"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L61",
+      "Location": "Line 61 Position 54-55"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L61",
+      "Location": "Line 61 Position 59-60"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L61",
+      "Location": "Line 61 Position 73-74"
+    },
+    {
+      "Id": "S109",
+      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L61",
+      "Location": "Line 61 Position 78-79"
     },
     {
       "Id": "S109",
       "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L68",
-      "Location": "Line 68 Position 18-19"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L68",
-      "Location": "Line 68 Position 32-33"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L68",
-      "Location": "Line 68 Position 37-38"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L68",
-      "Location": "Line 68 Position 51-52"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L68",
-      "Location": "Line 68 Position 56-57"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L68",
-      "Location": "Line 68 Position 70-71"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L68",
-      "Location": "Line 68 Position 75-76"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L69",
-      "Location": "Line 69 Position 16-17"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L69",
-      "Location": "Line 69 Position 21-22"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L69",
-      "Location": "Line 69 Position 35-36"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L69",
-      "Location": "Line 69 Position 40-41"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L69",
-      "Location": "Line 69 Position 54-55"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L69",
-      "Location": "Line 69 Position 59-60"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L69",
-      "Location": "Line 69 Position 73-74"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L69",
-      "Location": "Line 69 Position 78-79"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L70",
-      "Location": "Line 70 Position 16-17"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L70",
-      "Location": "Line 70 Position 21-22"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L70",
-      "Location": "Line 70 Position 35-36"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L70",
-      "Location": "Line 70 Position 40-41"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L70",
-      "Location": "Line 70 Position 54-55"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L70",
-      "Location": "Line 70 Position 59-60"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L70",
-      "Location": "Line 70 Position 73-74"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L70",
-      "Location": "Line 70 Position 78-79"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L71",
-      "Location": "Line 71 Position 16-17"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L71",
-      "Location": "Line 71 Position 21-22"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L71",
-      "Location": "Line 71 Position 35-36"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L71",
-      "Location": "Line 71 Position 40-41"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L71",
-      "Location": "Line 71 Position 54-55"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L71",
-      "Location": "Line 71 Position 59-60"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L71",
-      "Location": "Line 71 Position 73-74"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L71",
-      "Location": "Line 71 Position 78-79"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L72",
-      "Location": "Line 72 Position 16-17"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L72",
-      "Location": "Line 72 Position 21-22"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L72",
-      "Location": "Line 72 Position 35-36"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L72",
-      "Location": "Line 72 Position 40-41"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L72",
-      "Location": "Line 72 Position 54-55"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L72",
-      "Location": "Line 72 Position 59-60"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L72",
-      "Location": "Line 72 Position 73-74"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L72",
-      "Location": "Line 72 Position 78-79"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L82",
-      "Location": "Line 82 Position 13-14"
+      "Location": "Line 71 Position 13-14"
     },
     {
       "Id": "S109",
       "Message": "Assign this magic number \u002742\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L98",
-      "Location": "Line 98 Position 25-27"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00272.00\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L43",
-      "Location": "Line 43 Position 20-25"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273.50\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L44",
-      "Location": "Line 44 Position 21-26"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275.00\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L45",
-      "Location": "Line 45 Position 20-25"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u002710.00\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L46",
-      "Location": "Line 46 Position 30-36"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275000\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L53",
-      "Location": "Line 53 Position 15-19"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u002710.00\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L53",
-      "Location": "Line 53 Position 23-29"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275.00\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L53",
-      "Location": "Line 53 Position 32-37"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273000\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L54",
-      "Location": "Line 54 Position 15-19"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u002710.00\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L54",
-      "Location": "Line 54 Position 23-29"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00272.00\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L54",
-      "Location": "Line 54 Position 32-37"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u002710.00\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L55",
-      "Location": "Line 55 Position 18-24"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273000\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L60",
-      "Location": "Line 60 Position 16-20"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275000\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L60",
-      "Location": "Line 60 Position 28-32"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u002710.00\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L60",
-      "Location": "Line 60 Position 36-42"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u002710000\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L61",
-      "Location": "Line 61 Position 22-27"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u002710.00\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L61",
-      "Location": "Line 61 Position 31-37"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275.00\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L61",
-      "Location": "Line 61 Position 40-45"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00271000\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L62",
-      "Location": "Line 62 Position 20-24"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u002710.00\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L62",
-      "Location": "Line 62 Position 28-34"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275.00\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L62",
-      "Location": "Line 62 Position 37-42"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u002742\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1144.cs#L16",
-      "Location": "Line 16 Position 18-20"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u002742\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S134.cs#L7",
-      "Location": "Line 7 Position 20-22"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1854.cs#L11",
-      "Location": "Line 11 Position 21-22"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u002742\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2259.cs#L9",
-      "Location": "Line 9 Position 20-22"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3060.cs#L9",
-      "Location": "Line 9 Position 49-50"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3237.cs#L10",
-      "Location": "Line 10 Position 28-29"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u002742\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3251.Part2.cs#L24",
-      "Location": "Line 24 Position 20-22"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3440.cs#L10",
-      "Location": "Line 10 Position 17-18"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3440.cs#L10",
-      "Location": "Line 10 Position 22-23"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00276\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3440.cs#L11",
-      "Location": "Line 11 Position 17-18"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00276\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3440.cs#L11",
-      "Location": "Line 11 Position 22-23"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L12",
-      "Location": "Line 12 Position 34-35"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L12",
-      "Location": "Line 12 Position 48-49"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L12",
-      "Location": "Line 12 Position 53-54"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L12",
-      "Location": "Line 12 Position 67-68"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L12",
-      "Location": "Line 12 Position 72-73"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L12",
-      "Location": "Line 12 Position 86-87"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L12",
-      "Location": "Line 12 Position 91-92"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L13",
-      "Location": "Line 13 Position 32-33"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L13",
-      "Location": "Line 13 Position 37-38"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L13",
-      "Location": "Line 13 Position 51-52"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L13",
-      "Location": "Line 13 Position 56-57"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L13",
-      "Location": "Line 13 Position 70-71"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L13",
-      "Location": "Line 13 Position 75-76"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L13",
-      "Location": "Line 13 Position 89-90"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L13",
-      "Location": "Line 13 Position 94-95"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L14",
-      "Location": "Line 14 Position 32-33"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L14",
-      "Location": "Line 14 Position 37-38"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L14",
-      "Location": "Line 14 Position 51-52"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L14",
-      "Location": "Line 14 Position 56-57"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L14",
-      "Location": "Line 14 Position 70-71"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L14",
-      "Location": "Line 14 Position 75-76"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L14",
-      "Location": "Line 14 Position 89-90"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L14",
-      "Location": "Line 14 Position 94-95"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L15",
-      "Location": "Line 15 Position 32-33"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L15",
-      "Location": "Line 15 Position 37-38"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L15",
-      "Location": "Line 15 Position 51-52"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L15",
-      "Location": "Line 15 Position 56-57"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L15",
-      "Location": "Line 15 Position 70-71"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L15",
-      "Location": "Line 15 Position 75-76"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L15",
-      "Location": "Line 15 Position 89-90"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L15",
-      "Location": "Line 15 Position 94-95"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L16",
-      "Location": "Line 16 Position 32-33"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L16",
-      "Location": "Line 16 Position 37-38"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L16",
-      "Location": "Line 16 Position 51-52"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L16",
-      "Location": "Line 16 Position 56-57"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L16",
-      "Location": "Line 16 Position 70-71"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L16",
-      "Location": "Line 16 Position 75-76"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L16",
-      "Location": "Line 16 Position 89-90"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L16",
-      "Location": "Line 16 Position 94-95"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00272\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L24",
-      "Location": "Line 24 Position 26-27"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L24",
-      "Location": "Line 24 Position 40-41"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L24",
-      "Location": "Line 24 Position 45-46"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L24",
-      "Location": "Line 24 Position 59-60"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L24",
-      "Location": "Line 24 Position 64-65"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L24",
-      "Location": "Line 24 Position 78-79"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L24",
-      "Location": "Line 24 Position 83-84"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L25",
-      "Location": "Line 25 Position 24-25"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L25",
-      "Location": "Line 25 Position 29-30"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L25",
-      "Location": "Line 25 Position 43-44"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L25",
-      "Location": "Line 25 Position 48-49"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L25",
-      "Location": "Line 25 Position 62-63"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L25",
-      "Location": "Line 25 Position 67-68"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L25",
-      "Location": "Line 25 Position 81-82"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L25",
-      "Location": "Line 25 Position 86-87"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L26",
-      "Location": "Line 26 Position 24-25"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L26",
-      "Location": "Line 26 Position 29-30"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L26",
-      "Location": "Line 26 Position 43-44"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L26",
-      "Location": "Line 26 Position 48-49"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L26",
-      "Location": "Line 26 Position 62-63"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L26",
-      "Location": "Line 26 Position 67-68"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L26",
-      "Location": "Line 26 Position 81-82"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L26",
-      "Location": "Line 26 Position 86-87"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L27",
-      "Location": "Line 27 Position 24-25"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L27",
-      "Location": "Line 27 Position 29-30"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L27",
-      "Location": "Line 27 Position 43-44"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L27",
-      "Location": "Line 27 Position 48-49"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L27",
-      "Location": "Line 27 Position 62-63"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L27",
-      "Location": "Line 27 Position 67-68"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L27",
-      "Location": "Line 27 Position 81-82"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L27",
-      "Location": "Line 27 Position 86-87"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L28",
-      "Location": "Line 28 Position 24-25"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L28",
-      "Location": "Line 28 Position 29-30"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L28",
-      "Location": "Line 28 Position 43-44"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L28",
-      "Location": "Line 28 Position 48-49"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L28",
-      "Location": "Line 28 Position 62-63"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L28",
-      "Location": "Line 28 Position 67-68"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00273\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L28",
-      "Location": "Line 28 Position 81-82"
-    },
-    {
-      "Id": "S109",
-      "Message": "Assign this magic number \u00275\u0027 to a well-named variable or constant, and use that instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L28",
-      "Location": "Line 28 Position 86-87"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L87",
+      "Location": "Line 87 Position 25-27"
     }
   ]
 }

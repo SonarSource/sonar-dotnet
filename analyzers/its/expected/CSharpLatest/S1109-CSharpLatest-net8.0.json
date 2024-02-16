@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1109",
+      "Message": "Move this closing curly brace to the next line.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/NewlinesInStringInterpolations.cs#L14",
+      "Location": "Line 14 Position 14-15"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S1168",
+      "Message": "Return an empty collection instead of null.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/CovariantReturn.cs#L22",
+      "Location": "Line 22 Position 65-69"
+    },
+    {
+      "Id": "S1168",
+      "Message": "Return an empty collection instead of null.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/CovariantReturn.cs#L24",
+      "Location": "Line 24 Position 62-66"
+    },
+    {
+      "Id": "S1168",
+      "Message": "Return an empty collection instead of null.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/CovariantReturn.cs#L33",
+      "Location": "Line 33 Position 59-63"
+    }
+  ]
+}

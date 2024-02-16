@@ -5,30 +5,6 @@
       "Message": "The Cyclomatic Complexity of this top-level file is 61 which is greater than 10 authorized.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L1",
       "Location": "Line 1 Position 1-1"
-    },
-    {
-      "Id": "S1541",
-      "Message": "The Cyclomatic Complexity of this accessor is 13 which is greater than 10 authorized.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1541.cs#L11",
-      "Location": "Line 11 Position 13-17"
-    },
-    {
-      "Id": "S1541",
-      "Message": "The Cyclomatic Complexity of this accessor is 41 which is greater than 10 authorized.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L10",
-      "Location": "Line 10 Position 13-17"
-    },
-    {
-      "Id": "S1541",
-      "Message": "The Cyclomatic Complexity of this method is 40 which is greater than 10 authorized.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L23",
-      "Location": "Line 23 Position 14-53"
-    },
-    {
-      "Id": "S1541",
-      "Message": "The Cyclomatic Complexity of this method is 15 which is greater than 10 authorized.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4201.cs#L11",
-      "Location": "Line 11 Position 21-27"
     }
   ]
 }

@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S106",
+      "Message": "Remove this logging statement.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/NetCore31/Program.cs#L8",
+      "Location": "Line 8 Position 4-21"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S1125",
+      "Message": "Remove the unnecessary Boolean literal(s).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/Records.cs#L22",
+      "Location": "Line 22 Position 40-47"
+    }
+  ]
+}

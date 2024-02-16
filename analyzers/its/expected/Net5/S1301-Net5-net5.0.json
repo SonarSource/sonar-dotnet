@@ -3,32 +3,14 @@
     {
       "Id": "S1301",
       "Message": "Replace this \u0027switch\u0027 statement with \u0027if\u0027 statements to increase readability.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L30",
-      "Location": "Line 30 Position 1-7"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L19",
+      "Location": "Line 19 Position 1-7"
     },
     {
       "Id": "S1301",
       "Message": "Replace this \u0027switch\u0027 statement with \u0027if\u0027 statements to increase readability.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L35",
-      "Location": "Line 35 Position 1-7"
-    },
-    {
-      "Id": "S1301",
-      "Message": "Replace this \u0027switch\u0027 expression with a ternary conditional operator to increase readability.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4201.cs#L15",
-      "Location": "Line 15 Position 24-30"
-    },
-    {
-      "Id": "S1301",
-      "Message": "Replace this \u0027switch\u0027 expression with a ternary conditional operator to increase readability.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4201.cs#L21",
-      "Location": "Line 21 Position 24-30"
-    },
-    {
-      "Id": "S1301",
-      "Message": "Replace this \u0027switch\u0027 statement with \u0027if\u0027 statements to increase readability.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4201.cs#L29",
-      "Location": "Line 29 Position 13-19"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L24",
+      "Location": "Line 24 Position 1-7"
     }
   ]
 }

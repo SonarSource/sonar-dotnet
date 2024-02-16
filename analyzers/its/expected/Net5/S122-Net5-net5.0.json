@@ -3,26 +3,20 @@
     {
       "Id": "S122",
       "Message": "Reformat the code to have only one statement per line.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/ExtendingPartial.cs#L25",
-      "Location": "Line 25 Position 63-82"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L17",
+      "Location": "Line 17 Position 1-37"
     },
     {
       "Id": "S122",
       "Message": "Reformat the code to have only one statement per line.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L28",
-      "Location": "Line 28 Position 1-37"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L18",
+      "Location": "Line 18 Position 1-44"
     },
     {
       "Id": "S122",
       "Message": "Reformat the code to have only one statement per line.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L29",
-      "Location": "Line 29 Position 1-44"
-    },
-    {
-      "Id": "S122",
-      "Message": "Reformat the code to have only one statement per line.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L98",
-      "Location": "Line 98 Position 1-30"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L87",
+      "Location": "Line 87 Position 1-30"
     }
   ]
 }

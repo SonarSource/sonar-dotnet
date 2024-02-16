@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S3235",
+      "Message": "Remove these redundant parentheses.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/GenericAttributes.cs#L7",
+      "Location": "Line 7 Position 34-36"
+    },
+    {
+      "Id": "S3235",
+      "Message": "Remove these redundant parentheses.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/JsonSerializerSupportsFields.cs#L11",
+      "Location": "Line 11 Position 52-54"
+    }
+  ]
+}

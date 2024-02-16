@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S1694",
+      "Message": "Convert this \u0027abstract\u0027 class to an interface.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/CovariantReturn.cs#L8",
+      "Location": "Line 8 Position 27-33"
+    },
+    {
+      "Id": "S1694",
+      "Message": "Convert this \u0027abstract\u0027 record to an interface.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/Records.cs#L35",
+      "Location": "Line 35 Position 28-42"
+    },
+    {
+      "Id": "S1694",
+      "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3240.cs#L5",
+      "Location": "Line 5 Position 24-29"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "Issues": [
+    {
+      "Id": "S4069",
+      "Message": "Implement alternative method \u0027Add\u0027 for the operator \u0027\u002B\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10/StaticAbstractMembersInInterfaces.cs#L10",
+      "Location": "Line 10 Position 36-37"
+    },
+    {
+      "Id": "S4069",
+      "Message": "Implement alternative method \u0027Add\u0027 for the operator \u0027\u002B\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10/StaticAbstractMembersInInterfaces.cs#L29",
+      "Location": "Line 29 Position 35-36"
+    },
+    {
+      "Id": "S4069",
+      "Message": "Implement alternative method \u0027Add\u0027 for the operator \u0027\u002B\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/CheckedAndUncheckedUserDefinedOperators.cs#L32",
+      "Location": "Line 32 Position 38-39"
+    },
+    {
+      "Id": "S4069",
+      "Message": "Implement alternative method \u0027RightShift\u0027 for the operator \u0027\u003E\u003E\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/RelaxedShiftOperator.cs#L5",
+      "Location": "Line 5 Position 53-55"
+    },
+    {
+      "Id": "S4069",
+      "Message": "Implement alternative method \u0027Increment\u0027 for the operator \u0027\u002B\u002B\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/StaticVirtualMembersInInterfaces.cs#L16",
+      "Location": "Line 16 Position 47-49"
+    },
+    {
+      "Id": "S4069",
+      "Message": "Implement alternative method \u0027Increment\u0027 for the operator \u0027\u002B\u002B\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/StaticVirtualMembersInInterfaces.cs#L5",
+      "Location": "Line 5 Position 36-38"
+    },
+    {
+      "Id": "S4069",
+      "Message": "Implement alternative method \u0027Plus\u0027 for the operator \u0027\u002B\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/Records.cs#L84",
+      "Location": "Line 84 Position 49-50"
+    }
+  ]
+}

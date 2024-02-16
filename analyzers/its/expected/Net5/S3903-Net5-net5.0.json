@@ -3,8 +3,8 @@
     {
       "Id": "S3903",
       "Message": "Move \u0027Record\u0027 into a named namespace.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L224",
-      "Location": "Line 224 Position 15-21"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L213",
+      "Location": "Line 213 Position 15-21"
     }
   ]
 }

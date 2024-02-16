@@ -3,62 +3,26 @@
     {
       "Id": "S2589",
       "Message": "Change this condition so that it does not always evaluate to \u0027False\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L32",
-      "Location": "Line 32 Position 10-13"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L21",
+      "Location": "Line 21 Position 10-13"
     },
     {
       "Id": "S2589",
       "Message": "Change this condition so that it does not always evaluate to \u0027False\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L32",
-      "Location": "Line 32 Position 10-13"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L21",
+      "Location": "Line 21 Position 10-13"
     },
     {
       "Id": "S2589",
       "Message": "Change this condition so that it does not always evaluate to \u0027False\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L37",
-      "Location": "Line 37 Position 10-13"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L26",
+      "Location": "Line 26 Position 10-13"
     },
     {
       "Id": "S2589",
       "Message": "Change this condition so that it does not always evaluate to \u0027False\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L37",
-      "Location": "Line 37 Position 10-13"
-    },
-    {
-      "Id": "S2589",
-      "Message": "Change this condition so that it does not always evaluate to \u0027False\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1862.cs#L11",
-      "Location": "Line 11 Position 22-31"
-    },
-    {
-      "Id": "S2589",
-      "Message": "Change this condition so that it does not always evaluate to \u0027False\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1862.cs#L8",
-      "Location": "Line 8 Position 22-31"
-    },
-    {
-      "Id": "S2589",
-      "Message": "Change this condition so that it does not always evaluate to \u0027True\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2760.cs#L8",
-      "Location": "Line 8 Position 17-26"
-    },
-    {
-      "Id": "S2589",
-      "Message": "Change this condition so that it does not always evaluate to \u0027True\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2760.cs#L9",
-      "Location": "Line 9 Position 17-26"
-    },
-    {
-      "Id": "S2589",
-      "Message": "Change this condition so that it does not always evaluate to \u0027True\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3440.cs#L11",
-      "Location": "Line 11 Position 17-18"
-    },
-    {
-      "Id": "S2589",
-      "Message": "Change this condition so that it does not always evaluate to \u0027True\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3981.cs#L12",
-      "Location": "Line 12 Position 17-62"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L26",
+      "Location": "Line 26 Position 10-13"
     }
   ]
 }

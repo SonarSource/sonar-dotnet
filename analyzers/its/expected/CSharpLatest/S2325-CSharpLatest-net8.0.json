@@ -1,0 +1,388 @@
+{
+  "Issues": [
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Example\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10/AssignmentAndDeclarationInSameDeconstruction.cs#L5",
+      "Location": "Line 5 Position 21-28"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027DoSomething\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10/FileScopedNamespaceDeclaration.cs#L5",
+      "Location": "Line 5 Position 17-28"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Example\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10/GlobalUsingDirectives.cs#L7",
+      "Location": "Line 7 Position 17-24"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Example\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10/LambdasWithExplicitReturnType.cs#L5",
+      "Location": "Line 5 Position 21-28"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Method\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/CheckedAndUncheckedUserDefinedOperators.cs#L5",
+      "Location": "Line 5 Position 21-27"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Work\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/FileScopeAccess.cs#L10",
+      "Location": "Line 10 Position 20-24"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Method\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/ListPatterns.cs#L5",
+      "Location": "Line 5 Position 21-27"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Method\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/NewlinesInStringInterpolations.cs#L5",
+      "Location": "Line 5 Position 21-27"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Method\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/NumericIntPtrAndUIntPtr.cs#L5",
+      "Location": "Line 5 Position 21-27"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Method\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/PatternMatchSpanOrReadOnlySpanOnAConstantString.cs#L5",
+      "Location": "Line 5 Position 21-27"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Method\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/RawStringLiterals.cs#L5",
+      "Location": "Line 5 Position 23-29"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Method\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/RelaxedShiftOperator.cs#L8",
+      "Location": "Line 8 Position 21-27"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Method\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/StaticVirtualMembersInInterfaces.cs#L24",
+      "Location": "Line 24 Position 21-27"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Method\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/UnsignedRightShiftOperator.cs#L5",
+      "Location": "Line 5 Position 21-27"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Method\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/UTF8StringLiterals.cs#L5",
+      "Location": "Line 5 Position 21-27"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Copy\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp12/AliasAnyType.cs#L11",
+      "Location": "Line 11 Position 15-19"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Examples\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp12/CollectionExpressions.cs#L5",
+      "Location": "Line 5 Position 14-22"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Example\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp12/DefaultLambdaParameters.cs#L5",
+      "Location": "Line 5 Position 14-21"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Example\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp12/InlineArrays.cs#L11",
+      "Location": "Line 11 Position 14-21"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027DoNotOverrideMe\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/CovariantReturn.cs#L24",
+      "Location": "Line 24 Position 33-48"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Consume\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/CovariantReturn.cs#L38",
+      "Location": "Line 38 Position 21-28"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027TryParse\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/ExtendingPartial.cs#L25",
+      "Location": "Line 25 Position 31-39"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Method\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/ExtensionGetEnumerator.cs#L20",
+      "Location": "Line 20 Position 21-27"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Method\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/FunctionPointers.cs#L7",
+      "Location": "Line 7 Position 21-27"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Foo\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/GetWeatherForecastWithRecords.cs#L9",
+      "Location": "Line 9 Position 20-23"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Foo\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/JsonDictionaryKeys.cs#L9",
+      "Location": "Line 9 Position 14-17"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Foo\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/JsonSerializerImmutableTypes.cs#L9",
+      "Location": "Line 9 Position 14-17"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027InvokeFunc\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/LambdaDiscardParameters.cs#L30",
+      "Location": "Line 30 Position 22-32"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Method\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/NativeInts.cs#L7",
+      "Location": "Line 7 Position 21-27"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027TypePatterns\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/PatternMatchingImprovements.cs#L41",
+      "Location": "Line 41 Position 24-36"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027RelationalPatterns\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/PatternMatchingImprovements.cs#L51",
+      "Location": "Line 51 Position 24-42"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027LogicalPatterns\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/PatternMatchingImprovements.cs#L58",
+      "Location": "Line 58 Position 24-39"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027NotPattern\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/PatternMatchingImprovements.cs#L65",
+      "Location": "Line 65 Position 21-31"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Method\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/Records.cs#L121",
+      "Location": "Line 121 Position 22-28"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Method\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/Records.cs#L51",
+      "Location": "Line 51 Position 21-27"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Foo\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/RecordsVsClasses.cs#L9",
+      "Location": "Line 9 Position 21-24"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Foo\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S1067.cs#L5",
+      "Location": "Line 5 Position 21-24"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Property\u0027 a static property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S134.cs#L5",
+      "Location": "Line 5 Position 20-28"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Property\u0027 a static property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S1541.cs#L5",
+      "Location": "Line 5 Position 20-28"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027InitProperty\u0027 a static property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S1854.cs#L5",
+      "Location": "Line 5 Position 20-32"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Foo\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S1862.cs#L5",
+      "Location": "Line 5 Position 21-24"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Foo\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S2219.cs#L8",
+      "Location": "Line 8 Position 21-24"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Foo\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S2221.cs#L8",
+      "Location": "Line 8 Position 21-24"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Foo\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S2437.cs#L5",
+      "Location": "Line 5 Position 21-24"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Foo\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S2612.cs#L7",
+      "Location": "Line 7 Position 14-17"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Foo\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S2760.cs#L5",
+      "Location": "Line 5 Position 21-24"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Foo\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3240.cs#L8",
+      "Location": "Line 8 Position 21-24"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Foo\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3247.cs#L10",
+      "Location": "Line 10 Position 21-24"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027M11\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3251.Part2.cs#L22",
+      "Location": "Line 22 Position 28-31"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027M12\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3251.Part2.cs#L27",
+      "Location": "Line 27 Position 29-32"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027SuggestSelectAndWhere\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3267.cs#L23",
+      "Location": "Line 23 Position 26-47"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027SuggestWhere\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3267.cs#L8",
+      "Location": "Line 8 Position 29-41"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Test\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3353.cs#L5",
+      "Location": "Line 5 Position 21-25"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Foo\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3440.cs#L5",
+      "Location": "Line 5 Position 21-24"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027IsActive\u0027 a static property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3453.cs#L18",
+      "Location": "Line 18 Position 25-33"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027IsActive\u0027 a static property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3453.cs#L9",
+      "Location": "Line 9 Position 25-33"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Prop\u0027 a static property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3626.cs#L5",
+      "Location": "Line 5 Position 13-17"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027ChainedSimilarConditionsWithParentheses\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3776.cs#L23",
+      "Location": "Line 23 Position 14-53"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Foo9\u0027 a static property.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3928.cs#L8",
+      "Location": "Line 8 Position 20-24"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Foo\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3981.cs#L8",
+      "Location": "Line 8 Position 21-24"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Method\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S4201.cs#L11",
+      "Location": "Line 11 Position 21-27"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Foo\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S4830.cs#L5",
+      "Location": "Line 5 Position 14-17"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Foo\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/ShouldRichGoToTheDoctor.cs#L8",
+      "Location": "Line 8 Position 14-17"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027WhoDoesMycroftCareAbout\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/VariousPatternsOfPatterns.cs#L73",
+      "Location": "Line 73 Position 17-40"
+    }
+  ]
+}

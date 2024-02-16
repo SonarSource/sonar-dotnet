@@ -2,81 +2,39 @@
   "Issues": [
     {
       "Id": "S1481",
-      "Message": "Remove the unused local variable \u0027y\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/CovariantReturn.cs#L40",
-      "Location": "Line 40 Position 23-24"
-    },
-    {
-      "Id": "S1481",
-      "Message": "Remove the unused local variable \u0027ptr1\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/FunctionPointers.cs#L9",
-      "Location": "Line 9 Position 29-33"
-    },
-    {
-      "Id": "S1481",
-      "Message": "Remove the unused local variable \u0027explicitTypes2\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/LambdaDiscardParameters.cs#L19",
-      "Location": "Line 19 Position 36-50"
-    },
-    {
-      "Id": "S1481",
-      "Message": "Remove the unused local variable \u0027explicitTypes3\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/LambdaDiscardParameters.cs#L20",
-      "Location": "Line 20 Position 42-56"
-    },
-    {
-      "Id": "S1481",
       "Message": "Remove the unused local variable \u0027assem\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L78",
-      "Location": "Line 78 Position 10-15"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L67",
+      "Location": "Line 67 Position 10-15"
     },
     {
       "Id": "S1481",
       "Message": "Remove the unused local variable \u0027fs0\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L88",
-      "Location": "Line 88 Position 5-8"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L77",
+      "Location": "Line 77 Position 5-8"
     },
     {
       "Id": "S1481",
       "Message": "Remove the unused local variable \u0027l1\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L91",
-      "Location": "Line 91 Position 8-10"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L80",
+      "Location": "Line 80 Position 8-10"
     },
     {
       "Id": "S1481",
       "Message": "Remove the unused local variable \u0027l2\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L92",
-      "Location": "Line 92 Position 8-10"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L81",
+      "Location": "Line 81 Position 8-10"
     },
     {
       "Id": "S1481",
       "Message": "Remove the unused local variable \u0027l3\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L93",
-      "Location": "Line 93 Position 8-10"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L82",
+      "Location": "Line 82 Position 8-10"
     },
     {
       "Id": "S1481",
       "Message": "Remove the unused local variable \u0027l4\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L94",
-      "Location": "Line 94 Position 8-10"
-    },
-    {
-      "Id": "S1481",
-      "Message": "Remove the unused local variable \u0027isNull\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L67",
-      "Location": "Line 67 Position 17-23"
-    },
-    {
-      "Id": "S1481",
-      "Message": "Remove the unused local variable \u0027x\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1144.cs#L12",
-      "Location": "Line 12 Position 17-18"
-    },
-    {
-      "Id": "S1481",
-      "Message": "Remove the unused local variable \u0027x\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1144.cs#L7",
-      "Location": "Line 7 Position 17-18"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L83",
+      "Location": "Line 83 Position 8-10"
     },
     {
       "Id": "S1481",
@@ -89,48 +47,6 @@
       "Message": "Remove the unused local variable \u0027fruits\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2330.cs#L11",
       "Location": "Line 11 Position 21-27"
-    },
-    {
-      "Id": "S1481",
-      "Message": "Remove the unused local variable \u0027vegetable\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3247.cs#L14",
-      "Location": "Line 14 Position 21-30"
-    },
-    {
-      "Id": "S1481",
-      "Message": "Remove the unused local variable \u0027fruit\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3247.cs#L15",
-      "Location": "Line 15 Position 21-26"
-    },
-    {
-      "Id": "S1481",
-      "Message": "Remove the unused local variable \u0027vegetableY\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3247.cs#L16",
-      "Location": "Line 16 Position 21-31"
-    },
-    {
-      "Id": "S1481",
-      "Message": "Remove the unused local variable \u0027fruitX\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3247.cs#L17",
-      "Location": "Line 17 Position 21-27"
-    },
-    {
-      "Id": "S1481",
-      "Message": "Remove the unused local variable \u0027foo\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3353.cs#L7",
-      "Location": "Line 7 Position 18-21"
-    },
-    {
-      "Id": "S1481",
-      "Message": "Remove the unused local variable \u0027appleInside\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4201.cs#L17",
-      "Location": "Line 17 Position 23-34"
-    },
-    {
-      "Id": "S1481",
-      "Message": "Remove the unused local variable \u0027i\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/SkipLocalsInit.cs#L10",
-      "Location": "Line 10 Position 17-18"
     }
   ]
 }

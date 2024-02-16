@@ -1,0 +1,22 @@
+{
+  "Issues": [
+    {
+      "Id": "S3251",
+      "Message": "Supply an implementation for this partial method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/ExtendingPartial.cs#L6",
+      "Location": "Line 6 Position 9-16"
+    },
+    {
+      "Id": "S3251",
+      "Message": "Supply an implementation for this partial method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3251.Part1.cs#L5",
+      "Location": "Line 5 Position 9-16"
+    },
+    {
+      "Id": "S3251",
+      "Message": "Supply an implementation for this partial method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3251.Part2.cs#L5",
+      "Location": "Line 5 Position 9-16"
+    }
+  ]
+}

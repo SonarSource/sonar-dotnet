@@ -3,50 +3,26 @@
     {
       "Id": "S2583",
       "Message": "Change this condition so that it does not always evaluate to \u0027False\u0027. Some code paths are unreachable.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L28",
-      "Location": "Line 28 Position 5-11"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L17",
+      "Location": "Line 17 Position 5-11"
     },
     {
       "Id": "S2583",
       "Message": "Change this condition so that it does not always evaluate to \u0027False\u0027. Some code paths are unreachable.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L28",
-      "Location": "Line 28 Position 5-11"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L17",
+      "Location": "Line 17 Position 5-11"
     },
     {
       "Id": "S2583",
       "Message": "Change this condition so that it does not always evaluate to \u0027False\u0027. Some code paths are unreachable.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L29",
-      "Location": "Line 29 Position 5-11"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L18",
+      "Location": "Line 18 Position 5-11"
     },
     {
       "Id": "S2583",
       "Message": "Change this condition so that it does not always evaluate to \u0027False\u0027. Some code paths are unreachable.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L29",
-      "Location": "Line 29 Position 5-11"
-    },
-    {
-      "Id": "S2583",
-      "Message": "Change this condition so that it does not always evaluate to \u0027False\u0027. Some code paths are unreachable.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3240.cs#L11",
-      "Location": "Line 11 Position 17-30"
-    },
-    {
-      "Id": "S2583",
-      "Message": "Change this condition so that it does not always evaluate to \u0027True\u0027. Some code paths are unreachable.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3240.cs#L12",
-      "Location": "Line 12 Position 17-26"
-    },
-    {
-      "Id": "S2583",
-      "Message": "Change this condition so that it does not always evaluate to \u0027False\u0027. Some code paths are unreachable.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3440.cs#L10",
-      "Location": "Line 10 Position 17-18"
-    },
-    {
-      "Id": "S2583",
-      "Message": "Change this condition so that it does not always evaluate to \u0027False\u0027. Some code paths are unreachable.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4201.cs#L37",
-      "Location": "Line 37 Position 20-22"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L18",
+      "Location": "Line 18 Position 5-11"
     }
   ]
 }

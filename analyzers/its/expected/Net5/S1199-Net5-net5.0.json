@@ -3,8 +3,8 @@
     {
       "Id": "S1199",
       "Message": "Extract this nested code block into a separate method.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L81",
-      "Location": "Line 81 Position 1-2"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L70",
+      "Location": "Line 70 Position 1-2"
     }
   ]
 }
