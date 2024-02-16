@@ -29,17 +29,18 @@ public partial class RoslynSymbolicExecutionTest
     [TestMethod]
     public void Finally_Simple()
     {
-        const string code = @"
-Tag(""BeforeTry"");
-try
-{
-    Tag(""InTry"");
-}
-finally
-{
-    Tag(""InFinally"");
-}
-Tag(""AfterFinally"");";
+        const string code = """
+            Tag("BeforeTry");
+            try
+            {
+                Tag("InTry");
+            }
+            finally
+            {
+                Tag("InFinally");
+            }
+            Tag("AfterFinally");
+            """;
         SETestContext.CreateCS(code).Validator.ValidateTagOrder(
             "BeforeTry",
             "InTry",
@@ -51,28 +52,29 @@ Tag(""AfterFinally"");";
     [TestMethod]
     public void Finally_Nested_ExitingTwoFinallyOnSameBranch()
     {
-        const string code = @"
-Tag(""BeforeOuterTry"");
-try
-{
-    Tag(""InOuterTry"");
-    try
-    {
-        Tag(""InInnerTry"");
-    }
-    finally
-    {
-        true.ToString();    // Put some operations in the way
-        Tag(""InInnerFinally"");
-    }
-}
-finally
-{
-    true.ToString();    // Put some operations in the way
-    true.ToString();
-    Tag(""InOuterFinally"");
-}
-Tag(""AfterOuterFinally"");";
+        const string code = """
+            Tag("BeforeOuterTry");
+            try
+            {
+                Tag("InOuterTry");
+                try
+                {
+                    Tag("InInnerTry");
+                }
+                finally
+                {
+                    true.ToString();    // Put some operations in the way
+                    Tag("InInnerFinally");
+                }
+            }
+            finally
+            {
+                true.ToString();    // Put some operations in the way
+                true.ToString();
+                Tag("InOuterFinally");
+            }
+            Tag("AfterOuterFinally");
+            """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.ValidateTagOrder(
             "BeforeOuterTry",
@@ -98,28 +100,29 @@ Tag(""AfterOuterFinally"");";
     [TestMethod]
     public void Finally_Nested_InstructionAfterFinally()
     {
-        const string code = @"
-Tag(""BeforeOuterTry"");
-try
-{
-    Tag(""InOuterTry"");
-    try
-    {
-        Tag(""InInnerTry"");
-    }
-    finally
-    {
-        true.ToString();    // Put some operations in the way
-        Tag(""InInnerFinally"");
-    }
-    Tag(""AfterInnerFinally"");
-}
-finally
-{
-    true.ToString();    // Put some operations in the way
-    Tag(""InOuterFinally"");
-}
-Tag(""AfterOuterFinally"");";
+        const string code = """
+            Tag("BeforeOuterTry");
+            try
+            {
+                Tag("InOuterTry");
+                try
+                {
+                    Tag("InInnerTry");
+                }
+                finally
+                {
+                    true.ToString();    // Put some operations in the way
+                    Tag("InInnerFinally");
+                }
+                Tag("AfterInnerFinally");
+            }
+            finally
+            {
+                true.ToString();    // Put some operations in the way
+                Tag("InOuterFinally");
+            }
+            Tag("AfterOuterFinally");
+            """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.ValidateTagOrder(
             "BeforeOuterTry",
@@ -148,27 +151,28 @@ Tag(""AfterOuterFinally"");";
     [TestMethod]
     public void Finally_Nested_InstructionAfterFinally_NoThrowsInFinally()
     {
-        const string code = @"
-var tag = ""BeforeOuterTry"";
-var value = false;
-try
-{
-    try
-    {
-        Tag(""InInnerTry"");    // This can throw
-    }
-    finally
-    {
-        tag = ""InInnerFinally"";
-    }
-    value = true;
-    tag = ""AfterInnerFinally"";
-}
-finally
-{
-    Tag(""InOuterFinally"", value);
-}
-Tag(""AfterOuterFinally"", value);";
+        const string code = """
+            var tag = "BeforeOuterTry";
+            var value = false;
+            try
+            {
+                try
+                {
+                    Tag("InInnerTry");    // This can throw
+                }
+                finally
+                {
+                    tag = "InInnerFinally";
+                }
+                value = true;
+                tag = "AfterInnerFinally";
+            }
+            finally
+            {
+                Tag("InOuterFinally", value);
+            }
+            Tag("AfterOuterFinally", value);
+            """;
         var validator = SETestContext.CreateCS(code, new PreserveTestCheck("value")).Validator;
         validator.ValidateTagOrder(
             "BeforeOuterTry",
@@ -191,30 +195,31 @@ Tag(""AfterOuterFinally"", value);";
     [TestMethod]
     public void Finally_NestedInFinally_InstructionAfterFinally_NoThrowsInFinally()
     {
-        const string code = @"
-var tag = ""BeforeOuterTry"";
-var value = false;
-try
-{
-    Tag(""InOuterTry"");    // This can throw
-}
-finally
-{
-    tag = ""BeforeInnerTry"";
-    try
-    {
-        value = false;          // Operation that cannot throw - this doesn't do anything
-        tag = ""InInnerTry"";
-    }
-    finally
-    {
-        tag = ""InInnerFinally"";   // Operation that cannot throw
-    }
-    value = true;
+        const string code = """
+            var tag = "BeforeOuterTry";
+            var value = false;
+            try
+            {
+                Tag("InOuterTry");    // This can throw
+            }
+            finally
+            {
+                tag = "BeforeInnerTry";
+                try
+                {
+                    value = false;          // Operation that cannot throw - this doesn't do anything
+                    tag = "InInnerTry";
+                }
+                finally
+                {
+                    tag = "InInnerFinally";   // Operation that cannot throw
+                }
+                value = true;
 
-    Tag(""InOuterFinally"", value);
-}
-Tag(""AfterOuterFinally"", value);";
+                Tag("InOuterFinally", value);
+            }
+            Tag("AfterOuterFinally", value);
+            """;
         var validator = SETestContext.CreateCS(code, new PreserveTestCheck("value")).Validator;
         validator.ValidateTagOrder(
             "BeforeOuterTry",
@@ -240,33 +245,34 @@ Tag(""AfterOuterFinally"", value);";
     [TestMethod]
     public void Finally_BranchInNested()
     {
-        const string code = @"
-Tag(""BeforeOuterTry"");
-try
-{
-    Tag(""InOuterTry"");
-    try
-    {
-        Tag(""InInnerTry"");
-        if (Condition)
-        {
-            Tag(""1"");
-        }
-        else
-        {
-            Tag(""2"");
-        }
-    }
-    finally
-    {
-        Tag(""InInnerFinally"");
-    }
-}
-finally
-{
-    Tag(""InOuterFinally"");
-}
-Tag(""AfterOuterFinally"");";
+        const string code = """
+            Tag("BeforeOuterTry");
+            try
+            {
+                Tag("InOuterTry");
+                try
+                {
+                    Tag("InInnerTry");
+                    if (Condition)
+                    {
+                        Tag("1");
+                    }
+                    else
+                    {
+                        Tag("2");
+                    }
+                }
+                finally
+                {
+                    Tag("InInnerFinally");
+                }
+            }
+            finally
+            {
+                Tag("InOuterFinally");
+            }
+            Tag("AfterOuterFinally");
+            """;
         SETestContext.CreateCS(code).Validator.ValidateTagOrder(
             "BeforeOuterTry",
             "InOuterTry",
@@ -283,25 +289,26 @@ Tag(""AfterOuterFinally"");";
     [TestMethod]
     public void Finally_BranchAfterFinally()
     {
-        const string code = @"
-Tag(""BeforeTry"");
-try
-{
-    Tag(""InTry"");
-}
-finally
-{
-    true.ToString();    // Put some operations in the way
-    Tag(""InFinally"");
-}
-if (boolParameter)  // No operation between the finally and this. This will create a single follow up block with BranchValue
-{
-    Tag(""1"");
-}
-else
-{
-    Tag(""2"");
-}";
+        const string code = """
+            Tag("BeforeTry");
+            try
+            {
+                Tag("InTry");
+            }
+            finally
+            {
+                true.ToString();    // Put some operations in the way
+                Tag("InFinally");
+            }
+            if (boolParameter)  // No operation between the finally and this. This will create a single follow up block with BranchValue
+            {
+                Tag("1");
+            }
+            else
+            {
+                Tag("2");
+            }
+            """;
         SETestContext.CreateCS(code).Validator.ValidateTagOrder(
             "BeforeTry",
             "InTry",
@@ -314,26 +321,27 @@ else
     [TestMethod]
     public void Finally_BranchInFinally()
     {
-        const string code = @"
-Tag(""BeforeTry"");
-try
-{
-    Tag(""InTry"");
-}
-finally
-{
-    Tag(""InFinallyBeforeCondition"");
-    if (Condition)
-    {
-        Tag(""1"");
-    }
-    else
-    {
-        Tag(""2"");
-    }
-    Tag(""InFinallyAfterCondition"");
-}
-Tag(""AfterFinally"");";
+        const string code = """
+            Tag("BeforeTry");
+            try
+            {
+                Tag("InTry");
+            }
+            finally
+            {
+                Tag("InFinallyBeforeCondition");
+                if (Condition)
+                {
+                    Tag("1");
+                }
+                else
+                {
+                    Tag("2");
+                }
+                Tag("InFinallyAfterCondition");
+            }
+            Tag("AfterFinally");
+            """;
         SETestContext.CreateCS(code).Validator.ValidateTagOrder(
             "BeforeTry",
             "InTry",
@@ -351,19 +359,20 @@ Tag(""AfterFinally"");";
     [TestMethod]
     public void Finally_WrappedInLocalLifetimeRegion()
     {
-        const string code = @"
-Tag(""BeforeTry"");
-try
-{
-    Tag(""InTry"");
-}
-finally
-{
-    var local = true;   // This creates LocalLifeTime region
-    Tag(""InFinally"");
-    // Here is Block#4 outside the LocalLifeTime region
-}
-Tag(""AfterFinally"");";
+        const string code = """
+            Tag("BeforeTry");
+            try
+            {
+                Tag("InTry");
+            }
+            finally
+            {
+                var local = true;   // This creates LocalLifeTime region
+                Tag("InFinally");
+                // Here is Block#4 outside the LocalLifeTime region
+            }
+            Tag("AfterFinally");
+            """;
         SETestContext.CreateCS(code).Validator.ValidateTagOrder(
             "BeforeTry",
             "InTry",
@@ -375,26 +384,27 @@ Tag(""AfterFinally"");";
     [TestMethod]
     public void Finally_NestedFinally()
     {
-        const string code = @"
-var tag = ""BeforeOuterTry"";
-try
-{
-    Tag(""InOuterTry"");
-}
-finally
-{
-    Tag(""InOuterFinally"");
-    try
-    {
-        Tag(""InInnerTry"");
-    }
-    finally
-    {
-        Tag(""InInnerFinally"");
-    }
-    Tag(""AfterInnerFinally"");
-}
-Tag(""AfterOuterFinally"");";
+        const string code = """
+            var tag = "BeforeOuterTry";
+            try
+            {
+                Tag("InOuterTry");
+            }
+            finally
+            {
+                Tag("InOuterFinally");
+                try
+                {
+                    Tag("InInnerTry");
+                }
+                finally
+                {
+                    Tag("InInnerFinally");
+                }
+                Tag("AfterInnerFinally");
+            }
+            Tag("AfterOuterFinally");
+            """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.ValidateTagOrder(
             "BeforeOuterTry",
@@ -403,44 +413,45 @@ Tag(""AfterOuterFinally"");";
             "InOuterFinally",
             "InInnerTry",           // With Exception thrown by Tag("InOuterTry")
             "InInnerTry",
-            "InInnerFinally",       // With Exception thrown by Tag("InOuterTry")
-            "InInnerFinally",
-            "AfterInnerFinally",
+            "InInnerFinally",       // With Exception thrown by Tag("InOuterTry"), that visits AfterInnerFinally
+            "InInnerFinally",       // With Exception thrown by Tag("InInnerTry"), that skips AfterInnerFinally and goes to exit block
+            "InInnerFinally",       // No exception
+            "AfterInnerFinally",    // With Exception thrown by Tag("InOuterTry"), that visits AfterInnerFinally
+            "AfterInnerFinally",    // No exception
             "AfterOuterFinally");
-
         ValidateHasOnlyNoExceptionAndUnknownException(validator, "InOuterFinally");
-        ValidateHasOnlyNoExceptionAndUnknownException(validator, "InInnerFinally");
         ValidateHasOnlyNoExceptionAndUnknownException(validator, "InInnerTry");
-
-        validator.TagStates("AfterInnerFinally").Should().HaveCount(1)
-                 .And.ContainSingle(x => HasNoException(x));
-
-        validator.TagStates("AfterOuterFinally").Should().HaveCount(1)
-                 .And.ContainSingle(x => HasNoException(x));
+        ValidateHasOnlyNoExceptionAndUnknownException(validator, "AfterInnerFinally");
+        validator.TagStates("InInnerFinally").Should().SatisfyRespectively(
+            x => HasUnknownException(x).Should().BeTrue(),
+            x => HasUnknownException(x).Should().BeTrue(),
+            x => HasNoException(x).Should().BeTrue());
+        validator.TagStates("AfterOuterFinally").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
     }
 
     [TestMethod]
     public void Finally_NestedInCatch()
     {
-        const string code = @"
-var tag = ""BeforeOuterTry"";
-try
-{
-    try
-    {
-        Tag(""InInnerTry"");
-    }
-    finally
-    {
-        tag = ""InInnerFinally"";
-    }
-    tag = ""AfterInnerTry"";
-}
-catch
-{
-    tag = ""InOuterCatch"";
-}
-Tag(""End"");";
+        const string code = """
+            var tag = "BeforeOuterTry";
+            try
+            {
+                try
+                {
+                    Tag("InInnerTry");
+                }
+                finally
+                {
+                    tag = "InInnerFinally";
+                }
+                tag = "AfterInnerTry";
+            }
+            catch
+            {
+                tag = "InOuterCatch";
+            }
+            Tag("End");
+            """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.ValidateTagOrder(
             "BeforeOuterTry",
@@ -460,35 +471,36 @@ Tag(""End"");";
     [TestMethod]
     public void Finally_NestedInCatch_NestedInFinally()
     {
-        const string code = @"
-var tag = ""BeforeOuterTry"";
-try
-{
-    tag = ""BeforeMiddleTry"";
-    try
-    {
-        tag = ""BeforeInnerTry"";
-        try
-        {
-            Tag(""InInnerTry"");
-        }
-        finally
-        {
-            tag = ""InInnerFinally"";
-        }
-        tag = ""AfterInnerTry"";
-    }
-    finally
-    {
-        tag = ""InMiddleFinally"";
-    }
-    tag = ""AfterMiddleTry"";
-}
-catch
-{
-    tag = ""InOuterCatch"";
-}
-Tag(""End"");";
+        const string code = """
+            var tag = "BeforeOuterTry";
+            try
+            {
+                tag = "BeforeMiddleTry";
+                try
+                {
+                    tag = "BeforeInnerTry";
+                    try
+                    {
+                        Tag("InInnerTry");
+                    }
+                    finally
+                    {
+                        tag = "InInnerFinally";
+                    }
+                    tag = "AfterInnerTry";
+                }
+                finally
+                {
+                    tag = "InMiddleFinally";
+                }
+                tag = "AfterMiddleTry";
+            }
+            catch
+            {
+                tag = "InOuterCatch";
+            }
+            Tag("End");
+            """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.ValidateTagOrder(
             "BeforeOuterTry",
@@ -514,17 +526,18 @@ Tag(""End"");";
     [TestMethod]
     public void Catch_Simple_NoFilter()
     {
-        const string code = @"
-var tag = ""BeforeTry"";
-try
-{
-    Tag(""InTry"");
-}
-catch
-{
-    tag = ""InCatch"";
-}
-tag = ""End"";";
+        const string code = """
+            var tag = "BeforeTry";
+            try
+            {
+                Tag("InTry");
+            }
+            catch
+            {
+                tag = "InCatch";
+            }
+            tag = "End";
+            """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.ValidateTagOrder(
             "BeforeTry",
@@ -539,21 +552,22 @@ tag = ""End"";";
     [TestMethod]
     public void Catch_WrappedInLocalLifetimeRegion()
     {
-        const string code = @"
-var tag = ""BeforeTry"";
-try
-{
-    Tag(""InTry"");
-}
-catch
-{
-    tag = ""InCatch"";
-    if (true)
-    {
-        var local = true;   // Block #4 is wrapped in LocalLifeTime region
-    }
-}
-tag = ""End"";";
+        const string code = """
+            var tag = "BeforeTry";
+            try
+            {
+                Tag("InTry");
+            }
+            catch
+            {
+                tag = "InCatch";
+                if (true)
+                {
+                    var local = true;   // Block #4 is wrapped in LocalLifeTime region
+                }
+            }
+            tag = "End";
+            """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.ValidateTagOrder(
             "BeforeTry",
@@ -568,17 +582,18 @@ tag = ""End"";";
     [TestMethod]
     public void Catch_Simple_TypeFilter()
     {
-        const string code = @"
-var tag = ""BeforeTry"";
-try
-{
-    Tag(""InTry"");
-}
-catch (Exception)
-{
-    tag = ""InCatch"";
-}
-tag = ""End"";";
+        const string code = """
+            var tag = "BeforeTry";
+            try
+            {
+                Tag("InTry");
+            }
+            catch (Exception)
+            {
+                tag = "InCatch";
+            }
+            tag = "End";
+            """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.ValidateTagOrder(
             "BeforeTry",
@@ -593,25 +608,26 @@ tag = ""End"";";
     [TestMethod]
     public void Catch_Multiple()
     {
-        const string code = @"
-var tag = ""BeforeTry"";
-try
-{
-    Tag(""InTry"");
-}
-catch (ArgumentNullException ex)
-{
-    tag = ""InCatchArgumentNull"";
-}
-catch (NotSupportedException ex)
-{
-    tag = ""InCatchNotSupported"";
-}
-catch (Exception ex)
-{
-    tag = ""InCatchEverything"";
-}
-tag = ""End"";";
+        const string code = """
+            var tag = "BeforeTry";
+            try
+            {
+                Tag("InTry");
+            }
+            catch (ArgumentNullException ex)
+            {
+                tag = "InCatchArgumentNull";
+            }
+            catch (NotSupportedException ex)
+            {
+                tag = "InCatchNotSupported";
+            }
+            catch (Exception ex)
+            {
+                tag = "InCatchEverything";
+            }
+            tag = "End";
+            """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.ValidateTagOrder(
             "BeforeTry",
@@ -630,21 +646,22 @@ tag = ""End"";";
     [TestMethod]
     public void Catch_Finally()
     {
-        const string code = @"
-var tag = ""BeforeTry"";
-try
-{
-    Tag(""InTry"");
-}
-catch (Exception ex)
-{
-    tag = ""InCatch"";
-}
-finally
-{
-    tag = ""InFinally"";
-}
-tag = ""End"";";
+        const string code = """
+            var tag = "BeforeTry";
+            try
+            {
+                Tag("InTry");
+            }
+            catch (Exception ex)
+            {
+                tag = "InCatch";
+            }
+            finally
+            {
+                tag = "InFinally";
+            }
+            tag = "End";
+            """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.ValidateTagOrder(
             "BeforeTry",
@@ -661,26 +678,27 @@ tag = ""End"";";
     [TestMethod]
     public void Catch_NestedInTry()
     {
-        const string code = @"
-var tag = ""BeforeOuterTry"";
-try
-{
-    Tag(""BeforeInnerTry"");    // Can throw
-    try
-    {
-        Tag(""InInnerTry"");    // Can throw
-    }
-    catch (Exception exInner)
-    {
-        tag = ""InInnerCatch"";
-    }
-    tag = ""AfterInnerTry"";
-}
-catch (Exception ex)
-{
-    tag = ""InOuterCatch"";
-}
-tag = ""End"";";
+        const string code = """
+            var tag = "BeforeOuterTry";
+            try
+            {
+                Tag("BeforeInnerTry");    // Can throw
+                try
+                {
+                    Tag("InInnerTry");    // Can throw
+                }
+                catch (Exception exInner)
+                {
+                    tag = "InInnerCatch";
+                }
+                tag = "AfterInnerTry";
+            }
+            catch (Exception ex)
+            {
+                tag = "InOuterCatch";
+            }
+            tag = "End";
+            """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.ValidateTagOrder(
             "BeforeOuterTry",
@@ -699,26 +717,27 @@ tag = ""End"";";
     [TestMethod]
     public void Catch_NestedInCatch()
     {
-        const string code = @"
-var tag = ""BeforeOuterTry"";
-try
-{
-    Tag(""InOuterTry"");
-}
-catch (Exception exOuter)
-{
-    tag = ""BeforeInnerTry"";
-    try
-    {
-        Tag(""InInnerTry"");
-    }
-    catch (Exception exInner)
-    {
-        tag = ""InInnerCatch"";
-    }
-    tag = ""AfterInnerTry"";
-}
-tag = ""End"";";
+        const string code = """
+            var tag = "BeforeOuterTry";
+            try
+            {
+                Tag("InOuterTry");
+            }
+            catch (Exception exOuter)
+            {
+                tag = "BeforeInnerTry";
+                try
+                {
+                    Tag("InInnerTry");
+                }
+                catch (Exception exInner)
+                {
+                    tag = "InInnerCatch";
+                }
+                tag = "AfterInnerTry";
+            }
+            tag = "End";
+            """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.ValidateTagOrder(
             "BeforeOuterTry",
@@ -739,30 +758,31 @@ tag = ""End"";";
     [TestMethod]
     public void Catch_NestedInFinally()
     {
-        const string code = @"
-var tag = ""BeforeOuterTry"";
-try
-{
-    Tag(""InOuterTry"");
-}
-catch (Exception ex)
-{
-    tag = ""InOuterCatch"";
-}
-finally
-{
-    tag = ""BeforeInnerTry"";
-    try
-    {
-        Tag(""InInnerTry"");
-    }
-    catch (Exception exInner)
-    {
-        tag = ""InInnerCatch"";
-    }
-    tag = ""AfterInnerTry"";
-}
-tag = ""End"";";
+        const string code = """
+            var tag = "BeforeOuterTry";
+            try
+            {
+                Tag("InOuterTry");
+            }
+            catch (Exception ex)
+            {
+                tag = "InOuterCatch";
+            }
+            finally
+            {
+                tag = "BeforeInnerTry";
+                try
+                {
+                    Tag("InInnerTry");
+                }
+                catch (Exception exInner)
+                {
+                    tag = "InInnerCatch";
+                }
+                tag = "AfterInnerTry";
+            }
+            tag = "End";
+            """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.ValidateTagOrder(
             "BeforeOuterTry",
@@ -772,12 +792,13 @@ tag = ""End"";";
             "InInnerTry",
             "AfterInnerTry",
             "InInnerCatch",
-            "End");
+            "End",
+            "AfterInnerTry");
 
         validator.TagStates("InOuterCatch").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
         validator.TagStates("BeforeInnerTry").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
         validator.TagStates("InInnerCatch").Should().HaveCount(1).And.ContainSingle(x => HasUnknownException(x));
-        validator.TagStates("AfterInnerTry").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
+        validator.TagStates("AfterInnerTry").Should().HaveCount(2).And.OnlyContain(x => HasNoException(x));
         validator.TagStates("End").Should().HaveCount(1).And.ContainSingle(x => HasNoException(x));
     }
 
@@ -819,33 +840,34 @@ tag = ""End"";";
     [TestMethod]
     public void CatchWhen_Multiple()
     {
-        const string code = @"
-var tag = ""BeforeTry"";
-try
-{
-    Tag(""InTry"");
-}
-catch (ArgumentNullException ex) when (ex.ParamName == ""value"")
-{
-    tag = ""InCatchArgumentWhen"";
-}
-catch (ArgumentNullException ex)
-{
-    tag = ""InCatchArgument"";
-}
-catch (Exception ex) when (ex is ArgumentNullException)
-{
-    tag = ""InCatchAllWhen"";
-}
-catch (Exception ex)
-{
-    tag = ""InCatchAll"";
-}
-finally
-{
-    tag = ""InFinally"";
-}
-tag = ""End"";";
+        const string code = """
+            var tag = "BeforeTry";
+            try
+            {
+                Tag("InTry");
+            }
+            catch (ArgumentNullException ex) when (ex.ParamName == "value")
+            {
+                tag = "InCatchArgumentWhen";
+            }
+            catch (ArgumentNullException ex)
+            {
+                tag = "InCatchArgument";
+            }
+            catch (Exception ex) when (ex is ArgumentNullException)
+            {
+                tag = "InCatchAllWhen";
+            }
+            catch (Exception ex)
+            {
+                tag = "InCatchAll";
+            }
+            finally
+            {
+                tag = "InFinally";
+            }
+            tag = "End";
+            """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.ValidateTagOrder(
             "BeforeTry",
@@ -868,39 +890,41 @@ tag = ""End"";";
     [TestMethod]
     public void Finally_NestedLambda_ShouldNotFail()
     {
-        const string code = @"
-Tag(""Unreachable - outer CFG is not analyzed"");
-try
-{
-    Action a = () =>
-    {
-        // Lambda marker
-        var tag = ""Before"";
-        Tag(""CanThrow"");
-        tag = ""After"";
-    };
-}
-finally
-{
-    Tag(""Unreachable - outer CFG is not analyzed"");
-}";
+        const string code = """
+            Tag("Unreachable - outer CFG is not analyzed");
+            try
+            {
+                Action a = () =>
+                {
+                    // Lambda marker
+                    var tag = "Before";
+                    Tag("CanThrow");
+                    tag = "After";
+                };
+            }
+            finally
+            {
+                Tag("Unreachable - outer CFG is not analyzed");
+            }
+            """;
         SETestContext.CreateCSLambda(code, "// Lambda marker").Validator.ValidateTagOrder("Before", "CanThrow", "After");
     }
 
     [TestMethod]
     public void Catch_ExceptionVariableIsNotNull()
     {
-        const string code = @"
-try
-{
-    InstanceMethod();
-}
-catch(InvalidOperationException ex) when (Tag(""InFilter"", ex))
-{
-    Tag(""InCatch"", ex);
-}
+        const string code = """
+            try
+            {
+                InstanceMethod();
+            }
+            catch(InvalidOperationException ex) when (Tag("InFilter", ex))
+            {
+                Tag("InCatch", ex);
+            }
 
-static bool Tag<T>(string name, T value) => true;";
+            static bool Tag<T>(string name, T value) => true;
+            """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.TagValue("InFilter").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
         validator.TagValue("InCatch").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);

@@ -29,6 +29,7 @@ public sealed class FinallyPoint
 
     public bool IsFinallyBlock => finallyIndex < branch.FinallyRegions.Length;
     public int BlockIndex => IsFinallyBlock ? branch.FinallyRegions[finallyIndex].FirstBlockOrdinal : branch.Destination.Ordinal;
+    public int BranchDestination => branch.Destination.Ordinal;
     public FinallyPoint Previous { get; }
 
     public FinallyPoint(FinallyPoint previous, ControlFlowBranch branch, int finallyIndex = 0)

@@ -18,9 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Xml.Linq;
 using SonarAnalyzer.Extensions;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
-using SonarAnalyzer.Test.Helpers;
 
 namespace SonarAnalyzer.Test.SymbolicExecution.Roslyn;
 
@@ -114,18 +114,100 @@ public class ExplodedNodeTest
     }
 
     [TestMethod]
+    public void Equals_FinallyPoints_Single()
+    {
+        var cfg = TestHelper.CompileCfgBodyCS("""
+            try
+            {
+                if (condition)
+                {
+                    return; // Branch goes to exit 1->5, skipping AfterFinally
+                }
+                if (condition)
+                {
+                    return; // Branch goes to exit 2->5, skipping AfterFinally
+                }
+                // Branch goes AfterFinally 2->4
+            }
+            finally
+            {
+                System.Console.WriteLine("Finally");
+            }
+            System.Console.WriteLine("AfterFinally");
+            """, "bool condition");
+        var block = cfg.Blocks[0];
+        var from1to5 = cfg.Blocks[1].Successors.Single(x => x.Destination.Ordinal == 5);
+        var from2to5 = cfg.Blocks[2].Successors.Single(x => x.Destination.Ordinal == 5);
+        var from2to4 = cfg.Blocks[2].Successors.Single(x => x.Destination.Ordinal == 4);
+        var node = new ExplodedNode(block, ProgramState.Empty, new FinallyPoint(null, from1to5));
+        var noFinally = new ExplodedNode(block, ProgramState.Empty, null);
+
+        node.Equals(new ExplodedNode(block, ProgramState.Empty, new FinallyPoint(null, from2to5))).Should().BeTrue("We consider only same destination block");
+        node.Equals(new ExplodedNode(block, ProgramState.Empty, new FinallyPoint(null, from2to4))).Should().BeFalse("It has different destination block");
+        node.Equals(new ExplodedNode(block, ProgramState.Empty, new FinallyPoint(null, from1to5, 1))).Should().BeFalse("It has different BlockIndex");
+        node.Equals(noFinally).Should().BeFalse();
+        noFinally.Equals(node).Should().BeFalse();
+    }
+
+    [TestMethod]
+    public void Equals_FinallyPoints_WithPrevious()
+    {
+        var cfg = TestHelper.CompileCfgBodyCS("""
+            try
+            {
+                if (condition)
+                {
+                    return; // Branch goes to exit, skipping AfterFinally
+                }
+                if (condition)
+                {
+                    return; // Branch goes to exit, skipping AfterFinally
+                }
+                // Branch goes AfterFinally
+            }
+            finally
+            {
+                System.Console.WriteLine("Finally");
+            }
+            System.Console.WriteLine("AfterFinally");
+            """, "bool condition");
+        var block = cfg.Blocks[0];
+        var outerSame = cfg.Blocks[0].Successors.Single();
+        var from1to5 = cfg.Blocks[1].Successors.Single(x => x.Destination.Ordinal == 5);
+        var from2to5 = cfg.Blocks[2].Successors.Single(x => x.Destination.Ordinal == 5);
+        var from2to4 = cfg.Blocks[2].Successors.Single(x => x.Destination.Ordinal == 4);
+        var node = new ExplodedNode(block, ProgramState.Empty, new FinallyPoint(new FinallyPoint(null, from1to5), outerSame));
+        var noFinally = new ExplodedNode(block, ProgramState.Empty, Wrap(null));
+
+        node.Equals(new ExplodedNode(block, ProgramState.Empty, Wrap(new FinallyPoint(null, from2to5)))).Should().BeTrue("We consider only same destination block");
+        node.Equals(new ExplodedNode(block, ProgramState.Empty, Wrap(new FinallyPoint(null, from2to4)))).Should().BeFalse("It has different destination block");
+        node.Equals(new ExplodedNode(block, ProgramState.Empty, Wrap(new FinallyPoint(null, from1to5, 1)))).Should().BeFalse("It has different BlockIndex");
+        node.Equals(noFinally).Should().BeFalse();
+        noFinally.Equals(node).Should().BeFalse();
+
+        FinallyPoint Wrap(FinallyPoint inner) =>
+            new(inner, outerSame);
+    }
+
+    [TestMethod]
     public void GetHashCode_ReturnsSameForEquivalent()
     {
-        var block = TestHelper.CompileCfgBodyCS("var a = true;").Blocks[1];
-        var basic = new ExplodedNode(block, ProgramState.Empty, null);
-        var same = new ExplodedNode(block, ProgramState.Empty, null);
+        var cfg = TestHelper.CompileCfgBodyCS("var a = true;");
+        var block = cfg.Blocks[1];
+        var finallyPoint = new FinallyPoint(null, block.Successors.Single());
+        var basic = new ExplodedNode(block, ProgramState.Empty, finallyPoint);
+        var same = new ExplodedNode(block, ProgramState.Empty, finallyPoint);
         var differentLocation = basic.CreateNext(ProgramState.Empty);
-        var differentState = new ExplodedNode(block, ProgramState.Empty.SetOperationValue(block.Operations[0], SymbolicValue.Empty), null);
+        var differentState = new ExplodedNode(block, ProgramState.Empty.SetOperationValue(block.Operations[0], SymbolicValue.Empty), finallyPoint);
+        var differentNoFinallyPoint = new ExplodedNode(block, ProgramState.Empty, null);
+        var differentFinallyPointBlockIndex = new ExplodedNode(block, ProgramState.Empty, new(null, cfg.Blocks[0].Successors.Single()));
 
         basic.GetHashCode().Should().Be(basic.GetHashCode(), "value should be deterministic");
         basic.GetHashCode().Should().Be(same.GetHashCode());
         basic.GetHashCode().Should().NotBe(differentLocation.GetHashCode());
         basic.GetHashCode().Should().NotBe(differentState.GetHashCode());
+        basic.GetHashCode().Should().NotBe(differentNoFinallyPoint.GetHashCode());
+        basic.GetHashCode().Should().NotBe(differentFinallyPointBlockIndex.GetHashCode());
     }
 
     [TestMethod]
@@ -134,21 +216,24 @@ public class ExplodedNodeTest
         var cfg = TestHelper.CompileCfgBodyCS("var a = true;");
         var state = ProgramState.Empty.SetSymbolValue(cfg.Blocks[1].Operations[0].ChildOperations.First().TrackedSymbol(ProgramState.Empty), SymbolicValue.Empty);
 
-        new ExplodedNode(cfg.Blocks[0], ProgramState.Empty, null).ToString().Should().BeIgnoringLineEndings(
-@"Block #0, Branching
-Empty
-");
+        new ExplodedNode(cfg.Blocks[0], ProgramState.Empty, null).ToString().Should().BeIgnoringLineEndings("""
+            Block #0, Branching
+            Empty
 
-        new ExplodedNode(cfg.Blocks[1], state, null).ToString().Should().BeIgnoringLineEndings(
-@"Block #1, Operation #0, LocalReferenceOperation: a = true
-Symbols:
-a: No constraints
-");
-        new ExplodedNode(cfg.ExitBlock, state, null).ToString().Should().BeIgnoringLineEndings(
-@"Block #2, Branching
-Symbols:
-a: No constraints
-");
+            """);
+
+        new ExplodedNode(cfg.Blocks[1], state, null).ToString().Should().BeIgnoringLineEndings("""
+            Block #1, Operation #0, LocalReferenceOperation: a = true
+            Symbols:
+            a: No constraints
+
+            """);
+        new ExplodedNode(cfg.ExitBlock, state, null).ToString().Should().BeIgnoringLineEndings("""
+            Block #2, Branching
+            Symbols:
+            a: No constraints
+
+            """);
     }
 
     [TestMethod]
