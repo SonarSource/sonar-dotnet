@@ -1,16 +1,16 @@
 <h2>Why is this an issue?</h2>
 <p><a href="https://en.wikipedia.org/wiki/Short-circuit_evaluation">Short-circuit evaluation</a> is an evaluation strategy for <a
-href="https://en.wikipedia.org/wiki/Logical_connective">Boolean operators</a>, that doesn’t evaluates the second argument of the operator if it is not
+href="https://en.wikipedia.org/wiki/Logical_connective">Boolean operators</a>, that doesn’t evaluate the second argument of the operator if it is not
 needed to determine the result of the operation.</p>
-<p>VB.NET provides logical operators that implement short-circuit evaluation: <code>AndAlso</code> and <code>OrElse</code>, as well as
-non-short-circuit versions: <code>And</code> and <code>Or</code>. Unlike short-circuit operators, non-short-circuit ones evaluate both operands and
-afterwards perform the logical operation.</p>
-<p>For example <code>False AndAlso FunctionCall</code> always results in <code>False</code>, even when <code>FunctionCall</code> invocation would
-raise an exception. Instead, <code>False &amp; FunctionCall</code> also evaluates <code>FunctionCall</code>, and results in an exception if
+<p>VB.NET provides logical operators that implement short-circuiting evaluations <code>AndAlso</code> and <code>OrElse</code>, as well as the
+non-short-circuiting versions <code>And</code> and <code>Or</code>. Unlike short-circuiting operators, the non-short-circuiting operators evaluate
+both operands and afterward perform the logical operation.</p>
+<p>For example <code>False AndAlso FunctionCall</code> always results in <code>False</code> even when the <code>FunctionCall</code> invocation would
+raise an exception. In contrast, <code>False And FunctionCall</code> also evaluates <code>FunctionCall</code>, and results in an exception if
 <code>FunctionCall</code> raises an exception.</p>
 <p>Similarly, <code>True OrElse FunctionCall</code> always results in <code>True</code>, no matter what the return value of <code>FunctionCall</code>
 would be.</p>
-<p>The use of non-short-circuit logic in a boolean context is likely a mistake - one that could cause serious program errors as conditions are
+<p>The use of non-short-circuit logic in a boolean context is likely a mistake, one that could cause serious program errors as conditions are
 evaluated under the wrong circumstances.</p>
 <h2>How to fix it</h2>
 <h3>Code examples</h3>

@@ -13,8 +13,8 @@ that each string instance is immutable and stored, and then is reused everywhere
 <ul>
   <li> a reference to <a
   href="https://learn.microsoft.com/en-us/dotnet/visual-basic/programming-guide/program-structure/me-my-mybase-and-myclass#me">Me</a>: if the instance
-  is publicly accessibly, the lock might be shared </li>
-  <li> a <a href="https://learn.microsoft.com/en-us/dotnet/api/system.type">Type</a> object: if the type class is publicly accessibly, the lock might
+  is publicly accessible, the lock might be shared </li>
+  <li> a <a href="https://learn.microsoft.com/en-us/dotnet/api/system.type">Type</a> object: if the type class is publicly accessible, the lock might
   be shared </li>
   <li> a <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/data-types/string-data-type">string</a> literal or
   instance: if any other part of the program uses the same string, the lock is shared because of interning </li>

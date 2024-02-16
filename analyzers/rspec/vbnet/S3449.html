@@ -3,9 +3,9 @@
 href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/operators/bit-shift-operators">operators</a>, but the right operand of
 the operation needs to be an <code>int</code> or a type that has an <a
 href="https://learn.microsoft.com/en-us/dotnet/visual-basic/programming-guide/language-features/data-types/implicit-and-explicit-conversions">implicit
-conversion</a> to <code>int</code>. However, when the left operand is an <code>object</code>, the compiler’s type checking is turned off, so you can
-pass anything to the right of a shift operator and have it compile. And if the argument can’t be implicitly converted to <code>int</code> at runtime,
-then a <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.csharp.runtimebinder.runtimebinderexception">RuntimeBinderException</a> will be
+conversion</a> to <code>int</code>. However, when the left operand is an <code>object</code>, the compiler’s type checking is turned off, therfore you
+can pass anything to the right of a shift operator and have it compile. If the argument can’t be implicitly converted to <code>int</code> at runtime,
+a <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.csharp.runtimebinder.runtimebinderexception">RuntimeBinderException</a> will be
 raised.</p>
 <pre>
 Dim o As Object = 5

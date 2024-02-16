@@ -2,8 +2,8 @@
 <p>Parameters are part of the <a
 href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/methods#method-signatures">method signature</a> and its
 identity.</p>
-<p>Implementing a method from an interface, a base class, or a partial method and changing one of its parameters' names will confuse and impact its
-readability.</p>
+<p>Implementing a method from an interface, a base class, or a partial method and changing one of its parameters' names will confuse and impact the
+method’s readability.</p>
 <pre data-diff-id="1" data-diff-type="noncompliant">
 interface IBankAccount
 {
@@ -18,8 +18,8 @@ class BankAccount : IBankAccount
   }
 }
 </pre>
-<p>To avoid any ambiguity in the code, parameters' names should match the initial declaration, whether its initial declaration is from an interface, a
-base class, or a partial method.</p>
+<p>To avoid any ambiguity in the code, a parameter’s name should match the initial declaration, whether its initial declaration is from an interface,
+a base class, or a partial method.</p>
 <pre data-diff-id="1" data-diff-type="compliant">
 interface IBankAccount
 {
