@@ -575,6 +575,42 @@ static object Tag(string name, object value) => null;";
         validator.TagValue("Result").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
+    [DataTestMethod]
+    [DataRow("arg is > 42", null, null, null, null)]
+    [DataRow("arg is >= 42", null, null, null, null)]
+    [DataRow("arg is < 42", null, null, null, null)]
+    [DataRow("arg is <= 42", null, null, null, null)]
+    public void RelationalPattern_SetsNumberConstraint(string expression, int? ifMin, int? ifMax, int? elseMin, int? elseMax)
+    {
+        var code = $$"""
+            if ({{expression}})
+            {
+                Tag("If", arg);
+            }
+            else
+            {
+                Tag("Else", arg);
+            }
+            """;
+        var validator = SETestContext.CreateCS(code, "int arg").Validator;
+        if (NumberConstraint.From(ifMin, ifMax) is { } expectedIf)
+        {
+            validator.TagValue("If").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, expectedIf);
+        }
+        else
+        {
+            validator.TagValue("If").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        }
+        if (NumberConstraint.From(elseMin, elseMax) is { } expectedElse)
+        {
+            validator.TagValue("Else").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, expectedElse);
+        }
+        else
+        {
+            validator.TagValue("Else").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        }
+    }
+
     private static void ValidateSetBoolConstraint(string isPattern, OperationKind expectedOperation, bool? expectedBoolConstraint)
     {
         var validator = CreateSetBoolConstraintValidator(isPattern);
