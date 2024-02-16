@@ -4085,7 +4085,7 @@ public class Repro_8678
 // https://github.com/SonarSource/sonar-dotnet/issues/8707
 public class Repro_8707
 {
-    public void Method()
+    public void Catch()
     {
         var success = false;
         Exception exception = null;
@@ -4106,6 +4106,22 @@ public class Repro_8707
         if (exception != null)
         {
             Console.WriteLine(exception);
+        }
+    }
+
+    public void Finally()
+    {
+        int count = 3;
+        while (count > 0)   // Compliant
+        {
+            try
+            {
+                Console.WriteLine();
+            }
+            finally
+            {
+                count--;
+            }
         }
     }
 }

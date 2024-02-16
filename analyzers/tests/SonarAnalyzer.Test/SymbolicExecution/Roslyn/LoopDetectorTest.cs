@@ -312,8 +312,8 @@ public class LoopDetectorTest
             }
             _ = "After loop";                // Block 7
             """,
-            [2, 3, 4, 5],   // Should be [2, 3, 4, 5, 6]
-            [1, 6, 7]);     // Should be [1, 7]
+            [2, 3, 4, 5, 6],
+            [1, 7]);
 
     [TestMethod]
     public void LoopDetector_TryCatchFinally_Nested() =>
@@ -416,8 +416,37 @@ public class LoopDetectorTest
             }
             _ = "After try 1";                  // Block 32
             """,
-            [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 20],                                          // Should be [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
-            [1, 2, 13, 15, 16, 17, 18, 19, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32]);    // Should be [1, 2, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32]
+            [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+            [1, 2, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32]);
+
+    [TestMethod]
+    public void LoopDetector_TryCatchWhenFinally() =>
+        ValidateLoops("""
+            _ = "Before loop";          // Block 1
+            while (condition)           // Block 2
+            {
+                _ = "Inside loop";      // Block 3
+                try
+                {
+                    _ = "Try";          // Block 4
+                }
+                catch when (condition)  // Block 5
+                {
+                    _ = "Catch where";  // Block 6
+                }
+                catch
+                {
+                    _ = "Catch";        // Block 7
+                }
+                finally
+                {
+                    _ = "Finally";      // Block 8
+                }
+            }
+            _ = "After loop";           // Block 9
+            """,
+            [2, 3, 4, 5, 6, 7, 8],
+            [1, 9]);
 
     [TestMethod]
     public void LoopDetector_TouchingLoops() =>

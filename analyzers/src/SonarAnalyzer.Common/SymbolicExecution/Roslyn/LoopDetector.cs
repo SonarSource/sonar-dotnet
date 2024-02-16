@@ -83,11 +83,24 @@ internal class LoopDetector
         }
     }
 
-    private static IEnumerable<int> Successors(ControlFlowGraph cfg, int block)
+    private static IEnumerable<int> Successors(ControlFlowGraph cfg, int index)
     {
-        var successors = cfg.Blocks[block].SuccessorBlocks.Select(x => x.Ordinal);
-        return cfg.Blocks[block].EnclosingRegion(ControlFlowRegionKind.Try) is { } tryRegion
-            ? successors.Concat(tryRegion.ReachableHandlers().Select(x => x.FirstBlockOrdinal))
-            : successors;
+        var block = cfg.Blocks[index];
+        var successors = block.SuccessorBlocks.Select(x => x.Ordinal);
+        if (block.EnclosingRegion(ControlFlowRegionKind.Try) is { } tryRegion)
+        {
+            successors = successors.Concat(tryRegion.ReachableHandlers().Select(x => x.FirstBlockOrdinal));
+        }
+        if (block.EnclosingNonLocalLifetimeRegion() is { Kind: ControlFlowRegionKind.Finally } finallyRegion)
+        {
+            var tryFinallyRegion = finallyRegion.EnclosingRegion;
+            var associatedTryRegion = tryFinallyRegion.NestedRegion(ControlFlowRegionKind.Try);
+            successors = successors.Concat(
+                cfg.Blocks.Where(x => x.IsIn(associatedTryRegion))
+                    .SelectMany(x => x.SuccessorBlocks)
+                    .Where(x => !x.IsIn(tryFinallyRegion))
+                    .Select(x => x.Ordinal));
+        }
+        return successors.Distinct();
     }
 }
