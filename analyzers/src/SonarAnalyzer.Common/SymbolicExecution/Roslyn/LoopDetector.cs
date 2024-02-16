@@ -91,7 +91,7 @@ internal class LoopDetector
         {
             successors = successors.Concat(tryRegion.ReachableHandlers().Select(x => x.FirstBlockOrdinal));
         }
-        if (block.EnclosingRegion(ControlFlowRegionKind.Finally) is { } finallyRegion)
+        if (block.EnclosingNonLocalLifetimeRegion() is { Kind: ControlFlowRegionKind.Finally } finallyRegion)
         {
             var tryFinallyRegion = finallyRegion.EnclosingRegion;
             var associatedTryRegion = tryFinallyRegion.NestedRegion(ControlFlowRegionKind.Try);
