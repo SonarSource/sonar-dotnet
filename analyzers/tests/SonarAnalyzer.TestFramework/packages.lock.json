@@ -84,9 +84,9 @@
       },
       "MSTest.TestFramework": {
         "type": "Direct",
-        "requested": "[3.2.0, )",
-        "resolved": "3.2.0",
-        "contentHash": "jrlSvf3DmE6nqMR194++GdpJfN4evGwDKlCzxC6mowvCj0QVWSPfTltkq9pyXO/ne4gpE8DpPl9dqTg4CNPiUQ=="
+        "requested": "[3.2.1, )",
+        "resolved": "3.2.1",
+        "contentHash": "KA6VJTKX+nE/6FWvScdEhrKR37zHENPhvucGYTMV+7uJ1i3KItGquv3U0pslgEl+EKaJovUn7UJ79UQgEaZzog=="
       },
       "NuGet.Protocol": {
         "type": "Direct",
@@ -484,9 +484,9 @@
       },
       "MSTest.TestFramework": {
         "type": "Direct",
-        "requested": "[3.2.0, )",
-        "resolved": "3.2.0",
-        "contentHash": "jrlSvf3DmE6nqMR194++GdpJfN4evGwDKlCzxC6mowvCj0QVWSPfTltkq9pyXO/ne4gpE8DpPl9dqTg4CNPiUQ=="
+        "requested": "[3.2.1, )",
+        "resolved": "3.2.1",
+        "contentHash": "KA6VJTKX+nE/6FWvScdEhrKR37zHENPhvucGYTMV+7uJ1i3KItGquv3U0pslgEl+EKaJovUn7UJ79UQgEaZzog=="
       },
       "NuGet.Protocol": {
         "type": "Direct",

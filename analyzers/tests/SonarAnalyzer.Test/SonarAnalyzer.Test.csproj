@@ -37,9 +37,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
-    <PackageReference Include="Microsoft.TestPlatform" Version="17.9.0" />
-    <PackageReference Include="MSTest.TestAdapter" Version="3.2.0" />
+    <PackageReference Include="MSTest" Version="3.2.1" />
     <PackageReference Include="Moq" Version="4.18.4" />
     <PackageReference Include="Microsoft.Build.Locator" Version="1.5.5" />
     <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="4.8.0-2.final" />
@@ -50,7 +48,6 @@
       <!-- This package is a dependency of Microsoft.CodeAnalysis.CSharp.Workspaces. It is safe to use since it's compatible with .Net Portable runtime -->
       <NoWarn>NU1701</NoWarn>
     </PackageReference>
-    <PackageReference Include="MSTest.TestFramework" Version="3.2.0" />
     <PackageReference Include="NuGet.Protocol" Version="6.8.0" />
   </ItemGroup>
 
