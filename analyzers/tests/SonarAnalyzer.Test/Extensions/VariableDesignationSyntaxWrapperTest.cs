@@ -25,7 +25,7 @@ using StyleCop.Analyzers.Lightup;
 namespace SonarAnalyzer.Test.Extensions
 {
     [TestClass]
-    public class VariableDesignationSyntaxWrapperTests
+    public class VariableDesignationSyntaxWrapperTest
     {
         [DataTestMethod]
         [DataRow("var (a, b) = (1, 2);", "a,b")]

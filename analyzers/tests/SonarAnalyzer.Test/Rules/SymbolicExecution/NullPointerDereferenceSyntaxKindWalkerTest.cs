@@ -24,7 +24,7 @@ using VB = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic;
 namespace SonarAnalyzer.Test.Rules.SymbolicExecution;
 
 [TestClass]
-public class NullPointerDereferenceSyntaxKindWalkerTests
+public class NullPointerDereferenceSyntaxKindWalkerTest
 {
     [DataTestMethod]
     [DataRow("""await Task.Yield();""")]

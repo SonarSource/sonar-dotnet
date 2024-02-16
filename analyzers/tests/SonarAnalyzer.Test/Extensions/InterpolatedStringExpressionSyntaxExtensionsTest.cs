@@ -30,7 +30,7 @@ using SyntaxVB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 namespace SonarAnalyzer.Test.Extensions;
 
 [TestClass]
-public class InterpolatedStringExpressionSyntaxExtensionsTests
+public class InterpolatedStringExpressionSyntaxExtensionsTest
 {
     private const string CodeSnipetCS = @"
 public class C

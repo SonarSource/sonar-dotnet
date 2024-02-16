@@ -25,7 +25,7 @@ using StyleCop.Analyzers.Lightup;
 namespace SonarAnalyzer.Test.Facade;
 
 [TestClass]
-public class CSharpFacadeTests
+public class CSharpFacadeTest
 {
     [TestMethod]
     public void MethodParameterLookup_ForInvocation()

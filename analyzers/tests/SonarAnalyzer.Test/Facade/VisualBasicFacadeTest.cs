@@ -24,7 +24,7 @@ using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 namespace SonarAnalyzer.Test.Facade;
 
 [TestClass]
-public class VisualBasicFacadeTests
+public class VisualBasicFacadeTest
 {
     [TestMethod]
     public void MethodParameterLookup_ForInvocation()

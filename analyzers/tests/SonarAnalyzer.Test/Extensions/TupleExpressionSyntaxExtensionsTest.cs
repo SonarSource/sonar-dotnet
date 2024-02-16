@@ -25,7 +25,7 @@ using StyleCop.Analyzers.Lightup;
 namespace SonarAnalyzer.Test.Extensions
 {
     [TestClass]
-    public class TupleExpressionSyntaxExtensionsTests
+    public class TupleExpressionSyntaxExtensionsTest
     {
         [DataTestMethod]
         [DataRow("(1, 2)", "1,2")]

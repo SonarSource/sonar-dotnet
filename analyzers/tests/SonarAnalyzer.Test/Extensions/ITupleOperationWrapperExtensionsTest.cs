@@ -27,7 +27,7 @@ using StyleCop.Analyzers.Lightup;
 namespace SonarAnalyzer.Test.Extensions
 {
     [TestClass]
-    public class ITupleOperationWrapperExtensionsTests
+    public class ITupleOperationWrapperExtensionsTest
     {
         [DataTestMethod]
         // Tuple expression on the right side of assignment
