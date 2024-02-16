@@ -1,7 +1,7 @@
 <h2>Why is this an issue?</h2>
 <p>Marking a method with the <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.contracts.pureattribute"><code>Pure</code></a>
-attribute indicates that the method doesn’t make any visible state changes. Therefore, a <code>Pure</code> method should return a result otherwise it
-indicates a no-operation call.</p>
+attribute indicates that the method doesn’t make any visible state changes. Therefore, a <code>Pure</code> method should return a result. Otherwise,
+it indicates a no-operation call.</p>
 <p>Using <code>Pure</code> on a <code>void</code> method is either by mistake or the method is not doing a meaningful task.</p>
 <h2>How to fix it</h2>
 <h3>Code examples</h3>

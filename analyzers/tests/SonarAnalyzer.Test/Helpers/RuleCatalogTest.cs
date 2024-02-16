@@ -79,7 +79,7 @@ namespace SonarAnalyzer.Test.Helpers
             ValidateDescription(
                 "S107",
                 "track of their\nposition.",    // Html contains new line with no spaces around it
-                "Methods with a long parameter list are difficult to use, as maintainers must figure out the role of each parameter and keep track of their position.");
+                "Methods with a long parameter list are difficult to use because maintainers must figure out the role of each parameter and keep track of their position.");
 
         private static void AssertRuleS103(RuleDescriptor rule)
         {

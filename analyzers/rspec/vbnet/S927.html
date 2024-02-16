@@ -1,7 +1,7 @@
 <h2>Why is this an issue?</h2>
 <p>Parameters are part of the <a href="https://en.wikipedia.org/wiki/Type_signature#Method_signature">method signature</a> and its identity.</p>
-<p>Implementing a method from an interface, a base class, or a partial method and changing one of its parameters' names will confuse and impact its
-readability.</p>
+<p>Implementing a method from an interface, a base class, or a partial method and changing one of its parameters' names will confuse and impact the
+method’s readability.</p>
 <pre data-diff-id="1" data-diff-type="noncompliant">
 Interface IBankAccount
     Sub AddMoney(money As Integer)
@@ -15,8 +15,8 @@ Class BankAccount
     End Sub
 End Class
 </pre>
-<p>To avoid any ambiguity in the code, parameters' names should match the initial declaration, whether its initial declaration is from an interface, a
-base class, or a partial method.</p>
+<p>To avoid any ambiguity in the code, a parameter’s name should match the initial declaration, whether its initial declaration is from an interface,
+a base class, or a partial method.</p>
 <pre data-diff-id="1" data-diff-type="compliant">
 Interface IBankAccount
     Sub AddMoney(money As Integer)
