@@ -34,6 +34,15 @@ namespace SonarAnalyzer.Extensions
                 .GetArgumentsOfKnownType(knownType, semanticModel)
                 .Select(argument => semanticModel.GetSymbolInfo(argument.Expression).Symbol);
 
+        internal static IEnumerable<ISymbol> GetSymbolsDerivedFromKnownType(this SeparatedSyntaxList<ArgumentSyntax> syntaxList, KnownType knownType, SemanticModel semanticModel) =>
+            syntaxList
+                .GetArgumentsDerivedFromKnownType(knownType, semanticModel)
+                .Select(argument => semanticModel.GetSymbolInfo(argument.Expression).Symbol);
+
+        internal static IEnumerable<ArgumentSyntax> GetArgumentsDerivedFromKnownType(this SeparatedSyntaxList<ArgumentSyntax> syntaxList, KnownType knownType, SemanticModel semanticModel) =>
+            syntaxList
+                .Where(argument => semanticModel.GetTypeInfo(argument.Expression).Type.DerivesFrom(knownType));
+
         internal static bool NameIs(this ArgumentSyntax argument, string name) =>
             argument.NameColon?.Name.Identifier.Text == name;
 

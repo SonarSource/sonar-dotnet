@@ -33,11 +33,85 @@ public sealed class ExceptionsShouldBeLogged : SonarDiagnosticAnalyzer
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(c =>
             {
-                var node = c.Node;
-                if (true)
+                var catchClauseSyntax = (CatchClauseSyntax)c.Node;
+                var walker = new CatchLoggingInvocationWalker(c.SemanticModel);
+                if (walker.SafeVisit(catchClauseSyntax) && !walker.IsExceptionLogged)
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
+                    foreach (var invocation in walker.LoggingInvocations)
+                    {
+                        c.ReportIssue(Diagnostic.Create(Rule, invocation.GetLocation()));
+                    }
                 }
             },
-            SyntaxKind.InvocationExpression);
+            SyntaxKind.CatchClause);
+
+    // The walker is used to:
+    // - visit the catch clause (all the nested catch clauses are skipped; they will be visited independently)
+    // - save the declared exception
+    // - find all the logging invocations and check if the exception is logged
+    // - if the exception is logged, it will stop looking for the other invocations and set IsExceptionLogged to true
+    // - if the exception is not logged, it will visit all the invocations
+    private sealed class CatchLoggingInvocationWalker : SafeCSharpSyntaxWalker
+    {
+        private static readonly HashSet<string> MicrosoftExtensionsLoggingMethods =
+        [
+            "Log",
+            "LogCritical",
+            "LogDebug",
+            "LogError",
+            "LogInformation",
+            "LogTrace",
+            "LogWarning"
+        ];
+
+        private readonly SemanticModel model;
+        private bool isFirstCatchClauseVisited;
+        private ILocalSymbol catchException;
+
+        public bool IsExceptionLogged { get; private set; }
+        public readonly List<InvocationExpressionSyntax> LoggingInvocations = new();
+
+        public CatchLoggingInvocationWalker(SemanticModel model)
+        {
+            this.model = model;
+        }
+
+        public override void VisitCatchClause(CatchClauseSyntax node)
+        {
+            if (node.Declaration != null && !node.Declaration.Identifier.IsKind(SyntaxKind.None))
+            {
+                catchException = model.GetDeclaredSymbol(node.Declaration);
+            }
+
+            // We want to look for logging invocations only in the main catch clause.
+            if (!isFirstCatchClauseVisited)
+            {
+                isFirstCatchClauseVisited = true;
+                base.VisitCatchClause(node);
+            }
+        }
+
+        public override void VisitInvocationExpression(InvocationExpressionSyntax node)
+        {
+            if (IsLoggingInvocation(node, model))
+            {
+                var currentException = node.GetArgumentSymbolsDerivedFromKnownType(KnownType.System_Exception, model).FirstOrDefault();
+                if (currentException != null && currentException.Equals(catchException))
+                {
+                    IsExceptionLogged = true;
+                    return;
+                }
+                else
+                {
+                    LoggingInvocations.Add(node);
+                }
+            }
+            base.VisitInvocationExpression(node);
+        }
+
+        private static bool IsLoggingInvocation(InvocationExpressionSyntax invocationSyntax, SemanticModel model) =>
+            MicrosoftExtensionsLoggingMethods.Contains(invocationSyntax.GetIdentifier().ToString())
+            && model.GetSymbolInfo(invocationSyntax).Symbol is { } invocationSymbol
+            && invocationSymbol.ContainingType.Is(KnownType.Microsoft_Extensions_Logging_LoggerExtensions);
+    }
 }

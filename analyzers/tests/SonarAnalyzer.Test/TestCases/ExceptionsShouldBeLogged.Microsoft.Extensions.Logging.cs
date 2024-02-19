@@ -188,10 +188,18 @@ public class TestCases
         }
 
         try { }
+        catch (DivideByZeroException e)
+        {
+            logger.LogWarning(new EventId(1), e, "Message!");
+            logger.LogInformation(new EventId(1), "Message!");          // Compliant - the exception has been loged already
+        }
         catch (Exception e)
         {
-            logger.LogWarning(new EventId(1), "Message!");
             logger.LogWarning(new EventId(1), e, "Message!");
+            if (true)
+            {
+                logger.LogInformation(new EventId(1), "Message!");      // Compliant - the exception has been loged already
+            }
         }
 
         try { }
@@ -298,35 +306,53 @@ public class TestCases
         }
     }
 
-    private void LogFromNestedCatchBlocks()
+    private void LogFromNestedCatchBlocks(Exception wrongException)
     {
         try { }
         catch (Exception e)
         {
-            logger.LogWarning("Message!");              // Noncompliant
+            logger.LogWarning("Message!");                  // Noncompliant
+            logger.LogWarning(wrongException, "Message!");  // Noncompliant - wrong exception
             try { }
             catch (DivideByZeroException)
             {
-                logger.LogCritical("Message!");         // Noncompliant
+                logger.LogCritical("Message!");             // Noncompliant
             }
             catch (AggregateException e1)
             {
-                logger.LogCritical(e, "Message!");
+                logger.LogCritical(e, "Message!");          // Noncompliant - wrong exception
             }
             catch (Exception e2)
             {
                 logger.LogCritical(e2, "Message!");
             }
         }
+    }
 
+    private void ReAssignment()
+    {
         try { }
         catch (Exception e)
         {
-            try { }
-            catch (Exception e2)
-            {
-                logger.LogCritical(e2, "Message!");    // Noncompliant - Wrong exception
-            }
+            var other = e;
+            logger.LogWarning(other, "Message!");     // Noncompliant
+        }
+    }
+
+    private void Filtering()
+    {
+        try { }
+        catch (Exception e) when (e is InvalidCastException)
+        {
+            logger.LogWarning(e, "Message!");
+        }
+        catch (Exception e) when (e is DivideByZeroException divideByZeroException)
+        {
+            logger.LogWarning(divideByZeroException, "Message!");   // Noncompliant - FP the exception has other name
+        }
+        catch (Exception e) when (e is InvalidOperationException invalidOperationException || e is InvalidTimeZoneException invalidTimeZoneException)
+        {
+            logger.LogWarning(e, "Message!");                       // Compliant - the exception is logged (even if it has other names)
         }
     }
 
@@ -365,6 +391,11 @@ public class TestCases
         {
             new CustomLogger().LogCritical("Message!");
         }
+    }
+
+    public void LogOutsideCatchStatement()
+    {
+        logger.LogCritical("Message!");
     }
 
     public class CustomLogger
