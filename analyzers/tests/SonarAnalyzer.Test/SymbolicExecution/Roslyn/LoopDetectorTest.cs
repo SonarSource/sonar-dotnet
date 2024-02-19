@@ -469,8 +469,8 @@ public class LoopDetectorTest
             }
             _ = "After loop";                           // Block 7
             """,
-            [2, 3, 4, 5, 6],    // Should be [2, 3, 4, 6]
-            [1, 7]);            // Should be [1, 5, 7]
+            [2, 3, 4, 6],
+            [1, 5, 7]);
 
     [TestMethod]
     public void LoopDetector_TouchingLoops() =>
