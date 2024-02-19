@@ -18,14 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Extensions
-{
-    internal static class BaseArgumentListSyntaxExtensions
-    {
-        internal static ArgumentSyntax GetArgumentByName(this BaseArgumentListSyntax list, string name) =>
-            list.Arguments.FirstOrDefault(argument => argument.NameIs(name));
+namespace SonarAnalyzer.Rules.MesageTemplates;
 
-        internal static ArgumentSyntax GetArgumentByNameOrPosition(this BaseArgumentListSyntax list, string name, int index) =>
-            list.Arguments.FirstOrDefault(argument => argument.NameIs(name)) ?? list.Arguments[index];
-    }
+public interface IMessageTemplateCheck
+{
+    DiagnosticDescriptor Rule { get; }
+
+    void Execute(SonarSyntaxNodeReportingContext context, InvocationExpressionSyntax invocation, ArgumentSyntax templateArgument, MessageTemplates.Placeholder[] placeholders);
 }

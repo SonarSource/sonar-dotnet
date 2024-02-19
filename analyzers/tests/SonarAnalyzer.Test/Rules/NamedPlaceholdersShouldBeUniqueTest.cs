@@ -18,14 +18,24 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Extensions
-{
-    internal static class BaseArgumentListSyntaxExtensions
-    {
-        internal static ArgumentSyntax GetArgumentByName(this BaseArgumentListSyntax list, string name) =>
-            list.Arguments.FirstOrDefault(argument => argument.NameIs(name));
+using SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.Rules.MesageTemplates;
 
-        internal static ArgumentSyntax GetArgumentByNameOrPosition(this BaseArgumentListSyntax list, string name, int index) =>
-            list.Arguments.FirstOrDefault(argument => argument.NameIs(name)) ?? list.Arguments[index];
-    }
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class NamedPlaceholdersShouldBeUniqueTest
+{
+    private static readonly IEnumerable<MetadataReference> LoggingReferences =
+        NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions()
+        .Concat(NuGetMetadataReference.NLog(Constants.NuGetLatestVersion))
+        .Concat(NuGetMetadataReference.Serilog(Constants.NuGetLatestVersion));
+
+    [TestMethod]
+    public void NamedPlaceholdersShouldBeUnique_CS() =>
+        new VerifierBuilder<MessageTemplateAnalyzer>()
+        .AddPaths("NamedPlaceholdersShouldBeUnique.cs")
+        .AddReferences(LoggingReferences)
+        .WithOnlyDiagnostics(NamedPlaceholdersShouldBeUnique.S6677)
+        .Verify();
 }
