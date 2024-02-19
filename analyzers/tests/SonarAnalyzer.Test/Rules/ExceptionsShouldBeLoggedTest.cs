@@ -29,5 +29,8 @@ public class ExceptionsShouldBeLoggedTest
 
     [TestMethod]
     public void ExceptionsShouldBeLogged_CS() =>
-        builder.AddPaths("ExceptionsShouldBeLogged.cs").Verify();
+        builder
+            .AddPaths("ExceptionsShouldBeLogged.Microsoft.Extensions.Logging.cs")
+            .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions(Constants.NuGetLatestVersion))
+            .Verify();
 }
