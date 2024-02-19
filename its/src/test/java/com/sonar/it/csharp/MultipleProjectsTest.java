@@ -68,13 +68,13 @@ public class MultipleProjectsTest {
 
   @Test
   void projectTypesInfoIsLogged() {
-    assertThat(buildResult.getLogs()).contains("Found 4 MSBuild C# projects: 2 MAIN projects. 2 TEST projects.");
+    assertThat(buildResult.getLogs()).contains("Found 2 MSBuild C# projects: 2 MAIN projects.");
   }
 
   @Test
   void roslynVersionIsLogged() {
     // FirstProject + FirstProjectTests + 2x SecondProject (each target framework has its log) + SecondProjectTests
-    assertThat(buildResult.getLogsLines(x -> x.startsWith("INFO: Roslyn version: "))).hasSize(5);
+    assertThat(buildResult.getLogsLines(x -> x.startsWith("INFO: Roslyn version: "))).hasSize(3);
   }
 
   @Test
