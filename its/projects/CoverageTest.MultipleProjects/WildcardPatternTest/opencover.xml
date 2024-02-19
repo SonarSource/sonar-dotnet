@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-This file is a modified version of ...\sonar-dotnet\its\projects\MultipleProjects\opencover.xml
+This file is a modified version of ...\sonar-dotnet\its\projects\CoverageTest.MultipleProjects\opencover.xml
 From this file the module for FirstProject is removed so the IT using it can verify that the correct opencover.xml is loaded.
 -->
 <CoverageSession xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="4.7.922.0">
