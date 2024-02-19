@@ -75,44 +75,5 @@ public class Sample
             block.IsEnclosedIn(ControlFlowRegionKind.TryAndCatch).Should().BeFalse();   // Because it's enclosed in Try
             block.IsEnclosedIn(ControlFlowRegionKind.LocalLifetime).Should().BeTrue();  // When asking for it, it should return
         }
-
-        [TestMethod]
-        public void IsIn()
-        {
-            const string code = """
-                public class Sample
-                {
-                    public void Method()
-                    {
-                        _ = "Before Try";   // Block 1
-                        try
-                        {
-                            _ = "Try";      // Block 2
-                        }
-                        catch
-                        {
-                            _ = "Catch";    // Block 3
-                        }
-                        _ = "After Catch";  // Block 4
-                    }
-                }
-                """;
-            var cfg = TestHelper.CompileCfgCS(code);
-            var tryAndCatchRegion = cfg.Root.NestedRegions.Single();
-            var tryRegion = tryAndCatchRegion.NestedRegions.First();
-            var catchRegion = tryAndCatchRegion.NestedRegions.Last();
-            cfg.Blocks[1].IsIn(tryAndCatchRegion).Should().BeFalse();
-            cfg.Blocks[1].IsIn(tryRegion).Should().BeFalse();
-            cfg.Blocks[1].IsIn(catchRegion).Should().BeFalse();
-            cfg.Blocks[2].IsIn(tryAndCatchRegion).Should().BeTrue();
-            cfg.Blocks[2].IsIn(tryRegion).Should().BeTrue();
-            cfg.Blocks[2].IsIn(catchRegion).Should().BeFalse();
-            cfg.Blocks[3].IsIn(tryAndCatchRegion).Should().BeTrue();
-            cfg.Blocks[3].IsIn(tryRegion).Should().BeFalse();
-            cfg.Blocks[3].IsIn(catchRegion).Should().BeTrue();
-            cfg.Blocks[4].IsIn(tryAndCatchRegion).Should().BeFalse();
-            cfg.Blocks[4].IsIn(tryRegion).Should().BeFalse();
-            cfg.Blocks[4].IsIn(catchRegion).Should().BeFalse();
-        }
     }
 }
