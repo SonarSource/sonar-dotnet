@@ -1,6 +1,6 @@
 ﻿global using System.Runtime.CompilerServices;
 
-namespace CSharpLatest.CSharp10;
+namespace CSharpLatest.CSharp10Features;
 
 public class ClassThatDoesNotUseAnythingFromCompilerServicesNamespace
 {

@@ -1,4 +1,4 @@
-﻿namespace CSharpLatest.CSharp10
+﻿namespace CSharpLatest.CSharp10Features
 {
     // In .NET 6, the constructors/methods with MutexSecurity and MutexRights are in the MutexAcl class inside the Microsoft.Windows.Compatibility NuGet.
     // However, Microsoft.Windows.Compatibility does not contain DLLs, but rather a target to liaise with the .NET Framework DLLs.

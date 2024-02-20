@@ -2,7 +2,7 @@
 using System.Net.Http;
 using System.Net.Http.Json;
 
-namespace CSharpLatest.CSharp9
+namespace CSharpLatest.CSharp9Features
 {
     internal class GetWeatherForecastWithRecords
     {

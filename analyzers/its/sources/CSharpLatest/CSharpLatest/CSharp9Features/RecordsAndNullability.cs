@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
-namespace CSharpLatest.CSharp9
+namespace CSharpLatest.CSharp9Features
 {
     internal class RecordsAndNullability
     {

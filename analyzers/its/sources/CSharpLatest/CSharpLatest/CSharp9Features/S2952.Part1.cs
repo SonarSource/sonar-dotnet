@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace CSharpLatest.CSharp9.S2952
+namespace CSharpLatest.CSharp9Features.S2952
 {
     public partial class ResourceHolder : IDisposable
     {

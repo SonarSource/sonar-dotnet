@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CSharpLatest.CSharp9
+namespace CSharpLatest.CSharp9Features
 {
     public unsafe class S4000
     {

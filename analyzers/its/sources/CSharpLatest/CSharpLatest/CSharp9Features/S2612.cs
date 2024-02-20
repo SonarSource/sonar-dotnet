@@ -1,6 +1,6 @@
 ﻿using System.Security.AccessControl;
 
-namespace CSharpLatest.CSharp9
+namespace CSharpLatest.CSharp9Features
 {
     public class S2612
     {

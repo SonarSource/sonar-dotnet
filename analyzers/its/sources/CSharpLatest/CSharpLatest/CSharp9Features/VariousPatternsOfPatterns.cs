@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using static CSharpLatest.CSharp9.VariousPatternsOfPatterns.AccessType;
-using static CSharpLatest.CSharp9.VariousPatternsOfPatterns.ContentType;
+using static CSharpLatest.CSharp9Features.VariousPatternsOfPatterns.AccessType;
+using static CSharpLatest.CSharp9Features.VariousPatternsOfPatterns.ContentType;
 
-namespace CSharpLatest.CSharp9
+namespace CSharpLatest.CSharp9Features
 {
     internal class VariousPatternsOfPatterns
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CSharpLatest.CSharp9.S4583
+namespace CSharpLatest.CSharp9Features.S4583
 {
     public partial class CallerWrapperAnotherFile
     {

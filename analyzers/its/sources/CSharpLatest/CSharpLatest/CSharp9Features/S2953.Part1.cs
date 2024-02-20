@@ -1,4 +1,4 @@
-﻿namespace CSharpLatest.CSharp9.S2953
+﻿namespace CSharpLatest.CSharp9Features.S2953
 {
     public partial record MyPartial
     {

@@ -1,4 +1,4 @@
-﻿namespace CSharpLatest.CSharp10
+﻿namespace CSharpLatest.CSharp10Features
 {
     // Generic Attributes
     public class MyAttribute<T> : Attribute

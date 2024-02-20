@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CSharpLatest.CSharp9
+namespace CSharpLatest.CSharp9Features
 {
     public class Food { public bool HasTaste; }
     public class Meat : Food { public bool IsRed; }

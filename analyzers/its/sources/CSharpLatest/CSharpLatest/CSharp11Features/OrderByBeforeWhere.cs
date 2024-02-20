@@ -1,4 +1,4 @@
-﻿namespace CSharpLatest.CSharp11
+﻿namespace CSharpLatest.CSharp11Features
 {
     public static class OrderByBeforeWhere
     {

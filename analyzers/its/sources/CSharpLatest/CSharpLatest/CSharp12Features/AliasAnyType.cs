@@ -1,6 +1,6 @@
 ﻿using Point = (int x, int y);
 
-namespace CSharpLatest.CSharp12
+namespace CSharpLatest.CSharp12Features
 {
     using PointDictionary = Dictionary<string, Point>;
 

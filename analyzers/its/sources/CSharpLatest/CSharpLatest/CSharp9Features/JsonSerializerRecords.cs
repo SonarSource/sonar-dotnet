@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.Json;
 
-namespace CSharpLatest.CSharp9
+namespace CSharpLatest.CSharp9Features
 {
     internal class JsonSerializerRecords
     {

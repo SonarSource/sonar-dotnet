@@ -1,9 +1,9 @@
 ﻿using System;
-using CSharpLatest.CSharp9.CommercialRegistration;
-using CSharpLatest.CSharp9.ConsumerVehicleRegistration;
-using CSharpLatest.CSharp9.LiveryRegistration;
+using CSharpLatest.CSharp9Features.CommercialRegistration;
+using CSharpLatest.CSharp9Features.ConsumerVehicleRegistration;
+using CSharpLatest.CSharp9Features.LiveryRegistration;
 
-namespace CSharpLatest.CSharp9
+namespace CSharpLatest.CSharp9Features
 {
     // https://docs.microsoft.com/en-us/dotnet/csharp/tutorials/pattern-matching
     namespace ConsumerVehicleRegistration

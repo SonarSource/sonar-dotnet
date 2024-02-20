@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
 
-namespace CSharpLatest.CSharp11
+namespace CSharpLatest.CSharp11Features
 {
     public static class SetPropertiesInsteadOfLinqMethods
     {

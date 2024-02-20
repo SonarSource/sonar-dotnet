@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.Contracts;
 
-namespace CSharpLatest.CSharp9
+namespace CSharpLatest.CSharp9Features
 {
     record Record
     {

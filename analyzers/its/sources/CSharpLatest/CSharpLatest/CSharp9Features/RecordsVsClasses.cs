@@ -2,7 +2,7 @@
 using System.Linq;
 using static System.Console;
 
-namespace CSharpLatest.CSharp9
+namespace CSharpLatest.CSharp9Features
 {
     internal class RecordsVsClasses
     {

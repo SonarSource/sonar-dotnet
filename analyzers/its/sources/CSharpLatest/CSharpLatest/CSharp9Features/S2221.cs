@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace CSharpLatest.CSharp9
+namespace CSharpLatest.CSharp9Features
 {
     public class S2221
     {

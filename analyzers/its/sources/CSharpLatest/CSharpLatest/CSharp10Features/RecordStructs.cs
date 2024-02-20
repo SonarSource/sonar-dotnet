@@ -1,4 +1,4 @@
-﻿namespace CSharpLatest.CSharp10
+﻿namespace CSharpLatest.CSharp10Features
 {
     // Record structs
     public record struct RecordStruct(List<string> Property)

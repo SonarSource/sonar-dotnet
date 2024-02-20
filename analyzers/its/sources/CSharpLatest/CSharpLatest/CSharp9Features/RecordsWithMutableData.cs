@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static CSharpLatest.CSharp9.RecordsUsingWith;
+using static CSharpLatest.CSharp9Features.RecordsUsingWith;
 
-namespace CSharpLatest.CSharp9
+namespace CSharpLatest.CSharp9Features
 {
     internal class RecordsWithMutableData
     {

@@ -1,4 +1,4 @@
-﻿namespace CSharpLatest.CSharp9
+﻿namespace CSharpLatest.CSharp9Features
 {
     public sealed record Apple
     {

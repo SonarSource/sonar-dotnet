@@ -1,4 +1,4 @@
-﻿namespace CSharpLatest.CSharp12
+﻿namespace CSharpLatest.CSharp12Features
 {
     internal class DefaultLambdaParameters
     {
