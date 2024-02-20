@@ -217,6 +217,10 @@ It can still be used when and where it makes sense. For instance, when a class h
 implementing generic interfaces (such as `IComparable`, `IDisposable`), it can make sense to have regions 
 for the implementation of these interfaces.
 
+## ValueTuples
+
+Do not use `ValueTuples` in production code. The usage in test projects is fine. `ValueTuples` are not supported in MsBuild 14 and while MsBuild 14 is not officially supported anymore, we still don't want to break it, if we can avoid it.
+
 ## VB.NET Specifics
 
 Empty lines should be used between blocks, `Namespace`/`End Namespace` statements, `Class`/`End Class` statements
