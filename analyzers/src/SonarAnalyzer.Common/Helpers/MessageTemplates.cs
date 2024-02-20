@@ -27,16 +27,16 @@ namespace SonarAnalyzer.Helpers;
 /// </summary>
 public static class MessageTemplates
 {
-    private const string NamePattern = @"[0-9a-zA-Z_]+";
-    private const string PlaceholderPattern = @$"(?<Placeholder>{NamePattern})";
-    private const string AlignmentPattern = @"(,-?[0-9]+)?";
+    private const string NamePattern = "[0-9a-zA-Z_]+";
+    private const string PlaceholderPattern = $"(?<Placeholder>{NamePattern})";
+    private const string AlignmentPattern = "(,-?[0-9]+)?";
     private const string FormatPattern = @"(:[^\}]+)?";
 
     private const string HolePattern = "{" + "[@$]?" + PlaceholderPattern + AlignmentPattern + FormatPattern + "}";
     private const string TextPattern = @"([^\{]|\{\{|\}\})+";
     private const string TemplatePattern = $"^({TextPattern}|{HolePattern})*$";
 
-    private static readonly Regex RxTemplate = new(TemplatePattern, RegexOptions.Compiled, TimeSpan.FromMilliseconds(300));
+    private static readonly Regex TemplateRegex = new(TemplatePattern, RegexOptions.Compiled, TimeSpan.FromMilliseconds(300));
 
     /// <summary>
     /// Matches and extracts placeholders from a template string.
@@ -44,7 +44,7 @@ public static class MessageTemplates
     /// </summary>
     public static ParseResult Parse(string template)
     {
-        if (RxTemplate.SafeMatch(template) is { Success: true } match)
+        if (TemplateRegex.SafeMatch(template) is { Success: true } match)
         {
             var placeholders = match.Groups["Placeholder"].Captures
                  .OfType<Capture>()

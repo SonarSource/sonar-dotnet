@@ -114,7 +114,6 @@ public class MessageTemplatesTest
     }
 
     [DataTestMethod]
-
     [DataRow("{")]                              // Left bracket is not allowed
     [DataRow("{{{")]                            // Third left bracket is not allowed (first two are valid)
     [DataRow("{}")]                             // Empty placeholder is not allowed
