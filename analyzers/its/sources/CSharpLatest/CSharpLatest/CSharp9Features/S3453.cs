@@ -1,25 +1,24 @@
-﻿namespace CSharpLatest.CSharp9Features
+﻿namespace CSharpLatest.CSharp9Features;
+
+public class S3453
 {
-    public class S3453
+    public class Foo
     {
-        public class Foo
-        {
-            public static readonly Foo Instance = new();
+        public static readonly Foo Instance = new();
 
-            public bool IsActive => true;
+        public bool IsActive => true;
 
-            private Foo() { }
-        }
+        private Foo() { }
+    }
 
-        public class Bar
-        {
-            public static readonly BarInner Instance = new ();
+    public class Bar
+    {
+        public static readonly BarInner Instance = new ();
 
-            public bool IsActive => true;
+        public bool IsActive => true;
 
-            private Bar() { }
+        private Bar() { }
 
-            public class BarInner { }
-        }
+        public class BarInner { }
     }
 }

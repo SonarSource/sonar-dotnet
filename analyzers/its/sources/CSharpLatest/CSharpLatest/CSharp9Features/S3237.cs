@@ -1,13 +1,12 @@
-﻿namespace CSharpLatest.CSharp9Features
-{
-    public class S3237
-    {
-        int count;
+﻿namespace CSharpLatest.CSharp9Features;
 
-        public int Count
-        {
-            get { return count; }
-            init { count = 3; }
-        }
+public class S3237
+{
+    int count;
+
+    public int Count
+    {
+        get { return count; }
+        init { count = 3; }
     }
 }

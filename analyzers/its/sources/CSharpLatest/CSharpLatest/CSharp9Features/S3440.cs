@@ -1,35 +1,34 @@
-﻿namespace CSharpLatest.CSharp9Features
+﻿namespace CSharpLatest.CSharp9Features;
+
+public class S3440
 {
-    public class S3440
+    public void Foo()
     {
-        public void Foo()
+        int y = 6;
+        y = y switch
         {
-            int y = 6;
-            y = y switch
-            {
-                5 => 5,
-                6 => 6
-            };
-        }
+            5 => 5,
+            6 => 6
+        };
+    }
 
-        private int? f;
+    private int? f;
 
-        public int Property
+    public int Property
+    {
+        get
         {
-            get
+            if (f != null)
             {
-                if (f != null)
-                {
-                    f = null;
-                }
-                return 1;
+                f = null;
             }
-            init
+            return 1;
+        }
+        init
+        {
+            if (f != null)
             {
-                if (f != null)
-                {
-                    f = null;
-                }
+                f = null;
             }
         }
     }

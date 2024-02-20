@@ -1,15 +1,14 @@
-﻿namespace CSharpLatest.CSharp9Features
+﻿namespace CSharpLatest.CSharp9Features;
+
+public class S3626
 {
-    public class S3626
+    int Prop
     {
-        int Prop
+        init
         {
-            init
-            {
-                goto A;
-                A:
-                return;
-            }
+            goto A;
+            A:
+            return;
         }
     }
 }

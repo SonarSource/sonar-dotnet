@@ -1,11 +1,10 @@
-﻿namespace CSharpLatest.CSharp10Features
+﻿namespace CSharpLatest.CSharp10Features;
+
+internal class LambdaAttributes
 {
-    internal class LambdaAttributes
+    public void Example()
     {
-        public void Example()
-        {
-            //Lambda Attributes 
-            Action a =[MyAttribute<int>("asd")] () => { Console.WriteLine("Hello world."); };
-        }
+        //Lambda Attributes 
+        Action a =[MyAttribute<int>("asd")] () => { Console.WriteLine("Hello world."); };
     }
 }

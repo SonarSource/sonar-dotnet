@@ -1,30 +1,29 @@
-﻿namespace CSharpLatest.CSharp9Features
-{
-    public class S3776
-    {
-        string field;
-        private int one, two;
+﻿namespace CSharpLatest.CSharp9Features;
 
-        string Property
+public class S3776
+{
+    string field;
+    private int one, two;
+
+    string Property
+    {
+        init
         {
-            init
+            if ((one is 1 or 2) || (two is 3 or 5) || (two is 3 or 5) || (two is 3 or 5)
+                || (two is 3 or 5) || (two is 3 or 5) || (two is 3 or 5) || (two is 3 or 5)
+                || (two is 3 or 5) || (two is 3 or 5) || (two is 3 or 5) || (two is 3 or 5)
+                || (two is 3 or 5) || (two is 3 or 5) || (two is 3 or 5) || (two is 3 or 5)
+                || (two is 3 or 5) || (two is 3 or 5) || (two is 3 or 5) || (two is 3 or 5))
             {
-                if ((one is 1 or 2) || (two is 3 or 5) || (two is 3 or 5) || (two is 3 or 5)
-                    || (two is 3 or 5) || (two is 3 or 5) || (two is 3 or 5) || (two is 3 or 5)
-                    || (two is 3 or 5) || (two is 3 or 5) || (two is 3 or 5) || (two is 3 or 5)
-                    || (two is 3 or 5) || (two is 3 or 5) || (two is 3 or 5) || (two is 3 or 5)
-                    || (two is 3 or 5) || (two is 3 or 5) || (two is 3 or 5) || (two is 3 or 5))
-                {
-                    field = "";
-                }
+                field = "";
             }
         }
-
-        bool ChainedSimilarConditionsWithParentheses(int one, int two) =>
-            (one is 1 or 2) || (two is 3 or 5) || (two is 3 or 5) || (two is 3 or 5)
-            || (two is 3 or 5) || (two is 3 or 5) || (two is 3 or 5) || (two is 3 or 5)
-            || (two is 3 or 5) || (two is 3 or 5) || (two is 3 or 5) || (two is 3 or 5)
-            || (two is 3 or 5) || (two is 3 or 5) || (two is 3 or 5) || (two is 3 or 5)
-            || (two is 3 or 5) || (two is 3 or 5) || (two is 3 or 5) || (two is 3 or 5);
     }
+
+    bool ChainedSimilarConditionsWithParentheses(int one, int two) =>
+        (one is 1 or 2) || (two is 3 or 5) || (two is 3 or 5) || (two is 3 or 5)
+        || (two is 3 or 5) || (two is 3 or 5) || (two is 3 or 5) || (two is 3 or 5)
+        || (two is 3 or 5) || (two is 3 or 5) || (two is 3 or 5) || (two is 3 or 5)
+        || (two is 3 or 5) || (two is 3 or 5) || (two is 3 or 5) || (two is 3 or 5)
+        || (two is 3 or 5) || (two is 3 or 5) || (two is 3 or 5) || (two is 3 or 5);
 }

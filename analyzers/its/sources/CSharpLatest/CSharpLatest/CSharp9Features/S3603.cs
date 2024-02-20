@@ -1,18 +1,17 @@
 ﻿using System.Diagnostics.Contracts;
 
-namespace CSharpLatest.CSharp9Features
+namespace CSharpLatest.CSharp9Features;
+
+record Record
 {
-    record Record
+    Record()
     {
-        Record()
+        [Pure]
+        void LocalFunction()
         {
             [Pure]
-            void LocalFunction()
+            void NestedLocalFunction()
             {
-                [Pure]
-                void NestedLocalFunction()
-                {
-                }
             }
         }
     }

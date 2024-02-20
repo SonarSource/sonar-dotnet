@@ -1,32 +1,31 @@
-﻿namespace CSharpLatest.CSharp9Features
+﻿namespace CSharpLatest.CSharp9Features;
+
+public partial record Record3
 {
-    public partial record Record3
+    partial void Method3(); // Noncompliant
+
+    partial void Method2()
     {
-        partial void Method3(); // Noncompliant
 
-        partial void Method2()
-        {
+    }
 
-        }
+    public partial void M7()
+    {
 
-        public partial void M7()
-        {
+    }
 
-        }
+    public partial void M10()
+    {
 
-        public partial void M10()
-        {
+    }
 
-        }
+    public partial int M11()
+    {
+        return 42;
+    }
 
-        public partial int M11()
-        {
-            return 42;
-        }
-
-        public partial void M12(out string someParam)
-        {
-            someParam = "";
-        }
+    public partial void M12(out string someParam)
+    {
+        someParam = "";
     }
 }

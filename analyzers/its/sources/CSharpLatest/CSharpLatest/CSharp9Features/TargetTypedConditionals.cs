@@ -1,18 +1,17 @@
-﻿namespace CSharpLatest.CSharp9Features
+﻿namespace CSharpLatest.CSharp9Features;
+
+public class TargetTypeConditionals
 {
-    public class TargetTypeConditionals
+    public class Person { public string Name; }
+    public class Student : Person { public int Grade; }
+    public class Customer : Person { public bool HasMoney; }
+
+    public void Method(Student s, Customer c, int b)
     {
-        public class Person { public string Name; }
-        public class Student : Person { public int Grade; }
-        public class Customer : Person { public bool HasMoney; }
+        // The feature is in progress
+        // Person person = s ?? c;
 
-        public void Method(Student s, Customer c, int b)
-        {
-            // The feature is in progress
-            // Person person = s ?? c;
-
-            // The feature is in progress
-            // int? result = b ? 0 : null;
-        }
+        // The feature is in progress
+        // int? result = b ? 0 : null;
     }
 }

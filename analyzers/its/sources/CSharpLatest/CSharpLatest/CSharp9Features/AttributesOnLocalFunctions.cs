@@ -1,15 +1,14 @@
 ﻿using System;
 
-namespace CSharpLatest.CSharp9Features
-{
-    public class AttributesOnLocalFunctions
-    {
-        public void Method()
-        {
-            LocalFunction(); // CS0612 'LocalFunction' is obsolete.
+namespace CSharpLatest.CSharp9Features;
 
-            [Obsolete]
-            void LocalFunction() { }
-        }
+public class AttributesOnLocalFunctions
+{
+    public void Method()
+    {
+        LocalFunction(); // CS0612 'LocalFunction' is obsolete.
+
+        [Obsolete]
+        void LocalFunction() { }
     }
 }

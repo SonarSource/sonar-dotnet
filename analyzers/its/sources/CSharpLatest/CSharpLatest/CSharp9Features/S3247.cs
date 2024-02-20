@@ -1,21 +1,20 @@
 ﻿using System;
 
-namespace CSharpLatest.CSharp9Features
-{
-    public class S3247
-    {
-        class Fruit { public int Prop; }
-        class Vegetable { }
+namespace CSharpLatest.CSharp9Features;
 
-        public void Foo(Object x, Object y)
+public class S3247
+{
+    class Fruit { public int Prop; }
+    class Vegetable { }
+
+    public void Foo(Object x, Object y)
+    {
+        if ((x, y) is (Fruit f, Vegetable v))
         {
-            if ((x, y) is (Fruit f, Vegetable v))
-            {
-                var vegetable = (Vegetable)v;
-                var fruit = (Fruit)f;
-                var vegetableY = (Vegetable)y;
-                var fruitX = (Fruit)x;
-            }
+            var vegetable = (Vegetable)v;
+            var fruit = (Fruit)f;
+            var vegetableY = (Vegetable)y;
+            var fruitX = (Fruit)x;
         }
     }
 }

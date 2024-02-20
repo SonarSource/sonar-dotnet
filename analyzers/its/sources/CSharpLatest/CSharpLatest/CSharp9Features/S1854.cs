@@ -1,15 +1,14 @@
-﻿namespace CSharpLatest.CSharp9Features
+﻿namespace CSharpLatest.CSharp9Features;
+
+public class S1854
 {
-    public class S1854
+    public int InitProperty
     {
-        public int InitProperty
+        init
         {
-            init
-            {
-                value = 1;
-                int a = 100;
-                a = 2;
-            }
+            value = 1;
+            int a = 100;
+            a = 2;
         }
     }
 }

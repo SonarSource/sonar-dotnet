@@ -1,11 +1,10 @@
-﻿namespace CSharpLatest.CSharp11Features
+﻿namespace CSharpLatest.CSharp11Features;
+
+public static class OrderByBeforeWhere
 {
-    public static class OrderByBeforeWhere
+    public static List<int> Method()
     {
-        public static List<int> Method()
-        {
-            var list = new List<int>();
-            return list.OrderBy(x => x).Where(x => true).ToList();
-        }
+        var list = new List<int>();
+        return list.OrderBy(x => x).Where(x => true).ToList();
     }
 }

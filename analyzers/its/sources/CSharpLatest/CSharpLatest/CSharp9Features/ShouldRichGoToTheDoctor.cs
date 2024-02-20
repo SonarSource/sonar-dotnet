@@ -1,29 +1,28 @@
 ﻿using System;
 using static System.Console;
 
-namespace CSharpLatest.CSharp9Features
+namespace CSharpLatest.CSharp9Features;
+
+internal class ShouldRichGoToTheDoctor
 {
-    internal class ShouldRichGoToTheDoctor
+    void Foo()
     {
-        void Foo()
+        Person p = new("rich", 98);
+
+        var maybeIll = p switch
         {
-            Person p = new("rich", 98);
-
-            var maybeIll = p switch
+            { temperature: < 97 } => true,
+            { temperature: > 99 } => true,
+            { Name: "rich", temperature: var temp } when temp switch
             {
-                { temperature: < 97 } => true,
-                { temperature: > 99 } => true,
-                { Name: "rich", temperature: var temp } when temp switch
-                {
-                    > 97 and < 99 => true,
-                    _ => false
-                } => true,
-                { temperature: > 97 and < 99 } => false,
+                > 97 and < 99 => true,
                 _ => false
-            };
-            WriteLine($"{p.Name} should go to the doctor: {maybeIll}");
-        }
-
-        public record Person(string Name, int temperature);
+            } => true,
+            { temperature: > 97 and < 99 } => false,
+            _ => false
+        };
+        WriteLine($"{p.Name} should go to the doctor: {maybeIll}");
     }
+
+    public record Person(string Name, int temperature);
 }

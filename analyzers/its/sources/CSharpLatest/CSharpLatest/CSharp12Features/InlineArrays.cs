@@ -1,25 +1,24 @@
-﻿namespace CSharpLatest.CSharp12Features
+﻿namespace CSharpLatest.CSharp12Features;
+
+internal class InlineArrays
 {
-    internal class InlineArrays
+    [System.Runtime.CompilerServices.InlineArray(10)]
+    public struct Buffer
     {
-        [System.Runtime.CompilerServices.InlineArray(10)]
-        public struct Buffer
+        private int _element0;
+    }
+
+    void Example()
+    {
+        var buffer = new Buffer();
+        for (int i = 0; i < 10; i++)
         {
-            private int _element0;
+            buffer[i] = i;
         }
 
-        void Example()
+        foreach (var i in buffer)
         {
-            var buffer = new Buffer();
-            for (int i = 0; i < 10; i++)
-            {
-                buffer[i] = i;
-            }
-
-            foreach (var i in buffer)
-            {
-                Console.WriteLine(i);
-            }
+            Console.WriteLine(i);
         }
     }
 }

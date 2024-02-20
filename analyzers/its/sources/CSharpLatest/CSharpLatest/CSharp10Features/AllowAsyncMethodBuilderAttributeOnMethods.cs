@@ -1,10 +1,9 @@
-﻿namespace CSharpLatest.CSharp10Features
+﻿namespace CSharpLatest.CSharp10Features;
+
+internal class AllowAsyncMethodBuilderAttributeOnMethods
 {
-    internal class AllowAsyncMethodBuilderAttributeOnMethods
+    [AsyncMethodBuilder(builderType: typeof(RecordClass))]
+    public async void SomeMethod()
     {
-        [AsyncMethodBuilder(builderType: typeof(RecordClass))]
-        public async void SomeMethod()
-        {
-        }
     }
 }

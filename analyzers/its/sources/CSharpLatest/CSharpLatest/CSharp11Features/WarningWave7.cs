@@ -1,9 +1,8 @@
-﻿namespace CSharpLatest.CSharp11Features
+﻿namespace CSharpLatest.CSharp11Features;
+
+internal class WarningWave7
 {
-    internal class WarningWave7
+    public class lowercasename
     {
-        public class lowercasename
-        {
-        }
     }
 }

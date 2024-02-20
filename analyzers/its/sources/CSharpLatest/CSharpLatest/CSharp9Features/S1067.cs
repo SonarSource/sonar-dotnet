@@ -1,11 +1,10 @@
-﻿namespace CSharpLatest.CSharp9Features
+﻿namespace CSharpLatest.CSharp9Features;
+
+public class S1067
 {
-    public class S1067
+    public void Foo()
     {
-        public void Foo()
-        {
-            object x = null;
-            if (x is true or true or true or true or true) { }
-        }
+        object x = null;
+        if (x is true or true or true or true or true) { }
     }
 }

@@ -1,13 +1,12 @@
 ﻿using System.Runtime.CompilerServices;
 
-namespace CSharpLatest.CSharp9Features
+namespace CSharpLatest.CSharp9Features;
+
+public class SkipLocalsInit
 {
-    public class SkipLocalsInit
+    [SkipLocalsInit]
+    public void Method()
     {
-        [SkipLocalsInit]
-        public void Method()
-        {
-            int i; // not initialized to 0
-        }
+        int i; // not initialized to 0
     }
 }

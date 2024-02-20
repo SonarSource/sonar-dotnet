@@ -1,18 +1,17 @@
-﻿namespace CSharpLatest.CSharp10Features
+﻿namespace CSharpLatest.CSharp10Features;
+
+internal class StructuresAsLeftHandOperandsInWithExpressions
 {
-    internal class StructuresAsLeftHandOperandsInWithExpressions
+    public void Example()
     {
-        public void Example()
-        {
-            RecordStruct rs = new RecordStruct(null);
+        RecordStruct rs = new RecordStruct(null);
 
-            // Structures as left-hand operands in with expressions
-            RecordStruct rs2 = rs with { Property = null };
+        // Structures as left-hand operands in with expressions
+        RecordStruct rs2 = rs with { Property = null };
 
-            Struct s = new Struct();
+        Struct s = new Struct();
 
-            // Structures as left-hand operands in with expressions
-            Struct s2 = s with { Description = "SomeDescription" };
-        }
+        // Structures as left-hand operands in with expressions
+        Struct s2 = s with { Description = "SomeDescription" };
     }
 }

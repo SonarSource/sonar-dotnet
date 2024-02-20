@@ -1,7 +1,6 @@
-﻿namespace CSharpLatest.CSharp9Features.S2953
+﻿namespace CSharpLatest.CSharp9Features.S2953;
+
+public partial record MyPartial
 {
-    public partial record MyPartial
-    {
-        public partial void Dispose() { }
-    }
+    public partial void Dispose() { }
 }

@@ -1,14 +1,13 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
 
-namespace CSharpLatest.CSharp11Features
+namespace CSharpLatest.CSharp11Features;
+
+public static class SetPropertiesInsteadOfLinqMethods
 {
-    public static class SetPropertiesInsteadOfLinqMethods
+    static int Method()
     {
-        static int Method()
-        {
-            var set = new SortedSet<int>();
-            return set.Min();
-        }
+        var set = new SortedSet<int>();
+        return set.Min();
     }
 }

@@ -1,8 +1,7 @@
-﻿namespace CSharpLatest.CSharp9Features
+﻿namespace CSharpLatest.CSharp9Features;
+
+public class StaticLambdas
 {
-    public class StaticLambdas
-    {
-        // The feature is in progress
-        // public Func<int, string> StaticLambda = static i => i.ToString();
-    }
+    // The feature is in progress
+    // public Func<int, string> StaticLambda = static i => i.ToString();
 }

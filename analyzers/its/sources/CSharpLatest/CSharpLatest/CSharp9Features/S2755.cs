@@ -2,12 +2,11 @@
 using System.Xml.Resolvers;
 using System.Xml.XPath;
 
-namespace CSharpLatest.CSharp9Features
+namespace CSharpLatest.CSharp9Features;
+
+public class S2755
 {
-    public class S2755
-    {
-        XmlDocument doc = new () { XmlResolver = new XmlPreloadedResolver() };
-        XmlTextReader reader = new ("resources/") { XmlResolver = new XmlUrlResolver() };
-        XPathDocument xPathDocument = new ("doc.xml");
-    }
+    XmlDocument doc = new () { XmlResolver = new XmlPreloadedResolver() };
+    XmlTextReader reader = new ("resources/") { XmlResolver = new XmlUrlResolver() };
+    XPathDocument xPathDocument = new ("doc.xml");
 }

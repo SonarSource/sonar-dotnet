@@ -1,20 +1,19 @@
-﻿namespace CSharpLatest.CSharp9Features
+﻿namespace CSharpLatest.CSharp9Features;
+
+public class S134
 {
-    public class S134
+    public int Property
     {
-        public int Property
+        get => 42;
+        init
         {
-            get => 42;
-            init
+            if (true)
             {
                 if (true)
                 {
                     if (true)
                     {
-                        if (true)
-                        {
-                            if (true) { }
-                        }
+                        if (true) { }
                     }
                 }
             }

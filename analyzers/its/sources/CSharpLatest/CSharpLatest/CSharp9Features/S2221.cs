@@ -1,14 +1,13 @@
 ﻿using System;
 using System.IO;
 
-namespace CSharpLatest.CSharp9Features
+namespace CSharpLatest.CSharp9Features;
+
+public class S2221
 {
-    public class S2221
+    public void Foo()
     {
-        public void Foo()
-        {
-            try { }
-            catch (Exception e) when (e is not FileNotFoundException) { }
-        }
+        try { }
+        catch (Exception e) when (e is not FileNotFoundException) { }
     }
 }

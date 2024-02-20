@@ -1,8 +1,7 @@
-﻿namespace CSharpLatest.CSharp11Features
+﻿namespace CSharpLatest.CSharp11Features;
+
+internal class PatternMatchSpanOrReadOnlySpanOnAConstantString
 {
-    internal class PatternMatchSpanOrReadOnlySpanOnAConstantString
-    {
-        public bool Method(Span<char> span, ReadOnlySpan<char> readonlySpan) =>
-            span is "one" || readonlySpan is "two";
-    }
+    public bool Method(Span<char> span, ReadOnlySpan<char> readonlySpan) =>
+        span is "one" || readonlySpan is "two";
 }

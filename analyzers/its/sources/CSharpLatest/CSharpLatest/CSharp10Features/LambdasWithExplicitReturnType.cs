@@ -1,11 +1,10 @@
-﻿namespace CSharpLatest.CSharp10Features
+﻿namespace CSharpLatest.CSharp10Features;
+
+internal class LambdasWithExplicitReturnType
 {
-    internal class LambdasWithExplicitReturnType
+    public void Example()
     {
-        public void Example()
-        {
-            // Example for both explicit return type and infer a natural delegate type for lambdas and method groups
-            var f = byte () => 5;
-        }
+        // Example for both explicit return type and infer a natural delegate type for lambdas and method groups
+        var f = byte () => 5;
     }
 }

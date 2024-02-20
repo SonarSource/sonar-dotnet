@@ -1,29 +1,28 @@
 ﻿using System;
 
-namespace CSharpLatest.CSharp9Features
+namespace CSharpLatest.CSharp9Features;
+
+public class InitOnlyProperties
 {
-    public class InitOnlyProperties
+    private readonly string firstName;
+    private readonly string lastName;
+
+    public string FirstName
     {
-        private readonly string firstName;
-        private readonly string lastName;
+        get => firstName;
+        init => firstName = (value ?? throw new ArgumentNullException(nameof(FirstName)));
+    }
 
-        public string FirstName
-        {
-            get => firstName;
-            init => firstName = (value ?? throw new ArgumentNullException(nameof(FirstName)));
-        }
+    public string LastName
+    {
+        get => lastName;
+        init => lastName = value!;
+    }
 
-        public string LastName
-        {
-            get => lastName;
-            init => lastName = value!;
-        }
+    public string Details { get; init; }
 
-        public string Details { get; init; }
-
-        public InitOnlyProperties()
-        {
-            Details = string.Empty;
-        }
+    public InitOnlyProperties()
+    {
+        Details = string.Empty;
     }
 }

@@ -1,23 +1,22 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace CSharpLatest.CSharp11Features
+namespace CSharpLatest.CSharp11Features;
+
+internal class RequiredMembers
 {
-    internal class RequiredMembers
+    public class Person
     {
-        public class Person
-        {
-            public Person() { }
+        public Person() { }
 
-            [SetsRequiredMembers]
-            public Person(string firstName) => FirstName = firstName;
+        [SetsRequiredMembers]
+        public Person(string firstName) => FirstName = firstName;
 
-            public required string FirstName { get; init; }
-        }
+        public required string FirstName { get; init; }
+    }
 
-        public void Method()
-        {
-            var person = new Person("John");
-            person = new Person { FirstName = "John" };
-        }
+    public void Method()
+    {
+        var person = new Person("John");
+        person = new Person { FirstName = "John" };
     }
 }

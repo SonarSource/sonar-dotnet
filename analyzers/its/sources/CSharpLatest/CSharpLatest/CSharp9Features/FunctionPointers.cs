@@ -1,15 +1,14 @@
-﻿namespace CSharpLatest.CSharp9Features
+﻿namespace CSharpLatest.CSharp9Features;
+
+public unsafe class FunctionPointers
 {
-    public unsafe class FunctionPointers
+    public static void Log() { }
+
+    public void Method()
     {
-        public static void Log() { }
+        delegate*<void> ptr1 = &FunctionPointers.Log;
 
-        public void Method()
-        {
-            delegate*<void> ptr1 = &FunctionPointers.Log;
-
-            // This should work but it does not
-            // void* v = &FunctionPointers.Log;
-        }
+        // This should work but it does not
+        // void* v = &FunctionPointers.Log;
     }
 }

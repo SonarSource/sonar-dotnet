@@ -1,21 +1,20 @@
-﻿namespace CSharpLatest.CSharp11Features
+﻿namespace CSharpLatest.CSharp11Features;
+
+file interface IWidget
 {
-    file interface IWidget
-    {
-        int ProvideAnswer();
-    }
+    int ProvideAnswer();
+}
 
-    file class HiddenWidget
-    {
-        public int Work() => 42;
-    }
+file class HiddenWidget
+{
+    public int Work() => 42;
+}
 
-    internal class Widget : IWidget
+internal class Widget : IWidget
+{
+    public int ProvideAnswer()
     {
-        public int ProvideAnswer()
-        {
-            var worker = new HiddenWidget();
-            return worker.Work();
-        }
+        var worker = new HiddenWidget();
+        return worker.Work();
     }
 }

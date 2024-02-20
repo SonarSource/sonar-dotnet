@@ -1,15 +1,14 @@
-﻿namespace CSharpLatest.CSharp9Features
-{
-    public class S4015
-    {
-        class A
-        {
-            public int Property { get; init; }
-        }
+﻿namespace CSharpLatest.CSharp9Features;
 
-        class B : A
-        {
-            public int Property { get; private init; }
-        }
+public class S4015
+{
+    class A
+    {
+        public int Property { get; init; }
+    }
+
+    class B : A
+    {
+        public int Property { get; private init; }
     }
 }

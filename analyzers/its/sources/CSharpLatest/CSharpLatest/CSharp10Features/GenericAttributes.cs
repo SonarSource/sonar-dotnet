@@ -1,19 +1,18 @@
-﻿namespace CSharpLatest.CSharp10Features
+﻿namespace CSharpLatest.CSharp10Features;
+
+// Generic Attributes
+public class MyAttribute<T> : Attribute
 {
-    // Generic Attributes
-    public class MyAttribute<T> : Attribute
+    public MyAttribute(string s)
     {
-        public MyAttribute(string s)
-        {
-        }
     }
+}
 
-    internal class GenericAttributeUsage
+internal class GenericAttributeUsage
+{
+    [MyAttribute<int>("")]
+    public void Example()
     {
-        [MyAttribute<int>("")]
-        public void Example()
-        {
 
-        }
     }
 }

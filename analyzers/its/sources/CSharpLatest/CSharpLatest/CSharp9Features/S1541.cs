@@ -1,28 +1,27 @@
-﻿namespace CSharpLatest.CSharp9Features
+﻿namespace CSharpLatest.CSharp9Features;
+
+public class S1541
 {
-    public class S1541
+    public int Property
     {
-        public int Property
+        get
         {
-            get
-            {
-                return 0;
-            }
-            init
-            {
-                if (false) { }
-                if (false) { }
-                if (false) { }
-                if (false) { }
-                if (false) { }
-                if (false) { }
-                if (false) { }
-                if (false) { }
-                if (false) { }
-                if (false) { }
-                if (false) { }
-                if (false) { }
-            }
+            return 0;
+        }
+        init
+        {
+            if (false) { }
+            if (false) { }
+            if (false) { }
+            if (false) { }
+            if (false) { }
+            if (false) { }
+            if (false) { }
+            if (false) { }
+            if (false) { }
+            if (false) { }
+            if (false) { }
+            if (false) { }
         }
     }
 }

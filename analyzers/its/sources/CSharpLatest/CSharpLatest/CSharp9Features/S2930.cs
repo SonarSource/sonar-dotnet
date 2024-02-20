@@ -1,16 +1,15 @@
 ﻿using System.IO;
 
-namespace CSharpLatest.CSharp9Features
+namespace CSharpLatest.CSharp9Features;
+
+public class S2930
 {
-    public class S2930
+    private FileStream backing_field;
+    public FileStream Prop
     {
-        private FileStream backing_field;
-        public FileStream Prop
+        init
         {
-            init
-            {
-                backing_field = new ("", FileMode.Open);
-            }
+            backing_field = new ("", FileMode.Open);
         }
     }
 }

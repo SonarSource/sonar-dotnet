@@ -1,10 +1,9 @@
-﻿namespace CSharpLatest.CSharp10Features
+﻿namespace CSharpLatest.CSharp10Features;
+
+public record class RecordClass(int Property)
 {
-    public record class RecordClass(int Property)
+    public sealed override string ToString()
     {
-        public sealed override string ToString()
-        {
-            return string.Empty;
-        }
+        return string.Empty;
     }
 }
