@@ -196,6 +196,8 @@ namespace Tests.Diagnostics
             "http://maven.apache.org/POM/4.0.0",
             "http://www.omg.org/spec/UML/20131001",
             "http://www.opengis.net/kml/2.2",
+            "http://www.itunes.com",
+            "http://www.itunes.com/dtds/podcast-1.0.dtd",
             "http://email:password@subdomain.www.w3.org",  // Noncompliant
             "http://domain.com/www.w3.org",                // Noncompliant
             "http://domain.com/path?domain=www.w3.org",    // Noncompliant
@@ -203,6 +205,7 @@ namespace Tests.Diagnostics
             "http://domain.com#www.w3.org",                // Noncompliant
             "http://subdomain.www.w3.org",                 // Noncompliant
             "http://subdomain.xml.apache.org",             // Noncompliant
+            "http://subdomain#www.itunes.com",             // Noncompliant
             "http://subdomain.schemas.xmlsoap.org",        // Noncompliant
             "http://subdomain.schemas.openxmlformats.org", // Noncompliant
             "http://subdomain.rdfs.org",                   // Noncompliant

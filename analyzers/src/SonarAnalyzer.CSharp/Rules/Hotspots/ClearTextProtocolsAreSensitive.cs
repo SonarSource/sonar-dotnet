@@ -70,6 +70,7 @@ namespace SonarAnalyzer.Rules.CSharp
             "schemas.android.com",
             "www.omg.org",
             "www.opengis.net",
+            "www.itunes.com",
         };
 
         private static readonly string[] CommonlyUsedExampleDomains = { "example.com", "example.org", "test.com" };
