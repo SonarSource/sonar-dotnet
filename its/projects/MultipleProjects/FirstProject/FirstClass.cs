@@ -1,28 +1,27 @@
 ﻿using System;
-using System.Linq; // unused
 
-namespace FirstProject
+// FIXME: This should raise S1134
+// ToDo:  This should raise S1135
+namespace FirstProject;
+
+public class FirstClass
 {
-    public class FirstClass
+    public int Value { get; }
+
+    public void FirstMethod()
     {
-        public int CoveredGet { get; set; } public int UncoveredProperty { get; set; } public int CoveredSet { get; set; }
+        // Empty
+    }
 
-        public int AnotherCoveredGet { get; set; }
-
-        public int CoveredProperty { get; set; }
-
-        public int ArrowMethod(bool condition) => condition ? AnotherCoveredGet : UncoveredProperty;
-
-        public int BodyMethod()
+    public void SecondMethod(bool condition, bool flag)
+    {
+        if (condition)
         {
-            var x = CoveredProperty; CoveredProperty = 1; goto label; UncoveredProperty = 1;
-
-            UncoveredProperty = 1;
-
-            label:
-            CoveredSet = 1;
-
-            return CoveredGet;
+            Console.WriteLine("Add some complexity to this method" + (flag ? "!" : "?"));
+        }
+        else
+        {
+            Console.WriteLine("Else");
         }
     }
 }
