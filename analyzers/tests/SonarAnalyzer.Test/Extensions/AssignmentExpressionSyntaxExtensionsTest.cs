@@ -27,7 +27,7 @@ using StyleCop.Analyzers.Lightup;
 namespace SonarAnalyzer.Test.Extensions
 {
     [TestClass]
-    public class AssignmentExpressionSyntaxExtensionsTests
+    public class AssignmentExpressionSyntaxExtensionsTest
     {
         [TestMethod]
         public void MapAssignmentArguments_TupleElementsAreExtracted() =>

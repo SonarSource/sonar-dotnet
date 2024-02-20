@@ -24,7 +24,7 @@ using SonarAnalyzer.Extensions;
 namespace SonarAnalyzer.Test.Extensions
 {
     [TestClass]
-    public class BaciBlockExtensionsTests
+    public class BasicBlockExtensionsTest
     {
         [TestMethod]
         public void IsEnclosedIn_ReturnsTrueForLocalLifeTime()

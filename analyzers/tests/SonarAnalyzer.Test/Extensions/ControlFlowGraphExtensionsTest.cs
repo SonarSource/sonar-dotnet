@@ -25,7 +25,7 @@ using SonarAnalyzer.Extensions;
 namespace SonarAnalyzer.Test.Extensions
 {
     [TestClass]
-    public class ControlFlowGraphExtensionsTests
+    public class ControlFlowGraphExtensionsTest
     {
         [TestMethod]
         public void FindLocalFunctionCfgInScope_ThrowForUnexpectedSymbol()

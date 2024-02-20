@@ -21,7 +21,7 @@
 namespace SonarAnalyzer.Test.Helpers
 {
     [TestClass]
-    public class KnownMethodsTests
+    public class KnownMethodsTest
     {
         [TestMethod]
         public  void IsMainMethod_Null_ShouldBeFalse() =>

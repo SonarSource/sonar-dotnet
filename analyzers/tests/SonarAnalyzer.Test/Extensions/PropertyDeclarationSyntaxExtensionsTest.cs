@@ -25,7 +25,7 @@ using SonarAnalyzer.Extensions;
 namespace SonarAnalyzer.Test.Extensions
 {
     [TestClass]
-    public class PropertyDeclarationSyntaxExtensionsTests
+    public class PropertyDeclarationSyntaxExtensionsTest
     {
         [TestMethod]
         public void IsAutoProperty_AccessorWithBody_ReturnsFalse()

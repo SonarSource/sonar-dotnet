@@ -25,7 +25,7 @@ using static csharp::SonarAnalyzer.Extensions.SyntaxTokenExtensions;
 namespace SonarAnalyzer.Test.Extensions
 {
     [TestClass]
-    public class SyntaxTokenExtensionsTests
+    public class SyntaxTokenExtensionsTest
     {
         [TestMethod]
         public void GetBindableParent_ForEmptyToken_ReturnsNull()

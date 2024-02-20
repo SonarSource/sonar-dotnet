@@ -21,7 +21,7 @@
 namespace SonarAnalyzer.Test.Common
 {
     [TestClass]
-    public class BidirectionalDictionaryTests
+    public class BidirectionalDictionaryTest
     {
         private BidirectionalDictionary<int, int> sut;
 

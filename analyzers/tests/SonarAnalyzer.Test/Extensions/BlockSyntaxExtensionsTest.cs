@@ -28,7 +28,7 @@ using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 namespace SonarAnalyzer.Test.Extensions
 {
     [TestClass]
-    public class BlockSyntaxExtensionsTests
+    public class BlockSyntaxExtensionsTest
     {
         [TestMethod]
         public void IsEmpty_BlockMethodEmpty()
