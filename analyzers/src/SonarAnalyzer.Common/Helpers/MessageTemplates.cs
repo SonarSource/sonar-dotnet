@@ -33,10 +33,10 @@ public static class MessageTemplates
     private const string FormatPattern = @"(:[^\}]+)?";
 
     private const string HolePattern = "{" + "[@$]?" + PlaceholderPattern + AlignmentPattern + FormatPattern + "}";
-    private const string TextPattern = @"([^\}]|\{\{|\}\})+";
+    private const string TextPattern = @"([^\{]|\{\{|\}\})+";
     private const string TemplatePattern = $"^({TextPattern}|{HolePattern})*$";
 
-    private static readonly Regex RxTemplate = new(TemplatePattern, RegexOptions.Compiled, TimeSpan.FromMilliseconds(500));
+    private static readonly Regex RxTemplate = new(TemplatePattern, RegexOptions.Compiled, TimeSpan.FromMilliseconds(300));
 
     /// <summary>
     /// Matches and extracts placeholders from a template string.
@@ -44,15 +44,13 @@ public static class MessageTemplates
     /// </summary>
     public static ParseResult Parse(string template)
     {
-        var match = RxTemplate.SafeMatch(template);
-        if (match.Success)
+        if (RxTemplate.SafeMatch(template) is { Success: true } match)
         {
-            var placeholders = new List<Placeholder>();
-            foreach (Capture capture in match.Groups["Placeholder"].Captures)
-            {
-                placeholders.Add(new(capture.Value, capture.Index, capture.Length));
-            }
-            return new(true, [.. placeholders]);
+            var placeholders = match.Groups["Placeholder"].Captures
+                 .OfType<Capture>()
+                 .Select(x => new Placeholder(x.Value, x.Index, x.Length))
+                 .ToArray();
+            return new(true, placeholders);
         }
         else
         {

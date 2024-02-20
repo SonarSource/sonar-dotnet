@@ -25,7 +25,7 @@ public class MessageTemplatesTest
 {
     [DataTestMethod]
     [DataRow("")]
-    [DataRow("{")]
+    [DataRow("}")]
     [DataRow("{{}}")]
     [DataRow("{{")]
     [DataRow("}}")]
@@ -93,23 +93,33 @@ public class MessageTemplatesTest
     [TestMethod]
     public void Parse_Placeholder_Multiple()
     {
-        var template = "{{what}} {$an_amazing,20} {@day:dd-MM-yyyy} to be alive! {42,-2:format}";
+        var template = """
+            In code's {$silent} realm,
+            Logic weaves through lines {@0}f text,
+            Errors {@teach,42} us well.
+
+            Syntax {sym_phony,42:dd-MM},
+            Logic {@_orchestrates42} the mind,
+            Programmer's {ballet:_}.
+            """;
         var result = MessageTemplates.Parse(template);
-        ShouldBeSuccess(result, 3);
-        ShouldBe(result.Placeholders[0], "an_amazing", 11, 10);
-        ShouldBe(result.Placeholders[1], "day", 28, 3);
-        ShouldBe(result.Placeholders[2], "42", 58, 2);
+        ShouldBeSuccess(result, 6);
+        ShouldBe(result.Placeholders[0], "silent", 12, 6);
+        ShouldBe(result.Placeholders[1], "0", 56, 1);
+        ShouldBe(result.Placeholders[2], "teach", 75, 5);
+
+        ShouldBe(result.Placeholders[3], "sym_phony", 103, 9);
+        ShouldBe(result.Placeholders[4], "_orchestrates42", 132, 15);
+        ShouldBe(result.Placeholders[5], "ballet", 173, 6);
     }
 
     [DataTestMethod]
 
-    //[DataRow("Login failed for {User")]         // Missing closing bracket
-    //[DataRow("Login failed for {{User}")]       //  Opening bracket is escaped
-    //[DataRow("Login failed for {User_Name}")]   //  Only alphanumerics and '_' are allowed for placeholders
-
-    [DataRow("}")]                              // Right bracket is not allowed
-    [DataRow("}}}")]                            // Third right bracket is not allowed (first two are valid)
-    [DataRow("{{}")]                            // Empty placeholder is not allowed
+    [DataRow("{")]                              // Left bracket is not allowed
+    [DataRow("{{{")]                            // Third left bracket is not allowed (first two are valid)
+    [DataRow("{}")]                             // Empty placeholder is not allowed
+    [DataRow("{{{}}}")]                         // Empty placeholder is not allowed
+    [DataRow("Login failed for {User")]         // Missing closing bracket
     [DataRow("Login failed for {&User}")]       // Only '@' and '$' are allowed as prefix
     [DataRow("Login failed for {User_%Name}")]  // Only alphanumerics and '_' are allowed for placeholders
     [DataRow("Retry attempt {Cnt,r}")]          // The alignment specifier must be numeric
