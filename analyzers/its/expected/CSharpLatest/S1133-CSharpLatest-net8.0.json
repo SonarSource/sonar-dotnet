@@ -3,20 +3,20 @@
     {
       "Id": "S1133",
       "Message": "Do not forget to remove this deprecated code someday.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/ExtendedNameofScope.cs#L11",
-      "Location": "Line 11 Position 10-38"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11Features/ExtendedNameofScope.cs#L11",
+      "Location": "Line 11 Position 6-34"
     },
     {
       "Id": "S1133",
       "Message": "Do not forget to remove this deprecated code someday.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/ExtendedNameofScope.cs#L5",
-      "Location": "Line 5 Position 10-35"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11Features/ExtendedNameofScope.cs#L5",
+      "Location": "Line 5 Position 6-31"
     },
     {
       "Id": "S1133",
       "Message": "Do not forget to remove this deprecated code someday.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/AttributesOnLocalFunctions.cs#L11",
-      "Location": "Line 11 Position 14-22"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/AttributesOnLocalFunctions.cs#L11",
+      "Location": "Line 11 Position 10-18"
     }
   ]
 }

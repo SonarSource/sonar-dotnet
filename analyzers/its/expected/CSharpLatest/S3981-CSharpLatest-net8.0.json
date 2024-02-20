@@ -3,8 +3,8 @@
     {
       "Id": "S3981",
       "Message": "The \u0027Count\u0027 of \u0027IEnumerable\u003CT\u003E\u0027 always evaluates as \u0027True\u0027 regardless the size.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3981.cs#L12",
-      "Location": "Line 12 Position 44-62"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S3981.cs#L12",
+      "Location": "Line 12 Position 40-58"
     }
   ]
 }

@@ -3,8 +3,8 @@
     {
       "Id": "S6609",
       "Message": "\u0022Min\u0022 property of Set type should be used instead of the \u0022Min()\u0022 extension method.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/SetPropertiesInsteadOfLinqMethods.cs#L11",
-      "Location": "Line 11 Position 24-27"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11Features/SetPropertiesInsteadOfLinqMethods.cs#L11",
+      "Location": "Line 11 Position 20-23"
     }
   ]
 }

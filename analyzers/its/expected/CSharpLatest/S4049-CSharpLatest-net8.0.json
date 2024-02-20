@@ -3,14 +3,14 @@
     {
       "Id": "S4049",
       "Message": "Consider making method \u0027GetFood\u0027 a property.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/CovariantReturn.cs#L10",
-      "Location": "Line 10 Position 30-37"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/CovariantReturn.cs#L10",
+      "Location": "Line 10 Position 26-33"
     },
     {
       "Id": "S4049",
       "Message": "Consider making method \u0027GetName\u0027 a property.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/ExtendingPartial.cs#L30",
-      "Location": "Line 30 Position 16-23"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/ExtendingPartial.cs#L30",
+      "Location": "Line 30 Position 12-19"
     }
   ]
 }

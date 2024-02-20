@@ -3,26 +3,26 @@
     {
       "Id": "S3900",
       "Message": "Refactor this method to add validation of parameter \u0027someString\u0027 before using it.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10/NullableReferenceTypesExample.cs#L20",
-      "Location": "Line 20 Position 31-41"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10Features/NullableReferenceTypesExample.cs#L20",
+      "Location": "Line 20 Position 27-37"
     },
     {
       "Id": "S3900",
       "Message": "Refactor this method to add validation of parameter \u0027collection\u0027 before using it.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3267.cs#L12",
-      "Location": "Line 12 Position 37-47"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S3267.cs#L12",
+      "Location": "Line 12 Position 33-43"
     },
     {
       "Id": "S3900",
       "Message": "Refactor this method to add validation of parameter \u0027condition\u0027 before using it.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3267.cs#L14",
-      "Location": "Line 14 Position 21-30"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S3267.cs#L14",
+      "Location": "Line 14 Position 17-26"
     },
     {
       "Id": "S3900",
       "Message": "Refactor this method to add validation of parameter \u0027collection\u0027 before using it.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3267.cs#L27",
-      "Location": "Line 27 Position 37-47"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S3267.cs#L27",
+      "Location": "Line 27 Position 33-43"
     }
   ]
 }

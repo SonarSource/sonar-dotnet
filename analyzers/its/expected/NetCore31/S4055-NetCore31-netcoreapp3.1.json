@@ -3,8 +3,8 @@
     {
       "Id": "S4055",
       "Message": "Replace this string literal with a string retrieved through an instance of the \u0027ResourceManager\u0027 class.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/NetCore31/Program.cs#L8",
-      "Location": "Line 8 Position 22-36"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/NetCore31/Program.cs#L11",
+      "Location": "Line 11 Position 22-36"
     }
   ]
 }

@@ -3,20 +3,20 @@
     {
       "Id": "S1858",
       "Message": "There\u0027s no need to call \u0027ToString()\u0027, the compiler will do it for you.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/TargetTypedNew.cs#L18",
-      "Location": "Line 18 Position 33-44"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/TargetTypedNew.cs#L18",
+      "Location": "Line 18 Position 29-40"
     },
     {
       "Id": "S1858",
       "Message": "There\u0027s no need to call \u0027ToString()\u0027, the compiler will do it for you.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/TargetTypedNew.cs#L18",
-      "Location": "Line 18 Position 50-61"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/TargetTypedNew.cs#L18",
+      "Location": "Line 18 Position 46-57"
     },
     {
       "Id": "S1858",
       "Message": "There\u0027s no need to call \u0027ToString()\u0027, the compiler will do it for you.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/TargetTypedNew.cs#L18",
-      "Location": "Line 18 Position 67-78"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/TargetTypedNew.cs#L18",
+      "Location": "Line 18 Position 63-74"
     }
   ]
 }

@@ -3,8 +3,8 @@
     {
       "Id": "S2328",
       "Message": "Refactor \u0027GetHashCode\u0027 to not reference mutable fields.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/Records.cs#L95",
-      "Location": "Line 95 Position 29-40"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/Records.cs#L95",
+      "Location": "Line 95 Position 25-36"
     }
   ]
 }

@@ -3,8 +3,8 @@
     {
       "Id": "S2437",
       "Message": "Remove this unnecessary bit operation.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S2437.cs#L10",
-      "Location": "Line 10 Position 30-34"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S2437.cs#L10",
+      "Location": "Line 10 Position 26-30"
     }
   ]
 }

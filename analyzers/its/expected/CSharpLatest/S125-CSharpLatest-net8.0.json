@@ -3,56 +3,56 @@
     {
       "Id": "S125",
       "Message": "Remove this commented out code.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/CovariantReturn.cs#L16",
-      "Location": "Line 16 Position 5-8"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/CovariantReturn.cs#L16",
+      "Location": "Line 16 Position 1-4"
     },
     {
       "Id": "S125",
       "Message": "Remove this commented out code.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/CovariantReturn.cs#L30",
-      "Location": "Line 30 Position 9-67"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/CovariantReturn.cs#L30",
+      "Location": "Line 30 Position 5-63"
     },
     {
       "Id": "S125",
       "Message": "Remove this commented out code.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/ExtensionGetEnumerator.cs#L31",
-      "Location": "Line 31 Position 13-16"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/ExtensionGetEnumerator.cs#L31",
+      "Location": "Line 31 Position 9-12"
     },
     {
       "Id": "S125",
       "Message": "Remove this commented out code.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/FunctionPointers.cs#L12",
-      "Location": "Line 12 Position 13-48"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/FunctionPointers.cs#L12",
+      "Location": "Line 12 Position 9-44"
     },
     {
       "Id": "S125",
       "Message": "Remove this commented out code.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/ModuleInitializers.cs#L9",
-      "Location": "Line 9 Position 9-12"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/ModuleInitializers.cs#L9",
+      "Location": "Line 9 Position 5-8"
     },
     {
       "Id": "S125",
       "Message": "Remove this commented out code.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/ParameterValidation.cs#L8",
-      "Location": "Line 8 Position 9-12"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/ParameterValidation.cs#L8",
+      "Location": "Line 8 Position 5-8"
     },
     {
       "Id": "S125",
       "Message": "Remove this commented out code.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/RelaxRefPartialOrder.cs#L8",
-      "Location": "Line 8 Position 5-53"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/RelaxRefPartialOrder.cs#L8",
+      "Location": "Line 8 Position 1-49"
     },
     {
       "Id": "S125",
       "Message": "Remove this commented out code.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/StaticLambdas.cs#L6",
-      "Location": "Line 6 Position 9-77"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/StaticLambdas.cs#L6",
+      "Location": "Line 6 Position 5-73"
     },
     {
       "Id": "S125",
       "Message": "Remove this commented out code.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/TargetTypedConditionals.cs#L12",
-      "Location": "Line 12 Position 13-39"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/TargetTypedConditionals.cs#L12",
+      "Location": "Line 12 Position 9-35"
     }
   ]
 }

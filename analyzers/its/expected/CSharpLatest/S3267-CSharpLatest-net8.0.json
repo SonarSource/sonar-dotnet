@@ -3,14 +3,14 @@
     {
       "Id": "S3267",
       "Message": "Loops should be simplified using the \u0022Where\u0022 LINQ method",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3267.cs#L12",
-      "Location": "Line 12 Position 37-47"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S3267.cs#L12",
+      "Location": "Line 12 Position 33-43"
     },
     {
       "Id": "S3267",
       "Message": "Loop should be simplified by calling Select(element =\u003E element.Length))",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3267.cs#L27",
-      "Location": "Line 27 Position 37-47"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S3267.cs#L27",
+      "Location": "Line 27 Position 33-43"
     }
   ]
 }

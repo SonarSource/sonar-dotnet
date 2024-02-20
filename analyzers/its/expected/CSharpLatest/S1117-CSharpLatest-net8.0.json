@@ -3,8 +3,8 @@
     {
       "Id": "S1117",
       "Message": "Rename \u0027sonar\u0027 which hides the field with the same name.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10/Deconstruction.cs#L12",
-      "Location": "Line 12 Position 18-23"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10Features/Deconstruction.cs#L12",
+      "Location": "Line 12 Position 14-19"
     }
   ]
 }

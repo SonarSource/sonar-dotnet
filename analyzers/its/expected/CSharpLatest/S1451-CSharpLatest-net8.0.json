@@ -3,799 +3,799 @@
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10/AllowAsyncMethodBuilderAttributeOnMethods.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10Features/AllowAsyncMethodBuilderAttributeOnMethods.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10/AnonymousTypesInWithExpressions.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10Features/AnonymousTypesInWithExpressions.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10/AssignmentAndDeclarationInSameDeconstruction.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10Features/AssignmentAndDeclarationInSameDeconstruction.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10/CallerArgumentExpression.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10Features/CallerArgumentExpression.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10/ConstantInterpolatedStrings.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10Features/ConstantInterpolatedStrings.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10/Deconstruction.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10Features/Deconstruction.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10/ExtendedPropertyPatterns.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10Features/ExtendedPropertyPatterns.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10/FileScopedNamespaceDeclaration.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10Features/FileScopedNamespaceDeclaration.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10/GenericAttributes.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10Features/GenericAttributes.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10/GlobalUsingDirectives.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10Features/GlobalUsingDirectives.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10/ImplicitUsingOfNamespaces.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10Features/ImplicitUsingOfNamespaces.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10/LambdaAttributes.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10Features/LambdaAttributes.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10/LambdasWithExplicitReturnType.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10Features/LambdasWithExplicitReturnType.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10/MutexAclTest.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10Features/MutexAclTest.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10/NullableReferenceTypesExample.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10Features/NullableReferenceTypesExample.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10/ParameterlessConstructorsAndFieldInitializersInStructs.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10Features/ParameterlessConstructorsAndFieldInitializersInStructs.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10/RecordStructs.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10Features/RecordStructs.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10/RecordTypesCanSealToString.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10Features/RecordTypesCanSealToString.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10/StaticAbstractMembersInInterfaces.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10Features/StaticAbstractMembersInInterfaces.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10/StructuresAsLeftHandOperandsInWithExpressions.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp10Features/StructuresAsLeftHandOperandsInWithExpressions.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/AutoDefaultStruct.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11Features/AutoDefaultStruct.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/CheckedAndUncheckedUserDefinedOperators.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11Features/CheckedAndUncheckedUserDefinedOperators.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/ContainsInsteadOfAny.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11Features/ContainsInsteadOfAny.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/ExtendedNameofScope.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11Features/ExtendedNameofScope.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/FileScopeAccess.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11Features/FileScopeAccess.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/GenericAttributes.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11Features/GenericAttributes.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/ListPatterns.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11Features/ListPatterns.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/NewlinesInStringInterpolations.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11Features/NewlinesInStringInterpolations.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/NumericIntPtrAndUIntPtr.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11Features/NumericIntPtrAndUIntPtr.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/OrderByBeforeWhere.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11Features/OrderByBeforeWhere.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/PatternMatchSpanOrReadOnlySpanOnAConstantString.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11Features/PatternMatchSpanOrReadOnlySpanOnAConstantString.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/RawStringLiterals.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11Features/RawStringLiterals.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/RefFieldsAndRefScopedVariables.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11Features/RefFieldsAndRefScopedVariables.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/RelaxedShiftOperator.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11Features/RelaxedShiftOperator.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/RequiredMembers.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11Features/RequiredMembers.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/SetPropertiesInsteadOfLinqMethods.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11Features/SetPropertiesInsteadOfLinqMethods.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/StaticVirtualMembersInInterfaces.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11Features/StaticVirtualMembersInInterfaces.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/UnsignedRightShiftOperator.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11Features/UnsignedRightShiftOperator.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/UseStringCreate.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11Features/UseStringCreate.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/UTF8StringLiterals.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11Features/UTF8StringLiterals.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11/WarningWave7.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp11Features/WarningWave7.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp12/AliasAnyType.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp12Features/AliasAnyType.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp12/CollectionExpressions.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp12Features/CollectionExpressions.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp12/DefaultLambdaParameters.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp12Features/DefaultLambdaParameters.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp12/InlineArrays.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp12Features/InlineArrays.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp12/PrimaryConstructor.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp12Features/PrimaryConstructor.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/Apple.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/Apple.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/AttributesOnLocalFunctions.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/AttributesOnLocalFunctions.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/CovariantReturn.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/CovariantReturn.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/ExtendingPartial.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/ExtendingPartial.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/ExtensionGetEnumerator.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/ExtensionGetEnumerator.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/FunctionPointers.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/FunctionPointers.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/GetWeatherForecastWithRecords.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/GetWeatherForecastWithRecords.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/InitOnlyProperties.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/InitOnlyProperties.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/JsonDictionaryKeys.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/JsonDictionaryKeys.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/JsonSerializerImmutableTypes.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/JsonSerializerImmutableTypes.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/JsonSerializerPreserveReference.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/JsonSerializerPreserveReference.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/JsonSerializerRecords.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/JsonSerializerRecords.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/JsonSerializerSupportsFields.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/JsonSerializerSupportsFields.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/LambdaDiscardParameters.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/LambdaDiscardParameters.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/ModuleInitializers.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/ModuleInitializers.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/NativeInts.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/NativeInts.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/ParameterValidation.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/ParameterValidation.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/PatternMatchingImprovements.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/PatternMatchingImprovements.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/Records.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/Records.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/RecordsAndNullability.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/RecordsAndNullability.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/RecordsUsingWith.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/RecordsUsingWith.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/RecordsVsClasses.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/RecordsVsClasses.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/RecordsWithMutableData.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/RecordsWithMutableData.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/RecordWithStaticHelper.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/RecordWithStaticHelper.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/RelaxRefPartialOrder.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/RelaxRefPartialOrder.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S1067.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S1067.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S1144.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S1144.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S1185.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S1185.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S134.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S134.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S1541.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S1541.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S1854.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S1854.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S1862.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S1862.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S2219.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S2219.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S2221.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S2221.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S2259.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S2259.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S2292.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S2292.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S2376.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S2376.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S2437.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S2437.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S2612.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S2612.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S2755.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S2755.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S2760.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S2760.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S2930.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S2930.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S2952.Part1.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S2952.Part1.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S2952.Part2.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S2952.Part2.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S2953.Part1.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S2953.Part1.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S2953.Part2.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S2953.Part2.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3052.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S3052.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3060.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S3060.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3237.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S3237.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3240.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S3240.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3247.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S3247.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3251.Part1.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S3251.Part1.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3251.Part2.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S3251.Part2.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3254.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S3254.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3257.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S3257.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3267.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S3267.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3353.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S3353.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3440.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S3440.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3453.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S3453.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3603.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S3603.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3604.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S3604.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3626.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S3626.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3776.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S3776.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3877.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S3877.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3925.Part1.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S3925.Part1.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3925.Part2.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S3925.Part2.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3927.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S3927.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3928.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S3928.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S3981.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S3981.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S4000.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S4000.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S4004.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S4004.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S4005.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S4005.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S4015.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S4015.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S4057.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S4057.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S4201.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S4201.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S4426.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S4426.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S4433.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S4433.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S4583.Part1.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S4583.Part1.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S4583.Part2.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S4583.Part2.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/S4830.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S4830.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/ShouldRichGoToTheDoctor.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/ShouldRichGoToTheDoctor.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/SkipLocalsInit.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/SkipLocalsInit.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/StaticLambdas.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/StaticLambdas.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/TargetTypedConditionals.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/TargetTypedConditionals.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/TargetTypedNew.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/TargetTypedNew.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/VariousPatternsOfPatterns.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/VariousPatternsOfPatterns.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9/VariousPatternsOfRecords.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/VariousPatternsOfRecords.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
