@@ -3,14 +3,8 @@
     {
       "Id": "S134",
       "Message": "Refactor this code to not nest more than 3 control flow statements.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L48",
-      "Location": "Line 48 Position 13-15"
-    },
-    {
-      "Id": "S134",
-      "Message": "Refactor this code to not nest more than 3 control flow statements.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S134.cs#L16",
-      "Location": "Line 16 Position 29-31"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L37",
+      "Location": "Line 37 Position 13-15"
     }
   ]
 }

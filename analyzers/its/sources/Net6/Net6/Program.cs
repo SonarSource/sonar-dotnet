@@ -1,4 +1,3 @@
-﻿using Net6;
-
-int a = 5;
-CallerArgumentExpression.SomeMethod(a == 42);
+﻿// Next line triggers S1481 to make sure issues are raised
+var foo = 42;
+Console.WriteLine("Hello, World!");

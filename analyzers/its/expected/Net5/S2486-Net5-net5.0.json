@@ -3,14 +3,14 @@
     {
       "Id": "S2486",
       "Message": "Handle the exception or explain in a comment why it can be ignored.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L58",
-      "Location": "Line 58 Position 17-26"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L47",
+      "Location": "Line 47 Position 17-26"
     },
     {
       "Id": "S2486",
       "Message": "Handle the exception or explain in a comment why it can be ignored.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L62",
-      "Location": "Line 62 Position 5-14"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L51",
+      "Location": "Line 51 Position 5-14"
     }
   ]
 }

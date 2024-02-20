@@ -7,7 +7,7 @@ param
     $ruleId,
 
     [Parameter(HelpMessage = "The name of single project to build. If ommited, all projects will be build.")]
-    [ValidateSet("AnalyzeGenerated.CS", "AnalyzeGenerated.VB", "akka.net", "AutoMapper", "BlazorSample", "Ember-MM", "Nancy", "NetCore31", "Net5", "Net6", "Net7", "Net8", "NetCore31WithConfigurableRules" , "ManuallyAddedNoncompliantIssues.CS", "ManuallyAddedNoncompliantIssues.VB", "RazorSample", "Roslyn.1.3.1", "SkipGenerated.CS", "SkipGenerated.VB", "SonarLintExclusions", "WebConfig")]
+    [ValidateSet("AnalyzeGenerated.CS", "AnalyzeGenerated.VB", "akka.net", "AutoMapper", "BlazorSample", "CSharpLatest", "Ember-MM", "Nancy", "NetCore31", "Net5", "Net6", "Net7", "Net8", "ManuallyAddedNoncompliantIssues.CS", "ManuallyAddedNoncompliantIssues.VB", "RazorSample", "Roslyn.1.3.1", "SkipGenerated.CS", "SkipGenerated.VB", "SonarLintExclusions", "WebConfig")]
     [string]
     $project
 )
@@ -277,12 +277,12 @@ try {
     Build-Project-DotnetTool "Net6" "Net6.sln"
     Build-Project-DotnetTool "Net7" "Net7.sln"
     Build-Project-DotnetTool "Net8" "Net8.sln"
-    Build-Project-DotnetTool "NetCore31WithConfigurableRules" "NetCore31WithConfigurableRules.sln"
     Build-Project-DotnetTool "akka.net" "src\Akka.sln"
     Build-Project-DotnetTool "AutoMapper" "AutoMapper.sln"
     Build-Project-DotnetTool "SonarLintExclusions" "SonarLintExclusions.sln"
     Build-Project-DotnetTool "RazorSample" "RazorSample.sln"
     Build-Project-DotnetTool "BlazorSample" "BlazorSample.sln"
+    Build-Project-DotnetTool "CSharpLatest" "CSharpLatest.sln"
 
     Invoke-JsonParser
 

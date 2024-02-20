@@ -3,14 +3,8 @@
     {
       "Id": "S3241",
       "Message": "Change return type to \u0027void\u0027; not a single caller uses the returned value.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/LambdaDiscardParameters.cs#L25",
-      "Location": "Line 25 Position 13-16"
-    },
-    {
-      "Id": "S3241",
-      "Message": "Change return type to \u0027void\u0027; not a single caller uses the returned value.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L98",
-      "Location": "Line 98 Position 1-4"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L87",
+      "Location": "Line 87 Position 1-4"
     }
   ]
 }

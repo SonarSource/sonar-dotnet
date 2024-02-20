@@ -2,63 +2,9 @@
   "Issues": [
     {
       "Id": "S1481",
-      "Message": "Remove the unused local variable \u0027otherPerson\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/AnonymousTypesInWithExpressions.cs#L10",
-      "Location": "Line 10 Position 17-28"
-    },
-    {
-      "Id": "S1481",
-      "Message": "Remove the unused local variable \u0027b\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/AssignmentAndDeclarationInSameDeconstruction.cs#L8",
-      "Location": "Line 8 Position 21-22"
-    },
-    {
-      "Id": "S1481",
-      "Message": "Remove the unused local variable \u0027sonar\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/Deconstruction.cs#L12",
-      "Location": "Line 12 Position 18-23"
-    },
-    {
-      "Id": "S1481",
-      "Message": "Remove the unused local variable \u0027a\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/LambdaAttributes.cs#L8",
-      "Location": "Line 8 Position 20-21"
-    },
-    {
-      "Id": "S1481",
-      "Message": "Remove the unused local variable \u0027f\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/LambdasWithExplicitReturnType.cs#L8",
-      "Location": "Line 8 Position 17-18"
-    },
-    {
-      "Id": "S1481",
-      "Message": "Remove the unused local variable \u0027m0\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/MutexAclTest.cs#L34",
-      "Location": "Line 34 Position 17-19"
-    },
-    {
-      "Id": "S1481",
-      "Message": "Remove the unused local variable \u0027m0\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/MutexAclTest.cs#L41",
-      "Location": "Line 41 Position 17-19"
-    },
-    {
-      "Id": "S1481",
-      "Message": "Remove the unused local variable \u0027m1\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/MutexAclTest.cs#L42",
-      "Location": "Line 42 Position 17-19"
-    },
-    {
-      "Id": "S1481",
-      "Message": "Remove the unused local variable \u0027rs2\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/StructuresAsLeftHandOperandsInWithExpressions.cs#L10",
-      "Location": "Line 10 Position 26-29"
-    },
-    {
-      "Id": "S1481",
-      "Message": "Remove the unused local variable \u0027s2\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/StructuresAsLeftHandOperandsInWithExpressions.cs#L15",
-      "Location": "Line 15 Position 20-22"
+      "Message": "Remove the unused local variable \u0027foo\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/Program.cs#L2",
+      "Location": "Line 2 Position 5-8"
     }
   ]
 }

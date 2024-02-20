@@ -3,38 +3,20 @@
     {
       "Id": "S4055",
       "Message": "Replace this string literal with a string retrieved through an instance of the \u0027ResourceManager\u0027 class.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L130",
-      "Location": "Line 130 Position 23-36"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L119",
+      "Location": "Line 119 Position 23-36"
     },
     {
       "Id": "S4055",
       "Message": "Replace this string literal with a string retrieved through an instance of the \u0027ResourceManager\u0027 class.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L135",
-      "Location": "Line 135 Position 23-36"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L124",
+      "Location": "Line 124 Position 23-36"
     },
     {
       "Id": "S4055",
       "Message": "Replace this string literal with a string retrieved through an instance of the \u0027ResourceManager\u0027 class.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L6",
-      "Location": "Line 6 Position 19-33"
-    },
-    {
-      "Id": "S4055",
-      "Message": "Replace this string literal with a string retrieved through an instance of the \u0027ResourceManager\u0027 class.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L75",
-      "Location": "Line 75 Position 35-55"
-    },
-    {
-      "Id": "S4055",
-      "Message": "Replace this string literal with a string retrieved through an instance of the \u0027ResourceManager\u0027 class.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Records.cs#L16",
-      "Location": "Line 16 Position 31-66"
-    },
-    {
-      "Id": "S4055",
-      "Message": "Replace this string literal with a string retrieved through an instance of the \u0027ResourceManager\u0027 class.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Records.cs#L21",
-      "Location": "Line 21 Position 35-47"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L5",
+      "Location": "Line 5 Position 19-33"
     }
   ]
 }

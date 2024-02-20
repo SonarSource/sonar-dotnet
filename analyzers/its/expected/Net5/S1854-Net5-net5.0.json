@@ -3,44 +3,8 @@
     {
       "Id": "S1854",
       "Message": "Remove this useless assignment to local variable \u0027i\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L221",
-      "Location": "Line 221 Position 5-8"
-    },
-    {
-      "Id": "S1854",
-      "Message": "Remove this useless assignment to local variable \u0027a\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1854.cs#L10",
-      "Location": "Line 10 Position 21-28"
-    },
-    {
-      "Id": "S1854",
-      "Message": "Remove this useless assignment to local variable \u0027a\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1854.cs#L11",
-      "Location": "Line 11 Position 17-22"
-    },
-    {
-      "Id": "S1854",
-      "Message": "Remove this useless assignment to local variable \u0027value\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1854.cs#L9",
-      "Location": "Line 9 Position 17-26"
-    },
-    {
-      "Id": "S1854",
-      "Message": "Remove this useless assignment to local variable \u0027b\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2219.cs#L12",
-      "Location": "Line 12 Position 17-31"
-    },
-    {
-      "Id": "S1854",
-      "Message": "Remove this useless assignment to local variable \u0027b\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2219.cs#L13",
-      "Location": "Line 13 Position 13-35"
-    },
-    {
-      "Id": "S1854",
-      "Message": "Remove this useless assignment to local variable \u0027result\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2437.cs#L10",
-      "Location": "Line 10 Position 13-34"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L210",
+      "Location": "Line 210 Position 5-8"
     }
   ]
 }

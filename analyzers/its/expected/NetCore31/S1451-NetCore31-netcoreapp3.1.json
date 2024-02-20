@@ -3,61 +3,19 @@
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/Controllers/HomeController.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/NetCore31/obj/Debug/netcoreapp3.1/.NETCoreApp,Version=v3.1.AssemblyAttributes.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/Controllers/S2115.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/NetCore31/obj/Debug/netcoreapp3.1/NetCore31.AssemblyInfo.cs#L1",
       "Location": "Line 1 Position 1-1"
     },
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/Controllers/S4502Controller.cs#L1",
-      "Location": "Line 1 Position 1-1"
-    },
-    {
-      "Id": "S1451",
-      "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/Controllers/S5122Controller.cs#L1",
-      "Location": "Line 1 Position 1-1"
-    },
-    {
-      "Id": "S1451",
-      "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/Controllers/S5693Controller.cs#L1",
-      "Location": "Line 1 Position 1-1"
-    },
-    {
-      "Id": "S1451",
-      "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/obj/Debug/netcoreapp3.1/.NETCoreApp,Version=v3.1.AssemblyAttributes.cs#L1",
-      "Location": "Line 1 Position 1-1"
-    },
-    {
-      "Id": "S1451",
-      "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/obj/Debug/netcoreapp3.1/NetCore31.AssemblyInfo.cs#L1",
-      "Location": "Line 1 Position 1-1"
-    },
-    {
-      "Id": "S1451",
-      "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/obj/Debug/netcoreapp3.1/NetCore31.RazorAssemblyInfo.cs#L1",
-      "Location": "Line 1 Position 1-1"
-    },
-    {
-      "Id": "S1451",
-      "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/Program.cs#L1",
-      "Location": "Line 1 Position 1-1"
-    },
-    {
-      "Id": "S1451",
-      "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/Startup.cs#L1",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/NetCore31/Program.cs#L1",
       "Location": "Line 1 Position 1-1"
     }
   ]

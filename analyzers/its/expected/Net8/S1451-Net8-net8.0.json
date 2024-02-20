@@ -3,36 +3,6 @@
     {
       "Id": "S1451",
       "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net8/Net8/features/AliasAnyType.cs#L1",
-      "Location": "Line 1 Position 1-1"
-    },
-    {
-      "Id": "S1451",
-      "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net8/Net8/features/CollectionExpressions.cs#L1",
-      "Location": "Line 1 Position 1-1"
-    },
-    {
-      "Id": "S1451",
-      "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net8/Net8/features/DefaultLambdaParameters.cs#L1",
-      "Location": "Line 1 Position 1-1"
-    },
-    {
-      "Id": "S1451",
-      "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net8/Net8/features/InlineArrays.cs#L1",
-      "Location": "Line 1 Position 1-1"
-    },
-    {
-      "Id": "S1451",
-      "Message": "Add or update the header of this file.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net8/Net8/features/PrimaryConstructor.cs#L1",
-      "Location": "Line 1 Position 1-1"
-    },
-    {
-      "Id": "S1451",
-      "Message": "Add or update the header of this file.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net8/Net8/Program.cs#L1",
       "Location": "Line 1 Position 1-1"
     }
