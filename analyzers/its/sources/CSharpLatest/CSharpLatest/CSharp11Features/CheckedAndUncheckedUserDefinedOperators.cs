@@ -4,7 +4,7 @@ internal class CheckedAndUncheckedUserDefinedOperators
 {
     public void Method()
     {
-        var a = int.MaxValue;
+        int a = int.MaxValue;
         var b = 3;
 
         Console.WriteLine(unchecked(a + b));  // output: -2147483646

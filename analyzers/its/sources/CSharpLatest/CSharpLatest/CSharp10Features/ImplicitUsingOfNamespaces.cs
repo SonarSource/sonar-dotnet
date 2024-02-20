@@ -1,4 +1,4 @@
-﻿namespace Csharp10PlayGround;
+﻿namespace CSharpLatest.CSharp10Features;
 
 internal class ImplicitUsingOfNamespaces
 {
