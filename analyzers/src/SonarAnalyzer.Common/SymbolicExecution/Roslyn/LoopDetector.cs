@@ -96,12 +96,10 @@ internal class LoopDetector
             && block.Successors[0].Semantics == ControlFlowBranchSemantics.StructuredExceptionHandling)
         {
             var tryFinallyRegion = finallyRegion.EnclosingRegion;
-            var associatedTryRegion = tryFinallyRegion.NestedRegion(ControlFlowRegionKind.Try);
             successors = successors.Concat(
-                cfg.Blocks.Where(x => x.IsIn(associatedTryRegion))
-                    .SelectMany(x => x.SuccessorBlocks)
-                    .Where(x => !x.IsIn(tryFinallyRegion))
-                    .Select(x => x.Ordinal));
+                cfg.Blocks.SelectMany(x => x.Successors)
+                    .Where(x => x.Destination is not null && x.LeavingRegions.Contains(tryFinallyRegion))
+                    .Select(x => x.Destination.Ordinal));
         }
         return successors.Distinct();
     }
