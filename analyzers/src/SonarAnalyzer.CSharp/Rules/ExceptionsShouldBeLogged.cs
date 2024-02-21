@@ -88,6 +88,18 @@ public sealed class ExceptionsShouldBeLogged : SonarDiagnosticAnalyzer
             "Warn"
         ];
 
+        private static readonly HashSet<string> NLogLoggingMethods =
+        [
+            "Debug",
+            "ConditionalDebug",
+            "Error",
+            "Fatal",
+            "Info",
+            "Trace",
+            "ConditionalTrace",
+            "Warn"
+        ];
+
         private readonly SemanticModel model;
         private bool isFirstCatchClauseVisited;
         private bool hasWhenFilterWithDeclarations;
@@ -148,7 +160,8 @@ public sealed class ExceptionsShouldBeLogged : SonarDiagnosticAnalyzer
             IsLoggingInvocation(invocationSyntax, model, MicrosoftExtensionsLoggingMethods, KnownType.Microsoft_Extensions_Logging_LoggerExtensions)
             || IsLoggingInvocation(invocationSyntax, model, CastleCoreOrCommonCoreLoggingMethods, KnownType.Castle_Core_Logging_ILogger)
             || IsLoggingInvocation(invocationSyntax, model, CastleCoreOrCommonCoreLoggingMethods, KnownType.Common_Logging_ILog)
-            || IsLoggingInvocation(invocationSyntax, model, Log4NetLoggingMethods, KnownType.log4net_ILog);
+            || IsLoggingInvocation(invocationSyntax, model, Log4NetLoggingMethods, KnownType.log4net_ILog)
+            || IsLoggingInvocation(invocationSyntax, model, NLogLoggingMethods, KnownType.NLog_Logger);
 
         private static bool IsLoggingInvocation(InvocationExpressionSyntax invocationSyntax, SemanticModel model, ICollection<string> names, KnownType containingType) =>
             names.Contains(invocationSyntax.GetIdentifier().ToString())

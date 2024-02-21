@@ -202,4 +202,74 @@ public class ExceptionsShouldBeLoggedTest
             """)
             .AddReferences(NuGetMetadataReference.Log4Net(Constants.NuGetLatestVersion, "netstandard2.0"))
             .Verify();
+
+    [DataTestMethod]
+    [DataRow("Debug")]
+    [DataRow("Error")]
+    [DataRow("Fatal")]
+    [DataRow("Info")]
+    [DataRow("Trace")]
+    [DataRow("Warn")]
+    // https://nlog-project.org/documentation/v5.0.0/html/Methods_T_NLog_Logger.htm
+    public void ExceptionsShouldBeLogged_NLog_CS(string methodName) =>
+        builder.AddSnippet($$"""
+            using System;
+            using System.Globalization;
+            using NLog;
+
+            public class Program
+            {
+                public void Method(Logger logger, string message, Object[] parameters)
+                {
+                    try { }
+                    catch (Exception e)
+                    {
+                        logger.{{methodName}}("Message");                               // Noncompliant
+                        logger.{{methodName}}("Message", parameters);                   // Noncompliant
+                        logger.{{methodName}}(CultureInfo.CurrentCulture, "Message");   // Noncompliant
+                    }
+                    try { }
+                    catch (Exception e)
+                    {
+                        logger.{{methodName}}(e, "Message");
+                        logger.{{methodName}}(e, "Message", parameters);
+                        logger.{{methodName}}(e, CultureInfo.CurrentCulture, "Message");
+                    }
+                }
+            }
+            """)
+           .AddReferences(NuGetMetadataReference.NLog(Constants.NuGetLatestVersion))
+           .Verify();
+
+    [DataTestMethod]
+    [DataRow("ConditionalDebug")]
+    [DataRow("ConditionalTrace")]
+    // https://nlog-project.org/documentation/v5.0.0/html/Methods_T_NLog_Logger.htm
+    public void ExceptionsShouldBeLogged_NLog_Conditional_CS(string methodName) =>
+        builder.AddSnippet($$"""
+            using System;
+            using System.Globalization;
+            using NLog;
+
+            public class Program
+            {
+                public void Method(Logger logger, string message, Object[] parameters)
+                {
+                    try { }
+                    catch (Exception e)
+                    {
+                        logger.{{methodName}}("Message");                               // Noncompliant
+                        logger.{{methodName}}(CultureInfo.CurrentCulture, "Message");   // Noncompliant
+                    }
+                    try { }
+                    catch (Exception e)
+                    {
+                        logger.{{methodName}}(e, "Message");
+                        logger.{{methodName}}(e, CultureInfo.CurrentCulture, "Message");
+                    }
+                }
+            }
+            """)
+           .AddReferences(NuGetMetadataReference.NLog(Constants.NuGetLatestVersion))
+           .Verify();
 }
