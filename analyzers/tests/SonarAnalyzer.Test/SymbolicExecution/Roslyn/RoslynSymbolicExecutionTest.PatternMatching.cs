@@ -631,8 +631,9 @@ static object Tag(string name, object value) => null;";
             Tag("Result", result);
             Tag("Arg", arg);
             """;
-        var createSEContext = () => SETestContext.CreateCS(code, "double arg");
-        createSEContext.Should().ThrowExactly<NullReferenceException>();    // Should not throw
+        var validator = SETestContext.CreateCS(code, "double arg").Validator;
+        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
+        validator.TagValue("Arg").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
     }
 
     private static void ValidateSetBoolConstraint(string isPattern, OperationKind expectedOperation, bool? expectedBoolConstraint)
