@@ -83,6 +83,7 @@ public class MessageTemplatesTest
     [DataRow("hello {world,42:!@#$%}")]
     [DataRow("hello {world,-1:dd-MM-yyy}")]
     [DataRow("hello {world,-42:3,14159}")]
+    [DataRow("hello {world:format,42}")] // semantically looks like a typo, format and alignment are reversed, but it's syntactically valid.
     public void Parse_Placeholder_Named_Alignment_Format(string template)
     {
         var result = MessageTemplates.Parse(template);
