@@ -62,6 +62,24 @@ public class TestCases
         logger.LogCritical("Message!"); // Compliant - we do not check this
     }
 
+    public void LogFromLambda()
+    {
+        try { }
+        catch (AggregateException e)
+        {
+            Call(() => logger.LogCritical("Message!")); // Noncompliant
+        }
+        catch (Exception e)
+        {
+            Call(() => logger.LogCritical(e, "Message!"));
+        }
+    }
+
+    private void Call(Action action)
+    {
+        action();
+    }
+
     private void LogFromMultipleCatchBlocks()
     {
         try { }
@@ -84,20 +102,25 @@ public class TestCases
         try { }
         catch (Exception e)
         {
-            logger.LogWarning("Message!");                  // Noncompliant
-            logger.LogWarning(wrongException, "Message!");  // Noncompliant - wrong exception
+            logger.LogWarning("Message!");                      // Noncompliant
+            logger.LogWarning(wrongException, "Message!");      // Noncompliant - wrong exception
             try { }
             catch (DivideByZeroException)
             {
-                logger.LogCritical("Message!");             // Noncompliant
+                logger.LogCritical("Message!");                 // Noncompliant
             }
             catch (AggregateException e1)
             {
-                logger.LogCritical(e, "Message!");          // Noncompliant - wrong exception
+                logger.LogCritical(e, "Message!");              // Noncompliant - wrong exception
             }
-            catch (Exception e2)
+            catch (ArgumentException e2)
             {
+                logger.LogCritical(wrongException, "Message!"); // Compliant - caught exception is logged in the next line
                 logger.LogCritical(e2, "Message!");
+            }
+            catch (Exception e3)
+            {
+                logger.LogCritical(e3, "Message!");
             }
         }
     }
