@@ -449,6 +449,30 @@ public class LoopDetectorTest
             [1, 9]);
 
     [TestMethod]
+    public void LoopDetector_IfInTryFinally() =>
+        ValidateLoops("""
+            _ = "Before loop";                          // Block 1
+            while (condition)                           // Block 2
+            {
+                try
+                {
+                    _ = "Try";                          // Block 3
+                }
+                finally
+                {
+                    if (condition)                      // Block 4
+                    {
+                        _ = "Not part of the loop";     // Block 5
+                        throw new System.Exception();   // Block 5
+                    }
+                }                                       // Block 6
+            }
+            _ = "After loop";                           // Block 7
+            """,
+            [2, 3, 4, 6],
+            [1, 5, 7]);
+
+    [TestMethod]
     public void LoopDetector_TouchingLoops() =>
         ValidateLoops("""
             _ = "Start";    // Block 1
