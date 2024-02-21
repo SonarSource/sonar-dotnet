@@ -14,6 +14,7 @@ param
 
 Set-StrictMode -version 2.0
 $ErrorActionPreference = "Stop"
+$DifferencesMsg = "ERROR: There are differences between the actual and the expected issues."
 
 if ($PSBoundParameters['Verbose'] -Or $PSBoundParameters['Debug']) {
     $global:DebugPreference = "Continue"
@@ -175,8 +176,6 @@ function Show-DiffResults() {
         Remove-Item -Recurse -Force .\diff
     }
 
-    $errorMsg = "ERROR: There are differences between the actual and the expected issues."
-
     if (!$ruleId -And !$project)
     {
         Write-Host "Will find differences for all projects, all rules."
@@ -184,7 +183,7 @@ function Show-DiffResults() {
         Write-Debug "Running 'git diff' between 'actual' and 'expected'."
 
         Exec { & git diff --no-index --exit-code ./expected ./actual `
-        } -errorMessage $errorMsg
+        } -errorMessage $DifferencesMsg
 
         return
     }
@@ -214,7 +213,7 @@ function Show-DiffResults() {
     }
 
     Exec { & git diff --no-index --exit-code .\diff\expected .\diff\actual `
-    } -errorMessage $errorMsg
+    } -errorMessage $DifferencesMsg
 }
 
 function Invoke-JsonParser()
@@ -276,7 +275,7 @@ try {
 
     Invoke-JsonParser
 
-    # TODO: Migrate all of the remaining logic to JsonParser
+    # ToDo: Migrate all of the remaining logic to JsonParser
     Write-Host "Checking for differences..."
     Show-DiffResults
     Write-Host -ForegroundColor Green "SUCCESS: ITs were successful! No differences were found!"
@@ -284,8 +283,15 @@ try {
 }
 catch {
     Write-Host -ForegroundColor Red $_
-    Write-Host $_.Exception
-    Write-Host $_.ScriptStackTrace
+    # ToDo: Migrate this to JsonParser, remove update-expected.ps1 file
+    if($_.FullyQualifiedErrorId -eq $DifferencesMsg) {
+        ./update-expected.ps1 -Project $Project
+    } else {
+        Write-Host "----"
+        Write-Host $_.Exception
+        Write-Host "----"
+        Write-Host $_.ScriptStackTrace
+    }
     exit 1
 }
 finally {

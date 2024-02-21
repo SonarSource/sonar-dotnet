@@ -34,6 +34,7 @@ public static class Program
         ConsoleHelper.WriteLineColor("Processing analyzer results", ConsoleColor.Yellow);
         ParseIssues();
         ShowDiff(options.Project, options.RuleId);
+        // ToDo: Update expected
         return 0;
     }
 
@@ -48,7 +49,7 @@ public static class Program
         ConsoleHelper.WriteLineColor($"Finished splitting the SARIF reports in '{sw.Elapsed}'", ConsoleColor.Yellow);
     }
 
-    // TODO: Reimplement this functionality from the powershell function.
+    // ToDo: Reimplement this functionality from the powershell function.
     public static void ShowDiff(string project, string ruleId)
     {
         // Placeholder, to be deleted
