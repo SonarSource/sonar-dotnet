@@ -34,6 +34,7 @@ public class UseConstantLoggingTemplateTest
     [DataTestMethod]
     [DataRow("Log", "LogLevel.Warning,")]
     [DataRow("LogCritical")]
+    [DataRow("LogDebug")]
     [DataRow("LogError")]
     [DataRow("LogInformation")]
     [DataRow("LogTrace")]

@@ -41,6 +41,7 @@ public sealed class UseConstantLoggingTemplate : SonarDiagnosticAnalyzer
     private static readonly ImmutableArray<LogMethod> LogMethods = ImmutableArray.Create(
         new LogMethod(KnownType.Microsoft_Extensions_Logging_LoggerExtensions, "Log", "message"),
         new LogMethod(KnownType.Microsoft_Extensions_Logging_LoggerExtensions, "LogCritical", "message"),
+        new LogMethod(KnownType.Microsoft_Extensions_Logging_LoggerExtensions, "LogDebug", "message"),
         new LogMethod(KnownType.Microsoft_Extensions_Logging_LoggerExtensions, "LogError", "message"),
         new LogMethod(KnownType.Microsoft_Extensions_Logging_LoggerExtensions, "LogInformation", "message"),
         new LogMethod(KnownType.Microsoft_Extensions_Logging_LoggerExtensions, "LogTrace", "message"),

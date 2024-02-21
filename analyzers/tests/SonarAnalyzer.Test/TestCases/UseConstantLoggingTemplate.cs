@@ -40,6 +40,9 @@ public class Program
         logger.Log(LogLevel.Warning, new EventId(42), $"{arg}");                // Noncompliant
         logger.Log(LogLevel.Warning, new Exception(), $"{arg}");                // Noncompliant
         logger.Log(LogLevel.Warning, new Exception(), "{Arg}", arg);            // Compliant
+
+        LoggerExtensions.Log(logger, LogLevel.Warning, "{Arg}", arg);           // Compliant
+        LoggerExtensions.Log(logger, LogLevel.Warning, $"{arg}");               // Noncompliant
     }
 
     public void NotLoggingMethod(ILogger logger, int arg)
