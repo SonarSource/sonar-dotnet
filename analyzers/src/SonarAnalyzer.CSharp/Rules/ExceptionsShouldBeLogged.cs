@@ -24,7 +24,7 @@ namespace SonarAnalyzer.Rules.CSharp;
 public sealed class ExceptionsShouldBeLogged : SonarDiagnosticAnalyzer
 {
     private const string DiagnosticId = "S6667";
-    private const string MessageFormat = "Logging in a catch clause should include the exception";
+    private const string MessageFormat = "Logging in a catch clause should include the exception.";
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
