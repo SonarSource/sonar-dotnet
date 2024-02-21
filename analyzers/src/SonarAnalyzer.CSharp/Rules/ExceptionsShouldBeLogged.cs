@@ -63,6 +63,22 @@ public sealed class ExceptionsShouldBeLogged : SonarDiagnosticAnalyzer
             "LogWarning"
         ];
 
+        private static readonly HashSet<string> CastleCoreLoggingMethods =
+        [
+            "Debug",
+            "DebugFormat",
+            "Error",
+            "ErrorFormat",
+            "Fatal",
+            "FatalFormat",
+            "Info",
+            "InfoFormat",
+            "Trace",
+            "TraceFormat",
+            "Warn",
+            "WarnFormat"
+        ];
+
         private readonly SemanticModel model;
         private bool isFirstCatchClauseVisited;
         private bool hasWhenFilterWithDeclarations;
@@ -120,8 +136,12 @@ public sealed class ExceptionsShouldBeLogged : SonarDiagnosticAnalyzer
         }
 
         private static bool IsLoggingInvocation(InvocationExpressionSyntax invocationSyntax, SemanticModel model) =>
-            MicrosoftExtensionsLoggingMethods.Contains(invocationSyntax.GetIdentifier().ToString())
+            IsLoggingInvocation(invocationSyntax, model, MicrosoftExtensionsLoggingMethods, KnownType.Microsoft_Extensions_Logging_LoggerExtensions)
+            || IsLoggingInvocation(invocationSyntax, model, CastleCoreLoggingMethods, KnownType.Castle_Core_Logging_ILogger);
+
+        private static bool IsLoggingInvocation(InvocationExpressionSyntax invocationSyntax, SemanticModel model, ICollection<string> names, KnownType containingType) =>
+            names.Contains(invocationSyntax.GetIdentifier().ToString())
             && model.GetSymbolInfo(invocationSyntax).Symbol is { } invocationSymbol
-            && invocationSymbol.ContainingType.Is(KnownType.Microsoft_Extensions_Logging_LoggerExtensions);
+            && invocationSymbol.ContainingType.Is(containingType);
     }
 }
