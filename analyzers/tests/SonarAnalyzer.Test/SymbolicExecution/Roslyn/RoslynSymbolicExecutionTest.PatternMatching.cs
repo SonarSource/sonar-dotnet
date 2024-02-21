@@ -624,7 +624,7 @@ static object Tag(string name, object value) => null;";
     }
 
     [TestMethod]
-    public void RelationalPattern_Double_DoesNotLearn()
+    public void RelationalPattern_Double_DoesNotLearn() // We only track integer values because NumerConstraint uses BigInteger
     {
         const string code = """
             var result = arg is < 42.0;
