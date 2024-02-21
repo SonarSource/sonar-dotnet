@@ -25,12 +25,66 @@ namespace SonarAnalyzer.Test.Rules;
 [TestClass]
 public class ExceptionsShouldBeLoggedTest
 {
+    private const string EventIdParameter = "new EventId(1),";
+    private const string LogLevelParameter = "LogLevel.Warning,";
+    private const string NoParameter = "";
     private readonly VerifierBuilder builder = new VerifierBuilder<ExceptionsShouldBeLogged>();
 
     [TestMethod]
     public void ExceptionsShouldBeLogged_CS() =>
         builder
-            .AddPaths("ExceptionsShouldBeLogged.Microsoft.Extensions.Logging.cs")
+            .AddPaths("ExceptionsShouldBeLogged.cs")
             .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions(Constants.NuGetLatestVersion))
             .Verify();
+
+    [DataTestMethod]
+    [DataRow("Log", LogLevelParameter)]
+    [DataRow("Log", LogLevelParameter, EventIdParameter)]
+    [DataRow("LogCritical")]
+    [DataRow("LogCritical", NoParameter, EventIdParameter)]
+    [DataRow("LogDebug")]
+    [DataRow("LogDebug", NoParameter, EventIdParameter)]
+    [DataRow("LogError")]
+    [DataRow("LogError", NoParameter, EventIdParameter)]
+    [DataRow("LogInformation")]
+    [DataRow("LogInformation", NoParameter, EventIdParameter)]
+    [DataRow("LogTrace")]
+    [DataRow("LogTrace", NoParameter, EventIdParameter)]
+    [DataRow("LogWarning")]
+    [DataRow("LogWarning", NoParameter, EventIdParameter)]
+    public void ExceptionsShouldBeLogged_MicrosoftExtensionsLogging_NonCompliant_CS(string methodName, string logLevel = "", string eventId = "") =>
+        builder.AddSnippet($$"""
+            using System;
+            using Microsoft.Extensions.Logging;
+            using Microsoft.Extensions.Logging.Abstractions;
+
+            public class Program
+            {
+                public void Method(ILogger logger, string message)
+                {
+                    try { }
+                    catch (Exception e)
+                    {
+                        logger.{{methodName}}({{logLevel}} {{eventId}} message);                        // Noncompliant
+                    }
+                    try { }
+                    catch (Exception e)
+                    {
+                        logger.{{methodName}}({{logLevel}} {{eventId}} e, message);                     // Compliant
+                    }
+                    try { }
+                    catch (Exception e)
+                    {
+                        LoggerExtensions.{{methodName}}(logger, {{logLevel}} {{eventId}} message);      // Noncompliant
+                    }
+                    try { }
+                    catch (Exception e)
+                    {
+                        LoggerExtensions.{{methodName}}(logger, {{logLevel}}{{eventId}} e, message);    // Compliant
+                    }
+                }
+            }
+            """)
+           .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions(Constants.NuGetLatestVersion))
+           .Verify();
 }
