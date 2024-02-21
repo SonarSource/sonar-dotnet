@@ -623,6 +623,18 @@ static object Tag(string name, object value) => null;";
         }
     }
 
+    [TestMethod]
+    public void RelationalPattern_Double_DoesNotLearn()
+    {
+        const string code = """
+            var result = arg is < 42.0;
+            Tag("Result", result);
+            Tag("Arg", arg);
+            """;
+        var createSEContext = () => SETestContext.CreateCS(code, "double arg");
+        createSEContext.Should().ThrowExactly<NullReferenceException>();    // Should not throw
+    }
+
     private static void ValidateSetBoolConstraint(string isPattern, OperationKind expectedOperation, bool? expectedBoolConstraint)
     {
         var validator = CreateSetBoolConstraintValidator(isPattern);
