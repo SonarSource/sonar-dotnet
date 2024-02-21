@@ -66,6 +66,7 @@ public sealed class ExceptionsShouldBeLogged : SonarDiagnosticAnalyzer
 
         private readonly SemanticModel model;
         private bool isFirstCatchClauseVisited;
+        private bool hasWhenFilter;
         private ILocalSymbol catchException;
 
         public bool IsExceptionLogged { get; private set; }
@@ -78,6 +79,7 @@ public sealed class ExceptionsShouldBeLogged : SonarDiagnosticAnalyzer
 
         public override void VisitCatchClause(CatchClauseSyntax node)
         {
+            hasWhenFilter = node.Filter != null;
             if (node.Declaration != null && !node.Declaration.Identifier.IsKind(SyntaxKind.None))
             {
                 catchException = model.GetDeclaredSymbol(node.Declaration);
@@ -96,7 +98,7 @@ public sealed class ExceptionsShouldBeLogged : SonarDiagnosticAnalyzer
             if (IsLoggingInvocation(node, model))
             {
                 var currentException = node.GetArgumentSymbolsDerivedFromKnownType(KnownType.System_Exception, model).FirstOrDefault();
-                if (currentException != null && currentException.Equals(catchException))
+                if (currentException != null && (hasWhenFilter || currentException.Equals(catchException)))
                 {
                     IsExceptionLogged = true;
                     return;

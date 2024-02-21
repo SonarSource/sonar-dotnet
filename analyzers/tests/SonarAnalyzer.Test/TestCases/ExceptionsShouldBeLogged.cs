@@ -144,7 +144,7 @@ public class TestCases
         }
         catch (Exception e) when (e is DivideByZeroException divideByZeroException)
         {
-            logger.LogWarning(divideByZeroException, "Message!");   // Noncompliant - FP the exception has other name
+            logger.LogWarning(divideByZeroException, "Message!");
         }
         catch (Exception e) when (e is InvalidOperationException invalidOperationException || e is InvalidTimeZoneException invalidTimeZoneException)
         {
