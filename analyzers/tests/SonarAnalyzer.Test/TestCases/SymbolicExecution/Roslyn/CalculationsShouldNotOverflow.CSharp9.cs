@@ -113,3 +113,21 @@ public partial class Partial
         _ = i + 100; // Noncompliant
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8787
+class Repro_8787
+{
+    private class Constants
+    {
+        public const double MinMonthsValue = 1; // The SE engine doesn't learn the NumericConstraint for double
+        public const double MaxMonthsValue = 12;
+    }
+
+    public static double GetNormalizedNumMonthsForPastDate(double numMonths) =>
+        numMonths switch
+        {
+            < Constants.MinMonthsValue => Constants.MinMonthsValue, // <--- AD0001 here, because the NumericConstraint is not available
+            >= Constants.MaxMonthsValue => Constants.MinMonthsValue,
+            _ => 12 - numMonths
+        };
+}
