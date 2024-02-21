@@ -125,4 +125,39 @@ public class ExceptionsShouldBeLoggedTest
             """)
            .AddReferences(NuGetMetadataReference.CastleCore())
            .Verify();
+
+    [DataTestMethod]
+    [DataRow("Debug")]
+    [DataRow("Error")]
+    [DataRow("Fatal")]
+    [DataRow("Info")]
+    [DataRow("Warn")]
+    // https://logging.apache.org/log4net/release/sdk/html/T_log4net_ILog.htm
+    public void ExceptionsShouldBeLogged_Log4net_CS(string methodName) =>
+        builder.AddSnippet($$"""
+            using System;
+            using System.Globalization;
+            using log4net;
+
+            public class Program
+            {
+                public void Method(ILog logger, string message)
+                {
+                    try { }
+                    catch (Exception e)
+                    {
+                        logger.{{methodName}}(message);                                     // Noncompliant
+                        logger.{{methodName}}Format(message);                               // Compliant - Format overloads do not take an exception.
+                        logger.{{methodName}}Format(CultureInfo.CurrentCulture, message);   // Compliant - Format overloads do not take an exception.
+                    }
+                    try { }
+                    catch (Exception e)
+                    {
+                        logger.{{methodName}}(message, e);                                  // Compliant
+                    }
+                }
+            }
+            """)
+            .AddReferences(NuGetMetadataReference.Log4Net(Constants.NuGetLatestVersion, "netstandard2.0"))
+            .Verify();
 }
