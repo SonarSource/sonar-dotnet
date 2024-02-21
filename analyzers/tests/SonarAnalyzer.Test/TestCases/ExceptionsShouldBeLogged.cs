@@ -171,6 +171,20 @@ public class TestCases
         logger.LogCritical("Message!");
     }
 
+    public void ILoggerImplementation(NullLogger logger)
+    {
+        try { }
+        catch (Exception e)
+        {
+            logger.LogCritical("Message!");     // Noncompliant
+        }
+        try { }
+        catch (Exception e)
+        {
+            logger.LogCritical(e, "Message!");  // Compliant
+        }
+    }
+
     public class CustomLogger
     {
         public void LogCritical(string message) { }
