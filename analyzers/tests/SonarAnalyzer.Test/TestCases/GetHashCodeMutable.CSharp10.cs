@@ -33,3 +33,20 @@ public record GetHashCodeMutable : AnyOther
         return hash;
     }
 }
+
+public struct Struct
+{
+    public int Field;
+
+    // See https://github.com/SonarSource/sonar-dotnet/issues/8756
+    public override int GetHashCode() => Field; // Compliant, this is a value type.
+}
+
+public record struct RecordStruct
+{
+    public int Field;
+
+    // See https://github.com/SonarSource/sonar-dotnet/issues/8756
+    public override int GetHashCode() => Field; // Compliant, this is a value type.
+}
+

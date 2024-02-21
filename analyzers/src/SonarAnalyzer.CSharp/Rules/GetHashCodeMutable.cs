@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var methodSyntax = (MethodDeclarationSyntax)c.Node;
                     var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodSyntax);
 
-                    if (!methodSymbol.IsObjectGetHashCode())
+                    if (methodSymbol.ContainingType.IsValueType || !methodSymbol.IsObjectGetHashCode())
                     {
                         return;
                     }
@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         baseMembers = c.SemanticModel.LookupBaseMembers(methodSyntax.SpanStart);
                     }
-                    catch (System.ArgumentException)
+                    catch (ArgumentException)
                     {
                         // this is expected on invalid code
                         return;
@@ -77,7 +77,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.MethodDeclaration);
 
         private static SecondaryLocation CreateSecondaryLocation(SimpleNameSyntax identifierSyntax) =>
-            new SecondaryLocation(identifierSyntax.GetLocation(), string.Format(SecondaryMessageFormat, identifierSyntax.Identifier.Text));
+            new(identifierSyntax.GetLocation(), string.Format(SecondaryMessageFormat, identifierSyntax.Identifier.Text));
 
         private static IEnumerable<IdentifierNameSyntax> GetAllFirstMutableFieldsUsed(SonarSyntaxNodeReportingContext context,
                                                                                       ICollection<IFieldSymbol> fieldsOfClass,
@@ -87,19 +87,17 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var identifier in identifiers)
             {
-                if (!(context.SemanticModel.GetSymbolInfo(identifier).Symbol is IFieldSymbol identifierSymbol))
+                if (context.SemanticModel.GetSymbolInfo(identifier).Symbol is not IFieldSymbol identifierSymbol)
                 {
                     continue;
                 }
-
                 if (!syntaxNodes.ContainsKey(identifierSymbol))
                 {
                     if (!IsFieldRelevant(identifierSymbol, fieldsOfClass))
                     {
                         continue;
                     }
-
-                    syntaxNodes.Add(identifierSymbol, new List<IdentifierNameSyntax>());
+                    syntaxNodes.Add(identifierSymbol, []);
                 }
 
                 syntaxNodes[identifierSymbol].Add(identifier);
