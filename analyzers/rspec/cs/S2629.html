@@ -14,9 +14,6 @@ performance by reducing unnecessary evaluations and ensures that logging stateme
   <li> <a href="https://www.nuget.org/packages/Serilog">Serilog</a> </li>
   <li> <a href="https://www.nuget.org/packages/NLog">Nlog</a> </li>
 </ul>
-<h3>Exceptions</h3>
-<p>No issues will be raised if the interpolated string argument is passed to a parameter whose type is marked with the <a
-href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.interpolatedstringhandlerattribute">InterpolatedStringHandlerArgumentAttribute</a>.</p>
 <pre data-diff-id="1" data-diff-type="noncompliant">
 public void Method(ILogger logger, bool parameter)
 {
@@ -29,10 +26,4 @@ public void Method(ILogger logger, bool parameter)
     logger.DebugFormat("The value of the parameter is: {Parameter}.", parameter);
 }
 </pre>
-<h2>Resources</h2>
-<h3>Documentation</h3>
-<ul>
-  <li> Microsoft Learn - <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.interpolatedstringhandlerattribute">InterpolatedStringHandlerArgumentAttribute</a> </li>
-</ul>
 
