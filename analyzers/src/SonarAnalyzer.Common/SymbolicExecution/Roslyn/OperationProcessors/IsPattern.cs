@@ -60,8 +60,9 @@ internal sealed class IsPattern : BranchingProcessor<IIsPatternOperationWrapper>
     }
 
     private static NumberConstraint NumberConstraintFromRelationalPattern(ProgramState state, IRelationalPatternOperationWrapper relational, bool falseBranch, NumberConstraint existingNumber) =>
-        relational.OperatorKind.ApplyOpposite(falseBranch)
-            .NumberConstraintFromRelationalOperator(existingNumber, state.Constraint<NumberConstraint>(relational.Value));
+        state.Constraint<NumberConstraint>(relational.Value) is { } comparedNumber
+            ? relational.OperatorKind.ApplyOpposite(falseBranch).NumberConstraintFromRelationalOperator(existingNumber, comparedNumber)
+            : null;
 
     private static SymbolicConstraint ConstraintFromConstantPattern(ProgramState state, IConstantPatternOperationWrapper constant, bool falseBranch, bool isReferenceType)
     {
