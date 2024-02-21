@@ -109,8 +109,6 @@ function Build-Project-DotnetTool([string]$ProjectName, [string]$SolutionRelativ
 }
 
 function Initialize-ActualFolder() {
-    $methodTimer = [system.diagnostics.stopwatch]::StartNew()
-
     Write-Host "Initializing the actual issues folder with the expected result"
     if (Test-Path .\actual) {
         Write-Host "Removing existing folder 'actual'"
@@ -119,13 +117,9 @@ function Initialize-ActualFolder() {
 
     # this copies no files if ruleId is not set, and all but ending with ruleId if set
     Copy-FolderRecursively -From .\expected -To .\actual -Exclude "${ruleId}*.json"
-    $methodTimerElapsed = $methodTimer.Elapsed.TotalSeconds
-    Write-Debug "Initialized actual folder in '${methodTimerElapsed}'"
 }
 
 function Initialize-OutputFolder() {
-    $methodTimer = [system.diagnostics.stopwatch]::StartNew()
-
     Write-Host "Initializing the output folder"
     if (Test-Path .\output) {
         Write-Host "Removing existing folder 'output'"
@@ -148,9 +142,6 @@ function Initialize-OutputFolder() {
     }
 
     Write-Host "The rule set we use is .\output\AllSonarAnalyzerRules.ruleset."
-
-    $methodTimerElapsed = $methodTimer.Elapsed.TotalSeconds
-    Write-Debug "Initialized output folder in '${methodTimerElapsed}'"
 }
 
 function Get-FullPath($Folder) {
@@ -242,7 +233,6 @@ function Invoke-JsonParser()
 }
 
 try {
-    $scriptTimer = [system.diagnostics.stopwatch]::StartNew()
     . (Join-Path $PSScriptRoot "..\..\scripts\build\build-utils.ps1")
     Push-Location $PSScriptRoot
     Test-FileExists "..\packaging\binaries\SonarAnalyzer.dll"
@@ -288,11 +278,7 @@ try {
 
     # TODO: Migrate all of the remaining logic to JsonParser
     Write-Host "Checking for differences..."
-    $diffTimer = [system.diagnostics.stopwatch]::StartNew()
     Show-DiffResults
-    $diffTimerElapsed = $diffTimer.Elapsed.TotalSeconds
-    Write-Debug "Checked for differences in '${diffTimerElapsed}'"
-
     Write-Host -ForegroundColor Green "SUCCESS: ITs were successful! No differences were found!"
     exit 0
 }
@@ -304,14 +290,5 @@ catch {
 }
 finally {
     Pop-Location
-
     Remove-Item -ErrorAction Ignore -Force global.json
-
-    $scriptTimer.Stop()
-    $totalTimeInSeconds = [int]$scriptTimer.Elapsed.TotalSeconds
-    if ($ruleId) {
-        Write-Debug "Analyzed ${ruleId} in ${totalTimeInSeconds}s"
-    } else {
-        Write-Debug "Analyzed all rules in ${totalTimeInSeconds}s"
-    }
 }
