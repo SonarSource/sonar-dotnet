@@ -623,6 +623,19 @@ static object Tag(string name, object value) => null;";
         }
     }
 
+    [TestMethod]
+    public void RelationalPattern_Double_DoesNotLearn() // We only track integer values because NumerConstraint uses BigInteger
+    {
+        const string code = """
+            var result = arg is < 42.0;
+            Tag("Result", result);
+            Tag("Arg", arg);
+            """;
+        var validator = SETestContext.CreateCS(code, "double arg").Validator;
+        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
+        validator.TagValue("Arg").Should().HaveOnlyConstraints(ObjectConstraint.NotNull);
+    }
+
     private static void ValidateSetBoolConstraint(string isPattern, OperationKind expectedOperation, bool? expectedBoolConstraint)
     {
         var validator = CreateSetBoolConstraintValidator(isPattern);
