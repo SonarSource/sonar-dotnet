@@ -63,7 +63,7 @@ public sealed class ExceptionsShouldBeLogged : SonarDiagnosticAnalyzer
             "LogWarning"
         ];
 
-        private static readonly HashSet<string> CastleCoreLoggingMethods =
+        private static readonly HashSet<string> CastleCoreOrCommonCoreLoggingMethods =
         [
             "Debug",
             "DebugFormat",
@@ -146,7 +146,8 @@ public sealed class ExceptionsShouldBeLogged : SonarDiagnosticAnalyzer
 
         private static bool IsLoggingInvocation(InvocationExpressionSyntax invocationSyntax, SemanticModel model) =>
             IsLoggingInvocation(invocationSyntax, model, MicrosoftExtensionsLoggingMethods, KnownType.Microsoft_Extensions_Logging_LoggerExtensions)
-            || IsLoggingInvocation(invocationSyntax, model, CastleCoreLoggingMethods, KnownType.Castle_Core_Logging_ILogger)
+            || IsLoggingInvocation(invocationSyntax, model, CastleCoreOrCommonCoreLoggingMethods, KnownType.Castle_Core_Logging_ILogger)
+            || IsLoggingInvocation(invocationSyntax, model, CastleCoreOrCommonCoreLoggingMethods, KnownType.Common_Logging_ILog)
             || IsLoggingInvocation(invocationSyntax, model, Log4NetLoggingMethods, KnownType.log4net_ILog);
 
         private static bool IsLoggingInvocation(InvocationExpressionSyntax invocationSyntax, SemanticModel model, ICollection<string> names, KnownType containingType) =>

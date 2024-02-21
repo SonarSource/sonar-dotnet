@@ -127,6 +127,48 @@ public class ExceptionsShouldBeLoggedTest
            .Verify();
 
     [DataTestMethod]
+    [DataRow("Error")]
+    [DataRow("Debug")]
+    [DataRow("Fatal")]
+    [DataRow("Info")]
+    [DataRow("Trace")]
+    [DataRow("Warn")]
+    // https://www.fuget.org/packages/Common.Logging.Core/3.4.1/lib/netstandard1.0/Common.Logging.Core.dll/Common.Logging/ILog
+    public void ExceptionsShouldBeLogged_CommonLoggingCore_CS(string methodName) =>
+        builder.AddSnippet($$"""
+            using System;
+            using System.Globalization;
+            using Common.Logging;
+
+            public class Program
+            {
+                public void Method(ILog logger, string message)
+                {
+                    try { }
+                    catch (Exception e)
+                    {
+                        logger.{{methodName}}("Message");                                           // Noncompliant
+                        logger.{{methodName}}(_ => { });                                            // Noncompliant
+                        logger.{{methodName}}(CultureInfo.CurrentCulture, _ => { });                // Noncompliant
+                        logger.{{methodName}}Format("Message");                                     // Noncompliant
+                        logger.{{methodName}}Format(CultureInfo.CurrentCulture, "Message");         // Noncompliant
+                    }
+                    try { }
+                    catch (Exception e)
+                    {
+                        logger.{{methodName}}("Message", e);
+                        logger.{{methodName}}(_ => { }, e);
+                        logger.{{methodName}}(CultureInfo.CurrentCulture, _ => { }, e);
+                        logger.{{methodName}}Format("Message", e);
+                        logger.{{methodName}}Format(CultureInfo.CurrentCulture, "Message", e);
+                    }
+                }
+            }
+            """)
+            .AddReferences(NuGetMetadataReference.CommonLoggingCore())
+            .Verify();
+
+    [DataTestMethod]
     [DataRow("Debug")]
     [DataRow("Error")]
     [DataRow("Fatal")]
