@@ -2,8 +2,14 @@
 <p><code>GetHashCode</code> is used to file an object in a <code>Dictionary</code> or <code>Hashtable</code>. If <code>GetHashCode</code> uses
 non-<code>readonly</code> fields and those fields change after the object is stored, the object immediately becomes mis-filed in the
 <code>Hashtable</code>. Any subsequent test to see if the object is in the <code>Hashtable</code> will return a false negative.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<h3>Exceptions</h3>
+<p>This rule does not raise if the type implementing <code>GetHashCode</code> is a value type, for example a <code>struct</code> or a <code>record
+struct</code>, since when a value type is stored in a <code>Dictionary</code> or <code>Hashtable</code>, a copy of the value is stored, not a
+reference to the value.</p>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 public class Person
 {
   public int age;
@@ -17,8 +23,8 @@ public class Person
     return hash;
   }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 public class Person
 {
   public readonly DateTime birthday;
