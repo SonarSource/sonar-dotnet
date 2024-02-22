@@ -35,12 +35,11 @@ public sealed class ExceptionsShouldBeLogged : SonarDiagnosticAnalyzer
             {
                 var catchClauseSyntax = (CatchClauseSyntax)c.Node;
                 var walker = new CatchLoggingInvocationWalker(c.SemanticModel);
-                if (walker.SafeVisit(catchClauseSyntax) && !walker.IsExceptionLogged)
+                if (walker.SafeVisit(catchClauseSyntax) && !walker.IsExceptionLogged && walker.LoggingInvocations.Any())
                 {
-                    foreach (var invocation in walker.LoggingInvocations)
-                    {
-                        c.ReportIssue(Diagnostic.Create(Rule, invocation.GetLocation()));
-                    }
+                    var primaryLocation = walker.LoggingInvocations[0].GetLocation();
+                    var additionalLocations = walker.LoggingInvocations.Skip(1).Select(x => x.GetLocation());
+                    c.ReportIssue(Diagnostic.Create(Rule, primaryLocation, additionalLocations));
                 }
             },
             SyntaxKind.CatchClause);
@@ -66,8 +65,8 @@ public sealed class ExceptionsShouldBeLogged : SonarDiagnosticAnalyzer
 
         private readonly SemanticModel model;
         private bool isFirstCatchClauseVisited;
-        private bool hasWhenFilter;
-        private ILocalSymbol catchException;
+        private bool hasWhenFilterWithDeclarations;
+        private ISymbol catchException;
 
         public bool IsExceptionLogged { get; private set; }
         public readonly List<InvocationExpressionSyntax> LoggingInvocations = new();
@@ -77,20 +76,29 @@ public sealed class ExceptionsShouldBeLogged : SonarDiagnosticAnalyzer
             this.model = model;
         }
 
+        public override void Visit(SyntaxNode node)
+        {
+            if (!IsExceptionLogged)
+            {
+                base.Visit(node);
+            }
+        }
+
         public override void VisitCatchClause(CatchClauseSyntax node)
         {
-            hasWhenFilter = node.Filter != null;
+            // We want to look for logging invocations only in the main catch clause.
+            if (isFirstCatchClauseVisited)
+            {
+                return;
+            }
+
+            isFirstCatchClauseVisited = true;
+            hasWhenFilterWithDeclarations = node.Filter != null && node.Filter.DescendantNodes().Any(DeclarationPatternSyntaxWrapper.IsInstance);
             if (node.Declaration != null && !node.Declaration.Identifier.IsKind(SyntaxKind.None))
             {
                 catchException = model.GetDeclaredSymbol(node.Declaration);
             }
-
-            // We want to look for logging invocations only in the main catch clause.
-            if (!isFirstCatchClauseVisited)
-            {
-                isFirstCatchClauseVisited = true;
-                base.VisitCatchClause(node);
-            }
+            base.VisitCatchClause(node);
         }
 
         public override void VisitInvocationExpression(InvocationExpressionSyntax node)
@@ -98,7 +106,7 @@ public sealed class ExceptionsShouldBeLogged : SonarDiagnosticAnalyzer
             if (IsLoggingInvocation(node, model))
             {
                 var currentException = node.GetArgumentSymbolsDerivedFromKnownType(KnownType.System_Exception, model).FirstOrDefault();
-                if (currentException != null && (hasWhenFilter || currentException.Equals(catchException)))
+                if (currentException != null && (hasWhenFilterWithDeclarations || currentException.Equals(catchException)))
                 {
                     IsExceptionLogged = true;
                     return;

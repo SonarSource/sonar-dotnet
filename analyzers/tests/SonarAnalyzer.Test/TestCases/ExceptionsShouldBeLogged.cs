@@ -36,7 +36,8 @@ public class TestCases
         {
             logger.LogWarning(new EventId(1), "Message!");          // Noncompliant {{Logging in a catch clause should include the exception.}}
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-            logger.LogWarning(new EventId(1), "Message!");          // Noncompliant
+            logger.LogWarning(new EventId(1), "Message!");
+//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary
         }
     }
 
@@ -67,11 +68,18 @@ public class TestCases
         try { }
         catch (AggregateException e)
         {
-            Call(() => logger.LogCritical("Message!")); // Noncompliant
+            Call(() => logger.LogCritical("Message!"));             // Noncompliant
         }
         catch (Exception e)
         {
             Call(() => logger.LogCritical(e, "Message!"));
+        }
+
+        try { }
+        catch (Exception e)
+        {
+            Action<string> LogCritical = (string message) => { };
+            LogCritical("Message");                                 // Compliant
         }
     }
 
@@ -103,7 +111,8 @@ public class TestCases
         catch (Exception e)
         {
             logger.LogWarning("Message!");                      // Noncompliant
-            logger.LogWarning(wrongException, "Message!");      // Noncompliant - wrong exception
+            logger.LogWarning(wrongException, "Message!");
+//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary
             try { }
             catch (DivideByZeroException)
             {
@@ -148,7 +157,17 @@ public class TestCases
         }
         catch (Exception e) when (e is InvalidOperationException invalidOperationException || e is InvalidTimeZoneException invalidTimeZoneException)
         {
-            logger.LogWarning(e, "Message!");                       // Compliant - the exception is logged (even if it has other names)
+            logger.LogWarning(e, "Message!");                                           // Compliant - the exception is logged (even if it has other names)
+        }
+
+        try { }
+        catch (Exception e) when (e is InvalidCastException)
+        {
+            logger.LogWarning("Message!");                                              // Noncompliant
+        }
+        catch (Exception e) when (e is DivideByZeroException divideByZeroException)
+        {
+            logger.LogWarning(divideByZeroException, "Message!");                       // Compliant
         }
     }
 
@@ -205,6 +224,17 @@ public class TestCases
         catch (Exception e)
         {
             logger.LogCritical(e, "Message!");  // Compliant
+        }
+    }
+
+    public void PartialLogging()
+    {
+        try { }
+        catch (Exception e)
+        {
+            logger.LogWarning(new EventId(1), e.InnerException, "Message!");        // Noncompliant
+            logger.LogWarning(new EventId(1), (e.Message != null).ToString());
+//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary
         }
     }
 
