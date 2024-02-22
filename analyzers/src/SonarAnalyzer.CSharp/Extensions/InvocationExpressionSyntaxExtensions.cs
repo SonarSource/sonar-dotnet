@@ -29,6 +29,9 @@ namespace SonarAnalyzer.Extensions
         internal static IEnumerable<ISymbol> GetArgumentSymbolsOfKnownType(this InvocationExpressionSyntax invocation, KnownType knownType, SemanticModel semanticModel) =>
             invocation.ArgumentList.Arguments.GetSymbolsOfKnownType(knownType, semanticModel);
 
+        internal static IEnumerable<ISymbol> GetArgumentSymbolsDerivedFromKnownType(this InvocationExpressionSyntax invocation, KnownType knownType, SemanticModel semanticModel) =>
+            invocation.ArgumentList.Arguments.GetSymbolsDerivedFromKnownType(knownType, semanticModel);
+
         internal static bool HasExactlyNArguments(this InvocationExpressionSyntax invocation, int count) =>
             invocation?.ArgumentList != null && invocation.ArgumentList.Arguments.Count == count;
 

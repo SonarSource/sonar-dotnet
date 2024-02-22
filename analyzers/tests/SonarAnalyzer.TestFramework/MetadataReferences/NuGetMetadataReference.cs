@@ -99,6 +99,7 @@ public static class NuGetMetadataReference
         .Concat(Create("Microsoft.Extensions.Logging.Console", packageVersion))
         .Concat(Create("Microsoft.Extensions.Logging.Debug", packageVersion))
         .Concat(Create("Microsoft.Extensions.Logging.EventLog", packageVersion));
+    public static References MicrosoftExtensionsLoggingAbstractions(string packageVersion) => Create("Microsoft.Extensions.Logging.Abstractions", packageVersion);
     public static References MicrosoftExtensionsOptions(string packageVersion) => Create("Microsoft.Extensions.Options", packageVersion);
     public static References MicrosoftExtensionsPrimitives(string packageVersion) => Create("Microsoft.Extensions.Primitives", packageVersion);
     public static References MicrosoftJSInterop(string packageVersion) => Create("Microsoft.JSInterop", packageVersion);

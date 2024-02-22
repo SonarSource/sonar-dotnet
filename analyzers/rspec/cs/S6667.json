@@ -1,0 +1,18 @@
+{
+  "title": "Logging in a catch clause should include the exception",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "error-handling",
+    "logging"
+  ],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-6667",
+  "sqKey": "S6667",
+  "scope": "Main",
+  "quickfix": "targeted"
+}
