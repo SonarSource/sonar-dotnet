@@ -25,41 +25,33 @@ namespace SonarAnalyzer.ShimLayer.AnalysisContext;
 
 public static class CompilationStartAnalysisContextExtensions
 {
-    private static readonly Action<CompilationStartAnalysisContext, Action<SymbolStartAnalysisContextWrapper>, SymbolKind> RegisterSymbolStartActionWrapper =
-        CreateRegisterSymbolStartAnalysisWrapper();
-
-    public static void RegisterSymbolStartAction(this CompilationStartAnalysisContext context, Action<SymbolStartAnalysisContextWrapper> action, SymbolKind symbolKind) =>
-        RegisterSymbolStartActionWrapper(context, action, symbolKind);
-
-    // Code is executed in static initializers and is not detected by the coverage tool
-    // See the SonarAnalysisContextTest.SonarCompilationStartAnalysisContext_RegisterSymbolStartAction family of tests to check test coverage manually
-    [ExcludeFromCodeCoverage]
-    private static Action<CompilationStartAnalysisContext, Action<SymbolStartAnalysisContextWrapper>, SymbolKind> CreateRegisterSymbolStartAnalysisWrapper()
     {
-        if (typeof(CompilationStartAnalysisContext).GetMethod(nameof(RegisterSymbolStartAction)) is not { } registerMethod)
         {
             return static (_, _, _) => { };
         }
 
-        var contextParameter = Parameter(typeof(CompilationStartAnalysisContext));
-        var shimmedActionParameter = Parameter(typeof(Action<SymbolStartAnalysisContextWrapper>));
-        var symbolKindParameter = Parameter(typeof(SymbolKind));
+            var contextParameter = Parameter(typeof(CompilationStartAnalysisContext));
+            var symbolKindParameter = Parameter(typeof(SymbolKind));
 
-        var roslynSymbolStartAnalysisContextType = typeof(CompilationStartAnalysisContext).Assembly.GetType("Microsoft.CodeAnalysis.Diagnostics.SymbolStartAnalysisContext");
-        var roslynSymbolStartAnalysisActionType = typeof(Action<>).MakeGenericType(roslynSymbolStartAnalysisContextType);
-        var roslynSymbolStartAnalysisContextParameter = Parameter(roslynSymbolStartAnalysisContextType);
-        var sonarSymbolStartAnalysisContextCtor = typeof(SymbolStartAnalysisContextWrapper).GetConstructors().Single();
 
-        // Action<Roslyn.SymbolStartAnalysisContext> registerAction = roslynSymbolStartAnalysisContextParameter =>
-        //    shimmedActionParameter.Invoke(new Sonar.SymbolStartAnalysisContextWrapper(roslynSymbolStartAnalysisContextParameter))
-        var registerAction = Lambda(
-            delegateType: roslynSymbolStartAnalysisActionType,
-            body: Call(shimmedActionParameter, nameof(Action.Invoke), [], New(sonarSymbolStartAnalysisContextCtor, roslynSymbolStartAnalysisContextParameter)),
-            parameters: roslynSymbolStartAnalysisContextParameter);
 
-        // (contextParameter, shimmedActionParameter, symbolKindParameter) => contextParameter.RegisterSymbolStartAction(registerAction, symbolKindParameter)
-        return Lambda<Action<CompilationStartAnalysisContext, Action<SymbolStartAnalysisContextWrapper>, SymbolKind>>(
-            Call(contextParameter, registerMethod, registerAction, symbolKindParameter),
-            contextParameter, shimmedActionParameter, symbolKindParameter).Compile();
+                contextParameter, shimmedActionParameter, symbolKindParameter).Compile();
+        }
+        else
+        {
+            return static (_, _, _) => { };
+        }
+
+        Expression PassThroughLambda<T>(string registrationMethodName)
+        {
+            var registerParameter = Parameter(typeof(Action<T>));
+            return Lambda<Action<Action<T>>>(Call(symbolStartAnalysisContextParameter, registrationMethodName, [], registerParameter), registerParameter);
+        }
+
+        MethodCallExpression DebugPrint(Expression expression) =>
+            Call(typeof(Debug).GetMethod(nameof(Debug.WriteLine), [typeof(object)]), Convert(expression, typeof(object)));
     }
+
+    public static void RegisterSymbolStartAction(this CompilationStartAnalysisContext context, Action<SymbolStartAnalysisContext> action, SymbolKind symbolKind) =>
+        RegisterSymbolStartAnalysisWrapper(context, action, symbolKind);
 }

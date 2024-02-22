@@ -115,7 +115,7 @@ public class RegisterSymbolStartActionWrapperTest
     {
         var snippet = new SnippetCompiler("""
             public class C
-            {
+    {
                 int i = 0;
                 public void M() => ToString();
             }
@@ -123,7 +123,7 @@ public class RegisterSymbolStartActionWrapperTest
         var visited = new List<string>();
         var compilation = snippet.Compilation.WithAnalyzers(ImmutableArray.Create<DiagnosticAnalyzer>(
             new TestDiagnosticAnalyzer(symbolStart =>
-            {
+        {
                 symbolStart.RegisterCodeBlockStartAction<CS.SyntaxKind>(blockStart =>
                 {
                     var node = blockStart.CodeBlock.ToString();
@@ -133,7 +133,9 @@ public class RegisterSymbolStartActionWrapperTest
             }, SymbolKind.NamedType)));
         await compilation.GetAnalyzerDiagnosticsAsync();
         visited.Should().BeEquivalentTo("int i = 0;", "public void M() => ToString();", "ToString()");
-    }
+        }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+            ImmutableArray.Create(new DiagnosticDescriptor("TEST", "Test", "Test", "Test", DiagnosticSeverity.Warning, true));
 
     [TestMethod]
     public async Task RegisterSymbolStartAction_RegisterCodeBlockStartAction_VB()
@@ -156,7 +158,7 @@ public class RegisterSymbolStartActionWrapperTest
                     var node = blockStart.CodeBlock.ToString();
                     visited.Add(node);
                     blockStart.RegisterSyntaxNodeAction(nodeContext => visited.Add(nodeContext.Node.ToString()), VB.SyntaxKind.InvocationExpression);
-                });
+            });
             }, SymbolKind.NamedType)));
         await compilation.GetAnalyzerDiagnosticsAsync();
         visited.Should().BeEquivalentTo([
