@@ -109,6 +109,11 @@ public sealed class ExceptionsShouldBeLogged : SonarDiagnosticAnalyzer
             "Warn"
         ];
 
+        private static readonly HashSet<string> NLogILoggerBaseLoggingMethods =
+        [
+            "Log"
+        ];
+
         private readonly SemanticModel model;
         private bool isFirstCatchClauseVisited;
         private bool hasWhenFilterWithDeclarations;
@@ -166,16 +171,22 @@ public sealed class ExceptionsShouldBeLogged : SonarDiagnosticAnalyzer
         }
 
         private static bool IsLoggingInvocation(InvocationExpressionSyntax invocation, SemanticModel model) =>
-            IsLoggingInvocation(invocation, model, MicrosoftExtensionsLoggingMethods, KnownType.Microsoft_Extensions_Logging_LoggerExtensions)
-            || IsLoggingInvocation(invocation, model, CastleCoreOrCommonCoreLoggingMethods, KnownType.Castle_Core_Logging_ILogger)
-            || IsLoggingInvocation(invocation, model, CastleCoreOrCommonCoreLoggingMethods, KnownType.Common_Logging_ILog)
-            || IsLoggingInvocation(invocation, model, Log4NetLoggingMethods, KnownType.log4net_ILog)
-            || IsLoggingInvocation(invocation, model, Log4NetLoggingExtensionMethods, KnownType.log4net_Util_ILogExtensions)
-            || IsLoggingInvocation(invocation, model, NLogLoggingMethods, KnownType.NLog_Logger);
+            IsLoggingInvocation(invocation, model, MicrosoftExtensionsLoggingMethods, KnownType.Microsoft_Extensions_Logging_LoggerExtensions, true)
+            || IsLoggingInvocation(invocation, model, CastleCoreOrCommonCoreLoggingMethods, KnownType.Castle_Core_Logging_ILogger, false)
+            || IsLoggingInvocation(invocation, model, CastleCoreOrCommonCoreLoggingMethods, KnownType.Common_Logging_ILog, false)
+            || IsLoggingInvocation(invocation, model, Log4NetLoggingMethods, KnownType.log4net_ILog, false)
+            || IsLoggingInvocation(invocation, model, Log4NetLoggingExtensionMethods, KnownType.log4net_Util_ILogExtensions, true)
+            || IsLoggingInvocation(invocation, model, NLogLoggingMethods, KnownType.NLog_ILogger, false)
+            || IsLoggingInvocation(invocation, model, NLogILoggerBaseLoggingMethods, KnownType.NLog_ILoggerBase, false);
 
-        private static bool IsLoggingInvocation(InvocationExpressionSyntax invocation, SemanticModel model, ICollection<string> methodNames, KnownType containingType) =>
+        private static bool IsLoggingInvocation(InvocationExpressionSyntax invocation, SemanticModel model, ICollection<string> methodNames, KnownType containingType, bool isExtensionMethod) =>
             methodNames.Contains(invocation.GetIdentifier().ToString())
             && model.GetSymbolInfo(invocation).Symbol is { } invocationSymbol
-            && invocationSymbol.ContainingType.Is(containingType);
+            && HasMatchingContainingType(invocationSymbol, containingType, isExtensionMethod);
+
+        private static bool HasMatchingContainingType(ISymbol symbol, KnownType containingType, bool isExtensionMethod) =>
+            isExtensionMethod
+                ? symbol.ContainingType.Is(containingType)
+                : symbol.ContainingType.DerivesOrImplements(containingType);
     }
 }

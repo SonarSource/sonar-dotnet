@@ -209,14 +209,20 @@ public class ExceptionsShouldBeLoggedTest
             .Verify();
 
     [DataTestMethod]
-    [DataRow("Debug")]
-    [DataRow("Error")]
-    [DataRow("Fatal")]
-    [DataRow("Info")]
-    [DataRow("Trace")]
-    [DataRow("Warn")]
+    [DataRow("ILogger", "Debug")]
+    [DataRow("ILogger", "Error")]
+    [DataRow("ILogger", "Fatal")]
+    [DataRow("ILogger", "Info")]
+    [DataRow("ILogger", "Trace")]
+    [DataRow("ILogger", "Warn")]
+    [DataRow("Logger", "Debug")]
+    [DataRow("Logger", "Error")]
+    [DataRow("Logger", "Fatal")]
+    [DataRow("Logger", "Info")]
+    [DataRow("Logger", "Trace")]
+    [DataRow("Logger", "Warn")]
     // https://nlog-project.org/documentation/v5.0.0/html/Methods_T_NLog_Logger.htm
-    public void ExceptionsShouldBeLogged_NLog_CS(string methodName) =>
+    public void ExceptionsShouldBeLogged_NLog_CS(string type, string methodName) =>
         builder.AddSnippet($$"""
             using System;
             using System.Globalization;
@@ -224,7 +230,7 @@ public class ExceptionsShouldBeLoggedTest
 
             public class Program
             {
-                public void Method(Logger logger, string message, Object[] parameters)
+                public void Method({{type}} logger, string message, Object[] parameters)
                 {
                     try { }
                     catch (Exception e)
@@ -239,6 +245,39 @@ public class ExceptionsShouldBeLoggedTest
                         logger.{{methodName}}(e, "Message");
                         logger.{{methodName}}(e, "Message", parameters);
                         logger.{{methodName}}(e, CultureInfo.CurrentCulture, "Message");
+                    }
+                }
+            }
+            """)
+           .AddReferences(NuGetMetadataReference.NLog(Constants.NuGetLatestVersion))
+           .Verify();
+
+    [TestMethod]
+    public void ExceptionsShouldBeLogged_NLog_ILoggerBase_CS() =>
+        builder.AddSnippet("""
+            using System;
+            using System.Globalization;
+            using NLog;
+
+            public class Program
+            {
+                public void Method(ILoggerBase logger, string message, Object[] parameters)
+                {
+                    try { }
+                    catch (Exception e)
+                    {
+                        logger.Log(LogLevel.Debug, "Message");                                          // Noncompliant
+                        logger.Log(LogLevel.Debug, CultureInfo.CurrentCulture, "Message");              // Secondary
+                        logger.Log<string>(LogLevel.Debug, "Message");                                  // Secondary
+                        logger.Log<string>(LogLevel.Debug, CultureInfo.CurrentCulture, "Message");      // Secondary
+                    }
+                    try { }
+                    catch (Exception e)
+                    {
+                        logger.Log(LogLevel.Debug, e, "Message");
+                        logger.Log(LogLevel.Debug, CultureInfo.CurrentCulture, "Message");
+                        logger.Log<string>(LogLevel.Debug, "Message");
+                        logger.Log<string>(LogLevel.Debug, CultureInfo.CurrentCulture, "Message");
                     }
                 }
             }
