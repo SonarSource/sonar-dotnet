@@ -1,19 +1,14 @@
 {
   "title": "Logging templates should be constant",
   "type": "CODE_SMELL",
-  "code": {
-    "impacts": {
-      "MAINTAINABILITY": "MEDIUM"
-    },
-    "attribute": "EFFICIENT"
-  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
     "constantCost": "5min"
   },
   "tags": [
-    "performance"
+    "performance",
+    "logging"
   ],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-2629",
