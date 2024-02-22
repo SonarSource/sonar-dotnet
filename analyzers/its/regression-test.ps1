@@ -14,6 +14,7 @@ param
 
 Set-StrictMode -version 2.0
 $ErrorActionPreference = "Stop"
+$DifferencesMsg = "ERROR: There are differences between the actual and the expected issues."
 
 if ($PSBoundParameters['Verbose'] -Or $PSBoundParameters['Debug']) {
     $global:DebugPreference = "Continue"
@@ -109,8 +110,6 @@ function Build-Project-DotnetTool([string]$ProjectName, [string]$SolutionRelativ
 }
 
 function Initialize-ActualFolder() {
-    $methodTimer = [system.diagnostics.stopwatch]::StartNew()
-
     Write-Host "Initializing the actual issues folder with the expected result"
     if (Test-Path .\actual) {
         Write-Host "Removing existing folder 'actual'"
@@ -119,13 +118,9 @@ function Initialize-ActualFolder() {
 
     # this copies no files if ruleId is not set, and all but ending with ruleId if set
     Copy-FolderRecursively -From .\expected -To .\actual -Exclude "${ruleId}*.json"
-    $methodTimerElapsed = $methodTimer.Elapsed.TotalSeconds
-    Write-Debug "Initialized actual folder in '${methodTimerElapsed}'"
 }
 
 function Initialize-OutputFolder() {
-    $methodTimer = [system.diagnostics.stopwatch]::StartNew()
-
     Write-Host "Initializing the output folder"
     if (Test-Path .\output) {
         Write-Host "Removing existing folder 'output'"
@@ -148,9 +143,6 @@ function Initialize-OutputFolder() {
     }
 
     Write-Host "The rule set we use is .\output\AllSonarAnalyzerRules.ruleset."
-
-    $methodTimerElapsed = $methodTimer.Elapsed.TotalSeconds
-    Write-Debug "Initialized output folder in '${methodTimerElapsed}'"
 }
 
 function Get-FullPath($Folder) {
@@ -184,8 +176,6 @@ function Show-DiffResults() {
         Remove-Item -Recurse -Force .\diff
     }
 
-    $errorMsg = "ERROR: There are differences between the actual and the expected issues."
-
     if (!$ruleId -And !$project)
     {
         Write-Host "Will find differences for all projects, all rules."
@@ -193,7 +183,7 @@ function Show-DiffResults() {
         Write-Debug "Running 'git diff' between 'actual' and 'expected'."
 
         Exec { & git diff --no-index --exit-code ./expected ./actual `
-        } -errorMessage $errorMsg
+        } -errorMessage $DifferencesMsg
 
         return
     }
@@ -223,7 +213,7 @@ function Show-DiffResults() {
     }
 
     Exec { & git diff --no-index --exit-code .\diff\expected .\diff\actual `
-    } -errorMessage $errorMsg
+    } -errorMessage $DifferencesMsg
 }
 
 function Invoke-JsonParser()
@@ -242,7 +232,6 @@ function Invoke-JsonParser()
 }
 
 try {
-    $scriptTimer = [system.diagnostics.stopwatch]::StartNew()
     . (Join-Path $PSScriptRoot "..\..\scripts\build\build-utils.ps1")
     Push-Location $PSScriptRoot
     Test-FileExists "..\packaging\binaries\SonarAnalyzer.dll"
@@ -286,32 +275,26 @@ try {
 
     Invoke-JsonParser
 
-    # TODO: Migrate all of the remaining logic to JsonParser
+    # ToDo: Migrate all of the remaining logic to JsonParser
     Write-Host "Checking for differences..."
-    $diffTimer = [system.diagnostics.stopwatch]::StartNew()
     Show-DiffResults
-    $diffTimerElapsed = $diffTimer.Elapsed.TotalSeconds
-    Write-Debug "Checked for differences in '${diffTimerElapsed}'"
-
     Write-Host -ForegroundColor Green "SUCCESS: ITs were successful! No differences were found!"
     exit 0
 }
 catch {
     Write-Host -ForegroundColor Red $_
-    Write-Host $_.Exception
-    Write-Host $_.ScriptStackTrace
+    # ToDo: Migrate this to JsonParser, remove update-expected.ps1 file
+    if($_.FullyQualifiedErrorId -eq $DifferencesMsg) {
+        ./update-expected.ps1 -Project $Project
+    } else {
+        Write-Host "----"
+        Write-Host $_.Exception
+        Write-Host "----"
+        Write-Host $_.ScriptStackTrace
+    }
     exit 1
 }
 finally {
     Pop-Location
-
     Remove-Item -ErrorAction Ignore -Force global.json
-
-    $scriptTimer.Stop()
-    $totalTimeInSeconds = [int]$scriptTimer.Elapsed.TotalSeconds
-    if ($ruleId) {
-        Write-Debug "Analyzed ${ruleId} in ${totalTimeInSeconds}s"
-    } else {
-        Write-Debug "Analyzed all rules in ${totalTimeInSeconds}s"
-    }
 }
