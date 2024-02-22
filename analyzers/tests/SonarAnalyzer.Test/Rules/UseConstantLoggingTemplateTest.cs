@@ -32,28 +32,7 @@ public class UseConstantLoggingTemplateTest
         builder.AddPaths("UseConstantLoggingTemplate.cs").Verify();
 
     [DataTestMethod]
-    [DataRow("Log", "LogLevel.Warning,")]
-    [DataRow("LogCritical")]
-    [DataRow("LogDebug")]
-    [DataRow("LogError")]
-    [DataRow("LogInformation")]
-    [DataRow("LogTrace")]
-    [DataRow("LogWarning")]
-    public void UseConstantLoggingTemplate_MicrosoftExtensionsLogging_CS(string methodName, string extraParameter = "") =>
-        builder.AddSnippet($$"""
-            using Microsoft.Extensions.Logging;
-
-            public class Program
-            {
-                public void Method(ILogger logger, int arg)
-                {
-                    logger.{{methodName}}({{extraParameter}} "Message");    // Compliant
-                    logger.{{methodName}}({{extraParameter}} $"{arg}");     // Noncompliant
-                }
-            }
-            """).Verify();
-
-    [DataTestMethod]
+    [DataRow("Debug")]
     [DataRow("Debug")]
     [DataRow("Error")]
     [DataRow("Fatal")]
@@ -99,15 +78,38 @@ public class UseConstantLoggingTemplateTest
             """).Verify();
 
     [DataTestMethod]
+    [DataRow("Log", "LogLevel.Warning,")]
+    [DataRow("LogCritical")]
+    [DataRow("LogDebug")]
+    [DataRow("LogError")]
+    [DataRow("LogInformation")]
+    [DataRow("LogTrace")]
+    [DataRow("LogWarning")]
+    public void UseConstantLoggingTemplate_MicrosoftExtensionsLogging_CS(string methodName, string logLevel = "") =>
+        builder.AddSnippet($$"""
+            using Microsoft.Extensions.Logging;
+
+            public class Program
+            {
+                public void Method(ILogger logger, int arg)
+                {
+                    logger.{{methodName}}({{logLevel}} "Message");    // Compliant
+                    logger.{{methodName}}({{logLevel}} $"{arg}");     // Noncompliant
+                }
+            }
+            """).Verify();
+
+    [DataTestMethod]
     [DataRow("ConditionalDebug")]
     [DataRow("ConditionalTrace")]
     [DataRow("Debug")]
     [DataRow("Error")]
     [DataRow("Fatal")]
     [DataRow("Info")]
+    [DataRow("Log", "LogLevel.Warn,")]
     [DataRow("Trace")]
     [DataRow("Warn")]
-    public void UseConstantLoggingTemplate_NLog_CS(string methodName) =>
+    public void UseConstantLoggingTemplate_NLog_CS(string methodName, string logLevel = "") =>
         builder.AddSnippet($$"""
             using NLog;
 
@@ -115,8 +117,25 @@ public class UseConstantLoggingTemplateTest
             {
                 public void Method(ILogger logger, int arg)
                 {
-                    logger.{{methodName}}("Message");       // Compliant
-                    logger.{{methodName}}($"{arg}");        // Compliant
+                    logger.{{methodName}}({{logLevel}} "Message");       // Compliant
+                    logger.{{methodName}}({{logLevel}} $"{arg}");        // Noncompliant
+                }
+            }
+            """).Verify();
+
+    public void UseConstantLoggingTemplate_NLog_AdditionalLoggers_CS() =>
+        builder.AddSnippet("""
+            using NLog;
+
+            public class Program
+            {
+                public void Method(ILoggerBase logger, NullLogger nullLogger, int arg)
+                {
+                    logger.Log(LogLevel.Warn, "Message");       // Compliant
+                    logger.Log(LogLevel.Warn, $"{arg}");        // Noncompliant
+
+                    nullLogger.Log(LogLevel.Warn, "Message");   // Compliant
+                    nullLogger.Log(LogLevel.Warn, $"{arg}");    // Noncompliant
                 }
             }
             """).Verify();

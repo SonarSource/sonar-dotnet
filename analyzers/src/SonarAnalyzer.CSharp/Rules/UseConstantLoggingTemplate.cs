@@ -38,52 +38,47 @@ public sealed class UseConstantLoggingTemplate : SonarDiagnosticAnalyzer
         {SyntaxKind.InvocationExpression, OnUsingStringFormat},
     }.ToImmutableDictionary();
 
-    private static readonly ImmutableArray<string> MessageParameterNames = ImmutableArray.Create("format", "message", "messageTemplate");
+    private static readonly ImmutableArray<KnownType> LoggerTypes = ImmutableArray.Create(
+        KnownType.Castle_Core_Logging_Ilogger,
+        KnownType.log4net_ILog,
+        KnownType.Microsoft_Extensions_Logging_LoggerExtensions,
+        KnownType.NLog_ILogger,
+        KnownType.NLog_ILoggerBase,
+        KnownType.NLog_ILoggerExtensions,
+        KnownType.Serilog_ILogger,
+        KnownType.Serilog_Log);
 
-    private static readonly ImmutableArray<MemberDescriptor> LogMethods = ImmutableArray.Create(
-        new MemberDescriptor(KnownType.Microsoft_Extensions_Logging_LoggerExtensions, "Log"),
-        new MemberDescriptor(KnownType.Microsoft_Extensions_Logging_LoggerExtensions, "LogCritical"),
-        new MemberDescriptor(KnownType.Microsoft_Extensions_Logging_LoggerExtensions, "LogDebug"),
-        new MemberDescriptor(KnownType.Microsoft_Extensions_Logging_LoggerExtensions, "LogError"),
-        new MemberDescriptor(KnownType.Microsoft_Extensions_Logging_LoggerExtensions, "LogInformation"),
-        new MemberDescriptor(KnownType.Microsoft_Extensions_Logging_LoggerExtensions, "LogTrace"),
-        new MemberDescriptor(KnownType.Microsoft_Extensions_Logging_LoggerExtensions, "LogWarning"),
-        new MemberDescriptor(KnownType.Serilog_ILogger, "Debug"),
-        new MemberDescriptor(KnownType.Serilog_ILogger, "Error"),
-        new MemberDescriptor(KnownType.Serilog_ILogger, "Fatal"),
-        new MemberDescriptor(KnownType.Serilog_ILogger, "Information"),
-        new MemberDescriptor(KnownType.Serilog_ILogger, "Verbose"),
-        new MemberDescriptor(KnownType.Serilog_ILogger, "Warning"),
-        new MemberDescriptor(KnownType.Serilog_Log, "Debug"),
-        new MemberDescriptor(KnownType.Serilog_Log, "Error"),
-        new MemberDescriptor(KnownType.Serilog_Log, "Fatal"),
-        new MemberDescriptor(KnownType.Serilog_Log, "Information"),
-        new MemberDescriptor(KnownType.Serilog_Log, "Verbose"),
-        new MemberDescriptor(KnownType.Serilog_Log, "Warning"),
-        new MemberDescriptor(KnownType.log4net_ILog, "Debug"),
-        new MemberDescriptor(KnownType.log4net_ILog, "DebugFormat"),
-        new MemberDescriptor(KnownType.log4net_ILog, "Error"),
-        new MemberDescriptor(KnownType.log4net_ILog, "ErrorFormat"),
-        new MemberDescriptor(KnownType.log4net_ILog, "Fatal"),
-        new MemberDescriptor(KnownType.log4net_ILog, "FatalFormat"),
-        new MemberDescriptor(KnownType.log4net_ILog, "Info"),
-        new MemberDescriptor(KnownType.log4net_ILog, "InfoFormat"),
-        new MemberDescriptor(KnownType.log4net_ILog, "Trace"),
-        new MemberDescriptor(KnownType.log4net_ILog, "TraceFormat"),
-        new MemberDescriptor(KnownType.log4net_ILog, "Warn"),
-        new MemberDescriptor(KnownType.log4net_ILog, "WarnFormat"),
-        new MemberDescriptor(KnownType.Castle_Core_Logging_Ilogger, "Debug"),
-        new MemberDescriptor(KnownType.Castle_Core_Logging_Ilogger, "DebugFormat"),
-        new MemberDescriptor(KnownType.Castle_Core_Logging_Ilogger, "Error"),
-        new MemberDescriptor(KnownType.Castle_Core_Logging_Ilogger, "ErrorFormat"),
-        new MemberDescriptor(KnownType.Castle_Core_Logging_Ilogger, "Fatal"),
-        new MemberDescriptor(KnownType.Castle_Core_Logging_Ilogger, "FatalFormat"),
-        new MemberDescriptor(KnownType.Castle_Core_Logging_Ilogger, "Info"),
-        new MemberDescriptor(KnownType.Castle_Core_Logging_Ilogger, "InfoFormat"),
-        new MemberDescriptor(KnownType.Castle_Core_Logging_Ilogger, "Trace"),
-        new MemberDescriptor(KnownType.Castle_Core_Logging_Ilogger, "TraceFormat"),
-        new MemberDescriptor(KnownType.Castle_Core_Logging_Ilogger, "Warn"),
-        new MemberDescriptor(KnownType.Castle_Core_Logging_Ilogger, "WarnFormat"));
+    private static readonly ImmutableHashSet<string> LoggerMethodNames = ImmutableHashSet.Create(
+        "ConditionalDebug",
+        "ConditionalTrace",
+        "Debug",
+        "DebugFormat",
+        "Error",
+        "ErrorFormat",
+        "Fatal",
+        "FatalFormat",
+        "Info",
+        "InfoFormat",
+        "Information",
+        "Log",
+        "LogCritical",
+        "LogDebug",
+        "LogError",
+        "LogFormat",
+        "LogInformation",
+        "LogTrace",
+        "LogWarning",
+        "Trace",
+        "TraceFormat",
+        "Verbose",
+        "Warn",
+        "WarnFormat",
+        "Warning");
+
+    private static readonly ImmutableHashSet<string> LogMessageParameterNames = ImmutableHashSet.Create(
+        "format",
+        "message",
+        "messageTemplate");
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
@@ -91,11 +86,10 @@ public sealed class UseConstantLoggingTemplate : SonarDiagnosticAnalyzer
         context.RegisterNodeAction(c =>
         {
             var invocation = (InvocationExpressionSyntax)c.Node;
-            var candidates = LogMethods.Where(x => x.Name == invocation.GetName()).ToArray();
-            if (candidates.Any()
+            if (LoggerMethodNames.Any(x => x == invocation.GetName())
                 && c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol method
-                && Array.Exists(candidates, x => x.ContainingType.Matches(method.ContainingType))
-                && method.Parameters.FirstOrDefault(x => Array.Exists(candidates, c => MessageParameterNames.Contains(x.Name))) is { } messageParameter
+                && LoggerTypes.Any(x => x.Matches(method.ContainingType))
+                && method.Parameters.FirstOrDefault(x => LogMessageParameterNames.Contains(x.Name)) is { } messageParameter
                 && ArgumentValue(invocation, method, messageParameter) is { } argumentValue
                 && InvalidSyntaxNode(argumentValue, c.SemanticModel) is { } invalidNode)
             {
