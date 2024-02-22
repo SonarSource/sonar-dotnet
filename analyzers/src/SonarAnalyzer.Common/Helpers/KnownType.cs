@@ -49,6 +49,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType log4net_Config_DOMConfigurator = new("log4net.Config.DOMConfigurator");
         public static readonly KnownType log4net_Config_BasicConfigurator = new("log4net.Config.BasicConfigurator");
         public static readonly KnownType log4net_ILog = new("log4net.ILog");
+        public static readonly KnownType log4net_Util_ILogExtensions = new("log4net.Util.ILogExtensions");
         public static readonly KnownType Microsoft_AspNet_SignalR_Hub = new("Microsoft.AspNet.SignalR.Hub");
         public static readonly KnownType Microsoft_AspNetCore_Builder_DeveloperExceptionPageExtensions = new("Microsoft.AspNetCore.Builder.DeveloperExceptionPageExtensions");
         public static readonly KnownType Microsoft_AspNetCore_Builder_DatabaseErrorPageExtensions = new("Microsoft.AspNetCore.Builder.DatabaseErrorPageExtensions");

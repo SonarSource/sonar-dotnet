@@ -180,6 +180,7 @@ public class ExceptionsShouldBeLoggedTest
             using System;
             using System.Globalization;
             using log4net;
+            using log4net.Util;
 
             public class Program
             {
@@ -189,6 +190,8 @@ public class ExceptionsShouldBeLoggedTest
                     catch (Exception e)
                     {
                         logger.{{methodName}}(message);                                     // Noncompliant
+                        logger.{{methodName}}Ext(message);                                  // Secondary
+                        ILogExtensions.{{methodName}}Ext(logger, message);                  // Secondary
                         logger.{{methodName}}Format(message);                               // Compliant - Format overloads do not take an exception.
                         logger.{{methodName}}Format(CultureInfo.CurrentCulture, message);   // Compliant - Format overloads do not take an exception.
                     }
@@ -196,6 +199,8 @@ public class ExceptionsShouldBeLoggedTest
                     catch (Exception e)
                     {
                         logger.{{methodName}}(message, e);                                  // Compliant
+                        logger.{{methodName}}Ext(message, e);                               // Compliant
+                        ILogExtensions.{{methodName}}Ext(logger, message, e);               // Compliant
                     }
                 }
             }
