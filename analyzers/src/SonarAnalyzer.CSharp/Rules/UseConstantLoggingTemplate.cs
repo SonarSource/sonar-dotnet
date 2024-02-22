@@ -39,8 +39,9 @@ public sealed class UseConstantLoggingTemplate : SonarDiagnosticAnalyzer
     }.ToImmutableDictionary();
 
     private static readonly ImmutableArray<KnownType> LoggerTypes = ImmutableArray.Create(
-        KnownType.Castle_Core_Logging_Ilogger,
+        KnownType.Castle_Core_Logging_ILogger,
         KnownType.log4net_ILog,
+        KnownType.log4net_Util_ILogExtensions,
         KnownType.Microsoft_Extensions_Logging_LoggerExtensions,
         KnownType.NLog_ILogger,
         KnownType.NLog_ILoggerBase,
