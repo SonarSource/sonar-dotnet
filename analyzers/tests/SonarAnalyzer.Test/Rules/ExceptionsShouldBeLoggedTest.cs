@@ -110,8 +110,8 @@ public class ExceptionsShouldBeLoggedTest
                     catch (Exception e)
                     {
                         logger.{{methodName}}(message);                                     // Noncompliant
-                        logger.{{methodName}}Format(message);                               // Noncompliant
-                        logger.{{methodName}}Format(CultureInfo.CurrentCulture, message);   // Noncompliant
+                        logger.{{methodName}}Format(message);                               // Secondary
+                        logger.{{methodName}}Format(CultureInfo.CurrentCulture, message);   // Secondary
                     }
                     try { }
                     catch (Exception e)
@@ -148,10 +148,10 @@ public class ExceptionsShouldBeLoggedTest
                     catch (Exception e)
                     {
                         logger.{{methodName}}("Message");                                           // Noncompliant
-                        logger.{{methodName}}(_ => { });                                            // Noncompliant
-                        logger.{{methodName}}(CultureInfo.CurrentCulture, _ => { });                // Noncompliant
-                        logger.{{methodName}}Format("Message");                                     // Noncompliant
-                        logger.{{methodName}}Format(CultureInfo.CurrentCulture, "Message");         // Noncompliant
+                        logger.{{methodName}}(_ => { });                                            // Secondary
+                        logger.{{methodName}}(CultureInfo.CurrentCulture, _ => { });                // Secondary
+                        logger.{{methodName}}Format("Message");                                     // Secondary
+                        logger.{{methodName}}Format(CultureInfo.CurrentCulture, "Message");         // Secondary
                     }
                     try { }
                     catch (Exception e)
@@ -225,8 +225,8 @@ public class ExceptionsShouldBeLoggedTest
                     catch (Exception e)
                     {
                         logger.{{methodName}}("Message");                               // Noncompliant
-                        logger.{{methodName}}("Message", parameters);                   // Noncompliant
-                        logger.{{methodName}}(CultureInfo.CurrentCulture, "Message");   // Noncompliant
+                        logger.{{methodName}}("Message", parameters);                   // Secondary
+                        logger.{{methodName}}(CultureInfo.CurrentCulture, "Message");   // Secondary
                     }
                     try { }
                     catch (Exception e)
@@ -259,7 +259,7 @@ public class ExceptionsShouldBeLoggedTest
                     catch (Exception e)
                     {
                         logger.{{methodName}}("Message");                               // Noncompliant
-                        logger.{{methodName}}(CultureInfo.CurrentCulture, "Message");   // Noncompliant
+                        logger.{{methodName}}(CultureInfo.CurrentCulture, "Message");   // Secondary
                     }
                     try { }
                     catch (Exception e)
