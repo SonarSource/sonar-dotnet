@@ -151,6 +151,8 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType NHibernate_Impl_AbstractSessionImpl = new("NHibernate.Impl.AbstractSessionImpl");
         public static readonly KnownType NLog_ILogger = new("NLog.ILogger");
         public static readonly KnownType NLog_ILoggerBase = new("NLog.ILoggerBase");
+        public static readonly KnownType NLog_ILoggerExtensions = new("NLog.ILoggerExtensions");
+        public static readonly KnownType NLog_Logger = new("NLog.Logger");
         public static readonly KnownType NLog_LogManager = new("NLog.LogManager");
         public static readonly KnownType NUnit_Framework_Assert = new("NUnit.Framework.Assert");
         public static readonly KnownType NUnit_Framework_AssertionException = new("NUnit.Framework.AssertionException");
@@ -174,6 +176,8 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Serilog_LoggerConfiguration = new("Serilog.LoggerConfiguration");
         public static readonly KnownType ServiceStack_OrmLite_OrmLiteReadApi = new("ServiceStack.OrmLite.OrmLiteReadApi");
         public static readonly KnownType ServiceStack_OrmLite_OrmLiteReadApiAsync = new("ServiceStack.OrmLite.OrmLiteReadApiAsync");
+        public static readonly KnownType Serilog_ILogger = new("Serilog.ILogger");
+        public static readonly KnownType Serilog_Log = new("Serilog.Log");
         public static readonly KnownType System_Action = new("System.Action");
         public static readonly KnownType System_Action_T = new("System.Action", "T");
         public static readonly KnownType System_Action_T1_T2 = new("System.Action", "T1", "T2");
@@ -377,6 +381,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Numerics_IEqualityOperators_TSelf_TOther_TResult = new("System.Numerics.IEqualityOperators", "TSelf", "TOther", "TResult");
         public static readonly KnownType System_Numerics_IFloatingPointIeee754_TSelf = new("System.Numerics.IFloatingPointIeee754", "TSelf");
         public static readonly KnownType System_Object = new("System.Object");
+        public static readonly KnownType System_Object_Array = new("System.Object") { IsArray = true };
         public static readonly KnownType System_ObsoleteAttribute = new("System.ObsoleteAttribute");
         public static readonly KnownType System_OutOfMemoryException = new("System.OutOfMemoryException");
         public static readonly KnownType System_Random = new("System.Random");

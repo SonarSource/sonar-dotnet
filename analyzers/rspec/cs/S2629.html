@@ -1,0 +1,38 @@
+<h2>Why is this an issue?</h2>
+<p>Logging arguments should not require evaluation in order to avoid unnecessary performance overhead. When passing concatenated strings or string
+interpolations directly into a logging method, the evaluation of these expressions occurs every time the logging method is called, regardless of the
+log level. This can lead to inefficient code execution and increased resource consumption.</p>
+<p>Instead, it is recommended to use the overload of the logger that accepts a log format and its arguments as separate parameters. By separating the
+log format from the arguments, the evaluation of expressions can be deferred until it is necessary, based on the log level. This approach improves
+performance by reducing unnecessary evaluations and ensures that logging statements are only evaluated when needed.</p>
+<p>Furthermore, using a constant log format enhances observability and facilitates searchability in log aggregation and monitoring software.</p>
+<p>The rule covers the following logging frameworks:</p>
+<ul>
+  <li> <a href="https://www.nuget.org/packages/Microsoft.Extensions.Logging">Microsoft.Extensions.Logging</a> </li>
+  <li> <a href="https://www.nuget.org/packages/Castle.Core">Castle.Core</a> </li>
+  <li> <a href="https://www.nuget.org/packages/log4net">log4net</a> </li>
+  <li> <a href="https://www.nuget.org/packages/Serilog">Serilog</a> </li>
+  <li> <a href="https://www.nuget.org/packages/NLog">Nlog</a> </li>
+</ul>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+public void Method(ILogger logger, bool parameter)
+{
+    logger.DebugFormat($"The value of the parameter is: {parameter}.");
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+public void Method(ILogger logger, bool parameter)
+{
+    logger.DebugFormat("The value of the parameter is: {Parameter}.", parameter);
+}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.interpolatedstringhandlerattribute">InterpolatedStringHandlerArgumentAttribute</a> </li>
+</ul>
+

@@ -162,6 +162,7 @@ namespace SonarAnalyzer.Extensions
                 MemberAccessExpressionSyntax { Name.Identifier: var identifier } => identifier,
                 MemberBindingExpressionSyntax { Name.Identifier: var identifier } => identifier,
                 MethodDeclarationSyntax { Identifier: var identifier } => identifier,
+                NameColonSyntax nameColon => nameColon.Name.Identifier,
                 NamespaceDeclarationSyntax { Name: { } name } => GetIdentifier(name),
                 NullableTypeSyntax { ElementType: { } elementType } => GetIdentifier(elementType),
                 ObjectCreationExpressionSyntax { Type: var type } => GetIdentifier(type),
