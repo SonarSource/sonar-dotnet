@@ -109,10 +109,7 @@ public sealed class ExceptionsShouldBeLogged : SonarDiagnosticAnalyzer
             "Warn"
         ];
 
-        private static readonly HashSet<string> NLogILoggerBaseLoggingMethods =
-        [
-            "Log"
-        ];
+        private static readonly HashSet<string> NLogILoggerBaseLoggingMethods = ["Log"];
 
         private readonly SemanticModel model;
         private bool isFirstCatchClauseVisited;
