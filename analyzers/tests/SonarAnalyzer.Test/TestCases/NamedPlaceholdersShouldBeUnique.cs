@@ -20,6 +20,10 @@ namespace MicrosoftTests
             logger.LogWarning("Hey {0} and {0}", foo, bar);                 // Compliant
             logger.LogError("Hey {0} and {0}", foo, bar);                   // Compliant
 
+            // Do not raise on wildcard placeholder
+            logger.LogError("Hey {_} and {_}", foo, bar);                   // Compliant
+            logger.LogError("Hey {_} and {_0}", foo, bar);                  // Compliant
+
             logger.LogInformation("Hey {foo} and {bar}", foo, bar);         // Compliant
             logger.LogDebug("Hey {foo} and {bar}", foo, bar);               // Compliant
             logger.LogTrace("Hey {foo} and {bar}", foo, bar);               // Compliant
@@ -39,6 +43,17 @@ namespace MicrosoftTests
             new NotLogger().LogDebug("Hey {foo} and {foo}", foo, foo);      // Compliant
             new NotLogger().LogCritical("Hey {foo} and {foo}", foo, foo);   // Compliant
 
+            // Invalid template syntaxs
+            logger.LogInformation("Hey foo} and {foo}", foo, foo);           // Compliant
+            logger.LogInformation("Hey {foo and {foo}", foo, foo);           // Compliant
+            logger.LogInformation("Hey {foo} and {foo", foo, foo);           // Compliant
+            logger.LogInformation("Hey {foo} and {&foo}", foo);              // Compliant
+            logger.LogInformation("Hey {foo} and {@foo,INVALID}", foo);      // Compliant
+            logger.LogInformation("Hey {foo} and {@foo#}", foo);             // Compliant
+
+            // Escaped
+            logger.LogInformation("Hey {{foo}} and {{foo}}", foo, foo);      // Compliant
+            logger.LogInformation("Hey {foo} and {{foo}}", foo, foo);        // Compliant
         }
 
         void Noncompliant_Simple(ILogger logger, string foo, Exception ex, EventId eventId)
@@ -100,6 +115,21 @@ namespace MicrosoftTests
             logger.Log(LogLevel.Trace, args: new[] { foo, foo }, message: "Hey {foo} and {foo}"); // Noncompliant
             //                                                                            ^^^
 
+            // Grammar checks
+            logger.LogInformation("Hey {foo} and {$foo} and {@foo}", foo, bar);
+            //                                     ^^^ {{Message template placeholder 'foo' is not unique.}}
+            //                                                ^^^ @-1 {{Message template placeholder 'foo' is not unique.}}
+
+            logger.LogInformation("Hey {foo} and {foo,42} and {foo:format} and {foo,-42:for_{_mat}", foo, bar);
+            //                                    ^^^ {{Message template placeholder 'foo' is not unique.}}
+            //                                                 ^^^ @-1 {{Message template placeholder 'foo' is not unique.}}
+            //                                                                  ^^^ @-2 {{Message template placeholder 'foo' is not unique.}}
+
+            logger.LogInformation("Hey {_foo} and {_foo42} and {_foo42} and {_foo}", foo, bar);
+            //                                                  ^^^^^^ {{Message template placeholder '_foo42' is not unique.}}
+            //                                                               ^^^^ @-1 {{Message template placeholder '_foo' is not unique.}}
+
+            // Multiline
             logger.LogDebug(
                 message: "Hey {foo} and {foo}", // Noncompliant
                 //                       ^^^
@@ -217,7 +247,7 @@ namespace NLogTests
 
     public class Program
     {
-        void Compliant(ILogger logger, string foo, string bar)
+        void Compliant(ILogger logger, ILoggerBase loggerBase, string foo, string bar)
         {
             logger.Info("Hey {foo} and {bar}", foo, bar);                           // Compliant
             logger.Debug("Hey {foo} and {bar}", foo, bar);                          // Compliant
@@ -231,27 +261,36 @@ namespace NLogTests
 
             new MyLogger().Log(LogLevel.Trace, "Hey {foo} and {bar}", foo, foo);    // Compliant
             new MyLogger().Trace("Hey {foo} and {bar}", foo, foo);                  // Compliant
+
+            loggerBase.Log(LogLevel.Trace, "Hey {foo} and {bar}", foo, bar);        // Compliant
+            loggerBase.Log(LogLevel.Trace, "Hey {foo} and {bar}");                  // Compliant
         }
 
-        void Noncompliant(ILogger interfaceLogger, Logger classLogger, string foo)
+        void Noncompliant(ILogger interfaceLogger, ILoggerBase interfaceLoggerBase, Logger classLogger, string foo)
         {
-            classLogger.Info("Hey {foo} and {foo}", foo, foo);                      // Noncompliant {{Message template placeholder 'foo' is not unique.}}
-            classLogger.Debug("Hey {foo} and {foo}", foo, foo);                     // Noncompliant
-            classLogger.Trace("Hey {foo} and {foo}", foo, foo);                     // Noncompliant
-            classLogger.Error("Hey {foo} and {foo}", foo, foo);                     // Noncompliant
-            classLogger.Fatal("Hey {foo} and {foo}", foo, foo);                     // Noncompliant
-            classLogger.Warn("Hey {foo} and {foo}", foo, foo);                      // Noncompliant
-            classLogger.ConditionalTrace("Hey {foo} and {foo}", foo, foo);          // Noncompliant
-            classLogger.ConditionalDebug("Hey {foo} and {foo}", foo, foo);          // Noncompliant
-            classLogger.Log(LogLevel.Trace, "Hey {foo} and {foo}", foo, foo);       // Noncompliant
+            classLogger.Info("Hey {foo} and {foo}", foo, foo);                          // Noncompliant {{Message template placeholder 'foo' is not unique.}}
+            classLogger.Debug("Hey {foo} and {foo}", foo, foo);                         // Noncompliant
+            classLogger.Trace("Hey {foo} and {foo}", foo, foo);                         // Noncompliant
+            classLogger.Error("Hey {foo} and {foo}", foo, foo);                         // Noncompliant
+            classLogger.Fatal("Hey {foo} and {foo}", foo, foo);                         // Noncompliant
+            classLogger.Warn("Hey {foo} and {foo}", foo, foo);                          // Noncompliant
+            classLogger.ConditionalTrace("Hey {foo} and {foo}", foo, foo);              // Noncompliant
+            classLogger.ConditionalDebug("Hey {foo} and {foo}", foo, foo);              // Noncompliant
 
-            interfaceLogger.Trace("Hey {foo} and {foo}", foo, foo);                 // Noncompliant
-            interfaceLogger.Log(LogLevel.Trace, "Hey {foo} and {foo}", foo, foo);   // Noncompliant
+            classLogger.Log(LogLevel.Trace, "Hey {foo} and {foo}");                     // Noncompliant
+            classLogger.Log(LogLevel.Trace, "Hey {foo} and {foo}", foo);                // Noncompliant
+            classLogger.Log(LogLevel.Trace, "Hey {foo} and {foo}", foo, foo);           // Noncompliant
+
+            interfaceLogger.Trace("Hey {foo} and {foo}", foo, foo);                     // Noncompliant
+            interfaceLogger.Log(LogLevel.Trace, "Hey {foo} and {foo}", foo, foo);       // Noncompliant
             //                                                  ^^^
 
-            new MyLogger().Log(LogLevel.Trace, "Hey {foo} and {foo}", foo, foo);    // Noncompliant
-            new MyLogger().Trace("Hey {foo} and {foo}", foo, foo);                  // Noncompliant
+            interfaceLoggerBase.Log(LogLevel.Trace, "Hey {foo} and {foo}");             // Noncompliant
+            interfaceLoggerBase.Log(LogLevel.Trace, "Hey {foo} and {foo}", foo);        // Noncompliant
+            interfaceLoggerBase.Log(LogLevel.Trace, "Hey {foo} and {foo}", foo, foo);   // Noncompliant
 
+            new MyLogger().Log(LogLevel.Trace, "Hey {foo} and {foo}", foo, foo);        // Noncompliant
+            new MyLogger().Trace("Hey {foo} and {foo}", foo, foo);                      // Noncompliant
         }
 
         public class MyLogger : Logger { }
