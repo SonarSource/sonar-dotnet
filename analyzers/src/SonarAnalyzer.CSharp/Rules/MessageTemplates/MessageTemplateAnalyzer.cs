@@ -58,7 +58,12 @@ public sealed class MessageTemplateAnalyzer : SonarDiagnosticAnalyzer
         ?? TemplateArgument(invocation, model, KnownType.NLog_ILogger, NLogILogger, "message", checkDerivedTypes: true)
         ?? TemplateArgument(invocation, model, KnownType.NLog_ILoggerBase, NLogILoggerBase, "message", checkDerivedTypes: true);
 
-    private static ArgumentSyntax TemplateArgument(InvocationExpressionSyntax invocation, SemanticModel model, KnownType type, ICollection<string> methods, string template, bool checkDerivedTypes = false) =>
+    private static ArgumentSyntax TemplateArgument(InvocationExpressionSyntax invocation,
+                                                   SemanticModel model,
+                                                   KnownType type,
+                                                   ICollection<string> methods,
+                                                   string template,
+                                                   bool checkDerivedTypes = false) =>
         methods.Contains(invocation.GetIdentifier().ToString())
         && model.GetSymbolInfo(invocation).Symbol is IMethodSymbol method
         && method.HasContainingType(type, checkDerivedTypes)
