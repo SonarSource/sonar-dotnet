@@ -89,6 +89,7 @@ public sealed class MessageTemplateAnalyzer : SonarDiagnosticAnalyzer
         TemplateArgument(invocation, model, KnownType.Microsoft_Extensions_Logging_LoggerExtensions, MicrosoftExtensionsLoggingMethods, "message")
         // TODO: Add more testcases for Serilog and NLog
         ?? TemplateArgument(invocation, model, KnownType.Serilog_Log, SerilogMethods, "messageTemplate")
+        ?? TemplateArgument(invocation, model, KnownType.Serilog_ILogger, SerilogMethods, "messageTemplate")
         ?? TemplateArgument(invocation, model, KnownType.NLog_ILogger, NLogLoggerMethods, "message", exactMatch: false)
         ?? TemplateArgument(invocation, model, KnownType.NLog_ILoggerBase, NLogLoggerBaseMethods, "message", exactMatch: false);
 

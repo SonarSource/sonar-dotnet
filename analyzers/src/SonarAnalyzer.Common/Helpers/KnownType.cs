@@ -173,9 +173,9 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Org_BouncyCastle_Crypto_Generators_DHParametersGenerator = new("Org.BouncyCastle.Crypto.Generators.DHParametersGenerator");
         public static readonly KnownType Org_BouncyCastle_Crypto_Generators_DsaParametersGenerator = new("Org.BouncyCastle.Crypto.Generators.DsaParametersGenerator");
         public static readonly KnownType Org_BouncyCastle_Crypto_Parameters_RsaKeyGenerationParameters = new("Org.BouncyCastle.Crypto.Parameters.RsaKeyGenerationParameters");
+        public static readonly KnownType Serilog_ILogger = new("Serilog.ILogger");
         public static readonly KnownType Serilog_LoggerConfiguration = new("Serilog.LoggerConfiguration");
         public static readonly KnownType Serilog_Log = new("Serilog.Log");
-        public static readonly KnownType Serilog_ILogger = new("Serilog.ILogger");
         public static readonly KnownType ServiceStack_OrmLite_OrmLiteReadApi = new("ServiceStack.OrmLite.OrmLiteReadApi");
         public static readonly KnownType ServiceStack_OrmLite_OrmLiteReadApiAsync = new("ServiceStack.OrmLite.OrmLiteReadApiAsync");
         public static readonly KnownType System_Action = new("System.Action");

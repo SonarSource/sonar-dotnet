@@ -151,26 +151,62 @@ namespace SerilogTests
 
     public class Program
     {
-        void Compliant(string foo, string bar, Exception e, LogEventLevel level)
+        void Compliant(string foo, string bar, Exception e, LogEventLevel level, ILogger logger)
         {
-            Log.Verbose("Hey {foo} and {bar}", foo, bar);           // Compliant
-            Log.Debug("Hey {foo} and {bar}", foo, bar);             // Compliant
-            Log.Information("Hey {foo} and {bar}", foo, bar);       // Compliant
-            Log.Warning("Hey {foo} and {bar}", foo, bar);           // Compliant
-            Log.Error("Hey {foo} and {bar}", foo, bar);             // Compliant
-            Log.Fatal("Hey {foo} and {bar}", foo, bar);             // Compliant
-            Log.Write(level, e, "Hey {foo} and {bar}", foo, bar);   // Compliant
+            logger.Verbose("Hey {foo} and {bar}", foo, bar);               // Compliant
+            logger.Debug("Hey {foo} and {bar}", foo, bar);                 // Compliant
+            logger.Information("Hey {foo} and {bar}", foo, bar);           // Compliant
+            logger.Warning("Hey {foo} and {bar}", foo, bar);               // Compliant
+            logger.Error("Hey {foo} and {bar}", foo, bar);                 // Compliant
+            logger.Fatal("Hey {foo} and {bar}", foo, bar);                 // Compliant
+
+            logger.Write(level, e, "Hey {foo} and {bar}");                 // Compliant
+            logger.Write(level, e, "Hey {foo} and {bar}", foo);            // Compliant
+            logger.Write(level, e, "Hey {foo} and {bar}", foo, bar);       // Compliant
+
+            Log.Verbose("Hey {foo} and {bar}", foo, bar);                  // Compliant
+            Log.Debug("Hey {foo} and {bar}", foo, bar);                    // Compliant
+            Log.Information("Hey {foo} and {bar}", foo, bar);              // Compliant
+            Log.Warning("Hey {foo} and {bar}", foo, bar);                  // Compliant
+            Log.Error("Hey {foo} and {bar}", foo, bar);                    // Compliant
+            Log.Fatal("Hey {foo} and {bar}", foo, bar);                    // Compliant
+            Log.Write(level, e, "Hey {foo} and {bar}", foo, bar);          // Compliant
+
+            Log.Logger.Verbose("Hey {foo} and {bar}", foo, bar);           // Compliant
         }
 
-        void Noncompliant_Simple(string foo, string bar, Exception e, LogEventLevel level)
+        void Noncompliant(ILogger logger, string foo, string bar, Exception e, LogEventLevel level)
         {
-            Log.Verbose("Hey {foo} and {foo}", foo, bar);           // Noncompliant
-            Log.Debug("Hey {foo} and {foo}", foo, bar);             // Noncompliant
-            Log.Information("Hey {foo} and {foo}", foo, bar);       // Noncompliant
-            Log.Warning("Hey {foo} and {foo}", foo, bar);           // Noncompliant
-            Log.Error("Hey {foo} and {foo}", foo, bar);             // Noncompliant
-            Log.Fatal("Hey {foo} and {foo}", foo, bar);             // Noncompliant
-            Log.Write(level, e, "Hey {foo} and {foo}", foo, bar);   // Noncompliant
+            logger.Verbose("Hey {foo} and {foo}", foo, bar);               // Noncompliant {{Message template placeholder 'foo' is not unique.}}
+            logger.Debug("Hey {foo} and {foo}", foo, bar);                 // Noncompliant
+            logger.Information("Hey {foo} and {foo}", foo, bar);           // Noncompliant
+            logger.Warning("Hey {foo} and {foo}", foo, bar);               // Noncompliant
+            logger.Error("Hey {foo} and {foo}", foo, bar);                 // Noncompliant
+            logger.Fatal("Hey {foo} and {foo}", foo, bar);                 // Noncompliant
+            logger.Write(level, e, "Hey {foo} and {foo}");                 // Noncompliant
+            logger.Write(level, e, "Hey {foo} and {foo}", foo);            // Noncompliant
+            logger.Write(level, e, "Hey {foo} and {foo}", foo, bar);       // Noncompliant
+            //                                     ^^^
+
+            Log.Verbose("Hey {foo} and {foo}", foo, bar);                  // Noncompliant
+            Log.Debug("Hey {foo} and {foo}", foo, bar);                    // Noncompliant
+            Log.Information("Hey {foo} and {foo}", foo, bar);              // Noncompliant
+            Log.Warning("Hey {foo} and {foo}", foo, bar);                  // Noncompliant
+            Log.Error("Hey {foo} and {foo}", foo, bar);                    // Noncompliant
+            Log.Fatal("Hey {foo} and {foo}", foo, bar);                    // Noncompliant
+            Log.Write(level, e, "Hey {foo} and {foo}", foo, bar);          // Noncompliant
+            //                                  ^^^
+
+            Log.Logger.Verbose("Hey {foo} and {foo}", foo, bar);           // Noncompliant
+            //                                 ^^^
+
+            Log.Error(
+                propertyValues: new[] { foo },
+                messageTemplate: "Hey {foo} and {bar} and {foo} and {foo} and {bar}");
+            //                                             ^^^ {{Message template placeholder 'foo' is not unique.}}
+            //                                                       ^^^ @-1 {{Message template placeholder 'foo' is not unique.}}
+            //                                                                 ^^^ @-2 {{Message template placeholder 'bar' is not unique.}}
+
         }
     }
 }
