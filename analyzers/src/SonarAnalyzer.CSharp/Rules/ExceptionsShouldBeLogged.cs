@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using static Roslyn.Utilities.SonarAnalyzer.Shared.LoggingFrameworkIdentifier;
+
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -52,65 +54,6 @@ public sealed class ExceptionsShouldBeLogged : SonarDiagnosticAnalyzer
     // - if the exception is not logged, it will visit all the invocations
     private sealed class CatchLoggingInvocationWalker : SafeCSharpSyntaxWalker
     {
-        private static readonly HashSet<string> MicrosoftExtensionsLoggingMethods =
-        [
-            "Log",
-            "LogCritical",
-            "LogDebug",
-            "LogError",
-            "LogInformation",
-            "LogTrace",
-            "LogWarning"
-        ];
-
-        private static readonly HashSet<string> CastleCoreOrCommonCoreLoggingMethods =
-        [
-            "Debug",
-            "DebugFormat",
-            "Error",
-            "ErrorFormat",
-            "Fatal",
-            "FatalFormat",
-            "Info",
-            "InfoFormat",
-            "Trace",
-            "TraceFormat",
-            "Warn",
-            "WarnFormat"
-        ];
-
-        private static readonly HashSet<string> Log4NetLoggingMethods =
-        [
-            "Debug",
-            "Error",
-            "Fatal",
-            "Info",
-            "Warn"
-        ];
-
-        private static readonly HashSet<string> Log4NetLoggingExtensionMethods =
-        [
-            "DebugExt",
-            "ErrorExt",
-            "FatalExt",
-            "InfoExt",
-            "WarnExt"
-        ];
-
-        private static readonly HashSet<string> NLogLoggingMethods =
-        [
-            "Debug",
-            "ConditionalDebug",
-            "Error",
-            "Fatal",
-            "Info",
-            "Trace",
-            "ConditionalTrace",
-            "Warn"
-        ];
-
-        private static readonly HashSet<string> NLogILoggerBaseLoggingMethods = ["Log"];
-
         private readonly SemanticModel model;
         private bool isFirstCatchClauseVisited;
         private bool hasWhenFilterWithDeclarations;
