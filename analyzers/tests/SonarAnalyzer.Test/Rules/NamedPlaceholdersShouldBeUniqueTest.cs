@@ -57,9 +57,11 @@ public class NamedPlaceholdersShouldBeUniqueTest
                 {
                     logger.{{methodName}}("Hey {foo} and {bar}", arg, arg);                       // Compliant
                     logger.{{methodName}}("Hey {foo} and {foo}", arg, arg);                       // Noncompliant
+                                                                                                  // Secondary @-1
 
                     myLogger.{{methodName}}("Hey {foo} and {bar}", arg, arg);                     // Compliant
                     myLogger.{{methodName}}("Hey {foo} and {foo}", arg, arg);                     // Noncompliant
+                                                                                                  // Secondary @-1
                 }
             }
 
@@ -89,12 +91,15 @@ public class NamedPlaceholdersShouldBeUniqueTest
                 {
                     logger.{{methodName}}("Hey {foo} and {bar}", arg, arg);                       // Compliant
                     logger.{{methodName}}("Hey {foo} and {foo}", arg, arg);                       // Noncompliant
+                                                                                                  // Secondary @-1
 
                     Log.{{methodName}}("Hey {foo} and {bar}", arg, arg);                          // Compliant
                     Log.{{methodName}}("Hey {foo} and {foo}", arg, arg);                          // Noncompliant
+                                                                                                  // Secondary @-1
 
                     Log.Logger.{{methodName}}("Hey {foo} and {bar}", arg, arg);                   // Compliant
                     Log.Logger.{{methodName}}("Hey {foo} and {foo}", arg, arg);                   // Noncompliant
+                                                                                                  // Secondary @-1
                 }
             }
             """).Verify();
@@ -118,12 +123,15 @@ public class NamedPlaceholdersShouldBeUniqueTest
                 {
                     iLogger.{{methodName}}("Hey {foo} and {bar}", arg, arg);      // Compliant
                     iLogger.{{methodName}}("Hey {foo} and {foo}", arg, arg);      // Noncompliant
+                                                                                  // Secondary @-1
 
                     logger.{{methodName}}("Hey {foo} and {bar}", arg, arg);       // Compliant
                     logger.{{methodName}}("Hey {foo} and {foo}", arg, arg);       // Noncompliant
+                                                                                  // Secondary @-1
 
                     myLogger.{{methodName}}("Hey {foo} and {bar}", arg, arg);     // Compliant
                     myLogger.{{methodName}}("Hey {foo} and {foo}", arg, arg);     // Noncompliant
+                                                                                  // Secondary @-1
                 }
             }
             public class MyLogger : Logger { }
