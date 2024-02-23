@@ -117,7 +117,8 @@ public sealed class ExceptionsShouldBeLogged : SonarDiagnosticAnalyzer
                 .Select(x => x.Expression);
             foreach (var expression in expressions)
             {
-                if (expression is MemberAccessExpressionSyntax memberAccess && memberAccess.NameIs("InnerException"))
+                if (expression is MemberAccessExpressionSyntax memberAccess
+                    && memberAccess.NameIs("InnerException"))
                 {
                     yield return semanticModel.GetSymbolInfo(memberAccess.Expression).Symbol;
                 }
@@ -131,7 +132,8 @@ public sealed class ExceptionsShouldBeLogged : SonarDiagnosticAnalyzer
             || IsLoggingInvocation(invocation, model, CastleCoreOrCommonCore, KnownType.Common_Logging_ILog, true)
             || IsLoggingInvocation(invocation, model, Log4NetILog, KnownType.log4net_ILog, true)
             || IsLoggingInvocation(invocation, model, Log4NetILogExtensions, KnownType.log4net_Util_ILogExtensions, false)
-            || IsLoggingInvocation(invocation, model, NLogILogger, KnownType.NLog_ILogger, true)
+            || IsLoggingInvocation(invocation, model, NLogLoggingMethods, KnownType.NLog_ILogger, true)
+            || IsLoggingInvocation(invocation, model, NLogLoggingMethods, KnownType.NLog_ILoggerExtensions, false)
             || IsLoggingInvocation(invocation, model, NLogILoggerBase, KnownType.NLog_ILoggerBase, true);
 
         private static bool IsLoggingInvocation(InvocationExpressionSyntax invocation, SemanticModel model, ICollection<string> methodNames, KnownType containingType, bool checkDerivedTypes) =>
