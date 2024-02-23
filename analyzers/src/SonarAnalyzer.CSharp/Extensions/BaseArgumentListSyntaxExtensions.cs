@@ -24,8 +24,5 @@ namespace SonarAnalyzer.Extensions
     {
         internal static ArgumentSyntax GetArgumentByName(this BaseArgumentListSyntax list, string name) =>
             list.Arguments.FirstOrDefault(argument => argument.NameIs(name));
-
-        internal static ArgumentSyntax GetArgumentByNameOrPosition(this BaseArgumentListSyntax list, string name, int index) =>
-            list.Arguments.FirstOrDefault(argument => argument.NameIs(name)) ?? list.Arguments[index];
     }
 }
