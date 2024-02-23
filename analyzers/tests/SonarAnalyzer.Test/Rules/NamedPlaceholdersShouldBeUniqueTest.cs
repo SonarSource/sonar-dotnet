@@ -31,11 +31,101 @@ public class NamedPlaceholdersShouldBeUniqueTest
         .Concat(NuGetMetadataReference.NLog(Constants.NuGetLatestVersion))
         .Concat(NuGetMetadataReference.Serilog(Constants.NuGetLatestVersion));
 
+    private static readonly VerifierBuilder Builder = new VerifierBuilder<MessageTemplateAnalyzer>()
+        .AddReferences(LoggingReferences)
+        .WithOnlyDiagnostics(NamedPlaceholdersShouldBeUnique.S6677);
+
     [TestMethod]
     public void NamedPlaceholdersShouldBeUnique_CS() =>
-        new VerifierBuilder<MessageTemplateAnalyzer>()
-        .AddPaths("NamedPlaceholdersShouldBeUnique.cs")
-        .AddReferences(LoggingReferences)
-        .WithOnlyDiagnostics(NamedPlaceholdersShouldBeUnique.S6677)
-        .Verify();
+        Builder.AddPaths("NamedPlaceholdersShouldBeUnique.cs").Verify();
+
+    [DataTestMethod]
+    [DataRow("LogCritical")]
+    [DataRow("LogDebug")]
+    [DataRow("LogError")]
+    [DataRow("LogInformation")]
+    [DataRow("LogTrace")]
+    [DataRow("LogWarning")]
+    public void NamedPlaceholdersShouldBeUnique_MicrosoftExtensionsLogging_CS(string methodName) =>
+        Builder.AddSnippet($$"""
+            using System;
+            using Microsoft.Extensions.Logging;
+
+            public class Program
+            {
+                public void Method(ILogger logger, MyLogger myLogger, int arg)
+                {
+                    logger.{{methodName}}("Hey {foo} and {bar}", arg, arg);                       // Compliant
+                    logger.{{methodName}}("Hey {foo} and {foo}", arg, arg);                       // Noncompliant
+
+                    myLogger.{{methodName}}("Hey {foo} and {bar}", arg, arg);                     // Compliant
+                    myLogger.{{methodName}}("Hey {foo} and {foo}", arg, arg);                     // Noncompliant
+                }
+            }
+
+            public class MyLogger : ILogger
+            {
+                public IDisposable BeginScope<TState>(TState state) => null;
+                public bool IsEnabled(LogLevel logLevel) => true;
+                public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter) { }
+            }
+            """).Verify();
+
+    [DataTestMethod]
+    [DataRow("Debug")]
+    [DataRow("Error")]
+    [DataRow("Information")]
+    [DataRow("Fatal")]
+    [DataRow("Warning")]
+    [DataRow("Verbose")]
+    public void NamedPlaceholdersShouldBeUnique_Serilog_CS(string methodName) =>
+        Builder.AddSnippet($$"""
+            using Serilog;
+            using Serilog.Events;
+
+            public class Program
+            {
+                public void Method(ILogger logger, int arg)
+                {
+                    logger.{{methodName}}("Hey {foo} and {bar}", arg, arg);                       // Compliant
+                    logger.{{methodName}}("Hey {foo} and {foo}", arg, arg);                       // Noncompliant
+
+                    Log.{{methodName}}("Hey {foo} and {bar}", arg, arg);                          // Compliant
+                    Log.{{methodName}}("Hey {foo} and {foo}", arg, arg);                          // Noncompliant
+
+                    Log.Logger.{{methodName}}("Hey {foo} and {bar}", arg, arg);                   // Compliant
+                    Log.Logger.{{methodName}}("Hey {foo} and {foo}", arg, arg);                   // Noncompliant
+                }
+            }
+            """).Verify();
+
+    [DataTestMethod]
+    [DataRow("Debug")]
+    [DataRow("ConditionalDebug")]
+    [DataRow("Error")]
+    [DataRow("Fatal")]
+    [DataRow("Info")]
+    [DataRow("Trace")]
+    [DataRow("ConditionalTrace")]
+    [DataRow("Warn")]
+    public void NamedPlaceholdersShouldBeUnique_NLog_CS(string methodName) =>
+        Builder.AddSnippet($$"""
+            using NLog;
+
+            public class Program
+            {
+                public void Method(ILogger iLogger, Logger logger, MyLogger myLogger, int arg)
+                {
+                    iLogger.{{methodName}}("Hey {foo} and {bar}", arg, arg);      // Compliant
+                    iLogger.{{methodName}}("Hey {foo} and {foo}", arg, arg);      // Noncompliant
+
+                    logger.{{methodName}}("Hey {foo} and {bar}", arg, arg);       // Compliant
+                    logger.{{methodName}}("Hey {foo} and {foo}", arg, arg);       // Noncompliant
+
+                    myLogger.{{methodName}}("Hey {foo} and {bar}", arg, arg);     // Compliant
+                    myLogger.{{methodName}}("Hey {foo} and {foo}", arg, arg);     // Noncompliant
+                }
+            }
+            public class MyLogger : Logger { }
+            """).Verify();
 }
