@@ -19,7 +19,7 @@
  */
 
 using SonarAnalyzer.Rules.CSharp;
-using SonarAnalyzer.Rules.MesageTemplates;
+using SonarAnalyzer.Rules.MessageTemplates;
 
 namespace SonarAnalyzer.Test.Rules;
 

@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Rules.MesageTemplates;
+using SonarAnalyzer.Rules.MessageTemplates;
 
 namespace SonarAnalyzer.Rules.CSharp;
 
@@ -75,7 +75,7 @@ public sealed class MessageTemplateAnalyzer : SonarDiagnosticAnalyzer
             if (enabledChecks.Length > 0
                 && c.Node is InvocationExpressionSyntax invocation
                 && TemplateArgument(invocation, c.SemanticModel) is { } argument
-                && MessageTemplates.Parse(argument.Expression.ToString()) is { Success: true } result)
+                && Helpers.MessageTemplates.Parse(argument.Expression.ToString()) is { Success: true } result)
             {
                 foreach (var check in enabledChecks)
                 {

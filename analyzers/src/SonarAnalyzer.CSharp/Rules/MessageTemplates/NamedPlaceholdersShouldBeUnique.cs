@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.MesageTemplates;
+namespace SonarAnalyzer.Rules.MessageTemplates;
 
 public sealed class NamedPlaceholdersShouldBeUnique : IMessageTemplateCheck
 {
@@ -29,7 +29,7 @@ public sealed class NamedPlaceholdersShouldBeUnique : IMessageTemplateCheck
 
     public DiagnosticDescriptor Rule => S6677;
 
-    public void Execute(SonarSyntaxNodeReportingContext context, InvocationExpressionSyntax invocation, ArgumentSyntax templateArgument, MessageTemplates.Placeholder[] placeholders)
+    public void Execute(SonarSyntaxNodeReportingContext context, InvocationExpressionSyntax invocation, ArgumentSyntax templateArgument, Helpers.MessageTemplates.Placeholder[] placeholders)
     {
         var duplicates = placeholders
             .Where(x => x.Name != "_" && !int.TryParse(x.Name, out var _)) // exclude wildcard "_" and index placeholders like {42}

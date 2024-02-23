@@ -18,11 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.MesageTemplates;
+namespace SonarAnalyzer.Rules.MessageTemplates;
 
 public interface IMessageTemplateCheck
 {
     DiagnosticDescriptor Rule { get; }
 
-    void Execute(SonarSyntaxNodeReportingContext context, InvocationExpressionSyntax invocation, ArgumentSyntax templateArgument, MessageTemplates.Placeholder[] placeholders);
+    void Execute(SonarSyntaxNodeReportingContext context, InvocationExpressionSyntax invocation, ArgumentSyntax templateArgument, Helpers.MessageTemplates.Placeholder[] placeholders);
 }
