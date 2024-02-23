@@ -60,7 +60,6 @@ public sealed class MessageTemplateAnalyzer : SonarDiagnosticAnalyzer
 
     private static readonly HashSet<string> NLogLoggerBaseMethods = ["Log"];
 
-    // TODO: Implement ISEnabled detection, similar to SE
     private static readonly ImmutableHashSet<IMessageTemplateCheck> Checks = ImmutableHashSet.Create<IMessageTemplateCheck>(
                new NamedPlaceholdersShouldBeUnique());
 
@@ -70,17 +69,19 @@ public sealed class MessageTemplateAnalyzer : SonarDiagnosticAnalyzer
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(c =>
         {
-            if (c.Node is InvocationExpressionSyntax invocation
+            var enabledChecks = Checks.Where(x => x.Rule.IsEnabled(c)).ToArray();
+            if (enabledChecks.Length > 0
+                && c.Node is InvocationExpressionSyntax invocation
                 && TemplateArgument(invocation, c.SemanticModel) is { } argument
                 && MessageTemplates.Parse(argument.Expression.ToString()) is { Success: true } result)
             {
-                foreach (var check in Checks)
+                foreach (var check in enabledChecks)
                 {
                     check.Execute(c, invocation, argument, result.Placeholders);
                 }
             }
         },
-            SyntaxKind.InvocationExpression);
+        SyntaxKind.InvocationExpression);
 
     private static ArgumentSyntax TemplateArgument(InvocationExpressionSyntax invocation, SemanticModel model) =>
         TemplateArgument(invocation, model, KnownType.Microsoft_Extensions_Logging_LoggerExtensions, MicrosoftExtensionsLoggingMethods, "message")

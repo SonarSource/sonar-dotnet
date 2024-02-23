@@ -108,7 +108,7 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
                                        .Select(x => x.First().Value.CreateSonarFallback(Configuration))
                                        .WhereNotNull()
                                        .Cast<ISymbolicExecutionAnalyzer>() // ISymbolicExecutionAnalyzer should be passed as TSonarFallback to CreateFactory. Have you passed a Roslyn rule instead?
-                                       .Where(x => x.SupportedDiagnostics.Any(descriptor => IsEnabled(context, descriptor)))
+                                       .Where(x => x.SupportedDiagnostics.Any(descriptor => descriptor.IsEnabled(context)))
                                        .ToList();
         if (enabledAnalyzers.Any() && CSharpControlFlowGraph.TryGet(context.Node, context.SemanticModel, out var cfg))
         {

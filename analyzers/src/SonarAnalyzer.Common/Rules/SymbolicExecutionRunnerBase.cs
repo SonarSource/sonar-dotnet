@@ -47,31 +47,6 @@ public abstract class SymbolicExecutionRunnerBase : SonarDiagnosticAnalyzer
         where TSonarFallback : new() =>
         new RuleFactory<TRuleCheck, TSonarFallback>();
 
-    protected static bool IsEnabled(SonarSyntaxNodeReportingContext context, DiagnosticDescriptor descriptor)
-    {
-        if (context.HasMatchingScope(descriptor))
-        {
-            // Roslyn calls this analyzer if any of the SE rules is active. We need to remove deactivated rules from execution to improve overall SE performance.
-            // This is a reproduction of Roslyn activation logic:
-            // https://github.com/dotnet/roslyn/blob/0368609e1467563247e9b5e4e3fe8bff533d59b6/src/Compilers/Core/Portable/DiagnosticAnalyzer/AnalyzerDriver.cs#L1316-L1327
-            var options = CompilationOptionsWrapper.FromObject(context.Compilation.Options).SyntaxTreeOptionsProvider;
-            var severity = options.TryGetDiagnosticValue(context.Tree, descriptor.Id, default, out var severityFromOptions)
-                || options.TryGetGlobalDiagnosticValue(descriptor.Id, default, out severityFromOptions)
-                ? severityFromOptions                                               // .editorconfig for a specific tree
-                : descriptor.GetEffectiveSeverity(context.Compilation.Options);     // RuleSet file or .globalconfig;
-            return severity switch
-            {
-                ReportDiagnostic.Default => descriptor.IsEnabledByDefault,
-                ReportDiagnostic.Suppress => false,
-                _ => true
-            };
-        }
-        else
-        {
-            return false;
-        }
-    }
-
     protected void Analyze(SonarAnalysisContext analysisContext, SonarSyntaxNodeReportingContext nodeContext)
     {
         if (nodeContext.SemanticModel.GetDeclaredSymbol(nodeContext.Node) is { } symbol)
@@ -95,7 +70,7 @@ public abstract class SymbolicExecutionRunnerBase : SonarDiagnosticAnalyzer
     private void AnalyzeRoslyn(SonarAnalysisContext analysisContext, SonarSyntaxNodeReportingContext nodeContext, ISymbol symbol)
     {
         var checks = AllRules
-            .Where(x => IsEnabled(nodeContext, x.Key))
+            .Where(x => x.Key.IsEnabled(nodeContext))
             .GroupBy(x => x.Value.Type)                                                                 // Multiple DiagnosticDescriptors (S2583, S2589) can share the same check type
             .Select(x => x.First().Value.CreateInstance(Configuration, analysisContext, nodeContext))   // We need just one instance in that case
             .Where(x => x?.ShouldExecute() is true)
