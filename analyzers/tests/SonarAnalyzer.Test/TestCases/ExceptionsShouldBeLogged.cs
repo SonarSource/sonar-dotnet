@@ -238,6 +238,15 @@ public class TestCases
         }
     }
 
+    public void LogInnerException()
+    {
+        try { }
+        catch (Exception e)
+        {
+            logger.LogWarning(new EventId(1), e.InnerException, "Message!");        // Compliant
+        }
+    }
+
     public class CustomLogger
     {
         public void LogCritical(string message) { }
