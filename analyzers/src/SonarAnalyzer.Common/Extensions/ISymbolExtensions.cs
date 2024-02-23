@@ -68,5 +68,10 @@ namespace SonarAnalyzer.Helpers
                         select interfaceMember;
             return query.ToImmutableArray();
         }
+
+        public static bool HasContainingType(this ISymbol method, KnownType containingType, bool checkDerivedTypes) =>
+            checkDerivedTypes
+                ? method.ContainingType.DerivesOrImplements(containingType)
+                : method.ContainingType.Is(containingType);
     }
 }

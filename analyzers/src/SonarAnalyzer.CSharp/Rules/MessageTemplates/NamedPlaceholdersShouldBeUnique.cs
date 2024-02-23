@@ -32,7 +32,7 @@ public sealed class NamedPlaceholdersShouldBeUnique : IMessageTemplateCheck
     public void Execute(SonarSyntaxNodeReportingContext context, InvocationExpressionSyntax invocation, ArgumentSyntax templateArgument, Helpers.MessageTemplates.Placeholder[] placeholders)
     {
         var duplicates = placeholders
-            .Where(x => x.Name != "_" && !int.TryParse(x.Name, out var _)) // exclude wildcard "_" and index placeholders like {42}
+            .Where(x => x.Name != "_" && !int.TryParse(x.Name, out _)) // exclude wildcard "_" and index placeholders like {42}
             .GroupBy(x => x.Name)
             .Where(x => x.Count() > 1).Select(x => x.Skip(1))
             .SelectMany(x => x);
