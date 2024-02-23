@@ -232,7 +232,7 @@ public class TestCases
         try { }
         catch (Exception e)
         {
-            logger.LogWarning(new EventId(1), e.InnerException, "Message!");        // Noncompliant
+            logger.LogWarning(new EventId(1), e.StackTrace, "Message!");        // Noncompliant
             logger.LogWarning(new EventId(1), (e.Message != null).ToString());
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary
         }
@@ -244,6 +244,15 @@ public class TestCases
         catch (Exception e)
         {
             logger.LogWarning(new EventId(1), e.InnerException, "Message!");        // Compliant
+        }
+    }
+
+    public void LogFromCatchWithoutExceptionType()
+    {
+        try { }
+        catch
+        {
+            logger.LogWarning("Message!");                                          // Noncompliant
         }
     }
 
