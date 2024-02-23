@@ -57,7 +57,7 @@ public sealed class ExceptionsShouldBeLogged : SonarDiagnosticAnalyzer
         private readonly SemanticModel model;
         private bool isFirstCatchClauseVisited;
         private bool hasWhenFilterWithDeclarations;
-        private ISymbol catchException;
+        private ISymbol caughtException;
 
         public bool IsExceptionLogged { get; private set; }
         public readonly List<InvocationExpressionSyntax> LoggingInvocations = new();
@@ -87,7 +87,7 @@ public sealed class ExceptionsShouldBeLogged : SonarDiagnosticAnalyzer
             hasWhenFilterWithDeclarations = node.Filter != null && node.Filter.DescendantNodes().Any(DeclarationPatternSyntaxWrapper.IsInstance);
             if (node.Declaration != null && !node.Declaration.Identifier.IsKind(SyntaxKind.None))
             {
-                catchException = model.GetDeclaredSymbol(node.Declaration);
+                caughtException = model.GetDeclaredSymbol(node.Declaration);
             }
             base.VisitCatchClause(node);
         }
@@ -96,8 +96,8 @@ public sealed class ExceptionsShouldBeLogged : SonarDiagnosticAnalyzer
         {
             if (IsLoggingInvocation(node, model))
             {
-                var currentException = node.GetArgumentSymbolsDerivedFromKnownType(KnownType.System_Exception, model).FirstOrDefault();
-                if (currentException != null && (hasWhenFilterWithDeclarations || currentException.Equals(catchException)))
+                var currentException = GetArgumentSymbolsDerivedFromException(node, model).FirstOrDefault();
+                if (currentException != null && (hasWhenFilterWithDeclarations || currentException.Equals(caughtException)))
                 {
                     IsExceptionLogged = true;
                     return;
@@ -108,6 +108,21 @@ public sealed class ExceptionsShouldBeLogged : SonarDiagnosticAnalyzer
                 }
             }
             base.VisitInvocationExpression(node);
+        }
+
+        private static IEnumerable<ISymbol> GetArgumentSymbolsDerivedFromException(InvocationExpressionSyntax invocation, SemanticModel semanticModel)
+        {
+            var expressions = invocation.ArgumentList.Arguments
+                .Where(argument => semanticModel.GetTypeInfo(argument.Expression).Type.DerivesFrom(KnownType.System_Exception))
+                .Select(x => x.Expression);
+            foreach (var expression in expressions)
+            {
+                if (expression is MemberAccessExpressionSyntax memberAccess && memberAccess.NameIs("InnerException"))
+                {
+                    yield return semanticModel.GetSymbolInfo(memberAccess.Expression).Symbol;
+                }
+                yield return semanticModel.GetSymbolInfo(expression).Symbol;
+            }
         }
 
         private static bool IsLoggingInvocation(InvocationExpressionSyntax invocation, SemanticModel model) =>
