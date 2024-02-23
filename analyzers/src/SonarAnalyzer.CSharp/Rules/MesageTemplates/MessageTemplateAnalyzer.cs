@@ -18,7 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.MesageTemplates;
+using SonarAnalyzer.Rules.MesageTemplates;
+
+namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class MessageTemplateAnalyzer : SonarDiagnosticAnalyzer
