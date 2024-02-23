@@ -47,7 +47,7 @@ public sealed class MessageTemplateAnalyzer : SonarDiagnosticAnalyzer
             "Verbose",
         ];
 
-    private static readonly HashSet<string> NLogLoggerMethods =
+    private static readonly HashSet<string> NLogILoggerMethods =
         [
             "Debug",
             "Error",
@@ -60,7 +60,13 @@ public sealed class MessageTemplateAnalyzer : SonarDiagnosticAnalyzer
             "ConditionalDebug",
         ];
 
-    private static readonly HashSet<string> NLogLoggerBaseMethods = ["Log"];
+    private static readonly HashSet<string> NLogILoggerExtensionsMethods =
+        [
+            "ConditionalTrace",
+            "ConditionalDebug",
+        ];
+
+    private static readonly HashSet<string> NLogILoggerBaseMethods = ["Log"];
 
     private static readonly ImmutableHashSet<IMessageTemplateCheck> Checks = ImmutableHashSet.Create<IMessageTemplateCheck>(
                new NamedPlaceholdersShouldBeUnique());
@@ -89,8 +95,9 @@ public sealed class MessageTemplateAnalyzer : SonarDiagnosticAnalyzer
         TemplateArgument(invocation, model, KnownType.Microsoft_Extensions_Logging_LoggerExtensions, MicrosoftExtensionsLoggingMethods, "message")
         ?? TemplateArgument(invocation, model, KnownType.Serilog_Log, SerilogMethods, "messageTemplate")
         ?? TemplateArgument(invocation, model, KnownType.Serilog_ILogger, SerilogMethods, "messageTemplate")
-        ?? TemplateArgument(invocation, model, KnownType.NLog_ILogger, NLogLoggerMethods, "message", exactMatch: false)
-        ?? TemplateArgument(invocation, model, KnownType.NLog_ILoggerBase, NLogLoggerBaseMethods, "message", exactMatch: false);
+        ?? TemplateArgument(invocation, model, KnownType.NLog_ILoggerExtensions, NLogILoggerExtensionsMethods, "message")
+        ?? TemplateArgument(invocation, model, KnownType.NLog_ILogger, NLogILoggerMethods, "message", exactMatch: false)
+        ?? TemplateArgument(invocation, model, KnownType.NLog_ILoggerBase, NLogILoggerBaseMethods, "message", exactMatch: false);
 
     private static ArgumentSyntax TemplateArgument(InvocationExpressionSyntax invocation, SemanticModel model, KnownType type, HashSet<string> methods, string template, bool exactMatch = true) =>
         methods.Contains(invocation.GetIdentifier().ToString())

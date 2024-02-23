@@ -281,6 +281,8 @@ namespace NLogTests
             classLogger.Log(LogLevel.Trace, "Hey {foo} and {foo}", foo);                // Noncompliant
             classLogger.Log(LogLevel.Trace, "Hey {foo} and {foo}", foo, foo);           // Noncompliant
 
+            interfaceLogger.ConditionalTrace("Hey {foo} and {foo}", foo, foo);          // Noncompliant
+            interfaceLogger.ConditionalDebug("Hey {foo} and {foo}", foo, foo);          // Noncompliant
             interfaceLogger.Trace("Hey {foo} and {foo}", foo, foo);                     // Noncompliant
             interfaceLogger.Log(LogLevel.Trace, "Hey {foo} and {foo}", foo, foo);       // Noncompliant
             //                                                  ^^^
