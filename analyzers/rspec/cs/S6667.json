@@ -1,5 +1,5 @@
 {
-  "title": "Logging in a catch clause should include the exception",
+  "title": "Logging in a catch clause should pass the caught exception as a parameter.",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
