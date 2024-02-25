@@ -31,8 +31,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
         // For simplicity we will avoid creating noise if the validation is invoked in the same method (https://github.com/SonarSource/sonar-dotnet/issues/5032)
         protected override bool IsDevelopmentCheckInvoked(SyntaxNode node, SemanticModel semanticModel) =>
-            EnclosingScope(node) is { } enclosingScope
-            && enclosingScope.DescendantNodes().Any(x => IsDevelopmentCheck(x, semanticModel));
+            node.EnclosingScope()
+                .DescendantNodes()
+                .Any(x => IsDevelopmentCheck(x, semanticModel));
 
         protected override bool IsInDevelopmentContext(SyntaxNode node) =>
             node.Ancestors()
@@ -42,20 +43,5 @@ namespace SonarAnalyzer.Rules.CSharp
         private bool IsDevelopmentCheck(SyntaxNode node, SemanticModel semanticModel) =>
             node is InvocationExpressionSyntax condition
             && IsValidationMethod(semanticModel, condition, condition.Expression.GetIdentifier()?.ValueText);
-
-        private static SyntaxNode EnclosingScope(SyntaxNode node) =>
-            node.Ancestors().FirstOrDefault(x => x.IsAnyKind(
-                SyntaxKind.AddAccessorDeclaration,
-                SyntaxKind.ConstructorDeclaration,
-                SyntaxKind.DestructorDeclaration,
-                SyntaxKind.GetAccessorDeclaration,
-                SyntaxKind.GlobalStatement,
-                SyntaxKindEx.InitAccessorDeclaration,
-                SyntaxKindEx.LocalFunctionStatement,
-                SyntaxKind.MethodDeclaration,
-                SyntaxKind.ParenthesizedLambdaExpression,
-                SyntaxKind.RemoveAccessorDeclaration,
-                SyntaxKind.SetAccessorDeclaration,
-                SyntaxKind.SimpleLambdaExpression));
     }
 }
