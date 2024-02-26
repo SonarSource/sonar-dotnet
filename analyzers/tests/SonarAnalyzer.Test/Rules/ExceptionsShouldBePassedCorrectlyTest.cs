@@ -60,14 +60,23 @@ public class ExceptionsShouldBePassedCorrectlyTest
                 public void Method(ILogger logger, string message)
                 {
                     try { }
-                    catch (Exception ex)
+                    catch (Exception e)
                     {
-                        logger.{{methodName}}({{logLevel}}{{eventId}} "An exception occured {Exception}.", ex); // Noncompliant
+                        logger.{{methodName}}({{logLevel}}{{eventId}} "An exception occured {Exception}.", e);          // Noncompliant
+                        logger.{{methodName}}({{logLevel}}{{eventId}} "Expected exception.", e);                        // Noncompliant
+                        logger.{{methodName}}({{logLevel}}{{eventId}} "Expected exception.", e, e);                     // Noncompliant
+                                                                                                                        // Noncompliant@-1
+                        LoggerExtensions.{{methodName}}(logger, {{logLevel}}{{eventId}} "Expected exception.", e);      // Noncompliant
+                        LoggerExtensions.{{methodName}}(logger, {{logLevel}}{{eventId}} "Expected exception.", e, e);   // Noncompliant
+                                                                                                                        // Noncompliant@-1
                     }
                     try { }
-                    catch (Exception ex)
+                    catch (Exception e)
                     {
-                        logger.{{methodName}}({{logLevel}}{{eventId}} ex, "An exception occured.");
+                        logger.{{methodName}}({{logLevel}}{{eventId}} e, "Expected exception.");
+                        logger.{{methodName}}({{logLevel}}{{eventId}} e, "Expected exception.", e);
+                        LoggerExtensions.{{methodName}}(logger, {{logLevel}}{{eventId}} e, "Expected exception.");
+                        LoggerExtensions.{{methodName}}(logger, {{logLevel}}{{eventId}} e, "Expected exception.", e);
                     }
                 }
             }

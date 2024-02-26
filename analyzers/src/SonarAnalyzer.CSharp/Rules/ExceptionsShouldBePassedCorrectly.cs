@@ -18,13 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using static Roslyn.Utilities.SonarAnalyzer.Shared.LoggingFrameworkMethods;
+
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class ExceptionsShouldBePassedCorrectly : SonarDiagnosticAnalyzer
 {
     private const string DiagnosticId = "S6668";
-    private const string MessageFormat = "FIXME";
+    private const string MessageFormat = "Logging arguments should be passed to the correct parameter.";
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
@@ -33,11 +35,38 @@ public sealed class ExceptionsShouldBePassedCorrectly : SonarDiagnosticAnalyzer
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(c =>
             {
-                var node = c.Node;
-                if (true)
+                var invocation = (InvocationExpressionSyntax)c.Node;
+                if (LoggingInvocationSymbol(invocation, c.SemanticModel) is { } invocationSymbol)
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
+                    var exceptionParameterIndex = ExceptionParameterIndex(invocationSymbol);
+                    var exceptionArguments = invocation.ArgumentList.Arguments
+                        .Where(x => c.SemanticModel.GetTypeInfo(x.Expression).Type.DerivesFrom(KnownType.System_Exception))
+                        .ToArray();
+
+                    // Do not raise if there is at least one argument in the right place.
+                    if (Array.Exists(exceptionArguments, x => x.GetArgumentIndex() == exceptionParameterIndex))
+                    {
+                        return;
+                    }
+
+                    foreach (var wrongArgument in exceptionArguments.Where(x => x.GetArgumentIndex() != exceptionParameterIndex))
+                    {
+                        c.ReportIssue(Diagnostic.Create(Rule, wrongArgument.GetLocation()));
+                    }
                 }
             },
             SyntaxKind.InvocationExpression);
+
+    private static IMethodSymbol LoggingInvocationSymbol(InvocationExpressionSyntax invocation, SemanticModel model) =>
+        MicrosoftExtensionsLogging.Contains(invocation.GetIdentifier().ToString())
+        && model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
+        && methodSymbol.HasContainingType(KnownType.Microsoft_Extensions_Logging_LoggerExtensions, false)
+            ? methodSymbol
+            : null;
+
+    private static int ExceptionParameterIndex(IMethodSymbol invocationSymbol)
+    {
+        var exceptionParameter = invocationSymbol.Parameters.FirstOrDefault(x => x.Type.DerivesFrom(KnownType.System_Exception));
+        return invocationSymbol.Parameters.IndexOf(exceptionParameter);
+    }
 }
