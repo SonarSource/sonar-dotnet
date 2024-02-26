@@ -6,7 +6,9 @@
     "func": "Constant\/Issue",
     "constantCost": "1min"
   },
-  "tags": [],
+  "tags": [
+    "logging"
+  ],
   "defaultSeverity": "Minor",
   "ruleSpecification": "RSPEC-6678",
   "sqKey": "S6678",
