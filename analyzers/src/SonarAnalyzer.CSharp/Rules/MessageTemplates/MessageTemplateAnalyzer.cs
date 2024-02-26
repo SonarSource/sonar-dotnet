@@ -28,7 +28,8 @@ namespace SonarAnalyzer.Rules.CSharp;
 public sealed class MessageTemplateAnalyzer : SonarDiagnosticAnalyzer
 {
     private static readonly ImmutableHashSet<IMessageTemplateCheck> Checks = ImmutableHashSet.Create<IMessageTemplateCheck>(
-               new NamedPlaceholdersShouldBeUnique());
+               new NamedPlaceholdersShouldBeUnique(),
+               new UsePascalCaseForNamedPlaceHolders());
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
         Checks.Select(x => x.Rule).ToImmutableArray();

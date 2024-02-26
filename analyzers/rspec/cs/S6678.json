@@ -1,0 +1,15 @@
+{
+  "title": "Use PascalCase for named placeholders",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "1min"
+  },
+  "tags": [],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-6678",
+  "sqKey": "S6678",
+  "scope": "Main",
+  "quickfix": "targeted"
+}
