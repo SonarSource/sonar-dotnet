@@ -23,4 +23,17 @@ namespace Tests.Diagnostics
                 part2}}"""); // FN (at the moment we validate only constant string)
         }
     }
+
+    // All the new .NET5 methods should be taken into consideration
+    // https://github.com/SonarSource/sonar-dotnet/issues/8758
+    public class Repro_FN_8758
+    {
+        void Method()
+        {
+            var data = new byte[42];
+            using var stream = new System.IO.MemoryStream(data);
+            SHA1.HashData(stream);          // FN
+            SHA1.HashData(data);            // FN
+        }
+    }
 }
