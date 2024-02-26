@@ -58,7 +58,7 @@ public sealed class MessageTemplateAnalyzer : SonarDiagnosticAnalyzer
         },
         SyntaxKind.InvocationExpression);
 
-    private static ArgumentSyntax TemplateArgument(InvocationExpressionSyntax invocation, SemanticModel model) =>
+    public static ArgumentSyntax TemplateArgument(InvocationExpressionSyntax invocation, SemanticModel model) =>
         TemplateArgument(invocation, model, KnownType.Microsoft_Extensions_Logging_LoggerExtensions, MicrosoftExtensionsLogging, "message")
         ?? TemplateArgument(invocation, model, KnownType.Serilog_Log, Serilog, "messageTemplate")
         ?? TemplateArgument(invocation, model, KnownType.Serilog_ILogger, Serilog, "messageTemplate", checkDerivedTypes: true)

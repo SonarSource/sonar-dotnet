@@ -1,0 +1,15 @@
+{
+  "title": "Log message template should be syntactically correct",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": ["logging"],
+  "defaultSeverity": "Critical",
+  "ruleSpecification": "RSPEC-6674",
+  "sqKey": "S6674",
+  "scope": "Main",
+  "quickfix": "infeasible"
+}

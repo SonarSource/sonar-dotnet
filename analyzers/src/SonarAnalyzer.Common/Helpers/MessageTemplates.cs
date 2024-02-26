@@ -42,9 +42,12 @@ public static class MessageTemplates
     /// Matches and extracts placeholders from a template string.
     /// For more info, see <a href="https://messagetemplates.org/">Message Templates</a>.
     /// </summary>
-    public static ParseResult Parse(string template)
+    public static ParseResult Parse(string template) =>
+        Parse(template, TemplateRegex);
+
+    public static ParseResult Parse(string template, Regex regex)
     {
-        if (TemplateRegex.SafeMatch(template) is { Success: true } match)
+        if (regex.SafeMatch(template) is { Success: true } match)
         {
             var placeholders = match.Groups["Placeholder"].Captures
                  .OfType<Capture>()
