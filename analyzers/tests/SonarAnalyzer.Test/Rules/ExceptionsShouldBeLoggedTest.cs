@@ -238,6 +238,7 @@ public class ExceptionsShouldBeLoggedTest
                         logger.{{methodName}}("Message");                               // Noncompliant
                         logger.{{methodName}}("Message", parameters);                   // Secondary
                         logger.{{methodName}}(CultureInfo.CurrentCulture, "Message");   // Secondary
+                        ILoggerExtensions.{{methodName}}(logger, null, null);           // Secondary
                     }
                     try { }
                     catch (Exception e)
@@ -245,6 +246,7 @@ public class ExceptionsShouldBeLoggedTest
                         logger.{{methodName}}(e, "Message");
                         logger.{{methodName}}(e, "Message", parameters);
                         logger.{{methodName}}(e, CultureInfo.CurrentCulture, "Message");
+                        ILoggerExtensions.{{methodName}}(logger, null, null);
                     }
                 }
             }
@@ -304,12 +306,14 @@ public class ExceptionsShouldBeLoggedTest
                     {
                         logger.{{methodName}}("Message");                               // Noncompliant
                         logger.{{methodName}}(CultureInfo.CurrentCulture, "Message");   // Secondary
+                        ILoggerExtensions.{{methodName}}(logger, "Message");            // Secondary
                     }
                     try { }
                     catch (Exception e)
                     {
                         logger.{{methodName}}(e, "Message");
                         logger.{{methodName}}(e, CultureInfo.CurrentCulture, "Message");
+                        ILoggerExtensions.{{methodName}}(logger, e, "Message");
                     }
                 }
             }

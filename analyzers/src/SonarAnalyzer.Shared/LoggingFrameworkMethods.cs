@@ -78,7 +78,7 @@ public static class LoggingFrameworkMethods
         "Verbose",
     ];
 
-    public static readonly HashSet<string> NLogILogger =
+    public static readonly HashSet<string> NLogLoggingMethods =
     [
         "Debug",
         "ConditionalDebug",
@@ -88,12 +88,6 @@ public static class LoggingFrameworkMethods
         "Trace",
         "ConditionalTrace",
         "Warn"
-    ];
-
-    public static readonly HashSet<string> NLogILoggerExtensions =
-    [
-        "ConditionalTrace",
-        "ConditionalDebug",
     ];
 
     public static readonly HashSet<string> NLogILoggerBase = ["Log"];

@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Rules.CSharp;
 public sealed class ExceptionsShouldBeLogged : SonarDiagnosticAnalyzer
 {
     private const string DiagnosticId = "S6667";
-    private const string MessageFormat = "Logging in a catch clause should include the exception.";
+    private const string MessageFormat = "Logging in a catch clause should pass the caught exception as a parameter.";
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
@@ -57,7 +57,7 @@ public sealed class ExceptionsShouldBeLogged : SonarDiagnosticAnalyzer
         private readonly SemanticModel model;
         private bool isFirstCatchClauseVisited;
         private bool hasWhenFilterWithDeclarations;
-        private ISymbol catchException;
+        private ISymbol caughtException;
 
         public bool IsExceptionLogged { get; private set; }
         public readonly List<InvocationExpressionSyntax> LoggingInvocations = new();
@@ -87,7 +87,7 @@ public sealed class ExceptionsShouldBeLogged : SonarDiagnosticAnalyzer
             hasWhenFilterWithDeclarations = node.Filter != null && node.Filter.DescendantNodes().Any(DeclarationPatternSyntaxWrapper.IsInstance);
             if (node.Declaration != null && !node.Declaration.Identifier.IsKind(SyntaxKind.None))
             {
-                catchException = model.GetDeclaredSymbol(node.Declaration);
+                caughtException = model.GetDeclaredSymbol(node.Declaration);
             }
             base.VisitCatchClause(node);
         }
@@ -96,8 +96,8 @@ public sealed class ExceptionsShouldBeLogged : SonarDiagnosticAnalyzer
         {
             if (IsLoggingInvocation(node, model))
             {
-                var currentException = node.GetArgumentSymbolsDerivedFromKnownType(KnownType.System_Exception, model).FirstOrDefault();
-                if (currentException != null && (hasWhenFilterWithDeclarations || currentException.Equals(catchException)))
+                if (GetArgumentSymbolDerivedFromException(node, model) is { } currentException
+                    && (hasWhenFilterWithDeclarations || currentException.Equals(caughtException)))
                 {
                     IsExceptionLogged = true;
                     return;
@@ -110,13 +110,22 @@ public sealed class ExceptionsShouldBeLogged : SonarDiagnosticAnalyzer
             base.VisitInvocationExpression(node);
         }
 
+        private static ISymbol GetArgumentSymbolDerivedFromException(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
+            invocation.ArgumentList.Arguments
+                      .Where(x => semanticModel.GetTypeInfo(x.Expression).Type.DerivesFrom(KnownType.System_Exception))
+                      .Select(x => x.Expression is MemberAccessExpressionSyntax memberAccess && memberAccess.NameIs("InnerException")
+                                                ? semanticModel.GetSymbolInfo(memberAccess.Expression).Symbol
+                                                : semanticModel.GetSymbolInfo(x.Expression).Symbol)
+                      .FirstOrDefault();
+
         private static bool IsLoggingInvocation(InvocationExpressionSyntax invocation, SemanticModel model) =>
             IsLoggingInvocation(invocation, model, MicrosoftExtensionsLogging, KnownType.Microsoft_Extensions_Logging_LoggerExtensions, false)
             || IsLoggingInvocation(invocation, model, CastleCoreOrCommonCore, KnownType.Castle_Core_Logging_ILogger, true)
             || IsLoggingInvocation(invocation, model, CastleCoreOrCommonCore, KnownType.Common_Logging_ILog, true)
             || IsLoggingInvocation(invocation, model, Log4NetILog, KnownType.log4net_ILog, true)
             || IsLoggingInvocation(invocation, model, Log4NetILogExtensions, KnownType.log4net_Util_ILogExtensions, false)
-            || IsLoggingInvocation(invocation, model, NLogILogger, KnownType.NLog_ILogger, true)
+            || IsLoggingInvocation(invocation, model, NLogLoggingMethods, KnownType.NLog_ILogger, true)
+            || IsLoggingInvocation(invocation, model, NLogLoggingMethods, KnownType.NLog_ILoggerExtensions, false)
             || IsLoggingInvocation(invocation, model, NLogILoggerBase, KnownType.NLog_ILoggerBase, true);
 
         private static bool IsLoggingInvocation(InvocationExpressionSyntax invocation, SemanticModel model, ICollection<string> methodNames, KnownType containingType, bool checkDerivedTypes) =>
