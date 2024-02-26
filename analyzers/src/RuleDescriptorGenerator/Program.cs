@@ -25,7 +25,7 @@ using System.Text.Json;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Rules;
 
-namespace SonarAnalyzer.RuleDescriptorGenerator;
+namespace RuleDescriptorGenerator;
 
 [ExcludeFromCodeCoverage]
 public static class Program

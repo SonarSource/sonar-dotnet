@@ -21,7 +21,7 @@
 using System.Diagnostics.CodeAnalysis;
 using SonarAnalyzer.Common;
 
-namespace SonarAnalyzer.RuleDescriptorGenerator;
+namespace RuleDescriptorGenerator;
 
 [ExcludeFromCodeCoverage]
 public class RuleParameter

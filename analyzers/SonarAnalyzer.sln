@@ -20,7 +20,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.Common", "src
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.Test", "tests\SonarAnalyzer.Test\SonarAnalyzer.Test.csproj", "{E11606CA-A186-4FEE-BA30-B1688747CD1A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.RuleDescriptorGenerator", "src\SonarAnalyzer.RuleDescriptorGenerator\SonarAnalyzer.RuleDescriptorGenerator.csproj", "{07E31F39-7419-4B4E-998E-C2BF1A6BB91C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RuleDescriptorGenerator", "src\RuleDescriptorGenerator\RuleDescriptorGenerator.csproj", "{07E31F39-7419-4B4E-998E-C2BF1A6BB91C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.CSharp", "src\SonarAnalyzer.CSharp\SonarAnalyzer.CSharp.csproj", "{CA8EEC07-8775-42E3-91EB-E51F4DB72A48}"
 EndProject

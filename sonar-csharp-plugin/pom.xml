@@ -246,7 +246,7 @@
                 <exec executable="dotnet"
                       failonerror="true"
                       dir="${analyzers.directory}/packaging/binaries/RuleDescriptorGenerator">
-                  <arg value="SonarAnalyzer.RuleDescriptorGenerator.dll"/>
+                  <arg value="RuleDescriptorGenerator.dll"/>
                   <arg value="${analyzers.directory}/packaging/binaries/SonarAnalyzer.CSharp.dll"/>
                   <arg value="${sonarAnalyzer.workDirectory}/org/sonar/plugins/csharp/Rules.json"/>
                 </exec>

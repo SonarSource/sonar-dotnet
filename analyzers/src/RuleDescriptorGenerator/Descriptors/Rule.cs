@@ -18,8 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Reflection;
+using System.Diagnostics.CodeAnalysis;
 
-[assembly: AssemblyTitle("SonarAnalyzer.RuleDescriptorGenerator")]
-[assembly: AssemblyProduct("SonarAnalyzer.RuleDescriptorGenerator")]
-[assembly: AssemblyDescription("")]
+namespace RuleDescriptorGenerator;
+
+[ExcludeFromCodeCoverage]
+public record Rule(string Id, RuleParameter[] Parameters);
