@@ -58,11 +58,19 @@ public sealed class ExceptionsShouldBePassedCorrectly : SonarDiagnosticAnalyzer
             SyntaxKind.InvocationExpression);
 
     private static IMethodSymbol LoggingInvocationSymbol(InvocationExpressionSyntax invocation, SemanticModel model) =>
-        MicrosoftExtensionsLogging.Contains(invocation.GetIdentifier().ToString())
+        IsLoggingMethodName(invocation.GetName())
         && model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
-        && methodSymbol.HasContainingType(KnownType.Microsoft_Extensions_Logging_LoggerExtensions, false)
+        && IsLoggingType(methodSymbol)
             ? methodSymbol
             : null;
+
+    private static bool IsLoggingMethodName(string methodName) =>
+        MicrosoftExtensionsLogging.Contains(methodName)
+        || CastleCoreOrCommonCore.Contains(methodName);
+
+    private static bool IsLoggingType(IMethodSymbol methodSymbol) =>
+        methodSymbol.HasContainingType(KnownType.Microsoft_Extensions_Logging_LoggerExtensions, false)
+        || methodSymbol.HasContainingType(KnownType.Castle_Core_Logging_ILogger, checkDerivedTypes: true);
 
     private static int ExceptionParameterIndex(IMethodSymbol invocationSymbol)
     {

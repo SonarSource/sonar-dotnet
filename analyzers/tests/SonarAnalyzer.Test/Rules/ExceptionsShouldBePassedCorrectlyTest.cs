@@ -49,7 +49,7 @@ public class ExceptionsShouldBePassedCorrectlyTest
     [DataRow("LogTrace", NoParameter, EventIdParameter)]
     [DataRow("LogWarning")]
     [DataRow("LogWarning", NoParameter, EventIdParameter)]
-    public void ExceptionsShouldBeLogged_MicrosoftExtensionsLogging_NonCompliant_CS(string methodName, string logLevel = "", string eventId = "") =>
+    public void ExceptionsShouldBePassedCorrectly_MicrosoftExtensionsLogging_NonCompliant_CS(string methodName, string logLevel = "", string eventId = "") =>
         builder.AddSnippet($$"""
             using System;
             using Microsoft.Extensions.Logging;
@@ -83,4 +83,48 @@ public class ExceptionsShouldBePassedCorrectlyTest
             """)
            .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
            .Verify();
+
+    [DataTestMethod]
+    [DataRow("Error")]
+    [DataRow("Debug")]
+    [DataRow("Fatal")]
+    [DataRow("Info")]
+    [DataRow("Trace")]
+    [DataRow("Warn")]
+    // https://github.com/castleproject/Core/blob/dca4ed09df545dd7512c82778127219795668d30/src/Castle.Core/Core/Logging/ILogger.cs
+    public void ExceptionsShouldBePassedCorrectly_CastleCore_CS(string methodName) =>
+        builder.AddSnippet($$"""
+            using System;
+            using System.Globalization;
+            using Castle.Core.Logging;
+
+            public class Program
+            {
+                public void Method(ILogger logger, string message)
+                {
+                    try { }
+                    catch (Exception e)
+                    {
+                        logger.{{methodName}}Format(message, e);                                    // Noncompliant
+                        logger.{{methodName}}Format(CultureInfo.CurrentCulture, message, e);        // Noncompliant
+                    }
+                    try { }
+                    catch (Exception e)
+                    {
+                        logger.{{methodName}}(message, e);                                          // Compliant
+                        logger.{{methodName}}Format(e, message);                                    // Compliant
+                        logger.{{methodName}}Format(e, message, e);                                 // Compliant
+                        logger.{{methodName}}Format(e, CultureInfo.CurrentCulture, message);        // Compliant
+                        logger.{{methodName}}Format(e, CultureInfo.CurrentCulture, message, e);     // Compliant
+                    }
+                }
+            }
+            """)
+        .AddReferences(NuGetMetadataReference.CastleCore())
+        .Verify();
+
+    // NLog
+
+
+    // Serilog
 }
