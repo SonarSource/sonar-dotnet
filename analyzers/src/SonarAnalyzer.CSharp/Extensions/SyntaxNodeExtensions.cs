@@ -26,12 +26,13 @@ namespace SonarAnalyzer.Extensions
     {
         private static readonly ControlFlowGraphCache CfgCache = new();
         private static readonly SyntaxKind[] ParenthesizedNodeKinds = [SyntaxKind.ParenthesizedExpression, SyntaxKindEx.ParenthesizedPattern];
+
         private static readonly SyntaxKind[] EnclosingScopeSyntaxKinds = [
-            SyntaxKind.AddAccessorDeclaration,
             SyntaxKind.AddAccessorDeclaration,
             SyntaxKind.AnonymousMethodExpression,
             SyntaxKind.BaseConstructorInitializer,
             SyntaxKind.ConstructorDeclaration,
+            SyntaxKind.ConversionOperatorDeclaration,
             SyntaxKind.DestructorDeclaration,
             SyntaxKind.EqualsValueClause,
             SyntaxKind.GetAccessorDeclaration,
@@ -39,12 +40,23 @@ namespace SonarAnalyzer.Extensions
             SyntaxKindEx.InitAccessorDeclaration,
             SyntaxKindEx.LocalFunctionStatement,
             SyntaxKind.MethodDeclaration,
+            SyntaxKind.OperatorDeclaration,
             SyntaxKind.ParenthesizedLambdaExpression,
             SyntaxKindEx.PrimaryConstructorBaseType,
             SyntaxKind.RemoveAccessorDeclaration,
             SyntaxKind.SetAccessorDeclaration,
             SyntaxKind.SimpleLambdaExpression,
             SyntaxKind.ThisConstructorInitializer];
+
+        private static readonly SyntaxKind[] NegationOrConditionEnclosingSyntaxKinds = [
+            SyntaxKind.AnonymousMethodExpression,
+            SyntaxKind.BitwiseNotExpression,
+            SyntaxKind.ConditionalExpression,
+            SyntaxKind.IfStatement,
+            SyntaxKind.MethodDeclaration,
+            SyntaxKind.ParenthesizedLambdaExpression,
+            SyntaxKind.SimpleLambdaExpression,
+            SyntaxKind.WhileStatement];
 
         public static ControlFlowGraph CreateCfg(this SyntaxNode node, SemanticModel model, CancellationToken cancel) =>
             CfgCache.FindOrCreate(node, model, cancel);
@@ -79,12 +91,8 @@ namespace SonarAnalyzer.Extensions
             }
 
             var current = topNode;
-            while (current.Parent != null && current.Parent?.Kind() is not (SyntaxKind.BitwiseNotExpression
-                                                                     or SyntaxKind.IfStatement
-                                                                     or SyntaxKind.WhileStatement
-                                                                     or SyntaxKind.ConditionalExpression
-                                                                     or SyntaxKind.MethodDeclaration
-                                                                     or SyntaxKind.SimpleLambdaExpression))
+            while (current.Parent != null
+                    && !NegationOrConditionEnclosingSyntaxKinds.Contains(current.Parent.Kind()))
             {
                 current = current.Parent;
             }
