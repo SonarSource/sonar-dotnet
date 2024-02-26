@@ -243,7 +243,10 @@ public class TestCases
         try { }
         catch (Exception e)
         {
-            logger.LogWarning(new EventId(1), e.InnerException, "Message!");        // Compliant
+            logger.LogWarning(new EventId(1), e.InnerException, "Message!");                    // Compliant
+            logger.LogWarning(new EventId(1), e?.InnerException, "Message!");
+            logger.LogWarning(new EventId(1), e.InnerException.InnerException, "Message!");
+            logger.LogWarning(new EventId(1), (Exception)e.InnerException, "Message!");
         }
     }
 
