@@ -73,3 +73,13 @@ End Class
 Public Class [MyClass]
     Public mySbField As StringBuilder = New StringBuilder()
 End Class
+
+' https://github.com/SonarSource/sonar-dotnet/issues/8809
+Public Class GH8809
+    Public Function ToString() As String
+        Dim builder As New StringBuilder() ' FN
+        builder.AppendLine("value")
+
+        Return String.Empty
+    End Function
+End Class
