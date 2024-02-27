@@ -41,6 +41,7 @@ public sealed class MessageTemplateAnalyzer : SonarDiagnosticAnalyzer
             var enabledChecks = Checks.Where(x => x.Rule.IsEnabled(c)).ToArray();
             if (enabledChecks.Length > 0
                 && TemplateArgument(invocation, c.SemanticModel) is { } argument
+                && argument.Expression.IsKind(SyntaxKind.StringLiteralExpression)
                 && Helpers.MessageTemplates.Parse(argument.Expression.ToString()) is { Success: true } result)
             {
                 foreach (var check in enabledChecks)
@@ -54,7 +55,7 @@ public sealed class MessageTemplateAnalyzer : SonarDiagnosticAnalyzer
     private static ArgumentSyntax TemplateArgument(InvocationExpressionSyntax invocation, SemanticModel model) =>
         TemplateArgument(invocation, model, KnownType.Microsoft_Extensions_Logging_LoggerExtensions, MicrosoftExtensionsLogging, "message")
         ?? TemplateArgument(invocation, model, KnownType.Serilog_Log, Serilog, "messageTemplate")
-        ?? TemplateArgument(invocation, model, KnownType.Serilog_ILogger, Serilog, "messageTemplate")
+        ?? TemplateArgument(invocation, model, KnownType.Serilog_ILogger, Serilog, "messageTemplate", checkDerivedTypes: true)
         ?? TemplateArgument(invocation, model, KnownType.NLog_ILoggerExtensions, NLogLoggingMethods, "message")
         ?? TemplateArgument(invocation, model, KnownType.NLog_ILogger, NLogLoggingMethods, "message", checkDerivedTypes: true)
         ?? TemplateArgument(invocation, model, KnownType.NLog_ILoggerBase, NLogILoggerBase, "message", checkDerivedTypes: true);

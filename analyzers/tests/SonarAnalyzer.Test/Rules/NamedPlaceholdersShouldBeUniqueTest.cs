@@ -104,6 +104,32 @@ public class NamedPlaceholdersShouldBeUniqueTest
             }
             """).Verify();
 
+#if NET
+    [DataTestMethod]
+    [DataRow("Debug")]
+    [DataRow("Error")]
+    [DataRow("Information")]
+    [DataRow("Fatal")]
+    [DataRow("Warning")]
+    [DataRow("Verbose")]
+    public void NamedPlaceholdersShouldBeUnique_Serilog_Derived_CS(string methodName) =>
+    Builder.AddSnippet($$"""
+            using Serilog;
+            using Serilog.Events;
+            using Serilog.Core;
+
+            public class Program
+            {
+                public void Method(Logger logger, int arg)
+                {
+                    logger.{{methodName}}("Hey {foo} and {bar}", arg, arg);                       // Compliant
+                    logger.{{methodName}}("Hey {foo} and {foo}", arg, arg);                       // Noncompliant
+                                                                                                  // Secondary @-1
+                }
+            }
+            """).Verify();
+#endif
+
     [DataTestMethod]
     [DataRow("Debug")]
     [DataRow("ConditionalDebug")]
