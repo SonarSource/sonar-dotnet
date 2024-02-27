@@ -23,16 +23,16 @@ using SonarAnalyzer.Rules.CSharp;
 namespace SonarAnalyzer.Test.Rules;
 
 [TestClass]
-public class ExceptionsShouldBePassedCorrectlyTest
+public class LoggingArgumentsShouldBePassedCorrectlyTest
 {
     private const string EventIdParameter = "new EventId(1),";
     private const string LogLevelParameter = "LogLevel.Warning,";
     private const string NoParameter = "";
-    private readonly VerifierBuilder builder = new VerifierBuilder<ExceptionsShouldBePassedCorrectly>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<LoggingArgumentsShouldBePassedCorrectly>();
 
     [TestMethod]
-    public void ExceptionsShouldBePassedCorrectly_CS() =>
-        builder.AddPaths("ExceptionsShouldBePassedCorrectly.cs").AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions()).Verify();
+    public void LoggingArgumentsShouldBePassedCorrectly_CS() =>
+        builder.AddPaths("LoggingArgumentsShouldBePassedCorrectly.cs").AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions()).Verify();
 
     [DataTestMethod]
     [DataRow("Log", LogLevelParameter)]
@@ -49,7 +49,7 @@ public class ExceptionsShouldBePassedCorrectlyTest
     [DataRow("LogTrace", NoParameter, EventIdParameter)]
     [DataRow("LogWarning")]
     [DataRow("LogWarning", NoParameter, EventIdParameter)]
-    public void ExceptionsShouldBePassedCorrectly_MicrosoftExtensionsLogging_NonCompliant_CS(string methodName, string logLevel = "", string eventId = "") =>
+    public void LoggingArgumentsShouldBePassedCorrectly_MicrosoftExtensionsLogging_NonCompliant_CS(string methodName, string logLevel = "", string eventId = "") =>
         builder.AddSnippet($$"""
             using System;
             using Microsoft.Extensions.Logging;
@@ -84,7 +84,7 @@ public class ExceptionsShouldBePassedCorrectlyTest
     [DataRow("Trace")]
     [DataRow("Warn")]
     // https://github.com/castleproject/Core/blob/dca4ed09df545dd7512c82778127219795668d30/src/Castle.Core/Core/Logging/ILogger.cs
-    public void ExceptionsShouldBePassedCorrectly_CastleCore_CS(string methodName) =>
+    public void LoggingArgumentsShouldBePassedCorrectly_CastleCore_CS(string methodName) =>
         builder.AddSnippet($$"""
             using System;
             using System.Globalization;
@@ -116,7 +116,7 @@ public class ExceptionsShouldBePassedCorrectlyTest
     [DataRow("Trace")]
     [DataRow("ConditionalTrace")]
     [DataRow("Warn")]
-    public void ExceptionsShouldBeLogged_NLog_CS(string methodName) =>
+    public void LoggingArgumentsShouldBePassedCorrectly_NLog_CS(string methodName) =>
         builder.AddSnippet($$"""
             using System;
             using System.Globalization;
@@ -152,7 +152,7 @@ public class ExceptionsShouldBePassedCorrectlyTest
     [DataTestMethod]
     [DataRow("ConditionalDebug")]
     [DataRow("ConditionalTrace")]
-    public void ExceptionsShouldBeLogged_NLog_ConditionalExtensions_CS(string methodName) =>
+    public void LoggingArgumentsShouldBePassedCorrectly_NLog_ConditionalExtensions_CS(string methodName) =>
         builder.AddSnippet($$"""
             using System;
             using System.Globalization;
@@ -186,7 +186,7 @@ public class ExceptionsShouldBePassedCorrectlyTest
 
     [DataTestMethod]
     [DataRow("Error")]
-    public void ExceptionsShouldBePassedCorrectly_Serilog_CS(string methodName) =>
+    public void LoggingArgumentsShouldBePassedCorrectly_Serilog_CS(string methodName) =>
         builder.AddSnippet($$"""
             using System;
             using Serilog;

@@ -23,7 +23,7 @@ using static Roslyn.Utilities.SonarAnalyzer.Shared.LoggingFrameworkMethods;
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class ExceptionsShouldBePassedCorrectly : SonarDiagnosticAnalyzer
+public sealed class LoggingArgumentsShouldBePassedCorrectly : SonarDiagnosticAnalyzer
 {
     private const string DiagnosticId = "S6668";
     private const string MessageFormat = "Logging arguments should be passed to the correct parameter.";
