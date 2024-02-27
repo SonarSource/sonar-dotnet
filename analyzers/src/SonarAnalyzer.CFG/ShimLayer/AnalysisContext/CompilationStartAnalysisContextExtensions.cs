@@ -45,7 +45,7 @@ public static class CompilationStartAnalysisContextExtensions
             //        symbolStartAnalysisContextParameter.Compilation,
             //        symbolStartAnalysisContextParameter.Options,
             //        symbolStartAnalysisContextParameter.Symbol,
-            //        (Action<CodeBlockAnalysisContext> registerParameter) =>  symbolStartAnalysisContextParameter.RegisterCodeBlockAction(registerParameter),
+            //        (Action<CodeBlockAnalysisContext> registerActionParameter) =>  symbolStartAnalysisContextParameter.RegisterCodeBlockAction(registerActionParameter),
             var lambda = Lambda(symbolStartAnalysisActionType, Call(shimmedActionParameter, "Invoke", [],
                     New(symbolStartAnalysisContextCtor,
                         Property(symbolStartAnalysisContextParameter, nameof(SymbolStartAnalysisContext.CancellationToken)),
@@ -66,8 +66,8 @@ public static class CompilationStartAnalysisContextExtensions
 
         static Expression<Action<Action<T>>> PassThroughLambda<T>(ParameterExpression symbolStartAnalysisContextParameter, string registrationMethodName)
         {
-            var registerParameter = Parameter(typeof(Action<T>));
-            return Lambda<Action<Action<T>>>(Call(symbolStartAnalysisContextParameter, registrationMethodName, [], registerParameter), registerParameter);
+            var registerActionParameter = Parameter(typeof(Action<T>));
+            return Lambda<Action<Action<T>>>(Call(symbolStartAnalysisContextParameter, registrationMethodName, [], registerActionParameter), registerActionParameter);
         }
     }
 
