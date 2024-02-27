@@ -32,7 +32,7 @@ public class ExceptionsShouldBePassedCorrectlyTest
 
     [TestMethod]
     public void ExceptionsShouldBePassedCorrectly_CS() =>
-        builder.AddPaths("ExceptionsShouldBePassedCorrectly.cs").Verify();
+        builder.AddPaths("ExceptionsShouldBePassedCorrectly.cs").AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions()).Verify();
 
     [DataTestMethod]
     [DataRow("Log", LogLevelParameter)]
