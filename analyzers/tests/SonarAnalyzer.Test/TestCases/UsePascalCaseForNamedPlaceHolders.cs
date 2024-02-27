@@ -29,12 +29,12 @@ public class Program
         //                           ^^^
         logger.LogInformation("Arg: {arg} {arg}", arg, arg);
         //                           ^^^
-        //                                 ^^^ @-1
+        //                                 ^^^ Secondary @-1
         logger.LogInformation(@"
              Arg: {arg}
              {arg}", arg, arg);
         //         ^^^ @-1
-        //    ^^^ @-1
+        //    ^^^ Secondary @-1
 
         LoggerExtensions.LogInformation(logger, "Arg: {arg}", arg); // Noncompliant
 

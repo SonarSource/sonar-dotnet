@@ -68,8 +68,8 @@ public class UsePascalCaseForNamedPlaceHoldersTest
     [DataRow("Fatal")]
     [DataRow("Warning")]
     [DataRow("Verbose")]
-    public void NamedPlaceholdersShouldBeUnique_Serilog_CS(string methodName) =>
-    Builder.AddSnippet($$"""
+    public void UsePascalCaseForNamedPlaceHolders_Serilog_CS(string methodName) =>
+        Builder.AddSnippet($$"""
             using Serilog;
             using Serilog.Events;
 
@@ -92,7 +92,7 @@ public class UsePascalCaseForNamedPlaceHoldersTest
     [DataRow("Trace")]
     [DataRow("ConditionalTrace")]
     [DataRow("Warn")]
-    public void NamedPlaceholdersShouldBeUnique_NLog_CS(string methodName) =>
+    public void UsePascalCaseForNamedPlaceHolders_NLog_CS(string methodName) =>
         Builder.AddSnippet($$"""
             using NLog;
 
