@@ -44,6 +44,9 @@ namespace MicrosoftTests
             // Escaped
             logger.LogInformation("Hey {{foo}} and {{foo}}", foo, foo);      // Compliant
             logger.LogInformation("Hey {foo} and {{foo}}", foo, foo);        // Compliant
+
+            // Not string literal
+            logger.LogWarning($"Hey {foo} and {foo}", foo, foo);             // Compliant
         }
 
         void Noncompliant(ILogger logger, string foo, string bar, string baz, Exception ex, EventId eventId)
