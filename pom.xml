@@ -57,7 +57,7 @@
     <artifactsToDownload>${project.groupId}:SonarAnalyzer.CSharp:nupkg,${project.groupId}:SonarAnalyzer.VisualBasic:nupkg</artifactsToDownload>
     <!-- We are ignoring java doc warnings - this is because we are using JDK 11. Ideally we should not do that. -->
     <doclint>none</doclint>
-    <sonar.analyzer.commons.version>2.7.0.1482</sonar.analyzer.commons.version>
+    <sonar.analyzer.commons.version>2.8.0.2699</sonar.analyzer.commons.version>
     <sonar.version>10.6.0.2114</sonar.version>
     <sonar.api.impl.version>10.4.1.88267</sonar.api.impl.version>
     <jdk.min.version>11</jdk.min.version>
