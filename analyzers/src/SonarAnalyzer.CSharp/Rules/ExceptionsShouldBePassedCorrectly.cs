@@ -36,28 +36,74 @@ public sealed class ExceptionsShouldBePassedCorrectly : SonarDiagnosticAnalyzer
         context.RegisterNodeAction(c =>
             {
                 var invocation = (InvocationExpressionSyntax)c.Node;
-                if (LoggingInvocationSymbol(invocation, c.SemanticModel) is { } invocationSymbol)
+                if (NLogInvocationSymbol(invocation, c.SemanticModel) is { } nLogInvocationSymbol)
                 {
-                    var exceptionParameterIndex = ExceptionParameterIndex(invocationSymbol);
-                    var exceptionArguments = invocation.ArgumentList.Arguments
-                        .Where(x => c.SemanticModel.GetTypeInfo(x.Expression).Type.DerivesFrom(KnownType.System_Exception))
-                        .ToArray();
-
-                    // Do not raise if there is at least one argument in the right place.
-                    if (Array.Exists(exceptionArguments, x => x.GetArgumentIndex() == exceptionParameterIndex))
-                    {
-                        return;
-                    }
-
-                    foreach (var wrongArgument in exceptionArguments.Where(x => x.GetArgumentIndex() != exceptionParameterIndex))
-                    {
-                        c.ReportIssue(Diagnostic.Create(Rule, wrongArgument.GetLocation()));
-                    }
+                    VisitNLogInvocation(invocation, nLogInvocationSymbol, c);
+                }
+                else if (LoggingInvocationSymbol(invocation, c.SemanticModel) is { } invocationSymbol)
+                {
+                    VisitInvocation(invocation, invocationSymbol, c);
                 }
             },
             SyntaxKind.InvocationExpression);
 
+    private static void VisitNLogInvocation(InvocationExpressionSyntax invocation, IMethodSymbol invocationSymbol, SonarSyntaxNodeReportingContext c)
+    {
+        if (IsNLogIgnoredOverload(invocationSymbol))
+        {
+            return;
+        }
+
+        if (invocationSymbol.TypeArguments.Any(x => x.DerivesFrom(KnownType.System_Exception)))
+        {
+            foreach (var wrongArgument in ExceptionArguments(invocation, c.SemanticModel))
+            {
+                c.ReportIssue(Diagnostic.Create(Rule, wrongArgument.GetLocation()));
+            }
+        }
+        else
+        {
+            VisitInvocation(invocation, invocationSymbol, c);
+        }
+    }
+
+    private static void VisitInvocation(InvocationExpressionSyntax invocation, IMethodSymbol invocationSymbol, SonarSyntaxNodeReportingContext c)
+    {
+        var exceptionParameterIndex = ExceptionParameterIndex(invocationSymbol);
+        var exceptionArguments = ExceptionArguments(invocation, c.SemanticModel).ToArray();
+        // Do not raise if there is at least one argument in the right place.
+        if (Array.Exists(exceptionArguments, x => x.GetArgumentIndex() == exceptionParameterIndex))
+        {
+            return;
+        }
+        foreach (var wrongArgument in exceptionArguments)
+        {
+            c.ReportIssue(Diagnostic.Create(Rule, wrongArgument.GetLocation()));
+        }
+    }
+
+    private static bool IsNLogIgnoredOverload(IMethodSymbol methodSymbol) =>
+        // These overloads are ignored since they will try to convert the T value to an exception.
+        MatchesParams(methodSymbol, KnownType.System_Exception)
+        || MatchesParams(methodSymbol, KnownType.System_IFormatProvider, KnownType.System_Exception)
+        || MatchesParams(methodSymbol, KnownType.NLog_ILogger, KnownType.System_Exception)
+        || MatchesParams(methodSymbol, KnownType.NLog_ILogger, KnownType.System_IFormatProvider, KnownType.System_Exception);
+
+    private static bool MatchesParams(IMethodSymbol methodSymbol, params KnownType[] knownTypes) =>
+        methodSymbol.Parameters.Length == knownTypes.Length
+        && !methodSymbol.Parameters.Where((x, index) => !x.Type.DerivesFrom(knownTypes[index])).Any();
+
+    private static IMethodSymbol NLogInvocationSymbol(InvocationExpressionSyntax invocation, SemanticModel model) =>
+        NLogLoggingMethods.Contains(invocation.GetName())
+        && model.GetSymbolInfo(invocation).Symbol is IMethodSymbol symbol
+        && (symbol.HasContainingType(KnownType.NLog_ILoggerExtensions, false)
+            || symbol.HasContainingType(KnownType.NLog_ILoggerBase, true))
+            ? symbol
+            : null;
+
     private static IMethodSymbol LoggingInvocationSymbol(InvocationExpressionSyntax invocation, SemanticModel model) =>
+        // The implementation is simplified for the sake of performance, to retrieve the symbol info only once.
+        // It will first check if the method is a logging method (from any framework), and then if it is part of a logging type.
         IsLoggingMethodName(invocation.GetName())
         && model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
         && IsLoggingType(methodSymbol)
@@ -68,9 +114,12 @@ public sealed class ExceptionsShouldBePassedCorrectly : SonarDiagnosticAnalyzer
         MicrosoftExtensionsLogging.Contains(methodName)
         || CastleCoreOrCommonCore.Contains(methodName);
 
-    private static bool IsLoggingType(IMethodSymbol methodSymbol) =>
-        methodSymbol.HasContainingType(KnownType.Microsoft_Extensions_Logging_LoggerExtensions, false)
-        || methodSymbol.HasContainingType(KnownType.Castle_Core_Logging_ILogger, checkDerivedTypes: true);
+    private static bool IsLoggingType(ISymbol symbol) =>
+        symbol.HasContainingType(KnownType.Microsoft_Extensions_Logging_LoggerExtensions, false)
+        || symbol.HasContainingType(KnownType.Castle_Core_Logging_ILogger, true);
+
+    private static IEnumerable<ArgumentSyntax> ExceptionArguments(InvocationExpressionSyntax invocation, SemanticModel model) =>
+        invocation.ArgumentList.Arguments.Where(x => model.GetTypeInfo(x.Expression).Type.DerivesFrom(KnownType.System_Exception));
 
     private static int ExceptionParameterIndex(IMethodSymbol invocationSymbol)
     {

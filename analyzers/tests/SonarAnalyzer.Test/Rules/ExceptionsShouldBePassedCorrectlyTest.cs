@@ -57,27 +57,19 @@ public class ExceptionsShouldBePassedCorrectlyTest
 
             public class Program
             {
-                public void Method(ILogger logger, string message)
+                public void Method(ILogger logger, Exception e)
                 {
-                    try { }
-                    catch (Exception e)
-                    {
-                        logger.{{methodName}}({{logLevel}}{{eventId}} "An exception occured {Exception}.", e);          // Noncompliant
-                        logger.{{methodName}}({{logLevel}}{{eventId}} "Expected exception.", e);                        // Noncompliant
-                        logger.{{methodName}}({{logLevel}}{{eventId}} "Expected exception.", e, e);                     // Noncompliant
-                                                                                                                        // Noncompliant@-1
-                        LoggerExtensions.{{methodName}}(logger, {{logLevel}}{{eventId}} "Expected exception.", e);      // Noncompliant
-                        LoggerExtensions.{{methodName}}(logger, {{logLevel}}{{eventId}} "Expected exception.", e, e);   // Noncompliant
-                                                                                                                        // Noncompliant@-1
-                    }
-                    try { }
-                    catch (Exception e)
-                    {
-                        logger.{{methodName}}({{logLevel}}{{eventId}} e, "Expected exception.");
-                        logger.{{methodName}}({{logLevel}}{{eventId}} e, "Expected exception.", e);
-                        LoggerExtensions.{{methodName}}(logger, {{logLevel}}{{eventId}} e, "Expected exception.");
-                        LoggerExtensions.{{methodName}}(logger, {{logLevel}}{{eventId}} e, "Expected exception.", e);
-                    }
+                    logger.{{methodName}}({{logLevel}}{{eventId}} "An exception occured {Exception}.", e);          // Noncompliant
+                    logger.{{methodName}}({{logLevel}}{{eventId}} "Expected exception.", e);                        // Noncompliant
+                    logger.{{methodName}}({{logLevel}}{{eventId}} "Expected exception.", e, e);                     // Noncompliant
+                                                                                                                    // Noncompliant@-1
+                    LoggerExtensions.{{methodName}}(logger, {{logLevel}}{{eventId}} "Expected exception.", e);      // Noncompliant
+                    LoggerExtensions.{{methodName}}(logger, {{logLevel}}{{eventId}} "Expected exception.", e, e);   // Noncompliant
+                                                                                                                    // Noncompliant@-1
+                    logger.{{methodName}}({{logLevel}}{{eventId}} e, "Expected exception.");
+                    logger.{{methodName}}({{logLevel}}{{eventId}} e, "Expected exception.", e);
+                    LoggerExtensions.{{methodName}}(logger, {{logLevel}}{{eventId}} e, "Expected exception.");
+                    LoggerExtensions.{{methodName}}(logger, {{logLevel}}{{eventId}} e, "Expected exception.", e);
                 }
             }
             """)
@@ -100,31 +92,95 @@ public class ExceptionsShouldBePassedCorrectlyTest
 
             public class Program
             {
-                public void Method(ILogger logger, string message)
+                public void Method(ILogger logger, string message, Exception e)
                 {
-                    try { }
-                    catch (Exception e)
-                    {
-                        logger.{{methodName}}Format(message, e);                                    // Noncompliant
-                        logger.{{methodName}}Format(CultureInfo.CurrentCulture, message, e);        // Noncompliant
-                    }
-                    try { }
-                    catch (Exception e)
-                    {
-                        logger.{{methodName}}(message, e);                                          // Compliant
-                        logger.{{methodName}}Format(e, message);                                    // Compliant
-                        logger.{{methodName}}Format(e, message, e);                                 // Compliant
-                        logger.{{methodName}}Format(e, CultureInfo.CurrentCulture, message);        // Compliant
-                        logger.{{methodName}}Format(e, CultureInfo.CurrentCulture, message, e);     // Compliant
-                    }
+                    logger.{{methodName}}Format(message, e);                                    // Noncompliant
+                    logger.{{methodName}}Format(CultureInfo.CurrentCulture, message, e);        // Noncompliant
+                    logger.{{methodName}}(message, e);                                          // Compliant
+                    logger.{{methodName}}Format(e, message);                                    // Compliant
+                    logger.{{methodName}}Format(e, message, e);                                 // Compliant
+                    logger.{{methodName}}Format(e, CultureInfo.CurrentCulture, message);        // Compliant
+                    logger.{{methodName}}Format(e, CultureInfo.CurrentCulture, message, e);     // Compliant
                 }
             }
             """)
         .AddReferences(NuGetMetadataReference.CastleCore())
         .Verify();
 
-    // NLog
+    [DataTestMethod]
+    [DataRow("Debug")]
+    [DataRow("ConditionalDebug")]
+    [DataRow("Error")]
+    [DataRow("Fatal")]
+    [DataRow("Info")]
+    [DataRow("Trace")]
+    [DataRow("ConditionalTrace")]
+    [DataRow("Warn")]
+    public void ExceptionsShouldBeLogged_NLog_CS(string methodName) =>
+        builder.AddSnippet($$"""
+            using System;
+            using System.Globalization;
+            using NLog;
 
+            public class Program
+            {
+                public void Method(Logger logger, Exception e)
+                {
+                    logger.{{methodName}}(e);                                                    // Compliant
+                    logger.{{methodName}}(CultureInfo.CurrentCulture, e);                        // Compliant
+                    logger.{{methodName}}(e, "Message!");                                        // Compliant
+                    logger.{{methodName}}(e, "Message!", e);                                     // Compliant
+                    logger.{{methodName}}(e, CultureInfo.CurrentCulture, "Message!", e);         // Compliant
+                    logger.{{methodName}}(CultureInfo.CurrentCulture, "Message!", 1, 2, 3, e);   // Noncompliant
+                    logger.{{methodName}}("Message!");                                           // Compliant
+                    logger.{{methodName}}("Message!", 1, 2, 3, e);                               // Noncompliant
+                    logger.{{methodName}}("Message!", e);                                        // Noncompliant
+                    logger.{{methodName}}(CultureInfo.CurrentCulture, "Message!", e);            // Noncompliant
+                    logger.{{methodName}}<int>("Message!", 1);                                   // Compliant
+                    logger.{{methodName}}<Exception>("Message!", e);                             // Noncompliant
+                    logger.{{methodName}}(CultureInfo.CurrentCulture, "Message!", 1, e);         // Noncompliant
+                    logger.{{methodName}}("Message!", 1, e);                                     // Noncompliant
+                    logger.{{methodName}}(CultureInfo.CurrentCulture, "Message!", 1, 2, e);      // Noncompliant
+                    logger.{{methodName}}("Message!", 1, 2, e);                                  // Noncompliant
+                    ILoggerExtensions.{{methodName}}(logger, e, null);                           // Compliant
+                }
+            }
+            """)
+        .AddReferences(NuGetMetadataReference.NLog(Constants.NuGetLatestVersion))
+        .Verify();
 
-    // Serilog
+    [DataTestMethod]
+    [DataRow("ConditionalDebug")]
+    [DataRow("ConditionalTrace")]
+    public void ExceptionsShouldBeLogged_NLog_ConditionalExtensions_CS(string methodName) =>
+        builder.AddSnippet($$"""
+            using System;
+            using System.Globalization;
+            using NLog;
+
+            public class Program
+            {
+                public void Method(Logger logger, Exception e)
+                {
+                    ILoggerExtensions.{{methodName}}(logger, e);                                                    // Compliant
+                    ILoggerExtensions.{{methodName}}(logger, CultureInfo.CurrentCulture, e);                        // Compliant
+                    ILoggerExtensions.{{methodName}}(logger, e, "Message!");                                        // Compliant
+                    ILoggerExtensions.{{methodName}}(logger, e, "Message!", e);                                     // Compliant
+                    ILoggerExtensions.{{methodName}}(logger, e, CultureInfo.CurrentCulture, "Message!", e);         // Compliant
+                    ILoggerExtensions.{{methodName}}(logger, CultureInfo.CurrentCulture, "Message!", 1, 2, 3, e);   // Noncompliant
+                    ILoggerExtensions.{{methodName}}(logger, "Message!");                                           // Compliant
+                    ILoggerExtensions.{{methodName}}(logger, "Message!", 1, 2, 3, e);                               // Noncompliant
+                    ILoggerExtensions.{{methodName}}(logger, "Message!", e);                                        // Noncompliant
+                    ILoggerExtensions.{{methodName}}(logger, CultureInfo.CurrentCulture, "Message!", e);            // Noncompliant
+                    ILoggerExtensions.{{methodName}}<int>(logger, "Message!", 1);                                   // Compliant
+                    ILoggerExtensions.{{methodName}}<Exception>(logger, "Message!", e);                             // Noncompliant
+                    ILoggerExtensions.{{methodName}}(logger, CultureInfo.CurrentCulture, "Message!", 1, e);         // Noncompliant
+                    ILoggerExtensions.{{methodName}}(logger, "Message!", 1, e);                                     // Noncompliant
+                    ILoggerExtensions.{{methodName}}(logger, CultureInfo.CurrentCulture, "Message!", 1, 2, e);      // Noncompliant
+                    ILoggerExtensions.{{methodName}}(logger, "Message!", 1, 2, e);                                  // Noncompliant
+                }
+            }
+            """)
+        .AddReferences(NuGetMetadataReference.NLog(Constants.NuGetLatestVersion))
+        .Verify();
 }
