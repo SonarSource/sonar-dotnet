@@ -26,14 +26,15 @@ namespace SonarAnalyzer.ShimLayer.AnalysisContext;
 public static class CompilationStartAnalysisContextExtensions
 {
     {
+        if (typeof(CompilationStartAnalysisContext).GetMethod(nameof(RegisterSymbolStartAction)) is { } registerMethod)
         {
             return static (_, _, _) => { };
         }
 
             var contextParameter = Parameter(typeof(CompilationStartAnalysisContext));
             var symbolKindParameter = Parameter(typeof(SymbolKind));
-
-
+            var symbolStartAnalysisContextCtor = typeof(SymbolStartAnalysisContext).GetConstructors().Single();
+                        PassThroughLambda<CodeBlockAnalysisContext>(nameof(SymbolStartAnalysisContext.RegisterCodeBlockAction))))), symbolStartAnalysisContextParameter);
 
                 contextParameter, shimmedActionParameter, symbolKindParameter).Compile();
         }
@@ -42,14 +43,11 @@ public static class CompilationStartAnalysisContextExtensions
             return static (_, _, _) => { };
         }
 
-        Expression PassThroughLambda<T>(string registrationMethodName)
+        static Expression<Action<Action<T>>> PassThroughLambda<T>(ParameterExpression symbolStartAnalysisContextParameter, string registrationMethodName)
         {
             var registerParameter = Parameter(typeof(Action<T>));
             return Lambda<Action<Action<T>>>(Call(symbolStartAnalysisContextParameter, registrationMethodName, [], registerParameter), registerParameter);
         }
-
-        MethodCallExpression DebugPrint(Expression expression) =>
-            Call(typeof(Debug).GetMethod(nameof(Debug.WriteLine), [typeof(object)]), Convert(expression, typeof(object)));
     }
 
     public static void RegisterSymbolStartAction(this CompilationStartAnalysisContext context, Action<SymbolStartAnalysisContext> action, SymbolKind symbolKind) =>
