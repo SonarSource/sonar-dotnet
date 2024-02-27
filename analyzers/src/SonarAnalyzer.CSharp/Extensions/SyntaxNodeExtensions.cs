@@ -19,14 +19,44 @@
  */
 
 using SonarAnalyzer.CFG.Roslyn;
-using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Extensions
 {
     internal static partial class SyntaxNodeExtensions
     {
         private static readonly ControlFlowGraphCache CfgCache = new();
-        private static readonly SyntaxKind[] ParenthesizedNodeKinds = new[] { SyntaxKind.ParenthesizedExpression, SyntaxKindEx.ParenthesizedPattern };
+        private static readonly SyntaxKind[] ParenthesizedNodeKinds = [SyntaxKind.ParenthesizedExpression, SyntaxKindEx.ParenthesizedPattern];
+
+        private static readonly SyntaxKind[] EnclosingScopeSyntaxKinds = [
+            SyntaxKind.AddAccessorDeclaration,
+            SyntaxKind.AnonymousMethodExpression,
+            SyntaxKind.BaseConstructorInitializer,
+            SyntaxKind.ConstructorDeclaration,
+            SyntaxKind.ConversionOperatorDeclaration,
+            SyntaxKind.DestructorDeclaration,
+            SyntaxKind.EqualsValueClause,
+            SyntaxKind.GetAccessorDeclaration,
+            SyntaxKind.GlobalStatement,
+            SyntaxKindEx.InitAccessorDeclaration,
+            SyntaxKindEx.LocalFunctionStatement,
+            SyntaxKind.MethodDeclaration,
+            SyntaxKind.OperatorDeclaration,
+            SyntaxKind.ParenthesizedLambdaExpression,
+            SyntaxKindEx.PrimaryConstructorBaseType,
+            SyntaxKind.RemoveAccessorDeclaration,
+            SyntaxKind.SetAccessorDeclaration,
+            SyntaxKind.SimpleLambdaExpression,
+            SyntaxKind.ThisConstructorInitializer];
+
+        private static readonly SyntaxKind[] NegationOrConditionEnclosingSyntaxKinds = [
+            SyntaxKind.AnonymousMethodExpression,
+            SyntaxKind.BitwiseNotExpression,
+            SyntaxKind.ConditionalExpression,
+            SyntaxKind.IfStatement,
+            SyntaxKind.MethodDeclaration,
+            SyntaxKind.ParenthesizedLambdaExpression,
+            SyntaxKind.SimpleLambdaExpression,
+            SyntaxKind.WhileStatement];
 
         public static ControlFlowGraph CreateCfg(this SyntaxNode node, SemanticModel model, CancellationToken cancel) =>
             CfgCache.FindOrCreate(node, model, cancel);
@@ -34,12 +64,12 @@ namespace SonarAnalyzer.Extensions
         public static bool ContainsConditionalConstructs(this SyntaxNode node) =>
             node != null &&
             node.DescendantNodes()
-                .Any(descendant => descendant.IsAnyKind(SyntaxKind.IfStatement,
-                    SyntaxKind.ConditionalExpression,
-                    SyntaxKind.CoalesceExpression,
-                    SyntaxKind.SwitchStatement,
-                    SyntaxKindEx.SwitchExpression,
-                    SyntaxKindEx.CoalesceAssignmentExpression));
+                .Any(descendant => descendant.Kind() is SyntaxKind.IfStatement
+                    or SyntaxKind.ConditionalExpression
+                    or SyntaxKind.CoalesceExpression
+                    or SyntaxKind.SwitchStatement
+                    or SyntaxKindEx.SwitchExpression
+                    or SyntaxKindEx.CoalesceAssignmentExpression);
 
         public static object FindConstantValue(this SyntaxNode node, SemanticModel semanticModel) =>
             new CSharpConstantValueFinder(semanticModel).FindConstant(node);
@@ -49,7 +79,7 @@ namespace SonarAnalyzer.Extensions
 
         public static bool IsPartOfBinaryNegationOrCondition(this SyntaxNode node)
         {
-            if (!(node.Parent is MemberAccessExpressionSyntax))
+            if (node.Parent is not MemberAccessExpressionSyntax)
             {
                 return false;
             }
@@ -61,12 +91,8 @@ namespace SonarAnalyzer.Extensions
             }
 
             var current = topNode;
-            while (!current.Parent?.IsAnyKind(SyntaxKind.BitwiseNotExpression,
-                                              SyntaxKind.IfStatement,
-                                              SyntaxKind.WhileStatement,
-                                              SyntaxKind.ConditionalExpression,
-                                              SyntaxKind.MethodDeclaration,
-                                              SyntaxKind.SimpleLambdaExpression) ?? false)
+            while (current.Parent != null
+                    && !NegationOrConditionEnclosingSyntaxKinds.Contains(current.Parent.Kind()))
             {
                 current = current.Parent;
             }
@@ -400,14 +426,13 @@ namespace SonarAnalyzer.Extensions
 
             // Effectively, if we're on the RHS of the ? we have to walk up the RHS spine first until we hit the first
             // conditional access.
-            while (current.IsAnyKind(
-                SyntaxKind.InvocationExpression,
-                SyntaxKind.ElementAccessExpression,
-                SyntaxKind.SimpleMemberAccessExpression,
-                SyntaxKind.MemberBindingExpression,
-                SyntaxKind.ElementBindingExpression,
+            while ((current.Kind() is SyntaxKind.InvocationExpression
+                or SyntaxKind.ElementAccessExpression
+                or SyntaxKind.SimpleMemberAccessExpression
+                or SyntaxKind.MemberBindingExpression
+                or SyntaxKind.ElementBindingExpression
                 // Optional exclamations might follow the conditional operation. For example: a.b?.$$c!!!!()
-                SyntaxKindEx.SuppressNullableWarningExpression) &&
+                or SyntaxKindEx.SuppressNullableWarningExpression) &&
                 current.Parent is not ConditionalAccessExpressionSyntax)
             {
                 current = current.Parent;
@@ -539,6 +564,9 @@ namespace SonarAnalyzer.Extensions
                 _ => false,
             };
 
+        public static SyntaxNode EnclosingScope(this SyntaxNode node) =>
+            node.Ancestors().FirstOrDefault(x => x.IsAnyKind(EnclosingScopeSyntaxKinds));
+
         private readonly record struct PathPosition(int Index, int TupleLength);
 
         private sealed class ControlFlowGraphCache : ControlFlowGraphCacheBase
@@ -547,7 +575,10 @@ namespace SonarAnalyzer.Extensions
                 node.IsKind(SyntaxKindEx.LocalFunctionStatement);
 
             protected override bool HasNestedCfg(SyntaxNode node) =>
-                node.IsAnyKind(SyntaxKindEx.LocalFunctionStatement, SyntaxKind.SimpleLambdaExpression, SyntaxKind.AnonymousMethodExpression, SyntaxKind.ParenthesizedLambdaExpression);
+                node.Kind() is SyntaxKindEx.LocalFunctionStatement
+                    or SyntaxKind.SimpleLambdaExpression
+                    or SyntaxKind.AnonymousMethodExpression
+                    or SyntaxKind.ParenthesizedLambdaExpression;
         }
     }
 }

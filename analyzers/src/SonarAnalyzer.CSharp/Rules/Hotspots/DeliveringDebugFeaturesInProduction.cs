@@ -31,8 +31,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
         // For simplicity we will avoid creating noise if the validation is invoked in the same method (https://github.com/SonarSource/sonar-dotnet/issues/5032)
         protected override bool IsDevelopmentCheckInvoked(SyntaxNode node, SemanticModel semanticModel) =>
-            node.FirstAncestorOrSelf<MethodDeclarationSyntax>() is { } parentMethodDeclaration
-            && parentMethodDeclaration.DescendantNodes().Any(x => IsDevelopmentCheck(x, semanticModel));
+            node.EnclosingScope()
+                .DescendantNodes()
+                .Any(x => IsDevelopmentCheck(x, semanticModel));
 
         protected override bool IsInDevelopmentContext(SyntaxNode node) =>
             node.Ancestors()

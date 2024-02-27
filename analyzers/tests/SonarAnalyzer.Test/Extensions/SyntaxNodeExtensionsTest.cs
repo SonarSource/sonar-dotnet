@@ -1200,6 +1200,51 @@ public class X
             }
         }
 
+        [DataTestMethod]
+        [DataRow("""event EventHandler SomeEvent { add { $$int x = 42;$$ } remove { int x = 42; } }""", SyntaxKind.AddAccessorDeclaration)]
+        [DataRow("""int Method() { Func<int, int, int> add = delegate (int a, int b) { return $$a + b$$; }; return add(1, 2); }""", SyntaxKind.AnonymousMethodExpression)]
+        [DataRow("""Derived(int arg) : base($$arg$$) { }""", SyntaxKind.BaseConstructorInitializer)]
+        [DataRow("""Derived() { $$var x = 42;$$ }""", SyntaxKind.ConstructorDeclaration)]
+        [DataRow("""public static implicit operator int(Derived d) => $$42$$;""", SyntaxKind.ConversionOperatorDeclaration)]
+        [DataRow("""~Derived() { $$var x = 42;$$ }""", SyntaxKind.DestructorDeclaration)]
+        [DataRow("""int field = $$int.Parse("42")$$;""", SyntaxKind.EqualsValueClause)]
+        [DataRow("""int Property { get; set; } = $$int.Parse("42")$$;""", SyntaxKind.EqualsValueClause)]
+        [DataRow("""int Property { set { $$_ = value;$$ } }""", SyntaxKind.SetAccessorDeclaration)]
+        [DataRow("""int Property { set { $$_ = value;$$ } }""", SyntaxKind.SetAccessorDeclaration)]
+        [DataRow("""int Method() { return LocalFunction(); int LocalFunction() { $$return 42;$$ } }""", SyntaxKindEx.LocalFunctionStatement)]
+        [DataRow("""int Method() { return LocalFunction(); int LocalFunction() => $$42$$; }""", SyntaxKindEx.LocalFunctionStatement)]
+        [DataRow("""int Method() { $$return 42;$$ }""", SyntaxKind.MethodDeclaration)]
+        [DataRow("""int Method() => $$42$$;""", SyntaxKind.MethodDeclaration)]
+        [DataRow("""public static Derived operator +(Derived d) => $$d$$;""", SyntaxKind.OperatorDeclaration)]
+        [DataRow("""int Method() { var lambda = () => $$42$$; return lambda(); }""", SyntaxKind.ParenthesizedLambdaExpression)]
+        [DataRow("""int Method() { Func<int, int> lambda = x => $$x + 1$$; return lambda(42); }""", SyntaxKind.SimpleLambdaExpression)]
+        [DataRow("""event EventHandler SomeEvent { add { int x = 42; } remove { $$int x = 42;$$ } }""", SyntaxKind.RemoveAccessorDeclaration)]
+        [DataRow("""Derived(int arg) : this($$arg.ToString()$$) { }""", SyntaxKind.ThisConstructorInitializer)]
+#if NET
+        [DataRow("""int Property { init { $$_ = value;$$ } }""", SyntaxKindEx.InitAccessorDeclaration)]
+        [DataRow("""record BaseRec(int I); record DerivedRec(int I): BaseRec($$I++$$);""", SyntaxKindEx.PrimaryConstructorBaseType)]
+#endif
+        public void EnclosingScope_Members(string member, SyntaxKind expectedSyntaxKind)
+        {
+            var node = NodeBetweenMarkers($$"""
+                using System;
+
+                public class Base
+                {
+                    public Base() { }
+                    public Base(int arg) { }
+                }
+
+                public class Derived: Base
+                {
+                    Derived(string arg) { }
+                    {{member}}
+                }
+                """, LanguageNames.CSharp);
+            var actual = ExtensionsCS.EnclosingScope(node)?.Kind() ?? SyntaxKind.None;
+            actual.Should().Be(expectedSyntaxKind);
+        }
+
         private static SyntaxNode NodeBetweenMarkers(string code, string language, bool getInnermostNodeForTie = false)
         {
             var position = code.IndexOf("$$");
