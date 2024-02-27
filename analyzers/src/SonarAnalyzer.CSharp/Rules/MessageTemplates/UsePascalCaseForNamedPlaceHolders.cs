@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using static SonarAnalyzer.Helpers.MessageTemplates;
+
 namespace SonarAnalyzer.Rules.MessageTemplates;
 
 public sealed class UsePascalCaseForNamedPlaceHolders : IMessageTemplateCheck
@@ -31,10 +33,15 @@ public sealed class UsePascalCaseForNamedPlaceHolders : IMessageTemplateCheck
 
     public void Execute(SonarSyntaxNodeReportingContext context, InvocationExpressionSyntax invocation, ArgumentSyntax templateArgument, Helpers.MessageTemplates.Placeholder[] placeholders)
     {
-        foreach (var placeholder in placeholders.Where(x => char.IsLower(x.Name[0])))
+        var nonPascalCasePlaceholders = placeholders.Where(x => char.IsLower(x.Name[0])).ToArray();
+        if (nonPascalCasePlaceholders.Length > 0)
         {
-            var location = Location.Create(context.Tree, new(templateArgument.Expression.GetLocation().SourceSpan.Start + placeholder.Start, placeholder.Length));
-            context.ReportIssue(Diagnostic.Create(Rule, location));
+            var primaryLocation = GetLocation(nonPascalCasePlaceholders[0]);
+            var secondaryLocations = nonPascalCasePlaceholders.Skip(1).Select(GetLocation);
+            context.ReportIssue(Diagnostic.Create(Rule, primaryLocation, secondaryLocations));
         }
+
+        Location GetLocation(Placeholder placeholder) =>
+            Location.Create(context.Tree, new(templateArgument.Expression.GetLocation().SourceSpan.Start + placeholder.Start, placeholder.Length));
     }
 }
