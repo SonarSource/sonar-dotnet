@@ -183,4 +183,33 @@ public class ExceptionsShouldBePassedCorrectlyTest
             """)
         .AddReferences(NuGetMetadataReference.NLog(Constants.NuGetLatestVersion))
         .Verify();
+
+    [DataTestMethod]
+    [DataRow("Error")]
+    public void ExceptionsShouldBePassedCorrectly_Serilog_CS(string methodName) =>
+        builder.AddSnippet($$"""
+            using System;
+            using Serilog;
+
+            public class Program
+            {
+                public void Method(ILogger logger, string message, Exception e)
+                {
+                    Log.{{methodName}}("Message!");
+                    Log.{{methodName}}("Message!", e);                                   // Noncompliant
+                    Log.{{methodName}}<int>("Message!", 1);
+                    Log.{{methodName}}<Exception>("Message!", e);                        // Noncompliant
+                    Log.{{methodName}}<int, Exception>("Message!", 1, e);                // Noncompliant
+                    Log.{{methodName}}<int, Exception, bool>("Message!", 1, e, true);    // Noncompliant
+                    Log.{{methodName}}("Message!", 1, 2, 3, e, true);                    // Noncompliant
+                    Log.{{methodName}}(e, "Message");
+                    Log.{{methodName}}<Exception>(e, "Message", e);
+                    Log.{{methodName}}<int, Exception>(e, "Message", 1, e);
+                    Log.{{methodName}}<int, Exception, bool>(e, "Message", 1, e, true);
+                    Log.{{methodName}}(e, "Message!", 1, 2, 3, e, true);
+                }
+            }
+            """)
+           .AddReferences(NuGetMetadataReference.Serilog(Constants.NuGetLatestVersion))
+           .Verify();
 }

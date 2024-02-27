@@ -36,9 +36,9 @@ public sealed class ExceptionsShouldBePassedCorrectly : SonarDiagnosticAnalyzer
         context.RegisterNodeAction(c =>
             {
                 var invocation = (InvocationExpressionSyntax)c.Node;
-                if (NLogInvocationSymbol(invocation, c.SemanticModel) is { } nLogInvocationSymbol)
+                if (NLogOrSerilogInvocationSymbol(invocation, c.SemanticModel) is { } nLogInvocationSymbol)
                 {
-                    VisitNLogInvocation(invocation, nLogInvocationSymbol, c);
+                    VisitNLogOrSerilogInvocation(invocation, nLogInvocationSymbol, c);
                 }
                 else if (LoggingInvocationSymbol(invocation, c.SemanticModel) is { } invocationSymbol)
                 {
@@ -47,9 +47,11 @@ public sealed class ExceptionsShouldBePassedCorrectly : SonarDiagnosticAnalyzer
             },
             SyntaxKind.InvocationExpression);
 
-    private static void VisitNLogInvocation(InvocationExpressionSyntax invocation, IMethodSymbol invocationSymbol, SonarSyntaxNodeReportingContext c)
+    private static void VisitNLogOrSerilogInvocation(InvocationExpressionSyntax invocation, IMethodSymbol invocationSymbol, SonarSyntaxNodeReportingContext c)
     {
-        if (IsNLogIgnoredOverload(invocationSymbol))
+        if (IsNLogIgnoredOverload(invocationSymbol)
+            // The overload with the exception as the first argument is compliant.
+            || (invocationSymbol.Parameters.Length > 0 && invocationSymbol.Parameters[0].Type.DerivesFrom(KnownType.System_Exception)))
         {
             return;
         }
@@ -93,11 +95,13 @@ public sealed class ExceptionsShouldBePassedCorrectly : SonarDiagnosticAnalyzer
         methodSymbol.Parameters.Length == knownTypes.Length
         && !methodSymbol.Parameters.Where((x, index) => !x.Type.DerivesFrom(knownTypes[index])).Any();
 
-    private static IMethodSymbol NLogInvocationSymbol(InvocationExpressionSyntax invocation, SemanticModel model) =>
-        NLogLoggingMethods.Contains(invocation.GetName())
+    private static IMethodSymbol NLogOrSerilogInvocationSymbol(InvocationExpressionSyntax invocation, SemanticModel model) =>
+        (NLogLoggingMethods.Contains(invocation.GetName()) || Serilog.Contains(invocation.GetName()))
         && model.GetSymbolInfo(invocation).Symbol is IMethodSymbol symbol
         && (symbol.HasContainingType(KnownType.NLog_ILoggerExtensions, false)
-            || symbol.HasContainingType(KnownType.NLog_ILoggerBase, true))
+            || symbol.HasContainingType(KnownType.NLog_ILoggerBase, true)
+            || symbol.HasContainingType(KnownType.Serilog_ILogger, true)
+            || symbol.HasContainingType(KnownType.Serilog_Log, false))
             ? symbol
             : null;
 
