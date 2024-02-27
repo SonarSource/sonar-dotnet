@@ -6,8 +6,9 @@ public class Program
 {
     private void Log(ILogger logger, Exception e)
     {
-        logger.LogCritical("Expected exception.", e);       // Noncompliant {{Logging arguments should be passed to the correct parameter.}}
-//                                                ^
+        logger.LogCritical("Expected exception.", e);
+//      ^^^^^^^^^^^^^^^^^^ {{Logging arguments should be passed to the correct parameter.}}
+//                                                ^ Secondary @-1
         logger.LogWarning(new EventId(1), e.InnerException, "Message!");                    // Compliant
         logger.LogWarning(new EventId(1), e?.InnerException, "Message!");
         logger.LogWarning(new EventId(1), e.InnerException.InnerException, "Message!");
@@ -16,7 +17,10 @@ public class Program
 
     private void Log(CustomLogger logger, Exception e)
     {
-        logger.LogCritical("Expected exception.", e);       // Noncompliant
+        logger.LogCritical("Expected exception.", e, LogLevel.Critical);
+//      ^^^^^^^^^^^^^^^^^^ {{Logging arguments should be passed to the correct parameter.}}
+//                                                ^ Secondary @-1
+//                                                   ^^^^^^^^^^^^^^^^^ Secondary @-2
     }
 
     private class CustomLogger : ILogger

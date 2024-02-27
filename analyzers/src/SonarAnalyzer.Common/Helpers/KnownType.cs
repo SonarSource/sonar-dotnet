@@ -111,9 +111,11 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Microsoft_Extensions_Logging_DebugLoggerFactoryExtensions = new("Microsoft.Extensions.Logging.DebugLoggerFactoryExtensions");
         public static readonly KnownType Microsoft_Extensions_Logging_EventLoggerFactoryExtensions = new("Microsoft.Extensions.Logging.EventLoggerFactoryExtensions");
         public static readonly KnownType Microsoft_Extensions_Logging_EventSourceLoggerFactoryExtensions = new("Microsoft.Extensions.Logging.EventSourceLoggerFactoryExtensions");
+        public static readonly KnownType Microsoft_Extensions_Logging_EventId = new("Microsoft.Extensions.Logging.EventId");
         public static readonly KnownType Microsoft_Extensions_Logging_ILogger = new("Microsoft.Extensions.Logging.ILogger");
         public static readonly KnownType Microsoft_Extensions_Logging_ILoggerFactory = new("Microsoft.Extensions.Logging.ILoggerFactory");
         public static readonly KnownType Microsoft_Extensions_Logging_LoggerExtensions = new("Microsoft.Extensions.Logging.LoggerExtensions");
+        public static readonly KnownType Microsoft_Extensions_Logging_LogLevel = new("Microsoft.Extensions.Logging.LogLevel");
         public static readonly KnownType Microsoft_Extensions_Primitives_StringValues = new("Microsoft.Extensions.Primitives.StringValues");
         public static readonly KnownType Microsoft_Net_Http_Headers_HeaderNames = new("Microsoft.Net.Http.Headers.HeaderNames");
         public static readonly KnownType Microsoft_JSInterop_JSInvokable = new("Microsoft.JSInterop.JSInvokableAttribute");
@@ -152,8 +154,9 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType NLog_ILogger = new("NLog.ILogger");
         public static readonly KnownType NLog_ILoggerBase = new("NLog.ILoggerBase");
         public static readonly KnownType NLog_ILoggerExtensions = new("NLog.ILoggerExtensions");
-        public static readonly KnownType NLog_Logger = new("NLog.Logger");
+        public static readonly KnownType NLog_LogLevel = new("NLog.LogLevel");
         public static readonly KnownType NLog_LogManager = new("NLog.LogManager");
+        public static readonly KnownType NLog_Logger = new("NLog.Logger");
         public static readonly KnownType NUnit_Framework_Assert = new("NUnit.Framework.Assert");
         public static readonly KnownType NUnit_Framework_AssertionException = new("NUnit.Framework.AssertionException");
         public static readonly KnownType NUnit_Framework_ExpectedExceptionAttribute = new("NUnit.Framework.ExpectedExceptionAttribute");
@@ -173,6 +176,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Org_BouncyCastle_Crypto_Generators_DHParametersGenerator = new("Org.BouncyCastle.Crypto.Generators.DHParametersGenerator");
         public static readonly KnownType Org_BouncyCastle_Crypto_Generators_DsaParametersGenerator = new("Org.BouncyCastle.Crypto.Generators.DsaParametersGenerator");
         public static readonly KnownType Org_BouncyCastle_Crypto_Parameters_RsaKeyGenerationParameters = new("Org.BouncyCastle.Crypto.Parameters.RsaKeyGenerationParameters");
+        public static readonly KnownType Serilog_Events_LogEventLevel = new("Serilog.Events.LogEventLevel");
         public static readonly KnownType Serilog_ILogger = new("Serilog.ILogger");
         public static readonly KnownType Serilog_LoggerConfiguration = new("Serilog.LoggerConfiguration");
         public static readonly KnownType Serilog_Log = new("Serilog.Log");

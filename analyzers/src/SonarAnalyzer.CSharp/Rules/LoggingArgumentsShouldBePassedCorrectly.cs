@@ -36,98 +36,88 @@ public sealed class LoggingArgumentsShouldBePassedCorrectly : SonarDiagnosticAna
         context.RegisterNodeAction(c =>
             {
                 var invocation = (InvocationExpressionSyntax)c.Node;
-                if (NLogOrSerilogInvocationSymbol(invocation, c.SemanticModel) is { } nLogInvocationSymbol)
+                if (!HasLoggingMethodName(invocation)
+                    || c.SemanticModel.GetSymbolInfo(invocation).Symbol is not IMethodSymbol invocationSymbol)
                 {
-                    VisitNLogOrSerilogInvocation(invocation, nLogInvocationSymbol, c);
+                    return;
                 }
-                else if (LoggingInvocationSymbol(invocation, c.SemanticModel) is { } invocationSymbol)
+                if (invocationSymbol.HasContainingType(KnownType.Microsoft_Extensions_Logging_LoggerExtensions, false))
                 {
-                    VisitInvocation(invocation, invocationSymbol, c);
+                    var invalidTypes = ImmutableArray.Create(KnownType.System_Exception, KnownType.Microsoft_Extensions_Logging_LogLevel, KnownType.Microsoft_Extensions_Logging_EventId);
+                    CheckInvalidParams(invocation, invocationSymbol, c, invalidTypes);
+                }
+                else if (invocationSymbol.HasContainingType(KnownType.Castle_Core_Logging_ILogger, true))
+                {
+                    CheckInvalidParams(invocation, invocationSymbol, c, ImmutableArray.Create(KnownType.System_Exception));
+                }
+                else if (invocationSymbol.HasContainingType(KnownType.Serilog_ILogger, true)
+                         || invocationSymbol.HasContainingType(KnownType.Serilog_Log, false)
+                         || invocationSymbol.HasContainingType(KnownType.NLog_ILoggerBase, true)
+                         || invocationSymbol.HasContainingType(KnownType.NLog_ILoggerExtensions, false))
+                {
+                    var invalidTypes = ImmutableArray.Create(KnownType.System_Exception, KnownType.Serilog_Events_LogEventLevel, KnownType.NLog_LogLevel);
+                    CheckInvalidParams(invocation, invocationSymbol, c, invalidTypes);
+                    CheckInvalidTypeParams(invocation, invocationSymbol, c, invalidTypes);
                 }
             },
             SyntaxKind.InvocationExpression);
 
-    private static void VisitNLogOrSerilogInvocation(InvocationExpressionSyntax invocation, IMethodSymbol invocationSymbol, SonarSyntaxNodeReportingContext c)
+    private static void CheckInvalidParams(InvocationExpressionSyntax invocation, IMethodSymbol invocationSymbol, SonarSyntaxNodeReportingContext c, ImmutableArray<KnownType> knownTypes)
     {
-        if (IsNLogIgnoredOverload(invocationSymbol)
-            // The overload with the exception as the first argument is compliant.
-            || (invocationSymbol.Parameters.Length > 0 && invocationSymbol.Parameters[0].Type.DerivesFrom(KnownType.System_Exception)))
+        var paramsParameter = invocationSymbol.Parameters.FirstOrDefault(x => x.IsParams);
+        if (paramsParameter is null)
         {
             return;
         }
 
-        if (invocationSymbol.TypeArguments.Any(x => x.DerivesFrom(KnownType.System_Exception)))
+        var paramsIndex = invocationSymbol.Parameters.IndexOf(paramsParameter);
+        var invalidArguments = invocation.ArgumentList.Arguments
+            .Where(x => x.GetArgumentIndex() >= paramsIndex
+                        && IsInvalidArgument(x, c.SemanticModel, knownTypes))
+            .Select(x => x.GetLocation())
+            .ToArray();
+
+        if (invalidArguments.Length > 0)
         {
-            foreach (var wrongArgument in ExceptionArguments(invocation, c.SemanticModel))
-            {
-                c.ReportIssue(Diagnostic.Create(Rule, wrongArgument.GetLocation()));
-            }
-        }
-        else
-        {
-            VisitInvocation(invocation, invocationSymbol, c);
+            c.ReportIssue(Diagnostic.Create(Rule, invocation.Expression.GetLocation(), (IEnumerable<Location>)invalidArguments));
         }
     }
 
-    private static void VisitInvocation(InvocationExpressionSyntax invocation, IMethodSymbol invocationSymbol, SonarSyntaxNodeReportingContext c)
+    private static void CheckInvalidTypeParams(InvocationExpressionSyntax invocation, IMethodSymbol invocationSymbol, SonarSyntaxNodeReportingContext c, ImmutableArray<KnownType> knownTypes)
     {
-        var exceptionParameterIndex = ExceptionParameterIndex(invocationSymbol);
-        var exceptionArguments = ExceptionArguments(invocation, c.SemanticModel).ToArray();
-        // Do not raise if there is at least one argument in the right place.
-        if (Array.Exists(exceptionArguments, x => x.GetArgumentIndex() == exceptionParameterIndex))
+        if (!IsNLogIgnoredOverload(invocationSymbol) && invocationSymbol.TypeArguments.Any(x => x.DerivesFromAny(knownTypes)))
         {
-            return;
-        }
-        foreach (var wrongArgument in exceptionArguments)
-        {
-            c.ReportIssue(Diagnostic.Create(Rule, wrongArgument.GetLocation()));
+            var typeParameterNames = invocationSymbol.TypeParameters.Select(x => x.MetadataName).ToArray();
+            var positions = invocationSymbol.ConstructedFrom.Parameters.Where(x => typeParameterNames.Contains(x.Type.MetadataName)).Select(x => invocationSymbol.ConstructedFrom.Parameters.IndexOf(x));
+            var invalidArguments = InvalidArguments(invocation, c.SemanticModel, positions, knownTypes).Select(x => x.GetLocation());
+            c.ReportIssue(Diagnostic.Create(Rule, invocation.Expression.GetLocation(), invalidArguments));
         }
     }
+
+    private static bool HasLoggingMethodName(InvocationExpressionSyntax invocation) =>
+        MicrosoftExtensionsLogging.Contains(invocation.GetName())
+        || NLogLoggingMethods.Contains(invocation.GetName())
+        || Serilog.Contains(invocation.GetName())
+        || CastleCoreOrCommonCore.Contains(invocation.GetName());
 
     private static bool IsNLogIgnoredOverload(IMethodSymbol methodSymbol) =>
         // These overloads are ignored since they will try to convert the T value to an exception.
         MatchesParams(methodSymbol, KnownType.System_Exception)
         || MatchesParams(methodSymbol, KnownType.System_IFormatProvider, KnownType.System_Exception)
         || MatchesParams(methodSymbol, KnownType.NLog_ILogger, KnownType.System_Exception)
-        || MatchesParams(methodSymbol, KnownType.NLog_ILogger, KnownType.System_IFormatProvider, KnownType.System_Exception);
+        || MatchesParams(methodSymbol, KnownType.NLog_ILogger, KnownType.System_IFormatProvider, KnownType.System_Exception)
+        || MatchesParams(methodSymbol, KnownType.NLog_LogLevel, KnownType.System_Exception)
+        || MatchesParams(methodSymbol, KnownType.NLog_LogLevel, KnownType.System_IFormatProvider, KnownType.System_Exception);
 
     private static bool MatchesParams(IMethodSymbol methodSymbol, params KnownType[] knownTypes) =>
         methodSymbol.Parameters.Length == knownTypes.Length
         && !methodSymbol.Parameters.Where((x, index) => !x.Type.DerivesFrom(knownTypes[index])).Any();
 
-    private static IMethodSymbol NLogOrSerilogInvocationSymbol(InvocationExpressionSyntax invocation, SemanticModel model) =>
-        (NLogLoggingMethods.Contains(invocation.GetName()) || Serilog.Contains(invocation.GetName()))
-        && model.GetSymbolInfo(invocation).Symbol is IMethodSymbol symbol
-        && (symbol.HasContainingType(KnownType.NLog_ILoggerExtensions, false)
-            || symbol.HasContainingType(KnownType.NLog_ILoggerBase, true)
-            || symbol.HasContainingType(KnownType.Serilog_ILogger, true)
-            || symbol.HasContainingType(KnownType.Serilog_Log, false))
-            ? symbol
-            : null;
+    private static IEnumerable<ArgumentSyntax> InvalidArguments(InvocationExpressionSyntax invocation, SemanticModel model, IEnumerable<int> positionsToCheck, ImmutableArray<KnownType> knownTypes) =>
+        positionsToCheck
+            .Select(x => invocation.ArgumentList.Arguments[x])
+            .Where(x => IsInvalidArgument(x, model, knownTypes));
 
-    private static IMethodSymbol LoggingInvocationSymbol(InvocationExpressionSyntax invocation, SemanticModel model) =>
-        // The implementation is simplified for the sake of performance, to retrieve the symbol info only once.
-        // It will first check if the method is a logging method (from any framework), and then if it is part of a logging type.
-        IsLoggingMethodName(invocation.GetName())
-        && model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
-        && IsLoggingType(methodSymbol)
-            ? methodSymbol
-            : null;
-
-    private static bool IsLoggingMethodName(string methodName) =>
-        MicrosoftExtensionsLogging.Contains(methodName)
-        || CastleCoreOrCommonCore.Contains(methodName);
-
-    private static bool IsLoggingType(ISymbol symbol) =>
-        symbol.HasContainingType(KnownType.Microsoft_Extensions_Logging_LoggerExtensions, false)
-        || symbol.HasContainingType(KnownType.Castle_Core_Logging_ILogger, true);
-
-    private static IEnumerable<ArgumentSyntax> ExceptionArguments(InvocationExpressionSyntax invocation, SemanticModel model) =>
-        invocation.ArgumentList.Arguments.Where(x => model.GetTypeInfo(x.Expression).Type.DerivesFrom(KnownType.System_Exception));
-
-    private static int ExceptionParameterIndex(IMethodSymbol invocationSymbol)
-    {
-        var exceptionParameter = invocationSymbol.Parameters.FirstOrDefault(x => x.Type.DerivesFrom(KnownType.System_Exception));
-        return invocationSymbol.Parameters.IndexOf(exceptionParameter);
-    }
+    private static bool IsInvalidArgument(ArgumentSyntax argumentSyntax, SemanticModel model, ImmutableArray<KnownType> knownTypes) =>
+        model.GetTypeInfo(argumentSyntax.Expression).Type?.DerivesFromAny(knownTypes) is true;
 }
