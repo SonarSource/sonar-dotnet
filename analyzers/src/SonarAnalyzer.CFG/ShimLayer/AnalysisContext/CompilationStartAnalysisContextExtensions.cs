@@ -45,8 +45,8 @@ public static class CompilationStartAnalysisContextExtensions
 
         static Expression<Action<Action<T>>> PassThroughLambda<T>(ParameterExpression symbolStartAnalysisContextParameter, string registrationMethodName)
         {
-            var registerParameter = Parameter(typeof(Action<T>));
-            return Lambda<Action<Action<T>>>(Call(symbolStartAnalysisContextParameter, registrationMethodName, [], registerParameter), registerParameter);
+            var registerActionParameter = Parameter(typeof(Action<T>));
+            return Lambda<Action<Action<T>>>(Call(symbolStartAnalysisContextParameter, registrationMethodName, [], registerActionParameter), registerActionParameter);
         }
     }
 
