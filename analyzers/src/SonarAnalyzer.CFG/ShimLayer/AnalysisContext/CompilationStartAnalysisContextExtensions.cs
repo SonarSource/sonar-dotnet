@@ -28,7 +28,6 @@ public static class CompilationStartAnalysisContextExtensions
     private static readonly Action<CompilationStartAnalysisContext, Action<SymbolStartAnalysisContext>, SymbolKind> RegisterSymbolStartAnalysisWrapper = CreateRegisterSymbolStartAnalysisWrapper();
     private static Action<CompilationStartAnalysisContext, Action<SymbolStartAnalysisContext>, SymbolKind> CreateRegisterSymbolStartAnalysisWrapper()
     {
-        var symbolStartAnalysisContextParameter = default(ParameterExpression);
         if (typeof(CompilationStartAnalysisContext).GetMethod(nameof(RegisterSymbolStartAction)) is { } registerMethod)
         {
             var contextParameter = Parameter(typeof(CompilationStartAnalysisContext));
@@ -37,17 +36,24 @@ public static class CompilationStartAnalysisContextExtensions
 
             var symbolStartAnalysisContextType = typeof(CompilationStartAnalysisContext).Assembly.GetType("Microsoft.CodeAnalysis.Diagnostics.SymbolStartAnalysisContext");
             var symbolStartAnalysisActionType = typeof(Action<>).MakeGenericType(symbolStartAnalysisContextType);
-            symbolStartAnalysisContextParameter = Parameter(symbolStartAnalysisContextType, "symbolStartAnalysisContext");
+            var symbolStartAnalysisContextParameter = Parameter(symbolStartAnalysisContextType);
             var symbolStartAnalysisContextCtor = typeof(SymbolStartAnalysisContext).GetConstructors().Single();
 
-            var lambda = Lambda(symbolStartAnalysisActionType, Block(
-                Call(shimmedActionParameter, "Invoke", [],
+            // Action<Roslyn.SymbolStartAnalysisContext> lambda = symbolStartAnalysisContextParameter =>
+            //    shimmedActionParameter(new Sonar.SymbolStartAnalysisContext(
+            //        symbolStartAnalysisContextParameter.CancellationToken,
+            //        symbolStartAnalysisContextParameter.Compilation,
+            //        symbolStartAnalysisContextParameter.Options,
+            //        symbolStartAnalysisContextParameter.Symbol,
+            //        (Action<CodeBlockAnalysisContext> registerParameter) =>  symbolStartAnalysisContextParameter.RegisterCodeBlockAction(registerParameter),
+            var lambda = Lambda(symbolStartAnalysisActionType, Call(shimmedActionParameter, "Invoke", [],
                     New(symbolStartAnalysisContextCtor,
                         Property(symbolStartAnalysisContextParameter, nameof(SymbolStartAnalysisContext.CancellationToken)),
                         Property(symbolStartAnalysisContextParameter, nameof(SymbolStartAnalysisContext.Compilation)),
                         Property(symbolStartAnalysisContextParameter, nameof(SymbolStartAnalysisContext.Options)),
                         Property(symbolStartAnalysisContextParameter, nameof(SymbolStartAnalysisContext.Symbol)),
-                        PassThroughLambda<CodeBlockAnalysisContext>(nameof(SymbolStartAnalysisContext.RegisterCodeBlockAction))))), symbolStartAnalysisContextParameter);
+                        PassThroughLambda<CodeBlockAnalysisContext>(symbolStartAnalysisContextParameter, nameof(SymbolStartAnalysisContext.RegisterCodeBlockAction)))),
+                    symbolStartAnalysisContextParameter);
 
             return Lambda<Action<CompilationStartAnalysisContext, Action<SymbolStartAnalysisContext>, SymbolKind>>(
                 Call(contextParameter, registerMethod, lambda, symbolKindParameter),
@@ -58,14 +64,11 @@ public static class CompilationStartAnalysisContextExtensions
             return static (_, _, _) => { };
         }
 
-        Expression PassThroughLambda<T>(string registrationMethodName)
+        static Expression<Action<Action<T>>> PassThroughLambda<T>(ParameterExpression symbolStartAnalysisContextParameter, string registrationMethodName)
         {
             var registerParameter = Parameter(typeof(Action<T>));
             return Lambda<Action<Action<T>>>(Call(symbolStartAnalysisContextParameter, registrationMethodName, [], registerParameter), registerParameter);
         }
-
-        MethodCallExpression DebugPrint(Expression expression) =>
-            Call(typeof(Debug).GetMethod(nameof(Debug.WriteLine), [typeof(object)]), Convert(expression, typeof(object)));
     }
 
     public static void RegisterSymbolStartAction(this CompilationStartAnalysisContext context, Action<SymbolStartAnalysisContext> action, SymbolKind symbolKind) =>

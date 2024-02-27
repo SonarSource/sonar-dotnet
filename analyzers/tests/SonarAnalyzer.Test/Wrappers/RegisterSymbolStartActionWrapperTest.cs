@@ -25,6 +25,9 @@ namespace SonarAnalyzer.Test.Wrappers;
 [TestClass]
 public class RegisterSymbolStartActionWrapperTest
 {
+#pragma warning disable RS1001 // Missing diagnostic analyzer attribute
+#pragma warning disable RS1025 // Configure generated code analysis
+#pragma warning disable RS1026 // Enable concurrent execution
     public class TestDiagnosticAnalyzer : DiagnosticAnalyzer
     {
         public TestDiagnosticAnalyzer(Action<ShimLayer.AnalysisContext.SymbolStartAnalysisContext> action, SymbolKind symbolKind)
@@ -40,15 +43,11 @@ public class RegisterSymbolStartActionWrapperTest
 
         public override void Initialize(Microsoft.CodeAnalysis.Diagnostics.AnalysisContext context) =>
             context.RegisterCompilationStartAction(start =>
-            {
-                start.RegisterSymbolStartAction(c =>
-                {
-                }, SymbolKind.Method);
-                CompilationStartAnalysisContextExtensions.RegisterSymbolStartAction(start, Action, SymbolKind);
-            });
+                CompilationStartAnalysisContextExtensions.RegisterSymbolStartAction(start, Action, SymbolKind));
     }
+
     [TestMethod]
-    public async Task Test()
+    public async Task RegisterSymbolStartAction_RegisterCodeBlockAction()
     {
         var code = """
             public class C
@@ -71,7 +70,7 @@ public class RegisterSymbolStartActionWrapperTest
                     visitedCodeBlocks.Add(node.Substring(0, node.IndexOf('\n') is var pos and >= 0 ? pos : node.Length));
                 });
             }, SymbolKind.NamedType)));
-        var diagnostics = await compilation.GetAnalyzerDiagnosticsAsync();
+        await compilation.GetAnalyzerDiagnosticsAsync();
         visitedCodeBlocks.Should().BeEquivalentTo("int i = 0;", "public void M()");
     }
 }
