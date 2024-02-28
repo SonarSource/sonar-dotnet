@@ -27,6 +27,12 @@ namespace SonarAnalyzer.Rules.CSharp;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class MessageTemplateAnalyzer : SonarDiagnosticAnalyzer
 {
+    private static readonly ImmutableHashSet<SyntaxKind> ValidTemplateKinds = ImmutableHashSet.Create(
+        SyntaxKind.StringLiteralExpression,
+        SyntaxKind.AddExpression,
+        SyntaxKind.InterpolatedStringExpression,
+        SyntaxKind.InterpolatedStringText);
+
     private static readonly ImmutableHashSet<IMessageTemplateCheck> Checks = ImmutableHashSet.Create<IMessageTemplateCheck>(
                new NamedPlaceholdersShouldBeUnique(),
                new UsePascalCaseForNamedPlaceHolders());
@@ -41,7 +47,7 @@ public sealed class MessageTemplateAnalyzer : SonarDiagnosticAnalyzer
             var enabledChecks = Checks.Where(x => x.Rule.IsEnabled(c)).ToArray();
             if (enabledChecks.Length > 0
                 && TemplateArgument(invocation, c.SemanticModel) is { } argument
-                && argument.Expression.IsKind(SyntaxKind.StringLiteralExpression)
+                && HasValidExpression(argument)
                 && Helpers.MessageTemplates.Parse(argument.Expression.ToString()) is { Success: true } result)
             {
                 foreach (var check in enabledChecks)
@@ -74,4 +80,7 @@ public sealed class MessageTemplateAnalyzer : SonarDiagnosticAnalyzer
         && argumentsFound.Length == 1
             ? (ArgumentSyntax)argumentsFound[0].Parent
             : null;
+
+    private static bool HasValidExpression(ArgumentSyntax argument) =>
+        argument.Expression.DescendantNodes().All(x => x.IsAnyKind(ValidTemplateKinds));
 }

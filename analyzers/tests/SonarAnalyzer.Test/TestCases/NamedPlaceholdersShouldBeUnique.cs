@@ -45,10 +45,17 @@ namespace MicrosoftTests
             logger.LogInformation("Hey {{foo}} and {{foo}}", foo, foo);      // Compliant
             logger.LogInformation("Hey {foo} and {{foo}}", foo, foo);        // Compliant
 
-            // Not string literal
+            // Contains Interpolation
             logger.LogWarning($"Hey {foo} and {foo}", foo, foo);             // Compliant
+            logger.LogWarning($"Hey {foo}" + "and {foo}", foo, foo);         // Compliant
+            logger.LogInformation("Hey {foo}" + $"and {foo}" + "{foo}", foo, foo); // Compliant FN
 
-            logger.LogInformation($"Hey {{foo}} and {{foo}}", foo, foo); // FN, we do not parse interpolated strings
+            // Contains Identifier name
+            logger.LogWarning("Hey {" + foo + "} and {" + foo + "}");        // Compliant
+
+            // False Negatives
+            logger.LogInformation($"Hey {{foo}} and {{foo}}", foo, foo);     // Compliant, we get the template value at syntax level, so we don't escape {{
+            logger.LogInformation("Hey" + "{" + "foo} and {foo" +"}");       // Compliant, same as above (I hope this does not exist out there)
         }
 
         void Noncompliant(ILogger logger, string foo, string bar, string baz, Exception ex, EventId eventId)
@@ -139,6 +146,26 @@ namespace MicrosoftTests
             //   ^^^ @-3 {{Message template placeholder 'foo' is not unique.}}
             //             ^^^ Secondary @-2
                 foo, bar, foo);
+
+
+            // SyntaxKinds
+            logger.LogInformation("Hey {foo}" + "and {foo}", foo, foo);
+            //                          ^^^ {{Message template placeholder 'foo' is not unique.}}
+            //                                        ^^^ Secondary @-1
+            logger.LogInformation("Hey {foo}" + $"and of course" + "{foo}", foo, foo);
+            //                          ^^^ {{Message template placeholder 'foo' is not unique.}}
+            //                                                       ^^^ Secondary @-1
+            logger.LogInformation("Hey {foo}" + $"{{foo}}" + "{foo}", foo, foo);                    // We miss the second placeholder
+            //                          ^^^ {{Message template placeholder 'foo' is not unique.}}
+            //                                                 ^^^ Secondary @-1
+
+            logger.LogInformation(
+                "Hey {foo}"
+            //        ^^^ {{Message template placeholder 'foo' is not unique.}}
+                +
+                "and {foo}", foo, foo);
+            //        ^^^ Secondary
+
         }
 
         // Fake
