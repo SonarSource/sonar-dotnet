@@ -50,6 +50,12 @@ public static class CompilationStartAnalysisContextExtensions
         //        symbolStartAnalysisContextParameter.Options,
         //        symbolStartAnalysisContextParameter.Symbol,
         //        (Action<CodeBlockAnalysisContext> registerActionParameter) =>  symbolStartAnalysisContextParameter.RegisterCodeBlockAction(registerActionParameter),
+        //        (Action<CodeBlockStartAnalysisContext<CS.SyntaxKind>> registerActionParameter) =>  symbolStartAnalysisContextParameter.CodeBlockStartAction<CS.SyntaxKind>(registerActionParameter),
+        //        (Action<OperationAnalysisContext> registerActionParameter, ImmutableArray<OperationKind> additionalParameter) =>  symbolStartAnalysisContextParameter.RegisterOperationAction(registerActionParameter, additionalParameter),
+        //        (Action<OperationBlockAnalysisContext> registerActionParameter) =>  symbolStartAnalysisContextParameter.RegisterOperationBlockAction(registerActionParameter),
+        //        (Action<OperationBlockStartAnalysisContext> registerActionParameter) =>  symbolStartAnalysisContextParameter.RegisterOperationBlockStartAction(registerActionParameter),
+        //        (Action<SymbolAnalysisContext> registerActionParameter) =>  symbolStartAnalysisContextParameter.RegisterSymbolEndAction(registerActionParameter),
+        //        (Action<SyntaxNodeAnalysisContext> registerActionParameter, ImmutableArray<CS.SyntaxKind> additionalParameter) =>  symbolStartAnalysisContextParameter.RegisterSyntaxNodeAction<CS.SyntaxKind>(registerActionParameter, additionalParameter))
         var lambda = Lambda(symbolStartAnalysisActionType, Call(shimmedActionParameter, nameof(Action.Invoke), [],
                 New(symbolStartAnalysisContextCtor,
                     Property(symbolStartAnalysisContextParameter, nameof(SymbolStartAnalysisContext.CancellationToken)),
@@ -58,7 +64,11 @@ public static class CompilationStartAnalysisContextExtensions
                     Property(symbolStartAnalysisContextParameter, nameof(SymbolStartAnalysisContext.Symbol)),
                     RegisterLambda<CodeBlockAnalysisContext>(symbolStartAnalysisContextParameter, nameof(SymbolStartAnalysisContext.RegisterCodeBlockAction)),
                     RegisterLambda<CodeBlockStartAnalysisContext<CS.SyntaxKind>>(symbolStartAnalysisContextParameter, nameof(SymbolStartAnalysisContext.RegisterCodeBlockStartAction), typeof(CS.SyntaxKind)),
-                    RegisterLambdaWithAdditionalParameter<OperationAnalysisContext, ImmutableArray<OperationKind>>(symbolStartAnalysisContextParameter, nameof(SymbolStartAnalysisContext.RegisterOperationAction))
+                    RegisterLambdaWithAdditionalParameter<OperationAnalysisContext, ImmutableArray<OperationKind>>(symbolStartAnalysisContextParameter, nameof(SymbolStartAnalysisContext.RegisterOperationAction)),
+                    RegisterLambda<OperationBlockAnalysisContext>(symbolStartAnalysisContextParameter, nameof(SymbolStartAnalysisContext.RegisterOperationBlockAction)),
+                    RegisterLambda<OperationBlockStartAnalysisContext>(symbolStartAnalysisContextParameter, nameof(SymbolStartAnalysisContext.RegisterOperationBlockStartAction)),
+                    RegisterLambda<SymbolAnalysisContext>(symbolStartAnalysisContextParameter, nameof(SymbolStartAnalysisContext.RegisterSymbolEndAction)),
+                    RegisterLambdaWithAdditionalParameter<SyntaxNodeAnalysisContext, ImmutableArray<CS.SyntaxKind>>(symbolStartAnalysisContextParameter, nameof(SymbolStartAnalysisContext.RegisterSyntaxNodeAction), typeof(CS.SyntaxKind))
                     )),
                 symbolStartAnalysisContextParameter);
 

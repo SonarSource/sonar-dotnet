@@ -131,4 +131,105 @@ public class RegisterSymbolStartActionWrapperTest
         await compilation.GetAnalyzerDiagnosticsAsync();
         visited.Should().BeEquivalentTo("ToString()");
     }
+
+    [TestMethod]
+    public async Task RegisterSymbolStartAction_RegisterOperationBlockAction()
+    {
+        var code = """
+            public class C
+            {
+                int i = 0;
+                public void M() => ToString();
+            }
+            """;
+        var snippet = new SnippetCompiler(code);
+        var visited = new List<string>();
+        var compilation = snippet.Compilation.WithAnalyzers(ImmutableArray.Create<DiagnosticAnalyzer>(
+            new TestDiagnosticAnalyzer(symbolStart =>
+            {
+                symbolStart.RegisterOperationBlockAction(operationBlockContext =>
+                {
+                    var operation = operationBlockContext.OperationBlocks.First().Syntax.ToString();
+                    visited.Add(operation);
+                });
+            }, SymbolKind.NamedType)));
+        await compilation.GetAnalyzerDiagnosticsAsync();
+        visited.Should().BeEquivalentTo("= 0", "=> ToString()");
+    }
+
+    [TestMethod]
+    public async Task RegisterSymbolStartAction_RegisterOperationBlockStartAction()
+    {
+        var code = """
+            public class C
+            {
+                int i = 0;
+                public void M() => ToString();
+            }
+            """;
+        var snippet = new SnippetCompiler(code);
+        var visited = new List<string>();
+        var compilation = snippet.Compilation.WithAnalyzers(ImmutableArray.Create<DiagnosticAnalyzer>(
+            new TestDiagnosticAnalyzer(symbolStart =>
+            {
+                symbolStart.RegisterOperationBlockStartAction(operationBlockStartContext =>
+                {
+                    var operation = operationBlockStartContext.OperationBlocks.First().Syntax.ToString();
+                    visited.Add(operation);
+                    operationBlockStartContext.RegisterOperationAction(operationContext => visited.Add(operationContext.Operation.Syntax.ToString()), OperationKind.Invocation);
+                });
+            }, SymbolKind.NamedType)));
+        await compilation.GetAnalyzerDiagnosticsAsync();
+        visited.Should().BeEquivalentTo("= 0", "=> ToString()", "ToString()");
+    }
+
+    [TestMethod]
+    public async Task RegisterSymbolStartAction_RegisterRegisterSymbolEndAction()
+    {
+        var code = """
+            public class C
+            {
+                int i = 0;
+                public void M() => ToString();
+            }
+            """;
+        var snippet = new SnippetCompiler(code);
+        var visited = new List<string>();
+        var compilation = snippet.Compilation.WithAnalyzers(ImmutableArray.Create<DiagnosticAnalyzer>(
+            new TestDiagnosticAnalyzer(symbolStart =>
+            {
+                symbolStart.RegisterSymbolEndAction(symbolContext =>
+                {
+                    var symbolName = symbolContext.Symbol.Name;
+                    visited.Add(symbolName);
+                });
+            }, SymbolKind.NamedType)));
+        await compilation.GetAnalyzerDiagnosticsAsync();
+        visited.Should().BeEquivalentTo("C");
+    }
+
+    [TestMethod]
+    public async Task RegisterSymbolStartAction_RegisterSyntaxNodeAction()
+    {
+        var code = """
+            public class C
+            {
+                int i = 0;
+                public void M() => ToString();
+            }
+            """;
+        var snippet = new SnippetCompiler(code);
+        var visited = new List<string>();
+        var compilation = snippet.Compilation.WithAnalyzers(ImmutableArray.Create<DiagnosticAnalyzer>(
+            new TestDiagnosticAnalyzer(symbolStart =>
+            {
+                symbolStart.RegisterSyntaxNodeAction(syntaxNodeContext =>
+                {
+                    var symbolName = syntaxNodeContext.Node.ToString();
+                    visited.Add(symbolName);
+                }, CS.SyntaxKind.InvocationExpression, CS.SyntaxKind.EqualsValueClause);
+            }, SymbolKind.NamedType)));
+        await compilation.GetAnalyzerDiagnosticsAsync();
+        visited.Should().BeEquivalentTo("= 0", "ToString()");
+    }
 }
