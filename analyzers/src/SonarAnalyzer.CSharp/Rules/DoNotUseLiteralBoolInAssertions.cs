@@ -29,29 +29,29 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Remove or correct this assertion.";
 
         private static readonly Dictionary<KnownType, HashSet<string>> TrackedTypeAndMethods =
-            new ()
+            new()
             {
-                [KnownType.Xunit_Assert] = new HashSet<string>
-                {
-                    // "True" is not here because there was no Assert.Fail in Xunit until 2020 and Assert.True(false) was a way to simulate it.
-                    "Equal", "False", "NotEqual", "Same", "StrictEqual", "NotSame"
-                },
+                [KnownType.Xunit_Assert] =
+                [
+                    // "True" and "False" are not here because there was no Assert.Fail in Xunit until 2020 and Assert.True(false) and Assert.False(true) were some ways to simulate it.
+                    "Equal", "NotEqual", "Same", "StrictEqual", "NotSame"
+                ],
 
-                [KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert] = new HashSet<string>
-                {
+                [KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert] =
+                [
                     "AreEqual", "AreNotEqual", "AreSame", "IsFalse", "IsTrue"
-                },
+                ],
 
-                [KnownType.NUnit_Framework_Assert] = new HashSet<string>
-                {
+                [KnownType.NUnit_Framework_Assert] =
+                [
                     "AreEqual", "AreNotEqual", "AreNotSame", "AreSame", "False",
                     "IsFalse", "IsTrue", "That", "True"
-                },
+                ],
 
-                [KnownType.System_Diagnostics_Debug] = new HashSet<string>
-                {
+                [KnownType.System_Diagnostics_Debug] =
+                [
                     "Assert"
-                }
+                ]
             };
 
         private static readonly ISet<SyntaxKind> BoolLiterals =
