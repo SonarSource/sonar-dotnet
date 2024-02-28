@@ -9,6 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCore31.MVC", "NetCore31\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCore31.MVC.ConfigurableRules", "NetCore31WithConfigurableRules\NetCore31.MVC.ConfigurableRules.csproj", "{032F28CC-405C-407A-9F41-F123BF0CFBF5}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Net5", "Net5\Net5.csproj", "{4B6C54D3-B22F-4359-850A-C6E9A3D87721}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Net5Test", "Net5Test\Net5Test.csproj", "{320BC8DA-5ABA-48EF-B962-1436E727C4CF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{032F28CC-405C-407A-9F41-F123BF0CFBF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{032F28CC-405C-407A-9F41-F123BF0CFBF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{032F28CC-405C-407A-9F41-F123BF0CFBF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B6C54D3-B22F-4359-850A-C6E9A3D87721}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B6C54D3-B22F-4359-850A-C6E9A3D87721}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B6C54D3-B22F-4359-850A-C6E9A3D87721}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B6C54D3-B22F-4359-850A-C6E9A3D87721}.Release|Any CPU.Build.0 = Release|Any CPU
+		{320BC8DA-5ABA-48EF-B962-1436E727C4CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{320BC8DA-5ABA-48EF-B962-1436E727C4CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{320BC8DA-5ABA-48EF-B962-1436E727C4CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{320BC8DA-5ABA-48EF-B962-1436E727C4CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
