@@ -25,7 +25,7 @@ namespace SonarAnalyzer.Helpers;
 /// <summary>
 /// Grammar can be found <a href="https://github.com/messagetemplates/grammar"> here</a>.
 /// </summary>
-public static class MessageTemplates
+public static class MessageTemplatesParser
 {
     private const string NamePattern = "[0-9a-zA-Z_]+";
     private const string PlaceholderPattern = $"(?<Placeholder>{NamePattern})";

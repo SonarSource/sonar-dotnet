@@ -46,7 +46,7 @@ public sealed class MessageTemplateAnalyzer : SonarDiagnosticAnalyzer
             if (enabledChecks.Length > 0
                 && MessageTemplateExtractor.TemplateArgument(invocation, c.SemanticModel) is { } argument
                 && HasValidExpression(argument)
-                && Helpers.MessageTemplates.Parse(argument.Expression.ToString()) is { Success: true } result)
+                && MessageTemplatesParser.Parse(argument.Expression.ToString()) is { Success: true } result)
             {
                 foreach (var check in enabledChecks)
                 {

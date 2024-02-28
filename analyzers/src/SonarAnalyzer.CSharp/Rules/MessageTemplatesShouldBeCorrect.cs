@@ -52,57 +52,51 @@ public sealed class MessageTemplatesShouldBeCorrect : SonarDiagnosticAnalyzer
 
     private static class TemplateValidator
     {
+        private const int EmptyPlaceholderSize = 2; // "{}"
+
         private const string TextPattern = @"([^\{]|\{\{|\}\})+";
         private const string HolePattern = @"{(?<Placeholder>[^\}]*)}";
         private const string TemplatePattern = $"^({TextPattern}|{HolePattern})*$";
         // This is similar to the regex used for MessageTemplatesAnalyzer, but it is far more permissive.
         // The goal is to manually parse the placeholders, so that we can report more specific issues than just "malformed template".
         private static readonly Regex TemplateRegex = new(TemplatePattern, RegexOptions.Compiled, TimeSpan.FromMilliseconds(300));
-
         private static readonly Regex PlaceholderNameRegex = new("^[0-9a-zA-Z_]+$", RegexOptions.Compiled, RegexConstants.DefaultTimeout);
         private static readonly Regex PlaceholderAlignmentRegex = new("^-?[0-9]+$", RegexOptions.Compiled, RegexConstants.DefaultTimeout);
 
         public static bool ContainsErrors(string template, out List<ParsingError> errors)
         {
-            var result = Helpers.MessageTemplates.Parse(template, TemplateRegex);
+            var result = MessageTemplatesParser.Parse(template, TemplateRegex);
             errors = result.Success
                 ? result.Placeholders.Select(ParsePlaceholder).Where(x => x is not null).ToList()
                 : [new("should be syntactically correct", 0, template.Length)];
             return errors.Count > 0;
         }
 
-        private static ParsingError ParsePlaceholder(Helpers.MessageTemplates.Placeholder placeholder)
+        private static ParsingError ParsePlaceholder(MessageTemplatesParser.Placeholder placeholder)
         {
             if (placeholder.Length == 0)
             {
-                return new($"should not contain empty placeholder", placeholder.Start - 1, 2); // highlight both brackets '{}', since there is no content
+                return new("should not contain empty placeholder", placeholder.Start - 1, EmptyPlaceholderSize);
             }
-
             var parts = Split(placeholder.Name);
-            if (!PlaceholderNameRegex.SafeIsMatch(parts.Name))
+            return "🔥" switch
             {
-                return new($"placeholder '{parts.Name}' should only contain letters, numbers, and underscore", placeholder);
-            }
-            else if (parts.Alignment is not null && !PlaceholderAlignmentRegex.SafeIsMatch(parts.Alignment))
-            {
-                return new($"placeholder '{parts.Name}' should have numeric alignment instead of '{parts.Alignment}'", placeholder);
-            }
-            else if (parts.Format == string.Empty)
-            {
-                return new($"placeholder '{parts.Name}' should not have empty format", placeholder);
-            }
-            else
-            {
-                return null;
-            }
+                _ when !PlaceholderNameRegex.SafeIsMatch(parts.Name) =>
+                    new($"placeholder '{parts.Name}' should only contain letters, numbers, and underscore", placeholder),
+
+                _ when parts.Alignment is not null && !PlaceholderAlignmentRegex.SafeIsMatch(parts.Alignment) =>
+                    new($"placeholder '{parts.Name}' should have numeric alignment instead of '{parts.Alignment}'", placeholder),
+
+                _ when parts.Format == string.Empty =>
+                    new($"placeholder '{parts.Name}' should not have empty format", placeholder),
+
+                _ => null,
+            };
         }
 
         // pattern is: name[,alignment][:format]
         private static Parts Split(string placeholder)
         {
-            var start = placeholder[0] is '@' or '$' ? 1 : 0; // skip prefix
-
-            string name;
             string alignment = null;
             string format = null;
 
@@ -115,44 +109,33 @@ public sealed class MessageTemplatesShouldBeCorrect : SonarDiagnosticAnalyzer
                 alignmentIndex = -1;
             }
 
-            if (NotFound(alignmentIndex))
+            if (formatIndex == -1)
             {
-                if (NotFound(formatIndex))
-                {
-                    name = placeholder.Substring(start);
-                }
-                else
-                {
-                    name = placeholder.Substring(start, formatIndex - start);
-                    format = IsEmpty(formatIndex) ? string.Empty : placeholder.Substring(formatIndex + 1);
-                }
+                formatIndex = placeholder.Length;
             }
             else
             {
-                if (NotFound(formatIndex))
-                {
-                    name = placeholder.Substring(start, alignmentIndex - start);
-                    alignment = IsEmpty(alignmentIndex) ? string.Empty : placeholder.Substring(alignmentIndex + 1);
-                }
-                else
-                {
-                    name = placeholder.Substring(start, alignmentIndex - start);
-                    alignment = placeholder.Substring(alignmentIndex + 1, formatIndex - alignmentIndex - 1);
-                    format = placeholder.Substring(formatIndex + 1);
-                }
+                format = placeholder.Substring(formatIndex + 1);
+            }
+            if (alignmentIndex == -1)
+            {
+                alignmentIndex = formatIndex;
+            }
+            else
+            {
+                alignment = placeholder.Substring(alignmentIndex + 1, formatIndex - alignmentIndex - 1);
             }
 
+            var start = placeholder[0] is '@' or '$' ? 1 : 0; // skip prefix
+            var name = placeholder.Substring(start, alignmentIndex - start);
             return new(name, alignment, format);
-
-            bool NotFound(int index) => index == -1;
-            bool IsEmpty(int index) => index == placeholder.Length - 1;
         }
 
         private sealed record Parts(string Name, string Alignment, string Format);
 
         public sealed record ParsingError(string Message, int Start, int Length)
         {
-            public ParsingError(string message, Helpers.MessageTemplates.Placeholder placeholder)
+            public ParsingError(string message, MessageTemplatesParser.Placeholder placeholder)
                 : this(message, placeholder.Start, placeholder.Length)
             { }
         }

@@ -35,7 +35,7 @@ public class MessageTemplatesTest
     [DataRow("{{hello {{world}}}}")]
     public void Parse_NoPlaceholder(string template)
     {
-        var result = MessageTemplates.Parse(template);
+        var result = MessageTemplatesParser.Parse(template);
         ShouldBeSuccess(result);
     }
 
@@ -61,7 +61,7 @@ public class MessageTemplatesTest
     [DataRow(""" "hello" + "{world}" + "!" """, "world", 13, 5)]
     public void Parse_Placeholder(string template, string placeholder, int start, int length)
     {
-        var result = MessageTemplates.Parse(template);
+        var result = MessageTemplatesParser.Parse(template);
         ShouldBeSuccess(result, 1);
         ShouldBe(result.Placeholders[0], placeholder, start, length);
     }
@@ -87,7 +87,7 @@ public class MessageTemplatesTest
     [DataRow("hello {world:format,42}")] // semantically looks like a typo, format and alignment are reversed, but it's syntactically valid.
     public void Parse_Placeholder_Named_Alignment_Format(string template)
     {
-        var result = MessageTemplates.Parse(template);
+        var result = MessageTemplatesParser.Parse(template);
         ShouldBeSuccess(result, 1);
         ShouldBe(result.Placeholders[0], "world", 7, 5);
     }
@@ -104,7 +104,7 @@ public class MessageTemplatesTest
             Logic {@_orchestrates42} the mind,
             Programmer's {ballet:_}.
             """;
-        var result = MessageTemplates.Parse(template);
+        var result = MessageTemplatesParser.Parse(template);
         ShouldBeSuccess(result, 6);
         ShouldBe(result.Placeholders[0], "silent", 12, 6);
         ShouldBe(result.Placeholders[1], "0", 56, 1);
@@ -129,20 +129,20 @@ public class MessageTemplatesTest
     [DataRow(""" "hello {" + "world" + "}" """)]    // '+' and '"' is not allowed in placeholders
     public void Parse_Placeholder_Failure(string template)
     {
-        var result = MessageTemplates.Parse(template);
+        var result = MessageTemplatesParser.Parse(template);
         result.Should().NotBeNull();
         result.Success.Should().BeFalse();
         result.Placeholders.Should().BeNull();
     }
 
-    private static void ShouldBeSuccess(MessageTemplates.ParseResult actual, int placeholderCount = 0)
+    private static void ShouldBeSuccess(MessageTemplatesParser.ParseResult actual, int placeholderCount = 0)
     {
         actual.Should().NotBeNull();
         actual.Success.Should().BeTrue();
         actual.Placeholders.Should().NotBeNull().And.HaveCount(placeholderCount);
     }
 
-    private static void ShouldBe(MessageTemplates.Placeholder actual, string name, int start, int length)
+    private static void ShouldBe(MessageTemplatesParser.Placeholder actual, string name, int start, int length)
     {
         actual.Should().NotBeNull();
         actual.Name.Should().Be(name);
