@@ -20,13 +20,14 @@
 
 using System.Diagnostics.CodeAnalysis;
 using static System.Linq.Expressions.Expression;
+using CS = Microsoft.CodeAnalysis.CSharp;
 
 namespace SonarAnalyzer.ShimLayer.AnalysisContext;
 
 public static class CompilationStartAnalysisContextExtensions
 {
     {
-        if (typeof(CompilationStartAnalysisContext).GetMethod(nameof(RegisterSymbolStartAction)) is { } registerMethod)
+        if (typeof(CompilationStartAnalysisContext).GetMethod(nameof(RegisterSymbolStartAction)) is not { } registerMethod)
         {
             return static (_, _, _) => { };
         }
@@ -40,13 +41,17 @@ public static class CompilationStartAnalysisContextExtensions
         }
         else
         {
-            return static (_, _, _) => { };
+            var registerActionParameter = Parameter(typeof(Action<TContext>));
+            return Lambda<Action<Action<TContext>>>(Call(symbolStartAnalysisContextParameter, registrationMethodName, typeArguments, registerActionParameter), registerActionParameter);
         }
 
-        static Expression<Action<Action<T>>> PassThroughLambda<T>(ParameterExpression symbolStartAnalysisContextParameter, string registrationMethodName)
+        static Expression<Action<Action<TContext>, TParameter>> RegisterLambdaWithAdditionalParameter<TContext, TParameter>(
+            ParameterExpression symbolStartAnalysisContextParameter, string registrationMethodName, params Type[] typeArguments)
         {
-            var registerActionParameter = Parameter(typeof(Action<T>));
-            return Lambda<Action<Action<T>>>(Call(symbolStartAnalysisContextParameter, registrationMethodName, [], registerActionParameter), registerActionParameter);
+            var registerActionParameter = Parameter(typeof(Action<TContext>));
+            var additionalParameter = Parameter(typeof(TParameter));
+            return Lambda<Action<Action<TContext>, TParameter>>(
+                Call(symbolStartAnalysisContextParameter, registrationMethodName, typeArguments, registerActionParameter, additionalParameter), registerActionParameter, additionalParameter);
         }
     }
 
