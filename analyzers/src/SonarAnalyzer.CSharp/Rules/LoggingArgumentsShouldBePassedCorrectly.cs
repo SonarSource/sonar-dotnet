@@ -83,12 +83,12 @@ public sealed class LoggingArgumentsShouldBePassedCorrectly : SonarDiagnosticAna
         }
     }
 
-    private static void CheckInvalidTypeParams(InvocationExpressionSyntax invocation, IMethodSymbol invocationSymbol, SonarSyntaxNodeReportingContext c, ImmutableArray<KnownType> knownTypes)
+    private static void CheckInvalidTypeParams(InvocationExpressionSyntax invocation, IMethodSymbol methodSymbol, SonarSyntaxNodeReportingContext c, ImmutableArray<KnownType> knownTypes)
     {
-        if (!IsNLogIgnoredOverload(invocationSymbol) && invocationSymbol.TypeArguments.Any(x => x.DerivesFromAny(knownTypes)))
+        if (!IsNLogIgnoredOverload(methodSymbol) && methodSymbol.TypeArguments.Any(x => x.DerivesFromAny(knownTypes)))
         {
-            var typeParameterNames = invocationSymbol.TypeParameters.Select(x => x.MetadataName).ToArray();
-            var positions = invocationSymbol.ConstructedFrom.Parameters.Where(x => typeParameterNames.Contains(x.Type.MetadataName)).Select(x => invocationSymbol.ConstructedFrom.Parameters.IndexOf(x));
+            var typeParameterNames = methodSymbol.TypeParameters.Select(x => x.MetadataName).ToArray();
+            var positions = methodSymbol.ConstructedFrom.Parameters.Where(x => typeParameterNames.Contains(x.Type.MetadataName)).Select(x => methodSymbol.ConstructedFrom.Parameters.IndexOf(x));
             var invalidArguments = InvalidArguments(invocation, c.SemanticModel, positions, knownTypes).Select(x => x.GetLocation());
             c.ReportIssue(Diagnostic.Create(Rule, invocation.Expression.GetLocation(), invalidArguments));
         }
