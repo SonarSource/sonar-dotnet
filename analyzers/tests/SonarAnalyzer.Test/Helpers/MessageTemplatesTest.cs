@@ -58,11 +58,12 @@ public class MessageTemplatesTest
     [DataRow("{$199}", "199", 2, 3)]
     [DataRow("{@0}", "0", 2, 1)]
     [DataRow("{$world_42}", "world_42", 2, 8)]
-    public void Parse_Placeholder(string template, string placeholder, int start, int end)
+    [DataRow(""" "hello" + "{world}" + "!" """, "world", 13, 5)]
+    public void Parse_Placeholder(string template, string placeholder, int start, int length)
     {
         var result = MessageTemplates.Parse(template);
         ShouldBeSuccess(result, 1);
-        ShouldBe(result.Placeholders[0], placeholder, start, end);
+        ShouldBe(result.Placeholders[0], placeholder, start, length);
     }
 
     [DataTestMethod]
@@ -115,16 +116,17 @@ public class MessageTemplatesTest
     }
 
     [DataTestMethod]
-    [DataRow("{")]                              // Left bracket is not allowed
-    [DataRow("{{{")]                            // Third left bracket is not allowed (first two are valid)
-    [DataRow("{}")]                             // Empty placeholder is not allowed
-    [DataRow("{{{}}}")]                         // Empty placeholder is not allowed
-    [DataRow("Login failed for {User")]         // Missing closing bracket
-    [DataRow("Login failed for {&User}")]       // Only '@' and '$' are allowed as prefix
-    [DataRow("Login failed for {User_%Name}")]  // Only alphanumerics and '_' are allowed for placeholders
-    [DataRow("Retry attempt {Cnt,r}")]          // The alignment specifier must be numeric
-    [DataRow("Retry attempt {Cnt,}")]           // Empty alignment specifier is not allowed
-    [DataRow("Retry attempt {Cnt:}")]           // Empty format specifier is not allowed
+    [DataRow("{")]                                  // Left bracket is not allowed
+    [DataRow("{{{")]                                // Third left bracket is not allowed (first two are valid)
+    [DataRow("{}")]                                 // Empty placeholder is not allowed
+    [DataRow("{{{}}}")]                             // Empty placeholder is not allowed
+    [DataRow("Login failed for {User")]             // Missing closing bracket
+    [DataRow("Login failed for {&User}")]           // Only '@' and '$' are allowed as prefix
+    [DataRow("Login failed for {User_%Name}")]      // Only alphanumerics and '_' are allowed for placeholders
+    [DataRow("Retry attempt {Cnt,r}")]              // The alignment specifier must be numeric
+    [DataRow("Retry attempt {Cnt,}")]               // Empty alignment specifier is not allowed
+    [DataRow("Retry attempt {Cnt:}")]               // Empty format specifier is not allowed
+    [DataRow(""" "hello {" + "world" + "}" """)]    // '+' and '"' is not allowed in placeholders
     public void Parse_Placeholder_Failure(string template)
     {
         var result = MessageTemplates.Parse(template);
