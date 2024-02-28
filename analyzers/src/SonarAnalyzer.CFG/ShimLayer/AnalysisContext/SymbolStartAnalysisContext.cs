@@ -18,24 +18,33 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
+using CS = Microsoft.CodeAnalysis.CSharp;
 namespace SonarAnalyzer.ShimLayer.AnalysisContext;
 
 public class SymbolStartAnalysisContext
 {
     private readonly Action<Action<CodeBlockAnalysisContext>> registerCodeBlockAction;
+    private readonly Action<Action<CodeBlockStartAnalysisContext<CS.SyntaxKind>>> registerCodeBlockStartActionCS;
+    private readonly Action<Action<OperationAnalysisContext>, ImmutableArray<OperationKind>> registerOperationAction;
 
     public SymbolStartAnalysisContext(
         CancellationToken cancellationToken,
         Compilation compilation,
         AnalyzerOptions options,
         ISymbol symbol,
-        Action<Action<CodeBlockAnalysisContext>> registerCodeBlockAction)
+        Action<Action<CodeBlockAnalysisContext>> registerCodeBlockAction,
+        Action<Action<CodeBlockStartAnalysisContext<CS.SyntaxKind>>> registerCodeBlockStartActionCS,
+        Action<Action<OperationAnalysisContext>, ImmutableArray<OperationKind>> registerOperationAction
+        )
     {
         CancellationToken = cancellationToken;
         Compilation = compilation;
         Options = options;
         Symbol = symbol;
         this.registerCodeBlockAction = registerCodeBlockAction;
+        this.registerCodeBlockStartActionCS = registerCodeBlockStartActionCS;
+        this.registerOperationAction = registerOperationAction;
     }
 
     public CancellationToken CancellationToken { get; }
@@ -44,4 +53,21 @@ public class SymbolStartAnalysisContext
     public ISymbol Symbol { get; }
 
     public void RegisterCodeBlockAction(Action<CodeBlockAnalysisContext> action) => registerCodeBlockAction(action);
+    public void RegisterCodeBlockStartAction<TLanguageKindEnum>(Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action) where TLanguageKindEnum : struct
+    {
+        if (typeof(TLanguageKindEnum) == typeof(CS.SyntaxKind))
+        {
+            var casted = (Action<CodeBlockStartAnalysisContext<CS.SyntaxKind>>)action;
+            registerCodeBlockStartActionCS(casted);
+        }
+        else if (typeof(TLanguageKindEnum).FullName == "Microsoft.CodeAnalysis.VisualBasic.SyntaxKind")
+        {
+            throw new NotImplementedException("Add a reference to the Microsoft.CodeAnalysis.VisualBasic.Workspaces package.");
+        }
+        else
+        {
+            throw new ArgumentException("Invalid type parameter.", nameof(TLanguageKindEnum));
+        }
+    }
+    public void RegisterOperationAction(Action<OperationAnalysisContext> action, ImmutableArray<OperationKind> operationKinds) => registerOperationAction(action, operationKinds);
 }

@@ -19,7 +19,9 @@
  */
 
 using System.Linq.Expressions;
+
 using static System.Linq.Expressions.Expression;
+using CS = Microsoft.CodeAnalysis.CSharp;
 
 namespace SonarAnalyzer.ShimLayer.AnalysisContext;
 
@@ -28,47 +30,56 @@ public static class CompilationStartAnalysisContextExtensions
     private static readonly Action<CompilationStartAnalysisContext, Action<SymbolStartAnalysisContext>, SymbolKind> RegisterSymbolStartAnalysisWrapper = CreateRegisterSymbolStartAnalysisWrapper();
     private static Action<CompilationStartAnalysisContext, Action<SymbolStartAnalysisContext>, SymbolKind> CreateRegisterSymbolStartAnalysisWrapper()
     {
-        if (typeof(CompilationStartAnalysisContext).GetMethod(nameof(RegisterSymbolStartAction)) is { } registerMethod)
-        {
-            var contextParameter = Parameter(typeof(CompilationStartAnalysisContext));
-            var shimmedActionParameter = Parameter(typeof(Action<SymbolStartAnalysisContext>));
-            var symbolKindParameter = Parameter(typeof(SymbolKind));
-
-            var symbolStartAnalysisContextType = typeof(CompilationStartAnalysisContext).Assembly.GetType("Microsoft.CodeAnalysis.Diagnostics.SymbolStartAnalysisContext");
-            var symbolStartAnalysisActionType = typeof(Action<>).MakeGenericType(symbolStartAnalysisContextType);
-            var symbolStartAnalysisContextParameter = Parameter(symbolStartAnalysisContextType);
-            var symbolStartAnalysisContextCtor = typeof(SymbolStartAnalysisContext).GetConstructors().Single();
-
-            // Action<Roslyn.SymbolStartAnalysisContext> lambda = symbolStartAnalysisContextParameter =>
-            //    shimmedActionParameter(new Sonar.SymbolStartAnalysisContext(
-            //        symbolStartAnalysisContextParameter.CancellationToken,
-            //        symbolStartAnalysisContextParameter.Compilation,
-            //        symbolStartAnalysisContextParameter.Options,
-            //        symbolStartAnalysisContextParameter.Symbol,
-            //        (Action<CodeBlockAnalysisContext> registerActionParameter) =>  symbolStartAnalysisContextParameter.RegisterCodeBlockAction(registerActionParameter),
-            var lambda = Lambda(symbolStartAnalysisActionType, Call(shimmedActionParameter, nameof(Action.Invoke), [],
-                    New(symbolStartAnalysisContextCtor,
-                        Property(symbolStartAnalysisContextParameter, nameof(SymbolStartAnalysisContext.CancellationToken)),
-                        Property(symbolStartAnalysisContextParameter, nameof(SymbolStartAnalysisContext.Compilation)),
-                        Property(symbolStartAnalysisContextParameter, nameof(SymbolStartAnalysisContext.Options)),
-                        Property(symbolStartAnalysisContextParameter, nameof(SymbolStartAnalysisContext.Symbol)),
-                        PassThroughLambda<CodeBlockAnalysisContext>(symbolStartAnalysisContextParameter, nameof(SymbolStartAnalysisContext.RegisterCodeBlockAction)))),
-                    symbolStartAnalysisContextParameter);
-
-            // (contextParameter, shimmedActionParameter, symbolKindParameter) => contextParameter.RegisterSymbolStartAction(lambda), symbolKindParameter)
-            return Lambda<Action<CompilationStartAnalysisContext, Action<SymbolStartAnalysisContext>, SymbolKind>>(
-                Call(contextParameter, registerMethod, lambda, symbolKindParameter),
-                contextParameter, shimmedActionParameter, symbolKindParameter).Compile();
-        }
-        else
+        if (typeof(CompilationStartAnalysisContext).GetMethod(nameof(RegisterSymbolStartAction)) is not { } registerMethod)
         {
             return static (_, _, _) => { };
         }
+        var contextParameter = Parameter(typeof(CompilationStartAnalysisContext));
+        var shimmedActionParameter = Parameter(typeof(Action<SymbolStartAnalysisContext>));
+        var symbolKindParameter = Parameter(typeof(SymbolKind));
 
-        static Expression<Action<Action<T>>> PassThroughLambda<T>(ParameterExpression symbolStartAnalysisContextParameter, string registrationMethodName)
+        var symbolStartAnalysisContextType = typeof(CompilationStartAnalysisContext).Assembly.GetType("Microsoft.CodeAnalysis.Diagnostics.SymbolStartAnalysisContext");
+        var symbolStartAnalysisActionType = typeof(Action<>).MakeGenericType(symbolStartAnalysisContextType);
+        var symbolStartAnalysisContextParameter = Parameter(symbolStartAnalysisContextType);
+        var symbolStartAnalysisContextCtor = typeof(SymbolStartAnalysisContext).GetConstructors().Single();
+
+        // Action<Roslyn.SymbolStartAnalysisContext> lambda = symbolStartAnalysisContextParameter =>
+        //    shimmedActionParameter(new Sonar.SymbolStartAnalysisContext(
+        //        symbolStartAnalysisContextParameter.CancellationToken,
+        //        symbolStartAnalysisContextParameter.Compilation,
+        //        symbolStartAnalysisContextParameter.Options,
+        //        symbolStartAnalysisContextParameter.Symbol,
+        //        (Action<CodeBlockAnalysisContext> registerActionParameter) =>  symbolStartAnalysisContextParameter.RegisterCodeBlockAction(registerActionParameter),
+        var lambda = Lambda(symbolStartAnalysisActionType, Call(shimmedActionParameter, nameof(Action.Invoke), [],
+                New(symbolStartAnalysisContextCtor,
+                    Property(symbolStartAnalysisContextParameter, nameof(SymbolStartAnalysisContext.CancellationToken)),
+                    Property(symbolStartAnalysisContextParameter, nameof(SymbolStartAnalysisContext.Compilation)),
+                    Property(symbolStartAnalysisContextParameter, nameof(SymbolStartAnalysisContext.Options)),
+                    Property(symbolStartAnalysisContextParameter, nameof(SymbolStartAnalysisContext.Symbol)),
+                    RegisterLambda<CodeBlockAnalysisContext>(symbolStartAnalysisContextParameter, nameof(SymbolStartAnalysisContext.RegisterCodeBlockAction)),
+                    RegisterLambda<CodeBlockStartAnalysisContext<CS.SyntaxKind>>(symbolStartAnalysisContextParameter, nameof(SymbolStartAnalysisContext.RegisterCodeBlockStartAction), typeof(CS.SyntaxKind)),
+                    RegisterLambdaWithAdditionalParameter<OperationAnalysisContext, ImmutableArray<OperationKind>>(symbolStartAnalysisContextParameter, nameof(SymbolStartAnalysisContext.RegisterOperationAction))
+                    )),
+                symbolStartAnalysisContextParameter);
+
+        // (contextParameter, shimmedActionParameter, symbolKindParameter) => contextParameter.RegisterSymbolStartAction(lambda), symbolKindParameter)
+        return Lambda<Action<CompilationStartAnalysisContext, Action<SymbolStartAnalysisContext>, SymbolKind>>(
+            Call(contextParameter, registerMethod, lambda, symbolKindParameter),
+            contextParameter, shimmedActionParameter, symbolKindParameter).Compile();
+
+        static Expression<Action<Action<TContext>>> RegisterLambda<TContext>(ParameterExpression symbolStartAnalysisContextParameter, string registrationMethodName, params Type[] typeArguments)
         {
-            var registerActionParameter = Parameter(typeof(Action<T>));
-            return Lambda<Action<Action<T>>>(Call(symbolStartAnalysisContextParameter, registrationMethodName, [], registerActionParameter), registerActionParameter);
+            var registerActionParameter = Parameter(typeof(Action<TContext>));
+            return Lambda<Action<Action<TContext>>>(Call(symbolStartAnalysisContextParameter, registrationMethodName, typeArguments, registerActionParameter), registerActionParameter);
+        }
+
+        static Expression<Action<Action<TContext>, TParameter>> RegisterLambdaWithAdditionalParameter<TContext, TParameter>(
+            ParameterExpression symbolStartAnalysisContextParameter, string registrationMethodName, params Type[] typeArguments)
+        {
+            var registerActionParameter = Parameter(typeof(Action<TContext>));
+            var additionalParameter = Parameter(typeof(TParameter));
+            return Lambda<Action<Action<TContext>, TParameter>>(
+                Call(symbolStartAnalysisContextParameter, registrationMethodName, typeArguments, registerActionParameter, additionalParameter), registerActionParameter, additionalParameter);
         }
     }
 
