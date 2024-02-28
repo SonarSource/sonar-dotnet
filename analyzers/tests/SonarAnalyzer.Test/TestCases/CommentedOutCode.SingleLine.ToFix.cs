@@ -17,3 +17,21 @@ class Fixes
     // Trailing single line comment.
 }
 // Console.WriteLine("End Of file");
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8819
+class Repro_8819
+{
+    void IncorrectRemovalOfNewLine()
+    {
+        // Sentence before
+        // var x = 42;
+        // Sentence after
+    }
+
+    void CorrectRemovalOfCommentedOutLine()
+    {
+        var aStatement = "Hello, World!";
+        // var x = 42;
+        // Sentence after
+    }
+}

@@ -182,3 +182,61 @@ namespace Tests.Diagnostics
     // Somec++ reference
     class Z { }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8819
+class Repro_8819
+{
+    void LineTerminators()
+    {
+        // Remark: separators are required to consider comments as independent sentences
+
+        _ = "separator"; // Noncompliant@+1 FP
+        // Natural language sentence with semicolon at the end;
+
+        _ = "separator"; // Noncompliant@+1 FP
+        // Natural language sentence with open-brace at the end{
+
+        _ = "separator"; // Noncompliant@+2 FP
+        // Natural language sentence preceding sentence with semicolon at the end
+        // Natural language sentence with semicolon at the end;
+
+        _ = "separator"; // Noncompliant@+1 FP
+        // Natural language sentence with escaped semicolon at the end;
+        // Natural language sentence following sentence with escaped semicolon at the end
+
+        _ = "separator"; // Compliant: Natural language sentence with semicolon and escaped space at the end; \u0020
+        _ = "separator"; // Compliant: Natural language sentence with semicolon and multiple escaped spaces at the end; \u0020\u0020
+        _ = "separator"; // Compliant: Natural language sentence with escaped semicolon at the end\u003B
+        _ = "separator"; // Compliant: Natural language sentence with escaped open-brace at the end\u007B
+        _ = "separator"; // Compliant: Natural language sentence with escaped close-brace at the end\u007D
+        _ = "separator"; // Compliant: Natural language sentence with semicolon; in the middle
+        _ = "separator"; // Compliant: Natural language sentence with colon at the end:
+        _ = "separator"; // Compliant: Natural language sentence with comma at the end,
+        _ = "separator"; // Compliant: Natural language sentence with period at the end.
+        _ = "separator"; // Compliant: Natural language sentence with close-brace at the end}
+
+        _ = "separator"; // Noncompliant@+1 FP
+        // The empty set is indicated either with ∅ or with {}
+    }
+
+    void CommentedOutCommentsSeparatedByEmptyLine()
+    {
+        // Noncompliant: var x = 42;
+
+        // FN: var y = 3;
+    }
+
+    void CommentedOutCommentsSeparatedByMultiLineComment()
+    {
+        // Noncompliant: var x = 42;
+        /* A multiline comment  between the two commented-out blocks */
+        // Noncompliant: var y = 42;
+    }
+
+    void CommentedOutCommentsSeparatedByBlock()
+    {
+        // Noncompliant: var x = 42;
+        { }
+        // Noncompliant: var y = 42;
+    }
+}
