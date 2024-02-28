@@ -36,7 +36,7 @@ public sealed class MessageTemplatesShouldBeCorrect : SonarDiagnosticAnalyzer
         context.RegisterNodeAction(c =>
         {
             var invocation = (InvocationExpressionSyntax)c.Node;
-            if (MessageTemplateAnalyzer.TemplateArgument(invocation, c.SemanticModel) is { } argument
+            if (MessageTemplateExtractor.TemplateArgument(invocation, c.SemanticModel) is { } argument
                 && argument.Expression.IsKind(SyntaxKind.StringLiteralExpression)
                 && TemplateValidator.ContainsErrors(argument.Expression.ToString(), out var errors))
             {
@@ -81,7 +81,7 @@ public sealed class MessageTemplatesShouldBeCorrect : SonarDiagnosticAnalyzer
             var parts = Split(placeholder.Name);
             if (!PlaceholderNameRegex.SafeIsMatch(parts.Name))
             {
-                return new($"placeholder '{parts.Name}' should only contain chars, numbers, and underscore", placeholder);
+                return new($"placeholder '{parts.Name}' should only contain letters, numbers, and underscore", placeholder);
             }
             else if (parts.Alignment is not null && !PlaceholderAlignmentRegex.SafeIsMatch(parts.Alignment))
             {

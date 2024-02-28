@@ -58,19 +58,19 @@ public class Program
 
     public void InvalidName(ILogger logger, string user)
     {
-        logger.LogError("Login failed for {@}", user);                  // Noncompliant {{Log message template placeholder '' should only contain chars, numbers, and underscore.}}
+        logger.LogError("Login failed for {@}", user);                  // Noncompliant {{Log message template placeholder '' should only contain letters, numbers, and underscore.}}
         //                                 ^
-        logger.LogError("Login failed for {%User}", user);              // Noncompliant {{Log message template placeholder '%User' should only contain chars, numbers, and underscore.}}
+        logger.LogError("Login failed for {%User}", user);              // Noncompliant {{Log message template placeholder '%User' should only contain letters, numbers, and underscore.}}
         //                                 ^^^^^
-        logger.LogError("Login failed for { {User} }", user);              // Noncompliant {{Log message template placeholder ' {User' should only contain chars, numbers, and underscore.}}
+        logger.LogError("Login failed for { {User} }", user);              // Noncompliant {{Log message template placeholder ' {User' should only contain letters, numbers, and underscore.}}
         //                                 ^^^^^^
-        logger.LogError("Login failed for {User-Name}", user);          // Noncompliant {{Log message template placeholder 'User-Name' should only contain chars, numbers, and underscore.}}
+        logger.LogError("Login failed for {User-Name}", user);          // Noncompliant {{Log message template placeholder 'User-Name' should only contain letters, numbers, and underscore.}}
         //                                 ^^^^^^^^^
-        logger.LogError("Login failed for {User Name}", user);          // Noncompliant {{Log message template placeholder 'User Name' should only contain chars, numbers, and underscore.}}
+        logger.LogError("Login failed for {User Name}", user);          // Noncompliant {{Log message template placeholder 'User Name' should only contain letters, numbers, and underscore.}}
         //                                 ^^^^^^^^^
-        logger.LogError("Login failed for {user}, server is on {🔥}", user, "fire");          // Noncompliant {{Log message template placeholder '🔥' should only contain chars, numbers, and underscore.}}
+        logger.LogError("Login failed for {user}, server is on {🔥}", user, "fire");          // Noncompliant {{Log message template placeholder '🔥' should only contain letters, numbers, and underscore.}}
         //                                                      ^^
-        logger.LogError("Retry attempt {@,:}", user);                    // Noncompliant {{Log message template placeholder '' should only contain chars, numbers, and underscore.}}
+        logger.LogError("Retry attempt {@,:}", user);                    // Noncompliant {{Log message template placeholder '' should only contain letters, numbers, and underscore.}}
         //                              ^^^
     }
 
@@ -91,12 +91,12 @@ public class Program
     public void Complex(ILogger logger, string user, int cnt, int total)
     {
         logger.LogError("[User {user name,42}] Retry attempt {Cnt,:}", user, cnt);
-        //                      ^^^^^^^^^^^^ {{Log message template placeholder 'user name' should only contain chars, numbers, and underscore.}}
+        //                      ^^^^^^^^^^^^ {{Log message template placeholder 'user name' should only contain letters, numbers, and underscore.}}
         //                                                    ^^^^^ @-1 {{Log message template placeholder 'Cnt' should have numeric alignment instead of ''.}}
 
 
         logger.LogError("[User {user%,42}] Retry {{attempt}} {@Cnt:foo,} {$Total,-5000:}", user, cnt, total);
-        //                      ^^^^^^^^ {{Log message template placeholder 'user%' should only contain chars, numbers, and underscore.}}
+        //                      ^^^^^^^^ {{Log message template placeholder 'user%' should only contain letters, numbers, and underscore.}}
         //                                                                ^^^^^^^^^^^^^ @-1 {{Log message template placeholder 'Total' should not have empty format.}}
 
         logger.LogError(@"[User {user,42}] Retry attempt {@Cnt
@@ -107,7 +107,7 @@ public class Program
             Retry attempt {@Cnt:}
             Out of total {$Total,-abc:format}",
             user, cnt, total);
-        //         ^^^^^^^^^ @-3 {{Log message template placeholder 'user name' should only contain chars, numbers, and underscore.}}
+        //         ^^^^^^^^^ @-3 {{Log message template placeholder 'user name' should only contain letters, numbers, and underscore.}}
         //                 ^^^^^ @-3 {{Log message template placeholder 'Cnt' should not have empty format.}}
         //                ^^^^^^^^^^^^^^^^^^ @-3 {{Log message template placeholder 'Total' should have numeric alignment instead of '-abc'.}}
     }

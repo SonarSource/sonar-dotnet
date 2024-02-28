@@ -25,17 +25,14 @@ namespace SonarAnalyzer.Test.Rules;
 [TestClass]
 public class MessageTemplatesShouldBeCorrectTest
 {
-    private static readonly IEnumerable<MetadataReference> LoggingReferences =
-        NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions()
-        .Concat(NuGetMetadataReference.NLog(Constants.NuGetLatestVersion))
-        .Concat(NuGetMetadataReference.Serilog(Constants.NuGetLatestVersion));
-
-    private static readonly VerifierBuilder Builder = new VerifierBuilder<MessageTemplatesShouldBeCorrect>()
-        .AddReferences(LoggingReferences);
+    private static readonly VerifierBuilder Builder = new VerifierBuilder<MessageTemplatesShouldBeCorrect>();
 
     [TestMethod]
     public void MessageTemplatesShouldBeCorrect_CS() =>
-        Builder.AddPaths("MessageTemplatesShouldBeCorrect.cs").Verify();
+        Builder
+        .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
+        .AddPaths("MessageTemplatesShouldBeCorrect.cs")
+        .Verify();
 
     [DataTestMethod]
     [DataRow("LogCritical")]
@@ -45,22 +42,22 @@ public class MessageTemplatesShouldBeCorrectTest
     [DataRow("LogTrace")]
     [DataRow("LogWarning")]
     public void MessageTemplatesShouldBeCorrect_MicrosoftExtensionsLogging_CS(string methodName) =>
-        Builder.AddSnippet($$$"""
+        Builder
+        .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
+        .AddSnippet($$$"""
             using System;
             using Microsoft.Extensions.Logging;
 
             public class Program
             {
-                public void Method(ILogger logger, string user, int cnt)
+                public void Method(ILogger logger, string user, int count)
                 {
                     Console.WriteLine("Login failed for {User", user);                  // Compliant
                     logger.{{{methodName}}}("Login failed for {User}", user);           // Compliant
 
-                    logger.{{{methodName}}}("{", user);                                 // Noncompliant {{Log message template should be syntactically correct.}}
-                    logger.{{{methodName}}}("Login failed for {}", user);               // Noncompliant {{Log message template should not contain empty placeholder.}}
-                    logger.{{{methodName}}}("Login failed for {%User}", user);          // Noncompliant {{Log message template placeholder '%User' should only contain chars, numbers, and underscore.}}
-                    logger.{{{methodName}}}("Retry attempt {Cnt,r}", cnt);              // Noncompliant {{Log message template placeholder 'Cnt' should have numeric alignment instead of 'r'.}}
-                    logger.{{{methodName}}}("Retry attempt {Cnt:}", cnt);               // Noncompliant {{Log message template placeholder 'Cnt' should not have empty format.}}
+                    logger.{{{methodName}}}("{", user);                                 // Noncompliant
+                    logger.Log(LogLevel.Information, "{", user);                        // Noncompliant
+                    LoggerExtensions.{{{methodName}}}(logger, "{", user);               // Noncompliant
                 }
             }
             """).Verify();
@@ -73,23 +70,23 @@ public class MessageTemplatesShouldBeCorrectTest
     [DataRow("Warning")]
     [DataRow("Verbose")]
     public void MessageTemplatesShouldBeCorrect_Serilog_CS(string methodName) =>
-        Builder.AddSnippet($$$"""
+        Builder
+        .AddReferences(NuGetMetadataReference.Serilog(Constants.NuGetLatestVersion))
+        .AddSnippet($$$"""
             using System;
             using Serilog;
             using Serilog.Events;
 
             public class Program
             {
-                public void Method(ILogger logger, string user, int cnt)
+                public void Method(ILogger logger, string user, int count)
                 {
                     Console.WriteLine("Login failed for {User", user);                  // Compliant
                     logger.{{{methodName}}}("Login failed for {User}", user);           // Compliant
 
-                    logger.{{{methodName}}}("{", user);                                 // Noncompliant {{Log message template should be syntactically correct.}}
-                    logger.{{{methodName}}}("Login failed for {}", user);               // Noncompliant {{Log message template should not contain empty placeholder.}}
-                    logger.{{{methodName}}}("Login failed for {%User}", user);          // Noncompliant {{Log message template placeholder '%User' should only contain chars, numbers, and underscore.}}
-                    logger.{{{methodName}}}("Retry attempt {Cnt,r}", cnt);              // Noncompliant {{Log message template placeholder 'Cnt' should have numeric alignment instead of 'r'.}}
-                    logger.{{{methodName}}}("Retry attempt {Cnt:}", cnt);               // Noncompliant {{Log message template placeholder 'Cnt' should not have empty format.}}
+                    logger.{{{methodName}}}("{", user);                                 // Noncompliant
+                    Log.{{{methodName}}}("{", user);                                    // Noncompliant
+                    Log.Write(LogEventLevel.Verbose, "{", user);                        // Noncompliant
                 }
             }
             """).Verify();
@@ -104,34 +101,23 @@ public class MessageTemplatesShouldBeCorrectTest
     [DataRow("ConditionalTrace")]
     [DataRow("Warn")]
     public void MessageTemplatesShouldBeCorrect_NLog_CS(string methodName) =>
-        Builder.AddSnippet($$$"""
+        Builder
+        .AddReferences(NuGetMetadataReference.NLog(Constants.NuGetLatestVersion))
+        .AddSnippet($$$"""
             using System;
             using NLog;
 
             public class Program
             {
-                public void Method(ILogger iLogger, Logger logger, MyLogger myLogger, string user, int cnt)
+                public void Method(ILogger iLogger, Logger logger, MyLogger myLogger, string user, int count)
                 {
                     Console.WriteLine("Login failed for {User", user);                  // Compliant
                     logger.{{{methodName}}}("Login failed for {User}", user);           // Compliant
 
-                    iLogger.{{{methodName}}}("{", user);                                 // Noncompliant {{Log message template should be syntactically correct.}}
-                    iLogger.{{{methodName}}}("Login failed for {}", user);               // Noncompliant {{Log message template should not contain empty placeholder.}}
-                    iLogger.{{{methodName}}}("Login failed for {%User}", user);          // Noncompliant {{Log message template placeholder '%User' should only contain chars, numbers, and underscore.}}
-                    iLogger.{{{methodName}}}("Retry attempt {Cnt,r}", cnt);              // Noncompliant {{Log message template placeholder 'Cnt' should have numeric alignment instead of 'r'.}}
-                    iLogger.{{{methodName}}}("Retry attempt {Cnt:}", cnt);               // Noncompliant {{Log message template placeholder 'Cnt' should not have empty format.}}
-
-                    logger.{{{methodName}}}("{", user);                                 // Noncompliant {{Log message template should be syntactically correct.}}
-                    logger.{{{methodName}}}("Login failed for {}", user);               // Noncompliant {{Log message template should not contain empty placeholder.}}
-                    logger.{{{methodName}}}("Login failed for {%User}", user);          // Noncompliant {{Log message template placeholder '%User' should only contain chars, numbers, and underscore.}}
-                    logger.{{{methodName}}}("Retry attempt {Cnt,r}", cnt);              // Noncompliant {{Log message template placeholder 'Cnt' should have numeric alignment instead of 'r'.}}
-                    logger.{{{methodName}}}("Retry attempt {Cnt:}", cnt);               // Noncompliant {{Log message template placeholder 'Cnt' should not have empty format.}}
-
-                    myLogger.{{{methodName}}}("{", user);                                 // Noncompliant {{Log message template should be syntactically correct.}}
-                    myLogger.{{{methodName}}}("Login failed for {}", user);               // Noncompliant {{Log message template should not contain empty placeholder.}}
-                    myLogger.{{{methodName}}}("Login failed for {%User}", user);          // Noncompliant {{Log message template placeholder '%User' should only contain chars, numbers, and underscore.}}
-                    myLogger.{{{methodName}}}("Retry attempt {Cnt,r}", cnt);              // Noncompliant {{Log message template placeholder 'Cnt' should have numeric alignment instead of 'r'.}}
-                    myLogger.{{{methodName}}}("Retry attempt {Cnt:}", cnt);               // Noncompliant {{Log message template placeholder 'Cnt' should not have empty format.}}
+                    iLogger.{{{methodName}}}("{", user);                                // Noncompliant
+                    logger.{{{methodName}}}("{", user);                                 // Noncompliant
+                    myLogger.{{{methodName}}}("{", user);                               // Noncompliant
+                    ILoggerExtensions.ConditionalDebug(iLogger, "{", user);             // Noncompliant
                 }
             }
             public class MyLogger : Logger { }
