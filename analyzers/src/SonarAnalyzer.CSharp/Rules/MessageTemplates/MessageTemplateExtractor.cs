@@ -20,7 +20,7 @@
 
 using static Roslyn.Utilities.SonarAnalyzer.Shared.LoggingFrameworkMethods;
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.Rules.MessageTemplates;
 
 internal static class MessageTemplateExtractor
 {

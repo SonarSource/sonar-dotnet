@@ -35,13 +35,14 @@ public class MessageTemplatesShouldBeCorrectTest
         .Verify();
 
     [DataTestMethod]
-    [DataRow("LogCritical")]
-    [DataRow("LogDebug")]
-    [DataRow("LogError")]
-    [DataRow("LogInformation")]
-    [DataRow("LogTrace")]
-    [DataRow("LogWarning")]
-    public void MessageTemplatesShouldBeCorrect_MicrosoftExtensionsLogging_CS(string methodName) =>
+    [DataRow("LogCritical", "")]
+    [DataRow("LogDebug", "")]
+    [DataRow("LogError", "")]
+    [DataRow("LogInformation", "")]
+    [DataRow("LogTrace", "")]
+    [DataRow("LogWarning", "")]
+    [DataRow("Log", "LogLevel.Information,")]
+    public void MessageTemplatesShouldBeCorrect_MicrosoftExtensionsLogging_CS(string methodName, string logLevel) =>
         Builder
         .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
         .AddSnippet($$$"""
@@ -50,26 +51,27 @@ public class MessageTemplatesShouldBeCorrectTest
 
             public class Program
             {
-                public void Method(ILogger logger, string user, int count)
+                public void Method(ILogger logger, string user)
                 {
-                    Console.WriteLine("Login failed for {User", user);                  // Compliant
-                    logger.{{{methodName}}}("Login failed for {User}", user);           // Compliant
+                    Console.WriteLine("Login failed for {User", user);                                  // Compliant
+                    logger.{{{methodName}}}({{{logLevel}}} "Login failed for {User}", user);            // Compliant
 
-                    logger.{{{methodName}}}("{", user);                                 // Noncompliant
-                    logger.Log(LogLevel.Information, "{", user);                        // Noncompliant
-                    LoggerExtensions.{{{methodName}}}(logger, "{", user);               // Noncompliant
+                    logger.{{{methodName}}}({{{logLevel}}} "{", user);                                  // Noncompliant
+                    LoggerExtensions.{{{methodName}}}(logger, {{{logLevel}}} "{", user);                // Noncompliant
                 }
             }
-            """).Verify();
+            """)
+        .Verify();
 
     [DataTestMethod]
-    [DataRow("Debug")]
-    [DataRow("Error")]
-    [DataRow("Information")]
-    [DataRow("Fatal")]
-    [DataRow("Warning")]
-    [DataRow("Verbose")]
-    public void MessageTemplatesShouldBeCorrect_Serilog_CS(string methodName) =>
+    [DataRow("Debug", "")]
+    [DataRow("Error", "")]
+    [DataRow("Information", "")]
+    [DataRow("Fatal", "")]
+    [DataRow("Warning", "")]
+    [DataRow("Verbose", "")]
+    [DataRow("Write", "LogEventLevel.Verbose,")]
+    public void MessageTemplatesShouldBeCorrect_Serilog_CS(string methodName, string logEventLevel) =>
         Builder
         .AddReferences(NuGetMetadataReference.Serilog(Constants.NuGetLatestVersion))
         .AddSnippet($$$"""
@@ -79,17 +81,17 @@ public class MessageTemplatesShouldBeCorrectTest
 
             public class Program
             {
-                public void Method(ILogger logger, string user, int count)
+                public void Method(ILogger logger, string user)
                 {
-                    Console.WriteLine("Login failed for {User", user);                  // Compliant
-                    logger.{{{methodName}}}("Login failed for {User}", user);           // Compliant
+                    Console.WriteLine("Login failed for {User", user);                                     // Compliant
+                    logger.{{{methodName}}}({{{logEventLevel}}} "Login failed for {User}", user);          // Compliant
 
-                    logger.{{{methodName}}}("{", user);                                 // Noncompliant
-                    Log.{{{methodName}}}("{", user);                                    // Noncompliant
-                    Log.Write(LogEventLevel.Verbose, "{", user);                        // Noncompliant
+                    logger.{{{methodName}}}({{{logEventLevel}}} "{", user);                                // Noncompliant
+                    Log.{{{methodName}}}({{{logEventLevel}}} "{", user);                                   // Noncompliant
                 }
             }
-            """).Verify();
+            """)
+        .Verify();
 
     [DataTestMethod]
     [DataRow("Debug")]
@@ -109,7 +111,7 @@ public class MessageTemplatesShouldBeCorrectTest
 
             public class Program
             {
-                public void Method(ILogger iLogger, Logger logger, MyLogger myLogger, string user, int count)
+                public void Method(ILogger iLogger, Logger logger, MyLogger myLogger, string user)
                 {
                     Console.WriteLine("Login failed for {User", user);                  // Compliant
                     logger.{{{methodName}}}("Login failed for {User}", user);           // Compliant
@@ -117,9 +119,32 @@ public class MessageTemplatesShouldBeCorrectTest
                     iLogger.{{{methodName}}}("{", user);                                // Noncompliant
                     logger.{{{methodName}}}("{", user);                                 // Noncompliant
                     myLogger.{{{methodName}}}("{", user);                               // Noncompliant
-                    ILoggerExtensions.ConditionalDebug(iLogger, "{", user);             // Noncompliant
                 }
             }
             public class MyLogger : Logger { }
-            """).Verify();
+            """)
+        .Verify();
+
+    [DataTestMethod]
+    [DataRow("ConditionalDebug")]
+    [DataRow("ConditionalTrace")]
+    public void MessageTemplatesShouldBeCorrect_NLog_ConditionalExtensions_CS(string methodName) =>
+        Builder
+        .AddReferences(NuGetMetadataReference.NLog(Constants.NuGetLatestVersion))
+        .AddSnippet($$$"""
+            using System;
+            using NLog;
+
+            public class Program
+            {
+                public void Method(ILogger iLogger, string user)
+                {
+                    Console.WriteLine("Login failed for {User", user);                  // Compliant
+
+                    ILoggerExtensions.{{{methodName}}}(iLogger, "{", user);             // Noncompliant
+                }
+            }
+            public class MyLogger : Logger { }
+            """)
+        .Verify();
 }

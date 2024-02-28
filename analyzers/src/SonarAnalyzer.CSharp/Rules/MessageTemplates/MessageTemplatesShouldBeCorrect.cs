@@ -19,6 +19,7 @@
  */
 
 using System.Text.RegularExpressions;
+using SonarAnalyzer.Rules.MessageTemplates;
 
 namespace SonarAnalyzer.Rules.CSharp;
 
