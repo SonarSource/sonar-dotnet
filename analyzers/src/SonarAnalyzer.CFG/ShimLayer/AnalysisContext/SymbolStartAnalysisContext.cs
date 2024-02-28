@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using CS = Microsoft.CodeAnalysis.CSharp;
 namespace SonarAnalyzer.ShimLayer.AnalysisContext;
 
@@ -27,6 +27,10 @@ public class SymbolStartAnalysisContext
     private readonly Action<Action<CodeBlockAnalysisContext>> registerCodeBlockAction;
     private readonly Action<Action<CodeBlockStartAnalysisContext<CS.SyntaxKind>>> registerCodeBlockStartActionCS;
     private readonly Action<Action<OperationAnalysisContext>, ImmutableArray<OperationKind>> registerOperationAction;
+    private readonly Action<Action<OperationBlockAnalysisContext>> registerOperationBlockAction;
+    private readonly Action<Action<OperationBlockStartAnalysisContext>> registerOperationBlockStartAction;
+    private readonly Action<Action<SymbolAnalysisContext>> registerSymbolEndAction;
+    private readonly Action<Action<SyntaxNodeAnalysisContext>, ImmutableArray<SyntaxKind>> registerSyntaxNodeActionCS;
 
     public SymbolStartAnalysisContext(
         CancellationToken cancellationToken,
@@ -35,8 +39,12 @@ public class SymbolStartAnalysisContext
         ISymbol symbol,
         Action<Action<CodeBlockAnalysisContext>> registerCodeBlockAction,
         Action<Action<CodeBlockStartAnalysisContext<CS.SyntaxKind>>> registerCodeBlockStartActionCS,
-        Action<Action<OperationAnalysisContext>, ImmutableArray<OperationKind>> registerOperationAction
-        )
+        Action<Action<OperationAnalysisContext>, ImmutableArray<OperationKind>> registerOperationAction,
+        Action<Action<OperationBlockAnalysisContext>> registerOperationBlockAction,
+        Action<Action<OperationBlockStartAnalysisContext>> registerOperationBlockStartAction,
+        Action<Action<SymbolAnalysisContext>> registerSymbolEndAction,
+        Action<Action<SyntaxNodeAnalysisContext>, ImmutableArray<CS.SyntaxKind>> registerSyntaxNodeActionCS
+            )
     {
         CancellationToken = cancellationToken;
         Compilation = compilation;
@@ -45,6 +53,10 @@ public class SymbolStartAnalysisContext
         this.registerCodeBlockAction = registerCodeBlockAction;
         this.registerCodeBlockStartActionCS = registerCodeBlockStartActionCS;
         this.registerOperationAction = registerOperationAction;
+        this.registerOperationBlockAction = registerOperationBlockAction;
+        this.registerOperationBlockStartAction = registerOperationBlockStartAction;
+        this.registerSymbolEndAction = registerSymbolEndAction;
+        this.registerSyntaxNodeActionCS = registerSyntaxNodeActionCS;
     }
 
     public CancellationToken CancellationToken { get; }
@@ -52,7 +64,9 @@ public class SymbolStartAnalysisContext
     public AnalyzerOptions Options { get; }
     public ISymbol Symbol { get; }
 
-    public void RegisterCodeBlockAction(Action<CodeBlockAnalysisContext> action) => registerCodeBlockAction(action);
+    public void RegisterCodeBlockAction(Action<CodeBlockAnalysisContext> action) =>
+        registerCodeBlockAction(action);
+
     public void RegisterCodeBlockStartAction<TLanguageKindEnum>(Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action) where TLanguageKindEnum : struct
     {
         if (typeof(TLanguageKindEnum) == typeof(CS.SyntaxKind))
@@ -69,5 +83,32 @@ public class SymbolStartAnalysisContext
             throw new ArgumentException("Invalid type parameter.", nameof(TLanguageKindEnum));
         }
     }
-    public void RegisterOperationAction(Action<OperationAnalysisContext> action, ImmutableArray<OperationKind> operationKinds) => registerOperationAction(action, operationKinds);
+
+    public void RegisterOperationAction(Action<OperationAnalysisContext> action, ImmutableArray<OperationKind> operationKinds) =>
+        registerOperationAction(action, operationKinds);
+
+    public void RegisterOperationBlockAction(Action<OperationBlockAnalysisContext> action) =>
+        registerOperationBlockAction(action);
+
+    public void RegisterOperationBlockStartAction(Action<OperationBlockStartAnalysisContext> action) =>
+        registerOperationBlockStartAction(action);
+
+    public void RegisterSymbolEndAction(Action<SymbolAnalysisContext> action) =>
+        registerSymbolEndAction(action);
+
+    public void RegisterSyntaxNodeAction<TLanguageKindEnum>(Action<SyntaxNodeAnalysisContext> action, params TLanguageKindEnum[] syntaxKinds) where TLanguageKindEnum : struct
+    {
+        if (typeof(TLanguageKindEnum) == typeof(CS.SyntaxKind))
+        {
+            registerSyntaxNodeActionCS(action, syntaxKinds.Cast<CS.SyntaxKind>().ToImmutableArray());
+        }
+        else if (typeof(TLanguageKindEnum).FullName == "Microsoft.CodeAnalysis.VisualBasic.SyntaxKind")
+        {
+            throw new NotImplementedException("Add a reference to the Microsoft.CodeAnalysis.VisualBasic.Workspaces package.");
+        }
+        else
+        {
+            throw new ArgumentException("Invalid type parameter.", nameof(TLanguageKindEnum));
+        }
+    }
 }
