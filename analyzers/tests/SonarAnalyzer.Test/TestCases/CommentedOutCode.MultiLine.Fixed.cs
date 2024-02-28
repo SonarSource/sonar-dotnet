@@ -20,3 +20,18 @@
         return 42;
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8819
+class Repro_8819
+{
+    void IncorrectRemovalOfNewLine()
+    {
+        // Sentence before        // Sentence after
+    }
+
+    void CorrectRemovalOfCommentedOutLine()
+    {
+        var aStatement = "Hello, World!";
+        // Sentence after
+    }
+}
