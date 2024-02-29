@@ -16,8 +16,9 @@ public class Program
         logger.LogWarning(new EventId(1), (Exception)e.InnerException, "Message!");
         logger.LogCritical(args: new object[] { e, LogLevel.Critical }, message: "Expected exception.");        // FN
         logger.LogCritical(message: "Expected exception.", eventId: new EventId(42), exception: new Exception(), args: e);
+        logger.LogCritical(message: "Expected exception.", eventId: new EventId(42), args: e);
 //      ^^^^^^^^^^^^^^^^^^
-//                                                                                                               ^^^^^^^ Secondary@-1
+//                                                                                   ^^^^^^^ Secondary@-1
         logger.LogCritical("Expected exception.", new NullReferenceException());    // Noncompliant
                                                                                     // Secondary@-1
     }

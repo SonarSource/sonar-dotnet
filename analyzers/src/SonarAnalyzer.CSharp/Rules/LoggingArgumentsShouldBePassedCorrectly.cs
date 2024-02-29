@@ -48,19 +48,20 @@ public sealed class LoggingArgumentsShouldBePassedCorrectly : SonarDiagnosticAna
                 }
                 if (invocationSymbol.HasContainingType(KnownType.Microsoft_Extensions_Logging_LoggerExtensions, false))
                 {
-                    CheckInvalidParams(invocation, invocationSymbol, c, MicrosoftLoggingExtensionsInvalidTypes);
+                    CheckInvalidParams(invocation, invocationSymbol, c, Filter(invocationSymbol, MicrosoftLoggingExtensionsInvalidTypes));
                 }
                 else if (invocationSymbol.HasContainingType(KnownType.Castle_Core_Logging_ILogger, true))
                 {
-                    CheckInvalidParams(invocation, invocationSymbol, c, CastleCoreInvalidTypes);
+                    CheckInvalidParams(invocation, invocationSymbol, c, Filter(invocationSymbol, CastleCoreInvalidTypes));
                 }
                 else if (invocationSymbol.HasContainingType(KnownType.Serilog_ILogger, true)
                          || invocationSymbol.HasContainingType(KnownType.Serilog_Log, false)
                          || invocationSymbol.HasContainingType(KnownType.NLog_ILoggerBase, true)
                          || invocationSymbol.HasContainingType(KnownType.NLog_ILoggerExtensions, false))
                 {
-                    CheckInvalidParams(invocation, invocationSymbol, c, NLogAndSerilogInvalidTypes);
-                    CheckInvalidTypeParams(invocation, invocationSymbol, c, NLogAndSerilogInvalidTypes);
+                    var knownTypes = Filter(invocationSymbol, NLogAndSerilogInvalidTypes);
+                    CheckInvalidParams(invocation, invocationSymbol, c, knownTypes);
+                    CheckInvalidTypeParams(invocation, invocationSymbol, c, knownTypes);
                 }
             },
             SyntaxKind.InvocationExpression);
@@ -68,7 +69,7 @@ public sealed class LoggingArgumentsShouldBePassedCorrectly : SonarDiagnosticAna
     private static void CheckInvalidParams(InvocationExpressionSyntax invocation, IMethodSymbol invocationSymbol, SonarSyntaxNodeReportingContext c, ImmutableArray<KnownType> knownTypes)
     {
         var paramsParameter = invocationSymbol.Parameters.FirstOrDefault(x => x.IsParams);
-        if (paramsParameter is null)
+        if (paramsParameter is null || knownTypes.IsEmpty)
         {
             return;
         }
@@ -88,7 +89,7 @@ public sealed class LoggingArgumentsShouldBePassedCorrectly : SonarDiagnosticAna
 
     private static void CheckInvalidTypeParams(InvocationExpressionSyntax invocation, IMethodSymbol methodSymbol, SonarSyntaxNodeReportingContext c, ImmutableArray<KnownType> knownTypes)
     {
-        if (!IsNLogIgnoredOverload(methodSymbol) && methodSymbol.TypeArguments.Any(x => x.DerivesFromAny(knownTypes)))
+        if (!knownTypes.IsEmpty && !IsNLogIgnoredOverload(methodSymbol) && methodSymbol.TypeArguments.Any(x => x.DerivesFromAny(knownTypes)))
         {
             var typeParameterNames = methodSymbol.TypeParameters.Select(x => x.MetadataName).ToArray();
             var positions = methodSymbol.ConstructedFrom.Parameters.Where(x => typeParameterNames.Contains(x.Type.MetadataName)).Select(x => methodSymbol.ConstructedFrom.Parameters.IndexOf(x));
@@ -123,4 +124,7 @@ public sealed class LoggingArgumentsShouldBePassedCorrectly : SonarDiagnosticAna
 
     private static bool IsInvalidArgument(ArgumentSyntax argumentSyntax, SemanticModel model, ImmutableArray<KnownType> knownTypes) =>
         model.GetTypeInfo(argumentSyntax.Expression).Type?.DerivesFromAny(knownTypes) is true;
+
+    private static ImmutableArray<KnownType> Filter(IMethodSymbol methodSymbol, ImmutableArray<KnownType> knownTypes) =>
+        knownTypes.Where(knownType => !methodSymbol.ConstructedFrom.Parameters.Any(x => x.Type.DerivesFrom(knownType))).ToImmutableArray();
 }
