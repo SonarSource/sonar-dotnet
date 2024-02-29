@@ -53,7 +53,8 @@ public static class CompilationStartAnalysisContextExtensions
         // Action<Sonar.SymbolStartAnalysisContext> provided by the caller. The tricky part is "copying" the Register.. methods. We do so by wrapping them into delegates and passing these.
         // These delegates are very simple: They just take the parameters for the registration method and pass them to the corresponding Roslyn.SymbolStartAnalysisContext.Register.. method.
         // This doesn't work particular well for generic methods (like CodeBlockStartAction<TLanguageKindEnum>) because we can not pass an open generic Action<> to the constructor. But the affected
-        // methods only allow CS.SyntaxKind and VB.SyntaxKind as type parameters anyway, so we can created two closed generic versions for these methods.
+        // methods only allow CS.SyntaxKind and VB.SyntaxKind as type parameters anyway, so we can created two closed generic versions for these methods. The VB version is not supported (yet) because
+        // the Microsoft.CodeAnalysis.VisualBasic.Workspaces is not referenced in this project.
 
         // Action<Roslyn.SymbolStartAnalysisContext> lambda = symbolStartAnalysisContextParameter =>
         //    shimmedActionParameter(new Sonar.SymbolStartAnalysisContext(
@@ -88,12 +89,14 @@ public static class CompilationStartAnalysisContextExtensions
             Call(contextParameter, registerMethod, lambda, symbolKindParameter),
             contextParameter, shimmedActionParameter, symbolKindParameter).Compile();
 
+        // registerActionParameter => symbolStartAnalysisContextParameter."registrationMethodName"<typeArguments>(registerActionParameter)
         static Expression<Action<Action<TContext>>> RegisterLambda<TContext>(ParameterExpression symbolStartAnalysisContextParameter, string registrationMethodName, params Type[] typeArguments)
         {
             var registerActionParameter = Parameter(typeof(Action<TContext>));
             return Lambda<Action<Action<TContext>>>(Call(symbolStartAnalysisContextParameter, registrationMethodName, typeArguments, registerActionParameter), registerActionParameter);
         }
 
+        // (registerActionParameter, additionalParameter) => symbolStartAnalysisContextParameter."registrationMethodName"<typeArguments>(registerActionParameter, additionalParameter)
         static Expression<Action<Action<TContext>, TParameter>> RegisterLambdaWithAdditionalParameter<TContext, TParameter>(
             ParameterExpression symbolStartAnalysisContextParameter, string registrationMethodName, params Type[] typeArguments)
         {
