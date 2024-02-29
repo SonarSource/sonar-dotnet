@@ -4,7 +4,7 @@ Framework</a> (MEF), applying the <a
 href="https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.composition.partcreationpolicyattribute"><code>PartCreationPolicyAttribute</code></a>
 is necessary. For the <a
 href="https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.composition.partcreationpolicyattribute"><code>PartCreationPolicyAttribute</code></a>
-to be meaningful in the context of an export, it is required to also annotate the class with the <a
+to be meaningful in the context of an export, the class must also be annotated with the <a
 href="https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.composition.exportattribute"><code>ExportAttribute</code></a>.</p>
 <p>This rule raises an issue when a class is annotated with the <code>PartCreationPolicyAttribute</code> but not with the
 <code>ExportAttribute</code>.</p>
