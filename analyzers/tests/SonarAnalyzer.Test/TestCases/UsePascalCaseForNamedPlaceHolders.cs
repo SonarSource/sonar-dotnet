@@ -19,24 +19,32 @@ public class Program
         logger.BeginScope("scope");
         logger.BeginScope("{arg}", arg);
 
-        logger.LogInformation("Arg: {arg}", arg);                   // Noncompliant {{Use PascalCase for named placeholders.}}
-        //                           ^^^
-        logger.LogInformation("Arg: {Arg} {arg}", arg, arg);        // Noncompliant
-        //                                 ^^^
-        logger.LogInformation("Arg: {arg} {Arg}", arg, arg);        // Noncompliant
-        //                           ^^^
-        logger.LogInformation("Arg: {arg} {Arg}", arg, arg);        // Noncompliant
-        //                           ^^^
-        logger.LogInformation("Arg: {arg} {arg}", arg, arg);
-        //                           ^^^
+        logger.LogInformation("Arg: {arg}", arg);
+        //                    ^^^^^^^^^^^^ {{Use PascalCase for named placeholders.}}
+        //                           ^^^ Secondary @-1
+
+        logger.LogInformation("Arg: {Arg} {arg}", arg, arg);
+        //                    ^^^^^^^^^^^^^^^^^^
         //                                 ^^^ Secondary @-1
+
+        logger.LogInformation("Arg: {arg} {Arg}", arg, arg);
+        //                    ^^^^^^^^^^^^^^^^^^
+        //                           ^^^ Secondary @-1
+
+        logger.LogInformation("Arg: {arg} {arg}", arg, arg);
+        //                    ^^^^^^^^^^^^^^^^^^
+        //                           ^^^ Secondary @-1
+        //                                 ^^^ Secondary @-2
+
         logger.LogInformation(@"
              Arg: {arg}
              {arg}", arg, arg);
-        //         ^^^ @-1
-        //    ^^^ Secondary @-1
+        // Noncompliant @-3
+        // Secondary @-3
+        // Secondary @-3
 
         LoggerExtensions.LogInformation(logger, "Arg: {arg}", arg); // Noncompliant
+                                                                    // Secondary @-1
 
         logger.LogInformation("Arg: {Argumentvalue}", arg);         // FN - should be {ArgumentValue}, but the analyzer doesn't use any kind of word dictionary, it only checks the first character
     }
@@ -46,21 +54,27 @@ public class Program
         logger.LogInformation(args: new object[] { arg }, message: "Arg: {Arg}");   // Compliant
         logger.LogInformation(message: "Arg: {Arg}", args: new object[] { arg });   // Compliant
         logger.LogInformation(args: new object[] { arg }, message: "Arg: {arg}");   // Noncompliant
+                                                                                    // Secondary @-1
         logger.LogInformation(message: "Arg: {arg}", args: new object[] { arg });   // Noncompliant
+                                                                                    // Secondary @-1
     }
 
     public void IncorrectPlaceholderFormat(ILogger logger, int arg)
     {
         logger.LogInformation("Arg: {@arg}", arg);      // Noncompliant
+                                                        // Secondary @-1
         logger.LogInformation("Arg: {&arg}", arg);
         logger.LogInformation("Arg: {arg,23}", arg);    // Noncompliant
+                                                        // Secondary @-1
         logger.LogInformation("Arg: {arg,arg}", arg);
     }
 
     public void ClassImplementsILogger(CustomLogger logger, int arg)
     {
         logger.LogCritical("Arg: {arg}", arg);                      // Noncompliant
+                                                                    // Secondary @-1
         logger.LogInformation("Arg: {arg}", arg);                   // Noncompliant
+                                                                    // Secondary @-1
     }
 
     public void ClassDoesNotImplementILogger(NotILogger notILogger, int arg)
