@@ -8,6 +8,12 @@
     },
     {
       "Id": "S2259",
+      "Message": "\u0027Me.tLangList.FirstOrDefault(Function(l) l.ShortLang = Master.eSettings.TVDBLanguage)\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2499",
+      "Location": "Line 2499 Position 40-124"
+    },
+    {
+      "Id": "S2259",
       "Message": "\u0027Me.SettingsPanels.FirstOrDefault(Function(p) p.Name = tvSettings.SelectedNode.Name)\u0027 is Nothing on at least one execution path.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L4315",
       "Location": "Line 4315 Position 24-107"

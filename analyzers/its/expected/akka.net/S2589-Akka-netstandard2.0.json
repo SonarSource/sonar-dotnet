@@ -3,6 +3,12 @@
     {
       "Id": "S2589",
       "Message": "Change this condition so that it does not always evaluate to \u0027True\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.DefaultMessages.cs#L260",
+      "Location": "Line 260 Position 30-46"
+    },
+    {
+      "Id": "S2589",
+      "Message": "Change this condition so that it does not always evaluate to \u0027True\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/RetrySupport.cs#L121",
       "Location": "Line 121 Position 34-56"
     },

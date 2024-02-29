@@ -104,6 +104,12 @@
     },
     {
       "Id": "S2259",
+      "Message": "\u0027conf.Files.FirstOrDefault(Function(y) y.Process = True AndAlso y.Type = \u0022tvseason\u0022)\u0027 is Nothing on at least one execution path.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L443",
+      "Location": "Line 443 Position 85-168"
+    },
+    {
+      "Id": "S2259",
       "Message": "\u0027mediaPath\u0027 is Nothing on at least one execution path.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L523",
       "Location": "Line 523 Position 25-34"
