@@ -1,0 +1,42 @@
+<h2>Why is this an issue?</h2>
+<p>Most logging frameworks have methods that take a log level, an event ID or an exception as a separate input next to the log format and its
+arguments. There is a high chance that if the log level, the event ID or the exception are passed as the arguments to the message format, it was a
+mistake. This rule is going to raise in that scenario.</p>
+<p>The rule covers the following logging frameworks:</p>
+<ul>
+  <li> Nuget package - <a href="https://www.nuget.org/packages/Castle.Core">Castle.Core</a> </li>
+  <li> Nuget package - <a href="https://www.nuget.org/packages/Serilog">Serilog</a> </li>
+  <li> Nuget package - <a href="https://www.nuget.org/packages/NLog">Nlog</a> </li>
+  <li> Nuget package - <a href="https://www.nuget.org/packages/Microsoft.Extensions.Logging">Microsoft.Extensions.Logging</a> </li>
+</ul>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+try { }
+catch (Exception ex)
+{
+    logger.LogDebug("An exception occured {Exception} with {EventId}.", ex, eventId); // Noncompliant
+}
+</pre>
+<pre data-diff-id="1" data-diff-type="compliant">
+try { }
+catch (Exception ex)
+{
+    logger.LogDebug(eventId, ex, "An exception occured.");
+}
+</pre>
+<h3>Exceptions</h3>
+<p>This rule will not raise an issue if one of the parameters mentioned above is passed twice, once as a separate argument to the invocation and once
+as an argument to the message format.</p>
+<pre>
+try { }
+catch (Exception ex)
+{
+    logger.LogDebug(ex, "An exception occured {Exception}.", ex); // Compliant
+}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.logging.loggerextensions">LoggerExtensions
+  Class</a> </li>
+</ul>
+

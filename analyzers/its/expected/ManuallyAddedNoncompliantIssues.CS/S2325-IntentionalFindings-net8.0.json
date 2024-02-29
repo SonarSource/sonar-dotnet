@@ -5,6 +5,12 @@
       "Message": "Make \u0027ValueAccessOnEmptyNullable\u0027 a static method.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S3655.cs#L13",
       "Location": "Line 13 Position 21-47"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Log\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S6668.cs#L8",
+      "Location": "Line 8 Position 22-25"
     }
   ]
 }

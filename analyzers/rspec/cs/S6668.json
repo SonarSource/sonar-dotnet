@@ -1,0 +1,17 @@
+{
+  "title": "Logging arguments should be passed to the correct parameter",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "logging"
+  ],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-6668",
+  "sqKey": "S6668",
+  "scope": "Main",
+  "quickfix": "targeted"
+}
