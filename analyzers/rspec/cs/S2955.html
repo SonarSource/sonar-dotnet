@@ -1,39 +1,58 @@
 <h2>Why is this an issue?</h2>
-<p>When constraints have not been applied to restrict a generic type parameter to be a reference type, then a value type, such as a
-<code>struct</code>, could also be passed. In such cases, comparing the type parameter to <code>null</code> would always be false, because a
-<code>struct</code> can be empty, but never <code>null</code>. If a value type is truly what’s expected, then the comparison should use
-<code>default()</code>. If it’s not, then constraints should be added so that no value type can be passed.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-private bool IsDefault&lt;T&gt;(T value)
+<p>In C#, without constraints on a generic type parameter, both <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/reference-types">reference</a> and <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/value-types">value</a> types can be passed. However, comparing
+this type parameter to <code>null</code> can be misleading as value types, like <code>struct</code>, can never be null.</p>
+<h2>How to fix it</h2>
+<p>To avoid unexpected comparisons:</p>
+<ul>
+  <li> if you expect a value type, use <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/default#default-operator">default()</a> for comparison </li>
+  <li> if you expect a reference type, add a <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/constraints-on-type-parameters">constraint</a> to prevent value
+  types from being passed </li>
+</ul>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+bool IsDefault&lt;T&gt;(T value)
 {
   if (value == null) // Noncompliant
   {
     // ...
   }
-  // ...
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
-private bool IsDefault&lt;T&gt;(T value)
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+bool IsDefault&lt;T&gt;(T value)
 {
   if(object.Equals(value, default(T)))
   {
     // ...
   }
-  // ...
 }
 </pre>
 <p>or</p>
 <pre>
-private bool IsDefault&lt;T&gt;(T value) where T : class
+bool IsDefault&lt;T&gt;(T value) where T : class
 {
   if (value == null)
   {
     // ...
   }
-  // ...
 }
 </pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/constraints-on-type-parameters">Constraints on type parameters</a>
+  </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/reference-types">Reference types</a>
+  </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/value-types">Value types</a> </li>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/default#default-operator"><code>default</code> operator</a> </li>
+</ul>
 

@@ -1,32 +1,56 @@
 <h2>Why is this an issue?</h2>
-<p>Floating point math is imprecise because of the challenges of storing such values in a binary representation. Even worse, floating point math is
-not associative; push a <code>float</code> or a <code>double</code> through a series of simple mathematical operations and the answer will be
-different based on the order of those operation because of the rounding that takes place at each step.</p>
+<p>Floating point numbers in C# (and in most other programming languages) are not precise. They are a binary approximation of the actual value. This
+means that even if two floating point numbers appear to be equal, they might not be due to the tiny differences in their binary representation.</p>
 <p>Even simple floating point assignments are not simple:</p>
 <pre>
 float f = 0.100000001f; // 0.1
 double d = 0.10000000000000001; // 0.1
 </pre>
-<p>(Results will vary based on compiler and compiler settings)</p>
-<p>Therefore, the use of the equality (<code>==</code>) and inequality (<code>!=</code>) operators on <code>float</code> or <code>double</code> values
-is almost always an error.</p>
-<p>This rule checks for the use of direct and indirect equality/inequality tests on floats and doubles.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<p>(Note: Results may vary based on the compiler and its settings)</p>
+<p>This issue is further compounded by the <a href="https://en.wikipedia.org/wiki/Associative_property">non-associative</a> nature of floating point
+arithmetic. The order in which operations are performed can affect the outcome due to the rounding that occurs at each step. Consequently, the outcome
+of a series of mathematical operations can vary based on the order of operations.</p>
+<p>As a result, using the equality (<code>==</code>) or inequality (<code>!=</code>) operators with <code>float</code> or <code>double</code> values
+is typically a mistake, as it can lead to unexpected behavior.</p>
+<h2>How to fix it</h2>
+<p>Consider using a small tolerance value to check if the numbers are "close enough" to be considered equal. This tolerance value, often called
+<code>epsilon</code>, should be chosen based on the specifics of your program.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 float myNumber = 3.146f;
-if ( myNumber == 3.146f ) //Noncompliant. Because of floating point imprecision, this will be false
+
+if (myNumber == 3.146f) //Noncompliant: due to floating point imprecision, this will likely be false
 {
   // ...
 }
 
-if (myNumber &lt;= 3.146f &amp;&amp; mNumber &gt;= 3.146f) // Noncompliant indirect equality test
-{
-  // ...
-}
-
-if (myNumber &lt; 4 || myNumber &gt; 4) // Noncompliant indirect inequality test
+if (myNumber &lt; 4 || myNumber &gt; 4) // Noncompliant: indirect inequality test
 {
   // ...
 }
 </pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+float myNumber = 3.146f;
+float epsilon = 0.0001f; // or some other small value
+
+if (Math.Abs(myNumber - 3.146f) &lt; epsilon)
+{
+  // ...
+}
+
+if (myNumber &lt;= 4 - epsilon || myNumber &gt;= 4 + epsilon)
+{
+  // ...
+}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html">Floating-Point Arithmetic Complexities</a> by David Goldberg </li>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/floating-point-numeric-types#comparing-floating-point-numbers">Floating-point numeric types</a> </li>
+  <li> Wikipedia - <a href="https://en.wikipedia.org/wiki/Associative_property">Associative property</a> </li>
+</ul>
 
