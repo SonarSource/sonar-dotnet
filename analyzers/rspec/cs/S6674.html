@@ -1,0 +1,46 @@
+<p>A <a href="https://messagetemplates.org/">message template</a> must conform to the specification. The rule raises an issue if the template string
+violates the template string grammar.</p>
+<h2>Why is this an issue?</h2>
+<p>A message template needs to comply with a set of rules. <a
+href="https://learn.microsoft.com/en-us/dotnet/core/extensions/logging-providers">Logging provider</a> parse the template and enrich log entries with
+the information found in the template. An unparsable message template leads to corrupted log entries and might result in a loss of information in the
+logs.</p>
+<p>The rule covers the following logging frameworks:</p>
+<ul>
+  <li> Nuget package - <a href="https://www.nuget.org/packages/Serilog">Serilog</a> </li>
+  <li> Nuget package - <a href="https://www.nuget.org/packages/NLog">Nlog</a> </li>
+  <li> Nuget package - <a href="https://www.nuget.org/packages/Microsoft.Extensions.Logging">Microsoft.Extensions.Logging</a> </li>
+</ul>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+logger.LogError("Login failed for {User", user);       // Noncompliant: Missing closing bracket
+logger.LogError("Login failed for {{User}", user);     // Noncompliant: Opening bracket is escaped
+logger.LogError("Login failed for {&amp;User}", user);     // Noncompliant: Only '@' and '$' are allowed as prefix
+logger.LogError("Login failed for {User-Name}", user); // Noncompliant: Only chars, numbers, and underscore are allowed for placeholders
+logger.LogDebug("Retry attempt {Cnt,r}", cnt);         // Noncompliant: The alignment specifier must be numeric
+logger.LogDebug("Retry attempt {Cnt:}", cnt);          // Noncompliant: Empty format specifier is not allowed
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+logger.LogError("Login failed for {User}", user);
+logger.LogError("Login failed for {{{User}}}", user);
+logger.LogError("Login failed for {User}", user);
+logger.LogError("Login failed for {User_Name}", user);
+logger.LogDebug("Retry attempt {Cnt,-5}", cnt);
+logger.LogDebug("Retry attempt {Cnt:000}", cnt);
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Message Templates - <a href="https://messagetemplates.org/">Message template specification</a> </li>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/core/extensions/logging?tabs=command-line#log-message-template-formatting">Log message template
+  formatting</a> </li>
+  <li> NLog - <a href="https://github.com/NLog/NLog/wiki/How-to-use-structured-logging">How to use structured logging</a> </li>
+  <li> Serilog - <a href="https://github.com/serilog/serilog/wiki/Structured-Data">Structured Data</a> </li>
+  <li> Serilog - <a
+  href="https://github.com/Suchiman/SerilogAnalyzer/blob/master/README.md#serilog002-message-template-syntax-verifier"><code>Serilog002</code>:
+  Message template syntax verifier</a> </li>
+</ul>
+

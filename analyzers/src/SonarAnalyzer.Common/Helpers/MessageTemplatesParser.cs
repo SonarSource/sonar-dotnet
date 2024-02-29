@@ -25,7 +25,7 @@ namespace SonarAnalyzer.Helpers;
 /// <summary>
 /// Grammar can be found <a href="https://github.com/messagetemplates/grammar"> here</a>.
 /// </summary>
-public static class MessageTemplates
+public static class MessageTemplatesParser
 {
     private const string NamePattern = "[0-9a-zA-Z_]+";
     private const string PlaceholderPattern = $"(?<Placeholder>{NamePattern})";
@@ -42,9 +42,12 @@ public static class MessageTemplates
     /// Matches and extracts placeholders from a template string.
     /// For more info, see <a href="https://messagetemplates.org/">Message Templates</a>.
     /// </summary>
-    public static ParseResult Parse(string template)
+    public static ParseResult Parse(string template) =>
+        Parse(template, TemplateRegex);
+
+    public static ParseResult Parse(string template, Regex regex)
     {
-        if (TemplateRegex.SafeMatch(template) is { Success: true } match)
+        if (regex.SafeMatch(template) is { Success: true } match)
         {
             var placeholders = match.Groups["Placeholder"].Captures
                  .OfType<Capture>()

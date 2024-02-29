@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using static SonarAnalyzer.Helpers.MessageTemplates;
+using static SonarAnalyzer.Helpers.MessageTemplatesParser;
 
 namespace SonarAnalyzer.Rules.MessageTemplates;
 
@@ -31,7 +31,7 @@ public sealed class UsePascalCaseForNamedPlaceHolders : IMessageTemplateCheck
 
     public DiagnosticDescriptor Rule => S6678;
 
-    public void Execute(SonarSyntaxNodeReportingContext context, InvocationExpressionSyntax invocation, ArgumentSyntax templateArgument, Helpers.MessageTemplates.Placeholder[] placeholders)
+    public void Execute(SonarSyntaxNodeReportingContext context, InvocationExpressionSyntax invocation, ArgumentSyntax templateArgument, Placeholder[] placeholders)
     {
         var nonPascalCasePlaceholders = placeholders.Where(x => char.IsLower(x.Name[0])).ToArray();
         if (nonPascalCasePlaceholders.Length > 0)

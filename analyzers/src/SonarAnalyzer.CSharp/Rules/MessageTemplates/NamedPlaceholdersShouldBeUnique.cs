@@ -29,7 +29,7 @@ public sealed class NamedPlaceholdersShouldBeUnique : IMessageTemplateCheck
 
     public DiagnosticDescriptor Rule => S6677;
 
-    public void Execute(SonarSyntaxNodeReportingContext context, InvocationExpressionSyntax invocation, ArgumentSyntax templateArgument, Helpers.MessageTemplates.Placeholder[] placeholders)
+    public void Execute(SonarSyntaxNodeReportingContext context, InvocationExpressionSyntax invocation, ArgumentSyntax templateArgument, MessageTemplatesParser.Placeholder[] placeholders)
     {
         var duplicatedGroups = placeholders
             .Where(x => x.Name != "_" && !int.TryParse(x.Name, out _)) // exclude wildcard "_" and index placeholders like {42}

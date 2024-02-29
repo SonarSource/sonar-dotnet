@@ -20,8 +20,6 @@
 
 using SonarAnalyzer.Rules.MessageTemplates;
 
-using static Roslyn.Utilities.SonarAnalyzer.Shared.LoggingFrameworkMethods;
-
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -46,9 +44,9 @@ public sealed class MessageTemplateAnalyzer : SonarDiagnosticAnalyzer
             var invocation = (InvocationExpressionSyntax)c.Node;
             var enabledChecks = Checks.Where(x => x.Rule.IsEnabled(c)).ToArray();
             if (enabledChecks.Length > 0
-                && TemplateArgument(invocation, c.SemanticModel) is { } argument
+                && MessageTemplateExtractor.TemplateArgument(invocation, c.SemanticModel) is { } argument
                 && HasValidExpression(argument)
-                && Helpers.MessageTemplates.Parse(argument.Expression.ToString()) is { Success: true } result)
+                && MessageTemplatesParser.Parse(argument.Expression.ToString()) is { Success: true } result)
             {
                 foreach (var check in enabledChecks)
                 {
@@ -57,29 +55,6 @@ public sealed class MessageTemplateAnalyzer : SonarDiagnosticAnalyzer
             }
         },
         SyntaxKind.InvocationExpression);
-
-    private static ArgumentSyntax TemplateArgument(InvocationExpressionSyntax invocation, SemanticModel model) =>
-        TemplateArgument(invocation, model, KnownType.Microsoft_Extensions_Logging_LoggerExtensions, MicrosoftExtensionsLogging, "message")
-        ?? TemplateArgument(invocation, model, KnownType.Serilog_Log, Serilog, "messageTemplate")
-        ?? TemplateArgument(invocation, model, KnownType.Serilog_ILogger, Serilog, "messageTemplate", checkDerivedTypes: true)
-        ?? TemplateArgument(invocation, model, KnownType.NLog_ILoggerExtensions, NLogLoggingMethods, "message")
-        ?? TemplateArgument(invocation, model, KnownType.NLog_ILogger, NLogLoggingMethods, "message", checkDerivedTypes: true)
-        ?? TemplateArgument(invocation, model, KnownType.NLog_ILoggerBase, NLogILoggerBase, "message", checkDerivedTypes: true);
-
-    private static ArgumentSyntax TemplateArgument(InvocationExpressionSyntax invocation,
-                                                   SemanticModel model,
-                                                   KnownType type,
-                                                   ICollection<string> methods,
-                                                   string template,
-                                                   bool checkDerivedTypes = false) =>
-        methods.Contains(invocation.GetIdentifier().ToString())
-        && model.GetSymbolInfo(invocation).Symbol is IMethodSymbol method
-        && method.HasContainingType(type, checkDerivedTypes)
-        && CSharpFacade.Instance.MethodParameterLookup(invocation, method) is { } lookup
-        && lookup.TryGetSyntax(template, out var argumentsFound) // Fetch Argument.Expression with IParameterSymbol.Name == templateName
-        && argumentsFound.Length == 1
-            ? (ArgumentSyntax)argumentsFound[0].Parent
-            : null;
 
     private static bool HasValidExpression(ArgumentSyntax argument) =>
         argument.Expression.DescendantNodes().All(x => x.IsAnyKind(ValidTemplateKinds));

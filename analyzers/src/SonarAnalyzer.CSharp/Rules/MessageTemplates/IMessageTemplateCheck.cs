@@ -24,5 +24,5 @@ public interface IMessageTemplateCheck
 {
     DiagnosticDescriptor Rule { get; }
 
-    void Execute(SonarSyntaxNodeReportingContext context, InvocationExpressionSyntax invocation, ArgumentSyntax templateArgument, Helpers.MessageTemplates.Placeholder[] placeholders);
+    void Execute(SonarSyntaxNodeReportingContext context, InvocationExpressionSyntax invocation, ArgumentSyntax templateArgument, MessageTemplatesParser.Placeholder[] placeholders);
 }
