@@ -1,10 +1,10 @@
 {
   "Issues": [
     {
-      "Id": "S6668",
-      "Message": "Logging arguments should be passed to the correct parameter.",
+      "Id": "S6678",
+      "Message": "Use PascalCase for named placeholders.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S6668.cs#L9",
-      "Location": "Line 9 Position 13-31"
+      "Location": "Line 9 Position 43-52"
     }
   ]
 }

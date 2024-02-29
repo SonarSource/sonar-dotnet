@@ -30,6 +30,11 @@ public sealed class LoggingArgumentsShouldBePassedCorrectly : SonarDiagnosticAna
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
+    private static readonly ImmutableArray<KnownType> MicrosoftLoggingExtensionsInvalidTypes =
+        ImmutableArray.Create(KnownType.System_Exception, KnownType.Microsoft_Extensions_Logging_LogLevel, KnownType.Microsoft_Extensions_Logging_EventId);
+    private static readonly ImmutableArray<KnownType> CastleCoreInvalidTypes = ImmutableArray.Create(KnownType.System_Exception);
+    private static readonly ImmutableArray<KnownType> NLogAndSerilogInvalidTypes = ImmutableArray.Create(KnownType.System_Exception, KnownType.Serilog_Events_LogEventLevel, KnownType.NLog_LogLevel);
+
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
     protected override void Initialize(SonarAnalysisContext context) =>
@@ -43,21 +48,19 @@ public sealed class LoggingArgumentsShouldBePassedCorrectly : SonarDiagnosticAna
                 }
                 if (invocationSymbol.HasContainingType(KnownType.Microsoft_Extensions_Logging_LoggerExtensions, false))
                 {
-                    var invalidTypes = ImmutableArray.Create(KnownType.System_Exception, KnownType.Microsoft_Extensions_Logging_LogLevel, KnownType.Microsoft_Extensions_Logging_EventId);
-                    CheckInvalidParams(invocation, invocationSymbol, c, invalidTypes);
+                    CheckInvalidParams(invocation, invocationSymbol, c, MicrosoftLoggingExtensionsInvalidTypes);
                 }
                 else if (invocationSymbol.HasContainingType(KnownType.Castle_Core_Logging_ILogger, true))
                 {
-                    CheckInvalidParams(invocation, invocationSymbol, c, ImmutableArray.Create(KnownType.System_Exception));
+                    CheckInvalidParams(invocation, invocationSymbol, c, CastleCoreInvalidTypes);
                 }
                 else if (invocationSymbol.HasContainingType(KnownType.Serilog_ILogger, true)
                          || invocationSymbol.HasContainingType(KnownType.Serilog_Log, false)
                          || invocationSymbol.HasContainingType(KnownType.NLog_ILoggerBase, true)
                          || invocationSymbol.HasContainingType(KnownType.NLog_ILoggerExtensions, false))
                 {
-                    var invalidTypes = ImmutableArray.Create(KnownType.System_Exception, KnownType.Serilog_Events_LogEventLevel, KnownType.NLog_LogLevel);
-                    CheckInvalidParams(invocation, invocationSymbol, c, invalidTypes);
-                    CheckInvalidTypeParams(invocation, invocationSymbol, c, invalidTypes);
+                    CheckInvalidParams(invocation, invocationSymbol, c, NLogAndSerilogInvalidTypes);
+                    CheckInvalidTypeParams(invocation, invocationSymbol, c, NLogAndSerilogInvalidTypes);
                 }
             },
             SyntaxKind.InvocationExpression);
