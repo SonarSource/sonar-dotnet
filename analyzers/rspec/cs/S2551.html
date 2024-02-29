@@ -5,8 +5,8 @@ database connection, or system resource that needs to be accessed or manipulated
 <p>Shared resources should not be used for <a href="https://en.wikipedia.org/wiki/Lock_(computer_science)">locking</a> as it increases the chance of
 <a href="https://en.wikipedia.org/wiki/Deadlock">deadlocks</a>. Any other thread could acquire (or attempt to acquire) the same lock while doing some
 operation, without knowing that the resource is meant to be used for locking purposes.</p>
-<p>One case of this is strings, which are <a href="https://en.wikipedia.org/wiki/Interning_(computer_science)">interned</a> by the runtime. This means
-that each string instance is immutable and stored, and then is reused everywhere it is referenced.</p>
+<p>One example of this is a <code>String</code> <a href="https://en.wikipedia.org/wiki/Interning_(computer_science)">interned</a> by the runtime. This
+means that each <code>String</code> instance is immutable and stored, and then reused everywhere it is referenced.</p>
 <p>Instead, a dedicated private <code>object</code> instance should be used for each shared resource. Making the lock-specific object
 <code>private</code> guarantees that the access to it is as minimal as possible, in order to avoid deadlocks or lock contention.</p>
 <p>The following objects are considered as shared resources:</p>
