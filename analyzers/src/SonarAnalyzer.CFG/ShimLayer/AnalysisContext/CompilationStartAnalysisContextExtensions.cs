@@ -27,10 +27,10 @@ namespace SonarAnalyzer.ShimLayer.AnalysisContext;
 
 public static class CompilationStartAnalysisContextExtensions
 {
-    private static readonly Action<CompilationStartAnalysisContext, Action<SymbolStartAnalysisContext>, SymbolKind> RegisterSymbolStartAnalysisWrapper = CreateRegisterSymbolStartAnalysisWrapper();
+    private static readonly Action<CompilationStartAnalysisContext, Action<SymbolStartAnalysisContext>, SymbolKind> RegisterSymbolStartActionWrapper = CreateRegisterSymbolStartAnalysisWrapper();
 
     public static void RegisterSymbolStartAction(this CompilationStartAnalysisContext context, Action<SymbolStartAnalysisContext> action, SymbolKind symbolKind) =>
-        RegisterSymbolStartAnalysisWrapper(context, action, symbolKind);
+        RegisterSymbolStartActionWrapper(context, action, symbolKind);
 
     private static Action<CompilationStartAnalysisContext, Action<SymbolStartAnalysisContext>, SymbolKind> CreateRegisterSymbolStartAnalysisWrapper()
     {
@@ -47,6 +47,13 @@ public static class CompilationStartAnalysisContextExtensions
         var symbolStartAnalysisActionType = typeof(Action<>).MakeGenericType(symbolStartAnalysisContextType);
         var symbolStartAnalysisContextParameter = Parameter(symbolStartAnalysisContextType);
         var symbolStartAnalysisContextCtor = typeof(SymbolStartAnalysisContext).GetConstructors().Single();
+
+        // The Sonar.SymbolStartAnalysisContext is a copy of the Roslyn.SymbolStartAnalysisContext because Roslyn.SymbolStartAnalysisContext is not available in our Roslyn version.
+        // The Lambda below creates a method, that takes the Roslyn.SymbolStartAnalysisContext, creates a Sonar.SymbolStartAnalysisContext copy of it, and passes the copy to the
+        // Action<Sonar.SymbolStartAnalysisContext> provided by the caller. The tricky part is "copying" the Register.. methods. We do so by wrapping them into delegates and passing these.
+        // These delegates are very simple: They just take the parameters for the registration method and pass them to the corresponding Roslyn.SymbolStartAnalysisContext.Register.. method.
+        // This doesn't work particular well for generic methods (like CodeBlockStartAction<TLanguageKindEnum>) because we can not pass an open generic Action<> to the constructor. But the affected
+        // methods only allow CS.SyntaxKind and VB.SyntaxKind as type parameters anyway, so we can created two closed generic versions for these methods.
 
         // Action<Roslyn.SymbolStartAnalysisContext> lambda = symbolStartAnalysisContextParameter =>
         //    shimmedActionParameter(new Sonar.SymbolStartAnalysisContext(
