@@ -557,4 +557,25 @@ public class RegisterSymbolStartActionWrapperTest
         ad0001.Descriptor.Description.ToString().Should().Contain("System.NotImplementedException: Add a reference to the Microsoft.CodeAnalysis.VisualBasic.Workspaces package");
         visited.Should().BeEmpty(because: "The vb version requires the Microsoft.CodeAnalysis.VisualBasic.Workspaces package to be added. VB.SyntaxKind is not available in the shim layer.");
     }
+
+#pragma warning disable RS1001 // Missing diagnostic analyzer attribute
+#pragma warning disable RS1025 // Configure generated code analysis
+#pragma warning disable RS1026 // Enable concurrent execution
+    private class TestDiagnosticAnalyzer : DiagnosticAnalyzer
+    {
+        public TestDiagnosticAnalyzer(Action<ShimLayer.AnalysisContext.SymbolStartAnalysisContext> action, SymbolKind symbolKind)
+        {
+            Action = action;
+            SymbolKind = symbolKind;
+        }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+            ImmutableArray.Create(new DiagnosticDescriptor("TEST", "Test", "Test", "Test", DiagnosticSeverity.Warning, true));
+
+        public Action<ShimLayer.AnalysisContext.SymbolStartAnalysisContext> Action { get; }
+        public SymbolKind SymbolKind { get; }
+
+        public override void Initialize(Microsoft.CodeAnalysis.Diagnostics.AnalysisContext context) =>
+            context.RegisterCompilationStartAction(start =>
+                CompilationStartAnalysisContextExtensions.RegisterSymbolStartAction(start, Action, SymbolKind));
+    }
 }
