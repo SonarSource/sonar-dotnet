@@ -57,6 +57,7 @@ public class UsePascalCaseForNamedPlaceHoldersTest
                 {
                     logger.{{methodName}}("Arg: {Arg}", arg);       // Compliant
                     logger.{{methodName}}("Arg: {arg}", arg);       // Noncompliant
+                                                                    // Secondary @-1
                 }
             }
             """).Verify();
@@ -79,6 +80,7 @@ public class UsePascalCaseForNamedPlaceHoldersTest
                 {
                     logger.{{methodName}}("Arg: {Arg}", arg);       // Compliant
                     logger.{{methodName}}("Arg: {arg}", arg);       // Noncompliant
+                                                                    // Secondary @-1
                 }
             }
             """).Verify();
@@ -102,6 +104,7 @@ public class UsePascalCaseForNamedPlaceHoldersTest
                 {
                     logger.{{methodName}}("Arg: {Arg}", arg);       // Compliant
                     logger.{{methodName}}("Arg: {arg}", arg);       // Noncompliant
+                                                                    // Secondary @-1
                 }
             }
             public class MyLogger : Logger { }
