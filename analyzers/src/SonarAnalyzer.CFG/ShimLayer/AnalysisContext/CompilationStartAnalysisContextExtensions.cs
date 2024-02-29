@@ -27,6 +27,7 @@ namespace SonarAnalyzer.ShimLayer.AnalysisContext;
 public static class CompilationStartAnalysisContextExtensions
 {
     {
+#pragma warning disable S103 // Lines should not be too long
         if (typeof(CompilationStartAnalysisContext).GetMethod(nameof(RegisterSymbolStartAction)) is not { } registerMethod)
         {
             return static (_, _, _) => { };
@@ -53,8 +54,6 @@ public static class CompilationStartAnalysisContextExtensions
             return Lambda<Action<Action<TContext>, TParameter>>(
                 Call(symbolStartAnalysisContextParameter, registrationMethodName, typeArguments, registerActionParameter, additionalParameter), registerActionParameter, additionalParameter);
         }
+#pragma warning restore S103 // Lines should not be too long
     }
-
-    public static void RegisterSymbolStartAction(this CompilationStartAnalysisContext context, Action<SymbolStartAnalysisContext> action, SymbolKind symbolKind) =>
-        RegisterSymbolStartAnalysisWrapper(context, action, symbolKind);
 }

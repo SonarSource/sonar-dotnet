@@ -349,10 +349,7 @@ public class RegisterSymbolStartActionWrapperTest
             public class C
             {
                 int i = 0;
-                public void M()
-                {
-                    ToString();
-                }
+                public void M() => ToString();
             }
             """;
         var snippet = new SnippetCompiler(code);
@@ -363,12 +360,12 @@ public class RegisterSymbolStartActionWrapperTest
                 symbolStart.RegisterCodeBlockStartAction<CS.SyntaxKind>(blockStart =>
                 {
                     var node = blockStart.CodeBlock.ToString();
-                    visited.Add(node.Substring(0, node.IndexOf('\n') is var pos and >= 0 ? pos : node.Length));
+                    visited.Add(node);
                     blockStart.RegisterSyntaxNodeAction(nodeContext => visited.Add(nodeContext.Node.ToString()), CS.SyntaxKind.InvocationExpression);
                 });
             }, SymbolKind.NamedType)));
         await compilation.GetAnalyzerDiagnosticsAsync();
-        visited.Should().BeEquivalentTo("int i = 0;", "public void M()", "ToString()");
+        visited.Should().BeEquivalentTo("int i = 0;", "public void M() => ToString();", "ToString()");
     }
 
     [TestMethod]
@@ -492,8 +489,8 @@ public class RegisterSymbolStartActionWrapperTest
             {
                 symbolStart.RegisterSyntaxNodeAction(syntaxNodeContext =>
                 {
-                    var symbolName = syntaxNodeContext.Node.ToString();
-                    visited.Add(symbolName);
+                    var nodeName = syntaxNodeContext.Node.ToString();
+                    visited.Add(nodeName);
                 }, CS.SyntaxKind.InvocationExpression, CS.SyntaxKind.EqualsValueClause);
             }, SymbolKind.NamedType)));
         await compilation.GetAnalyzerDiagnosticsAsync();

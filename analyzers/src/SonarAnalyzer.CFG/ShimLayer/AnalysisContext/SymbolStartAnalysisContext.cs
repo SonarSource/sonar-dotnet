@@ -43,8 +43,7 @@ public class SymbolStartAnalysisContext
         Action<Action<OperationBlockAnalysisContext>> registerOperationBlockAction,
         Action<Action<OperationBlockStartAnalysisContext>> registerOperationBlockStartAction,
         Action<Action<SymbolAnalysisContext>> registerSymbolEndAction,
-        Action<Action<SyntaxNodeAnalysisContext>, ImmutableArray<CS.SyntaxKind>> registerSyntaxNodeActionCS
-            )
+        Action<Action<SyntaxNodeAnalysisContext>, ImmutableArray<CS.SyntaxKind>> registerSyntaxNodeActionCS)
     {
         CancellationToken = cancellationToken;
         Compilation = compilation;
@@ -69,12 +68,13 @@ public class SymbolStartAnalysisContext
 
     public void RegisterCodeBlockStartAction<TLanguageKindEnum>(Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action) where TLanguageKindEnum : struct
     {
-        if (typeof(TLanguageKindEnum) == typeof(CS.SyntaxKind))
+        var languageKindType = typeof(TLanguageKindEnum);
+        if (languageKindType == typeof(CS.SyntaxKind))
         {
             var casted = (Action<CodeBlockStartAnalysisContext<CS.SyntaxKind>>)action;
             registerCodeBlockStartActionCS(casted);
         }
-        else if (typeof(TLanguageKindEnum).FullName == "Microsoft.CodeAnalysis.VisualBasic.SyntaxKind")
+        else if (languageKindType.FullName == "Microsoft.CodeAnalysis.VisualBasic.SyntaxKind")
         {
             throw new NotImplementedException("Add a reference to the Microsoft.CodeAnalysis.VisualBasic.Workspaces package.");
         }
@@ -98,11 +98,12 @@ public class SymbolStartAnalysisContext
 
     public void RegisterSyntaxNodeAction<TLanguageKindEnum>(Action<SyntaxNodeAnalysisContext> action, params TLanguageKindEnum[] syntaxKinds) where TLanguageKindEnum : struct
     {
-        if (typeof(TLanguageKindEnum) == typeof(CS.SyntaxKind))
+        var languageKindType = typeof(TLanguageKindEnum);
+        if (languageKindType == typeof(CS.SyntaxKind))
         {
             registerSyntaxNodeActionCS(action, syntaxKinds.Cast<CS.SyntaxKind>().ToImmutableArray());
         }
-        else if (typeof(TLanguageKindEnum).FullName == "Microsoft.CodeAnalysis.VisualBasic.SyntaxKind")
+        else if (languageKindType.FullName == "Microsoft.CodeAnalysis.VisualBasic.SyntaxKind")
         {
             throw new NotImplementedException("Add a reference to the Microsoft.CodeAnalysis.VisualBasic.Workspaces package.");
         }
