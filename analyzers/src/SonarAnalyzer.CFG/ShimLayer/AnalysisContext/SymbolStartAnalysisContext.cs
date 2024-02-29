@@ -30,11 +30,11 @@ public class SymbolStartAnalysisContext
     private readonly Action<Action<OperationBlockAnalysisContext>> registerOperationBlockAction;
     private readonly Action<Action<OperationBlockStartAnalysisContext>> registerOperationBlockStartAction;
     private readonly Action<Action<SymbolAnalysisContext>> registerSymbolEndAction;
-    private readonly Action<Action<SyntaxNodeAnalysisContext>, ImmutableArray<SyntaxKind>> registerSyntaxNodeActionCS;
+    private readonly Action<Action<SyntaxNodeAnalysisContext>, ImmutableArray<CS.SyntaxKind>> registerSyntaxNodeActionCS;
 
     public SymbolStartAnalysisContext(
         CancellationToken cancellationToken,
-        Compilation compilation,
+        Compilation compilation,    
         AnalyzerOptions options,
         ISymbol symbol,
         Action<Action<CodeBlockAnalysisContext>> registerCodeBlockAction,

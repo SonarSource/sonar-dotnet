@@ -369,6 +369,37 @@ public class RegisterSymbolStartActionWrapperTest
     }
 
     [TestMethod]
+    public async Task RegisterSymbolStartAction_RegisterCodeBlockStartAction_VB()
+    {
+        var code = """
+            Public Class C
+                Private i As Integer = 0
+
+                Public Sub M()
+                    Call ToString()
+                End Sub
+            End Class
+            """;
+        var snippet = new SnippetCompiler(code, ignoreErrors: false, AnalyzerLanguage.VisualBasic);
+        var visited = new List<string>();
+        var compilation = snippet.Compilation.WithAnalyzers(ImmutableArray.Create<DiagnosticAnalyzer>(
+            new TestDiagnosticAnalyzer(symbolStart =>
+            {
+                symbolStart.RegisterCodeBlockStartAction<VB.SyntaxKind>(blockStart =>
+                {
+                    var node = blockStart.CodeBlock.ToString();
+                    visited.Add(node);
+                    blockStart.RegisterSyntaxNodeAction(nodeContext => visited.Add(nodeContext.Node.ToString()), VB.SyntaxKind.InvocationExpression);
+                });
+            }, SymbolKind.NamedType)));
+        var diag = await compilation.GetAnalyzerDiagnosticsAsync();
+        var ad0001 = diag.Should().ContainSingle().Which;
+        ad0001.Id.Should().Be("AD0001");
+        ad0001.Descriptor.Description.ToString().Should().Contain("System.NotImplementedException: Add a reference to the Microsoft.CodeAnalysis.VisualBasic.Workspaces package");
+        visited.Should().BeEmpty(because: "The vb version requires the Microsoft.CodeAnalysis.VisualBasic.Workspaces package to be added. VB.SyntaxKind is not available in the shim layer.");
+    }
+
+    [TestMethod]
     public async Task RegisterSymbolStartAction_RegisterOperationAction()
     {
         var code = """
@@ -473,7 +504,7 @@ public class RegisterSymbolStartActionWrapperTest
     }
 
     [TestMethod]
-    public async Task RegisterSymbolStartAction_RegisterSyntaxNodeAction()
+    public async Task RegisterSymbolStartAction_RegisterSyntaxNodeAction_CS()
     {
         var code = """
             public class C
@@ -495,5 +526,35 @@ public class RegisterSymbolStartActionWrapperTest
             }, SymbolKind.NamedType)));
         await compilation.GetAnalyzerDiagnosticsAsync();
         visited.Should().BeEquivalentTo("= 0", "ToString()");
+    }
+
+    [TestMethod]
+    public async Task RegisterSymbolStartAction_RegisterSyntaxNodeAction_VB()
+    {
+        var code = """
+            Public Class C
+                Private i As Integer = 0
+
+                Public Sub M()
+                    Call ToString()
+                End Sub
+            End Class
+            """;
+        var snippet = new SnippetCompiler(code, ignoreErrors: false, AnalyzerLanguage.VisualBasic);
+        var visited = new List<string>();
+        var compilation = snippet.Compilation.WithAnalyzers(ImmutableArray.Create<DiagnosticAnalyzer>(
+            new TestDiagnosticAnalyzer(symbolStart =>
+            {
+                symbolStart.RegisterSyntaxNodeAction(syntaxNodeContext =>
+                {
+                    var nodeName = syntaxNodeContext.Node.ToString();
+                    visited.Add(nodeName);
+                }, VB.SyntaxKind.InvocationExpression);
+            }, SymbolKind.NamedType)));
+        var diag = await compilation.GetAnalyzerDiagnosticsAsync();
+        var ad0001 = diag.Should().ContainSingle().Which;
+        ad0001.Id.Should().Be("AD0001");
+        ad0001.Descriptor.Description.ToString().Should().Contain("System.NotImplementedException: Add a reference to the Microsoft.CodeAnalysis.VisualBasic.Workspaces package");
+        visited.Should().BeEmpty(because: "The vb version requires the Microsoft.CodeAnalysis.VisualBasic.Workspaces package to be added. VB.SyntaxKind is not available in the shim layer.");
     }
 }
