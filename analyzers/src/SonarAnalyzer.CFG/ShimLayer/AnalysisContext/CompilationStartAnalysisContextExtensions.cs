@@ -52,9 +52,9 @@ public static class CompilationStartAnalysisContextExtensions
         // The Lambda below creates a method, that takes the Roslyn.SymbolStartAnalysisContext, creates a Sonar.SymbolStartAnalysisContext copy of it, and passes the copy to the
         // Action<Sonar.SymbolStartAnalysisContext> provided by the caller. The tricky part is "copying" the Register.. methods. We do so by wrapping them into delegates and passing these.
         // These delegates are very simple: They just take the parameters for the registration method and pass them to the corresponding Roslyn.SymbolStartAnalysisContext.Register.. method.
-        // This doesn't work particular well for generic methods (like CodeBlockStartAction<TLanguageKindEnum>) because we can not pass an open generic Action<> to the constructor. But the affected
-        // methods only allow CS.SyntaxKind and VB.SyntaxKind as type parameters anyway, so we can created two closed generic versions for these methods. The VB version is not supported (yet) because
-        // the Microsoft.CodeAnalysis.VisualBasic.Workspaces is not referenced in this project.
+        // This doesn't work particular well for generic methods (like CodeBlockStartAction<TLanguageKindEnum>) because we can not pass an open generic Action<> to the Sonar.SymbolStartAnalysisContext
+        // constructor. But the affected methods only allow CS.SyntaxKind and VB.SyntaxKind as type parameters anyway, so we can created two closed generic versions for these methods. The VB
+        // version is not supported (yet) because the Microsoft.CodeAnalysis.VisualBasic.Workspaces is not referenced in this project.
 
         // Action<Roslyn.SymbolStartAnalysisContext> lambda = symbolStartAnalysisContextParameter =>
         //    shimmedActionParameter(new Sonar.SymbolStartAnalysisContext(
