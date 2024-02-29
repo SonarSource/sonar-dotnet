@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CSharp;
 using CS = Microsoft.CodeAnalysis.CSharp;
 namespace SonarAnalyzer.ShimLayer.AnalysisContext;
 
@@ -34,7 +33,7 @@ public class SymbolStartAnalysisContext
 
     public SymbolStartAnalysisContext(
         CancellationToken cancellationToken,
-        Compilation compilation,    
+        Compilation compilation,
         AnalyzerOptions options,
         ISymbol symbol,
         Action<Action<CodeBlockAnalysisContext>> registerCodeBlockAction,
