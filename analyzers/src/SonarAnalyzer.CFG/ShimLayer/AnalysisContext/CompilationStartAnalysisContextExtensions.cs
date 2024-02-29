@@ -46,6 +46,7 @@ public static class CompilationStartAnalysisContextExtensions
             return Lambda<Action<Action<TContext>>>(Call(symbolStartAnalysisContextParameter, registrationMethodName, typeArguments, registerActionParameter), registerActionParameter);
         }
 
+        // (registerActionParameter, additionalParameter) => symbolStartAnalysisContextParameter."registrationMethodName"<typeArguments>(registerActionParameter, additionalParameter)
         static Expression<Action<Action<TContext>, TParameter>> RegisterLambdaWithAdditionalParameter<TContext, TParameter>(
             ParameterExpression symbolStartAnalysisContextParameter, string registrationMethodName, params Type[] typeArguments)
         {
