@@ -1,18 +1,52 @@
 <h2>Why is this an issue?</h2>
-<p>It can be extremely confusing when a <code>for</code> loop’s counter is incremented outside of its increment clause. In such cases, the increment
-should be moved to the loop’s increment clause if at all possible.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-for (i = 0; i &lt; 10; j++) // Noncompliant
+<p>The <code>for</code> loop is designed to iterate over a range using a counter variable, with the counter being updated in the loop’s increment
+section. Misusing this structure can lead to issues such as infinite loops if the counter is not updated correctly. If this is intentional, use a
+<code>while</code> or <code>do while</code> loop instead of a <code>for</code> loop.</p>
+<p>Using a for loop for purposes other than its intended use can lead to confusion and potential bugs. If the <code>for</code> loop structure does not
+fit your needs, consider using an alternative <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/iteration-statements">iteration statement</a>.</p>
+<h2>How to fix it</h2>
+<p>Move the counter variable update to the loop’s increment section. If this is impossible, consider using another iteration statement instead.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+int sum = 0;
+for (int i = 0; i &lt; 10; sum++) // Noncompliant: `i` is not updated in the increment section
+{
+  // ...
+  i++;
+}
+</pre>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+for (int i = 0;; i++) // Noncompliant: the loop condition is empty although incrementing `i`
 {
   // ...
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
-for (i = 0; i &lt; 10; i++)
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+int sum = 0;
+for (int i = 0; i &lt; 10; i++)
 {
   // ...
+  sum++;
 }
 </pre>
+<pre data-diff-id="2" data-diff-type="compliant">
+int i = 0;
+while (true)
+{
+  // ...
+  i++;
+}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/iteration-statements#the-for-statement">The <code>for</code>
+  statement</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/iteration-statements">Iteration
+  statements - <code>for</code>, <code>foreach</code>, <code>do</code>, and <code>while</code></a> </li>
+</ul>
 

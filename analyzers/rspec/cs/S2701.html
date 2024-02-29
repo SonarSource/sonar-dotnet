@@ -1,11 +1,89 @@
 <h2>Why is this an issue?</h2>
-<p>There’s no reason to use literal boolean values in assertions. Doing so is at best confusing for maintainers, and at worst a bug.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-bool b = true;
-NUnit.Framework.Assert.AreEqual(true, b);
-Xunit.Assert.NotSame(true, b);
-Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(true, b);
-System.Diagnostics.Debug.Assert(true);
+<p>Using literal boolean values in assertions can lead to less readable and less informative unit tests. When a test fails, it’s important to have a
+clear understanding of what the test was checking and why it failed. Most of the testing frameworks provide more explicit assertion methods that will
+provide a more helpful error message if the test fails.</p>
+<h3>Exceptions</h3>
+<p>In the context of xUnit, <code>Assert.True</code> and <code>Assert.False</code> are not flagged by this rule. This is because
+<code>Assert.Fail</code> was only introduced in 2020 with version <code>2.4.2</code>. Prior to this, developers used <code>Assert.True(false,
+message)</code> and <code>Assert.False(true, message)</code> as workarounds to simulate the functionality of <code>Assert.Fail()</code>.</p>
+<h2>How to fix it in MSTest</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+bool someResult;
+
+Assert.AreEqual(false, someResult); // Noncompliant: use Assert.IsFalse
+Assert.AreEqual(true, someResult); // Noncompliant: use Assert.IsTrue
+Assert.AreNotEqual(false, someResult); // Noncompliant: use Assert.IsTrue
+Assert.AreNotEqual(true, someResult); // Noncompliant: use Assert.IsFalse
+Assert.IsFalse(true, "Should not reach this line!"); // Noncompliant: use Assert.Fail
+Assert.IsTrue(false, "Should not reach this line!"); // Noncompliant: use Assert.Fail
+Assert.IsFalse(false); // Noncompliant: remove it
 </pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+bool someResult;
+
+Assert.IsFalse(someResult);
+Assert.IsTrue(someResult);
+Assert.IsTrue(someResult);
+Assert.IsFalse(someResult);
+Assert.Fail("Should not reach this line!");
+Assert.Fail("Should not reach this line!");
+// Removed
+</pre>
+<h2>How to fix it in NUnit</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+bool someResult;
+
+Assert.AreEqual(false, someResult); // Noncompliant: use Assert.False
+Assert.AreEqual(true, someResult); // Noncompliant: use Assert.True
+Assert.AreNotEqual(false, someResult); // Noncompliant: use Assert.True
+Assert.AreNotEqual(true, someResult); // Noncompliant: use Assert.False
+Assert.False(true, "Should not reach this line!"); // Noncompliant: use Assert.Fail
+Assert.True(false, "Should not reach this line!"); // Noncompliant: use Assert.Fail
+Assert.False(false); // Noncompliant: remove it
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+bool someResult;
+
+Assert.False(someResult);
+Assert.True(someResult);
+Assert.True(someResult);
+Assert.False(someResult);
+Assert.Fail("Should not reach this line!");
+Assert.Fail("Should not reach this line!");
+// Removed
+</pre>
+<h2>How to fix it in xUnit</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="3" data-diff-type="noncompliant">
+bool someResult;
+
+Assert.Equal(false, someResult); // Noncompliant: use Assert.False
+Assert.Equal(true, someResult); // Noncompliant: use Assert.True
+Assert.NotEqual(false, someResult); // Noncompliant: use Assert.True
+Assert.NotEqual(true, someResult); // Noncompliant: use Assert.False
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="3" data-diff-type="compliant">
+bool someResult;
+
+Assert.False(someResult);
+Assert.True(someResult);
+Assert.True(someResult);
+Assert.False(someResult);
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://docs.nunit.org/">NUnit Documentation</a> </li>
+  <li> <a href="https://xunit.net/docs/getting-started/netcore/cmdline">xUnit Documentation</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-with-mstest">MSTest Documentation</a> </li>
+  <li> <a href="https://github.com/xunit/xunit/issues/2027">Xunit doesn’t have an Assert.Fail() operation</a> </li>
+</ul>
 

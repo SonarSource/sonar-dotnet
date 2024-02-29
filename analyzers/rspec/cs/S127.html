@@ -9,33 +9,34 @@ introduction of errors in the future.</p>
   <li> When the stop condition depend upon a method call </li>
   <li> When the stop condition depends on an object property, since such properties could change during the execution of the loop. </li>
 </ul>
-<h3>Noncompliant code example</h3>
-<pre>
-class Foo
+<h2>How to fix it</h2>
+<p>It’s generally recommended to only update the loop counter in the loop declaration. If skipping elements or iterating at a different pace based on
+a condition is needed, consider using a while loop or a different structure that better fits the needs.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+for (int i = 1; i &lt;= 5; i++)
 {
-    static void Main()
+    Console.WriteLine(i);
+    if (condition)
     {
-        for (int i = 1; i &lt;= 5; i++)
-        {
-            Console.WriteLine(i);
-            if (condition)
-            {
-               i = 20;
-           }
-        }
+        i = 20;
     }
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
-class Foo
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+int i = 1;
+while (i &lt;= 5)
 {
-    static void Main()
+    Console.WriteLine(i);
+    if (condition)
     {
-        for (int i = 1; i &lt;= 5; i++)
-        {
-            Console.WriteLine(i);
-        }
+        i = 20;
+    }
+    else
+    {
+        i++;
     }
 }
 </pre>

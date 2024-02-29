@@ -9,8 +9,10 @@
   },
   "status": "ready",
   "remediation": {
-    "func": "Constant\/Issue",
-    "constantCost": "10min"
+    "func": "Linear with offset",
+    "linearDesc": "per duplicate instance",
+    "linearOffset": "2min",
+    "linearFactor": "2min"
   },
   "tags": [
     "design"
