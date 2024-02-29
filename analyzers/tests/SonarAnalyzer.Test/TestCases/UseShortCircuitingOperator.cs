@@ -34,5 +34,12 @@ namespace Tests.Diagnostics
 
         private bool ReturnSomeBool() =>
             Environment.Is64BitOperatingSystem;
+
+        public void Repro_8834(bool a, bool b, bool c)
+        {
+            // CodeFix should add parantheses to preserve operator precedence
+            _ = a && b | c; // Noncompliant
+            //         ^
+        }
     }
 }
