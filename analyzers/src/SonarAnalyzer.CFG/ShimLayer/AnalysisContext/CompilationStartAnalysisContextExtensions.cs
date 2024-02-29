@@ -57,7 +57,7 @@ public static class CompilationStartAnalysisContextExtensions
         // version is not supported (yet) because the Microsoft.CodeAnalysis.VisualBasic.Workspaces is not referenced in this project.
 
         // Action<Roslyn.SymbolStartAnalysisContext> lambda = symbolStartAnalysisContextParameter =>
-        //    shimmedActionParameter(new Sonar.SymbolStartAnalysisContext(
+        //    shimmedActionParameter.Invoke(new Sonar.SymbolStartAnalysisContext(
         //        symbolStartAnalysisContextParameter.CancellationToken,
         //        symbolStartAnalysisContextParameter.Compilation,
         //        symbolStartAnalysisContextParameter.Options,
