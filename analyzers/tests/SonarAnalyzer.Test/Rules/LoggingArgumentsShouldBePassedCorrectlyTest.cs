@@ -199,7 +199,7 @@ public class LoggingArgumentsShouldBePassedCorrectlyTest
                 }
             }
             """)
-        .AddReferences(NuGetMetadataReference.NLog(Constants.NuGetLatestVersion))
+        .AddReferences(NuGetMetadataReference.NLog())
         .Verify();
 
     [DataTestMethod]
@@ -243,7 +243,7 @@ public class LoggingArgumentsShouldBePassedCorrectlyTest
                 }
             }
             """)
-        .AddReferences(NuGetMetadataReference.NLog(Constants.NuGetLatestVersion))
+        .AddReferences(NuGetMetadataReference.NLog())
         .Verify();
 
     [DataTestMethod]
@@ -282,7 +282,7 @@ public class LoggingArgumentsShouldBePassedCorrectlyTest
                 }
             }
             """)
-           .AddReferences(NuGetMetadataReference.Serilog(Constants.NuGetLatestVersion))
+           .AddReferences(NuGetMetadataReference.Serilog())
            .Verify();
 
     [TestMethod]
@@ -314,6 +314,6 @@ public class LoggingArgumentsShouldBePassedCorrectlyTest
             }
         }
         """)
-       .AddReferences(NuGetMetadataReference.Serilog(Constants.NuGetLatestVersion))
+       .AddReferences(NuGetMetadataReference.Serilog())
        .Verify();
 }

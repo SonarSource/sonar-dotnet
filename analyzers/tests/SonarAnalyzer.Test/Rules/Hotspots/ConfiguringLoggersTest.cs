@@ -91,7 +91,7 @@ namespace SonarAnalyzer.Test.Rules
             NuGetMetadataReference.Log4Net("2.0.8", "net45-full").Concat(MetadataReferenceFacade.SystemXml);
 
         private static IEnumerable<MetadataReference> NLogReferences =>
-            NuGetMetadataReference.NLog(Constants.NuGetLatestVersion);
+            NuGetMetadataReference.NLog();
 
         private static IEnumerable<MetadataReference> SeriLogReferences =>
             Enumerable.Empty<MetadataReference>()

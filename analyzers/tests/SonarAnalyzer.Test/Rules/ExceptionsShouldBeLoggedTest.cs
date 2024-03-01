@@ -251,7 +251,7 @@ public class ExceptionsShouldBeLoggedTest
                 }
             }
             """)
-           .AddReferences(NuGetMetadataReference.NLog(Constants.NuGetLatestVersion))
+           .AddReferences(NuGetMetadataReference.NLog())
            .Verify();
 
     [TestMethod]
@@ -284,7 +284,7 @@ public class ExceptionsShouldBeLoggedTest
                 }
             }
             """)
-           .AddReferences(NuGetMetadataReference.NLog(Constants.NuGetLatestVersion))
+           .AddReferences(NuGetMetadataReference.NLog())
            .Verify();
 
     [DataTestMethod]
@@ -318,6 +318,6 @@ public class ExceptionsShouldBeLoggedTest
                 }
             }
             """)
-           .AddReferences(NuGetMetadataReference.NLog(Constants.NuGetLatestVersion))
+           .AddReferences(NuGetMetadataReference.NLog())
            .Verify();
 }
