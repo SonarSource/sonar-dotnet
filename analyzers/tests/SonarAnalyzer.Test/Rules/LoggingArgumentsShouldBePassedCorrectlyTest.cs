@@ -50,7 +50,7 @@ public class LoggingArgumentsShouldBePassedCorrectlyTest
                 {
                     logger.{{methodName}}("Expected exception.");
                     logger.{{methodName}}(e, "Expected exception.");
-                    logger.{{methodName}}(null, message, e);                                                                                   // FN
+                    logger.{{methodName}}(null, "Expected exception.", e);                                                                     // FN
                     logger.{{methodName}}(new EventId(), "Expected exception.");
                     logger.{{methodName}}(new EventId(), e, "Expected exception.");
                     LoggerExtensions.{{methodName}}(logger, "Expected exception.");
