@@ -34,6 +34,11 @@ public sealed class LoggingArgumentsShouldBePassedCorrectly : SonarDiagnosticAna
         ImmutableArray.Create(KnownType.System_Exception, KnownType.Microsoft_Extensions_Logging_LogLevel, KnownType.Microsoft_Extensions_Logging_EventId);
     private static readonly ImmutableArray<KnownType> CastleCoreInvalidTypes = ImmutableArray.Create(KnownType.System_Exception);
     private static readonly ImmutableArray<KnownType> NLogAndSerilogInvalidTypes = ImmutableArray.Create(KnownType.System_Exception, KnownType.Serilog_Events_LogEventLevel, KnownType.NLog_LogLevel);
+    private static readonly HashSet<string> LoggingMethodNames = MicrosoftExtensionsLogging
+        .Concat(NLogLoggingMethods)
+        .Concat(Serilog)
+        .Concat(CastleCoreOrCommonCore)
+        .ToHashSet();
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
@@ -41,7 +46,7 @@ public sealed class LoggingArgumentsShouldBePassedCorrectly : SonarDiagnosticAna
         context.RegisterNodeAction(c =>
             {
                 var invocation = (InvocationExpressionSyntax)c.Node;
-                if (!HasLoggingMethodName(invocation)
+                if (!LoggingMethodNames.Contains(invocation.GetName())
                     || c.SemanticModel.GetSymbolInfo(invocation).Symbol is not IMethodSymbol invocationSymbol)
                 {
                     return;
@@ -98,12 +103,6 @@ public sealed class LoggingArgumentsShouldBePassedCorrectly : SonarDiagnosticAna
         }
     }
 
-    private static bool HasLoggingMethodName(InvocationExpressionSyntax invocation) =>
-        MicrosoftExtensionsLogging.Contains(invocation.GetName())
-        || NLogLoggingMethods.Contains(invocation.GetName())
-        || Serilog.Contains(invocation.GetName())
-        || CastleCoreOrCommonCore.Contains(invocation.GetName());
-
     private static bool IsNLogIgnoredOverload(IMethodSymbol methodSymbol) =>
         // These overloads are ignored since they will try to convert the T value to an exception.
         MatchesParams(methodSymbol, KnownType.System_Exception)
@@ -125,6 +124,10 @@ public sealed class LoggingArgumentsShouldBePassedCorrectly : SonarDiagnosticAna
     private static bool IsInvalidArgument(ArgumentSyntax argumentSyntax, SemanticModel model, ImmutableArray<KnownType> knownTypes) =>
         model.GetTypeInfo(argumentSyntax.Expression).Type?.DerivesFromAny(knownTypes) is true;
 
+    // This method filters out the types that the method accepts strongly:
+    // logger.Debug(exception, "template", exception)
+    //              ^^^^^^^^^ valid
+    //                                     ^^^^^^^^^ do not raise
     private static ImmutableArray<KnownType> Filter(IMethodSymbol methodSymbol, ImmutableArray<KnownType> knownTypes) =>
         knownTypes.Where(knownType => !methodSymbol.ConstructedFrom.Parameters.Any(x => x.Type.DerivesFrom(knownType))).ToImmutableArray();
 }
