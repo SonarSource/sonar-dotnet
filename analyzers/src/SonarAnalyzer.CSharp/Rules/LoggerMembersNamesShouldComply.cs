@@ -66,7 +66,7 @@ public sealed class LoggerMembersNamesShouldComply : ParametrizedDiagnosticAnaly
         SyntaxKind.FieldDeclaration,
         SyntaxKind.PropertyDeclaration);
 
-    private IEnumerable<MemberData> Declarations(SyntaxNode node)
+    private static IEnumerable<MemberData> Declarations(SyntaxNode node)
     {
         if (node is FieldDeclarationSyntax field)
         {
