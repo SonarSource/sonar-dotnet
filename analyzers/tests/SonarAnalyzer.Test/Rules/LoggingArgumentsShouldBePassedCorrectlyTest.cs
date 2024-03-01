@@ -32,14 +32,13 @@ public class LoggingArgumentsShouldBePassedCorrectlyTest
         builder.AddPaths("LoggingArgumentsShouldBePassedCorrectly.cs").AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions()).Verify();
 
     [DataTestMethod]
-    [DataRow("Log", "LogLevel.Warning,")]
     [DataRow("LogCritical")]
     [DataRow("LogDebug")]
     [DataRow("LogError")]
     [DataRow("LogInformation")]
     [DataRow("LogTrace")]
     [DataRow("LogWarning")]
-    public void LoggingArgumentsShouldBePassedCorrectly_MicrosoftExtensionsLogging_NonCompliant_CS(string methodName, string logLevel = "") =>
+    public void LoggingArgumentsShouldBePassedCorrectly_MicrosoftExtensionsLogging_NonCompliant_CS(string methodName) =>
         builder.AddSnippet($$"""
             using System;
             using Microsoft.Extensions.Logging;
@@ -49,37 +48,68 @@ public class LoggingArgumentsShouldBePassedCorrectlyTest
             {
                 public void Method(ILogger logger, Exception e)
                 {
-                    logger.{{methodName}}({{logLevel}} "Expected exception.");
-                    logger.{{methodName}}({{logLevel}} e, "Expected exception.");
-                    logger.{{methodName}}({{logLevel}} new EventId(), "Expected exception.");
-                    logger.{{methodName}}({{logLevel}} new EventId(), e, "Expected exception.");
-                    LoggerExtensions.{{methodName}}(logger, {{logLevel}} "Expected exception.");
-                    LoggerExtensions.{{methodName}}(logger, {{logLevel}} new EventId(), e, "Expected exception.");
+                    logger.{{methodName}}("Expected exception.");
+                    logger.{{methodName}}(e, "Expected exception.");
+                    logger.{{methodName}}(null, "Expected exception.", e);                                                                     // FN
+                    logger.{{methodName}}(new EventId(), "Expected exception.");
+                    logger.{{methodName}}(new EventId(), e, "Expected exception.");
+                    LoggerExtensions.{{methodName}}(logger, "Expected exception.");
+                    LoggerExtensions.{{methodName}}(logger, new EventId(), e, "Expected exception.");
 
-                    logger.{{methodName}}({{logLevel}} new EventId(), e, "Expected exception.", e, new EventId(), LogLevel.Critical);                       // Noncompliant (exception, event id, log level)
-                                                                                                                                                            // Secondary @-1
-                                                                                                                                                            // Secondary @-2
-                                                                                                                                                            // Secondary @-3
-                    logger.{{methodName}}({{logLevel}} new EventId(), "Expected exception.", e, new EventId(), LogLevel.Critical);                          // Noncompliant (exception, event id, log level)
-                                                                                                                                                            // Secondary @-1
-                                                                                                                                                            // Secondary @-2
-                                                                                                                                                            // Secondary @-3
-                    logger.{{methodName}}({{logLevel}} e, "Expected exception.", e, new EventId(), LogLevel.Critical);                                      // Noncompliant (event id, log level)
-                                                                                                                                                            // Secondary @-1
-                                                                                                                                                            // Secondary @-2
-                                                                                                                                                            // Secondary @-3
-                    logger.{{methodName}}({{logLevel}} "Expected exception.", e, new EventId(), LogLevel.Critical);                                         // Noncompliant (exception, event id, log level)
-                                                                                                                                                            // Secondary @-1
-                                                                                                                                                            // Secondary @-2
-                                                                                                                                                            // Secondary @-3
-                    LoggerExtensions.{{methodName}}(logger, {{logLevel}} "Expected exception.", e, new EventId(), LogLevel.Critical);                       // Noncompliant (exception, event id, log level)
-                                                                                                                                                            // Secondary @-1
-                                                                                                                                                            // Secondary @-2
-                                                                                                                                                            // Secondary @-3
-                    LoggerExtensions.{{methodName}}(logger, {{logLevel}} new EventId(), e, "Expected exception.", e, new EventId(), LogLevel.Critical);     // Noncompliant (event id, log level)
-                                                                                                                                                            // Secondary @-1
-                                                                                                                                                            // Secondary @-2
-                                                                                                                                                            // Secondary @-3
+                    logger.{{methodName}}(new EventId(), e, "Expected exception.", e, new EventId(), LogLevel.Critical);                       // Noncompliant (log level)
+                                                                                                                                               // Secondary @-1
+                    logger.{{methodName}}(new EventId(), "Expected exception.", e, new EventId(), LogLevel.Critical);                          // Noncompliant (exception, log level)
+                                                                                                                                               // Secondary @-1
+                                                                                                                                               // Secondary @-2
+                    logger.{{methodName}}(e, "Expected exception.", e, new EventId(), LogLevel.Critical);                                      // Noncompliant (event id, log level)
+                                                                                                                                               // Secondary @-1
+                                                                                                                                               // Secondary @-2
+                    logger.{{methodName}}("Expected exception.", e, new EventId(), LogLevel.Critical);                                         // Noncompliant (exception, event id, log level)
+                                                                                                                                               // Secondary @-1
+                                                                                                                                               // Secondary @-2
+                                                                                                                                               // Secondary @-3
+                    LoggerExtensions.{{methodName}}(logger, "Expected exception.", e, new EventId(), LogLevel.Critical);                       // Noncompliant (exception, event id, log level)
+                                                                                                                                               // Secondary @-1
+                                                                                                                                               // Secondary @-2
+                                                                                                                                               // Secondary @-3
+                    LoggerExtensions.{{methodName}}(logger, new EventId(), e, "Expected exception.", e, new EventId(), LogLevel.Critical);     // Noncompliant (log level)
+                                                                                                                                               // Secondary @-1
+                }
+            }
+            """)
+           .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
+           .Verify();
+
+    [TestMethod]
+    public void LoggingArgumentsShouldBePassedCorrectly_MicrosoftExtensionsLogging_Log_CS() =>
+        builder.AddSnippet("""
+            using System;
+            using Microsoft.Extensions.Logging;
+            using Microsoft.Extensions.Logging.Abstractions;
+
+            public class Program
+            {
+                public void Method(ILogger logger, Exception e)
+                {
+                    logger.Log(LogLevel.Warning, "Expected exception.");
+                    logger.Log(LogLevel.Warning, e, "Expected exception.");
+                    logger.Log(LogLevel.Warning, new EventId(), "Expected exception.");
+                    logger.Log(LogLevel.Warning, new EventId(), e, "Expected exception.");
+                    LoggerExtensions.Log(logger, LogLevel.Warning, "Expected exception.");
+                    LoggerExtensions.Log(logger, LogLevel.Warning, new EventId(), e, "Expected exception.");
+
+                    logger.Log(LogLevel.Warning, new EventId(), e, "Expected exception.", e, new EventId(), LogLevel.Critical);
+                    logger.Log(LogLevel.Warning, new EventId(), "Expected exception.", e, new EventId(), LogLevel.Critical);                          // Noncompliant (exception)
+                                                                                                                                                      // Secondary @-1
+                    logger.Log(LogLevel.Warning, e, "Expected exception.", e, new EventId(), LogLevel.Critical);                                      // Noncompliant (event id)
+                                                                                                                                                      // Secondary @-1
+                    logger.Log(LogLevel.Warning, "Expected exception.", e, new EventId(), LogLevel.Critical);                                         // Noncompliant (exception, event id)
+                                                                                                                                                      // Secondary @-1
+                                                                                                                                                      // Secondary @-2
+                    LoggerExtensions.Log(logger, LogLevel.Warning, "Expected exception.", e, new EventId(), LogLevel.Critical);                       // Noncompliant (exception, event id)
+                                                                                                                                                      // Secondary @-1
+                                                                                                                                                      // Secondary @-2
+                    LoggerExtensions.Log(logger, LogLevel.Warning, new EventId(), e, "Expected exception.", e, new EventId(), LogLevel.Critical);
                 }
             }
             """)
@@ -110,11 +140,9 @@ public class LoggingArgumentsShouldBePassedCorrectlyTest
                     logger.{{methodName}}(CultureInfo.CurrentCulture, message, e);        // Noncompliant
                                                                                           // Secondary @-1
                     logger.{{methodName}}(e, message);                                    // Compliant
-                    logger.{{methodName}}(e, message, e);                                 // Noncompliant
-                                                                                          // Secondary @-1
+                    logger.{{methodName}}(e, message, e);                                 // Compliant
                     logger.{{methodName}}(e, CultureInfo.CurrentCulture, message);        // Compliant
-                    logger.{{methodName}}(e, CultureInfo.CurrentCulture, message, e);     // Noncompliant
-                                                                                          // Secondary @-1
+                    logger.{{methodName}}(e, CultureInfo.CurrentCulture, message, e);     // Compliant
                 }
             }
             """)
@@ -122,7 +150,7 @@ public class LoggingArgumentsShouldBePassedCorrectlyTest
         .Verify();
 
     [DataTestMethod]
-    [DataRow("Log", "LogLevel.Debug,")]
+    [DataRow("Log", "LogLevel.Debug,", "")]
     [DataRow("Debug")]
     [DataRow("ConditionalDebug")]
     [DataRow("Error")]
@@ -131,7 +159,7 @@ public class LoggingArgumentsShouldBePassedCorrectlyTest
     [DataRow("Trace")]
     [DataRow("ConditionalTrace")]
     [DataRow("Warn")]
-    public void LoggingArgumentsShouldBePassedCorrectly_NLog_CS(string methodName, string logLevel = "") =>
+    public void LoggingArgumentsShouldBePassedCorrectly_NLog_CS(string methodName, string logLevel = "", string logLevelExpectation = "// Secondary @-2") =>
         builder.AddSnippet($$"""
             using System;
             using System.Globalization;
@@ -144,11 +172,9 @@ public class LoggingArgumentsShouldBePassedCorrectlyTest
                     logger.{{methodName}}({{logLevel}} e);                                                    // Compliant
                     logger.{{methodName}}({{logLevel}} CultureInfo.CurrentCulture, e);                        // Compliant
                     logger.{{methodName}}({{logLevel}} e, "Message!");                                        // Compliant
-                    logger.{{methodName}}({{logLevel}} e, "Message!", e);                                     // Noncompliant
-                                                                                                              // Secondary @-1
-                    logger.{{methodName}}({{logLevel}}e, CultureInfo.CurrentCulture, "Message!", e);          // Noncompliant
-                                                                                                              // Secondary @-1
-                    logger.{{methodName}}({{logLevel}}CultureInfo.CurrentCulture, "Message!", 1, 2, 3, e);    // Noncompliant
+                    logger.{{methodName}}({{logLevel}} e, "Message!", e);                                     // Compliant
+                    logger.{{methodName}}({{logLevel}} e, CultureInfo.CurrentCulture, "Message!", e);         // Compliant
+                    logger.{{methodName}}({{logLevel}} CultureInfo.CurrentCulture, "Message!", 1, 2, 3, e);   // Noncompliant
                                                                                                               // Secondary @-1
                     logger.{{methodName}}({{logLevel}} "Message!");                                           // Compliant
                     logger.{{methodName}}({{logLevel}} "Message!", 1, 2, 3, e);                               // Noncompliant
@@ -168,7 +194,7 @@ public class LoggingArgumentsShouldBePassedCorrectlyTest
                                                                                                               // Secondary @-1
                     logger.{{methodName}}({{logLevel}} "Message!", 1, LogLevel.Debug, e);                     // Noncompliant
                                                                                                               // Secondary @-1
-                                                                                                              // Secondary @-2
+                                                                                                              {{logLevelExpectation}}
                     ILoggerExtensions.{{methodName}}(logger, {{logLevel}} e, null);                           // Compliant
                 }
             }
@@ -192,10 +218,8 @@ public class LoggingArgumentsShouldBePassedCorrectlyTest
                     ILoggerExtensions.{{methodName}}(logger, e);                                                    // Compliant
                     ILoggerExtensions.{{methodName}}(logger, CultureInfo.CurrentCulture, e);                        // Compliant
                     ILoggerExtensions.{{methodName}}(logger, e, "Message!");                                        // Compliant
-                    ILoggerExtensions.{{methodName}}(logger, e, "Message!", e);                                     // Noncompliant
-                                                                                                                    // Secondary @-1
-                    ILoggerExtensions.{{methodName}}(logger, e, CultureInfo.CurrentCulture, "Message!", e);         // Noncompliant
-                                                                                                                    // Secondary @-1
+                    ILoggerExtensions.{{methodName}}(logger, e, "Message!", e);                                     // Compliant
+                    ILoggerExtensions.{{methodName}}(logger, e, CultureInfo.CurrentCulture, "Message!", e);         // Compliant
                     ILoggerExtensions.{{methodName}}(logger, CultureInfo.CurrentCulture, "Message!", 1, 2, 3, e);   // Noncompliant
                                                                                                                     // Secondary @-1
                     ILoggerExtensions.{{methodName}}(logger, "Message!");                                           // Compliant
@@ -251,14 +275,10 @@ public class LoggingArgumentsShouldBePassedCorrectlyTest
                     Log.{{methodName}}("Message!", 1, 2, 3, e, true);                    // Noncompliant
                                                                                          // Secondary @-1
                     Log.{{methodName}}(e, "Message");
-                    Log.{{methodName}}<Exception>(e, "Message", e);                      // Noncompliant
-                                                                                         // Secondary @-1
-                    Log.{{methodName}}<int, Exception>(e, "Message", 1, e);              // Noncompliant
-                                                                                         // Secondary @-1
-                    Log.{{methodName}}<int, Exception, bool>(e, "Message", 1, e, true);  // Noncompliant
-                                                                                         // Secondary @-1
-                    Log.{{methodName}}(e, "Message!", 1, 2, 3, e, true);                 // Noncompliant
-                                                                                         // Secondary @-1
+                    Log.{{methodName}}<Exception>(e, "Message", e);
+                    Log.{{methodName}}<int, Exception>(e, "Message", 1, e);
+                    Log.{{methodName}}<int, Exception, bool>(e, "Message", 1, e, true);
+                    Log.{{methodName}}(e, "Message!", 1, 2, 3, e, true);
                 }
             }
             """)
@@ -278,28 +298,19 @@ public class LoggingArgumentsShouldBePassedCorrectlyTest
             {
                 Log.Write(logEvent);
                 Log.Write(level, "Message");
-                Log.Write(level, "Message", level);                                 // Noncompliant
-                                                                                    // Secondary @-1
+                Log.Write(level, "Message", level);
                 Log.Write(level, "Message", 1);
-                Log.Write(level, "Message", level, 1);                              // Noncompliant
+                Log.Write(level, "Message", level, exception);                      // Noncompliant
                                                                                     // Secondary @-1
                 Log.Write(level, "Message", 1, exception, 2);                       // Noncompliant
                                                                                     // Secondary @-1
                 Log.Write(level, "Message", level, exception, 1, 2);                // Noncompliant
                                                                                     // Secondary @-1
-                                                                                    // Secondary @-2
                 Log.Write(level, exception, "Message");
-                Log.Write(level, exception, "Message", level);                      // Noncompliant
-                                                                                    // Secondary @-1
-                Log.Write(level, exception, "Message", level, exception);           // Noncompliant
-                                                                                    // Secondary @-1
-                                                                                    // Secondary @-2
-                Log.Write(level, exception, "Message", level, exception, 1);        // Noncompliant
-                                                                                    // Secondary @-1
-                                                                                    // Secondary @-2
-                Log.Write(level, exception, "Message", level, exception, 1, 2);     // Noncompliant
-                                                                                    // Secondary @-1
-                                                                                    // Secondary @-2
+                Log.Write(level, exception, "Message", level);
+                Log.Write(level, exception, "Message", level, exception);
+                Log.Write(level, exception, "Message", level, exception, 1);
+                Log.Write(level, exception, "Message", level, exception, 1, 2);
             }
         }
         """)

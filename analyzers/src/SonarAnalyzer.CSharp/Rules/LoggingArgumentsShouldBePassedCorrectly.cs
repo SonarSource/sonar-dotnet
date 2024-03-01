@@ -34,6 +34,11 @@ public sealed class LoggingArgumentsShouldBePassedCorrectly : SonarDiagnosticAna
         ImmutableArray.Create(KnownType.System_Exception, KnownType.Microsoft_Extensions_Logging_LogLevel, KnownType.Microsoft_Extensions_Logging_EventId);
     private static readonly ImmutableArray<KnownType> CastleCoreInvalidTypes = ImmutableArray.Create(KnownType.System_Exception);
     private static readonly ImmutableArray<KnownType> NLogAndSerilogInvalidTypes = ImmutableArray.Create(KnownType.System_Exception, KnownType.Serilog_Events_LogEventLevel, KnownType.NLog_LogLevel);
+    private static readonly HashSet<string> LoggingMethodNames = MicrosoftExtensionsLogging
+        .Concat(NLogLoggingMethods)
+        .Concat(Serilog)
+        .Concat(CastleCoreOrCommonCore)
+        .ToHashSet();
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
@@ -41,26 +46,27 @@ public sealed class LoggingArgumentsShouldBePassedCorrectly : SonarDiagnosticAna
         context.RegisterNodeAction(c =>
             {
                 var invocation = (InvocationExpressionSyntax)c.Node;
-                if (!HasLoggingMethodName(invocation)
+                if (!LoggingMethodNames.Contains(invocation.GetName())
                     || c.SemanticModel.GetSymbolInfo(invocation).Symbol is not IMethodSymbol invocationSymbol)
                 {
                     return;
                 }
                 if (invocationSymbol.HasContainingType(KnownType.Microsoft_Extensions_Logging_LoggerExtensions, false))
                 {
-                    CheckInvalidParams(invocation, invocationSymbol, c, MicrosoftLoggingExtensionsInvalidTypes);
+                    CheckInvalidParams(invocation, invocationSymbol, c, Filter(invocationSymbol, MicrosoftLoggingExtensionsInvalidTypes));
                 }
                 else if (invocationSymbol.HasContainingType(KnownType.Castle_Core_Logging_ILogger, true))
                 {
-                    CheckInvalidParams(invocation, invocationSymbol, c, CastleCoreInvalidTypes);
+                    CheckInvalidParams(invocation, invocationSymbol, c, Filter(invocationSymbol, CastleCoreInvalidTypes));
                 }
                 else if (invocationSymbol.HasContainingType(KnownType.Serilog_ILogger, true)
                          || invocationSymbol.HasContainingType(KnownType.Serilog_Log, false)
                          || invocationSymbol.HasContainingType(KnownType.NLog_ILoggerBase, true)
                          || invocationSymbol.HasContainingType(KnownType.NLog_ILoggerExtensions, false))
                 {
-                    CheckInvalidParams(invocation, invocationSymbol, c, NLogAndSerilogInvalidTypes);
-                    CheckInvalidTypeParams(invocation, invocationSymbol, c, NLogAndSerilogInvalidTypes);
+                    var knownTypes = Filter(invocationSymbol, NLogAndSerilogInvalidTypes);
+                    CheckInvalidParams(invocation, invocationSymbol, c, knownTypes);
+                    CheckInvalidTypeParams(invocation, invocationSymbol, c, knownTypes);
                 }
             },
             SyntaxKind.InvocationExpression);
@@ -68,7 +74,7 @@ public sealed class LoggingArgumentsShouldBePassedCorrectly : SonarDiagnosticAna
     private static void CheckInvalidParams(InvocationExpressionSyntax invocation, IMethodSymbol invocationSymbol, SonarSyntaxNodeReportingContext c, ImmutableArray<KnownType> knownTypes)
     {
         var paramsParameter = invocationSymbol.Parameters.FirstOrDefault(x => x.IsParams);
-        if (paramsParameter is null)
+        if (paramsParameter is null || knownTypes.IsEmpty)
         {
             return;
         }
@@ -88,7 +94,7 @@ public sealed class LoggingArgumentsShouldBePassedCorrectly : SonarDiagnosticAna
 
     private static void CheckInvalidTypeParams(InvocationExpressionSyntax invocation, IMethodSymbol methodSymbol, SonarSyntaxNodeReportingContext c, ImmutableArray<KnownType> knownTypes)
     {
-        if (!IsNLogIgnoredOverload(methodSymbol) && methodSymbol.TypeArguments.Any(x => x.DerivesFromAny(knownTypes)))
+        if (!knownTypes.IsEmpty && !IsNLogIgnoredOverload(methodSymbol) && methodSymbol.TypeArguments.Any(x => x.DerivesFromAny(knownTypes)))
         {
             var typeParameterNames = methodSymbol.TypeParameters.Select(x => x.MetadataName).ToArray();
             var positions = methodSymbol.ConstructedFrom.Parameters.Where(x => typeParameterNames.Contains(x.Type.MetadataName)).Select(x => methodSymbol.ConstructedFrom.Parameters.IndexOf(x));
@@ -96,12 +102,6 @@ public sealed class LoggingArgumentsShouldBePassedCorrectly : SonarDiagnosticAna
             c.ReportIssue(Diagnostic.Create(Rule, invocation.Expression.GetLocation(), invalidArguments));
         }
     }
-
-    private static bool HasLoggingMethodName(InvocationExpressionSyntax invocation) =>
-        MicrosoftExtensionsLogging.Contains(invocation.GetName())
-        || NLogLoggingMethods.Contains(invocation.GetName())
-        || Serilog.Contains(invocation.GetName())
-        || CastleCoreOrCommonCore.Contains(invocation.GetName());
 
     private static bool IsNLogIgnoredOverload(IMethodSymbol methodSymbol) =>
         // These overloads are ignored since they will try to convert the T value to an exception.
@@ -123,4 +123,11 @@ public sealed class LoggingArgumentsShouldBePassedCorrectly : SonarDiagnosticAna
 
     private static bool IsInvalidArgument(ArgumentSyntax argumentSyntax, SemanticModel model, ImmutableArray<KnownType> knownTypes) =>
         model.GetTypeInfo(argumentSyntax.Expression).Type?.DerivesFromAny(knownTypes) is true;
+
+    // This method filters out the types that the method accepts strongly:
+    // logger.Debug(exception, "template", exception)
+    //              ^^^^^^^^^ valid
+    //                                     ^^^^^^^^^ do not raise
+    private static ImmutableArray<KnownType> Filter(IMethodSymbol methodSymbol, ImmutableArray<KnownType> knownTypes) =>
+        knownTypes.Where(knownType => !methodSymbol.ConstructedFrom.Parameters.Any(x => x.Type.DerivesFrom(knownType))).ToImmutableArray();
 }
