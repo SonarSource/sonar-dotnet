@@ -113,6 +113,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Microsoft_Extensions_Logging_EventSourceLoggerFactoryExtensions = new("Microsoft.Extensions.Logging.EventSourceLoggerFactoryExtensions");
         public static readonly KnownType Microsoft_Extensions_Logging_EventId = new("Microsoft.Extensions.Logging.EventId");
         public static readonly KnownType Microsoft_Extensions_Logging_ILogger = new("Microsoft.Extensions.Logging.ILogger");
+        public static readonly KnownType Microsoft_Extensions_Logging_ILogger_TCategoryName = new("Microsoft.Extensions.Logging.ILogger", "TCategoryName");
         public static readonly KnownType Microsoft_Extensions_Logging_ILoggerFactory = new("Microsoft.Extensions.Logging.ILoggerFactory");
         public static readonly KnownType Microsoft_Extensions_Logging_LoggerExtensions = new("Microsoft.Extensions.Logging.LoggerExtensions");
         public static readonly KnownType Microsoft_Extensions_Logging_LogLevel = new("Microsoft.Extensions.Logging.LogLevel");
