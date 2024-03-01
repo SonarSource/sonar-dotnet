@@ -137,7 +137,7 @@ public static class NuGetMetadataReference
     public static References PetaPocoCompiled(string packageVersion = "6.0.353") => Create("PetaPoco.Compiled", packageVersion);
     public static References RhinoMocks(string packageVersion) => Create("RhinoMocks", packageVersion);
     public static References Shouldly(string packageVersion) => Create("Shouldly", packageVersion);
-    public static References Serilog(string packageVersion) => Create("Serilog", packageVersion);
+    public static References Serilog(string packageVersion = Constants.NuGetLatestVersion) => Create("Serilog", packageVersion);
     public static References SerilogSinksConsole(string packageVersion) => Create("Serilog.Sinks.Console", packageVersion);
     public static References ServiceStackOrmLite(string packageVersion = "5.1.0") => Create("ServiceStack.OrmLite", packageVersion);
     public static References SpecFlow(string packageVersion) => Create("SpecFlow", packageVersion);
