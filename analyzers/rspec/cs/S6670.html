@@ -1,0 +1,51 @@
+<h2>Why is this an issue?</h2>
+<p><a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.trace.write">Trace.Write</a> and <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.trace.writeline">Trace.WriteLine</a> methods are writing to the underlying
+output stream directly, bypassing the trace formatting and filtering performed by <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.tracelistener.traceevent">TraceListener.TraceEvent</a> implementations. It is
+preferred to use <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.trace.traceerror">Trace.TraceError</a>, <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.trace.tracewarning">Trace.TraceWarning</a> and <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.trace.traceinformation">Trace.TraceInformation</a> methods instead because they
+call the <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.tracelistener.traceevent">TraceEvent method</a> which filters the
+trace output according to the <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.traceeventtype">TraceEventType</a> (Error,
+Warning or Information) and enhance the output with additional information.</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+try
+{
+    var message = RetrieveMessage();
+    Trace.Write($"Message received: {message}"); // Noncompliant
+}
+catch (Exception ex)
+{
+    Trace.WriteLine(ex); // Noncompliant
+}
+</pre>
+<pre data-diff-id="1" data-diff-type="compliant">
+try
+{
+    var message = RetrieveMessage();
+    Trace.TraceInformation($"Message received: {message}");
+}
+catch (Exception ex)
+{
+    Trace.TraceError(ex);
+}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.trace.traceerror">Trace.TraceError Method</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.trace.traceinformation">Trace.TraceInformation
+  Method</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.trace.tracewarning">Trace.TraceWarning Method</a>
+  </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.trace.write">Trace.Write Method</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.trace.writeline">Trace.WriteLine Method</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.tracelistener.traceevent">TraceListener.TraceEvent
+  Method</a> </li>
+</ul>
+<h3>Articles &amp; blog posts</h3>
+<ul>
+  <li> Stackoverflow - <a href="https://stackoverflow.com/q/26350620">Difference between Trace.Write() and Trace.TraceInformation()</a> </li>
+</ul>
+
