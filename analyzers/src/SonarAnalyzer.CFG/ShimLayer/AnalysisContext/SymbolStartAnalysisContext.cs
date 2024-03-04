@@ -18,11 +18,18 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using static System.Linq.Expressions.Expression;
 using CS = Microsoft.CodeAnalysis.CSharp;
+
 namespace SonarAnalyzer.ShimLayer.AnalysisContext;
 
 public class SymbolStartAnalysisContext
 {
+    private static Func<object, CancellationToken> cancellationTokenAccessor;
+    private static Func<object, Compilation> compilationAccessor;
+    private static Func<object, AnalyzerOptions> optionsAccessor;
+    private static Func<object, ISymbol> symbolAccessor;
+
     private readonly Action<Action<CodeBlockAnalysisContext>> registerCodeBlockAction;
     private readonly Action<Action<CodeBlockStartAnalysisContext<CS.SyntaxKind>>> registerCodeBlockStartActionCS;
     private readonly Action<Action<OperationAnalysisContext>, ImmutableArray<OperationKind>> registerOperationAction;
@@ -31,11 +38,17 @@ public class SymbolStartAnalysisContext
     private readonly Action<Action<SymbolAnalysisContext>> registerSymbolEndAction;
     private readonly Action<Action<SyntaxNodeAnalysisContext>, ImmutableArray<CS.SyntaxKind>> registerSyntaxNodeActionCS;
 
+    static SymbolStartAnalysisContext()
+    {
+        var symbolStartAnalysisContextType = typeof(CompilationStartAnalysisContext).Assembly.GetType("Microsoft.CodeAnalysis.Diagnostics.SymbolStartAnalysisContext");
+        cancellationTokenAccessor = CreatePropertyAccessor<CancellationToken>(symbolStartAnalysisContextType, nameof(CancellationToken));
+        compilationAccessor = CreatePropertyAccessor<Compilation>(symbolStartAnalysisContextType, nameof(Compilation));
+        optionsAccessor = CreatePropertyAccessor<AnalyzerOptions>(symbolStartAnalysisContextType, nameof(Options));
+        symbolAccessor = CreatePropertyAccessor<ISymbol>(symbolStartAnalysisContextType, nameof(Symbol));
+    }
+
     public SymbolStartAnalysisContext(
-        CancellationToken cancellationToken,
-        Compilation compilation,
-        AnalyzerOptions options,
-        ISymbol symbol,
+        object roslynSymbolStartAnalysisContext,
         Action<Action<CodeBlockAnalysisContext>> registerCodeBlockAction,
         Action<Action<CodeBlockStartAnalysisContext<CS.SyntaxKind>>> registerCodeBlockStartActionCS,
         Action<Action<OperationAnalysisContext>, ImmutableArray<OperationKind>> registerOperationAction,
@@ -44,10 +57,7 @@ public class SymbolStartAnalysisContext
         Action<Action<SymbolAnalysisContext>> registerSymbolEndAction,
         Action<Action<SyntaxNodeAnalysisContext>, ImmutableArray<CS.SyntaxKind>> registerSyntaxNodeActionCS)
     {
-        CancellationToken = cancellationToken;
-        Compilation = compilation;
-        Options = options;
-        Symbol = symbol;
+        RoslynSymbolStartAnalysisContext = roslynSymbolStartAnalysisContext;
         this.registerCodeBlockAction = registerCodeBlockAction;
         this.registerCodeBlockStartActionCS = registerCodeBlockStartActionCS;
         this.registerOperationAction = registerOperationAction;
@@ -56,11 +66,11 @@ public class SymbolStartAnalysisContext
         this.registerSymbolEndAction = registerSymbolEndAction;
         this.registerSyntaxNodeActionCS = registerSyntaxNodeActionCS;
     }
-
-    public CancellationToken CancellationToken { get; }
-    public Compilation Compilation { get; }
-    public AnalyzerOptions Options { get; }
-    public ISymbol Symbol { get; }
+    public object RoslynSymbolStartAnalysisContext { get; }
+    public CancellationToken CancellationToken => cancellationTokenAccessor(RoslynSymbolStartAnalysisContext);
+    public Compilation Compilation => compilationAccessor(RoslynSymbolStartAnalysisContext);
+    public AnalyzerOptions Options => optionsAccessor(RoslynSymbolStartAnalysisContext);
+    public ISymbol Symbol => symbolAccessor(RoslynSymbolStartAnalysisContext);
 
     public void RegisterCodeBlockAction(Action<CodeBlockAnalysisContext> action) =>
         registerCodeBlockAction(action);
@@ -110,5 +120,14 @@ public class SymbolStartAnalysisContext
         {
             throw new ArgumentException("Invalid type parameter.", nameof(TLanguageKindEnum));
         }
+    }
+
+    private static Func<object, TProperty> CreatePropertyAccessor<TProperty>(Type symbolStartAnalysisContextType, string propertyName)
+    {
+        var symbolStartAnalysisContextParameter = Parameter(typeof(object));
+        return Lambda<Func<object, TProperty>>(
+            Property(
+                Convert(symbolStartAnalysisContextParameter, symbolStartAnalysisContextType), propertyName),
+            symbolStartAnalysisContextParameter).Compile();
     }
 }

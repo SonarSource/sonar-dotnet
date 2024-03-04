@@ -20,6 +20,7 @@
 
 using SonarAnalyzer.ShimLayer.AnalysisContext;
 using CS = Microsoft.CodeAnalysis.CSharp;
+using SonarSymbolStartAnalysisContext = SonarAnalyzer.ShimLayer.AnalysisContext.SymbolStartAnalysisContext;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 namespace SonarAnalyzer.Test.Wrappers;
@@ -27,6 +28,28 @@ namespace SonarAnalyzer.Test.Wrappers;
 [TestClass]
 public class RegisterSymbolStartActionWrapperTest
 {
+    [TestMethod]
+    public async Task RegisterSymbolStartAction_SymbolStartProperties()
+    {
+        var code = """
+            public class C
+            {
+                int i = 0;
+                public void M() => ToString();
+            }
+            """;
+        var snippet = new SnippetCompiler(code);
+        var compilation = snippet.Compilation.WithAnalyzers(ImmutableArray.Create<DiagnosticAnalyzer>(
+            new TestDiagnosticAnalyzer(symbolStart =>
+            {
+                symbolStart.CancellationToken.IsCancellationRequested.Should().BeFalse();
+                symbolStart.Compilation.SyntaxTrees.Should().ContainSingle();
+                symbolStart.Options.Should().NotBeNull();
+                symbolStart.Symbol.Should().BeAssignableTo<INamedTypeSymbol>().Which.Name.Should().Be("C");
+            }, SymbolKind.NamedType)));
+        await compilation.GetAnalyzerDiagnosticsAsync();
+    }
+
     [TestMethod]
     public async Task RegisterSymbolStartAction_RegisterCodeBlockAction()
     {
@@ -44,6 +67,7 @@ public class RegisterSymbolStartActionWrapperTest
             {
                 symbolStart.RegisterCodeBlockAction(block =>
                 {
+                    var c = symbolStart.CancellationToken;
                     var node = block.CodeBlock.ToString();
                     visitedCodeBlocks.Add(node);
                 });
@@ -273,7 +297,7 @@ public class RegisterSymbolStartActionWrapperTest
 #pragma warning disable RS1026 // Enable concurrent execution
     private class TestDiagnosticAnalyzer : DiagnosticAnalyzer
     {
-        public TestDiagnosticAnalyzer(Action<ShimLayer.AnalysisContext.SymbolStartAnalysisContext> action, SymbolKind symbolKind)
+        public TestDiagnosticAnalyzer(Action<SonarSymbolStartAnalysisContext> action, SymbolKind symbolKind)
         {
             Action = action;
             SymbolKind = symbolKind;
@@ -281,7 +305,7 @@ public class RegisterSymbolStartActionWrapperTest
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
             ImmutableArray.Create(new DiagnosticDescriptor("TEST", "Test", "Test", "Test", DiagnosticSeverity.Warning, true));
 
-        public Action<ShimLayer.AnalysisContext.SymbolStartAnalysisContext> Action { get; }
+        public Action<SonarSymbolStartAnalysisContext> Action { get; }
         public SymbolKind SymbolKind { get; }
 
         public override void Initialize(Microsoft.CodeAnalysis.Diagnostics.AnalysisContext context) =>
