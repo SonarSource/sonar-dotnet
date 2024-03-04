@@ -32,6 +32,7 @@ public sealed class MessageTemplateAnalyzer : SonarDiagnosticAnalyzer
         SyntaxKind.InterpolatedStringText);
 
     private static readonly ImmutableHashSet<IMessageTemplateCheck> Checks = ImmutableHashSet.Create<IMessageTemplateCheck>(
+               new LoggingTemplatePlaceHoldersShouldBeInOrder(),
                new NamedPlaceholdersShouldBeUnique(),
                new UsePascalCaseForNamedPlaceHolders());
 
