@@ -29,9 +29,9 @@ public class SymbolStartAnalysisContext
     private static Func<object, Compilation> compilationAccessor;
     private static Func<object, AnalyzerOptions> optionsAccessor;
     private static Func<object, ISymbol> symbolAccessor;
+    private static Action<object, Action<CodeBlockAnalysisContext>> registerCodeBlockAction;
+    private static Action<object, Action<CodeBlockStartAnalysisContext<CS.SyntaxKind>>> registerCodeBlockStartActionCS;
 
-    private readonly Action<Action<CodeBlockAnalysisContext>> registerCodeBlockAction;
-    private readonly Action<Action<CodeBlockStartAnalysisContext<CS.SyntaxKind>>> registerCodeBlockStartActionCS;
     private readonly Action<Action<OperationAnalysisContext>, ImmutableArray<OperationKind>> registerOperationAction;
     private readonly Action<Action<OperationBlockAnalysisContext>> registerOperationBlockAction;
     private readonly Action<Action<OperationBlockStartAnalysisContext>> registerOperationBlockStartAction;
@@ -45,12 +45,21 @@ public class SymbolStartAnalysisContext
         compilationAccessor = CreatePropertyAccessor<Compilation>(symbolStartAnalysisContextType, nameof(Compilation));
         optionsAccessor = CreatePropertyAccessor<AnalyzerOptions>(symbolStartAnalysisContextType, nameof(Options));
         symbolAccessor = CreatePropertyAccessor<ISymbol>(symbolStartAnalysisContextType, nameof(Symbol));
+        registerCodeBlockAction = CreateRegistrationMethod<CodeBlockAnalysisContext>(symbolStartAnalysisContextType, nameof(RegisterCodeBlockAction));
+        registerCodeBlockStartActionCS = CreateRegistrationMethod<CodeBlockStartAnalysisContext<CS.SyntaxKind>>(symbolStartAnalysisContextType, nameof(RegisterCodeBlockStartAction), typeof(CS.SyntaxKind));
     }
+
+    private static Action<object, Action<TContext>> CreateRegistrationMethod<TContext>(Type symbolStartAnalysisContextType, string registrationMethodName, params Type[] typeArguments)
+    {
+        var receiver = Parameter(typeof(object));
+        var registerActionParameter = Parameter(typeof(Action<TContext>));
+        return Lambda<Action<object, Action<TContext>>>(
+            Call(Convert(receiver, symbolStartAnalysisContextType), registrationMethodName, typeArguments, registerActionParameter), receiver, registerActionParameter).Compile();
+    }
+
 
     public SymbolStartAnalysisContext(
         object roslynSymbolStartAnalysisContext,
-        Action<Action<CodeBlockAnalysisContext>> registerCodeBlockAction,
-        Action<Action<CodeBlockStartAnalysisContext<CS.SyntaxKind>>> registerCodeBlockStartActionCS,
         Action<Action<OperationAnalysisContext>, ImmutableArray<OperationKind>> registerOperationAction,
         Action<Action<OperationBlockAnalysisContext>> registerOperationBlockAction,
         Action<Action<OperationBlockStartAnalysisContext>> registerOperationBlockStartAction,
@@ -58,8 +67,6 @@ public class SymbolStartAnalysisContext
         Action<Action<SyntaxNodeAnalysisContext>, ImmutableArray<CS.SyntaxKind>> registerSyntaxNodeActionCS)
     {
         RoslynSymbolStartAnalysisContext = roslynSymbolStartAnalysisContext;
-        this.registerCodeBlockAction = registerCodeBlockAction;
-        this.registerCodeBlockStartActionCS = registerCodeBlockStartActionCS;
         this.registerOperationAction = registerOperationAction;
         this.registerOperationBlockAction = registerOperationBlockAction;
         this.registerOperationBlockStartAction = registerOperationBlockStartAction;
@@ -73,7 +80,7 @@ public class SymbolStartAnalysisContext
     public ISymbol Symbol => symbolAccessor(RoslynSymbolStartAnalysisContext);
 
     public void RegisterCodeBlockAction(Action<CodeBlockAnalysisContext> action) =>
-        registerCodeBlockAction(action);
+        registerCodeBlockAction(RoslynSymbolStartAnalysisContext, action);
 
     public void RegisterCodeBlockStartAction<TLanguageKindEnum>(Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action) where TLanguageKindEnum : struct
     {
@@ -81,7 +88,7 @@ public class SymbolStartAnalysisContext
         if (languageKindType == typeof(CS.SyntaxKind))
         {
             var casted = (Action<CodeBlockStartAnalysisContext<CS.SyntaxKind>>)action;
-            registerCodeBlockStartActionCS(casted);
+            registerCodeBlockStartActionCS(RoslynSymbolStartAnalysisContext, casted);
         }
         else if (languageKindType.FullName == "Microsoft.CodeAnalysis.VisualBasic.SyntaxKind")
         {

@@ -30,7 +30,7 @@ public static class CompilationStartAnalysisContextExtensions
     private static readonly Action<CompilationStartAnalysisContext, Action<SymbolStartAnalysisContext>, SymbolKind> RegisterSymbolStartActionWrapper = CreateRegisterSymbolStartAnalysisWrapper();
 
     public static void RegisterSymbolStartAction(this CompilationStartAnalysisContext context, Action<SymbolStartAnalysisContext> action, SymbolKind symbolKind) =>
-        RegisterSymbolStartActionWrapper(context, action, symbolKind);
+        CreateRegisterSymbolStartAnalysisWrapper()(context, action, symbolKind);
 
     private static Action<CompilationStartAnalysisContext, Action<SymbolStartAnalysisContext>, SymbolKind> CreateRegisterSymbolStartAnalysisWrapper()
     {
@@ -73,8 +73,6 @@ public static class CompilationStartAnalysisContextExtensions
         var lambda = Lambda(symbolStartAnalysisActionType, Call(shimmedActionParameter, nameof(Action.Invoke), [],
                 New(symbolStartAnalysisContextCtor,
                     symbolStartAnalysisContextParameter,
-                    RegisterLambda<CodeBlockAnalysisContext>(symbolStartAnalysisContextParameter, nameof(SymbolStartAnalysisContext.RegisterCodeBlockAction)),
-                    RegisterLambda<CodeBlockStartAnalysisContext<CS.SyntaxKind>>(symbolStartAnalysisContextParameter, nameof(SymbolStartAnalysisContext.RegisterCodeBlockStartAction), typeof(CS.SyntaxKind)),
                     RegisterLambdaWithAdditionalParameter<OperationAnalysisContext, ImmutableArray<OperationKind>>(symbolStartAnalysisContextParameter, nameof(SymbolStartAnalysisContext.RegisterOperationAction)),
                     RegisterLambda<OperationBlockAnalysisContext>(symbolStartAnalysisContextParameter, nameof(SymbolStartAnalysisContext.RegisterOperationBlockAction)),
                     RegisterLambda<OperationBlockStartAnalysisContext>(symbolStartAnalysisContextParameter, nameof(SymbolStartAnalysisContext.RegisterOperationBlockStartAction)),
