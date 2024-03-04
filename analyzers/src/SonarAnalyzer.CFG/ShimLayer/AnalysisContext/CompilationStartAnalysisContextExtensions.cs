@@ -39,6 +39,7 @@ public static class CompilationStartAnalysisContextExtensions
         {
             return static (_, _, _) => { };
         }
+
         var contextParameter = Parameter(typeof(CompilationStartAnalysisContext));
         var shimmedActionParameter = Parameter(typeof(Action<SymbolStartAnalysisContext>));
         var symbolKindParameter = Parameter(typeof(SymbolKind));

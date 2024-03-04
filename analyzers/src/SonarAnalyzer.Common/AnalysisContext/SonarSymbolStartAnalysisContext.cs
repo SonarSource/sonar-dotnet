@@ -31,24 +31,24 @@ public sealed class SonarSymbolStartAnalysisContext : SonarAnalysisContextBase<S
 
     internal SonarSymbolStartAnalysisContext(SonarAnalysisContext analysisContext, SymbolStartAnalysisContext context) : base(analysisContext, context) { }
 
-    public void RegisterCodeBlockAction(Action<SonarCodeBlockReportingContext> action)
-        => Context.RegisterCodeBlockAction(x => action(new(AnalysisContext, x)));
+    public void RegisterCodeBlockAction(Action<SonarCodeBlockReportingContext> action) =>
+        Context.RegisterCodeBlockAction(x => action(new(AnalysisContext, x)));
 
-    public void RegisterCodeBlockStartAction<TLanguageKindEnum>(Action<SonarCodeBlockStartAnalysisContext<TLanguageKindEnum>> action) where TLanguageKindEnum : struct
-        => Context.RegisterCodeBlockStartAction<TLanguageKindEnum>(x => action(new(AnalysisContext, x)));
+    public void RegisterCodeBlockStartAction<TLanguageKindEnum>(Action<SonarCodeBlockStartAnalysisContext<TLanguageKindEnum>> action) where TLanguageKindEnum : struct =>
+        Context.RegisterCodeBlockStartAction<TLanguageKindEnum>(x => action(new(AnalysisContext, x)));
 
-    public void RegisterOperationAction(Action<OperationAnalysisContext> action, ImmutableArray<OperationKind> operationKinds)
-        => Context.RegisterOperationAction(action, operationKinds);
+    public void RegisterOperationAction(Action<OperationAnalysisContext> action, ImmutableArray<OperationKind> operationKinds) =>
+        Context.RegisterOperationAction(action, operationKinds);
 
-    public void RegisterOperationBlockAction(Action<OperationBlockAnalysisContext> action)
-        => Context.RegisterOperationBlockAction(action);
+    public void RegisterOperationBlockAction(Action<OperationBlockAnalysisContext> action) =>
+        Context.RegisterOperationBlockAction(action);
 
-    public void RegisterOperationBlockStartAction(Action<OperationBlockStartAnalysisContext> action)
-        => Context.RegisterOperationBlockStartAction(action);
+    public void RegisterOperationBlockStartAction(Action<OperationBlockStartAnalysisContext> action) =>
+        Context.RegisterOperationBlockStartAction(action);
 
-    public void RegisterSymbolEndAction(Action<SymbolAnalysisContext> action)
-        => Context.RegisterSymbolEndAction(action);
+    public void RegisterSymbolEndAction(Action<SymbolAnalysisContext> action) =>
+        Context.RegisterSymbolEndAction(action);
 
-    public void RegisterSyntaxNodeAction<TLanguageKindEnum>(Action<SonarSyntaxNodeReportingContext> action, params TLanguageKindEnum[] syntaxKinds) where TLanguageKindEnum : struct
-        => Context.RegisterSyntaxNodeAction(x => action(new(AnalysisContext, x)), syntaxKinds);
+    public void RegisterSyntaxNodeAction<TLanguageKindEnum>(Action<SonarSyntaxNodeReportingContext> action, params TLanguageKindEnum[] syntaxKinds) where TLanguageKindEnum : struct =>
+        Context.RegisterSyntaxNodeAction(x => action(new(AnalysisContext, x)), syntaxKinds);
 }
