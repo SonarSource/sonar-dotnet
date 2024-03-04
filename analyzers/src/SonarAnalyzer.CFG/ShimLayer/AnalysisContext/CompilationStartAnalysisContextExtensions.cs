@@ -72,8 +72,7 @@ public static class CompilationStartAnalysisContextExtensions
         //        (Action<SyntaxNodeAnalysisContext> registerActionParameter, ImmutableArray<CS.SyntaxKind> additionalParameter) =>  symbolStartAnalysisContextParameter.RegisterSyntaxNodeAction<CS.SyntaxKind>(registerActionParameter, additionalParameter))
         var lambda = Lambda(symbolStartAnalysisActionType, Call(shimmedActionParameter, nameof(Action.Invoke), [],
                 New(symbolStartAnalysisContextCtor,
-                    symbolStartAnalysisContextParameter,
-                    RegisterLambdaWithAdditionalParameter<SyntaxNodeAnalysisContext, ImmutableArray<CS.SyntaxKind>>(symbolStartAnalysisContextParameter, nameof(SymbolStartAnalysisContext.RegisterSyntaxNodeAction), typeof(CS.SyntaxKind)))),
+                    symbolStartAnalysisContextParameter)),
                 symbolStartAnalysisContextParameter);
 
         // (contextParameter, shimmedActionParameter, symbolKindParameter) => contextParameter.RegisterSymbolStartAction(lambda), symbolKindParameter)
