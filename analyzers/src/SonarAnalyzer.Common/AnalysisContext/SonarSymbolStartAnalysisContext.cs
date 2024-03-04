@@ -38,13 +38,13 @@ public sealed class SonarSymbolStartAnalysisContext : SonarAnalysisContextBase<S
         Context.RegisterCodeBlockStartAction<TLanguageKindEnum>(x => action(new(AnalysisContext, x)));
 
     public void RegisterOperationAction(Action<OperationAnalysisContext> action, ImmutableArray<OperationKind> operationKinds) =>
-        Context.RegisterOperationAction(action, operationKinds);
+        throw new NotImplementedException("SonarOperationAnalysisContext wrapper type not implemented.");
 
     public void RegisterOperationBlockAction(Action<OperationBlockAnalysisContext> action) =>
-        Context.RegisterOperationBlockAction(action);
+        throw new NotImplementedException("SonarOperationBlockAnalysisContext wrapper type not implemented.");
 
     public void RegisterOperationBlockStartAction(Action<OperationBlockStartAnalysisContext> action) =>
-        Context.RegisterOperationBlockStartAction(action);
+        throw new NotImplementedException("SonarOperationBlockStartAnalysisContext wrapper type not implemented.");
 
     public void RegisterSymbolEndAction(Action<SymbolAnalysisContext> action) =>
         Context.RegisterSymbolEndAction(action);

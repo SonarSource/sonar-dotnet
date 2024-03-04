@@ -23,7 +23,6 @@ extern alias vbnet;
 using Microsoft.CodeAnalysis.CSharp;
 using Moq;
 using SonarAnalyzer.AnalysisContext;
-using SonarAnalyzer.Test.TestFramework.Tests;
 using CS = csharp::SonarAnalyzer.Extensions.SonarAnalysisContextExtensions;
 using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext;
 using VB = vbnet::SonarAnalyzer.Extensions.SonarAnalysisContextExtensions;
@@ -266,6 +265,29 @@ public partial class SonarAnalysisContextTest
         startContext.RaisedDiagnostic.Should().NotBeNull().And.BeSameAs(diagnostic);
     }
 
+    [TestMethod]
+    public void SonarCompilationStartAnalysisContext_RegisterSymbolStartAction()
+    {
+        var context = new DummyAnalysisContext(TestContext);
+        var startContext = new DummyCompilationStartAnalysisContext(context);
+        var sut = new SonarCompilationStartAnalysisContext(new(context, DummyMainDescriptor), startContext);
+        var invocationCount = 0;
+        sut.RegisterSymbolStartAction(x => invocationCount++, SymbolKind.NamedType);
+        startContext.RaisedDiagnostic.Should().BeNull();
+        invocationCount.Should().Be(1);
+    }
+
+    [TestMethod]
+    public void SonarCompilationStartAnalysisContext_RegisterSymbolStartAction_RegisterCodeBlockAction_ReportIssue()
+    {
+        var context = new DummyAnalysisContext(TestContext);
+        var startContext = new DummyCompilationStartAnalysisContext(context);
+        var sut = new SonarCompilationStartAnalysisContext(new(context, DummyMainDescriptor), startContext);
+        var diagnostic = Diagnostic.Create(DiagnosticDescriptorFactory.CreateUtility("TEST", "Test report"), context.Tree.GetRoot().GetLocation());
+        sut.RegisterSymbolStartAction(x => x.RegisterCodeBlockAction(c => c.ReportIssue(diagnostic)), SymbolKind.NamedType);
+        startContext.RaisedDiagnostic.Should().BeNull();
+    }
+
 #if NET
 
     [DataTestMethod]
@@ -471,6 +493,12 @@ public partial class SonarAnalysisContextTest
 
         public override void RegisterSyntaxTreeAction(Action<SyntaxTreeAnalysisContext> action) =>
             throw new NotImplementedException();
+
+        public override void RegisterSymbolStartAction(Action<SymbolStartAnalysisContext> action, SymbolKind symbolKind)
+        {
+            var symbolStartAnalysisContext = new Mock<SymbolStartAnalysisContext>(Mock.Of<ISymbol>(), context.Model.Compilation, context.Options, CancellationToken.None);
+            action(symbolStartAnalysisContext.Object);
+        }
     }
 
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
