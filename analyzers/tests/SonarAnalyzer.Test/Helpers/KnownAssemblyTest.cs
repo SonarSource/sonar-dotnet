@@ -255,103 +255,115 @@ public class KnownAssemblyTest
     }
 
     [TestMethod]
-    public void XUnitAssert_2_4()
-    {
-        var compilation = TestHelper.CompileCS("// Empty file", NuGetMetadataReference.XunitFramework("2.4.2").ToArray()).Model.Compilation;
-        compilation.References(XUnit_Assert).Should().BeTrue();
-    }
+    public void XUnitAssert_2_4() =>
+        CompilationShouldReference(NuGetMetadataReference.XunitFramework("2.4.2"), XUnit_Assert);
 
     [TestMethod]
-    public void XUnitAssert_1_9()
-    {
-        var compilation = TestHelper.CompileCS("// Empty file", NuGetMetadataReference.XunitFrameworkV1.ToArray()).Model.Compilation;
-        compilation.References(XUnit_Assert).Should().BeTrue();
-    }
+    public void XUnitAssert_1_9() =>
+        CompilationShouldReference(NuGetMetadataReference.XunitFrameworkV1.ToArray(), XUnit_Assert);
 
     [TestMethod]
-    public void XUnitAssert_NoReference()
-    {
-        var compilation = TestHelper.CompileCS("// Empty file").Model.Compilation;
-        compilation.References(XUnit_Assert).Should().BeFalse();
-    }
+    public void XUnitAssert_NoReference() =>
+        CompilationShouldNotReference(XUnit_Assert);
 
     [TestMethod]
-    public void MSTest_V1()
-    {
-        var compilation = TestHelper.CompileCS("// Empty file", NuGetMetadataReference.MSTestTestFrameworkV1.ToArray()).Model.Compilation;
-        compilation.References(MSTest).Should().BeTrue();
-    }
+    public void MSTest_V1() =>
+        CompilationShouldReference(NuGetMetadataReference.MSTestTestFrameworkV1.ToArray(), MSTest);
 
     [TestMethod]
-    public void MSTest_V2()
-    {
-        var compilation = TestHelper.CompileCS("// Empty file", NuGetMetadataReference.MSTestTestFramework("3.0.2").ToArray()).Model.Compilation;
-        compilation.References(MSTest).Should().BeTrue();
-    }
+    public void MSTest_V2() =>
+        CompilationShouldReference(NuGetMetadataReference.MSTestTestFramework("3.0.2").ToArray(), MSTest);
 
     [TestMethod]
-    public void MSTest_MicrosoftVisualStudioQualityToolsUnitTestFramework()
-    {
-        var compilation = TestHelper.CompileCS("// Empty file", NuGetMetadataReference.MicrosoftVisualStudioQualityToolsUnitTestFramework.ToArray()).Model.Compilation;
-        compilation.References(MSTest).Should().BeTrue();
-    }
+    public void MSTest_MicrosoftVisualStudioQualityToolsUnitTestFramework() =>
+        CompilationShouldReference(NuGetMetadataReference.MicrosoftVisualStudioQualityToolsUnitTestFramework.ToArray(), MSTest);
 
     [TestMethod]
-    public void MSTest_NoReference()
-    {
-        var compilation = TestHelper.CompileCS("// Empty file").Model.Compilation;
-        compilation.References(MSTest).Should().BeFalse();
-    }
+    public void MSTest_NoReference() =>
+        CompilationShouldNotReference(MSTest);
 
     [TestMethod]
-    public void FluentAssertions_6_10()
-    {
-        var compilation = TestHelper.CompileCS("// Empty file", NuGetMetadataReference.FluentAssertions("6.10.0").ToArray()).Model.Compilation;
-        compilation.References(KnownAssembly.FluentAssertions).Should().BeTrue();
-    }
+    public void FluentAssertions_6_10() =>
+        CompilationShouldReference(NuGetMetadataReference.FluentAssertions("6.10.0").ToArray(), KnownAssembly.FluentAssertions);
 
     [TestMethod]
-    public void FluentAssertions_NoReference()
-    {
-        var compilation = TestHelper.CompileCS("// Empty file").Model.Compilation;
-        compilation.References(KnownAssembly.FluentAssertions).Should().BeFalse();
-    }
+    public void FluentAssertions_NoReference() =>
+        CompilationShouldNotReference(KnownAssembly.FluentAssertions);
 
     [TestMethod]
-    public void NFluent_2_8()
-    {
-        var compilation = TestHelper.CompileCS("// Empty file", NuGetMetadataReference.NFluent("2.8.0").ToArray()).Model.Compilation;
-        compilation.References(NFluent).Should().BeTrue();
-    }
+    public void NFluent_2_8() =>
+        CompilationShouldReference(NuGetMetadataReference.NFluent("2.8.0").ToArray(), NFluent);
 
     [TestMethod]
-    public void NFluent_1_0()
-    {
+    public void NFluent_1_0() =>
         // 1.0.0 has no publicKeyToken
-        var compilation = TestHelper.CompileCS("// Empty file", NuGetMetadataReference.NFluent("1.0.0").ToArray()).Model.Compilation;
-        compilation.References(NFluent).Should().BeTrue();
-    }
+        CompilationShouldReference(NuGetMetadataReference.NFluent("1.0.0"), NFluent);
 
     [TestMethod]
-    public void NFluent_NoReference()
-    {
-        var compilation = TestHelper.CompileCS("// Empty file").Model.Compilation;
-        compilation.References(NFluent).Should().BeFalse();
-    }
+    public void NFluent_NoReference() =>
+        CompilationShouldNotReference(NFluent);
 
     [TestMethod]
-    public void NSubstitute_5_0()
-    {
-        var compilation = TestHelper.CompileCS("// Empty file", NuGetMetadataReference.NSubstitute("5.0.0").ToArray()).Model.Compilation;
-        compilation.References(NSubstitute).Should().BeTrue();
-    }
+    public void NSubstitute_5_0() =>
+        CompilationShouldReference(NuGetMetadataReference.NSubstitute("5.0.0"), NSubstitute);
 
     [TestMethod]
-    public void NSubstitute_NoReference()
-    {
-        var compilation = TestHelper.CompileCS("// Empty file").Model.Compilation;
-        compilation.References(NSubstitute).Should().BeFalse();
-    }
+    public void NSubstitute_NoReference() =>
+        CompilationShouldNotReference(NSubstitute);
+
+    [TestMethod]
+    public void MicrosoftExtensionsLoggingAbstractions_Latest() =>
+        CompilationShouldReference(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions(Constants.NuGetLatestVersion), MicrosoftExtensionsLoggingAbstractions);
+
+    [TestMethod]
+    public void MicrosoftExtensionsLoggingAbstractions_NoReference() =>
+        CompilationShouldNotReference(MicrosoftExtensionsLoggingAbstractions);
+
+    [TestMethod]
+    public void Serilog_Latest() =>
+        CompilationShouldReference(NuGetMetadataReference.Serilog(Constants.NuGetLatestVersion), Serilog);
+
+    [TestMethod]
+    public void Serilog_NoReference() =>
+        CompilationShouldNotReference(Serilog);
+
+    [TestMethod]
+    public void NLog_Latest() =>
+        CompilationShouldReference(NuGetMetadataReference.NLog(Constants.NuGetLatestVersion), NLog);
+
+    [TestMethod]
+    public void NLog_NoReference() =>
+        CompilationShouldNotReference(NLog);
+
+    [TestMethod]
+    public void Log4net_2_0_8() =>
+        CompilationShouldReference(NuGetMetadataReference.Log4Net("2.0.8", "net45-full"), Log4Net);
+
+    [TestMethod]
+    public void Log4net_NoReference() =>
+        CompilationShouldNotReference(Log4Net);
+
+    [TestMethod]
+    public void CommonLoggingCore_Latest() =>
+        CompilationShouldReference(NuGetMetadataReference.CommonLoggingCore(Constants.NuGetLatestVersion), CommonLoggingCore);
+
+    [TestMethod]
+    public void CommonLoggingCore_NoReference() =>
+        CompilationShouldNotReference(CommonLoggingCore);
+
+    [TestMethod]
+    public void CastleCore_Latest() =>
+        CompilationShouldReference(NuGetMetadataReference.CastleCore(Constants.NuGetLatestVersion), CastleCore);
+
+    [TestMethod]
+    public void CastleCore_NoReference() =>
+        CompilationShouldNotReference(CastleCore);
+
+    private static void CompilationShouldReference(IEnumerable<MetadataReference> references, KnownAssembly expectedAssembly) =>
+        TestHelper.CompileCS("// Empty file", references.ToArray()).Model.Compilation.References(expectedAssembly).Should().BeTrue();
+
+    private static void CompilationShouldNotReference(KnownAssembly expectedAssembly) =>
+        TestHelper.CompileCS("// Empty file").Model.Compilation.References(expectedAssembly).Should().BeFalse();
 
     private static Mock<Compilation> CompilationWithReferenceTo(AssemblyIdentity identity)
     {

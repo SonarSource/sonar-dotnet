@@ -59,4 +59,42 @@ public class CompilationExtensionsTest
         semanticModel.Compilation.IsMemberAvailable<IMethodSymbol>(new("Sample"), "MethodWithParameters", x => x is { Parameters.Length: 2 })
             .Should().BeTrue();
     }
+
+    [TestMethod]
+    public void ReferencesAny_ShouldBeTrue()
+    {
+        Check(NuGetMetadataReference.NLog(), KnownAssembly.NLog);
+        Check(NuGetMetadataReference.NLog().Concat(NuGetMetadataReference.NHibernate()), KnownAssembly.NLog);
+        Check(NuGetMetadataReference.NLog(), KnownAssembly.NLog, KnownAssembly.NSubstitute);
+
+        static void Check(IEnumerable<MetadataReference> compilationReferences, params KnownAssembly[] checkedAssemblies) =>
+            ReferencesAny_ShouldBe(true, compilationReferences, checkedAssemblies);
+    }
+
+    [TestMethod]
+    public void ReferencesAny_ShouldBeFalse()
+    {
+        Check(Enumerable.Empty<MetadataReference>(), KnownAssembly.NLog);
+        Check(Enumerable.Empty<MetadataReference>(), KnownAssembly.NLog, KnownAssembly.NSubstitute);
+
+        static void Check(IEnumerable<MetadataReference> compilationReferences, params KnownAssembly[] checkedAssemblies) =>
+            ReferencesAny_ShouldBe(false, compilationReferences, checkedAssemblies);
+    }
+
+    [TestMethod]
+    public void ReferencesAny_ShouldThrow()
+    {
+        var (_, model) = TestHelper.Compile(string.Empty, false, AnalyzerLanguage.CSharp);
+
+        ((Func<bool>)(() => model.Compilation.ReferencesAny()))
+            .Should()
+            .ThrowExactly<ArgumentException>()
+            .WithMessage("Assemblies argument needs to be non-empty");
+    }
+
+    private static void ReferencesAny_ShouldBe(bool expected, IEnumerable<MetadataReference> compilationReferences, params KnownAssembly[] checkedAssemblies)
+    {
+        var (_, model) = TestHelper.Compile(string.Empty, false, AnalyzerLanguage.CSharp, compilationReferences.ToArray());
+        model.Compilation.ReferencesAny(checkedAssemblies).Should().Be(expected);
+    }
 }
