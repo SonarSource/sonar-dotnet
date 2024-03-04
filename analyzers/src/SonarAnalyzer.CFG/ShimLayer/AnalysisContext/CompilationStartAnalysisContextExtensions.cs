@@ -20,14 +20,12 @@
 
 using System.Diagnostics.CodeAnalysis;
 using static System.Linq.Expressions.Expression;
-using CS = Microsoft.CodeAnalysis.CSharp;
 
 namespace SonarAnalyzer.ShimLayer.AnalysisContext;
 
 public static class CompilationStartAnalysisContextExtensions
 {
     {
-#pragma warning disable S103 // Lines should not be too long
         if (typeof(CompilationStartAnalysisContext).GetMethod(nameof(RegisterSymbolStartAction)) is not { } registerMethod)
         {
             return static (_, _, _) => { };
