@@ -33,9 +33,9 @@ public class SymbolStartAnalysisContext
     private static Action<object, Action<CodeBlockStartAnalysisContext<CS.SyntaxKind>>> registerCodeBlockStartActionCS;
     private static Action<object, Action<OperationAnalysisContext>, ImmutableArray<OperationKind>> registerOperationAction;
 
-    private readonly Action<Action<OperationBlockAnalysisContext>> registerOperationBlockAction;
-    private readonly Action<Action<OperationBlockStartAnalysisContext>> registerOperationBlockStartAction;
-    private readonly Action<Action<SymbolAnalysisContext>> registerSymbolEndAction;
+    private static Action<object, Action<OperationBlockAnalysisContext>> registerOperationBlockAction;
+    private static Action<object, Action<OperationBlockStartAnalysisContext>> registerOperationBlockStartAction;
+    private static Action<object, Action<SymbolAnalysisContext>> registerSymbolEndAction;
     private readonly Action<Action<SyntaxNodeAnalysisContext>, ImmutableArray<CS.SyntaxKind>> registerSyntaxNodeActionCS;
 
     static SymbolStartAnalysisContext()
@@ -48,6 +48,9 @@ public class SymbolStartAnalysisContext
         registerCodeBlockAction = CreateRegistrationMethod<CodeBlockAnalysisContext>(symbolStartAnalysisContextType, nameof(RegisterCodeBlockAction));
         registerCodeBlockStartActionCS = CreateRegistrationMethod<CodeBlockStartAnalysisContext<CS.SyntaxKind>>(symbolStartAnalysisContextType, nameof(RegisterCodeBlockStartAction), typeof(CS.SyntaxKind));
         registerOperationAction = CreateRegistrationMethodWithAdditionalParameter<OperationAnalysisContext, ImmutableArray<OperationKind>>(symbolStartAnalysisContextType, nameof(RegisterOperationAction));
+        registerOperationBlockAction = CreateRegistrationMethod<OperationBlockAnalysisContext>(symbolStartAnalysisContextType, nameof(RegisterOperationBlockAction));
+        registerOperationBlockStartAction = CreateRegistrationMethod<OperationBlockStartAnalysisContext>(symbolStartAnalysisContextType, nameof(RegisterOperationBlockStartAction));
+        registerSymbolEndAction = CreateRegistrationMethod<SymbolAnalysisContext>(symbolStartAnalysisContextType, nameof(RegisterSymbolEndAction));
     }
 
     private static Action<object, Action<TContext>, TParameter> CreateRegistrationMethodWithAdditionalParameter<TContext, TParameter>(Type symbolStartAnalysisContextType, string registrationMethodName, params Type[] typeArguments)
@@ -69,15 +72,9 @@ public class SymbolStartAnalysisContext
 
     public SymbolStartAnalysisContext(
         object roslynSymbolStartAnalysisContext,
-        Action<Action<OperationBlockAnalysisContext>> registerOperationBlockAction,
-        Action<Action<OperationBlockStartAnalysisContext>> registerOperationBlockStartAction,
-        Action<Action<SymbolAnalysisContext>> registerSymbolEndAction,
         Action<Action<SyntaxNodeAnalysisContext>, ImmutableArray<CS.SyntaxKind>> registerSyntaxNodeActionCS)
     {
         RoslynSymbolStartAnalysisContext = roslynSymbolStartAnalysisContext;
-        this.registerOperationBlockAction = registerOperationBlockAction;
-        this.registerOperationBlockStartAction = registerOperationBlockStartAction;
-        this.registerSymbolEndAction = registerSymbolEndAction;
         this.registerSyntaxNodeActionCS = registerSyntaxNodeActionCS;
     }
     public object RoslynSymbolStartAnalysisContext { get; }
@@ -111,13 +108,13 @@ public class SymbolStartAnalysisContext
         registerOperationAction(RoslynSymbolStartAnalysisContext, action, operationKinds);
 
     public void RegisterOperationBlockAction(Action<OperationBlockAnalysisContext> action) =>
-        registerOperationBlockAction(action);
+        registerOperationBlockAction(RoslynSymbolStartAnalysisContext, action);
 
     public void RegisterOperationBlockStartAction(Action<OperationBlockStartAnalysisContext> action) =>
-        registerOperationBlockStartAction(action);
+        registerOperationBlockStartAction(RoslynSymbolStartAnalysisContext, action);
 
     public void RegisterSymbolEndAction(Action<SymbolAnalysisContext> action) =>
-        registerSymbolEndAction(action);
+        registerSymbolEndAction(RoslynSymbolStartAnalysisContext, action);
 
     public void RegisterSyntaxNodeAction<TLanguageKindEnum>(Action<SyntaxNodeAnalysisContext> action, params TLanguageKindEnum[] syntaxKinds) where TLanguageKindEnum : struct
     {
