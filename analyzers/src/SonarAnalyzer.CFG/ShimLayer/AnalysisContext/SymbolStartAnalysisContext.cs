@@ -23,7 +23,7 @@ using CS = Microsoft.CodeAnalysis.CSharp;
 
 namespace SonarAnalyzer.ShimLayer.AnalysisContext;
 
-public class SymbolStartAnalysisContext
+public readonly struct SymbolStartAnalysisContext
 {
     // symbolStartAnalysisContextParameter => ((symbolStartAnalysisContextType)symbolStartAnalysisContextParameter).CancellationToken
     private static Func<object, CancellationToken> cancellationTokenAccessor;
