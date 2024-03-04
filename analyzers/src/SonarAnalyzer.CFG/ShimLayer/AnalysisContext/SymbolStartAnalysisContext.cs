@@ -32,11 +32,10 @@ public class SymbolStartAnalysisContext
     private static Action<object, Action<CodeBlockAnalysisContext>> registerCodeBlockAction;
     private static Action<object, Action<CodeBlockStartAnalysisContext<CS.SyntaxKind>>> registerCodeBlockStartActionCS;
     private static Action<object, Action<OperationAnalysisContext>, ImmutableArray<OperationKind>> registerOperationAction;
-
     private static Action<object, Action<OperationBlockAnalysisContext>> registerOperationBlockAction;
     private static Action<object, Action<OperationBlockStartAnalysisContext>> registerOperationBlockStartAction;
     private static Action<object, Action<SymbolAnalysisContext>> registerSymbolEndAction;
-    private readonly Action<Action<SyntaxNodeAnalysisContext>, ImmutableArray<CS.SyntaxKind>> registerSyntaxNodeActionCS;
+    private static Action<object, Action<SyntaxNodeAnalysisContext>, ImmutableArray<CS.SyntaxKind>> registerSyntaxNodeActionCS;
 
     static SymbolStartAnalysisContext()
     {
@@ -51,6 +50,7 @@ public class SymbolStartAnalysisContext
         registerOperationBlockAction = CreateRegistrationMethod<OperationBlockAnalysisContext>(symbolStartAnalysisContextType, nameof(RegisterOperationBlockAction));
         registerOperationBlockStartAction = CreateRegistrationMethod<OperationBlockStartAnalysisContext>(symbolStartAnalysisContextType, nameof(RegisterOperationBlockStartAction));
         registerSymbolEndAction = CreateRegistrationMethod<SymbolAnalysisContext>(symbolStartAnalysisContextType, nameof(RegisterSymbolEndAction));
+        registerSyntaxNodeActionCS = CreateRegistrationMethodWithAdditionalParameter<SyntaxNodeAnalysisContext, ImmutableArray<CS.SyntaxKind>>(symbolStartAnalysisContextType, nameof(RegisterSyntaxNodeAction), typeof(CS.SyntaxKind));
     }
 
     private static Action<object, Action<TContext>, TParameter> CreateRegistrationMethodWithAdditionalParameter<TContext, TParameter>(Type symbolStartAnalysisContextType, string registrationMethodName, params Type[] typeArguments)
@@ -70,12 +70,9 @@ public class SymbolStartAnalysisContext
             Call(Convert(receiver, symbolStartAnalysisContextType), registrationMethodName, typeArguments, registerActionParameter), receiver, registerActionParameter).Compile();
     }
 
-    public SymbolStartAnalysisContext(
-        object roslynSymbolStartAnalysisContext,
-        Action<Action<SyntaxNodeAnalysisContext>, ImmutableArray<CS.SyntaxKind>> registerSyntaxNodeActionCS)
+    public SymbolStartAnalysisContext(object roslynSymbolStartAnalysisContext)
     {
         RoslynSymbolStartAnalysisContext = roslynSymbolStartAnalysisContext;
-        this.registerSyntaxNodeActionCS = registerSyntaxNodeActionCS;
     }
     public object RoslynSymbolStartAnalysisContext { get; }
     public CancellationToken CancellationToken => cancellationTokenAccessor(RoslynSymbolStartAnalysisContext);
@@ -121,7 +118,7 @@ public class SymbolStartAnalysisContext
         var languageKindType = typeof(TLanguageKindEnum);
         if (languageKindType == typeof(CS.SyntaxKind))
         {
-            registerSyntaxNodeActionCS(action, syntaxKinds.Cast<CS.SyntaxKind>().ToImmutableArray());
+            registerSyntaxNodeActionCS(RoslynSymbolStartAnalysisContext, action, syntaxKinds.Cast<CS.SyntaxKind>().ToImmutableArray());
         }
         else if (languageKindType.FullName == "Microsoft.CodeAnalysis.VisualBasic.SyntaxKind")
         {
