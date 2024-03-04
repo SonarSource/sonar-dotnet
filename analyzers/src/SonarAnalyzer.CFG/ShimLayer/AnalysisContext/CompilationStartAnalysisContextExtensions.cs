@@ -73,9 +73,6 @@ public static class CompilationStartAnalysisContextExtensions
         var lambda = Lambda(symbolStartAnalysisActionType, Call(shimmedActionParameter, nameof(Action.Invoke), [],
                 New(symbolStartAnalysisContextCtor,
                     symbolStartAnalysisContextParameter,
-                    RegisterLambda<OperationBlockAnalysisContext>(symbolStartAnalysisContextParameter, nameof(SymbolStartAnalysisContext.RegisterOperationBlockAction)),
-                    RegisterLambda<OperationBlockStartAnalysisContext>(symbolStartAnalysisContextParameter, nameof(SymbolStartAnalysisContext.RegisterOperationBlockStartAction)),
-                    RegisterLambda<SymbolAnalysisContext>(symbolStartAnalysisContextParameter, nameof(SymbolStartAnalysisContext.RegisterSymbolEndAction)),
                     RegisterLambdaWithAdditionalParameter<SyntaxNodeAnalysisContext, ImmutableArray<CS.SyntaxKind>>(symbolStartAnalysisContextParameter, nameof(SymbolStartAnalysisContext.RegisterSyntaxNodeAction), typeof(CS.SyntaxKind)))),
                 symbolStartAnalysisContextParameter);
 
