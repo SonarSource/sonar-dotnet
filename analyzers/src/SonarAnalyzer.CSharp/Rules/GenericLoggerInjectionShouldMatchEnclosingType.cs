@@ -42,14 +42,30 @@ public sealed class GenericLoggerInjectionShouldMatchEnclosingType : SonarDiagno
         SyntaxKind.ConstructorDeclaration);
 
     // Returns T for [Constructor(ILogger<T> logger)] where T is not Constructor
-    private static IEnumerable<TypeSyntax> InvalidTypeParameters(ConstructorDeclarationSyntax constructor, SemanticModel model) =>
-        constructor.ParameterList.Parameters
-        .Where(x => x.Type is GenericNameSyntax)
-        .Select(x => (GenericNameSyntax)x.Type)
-        .Where(x => x.TypeArgumentList.Arguments.Count == 1
-                    && x.TypeArgumentList.Arguments[0].GetIdentifier()?.ValueText != constructor.Identifier.ValueText
-                    && IsGenericLogger(model.GetTypeInfo(x).Type))
-        .Select(x => x.TypeArgumentList.Arguments[0]);
+    private static IEnumerable<TypeSyntax> InvalidTypeParameters(ConstructorDeclarationSyntax constructor, SemanticModel model)
+    {
+        var genericParameters = constructor.ParameterList.Parameters
+            .Where(x => x.Type is GenericNameSyntax generic
+                        && generic.TypeArgumentList.Arguments.Count == 1)
+            .Select(x => (GenericNameSyntax)x.Type)
+            .ToArray();
+
+        if (genericParameters.Length == 0)
+        {
+            yield break;
+        }
+
+        var constructorType = model.GetDeclaredSymbol(constructor)?.ContainingType;
+        foreach (var generic in genericParameters)
+        {
+            var genericArgument = generic.TypeArgumentList.Arguments[0];
+            if (IsGenericLogger(model.GetTypeInfo(generic).Type)                             // ILogger<T>
+                && !model.GetTypeInfo(genericArgument).Type.Equals(constructorType))         // T
+            {
+                yield return genericArgument;
+            }
+        }
+    }
 
     private static bool IsGenericLogger(ITypeSymbol type) =>
         type.Is(KnownType.Microsoft_Extensions_Logging_ILogger_TCategoryName)
