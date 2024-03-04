@@ -56,7 +56,7 @@ public static class CompilationStartAnalysisContextExtensions
         var lambda = Lambda(symbolStartAnalysisActionType,
             Call(shimmedActionParameter, nameof(Action.Invoke), [], New(symbolStartAnalysisContextCtor, symbolStartAnalysisContextParameter)), symbolStartAnalysisContextParameter);
 
-        // (contextParameter, shimmedActionParameter, symbolKindParameter) => contextParameter.RegisterSymbolStartAction(lambda), symbolKindParameter)
+        // (contextParameter, shimmedActionParameter, symbolKindParameter) => contextParameter.RegisterSymbolStartAction(lambda, symbolKindParameter)
         return Lambda<Action<CompilationStartAnalysisContext, Action<SymbolStartAnalysisContext>, SymbolKind>>(
             Call(contextParameter, registerMethod, lambda, symbolKindParameter),
             contextParameter, shimmedActionParameter, symbolKindParameter).Compile();
