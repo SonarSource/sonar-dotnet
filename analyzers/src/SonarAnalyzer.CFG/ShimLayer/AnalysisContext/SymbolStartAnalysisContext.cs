@@ -31,8 +31,8 @@ public class SymbolStartAnalysisContext
     private static Func<object, ISymbol> symbolAccessor;
     private static Action<object, Action<CodeBlockAnalysisContext>> registerCodeBlockAction;
     private static Action<object, Action<CodeBlockStartAnalysisContext<CS.SyntaxKind>>> registerCodeBlockStartActionCS;
+    private static Action<object, Action<OperationAnalysisContext>, ImmutableArray<OperationKind>> registerOperationAction;
 
-    private readonly Action<Action<OperationAnalysisContext>, ImmutableArray<OperationKind>> registerOperationAction;
     private readonly Action<Action<OperationBlockAnalysisContext>> registerOperationBlockAction;
     private readonly Action<Action<OperationBlockStartAnalysisContext>> registerOperationBlockStartAction;
     private readonly Action<Action<SymbolAnalysisContext>> registerSymbolEndAction;
@@ -47,6 +47,16 @@ public class SymbolStartAnalysisContext
         symbolAccessor = CreatePropertyAccessor<ISymbol>(symbolStartAnalysisContextType, nameof(Symbol));
         registerCodeBlockAction = CreateRegistrationMethod<CodeBlockAnalysisContext>(symbolStartAnalysisContextType, nameof(RegisterCodeBlockAction));
         registerCodeBlockStartActionCS = CreateRegistrationMethod<CodeBlockStartAnalysisContext<CS.SyntaxKind>>(symbolStartAnalysisContextType, nameof(RegisterCodeBlockStartAction), typeof(CS.SyntaxKind));
+        registerOperationAction = CreateRegistrationMethodWithAdditionalParameter<OperationAnalysisContext, ImmutableArray<OperationKind>>(symbolStartAnalysisContextType, nameof(RegisterOperationAction));
+    }
+
+    private static Action<object, Action<TContext>, TParameter> CreateRegistrationMethodWithAdditionalParameter<TContext, TParameter>(Type symbolStartAnalysisContextType, string registrationMethodName, params Type[] typeArguments)
+    {
+        var receiver = Parameter(typeof(object));
+        var registerActionParameter = Parameter(typeof(Action<TContext>));
+        var additionalParameter = Parameter(typeof(TParameter));
+        return Lambda<Action<object, Action<TContext>, TParameter>>(
+            Call(Convert(receiver, symbolStartAnalysisContextType), registrationMethodName, typeArguments, registerActionParameter, additionalParameter), receiver, registerActionParameter, additionalParameter).Compile();
     }
 
     private static Action<object, Action<TContext>> CreateRegistrationMethod<TContext>(Type symbolStartAnalysisContextType, string registrationMethodName, params Type[] typeArguments)
@@ -57,17 +67,14 @@ public class SymbolStartAnalysisContext
             Call(Convert(receiver, symbolStartAnalysisContextType), registrationMethodName, typeArguments, registerActionParameter), receiver, registerActionParameter).Compile();
     }
 
-
     public SymbolStartAnalysisContext(
         object roslynSymbolStartAnalysisContext,
-        Action<Action<OperationAnalysisContext>, ImmutableArray<OperationKind>> registerOperationAction,
         Action<Action<OperationBlockAnalysisContext>> registerOperationBlockAction,
         Action<Action<OperationBlockStartAnalysisContext>> registerOperationBlockStartAction,
         Action<Action<SymbolAnalysisContext>> registerSymbolEndAction,
         Action<Action<SyntaxNodeAnalysisContext>, ImmutableArray<CS.SyntaxKind>> registerSyntaxNodeActionCS)
     {
         RoslynSymbolStartAnalysisContext = roslynSymbolStartAnalysisContext;
-        this.registerOperationAction = registerOperationAction;
         this.registerOperationBlockAction = registerOperationBlockAction;
         this.registerOperationBlockStartAction = registerOperationBlockStartAction;
         this.registerSymbolEndAction = registerSymbolEndAction;
@@ -101,7 +108,7 @@ public class SymbolStartAnalysisContext
     }
 
     public void RegisterOperationAction(Action<OperationAnalysisContext> action, ImmutableArray<OperationKind> operationKinds) =>
-        registerOperationAction(action, operationKinds);
+        registerOperationAction(RoslynSymbolStartAnalysisContext, action, operationKinds);
 
     public void RegisterOperationBlockAction(Action<OperationBlockAnalysisContext> action) =>
         registerOperationBlockAction(action);
