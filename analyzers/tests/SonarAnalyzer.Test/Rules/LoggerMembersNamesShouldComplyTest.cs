@@ -77,7 +77,7 @@ public class LoggerMembersNamesShouldComplyTest
 
     [TestMethod]
     public void LoggerMembersNamesShouldComply_Serilog_CS() =>
-        Builder.AddSnippet($$$"""
+        Builder.AddSnippet("""
             using Serilog;
 
             public class Program
@@ -100,7 +100,7 @@ public class LoggerMembersNamesShouldComplyTest
 
     [TestMethod]
     public void LoggerMembersNamesShouldComply_NLog_CS() =>
-        Builder.AddSnippet($$$"""
+        Builder.AddSnippet("""
             using NLog;
 
             public class Program
@@ -125,7 +125,7 @@ public class LoggerMembersNamesShouldComplyTest
 
     [TestMethod]
     public void LoggerMembersNamesShouldComply_log4net_CS() =>
-        Builder.AddSnippet($$$"""
+        Builder.AddSnippet("""
             using log4net;
             using log4net.Core;
             using log4net.Repository.Hierarchy;
@@ -156,7 +156,7 @@ public class LoggerMembersNamesShouldComplyTest
 
     [TestMethod]
     public void LoggerMembersNamesShouldComply_CastleCore_CS() =>
-        Builder.AddSnippet($$$"""
+        Builder.AddSnippet("""
             using Castle.Core.Logging;
 
             public class Program
@@ -175,4 +175,21 @@ public class LoggerMembersNamesShouldComplyTest
             """)
         .AddReferences(NuGetMetadataReference.CastleCore())
         .Verify();
+
+    [TestMethod]
+    public void LoggerMembersNamesShouldComply_Parametrized_CS() =>
+        new VerifierBuilder()
+        .AddAnalyzer(() => new LoggerMembersNamesShouldComply { Format = "^chocolate$" })
+        .AddSnippet("""
+                using System;
+                using Microsoft.Extensions.Logging;
+
+                public class Program
+                {
+                    ILogger chocolate;                      // Compliant
+                    ILogger running;                        // Noncompliant {{Rename this field 'running' to match the regular expression '^chocolate$'.}}
+                }
+                """)
+       .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
+       .Verify();
 }

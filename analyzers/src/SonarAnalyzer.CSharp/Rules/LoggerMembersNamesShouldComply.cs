@@ -27,7 +27,17 @@ public sealed class LoggerMembersNamesShouldComply : ParametrizedDiagnosticAnaly
 {
     private const string DiagnosticId = "S6669";
     private const string MessageFormat = "Rename this {0} '{1}' to match the regular expression '{2}'.";
-    private const string DefaultFormat = "^_?[Ll]og(ger)?$";
+    private const string DefaultFormat = "^_?[Ll]og(ger)?$"; // unused unless the user changes the regex
+
+    private static readonly ImmutableHashSet<string> DefaultAllowedNames = ImmutableHashSet.Create(
+        "log",
+        "Log",
+        "_log",
+        "_Log",
+        "logger",
+        "Logger",
+        "_logger",
+        "_Logger");
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat, isEnabledByDefault: false);
 
@@ -37,7 +47,9 @@ public sealed class LoggerMembersNamesShouldComply : ParametrizedDiagnosticAnaly
     [RuleParameter("format", PropertyType.RegularExpression, "Regular expression used to check the field or property names against", DefaultFormat)]
     public string Format { get; set; } = DefaultFormat;
 
-    private Regex NameRegex => new(Format, RegexOptions.Compiled, RegexConstants.DefaultTimeout);
+    private bool UsesDefaultFormat => Format == DefaultFormat;
+
+    private Regex NameRegex { get; set; }
 
     private static readonly ImmutableArray<KnownType> Loggers = ImmutableArray.Create(
         KnownType.Microsoft_Extensions_Logging_ILogger,
@@ -51,20 +63,31 @@ public sealed class LoggerMembersNamesShouldComply : ParametrizedDiagnosticAnaly
         KnownType.Castle_Core_Logging_ILogger);
 
     protected override void Initialize(SonarParametrizedAnalysisContext context) =>
-        context.RegisterNodeAction(c =>
+        context.RegisterCompilationStartAction(cc =>
         {
-            foreach (var memberData in Declarations(c.Node))
+            // TODO: Check for reference assemblies and exit-early.
+            NameRegex = UsesDefaultFormat ? null : new(Format, RegexOptions.Compiled, RegexConstants.DefaultTimeout);
+
+            cc.RegisterNodeAction(c =>
             {
-                if (!NameRegex.SafeIsMatch(memberData.Name)
-                    && c.SemanticModel.GetDeclaredSymbol(memberData.Member).GetSymbolType() is { } type
-                    && type.DerivesOrImplementsAny(Loggers))
+                foreach (var memberData in Declarations(c.Node))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, memberData.Location, memberData.MemberType, memberData.Name, Format));
+                    if (!MatchesFormat(memberData.Name)
+                        && c.SemanticModel.GetDeclaredSymbol(memberData.Member).GetSymbolType() is { } type
+                        && type.DerivesOrImplementsAny(Loggers))
+                    {
+                        c.ReportIssue(Diagnostic.Create(Rule, memberData.Location, memberData.MemberType, memberData.Name, Format));
+                    }
                 }
-            }
-        },
-        SyntaxKind.FieldDeclaration,
-        SyntaxKind.PropertyDeclaration);
+            },
+            SyntaxKind.FieldDeclaration,
+            SyntaxKind.PropertyDeclaration);
+        });
+
+    private bool MatchesFormat(string name) =>
+        UsesDefaultFormat
+        ? DefaultAllowedNames.Contains(name) // for performance, if the user doesn't change the regex, we can use a hashtable lookup
+        : NameRegex.SafeIsMatch(name);
 
     private static IEnumerable<MemberData> Declarations(SyntaxNode node)
     {
@@ -82,7 +105,7 @@ public sealed class LoggerMembersNamesShouldComply : ParametrizedDiagnosticAnaly
         }
     }
 
-    private record struct MemberData(SyntaxNode Member, Location Location, string Name, bool IsProperty)
+    private readonly record struct MemberData(SyntaxNode Member, Location Location, string Name, bool IsProperty)
     {
         public readonly string MemberType => IsProperty ? "property" : "field";
     }
