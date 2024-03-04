@@ -18,8 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Linq.Expressions;
-
+using System;
 using static System.Linq.Expressions.Expression;
 
 namespace SonarAnalyzer.ShimLayer.AnalysisContext;
@@ -42,23 +41,21 @@ public static class CompilationStartAnalysisContextExtensions
         var shimmedActionParameter = Parameter(typeof(Action<SymbolStartAnalysisContext>));
         var symbolKindParameter = Parameter(typeof(SymbolKind));
 
-        var symbolStartAnalysisContextType = typeof(CompilationStartAnalysisContext).Assembly.GetType("Microsoft.CodeAnalysis.Diagnostics.SymbolStartAnalysisContext");
-        var symbolStartAnalysisActionType = typeof(Action<>).MakeGenericType(symbolStartAnalysisContextType);
-        var symbolStartAnalysisContextParameter = Parameter(symbolStartAnalysisContextType);
-        var symbolStartAnalysisContextCtor = typeof(SymbolStartAnalysisContext).GetConstructors().Single();
+        var roslynSymbolStartAnalysisContextType = typeof(CompilationStartAnalysisContext).Assembly.GetType("Microsoft.CodeAnalysis.Diagnostics.SymbolStartAnalysisContext");
+        var roslynSymbolStartAnalysisActionType = typeof(Action<>).MakeGenericType(roslynSymbolStartAnalysisContextType);
+        var roslynSymbolStartAnalysisContextParameter = Parameter(roslynSymbolStartAnalysisContextType);
+        var sonarSymbolStartAnalysisContextCtor = typeof(SymbolStartAnalysisContext).GetConstructors().Single();
 
-        // The Sonar.SymbolStartAnalysisContext is a copy of the Roslyn.SymbolStartAnalysisContext because Roslyn.SymbolStartAnalysisContext is not available in our Roslyn version.
-        // The Lambda below creates a method, that takes the Roslyn.SymbolStartAnalysisContext, creates a Sonar.SymbolStartAnalysisContext copy of it by passing the Roslyn.SymbolStartAnalysisContext
-        // as object to the copy. Then Action<Sonar.SymbolStartAnalysisContext> is invoked with that copy.
+        // Action<Roslyn.SymbolStartAnalysisContext> registerAction = roslynSymbolStartAnalysisContextParameter =>
+        //    shimmedActionParameter.Invoke(new Sonar.SymbolStartAnalysisContext(roslynSymbolStartAnalysisContextParameter))
+        var registerAction = Lambda(
+            delegateType: roslynSymbolStartAnalysisActionType,
+            body: Call(shimmedActionParameter, nameof(Action.Invoke), [], New(sonarSymbolStartAnalysisContextCtor, roslynSymbolStartAnalysisContextParameter)),
+            parameters: roslynSymbolStartAnalysisContextParameter);
 
-        // Action<Roslyn.SymbolStartAnalysisContext> lambda = symbolStartAnalysisContextParameter =>
-        //    shimmedActionParameter.Invoke(new Sonar.SymbolStartAnalysisContext(symbolStartAnalysisContextParameter))
-        var lambda = Lambda(symbolStartAnalysisActionType,
-            Call(shimmedActionParameter, nameof(Action.Invoke), [], New(symbolStartAnalysisContextCtor, symbolStartAnalysisContextParameter)), symbolStartAnalysisContextParameter);
-
-        // (contextParameter, shimmedActionParameter, symbolKindParameter) => contextParameter.RegisterSymbolStartAction(lambda, symbolKindParameter)
+        // (contextParameter, shimmedActionParameter, symbolKindParameter) => contextParameter.RegisterSymbolStartAction(registerAction, symbolKindParameter)
         return Lambda<Action<CompilationStartAnalysisContext, Action<SymbolStartAnalysisContext>, SymbolKind>>(
-            Call(contextParameter, registerMethod, lambda, symbolKindParameter),
+            Call(contextParameter, registerMethod, registerAction, symbolKindParameter),
             contextParameter, shimmedActionParameter, symbolKindParameter).Compile();
     }
 }
