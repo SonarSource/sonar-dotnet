@@ -91,7 +91,6 @@ public class RegisterSymbolStartActionWrapperTest
             {
                 symbolStart.RegisterCodeBlockAction(block =>
                 {
-                    var c = symbolStart.CancellationToken;
                     var node = block.CodeBlock.ToString();
                     visitedCodeBlocks.Add(node);
                 });
@@ -498,7 +497,7 @@ public class RegisterSymbolStartActionWrapperTest
                     operationBlockStartContext.RegisterOperationAction(operationContext => visited.Add(operationContext.Operation.Syntax.ToString()), OperationKind.Invocation);
                 });
             }, SymbolKind.NamedType)));
-        await compilation.GetAnalyzerDiagnosticsAsync();
+        var diag = await compilation.GetAnalyzerDiagnosticsAsync();
         visited.Should().BeEquivalentTo("= 0", "=> ToString()", "ToString()");
     }
 
