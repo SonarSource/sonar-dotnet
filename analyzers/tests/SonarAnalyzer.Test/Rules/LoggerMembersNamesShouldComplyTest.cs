@@ -179,17 +179,17 @@ public class LoggerMembersNamesShouldComplyTest
     [TestMethod]
     public void LoggerMembersNamesShouldComply_Parameterized_CS() =>
         new VerifierBuilder()
-        .AddAnalyzer(() => new LoggerMembersNamesShouldComply { Format = "^chocolate$" })
-        .AddSnippet("""
-                using System;
-                using Microsoft.Extensions.Logging;
+            .AddAnalyzer(() => new LoggerMembersNamesShouldComply { Format = "^chocolate$" })
+            .AddSnippet("""
+                    using System;
+                    using Microsoft.Extensions.Logging;
 
-                public class Program
-                {
-                    ILogger chocolate;                      // Compliant
-                    ILogger running;                        // Noncompliant {{Rename this field 'running' to match the regular expression '^chocolate$'.}}
-                }
-                """)
-        .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
-        .Verify();
+                    public class Program
+                    {
+                        ILogger chocolate;                      // Compliant
+                        ILogger running;                        // Noncompliant {{Rename this field 'running' to match the regular expression '^chocolate$'.}}
+                    }
+                    """)
+            .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
+            .Verify();
 }
