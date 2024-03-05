@@ -39,6 +39,7 @@ public class RegisterSymbolStartActionWrapperTest
             }
             """;
         var snippet = new SnippetCompiler(code);
+        var symbolStartWasCalled = false;
         var compilation = snippet.Compilation.WithAnalyzers(ImmutableArray.Create<DiagnosticAnalyzer>(
             new TestDiagnosticAnalyzer(symbolStart =>
             {
@@ -46,8 +47,10 @@ public class RegisterSymbolStartActionWrapperTest
                 symbolStart.Compilation.SyntaxTrees.Should().ContainSingle();
                 symbolStart.Options.Should().NotBeNull();
                 symbolStart.Symbol.Should().BeAssignableTo<INamedTypeSymbol>().Which.Name.Should().Be("C");
+                symbolStartWasCalled = true;
             }, SymbolKind.NamedType)));
         var diags = await compilation.GetAnalyzerDiagnosticsAsync();
+        symbolStartWasCalled.Should().BeTrue();
         diags.Should().BeEmpty();
     }
 
