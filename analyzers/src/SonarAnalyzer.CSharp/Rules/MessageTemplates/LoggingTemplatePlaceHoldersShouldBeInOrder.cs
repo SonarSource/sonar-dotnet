@@ -32,14 +32,14 @@ public sealed class LoggingTemplatePlaceHoldersShouldBeInOrder : IMessageTemplat
     public void Execute(SonarSyntaxNodeReportingContext context, InvocationExpressionSyntax invocation, ArgumentSyntax templateArgument, MessageTemplatesParser.Placeholder[] placeholders)
     {
         var methodSymbol = (IMethodSymbol)context.SemanticModel.GetSymbolInfo(invocation).Symbol;
-        var templateArguments = PlaceholderValues(invocation, methodSymbol).ToImmutableArray();
+        var placeholderValues = PlaceholderValues(invocation, methodSymbol).ToImmutableArray();
         for (var i = 0; i < placeholders.Length; i++)
         {
             var placeholder = placeholders[i];
             if (placeholder.Name != "_"
                 && !int.TryParse(placeholder.Name, out _)
-                && OutOfOrderTemplateArgumentForPlaceHolder(placeholder, i, templateArguments) is { } outOfOrderArgument
-                && !placeholders.Take(i).Any(x => x.Name == placeholder.Name)) // don't raise for duplicate placeholders
+                && Array.FindIndex(placeholders, x => x.Name == placeholder.Name) == i // don't raise for duplicate placeholders
+                && OutOfOrderPlaceholderValue(placeholder, i, placeholderValues) is { } outOfOrderArgument)
             {
                 var templateStart = templateArgument.Expression.GetLocation().SourceSpan.Start;
                 var primaryLocation = Location.Create(context.Tree, new(templateStart + placeholder.Start, placeholder.Length));
@@ -52,63 +52,51 @@ public sealed class LoggingTemplatePlaceHoldersShouldBeInOrder : IMessageTemplat
 
     private static IEnumerable<SyntaxNode> PlaceholderValues(InvocationExpressionSyntax invocation, IMethodSymbol methodSymbol)
     {
-        var placeholderArguments = methodSymbol.Parameters.Where(x => x.Name is "args"
+        var parameters = methodSymbol.Parameters.Where(x => x.Name is "args"
             || x.Name.StartsWith("argument")
-            || x.Name.StartsWith("propertyValue"));
-        foreach (var placeholderArgument in placeholderArguments)
+            || x.Name.StartsWith("propertyValue"))
+            .ToArray();
+        if (parameters.Length == 0)
         {
-            var paramIndex = methodSymbol.Parameters.IndexOf(placeholderArgument);
-            if (invocation.ArgumentList.Arguments.FirstOrDefault(x => x.NameColon?.GetName() == placeholderArgument.Name) is { } argumentValue)
+            yield break;
+        }
+        var parameterLookup = CSharpFacade.Instance.MethodParameterLookup(invocation, methodSymbol);
+        foreach (var parameter in parameters)
+        {
+            if (parameterLookup.TryGetSyntax(parameter, out var expressions))
             {
-                yield return argumentValue.Expression;
-            }
-            else if (paramIndex < invocation.ArgumentList.Arguments.Count)
-            {
-                var argumentLimit = placeholderArgument.IsParams
-                    ? invocation.ArgumentList.Arguments.Count
-                    : paramIndex + 1;
-                for (var i = paramIndex; i < argumentLimit; i++)
+                foreach (var item in expressions)
                 {
-                    yield return invocation.ArgumentList.Arguments[i].Expression;
+                    yield return item;
                 }
             }
         }
     }
 
-    private static SyntaxNode OutOfOrderTemplateArgumentForPlaceHolder(MessageTemplatesParser.Placeholder placeholder, int placeholderIndex, ImmutableArray<SyntaxNode> templateArguments)
+    private static SyntaxNode OutOfOrderPlaceholderValue(MessageTemplatesParser.Placeholder placeholder, int placeholderIndex, ImmutableArray<SyntaxNode> placeholderValues)
     {
-        if (placeholderIndex < templateArguments.Length && PlaceholderMatchesTemplateArgument(placeholder.Name, templateArguments[placeholderIndex]))
+        if (placeholderIndex < placeholderValues.Length && MatchesName(placeholder.Name, placeholderValues[placeholderIndex]))
         {
             return null;
         }
         else
         {
-            for (var i = 0; i < templateArguments.Length; i++)
+            for (var i = 0; i < placeholderValues.Length; i++)
             {
-                if (i != placeholderIndex && PlaceholderMatchesTemplateArgument(placeholder.Name, templateArguments[i]))
+                if (i != placeholderIndex && MatchesName(placeholder.Name, placeholderValues[i]))
                 {
-                    return templateArguments[placeholderIndex];
+                    return placeholderValues[placeholderIndex];
                 }
             }
         }
         return null;
     }
 
-    private static bool PlaceholderMatchesTemplateArgument(string placeholderName, SyntaxNode templateArgument)
-    {
-        if (templateArgument is MemberAccessExpressionSyntax memberAccess)
+    private static bool MatchesName(string placeholderName, SyntaxNode placeholderValue) =>
+        placeholderValue switch
         {
-            return PlaceholderMatchesTemplateArgument(placeholderName, memberAccess.Expression)
-                || PlaceholderMatchesTemplateArgument(placeholderName, memberAccess.Name);
-        }
-        else if (templateArgument is ObjectCreationExpressionSyntax)
-        {
-            return false;
-        }
-        else
-        {
-            var filteredName = new string(placeholderName.Where(char.IsLetterOrDigit).ToArray());
-            return filteredName.Equals(templateArgument.ToString(), StringComparison.OrdinalIgnoreCase);
-        }
-    }
+            MemberAccessExpressionSyntax memberAccess => MatchesName(placeholderName, memberAccess.Name) || MatchesName(placeholderName, memberAccess.Expression),
+            ObjectCreationExpressionSyntax => false,
+            _ => new string(placeholderName.Where(char.IsLetterOrDigit).ToArray()).Equals(placeholderValue.ToString(), StringComparison.OrdinalIgnoreCase)
+        };
 }
