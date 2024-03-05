@@ -62,6 +62,12 @@ public sealed partial class KnownAssembly
         internal static Func<AssemblyIdentity, bool> PublicKeyTokenIs(string key) =>
             x => x.HasPublicKey && PublicKeyEqualHex(x, key);
 
+        internal static Func<AssemblyIdentity, bool> PublicKeyTokenIsAny(params string[] keys) =>
+            x => x.HasPublicKey && Array.Exists(keys, key => PublicKeyEqualHex(x, key));
+
+        internal static Func<AssemblyIdentity, bool> NameAndPublicKeyIs(string name, string key) =>
+            NameIs(name).And(PublicKeyTokenIs(key));
+
         private static bool PublicKeyEqualHex(AssemblyIdentity identity, string hexString)
         {
             var normalizedHexString = hexString.Replace("-", string.Empty);

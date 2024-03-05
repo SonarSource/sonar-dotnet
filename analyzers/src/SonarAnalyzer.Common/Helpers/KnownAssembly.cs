@@ -40,19 +40,15 @@ public sealed partial class KnownAssembly
                 PublicKeyTokenIs("b03f5f7f11d50a3a")));
 
     public static KnownAssembly NFluent { get; } = new(NameIs("NFluent").And(OptionalPublicKeyTokenIs("18828b37b84b1437")));
-    public static KnownAssembly FluentAssertions { get; } = new("FluentAssertions", "33f2691a05b67b6a");
-    public static KnownAssembly NSubstitute { get; } = new("NSubstitute", "92dd2e9066daa5ca");
+    public static KnownAssembly FluentAssertions { get; } = new(NameAndPublicKeyIs("FluentAssertions", "33f2691a05b67b6a"));
+    public static KnownAssembly NSubstitute { get; } = new(NameAndPublicKeyIs("NSubstitute", "92dd2e9066daa5ca"));
     // Logging assemblies
-    public static KnownAssembly MicrosoftExtensionsLoggingAbstractions { get; } = new("Microsoft.Extensions.Logging.Abstractions", "adb9793829ddae60");
-    public static KnownAssembly Serilog { get; } = new("Serilog", "24c2f752a8e58a10");
-    public static KnownAssembly NLog { get; } = new("NLog", "5120e14c03d0593c");
-    public static KnownAssembly Log4Net { get; } = new("log4net", "669e0ddf0bb1aa2a");
-    public static KnownAssembly CommonLoggingCore { get; } = new("Common.Logging.Core", "af08829b84f0328e");
-    public static KnownAssembly CastleCore { get; } = new("Castle.Core", "407dd0808d44fbdc");
-
-    internal KnownAssembly(string name, string publicKeyToken)
-        : this(NameIs(name).And(PublicKeyTokenIs(publicKeyToken)))
-    { }
+    public static KnownAssembly MicrosoftExtensionsLoggingAbstractions { get; } = new(NameAndPublicKeyIs("Microsoft.Extensions.Logging.Abstractions", "adb9793829ddae60"));
+    public static KnownAssembly Serilog { get; } = new(NameAndPublicKeyIs("Serilog", "24c2f752a8e58a10"));
+    public static KnownAssembly NLog { get; } = new(NameAndPublicKeyIs("NLog", "5120e14c03d0593c"));
+    public static KnownAssembly Log4Net { get; } = new(NameIs("log4net").And(PublicKeyTokenIsAny("669e0ddf0bb1aa2a", "1b44e1d426115821")));
+    public static KnownAssembly CommonLoggingCore { get; } = new(NameAndPublicKeyIs("Common.Logging.Core", "af08829b84f0328e"));
+    public static KnownAssembly CastleCore { get; } = new(NameAndPublicKeyIs("Castle.Core", "407dd0808d44fbdc"));
 
     internal KnownAssembly(Func<AssemblyIdentity, bool> predicate, params Func<AssemblyIdentity, bool>[] or)
         : this(predicate is null || Array.Exists(or, x => x is null)

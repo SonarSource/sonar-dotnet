@@ -322,6 +322,10 @@ public class KnownAssemblyTest
         CompilationShouldReference(NuGetMetadataReference.NLog(), NLog);
 
     [TestMethod]
+    public void Log4net_1_2_10() =>
+        CompilationShouldReference(NuGetMetadataReference.Log4Net("1.2.10", "1.0"), Log4Net);
+
+    [TestMethod]
     public void Log4net_2_0_8() =>
         CompilationShouldReference(NuGetMetadataReference.Log4Net("2.0.8", "net45-full"), Log4Net);
 
