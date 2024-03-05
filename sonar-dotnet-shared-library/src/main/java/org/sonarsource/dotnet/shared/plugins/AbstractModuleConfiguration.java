@@ -28,7 +28,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
-import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 import org.sonar.api.batch.InstantiationStrategy;
 import org.sonar.api.batch.ScannerSide;
@@ -81,7 +80,7 @@ public abstract class AbstractModuleConfiguration {
   public List<Path> protobufReportPaths() {
     List<Path> analyzerWorkDirPaths = Arrays.stream(configuration.getStringArray(getAnalyzerWorkDirProperty(languageKey)))
       .map(Paths::get)
-      .collect(Collectors.toList());
+      .toList();
 
     if (analyzerWorkDirPaths.isEmpty() && !configuration.hasKey("sonar.tests")) {
       LOG.debug("Project '{}': Property missing: '{}'. No protobuf files will be loaded for this project.", projectKey, lazy(() -> getAnalyzerWorkDirProperty(languageKey)));
@@ -89,7 +88,7 @@ public abstract class AbstractModuleConfiguration {
 
     return analyzerWorkDirPaths.stream().map(x -> x.resolve(getAnalyzerReportDir(languageKey)))
       .filter(this::validateOutputDir)
-      .collect(Collectors.toList());
+      .toList();
   }
 
   public List<Path> roslynReportPaths() {
@@ -98,7 +97,7 @@ public abstract class AbstractModuleConfiguration {
       LOG.debug("Project '{}': The Roslyn JSON report path has '{}'", projectKey, lazy(() -> String.join(",", strPaths)));
       return Arrays.stream(strPaths)
         .map(Paths::get)
-        .collect(Collectors.toList());
+        .toList();
     } else {
       LOG.debug("Project '{}': No Roslyn issues reports have been found.", projectKey);
       return Collections.emptyList();

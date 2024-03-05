@@ -60,7 +60,7 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
 
     NewRepository repository = context.createRepository(repositoryKey, languageKey).setName(REPOSITORY_NAME);
     RuleMetadataLoader ruleMetadataLoader = new RuleMetadataLoader(getResourcesDirectory(), sonarRuntime);
-    ruleMetadataLoader.addRulesByRuleKey(repository, rules.stream().map(Rule::getId).collect(Collectors.toList()));
+    ruleMetadataLoader.addRulesByRuleKey(repository, rules.stream().map(Rule::getId).toList());
 
     for (Rule rule : rules) {
       var currentRule = repository.rule(rule.id);

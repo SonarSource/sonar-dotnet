@@ -49,8 +49,6 @@ import org.sonar.api.server.rule.RulesDefinition.Rule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static java.util.stream.Collectors.toList;
-
 /**
  * This profile exporter was build to be used by the SonarQube SonarScanner for .NET (S4MSB) during the Begin step,
  * to download the SonarLint.xml.
@@ -133,7 +131,7 @@ public class RoslynProfileExporter extends ProfileExporter {
       Map<String, List<RuleKey>> activeRoslynRulesByPartialRepoKey = activeRoslynRulesByPartialRepoKey(pluginMetadata, rulesProfile.getActiveRules()
         .stream()
         .map(r -> RuleKey.of(r.getRepositoryKey(), r.getRuleKey()))
-        .collect(toList()));
+        .toList());
 
       appendLine(writer, "<?xml version=\"1.0\" encoding=\"utf-8\"?>");
       appendLine(writer, "<RoslynExportProfile Version=\"1.0\">");
