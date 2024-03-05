@@ -47,20 +47,55 @@ public readonly struct SymbolStartAnalysisContext
     static SymbolStartAnalysisContext()
     {
         var symbolStartAnalysisContextType = typeof(CompilationStartAnalysisContext).Assembly.GetType("Microsoft.CodeAnalysis.Diagnostics.SymbolStartAnalysisContext");
-        cancellationTokenAccessor = CreatePropertyAccessor<CancellationToken>(symbolStartAnalysisContextType, nameof(CancellationToken));
-        compilationAccessor = CreatePropertyAccessor<Compilation>(symbolStartAnalysisContextType, nameof(Compilation));
-        optionsAccessor = CreatePropertyAccessor<AnalyzerOptions>(symbolStartAnalysisContextType, nameof(Options));
-        symbolAccessor = CreatePropertyAccessor<ISymbol>(symbolStartAnalysisContextType, nameof(Symbol));
-        registerCodeBlockAction = CreateRegistrationMethod<CodeBlockAnalysisContext>(symbolStartAnalysisContextType, nameof(RegisterCodeBlockAction));
+        cancellationTokenAccessor = CreatePropertyAccessor<CancellationToken>(nameof(CancellationToken));
+        compilationAccessor = CreatePropertyAccessor<Compilation>(nameof(Compilation));
+        optionsAccessor = CreatePropertyAccessor<AnalyzerOptions>(nameof(Options));
+        symbolAccessor = CreatePropertyAccessor<ISymbol>(nameof(Symbol));
+        registerCodeBlockAction = CreateRegistrationMethod<CodeBlockAnalysisContext>(nameof(RegisterCodeBlockAction));
         registerCodeBlockStartActionCS =
-            CreateRegistrationMethod<CodeBlockStartAnalysisContext<CS.SyntaxKind>>(symbolStartAnalysisContextType, nameof(RegisterCodeBlockStartAction), typeof(CS.SyntaxKind));
+            CreateRegistrationMethod<CodeBlockStartAnalysisContext<CS.SyntaxKind>>(nameof(RegisterCodeBlockStartAction), typeof(CS.SyntaxKind));
         registerOperationAction =
-            CreateRegistrationMethodWithAdditionalParameter<OperationAnalysisContext, ImmutableArray<OperationKind>>(symbolStartAnalysisContextType, nameof(RegisterOperationAction));
-        registerOperationBlockAction = CreateRegistrationMethod<OperationBlockAnalysisContext>(symbolStartAnalysisContextType, nameof(RegisterOperationBlockAction));
-        registerOperationBlockStartAction = CreateRegistrationMethod<OperationBlockStartAnalysisContext>(symbolStartAnalysisContextType, nameof(RegisterOperationBlockStartAction));
-        registerSymbolEndAction = CreateRegistrationMethod<SymbolAnalysisContext>(symbolStartAnalysisContextType, nameof(RegisterSymbolEndAction));
+            CreateRegistrationMethodWithAdditionalParameter<OperationAnalysisContext, ImmutableArray<OperationKind>>(nameof(RegisterOperationAction));
+        registerOperationBlockAction = CreateRegistrationMethod<OperationBlockAnalysisContext>(nameof(RegisterOperationBlockAction));
+        registerOperationBlockStartAction = CreateRegistrationMethod<OperationBlockStartAnalysisContext>(nameof(RegisterOperationBlockStartAction));
+        registerSymbolEndAction = CreateRegistrationMethod<SymbolAnalysisContext>(nameof(RegisterSymbolEndAction));
         registerSyntaxNodeActionCS = CreateRegistrationMethodWithAdditionalParameter<SyntaxNodeAnalysisContext, ImmutableArray<CS.SyntaxKind>>(
-            symbolStartAnalysisContextType, nameof(RegisterSyntaxNodeAction), typeof(CS.SyntaxKind));
+            nameof(RegisterSyntaxNodeAction), typeof(CS.SyntaxKind));
+
+        // symbolStartAnalysisContextParameter => ((symbolStartAnalysisContextType)receiverParameter)."propertyName"
+        Func<object, TProperty> CreatePropertyAccessor<TProperty>(string propertyName)
+        {
+            var receiverParameter = Parameter(typeof(object));
+            return Lambda<Func<object, TProperty>>(
+                Property(Convert(receiverParameter, symbolStartAnalysisContextType), propertyName),
+                receiverParameter).Compile();
+        }
+
+        // (object receiverParameter, Action<TContext> registerActionParameter)
+        //     => ((symbolStartAnalysisContextType)symbolStartAnalysisContextParameter)."registrationMethodName"<typeArguments>(registerActionParameter)
+        Action<object, Action<TContext>> CreateRegistrationMethod<TContext>(string registrationMethodName, params Type[] typeArguments)
+        {
+            var receiverParameter = Parameter(typeof(object));
+            var registerActionParameter = Parameter(typeof(Action<TContext>));
+            return Lambda<Action<object, Action<TContext>>>(
+                Call(Convert(receiverParameter, symbolStartAnalysisContextType), registrationMethodName, typeArguments, registerActionParameter),
+                receiverParameter,
+                registerActionParameter).Compile();
+        }
+
+        // (object receiverParameter, Action<TContext> registerActionParameter, TParameter additionalParameter)
+        //     => ((symbolStartAnalysisContextType)symbolStartAnalysisContextParameter)."registrationMethodName"<typeArguments>(registerActionParameter, additionalParameter)
+        Action<object, Action<TContext>, TParameter> CreateRegistrationMethodWithAdditionalParameter<TContext, TParameter>(string registrationMethodName, params Type[] typeArguments)
+        {
+            var receiverParameter = Parameter(typeof(object));
+            var registerActionParameter = Parameter(typeof(Action<TContext>));
+            var additionalParameter = Parameter(typeof(TParameter));
+            return Lambda<Action<object, Action<TContext>, TParameter>>(
+                Call(Convert(receiverParameter, symbolStartAnalysisContextType), registrationMethodName, typeArguments, registerActionParameter, additionalParameter),
+                receiverParameter,
+                registerActionParameter,
+                additionalParameter).Compile();
+        }
     }
 
     public SymbolStartAnalysisContext(object roslynSymbolStartAnalysisContext) =>
@@ -114,39 +149,5 @@ public readonly struct SymbolStartAnalysisContext
         {
             throw new ArgumentException("Invalid type parameter.", nameof(TLanguageKindEnum));
         }
-    }
-
-    // symbolStartAnalysisContextParameter => ((symbolStartAnalysisContextType)receiverParameter)."propertyName"
-    private static Func<object, TProperty> CreatePropertyAccessor<TProperty>(Type symbolStartAnalysisContextType, string propertyName)
-    {
-        var receiverParameter = Parameter(typeof(object));
-        return Lambda<Func<object, TProperty>>(
-            Property(Convert(receiverParameter, symbolStartAnalysisContextType), propertyName),
-            receiverParameter).Compile();
-    }
-
-    // (object receiverParameter, Action<TContext> registerActionParameter)
-    //     => ((symbolStartAnalysisContextType)symbolStartAnalysisContextParameter)."registrationMethodName"<typeArguments>(registerActionParameter)
-    private static Action<object, Action<TContext>> CreateRegistrationMethod<TContext>(Type symbolStartAnalysisContextType, string registrationMethodName, params Type[] typeArguments)
-    {
-        var receiverParameter = Parameter(typeof(object));
-        var registerActionParameter = Parameter(typeof(Action<TContext>));
-        return Lambda<Action<object, Action<TContext>>>(
-            Call(Convert(receiverParameter, symbolStartAnalysisContextType), registrationMethodName, typeArguments, registerActionParameter),
-            receiverParameter,
-            registerActionParameter).Compile();
-    }
-
-    // (object receiverParameter, Action<TContext> registerActionParameter, TParameter additionalParameter)
-    //     => ((symbolStartAnalysisContextType)symbolStartAnalysisContextParameter)."registrationMethodName"<typeArguments>(registerActionParameter, additionalParameter)
-    private static Action<object, Action<TContext>, TParameter> CreateRegistrationMethodWithAdditionalParameter<TContext, TParameter>(
-        Type symbolStartAnalysisContextType, string registrationMethodName, params Type[] typeArguments)
-    {
-        var receiverParameter = Parameter(typeof(object));
-        var registerActionParameter = Parameter(typeof(Action<TContext>));
-        var additionalParameter = Parameter(typeof(TParameter));
-        return Lambda<Action<object, Action<TContext>, TParameter>>(
-            Call(Convert(receiverParameter, symbolStartAnalysisContextType), registrationMethodName, typeArguments, registerActionParameter, additionalParameter),
-            receiverParameter, registerActionParameter, additionalParameter).Compile();
     }
 }
