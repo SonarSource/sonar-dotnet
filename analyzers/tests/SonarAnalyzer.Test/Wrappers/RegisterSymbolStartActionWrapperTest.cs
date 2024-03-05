@@ -419,11 +419,15 @@ public class RegisterSymbolStartActionWrapperTest
                     blockStart.RegisterSyntaxNodeAction(nodeContext => visited.Add(nodeContext.Node.ToString()), VB.SyntaxKind.InvocationExpression);
                 });
             }, SymbolKind.NamedType)));
-        var diag = await compilation.GetAnalyzerDiagnosticsAsync();
-        var ad0001 = diag.Should().ContainSingle().Which;
-        ad0001.Id.Should().Be("AD0001");
-        ad0001.Descriptor.Description.ToString().Should().Contain("System.NotImplementedException: Add a reference to the Microsoft.CodeAnalysis.VisualBasic.Workspaces package");
-        visited.Should().BeEmpty(because: "The vb version requires the Microsoft.CodeAnalysis.VisualBasic.Workspaces package to be added. VB.SyntaxKind is not available in the shim layer.");
+        await compilation.GetAnalyzerDiagnosticsAsync();
+        visited.Should().BeEquivalentTo([
+            """Private i As Integer = 0""",
+            """
+            Public Sub M()
+                    Call ToString()
+                End Sub
+            """,
+            """ToString()"""]);
     }
 
     [TestMethod]
@@ -578,11 +582,8 @@ public class RegisterSymbolStartActionWrapperTest
                     visited.Add(nodeName);
                 }, VB.SyntaxKind.InvocationExpression);
             }, SymbolKind.NamedType)));
-        var diag = await compilation.GetAnalyzerDiagnosticsAsync();
-        var ad0001 = diag.Should().ContainSingle().Which;
-        ad0001.Id.Should().Be("AD0001");
-        ad0001.Descriptor.Description.ToString().Should().Contain("System.NotImplementedException: Add a reference to the Microsoft.CodeAnalysis.VisualBasic.Workspaces package");
-        visited.Should().BeEmpty(because: "The vb version requires the Microsoft.CodeAnalysis.VisualBasic.Workspaces package to be added. VB.SyntaxKind is not available in the shim layer.");
+        await compilation.GetAnalyzerDiagnosticsAsync();
+        visited.Should().BeEquivalentTo("ToString()");
     }
 
 #pragma warning disable RS1001 // Missing diagnostic analyzer attribute
