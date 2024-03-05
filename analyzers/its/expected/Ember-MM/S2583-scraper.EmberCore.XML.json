@@ -57,6 +57,12 @@
     {
       "Id": "S2583",
       "Message": "Change this condition so that it does not always evaluate to \u0027False\u0027. Some code paths are unreachable.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L352",
+      "Location": "Line 352 Position 28-48"
+    },
+    {
+      "Id": "S2583",
+      "Message": "Change this condition so that it does not always evaluate to \u0027False\u0027. Some code paths are unreachable.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperInfo.vb#L190",
       "Location": "Line 190 Position 20-33"
     }

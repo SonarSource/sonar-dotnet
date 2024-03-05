@@ -450,6 +450,7 @@ namespace Tests.Diagnostics
             bool guard1 = true;
             bool guard2 = true;
             bool guard3 = true;
+            bool guard4 = true;
 
             while (GetCondition())
             {
@@ -459,18 +460,25 @@ namespace Tests.Diagnostics
                 }
                 else
                 {
-                    if (guard2)         // Noncompliant FP: loop is only analyzed twice
+                    if (guard2)             // Compliant
                     {
                         guard2 = false;
                     }
                     else
                     {
-                        guard3 = false; // Secondary FP
+                        if (guard3)         // Noncompliant FP
+                        {
+                            guard3 = false;
+                        }
+                        else
+                        {
+                            guard4 = false; // Secondary FP
+                        }
                     }
                 }
             }
 
-            if (guard3)                 // Noncompliant FP: loop is only analyzed twice
+            if (guard4)                     // Noncompliant FP: loop is only analyzed three times
             {
                 Console.WriteLine();
             }
@@ -1788,12 +1796,22 @@ namespace Tests.Diagnostics
         {
             var i = 0;
             var j = 0;
+            var k = 0;
             while (condition)
             {
-                if (j >= 0)         // Noncompliant FP
+                if (i >= 0)         // Compliant
                 {
                     Console.WriteLine();
                 }
+                if (j >= 0)         // Compliant
+                {
+                    Console.WriteLine();
+                }
+                if (k >= 0)         // Noncompliant FP
+                {
+                    Console.WriteLine();
+                }
+                k = j + 1;
                 j = i + 1;
                 i = -5;
             }
@@ -2756,9 +2774,9 @@ namespace Tests.Diagnostics
 
             foreach (var item1 in items)
             {
-                if (bool2)          // Noncompliant - FP because symbolic execution stops at the third iteration of loop
+                if (bool2)          // Compliant
                 {
-                    bool3 = true;   // Secondary FP
+                    bool3 = true;
                 }
                 if (bool1)
                 {
@@ -3611,7 +3629,7 @@ public class Repro_8264
                 continue; // first iteration
             }
 
-            if (response == "5" && contentLength == 0)  // Noncompliant {{Change this condition so that it does not always evaluate to 'True'.}} FP (contentLength is changed in the second iteration)
+            if (response == "5" && contentLength == 0)  // Compliant
             {
                 contentLength = 7;
                 continue;
@@ -3619,9 +3637,9 @@ public class Repro_8264
 
             if (response.Length > 0)
             {
-                if (contentLength > 0)                  // Noncompliant {{Change this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.}} FP (consequential error)
+                if (contentLength > 0)                  // Compliant
                 {
-                    Console.WriteLine("Unreachable??"); // Secondary
+                    Console.WriteLine("Unreachable??");
                 }
                 break;
             }

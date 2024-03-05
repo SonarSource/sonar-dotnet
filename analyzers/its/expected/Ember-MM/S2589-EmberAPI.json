@@ -33,6 +33,12 @@
     {
       "Id": "S2589",
       "Message": "Change this condition so that it does not always evaluate to \u0027True\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L706",
+      "Location": "Line 706 Position 24-34"
+    },
+    {
+      "Id": "S2589",
+      "Message": "Change this condition so that it does not always evaluate to \u0027True\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L978",
       "Location": "Line 978 Position 20-30"
     }

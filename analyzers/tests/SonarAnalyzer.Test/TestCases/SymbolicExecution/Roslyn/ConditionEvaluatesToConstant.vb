@@ -315,20 +315,25 @@ Public Class ConditionEvaluatesToConstant
         Dim guard1 = True
         Dim guard2 = True
         Dim guard3 = True
+        Dim guard4 = True
 
         While GetCondition()
             If guard1 Then
                 guard1 = False
             Else
-                If guard2 Then         ' Noncompliant FP: loop is only analyzed twice
+                If guard2 Then          ' Compliant
                     guard2 = False
                 Else
-                    guard3 = False     ' Secondary FP
+                    If guard3 Then      ' Noncompliant FP
+                        guard3 = False
+                    Else
+                        guard4 = False  ' Secondary FP
+                    End If
                 End If
             End If
         End While
 
-        If guard3 Then                 ' Noncompliant FP: loop is only analyzed twice
+        If guard4 Then                 ' Noncompliant FP: loop is only analyzed three times
             Console.WriteLine()
         End If
     End Sub

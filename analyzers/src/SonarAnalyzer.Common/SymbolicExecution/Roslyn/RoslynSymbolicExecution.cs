@@ -27,8 +27,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn;
 
 internal class RoslynSymbolicExecution
 {
-    internal const int MaxStepCount = 2000;
-    private const int MaxOperationVisits = 2;
+    internal const int MaxStepCount = 4000;
+    private const int MaxOperationVisits = 3;
 
     private readonly ControlFlowGraph cfg;
     private readonly SyntaxClassifierBase syntaxClassifier;
