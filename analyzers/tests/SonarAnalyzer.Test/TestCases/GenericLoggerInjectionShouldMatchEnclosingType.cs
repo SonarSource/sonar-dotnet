@@ -32,7 +32,7 @@ public class Correct : Base
     Correct(Logger<Correct> logger, Logger<Wrong> logger2) { }
     //                                     ^^^^^ {{Update this logger to use its enclosing type.}}
 
-    Correct(Logger logger) { } // Compliant FP , Logger is not a generic type
+    Correct(Logger logger) { } // Compliant, Logger is not a generic type
 }
 
 public class Base
