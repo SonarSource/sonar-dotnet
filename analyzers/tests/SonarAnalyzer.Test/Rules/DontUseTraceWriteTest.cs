@@ -30,27 +30,4 @@ public class DontUseTraceWriteTest
     [TestMethod]
     public void DontUseTraceWrite_CS() =>
         builder.AddPaths("DontUseTraceWrite.cs").Verify();
-
-    [TestMethod]
-    public void DontUseTraceWrite_CustomTraceClass_CS() =>
-        builder.AddSnippet("""
-            public class Program
-            {
-                public void Method(string arg)
-                {
-                    Trace.Write("Message");                 // Compliant - the method is not from the System.Diagnostics.Trace class
-                    Trace.Write("Message: {0}", arg);
-                    Trace.WriteLine("Message");
-                    Trace.WriteLine("Message: {0}", arg);
-                }
-            }
-
-            public class Trace
-            {
-                public static void Write(string message) { }
-                public static void Write(string message, params object[] args) { }
-                public static void WriteLine(string message) { }
-                public static void WriteLine(string message, params object[] args) { }
-            }
-            """).Verify();
 }

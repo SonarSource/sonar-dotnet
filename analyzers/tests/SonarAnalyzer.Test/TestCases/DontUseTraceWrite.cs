@@ -58,3 +58,25 @@ public class Program
         AliasedTrace.WriteLine("Message");              // Noncompliant
     }
 }
+
+namespace MyNamespace
+{
+    public class Test
+    {
+        public void Using_CustomTraceClass(string arg)
+        {
+            Trace.Write("Message");                     // Compliant - the method is not from the System.Diagnostics.Trace class
+            Trace.Write("Message: {0}", arg);
+            Trace.WriteLine("Message");
+            Trace.WriteLine("Message: {0}", arg);
+        }
+    }
+
+    public static class Trace
+    {
+        public static void Write(string message) { }
+        public static void Write(string message, params object[] args) { }
+        public static void WriteLine(string message) { }
+        public static void WriteLine(string message, params object[] args) { }
+    }
+}
