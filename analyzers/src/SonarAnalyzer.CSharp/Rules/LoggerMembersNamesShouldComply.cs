@@ -65,23 +65,25 @@ public sealed class LoggerMembersNamesShouldComply : ParametrizedDiagnosticAnaly
     protected override void Initialize(SonarParametrizedAnalysisContext context) =>
         context.RegisterCompilationStartAction(cc =>
         {
-            // TODO: Check for reference assemblies and exit-early.
-            NameRegex = UsesDefaultFormat ? null : new(Format, RegexOptions.Compiled, RegexConstants.DefaultTimeout);
-
-            cc.RegisterNodeAction(c =>
+            if (cc.Compilation.References(KnownAssembly.MicrosoftExtensionsLoggingAbstractions))
             {
-                foreach (var memberData in Declarations(c.Node))
+                NameRegex = UsesDefaultFormat ? null : new(Format, RegexOptions.Compiled, RegexConstants.DefaultTimeout);
+
+                cc.RegisterNodeAction(c =>
                 {
-                    if (!MatchesFormat(memberData.Name)
-                        && c.SemanticModel.GetDeclaredSymbol(memberData.Member).GetSymbolType() is { } type
-                        && type.DerivesOrImplementsAny(Loggers))
+                    foreach (var memberData in Declarations(c.Node))
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, memberData.Location, memberData.MemberType, memberData.Name, Format));
+                        if (!MatchesFormat(memberData.Name)
+                            && c.SemanticModel.GetDeclaredSymbol(memberData.Member).GetSymbolType() is { } type
+                            && type.DerivesOrImplementsAny(Loggers))
+                        {
+                            c.ReportIssue(Diagnostic.Create(Rule, memberData.Location, memberData.MemberType, memberData.Name, Format));
+                        }
                     }
-                }
-            },
-            SyntaxKind.FieldDeclaration,
-            SyntaxKind.PropertyDeclaration);
+                },
+                SyntaxKind.FieldDeclaration,
+                SyntaxKind.PropertyDeclaration);
+            }
         });
 
     private bool MatchesFormat(string name) =>

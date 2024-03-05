@@ -177,7 +177,7 @@ public class LoggerMembersNamesShouldComplyTest
         .Verify();
 
     [TestMethod]
-    public void LoggerMembersNamesShouldComply_Parametrized_CS() =>
+    public void LoggerMembersNamesShouldComply_Parameterized_CS() =>
         new VerifierBuilder()
         .AddAnalyzer(() => new LoggerMembersNamesShouldComply { Format = "^chocolate$" })
         .AddSnippet("""
@@ -190,6 +190,6 @@ public class LoggerMembersNamesShouldComplyTest
                     ILogger running;                        // Noncompliant {{Rename this field 'running' to match the regular expression '^chocolate$'.}}
                 }
                 """)
-       .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
-       .Verify();
+        .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
+        .Verify();
 }
