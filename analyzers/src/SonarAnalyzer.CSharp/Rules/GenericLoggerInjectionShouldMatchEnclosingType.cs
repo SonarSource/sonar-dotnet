@@ -31,15 +31,21 @@ public sealed class GenericLoggerInjectionShouldMatchEnclosingType : SonarDiagno
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
     protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(c =>
+        context.RegisterCompilationStartAction(cc =>
         {
-            var constructor = (ConstructorDeclarationSyntax)c.Node;
-            foreach (var invalidType in InvalidTypeParameters(constructor, c.SemanticModel))
+            if (cc.Compilation.References(KnownAssembly.MicrosoftExtensionsLoggingAbstractions))
             {
-                c.ReportIssue(Diagnostic.Create(Rule, invalidType.GetLocation()));
+                cc.RegisterNodeAction(c =>
+                {
+                    var constructor = (ConstructorDeclarationSyntax)c.Node;
+                    foreach (var invalidType in InvalidTypeParameters(constructor, c.SemanticModel))
+                    {
+                        c.ReportIssue(Diagnostic.Create(Rule, invalidType.GetLocation()));
+                    }
+                },
+                SyntaxKind.ConstructorDeclaration);
             }
-        },
-        SyntaxKind.ConstructorDeclaration);
+        });
 
     // Returns T for [Constructor(ILogger<T> logger)] where T is not Constructor
     private static IEnumerable<TypeSyntax> InvalidTypeParameters(ConstructorDeclarationSyntax constructor, SemanticModel model)
