@@ -62,10 +62,19 @@ public sealed class LoggerMembersNamesShouldComply : ParametrizedDiagnosticAnaly
         KnownType.log4net_Core_ILogger,
         KnownType.Castle_Core_Logging_ILogger);
 
+    private static readonly KnownAssembly[] Assemblies =
+    [
+        KnownAssembly.MicrosoftExtensionsLoggingAbstractions,
+        KnownAssembly.Serilog,
+        KnownAssembly.NLog,
+        KnownAssembly.Log4Net,
+        KnownAssembly.CastleCore
+    ];
+
     protected override void Initialize(SonarParametrizedAnalysisContext context) =>
         context.RegisterCompilationStartAction(cc =>
         {
-            if (cc.Compilation.References(KnownAssembly.MicrosoftExtensionsLoggingAbstractions))
+            if (cc.Compilation.ReferencesAny(Assemblies))
             {
                 NameRegex = UsesDefaultFormat ? null : new(Format, RegexOptions.Compiled, RegexConstants.DefaultTimeout);
 
