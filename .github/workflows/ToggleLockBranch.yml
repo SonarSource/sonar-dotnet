@@ -20,4 +20,4 @@ jobs:
         with:
           github-token: ${{ fromJSON(steps.secrets.outputs.vault).lock_token }}
           slack-token: ${{ fromJSON(steps.secrets.outputs.vault).slack_api_token }}
-          slack-channel: team-lang-dotnet
+          slack-channel: squad-dotnet
