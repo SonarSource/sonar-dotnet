@@ -1,0 +1,17 @@
+{
+  "title": "\"Trace.Write\" and \"Trace.WriteLine\" should not be used",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "logging"
+  ],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-6670",
+  "sqKey": "S6670",
+  "scope": "Main",
+  "quickfix": "targeted"
+}
