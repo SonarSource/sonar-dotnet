@@ -52,7 +52,7 @@ public sealed class LoggingTemplatePlaceHoldersShouldBeInOrder : IMessageTemplat
 
     private static IEnumerable<SyntaxNode> PlaceholderValues(InvocationExpressionSyntax invocation, IMethodSymbol methodSymbol)
     {
-        var parameters = methodSymbol.Parameters.Where(x => x.Name is "args"
+        var parameters = methodSymbol.Parameters.Where(x => x.Name == "args"
             || x.Name.StartsWith("argument")
             || x.Name.StartsWith("propertyValue"))
             .ToArray();

@@ -70,7 +70,7 @@ public class LoggingTemplatePlaceHoldersShouldBeInOrderTest
     [DataRow("Warning")]
     [DataRow("Verbose")]
     public void LoggingTemplatePlaceHoldersShouldBeInOrder_Serilog_CS(string methodName) =>
-    Builder.AddSnippet($$"""
+        Builder.AddSnippet($$"""
             using Serilog;
             using Serilog.Events;
 
@@ -107,6 +107,27 @@ public class LoggingTemplatePlaceHoldersShouldBeInOrderTest
                                                                             // Secondary @-1
                 }
             }
+
             public class MyLogger : Logger { }
             """).Verify();
+
+    [TestMethod]
+    public void LoggingTemplatePlaceHoldersShouldBeInOrder_FakeLoggerWithSameName() =>
+        new VerifierBuilder<MessageTemplateAnalyzer>()
+            .WithOnlyDiagnostics(LoggingTemplatePlaceHoldersShouldBeInOrder.S6673)
+            .AddSnippet("""
+                public class Program
+                {
+                    public void Method(ILogger logger, int arg1, int arg2)
+                    {
+                        logger.Info("{Arg1} {Arg2}", arg1, arg2);     // Compliant
+                        logger.Info("{Arg1} {Arg2}", arg2, arg1);     // Compliant - the method is not from any of the known logging frameworks
+                    }
+                }
+
+                public interface ILogger
+                {
+                    void Info(string message, params object[] args);
+                }
+                """).Verify();
 }
