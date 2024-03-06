@@ -1,0 +1,18 @@
+{
+  "title": "Generic logger injection should match enclosing type",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "confusing",
+    "logging"
+  ],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-6672",
+  "sqKey": "S6672",
+  "scope": "Main",
+  "quickfix": "targeted"
+}
