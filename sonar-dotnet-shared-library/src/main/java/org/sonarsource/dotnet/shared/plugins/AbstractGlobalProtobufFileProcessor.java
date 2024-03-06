@@ -30,7 +30,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
-import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import org.sonar.api.batch.Phase;
 import org.sonar.api.batch.Phase.Name;
@@ -78,7 +77,7 @@ public abstract class AbstractGlobalProtobufFileProcessor extends ProjectBuilder
       LOG.debug("Processing {}", metadataReportProtobuf);
       FileMetadataImporter fileMetadataImporter = new FileMetadataImporter();
       fileMetadataImporter.accept(metadataReportProtobuf);
-      this.generatedFileUris.addAll(fileMetadataImporter.getGeneratedFileUris().stream().map(URI::toString).collect(Collectors.toList()));
+      this.generatedFileUris.addAll(fileMetadataImporter.getGeneratedFileUris().stream().map(URI::toString).toList());
       for (Map.Entry<URI, Charset> entry : fileMetadataImporter.getEncodingPerUri().entrySet()) {
         String key = entry.getKey().toString();
         if (!this.roslynEncodingPerUri.containsKey(key)) {
@@ -105,7 +104,7 @@ public abstract class AbstractGlobalProtobufFileProcessor extends ProjectBuilder
   private List<Path> protobufReportPaths(Map<String, String> moduleProps) {
     return Arrays.stream(parseAsStringArray(moduleProps.get(getAnalyzerWorkDirProperty(languageKey))))
       .map(x -> Paths.get(x).resolve(AbstractModuleConfiguration.getAnalyzerReportDir(languageKey)))
-      .collect(Collectors.toList());
+      .toList();
   }
 
   /**

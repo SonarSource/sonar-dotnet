@@ -21,7 +21,6 @@ package org.sonarsource.dotnet.shared.plugins;
 
 import java.nio.file.Path;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
@@ -58,7 +57,7 @@ public class PropertiesSensor implements Sensor {
 
     List<Path> roslynReportPaths = configuration.roslynReportPaths();
     if (!roslynReportPaths.isEmpty()) {
-      reportPathCollector.addRoslynReport(roslynReportPaths.stream().map(path -> new RoslynReport(context.project(), path)).collect(Collectors.toList()));
+      reportPathCollector.addRoslynReport(roslynReportPaths.stream().map(path -> new RoslynReport(context.project(), path)).toList());
     }
   }
 }

@@ -41,14 +41,10 @@ public class SarifParserFactory {
       if (root.has("version")) {
         String version = root.get("version").getAsString();
 
-        switch (version) {
-          case "0.4":
-          case "0.1":
-            return new SarifParser01And04(report.getProject(), root, toRealPath);
-          case "1.0":
-          default:
-            return new SarifParser10(report.getProject(), root, toRealPath);
-        }
+        return switch (version) {
+          case "0.4", "0.1" -> new SarifParser01And04(report.getProject(), root, toRealPath);
+          default -> new SarifParser10(report.getProject(), root, toRealPath);
+        };
       }
     } catch (IOException e) {
       throw new IllegalStateException("Unable to read the Roslyn SARIF report file: " + report.getReportPath().toAbsolutePath(), e);

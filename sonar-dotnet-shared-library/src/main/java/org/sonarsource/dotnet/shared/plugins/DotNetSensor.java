@@ -34,7 +34,6 @@ import org.sonar.api.scanner.sensor.ProjectSensor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static java.util.stream.Collectors.toList;
 import static org.sonarsource.dotnet.shared.CallableUtils.lazy;
 import static org.sonarsource.dotnet.shared.plugins.RoslynProfileExporter.activeRoslynRulesByPartialRepoKey;
 
@@ -112,7 +111,7 @@ public class DotNetSensor implements ProjectSensor {
         .findAll()
         .stream()
         .map(ActiveRule::ruleKey)
-        .collect(toList()));
+        .toList());
       roslynDataImporter.importRoslynReports(roslynReports, context, activeRoslynRulesByPartialRepoKey, toRealPath);
     }
   }

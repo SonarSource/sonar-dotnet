@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.FileSystem;
@@ -61,7 +60,7 @@ public class ScannerFileService implements FileService {
           fileSystem.inputFiles(fp.and(fp.hasLanguage(languageKey), new PathSuffixPredicate(pathSuffix))).spliterator(),
           false)
         .map(x -> x.uri().getPath())
-        .collect(Collectors.toList());
+        .toList();
 
       if (foundFiles.size() == 1) {
         String foundFile = foundFiles.get(0);

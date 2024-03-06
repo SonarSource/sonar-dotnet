@@ -30,7 +30,6 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static java.util.stream.Collectors.toList;
 import static org.sonarsource.dotnet.shared.CallableUtils.lazy;
 
 public class DotCoverReportsAggregator implements CoverageParser {
@@ -73,7 +72,7 @@ public class DotCoverReportsAggregator implements CoverageParser {
       return pathStream
         .map(Path::toFile)
         .filter(f -> f.isFile() && f.getName().endsWith(".html"))
-        .collect(toList());
+        .toList();
     } catch (IOException e) {
       throw new IllegalStateException(e);
     }
