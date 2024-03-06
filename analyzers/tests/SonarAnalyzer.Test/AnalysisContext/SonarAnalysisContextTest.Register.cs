@@ -641,11 +641,11 @@ public partial class SonarAnalysisContextTest
             context.RegisterNodeActionInAllFiles(c => c.ReportIssue(Diagnostic.Create(rule, c.Node.GetLocation())), SyntaxKind.ClassDeclaration);
     }
 
+    [DiagnosticAnalyzer(LanguageNames.CSharp)]
     private sealed class TestAnalyzerCS : SonarDiagnosticAnalyzer
     {
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
-        public DiagnosticDescriptor Rule { get; }
-
+        private DiagnosticDescriptor Rule { get; }
         private Action<SonarAnalysisContext> Register { get; }
 
         public TestAnalyzerCS(DiagnosticDescriptor rule, Action<SonarAnalysisContext> register)
