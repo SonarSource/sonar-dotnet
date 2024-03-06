@@ -33,6 +33,11 @@ internal static class CompilationExtensions
         // See https://github.com/dotnet/roslyn/issues/3798
         compilation.ObjectType.ContainingAssembly.Name == "mscorlib";
 
+    public static bool ReferencesAny(this Compilation compilation, params KnownAssembly[] assemblies)
+        => assemblies.Any()
+            ? Array.Exists(assemblies, x => compilation.References(x))
+            : throw new ArgumentException("Assemblies argument needs to be non-empty");
+
     public static bool References(this Compilation compilation, KnownAssembly assembly)
         => assembly.IsReferencedBy(compilation);
 

@@ -39,16 +39,22 @@ public sealed partial class KnownAssembly
         new(And(NameIs("Microsoft.VisualStudio.QualityTools.UnitTestFramework").Or(NameIs("Microsoft.VisualStudio.TestPlatform.TestFramework")),
                 PublicKeyTokenIs("b03f5f7f11d50a3a")));
 
-    public static KnownAssembly FluentAssertions { get; } = new(NameIs("FluentAssertions").And(PublicKeyTokenIs("33f2691a05b67b6a")));
     public static KnownAssembly NFluent { get; } = new(NameIs("NFluent").And(OptionalPublicKeyTokenIs("18828b37b84b1437")));
-    public static KnownAssembly NSubstitute { get; } = new(NameIs("NSubstitute").And(PublicKeyTokenIs("92dd2e9066daa5ca")));
+    public static KnownAssembly FluentAssertions { get; } = new(NameAndPublicKeyIs("FluentAssertions", "33f2691a05b67b6a"));
+    public static KnownAssembly NSubstitute { get; } = new(NameAndPublicKeyIs("NSubstitute", "92dd2e9066daa5ca"));
+    // Logging assemblies
+    public static KnownAssembly MicrosoftExtensionsLoggingAbstractions { get; } = new(NameAndPublicKeyIs("Microsoft.Extensions.Logging.Abstractions", "adb9793829ddae60"));
+    public static KnownAssembly Serilog { get; } = new(NameAndPublicKeyIs("Serilog", "24c2f752a8e58a10"));
+    public static KnownAssembly NLog { get; } = new(NameAndPublicKeyIs("NLog", "5120e14c03d0593c"));
+    public static KnownAssembly Log4Net { get; } = new(NameIs("log4net").And(PublicKeyTokenIsAny("669e0ddf0bb1aa2a", "1b44e1d426115821")));
+    public static KnownAssembly CommonLoggingCore { get; } = new(NameAndPublicKeyIs("Common.Logging.Core", "af08829b84f0328e"));
+    public static KnownAssembly CastleCore { get; } = new(NameAndPublicKeyIs("Castle.Core", "407dd0808d44fbdc"));
 
     internal KnownAssembly(Func<AssemblyIdentity, bool> predicate, params Func<AssemblyIdentity, bool>[] or)
-        : this(predicate is null || or.Any(x => x is null)
+        : this(predicate is null || Array.Exists(or, x => x is null)
               ? throw new ArgumentNullException(nameof(predicate), "All predicates must be non-null.")
-              : identities => identities.Any(identitiy => predicate(identitiy) || or.Any(orPredicate => orPredicate(identitiy))))
-    {
-    }
+              : identities => identities.Any(x => predicate(x) || Array.Exists(or, orPredicate => orPredicate(x))))
+    { }
 
     internal KnownAssembly(Func<IEnumerable<AssemblyIdentity>, bool> predicate) =>
         this.predicate = predicate ?? throw new ArgumentNullException(nameof(predicate));

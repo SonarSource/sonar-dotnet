@@ -34,22 +34,28 @@ public sealed class MessageTemplatesShouldBeCorrect : SonarDiagnosticAnalyzer
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
     protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(c =>
+        context.RegisterCompilationStartAction(cc =>
         {
-            var invocation = (InvocationExpressionSyntax)c.Node;
-            if (MessageTemplateExtractor.TemplateArgument(invocation, c.SemanticModel) is { } argument
-                && argument.Expression.IsKind(SyntaxKind.StringLiteralExpression)
-                && TemplateValidator.ContainsErrors(argument.Expression.ToString(), out var errors))
+            if (cc.Compilation.ReferencesAny(KnownAssembly.MicrosoftExtensionsLoggingAbstractions, KnownAssembly.Serilog, KnownAssembly.NLog))
             {
-                var templateStart = argument.Expression.GetLocation().SourceSpan.Start;
-                foreach (var error in errors)
+                cc.RegisterNodeAction(c =>
                 {
-                    var location = Location.Create(c.Tree, new(templateStart + error.Start, error.Length));
-                    c.ReportIssue(Diagnostic.Create(Rule, location, error.Message));
-                }
+                    var invocation = (InvocationExpressionSyntax)c.Node;
+                    if (MessageTemplateExtractor.TemplateArgument(invocation, c.SemanticModel) is { } argument
+                        && argument.Expression.IsKind(SyntaxKind.StringLiteralExpression)
+                        && TemplateValidator.ContainsErrors(argument.Expression.ToString(), out var errors))
+                    {
+                        var templateStart = argument.Expression.GetLocation().SourceSpan.Start;
+                        foreach (var error in errors)
+                        {
+                            var location = Location.Create(c.Tree, new(templateStart + error.Start, error.Length));
+                            c.ReportIssue(Diagnostic.Create(Rule, location, error.Message));
+                        }
+                    }
+                },
+                SyntaxKind.InvocationExpression);
             }
-        },
-        SyntaxKind.InvocationExpression);
+        });
 
     private static class TemplateValidator
     {
