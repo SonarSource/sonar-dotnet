@@ -240,3 +240,53 @@ class Repro_8819
         // Noncompliant: var y = 42;
     }
 }
+
+#if NET
+    /* var x = "x"; */
+#endif
+#if NETFRAMEWORK
+    /* var x = "x"; */
+#endif
+
+#if CSHARP7_OR_GREATER
+    /* var x = "x"; */
+#endif
+#if CSHARP8_OR_GREATER
+    /* var x = "x"; */
+#endif
+#if CSHARP9_OR_GREATER
+    /* var x = "x"; */
+#endif
+#if CSHARP10_OR_GREATER
+    /* var x = "x"; */
+#endif
+#if CSHARP11_OR_GREATER
+    /* var x = "x"; */
+#endif
+#if CSHARP12_OR_GREATER
+    /* var x = "x"; */
+#endif
+
+#if CSHARP7
+    /* var x = "x"; */
+#endif
+#if CSHARP8
+    /* var x = "x"; */
+#endif
+#if CSHARP9
+    /* var x = "x"; */
+#endif
+#if CSHARP10
+    /* var x = "x"; */
+#endif
+#if CSHARP11
+    /* var x = "x"; */
+#endif
+#if CSHARP12
+    /* var x = "x"; */
+#endif
+
+#if NET && CSHARP11
+    /* var x = "x"; */
+#endif
+

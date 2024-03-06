@@ -29,31 +29,37 @@ public class CommentedOutCodeTest
     private readonly VerifierBuilder builder = new VerifierBuilder<CommentedOutCode>();
 
     [TestMethod]
-    public void CommentedOutCode_Nonconcurrent() =>
-        builder.AddPaths("CommentedOutCode_Nonconcurrent.cs").WithConcurrentAnalysis(false).Verify();
-
-    [TestMethod]
     public void CommentedOutCode() =>
         builder.AddPaths("CommentedOutCode.cs").Verify();
 
     [TestMethod]
-    public void CommentedOutCode_NoDocumentation() =>
-        builder.AddPaths("CommentedOutCode.cs")
-            .WithConcurrentAnalysis(false)
-            .WithOptions(ImmutableArray.Create<ParseOptions>(new CSharpParseOptions(documentationMode: DocumentationMode.None)))
+    public void CommentedOutCode_CSharp7() =>
+        builder.AddPaths("CommentedOutCode.cs").WithOptions(ParseOptionsHelper.FromCSharp7).Verify();
+
+    [TestMethod]
+    public void CommentedOutCode_CSharp8() =>
+        builder.AddPaths("CommentedOutCode.cs").WithOptions(ParseOptionsHelper.FromCSharp8).Verify();
+
+    [TestMethod]
+    public void CommentedOutCode_CSharp9() =>
+        builder.AddPaths("CommentedOutCode.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
+
+    [TestMethod]
+    public void CommentedOutCode_CSharp10() =>
+        builder.AddPaths("CommentedOutCode.cs").WithOptions(ParseOptionsHelper.FromCSharp10).Verify();
+
+    [TestMethod]
+    public void CommentedOutCode_CSharp11() =>
+        builder.AddPaths("CommentedOutCode.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+
+    [TestMethod]
+    public void CommentedOutCode_CSharp12() =>
+        builder.AddPaths("CommentedOutCode.cs").WithOptions(ParseOptionsHelper.FromCSharp12).Verify();
+
+    [TestMethod]
+    public void CommentedOutCode_Latest() =>
+        builder
+            .AddPaths("CommentedOutCode.cs")
+            .WithOptions(ParseOptionsHelper.CSharpLatest)
             .Verify();
-
-    [TestMethod]
-    public void CommentedOutCode_CodeFix_SingleLine() =>
-        builder.AddPaths("CommentedOutCode.SingleLine.ToFix.cs")
-            .WithCodeFix<CommentedOutCodeCodeFix>()
-            .WithCodeFixedPaths("CommentedOutCode.SingleLine.Fixed.cs")
-            .VerifyCodeFix();
-
-    [TestMethod]
-    public void CommentedOutCode_CodeFix_MultiLine() =>
-       builder.AddPaths("CommentedOutCode.MultiLine.ToFix.cs")
-           .WithCodeFix<CommentedOutCodeCodeFix>()
-           .WithCodeFixedPaths("CommentedOutCode.MultiLine.Fixed.cs")
-           .VerifyCodeFix();
 }

@@ -18,6 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq;
+using System.Numerics;
+using Microsoft.CodeAnalysis.CSharp;
 using static Microsoft.CodeAnalysis.CSharp.LanguageVersion;
 using static Microsoft.CodeAnalysis.VisualBasic.LanguageVersion;
 using CS = Microsoft.CodeAnalysis.CSharp;
@@ -113,13 +116,49 @@ public static class ParseOptionsHelper
         };
 
     private static ImmutableArray<ParseOptions> FilterByEnvironment(this IEnumerable<ParseOptions> options) =>
-        TestContextHelper.IsAzureDevOpsContext && !TestContextHelper.IsPullRequestBuild
+        true
             ? options.ToImmutableArray()
             : ImmutableArray.Create(options.First()); // Use only the oldest version for local test run and debug
 
     private static IEnumerable<ParseOptions> CreateOptions(params CS.LanguageVersion[] options) =>
-        options.Select(x => new CS.CSharpParseOptions(x));
+        options.Select(x => new CS.CSharpParseOptions(x, preprocessorSymbols: BuildCSharpPreprocessorSymbols(x)));
 
     private static IEnumerable<ParseOptions> CreateOptions(params VB.LanguageVersion[] options) =>
-        options.Select(x => new VB.VisualBasicParseOptions(x));
+        options.Select(x => new VB.VisualBasicParseOptions(x, preprocessorSymbols: BuildVisualBasicPreprocessorSymbols(x)));
+
+    private static string[] BuildCSharpPreprocessorSymbols(CS.LanguageVersion version) =>
+        [
+            .. BuildNetRuntimePreprocessorSymbols(),
+            .. BuildLangVersionOrLaterPreprocessorSymbols(version),
+            version.ToString().ToUpperInvariant(),
+        ];
+
+    private static IEnumerable<KeyValuePair<string, object>> BuildVisualBasicPreprocessorSymbols(VB.LanguageVersion version)
+    {
+        return [
+                .. BuildNetRuntimePreprocessorSymbols().Select(ToValuedSymbol),
+                .. BuildLangVersionOrLaterPreprocessorSymbols(version).Select(ToValuedSymbol),
+                ToValuedSymbol(version.ToString().ToUpperInvariant()),
+            ];
+
+        KeyValuePair<string, object> ToValuedSymbol(string name) => new KeyValuePair<string, object>(name, 1);
+    }
+
+    private static IEnumerable<string> BuildLangVersionOrLaterPreprocessorSymbols<T>(T version) where T : struct, Enum =>
+        Enum.GetValues(typeof(T))
+            .Cast<T>()
+            .Where(x => ((IComparable)x).CompareTo(version) <= 0) // Includes Default
+            .Select(x => $"{x.ToString().ToUpperInvariant()}_OR_GREATER");
+
+    private static List<string> BuildNetRuntimePreprocessorSymbols()
+    {
+        var result = new List<string>();
+#if NET
+        result.Add("NET");
+#endif
+#if NETFRAMEWORK
+        result.Add("NETFRAMEWORK");
+#endif
+        return result;
+    }
 }
