@@ -25,6 +25,8 @@ namespace SonarAnalyzer.Common.Walkers;
 // The walker is used to:
 // - visit the catch clause (all the nested catch clauses are skipped; they will be visited independently)
 // - save the declared exception
+// - save the logging invocation that uses the exception
+// - save the throw statement that rethrows the exception
 // - find all the logging invocations and check if the exception is logged
 // - if the exception is logged, it will stop looking for the other invocations and set IsExceptionLogged to true
 // - if the exception is not logged, it will visit all the invocations
@@ -33,14 +35,14 @@ public sealed class CatchLoggingInvocationWalker : SafeCSharpSyntaxWalker
     private readonly SemanticModel model;
     private bool isFirstCatchClauseVisited;
     private bool hasWhenFilterWithDeclarations;
+    private ISymbol caughtException;
 
-    public ISymbol CaughtException { get; private set; }
     public bool IsExceptionLogged { get; private set; }
     public InvocationExpressionSyntax LoggingInvocationWithException { get; private set; }
     public ThrowStatementSyntax ThrowStatementSyntax { get; private set; }
-    public ImmutableArray<InvocationExpressionSyntax> LoggingInvocationsWithoutException { get; private set; } = ImmutableArray<InvocationExpressionSyntax>.Empty;
+    public List<InvocationExpressionSyntax> LoggingInvocationsWithoutException { get; } = new();
 
-    private static readonly ImmutableArray<LoggingInvocationDescriptor> LoggingInvocationIdentifiers = ImmutableArray.Create(
+    private static readonly ImmutableArray<LoggingInvocationDescriptor> LoggingInvocationDescriptors = ImmutableArray.Create(
         new LoggingInvocationDescriptor(MicrosoftExtensionsLogging, KnownType.Microsoft_Extensions_Logging_LoggerExtensions, false),
         new LoggingInvocationDescriptor(CastleCoreOrCommonCore, KnownType.Castle_Core_Logging_ILogger, true),
         new LoggingInvocationDescriptor(CastleCoreOrCommonCore, KnownType.Common_Logging_ILog, true),
@@ -69,7 +71,7 @@ public sealed class CatchLoggingInvocationWalker : SafeCSharpSyntaxWalker
         hasWhenFilterWithDeclarations = node.Filter != null && node.Filter.DescendantNodes().Any(DeclarationPatternSyntaxWrapper.IsInstance);
         if (node.Declaration != null && !node.Declaration.Identifier.IsKind(SyntaxKind.None))
         {
-            CaughtException = model.GetDeclaredSymbol(node.Declaration);
+            caughtException = model.GetDeclaredSymbol(node.Declaration);
         }
         base.VisitCatchClause(node);
     }
@@ -79,7 +81,7 @@ public sealed class CatchLoggingInvocationWalker : SafeCSharpSyntaxWalker
         if (!IsExceptionLogged && IsLoggingInvocation(node, model))
         {
             if (GetArgumentSymbolDerivedFromException(node, model) is { } currentException
-                && (hasWhenFilterWithDeclarations || currentException.Equals(CaughtException)))
+                && (hasWhenFilterWithDeclarations || currentException.Equals(caughtException)))
             {
                 IsExceptionLogged = true;
                 LoggingInvocationWithException = node;
@@ -87,7 +89,7 @@ public sealed class CatchLoggingInvocationWalker : SafeCSharpSyntaxWalker
             }
             else
             {
-                LoggingInvocationsWithoutException = LoggingInvocationsWithoutException.Add(node);
+                LoggingInvocationsWithoutException.Add(node);
             }
         }
         base.VisitInvocationExpression(node);
@@ -95,9 +97,26 @@ public sealed class CatchLoggingInvocationWalker : SafeCSharpSyntaxWalker
 
     public override void VisitThrowStatement(ThrowStatementSyntax node)
     {
-        ThrowStatementSyntax = node;
+        if (ThrowStatementSyntax == null
+            && RethrowsCaughtException(node))
+        {
+            ThrowStatementSyntax = node;
+        }
         base.VisitThrowStatement(node);
     }
+
+    public override void VisitParenthesizedLambdaExpression(ParenthesizedLambdaExpressionSyntax node)
+    {
+        // Skip processing to avoid false positives.
+    }
+
+    public override void VisitSimpleLambdaExpression(SimpleLambdaExpressionSyntax node)
+    {
+        // Skip processing to avoid false positives.
+    }
+
+    private bool RethrowsCaughtException(ThrowStatementSyntax node) =>
+        node.Expression is null || Equals(model.GetSymbolInfo(node.Expression).Symbol, caughtException);
 
     private static ISymbol GetArgumentSymbolDerivedFromException(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
         invocation.ArgumentList.Arguments
@@ -108,7 +127,7 @@ public sealed class CatchLoggingInvocationWalker : SafeCSharpSyntaxWalker
             .FirstOrDefault();
 
     private static bool IsLoggingInvocation(InvocationExpressionSyntax invocation, SemanticModel model) =>
-        LoggingInvocationIdentifiers.Any(x => IsLoggingInvocation(invocation, model, x.MethodNames, x.ContainingType, x.CheckDerivedTypes));
+        LoggingInvocationDescriptors.Any(x => IsLoggingInvocation(invocation, model, x.MethodNames, x.ContainingType, x.CheckDerivedTypes));
 
     private static bool IsLoggingInvocation(InvocationExpressionSyntax invocation, SemanticModel model, ICollection<string> methodNames, KnownType containingType, bool checkDerivedTypes) =>
         methodNames.Contains(invocation.GetIdentifier().ToString())

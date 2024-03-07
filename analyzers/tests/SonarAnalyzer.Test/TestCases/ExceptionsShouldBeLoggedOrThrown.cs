@@ -8,9 +8,32 @@ public class ExceptionsShouldBeEitherLoggedOrThrown
         try
         {
         }
-        catch (DivideByZeroException divideByZeroException) // The exception is only logged.
+        catch (DivideByZeroException divideByZeroException)             // The exception is only logged.
         {
             logger.LogError(divideByZeroException, "Message!");
+        }
+        catch (OverflowException exception)                             // The exception is only thrown
+        {
+            throw;
+        }
+        catch (FormatException exception)                               // The exception is only thrown
+        {
+            throw exception;
+        }
+        catch (ArithmeticException exception)                           // The exception is not logged
+        {
+            logger.LogError(null, "Message!");
+            throw;
+        }
+        catch (RankException exception)                                 // Logging a different exception
+        {
+            logger.LogError(new Exception("hello"), "Message!");
+            throw;
+        }
+        catch (AggregateException exception)                            // Logging a different exception
+        {
+            logger.LogError(exception, "Message!");
+            throw new Exception();
         }
         catch (InvalidOperationException loggedMultipleTimes)           // Noncompliant {{Either log this exception and handle it, or rethrow it with some contextual information.}}
         {
@@ -89,6 +112,17 @@ public class ExceptionsShouldBeEitherLoggedOrThrown
                 throw outer;
             }
         }
+
+        try { }
+        catch (Exception outer)                                         // Noncompliant
+        {
+            try { }
+            finally
+            {
+                logger.LogError(outer, "message");                      // Secondary
+                throw outer;                                            // Secondary
+            }
+        }
     }
 
     public void NoCatch(ILogger logger, Exception exception)
@@ -142,18 +176,34 @@ public class ExceptionsShouldBeEitherLoggedOrThrown
     public void LogFromLambda(ILogger logger)
     {
         try { }
-        catch (Exception e)                                             // Noncompliant
+        catch (Exception e)                                             // FN - to avoid noise in other lambda cases
         {
-            Call(() => logger.LogCritical(e, "Message!"));              // Secondary
-            throw;                                                      // Secondary
+            Call(() => logger.LogCritical(e, "Message!"));
+            throw;
         }
 
         try { }
         catch (Exception e)
         {
             Action<Exception, string> LogCritical = (Exception ex, string message) => { };
-            LogCritical(e, "Message");                                 // Compliant
+            LogCritical(e, "Message");
             throw;
+        }
+
+        try
+        { }
+        catch (Exception exception)
+        {
+            Action x = () => { throw exception; };
+            logger.LogError(exception, "Message");
+        }
+
+        try
+        { }
+        catch (Exception exception)
+        {
+            Action x = () => { logger.LogError(exception, "Message"); };
+            throw exception;
         }
     }
 
@@ -195,6 +245,33 @@ public class ExceptionsShouldBeEitherLoggedOrThrown
         {
             logger.LogWarning(e.InnerException, "Message!");            // Secondary
             throw;                                                      // Secondary
+        }
+    }
+
+    public void MultipleThrows(ILogger logger)
+    {
+        try { }
+        catch (InvalidCastException e)                                  // Noncompliant
+        {
+            logger.LogWarning(e.InnerException, "Message!");            // Secondary
+            throw new Exception();
+            throw;                                                      // Secondary
+        }
+
+        try { }
+        catch (InvalidCastException e)                                  // Noncompliant
+        {
+            logger.LogWarning(e.InnerException, "Message!");            // Secondary
+            throw new Exception();
+            throw e;                                                      // Secondary
+        }
+
+        try { }
+        catch (InvalidCastException e)                                  // Noncompliant
+        {
+            logger.LogWarning(e.InnerException, "Message!");            // Secondary
+            throw;                                                      // Secondary
+            throw new Exception();
         }
     }
 

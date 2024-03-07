@@ -40,16 +40,22 @@ public class ExceptionsShouldBeLoggedOrThrownTest
             .AddSnippet("""
                 using System;
                 using log4net;
+                using log4net.Util;
 
                 public class Program
                 {
                     public void Method(ILog logger, string message)
                     {
                         try { }
-                        catch (Exception e)                 // Noncompliant
+                        catch (AggregateException e)                                // Noncompliant
                         {
-                            logger.Debug(message, e);       // Secondary
-                            throw;                          // Secondary
+                            ILogExtensions.DebugExt(logger, "Message", e);          // Secondary
+                            throw;                                                  // Secondary
+                        }
+                        catch (Exception e)                                         // Noncompliant
+                        {
+                            logger.Debug(message, e);                               // Secondary
+                            throw;                                                  // Secondary
                         }
                     }
                 }
@@ -69,10 +75,15 @@ public class ExceptionsShouldBeLoggedOrThrownTest
                     public void Method(ILogger logger, string message)
                     {
                         try { }
-                        catch (Exception e)                 // Noncompliant
+                        catch (ArgumentException e)                     // Noncompliant
                         {
-                            logger.Debug(e, message);       // Secondary
-                            throw;                          // Secondary
+                            logger.Debug(e, message);                   // Secondary
+                            throw;                                      // Secondary
+                        }
+                        catch (Exception e)                             // Noncompliant
+                        {
+                            ILoggerExtensions.Warn(logger, e, null);    // Secondary
+                            throw;                                      // Secondary
                         }
                     }
                 }
@@ -104,6 +115,29 @@ public class ExceptionsShouldBeLoggedOrThrownTest
             .Verify();
 
     [TestMethod]
+    public void ExceptionsShouldBeLoggedOrThrown_CommonLogging_CS() =>
+        builder
+            .AddSnippet("""
+                using System;
+                using Common.Logging;
+
+                public class Program
+                {
+                    public void Method(ILog logger, string message)
+                    {
+                        try { }
+                        catch (Exception e)                 // Noncompliant
+                        {
+                            logger.Debug(message, e);       // Secondary
+                            throw;                          // Secondary
+                        }
+                    }
+                }
+                """)
+            .AddReferences(NuGetMetadataReference.CommonLoggingCore())
+            .Verify();
+
+    [TestMethod]
     public void ExceptionsShouldBeLoggedOrThrown_Serilog_CS() =>
         builder
             .AddSnippet("""
@@ -115,6 +149,11 @@ public class ExceptionsShouldBeLoggedOrThrownTest
                     public void Method(ILogger logger, string message)
                     {
                         try { }
+                        catch (AggregateException e)        // Noncompliant
+                        {
+                            Log.Debug(e, message);          // Secondary
+                            throw;                          // Secondary
+                        }
                         catch (Exception e)                 // Noncompliant
                         {
                             logger.Debug(e, message);       // Secondary
@@ -123,6 +162,6 @@ public class ExceptionsShouldBeLoggedOrThrownTest
                     }
                 }
                 """)
-            .AddReferences(NuGetMetadataReference.Serilog(Constants.NuGetLatestVersion))
+            .AddReferences(NuGetMetadataReference.Serilog())
             .Verify();
 }
