@@ -28,8 +28,8 @@ public class UsePascalCaseForNamedPlaceHoldersTest
 {
     private static readonly IEnumerable<MetadataReference> LoggingReferences =
         NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions()
-        .Concat(NuGetMetadataReference.NLog(Constants.NuGetLatestVersion))
-        .Concat(NuGetMetadataReference.Serilog(Constants.NuGetLatestVersion));
+        .Concat(NuGetMetadataReference.NLog())
+        .Concat(NuGetMetadataReference.Serilog());
 
     private static readonly VerifierBuilder Builder = new VerifierBuilder<MessageTemplateAnalyzer>()
         .AddReferences(LoggingReferences)

@@ -171,7 +171,7 @@ public class UseConstantLoggingTemplateTest
         new VerifierBuilder<TAnalyzer>()
             .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingPackages(Constants.NuGetLatestVersion))
             .AddReferences(NuGetMetadataReference.CastleCore(Constants.NuGetLatestVersion))
-            .AddReferences(NuGetMetadataReference.Serilog(Constants.NuGetLatestVersion))
+            .AddReferences(NuGetMetadataReference.Serilog())
             .AddReferences(NuGetMetadataReference.Log4Net("2.0.8", "net45-full"))
-            .AddReferences(NuGetMetadataReference.NLog(Constants.NuGetLatestVersion));
+            .AddReferences(NuGetMetadataReference.NLog());
 }

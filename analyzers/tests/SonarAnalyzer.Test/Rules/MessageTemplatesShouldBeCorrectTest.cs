@@ -73,7 +73,7 @@ public class MessageTemplatesShouldBeCorrectTest
     [DataRow("Write", "LogEventLevel.Verbose,")]
     public void MessageTemplatesShouldBeCorrect_Serilog_CS(string methodName, string logEventLevel) =>
         Builder
-        .AddReferences(NuGetMetadataReference.Serilog(Constants.NuGetLatestVersion))
+        .AddReferences(NuGetMetadataReference.Serilog())
         .AddSnippet($$$"""
             using System;
             using Serilog;
@@ -104,7 +104,7 @@ public class MessageTemplatesShouldBeCorrectTest
     [DataRow("Warn")]
     public void MessageTemplatesShouldBeCorrect_NLog_CS(string methodName) =>
         Builder
-        .AddReferences(NuGetMetadataReference.NLog(Constants.NuGetLatestVersion))
+        .AddReferences(NuGetMetadataReference.NLog())
         .AddSnippet($$$"""
             using System;
             using NLog;
@@ -130,7 +130,7 @@ public class MessageTemplatesShouldBeCorrectTest
     [DataRow("ConditionalTrace")]
     public void MessageTemplatesShouldBeCorrect_NLog_ConditionalExtensions_CS(string methodName) =>
         Builder
-        .AddReferences(NuGetMetadataReference.NLog(Constants.NuGetLatestVersion))
+        .AddReferences(NuGetMetadataReference.NLog())
         .AddSnippet($$$"""
             using System;
             using NLog;
