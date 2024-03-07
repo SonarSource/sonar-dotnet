@@ -1,0 +1,24 @@
+{
+  "title": "Exceptions should be either logged or rethrown but not both",
+  "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "MEDIUM"
+    },
+    "attribute": "DISTINCT"
+  },
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "15min"
+  },
+  "tags": [
+    "logging",
+    "error-handling"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-2139",
+  "sqKey": "S2139",
+  "scope": "Main",
+  "quickfix": "infeasible"
+}

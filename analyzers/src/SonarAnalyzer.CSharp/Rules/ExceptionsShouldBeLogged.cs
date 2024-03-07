@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using static Roslyn.Utilities.SonarAnalyzer.Shared.LoggingFrameworkMethods;
+using SonarAnalyzer.Common.Walkers;
 
 namespace SonarAnalyzer.Rules.CSharp;
 
@@ -37,100 +37,12 @@ public sealed class ExceptionsShouldBeLogged : SonarDiagnosticAnalyzer
             {
                 var catchClauseSyntax = (CatchClauseSyntax)c.Node;
                 var walker = new CatchLoggingInvocationWalker(c.SemanticModel);
-                if (walker.SafeVisit(catchClauseSyntax) && !walker.IsExceptionLogged && walker.LoggingInvocations.Any())
+                if (walker.SafeVisit(catchClauseSyntax) && !walker.IsExceptionLogged && walker.LoggingInvocationsWithoutException.Any())
                 {
-                    var primaryLocation = walker.LoggingInvocations[0].GetLocation();
-                    var additionalLocations = walker.LoggingInvocations.Skip(1).Select(x => x.GetLocation());
+                    var primaryLocation = walker.LoggingInvocationsWithoutException[0].GetLocation();
+                    var additionalLocations = walker.LoggingInvocationsWithoutException.Skip(1).Select(x => x.GetLocation());
                     c.ReportIssue(Diagnostic.Create(Rule, primaryLocation, additionalLocations));
                 }
             },
             SyntaxKind.CatchClause);
-
-    // The walker is used to:
-    // - visit the catch clause (all the nested catch clauses are skipped; they will be visited independently)
-    // - save the declared exception
-    // - find all the logging invocations and check if the exception is logged
-    // - if the exception is logged, it will stop looking for the other invocations and set IsExceptionLogged to true
-    // - if the exception is not logged, it will visit all the invocations
-    private sealed class CatchLoggingInvocationWalker : SafeCSharpSyntaxWalker
-    {
-        private readonly SemanticModel model;
-        private bool isFirstCatchClauseVisited;
-        private bool hasWhenFilterWithDeclarations;
-        private ISymbol caughtException;
-
-        public bool IsExceptionLogged { get; private set; }
-        public readonly List<InvocationExpressionSyntax> LoggingInvocations = new();
-
-        public CatchLoggingInvocationWalker(SemanticModel model)
-        {
-            this.model = model;
-        }
-
-        public override void Visit(SyntaxNode node)
-        {
-            if (!IsExceptionLogged)
-            {
-                base.Visit(node);
-            }
-        }
-
-        public override void VisitCatchClause(CatchClauseSyntax node)
-        {
-            // We want to look for logging invocations only in the main catch clause.
-            if (isFirstCatchClauseVisited)
-            {
-                return;
-            }
-
-            isFirstCatchClauseVisited = true;
-            hasWhenFilterWithDeclarations = node.Filter != null && node.Filter.DescendantNodes().Any(DeclarationPatternSyntaxWrapper.IsInstance);
-            if (node.Declaration != null && !node.Declaration.Identifier.IsKind(SyntaxKind.None))
-            {
-                caughtException = model.GetDeclaredSymbol(node.Declaration);
-            }
-            base.VisitCatchClause(node);
-        }
-
-        public override void VisitInvocationExpression(InvocationExpressionSyntax node)
-        {
-            if (IsLoggingInvocation(node, model))
-            {
-                if (GetArgumentSymbolDerivedFromException(node, model) is { } currentException
-                    && (hasWhenFilterWithDeclarations || currentException.Equals(caughtException)))
-                {
-                    IsExceptionLogged = true;
-                    return;
-                }
-                else
-                {
-                    LoggingInvocations.Add(node);
-                }
-            }
-            base.VisitInvocationExpression(node);
-        }
-
-        private static ISymbol GetArgumentSymbolDerivedFromException(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
-            invocation.ArgumentList.Arguments
-                      .Where(x => semanticModel.GetTypeInfo(x.Expression).Type.DerivesFrom(KnownType.System_Exception))
-                      .Select(x => x.Expression is MemberAccessExpressionSyntax memberAccess && memberAccess.NameIs("InnerException")
-                                                ? semanticModel.GetSymbolInfo(memberAccess.Expression).Symbol
-                                                : semanticModel.GetSymbolInfo(x.Expression).Symbol)
-                      .FirstOrDefault();
-
-        private static bool IsLoggingInvocation(InvocationExpressionSyntax invocation, SemanticModel model) =>
-            IsLoggingInvocation(invocation, model, MicrosoftExtensionsLogging, KnownType.Microsoft_Extensions_Logging_LoggerExtensions, false)
-            || IsLoggingInvocation(invocation, model, CastleCoreOrCommonCore, KnownType.Castle_Core_Logging_ILogger, true)
-            || IsLoggingInvocation(invocation, model, CastleCoreOrCommonCore, KnownType.Common_Logging_ILog, true)
-            || IsLoggingInvocation(invocation, model, Log4NetILog, KnownType.log4net_ILog, true)
-            || IsLoggingInvocation(invocation, model, Log4NetILogExtensions, KnownType.log4net_Util_ILogExtensions, false)
-            || IsLoggingInvocation(invocation, model, NLogLoggingMethods, KnownType.NLog_ILogger, true)
-            || IsLoggingInvocation(invocation, model, NLogLoggingMethods, KnownType.NLog_ILoggerExtensions, false)
-            || IsLoggingInvocation(invocation, model, NLogILoggerBase, KnownType.NLog_ILoggerBase, true);
-
-        private static bool IsLoggingInvocation(InvocationExpressionSyntax invocation, SemanticModel model, ICollection<string> methodNames, KnownType containingType, bool checkDerivedTypes) =>
-            methodNames.Contains(invocation.GetIdentifier().ToString())
-            && model.GetSymbolInfo(invocation).Symbol is { } invocationSymbol
-            && invocationSymbol.HasContainingType(containingType, checkDerivedTypes);
-    }
 }
