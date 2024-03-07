@@ -1,0 +1,17 @@
+{
+  "title": "Log message template placeholders should be in the right order",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "logging"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-6673",
+  "sqKey": "S6673",
+  "scope": "Main",
+  "quickfix": "infeasible"
+}

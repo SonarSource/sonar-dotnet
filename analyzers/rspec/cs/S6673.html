@@ -1,0 +1,68 @@
+<p>The positions of arguments in a logging call should match the positions of their <a href="https://messagetemplates.org">message template</a>
+placeholders.</p>
+<h2>Why is this an issue?</h2>
+<p>The placeholders of a <a href="https://messagetemplates.org">message template</a> are defined by their name and their position. Log methods specify
+the values for the placeholder at runtime by passing them in a <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/params">params array</a>:</p>
+<pre data-diff-id="1" data-diff-type="compliant">
+logger.LogError("{First} placeholder and {Second} one.", first, second);
+</pre>
+<p>This rule raises an issue if the position of an argument does not match the position of the corresponding placeholder:</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+// 'first' and 'second' are swapped
+logger.LogError("{First} placeholder and {Second} one.", second, first);
+//                                                       ^^^^^^  ^^^^^
+</pre>
+<h3>What is the potential impact?</h3>
+<p>Logging providers use placeholder names to create key/value pairs in the log entry. The key corresponds to the placeholder and the value is the
+argument passed in the log call.</p>
+<p>If the positions of the placeholder and the argument do not match, the value is associated with the wrong key. This corrupts the logs entry and
+makes log analytics unreliable.</p>
+<h2>How to fix it</h2>
+<p>Make sure that the placeholder positions and the argument positions match. Use local variables, fields, or properties for the arguments and name
+the placeholders accordingly.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<p>'path' and 'fileName' are swapped and therefore assigned to the wrong placeholders.</p>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+logger.LogError("File {FileName} not found in folder {Path}", path, fileName);
+//                                                            ^^^^  ^^^^^^^^
+</pre>
+<h4>Compliant solution</h4>
+<p>Swap the arguments.</p>
+<pre data-diff-id="2" data-diff-type="compliant">
+logger.LogError("File {FileName} not found in folder {Path}", fileName, path);
+</pre>
+<h4>Noncompliant code example</h4>
+<p>'Name' is detected but 'Folder' is not. The placeholder’s name should correspond to the name from the argument.</p>
+<pre data-diff-id="3" data-diff-type="noncompliant">
+logger.LogError("File {Name} not found in folder {Folder}", file.DirectoryName, file.Name);
+//                                                                                   ^^^^
+</pre>
+<h4>Compliant solution</h4>
+<p>Swap the arguments and rename the placeholder to 'DirectoryName'.</p>
+<pre data-diff-id="3" data-diff-type="compliant">
+logger.LogError("File {Name} not found in folder {DirectoryName}", file.Name, file.DirectoryName);
+</pre>
+<h4>Noncompliant code example</h4>
+<p>Not detected: A name for the arguments can not be inferred. Use locals to support detection.</p>
+<pre data-diff-id="4" data-diff-type="noncompliant">
+logger.LogError("Sum is {Sum} and product is {Product}", x * y, x + y); // Not detected
+</pre>
+<h4>Compliant solution</h4>
+<p>Help detection by using arguments with a name.</p>
+<pre data-diff-id="4" data-diff-type="compliant">
+var sum = x + y;
+var product = x * y;
+logger.LogError("Sum is {Sum} and product is {Product}", sum, product);
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Message Templates - <a href="https://messagetemplates.org">Message template specification</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/logging?tabs=command-line#log-message-template">Log message
+  template</a> </li>
+  <li> Serilog - <a href="https://github.com/serilog/serilog/wiki/Structured-Data">Structured Data</a> </li>
+  <li> NLog - <a href="https://github.com/NLog/NLog/wiki/How-to-use-structured-logging">How to use structured logging</a> </li>
+</ul>
+

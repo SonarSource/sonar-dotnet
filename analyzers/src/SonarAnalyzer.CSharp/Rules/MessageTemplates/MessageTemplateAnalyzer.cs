@@ -32,6 +32,7 @@ public sealed class MessageTemplateAnalyzer : SonarDiagnosticAnalyzer
         SyntaxKind.InterpolatedStringText);
 
     private static readonly ImmutableHashSet<IMessageTemplateCheck> Checks = ImmutableHashSet.Create<IMessageTemplateCheck>(
+               new LoggingTemplatePlaceHoldersShouldBeInOrder(),
                new NamedPlaceholdersShouldBeUnique(),
                new UsePascalCaseForNamedPlaceHolders());
 
@@ -39,22 +40,28 @@ public sealed class MessageTemplateAnalyzer : SonarDiagnosticAnalyzer
         Checks.Select(x => x.Rule).ToImmutableArray();
 
     protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(c =>
+        context.RegisterCompilationStartAction(cc =>
         {
-            var invocation = (InvocationExpressionSyntax)c.Node;
-            var enabledChecks = Checks.Where(x => x.Rule.IsEnabled(c)).ToArray();
-            if (enabledChecks.Length > 0
-                && MessageTemplateExtractor.TemplateArgument(invocation, c.SemanticModel) is { } argument
-                && HasValidExpression(argument)
-                && MessageTemplatesParser.Parse(argument.Expression.ToString()) is { Success: true } result)
+            if (cc.Compilation.ReferencesAny(KnownAssembly.MicrosoftExtensionsLoggingAbstractions, KnownAssembly.Serilog, KnownAssembly.NLog))
             {
-                foreach (var check in enabledChecks)
+                cc.RegisterNodeAction(c =>
                 {
-                    check.Execute(c, invocation, argument, result.Placeholders);
-                }
+                    var invocation = (InvocationExpressionSyntax)c.Node;
+                    var enabledChecks = Checks.Where(x => x.Rule.IsEnabled(c)).ToArray();
+                    if (enabledChecks.Length > 0
+                        && MessageTemplateExtractor.TemplateArgument(invocation, c.SemanticModel) is { } argument
+                        && HasValidExpression(argument)
+                        && MessageTemplatesParser.Parse(argument.Expression.ToString()) is { Success: true } result)
+                    {
+                        foreach (var check in enabledChecks)
+                        {
+                            check.Execute(c, invocation, argument, result.Placeholders);
+                        }
+                    }
+                },
+                SyntaxKind.InvocationExpression);
             }
-        },
-        SyntaxKind.InvocationExpression);
+        });
 
     private static bool HasValidExpression(ArgumentSyntax argument) =>
         argument.Expression.DescendantNodes().All(x => x.IsAnyKind(ValidTemplateKinds));

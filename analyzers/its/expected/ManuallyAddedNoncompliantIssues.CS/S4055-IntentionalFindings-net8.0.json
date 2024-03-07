@@ -11,6 +11,12 @@
       "Message": "Replace this string literal with a string retrieved through an instance of the \u0027ResourceManager\u0027 class.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S6670.cs#L10",
       "Location": "Line 10 Position 25-34"
+    },
+    {
+      "Id": "S4055",
+      "Message": "Replace this string literal with a string retrieved through an instance of the \u0027ResourceManager\u0027 class.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S6673.cs#L9",
+      "Location": "Line 9 Position 35-60"
     }
   ]
 }
