@@ -26,18 +26,13 @@ namespace SonarAnalyzer.Test.Rules;
 [TestClass]
 public class LoggingTemplatePlaceHoldersShouldBeInOrderTest
 {
-    private static readonly IEnumerable<MetadataReference> LoggingReferences =
-        NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions()
-        .Concat(NuGetMetadataReference.NLog(Constants.NuGetLatestVersion))
-        .Concat(NuGetMetadataReference.Serilog(Constants.NuGetLatestVersion));
-
-    private static readonly VerifierBuilder Builder = new VerifierBuilder<MessageTemplateAnalyzer>()
-        .AddReferences(LoggingReferences)
-        .WithOnlyDiagnostics(LoggingTemplatePlaceHoldersShouldBeInOrder.S6673);
+    private static readonly VerifierBuilder Builder = new VerifierBuilder<MessageTemplateAnalyzer>().WithOnlyDiagnostics(LoggingTemplatePlaceHoldersShouldBeInOrder.S6673);
 
     [TestMethod]
     public void LoggingTemplatePlaceHoldersShouldBeInOrder_CS() =>
-        Builder.AddPaths("LoggingTemplatePlaceHoldersShouldBeInOrder.cs").Verify();
+        Builder.AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
+            .AddPaths("LoggingTemplatePlaceHoldersShouldBeInOrder.cs")
+            .Verify();
 
     [DataTestMethod]
     [DataRow("LogCritical")]
@@ -47,20 +42,21 @@ public class LoggingTemplatePlaceHoldersShouldBeInOrderTest
     [DataRow("LogTrace")]
     [DataRow("LogWarning")]
     public void LoggingTemplatePlaceHoldersShouldBeInOrder_MicrosoftExtensionsLogging_CS(string methodName) =>
-        Builder.AddSnippet($$"""
-            using System;
-            using Microsoft.Extensions.Logging;
+        Builder.AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
+            .AddSnippet($$"""
+                using System;
+                using Microsoft.Extensions.Logging;
 
-            public class Program
-            {
-                public void Method(ILogger logger, int arg1, int arg2)
+                public class Program
                 {
-                    logger.{{methodName}}("{Arg1} {Arg2}", arg1, arg2);     // Compliant
-                    logger.{{methodName}}("{Arg1} {Arg2}", arg2, arg1);     // Noncompliant
-                                                                            // Secondary @-1
+                    public void Method(ILogger logger, int arg1, int arg2)
+                    {
+                        logger.{{methodName}}("{Arg1} {Arg2}", arg1, arg2);     // Compliant
+                        logger.{{methodName}}("{Arg1} {Arg2}", arg2, arg1);     // Noncompliant
+                                                                                // Secondary @-1
+                    }
                 }
-            }
-            """).Verify();
+                """).Verify();
 
     [DataTestMethod]
     [DataRow("Debug")]
@@ -70,20 +66,21 @@ public class LoggingTemplatePlaceHoldersShouldBeInOrderTest
     [DataRow("Warning")]
     [DataRow("Verbose")]
     public void LoggingTemplatePlaceHoldersShouldBeInOrder_Serilog_CS(string methodName) =>
-        Builder.AddSnippet($$"""
-            using Serilog;
-            using Serilog.Events;
+        Builder.AddReferences(NuGetMetadataReference.Serilog(Constants.NuGetLatestVersion))
+            .AddSnippet($$"""
+                using Serilog;
+                using Serilog.Events;
 
-            public class Program
-            {
-                public void Method(ILogger logger, int arg1, int arg2)
+                public class Program
                 {
-                    logger.{{methodName}}("{Arg1} {Arg2}", arg1, arg2);     // Compliant
-                    logger.{{methodName}}("{Arg1} {Arg2}", arg2, arg1);     // Noncompliant
-                                                                            // Secondary @-1
+                    public void Method(ILogger logger, int arg1, int arg2)
+                    {
+                        logger.{{methodName}}("{Arg1} {Arg2}", arg1, arg2);     // Compliant
+                        logger.{{methodName}}("{Arg1} {Arg2}", arg2, arg1);     // Noncompliant
+                                                                                // Secondary @-1
+                    }
                 }
-            }
-            """).Verify();
+                """).Verify();
 
     [DataTestMethod]
     [DataRow("Debug")]
@@ -95,39 +92,38 @@ public class LoggingTemplatePlaceHoldersShouldBeInOrderTest
     [DataRow("ConditionalTrace")]
     [DataRow("Warn")]
     public void LoggingTemplatePlaceHoldersShouldBeInOrder_NLog_CS(string methodName) =>
-        Builder.AddSnippet($$"""
-            using NLog;
+        Builder.AddReferences(NuGetMetadataReference.NLog(Constants.NuGetLatestVersion))
+            .AddSnippet($$"""
+                using NLog;
 
-            public class Program
-            {
-                public void Method(ILogger iLogger, Logger logger, MyLogger myLogger, int arg1, int arg2)
-                {
-                    logger.{{methodName}}("{Arg1} {Arg2}", arg1, arg2);     // Compliant
-                    logger.{{methodName}}("{Arg1} {Arg2}", arg2, arg1);     // Noncompliant
-                                                                            // Secondary @-1
-                }
-            }
-
-            public class MyLogger : Logger { }
-            """).Verify();
-
-    [TestMethod]
-    public void LoggingTemplatePlaceHoldersShouldBeInOrder_FakeLoggerWithSameName() =>
-        new VerifierBuilder<MessageTemplateAnalyzer>()
-            .WithOnlyDiagnostics(LoggingTemplatePlaceHoldersShouldBeInOrder.S6673)
-            .AddSnippet("""
                 public class Program
                 {
-                    public void Method(ILogger logger, int arg1, int arg2)
+                    public void Method(ILogger iLogger, Logger logger, MyLogger myLogger, int arg1, int arg2)
                     {
-                        logger.Info("{Arg1} {Arg2}", arg1, arg2);     // Compliant
-                        logger.Info("{Arg1} {Arg2}", arg2, arg1);     // Compliant - the method is not from any of the known logging frameworks
+                        logger.{{methodName}}("{Arg1} {Arg2}", arg1, arg2);     // Compliant
+                        logger.{{methodName}}("{Arg1} {Arg2}", arg2, arg1);     // Noncompliant
+                                                                                // Secondary @-1
                     }
                 }
 
-                public interface ILogger
-                {
-                    void Info(string message, params object[] args);
-                }
+                public class MyLogger : Logger { }
                 """).Verify();
+
+    [TestMethod]
+    public void LoggingTemplatePlaceHoldersShouldBeInOrder_FakeLoggerWithSameName() =>
+        Builder.AddSnippet("""
+            public class Program
+            {
+                public void Method(ILogger logger, int arg1, int arg2)
+                {
+                    logger.Info("{Arg1} {Arg2}", arg1, arg2);     // Compliant
+                    logger.Info("{Arg1} {Arg2}", arg2, arg1);     // Compliant - the method is not from any of the known logging frameworks
+                }
+            }
+
+            public interface ILogger
+            {
+                void Info(string message, params object[] args);
+            }
+            """).Verify();
 }
