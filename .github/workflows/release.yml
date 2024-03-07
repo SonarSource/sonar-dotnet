@@ -16,4 +16,4 @@ jobs:
     with:
       publishToBinaries: true
       mavenCentralSync: true
-      slackChannel: team-lang-dotnet
+      slackChannel: squad-dotnet
