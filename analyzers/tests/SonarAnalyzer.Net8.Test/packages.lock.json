@@ -4,9 +4,9 @@
     "net8.0-windows7.0": {
       "altcover": {
         "type": "Direct",
-        "requested": "[8.6.95, )",
-        "resolved": "8.6.95",
-        "contentHash": "/hjK4jymLaakUq9pih1pU8ITcVLPQD/pZh4Lga4m99y9dBH2CL4dJwgCc2kD9c6QZX2sZBT45wZmoebvUvn/pw=="
+        "requested": "[8.6.125, )",
+        "resolved": "8.6.125",
+        "contentHash": "BqYlne9exn3yzxgLfVK7hw7gKgpq8iYzNx32W/m+5QmoNxWGiMKMm9a1pJ1AT2AXxdPceYqUC41A3gr1jlzJ6w=="
       },
       "Microsoft.NET.Test.Sdk": {
         "type": "Direct",

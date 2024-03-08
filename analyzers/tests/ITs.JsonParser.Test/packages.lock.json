@@ -4,9 +4,9 @@
     "net8.0-windows7.0": {
       "altcover": {
         "type": "Direct",
-        "requested": "[8.6.95, )",
-        "resolved": "8.6.95",
-        "contentHash": "/hjK4jymLaakUq9pih1pU8ITcVLPQD/pZh4Lga4m99y9dBH2CL4dJwgCc2kD9c6QZX2sZBT45wZmoebvUvn/pw=="
+        "requested": "[8.6.125, )",
+        "resolved": "8.6.125",
+        "contentHash": "BqYlne9exn3yzxgLfVK7hw7gKgpq8iYzNx32W/m+5QmoNxWGiMKMm9a1pJ1AT2AXxdPceYqUC41A3gr1jlzJ6w=="
       },
       "FluentAssertions": {
         "type": "Direct",
@@ -19,9 +19,9 @@
       },
       "FluentAssertions.Analyzers": {
         "type": "Direct",
-        "requested": "[0.23.0, )",
-        "resolved": "0.23.0",
-        "contentHash": "NIaSIXAargF7WoHWdDjP/n48EEOP0ypTQI+7AHAtF3+aV8QQQCI6WL0q8rH2e0DM5YuBXcv0YaV7hM6bgJznBg=="
+        "requested": "[0.31.0, )",
+        "resolved": "0.31.0",
+        "contentHash": "KWyAnqT5gCx1vHr/oNhyEV8HV1aCJswREoxEbZcWOWBGTWm7aAeMnzwjfAPNNYumzhT8Y8IafgcLur0OXrLZrA=="
       },
       "Microsoft.NET.Test.Sdk": {
         "type": "Direct",
