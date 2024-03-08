@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+  <RunConfiguration>
+    <!-- 0 will run all Test DLL in parallel locally -->
+    <MaxCpuCount>0</MaxCpuCount>
+  </RunConfiguration>
+</RunSettings>
