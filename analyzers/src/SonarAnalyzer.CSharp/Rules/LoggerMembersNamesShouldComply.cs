@@ -38,6 +38,7 @@ public sealed class LoggerMembersNamesShouldComply : ParametrizedDiagnosticAnaly
         "Logger",
         "_logger",
         "_Logger",
+        "instance",
         "Instance"); // "Instance" is a common name for singleton pattern
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat, isEnabledByDefault: false);
