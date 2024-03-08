@@ -29,20 +29,35 @@ public sealed class ExceptionsShouldBeLogged : SonarDiagnosticAnalyzer
     private const string MessageFormat = "Logging in a catch clause should pass the caught exception as a parameter.";
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+    private static readonly KnownAssembly[] SupportedLoggingFrameworks =
+    [
+        KnownAssembly.MicrosoftExtensionsLoggingAbstractions,
+        KnownAssembly.CastleCore,
+        KnownAssembly.CommonLoggingCore,
+        KnownAssembly.Log4Net,
+        KnownAssembly.NLog
+    ];
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
     protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(c =>
+        context.RegisterCompilationStartAction(cc =>
             {
-                var catchClauseSyntax = (CatchClauseSyntax)c.Node;
-                var walker = new CatchLoggingInvocationWalker(c.SemanticModel);
-                if (walker.SafeVisit(catchClauseSyntax) && !walker.IsExceptionLogged && walker.LoggingInvocationsWithoutException.Any())
+                if (cc.Compilation.ReferencesAny(SupportedLoggingFrameworks))
                 {
-                    var primaryLocation = walker.LoggingInvocationsWithoutException[0].GetLocation();
-                    var additionalLocations = walker.LoggingInvocationsWithoutException.Skip(1).Select(x => x.GetLocation());
-                    c.ReportIssue(Diagnostic.Create(Rule, primaryLocation, additionalLocations));
+                    cc.RegisterNodeAction(c =>
+                        {
+                            var catchClauseSyntax = (CatchClauseSyntax)c.Node;
+                            var walker = new CatchLoggingInvocationWalker(c.SemanticModel);
+                            if (walker.SafeVisit(catchClauseSyntax) && !walker.IsExceptionLogged &&
+                                walker.LoggingInvocationsWithoutException.Any())
+                            {
+                                var primaryLocation = walker.LoggingInvocationsWithoutException[0].GetLocation();
+                                var additionalLocations = walker.LoggingInvocationsWithoutException.Skip(1).Select(x => x.GetLocation());
+                                c.ReportIssue(Diagnostic.Create(Rule, primaryLocation, additionalLocations));
+                            }
+                        },
+                        SyntaxKind.CatchClause);
                 }
-            },
-            SyntaxKind.CatchClause);
+            });
 }
