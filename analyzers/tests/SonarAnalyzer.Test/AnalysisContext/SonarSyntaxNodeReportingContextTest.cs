@@ -87,30 +87,18 @@ public class SonarSyntaxNodeReportingContextTest
 
     [DataTestMethod]
     [DataRow("class")]
-
 #if NET
-
     [DataRow("record")]
-
 #endif
-
     public void IsRedundantPrimaryConstructorBaseTypeContext_ReturnsTrueForTypeDeclaration(string type)
     {
         var compilerVersion = typeof(DiagnosticAnalyzer).Assembly.GetName().Version;
-        // Depending on the version of the compiler, the node action is called either twice with different ContainingSymbol or just once
-        var assertion = compilerVersion < new Version(5, 0) // Fix the compiler version once https://github.com/dotnet/roslyn/pull/70655 is released
-            ? """
-              //  ^^^^^^^    {{IsRedundantPrimaryConstructorBaseTypeContext is True, ContainingSymbol is NamedType Derived}}
-              //  ^^^^^^^@-1 {{IsRedundantPrimaryConstructorBaseTypeContext is False, ContainingSymbol is Method Derived.Derived(int)}}
-              """
-            : """
-              //  ^^^^^^^    {{IsRedundantPrimaryConstructorBaseTypeContext is False, ContainingSymbol is Method Derived.Derived(int)}}
-              """;
-        var snippet = $$"""
-            public {{type}} Base(int i);
-            public {{type}} Derived(int i) :
+        // For Roslyn < 4.9.2, the node action is called either twice with different ContainingSymbol.
+        var snippet = $$$"""
+            public {{{type}}} Base(int i);
+            public {{{type}}} Derived(int i) :
                 Base(i); // This is the node that is asserted
-            {{assertion}}
+            //  ^^^^^^^    {{IsRedundantPrimaryConstructorBaseTypeContext is False, ContainingSymbol is Method Derived.Derived(int)}}
             """;
         new VerifierBuilder()
             .AddAnalyzer(() => new TestAnalyzer(new[] { SyntaxKindEx.PrimaryConstructorBaseType }, c =>

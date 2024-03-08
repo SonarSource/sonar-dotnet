@@ -32,11 +32,12 @@ namespace SonarAnalyzer.Test.Helpers
         [DataRow(true, DisplayName = "Reversed execution order")]
         public void Linear(bool reverseOrder)
         {
-            const string code = @"
-var a = 1;
-var b = 2;
-a = b + 1;
-Method();";
+            const string code = """
+                var a = 1;
+                var b = 2;
+                a = b + 1;
+                Method();
+                """;
             var expected = new[]
             {
                 "Literal: 1",
@@ -52,7 +53,7 @@ Method();";
                 "LocalReference: a",
                 "LocalReference: b",
                 "Literal: 1",
-                "BinaryOperator: b + 1",
+                "Binary: b + 1",
                 "SimpleAssignment: a = b + 1",
                 "ExpressionStatement: a = b + 1;",
                 "Invocation: Method()",
@@ -66,10 +67,11 @@ Method();";
         [DataRow(true, DisplayName = "Reversed execution order")]
         public void Nested(bool reverseOrder)
         {
-            const string code = @"
-Method(0);
-Method(1, Nested(40 + 2), 3);
-Method(4);";
+            const string code = """
+                Method(0);
+                Method(1, Nested(40 + 2), 3);
+                Method(4);
+                """;
             var expected = new[]
             {
                 "Literal: 0",
@@ -78,7 +80,7 @@ Method(4);";
                 "Literal: 1",
                 "Literal: 40",
                 "Literal: 2",
-                "BinaryOperator: 40 + 2",
+                "Binary: 40 + 2",
                 "Invocation: Nested(40 + 2)",
                 "Literal: 3",
                 "Invocation: Method(1, Nested(40 + 2), 3)",
@@ -137,17 +139,18 @@ Method(4);";
 
         private static OperationExecutionOrder Compile(string methodBody, bool reverseOrder)
         {
-            var code = @$"
-public class Sample
-{{
-    public void Main()
-    {{
-{methodBody}
-    }}
+            var code = $$"""
+                public class Sample
+                {
+                    public void Main()
+                    {
+                {{methodBody}}
+                    }
 
-    public int Method(params int[] values) => 0;
-    public int Nested(params int[] values) => 0;
-}}";
+                    public int Method(params int[] values) => 0;
+                    public int Nested(params int[] values) => 0;
+                }
+                """;
             var (tree, semanticModel) = TestHelper.CompileCS(code);
             var body = tree.First<BlockSyntax>();
             var rootOperation = new IOperationWrapperSonar(semanticModel.GetOperation(body));

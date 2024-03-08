@@ -242,8 +242,8 @@ namespace SonarAnalyzer.Test.Rules
                         // Net8 SDK: Declaration (1,0) - (1,17) Reference (1,6) - (1,23) <- Overlapping
                         // Declaration of TSomeVeryLongName is placed starting at index 0 (ignoring "@typeparam ")
                         // Reference "where TSomeVeryLongName" is placed starting at index 6 (ignoring "@typeparam TSomeVeryLongName ")
-                        // In Net7 SDK, no references are produced
-                        orderedSymbols[3].Reference.Should().BeEmpty();
+                        VerifyReferences(orderedSymbols[3].Reference, 1, 1, 1);
+                        orderedSymbols[3].Reference.Single().Reference.Single().Should().BeEquivalentTo(new TextRange { StartLine = 1, EndLine = 1, StartOffset = 6, EndOffset = 23 });
                     });
 
         [DataTestMethod]

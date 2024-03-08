@@ -199,9 +199,9 @@ public class VerifierTest
             .VerifyNoIssueReported();
 
     [DataTestMethod]
-    [DataRow("net6.0")]
-    [DataRow("net7.0")]
-    public void Compile_Razor_WithFramework(string framework)
+    [DataRow("net6.0", 6)]
+    [DataRow("net7.0", 7)]
+    public void Compile_Razor_WithFramework(string framework, int expectedVersion)
     {
         var compilation = DummyWithLocation.AddPaths("Dummy.razor")
             .WithFramework(framework)
@@ -209,7 +209,7 @@ public class VerifierTest
             .Build()
             .Compile(false)
             .Single();
-        compilation.Compilation.ExternalReferences.First().Display.Should().Contain(framework);
+        compilation.Compilation.GetSpecialType(SpecialType.System_Object).ContainingAssembly.Identity.Version.Major.Should().Be(expectedVersion);
     }
 
     [TestMethod]
@@ -220,7 +220,7 @@ public class VerifierTest
             .Build()
             .Compile(false)
             .Single();
-        compilation.Compilation.ExternalReferences.First().Display.Should().Contain("net7.0", "This version is used in EmptyProject.csproj");
+        compilation.Compilation.GetSpecialType(SpecialType.System_Object).ContainingAssembly.Identity.Version.Major.Should().Be(7, "This version is used in EmptyProject.csproj");
     }
 
     [DataTestMethod]
