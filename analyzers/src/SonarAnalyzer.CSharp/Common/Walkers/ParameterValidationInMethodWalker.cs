@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Common.Walkers
         {
             // When throw is like `throw new XXX` where XXX derives from ArgumentException, save location
             if (node.Expression != null
-                && semanticModel.GetTypeInfo(node.Expression) is TypeInfo typeInfo
+                && semanticModel.GetTypeInfo(node.Expression) is var typeInfo
                 && typeInfo.Type.DerivesFrom(KnownType.System_ArgumentException))
             {
                 argumentExceptionLocations.Add(node.Expression.GetLocation());
