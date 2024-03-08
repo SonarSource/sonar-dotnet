@@ -362,7 +362,8 @@ internal class Verifier
     }
 
     private static bool IsRazorOrCshtml(string path) =>
-        Path.GetExtension(path) is var extension
+        path is not null
+        && Path.GetExtension(path) is var extension
         && (extension.Equals(".razor", StringComparison.OrdinalIgnoreCase) || extension.Equals(".cshtml", StringComparison.OrdinalIgnoreCase));
 
     public sealed record CompilationData(Compilation Compilation, string[] AdditionalSourceFiles);
