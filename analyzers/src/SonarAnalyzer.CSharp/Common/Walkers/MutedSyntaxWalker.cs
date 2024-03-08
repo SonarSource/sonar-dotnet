@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Common.Walkers
 {
     /// <summary>
     /// This class find syntax cases that are not properly supported by current CFG/SE/LVA and we mute all issues related to these scenarios.
@@ -26,8 +26,8 @@ namespace SonarAnalyzer.Helpers
     internal class MutedSyntaxWalker : CSharpSyntaxWalker
     {
         // All kinds that SonarAnalysisContextExtensions.RegisterExplodedGraphBasedAnalysis registers for
-        private static readonly SyntaxKind[] RootKinds = new[]
-        {
+        private static readonly SyntaxKind[] RootKinds =
+        [
             SyntaxKind.ConstructorDeclaration,
             SyntaxKind.DestructorDeclaration,
             SyntaxKind.ConversionOperatorDeclaration,
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Helpers
             SyntaxKind.AnonymousMethodExpression,
             SyntaxKind.SimpleLambdaExpression,
             SyntaxKind.ParenthesizedLambdaExpression
-        };
+        ];
 
         private readonly SemanticModel semanticModel;
         private readonly SyntaxNode root;
@@ -80,7 +80,7 @@ namespace SonarAnalyzer.Helpers
 
         public override void VisitIdentifierName(IdentifierNameSyntax node)
         {
-            if (symbols.FirstOrDefault(x => node.NameIs(x.Name) && x.Equals(semanticModel.GetSymbolInfo(node).Symbol)) is { } symbol)
+            if (Array.Find(symbols, x => node.NameIs(x.Name) && x.Equals(semanticModel.GetSymbolInfo(node).Symbol)) is { } symbol)
             {
                 isMuted = IsInTupleAssignmentTarget() || IsUsedInLocalFunction(symbol) || IsInUnsupportedExpression();
                 InspectTryCatch(node);
@@ -101,7 +101,7 @@ namespace SonarAnalyzer.Helpers
 
         public override void VisitVariableDeclarator(VariableDeclaratorSyntax node)
         {
-            if (symbols.FirstOrDefault(x => node.Identifier.ValueText == x.Name && x.Equals(semanticModel.GetDeclaredSymbol(node))) is { } symbol)
+            if (Array.Find(symbols, x => node.Identifier.ValueText == x.Name && x.Equals(semanticModel.GetDeclaredSymbol(node))) is not null)
             {
                 InspectTryCatch(node);
             }

@@ -19,6 +19,7 @@
  */
 
 using SonarAnalyzer.CFG.Helpers;
+using SonarAnalyzer.Common.Walkers;
 
 namespace SonarAnalyzer.Rules.CSharp;
 

@@ -20,6 +20,7 @@
 
 using SonarAnalyzer.CFG.LiveVariableAnalysis;
 using SonarAnalyzer.CFG.Sonar;
+using SonarAnalyzer.Common.Walkers;
 using SonarAnalyzer.LiveVariableAnalysis.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp

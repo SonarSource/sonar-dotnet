@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Common.Walkers
 {
     internal class ParameterValidationInMethodWalker : SafeCSharpSyntaxWalker
     {
@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Helpers
         {
             // When throw is like `throw new XXX` where XXX derives from ArgumentException, save location
             if (node.Expression != null
-                && semanticModel.GetTypeInfo(node.Expression) is TypeInfo typeInfo
+                && semanticModel.GetTypeInfo(node.Expression) is var typeInfo
                 && typeInfo.Type.DerivesFrom(KnownType.System_ArgumentException))
             {
                 argumentExceptionLocations.Add(node.Expression.GetLocation());
