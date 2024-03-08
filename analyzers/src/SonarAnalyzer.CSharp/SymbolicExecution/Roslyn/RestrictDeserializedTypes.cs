@@ -19,6 +19,7 @@
  */
 
 using System.Runtime.Serialization;
+using SonarAnalyzer.Common.Walkers;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 

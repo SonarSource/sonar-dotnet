@@ -19,6 +19,7 @@
  */
 
 using System.IO;
+using SonarAnalyzer.Common.Walkers;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
