@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S6675",
+      "Message": "Don\u0027t use Trace.WriteLineIf with TraceSwitch level checks.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S6675.cs#L10",
+      "Location": "Line 10 Position 31-53"
+    }
+  ]
+}

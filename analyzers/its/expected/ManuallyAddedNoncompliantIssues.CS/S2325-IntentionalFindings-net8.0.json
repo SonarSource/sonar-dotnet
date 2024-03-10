@@ -23,6 +23,12 @@
       "Message": "Make \u0027Log\u0027 a static method.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S6673.cs#L8",
       "Location": "Line 8 Position 22-25"
+    },
+    {
+      "Id": "S2325",
+      "Message": "Make \u0027Method\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S6675.cs#L8",
+      "Location": "Line 8 Position 21-27"
     }
   ]
 }
