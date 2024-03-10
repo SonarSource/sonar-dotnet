@@ -310,6 +310,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Diagnostics_ProcessStartInfo = new("System.Diagnostics.ProcessStartInfo");
         public static readonly KnownType System_Diagnostics_Trace = new("System.Diagnostics.Trace");
         public static readonly KnownType System_Diagnostics_TraceSource = new("System.Diagnostics.TraceSource");
+        public static readonly KnownType System_Diagnostics_TraceSwitch = new("System.Diagnostics.TraceSwitch");
         public static readonly KnownType System_DirectoryServices_AuthenticationTypes = new("System.DirectoryServices.AuthenticationTypes");
         public static readonly KnownType System_DirectoryServices_DirectoryEntry = new("System.DirectoryServices.DirectoryEntry");
         public static readonly KnownType System_Double = new("System.Double");
