@@ -20,7 +20,6 @@
 
 using SonarAnalyzer.ShimLayer.AnalysisContext;
 using CS = Microsoft.CodeAnalysis.CSharp;
-using SonarSymbolStartAnalysisContext = SonarAnalyzer.ShimLayer.AnalysisContext.SymbolStartAnalysisContextWrapper;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 namespace SonarAnalyzer.Test.Wrappers;
@@ -301,7 +300,7 @@ public class RegisterSymbolStartActionWrapperTest
 #pragma warning disable RS1026 // Enable concurrent execution
     private class TestDiagnosticAnalyzer : DiagnosticAnalyzer
     {
-        public TestDiagnosticAnalyzer(Action<SonarSymbolStartAnalysisContext> action, SymbolKind symbolKind)
+        public TestDiagnosticAnalyzer(Action<SymbolStartAnalysisContextWrapper> action, SymbolKind symbolKind)
         {
             Action = action;
             SymbolKind = symbolKind;
@@ -309,7 +308,7 @@ public class RegisterSymbolStartActionWrapperTest
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
             ImmutableArray.Create(new DiagnosticDescriptor("TEST", "Test", "Test", "Test", DiagnosticSeverity.Warning, true));
 
-        public Action<SonarSymbolStartAnalysisContext> Action { get; }
+        public Action<SymbolStartAnalysisContextWrapper> Action { get; }
         public SymbolKind SymbolKind { get; }
 
         public override void Initialize(Microsoft.CodeAnalysis.Diagnostics.AnalysisContext context) =>
