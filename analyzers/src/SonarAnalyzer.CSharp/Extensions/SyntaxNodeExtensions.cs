@@ -179,7 +179,6 @@ namespace SonarAnalyzer.Extensions
                 DestructorDeclarationSyntax { Identifier: var identifier } => identifier,
                 EnumMemberDeclarationSyntax { Identifier: var identifier } => identifier,
                 EventDeclarationSyntax { Identifier: var identifier } => identifier,
-                IdentifierNameSyntax { Identifier: var identifier } => identifier,
                 IndexerDeclarationSyntax { ThisKeyword: var thisKeyword } => thisKeyword,
                 InvocationExpressionSyntax
                 {
@@ -199,6 +198,7 @@ namespace SonarAnalyzer.Extensions
                 PointerTypeSyntax { ElementType: { } elementType } => GetIdentifier(elementType),
                 PredefinedTypeSyntax { Keyword: var keyword } => keyword,
                 QualifiedNameSyntax { Right.Identifier: var identifier } => identifier,
+                SimpleBaseTypeSyntax { Type: { } type } => GetIdentifier(type),
                 SimpleNameSyntax { Identifier: var identifier } => identifier,
                 TypeParameterConstraintClauseSyntax { Name.Identifier: var identifier } => identifier,
                 TypeParameterSyntax { Identifier: var identifier } => identifier,
@@ -363,23 +363,14 @@ namespace SonarAnalyzer.Extensions
             }
         }
 
-        public static bool IsParentKind<T>(this SyntaxNode node, SyntaxKind kind, out T result) where T : SyntaxNode
-        {
-            if (node?.Parent?.IsKind(kind) is true && node.Parent is T t)
-            {
-                result = t;
-                return true;
-            }
-            result = null;
-            return false;
-        }
-
         // based on Type="ArgumentListSyntax" in https://github.com/dotnet/roslyn/blob/main/src/Compilers/CSharp/Portable/Syntax/Syntax.xml
-        public static ArgumentListSyntax ArgumentList(this SyntaxNode node) =>
+        public static BaseArgumentListSyntax ArgumentList(this SyntaxNode node) =>
             node switch
             {
                 ObjectCreationExpressionSyntax creation => creation.ArgumentList,
                 InvocationExpressionSyntax invocation => invocation.ArgumentList,
+                ElementAccessExpressionSyntax x => x.ArgumentList,
+                ElementBindingExpressionSyntax x => x.ArgumentList,
                 ConstructorInitializerSyntax constructorInitializer => constructorInitializer.ArgumentList,
                 null => null,
                 _ when PrimaryConstructorBaseTypeSyntaxWrapper.IsInstance(node) => ((PrimaryConstructorBaseTypeSyntaxWrapper)node).ArgumentList,
@@ -502,6 +493,44 @@ namespace SonarAnalyzer.Extensions
 
             return current;
         }
+
+        // Copy of
+        // https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/SyntaxNodeExtensions.cs#L347
+        public static bool IsLeftSideOfAssignExpression(this SyntaxNode node)
+            => node?.Parent is AssignmentExpressionSyntax { RawKind: (int)SyntaxKind.SimpleAssignmentExpression } assignment &&
+               assignment.Left == node;
+
+        // Copy of
+        // https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/SyntaxNodeExtensions.cs#L43C1-L45C1
+        public static bool IsParentKind(this SyntaxNode node, SyntaxKind kind)
+            => Microsoft.CodeAnalysis.CSharpExtensions.IsKind(node?.Parent, kind);
+
+        // Copy of
+        // https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/SyntaxNodeExtensions.cs#L46
+        public static bool IsParentKind<T>(this SyntaxNode node, SyntaxKind kind, out T result) where T : SyntaxNode
+        {
+            if (node?.Parent?.IsKind(kind) is true && node.Parent is T t)
+            {
+                result = t;
+                return true;
+            }
+            result = null;
+            return false;
+        }
+
+        // Copy of
+        // https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/SyntaxNodeExtensions.cs#L351
+        public static bool IsLeftSideOfAnyAssignExpression(this SyntaxNode node)
+        {
+            return node?.Parent != null &&
+                node.Parent.IsAnyAssignExpression() &&
+                ((AssignmentExpressionSyntax)node.Parent).Left == node;
+        }
+
+        // Copy of
+        // https://github.com/dotnet/roslyn/blob/575bc42589145ba18b4f1cc2267d02695f861d8f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Extensions/SyntaxNodeExtensions.cs#L323
+        public static bool IsAnyAssignExpression(this SyntaxNode node)
+            => SyntaxFacts.IsAssignmentExpression(node.Kind());
 
         private static string GetUnknownType(SyntaxKind kind) =>
 
