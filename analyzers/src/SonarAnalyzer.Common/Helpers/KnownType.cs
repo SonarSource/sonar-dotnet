@@ -78,6 +78,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Microsoft_AspNetCore_Mvc_RazorPages_PageModel = new("Microsoft.AspNetCore.Mvc.RazorPages.PageModel");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_RequestFormLimitsAttribute = new("Microsoft.AspNetCore.Mvc.RequestFormLimitsAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_RequestSizeLimitAttribute = new("Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute");
+        public static readonly KnownType Microsoft_AspNetCore_Mvc_RouteAttribute = new("Microsoft.AspNetCore.Mvc.RouteAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Razor_Hosting_RazorCompiledItemAttribute = new("Microsoft.AspNetCore.Razor.Hosting.RazorCompiledItemAttribute");
         public static readonly KnownType Microsoft_Azure_Cosmos_CosmosClient = new("Microsoft.Azure.Cosmos.CosmosClient");
         public static readonly KnownType Microsoft_Azure_Documents_Client_DocumentClient = new("Microsoft.Azure.Documents.Client.DocumentClient");
@@ -301,6 +302,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Delegate = new("System.Delegate");
         public static readonly KnownType System_Diagnostics_CodeAnalysis_ExcludeFromCodeCoverageAttribute = new("System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute");
         public static readonly KnownType System_Diagnostics_CodeAnalysis_SuppressMessageAttribute = new("System.Diagnostics.CodeAnalysis.SuppressMessageAttribute");
+        public static readonly KnownType System_Diagnostics_CodeAnalysis_StringSyntaxAttribute = new("System.Diagnostics.CodeAnalysis.StringSyntaxAttribute");
         public static readonly KnownType System_Diagnostics_ConditionalAttribute = new("System.Diagnostics.ConditionalAttribute");
         public static readonly KnownType System_Diagnostics_Contracts_PureAttribute = new("System.Diagnostics.Contracts.PureAttribute");
         public static readonly KnownType System_Diagnostics_Debug = new("System.Diagnostics.Debug");
@@ -535,9 +537,10 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Web_HttpResponseBase = new("System.Web.HttpResponseBase");
         public static readonly KnownType System_Web_Http_ApiController = new("System.Web.Http.ApiController");
         public static readonly KnownType System_Web_Http_Cors_EnableCorsAttribute = new("System.Web.Http.Cors.EnableCorsAttribute");
-        public static readonly KnownType System_Web_Mvc_NonActionAttribute = new("System.Web.Mvc.NonActionAttribute");
         public static readonly KnownType System_Web_Mvc_Controller = new("System.Web.Mvc.Controller");
         public static readonly KnownType System_Web_Mvc_HttpPostAttribute = new("System.Web.Mvc.HttpPostAttribute");
+        public static readonly KnownType System_Web_Mvc_NonActionAttribute = new("System.Web.Mvc.NonActionAttribute");
+        public static readonly KnownType System_Web_Mvc_RouteAttribute = new("System.Web.Mvc.RouteAttribute");
         public static readonly KnownType System_Web_Mvc_ValidateInputAttribute = new("System.Web.Mvc.ValidateInputAttribute");
         public static readonly KnownType System_Web_Script_Serialization_JavaScriptSerializer = new("System.Web.Script.Serialization.JavaScriptSerializer");
         public static readonly KnownType System_Web_Script_Serialization_JavaScriptTypeResolver = new("System.Web.Script.Serialization.JavaScriptTypeResolver");
@@ -676,5 +679,9 @@ namespace SonarAnalyzer.Helpers
                 System_UInt64,
                 System_UInt32,
                 System_UInt16);
+        public static readonly ImmutableArray<KnownType> RouteAttributes =
+            ImmutableArray.Create(
+                Microsoft_AspNetCore_Mvc_RouteAttribute,
+                System_Web_Mvc_RouteAttribute);
     }
 }

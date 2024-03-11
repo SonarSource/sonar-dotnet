@@ -1,0 +1,23 @@
+{
+  "title": "Backslash should be avoided in route templates",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "asp.net"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-6930",
+  "sqKey": "S6930",
+  "scope": "Main",
+  "quickfix": "targeted",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "HIGH"
+    },
+    "attribute": "LOGICAL"
+  }
+}
