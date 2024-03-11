@@ -26,7 +26,6 @@ namespace SonarAnalyzer.Common.Walkers;
 // - visit the catch clause (all the nested catch clauses are skipped; they will be visited independently)
 // - save the declared exception
 // - save the logging invocation that uses the exception
-// - save the throw statement that rethrows the exception
 // - find all the logging invocations and check if the exception is logged
 // - if the exception is logged, it will stop looking for the other invocations and set IsExceptionLogged to true
 // - if the exception is not logged, it will visit all the invocations
