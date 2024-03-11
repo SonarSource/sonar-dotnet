@@ -47,10 +47,10 @@ public readonly struct SymbolStartAnalysisContextWrapper
     public AnalyzerOptions Options => OptionsAccessor(RoslynSymbolStartAnalysisContext);
     public ISymbol Symbol => SymbolAccessor(RoslynSymbolStartAnalysisContext);
     private object RoslynSymbolStartAnalysisContext { get; }
-    public CancellationToken CancellationToken => cancellationTokenAccessor(RoslynSymbolStartAnalysisContext);
-    public Compilation Compilation => compilationAccessor(RoslynSymbolStartAnalysisContext);
-    public AnalyzerOptions Options => optionsAccessor(RoslynSymbolStartAnalysisContext);
-    public ISymbol Symbol => symbolAccessor(RoslynSymbolStartAnalysisContext);
+    public CancellationToken CancellationToken => CancellationTokenAccessor(RoslynSymbolStartAnalysisContext);
+    public Compilation Compilation => CompilationAccessor(RoslynSymbolStartAnalysisContext);
+    public AnalyzerOptions Options => OptionsAccessor(RoslynSymbolStartAnalysisContext);
+    public ISymbol Symbol => SymbolAccessor(RoslynSymbolStartAnalysisContext);
 
     // Code is executed in static initializers and is not detected by the coverage tool
     // See the RegisterSymbolStartActionWrapperTest family of tests to check test coverage manually
