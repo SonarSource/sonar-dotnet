@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using AliasedTrace = System.Diagnostics.Trace;
 using AliasedTraceSwitch = System.Diagnostics.TraceSwitch;
 
@@ -12,9 +11,9 @@ public class Program
         Trace.WriteIf(condition, "Message");                    // Compliant
         Trace.WriteLineIf(condition, "Message");
 
-        Trace.WriteIf(_traceSwitch.TraceError, "Message");      // Noncompliant {{Don't use Trace.WriteIf with TraceSwitch level checks.}}
+        Trace.WriteIf(_traceSwitch.TraceError, "Message");      // Noncompliant {{'Trace.WriteIf' should not be used with 'TraceSwitch' levels.}}
         //            ^^^^^^^^^^^^^^^^^^^^^^^
-        Trace.WriteLineIf(_traceSwitch.TraceError, "Message");  // Noncompliant {{Don't use Trace.WriteLineIf with TraceSwitch level checks.}}
+        Trace.WriteLineIf(_traceSwitch.TraceError, "Message");  // Noncompliant {{'Trace.WriteLineIf' should not be used with 'TraceSwitch' levels.}}
     }
 
     public void Compliant_TraceMethods(string arg)

@@ -24,7 +24,7 @@ namespace SonarAnalyzer.Rules.CSharp;
 public sealed class DontUseTraceSwitchLevels : SonarDiagnosticAnalyzer
 {
     private const string DiagnosticId = "S6675";
-    private const string MessageFormat = "Don't use Trace.{0} with TraceSwitch level checks.";
+    private const string MessageFormat = "'Trace.{0}' should not be used with 'TraceSwitch' levels.";
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
