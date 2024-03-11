@@ -69,7 +69,7 @@ public readonly struct SymbolStartAnalysisContextWrapper
         registerSyntaxNodeActionVB = CreateRegistrationMethodWithAdditionalParameter<SyntaxNodeAnalysisContext, ImmutableArray<VB.SyntaxKind>>(
             nameof(RegisterSyntaxNodeAction), typeof(VB.SyntaxKind));
 
-        // symbolStartAnalysisContextParameter => ((symbolStartAnalysisContextType)receiverParameter)."propertyName"
+        // receiverParameter => ((symbolStartAnalysisContextType)receiverParameter)."propertyName"
         Func<object, TProperty> CreatePropertyAccessor<TProperty>(string propertyName)
         {
             var receiverParameter = Parameter(typeof(object));
@@ -79,7 +79,7 @@ public readonly struct SymbolStartAnalysisContextWrapper
         }
 
         // (object receiverParameter, Action<TContext> registerActionParameter)
-        //     => ((symbolStartAnalysisContextType)symbolStartAnalysisContextParameter)."registrationMethodName"<typeArguments>(registerActionParameter)
+        //     => ((symbolStartAnalysisContextType)receiverParameter)."registrationMethodName"<typeArguments>(registerActionParameter)
         Action<object, Action<TContext>> CreateRegistrationMethod<TContext>(string registrationMethodName, params Type[] typeArguments)
         {
             var receiverParameter = Parameter(typeof(object));
@@ -91,7 +91,7 @@ public readonly struct SymbolStartAnalysisContextWrapper
         }
 
         // (object receiverParameter, Action<TContext> registerActionParameter, TParameter additionalParameter)
-        //     => ((symbolStartAnalysisContextType)symbolStartAnalysisContextParameter)."registrationMethodName"<typeArguments>(registerActionParameter, additionalParameter)
+        //     => ((symbolStartAnalysisContextType)receiverParameter)."registrationMethodName"<typeArguments>(registerActionParameter, additionalParameter)
         Action<object, Action<TContext>, TParameter> CreateRegistrationMethodWithAdditionalParameter<TContext, TParameter>(string registrationMethodName, params Type[] typeArguments)
         {
             var receiverParameter = Parameter(typeof(object));
