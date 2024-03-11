@@ -30,14 +30,13 @@ public class RegisterSymbolStartActionWrapperTest
     [TestMethod]
     public async Task RegisterSymbolStartAction_SymbolStartProperties()
     {
-        var code = """
+        var snippet = new SnippetCompiler("""
             public class C
             {
                 int i = 0;
                 public void M() => ToString();
             }
-            """;
-        var snippet = new SnippetCompiler(code);
+            """);
         var symbolStartWasCalled = false;
         var compilation = snippet.Compilation.WithAnalyzers(ImmutableArray.Create<DiagnosticAnalyzer>(
             new TestDiagnosticAnalyzer(symbolStart =>
@@ -56,14 +55,13 @@ public class RegisterSymbolStartActionWrapperTest
     [TestMethod]
     public async Task RegisterSymbolStartAction_RegisterCodeBlockAction()
     {
-        var code = """
+        var snippet = new SnippetCompiler("""
             public class C
             {
                 int i = 0;
                 public void M() => ToString();
             }
-            """;
-        var snippet = new SnippetCompiler(code);
+            """);
         var visitedCodeBlocks = new List<string>();
         var compilation = snippet.Compilation.WithAnalyzers(ImmutableArray.Create<DiagnosticAnalyzer>(
             new TestDiagnosticAnalyzer(symbolStart =>
@@ -81,14 +79,13 @@ public class RegisterSymbolStartActionWrapperTest
     [TestMethod]
     public async Task RegisterSymbolStartAction_RegisterCodeBlockStartAction_CS()
     {
-        var code = """
+        var snippet = new SnippetCompiler("""
             public class C
             {
                 int i = 0;
                 public void M() => ToString();
             }
-            """;
-        var snippet = new SnippetCompiler(code);
+            """);
         var visited = new List<string>();
         var compilation = snippet.Compilation.WithAnalyzers(ImmutableArray.Create<DiagnosticAnalyzer>(
             new TestDiagnosticAnalyzer(symbolStart =>
@@ -107,7 +104,7 @@ public class RegisterSymbolStartActionWrapperTest
     [TestMethod]
     public async Task RegisterSymbolStartAction_RegisterCodeBlockStartAction_VB()
     {
-        var code = """
+        var snippet = new SnippetCompiler("""
             Public Class C
                 Private i As Integer = 0
 
@@ -115,8 +112,7 @@ public class RegisterSymbolStartActionWrapperTest
                     Call ToString()
                 End Sub
             End Class
-            """;
-        var snippet = new SnippetCompiler(code, ignoreErrors: false, AnalyzerLanguage.VisualBasic);
+            """, ignoreErrors: false, AnalyzerLanguage.VisualBasic);
         var visited = new List<string>();
         var compilation = snippet.Compilation.WithAnalyzers(ImmutableArray.Create<DiagnosticAnalyzer>(
             new TestDiagnosticAnalyzer(symbolStart =>
@@ -142,7 +138,7 @@ public class RegisterSymbolStartActionWrapperTest
     [TestMethod]
     public async Task RegisterSymbolStartAction_RegisterOperationAction()
     {
-        var code = """
+        var snippet = new SnippetCompiler("""
             public class C
             {
                 int i = 0;
@@ -151,8 +147,7 @@ public class RegisterSymbolStartActionWrapperTest
                     ToString();
                 }
             }
-            """;
-        var snippet = new SnippetCompiler(code);
+            """);
         var visited = new List<string>();
         var compilation = snippet.Compilation.WithAnalyzers(ImmutableArray.Create<DiagnosticAnalyzer>(
             new TestDiagnosticAnalyzer(symbolStart =>
@@ -170,14 +165,13 @@ public class RegisterSymbolStartActionWrapperTest
     [TestMethod]
     public async Task RegisterSymbolStartAction_RegisterOperationBlockAction()
     {
-        var code = """
+        var snippet = new SnippetCompiler("""
             public class C
             {
                 int i = 0;
                 public void M() => ToString();
             }
-            """;
-        var snippet = new SnippetCompiler(code);
+            """);
         var visited = new List<string>();
         var compilation = snippet.Compilation.WithAnalyzers(ImmutableArray.Create<DiagnosticAnalyzer>(
             new TestDiagnosticAnalyzer(symbolStart =>
@@ -195,14 +189,13 @@ public class RegisterSymbolStartActionWrapperTest
     [TestMethod]
     public async Task RegisterSymbolStartAction_RegisterOperationBlockStartAction()
     {
-        var code = """
+        var snippet = new SnippetCompiler("""
             public class C
             {
                 int i = 0;
                 public void M() => ToString();
             }
-            """;
-        var snippet = new SnippetCompiler(code);
+            """);
         var visited = new List<string>();
         var compilation = snippet.Compilation.WithAnalyzers(ImmutableArray.Create<DiagnosticAnalyzer>(
             new TestDiagnosticAnalyzer(symbolStart =>
@@ -221,14 +214,13 @@ public class RegisterSymbolStartActionWrapperTest
     [TestMethod]
     public async Task RegisterSymbolStartAction_RegisterRegisterSymbolEndAction()
     {
-        var code = """
+        var snippet = new SnippetCompiler("""
             public class C
             {
                 int i = 0;
                 public void M() => ToString();
             }
-            """;
-        var snippet = new SnippetCompiler(code);
+            """);
         var visited = new List<string>();
         var compilation = snippet.Compilation.WithAnalyzers(ImmutableArray.Create<DiagnosticAnalyzer>(
             new TestDiagnosticAnalyzer(symbolStart =>
@@ -246,14 +238,13 @@ public class RegisterSymbolStartActionWrapperTest
     [TestMethod]
     public async Task RegisterSymbolStartAction_RegisterSyntaxNodeAction_CS()
     {
-        var code = """
+        var snippet = new SnippetCompiler("""
             public class C
             {
                 int i = 0;
                 public void M() => ToString();
             }
-            """;
-        var snippet = new SnippetCompiler(code);
+            """);
         var visited = new List<string>();
         var compilation = snippet.Compilation.WithAnalyzers(ImmutableArray.Create<DiagnosticAnalyzer>(
             new TestDiagnosticAnalyzer(symbolStart =>
@@ -271,7 +262,7 @@ public class RegisterSymbolStartActionWrapperTest
     [TestMethod]
     public async Task RegisterSymbolStartAction_RegisterSyntaxNodeAction_VB()
     {
-        var code = """
+        var snippet = new SnippetCompiler("""
             Public Class C
                 Private i As Integer = 0
 
@@ -279,8 +270,7 @@ public class RegisterSymbolStartActionWrapperTest
                     Call ToString()
                 End Sub
             End Class
-            """;
-        var snippet = new SnippetCompiler(code, ignoreErrors: false, AnalyzerLanguage.VisualBasic);
+            """, ignoreErrors: false, AnalyzerLanguage.VisualBasic);
         var visited = new List<string>();
         var compilation = snippet.Compilation.WithAnalyzers(ImmutableArray.Create<DiagnosticAnalyzer>(
             new TestDiagnosticAnalyzer(symbolStart =>
