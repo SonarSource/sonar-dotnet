@@ -24,7 +24,8 @@ namespace SonarAnalyzer.ShimLayer.AnalysisContext;
 
 public static class CompilationStartAnalysisContextExtensions
 {
-    private static readonly Action<CompilationStartAnalysisContext, Action<SymbolStartAnalysisContextWrapper>, SymbolKind> RegisterSymbolStartActionWrapper = CreateRegisterSymbolStartAnalysisWrapper();
+    private static readonly Action<CompilationStartAnalysisContext, Action<SymbolStartAnalysisContextWrapper>, SymbolKind> RegisterSymbolStartActionWrapper =
+        CreateRegisterSymbolStartAnalysisWrapper();
 
     public static void RegisterSymbolStartAction(this CompilationStartAnalysisContext context, Action<SymbolStartAnalysisContextWrapper> action, SymbolKind symbolKind) =>
         RegisterSymbolStartActionWrapper(context, action, symbolKind);
@@ -46,7 +47,7 @@ public static class CompilationStartAnalysisContextExtensions
         var sonarSymbolStartAnalysisContextCtor = typeof(SymbolStartAnalysisContextWrapper).GetConstructors().Single();
 
         // Action<Roslyn.SymbolStartAnalysisContext> registerAction = roslynSymbolStartAnalysisContextParameter =>
-        //    shimmedActionParameter.Invoke(new Sonar.SymbolStartAnalysisContext(roslynSymbolStartAnalysisContextParameter))
+        //    shimmedActionParameter.Invoke(new Sonar.SymbolStartAnalysisContextWrapper(roslynSymbolStartAnalysisContextParameter))
         var registerAction = Lambda(
             delegateType: roslynSymbolStartAnalysisActionType,
             body: Call(shimmedActionParameter, nameof(Action.Invoke), [], New(sonarSymbolStartAnalysisContextCtor, roslynSymbolStartAnalysisContextParameter)),

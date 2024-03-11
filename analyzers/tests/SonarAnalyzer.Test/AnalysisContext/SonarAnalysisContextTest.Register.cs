@@ -614,6 +614,7 @@ public partial class SonarAnalysisContextTest
         }
     }
 
+#pragma warning disable RS1036 // Specify analyzer banned API enforcement setting
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     private class DummyAnalyzerForGenerated : SonarDiagnosticAnalyzer
     {
