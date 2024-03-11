@@ -47,9 +47,9 @@ public class RegisterSymbolStartActionWrapperTest
                 symbolStart.Symbol.Should().BeAssignableTo<INamedTypeSymbol>().Which.Name.Should().Be("C");
                 symbolStartWasCalled = true;
             }, SymbolKind.NamedType)));
-        var diags = await compilation.GetAnalyzerDiagnosticsAsync();
+        var diagnostics = await compilation.GetAnalyzerDiagnosticsAsync();
         symbolStartWasCalled.Should().BeTrue();
-        diags.Should().BeEmpty();
+        diagnostics.Should().BeEmpty();
     }
 
     [TestMethod]
@@ -76,6 +76,39 @@ public class RegisterSymbolStartActionWrapperTest
         visitedCodeBlocks.Should().BeEquivalentTo("int i = 0;", "public void M() => ToString();");
     }
 
+    [TestMethod]
+    public async Task RegisterSymbolStartAction_RegisterCodeBlockAction_ConditionalRegistration()
+    {
+        var snippet = new SnippetCompiler("""
+            public class C
+            {
+                int i = 0;
+                public void M() => ToString();
+            }
+            public class D
+            {
+                int j = 0;
+                public void N() => ToString();
+            }
+            """);
+        var visitedCodeBlocks = new List<string>();
+        var compilation = snippet.Compilation.WithAnalyzers(ImmutableArray.Create<DiagnosticAnalyzer>(
+            new TestDiagnosticAnalyzer(symbolStart =>
+            {
+                if (symbolStart.Symbol.Name == "C")
+                {
+                    return;
+                }
+
+                symbolStart.RegisterCodeBlockAction(block =>
+                {
+                    var node = block.CodeBlock.ToString();
+                    visitedCodeBlocks.Add(node);
+                });
+            }, SymbolKind.NamedType)));
+        await compilation.GetAnalyzerDiagnosticsAsync();
+        visitedCodeBlocks.Should().BeEquivalentTo("int j = 0;", "public void N() => ToString();");
+    }
     [TestMethod]
     public async Task RegisterSymbolStartAction_RegisterCodeBlockStartAction_CS()
     {
