@@ -626,19 +626,11 @@ public partial class SonarAnalysisContextTest
     }
 
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    private sealed class TestAnalyzerCS : SonarDiagnosticAnalyzer
+    private sealed class TestAnalyzerCS(DiagnosticDescriptor rule, Action<SonarAnalysisContext> register) : SonarDiagnosticAnalyzer
     {
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
-        private DiagnosticDescriptor Rule { get; }
-        private Action<SonarAnalysisContext> Register { get; }
-
-        public TestAnalyzerCS(DiagnosticDescriptor rule, Action<SonarAnalysisContext> register)
-        {
-            Rule = rule;
-            Register = register;
-        }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            Register(context);
+            register(context);
     }
 }
