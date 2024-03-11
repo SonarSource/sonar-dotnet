@@ -274,7 +274,14 @@ public partial class SonarAnalysisContextTest
         var startContext = new DummyCompilationStartAnalysisContext(context);
         var sut = new SonarCompilationStartAnalysisContext(new(context, DummyMainDescriptor), startContext);
         var invocationCount = 0;
-        sut.RegisterSymbolStartAction(x => invocationCount++, SymbolKind.NamedType);
+        sut.RegisterSymbolStartAction(x =>
+        {
+            x.Cancel.Should().Be(startContext.CancellationToken);
+            x.Compilation.Should().Be(startContext.Compilation);
+            x.Options.Should().Be(startContext.Options);
+            x.Symbol.Should().NotBeNull();
+            invocationCount++;
+        }, SymbolKind.NamedType);
         startContext.RaisedDiagnostic.Should().BeNull();
         invocationCount.Should().Be(1);
     }

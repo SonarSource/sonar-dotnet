@@ -18,10 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Diagnostics.CodeAnalysis;
 using static System.Linq.Expressions.Expression;
 
 namespace SonarAnalyzer.ShimLayer.AnalysisContext;
 
+// Code is executed in static initializers and is not detected by the coverage tool
+// See the SonarAnalysisContextTest.SonarCompilationStartAnalysisContext_RegisterSymbolStartAction family of tests to check test coverage manually
+[ExcludeFromCodeCoverage]
 public static class CompilationStartAnalysisContextExtensions
 {
     private static readonly Action<CompilationStartAnalysisContext, Action<SymbolStartAnalysisContextWrapper>, SymbolKind> RegisterSymbolStartActionWrapper =

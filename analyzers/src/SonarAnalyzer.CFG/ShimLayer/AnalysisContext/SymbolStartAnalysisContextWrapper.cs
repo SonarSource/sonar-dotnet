@@ -18,12 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Diagnostics.CodeAnalysis;
 using static System.Linq.Expressions.Expression;
 using CS = Microsoft.CodeAnalysis.CSharp;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 namespace SonarAnalyzer.ShimLayer.AnalysisContext;
 
+// Code is executed in static initializers and is not detected by the coverage tool
+// See the RegisterSymbolStartActionWrapperTest family of tests to check test coverage manually
+[ExcludeFromCodeCoverage]
 public readonly struct SymbolStartAnalysisContextWrapper
 {
     private static readonly Func<object, CancellationToken> CancellationTokenAccessor;
