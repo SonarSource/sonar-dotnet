@@ -26,47 +26,47 @@ namespace SonarAnalyzer.ShimLayer.AnalysisContext;
 
 public readonly struct SymbolStartAnalysisContextWrapper
 {
-    private static Func<object, CancellationToken> cancellationTokenAccessor;
-    private static Func<object, Compilation> compilationAccessor;
-    private static Func<object, AnalyzerOptions> optionsAccessor;
-    private static Func<object, ISymbol> symbolAccessor;
+    private static readonly Func<object, CancellationToken> CancellationTokenAccessor;
+    private static readonly Func<object, Compilation> CompilationAccessor;
+    private static readonly Func<object, AnalyzerOptions> OptionsAccessor;
+    private static readonly Func<object, ISymbol> SymbolAccessor;
 
-    private static Action<object, Action<CodeBlockAnalysisContext>> registerCodeBlockAction;
-    private static Action<object, Action<CodeBlockStartAnalysisContext<CS.SyntaxKind>>> registerCodeBlockStartActionCS;
-    private static Action<object, Action<CodeBlockStartAnalysisContext<VB.SyntaxKind>>> registerCodeBlockStartActionVB;
-    private static Action<object, Action<OperationAnalysisContext>, ImmutableArray<OperationKind>> registerOperationAction;
-    private static Action<object, Action<OperationBlockAnalysisContext>> registerOperationBlockAction;
-    private static Action<object, Action<OperationBlockStartAnalysisContext>> registerOperationBlockStartAction;
-    private static Action<object, Action<SymbolAnalysisContext>> registerSymbolEndAction;
-    private static Action<object, Action<SyntaxNodeAnalysisContext>, ImmutableArray<CS.SyntaxKind>> registerSyntaxNodeActionCS;
-    private static Action<object, Action<SyntaxNodeAnalysisContext>, ImmutableArray<VB.SyntaxKind>> registerSyntaxNodeActionVB;
+    private static readonly Action<object, Action<CodeBlockAnalysisContext>> RegisterCodeBlockActionMethod;
+    private static readonly Action<object, Action<CodeBlockStartAnalysisContext<CS.SyntaxKind>>> RegisterCodeBlockStartActionCS;
+    private static readonly Action<object, Action<CodeBlockStartAnalysisContext<VB.SyntaxKind>>> RegisterCodeBlockStartActionVB;
+    private static readonly Action<object, Action<OperationAnalysisContext>, ImmutableArray<OperationKind>> RegisterOperationActionMethod;
+    private static readonly Action<object, Action<OperationBlockAnalysisContext>> RegisterOperationBlockActionMethod;
+    private static readonly Action<object, Action<OperationBlockStartAnalysisContext>> RegisterOperationBlockStartActionMethod;
+    private static readonly Action<object, Action<SymbolAnalysisContext>> RegisterSymbolEndActionMethod;
+    private static readonly Action<object, Action<SyntaxNodeAnalysisContext>, ImmutableArray<CS.SyntaxKind>> RegisterSyntaxNodeActionCS;
+    private static readonly Action<object, Action<SyntaxNodeAnalysisContext>, ImmutableArray<VB.SyntaxKind>> RegisterSyntaxNodeActionVB;
 
     private object RoslynSymbolStartAnalysisContext { get; }
-    public CancellationToken CancellationToken => cancellationTokenAccessor(RoslynSymbolStartAnalysisContext);
-    public Compilation Compilation => compilationAccessor(RoslynSymbolStartAnalysisContext);
-    public AnalyzerOptions Options => optionsAccessor(RoslynSymbolStartAnalysisContext);
-    public ISymbol Symbol => symbolAccessor(RoslynSymbolStartAnalysisContext);
+    public CancellationToken CancellationToken => CancellationTokenAccessor(RoslynSymbolStartAnalysisContext);
+    public Compilation Compilation => CompilationAccessor(RoslynSymbolStartAnalysisContext);
+    public AnalyzerOptions Options => OptionsAccessor(RoslynSymbolStartAnalysisContext);
+    public ISymbol Symbol => SymbolAccessor(RoslynSymbolStartAnalysisContext);
 
     static SymbolStartAnalysisContextWrapper()
     {
         var symbolStartAnalysisContextType = typeof(CompilationStartAnalysisContext).Assembly.GetType("Microsoft.CodeAnalysis.Diagnostics.SymbolStartAnalysisContext");
-        cancellationTokenAccessor = CreatePropertyAccessor<CancellationToken>(nameof(CancellationToken));
-        compilationAccessor = CreatePropertyAccessor<Compilation>(nameof(Compilation));
-        optionsAccessor = CreatePropertyAccessor<AnalyzerOptions>(nameof(Options));
-        symbolAccessor = CreatePropertyAccessor<ISymbol>(nameof(Symbol));
-        registerCodeBlockAction = CreateRegistrationMethod<CodeBlockAnalysisContext>(nameof(RegisterCodeBlockAction));
-        registerCodeBlockStartActionCS =
+        CancellationTokenAccessor = CreatePropertyAccessor<CancellationToken>(nameof(CancellationToken));
+        CompilationAccessor = CreatePropertyAccessor<Compilation>(nameof(Compilation));
+        OptionsAccessor = CreatePropertyAccessor<AnalyzerOptions>(nameof(Options));
+        SymbolAccessor = CreatePropertyAccessor<ISymbol>(nameof(Symbol));
+        RegisterCodeBlockActionMethod = CreateRegistrationMethod<CodeBlockAnalysisContext>(nameof(RegisterCodeBlockAction));
+        RegisterCodeBlockStartActionCS =
             CreateRegistrationMethod<CodeBlockStartAnalysisContext<CS.SyntaxKind>>(nameof(RegisterCodeBlockStartAction), typeof(CS.SyntaxKind));
-        registerCodeBlockStartActionVB =
+        RegisterCodeBlockStartActionVB =
             CreateRegistrationMethod<CodeBlockStartAnalysisContext<VB.SyntaxKind>>(nameof(RegisterCodeBlockStartAction), typeof(VB.SyntaxKind));
-        registerOperationAction =
+        RegisterOperationActionMethod =
             CreateRegistrationMethodWithAdditionalParameter<OperationAnalysisContext, ImmutableArray<OperationKind>>(nameof(RegisterOperationAction));
-        registerOperationBlockAction = CreateRegistrationMethod<OperationBlockAnalysisContext>(nameof(RegisterOperationBlockAction));
-        registerOperationBlockStartAction = CreateRegistrationMethod<OperationBlockStartAnalysisContext>(nameof(RegisterOperationBlockStartAction));
-        registerSymbolEndAction = CreateRegistrationMethod<SymbolAnalysisContext>(nameof(RegisterSymbolEndAction));
-        registerSyntaxNodeActionCS = CreateRegistrationMethodWithAdditionalParameter<SyntaxNodeAnalysisContext, ImmutableArray<CS.SyntaxKind>>(
+        RegisterOperationBlockActionMethod = CreateRegistrationMethod<OperationBlockAnalysisContext>(nameof(RegisterOperationBlockAction));
+        RegisterOperationBlockStartActionMethod = CreateRegistrationMethod<OperationBlockStartAnalysisContext>(nameof(RegisterOperationBlockStartAction));
+        RegisterSymbolEndActionMethod = CreateRegistrationMethod<SymbolAnalysisContext>(nameof(RegisterSymbolEndAction));
+        RegisterSyntaxNodeActionCS = CreateRegistrationMethodWithAdditionalParameter<SyntaxNodeAnalysisContext, ImmutableArray<CS.SyntaxKind>>(
             nameof(RegisterSyntaxNodeAction), typeof(CS.SyntaxKind));
-        registerSyntaxNodeActionVB = CreateRegistrationMethodWithAdditionalParameter<SyntaxNodeAnalysisContext, ImmutableArray<VB.SyntaxKind>>(
+        RegisterSyntaxNodeActionVB = CreateRegistrationMethodWithAdditionalParameter<SyntaxNodeAnalysisContext, ImmutableArray<VB.SyntaxKind>>(
             nameof(RegisterSyntaxNodeAction), typeof(VB.SyntaxKind));
 
         // receiverParameter => ((symbolStartAnalysisContextType)receiverParameter)."propertyName"
@@ -109,7 +109,7 @@ public readonly struct SymbolStartAnalysisContextWrapper
         RoslynSymbolStartAnalysisContext = roslynSymbolStartAnalysisContext;
 
     public void RegisterCodeBlockAction(Action<CodeBlockAnalysisContext> action) =>
-        registerCodeBlockAction(RoslynSymbolStartAnalysisContext, action);
+        RegisterCodeBlockActionMethod(RoslynSymbolStartAnalysisContext, action);
 
     public void RegisterCodeBlockStartAction<TLanguageKindEnum>(Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action) where TLanguageKindEnum : struct
     {
@@ -117,12 +117,12 @@ public readonly struct SymbolStartAnalysisContextWrapper
         if (languageKindType == typeof(CS.SyntaxKind))
         {
             var cast = (Action<CodeBlockStartAnalysisContext<CS.SyntaxKind>>)action;
-            registerCodeBlockStartActionCS(RoslynSymbolStartAnalysisContext, cast);
+            RegisterCodeBlockStartActionCS(RoslynSymbolStartAnalysisContext, cast);
         }
         else if (languageKindType == typeof(VB.SyntaxKind))
         {
             var cast = (Action<CodeBlockStartAnalysisContext<VB.SyntaxKind>>)action;
-            registerCodeBlockStartActionVB(RoslynSymbolStartAnalysisContext, cast);
+            RegisterCodeBlockStartActionVB(RoslynSymbolStartAnalysisContext, cast);
         }
         else
         {
@@ -131,27 +131,27 @@ public readonly struct SymbolStartAnalysisContextWrapper
     }
 
     public void RegisterOperationAction(Action<OperationAnalysisContext> action, ImmutableArray<OperationKind> operationKinds) =>
-        registerOperationAction(RoslynSymbolStartAnalysisContext, action, operationKinds);
+        RegisterOperationActionMethod(RoslynSymbolStartAnalysisContext, action, operationKinds);
 
     public void RegisterOperationBlockAction(Action<OperationBlockAnalysisContext> action) =>
-        registerOperationBlockAction(RoslynSymbolStartAnalysisContext, action);
+        RegisterOperationBlockActionMethod(RoslynSymbolStartAnalysisContext, action);
 
     public void RegisterOperationBlockStartAction(Action<OperationBlockStartAnalysisContext> action) =>
-        registerOperationBlockStartAction(RoslynSymbolStartAnalysisContext, action);
+        RegisterOperationBlockStartActionMethod(RoslynSymbolStartAnalysisContext, action);
 
     public void RegisterSymbolEndAction(Action<SymbolAnalysisContext> action) =>
-        registerSymbolEndAction(RoslynSymbolStartAnalysisContext, action);
+        RegisterSymbolEndActionMethod(RoslynSymbolStartAnalysisContext, action);
 
     public void RegisterSyntaxNodeAction<TLanguageKindEnum>(Action<SyntaxNodeAnalysisContext> action, params TLanguageKindEnum[] syntaxKinds) where TLanguageKindEnum : struct
     {
         var languageKindType = typeof(TLanguageKindEnum);
         if (languageKindType == typeof(CS.SyntaxKind))
         {
-            registerSyntaxNodeActionCS(RoslynSymbolStartAnalysisContext, action, syntaxKinds.Cast<CS.SyntaxKind>().ToImmutableArray());
+            RegisterSyntaxNodeActionCS(RoslynSymbolStartAnalysisContext, action, syntaxKinds.Cast<CS.SyntaxKind>().ToImmutableArray());
         }
         else if (languageKindType == typeof(VB.SyntaxKind))
         {
-            registerSyntaxNodeActionVB(RoslynSymbolStartAnalysisContext, action, syntaxKinds.Cast<VB.SyntaxKind>().ToImmutableArray());
+            RegisterSyntaxNodeActionVB(RoslynSymbolStartAnalysisContext, action, syntaxKinds.Cast<VB.SyntaxKind>().ToImmutableArray());
         }
         else
         {
