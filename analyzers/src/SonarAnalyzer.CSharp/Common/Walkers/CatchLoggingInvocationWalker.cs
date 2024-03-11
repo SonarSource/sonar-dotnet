@@ -33,6 +33,7 @@ namespace SonarAnalyzer.Common.Walkers;
 public sealed class CatchLoggingInvocationWalker : SafeCSharpSyntaxWalker
 {
     private readonly SemanticModel model;
+    private readonly bool visitConditionals;
     private bool isFirstCatchClauseVisited;
     private bool hasWhenFilterWithDeclarations;
     private ISymbol caughtException;
@@ -54,9 +55,10 @@ public sealed class CatchLoggingInvocationWalker : SafeCSharpSyntaxWalker
         new LoggingInvocationDescriptor(Serilog, KnownType.Serilog_ILogger, true),
         new LoggingInvocationDescriptor(Serilog, KnownType.Serilog_Log, false));
 
-    public CatchLoggingInvocationWalker(SemanticModel model)
+    public CatchLoggingInvocationWalker(SemanticModel model, bool visitConditionals = true)
     {
         this.model = model;
+        this.visitConditionals = visitConditionals;
     }
 
     public override void VisitCatchClause(CatchClauseSyntax node)
@@ -113,6 +115,22 @@ public sealed class CatchLoggingInvocationWalker : SafeCSharpSyntaxWalker
     public override void VisitSimpleLambdaExpression(SimpleLambdaExpressionSyntax node)
     {
         // Skip processing to avoid false positives.
+    }
+
+    public override void VisitIfStatement(IfStatementSyntax node)
+    {
+        if (visitConditionals)
+        {
+            base.VisitIfStatement(node);
+        }
+    }
+
+    public override void VisitSwitchStatement(SwitchStatementSyntax node)
+    {
+        if (visitConditionals)
+        {
+            base.VisitSwitchStatement(node);
+        }
     }
 
     private bool RethrowsCaughtException(ThrowStatementSyntax node) =>

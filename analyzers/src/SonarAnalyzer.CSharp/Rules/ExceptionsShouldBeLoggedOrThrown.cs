@@ -49,7 +49,7 @@ public sealed class ExceptionsShouldBeLoggedOrThrown : SonarDiagnosticAnalyzer
                      cc.RegisterNodeAction(c =>
                          {
                              var catchClauseSyntax = (CatchClauseSyntax)c.Node;
-                             var walker = new CatchLoggingInvocationWalker(c.SemanticModel);
+                             var walker = new CatchLoggingInvocationWalker(c.SemanticModel, false);
                              if (catchClauseSyntax.Declaration?.Identifier is { } exceptionIdentifier // there is an exception to log
                                  && catchClauseSyntax.DescendantNodes().OfType<ThrowStatementSyntax>().Any() // and a throw statement (preliminary check)
                                  && walker.SafeVisit(catchClauseSyntax)

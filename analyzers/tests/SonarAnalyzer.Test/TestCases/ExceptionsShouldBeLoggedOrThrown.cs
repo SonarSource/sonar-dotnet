@@ -285,6 +285,65 @@ public class ExceptionsShouldBeEitherLoggedOrThrown
         }
     }
 
+    public void Branches(ILogger logger, bool condition)
+    {
+        try { }
+        catch (InvalidOperationException e)                     // FN
+        {
+            if (condition)
+            {
+                logger.LogError(e, "Message!");
+                throw;
+            }
+        }
+        catch (ArgumentException e)                             // Compliant - conditional
+        {
+            logger.LogError(e, "Message!");
+            if (condition)
+            {
+                throw;
+            }
+        }
+        catch (AggregateException e)                            // Compliant - conditional
+        {
+            if (condition)
+            {
+                logger.LogError(e, "Message!");
+            }
+            throw;
+        }
+        catch (ApplicationException e)                          // Compliant - conditional
+        {
+            if (condition)
+            {
+                logger.LogError(e, "Message!");
+            }
+            else
+            {
+                throw;
+            }
+        }
+        catch (FormatException e)                               // Noncompliant
+        {
+            if (condition)
+            {
+            }
+            logger.LogError(e, "Message!");                     // Secondary
+            throw;                                              // Secondary
+        }
+        catch (Exception e)                                     // Compliant - conditional
+        {
+            switch (condition)
+            {
+                case true:
+                    logger.LogError(e, "Message!");
+                    break;
+                case false:
+                    throw;
+            }
+        }
+    }
+
     private void Call(Action action)
     {
         action();
