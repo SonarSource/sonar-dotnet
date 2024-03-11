@@ -24,19 +24,21 @@ public class Program
 
         Trace.TraceWarning("Message");
         Trace.TraceWarning("Message: {0}", arg);
+
+        Trace.Write("Message", "Category");             // Compliant - the developer wants to use a specific category, other than the predefined ones
+        Trace.Write(42, "Category");
+
+        Trace.WriteLine("Message", "Category");
+        Trace.WriteLine(42, "Category");
     }
 
     public void Write_Overloads()
     {
         Trace.Write("Message");                         // Noncompliant
         Trace.Write(42);                                // Noncompliant
-        Trace.Write("Message", "Category");             // Noncompliant
-        Trace.Write(42, "Category");                    // Noncompliant
 
         Trace.WriteLine("Message");                     // Noncompliant
         Trace.WriteLine(42);                            // Noncompliant
-        Trace.WriteLine("Message", "Category");         // Noncompliant
-        Trace.WriteLine(42, "Category");                // Noncompliant
     }
 
     public void Not_TraceClass(string arg)

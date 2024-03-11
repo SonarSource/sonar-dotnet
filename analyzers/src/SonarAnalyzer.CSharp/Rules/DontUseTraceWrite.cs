@@ -34,5 +34,11 @@ public sealed class DontUseTraceWrite : DoNotCallMethodsBase<SyntaxKind, Invocat
 
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
+    protected override bool ShouldReportOnMethodCall(InvocationExpressionSyntax invocation, SemanticModel semanticModel, MemberDescriptor memberDescriptor)
+    {
+        var methodSymbol = (IMethodSymbol)semanticModel.GetSymbolInfo(invocation).Symbol;
+        return !methodSymbol.Parameters.Any(x => x.Name == "category");
+    }
+
     public DontUseTraceWrite() : base(DiagnosticId) { }
 }
