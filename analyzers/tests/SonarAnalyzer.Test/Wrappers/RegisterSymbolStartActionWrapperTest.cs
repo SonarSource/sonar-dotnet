@@ -47,9 +47,9 @@ public class RegisterSymbolStartActionWrapperTest
                 symbolStart.Symbol.Should().BeAssignableTo<INamedTypeSymbol>().Which.Name.Should().Be("C");
                 symbolStartWasCalled = true;
             }, SymbolKind.NamedType)));
-        var diags = await compilation.GetAnalyzerDiagnosticsAsync();
+        var diagnostics = await compilation.GetAnalyzerDiagnosticsAsync();
         symbolStartWasCalled.Should().BeTrue();
-        diags.Should().BeEmpty();
+        diagnostics.Should().BeEmpty();
     }
 
     [TestMethod]
