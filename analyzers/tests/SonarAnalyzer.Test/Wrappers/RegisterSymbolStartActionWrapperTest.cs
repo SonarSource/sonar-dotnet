@@ -109,6 +109,7 @@ public class RegisterSymbolStartActionWrapperTest
         await compilation.GetAnalyzerDiagnosticsAsync();
         visitedCodeBlocks.Should().BeEquivalentTo("int j = 0;", "public void N() => ToString();");
     }
+
     [TestMethod]
     public async Task RegisterSymbolStartAction_RegisterCodeBlockStartAction_CS()
     {
