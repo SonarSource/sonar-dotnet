@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+
 namespace SonarAnalyzer.Rules;
 
 public abstract class BackslashShouldBeAvoidedInAspNetRoutesBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
@@ -52,7 +54,7 @@ public abstract class BackslashShouldBeAvoidedInAspNetRoutesBase<TSyntaxKind> : 
     }
 
     private bool IsRouteTemplate(SemanticModel model, SyntaxNode node) =>
-        node?.Parent?.Parent is { } invocation
+        node.Parent.Parent is var invocation
         && model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
         && Language.MethodParameterLookup(invocation, methodSymbol) is { } parameterLookup
         && parameterLookup.TryGetSymbol(node, out var parameter)
