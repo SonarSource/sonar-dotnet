@@ -64,8 +64,8 @@ public class BackslashShouldBeAvoidedInAspNetRoutesTest
 #endif
 
 #if NET
-    public static IEnumerable<object[]> AspNetCore2xVersionsUnderTest => [
-        ["2.0.4"] /* Latest 2.0.x */, ["2.2.0"] /* 2nd most used */, [Constants.NuGetLatestVersion]];
+    public static IEnumerable<object[]> AspNetCore2xVersionsUnderTest =>
+        [["2.0.4"] /* Latest 2.0.x */, ["2.2.0"] /* 2nd most used */, [Constants.NuGetLatestVersion]];
 
     private static IEnumerable<MetadataReference> AspNetCore2xReferences(string aspNetCoreVersion) =>
         NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetCoreVersion)                       // for Controller
