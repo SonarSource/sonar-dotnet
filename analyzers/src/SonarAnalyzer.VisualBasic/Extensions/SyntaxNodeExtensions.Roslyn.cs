@@ -1,6 +1,6 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2015-2024 SonarSource SA
+ * Copyright (C) 2015-2023 SonarSource SA
  * mailto: contact AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -18,19 +18,17 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Helpers;
+using System.CodeDom.Compiler;
 
-internal class CSharpAttributeParameterLookup : MethodParameterLookupBase<AttributeArgumentSyntax>
+namespace SonarAnalyzer.Extensions;
+
+[GeneratedCode("Copied and converted from Roslyn", "5a1cc5f83e4baba57f0355a685a5d1f487bfac66")]
+internal static partial class SyntaxNodeExtensions
 {
-    public CSharpAttributeParameterLookup(AttributeSyntax attribute, IMethodSymbol methodSymbol)
-        : base(attribute.ArgumentList?.Arguments ?? default, methodSymbol) { }
-
-    protected override SyntaxNode Expression(AttributeArgumentSyntax argument) =>
-        argument.Expression;
-
-    protected override SyntaxToken? GetNameColonArgumentIdentifier(AttributeArgumentSyntax argument) =>
-        argument.NameColon?.Name.Identifier;
-
-    protected override SyntaxToken? GetNameEqualsArgumentIdentifier(AttributeArgumentSyntax argument) =>
-        argument.NameEquals?.Name.Identifier;
+    // Copied and converted from
+    // https://github.com/dotnet/roslyn/blob/5a1cc5f83e4baba57f0355a685a5d1f487bfac66/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/VisualBasic/Extensions/SyntaxNodeExtensions.vb#L16
+    public static bool IsParentKind(this SyntaxNode node, SyntaxKind kind)
+    {
+        return node != null && node.Parent.IsKind(kind);
+    }
 }

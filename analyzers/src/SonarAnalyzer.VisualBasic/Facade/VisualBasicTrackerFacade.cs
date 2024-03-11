@@ -31,5 +31,6 @@ namespace SonarAnalyzer.Helpers.Facade
         public MethodDeclarationTracker<SyntaxKind> MethodDeclaration { get; } = new VisualBasicMethodDeclarationTracker();
         public ObjectCreationTracker<SyntaxKind> ObjectCreation { get; } = new VisualBasicObjectCreationTracker();
         public PropertyAccessTracker<SyntaxKind> PropertyAccess { get; } = new VisualBasicPropertyAccessTracker();
+        public ArgumentTracker<SyntaxKind> Argument => new VisualBasicArgumentTracker();
     }
 }

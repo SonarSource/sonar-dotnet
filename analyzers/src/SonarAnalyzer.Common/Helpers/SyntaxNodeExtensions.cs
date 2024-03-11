@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.Helpers;
 
-internal static class SyntaxNodeExtensions
+internal static partial class SyntaxNodeExtensions
 {
     public static SemanticModel EnsureCorrectSemanticModelOrDefault(this SyntaxNode node, SemanticModel semanticModel) =>
         node.SyntaxTree.GetSemanticModelOrDefault(semanticModel);

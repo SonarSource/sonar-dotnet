@@ -44,6 +44,7 @@ public abstract class SyntaxFacade<TSyntaxKind>
     public abstract bool IsAnyKind(SyntaxNode node, params TSyntaxKind[] syntaxKinds);
     public abstract bool IsAnyKind(SyntaxTrivia trivia, params TSyntaxKind[] syntaxKinds);
     public abstract bool IsInExpressionTree(SemanticModel model, SyntaxNode node);
+    public abstract bool IsWrittenTo(SyntaxNode expression, SemanticModel semanticModel, CancellationToken cancellationToken);
     public abstract bool IsKind(SyntaxNode node, TSyntaxKind kind);
     public abstract bool IsKind(SyntaxToken token, TSyntaxKind kind);
     public abstract bool IsKind(SyntaxTrivia trivia, TSyntaxKind kind);
