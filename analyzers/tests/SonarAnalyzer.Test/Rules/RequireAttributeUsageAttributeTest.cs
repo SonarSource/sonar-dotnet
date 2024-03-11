@@ -20,26 +20,25 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class RequireAttributeUsageAttributeTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<RequireAttributeUsageAttribute>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void RequireAttributeUsageAttribute() =>
-            builder.AddPaths("RequireAttributeUsageAttribute.cs").Verify();
+[TestClass]
+public class RequireAttributeUsageAttributeTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder<RequireAttributeUsageAttribute>();
+
+    [TestMethod]
+    public void RequireAttributeUsageAttribute() =>
+        builder.AddPaths("RequireAttributeUsageAttribute.cs").Verify();
 
 #if NET
 
-        [TestMethod]
-        public void RequireAttributeUsageAttribute_CSharp11() =>
-            builder.AddPaths("RequireAttributeUsageAttribute.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .Verify();
+    [TestMethod]
+    public void RequireAttributeUsageAttribute_CSharp11() =>
+        builder.AddPaths("RequireAttributeUsageAttribute.CSharp11.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .Verify();
 
 #endif
 
-    }
 }

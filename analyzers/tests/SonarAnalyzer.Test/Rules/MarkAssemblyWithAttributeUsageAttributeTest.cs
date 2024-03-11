@@ -20,13 +20,12 @@
 
 using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class MarkAssemblyWithAttributeUsageAttributeTest
 {
-    [TestClass]
-    public class MarkAssemblyWithAttributeUsageAttributeTest
-    {
-        [TestMethod]
-        public void RequireAttributeUsageAttribute() =>
-            new VerifierBuilder<RequireAttributeUsageAttribute>().AddPaths(@"RequireAttributeUsageAttribute.cs").Verify();
-    }
+    [TestMethod]
+    public void RequireAttributeUsageAttribute() =>
+        new VerifierBuilder<RequireAttributeUsageAttribute>().AddPaths(@"RequireAttributeUsageAttribute.cs").Verify();
 }
