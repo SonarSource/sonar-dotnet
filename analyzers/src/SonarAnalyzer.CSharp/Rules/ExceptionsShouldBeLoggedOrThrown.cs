@@ -51,10 +51,10 @@ public sealed class ExceptionsShouldBeLoggedOrThrown : SonarDiagnosticAnalyzer
                              var catchClauseSyntax = (CatchClauseSyntax)c.Node;
                              var walker = new LoggingInvocationWalker(c.SemanticModel);
                              if (catchClauseSyntax.Declaration?.Identifier is { } exceptionIdentifier // there is an exception to log
-                                 && catchClauseSyntax.DescendantNodes().OfType<ThrowStatementSyntax>().Any() // and a throw statement (preliminary check)
+                                 && catchClauseSyntax.DescendantNodes().Any(x => x.IsAnyKind(SyntaxKind.ThrowStatement, SyntaxKindEx.ThrowExpression)) // and a throw statement (preliminary check)
                                  && walker.SafeVisit(catchClauseSyntax)
                                  && walker.IsExceptionLogged
-                                 && walker.ThrowStatementSyntax is { } throwStatement)
+                                 && walker.ThrowNode is { } throwStatement)
                              {
                                  var secondaryLocations = new List<SecondaryLocation>
                                  {
@@ -70,7 +70,7 @@ public sealed class ExceptionsShouldBeLoggedOrThrown : SonarDiagnosticAnalyzer
 
     private sealed class LoggingInvocationWalker(SemanticModel model) : CatchLoggingInvocationWalker(model)
     {
-        public ThrowStatementSyntax ThrowStatementSyntax { get; private set; }
+        public SyntaxNode ThrowNode { get; private set; }
 
         public override void VisitIfStatement(IfStatementSyntax node)
         {
@@ -87,17 +87,31 @@ public sealed class ExceptionsShouldBeLoggedOrThrown : SonarDiagnosticAnalyzer
             // Skip processing to avoid false positives.
         }
 
+        public override void Visit(SyntaxNode node)
+        {
+            if (ThrowExpressionSyntaxWrapper.IsInstance(node)
+                && RethrowsCaughtException(((ThrowExpressionSyntaxWrapper)node).Expression))
+            {
+                ThrowNode = node;
+            }
+            if (node.IsKind(SyntaxKind.CoalesceExpression))
+            {
+                return;
+            }
+            base.Visit(node);
+        }
+
         public override void VisitThrowStatement(ThrowStatementSyntax node)
         {
-            if (ThrowStatementSyntax == null
-                && RethrowsCaughtException(node))
+            if (ThrowNode == null
+                && RethrowsCaughtException(node.Expression))
             {
-                ThrowStatementSyntax = node;
+                ThrowNode = node;
             }
             base.VisitThrowStatement(node);
         }
 
-        private bool RethrowsCaughtException(ThrowStatementSyntax node) =>
-            node.Expression is null || Equals(model.GetSymbolInfo(node.Expression).Symbol, CaughtException);
+        private bool RethrowsCaughtException(ExpressionSyntax expression) =>
+            expression is null || Equals(model.GetSymbolInfo(expression).Symbol, CaughtException);
     }
 }
