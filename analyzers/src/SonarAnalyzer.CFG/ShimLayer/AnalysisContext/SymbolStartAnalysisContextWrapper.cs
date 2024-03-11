@@ -41,11 +41,11 @@ public readonly struct SymbolStartAnalysisContextWrapper
     private static readonly Action<object, Action<SyntaxNodeAnalysisContext>, ImmutableArray<CS.SyntaxKind>> RegisterSyntaxNodeActionCS;
     private static readonly Action<object, Action<SyntaxNodeAnalysisContext>, ImmutableArray<VB.SyntaxKind>> RegisterSyntaxNodeActionVB;
 
-    private object RoslynSymbolStartAnalysisContext { get; }
     public CancellationToken CancellationToken => CancellationTokenAccessor(RoslynSymbolStartAnalysisContext);
     public Compilation Compilation => CompilationAccessor(RoslynSymbolStartAnalysisContext);
     public AnalyzerOptions Options => OptionsAccessor(RoslynSymbolStartAnalysisContext);
     public ISymbol Symbol => SymbolAccessor(RoslynSymbolStartAnalysisContext);
+    private object RoslynSymbolStartAnalysisContext { get; }
 
     static SymbolStartAnalysisContextWrapper()
     {
