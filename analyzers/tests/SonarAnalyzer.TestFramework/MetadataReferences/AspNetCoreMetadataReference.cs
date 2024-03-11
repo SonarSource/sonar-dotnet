@@ -41,5 +41,6 @@ public static class AspNetCoreMetadataReference
     public static MetadataReference MicrosoftAspNetCoreRouting { get; } = Create(typeof(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder));
     public static MetadataReference MicrosoftAspNetCoreWebHost { get; } = Create(typeof(Microsoft.AspNetCore.WebHost));
     public static MetadataReference MicrosoftExtensionsHostingAbstractions { get; } = Create(typeof(Microsoft.Extensions.Hosting.IHost));
+    public static MetadataReference MicrosoftExtensionsPrimitives { get; } = Create(typeof(Microsoft.Extensions.Primitives.CancellationChangeToken));
 }
 #endif

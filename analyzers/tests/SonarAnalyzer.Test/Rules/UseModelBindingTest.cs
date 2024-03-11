@@ -23,11 +23,22 @@ using SonarAnalyzer.Rules.CSharp;
 namespace SonarAnalyzer.Test.Rules;
 
 [TestClass]
-public class ClassNameTest
+public class UseModelBindingTest
 {
-    private readonly VerifierBuilder builder = new VerifierBuilder<ClassName>();
+#if NET
+    private readonly VerifierBuilder builderAspNetCore = new VerifierBuilder<UseModelBinding>()
+        .WithOptions(ParseOptionsHelper.FromCSharp12)
+        .AddReferences([
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcCore,
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions,
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcViewFeatures,
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcAbstractions,
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpFeatures,
+            AspNetCoreMetadataReference.MicrosoftExtensionsPrimitives,
+        ]);
 
     [TestMethod]
-    public void ClassName_CS() =>
-        builder.AddPaths("ClassName.cs").Verify();
+    public void UseModelBinding_AspNetCore_CS() =>
+        builderAspNetCore.AddPaths("UseModelBinding_AspNetCore.cs").Verify();
+#endif
 }
