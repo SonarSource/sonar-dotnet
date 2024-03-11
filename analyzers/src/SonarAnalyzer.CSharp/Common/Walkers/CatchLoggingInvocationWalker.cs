@@ -34,11 +34,11 @@ public class CatchLoggingInvocationWalker(SemanticModel model) : SafeCSharpSynta
 {
     private bool isFirstCatchClauseVisited;
     private bool hasWhenFilterWithDeclarations;
-    private ISymbol caughtException;
+
+    internal ISymbol CaughtException;
 
     public bool IsExceptionLogged { get; private set; }
     public InvocationExpressionSyntax LoggingInvocationWithException { get; private set; }
-    public ThrowStatementSyntax ThrowStatementSyntax { get; private set; }
     public IList<InvocationExpressionSyntax> LoggingInvocationsWithoutException { get; } = new List<InvocationExpressionSyntax>();
 
     private static readonly ImmutableArray<LoggingInvocationDescriptor> LoggingInvocationDescriptors = ImmutableArray.Create(
@@ -65,7 +65,7 @@ public class CatchLoggingInvocationWalker(SemanticModel model) : SafeCSharpSynta
         hasWhenFilterWithDeclarations = node.Filter != null && node.Filter.DescendantNodes().Any(DeclarationPatternSyntaxWrapper.IsInstance);
         if (node.Declaration != null && !node.Declaration.Identifier.IsKind(SyntaxKind.None))
         {
-            caughtException = model.GetDeclaredSymbol(node.Declaration);
+            CaughtException = model.GetDeclaredSymbol(node.Declaration);
         }
         base.VisitCatchClause(node);
     }
@@ -75,7 +75,7 @@ public class CatchLoggingInvocationWalker(SemanticModel model) : SafeCSharpSynta
         if (!IsExceptionLogged && IsLoggingInvocation(node, model))
         {
             if (GetArgumentSymbolDerivedFromException(node, model) is { } currentException
-                && (hasWhenFilterWithDeclarations || currentException.Equals(caughtException)))
+                && (hasWhenFilterWithDeclarations || currentException.Equals(CaughtException)))
             {
                 IsExceptionLogged = true;
                 LoggingInvocationWithException = node;
@@ -89,18 +89,15 @@ public class CatchLoggingInvocationWalker(SemanticModel model) : SafeCSharpSynta
         base.VisitInvocationExpression(node);
     }
 
-    public override void VisitThrowStatement(ThrowStatementSyntax node)
+    public override void VisitParenthesizedLambdaExpression(ParenthesizedLambdaExpressionSyntax node)
     {
-        if (ThrowStatementSyntax == null
-            && RethrowsCaughtException(node))
-        {
-            ThrowStatementSyntax = node;
-        }
-        base.VisitThrowStatement(node);
+        // Skip processing to avoid false positives.
     }
 
-    private bool RethrowsCaughtException(ThrowStatementSyntax node) =>
-        node.Expression is null || Equals(model.GetSymbolInfo(node.Expression).Symbol, caughtException);
+    public override void VisitSimpleLambdaExpression(SimpleLambdaExpressionSyntax node)
+    {
+        // Skip processing to avoid false positives.
+    }
 
     private static ISymbol GetArgumentSymbolDerivedFromException(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
         invocation.ArgumentList.Arguments

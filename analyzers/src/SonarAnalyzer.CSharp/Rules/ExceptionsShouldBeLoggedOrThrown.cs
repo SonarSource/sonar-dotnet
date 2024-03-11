@@ -70,15 +70,7 @@ public sealed class ExceptionsShouldBeLoggedOrThrown : SonarDiagnosticAnalyzer
 
     private sealed class LoggingInvocationWalker(SemanticModel model) : CatchLoggingInvocationWalker(model)
     {
-        public override void VisitParenthesizedLambdaExpression(ParenthesizedLambdaExpressionSyntax node)
-        {
-            // Skip processing to avoid false positives.
-        }
-
-        public override void VisitSimpleLambdaExpression(SimpleLambdaExpressionSyntax node)
-        {
-            // Skip processing to avoid false positives.
-        }
+        public ThrowStatementSyntax ThrowStatementSyntax { get; private set; }
 
         public override void VisitIfStatement(IfStatementSyntax node)
         {
@@ -94,5 +86,18 @@ public sealed class ExceptionsShouldBeLoggedOrThrown : SonarDiagnosticAnalyzer
         {
             // Skip processing to avoid false positives.
         }
+
+        public override void VisitThrowStatement(ThrowStatementSyntax node)
+        {
+            if (ThrowStatementSyntax == null
+                && RethrowsCaughtException(node))
+            {
+                ThrowStatementSyntax = node;
+            }
+            base.VisitThrowStatement(node);
+        }
+
+        private bool RethrowsCaughtException(ThrowStatementSyntax node) =>
+            node.Expression is null || Equals(model.GetSymbolInfo(node.Expression).Symbol, CaughtException);
     }
 }
