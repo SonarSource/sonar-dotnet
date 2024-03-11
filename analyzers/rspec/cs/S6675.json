@@ -1,0 +1,19 @@
+{
+  "title": "\"Trace.WriteLineIf\" should not be used with \"TraceSwitch\" levels",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "confusing",
+    "clumsy",
+    "logging"
+  ],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-6675",
+  "sqKey": "S6675",
+  "scope": "Main",
+  "quickfix": "targeted"
+}

@@ -1,0 +1,60 @@
+<h2>Why is this an issue?</h2>
+<p>The <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.trace.writelineif"><code>Trace.WriteLineIf</code> Method</a> from the
+<a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.trace"><code>System.Diagnostic.Trace</code></a> facility writes a trace if
+the condition passed as the first parameter is <code>true</code>.</p>
+<p><a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.traceswitch"><code>TraceSwitch</code></a> allows trace control via
+<code>bool</code> properties for each relevant <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.tracelevel"><code>TraceLevel</code></a>, such as <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.traceswitch.traceerror"><code>TraceSwitch.TraceError</code></a>.</p>
+<p>Using <code>Trace.WriteLineIf</code> with such properties should be avoided since it can lead to misinterpretation and produce confusion.</p>
+<p>In particular, <code>Trace.WriteLineIf</code> may appear as equivalent to the level-specific tracing methods provided by <code>Trace</code>, such
+as <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.trace.traceerror"><code>Trace.Error</code></a>, but it is not.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+public void Method(TraceSwitch traceSwitch)
+{
+    Trace.WriteIf(traceSwitch.TraceError, "Failed to log in!");
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+public void Method(bool condition)
+{
+    Trace.WriteIf(condition, "Failed to log in!");
+}
+</pre>
+<h2>How to fix it</h2>
+<p>The fix depends on the intent behind the use of <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.traceswitch"><code>TraceSwitch</code></a> levels with <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.trace.writelineif"><code>Trace.WriteLineIf</code></a>.</p>
+<p>If it is <strong>trace categorization</strong>, level-specific tracing methods, such as <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.trace.traceerror"><code>Trace.TraceError</code></a> or <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.trace.tracewarning"><code>Trace.TraceWarning</code></a>, should be used
+instead.</p>
+<p>If it is <strong>trace filtering</strong>, <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.tracesource"><code>TraceSource</code></a> should be used instead.</p>
+<p>If it is <strong>log filtering</strong>, <code>Trace</code> should be replaced by logging APIs, such as the <a
+href="https://learn.microsoft.com/en-us/dotnet/core/diagnostics/logging-tracing#net-logging-apis"><code>ILogger</code> API</a>.</p>
+<p>Modern logging APIs are also more suitable than <code>Trace</code> when <a
+href="https://learn.microsoft.com/en-us/dotnet/core/extensions/high-performance-logging">high-performance logging</a> is required.</p>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.trace.writelineif"><code>Trace.WriteLineIf</code>
+  Method</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.traceswitch"><code>TraceSwitch</code></a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.tracesource"><code>TraceSource</code></a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.trace.writeline"><code>Trace.WriteLine</code>
+  Method</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/high-performance-logging">High-performance logging in
+  .NET</a> </li>
+</ul>
+<h3>Articles &amp; blog posts</h3>
+<ul>
+  <li> StackOverflow - <a href="https://stackoverflow.com/a/5118040">Difference between Trace.WriteLineIf and Trace.Error</a> </li>
+  <li> StackOverflow - <a href="https://stackoverflow.com/a/3691841">Difference between TraceSwitch and SourceSwitch</a> </li>
+  <li> InfoSupport Blogs - <a href="https://blogs.infosupport.com/please-be-careful-when-using-trace-writelineif/">Please be careful when using
+  Trace.WriteLineIf()</a> </li>
+</ul>
+
