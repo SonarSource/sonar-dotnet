@@ -31,7 +31,6 @@ public class BackslashShouldBeAvoidedInAspNetRoutesTest
     private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.BackslashShouldBeAvoidedInAspNetRoutes>();
 
 #if NETFRAMEWORK
-
     // ASP.NET 4x MVC 3 and 4 don't support attribute routing, nor MapControllerRoute and similar
     public static IEnumerable<object[]> AspNet4xMvcVersionsUnderTest => [["5.2.7"] /* Most used */, [Constants.NuGetLatestVersion]];
 
@@ -63,7 +62,5 @@ public class BackslashShouldBeAvoidedInAspNetRoutesTest
             .AddPaths("BackslashShouldBeAvoidedInAspNetRoutes.AspNet4x.vb")
             .AddReferences(AspNet4xReferences(aspNetMvcVersion))
             .Verify();
-
 #endif
-
 }

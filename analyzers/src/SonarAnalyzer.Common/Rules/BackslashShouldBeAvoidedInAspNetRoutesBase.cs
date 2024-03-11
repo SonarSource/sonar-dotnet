@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.Xml.Linq;
 
 namespace SonarAnalyzer.Rules;
 
@@ -47,15 +47,14 @@ public abstract class BackslashShouldBeAvoidedInAspNetRoutesBase<TSyntaxKind> : 
         if (Language.Syntax.NodeExpression(c.Node) is { } expression
             && Language.FindStringConstant(c.SemanticModel, expression) is { } constantRouteTemplate
             && ContainsBackslash(constantRouteTemplate)
-            && IsRouteTemplate(c.SemanticModel, c.Node))
+            && IsRouteTemplate(c.SemanticModel, c.Node, c.Node.Parent.Parent))
         {
             c.ReportIssue(Diagnostic.Create(Rule, expression.GetLocation()));
         }
     }
 
-    private bool IsRouteTemplate(SemanticModel model, SyntaxNode node) =>
-        node.Parent.Parent is var invocation
-        && model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
+    private bool IsRouteTemplate(SemanticModel model, SyntaxNode node, SyntaxNode invocation) =>
+        model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
         && Language.MethodParameterLookup(invocation, methodSymbol) is { } parameterLookup
         && parameterLookup.TryGetSymbol(node, out var parameter)
         && (parameter.HasAttribute(KnownType.System_Diagnostics_CodeAnalysis_StringSyntaxAttribute)
