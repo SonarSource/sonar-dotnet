@@ -36,6 +36,8 @@ public class LoggerMembersNamesShouldComplyTest
     [DataRow("_logger")]
     [DataRow("Logger")]
     [DataRow("_Logger")]
+    [DataRow("instance")]
+    [DataRow("Instance")]
     public void LoggerMembersNamesShouldComply_Compliant_CS(string name) =>
         Builder.AddSnippet($$"""
             using System;
