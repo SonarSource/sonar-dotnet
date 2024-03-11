@@ -51,6 +51,7 @@ public readonly struct SymbolStartAnalysisContextWrapper
     public Compilation Compilation => CompilationAccessor(RoslynSymbolStartAnalysisContext);
     public AnalyzerOptions Options => OptionsAccessor(RoslynSymbolStartAnalysisContext);
     public ISymbol Symbol => SymbolAccessor(RoslynSymbolStartAnalysisContext);
+    private object RoslynSymbolStartAnalysisContext { get; }
 
     // Code is executed in static initializers and is not detected by the coverage tool
     // See the RegisterSymbolStartActionWrapperTest family of tests to check test coverage manually
