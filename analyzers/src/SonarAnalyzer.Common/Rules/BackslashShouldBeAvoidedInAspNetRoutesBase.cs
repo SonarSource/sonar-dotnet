@@ -60,8 +60,7 @@ public abstract class BackslashShouldBeAvoidedInAspNetRoutesBase<TSyntaxKind> : 
             || (methodSymbol.ContainingType.IsAny(KnownType.RouteAttributes) && methodSymbol.IsConstructor() && parameter.Name == "template"));
 
     private static bool ShouldRegisterAction(Compilation compilation) =>
-        compilation.GetTypeByMetadataName(KnownType.Microsoft_AspNetCore_Mvc_Controller) is not null
-        || compilation.GetTypeByMetadataName(KnownType.System_Web_Mvc_Controller) is not null;
+        compilation.GetTypeByMetadataName(KnownType.System_Web_Mvc_Controller) is not null;
 
     private static bool ContainsBackslash(string value)
     {
