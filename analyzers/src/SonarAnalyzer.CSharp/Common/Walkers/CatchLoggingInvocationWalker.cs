@@ -30,10 +30,8 @@ namespace SonarAnalyzer.Common.Walkers;
 // - find all the logging invocations and check if the exception is logged
 // - if the exception is logged, it will stop looking for the other invocations and set IsExceptionLogged to true
 // - if the exception is not logged, it will visit all the invocations
-public sealed class CatchLoggingInvocationWalker : SafeCSharpSyntaxWalker
+public class CatchLoggingInvocationWalker(SemanticModel model) : SafeCSharpSyntaxWalker
 {
-    private readonly SemanticModel model;
-    private readonly bool visitConditionals;
     private bool isFirstCatchClauseVisited;
     private bool hasWhenFilterWithDeclarations;
     private ISymbol caughtException;
@@ -41,7 +39,7 @@ public sealed class CatchLoggingInvocationWalker : SafeCSharpSyntaxWalker
     public bool IsExceptionLogged { get; private set; }
     public InvocationExpressionSyntax LoggingInvocationWithException { get; private set; }
     public ThrowStatementSyntax ThrowStatementSyntax { get; private set; }
-    public List<InvocationExpressionSyntax> LoggingInvocationsWithoutException { get; } = new();
+    public IList<InvocationExpressionSyntax> LoggingInvocationsWithoutException { get; } = new List<InvocationExpressionSyntax>();
 
     private static readonly ImmutableArray<LoggingInvocationDescriptor> LoggingInvocationDescriptors = ImmutableArray.Create(
         new LoggingInvocationDescriptor(MicrosoftExtensionsLogging, KnownType.Microsoft_Extensions_Logging_LoggerExtensions, false),
@@ -54,12 +52,6 @@ public sealed class CatchLoggingInvocationWalker : SafeCSharpSyntaxWalker
         new LoggingInvocationDescriptor(NLogILoggerBase, KnownType.NLog_ILoggerBase, true),
         new LoggingInvocationDescriptor(Serilog, KnownType.Serilog_ILogger, true),
         new LoggingInvocationDescriptor(Serilog, KnownType.Serilog_Log, false));
-
-    public CatchLoggingInvocationWalker(SemanticModel model, bool visitConditionals = true)
-    {
-        this.model = model;
-        this.visitConditionals = visitConditionals;
-    }
 
     public override void VisitCatchClause(CatchClauseSyntax node)
     {
@@ -105,32 +97,6 @@ public sealed class CatchLoggingInvocationWalker : SafeCSharpSyntaxWalker
             ThrowStatementSyntax = node;
         }
         base.VisitThrowStatement(node);
-    }
-
-    public override void VisitParenthesizedLambdaExpression(ParenthesizedLambdaExpressionSyntax node)
-    {
-        // Skip processing to avoid false positives.
-    }
-
-    public override void VisitSimpleLambdaExpression(SimpleLambdaExpressionSyntax node)
-    {
-        // Skip processing to avoid false positives.
-    }
-
-    public override void VisitIfStatement(IfStatementSyntax node)
-    {
-        if (visitConditionals)
-        {
-            base.VisitIfStatement(node);
-        }
-    }
-
-    public override void VisitSwitchStatement(SwitchStatementSyntax node)
-    {
-        if (visitConditionals)
-        {
-            base.VisitSwitchStatement(node);
-        }
     }
 
     private bool RethrowsCaughtException(ThrowStatementSyntax node) =>

@@ -49,7 +49,7 @@ public sealed class ExceptionsShouldBeLoggedOrThrown : SonarDiagnosticAnalyzer
                      cc.RegisterNodeAction(c =>
                          {
                              var catchClauseSyntax = (CatchClauseSyntax)c.Node;
-                             var walker = new CatchLoggingInvocationWalker(c.SemanticModel, false);
+                             var walker = new LoggingInvocationWalker(c.SemanticModel);
                              if (catchClauseSyntax.Declaration?.Identifier is { } exceptionIdentifier // there is an exception to log
                                  && catchClauseSyntax.DescendantNodes().OfType<ThrowStatementSyntax>().Any() // and a throw statement (preliminary check)
                                  && walker.SafeVisit(catchClauseSyntax)
@@ -67,4 +67,32 @@ public sealed class ExceptionsShouldBeLoggedOrThrown : SonarDiagnosticAnalyzer
                          SyntaxKind.CatchClause);
                 }
             });
+
+    private sealed class LoggingInvocationWalker(SemanticModel model) : CatchLoggingInvocationWalker(model)
+    {
+        public override void VisitParenthesizedLambdaExpression(ParenthesizedLambdaExpressionSyntax node)
+        {
+            // Skip processing to avoid false positives.
+        }
+
+        public override void VisitSimpleLambdaExpression(SimpleLambdaExpressionSyntax node)
+        {
+            // Skip processing to avoid false positives.
+        }
+
+        public override void VisitIfStatement(IfStatementSyntax node)
+        {
+            // Skip processing to avoid false positives.
+        }
+
+        public override void VisitSwitchStatement(SwitchStatementSyntax node)
+        {
+            // Skip processing to avoid false positives.
+        }
+
+        public override void VisitConditionalExpression(ConditionalExpressionSyntax node)
+        {
+            // Skip processing to avoid false positives.
+        }
+    }
 }

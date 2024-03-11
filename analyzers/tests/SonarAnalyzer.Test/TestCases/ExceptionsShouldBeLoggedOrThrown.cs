@@ -285,7 +285,7 @@ public class ExceptionsShouldBeEitherLoggedOrThrown
         }
     }
 
-    public void Branches(ILogger logger, bool condition)
+    public void Branches(ILogger logger, bool condition, object x)
     {
         try { }
         catch (InvalidOperationException e)                     // FN
@@ -331,7 +331,7 @@ public class ExceptionsShouldBeEitherLoggedOrThrown
             logger.LogError(e, "Message!");                     // Secondary
             throw;                                              // Secondary
         }
-        catch (Exception e)                                     // Compliant - conditional
+        catch (OverflowException e)                             // Compliant - conditional
         {
             switch (condition)
             {
@@ -341,6 +341,11 @@ public class ExceptionsShouldBeEitherLoggedOrThrown
                 case false:
                     throw;
             }
+        }
+        catch (Exception e)
+        {
+            logger.LogError(e, "Message!");
+            x = condition ? 42 : throw e;
         }
     }
 

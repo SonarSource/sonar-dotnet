@@ -68,7 +68,7 @@ public class TestCases
         try { }
         catch (AggregateException e)
         {
-            Call(() => logger.LogCritical("Message!"));             // FN - to avoid noise
+            Call(() => logger.LogCritical("Message!"));             // Noncompliant
         }
         catch (Exception e)
         {
