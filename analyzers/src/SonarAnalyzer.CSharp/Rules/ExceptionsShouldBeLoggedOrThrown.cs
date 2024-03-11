@@ -89,11 +89,6 @@ public sealed class ExceptionsShouldBeLoggedOrThrown : SonarDiagnosticAnalyzer
 
         public override void Visit(SyntaxNode node)
         {
-            if (ThrowExpressionSyntaxWrapper.IsInstance(node)
-                && RethrowsCaughtException(((ThrowExpressionSyntaxWrapper)node).Expression))
-            {
-                ThrowNode = node;
-            }
             if (node.IsKind(SyntaxKind.CoalesceExpression))
             {
                 return;
