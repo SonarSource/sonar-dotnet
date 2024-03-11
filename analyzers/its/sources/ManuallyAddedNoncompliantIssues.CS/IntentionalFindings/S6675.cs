@@ -7,7 +7,7 @@ namespace IntentionalFindings
     {
         public void Method(TraceSwitch traceSwitch)
         {
-            Trace.WriteLineIf(traceSwitch.TraceError, "Message"); // Noncompliant (S6675) {{Don't use Trace.WriteLineIf with TraceSwitch level checks.}}
+            Trace.WriteLineIf(traceSwitch.TraceError, "Message"); // Noncompliant (S6675)
         }
     }
 }
