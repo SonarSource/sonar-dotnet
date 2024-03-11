@@ -78,8 +78,8 @@ public readonly struct SymbolStartAnalysisContextWrapper
                 receiverParameter).Compile();
         }
 
-        // (object receiverParameter, Action<TContext> registerActionParameter)
-        //     => ((symbolStartAnalysisContextType)receiverParameter)."registrationMethodName"<typeArguments>(registerActionParameter)
+        // (object receiverParameter, Action<TContext> registerActionParameter) =>
+        //     ((symbolStartAnalysisContextType)receiverParameter)."registrationMethodName"<typeArguments>(registerActionParameter)
         Action<object, Action<TContext>> CreateRegistrationMethod<TContext>(string registrationMethodName, params Type[] typeArguments)
         {
             var receiverParameter = Parameter(typeof(object));
@@ -90,8 +90,8 @@ public readonly struct SymbolStartAnalysisContextWrapper
                 registerActionParameter).Compile();
         }
 
-        // (object receiverParameter, Action<TContext> registerActionParameter, TParameter additionalParameter)
-        //     => ((symbolStartAnalysisContextType)receiverParameter)."registrationMethodName"<typeArguments>(registerActionParameter, additionalParameter)
+        // (object receiverParameter, Action<TContext> registerActionParameter, TParameter additionalParameter) =>
+        //     ((symbolStartAnalysisContextType)receiverParameter)."registrationMethodName"<typeArguments>(registerActionParameter, additionalParameter)
         Action<object, Action<TContext>, TParameter> CreateRegistrationMethodWithAdditionalParameter<TContext, TParameter>(string registrationMethodName, params Type[] typeArguments)
         {
             var receiverParameter = Parameter(typeof(object));
