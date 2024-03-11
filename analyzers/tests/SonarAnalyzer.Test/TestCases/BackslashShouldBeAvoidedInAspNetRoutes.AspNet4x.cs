@@ -102,3 +102,11 @@ namespace WithFakeRouteAttribute
         public RouteAttribute(string template) { }
     }
 }
+
+class WithTuples
+{
+    void Test()
+    {
+        var tuple = (1, "A\\[controller]"); // Compliant: the argument is not in a method invocation
+    }
+}
