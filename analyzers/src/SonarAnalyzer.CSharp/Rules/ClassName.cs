@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.Helpers.Trackers;
+
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -42,7 +44,11 @@ public sealed class ClassName : SonarDiagnosticAnalyzer
                     if (symbolStartContext.Symbol is INamedTypeSymbol namedType
                         && namedType.IsControllerType())
                     {
-
+                        symbolStartContext.RegisterSyntaxNodeAction(nodeAction =>
+                        {
+                            var tracker = new CSharpArgumentTracker();
+                            
+                        }, SyntaxKind.Argument);
                     }
                 }, SymbolKind.NamedType);
             }
