@@ -112,6 +112,6 @@ public sealed class ExceptionsShouldBeLoggedOrThrown : SonarDiagnosticAnalyzer
         }
 
         private bool RethrowsCaughtException(ExpressionSyntax expression) =>
-            expression is null || Equals(model.GetSymbolInfo(expression).Symbol, CaughtException);
+            expression is null || Equals(Model.GetSymbolInfo(expression).Symbol, CaughtException);
     }
 }

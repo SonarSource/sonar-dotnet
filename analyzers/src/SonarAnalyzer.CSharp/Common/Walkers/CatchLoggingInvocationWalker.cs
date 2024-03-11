@@ -31,6 +31,8 @@ namespace SonarAnalyzer.Common.Walkers;
 // - if the exception is not logged, it will visit all the invocations
 public class CatchLoggingInvocationWalker(SemanticModel model) : SafeCSharpSyntaxWalker
 {
+    internal readonly SemanticModel Model = model;
+
     private bool isFirstCatchClauseVisited;
     private bool hasWhenFilterWithDeclarations;
 
@@ -64,16 +66,16 @@ public class CatchLoggingInvocationWalker(SemanticModel model) : SafeCSharpSynta
         hasWhenFilterWithDeclarations = node.Filter != null && node.Filter.DescendantNodes().Any(DeclarationPatternSyntaxWrapper.IsInstance);
         if (node.Declaration != null && !node.Declaration.Identifier.IsKind(SyntaxKind.None))
         {
-            CaughtException = model.GetDeclaredSymbol(node.Declaration);
+            CaughtException = Model.GetDeclaredSymbol(node.Declaration);
         }
         base.VisitCatchClause(node);
     }
 
     public override void VisitInvocationExpression(InvocationExpressionSyntax node)
     {
-        if (!IsExceptionLogged && IsLoggingInvocation(node, model))
+        if (!IsExceptionLogged && IsLoggingInvocation(node, Model))
         {
-            if (GetArgumentSymbolDerivedFromException(node, model) is { } currentException
+            if (GetArgumentSymbolDerivedFromException(node, Model) is { } currentException
                 && (hasWhenFilterWithDeclarations || currentException.Equals(CaughtException)))
             {
                 IsExceptionLogged = true;
