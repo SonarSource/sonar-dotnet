@@ -24,12 +24,12 @@ namespace SonarAnalyzer.ShimLayer.AnalysisContext;
 
 public static class CompilationStartAnalysisContextExtensions
 {
-    private static readonly Action<CompilationStartAnalysisContext, Action<SymbolStartAnalysisContext>, SymbolKind> RegisterSymbolStartActionWrapper = CreateRegisterSymbolStartAnalysisWrapper();
+    private static readonly Action<CompilationStartAnalysisContext, Action<SymbolStartAnalysisContextWrapper>, SymbolKind> RegisterSymbolStartActionWrapper = CreateRegisterSymbolStartAnalysisWrapper();
 
-    public static void RegisterSymbolStartAction(this CompilationStartAnalysisContext context, Action<SymbolStartAnalysisContext> action, SymbolKind symbolKind) =>
+    public static void RegisterSymbolStartAction(this CompilationStartAnalysisContext context, Action<SymbolStartAnalysisContextWrapper> action, SymbolKind symbolKind) =>
         RegisterSymbolStartActionWrapper(context, action, symbolKind);
 
-    private static Action<CompilationStartAnalysisContext, Action<SymbolStartAnalysisContext>, SymbolKind> CreateRegisterSymbolStartAnalysisWrapper()
+    private static Action<CompilationStartAnalysisContext, Action<SymbolStartAnalysisContextWrapper>, SymbolKind> CreateRegisterSymbolStartAnalysisWrapper()
     {
         if (typeof(CompilationStartAnalysisContext).GetMethod(nameof(RegisterSymbolStartAction)) is not { } registerMethod)
         {
@@ -37,13 +37,13 @@ public static class CompilationStartAnalysisContextExtensions
         }
 
         var contextParameter = Parameter(typeof(CompilationStartAnalysisContext));
-        var shimmedActionParameter = Parameter(typeof(Action<SymbolStartAnalysisContext>));
+        var shimmedActionParameter = Parameter(typeof(Action<SymbolStartAnalysisContextWrapper>));
         var symbolKindParameter = Parameter(typeof(SymbolKind));
 
         var roslynSymbolStartAnalysisContextType = typeof(CompilationStartAnalysisContext).Assembly.GetType("Microsoft.CodeAnalysis.Diagnostics.SymbolStartAnalysisContext");
         var roslynSymbolStartAnalysisActionType = typeof(Action<>).MakeGenericType(roslynSymbolStartAnalysisContextType);
         var roslynSymbolStartAnalysisContextParameter = Parameter(roslynSymbolStartAnalysisContextType);
-        var sonarSymbolStartAnalysisContextCtor = typeof(SymbolStartAnalysisContext).GetConstructors().Single();
+        var sonarSymbolStartAnalysisContextCtor = typeof(SymbolStartAnalysisContextWrapper).GetConstructors().Single();
 
         // Action<Roslyn.SymbolStartAnalysisContext> registerAction = roslynSymbolStartAnalysisContextParameter =>
         //    shimmedActionParameter.Invoke(new Sonar.SymbolStartAnalysisContext(roslynSymbolStartAnalysisContextParameter))
@@ -53,7 +53,7 @@ public static class CompilationStartAnalysisContextExtensions
             parameters: roslynSymbolStartAnalysisContextParameter);
 
         // (contextParameter, shimmedActionParameter, symbolKindParameter) => contextParameter.RegisterSymbolStartAction(registerAction, symbolKindParameter)
-        return Lambda<Action<CompilationStartAnalysisContext, Action<SymbolStartAnalysisContext>, SymbolKind>>(
+        return Lambda<Action<CompilationStartAnalysisContext, Action<SymbolStartAnalysisContextWrapper>, SymbolKind>>(
             Call(contextParameter, registerMethod, registerAction, symbolKindParameter),
             contextParameter, shimmedActionParameter, symbolKindParameter).Compile();
     }

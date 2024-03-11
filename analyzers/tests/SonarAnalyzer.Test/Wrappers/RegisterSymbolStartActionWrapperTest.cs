@@ -20,7 +20,7 @@
 
 using SonarAnalyzer.ShimLayer.AnalysisContext;
 using CS = Microsoft.CodeAnalysis.CSharp;
-using SonarSymbolStartAnalysisContext = SonarAnalyzer.ShimLayer.AnalysisContext.SymbolStartAnalysisContext;
+using SonarSymbolStartAnalysisContext = SonarAnalyzer.ShimLayer.AnalysisContext.SymbolStartAnalysisContextWrapper;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 namespace SonarAnalyzer.Test.Wrappers;

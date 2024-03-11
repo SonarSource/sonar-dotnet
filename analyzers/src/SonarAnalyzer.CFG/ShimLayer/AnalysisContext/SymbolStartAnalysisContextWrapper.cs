@@ -24,7 +24,7 @@ using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 namespace SonarAnalyzer.ShimLayer.AnalysisContext;
 
-public readonly struct SymbolStartAnalysisContext
+public readonly struct SymbolStartAnalysisContextWrapper
 {
     private static Func<object, CancellationToken> cancellationTokenAccessor;
     private static Func<object, Compilation> compilationAccessor;
@@ -47,7 +47,7 @@ public readonly struct SymbolStartAnalysisContext
     public AnalyzerOptions Options => optionsAccessor(RoslynSymbolStartAnalysisContext);
     public ISymbol Symbol => symbolAccessor(RoslynSymbolStartAnalysisContext);
 
-    static SymbolStartAnalysisContext()
+    static SymbolStartAnalysisContextWrapper()
     {
         var symbolStartAnalysisContextType = typeof(CompilationStartAnalysisContext).Assembly.GetType("Microsoft.CodeAnalysis.Diagnostics.SymbolStartAnalysisContext");
         cancellationTokenAccessor = CreatePropertyAccessor<CancellationToken>(nameof(CancellationToken));
@@ -105,7 +105,7 @@ public readonly struct SymbolStartAnalysisContext
         }
     }
 
-    public SymbolStartAnalysisContext(object roslynSymbolStartAnalysisContext) =>
+    public SymbolStartAnalysisContextWrapper(object roslynSymbolStartAnalysisContext) =>
         RoslynSymbolStartAnalysisContext = roslynSymbolStartAnalysisContext;
 
     public void RegisterCodeBlockAction(Action<CodeBlockAnalysisContext> action) =>

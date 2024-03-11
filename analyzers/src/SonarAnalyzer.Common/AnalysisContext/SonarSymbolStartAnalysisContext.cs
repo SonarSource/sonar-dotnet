@@ -22,14 +22,14 @@ using SonarAnalyzer.ShimLayer.AnalysisContext;
 
 namespace SonarAnalyzer.AnalysisContext;
 
-public sealed class SonarSymbolStartAnalysisContext : SonarAnalysisContextBase<SymbolStartAnalysisContext>
+public sealed class SonarSymbolStartAnalysisContext : SonarAnalysisContextBase<SymbolStartAnalysisContextWrapper>
 {
     public override Compilation Compilation => Context.Compilation;
     public override AnalyzerOptions Options => Context.Options;
     public override CancellationToken Cancel => Context.CancellationToken;
     public ISymbol Symbol => Context.Symbol;
 
-    internal SonarSymbolStartAnalysisContext(SonarAnalysisContext analysisContext, SymbolStartAnalysisContext context) : base(analysisContext, context) { }
+    internal SonarSymbolStartAnalysisContext(SonarAnalysisContext analysisContext, SymbolStartAnalysisContextWrapper context) : base(analysisContext, context) { }
 
     public void RegisterCodeBlockAction(Action<SonarCodeBlockReportingContext> action) =>
         Context.RegisterCodeBlockAction(x => action(new(AnalysisContext, x)));
