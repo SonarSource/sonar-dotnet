@@ -41,22 +41,23 @@ public sealed class UseModelBinding : SonarDiagnosticAnalyzer
             if (compilationStartContext.Compilation.GetTypeByMetadataName(KnownType.Microsoft_AspNetCore_Mvc_ControllerAttribute) is { } controllerAttribute)
             {
                 // ASP.Net core
-                argumentDescriptors.Add(ArgumentDescriptor.ElementAccess(
+                argumentDescriptors.Add(ArgumentDescriptor.ElementAccess(// Request.Form["id"]
                     invokedIndexerContainer: KnownType.Microsoft_AspNetCore_Http_IFormCollection,
                     invokedIndexerExpression: "Form",
                     parameterConstraint: parameter => parameter.IsType(KnownType.System_String) && parameter.ContainingSymbol is IMethodSymbol { MethodKind: MethodKind.PropertyGet },
                     argumentPosition: 0));
-                argumentDescriptors.Add(ArgumentDescriptor.MethodInvocation(
+                argumentDescriptors.Add(ArgumentDescriptor.MethodInvocation(// Request.Form.TryGetValue("id", out _)
                     invokedType: KnownType.Microsoft_AspNetCore_Http_IFormCollection,
                     methodName: "TryGetValue",
                     parameterName: "key",
                     argumentPosition: 0));
-                argumentDescriptors.Add(ArgumentDescriptor.MethodInvocation(
+                argumentDescriptors.Add(ArgumentDescriptor.MethodInvocation(// Request.Form.ContainsKey("id")
                     invokedType: KnownType.Microsoft_AspNetCore_Http_IFormCollection,
                     methodName: "ContainsKey",
                     parameterName: "key",
                     argumentPosition: 0));
             }
+            // TODO: Add descriptors for Asp.Net MVC 4.x
             if (argumentDescriptors.Any())
             {
                 compilationStartContext.RegisterSymbolStartAction(symbolStartContext =>
