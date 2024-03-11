@@ -30,14 +30,22 @@ public sealed class ClassName : SonarDiagnosticAnalyzer
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-    protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(c =>
+    protected override void Initialize(SonarAnalysisContext context)
+    {
+        context.RegisterCompilationStartAction(compilationStartContext =>
+        {
+            if (compilationStartContext.Compilation.GetTypeByMetadataName(KnownType.Microsoft_AspNetCore_Mvc_ControllerAttribute) is { } controllerAttribute)
             {
-                var node = c.Node;
-                if (true)
+                // ASP.Net core
+                compilationStartContext.RegisterSymbolStartAction(symbolStartContext =>
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
-                }
-            },
-            SyntaxKind.InvocationExpression);
+                    if (symbolStartContext.Symbol is INamedTypeSymbol namedType
+                        && namedType.IsControllerType())
+                    {
+
+                    }
+                }, SymbolKind.NamedType);
+            }
+        });
+    }
 }
