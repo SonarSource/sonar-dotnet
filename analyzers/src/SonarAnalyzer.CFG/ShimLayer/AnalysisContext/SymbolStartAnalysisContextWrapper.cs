@@ -25,6 +25,9 @@ using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 namespace SonarAnalyzer.ShimLayer.AnalysisContext;
 
+// Code is executed in static initializers and is not detected by the coverage tool
+// See the RegisterSymbolStartActionWrapperTest family of tests to check test coverage manually
+[ExcludeFromCodeCoverage]
 public readonly struct SymbolStartAnalysisContextWrapper
 {
     private static readonly Func<object, CancellationToken> CancellationTokenAccessor;

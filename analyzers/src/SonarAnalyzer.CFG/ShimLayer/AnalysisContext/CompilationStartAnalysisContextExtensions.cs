@@ -23,6 +23,9 @@ using static System.Linq.Expressions.Expression;
 
 namespace SonarAnalyzer.ShimLayer.AnalysisContext;
 
+// Code is executed in static initializers and is not detected by the coverage tool
+// See the SonarAnalysisContextTest.SonarCompilationStartAnalysisContext_RegisterSymbolStartAction family of tests to check test coverage manually
+[ExcludeFromCodeCoverage]
 public static class CompilationStartAnalysisContextExtensions
 {
     {
