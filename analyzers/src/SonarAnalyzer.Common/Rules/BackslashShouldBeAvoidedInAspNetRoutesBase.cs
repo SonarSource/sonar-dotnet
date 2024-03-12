@@ -43,16 +43,17 @@ public abstract class BackslashShouldBeAvoidedInAspNetRoutesBase<TSyntaxKind> : 
     protected void Check(SonarSyntaxNodeReportingContext c)
     {
         if (Language.Syntax.NodeExpression(c.Node) is { } expression
-            && Language.FindStringConstant(c.SemanticModel, expression) is { } constantRouteTemplate
+            && Language.FindConstantValue(c.SemanticModel, expression) is string constantRouteTemplate
             && ContainsBackslash(constantRouteTemplate)
-            && IsRouteTemplate(c.SemanticModel, c.Node, c.Node.Parent.Parent))
+            && IsRouteTemplate(c.SemanticModel, c.Node))
         {
             c.ReportIssue(Diagnostic.Create(Rule, expression.GetLocation()));
         }
     }
 
-    private bool IsRouteTemplate(SemanticModel model, SyntaxNode node, SyntaxNode invocation) =>
-        model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
+    private bool IsRouteTemplate(SemanticModel model, SyntaxNode node) =>
+        node.Parent.Parent is var invocation // can be a method invocation or a tuple expression
+        && model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
         && Language.MethodParameterLookup(invocation, methodSymbol) is { } parameterLookup
         && parameterLookup.TryGetSymbol(node, out var parameter)
         && (parameter.HasAttribute(KnownType.System_Diagnostics_CodeAnalysis_StringSyntaxAttribute)
