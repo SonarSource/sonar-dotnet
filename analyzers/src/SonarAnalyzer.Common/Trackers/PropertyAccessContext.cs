@@ -30,5 +30,11 @@ namespace SonarAnalyzer.Helpers
             PropertyName = propertyName;
             PropertySymbol = new Lazy<IPropertySymbol>(() => context.SemanticModel.GetSymbolInfo(context.Node).Symbol as IPropertySymbol);
         }
+
+        public PropertyAccessContext(SyntaxNode node, SemanticModel semanticModel, string propertyName) : base(node, semanticModel)
+        {
+            PropertyName = propertyName;
+            PropertySymbol = new Lazy<IPropertySymbol>(() => semanticModel.GetSymbolInfo(node).Symbol as IPropertySymbol);
+        }
     }
 }
