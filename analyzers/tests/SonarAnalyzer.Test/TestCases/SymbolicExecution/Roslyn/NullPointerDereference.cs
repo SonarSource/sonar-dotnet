@@ -2108,3 +2108,20 @@ class Repro_8324
             Console.WriteLine(n.ToString());    // Compliant
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8907
+// https://github.com/SonarSource/sonar-dotnet/issues/8908
+class Repro_8907_8908
+{
+    private void Foo(string[] values)
+    {
+        if (values == null)
+        {
+            Console.WriteLine("Oops!");
+        }
+        if (5 < values.Count())         // FN, will throw when values is null
+        {
+            _ = values[5].ToString();   // Noncompliant FP, we do not learn NotNull from LINQ methods
+        }
+    }
+}
