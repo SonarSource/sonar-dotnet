@@ -74,6 +74,8 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Microsoft_AspNetCore_Mvc_ControllerBase = new("Microsoft.AspNetCore.Mvc.ControllerBase");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_ControllerAttribute = new("Microsoft.AspNetCore.Mvc.ControllerAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_DisableRequestSizeLimitAttribute = new("Microsoft.AspNetCore.Mvc.DisableRequestSizeLimitAttribute");
+        public static readonly KnownType Microsoft_AspNetCore_Mvc_Filters_IActionFilter = new("Microsoft.AspNetCore.Mvc.Filters.IActionFilter");
+        public static readonly KnownType Microsoft_AspNetCore_Mvc_Filters_IAsyncActionFilter = new("Microsoft.AspNetCore.Mvc.Filters.IAsyncActionFilter");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_FromServicesAttribute = new("Microsoft.AspNetCore.Mvc.FromServicesAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_IActionResult = new("Microsoft.AspNetCore.Mvc.IActionResult");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_IgnoreAntiforgeryTokenAttribute = new("Microsoft.AspNetCore.Mvc.IgnoreAntiforgeryTokenAttribute");

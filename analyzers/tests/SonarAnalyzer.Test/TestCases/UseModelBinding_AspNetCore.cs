@@ -56,7 +56,6 @@ public class TestController : Controller
         _ = Request.Form["""key"""];                              // Noncompliant
         _ = Request.Form.TryGetValue("""key""", out _);           // Noncompliant
 
-        _ = Request.Form[Key];                                    // FN: Key is a readonly field with a constant initializer (Requires cross procedure SE)
         const string key = "id";
         _ = Request.Form[key];                                    // Noncompliant
         _ = Request.Form.TryGetValue(key, out _);                 // Noncompliant
@@ -64,11 +63,22 @@ public class TestController : Controller
         _ = Request.Form.TryGetValue($"prefix.{key}", out _);     // Noncompliant
         _ = Request.Form[$"""prefix.{key}"""];                    // Noncompliant
         _ = Request.Form.TryGetValue($"""prefix.{key}""", out _); // Noncompliant
-        string localKey = "id";
-        _ = Request.Form[localKey];                               // FN (Requires SE)
 
         _ = Request.Form[key: "id"];                              // Noncompliant
         _ = Request.Form.TryGetValue(value: out _, key: "id");    // Noncompliant
+    }
+
+    void MixedAccess(string key)
+    {
+        _ = Request.Form["id"]; // Compliant (a mixed access with constant and non-constant keys is compliant)
+        _ = Request.Form[key];  // Compliant
+    }
+
+    void FalseNegatives()
+    {
+        string localKey = "id";
+        _ = Request.Form[localKey];                               // FN (Requires SE)
+        _ = Request.Form[Key];                                    // FN: Key is a readonly field with a constant initializer (Requires cross procedure SE)
     }
 
     void HeaderAccess()
