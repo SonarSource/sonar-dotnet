@@ -4194,3 +4194,52 @@ class Repro_8570
         }
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8833
+public class Repro_8833
+{
+    public static void Method(List<int> indexes)
+    {
+        string[] current = null;
+        foreach (var idx in indexes)
+        {
+            var tmp = new string[4];
+
+            // Removing this loop will make S2583 disappear
+            for (int j = 0; j < tmp.Length; j++)
+            {
+                tmp[j] = $"{idx}-{j}";
+            }
+
+            if (current != null) // Noncompliant - FP
+            {
+                Console.WriteLine("Not Null"); // Secondary - FP
+            }
+
+            current = tmp;
+        }
+    }
+
+    public static void Method()
+    {
+        var i = 0;
+        while (i < 3)
+        {
+            var j = 0;
+            while (j < 3)
+            {
+                // Removing this loop will make S2583 disappear
+                for (var k = 0; k < 3; k++)
+                {
+                    Console.WriteLine("Loop!");
+                }
+
+                // Noncompliant@+1 - FP
+                Console.WriteLine((i == j) ? 1 : 0); // Secondary - FP
+                j++;
+            }
+
+            i++;
+        }
+    }
+}
