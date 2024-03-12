@@ -24,19 +24,13 @@ Visual Studio 2022 version 17.6+ is required to build the project (due to source
     - .NET Framework 4.8 SDK
     - .NET Framework 4.8 Targeting pack
     - .NET Framework 4.7.2 Targeting pack
-    - .NET Framework 4.6 Targeting pack
     - .NET SDK
     - .NET Compiler Platform SDK
 1. Install also:
-    - [.NET Core 2.1 SDK](https://dotnet.microsoft.com/en-us/download/dotnet)
     - .NET Core 3.1 SDK
     - .NET 5.0 SDK
     - .NET 6.0 SDK
     - .NET 7.0 SDK
-    - .NET 3.5 SDK (SP1) from [Microsoft download center](https://www.microsoft.com/en-us/download/details.aspx?id=21)
-    - Install Visual Studio 2019 and check these SDKs in the *individual components* tab
-        - .NET framework 4 targeting pack
-        - .NET framework 4.5 targeting pack
 1. The following environment variables must be set:
     - **JAVA_HOME** (e.g. `C:\Program Files\Java\jdk-11.0.2`)
     - **MSBUILD_PATH** - path to the MSBuild.exe executable (MSBuild 16 e.g. `C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe`)
