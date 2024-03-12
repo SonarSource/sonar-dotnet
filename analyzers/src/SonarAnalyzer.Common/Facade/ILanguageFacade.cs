@@ -32,7 +32,6 @@ public interface ILanguageFacade
 
     DiagnosticDescriptor CreateDescriptor(string id, string messageFormat, bool? isEnabledByDefault = null, bool fadeOutCode = false);
     object FindConstantValue(SemanticModel model, SyntaxNode node);
-    string FindStringConstant(SemanticModel model, SyntaxNode node);
     IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, IMethodSymbol methodSymbol);
     IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, SemanticModel semanticModel);
     string GetName(SyntaxNode expression);
