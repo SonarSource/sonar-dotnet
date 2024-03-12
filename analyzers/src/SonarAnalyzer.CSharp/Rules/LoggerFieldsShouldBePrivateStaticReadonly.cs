@@ -75,11 +75,9 @@ public sealed class LoggerFieldsShouldBePrivateStaticReadonly : SonarDiagnosticA
 
     private static IEnumerable<SyntaxToken> InvalidFields(BaseFieldDeclarationSyntax field, SemanticModel model)
     {
-        var isStatic = field.Modifiers.Any(x => x.IsKind(SyntaxKind.StaticKeyword));
-        var isReadonly = field.Modifiers.Any(x => x.IsKind(SyntaxKind.ReadOnlyKeyword));
-        var isPrivate = field.Modifiers.All(x => !x.IsAnyKind(InvalidAccessModifiers));
-
-        if (isStatic && isReadonly && isPrivate)
+        if (field.Modifiers.Any(x => x.IsKind(SyntaxKind.StaticKeyword))
+            && field.Modifiers.Any(x => x.IsKind(SyntaxKind.ReadOnlyKeyword))
+            && field.Modifiers.All(x => !x.IsAnyKind(InvalidAccessModifiers)))
         {
             yield break;
         }
