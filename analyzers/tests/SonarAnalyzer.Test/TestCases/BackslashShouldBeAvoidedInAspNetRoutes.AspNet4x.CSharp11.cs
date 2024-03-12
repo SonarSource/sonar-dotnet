@@ -1,5 +1,4 @@
 ﻿using System.Web.Mvc;
-using System;
 
 // ToDo: Remark for the implementer: suitable for a parameterized test
 public class WithAllTypesOfStringsController : Controller
