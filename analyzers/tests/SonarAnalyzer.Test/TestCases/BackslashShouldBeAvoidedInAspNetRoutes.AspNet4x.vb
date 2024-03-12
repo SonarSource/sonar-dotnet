@@ -1,5 +1,4 @@
 ﻿Imports System.Web.Mvc
-Imports System
 
 <Route("A\[controller]")>   ' Noncompliant ^8#16 {{Replace '\' with '/'.}}
 Public Class BackslashOnController
