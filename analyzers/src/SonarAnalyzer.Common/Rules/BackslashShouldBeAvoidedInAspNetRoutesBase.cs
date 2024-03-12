@@ -56,8 +56,7 @@ public abstract class BackslashShouldBeAvoidedInAspNetRoutesBase<TSyntaxKind> : 
         && model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
         && Language.MethodParameterLookup(invocation, methodSymbol) is { } parameterLookup
         && parameterLookup.TryGetSymbol(node, out var parameter)
-        && (parameter.HasAttribute(KnownType.System_Diagnostics_CodeAnalysis_StringSyntaxAttribute)
-            || (methodSymbol.ContainingType.IsAny(KnownType.RouteAttributes) && methodSymbol.IsConstructor() && parameter.Name == "template"));
+        && methodSymbol.ContainingType.IsAny(KnownType.RouteAttributes) && methodSymbol.IsConstructor() && parameter.Name == "template";
 
     private static bool ShouldRegisterAction(Compilation compilation) =>
         compilation.GetTypeByMetadataName(KnownType.System_Web_Mvc_Controller) is not null;
