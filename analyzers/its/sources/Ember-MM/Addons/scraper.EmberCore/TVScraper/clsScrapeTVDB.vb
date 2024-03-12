@@ -577,7 +577,7 @@ Public Class Scraper
                 If String.IsNullOrEmpty(sInfo.TVDBID) Then
                     RaiseEvent ScraperEvent(Enums.TVScraperEventType.Searching, 0, Nothing)
                     Using dTVDBSearch As New dlgTVDBSearchResults
-                        If dTVDBSearch.ShowDialog(sInfo) = DialogResult.OK Then
+                        If dTVDBSearch.ShowDialog(sInfo) = Windows.Forms.DialogResult.OK Then
                             Master.currShow = tmpTVDBShow.Episodes(0)
                             If Not String.IsNullOrEmpty(Master.currShow.TVEp.LocalFile) AndAlso File.Exists(Master.currShow.TVEp.LocalFile) Then
                                 Master.currShow.TVEp.Poster.FromWeb(Master.currShow.TVEp.PosterURL)
@@ -616,7 +616,7 @@ Public Class Scraper
                     Else
                         RaiseEvent ScraperEvent(Enums.TVScraperEventType.Searching, 0, Nothing)
                         Using dTVDBSearch As New dlgTVDBSearchResults
-                            If dTVDBSearch.ShowDialog(sInfo) = DialogResult.OK Then
+                            If dTVDBSearch.ShowDialog(sInfo) = Windows.Forms.DialogResult.OK Then
                                 Master.currShow = tmpTVDBShow.Episodes(0)
                                 If Not String.IsNullOrEmpty(Master.currShow.TVEp.LocalFile) AndAlso Not File.Exists(Master.currShow.TVEp.LocalFile) Then
                                     Master.currShow.TVEp.Poster.FromWeb(Master.currShow.TVEp.PosterURL)
@@ -666,11 +666,11 @@ Public Class Scraper
                 If String.IsNullOrEmpty(sInfo.TVDBID) AndAlso sInfo.ScrapeType = Enums.ScrapeType.FullAsk Then
                     RaiseEvent ScraperEvent(Enums.TVScraperEventType.Searching, 0, Nothing)
                     Using dTVDBSearch As New dlgTVDBSearchResults
-                        If dTVDBSearch.ShowDialog(sInfo) = DialogResult.OK Then
+                        If dTVDBSearch.ShowDialog(sInfo) = Windows.Forms.DialogResult.OK Then
                             Master.currShow = tmpTVDBShow.Show
                             RaiseEvent ScraperEvent(Enums.TVScraperEventType.SelectImages, 0, Nothing)
                             Using dTVImageSel As New dlgTVImageSelect
-                                If dTVImageSel.ShowDialog(sInfo.ShowID, Enums.TVImageType.All, sInfo.ScrapeType, sInfo.WithCurrent) = DialogResult.OK Then
+                                If dTVImageSel.ShowDialog(sInfo.ShowID, Enums.TVImageType.All, sInfo.ScrapeType, sInfo.WithCurrent) = Windows.Forms.DialogResult.OK Then
                                     If Not IsNothing(sInfo.iSeason) AndAlso sInfo.iSeason >= 0 Then
                                         Me.SaveImages()
                                     Else
@@ -690,7 +690,7 @@ Public Class Scraper
                         Master.currShow = tmpTVDBShow.Show
                         RaiseEvent ScraperEvent(Enums.TVScraperEventType.SelectImages, 0, Nothing)
                         Using dTVImageSel As New dlgTVImageSelect
-                            If dTVImageSel.ShowDialog(sInfo.ShowID, Enums.TVImageType.All, sInfo.ScrapeType, sInfo.WithCurrent) = DialogResult.OK Then
+                            If dTVImageSel.ShowDialog(sInfo.ShowID, Enums.TVImageType.All, sInfo.ScrapeType, sInfo.WithCurrent) = Windows.Forms.DialogResult.OK Then
                                 If Not IsNothing(sInfo.iSeason) AndAlso sInfo.iSeason >= 0 Then
                                     Me.SaveImages()
                                 Else
@@ -707,11 +707,11 @@ Public Class Scraper
                     ElseIf sInfo.ScrapeType = Enums.ScrapeType.FullAsk Then
                         RaiseEvent ScraperEvent(Enums.TVScraperEventType.Searching, 0, Nothing)
                         Using dTVDBSearch As New dlgTVDBSearchResults
-                            If dTVDBSearch.ShowDialog(sInfo) = DialogResult.OK Then
+                            If dTVDBSearch.ShowDialog(sInfo) = Windows.Forms.DialogResult.OK Then
                                 Master.currShow = tmpTVDBShow.Show
                                 RaiseEvent ScraperEvent(Enums.TVScraperEventType.SelectImages, 0, Nothing)
                                 Using dTVImageSel As New dlgTVImageSelect
-                                    If dTVImageSel.ShowDialog(sInfo.ShowID, Enums.TVImageType.All, sInfo.ScrapeType, sInfo.WithCurrent) = DialogResult.OK Then
+                                    If dTVImageSel.ShowDialog(sInfo.ShowID, Enums.TVImageType.All, sInfo.ScrapeType, sInfo.WithCurrent) = Windows.Forms.DialogResult.OK Then
                                         If Not IsNothing(sInfo.iSeason) AndAlso sInfo.iSeason >= 0 Then
                                             Me.SaveImages()
                                         Else
@@ -888,7 +888,7 @@ Public Class Scraper
                             End If
                             Me.bwTVDB.ReportProgress(iProgress, "progress")
 
-                            'If AdvancedSettings.GetBooleanSetting("ScrapeActorsThumbs", False) Then
+                            'If AdvancedSettings.GetBooleanSetting("ScrapeActorsThumbs", False) Then 
                             'For Each act As MediaContainers.Person In Episode.TVEp.Actors
                             'Dim img As New Images
                             'img.FromWeb(act.Thumb)

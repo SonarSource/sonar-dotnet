@@ -164,7 +164,7 @@ Partial Class dlgEditMovie
 		'
 		'Cancel_Button
 		'
-		Me.Cancel_Button.DialogResult = DialogResult.Cancel
+		Me.Cancel_Button.DialogResult = System.Windows.Forms.DialogResult.Cancel
 		Me.Cancel_Button.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
 		Me.Cancel_Button.Location = New System.Drawing.Point(781, 553)
 		Me.Cancel_Button.Name = "Cancel_Button"

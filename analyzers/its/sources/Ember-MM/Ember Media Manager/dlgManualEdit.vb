@@ -42,7 +42,7 @@ Public Class dlgManualEdit
 
 #Region "Methods"
 
-    Public Overloads Function ShowDialog(ByVal nfoPath As String) As DialogResult
+    Public Overloads Function ShowDialog(ByVal nfoPath As String) As Windows.Forms.DialogResult
         Me.currFile = nfoPath
 
         Return MyBase.ShowDialog()
@@ -92,7 +92,7 @@ Public Class dlgManualEdit
             If DResult = MsgBoxResult.Yes Then
                 File.WriteAllText(currFile, RichTextBox1.Text, Encoding.UTF8)
                 'RichTextBox1.SaveFile(currFile, RichTextBoxStreamType.PlainText)
-                Me.DialogResult = DialogResult.OK
+                Me.DialogResult = Windows.Forms.DialogResult.OK
 
             ElseIf DResult = MsgBoxResult.Cancel Then
 
@@ -102,7 +102,7 @@ Public Class dlgManualEdit
 
         Else
 
-            If ReturnOK Then Me.DialogResult = DialogResult.OK
+            If ReturnOK Then Me.DialogResult = Windows.Forms.DialogResult.OK
 
         End If
     End Sub

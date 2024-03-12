@@ -286,7 +286,7 @@ Partial Class dlgSetsManager
 		'
 		'btnCancel
 		'
-		Me.btnCancel.DialogResult = DialogResult.Cancel
+		Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
 		Me.btnCancel.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
 		Me.btnCancel.Image = CType(resources.GetObject("btnCancel.Image"), System.Drawing.Image)
 		Me.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft

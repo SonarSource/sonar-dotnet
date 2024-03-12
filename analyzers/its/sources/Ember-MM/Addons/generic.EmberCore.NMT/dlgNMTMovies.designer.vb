@@ -105,7 +105,7 @@ Partial Class dlgNMTMovies
 		'Close_Button
 		'
 		Me.Close_Button.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.Close_Button.DialogResult = DialogResult.OK
+		Me.Close_Button.DialogResult = System.Windows.Forms.DialogResult.OK
 		Me.Close_Button.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
 		Me.Close_Button.Location = New System.Drawing.Point(778, 368)
 		Me.Close_Button.Name = "Close_Button"

@@ -35,7 +35,7 @@ Public Class dlgSortFiles
 
     Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
         With Me.fbdBrowse
-            If .ShowDialog = DialogResult.OK Then
+            If .ShowDialog = Windows.Forms.DialogResult.OK Then
                 If Not String.IsNullOrEmpty(.SelectedPath) Then
                     Me.txtPath.Text = .SelectedPath
                 End If
@@ -64,7 +64,7 @@ Public Class dlgSortFiles
     End Sub
 
     Private Sub Cancel_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel_Button.Click
-        Me.DialogResult = If(Me._hitgo, DialogResult.OK, DialogResult.Cancel)
+        Me.DialogResult = If(Me._hitgo, System.Windows.Forms.DialogResult.OK, System.Windows.Forms.DialogResult.Cancel)
         Me.Close()
     End Sub
 

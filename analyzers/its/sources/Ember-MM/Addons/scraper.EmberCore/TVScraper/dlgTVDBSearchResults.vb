@@ -36,7 +36,7 @@ Public Class dlgTVDBSearchResults
 
 #Region "Methods"
 
-    Public Overloads Function ShowDialog(ByVal _sInfo As Structures.ScrapeInfo) As DialogResult
+    Public Overloads Function ShowDialog(ByVal _sInfo As Structures.ScrapeInfo) As Windows.Forms.DialogResult
         Me.sInfo = _sInfo
         Me.Text = String.Concat(Master.eLang.GetString(85, "TV Search Results"), " - ", sInfo.ShowTitle)
         Scraper.sObject.GetSearchResultsAsync(Me.sInfo)
@@ -51,7 +51,7 @@ Public Class dlgTVDBSearchResults
         Me.Text = String.Concat(Master.eLang.GetString(85, "TV Search Results"), " - ", sInfo.ShowTitle)
         Scraper.sObject.GetSearchResultsAsync(Me.sInfo)
 
-        If MyBase.ShowDialog() = DialogResult.OK Then
+        If MyBase.ShowDialog() = Windows.Forms.DialogResult.OK Then
             Return Me.sInfo
         Else
             Return _sinfo
@@ -165,7 +165,7 @@ Public Class dlgTVDBSearchResults
     End Sub
 
     Private Sub Cancel_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel_Button.Click
-        Me.DialogResult = DialogResult.Cancel
+        Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Close()
     End Sub
 
@@ -279,7 +279,7 @@ Public Class dlgTVDBSearchResults
                 Me.pnlLoading.Visible = True
                 Scraper.sObject.DownloadSeriesAsync(sInfo)
             Else
-                Me.DialogResult = DialogResult.OK
+                Me.DialogResult = System.Windows.Forms.DialogResult.OK
                 Me.Close()
             End If
         ElseIf Me.chkManual.Checked AndAlso Not IsNothing(Me._manualresult) Then
@@ -291,7 +291,7 @@ Public Class dlgTVDBSearchResults
                 Me.pnlLoading.Visible = True
                 Scraper.sObject.DownloadSeriesAsync(sInfo)
             Else
-                Me.DialogResult = DialogResult.OK
+                Me.DialogResult = System.Windows.Forms.DialogResult.OK
                 Me.Close()
             End If
         End If
@@ -379,7 +379,7 @@ Public Class dlgTVDBSearchResults
                 If Not Me.chkManual.Checked Then Me.lvSearchResults.Enabled = True
 
             Case Enums.TVScraperEventType.ShowDownloaded
-                Me.DialogResult = DialogResult.OK
+                Me.DialogResult = System.Windows.Forms.DialogResult.OK
                 Me.Close()
         End Select
     End Sub

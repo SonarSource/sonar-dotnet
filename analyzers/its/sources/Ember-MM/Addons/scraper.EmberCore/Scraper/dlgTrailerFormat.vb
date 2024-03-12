@@ -35,7 +35,7 @@ Public Class dlgTrailerFormat
     Public Overloads Function ShowDialog(ByVal YTURL As String) As String
         Me._yturl = YTURL
 
-        If MyBase.ShowDialog() = DialogResult.OK Then
+        If MyBase.ShowDialog() = Windows.Forms.DialogResult.OK Then
             Return _selectedformaturl
         Else
             Return String.Empty
@@ -43,7 +43,7 @@ Public Class dlgTrailerFormat
     End Function
 
     Private Sub Cancel_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel_Button.Click
-        Me.DialogResult = DialogResult.Cancel
+        Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Close()
     End Sub
 
@@ -75,7 +75,7 @@ Public Class dlgTrailerFormat
     End Sub
 
     Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK_Button.Click
-        Me.DialogResult = DialogResult.OK
+        Me.DialogResult = System.Windows.Forms.DialogResult.OK
         Me.Close()
     End Sub
 

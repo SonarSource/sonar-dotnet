@@ -32,7 +32,7 @@ Public Class dlgDeleteConfirm
 
 #Region "Methods"
 
-    Public Overloads Function ShowDialog(ByVal ItemsToDelete As Dictionary(Of Long, Long), ByVal DelType As Enums.DelType) As DialogResult
+    Public Overloads Function ShowDialog(ByVal ItemsToDelete As Dictionary(Of Long, Long), ByVal DelType As Enums.DelType) As System.Windows.Forms.DialogResult
         Me._deltype = DelType
         Populate_FileList(ItemsToDelete)
         Return MyBase.ShowDialog
@@ -79,7 +79,7 @@ Public Class dlgDeleteConfirm
     End Sub
 
     Private Sub Cancel_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel_Button.Click
-        Me.DialogResult = DialogResult.Cancel
+        Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Close()
     End Sub
 
@@ -145,9 +145,9 @@ Public Class dlgDeleteConfirm
 
     Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK_Button.Click
         If DeleteSelectedItems() Then
-            Me.DialogResult = DialogResult.OK
+            Me.DialogResult = System.Windows.Forms.DialogResult.OK
         Else
-            Me.DialogResult = DialogResult.Cancel
+            Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
         End If
         Me.Close()
     End Sub

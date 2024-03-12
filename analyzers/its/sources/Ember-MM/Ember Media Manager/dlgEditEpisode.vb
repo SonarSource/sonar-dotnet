@@ -83,7 +83,7 @@ Public Class dlgEditEpisode
 
     Private Sub btnManual_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnManual.Click
         Try
-            If dlgManualEdit.ShowDialog(Master.currShow.EpNfoPath) = DialogResult.OK Then
+            If dlgManualEdit.ShowDialog(Master.currShow.EpNfoPath) = Windows.Forms.DialogResult.OK Then
                 Master.currShow.TVEp = NFO.LoadTVEpFromNFO(Master.currShow.EpNfoPath, Master.currShow.TVEp.Season, Master.currShow.TVEp.Episode)
                 Me.FillInfo()
             End If
@@ -192,7 +192,7 @@ Public Class dlgEditEpisode
     End Sub
 
     Private Sub Cancel_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel_Button.Click
-        Me.DialogResult = DialogResult.Cancel
+        Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Close()
     End Sub
 
@@ -368,7 +368,7 @@ Public Class dlgEditEpisode
             Master.eLog.WriteToErrorLog(ex.Message, ex.StackTrace, "Error")
         End Try
 
-        Me.DialogResult = DialogResult.OK
+        Me.DialogResult = System.Windows.Forms.DialogResult.OK
         Me.Close()
     End Sub
 

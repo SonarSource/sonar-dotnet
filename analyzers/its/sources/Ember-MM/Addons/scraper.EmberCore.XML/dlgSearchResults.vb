@@ -58,7 +58,7 @@ Public Class dlgSearchResults
         Me._scrapername = scrapername
         SearchResultsDownloaded()
 
-        If MyBase.ShowDialog = DialogResult.OK Then
+        If MyBase.ShowDialog = Windows.Forms.DialogResult.OK Then
             Return lMediaTag
         Else
             Return Nothing
@@ -142,7 +142,7 @@ Public Class dlgSearchResults
     Private Sub Cancel_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel_Button.Click
         Master.tmpMovie.Clear()
 
-        Me.DialogResult = DialogResult.Cancel
+        Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Close()
     End Sub
 
@@ -200,7 +200,7 @@ Public Class dlgSearchResults
     Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK_Button.Click
         Try
 
-            Me.DialogResult = DialogResult.OK
+            Me.DialogResult = System.Windows.Forms.DialogResult.OK
         Catch ex As Exception
             Master.eLog.WriteToErrorLog(ex.Message, ex.StackTrace, "Error")
         End Try

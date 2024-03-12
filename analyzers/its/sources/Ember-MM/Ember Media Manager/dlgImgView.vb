@@ -31,7 +31,7 @@ Public Class dlgImgView
 
 #Region "Methods"
 
-    Public Overloads Function ShowDialog(ByVal iImage As Image) As DialogResult
+    Public Overloads Function ShowDialog(ByVal iImage As Image) As Windows.Forms.DialogResult
         '//
         ' Overload to pass data
         '\\
@@ -149,7 +149,7 @@ Public Class dlgImgView
         '\\
 
         Try
-            If e.Button = MouseButtons.Left AndAlso pbPicture.Cursor = Cursors.NoMove2D Then
+            If e.Button = Windows.Forms.MouseButtons.Left AndAlso pbPicture.Cursor = Cursors.NoMove2D Then
 
                 Dim DeltaX As Integer = (PanStartPoint.X - e.X)
                 Dim DeltaY As Integer = (PanStartPoint.Y - e.Y)

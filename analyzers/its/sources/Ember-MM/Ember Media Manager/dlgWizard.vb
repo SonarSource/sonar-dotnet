@@ -55,7 +55,7 @@ Public Class dlgWizard
 
 	Private Sub btnMovieAddFolders_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnMovieAddFolder.Click
 		Using dSource As New dlgMovieSource
-			If dSource.ShowDialog = DialogResult.OK Then RefreshSources()
+			If dSource.ShowDialog = Windows.Forms.DialogResult.OK Then RefreshSources()
 		End Using
 	End Sub
 
@@ -88,7 +88,7 @@ Public Class dlgWizard
 
 	Private Sub btnTVAddSource_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTVAddSource.Click
 		Using dSource As New dlgTVSource
-			If dSource.ShowDialog = DialogResult.OK Then
+			If dSource.ShowDialog = Windows.Forms.DialogResult.OK Then
 				RefreshTVSources()
 			End If
 		End Using
@@ -99,7 +99,7 @@ Public Class dlgWizard
 	End Sub
 
 	Private Sub Cancel_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel_Button.Click
-		Me.DialogResult = DialogResult.Cancel
+		Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
 		Me.Close()
 	End Sub
 
@@ -192,7 +192,7 @@ Public Class dlgWizard
 	Private Sub lvMovies_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvMovies.DoubleClick
 		If lvMovies.SelectedItems.Count > 0 Then
 			Using dMovieSource As New dlgMovieSource
-				If dMovieSource.ShowDialog(Convert.ToInt32(lvMovies.SelectedItems(0).Text)) = DialogResult.OK Then
+				If dMovieSource.ShowDialog(Convert.ToInt32(lvMovies.SelectedItems(0).Text)) = Windows.Forms.DialogResult.OK Then
 					Me.RefreshSources()
 				End If
 			End Using
@@ -206,7 +206,7 @@ Public Class dlgWizard
 	Private Sub lvTVSources_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvTVSources.DoubleClick
 		If lvTVSources.SelectedItems.Count > 0 Then
 			Using dTVSource As New dlgTVSource
-				If dTVSource.ShowDialog(Convert.ToInt32(lvTVSources.SelectedItems(0).Text)) = DialogResult.OK Then
+				If dTVSource.ShowDialog(Convert.ToInt32(lvTVSources.SelectedItems(0).Text)) = Windows.Forms.DialogResult.OK Then
 					Me.RefreshTVSources()
 				End If
 			End Using
@@ -219,7 +219,7 @@ Public Class dlgWizard
 
 	Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK_Button.Click
 		Me.SaveSettings()
-		Me.DialogResult = DialogResult.OK
+		Me.DialogResult = System.Windows.Forms.DialogResult.OK
 		Me.Close()
 	End Sub
 

@@ -104,7 +104,7 @@ Public Class dlgEditMovie
     Private Sub btnChangeMovie_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnChangeMovie.Click
         Me.CleanUp()
         ' ***
-        Me.DialogResult = DialogResult.Abort
+        Me.DialogResult = System.Windows.Forms.DialogResult.Abort
         Me.Close()
     End Sub
 
@@ -152,7 +152,7 @@ Public Class dlgEditMovie
 
     Private Sub btnManual_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnManual.Click
         Try
-            If dlgManualEdit.ShowDialog(Master.currMovie.NfoPath) = DialogResult.OK Then
+            If dlgManualEdit.ShowDialog(Master.currMovie.NfoPath) = Windows.Forms.DialogResult.OK Then
                 Master.currMovie.Movie = NFO.LoadMovieFromNFO(Master.currMovie.NfoPath, Master.currMovie.isSingle)
                 Me.FillInfo(False)
             End If
@@ -210,7 +210,7 @@ Public Class dlgEditMovie
     Private Sub btnRescrape_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRescrape.Click
         Me.CleanUp()
         ' ***
-        Me.DialogResult = DialogResult.Retry
+        Me.DialogResult = System.Windows.Forms.DialogResult.Retry
         Me.Close()
     End Sub
 
@@ -448,7 +448,7 @@ Public Class dlgEditMovie
     Private Sub Cancel_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel_Button.Click
         Me.CleanUp()
         Master.currMovie = Master.DB.LoadMovieFromDB(Master.currMovie.ID)
-        Me.DialogResult = DialogResult.Cancel
+        Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Close()
     End Sub
 
@@ -913,7 +913,7 @@ Public Class dlgEditMovie
             Master.eLog.WriteToErrorLog(ex.Message, ex.StackTrace, "Error")
         End Try
 
-        Me.DialogResult = DialogResult.OK
+        Me.DialogResult = System.Windows.Forms.DialogResult.OK
         Me.Close()
     End Sub
 

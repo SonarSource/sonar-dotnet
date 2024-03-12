@@ -407,7 +407,7 @@ Public Class dlgSettings
 
     Private Sub btnAddTVSource_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAddTVSource.Click
         Using dSource As New dlgTVSource
-            If dSource.ShowDialog = DialogResult.OK Then
+            If dSource.ShowDialog = Windows.Forms.DialogResult.OK Then
                 RefreshTVSources()
                 Me.SetApplyButton(True)
                 Me.sResult.NeedsUpdate = True
@@ -439,7 +439,7 @@ Public Class dlgSettings
 
     Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
         With Me.fbdBrowse
-            If .ShowDialog = DialogResult.OK Then
+            If .ShowDialog = Windows.Forms.DialogResult.OK Then
                 If Not String.IsNullOrEmpty(.SelectedPath.ToString) AndAlso Directory.Exists(.SelectedPath) Then
                     Me.txtBDPath.Text = .SelectedPath.ToString
                 End If
@@ -502,7 +502,7 @@ Public Class dlgSettings
     Private Sub btnEditSource_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEditSource.Click
         If lvMovies.SelectedItems.Count > 0 Then
             Using dMovieSource As New dlgMovieSource
-                If dMovieSource.ShowDialog(Convert.ToInt32(lvMovies.SelectedItems(0).Text)) = DialogResult.OK Then
+                If dMovieSource.ShowDialog(Convert.ToInt32(lvMovies.SelectedItems(0).Text)) = Windows.Forms.DialogResult.OK Then
                     Me.RefreshSources()
                     Me.sResult.NeedsUpdate = True
                     Me.SetApplyButton(True)
@@ -536,7 +536,7 @@ Public Class dlgSettings
     Private Sub btnEditTVSource_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEditTVSource.Click
         If lvTVSources.SelectedItems.Count > 0 Then
             Using dTVSource As New dlgTVSource
-                If dTVSource.ShowDialog(Convert.ToInt32(lvTVSources.SelectedItems(0).Text)) = DialogResult.OK Then
+                If dTVSource.ShowDialog(Convert.ToInt32(lvTVSources.SelectedItems(0).Text)) = Windows.Forms.DialogResult.OK Then
                     Me.RefreshTVSources()
                     Me.sResult.NeedsUpdate = True
                     Me.SetApplyButton(True)
@@ -579,7 +579,7 @@ Public Class dlgSettings
 
     Private Sub btnMovieAddFolders_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnMovieAddFolder.Click
         Using dSource As New dlgMovieSource
-            If dSource.ShowDialog = DialogResult.OK Then
+            If dSource.ShowDialog = Windows.Forms.DialogResult.OK Then
                 RefreshSources()
                 Me.SetApplyButton(True)
                 Me.sResult.NeedsUpdate = True
@@ -725,7 +725,7 @@ Public Class dlgSettings
 
     Private Sub btnGetTVProfiles_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGetTVProfiles.Click
         Using dd As New dlgTVRegExProfiles
-            If dd.ShowDialog() = DialogResult.OK Then
+            If dd.ShowDialog() = Windows.Forms.DialogResult.OK Then
                 Me.ShowRegex.Clear()
                 Me.ShowRegex.AddRange(dd.ShowRegex)
                 Me.LoadShowRegex()
@@ -2891,7 +2891,7 @@ Public Class dlgSettings
     Private Sub lvMovies_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvMovies.DoubleClick
         If lvMovies.SelectedItems.Count > 0 Then
             Using dMovieSource As New dlgMovieSource
-                If dMovieSource.ShowDialog(Convert.ToInt32(lvMovies.SelectedItems(0).Text)) = DialogResult.OK Then
+                If dMovieSource.ShowDialog(Convert.ToInt32(lvMovies.SelectedItems(0).Text)) = Windows.Forms.DialogResult.OK Then
                     Me.RefreshSources()
                     Me.sResult.NeedsUpdate = True
                     Me.SetApplyButton(True)
@@ -2923,7 +2923,7 @@ Public Class dlgSettings
     Private Sub lvTVSources_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvTVSources.DoubleClick
         If lvTVSources.SelectedItems.Count > 0 Then
             Using dTVSource As New dlgTVSource
-                If dTVSource.ShowDialog(Convert.ToInt32(lvTVSources.SelectedItems(0).Text)) = DialogResult.OK Then
+                If dTVSource.ShowDialog(Convert.ToInt32(lvTVSources.SelectedItems(0).Text)) = Windows.Forms.DialogResult.OK Then
                     Me.RefreshTVSources()
                     Me.sResult.NeedsUpdate = True
                     Me.SetApplyButton(True)

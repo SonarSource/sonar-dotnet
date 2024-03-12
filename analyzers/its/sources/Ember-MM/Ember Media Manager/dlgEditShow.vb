@@ -131,7 +131,7 @@ Public Class dlgEditShow
 
     Private Sub btnManual_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnManual.Click
         Try
-            If dlgManualEdit.ShowDialog(Master.currShow.ShowNfoPath) = DialogResult.OK Then
+            If dlgManualEdit.ShowDialog(Master.currShow.ShowNfoPath) = Windows.Forms.DialogResult.OK Then
                 Master.currShow.TVShow = NFO.LoadTVShowFromNFO(Master.currShow.ShowNfoPath)
                 Me.FillInfo()
             End If
@@ -315,7 +315,7 @@ Public Class dlgEditShow
     End Sub
 
     Private Sub Cancel_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel_Button.Click
-        Me.DialogResult = DialogResult.Cancel
+        Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Close()
     End Sub
 
@@ -521,7 +521,7 @@ Public Class dlgEditShow
             Master.eLog.WriteToErrorLog(ex.Message, ex.StackTrace, "Error")
         End Try
 
-        Me.DialogResult = DialogResult.OK
+        Me.DialogResult = System.Windows.Forms.DialogResult.OK
         Me.Close()
     End Sub
 

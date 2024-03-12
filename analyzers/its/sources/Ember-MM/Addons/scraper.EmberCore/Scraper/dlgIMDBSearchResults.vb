@@ -48,7 +48,7 @@ Public Class dlgIMDBSearchResults
 
     #Region "Methods"
 
-    Public Overloads Function ShowDialog(ByVal sMovieTitle As String, ByVal filterOptions As Structures.ScrapeOptions) As DialogResult
+    Public Overloads Function ShowDialog(ByVal sMovieTitle As String, ByVal filterOptions As Structures.ScrapeOptions) As Windows.Forms.DialogResult
         Me.tmrWait.Enabled = False
         Me.tmrWait.Interval = 250
         Me.tmrLoad.Enabled = False
@@ -65,7 +65,7 @@ Public Class dlgIMDBSearchResults
         Return MyBase.ShowDialog()
     End Function
 
-    Public Overloads Function ShowDialog(ByVal Res As IMDB.MovieSearchResults, ByVal sMovieTitle As String) As DialogResult
+    Public Overloads Function ShowDialog(ByVal Res As IMDB.MovieSearchResults, ByVal sMovieTitle As String) As Windows.Forms.DialogResult
         Me.tmrWait.Enabled = False
         Me.tmrWait.Interval = 250
         Me.tmrLoad.Enabled = False
@@ -138,7 +138,7 @@ Public Class dlgIMDBSearchResults
     Private Sub Cancel_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel_Button.Click
         Master.tmpMovie.Clear()
 
-        Me.DialogResult = DialogResult.Cancel
+        Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Close()
     End Sub
 
@@ -231,7 +231,7 @@ Public Class dlgIMDBSearchResults
                     End If
                 End If
             End If
-            Me.DialogResult = DialogResult.OK
+            Me.DialogResult = System.Windows.Forms.DialogResult.OK
         Catch ex As Exception
             Master.eLog.WriteToErrorLog(ex.Message, ex.StackTrace, "Error")
         End Try

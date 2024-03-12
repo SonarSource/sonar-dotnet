@@ -58,7 +58,7 @@ Partial Class dlgTrailer
 		'
 		'Cancel_Button
 		'
-		Me.Cancel_Button.DialogResult = DialogResult.Cancel
+		Me.Cancel_Button.DialogResult = System.Windows.Forms.DialogResult.Cancel
 		Me.Cancel_Button.Location = New System.Drawing.Point(369, 339)
 		Me.Cancel_Button.Name = "Cancel_Button"
 		Me.Cancel_Button.Size = New System.Drawing.Size(67, 23)

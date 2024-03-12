@@ -54,7 +54,7 @@ Public Class dlgAddEditActor
             Me.eActor = inActor
         End If
 
-        If MyBase.ShowDialog() = DialogResult.OK Then
+        If MyBase.ShowDialog() = Windows.Forms.DialogResult.OK Then
             Return Me.eActor
         Else
             Return Nothing
@@ -115,7 +115,7 @@ Public Class dlgAddEditActor
         ' Get me out of here!
         '\\
 
-        Me.DialogResult = DialogResult.Cancel
+        Me.DialogResult = Windows.Forms.DialogResult.Cancel
 
         Me.Close()
     End Sub
@@ -153,7 +153,7 @@ Public Class dlgAddEditActor
             Me.eActor.Name = Me.txtName.Text
             Me.eActor.Role = Me.txtRole.Text
             Me.eActor.Thumb = Me.txtThumb.Text
-            Me.DialogResult = DialogResult.OK
+            Me.DialogResult = Windows.Forms.DialogResult.OK
         Catch ex As Exception
             Master.eLog.WriteToErrorLog(ex.Message, ex.StackTrace, "Error")
         End Try

@@ -478,7 +478,7 @@ Public Class dlgImgSelect
             Threading.Thread.Sleep(50)
         End While
 
-        Me.DialogResult = DialogResult.Cancel
+        Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Close()
     End Sub
 
@@ -533,7 +533,7 @@ Public Class dlgImgSelect
                 Else
                     MsgBox(Master.eLang.GetString(30, "No Posters found for this movie."), MsgBoxStyle.Information, Master.eLang.GetString(31, "No Posters Found"))
                 End If
-                Me.DialogResult = DialogResult.Cancel
+                Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
                 Me.Close()
             End If
 
@@ -1016,7 +1016,7 @@ Public Class dlgImgSelect
             Master.eLog.WriteToErrorLog(ex.Message, ex.StackTrace, "Error")
         End Try
 
-        Me.DialogResult = DialogResult.OK
+        Me.DialogResult = System.Windows.Forms.DialogResult.OK
         Me.Close()
     End Sub
 
@@ -1066,7 +1066,7 @@ Public Class dlgImgSelect
                     Else
                         MsgBox(Master.eLang.GetString(30, "No Posters found for this movie."), MsgBoxStyle.Information, Master.eLang.GetString(31, "No Posters Found"))
                     End If
-                    Me.DialogResult = DialogResult.Cancel
+                    Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
                     Me.Close()
                 Else
                     noImages = True

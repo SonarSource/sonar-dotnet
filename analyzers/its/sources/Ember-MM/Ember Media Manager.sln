@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Ember Media Manager", "Ember Media Manager\Ember Media Manager.vbproj", "{9B57D3AB-AF12-4012-B945-284C2448DC81}"
 	ProjectSection(ProjectDependencies) = postProject
 		{EAAB0601-6478-44D2-A39C-89B0850D7833} = {EAAB0601-6478-44D2-A39C-89B0850D7833}
@@ -49,13 +51,6 @@ EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "scraper.EmberCore.XML", "Addons\scraper.EmberCore.XML\scraper.EmberCore.XML.vbproj", "{E567C031-1F7B-4637-9B3A-806988DE50CF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ember.Plugins", "Ember.Plugins\Ember.Plugins.csproj", "{9496C697-5AFD-4813-AEDC-AF33FACEADF0}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{8564C91B-7F49-482F-A4B3-C3D7E818648F}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -145,5 +140,8 @@ Global
 		{62356BCF-D15A-4BF1-B980-395CEC0004A9} = {4FD2B635-11BD-4532-96F6-97ECB41072A1}
 		{EF6A550E-DD76-4F4D-8250-8598140F828B} = {4FD2B635-11BD-4532-96F6-97ECB41072A1}
 		{E567C031-1F7B-4637-9B3A-806988DE50CF} = {4FD2B635-11BD-4532-96F6-97ECB41072A1}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {077DAD6D-FA38-42D5-9016-B6DE9A87B5F2}
 	EndGlobalSection
 EndGlobal
