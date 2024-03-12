@@ -73,7 +73,7 @@ public sealed class LoggerFieldsShouldBePrivateStaticReadonly : SonarDiagnosticA
             }
         });
 
-    private static IEnumerable<SyntaxToken> InvalidFields(FieldDeclarationSyntax field, SemanticModel model)
+    private static IEnumerable<SyntaxToken> InvalidFields(BaseFieldDeclarationSyntax field, SemanticModel model)
     {
         var isStatic = field.Modifiers.Any(x => x.IsKind(SyntaxKind.StaticKeyword));
         var isReadonly = field.Modifiers.Any(x => x.IsKind(SyntaxKind.ReadOnlyKeyword));
@@ -84,9 +84,14 @@ public sealed class LoggerFieldsShouldBePrivateStaticReadonly : SonarDiagnosticA
             yield break;
         }
 
-        foreach (var variable in field.Declaration.Variables.Where(x => model.GetDeclaredSymbol(x).GetSymbolType().DerivesOrImplementsAny(Loggers)))
+        foreach (var variable in field.Declaration.Variables.Where(ShouldRaise))
         {
             yield return variable.Identifier;
         }
+
+        bool ShouldRaise(VariableDeclaratorSyntax variable) =>
+            model.GetDeclaredSymbol(variable) is { } symbol
+            && !symbol.ContainingType.IsInterface() // exclude default interface implementation fields
+            && symbol.GetSymbolType().DerivesOrImplementsAny(Loggers);
     }
 }

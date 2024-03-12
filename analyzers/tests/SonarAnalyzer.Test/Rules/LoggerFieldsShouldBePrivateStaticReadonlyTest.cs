@@ -34,8 +34,9 @@ public class LoggerFieldsShouldBePrivateStaticReadonlyTest
             .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
             .Verify();
 
+#if NET
     [TestMethod]
-    public void LoggerFieldsShouldBePrivateStaticReadonly_MultipleAccessModifiers_CS() =>
+    public void LoggerFieldsShouldBePrivateStaticReadonly_CSharp8() =>
         Builder
             .AddSnippet("""
                 using Microsoft.Extensions.Logging;
@@ -45,10 +46,18 @@ public class LoggerFieldsShouldBePrivateStaticReadonlyTest
                     private protected static readonly ILogger logger;   // Noncompliant
                     //                                        ^^^^^^
                 }
+
+                public interface Service
+                {
+                    static ILogger StaticLogger;
+                    protected internal static ILogger Logger;
+                    private static ILogger Test;
+                }
                 """)
             .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
-            .WithOptions(ParseOptionsHelper.FromCSharp8) // private protected was introduced at C# 7.2
+            .WithOptions(ParseOptionsHelper.FromCSharp8)
             .Verify();
+#endif
 
     [TestMethod]
     public void LoggerFieldsShouldBePrivateStaticReadonly_Serilog_CS() =>
