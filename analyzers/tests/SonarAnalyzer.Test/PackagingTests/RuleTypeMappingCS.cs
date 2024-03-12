@@ -1236,7 +1236,7 @@ internal static class RuleTypeMappingCS
         ["S1309"] = "CODE_SMELL",
         // ["S1310"],
         // ["S1311"],
-        // ["S1312"],
+        ["S1312"] = "CODE_SMELL",
         ["S1313"] = "SECURITY_HOTSPOT",
         // ["S1314"],
         // ["S1315"],
