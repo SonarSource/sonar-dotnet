@@ -9,7 +9,7 @@
     {
       "Id": "S6145",
       "Message": "Change this to \u0027Option Strict On\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AnalyzeGenerated.VB/obj/Debug/.NETFramework,Version=v4.5.2.AssemblyAttributes.vb#L2",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AnalyzeGenerated.VB/obj/Debug/.NETFramework,Version=v4.8.AssemblyAttributes.vb#L2",
       "Location": "Line 2 Position 13-30"
     }
   ]
