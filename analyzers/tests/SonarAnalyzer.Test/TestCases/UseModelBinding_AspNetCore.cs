@@ -16,35 +16,35 @@ public class TestController : Controller
         _ = Request.Form.TryGetValue("id", out _);        // Noncompliant {{Use model binding instead of accessing the raw request data}}
         //  ^^^^^^^^^^^^^^^^^^^^^^^^
         _ = Request.Form.ContainsKey("id");               // Noncompliant {{Use model binding instead of accessing the raw request data}}
-        //          ^^^^
+        //  ^^^^^^^^^^^^^^^^^^^^^^^^
         _ = Request.Headers["id"];                        // Noncompliant {{Use model binding instead of accessing the raw request data}}
-        //          ^^^^^^^
+        //  ^^^^^^^^^^^^^^^
         _ = Request.Headers.TryGetValue("id", out _);     // Noncompliant {{Use model binding instead of accessing the raw request data}}
-        //          ^^^^^^^
+        //  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
         _ = Request.Headers.ContainsKey("id");            // Noncompliant {{Use model binding instead of accessing the raw request data}}
-        //          ^^^^^^^
+        //  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
         _ = Request.Query["id"];                          // Noncompliant {{Use model binding instead of accessing the raw request data}}
-        //          ^^^^^
+        //  ^^^^^^^^^^^^^
         _ = Request.Query.TryGetValue("id", out _);       // Noncompliant {{Use model binding instead of accessing the raw request data}}
-        //          ^^^^^
+        //  ^^^^^^^^^^^^^^^^^^^^^^^^^
         _ = Request.RouteValues["id"];                    // Noncompliant {{Use model binding instead of accessing the raw request data}}
-        //          ^^^^^^^^^^^
+        //  ^^^^^^^^^^^^^^^^^^^
         _ = Request.RouteValues.TryGetValue("id", out _); // Noncompliant {{Use model binding instead of accessing the raw request data}}
-        //          ^^^^^^^^^^^
+        //  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         _ = Request.Form.Files;                           // Noncompliant {{Use IFormFile or IFormFileCollection binding instead}}
-        //               ^^^^^
+        //  ^^^^^^^^^^^^^^^^^^
         _ = Request.Form.Files["file"];                   // Noncompliant {{Use IFormFile or IFormFileCollection binding instead}}
-        //               ^^^^^
+        //  ^^^^^^^^^^^^^^^^^^
         _ = Request.Form.Files[0];                        // Noncompliant {{Use IFormFile or IFormFileCollection binding instead}}
-        //               ^^^^^
+        //  ^^^^^^^^^^^^^^^^^^
         _ = Request.Form.Files.Any();                     // Noncompliant {{Use IFormFile or IFormFileCollection binding instead}}
-        //               ^^^^^
+        //  ^^^^^^^^^^^^^^^^^^
         _ = Request.Form.Files.Count;                     // Noncompliant {{Use IFormFile or IFormFileCollection binding instead}}
-        //               ^^^^^
+        //  ^^^^^^^^^^^^^^^^^^
         _ = Request.Form.Files.GetFile("file");           // Noncompliant {{Use IFormFile or IFormFileCollection binding instead}}
-        //               ^^^^^
+        //  ^^^^^^^^^^^^^^^^^^
         _ = Request.Form.Files.GetFiles("file");          // Noncompliant {{Use IFormFile or IFormFileCollection binding instead}}
-        //               ^^^^^
+        //  ^^^^^^^^^^^^^^^^^^
         return default;
     }
 
@@ -69,6 +69,11 @@ public class TestController : Controller
 
         _ = Request.Form[key: "id"];                              // Noncompliant
         _ = Request.Form.TryGetValue(value: out _, key: "id");    // Noncompliant
+    }
+
+    void HeaderAccess()
+    {
+        Request.Headers["id"] = "Assignment";                     // Compliant
     }
 
     // Parameterized for Form, Headers, Query, RouteValues / Request, this.Request, ControllerContext.HttpContext.Request / [FromForm], [FromQuery], [FromRoute], [FromHeader]
@@ -136,10 +141,10 @@ public class CodeBlocksController : Controller
     {
         _ = (true ? Request : Request).Form["id"]; // Noncompliant
         _ = ValidatedRequest().Form["id"]; // Noncompliant
-        _ = ValidRequest.Form["id"];
-        _ = Form["id"];      //  FN: requires cross method SE
-        _ = this.Form["id"]; //  FN: requires cross method SE 
-        _ = new CodeBlocksController().Form["id"]; //  Compliant
+        _ = ValidRequest.Form["id"]; // Noncompliant
+        _ = Form["id"];      // Noncompliant
+        _ = this.Form["id"]; // Noncompliant
+        _ = new CodeBlocksController().Form["id"]; // Noncompliant
 
         HttpRequest ValidatedRequest() => Request;
     }

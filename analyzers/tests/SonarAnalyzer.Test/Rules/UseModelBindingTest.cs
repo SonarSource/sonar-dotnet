@@ -40,5 +40,29 @@ public class UseModelBindingTest
     [TestMethod]
     public void UseModelBinding_AspNetCore_CS() =>
         builderAspNetCore.AddPaths("UseModelBinding_AspNetCore.cs").Verify();
+
+    [TestMethod]
+    public void UseModelBinding_AspNetCore_CS_Debug() =>
+        builderAspNetCore
+            .WithConcurrentAnalysis(false)
+            .AddSnippet("""
+                using Microsoft.AspNetCore.Http;
+                using Microsoft.AspNetCore.Mvc;
+                using Microsoft.AspNetCore.Mvc.Filters;
+                using System;
+                using System.Linq;
+                using System.Threading.Tasks;
+
+                public class TestController : Controller
+                {
+                    private readonly string Key = "id";
+
+                    public IActionResult Post()
+                    {
+                        _ = Request.Headers.TryGetValue("id", out _);     // Noncompliant {{Use model binding instead of accessing the raw request data}}
+                        return null;
+                    }
+                }
+            """).Verify();
 #endif
 }
