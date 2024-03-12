@@ -657,12 +657,6 @@
     {
       "Id": "S2354",
       "Message": "Reformat the code to remove this use of the line continuation character.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5324",
-      "Location": "Line 5324 Position 115-116"
-    },
-    {
-      "Id": "S2354",
-      "Message": "Reformat the code to remove this use of the line continuation character.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6513",
       "Location": "Line 6513 Position 185-186"
     },
