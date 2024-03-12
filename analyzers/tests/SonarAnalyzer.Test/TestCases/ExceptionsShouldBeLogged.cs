@@ -199,6 +199,29 @@ public class TestCases
         }
     }
 
+    public void LogFromSwitchStatement(bool condition)
+    {
+        try { }
+        catch (DivideByZeroException e)
+        {
+            switch (condition)
+            {
+                case true:
+                    logger.LogCritical("Message!");   // Noncompliant
+                    break;
+            }
+        }
+        catch (Exception e)
+        {
+            switch (condition)
+            {
+                case true:
+                    logger.LogCritical(e, "Message!");
+                    break;
+            }
+        }
+    }
+
     public void LogFromCustomLogger()
     {
         try { }

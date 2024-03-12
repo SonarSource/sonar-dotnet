@@ -35,6 +35,30 @@ public class ExceptionsShouldBeLoggedOrThrownTest
             .Verify();
 
     [TestMethod]
+    public void ExceptionsShouldBeLoggedOrThrown_Coalesce_CS() =>
+        builder
+            .AddSnippet("""
+                using System;
+                using Microsoft.Extensions.Logging;
+
+                public class Program
+                {
+                    public void Method(ILogger logger, object x)
+                    {
+                        try { }
+                        catch (SystemException e)
+                        {
+                            logger.LogError(e, "Message!");
+                            x = x ?? throw e;
+                        }
+                    }
+                }
+                """)
+            .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
+            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .Verify();
+
+    [TestMethod]
     public void ExceptionsShouldBeLoggedOrThrown_Log4net_CS() =>
         builder
             .AddSnippet("""
