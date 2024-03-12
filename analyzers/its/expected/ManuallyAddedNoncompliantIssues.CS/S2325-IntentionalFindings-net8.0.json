@@ -2,6 +2,12 @@
   "Issues": [
     {
       "Id": "S2325",
+      "Message": "Make \u0027Method\u0027 a static method.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S3416.cs#L7",
+      "Location": "Line 7 Position 21-27"
+    },
+    {
+      "Id": "S2325",
       "Message": "Make \u0027ValueAccessOnEmptyNullable\u0027 a static method.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S3655.cs#L13",
       "Location": "Line 13 Position 21-47"
