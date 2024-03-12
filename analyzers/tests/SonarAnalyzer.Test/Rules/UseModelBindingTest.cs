@@ -53,16 +53,36 @@ public class UseModelBindingTest
                 using System.Linq;
                 using System.Threading.Tasks;
 
-                public class TestController : Controller
+                public class OverridesController : Controller
                 {
-                    private readonly string Key = "id";
-
-                    public IActionResult Post()
+                    public void Action()
                     {
-                        _ = Request.Headers.TryGetValue("id", out _);     // Noncompliant {{Use model binding instead of accessing the raw request data}}
-                        return null;
+                        _ = Request.Form["id"]; // Noncompliant 
+                    }
+                    private void Undecidable(HttpContext context)
+                    {
+                        // Implementation: It might be difficult to distinguish between access to "Request" that originate from overrides vs. "Request" access that originate from action methods.
+                        // This is especially true for "Request" which originate from parameters like here. We may need to redeclare such cases as FNs (see e.g HandleRequest above).
+                        _ = context.Request.Form["id"]; // Undecidable: request may originate from an action method (which supports binding), or from one of the following overrides (which don't).
+                    }
+                    private void Undecidable(HttpRequest request)
+                    {
+                        _ = request.Form["id"]; // Undecidable: request may originate from an action method (which supports binding), or from one of the following overloads (which don't).
+                    }
+                    public override void OnActionExecuted(ActionExecutedContext context)
+                    {
+                        _ = context.HttpContext.Request.Form["id"]; // Compliant: Model binding is not supported here
+                    }
+                    public override void OnActionExecuting(ActionExecutingContext context)
+                    {
+                        _ = context.HttpContext.Request.Form["id"]; // Compliant: Model binding is not supported here
+                    }
+                    public override Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
+                    {
+                        _ = context.HttpContext.Request.Form["id"]; // Compliant: Model binding is not supported here
+                        return base.OnActionExecutionAsync(context, next);
                     }
                 }
-            """).Verify();
+                """).Verify();
 #endif
 }

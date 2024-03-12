@@ -106,21 +106,47 @@ public sealed class UseModelBinding : SonarDiagnosticAnalyzer
             {
                 compilationStartContext.RegisterSymbolStartAction(symbolStartContext =>
                 {
+                    var hasOverrides = false;
+                    var controllerCandidates = new List<ReportCandidate>();
                     if (symbolStartContext.Symbol is INamedTypeSymbol namedType
                         && namedType.IsControllerType())
                     {
                         if (argumentDescriptors.Any())
                         {
-                            symbolStartContext.RegisterSyntaxNodeAction(nodeContext =>
+                            symbolStartContext.RegisterCodeBlockStartAction<SyntaxKind>(codeBlockStart =>
                             {
-                                var argument = (ArgumentSyntax)nodeContext.Node;
-                                var context = new ArgumentContext(argument, nodeContext.SemanticModel);
-                                if (argumentDescriptors.Any(x => argumentTracker.MatchArgument(x)(context))
-                                    && nodeContext.SemanticModel.GetConstantValue(argument.Expression) is { HasValue: true, Value: string })
+                                var isOverride = codeBlockStart.OwningSymbol is IMethodSymbol method
+                                    && method.ExplicitOrImplicitInterfaceImplementations().Any(x => x is IMethodSymbol { ContainingType: { } container } && container.IsAny(
+                                        KnownType.Microsoft_AspNetCore_Mvc_Filters_IActionFilter,
+                                        KnownType.Microsoft_AspNetCore_Mvc_Filters_IAsyncActionFilter));
+                                hasOverrides |= isOverride;
+                                var allConstantAccess = true;
+                                var codeBlockCandidates = new List<ReportCandidate>();
+                                if (!isOverride)
                                 {
-                                    nodeContext.ReportIssue(Diagnostic.Create(Rule, GetPrimaryLocation(argument), UseModelBindingMessage));
+                                    codeBlockStart.RegisterNodeAction(nodeContext =>
+                                    {
+                                        var argument = (ArgumentSyntax)nodeContext.Node;
+                                        var context = new ArgumentContext(argument, nodeContext.SemanticModel);
+                                        if (argumentDescriptors.Any(x => argumentTracker.MatchArgument(x)(context)))
+                                        {
+                                            allConstantAccess &= nodeContext.SemanticModel.GetConstantValue(argument.Expression) is { HasValue: true, Value: string };
+                                            if (allConstantAccess)
+                                            {
+                                                var originatesFromParameter = OriginatesFromParameter(nodeContext.SemanticModel, argument);
+                                                codeBlockCandidates.Add(new(UseModelBindingMessage, GetPrimaryLocation(argument), originatesFromParameter));
+                                            }
+                                        }
+                                    }, SyntaxKind.Argument);
+                                    codeBlockStart.RegisterCodeBlockEndAction(codeBlockEnd =>
+                                    {
+                                        if (allConstantAccess)
+                                        {
+                                            controllerCandidates.AddRange(codeBlockCandidates);
+                                        }
+                                    });
                                 }
-                            }, SyntaxKind.Argument);
+                            });
                         }
                         if (propertyAccessDescriptors.Any())
                         {
@@ -135,18 +161,52 @@ public sealed class UseModelBinding : SonarDiagnosticAnalyzer
                             }, SyntaxKind.SimpleMemberAccessExpression);
                         }
                     }
+                    symbolStartContext.RegisterSymbolEndAction(symbolEnd =>
+                    {
+                        foreach (var candidate in controllerCandidates)
+                        {
+                            if (hasOverrides && candidate.OriginatesFromParameter)
+                            {
+                                continue;
+                            }
+                            symbolEnd.ReportIssue(Diagnostic.Create(Rule, candidate.Location, candidate.Message));
+                        }
+                    });
                 }, SymbolKind.NamedType);
             }
         });
     }
 
-    private static Location GetPrimaryLocation(ArgumentSyntax argument) =>
+    private static bool OriginatesFromParameter(SemanticModel semanticModel, ArgumentSyntax argument) =>
+        GetExpressionOfArgumentParent(argument) is { } parentExpression
+            && MostLeftOfDottedChain(parentExpression) is { } mostLeft
+            && semanticModel.GetSymbolInfo(mostLeft).Symbol is IParameterSymbol;
+
+    private static ExpressionSyntax MostLeftOfDottedChain(ExpressionSyntax root)
+    {
+        var current = root.GetRootConditionalAccessExpression() ?? root;
+        while (current.Kind() is SyntaxKind.SimpleMemberAccessExpression or SyntaxKind.ElementAccessExpression)
+        {
+            current = current switch
+            {
+                MemberAccessExpressionSyntax { Expression: { } left } => left,
+                ElementAccessExpressionSyntax { Expression: { } left } => left,
+                _ => throw new InvalidOperationException("Unreachable"),
+            };
+        }
+        return current;
+    }
+    private static ExpressionSyntax GetExpressionOfArgumentParent(ArgumentSyntax argument) =>
         argument switch
         {
-            { Parent: BracketedArgumentListSyntax { Parent: ElementAccessExpressionSyntax { Expression: { } expression } } } => expression.GetLocation(),
-            { Parent: ArgumentListSyntax { Parent: InvocationExpressionSyntax { Expression: { } expression } } } => expression.GetLocation(),
-            _ => argument.GetLocation(),
+            { Parent: BracketedArgumentListSyntax { Parent: ElementBindingExpressionSyntax { Parent: ConditionalAccessExpressionSyntax { Expression: { } expression } } } } => expression,
+            { Parent: BracketedArgumentListSyntax { Parent: ElementAccessExpressionSyntax { Expression: { } expression } } } => expression,
+            { Parent: ArgumentListSyntax { Parent: InvocationExpressionSyntax { Expression: { } expression } } } => expression,
+            _ => null,
         };
+
+    private static Location GetPrimaryLocation(ArgumentSyntax argument) =>
+        ((SyntaxNode)GetExpressionOfArgumentParent(argument) ?? argument).GetLocation();
 
     private static bool IsGetterParameter(IParameterSymbol parameter) =>
         parameter.ContainingSymbol is IMethodSymbol { MethodKind: MethodKind.PropertyGet };
@@ -156,4 +216,6 @@ public sealed class UseModelBinding : SonarDiagnosticAnalyzer
             && method.ContainingType.TypeArguments is { Length: 2 } typeArguments
             && typeArguments[0].Is(KnownType.System_String)
             && typeArguments[1].Is(KnownType.Microsoft_Extensions_Primitives_StringValues);
+
+    private readonly record struct ReportCandidate(string Message, Location Location, bool OriginatesFromParameter = false);
 }
