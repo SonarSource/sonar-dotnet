@@ -43,8 +43,8 @@ languages in [SonarQube](https://www.sonarsource.com/products/sonarqube), [Sonar
 
 ## Get started
 
-* [Building, testing and debugging the Java plugin](./docs/contributing-plugin.md)
 * [Building, testing and debugging the .NET analyzer](./docs/contributing-analyzer.md)
+* [Building, testing and debugging the Java plugin](./docs/contributing-plugin.md)
 * [How to re-generate NuGet lock files](./docs/regenerate-lock-files.md)
 * [Using the rspec.ps1 script](./scripts/rspec/README.md)
 
