@@ -2125,3 +2125,20 @@ class Repro_8907_8908
         }
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8910
+class Repro_8910
+{
+    private void Foo(List<string> values)
+    {
+        string x = null;
+        if (values.Count > 0)
+        {
+            x = "";
+        }
+        foreach (var value in values)
+        {
+            _ = x.Length;   // Noncompliant FP
+        }
+    }
+}
