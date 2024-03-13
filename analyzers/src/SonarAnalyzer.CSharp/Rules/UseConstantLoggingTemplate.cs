@@ -114,8 +114,17 @@ public sealed class UseConstantLoggingTemplate : SonarDiagnosticAnalyzer
 
     private static SyntaxNode InvalidSyntaxNode(SyntaxNode messageArgument, SemanticModel model) =>
         messageArgument.DescendantNodesAndSelf().FirstOrDefault(x =>
-            x.Kind() is SyntaxKind.InterpolatedStringExpression or SyntaxKind.AddExpression
+            x.Kind() == SyntaxKind.InterpolatedStringExpression
+            || (x is BinaryExpressionSyntax { RawKind: (int)SyntaxKind.AddExpression } concatenation && !AllMembersAreConstantStrings(concatenation, model))
             || IsStringFormatInvocation(x, model));
+
+    private static bool AllMembersAreConstantStrings(BinaryExpressionSyntax addExpression, SemanticModel model) =>
+        IsConstantStringOrConcatenation(addExpression.Left, model) && IsConstantStringOrConcatenation(addExpression.Right, model);
+    private static bool IsConstantStringOrConcatenation(SyntaxNode node, SemanticModel model) =>
+        node.Kind() == SyntaxKind.StringLiteralExpression
+        || (node.Kind() == SyntaxKind.IdentifierName && model.GetSymbolInfo(node).Symbol is IFieldSymbol { HasConstantValue: true } or ILocalSymbol { HasConstantValue: true})
+        || (node is BinaryExpressionSyntax { RawKind: (int)SyntaxKind.AddExpression } concatenation
+            && AllMembersAreConstantStrings(concatenation, model));
 
     private static bool IsStringFormatInvocation(SyntaxNode node, SemanticModel model) =>
         node is InvocationExpressionSyntax invocation
