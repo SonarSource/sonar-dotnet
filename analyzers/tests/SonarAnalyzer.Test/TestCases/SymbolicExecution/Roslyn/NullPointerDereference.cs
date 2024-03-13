@@ -2109,6 +2109,25 @@ class Repro_8324
     }
 }
 
+// https://github.com/SonarSource/sonar-dotnet/issues/8905
+class Repro_8905
+{
+    public string Value { get; private set; }
+    private void Foo()
+    {
+        string value = null;
+        if (Value != null)                      // Branching on Value
+        {
+            value = "";
+        }
+
+        if (Value != null)                      // Both branches enter here because PropertyReference is not learning from TrackedSymbol
+        {
+            Console.WriteLine(value.Length);    // Noncompliant FP
+        }
+    }
+}
+
 // https://github.com/SonarSource/sonar-dotnet/issues/8907
 // https://github.com/SonarSource/sonar-dotnet/issues/8908
 class Repro_8907_8908
