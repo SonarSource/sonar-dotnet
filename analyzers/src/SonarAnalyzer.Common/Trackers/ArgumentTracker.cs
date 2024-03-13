@@ -38,6 +38,7 @@ public abstract class ArgumentTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKi
             if (context.Node is { } argumentNode
                 && argumentNode is { Parent.Parent: { } invoked }
                 && SyntacticChecks(context.SemanticModel, descriptor, argumentNode, invoked)
+                && (descriptor.InvokedMemberNodeConstraint?.Invoke(context.SemanticModel, Language, invoked) ?? true)
                 && MethodSymbol(context.SemanticModel, invoked) is { } methodSymbol
                 && Language.MethodParameterLookup(invoked, methodSymbol).TryGetSymbol(argumentNode, out var parameter)
                 && ParameterFits(parameter, descriptor.ParameterConstraint, descriptor.InvokedMemberConstraint))

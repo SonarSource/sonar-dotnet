@@ -474,6 +474,40 @@ public class ArgumentTrackerTest
         context.Parameter.ContainingType.Name.Should().Be("Action");
     }
 
+    [TestMethod]
+    public void Method_InvocationOnProperty()
+    {
+        var snippet = $$"""
+                using System.Collections.Generic;
+                class C
+                {
+                    public IList<int> List { get; } = new List<int>();
+                    void M()
+                    {
+                        List.Add($$1); // Add is defined on ICollection<T> while the List property is of type IList<T>, invokedMemberNodeConstraint can figure this out
+                    }
+                }
+            """;
+        var (node, model) = ArgumentAndModelCS(snippet);
+
+        var argument = ArgumentDescriptor.MethodInvocation(
+            invokedMethodSymbol: x => x.Is(KnownType.System_Collections_Generic_ICollection_T, "Add"),
+            invokedMemberNameConstraint: (x, c) => string.Equals(x, "Add", c),
+            invokedMemberNodeConstraint: (model, language, node) =>
+                node is CS.InvocationExpressionSyntax { Expression: CS.MemberAccessExpressionSyntax { Expression: CS.IdentifierNameSyntax { Identifier.ValueText: { } leftName } left } }
+                    && language.NameComparer.Equals(leftName, "List")
+                    && model.GetSymbolInfo(left).Symbol is IPropertySymbol property
+                    && property.Type.Is(KnownType.System_Collections_Generic_IList_T),
+            parameterConstraint: _ => true,
+            argumentListConstraint: (_, _) => true,
+            refKind: null);
+        var (result, context) = MatchArgumentCS(model, node, argument);
+        result.Should().BeTrue();
+        context.Parameter.Name.Should().Be("item");
+        context.Parameter.ContainingSymbol.Name.Should().Be("Add");
+        context.Parameter.ContainingType.Name.Should().Be("ICollection");
+    }
+
     [DataTestMethod]
     [DataRow("""ProcessStartInfo($$"fileName")""", "fileName", 0, true)]
     [DataRow("""ProcessStartInfo($$"fileName")""", "arguments", 1, false)]
@@ -716,6 +750,7 @@ public class ArgumentTrackerTest
 
         var argument = ArgumentDescriptor.ConstructorInvocation(invokedMethodSymbol: x => x is { MethodKind: MethodKind.Constructor, ContainingSymbol.Name: "C" },
                                                                 invokedMemberNameConstraint: (c, n) => c.Equals("C", n) || c.Equals("CAlias"),
+                                                                invokedMemberNodeConstraint: (_, _, _) => true,
                                                                 parameterConstraint: p => p.Name is "i" or "j",
                                                                 argumentListConstraint: (n, i) => i is null or 0 or 1 && n.Count > 1,
                                                                 refKind: null);
@@ -737,6 +772,7 @@ public class ArgumentTrackerTest
 
         var argument = ArgumentDescriptor.ConstructorInvocation(invokedMethodSymbol: x => x is { MethodKind: MethodKind.Constructor, ContainingSymbol.Name: "Base" },
                                                                 invokedMemberNameConstraint: (c, n) => c.Equals("Base", n),
+                                                                invokedMemberNodeConstraint: (_, _, _) => true,
                                                                 parameterConstraint: p => p.Name is "i",
                                                                 argumentListConstraint: (_, _) => true,
                                                                 refKind: null);
@@ -761,6 +797,7 @@ public class ArgumentTrackerTest
 
         var argument = ArgumentDescriptor.ConstructorInvocation(invokedMethodSymbol: x => x is { MethodKind: MethodKind.Constructor, ContainingSymbol.Name: "Base" },
                                                                 invokedMemberNameConstraint: (c, n) => c.Equals("Base", n),
+                                                                invokedMemberNodeConstraint: (_, _, _) => true,
                                                                 parameterConstraint: p => p.Name is "i",
                                                                 argumentListConstraint: (_, _) => true,
                                                                 refKind: null);
@@ -896,7 +933,7 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModelCS(WrapInMethodCS(snippet));
 
         var argument = ArgumentDescriptor.ElementAccess(m => m is { MethodKind: MethodKind.PropertyGet, ContainingType: { } type } && type.Name == "IDictionary",
-            (n, c) => n.Equals("GetEnvironmentVariables", c), p => p.Name == "key", (_, p) => p is null or 0);
+            (n, c) => n.Equals("GetEnvironmentVariables", c), (_, _, _) => true, p => p.Name == "key", (_, p) => p is null or 0);
         var (result, _) = MatchArgumentCS(model, node, argument);
         result.Should().BeTrue();
     }
@@ -910,7 +947,7 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModelVB(WrapInMethodVB(snippet));
 
         var argument = ArgumentDescriptor.ElementAccess(m => m is { MethodKind: MethodKind.PropertyGet, ContainingType: { } type } && type.Name == "IDictionary",
-            (n, c) => n.Equals("GetEnvironmentVariables", c), p => p.Name == "key", (_, p) => p is null or 0);
+            (n, c) => n.Equals("GetEnvironmentVariables", c), (_, _, _) => true, p => p.Name == "key", (_, p) => p is null or 0);
         var (result, _) = MatchArgumentVB(model, node, argument);
         result.Should().BeTrue();
     }
@@ -944,6 +981,7 @@ public class ArgumentTrackerTest
         var argument = ArgumentDescriptor.ElementAccess(
             m => m is { MethodKind: var kind, ContainingType: { } type } && type.Name == "C" && (isGetter ? kind == MethodKind.PropertyGet : kind == MethodKind.PropertySet),
             (n, c) => true,
+            (_, _, _) => true,
             p => p.Name == parameterName, (_, _) => true);
         var (result, _) = MatchArgumentCS(model, node, argument);
         result.Should().BeTrue();
@@ -980,6 +1018,7 @@ public class ArgumentTrackerTest
         var argument = ArgumentDescriptor.ElementAccess(
             m => m is { MethodKind: var kind, ContainingType: { } type } && type.Name == "C" && (isGetter ? kind == MethodKind.PropertyGet : kind == MethodKind.PropertySet),
             (n, c) => true,
+            (_, _, _) => true,
             p => p.Name == parameterName, (_, _) => true);
         var (result, _) = MatchArgumentVB(model, node, argument);
         result.Should().BeTrue();
@@ -1006,7 +1045,7 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModelCS(snippet);
 
         var argument = ArgumentDescriptor.ElementAccess(m => m is { MethodKind: MethodKind.PropertyGet, ContainingType: { } type } && type.Name == "ProcessModuleCollection",
-            (n, c) => n.Equals("Modules", c), p => p.Name == "index", (_, p) => p is null or 0);
+            (n, c) => n.Equals("Modules", c), (_, _, _) => true, p => p.Name == "index", (_, p) => p is null or 0);
         var (result, _) = MatchArgumentCS(model, node, argument);
         result.Should().BeTrue();
     }
@@ -1054,7 +1093,7 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModelCS(snippet);
 
         var argument = ArgumentDescriptor.AttributeArgument(x => x is { MethodKind: MethodKind.Constructor, ContainingType.Name: "ObsoleteAttribute" },
-            (s, c) => s.StartsWith("Obsolete", c), p => p.Name == "message", (_, i) => i is 0);
+            (s, c) => s.StartsWith("Obsolete", c), (_, _, _) => true, p => p.Name == "message", (_, i) => i is 0);
         var (result, _) = MatchArgumentCS(model, node, argument);
         result.Should().BeTrue();
     }
@@ -1074,7 +1113,7 @@ public class ArgumentTrackerTest
         var (node, model) = ArgumentAndModelVB(snippet);
 
         var argument = ArgumentDescriptor.AttributeArgument(x => x is { MethodKind: MethodKind.Constructor, ContainingType.Name: "ObsoleteAttribute" },
-            (s, c) => s.StartsWith("Obsolete", c), p => p.Name == "message", (_, i) => i is 0);
+            (s, c) => s.StartsWith("Obsolete", c), (_, _, _) => true, p => p.Name == "message", (_, i) => i is 0);
         var (result, _) = MatchArgumentVB(model, node, argument);
         result.Should().BeTrue();
     }

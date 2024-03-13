@@ -31,13 +31,15 @@ public enum InvokedMemberKind
 public class ArgumentDescriptor
 {
     private ArgumentDescriptor(InvokedMemberKind memberKind, Func<IMethodSymbol, bool> invokedMemberConstraint, Func<string, StringComparison, bool> invokedMemberNameConstraint,
-        Func<IReadOnlyCollection<SyntaxNode>, int?, bool> argumentListConstraint, Func<IParameterSymbol, bool> parameterConstraint, RefKind? refKind)
+        Func<SemanticModel, ILanguageFacade, SyntaxNode, bool> invokedMemberNodeConstraint, Func<IReadOnlyCollection<SyntaxNode>, int?, bool> argumentListConstraint,
+        Func<IParameterSymbol, bool> parameterConstraint, RefKind? refKind)
     {
         MemberKind = memberKind;
         ArgumentListConstraint = argumentListConstraint;
         RefKind = refKind;
         ParameterConstraint = parameterConstraint;
         InvokedMemberNameConstraint = invokedMemberNameConstraint;
+        InvokedMemberNodeConstraint = invokedMemberNodeConstraint;
         InvokedMemberConstraint = invokedMemberConstraint;
     }
 
@@ -61,15 +63,18 @@ public class ArgumentDescriptor
         Func<IParameterSymbol, bool> parameterConstraint, Func<int, bool> argumentPosition, RefKind? refKind) =>
         MethodInvocation(invokedMethodSymbol,
             invokedMemberNameConstraint,
+            (_, _, _) => true,
             parameterConstraint,
             (_, position) => position is null || argumentPosition is null || argumentPosition(position.Value),
             refKind);
 
     public static ArgumentDescriptor MethodInvocation(Func<IMethodSymbol, bool> invokedMethodSymbol, Func<string, StringComparison, bool> invokedMemberNameConstraint,
-        Func<IParameterSymbol, bool> parameterConstraint, Func<IReadOnlyCollection<SyntaxNode>, int?, bool> argumentListConstraint, RefKind? refKind) =>
+        Func<SemanticModel, ILanguageFacade, SyntaxNode, bool> invokedMemberNodeConstraint, Func<IParameterSymbol, bool> parameterConstraint,
+        Func<IReadOnlyCollection<SyntaxNode>, int?, bool> argumentListConstraint, RefKind? refKind) =>
         new(InvokedMemberKind.Method,
             invokedMemberConstraint: invokedMethodSymbol,
             invokedMemberNameConstraint: invokedMemberNameConstraint,
+            invokedMemberNodeConstraint: invokedMemberNodeConstraint,
             argumentListConstraint: argumentListConstraint,
             parameterConstraint: parameterConstraint,
             refKind: refKind);
@@ -78,15 +83,18 @@ public class ArgumentDescriptor
         ConstructorInvocation(
             x => constructedType.Matches(x.ContainingType),
             (x, c) => x.Equals(constructedType.TypeName, c),
+            static (_, _, _) => true,
             x => x.Name == parameterName,
             (_, x) => x is null || x == argumentPosition,
             null);
 
     public static ArgumentDescriptor ConstructorInvocation(Func<IMethodSymbol, bool> invokedMethodSymbol, Func<string, StringComparison, bool> invokedMemberNameConstraint,
-        Func<IParameterSymbol, bool> parameterConstraint, Func<IReadOnlyCollection<SyntaxNode>, int?, bool> argumentListConstraint, RefKind? refKind) =>
+        Func<SemanticModel, ILanguageFacade, SyntaxNode, bool> invokedMemberNodeConstraint, Func<IParameterSymbol, bool> parameterConstraint,
+        Func<IReadOnlyCollection<SyntaxNode>, int?, bool> argumentListConstraint, RefKind? refKind) =>
         new(InvokedMemberKind.Constructor,
             invokedMemberConstraint: invokedMethodSymbol,
             invokedMemberNameConstraint: invokedMemberNameConstraint,
+            invokedMemberNodeConstraint: invokedMemberNodeConstraint,
             argumentListConstraint: argumentListConstraint,
             parameterConstraint: parameterConstraint,
             refKind: refKind);
@@ -114,14 +122,17 @@ public class ArgumentDescriptor
         ElementAccess(
             x => x is { ContainingSymbol: INamedTypeSymbol { } container } && invokedIndexerContainer.Matches(container),
             (s, c) => invokedIndexerExpression is null || s.Equals(invokedIndexerExpression, c),
+            (_, _, _) => true,
             argumentListConstraint: (_, p) => argumentPositionConstraint is null || p is null || argumentPositionConstraint(p.Value),
             parameterConstraint: parameterConstraint);
 
     public static ArgumentDescriptor ElementAccess(Func<IMethodSymbol, bool> invokedIndexerPropertyMethod, Func<string, StringComparison, bool> invokedIndexerExpression,
-        Func<IParameterSymbol, bool> parameterConstraint, Func<IReadOnlyCollection<SyntaxNode>, int?, bool> argumentListConstraint) =>
+        Func<SemanticModel, ILanguageFacade, SyntaxNode, bool> invokedIndexerExpressionNodeConstraint, Func<IParameterSymbol, bool> parameterConstraint,
+        Func<IReadOnlyCollection<SyntaxNode>, int?, bool> argumentListConstraint) =>
         new(InvokedMemberKind.Indexer,
             invokedMemberConstraint: invokedIndexerPropertyMethod,
             invokedMemberNameConstraint: invokedIndexerExpression,
+            invokedMemberNodeConstraint: invokedIndexerExpressionNodeConstraint,
             argumentListConstraint: argumentListConstraint,
             parameterConstraint: parameterConstraint,
             refKind: null);
@@ -130,14 +141,17 @@ public class ArgumentDescriptor
         AttributeArgument(
             x => x is { MethodKind: MethodKind.Constructor, ContainingType.Name: { } name } && (name == attributeName || name == $"{attributeName}Attribute"),
             (x, c) => AttributeClassNameConstraint(attributeName, x, c),
+            (_, _, _) => true,
             p => p.Name == parameterName,
             (_, i) => i is null || i.Value == argumentPosition);
 
     public static ArgumentDescriptor AttributeArgument(Func<IMethodSymbol, bool> attributeConstructorConstraint, Func<string, StringComparison, bool> attributeNameConstraint,
-        Func<IParameterSymbol, bool> parameterConstraint, Func<IReadOnlyCollection<SyntaxNode>, int?, bool> argumentListConstraint) =>
+        Func<SemanticModel, ILanguageFacade, SyntaxNode, bool> attributeNodeConstraint, Func<IParameterSymbol, bool> parameterConstraint,
+        Func<IReadOnlyCollection<SyntaxNode>, int?, bool> argumentListConstraint) =>
         new(InvokedMemberKind.Attribute,
             invokedMemberConstraint: attributeConstructorConstraint,
             invokedMemberNameConstraint: attributeNameConstraint,
+            invokedMemberNodeConstraint: attributeNodeConstraint,
             argumentListConstraint: argumentListConstraint,
             parameterConstraint: parameterConstraint,
             refKind: null);
@@ -146,6 +160,7 @@ public class ArgumentDescriptor
         AttributeArgument(
             attributeConstructorConstraint: x => x is { MethodKind: MethodKind.PropertySet, AssociatedSymbol.Name: { } name } && name == propertyName,
             attributeNameConstraint: (s, c) => AttributeClassNameConstraint(attributeName, s, c),
+            (_, _, _) => true,
             parameterConstraint: p => true,
             argumentListConstraint: (_, _) => true);
 
@@ -157,5 +172,6 @@ public class ArgumentDescriptor
     public RefKind? RefKind { get; }
     public Func<IParameterSymbol, bool> ParameterConstraint { get; }
     public Func<string, StringComparison, bool> InvokedMemberNameConstraint { get; }
+    public Func<SemanticModel, ILanguageFacade, SyntaxNode, bool> InvokedMemberNodeConstraint { get; }
     public Func<IMethodSymbol, bool> InvokedMemberConstraint { get; }
 }
