@@ -7,7 +7,7 @@ param
     $ruleId,
 
     [Parameter(HelpMessage = "The name of single project to build. If ommited, all projects will be build.")]
-    [ValidateSet("AnalyzeGenerated.CS", "AnalyzeGenerated.VB", "akka.net", "AutoMapper", "BlazorSample", "CSharpLatest", "Ember-MM", "Nancy", "NetCore31", "Net5", "Net6", "Net7", "Net8", "ManuallyAddedNoncompliantIssues.CS", "ManuallyAddedNoncompliantIssues.VB", "RazorSample", "Roslyn.1.3.1", "SkipGenerated.CS", "SkipGenerated.VB", "SonarLintExclusions", "WebConfig")]
+    [ValidateSet("AnalyzeGenerated.CS", "AnalyzeGenerated.VB", "akka.net", "AutoMapper", "BlazorSample", "CSharpLatest", "Ember-MM", "Nancy", "NetCore31", "Net6", "Net7", "Net8", "ManuallyAddedNoncompliantIssues.CS", "ManuallyAddedNoncompliantIssues.VB", "RazorSample", "Roslyn.1.3.1", "SkipGenerated.CS", "SkipGenerated.VB", "SonarLintExclusions", "WebConfig")]
     [string]
     $project
 )
@@ -262,7 +262,6 @@ try {
     Build-Project-MSBuild "WebConfig" "WebConfig.sln"
 
     Build-Project-DotnetTool "NetCore31" "NetCore31.sln"
-    Build-Project-DotnetTool "Net5" "Net5.sln"
     Build-Project-DotnetTool "Net6" "Net6.sln"
     Build-Project-DotnetTool "Net7" "Net7.sln"
     Build-Project-DotnetTool "Net8" "Net8.sln"
