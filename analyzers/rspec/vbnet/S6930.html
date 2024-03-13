@@ -1,0 +1,87 @@
+<p>Backslash characters (<code>\</code>) should be avoided in <a
+href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/routing#route-templates">route templates</a>.</p>
+<h2>Why is this an issue?</h2>
+<p><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/routing">Routing</a> in ASP.NET MVC maps <a
+href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/actions#what-is-a-controller">controllers</a> and <a
+href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/actions#defining-actions">actions</a> to paths in request <a
+href="https://en.wikipedia.org/wiki/Uniform_Resource_Identifier">URIs</a>.</p>
+<p>In the former syntax specification of URIs, backslash characters (<code>\</code>) were not allowed at all (see <a
+href="https://datatracker.ietf.org/doc/html/rfc2396/#section-2.4.3">section "2.4.3. Excluded US-ASCII Characters" of RFC 2396</a>). While the current
+specification (<a href="https://datatracker.ietf.org/doc/html/rfc3986">RFC 3986</a>) doesn’t include anymore the "Excluded US-ASCII Characters"
+section, most URL processors still don’t support backslash properly.</p>
+<p>For instance, a backslash in the <a href="https://datatracker.ietf.org/doc/html/rfc3986#section-3.3">"path" part</a> of a <a
+href="https://en.wikipedia.org/wiki/URL#Syntax">URL</a> is automatically converted to a forward slash (<code>/</code>) both by Chrome and Internet
+Explorer (see <a href="https://stackoverflow.com/q/10438008">here</a>).</p>
+<p>As an example, <code>\Calculator\Evaluate?expression=3\4</code> is converted on the fly into <code>/Calculator/Evaluate?expression=3\4</code>
+before the HTTP request is made to the server.</p>
+<p>While backslashes are allowed in the "query" part of a URL, and it’s common to have them as part of a complex query expression, the route of a
+controller is always part of the "path".</p>
+<p>That is why the use of backslashes in controller templates should be avoided in general.</p>
+<h3>What is the potential impact?</h3>
+<p>A backslash in the route pattern of a controller would only make sense if the developer intended the backslash in the route to be explicitly
+escaped by the user, using <a href="https://en.wikipedia.org/wiki/Percent-encoding#Character_data"><code>%5C</code></a>.</p>
+<p>For example, the route <code>Something\[controller]</code> for the <code>HomeController</code> would need to be called as
+<code>Something%5CHome</code>.</p>
+<p>The validity of such a scenario is unlikely and the resulting behavior is surprising.</p>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+&lt;Route("Something\[controller]")&gt; ' Noncompliant: Replace `\` with `/`.
+Public Class HomeController
+    Inherits Controller
+
+    &lt;HttpGet&gt;
+    Public Function Index() As ActionResult
+        Return View()
+    End Function
+End Class
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+&lt;Route("Something/[controller]")&gt; ' `\` replaced with `/`
+Public Class HomeController
+    Inherits Controller
+
+    &lt;HttpGet&gt;
+    Public Function Index() As ActionResult
+        Return View()
+    End Function
+End Class
+</pre>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+app.MapControllerRoute(
+    name:="default",
+    pattern:="{controller=Home}\{action=Index}") ' Noncompliant: Replace `\` with `/`.
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+app.MapControllerRoute(
+    name:="default",
+    pattern:="{controller=Home}/{action=Index}") ' `\` replaced with `/`
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/routing">Routing in ASP.NET Core</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/routing">Routing to controller actions in ASP.NET
+  Core</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/actions">Handle requests with controllers in ASP.NET
+  Core MVC</a> </li>
+  <li> Wikipedia - <a href="https://en.wikipedia.org/wiki/Uniform_Resource_Identifier">Uniform Resource Identifier</a> </li>
+  <li> Wikipedia - <a href="https://en.wikipedia.org/wiki/URL#Syntax">URL - Syntax</a> </li>
+  <li> Wikipedia - <a href="https://en.wikipedia.org/wiki/Percent-encoding">Percent-encoding</a> </li>
+</ul>
+<h3>Articles &amp; blog posts</h3>
+<ul>
+  <li> StackOverflow - <a href="https://stackoverflow.com/questions/10438008">Different behaviours of treating \ (backslash) in the url by FireFox and
+  Chrome</a> </li>
+</ul>
+<h3>Standards</h3>
+<ul>
+  <li> IETF.org - <a href="https://datatracker.ietf.org/doc/html/rfc3986">RFC 3986 - Uniform Resource Identifier (URI): Generic Syntax</a> </li>
+  <li> IETF.org - <a href="https://datatracker.ietf.org/doc/html/rfc2396">RFC 2396 - Uniform Resource Identifiers (URI): Generic Syntax (OBSOLETE,
+  replaced by RFC 3986)</a> </li>
+</ul>
+
