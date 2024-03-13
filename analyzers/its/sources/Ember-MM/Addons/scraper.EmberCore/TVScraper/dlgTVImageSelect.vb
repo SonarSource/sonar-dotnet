@@ -276,7 +276,7 @@ Public Class dlgTVImageSelect
         Return False
     End Function
 
-    Public Overloads Function ShowDialog(ByVal ShowID As Integer, ByVal Type As Enums.TVImageType, ByVal ScrapeType As Enums.ScrapeType, ByVal WithCurrent As Boolean) As DialogResult
+    Public Overloads Function ShowDialog(ByVal ShowID As Integer, ByVal Type As Enums.TVImageType, ByVal ScrapeType As Enums.ScrapeType, ByVal WithCurrent As Boolean) As System.Windows.Forms.DialogResult
         Me._id = ShowID
         Me._type = Type
         Me._withcurrent = WithCurrent
@@ -290,7 +290,7 @@ Public Class dlgTVImageSelect
         Me._season = Season
         Me.pbCurrent.Image = CurrentImage
 
-        If MyBase.ShowDialog = DialogResult.OK Then
+        If MyBase.ShowDialog = Windows.Forms.DialogResult.OK Then
             Return Me.pbCurrent.Image
         Else
             Return Nothing
@@ -365,7 +365,7 @@ Public Class dlgTVImageSelect
             Threading.Thread.Sleep(50)
         End While
 
-        Me.DialogResult = DialogResult.Cancel
+        Me.DialogResult = Windows.Forms.DialogResult.Cancel
         Me.Close()
     End Sub
 
@@ -428,7 +428,7 @@ Public Class dlgTVImageSelect
             End If
         End If
 
-        Me.DialogResult = DialogResult.OK
+        Me.DialogResult = Windows.Forms.DialogResult.OK
         Me.Close()
     End Sub
 

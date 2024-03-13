@@ -66,7 +66,7 @@ Public Class dlgOfflineHolder
 
     Private Sub btnBackgroundColor_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBackgroundColor.Click
         With Me.cdColor
-            If .ShowDialog = DialogResult.OK Then
+            If .ShowDialog = Windows.Forms.DialogResult.OK Then
                 If Not .Color = Nothing Then
                     Me.btnBackgroundColor.BackColor = .Color
                     Me.CreatePreview()
@@ -77,7 +77,7 @@ Public Class dlgOfflineHolder
 
     Private Sub btnFont_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFont.Click
         With Me.cdFont
-            If .ShowDialog = DialogResult.OK Then
+            If .ShowDialog = Windows.Forms.DialogResult.OK Then
                 If Not IsNothing(.Font) Then
                     Me.drawFont = .Font
                     Me.CreatePreview()
@@ -88,7 +88,7 @@ Public Class dlgOfflineHolder
 
     Private Sub btnTextColor_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTextColor.Click
         With Me.cdColor
-            If .ShowDialog = DialogResult.OK Then
+            If .ShowDialog = Windows.Forms.DialogResult.OK Then
                 If Not .Color = Nothing Then
                     Me.btnTextColor.BackColor = .Color
                     Me.CreatePreview()
@@ -242,7 +242,7 @@ Public Class dlgOfflineHolder
         Me.pbProgress.Visible = False
         If Not e.Cancelled Then
             MsgBox(Master.eLang.GetString(7, "Offline movie place holder created!"), MsgBoxStyle.OkOnly, Me.Text)
-            Me.DialogResult = DialogResult.OK
+            Me.DialogResult = Windows.Forms.DialogResult.OK
         End If
         Me.Close()
     End Sub
@@ -395,7 +395,7 @@ Public Class dlgOfflineHolder
         If bwCreateHolder.IsBusy Then
             bwCreateHolder.CancelAsync()
         Else
-            Me.DialogResult = DialogResult.Cancel
+            Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
             Me.Close()
         End If
     End Sub

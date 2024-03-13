@@ -18,7 +18,7 @@ Partial Class dlgVersions
     Private components As System.ComponentModel.IContainer
 
     'NOTE: The following procedure is required by the Windows Form Designer
-    'It can be modified using the Windows Form Designer.
+    'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
@@ -28,11 +28,11 @@ Partial Class dlgVersions
 		Me.ColumnHeader16 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
 		Me.btnCopy = New System.Windows.Forms.Button()
 		Me.SuspendLayout()
-        '
-        'OK_Button
-        '
-        Me.OK_Button.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.OK_Button.Location = New System.Drawing.Point(350, 289)
+		'
+		'OK_Button
+		'
+		Me.OK_Button.DialogResult = System.Windows.Forms.DialogResult.Cancel
+		Me.OK_Button.Location = New System.Drawing.Point(350, 289)
 		Me.OK_Button.Name = "OK_Button"
 		Me.OK_Button.Size = New System.Drawing.Size(67, 23)
 		Me.OK_Button.TabIndex = 0

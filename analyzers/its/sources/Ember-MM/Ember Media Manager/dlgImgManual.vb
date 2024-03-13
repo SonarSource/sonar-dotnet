@@ -33,7 +33,7 @@ Public Class dlgImgManual
 
 #Region "Methods"
 
-    Public Overloads Function ShowDialog(ByVal _DLType As Enums.ImageType) As DialogResult
+    Public Overloads Function ShowDialog(ByVal _DLType As Enums.ImageType) As Windows.Forms.DialogResult
         '//
         ' Overload to pass data
         '\\
@@ -60,7 +60,7 @@ Public Class dlgImgManual
     End Sub
 
     Private Sub Cancel_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel_Button.Click
-        Me.DialogResult = DialogResult.Cancel
+        Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Close()
     End Sub
 
@@ -106,7 +106,7 @@ Public Class dlgImgManual
             Master.eLog.WriteToErrorLog(ex.Message, ex.StackTrace, "Error")
         End Try
 
-        Me.DialogResult = DialogResult.OK
+        Me.DialogResult = System.Windows.Forms.DialogResult.OK
         Me.Close()
     End Sub
 

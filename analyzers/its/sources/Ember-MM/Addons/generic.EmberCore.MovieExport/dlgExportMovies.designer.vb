@@ -116,7 +116,7 @@ Partial Class dlgExportMovies
 		'Close_Button
 		'
 		Me.Close_Button.Anchor = System.Windows.Forms.AnchorStyles.None
-		Me.Close_Button.DialogResult = DialogResult.Cancel
+		Me.Close_Button.DialogResult = System.Windows.Forms.DialogResult.Cancel
 		Me.Close_Button.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
 		Me.Close_Button.Location = New System.Drawing.Point(76, 3)
 		Me.Close_Button.Name = "Close_Button"

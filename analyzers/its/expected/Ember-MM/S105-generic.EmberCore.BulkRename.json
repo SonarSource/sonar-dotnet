@@ -3,8 +3,8 @@
     {
       "Id": "S105",
       "Message": "Replace all tab characters in this file by sequences of white-spaces.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/Module.BulkRenamer.vb#L264",
-      "Location": "Line 264 Position 12-12"
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/Module.BulkRenamer.vb#L119",
+      "Location": "Line 119 Position 1-1"
     }
   ]
 }

@@ -178,13 +178,13 @@
       "Id": "S117",
       "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/Module.BulkRenamer.vb#L121",
-      "Location": "Line 121 Position 13-17"
+      "Location": "Line 121 Position 7-11"
     },
     {
       "Id": "S117",
       "Message": "Rename this local variable to match the regular expression: \u0027^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]\u002B)*([A-Z]{2})?$\u0027.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/Module.BulkRenamer.vb#L122",
-      "Location": "Line 122 Position 13-15"
+      "Location": "Line 122 Position 7-9"
     },
     {
       "Id": "S117",

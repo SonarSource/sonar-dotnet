@@ -872,6 +872,12 @@
     },
     {
       "Id": "S103",
+      "Message": "Split this 203 characters long line (which is greater than 200 authorized).",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L279",
+      "Location": "Line 279 Position 1-204"
+    },
+    {
+      "Id": "S103",
       "Message": "Split this 238 characters long line (which is greater than 200 authorized).",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L711",
       "Location": "Line 711 Position 1-239"

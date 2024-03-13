@@ -1728,7 +1728,7 @@ Public Class dlgNMTMovies
     Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
         Try
             Using fbdBrowse As New System.Windows.Forms.FolderBrowserDialog
-                If fbdBrowse.ShowDialog = DialogResult.OK Then
+                If fbdBrowse.ShowDialog = Windows.Forms.DialogResult.OK Then
                     If Not String.IsNullOrEmpty(fbdBrowse.SelectedPath) Then
                         Me.txtOutputFolder.Text = fbdBrowse.SelectedPath
                     End If

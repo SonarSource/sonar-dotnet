@@ -1848,7 +1848,7 @@ doCancel:
 
             If SeasonsToDelete.Count > 0 Then
                 Using dlg As New dlgDeleteConfirm
-                    If dlg.ShowDialog(SeasonsToDelete, Enums.DelType.Seasons) = DialogResult.OK Then
+                    If dlg.ShowDialog(SeasonsToDelete, Enums.DelType.Seasons) = Windows.Forms.DialogResult.OK Then
                         Me.FillSeasons(Convert.ToInt32(Me.dgvTVSeasons.Item(0, Me.currSeasonRow).Value))
                         Me.SetTVCount()
                     End If
@@ -1875,7 +1875,7 @@ doCancel:
 
             If EpsToDelete.Count > 0 Then
                 Using dlg As New dlgDeleteConfirm
-                    If dlg.ShowDialog(EpsToDelete, Enums.DelType.Episodes) = DialogResult.OK Then
+                    If dlg.ShowDialog(EpsToDelete, Enums.DelType.Episodes) = Windows.Forms.DialogResult.OK Then
                         Me.FillEpisodes(Convert.ToInt32(Me.dgvTVSeasons.Item(0, Me.currSeasonRow).Value), Convert.ToInt32(Me.dgvTVSeasons.Item(2, Me.currSeasonRow).Value))
                         Me.SetTVCount()
                     End If
@@ -1903,7 +1903,7 @@ doCancel:
 
             If ShowsToDelete.Count > 0 Then
                 Using dlg As New dlgDeleteConfirm
-                    If dlg.ShowDialog(ShowsToDelete, Enums.DelType.Shows) = DialogResult.OK Then
+                    If dlg.ShowDialog(ShowsToDelete, Enums.DelType.Shows) = Windows.Forms.DialogResult.OK Then
                         Me.FillList(0)
                     End If
                 End Using
@@ -1925,7 +1925,7 @@ doCancel:
             Using dEditEpisode As New dlgEditEpisode
                 AddHandler ModulesManager.Instance.GenericEvent, AddressOf dEditEpisode.GenericRunCallBack
                 Select Case dEditEpisode.ShowDialog()
-                    Case DialogResult.OK
+                    Case Windows.Forms.DialogResult.OK
                         If Me.RefreshEpisode(ID) Then
                             Me.FillEpisodes(Convert.ToInt32(Master.currShow.ShowID), Master.currShow.TVEp.Season)
                         End If
@@ -1951,7 +1951,7 @@ doCancel:
             Using dEditMovie As New dlgEditMovie(Me)
                 AddHandler ModulesManager.Instance.GenericEvent, AddressOf dEditMovie.GenericRunCallBack
                 Select Case dEditMovie.ShowDialog()
-                    Case DialogResult.OK
+                    Case Windows.Forms.DialogResult.OK
                         ModulesManager.Instance.RunGeneric(Enums.ModuleEventType.MovieScraperRDYtoSave, Nothing, Master.currMovie)
                         Me.SetListItemAfterEdit(ID, indX)
                         If Me.RefreshMovie(ID) Then
@@ -1960,10 +1960,10 @@ doCancel:
                             Me.SetControlsEnabled(True)
                         End If
                         ModulesManager.Instance.RunGeneric(Enums.ModuleEventType.MovieSync, Nothing, Master.currMovie)
-                    Case DialogResult.Retry
+                    Case Windows.Forms.DialogResult.Retry
                         Functions.SetScraperMod(Enums.ModType.All, True, True)
                         Me.MovieScrapeData(True, Enums.ScrapeType.SingleScrape, Master.DefaultOptions)
-                    Case DialogResult.Abort
+                    Case Windows.Forms.DialogResult.Abort
                         Master.currMovie.ClearExtras = False
                         Functions.SetScraperMod(Enums.ModType.DoSearch, True)
                         Functions.SetScraperMod(Enums.ModType.All, True, False)
@@ -1994,7 +1994,7 @@ doCancel:
             Using dEditShow As New dlgEditShow
 
                 Select Case dEditShow.ShowDialog()
-                    Case DialogResult.OK
+                    Case Windows.Forms.DialogResult.OK
                         Me.SetShowListItemAfterEdit(ID, indX)
                         If Me.RefreshShow(ID, False, True, False, False) Then
                             Me.FillList(0)
@@ -2511,7 +2511,7 @@ doCancel:
         Dim ID As Integer = Convert.ToInt32(Me.dgvMediaList.Item(0, indX).Value)
         Using dEditMeta As New dlgFileInfo
             Select Case dEditMeta.ShowDialog(False)
-                Case DialogResult.OK
+                Case Windows.Forms.DialogResult.OK
                     Me.SetListItemAfterEdit(ID, indX)
                     If Me.RefreshMovie(ID) Then
                         Me.FillList(0)
@@ -2728,7 +2728,7 @@ doCancel:
     Private Sub cmnuSeasonChangeImages_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles cmnuSeasonChangeImages.Click
         Me.SetControlsEnabled(False)
         Using dEditSeason As New dlgEditSeason
-            If dEditSeason.ShowDialog() = DialogResult.OK Then
+            If dEditSeason.ShowDialog() = Windows.Forms.DialogResult.OK Then
                 If Me.RefreshSeason(Convert.ToInt32(Master.currShow.ShowID), Master.currShow.TVEp.Season, False) Then
                     Me.FillSeasons(Convert.ToInt32(Master.currShow.ShowID))
                 End If
@@ -2782,7 +2782,7 @@ doCancel:
     Private Sub ConvertFileSourceToFolderSourceToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ConvertFileSourceToFolderSourceToolStripMenuItem.Click, SortFilesIntoFoldersToolStripMenuItem.Click
         Me.SetControlsEnabled(False)
         Using dSortFiles As New dlgSortFiles
-            If dSortFiles.ShowDialog() = DialogResult.OK Then
+            If dSortFiles.ShowDialog() = Windows.Forms.DialogResult.OK Then
                 Me.LoadMedia(New Structures.Scans With {.Movies = True})
             Else
                 Me.SetControlsEnabled(True)
@@ -2875,7 +2875,7 @@ doCancel:
 
             If MoviesToDelete.Count > 0 Then
                 Using dlg As New dlgDeleteConfirm
-                    If dlg.ShowDialog(MoviesToDelete, Enums.DelType.Movies) = DialogResult.OK Then
+                    If dlg.ShowDialog(MoviesToDelete, Enums.DelType.Movies) = Windows.Forms.DialogResult.OK Then
                         Me.FillList(0)
                     End If
                 End Using
@@ -2950,17 +2950,17 @@ doCancel:
             Using dEditMovie As New dlgEditMovie(Me)
                 AddHandler ModulesManager.Instance.GenericEvent, AddressOf dEditMovie.GenericRunCallBack
                 Select Case dEditMovie.ShowDialog()
-                    Case DialogResult.OK
+                    Case Windows.Forms.DialogResult.OK
                         ModulesManager.Instance.RunGeneric(Enums.ModuleEventType.MovieScraperRDYtoSave, Nothing, Master.currMovie)
                         Me.SetListItemAfterEdit(ID, indX)
                         If Me.RefreshMovie(ID) Then
                             Me.FillList(0)
                         End If
                         ModulesManager.Instance.RunGeneric(Enums.ModuleEventType.MovieSync, Nothing, Master.currMovie)
-                    Case DialogResult.Retry
+                    Case Windows.Forms.DialogResult.Retry
                         Functions.SetScraperMod(Enums.ModType.All, True, True)
                         Me.MovieScrapeData(True, Enums.ScrapeType.SingleScrape, Master.DefaultOptions)
-                    Case DialogResult.Abort
+                    Case Windows.Forms.DialogResult.Abort
                         Functions.SetScraperMod(Enums.ModType.DoSearch, True)
                         Functions.SetScraperMod(Enums.ModType.All, True, False)
                         Me.MovieScrapeData(True, Enums.ScrapeType.SingleScrape, Master.DefaultOptions)
@@ -3138,17 +3138,17 @@ doCancel:
                 Using dEditMovie As New dlgEditMovie(Me)
                     AddHandler ModulesManager.Instance.GenericEvent, AddressOf dEditMovie.GenericRunCallBack
                     Select Case dEditMovie.ShowDialog()
-                        Case DialogResult.OK
+                        Case Windows.Forms.DialogResult.OK
                             ModulesManager.Instance.RunGeneric(Enums.ModuleEventType.MovieScraperRDYtoSave, Nothing, Master.currMovie)
                             Me.SetListItemAfterEdit(ID, indX)
                             If Me.RefreshMovie(ID) Then
                                 Me.FillList(0)
                             End If
                             ModulesManager.Instance.RunGeneric(Enums.ModuleEventType.MovieSync, Nothing, Master.currMovie)
-                        Case DialogResult.Retry
+                        Case Windows.Forms.DialogResult.Retry
                             Functions.SetScraperMod(Enums.ModType.All, True, True)
                             Me.MovieScrapeData(True, Enums.ScrapeType.SingleScrape, Master.DefaultOptions)
-                        Case DialogResult.Abort
+                        Case Windows.Forms.DialogResult.Abort
                             Functions.SetScraperMod(Enums.ModType.DoSearch, True)
                             Functions.SetScraperMod(Enums.ModType.All, True, False)
                             Me.MovieScrapeData(True, Enums.ScrapeType.SingleScrape, Master.DefaultOptions)
@@ -3166,7 +3166,7 @@ doCancel:
 
     Private Sub dgvMediaList_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles dgvMediaList.MouseDown
         Try
-            If e.Button = MouseButtons.Right And Me.dgvMediaList.RowCount > 0 Then
+            If e.Button = Windows.Forms.MouseButtons.Right And Me.dgvMediaList.RowCount > 0 Then
                 If bwCleanDB.IsBusy OrElse bwMovieScraper.IsBusy OrElse bwNonScrape.IsBusy Then
                     Me.cmnuTitle.Text = Master.eLang.GetString(845, ">> No Item Selected <<")
                     Return
@@ -3302,7 +3302,7 @@ doCancel:
             Using dEditEpisode As New dlgEditEpisode
                 AddHandler ModulesManager.Instance.GenericEvent, AddressOf dEditEpisode.GenericRunCallBack
                 Select Case dEditEpisode.ShowDialog()
-                    Case DialogResult.OK
+                    Case Windows.Forms.DialogResult.OK
                         If Me.RefreshEpisode(ID) Then
                             Me.FillEpisodes(Convert.ToInt32(Master.currShow.ShowID), Master.currShow.TVEp.Season)
                         End If
@@ -3435,7 +3435,7 @@ doCancel:
                 Using dEditEpisode As New dlgEditEpisode
                     AddHandler ModulesManager.Instance.GenericEvent, AddressOf dEditEpisode.GenericRunCallBack
                     Select Case dEditEpisode.ShowDialog()
-                        Case DialogResult.OK
+                        Case Windows.Forms.DialogResult.OK
                             If Me.RefreshEpisode(ID) Then
                                 Me.FillEpisodes(Convert.ToInt32(Master.currShow.ShowID), Master.currShow.TVEp.Season)
                             End If
@@ -3488,7 +3488,7 @@ doCancel:
         Try
             Dim hasMissing As Boolean = False
 
-            If e.Button = MouseButtons.Right And Me.dgvTVEpisodes.RowCount > 0 Then
+            If e.Button = Windows.Forms.MouseButtons.Right And Me.dgvTVEpisodes.RowCount > 0 Then
 
                 Me.mnuEpisodes.Enabled = False
 
@@ -3633,7 +3633,7 @@ doCancel:
             Master.currShow = Master.DB.LoadTVSeasonFromDB(ShowID, Season, True)
 
             Using dEditSeason As New dlgEditSeason
-                If dEditSeason.ShowDialog() = DialogResult.OK Then
+                If dEditSeason.ShowDialog() = Windows.Forms.DialogResult.OK Then
                     If Me.RefreshSeason(ShowID, Season, False) Then
                         Me.FillSeasons(ShowID)
                     End If
@@ -3759,7 +3759,7 @@ doCancel:
                 Master.currShow = Master.DB.LoadTVSeasonFromDB(ShowID, Season, True)
 
                 Using dEditSeason As New dlgEditSeason
-                    If dEditSeason.ShowDialog() = DialogResult.OK Then
+                    If dEditSeason.ShowDialog() = Windows.Forms.DialogResult.OK Then
                         If Me.RefreshSeason(ShowID, Season, False) Then
                             Me.FillSeasons(ShowID)
                         End If
@@ -3773,7 +3773,7 @@ doCancel:
 
     Private Sub dgvTVSeasons_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles dgvTVSeasons.MouseDown
         Try
-            If e.Button = MouseButtons.Right And Me.dgvTVSeasons.RowCount > 0 Then
+            If e.Button = Windows.Forms.MouseButtons.Right And Me.dgvTVSeasons.RowCount > 0 Then
 
                 Me.mnuSeasons.Enabled = False
 
@@ -3897,7 +3897,7 @@ doCancel:
             Using dEditShow As New dlgEditShow
 
                 Select Case dEditShow.ShowDialog()
-                    Case DialogResult.OK
+                    Case Windows.Forms.DialogResult.OK
                         Me.SetShowListItemAfterEdit(ID, indX)
                         If Me.RefreshShow(ID, False, True, False, False) Then
                             Me.FillList(0)
@@ -4024,7 +4024,7 @@ doCancel:
                 Using dEditShow As New dlgEditShow
 
                     Select Case dEditShow.ShowDialog()
-                        Case DialogResult.OK
+                        Case Windows.Forms.DialogResult.OK
                             Me.SetShowListItemAfterEdit(ID, indX)
                             If Me.RefreshShow(ID, False, True, False, False) Then
                                 Me.FillList(0)
@@ -4040,7 +4040,7 @@ doCancel:
 
     Private Sub dgvTVShows_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles dgvTVShows.MouseDown
         Try
-            If e.Button = MouseButtons.Right And Me.dgvTVShows.RowCount > 0 Then
+            If e.Button = Windows.Forms.MouseButtons.Right And Me.dgvTVShows.RowCount > 0 Then
 
                 Me.mnuShows.Enabled = False
 
@@ -5271,9 +5271,9 @@ doCancel:
             If Not Me.WindowState = FormWindowState.Minimized Then Master.eSettings.Save()
 
         Catch ex As Exception
-            ' If we got here, then some of the above not run. Application.Exit can not be used.
+            ' If we got here, then some of the above not run. Application.Exit can not be used. 
             ' Because Exit will dispose object that are in use by BackgroundWorkers
-            ' If any BackgroundWorker still running will raise exception
+            ' If any BackgroundWorker still running will raise exception 
             ' "Collection was modified; enumeration operation may not execute."
             ' Application.Exit()
         End Try
@@ -5321,8 +5321,8 @@ doCancel:
 			fLoading.SetLoadingMesg(Master.eLang.GetString(854, "Basic setup"))
 
             Dim currentDomain As AppDomain = AppDomain.CurrentDomain
-            ModulesManager.AssemblyList.Add(New ModulesManager.AssemblyListItem With {.AssemblyName = "EmberAPI", _
-                    .Assembly = Assembly.LoadFile(Path.Combine(Functions.AppPath, "EmberAPI.dll"), Assembly.GetExecutingAssembly().Evidence)})
+            ModulesManager.AssemblyList.Add(New ModulesManager.AssemblyListItem With {.AssemblyName = "EmberAPI",
+                    .Assembly = Assembly.LoadFile(Path.Combine(Functions.AppPath, "EmberAPI.dll"))})
             AddHandler currentDomain.AssemblyResolve, AddressOf MyResolveEventHandler
 
             Dim sPath As String = String.Concat(Functions.AppPath, "Log", Path.DirectorySeparatorChar, "errlog.txt")
@@ -5642,7 +5642,7 @@ doCancel:
                     '    If Functions.CheckNeedUpdate() Then
                     '        Using dNewVer As New dlgNewVersion
                     '            fLoading.Hide()
-                    '            If dNewVer.ShowDialog() = DialogResult.Abort Then
+                    '            If dNewVer.ShowDialog() = Windows.Forms.DialogResult.Abort Then
                     '                tmrAppExit.Enabled = True
                     '                CloseApp = True
                     '            End If
@@ -5718,7 +5718,7 @@ doCancel:
 							If Master.DB.CheckEssentials() Then
 								Me.LoadMedia(New Structures.Scans With {.Movies = True, .TV = True})
 							End If
-							If dlgWizard.ShowDialog = DialogResult.OK Then
+							If dlgWizard.ShowDialog = Windows.Forms.DialogResult.OK Then
 								Application.DoEvents()
 								Me.SetUp(False)	'just in case user changed languages
 								Me.Visible = True
@@ -6440,18 +6440,18 @@ doCancel:
                 Using dEditMovie As New dlgEditMovie(Me)
                     AddHandler ModulesManager.Instance.GenericEvent, AddressOf dEditMovie.GenericRunCallBack
                     Select Case dEditMovie.ShowDialog()
-                        Case DialogResult.OK
+                        Case Windows.Forms.DialogResult.OK
                             ModulesManager.Instance.RunGeneric(Enums.ModuleEventType.MovieScraperRDYtoSave, Nothing, Master.currMovie)
                             Me.SetListItemAfterEdit(ID, indX)
                             If Me.RefreshMovie(ID) Then
                                 Me.FillList(0)
                             End If
                             ModulesManager.Instance.RunGeneric(Enums.ModuleEventType.MovieSync, Nothing, Master.currMovie)
-                        Case DialogResult.Retry
+                        Case Windows.Forms.DialogResult.Retry
                             Master.currMovie.ClearExtras = False
                             Functions.SetScraperMod(Enums.ModType.All, True, True)
                             Me.MovieScrapeData(True, Enums.ScrapeType.SingleScrape, Master.DefaultOptions) ', ID)
-                        Case DialogResult.Abort
+                        Case Windows.Forms.DialogResult.Abort
                             Master.currMovie.ClearExtras = False
                             Functions.SetScraperMod(Enums.ModType.DoSearch, True)
                             Functions.SetScraperMod(Enums.ModType.All, True, False)
@@ -7998,7 +7998,7 @@ doCancel:
             Me.SetMenus(True)
             If dresult.NeedsRestart Then
                 Using dRestart As New dlgRestart
-                    If dRestart.ShowDialog = DialogResult.OK Then
+                    If dRestart.ShowDialog = Windows.Forms.DialogResult.OK Then
                         Application.Restart()
                     End If
                 End Using
@@ -8802,7 +8802,7 @@ doCancel:
                         Me.tspbLoading.Visible = True
                         Me.tslLoading.Visible = True
                         Using dEditShow As New dlgEditShow
-                            If dEditShow.ShowDialog() = DialogResult.OK Then
+                            If dEditShow.ShowDialog() = Windows.Forms.DialogResult.OK Then
                                 Me.SetShowListItemAfterEdit(Convert.ToInt32(Master.currShow.ShowID), Me.dgvTVShows.SelectedRows(0).Index)
                                 ModulesManager.Instance.TVSaveImages()
                             Else
@@ -8820,7 +8820,7 @@ doCancel:
                         Me.tslLoading.Visible = True
                         Using dEditEp As New dlgEditEpisode
                             AddHandler ModulesManager.Instance.GenericEvent, AddressOf dEditEp.GenericRunCallBack
-                            If dEditEp.ShowDialog = DialogResult.OK Then
+                            If dEditEp.ShowDialog = Windows.Forms.DialogResult.OK Then
                                 Me.RefreshEpisode(Master.currShow.EpID)
                             End If
                             RemoveHandler ModulesManager.Instance.GenericEvent, AddressOf dEditEp.GenericRunCallBack
@@ -8922,7 +8922,7 @@ doCancel:
     Private Sub CheckUpdatesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckUpdatesToolStripMenuItem.Click
         If Functions.CheckNeedUpdate() Then
             Using dNewVer As New dlgNewVersion
-                If dNewVer.ShowDialog() = DialogResult.Abort Then
+                If dNewVer.ShowDialog() = Windows.Forms.DialogResult.Abort Then
                     tmrAppExit.Enabled = True
                     CloseApp = True
                 End If

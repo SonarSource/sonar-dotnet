@@ -37,7 +37,7 @@ Public Class dlgTVSource
 
 #Region "Methods"
 
-    Public Overloads Function ShowDialog(ByVal id As Integer) As DialogResult
+    Public Overloads Function ShowDialog(ByVal id As Integer) As Windows.Forms.DialogResult
         Me._id = id
 
         Return MyBase.ShowDialog()
@@ -46,7 +46,7 @@ Public Class dlgTVSource
     Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
         Try
             With Me.fbdBrowse
-                If .ShowDialog = DialogResult.OK Then
+                If .ShowDialog = Windows.Forms.DialogResult.OK Then
                     If Not String.IsNullOrEmpty(.SelectedPath) Then
                         Me.txtSourcePath.Text = .SelectedPath
                     End If
@@ -58,7 +58,7 @@ Public Class dlgTVSource
     End Sub
 
     Private Sub Cancel_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel_Button.Click
-        Me.DialogResult = DialogResult.Cancel
+        Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Close()
     End Sub
 
@@ -133,10 +133,10 @@ Public Class dlgTVSource
             End Using
         Catch ex As Exception
             Master.eLog.WriteToErrorLog(ex.Message, ex.StackTrace, "Error")
-            Me.DialogResult = DialogResult.Cancel
+            Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
         End Try
 
-        Me.DialogResult = DialogResult.OK
+        Me.DialogResult = System.Windows.Forms.DialogResult.OK
         Me.Close()
     End Sub
 

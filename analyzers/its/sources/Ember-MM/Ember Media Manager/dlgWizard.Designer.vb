@@ -144,7 +144,7 @@ Partial Class dlgWizard
 		'
 		'OK_Button
 		'
-		Me.OK_Button.DialogResult = DialogResult.OK
+		Me.OK_Button.DialogResult = System.Windows.Forms.DialogResult.OK
 		Me.OK_Button.Enabled = False
 		Me.OK_Button.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
 		Me.OK_Button.Location = New System.Drawing.Point(402, 337)
@@ -155,7 +155,7 @@ Partial Class dlgWizard
 		'
 		'Cancel_Button
 		'
-		Me.Cancel_Button.DialogResult = DialogResult.Cancel
+		Me.Cancel_Button.DialogResult = System.Windows.Forms.DialogResult.Cancel
 		Me.Cancel_Button.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
 		Me.Cancel_Button.Location = New System.Drawing.Point(475, 337)
 		Me.Cancel_Button.Name = "Cancel_Button"

@@ -140,7 +140,7 @@ Public Class OfflineHolderModule
     Private Sub MyMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyMenu.Click, MyTrayMenu.Click
         RaiseEvent GenericEvent(Enums.ModuleEventType.Generic, New List(Of Object)(New Object() {"controlsenabled", False}))
         Using dOfflineHolder As New dlgOfflineHolder
-            If dOfflineHolder.ShowDialog() = DialogResult.OK Then
+            If dOfflineHolder.ShowDialog() = Windows.Forms.DialogResult.OK Then
                 ModulesManager.Instance.RuntimeObjects.InvokeLoadMedia(New Structures.Scans With {.Movies = True}, String.Empty)
             Else
                 RaiseEvent GenericEvent(Enums.ModuleEventType.Generic, New List(Of Object)(New Object() {"controlsenabled", True}))

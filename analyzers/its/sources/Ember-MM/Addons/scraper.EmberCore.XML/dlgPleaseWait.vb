@@ -23,7 +23,7 @@
 Public Class dlgPleaseWait
 
     Private Sub Cancel_Button_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel_Button.Click
-        Me.DialogResult = DialogResult.Cancel
+        Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
     End Sub
 
     Private Sub dlgPleaseWait_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load

@@ -34,7 +34,7 @@ Partial Class dlgCopyFiles
 		'
 		Me.Cancel_Button.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
 				  Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.Cancel_Button.DialogResult = DialogResult.Cancel
+		Me.Cancel_Button.DialogResult = System.Windows.Forms.DialogResult.Cancel
 		Me.Cancel_Button.Location = New System.Drawing.Point(130, 73)
 		Me.Cancel_Button.Name = "Cancel_Button"
 		Me.Cancel_Button.Size = New System.Drawing.Size(67, 23)

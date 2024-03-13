@@ -32,7 +32,7 @@ Public Class dlgNewSet
             Me.Text = Master.eLang.GetString(208, "Add New Set")
         End If
 
-        If MyBase.ShowDialog() = DialogResult.OK Then
+        If MyBase.ShowDialog() = Windows.Forms.DialogResult.OK Then
             Return txtSetName.Text
         Else
             Return String.Empty
@@ -40,7 +40,7 @@ Public Class dlgNewSet
     End Function
 
     Private Sub Cancel_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel_Button.Click
-        Me.DialogResult = DialogResult.Cancel
+        Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Close()
     End Sub
 
@@ -62,7 +62,7 @@ Public Class dlgNewSet
 
         Master.eSettings.Save()
 
-        Me.DialogResult = DialogResult.OK
+        Me.DialogResult = System.Windows.Forms.DialogResult.OK
         Me.Close()
     End Sub
 

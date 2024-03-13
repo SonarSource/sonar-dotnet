@@ -51,7 +51,7 @@ Public Class frmSettingsHolder
     Private Sub btnAddCom_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAddCom.Click
         Using dlg As New dlgXBMCHost
             dlg.XComs = XComs
-            If dlg.ShowDialog() = DialogResult.OK Then
+            If dlg.ShowDialog() = Windows.Forms.DialogResult.OK Then
                 XComs = dlg.XComs
                 RaiseEvent ModuleSettingsChanged()
                 Me.LoadXComs()
@@ -65,7 +65,7 @@ Public Class frmSettingsHolder
             Using dlg As New dlgXBMCHost
                 dlg.XComs = XComs
                 dlg.hostid = Me.lbXBMCCom.SelectedItem.ToString
-                If dlg.ShowDialog() = DialogResult.OK Then
+                If dlg.ShowDialog() = Windows.Forms.DialogResult.OK Then
                     XComs = dlg.XComs
                     RaiseEvent ModuleSettingsChanged()
                     Me.LoadXComs()

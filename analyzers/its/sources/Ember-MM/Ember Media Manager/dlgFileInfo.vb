@@ -42,14 +42,14 @@ Public Class dlgFileInfo
         SettingDefaults = True
         _FileInfo = fi
         _isEpisode = isEpisode
-        If MyBase.ShowDialog() = DialogResult.OK Then
+        If MyBase.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
             Return _FileInfo
         Else
             Return Nothing
         End If
     End Function
 
-    Public Overloads Function ShowDialog(ByVal isEpisode As Boolean) As DialogResult
+    Public Overloads Function ShowDialog(ByVal isEpisode As Boolean) As System.Windows.Forms.DialogResult
         Return MyBase.ShowDialog
     End Function
 
@@ -103,9 +103,9 @@ Public Class dlgFileInfo
 
     Private Sub Cancel_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel_Button.Click
         If NeedToRefresh Then
-            Me.DialogResult = DialogResult.OK
+            Me.DialogResult = System.Windows.Forms.DialogResult.OK
         Else
-            Me.DialogResult = DialogResult.Cancel
+            Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
         End If
         Me.Close()
     End Sub

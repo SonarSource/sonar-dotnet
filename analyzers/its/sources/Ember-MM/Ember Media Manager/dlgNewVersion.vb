@@ -41,7 +41,7 @@ Public Class dlgNewVersion
                 Explorer.Start()
             End Using
         End If
-        DialogResult = DialogResult.Abort
+        DialogResult = Windows.Forms.DialogResult.Abort
         Me.Close()
     End Sub
 

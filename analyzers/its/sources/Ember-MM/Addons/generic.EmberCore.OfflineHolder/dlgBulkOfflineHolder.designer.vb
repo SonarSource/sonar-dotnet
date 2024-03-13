@@ -61,8 +61,8 @@ Partial Class dlgBulkOfflineHolder
 		'CLOSE_Button
 		'
 		Me.CLOSE_Button.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.CLOSE_Button.DialogResult = DialogResult.Cancel
-        Me.CLOSE_Button.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+		Me.CLOSE_Button.DialogResult = System.Windows.Forms.DialogResult.Cancel
+		Me.CLOSE_Button.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
 		Me.CLOSE_Button.Location = New System.Drawing.Point(553, 385)
 		Me.CLOSE_Button.Name = "CLOSE_Button"
 		Me.CLOSE_Button.Size = New System.Drawing.Size(80, 23)

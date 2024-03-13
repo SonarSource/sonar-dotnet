@@ -60,7 +60,7 @@ Public Class dlgBulkRenamer
 
     Private Sub bwbwDoRename_RunWorkerCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bwDoRename.RunWorkerCompleted
         pnlCancel.Visible = False
-        Me.DialogResult = DialogResult.OK
+        Me.DialogResult = System.Windows.Forms.DialogResult.OK
         Me.Close()
     End Sub
 
@@ -255,9 +255,9 @@ Public Class dlgBulkRenamer
 
     Private Sub Close_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Close_Button.Click
         If DoneRename Then
-            Me.DialogResult = DialogResult.OK
+            Me.DialogResult = System.Windows.Forms.DialogResult.OK
         Else
-            Me.DialogResult = DialogResult.Cancel
+            Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
         End If
 
         Me.Close()

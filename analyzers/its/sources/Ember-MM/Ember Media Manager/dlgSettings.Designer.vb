@@ -2255,7 +2255,7 @@ Partial Class dlgSettings
 		'
 		'btnCancel
 		'
-		Me.btnCancel.DialogResult = DialogResult.Cancel
+		Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
 		Me.btnCancel.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
 		Me.btnCancel.Location = New System.Drawing.Point(732, 601)
 		Me.btnCancel.Name = "btnCancel"

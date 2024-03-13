@@ -592,7 +592,7 @@
       "Id": "S122",
       "Message": "Reformat the code to have only one statement per line.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L105",
-      "Location": "Line 105 Position 13-63"
+      "Location": "Line 105 Position 13-77"
     },
     {
       "Id": "S122",
@@ -916,7 +916,7 @@
       "Id": "S122",
       "Message": "Reformat the code to have only one statement per line.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgWizard.vb#L58",
-      "Location": "Line 58 Position 4-65"
+      "Location": "Line 58 Position 4-79"
     },
     {
       "Id": "S122",

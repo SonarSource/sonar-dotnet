@@ -50,7 +50,7 @@ Partial Class dlgAbout
 		'OKButton
 		'
 		Me.OKButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.OKButton.DialogResult = DialogResult.Cancel
+		Me.OKButton.DialogResult = System.Windows.Forms.DialogResult.Cancel
 		Me.OKButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.OKButton.Location = New System.Drawing.Point(342, 343)
 		Me.OKButton.Name = "OKButton"

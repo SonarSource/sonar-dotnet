@@ -420,7 +420,7 @@ Public Class dlgSetsManager
 
         If Me.currSet.Movies.Count > 0 AndAlso needsSave Then SaveSet(currSet)
 
-        Me.DialogResult = DialogResult.OK
+        Me.DialogResult = System.Windows.Forms.DialogResult.OK
         Me.Close()
     End Sub
 

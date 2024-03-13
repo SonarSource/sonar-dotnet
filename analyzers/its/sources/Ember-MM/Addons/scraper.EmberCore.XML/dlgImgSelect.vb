@@ -282,7 +282,7 @@ Public Class dlgImgSelect
             Threading.Thread.Sleep(50)
         End While
 
-        DialogResult = DialogResult.Cancel
+        DialogResult = Windows.Forms.DialogResult.Cancel
         Close()
     End Sub
 
@@ -311,7 +311,7 @@ Public Class dlgImgSelect
         MovieImages = Nothing
     End Sub
 
-    Private Sub dlgImgSelect_FormClosing(ByVal sender As Object, ByVal e As FormClosingEventArgs) Handles Me.FormClosing
+    Private Sub dlgImgSelect_FormClosing(ByVal sender As Object, ByVal e As Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
         If Master.eSettings.AutoET AndAlso Not Master.eSettings.UseImgCache Then FileUtils.Delete.DeleteDirectory(CachePath)
     End Sub
 
@@ -330,7 +330,7 @@ Public Class dlgImgSelect
                 Else
                     MsgBox(Master.eLang.GetString(30, "No Posters found for this movie."), MsgBoxStyle.Information, Master.eLang.GetString(31, "No Posters Found"))
                 End If
-                DialogResult = DialogResult.Cancel
+                DialogResult = Windows.Forms.DialogResult.Cancel
                 Close()
             End If
 
@@ -567,7 +567,7 @@ Public Class dlgImgSelect
         DoSelect(Convert.ToInt32(DirectCast(sender, Label).Name), DirectCast(sender, Label).Tag.ToString)
     End Sub
 
-    Private Sub MouseWheelEvent(ByVal sender As Object, ByVal e As MouseEventArgs)
+    Private Sub MouseWheelEvent(ByVal sender As Object, ByVal e As Windows.Forms.MouseEventArgs)
         If e.Delta < 0 Then
             If (pnlBG.VerticalScroll.Value + 50) <= pnlBG.VerticalScroll.Maximum Then
                 pnlBG.VerticalScroll.Value += 50
@@ -694,7 +694,7 @@ Public Class dlgImgSelect
             Master.eLog.WriteToErrorLog(ex.Message, ex.StackTrace, "Error")
         End Try
 
-        DialogResult = DialogResult.OK
+        DialogResult = Windows.Forms.DialogResult.OK
         Close()
     End Sub
 
@@ -742,7 +742,7 @@ Public Class dlgImgSelect
                     Else
                         MsgBox(Master.eLang.GetString(30, "No Posters found for this movie."), MsgBoxStyle.Information, Master.eLang.GetString(31, "No Posters Found"))
                     End If
-                    DialogResult = DialogResult.Cancel
+                    DialogResult = Windows.Forms.DialogResult.Cancel
                     Close()
                 Else
                     noImages = True

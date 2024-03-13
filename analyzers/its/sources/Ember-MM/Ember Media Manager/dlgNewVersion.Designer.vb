@@ -43,7 +43,7 @@ Partial Class dlgNewVersion
 		'Cancel_Button
 		'
 		Me.Cancel_Button.Anchor = System.Windows.Forms.AnchorStyles.None
-		Me.Cancel_Button.DialogResult = DialogResult.Cancel
+		Me.Cancel_Button.DialogResult = System.Windows.Forms.DialogResult.Cancel
 		Me.Cancel_Button.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
 		Me.Cancel_Button.Location = New System.Drawing.Point(457, 390)
 		Me.Cancel_Button.Name = "Cancel_Button"
@@ -133,7 +133,7 @@ Partial Class dlgNewVersion
 		'
 		'btnNo
 		'
-		Me.btnNo.DialogResult = DialogResult.Cancel
+		Me.btnNo.DialogResult = System.Windows.Forms.DialogResult.Cancel
 		Me.btnNo.Location = New System.Drawing.Point(201, 123)
 		Me.btnNo.Name = "btnNo"
 		Me.btnNo.Size = New System.Drawing.Size(58, 22)

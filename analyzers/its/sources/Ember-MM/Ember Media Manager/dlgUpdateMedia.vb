@@ -36,7 +36,7 @@ Public Class dlgUpdateMedia
         ' Overload to pass data
         '\\
 
-        If MyBase.ShowDialog() = DialogResult.OK Then
+        If MyBase.ShowDialog() = Windows.Forms.DialogResult.OK Then
             Me.CustomUpdater.Canceled = False
         Else
             Me.CustomUpdater.Canceled = True
@@ -292,7 +292,7 @@ Public Class dlgUpdateMedia
     End Sub
 
     Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK_Button.Click
-        Me.DialogResult = DialogResult.Cancel
+        Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Close()
     End Sub
 
@@ -409,7 +409,7 @@ Public Class dlgUpdateMedia
     End Sub
 
     Private Sub Update_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Update_Button.Click
-        Me.DialogResult = DialogResult.OK
+        Me.DialogResult = System.Windows.Forms.DialogResult.OK
         Me.Close()
     End Sub
 

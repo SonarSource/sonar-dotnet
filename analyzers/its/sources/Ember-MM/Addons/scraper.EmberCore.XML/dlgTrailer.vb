@@ -42,7 +42,7 @@ Public Class dlgTrailer
 
         Me.lbTrailers.Items.AddRange(_trailerlist.ToArray)
 
-        If MyBase.ShowDialog() = DialogResult.OK Then
+        If MyBase.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
             Return Me.tURL
         Else
             Return String.Empty
@@ -77,7 +77,7 @@ Public Class dlgTrailer
 
                 File.Delete(Me.prePath)
 
-                Me.DialogResult = DialogResult.OK
+                Me.DialogResult = System.Windows.Forms.DialogResult.OK
                 Me.Close()
             Else
                 System.Diagnostics.Process.Start(String.Concat("""", Me.prePath, """"))
@@ -90,7 +90,7 @@ Public Class dlgTrailer
                     Me.tURL = Path.Combine(Directory.GetParent(Me.sPath).FullName, String.Concat(Path.GetFileNameWithoutExtension(Me.sPath), If(Master.eSettings.DashTrailer, "-trailer", "[trailer]"), Path.GetExtension(Me.txtManual.Text)))
                     FileUtils.Common.MoveFileWithStream(Me.txtManual.Text, Me.tURL)
 
-                    Me.DialogResult = DialogResult.OK
+                    Me.DialogResult = System.Windows.Forms.DialogResult.OK
                     Me.Close()
                 Else
                     System.Diagnostics.Process.Start(String.Concat("""", Me.txtManual.Text, """"))
@@ -172,7 +172,7 @@ Public Class dlgTrailer
                 Me.tURL = Path.Combine(Directory.GetParent(Me.sPath).FullName, String.Concat(Path.GetFileNameWithoutExtension(Me.sPath), If(Master.eSettings.DashTrailer, "-trailer", "[trailer]"), Path.GetExtension(Me.txtManual.Text)))
                 File.Move(Me.txtManual.Text, Me.tURL)
 
-                Me.DialogResult = DialogResult.OK
+                Me.DialogResult = System.Windows.Forms.DialogResult.OK
                 Me.Close()
             Else
                 MsgBox(Master.eLang.GetString(192, "File is not valid.", True), MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, Master.eLang.GetString(194, "Not Valid", True))
@@ -195,7 +195,7 @@ Public Class dlgTrailer
             End If
 
             If Not didCancel Then
-                Me.DialogResult = DialogResult.OK
+                Me.DialogResult = System.Windows.Forms.DialogResult.OK
                 Me.Close()
             End If
         End If
@@ -229,7 +229,7 @@ Public Class dlgTrailer
     Private Sub bwDownloadTrailer_RunWorkerCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bwDownloadTrailer.RunWorkerCompleted
         If Not e.Cancelled Then
             If Convert.ToBoolean(e.Result) Then
-                Me.DialogResult = DialogResult.OK
+                Me.DialogResult = System.Windows.Forms.DialogResult.OK
                 Me.Close()
             Else
                 Me.pnlStatus.Visible = False
@@ -253,7 +253,7 @@ Public Class dlgTrailer
             Threading.Thread.Sleep(50)
         End While
 
-        Me.DialogResult = DialogResult.Cancel
+        Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Close()
     End Sub
 
