@@ -68,10 +68,16 @@ public class TestController : Controller
         _ = Request.Form.TryGetValue(value: out _, key: "id");    // Noncompliant
     }
 
-    void MixedAccess(string key)
+    void MixedAccess_Form(string key)
     {
         _ = Request.Form["id"]; // Compliant (a mixed access with constant and non-constant keys is compliant)
         _ = Request.Form[key];  // Compliant
+    }
+
+    void MixedAccess_Form_Query(string key)
+    {
+        _ = Request.Form["id"];  // Compliant (a mixed access with constant and non-constant keys is compliant)
+        _ = Request.Query[key];  // Compliant
     }
 
     void FalseNegatives()

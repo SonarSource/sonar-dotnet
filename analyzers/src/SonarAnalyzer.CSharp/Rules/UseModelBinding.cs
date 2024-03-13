@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Concurrent;
 using SonarAnalyzer.Helpers.Trackers;
 
 namespace SonarAnalyzer.Rules.CSharp;
@@ -107,7 +108,7 @@ public sealed class UseModelBinding : SonarDiagnosticAnalyzer
                 compilationStartContext.RegisterSymbolStartAction(symbolStartContext =>
                 {
                     var hasOverrides = false;
-                    var controllerCandidates = new List<ReportCandidate>();
+                    var controllerCandidates = new ConcurrentStack<ReportCandidate>();
                     if (symbolStartContext.Symbol is INamedTypeSymbol namedType
                         && namedType.IsControllerType())
                     {
@@ -115,13 +116,10 @@ public sealed class UseModelBinding : SonarDiagnosticAnalyzer
                         {
                             symbolStartContext.RegisterCodeBlockStartAction<SyntaxKind>(codeBlockStart =>
                             {
-                                var isOverride = codeBlockStart.OwningSymbol is IMethodSymbol method
-                                    && method.ExplicitOrImplicitInterfaceImplementations().Any(x => x is IMethodSymbol { ContainingType: { } container } && container.IsAny(
-                                        KnownType.Microsoft_AspNetCore_Mvc_Filters_IActionFilter,
-                                        KnownType.Microsoft_AspNetCore_Mvc_Filters_IAsyncActionFilter));
+                                var isOverride = codeBlockStart.OwningSymbol is IMethodSymbol method && IsOverridingFilterMethods(method);
                                 hasOverrides |= isOverride;
                                 var allConstantAccess = true;
-                                var codeBlockCandidates = new List<ReportCandidate>();
+                                var codeBlockCandidates = new ConcurrentStack<ReportCandidate>();
                                 if (!isOverride)
                                 {
                                     codeBlockStart.RegisterNodeAction(nodeContext =>
@@ -133,8 +131,7 @@ public sealed class UseModelBinding : SonarDiagnosticAnalyzer
                                             allConstantAccess &= nodeContext.SemanticModel.GetConstantValue(argument.Expression) is { HasValue: true, Value: string };
                                             if (allConstantAccess)
                                             {
-                                                var originatesFromParameter = OriginatesFromParameter(nodeContext.SemanticModel, argument);
-                                                codeBlockCandidates.Add(new(UseModelBindingMessage, GetPrimaryLocation(argument), originatesFromParameter));
+                                                codeBlockCandidates.Push(new(UseModelBindingMessage, GetPrimaryLocation(argument), OriginatesFromParameter(nodeContext.SemanticModel, argument)));
                                             }
                                         }
                                     }, SyntaxKind.Argument);
@@ -142,7 +139,7 @@ public sealed class UseModelBinding : SonarDiagnosticAnalyzer
                                     {
                                         if (allConstantAccess)
                                         {
-                                            controllerCandidates.AddRange(codeBlockCandidates);
+                                            controllerCandidates.PushRange([.. codeBlockCandidates]);
                                         }
                                     });
                                 }
@@ -156,7 +153,7 @@ public sealed class UseModelBinding : SonarDiagnosticAnalyzer
                                 var context = new PropertyAccessContext(memberAccess, nodeContext.SemanticModel, memberAccess.Name.Identifier.ValueText);
                                 if (propertyTracker.MatchProperty([.. propertyAccessDescriptors])(context))
                                 {
-                                    nodeContext.ReportIssue(Diagnostic.Create(Rule, memberAccess.GetLocation(), UseIFormFileBindingMessage));
+                                    controllerCandidates.Push(new(UseIFormFileBindingMessage, memberAccess.GetLocation(), OriginatesFromParameter(nodeContext.SemanticModel, memberAccess)));
                                 }
                             }, SyntaxKind.SimpleMemberAccessExpression);
                         }
@@ -177,10 +174,19 @@ public sealed class UseModelBinding : SonarDiagnosticAnalyzer
         });
     }
 
+    private static bool IsOverridingFilterMethods(IMethodSymbol method) =>
+        (method.GetOverriddenMember() ?? method).ExplicitOrImplicitInterfaceImplementations().Any(x => x is IMethodSymbol { ContainingType: { } container }
+        && container.IsAny(
+                KnownType.Microsoft_AspNetCore_Mvc_Filters_IActionFilter,
+                KnownType.Microsoft_AspNetCore_Mvc_Filters_IAsyncActionFilter));
+
     private static bool OriginatesFromParameter(SemanticModel semanticModel, ArgumentSyntax argument) =>
         GetExpressionOfArgumentParent(argument) is { } parentExpression
-            && MostLeftOfDottedChain(parentExpression) is { } mostLeft
-            && semanticModel.GetSymbolInfo(mostLeft).Symbol is IParameterSymbol;
+        && OriginatesFromParameter(semanticModel, parentExpression);
+
+    private static bool OriginatesFromParameter(SemanticModel semanticModel, ExpressionSyntax expression) =>
+        MostLeftOfDottedChain(expression) is { } mostLeft
+        && semanticModel.GetSymbolInfo(mostLeft).Symbol is IParameterSymbol;
 
     private static ExpressionSyntax MostLeftOfDottedChain(ExpressionSyntax root)
     {
@@ -196,6 +202,7 @@ public sealed class UseModelBinding : SonarDiagnosticAnalyzer
         }
         return current;
     }
+
     private static ExpressionSyntax GetExpressionOfArgumentParent(ArgumentSyntax argument) =>
         argument switch
         {
