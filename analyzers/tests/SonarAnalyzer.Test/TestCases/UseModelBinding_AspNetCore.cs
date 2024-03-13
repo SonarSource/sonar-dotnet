@@ -87,6 +87,11 @@ public class TestController : Controller
         _ = Request.Form[Key];                                    // FN: Key is a readonly field with a constant initializer (Requires cross procedure SE)
     }
 
+    void FormCollection(IFormCollection form)
+    {
+        _ = form["id"]; // Compliant. Using IFormCollection is model binding
+    }
+
     void HeaderAccess()
     {
         Request.Headers["id"] = "Assignment";                     // Compliant

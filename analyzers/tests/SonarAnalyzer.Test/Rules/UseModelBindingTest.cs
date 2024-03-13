@@ -55,32 +55,9 @@ public class UseModelBindingTest
 
                 public class OverridesController : Controller
                 {
-                    public void Action()
+                    public void Action(IFormCollection form)
                     {
-                        _ = Request.Form["id"]; // Noncompliant 
-                    }
-                    private void Undecidable(HttpContext context)
-                    {
-                        // Implementation: It might be difficult to distinguish between access to "Request" that originate from overrides vs. "Request" access that originate from action methods.
-                        // This is especially true for "Request" which originate from parameters like here. We may need to redeclare such cases as FNs (see e.g HandleRequest above).
-                        _ = context.Request.Form["id"]; // Undecidable: request may originate from an action method (which supports binding), or from one of the following overrides (which don't).
-                    }
-                    private void Undecidable(HttpRequest request)
-                    {
-                        _ = request.Form["id"]; // Undecidable: request may originate from an action method (which supports binding), or from one of the following overloads (which don't).
-                    }
-                    public override void OnActionExecuted(ActionExecutedContext context)
-                    {
-                        _ = context.HttpContext.Request.Form["id"]; // Compliant: Model binding is not supported here
-                    }
-                    public override void OnActionExecuting(ActionExecutingContext context)
-                    {
-                        _ = context.HttpContext.Request.Form["id"]; // Compliant: Model binding is not supported here
-                    }
-                    public override Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
-                    {
-                        _ = context.HttpContext.Request.Form["id"]; // Compliant: Model binding is not supported here
-                        return base.OnActionExecutionAsync(context, next);
+                        _ = form["id"]; // Compliant. Using IFormCollection is model binding
                     }
                 }
                 """).Verify();

@@ -42,7 +42,7 @@ public sealed class UseModelBinding : SonarDiagnosticAnalyzer
             var propertyTracker = new CSharpPropertyAccessTracker();
             var argumentDescriptors = new List<ArgumentDescriptor>();
             var propertyAccessDescriptors = new List<MemberDescriptor>();
-            if (compilationStartContext.Compilation.GetTypeByMetadataName(KnownType.Microsoft_AspNetCore_Mvc_ControllerAttribute) is { } controllerAttribute)
+            if (compilationStartContext.Compilation.GetTypeByMetadataName(KnownType.Microsoft_AspNetCore_Mvc_ControllerAttribute) is { })
             {
                 AddAspNetCoreDescriptors(argumentDescriptors, propertyAccessDescriptors);
             }
@@ -145,8 +145,11 @@ public sealed class UseModelBinding : SonarDiagnosticAnalyzer
         argumentDescriptors.Add(ArgumentDescriptor.MethodInvocation(// Request.Headers.TryGetValue("id", out _)
             invokedMethodSymbol: x => IsIDictionaryStringStringValuesInvocation(x, "TryGetValue"),
             invokedMemberNameConstraint: (name, comparison) => string.Equals(name, "TryGetValue", comparison),
+            invokedMemberNodeConstraint: (model, language, invocation) => invocation is InvocationExpressionSyntax { Expression: { } expression }
+                && GetLeftOfDot(expression) is var left
+                && (left is null || (model.GetTypeInfo(left) is { Type: { } typeSymbol } && typeSymbol.Is(KnownType.Microsoft_AspNetCore_Http_IHeaderDictionary))),
             parameterConstraint: x => string.Equals(x.Name, "key", StringComparison.Ordinal),
-            argumentPosition: x => x == 0,
+            argumentListConstraint: (list, position) => list.Count == 2 && position == 0,
             refKind: null));
         argumentDescriptors.Add(ArgumentDescriptor.MethodInvocation(// Request.Headers.ContainsKey("id")
             invokedMethodSymbol: x => IsIDictionaryStringStringValuesInvocation(x, "ContainsKey"),
@@ -191,6 +194,14 @@ public sealed class UseModelBinding : SonarDiagnosticAnalyzer
     private static bool OriginatesFromParameter(SemanticModel semanticModel, ExpressionSyntax expression) =>
         MostLeftOfDottedChain(expression) is { } mostLeft
         && semanticModel.GetSymbolInfo(mostLeft).Symbol is IParameterSymbol;
+
+    private static ExpressionSyntax GetLeftOfDot(ExpressionSyntax expression) =>
+        expression switch
+        {
+            MemberAccessExpressionSyntax memberAccessExpression => memberAccessExpression.Expression,
+            MemberBindingExpressionSyntax memberBindingExpression => memberBindingExpression.GetParentConditionalAccessExpression()?.Expression,
+            _ => null,
+        };
 
     private static ExpressionSyntax MostLeftOfDottedChain(ExpressionSyntax root)
     {
