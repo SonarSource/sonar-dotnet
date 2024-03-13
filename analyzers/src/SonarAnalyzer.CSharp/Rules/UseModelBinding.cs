@@ -51,56 +51,57 @@ public sealed class UseModelBinding : SonarDiagnosticAnalyzer
             {
                 compilationStartContext.RegisterSymbolStartAction(symbolStartContext =>
                 {
+                    // If the user overrides any action filters, model binding may not be working as expected. We do not want to raise on expressions that originate from parameters.
                     var hasOverrides = false;
-                    var controllerCandidates = new ConcurrentStack<ReportCandidate>();
+                    var controllerCandidates = new ConcurrentStack<ReportCandidate>(); // In SymbolEnd, we filter the candidates based on the overriding we learn on the go.
                     if (symbolStartContext.Symbol is INamedTypeSymbol namedType
                         && namedType.IsControllerType())
                     {
-                        if (argumentDescriptors.Any())
+                        symbolStartContext.RegisterCodeBlockStartAction<SyntaxKind>(codeBlockStart =>
                         {
-                            symbolStartContext.RegisterCodeBlockStartAction<SyntaxKind>(codeBlockStart =>
+                            var isOverride = codeBlockStart.OwningSymbol is IMethodSymbol method && IsOverridingFilterMethods(method);
+                            hasOverrides |= isOverride;
+                            if (isOverride)
                             {
-                                var isOverride = codeBlockStart.OwningSymbol is IMethodSymbol method && IsOverridingFilterMethods(method);
-                                hasOverrides |= isOverride;
-                                var allConstantAccess = true;
-                                var codeBlockCandidates = new ConcurrentStack<ReportCandidate>();
-                                if (!isOverride)
+                                return;
+                            }
+                            // Within a single codeblock, access via constant and variable keys could be mixed
+                            // We only want to raise, if all access were done via constants
+                            var allConstantAccess = true;
+                            var codeBlockCandidates = new ConcurrentStack<ReportCandidate>();
+                            if (argumentDescriptors.Any())
+                            {
+                                codeBlockStart.RegisterNodeAction(nodeContext =>
                                 {
-                                    codeBlockStart.RegisterNodeAction(nodeContext =>
+                                    var argument = (ArgumentSyntax)nodeContext.Node;
+                                    var context = new ArgumentContext(argument, nodeContext.SemanticModel);
+                                    if (allConstantAccess && argumentDescriptors.Exists(x => argumentTracker.MatchArgument(x)(context)))
                                     {
-                                        var argument = (ArgumentSyntax)nodeContext.Node;
-                                        var context = new ArgumentContext(argument, nodeContext.SemanticModel);
-                                        if (argumentDescriptors.Any(x => argumentTracker.MatchArgument(x)(context)))
-                                        {
-                                            allConstantAccess &= nodeContext.SemanticModel.GetConstantValue(argument.Expression) is { HasValue: true, Value: string };
-                                            if (allConstantAccess)
-                                            {
-                                                codeBlockCandidates.Push(new(UseModelBindingMessage, GetPrimaryLocation(argument), OriginatesFromParameter(nodeContext.SemanticModel, argument)));
-                                            }
-                                        }
-                                    }, SyntaxKind.Argument);
-                                    codeBlockStart.RegisterCodeBlockEndAction(codeBlockEnd =>
+                                        allConstantAccess &= nodeContext.SemanticModel.GetConstantValue(argument.Expression) is { HasValue: true, Value: string };
+                                        codeBlockCandidates.Push(new(UseModelBindingMessage, GetPrimaryLocation(argument), OriginatesFromParameter(nodeContext.SemanticModel, argument)));
+                                    }
+                                }, SyntaxKind.Argument);
+                            }
+                            if (propertyAccessDescriptors.Any())
+                            {
+                                codeBlockStart.RegisterNodeAction(nodeContext =>
+                                {
+                                    var memberAccess = (MemberAccessExpressionSyntax)nodeContext.Node;
+                                    var context = new PropertyAccessContext(memberAccess, nodeContext.SemanticModel, memberAccess.Name.Identifier.ValueText);
+                                    if (propertyTracker.MatchProperty([.. propertyAccessDescriptors])(context))
                                     {
-                                        if (allConstantAccess)
-                                        {
-                                            controllerCandidates.PushRange([.. codeBlockCandidates]);
-                                        }
-                                    });
+                                        codeBlockCandidates.Push(new(UseIFormFileBindingMessage, memberAccess.GetLocation(), OriginatesFromParameter(nodeContext.SemanticModel, memberAccess)));
+                                    }
+                                }, SyntaxKind.SimpleMemberAccessExpression);
+                            }
+                            codeBlockStart.RegisterCodeBlockEndAction(codeBlockEnd =>
+                            {
+                                if (allConstantAccess)
+                                {
+                                    controllerCandidates.PushRange([.. codeBlockCandidates]);
                                 }
                             });
-                        }
-                        if (propertyAccessDescriptors.Any())
-                        {
-                            symbolStartContext.RegisterSyntaxNodeAction(nodeContext =>
-                            {
-                                var memberAccess = (MemberAccessExpressionSyntax)nodeContext.Node;
-                                var context = new PropertyAccessContext(memberAccess, nodeContext.SemanticModel, memberAccess.Name.Identifier.ValueText);
-                                if (propertyTracker.MatchProperty([.. propertyAccessDescriptors])(context))
-                                {
-                                    controllerCandidates.Push(new(UseIFormFileBindingMessage, memberAccess.GetLocation(), OriginatesFromParameter(nodeContext.SemanticModel, memberAccess)));
-                                }
-                            }, SyntaxKind.SimpleMemberAccessExpression);
-                        }
+                        });
                     }
                     symbolStartContext.RegisterSymbolEndAction(symbolEnd =>
                     {
