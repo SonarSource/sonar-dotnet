@@ -10,6 +10,10 @@
     <PackageReference Include="Google.Protobuf" Version="3.6.1" />
     <!-- When changing this reference update ProtocExe property too! -->
     <PackageReference Include="Google.Protobuf.Tools" Version="3.6.1" />
+    <PackageReference Include="Grpc.Tools" Version="2.26.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.CodeAnalysis.PerformanceSensitiveAnalyzers" Version="3.3.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -26,10 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Protobuf\AnalyzerReport.cs" />
-    <Compile Include="Protobuf\AnalyzerReport.cs">
-      <SonarQubeExclude>true</SonarQubeExclude>
-    </Compile>
     <Compile Include="..\Signing.cs" Link="Properties\Signing.cs" />
   </ItemGroup>
 
@@ -47,23 +47,9 @@
     <Using Include="Microsoft.CodeAnalysis" />
     <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
   </ItemGroup>
-
-  <!-- Generate protobuf classes, supports windows and linux execution -->
-  <Target Name="GenerateProtobufClasses" BeforeTargets="CoreCompile" Outputs="./Protobuf/AnalyzerReport.cs" Inputs="./Protobuf/AnalyzerReport.proto">
-    <Message Importance="high" Text="Generating protobuf classes..." />
-    <!-- There is no built-in way to distinguish between Linux and OSX -->
-    <PropertyGroup>
-      <IsWindows Condition="'$(OS)'=='Windows_NT'">true</IsWindows>
-      <IsOSX Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::OSX)))' == 'true'">true</IsOSX>
-      <IsLinux Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Linux)))' == 'true'">true</IsLinux>
-    </PropertyGroup>
-    <PropertyGroup>
-      <ProtocCompiler Condition="$(IsWindows)==true">"$(NugetPackageRoot)/Google.Protobuf.Tools/3.6.1/tools/windows_x64/protoc.exe"</ProtocCompiler>
-      <ProtocCompiler Condition="$(IsOSX)==true">$(NugetPackageRoot)/google.protobuf.tools/3.6.1/tools/macosx_x64/protoc</ProtocCompiler>
-      <ProtocCompiler Condition="$(IsLinux)==true">$(NugetPackageRoot)/google.protobuf.tools/3.6.1/tools/linux_x64/protoc</ProtocCompiler>
-    </PropertyGroup>
-    <Exec Command="$(ProtocCompiler) -I=./Protobuf --csharp_out=./Protobuf ./Protobuf/AnalyzerReport.proto" />
-    <Message Importance="high" Text="Protobuf classes generated." />
-  </Target>
+  
+  <ItemGroup>
+    <Protobuf Include="Protobuf/AnalyzerReport.proto" />
+  </ItemGroup>
 
 </Project>

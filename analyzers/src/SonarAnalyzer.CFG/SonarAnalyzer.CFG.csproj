@@ -25,9 +25,6 @@
 
   <ItemGroup>
     <Compile Include="..\Signing.cs" Link="Properties\Signing.cs" />
-    <Compile Update="ShimLayer\*.cs">
-      <SonarQubeExclude>true</SonarQubeExclude>
-    </Compile>
   </ItemGroup>
 
   <ItemGroup>
