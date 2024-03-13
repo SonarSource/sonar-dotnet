@@ -51,72 +51,73 @@ public sealed class UseModelBinding : SonarDiagnosticAnalyzer
             {
                 compilationStartContext.RegisterSymbolStartAction(symbolStartContext =>
                 {
-                    // If the user overrides any action filters, model binding may not be working as expected. We do not want to raise on expressions that originate from parameters.
+                    // If the user overrides any action filters, model binding may not be working as expected. Then we do not want to raise on expressions that originate from parameters.
                     var hasOverrides = false;
                     var controllerCandidates = new ConcurrentStack<ReportCandidate>(); // In SymbolEnd, we filter the candidates based on the overriding we learn on the go.
-                    if (symbolStartContext.Symbol is INamedTypeSymbol namedType
-                        && namedType.IsControllerType())
+                    if (symbolStartContext.Symbol is INamedTypeSymbol namedType && namedType.IsControllerType())
                     {
                         symbolStartContext.RegisterCodeBlockStartAction<SyntaxKind>(codeBlockStart =>
-                        {
-                            var isOverride = codeBlockStart.OwningSymbol is IMethodSymbol method && IsOverridingFilterMethods(method);
-                            hasOverrides |= isOverride;
-                            if (isOverride)
-                            {
-                                return;
-                            }
-                            // Within a single codeblock, access via constant and variable keys could be mixed
-                            // We only want to raise, if all access were done via constants
-                            var allConstantAccess = true;
-                            var codeBlockCandidates = new ConcurrentStack<ReportCandidate>();
-                            if (argumentDescriptors.Any())
-                            {
-                                codeBlockStart.RegisterNodeAction(nodeContext =>
-                                {
-                                    var argument = (ArgumentSyntax)nodeContext.Node;
-                                    var context = new ArgumentContext(argument, nodeContext.SemanticModel);
-                                    if (allConstantAccess && argumentDescriptors.Exists(x => argumentTracker.MatchArgument(x)(context)))
-                                    {
-                                        allConstantAccess &= nodeContext.SemanticModel.GetConstantValue(argument.Expression) is { HasValue: true, Value: string };
-                                        codeBlockCandidates.Push(new(UseModelBindingMessage, GetPrimaryLocation(argument), OriginatesFromParameter(nodeContext.SemanticModel, argument)));
-                                    }
-                                }, SyntaxKind.Argument);
-                            }
-                            if (propertyAccessDescriptors.Any())
-                            {
-                                codeBlockStart.RegisterNodeAction(nodeContext =>
-                                {
-                                    var memberAccess = (MemberAccessExpressionSyntax)nodeContext.Node;
-                                    var context = new PropertyAccessContext(memberAccess, nodeContext.SemanticModel, memberAccess.Name.Identifier.ValueText);
-                                    if (propertyTracker.MatchProperty([.. propertyAccessDescriptors])(context))
-                                    {
-                                        codeBlockCandidates.Push(new(UseIFormFileBindingMessage, memberAccess.GetLocation(), OriginatesFromParameter(nodeContext.SemanticModel, memberAccess)));
-                                    }
-                                }, SyntaxKind.SimpleMemberAccessExpression);
-                            }
-                            codeBlockStart.RegisterCodeBlockEndAction(codeBlockEnd =>
-                            {
-                                if (allConstantAccess)
-                                {
-                                    controllerCandidates.PushRange([.. codeBlockCandidates]);
-                                }
-                            });
-                        });
+                            hasOverrides |= CheckCodeBlock(codeBlockStart, argumentTracker, propertyTracker, argumentDescriptors, propertyAccessDescriptors, controllerCandidates));
                     }
                     symbolStartContext.RegisterSymbolEndAction(symbolEnd =>
                     {
-                        foreach (var candidate in controllerCandidates)
+                        foreach (var candidate in controllerCandidates.Where(x => !(hasOverrides && x.OriginatesFromParameter)))
                         {
-                            if (hasOverrides && candidate.OriginatesFromParameter)
-                            {
-                                continue;
-                            }
                             symbolEnd.ReportIssue(Diagnostic.Create(Rule, candidate.Location, candidate.Message));
                         }
                     });
                 }, SymbolKind.NamedType);
             }
         });
+    }
+
+    private static bool CheckCodeBlock(SonarCodeBlockStartAnalysisContext<SyntaxKind> codeBlockStart,
+        CSharpArgumentTracker argumentTracker, CSharpPropertyAccessTracker propertyTracker,
+        IReadOnlyList<ArgumentDescriptor> argumentDescriptors, IReadOnlyList<MemberDescriptor> propertyAccessDescriptors,
+        ConcurrentStack<ReportCandidate> controllerCandidates)
+    {
+        var isOverride = codeBlockStart.OwningSymbol is IMethodSymbol method && IsOverridingFilterMethods(method);
+        if (isOverride)
+        {
+            return true;
+        }
+        // Within a single code block, access via constant and variable keys could be mixed
+        // We only want to raise, if all access were done via constants
+        var allConstantAccess = true;
+        var codeBlockCandidates = new ConcurrentStack<ReportCandidate>();
+        if (argumentDescriptors.Any())
+        {
+            codeBlockStart.RegisterNodeAction(nodeContext =>
+            {
+                var argument = (ArgumentSyntax)nodeContext.Node;
+                var context = new ArgumentContext(argument, nodeContext.SemanticModel);
+                if (allConstantAccess && argumentDescriptors.Any(x => argumentTracker.MatchArgument(x)(context)))
+                {
+                    allConstantAccess &= nodeContext.SemanticModel.GetConstantValue(argument.Expression) is { HasValue: true, Value: string };
+                    codeBlockCandidates.Push(new(UseModelBindingMessage, GetPrimaryLocation(argument), OriginatesFromParameter(nodeContext.SemanticModel, argument)));
+                }
+            }, SyntaxKind.Argument);
+        }
+        if (propertyAccessDescriptors.Any())
+        {
+            codeBlockStart.RegisterNodeAction(nodeContext =>
+            {
+                var memberAccess = (MemberAccessExpressionSyntax)nodeContext.Node;
+                var context = new PropertyAccessContext(memberAccess, nodeContext.SemanticModel, memberAccess.Name.Identifier.ValueText);
+                if (propertyTracker.MatchProperty([.. propertyAccessDescriptors])(context))
+                {
+                    codeBlockCandidates.Push(new(UseIFormFileBindingMessage, memberAccess.GetLocation(), OriginatesFromParameter(nodeContext.SemanticModel, memberAccess)));
+                }
+            }, SyntaxKind.SimpleMemberAccessExpression);
+        }
+        codeBlockStart.RegisterCodeBlockEndAction(codeBlockEnd =>
+        {
+            if (allConstantAccess)
+            {
+                controllerCandidates.PushRange([.. codeBlockCandidates]);
+            }
+        });
+        return false;
     }
 
     private static void AddAspNetCoreDescriptors(List<ArgumentDescriptor> argumentDescriptors, List<MemberDescriptor> propertyAccessDescriptors)
