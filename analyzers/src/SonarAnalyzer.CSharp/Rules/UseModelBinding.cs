@@ -41,67 +41,11 @@ public sealed class UseModelBinding : SonarDiagnosticAnalyzer
             var argumentTracker = new CSharpArgumentTracker();
             var propertyTracker = new CSharpPropertyAccessTracker();
             var argumentDescriptors = new List<ArgumentDescriptor>();
+            var propertyAccessDescriptors = new List<MemberDescriptor>();
             if (compilationStartContext.Compilation.GetTypeByMetadataName(KnownType.Microsoft_AspNetCore_Mvc_ControllerAttribute) is { } controllerAttribute)
             {
-                // ASP.Net core
-                argumentDescriptors.Add(ArgumentDescriptor.ElementAccess(// Request.Form["id"]
-                    invokedIndexerContainer: KnownType.Microsoft_AspNetCore_Http_IFormCollection,
-                    invokedIndexerExpression: "Form",
-                    parameterConstraint: parameter => parameter.IsType(KnownType.System_String) && IsGetterParameter(parameter),
-                    argumentPosition: 0));
-                argumentDescriptors.Add(ArgumentDescriptor.MethodInvocation(// Request.Form.TryGetValue("id", out _)
-                    invokedType: KnownType.Microsoft_AspNetCore_Http_IFormCollection,
-                    methodName: "TryGetValue",
-                    parameterName: "key",
-                    argumentPosition: 0));
-                argumentDescriptors.Add(ArgumentDescriptor.MethodInvocation(// Request.Form.ContainsKey("id")
-                    invokedType: KnownType.Microsoft_AspNetCore_Http_IFormCollection,
-                    methodName: "ContainsKey",
-                    parameterName: "key",
-                    argumentPosition: 0));
-                argumentDescriptors.Add(ArgumentDescriptor.ElementAccess(// Request.Headers["id"]
-                    invokedIndexerContainer: KnownType.Microsoft_AspNetCore_Http_IHeaderDictionary,
-                    invokedIndexerExpression: "Headers",
-                    parameterConstraint: parameter => parameter.IsType(KnownType.System_String) && IsGetterParameter(parameter),
-                    argumentPosition: 0));
-                argumentDescriptors.Add(ArgumentDescriptor.MethodInvocation(// Request.Headers.TryGetValue("id", out _)
-                    invokedMethodSymbol: x => IsIDictionaryStringStringValuesInvocation(x, "TryGetValue"),
-                    invokedMemberNameConstraint: (name, comparison) => string.Equals(name, "TryGetValue", comparison),
-                    parameterConstraint: x => string.Equals(x.Name, "key", StringComparison.Ordinal),
-                    argumentPosition: x => x == 0,
-                    refKind: null));
-                argumentDescriptors.Add(ArgumentDescriptor.MethodInvocation(// Request.Headers.ContainsKey("id")
-                    invokedMethodSymbol: x => IsIDictionaryStringStringValuesInvocation(x, "ContainsKey"),
-                    invokedMemberNameConstraint: (name, comparison) => string.Equals(name, "ContainsKey", comparison),
-                    parameterConstraint: x => string.Equals(x.Name, "key", StringComparison.Ordinal),
-                    argumentPosition: x => x == 0,
-                    refKind: null));
-                argumentDescriptors.Add(ArgumentDescriptor.ElementAccess(// Request.Query["id"]
-                    invokedIndexerContainer: KnownType.Microsoft_AspNetCore_Http_IQueryCollection,
-                    invokedIndexerExpression: "Query",
-                    parameterConstraint: parameter => parameter.IsType(KnownType.System_String) && IsGetterParameter(parameter),
-                    argumentPosition: 0));
-                argumentDescriptors.Add(ArgumentDescriptor.MethodInvocation(// Request.Query.TryGetValue("id", out _)
-                    invokedType: KnownType.Microsoft_AspNetCore_Http_IQueryCollection,
-                    methodName: "TryGetValue",
-                    parameterName: "key",
-                    argumentPosition: 0));
-                argumentDescriptors.Add(ArgumentDescriptor.ElementAccess(// Request.RouteValues["id"]
-                    invokedIndexerContainer: KnownType.Microsoft_AspNetCore_Routing_RouteValueDictionary,
-                    invokedIndexerExpression: "RouteValues",
-                    parameterConstraint: parameter => parameter.IsType(KnownType.System_String) && IsGetterParameter(parameter),
-                    argumentPosition: 0));
-                argumentDescriptors.Add(ArgumentDescriptor.MethodInvocation(// Request.RouteValues.TryGetValue("id", out _)
-                    invokedType: KnownType.Microsoft_AspNetCore_Routing_RouteValueDictionary,
-                    methodName: "TryGetValue",
-                    parameterName: "key",
-                    argumentPosition: 0));
+                AddAspNetCoreDescriptors(argumentDescriptors, propertyAccessDescriptors);
             }
-
-            var propertyAccessDescriptors = new List<MemberDescriptor>
-            {
-                new(KnownType.Microsoft_AspNetCore_Http_IFormCollection, "Files"), // Request.Form.Files...
-            };
             // TODO: Add descriptors for Asp.Net MVC 4.x
             if (argumentDescriptors.Any() || propertyAccessDescriptors.Any())
             {
@@ -172,6 +116,64 @@ public sealed class UseModelBinding : SonarDiagnosticAnalyzer
                 }, SymbolKind.NamedType);
             }
         });
+    }
+
+    private static void AddAspNetCoreDescriptors(List<ArgumentDescriptor> argumentDescriptors, List<MemberDescriptor> propertyAccessDescriptors)
+    {
+        argumentDescriptors.Add(ArgumentDescriptor.ElementAccess(// Request.Form["id"]
+            invokedIndexerContainer: KnownType.Microsoft_AspNetCore_Http_IFormCollection,
+            invokedIndexerExpression: "Form",
+            parameterConstraint: parameter => parameter.IsType(KnownType.System_String) && IsGetterParameter(parameter),
+            argumentPosition: 0));
+        argumentDescriptors.Add(ArgumentDescriptor.MethodInvocation(// Request.Form.TryGetValue("id", out _)
+            invokedType: KnownType.Microsoft_AspNetCore_Http_IFormCollection,
+            methodName: "TryGetValue",
+            parameterName: "key",
+            argumentPosition: 0));
+        argumentDescriptors.Add(ArgumentDescriptor.MethodInvocation(// Request.Form.ContainsKey("id")
+            invokedType: KnownType.Microsoft_AspNetCore_Http_IFormCollection,
+            methodName: "ContainsKey",
+            parameterName: "key",
+            argumentPosition: 0));
+        argumentDescriptors.Add(ArgumentDescriptor.ElementAccess(// Request.Headers["id"]
+            invokedIndexerContainer: KnownType.Microsoft_AspNetCore_Http_IHeaderDictionary,
+            invokedIndexerExpression: "Headers",
+            parameterConstraint: parameter => parameter.IsType(KnownType.System_String) && IsGetterParameter(parameter),
+            argumentPosition: 0));
+        argumentDescriptors.Add(ArgumentDescriptor.MethodInvocation(// Request.Headers.TryGetValue("id", out _)
+            invokedMethodSymbol: x => IsIDictionaryStringStringValuesInvocation(x, "TryGetValue"),
+            invokedMemberNameConstraint: (name, comparison) => string.Equals(name, "TryGetValue", comparison),
+            parameterConstraint: x => string.Equals(x.Name, "key", StringComparison.Ordinal),
+            argumentPosition: x => x == 0,
+            refKind: null));
+        argumentDescriptors.Add(ArgumentDescriptor.MethodInvocation(// Request.Headers.ContainsKey("id")
+            invokedMethodSymbol: x => IsIDictionaryStringStringValuesInvocation(x, "ContainsKey"),
+            invokedMemberNameConstraint: (name, comparison) => string.Equals(name, "ContainsKey", comparison),
+            parameterConstraint: x => string.Equals(x.Name, "key", StringComparison.Ordinal),
+            argumentPosition: x => x == 0,
+            refKind: null));
+        argumentDescriptors.Add(ArgumentDescriptor.ElementAccess(// Request.Query["id"]
+            invokedIndexerContainer: KnownType.Microsoft_AspNetCore_Http_IQueryCollection,
+            invokedIndexerExpression: "Query",
+            parameterConstraint: parameter => parameter.IsType(KnownType.System_String) && IsGetterParameter(parameter),
+            argumentPosition: 0));
+        argumentDescriptors.Add(ArgumentDescriptor.MethodInvocation(// Request.Query.TryGetValue("id", out _)
+            invokedType: KnownType.Microsoft_AspNetCore_Http_IQueryCollection,
+            methodName: "TryGetValue",
+            parameterName: "key",
+            argumentPosition: 0));
+        argumentDescriptors.Add(ArgumentDescriptor.ElementAccess(// Request.RouteValues["id"]
+            invokedIndexerContainer: KnownType.Microsoft_AspNetCore_Routing_RouteValueDictionary,
+            invokedIndexerExpression: "RouteValues",
+            parameterConstraint: parameter => parameter.IsType(KnownType.System_String) && IsGetterParameter(parameter),
+            argumentPosition: 0));
+        argumentDescriptors.Add(ArgumentDescriptor.MethodInvocation(// Request.RouteValues.TryGetValue("id", out _)
+            invokedType: KnownType.Microsoft_AspNetCore_Routing_RouteValueDictionary,
+            methodName: "TryGetValue",
+            parameterName: "key",
+            argumentPosition: 0));
+
+        propertyAccessDescriptors.Add(new(KnownType.Microsoft_AspNetCore_Http_IFormCollection, "Files")); // Request.Form.Files...
     }
 
     private static bool IsOverridingFilterMethods(IMethodSymbol method) =>
