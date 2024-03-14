@@ -40,26 +40,5 @@ public class UseModelBindingTest
     [TestMethod]
     public void UseModelBinding_AspNetCore_CS() =>
         builderAspNetCore.AddPaths("UseModelBinding_AspNetCore.cs").Verify();
-
-    [TestMethod]
-    public void UseModelBinding_AspNetCore_CS_Debug() =>
-        builderAspNetCore
-            .WithConcurrentAnalysis(false)
-            .AddSnippet("""
-                using Microsoft.AspNetCore.Http;
-                using Microsoft.AspNetCore.Mvc;
-                using Microsoft.AspNetCore.Mvc.Filters;
-                using System;
-                using System.Linq;
-                using System.Threading.Tasks;
-
-                public class OverridesController : Controller
-                {
-                    public void Action(IFormCollection form)
-                    {
-                        _ = form["id"]; // Compliant. Using IFormCollection is model binding
-                    }
-                }
-                """).Verify();
 #endif
 }
