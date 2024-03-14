@@ -154,7 +154,7 @@ public sealed class UseModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
                 invokedMemberNameConstraint: (name, comparison) => string.Equals(name, "TryGetValue", comparison),
                 invokedMemberNodeConstraint: IsAccessedViaHeaderDictionary,
                 parameterConstraint: x => string.Equals(x.Name, "key", StringComparison.Ordinal),
-                argumentListConstraint: (list, position) => list.Count == 2 && position == 0,
+                argumentListConstraint: (list, position) => list.Count == 2 && position is 0 or null,
                 refKind: RefKind.None),
             ArgumentDescriptor.MethodInvocation(// Request.Headers.ContainsKey("id")
                 invokedMethodSymbol: x => IsIDictionaryStringStringValuesInvocation(x, "ContainsKey"),

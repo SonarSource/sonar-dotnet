@@ -48,26 +48,6 @@ public class TestController : Controller
         return default;
     }
 
-    // Parameterized for "Form", "Query", "RouteValues", "Headers"
-    void NoncompliantKeyVariations()
-    {
-        _ = Request.Form[@"key"];                                 // Noncompliant
-        _ = Request.Form.TryGetValue(@"key", out _);              // Noncompliant
-        _ = Request.Form["""key"""];                              // Noncompliant
-        _ = Request.Form.TryGetValue("""key""", out _);           // Noncompliant
-
-        const string key = "id";
-        _ = Request.Form[key];                                    // Noncompliant
-        _ = Request.Form.TryGetValue(key, out _);                 // Noncompliant
-        _ = Request.Form[$"prefix.{key}"];                        // Noncompliant
-        _ = Request.Form.TryGetValue($"prefix.{key}", out _);     // Noncompliant
-        _ = Request.Form[$"""prefix.{key}"""];                    // Noncompliant
-        _ = Request.Form.TryGetValue($"""prefix.{key}""", out _); // Noncompliant
-
-        _ = Request.Form[key: "id"];                              // Noncompliant
-        _ = Request.Form.TryGetValue(value: out _, key: "id");    // Noncompliant
-    }
-
     void MixedAccess_Form(string key)
     {
         _ = Request.Form["id"]; // Compliant (a mixed access with constant and non-constant keys is compliant)
@@ -98,19 +78,16 @@ public class TestController : Controller
         Request.RouteValues["id"] = "Assignment";                 // Compliant
     }
 
-    // Parameterized for Form, Headers, Query, RouteValues / Request, this.Request, ControllerContext.HttpContext.Request / [FromForm], [FromQuery], [FromRoute], [FromHeader]
-    // Implementation: Consider adding a CombinatorialDataAttribute https://stackoverflow.com/a/75531690
-    async Task Compliant([FromForm] string key)
+    async Task Compliant()
     {
-        _ = Request.Form.Keys;
-        _ = Request.Form.Count;
-        foreach (var kvp in Request.Form)
-        { }
-        _ = Request.Form.Select(x => x);
-        _ = Request.Form[key];                // Compliant: The accessed key is not a compile time constant
         _ = Request.Cookies["cookie"];        // Compliant: Cookies are not bound by default
         _ = Request.QueryString;              // Compliant: Accessing the whole raw string is fine.
-        _ = await Request.ReadFormAsync();    // Compliant: This might be used for optimization purposes e.g. conditional form value access.
+    }
+
+    async Task CompliantFormAccess()
+    {
+        var form = await Request.ReadFormAsync(); // Compliant: This might be used for optimization purposes e.g. conditional form value access.
+        _ = form["id"];
     }
 
     // parameterized test: parameters are the different forbidden Request accesses (see above)
