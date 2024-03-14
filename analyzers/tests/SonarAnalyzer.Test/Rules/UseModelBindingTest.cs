@@ -75,6 +75,19 @@ public class UseModelBindingTest
                     _ = Request.{{property}}[key: "id"];                              // Noncompliant
                     _ = Request.{{property}}.TryGetValue(value: out _, key: "id");    // Noncompliant
                 }
+
+                private static void HandleRequest(HttpRequest request)
+                {
+                    _ = request.{{property}}["id"]; // Noncompliant: Containing type is a controller
+                    void LocalFunction()
+                    {
+                        _ = request.{{property}}["id"]; // Noncompliant: Containing type is a controller
+                    }
+                    static void StaticLocalFunction(HttpRequest request)
+                    {
+                        _ = request.{{property}}["id"]; // Noncompliant: Containing type is a controller
+                    }
+                }
             }
             """").Verify();
 
@@ -106,5 +119,118 @@ public class UseModelBindingTest
                 }
             }
             """).Verify();
+
+    [DataTestMethod]
+    [DataRow("public class MyController: Controller")]
+    [DataRow("public class MyController: ControllerBase")]
+    [DataRow("[Controller] public class My: Controller")]
+    // [DataRow("public class MyController")] FN: Poco controller are not detected
+    public void PocoController(string classDeclaration) =>
+        builderAspNetCore.AddSnippet($$""""
+            using Microsoft.AspNetCore.Http;
+            using Microsoft.AspNetCore.Mvc;
+            using Microsoft.AspNetCore.Mvc.Filters;
+            using System;
+            using System.Linq;
+            using System.Threading.Tasks;
+
+            {{classDeclaration}}
+            {
+                public async Task Action([FromServices]IHttpContextAccessor httpContextAccessor)
+                {
+                    _ = httpContextAccessor.HttpContext.Request.Form["id"]; // Noncompliant
+                }
+            }
+            """").Verify();
+
+    [DataTestMethod]
+    [DataRow("public class My")]
+    [DataRow("[NonController] public class My: Controller")]
+    [DataRow("[NonController] public class MyController: Controller")]
+    public void NoController(string classDeclaration) =>
+        builderAspNetCore.AddSnippet($$""""
+            using Microsoft.AspNetCore.Http;
+            using Microsoft.AspNetCore.Mvc;
+            using Microsoft.AspNetCore.Mvc.Filters;
+            using System;
+            using System.Linq;
+            using System.Threading.Tasks;
+
+            {{classDeclaration}}
+            {
+                public async Task Action([FromServices]IHttpContextAccessor httpContextAccessor)
+                {
+                    _ = httpContextAccessor.HttpContext.Request.Form["id"]; // Compliant
+                }
+            }
+            """").Verify();
+
+    [DataTestMethod]
+    [DataRow("Form")]
+    [DataRow("Headers")]
+    [DataRow("Query")]
+    [DataRow("RouteValues")]
+    public void NoControllerHelpers(string property) =>
+        builderAspNetCore.AddSnippet($$""""
+            using Microsoft.AspNetCore.Http;
+            using Microsoft.AspNetCore.Mvc;
+            using Microsoft.AspNetCore.Mvc.Filters;
+            using System;
+            using System.Linq;
+            using System.Threading.Tasks;
+
+            static class HttpRequestExtensions
+            {
+                public static void Ext(this HttpRequest request)
+                {
+                    _ = request.{{property}}["id"]; // Compliant: Not in a controller
+                }
+            }
+
+            class RequestService
+            {
+                public HttpRequest Request { get; }
+
+                public void HandleRequest(HttpRequest request)
+                {
+                    _ = Request.{{property}}["id"]; // Compliant: Not in a controller
+                    _ = request.{{property}}["id"]; // Compliant: Not in a controller
+                }
+            }            
+            """").Verify();
+
+    [TestMethod]
+    [CombinatorialData]
+    public void InheritanceAccess(
+        [DataValues(
+            ": Controller",
+            ": ControllerBase",
+            ": MyBaseController",
+            ": MyBaseBaseController")]string baseList,
+        [DataValues(
+            """_ = Request.Form["id"]""",
+            """_ = Request.Form.TryGetValue("id", out var _)""",
+            """_ = Request.Headers["id"]""",
+            """_ = Request.Query["id"]""",
+            """_ = Request.RouteValues["id"]""")]string nonCompliantStatement) =>
+        builderAspNetCore.AddSnippet($$""""
+            using Microsoft.AspNetCore.Http;
+            using Microsoft.AspNetCore.Mvc;
+            using Microsoft.AspNetCore.Mvc.Filters;
+            using System;
+            using System.Linq;
+            using System.Threading.Tasks;
+
+            public class MyBaseController : ControllerBase { }
+            public class MyBaseBaseController : MyBaseController { }
+
+            public class MyTestController {{baseList}}
+            {
+                public void Action()
+                {
+                    {{nonCompliantStatement}}; // Noncompliant
+                }
+            }
+            """").Verify();
 #endif
 }

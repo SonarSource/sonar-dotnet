@@ -89,20 +89,6 @@ public class TestController : Controller
         var form = await Request.ReadFormAsync(); // Compliant: This might be used for optimization purposes e.g. conditional form value access.
         _ = form["id"];
     }
-
-    // parameterized test: parameters are the different forbidden Request accesses (see above)
-    private static void HandleRequest(HttpRequest request)
-    {
-        _ = request.Form["id"]; // Noncompliant: Containing type is a controller
-        void LocalFunction()
-        {
-            _ = request.Form["id"]; // Noncompliant: Containing type is a controller
-        }
-        static void StaticLocalFunction(HttpRequest request)
-        {
-            _ = request.Form["id"]; // Noncompliant: Containing type is a controller
-        }
-    }
 }
 
 public class CodeBlocksController : Controller
@@ -167,18 +153,6 @@ public class CodeBlocksController : Controller
 }
 
 
-// parameterized test: Repeat for Controller, ControllerBase, MyBaseController, MyBaseBaseController base classes
-// consider adding "PageModel" to the parametrized test but functional tests and updates to the RSpec are needed.
-public class MyBaseController : ControllerBase { }
-public class MyBaseBaseController : MyBaseController { }
-public class MyTestController : MyBaseBaseController
-{
-    public void Action()
-    {
-        _ = Request.Form["id"]; // Noncompliant
-    }
-}
-
 public class OverridesController : Controller
 {
     public void Action()
@@ -210,8 +184,7 @@ public class OverridesController : Controller
     }
 }
 
-// parameterized test for PocoController, [Controller]Poco
-// consider adding "PageModel" to the parametrized test but functional tests and updates to the RSpec are needed.
+[Controller]
 public class PocoController : IActionFilter, IAsyncActionFilter
 {
     public void OnActionExecuted(ActionExecutedContext context)
@@ -239,25 +212,5 @@ public class PocoController : IActionFilter, IAsyncActionFilter
     {
         _ = context.HttpContext.Request.Form["id"]; // Compliant: Model binding is not supported here
         return Task.CompletedTask;
-    }
-}
-
-static class HttpRequestExtensions
-{
-    // parameterized test: parameters are the different forbidden Request accesses (see above)
-    public static void Ext(this HttpRequest request)
-    {
-        _ = request.Form["id"]; // Compliant: Not in a controller
-    }
-}
-
-class RequestService
-{
-    public HttpRequest Request { get; }
-    // parameterized test: parameters are the different forbidden Request accesses (see above)
-    public void HandleRequest(HttpRequest request)
-    {
-        _ = Request.Form["id"]; // Compliant: Not in a controller
-        _ = request.Form["id"]; // Compliant: Not in a controller
     }
 }
