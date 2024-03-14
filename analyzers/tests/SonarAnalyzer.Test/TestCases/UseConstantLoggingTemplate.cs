@@ -5,12 +5,14 @@ using AliasedLogger = Microsoft.Extensions.Logging.ILogger;
 
 public class Program
 {
+    private const string FieldConstant = "field";
     private string _stringField = "";
     private string StringProperty => "";
     private string StringMethod() => "";
 
     public void BasicScenarios(ILogger logger, int arg)
     {
+        const string localConstant = "local";
         string localVariable = "";
 
         logger.Log(LogLevel.Warning, "");                                       // Compliant
@@ -36,6 +38,12 @@ public class Program
         //                          ^^^^^^^^
         logger.Log(LogLevel.Warning, (arg + " " + arg).ToLower());              // Noncompliant
         //                            ^^^^^^^^^^^^^^^
+
+        logger.Log(LogLevel.Warning, "First " + "Second " + "Third");           // Compliant - all strings in the concatenation are constants, the compiler can optimize it
+        logger.Log(LogLevel.Warning, FieldConstant + localConstant);            // Compliant
+        logger.Log(LogLevel.Warning, FieldConstant + "Second");                 // Compliant
+        logger.Log(LogLevel.Warning, "First " + arg + "Third");                 // Noncompliant
+        logger.Log(LogLevel.Warning, ("First " + "Second").ToLower());          // FN
 
         logger.Log(LogLevel.Warning, new EventId(42), $"{arg}");                // Noncompliant
         logger.Log(LogLevel.Warning, new Exception(), $"{arg}");                // Noncompliant
