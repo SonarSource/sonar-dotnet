@@ -40,24 +40,19 @@ public sealed class UseModelBinding : SonarDiagnosticAnalyzer
         {
             var argumentTracker = new CSharpArgumentTracker();
             var propertyTracker = new CSharpPropertyAccessTracker();
-            var argumentDescriptors = new List<ArgumentDescriptor>();
-            var propertyAccessDescriptors = new List<MemberDescriptor>();
-            if (compilationStartContext.Compilation.GetTypeByMetadataName(KnownType.Microsoft_AspNetCore_Mvc_ControllerAttribute) is { })
-            {
-                AddAspNetCoreDescriptors(argumentDescriptors, propertyAccessDescriptors);
-            }
-            // TODO: Add descriptors for Asp.Net MVC 4.x
+            var (argumentDescriptors, propertyAccessDescriptors) = GetDescriptors(compilationStartContext.Compilation);
             if (argumentDescriptors.Any() || propertyAccessDescriptors.Any())
             {
                 compilationStartContext.RegisterSymbolStartAction(symbolStartContext =>
                 {
                     // If the user overrides any action filters, model binding may not be working as expected. Then we do not want to raise on expressions that originate from parameters.
+                    // See the OverridesController.Undecidable test cases for details.
                     var hasOverrides = false;
                     var controllerCandidates = new ConcurrentStack<ReportCandidate>(); // In SymbolEnd, we filter the candidates based on the overriding we learn on the go.
                     if (symbolStartContext.Symbol is INamedTypeSymbol namedType && namedType.IsControllerType())
                     {
                         symbolStartContext.RegisterCodeBlockStartAction<SyntaxKind>(codeBlockStart =>
-                            hasOverrides |= CheckCodeBlock(codeBlockStart, argumentTracker, propertyTracker, argumentDescriptors, propertyAccessDescriptors, controllerCandidates));
+                            hasOverrides |= RegisterCodeBlockActions(codeBlockStart, argumentTracker, propertyTracker, argumentDescriptors, propertyAccessDescriptors, controllerCandidates));
                     }
                     symbolStartContext.RegisterSymbolEndAction(symbolEnd =>
                     {
@@ -71,14 +66,15 @@ public sealed class UseModelBinding : SonarDiagnosticAnalyzer
         });
     }
 
-    private static bool CheckCodeBlock(SonarCodeBlockStartAnalysisContext<SyntaxKind> codeBlockStart,
+    private static bool RegisterCodeBlockActions(SonarCodeBlockStartAnalysisContext<SyntaxKind> codeBlockStart,
         CSharpArgumentTracker argumentTracker, CSharpPropertyAccessTracker propertyTracker,
         IReadOnlyList<ArgumentDescriptor> argumentDescriptors, IReadOnlyList<MemberDescriptor> propertyAccessDescriptors,
         ConcurrentStack<ReportCandidate> controllerCandidates)
     {
-        var isOverride = codeBlockStart.OwningSymbol is IMethodSymbol method && IsOverridingFilterMethods(method);
-        if (isOverride)
+        if (codeBlockStart.OwningSymbol is IMethodSymbol method && IsOverridingFilterMethods(method))
         {
+            // We do not want to raise in ActionFilter overrides. The SymbolEndAction needs to be made aware, that there are
+            // ActionFilter overrides, so it can filter out some candidates.
             return true;
         }
         // Within a single code block, access via constant and variable keys could be mixed
@@ -120,6 +116,18 @@ public sealed class UseModelBinding : SonarDiagnosticAnalyzer
         return false;
     }
 
+    private static (List<ArgumentDescriptor> ArgumentDescriptors, List<MemberDescriptor> PropertyAccessDescriptors) GetDescriptors(Compilation compilation)
+    {
+        var argumentDescriptors = new List<ArgumentDescriptor>();
+        var propertyAccessDescriptors = new List<MemberDescriptor>();
+        if (compilation.GetTypeByMetadataName(KnownType.Microsoft_AspNetCore_Mvc_ControllerAttribute) is { })
+        {
+            AddAspNetCoreDescriptors(argumentDescriptors, propertyAccessDescriptors);
+        }
+        // TODO: Add descriptors for Asp.Net MVC 4.x
+        return (argumentDescriptors, propertyAccessDescriptors);
+    }
+
     private static void AddAspNetCoreDescriptors(List<ArgumentDescriptor> argumentDescriptors, List<MemberDescriptor> propertyAccessDescriptors)
     {
         argumentDescriptors.Add(ArgumentDescriptor.ElementAccess(// Request.Form["id"]
@@ -143,19 +151,18 @@ public sealed class UseModelBinding : SonarDiagnosticAnalyzer
             parameterConstraint: parameter => parameter.IsType(KnownType.System_String) && IsGetterParameter(parameter),
             argumentPosition: 0));
         argumentDescriptors.Add(ArgumentDescriptor.MethodInvocation(// Request.Headers.TryGetValue("id", out _)
-            invokedMethodSymbol: x => IsIDictionaryStringStringValuesInvocation(x, "TryGetValue"),
+            invokedMethodSymbol: x => IsIDictionaryStringStringValuesInvocation(x, "TryGetValue"), // TryGetValue is from IDictionary<TKey, TValue> here. We check the type arguments.
             invokedMemberNameConstraint: (name, comparison) => string.Equals(name, "TryGetValue", comparison),
-            invokedMemberNodeConstraint: (model, language, invocation) => invocation is InvocationExpressionSyntax { Expression: { } expression }
-                && GetLeftOfDot(expression) is var left
-                && (left is null || (model.GetTypeInfo(left) is { Type: { } typeSymbol } && typeSymbol.Is(KnownType.Microsoft_AspNetCore_Http_IHeaderDictionary))),
+            invokedMemberNodeConstraint: IsAccessedViaHeaderDictionary,
             parameterConstraint: x => string.Equals(x.Name, "key", StringComparison.Ordinal),
             argumentListConstraint: (list, position) => list.Count == 2 && position == 0,
             refKind: null));
         argumentDescriptors.Add(ArgumentDescriptor.MethodInvocation(// Request.Headers.ContainsKey("id")
             invokedMethodSymbol: x => IsIDictionaryStringStringValuesInvocation(x, "ContainsKey"),
             invokedMemberNameConstraint: (name, comparison) => string.Equals(name, "ContainsKey", comparison),
+            invokedMemberNodeConstraint: IsAccessedViaHeaderDictionary,
             parameterConstraint: x => string.Equals(x.Name, "key", StringComparison.Ordinal),
-            argumentPosition: x => x == 0,
+            argumentListConstraint: (list, position) => list.Count == 1,
             refKind: null));
         argumentDescriptors.Add(ArgumentDescriptor.ElementAccess(// Request.Query["id"]
             invokedIndexerContainer: KnownType.Microsoft_AspNetCore_Http_IQueryCollection,
@@ -180,6 +187,12 @@ public sealed class UseModelBinding : SonarDiagnosticAnalyzer
 
         propertyAccessDescriptors.Add(new(KnownType.Microsoft_AspNetCore_Http_IFormCollection, "Files")); // Request.Form.Files...
     }
+
+    // Check that the "Headers" expression in the Headers.TryGetValue("id", out _) invocation is of type IHeaderDictionary
+    private static bool IsAccessedViaHeaderDictionary(SemanticModel model, ILanguageFacade language, SyntaxNode invocation) =>
+        invocation is InvocationExpressionSyntax { Expression: { } expression }
+        && GetLeftOfDot(expression) is { } left
+        && model.GetTypeInfo(left) is { Type: { } typeSymbol } && typeSymbol.Is(KnownType.Microsoft_AspNetCore_Http_IHeaderDictionary);
 
     private static bool IsOverridingFilterMethods(IMethodSymbol method) =>
         (method.GetOverriddenMember() ?? method).ExplicitOrImplicitInterfaceImplementations().Any(x => x is IMethodSymbol { ContainingType: { } container }
