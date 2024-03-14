@@ -1,0 +1,24 @@
+{
+  "title": "Loggers should be named for their enclosing types",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "LOW"
+    },
+    "attribute": "IDENTIFIABLE"
+  },
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "confusing",
+    "logging"
+  ],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-3416",
+  "sqKey": "S3416",
+  "scope": "Main",
+  "quickfix": "targeted"
+}

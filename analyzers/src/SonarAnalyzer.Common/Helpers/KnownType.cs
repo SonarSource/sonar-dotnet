@@ -45,11 +45,12 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType JWT_Builder_JwtBuilder = new("JWT.Builder.JwtBuilder");
         public static readonly KnownType JWT_IJwtDecoder = new("JWT.IJwtDecoder");
         public static readonly KnownType JWT_JwtDecoderExtensions = new("JWT.JwtDecoderExtensions");
-        public static readonly KnownType log4net_Config_XmlConfigurator = new("log4net.Config.XmlConfigurator");
-        public static readonly KnownType log4net_Config_DOMConfigurator = new("log4net.Config.DOMConfigurator");
         public static readonly KnownType log4net_Config_BasicConfigurator = new("log4net.Config.BasicConfigurator");
+        public static readonly KnownType log4net_Config_DOMConfigurator = new("log4net.Config.DOMConfigurator");
+        public static readonly KnownType log4net_Config_XmlConfigurator = new("log4net.Config.XmlConfigurator");
         public static readonly KnownType log4net_Core_ILogger = new("log4net.Core.ILogger");
         public static readonly KnownType log4net_ILog = new("log4net.ILog");
+        public static readonly KnownType log4net_LogManager = new("log4net.LogManager");
         public static readonly KnownType log4net_Util_ILogExtensions = new("log4net.Util.ILogExtensions");
         public static readonly KnownType Microsoft_AspNet_SignalR_Hub = new("Microsoft.AspNet.SignalR.Hub");
         public static readonly KnownType Microsoft_AspNetCore_Builder_DeveloperExceptionPageExtensions = new("Microsoft.AspNetCore.Builder.DeveloperExceptionPageExtensions");
@@ -119,6 +120,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Microsoft_Extensions_Logging_ILogger_TCategoryName = new("Microsoft.Extensions.Logging.ILogger", "TCategoryName");
         public static readonly KnownType Microsoft_Extensions_Logging_ILoggerFactory = new("Microsoft.Extensions.Logging.ILoggerFactory");
         public static readonly KnownType Microsoft_Extensions_Logging_LoggerExtensions = new("Microsoft.Extensions.Logging.LoggerExtensions");
+        public static readonly KnownType Microsoft_Extensions_Logging_LoggerFactoryExtensions = new("Microsoft.Extensions.Logging.LoggerFactoryExtensions");
         public static readonly KnownType Microsoft_Extensions_Logging_LogLevel = new("Microsoft.Extensions.Logging.LogLevel");
         public static readonly KnownType Microsoft_Extensions_Primitives_StringValues = new("Microsoft.Extensions.Primitives.StringValues");
         public static readonly KnownType Microsoft_Net_Http_Headers_HeaderNames = new("Microsoft.Net.Http.Headers.HeaderNames");
@@ -159,6 +161,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType NLog_ILoggerBase = new("NLog.ILoggerBase");
         public static readonly KnownType NLog_ILoggerExtensions = new("NLog.ILoggerExtensions");
         public static readonly KnownType NLog_LogLevel = new("NLog.LogLevel");
+        public static readonly KnownType NLog_LogFactory = new("NLog.LogFactory");
         public static readonly KnownType NLog_LogManager = new("NLog.LogManager");
         public static readonly KnownType NLog_Logger = new("NLog.Logger");
         public static readonly KnownType NUnit_Framework_Assert = new("NUnit.Framework.Assert");

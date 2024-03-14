@@ -1,0 +1,136 @@
+﻿/*
+ * SonarAnalyzer for .NET
+ * Copyright (C) 2015-2024 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+
+namespace SonarAnalyzer.Rules.CSharp;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class LoggersShouldBeNamedForEnclosingType : SonarDiagnosticAnalyzer
+{
+    private const string DiagnosticId = "S3416";
+    private const string MessageFormat = "Update this logger to use its enclosing type.";
+
+    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+
+    private static readonly KnownAssembly[] SupportedFrameworks =
+        [
+            KnownAssembly.MicrosoftExtensionsLoggingAbstractions,
+            KnownAssembly.NLog,
+            KnownAssembly.Log4Net,
+        ];
+
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterCompilationStartAction(cc =>
+        {
+            if (cc.Compilation.ReferencesAny(SupportedFrameworks))
+            {
+                cc.RegisterNodeAction(Process, SyntaxKind.InvocationExpression);
+            }
+        });
+
+    private static void Process(SonarSyntaxNodeReportingContext context)
+    {
+        var invocation = (InvocationExpressionSyntax)context.Node;
+
+        if (invocation.GetName() is "GetLogger" or "CreateLogger"
+            && invocation.Ancestors().OfType<TypeDeclarationSyntax>().FirstOrDefault() is { } enclosingType // filter out top-level statements
+            && ExtractArgument(invocation) is { } argument
+            && context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol method
+            && IsValidMethod(method)
+            && !MatchesEnclosingType(argument, enclosingType, context.SemanticModel))
+        {
+            context.ReportIssue(Diagnostic.Create(Rule, argument.GetLocation()));
+        }
+    }
+
+    // Extracts T for generic argument, nameof or typeof expressions
+    private static SyntaxNode ExtractArgument(InvocationExpressionSyntax invocation)
+    {
+        // CreateLogger<T>
+        if (ExtractGeneric(invocation) is { } generic)
+        {
+            return generic;
+        }
+        else if (invocation.ArgumentList?.Arguments.Count == 1)
+        {
+            return invocation.ArgumentList.Arguments[0].Expression switch
+            {
+                TypeOfExpressionSyntax typeOf => typeOf.Type,                                   // CreateLogger(typeof(T))
+                MemberAccessExpressionSyntax memberAccess => ExtractTypeOfName(memberAccess),   // CreateLogger(typeof(T).Name)
+                InvocationExpressionSyntax innerInvocation => ExtractNameOf(innerInvocation),   // CreateLogger(nameof(T))
+                _ => null
+            };
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    private static bool IsValidMethod(IMethodSymbol method)
+    {
+        return Matches(KnownType.Microsoft_Extensions_Logging_ILoggerFactory, true)
+            || Matches(KnownType.Microsoft_Extensions_Logging_LoggerFactoryExtensions, false)
+            || Matches(KnownType.NLog_LogManager, false)
+            || Matches(KnownType.NLog_LogFactory, true)
+            || Matches(KnownType.log4net_LogManager, false)
+            || MatchesGeneric();
+
+        bool Matches(KnownType containingType, bool checkDerived) =>
+            method.HasContainingType(containingType, checkDerived)
+            && method.Parameters.Length == 1
+            && method.Parameters[0].Type.IsAny(KnownType.System_String, KnownType.System_Type);
+
+        bool MatchesGeneric() =>
+            method.ContainingType.Is(KnownType.Microsoft_Extensions_Logging_LoggerFactoryExtensions)
+            && method.TypeParameters.Length == 1;
+    }
+
+    private static bool MatchesEnclosingType(SyntaxNode argument, TypeDeclarationSyntax typeSyntax, SemanticModel model) =>
+        model.GetTypeInfo(argument).Type is { } argumentType
+        && model.GetDeclaredSymbol(typeSyntax).GetSymbolType() is { } enclosingType
+        && (enclosingType.Equals(argumentType) || argumentType.TypeKind is TypeKind.TypeParameter); // we do not want to raise on CreateLogger<T> if T is not concrete
+
+    private static SyntaxNode ExtractGeneric(InvocationExpressionSyntax invocation)
+    {
+        var genericName = invocation.Expression switch
+        {
+            GenericNameSyntax g => g, // CreateLogger<T>
+            MemberAccessExpressionSyntax memberAccess => memberAccess.Name as GenericNameSyntax, // A..B.CreateLogger<T>
+            _ => null
+        };
+
+        return genericName?.TypeArgumentList?.Arguments.Count == 1
+            ? genericName.TypeArgumentList.Arguments[0]
+            : null;
+    }
+
+    private static SyntaxNode ExtractTypeOfName(MemberAccessExpressionSyntax memberAccess) =>
+        memberAccess.Expression is TypeOfExpressionSyntax typeOf
+        && memberAccess.GetName() is "Name" or "FullName" or "AssemblyQualifiedName"
+            ? typeOf.Type
+            : null;
+
+    private static SyntaxNode ExtractNameOf(InvocationExpressionSyntax invocation) =>
+        invocation.NameIs("nameof") && invocation.ArgumentList?.Arguments.Count == 1
+            ? invocation.ArgumentList?.Arguments[0].Expression
+            : null;
+}
