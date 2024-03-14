@@ -31,7 +31,8 @@ public class BackslashShouldBeAvoidedInAspNetRoutesTest
 
 #if NETFRAMEWORK
     // ASP.NET 4x MVC 3 and 4 don't support attribute routing, nor MapControllerRoute and similar
-    public static IEnumerable<object[]> AspNet4xMvcVersionsUnderTest => [["5.2.7"] /* Most used */, [Constants.NuGetLatestVersion]];
+    public static IEnumerable<object[]> AspNet4xMvcVersionsUnderTest =>
+        [["5.2.7"] /* Most used */, [Constants.NuGetLatestVersion]];
 
     private static IEnumerable<MetadataReference> AspNet4xReferences(string aspNetMvcVersion) =>
         MetadataReferenceFacade.SystemWeb                                          // For HttpAttributeMethod and derived attributes
@@ -72,7 +73,8 @@ public class BackslashShouldBeAvoidedInAspNetRoutesTest
             .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(aspNetCoreVersion))  // For View
             .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcAbstractions(aspNetCoreVersion)); // For IActionResult
 
-    private static IEnumerable<MetadataReference> AspNetCore3AndAboveReferences => [
+    private static IEnumerable<MetadataReference> AspNetCore3AndAboveReferences =>
+        [
             AspNetCoreMetadataReference.MicrosoftAspNetCore,                    // For WebApplication
             AspNetCoreMetadataReference.MicrosoftExtensionsHostingAbstractions, // For IHost
             AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions,    // For HttpContext, RouteValueDictionary
@@ -82,7 +84,6 @@ public class BackslashShouldBeAvoidedInAspNetRoutesTest
             AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcViewFeatures,
             AspNetCoreMetadataReference.MicrosoftAspNetCoreRouting,             // For IEndpointRouteBuilder
             AspNetCoreMetadataReference.MicrosoftAspNetCoreRazorPages,          // For RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage
-
         ];
 
     [TestMethod]
