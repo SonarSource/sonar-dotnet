@@ -120,6 +120,7 @@ public sealed class UseConstantLoggingTemplate : SonarDiagnosticAnalyzer
 
     private static bool AllMembersAreConstantStrings(BinaryExpressionSyntax addExpression, SemanticModel model) =>
         IsConstantStringOrConcatenation(addExpression.Left, model) && IsConstantStringOrConcatenation(addExpression.Right, model);
+
     private static bool IsConstantStringOrConcatenation(SyntaxNode node, SemanticModel model) =>
         node.Kind() == SyntaxKind.StringLiteralExpression
         || (node.Kind() == SyntaxKind.IdentifierName && model.GetSymbolInfo(node).Symbol is IFieldSymbol { HasConstantValue: true } or ILocalSymbol { HasConstantValue: true})
