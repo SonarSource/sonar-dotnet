@@ -26,6 +26,7 @@ namespace SonarAnalyzer.TestFramework.MetadataReferences;
 
 public static class AspNetCoreMetadataReference
 {
+    public static MetadataReference MicrosoftAspNetCore { get; } = Create(typeof(Microsoft.AspNetCore.Builder.WebApplication));
     public static MetadataReference MicrosoftAspNetCoreCors { get; } = Create(typeof(Microsoft.Extensions.DependencyInjection.CorsServiceCollectionExtensions));
     public static MetadataReference MicrosoftAspNetCoreDiagnostics { get; } = Create(typeof(Microsoft.AspNetCore.Diagnostics.StatusCodeContext));
     public static MetadataReference MicrosoftAspNetCoreEventSourceLoggerFactoryExtensions { get; } = Create(typeof(Microsoft.Extensions.Logging.EventSourceLoggerFactoryExtensions));

@@ -1,7 +1,4 @@
 ﻿Imports Microsoft.AspNetCore.Mvc
-Imports Microsoft.AspNetCore.Mvc.Routing
-Imports System
-Imports System.Diagnostics.CodeAnalysis
 
 <Route("A\[controller]")>   ' Noncompliant ^8#16 {{Replace '\' with '/'.}}
 Public Class BackslashOnController : Inherits Controller : End Class

@@ -31,11 +31,12 @@ public class BackslashShouldBeAvoidedInAspNetRoutesTest
 
 #if NETFRAMEWORK
     // ASP.NET 4x MVC 3 and 4 don't support attribute routing, nor MapControllerRoute and similar
-    public static IEnumerable<object[]> AspNet4xMvcVersionsUnderTest => [["5.2.7"] /* Most used */, [Constants.NuGetLatestVersion]];
+    public static IEnumerable<object[]> AspNet4xMvcVersionsUnderTest =>
+        [["5.2.7"] /* Most used */, [Constants.NuGetLatestVersion]];
 
     private static IEnumerable<MetadataReference> AspNet4xReferences(string aspNetMvcVersion) =>
-        MetadataReferenceFacade.SystemWeb
-            .Concat(NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion));
+        MetadataReferenceFacade.SystemWeb                                          // For HttpAttributeMethod and derived attributes
+            .Concat(NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion));  // For Controller
 
     [TestMethod]
     [DynamicData(nameof(AspNet4xMvcVersionsUnderTest))]
@@ -64,19 +65,32 @@ public class BackslashShouldBeAvoidedInAspNetRoutesTest
 #endif
 
 #if NET
-    public static IEnumerable<object[]> AspNetCore2xVersionsUnderTest => [
-        ["2.0.4"] /* Latest 2.0.x */, ["2.2.0"] /* 2nd most used */, [Constants.NuGetLatestVersion]];
+    public static IEnumerable<object[]> AspNetCore2xVersionsUnderTest =>
+        [["2.0.4"] /* Latest 2.0.x */, ["2.2.0"] /* 2nd most used */, [Constants.NuGetLatestVersion]];
 
     private static IEnumerable<MetadataReference> AspNetCore2xReferences(string aspNetCoreVersion) =>
-        NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetCoreVersion)                       // for Controller
-            .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(aspNetCoreVersion))  // for View
-            .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcAbstractions(aspNetCoreVersion)); // for IActionResult
+        NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetCoreVersion)                       // For Controller
+            .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(aspNetCoreVersion))  // For View
+            .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcAbstractions(aspNetCoreVersion)); // For IActionResult
+
+    private static IEnumerable<MetadataReference> AspNetCore3AndAboveReferences =>
+        [
+            AspNetCoreMetadataReference.MicrosoftAspNetCore,                    // For WebApplication
+            AspNetCoreMetadataReference.MicrosoftExtensionsHostingAbstractions, // For IHost
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions,    // For HttpContext, RouteValueDictionary
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpFeatures,
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcAbstractions,
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcCore,
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcViewFeatures,
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreRouting,             // For IEndpointRouteBuilder
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreRazorPages,          // For RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage
+        ];
 
     [TestMethod]
     [DynamicData(nameof(AspNetCore2xVersionsUnderTest))]
     public void BackslashShouldBeAvoidedInAspNetRoutes_AspNetCore2x_CS(string aspNetCoreVersion) =>
         builderCS
-            .AddPaths("BackslashShouldBeAvoidedInAspNetRoutes.AspNetCore2x.cs")
+            .AddPaths("BackslashShouldBeAvoidedInAspNetRoutes.AspNetCore2AndAbove.cs")
             .AddReferences(AspNetCore2xReferences(aspNetCoreVersion))
             .Verify();
 
@@ -95,6 +109,28 @@ public class BackslashShouldBeAvoidedInAspNetRoutesTest
         builderVB
             .AddPaths("BackslashShouldBeAvoidedInAspNetRoutes.AspNetCore2x.vb")
             .AddReferences(AspNetCore2xReferences(aspNetCoreVersion))
+            .Verify();
+
+    [TestMethod]
+    public void BackslashShouldBeAvoidedInAspNetRoutes_AspNetCore3AndAbove_CS() =>
+        builderCS
+            .AddPaths("BackslashShouldBeAvoidedInAspNetRoutes.AspNetCore2AndAbove.cs")
+            .AddReferences(AspNetCore3AndAboveReferences)
+            .Verify();
+
+    [TestMethod]
+    public void BackslashShouldBeAvoidedInAspNetRoutes_AspNetCore3AndAbove_CSharp11() =>
+        builderCS
+            .AddPaths("BackslashShouldBeAvoidedInAspNetRoutes.AspNetCore3AndAbove.CSharp11.cs")
+            .AddReferences(AspNetCore3AndAboveReferences)
+            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .Verify();
+
+    [TestMethod]
+    public void BackslashShouldBeAvoidedInAspNetRoutes_AspNetCore3AndAbove_VB() =>
+        builderVB
+            .AddPaths("BackslashShouldBeAvoidedInAspNetRoutes.AspNetCore3AndAbove.vb")
+            .AddReferences(AspNetCore3AndAboveReferences)
             .Verify();
 #endif
 }

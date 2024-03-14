@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Routing;
-using System;
-using System.Diagnostics.CodeAnalysis;
+﻿using Microsoft.AspNetCore.Mvc;
 
 // ToDo: Remark for the implementer: suitable for a parameterized test
 public class WithAllTypesOfStrings : Controller
