@@ -124,30 +124,15 @@ public class CodeBlocksController : Controller
     }
     void M3()
     {
-        _ = (true ? Request : Request).Form["id"]; // Noncompliant
-        _ = ValidatedRequest().Form["id"]; // Noncompliant
-        _ = ValidRequest.Form["id"]; // Noncompliant
-        _ = Form["id"];      // Noncompliant
-        _ = this.Form["id"]; // Noncompliant
-        _ = new CodeBlocksController().Form["id"]; // Noncompliant
+        // see also parameterized test "DottedExpressions"
+        _ = Request.Form["id"][0];       // Noncompliant
+        _ = Request?.Form["id"][0];      // Noncompliant
+        _ = Request.Form?["id"][0];      // Noncompliant
+        _ = Request?.Form?["id"][0];     // Noncompliant
+        _ = Request.Form?["id"][0];      // Noncompliant
 
-        HttpRequest ValidatedRequest() => Request;
-    }
-
-    void M4()
-    {
-        _ = this.Request.Form["id"]; // Noncompliant
-        _ = Request?.Form?["id"]; // Noncompliant
-        _ = Request?.Form?.TryGetValue("id", out _); // Noncompliant
-        _ = Request.Form?.TryGetValue("id", out _); // Noncompliant
-        _ = Request.Form?.TryGetValue("id", out _).ToString(); // Noncompliant
-        _ = HttpContext.Request.Form["id"]; // Noncompliant
-        _ = Request.HttpContext.Request.Form["id"]; // Noncompliant
-        _ = this.ControllerContext.HttpContext.Request.Form["id"]; // Noncompliant
-        var r1 = HttpContext.Request;
-        _ = r1.Form["id"]; // Noncompliant
-        var r2 = ControllerContext;
-        _ = r2.HttpContext.Request.Form["id"]; // Noncompliant
+        _ = Request.Form?["id"][0][0];   // Noncompliant
+        _ = Request.Form?["id"][0]?[0];  // Noncompliant
     }
     ~CodeBlocksController() => _ = Request.Form["id"]; // Noncompliant
 }

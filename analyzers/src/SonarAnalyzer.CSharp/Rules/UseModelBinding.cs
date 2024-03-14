@@ -190,22 +190,20 @@ public sealed class UseModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
     // Check that the "Headers" expression in the Headers.TryGetValue("id", out _) invocation is of type IHeaderDictionary
     private static bool IsAccessedViaHeaderDictionary(SemanticModel model, ILanguageFacade language, SyntaxNode invocation) =>
         invocation is InvocationExpressionSyntax { Expression: { } expression }
-        && GetLeftOfDot(expression) is { } left
-        && model.GetTypeInfo(left) is { Type: { } typeSymbol } && typeSymbol.Is(KnownType.Microsoft_AspNetCore_Http_IHeaderDictionary);
+            && GetLeftOfDot(expression) is { } left
+            && model.GetTypeInfo(left) is { Type: { } typeSymbol } && typeSymbol.Is(KnownType.Microsoft_AspNetCore_Http_IHeaderDictionary);
 
     private static bool IsOverridingFilterMethods(IMethodSymbol method) =>
         (method.GetOverriddenMember() ?? method).ExplicitOrImplicitInterfaceImplementations().Any(x => x is IMethodSymbol { ContainingType: { } container }
-        && container.IsAny(
-            KnownType.Microsoft_AspNetCore_Mvc_Filters_IActionFilter,
-            KnownType.Microsoft_AspNetCore_Mvc_Filters_IAsyncActionFilter));
+            && container.IsAny(
+                KnownType.Microsoft_AspNetCore_Mvc_Filters_IActionFilter,
+                KnownType.Microsoft_AspNetCore_Mvc_Filters_IAsyncActionFilter));
 
     private static bool OriginatesFromParameter(SemanticModel semanticModel, ArgumentSyntax argument) =>
-        GetExpressionOfArgumentParent(argument) is { } parentExpression
-        && OriginatesFromParameter(semanticModel, parentExpression);
+        GetExpressionOfArgumentParent(argument) is { } parentExpression && OriginatesFromParameter(semanticModel, parentExpression);
 
     private static bool OriginatesFromParameter(SemanticModel semanticModel, ExpressionSyntax expression) =>
-        MostLeftOfDottedChain(expression) is { } mostLeft
-        && semanticModel.GetSymbolInfo(mostLeft).Symbol is IParameterSymbol;
+        MostLeftOfDottedChain(expression) is { } mostLeft && semanticModel.GetSymbolInfo(mostLeft).Symbol is IParameterSymbol;
 
     private static ExpressionSyntax GetLeftOfDot(ExpressionSyntax expression) =>
         expression switch

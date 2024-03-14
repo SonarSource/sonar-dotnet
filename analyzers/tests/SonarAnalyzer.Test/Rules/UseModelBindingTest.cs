@@ -38,6 +38,10 @@ public class UseModelBindingTest
         ]);
 
     [TestMethod]
+    public void UseModelBinding_NoRegistrationIfNotAspNet() =>
+        new VerifierBuilder<UseModelBinding>().AddSnippet(string.Empty).Verify();
+
+    [TestMethod]
     public void UseModelBinding_AspNetCore_CS() =>
         builderAspNetCore.AddPaths("UseModelBinding_AspNetCore.cs").Verify();
 
@@ -116,6 +120,56 @@ public class UseModelBindingTest
                 async Task Compliant({{attribute}} string key, HttpRequest request)
                 {
                     {{string.Format(statementFormat, $"{request}.{property}")}};
+                }
+            }
+            """).Verify();
+
+    [DataTestMethod]
+    [DataRow("Form")]
+    [DataRow("Headers")]
+    [DataRow("Query")]
+    [DataRow("RouteValues")]
+    public void DottedExpressions(string property) =>
+        builderAspNetCore.AddSnippet($$"""
+            using Microsoft.AspNetCore.Http;
+            using Microsoft.AspNetCore.Mvc;
+            using Microsoft.AspNetCore.Mvc.Filters;
+            using Microsoft.AspNetCore.Routing;
+            using System;
+            using System.Linq;
+            using System.Threading.Tasks;
+
+            public class TestController : Controller
+            {
+                HttpRequest ValidRequest => Request;
+                IFormCollection Form => Request.Form;
+                IHeaderDictionary Headers => Request.Headers;
+                IQueryCollection Query => Request.Query;
+                RouteValueDictionary RouteValues => Request.RouteValues;
+
+                async Task DottedExpressions()
+                {
+                    _ = (true ? Request : Request).{{property}}["id"]; // Noncompliant
+                    _ = ValidatedRequest().{{property}}["id"]; // Noncompliant
+                    _ = ValidRequest.{{property}}["id"]; // Noncompliant
+                    _ = {{property}}["id"];      // Noncompliant
+                    _ = this.{{property}}["id"];                 // Noncompliant
+                    _ = new TestController().{{property}}["id"]; // Noncompliant
+
+                    _ = this.Request.{{property}}["id"]; // Noncompliant
+                    _ = Request?.{{property}}?["id"]; // Noncompliant
+                    _ = Request?.{{property}}?.TryGetValue("id", out _); // Noncompliant
+                    _ = Request.{{property}}?.TryGetValue("id", out _); // Noncompliant
+                    _ = Request.{{property}}?.TryGetValue("id", out _).ToString(); // Noncompliant
+                    _ = HttpContext.Request.{{property}}["id"]; // Noncompliant
+                    _ = Request.HttpContext.Request.{{property}}["id"]; // Noncompliant
+                    _ = this.ControllerContext.HttpContext.Request.{{property}}["id"]; // Noncompliant
+                    var r1 = HttpContext.Request;
+                    _ = r1.{{property}}["id"]; // Noncompliant
+                    var r2 = ControllerContext;
+                    _ = r2.HttpContext.Request.{{property}}["id"]; // Noncompliant
+
+                    HttpRequest ValidatedRequest() => Request;
                 }
             }
             """).Verify();
