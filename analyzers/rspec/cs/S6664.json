@@ -1,0 +1,17 @@
+{
+  "title": "The code block contains too many logging calls",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "logging"
+  ],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-6664",
+  "sqKey": "S6664",
+  "scope": "Main",
+  "quickfix": "infeasible"
+}
