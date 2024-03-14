@@ -136,7 +136,7 @@ public sealed class TooManyLoggingCalls : ParametrizedDiagnosticAnalyzer
     private sealed class LoggingCallCollector : SafeCSharpSyntaxWalker
     {
         private readonly SemanticModel semanticModel;
-        private SyntaxNode currentBlock;
+        private readonly SyntaxNode currentBlock;
 
         public Dictionary<string, List<InvocationExpressionSyntax>> GroupedLoggingInvocations { get; } = [];
 
