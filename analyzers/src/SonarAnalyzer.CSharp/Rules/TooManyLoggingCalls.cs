@@ -31,32 +31,41 @@ public sealed class TooManyLoggingCalls : ParametrizedDiagnosticAnalyzer
     private static class CategoryNames
     {
         public const string Debug = "Debug";
-        public const string Error = "Error";
         public const string Information = "Information";
         public const string Warning = "Warning";
+        public const string Error = "Error";
     }
 
-    private static class DefaultTresholds
+    private static class DefaultThresholds
     {
         public const int Debug = 4;
-        public const int Error = 1;
         public const int Information = 2;
         public const int Warning = 1;
+        public const int Error = 1;
     }
 
     public static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat, isEnabledByDefault: false);
 
+    private static readonly KnownAssembly[] SupportedLoggingLibraries =
+    [
+        KnownAssembly.MicrosoftExtensionsLoggingAbstractions,
+        KnownAssembly.NLog,
+        KnownAssembly.Serilog,
+        KnownAssembly.Log4Net,
+        KnownAssembly.CastleCore
+    ];
+
     private static readonly ImmutableArray<KnownType> LoggerTypes = ImmutableArray.Create(
-        KnownType.Castle_Core_Logging_ILogger,
-        KnownType.log4net_ILog,
-        KnownType.log4net_Util_ILogExtensions,
         KnownType.Microsoft_Extensions_Logging_ILogger,
         KnownType.Microsoft_Extensions_Logging_LoggerExtensions,
         KnownType.NLog_ILogger,
         KnownType.NLog_ILoggerBase,
         KnownType.NLog_ILoggerExtensions,
         KnownType.Serilog_ILogger,
-        KnownType.Serilog_Log);
+        KnownType.Serilog_Log,
+        KnownType.log4net_ILog,
+        KnownType.log4net_Util_ILogExtensions,
+        KnownType.Castle_Core_Logging_ILogger);
 
     private static readonly ImmutableArray<LoggingCategory> LoggingCategories = ImmutableArray.Create<LoggingCategory>(
         new(CategoryNames.Debug, ImmutableHashSet.Create("ConditionalDebug", "ConditionalTrace", "Debug", "DebugFormat", "LogDebug", "LogTrace", "Trace", "TraceFormat", "Verbose")),
@@ -66,22 +75,22 @@ public sealed class TooManyLoggingCalls : ParametrizedDiagnosticAnalyzer
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-    [RuleParameter("debugThreshold", PropertyType.Integer, "The maximum number of DEBUG, TRACE and VERBOSE statements allowed in the same code block.", DefaultTresholds.Debug)]
-    public int DebugThreshold { get; set; } = DefaultTresholds.Debug;
+    [RuleParameter("debugThreshold", PropertyType.Integer, "The maximum number of DEBUG, TRACE and VERBOSE statements allowed in the same code block.", DefaultThresholds.Debug)]
+    public int DebugThreshold { get; set; } = DefaultThresholds.Debug;
 
-    [RuleParameter("errorThreshold", PropertyType.Integer, "The maximum number of ERROR and FATAL statements allowed in the same code block.", DefaultTresholds.Error)]
-    public int ErrorThreshold { get; set; } = DefaultTresholds.Error;
+    [RuleParameter("errorThreshold", PropertyType.Integer, "The maximum number of ERROR and FATAL statements allowed in the same code block.", DefaultThresholds.Error)]
+    public int ErrorThreshold { get; set; } = DefaultThresholds.Error;
 
-    [RuleParameter("informationThreshold", PropertyType.Integer, "The maximum number of INFORMATION statements allowed in the same code block.", DefaultTresholds.Information)]
-    public int InformationThreshold { get; set; } = DefaultTresholds.Information;
+    [RuleParameter("informationThreshold", PropertyType.Integer, "The maximum number of INFORMATION statements allowed in the same code block.", DefaultThresholds.Information)]
+    public int InformationThreshold { get; set; } = DefaultThresholds.Information;
 
-    [RuleParameter("warningThreshold", PropertyType.Integer, "The maximum number of WARNING statements allowed in the same code block.", DefaultTresholds.Warning)]
-    public int WarningThreshold { get; set; } = DefaultTresholds.Warning;
+    [RuleParameter("warningThreshold", PropertyType.Integer, "The maximum number of WARNING statements allowed in the same code block.", DefaultThresholds.Warning)]
+    public int WarningThreshold { get; set; } = DefaultThresholds.Warning;
 
     protected override void Initialize(SonarParametrizedAnalysisContext context) =>
         context.RegisterCompilationStartAction(cc =>
         {
-            if (cc.Compilation.ReferencesAny(KnownAssembly.CastleCore, KnownAssembly.Log4Net, KnownAssembly.MicrosoftExtensionsLoggingAbstractions, KnownAssembly.Serilog, KnownAssembly.NLog))
+            if (cc.Compilation.ReferencesAny(SupportedLoggingLibraries))
             {
                 cc.RegisterNodeAction(Process, SyntaxKind.Block, SyntaxKind.CompilationUnit);
             }
@@ -94,21 +103,21 @@ public sealed class TooManyLoggingCalls : ParametrizedDiagnosticAnalyzer
         {
             var logCallCollector = new LoggingCallCollector(context.SemanticModel, node);
             logCallCollector.Visit(node);
-            foreach (var loggingCategory in logCallCollector.LoggingInvocations)
+            foreach (var group in logCallCollector.GroupedLoggingInvocations)
             {
-                var treshold = Treshold(loggingCategory.Key);
-                var invocations = loggingCategory.Value;
-                if (invocations.Count > treshold)
+                var threshold = Threshold(group.Key);
+                var invocations = group.Value;
+                if (invocations.Count > threshold)
                 {
                     var primaryLocation = invocations[0].GetLocation();
                     var secondaryLocations = invocations.Skip(1).Select(x => x.GetLocation());
-                    context.ReportIssue(Diagnostic.Create(Rule, primaryLocation, secondaryLocations, loggingCategory.Key, invocations.Count, treshold));
+                    context.ReportIssue(Diagnostic.Create(Rule, primaryLocation, secondaryLocations, group.Key, invocations.Count, threshold));
                 }
             }
         }
     }
 
-    private int Treshold(string category)
+    private int Threshold(string category)
     {
         var threshold = category switch
         {
@@ -129,7 +138,7 @@ public sealed class TooManyLoggingCalls : ParametrizedDiagnosticAnalyzer
         private readonly SemanticModel semanticModel;
         private SyntaxNode currentBlock;
 
-        public Dictionary<string, List<InvocationExpressionSyntax>> LoggingInvocations { get; } = [];
+        public Dictionary<string, List<InvocationExpressionSyntax>> GroupedLoggingInvocations { get; } = [];
 
         public LoggingCallCollector(SemanticModel semanticModel, SyntaxNode currentBlock)
         {
@@ -141,7 +150,6 @@ public sealed class TooManyLoggingCalls : ParametrizedDiagnosticAnalyzer
         {
             if (currentBlock == node) // Don't visit nested blocks, that will be done by additional LoggingCallCollector instances.
             {
-                currentBlock = node;
                 base.VisitBlock(node);
             }
         }
@@ -150,16 +158,16 @@ public sealed class TooManyLoggingCalls : ParametrizedDiagnosticAnalyzer
         {
             if (IsLoggerMethod(node.GetName())
                 && semanticModel.GetSymbolInfo(node).Symbol is IMethodSymbol methodSymbol
-                && methodSymbol.ContainingType.DerivesFromAny(LoggerTypes)
+                && methodSymbol.ContainingType.DerivesOrImplementsAny(LoggerTypes)
                 && LoggingCategoryName(node, methodSymbol) is { } loggingCategory)
             {
-                if (LoggingInvocations.TryGetValue(loggingCategory, out var invocationList))
+                if (GroupedLoggingInvocations.TryGetValue(loggingCategory, out var invocationList))
                 {
                     invocationList.Add(node);
                 }
                 else
                 {
-                    LoggingInvocations.Add(loggingCategory, [node]);
+                    GroupedLoggingInvocations.Add(loggingCategory, [node]);
                 }
             }
         }
@@ -171,12 +179,12 @@ public sealed class TooManyLoggingCalls : ParametrizedDiagnosticAnalyzer
 
         public override void VisitParenthesizedLambdaExpression(ParenthesizedLambdaExpressionSyntax node)
         {
-            // Skip syntax node to avoid FPs
+            // Skip syntax node to avoid FPs when the lambda body is a single instruction rather than a block
         }
 
         public override void VisitSimpleLambdaExpression(SimpleLambdaExpressionSyntax node)
         {
-            // Skip syntax node to avoid FPs
+            // Skip syntax node to avoid FPs when the lambda body is a single instruction rather than a block
         }
 
         public override void VisitSwitchStatement(SwitchStatementSyntax node)
