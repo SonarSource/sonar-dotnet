@@ -87,10 +87,11 @@ public sealed class LoggersShouldBeNamedForEnclosingType : SonarDiagnosticAnalyz
 
     private static bool IsValidMethod(IMethodSymbol method)
     {
-        return Matches(KnownType.NLog_LogManager, false)
-            || Matches(KnownType.log4net_LogManager, false)
+        return Matches(KnownType.Microsoft_Extensions_Logging_ILoggerFactory, true)
             || Matches(KnownType.Microsoft_Extensions_Logging_LoggerFactoryExtensions, false)
-            || Matches(KnownType.Microsoft_Extensions_Logging_ILoggerFactory, true)
+            || Matches(KnownType.NLog_LogManager, false)
+            || Matches(KnownType.NLog_LogFactory, true)
+            || Matches(KnownType.log4net_LogManager, false)
             || MatchesGeneric();
 
         bool Matches(KnownType containingType, bool checkDerived) =>

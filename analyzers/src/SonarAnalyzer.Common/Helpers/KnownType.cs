@@ -160,6 +160,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType NLog_ILoggerBase = new("NLog.ILoggerBase");
         public static readonly KnownType NLog_ILoggerExtensions = new("NLog.ILoggerExtensions");
         public static readonly KnownType NLog_LogLevel = new("NLog.LogLevel");
+        public static readonly KnownType NLog_LogFactory = new("NLog.LogFactory");
         public static readonly KnownType NLog_LogManager = new("NLog.LogManager");
         public static readonly KnownType NLog_Logger = new("NLog.Logger");
         public static readonly KnownType NUnit_Framework_Assert = new("NUnit.Framework.Assert");

@@ -39,7 +39,7 @@ class EnclosingType
 {
     private readonly ILogger logger;
 
-    ctor(ILoggerFactory loggerFactory)
+    EnclosingType(ILoggerFactory loggerFactory)
     {
         logger = loggerFactory.CreateLogger("My cross-type logging category");   // Compliant
         logger = loggerFactory.CreateLogger(AComplexLogicToFindTheRightType());  // Compliant

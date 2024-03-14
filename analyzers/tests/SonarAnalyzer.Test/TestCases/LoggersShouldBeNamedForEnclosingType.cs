@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
 using System;
 
+using AliasedFactory = Microsoft.Extensions.Logging.ILoggerFactory;
+
 class AnotherType : EnclosingType { }
 
 class EnclosingType
@@ -12,7 +14,7 @@ class EnclosingType
         factory.CreateLogger(GetLoggerName());                          // Compliant
 
         factory.CreateLogger(GetType().FullName);                       // Compliant
-        factory.CreateLogger(new AnotherType().GetType().FullName);     // Compliant FN, we do not parse this
+        factory.CreateLogger(new AnotherType().GetType().FullName);     // FN, we do not parse this
 
         factory.CreateLogger(nameof(EnclosingType));                    // Compliant
         factory.CreateLogger(nameof(AnotherType));                      // Noncompliant {{Update this logger to use its enclosing type.}}
@@ -29,8 +31,8 @@ class EnclosingType
     {
         // runtime
         factory.CreateLogger(GetType());                                // Compliant
-        factory.CreateLogger(new AnotherType().GetType());              // Compliant FN, we do not parse this
-        factory.CreateLogger(GetLoggerType());                          // Compliant FN, we do not parse this
+        factory.CreateLogger(new AnotherType().GetType());              // FN, we do not parse this
+        factory.CreateLogger(GetLoggerType());                          // FN, we do not parse this
 
         // compile time, typeof
         factory.CreateLogger(typeof(EnclosingType));                   // Compliant
@@ -44,6 +46,13 @@ class EnclosingType
 
         LoggerFactoryExtensions.CreateLogger<AnotherType>(factory);    // Noncompliant
         //                                   ^^^^^^^^^^^
+    }
+
+    void Aliasing(AliasedFactory factory)
+    {
+        factory.CreateLogger(nameof(EnclosingType));                   // Compliant
+        factory.CreateLogger(nameof(AnotherType));                     // Noncompliant
+        //                          ^^^^^^^^^^^
     }
 
     static string GetLoggerName() => "Whatever";
@@ -68,7 +77,7 @@ class EnclosingType
             factory.CreateLogger<AnotherType>();                                         // Noncompliant
 
             LoggerFactoryExtensions.CreateLogger(factory, typeof(EnclosingType.Inner));  // Compliant
-            LoggerFactoryExtensions.CreateLogger(factory, typeof(AnotherType));          // Compliant FN, we do not go into arguments if their Count is > 1
+            LoggerFactoryExtensions.CreateLogger(factory, typeof(AnotherType));          // FN, we do not go into arguments if their Count is > 1
 
             LoggerFactoryExtensions.CreateLogger<EnclosingType.Inner>(factory);          // Compliant
             LoggerFactoryExtensions.CreateLogger<AnotherType>(factory);                  // Noncompliant
