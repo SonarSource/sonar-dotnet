@@ -40,15 +40,35 @@ public class SdkTest {
   private static Path temp;
 
   @Test
-  void net5() throws IOException {
-    validateProject("Net5");
+  void netCore31() throws IOException {
+    validateProject("NetCore31", 9, 14);
   }
 
-  void validateProject(String project) throws IOException {
+  @Test
+  void net5() throws IOException {
+    validateProject("Net5", 3, 5);
+  }
+
+  @Test
+  void net6() throws IOException {
+    validateProject("Net6", 3, 5);
+  }
+
+  @Test
+  void net7() throws IOException {
+    validateProject("Net7", 3, 5);
+  }
+
+  @Test
+  void net8() throws IOException {
+    validateProject("Net8", 3, 5);
+  }
+
+  void validateProject(String project, int issueLine, int lines) throws IOException {
     Tests.analyzeProject(temp, project);
     assertThat(getComponent(project)).isNotNull();
-    assertThat(getIssues(project)).extracting(Issues.Issue::getLine, Issues.Issue::getRule).containsOnly(tuple(3, "csharpsquid:S1134"));
     assertThat(getMeasureAsInt(project, "files")).isEqualTo(1);
-    assertThat(getMeasureAsInt(project, "lines")).isEqualTo(5);
+    assertThat(getMeasureAsInt(project, "lines")).isEqualTo(lines);
+    assertThat(getIssues(project)).extracting(Issues.Issue::getLine, Issues.Issue::getRule).containsOnly(tuple(issueLine, "csharpsquid:S1134"));
   }
 }
