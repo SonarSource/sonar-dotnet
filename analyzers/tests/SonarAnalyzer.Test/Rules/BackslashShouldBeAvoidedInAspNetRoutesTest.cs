@@ -35,7 +35,8 @@ public class BackslashShouldBeAvoidedInAspNetRoutesTest
         private const string AConstStringNotIncludingABackslash = $"A{ASlash}";
         """;
 
-    private static readonly object[][] AttributesWithAllTypesOfStrings = [
+    private static readonly object[][] AttributesWithAllTypesOfStrings =
+    [
         [$"[{AttributePlaceholder}(AConstStringIncludingABackslash)]", false, "ConstStringIncludingABackslash"],
         [$"[{AttributePlaceholder}(AConstStringNotIncludingABackslash)]", true, "ConstStringNotIncludingABackslash"],
         [$"""[{AttributePlaceholder}("\u002f[action]")]""", true, "EscapeCodeOfSlash"],
