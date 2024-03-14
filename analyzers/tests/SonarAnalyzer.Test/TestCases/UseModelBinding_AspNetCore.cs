@@ -92,9 +92,10 @@ public class TestController : Controller
         _ = form["id"]; // Compliant. Using IFormCollection is model binding
     }
 
-    void HeaderAccess()
+    void WriteAccess()
     {
         Request.Headers["id"] = "Assignment";                     // Compliant
+        Request.RouteValues["id"] = "Assignment";                 // Compliant
     }
 
     // Parameterized for Form, Headers, Query, RouteValues / Request, this.Request, ControllerContext.HttpContext.Request / [FromForm], [FromQuery], [FromRoute], [FromHeader]
