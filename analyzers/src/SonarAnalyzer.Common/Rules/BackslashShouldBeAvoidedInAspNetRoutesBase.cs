@@ -64,6 +64,7 @@ public abstract class BackslashShouldBeAvoidedInAspNetRoutesBase<TSyntaxKind> : 
         && string.Equals(syntaxParameter, "Route", StringComparison.Ordinal);
 
     private static bool IsRouteTemplateBeforeAspNet6(IParameterSymbol parameter, IMethodSymbol method) =>
+        // Remark: route templates cannot be specified via HttpXAttribute in ASP.NET 4.x
         (method.ContainingType.IsAny(KnownType.RouteAttributes)
             || method.ContainingType.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_Routing_HttpMethodAttribute))
         && method.IsConstructor() && parameter.Name == "template";
