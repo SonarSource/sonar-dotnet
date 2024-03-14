@@ -37,6 +37,7 @@ public sealed class DataValuesAttribute : Attribute
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
 public sealed class CombinatorialDataAttribute : Attribute, ITestDataSource
 {
+    // Based on https://stackoverflow.com/a/75531690
     public IEnumerable<object[]> GetData(MethodInfo methodInfo)
     {
         var valuesPerParameter = methodInfo.GetParameters().Select(p => p.GetCustomAttribute<DataValuesAttribute>()?.Values
@@ -55,7 +56,7 @@ public sealed class CombinatorialDataAttribute : Attribute, ITestDataSource
             yield return arg;
 
             // Increment indices
-            for (int i = parameterIndices.Length - 1; i >= 0; i--)
+            for (var i = parameterIndices.Length - 1; i >= 0; i--)
             {
                 parameterIndices[i]++;
                 if (parameterIndices[i] >= valuesPerParameter[i].Length)
@@ -63,25 +64,20 @@ public sealed class CombinatorialDataAttribute : Attribute, ITestDataSource
                     parameterIndices[i] = 0;
 
                     if (i == 0)
+                    {
                         yield break;
+                    }
                 }
                 else
+                {
                     break;
+                }
             }
         }
     }
 
-    public string GetDisplayName(MethodInfo methodInfo, object[] data)
-    {
-        if (data != null)
-        {
-            return string.Format(CultureInfo.CurrentCulture, "{0} ({1})", new object[2]
-            {
-            methodInfo.Name,
-            string.Join(",", data)
-            });
-        }
-
-        return null!;
-    }
+    public string GetDisplayName(MethodInfo methodInfo, object[] data) =>
+        data == null
+            ? null
+            : $"{methodInfo.Name} ({string.Join(",", data)})";
 }

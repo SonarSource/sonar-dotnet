@@ -85,7 +85,7 @@ public sealed class UseModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
             {
                 var argument = (ArgumentSyntax)nodeContext.Node;
                 var context = new ArgumentContext(argument, nodeContext.SemanticModel);
-                if (allConstantAccess && argumentDescriptors.Any(x => Language.Tracker.Argument.MatchArgument(x)(context)))
+                if (allConstantAccess && Array.Exists(argumentDescriptors, x => Language.Tracker.Argument.MatchArgument(x)(context)))
                 {
                     allConstantAccess &= nodeContext.SemanticModel.GetConstantValue(argument.Expression) is { HasValue: true, Value: string };
                     codeBlockCandidates.Push(new(UseModelBindingMessage, GetPrimaryLocation(argument), OriginatesFromParameter(nodeContext.SemanticModel, argument)));
@@ -196,8 +196,8 @@ public sealed class UseModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
     private static bool IsOverridingFilterMethods(IMethodSymbol method) =>
         (method.GetOverriddenMember() ?? method).ExplicitOrImplicitInterfaceImplementations().Any(x => x is IMethodSymbol { ContainingType: { } container }
         && container.IsAny(
-                KnownType.Microsoft_AspNetCore_Mvc_Filters_IActionFilter,
-                KnownType.Microsoft_AspNetCore_Mvc_Filters_IAsyncActionFilter));
+            KnownType.Microsoft_AspNetCore_Mvc_Filters_IActionFilter,
+            KnownType.Microsoft_AspNetCore_Mvc_Filters_IAsyncActionFilter));
 
     private static bool OriginatesFromParameter(SemanticModel semanticModel, ArgumentSyntax argument) =>
         GetExpressionOfArgumentParent(argument) is { } parentExpression

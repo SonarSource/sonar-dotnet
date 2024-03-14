@@ -27,23 +27,18 @@ public class CombinatorialDataAttributeTest_TwoDimensions
     private static List<(int X, int Y)> combinations;
 
     [ClassInitialize]
-    public static void Initialize(TestContext context)
-    {
+    public static void Initialize(TestContext context) =>
         combinations = new();
-    }
 
     [TestMethod]
     [CombinatorialData]
 #pragma warning disable S2699 // Tests should include assertions. Assertion happens in cleanup
-    public void Combinatorial([DataValues(1, 2, 3)] int x, [DataValues(-1, -2, -3)] int y)
-#pragma warning restore S2699
-    {
+    public void Combinatorial([DataValues(1, 2, 3)] int x, [DataValues(-1, -2, -3)] int y) =>
         combinations.Add((x, y));
-    }
+#pragma warning restore S2699
 
     [ClassCleanup]
-    public static void Cleanup()
-    {
+    public static void Cleanup() =>
         combinations.Should().BeEquivalentTo([
             (1, -1),
             (1, -2),
@@ -55,7 +50,6 @@ public class CombinatorialDataAttributeTest_TwoDimensions
             (3, -2),
             (3, -3),
         ]);
-    }
 }
 
 [TestClass]
@@ -121,8 +115,8 @@ public class CombinatorialDataAttributeTest_AttributeTest
             [3, "B", false],
             ]);
     }
-    public void Combinatorial([DataValues(1, 2, 3)] int x, [DataValues("A", "B")] string y, [DataValues(true, false)] bool z)
+    public static void Combinatorial([DataValues(1, 2, 3)] int x, [DataValues("A", "B")] string y, [DataValues(true, false)] bool z)
     {
-
+        // For Attribute reflection only
     }
 }

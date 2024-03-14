@@ -152,7 +152,6 @@ public class CodeBlocksController : Controller
     ~CodeBlocksController() => _ = Request.Form["id"]; // Noncompliant
 }
 
-
 public class OverridesController : Controller
 {
     public void Action()
