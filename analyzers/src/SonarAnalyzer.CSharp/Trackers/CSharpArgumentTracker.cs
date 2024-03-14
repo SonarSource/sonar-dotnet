@@ -20,13 +20,13 @@
 
 namespace SonarAnalyzer.Helpers.Trackers;
 
-internal class CSharpArgumentTracker : ArgumentTracker<SyntaxKind>
+internal sealed class CSharpArgumentTracker : ArgumentTracker<SyntaxKind>
 {
-    protected override SyntaxKind[] TrackedSyntaxKinds => new[]
-        {
+    protected override SyntaxKind[] TrackedSyntaxKinds =>
+        [
             SyntaxKind.AttributeArgument,
             SyntaxKind.Argument,
-        };
+        ];
 
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
@@ -71,7 +71,7 @@ internal class CSharpArgumentTracker : ArgumentTracker<SyntaxKind>
             {
                 ObjectCreationExpressionSyntax { Type: { } typeName } => invokedMemberNameConstraint(typeName.GetName()),
                 ConstructorInitializerSyntax x => FindClassNameFromConstructorInitializerSyntax(x) is not string name || invokedMemberNameConstraint(name),
-                { } ex when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(ex) => invokedMemberNameConstraint(model.GetSymbolInfo(ex).Symbol?.ContainingType?.Name),
+                { } x when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(x) => invokedMemberNameConstraint(model.GetSymbolInfo(x).Symbol?.ContainingType?.Name),
                 _ => false,
             },
             InvokedMemberKind.Indexer => invokedExpression switch
