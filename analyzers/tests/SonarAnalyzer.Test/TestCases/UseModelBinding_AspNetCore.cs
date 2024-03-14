@@ -125,14 +125,15 @@ public class CodeBlocksController : Controller
     void M3()
     {
         // see also parameterized test "DottedExpressions"
-        _ = Request.Form["id"][0];       // Noncompliant
-        _ = Request?.Form["id"][0];      // Noncompliant
-        _ = Request.Form?["id"][0];      // Noncompliant
-        _ = Request?.Form?["id"][0];     // Noncompliant
-        _ = Request.Form?["id"][0];      // Noncompliant
+        _ = Request.Form["id"][0];      // Noncompliant
+        _ = Request?.Form["id"][0];     // Noncompliant
+        _ = Request.Form?["id"][0];     // Noncompliant
+        _ = Request?.Form?["id"][0];    // Noncompliant
+        _ = Request.Form?["id"][0];     // Noncompliant
 
-        _ = Request.Form?["id"][0][0];   // Noncompliant
-        _ = Request.Form?["id"][0]?[0];  // Noncompliant
+        _ = Request.Form?["id"][0][0];  // Noncompliant
+        _ = Request.Form?["id"][0]?[0]; // Noncompliant
+        _ = Request.Form["id"][0]?[0];  // Noncompliant
     }
     ~CodeBlocksController() => _ = Request.Form["id"]; // Noncompliant
 }
@@ -148,6 +149,15 @@ public class OverridesController : Controller
         // Implementation: It might be difficult to distinguish between access to "Request" that originate from overrides vs. "Request" access that originate from action methods.
         // This is especially true for "Request" which originate from parameters like here. We may need to redeclare such cases as FNs (see e.g HandleRequest above).
         _ = context.Request.Form["id"]; // Undecidable: request may originate from an action method (which supports binding), or from one of the following overrides (which don't).
+        _ = context.Request.Form["id"][0];      
+        _ = context.Request?.Form["id"][0];     
+        _ = context.Request.Form?["id"][0];     
+        _ = context.Request?.Form?["id"][0];    
+        _ = context.Request.Form?["id"][0];     
+
+        _ = context.Request.Form?["id"][0][0];  
+        _ = context.Request.Form?["id"][0]?[0]; 
+        _ = context.Request.Form["id"][0]?[0];  
     }
     private void Undecidable(HttpRequest request)
     {

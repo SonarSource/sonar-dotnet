@@ -215,7 +215,7 @@ public sealed class UseModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
 
     private static ExpressionSyntax MostLeftOfDottedChain(ExpressionSyntax root)
     {
-        var current = root.GetRootConditionalAccessExpression() ?? root;
+        var current = root.GetRootConditionalAccessExpression()?.Expression ?? root;
         while (current.Kind() is SyntaxKind.SimpleMemberAccessExpression or SyntaxKind.ElementAccessExpression)
         {
             current = current switch
@@ -231,7 +231,7 @@ public sealed class UseModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
     private static ExpressionSyntax GetExpressionOfArgumentParent(ArgumentSyntax argument) =>
         argument switch
         {
-            { Parent: BracketedArgumentListSyntax { Parent: ElementBindingExpressionSyntax { Parent: ConditionalAccessExpressionSyntax { Expression: { } expression } } } } => expression,
+            { Parent: BracketedArgumentListSyntax { Parent: ElementBindingExpressionSyntax expression } } => expression.GetParentConditionalAccessExpression(),
             { Parent: BracketedArgumentListSyntax { Parent: ElementAccessExpressionSyntax { Expression: { } expression } } } => expression,
             { Parent: ArgumentListSyntax { Parent: InvocationExpressionSyntax { Expression: { } expression } } } => expression,
             _ => null,
