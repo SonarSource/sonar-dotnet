@@ -1,0 +1,85 @@
+<p>Route templates for <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/actions#defining-actions">ASP.NET controller
+actions</a>, defined via a <a
+href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.routeattribute"><code>RouteAttribute</code></a> or any derivation of <a
+href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.routing.httpmethodattribute"><code>HttpMethodAttribute</code></a>, should
+not start with "/".</p>
+<h2>Why is this an issue?</h2>
+<p><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/routing">Routing</a> in ASP.NET Core MVC maps <a
+href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/actions#what-is-a-controller">controllers</a> and <a
+href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/actions#defining-actions">actions</a> to paths in request <a
+href="https://en.wikipedia.org/wiki/Uniform_Resource_Identifier">URIs</a>. Similar <a
+href="https://learn.microsoft.com/en-us/aspnet/mvc/overview/older-versions-1/controllers-and-routing/asp-net-mvc-routing-overview-cs">routing</a>
+happens in ASP.NET Framework MVC.</p>
+<p>In ASP.NET Core MVC, when an action defines a route template starting with a "/", the route is considered absolute and the action is registered at
+the root of the web application.</p>
+<p>In such a scenario, any route defined at the controller level is disregarded, as shown in the following example:</p>
+<pre>
+[Route("[controller]")]  // This route is ignored for the routing of Index1 and Index2
+public class HomeController : Controller
+{
+    [HttpGet("/Index1")] // This action is mapped to the root of the web application
+    public ActionResult Index1() =&gt; View();
+
+    [Route("/Index2")]   // The same applies here
+    public ActionResult Index2() =&gt; View();
+}
+</pre>
+<p>The behavior can be found confusing and surprising because any relative action route is relativized to the controller route.</p>
+<p>Therefore, in the vast majority of scenarios, controllers group all related actions not only in the source code, but also at the routing level.</p>
+<p>In ASP.NET Framework MVC with attribute routing enabled via <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.web.mvc.routecollectionattributeroutingextensions.mapmvcattributeroutes"><code>MapMvcAttributeRoutes</code></a>,
+the mere presence of an absolute route at the action level will produce an <code>InvalidOperationException</code> at runtime.</p>
+<p>It is then a good practice to avoid absolute routing at the action level and move the "/" to the root level, changing the template defined in the
+<code>RouteAttribute</code> of the controller appropriately.</p>
+<h3>Exceptions</h3>
+<p>The rule only applies when all route templates of all actions of the controller start with "/". Sometimes some actions may have both relative and
+absolute route templates, for example for backward compatibility reasons (i.e. a former route needs to be preserved). In such scenarios, it may make
+sense to keep the absolute route template at the action level.</p>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+[Route("[controller]")]  // This route is ignored
+public class ReviewsController : Controller // Noncompliant
+{
+    // Route is /reviews
+    [HttpGet("/reviews")]
+    public ActionResult Index() { /* ... */ }
+
+    // Route is /reviews/{reviewId}
+    [Route("/reviews/{reviewId}")]
+    public ActionResult Show(int reviewId)() { /* ... */ }
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+[Route("/")] // Turns on attribute routing
+public class ReviewsController : Controller
+{
+    // Route is /reviews
+    [HttpGet("reviews")]
+    public ActionResult Index() { /* ... */ }
+
+    // Route is /reviews/{reviewId}
+    [Route("reviews/{reviewId}")]
+    public ActionResult Show(int reviewId)() { /* ... */ }
+}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/routing">ASP.NET Core: Routing to controller actions
+  in ASP.NET Core</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/routing#attribute-routing-for-rest-apis">ASP.NET Core:
+  Routing to controller actions in ASP.NET Core - Attribute routing for REST APIs</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/actions">ASP.NET Core: Handle requests with
+  controllers in ASP.NET Core MVC</a> </li>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/aspnet/mvc/overview/older-versions-1/controllers-and-routing/asp-net-mvc-routing-overview-cs">ASP.NET MVC
+  Routing Overview (C#)</a> </li>
+</ul>
+<h3>Articles &amp; blog posts</h3>
+<ul>
+  <li> .NET Blog - <a href="https://devblogs.microsoft.com/dotnet/attribute-routing-in-asp-net-mvc-5/">Attribute Routing in ASP.NET MVC 5</a> </li>
+</ul>
+
