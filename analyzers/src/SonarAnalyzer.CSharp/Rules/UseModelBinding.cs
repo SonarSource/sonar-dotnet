@@ -24,22 +24,22 @@ using SonarAnalyzer.Helpers.Trackers;
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class UseModelBinding : SonarDiagnosticAnalyzer
+public sealed class UseModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
 {
     private const string DiagnosticId = "S6932";
     private const string UseModelBindingMessage = "Use model binding instead of accessing the raw request data";
     private const string UseIFormFileBindingMessage = "Use IFormFile or IFormFileCollection binding instead";
 
-    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, "{0}");
+    protected override string MessageFormat => "{0}";
 
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
+    public UseModelBinding() : base(DiagnosticId) { }
 
     protected override void Initialize(SonarAnalysisContext context)
     {
         context.RegisterCompilationStartAction(compilationStartContext =>
         {
-            var argumentTracker = new CSharpArgumentTracker();
-            var propertyTracker = new CSharpPropertyAccessTracker();
             var (argumentDescriptors, propertyAccessDescriptors) = GetDescriptors(compilationStartContext.Compilation);
             if (argumentDescriptors.Any() || propertyAccessDescriptors.Any())
             {
@@ -52,7 +52,7 @@ public sealed class UseModelBinding : SonarDiagnosticAnalyzer
                     if (symbolStartContext.Symbol is INamedTypeSymbol namedType && namedType.IsControllerType())
                     {
                         symbolStartContext.RegisterCodeBlockStartAction<SyntaxKind>(codeBlockStart =>
-                            hasOverrides |= RegisterCodeBlockActions(codeBlockStart, argumentTracker, propertyTracker, argumentDescriptors, propertyAccessDescriptors, controllerCandidates));
+                            hasOverrides |= RegisterCodeBlockActions(codeBlockStart, argumentDescriptors, propertyAccessDescriptors, controllerCandidates));
                     }
                     symbolStartContext.RegisterSymbolEndAction(symbolEnd =>
                     {
@@ -66,8 +66,7 @@ public sealed class UseModelBinding : SonarDiagnosticAnalyzer
         });
     }
 
-    private static bool RegisterCodeBlockActions(SonarCodeBlockStartAnalysisContext<SyntaxKind> codeBlockStart,
-        CSharpArgumentTracker argumentTracker, CSharpPropertyAccessTracker propertyTracker,
+    private bool RegisterCodeBlockActions(SonarCodeBlockStartAnalysisContext<SyntaxKind> codeBlockStart,
         IReadOnlyList<ArgumentDescriptor> argumentDescriptors, IReadOnlyList<MemberDescriptor> propertyAccessDescriptors,
         ConcurrentStack<ReportCandidate> controllerCandidates)
     {
@@ -87,7 +86,7 @@ public sealed class UseModelBinding : SonarDiagnosticAnalyzer
             {
                 var argument = (ArgumentSyntax)nodeContext.Node;
                 var context = new ArgumentContext(argument, nodeContext.SemanticModel);
-                if (allConstantAccess && argumentDescriptors.Any(x => argumentTracker.MatchArgument(x)(context)))
+                if (allConstantAccess && argumentDescriptors.Any(x => Language.Tracker.Argument.MatchArgument(x)(context)))
                 {
                     allConstantAccess &= nodeContext.SemanticModel.GetConstantValue(argument.Expression) is { HasValue: true, Value: string };
                     codeBlockCandidates.Push(new(UseModelBindingMessage, GetPrimaryLocation(argument), OriginatesFromParameter(nodeContext.SemanticModel, argument)));
@@ -100,7 +99,7 @@ public sealed class UseModelBinding : SonarDiagnosticAnalyzer
             {
                 var memberAccess = (MemberAccessExpressionSyntax)nodeContext.Node;
                 var context = new PropertyAccessContext(memberAccess, nodeContext.SemanticModel, memberAccess.Name.Identifier.ValueText);
-                if (propertyTracker.MatchProperty([.. propertyAccessDescriptors])(context))
+                if (Language.Tracker.PropertyAccess.MatchProperty([.. propertyAccessDescriptors])(context))
                 {
                     codeBlockCandidates.Push(new(UseIFormFileBindingMessage, memberAccess.GetLocation(), OriginatesFromParameter(nodeContext.SemanticModel, memberAccess)));
                 }
@@ -133,7 +132,7 @@ public sealed class UseModelBinding : SonarDiagnosticAnalyzer
         argumentDescriptors.Add(ArgumentDescriptor.ElementAccess(// Request.Form["id"]
             invokedIndexerContainer: KnownType.Microsoft_AspNetCore_Http_IFormCollection,
             invokedIndexerExpression: "Form",
-            parameterConstraint: parameter => parameter.IsType(KnownType.System_String) && IsGetterParameter(parameter),
+            parameterConstraint: _ => true,
             argumentPosition: 0));
         argumentDescriptors.Add(ArgumentDescriptor.MethodInvocation(// Request.Form.TryGetValue("id", out _)
             invokedType: KnownType.Microsoft_AspNetCore_Http_IFormCollection,
@@ -162,12 +161,12 @@ public sealed class UseModelBinding : SonarDiagnosticAnalyzer
             invokedMemberNameConstraint: (name, comparison) => string.Equals(name, "ContainsKey", comparison),
             invokedMemberNodeConstraint: IsAccessedViaHeaderDictionary,
             parameterConstraint: x => string.Equals(x.Name, "key", StringComparison.Ordinal),
-            argumentListConstraint: (list, position) => list.Count == 1,
+            argumentListConstraint: (list, _) => list.Count == 1,
             refKind: null));
         argumentDescriptors.Add(ArgumentDescriptor.ElementAccess(// Request.Query["id"]
             invokedIndexerContainer: KnownType.Microsoft_AspNetCore_Http_IQueryCollection,
             invokedIndexerExpression: "Query",
-            parameterConstraint: parameter => parameter.IsType(KnownType.System_String) && IsGetterParameter(parameter),
+            parameterConstraint: _ => true,
             argumentPosition: 0));
         argumentDescriptors.Add(ArgumentDescriptor.MethodInvocation(// Request.Query.TryGetValue("id", out _)
             invokedType: KnownType.Microsoft_AspNetCore_Http_IQueryCollection,
