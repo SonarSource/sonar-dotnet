@@ -22,7 +22,7 @@ namespace SonarAnalyzer.Helpers.Trackers;
 
 public class VisualBasicArgumentTracker : ArgumentTracker<SyntaxKind>
 {
-    protected override SyntaxKind[] TrackedSyntaxKinds => new[] { SyntaxKind.SimpleArgument };
+    protected override SyntaxKind[] TrackedSyntaxKinds =>   [SyntaxKind.SimpleArgument];
 
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
