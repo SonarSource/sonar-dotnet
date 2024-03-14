@@ -62,4 +62,39 @@ public class BackslashShouldBeAvoidedInAspNetRoutesTest
             .AddReferences(AspNet4xReferences(aspNetMvcVersion))
             .Verify();
 #endif
+
+#if NET
+    public static IEnumerable<object[]> AspNetCore2xVersionsUnderTest => [
+        ["2.0.4"] /* Latest 2.0.x */, ["2.2.0"] /* 2nd most used */, [Constants.NuGetLatestVersion]];
+
+    private static IEnumerable<MetadataReference> AspNetCore2xReferences(string aspNetCoreVersion) =>
+        NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetCoreVersion)                       // for Controller
+            .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(aspNetCoreVersion))  // for View
+            .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcAbstractions(aspNetCoreVersion)); // for IActionResult
+
+    [TestMethod]
+    [DynamicData(nameof(AspNetCore2xVersionsUnderTest))]
+    public void BackslashShouldBeAvoidedInAspNetRoutes_AspNetCore2x_CS(string aspNetCoreVersion) =>
+        builderCS
+            .AddPaths("BackslashShouldBeAvoidedInAspNetRoutes.AspNetCore2x.cs")
+            .AddReferences(AspNetCore2xReferences(aspNetCoreVersion))
+            .Verify();
+
+    [TestMethod]
+    [DynamicData(nameof(AspNetCore2xVersionsUnderTest))]
+    public void BackslashShouldBeAvoidedInAspNetRoutes_AspNetCore2x_CSharp11(string aspNetCoreVersion) =>
+        builderCS
+            .AddPaths("BackslashShouldBeAvoidedInAspNetRoutes.AspNetCore2x.CSharp11.cs")
+            .AddReferences(AspNetCore2xReferences(aspNetCoreVersion))
+            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .Verify();
+
+    [TestMethod]
+    [DynamicData(nameof(AspNetCore2xVersionsUnderTest))]
+    public void BackslashShouldBeAvoidedInAspNetRoutes_AspNetCore2x_VB(string aspNetCoreVersion) =>
+        builderVB
+            .AddPaths("BackslashShouldBeAvoidedInAspNetRoutes.AspNetCore2x.vb")
+            .AddReferences(AspNetCore2xReferences(aspNetCoreVersion))
+            .Verify();
+#endif
 }

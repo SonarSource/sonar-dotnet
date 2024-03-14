@@ -56,10 +56,22 @@ public abstract class BackslashShouldBeAvoidedInAspNetRoutesBase<TSyntaxKind> : 
         && model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
         && Language.MethodParameterLookup(invocation, methodSymbol) is { } parameterLookup
         && parameterLookup.TryGetSymbol(node, out var parameter)
-        && methodSymbol.ContainingType.IsAny(KnownType.RouteAttributes) && methodSymbol.IsConstructor() && parameter.Name == "template";
+        && (HasStringSyntaxAttributeOfTypeRoute(parameter) || IsRouteTemplateBeforeAspNet6(parameter, methodSymbol));
+
+    private static bool HasStringSyntaxAttributeOfTypeRoute(IParameterSymbol parameter) =>
+        parameter.GetAttributes(KnownType.System_Diagnostics_CodeAnalysis_StringSyntaxAttribute).FirstOrDefault() is { } syntaxAttribute
+        && syntaxAttribute.TryGetAttributeValue<string>("syntax", out var syntaxParameter)
+        && string.Equals(syntaxParameter, "Route", StringComparison.Ordinal);
+
+    private static bool IsRouteTemplateBeforeAspNet6(IParameterSymbol parameter, IMethodSymbol method) =>
+        // Remark: route templates cannot be specified via HttpXAttribute in ASP.NET 4.x
+        (method.ContainingType.IsAny(KnownType.RouteAttributes)
+            || method.ContainingType.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_Routing_HttpMethodAttribute))
+        && method.IsConstructor() && parameter.Name == "template";
 
     private static bool ShouldRegisterAction(Compilation compilation) =>
-        compilation.GetTypeByMetadataName(KnownType.System_Web_Mvc_Controller) is not null;
+        compilation.GetTypeByMetadataName(KnownType.System_Web_Mvc_Controller) is not null
+        || compilation.GetTypeByMetadataName(KnownType.Microsoft_AspNetCore_Mvc_Controller) is not null;
 
     private static bool ContainsBackslash(string value)
     {
