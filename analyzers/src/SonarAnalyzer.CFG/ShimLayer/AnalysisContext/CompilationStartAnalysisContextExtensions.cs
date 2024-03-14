@@ -23,39 +23,43 @@ using static System.Linq.Expressions.Expression;
 
 namespace SonarAnalyzer.ShimLayer.AnalysisContext;
 
-// Code is executed in static initializers and is not detected by the coverage tool
-// See the SonarAnalysisContextTest.SonarCompilationStartAnalysisContext_RegisterSymbolStartAction family of tests to check test coverage manually
-[ExcludeFromCodeCoverage]
 public static class CompilationStartAnalysisContextExtensions
 {
+    private static readonly Action<CompilationStartAnalysisContext, Action<SymbolStartAnalysisContextWrapper>, SymbolKind> RegisterSymbolStartActionWrapper =
+        CreateRegisterSymbolStartAnalysisWrapper();
+
+    public static void RegisterSymbolStartAction(this CompilationStartAnalysisContext context, Action<SymbolStartAnalysisContextWrapper> action, SymbolKind symbolKind) =>
+        RegisterSymbolStartActionWrapper(context, action, symbolKind);
+
+    // Code is executed in static initializers and is not detected by the coverage tool
+    // See the SonarAnalysisContextTest.SonarCompilationStartAnalysisContext_RegisterSymbolStartAction family of tests to check test coverage manually
+    [ExcludeFromCodeCoverage]
+    private static Action<CompilationStartAnalysisContext, Action<SymbolStartAnalysisContextWrapper>, SymbolKind> CreateRegisterSymbolStartAnalysisWrapper()
     {
         if (typeof(CompilationStartAnalysisContext).GetMethod(nameof(RegisterSymbolStartAction)) is not { } registerMethod)
         {
             return static (_, _, _) => { };
         }
 
-            var contextParameter = Parameter(typeof(CompilationStartAnalysisContext));
-            var symbolKindParameter = Parameter(typeof(SymbolKind));
-            var symbolStartAnalysisContextCtor = typeof(SymbolStartAnalysisContext).GetConstructors().Single();
-                        PassThroughLambda<CodeBlockAnalysisContext>(nameof(SymbolStartAnalysisContext.RegisterCodeBlockAction))))), symbolStartAnalysisContextParameter);
+        var contextParameter = Parameter(typeof(CompilationStartAnalysisContext));
+        var shimmedActionParameter = Parameter(typeof(Action<SymbolStartAnalysisContextWrapper>));
+        var symbolKindParameter = Parameter(typeof(SymbolKind));
 
-                contextParameter, shimmedActionParameter, symbolKindParameter).Compile();
-        }
-        else
-        {
-            var registerActionParameter = Parameter(typeof(Action<TContext>));
-            return Lambda<Action<Action<TContext>>>(Call(symbolStartAnalysisContextParameter, registrationMethodName, typeArguments, registerActionParameter), registerActionParameter);
-        }
+        var roslynSymbolStartAnalysisContextType = typeof(CompilationStartAnalysisContext).Assembly.GetType("Microsoft.CodeAnalysis.Diagnostics.SymbolStartAnalysisContext");
+        var roslynSymbolStartAnalysisActionType = typeof(Action<>).MakeGenericType(roslynSymbolStartAnalysisContextType);
+        var roslynSymbolStartAnalysisContextParameter = Parameter(roslynSymbolStartAnalysisContextType);
+        var sonarSymbolStartAnalysisContextCtor = typeof(SymbolStartAnalysisContextWrapper).GetConstructors().Single();
 
-        // (registerActionParameter, additionalParameter) => symbolStartAnalysisContextParameter."registrationMethodName"<typeArguments>(registerActionParameter, additionalParameter)
-        static Expression<Action<Action<TContext>, TParameter>> RegisterLambdaWithAdditionalParameter<TContext, TParameter>(
-            ParameterExpression symbolStartAnalysisContextParameter, string registrationMethodName, params Type[] typeArguments)
-        {
-            var registerActionParameter = Parameter(typeof(Action<TContext>));
-            var additionalParameter = Parameter(typeof(TParameter));
-            return Lambda<Action<Action<TContext>, TParameter>>(
-                Call(symbolStartAnalysisContextParameter, registrationMethodName, typeArguments, registerActionParameter, additionalParameter), registerActionParameter, additionalParameter);
-        }
-#pragma warning restore S103 // Lines should not be too long
+        // Action<Roslyn.SymbolStartAnalysisContext> registerAction = roslynSymbolStartAnalysisContextParameter =>
+        //    shimmedActionParameter.Invoke(new Sonar.SymbolStartAnalysisContextWrapper(roslynSymbolStartAnalysisContextParameter))
+        var registerAction = Lambda(
+            delegateType: roslynSymbolStartAnalysisActionType,
+            body: Call(shimmedActionParameter, nameof(Action.Invoke), [], New(sonarSymbolStartAnalysisContextCtor, roslynSymbolStartAnalysisContextParameter)),
+            parameters: roslynSymbolStartAnalysisContextParameter);
+
+        // (contextParameter, shimmedActionParameter, symbolKindParameter) => contextParameter.RegisterSymbolStartAction(registerAction, symbolKindParameter)
+        return Lambda<Action<CompilationStartAnalysisContext, Action<SymbolStartAnalysisContextWrapper>, SymbolKind>>(
+            Call(contextParameter, registerMethod, registerAction, symbolKindParameter),
+            contextParameter, shimmedActionParameter, symbolKindParameter).Compile();
     }
 }

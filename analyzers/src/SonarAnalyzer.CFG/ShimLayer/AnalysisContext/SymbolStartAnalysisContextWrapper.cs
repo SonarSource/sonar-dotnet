@@ -25,9 +25,6 @@ using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 namespace SonarAnalyzer.ShimLayer.AnalysisContext;
 
-// Code is executed in static initializers and is not detected by the coverage tool
-// See the RegisterSymbolStartActionWrapperTest family of tests to check test coverage manually
-[ExcludeFromCodeCoverage]
 public readonly struct SymbolStartAnalysisContextWrapper
 {
     private static readonly Func<object, CancellationToken> CancellationTokenAccessor;
@@ -45,11 +42,6 @@ public readonly struct SymbolStartAnalysisContextWrapper
     private static readonly Action<object, Action<SyntaxNodeAnalysisContext>, ImmutableArray<CS.SyntaxKind>> RegisterSyntaxNodeActionCS;
     private static readonly Action<object, Action<SyntaxNodeAnalysisContext>, ImmutableArray<VB.SyntaxKind>> RegisterSyntaxNodeActionVB;
 
-    public CancellationToken CancellationToken => CancellationTokenAccessor(RoslynSymbolStartAnalysisContext);
-    public Compilation Compilation => CompilationAccessor(RoslynSymbolStartAnalysisContext);
-    public AnalyzerOptions Options => OptionsAccessor(RoslynSymbolStartAnalysisContext);
-    public ISymbol Symbol => SymbolAccessor(RoslynSymbolStartAnalysisContext);
-    private object RoslynSymbolStartAnalysisContext { get; }
     public CancellationToken CancellationToken => CancellationTokenAccessor(RoslynSymbolStartAnalysisContext);
     public Compilation Compilation => CompilationAccessor(RoslynSymbolStartAnalysisContext);
     public AnalyzerOptions Options => OptionsAccessor(RoslynSymbolStartAnalysisContext);
