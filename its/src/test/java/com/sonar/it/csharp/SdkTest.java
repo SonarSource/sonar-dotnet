@@ -40,11 +40,11 @@ public class SdkTest {
   private static Path temp;
 
   @Test
-  void net5_should_have_metrics_and_issues() throws IOException {
-    project_should_have_metrics_and_issues("Net5");
+  void net5() throws IOException {
+    validateProject("Net5");
   }
 
-  void project_should_have_metrics_and_issues(String project) throws IOException {
+  void validateProject(String project) throws IOException {
     Tests.analyzeProject(temp, project);
     assertThat(getComponent(project)).isNotNull();
     assertThat(getIssues(project)).extracting(Issues.Issue::getLine, Issues.Issue::getRule).containsOnly(tuple(3, "csharpsquid:S1134"));
