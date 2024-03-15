@@ -75,7 +75,7 @@ public sealed class LoggingTemplatePlaceHoldersShouldBeInOrder : IMessageTemplat
 
     private static SyntaxNode OutOfOrderPlaceholderValue(MessageTemplatesParser.Placeholder placeholder, int placeholderIndex, ImmutableArray<SyntaxNode> placeholderValues)
     {
-        if (placeholderIndex < placeholderValues.Length && MatchesName(placeholder.Name, placeholderValues[placeholderIndex]))
+        if (placeholderIndex < placeholderValues.Length && MatchesName(placeholder.Name, placeholderValues[placeholderIndex]) is not false)
         {
             return null;
         }
@@ -83,7 +83,7 @@ public sealed class LoggingTemplatePlaceHoldersShouldBeInOrder : IMessageTemplat
         {
             for (var i = 0; i < placeholderValues.Length; i++)
             {
-                if (i != placeholderIndex && MatchesName(placeholder.Name, placeholderValues[i]))
+                if (i != placeholderIndex && placeholderIndex < placeholderValues.Length && MatchesName(placeholder.Name, placeholderValues[i]) is true)
                 {
                     return placeholderValues[placeholderIndex];
                 }
@@ -92,11 +92,12 @@ public sealed class LoggingTemplatePlaceHoldersShouldBeInOrder : IMessageTemplat
         return null;
     }
 
-    private static bool MatchesName(string placeholderName, SyntaxNode placeholderValue) =>
+    private static bool? MatchesName(string placeholderName, SyntaxNode placeholderValue) =>
         placeholderValue switch
         {
-            MemberAccessExpressionSyntax memberAccess => MatchesName(placeholderName, memberAccess.Name) || MatchesName(placeholderName, memberAccess.Expression),
-            ObjectCreationExpressionSyntax => false,
-            _ => new string(placeholderName.Where(char.IsLetterOrDigit).ToArray()).Equals(placeholderValue.ToString(), StringComparison.OrdinalIgnoreCase)
+            MemberAccessExpressionSyntax memberAccess => MatchesName(placeholderName, memberAccess.Name),
+            CastExpressionSyntax cast => MatchesName(placeholderName, cast.Expression),
+            NameSyntax name => new string(placeholderName.Where(char.IsLetterOrDigit).ToArray()).Equals(name.GetName(), StringComparison.OrdinalIgnoreCase),
+            _ => null
         };
 }
