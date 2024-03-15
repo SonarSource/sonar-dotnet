@@ -216,12 +216,7 @@ public class VerifierTest
     public void Compile_Razor_DefaultFramework()
     {
         var compilation = DummyWithLocation.AddPaths("Dummy.razor")
-            .AddSnippet("""
-                public class Sample
-                {
-                    public void UseSystemObject(object forceTheTypeToBeUsed) { }
-                }
-                """)
+            .AddSnippet("class Sample(object forceTheTypeToBeUsed) { }")
             .WithLanguageVersion(LanguageVersion.CSharp12)
             .Build()
             .Compile(false)
