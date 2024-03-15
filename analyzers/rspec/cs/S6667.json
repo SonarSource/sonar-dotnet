@@ -1,6 +1,12 @@
 {
   "title": "Logging in a catch clause should pass the caught exception as a parameter.",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "MEDIUM"
+    },
+    "attribute": "COMPLETE"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

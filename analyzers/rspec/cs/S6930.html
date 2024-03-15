@@ -27,7 +27,7 @@ escaped by the user, using <a href="https://en.wikipedia.org/wiki/Percent-encodi
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
-[Route(@"Something\[controller]")] // Noncompliant: Replace `\` with `/`.
+[Route(@"Something\[controller]")] // Noncompliant: Replace '\' with '/'.
 public class HomeController : Controller
 {
     [HttpGet]
@@ -36,7 +36,7 @@ public class HomeController : Controller
 </pre>
 <h4>Compliant solution</h4>
 <pre data-diff-id="1" data-diff-type="compliant">
-[Route(@"Something/[controller]")] // `\` replaced with `/`
+[Route(@"Something/[controller]")] // '\' replaced with '/'
 public class HomeController : Controller
 {
     [HttpGet]
@@ -47,13 +47,13 @@ public class HomeController : Controller
 <pre data-diff-id="2" data-diff-type="noncompliant">
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}\\{action=Index}"); // Noncompliant: Replace `\` with `/`.
+    pattern: "{controller=Home}\\{action=Index}"); // Noncompliant: Replace '\' with '/'.
 </pre>
 <h4>Compliant solution</h4>
 <pre data-diff-id="2" data-diff-type="compliant">
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}"); // `\` replaced with `/`
+    pattern: "{controller=Home}/{action=Index}"); // '\' replaced with '/'
 </pre>
 <h2>Resources</h2>
 <h3>Documentation</h3>

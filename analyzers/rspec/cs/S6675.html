@@ -9,21 +9,12 @@ href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.traceswitc
 <p>Using <code>Trace.WriteLineIf</code> with such properties should be avoided since it can lead to misinterpretation and produce confusion.</p>
 <p>In particular, <code>Trace.WriteLineIf</code> may appear as equivalent to the level-specific tracing methods provided by <code>Trace</code>, such
 as <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.trace.traceerror"><code>Trace.Error</code></a>, but it is not.</p>
-<h3>Code examples</h3>
-<h4>Noncompliant code example</h4>
-<pre data-diff-id="1" data-diff-type="noncompliant">
-public void Method(TraceSwitch traceSwitch)
-{
-    Trace.WriteIf(traceSwitch.TraceError, "Failed to log in!");
-}
-</pre>
-<h4>Compliant solution</h4>
-<pre data-diff-id="1" data-diff-type="compliant">
-public void Method(bool condition)
-{
-    Trace.WriteIf(condition, "Failed to log in!");
-}
-</pre>
+<p>The difference is that <code>Trace.WriteLineIf(switch.TraceError, …​)</code> conditionally writes the trace, based on the switch, whereas
+<code>Trace.TraceError</code> always writes the trace, no matter whether <code>switch.TraceError</code> is <code>true</code> or
+<code>false</code>.</p>
+<p>Moreover, unlike <code>Trace.TraceError</code>, <code>Trace.WriteLineIf(switch.TraceError, …​)</code> would behave like
+<code>Trace.WriteLine(…​)</code> when <code>switch.TraceError</code> is <code>true</code>, writing unfiltered to the underlying trace listeners and
+not categorizing the log entry by level, as described more in detail in {rule:csharpsquid:S6670}.</p>
 <h2>How to fix it</h2>
 <p>The fix depends on the intent behind the use of <a
 href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.traceswitch"><code>TraceSwitch</code></a> levels with <a

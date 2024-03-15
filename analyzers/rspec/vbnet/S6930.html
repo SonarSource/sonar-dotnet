@@ -27,7 +27,7 @@ escaped by the user, using <a href="https://en.wikipedia.org/wiki/Percent-encodi
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
-&lt;Route("Something\[controller]")&gt; ' Noncompliant: Replace `\` with `/`.
+&lt;Route("Something\[controller]")&gt; ' Noncompliant: Replace '\' with '/'.
 Public Class HomeController
     Inherits Controller
 
@@ -39,7 +39,7 @@ End Class
 </pre>
 <h4>Compliant solution</h4>
 <pre data-diff-id="1" data-diff-type="compliant">
-&lt;Route("Something/[controller]")&gt; ' `\` replaced with `/`
+&lt;Route("Something/[controller]")&gt; ' '\' replaced with '/'
 Public Class HomeController
     Inherits Controller
 
@@ -53,13 +53,13 @@ End Class
 <pre data-diff-id="2" data-diff-type="noncompliant">
 app.MapControllerRoute(
     name:="default",
-    pattern:="{controller=Home}\{action=Index}") ' Noncompliant: Replace `\` with `/`.
+    pattern:="{controller=Home}\{action=Index}") ' Noncompliant: Replace '\' with '/'.
 </pre>
 <h4>Compliant solution</h4>
 <pre data-diff-id="2" data-diff-type="compliant">
 app.MapControllerRoute(
     name:="default",
-    pattern:="{controller=Home}/{action=Index}") ' `\` replaced with `/`
+    pattern:="{controller=Home}/{action=Index}") ' '\' replaced with '/'
 </pre>
 <h2>Resources</h2>
 <h3>Documentation</h3>

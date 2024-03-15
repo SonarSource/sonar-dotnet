@@ -1,6 +1,12 @@
 {
   "title": "\"Trace.Write\" and \"Trace.WriteLine\" should not be used",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "MEDIUM"
+    },
+    "attribute": "LOGICAL"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
