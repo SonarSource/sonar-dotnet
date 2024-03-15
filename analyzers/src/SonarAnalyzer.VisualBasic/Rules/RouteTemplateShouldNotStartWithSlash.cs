@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-
 namespace SonarAnalyzer.Rules.VisualBasic;
 
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
@@ -28,9 +26,6 @@ public sealed class RouteTemplateShouldNotStartWithSlash : RouteTemplateShouldNo
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
     protected override SyntaxKind MethodSyntaxKind => SyntaxKind.FunctionBlock;
 
-    protected override Location ControllerLocation(INamedTypeSymbol symbol)
-    {
-        var controllerSyntax = symbol.GetFirstSyntaxRef() as ClassStatementSyntax;
-        return controllerSyntax.GetIdentifier()?.GetLocation();
-    }
+    protected override Location ControllerLocation(INamedTypeSymbol symbol) =>
+        ((ClassStatementSyntax)symbol.GetFirstSyntaxRef()).GetIdentifier()?.GetLocation();
 }

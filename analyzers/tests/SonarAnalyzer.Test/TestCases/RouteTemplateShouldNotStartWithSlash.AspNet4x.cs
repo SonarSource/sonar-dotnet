@@ -115,6 +115,8 @@ public class CompliantNoControllerRouteEmptyActionRouteController : Controller /
     public ActionResult Index4() => View();
 }
 
+public class EmptyController : Controller { } // Compliant
+
 namespace WithAliases
 {
     using MyRoute = RouteAttribute;

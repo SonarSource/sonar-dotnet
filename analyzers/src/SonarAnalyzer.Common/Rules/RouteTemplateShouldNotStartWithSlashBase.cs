@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Concurrent;
-using Microsoft.CodeAnalysis.CSharp;
 
 namespace SonarAnalyzer.Rules;
 
@@ -27,11 +26,11 @@ public abstract class RouteTemplateShouldNotStartWithSlashBase<TSyntaxKind> : So
     where TSyntaxKind : struct
 {
     private const string DiagnosticId = "S6931";
-    protected abstract TSyntaxKind MethodSyntaxKind { get; }
-    protected abstract Location ControllerLocation(INamedTypeSymbol symbol);
-
     private const string MessageOnlyActions = "Change the paths of the actions of this controller to be relative and adapt the controller route accordingly.";
     private const string MessageActionsAndController = "Change the paths of the actions of this controller to be relative and add a controller route with the common prefix.";
+
+    protected abstract TSyntaxKind MethodSyntaxKind { get; }
+    protected abstract Location ControllerLocation(INamedTypeSymbol symbol);
 
     protected override string MessageFormat => "{0}";
     protected RouteTemplateShouldNotStartWithSlashBase() : base(DiagnosticId) { }
@@ -43,39 +42,41 @@ public abstract class RouteTemplateShouldNotStartWithSlashBase<TSyntaxKind> : So
             {
                 return;
             }
+
             compilationStartContext.RegisterSymbolStartAction(symbolStartContext =>
             {
-                if (symbolStartContext.Symbol is INamedTypeSymbol controllerSymbol && controllerSymbol.IsControllerType())
+                var symbol = (INamedTypeSymbol)symbolStartContext.Symbol;
+                if (symbol.IsControllerType())
                 {
                     var controllerActionInfo = new ConcurrentBag<ControllerActionInfo>();
                     symbolStartContext.RegisterSyntaxNodeAction(nodeContext =>
                     {
                         var methodSymbol = nodeContext.SemanticModel.GetDeclaredSymbol(nodeContext.Node) as IMethodSymbol;
-                        if (methodSymbol is not null && methodSymbol.IsControllerMethod())
+                        if (methodSymbol.IsControllerMethod())
                         {
                             controllerActionInfo.Add(new ControllerActionInfo(methodSymbol, RouteAttributeTemplateArguments(methodSymbol.GetAttributes())));
                         }
                     }, MethodSyntaxKind);
 
-                    symbolStartContext.RegisterSymbolEndAction(context =>
-                    {
-                        foreach (var action in controllerActionInfo)
-                        {
-                            if (!action.RouteParameters.Any() || action.RouteParameters.Keys.Any(x => !x.StartsWith("/")))
-                            {
-                                return;
-                            }
-                        }
-
-                        var issueMessage = controllerSymbol.GetAttributes().Any(x => x.AttributeClass.IsAny(KnownType.RouteAttributes))
-                            ? MessageOnlyActions
-                            : MessageActionsAndController;
-
-                        var attributeLocations = controllerActionInfo.SelectMany(x => x.RouteParameters).Select(x => x.Value);
-                        context.ReportIssue(Language.GeneratedCodeRecognizer, Diagnostic.Create(Rule, ControllerLocation(controllerSymbol), attributeLocations, issueMessage));
-                    });
+                    ReportIssues(symbolStartContext, symbol, controllerActionInfo);
                 }
             }, SymbolKind.NamedType);
+        });
+
+    private void ReportIssues(SonarSymbolStartAnalysisContext context, INamedTypeSymbol controllerSymbol, ConcurrentBag<ControllerActionInfo> actions) =>
+        context.RegisterSymbolEndAction(context =>
+        {
+            if (!actions.Any()
+                || actions.Any(x => !x.RouteParameters.Any() || x.RouteParameters.Keys.Any(x => !x.StartsWith("/"))))
+            {
+                return;
+            }
+            var issueMessage = controllerSymbol.GetAttributes().Any(x => x.AttributeClass.IsAny(KnownType.RouteAttributes))
+                ? MessageOnlyActions
+                : MessageActionsAndController;
+
+            var attributeLocations = actions.SelectMany(x => x.RouteParameters).Select(x => x.Value);
+            context.ReportIssue(Language.GeneratedCodeRecognizer, Diagnostic.Create(Rule, ControllerLocation(controllerSymbol), attributeLocations, issueMessage));
         });
 
     private static Dictionary<string, Location> RouteAttributeTemplateArguments(ImmutableArray<AttributeData> attributes)
