@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Extensions.Logging;
 
 public class Program
@@ -51,6 +53,9 @@ public class Program
         //    ^^^ @-1
         //                  ^^^^^^^^^^ Secondary @-1
 
+        logger.LogInformation("Arg: {Arg} {AnotherArg}", (short)anotherArg, (float)arg);            // Noncompliant
+                                                                                                    // Secondary @-1
+
         LoggerExtensions.LogInformation(logger, "Arg: {Arg} {AnotherArg}", anotherArg, arg);        // Noncompliant
                                                                                                     // Secondary @-1
     }
@@ -61,14 +66,17 @@ public class Program
         logger.LogInformation(args: new[] { arg, anotherArg }, message: "Arg: {AnotherArg} {Arg}");     // FN
     }
 
-    public void PropertyAccess(ILogger logger, Person person)
+    public void PropertyAccess(ILogger logger, Person person, List<Person> people)
     {
-        logger.LogInformation("Person: {FirstName} {LastName}", person.FirstName, person.LastName);
+        logger.LogInformation("Person: {FirstName} {LastName}", person.FirstName, person.LastName);                     // Compliant
         logger.LogInformation("Person: {LastName} {FirstName}", person.FirstName, person.LastName);                     // Noncompliant
                                                                                                                         // Secondary @-1
-        logger.LogInformation("Father: {Father}, Mother: {Mother}", person.Father.LastName, person.Mother.LastName);
-        logger.LogInformation("Father: {Father}, Mother: {Mother}", person.Mother.LastName, person.Father.LastName);    // Noncompliant
-                                                                                                                        // Secondary @-1
+        logger.LogInformation("Father: {Father}, Mother: {Mother}", person.Father.LastName, person.Mother.LastName);    // Compliant
+        logger.LogInformation("Father: {Father}, Mother: {Mother}", person.Mother.LastName, person.Father.LastName);    // FN
+        logger.LogInformation("People: {Count} {People}", people.Count, people.Select(x => x.FirstName + " " + x.LastName));
+
+        var allPeople = people;
+        logger.LogInformation("People: {Count} {People}", people.Count, allPeople);
     }
 
     public void Overloads(ILogger logger, int arg, int anotherArg)
