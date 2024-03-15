@@ -52,6 +52,7 @@ public sealed class LoggersShouldBeNamedForEnclosingType : SonarDiagnosticAnalyz
 
         if (invocation.GetName() is "GetLogger" or "CreateLogger"
             && invocation.Ancestors().OfType<TypeDeclarationSyntax>().FirstOrDefault() is { } enclosingType // filter out top-level statements
+            && !IsArgumentInObjectCreation(invocation)
             && ExtractArgument(invocation) is { } argument
             && context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol method
             && IsValidMethod(method)
@@ -60,6 +61,9 @@ public sealed class LoggersShouldBeNamedForEnclosingType : SonarDiagnosticAnalyz
             context.ReportIssue(Diagnostic.Create(Rule, argument.GetLocation()));
         }
     }
+
+    private static bool IsArgumentInObjectCreation(InvocationExpressionSyntax invocation) =>
+        invocation.Ancestors().OfType<ObjectCreationExpressionSyntax>().Any();
 
     // Extracts T for generic argument, nameof or typeof expressions
     private static SyntaxNode ExtractArgument(InvocationExpressionSyntax invocation)

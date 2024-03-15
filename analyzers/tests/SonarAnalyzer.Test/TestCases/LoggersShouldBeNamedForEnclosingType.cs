@@ -185,12 +185,12 @@ public class Factory
 
     public Service CreateType(ILoggerFactory loggerFactory)
     {
-        return new Service(loggerFactory.CreateLogger<Service>());                                              // Noncompliant FP
+        return new Service(loggerFactory.CreateLogger<Service>());
     }
 
     public Service CreateType(ILoggerFactory loggerFactory, string otherParameter)
     {
-        return new Service(loggerFactory.CreateLogger<Service>(), otherParameter);                              // Noncompliant FP
+        return new Service(loggerFactory.CreateLogger<Service>(), otherParameter);
     }
 
     public Service CreateType_LocalVariable(ILoggerFactory loggerFactory)
@@ -201,12 +201,12 @@ public class Factory
 
     public Service CreateType_LocalVariableField()
     {
-        return new Service(logger);                                                                             // Compliant
+        return new Service(logger);
     }
 
     public Service CreateType_Decorator(ILoggerFactory loggerFactory)
     {
-        return new Service(new Decorator<Service>(loggerFactory.CreateLogger<Service>()));                      // Noncompliant FP
+        return new Service(new Decorator<Service>(loggerFactory.CreateLogger<Service>()));
     }
 
     private class Decorator<T> : ILogger<T>
