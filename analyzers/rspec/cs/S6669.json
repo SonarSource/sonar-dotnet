@@ -1,12 +1,20 @@
 {
   "title": "Logger field or property name should comply with a naming convention",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "MEDIUM"
+    },
+    "attribute": "CONVENTIONAL"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
     "constantCost": "2min"
   },
-  "tags": ["logging"],
+  "tags": [
+    "logging"
+  ],
   "defaultSeverity": "Minor",
   "ruleSpecification": "RSPEC-6669",
   "sqKey": "S6669",

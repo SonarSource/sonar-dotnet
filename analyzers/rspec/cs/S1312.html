@@ -18,9 +18,11 @@ in place of <a href="https://en.wikipedia.org/wiki/Dependency_injection">Depende
   <li> <a href="https://www.nuget.org/packages/NLog">NLog</a> </li>
   <li> <a href="https://www.nuget.org/packages/log4net">log4net</a> </li>
 </ul>
+<h3>Noncompliant code example</h3>
 <pre data-diff-id="1" data-diff-type="noncompliant">
 public Logger logger;
 </pre>
+<h3>Compliant solution</h3>
 <pre data-diff-id="1" data-diff-type="compliant">
 private static readonly Logger logger;
 </pre>

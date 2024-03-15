@@ -1,6 +1,12 @@
 {
   "title": "Log message template placeholders should be in the right order",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "MEDIUM"
+    },
+    "attribute": "CONVENTIONAL"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

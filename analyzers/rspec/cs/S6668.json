@@ -1,6 +1,12 @@
 {
   "title": "Logging arguments should be passed to the correct parameter",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "MEDIUM"
+    },
+    "attribute": "LOGICAL"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
