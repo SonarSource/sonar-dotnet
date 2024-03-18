@@ -132,6 +132,40 @@ stages:
             Write-Output "smctl sync:"
             smctl windows certsync
 
+      - script: '"$(MSBUILD_PATH)" -version'
+        displayName: "Check MsBuild path"
+
+      - script: 'dotnet --info'
+        displayName: "dotnet info"
+
+      - script: 'dotnet --list-sdks'
+        displayName: "dotnet list-sdks"
+
+      - script: 'dotnet --list-runtimes'
+        displayName: "dotnet list-runtimes"
+
+      - script: 'vswhere.exe -products * -sort -format json'
+        displayName: "vswhere"
+
+
+      - script: dotnet new globaljson --sdk-version 7.0.0 --roll-forward latestMajor
+        displayName: "emit new global-json"
+
+      - script: '"$(MSBUILD_PATH)" -version'
+        displayName: "AFTER Check MsBuild path"
+
+      - script: 'dotnet --info'
+        displayName: "AFTER dotnet info"
+
+      - script: 'dotnet --list-sdks'
+        displayName: "AFTER dotnet list-sdks"
+
+      - script: 'dotnet --list-runtimes'
+        displayName: "AFTER dotnet list-runtimes"
+
+      - script: 'vswhere.exe -products * -sort -format json'
+        displayName: "AFTER vswhere"
+
       - task: VSBuild@1
         displayName: "Build and sign SonarAnalyzer solution"
         env:
