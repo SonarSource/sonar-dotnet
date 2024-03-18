@@ -61,3 +61,11 @@ namespace Ignore
     partial record EmptyPartialRecord(); // Compliant - partial classes are ignored, so partial record classes are ignored as well
 }
 
+// https://github.com/SonarSource/sonar-dotnet/issues/7709
+namespace Reporo_7709
+{
+    interface IMarker { }
+    record ImplementsMarker : IMarker { }
+    record ImplementsEmptyRecordAndMarker : Noncompliant.EmptyRecord, IMarker { }
+}
+
