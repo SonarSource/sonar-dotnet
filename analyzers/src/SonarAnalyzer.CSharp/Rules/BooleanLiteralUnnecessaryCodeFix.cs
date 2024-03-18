@@ -223,10 +223,28 @@ namespace SonarAnalyzer.Rules.CSharp
 
             #endregion
 
+            #region ==/!= one side boolean
+
+            if (binary.IsKind(SyntaxKind.EqualsExpression))
+            {
+                // edge case [condition == false] -> !condition
+                if (CSharpEquivalenceChecker.AreEquivalent(binary.Right, CSharpSyntaxHelper.FalseLiteralExpression))
+                {
+                    return SyntaxFactory.PrefixUnaryExpression(SyntaxKind.LogicalNotExpression, binary.Left);
+                }
+                // edge case [false == condition] -> !condition
+                if (CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.FalseLiteralExpression))
+                {
+                    return SyntaxFactory.PrefixUnaryExpression(SyntaxKind.LogicalNotExpression, binary.Right);
+                }
+            }
+
             return CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.TrueLiteralExpression)
                    || CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.FalseLiteralExpression)
                 ? binary.Right
                 : binary.Left;
+
+            #endregion
         }
 
         private static bool TwoSidesAreDifferentBooleans(BinaryExpressionSyntax binary) =>
