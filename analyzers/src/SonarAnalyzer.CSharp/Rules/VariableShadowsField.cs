@@ -90,7 +90,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void ReportOnVariableMatchingField(SonarSyntaxNodeReportingContext context, IEnumerable<ISymbol> members, SyntaxToken identifier)
         {
-            if (members.FirstOrDefault(x => x.Name == identifier.ValueText) is { } matchingMember)
+            if (members.FirstOrDefault(x => x.Name == identifier.ValueText
+                && (x.IsStatic || !identifier.Parent.EnclosingScope().GetModifiers().Any(x => x.Kind() == SyntaxKind.StaticKeyword))) is { } matchingMember)
             {
                 context.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation(), identifier.Text, GetSymbolName(matchingMember)));
             }
