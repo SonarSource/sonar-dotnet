@@ -115,7 +115,17 @@ public class CompliantNoControllerRouteEmptyActionRouteController : Controller /
     public ActionResult Index4() => View();
 }
 
+public class ControllerWithoutActions : Controller // Compliant
+{
+    public int NotAnAction()
+    {
+        return 1;
+    }
+}
+
 public class EmptyController : Controller { } // Compliant
+
+public class NotAController { } // For coverage
 
 namespace WithAliases
 {
