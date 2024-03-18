@@ -20,8 +20,11 @@
 
 namespace SonarAnalyzer.Helpers
 {
+#pragma warning disable S2339 // Public constant members should not be used
     public static class RefKindEx
     {
-        public static readonly RefKind In = (RefKind)3;
+        public const RefKind In = (RefKind)3;
+        public const RefKind RefReadOnlyParameter = (RefKind)4;
     }
+#pragma warning restore S2339 // Public constant members should not be used
 }

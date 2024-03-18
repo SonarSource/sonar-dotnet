@@ -18,17 +18,18 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Diagnostics.CodeAnalysis;
+namespace SonarAnalyzer.Helpers;
 
-namespace Microsoft.CodeAnalysis.VisualBasic.Extensions;
-
-[ExcludeFromCodeCoverage]
-internal static class SyntaxNodeExtensions
+internal class VisualBasicAttributeParameterLookup(SeparatedSyntaxList<ArgumentSyntax> argumentList, IMethodSymbol methodSymbol) : MethodParameterLookupBase<ArgumentSyntax>(argumentList, methodSymbol)
 {
-    // Copied and converted from
-    // https://github.com/dotnet/roslyn/blob/5a1cc5f83e4baba57f0355a685a5d1f487bfac66/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/VisualBasic/Extensions/SyntaxNodeExtensions.vb#L16
-    public static bool IsParentKind(this SyntaxNode node, SyntaxKind kind)
-    {
-        return node != null && node.Parent.IsKind(kind);
-    }
+    protected override SyntaxNode Expression(ArgumentSyntax argument) =>
+        argument.GetExpression();
+
+    protected override SyntaxToken? GetNameColonIdentifier(ArgumentSyntax argument) =>
+        null;
+
+    protected override SyntaxToken? GetNameEqualsIdentifier(ArgumentSyntax argument) =>
+        argument is SimpleArgumentSyntax { NameColonEquals.Name.Identifier: var identifier }
+            ? identifier
+            : null;
 }

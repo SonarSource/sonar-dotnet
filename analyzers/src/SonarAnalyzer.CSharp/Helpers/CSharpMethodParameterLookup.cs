@@ -28,15 +28,18 @@ internal class CSharpMethodParameterLookup : MethodParameterLookupBase<ArgumentS
     public CSharpMethodParameterLookup(InvocationExpressionSyntax invocation, IMethodSymbol methodSymbol)
         : this(invocation.ArgumentList, methodSymbol) { }
 
-    public CSharpMethodParameterLookup(ArgumentListSyntax argumentList, SemanticModel semanticModel)
+    public CSharpMethodParameterLookup(BaseArgumentListSyntax argumentList, SemanticModel semanticModel)
         : base(argumentList.Arguments, semanticModel.GetSymbolInfo(argumentList.Parent)) { }
 
-    public CSharpMethodParameterLookup(ArgumentListSyntax argumentList, IMethodSymbol methodSymbol)
+    public CSharpMethodParameterLookup(BaseArgumentListSyntax argumentList, IMethodSymbol methodSymbol)
         : base(argumentList.Arguments, methodSymbol) { }
 
     protected override SyntaxNode Expression(ArgumentSyntax argument) =>
         argument.Expression;
 
-    protected override SyntaxToken? GetNameColonArgumentIdentifier(ArgumentSyntax argument) =>
+    protected override SyntaxToken? GetNameColonIdentifier(ArgumentSyntax argument) =>
         argument.NameColon?.Name.Identifier;
+
+    protected override SyntaxToken? GetNameEqualsIdentifier(ArgumentSyntax argument) =>
+        null;
 }
