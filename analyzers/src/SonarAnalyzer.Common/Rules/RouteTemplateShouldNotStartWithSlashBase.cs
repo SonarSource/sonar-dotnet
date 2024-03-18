@@ -43,7 +43,7 @@ public abstract class RouteTemplateShouldNotStartWithSlashBase<TSyntaxKind> : So
             compilationStartContext.RegisterSymbolStartAction(symbolStartContext =>
             {
                 var symbol = (INamedTypeSymbol)symbolStartContext.Symbol;
-                if (symbol.IsControllerType())
+                if (symbol.IsControllerType() && symbol.ContainingSymbol is not INamedTypeSymbol)
                 {
                     var controllerActionInfo = new ConcurrentStack<ControllerActionInfo>();
                     symbolStartContext.RegisterSyntaxNodeAction(nodeContext =>
@@ -91,7 +91,7 @@ public abstract class RouteTemplateShouldNotStartWithSlashBase<TSyntaxKind> : So
     private static Dictionary<Location, string> RouteAttributeTemplateArguments(ImmutableArray<AttributeData> attributes)
     {
         var templates = new Dictionary<Location, string>();
-        var routeAttributes = attributes.Where(x => x.AttributeClass.IsAny(KnownType.RouteAttributes));
+        var routeAttributes = attributes.Where(x => x.AttributeClass.IsAny(KnownType.RouteAttributes) || x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_Routing_HttpMethodAttribute));
         foreach (var attribute in routeAttributes)
         {
             if (attribute.TryGetAttributeValue<string>("template", out var templateParameter))

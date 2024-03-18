@@ -29,8 +29,36 @@ public class RouteTemplateShouldNotStartWithSlashTest
     private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.RouteTemplateShouldNotStartWithSlash>();
     private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.RouteTemplateShouldNotStartWithSlash>();
 
-#if NETFRAMEWORK
+#if NET
+    private static IEnumerable<MetadataReference> AspNetCoreReferences =>
+        [
+            AspNetCoreMetadataReference.MicrosoftAspNetCore,                    // For WebApplication
+            AspNetCoreMetadataReference.MicrosoftExtensionsHostingAbstractions, // For IHost
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions,    // For HttpContext, RouteValueDictionary
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpFeatures,
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcAbstractions,
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcCore,
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcViewFeatures,
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreRouting,             // For IEndpointRouteBuilder
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreRazorPages,          // For RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage
+        ];
 
+    [TestMethod]
+    public void RouteTemplateShouldNotStartWithSlash_CS() =>
+        builderCS
+            .AddPaths("RouteTemplateShouldNotStartWithSlash.AspNetCore.cs")
+            .AddReferences(AspNetCoreReferences)
+            .Verify();
+
+    [TestMethod]
+    public void RouteTemplateShouldNotStartWithSlash_VB() =>
+        builderVB
+            .AddPaths("RouteTemplateShouldNotStartWithSlash.AspNetCore.vb")
+            .AddReferences(AspNetCoreReferences)
+            .Verify();
+#endif
+
+#if NETFRAMEWORK
     // ASP.NET 4x MVC 3 and 4 don't support attribute routing, nor MapControllerRoute and similar
     public static IEnumerable<object[]> AspNet4xMvcVersionsUnderTest => [["5.2.7"] /* Most used */, [Constants.NuGetLatestVersion]];
 
@@ -42,17 +70,17 @@ public class RouteTemplateShouldNotStartWithSlashTest
     [DynamicData(nameof(AspNet4xMvcVersionsUnderTest))]
     public void RouteTemplateShouldNotStartWithSlash_CS(string aspNetMvcVersion) =>
         builderCS
-        .AddPaths("RouteTemplateShouldNotStartWithSlash.AspNet4x.cs")
-        .AddReferences(AspNet4xReferences(aspNetMvcVersion))
-        .Verify();
+            .AddPaths("RouteTemplateShouldNotStartWithSlash.AspNet4x.cs")
+            .AddReferences(AspNet4xReferences(aspNetMvcVersion))
+            .Verify();
 
     [TestMethod]
     [DynamicData(nameof(AspNet4xMvcVersionsUnderTest))]
     public void RouteTemplateShouldNotStartWithSlash_VB(string aspNetMvcVersion) =>
         builderVB
-        .AddPaths("RouteTemplateShouldNotStartWithSlash.vb")
-        .AddReferences(AspNet4xReferences(aspNetMvcVersion))
-        .Verify();
+            .AddPaths("RouteTemplateShouldNotStartWithSlash.AspNet4x.vb")
+            .AddReferences(AspNet4xReferences(aspNetMvcVersion))
+            .Verify();
 
     [TestMethod]
     [DynamicData(nameof(AspNet4xMvcVersionsUnderTest))]
@@ -182,7 +210,6 @@ public class RouteTemplateShouldNotStartWithSlashTest
             """)
     .AddReferences(AspNet4xReferences(aspNetMvcVersion))
     .Verify();
-
 #endif
 
 }
