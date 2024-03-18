@@ -121,8 +121,9 @@ public class CombinatorialDataAttributeTest_AttributeTest
             [3, "B", false],
             ]);
     }
-    public void Combinatorial([DataValues(1, 2, 3)] int x, [DataValues("A", "B")] string y, [DataValues(true, false)] bool z)
-    {
 
+    public static void Combinatorial([DataValues(1, 2, 3)] int x, [DataValues("A", "B")] string y, [DataValues(true, false)] bool z)
+    {
+        // Used for reflection only.
     }
 }
