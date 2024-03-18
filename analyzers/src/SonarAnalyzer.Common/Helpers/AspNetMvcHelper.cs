@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Helpers
         /// Returns a value indicating whether the provided type symbol is a ASP.NET MVC
         /// controller.
         /// </summary>
-        private static bool IsControllerType(this INamedTypeSymbol containingType) =>
+        public static bool IsControllerType(this INamedTypeSymbol containingType) =>
             containingType != null
             && (containingType.DerivesFromAny(ControllerTypes)
                 || containingType.GetAttributes(ControllerAttributeTypes).Any())
