@@ -9,7 +9,7 @@ public class TestController : Controller
 {
     private readonly string Key = "id";
 
-    public IActionResult Post()
+    public IActionResult Post(string key)
     {
         _ = Request.Form["id"];                           // Noncompliant {{Use model binding instead of accessing the raw request data}}
         //  ^^^^^^^^^^^^
@@ -36,6 +36,8 @@ public class TestController : Controller
         _ = Request.Form.File\u0073;                      // Noncompliant {{Use IFormFile or IFormFileCollection binding instead}}
         //  ^^^^^^^^^^^^^^^^^^^^^^^
         _ = Request.Form.Files["file"];                   // Noncompliant {{Use IFormFile or IFormFileCollection binding instead}}
+        //  ^^^^^^^^^^^^^^^^^^
+        _ = Request.Form.Files[key];                      // Noncompliant {{Use IFormFile or IFormFileCollection binding instead}}
         //  ^^^^^^^^^^^^^^^^^^
         _ = Request.Form.Files[0];                        // Noncompliant {{Use IFormFile or IFormFileCollection binding instead}}
         //  ^^^^^^^^^^^^^^^^^^

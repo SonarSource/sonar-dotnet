@@ -43,7 +43,7 @@ public class UseAspNetModelBindingTest
         new VerifierBuilder<UseAspNetModelBinding>().AddSnippet(string.Empty).Verify();
 
     [TestMethod]
-    public void UseAspNetModelBinding_AspNetCore_CS() =>
+    public void UseAspNetModelBinding_AspNetCore_CSharp12() =>
         builderAspNetCore.AddPaths("UseAspNetModelBinding_AspNetCore.cs").Verify();
 
     [DataTestMethod]
@@ -51,7 +51,7 @@ public class UseAspNetModelBindingTest
     [DataRow("Query")]
     [DataRow("RouteValues")]
     [DataRow("Headers")]
-    public void NonCompliantAccess(string property) =>
+    public void UseAspNetModelBinding_NonCompliantAccess(string property) =>
         builderAspNetCore.AddSnippet($$""""
             using Microsoft.AspNetCore.Http;
             using Microsoft.AspNetCore.Mvc;
@@ -98,7 +98,7 @@ public class UseAspNetModelBindingTest
 
     [TestMethod]
     [CombinatorialData]
-    public void CompliantAccess(
+    public void UseAspNetModelBinding_CompliantAccess(
         [DataValues(
             "_ = {0}.Keys",
             "_ = {0}.Count",
@@ -130,7 +130,7 @@ public class UseAspNetModelBindingTest
     [DataRow("Headers")]
     [DataRow("Query")]
     [DataRow("RouteValues")]
-    public void DottedExpressions(string property) =>
+    public void UseAspNetModelBinding_DottedExpressions(string property) =>
         builderAspNetCore.AddSnippet($$"""
             using Microsoft.AspNetCore.Http;
             using Microsoft.AspNetCore.Mvc;
@@ -180,7 +180,7 @@ public class UseAspNetModelBindingTest
     [DataRow("public class MyController: ControllerBase")]
     [DataRow("[Controller] public class My: Controller")]
     // [DataRow("public class MyController")] FN: Poco controller are not detected
-    public void PocoController(string classDeclaration) =>
+    public void UseAspNetModelBinding_PocoController(string classDeclaration) =>
         builderAspNetCore.AddSnippet($$""""
             using Microsoft.AspNetCore.Http;
             using Microsoft.AspNetCore.Mvc;
@@ -202,7 +202,7 @@ public class UseAspNetModelBindingTest
     [DataRow("public class My")]
     [DataRow("[NonController] public class My: Controller")]
     [DataRow("[NonController] public class MyController: Controller")]
-    public void NoController(string classDeclaration) =>
+    public void UseAspNetModelBinding_NoController(string classDeclaration) =>
         builderAspNetCore.AddSnippet($$""""
             using Microsoft.AspNetCore.Http;
             using Microsoft.AspNetCore.Mvc;
@@ -225,7 +225,7 @@ public class UseAspNetModelBindingTest
     [DataRow("Headers")]
     [DataRow("Query")]
     [DataRow("RouteValues")]
-    public void NoControllerHelpers(string property) =>
+    public void UseAspNetModelBinding_NoControllerHelpers(string property) =>
         builderAspNetCore.AddSnippet($$""""
             using Microsoft.AspNetCore.Http;
             using Microsoft.AspNetCore.Mvc;
@@ -256,7 +256,7 @@ public class UseAspNetModelBindingTest
 
     [TestMethod]
     [CombinatorialData]
-    public void InheritanceAccess(
+    public void UseAspNetModelBinding_InheritanceAccess(
         [DataValues(
             ": Controller",
             ": ControllerBase",
