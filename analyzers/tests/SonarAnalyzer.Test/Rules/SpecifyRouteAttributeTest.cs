@@ -25,9 +25,19 @@ namespace SonarAnalyzer.Test.Rules;
 [TestClass]
 public class SpecifyRouteAttributeTest
 {
-    private readonly VerifierBuilder builder = new VerifierBuilder<SpecifyRouteAttribute>();
+#if NET
+    private readonly VerifierBuilder builder = new VerifierBuilder<SpecifyRouteAttribute>()
+        .WithOptions(ParseOptionsHelper.FromCSharp12)
+        .AddReferences([
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcCore,
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions,
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcViewFeatures,
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcAbstractions,
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpFeatures,
+        ]);
 
     [TestMethod]
     public void SpecifyRouteAttribute_CS() =>
         builder.AddPaths("SpecifyRouteAttribute.cs").Verify();
+#endif
 }
