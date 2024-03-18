@@ -64,10 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             }
 
                             var usageCollector = new CSharpSymbolUsageCollector(c.Compilation, removableInternalTypes);
-                            foreach (var syntaxTree in c.Compilation.SyntaxTrees.Where(tree => !tree.IsConsideredGenerated(
-                                CSharpGeneratedCodeRecognizer.Instance,
-                                c.Compilation,
-                                c.IsRazorAnalysisEnabled())))
+                            foreach (var syntaxTree in c.Compilation.SyntaxTrees.Where(tree => !tree.IsConsideredGenerated(CSharpGeneratedCodeRecognizer.Instance, c.IsRazorAnalysisEnabled())))
                             {
                                 usageCollector.SafeVisit(syntaxTree.GetRoot());
                             }
@@ -133,11 +130,9 @@ namespace SonarAnalyzer.Rules.CSharp
             return true;
 
             static IEnumerable<BaseTypeDeclarationSyntax> PrivateNestedMembersFromNonGeneratedCode(INamedTypeSymbol namedType, Compilation compilation, SonarSymbolReportingContext context) =>
-                namedType.DeclaringSyntaxReferences.Where(r => !r.SyntaxTree.IsConsideredGenerated(
-                    CSharpGeneratedCodeRecognizer.Instance,
-                    compilation,
-                    context.IsRazorAnalysisEnabled()))
-                        .SelectMany(x => x.GetSyntax().ChildNodes().OfType<BaseTypeDeclarationSyntax>());
+                namedType.DeclaringSyntaxReferences
+                    .Where(r => !r.SyntaxTree.IsConsideredGenerated(CSharpGeneratedCodeRecognizer.Instance, context.IsRazorAnalysisEnabled()))
+                    .SelectMany(x => x.GetSyntax().ChildNodes().OfType<BaseTypeDeclarationSyntax>());
         }
 
         private static IEnumerable<Diagnostic> DiagnosticsForUnusedPrivateMembers(CSharpSymbolUsageCollector usageCollector,
@@ -273,7 +268,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return syntaxReferencesToVisit.All(x => visitor.SafeVisit(x.GetSyntax()));
 
             bool IsGenerated(SyntaxReference syntaxReference) =>
-                syntaxReference.SyntaxTree.IsConsideredGenerated(CSharpGeneratedCodeRecognizer.Instance, compilation, context.IsRazorAnalysisEnabled());
+                syntaxReference.SyntaxTree.IsConsideredGenerated(CSharpGeneratedCodeRecognizer.Instance, context.IsRazorAnalysisEnabled());
         }
 
         private static CSharpRemovableSymbolWalker RetrieveRemovableSymbols(INamedTypeSymbol namedType, Compilation compilation, SonarSymbolReportingContext context)

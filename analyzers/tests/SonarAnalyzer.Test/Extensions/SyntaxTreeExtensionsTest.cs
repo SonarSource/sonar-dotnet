@@ -90,6 +90,6 @@ public class SyntaxTreeExtensionsTest
            .AddProject(AnalyzerLanguage.CSharp)
            .AddSnippet(content)
            .GetCompilation();
-        return compilation.SyntaxTrees.First().IsGenerated(generatedCodeRecognizer, compilation);
+        return compilation.SyntaxTrees.First().IsGenerated(generatedCodeRecognizer);
     }
 }

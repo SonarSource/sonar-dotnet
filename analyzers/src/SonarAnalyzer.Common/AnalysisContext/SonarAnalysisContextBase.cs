@@ -59,7 +59,7 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
         SonarLintXml() is var sonarLintXml
         && (generatedCodeRecognizer is null
             || sonarLintXml.AnalyzeGeneratedCode(Compilation.Language)
-            || !tree.IsConsideredGenerated(generatedCodeRecognizer, Compilation, IsRazorAnalysisEnabled()))
+            || !tree.IsConsideredGenerated(generatedCodeRecognizer, IsRazorAnalysisEnabled()))
         && (tree is null || (!IsUnchanged(tree) && !IsExcluded(sonarLintXml, tree.FilePath)));
 
     /// <summary>

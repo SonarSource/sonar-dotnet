@@ -28,7 +28,7 @@ internal static class SyntaxTreeExtensions
     private static readonly ConditionalWeakTable<SyntaxTree, object> GeneratedCodeCache = new();
 
     [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7439", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
-    public static bool IsGenerated(this SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer, Compilation compilation) =>
+    public static bool IsGenerated(this SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer) =>
         tree switch
         {
             null => false,
@@ -40,10 +40,10 @@ internal static class SyntaxTreeExtensions
     private static bool IsGeneratedGetOrAdd(SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer) =>
         (bool)GeneratedCodeCache.GetValue(tree, tree => generatedCodeRecognizer.IsGenerated(tree));
 
-    public static bool IsConsideredGenerated(this SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer, Compilation compilation, bool isRazorAnalysisEnabled) =>
+    public static bool IsConsideredGenerated(this SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer, bool isRazorAnalysisEnabled) =>
         isRazorAnalysisEnabled
-            ? IsGenerated(tree, generatedCodeRecognizer, compilation) && !GeneratedCodeRecognizer.IsRazorGeneratedFile(tree)
-            : IsGenerated(tree, generatedCodeRecognizer, compilation);
+            ? IsGenerated(tree, generatedCodeRecognizer) && !GeneratedCodeRecognizer.IsRazorGeneratedFile(tree)
+            : IsGenerated(tree, generatedCodeRecognizer);
 
     public static string GetOriginalFilePath(this SyntaxTree tree) =>
         // Currently we support only C# based generated files.

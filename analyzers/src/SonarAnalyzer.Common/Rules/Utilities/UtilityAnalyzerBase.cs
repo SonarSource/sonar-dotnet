@@ -141,6 +141,6 @@ namespace SonarAnalyzer.Rules
         private bool ShouldGenerateMetricsByType(UtilityAnalyzerParameters parameters, SyntaxTree tree, Compilation compilation) =>
             parameters.AnalyzeGeneratedCode
                 ? !GeneratedCodeRecognizer.IsCshtml(tree) // We cannot upload metrics for .cshtml files. The file is owned by the html plugin.
-                : !tree.IsGenerated(Language.GeneratedCodeRecognizer, compilation) || GeneratedCodeRecognizer.IsRazor(tree);
+                : !tree.IsGenerated(Language.GeneratedCodeRecognizer) || GeneratedCodeRecognizer.IsRazor(tree);
     }
 }
