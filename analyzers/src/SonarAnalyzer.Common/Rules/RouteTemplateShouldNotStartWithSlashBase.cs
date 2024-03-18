@@ -85,7 +85,7 @@ public abstract class RouteTemplateShouldNotStartWithSlashBase<TSyntaxKind> : So
         SyntaxNode[] ControllerDeclarationSyntax(INamedTypeSymbol symbol) =>
             symbol.DeclaringSyntaxReferences
             .Select(x => x.GetSyntax())
-            .Where(x => !x.SyntaxTree.IsGenerated(Language.GeneratedCodeRecognizer, null))
+            .Where(x => !x.SyntaxTree.IsGenerated(Language.GeneratedCodeRecognizer))
             .ToArray();
 
         IEnumerable<Location> FindActionSecondaryLocations(ConcurrentStack<ControllerActionInfo> actions) =>
