@@ -22,11 +22,7 @@ namespace SonarAnalyzer.Helpers.Trackers;
 
 internal sealed class CSharpArgumentTracker : ArgumentTracker<SyntaxKind>
 {
-    protected override SyntaxKind[] TrackedSyntaxKinds =>
-        [
-            SyntaxKind.AttributeArgument,
-            SyntaxKind.Argument,
-        ];
+    protected override SyntaxKind[] TrackedSyntaxKinds => [SyntaxKind.AttributeArgument, SyntaxKind.Argument,];
 
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 

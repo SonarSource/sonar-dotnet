@@ -33,6 +33,8 @@ public class TestController : Controller
         //  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         _ = Request.Form.Files;                           // Noncompliant {{Use IFormFile or IFormFileCollection binding instead}}
         //  ^^^^^^^^^^^^^^^^^^
+        _ = Request.Form.File\u0073;                      // Noncompliant {{Use IFormFile or IFormFileCollection binding instead}}
+        //  ^^^^^^^^^^^^^^^^^^^^^^^
         _ = Request.Form.Files["file"];                   // Noncompliant {{Use IFormFile or IFormFileCollection binding instead}}
         //  ^^^^^^^^^^^^^^^^^^
         _ = Request.Form.Files[0];                        // Noncompliant {{Use IFormFile or IFormFileCollection binding instead}}

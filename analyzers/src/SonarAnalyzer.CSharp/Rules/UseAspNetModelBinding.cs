@@ -53,7 +53,7 @@ public sealed class UseAspNetModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
                     {
                         symbolStart.RegisterCodeBlockStartAction<SyntaxKind>(codeBlockStart =>
                             {
-                                if (codeBlockStart.OwningSymbol is IMethodSymbol method && IsOverridingFilterMethods(method))
+                                if (IsOverridingFilterMethods(codeBlockStart.OwningSymbol))
                                 {
                                     // We do not want to raise in ActionFilter overrides and so we do not register.
                                     // The SymbolEndAction needs to be made aware, that there are
@@ -82,9 +82,9 @@ public sealed class UseAspNetModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
         ArgumentDescriptor[] argumentDescriptors, MemberDescriptor[] propertyAccessDescriptors,
         ConcurrentStack<ReportCandidate> controllerCandidates)
     {
-        // Within a single code block, access via constant and variable keys could be mixed
-        // We only want to raise, if all access were done via constants
-        var allConstantAccess = true;
+        // Within a single code block, access via constant and variable keys could be mixed.
+        // We only want to raise, if all access were done via constants.
+        var allConstantAccesses = true;
         var codeBlockCandidates = new ConcurrentStack<ReportCandidate>();
         if (argumentDescriptors.Any())
         {
@@ -92,10 +92,10 @@ public sealed class UseAspNetModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
             {
                 var argument = (ArgumentSyntax)nodeContext.Node;
                 var context = new ArgumentContext(argument, nodeContext.SemanticModel);
-                if (allConstantAccess && Array.Exists(argumentDescriptors, x => Language.Tracker.Argument.MatchArgument(x)(context)))
+                if (allConstantAccesses && Array.Exists(argumentDescriptors, x => Language.Tracker.Argument.MatchArgument(x)(context)))
                 {
-                    allConstantAccess &= nodeContext.SemanticModel.GetConstantValue(argument.Expression) is { HasValue: true, Value: string };
-                    codeBlockCandidates.Push(new(UseAspNetModelBindingMessage, GetPrimaryLocation(argument), OriginatesFromParameter(nodeContext.SemanticModel, argument)));
+                    allConstantAccesses &= nodeContext.SemanticModel.GetConstantValue(argument.Expression) is { HasValue: true, Value: string };
+                    codeBlockCandidates.Push(new(UseAspNetModelBindingMessage, GetPrimaryLocation(argument), IsOriginatingFromParameter(nodeContext.SemanticModel, argument)));
                 }
             }, SyntaxKind.Argument);
         }
@@ -103,17 +103,19 @@ public sealed class UseAspNetModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
         {
             codeBlockStart.RegisterNodeAction(nodeContext =>
             {
+                // The property access of Request.Form.Files can be replaced by an IFormFile binding.
+                // Any access to a "Files" property is therefore noncompliant. This is different from the Argument handling above.
                 var memberAccess = (MemberAccessExpressionSyntax)nodeContext.Node;
                 var context = new PropertyAccessContext(memberAccess, nodeContext.SemanticModel, memberAccess.Name.Identifier.ValueText);
                 if (Language.Tracker.PropertyAccess.MatchProperty(propertyAccessDescriptors)(context))
                 {
-                    codeBlockCandidates.Push(new(UseIFormFileBindingMessage, memberAccess.GetLocation(), OriginatesFromParameter(nodeContext.SemanticModel, memberAccess)));
+                    codeBlockCandidates.Push(new(UseIFormFileBindingMessage, memberAccess.GetLocation(), IsOriginatingFromParameter(nodeContext.SemanticModel, memberAccess)));
                 }
             }, SyntaxKind.SimpleMemberAccessExpression);
         }
         codeBlockStart.RegisterCodeBlockEndAction(codeBlockEnd =>
         {
-            if (allConstantAccess)
+            if (allConstantAccesses)
             {
                 controllerCandidates.PushRange([.. codeBlockCandidates]);
             }
@@ -199,16 +201,16 @@ public sealed class UseAspNetModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
             && GetLeftOfDot(expression) is { } left
             && model.GetTypeInfo(left) is { Type: { } typeSymbol } && typeSymbol.Is(KnownType.Microsoft_AspNetCore_Http_IHeaderDictionary);
 
-    private static bool IsOverridingFilterMethods(IMethodSymbol method) =>
-        (method.GetOverriddenMember() ?? method).ExplicitOrImplicitInterfaceImplementations().Any(x => x is IMethodSymbol { ContainingType: { } container }
+    private static bool IsOverridingFilterMethods(ISymbol owningSymbol) =>
+        (owningSymbol.GetOverriddenMember() ?? owningSymbol).ExplicitOrImplicitInterfaceImplementations().Any(x => x is IMethodSymbol { ContainingType: { } container }
             && container.IsAny(
                 KnownType.Microsoft_AspNetCore_Mvc_Filters_IActionFilter,
                 KnownType.Microsoft_AspNetCore_Mvc_Filters_IAsyncActionFilter));
 
-    private static bool OriginatesFromParameter(SemanticModel semanticModel, ArgumentSyntax argument) =>
-        GetExpressionOfArgumentParent(argument) is { } parentExpression && OriginatesFromParameter(semanticModel, parentExpression);
+    private static bool IsOriginatingFromParameter(SemanticModel semanticModel, ArgumentSyntax argument) =>
+        GetExpressionOfArgumentParent(argument) is { } parentExpression && IsOriginatingFromParameter(semanticModel, parentExpression);
 
-    private static bool OriginatesFromParameter(SemanticModel semanticModel, ExpressionSyntax expression) =>
+    private static bool IsOriginatingFromParameter(SemanticModel semanticModel, ExpressionSyntax expression) =>
         MostLeftOfDottedChain(expression) is { } mostLeft && semanticModel.GetSymbolInfo(mostLeft).Symbol is IParameterSymbol;
 
     private static ExpressionSyntax GetLeftOfDot(ExpressionSyntax expression) =>
@@ -255,5 +257,5 @@ public sealed class UseAspNetModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
             && typeArguments[0].Is(KnownType.System_String)
             && typeArguments[1].Is(KnownType.Microsoft_Extensions_Primitives_StringValues);
 
-    private readonly record struct ReportCandidate(string Message, Location Location, bool OriginatesFromParameter = false);
+    private readonly record struct ReportCandidate(string Message, Location Location, bool OriginatesFromParameter);
 }

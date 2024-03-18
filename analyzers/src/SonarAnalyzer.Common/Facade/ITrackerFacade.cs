@@ -25,6 +25,7 @@ namespace SonarAnalyzer.Helpers.Facade
     public interface ITrackerFacade<TSyntaxKind>
         where TSyntaxKind : struct
     {
+        ArgumentTracker<TSyntaxKind> Argument { get; }
         BaseTypeTracker<TSyntaxKind> BaseType { get; }
         ElementAccessTracker<TSyntaxKind> ElementAccess { get; }
         FieldAccessTracker<TSyntaxKind> FieldAccess { get; }
@@ -32,6 +33,5 @@ namespace SonarAnalyzer.Helpers.Facade
         MethodDeclarationTracker<TSyntaxKind> MethodDeclaration { get; }
         ObjectCreationTracker<TSyntaxKind> ObjectCreation { get; }
         PropertyAccessTracker<TSyntaxKind> PropertyAccess { get; }
-        ArgumentTracker<TSyntaxKind> Argument { get; }
     }
 }
