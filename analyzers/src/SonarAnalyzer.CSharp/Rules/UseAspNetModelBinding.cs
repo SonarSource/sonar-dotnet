@@ -23,17 +23,17 @@ using System.Collections.Concurrent;
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class UseModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
+public sealed class UseAspNetModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
 {
     private const string DiagnosticId = "S6932";
-    private const string UseModelBindingMessage = "Use model binding instead of accessing the raw request data";
+    private const string UseAspNetModelBindingMessage = "Use model binding instead of accessing the raw request data";
     private const string UseIFormFileBindingMessage = "Use IFormFile or IFormFileCollection binding instead";
 
     protected override string MessageFormat => "{0}";
 
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-    public UseModelBinding() : base(DiagnosticId) { }
+    public UseAspNetModelBinding() : base(DiagnosticId) { }
 
     protected override void Initialize(SonarAnalysisContext context)
     {
@@ -88,7 +88,7 @@ public sealed class UseModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
                 if (allConstantAccess && Array.Exists(argumentDescriptors, x => Language.Tracker.Argument.MatchArgument(x)(context)))
                 {
                     allConstantAccess &= nodeContext.SemanticModel.GetConstantValue(argument.Expression) is { HasValue: true, Value: string };
-                    codeBlockCandidates.Push(new(UseModelBindingMessage, GetPrimaryLocation(argument), OriginatesFromParameter(nodeContext.SemanticModel, argument)));
+                    codeBlockCandidates.Push(new(UseAspNetModelBindingMessage, GetPrimaryLocation(argument), OriginatesFromParameter(nodeContext.SemanticModel, argument)));
                 }
             }, SyntaxKind.Argument);
         }

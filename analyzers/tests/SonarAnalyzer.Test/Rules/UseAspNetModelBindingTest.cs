@@ -24,10 +24,10 @@ using SonarAnalyzer.Rules.CSharp;
 namespace SonarAnalyzer.Test.Rules;
 
 [TestClass]
-public class UseModelBindingTest
+public class UseAspNetModelBindingTest
 {
 #if NET
-    private readonly VerifierBuilder builderAspNetCore = new VerifierBuilder<UseModelBinding>()
+    private readonly VerifierBuilder builderAspNetCore = new VerifierBuilder<UseAspNetModelBinding>()
         .WithOptions(ParseOptionsHelper.FromCSharp12)
         .AddReferences([
             AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcCore,
@@ -39,12 +39,12 @@ public class UseModelBindingTest
         ]);
 
     [TestMethod]
-    public void UseModelBinding_NoRegistrationIfNotAspNet() =>
-        new VerifierBuilder<UseModelBinding>().AddSnippet(string.Empty).Verify();
+    public void UseAspNetModelBinding_NoRegistrationIfNotAspNet() =>
+        new VerifierBuilder<UseAspNetModelBinding>().AddSnippet(string.Empty).Verify();
 
     [TestMethod]
-    public void UseModelBinding_AspNetCore_CS() =>
-        builderAspNetCore.AddPaths("UseModelBinding_AspNetCore.cs").Verify();
+    public void UseAspNetModelBinding_AspNetCore_CS() =>
+        builderAspNetCore.AddPaths("UseAspNetModelBinding_AspNetCore.cs").Verify();
 
     [DataTestMethod]
     [DataRow("Form")]
