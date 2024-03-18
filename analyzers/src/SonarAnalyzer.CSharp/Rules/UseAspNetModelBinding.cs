@@ -42,20 +42,33 @@ public sealed class UseAspNetModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
             var (argumentDescriptors, propertyAccessDescriptors) = GetDescriptors(compilationStartContext.Compilation);
             if (argumentDescriptors.Any() || propertyAccessDescriptors.Any())
             {
-                compilationStartContext.RegisterSymbolStartAction(symbolStartContext =>
+                compilationStartContext.RegisterSymbolStartAction(symbolStart =>
                 {
-                    // If the user overrides any action filters, model binding may not be working as expected. Then we do not want to raise on expressions that originate from parameters.
+                    // If the user overrides any action filters, model binding may not be working as expected.
+                    // Then we do not want to raise on expressions that originate from parameters.
                     // See the OverridesController.Undecidable test cases for details.
-                    var hasOverrides = false;
-                    var controllerCandidates = new ConcurrentStack<ReportCandidate>(); // In SymbolEnd, we filter the candidates based on the overriding we learn on the go.
-                    if (symbolStartContext.Symbol is INamedTypeSymbol namedType && namedType.IsControllerType())
+                    var hasActionFiltersOverrides = false;
+                    var candidates = new ConcurrentStack<ReportCandidate>(); // In SymbolEnd, we filter the candidates based on the overriding we learn on the go.
+                    if (symbolStart.Symbol is INamedTypeSymbol namedType && namedType.IsControllerType())
                     {
-                        symbolStartContext.RegisterCodeBlockStartAction<SyntaxKind>(codeBlockStart =>
-                            hasOverrides |= RegisterCodeBlockActions(codeBlockStart, argumentDescriptors, propertyAccessDescriptors, controllerCandidates));
+                        symbolStart.RegisterCodeBlockStartAction<SyntaxKind>(codeBlockStart =>
+                            {
+                                if (codeBlockStart.OwningSymbol is IMethodSymbol method && IsOverridingFilterMethods(method))
+                                {
+                                    // We do not want to raise in ActionFilter overrides and so we do not register.
+                                    // The SymbolEndAction needs to be made aware, that there are
+                                    // ActionFilter overrides, so it can filter out some candidates.
+                                    hasActionFiltersOverrides = true;
+                                }
+                                else
+                                {
+                                    RegisterCodeBlockActions(codeBlockStart, argumentDescriptors, propertyAccessDescriptors, candidates);
+                                }
+                            });
                     }
-                    symbolStartContext.RegisterSymbolEndAction(symbolEnd =>
+                    symbolStart.RegisterSymbolEndAction(symbolEnd =>
                     {
-                        foreach (var candidate in controllerCandidates.Where(x => !(hasOverrides && x.OriginatesFromParameter)))
+                        foreach (var candidate in candidates.Where(x => !(hasActionFiltersOverrides && x.OriginatesFromParameter)))
                         {
                             symbolEnd.ReportIssue(Diagnostic.Create(Rule, candidate.Location, candidate.Message));
                         }
@@ -65,16 +78,10 @@ public sealed class UseAspNetModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
         });
     }
 
-    private bool RegisterCodeBlockActions(SonarCodeBlockStartAnalysisContext<SyntaxKind> codeBlockStart,
+    private void RegisterCodeBlockActions(SonarCodeBlockStartAnalysisContext<SyntaxKind> codeBlockStart,
         ArgumentDescriptor[] argumentDescriptors, MemberDescriptor[] propertyAccessDescriptors,
         ConcurrentStack<ReportCandidate> controllerCandidates)
     {
-        if (codeBlockStart.OwningSymbol is IMethodSymbol method && IsOverridingFilterMethods(method))
-        {
-            // We do not want to raise in ActionFilter overrides. The SymbolEndAction needs to be made aware, that there are
-            // ActionFilter overrides, so it can filter out some candidates.
-            return true;
-        }
         // Within a single code block, access via constant and variable keys could be mixed
         // We only want to raise, if all access were done via constants
         var allConstantAccess = true;
@@ -111,7 +118,6 @@ public sealed class UseAspNetModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
                 controllerCandidates.PushRange([.. codeBlockCandidates]);
             }
         });
-        return false;
     }
 
     private static (ArgumentDescriptor[] ArgumentDescriptors, MemberDescriptor[] PropertyAccessDescriptors) GetDescriptors(Compilation compilation)
