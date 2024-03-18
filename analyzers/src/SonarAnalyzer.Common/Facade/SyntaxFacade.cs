@@ -51,6 +51,7 @@ public abstract class SyntaxFacade<TSyntaxKind>
     public abstract bool IsMemberAccessOnKnownType(SyntaxNode memberAccess, string name, KnownType knownType, SemanticModel semanticModel);
     public abstract bool IsNullLiteral(SyntaxNode node);
     public abstract bool IsStatic(SyntaxNode node);
+    public abstract bool IsWrittenTo(SyntaxNode expression, SemanticModel semanticModel, CancellationToken cancellationToken);
     public abstract TSyntaxKind Kind(SyntaxNode node);
     public abstract string LiteralText(SyntaxNode literal);
     public abstract ImmutableArray<SyntaxToken> LocalDeclarationIdentifiers(SyntaxNode node);
