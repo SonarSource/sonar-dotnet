@@ -11,8 +11,8 @@ trigger:
 - master
 
 pool:
-  name: .net-bubble-aws-re-team-dev
-  demands: ImageName -equals pr-490-dotnet-bubble-ci-v*
+  name: .net-bubble-aws-re-team-prod
+  # demands: ImageName -equals pr-490-dotnet-bubble-ci-v*
 
 variables:
   - group: sonar-dotnet-variables
