@@ -59,5 +59,17 @@ namespace SonarAnalyzer.Helpers
                 }
             }
         }
+
+        public Condition ExceptWhen(Condition condition) =>
+            value => !condition(value);
+
+        public Condition And(Condition condition1, Condition condition2) =>
+            value => condition1(value) && condition2(value);
+
+        public Condition Or(Condition condition1, Condition condition2) =>
+            value => condition1(value) || condition2(value);
+
+        public Condition Or(Condition condition1, Condition condition2, Condition condition3) =>
+            value => condition1(value) || condition2(value) || condition3(value);
     }
 }
