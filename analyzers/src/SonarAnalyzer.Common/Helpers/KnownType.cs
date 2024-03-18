@@ -72,6 +72,13 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Microsoft_AspNetCore_Mvc_ControllerAttribute = new("Microsoft.AspNetCore.Mvc.ControllerAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_DisableRequestSizeLimitAttribute = new("Microsoft.AspNetCore.Mvc.DisableRequestSizeLimitAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_FromServicesAttribute = new("Microsoft.AspNetCore.Mvc.FromServicesAttribute");
+        public static readonly KnownType Microsoft_AspNetCore_Mvc_HttpDeleteAttribute = new("Microsoft.AspNetCore.Mvc.HttpDeleteAttribute");
+        public static readonly KnownType Microsoft_AspNetCore_Mvc_HttpGetAttribute = new("Microsoft.AspNetCore.Mvc.HttpGetAttribute");
+        public static readonly KnownType Microsoft_AspNetCore_Mvc_HttpHeadAttribute = new("Microsoft.AspNetCore.Mvc.HttpHeadAttribute");
+        public static readonly KnownType Microsoft_AspNetCore_Mvc_HttpOptionsAttribute = new("Microsoft.AspNetCore.Mvc.HttpOptionsAttribute");
+        public static readonly KnownType Microsoft_AspNetCore_Mvc_HttpPatchAttribute = new("Microsoft.AspNetCore.Mvc.HttpPatchAttribute");
+        public static readonly KnownType Microsoft_AspNetCore_Mvc_HttpPostAttribute = new("Microsoft.AspNetCore.Mvc.HttpPostAttribute");
+        public static readonly KnownType Microsoft_AspNetCore_Mvc_HttpPutAttribute = new("Microsoft.AspNetCore.Mvc.HttpPutAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_IActionResult = new("Microsoft.AspNetCore.Mvc.IActionResult");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_IgnoreAntiforgeryTokenAttribute = new("Microsoft.AspNetCore.Mvc.IgnoreAntiforgeryTokenAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_NonActionAttribute = new("Microsoft.AspNetCore.Mvc.NonActionAttribute");
@@ -80,14 +87,15 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Microsoft_AspNetCore_Mvc_RequestFormLimitsAttribute = new("Microsoft.AspNetCore.Mvc.RequestFormLimitsAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_RequestSizeLimitAttribute = new("Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_RouteAttribute = new("Microsoft.AspNetCore.Mvc.RouteAttribute");
-        public static readonly KnownType Microsoft_AspNetCore_Mvc_Routing_HttpDeleteAttribute = new("Microsoft.AspNetCore.Mvc.Routing.HttpDeleteAttribute");
-        public static readonly KnownType Microsoft_AspNetCore_Mvc_Routing_HttpGetAttribute = new("Microsoft.AspNetCore.Mvc.Routing.HttpGetAttribute");
-        public static readonly KnownType Microsoft_AspNetCore_Mvc_Routing_HttpHeadAttribute = new("Microsoft.AspNetCore.Mvc.Routing.HttpHeadAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_Routing_HttpMethodAttribute = new("Microsoft.AspNetCore.Mvc.Routing.HttpMethodAttribute");
-        public static readonly KnownType Microsoft_AspNetCore_Mvc_Routing_HttpOptionsAttribute = new("Microsoft.AspNetCore.Mvc.Routing.HttpHeadAttribute");
-        public static readonly KnownType Microsoft_AspNetCore_Mvc_Routing_HttpPatchAttribute = new("Microsoft.AspNetCore.Mvc.Routing.HttpHeadAttribute");
-        public static readonly KnownType Microsoft_AspNetCore_Mvc_Routing_HttpPostAttribute = new("Microsoft.AspNetCore.Mvc.Routing.HttpHeadAttribute");
-        public static readonly KnownType Microsoft_AspNetCore_Mvc_Routing_HttpPutAttribute = new("Microsoft.AspNetCore.Mvc.Routing.HttpHeadAttribute");
+        public static readonly ImmutableArray<KnownType> Microsoft_AspNetCore_Mvc_Routing_HttpMethodAttributes = ImmutableArray.Create(
+            Microsoft_AspNetCore_Mvc_HttpDeleteAttribute,
+            Microsoft_AspNetCore_Mvc_HttpGetAttribute,
+            Microsoft_AspNetCore_Mvc_HttpHeadAttribute,
+            Microsoft_AspNetCore_Mvc_HttpOptionsAttribute,
+            Microsoft_AspNetCore_Mvc_HttpPatchAttribute,
+            Microsoft_AspNetCore_Mvc_HttpPostAttribute,
+            Microsoft_AspNetCore_Mvc_HttpPutAttribute);
         public static readonly KnownType Microsoft_AspNetCore_Razor_Hosting_RazorCompiledItemAttribute = new("Microsoft.AspNetCore.Razor.Hosting.RazorCompiledItemAttribute");
         public static readonly KnownType Microsoft_Azure_Cosmos_CosmosClient = new("Microsoft.Azure.Cosmos.CosmosClient");
         public static readonly KnownType Microsoft_Azure_Documents_Client_DocumentClient = new("Microsoft.Azure.Documents.Client.DocumentClient");

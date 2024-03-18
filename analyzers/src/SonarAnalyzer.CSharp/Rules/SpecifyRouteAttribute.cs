@@ -39,7 +39,7 @@ public sealed class SpecifyRouteAttribute : SonarDiagnosticAnalyzer
                 {
                     compilationStart.RegisterSymbolStartAction(symbolStart =>
                     {
-                        if (symbolStart.Symbol.GetAttributes().Any(x => x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_RouteAttribute)))
+                        if (symbolStart.Symbol.GetAttributes().Any(x => x.AttributeClass.Is(KnownType.Microsoft_AspNetCore_Mvc_RouteAttribute)))
                         {
                             return;
                         }
@@ -49,7 +49,10 @@ public sealed class SpecifyRouteAttribute : SonarDiagnosticAnalyzer
                             var node = (MethodDeclarationSyntax)nodeContext.Node;
                             if (nodeContext.SemanticModel.GetDeclaredSymbol(node, nodeContext.Cancel) is IMethodSymbol method
                                 && method.IsControllerMethod()
-                                && method.GetAttributes().Any(x => x.TryGetAttributeValue<string>("template", out var template) && !string.IsNullOrWhiteSpace(template)))
+                                && method.GetAttributes().Any(x =>
+                                    x.AttributeClass.IsAny(KnownType.Microsoft_AspNetCore_Mvc_Routing_HttpMethodAttributes)
+                                    && x.TryGetAttributeValue<string>("template", out var template)
+                                    && !string.IsNullOrWhiteSpace(template)))
                             {
                                 secondaryLocations.Push(node.Identifier.GetLocation());
                             }
