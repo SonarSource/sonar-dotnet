@@ -199,6 +199,7 @@ namespace SonarAnalyzer.Extensions
                 PointerTypeSyntax { ElementType: { } elementType } => GetIdentifier(elementType),
                 PredefinedTypeSyntax { Keyword: var keyword } => keyword,
                 QualifiedNameSyntax { Right.Identifier: var identifier } => identifier,
+                SimpleBaseTypeSyntax { Type: { } type } => GetIdentifier(type),
                 SimpleNameSyntax { Identifier: var identifier } => identifier,
                 TypeParameterConstraintClauseSyntax { Name.Identifier: var identifier } => identifier,
                 TypeParameterSyntax { Identifier: var identifier } => identifier,
@@ -363,13 +364,15 @@ namespace SonarAnalyzer.Extensions
             }
         }
 
-        // based on Type="ArgumentListSyntax" in https://github.com/dotnet/roslyn/blob/main/src/Compilers/CSharp/Portable/Syntax/Syntax.xml
-        public static ArgumentListSyntax ArgumentList(this SyntaxNode node) =>
+        // based on Type="BaseArgumentListSyntax " in https://github.com/dotnet/roslyn/blob/main/src/Compilers/CSharp/Portable/Syntax/Syntax.xml
+        public static BaseArgumentListSyntax ArgumentList(this SyntaxNode node) =>
             node switch
             {
                 ObjectCreationExpressionSyntax creation => creation.ArgumentList,
                 InvocationExpressionSyntax invocation => invocation.ArgumentList,
                 ConstructorInitializerSyntax constructorInitializer => constructorInitializer.ArgumentList,
+                ElementAccessExpressionSyntax x => x.ArgumentList,
+                ElementBindingExpressionSyntax x => x.ArgumentList,
                 null => null,
                 _ when PrimaryConstructorBaseTypeSyntaxWrapper.IsInstance(node) => ((PrimaryConstructorBaseTypeSyntaxWrapper)node).ArgumentList,
                 _ when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(node) => ((ImplicitObjectCreationExpressionSyntaxWrapper)node).ArgumentList,

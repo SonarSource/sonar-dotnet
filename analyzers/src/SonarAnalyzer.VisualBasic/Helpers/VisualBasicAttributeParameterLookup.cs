@@ -1,6 +1,6 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2015-2024 SonarSource SA
+ * Copyright (C) 2015-2023 SonarSource SA
  * mailto: contact AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -20,17 +20,20 @@
 
 namespace SonarAnalyzer.Helpers;
 
-internal class CSharpAttributeParameterLookup : MethodParameterLookupBase<AttributeArgumentSyntax>
+internal class VisualBasicAttributeParameterLookup : MethodParameterLookupBase<ArgumentSyntax>
 {
-    public CSharpAttributeParameterLookup(AttributeSyntax attribute, IMethodSymbol methodSymbol)
-        : base(attribute.ArgumentList?.Arguments ?? default, methodSymbol) { }
+    public VisualBasicAttributeParameterLookup(SeparatedSyntaxList<ArgumentSyntax> argumentList, IMethodSymbol methodSymbol) : base(argumentList, methodSymbol)
+    {
+    }
 
-    protected override SyntaxNode Expression(AttributeArgumentSyntax argument) =>
-        argument.Expression;
+    protected override SyntaxNode Expression(ArgumentSyntax argument) =>
+        argument.GetExpression();
 
-    protected override SyntaxToken? GetNameColonArgumentIdentifier(AttributeArgumentSyntax argument) =>
-        argument.NameColon?.Name.Identifier;
+    protected override SyntaxToken? GetNameColonArgumentIdentifier(ArgumentSyntax argument) =>
+        null;
 
-    protected override SyntaxToken? GetNameEqualsArgumentIdentifier(AttributeArgumentSyntax argument) =>
-        argument.NameEquals?.Name.Identifier;
+    protected override SyntaxToken? GetNameEqualsArgumentIdentifier(ArgumentSyntax argument) =>
+        argument is SimpleArgumentSyntax { NameColonEquals.Name.Identifier: var identifier }
+            ? identifier
+            : null;
 }
