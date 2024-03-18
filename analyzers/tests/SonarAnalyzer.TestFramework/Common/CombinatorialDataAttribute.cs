@@ -18,11 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Globalization;
 using System.Reflection;
 
 namespace SonarAnalyzer.TestFramework.Common;
 
+// Based on https://stackoverflow.com/a/75531690
 [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false)]
 public sealed class DataValuesAttribute : Attribute
 {
@@ -45,14 +45,7 @@ public sealed class CombinatorialDataAttribute : Attribute, ITestDataSource
 
         while (true)
         {
-            // Create new arguments
-            var arg = new object[parameterIndices.Length];
-            for (var i = 0; i < parameterIndices.Length; i++)
-            {
-                arg[i] = valuesPerParameter[i][parameterIndices[i]];
-            }
-
-            yield return arg;
+            yield return CreateArguments(valuesPerParameter, parameterIndices);
 
             // Increment indices
             for (int i = parameterIndices.Length - 1; i >= 0; i--)
@@ -63,25 +56,29 @@ public sealed class CombinatorialDataAttribute : Attribute, ITestDataSource
                     parameterIndices[i] = 0;
 
                     if (i == 0)
+                    {
                         yield break;
+                    }
                 }
                 else
+                {
                     break;
+                }
             }
         }
     }
 
-    public string GetDisplayName(MethodInfo methodInfo, object[] data)
+    private static object[] CreateArguments(object[][] valuesPerParameter, int[] parameterIndices)
     {
-        if (data != null)
+        var arg = new object[parameterIndices.Length];
+        for (var i = 0; i < parameterIndices.Length; i++)
         {
-            return string.Format(CultureInfo.CurrentCulture, "{0} ({1})", new object[2]
-            {
-            methodInfo.Name,
-            string.Join(",", data)
-            });
+            arg[i] = valuesPerParameter[i][parameterIndices[i]];
         }
 
-        return null!;
+        return arg;
     }
+
+    public string GetDisplayName(MethodInfo methodInfo, object[] data) =>
+        data != null ? $"{methodInfo.Name} ({string.Join(",", data)})" : null;
 }
