@@ -18,17 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Diagnostics.CodeAnalysis;
+namespace SonarAnalyzer.Helpers;
 
-namespace Microsoft.CodeAnalysis.VisualBasic.Extensions;
-
-[ExcludeFromCodeCoverage]
-internal static class SyntaxNodeExtensions
+public class ArgumentContext : SyntaxBaseContext
 {
-    // Copied and converted from
-    // https://github.com/dotnet/roslyn/blob/5a1cc5f83e4baba57f0355a685a5d1f487bfac66/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/VisualBasic/Extensions/SyntaxNodeExtensions.vb#L16
-    public static bool IsParentKind(this SyntaxNode node, SyntaxKind kind)
-    {
-        return node != null && node.Parent.IsKind(kind);
-    }
+    public IParameterSymbol Parameter { get; internal set; }
+
+    public ArgumentContext(SonarSyntaxNodeReportingContext context) : base(context) { }
+
+    public ArgumentContext(SyntaxNode node, SemanticModel semanticModel) : base(node, semanticModel) { }
 }

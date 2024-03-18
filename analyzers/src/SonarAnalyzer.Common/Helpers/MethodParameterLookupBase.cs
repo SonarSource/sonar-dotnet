@@ -35,7 +35,8 @@ internal abstract class MethodParameterLookupBase<TArgumentSyntax> : IMethodPara
 {
     private readonly SeparatedSyntaxList<TArgumentSyntax> argumentList;
 
-    protected abstract SyntaxToken? GetNameColonArgumentIdentifier(TArgumentSyntax argument);
+    protected abstract SyntaxToken? GetNameColonIdentifier(TArgumentSyntax argument);
+    protected abstract SyntaxToken? GetNameEqualsIdentifier(TArgumentSyntax argument);
     protected abstract SyntaxNode Expression(TArgumentSyntax argument);
 
     public IMethodSymbol MethodSymbol { get; }
@@ -69,9 +70,19 @@ internal abstract class MethodParameterLookupBase<TArgumentSyntax> : IMethodPara
             return false;
         }
 
-        if (GetNameColonArgumentIdentifier(arg) is { } nameColonArgumentIdentifier)
+        if (GetNameColonIdentifier(arg) is { } nameColonIdentifier)
         {
-            parameter = methodSymbol.Parameters.FirstOrDefault(symbol => symbol.Name == nameColonArgumentIdentifier.ValueText);
+            parameter = methodSymbol.Parameters.FirstOrDefault(symbol => symbol.Name == nameColonIdentifier.ValueText);
+            return parameter != null;
+        }
+
+        if (GetNameEqualsIdentifier(arg) is { } nameEqualsIdentifier
+            && methodSymbol.ContainingType.GetMembers(nameEqualsIdentifier.ValueText) is { Length: 1 } properties
+            && properties[0] is IPropertySymbol { SetMethod: { } setter } property
+            && property.Name == nameEqualsIdentifier.ValueText
+            && setter.Parameters is { Length: 1 } parameters)
+        {
+            parameter = parameters[0];
             return parameter != null;
         }
 
