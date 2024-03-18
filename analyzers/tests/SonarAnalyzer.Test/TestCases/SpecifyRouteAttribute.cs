@@ -11,28 +11,28 @@ public class NoActionHasHttpAttributeWithRouteController : Controller
     public IActionResult Error() => View();  // Compliant
 }
 
-public class ActionHasHttpAttributeWithRouteController : Controller
+public class ActionHasHttpAttributeWithRouteController : Controller // Noncompliant [controller]
 {
-    [HttpGet("GetObject")]          // Noncompliant
-    public IActionResult Get() => View();
+    [HttpGet("GetObject")]          
+    public IActionResult Get() => View(); // Secondary [controller]
 
-    [HttpPost("CreateObject")]     // Noncompliant
-    public IActionResult Post() => View();
+    [HttpPost("CreateObject")]     
+    public IActionResult Post() => View(); // Secondary [controller]
 
-    [HttpPut("UpdateObject")]      // Noncompliant
-    public IActionResult Put() => View();
+    [HttpPut("UpdateObject")]      
+    public IActionResult Put() => View(); // Secondary [controller]
 
-    [HttpDelete("DeleteObject")]  // Noncompliant
-    public IActionResult Delete() => View();
+    [HttpDelete("DeleteObject")]  
+    public IActionResult Delete() => View(); // Secondary [controller]
 
-    [HttpPatch("PatchObject")]    // Noncompliant
-    public IActionResult Patch() => View();
+    [HttpPatch("PatchObject")]    
+    public IActionResult Patch() => View(); // Secondary [controller]
 
-    [HttpHead("Head")]           // Noncompliant
-    public IActionResult HttpHead() => View();
+    [HttpHead("Head")]           
+    public IActionResult HttpHead() => View(); // Secondary [controller]
 
-    [HttpOptions("Options")]     // Noncompliant
-    public IActionResult HttpOptions() => View();
+    [HttpOptions("Options")]     
+    public IActionResult HttpOptions() => View(); // Secondary [controller]
 }
 
 public class WithUserDefinedAttribute : Controller

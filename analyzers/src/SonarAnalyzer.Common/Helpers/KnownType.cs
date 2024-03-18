@@ -80,7 +80,14 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Microsoft_AspNetCore_Mvc_RequestFormLimitsAttribute = new("Microsoft.AspNetCore.Mvc.RequestFormLimitsAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_RequestSizeLimitAttribute = new("Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_RouteAttribute = new("Microsoft.AspNetCore.Mvc.RouteAttribute");
+        public static readonly KnownType Microsoft_AspNetCore_Mvc_Routing_HttpDeleteAttribute = new("Microsoft.AspNetCore.Mvc.Routing.HttpDeleteAttribute");
+        public static readonly KnownType Microsoft_AspNetCore_Mvc_Routing_HttpGetAttribute = new("Microsoft.AspNetCore.Mvc.Routing.HttpGetAttribute");
+        public static readonly KnownType Microsoft_AspNetCore_Mvc_Routing_HttpHeadAttribute = new("Microsoft.AspNetCore.Mvc.Routing.HttpHeadAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_Routing_HttpMethodAttribute = new("Microsoft.AspNetCore.Mvc.Routing.HttpMethodAttribute");
+        public static readonly KnownType Microsoft_AspNetCore_Mvc_Routing_HttpOptionsAttribute = new("Microsoft.AspNetCore.Mvc.Routing.HttpHeadAttribute");
+        public static readonly KnownType Microsoft_AspNetCore_Mvc_Routing_HttpPatchAttribute = new("Microsoft.AspNetCore.Mvc.Routing.HttpHeadAttribute");
+        public static readonly KnownType Microsoft_AspNetCore_Mvc_Routing_HttpPostAttribute = new("Microsoft.AspNetCore.Mvc.Routing.HttpHeadAttribute");
+        public static readonly KnownType Microsoft_AspNetCore_Mvc_Routing_HttpPutAttribute = new("Microsoft.AspNetCore.Mvc.Routing.HttpHeadAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Razor_Hosting_RazorCompiledItemAttribute = new("Microsoft.AspNetCore.Razor.Hosting.RazorCompiledItemAttribute");
         public static readonly KnownType Microsoft_Azure_Cosmos_CosmosClient = new("Microsoft.Azure.Cosmos.CosmosClient");
         public static readonly KnownType Microsoft_Azure_Documents_Client_DocumentClient = new("Microsoft.Azure.Documents.Client.DocumentClient");
