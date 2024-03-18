@@ -55,7 +55,7 @@ public class BackslashShouldBeAvoidedInAspNetRoutesTest
     private static IEnumerable<object[]> RouteAttributesWithAllTypesOfStrings =>
         AttributesWithAllTypesOfStrings.Select(x => new object[] { ((string)x[0]).Replace(AttributePlaceholder, "Route"), x[1], x[2] });
 
-    private static IEnumerable<object[]> HttpMethodAttributesAttributesWithAllTypesOfStrings =>
+    private static IEnumerable<object[]> HttpMethodAttributesWithAllTypesOfStrings =>
         AttributesWithAllTypesOfStrings.Zip(
             ["HttpGet", "HttpPost", "HttpPatch", "HttpHead", "HttpDelete", "HttpOptions", "HttpGet", "HttpPost", "HttpPatch", "HttpHead"],
             (attribute, httpMethod) => new object[] { ((string)attribute[0]).Replace(AttributePlaceholder, httpMethod), attribute[1], attribute[2] });
@@ -162,7 +162,7 @@ public class BackslashShouldBeAvoidedInAspNetRoutesTest
 
     [TestMethod]
     [DynamicData(
-        nameof(HttpMethodAttributesAttributesWithAllTypesOfStrings),
+        nameof(HttpMethodAttributesWithAllTypesOfStrings),
         DynamicDataDisplayName = nameof(AttributesWithAllTypesOfStringsDisplayNameProvider),
         DynamicDataDisplayNameDeclaringType = typeof(BackslashShouldBeAvoidedInAspNetRoutesTest))]
     public void BackslashShouldBeAvoidedInAspNetRoutes_AspNetCore2x_HttpMethods_CSharp11(string actionDeclaration, bool compliant, string displayName) =>
@@ -184,7 +184,7 @@ public class BackslashShouldBeAvoidedInAspNetRoutesTest
 
     [TestMethod]
     [DynamicData(
-        nameof(HttpMethodAttributesAttributesWithAllTypesOfStrings),
+        nameof(HttpMethodAttributesWithAllTypesOfStrings),
         DynamicDataDisplayName = nameof(AttributesWithAllTypesOfStringsDisplayNameProvider),
         DynamicDataDisplayNameDeclaringType = typeof(BackslashShouldBeAvoidedInAspNetRoutesTest))]
     public void BackslashShouldBeAvoidedInAspNetRoutes_AspNetCore3AndAbove_HttpMethods_CSharp11(string actionDeclaration, bool compliant, string displayName) =>
