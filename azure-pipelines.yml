@@ -10,7 +10,9 @@ schedules:
 trigger:
 - master
 
-pool: .net-bubble-aws-re-team-prod
+pool:
+  name: .net-bubble-aws-re-team-dev
+  demands: ImageName -equals pr-490-dotnet-bubble-ci-v*
 
 variables:
   - group: sonar-dotnet-variables
