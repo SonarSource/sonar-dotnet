@@ -18,6 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Reflection;
+using Moq;
+
 namespace SonarAnalyzer.Test.TestFramework.Tests.Common;
 
 [TestClass]
@@ -128,6 +131,31 @@ public class CombinatorialDataAttributeTest_AttributeTest
         var attribute = new CombinatorialDataAttribute();
         var data = () => attribute.GetData(typeof(CombinatorialDataAttributeTest_AttributeTest).GetMethod(nameof(MissingAttribute))).ToList();
         data.Should().Throw<InvalidOperationException>().WithMessage("Combinatorial test requires all parameters to have the [DataValues] attribute set");
+    }
+
+    [DataTestMethod]
+    [DataRow("Test ()")]
+    [DataRow("Test ()", null)]
+    [DataRow("Test (a)", "a")]
+    [DataRow("Test (a,b)", "a", "b")]
+    [DataRow("Test (a,b,1)", "a", "b", 1)]
+    public void GetDisplayName_Test(string expected, params object[] arguments)
+    {
+        var attribute = new CombinatorialDataAttribute();
+        var methodInfo = new Mock<MethodInfo>();
+        methodInfo.SetupGet(x => x.Name).Returns("Test");
+        var actual = attribute.GetDisplayName(methodInfo.Object, arguments);
+        actual.Should().Be(expected);
+    }
+
+    [TestMethod]
+    public void GetDisplayName_Null()
+    {
+        var attribute = new CombinatorialDataAttribute();
+        var methodInfo = new Mock<MethodInfo>();
+        methodInfo.SetupGet(x => x.Name).Returns("Test");
+        var actual = attribute.GetDisplayName(methodInfo.Object, null);
+        actual.Should().Be("Test ()");
     }
 
     public static void Combinatorial([DataValues(1, 2, 3)] int x, [DataValues("A", "B")] string y, [DataValues(true, false)] bool z)
