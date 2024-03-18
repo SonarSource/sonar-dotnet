@@ -35,39 +35,42 @@ public sealed class SpecifyRouteAttribute : SonarDiagnosticAnalyzer
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterCompilationStartAction(compilationStart =>
             {
-                if (compilationStart.Compilation.GetTypeByMetadataName(KnownType.Microsoft_AspNetCore_Mvc_Routing_HttpMethodAttribute) is not null)
+                if (compilationStart.Compilation.GetTypeByMetadataName(KnownType.Microsoft_AspNetCore_Mvc_Routing_HttpMethodAttribute) is null)
                 {
-                    compilationStart.RegisterSymbolStartAction(symbolStart =>
-                    {
-                        if (symbolStart.Symbol.GetAttributes().Any(x => x.AttributeClass.Is(KnownType.Microsoft_AspNetCore_Mvc_RouteAttribute)))
-                        {
-                            return;
-                        }
-                        var secondaryLocations = new ConcurrentStack<Location>();
-                        symbolStart.RegisterSyntaxNodeAction(nodeContext =>
-                        {
-                            var node = (MethodDeclarationSyntax)nodeContext.Node;
-                            if (nodeContext.SemanticModel.GetDeclaredSymbol(node, nodeContext.Cancel) is IMethodSymbol method
-                                && method.IsControllerMethod()
-                                && method.GetAttributes().Any(x =>
-                                    x.AttributeClass.IsAny(KnownType.Microsoft_AspNetCore_Mvc_Routing_HttpMethodAttributes)
-                                    && x.TryGetAttributeValue<string>("template", out var template)
-                                    && !string.IsNullOrWhiteSpace(template)))
-                            {
-                                secondaryLocations.Push(node.Identifier.GetLocation());
-                            }
-                        }, SyntaxKind.MethodDeclaration);
-                        symbolStart.RegisterSymbolEndAction(symbolEnd =>
-                        {
-                            if (!secondaryLocations.IsEmpty)
-                            {
-                                foreach (var declaration in symbolStart.Symbol.DeclaringSyntaxReferences.Select(r => r.GetSyntax()))
-                                {
-                                    symbolEnd.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, Diagnostic.Create(Rule, declaration.GetLocation(), secondaryLocations));
-                                }
-                            }
-                        });
-                    }, SymbolKind.NamedType);
+                    return;
                 }
+                compilationStart.RegisterSymbolStartAction(symbolStart =>
+                {
+                    if (symbolStart.Symbol.GetAttributes().Any(x => x.AttributeClass.Is(KnownType.Microsoft_AspNetCore_Mvc_RouteAttribute)))
+                    {
+                        return;
+                    }
+                    var secondaryLocations = new ConcurrentStack<Location>();
+                    symbolStart.RegisterSyntaxNodeAction(nodeContext =>
+                    {
+                        var node = (MethodDeclarationSyntax)nodeContext.Node;
+                        if (nodeContext.SemanticModel.GetDeclaredSymbol(node, nodeContext.Cancel) is IMethodSymbol method
+                            && method.IsControllerMethod()
+                            && method.GetAttributes().Any(x =>
+                                x.AttributeClass.IsAny(KnownType.Microsoft_AspNetCore_Mvc_Routing_HttpMethodAttributes)
+                                && x.TryGetAttributeValue<string>("template", out var template)
+                                && !string.IsNullOrWhiteSpace(template)))
+                        {
+                            secondaryLocations.Push(node.Identifier.GetLocation());
+                        }
+                    }, SyntaxKind.MethodDeclaration);
+                    symbolStart.RegisterSymbolEndAction(symbolEnd => ReportIssues(symbolEnd, symbolStart.Symbol, secondaryLocations));
+                }, SymbolKind.NamedType);
             });
+
+    private static void ReportIssues(SonarSymbolReportingContext context, ISymbol symbol, ConcurrentStack<Location> secondaryLocations)
+    {
+        if (!secondaryLocations.IsEmpty)
+        {
+            foreach (var declaration in symbol.DeclaringSyntaxReferences.Select(r => r.GetSyntax()))
+            {
+                context.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, Diagnostic.Create(Rule, declaration.GetLocation(), secondaryLocations));
+            }
+        }
+    }
 }
