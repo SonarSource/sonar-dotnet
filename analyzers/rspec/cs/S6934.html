@@ -1,0 +1,64 @@
+<p>The <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/routing">routing</a> middleware in <a
+href="https://learn.microsoft.com/en-us/aspnet/core/mvc/overview">ASP.NET Core MVC</a> uses a set of predefined rules and conventions to determine
+which controller and action method to invoke for a given HTTP request. The routing configuration is typically defined with the <a
+href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.builder.controllerendpointroutebuilderextensions.mapcontrollerroute"><code>MapControllerRoute</code></a>
+method during the application configuration. However, without some extra configuration on the developer’s part, sometimes the routing system cannot
+correctly resolve a route and map it to a certain action, resulting in unexpected behavior or errors.</p>
+<h2>Why is this an issue?</h2>
+<p>In ASP.NET MVC, when a <a
+href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.routing.httpmethodattribute"><code>HttpMethodAttribute</code></a> (such as
+<a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.httpgetattribute"><code>HttpGet</code></a>, <a
+href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.httppostattribute"><code>HttpPost</code></a>, etc) is specified with a
+given route template at the action level, it’s important that its controller also has a <a
+href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.routeattribute"><code>RouteAttribute</code></a> defined. If not, then the
+route pattern that has been defined in <code>WebApplication.MapControllerRoute</code> is applied, resulting in an unexpected route and potential
+confusion. This applies also to when <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/areas"><code>areas</code></a> are
+defined.</p>
+<h2>How to fix it</h2>
+<p>When any of the controller actions is annotated with a <code>HttpMethodAttribute' with a route template, you should also annotate the controller
+with the `RouteAttribute</code> as well.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre>
+    public class PersonController : Controller
+    {
+        [HttpGet("GetPerson")]
+        public ActionResult Index() // Noncompliant, this action will be reachable by "/root/GetPerson" instead of "/root/Person/GetPerson"
+        {
+            return View();
+        }
+    }
+</pre>
+<h4>Compliant solution</h4>
+<pre>
+    public class PersonController: Controller
+    {
+        [HttpGet]
+        public ActionResult Index() // Compliant, no route template is given to the attribute
+        {
+            return View();
+        }
+    }
+
+    [Route("Person")]
+    public class PersonController: Controller
+    {
+        [HttpGet("GetPerson")]
+        public ActionResult Index() // Compliant
+        {
+            return View();
+        }
+    }
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/overview">Overview of ASP.NET Core MVC</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/routing">Routing to controller actions in ASP.NET
+  Core</a> </li>
+</ul>
+<h3>Articles &amp; blog posts</h3>
+<ul>
+  <li> Medium - <a href="https://medium.com/quick-code/routing-in-asp-net-core-c433bff3f1a4">Routing in ASP.NET Core</a> </li>
+</ul>
+
