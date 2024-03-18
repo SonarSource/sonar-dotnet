@@ -108,6 +108,9 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
     public override bool IsStatic(SyntaxNode node) =>
         Cast<BaseMethodDeclarationSyntax>(node).IsStatic();
 
+    public override bool IsWrittenTo(SyntaxNode expression, SemanticModel semanticModel, CancellationToken cancellationToken) =>
+        Cast<ExpressionSyntax>(expression).IsWrittenTo(semanticModel, cancellationToken);
+
     public override SyntaxKind Kind(SyntaxNode node) => node.Kind();
 
     public override string LiteralText(SyntaxNode literal) =>
@@ -158,7 +161,4 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
 
     public override bool TryGetOperands(SyntaxNode invocation, out SyntaxNode left, out SyntaxNode right) =>
         Cast<InvocationExpressionSyntax>(invocation).TryGetOperands(out left, out right);
-
-    public override bool IsWrittenTo(SyntaxNode expression, SemanticModel semanticModel, CancellationToken cancellationToken) =>
-        expression is ExpressionSyntax ex && ex.IsWrittenTo(semanticModel, cancellationToken);
 }

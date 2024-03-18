@@ -363,7 +363,7 @@ namespace SonarAnalyzer.Extensions
             }
         }
 
-        // based on Type="ArgumentListSyntax" in https://github.com/dotnet/roslyn/blob/main/src/Compilers/CSharp/Portable/Syntax/Syntax.xml
+        // based on Type="BaseArgumentListSyntax" in https://github.com/dotnet/roslyn/blob/main/src/Compilers/CSharp/Portable/Syntax/Syntax.xml
         public static BaseArgumentListSyntax ArgumentList(this SyntaxNode node) =>
             node switch
             {
