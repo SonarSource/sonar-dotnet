@@ -30,6 +30,8 @@ public abstract class RouteTemplateShouldNotStartWithSlashBase<TSyntaxKind> : So
     private const string MessageActionsAndController = "Change the paths of the actions of this controller to be relative and add a controller route with the common prefix.";
 
     protected abstract TSyntaxKind MethodSyntaxKind { get; }
+    protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
+
     protected abstract Location ControllerLocation(INamedTypeSymbol symbol);
 
     protected override string MessageFormat => "{0}";
@@ -48,13 +50,12 @@ public abstract class RouteTemplateShouldNotStartWithSlashBase<TSyntaxKind> : So
                 var symbol = (INamedTypeSymbol)symbolStartContext.Symbol;
                 if (symbol.IsControllerType())
                 {
-                    var controllerActionInfo = new ConcurrentBag<ControllerActionInfo>();
+                    var controllerActionInfo = new ConcurrentStack<ControllerActionInfo>();
                     symbolStartContext.RegisterSyntaxNodeAction(nodeContext =>
                     {
-                        var methodSymbol = nodeContext.SemanticModel.GetDeclaredSymbol(nodeContext.Node) as IMethodSymbol;
-                        if (methodSymbol.IsControllerMethod())
+                        if (nodeContext.SemanticModel.GetDeclaredSymbol(nodeContext.Node) is IMethodSymbol methodSymbol && methodSymbol.IsControllerMethod())
                         {
-                            controllerActionInfo.Add(new ControllerActionInfo(methodSymbol, RouteAttributeTemplateArguments(methodSymbol.GetAttributes())));
+                            controllerActionInfo.Push(new ControllerActionInfo(methodSymbol, RouteAttributeTemplateArguments(methodSymbol.GetAttributes())));
                         }
                     }, MethodSyntaxKind);
 
@@ -63,7 +64,10 @@ public abstract class RouteTemplateShouldNotStartWithSlashBase<TSyntaxKind> : So
             }, SymbolKind.NamedType);
         });
 
-    private void ReportIssues(SonarSymbolStartAnalysisContext context, INamedTypeSymbol controllerSymbol, ConcurrentBag<ControllerActionInfo> actions) =>
+    protected bool IsGeneratedCode(SyntaxReference syntaxReference) =>
+        syntaxReference.GetSyntax().SyntaxTree.IsGenerated(GeneratedCodeRecognizer, null);
+
+    private void ReportIssues(SonarSymbolStartAnalysisContext context, INamedTypeSymbol controllerSymbol, ConcurrentStack<ControllerActionInfo> actions) =>
         context.RegisterSymbolEndAction(context =>
         {
             if (!actions.Any()
@@ -76,7 +80,10 @@ public abstract class RouteTemplateShouldNotStartWithSlashBase<TSyntaxKind> : So
                 : MessageActionsAndController;
 
             var attributeLocations = actions.SelectMany(x => x.RouteParameters).Select(x => x.Value);
-            context.ReportIssue(Language.GeneratedCodeRecognizer, Diagnostic.Create(Rule, ControllerLocation(controllerSymbol), attributeLocations, issueMessage));
+            if (ControllerLocation(controllerSymbol) is { } controllerLocation)
+            {
+                context.ReportIssue(Language.GeneratedCodeRecognizer, Diagnostic.Create(Rule, controllerLocation, attributeLocations, issueMessage));
+            }
         });
 
     private static Dictionary<string, Location> RouteAttributeTemplateArguments(ImmutableArray<AttributeData> attributes)

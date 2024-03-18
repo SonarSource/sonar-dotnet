@@ -27,6 +27,8 @@ public sealed class RouteTemplateShouldNotStartWithSlash : RouteTemplateShouldNo
 
     protected override SyntaxKind MethodSyntaxKind => SyntaxKind.MethodDeclaration;
 
+    protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
+
     protected override Location ControllerLocation(INamedTypeSymbol symbol) =>
-        ((TypeDeclarationSyntax)symbol.DeclaringSyntaxReferences.First().GetSyntax()).Identifier.GetLocation();
+        ((TypeDeclarationSyntax)symbol.DeclaringSyntaxReferences.FirstOrDefault(x => !IsGeneratedCode(x))?.GetSyntax())?.Identifier.GetLocation();
 }
