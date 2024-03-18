@@ -102,7 +102,7 @@ public class CombinatorialDataAttributeTest_ThreeDimensions
 public class CombinatorialDataAttributeTest_AttributeTest
 {
     [TestMethod]
-    public void CombinatorialData()
+    public void Combinatorial_Test()
     {
         var attribute = new CombinatorialDataAttribute();
         var data = attribute.GetData(typeof(CombinatorialDataAttributeTest_AttributeTest).GetMethod(nameof(Combinatorial)));
@@ -122,7 +122,20 @@ public class CombinatorialDataAttributeTest_AttributeTest
             ]);
     }
 
+    [TestMethod]
+    public void MissingAttribute_Test()
+    {
+        var attribute = new CombinatorialDataAttribute();
+        var data = () => attribute.GetData(typeof(CombinatorialDataAttributeTest_AttributeTest).GetMethod(nameof(MissingAttribute))).ToList();
+        data.Should().Throw<InvalidOperationException>().WithMessage("Combinatorial test requires all parameters to have the [DataValues] attribute set");
+    }
+
     public static void Combinatorial([DataValues(1, 2, 3)] int x, [DataValues("A", "B")] string y, [DataValues(true, false)] bool z)
+    {
+        // Used for reflection only.
+    }
+
+    public static void MissingAttribute([DataValues(1, 2, 3)] int x, string y, [DataValues(true, false)] bool z)
     {
         // Used for reflection only.
     }
