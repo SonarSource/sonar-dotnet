@@ -170,32 +170,51 @@ class LoggerHelper
 
 public class Service
 {
-    public Service(ILogger<Service> logger)
-    {
-    }
-
-    public Service(ILogger<Service> logger, string otherParameter)
-    {
-    }
+    public Service(ILogger logger) { }
+    public Service(ILogger logger, string otherParameter) { }
+    public Service(ILogger<Service> logger) { }
+    public Service(ILogger<Service> logger, string otherParameter) { }
+    public Service(Service service) { }
+    public Service(AnotherService service) { }
 }
+
+public class AnotherService
+{
+    public AnotherService(Service service) { }
+    public AnotherService(ILogger<Service> logger) { }
+}
+
 
 public class Factory
 {
-    private readonly ILogger<Service> logger = LoggerFactory.Create(builder => { }).CreateLogger<Service>();    // Noncompliant
+    private readonly ILogger<Service> logger = LoggerFactory.Create(builder => { }).CreateLogger<Service>();        // Noncompliant
 
-    public Service CreateType(ILoggerFactory loggerFactory)
+    public void CreateType(ILoggerFactory loggerFactory, string otherParameter)
     {
-        return new Service(loggerFactory.CreateLogger<Service>());
-    }
+        new Service(loggerFactory.CreateLogger<Service>());                                                         // Compliant
+        new Service(loggerFactory.CreateLogger<AnotherService>());                                                  // Noncompliant
 
-    public Service CreateType(ILoggerFactory loggerFactory, string otherParameter)
-    {
-        return new Service(loggerFactory.CreateLogger<Service>(), otherParameter);
+        new Service(loggerFactory.CreateLogger<Service>(), otherParameter);
+        new Service(loggerFactory.CreateLogger(nameof(Service)), otherParameter);
+        new Service(loggerFactory.CreateLogger(typeof(Service)), otherParameter);
+        new Service(loggerFactory.CreateLogger(typeof(Service).Name), otherParameter);
+        new Service(loggerFactory.CreateLogger(typeof(Service).FullName), otherParameter);
+        new Service(loggerFactory.CreateLogger(typeof(Service).AssemblyQualifiedName), otherParameter);
+
+        new Service(loggerFactory.CreateLogger<string>(), otherParameter);                                           // Noncompliant
+        new Service(loggerFactory.CreateLogger(nameof(AnotherService)), otherParameter);                             // Noncompliant
+        new Service(loggerFactory.CreateLogger(typeof(AnotherService)), otherParameter);                             // Noncompliant
+        new Service(loggerFactory.CreateLogger(typeof(string).Name), otherParameter);                                // Noncompliant
+        new Service(loggerFactory.CreateLogger(typeof(string).FullName), otherParameter);                            // Noncompliant
+        new Service(loggerFactory.CreateLogger(typeof(Decorator<Service>).AssemblyQualifiedName), otherParameter);   // Noncompliant
+
+        new AnotherService(new Service(loggerFactory.CreateLogger<Service>()));                                      // Compliant
+        new Service(new AnotherService(loggerFactory.CreateLogger<Service>()));                                      // Noncompliant
     }
 
     public Service CreateType_LocalVariable(ILoggerFactory loggerFactory)
     {
-        var logger = loggerFactory.CreateLogger<Service>();                                                     // Noncompliant FP
+        var logger = loggerFactory.CreateLogger<Service>();                                                         // Noncompliant FP
         return new Service(logger);
     }
 
@@ -206,7 +225,16 @@ public class Factory
 
     public Service CreateType_Decorator(ILoggerFactory loggerFactory)
     {
-        return new Service(new Decorator<Service>(loggerFactory.CreateLogger<Service>()));
+        return new Service(new Decorator<Service>(loggerFactory.CreateLogger<Service>()));                          // Compliant
+        return new Service(new Decorator(loggerFactory.CreateLogger(nameof(Service))));                             // Compliant
+    }
+
+    class Decorator : ILogger
+    {
+        public Decorator(ILogger logger) { }
+        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter) { }
+        public bool IsEnabled(LogLevel logLevel) => true;
+        public IDisposable BeginScope<TState>(TState state) => null;
     }
 
     private class Decorator<T> : ILogger<T>
@@ -217,4 +245,3 @@ public class Factory
         public IDisposable BeginScope<TState>(TState state) => null;
     }
 }
-
