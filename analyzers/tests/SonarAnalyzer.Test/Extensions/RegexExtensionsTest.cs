@@ -31,13 +31,14 @@ public class RegexExtensionsTest
     private const string TimeoutPattern =
         @"^((?<DRIVE>[a-zA-Z]):\\)*((?<DIR>[a-zA-Z0-9_]+(([a-zA-Z0-9_\s_\-\.]*[a-zA-Z0-9_]+)|([a-zA-Z0-9_]+)))\\)*(?<FILE>([a-zA-Z0-9_]+(([a-zA-Z0-9_\s_\-\.]*[a-zA-Z0-9_]+)|([a-zA-Z0-9_]+))\.(?<EXTENSION>[a-zA-Z0-9]{1,6})$))";
 
-    [TestMethod]
-    public void SafeIsMatch_Timeout_Fallback()
+    [DataTestMethod]
+    [DataRow(true)]
+    [DataRow(false)]
+    public void SafeIsMatch_Timeout_Fallback(bool timeoutFallback)
     {
         var regex = new Regex(TimeoutPattern, RegexOptions.None, TimeSpan.FromTicks(1));
 
-        regex.SafeIsMatch(@"C:\Users\username\AppData\Local\Temp\00af5451-626f-40db-af1d-89d376dc5ef6\SomeFile.csproj", timeoutFallback: true).Should().BeTrue();
-        regex.SafeIsMatch(@"C:\Users\username\AppData\Local\Temp\00af5451-626f-40db-af1d-89d376dc5ef6\SomeFile.csproj", timeoutFallback: false).Should().BeFalse();
+        regex.SafeIsMatch(@"C:\Users\username\AppData\Local\Temp\00af5451-626f-40db-af1d-89d376dc5ef6\SomeFile.csproj", timeoutFallback).Should().Be(timeoutFallback);
     }
 
     [DataTestMethod]
