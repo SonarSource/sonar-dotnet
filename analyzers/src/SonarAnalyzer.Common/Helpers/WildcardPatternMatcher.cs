@@ -32,7 +32,7 @@ internal static class WildcardPatternMatcher
     public static bool IsMatch(string pattern, string input, bool timeoutFallbackResult) =>
         !(string.IsNullOrWhiteSpace(pattern) || string.IsNullOrWhiteSpace(input))
         && Cache.GetOrAdd(pattern, _ => new Regex(ToRegex(pattern), RegexOptions.None, RegexConstants.DefaultTimeout)) is var regex
-        && regex.SafeIsMatch(input, timeoutFallbackResult);
+        && regex.SafeIsMatch(input.Trim('/'), timeoutFallbackResult);
 
     /// <summary>
     /// Copied from https://github.com/SonarSource/sonar-plugin-api/blob/a9bd7ff48f0f77811ed909070030678c443c975a/sonar-plugin-api/src/main/java/org/sonar/api/utils/WildcardPattern.java.
