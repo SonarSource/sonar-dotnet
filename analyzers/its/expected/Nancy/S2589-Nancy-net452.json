@@ -3,13 +3,13 @@
     {
       "Id": "S2589",
       "Message": "Change this condition so that it does not always evaluate to \u0027True\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L494",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L494",
       "Location": "Line 494 Position 26-36"
     },
     {
       "Id": "S2589",
       "Message": "Change this condition so that it does not always evaluate to \u0027True\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L536",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L536",
       "Location": "Line 536 Position 30-41"
     }
   ]

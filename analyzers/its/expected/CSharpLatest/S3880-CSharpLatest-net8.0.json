@@ -3,7 +3,7 @@
     {
       "Id": "S3880",
       "Message": "Remove this empty finalizer.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/Records.cs#L77-L79",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/Records.cs#L77-L79",
       "Location": "Lines 77-79 Position 5-6"
     }
   ]

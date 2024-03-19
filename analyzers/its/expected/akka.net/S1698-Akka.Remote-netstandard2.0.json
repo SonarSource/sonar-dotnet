@@ -3,13 +3,13 @@
     {
       "Id": "S1698",
       "Message": "Consider using \u0027Equals\u0027 if value comparison was intended.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/DaemonMsgCreateSerializer.cs#L116",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Serialization/DaemonMsgCreateSerializer.cs#L116",
       "Location": "Line 116 Position 37-39"
     },
     {
       "Id": "S1698",
       "Message": "Consider using \u0027Equals\u0027 if value comparison was intended.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L250",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L250",
       "Location": "Line 250 Position 28-30"
     }
   ]

@@ -3,7 +3,7 @@
     {
       "Id": "S881",
       "Message": "Extract this increment operation into a dedicated statement.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/RazorViewEngine.cs#L260",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.Razor/RazorViewEngine.cs#L260",
       "Location": "Line 260 Position 112-114"
     }
   ]

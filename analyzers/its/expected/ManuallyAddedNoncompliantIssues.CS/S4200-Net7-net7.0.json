@@ -3,13 +3,13 @@
     {
       "Id": "S4200",
       "Message": "Make this native method private and provide a wrapper.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/Net7/S4200.cs#L12",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/Net7/S4200.cs#L12",
       "Location": "Line 12 Position 32-81"
     },
     {
       "Id": "S4200",
       "Message": "Make this native method private and provide a wrapper.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/Net7/S4200.cs#L9",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/Net7/S4200.cs#L9",
       "Location": "Line 9 Position 32-71"
     }
   ]

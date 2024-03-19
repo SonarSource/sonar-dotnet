@@ -3,13 +3,13 @@
     {
       "Id": "S4462",
       "Message": "Replace this use of \u0027Task.Result\u0027 with \u0027await\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsHook.cs#L182",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Diagnostics/DiagnosticsHook.cs#L182",
       "Location": "Line 182 Position 32-50"
     },
     {
       "Id": "S4462",
       "Message": "Replace this use of \u0027Task.Result\u0027 with \u0027await\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsHook.cs#L303",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/Diagnostics/DiagnosticsHook.cs#L303",
       "Location": "Line 303 Position 47-108"
     }
   ]

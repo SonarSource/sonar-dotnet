@@ -3,43 +3,43 @@
     {
       "Id": "S4040",
       "Message": "Change this normalization to \u0027ToUpperInvariant()\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Cluster.cs#L70",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Cluster.cs#L70",
       "Location": "Line 70 Position 87-103"
     },
     {
       "Id": "S4040",
       "Message": "Change this normalization to \u0027ToUpperInvariant()\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L104",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L104",
       "Location": "Line 104 Position 22-38"
     },
     {
       "Id": "S4040",
       "Message": "Change this normalization to \u0027ToUpperInvariant()\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L63",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L63",
       "Location": "Line 63 Position 36-52"
     },
     {
       "Id": "S4040",
       "Message": "Change this normalization to \u0027ToUpperInvariant()\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L64",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L64",
       "Location": "Line 64 Position 36-52"
     },
     {
       "Id": "S4040",
       "Message": "Change this normalization to \u0027ToUpperInvariant()\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L65",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L65",
       "Location": "Line 65 Position 36-52"
     },
     {
       "Id": "S4040",
       "Message": "Change this normalization to \u0027ToUpperInvariant()\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolverSettings.cs#L43",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolverSettings.cs#L43",
       "Location": "Line 43 Position 64-80"
     },
     {
       "Id": "S4040",
       "Message": "Change this normalization to \u0027ToUpperInvariant()\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolverSettings.cs#L50",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolverSettings.cs#L50",
       "Location": "Line 50 Position 44-60"
     }
   ]

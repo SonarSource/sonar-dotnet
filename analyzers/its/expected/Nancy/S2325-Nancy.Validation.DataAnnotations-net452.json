@@ -3,7 +3,7 @@
     {
       "Id": "S2325",
       "Message": "Make \u0027GetDisplayAttribute\u0027 a static method.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.DataAnnotations/DataAnnotationsValidatorAdapter.cs#L109",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Validation.DataAnnotations/DataAnnotationsValidatorAdapter.cs#L109",
       "Location": "Line 109 Position 34-53"
     }
   ]

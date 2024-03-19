@@ -3,13 +3,13 @@
     {
       "Id": "S6563",
       "Message": "Use UTC when recording DateTime instants",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PersistenceBenchmark/Messages.cs#L49",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/PersistenceBenchmark/Messages.cs#L49",
       "Location": "Line 49 Position 25-37"
     },
     {
       "Id": "S6563",
       "Message": "Use UTC when recording DateTime instants",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PersistenceBenchmark/Messages.cs#L54",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/benchmark/PersistenceBenchmark/Messages.cs#L54",
       "Location": "Line 54 Position 25-37"
     }
   ]

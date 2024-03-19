@@ -3,7 +3,7 @@
     {
       "Id": "S3878",
       "Message": "Remove this array creation and simply pass the elements.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.DotLiquid/LiquidNancyFileSystem.cs#L76",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.DotLiquid/LiquidNancyFileSystem.cs#L76",
       "Location": "Line 76 Position 74-96"
     }
   ]

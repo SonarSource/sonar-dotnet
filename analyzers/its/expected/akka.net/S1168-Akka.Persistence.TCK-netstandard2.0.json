@@ -3,7 +3,7 @@
     {
       "Id": "S1168",
       "Message": "Return an empty collection instead of null.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/JournalSerializationSpec.cs#L198",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence.TCK/Serialization/JournalSerializationSpec.cs#L198",
       "Location": "Line 198 Position 24-28"
     }
   ]

@@ -3,7 +3,7 @@
     {
       "Id": "S3415",
       "Message": "Make sure these 2 arguments are in the correct order: expected value, actual value.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/test/Nancy.Testing.Tests/BrowserDefaultsFixture.cs#L167",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/test/Nancy.Testing.Tests/BrowserDefaultsFixture.cs#L167",
       "Location": "Line 167 Position 26-100"
     }
   ]

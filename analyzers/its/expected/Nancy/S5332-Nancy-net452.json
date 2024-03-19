@@ -3,7 +3,7 @@
     {
       "Id": "S5332",
       "Message": "Using http protocol is insecure. Use https instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLinkRelation.cs#L15",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy/HttpLinkRelation.cs#L15",
       "Location": "Line 15 Position 69-112"
     }
   ]

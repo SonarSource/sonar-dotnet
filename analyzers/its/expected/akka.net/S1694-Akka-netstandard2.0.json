@@ -3,247 +3,247 @@
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorBase.cs#L18",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorBase.cs#L18",
       "Location": "Line 18 Position 27-33"
     },
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorProducerPipeline.cs#L50",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorProducerPipeline.cs#L50",
       "Location": "Line 50 Position 27-50"
     },
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorProducerPipeline.cs#L81",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorProducerPipeline.cs#L81",
       "Location": "Line 81 Position 27-50"
     },
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorSelection.cs#L388",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorSelection.cs#L388",
       "Location": "Line 388 Position 27-47"
     },
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorSystem.cs#L25",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ActorSystem.cs#L25",
       "Location": "Line 25 Position 27-44"
     },
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ChildrenContainer/Internal/SuspendReason.cs#L16",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ChildrenContainer/Internal/SuspendReason.cs#L16",
       "Location": "Line 16 Position 27-40"
     },
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L16",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Exceptions.cs#L16",
       "Location": "Line 16 Position 27-40"
     },
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/FSM.cs#L202",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/FSM.cs#L202",
       "Location": "Line 202 Position 31-37"
     },
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/FSM.cs#L668",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/FSM.cs#L668",
       "Location": "Line 668 Position 27-30"
     },
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ReceiveActor.cs#L20",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/ReceiveActor.cs#L20",
       "Location": "Line 20 Position 27-39"
     },
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Setup/ActorSystemSetup.cs#L22",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Setup/ActorSystemSetup.cs#L22",
       "Location": "Line 22 Position 27-32"
     },
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Stash/Internal/AbstractStash.cs#L22",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/Stash/Internal/AbstractStash.cs#L22",
       "Location": "Line 22 Position 27-40"
     },
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/TypedActor.cs#L30",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Actor/TypedActor.cs#L30",
       "Location": "Line 30 Position 27-37"
     },
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/CDataConfigurationElement.cs#L34",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Configuration/Hocon/CDataConfigurationElement.cs#L34",
       "Location": "Line 34 Position 27-52"
     },
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to an interface.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/ExecutorService.cs#L53",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Dispatch/ExecutorService.cs#L53",
       "Location": "Line 53 Position 27-49"
     },
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to an interface.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailbox.cs#L554",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Dispatch/Mailbox.cs#L554",
       "Location": "Line 554 Position 27-38"
     },
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/SysMsg/ISystemMessage.cs#L282",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Dispatch/SysMsg/ISystemMessage.cs#L282",
       "Location": "Line 282 Position 27-40"
     },
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/DeadLetter.cs#L29",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Event/DeadLetter.cs#L29",
       "Location": "Line 29 Position 27-41"
     },
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Dns.cs#L22",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/Dns.cs#L22",
       "Location": "Line 22 Position 27-34"
     },
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Dns.cs#L62",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/Dns.cs#L62",
       "Location": "Line 62 Position 31-38"
     },
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Inet.cs#L20",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/Inet.cs#L20",
       "Location": "Line 20 Position 31-43"
     },
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Inet.cs#L229",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/Inet.cs#L229",
       "Location": "Line 229 Position 31-43"
     },
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Inet.cs#L53",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/Inet.cs#L53",
       "Location": "Line 53 Position 31-51"
     },
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Inet.cs#L58",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/Inet.cs#L58",
       "Location": "Line 58 Position 31-45"
     },
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Inet.cs#L71",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/Inet.cs#L71",
       "Location": "Line 71 Position 31-53"
     },
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to an interface.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/IO.cs#L15",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/IO.cs#L15",
       "Location": "Line 15 Position 27-38"
     },
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L392",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/Tcp.cs#L392",
       "Location": "Line 392 Position 31-43"
     },
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L56",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/Tcp.cs#L56",
       "Location": "Line 56 Position 33-48"
     },
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L95",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/Tcp.cs#L95",
       "Location": "Line 95 Position 31-38"
     },
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Udp.cs#L107",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/Udp.cs#L107",
       "Location": "Line 107 Position 31-38"
     },
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Udp.cs#L110",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/Udp.cs#L110",
       "Location": "Line 110 Position 31-38"
     },
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Udp.cs#L348",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/Udp.cs#L348",
       "Location": "Line 348 Position 31-36"
     },
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Udp.cs#L37",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/Udp.cs#L37",
       "Location": "Line 37 Position 33-48"
     },
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnected.cs#L100",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/UdpConnected.cs#L100",
       "Location": "Line 100 Position 31-38"
     },
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnected.cs#L295",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/UdpConnected.cs#L295",
       "Location": "Line 295 Position 31-36"
     },
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnected.cs#L37",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/UdpConnected.cs#L37",
       "Location": "Line 37 Position 33-48"
     },
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnected.cs#L95",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/IO/UdpConnected.cs#L95",
       "Location": "Line 95 Position 31-38"
     },
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to an interface.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L77",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L77",
       "Location": "Line 77 Position 27-41"
     },
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Listeners.cs#L37",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Routing/Listeners.cs#L37",
       "Location": "Line 37 Position 27-42"
     },
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to an interface.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Router.cs#L263",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Routing/Router.cs#L263",
       "Location": "Line 263 Position 27-39"
     },
     {
       "Id": "S1694",
       "Message": "Convert this \u0027abstract\u0027 class to a concrete type with a protected constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RouterMsg.cs#L31",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Routing/RouterMsg.cs#L31",
       "Location": "Line 31 Position 27-50"
     }
   ]

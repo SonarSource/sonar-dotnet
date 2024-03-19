@@ -3,7 +3,7 @@
     {
       "Id": "S5122",
       "Message": "Make sure this permissive CORS policy is safe here.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/Net5/S5122.cs#L7",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/Net5/S5122.cs#L7",
       "Location": "Line 7 Position 37-46"
     }
   ]

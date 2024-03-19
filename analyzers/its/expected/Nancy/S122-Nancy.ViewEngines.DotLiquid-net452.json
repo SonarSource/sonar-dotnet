@@ -3,7 +3,7 @@
     {
       "Id": "S122",
       "Message": "Reformat the code to have only one statement per line.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.DotLiquid/LiquidNancyFileSystem.cs#L63",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.DotLiquid/LiquidNancyFileSystem.cs#L63",
       "Location": "Line 63 Position 25-57"
     }
   ]

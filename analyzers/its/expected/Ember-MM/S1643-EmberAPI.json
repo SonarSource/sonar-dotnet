@@ -3,13 +3,13 @@
     {
       "Id": "S1643",
       "Message": "Use a StringBuilder instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L178",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPIDVD.vb#L178",
       "Location": "Line 178 Position 17-64"
     },
     {
       "Id": "S1643",
       "Message": "Use a StringBuilder instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L1084",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/EmberAPI/clsAPINFO.vb#L1084",
       "Location": "Line 1084 Position 21-52"
     }
   ]

@@ -3,7 +3,7 @@
     {
       "Id": "S2325",
       "Message": "Make \u0027GetTimestampProvider\u0027 a static method.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/SqlJournal.cs#L524",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/SqlJournal.cs#L524",
       "Location": "Line 524 Position 38-58"
     }
   ]

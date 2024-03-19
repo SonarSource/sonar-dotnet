@@ -3,7 +3,7 @@
     {
       "Id": "S3963",
       "Message": "Initialize all \u0027static fields\u0027 inline and remove the \u0027static constructor\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S3604.cs#L16",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S3604.cs#L16",
       "Location": "Line 16 Position 12-17"
     }
   ]

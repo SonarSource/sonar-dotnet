@@ -3,7 +3,7 @@
     {
       "Id": "S3900",
       "Message": "Refactor this method to add validation of parameter \u0027description\u0027 before using it.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Metadata.Modules/MetadataModule.cs#L48",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Metadata.Modules/MetadataModule.cs#L48",
       "Location": "Line 48 Position 43-54"
     }
   ]
