@@ -55,7 +55,7 @@ function Build-Project-MSBuild([string]$ProjectName, [string]$SolutionRelativePa
 
     Prepare-Project($ProjectName)
 
-    $solutionPath = Resolve-Path ".\sources\${ProjectName}\${SolutionRelativePath}"
+    $solutionPath = Resolve-Path ".\Projects\${ProjectName}\${SolutionRelativePath}"
 
     # The PROJECT env variable is used by 'Directory.Build.targets'
     Write-Debug "Setting PROJECT environment variable to '${ProjectName}'"
@@ -77,13 +77,13 @@ function Build-Project-DotnetTool([string]$ProjectName, [string]$SolutionRelativ
         return
     }
 
-    $projectGlobalJsonPath = ".\sources\${ProjectName}\global.json"
+    $projectGlobalJsonPath = ".\Projects\${ProjectName}\global.json"
     $globalJsonContent = $(Get-Content $projectGlobalJsonPath)
     Write-Host "Will build dotnet project: '${ProjectName}' (with ${projectGlobalJsonPath}) with dotnet version '${globalJsonContent}'."
 
     Prepare-Project($ProjectName)
 
-    $solutionPath = Resolve-Path ".\sources\${ProjectName}\${SolutionRelativePath}"
+    $solutionPath = Resolve-Path ".\Projects\${ProjectName}\${SolutionRelativePath}"
 
     # The PROJECT env variable is used by 'Directory.Build.targets'
     Write-Debug "Setting PROJECT environment variable to '${ProjectName}'"

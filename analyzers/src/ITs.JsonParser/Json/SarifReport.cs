@@ -49,7 +49,7 @@ public class SarifIssue
         }
         else
         {
-            // analyzers/its/sources/project/...
+            // analyzers/its/Projects/<Project>/...
             var filePath = Location.Uri.Substring(Location.Uri.IndexOf("analyzers/its"));
             // ...#L1-L2
             var suffix = Location.Region.StartLine == Location.Region.EndLine
