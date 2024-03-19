@@ -75,7 +75,7 @@ public abstract class RouteTemplateShouldNotStartWithSlashBase<TSyntaxKind> : So
             {
                 return;
             }
-            var issueMessage = controllerSymbol.GetAttributes().Any(x => x.AttributeClass.IsAny(KnownType.RouteAttributes))
+            var issueMessage = controllerSymbol.GetAttributes().Any(x => x.AttributeClass.IsAny(KnownType.RouteAttributes) || x.AttributeClass.Is(KnownType.System_Web_Mvc_RoutePrefixAttribute))
                 ? MessageOnlyActions
                 : MessageActionsAndController;
 

@@ -687,7 +687,6 @@ namespace SonarAnalyzer.Helpers
         public static readonly ImmutableArray<KnownType> RouteAttributes =
             ImmutableArray.Create(
                 Microsoft_AspNetCore_Mvc_RouteAttribute,
-                System_Web_Mvc_RouteAttribute,
-                System_Web_Mvc_RoutePrefixAttribute);
+                System_Web_Mvc_RouteAttribute);
     }
 }
