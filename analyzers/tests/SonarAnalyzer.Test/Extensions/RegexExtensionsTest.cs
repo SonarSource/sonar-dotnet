@@ -37,7 +37,6 @@ public class RegexExtensionsTest
     public void SafeIsMatch_Timeout_Fallback(bool timeoutFallback)
     {
         var regex = new Regex(TimeoutPattern, RegexOptions.None, TimeSpan.FromTicks(1));
-
         regex.SafeIsMatch(@"C:\Users\username\AppData\Local\Temp\00af5451-626f-40db-af1d-89d376dc5ef6\SomeFile.csproj", timeoutFallback).Should().Be(timeoutFallback);
     }
 
@@ -49,7 +48,6 @@ public class RegexExtensionsTest
     public void SafeMatch_Timeout(string input, long timeoutTicks, bool matchSucceed)
     {
         var regex = new Regex(TimeoutPattern, RegexOptions.None, TimeSpan.FromTicks(timeoutTicks));
-
         regex.SafeMatch(input).Success.Should().Be(matchSucceed);
     }
 
