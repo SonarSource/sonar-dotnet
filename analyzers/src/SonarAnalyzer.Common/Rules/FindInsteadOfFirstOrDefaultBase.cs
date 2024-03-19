@@ -26,8 +26,10 @@ public abstract class FindInsteadOfFirstOrDefaultBase<TSyntaxKind, TInvocationEx
 {
     private const string DiagnosticId = "S6602";
     private const int NumberOfArgument = 1;
+    private const string GenericMessage = @"""Find"" method should be used instead of the ""FirstOrDefault"" extension method.";
+    private const string ArrayMessage = @"""Array.Find"" static method should be used instead of the ""FirstOrDefault"" extension method.";
 
-    protected override string MessageFormat => $"\"{nameof(Array.Find)}\" method should be used instead of the \"{nameof(Enumerable.FirstOrDefault)}\" extension method.";
+    protected override string MessageFormat => "{0}";
 
     private static readonly ImmutableArray<KnownType> RuleSpecificTypes = ImmutableArray.Create(
         KnownType.System_Collections_Generic_List_T,
@@ -48,7 +50,8 @@ public abstract class FindInsteadOfFirstOrDefaultBase<TSyntaxKind, TInvocationEx
                     && IsCorrectType(left, c.SemanticModel)
                     && !Language.Syntax.IsInExpressionTree(c.SemanticModel, invocation))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, Language.Syntax.NodeIdentifier(invocation)?.GetLocation()));
+                    var message = c.SemanticModel.GetTypeInfo(left).Type.DerivesFrom(KnownType.System_Array) ? ArrayMessage : GenericMessage;
+                    c.ReportIssue(Diagnostic.Create(Rule, Language.Syntax.NodeIdentifier(invocation)?.GetLocation(), message));
                 }
             },
             Language.SyntaxKind.InvocationExpression);

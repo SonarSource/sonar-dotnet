@@ -7,7 +7,7 @@ public class FindInsteadOfFirstOrDefault
     {
         var data = new int[1];
 
-        data.FirstOrDefault(x => true); // Noncompliant
+        data.FirstOrDefault(x => true); // Noncompliant {{"Array.Find" static method should be used instead of the "FirstOrDefault" extension method.}}
         //   ^^^^^^^^^^^^^^
         Array.Find(data, x => true); // Compliant
 
