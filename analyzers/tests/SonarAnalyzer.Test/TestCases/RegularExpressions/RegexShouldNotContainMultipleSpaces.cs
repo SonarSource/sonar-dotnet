@@ -45,6 +45,13 @@ class Compliant
             || Regex.IsMatch(input, "without_spaces")
             || Regex.IsMatch(input, "with\ttab")
             || Regex.IsMatch(input, "")
+            || Regex.IsMatch(input, "\x09 character tabulation")
+            || Regex.IsMatch(input, "\x0A line feed")
+            || Regex.IsMatch(input, "\x0B line tabulation")
+            || Regex.IsMatch(input, "\x0C form feed")
+            || Regex.IsMatch(input, "\x0D carriage feed")
+            || Regex.IsMatch(input, "\x85 next line")
+            || Regex.IsMatch(input, "\xA0 non-break space")
             || Regex.IsMatch(input, "ignore  pattern  white space", RegexOptions.IgnorePatternWhitespace);
     }
 }

@@ -27,14 +27,14 @@ public sealed class RegexContext
 {
     private static readonly RegexOptions ValidationMask = (RegexOptions)int.MaxValue ^ RegexOptions.Compiled;
 
-    private static readonly string[] MatchMethods = new[]
-    {
+    private static readonly string[] MatchMethods =
+    [
         nameof(Regex.IsMatch),
         nameof(Regex.Match),
         nameof(Regex.Matches),
         nameof(Regex.Replace),
         nameof(Regex.Split),
-    };
+    ];
 
     public SyntaxNode PatternNode { get; }
     public string Pattern { get; }

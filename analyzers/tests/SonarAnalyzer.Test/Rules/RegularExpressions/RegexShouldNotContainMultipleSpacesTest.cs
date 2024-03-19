@@ -1,6 +1,6 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2015-2023 SonarSource SA
+ * Copyright (C) 2015-2024 SonarSource SA
  * mailto: contact AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -21,37 +21,26 @@
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.UnitTest.Rules;
+namespace SonarAnalyzer.Test.Rules;
 
 [TestClass]
-public class RegexMustHaveValidSyntaxTest
+public class RegexShouldNotContainMultipleSpacesTest
 {
-    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.RegexMustHaveValidSyntax>()
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.RegexShouldNotContainMultipleSpaces>()
         .WithBasePath("RegularExpressions")
         .AddReferences(MetadataReferenceFacade.RegularExpressions)
         .AddReferences(NuGetMetadataReference.SystemComponentModelAnnotations());
 
-    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.RegexMustHaveValidSyntax>()
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.RegexShouldNotContainMultipleSpaces>()
         .WithBasePath("RegularExpressions")
         .AddReferences(MetadataReferenceFacade.RegularExpressions)
         .AddReferences(NuGetMetadataReference.SystemComponentModelAnnotations());
 
     [TestMethod]
-    public void RegexMustHaveValidSyntax_CS() =>
-        builderCS.AddPaths("RegexMustHaveValidSyntax.cs").Verify();
-
-#if NET
+    public void RegexShouldNotContainMultipleSpaces_CS() =>
+        builderCS.AddPaths("RegexShouldNotContainMultipleSpaces.cs").Verify();
 
     [TestMethod]
-    public void RegexMustHaveValidSyntax_CSharp9() =>
-        builderCS.AddPaths("RegexMustHaveValidSyntax.CSharp9.cs").WithOptions(ParseOptionsHelper.FromCSharp9).Verify();
-
-    [TestMethod]
-    public void RegexMustHaveValidSyntax_CSharp11() =>
-       builderCS.AddPaths("RegexMustHaveValidSyntax.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
-#endif
-
-    [TestMethod]
-    public void RegexMustHaveValidSyntax_VB() =>
-        builderVB.AddPaths("RegexMustHaveValidSyntax.vb").Verify();
+    public void RegexShouldNotContainMultipleSpaces_VB() =>
+        builderVB.AddPaths("RegexShouldNotContainMultipleSpaces.vb").Verify();
 }
