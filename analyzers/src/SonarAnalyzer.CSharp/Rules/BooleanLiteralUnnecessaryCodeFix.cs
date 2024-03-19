@@ -181,8 +181,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static SyntaxNode FindNodeToKeep(BinaryExpressionSyntax binary)
         {
-            #region logical and false, logical or true
-
+            // logical and false, logical or true
             if (binary.IsKind(SyntaxKind.LogicalAndExpression)
                 && (CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.FalseLiteralExpression)
                    || CSharpEquivalenceChecker.AreEquivalent(binary.Right, CSharpSyntaxHelper.FalseLiteralExpression)))
@@ -196,10 +195,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return CSharpSyntaxHelper.TrueLiteralExpression;
             }
 
-            #endregion
-
-            #region ==/!= both sides booleans
-
+            // ==/!= both sides booleans
             if (binary.IsKind(SyntaxKind.EqualsExpression)
                 && TwoSidesAreDifferentBooleans(binary))
             {
@@ -221,10 +217,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return CSharpSyntaxHelper.TrueLiteralExpression;
             }
 
-            #endregion
-
-            #region ==/!= one side boolean
-
+            // ==/!= one side boolean
             if (binary.IsKind(SyntaxKind.EqualsExpression))
             {
                 // edge case [condition == false] -> !condition
@@ -243,8 +236,6 @@ namespace SonarAnalyzer.Rules.CSharp
                    || CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.FalseLiteralExpression)
                 ? binary.Right
                 : binary.Left;
-
-            #endregion
         }
 
         private static bool TwoSidesAreDifferentBooleans(BinaryExpressionSyntax binary) =>
