@@ -49,11 +49,11 @@ public class LoggingTemplatePlaceHoldersShouldBeInOrderTest
 
                 public class Program
                 {
-                    public void Method(ILogger logger, int arg1, int arg2)
+                    public void Method(ILogger logger, int first, int second)
                     {
-                        logger.{{methodName}}("{Arg1} {Arg2}", arg1, arg2);     // Compliant
-                        logger.{{methodName}}("{Arg1} {Arg2}", arg2, arg1);     // Noncompliant
-                                                                                // Secondary @-1
+                        logger.{{methodName}}("{First} {Second}", first, second);   // Compliant
+                        logger.{{methodName}}("{First} {Second}", second, first);   // Noncompliant
+                                                                                    // Secondary @-1
                     }
                 }
                 """).Verify();
@@ -73,11 +73,11 @@ public class LoggingTemplatePlaceHoldersShouldBeInOrderTest
 
                 public class Program
                 {
-                    public void Method(ILogger logger, int arg1, int arg2)
+                    public void Method(ILogger logger, int first, int second)
                     {
-                        logger.{{methodName}}("{Arg1} {Arg2}", arg1, arg2);     // Compliant
-                        logger.{{methodName}}("{Arg1} {Arg2}", arg2, arg1);     // Noncompliant
-                                                                                // Secondary @-1
+                        logger.{{methodName}}("{First} {Second}", first, second);   // Compliant
+                        logger.{{methodName}}("{First} {Second}", second, first);   // Noncompliant
+                                                                                    // Secondary @-1
                     }
                 }
                 """).Verify();
@@ -98,11 +98,19 @@ public class LoggingTemplatePlaceHoldersShouldBeInOrderTest
 
                 public class Program
                 {
-                    public void Method(ILogger iLogger, Logger logger, MyLogger myLogger, int arg1, int arg2)
+                    public void Method(ILogger iLogger, Logger logger, MyLogger myLogger, int first, int second)
                     {
-                        logger.{{methodName}}("{Arg1} {Arg2}", arg1, arg2);     // Compliant
-                        logger.{{methodName}}("{Arg1} {Arg2}", arg2, arg1);     // Noncompliant
-                                                                                // Secondary @-1
+                        iLogger.{{methodName}}("{First} {Second}", first, second);  // Compliant
+                        iLogger.{{methodName}}("{First} {Second}", second, first);  // Noncompliant
+                                                                                    // Secondary @-1
+
+                        logger.{{methodName}}("{First} {Second}", first, second);   // Compliant
+                        logger.{{methodName}}("{First} {Second}", second, first);   // Noncompliant
+                                                                                    // Secondary @-1
+
+                        myLogger.{{methodName}}("{First} {Second}", first, second); // Compliant
+                        myLogger.{{methodName}}("{First} {Second}", second, first); // Noncompliant
+                                                                                    // Secondary @-1
                     }
                 }
 
@@ -114,10 +122,10 @@ public class LoggingTemplatePlaceHoldersShouldBeInOrderTest
         Builder.AddSnippet("""
             public class Program
             {
-                public void Method(ILogger logger, int arg1, int arg2)
+                public void Method(ILogger logger, int first, int second)
                 {
-                    logger.Info("{Arg1} {Arg2}", arg1, arg2);     // Compliant
-                    logger.Info("{Arg1} {Arg2}", arg2, arg1);     // Compliant - the method is not from any of the known logging frameworks
+                    logger.Info("{First} {Second}", first, second);     // Compliant
+                    logger.Info("{First} {Second}", second, first);     // Compliant - the method is not from any of the known logging frameworks
                 }
             }
 
