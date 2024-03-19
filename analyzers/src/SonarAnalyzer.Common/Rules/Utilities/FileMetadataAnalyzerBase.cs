@@ -34,9 +34,9 @@ namespace SonarAnalyzer.Rules
 
         protected FileMetadataAnalyzerBase() : base(DiagnosticId, Title) { }
 
-        protected override bool ShouldGenerateMetrics(UtilityAnalyzerParameters parameters, SyntaxTree tree, Compilation compilation) =>
+        protected override bool ShouldGenerateMetrics(UtilityAnalyzerParameters parameters, SyntaxTree tree) =>
             !GeneratedCodeRecognizer.IsRazorGeneratedFile(tree)
-            && base.ShouldGenerateMetrics(parameters, tree, compilation);
+            && base.ShouldGenerateMetrics(parameters, tree);
 
         protected sealed override FileMetadataInfo CreateMessage(UtilityAnalyzerParameters parameters, SyntaxTree tree, SemanticModel model) =>
             new()
