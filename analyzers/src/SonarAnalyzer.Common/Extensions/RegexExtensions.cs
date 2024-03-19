@@ -19,6 +19,7 @@
  */
 
 using System.Text.RegularExpressions;
+using SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
 namespace SonarAnalyzer.Extensions;
 
@@ -47,7 +48,9 @@ public static class RegexExtensions
     public static bool SafeIsMatch(this Regex regex, string input) =>
         regex.SafeIsMatch(input, false);
 
-    /// <inheritdoc cref="SafeIsMatch(Regex, string)"/>
+    /// <summary>
+    /// Matches the input to the regex. Returns <paramref name="timeoutFallback"/> in case of an <see cref="RegexMatchTimeoutException" />.
+    /// </summary>
     public static bool SafeIsMatch(this Regex regex, string input, bool timeoutFallback)
     {
         try
@@ -79,6 +82,7 @@ public static class RegexExtensions
     {
         try
         {
+            _ = regex.Matches(input).Count; // MatchCollection is lazy. Accessing "Count" executes the regex and caches the result
             return regex.Matches(input);
         }
         catch (RegexMatchTimeoutException)
@@ -93,11 +97,14 @@ public static class SafeRegex
     public static bool IsMatch(string input, string pattern) =>
         IsMatch(input, pattern, RegexOptions.None);
 
-    public static bool IsMatch(string input, string pattern, RegexOptions options)
+    public static bool IsMatch(string input, string pattern, RegexOptions options) =>
+        IsMatch(input, pattern, options, RegexConstants.DefaultTimeout);
+
+    public static bool IsMatch(string input, string pattern, RegexOptions options, TimeSpan matchTimeout)
     {
         try
         {
-            return Regex.IsMatch(input, pattern, options, RegexConstants.DefaultTimeout);
+            return Regex.IsMatch(input, pattern, options, matchTimeout);
         }
         catch (RegexMatchTimeoutException)
         {
