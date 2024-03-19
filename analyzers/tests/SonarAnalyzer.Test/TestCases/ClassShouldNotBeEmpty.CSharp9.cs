@@ -62,7 +62,7 @@ namespace Ignore
 }
 
 // https://github.com/SonarSource/sonar-dotnet/issues/7709
-namespace Reporo_7709
+namespace Repro_7709
 {
     interface IMarker { }
     record ImplementsMarker : IMarker { }
