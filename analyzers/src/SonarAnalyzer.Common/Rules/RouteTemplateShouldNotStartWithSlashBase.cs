@@ -40,7 +40,7 @@ public abstract class RouteTemplateShouldNotStartWithSlashBase<TSyntaxKind> : So
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterCompilationStartAction(compilationStartContext =>
         {
-            if (!ShouldRegisterAction(compilationStartContext.Compilation))
+            if (!compilationStartContext.Compilation.ReferencesControllers())
             {
                 return;
             }
@@ -99,9 +99,6 @@ public abstract class RouteTemplateShouldNotStartWithSlashBase<TSyntaxKind> : So
         }
         return templates;
     }
-
-    private static bool ShouldRegisterAction(Compilation compilation) =>
-        compilation.GetTypeByMetadataName(KnownType.System_Web_Mvc_Controller) is not null;
 
     private readonly record struct ControllerActionInfo(IMethodSymbol Action, Dictionary<string, Location> RouteParameters);
 }
