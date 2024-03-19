@@ -37,6 +37,14 @@ public sealed class LoggersShouldBeNamedForEnclosingType : SonarDiagnosticAnalyz
             KnownAssembly.Log4Net,
         ];
 
+    private static readonly ImmutableArray<KnownType> Loggers = ImmutableArray.Create(
+        KnownType.Microsoft_Extensions_Logging_ILogger,
+        KnownType.Microsoft_Extensions_Logging_ILogger_TCategoryName,
+        KnownType.NLog_Logger,
+        KnownType.NLog_ILogger,
+        KnownType.NLog_ILoggerBase,
+        KnownType.log4net_ILog);
+
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterCompilationStartAction(cc =>
         {
@@ -51,8 +59,7 @@ public sealed class LoggersShouldBeNamedForEnclosingType : SonarDiagnosticAnalyz
         var invocation = (InvocationExpressionSyntax)context.Node;
 
         if (invocation.GetName() is "GetLogger" or "CreateLogger"
-            && invocation.Ancestors().OfType<TypeDeclarationSyntax>().FirstOrDefault() is { } enclosingType // filter out top-level statements
-            && !IsArgumentInObjectCreation(invocation)
+            && EnclosingTypeNode(invocation) is { } enclosingType // filter out top-level statements, choose new() first and then enclosing type
             && ExtractArgument(invocation) is { } argument
             && context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol method
             && IsValidMethod(method)
@@ -62,8 +69,12 @@ public sealed class LoggersShouldBeNamedForEnclosingType : SonarDiagnosticAnalyz
         }
     }
 
-    private static bool IsArgumentInObjectCreation(InvocationExpressionSyntax invocation) =>
-        invocation.Ancestors().OfType<ObjectCreationExpressionSyntax>().Any();
+    private static SyntaxNode EnclosingTypeNode(InvocationExpressionSyntax invocation)
+    {
+        var ancestors = invocation.Ancestors();
+        return (SyntaxNode)ancestors.OfType<ObjectCreationExpressionSyntax>().FirstOrDefault() // prioritize new() over enclosing type
+                    ?? ancestors.OfType<TypeDeclarationSyntax>().FirstOrDefault();
+    }
 
     // Extracts T for generic argument, nameof or typeof expressions
     private static SyntaxNode ExtractArgument(InvocationExpressionSyntax invocation)
@@ -108,10 +119,15 @@ public sealed class LoggersShouldBeNamedForEnclosingType : SonarDiagnosticAnalyz
             && method.TypeParameters.Length == 1;
     }
 
-    private static bool MatchesEnclosingType(SyntaxNode argument, TypeDeclarationSyntax typeSyntax, SemanticModel model) =>
+    private static bool MatchesEnclosingType(SyntaxNode argument, SyntaxNode enclosingNode, SemanticModel model) =>
         model.GetTypeInfo(argument).Type is { } argumentType
-        && model.GetDeclaredSymbol(typeSyntax).GetSymbolType() is { } enclosingType
-        && (enclosingType.Equals(argumentType) || argumentType.TypeKind is TypeKind.TypeParameter); // we do not want to raise on CreateLogger<T> if T is not concrete
+        && EnclosingTypeSymbol(model, enclosingNode) is { } enclosingType
+        && (enclosingType.Equals(argumentType)
+            || argumentType.TypeKind is TypeKind.TypeParameter  // Do not raise on CreateLogger<T> if T is not concrete
+            || enclosingType.DerivesOrImplementsAny(Loggers));  // Do not raise on Decorator pattern
+
+    private static ITypeSymbol EnclosingTypeSymbol(SemanticModel model, SyntaxNode enclosingNode) =>
+        (model.GetDeclaredSymbol(enclosingNode) ?? model.GetSymbolInfo(enclosingNode).Symbol).GetSymbolType();
 
     private static SyntaxNode ExtractGeneric(InvocationExpressionSyntax invocation)
     {
