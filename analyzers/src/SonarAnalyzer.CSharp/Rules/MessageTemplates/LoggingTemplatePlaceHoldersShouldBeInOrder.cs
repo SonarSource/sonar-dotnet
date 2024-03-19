@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Text;
+
 namespace SonarAnalyzer.Rules.MessageTemplates;
 
 public sealed class LoggingTemplatePlaceHoldersShouldBeInOrder : IMessageTemplateCheck
@@ -75,7 +77,7 @@ public sealed class LoggingTemplatePlaceHoldersShouldBeInOrder : IMessageTemplat
 
     private static SyntaxNode OutOfOrderPlaceholderValue(MessageTemplatesParser.Placeholder placeholder, int placeholderIndex, ImmutableArray<SyntaxNode> placeholderValues)
     {
-        if (placeholderIndex < placeholderValues.Length && MatchesName(placeholder.Name, placeholderValues[placeholderIndex]) is not false)
+        if (placeholderIndex < placeholderValues.Length && MatchesName(placeholder.Name, placeholderValues[placeholderIndex], isStrict: false) is not false)
         {
             return null;
         }
@@ -83,7 +85,7 @@ public sealed class LoggingTemplatePlaceHoldersShouldBeInOrder : IMessageTemplat
         {
             for (var i = 0; i < placeholderValues.Length; i++)
             {
-                if (i != placeholderIndex && placeholderIndex < placeholderValues.Length && MatchesName(placeholder.Name, placeholderValues[i]) is true)
+                if (i != placeholderIndex && placeholderIndex < placeholderValues.Length && MatchesName(placeholder.Name, placeholderValues[i], isStrict: true) is true)
                 {
                     return placeholderValues[placeholderIndex];
                 }
@@ -92,12 +94,50 @@ public sealed class LoggingTemplatePlaceHoldersShouldBeInOrder : IMessageTemplat
         return null;
     }
 
-    private static bool? MatchesName(string placeholderName, SyntaxNode placeholderValue) =>
+    private static bool? MatchesName(string placeholderName, SyntaxNode placeholderValue, bool isStrict) =>
         placeholderValue switch
         {
-            MemberAccessExpressionSyntax memberAccess => MatchesName(placeholderName, memberAccess.Name),
-            CastExpressionSyntax cast => MatchesName(placeholderName, cast.Expression),
-            NameSyntax name => new string(placeholderName.Where(char.IsLetterOrDigit).ToArray()).Equals(name.GetName(), StringComparison.OrdinalIgnoreCase),
+            MemberAccessExpressionSyntax memberAccess => MatchesName(placeholderName, memberAccess.Name, isStrict),
+            CastExpressionSyntax cast => MatchesName(placeholderName, cast.Expression, isStrict),
+            NameSyntax name => SimpleStringMatches(placeholderName, name.GetName(), isStrict),
             _ => null
         };
+
+    private static bool SimpleStringMatches(string placeholderName, string argumentName, bool isStrict)
+    {
+        if (isStrict)
+        {
+            return OnlyLetters(placeholderName).Equals(OnlyLetters(argumentName), StringComparison.OrdinalIgnoreCase);
+        }
+        else
+        {
+            var placeholderComponents = SplitByCamelCase(placeholderName);
+            var argumentComponents = SplitByCamelCase(argumentName);
+            return placeholderComponents.Intersect(argumentComponents, StringComparer.OrdinalIgnoreCase).Any();
+        }
+    }
+
+    private static IEnumerable<string> SplitByCamelCase(string text)
+    {
+        var builder = new StringBuilder(text.Length);
+        foreach (var ch in text)
+        {
+            if (char.IsUpper(ch) && builder.Length > 0)
+            {
+                yield return builder.ToString();
+                builder.Clear();
+            }
+            if (char.IsLetter(ch))
+            {
+                builder.Append(ch);
+            }
+        }
+        if (builder.Length > 0)
+        {
+            yield return builder.ToString();
+        }
+    }
+
+    private static string OnlyLetters(string text) =>
+        new(text.Where(char.IsLetter).ToArray());
 }
