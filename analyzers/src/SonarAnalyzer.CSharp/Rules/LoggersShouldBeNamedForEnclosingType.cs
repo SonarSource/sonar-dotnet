@@ -127,8 +127,7 @@ public sealed class LoggersShouldBeNamedForEnclosingType : SonarDiagnosticAnalyz
             || enclosingType.DerivesOrImplementsAny(Loggers));  // Do not raise on Decorator pattern
 
     private static ITypeSymbol EnclosingTypeSymbol(SemanticModel model, SyntaxNode enclosingNode) =>
-        model.GetDeclaredSymbol(enclosingNode).GetSymbolType()          // inside type
-        ?? model.GetSymbolInfo(enclosingNode).Symbol?.ContainingType;   // inside new(...)
+        (model.GetDeclaredSymbol(enclosingNode) ?? model.GetSymbolInfo(enclosingNode).Symbol).GetSymbolType();
 
     private static SyntaxNode ExtractGeneric(InvocationExpressionSyntax invocation)
     {
