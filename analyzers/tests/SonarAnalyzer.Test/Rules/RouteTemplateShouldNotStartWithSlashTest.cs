@@ -50,12 +50,132 @@ public class RouteTemplateShouldNotStartWithSlashTest
             .AddReferences(AspNetCoreReferences)
             .Verify();
 
+    [DataRow("""[HttpGet("/Index1")]""", "", false)]
+    [DataRow("""[Route("/Index2")]""", "", false)]
+    [DataRow("""[HttpGet("\\Index1")]""", "", true)]
+    [DataRow("""[Route("\\Index2")]""", "", true)]
+    [DataRow("""[HttpGet("Index1/SubPath")]""", "", true)]
+    [DataRow("""[Route("Index2/SubPath")]""", "", true)]
+    [DataRow("""[Route("/IndexA")]""", """[Route("/IndexB")]""", false)]
+    [DataRow("""[Route("/IndexC")]""", """[HttpGet("/IndexD")]""", false)]
+    [DataTestMethod]
+    public void RouteTemplateShouldNotStartWithSlash_RouteAttributes(string firstAttribute, string secondAttribute, bool compliant)
+    {
+        var builder = builderCS.AddReferences(AspNetCoreReferences)
+            .AddSnippet($$"""
+                using Microsoft.AspNetCore.Mvc;
+                using Microsoft.AspNetCore.Mvc.Routing;
+
+                [Route("[controller]")]
+                public class BasicsController : Controller {{(compliant ? string.Empty : " // Noncompliant")}}
+                {
+                    {{firstAttribute}}{{(compliant ? string.Empty : " // Secondary")}}
+                    {{secondAttribute}}{{(compliant || string.IsNullOrEmpty(secondAttribute) ? string.Empty : " // Secondary")}}
+                    public ActionResult SomeAction() => View();
+                }
+                """);
+
+        if (compliant)
+        {
+            builder.VerifyNoIssueReported();
+        }
+        else
+        {
+            builder.Verify();
+        }
+    }
+
+    [DataRow("""[HttpGet("/IndexGet")]""")]
+    [DataRow("""[HttpPost("/IndexPost")]""")]
+    [DataRow("""[HttpPut("/IndexPut")]""")]
+    [DataRow("""[HttpDelete("/IndexDelete")]""")]
+    [DataRow("""[HttpPatch("/IndexPatch")]""")]
+    [DataRow("""[HttpHead("/IndexHead")]""")]
+    [DataRow("""[HttpOptions("/IndexOptions")]""")]
+    public void RouteTemplateShouldNotStartWithSlash_HttpAttributes(string attribute)
+    {
+        var builder = builderCS.AddReferences(AspNetCoreReferences)
+            .AddSnippet($$"""
+                using Microsoft.AspNetCore.Mvc;
+                using Microsoft.AspNetCore.Mvc.Routing;
+
+                public class BasicsController : Controller  // Noncompliant
+                {
+                    {{attribute}} // Secondary
+                    public ActionResult SomeAction() => View();
+                }
+                """);
+        builder.Verify();
+    }
+
+    [DataRow("""[Route(template: @"/[action]", Name = "a", Order = 42)]""")]
+    [DataRow("""[RouteAttribute(@"/[action]")]""")]
+    [DataRow("""[Microsoft.AspNetCore.Mvc.RouteAttribute(@"/[action]")]""")]
+    [DataRow("""[method:Route(@"/[action]")]""")]
+    [DataTestMethod]
+    public void RouteTemplateShouldNotStartWithSlash_AttributeSyntaxVariations(string attribute)
+    {
+        var builder = builderCS.AddReferences(AspNetCoreReferences)
+            .AddSnippet($$"""
+                using Microsoft.AspNetCore.Mvc;
+                using Microsoft.AspNetCore.Mvc.Routing;
+
+                public class BasicsController : Controller  // Noncompliant
+                {
+                    {{attribute}} // Secondary
+                    public ActionResult SomeAction() => View();
+                }
+                """);
+        builder.Verify();
+    }
+
+    [DataRow("""(@"/[action]")""", false)]
+    [DataRow("""("/[action]")""", false)]
+    [DataRow("""("\u002f[action]")""", false)]
+    [DataRow("""($"/{ConstA}/[action]")""", false)]
+    [DataRow(""""("""/[action]""")"""", false)]
+    [DataRow(""""""(""""/[action]"""")"""""", false)]
+    [DataRow(""""($$"""/{{ConstA}}/[action]""")"""", false)]
+    [DataRow("""(@"/[action]", Name = "a", Order = 42)""", false)]
+    [DataRow("""($"{ConstA}/[action]")""", true)]
+    [DataRow("""($"{ConstSlash}[action]")""", false)]
+    [DataTestMethod]
+    public void RouteTemplateShouldNotStartWithSlash_WithAllTypesOfStrings(string attributeParameter, bool compliant)
+    {
+        var builder = builderCS
+            .AddReferences(AspNetCoreReferences)
+            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .AddSnippet($$"""
+                using Microsoft.AspNetCore.Mvc;
+                using Microsoft.AspNetCore.Mvc.Routing;
+
+                public class BasicsController : Controller {{(compliant ? string.Empty : " // Noncompliant")}}
+                {
+                    private const string ConstA = "A";
+                    private const string ConstSlash = "/";
+
+                    [Route{{attributeParameter}}] {{(compliant ? string.Empty : " // Secondary")}}
+                    public ActionResult SomeAction() => View();
+                }
+                """);
+
+        if (compliant)
+        {
+            builder.VerifyNoIssueReported();
+        }
+        else
+        {
+            builder.Verify();
+        }
+    }
+
     [TestMethod]
     public void RouteTemplateShouldNotStartWithSlash_VB() =>
         builderVB
             .AddPaths("RouteTemplateShouldNotStartWithSlash.AspNetCore.vb")
             .AddReferences(AspNetCoreReferences)
             .Verify();
+
 #endif
 
 #if NETFRAMEWORK
