@@ -52,7 +52,7 @@ public class RegexExtensionsTest
         regex.SafeMatch(input).Success.Should().Be(matchSucceed);
     }
 
-    [TestMethod]
+    [DataTestMethod]
     [DataRow(@"C:\Users\username\AppData\Local\Temp\00af5451-626f-40db-af1d-89d376dc5ef6\SomeFile.csproj", 1, 0)]
     [DataRow(@"C:\Users\username\AppData\Local\Temp\00af5451-626f-40db-af1d-89d376dc5ef6\SomeFile.csproj", 1_000_000, 1)]
     [DataRow(@"äöü", 1, 0)]
@@ -69,7 +69,7 @@ public class RegexExtensionsTest
         }
     }
 
-    [TestMethod]
+    [DataTestMethod]
     [DataRow(@"C:\Users\username\AppData\Local\Temp\00af5451-626f-40db-af1d-89d376dc5ef6\SomeFile.csproj", 1, false)]
     [DataRow(@"C:\Users\username\AppData\Local\Temp\00af5451-626f-40db-af1d-89d376dc5ef6\SomeFile.csproj", 1_000_000, true)]
     [DataRow(@"äöü", 1, false)]
