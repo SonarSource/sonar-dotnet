@@ -9,6 +9,8 @@ public class Program
     private string _second = "";
     private string First { get; set; } = "";
     private string Second { get; set; } = "";
+    private Person _person;
+    private Person Person { get; set; }
 
     public void Basics(ILogger logger, int first, int second, int third)
     {
@@ -94,6 +96,14 @@ public class Program
         logger.LogInformation("Person: {Age} {FirstName}", person.FirstName, person.Age);       // Noncompliant
                                                                                                 // Secondary @-1
 
+        logger.LogInformation("Person: {FirstName} {Age}", _person.FirstName, _person.Age);     // Compliant
+        logger.LogInformation("Person: {Age} {FirstName}", _person.FirstName, _person.Age);     // Noncompliant
+                                                                                                // Secondary @-1
+
+        logger.LogInformation("Person: {FirstName} {Age}", Person.FirstName, Person.Age);       // Compliant
+        logger.LogInformation("Person: {Age} {FirstName}", Person.FirstName, Person.Age);       // Noncompliant
+                                                                                                // Secondary @-1
+
         logger.LogInformation("Father: {Father}, Mother: {Mother}", person.Father.LastName, person.Mother.LastName);    // Compliant
         logger.LogInformation("Father: {Father}, Mother: {Mother}", person.Mother.LastName, person.Father.LastName);    // FN
 
@@ -103,7 +113,15 @@ public class Program
         logger.LogInformation("People: {Count} {People}", people.Count, people.Select(x => x.FirstName + " " + x.LastName));
 
         var someFirstName = person.FirstName;
-        logger.LogInformation("{PersonFirstName} {PersonAge}", someFirstName, person.Age);  // Compliant
+        logger.LogInformation("{PersonFirstName} {PersonAge}", someFirstName, person.Age);      // Compliant
+
+        var first = person.FirstName;
+        var last = person.LastName;
+        var name = person.LastName;
+        logger.LogInformation("Person: {FirstName} {LastName}", first, last);       // Compliant
+        logger.LogInformation("Person: {FirstName} {LastName}", last, first);       // FN
+        logger.LogInformation("Person: {FirstName} {LastName}", last, name);        // FN
+        logger.LogInformation("Person: {FirstName} {LastName}", name, name);        // FN
 
         var allPeople = people;
         logger.LogInformation("People: {Count} {People}", people.Count, allPeople);
