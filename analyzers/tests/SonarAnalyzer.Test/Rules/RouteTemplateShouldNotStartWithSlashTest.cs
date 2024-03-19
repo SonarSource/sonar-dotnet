@@ -124,13 +124,13 @@ public class RouteTemplateShouldNotStartWithSlashTest
     [DataRow("""(@"/[action]")""", false)]
     [DataRow("""("/[action]")""", false)]
     [DataRow("""("\u002f[action]")""", false)]
-    [DataRow("""($"/{AConst}/[action]")""", false)]
+    [DataRow("""($"/{ConstA}/[action]")""", false)]
     [DataRow(""""("""/[action]""")"""", false)]
     [DataRow(""""""(""""/[action]"""")"""""", false)]
-    [DataRow(""""($$"""/{{AConst}}/[action]""")"""", false)]
+    [DataRow(""""($$"""/{{ConstA}}/[action]""")"""", false)]
     [DataRow("""(@"/[action]", Name = "a", Order = 42)""", false)]
-    [DataRow("""($"{AConst}/[action]")""", true)]
-    [DataRow("""($"{ASlash}[action]")""", false)]
+    [DataRow("""($"{ConstA}/[action]")""", true)]
+    [DataRow("""($"{ConstSlash}[action]")""", false)]
     [DataTestMethod]
     public void RouteTemplateShouldNotStartWithSlash_WithAllTypesOfStrings(string attributeParameter, bool compliant)
     {
@@ -143,8 +143,8 @@ public class RouteTemplateShouldNotStartWithSlashTest
                 [Route("[controller]")]
                 public class BasicsController : Controller {{(compliant ? string.Empty : " // Noncompliant")}}
                 {
-                    private const string AConst = "A";
-                    private const string ASlash = "/";
+                    private const string ConstA = "A";
+                    private const string ConstSlash = "/";
 
                     [Route{{attributeParameter}}] {{(compliant ? string.Empty : " // Secondary")}}
                     public ActionResult SomeAction() => View();

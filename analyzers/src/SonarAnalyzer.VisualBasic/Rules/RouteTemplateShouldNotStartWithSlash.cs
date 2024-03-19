@@ -24,10 +24,4 @@ namespace SonarAnalyzer.Rules.VisualBasic;
 public sealed class RouteTemplateShouldNotStartWithSlash : RouteTemplateShouldNotStartWithSlashBase<SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
-    protected override SyntaxKind MethodSyntaxKind => SyntaxKind.FunctionBlock;
-
-    protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
-
-    protected override Location ControllerLocation(INamedTypeSymbol symbol) =>
-        ((ClassStatementSyntax)symbol.DeclaringSyntaxReferences.FirstOrDefault(x => !IsGeneratedCode(x))?.GetSyntax())?.Identifier.GetLocation();
 }

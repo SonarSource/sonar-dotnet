@@ -29,11 +29,6 @@ public abstract class RouteTemplateShouldNotStartWithSlashBase<TSyntaxKind> : So
     private const string MessageOnlyActions = "Change the paths of the actions of this controller to be relative and adapt the controller route accordingly.";
     private const string MessageActionsAndController = "Change the paths of the actions of this controller to be relative and add a controller route with the common prefix.";
 
-    protected abstract TSyntaxKind MethodSyntaxKind { get; }
-    protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
-
-    protected abstract Location ControllerLocation(INamedTypeSymbol symbol);
-
     protected override string MessageFormat => "{0}";
     protected RouteTemplateShouldNotStartWithSlashBase() : base(DiagnosticId) { }
 
@@ -57,48 +52,51 @@ public abstract class RouteTemplateShouldNotStartWithSlashBase<TSyntaxKind> : So
                         {
                             controllerActionInfo.Push(new ControllerActionInfo(methodSymbol, RouteAttributeTemplateArguments(methodSymbol.GetAttributes())));
                         }
-                    }, MethodSyntaxKind);
+                    }, Language.SyntaxKind.MethodDeclarations);
 
-                    ReportIssues(symbolStartContext, symbol, controllerActionInfo);
+                    symbolStartContext.RegisterSymbolEndAction(symbolEndContext =>
+                        ReportIssues(symbolEndContext, symbol, controllerActionInfo));
                 }
             }, SymbolKind.NamedType);
         });
 
-    protected bool IsGeneratedCode(SyntaxReference syntaxReference) =>
-        syntaxReference.GetSyntax().SyntaxTree.IsGenerated(GeneratedCodeRecognizer, null);
-
-    private void ReportIssues(SonarSymbolStartAnalysisContext context, INamedTypeSymbol controllerSymbol, ConcurrentStack<ControllerActionInfo> actions) =>
-        context.RegisterSymbolEndAction(context =>
-        {
-            if (!actions.Any()
-                || actions.Any(x => !x.RouteParameters.Any() || x.RouteParameters.Keys.Any(x => !x.StartsWith("/"))))
-            {
-                return;
-            }
-            var issueMessage = controllerSymbol.GetAttributes().Any(x => x.AttributeClass.IsAny(KnownType.RouteAttributes) || x.AttributeClass.Is(KnownType.System_Web_Mvc_RoutePrefixAttribute))
-                ? MessageOnlyActions
-                : MessageActionsAndController;
-
-            var attributeLocations = actions.SelectMany(x => x.RouteParameters).Select(x => x.Value);
-            if (ControllerLocation(controllerSymbol) is { } controllerLocation)
-            {
-                context.ReportIssue(Language.GeneratedCodeRecognizer, Diagnostic.Create(Rule, controllerLocation, attributeLocations, issueMessage));
-            }
-        });
-
-    private static Dictionary<string, Location> RouteAttributeTemplateArguments(ImmutableArray<AttributeData> attributes)
+    private void ReportIssues(SonarSymbolReportingContext context, INamedTypeSymbol controllerSymbol, ConcurrentStack<ControllerActionInfo> actions)
     {
-        var templates = new Dictionary<string, Location>();
+        if (!actions.Any() || actions.Any(x => !x.RouteParameters.Any() || x.RouteParameters.Values.Any(x => !x.StartsWith("/"))))
+        {
+            return;
+        }
+
+        var issueMessage = controllerSymbol.GetAttributes().Any(x => x.AttributeClass.IsAny(KnownType.RouteAttributes) || x.AttributeClass.Is(KnownType.System_Web_Mvc_RoutePrefixAttribute))
+            ? MessageOnlyActions
+            : MessageActionsAndController;
+        var attributeLocations = actions.SelectMany(x => x.RouteParameters).Select(x => x.Key);
+
+        if (ControllerDeclarationSyntax(controllerSymbol) is { } controllerSyntax
+            && Language.Syntax.NodeIdentifier(controllerSyntax) is { } identifier)
+        {
+            context.ReportIssue(Language.GeneratedCodeRecognizer, Diagnostic.Create(Rule, identifier.GetLocation(), attributeLocations, issueMessage));
+        }
+
+        SyntaxNode ControllerDeclarationSyntax(INamedTypeSymbol symbol) =>
+            symbol.DeclaringSyntaxReferences
+            .FirstOrDefault(x => !x.GetSyntax().SyntaxTree.IsGenerated(Language.GeneratedCodeRecognizer, null))
+            ?.GetSyntax();
+    }
+
+    private static Dictionary<Location, string> RouteAttributeTemplateArguments(ImmutableArray<AttributeData> attributes)
+    {
+        var templates = new Dictionary<Location, string>();
         var routeAttributes = attributes.Where(x => x.AttributeClass.IsAny(KnownType.RouteAttributes));
         foreach (var attribute in routeAttributes)
         {
             if (attribute.TryGetAttributeValue<string>("template", out var templateParameter))
             {
-                templates.Add(templateParameter, attribute.ApplicationSyntaxReference.GetSyntax().GetLocation());
+                templates.Add(attribute.ApplicationSyntaxReference.GetSyntax().GetLocation(), templateParameter);
             }
         }
         return templates;
     }
 
-    private readonly record struct ControllerActionInfo(IMethodSymbol Action, Dictionary<string, Location> RouteParameters);
+    private readonly record struct ControllerActionInfo(IMethodSymbol Action, Dictionary<Location, string> RouteParameters);
 }

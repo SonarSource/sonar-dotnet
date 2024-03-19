@@ -31,6 +31,8 @@ public class NoncompliantWithRoutePrefixController : Controller // Noncompliant 
 {
     [Route("/Index1")]                  // Secondary
 //   ^^^^^^^^^^^^^^^^
+    [Route("/Index1")]                  // Secondary
+//   ^^^^^^^^^^^^^^^^
     public ActionResult Index1() => View();
 }
 
