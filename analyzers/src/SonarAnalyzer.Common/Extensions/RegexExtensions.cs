@@ -62,18 +62,6 @@ public static class RegexExtensions
         }
     }
 
-    public static bool SafeIsMatch(string input, string pattern, TimeSpan timeout, RegexOptions options = RegexOptions.None)
-    {
-        try
-        {
-            return Regex.IsMatch(input, pattern, options, timeout);
-        }
-        catch (RegexMatchTimeoutException)
-        {
-            return false;
-        }
-    }
-
     /// <summary>
     /// Matches the input to the regex. Returns an empty <see cref="MatchCollection" /> in case of an <see cref="RegexMatchTimeoutException" />.
     /// </summary>

@@ -31,19 +31,6 @@ public class RegexExtensionsTest
     private const string TimeoutPattern =
         @"^((?<DRIVE>[a-zA-Z]):\\)*((?<DIR>[a-zA-Z0-9_]+(([a-zA-Z0-9_\s_\-\.]*[a-zA-Z0-9_]+)|([a-zA-Z0-9_]+)))\\)*(?<FILE>([a-zA-Z0-9_]+(([a-zA-Z0-9_\s_\-\.]*[a-zA-Z0-9_]+)|([a-zA-Z0-9_]+))\.(?<EXTENSION>[a-zA-Z0-9]{1,6})$))";
 
-    [DataTestMethod]
-    [DataRow(@"C:\Users\username\AppData\Local\Temp\00af5451-626f-40db-af1d-89d376dc5ef6\SomeFile.csproj", 1, false)]
-    [DataRow(@"C:\Users\username\AppData\Local\Temp\00af5451-626f-40db-af1d-89d376dc5ef6\SomeFile.csproj", 1_000_000, true)]
-    [DataRow(@"äöü", 1, false)]
-    [DataRow(@"äöü", 1_000_000, false)]
-    public void SafeIsMatch_Timeout(string input, long timeoutTicks, bool matchSucceed)
-    {
-        var regex = new Regex(TimeoutPattern, RegexOptions.None, TimeSpan.FromTicks(timeoutTicks));
-
-        regex.SafeIsMatch(input).Should().Be(matchSucceed);
-        RegexExtensions.SafeIsMatch(input, TimeoutPattern, TimeSpan.FromTicks(timeoutTicks)).Should().Be(matchSucceed);
-    }
-
     [TestMethod]
     public void SafeIsMatch_Timeout_Fallback()
     {
