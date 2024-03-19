@@ -56,6 +56,6 @@ namespace SonarAnalyzer.Helpers
 
         public static bool IsTextMatchingVbcErrorPattern(string text) =>
             text != null &&
-            VbNetErrorPattern.IsMatch(text);
+            VbNetErrorPattern.SafeIsMatch(text);
     }
 }

@@ -170,7 +170,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private void CheckCurveNameKeyLength(SonarSyntaxNodeReportingContext c, SyntaxNode syntaxElement, string curveName)
         {
-            var match = namedEllipticCurve.Match(curveName);
+            var match = namedEllipticCurve.SafeMatch(curveName);
             if (match.Success && int.TryParse(match.Groups["KeyLength"].Value, out var keyLength) && keyLength < MinimalEllipticCurveKeyLength)
             {
                 c.ReportIssue(Diagnostic.Create(Rule, syntaxElement.GetLocation(), MinimalEllipticCurveKeyLength, "EC", string.Empty));

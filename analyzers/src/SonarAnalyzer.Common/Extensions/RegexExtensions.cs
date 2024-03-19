@@ -24,6 +24,8 @@ namespace SonarAnalyzer.Extensions;
 
 public static class RegexExtensions
 {
+    private static readonly MatchCollection EmptyMatchCollection = Regex.Matches(string.Empty, "a");
+
     /// <summary>
     /// Matches the input to the regex. Returns <see cref="Match.Empty" /> in case of an <see cref="RegexMatchTimeoutException" />.
     /// </summary>
@@ -42,7 +44,11 @@ public static class RegexExtensions
     /// <summary>
     /// Matches the input to the regex. Returns <see langword="false" /> in case of an <see cref="RegexMatchTimeoutException" />.
     /// </summary>
-    public static bool SafeIsMatch(this Regex regex, string input)
+    public static bool SafeIsMatch(this Regex regex, string input) =>
+        regex.SafeIsMatch(input, false);
+
+    /// <inheritdoc cref="SafeIsMatch(Regex, string)"/>
+    public static bool SafeIsMatch(this Regex regex, string input, bool timeoutFallback)
     {
         try
         {
@@ -50,7 +56,7 @@ public static class RegexExtensions
         }
         catch (RegexMatchTimeoutException)
         {
-            return false;
+            return timeoutFallback;
         }
     }
 
@@ -59,6 +65,39 @@ public static class RegexExtensions
         try
         {
             return Regex.IsMatch(input, pattern, options, timeout);
+        }
+        catch (RegexMatchTimeoutException)
+        {
+            return false;
+        }
+    }
+
+    /// <summary>
+    /// Matches the input to the regex. Returns <see cref="Match.Empty" /> in case of an <see cref="RegexMatchTimeoutException" />.
+    /// </summary>
+    public static MatchCollection SafeMatches(this Regex regex, string input)
+    {
+        try
+        {
+            return regex.Matches(input);
+        }
+        catch (RegexMatchTimeoutException)
+        {
+            return EmptyMatchCollection;
+        }
+    }
+}
+
+public static class SafeRegex
+{
+    public static bool IsMatch(string input, string pattern) =>
+        IsMatch(input, pattern, RegexOptions.None);
+
+    public static bool IsMatch(string input, string pattern, RegexOptions options)
+    {
+        try
+        {
+            return Regex.IsMatch(input, pattern, options, RegexConstants.DefaultTimeout);
         }
         catch (RegexMatchTimeoutException)
         {

@@ -54,6 +54,6 @@ namespace SonarAnalyzer.Rules
         }
 
         private bool IsInvalid(string path) =>
-            !string.IsNullOrEmpty(path) && !validPath.IsMatch(path);
+            !string.IsNullOrEmpty(path) && !validPath.SafeIsMatch(path);
     }
 }

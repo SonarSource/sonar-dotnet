@@ -102,7 +102,7 @@ namespace SonarAnalyzer.Rules
                 unixEndingHeaderFormat += "\n";
             }
             return IsRegularExpression
-                ? Regex.IsMatch(unixEndingHeader, unixEndingHeaderFormat, RegexOptions.Singleline, RegexConstants.DefaultTimeout)
+                ? SafeRegex.IsMatch(unixEndingHeader, unixEndingHeaderFormat, RegexOptions.Singleline)
                 : unixEndingHeader.StartsWith(unixEndingHeaderFormat, StringComparison.Ordinal);
         }
 

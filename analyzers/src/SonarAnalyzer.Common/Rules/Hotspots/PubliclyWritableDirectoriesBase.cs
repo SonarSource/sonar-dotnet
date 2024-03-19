@@ -97,11 +97,11 @@ namespace SonarAnalyzer.Rules
         }
 
         private static bool IsSensitiveDirectoryUsage(string directory) =>
-            WindowsDirectories.IsMatch(directory)
-                || MacDirectories.IsMatch(directory)
-                || LinuxDirectories.IsMatch(directory)
-                || EnvironmentVariables.IsMatch(directory)
-                || UserProfile.IsMatch(directory);
+            WindowsDirectories.SafeIsMatch(directory)
+                || MacDirectories.SafeIsMatch(directory)
+                || LinuxDirectories.SafeIsMatch(directory)
+                || EnvironmentVariables.SafeIsMatch(directory)
+                || UserProfile.SafeIsMatch(directory);
 
         private static string[] LinuxDirs() => new[]
             {

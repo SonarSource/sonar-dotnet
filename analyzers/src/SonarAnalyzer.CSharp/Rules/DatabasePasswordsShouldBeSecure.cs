@@ -169,6 +169,6 @@ namespace SonarAnalyzer.Rules.CSharp
             || connectionString.EndsWith("Password=\"\"\"");
 
         private static bool HasSanitizers(string connectionString) =>
-            Sanitizers.IsMatch(connectionString);
+            Sanitizers.SafeIsMatch(connectionString);
     }
 }

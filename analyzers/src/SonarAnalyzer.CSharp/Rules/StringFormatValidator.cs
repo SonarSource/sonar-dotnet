@@ -199,7 +199,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static ValidationFailure TryParseItem(string formatItem, out FormatStringItem formatStringItem)
         {
             formatStringItem = null;
-            var matchResult = StringFormatItemRegex.Match(formatItem);
+            var matchResult = StringFormatItemRegex.SafeMatch(formatItem);
             if (!matchResult.Success)
             {
                 return ValidationFailure.FormatItemMalformed;
