@@ -5,7 +5,7 @@ namespace IntentionalFindings
 {
     public class S6673
     {
-        private void Log(ILogger logger, int arg, int anotherArg) =>
-            logger.LogInformation("Arg: {Arg} {AnotherArg}", anotherArg, arg); // Noncompliant (S6673) {{Template placeholders should be in the right order: placeholder 'Arg' does not match with argument 'anotherArg'.}}
+        private void Log(ILogger logger, int first, int second) =>
+            logger.LogInformation("Arg: {First} {Second}", second, first); // Noncompliant (S6673)
     }
 }
