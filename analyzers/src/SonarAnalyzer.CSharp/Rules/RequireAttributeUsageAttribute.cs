@@ -26,35 +26,29 @@ public sealed class RequireAttributeUsageAttribute : SonarDiagnosticAnalyzer
     internal const string DiagnosticId = "S3993";
     private const string MessageFormat = "Specify AttributeUsage on '{0}'{1}.";
 
-    private static readonly DiagnosticDescriptor rule =
+    private static readonly DiagnosticDescriptor Rule =
         DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-    protected override void Initialize(SonarAnalysisContext context)
-    {
+    protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(c =>
         {
             var classDeclaration = (ClassDeclarationSyntax)c.Node;
-            var classSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration);
 
-            if (classSymbol == null
-                || classSymbol.IsAbstract
-                || !classSymbol.DerivesFrom(KnownType.System_Attribute)
-                || classSymbol.HasAttribute(KnownType.System_AttributeUsageAttribute))
+            if (c.SemanticModel.GetDeclaredSymbol(classDeclaration) is { IsAbstract: false } classSymbol
+                && classSymbol.DerivesFrom(KnownType.System_Attribute)
+                && !classSymbol.HasAttribute(KnownType.System_AttributeUsageAttribute))
             {
-                return;
+                var additionalText = InheritsAttributeUsage(classSymbol)
+                    ? " to improve readability, even though it inherits it from its base type"
+                    : string.Empty;
+
+                c.ReportIssue(Diagnostic.Create(Rule, classDeclaration.Identifier.GetLocation(),
+                    classSymbol.Name, additionalText));
             }
-
-            var additionalText = InheritsAttributeUsage(classSymbol)
-                ? " to improve readability, even though it inherits it from its base type"
-                : string.Empty;
-
-            c.ReportIssue(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation(),
-                classSymbol.Name, additionalText));
         },
         SyntaxKind.ClassDeclaration);
-    }
 
     private static bool InheritsAttributeUsage(INamedTypeSymbol classSymbol) =>
         classSymbol.GetSelfAndBaseTypes()
