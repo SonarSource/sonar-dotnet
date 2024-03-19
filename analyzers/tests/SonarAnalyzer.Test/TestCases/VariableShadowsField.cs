@@ -180,6 +180,15 @@ namespace Tests.Diagnostics
             var privateStaticField = 2;         // Noncompliant
             var privateStaticProperty = 2;      // Noncompliant
         }
+
+        public void BaseInstanceMethod()
+        {
+            var privateInstanceField = 2;       // Noncompliant
+            var privateInstanceProperty = 2;    // Noncompliant
+
+            var privateStaticField = 2;         // Noncompliant
+            var privateStaticProperty = 2;      // Noncompliant
+        }
     }
 
     public class Derived : Base
@@ -193,6 +202,15 @@ namespace Tests.Diagnostics
             var protectedInstanceProperty = 2;  // Compliant (instance property is not accessible from static method)
 
             var protectedStaticField = 2;       // FN - members from the base class are not checked
+            var protectedStaticProperty = 2;    // FN
+        }
+
+        public void DerivedInstanceMethod()
+        {
+            var protectedInstanceField = 2;     // FN
+            var protectedInstanceProperty = 2;  // FN
+
+            var protectedStaticField = 2;       // FN
             var protectedStaticProperty = 2;    // FN
         }
     }
