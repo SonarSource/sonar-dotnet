@@ -19,13 +19,12 @@
  */
 
 using System.Text.RegularExpressions;
-using SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
 namespace SonarAnalyzer.Extensions;
 
 public static class RegexExtensions
 {
-    private static readonly MatchCollection EmptyMatchCollection = Regex.Matches(string.Empty, "a");
+    private static readonly MatchCollection EmptyMatchCollection = Regex.Matches(string.Empty, "a", RegexOptions.None, RegexConstants.DefaultTimeout);
 
     /// <summary>
     /// Matches the input to the regex. Returns <see cref="Match.Empty" /> in case of an <see cref="RegexMatchTimeoutException" />.
@@ -76,7 +75,7 @@ public static class RegexExtensions
     }
 
     /// <summary>
-    /// Matches the input to the regex. Returns <see cref="Match.Empty" /> in case of an <see cref="RegexMatchTimeoutException" />.
+    /// Matches the input to the regex. Returns an empty <see cref="MatchCollection" /> in case of an <see cref="RegexMatchTimeoutException" />.
     /// </summary>
     public static MatchCollection SafeMatches(this Regex regex, string input)
     {
@@ -94,12 +93,17 @@ public static class RegexExtensions
 
 public static class SafeRegex
 {
+    /// <summary>
+    /// Matches the input to the regex. Returns <see langword="false" /> in case of an <see cref="RegexMatchTimeoutException" />.
+    /// </summary>
     public static bool IsMatch(string input, string pattern) =>
         IsMatch(input, pattern, RegexOptions.None);
 
+    /// <inheritdoc cref="IsMatch(string, string)"/>
     public static bool IsMatch(string input, string pattern, RegexOptions options) =>
         IsMatch(input, pattern, options, RegexConstants.DefaultTimeout);
 
+    /// <inheritdoc cref="IsMatch(string, string)"/>
     public static bool IsMatch(string input, string pattern, RegexOptions options, TimeSpan matchTimeout)
     {
         try
