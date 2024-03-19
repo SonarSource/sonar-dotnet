@@ -118,10 +118,17 @@ public class Program
         var first = person.FirstName;
         var last = person.LastName;
         var name = person.LastName;
-        logger.LogInformation("Person: {FirstName} {LastName}", first, last);       // Compliant
-        logger.LogInformation("Person: {FirstName} {LastName}", last, first);       // FN
-        logger.LogInformation("Person: {FirstName} {LastName}", last, name);        // FN
-        logger.LogInformation("Person: {FirstName} {LastName}", name, name);        // FN
+        var PFN = person.FirstName;
+        var PLN = person.LastName;
+        logger.LogInformation("Person: {FirstName} {LastName}", first, last);                   // Compliant
+        logger.LogInformation("Person: {FirstName} {LastName}", last, first);                   // Compliant
+        logger.LogInformation("Person: {FirstName} {LastName}", last, name);                    // Compliant
+        logger.LogInformation("Person: {FirstName} {LastName}", name, name);                    // Compliant
+        logger.LogInformation("Person: {FirstName} {LastName}", name, name);                    // Compliant
+        logger.LogInformation("Person: {FirstName} {LastName}", PFN, PLN);                      // Compliant
+        logger.LogInformation("Person: {FirstName} {LastName}", PLN, PFN);                      // Compliant
+        logger.LogInformation("Person: {PLN} {PFN}", PLN, PFN);                                 // Compliant
+        logger.LogInformation("Person: {PLN} {PFN}", PFN, PLN);                                 // Compliant
 
         var allPeople = people;
         logger.LogInformation("People: {Count} {People}", people.Count, allPeople);
@@ -130,11 +137,11 @@ public class Program
     public void Overloads(ILogger logger, int first, int second)
     {
         logger.LogInformation(new EventId(42), "Arg: {First} {Second}", first, second);
-        logger.LogInformation(new EventId(42), "Arg: {Second} {First}", first, second);     // Noncompliant
-                                                                                            // Secondary @-1
+        logger.LogInformation(new EventId(42), "Arg: {Second} {First}", first, second);         // Noncompliant
+                                                                                                // Secondary @-1
         logger.LogInformation(new Exception(), "Arg: {First} {Second}", first, second);
-        logger.LogInformation(new Exception(), "Arg: {Second} {First}", first, second);     // Noncompliant
-                                                                                            // Secondary @-1
+        logger.LogInformation(new Exception(), "Arg: {Second} {First}", first, second);         // Noncompliant
+                                                                                                // Secondary @-1
     }
 
     public void Casing(ILogger logger, int first, int second)
