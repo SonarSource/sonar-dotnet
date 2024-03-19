@@ -113,19 +113,18 @@ public sealed class LoggingTemplatePlaceHoldersShouldBeInOrder : IMessageTemplat
         {
             var placeholderComponents = SplitByCamelCase(placeholderName);
             var argumentComponents = SplitByCamelCase(argumentName);
-            return Array.Exists(placeholderComponents, x => Array.Exists(argumentComponents, y => x.Equals(y, StringComparison.OrdinalIgnoreCase)));
+            return placeholderComponents.Intersect(argumentComponents, StringComparer.OrdinalIgnoreCase).Any();
         }
     }
 
-    private static string[] SplitByCamelCase(string text)
+    private static IEnumerable<string> SplitByCamelCase(string text)
     {
-        var components = new List<string>();
         var builder = new StringBuilder(text.Length);
         foreach (var ch in text)
         {
             if (char.IsUpper(ch) && builder.Length > 0)
             {
-                components.Add(builder.ToString());
+                yield return builder.ToString();
                 builder.Clear();
             }
             if (char.IsLetter(ch))
@@ -135,9 +134,8 @@ public sealed class LoggingTemplatePlaceHoldersShouldBeInOrder : IMessageTemplat
         }
         if (builder.Length > 0)
         {
-            components.Add(builder.ToString());
+            yield return builder.ToString();
         }
-        return [.. components];
     }
 
     private static string OnlyLetters(string text) =>
