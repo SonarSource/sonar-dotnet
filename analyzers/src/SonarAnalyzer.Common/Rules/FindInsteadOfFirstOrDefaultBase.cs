@@ -26,12 +26,13 @@ public abstract class FindInsteadOfFirstOrDefaultBase<TSyntaxKind, TInvocationEx
 {
     private const string DiagnosticId = "S6602";
     private const int NumberOfArgument = 1;
+    private const string GenericMessage = @"""Find"" method should be used instead of the ""FirstOrDefault"" extension method.";
+    private const string ArrayMessage = @"""Array.Find"" static method should be used instead of the ""FirstOrDefault"" extension method.";
 
-    protected override string MessageFormat => $"\"{nameof(Array.Find)}\" method should be used instead of the \"{nameof(Enumerable.FirstOrDefault)}\" extension method.";
+    protected override string MessageFormat => "{0}";
 
-    private static readonly ImmutableArray<KnownType> RuleSpecificTypes = ImmutableArray.Create(
+    private static readonly ImmutableArray<KnownType> ListTypes = ImmutableArray.Create(
         KnownType.System_Collections_Generic_List_T,
-        KnownType.System_Array,
         KnownType.System_Collections_Immutable_ImmutableList_T);
 
     protected FindInsteadOfFirstOrDefaultBase() : base(DiagnosticId) { }
@@ -45,10 +46,10 @@ public abstract class FindInsteadOfFirstOrDefaultBase<TSyntaxKind, TInvocationEx
                     && Language.Syntax.HasExactlyNArguments(invocation, NumberOfArgument)
                     && Language.Syntax.TryGetOperands(invocation, out var left, out var right)
                     && IsCorrectCall(right, c.SemanticModel)
-                    && IsCorrectType(left, c.SemanticModel)
+                    && IsCorrectType(left, c.SemanticModel, out var isArray)
                     && !Language.Syntax.IsInExpressionTree(c.SemanticModel, invocation))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, Language.Syntax.NodeIdentifier(invocation)?.GetLocation()));
+                    c.ReportIssue(Diagnostic.Create(Rule, Language.Syntax.NodeIdentifier(invocation)?.GetLocation(), isArray ? ArrayMessage : GenericMessage));
                 }
             },
             Language.SyntaxKind.InvocationExpression);
@@ -59,6 +60,10 @@ public abstract class FindInsteadOfFirstOrDefaultBase<TSyntaxKind, TInvocationEx
         && method.Parameters.Length == NumberOfArgument
         && method.Parameters[0].IsType(KnownType.System_Func_T_TResult);
 
-    private static bool IsCorrectType(SyntaxNode left, SemanticModel model) =>
-        model.GetTypeInfo(left).Type.DerivesFromAny(RuleSpecificTypes);
+    private static bool IsCorrectType(SyntaxNode left, SemanticModel model, out bool isArray)
+    {
+        var type = model.GetTypeInfo(left).Type;
+        isArray = type.DerivesFrom(KnownType.System_Array);
+        return isArray || type.DerivesFromAny(ListTypes);
+    }
 }
