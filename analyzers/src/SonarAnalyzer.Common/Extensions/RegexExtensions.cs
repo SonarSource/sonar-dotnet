@@ -69,8 +69,9 @@ public static class RegexExtensions
     {
         try
         {
-            _ = regex.Matches(input).Count; // MatchCollection is lazy. Accessing "Count" executes the regex and caches the result
-            return regex.Matches(input);
+            var res = regex.Matches(input);
+            _ = res.Count; // MatchCollection is lazy. Accessing "Count" executes the regex and caches the result
+            return res;
         }
         catch (RegexMatchTimeoutException)
         {
