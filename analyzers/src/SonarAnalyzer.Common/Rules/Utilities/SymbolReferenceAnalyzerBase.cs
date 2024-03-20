@@ -54,8 +54,8 @@ namespace SonarAnalyzer.Rules
             return symbolReferenceInfo;
         }
 
-        protected sealed override bool ShouldGenerateMetrics(UtilityAnalyzerParameters parameters, SyntaxTree tree, Compilation compilation) =>
-            base.ShouldGenerateMetrics(parameters, tree, compilation)
+        protected sealed override bool ShouldGenerateMetrics(UtilityAnalyzerParameters parameters, SyntaxTree tree) =>
+            base.ShouldGenerateMetrics(parameters, tree)
             && !HasTooManyTokens(tree);
 
         private Dictionary<ISymbol, List<ReferenceInfo>> GetReferences(SyntaxNode root, SemanticModel model)

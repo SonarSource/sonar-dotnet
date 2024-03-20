@@ -122,11 +122,11 @@ namespace SonarAnalyzer.Rules
                 });
             });
 
-        protected virtual bool ShouldGenerateMetrics(UtilityAnalyzerParameters parameters, SyntaxTree tree, Compilation compilation) =>
+        protected virtual bool ShouldGenerateMetrics(UtilityAnalyzerParameters parameters, SyntaxTree tree) =>
             // The results of Metrics and CopyPasteToken analyzers are not needed for Test projects yet the plugin side expects the protobuf files, so we create empty ones.
             (parameters.AnalyzeTestProjects || !parameters.IsTestProject)
             && FileExtensionWhitelist.Contains(Path.GetExtension(tree.FilePath))
-            && ShouldGenerateMetricsByType(parameters, tree, compilation);
+            && ShouldGenerateMetricsByType(parameters, tree);
 
         protected static string GetFilePath(SyntaxTree tree) =>
             // If the syntax tree is constructed for a razor generated file, we need to provide the original file path.
@@ -136,11 +136,11 @@ namespace SonarAnalyzer.Rules
 
         private bool ShouldGenerateMetrics(UtilityAnalyzerParameters parameters, SonarSemanticModelReportingContext context) =>
             (AnalyzeUnchangedFiles || !context.IsUnchanged(context.Tree))
-            && ShouldGenerateMetrics(parameters, context.Tree, context.Compilation);
+            && ShouldGenerateMetrics(parameters, context.Tree);
 
-        private bool ShouldGenerateMetricsByType(UtilityAnalyzerParameters parameters, SyntaxTree tree, Compilation compilation) =>
+        private bool ShouldGenerateMetricsByType(UtilityAnalyzerParameters parameters, SyntaxTree tree) =>
             parameters.AnalyzeGeneratedCode
                 ? !GeneratedCodeRecognizer.IsCshtml(tree) // We cannot upload metrics for .cshtml files. The file is owned by the html plugin.
-                : !tree.IsGenerated(Language.GeneratedCodeRecognizer, compilation) || GeneratedCodeRecognizer.IsRazor(tree);
+                : !tree.IsGenerated(Language.GeneratedCodeRecognizer) || GeneratedCodeRecognizer.IsRazor(tree);
     }
 }

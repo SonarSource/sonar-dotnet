@@ -64,10 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             }
 
                             var usageCollector = new CSharpSymbolUsageCollector(c.Compilation, removableInternalTypes);
-                            foreach (var syntaxTree in c.Compilation.SyntaxTrees.Where(tree => !tree.IsConsideredGenerated(
-                                CSharpGeneratedCodeRecognizer.Instance,
-                                c.Compilation,
-                                c.IsRazorAnalysisEnabled())))
+                            foreach (var syntaxTree in c.Compilation.SyntaxTrees.Where(tree => !tree.IsConsideredGenerated(CSharpGeneratedCodeRecognizer.Instance, c.IsRazorAnalysisEnabled())))
                             {
                                 usageCollector.SafeVisit(syntaxTree.GetRoot());
                             }
@@ -86,7 +83,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (GatherSymbols(namedType, context.Compilation, privateSymbols, removableInternalTypes, fieldLikeSymbols, context)
                 && privateSymbols.Any()
                 && new CSharpSymbolUsageCollector(context.Compilation, privateSymbols) is var usageCollector
-                && VisitDeclaringReferences(namedType, usageCollector, context.Compilation, context, includeGeneratedFile: true))
+                && VisitDeclaringReferences(namedType, usageCollector, context, includeGeneratedFile: true))
             {
                 foreach (var diagnostic in DiagnosticsForUnusedPrivateMembers(usageCollector, privateSymbols, SyntaxConstants.Private, fieldLikeSymbols))
                 {
@@ -119,7 +116,7 @@ namespace SonarAnalyzer.Rules.CSharp
             CopyRetrievedSymbols(removableSymbolsCollector, privateSymbols, internalSymbols, fieldLikeSymbols);
 
             // Collect symbols of private members that could potentially be removed for the nested classes
-            foreach (var declaration in PrivateNestedMembersFromNonGeneratedCode(namedType, compilation, context))
+            foreach (var declaration in PrivateNestedMembersFromNonGeneratedCode(namedType, context))
             {
                 if (compilation.GetSemanticModel(declaration.SyntaxTree) is { } semanticModel
                     && semanticModel.GetDeclaredSymbol(declaration) is { } declarationSymbol
@@ -132,12 +129,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
             return true;
 
-            static IEnumerable<BaseTypeDeclarationSyntax> PrivateNestedMembersFromNonGeneratedCode(INamedTypeSymbol namedType, Compilation compilation, SonarSymbolReportingContext context) =>
-                namedType.DeclaringSyntaxReferences.Where(r => !r.SyntaxTree.IsConsideredGenerated(
-                    CSharpGeneratedCodeRecognizer.Instance,
-                    compilation,
-                    context.IsRazorAnalysisEnabled()))
-                        .SelectMany(x => x.GetSyntax().ChildNodes().OfType<BaseTypeDeclarationSyntax>());
+            static IEnumerable<BaseTypeDeclarationSyntax> PrivateNestedMembersFromNonGeneratedCode(INamedTypeSymbol namedType, SonarSymbolReportingContext context) =>
+                namedType.DeclaringSyntaxReferences
+                    .Where(r => !r.SyntaxTree.IsConsideredGenerated(CSharpGeneratedCodeRecognizer.Instance, context.IsRazorAnalysisEnabled()))
+                    .SelectMany(x => x.GetSyntax().ChildNodes().OfType<BaseTypeDeclarationSyntax>());
         }
 
         private static IEnumerable<Diagnostic> DiagnosticsForUnusedPrivateMembers(CSharpSymbolUsageCollector usageCollector,
@@ -264,7 +259,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static string GetMemberName(ISymbol symbol) =>
             symbol.IsConstructor() ? symbol.ContainingType.Name : symbol.Name;
 
-        private static bool VisitDeclaringReferences(ISymbol symbol, ISafeSyntaxWalker visitor, Compilation compilation, SonarSymbolReportingContext context, bool includeGeneratedFile)
+        private static bool VisitDeclaringReferences(ISymbol symbol, ISafeSyntaxWalker visitor, SonarSymbolReportingContext context, bool includeGeneratedFile)
         {
             var syntaxReferencesToVisit = includeGeneratedFile
                 ? symbol.DeclaringSyntaxReferences
@@ -273,13 +268,13 @@ namespace SonarAnalyzer.Rules.CSharp
             return syntaxReferencesToVisit.All(x => visitor.SafeVisit(x.GetSyntax()));
 
             bool IsGenerated(SyntaxReference syntaxReference) =>
-                syntaxReference.SyntaxTree.IsConsideredGenerated(CSharpGeneratedCodeRecognizer.Instance, compilation, context.IsRazorAnalysisEnabled());
+                syntaxReference.SyntaxTree.IsConsideredGenerated(CSharpGeneratedCodeRecognizer.Instance, context.IsRazorAnalysisEnabled());
         }
 
         private static CSharpRemovableSymbolWalker RetrieveRemovableSymbols(INamedTypeSymbol namedType, Compilation compilation, SonarSymbolReportingContext context)
         {
             var removableSymbolsCollector = new CSharpRemovableSymbolWalker(compilation.GetSemanticModel, namedType.DeclaredAccessibility);
-            if (!VisitDeclaringReferences(namedType, removableSymbolsCollector, compilation, context, includeGeneratedFile: false))
+            if (!VisitDeclaringReferences(namedType, removableSymbolsCollector, context, includeGeneratedFile: false))
             {
                 return null;
             }

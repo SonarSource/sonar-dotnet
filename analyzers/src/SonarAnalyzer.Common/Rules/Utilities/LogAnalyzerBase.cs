@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules
             };
 
         protected sealed override LogInfo CreateMessage(UtilityAnalyzerParameters parameters, SyntaxTree tree, SemanticModel model) =>
-            tree.IsGenerated(Language.GeneratedCodeRecognizer, model.Compilation)
+            tree.IsGenerated(Language.GeneratedCodeRecognizer)
             ? CreateMessage(tree)
             : null;
 

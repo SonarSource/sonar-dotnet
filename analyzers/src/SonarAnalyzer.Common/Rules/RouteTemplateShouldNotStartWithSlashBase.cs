@@ -84,7 +84,7 @@ public abstract class RouteTemplateShouldNotStartWithSlashBase<TSyntaxKind> : So
 
         SyntaxNode ControllerDeclarationSyntax(INamedTypeSymbol symbol) =>
             symbol.DeclaringSyntaxReferences
-            .FirstOrDefault(x => !x.GetSyntax().SyntaxTree.IsGenerated(Language.GeneratedCodeRecognizer, null))
+            .FirstOrDefault(x => !x.GetSyntax().SyntaxTree.IsGenerated(Language.GeneratedCodeRecognizer))
             ?.GetSyntax();
     }
 
