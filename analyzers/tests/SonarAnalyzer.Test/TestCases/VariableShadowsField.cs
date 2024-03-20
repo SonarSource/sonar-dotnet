@@ -159,4 +159,59 @@ namespace Tests.Diagnostics
             parameter = null;
         }
     }
+
+    public class Base
+    {
+        private int privateInstanceField = 1;
+        private int privateInstanceProperty { get; set; } = 1;
+        private static int privateStaticField = 1;
+        private static int privateStaticProperty = 1;
+
+        protected int protectedInstanceField = 1;
+        protected int protectedInstanceProperty { get; set; } = 1;
+        protected static int protectedStaticField = 1;
+        protected static int protectedStaticProperty = 1;
+
+        public static void BaseStaticMethod()
+        {
+            var privateInstanceField = 2;       // Compliant (instance field is not accessible from static method)
+            var privateInstanceProperty = 2;    // Compliant (instance property is not accessible from static method)
+
+            var privateStaticField = 2;         // Noncompliant
+            var privateStaticProperty = 2;      // Noncompliant
+        }
+
+        public void BaseInstanceMethod()
+        {
+            var privateInstanceField = 2;       // Noncompliant
+            var privateInstanceProperty = 2;    // Noncompliant
+
+            var privateStaticField = 2;         // Noncompliant
+            var privateStaticProperty = 2;      // Noncompliant
+        }
+    }
+
+    public class Derived : Base
+    {
+        public static void DerivedStaticMethod()
+        {
+            var privateStaticField = 2;         // Compliant (private field from the base class is not accessible in the derived class)
+            var privateStaticProperty = 2;      // Compliant (private property from the base class is not accessible in the derived class)
+
+            var protectedInstanceField = 2;     // Compliant (instance field is not accessible from static method)
+            var protectedInstanceProperty = 2;  // Compliant (instance property is not accessible from static method)
+
+            var protectedStaticField = 2;       // FN - members from the base class are not checked
+            var protectedStaticProperty = 2;    // FN
+        }
+
+        public void DerivedInstanceMethod()
+        {
+            var protectedInstanceField = 2;     // FN
+            var protectedInstanceProperty = 2;  // FN
+
+            var protectedStaticField = 2;       // FN
+            var protectedStaticProperty = 2;    // FN
+        }
+    }
 }

@@ -5,18 +5,6 @@
       "Message": "Rename \u0027parameters\u0027 which hides the field with the same name.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLink.cs#L230",
       "Location": "Line 230 Position 17-27"
-    },
-    {
-      "Id": "S1117",
-      "Message": "Rename \u0027prefix\u0027 which hides the field with the same name.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLinkRelation.cs#L152",
-      "Location": "Line 152 Position 21-27"
-    },
-    {
-      "Id": "S1117",
-      "Message": "Rename \u0027value\u0027 which hides the field with the same name.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLinkRelation.cs#L153",
-      "Location": "Line 153 Position 21-26"
     }
   ]
 }

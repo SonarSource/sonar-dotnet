@@ -37,18 +37,13 @@ class MyParentClass(int parentClassParam)
 // Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/8260
 class Repro_8260(int primaryCtorParam)
 {
-    private int instanceField = 1;
-    private int instanceProperty { get; set; } = 1;
-    private static int staticField = 1;
-    private static int staticProperty = 1;
-
     public static void StaticMethod()
     {
-        var instanceField = 2; // Noncompliant FP (instance field is not accessible from static method)
-        var instanceProperty = 2; // Noncompliant FP (instance property is not accessible from static method)
-        var primaryCtorParam = 2; // Noncompliant FP (primary ctor parameter is not accessible from static method)
+        var primaryCtorParam = 42;      // Compliant (primary ctor parameter is not accessible from static method)
+    }
 
-        var staticField = 2; // Noncompliant
-        var staticProperty = 2; // Noncompliant
+    public void NonStaticMethod()
+    {
+        var primaryCtorParam = 42;      // Noncompliant
     }
 }
