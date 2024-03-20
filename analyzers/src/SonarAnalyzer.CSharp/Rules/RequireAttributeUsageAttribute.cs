@@ -18,47 +18,41 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.CSharp;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class RequireAttributeUsageAttribute : SonarDiagnosticAnalyzer
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class RequireAttributeUsageAttribute : SonarDiagnosticAnalyzer
-    {
-        internal const string DiagnosticId = "S3993";
-        private const string MessageFormat = "Specify AttributeUsage on '{0}'{1}.";
+    internal const string DiagnosticId = "S3993";
+    private const string MessageFormat = "Specify AttributeUsage on '{0}'{1}.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
+    private static readonly DiagnosticDescriptor Rule =
+        DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(c =>
         {
-            context.RegisterNodeAction(c =>
+            var classDeclaration = (ClassDeclarationSyntax)c.Node;
+
+            if (c.SemanticModel.GetDeclaredSymbol(classDeclaration) is { IsAbstract: false } classSymbol
+                && classSymbol.DerivesFrom(KnownType.System_Attribute)
+                && !classSymbol.HasAttribute(KnownType.System_AttributeUsageAttribute))
             {
-                var classDeclaration = (ClassDeclarationSyntax)c.Node;
-                var classSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration);
-
-                if (classSymbol == null ||
-                    !classSymbol.DerivesFrom(KnownType.System_Attribute) ||
-                    classSymbol.HasAttribute(KnownType.System_AttributeUsageAttribute))
-                {
-                    return;
-                }
-
                 var additionalText = InheritsAttributeUsage(classSymbol)
                     ? " to improve readability, even though it inherits it from its base type"
                     : string.Empty;
 
-                c.ReportIssue(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation(),
+                c.ReportIssue(Diagnostic.Create(Rule, classDeclaration.Identifier.GetLocation(),
                     classSymbol.Name, additionalText));
-            },
-            SyntaxKind.ClassDeclaration);
-        }
+            }
+        },
+        SyntaxKind.ClassDeclaration);
 
-        private static bool InheritsAttributeUsage(INamedTypeSymbol classSymbol) =>
-            classSymbol.GetSelfAndBaseTypes()
-                // System.Attribute already has AttributeUsage, we don't want to report it
-                .TakeWhile(t => !t.Is(KnownType.System_Attribute))
-                .Any(t => t.HasAttribute(KnownType.System_AttributeUsageAttribute));
-    }
+    private static bool InheritsAttributeUsage(INamedTypeSymbol classSymbol) =>
+        classSymbol.GetSelfAndBaseTypes()
+            // System.Attribute already has AttributeUsage, we don't want to report it
+            .TakeWhile(x => !x.Is(KnownType.System_Attribute))
+            .Any(x => x.HasAttribute(KnownType.System_AttributeUsageAttribute));
 }

@@ -1,24 +1,25 @@
 ﻿using System;
 
-namespace Tests.Diagnostics
+public class MyInvalidAttribute : Attribute
+//           ^^^^^^^^^^^^^^^^^^ {{Specify AttributeUsage on 'MyInvalidAttribute'.}}
 {
-    public class MyInvalidAttribute : Attribute
-//               ^^^^^^^^^^^^^^^^^^ {{Specify AttributeUsage on 'MyInvalidAttribute'.}}
-    {
-    }
+}
 
-    [AttributeUsage(AttributeTargets.Class)]
-    public class MyCompliantAttribute : Attribute
-    {
-    }
+[AttributeUsage(AttributeTargets.Class)]
+public class MyCompliantAttribute : Attribute
+{
+}
 
-    public class MyInvalidInheritedAttribute : MyCompliantAttribute
-//               ^^^^^^^^^^^^^^^^^^^^^^^^^^^ {{Specify AttributeUsage on 'MyInvalidInheritedAttribute' to improve readability, even though it inherits it from its base type.}}
-    {
-    }
+public class MyInvalidInheritedAttribute : MyCompliantAttribute
+//           ^^^^^^^^^^^^^^^^^^^^^^^^^^^ {{Specify AttributeUsage on 'MyInvalidInheritedAttribute' to improve readability, even though it inherits it from its base type.}}
+{
+}
 
-    [AttributeUsage(AttributeTargets.Class)]
-    public class MyInheritedAttribute : MyCompliantAttribute
-    {
-    }
+[AttributeUsage(AttributeTargets.Class)]
+public class MyInheritedAttribute : MyCompliantAttribute
+{
+}
+
+public abstract class AbstractAttribute : Attribute // Compliant
+{
 }
