@@ -1,0 +1,23 @@
+{
+  "title": "ASP.NET controller actions should not have a route template starting with \"\/\"",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "asp.net"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-6931",
+  "sqKey": "S6931",
+  "scope": "Main",
+  "quickfix": "partial",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "HIGH"
+    },
+    "attribute": "CLEAR"
+  }
+}

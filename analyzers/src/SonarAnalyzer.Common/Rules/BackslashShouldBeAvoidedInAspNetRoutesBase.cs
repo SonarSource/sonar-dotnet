@@ -34,7 +34,7 @@ public abstract class BackslashShouldBeAvoidedInAspNetRoutesBase<TSyntaxKind> : 
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterCompilationStartAction(compilationStartContext =>
         {
-            if (ShouldRegisterAction(compilationStartContext.Compilation))
+            if (compilationStartContext.Compilation.ReferencesControllers())
             {
                 compilationStartContext.RegisterNodeAction(Language.GeneratedCodeRecognizer, Check, SyntaxKinds);
             }
@@ -68,10 +68,6 @@ public abstract class BackslashShouldBeAvoidedInAspNetRoutesBase<TSyntaxKind> : 
         (method.ContainingType.IsAny(KnownType.RouteAttributes)
             || method.ContainingType.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_Routing_HttpMethodAttribute))
         && method.IsConstructor() && parameter.Name == "template";
-
-    private static bool ShouldRegisterAction(Compilation compilation) =>
-        compilation.GetTypeByMetadataName(KnownType.System_Web_Mvc_Controller) is not null
-        || compilation.GetTypeByMetadataName(KnownType.Microsoft_AspNetCore_Mvc_Controller) is not null;
 
     private static bool ContainsBackslash(string value)
     {

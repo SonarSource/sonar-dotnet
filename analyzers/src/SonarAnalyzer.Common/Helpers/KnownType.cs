@@ -545,6 +545,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Web_Mvc_HttpPostAttribute = new("System.Web.Mvc.HttpPostAttribute");
         public static readonly KnownType System_Web_Mvc_NonActionAttribute = new("System.Web.Mvc.NonActionAttribute");
         public static readonly KnownType System_Web_Mvc_RouteAttribute = new("System.Web.Mvc.RouteAttribute");
+        public static readonly KnownType System_Web_Mvc_RoutePrefixAttribute = new("System.Web.Mvc.RoutePrefixAttribute");
         public static readonly KnownType System_Web_Mvc_ValidateInputAttribute = new("System.Web.Mvc.ValidateInputAttribute");
         public static readonly KnownType System_Web_Script_Serialization_JavaScriptSerializer = new("System.Web.Script.Serialization.JavaScriptSerializer");
         public static readonly KnownType System_Web_Script_Serialization_JavaScriptTypeResolver = new("System.Web.Script.Serialization.JavaScriptTypeResolver");
