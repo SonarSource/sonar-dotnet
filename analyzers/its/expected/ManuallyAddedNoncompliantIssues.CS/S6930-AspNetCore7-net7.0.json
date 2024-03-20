@@ -1,0 +1,16 @@
+{
+  "Issues": [
+    {
+      "Id": "S6930",
+      "Message": "Replace \u0027\\\u0027 with \u0027/\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/AspNetCore7/Controllers/S6930Controller.cs#L5",
+      "Location": "Line 5 Position 8-25"
+    },
+    {
+      "Id": "S6930",
+      "Message": "Replace \u0027\\\u0027 with \u0027/\u0027.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/AspNetCore7/Controllers/S6930Controller.cs#L9",
+      "Location": "Line 9 Position 12-25"
+    }
+  ]
+}
