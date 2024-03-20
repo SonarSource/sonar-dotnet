@@ -1,0 +1,10 @@
+{
+  "Issues": [
+    {
+      "Id": "S6664",
+      "Message": "Reduce the number of Error logging calls within this code block from 2 to the 1 allowed.",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L92-L94",
+      "Location": "Lines 92-94 Position 25-70"
+    }
+  ]
+}
