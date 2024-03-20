@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Net5
+namespace Net7
 {
     static class Program
     {

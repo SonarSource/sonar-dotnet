@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Net5
+namespace NetCore31
 {
     static class Program
     {
