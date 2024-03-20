@@ -71,7 +71,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var baseTypesCount = objectTypeInfo.Symbol.BaseType.GetSelfAndBaseTypes()
                         .TakeWhile(s => GetRootNamespace(s) == thisTypeRootNamespace)
                         .Select(nts => nts.OriginalDefinition.ToDisplayString())
-                        .TakeWhile(className => filters.All(regex => !regex.IsMatch(className)))
+                        .TakeWhile(className => filters.All(regex => !regex.SafeIsMatch(className)))
                         .Count();
                     if (baseTypesCount > MaximumDepth)
                     {

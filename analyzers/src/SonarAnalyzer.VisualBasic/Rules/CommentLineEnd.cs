@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Text.RegularExpressions;
-
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
@@ -61,7 +59,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             {
                 var location = comment.GetLocation();
                 if (location.GetLineSpan().StartLinePosition.Line == tokenLine &&
-                    !Regex.IsMatch(comment.ToString(), LegalCommentPattern, RegexOptions.None, RegexConstants.DefaultTimeout))
+                    !SafeRegex.IsMatch(comment.ToString(), LegalCommentPattern))
                 {
                     context.ReportIssue(Diagnostic.Create(rule, location));
                 }

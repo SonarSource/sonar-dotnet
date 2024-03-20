@@ -39,9 +39,8 @@ namespace SonarAnalyzer.Rules
         private const string AbsoluteDiskUri = @"^[A-Za-z]:(/|\\)";
         private const string AbsoluteMappedDiskUri = @"^\\\\\w[ \w\.]*";
 
-        private static TimeSpan RegexTimeout => TimeSpan.FromMilliseconds(500); // see also RegexConstants.DefaultTimeout
-        protected static readonly Regex UriRegex = new($"{UriScheme}|{AbsoluteDiskUri}|{AbsoluteMappedDiskUri}", RegexOptions.Compiled, RegexTimeout);
-        protected static readonly Regex PathDelimiterRegex = new(@"^(\\|/)$", RegexOptions.Compiled, RegexTimeout);
+        protected static readonly Regex UriRegex = new($"{UriScheme}|{AbsoluteDiskUri}|{AbsoluteMappedDiskUri}", RegexOptions.Compiled, RegexConstants.DefaultTimeout);
+        protected static readonly Regex PathDelimiterRegex = new(@"^(\\|/)$", RegexOptions.Compiled, RegexConstants.DefaultTimeout);
 
         protected static readonly ISet<string> CheckedVariableNames =
             new HashSet<string>
@@ -76,7 +75,7 @@ namespace SonarAnalyzer.Rules
                 GeneratedCodeRecognizer,
                 c =>
                 {
-                    if (UriRegex.IsMatch(Language.Syntax.LiteralText(c.Node)) && IsInCheckedContext(c.Node, c.SemanticModel))
+                    if (UriRegex.SafeIsMatch(Language.Syntax.LiteralText(c.Node)) && IsInCheckedContext(c.Node, c.SemanticModel))
                     {
                         c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], c.Node.GetLocation(), AbsoluteUriMessage));
                     }
@@ -129,6 +128,6 @@ namespace SonarAnalyzer.Rules
         }
 
         private bool IsPathDelimiter(SyntaxNode expression) =>
-            expression is TLiteralExpressionSyntax && PathDelimiterRegex.IsMatch(Language.Syntax.LiteralText(expression));
+            expression is TLiteralExpressionSyntax && PathDelimiterRegex.SafeIsMatch(Language.Syntax.LiteralText(expression));
     }
 }

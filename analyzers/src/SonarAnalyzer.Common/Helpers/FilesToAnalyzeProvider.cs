@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Helpers
             allFiles.Where(x => FilterByFileName(x, fileName) && (!onlyExistingFiles || File.Exists(x)));
 
         public IEnumerable<string> FindFiles(Regex fullPathRegex, bool onlyExistingFiles = true) =>
-            allFiles.Where(x => fullPathRegex.IsMatch(x) && (!onlyExistingFiles || File.Exists(x)));
+            allFiles.Where(x => fullPathRegex.SafeIsMatch(x) && (!onlyExistingFiles || File.Exists(x)));
 
         private static IEnumerable<string> ReadLines(string filePath)
         {

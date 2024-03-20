@@ -24,6 +24,8 @@ namespace SonarAnalyzer.Extensions;
 
 public static class RegexExtensions
 {
+    private static readonly MatchCollection EmptyMatchCollection = Regex.Matches(string.Empty, "a", RegexOptions.None, RegexConstants.DefaultTimeout);
+
     /// <summary>
     /// Matches the input to the regex. Returns <see cref="Match.Empty" /> in case of an <see cref="RegexMatchTimeoutException" />.
     /// </summary>
@@ -42,7 +44,13 @@ public static class RegexExtensions
     /// <summary>
     /// Matches the input to the regex. Returns <see langword="false" /> in case of an <see cref="RegexMatchTimeoutException" />.
     /// </summary>
-    public static bool SafeIsMatch(this Regex regex, string input)
+    public static bool SafeIsMatch(this Regex regex, string input) =>
+        regex.SafeIsMatch(input, false);
+
+    /// <summary>
+    /// Matches the input to the regex. Returns <paramref name="timeoutFallback"/> in case of an <see cref="RegexMatchTimeoutException" />.
+    /// </summary>
+    public static bool SafeIsMatch(this Regex regex, string input, bool timeoutFallback)
     {
         try
         {
@@ -50,15 +58,46 @@ public static class RegexExtensions
         }
         catch (RegexMatchTimeoutException)
         {
-            return false;
+            return timeoutFallback;
         }
     }
 
-    public static bool SafeIsMatch(string input, string pattern, TimeSpan timeout, RegexOptions options = RegexOptions.None)
+    /// <summary>
+    /// Matches the input to the regex. Returns an empty <see cref="MatchCollection" /> in case of an <see cref="RegexMatchTimeoutException" />.
+    /// </summary>
+    public static MatchCollection SafeMatches(this Regex regex, string input)
     {
         try
         {
-            return Regex.IsMatch(input, pattern, options, timeout);
+            var res = regex.Matches(input);
+            _ = res.Count; // MatchCollection is lazy. Accessing "Count" executes the regex and caches the result
+            return res;
+        }
+        catch (RegexMatchTimeoutException)
+        {
+            return EmptyMatchCollection;
+        }
+    }
+}
+
+public static class SafeRegex
+{
+    /// <summary>
+    /// Matches the input to the regex. Returns <see langword="false" /> in case of an <see cref="RegexMatchTimeoutException" />.
+    /// </summary>
+    public static bool IsMatch(string input, string pattern) =>
+        IsMatch(input, pattern, RegexOptions.None);
+
+    /// <inheritdoc cref="IsMatch(string, string)"/>
+    public static bool IsMatch(string input, string pattern, RegexOptions options) =>
+        IsMatch(input, pattern, options, RegexConstants.DefaultTimeout);
+
+    /// <inheritdoc cref="IsMatch(string, string)"/>
+    public static bool IsMatch(string input, string pattern, RegexOptions options, TimeSpan matchTimeout)
+    {
+        try
+        {
+            return Regex.IsMatch(input, pattern, options, matchTimeout);
         }
         catch (RegexMatchTimeoutException)
         {

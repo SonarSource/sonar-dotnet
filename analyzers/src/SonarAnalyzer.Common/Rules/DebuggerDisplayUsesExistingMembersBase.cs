@@ -76,7 +76,7 @@ public abstract class DebuggerDisplayUsesExistingMembersBase<TAttributeSyntax, T
                 .Select(x => x.Name)
                 .ToHashSet(Language.NameComparer);
 
-            foreach (Match match in evaluatedExpressionRegex.Matches(formatString))
+            foreach (Match match in evaluatedExpressionRegex.SafeMatches(formatString))
             {
                 if (match.Groups["EvaluatedExpression"] is { Success: true, Value: var evaluatedExpression }
                     && ExtractValidMemberName(evaluatedExpression) is { } memberName
