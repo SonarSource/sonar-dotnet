@@ -43,7 +43,7 @@ public abstract class RouteTemplateShouldNotStartWithSlashBase<TSyntaxKind> : So
             compilationStartContext.RegisterSymbolStartAction(symbolStartContext =>
             {
                 var symbol = (INamedTypeSymbol)symbolStartContext.Symbol;
-                if (symbol.IsControllerType() && symbol.ContainingSymbol is not INamedTypeSymbol)
+                if (symbol.IsControllerType())
                 {
                     var controllerActionInfo = new ConcurrentStack<ControllerActionInfo>();
                     symbolStartContext.RegisterSyntaxNodeAction(nodeContext =>
@@ -65,7 +65,7 @@ public abstract class RouteTemplateShouldNotStartWithSlashBase<TSyntaxKind> : So
         // If one of the following conditions is true, the rule won't raise an issue
         // 1. The controller does not have any actions defined
         // 2. At least one action is not annotated with a route attribute or is annotated with a parameterless attribute
-        // 3. At least one route template defined in a route attribute over any action does not start with '/'
+        // 3. There is at least one action with a route template that does not start with '/'
         if (!actions.Any() || actions.Any(x => !x.RouteParameters.Any() || x.RouteParameters.Values.Any(x => !x.StartsWith("/"))))
         {
             return;
