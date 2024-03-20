@@ -38,11 +38,6 @@ internal class Verifier
     private const string TestCases = "TestCases";
 
     private static readonly Regex ImportsRegexVB = new(@"^\s*Imports\s+.+$", RegexOptions.Multiline | RegexOptions.RightToLeft, RegexConstants.DefaultTimeout);
-    private readonly string[] razorSupportedFrameworks = new[]
-        {
-            "net6.0",
-            "net7.0"
-        };
     private readonly VerifierBuilder builder;
     private readonly DiagnosticAnalyzer[] analyzers;
     private readonly SonarCodeFix codeFix;
@@ -184,10 +179,6 @@ internal class Verifier
         {
             MSBuildLocator.RegisterDefaults();
         }
-        if (!razorSupportedFrameworks.Contains(builder.RazorFramework))
-        {
-            throw new InvalidOperationException("Razor compilation is supported only for .NET 6 and .NET 7 frameworks.");
-        }
         using var workspace = MSBuildWorkspace.Create();
         workspace.WorkspaceFailed += (_, failure) => Console.WriteLine(failure.Diagnostic);
 
@@ -240,7 +231,6 @@ internal class Verifier
         }
         var csProjPath = Path.Combine(projectRoot, "EmptyProject.csproj");
         var xml = XElement.Load(csProjPath);
-        xml.Descendants("TargetFramework").Single().Value = builder.RazorFramework;
         xml.Descendants("LangVersion").Single().Value = langVersion;
         var references = xml.Descendants("ItemGroup").Single();
         foreach (var reference in builder.References)

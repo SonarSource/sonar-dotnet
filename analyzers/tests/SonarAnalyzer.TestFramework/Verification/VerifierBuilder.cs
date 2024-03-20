@@ -49,7 +49,6 @@ public record VerifierBuilder
     public string CodeFixTitle { get; init; }
     public bool ConcurrentAnalysis { get; init; } = true;
     public CompilationErrorBehavior ErrorBehavior { get; init; } = CompilationErrorBehavior.Default;
-    public string RazorFramework { get; init; } = "net7.0";
     public bool IsRazor { get; init; }
     public ImmutableArray<DiagnosticDescriptor> OnlyDiagnostics { get; init; } = ImmutableArray<DiagnosticDescriptor>.Empty;
     public OutputKind OutputKind { get; init; } = OutputKind.DynamicallyLinkedLibrary;
@@ -107,9 +106,6 @@ public record VerifierBuilder
     [Obsolete("Do not use CompilationErrorBehavior. Assert errors with // Error [CSxxxx, CSyyyy] instead")]
     public VerifierBuilder WithErrorBehavior(CompilationErrorBehavior errorBehavior) =>
         this with { ErrorBehavior = errorBehavior };
-
-    public VerifierBuilder WithFramework(string framework) =>
-        this with { RazorFramework = framework };
 
     public VerifierBuilder WithLanguageVersion(CS.LanguageVersion languageVersion) =>
         WithOptions(ImmutableArray.Create<ParseOptions>(new CS.CSharpParseOptions(languageVersion)));
