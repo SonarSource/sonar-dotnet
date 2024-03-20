@@ -34,7 +34,7 @@ namespace Tests.Diagnostics
             var x = false;                  // Fixed
             x = true;              // Fixed
             x = true;                     // Fixed
-            x = a;                    // Fixed
+            x = !a;                    // Fixed
             x = !a;                    // Fixed
 
             x = a;                // Fixed
@@ -42,7 +42,7 @@ namespace Tests.Diagnostics
             x = a;                  // Fixed
             x = a;                 // Fixed
             x = !a;                  // Fixed
-            x = a;                 // Fixed
+            x = !a;                 // Fixed
             x = a;                  // Fixed
             x = false is a;                 // Error [CS9135]
             x = true is a;                  // Error [CS9135]
@@ -211,7 +211,17 @@ namespace Tests.Diagnostics
     {
         void Method(bool cond)
         {
-            if (cond) { } // Fixed
+            if (!cond) { }  // Fixed
+            if (cond) { }  // Fixed
+
+            if (cond) { }   // Fixed
+            if (!cond) { }   // Fixed
+
+            if (!cond) { }  // Fixed
+            if (cond) { }  // Fixed
+
+            if (cond) { }   // Fixed
+            if (!cond) { }   // Fixed
         }
     }
 

@@ -228,7 +228,17 @@ namespace Tests.Diagnostics
     {
         void Method(bool cond)
         {
-            if (cond == false) { } // Noncompliant, TP but code fix is wrong - it should be fixed to "if (!cond)"
+            if (cond == false) { }  // Noncompliant
+            if (cond != false) { }  // Noncompliant
+
+            if (cond == true) { }   // Noncompliant
+            if (cond != true) { }   // Noncompliant
+
+            if (false == cond) { }  // Noncompliant
+            if (false != cond) { }  // Noncompliant
+
+            if (true == cond) { }   // Noncompliant
+            if (true != cond) { }   // Noncompliant
         }
     }
 

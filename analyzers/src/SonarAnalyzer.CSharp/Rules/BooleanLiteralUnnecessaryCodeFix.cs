@@ -181,8 +181,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static SyntaxNode FindNodeToKeep(BinaryExpressionSyntax binary)
         {
-            #region logical and false, logical or true
-
+            // logical and false, logical or true
             if (binary.IsKind(SyntaxKind.LogicalAndExpression)
                 && (CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.FalseLiteralExpression)
                    || CSharpEquivalenceChecker.AreEquivalent(binary.Right, CSharpSyntaxHelper.FalseLiteralExpression)))
@@ -196,10 +195,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return CSharpSyntaxHelper.TrueLiteralExpression;
             }
 
-            #endregion
-
-            #region ==/!= both sides booleans
-
+            // ==/!= both sides booleans
             if (binary.IsKind(SyntaxKind.EqualsExpression)
                 && TwoSidesAreDifferentBooleans(binary))
             {
@@ -221,7 +217,20 @@ namespace SonarAnalyzer.Rules.CSharp
                 return CSharpSyntaxHelper.TrueLiteralExpression;
             }
 
-            #endregion
+            // ==/!= one side boolean
+            if (binary.IsKind(SyntaxKind.EqualsExpression))
+            {
+                // edge case [condition == false] -> !condition
+                if (CSharpEquivalenceChecker.AreEquivalent(binary.Right, CSharpSyntaxHelper.FalseLiteralExpression))
+                {
+                    return SyntaxFactory.PrefixUnaryExpression(SyntaxKind.LogicalNotExpression, binary.Left);
+                }
+                // edge case [false == condition] -> !condition
+                if (CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.FalseLiteralExpression))
+                {
+                    return SyntaxFactory.PrefixUnaryExpression(SyntaxKind.LogicalNotExpression, binary.Right);
+                }
+            }
 
             return CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.TrueLiteralExpression)
                    || CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.FalseLiteralExpression)
