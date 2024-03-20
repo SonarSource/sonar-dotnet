@@ -50,14 +50,16 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void GetHashCodeMutable_InvalidCode() =>
-            builder.AddSnippet(@"class
-{
-    int i;
-    public override int GetHashCode()
-    {
-        return i; // we don't report on this
-    }
-}")
+            builder.AddSnippet("""
+                class
+                {
+                    int i;                              
+                    public override int GetHashCode()   // Noncompliant
+                    {
+                        return i;                       // Secondary
+                    }
+                }
+                """)
                 .WithErrorBehavior(CompilationErrorBehavior.Ignore)
                 .Verify();
     }

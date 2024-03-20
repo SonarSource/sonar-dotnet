@@ -198,43 +198,16 @@ public class VerifierTest
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Unknown))
             .VerifyNoIssueReported();
 
-    [DataTestMethod]
-    [DataRow("net6.0")]
-    [DataRow("net7.0")]
-    public void Compile_Razor_WithFramework(string framework)
-    {
-        var compilation = DummyWithLocation.AddPaths("Dummy.razor")
-            .WithFramework(framework)
-            .WithLanguageVersion(LanguageVersion.CSharp12)
-            .Build()
-            .Compile(false)
-            .Single();
-        compilation.Compilation.ExternalReferences.First().Display.Should().Contain(framework);
-    }
-
     [TestMethod]
     public void Compile_Razor_DefaultFramework()
     {
         var compilation = DummyWithLocation.AddPaths("Dummy.razor")
+            .AddSnippet("class Sample(object forceTheTypeToBeUsed) { }")
             .WithLanguageVersion(LanguageVersion.CSharp12)
             .Build()
             .Compile(false)
             .Single();
-        compilation.Compilation.ExternalReferences.First().Display.Should().Contain("net7.0", "This version is used in EmptyProject.csproj");
-    }
-
-    [DataTestMethod]
-    [DataRow("net48")]
-    [DataRow("netcoreapp3.1")]
-    [DataRow("netstandard2.1")]
-    [DataRow("net5.0")]
-    public void Verify_Razor_WithFramework_NotSupported(string framework)
-    {
-        var verifierBuilder = DummyWithLocation.AddPaths("Dummy.razor");
-        verifierBuilder.WithFramework(framework)
-            .Invoking(x => x.Verify())
-            .Should()
-            .Throw<InvalidOperationException>().WithMessage("Razor compilation is supported only for .NET 6 and .NET 7 frameworks.");
+        compilation.Compilation.GetSpecialType(SpecialType.System_Object).ContainingAssembly.Identity.Version.Major.Should().Be(7, "This version is used in EmptyProject.csproj");
     }
 
     [TestMethod]

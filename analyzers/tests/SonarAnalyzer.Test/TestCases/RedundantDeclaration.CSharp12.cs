@@ -69,7 +69,6 @@ namespace Repro_8115
         {
             var typeInferredAndReassigned = new[] { 1, 2, 3 };
             typeInferredAndReassigned = new[] { };             // Error [CS0826] No best type found for implicitly-typed array
-                                                               // Error@-1 [CS0029] Cannot implicitly convert type '?[]' to 'int[]'
         }
     }
 }
