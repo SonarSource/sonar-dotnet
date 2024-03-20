@@ -31,7 +31,7 @@ public sealed class ClassShouldNotBeEmpty : ClassShouldNotBeEmptyBase<SyntaxKind
         && (node is ClassDeclarationSyntax || IsParameterlessRecord(node));
 
     protected override BaseTypeDeclarationSyntax GetIfHasDeclaredBaseClassOrInterface(SyntaxNode node) =>
-        node is ClassDeclarationSyntax { BaseList: not null } declaration
+        node is TypeDeclarationSyntax { BaseList: not null } declaration
             ? declaration
             : null;
 

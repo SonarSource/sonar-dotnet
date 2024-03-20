@@ -66,5 +66,5 @@ public abstract class ClassShouldNotBeEmptyBase<TSyntaxKind, TDeclarationSyntax>
         model.GetDeclaredSymbol(node) is INamedTypeSymbol classSymbol
             && (classSymbol.BaseType is { IsAbstract: true }
             || classSymbol.DerivesFromAny(BaseClassesToIgnore)
-            || classSymbol.Interfaces.Any());
+            || classSymbol.Interfaces.Any(x => !x.Is(KnownType.System_IEquatable_T))); // every record type implicitly implements System.IEquatable<T>
 }

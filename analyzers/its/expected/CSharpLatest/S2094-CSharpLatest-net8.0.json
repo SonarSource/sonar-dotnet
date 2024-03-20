@@ -27,12 +27,6 @@
     {
       "Id": "S2094",
       "Message": "Remove this empty record, write its code or make it an \u0022interface\u0022.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/Records.cs#L130",
-      "Location": "Line 130 Position 15-16"
-    },
-    {
-      "Id": "S2094",
-      "Message": "Remove this empty record, write its code or make it an \u0022interface\u0022.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S2219.cs#L5",
       "Location": "Line 5 Position 12-17"
     },
