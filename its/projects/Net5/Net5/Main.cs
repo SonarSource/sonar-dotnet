@@ -1,4 +1,13 @@
 ﻿using System;
 
-// FIXME this is expected to raise S1134
-Console.WriteLine("Hello World!");
+namespace Net5
+{
+    static class Program
+    {
+        static void Main(string[] args)
+        {
+            // FIXME this is expected to raise S1134
+            Console.WriteLine("Hello World!");
+        }
+    }
+}
