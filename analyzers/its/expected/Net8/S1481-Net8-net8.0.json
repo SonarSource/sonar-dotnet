@@ -3,7 +3,7 @@
     {
       "Id": "S1481",
       "Message": "Remove the unused local variable \u0027foo\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net8/Net8/Program.cs#L2",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Net8/Net8/Program.cs#L2",
       "Location": "Line 2 Position 5-8"
     }
   ]

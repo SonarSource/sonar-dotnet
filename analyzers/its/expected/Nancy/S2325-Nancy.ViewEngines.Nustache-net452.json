@@ -3,7 +3,7 @@
     {
       "Id": "S2325",
       "Message": "Make \u0027GetCompiledTemplate\u0027 a static method.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Nustache/NustacheViewEngine.cs#L49",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.Nustache/NustacheViewEngine.cs#L49",
       "Location": "Line 49 Position 32-51"
     }
   ]

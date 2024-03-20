@@ -3,7 +3,7 @@
     {
       "Id": "S122",
       "Message": "Reformat the code to have only one statement per line.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/ExtendingPartial.cs#L25",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/ExtendingPartial.cs#L25",
       "Location": "Line 25 Position 59-78"
     }
   ]

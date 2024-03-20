@@ -3,7 +3,7 @@
     {
       "Id": "S2996",
       "Message": "Remove this initialization of \u0027_threadRunning\u0027 or make it lazy.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Dispatchers.cs#L104",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka/Dispatch/Dispatchers.cs#L104",
       "Location": "Line 104 Position 44-51"
     }
   ]

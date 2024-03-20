@@ -3,7 +3,7 @@
     {
       "Id": "S4487",
       "Message": "Remove this unread private field \u0027hostBrowser\u0027 or refactor the code to use its value.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserResponse.cs#L12",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.Testing/BrowserResponse.cs#L12",
       "Location": "Line 12 Position 34-45"
     }
   ]

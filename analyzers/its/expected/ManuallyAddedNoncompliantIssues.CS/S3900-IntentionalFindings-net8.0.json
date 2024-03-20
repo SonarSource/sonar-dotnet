@@ -3,13 +3,13 @@
     {
       "Id": "S3900",
       "Message": "Refactor this method to add validation of parameter \u0027factory\u0027 before using it.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S3416.cs#L9",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S3416.cs#L9",
       "Location": "Line 9 Position 13-20"
     },
     {
       "Id": "S3900",
       "Message": "Refactor this method to add validation of parameter \u0027traceSwitch\u0027 before using it.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S6675.cs#L10",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/IntentionalFindings/S6675.cs#L10",
       "Location": "Line 10 Position 31-42"
     }
   ]

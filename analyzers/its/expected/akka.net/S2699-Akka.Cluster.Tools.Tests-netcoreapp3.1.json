@@ -3,7 +3,7 @@
     {
       "Id": "S2699",
       "Message": "Add at least one assertion to this test case.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools.Tests/PublishSubscribe/DistributedPubSubMediatorRouterSpec.cs#L185",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Tools.Tests/PublishSubscribe/DistributedPubSubMediatorRouterSpec.cs#L185",
       "Location": "Line 185 Position 21-114"
     }
   ]

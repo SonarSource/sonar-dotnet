@@ -3,37 +3,37 @@
     {
       "Id": "S1854",
       "Message": "Remove this useless assignment to local variable \u0027a\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S1854.cs#L10",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S1854.cs#L10",
       "Location": "Line 10 Position 17-24"
     },
     {
       "Id": "S1854",
       "Message": "Remove this useless assignment to local variable \u0027a\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S1854.cs#L11",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S1854.cs#L11",
       "Location": "Line 11 Position 13-18"
     },
     {
       "Id": "S1854",
       "Message": "Remove this useless assignment to local variable \u0027value\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S1854.cs#L9",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S1854.cs#L9",
       "Location": "Line 9 Position 13-22"
     },
     {
       "Id": "S1854",
       "Message": "Remove this useless assignment to local variable \u0027b\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S2219.cs#L12",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S2219.cs#L12",
       "Location": "Line 12 Position 13-27"
     },
     {
       "Id": "S1854",
       "Message": "Remove this useless assignment to local variable \u0027b\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S2219.cs#L13",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S2219.cs#L13",
       "Location": "Line 13 Position 9-31"
     },
     {
       "Id": "S1854",
       "Message": "Remove this useless assignment to local variable \u0027result\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/S2437.cs#L10",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/S2437.cs#L10",
       "Location": "Line 10 Position 9-30"
     }
   ]

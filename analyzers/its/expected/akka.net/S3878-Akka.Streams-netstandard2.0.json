@@ -3,7 +3,7 @@
     {
       "Id": "S3878",
       "Message": "Remove this array creation and simply pass the elements.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L633-L645",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L633-L645",
       "Location": "Lines 633-645 Position 35-18"
     }
   ]

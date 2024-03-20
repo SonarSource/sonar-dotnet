@@ -3,7 +3,7 @@
     {
       "Id": "S3253",
       "Message": "Remove this redundant constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Routing/MetricSelectors.cs#L136-L138",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Routing/MetricSelectors.cs#L136-L138",
       "Location": "Lines 136-138 Position 9-10"
     }
   ]

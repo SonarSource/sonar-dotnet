@@ -3,13 +3,13 @@
     {
       "Id": "S1144",
       "Message": "Remove the unused private method \u0027ChangeDllPathPlatform\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L469",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L469",
       "Location": "Line 469 Position 23-44"
     },
     {
       "Id": "S1144",
       "Message": "Remove the unused private method \u0027PublishToAllSinks\u0027.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L536",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L536",
       "Location": "Line 536 Position 29-46"
     }
   ]

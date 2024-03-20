@@ -3,7 +3,7 @@
     {
       "Id": "S3240",
       "Message": "Use the \u0027??=\u0027 operator here.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L370",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L370",
       "Location": "Line 370 Position 33-81"
     }
   ]

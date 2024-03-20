@@ -3,7 +3,7 @@
     {
       "Id": "S3874",
       "Message": "Consider refactoring this method in order to remove the need for this \u0027out\u0027 modifier.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L228",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/AutoMapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L228",
       "Location": "Line 228 Position 71-74"
     }
   ]

@@ -3,7 +3,7 @@
     {
       "Id": "S1244",
       "Message": "Do not check floating point equality with exact values, use a range instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L487",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L487",
       "Location": "Line 487 Position 55-57"
     }
   ]

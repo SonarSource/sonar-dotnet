@@ -3,7 +3,7 @@
     {
       "Id": "S3253",
       "Message": "Remove this redundant constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.DotLiquid/DefaultFileSystemFactory.cs#L16-L18",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.DotLiquid/DefaultFileSystemFactory.cs#L16-L18",
       "Location": "Lines 16-18 Position 9-10"
     }
   ]

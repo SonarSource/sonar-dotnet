@@ -3,7 +3,7 @@
     {
       "Id": "S3900",
       "Message": "Refactor this method to add validation of parameter \u0027section\u0027 before using it.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L58",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L58",
       "Location": "Line 58 Position 38-45"
     }
   ]

@@ -3,7 +3,7 @@
     {
       "Id": "S3717",
       "Message": "Implement this method or throw \u0027NotSupportedException\u0027 instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/CSharpLatest/CSharpLatest/CSharp9Features/Records.cs#L105",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/CSharpLatest/CSharpLatest/CSharp9Features/Records.cs#L105",
       "Location": "Line 105 Position 9-45"
     }
   ]

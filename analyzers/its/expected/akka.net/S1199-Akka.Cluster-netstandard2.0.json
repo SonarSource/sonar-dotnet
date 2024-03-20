@@ -3,7 +3,7 @@
     {
       "Id": "S1199",
       "Message": "Extract this nested code block into a separate method.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolverSettings.cs#L48",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolverSettings.cs#L48",
       "Location": "Line 48 Position 13-14"
     }
   ]

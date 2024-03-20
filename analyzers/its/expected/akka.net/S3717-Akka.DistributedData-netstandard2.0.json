@@ -3,7 +3,7 @@
     {
       "Id": "S3717",
       "Message": "Implement this method or throw \u0027NotSupportedException\u0027 instead.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L511",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L511",
       "Location": "Line 511 Position 13-49"
     }
   ]

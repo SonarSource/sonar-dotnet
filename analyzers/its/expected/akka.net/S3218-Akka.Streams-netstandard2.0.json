@@ -3,7 +3,7 @@
     {
       "Id": "S3218",
       "Message": "Rename this field to not shadow the outer class\u0027 member with the same name.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L537",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L537",
       "Location": "Line 537 Position 35-40"
     }
   ]

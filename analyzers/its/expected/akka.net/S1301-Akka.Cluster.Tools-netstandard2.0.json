@@ -3,13 +3,13 @@
     {
       "Id": "S1301",
       "Message": "Replace this \u0027switch\u0027 statement with \u0027if\u0027 statements to increase readability.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L1050",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L1050",
       "Location": "Line 1050 Position 21-27"
     },
     {
       "Id": "S1301",
       "Message": "Replace this \u0027switch\u0027 statement with \u0027if\u0027 statements to increase readability.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L1058",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L1058",
       "Location": "Line 1058 Position 33-39"
     }
   ]

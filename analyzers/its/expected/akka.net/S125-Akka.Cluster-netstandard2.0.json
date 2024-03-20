@@ -3,7 +3,7 @@
     {
       "Id": "S125",
       "Message": "Remove this commented out code.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Util.cs#L78",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Cluster/Util.cs#L78",
       "Location": "Line 78 Position 13-44"
     }
   ]

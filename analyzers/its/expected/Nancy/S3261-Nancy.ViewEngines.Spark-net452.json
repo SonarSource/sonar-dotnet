@@ -3,7 +3,7 @@
     {
       "Id": "S3261",
       "Message": "Remove this empty namespace.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DescriptorFilterExtensions.cs#L1-L30",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DescriptorFilterExtensions.cs#L1-L30",
       "Location": "Lines 1-30 Position 1-2"
     }
   ]

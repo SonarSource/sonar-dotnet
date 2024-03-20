@@ -3,7 +3,7 @@
     {
       "Id": "S4136",
       "Message": "All \u0027CompareTo\u0027 method overloads should be adjacent.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.Query/Offset.cs#L62",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/akka.net/src/core/Akka.Persistence.Query/Offset.cs#L62",
       "Location": "Line 62 Position 20-29"
     }
   ]

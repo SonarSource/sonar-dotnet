@@ -3,7 +3,7 @@
     {
       "Id": "S3253",
       "Message": "Remove this redundant constructor.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L28-L30",
+      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L28-L30",
       "Location": "Lines 28-30 Position 9-10"
     }
   ]
