@@ -179,7 +179,6 @@ namespace SonarAnalyzer.Extensions
                 DestructorDeclarationSyntax { Identifier: var identifier } => identifier,
                 EnumMemberDeclarationSyntax { Identifier: var identifier } => identifier,
                 EventDeclarationSyntax { Identifier: var identifier } => identifier,
-                IdentifierNameSyntax { Identifier: var identifier } => identifier,
                 IndexerDeclarationSyntax { ThisKeyword: var thisKeyword } => thisKeyword,
                 InvocationExpressionSyntax
                 {
