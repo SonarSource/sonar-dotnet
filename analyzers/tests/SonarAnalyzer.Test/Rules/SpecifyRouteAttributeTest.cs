@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#if NET
+
 using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.Test.Rules;
@@ -25,7 +27,6 @@ namespace SonarAnalyzer.Test.Rules;
 [TestClass]
 public class SpecifyRouteAttributeTest
 {
-#if NET
     private readonly VerifierBuilder builder = new VerifierBuilder<SpecifyRouteAttribute>()
         .WithOptions(ParseOptionsHelper.FromCSharp12)
         .AddReferences([
@@ -39,5 +40,6 @@ public class SpecifyRouteAttributeTest
     [TestMethod]
     public void SpecifyRouteAttribute_CS() =>
         builder.AddPaths("SpecifyRouteAttribute.cs").Verify();
-#endif
 }
+
+#endif
