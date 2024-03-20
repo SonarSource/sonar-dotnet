@@ -282,3 +282,16 @@ public class Close
         connection.Close(); // Compliant - close() in DB connection does not dispose the connection object.
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8946
+public class Repro_8946
+{
+    static void Method<T>(T[] array)
+    {
+        for (int i = 0; i < array.Length; i++)
+            if (array[i] is IDisposable d)
+            {
+                d.Dispose(); // Noncompliant FP
+            }
+    }
+}
