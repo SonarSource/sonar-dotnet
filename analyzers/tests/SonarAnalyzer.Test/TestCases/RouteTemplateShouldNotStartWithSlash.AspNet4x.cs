@@ -148,25 +148,25 @@ namespace WithAliases
 }
 
 [Route("[controller]")]
-public partial class PartialController : Controller // Noncompliant {{Change the paths of the actions of this controller to be relative and adapt the controller route accordingly.}}
+public partial class PartialController : Controller // Noncompliant [first]
 {
-    [Route("/Index1")]                  // Secondary
+    [Route("/Index1")]                              // Secondary [first, second]
     public ActionResult Index1() => View();
 
-    [Route("/SubPath/Index2_1")]        // Secondary
-    [Route("/[controller]/Index2_2")]   // Secondary
+    [Route("/SubPath/Index2_1")]                    // Secondary [first, second]
+    [Route("/[controller]/Index2_2")]               // Secondary [first, second]
     public ActionResult Index2() => View();
 }
 
 [Route("[controller]")]
-public partial class PartialController : Controller // Secondary
+public partial class PartialController : Controller // Noncompliant [second]
 {
-    [Route("/[action]")]                // Secondary
+    [Route("/[action]")]                            // Secondary [first, second]
     public ActionResult Index3() => View();
 
-    [Route("/SubPath/Index4_1")]        // Secondary
+    [Route("/SubPath/Index4_1")]                    // Secondary [first, second]
 
-    [Route("/[controller]/Index4_2")]   // Secondary
+    [Route("/[controller]/Index4_2")]               // Secondary [first, second]
     public ActionResult Index4() => View();
 }
 

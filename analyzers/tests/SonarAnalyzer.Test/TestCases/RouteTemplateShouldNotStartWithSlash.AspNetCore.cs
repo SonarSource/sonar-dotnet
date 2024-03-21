@@ -259,22 +259,22 @@ public struct AStruct
 }
 
 [Route("[controller]")]
-public partial class NoncompliantPartialController : Controller // Noncompliant {{Change the paths of the actions of this controller to be relative and adapt the controller route accordingly.}}
+public partial class NoncompliantPartialController : Controller // Noncompliant [first]
 {
-    [Route("/Index1")]                  // Secondary
+    [Route("/Index1")]                  // Secondary [first, second]
     public IActionResult Index1() => View();
 
-    [Route("/SubPath/Index2")]          // Secondary
+    [Route("/SubPath/Index2")]          // Secondary [first, second]
     public IActionResult Index2() => View();
 }
 
 [Route("[controller]")]
-public partial class NoncompliantPartialController : Controller // Secondary
+public partial class NoncompliantPartialController : Controller // Noncompliant [second]
 {
-    [HttpGet("/[action]")]              // Secondary
+    [HttpGet("/[action]")]              // Secondary [first, second]
     public IActionResult Index3() => View();
 
-    [HttpGet("/SubPath/Index4_1")]      // Secondary
+    [HttpGet("/SubPath/Index4_1")]      // Secondary [first, second]
     public IActionResult Index4() => View();
 }
 
