@@ -1,23 +1,23 @@
 {
-  "title": "You should specify the RouteAttribute when an HttpMethodAttribute is specified at an action level",
+  "title": "A Route attribute should be added to the controller when a route template is specified at the action level",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
     "constantCost": "5min"
   },
-  "tags": [],
+  "tags": [
+    "asp.net"
+  ],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-6934",
   "sqKey": "S6934",
-  "scope": "All",
-  "quickfix": "unknown",
+  "scope": "Main",
+  "quickfix": "partial",
   "code": {
     "impacts": {
-      "MAINTAINABILITY": "HIGH",
-      "RELIABILITY": "MEDIUM",
-      "SECURITY": "LOW"
+      "MAINTAINABILITY": "HIGH"
     },
-    "attribute": "CONVENTIONAL"
+    "attribute": "CLEAR"
   }
 }
