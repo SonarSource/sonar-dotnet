@@ -65,7 +65,16 @@ public class RouteTemplatesAreSpecifiedController : Controller                  
     public IActionResult HttpOptions() => View();                               // Secondary [controller]
 
     [Route("details")]
-    public IActionResult GetDetails() => View();                                // FN
+    public IActionResult WithRoute() => View();                                 // Secondary [controller]
+
+    [Route("details", Order = 1)]
+    public IActionResult WithRouteAndProperties1() => View();                   // Secondary [controller]
+
+    [Route("details", Order = 1, Name = "Details")]
+    public IActionResult WithRouteAndProperties2() => View();                   // Secondary [controller]
+
+    [Route("details", Name = "Details", Order = 1)]
+    public IActionResult WithRouteAndProperties3() => View();                   // Secondary [controller]
 
     [Route("[controller]/List/{sortBy}/{direction}")]
     [HttpGet("[controller]/Search/{sortBy}/{direction}")]
@@ -138,7 +147,6 @@ public class WithAttributeControllerUsingInheritanceController : Endpoint       
     public string Index() => "Hi!";                                             // FN
 }
 
-[Route("api/[controller]")]
 public class NamedController                                                    // FN
 {
     [HttpGet("Test")]

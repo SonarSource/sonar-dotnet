@@ -30,6 +30,9 @@ public sealed class SpecifyRouteAttribute : SonarDiagnosticAnalyzer
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
+    private static readonly ImmutableArray<KnownType> RouteTemplateAttributes =
+        ImmutableArray.Create(KnownType.Microsoft_AspNetCore_Mvc_Routing_HttpMethodAttribute, KnownType.Microsoft_AspNetCore_Mvc_RouteAttribute);
+
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
     protected override void Initialize(SonarAnalysisContext context) =>
@@ -52,7 +55,7 @@ public sealed class SpecifyRouteAttribute : SonarDiagnosticAnalyzer
                         if (nodeContext.SemanticModel.GetDeclaredSymbol(node, nodeContext.Cancel) is { } method
                             && method.IsControllerMethod()
                             && method.GetAttributes().Any(x =>
-                                x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_Routing_HttpMethodAttribute)
+                                x.AttributeClass.DerivesFromAny(RouteTemplateAttributes)
                                 && x.TryGetAttributeValue<string>("template", out var template)
                                 && !string.IsNullOrWhiteSpace(template)))
                         {
