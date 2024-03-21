@@ -117,7 +117,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override void VisitInterpolatedStringExpression(InterpolatedStringExpressionSyntax node)
             {
-                if (TryGetConstantValuesOfInterpolatedStringExpression(node, out var stringParts))
+                if (TryGetConstantValuesOfInterpolatedStringExpression(node, out var stringParts)
+                    && stringParts.Count > 0
+                    && StartsWithSqlKeyword(stringParts[0].Text.Trim()))
                 {
                     RaiseIssueIfSpaceDoesNotExistBetweenStrings(stringParts);
                 }
@@ -140,22 +142,14 @@ namespace SonarAnalyzer.Rules.CSharp
                     && TryGetStringWrapper(node.Right, out var rightSide)
                     && StartsWithSqlKeyword(leftSide.Text.Trim()))
                 {
-                    var strings = new List<StringWrapper>();
-                    strings.Add(leftSide);
-                    strings.Add(rightSide);
-                    var onlyStringsInConcatenation = AddStringsToList(node, strings);
-                    if (!onlyStringsInConcatenation)
+                    var strings = new List<StringWrapper> { leftSide, rightSide };
+                    if (AddStringsToList(node, strings))
                     {
-                        return;
+                        RaiseIssueIfSpaceDoesNotExistBetweenStrings(strings);
                     }
-
-                    RaiseIssueIfSpaceDoesNotExistBetweenStrings(strings);
                 }
-                else
-                {
-                    Visit(node.Left);
-                    Visit(node.Right);
-                }
+                Visit(node.Left);
+                Visit(node.Right);
             }
 
             private void RaiseIssueIfSpaceDoesNotExistBetweenStrings(List<StringWrapper> stringWrappers)
@@ -175,31 +169,40 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
 
-            private static bool TryGetStringWrapper(ExpressionSyntax expression, out StringWrapper stringWrapper)
+            private bool TryGetStringWrapper(ExpressionSyntax expression, out StringWrapper stringWrapper)
             {
                 if (expression is LiteralExpressionSyntax literal && literal.IsKind(SyntaxKind.StringLiteralExpression))
                 {
                     stringWrapper = new StringWrapper(literal, literal.Token.ValueText);
                     return true;
                 }
-
-                if (expression is InterpolatedStringExpressionSyntax interpolatedString)
+                else if (expression is InterpolatedStringExpressionSyntax interpolatedString)
                 {
                     stringWrapper = new StringWrapper(interpolatedString, interpolatedString.GetContentsText());
                     return true;
                 }
-
-                stringWrapper = null;
-                return false;
+                // if this is a nested binary, we skip it so that we can raise when we visit it.
+                // Otherwise, FindConstantValue will merge it into one value.
+                else if (expression.RemoveParentheses() is not BinaryExpressionSyntax
+                    && expression.FindConstantValue(context.SemanticModel) is string constantValue)
+                {
+                    stringWrapper = new StringWrapper(expression, constantValue);
+                    return true;
+                }
+                else
+                {
+                    stringWrapper = null;
+                    return false;
+                }
             }
 
             /**
              * Returns
-             * - true if all the found elements are string literals.
-             * - false if, inside the chain of binary expressions, some elements are not string literals or
+             * - true if all the found elements have constant string value.
+             * - false if, inside the chain of binary expressions, some element's value cannot be computed or
              * some binary expressions are not additions.
              */
-            private static bool AddStringsToList(BinaryExpressionSyntax node, List<StringWrapper> strings)
+            private bool AddStringsToList(BinaryExpressionSyntax node, List<StringWrapper> strings)
             {
                 // this is the left-most node of a concatenation chain
                 // collect all string literals
@@ -213,7 +216,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                     else
                     {
-                        // we are in a binary expression, but it's not only of strings or not only concatenations
+                        // we are in a binary expression, but it's not only of constants or concatenations
                         return false;
                     }
                     parent = parent.Parent;
@@ -223,15 +226,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private bool TryGetConstantValuesOfInterpolatedStringExpression(InterpolatedStringExpressionSyntax interpolatedStringExpression, out List<StringWrapper> parts)
             {
-                parts = new List<StringWrapper>();
-                foreach (var interpolatedStringContent in interpolatedStringExpression.Contents)
+                parts = [];
+                foreach (var content in interpolatedStringExpression.Contents)
                 {
-                    if (interpolatedStringContent is InterpolationSyntax interpolation
+                    if (content is InterpolationSyntax interpolation
                         && interpolation.Expression.FindConstantValue(context.SemanticModel) is string constantValue)
                     {
-                        parts.Add(new StringWrapper(interpolatedStringContent, constantValue));
+                        parts.Add(new StringWrapper(content, constantValue));
                     }
-                    else if (interpolatedStringContent is InterpolatedStringTextSyntax interpolatedText)
+                    else if (content is InterpolatedStringTextSyntax interpolatedText)
                     {
                         parts.Add(new StringWrapper(interpolatedText, interpolatedText.TextToken.Text));
                     }

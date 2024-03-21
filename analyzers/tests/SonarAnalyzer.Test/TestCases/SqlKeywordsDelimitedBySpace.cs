@@ -155,7 +155,8 @@ namespace Tests.Diagnostics
             var parantheses = "SELECT (" +
                 "x.y,z.z)" + // FN - we ignore parantheses as they can lead to FPs
                 "FROM  table;";
-            var parantheses2 = "SELECT " + ("all") + "FROM table"; // FN
+            var parantheses2 = "SELECT " + ("all") + "FROM table"; // Noncompliant {{Add a space before 'FROM'.}}
+            //                                       ^^^^^^^^^^^^
         }
 
         public void InterpolatedAndRawStringsAreIgnored(string col1, string col2, string innerQuery)

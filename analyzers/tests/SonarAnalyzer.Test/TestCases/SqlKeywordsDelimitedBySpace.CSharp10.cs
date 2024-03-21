@@ -72,6 +72,32 @@ namespace Tests.Diagnostics
         }
     }
 
+    public class Interpolation
+    {
+        public const string select = "select";                  // Compliant
+        public const string truncate = $"{nameof(truncate)}";   // Compliant
+        public const string @from = "from";                     // Compliant
+
+        public const string s1 = $"{select}";                   // Compliant
+        public const string s2 = $"{select}Name";               // Noncompliant
+        public const string s3 = $"select Name {"from"}";       // Compliant
+        public const string s4 = $"select Name {"from"}";       // Compliant
+        public const string s5 = $"{select} col1{@from}";       // Noncompliant {{Add a space before 'from'.}}
+        //                                      ^^^^^^^
+        public const string s6 = $"{select} col1{{{@from}}}";
+        //                                               ^^ {{Add a space before '}}'.}}
+        //                                        ^^^^^^^@-1 {{Add a space before 'from'.}}
+        public const string s7 = $"{select} col1{{{@from}}}";
+        //                                        ^^^^^^^ {{Add a space before 'from'.}}
+        //                                               ^^@-1 {{Add a space before '}}'.}}
+
+        public const string s8 = truncate + $"col1{@from}"; // here we have an FN on col1 + @from, because of the mixed binary/interpolation scenario
+        //                                  ^^^^^^^^^^^^^^ {{Add a space before 'col1{@from}'.}}
+
+        public const string s9 = truncate + $"table";           // Noncompliant
+        //                                  ^^^^^^^^
+    }
+
     // https://github.com/SonarSource/sonar-dotnet/issues/6355
     public class Repro_6355
     {
@@ -82,34 +108,32 @@ namespace Tests.Diagnostics
             string empty = string.Empty;
 
             const string s0 = $"{constOne}";                // Compliant
-            const string s1 = $"{constOne}Two";             // Noncompliant FP
-            const string s2 = $"{nameof(constOne)}Two";     // Noncompliant FP
+            const string s1 = $"{constOne}Two";             // Compliant
+            const string s2 = $"{nameof(constOne)}Two";     // Compliant
             const string s3 = $"{parameter}";               // Error [CS0133]
             const string s4 = $"{parameter}Two";            // Error [CS0133]
-            const string s5 = $"{nameof(parameter)}Two";    // Noncompliant FP
+            const string s5 = $"{nameof(parameter)}Two";    // Compliant
             const string s6 = $"{nonConstOne}";             // Error [CS0133]
             const string s7 = $"{nonConstOne}Two";          // Error [CS0133]
-                                                            // Noncompliant@-1 FP
-            const string s8 = $"{nameof(nonConstOne)}Two";  // Noncompliant FP
+            const string s8 = $"{nameof(nonConstOne)}Two";  // Compliant
             const string s9 = $"{empty}";                   // Error [CS0133]
             const string s10 = $"{empty}Two";               // Error [CS0133]
-            const string s11 = $"{nameof(empty)}Two";       // Noncompliant FP
+            const string s11 = $"{nameof(empty)}Two";       // Compliant
 
             string s12 = $"{constOne}";                     // Compliant
-            string s13 = $"{constOne}Two";                  // Noncompliant FP
-            string s14 = $"{nameof(constOne)}Two";          // Noncompliant FP
+            string s13 = $"{constOne}Two";                  // Compliant
+            string s14 = $"{nameof(constOne)}Two";          // Compliant
             string s15 = $"{parameter}";                    // Compliant
             string s16 = $"{parameter}Two";                 // Compliant
-            string s17 = $"{nameof(parameter)}Two";         // Noncompliant FP
+            string s17 = $"{nameof(parameter)}Two";         // Compliant
             string s18 = $"{nonConstOne}";                  // Compliant
-            string s19 = $"{nonConstOne}Two";               // Noncompliant FP
-            string s20 = $"{nameof(nonConstOne)}Two";       // Noncompliant FP
+            string s19 = $"{nonConstOne}Two";               // Compliant
+            string s20 = $"{nameof(nonConstOne)}Two";       // Compliant
             string s21 = $"{empty}";                        // Compliant
             string s22 = $"{empty}Two";                     // Compliant
-            string s23 = $"{nameof(empty)}Two";             // Noncompliant FP
+            string s23 = $"{nameof(empty)}Two";             // Compliant
 
-            string s24 = $"{{{nonConstOne}}}";              // Noncompliant FP
-                                                            // Noncompliant@-1 FP
+            string s24 = $"{{{nonConstOne}}}";              // Compliant
         }
     }
 }
