@@ -117,11 +117,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override void VisitInterpolatedStringExpression(InterpolatedStringExpressionSyntax node)
             {
-                if (TryGetConstantValuesOfInterpolatedStringExpression(node, out var stringParts)
+                if (TryGetConstantValues(node, out var stringParts)
                     && stringParts.Count > 0
                     && StartsWithSqlKeyword(stringParts[0].Text.Trim()))
                 {
-                    RaiseIssueIfSpaceDoesNotExistBetweenStrings(stringParts);
+                    RaiseIssueIfNotDelimited(stringParts);
                 }
                 base.VisitInterpolatedStringExpression(node);
             }
@@ -143,16 +143,16 @@ namespace SonarAnalyzer.Rules.CSharp
                     && StartsWithSqlKeyword(leftSide.Text.Trim()))
                 {
                     var strings = new List<StringWrapper> { leftSide, rightSide };
-                    if (AddStringsToList(node, strings))
+                    if (TryExtractNestedStrings(node, strings))
                     {
-                        RaiseIssueIfSpaceDoesNotExistBetweenStrings(strings);
+                        RaiseIssueIfNotDelimited(strings);
                     }
                 }
                 Visit(node.Left);
                 Visit(node.Right);
             }
 
-            private void RaiseIssueIfSpaceDoesNotExistBetweenStrings(List<StringWrapper> stringWrappers)
+            private void RaiseIssueIfNotDelimited(List<StringWrapper> stringWrappers)
             {
                 for (var i = 0; i < stringWrappers.Count - 1; i++)
                 {
@@ -202,7 +202,7 @@ namespace SonarAnalyzer.Rules.CSharp
              * - false if, inside the chain of binary expressions, some element's value cannot be computed or
              * some binary expressions are not additions.
              */
-            private bool AddStringsToList(BinaryExpressionSyntax node, List<StringWrapper> strings)
+            private bool TryExtractNestedStrings(BinaryExpressionSyntax node, List<StringWrapper> strings)
             {
                 // this is the left-most node of a concatenation chain
                 // collect all string literals
@@ -224,7 +224,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return true;
             }
 
-            private bool TryGetConstantValuesOfInterpolatedStringExpression(InterpolatedStringExpressionSyntax interpolatedStringExpression, out List<StringWrapper> parts)
+            private bool TryGetConstantValues(InterpolatedStringExpressionSyntax interpolatedStringExpression, out List<StringWrapper> parts)
             {
                 parts = [];
                 foreach (var content in interpolatedStringExpression.Contents)
@@ -261,7 +261,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 return IsAlphaNumericOrInvalidCharacters(first) && IsAlphaNumericOrInvalidCharacters(second);
 
-                bool IsAlphaNumericOrInvalidCharacters(char c) =>
+                static bool IsAlphaNumericOrInvalidCharacters(char c) =>
                     char.IsLetterOrDigit(c) || InvalidCharacters.Contains(c);
             }
         }
