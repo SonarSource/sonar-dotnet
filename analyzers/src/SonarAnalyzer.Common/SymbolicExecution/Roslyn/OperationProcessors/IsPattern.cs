@@ -182,7 +182,7 @@ internal sealed class IsPattern : BranchingProcessor<IIsPatternOperationWrapper>
         declaration switch
         {
             _ when valueConstraint == ObjectConstraint.Null => BoolConstraint.False,
-            _ when declaration.InputType?.DerivesOrImplements(declaration.NarrowedType) is true => BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
+            _ when declaration.InputType.DerivesOrImplements(declaration.NarrowedType) => BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
             _ => null,
         };
 
