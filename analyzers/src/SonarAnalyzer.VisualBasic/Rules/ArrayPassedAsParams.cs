@@ -31,7 +31,7 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, Ar
             SyntaxKind.InvocationExpression
         };
 
-    protected override ArgumentSyntax GetLastArgumentIfArrayCreation(SyntaxNode expression) =>
+    protected override ArgumentSyntax LastArgumentIfArrayCreation(SyntaxNode expression) =>
         GetLastArgumentIfArrayCreation(GetArgumentListFromExpression(expression));
 
     private static ArgumentListSyntax GetArgumentListFromExpression(SyntaxNode expression) =>

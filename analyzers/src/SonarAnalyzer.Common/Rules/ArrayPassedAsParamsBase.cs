@@ -30,7 +30,7 @@ public abstract class ArrayPassedAsParamsBase<TSyntaxKind, TArgumentNode> : Sona
     private readonly DiagnosticDescriptor rule;
 
     protected abstract TSyntaxKind[] ExpressionKinds { get; }
-    protected abstract TArgumentNode GetLastArgumentIfArrayCreation(SyntaxNode expression);
+    protected abstract TArgumentNode LastArgumentIfArrayCreation(SyntaxNode expression);
 
     protected ArrayPassedAsParamsBase() : base(DiagnosticId) =>
         rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
@@ -38,7 +38,7 @@ public abstract class ArrayPassedAsParamsBase<TSyntaxKind, TArgumentNode> : Sona
     protected sealed override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
         {
-            if (GetLastArgumentIfArrayCreation(c.Node) is { } lastArgument
+            if (LastArgumentIfArrayCreation(c.Node) is { } lastArgument
                 && IsParamParameter(c.SemanticModel, c.Node, lastArgument))
             {
                 c.ReportIssue(Diagnostic.Create(rule, lastArgument.GetLocation()));
