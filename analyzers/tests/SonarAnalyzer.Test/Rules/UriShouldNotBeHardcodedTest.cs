@@ -33,6 +33,13 @@ namespace SonarAnalyzer.Test.Rules
         public void UriShouldNotBeHardcoded_CSharp_General() =>
             builderCS.AddPaths("UriShouldNotBeHardcoded.cs").Verify();
 
+        [TestMethod]
+        public void UriShouldNotBeHardcoded_CSharp_Exceptions() =>
+            builderCS
+            .AddPaths("UriShouldNotBeHardcoded.Exceptions.cs")
+            .AddReferences(MetadataReferenceFacade.SystemXml)
+            .Verify();
+
 #if NET
 
         [TestMethod]
