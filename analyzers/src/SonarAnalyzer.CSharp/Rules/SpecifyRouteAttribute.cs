@@ -31,7 +31,7 @@ public sealed class SpecifyRouteAttribute() : SonarDiagnosticAnalyzer<SyntaxKind
         ImmutableArray.Create(KnownType.Microsoft_AspNetCore_Mvc_Routing_HttpMethodAttribute, KnownType.Microsoft_AspNetCore_Mvc_RouteAttribute);
 
     protected override string MessageFormat => "Specify the RouteAttribute when an HttpMethodAttribute is specified at an action level.";
-    protected override ILanguageFacade<SyntaxKind> Language { get; } = CSharpFacade.Instance;
+    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterCompilationStartAction(compilationStart =>
