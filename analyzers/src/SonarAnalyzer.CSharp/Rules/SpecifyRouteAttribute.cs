@@ -57,7 +57,7 @@ public sealed class SpecifyRouteAttribute : SonarDiagnosticAnalyzer
                             && method.GetAttributes().Any(x =>
                                 x.AttributeClass.DerivesFromAny(RouteTemplateAttributes)
                                 && x.TryGetAttributeValue<string>("template", out var template)
-                                && !string.IsNullOrWhiteSpace(template)))
+                                && !CanBeIgnored(template)))
                         {
                             secondaryLocations.Push(node.Identifier.GetLocation());
                         }
@@ -82,4 +82,11 @@ public sealed class SpecifyRouteAttribute : SonarDiagnosticAnalyzer
             }
         }
     }
+
+    private static bool CanBeIgnored(string template) =>
+        string.IsNullOrWhiteSpace(template)
+        // See: https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/routing#combining-attribute-routes
+        // Route templates applied to an action that begin with / or ~/ don't get combined with route templates applied to the controller.
+        || template.StartsWith("/")
+        || template.StartsWith("~/");
 }

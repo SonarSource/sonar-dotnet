@@ -26,6 +26,12 @@ public class RouteTemplateIsNotSpecifiedController : Controller
     [method: HttpGet]
     public IActionResult Index7() => View();                                    // Compliant
 
+    [HttpGet("/[controller]/[action]/{sortBy}")]
+    public IActionResult AbsoluteUri1(string sortBy) => View();                 // Compliant, absolute uri
+
+    [HttpGet("~/[controller]/[action]/{sortBy}")]
+    public IActionResult AbsoluteUri2(string sortBy) => View();                 // Compliant, absolute uri
+
     public IActionResult Error() => View();                                     // Compliant
 }
 
