@@ -112,6 +112,13 @@ public class RouteTemplatesAreSpecifiedController : Controller                  
     public IActionResult Comment() => View();
 }
 
+[Route("api/[controller]")]
+public class WithRouteAttributeIsCompliantController : Controller
+{
+    [HttpGet("Test")]
+    public IActionResult Index() => View();
+}
+
 public class WithUserDefinedAttributeController : Controller                    // Noncompliant [customAttribute]
 {
     [MyHttpMethod("Test")]
