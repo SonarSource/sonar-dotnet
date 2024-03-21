@@ -83,7 +83,7 @@ public class NoncompliantNoControllerRouteController : Controller // Noncomplian
 
 public class CompliantNoControllerRouteNoActionRouteController : Controller // Compliant
 {
-    public IActionResult Index1() => View(); // Default route -> relative
+    public IActionResult Index1() => View(); // Conventional route -> relative
 
     [Route("/SubPath/Index2")]
     public IActionResult Index2() => View();
@@ -99,7 +99,7 @@ public class CompliantNoControllerRouteNoActionRouteController : Controller // C
 public class CompliantNoControllerRouteEmptyActionRouteController : Controller // Compliant
 {
     [HttpGet]
-    public IActionResult Index1() => View(); // Empty route -> relative
+    public IActionResult Index1() => View(); // Empty route template -> relative conventional routing
 
     [Route("/SubPath/Index2")]
     public IActionResult Index2() => View();
