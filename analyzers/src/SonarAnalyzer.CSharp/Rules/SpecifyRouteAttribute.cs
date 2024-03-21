@@ -75,6 +75,9 @@ public sealed class SpecifyRouteAttribute : SonarDiagnosticAnalyzer
                 if (declaration.GetIdentifier() is { } identifier)
                 {
                     context.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, Diagnostic.Create(Rule, identifier.GetLocation(), secondaryLocations));
+
+                    // When a symbol was declared in multiple locations, we want to avoid reporting the same secondary locations multiple times.
+                    secondaryLocations.Clear();
                 }
             }
         }
