@@ -88,14 +88,6 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType Microsoft_AspNetCore_Mvc_RequestSizeLimitAttribute = new("Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_RouteAttribute = new("Microsoft.AspNetCore.Mvc.RouteAttribute");
         public static readonly KnownType Microsoft_AspNetCore_Mvc_Routing_HttpMethodAttribute = new("Microsoft.AspNetCore.Mvc.Routing.HttpMethodAttribute");
-        public static readonly ImmutableArray<KnownType> Microsoft_AspNetCore_Mvc_Routing_HttpMethodAttributes = ImmutableArray.Create(
-            Microsoft_AspNetCore_Mvc_HttpDeleteAttribute,
-            Microsoft_AspNetCore_Mvc_HttpGetAttribute,
-            Microsoft_AspNetCore_Mvc_HttpHeadAttribute,
-            Microsoft_AspNetCore_Mvc_HttpOptionsAttribute,
-            Microsoft_AspNetCore_Mvc_HttpPatchAttribute,
-            Microsoft_AspNetCore_Mvc_HttpPostAttribute,
-            Microsoft_AspNetCore_Mvc_HttpPutAttribute);
         public static readonly KnownType Microsoft_AspNetCore_Razor_Hosting_RazorCompiledItemAttribute = new("Microsoft.AspNetCore.Razor.Hosting.RazorCompiledItemAttribute");
         public static readonly KnownType Microsoft_Azure_Cosmos_CosmosClient = new("Microsoft.Azure.Cosmos.CosmosClient");
         public static readonly KnownType Microsoft_Azure_Documents_Client_DocumentClient = new("Microsoft.Azure.Documents.Client.DocumentClient");

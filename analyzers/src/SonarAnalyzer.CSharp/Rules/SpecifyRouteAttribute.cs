@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Rules.CSharp;
 public sealed class SpecifyRouteAttribute : SonarDiagnosticAnalyzer
 {
     private const string DiagnosticId = "S6934";
-    private const string MessageFormat = "Specify the RouteAttribute when an HttpMethodAttribute is specified at an action level";
+    private const string MessageFormat = "Specify the RouteAttribute when an HttpMethodAttribute is specified at an action level.";
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
@@ -49,10 +49,10 @@ public sealed class SpecifyRouteAttribute : SonarDiagnosticAnalyzer
                     symbolStart.RegisterSyntaxNodeAction(nodeContext =>
                     {
                         var node = (MethodDeclarationSyntax)nodeContext.Node;
-                        if (nodeContext.SemanticModel.GetDeclaredSymbol(node, nodeContext.Cancel) is IMethodSymbol method
+                        if (nodeContext.SemanticModel.GetDeclaredSymbol(node, nodeContext.Cancel) is { } method
                             && method.IsControllerMethod()
                             && method.GetAttributes().Any(x =>
-                                x.AttributeClass.IsAny(KnownType.Microsoft_AspNetCore_Mvc_Routing_HttpMethodAttributes)
+                                x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_Routing_HttpMethodAttribute)
                                 && x.TryGetAttributeValue<string>("template", out var template)
                                 && !string.IsNullOrWhiteSpace(template)))
                         {
@@ -67,9 +67,12 @@ public sealed class SpecifyRouteAttribute : SonarDiagnosticAnalyzer
     {
         if (!secondaryLocations.IsEmpty)
         {
-            foreach (var declaration in symbol.DeclaringSyntaxReferences.Select(r => r.GetSyntax()))
+            foreach (var declaration in symbol.DeclaringSyntaxReferences.Select(x => x.GetSyntax()))
             {
-                context.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, Diagnostic.Create(Rule, declaration.GetLocation(), secondaryLocations));
+                if (declaration.GetIdentifier() is { } identifier)
+                {
+                    context.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, Diagnostic.Create(Rule, identifier.GetLocation(), secondaryLocations));
+                }
             }
         }
     }
