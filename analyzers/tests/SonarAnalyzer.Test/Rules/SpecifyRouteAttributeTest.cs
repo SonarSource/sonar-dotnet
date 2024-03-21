@@ -48,17 +48,17 @@ public class SpecifyRouteAttributeTest
                         using Microsoft.AspNetCore.Mvc;
                         using Microsoft.AspNetCore.Mvc.Routing;
 
-                        public partial class HomeController : Controller       // Noncompliant
+                        public partial class HomeController : Controller       // Noncompliant [first]
                         {
                             [HttpGet("Test")]
-                            public IActionResult Index() => View();            // Secondary
+                            public IActionResult Index() => View();            // Secondary [first, second]
                         }
                         """)
             .AddSnippet("""
                         using Microsoft.AspNetCore.Mvc;
                         using Microsoft.AspNetCore.Mvc.Routing;
 
-                        public partial class HomeController : Controller       // Noncompliant
+                        public partial class HomeController : Controller       // Noncompliant [second]
                         {
                         }
                         """)
