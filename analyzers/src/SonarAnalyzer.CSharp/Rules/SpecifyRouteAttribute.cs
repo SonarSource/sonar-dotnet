@@ -66,20 +66,22 @@ public sealed class SpecifyRouteAttribute() : SonarDiagnosticAnalyzer<SyntaxKind
 
     private void ReportIssues(SonarSymbolReportingContext context, ISymbol symbol, ConcurrentStack<Location> secondaryLocations)
     {
-        if (!secondaryLocations.IsEmpty)
+        if (secondaryLocations.IsEmpty)
         {
-            foreach (var declaration in symbol.DeclaringSyntaxReferences.Select(x => x.GetSyntax()))
-            {
-                if (declaration.GetIdentifier() is { } identifier)
-                {
-                    context.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, Diagnostic.Create(Rule, identifier.GetLocation(), secondaryLocations));
+            return;
+        }
 
-                    // When a symbol was declared in multiple locations, we want to avoid reporting the same secondary locations multiple times.
-                    // The list is cleared only if the declaration is not in generated code. Otherwise, the secondary locations are not reported at all.
-                    if (!Language.GeneratedCodeRecognizer.IsGenerated(declaration.SyntaxTree))
-                    {
-                        secondaryLocations.Clear();
-                    }
+        foreach (var declaration in symbol.DeclaringSyntaxReferences.Select(x => x.GetSyntax()))
+        {
+            if (declaration.GetIdentifier() is { } identifier)
+            {
+                context.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, Diagnostic.Create(Rule, identifier.GetLocation(), secondaryLocations));
+
+                // When a symbol was declared in multiple locations, we want to avoid reporting the same secondary locations multiple times.
+                // The list is cleared only if the declaration is not in generated code. Otherwise, the secondary locations are not reported at all.
+                if (!Language.GeneratedCodeRecognizer.IsGenerated(declaration.SyntaxTree))
+                {
+                    secondaryLocations.Clear();
                 }
             }
         }
