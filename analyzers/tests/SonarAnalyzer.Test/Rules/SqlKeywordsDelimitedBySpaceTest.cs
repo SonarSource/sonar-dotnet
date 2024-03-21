@@ -25,23 +25,24 @@ namespace SonarAnalyzer.Test.Rules
     [TestClass]
     public class SqlKeywordsDelimitedBySpaceTest
     {
-        private readonly VerifierBuilder builder = new VerifierBuilder<SqlKeywordsDelimitedBySpace>().AddReferences(NuGetMetadataReference.SystemDataSqlClient());
+        private static readonly VerifierBuilder Builder = new VerifierBuilder<SqlKeywordsDelimitedBySpace>()
+            .AddReferences(NuGetMetadataReference.SystemDataSqlClient());
 
         [TestMethod]
         public void SqlKeywordsDelimitedBySpace_Csharp8() =>
-            builder.AddPaths("SqlKeywordsDelimitedBySpace.cs")
+            Builder.AddPaths("SqlKeywordsDelimitedBySpace.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp8)
                 .Verify();
 
         [TestMethod]
         public void SqlKeywordsDelimitedBySpace_UsingInsideNamespace() =>
-            builder.AddPaths("SqlKeywordsDelimitedBySpace_InsideNamespace.cs")
+            Builder.AddPaths("SqlKeywordsDelimitedBySpace_InsideNamespace.cs")
                 .WithConcurrentAnalysis(false)
                 .Verify();
 
         [TestMethod]
         public void SqlKeywordsDelimitedBySpace_DefaultNamespace() =>
-            builder.AddPaths("SqlKeywordsDelimitedBySpace_DefaultNamespace.cs")
+            Builder.AddPaths("SqlKeywordsDelimitedBySpace_DefaultNamespace.cs")
                 .AddTestReference()
                 .VerifyNoIssueReported();
 
@@ -49,33 +50,33 @@ namespace SonarAnalyzer.Test.Rules
 
         [TestMethod]
         public void SqlKeywordsDelimitedBySpace_CSharp10_GlobalUsings() =>
-            builder.AddPaths("SqlKeywordsDelimitedBySpace.CSharp10.GlobalUsing.cs", "SqlKeywordsDelimitedBySpace.CSharp10.GlobalUsingConsumer.cs")
+            Builder.AddPaths("SqlKeywordsDelimitedBySpace.CSharp10.GlobalUsing.cs", "SqlKeywordsDelimitedBySpace.CSharp10.GlobalUsingConsumer.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
                 .WithConcurrentAnalysis(false)
                 .Verify();
 
         [TestMethod]
         public void SqlKeywordsDelimitedBySpace_CSharp10_FileScopesNamespace() =>
-            builder.AddPaths("SqlKeywordsDelimitedBySpace.CSharp10.FileScopedNamespaceDeclaration.cs")
+            Builder.AddPaths("SqlKeywordsDelimitedBySpace.CSharp10.FileScopedNamespaceDeclaration.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
                 .WithConcurrentAnalysis(false)
                 .Verify();
 
         [TestMethod]
         public void SqlKeywordsDelimitedBySpace_CSharp10() =>
-            builder.AddPaths("SqlKeywordsDelimitedBySpace.CSharp10.cs")
+            Builder.AddPaths("SqlKeywordsDelimitedBySpace.CSharp10.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp10)
                 .Verify();
 
         [TestMethod]
         public void SqlKeywordsDelimitedBySpace_CSharp11() =>
-            builder.AddPaths("SqlKeywordsDelimitedBySpace.CSharp11.cs")
+            Builder.AddPaths("SqlKeywordsDelimitedBySpace.CSharp11.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp11)
                 .Verify();
 
         [TestMethod]
         public void SqlKeywordsDelimitedBySpace_CSharp12() =>
-            builder.AddPaths("SqlKeywordsDelimitedBySpace.CSharp12.cs")
+            Builder.AddPaths("SqlKeywordsDelimitedBySpace.CSharp12.cs")
                 .WithOptions(ParseOptionsHelper.FromCSharp12)
                 .WithConcurrentAnalysis(false)
                 .Verify();
@@ -95,7 +96,7 @@ namespace SonarAnalyzer.Test.Rules
         [DataRow("PetaPoco")]
         [DataTestMethod]
         public void SqlKeywordsDelimitedBySpace_DotnetFramework(string sqlNamespace) =>
-            builder
+            Builder
                 .AddReferences(MetadataReferenceFacade.SystemData)
                 .AddReferences(NuGetMetadataReference.Dapper())
                 .AddReferences(NuGetMetadataReference.EntityFramework())
@@ -124,7 +125,7 @@ namespace TestNamespace
         [DataRow("ServiceStack.OrmLite")]
         [DataTestMethod]
         public void SqlKeywordsDelimitedBySpace_DotnetCore(string sqlNamespace) =>
-            builder
+            Builder
                 .AddReferences(MetadataReferenceFacade.SystemData)
                 .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCore("2.2.0"))
                 .AddReferences(NuGetMetadataReference.ServiceStackOrmLite())
