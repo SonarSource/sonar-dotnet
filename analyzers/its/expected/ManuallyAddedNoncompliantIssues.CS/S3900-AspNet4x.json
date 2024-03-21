@@ -2,12 +2,6 @@
   "Issues": [
     {
       "Id": "S3900",
-      "Message": "Refactor this method to add validation of parameter \u0027bundles\u0027 before using it.",
-      "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/AspNet4x/App_Start/BundleConfig.cs#L11",
-      "Location": "Line 11 Position 13-20"
-    },
-    {
-      "Id": "S3900",
       "Message": "Refactor this method to add validation of parameter \u0027filters\u0027 before using it.",
       "Uri": "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/Projects/ManuallyAddedNoncompliantIssues.CS/AspNet4x/App_Start/FilterConfig.cs#L10",
       "Location": "Line 10 Position 13-20"
