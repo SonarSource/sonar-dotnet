@@ -23,17 +23,15 @@ using System.Collections.Concurrent;
 namespace SonarAnalyzer.Rules.CSharp;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class SpecifyRouteAttribute : SonarDiagnosticAnalyzer
+public sealed class SpecifyRouteAttribute() : SonarDiagnosticAnalyzer<SyntaxKind>(DiagnosticId)
 {
     private const string DiagnosticId = "S6934";
-    private const string MessageFormat = "Specify the RouteAttribute when an HttpMethodAttribute is specified at an action level.";
-
-    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
     private static readonly ImmutableArray<KnownType> RouteTemplateAttributes =
         ImmutableArray.Create(KnownType.Microsoft_AspNetCore_Mvc_Routing_HttpMethodAttribute, KnownType.Microsoft_AspNetCore_Mvc_RouteAttribute);
 
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+    protected override string MessageFormat => "Specify the RouteAttribute when an HttpMethodAttribute is specified at an action level.";
+    protected override ILanguageFacade<SyntaxKind> Language { get; } = CSharpFacade.Instance;
 
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterCompilationStartAction(compilationStart =>
@@ -66,7 +64,7 @@ public sealed class SpecifyRouteAttribute : SonarDiagnosticAnalyzer
                 }, SymbolKind.NamedType);
             });
 
-    private static void ReportIssues(SonarSymbolReportingContext context, ISymbol symbol, ConcurrentStack<Location> secondaryLocations)
+    private void ReportIssues(SonarSymbolReportingContext context, ISymbol symbol, ConcurrentStack<Location> secondaryLocations)
     {
         if (!secondaryLocations.IsEmpty)
         {
@@ -77,7 +75,11 @@ public sealed class SpecifyRouteAttribute : SonarDiagnosticAnalyzer
                     context.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, Diagnostic.Create(Rule, identifier.GetLocation(), secondaryLocations));
 
                     // When a symbol was declared in multiple locations, we want to avoid reporting the same secondary locations multiple times.
-                    secondaryLocations.Clear();
+                    // The list is cleared only if the declaration is not in generated code. Otherwise, the secondary locations are not reported at all.
+                    if (!Language.GeneratedCodeRecognizer.IsGenerated(declaration.SyntaxTree))
+                    {
+                        secondaryLocations.Clear();
+                    }
                 }
             }
         }
