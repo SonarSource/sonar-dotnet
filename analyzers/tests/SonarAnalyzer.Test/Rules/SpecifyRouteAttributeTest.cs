@@ -40,6 +40,30 @@ public class SpecifyRouteAttributeTest
     [TestMethod]
     public void SpecifyRouteAttribute_CS() =>
         builder.AddPaths("SpecifyRouteAttribute.cs").Verify();
+
+    [TestMethod]
+    public void SpecifyRouteAttribute_PartialClasses_CS() =>
+        builder
+            .AddSnippet("""
+                        using Microsoft.AspNetCore.Mvc;
+                        using Microsoft.AspNetCore.Mvc.Routing;
+
+                        public partial class HomeController : Controller       // Noncompliant
+                        {
+                            [HttpGet("Test")]
+                            public IActionResult Index() => View();            // Secondary
+                                                                               // Secondary @-1
+                        }
+                        """)
+            .AddSnippet("""
+                        using Microsoft.AspNetCore.Mvc;
+                        using Microsoft.AspNetCore.Mvc.Routing;
+
+                        public partial class HomeController : Controller       // Noncompliant
+                        {
+                        }
+                        """)
+            .Verify();
 }
 
 #endif
