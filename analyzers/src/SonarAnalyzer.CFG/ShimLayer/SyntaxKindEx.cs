@@ -93,5 +93,6 @@ namespace StyleCop.Analyzers.Lightup
         public const SyntaxKind InterpolatedMultiLineRawStringStartToken = (SyntaxKind)9073;
         public const SyntaxKind InterpolatedRawStringEndToken = (SyntaxKind)9074;
         public const SyntaxKind ScopedType = (SyntaxKind)9075;
+        public const SyntaxKind SpreadElement = (SyntaxKind)9078;
     }
 }

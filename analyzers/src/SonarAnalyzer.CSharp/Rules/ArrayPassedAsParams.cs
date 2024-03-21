@@ -32,10 +32,17 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, Ar
             SyntaxKindEx.ImplicitObjectCreationExpression
         };
 
-    protected override ArgumentSyntax GetLastArgumentIfArrayCreation(SyntaxNode expression) =>
-        GetLastArgumentIfArrayCreation(GetArgumentListFromExpression(expression));
+    protected override ArgumentSyntax LastArgumentIfArrayCreation(SyntaxNode expression) =>
+        LastArgumentIfArrayCreation(ArgumentList(expression));
 
-    private static BaseArgumentListSyntax GetArgumentListFromExpression(SyntaxNode expression) =>
+    private static ArgumentSyntax LastArgumentIfArrayCreation(BaseArgumentListSyntax argumentList) =>
+        argumentList is { Arguments: { Count: > 0 } arguments }
+        && arguments.Last() is var lastArgument
+        && IsArrayCreation(lastArgument.Expression)
+            ? lastArgument
+            : null;
+
+    private static BaseArgumentListSyntax ArgumentList(SyntaxNode expression) =>
         expression switch
         {
             ObjectCreationExpressionSyntax { } creation => creation.ArgumentList,
@@ -45,19 +52,16 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, Ar
             _ => null
         };
 
-    private static ArgumentSyntax GetLastArgumentIfArrayCreation(BaseArgumentListSyntax argumentList) =>
-        argumentList is { Arguments: { Count: > 0 } arguments }
-        && arguments.Last() is var lastArgument
-        && IsArrayCreation(lastArgument.Expression)
-            ? lastArgument
-            : null;
-
     private static bool IsArrayCreation(ExpressionSyntax expression) =>
         expression switch
         {
             ArrayCreationExpressionSyntax { Initializer: not null } => true,
             ImplicitArrayCreationExpressionSyntax => true,
-            _ when CollectionExpressionSyntaxWrapper.IsInstance(expression) => true,
+            _ when CollectionExpressionSyntaxWrapper.IsInstance(expression) => !ContainsSpread((CollectionExpressionSyntaxWrapper)expression),
             _ => false
         };
+
+    // [x, y, ..z] is not possible to be passed as params
+    private static bool ContainsSpread(CollectionExpressionSyntaxWrapper expression) =>
+        expression.Elements.Any(x => x.SyntaxNode.IsKind(SyntaxKindEx.SpreadElement));
 }
