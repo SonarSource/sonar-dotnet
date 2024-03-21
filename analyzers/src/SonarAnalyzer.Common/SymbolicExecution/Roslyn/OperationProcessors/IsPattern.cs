@@ -44,16 +44,18 @@ internal sealed class IsPattern : BranchingProcessor<IIsPatternOperationWrapper>
 
     private static SymbolicConstraint LearnBranchingConstraint(ProgramState state, IPatternOperationWrapper pattern, bool falseBranch, bool hasObjectConstraint, NumberConstraint numberConstraint)
     {
-        return pattern.WrappedOperation.Kind switch
-        {
-            OperationKindEx.ConstantPattern => ConstraintFromConstantPattern(state, As(IConstantPatternOperationWrapper.FromOperation), falseBranch, pattern.InputType.IsReferenceType),
-            OperationKindEx.DeclarationPattern => ConstraintFromDeclarationPattern(As(IDeclarationPatternOperationWrapper.FromOperation), falseBranch, hasObjectConstraint),
-            OperationKindEx.NegatedPattern => LearnBranchingConstraint(state, As(INegatedPatternOperationWrapper.FromOperation).Pattern, !falseBranch, hasObjectConstraint, numberConstraint),
-            OperationKindEx.RecursivePattern => ConstraintFromRecursivePattern(As(IRecursivePatternOperationWrapper.FromOperation), falseBranch, hasObjectConstraint),
-            OperationKindEx.TypePattern => ObjectConstraint.NotNull.ApplyOpposite(falseBranch),
-            OperationKindEx.RelationalPattern => NumberConstraintFromRelationalPattern(state, As(IRelationalPatternOperationWrapper.FromOperation), falseBranch, numberConstraint),
-            _ => null
-        };
+        return pattern.InputType is null
+            ? null
+            : pattern.WrappedOperation.Kind switch
+            {
+                OperationKindEx.ConstantPattern => ConstraintFromConstantPattern(state, As(IConstantPatternOperationWrapper.FromOperation), falseBranch, pattern.InputType.IsReferenceType),
+                OperationKindEx.DeclarationPattern => ConstraintFromDeclarationPattern(As(IDeclarationPatternOperationWrapper.FromOperation), falseBranch, hasObjectConstraint),
+                OperationKindEx.NegatedPattern => LearnBranchingConstraint(state, As(INegatedPatternOperationWrapper.FromOperation).Pattern, !falseBranch, hasObjectConstraint, numberConstraint),
+                OperationKindEx.RecursivePattern => ConstraintFromRecursivePattern(As(IRecursivePatternOperationWrapper.FromOperation), falseBranch, hasObjectConstraint),
+                OperationKindEx.TypePattern => ObjectConstraint.NotNull.ApplyOpposite(falseBranch),
+                OperationKindEx.RelationalPattern => NumberConstraintFromRelationalPattern(state, As(IRelationalPatternOperationWrapper.FromOperation), falseBranch, numberConstraint),
+                _ => null
+            };
 
         T As<T>(Func<IOperation, T> fromOperation) =>
             fromOperation(pattern.WrappedOperation);
@@ -149,7 +151,8 @@ internal sealed class IsPattern : BranchingProcessor<IIsPatternOperationWrapper>
     private static SymbolicConstraint BoolConstraintFromPattern(ProgramState state, SymbolicValue value, IPatternOperationWrapper pattern)
     {
         var patternOperation = pattern.WrappedOperation;
-        if (patternOperation.Kind is OperationKindEx.DiscardPattern
+        if (pattern.InputType is null
+            || patternOperation.Kind is OperationKindEx.DiscardPattern
             || patternOperation.AsDeclarationPattern() is { MatchesNull: true })
         {
             return BoolConstraint.True;
@@ -179,7 +182,7 @@ internal sealed class IsPattern : BranchingProcessor<IIsPatternOperationWrapper>
         declaration switch
         {
             _ when valueConstraint == ObjectConstraint.Null => BoolConstraint.False,
-            _ when declaration.InputType.DerivesOrImplements(declaration.NarrowedType) => BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
+            _ when declaration.InputType?.DerivesOrImplements(declaration.NarrowedType) is true => BoolConstraint.From(valueConstraint == ObjectConstraint.NotNull),
             _ => null,
         };
 
