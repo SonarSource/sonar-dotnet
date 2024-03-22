@@ -35,7 +35,7 @@ public class RouteTemplateIsNotSpecifiedController : Controller
     public IActionResult Error() => View();                                     // Compliant
 }
 
-public class RouteTemplatesAreSpecifiedController : Controller                  // Noncompliant [controller] {{Specify the RouteAttribute when an HttpMethodAttribute is specified at an action level.}}
+public class RouteTemplatesAreSpecifiedController : Controller                  // Noncompliant [controller] {{Specify the RouteAttribute when an HttpMethodAttribute or RouteAttribute is specified at an action level.}}
 //           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 {
     private const string ConstantRoute = "ConstantRoute";
@@ -175,4 +175,4 @@ public class NonController
 public class DerivedController : Controller { }
 
 [Controller]
-public class Endpoint {}
+public class Endpoint { }

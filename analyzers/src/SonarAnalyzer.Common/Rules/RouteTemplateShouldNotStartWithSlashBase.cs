@@ -22,15 +22,19 @@ using System.Collections.Concurrent;
 
 namespace SonarAnalyzer.Rules;
 
-public abstract class RouteTemplateShouldNotStartWithSlashBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+public abstract class RouteTemplateShouldNotStartWithSlashBase<TSyntaxKind>() : SonarDiagnosticAnalyzer<TSyntaxKind>(DiagnosticId)
     where TSyntaxKind : struct
 {
     private const string DiagnosticId = "S6931";
     private const string MessageOnlyActions = "Change the paths of the actions of this controller to be relative and adapt the controller route accordingly.";
     private const string MessageActionsAndController = "Change the paths of the actions of this controller to be relative and add a controller route with the common prefix.";
 
+    private static readonly ImmutableArray<KnownType> RouteTemplateAttributes = ImmutableArray.Create(
+        KnownType.Microsoft_AspNetCore_Mvc_Routing_HttpMethodAttribute,
+        KnownType.Microsoft_AspNetCore_Mvc_RouteAttribute,
+        KnownType.System_Web_Mvc_RouteAttribute);
+
     protected override string MessageFormat => "{0}";
-    protected RouteTemplateShouldNotStartWithSlashBase() : base(DiagnosticId) { }
 
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterCompilationStartAction(compilationStartContext =>
@@ -91,10 +95,9 @@ public abstract class RouteTemplateShouldNotStartWithSlashBase<TSyntaxKind> : So
     private static Dictionary<Location, string> RouteAttributeTemplateArguments(ImmutableArray<AttributeData> attributes)
     {
         var templates = new Dictionary<Location, string>();
-        var routeAttributes = attributes.Where(x => x.AttributeClass.IsAny(KnownType.RouteAttributes) || x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_Routing_HttpMethodAttribute));
-        foreach (var attribute in routeAttributes)
+        foreach (var attribute in attributes)
         {
-            if (attribute.TryGetAttributeValue<string>("template", out var templateParameter))
+            if (attribute.GetAttributeRouteTemplate(RouteTemplateAttributes) is { } templateParameter)
             {
                 templates.Add(attribute.ApplicationSyntaxReference.GetSyntax().GetLocation(), templateParameter);
             }

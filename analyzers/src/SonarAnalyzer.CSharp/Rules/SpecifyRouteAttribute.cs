@@ -27,42 +27,40 @@ public sealed class SpecifyRouteAttribute() : SonarDiagnosticAnalyzer<SyntaxKind
 {
     private const string DiagnosticId = "S6934";
 
-    private static readonly ImmutableArray<KnownType> RouteTemplateAttributes =
-        ImmutableArray.Create(KnownType.Microsoft_AspNetCore_Mvc_Routing_HttpMethodAttribute, KnownType.Microsoft_AspNetCore_Mvc_RouteAttribute);
+    private static readonly ImmutableArray<KnownType> RouteTemplateAttributes = ImmutableArray.Create(
+        KnownType.Microsoft_AspNetCore_Mvc_Routing_HttpMethodAttribute,
+        KnownType.Microsoft_AspNetCore_Mvc_RouteAttribute);
 
-    protected override string MessageFormat => "Specify the RouteAttribute when an HttpMethodAttribute is specified at an action level.";
+    protected override string MessageFormat => "Specify the RouteAttribute when an HttpMethodAttribute or RouteAttribute is specified at an action level.";
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterCompilationStartAction(compilationStart =>
+        {
+            if (!UsesAttributeRouting(compilationStart.Compilation))
             {
-                if (compilationStart.Compilation.GetTypeByMetadataName(KnownType.Microsoft_AspNetCore_Mvc_Routing_HttpMethodAttribute) is null)
+                return;
+            }
+            compilationStart.RegisterSymbolStartAction(symbolStart =>
+            {
+                if (symbolStart.Symbol.GetAttributes().Any(x => x.AttributeClass.Is(KnownType.Microsoft_AspNetCore_Mvc_RouteAttribute)))
                 {
                     return;
                 }
-                compilationStart.RegisterSymbolStartAction(symbolStart =>
+                var secondaryLocations = new ConcurrentStack<Location>();
+                symbolStart.RegisterSyntaxNodeAction(nodeContext =>
                 {
-                    if (symbolStart.Symbol.GetAttributes().Any(x => x.AttributeClass.Is(KnownType.Microsoft_AspNetCore_Mvc_RouteAttribute)))
+                    var methodDeclaration = (MethodDeclarationSyntax)nodeContext.Node;
+                    if (nodeContext.SemanticModel.GetDeclaredSymbol(methodDeclaration, nodeContext.Cancel) is { } method
+                        && method.IsControllerMethod()
+                        && method.GetAttributes().Any(x => !CanBeIgnored(x.GetAttributeRouteTemplate(RouteTemplateAttributes))))
                     {
-                        return;
+                        secondaryLocations.Push(methodDeclaration.Identifier.GetLocation());
                     }
-                    var secondaryLocations = new ConcurrentStack<Location>();
-                    symbolStart.RegisterSyntaxNodeAction(nodeContext =>
-                    {
-                        var node = (MethodDeclarationSyntax)nodeContext.Node;
-                        if (nodeContext.SemanticModel.GetDeclaredSymbol(node, nodeContext.Cancel) is { } method
-                            && method.IsControllerMethod()
-                            && method.GetAttributes().Any(x =>
-                                x.AttributeClass.DerivesFromAny(RouteTemplateAttributes)
-                                && x.TryGetAttributeValue<string>("template", out var template)
-                                && !CanBeIgnored(template)))
-                        {
-                            secondaryLocations.Push(node.Identifier.GetLocation());
-                        }
-                    }, SyntaxKind.MethodDeclaration);
-                    symbolStart.RegisterSymbolEndAction(symbolEnd => ReportIssues(symbolEnd, symbolStart.Symbol, secondaryLocations));
-                }, SymbolKind.NamedType);
-            });
+                }, SyntaxKind.MethodDeclaration);
+                symbolStart.RegisterSymbolEndAction(symbolEnd => ReportIssues(symbolEnd, symbolStart.Symbol, secondaryLocations));
+            }, SymbolKind.NamedType);
+        });
 
     private void ReportIssues(SonarSymbolReportingContext context, ISymbol symbol, ConcurrentStack<Location> secondaryLocations)
     {
@@ -79,6 +77,9 @@ public sealed class SpecifyRouteAttribute() : SonarDiagnosticAnalyzer<SyntaxKind
             }
         }
     }
+
+    private static bool UsesAttributeRouting(Compilation compilation) =>
+        compilation.GetTypeByMetadataName(KnownType.Microsoft_AspNetCore_Mvc_Routing_HttpMethodAttribute) is not null;
 
     private static bool CanBeIgnored(string template) =>
         string.IsNullOrWhiteSpace(template)
