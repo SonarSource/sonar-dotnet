@@ -496,7 +496,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private static bool IsRemovable(ISymbol symbol) =>
                 symbol is { IsImplicitlyDeclared: false, IsVirtual: false }
-                && !symbol.GetAttributes().Any()
+                && !symbol.IsSerializableMember()
+                && !symbol.GetAttributes().Any(x => !x.AttributeClass.Is(KnownType.System_NonSerializedAttribute))
                 && !symbol.ContainingType.IsInterface()
                 && symbol.GetInterfaceMember() == null
                 && symbol.GetOverriddenMember() == null;

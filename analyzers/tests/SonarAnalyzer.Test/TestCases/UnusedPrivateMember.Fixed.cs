@@ -339,6 +339,6 @@ class Repro_8342
 [Serializable]
 public class Repro_8532
 {
-    [NonSerialized]
-    private string value;               // FN
+    private string serializedField;                             // Compliant
+    private string serializedReadWriteProperty { get; set; }    // Compliant
 }

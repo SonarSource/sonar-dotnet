@@ -19,7 +19,6 @@
  */
 
 using System.Reflection;
-using static System.Net.WebRequestMethods;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -350,5 +349,10 @@ namespace SonarAnalyzer.Helpers
 
         public static bool IsRecord(this ITypeSymbol typeSymbol)
             => ITypeSymbolIsRecord?.GetValue(typeSymbol) is true;
+
+        public static bool IsSerializableMember(this ISymbol symbol) =>
+            symbol is IFieldSymbol or IPropertySymbol { SetMethod: not null }
+            && symbol.ContainingType.GetAttributes().Any(x => x.AttributeClass.Is(KnownType.System_SerializableAttribute))
+            && !symbol.GetAttributes().Any(x => x.AttributeClass.Is(KnownType.System_NonSerializedAttribute));
     }
 }
